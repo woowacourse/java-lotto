@@ -11,8 +11,8 @@ public class LottoGame {
     private static final int NO_YIELD = 0;
     private static final int SUM_BASE = 0;
 
-    private List<Integer> winningLottoNumbers;
-    private int bonusNumber;
+    private Lotto winningLotto;
+    private LottoNumber bonusNumber;
     private Lottos lottos;
 
     public LottoGame() {
@@ -28,15 +28,19 @@ public class LottoGame {
         return lottos;
     }
 
-    public void enterWinningLottoNumbersAndBonusNumber(List<Integer> winningLottoNumbers, int bonusNumber) {
-        this.winningLottoNumbers = winningLottoNumbers;
-        this.bonusNumber = bonusNumber;
+    public void enterWinningLottoNumbersAndBonusNumber(List<Integer> notVerifiedWinningLottoNumbers
+            , int notVerifiedBonusNumber) {
+        List<LottoNumber> winningLottoNumbers = notVerifiedWinningLottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        this.winningLotto = new Lotto(winningLottoNumbers);
+        this.bonusNumber = new LottoNumber(notVerifiedBonusNumber);
     }
 
     public void makeResult(List<Integer> notVerifiedWinningNumbers, Integer notVerifiedBonusNumber) {
         List<LottoNumber> winningNumbers = notVerifiedWinningNumbers.stream()
-                                .map(LottoNumber::new)
-                                .collect(Collectors.toList());
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
         lottos.compareAllLotto(winningNumbers, new LottoNumber(notVerifiedBonusNumber));
     }
 
