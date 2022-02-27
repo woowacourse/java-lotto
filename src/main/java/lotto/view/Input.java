@@ -40,8 +40,9 @@ public class Input {
         return winNumber.split(DELIMITER);
     }
 
-    private static void validateNumber(String input) {
-        if (isBlank(input) || !isNumber(input)) {
+    private static void validateNumber(final String input) {
+        String number = input.trim();
+        if (isBlank(number) || !isNumber(number)) {
             throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
         }
     }
