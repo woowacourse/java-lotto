@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import domain.generatestrategy.LotteryGenerateFamily;
+import domain.generatestrategy.LotteryGenerateStrategy;
 
 public class LotteryGame {
 
 	private final PurchaseAmount purchaseAmount;
-	private final LotteryGenerateFamily lotteryGenerator;
+	private final LotteryGenerateStrategy lotteryGenerator;
 	private Lotteries lotteries;
 	private WinningLottery winningLottery;
 
-	public LotteryGame(final PurchaseAmount purchaseAmount, final LotteryGenerateFamily lotteryGenerator) {
+	public LotteryGame(final PurchaseAmount purchaseAmount, final LotteryGenerateStrategy lotteryGenerator) {
 		this.purchaseAmount = purchaseAmount;
 		this.lotteryGenerator = lotteryGenerator;
 		createAutoLottery();

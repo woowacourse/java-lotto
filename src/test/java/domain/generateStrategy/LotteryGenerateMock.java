@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import domain.Lottery;
-import domain.generatestrategy.LotteryGenerateFamily;
+import domain.generatestrategy.LotteryGenerateStrategy;
 import utils.Parser;
 
-public class LotteryGenerateMock implements LotteryGenerateFamily {
+public class LotteryGenerateMock implements LotteryGenerateStrategy {
 
 	private final List<Lottery> lotteriesNumber;
 	private int index;

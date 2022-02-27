@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import domain.Lottery;
 import domain.LotteryNumber;
 
-public class LotteryRandomGeneratorStrategy implements LotteryGenerateFamily{
+public class LotteryRandomGeneratorStrategy implements LotteryGenerateStrategy {
 
 	private static final int MIN_BOUND = 1;
 	private static final int MAX_BOUND = 45;

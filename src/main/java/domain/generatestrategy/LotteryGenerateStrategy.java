@@ -4,6 +4,6 @@ package domain.generatestrategy;
 import domain.Lottery;
 
 @FunctionalInterface
-public interface LotteryGenerateFamily {
+public interface LotteryGenerateStrategy {
 	Lottery getNumbers();
 }
