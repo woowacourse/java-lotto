@@ -25,12 +25,4 @@ public class LotteryController {
     public List<LotteryTicket> getLotteryTickets() {
         return lotteryTickets.getLotteryTickets();
     }
-
-    public int totalProfit(Map<WinningLottery, Integer> lotteryTicketResult) {
-        int sum = 0;
-        for (WinningLottery winningLottery : lotteryTicketResult.keySet()) {
-            sum += winningLottery.getPrice() * lotteryTicketResult.get(winningLottery);
-        }
-        return sum;
-    }
 }
