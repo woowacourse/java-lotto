@@ -19,7 +19,7 @@ public class PurchaseAmount {
 		}
 	}
 
-	public int getPurchasedLotteries() {
+	public int getTheNumberOfPurchasedLotteries() {
 		return purchaseAmount / AMOUNT_MIN_RANGE;
 	}
 

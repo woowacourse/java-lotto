@@ -22,7 +22,7 @@ public class LotteryGame {
 
 	private void createAutoLottery() {
 		final List<Lottery> createdLotteries = new ArrayList<>();
-		for (int i = 0; i < purchaseAmount.getPurchasedLotteries(); i++) {
+		for (int i = 0; i < purchaseAmount.getTheNumberOfPurchasedLotteries(); i++) {
 			createdLotteries.add(lotteryGenerator.getNumbers());
 		}
 		lotteries = new Lotteries(createdLotteries);
