@@ -32,9 +32,7 @@ public class PrizeResult {
     }
 
     private float calculateEarningRate(int inputMoney) {
-        long totalPrize = totalPrize();
-
-        float earningRate = (float) totalPrize / inputMoney;
+        float earningRate = (float) totalPrize() / inputMoney;
         return  (float) (Math.floor(earningRate * 100) / 100.0);
     }
 
@@ -46,7 +44,7 @@ public class PrizeResult {
         return totalPrice;
     }
 
-    public List<Prize> validWinnerPrices() {
+    public List<Prize> sortedPriceKeySet() {
         return prizeResult.keySet().stream()
                 .filter(winnerPrice -> winnerPrice != Prize.FAIL)
                 .sorted(Comparator.comparing(Prize::getPrize))
