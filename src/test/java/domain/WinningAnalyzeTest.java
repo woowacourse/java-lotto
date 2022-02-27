@@ -36,6 +36,6 @@ public class WinningAnalyzeTest {
 	void profitRate() {
 		double profitRate = dto.getProfitRate();
 
-		assertThat(profitRate).isEqualTo(0.35714285714285715);
+		assertThat(profitRate).isEqualTo(0.35);
 	}
 }

@@ -10,11 +10,6 @@ public class Ticket {
 
 	public static final String SIZE_ERROR = "로또 번호는 6자리여야 합니다.";
 
-	private static final String START_SIGN = "[";
-	private static final String END_SIGN = "]";
-	private static final String BALL_DELIMITER = ",";
-	private static final String LINE_DELIMITER = "\n";
-
 	private final List<Ball> balls;
 
 	public Ticket(final List<Integer> numbers) {
@@ -52,17 +47,9 @@ public class Ticket {
 			.count();
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-
-		stringBuilder.append(START_SIGN);
-		stringBuilder.append(String.join(BALL_DELIMITER, balls.stream()
-			.map(Ball::toString)
-			.collect(Collectors.toUnmodifiableList())));
-		stringBuilder.append(END_SIGN);
-		stringBuilder.append(LINE_DELIMITER);
-
-		return stringBuilder.toString();
+	public List<String> makeBallsToStrings() {
+		return balls.stream()
+			.map(Object::toString)
+			.collect(Collectors.toList());
 	}
 }

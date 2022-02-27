@@ -4,7 +4,7 @@ import domain.Tickets;
 import domain.WinningAnalyze;
 import domain.WinningNumber;
 import domain.dto.WinningAnalyzeDto;
-import domain.strategy.RandomTicketGenerator;
+import domain.strategy.AutoStrategy;
 import view.InputView;
 import view.OutputView;
 
@@ -12,7 +12,7 @@ public class LottoController {
 
 	public void run() {
 		Tickets tickets = generateTickets(InputView.getPayment());
-		OutputView.printTickets(tickets);
+		OutputView.printTickets(tickets.getTickets());
 
 		WinningNumber winningNumber =
 			new WinningNumber(InputView.getWinningNumber(), InputView.getBonusBall());
@@ -22,7 +22,7 @@ public class LottoController {
 
 	private Tickets generateTickets(int payment) {
 		Tickets tickets = new Tickets();
-		tickets.makeTickets(payment, new RandomTicketGenerator());
+		tickets.makeTickets(payment, new AutoStrategy());
 
 		return tickets;
 	}

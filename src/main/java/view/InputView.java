@@ -29,6 +29,7 @@ public class InputView {
 	}
 
 	public static List<Integer> getWinningNumber() {
+		System.out.println();
 		System.out.println(WINNING_NUMBER_MESSAGE);
 
 		String[] input = scanner.nextLine()
