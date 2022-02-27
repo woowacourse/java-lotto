@@ -49,7 +49,7 @@ class TicketTest {
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForContainsTest")
     void containsTest(final List<Integer> numbers, final int targetNumber) {
         final Ticket ticket = new Ticket(numbers);
-        final Ball targetBall = new Ball(targetNumber);
+        final Ball targetBall = Balls.getBall(targetNumber);
 
         assertThat(ticket.contains(targetBall)).isTrue();
     }
@@ -62,7 +62,7 @@ class TicketTest {
         final Ticket winningTicket = new Ticket(winningNumbers);
         final List<Integer> winningBallNumbers = winningTicket.getBallNumbers();
         final List<Ball> winningBalls = winningBallNumbers.stream()
-                .map(Ball::new)
+                .map(Balls::getBall)
                 .collect(Collectors.toUnmodifiableList());
 
         assertThat(ticket.countMatches(winningBalls)).isEqualTo(matchCount);
@@ -77,7 +77,7 @@ class TicketTest {
                            final Rank expected) {
         final Ticket ticket = new Ticket((numbers));
         final Ticket winningTicket = new Ticket(winningNumbers);
-        final Ball bonusBall = new Ball(bonusNumber);
+        final Ball bonusBall = Balls.getBall(bonusNumber);
         final Rank rank = ticket.calculateRank(winningTicket, bonusBall).orElse(null);
         assertThat(rank).isEqualTo(expected);
     }

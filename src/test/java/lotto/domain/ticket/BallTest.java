@@ -17,7 +17,7 @@ class BallTest {
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}")
     @ValueSource(ints = {-2, -1, 0, 46, 47, 48})
     void rangeOutExceptionTest(final int number) {
-        assertThatThrownBy(() -> new Ball(number))
+        assertThatThrownBy(() -> Balls.getBall(number))
                 .isInstanceOf(LottoException.class)
                 .hasMessageContaining(BallNumberExceptionStatus.BALL_CANNOT_BE_OUT_OF_RANGE.getMessage());
     }
@@ -26,7 +26,7 @@ class BallTest {
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}")
     @ValueSource(ints = {1, 2, 3, 43, 44, 45})
     void initTest(final int number) {
-        final Ball ball = new Ball(number);
+        final Ball ball = Balls.getBall(number);
         assertThat(ball.getBallNumber()).isEqualTo(number);
     }
 
@@ -34,8 +34,8 @@ class BallTest {
     @ParameterizedTest(name = "[{index}] 번호1 : {0}, 번호2 : {1}")
     @CsvSource(value = {"1,1", "2,2", "33,33", "45,45"}, delimiter = ',')
     void equalsSuccessTest(final int number1, final int number2) {
-        final Ball ball1 = new Ball(number1);
-        final Ball ball2 = new Ball(number2);
+        final Ball ball1 = Balls.getBall(number1);
+        final Ball ball2 = Balls.getBall(number2);
         assertThat(ball1.equals(ball2)).isTrue();
     }
 
@@ -43,8 +43,8 @@ class BallTest {
     @ParameterizedTest(name = "[{index}] 번호1 : {0}, 번호2 : {1}")
     @CsvSource(value = {"1,2", "2,1", "33,45", "45,33"}, delimiter = ',')
     void equalsFalseTest(final int number1, final int number2) {
-        final Ball ball1 = new Ball(number1);
-        final Ball ball2 = new Ball(number2);
+        final Ball ball1 = Balls.getBall(number1);
+        final Ball ball2 = Balls.getBall(number2);
         assertThat(ball1.equals(ball2)).isFalse();
     }
 

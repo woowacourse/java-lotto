@@ -37,7 +37,7 @@ class TicketsTest {
         final Tickets tickets = new Tickets(ticketCount, customTicketGenerator);
 
         final Ticket winningTicket = new Ticket(winningTicketNumbers.getBallNumbers());
-        final Ball bonusBall = new Ball(bonusNumber);
+        final Ball bonusBall = Balls.getBall(bonusNumber);
 
         final List<Rank> actual = tickets.calculateRanks(winningTicket, bonusBall);
         assertThat(actual).isEqualTo(expected);

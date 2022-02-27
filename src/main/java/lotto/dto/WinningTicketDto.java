@@ -3,6 +3,7 @@ package lotto.dto;
 import java.util.List;
 
 import lotto.domain.ticket.Ball;
+import lotto.domain.ticket.Balls;
 import lotto.domain.ticket.WinningTicket;
 
 public class WinningTicketDto {
@@ -16,7 +17,7 @@ public class WinningTicketDto {
     }
 
     public WinningTicket toWinningTicket() {
-        return new WinningTicket(ticketDto.toTicket(), new Ball(bonusNumber));
+        return new WinningTicket(ticketDto.toTicket(), Balls.getBall(bonusNumber));
     }
 
 }
