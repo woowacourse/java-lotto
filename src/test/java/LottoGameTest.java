@@ -27,7 +27,22 @@ public class LottoGameTest {
     @Test
     @DisplayName("수익률 계산하는 기능 테스트")
     void calculateYield() {
-        //TODO
+        Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+        Lotto lotto2 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+        Lotto lotto3 = new Lotto(Stream.of(11, 12, 13, 14, 15, 16)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+
+        LottoGame lottoGame = new LottoGame(Arrays.asList(lotto1, lotto2, lotto3));
+        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 9;
+        lottoGame.enterWinningLottoNumbersAndBonusNumber(winningNumbers, bonusNumber);
+        float yield = lottoGame.calculateYield();
+        assertThat(yield).isEqualTo((float) (Rewards.FIRST_REWARD.getPrize() + Rewards.FIRST_REWARD.getPrize()) / 3);
     }
 
     @Test

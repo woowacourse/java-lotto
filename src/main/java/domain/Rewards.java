@@ -14,7 +14,7 @@ public enum Rewards {
         this.prize = prize;
     }
 
-    public int getPrize() {
+    public long getPrize() {
         return this.prize;
     }
 }
