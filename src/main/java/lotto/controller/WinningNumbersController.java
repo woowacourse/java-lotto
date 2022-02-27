@@ -26,13 +26,13 @@ public class WinningNumbersController {
 
         do {
             List<Integer> integers = StringUtil.toIntegers(InputView.inputWinningNumbers());
-            winningLotto = inputWinningLotto(integers);
+            winningLotto = getValidWinningLotto(integers);
         } while (winningLotto.isEmpty());
 
         return winningLotto.get();
     }
 
-    private Optional<Lotto> inputWinningLotto(List<Integer> integers) {
+    private Optional<Lotto> getValidWinningLotto(List<Integer> integers) {
         try {
             return Optional.of(new Lotto(integers));
         } catch (IllegalArgumentException exception) {
