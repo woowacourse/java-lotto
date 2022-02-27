@@ -12,14 +12,6 @@ public class Ranks {
         createStatistics(ranks);
     }
 
-    public double getLottoTotalReward() {
-        double total = 0;
-        for (Rank rank : statistics.keySet()) {
-            total += rank.calculateTotalReward(statistics.get(rank));
-        }
-        return total;
-    }
-
     private EnumMap<Rank, Integer> initializeState() {
         EnumMap<Rank, Integer> temp = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
@@ -36,5 +28,13 @@ public class Ranks {
 
     public EnumMap<Rank, Integer> getStatistics() {
         return new EnumMap<>(statistics);
+    }
+
+    public double getLottoTotalReward() {
+        double total = 0;
+        for (Rank rank : statistics.keySet()) {
+            total += rank.calculateTotalReward(statistics.get(rank));
+        }
+        return total;
     }
 }

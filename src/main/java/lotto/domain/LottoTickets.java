@@ -14,14 +14,6 @@ public class LottoTickets {
         createLottoTickets(lottoCount);
     }
 
-    public List<Rank> getRanksWithWinningNumbers(WinningNumbers winningNumbers) {
-        List<Rank> ranks = new ArrayList<>();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            ranks.add(lottoTicket.compareNumbers(winningNumbers.getWinningNumbers(), winningNumbers.getBonusNumber()));
-        }
-        return ranks;
-    }
-
     private void createLottoTickets(int lottoCount) {
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         for (int i = 0; i < lottoCount; i++) {
@@ -31,5 +23,13 @@ public class LottoTickets {
 
     public List<LottoTicket> getLottoTickets() {
         return new ArrayList<>(lottoTickets);
+    }
+
+    public List<Rank> getRanksWithWinningNumbers(WinningNumbers winningNumbers) {
+        List<Rank> ranks = new ArrayList<>();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            ranks.add(lottoTicket.compareNumbers(winningNumbers.getWinningNumbers(), winningNumbers.getBonusNumber()));
+        }
+        return ranks;
     }
 }

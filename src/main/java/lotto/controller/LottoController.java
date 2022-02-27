@@ -24,11 +24,11 @@ public class LottoController {
         OutputView.displayResult(ranks.getStatistics(), moneyManager.calculateYield(ranks.getLottoTotalReward()));
     }
 
-    private LottoNumber getBonusNumber() {
-        return new LottoNumber(InputView.requestBonusNumber());
-    }
-
     private List<LottoNumber> getWinningNumbers() {
         return InputView.requestWinningNumbers().stream().map(LottoNumber::new).collect(Collectors.toList());
+    }
+
+    private LottoNumber getBonusNumber() {
+        return new LottoNumber(InputView.requestBonusNumber());
     }
 }

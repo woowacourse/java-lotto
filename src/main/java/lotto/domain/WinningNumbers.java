@@ -14,17 +14,17 @@ public class WinningNumbers {
     private final LottoNumber bonusNumber;
 
     public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        validateWinningNumbersDuplication(winningNumbers);
         validateWinningNumbersCount(winningNumbers);
+        validateWinningNumbersDuplication(winningNumbers);
         validateBonusNumberDuplication(winningNumbers, bonusNumber);
 
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateBonusNumberDuplication(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        if (winningNumbers.contains(bonusNumber)) {
-            throw new RuntimeException(ERROR_DUPLICATION_BONUS_NUMBER);
+    private void validateWinningNumbersCount(List<LottoNumber> winningNumbers) {
+        if (winningNumbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new RuntimeException(ERROR_NOT_MATCH_NUMBER_COUNT);
         }
     }
 
@@ -34,14 +34,14 @@ public class WinningNumbers {
         }
     }
 
-    private void validateWinningNumbersCount(List<LottoNumber> winningNumbers) {
-        if (winningNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new RuntimeException(ERROR_NOT_MATCH_NUMBER_COUNT);
-        }
-    }
-
     private boolean isDuplicate(List<LottoNumber> winningNumbers) {
         return winningNumbers.stream().distinct().count() != winningNumbers.size();
+    }
+
+    private void validateBonusNumberDuplication(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new RuntimeException(ERROR_DUPLICATION_BONUS_NUMBER);
+        }
     }
 
     public List<LottoNumber> getWinningNumbers() {

@@ -11,6 +11,10 @@ public class LottoTicket {
         this.numbers = lottoTicket;
     }
 
+    public List<LottoNumber> getNumbers() {
+        return new ArrayList<>(numbers);
+    }
+
     public Rank compareNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         int totalMatchNumber = (int) numbers.stream()
                 .filter(winningNumbers::contains)
@@ -23,9 +27,5 @@ public class LottoTicket {
             return Rank.MATCH_FIVE_AND_BONUS_NUMBERS;
         }
         return Rank.matchResult(total);
-    }
-
-    public List<LottoNumber> getNumbers() {
-        return new ArrayList<>(numbers);
     }
 }

@@ -23,25 +23,10 @@ public class InputView {
         return toInteger(inputMoney);
     }
 
-    public static List<Integer> requestWinningNumbers() {
-        System.out.println(REQUEST_WINNING_NUMBERS);
-        String inputWinningNumbers = scanner.nextLine();
-        validateIsNullOrEmpty(inputWinningNumbers);
-        return splitNumbers(inputWinningNumbers);
-    }
-
-    public static int requestBonusNumber() {
-        System.out.println(REQUEST_BONUS_NUMBER);
-        String inputBonusNumber = scanner.nextLine();
-        validateIsNullOrEmpty(inputBonusNumber);
-        return toInteger(inputBonusNumber);
-    }
-
-    public static List<Integer> splitNumbers(String input) {
-        String[] inputNumbers = input.split(DELIMITER);
-        return Arrays.stream(inputNumbers)
-                .map(InputView::toInteger)
-                .collect(Collectors.toList());
+    public static void validateIsNullOrEmpty(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new RuntimeException(ERROR_NULL_OR_EMPTY);
+        }
     }
 
     public static int toInteger(String input) {
@@ -52,9 +37,24 @@ public class InputView {
         }
     }
 
-    public static void validateIsNullOrEmpty(String input) {
-        if (input == null || input.isEmpty()) {
-            throw new RuntimeException(ERROR_NULL_OR_EMPTY);
-        }
+    public static List<Integer> requestWinningNumbers() {
+        System.out.println(REQUEST_WINNING_NUMBERS);
+        String inputWinningNumbers = scanner.nextLine();
+        validateIsNullOrEmpty(inputWinningNumbers);
+        return splitNumbers(inputWinningNumbers);
+    }
+
+    public static List<Integer> splitNumbers(String input) {
+        String[] inputNumbers = input.split(DELIMITER);
+        return Arrays.stream(inputNumbers)
+                .map(InputView::toInteger)
+                .collect(Collectors.toList());
+    }
+
+    public static int requestBonusNumber() {
+        System.out.println(REQUEST_BONUS_NUMBER);
+        String inputBonusNumber = scanner.nextLine();
+        validateIsNullOrEmpty(inputBonusNumber);
+        return toInteger(inputBonusNumber);
     }
 }

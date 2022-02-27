@@ -18,14 +18,14 @@ public class LottoNumberGenerator {
         }
     }
 
-    private void shuffleNumbers() {
-        Collections.shuffle(lottoNumbers);
-    }
-
     public List<LottoNumber> getLottoNumbers(int count) {
         shuffleNumbers();
         List<LottoNumber> numbers = lottoNumbers.subList(0, count);
         Collections.sort(numbers);
         return new ArrayList<>(numbers);
+    }
+
+    private void shuffleNumbers() {
+        Collections.shuffle(lottoNumbers);
     }
 }
