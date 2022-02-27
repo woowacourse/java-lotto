@@ -1,29 +1,30 @@
 package lotto.model;
 
-import java.util.HashMap;
+import static java.util.stream.Collectors.*;
+
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoResult {
-    private final Map<Rank, Integer> result = new HashMap<>();
+    private final Map<Rank, Long> result;
 
-    private LottoResult() {
+    private LottoResult(Map<Rank, Long> result) {
+        this.result = result;
     }
 
     public static LottoResult create(Lottos lottos, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
-        LottoResult lottoResult = new LottoResult();
-        lottos.getLottos().forEach(lotto -> {
-            Rank currentRank = lottoResult.match(lotto, winningNumbers, bonusNumber);
-            lottoResult.result.put(currentRank, lottoResult.getRankCount(currentRank) + 1);
-        });
-        return lottoResult;
+        EnumMap<Rank, Long> collect = lottos.getLottos().stream()
+            .map(lotto -> LottoResult.match(lotto, winningNumbers, bonusNumber))
+            .collect(groupingBy(rank -> rank, () -> new EnumMap<>(Rank.class), counting()));
+        return new LottoResult(collect);
     }
 
-    private Rank match(Lotto lotto, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+    private static Rank match(Lotto lotto, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         return Rank.find(lotto.matchWinningNumbers(winningNumbers), lotto.matchNumber(bonusNumber));
     }
 
-    public Integer getRankCount(Rank rank) {
-        return result.getOrDefault(rank, 0);
+    public Long getRankCount(Rank rank) {
+        return result.getOrDefault(rank, 0L);
     }
 
     Long getTotalWinningMoney() {
