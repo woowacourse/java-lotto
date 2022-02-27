@@ -23,7 +23,7 @@ public class LottoController {
         LottoMachine lottoMachine = new LottoMachine();
         LottoTickets lottoTickets = lottoMachine.issue(new Money(money));
 
-        return new LottoTicketsDto(lottoTickets);
+        return LottoTicketsDto.from(lottoTickets);
     }
 
     public WinningNumberDto createWinningNumber(List<Integer> normalNumbers, int bonusNumber) {

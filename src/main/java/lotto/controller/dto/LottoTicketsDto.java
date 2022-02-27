@@ -11,11 +11,15 @@ public class LottoTicketsDto {
 
     private final List<LottoTicketDto> lottoTickets;
 
-    public LottoTicketsDto(LottoTickets lottoTickets) {
+    private LottoTicketsDto(LottoTickets lottoTickets) {
         this.lottoTickets = lottoTickets.getLottoTickets()
                 .stream()
                 .map(LottoTicketDto::new)
                 .collect(toList());
+    }
+
+    public static LottoTicketsDto from(LottoTickets lottoTickets) {
+        return new LottoTicketsDto(lottoTickets);
     }
 
     public LottoTickets toLottoTickets() {
