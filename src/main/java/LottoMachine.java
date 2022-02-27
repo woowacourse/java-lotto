@@ -32,7 +32,8 @@ public class LottoMachine {
     }
 
     private void printTotalStatistic(Money money, Statistic winningStatistics) {
+        double profitRate = winningStatistics.getProfitRate(money);
         OutputView.printStatistics(winningStatistics);
-        OutputView.printProfitRate(winningStatistics, money);
+        OutputView.printProfitRate(profitRate);
     }
 }

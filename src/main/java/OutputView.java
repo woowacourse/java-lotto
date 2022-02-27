@@ -28,7 +28,8 @@ public class OutputView {
     }
 
     private static void printStatisticsMessage(Rank rank, int count) {
-        System.out.printf(selectPrintMessageType(rank), rank.getCount(), rank.getWinningPrice(), count);
+        System.out.printf(selectPrintMessageType(rank), rank.getCount(), rank.getWinningPrice(),
+            count);
     }
 
     private static String selectPrintMessageType(Rank rank) {
@@ -38,8 +39,7 @@ public class OutputView {
         return WINNING_MESSAGE;
     }
 
-    public static void printProfitRate(Statistic statistic, Money money) {
-        double profitRate = statistic.getProfitRate(money);
+    public static void printProfitRate(double profitRate) {
         System.out.printf(PROFIT_RATE_MESSAGE, profitRate);
     }
 }

@@ -58,7 +58,7 @@
 - [ ] 정적 팩토리 메서드(함수의 네이밍 수정)(ex. valueOf())
 - [ ] Integer 클래스는 값을 캐싱해서 사용하고 있는 부분이 존재
   - 자주 사용될 수 있는 객체는 값을 캐싱하는 식으로 구현
-- [ ] View에서 Statistics가 Money를 받아 수익률 계산하는 것을 모르도록 개선
+- [x] View에서 Statistics가 Money를 받아 수익률 계산하는 것을 모르도록 개선
 - [ ] 테스트 코드 추가
   1. Rank - valueOf()
   2. Statistics - getWinningStatistics()
