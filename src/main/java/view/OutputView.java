@@ -2,7 +2,7 @@ package view;
 
 import java.util.List;
 
-import model.lotto.LottoDTO;
+import model.lotto.LottoResponse;
 
 public class OutputView {
     private static final String PURCHASE_MESSAGE = "개를 구매했습니다";
@@ -18,9 +18,9 @@ public class OutputView {
         printMessage(message);
     }
 
-    public void printLottos(List<LottoDTO> lottoStorage) {
+    public void printLottos(List<LottoResponse> lottoStorage) {
         printMessage(lottoStorage.size() + PURCHASE_MESSAGE);
-        lottoStorage.forEach(lottoDTO -> System.out.println(lottoDTO.getNumbers()));
+        lottoStorage.forEach(lottoResponse -> System.out.println(lottoResponse.getNumbers()));
     }
 
     public void printResultMessage() {

@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import model.result.WinningResult;
-import model.bonusball.BonusBallDTO;
+import model.bonusball.BonusBallResponse;
 import model.result.Rank;
-import model.winningnumber.LottoWinningNumberDTO;
+import model.winningnumber.LottoWinningNumberResponse;
 
 public class LottoTest {
     private WinningResult winningResult;
@@ -26,11 +26,11 @@ public class LottoTest {
     @DisplayName("당첨 번호와 로또의 비교값이 5인 경우")
     void compareWinningNumberWithLottoFive() {
         Lotto lotto = new Lotto(new HashSet<>(List.of(1, 2, 3, 4, 5, 6)));
-        LottoWinningNumberDTO lottoWinningNumberDTO =
-                new LottoWinningNumberDTO(new HashSet<>(List.of(1, 2, 3, 4, 5, 7)));
-        BonusBallDTO bonusBallDTO = new BonusBallDTO(8);
+        LottoWinningNumberResponse lottoWinningNumberResponse =
+                new LottoWinningNumberResponse(new HashSet<>(List.of(1, 2, 3, 4, 5, 7)));
+        BonusBallResponse bonusBallResponse = new BonusBallResponse(8);
 
-        lotto.calcWinningNumber(winningResult, bonusBallDTO, lottoWinningNumberDTO);
+        lotto.calcWinningNumber(winningResult, bonusBallResponse, lottoWinningNumberResponse);
 
         assertThat(winningResult.getWinningCount().get(Rank.BONUS)).isEqualTo(0);
     }
@@ -39,11 +39,11 @@ public class LottoTest {
     @DisplayName("당첨 번호와 로또의 비교값이 5이고, 보너스가 존재하는 경우")
     void compareWinningNumberWithLotto() {
         Lotto lotto = new Lotto(new HashSet<>(List.of(1, 2, 3, 4, 5, 6)));
-        LottoWinningNumberDTO lottoWinningNumberDTO =
-                new LottoWinningNumberDTO(new HashSet<>(List.of(1, 2, 3, 4, 5, 7)));
-        BonusBallDTO bonusBallDTO = new BonusBallDTO(6);
+        LottoWinningNumberResponse lottoWinningNumberResponse =
+                new LottoWinningNumberResponse(new HashSet<>(List.of(1, 2, 3, 4, 5, 7)));
+        BonusBallResponse bonusBallResponse = new BonusBallResponse(6);
 
-        lotto.calcWinningNumber(winningResult, bonusBallDTO, lottoWinningNumberDTO);
+        lotto.calcWinningNumber(winningResult, bonusBallResponse, lottoWinningNumberResponse);
 
         assertThat(winningResult.getWinningCount().get(Rank.BONUS)).isEqualTo(1);
     }

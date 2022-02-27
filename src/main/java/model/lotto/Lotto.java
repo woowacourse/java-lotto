@@ -6,9 +6,9 @@ import java.util.Objects;
 import java.util.Set;
 
 import model.result.WinningResult;
-import model.winningnumber.LottoWinningNumberDTO;
+import model.winningnumber.LottoWinningNumberResponse;
 import model.result.Rank;
-import model.bonusball.BonusBallDTO;
+import model.bonusball.BonusBallResponse;
 
 public class Lotto {
     private static final int CHECKING_BONUS_NUMBER = 5;
@@ -19,12 +19,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public void calcWinningNumber(WinningResult winningResult, BonusBallDTO bonusDTO, LottoWinningNumberDTO winningDTO) {
-        Set<Integer> winningNumbers = winningDTO.getWinningNumbers();
+    public void calcWinningNumber(WinningResult winningResult, BonusBallResponse bonusBallResponse,
+                                  LottoWinningNumberResponse winningResponse) {
+        Set<Integer> winningNumbers = winningResponse.getWinningNumbers();
         long count = countWinningNumber(winningNumbers);
 
         if (count == CHECKING_BONUS_NUMBER) {
-            compareWithBonusAndStore(winningResult, bonusDTO);
+            compareWithBonusAndStore(winningResult, bonusBallResponse);
             return;
         }
         storeResult(winningResult, count);
@@ -36,8 +37,8 @@ public class Lotto {
                 .count();
     }
 
-    private void compareWithBonusAndStore(WinningResult winningResult, BonusBallDTO bonusBallDTO) {
-        if (numbers.contains(bonusBallDTO.getNumber())) {
+    private void compareWithBonusAndStore(WinningResult winningResult, BonusBallResponse bonusBallResponse) {
+        if (numbers.contains(bonusBallResponse.getNumber())) {
             winningResult.addCount(Rank.BONUS);
             return;
         }

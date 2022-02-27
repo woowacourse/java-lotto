@@ -1,9 +1,9 @@
 package model.bonusball;
 
-public class BonusBallDTO {
+public class BonusBallResponse {
     private final int number;
 
-    public BonusBallDTO(int number) {
+    public BonusBallResponse(int number) {
         this.number = number;
     }
 

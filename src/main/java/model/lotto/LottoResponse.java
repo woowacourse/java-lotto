@@ -4,10 +4,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class LottoDTO {
+public class LottoResponse {
     private final Set<Integer> numbers;
 
-    public LottoDTO(Set<Integer> numbers) {
+    public LottoResponse(Set<Integer> numbers) {
         this.numbers = new HashSet<>(numbers);
     }
 

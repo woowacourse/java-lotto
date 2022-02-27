@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import model.result.WinningResult;
-import model.winningnumber.LottoWinningNumberDTO;
-import model.bonusball.BonusBallDTO;
+import model.winningnumber.LottoWinningNumberResponse;
+import model.bonusball.BonusBallResponse;
 
 public class LottoStorage {
     private final List<Lotto> lottoStorage;
@@ -25,15 +25,16 @@ public class LottoStorage {
         return lottos;
     }
 
-    public List<LottoDTO> getLottoStorage() {
-        final List<LottoDTO> lottoDTOS = new ArrayList<>();
-        lottoStorage.forEach(lotto -> lottoDTOS.add(new LottoDTO(lotto.getNumbers())));
-        return Collections.unmodifiableList(lottoDTOS);
+    public List<LottoResponse> getLottoStorage() {
+        final List<LottoResponse> lottoResponses = new ArrayList<>();
+        lottoStorage.forEach(lotto -> lottoResponses.add(new LottoResponse(lotto.getNumbers())));
+        return Collections.unmodifiableList(lottoResponses);
     }
 
-    public WinningResult calcWinningNumber(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumbersDTO) {
+    public WinningResult calcWinningNumber(BonusBallResponse bonusBallResponse,
+                                           LottoWinningNumberResponse winningNumberResponse) {
         WinningResult winningResult = new WinningResult();
-        lottoStorage.forEach(lotto -> lotto.calcWinningNumber(winningResult, bonusBallDTO, winningNumbersDTO));
+        lottoStorage.forEach(lotto -> lotto.calcWinningNumber(winningResult, bonusBallResponse, winningNumberResponse));
         return winningResult;
     }
 }
