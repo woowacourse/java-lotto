@@ -7,12 +7,16 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTicketTest {
 
-    @Test
+
     @DisplayName("로또 티켓이 정상적으로 생성되는지 확인")
-    void createLottoTicket() {
+    @ParameterizedTest
+    @ValueSource(ints = {1,2,3,4,5,6})
+    void createLottoTicket(int number) {
         // given
         List<LottoNumber> numbers = new ArrayList<>(
             List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
@@ -21,7 +25,7 @@ class LottoTicketTest {
         // when
         LottoTicket lottoTicket = new LottoTicket(numbers);
         // then
-        assertThat(lottoTicket).isNotNull();
+        assertThat(lottoTicket.isMatch(new LottoNumber(number))).isTrue();
     }
 
     @Test
