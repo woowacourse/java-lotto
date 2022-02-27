@@ -2,10 +2,10 @@ package model.lotto;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import model.bonusball.BonusBallDTO;
 import model.result.Rank;
-import model.result.RateOfReturn;
 import model.winningnumber.LottoWinningNumberDTO;
 
 public class Lotto {
@@ -21,16 +21,15 @@ public class Lotto {
 		return new LottoDTO(numbers);
 	}
 
-	public void checkWithWinningNumberAndBonus(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumberDTO,
-		RateOfReturn rateOfReturn) {
+	public Rank match(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumberDTO) {
 		List<Integer> winningNumbers = winningNumberDTO.getWinningNumbers();
 		long count = countMatchingWinningNumber(winningNumbers);
 
 		if (count == CHECKING_BONUS_NUMBER) {
-			checkWithBonusBallAndStore(bonusBallDTO, rateOfReturn);
-			return;
+			return matchWithBonus(bonusBallDTO);
 		}
-		storeResult(count, rateOfReturn);
+
+		return findRank(count);
 	}
 
 	private long countMatchingWinningNumber(List<Integer> winningNumbers) {
@@ -39,17 +38,17 @@ public class Lotto {
 			.count();
 	}
 
-	private void checkWithBonusBallAndStore(BonusBallDTO bonusBallDTO, RateOfReturn rateOfReturn) {
+	private Rank matchWithBonus(BonusBallDTO bonusBallDTO) {
 		if (numbers.contains(bonusBallDTO.getNumber())) {
-			rateOfReturn.saveResult(Rank.BONUS);
-			return;
+			return Rank.BONUS;
 		}
-		rateOfReturn.saveResult(Rank.FIVE);
+		return Rank.FIVE;
 	}
 
-	private void storeResult(long count, RateOfReturn rateOfReturn) {
-		Arrays.stream(Rank.values())
-			.filter(statistics -> statistics.getMatchNumber() == count)
-			.forEach(statistics -> rateOfReturn.saveResult(statistics));
+	private Rank findRank(long count) {
+		List<Rank> ranks = Arrays.stream(Rank.values())
+			.filter(rank -> rank.getMatchNumber() == count)
+			.collect(Collectors.toList());
+		return ranks.get(0);
 	}
 }

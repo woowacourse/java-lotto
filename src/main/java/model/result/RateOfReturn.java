@@ -28,6 +28,7 @@ public class RateOfReturn {
 
 	public double getRateOfReturn() {
 		Arrays.stream(Rank.values())
+			.filter(rank -> rank.getMatchNumber() >= 3)
 			.forEach(
 				statistics -> sumMoneyOfReturns += (countOfResult.getOrDefault(statistics, 0) * statistics.getValue()));
 

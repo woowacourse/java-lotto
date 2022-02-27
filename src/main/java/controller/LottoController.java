@@ -72,6 +72,7 @@ public class LottoController {
 	private void showResult() {
 		outputView.printResultMessage();
 		Arrays.stream(Rank.values())
+			.filter(rank -> rank.getMatchNumber() >= 3)
 			.forEach(statistics -> outputView.printResult(statistics.getMatchNumber(), statistics.getValue(),
 				rateOfReturn.countStatistics(statistics),
 				Rank.BONUS.getValue()));
