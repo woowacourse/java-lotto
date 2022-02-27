@@ -9,7 +9,7 @@ public class MoneyManager {
 
     private final int inputMoney;
 
-    public MoneyManager(int inputMoney) {
+    public MoneyManager(int inputMoney) throws RuntimeException {
         validateIsNegativeOrZero(inputMoney);
         validateIsDividableByLottoPrice(inputMoney);
 

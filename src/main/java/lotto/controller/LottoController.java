@@ -14,22 +14,40 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void buyAndMatch() {
-        MoneyManager moneyManager = new MoneyManager(InputView.requestMoney());
+        MoneyManager moneyManager = getMoney();
         LottoTickets lottoTickets = new LottoTickets(new LottoNumberGenerator(), moneyManager.getLottoCount());
 
         OutputView.displayLottoTickets(lottoTickets);
 
-        WinningNumbers winningNumbers = new WinningNumbers(getWinningNumbers(), getBonusNumber());
+        WinningNumbers winningNumbers = getWinningNumbersAndBonusNumber();
 
         Ranks ranks = new Ranks(lottoTickets.getRanksWithWinningNumbers(winningNumbers));
         OutputView.displayResult(ranks.getStatistics(), moneyManager.calculateYield(ranks.getLottoTotalReward()));
     }
 
-    private List<LottoNumber> getWinningNumbers() {
+    private MoneyManager getMoney() {
+        try {
+            return new MoneyManager(InputView.requestMoney());
+        } catch (RuntimeException exception) {
+            System.out.println("[ERROR] " + exception + "\n");
+            return getMoney();
+        }
+    }
+
+    private WinningNumbers getWinningNumbersAndBonusNumber() {
+        try {
+            return new WinningNumbers(getWinningNumbers(), getBonusNumber());
+        } catch (RuntimeException exception) {
+            System.out.println("[ERROR] " + exception + "\n");
+            return getWinningNumbersAndBonusNumber();
+        }
+    }
+
+    private List<LottoNumber> getWinningNumbers() throws RuntimeException {
         return InputView.requestWinningNumbers().stream().map(LottoNumber::new).collect(Collectors.toList());
     }
 
-    private LottoNumber getBonusNumber() {
+    private LottoNumber getBonusNumber() throws RuntimeException {
         return new LottoNumber(InputView.requestBonusNumber());
     }
 }

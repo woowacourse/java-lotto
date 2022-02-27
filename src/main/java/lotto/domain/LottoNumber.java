@@ -10,7 +10,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    public LottoNumber(int number) throws RuntimeException {
         validateRange(number);
         this.number = number;
     }

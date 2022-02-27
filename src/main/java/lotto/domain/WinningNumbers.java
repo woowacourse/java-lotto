@@ -13,7 +13,7 @@ public class WinningNumbers {
     private final List<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) throws RuntimeException {
         validateWinningNumbersCount(winningNumbers);
         validateWinningNumbersDuplication(winningNumbers);
         validateBonusNumberDuplication(winningNumbers, bonusNumber);
@@ -29,13 +29,9 @@ public class WinningNumbers {
     }
 
     private void validateWinningNumbersDuplication(List<LottoNumber> winningNumbers) {
-        if (isDuplicate(winningNumbers)) {
+        if (winningNumbers.stream().distinct().count() != winningNumbers.size()) {
             throw new RuntimeException(ERROR_DUPLICATION_WINNING_NUMBERS);
         }
-    }
-
-    private boolean isDuplicate(List<LottoNumber> winningNumbers) {
-        return winningNumbers.stream().distinct().count() != winningNumbers.size();
     }
 
     private void validateBonusNumberDuplication(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {

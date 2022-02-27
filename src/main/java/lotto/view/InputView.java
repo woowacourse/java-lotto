@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
-    private static final String ERROR_NON_INTEGER_FORMAT = "구입 금액은 숫자 형태로 입력해야 합니다.";
-    private static final String ERROR_NULL_OR_EMPTY = "입력 null 혹은 빈 문자열 일수 없습니다.";
+    private static final String ERROR_NON_INTEGER_FORMAT = "구입 금액은 구분자(', ')로 구분된 숫자 형태로 입력해야 합니다.";
+    private static final String ERROR_NULL_OR_EMPTY = "입력은 null 혹은 빈 문자열일 수 없습니다.";
     private static final String REQUEST_MONEY = "구입금액을 입력해 주세요.";
     private static final String REQUEST_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
@@ -16,7 +16,7 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int requestMoney() {
+    public static int requestMoney() throws RuntimeException {
         System.out.println(REQUEST_MONEY);
         String inputMoney = scanner.nextLine();
         validateIsNullOrEmpty(inputMoney);
@@ -37,7 +37,7 @@ public class InputView {
         }
     }
 
-    public static List<Integer> requestWinningNumbers() {
+    public static List<Integer> requestWinningNumbers() throws RuntimeException {
         System.out.println(REQUEST_WINNING_NUMBERS);
         String inputWinningNumbers = scanner.nextLine();
         validateIsNullOrEmpty(inputWinningNumbers);
@@ -51,7 +51,7 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    public static int requestBonusNumber() {
+    public static int requestBonusNumber() throws RuntimeException {
         System.out.println(REQUEST_BONUS_NUMBER);
         String inputBonusNumber = scanner.nextLine();
         validateIsNullOrEmpty(inputBonusNumber);
