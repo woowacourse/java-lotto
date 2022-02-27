@@ -18,12 +18,12 @@ public class Lotto {
 
     public Lotto(List<Integer> lottoNumbers) {
         validateNumberOfLottoNumbers(lottoNumbers);
-        validateDuplicationWinningNumbers(lottoNumbers);
+        validateDuplicationLottoNumbers(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers = convertIntegersToLottoNumbers(lottoNumbers);
     }
 
-    public static Lotto generate() {
+    static Lotto generate() {
         List<Integer> lottoNumbers = generateSequentialIntegers();
         Collections.shuffle(lottoNumbers);
 
@@ -33,7 +33,7 @@ public class Lotto {
     private static List<Integer> generateSequentialIntegers() {
         return IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
             .boxed()
-            .collect(Collectors.toList());
+            .collect(Collectors.toUnmodifiableList());
     }
 
     private void validateNumberOfLottoNumbers(List<Integer> lottoNumbers) {
@@ -42,7 +42,7 @@ public class Lotto {
         }
     }
 
-    private void validateDuplicationWinningNumbers(List<Integer> winningNumbers) {
+    private void validateDuplicationLottoNumbers(List<Integer> winningNumbers) {
         Set<Integer> distinct = new HashSet<>(winningNumbers);
         if (distinct.size() != winningNumbers.size()) {
             throw new IllegalArgumentException(ERROR_DUPLICATION_LOTTO_NUMBERS);
