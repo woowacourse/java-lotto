@@ -4,6 +4,7 @@ import static common.TestUtils.createCountsDto;
 import static common.TestUtils.createNewLotto;
 import static domain.LottoGame.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,6 +52,18 @@ public class LottoGameTest {
     }
 
     @Test
+    void getResultStatistics_exceptionOnModifyingStats() {
+        Lottos lottos = Lottos.of(getLottosExample(firstPrizeLotto, secondPrizeLotto, noPrizeLotto),
+                createCountsDto(3, 0));
+        LottoGame game = new LottoGame(lottos, referee);
+
+        Map<LottoResult, Integer> stats = game.getResultStatistics();
+
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> stats.put(LottoResult.FIRST, 10));
+    }
+
+    @Test
     void calculatePrizePriceRatio_zeroIfNoPrize() {
         Lottos lottos = Lottos.of(getLottosExample(noPrizeLotto), createCountsDto(1, 0));
         LottoGame game = new LottoGame(lottos, referee);
@@ -67,7 +80,8 @@ public class LottoGameTest {
 
         float actual = game.calculatePrizePriceRatio();
 
-        assertThat(actual).isEqualTo((float) LottoResult.FIFTH.getPrize() / LOTTO_PRICE);
+        assertThat(actual)
+                .isEqualTo((float) LottoResult.FIFTH.getPrize() / LOTTO_PRICE);
     }
 
     private List<Lotto> getLottosExample(Lotto... lottos) {

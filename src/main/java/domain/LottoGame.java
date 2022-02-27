@@ -27,7 +27,7 @@ public class LottoGame {
     }
 
     public Map<LottoResult, Integer> getResultStatistics() {
-        return Collections.unmodifiableMap(resultStatistics.getResultStatistics());
+        return resultStatistics.getResultStatistics();
     }
 
     public float calculatePrizePriceRatio() {
