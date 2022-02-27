@@ -23,4 +23,10 @@ public class InputValidateUtils {
 			throw new IllegalArgumentException(message);
 		}
 	}
+
+	// public static void inputOutOfRange2(int number, String message) {
+	// 	if (number < LottoRule.LOTTO_MIN_NUMBER || number > LottoRule.LOTTO_MAX_NUMBER) {
+	// 		throw new IllegalArgumentException(message);
+	// 	}
+	// }
 }

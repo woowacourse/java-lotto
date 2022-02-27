@@ -66,6 +66,12 @@ public class LottoWinningNumber {
 		}
 	}
 
+	// public void validateReduplicationWithBonusBall2(int number) {
+	// 	if (winningNumbers.contains(number)) {
+	// 		throw new IllegalArgumentException(REDUPLICATION_WITH_BONUS_BALL_ERROR_MESSAGE);
+	// 	}
+	// }
+
 	public LottoWinningNumberDTO getWinningNumbersDTO() {
 		return new LottoWinningNumberDTO(this.winningNumbers);
 	}
