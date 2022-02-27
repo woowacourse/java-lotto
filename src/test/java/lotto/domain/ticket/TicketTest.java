@@ -17,31 +17,31 @@ import lotto.exception.ticket.TicketNumbersExceptionStatus;
 
 class TicketTest {
 
-    private void ticketExceptionTest(final List<Integer> numbers, final TicketNumbersExceptionStatus exceptionStatus) {
-        assertThatThrownBy(() -> new Ticket(numbers))
-                .isInstanceOf(LottoException.class)
-                .hasMessageContaining(exceptionStatus.getMessage());
-    }
-
     @DisplayName("로또 번호 묶음은 NULL이 아니어야 합니다.")
     @ParameterizedTest
     @NullSource
     void ticketNullExceptionTest(final List<Integer> numbers) {
-        ticketExceptionTest(numbers, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_NULL);
+        assertThatThrownBy(() -> new Ticket(numbers))
+                .isInstanceOf(LottoException.class)
+                .hasMessageContaining(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_NULL.getMessage());
     }
 
     @DisplayName("로또 번호 묶음은 6개로 구성되여야 합니다.")
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}")
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForNumbersOutOfSizeExceptionTest")
     void ticketOutOfSizeExceptionTest(final List<Integer> numbers) {
-        ticketExceptionTest(numbers, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_OUT_OF_SIZE);
+        assertThatThrownBy(() -> new Ticket(numbers))
+                .isInstanceOf(LottoException.class)
+                .hasMessageContaining(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_OUT_OF_SIZE.getMessage());
     }
 
     @DisplayName("로또 번호 묶음 중 중복 값은 존재할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}")
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForNumbersDuplicatedExceptionTest")
     void ticketNumbersDuplicatedExceptionTest(final List<Integer> numbers) {
-        ticketExceptionTest(numbers, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
+        assertThatThrownBy(() -> new Ticket(numbers))
+                .isInstanceOf(LottoException.class)
+                .hasMessageContaining(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED.getMessage());
     }
 
     @DisplayName("특정 번호 포함 여부 확인 테스트")
@@ -49,7 +49,7 @@ class TicketTest {
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForContainsTest")
     void containsTest(final List<Integer> numbers, final int targetNumber) {
         final Ticket ticket = new Ticket(numbers);
-        final Ball targetBall = Balls.getBall(targetNumber);
+        final Ball targetBall = new Ball(targetNumber);
 
         assertThat(ticket.contains(targetBall)).isTrue();
     }
@@ -57,12 +57,12 @@ class TicketTest {
     @DisplayName("당첨 번호와 일치 개수 확인 테스트")
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}, 일치 개수 : {2}, 당첨 번호 : {1}")
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForCountMatchesTest")
-    void countMatchesTest(final List<Integer> numbers, final List<Integer> winningNumbers, final int matchCount) {
+    void countMatches(final List<Integer> numbers, final List<Integer> winningNumbers, final int matchCount) {
         final Ticket ticket = new Ticket((numbers));
         final Ticket winningTicket = new Ticket(winningNumbers);
         final List<Integer> winningBallNumbers = winningTicket.getBallNumbers();
         final List<Ball> winningBalls = winningBallNumbers.stream()
-                .map(Balls::getBall)
+                .map(Ball::new)
                 .collect(Collectors.toUnmodifiableList());
 
         assertThat(ticket.countMatches(winningBalls)).isEqualTo(matchCount);
@@ -77,9 +77,8 @@ class TicketTest {
                            final Rank expected) {
         final Ticket ticket = new Ticket((numbers));
         final Ticket winningTicket = new Ticket(winningNumbers);
-        final Ball bonusBall = Balls.getBall(bonusNumber);
+        final Ball bonusBall = new Ball(bonusNumber);
         final Rank rank = ticket.calculateRank(winningTicket, bonusBall).orElse(null);
-
         assertThat(rank).isEqualTo(expected);
     }
 

@@ -10,34 +10,36 @@ import lotto.exception.ticket.TicketNumbersExceptionStatus;
 
 public class TicketValidator {
 
+    private static final TicketValidator INSTANCE = new TicketValidator();
+
     private TicketValidator() {
     }
 
     public static void validateTicket(final List<Integer> ballNumbers) {
-        verifyNumbersNotNull(ballNumbers);
-        verifyNumbersNotOutOfSize(ballNumbers);
-        verifyNumbersNotDuplicated(ballNumbers);
+        INSTANCE.verifyNumbersNotNull(ballNumbers);
+        INSTANCE.verifyNumbersNotOutOfSize(ballNumbers);
+        INSTANCE.verifyNumbersNotDuplicated(ballNumbers);
     }
 
-    private static void verifyNumbersNotNull(final List<Integer> ballNumbers) {
+    private void verifyNumbersNotNull(final List<Integer> ballNumbers) {
         if (Objects.isNull(ballNumbers)) {
             throw new LottoException(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_NULL);
         }
     }
 
-    private static void verifyNumbersNotOutOfSize(final List<Integer> ballNumbers) {
+    private void verifyNumbersNotOutOfSize(final List<Integer> ballNumbers) {
         if (TicketSize.DEFAULT_SIZE.doesNotMatch(ballNumbers.size())) {
             throw new LottoException(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_OUT_OF_SIZE);
         }
     }
 
-    private static void verifyNumbersNotDuplicated(final List<Integer> ballNumbers) {
+    private void verifyNumbersNotDuplicated(final List<Integer> ballNumbers) {
         if (isNumberDuplicated(ballNumbers)) {
             throw new LottoException(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
         }
     }
 
-    private static boolean isNumberDuplicated(final List<Integer> ballNumbers) {
+    private boolean isNumberDuplicated(final List<Integer> ballNumbers) {
         return ballNumbers.stream()
                 .anyMatch(ballNumber -> BallNumberDuplication.isExcessiveDuplicated(ballNumbers, ballNumber));
     }

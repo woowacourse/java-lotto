@@ -7,14 +7,16 @@ import lotto.exception.ticket.TicketNumbersExceptionStatus;
 
 public class WinningTicketValidator {
 
+    private static final WinningTicketValidator INSTANCE = new WinningTicketValidator();
+
     private WinningTicketValidator() {
     }
 
     public static void validateWinningTicket(final Ticket ticket, final Ball bonusBall) {
-        verifyBonusBallNotDuplicated(ticket, bonusBall);
+        INSTANCE.verifyBonusBallNotDuplicated(ticket, bonusBall);
     }
 
-    private static void verifyBonusBallNotDuplicated(final Ticket ticket, final Ball bonusBall) {
+    private void verifyBonusBallNotDuplicated(final Ticket ticket, final Ball bonusBall) {
         if (ticket.contains(bonusBall)) {
             throw new LottoException(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
         }
