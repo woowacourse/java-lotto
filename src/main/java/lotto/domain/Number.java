@@ -8,8 +8,8 @@ import java.util.stream.IntStream;
 
 public class Number implements Comparable<Number> {
 
-    public static final int MIN_VALUE = 1;
-    public static final int MAX_VALUE = 45;
+    private static final int MIN_VALUE = 1;
+    private static final int MAX_VALUE = 45;
     private static final String ERROR_MESSAGE = MIN_VALUE + "부터 " + MAX_VALUE + "의 숫자여야 합니다.";
     private static final List<Number> cache;
 
