@@ -3,7 +3,6 @@ package lotto.controller;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import lotto.model.Lottos;
 import lotto.model.Money;
