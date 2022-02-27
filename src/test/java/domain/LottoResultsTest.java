@@ -5,7 +5,12 @@ import static org.assertj.core.api.Assertions.entry;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Stream;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 @SuppressWarnings("NonAsciiCharacters")
 public class LottoResultsTest {
@@ -25,103 +30,22 @@ public class LottoResultsTest {
                 .contains(entry(Rank.FIRST, 2), entry(Rank.SECOND, 1), entry(Rank.THIRD, 1));
     }
 
-    @Test
-    void 수익률_0() {
+    @ParameterizedTest(name = "{index}: {4}")
+    @MethodSource("validParameters")
+    @DisplayName("수익률 검사")
+    void validCreate(Ticket ticket1, Ticket ticket2, Ticket ticket3, int amount, double yield, String testName) {
         WinningNumbers winningNumbers = getWinningNumbers();
-
-        Ticket ticket1 = getOtherTicket();
-        Ticket ticket2 = getOtherTicket();
-        Ticket ticket3 = getOtherTicket();
-
         Tickets tickets = new Tickets(Arrays.asList(ticket1, ticket2, ticket3));
         LottoResults results = LottoResults.of(winningNumbers, tickets);
-        assertThat(new Amount(3000).getYield(results.getProfit())).isEqualTo(0);
+        assertThat(new Amount(amount).getYield(results.getProfit())).isEqualTo(yield);
     }
 
-    @Test
-    void 수익률_1000() {
-        WinningNumbers winningNumbers = getWinningNumbers();
-
-        Ticket ticket1 = getOtherTicket();
-        Ticket ticket2 = getThirdTicket();
-        Ticket ticket3 = getThirdTicket();
-
-        Tickets tickets = new Tickets(Arrays.asList(ticket1, ticket2, ticket3));
-
-        LottoResults results = LottoResults.of(winningNumbers, tickets);
-        assertThat(new Amount(3000).getYield(results.getProfit())).isEqualTo(1000);
-    }
-
-    @Test
-    void 수익률_035() {
-        WinningNumbers winningNumbers = getWinningNumbers();
-
-        Ticket ticket1 = getFifthTicket();
-        Ticket ticket2 = getOtherTicket();
-        Ticket ticket3 = getOtherTicket();
-        Ticket ticket4 = getOtherTicket();
-        Ticket ticket5 = getOtherTicket();
-        Ticket ticket6 = getOtherTicket();
-        Ticket ticket7 = getOtherTicket();
-        Ticket ticket8 = getOtherTicket();
-        Ticket ticket9 = getOtherTicket();
-        Ticket ticket10 = getOtherTicket();
-        Ticket ticket11 = getOtherTicket();
-        Ticket ticket12 = getOtherTicket();
-        Ticket ticket13 = getOtherTicket();
-        Ticket ticket14 = getOtherTicket();
-
-        Tickets tickets = new Tickets(Arrays.asList(ticket1, ticket2, ticket3,
-                ticket4, ticket5, ticket6, ticket7,
-                ticket8, ticket9, ticket10, ticket11,
-                ticket12, ticket13, ticket14));
-
-        LottoResults results = LottoResults.of(winningNumbers, tickets);
-        assertThat(new Amount(14000).getYield(results.getProfit())).isEqualTo(0.35);
-    }
-
-    @Test
-    void 수익률_1등_3명() {
-        WinningNumbers winningNumbers = getWinningNumbers();
-
-        Ticket ticket1 = getFirstTicket();
-        Ticket ticket2 = getFirstTicket();
-        Ticket ticket3 = getFirstTicket();
-
-        Tickets tickets = new Tickets(Arrays.asList(ticket1, ticket2, ticket3));
-
-        LottoResults results = LottoResults.of(winningNumbers, tickets);
-        assertThat(new Amount(3000).getYield(results.getProfit())).isEqualTo(2000000);
-        System.out.println();
-    }
-
-    @Test
-    void 수익률_1등_14명() {
-        WinningNumbers winningNumbers = getWinningNumbers();
-
-        Ticket ticket1 = getFirstTicket();
-        Ticket ticket2 = getFirstTicket();
-        Ticket ticket3 = getFirstTicket();
-        Ticket ticket4 = getFirstTicket();
-        Ticket ticket5 = getFirstTicket();
-        Ticket ticket6 = getFirstTicket();
-        Ticket ticket7 = getFirstTicket();
-        Ticket ticket8 = getFirstTicket();
-        Ticket ticket9 = getFirstTicket();
-        Ticket ticket10 = getFirstTicket();
-        Ticket ticket11 = getFirstTicket();
-        Ticket ticket12 = getFirstTicket();
-        Ticket ticket13 = getFirstTicket();
-        Ticket ticket14 = getFirstTicket();
-
-        Tickets tickets = new Tickets(Arrays.asList(ticket1, ticket2, ticket3,
-                ticket4, ticket5, ticket6, ticket7,
-                ticket8, ticket9, ticket10, ticket11,
-                ticket12, ticket13, ticket14));
-
-        LottoResults results = LottoResults.of(winningNumbers, tickets);
-        assertThat(new Amount(14000).getYield(results.getProfit())).isEqualTo(2000000);
-        System.out.println();
+    static Stream<Arguments> validParameters() {
+        return Stream.of(
+                Arguments.of(getOtherTicket(), getOtherTicket(), getOtherTicket(), 3000, 0, "수익률 0"),
+                Arguments.of(getOtherTicket(), getThirdTicket(), getThirdTicket(), 3000, 1000, "수익률 1000"),
+                Arguments.of(getFifthTicket(), getSecondTicket(), getFirstTicket(), 3000, 676668.33, "수익률 676668"),
+                Arguments.of(getFirstTicket(), getFirstTicket(), getFirstTicket(), 3000, 2000000, "수익률 2000000"));
     }
 
     private WinningNumbers getWinningNumbers() {
@@ -135,7 +59,7 @@ public class LottoResultsTest {
         return new WinningNumbers(winTicket, bonusNumber);
     }
 
-    private Ticket getFifthTicket() {
+    private static Ticket getFifthTicket() {
         return new Ticket(Set.of(new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -144,7 +68,7 @@ public class LottoResultsTest {
                 new LottoNumber(43)));
     }
 
-    private Ticket getOtherTicket() {
+    private static Ticket getOtherTicket() {
         return new Ticket(Set.of(new LottoNumber(11),
                 new LottoNumber(12),
                 new LottoNumber(13),
@@ -153,7 +77,7 @@ public class LottoResultsTest {
                 new LottoNumber(43)));
     }
 
-    private Ticket getThirdTicket() {
+    private static Ticket getThirdTicket() {
         return new Ticket(Set.of(new LottoNumber(40),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -162,7 +86,7 @@ public class LottoResultsTest {
                 new LottoNumber(16)));
     }
 
-    private Ticket getSecondTicket() {
+    private static Ticket getSecondTicket() {
         return new Ticket(Set.of(new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -171,7 +95,7 @@ public class LottoResultsTest {
                 new LottoNumber(6)));
     }
 
-    private Ticket getFirstTicket() {
+    private static Ticket getFirstTicket() {
         return new Ticket(Set.of(new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
