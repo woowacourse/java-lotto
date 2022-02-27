@@ -17,6 +17,6 @@ public class LottoController {
 
         lottoGame.produceResults();
         OutputView.printWinningStatistic();
-        OutputView.printYield(lottoGame.getYield());
+        OutputView.printYield(lottoGame.calculateYield());
     }
 }

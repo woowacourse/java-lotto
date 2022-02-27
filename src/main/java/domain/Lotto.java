@@ -13,10 +13,6 @@ public class Lotto {
     private static final int MIN_RANGE = 0;
     private static final int MAX_RANGE = 6;
 
-    private static final int WINNING_COUNT_LIMIT = 3;
-    private static final int SECOND_PRIZE_CONDITION = 5;
-    private static final int NO_MEANING_COUNT = 0;
-
     private List<LottoNumber> lottoNumbers;
 
     public Lotto() {
@@ -67,44 +63,5 @@ public class Lotto {
 
     public boolean isBonusNumberContain(LottoNumber bonusNumber) {
         return getNumbers().contains(bonusNumber.getNumber());
-    }
-
-    public Rewards checkWinning(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-
-        int winningCount = countWinningNumbers(winningNumbers);
-        int bonusCount = countBonusNumber(bonusNumber);
-
-        winningCount = checkNoReward(winningCount);
-        bonusCount = checkSecondPrize(winningCount, bonusCount);
-
-        return Rewards.findReward(winningCount, bonusCount);
-    }
-
-    private int countWinningNumbers(List<LottoNumber> winningNumbers) {
-        return (int) lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .filter(winningNumbers::contains)
-                .count();
-    }
-
-    private int countBonusNumber(LottoNumber bonusNumber) {
-        return (int) lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .filter(bonusNumber::equals)
-                .count();
-    }
-
-    private int checkNoReward(Integer winningCount) {
-        if (winningCount < WINNING_COUNT_LIMIT) {
-            return NO_MEANING_COUNT;
-        }
-        return winningCount;
-    }
-
-    private int checkSecondPrize(Integer winningCount, Integer bonusCount) {
-        if (winningCount != SECOND_PRIZE_CONDITION) {
-            return NO_MEANING_COUNT;
-        }
-        return bonusCount;
     }
 }

@@ -20,13 +20,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public void compareAllLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        for (Lotto lotto : lottos) {
-            Rewards rewards = lotto.checkWinning(winningNumbers, bonusNumber);
-            Rewards.addCount(rewards);
-        }
-    }
-
     public int getSize() {
         return lottos.size();
     }

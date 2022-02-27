@@ -33,12 +33,7 @@ public class OutputView {
     }
 
     public static void printWinningStatistic() {
-        System.out.println(MESSAGE_WINNING_STATISTIC);
-        System.out.println(SEPERATOR_LINE);
-
-        for (int i = 0; i < 5; i++) {
-            System.out.printf(MESSAGE_WINNING_RANKING[i], Rewards.getCount(Rewards.values()[reverseIndex(i)]));
-        }
+        //TODO
     }
 
     public static void printYield(double yield) {

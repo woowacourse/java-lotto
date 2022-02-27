@@ -12,9 +12,9 @@ public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
     private static final int EMPTY = 0;
     private static final int NO_YIELD = 0;
-    private static final int SUM_BASE = 0;
     private static final int INCREASE_COUNT = 1;
     private static final int BASE_COUNT = 0;
+    private static final int BASE_SUM = 0;
 
     private Lotto winningLotto;
     private LottoNumber bonusNumber;
@@ -58,15 +58,15 @@ public class LottoGame {
                 .collect(Collectors.toList());
     }
 
-    public double getYield() {
+    public float calculateYield() {
         if (lottos.getSize() == EMPTY) {
             return NO_YIELD;
         }
-
-        int prize = Arrays.stream(Rewards.values())
-                .map(Rewards::calculateYield)
-                .reduce(SUM_BASE, Integer::sum);
-        return (float) prize / (LOTTO_PRICE * lottos.getSize());
+        List<Rewards> ranks = convertLottoResultsToRanks();
+        int prizeSum = ranks.stream()
+                .map(Rewards::getPrize)
+                .reduce(BASE_SUM, Integer::sum);
+        return (float) prizeSum / lottos.getSize();
     }
 
     public Lottos getLottos() {
