@@ -13,7 +13,11 @@ public class LottoMachine {
         this.lottoGenerator = lottoGenerator;
     }
 
-    public List<Lotto> issueLotto(Money money) {
+    public Lottoes issueLotto(Money money) {
+        return new Lottoes(createLottoes(money));
+    }
+
+    private List<Lotto> createLottoes(Money money) {
         return IntStream.range(0, quantity(money))
             .mapToObj(i -> lottoGenerator.createLotto())
             .collect(toUnmodifiableList());

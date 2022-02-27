@@ -1,8 +1,6 @@
 package lotto.model;
 
-import static java.util.stream.Collectors.toUnmodifiableList;
-
-import java.util.List;
+import java.util.Collection;
 import lotto.model.exception.DuplicatedNumberException;
 
 public class WinnerLotto {
@@ -18,14 +16,12 @@ public class WinnerLotto {
         this.bonus = bonus;
     }
 
-    public Statistic summarize(List<Lotto> lottoes) {
+    public Statistic summarize(Lottoes lottoes) {
         return new Statistic(ranks(lottoes));
     }
 
-    private List<Rank> ranks(List<Lotto> lottoes) {
-        return lottoes.stream()
-            .map(this::rankBy)
-            .collect(toUnmodifiableList());
+    private Collection<Rank> ranks(Lottoes lottoes) {
+        return lottoes.mapAndCollect(this::rankBy);
     }
 
     private Rank rankBy(Lotto lotto) {

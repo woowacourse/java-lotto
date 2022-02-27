@@ -61,7 +61,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("1등 판독 테스트")
     void firstPrize() {
-        Statistic statistic = winnerLotto.summarize(List.of(FIRST_RANK_LOTTO));
+        Statistic statistic = winnerLotto.summarize(new Lottoes(List.of(FIRST_RANK_LOTTO)));
         BigDecimal profitRate = FIRST_RANK_PRIZE.divide(THOUSAND_MONEY);
         assertThat(statistic.getProfitRate()).isEqualTo(new ProfitRate(profitRate));
         assertThat(statistic.getCountByRank(Rank.FIRST)).isEqualTo(1);
@@ -70,7 +70,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("2등 판독 테스트")
     void secondPrize() {
-        Statistic result = winnerLotto.summarize(List.of(SECOND_RANK_LOTTO));
+        Statistic result = winnerLotto.summarize(new Lottoes(List.of(SECOND_RANK_LOTTO)));
         BigDecimal profitRate = SECOND_RANK_PRIZE.divide(THOUSAND_MONEY);
         assertThat(result.getProfitRate()).isEqualTo(new ProfitRate(profitRate));
         assertThat(result.getCountByRank(Rank.SECOND)).isEqualTo(1);
@@ -79,7 +79,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("3등 판독 테스트")
     void thirdPrize() {
-        Statistic result = winnerLotto.summarize(List.of(THIRD_RANK_LOTTO));
+        Statistic result = winnerLotto.summarize(new Lottoes(List.of(THIRD_RANK_LOTTO)));
         BigDecimal profitRate = THIRD_RANK_PRIZE.divide(THOUSAND_MONEY);
         assertThat(result.getProfitRate()).isEqualTo(new ProfitRate(profitRate));
         assertThat(result.getCountByRank(Rank.THIRD)).isEqualTo(1);
@@ -88,7 +88,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("4등 판독 테스트")
     void fourthPrize() {
-        Statistic result = winnerLotto.summarize(List.of(FOURTH_RANK_LOTTO));
+        Statistic result = winnerLotto.summarize(new Lottoes(List.of(FOURTH_RANK_LOTTO)));
         BigDecimal profitRate = FOURTH_RANK_PRIZE.divide(THOUSAND_MONEY);
         assertThat(result.getProfitRate()).isEqualTo(new ProfitRate(profitRate));
         assertThat(result.getCountByRank(Rank.FOURTH)).isEqualTo(1);
@@ -97,7 +97,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("5등 판독 테스트")
     void fifthPrize() {
-        Statistic result = winnerLotto.summarize(List.of(FIFTH_RANK_LOTTO));
+        Statistic result = winnerLotto.summarize(new Lottoes(List.of(FIFTH_RANK_LOTTO)));
         BigDecimal profitRate = FIFTH_RANK_PRIZE.divide(THOUSAND_MONEY);
         assertThat(result.getProfitRate()).isEqualTo(new ProfitRate(profitRate));
         assertThat(result.getCountByRank(Rank.FIFTH)).isEqualTo(1);
@@ -107,7 +107,7 @@ public class WinnerLottoTest {
     @MethodSource("provideLottoNumbersList")
     @DisplayName("꽝 판독 테스트")
     void nothingPrize(Lotto lottoNumbers) {
-        Statistic result = winnerLotto.summarize(List.of(lottoNumbers));
+        Statistic result = winnerLotto.summarize(new Lottoes(List.of(lottoNumbers)));
         assertThat(result.getProfitRate().getDoubleValue())
             .isCloseTo(new ProfitRate(BigDecimal.ZERO).getDoubleValue(),
                 Percentage.withPercentage(0.01));
@@ -125,9 +125,9 @@ public class WinnerLottoTest {
     @DisplayName("다양한 로또 순위 구하기")
     void summarize() {
         Statistic result = winnerLotto.summarize(
-            List.of(FIRST_RANK_LOTTO, FIRST_RANK_LOTTO,
+            new Lottoes(List.of(FIRST_RANK_LOTTO, FIRST_RANK_LOTTO,
                 SECOND_RANK_LOTTO, THIRD_RANK_LOTTO,
-                THIRD_RANK_LOTTO, NOTHING_RANK_LOTTO));
+                THIRD_RANK_LOTTO, NOTHING_RANK_LOTTO)));
 
         Money expectedPrize = FIRST_RANK_PRIZE.plus(FIRST_RANK_PRIZE).plus(SECOND_RANK_PRIZE)
             .plus(THIRD_RANK_PRIZE).plus(THIRD_RANK_PRIZE);

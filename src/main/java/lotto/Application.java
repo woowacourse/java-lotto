@@ -12,6 +12,7 @@ import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.LottoGenerator;
 import lotto.model.LottoMachine;
+import lotto.model.Lottoes;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
 import lotto.model.Statistic;
@@ -30,14 +31,14 @@ public class Application {
 
     private static void run() {
         Money inputMoney = inputMoney();
-        List<Lotto> lottoes = issueLottoes(inputMoney);
+        Lottoes lottoes = issueLottoes(inputMoney);
         printLottoes(lottoes);
         WinnerLotto winnerLotto = inputWinnerLotto();
         Statistic statistic = winnerLotto.summarize(lottoes);
         printStatistic(statistic);
     }
 
-    private static List<Lotto> issueLottoes(Money inputMoney) {
+    private static Lottoes issueLottoes(Money inputMoney) {
         return lottoMachine().issueLotto(inputMoney);
     }
 

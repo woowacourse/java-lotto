@@ -22,7 +22,7 @@ public class LottoMachineTest {
 
         LottoMachine lottoMachine = new LottoMachine(() -> lottoes[count.getAndIncrement()]);
 
-        List<Lotto> actual = lottoMachine.issueLotto(new Money(3000));
+        Lottoes actual = lottoMachine.issueLotto(new Money(3000));
         assertThat(count.get()).isEqualTo(3);
         assertThat(actual).hasSize(3);
         assertThat(actual).contains(lottoes);

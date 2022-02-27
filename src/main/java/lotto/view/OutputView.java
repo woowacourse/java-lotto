@@ -10,6 +10,7 @@ import static lotto.model.Rank.THIRD;
 import java.util.List;
 import java.util.Map;
 import lotto.model.Lotto;
+import lotto.model.Lottoes;
 import lotto.model.ProfitRate;
 import lotto.model.Statistic;
 import lotto.model.exception.DuplicatedNumberException;
@@ -29,9 +30,9 @@ public class OutputView {
             InvalidRankException.class, "일치하는 로또 번호 갯수는 0 ~ 6 사이여야 합니다.",
             InvalidNumberRangeException.class, "로또 번호는 1 ~ 45 사이여야 합니다.");
 
-    public static void printLottoes(List<Lotto> lottoNumbersList) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoNumbersList.size());
-        for (Lotto numbers : lottoNumbersList) {
+    public static void printLottoes(Lottoes lottoes) {
+        System.out.printf("%d개를 구매했습니다.\n", lottoes.size());
+        for (Lotto numbers : lottoes) {
             printEachLotto(numbers);
         }
     }

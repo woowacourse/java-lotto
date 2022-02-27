@@ -3,8 +3,8 @@ package lotto.model;
 import static java.util.stream.Collectors.toMap;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -13,11 +13,11 @@ public class Statistic {
 
     private final Map<Rank, Integer> ranks;
 
-    public Statistic(List<Rank> ranks) {
+    public Statistic(Collection<Rank> ranks) {
         this.ranks = Collections.unmodifiableMap(collectRanks(ranks));
     }
 
-    private Map<Rank, Integer> collectRanks(List<Rank> ranks) {
+    private Map<Rank, Integer> collectRanks(Collection<Rank> ranks) {
         return collectRanksToMap(emptyRankMap(), ranks);
     }
 
@@ -26,7 +26,7 @@ public class Statistic {
             .collect(toMap(Function.identity(), r -> 0));
     }
 
-    private Map<Rank, Integer> collectRanksToMap(Map<Rank, Integer> rankMap, List<Rank> ranks) {
+    private Map<Rank, Integer> collectRanksToMap(Map<Rank, Integer> rankMap, Collection<Rank> ranks) {
         for (Rank rank : ranks) {
             rankMap.put(rank, rankMap.get(rank) + 1);
         }
