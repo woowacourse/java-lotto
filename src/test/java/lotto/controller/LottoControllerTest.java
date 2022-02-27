@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,13 +13,17 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.AppConfig;
 import lotto.domain.ticket.generator.CustomTicketGenerator;
+import lotto.domain.rank.Rank;
+import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
+import lotto.dto.WinningTicketDto;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
 import lotto.exception.ball.BallNumberExceptionStatus;
 import lotto.exception.money.MoneyExceptionStatus;
 import lotto.exception.ticket.TicketNumbersExceptionStatus;
 import lotto.service.LottoService;
+import lotto.view.LottoView;
 import lotto.view.input.reader.CustomReader;
 
 class LottoControllerTest {
@@ -27,6 +32,7 @@ class LottoControllerTest {
 
     private final LottoController lottoController = APP_CONFIG.lottoController;
     private final LottoService lottoService = APP_CONFIG.lottoService;
+    private final LottoView lottoView = APP_CONFIG.lottoView;
     private final CustomTicketGenerator customTicketGenerator = APP_CONFIG.ticketGenerator;
     private final CustomReader customReader = APP_CONFIG.reader;
 
@@ -79,8 +85,8 @@ class LottoControllerTest {
     }
 
     private void winningNumbersAndBonusNumberExceptionTest(final List<String> inputValues,
-                                             final List<TicketDto> generatedTickets,
-                                             final LottoExceptionStatus exceptionStatus) {
+                                                           final List<TicketDto> generatedTickets,
+                                                           final LottoExceptionStatus exceptionStatus) {
         customReader.initText(inputValues);
         customTicketGenerator.initTickets(generatedTickets);
         lottoController.purchaseTickets();
@@ -178,6 +184,46 @@ class LottoControllerTest {
         final List<String> inputValues = List.of(inputMoney, inputWinningNumbers, inputBonusNumber);
         winningNumbersAndBonusNumberExceptionTest(
                 inputValues, generatedTickets, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
+    }
+
+    @DisplayName("당첨 통계, 당첨 등수 개수 확인 테스트")
+    @ParameterizedTest(name = "[{index}] 당첨 등수 : {4}")
+    @MethodSource("lotto.controller.provider.LottoControllerTestProvider#provideForCheckOutAnalysisTest")
+    void checkOutAnalysisRankCountsTest(final String inputMoney,
+                                        final String inputWinningNumbers,
+                                        final String inputBonusNumber,
+                                        final List<TicketDto> generatedTickets,
+                                        final Map<Rank, Integer> expectedRankCounts,
+                                        final String expectedProfitRate) {
+        customReader.initText(List.of(inputMoney, inputWinningNumbers, inputBonusNumber));
+        customTicketGenerator.initTickets(generatedTickets);
+        lottoController.purchaseTickets();
+
+        final WinningTicketDto winningTicketDto = lottoView.requestWinningTicket();
+        final AnalysisDto analysisDto = lottoService.generateAnalysis(winningTicketDto);
+
+        final Map<Rank, Integer> actualRankCounts = analysisDto.getRankCounts();
+        assertThat(actualRankCounts).isEqualTo(expectedRankCounts);
+    }
+
+    @DisplayName("당첨 통계, 수익률 확인 테스트")
+    @ParameterizedTest(name = "[{index}] 수익률 : {5}")
+    @MethodSource("lotto.controller.provider.LottoControllerTestProvider#provideForCheckOutAnalysisTest")
+    void checkOutAnalysisProfitRateTest(final String inputMoney,
+                                        final String inputWinningNumbers,
+                                        final String inputBonusNumber,
+                                        final List<TicketDto> generatedTickets,
+                                        final Map<Rank, Integer> expectedRankCounts,
+                                        final String expectedProfitRate) {
+        customReader.initText(List.of(inputMoney, inputWinningNumbers, inputBonusNumber));
+        customTicketGenerator.initTickets(generatedTickets);
+        lottoController.purchaseTickets();
+
+        final WinningTicketDto winningTicketDto = lottoView.requestWinningTicket();
+        final AnalysisDto analysisDto = lottoService.generateAnalysis(winningTicketDto);
+
+        final String actualProfitRate = String.format("%.2f", analysisDto.getProfitRate());
+        assertThat(actualProfitRate).isEqualTo(expectedProfitRate);
     }
 
 }
