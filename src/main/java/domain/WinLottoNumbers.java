@@ -14,6 +14,7 @@ public class WinLottoNumbers {
     private final LottoNumber bonus;
 
     private WinLottoNumbers(List<Integer> lottoNumbers, int bonus) {
+        validate(lottoNumbers, bonus);
         List<LottoNumber> tmpLottoNumbers = new ArrayList<>();
         for (Integer lottoNumber : lottoNumbers) {
             tmpLottoNumbers.add(LottoNumber.valueOf(lottoNumber));
@@ -24,7 +25,6 @@ public class WinLottoNumbers {
 
     public static WinLottoNumbers of(String lottoNumbersText, int bonus) {
         List<Integer> numbers = Separator.splitStringToListInt(lottoNumbersText);
-        validate(numbers, bonus);
         return new WinLottoNumbers(numbers, bonus);
     }
 
