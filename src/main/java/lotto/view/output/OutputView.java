@@ -45,29 +45,33 @@ public class OutputView {
     }
 
     public void printAnalysis(final AnalysisDto analysisDto) {
-        final Map<Rank, Integer> rankCounts = analysisDto.getRankCounts();
-
-        rankCounts.forEach(this::printAnalysisRank);
-
-        final double rate = analysisDto.getProfitRate();
-        final String message = String.format(PROFIT_RAGE_FORMAT.getMessage(), rate);
-        printMessage(message);
+        printAnalysisRankCounts(analysisDto);
+        printAnalysisProfitRate(analysisDto);
     }
 
-    private void printAnalysisRank(final Rank rank, final int rankCount) {
+    private void printAnalysisRankCounts(final AnalysisDto analysisDto) {
+        final Map<Rank, Integer> rankCounts = analysisDto.getRankCounts();
+        rankCounts.forEach(this::printAnalysisRankCount);
+    }
+
+    private void printAnalysisRankCount(final Rank rank, final int rankCount) {
         final int matchCount = rank.getMatchCount();
         final long prizeMoney = rank.getPrizeMoney();
 
-        final String messageFormat = selectMessageFormatOfAnalysisRank(rank.getBonusMatched());
-        final String message = String.format(messageFormat, matchCount, prizeMoney, rankCount);
-        printMessage(message);
+        final String messageFormat = selectMessageFormatOfAnalysisRank(rank);
+        printMessage(String.format(messageFormat, matchCount, prizeMoney, rankCount));
     }
 
-    private String selectMessageFormatOfAnalysisRank(final boolean isExtra) {
-        if (isExtra) {
+    private String selectMessageFormatOfAnalysisRank(final Rank rank) {
+        if (rank.getBonusMatched()) {
             return ANALYSIS_EXTRA_FORMAT.getMessage();
         }
         return ANALYSIS_FORMAT.getMessage();
+    }
+
+    private void printAnalysisProfitRate(final AnalysisDto analysisDto) {
+        final double profitRate = analysisDto.getProfitRate();
+        printMessage(String.format(PROFIT_RAGE_FORMAT.getMessage(), profitRate));
     }
 
 }
