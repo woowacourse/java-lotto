@@ -5,7 +5,7 @@ public class Yield {
 
     private final float yield;
 
-    private Yield(float yield) {
+    public Yield(float yield) {
         this.yield = yield;
     }
 
