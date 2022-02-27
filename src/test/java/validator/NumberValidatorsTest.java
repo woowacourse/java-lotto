@@ -9,7 +9,6 @@ import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
-import static domain.LottoGame.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
@@ -21,6 +20,7 @@ import static validator.NumberValidators.validateNoDuplicates;
 import static validator.NumberValidators.validateTotalLottoPriceUnit;
 import static validator.NumberValidators.validateLottoNumbersSize;
 
+import domain.Lotto;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -52,7 +52,7 @@ public class NumberValidatorsTest {
     @Test
     void validateTotalLottoPriceUnit_passesOnPositiveNumberInput() {
         assertThatNoException()
-                .isThrownBy(() -> validateTotalLottoPriceUnit(LOTTO_PRICE * 10));
+                .isThrownBy(() -> validateTotalLottoPriceUnit(Lotto.PRICE * 10));
     }
 
     @Test
@@ -64,14 +64,14 @@ public class NumberValidatorsTest {
     @Test
     void validateTotalLottoPriceUnit_failOnNegativeNumberInput() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> validateTotalLottoPriceUnit(LOTTO_PRICE * -10))
+                .isThrownBy(() -> validateTotalLottoPriceUnit(Lotto.PRICE * -10))
                 .withMessageMatching(NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE);
     }
 
     @Test
     void validateTotalLottoPriceUnit_failIfChangesExist() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> validateTotalLottoPriceUnit(LOTTO_PRICE * 10 + 1))
+                .isThrownBy(() -> validateTotalLottoPriceUnit(Lotto.PRICE * 10 + 1))
                 .withMessageMatching(INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE);
     }
 

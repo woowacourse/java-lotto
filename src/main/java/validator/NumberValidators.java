@@ -9,10 +9,10 @@ import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MES
 import static constant.ExceptionMessages.NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
 import static domain.Lotto.LOTTO_NUMBERS_SIZE;
-import static domain.LottoGame.LOTTO_PRICE;
 import static domain.LottoNumber.MAXIMUM_NUMBER;
 import static domain.LottoNumber.MINIMUM_NUMBER;
 
+import domain.Lotto;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,7 +32,7 @@ public class NumberValidators {
 
     public static void validateTotalLottoPriceUnit(int num) {
         validateNotNegative(num);
-        if (num % LOTTO_PRICE > 0) {
+        if (num % Lotto.PRICE > 0) {
             throw new IllegalArgumentException(INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE);
         }
     }

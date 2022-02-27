@@ -1,13 +1,10 @@
 package domain;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoGame {
-
-    public static final int LOTTO_PRICE = 1000;
 
     private final Lottos lottos;
     private final LottoReferee referee;
@@ -37,7 +34,7 @@ public class LottoGame {
     }
 
     private int getLottoPrice() {
-        return getLottosSize() * LOTTO_PRICE;
+        return getLottosSize() * Lotto.PRICE;
     }
 
     private int getLottosSize() {

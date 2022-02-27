@@ -2,7 +2,6 @@ package domain;
 
 import static common.TestUtils.createCountsDto;
 import static common.TestUtils.createNewLotto;
-import static domain.LottoGame.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -81,7 +80,7 @@ public class LottoGameTest {
         float actual = game.calculatePrizePriceRatio();
 
         assertThat(actual)
-                .isEqualTo((float) LottoResult.FIFTH.getPrize() / LOTTO_PRICE);
+                .isEqualTo((float) LottoResult.FIFTH.getPrize() / Lotto.PRICE);
     }
 
     private List<Lotto> getLottosExample(Lotto... lottos) {

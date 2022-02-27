@@ -12,6 +12,7 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
+    public static final int PRICE = 1000;
     public static final int LOTTO_NUMBERS_SIZE = 6;
     private static final List<LottoNumber> allLottoNumbers = IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER)
             .boxed()

@@ -1,6 +1,5 @@
 package controller;
 
-import static domain.LottoGame.LOTTO_PRICE;
 import static validator.NumberValidators.validateManualLottosCount;
 import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
@@ -23,7 +22,7 @@ public class LottoController {
 
     public LottoCountsDto initCountsDto(int totalLottoPrice, int manualsCount) {
         validateTotalLottoPriceUnit(totalLottoPrice);
-        int totalCount = totalLottoPrice / LOTTO_PRICE;
+        int totalCount = totalLottoPrice / Lotto.PRICE;
 
         validateManualLottosCount(manualsCount, totalCount);
         int autosCount = totalCount - manualsCount;
