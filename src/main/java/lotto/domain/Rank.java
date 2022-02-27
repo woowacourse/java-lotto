@@ -5,7 +5,7 @@ import java.util.Arrays;
 public enum Rank {
 
     FIRST(2_000_000_000, 6, false),
-    SECOND(30_000_000, 4, true),
+    SECOND(30_000_000, 5, true),
     THIRD(1_500_000, 5, false),
     FORTH(50_000, 4, false),
     FIFTH(5_000, 3, false),
@@ -37,10 +37,6 @@ public enum Rank {
     }
 
     public int getCount() {
-        if (this == Rank.SECOND) {
-            return count + 1;
-        }
-
         return count;
     }
 

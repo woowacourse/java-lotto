@@ -12,7 +12,7 @@ class RankTest {
     @Test
     void 이등_보너스_포함_당첨() {
         // given
-        Rank rank = Rank.of(4, true);
+        Rank rank = Rank.of(5, true);
 
         // when & then
         assertAll(
