@@ -9,20 +9,20 @@ import java.util.Map;
 public class WinningStats {
 
     public static final int EARNING_RATE_PRECISIONS = 2;
-    private final EnumMap<LottoRank, Integer> winningStatistics;
+    private final EnumMap<LottoRank, Integer> winningStats;
 
     public WinningStats() {
-        winningStatistics = new EnumMap<>(LottoRank.class);
+        winningStats = new EnumMap<>(LottoRank.class);
         Arrays.stream(LottoRank.values())
-                .forEach(lottoRank -> winningStatistics.put(lottoRank, 0));
+                .forEach(lottoRank -> winningStats.put(lottoRank, 0));
     }
 
     public void put(LottoRank lottoRank) {
-        winningStatistics.put(lottoRank, winningStatistics.get(lottoRank) + 1);
+        winningStats.put(lottoRank, winningStats.get(lottoRank) + 1);
     }
 
     public int get(LottoRank lottoRank) {
-        return winningStatistics.get(lottoRank);
+        return winningStats.get(lottoRank);
     }
 
     public double getEarningsRate(PurchaseAmount money) {
@@ -32,17 +32,10 @@ public class WinningStats {
     }
 
     long getTotalPrize() {
-        long totalPrize = 0;
-        for (LottoRank lottoRank : winningStatistics.keySet()) {
-            totalPrize += lottoRank.prizeMoney() * winningStatistics.get(lottoRank);
-        }
-
-        winningStatistics.entrySet().stream()
+        return winningStats.entrySet().stream()
                 .mapToLong(
                         (Map.Entry<LottoRank, Integer> winingStat) ->
                                 winingStat.getKey().prizeMoney() * winingStat.getValue()
                 ).sum();
-
-        return totalPrize;
     }
 }
