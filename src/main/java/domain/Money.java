@@ -23,4 +23,8 @@ public class Money {
 			throw new IllegalArgumentException(INVALID_MONEY_RANGE_EXCEPTION.getMessage());
 		}
 	}
+
+	public int divideBy(final int divisor) {
+		return this.money / divisor;
+	}
 }

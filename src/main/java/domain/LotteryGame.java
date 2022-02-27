@@ -18,17 +18,19 @@ public class LotteryGame {
 	private static final int LOTTERY_PRICE = 1000;
 
 	private final int theNumberOfLottery;
+	private final Money money;
 	private final LotteryGenerateFamily lotteryGenerator;
 	private Lotteries lotteries;
 	private WinningLottery winningLottery;
 
-	private LotteryGame(final int inputMoney, LotteryGenerateFamily lotteryGenerator) {
-		this.theNumberOfLottery = inputMoney / LOTTERY_PRICE;
+	private LotteryGame(final int inputMoney, final LotteryGenerateFamily lotteryGenerator) {
+		this.money = new Money(inputMoney);
+		this.theNumberOfLottery = money.divideBy(LOTTERY_PRICE);
 		this.lotteryGenerator = lotteryGenerator;
 		createAutoLottery();
 	}
 
-	public static LotteryGame of(final int inputMoney, LotteryGenerateFamily lotteryGenerator) {
+	public static LotteryGame of(final int inputMoney, final LotteryGenerateFamily lotteryGenerator) {
 		return new LotteryGame(inputMoney, lotteryGenerator);
 	}
 

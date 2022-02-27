@@ -15,8 +15,6 @@ public class InputView {
 	private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
 	private static final Pattern WINNING_NUMBER_PATTERN = Pattern.compile("^([1-9]{1,2}[,][\\s]?){5}[1-9]{1,2}$");
 	private static final String WINNING_NUMBER_DELIMITER = ",";
-	private static final int MINIMUM_MONEY = 1000;
-	private static final int MAXIMUM_MONEY = 100000;
 
 	public int inputValidMoney() {
 		final String money = inputMoney();
@@ -37,19 +35,11 @@ public class InputView {
 
 	private void validateMoney(final String money) {
 		validateNumber(money);
-		validateRange(money);
 	}
 
 	private void validateNumber(String money) {
 		if (!NUMBER_PATTERN.matcher(money).matches()) {
 			throw new IllegalArgumentException(INVALID_INPUT_NUMBER_EXCEPTION.getMessage());
-		}
-	}
-
-	private void validateRange(String money) {
-		int number = Integer.parseInt(money);
-		if (number < MINIMUM_MONEY || number > MAXIMUM_MONEY) {
-			throw new IllegalArgumentException(INVALID_MONEY_RANGE_EXCEPTION.getMessage());
 		}
 	}
 
