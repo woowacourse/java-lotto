@@ -11,6 +11,10 @@ public class Lottos {
         this.lottos = generateLottos(lottoAmount);
     }
 
+    public static Lottos buyLottos(int lottoAmount) {
+        return new Lottos(lottoAmount);
+    }
+
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }

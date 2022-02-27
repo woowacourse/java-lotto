@@ -21,7 +21,7 @@ public class LottoGame {
 
     public Lottos buyLotto(Money money) {
         int lottoAmount = money.money() / LOTTO_PRICE;
-        lottos = new Lottos(lottoAmount);
+        lottos = Lottos.buyLottos(lottoAmount);
         return lottos;
     }
 
