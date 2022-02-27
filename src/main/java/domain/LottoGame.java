@@ -19,6 +19,8 @@ public class LottoGame {
     private static final int BASE_COUNT = 0;
     private static final long BASE_LONG_SUM = 0L;
     private static final String LOTTO_NUMBER_DUPLICATED_EXCEPTION = "[ERROR] 로또번호와 보너스번호는 중복일 수 없습니다.";
+    private static final int LOTTO_NUMBER_DIGIT = 6;
+    private static final String LOTTO_NUMBER_DIGIT_EXCEPTION = "[ERROR] 로또는 6자리의 숫자로 이루어져 있습니다.";
 
     private Lotto winningLotto;
     private LottoNumber bonusNumber;
@@ -39,12 +41,24 @@ public class LottoGame {
 
     public void enterWinningLottoNumbersAndBonusNumber(List<Integer> notVerifiedWinningLottoNumbers
             , int notVerifiedBonusNumber) {
-        validateNoDuplication(notVerifiedWinningLottoNumbers, notVerifiedBonusNumber);
+        validateLottoInput(notVerifiedWinningLottoNumbers, notVerifiedBonusNumber);
         List<LottoNumber> winningLottoNumbers = notVerifiedWinningLottoNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         this.winningLotto = new Lotto(winningLottoNumbers);
         this.bonusNumber = new LottoNumber(notVerifiedBonusNumber);
+    }
+
+    private void validateLottoInput(List<Integer> notVerifiedWinningLottoNumbers
+            , int notVerifiedBonusNumber) {
+        validateLength(notVerifiedWinningLottoNumbers);
+        validateNoDuplication(notVerifiedWinningLottoNumbers, notVerifiedBonusNumber);
+    }
+
+    private void validateLength(List<Integer> target) {
+        if (target == null || target.isEmpty() || target.size() != LOTTO_NUMBER_DIGIT) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_DIGIT_EXCEPTION);
+        }
     }
 
     private void validateNoDuplication(List<Integer> targets, int additionalTarget) {
