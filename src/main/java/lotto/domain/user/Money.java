@@ -12,6 +12,11 @@ public class Money {
         this.money = Integer.parseInt(money);
     }
 
+    public Money(final int money) {
+        checkDivideMoney(money);
+        this.money = money;
+    }
+
     private void checkInputMoney(final String money) {
         checkValidateInt(money);
         checkDivideMoney(Integer.parseInt(money));
@@ -29,6 +34,10 @@ public class Money {
         if (!(money >= BASIC_LOTTO_MONEY && money % BASIC_LOTTO_MONEY == 0)) {
             throw new IllegalArgumentException(InvalidException.ERROR_WRONG_INPUT_MONEY);
         }
+    }
+
+    public int getCount(){
+        return money/BASIC_LOTTO_MONEY;
     }
 
     public int getMoney() {

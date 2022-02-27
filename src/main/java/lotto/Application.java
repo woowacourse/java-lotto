@@ -19,7 +19,7 @@ public class Application {
         LottoWinningNumbers lottoWinningNumbers = lottoController.createLottoWinningNumbers();
 
         LottoResult lottoResult = lottoController.calculateRanks(lottos, lottoWinningNumbers);
-        lottoController.printWinningResult(lottoWinningNumbers, lottoResult);
+        lottoController.printWinningResult(lottoResult);
 
         double profit = moneyController.calculateProfit(money, lottoResult);
         moneyController.printProfit(profit);

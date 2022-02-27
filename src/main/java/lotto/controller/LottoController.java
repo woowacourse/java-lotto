@@ -4,6 +4,7 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoWinningNumbers;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.result.LottoResult;
+import lotto.domain.user.Money;
 import lotto.exception.InvalidException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -14,8 +15,9 @@ public class LottoController {
         OutputView.printLottos(lottos);
     }
 
-    public Lottos inputLottoMoney(final int money) {
-        return new Lottos(money);
+    public Lottos inputLottoMoney(final int inputMoney) {
+        Money money = new Money(inputMoney);
+        return new Lottos(money.getCount());
     }
 
     public LottoWinningNumbers createLottoWinningNumbers() {
@@ -60,8 +62,7 @@ public class LottoController {
         return lottoResult;
     }
 
-
-    public void printWinningResult(LottoWinningNumbers lottoWinningNumbers, LottoResult lottoResult) {
-        OutputView.printWinningResult(lottoWinningNumbers, lottoResult);
+    public void printWinningResult(LottoResult lottoResult) {
+        OutputView.printWinningResult(lottoResult);
     }
 }

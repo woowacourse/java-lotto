@@ -30,19 +30,20 @@ public class OutputView {
         System.out.println(lotto.getNumbers().toString());
     }
 
-    public static void printWinningResult(final LottoWinningNumbers lottoWinningNumbers, LottoResult result) {
+    public static void printWinningResult(LottoResult result) {
         System.out.println();
         System.out.println(EXPLAIN_WINNING_STATISTICS);
         System.out.println(BASIC_LINE);
         Arrays.stream(Rank.values())
                 .sorted(Comparator.reverseOrder())
                         .filter(Predicate.not(rank -> rank == Rank.NO_MATCH))
-                                .forEach(rank -> printLottoResult(rank, lottoWinningNumbers, result));
+                                .forEach(rank -> printLottoResult(rank, result));
     }
 
-    private static void printLottoResult(Rank rank, LottoWinningNumbers lottoWinningNumbers, LottoResult result) {
+    private static void printLottoResult(Rank rank, LottoResult result) {
         if (rank == Rank.SECOND){
             System.out.println(String.format(PRINT_SECOND_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), result.getRankCount(rank)));
+            return;
         }
         System.out.println(String.format(PRINT_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), result.getRankCount(rank)));
     }
