@@ -32,7 +32,7 @@ public class Money {
         return this.amount / UNIT;
     }
 
-    public int getAmount() {
-        return this.amount;
+    public double divideByAmount(long target) {
+        return (double) target / this.amount;
     }
 }

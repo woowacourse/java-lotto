@@ -35,4 +35,14 @@ class MoneyTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Money(amount));
     }
+
+    @Test
+    @DisplayName("정상적으로 돈으로 나누는지 확인")
+    void divideByAmount() {
+        // given
+        int amount = 3000;
+        Money money = new Money(amount);
+        // then
+        assertThat(money.divideByAmount(4500L)).isEqualTo(1.50);
+    }
 }
