@@ -20,12 +20,12 @@ public class Amount {
     }
 
     private void checkAmountDivisible(int amount) {
-        if (isDivisibleLottoPrice(amount)) {
+        if (isNotDivisibleLottoPrice(amount)) {
             throw new IllegalArgumentException(REQUEST_UNIT_OF_1000);
         }
     }
 
-    private boolean isDivisibleLottoPrice(int amount) {
+    private boolean isNotDivisibleLottoPrice(int amount) {
         return amount % LOTTO_PRICE != 0;
     }
 
