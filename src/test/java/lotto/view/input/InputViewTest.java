@@ -2,6 +2,7 @@ package lotto.view.input;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.AppConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -13,8 +14,10 @@ import lotto.view.input.reader.CustomReader;
 
 class InputViewTest {
 
-    private final CustomReader customReader = new CustomReader();
-    private final InputView inputView = new InputView(customReader);
+    private static final AppConfig APP_CONFIG = AppConfig.getInstance();
+
+    private final InputView inputView = APP_CONFIG.inputView;
+    private final CustomReader customReader = APP_CONFIG.reader;
 
     @DisplayName("구입 금액은 숫자여야 합니다.")
     @ParameterizedTest(name = "[{index}] 입력 : \"{0}\"")
