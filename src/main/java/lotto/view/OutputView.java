@@ -10,15 +10,11 @@ public class OutputView {
     private static final String SUFFIX_LOTTO_COUNT = "개를 구매했습니다.";
     private static final String EXPLAIN_WINNING_STATISTICS = "당첨 통계";
     private static final String BASIC_LINE = "---------";
-    private static final String SUFFIX_SAME_NUMBER = "개 일치 (";
-    private static final String SUFFIX_SAME_BONUS_NUMBER = "개 일치, 보너스 볼 일치 (";
-    private static final String SUFFIX_WON = "원) - ";
-    private static final String SUFFIX_COUNT = "개";
-    private static final String SUFFIX_LAST_LINE = "입니다.";
-    private static final String PREFIX_PROFIT = "총 수익률은 ";
-    private static final String DEFAULT_FORMAT = "%.2f";
-    public static final String PRINT_PROFIT = "(기준이 1이기 때문에 결과적으로 이익이라는 의미임)";
-    public static final String PRINT_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String PRINT_WINNING_STATISTIC = "%d개 일치 (%d원)- %d개";
+    private static final String PRINT_SECOND_WINNING_STATISTIC = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+    private static final String PRINT_TOTAL_RETURN = "총 수익률은 %.2f입니다.";
+    private static final String PRINT_PROFIT = "(기준이 1이기 때문에 결과적으로 이익이라는 의미임)";
+    private static final String PRINT_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public static void printLottos(final Lottos lottos) {
         System.out.println(lottos.getLottos().size() + SUFFIX_LOTTO_COUNT);
@@ -44,15 +40,15 @@ public class OutputView {
     }
 
     private static void printBasicWinningResult(final Rank rank, final int count) {
-        System.out.println(rank.getMatchCount() + SUFFIX_SAME_NUMBER + rank.getMoney() + SUFFIX_WON + count + SUFFIX_COUNT);
+        System.out.println(String.format(PRINT_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), count));
     }
 
     private static void printSecondResult(final Rank rank, final int count) {
-        System.out.println(rank.getMatchCount() + SUFFIX_SAME_BONUS_NUMBER + rank.getMoney() + SUFFIX_WON + count + SUFFIX_COUNT);
+        System.out.println(String.format(PRINT_SECOND_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), count));
     }
 
     public static void printProfit(final double profit) {
-        System.out.print(PREFIX_PROFIT + Double.parseDouble(String.format(DEFAULT_FORMAT, profit)) + SUFFIX_LAST_LINE);
+        System.out.print(String.format(PRINT_TOTAL_RETURN, profit));
     }
 
     public static void printWinningLottoProfit() {

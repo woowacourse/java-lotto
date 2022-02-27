@@ -25,7 +25,6 @@ public class LottoWinningNumbers {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
-
     public void calculateWinning(final Lotto lotto) {
         int matchCount = (int) winningLotto.getNumbers()
                 .stream()
