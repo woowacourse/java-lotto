@@ -1,17 +1,17 @@
 package utils;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Separator {
 
     private static final String REGEX = ", ";
 
     public static List<Integer> splitStringToListInt(String input) {
-        List<Integer> numbers = new ArrayList<>();
-        for (String number : input.split(REGEX)) {
-            numbers.add(Integer.parseInt(number));
-        }
-        return numbers;
+        return Arrays.stream(input.split(REGEX))
+            .mapToInt(Integer::parseInt)
+            .boxed()
+            .collect(Collectors.toList());
     }
 }
