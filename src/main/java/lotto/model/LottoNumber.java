@@ -3,11 +3,14 @@ package lotto.model;
 import lotto.model.exception.InvalidNumberRangeException;
 import java.util.Objects;
 
-public class Number {
+public class LottoNumber {
+
+    public static final int LOTTO_NUMBER_LOWER_BOUND = 1;
+    public static final int LOTTO_NUMBER_UPPER_BOUND = 45;
 
     private final int number;
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         if (isInvalidRange(number)) {
             throw new InvalidNumberRangeException();
         }
@@ -15,7 +18,7 @@ public class Number {
     }
 
     private boolean isInvalidRange(int number) {
-        return 1 > number || number > 45;
+        return LOTTO_NUMBER_LOWER_BOUND > number || number > LOTTO_NUMBER_UPPER_BOUND;
     }
 
     public int getIntValue() {
@@ -30,7 +33,7 @@ public class Number {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Number that = (Number) o;
+        LottoNumber that = (LottoNumber) o;
         return number == that.number;
     }
 

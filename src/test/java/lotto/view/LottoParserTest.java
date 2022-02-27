@@ -34,14 +34,14 @@ public class LottoParserTest {
     @Test
     @DisplayName("로또 당첨 번호 분리")
     void splitWinningNumber() {
-        assertThat(parser.parse("1,2,3,4,5,6")).isEqualTo(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        assertThat(parser.parse("1,2,3,4,5,6")).isEqualTo(Lotto.create(List.of(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
     @DisplayName("로또 당첨 번호 공백 제거 분리")
     void splitWinningNumberWithTrim() {
         assertThat(parser.parse("1, 2,3,4 ,5,    6"))
-            .isEqualTo(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+            .isEqualTo(Lotto.create(List.of(1, 2, 3, 4, 5, 6)));
     }
 
     @ParameterizedTest

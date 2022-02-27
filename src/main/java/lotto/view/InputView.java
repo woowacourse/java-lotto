@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.Money;
-import lotto.model.Number;
+import lotto.model.LottoNumber;
 import lotto.model.WinnerLotto;
 
 public class InputView {
@@ -15,7 +15,7 @@ public class InputView {
         .numberValidator();
     private static final Parser<Lotto> LOTTO_PARSER = new LottoParser();
     private static final Parser<Money> MONEY_PARSER = Parser.moneyParser();
-    private static final Parser<Number> NUMBER_PARSER = Parser.numberParser();
+    private static final Parser<LottoNumber> NUMBER_PARSER = Parser.numberParser();
     private static final InputTemplate inputTemplate = new InputTemplate(System.in, System.out);
 
     private InputView() {
@@ -51,7 +51,7 @@ public class InputView {
                 OutputView::printErrorMessage);
     }
 
-    private static Number createBonus() {
+    private static LottoNumber createBonus() {
         return NUMBER_PARSER.parse(inputBonusText());
     }
 

@@ -6,20 +6,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.model.exception.InvalidNumberRangeException;
-import lotto.model.Number;
+import lotto.model.LottoNumber;
 import lotto.view.exception.InvalidFormatException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class NumberParserTest {
+public class LottoNumberParserTest {
 
     @ParameterizedTest
     @CsvSource({"1, 1", "24, 24", "42, 42", "   43    , 43"})
     @DisplayName("정상적인 숫자 입력 처리")
     void parse(String text, int actual) {
-        assertThat(numberParser().parse(text)).isEqualTo(new Number(actual));
+        assertThat(numberParser().parse(text)).isEqualTo(new LottoNumber(actual));
     }
 
     @ParameterizedTest

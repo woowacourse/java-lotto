@@ -6,9 +6,9 @@ import lotto.model.exception.DuplicatedNumberException;
 public class WinnerLotto {
 
     private final Lotto winnerLotto;
-    private final Number bonus;
+    private final LottoNumber bonus;
 
-    public WinnerLotto(Lotto winnerLotto, Number bonus) {
+    public WinnerLotto(Lotto winnerLotto, LottoNumber bonus) {
         if (winnerLotto.contains(bonus)) {
             throw new DuplicatedNumberException();
         }

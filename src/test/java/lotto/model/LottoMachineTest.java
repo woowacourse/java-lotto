@@ -15,9 +15,9 @@ public class LottoMachineTest {
     void issueLottoNumbers() {
         final AtomicInteger count = new AtomicInteger(0);
         final Lotto[] lottoes = new Lotto[]{
-            new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-            new Lotto(List.of(11, 12, 13, 14, 15, 16)),
-            new Lotto(List.of(21, 22, 23, 24, 25, 26))
+            Lotto.create(List.of(1, 2, 3, 4, 5, 6)),
+            Lotto.create(List.of(11, 12, 13, 14, 15, 16)),
+            Lotto.create(List.of(21, 22, 23, 24, 25, 26))
         };
 
         LottoMachine lottoMachine = new LottoMachine(() -> lottoes[count.getAndIncrement()]);

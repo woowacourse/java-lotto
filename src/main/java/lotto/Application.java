@@ -1,5 +1,7 @@
 package lotto;
 
+import static lotto.model.LottoNumber.LOTTO_NUMBER_LOWER_BOUND;
+import static lotto.model.LottoNumber.LOTTO_NUMBER_UPPER_BOUND;
 import static lotto.view.InputView.inputMoney;
 import static lotto.view.InputView.inputWinnerLotto;
 import static lotto.view.OutputView.printLottoes;
@@ -44,7 +46,7 @@ public class Application {
     }
 
     private static LottoGenerator lottoGenerator() {
-        return new RandomLottoGenerator(1, 45);
+        return new RandomLottoGenerator(LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND);
     }
 
 }

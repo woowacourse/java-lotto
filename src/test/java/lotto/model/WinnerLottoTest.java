@@ -17,20 +17,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class WinnerLottoTest {
 
-    private static final Number BONUS = new Number(7);
-    private static final Lotto WINNING_LOTTO = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-    private static final Lotto FIRST_RANK_LOTTO = new Lotto(
-        List.of(1, 2, 3, 4, 5, 6));
-    private static final Lotto SECOND_RANK_LOTTO = new Lotto(
-        List.of(1, 2, 3, 4, 5, 7));
-    private static final Lotto THIRD_RANK_LOTTO = new Lotto(
-        List.of(1, 2, 3, 4, 5, 8));
-    private static final Lotto FOURTH_RANK_LOTTO = new Lotto(
-        List.of(1, 2, 3, 4, 10, 11));
-    private static final Lotto FIFTH_RANK_LOTTO = new Lotto(
-        List.of(1, 2, 3, 10, 11, 12));
-    private static final Lotto NOTHING_RANK_LOTTO = new Lotto(
-        List.of(1, 2, 9, 11, 12, 13));
+    private static final LottoNumber BONUS = new LottoNumber(7);
+    private static final Lotto WINNING_LOTTO = Lotto.create(List.of(1, 2, 3, 4, 5, 6));
+    private static final Lotto FIRST_RANK_LOTTO = Lotto.create(List.of(1, 2, 3, 4, 5, 6));
+    private static final Lotto SECOND_RANK_LOTTO = Lotto.create(List.of(1, 2, 3, 4, 5, 7));
+    private static final Lotto THIRD_RANK_LOTTO = Lotto.create(List.of(1, 2, 3, 4, 5, 8));
+    private static final Lotto FOURTH_RANK_LOTTO = Lotto.create(List.of(1, 2, 3, 4, 10, 11));
+    private static final Lotto FIFTH_RANK_LOTTO = Lotto.create(List.of(1, 2, 3, 10, 11, 12));
+    private static final Lotto NOTHING_RANK_LOTTO = Lotto.create(List.of(1, 2, 9, 11, 12, 13));
     private static final Money FIRST_RANK_PRIZE = Rank.FIRST.getPrize();
     private static final Money SECOND_RANK_PRIZE = Rank.SECOND.getPrize();
     private static final Money THIRD_RANK_PRIZE = Rank.THIRD.getPrize();
@@ -49,16 +43,16 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("당첨번호와 보너스 번호 정상적으로 생성")
     void createValidWinningLottoNumbers() {
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Number bonus = new Number(7);
+        Lotto lotto = Lotto.create(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonus = new LottoNumber(7);
         assertThatCode(() -> new WinnerLotto(lotto, bonus)).doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("당첨번호와 보너스 번호 중복 생성 예외 발생")
     void duplicatedWinningLottoNumbers() {
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Number bonus = new Number(1);
+        Lotto lotto = Lotto.create(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonus = new LottoNumber(1);
         assertThatThrownBy(() -> new WinnerLotto(lotto, bonus))
             .isInstanceOf(DuplicatedNumberException.class);
     }
@@ -119,8 +113,8 @@ public class WinnerLottoTest {
 
     private static Stream<Arguments> provideLottoNumbersList() {
         return Stream.of(
-            Arguments.of(new Lotto(List.of(1, 2, 8, 9, 10, 11))),
-            Arguments.of(new Lotto(List.of(1, 2, 7, 9, 10, 11)))
+            Arguments.of(Lotto.create(List.of(1, 2, 8, 9, 10, 11))),
+            Arguments.of(Lotto.create(List.of(1, 2, 7, 9, 10, 11)))
         );
     }
 

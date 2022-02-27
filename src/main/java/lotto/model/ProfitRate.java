@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class ProfitRate {
 
+    public static final BigDecimal PROFIT_BENCHMARK_RATE = BigDecimal.ONE;
     private final BigDecimal rate;
 
     public ProfitRate(BigDecimal rate) {
@@ -16,15 +17,15 @@ public class ProfitRate {
     }
 
     public boolean isProfit() {
-        return rate.compareTo(BigDecimal.ONE) == 1;
+        return rate.compareTo(PROFIT_BENCHMARK_RATE) == 1;
     }
 
     public boolean isLoss() {
-        return rate.compareTo(BigDecimal.ONE) == -1;
+        return rate.compareTo(PROFIT_BENCHMARK_RATE) == -1;
     }
 
     public boolean isPrincipal() {
-        return rate.compareTo(BigDecimal.ONE) == 0;
+        return rate.compareTo(PROFIT_BENCHMARK_RATE) == 0;
     }
 
     @Override

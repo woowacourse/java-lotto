@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.model.Money;
-import lotto.model.Number;
+import lotto.model.LottoNumber;
 
 public abstract class Parser<T> {
 
@@ -27,11 +27,11 @@ public abstract class Parser<T> {
         };
     }
 
-    public static Parser<Number> numberParser() {
+    public static Parser<LottoNumber> numberParser() {
         return new Parser<>(StringFormatValidator.numberValidator()) {
             @Override
-            protected Number convert(String text) {
-                return new Number(Integer.parseInt(text.trim()));
+            protected LottoNumber convert(String text) {
+                return new LottoNumber(Integer.parseInt(text.trim()));
             }
         };
     }
