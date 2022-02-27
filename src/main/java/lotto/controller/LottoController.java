@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoTickets;
+import lotto.domain.LottoTicketsDTO;
 import lotto.domain.MoneyManager;
 import lotto.domain.Ranks;
 import lotto.domain.WinningNumbers;
@@ -17,7 +18,7 @@ public class LottoController {
         MoneyManager moneyManager = getMoney();
         LottoTickets lottoTickets = new LottoTickets(new LottoNumberGenerator(), moneyManager.getLottoCount());
 
-        OutputView.displayLottoTickets(lottoTickets);
+        OutputView.displayLottoTickets(new LottoTicketsDTO(lottoTickets));
 
         WinningNumbers winningNumbers = getWinningNumbersAndBonusNumber();
 
