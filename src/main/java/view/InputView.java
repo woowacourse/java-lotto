@@ -14,7 +14,6 @@ public class InputView {
     private static final String REQUEST_MESSAGE_INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String REGEX_OF_LOTTO_NUMBER = ", ";
     private static final int REGEX_LIMIT = -1;
-    private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final int MINIMUM_VALUE = 0;
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -67,15 +66,8 @@ public class InputView {
     }
 
     private static void validateWinningLottoNumbers(List<String> values) {
-        validateCount(values);
         for (String value : values) {
             validateNumber(value);
-        }
-    }
-
-    private static void validateCount(List<String> values) {
-        if (values.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException();
         }
     }
 
