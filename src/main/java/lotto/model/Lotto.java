@@ -52,23 +52,23 @@ public class Lotto {
     private List<LottoNumber> convertIntegersToLottoNumbers(List<Integer> integers) {
         return integers.stream()
             .map(LottoNumber::new)
-            .collect(Collectors.toList());
+            .collect(Collectors.toUnmodifiableList());
     }
 
-    public int matchWinningNumbers(WinningNumbers winningNumbers) {
+    public int getMatchScore(WinningNumbers winningNumbers) {
         return (int)lottoNumbers.stream()
             .filter(winningNumbers::matchNumber)
             .count();
     }
 
-    public boolean matchBonusNumber(LottoNumber bonusNumber) {
+    public boolean isMatchBonusNumber(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 
     public List<Integer> toIntegers() {
         return lottoNumbers.stream()
             .map(LottoNumber::getNumber)
-            .collect(Collectors.toList());
+            .collect(Collectors.toUnmodifiableList());
     }
 
     public boolean isMatchNumber(LottoNumber number) {
