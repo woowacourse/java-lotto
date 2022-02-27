@@ -3,30 +3,16 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
-    private static final int MIN = 1;
-    private static final int MAX = 45;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
 
     private static final String NUMBER_RANGE_ERROR = "로또 숫자는 " + MIN + " 이상 " + MAX + " 이하의 숫자만 가능합니다.";
-    private static final String TYPE_ERROR = "로또 번호는 숫자만 가능합니다.";
 
-    private final int number;
+    private final int value;
 
-    public LottoNumber(String input) {
-        int number = convertToInt(input);
-        validateNumber(number);
-        this.number = number;
-    }
-
-    public int toInt() {
-        return number;
-    }
-
-    private int convertToInt(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(TYPE_ERROR);
-        }
+    public LottoNumber(int lottoNumber) {
+        validateNumber(lottoNumber);
+        this.value = lottoNumber;
     }
 
     private void validateNumber(int number) {
@@ -35,27 +21,32 @@ public class LottoNumber {
         }
     }
 
+    public int getValue() {
+        return value;
+    }
+
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object other) {
+        if (this == other) {
             return true;
         }
 
-        if (o == null || getClass() != o.getClass()) {
+        if (other == null || getClass() != other.getClass()) {
             return false;
         }
-        LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        LottoNumber that = (LottoNumber) other;
+        return value == that.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(value);
     }
+
     @Override
     public String toString() {
         return "LottoNumber{" +
-                "number=" + number +
+                "lottoNumber=" + value +
                 '}';
     }
 }
