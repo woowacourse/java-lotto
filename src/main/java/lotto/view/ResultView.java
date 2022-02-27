@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
@@ -41,16 +43,16 @@ public class ResultView {
                 .collect(Collectors.toList()));
     }
 
-    public static void printTotalResult(Lottos lottos) {
+    public static void printTotalRankResult(Map<Rank, Integer> rankCount) {
         System.out.println();
         System.out.println(STATISTICS_MESSAGE);
-        for (Rank rank : Rank.values()) {
-            System.out.print(printRank(rank, lottos.getEachRankCount(rank)));
+        Set<Rank> keySet = rankCount.keySet();
+        for (Rank rank : keySet) {
+            printRank(rank, rankCount.get(rank));
         }
-        printRevenue(lottos);
     }
 
-    private static String printRank(Rank rank, Integer integer) {
+    private static void printRank(Rank rank, Integer integer) {
         StringBuilder message = new StringBuilder();
         if (!rank.equals(Rank.LOSER)) {
             message.append(rank.getCount()).append(COUNT_CORRESPOND_MESSAGE);
@@ -58,7 +60,7 @@ public class ResultView {
             message.append(PRICE_OPEN_BRACKET).append(rank.getPrice()).append(PRICE_CLOSE_BRACKET).append(integer)
                     .append(COUNT_MESSAGE);
         }
-        return message.toString();
+        System.out.print(message);
     }
 
     private static String printBonusNumber(Rank rank) {

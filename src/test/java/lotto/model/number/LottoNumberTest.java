@@ -21,12 +21,6 @@ public class LottoNumberTest {
         assertThatThrownBy(() ->
                 new LottoNumber(lottoNumber))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("[ERROR]");;
-    }
-
-    @Test
-    void 보너스_번호_비교_테스트() {
-        LottoNumber lottoNumber = new LottoNumber(3);
-        assertThat(lottoNumber.compareBonusNumber(new BonusNumber(3))).isTrue();
+                .hasMessageContaining("[ERROR]");
     }
 }

@@ -25,10 +25,6 @@ public class LottoNumber {
         return number;
     }
 
-    public boolean compareBonusNumber(BonusNumber bonusNumber) {
-        return number == bonusNumber.number;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

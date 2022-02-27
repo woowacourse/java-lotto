@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.model.generator.AutoLottoNumbersGenerator;
-import lotto.model.number.BonusNumber;
+import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 
 public class Lottos {
@@ -38,18 +38,23 @@ public class Lottos {
         return map;
     }
 
-    public void calculateRanks(LottoNumbers winningNumbers, BonusNumber bonusNumber) {
+    public Map<Rank, Integer> calculateRanks(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         lottos.forEach(lotto -> lotto.calculateRank(winningNumbers, bonusNumber));
+        countEachRank(winningNumbers, bonusNumber);
+        Map<Rank, Integer> newRankCount = new LinkedHashMap<>(rankCount);
+        return newRankCount;
     }
 
-    public void countRank() {
+    private void countEachRank(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         lottos.forEach(lotto -> {
-            rankCount.put(lotto.getRank(), rankCount.get(lotto.getRank()) + 1);
+            Rank rank = lotto.calculateRank(winningNumbers, bonusNumber);
+            rankCount.put(rank, rankCount.get(rank) + 1);
         });
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        List<Lotto> newLottos = new ArrayList<>(lottos);
+        return newLottos;
     }
 
     public int getLottoCount() {

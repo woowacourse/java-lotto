@@ -1,7 +1,7 @@
 package lotto.model;
 
 import lotto.model.generator.LottoGenerator;
-import lotto.model.number.BonusNumber;
+import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 
 public class Lotto {
@@ -16,16 +16,23 @@ public class Lotto {
     public Lotto(LottoGenerator autoLottoNumbersGenerator) throws RuntimeException {
         this.lottoNumbers = autoLottoNumbersGenerator.generateLottoNumbers(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER,
                 LOTTO_LENGTH);
-        this.rank = Rank.LOSER;
+        this.rank = null;
     }
 
-    public Rank calculateRank(LottoNumbers winningNumbers, BonusNumber bonusNumber) {
-        int count = countMatchingNumber(winningNumbers);
-        boolean win = false;
-        if (count == Rank.SECOND.getCount()) {
-            win = lottoNumbers.containNumber(bonusNumber);
+    public Rank calculateRank(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        if (this.rank == null) {
+            int count = countMatchingNumber(winningNumbers);
+            boolean win = isWinBonusNumber(count, bonusNumber);
+            return this.rank = Rank.getRank(count, win);
         }
-        return this.rank = Rank.getRank(count, win);
+        return this.rank;
+    }
+
+    private boolean isWinBonusNumber(int count, LottoNumber bonusNumber) {
+        if (count == Rank.SECOND.getCount()) {
+            return lottoNumbers.containNumber(bonusNumber);
+        }
+        return false;
     }
 
     private int countMatchingNumber(LottoNumbers winningNumbers) {
@@ -34,9 +41,5 @@ public class Lotto {
 
     public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    public Rank getRank() {
-        return rank;
     }
 }

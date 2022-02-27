@@ -1,7 +1,7 @@
 package lotto.model;
 
+import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.model.number.BonusNumber;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 
@@ -10,15 +10,15 @@ public class WinningLotto {
     private static final String DUPLICATED_NUMBER_ERROR_MESSAGE = "[ERROR] 중복된 번호가 존재합니다.";
 
     private final LottoNumbers winningNumbers;
-    private final BonusNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(LottoNumbers winningNumbers, BonusNumber bonusNumber) throws RuntimeException {
+    public WinningLotto(LottoNumbers winningNumbers, LottoNumber bonusNumber) throws RuntimeException {
         this.winningNumbers = winningNumbers;
         checkDuplicateNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    public void checkDuplicateNumber(BonusNumber number) throws RuntimeException {
+    public void checkDuplicateNumber(LottoNumber number) throws RuntimeException {
         if ((winningNumbers.getLottoNumbers().stream()
                 .mapToInt(LottoNumber::getLottoNumber)
                 .boxed()
@@ -28,7 +28,7 @@ public class WinningLotto {
         }
     }
 
-    public void checkRank(Lottos lottos) {
-        lottos.calculateRanks(winningNumbers, bonusNumber);
+    public Map<Rank, Integer> checkRank(Lottos lottos) {
+        return lottos.calculateRanks(winningNumbers, bonusNumber);
     }
 }

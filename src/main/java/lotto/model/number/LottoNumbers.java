@@ -1,14 +1,15 @@
 package lotto.model.number;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
 
     private static final String NUMBERS_ERROR_MESSAGE = "[ERROR] 중복되지 않은 6자리 수를 입력해주세요.";
     private static final int LOTTO_NUMBERS_SIZE = 6;
-    private static final int NOT_CONTAIN_NUMBER = 0;
 
-    private List<LottoNumber> lottoNumbers;
+    public List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) throws RuntimeException {
         validateLottoNumbers(lottoNumbers);
@@ -38,19 +39,12 @@ public class LottoNumbers {
                 .count();
     }
 
-    private boolean containNumber(LottoNumber number) {
-        return lottoNumbers.stream()
-                .filter(lottoNumber -> lottoNumber.equals(number))
-                .count() != NOT_CONTAIN_NUMBER;
-    }
-
-    public boolean containNumber(BonusNumber number) {
-        return lottoNumbers.stream()
-                .filter(lottoNumber -> lottoNumber.compareBonusNumber(number))
-                .count() != NOT_CONTAIN_NUMBER;
+    public boolean containNumber(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        List<LottoNumber> newLottoNumbers = new ArrayList<>(lottoNumbers);
+        return newLottoNumbers;
     }
 }

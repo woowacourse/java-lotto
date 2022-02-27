@@ -9,14 +9,6 @@ import org.junit.jupiter.api.Test;
 
 public class LottoNumbersTest {
 
-    private LottoNumbers makeLottoNumbers(int[] numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int num : numbers) {
-            lottoNumbers.add(new LottoNumber(num));
-        }
-        return new LottoNumbers(lottoNumbers);
-    }
-
     @Test
     void 로또_번호_6자리_생성_테스트() {
         LottoNumbers lottoNumbers = makeLottoNumbers(new int[]{1,2,3,4,5,6});
@@ -45,5 +37,13 @@ public class LottoNumbersTest {
                 makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 5}))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("[ERROR]");
+    }
+
+    private LottoNumbers makeLottoNumbers(int[] numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int num : numbers) {
+            lottoNumbers.add(new LottoNumber(num));
+        }
+        return new LottoNumbers(lottoNumbers);
     }
 }
