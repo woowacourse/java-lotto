@@ -11,12 +11,14 @@ import lotto.view.OutputView;
 
 public class WinningNumbersController {
 
-    private static final String DUPLICATE_NUMBER_MESSAGE = "중복입니다.";
-
     public WinningNumbers getWinningNumbers() {
         final Lotto winningLotto = getWinningLotto();
-        final Number bonusNumber = getBonusNumber(winningLotto);
-        return new WinningNumbers(winningLotto, bonusNumber);
+        Optional<WinningNumbers> winningNumbers;
+
+        do {
+            winningNumbers = getBonusNumber(winningLotto);
+        } while (winningNumbers.isEmpty());
+        return winningNumbers.get();
     }
 
     private Lotto getWinningLotto() {
@@ -39,23 +41,10 @@ public class WinningNumbersController {
         }
     }
 
-    private Number getBonusNumber(Lotto winningLotto) {
-        Optional<Number> bonusNumber;
-
-        do {
-            bonusNumber = inputBonusNumber(winningLotto);
-        } while (bonusNumber.isEmpty());
-
-        return bonusNumber.get();
-    }
-
-    private Optional<Number> inputBonusNumber(Lotto winningLotto) {
+    private Optional<WinningNumbers> getBonusNumber(Lotto winningLotto) {
         try {
             final Number bonusNumber = Number.getInstance(InputView.inputBonusNumber());
-            if (winningLotto.contains(bonusNumber)) {
-                throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
-            }
-            return Optional.of(bonusNumber);
+            return Optional.of(new WinningNumbers(winningLotto, bonusNumber));
         } catch (IllegalArgumentException exception) {
             OutputView.printError(exception.getMessage());
             return Optional.empty();

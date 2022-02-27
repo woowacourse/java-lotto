@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -11,8 +12,30 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class WinningNumbersTest {
+
+    @Nested
+    @DisplayName("당첨 번호는")
+    class InitBonusNumber {
+
+        @Nested
+        @DisplayName("지난 주 당첨 결과와 중복되는 보너스 볼이 들어오면")
+        class Context_when_duplicate {
+
+            @ParameterizedTest
+            @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+            @DisplayName("예외를 던진다.")
+            void it_throws_exception(int value) {
+                final Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+                assertThatThrownBy(() -> new WinningNumbers(winningLotto, Number.getInstance(value)))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("중복입니다.");
+            }
+        }
+    }
 
     @Nested
     @DisplayName("당첨 순위를 알려주는 메소드는")
