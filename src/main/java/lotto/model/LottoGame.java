@@ -29,6 +29,6 @@ public class LottoGame {
     }
 
     public float calculateYield(Money money, LottoResult lottoResult) {
-        return money.calculatePercentage(lottoResult.getTotalWinningMoney());
+        return money.calculateYield(lottoResult.getTotalWinningMoney());
     }
 }

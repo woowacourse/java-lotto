@@ -27,7 +27,7 @@ public class ResultViewTest {
     @Test
     @DisplayName("생성된 로또 출력 확인")
     void printGeneratedLottosTest() {
-        ResultView.printGeneratedLottos(lottos.getLottos());
+        ResultView.printBuyingLotto(lottos.getLottos());
 
         assertThat(outputStreamCaptor.toString())
                 .contains("2개를 ")

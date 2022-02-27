@@ -19,7 +19,7 @@ public class LottoResult {
     }
 
     private Rank match(Lotto lotto, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
-        return Rank.find(lotto.matchWinningNumbers(winningNumbers),lotto.matchNumber(bonusNumber));
+        return Rank.find(lotto.matchWinningNumbers(winningNumbers), lotto.isNumberMatch(bonusNumber));
     }
 
     public Integer getRankCount(Rank rank) {

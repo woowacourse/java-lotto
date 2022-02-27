@@ -10,25 +10,25 @@ public enum Rank {
     FIRST(6, 2_000_000_000),
     FAIL(0, 0);
 
-    private final int value;
+    private final int correctedBall;
     private final long money;
 
-    Rank(int value, long money) {
-        this.value = value;
+    Rank(int correctedBall, long money) {
+        this.correctedBall = correctedBall;
         this.money = money;
     }
 
     public static Rank find(int matchWinningNumbers, boolean matchBonus) {
-        if (matchBonus && matchWinningNumbers == SECOND.value) {
+        if (matchBonus && matchWinningNumbers == SECOND.correctedBall) {
             return Rank.SECOND;
         }
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.value == matchWinningNumbers && rank != Rank.SECOND)
+                .filter(rank -> rank.correctedBall == matchWinningNumbers && rank != Rank.SECOND)
                 .findFirst().orElse(FAIL);
     }
 
-    public int getValue() {
-        return value;
+    public int getCorrectedBall() {
+        return correctedBall;
     }
 
     public long getMoney() {
