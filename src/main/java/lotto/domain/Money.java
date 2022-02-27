@@ -15,6 +15,7 @@ public class Money {
 
     private void checkValidMoney(final String money) {
         checkValidInt(money);
+        checkMoreThanBasicLottoMoney(Integer.parseInt(money));
         checkDividingMoney(Integer.parseInt(money));
     }
 
@@ -26,8 +27,14 @@ public class Money {
         }
     }
 
+    private void checkMoreThanBasicLottoMoney(final int money) {
+        if (money < BASIC_LOTTO_MONEY) {
+            throw new IllegalArgumentException(ERROR_WRONG_INPUT_MONEY);
+        }
+    }
+
     private void checkDividingMoney(final int money) {
-        if (!(money >= Money.BASIC_LOTTO_MONEY && money % Money.BASIC_LOTTO_MONEY == 0)) {
+        if (money % BASIC_LOTTO_MONEY != 0) {
             throw new IllegalArgumentException(ERROR_WRONG_DIVIDING_MONEY);
         }
     }
