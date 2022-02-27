@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import domain.generateStrategy.LotteryGenerateMock;
@@ -26,25 +26,35 @@ public class LotteryGameTest {
 		assertThat(lotteryGame.getLotteries().size()).isEqualTo(lotteriesToCreate);
 	}
 
-	@Test
 	@DisplayName("등수가 제대로 집계되는지 확인")
-	void testRankingCount() {
-		final LotteryGame lotteryGame = new LotteryGame(new PurchaseAmount(6000), new LotteryGenerateMock());
-		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+	@ParameterizedTest(name = "{index} {displayName} purchaseAmount={0}, rank={1}")
+	@CsvSource(value = {"6000, 1, FIRST", "100000, 2, SECOND", "1000, 5, FIFTH"})
+	void testRankingCount(final int purchaseAmount, final int expectedRank, final String rankName) {
+		final LotteryGame lotteryGame = initRankingTest(purchaseAmount, expectedRank);
+
 		Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
-		for (Rank rank : rankResult.keySet()) {
-			rankResult.get(rank);
-			assertThat(rankResult.get(rank)).isEqualTo(1);
-		}
+		Rank actualRank = Rank.valueOf(rankName);
+
+		assertThat(rankResult.get(actualRank)).isEqualTo(purchaseAmount / 1000);
 	}
 
-	@Test
 	@DisplayName("승률이 제대로 집계되는지 확인")
-	void testRankingPercent() {
-		final LotteryGame lotteryGame = new LotteryGame(new PurchaseAmount(6000), new LotteryGenerateMock());
-		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+	@ParameterizedTest(name = "{index} {displayName} purchaseAmount={0}, rank={1}")
+	@CsvSource(value = {"6000, 1, 2000000000", "100000, 2, 30000000", "1000, 5, 5000"})
+	void testRankingPercent(final int purchaseAmount, final int expectedRank, final int prize) {
+		final LotteryGame lotteryGame = initRankingTest(purchaseAmount, expectedRank);
+
 		Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
 		double percent = lotteryGame.makeRankingPercent(rankResult);
-		assertThat(percent).isEqualTo((double)2031555000 / (6 * 1000));
+
+		assertThat(percent).isEqualTo((double)(prize * (purchaseAmount / 1000)) / purchaseAmount);
 	}
+
+	private LotteryGame initRankingTest(final int purchaseAmount, final int expectedRank) {
+		final LotteryGame lotteryGame = new LotteryGame(new PurchaseAmount(purchaseAmount),
+			new LotteryGenerateMock(expectedRank, purchaseAmount / 1000));
+		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+		return lotteryGame;
+	}
+
 }

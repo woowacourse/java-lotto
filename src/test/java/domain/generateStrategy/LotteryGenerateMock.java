@@ -11,9 +11,10 @@ import utils.Parser;
 public class LotteryGenerateMock implements LotteryGenerateStrategy {
 
 	private final List<Lottery> lotteriesNumber;
-	private int index;
+	private final int rank;
+	private int theNumberOfLotteries;
 
-	public LotteryGenerateMock() {
+	public LotteryGenerateMock(final int rank, final int theNumberOfLotteries) {
 		lotteriesNumber = new ArrayList<>();
 		lotteriesNumber.add(toLottery(Arrays.asList(1, 2, 3, 4, 5, 6)));
 		lotteriesNumber.add(toLottery(Arrays.asList(1, 2, 3, 4, 5, 7)));
@@ -21,7 +22,8 @@ public class LotteryGenerateMock implements LotteryGenerateStrategy {
 		lotteriesNumber.add(toLottery(Arrays.asList(1, 2, 3, 4, 9, 10)));
 		lotteriesNumber.add(toLottery(Arrays.asList(1, 2, 3, 8, 9, 10)));
 		lotteriesNumber.add(toLottery(Arrays.asList(1, 2, 10, 11, 12, 13)));
-		index = 0;
+		this.rank = rank - 1;
+		this.theNumberOfLotteries = theNumberOfLotteries;
 	}
 
 	private Lottery toLottery(List<Integer> numbers) {
@@ -30,8 +32,8 @@ public class LotteryGenerateMock implements LotteryGenerateStrategy {
 
 	@Override
 	public Lottery getNumbers() {
-		if (index < lotteriesNumber.size()) {
-			return lotteriesNumber.get(index++);
+		if (theNumberOfLotteries-- > 0) {
+			return lotteriesNumber.get(rank);
 		}
 
 		return toLottery(Arrays.asList(0, 0, 0, 0, 0, 0));
