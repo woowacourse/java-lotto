@@ -26,7 +26,7 @@ public class Tickets {
 	}
 
 	private void validatePayment(int payment) {
-		if(payment < TICKET_PRICE) {
+		if (payment < TICKET_PRICE) {
 			throw new IllegalArgumentException(PAYMENT_ERROR);
 		}
 	}

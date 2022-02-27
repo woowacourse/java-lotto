@@ -38,7 +38,7 @@ public class WinningAnalyzeTest {
 	@DisplayName("수익률 계산 테스트")
 	@Test
 	void profitRate() {
-		winningAnalyze.analyze(tickets,winningNumber);
+		winningAnalyze.analyze(tickets, winningNumber);
 
 		double profitRate = winningAnalyze.getProfitRate();
 

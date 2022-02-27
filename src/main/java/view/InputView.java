@@ -32,7 +32,7 @@ public class InputView {
 		System.out.println(WINNING_NUMBER_MESSAGE);
 
 		String[] input = scanner.nextLine()
-			.split(WINNING_NUMBER_DELIMITER , -1);
+			.split(WINNING_NUMBER_DELIMITER, -1);
 
 		return Arrays.stream(input)
 			.map(String::trim)

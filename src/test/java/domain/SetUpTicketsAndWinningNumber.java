@@ -29,11 +29,11 @@ class SetUpTicketsAndWinningNumber {
 
 		CustomTicketGenerator customLottoGenerator = new CustomTicketGenerator();
 		customLottoGenerator.initNumbers(numbers);
-		int payment= 14000;
+		int payment = 14000;
 
 		tickets.makeTickets(payment, customLottoGenerator);
 
-		List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 		int bonusBall = 7;
 		winningNumber = new WinningNumber(winningNumbers, bonusBall);
 	}

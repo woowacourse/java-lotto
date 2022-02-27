@@ -35,7 +35,7 @@ public class WinningNumber {
 		List<Integer> duplicateChecker = winningBalls.stream()
 			.distinct().collect(Collectors.toUnmodifiableList());
 
-		if(!winningBalls.equals(duplicateChecker)) {
+		if (!winningBalls.equals(duplicateChecker)) {
 			throw new IllegalArgumentException(WINNING_NUMBER_DUPLICATE_ERROR);
 		}
 
