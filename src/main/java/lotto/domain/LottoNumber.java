@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    public static final int LOTTO_MIN_RANGE = 1;
-    public static final int LOTTO_MAX_RANGE = 45;
+    private static final int LOTTO_MIN_RANGE = 1;
+    private static final int LOTTO_MAX_RANGE = 45;
     public static final String ERROR_WRONG_LOTTO_NUMBER = "[ERROR] " + LOTTO_MIN_RANGE + "~" + LOTTO_MAX_RANGE + " 사이의 숫자를 입력해주세요..";
 
     private final int lottoNumber;
@@ -59,7 +59,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         LottoNumber that = (LottoNumber) o;
         return lottoNumber == that.lottoNumber;
     }
-
 
     @Override
     public int hashCode() {
