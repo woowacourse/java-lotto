@@ -23,9 +23,9 @@ public class RandomNumbersGeneratorTest {
 
     private static Stream<Arguments> provideRangeAndSizeAndExpectedSet() {
         return Stream.of(
-            Arguments.of(1, 6, Lotto.create(List.of(1, 2, 3, 4, 5, 6))),
-            Arguments.of(10, 15, Lotto.create(List.of(10, 11, 12, 13, 14, 15))),
-            Arguments.of(6, 11, Lotto.create(List.of(6, 7, 8, 9, 10, 11)))
+            Arguments.of(1, 6, Lotto.of(List.of(1, 2, 3, 4, 5, 6))),
+            Arguments.of(10, 15, Lotto.of(List.of(10, 11, 12, 13, 14, 15))),
+            Arguments.of(6, 11, Lotto.of(List.of(6, 7, 8, 9, 10, 11)))
         );
     }
 }

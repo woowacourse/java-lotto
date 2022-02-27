@@ -11,6 +11,7 @@ import lotto.model.exception.InvalidLottoSizeException;
 
 public class Lotto {
 
+    static final Money PRICE = new Money(1000);
     static final int LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> numbers;
@@ -63,12 +64,11 @@ public class Lotto {
         return Objects.hash(numbers);
     }
 
-    public static Lotto create(List<Integer> numbers) {
+    public static Lotto of(List<Integer> numbers) {
         if (hasDuplicatedNumber(numbers)) {
             throw new DuplicatedNumberException();
         }
-        Set<Integer> distinctNumbers = numbers.stream().collect(toUnmodifiableSet());
-        return new Lotto(distinctNumbers);
+        return new Lotto(toSet(numbers));
     }
 
     private static boolean hasDuplicatedNumber(List<Integer> numbers) {
@@ -79,5 +79,9 @@ public class Lotto {
         return numbers.stream()
             .distinct()
             .count();
+    }
+
+    private static Set<Integer> toSet(List<Integer> numbers) {
+        return numbers.stream().collect(toUnmodifiableSet());
     }
 }

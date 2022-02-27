@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Money {
@@ -26,7 +27,7 @@ public class Money {
     }
 
     public BigDecimal divide(Money money) {
-        return this.amount.divide(money.amount);
+        return this.amount.divide(money.amount, 2, RoundingMode.HALF_UP);
     }
 
     @Override

@@ -3,6 +3,8 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
+import org.assertj.core.data.Offset;
+import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +30,8 @@ public class MoneyTest {
     void divide() {
         Money money = new Money(100);
         BigDecimal shareValue = money.divide(new Money(4));
-        assertThat(shareValue).isEqualTo(new BigDecimal("25"));
+        assertThat(shareValue.doubleValue()).isCloseTo(new BigDecimal("25").doubleValue(),
+            Percentage.withPercentage(0.01));
     }
 
 }

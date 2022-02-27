@@ -14,12 +14,12 @@ public class RandomLottoGenerator implements LottoGenerator {
 
     private final List<Integer> numberPool;
 
-    public RandomLottoGenerator(int start, int end) {
-        numberPool = createNumberPool(start, end);
+    public RandomLottoGenerator(int lowerBound, int upperBound) {
+        numberPool = createNumberPool(lowerBound, upperBound);
     }
 
-    private List<Integer> createNumberPool(int start, int end) {
-        return IntStream.rangeClosed(start, end)
+    private List<Integer> createNumberPool(int lowerBound, int upperBound) {
+        return IntStream.rangeClosed(lowerBound, upperBound)
             .boxed()
             .collect(toUnmodifiableList());
     }
@@ -29,7 +29,7 @@ public class RandomLottoGenerator implements LottoGenerator {
         List<Integer> shuffledList = shuffleNumberList();
         Queue<Integer> queue = queueFromShuffledList(shuffledList);
         List<Integer> numbers = numbers(queue);
-        return Lotto.create(numbers);
+        return Lotto.of(numbers);
     }
 
     private List<Integer> shuffleNumberList() {

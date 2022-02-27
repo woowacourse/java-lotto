@@ -3,41 +3,68 @@ package lotto.model;
 import static java.util.stream.Collectors.toMap;
 
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class Statistic {
 
-    private final Money inputMoney;
-    private final Map<Rank, Integer> rankMap;
+    private final Map<Rank, Integer> ranks;
 
-    public Statistic(Money inputMoney) {
-        this.inputMoney = inputMoney;
-        this.rankMap = Stream.of(Rank.values())
+    public Statistic(List<Rank> ranks) {
+        this.ranks = Collections.unmodifiableMap(collectRanks(ranks));
+    }
+
+    private Map<Rank, Integer> collectRanks(List<Rank> ranks) {
+        return collectRanksToMap(emptyRankMap(), ranks);
+    }
+
+    private Map<Rank, Integer> emptyRankMap() {
+        return Stream.of(Rank.values())
             .collect(toMap(Function.identity(), r -> 0));
     }
 
-    public int getCountByRank(Rank rank) {
-        return rankMap.get(rank);
+    private Map<Rank, Integer> collectRanksToMap(Map<Rank, Integer> rankMap, List<Rank> ranks) {
+        for (Rank rank : ranks) {
+            rankMap.put(rank, rankMap.get(rank) + 1);
+        }
+        return rankMap;
     }
 
-    public void addRank(Rank rank) {
-        rankMap.put(rank, getCountByRank(rank) + 1);
+    public int getCountByRank(Rank rank) {
+        return ranks.get(rank);
     }
 
     public ProfitRate getProfitRate() {
-        BigDecimal rate = totalPrize().divide(inputMoney);
-        return new ProfitRate(rate);
+        return new ProfitRate(profitRate());
+    }
+
+    private BigDecimal profitRate() {
+        if (lottoQuantity() == 0) {
+            return ProfitRate.PROFIT_PRINCIPAL_RATE;
+        }
+        return totalPrize().divide(totalLottoPrice());
+    }
+
+    private int lottoQuantity() {
+        return ranks.values().stream()
+            .mapToInt(v -> v.intValue())
+            .sum();
+    }
+
+    private Money totalLottoPrice() {
+        return Lotto.PRICE.multiply(lottoQuantity());
     }
 
     private Money totalPrize() {
-        return rankMap.keySet().stream()
-            .map(this::eachTotalPrize)
+        return ranks.keySet().stream()
+            .map(this::eachRankTotalPrize)
             .reduce(Money.ZERO, Money::plus);
     }
 
-    private Money eachTotalPrize(Rank rank) {
+    private Money eachRankTotalPrize(Rank rank) {
         return rank.getPrize().multiply(getCountByRank(rank));
     }
 }

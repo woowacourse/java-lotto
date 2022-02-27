@@ -7,7 +7,6 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
 
-    private final static Money LOTTO_PRICE = new Money(1000);
     private final LottoGenerator lottoGenerator;
 
     public LottoMachine(LottoGenerator lottoGenerator) {
@@ -21,6 +20,6 @@ public class LottoMachine {
     }
 
     private int quantity(Money money) {
-        return money.divide(LOTTO_PRICE).intValue();
+        return money.divide(Lotto.PRICE).intValue();
     }
 }

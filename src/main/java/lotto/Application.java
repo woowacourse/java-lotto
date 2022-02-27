@@ -33,7 +33,7 @@ public class Application {
         List<Lotto> lottoes = issueLottoes(inputMoney);
         printLottoes(lottoes);
         WinnerLotto winnerLotto = inputWinnerLotto();
-        Statistic statistic = winnerLotto.summarize(lottoes, inputMoney);
+        Statistic statistic = winnerLotto.summarize(lottoes);
         printStatistic(statistic);
     }
 
