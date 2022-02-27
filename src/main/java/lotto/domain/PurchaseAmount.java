@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class PurchaseAmount {
+
     static final String NOT_NUMBER = "[ERROR] 구입금액은 숫자여야 합니다.";
     static final String NOT_ENOUGH_MONEY = "[ERROR] 로또를 구매하려면 최소 천원 이상 투입해야 합니다.";
 

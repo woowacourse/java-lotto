@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 public enum LottoRank {
@@ -34,14 +35,11 @@ public enum LottoRank {
         }
 
         public boolean contains(boolean containsBonusBall) {
-            for (Boolean bonusBallIncludeState : bonusBallIncludeStates) {
-                if (bonusBallIncludeState == containsBonusBall) {
-                    return true;
-                }
-            }
-            return false;
+            return List.of(bonusBallIncludeStates)
+                    .contains(containsBonusBall);
         }
     }
+
     public static LottoRank getRank(int winningNumberCount, boolean containsBonusBall) {
         return Arrays.stream(values())
                 .filter(classifyRank(winningNumberCount, containsBonusBall))

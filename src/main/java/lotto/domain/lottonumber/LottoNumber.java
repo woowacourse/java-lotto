@@ -3,6 +3,7 @@ package lotto.domain.lottonumber;
 import java.util.Objects;
 
 public class LottoNumber {
+
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     static final String NOT_NUMBER_OF_LOTTO = "[ERROR] 로또 번호는 숫자여야 합니다.";

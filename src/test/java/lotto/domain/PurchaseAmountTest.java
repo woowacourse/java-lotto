@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class PurchaseAmountTest {
+
     @Test
     @DisplayName("로또는 최소 천원이 있어야 구매할 수 있다.")
     void underLottoTicketPrice() {

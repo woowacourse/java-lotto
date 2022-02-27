@@ -9,8 +9,8 @@ import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoTicket;
 
 public class LottoTicketFactory {
-    private static final int LOTTO_TICKET_PRICE = 1000;
 
+    private static final int LOTTO_TICKET_PRICE = 1000;
     private static final List<LottoNumber> availableLottoNumbers;
 
     static {
