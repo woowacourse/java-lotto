@@ -3,6 +3,7 @@ package model.lotto;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import model.exception.LottoCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,7 +19,7 @@ public class LottoCountTest {
     void validateLottoNumber(String number) {
         assertThatThrownBy(() -> new LottoCount(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error]: 금액을 입력해주세요.");
+                .hasMessageContaining(LottoCountException.BLANK_ERROR.getMassage());
     }
 
     @ParameterizedTest
@@ -27,7 +28,7 @@ public class LottoCountTest {
     void validateInputMoneyIsNumber(String number) {
         assertThatThrownBy(() -> new LottoCount(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error]: 금액은 숫자를 입력해주세요.");
+                .hasMessageContaining(LottoCountException.NUMBER_ERROR.getMassage());
     }
 
     @ParameterizedTest
@@ -36,7 +37,7 @@ public class LottoCountTest {
     void validateNotThousandUnitInputMoney(String number) {
         assertThatThrownBy(() -> new LottoCount(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error]: 금액은 천원 단위여야 합니다.");
+                .hasMessageContaining(LottoCountException.UNIT_ERROR.getMassage());
     }
 
     @Test

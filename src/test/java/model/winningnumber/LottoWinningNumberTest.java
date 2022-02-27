@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import model.exception.WinningNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +23,7 @@ public class LottoWinningNumberTest {
     void validateInputLottoNumberBlank(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(List.of(numbers)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error]: 당첨 번호를 입력하세요.");
+                .hasMessageContaining(WinningNumberException.BLANK_ERROR.getMassage());
     }
 
     @Test
@@ -30,7 +31,7 @@ public class LottoWinningNumberTest {
     void validateInputLottoNumberNull() {
         assertThatThrownBy(() -> new LottoWinningNumber(null))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error]: 당첨 번호를 입력하세요.");
+                .hasMessageContaining(WinningNumberException.BLANK_ERROR.getMassage());
     }
 
     @ParameterizedTest
@@ -39,7 +40,7 @@ public class LottoWinningNumberTest {
     void validateInputLottoWinningNumberIsInt(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(List.of(numbers)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error]: 당첨 번호는 숫자여야 합니다.");
+                .hasMessageContaining(WinningNumberException.NUMBER_ERROR.getMassage());
     }
 
     @ParameterizedTest
@@ -51,7 +52,7 @@ public class LottoWinningNumberTest {
                 .map(String::trim)
                 .collect(Collectors.toList())))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error]: 당첨 번호는 1~45 숫자여야 합니다.");
+                .hasMessageContaining(WinningNumberException.RANGE_ERROR.getMassage());
     }
 
     @Test
@@ -72,7 +73,7 @@ public class LottoWinningNumberTest {
     void validateInputLottoWinningNumberSize(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(List.of(numbers.split(","))))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error]: 당첨 번호는 6개의 숫자여야 합니다.");
+                .hasMessageContaining(WinningNumberException.SIZE_ERROR.getMassage());
     }
 
     @ParameterizedTest
@@ -81,7 +82,7 @@ public class LottoWinningNumberTest {
     void validateWinningNumberReduplication(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(List.of(numbers.split(","))))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error]: 당첨 번호는 중복이 있으면 안됩니다");
+                .hasMessageContaining(WinningNumberException.REDUPLICATION_ERROR.getMassage());
     }
 
     @ParameterizedTest
@@ -91,6 +92,6 @@ public class LottoWinningNumberTest {
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(List.of("1,2,3,4,5,6".split(",")));
         assertThatThrownBy(() -> lottoWinningNumber.validateReduplicationWithBonusBall(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error]: 당첨 번호와 보너스 볼이 중복됩니다.");
+                .hasMessageContaining(WinningNumberException.REDUPLICATION_BONUS_BALL_ERROR.getMassage());
     }
 }

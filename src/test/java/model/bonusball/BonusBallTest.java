@@ -3,6 +3,7 @@ package model.bonusball;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import model.exception.BonusBallException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +20,7 @@ public class BonusBallTest {
         assertThatThrownBy(() -> {
             new BonusBall(number);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error]: 보너스 볼을 입력해주세요.");
+                .hasMessageContaining(BonusBallException.BLANK_ERROR.getMessage());
     }
 
     @ParameterizedTest
@@ -28,7 +29,7 @@ public class BonusBallTest {
     void validateBonusBallNumber(String number) {
         assertThatThrownBy(() -> new BonusBall(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error]: 보너스 볼은 숫자여야 합니다.");
+                .hasMessageContaining(BonusBallException.NUMBER_ERROR.getMessage());
     }
 
     @ParameterizedTest
@@ -37,7 +38,7 @@ public class BonusBallTest {
     void validateBonusBallOutOfRange(String number) {
         assertThatThrownBy(() -> new BonusBall(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error]: 보너스 볼은 1~45의 숫자만 입력해주세요.");
+                .hasMessageContaining(BonusBallException.RANGE_ERROR.getMessage());
     }
 
     @Test
