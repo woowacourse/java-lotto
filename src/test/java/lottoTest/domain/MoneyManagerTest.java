@@ -21,7 +21,7 @@ class MoneyManagerTest {
         assertThat(result).isEqualTo(14);
     }
 
-    @ParameterizedTest(name = "[{index}] 숫자: {0}")
+    @ParameterizedTest(name = "[{index}] 입력된 구입 금액 : {0}")
     @ValueSource(ints = {0, -1})
     void 구입_금액이_양의_정수가_아닌_경우_테스트(int inputMoney) {
         assertThatThrownBy(() -> new MoneyManager(inputMoney))

@@ -17,15 +17,17 @@ import org.junit.jupiter.params.provider.MethodSource;
 @SuppressWarnings("NonAsciiCharacters")
 class LottoTicketTest {
 
-    @ParameterizedTest(name = "[{index}] 로또 등수: {3}")
+    @ParameterizedTest(name = "[{index}] 당첨 결과 : {3}")
     @MethodSource("provideLottoData")
-    void 로또의_당첨_여부를_판단하는_기능_테스트(List<LottoNumber> winningNumber, LottoNumber bonusNumber, List<LottoNumber> lottoNumber,
-                                Rank rank) {
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumber, bonusNumber);
-        LottoTicket lottoTicket = new LottoTicket(lottoNumber);
-        Rank lottoRank = lottoTicket.compareNumbers(winningNumbers.getWinningNumbers(),
-                winningNumbers.getBonusNumber());
-        assertThat(lottoRank).isEqualTo(rank);
+    void 로또의_당첨_여부를_판단하는_기능_테스트(List<LottoNumber> inputWinningNumbers, LottoNumber inputBonusNumber,
+                                List<LottoNumber> inputLottoNumbers, Rank rank) {
+        WinningNumbers winningNumbers = new WinningNumbers(inputWinningNumbers, inputBonusNumber);
+        LottoTicket lottoTicket = new LottoTicket(inputLottoNumbers);
+
+        Rank resultRank = lottoTicket.compareNumbers(
+                winningNumbers.getWinningNumbers(), winningNumbers.getBonusNumber());
+
+        assertThat(resultRank).isEqualTo(rank);
     }
 
     private static List<LottoNumber> toLottoNumbers(List<Integer> integers) {
@@ -35,15 +37,13 @@ class LottoTicketTest {
     }
 
     private static Stream<Arguments> provideLottoData() {
+        List<LottoNumber> winningNumbersForTest = toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         return Stream.of(
-                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7),
-                        toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                Arguments.of(winningNumbersForTest, new LottoNumber(7), winningNumbersForTest,
                         Rank.MATCH_SIX_NUMBERS),
-                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7),
-                        toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)),
+                Arguments.of(winningNumbersForTest, new LottoNumber(7), toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)),
                         Rank.MATCH_FIVE_NUMBERS),
-                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(8),
-                        toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)),
+                Arguments.of(winningNumbersForTest, new LottoNumber(8), toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)),
                         Rank.MATCH_FIVE_AND_BONUS_NUMBERS)
         );
     }
