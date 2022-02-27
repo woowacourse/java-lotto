@@ -2,10 +2,11 @@ package lotto.domain;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class Ranks {
 
-    private final EnumMap<Rank, Integer> statistics;
+    private final Map<Rank, Integer> statistics;
 
     public Ranks(List<Rank> ranks) {
         this.statistics = new EnumMap<>(Rank.class);
@@ -18,8 +19,8 @@ public class Ranks {
         }
     }
 
-    public EnumMap<Rank, Integer> getStatistics() {
-        EnumMap<Rank, Integer> statisticsResult = new EnumMap<>(Rank.class);
+    public Map<Rank, Integer> getStatistics() {
+        Map<Rank, Integer> statisticsResult = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             statisticsResult.put(rank, this.statistics.getOrDefault(rank, 0));
         }

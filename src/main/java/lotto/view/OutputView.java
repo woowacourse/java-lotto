@@ -1,7 +1,7 @@
 package lotto.view;
 
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
@@ -32,7 +32,7 @@ public class OutputView {
                 .collect(Collectors.toList());
     }
 
-    public static void displayResult(EnumMap<Rank, Integer> statistics, double calculateYield) {
+    public static void displayResult(Map<Rank, Integer> statistics, double calculateYield) {
         System.out.println();
         System.out.println(STATISTICS_GUIDE_MESSAGE);
         for (Rank rank : statistics.keySet()) {
@@ -41,7 +41,7 @@ public class OutputView {
         System.out.println(String.format(YIELD_FORMAT, calculateYield) + isLoss(calculateYield));
     }
 
-    private static void displayStatistics(EnumMap<Rank, Integer> statistics, Rank rank) {
+    private static void displayStatistics(Map<Rank, Integer> statistics, Rank rank) {
         if (rank.getMatchCount() != Rank.MATCH_ZERO_NUMBERS.getMatchCount()) {
             System.out.println(
                     rank.getMatchStatus() + String.format(STATISTICS_FORMAT, rank.getReward(), statistics.get(rank)));
