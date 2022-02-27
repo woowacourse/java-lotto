@@ -102,6 +102,7 @@ public class LottoController {
 
     private List<LottoMatchKindDto> convertWinningResultsToDtos(final Map<LottoMatchKind, Integer> results) {
         return results.keySet().stream()
+                .filter(lottoMatchKind -> lottoMatchKind != LottoMatchKind.BLANK)
                 .map(lottoMatchKind -> new LottoMatchKindDto(lottoMatchKind, results.get(lottoMatchKind)))
                 .collect(Collectors.toUnmodifiableList());
     }
