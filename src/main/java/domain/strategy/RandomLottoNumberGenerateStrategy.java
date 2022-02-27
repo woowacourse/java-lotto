@@ -1,6 +1,6 @@
 package domain.strategy;
 
-import constants.LottoNumbers;
+import constants.LottoConstants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +11,7 @@ public class RandomLottoNumberGenerateStrategy implements LottoNumberGenerateStr
 
     @Override
     public List<Integer> generateLottoNumbers() {
-        List<Integer> modifiableLottoNumbers = new ArrayList<>(LottoNumbers.LOTTO_NUMBERS);
+        List<Integer> modifiableLottoNumbers = new ArrayList<>(LottoConstants.LOTTO_NUMBERS);
         Collections.shuffle(modifiableLottoNumbers);
 
         return Collections.unmodifiableList(

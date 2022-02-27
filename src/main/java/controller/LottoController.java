@@ -1,18 +1,24 @@
 package controller;
 
-import domain.*;
+import constants.LottoConstants;
+import domain.InputMoney;
+import domain.Lotto;
+import domain.LottoNumber;
+import domain.LottoQuantity;
+import domain.Lottos;
+import domain.Rank;
+import domain.WinningCount;
+import domain.WinningLotto;
 import domain.strategy.LottoNumberGenerateStrategy;
 import dto.LottoResultDto;
-import view.InputView;
-import view.ResultView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import view.InputView;
+import view.ResultView;
 
 public class LottoController {
-    private static final int LOTTO_PRICE = 1000;
     private final LottoNumberGenerateStrategy lottoNumberGenerator;
 
     public LottoController(LottoNumberGenerateStrategy lottoNumberGenerator) {
@@ -33,7 +39,7 @@ public class LottoController {
     }
 
     private LottoQuantity getLottoQuantityByInputMoney(InputMoney inputMoney) {
-        return new LottoQuantity(inputMoney.getMoney() / LOTTO_PRICE);
+        return new LottoQuantity(inputMoney.getMoney() / LottoConstants.SINGLE_LOTTO_PRICE);
     }
 
     private Lottos getRandomLottos(LottoQuantity lottoQuantity) {

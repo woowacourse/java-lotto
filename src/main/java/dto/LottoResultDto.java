@@ -1,5 +1,6 @@
 package dto;
 
+import constants.LottoConstants;
 import domain.LottoQuantity;
 import domain.Rank;
 import domain.WinningCount;
@@ -8,7 +9,6 @@ import java.util.Objects;
 
 public class LottoResultDto {
     public static final double ROUND_UNIT = 100.0;
-    public static final double SINGLE_LOTTO_PRICE = 1000.0;
 
     private final Map<Rank, WinningCount> lottoWinningResult;
     private final double profitRatio;
@@ -28,7 +28,7 @@ public class LottoResultDto {
     }
 
     private static double getProfitRatio(long totalPrize, LottoQuantity lottoQuantity) {
-        double purchaseMoney = (lottoQuantity.getLottoQuantity() * SINGLE_LOTTO_PRICE);
+        double purchaseMoney = lottoQuantity.getLottoQuantity() * LottoConstants.SINGLE_LOTTO_PRICE;
         return roundToSecondDigit(totalPrize / purchaseMoney);
     }
 

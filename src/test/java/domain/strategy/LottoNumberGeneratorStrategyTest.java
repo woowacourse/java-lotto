@@ -2,7 +2,7 @@ package domain.strategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import constants.LottoNumbers;
+import constants.LottoConstants;
 import java.util.List;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +17,7 @@ public class LottoNumberGeneratorStrategyTest {
         IntStream.range(0, 100000)
                 .forEach(i -> {
                     List<Integer> generatedWinningNumbers = lottoNumberGenerateStrategy.generateLottoNumbers();
-                    assertThat(LottoNumbers.LOTTO_NUMBERS.containsAll(generatedWinningNumbers)).isTrue();
+                    assertThat(LottoConstants.LOTTO_NUMBERS.containsAll(generatedWinningNumbers)).isTrue();
                 });
     }
 }
