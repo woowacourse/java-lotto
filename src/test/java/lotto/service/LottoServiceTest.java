@@ -13,7 +13,6 @@ import lotto.domain.ticket.generator.CustomTicketGenerator;
 import lotto.domain.rank.Rank;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
-import lotto.dto.TicketsDto;
 import lotto.dto.WinningTicketDto;
 
 class LottoServiceTest {
@@ -28,8 +27,7 @@ class LottoServiceTest {
         customTicketGenerator.initNumbers(expectedTicketDtos);
         lottoService.generateTickets(money);
 
-        final TicketsDto ticketsDto = lottoService.getTicketDtos();
-        final List<TicketDto> actualTicketDtos = ticketsDto.getTicketDtos();
+        final List<TicketDto> actualTicketDtos = lottoService.getTicketDtos();
         checkTicketEquals(actualTicketDtos, expectedTicketDtos);
     }
 

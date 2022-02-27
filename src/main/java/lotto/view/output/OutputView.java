@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import lotto.domain.rank.Rank;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
-import lotto.dto.TicketsDto;
 import lotto.view.utils.Delimiter;
 
 public class OutputView {
@@ -22,14 +21,14 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printTicketCount(final TicketsDto ticketDtos) {
-        final int ticketCount = ticketDtos.getSize();
+    public void printTicketCount(final List<TicketDto> ticketDtos) {
+        final int ticketCount = ticketDtos.size();
         final String message = String.format(TICKET_COUNT_FORMAT.getMessage(), ticketCount);
         printMessage(message);
     }
 
-    public void printTickets(final TicketsDto ticketDtos) {
-        ticketDtos.getTicketDtos().stream()
+    public void printTickets(final List<TicketDto> ticketDtos) {
+        ticketDtos.stream()
                 .map(this::makeTicketFormat)
                 .forEach(this::printMessage);
     }

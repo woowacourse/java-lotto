@@ -1,7 +1,9 @@
 package lotto.controller;
 
+import java.util.List;
+
 import lotto.dto.AnalysisDto;
-import lotto.dto.TicketsDto;
+import lotto.dto.TicketDto;
 import lotto.dto.WinningTicketDto;
 import lotto.service.LottoService;
 import lotto.view.LottoView;
@@ -22,7 +24,7 @@ public class LottoController {
     }
 
     public void showTickets() {
-        final TicketsDto ticketDtos = lottoService.getTicketDtos();
+        final List<TicketDto> ticketDtos = lottoService.getTicketDtos();
         lottoView.announceTickets(ticketDtos);
     }
 

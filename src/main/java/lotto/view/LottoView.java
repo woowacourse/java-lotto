@@ -6,7 +6,6 @@ import java.util.List;
 
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
-import lotto.dto.TicketsDto;
 import lotto.dto.WinningTicketDto;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
@@ -42,7 +41,7 @@ public class LottoView {
         return inputView.requestBonusNumber();
     }
 
-    public void announceTickets(TicketsDto ticketDtos) {
+    public void announceTickets(List<TicketDto> ticketDtos) {
         outputView.printTicketCount(ticketDtos);
         outputView.printTickets(ticketDtos);
     }
