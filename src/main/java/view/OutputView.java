@@ -1,7 +1,7 @@
 package view;
 
 import domain.Tickets;
-import domain.WinningAnalyze;
+import domain.dto.WinningAnalyzeDto;
 
 public class OutputView {
 	private static final String PAYMENT_COUNT_MESSAGE = "개를 구매했습니다.";
@@ -13,11 +13,11 @@ public class OutputView {
 		System.out.println(tickets.toString());
 	}
 
-	public static void printStatistics(WinningAnalyze winningAnalyze) {
+	public static void printStatistics(WinningAnalyzeDto winningAnalyzeDto) {
 		System.out.println();
 		System.out.println(ANALYSIS_TITLE_MESSAGE);
 		System.out.println(DIVIDING_LINE);
 
-		System.out.println(winningAnalyze.toString());
+		/*System.out.println(winningAnalyze.toString());*/
 	}
 }

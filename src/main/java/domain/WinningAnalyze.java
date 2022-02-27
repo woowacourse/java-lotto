@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import domain.dto.WinningAnalyzeDto;
+
 public class WinningAnalyze {
 	private static final int LOTTO_PRICE = 1000;
 
@@ -12,49 +14,48 @@ public class WinningAnalyze {
 	private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
 	private static final String LINE_DELIMITER = "\n";
 
-	private final Map<Rank, Integer> analyzeResult;
-	private double profitRate;
+	private final Tickets tickets;
+	private final WinningNumber winningNumber;
 
-	public WinningAnalyze() {
-		this.analyzeResult = new LinkedHashMap<>();
-		initRankResult();
+	public WinningAnalyze(Tickets tickets, WinningNumber winningNumber) {
+		this.tickets = tickets;
+		this.winningNumber = winningNumber;
 	}
 
-	private void initRankResult() {
-		Arrays.stream(Rank.values())
-			.forEach(rank -> analyzeResult.put(rank, 0));
-	}
-
-	public void analyze(Tickets tickets, WinningNumber winningNumber) {
+	public WinningAnalyzeDto analyze() {
+		Map<Rank, Integer> analyzeResult = initRankResult();
 		List<Rank> ranks = tickets.getRanks(winningNumber);
 		ranks.forEach(rank -> analyzeResult.put(rank, analyzeResult.get(rank) + 1));
 
-		calculateProfitRate(tickets);
+		double profitRate = calculateProfitRate(analyzeResult);
+
+		return new WinningAnalyzeDto(analyzeResult, profitRate);
 	}
 
-	private void calculateProfitRate(Tickets tickets) {
+	private Map<Rank, Integer> initRankResult() {
+		Map<Rank, Integer> analyzeResult = new LinkedHashMap<>();
+
+		Arrays.stream(Rank.values())
+			.forEach(rank -> analyzeResult.put(rank, 0));
+
+		return analyzeResult;
+	}
+
+	private double calculateProfitRate(Map<Rank, Integer> analyzeResult) {
 		int payment = tickets.size() * LOTTO_PRICE;
-		double profit = getProfit();
+		double profit = getProfit(analyzeResult);
 
-		profitRate = (profit / payment);
+		return (profit / payment);
 	}
 
-	private double getProfit() {
+	private double getProfit(Map<Rank, Integer> analyzeResult) {
 		return analyzeResult.keySet()
 			.stream()
 			.mapToDouble(rank -> rank.getPrize() * analyzeResult.get(rank))
 			.sum();
 	}
 
-	public Map<Rank, Integer> getAnalyzeResult() {
-		return analyzeResult;
-	}
-
-	public double getProfitRate() {
-		return profitRate;
-	}
-
-	@Override
+/*	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 
@@ -68,5 +69,5 @@ public class WinningAnalyze {
 			.format(PROFIT_RATE_MESSAGE, Math.floor(profitRate * 100) / 100.0));
 
 		return stringBuilder.toString();
-	}
+	}*/
 }

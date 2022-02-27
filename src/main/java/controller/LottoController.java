@@ -3,6 +3,7 @@ package controller;
 import domain.Tickets;
 import domain.WinningAnalyze;
 import domain.WinningNumber;
+import domain.dto.WinningAnalyzeDto;
 import domain.strategy.RandomTicketGenerator;
 import view.InputView;
 import view.OutputView;
@@ -16,8 +17,7 @@ public class LottoController {
 		WinningNumber winningNumber =
 			new WinningNumber(InputView.getWinningNumber(), InputView.getBonusBall());
 
-		WinningAnalyze winningAnalyze = generateStatistics(tickets, winningNumber);
-		OutputView.printStatistics(winningAnalyze);
+		OutputView.printStatistics(generateStatistics(tickets, winningNumber));
 	}
 
 	private Tickets generateTickets(int payment) {
@@ -27,10 +27,9 @@ public class LottoController {
 		return tickets;
 	}
 
-	private WinningAnalyze generateStatistics(Tickets tickets, WinningNumber winningNumber) {
-		WinningAnalyze winningAnalyze = new WinningAnalyze();
-		winningAnalyze.analyze(tickets, winningNumber);
+	private WinningAnalyzeDto generateStatistics(Tickets tickets, WinningNumber winningNumber) {
+		WinningAnalyze winningAnalyze = new WinningAnalyze(tickets, winningNumber);
 
-		return winningAnalyze;
+		return winningAnalyze.analyze();
 	}
 }
