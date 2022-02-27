@@ -11,13 +11,13 @@ public class Money {
 
     private final long value;
 
-    public Money(long number) {
-        validatePositive(number);
-        this.value = number;
+    public Money(long value) {
+        validatePositive(value);
+        this.value = value;
     }
 
-    private void validatePositive(long number) {
-        if (number < MINIMUM_MONEY) {
+    private void validatePositive(long value) {
+        if (value < MINIMUM_MONEY) {
             throw new IllegalArgumentException("돈은 0이상이어야 한다.");
         }
     }
