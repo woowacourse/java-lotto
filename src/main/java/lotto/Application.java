@@ -8,8 +8,6 @@ import static lotto.view.OutputView.printLottoes;
 import static lotto.view.OutputView.printMessage;
 import static lotto.view.OutputView.printStatistic;
 
-import java.util.List;
-import lotto.model.Lotto;
 import lotto.model.LottoGenerator;
 import lotto.model.LottoMachine;
 import lotto.model.Lottoes;
@@ -17,14 +15,14 @@ import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
 import lotto.model.Statistic;
 import lotto.model.WinnerLotto;
-import lotto.view.exception.LottoFinishedException;
+import lotto.view.exception.ApplicationFinishedException;
 
 public class Application {
 
     public static void main(String[] args) {
         try {
             run();
-        } catch (LottoFinishedException e) {
+        } catch (ApplicationFinishedException e) {
             printMessage("종료되었습니다!");
         }
     }

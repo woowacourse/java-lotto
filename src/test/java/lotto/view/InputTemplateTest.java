@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.model.exception.LottoException;
 import lotto.view.exception.InvalidFormatException;
-import lotto.view.exception.LottoFinishedException;
+import lotto.view.exception.ApplicationFinishedException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -56,7 +56,7 @@ public class InputTemplateTest {
         assertThatCode(
             () -> inputTemplate
                 .repeatablyExecute(supplier::throwLottoException, exceptionHandler::accept))
-            .isInstanceOf(LottoFinishedException.class);
+            .isInstanceOf(ApplicationFinishedException.class);
 
         supplier.verifyCalledOnce();
         exceptionHandler.verifyCalledOnce(LottoException.class);
@@ -70,7 +70,7 @@ public class InputTemplateTest {
         assertThatCode(
             () -> inputTemplate
                 .repeatablyExecute(supplier::throwLottoException, exceptionHandler::accept))
-            .isInstanceOf(LottoFinishedException.class);
+            .isInstanceOf(ApplicationFinishedException.class);
 
         supplier.verifyCalledTimes(3);
         exceptionHandler.verifyCalledTimes(3, LottoException.class);
@@ -115,7 +115,7 @@ public class InputTemplateTest {
             .repeatablyInput(MESSAGE,
                 text -> consumer.throwInvalidFormatException(text, MESSAGE),
                 exceptionHandler::accept))
-            .isInstanceOf(LottoFinishedException.class);
+            .isInstanceOf(ApplicationFinishedException.class);
 
         consumer.verifyCalledTimes(2, INPUT_TEXT, INPUT_TEXT);
         exceptionHandler.verifyCalledTimes(2, InvalidFormatException.class);

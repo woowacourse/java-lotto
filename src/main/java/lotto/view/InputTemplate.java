@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 import lotto.model.exception.LottoException;
 import lotto.view.exception.InvalidFormatException;
-import lotto.view.exception.LottoFinishedException;
+import lotto.view.exception.ApplicationFinishedException;
 
 public class InputTemplate {
 
@@ -38,7 +38,7 @@ public class InputTemplate {
         if (isRepeatable(value)) {
             return supplier.get();
         }
-        throw new LottoFinishedException();
+        throw new ApplicationFinishedException();
     }
 
     private String chooseOptions(String message, String... options) {
