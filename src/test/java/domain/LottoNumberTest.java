@@ -13,7 +13,7 @@ class LottoNumberTest {
     @DisplayName("로또 번호가 1보다 작거나 45보다 크면 예외 발생")
     void generateLottoNumberTest(int number) {
         assertThatThrownBy(
-                () -> LottoNumber.generateLottoNumber(number)
+                () -> LottoNumber.of(number)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 }

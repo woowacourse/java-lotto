@@ -40,7 +40,7 @@ public class InputView {
         String[] numbers = input.split(DELIMITER);
         List<LottoNumber> collect = Arrays.stream(numbers)
                 .map(Integer::parseInt)
-                .map(LottoNumber::generateLottoNumber)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
         return new Lotto(collect);
     }
@@ -49,7 +49,7 @@ public class InputView {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
         String input = scanner.nextLine();
         int bonusBall = convertToIntBonusBall(input);
-        return LottoNumber.generateLottoNumber(bonusBall);
+        return LottoNumber.of(bonusBall);
     }
 
     private static int convertToIntBonusBall(String input) {

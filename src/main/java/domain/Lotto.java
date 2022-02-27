@@ -44,7 +44,7 @@ public class Lotto {
 
     public static Lotto generateLottoNumbers(int minNumber, int maxNumber) {
         List<LottoNumber> lottoRange = IntStream.rangeClosed(minNumber, maxNumber)
-                .mapToObj(LottoNumber::generateLottoNumber)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
         Collections.shuffle(lottoRange);
         List<LottoNumber> numbers = lottoRange.subList(LOTTO_START, LOTTO_END);

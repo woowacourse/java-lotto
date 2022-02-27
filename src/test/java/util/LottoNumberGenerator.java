@@ -8,7 +8,7 @@ public class LottoNumberGenerator {
 
     public static List<domain.LottoNumber> of(Integer... numbers) {
         return Arrays.stream(numbers)
-                .map(domain.LottoNumber::generateLottoNumber)
+                .map(domain.LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

@@ -1,11 +1,18 @@
 package domain;
 
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     static final String INVALID_LOTTO_NUMBER_RANGE = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.";
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
+
+    static {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+            CACHE.put(i, new LottoNumber(i));
+        }
+    }
 
     private final int number;
 
@@ -14,8 +21,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber generateLottoNumber(final int number) {
-        return new LottoNumber(number);
+    public static LottoNumber of(final int number) {
+        LottoNumber lottoNumber = CACHE.get(number);
+        if (Objects.isNull(lottoNumber)) {
+            lottoNumber = new LottoNumber(number);
+        }
+        return lottoNumber;
     }
 
     private static void validateRange(final int number) {
@@ -47,6 +58,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber o) {
-        return this.number - o.number;
+        return Integer.compare(this.number, o.number);
     }
 }
