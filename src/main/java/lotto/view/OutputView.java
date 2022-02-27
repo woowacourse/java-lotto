@@ -20,6 +20,9 @@ public class OutputView {
     private static final String SUFFIX_LAST_LINE = "입니다.";
     private static final String PREFIX_PROFIT = "총 수익률은 ";
     private static final String DEFAULT_FORMAT = "%.2f";
+    public static final String PREFIX_PRINT_LOTTO = "[";
+    public static final String SUFFIX_PRINT_LOTTO = "]";
+    public static final String PRINT_LOTTO_DELIMITER = ", ";
 
     public static void printLottos(final Lottos lottos) {
         System.out.println(lottos.getLottos().size() + SUFFIX_LOTTO_COUNT);
@@ -30,13 +33,13 @@ public class OutputView {
     }
 
     private static void printLotto(final Lotto lotto) {
-        System.out.print("[");
+        System.out.print(PREFIX_PRINT_LOTTO);
         int size = lotto.getNumbers().size();
         for (int i = 0; i < size - 1; i++) {
-            System.out.print(lotto.getNumbers().get(i).getLottoNumber() + ", ");
+            System.out.print(lotto.getNumbers().get(i).getLottoNumber() + PRINT_LOTTO_DELIMITER);
         }
         System.out.print(lotto.getNumbers().get(size - 1).getLottoNumber());
-        System.out.println("]");
+        System.out.println(SUFFIX_PRINT_LOTTO);
     }
 
     public static void printWinningResult(final Result reuslt) {
