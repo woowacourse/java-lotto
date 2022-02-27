@@ -14,7 +14,7 @@ public class Player {
     private static final int MINIMUM_PURCHASE_AMOUNT = 1000;
 
     private final Money money;
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Player(int money) {
         this.money = new Money(money);

@@ -1,14 +1,14 @@
 package dto;
 
 import domain.Rank;
+import domain.ResultStatus;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class RanksDto {
-
-    public static final int RANK_NUMBER = 5;
 
     private final List<RankDto> rankDtos;
     private final double incomeRate;
@@ -18,12 +18,12 @@ public class RanksDto {
         this.incomeRate = incomeRate;
     }
 
-    public static RanksDto from(double incomeRate) {
+    public static RanksDto from(ResultStatus resultStatus, double incomeRate) {
         List<RankDto> rankDtos = new ArrayList<>();
-        int rankNumber = RANK_NUMBER;
+        Map<Rank, Integer> resultStatistics = resultStatus.getResultStatistics();
+        for (Rank rank : resultStatistics.keySet()) {
+            rankDtos.add(RankDto.from(rank, resultStatistics.get(rank)));
 
-        for (Rank rank : Rank.values()) {
-            rankDtos.add(RankDto.from(rank, rankNumber--));
         }
         return new RanksDto(rankDtos, incomeRate);
     }

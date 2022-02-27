@@ -15,7 +15,6 @@ public class Application {
 
         lottoController.determineWinningNumber(InputView.inputWinningNumber(), InputView.inputBonusBall());
 
-        List<Result> results = lottoController.judgeLottos();
-        OutputView.printResult(lottoController.makeResult(results));
+        OutputView.printResult(lottoController.makeResult());
     }
 }

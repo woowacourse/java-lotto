@@ -11,7 +11,7 @@ class ResultTest {
     @DisplayName("결과값을 대조해서 등수를 정한다.(2등)")
     void compare_2등_테스트() {
         Result result = new Result(5, true);
-        boolean actual = result.compare(Rank.SECOND);
+        boolean actual = result.isWhatRank(Rank.SECOND);
         boolean expected = true;
         assertThat(actual).isEqualTo(expected);
     }
@@ -20,7 +20,7 @@ class ResultTest {
     @DisplayName("결과값을 대조해서 등수를 정한다.(3등)")
     void compare_3등_테스트() {
         Result result = new Result(5, false);
-        boolean actual = result.compare(Rank.THIRD);
+        boolean actual = result.isWhatRank(Rank.THIRD);
         boolean expected = true;
         assertThat(actual).isEqualTo(expected);
     }
@@ -29,7 +29,7 @@ class ResultTest {
     @DisplayName("결과값을 대조해서 등수를 정한다.(1등)")
     void compare_1등_테스트() {
         Result result = new Result(6, true);
-        boolean actual = result.compare(Rank.FIRST);
+        boolean actual = result.isWhatRank(Rank.FIRST);
         boolean expected = true;
         assertThat(actual).isEqualTo(expected);
 
