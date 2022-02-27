@@ -1,17 +1,16 @@
 package lotto.utils;
 
+import static lotto.domain.Lotto.LOTTO_SIZE;
+import static lotto.domain.LottoNumber.LOTTO_MAXIMUM;
+import static lotto.domain.LottoNumber.LOTTO_MINIMUM;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.LottoNumber;
 
-public class LottoGenerator {
-
-    private static final int LOTTO_MINIMUM = 1;
-    private static final int LOTTO_MAXIMUM = 45;
-    private static final int FROM_LOTTO_INDEX = 0;
-    private static final int TO_LOTTO_INDEX = 6;
+public class LottoNumbersGenerator {
 
     private static final List<LottoNumber> originLottoNumbers;
 
@@ -21,12 +20,12 @@ public class LottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    private LottoGenerator() {
+    private LottoNumbersGenerator() {
     }
 
     public static List<LottoNumber> generateLottoNumbers() {
         Collections.shuffle(originLottoNumbers);
-        return originLottoNumbers.subList(FROM_LOTTO_INDEX, TO_LOTTO_INDEX).stream()
+        return originLottoNumbers.subList(0, LOTTO_SIZE).stream()
                 .sorted()
                 .collect(Collectors.toList());
     }

@@ -12,7 +12,7 @@ public class Lotto {
     private static final String ERROR_DUPLICATION_MESSAGE = "로또 숫자는 중복되면 안됩니다.";
     private static final String ERROR_NULL_MESSAGE = "입력된 값이 null이면 안됩니다.";
 
-    private static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> numbers;
 

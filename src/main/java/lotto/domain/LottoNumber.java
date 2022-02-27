@@ -6,8 +6,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final String ERROR_NUMBERS_RANGE_MESSAGE = "로또 숫자 범위는 1 ~ 45입니다.";
 
-    private static final int LOTTO_MAXIMUM = 45;
-    private static final int LOTTO_MINIMUM = 1;
+    public static final int LOTTO_MINIMUM = 1;
+    public static final int LOTTO_MAXIMUM = 45;
 
     private final int number;
 

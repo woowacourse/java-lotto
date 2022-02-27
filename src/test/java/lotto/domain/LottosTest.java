@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.utils.LottoGenerator.generateLottoNumbers;
+import static lotto.utils.LottoNumbersGenerator.generateLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
