@@ -33,12 +33,16 @@ public class OutputView {
         System.out.println(RESULT_MESSAGE);
         System.out.println(DELIMITER);
         for (RankDto rankDto : ranksDto.getRankDtos()) {
-            printByRank(rankDto, rankDto.getCriteria(), rankDto.getReward(), rankDto.getHitCount());
+            printByRank(rankDto);
         }
         printIncomeRate(ranksDto);
     }
 
-    private static void printByRank(RankDto rankDto, int criteria, int reward, int hitCount) {
+    private static void printByRank(RankDto rankDto) {
+        int criteria = rankDto.getCriteria();
+        int reward = rankDto.getReward();
+        int hitCount = rankDto.getHitCount();
+
         if (rankDto.getRankNumber() == SECOND_RANK) {
             System.out.println(String.format(RESULT_FORMAT, criteria, BONUS_FORMAT, reward, hitCount));
             return;
