@@ -11,7 +11,6 @@ import domain.WinningCount;
 import domain.WinningLotto;
 import domain.strategy.LottoNumberGenerateStrategy;
 import dto.LottoResultDto;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,7 +30,7 @@ public class LottoController {
         LottoQuantity lottoQuantity = getLottoQuantityByInputMoney(inputMoney);
         InputView.printLottoQuantity(lottoQuantity.getLottoQuantity());
 
-        Lottos autoLottos = getRandomLottos(lottoQuantity);
+        Lottos autoLottos = new Lottos(lottoQuantity, lottoNumberGenerator);
         InputView.printLottos(autoLottos);
 
         WinningLotto winningLotto = setupWinningLotto();
@@ -41,22 +40,6 @@ public class LottoController {
 
     private LottoQuantity getLottoQuantityByInputMoney(InputMoney inputMoney) {
         return new LottoQuantity(inputMoney.getMoney() / LottoConstants.SINGLE_LOTTO_PRICE);
-    }
-
-    private Lottos getRandomLottos(LottoQuantity lottoQuantity) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoQuantity.getLottoQuantity(); i++) {
-            lottos.add(new Lotto(getLottoNumbers()));
-        }
-
-        return new Lottos(lottos);
-    }
-
-    private Set<LottoNumber> getLottoNumbers() {
-        return lottoNumberGenerator.generateLottoNumbers()
-                .stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
     }
 
     private WinningLotto setupWinningLotto() {

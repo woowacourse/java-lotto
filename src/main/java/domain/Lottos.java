@@ -1,23 +1,33 @@
 package domain;
 
-import java.util.Collections;
+import domain.strategy.LottoNumberGenerateStrategy;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
-        validateNullOrEmpty(lottos);
-        this.lottos = Collections.unmodifiableList(lottos);
+    public Lottos(LottoQuantity lottoQuantity, LottoNumberGenerateStrategy lottoNumberGenerator) {
+        this.lottos = generateLottos(lottoQuantity, lottoNumberGenerator);
     }
 
-    private void validateNullOrEmpty(List<Lotto> lottos) {
-        if (Objects.isNull(lottos) || lottos.isEmpty()) {
-            throw new IllegalArgumentException("Lotto 목록이 비었습니다");
+    private List<Lotto> generateLottos(LottoQuantity lottoQuantity, LottoNumberGenerateStrategy lottoNumberGenerator) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < lottoQuantity.getLottoQuantity(); i++) {
+            lottos.add(new Lotto(generateLottoNumbers(lottoNumberGenerator)));
         }
+        return lottos;
+    }
+
+    private Set<LottoNumber> generateLottoNumbers(LottoNumberGenerateStrategy lottoNumberGenerator) {
+        return lottoNumberGenerator.generateLottoNumbers()
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 
     public Map<Rank, WinningCount> getResultByWinningLotto(WinningLotto winningLotto) {
@@ -49,5 +59,12 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    @Override
+    public String toString() {
+        return "Lottos{" +
+                "lottos=" + lottos +
+                '}';
     }
 }

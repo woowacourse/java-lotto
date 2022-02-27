@@ -49,4 +49,11 @@ public class Lotto {
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
+    }
 }
