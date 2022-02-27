@@ -3,7 +3,7 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ public class WinningLottoTest {
 
     @BeforeEach
     void setup() {
-        lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+        lotto = new Lotto(Set.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
 
         bonusNumber = new LottoNumber(7);

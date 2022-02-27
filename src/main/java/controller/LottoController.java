@@ -14,6 +14,7 @@ import dto.LottoResultDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import view.InputView;
 import view.ResultView;
@@ -51,11 +52,11 @@ public class LottoController {
         return new Lottos(lottos);
     }
 
-    private List<LottoNumber> getLottoNumbers() {
+    private Set<LottoNumber> getLottoNumbers() {
         return lottoNumberGenerator.generateLottoNumbers()
                 .stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     private WinningLotto setupWinningLotto() {
@@ -74,9 +75,9 @@ public class LottoController {
         try {
             List<Integer> winningNumberValues = InputView.scanWinningNumbers();
 
-            List<LottoNumber> lottoNumbers = winningNumberValues.stream()
+            Set<LottoNumber> lottoNumbers = winningNumberValues.stream()
                     .map(LottoNumber::new)
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toSet());
             return new Lotto(lottoNumbers);
         } catch (IllegalArgumentException exception) {
             InputView.printException(exception);

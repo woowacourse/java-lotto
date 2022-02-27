@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,11 +20,11 @@ public class LottosTest {
 
     @BeforeEach
     void setupLottos() {
-        Lotto lottoNumbers1 = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+        Lotto lottoNumbers1 = new Lotto(Set.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
-        Lotto lottoNumbers2 = new Lotto(List.of(new LottoNumber(13), new LottoNumber(14), new LottoNumber(15),
+        Lotto lottoNumbers2 = new Lotto(Set.of(new LottoNumber(13), new LottoNumber(14), new LottoNumber(15),
                 new LottoNumber(10), new LottoNumber(11), new LottoNumber(12)));
-        Lotto lottoNumbers3 = new Lotto(List.of(new LottoNumber(21), new LottoNumber(22), new LottoNumber(23),
+        Lotto lottoNumbers3 = new Lotto(Set.of(new LottoNumber(21), new LottoNumber(22), new LottoNumber(23),
                 new LottoNumber(28), new LottoNumber(25), new LottoNumber(45)));
 
         winningLotto = new WinningLotto(lottoNumbers1, new LottoNumber(7));
