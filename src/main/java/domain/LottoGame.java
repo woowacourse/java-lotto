@@ -12,15 +12,13 @@ public class LottoGame {
 
     private List<Lotto> lottos = new ArrayList<>();
     private PrizeResult prizeResult = new PrizeResult();
-    private int inputMoney;
 
     public LottoGame(int inputMoney) {
-        this.inputMoney = inputMoney;
-        purchaseMaximumLottos();
+        purchaseMaximumLottos(inputMoney);
     }
 
-    private void purchaseMaximumLottos() {
-        for (int i = 0; i < inputMoney / LOTTO_PRICE; i++) {
+    private void purchaseMaximumLottos(int money) {
+        for (int i = 0; i < money / LOTTO_PRICE; i++) {
             purchase(new RandomPurchaseStrategy());
         }
     }
@@ -31,17 +29,16 @@ public class LottoGame {
     }
 
     public PrizeResult calculatePrizeResult(WinningLotto winningLotto) {
-        lottos.forEach(lotto -> {
-                    Prize winnerPrice = winningLotto.calculatePrize(lotto);
-                    prizeResult.updatePrizeResult(winnerPrice);
-                });
+        for (Lotto lotto : lottos) {
+            prizeResult.updatePrizeResult(winningLotto.calculatePrize(lotto));
+        }
         return prizeResult;
     }
 
     public float calculateEarningRate() {
         long totalPrize = prizeResult.totalPrize();
 
-        float earningRate = (float) totalPrize / inputMoney;
+        float earningRate = (float) totalPrize / lottos.size();
         return (float) (Math.floor(earningRate * 100) / 100.0);
     }
 
