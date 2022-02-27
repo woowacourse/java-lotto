@@ -16,7 +16,6 @@ public class OutputView {
     private static final String DELIMITER = ", ";
     public static final String RESULT_HEADER_MESSAGE = "당첨 통계\n---------\n";
     public static final int STANDARD = 1;
-
     private static final StringBuilder stringBuilder = new StringBuilder();
 
     public static void printTickets(int ticketCount, Tickets tickets) {
