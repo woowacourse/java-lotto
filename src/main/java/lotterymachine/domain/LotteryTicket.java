@@ -11,7 +11,7 @@ public class LotteryTicket {
     private final List<LotteryNumber> numbers;
 
     public LotteryTicket(final List<LotteryNumber> numbers) {
-        validateSize(numbers);
+        validateNumbers(numbers);
         this.numbers = numbers;
     }
 
@@ -31,6 +31,10 @@ public class LotteryTicket {
                 .map(LotteryNumber::getNumber)
                 .collect(Collectors.toUnmodifiableList());
     }
+    private void validateNumbers(List<LotteryNumber> numbers) {
+        validateSize(numbers);
+        validateDuplication(numbers);
+    }
 
     private void validateSize(List<LotteryNumber> numbers) {
         if (!isLotteryTicketSize(numbers.size())) {
@@ -40,5 +44,14 @@ public class LotteryTicket {
 
     private static boolean isLotteryTicketSize(int size) {
         return size == TICKET_SIZE;
+    }
+
+    private void validateDuplication(List<LotteryNumber> numbers) {
+        int count = (int) numbers.stream()
+                .distinct()
+                .count();
+        if (count != numbers.size()) {
+            throw new IllegalArgumentException("중복된 숫자를 입력 받았습니다.");
+        }
     }
 }
