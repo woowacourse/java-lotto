@@ -23,7 +23,7 @@ public class LottoController {
         OutputView.printRanks(ranks);
 
         Money totalReward = Rank.calculateReward(ranks);
-        OutputView.printRate(totalReward.divide(inputMoney));
+        OutputView.printRate(totalReward, inputMoney);
     }
 
     private List<Lotto> buyLottos(Money money) {

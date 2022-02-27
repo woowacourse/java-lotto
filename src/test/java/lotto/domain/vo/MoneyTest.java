@@ -2,6 +2,7 @@ package lotto.domain.vo;
 
 import static org.assertj.core.api.Assertions.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -47,7 +48,7 @@ public class MoneyTest {
         Money totalMoney = new Money(50_000L);
         Money money = new Money(3_000L);
 
-        assertThat(totalMoney.divide(money)).isEqualTo(BigDecimal.valueOf(16.66));
+        assertThat(totalMoney.divide(money, 2, RoundingMode.DOWN)).isEqualTo(BigDecimal.valueOf(16.66));
     }
 
     @ParameterizedTest

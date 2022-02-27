@@ -2,17 +2,20 @@ package lotto.view;
 
 import java.io.PrintStream;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.MessageFormat;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.vo.Money;
 import lotto.domain.vo.Number;
 import lotto.domain.Rank;
 
 public class OutputView {
 
     private static final String DELIMITER = ",";
+    private static final int DECIMAL_PLACE = 2;
 
     public static void printLottos(List<Lotto> lottos) {
         printLottosSize(lottos);
@@ -28,8 +31,12 @@ public class OutputView {
         }
     }
 
-    public static void printRate(BigDecimal rate) {
-        System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", rate.toString()));
+    public static void printRate(Money totalReward, Money inputMoney) {
+        System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", measureRatio(totalReward, inputMoney)));
+    }
+
+    private static BigDecimal measureRatio(Money totalReward, Money inputMoney) {
+        return totalReward.divide(inputMoney, DECIMAL_PLACE, RoundingMode.DOWN);
     }
 
     private static void printLottosSize(List<Lotto> lottos) {

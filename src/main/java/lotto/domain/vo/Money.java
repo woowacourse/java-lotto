@@ -9,7 +9,6 @@ public class Money {
     public static final Money ZERO = new Money(0L);
 
     private static final int MINIMUM_MONEY = 0;
-    private static final int DECIMAL_PLACE = 2;
 
     private final long amount;
 
@@ -26,8 +25,8 @@ public class Money {
         return new Money(this.amount - money.amount);
     }
 
-    public BigDecimal divide(Money money) {
-        return BigDecimal.valueOf(this.amount).divide(BigDecimal.valueOf(money.amount), DECIMAL_PLACE, RoundingMode.DOWN);
+    public BigDecimal divide(Money money, int decimalPlace, RoundingMode roundingMode) {
+        return BigDecimal.valueOf(this.amount).divide(BigDecimal.valueOf(money.amount), decimalPlace, roundingMode);
     }
 
     public boolean isGreaterThan(Money money) {
