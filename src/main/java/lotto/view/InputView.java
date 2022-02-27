@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import lotto.controller.dto.money.MoneyRequestDto;
 
 public class InputView {
 
@@ -21,10 +22,10 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public int getMoney() {
+    public MoneyRequestDto getMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         String input = scanner.nextLine();
-        return parseInt(input);
+        return MoneyRequestDto.from(parseInt(input));
     }
 
     public List<Integer> getNormalNumbers() {

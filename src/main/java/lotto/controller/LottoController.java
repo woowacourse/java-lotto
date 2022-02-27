@@ -4,6 +4,8 @@ import java.util.List;
 import lotto.controller.dto.LottoResultDto;
 import lotto.controller.dto.LottoTicketsDto;
 import lotto.controller.dto.WinningNumberDto;
+import lotto.controller.dto.money.MoneyRequestDto;
+import lotto.controller.dto.money.MoneyResponseDto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
@@ -14,8 +16,8 @@ import lotto.domain.WinningNumber;
 
 public class LottoController {
 
-    public int createTotalCount(int money) {
-        return new Money(money).calculateTicketCount();
+    public MoneyResponseDto createMoney(MoneyRequestDto moneyRequestDto) {
+        return MoneyResponseDto.from(new Money(moneyRequestDto.getPrice()));
     }
 
     public LottoTicketsDto createLottoTickets(int money) {
