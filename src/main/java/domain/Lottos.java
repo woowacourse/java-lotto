@@ -2,9 +2,7 @@ package domain;
 
 import domain.strategy.LottoNumberGenerateStrategy;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -47,23 +45,6 @@ public class Lottos {
                 .count();
 
         return new WinningCount(winningCount);
-    }
-
-    private void increaseCountByRank(Map<Rank, WinningCount> winningResult, Rank rank) {
-        int count = winningResult.get(rank).getCount() + 1;
-        winningResult.put(rank, new WinningCount(count));
-    }
-
-    private Map<Rank, WinningCount> setupWinningResult() {
-        Map<Rank, WinningCount> winningResult = new HashMap<>();
-        winningResult.put(Rank.FIRST, new WinningCount(0));
-        winningResult.put(Rank.SECOND, new WinningCount(0));
-        winningResult.put(Rank.THIRD, new WinningCount(0));
-        winningResult.put(Rank.FOURTH, new WinningCount(0));
-        winningResult.put(Rank.FIFTH, new WinningCount(0));
-        winningResult.put(Rank.NO_MATCH, new WinningCount(0));
-
-        return winningResult;
     }
 
     public List<Lotto> getLottos() {
