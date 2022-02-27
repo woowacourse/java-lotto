@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public class WinningAnalyze {
+	private static final int LOTTO_PRICE = 1000;
+
 	private final Map<Rank, Integer> analyzeResult;
 	private double profitRate;
 
@@ -27,10 +29,10 @@ public class WinningAnalyze {
 	}
 
 	private void calculateProfitRate(Tickets tickets) {
-		double payment = tickets.size() * 1000;
+		double payment = tickets.size() * LOTTO_PRICE;
 		double profit = getProfit();
 
-		profitRate =  (profit / payment);
+		profitRate = (profit / payment);
 	}
 
 	private double getProfit() {

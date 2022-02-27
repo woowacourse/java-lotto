@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Ticket {
+	private static final int CONDITION_FOR_CHECK_BONUS_BALL = 5;
+
 	private final List<Ball> balls;
 
 	public Ticket(final List<Integer> numbers) {
@@ -20,7 +22,7 @@ public class Ticket {
 		int matchCount = countMatch(winningNumber.getWinningBalls());
 		boolean bonusBallMatched = false;
 
-		if(matchCount == 5) {
+		if (matchCount == CONDITION_FOR_CHECK_BONUS_BALL) {
 			bonusBallMatched = balls.contains(winningNumber.getBonusBall());
 		}
 
