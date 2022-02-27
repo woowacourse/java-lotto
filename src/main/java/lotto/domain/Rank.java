@@ -5,11 +5,11 @@ import java.util.Arrays;
 public enum Rank {
 
     MATCH_ZERO_NUMBERS(0, 0, "3개 미만 일치"),
-    MATCH_THREE_NUMBERS(3, 5000, "3개 일치"),
-    MATCH_FOUR_NUMBERS(4, 50000, "4개 일치"),
-    MATCH_FIVE_NUMBERS(5, 1500000, "5개 일치"),
-    MATCH_FIVE_AND_BONUS_NUMBERS(5, 30000000, "5개 일치, 보너스 볼 일치"),
-    MATCH_SIX_NUMBERS(6, 2000000000, "6개 일치");
+    MATCH_THREE_NUMBERS(3, 5_000, "3개 일치"),
+    MATCH_FOUR_NUMBERS(4, 50_000, "4개 일치"),
+    MATCH_FIVE_NUMBERS(5, 1_500_000, "5개 일치"),
+    MATCH_FIVE_AND_BONUS_NUMBERS(5, 30_000_000, "5개 일치, 보너스 볼 일치"),
+    MATCH_SIX_NUMBERS(6, 2_000_000_000, "6개 일치");
 
     private final int matchCount;
     private final int reward;
