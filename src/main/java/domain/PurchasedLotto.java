@@ -4,6 +4,7 @@ import domain.strategy.PurchaseStrategy;
 import domain.strategy.RandomPurchaseStrategy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PurchasedLotto {
@@ -34,7 +35,7 @@ public class PurchasedLotto {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 
 }

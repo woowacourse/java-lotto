@@ -10,7 +10,7 @@ public class LottoGameController {
 
     public void run() {
         PurchasedLotto purchasedLotto = new PurchasedLotto(InputView.inputPrice());
-        OutputView.printPurchasedLotto(purchasedLotto);
+        OutputView.printPurchasedLotto(purchasedLotto.getLottos());
 
         PrizeResult prizeResult = purchasedLotto.prizeResult(initWinningNumber());
         OutputView.printFinalStatistic(prizeResult);
