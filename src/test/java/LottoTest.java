@@ -12,8 +12,8 @@ public class LottoTest {
     @Test
     @DisplayName("일치하는 번호 개수 확인 테스트")
     public void checkMatchNumber() {
-        WinningNumber winningNumber = new WinningNumber(List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)));
-        Lotto lotto = new Lotto(List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)));
+        WinningNumber winningNumber = new WinningNumber(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3), LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
+        Lotto lotto = new Lotto(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3), LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
         int winning = lotto.match(winningNumber);
 
         assertEquals(winning, 6);
@@ -23,8 +23,8 @@ public class LottoTest {
     @CsvSource(value = {"1, true", "2, true", "3, true", "7, false", "34, false"})
     @DisplayName("보너스 볼과 일치하는 번호가 있는지 테스트")
     public void checkBonusBallMatchTest(int number, boolean expected) {
-        LottoNumber bonusBall = LottoNumber.from(number);
-        Lotto lotto = new Lotto(List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)));
+        LottoNumber bonusBall = LottoNumber.valueOf(number);
+        Lotto lotto = new Lotto(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3), LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
 
         assertEquals(lotto.hasBonusBall(bonusBall), expected);
     }

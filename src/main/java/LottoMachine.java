@@ -4,7 +4,7 @@ public class LottoMachine {
     public void start() {
         Money money = new Money(InputView.askInputMoney());
         int lottoCount = calculateCount(money);
-        Lottos lottos = getnerateLottos(lottoCount);
+        Lottos lottos = generateLottos(lottoCount);
 
         WinningNumber winningNumber = InputView.askInputWinningNumber();
         LottoNumber bonusBall = inputBonusBall(winningNumber);
@@ -19,7 +19,7 @@ public class LottoMachine {
         return lottoCount;
     }
 
-    private Lottos getnerateLottos(int lottoCount) {
+    private Lottos generateLottos(int lottoCount) {
         Lottos lottos = Lottos.generateLottos(lottoCount);
         OutputView.printLottos(lottos);
         return lottos;

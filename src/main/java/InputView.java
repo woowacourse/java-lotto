@@ -27,7 +27,7 @@ public class InputView {
         String[] numbers = input.split(SPLIT_REGEX);
         return new WinningNumber(Arrays.stream(numbers)
             .map(number -> convertToInt(number, INPUT_WINNING_NUMBER_ONLY_NUMBER_MESSAGE))
-            .map(number -> LottoNumber.from(number))
+            .map(number -> LottoNumber.valueOf(number))
             .collect(Collectors.toList()));
     }
 
@@ -35,7 +35,7 @@ public class InputView {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
         String input = scanner.nextLine();
         int number = convertToInt(input, INPUT_BONUS_BALL_ONLY_NUMBER_MESSAGE);
-        LottoNumber bonusBall = LottoNumber.from(number);
+        LottoNumber bonusBall = LottoNumber.valueOf(number);
         return bonusBall;
     }
 
