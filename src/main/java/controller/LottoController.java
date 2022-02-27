@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.List;
-
 import domain.Tickets;
 import domain.WinningAnalyze;
 import domain.WinningNumber;
@@ -10,14 +8,13 @@ import view.InputView;
 import view.OutputView;
 
 public class LottoController {
+
 	public void run() {
-		int payment = InputView.getPayment();
-		Tickets tickets = generateTickets(payment);
+		Tickets tickets = generateTickets(InputView.getPayment());
 		OutputView.printTickets(tickets);
 
-		List<Integer> numbers = InputView.getWinningNumber();
-		int bonusBall = InputView.getBonusBall();
-		WinningNumber winningNumber = new WinningNumber(numbers, bonusBall);
+		WinningNumber winningNumber =
+			new WinningNumber(InputView.getWinningNumber(), InputView.getBonusBall());
 
 		WinningAnalyze winningAnalyze = generateStatistics(tickets, winningNumber);
 		OutputView.printStatistics(winningAnalyze);
@@ -36,5 +33,4 @@ public class LottoController {
 
 		return winningAnalyze;
 	}
-
 }
