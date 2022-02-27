@@ -10,6 +10,8 @@ public class LottoGame {
     private static final int NO_YIELD = 0;
     private static final int SUM_BASE = 0;
 
+    private List<Integer> winningLottoNumbers;
+    private int bonusNumber;
     private Lottos lottos;
 
     public LottoGame() {
@@ -23,6 +25,11 @@ public class LottoGame {
         int lottoAmount = money.money() / LOTTO_PRICE;
         lottos = Lottos.buyLottos(lottoAmount);
         return lottos;
+    }
+
+    public void enterWinningLottoNumbersAndBonusNumber(List<Integer> winningLottoNumbers, int bonusNumber) {
+        this.winningLottoNumbers = winningLottoNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
     public void makeResult(List<Integer> winningNumbers, Integer bonusNumber) {
