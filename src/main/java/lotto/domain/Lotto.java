@@ -10,16 +10,16 @@ import java.util.stream.IntStream;
 
 public class Lotto implements Comparable<Lotto> {
     private static final List<Integer> lottoTotalNumbers = new ArrayList<>();
-    private static final int MINIMUM_NUMBER = 1;
-    private static final int MAXIMUM_NUMBER = 45;
-    private static final int LOTTO_COUNT = 6;
-    private static final String ERROR_LOTTO_COUNT = LOTTO_COUNT + "개의 숫자를 입력해주세요";
+    private static final int BALL_COUNT = 6;
+    public static final int LOTTO_PRICE = 1000;
+    private static final String ERROR_BALL_COUNT = BALL_COUNT + "개의 숫자를 입력해주세요";
     private static final String ERROR_DUPLICATED_NUMBER = "번호가 중복됩니다!";
 
+    // TODO: List 말고 Set 으로 바꿀까?
     private final List<Ball> lotto = new ArrayList<>();
 
     static {
-        lottoTotalNumbers.addAll(IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER + 1)
+        lottoTotalNumbers.addAll(IntStream.range(Ball.MINIMUM_NUMBER, Ball.MAXIMUM_NUMBER + 1)
                 .boxed()
                 .collect(Collectors.toList()));
     }
@@ -58,7 +58,7 @@ public class Lotto implements Comparable<Lotto> {
     }
 
     private static ArrayList<Integer> splitLottoNumbers(List<Integer> lottoNumbers) {
-        return new ArrayList<>(lottoNumbers.subList(0, LOTTO_COUNT));
+        return new ArrayList<>(lottoNumbers.subList(0, BALL_COUNT));
     }
 
     private void validateLotto(final List<Integer> numbers) {
@@ -74,8 +74,8 @@ public class Lotto implements Comparable<Lotto> {
     }
 
     private void validateLottoCount(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_COUNT) {
-            throw new IllegalArgumentException(ERROR_LOTTO_COUNT);
+        if (numbers.size() != BALL_COUNT) {
+            throw new IllegalArgumentException(ERROR_BALL_COUNT);
         }
     }
 
