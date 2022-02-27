@@ -14,7 +14,7 @@ public class OutputView {
     private static final String SUFFIX_LOTTO_COUNT = "개를 구매했습니다.";
     private static final String EXPLAIN_WINNING_STATISTICS = "당첨 통계";
     private static final String BASIC_LINE = "---------";
-    private static final String PRINT_WINNING_STATISTIC = "%d개 일치 (%d원)- %d개";
+    private static final String PRINT_WINNING_STATISTIC = "%d개 일치 (%d원) - %d개";
     private static final String PRINT_SECOND_WINNING_STATISTIC = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String PRINT_TOTAL_RETURN = "총 수익률은 %.2f입니다.";
 

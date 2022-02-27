@@ -1,6 +1,5 @@
 package lotto.domain.user;
 
-import lotto.domain.LottoConstant;
 import lotto.exception.InvalidException;
 
 public class Money {

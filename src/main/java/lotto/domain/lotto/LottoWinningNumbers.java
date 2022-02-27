@@ -1,14 +1,8 @@
 package lotto.domain.lotto;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.domain.LottoConstant;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.result.LottoResult;
-import lotto.domain.result.Rank;
 import lotto.exception.InvalidException;
 
 public class LottoWinningNumbers {
@@ -20,10 +14,20 @@ public class LottoWinningNumbers {
     private int bonusNumber;
 
     public LottoWinningNumbers(final String numbers, final int bonusNumber) {
-//        checkNumbers(numbers);
+        checkNumbers(numbers);
         this.winningLotto = new Lotto(createWinningLottoNumbers(numbers));
         checkBonusNumber(winningLotto, bonusNumber);
         this.bonusNumber = bonusNumber;
+    }
+
+    private void checkNumbers(String numbers) {
+        checkNullAndBlank(numbers);
+    }
+
+    private void checkNullAndBlank(String numbers) {
+        if (numbers == null || numbers.isBlank()){
+            throw new IllegalArgumentException(InvalidException.ERROR_NULL_BLANK);
+        }
     }
 
     private List<Integer> createWinningLottoNumbers(final String numbers) {

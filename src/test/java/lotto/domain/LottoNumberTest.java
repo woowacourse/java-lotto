@@ -11,7 +11,8 @@ class LottoNumberTest {
 
     @Test
     public void 로또번호_생성_검증() {
-        List<Integer> testValues = LottoNumber.createLottoNumbers();
+        LottoNumber lottoNumber = new LottoNumber();
+        List<Integer> testValues = lottoNumber.createLottoNumbers();
         assertThat(testValues.size()).isEqualTo(Set.copyOf(testValues).size());
     }
 }

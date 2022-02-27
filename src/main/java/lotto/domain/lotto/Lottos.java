@@ -2,7 +2,6 @@ package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.LottoConstant;
 import lotto.exception.InvalidException;
 
 public class Lottos {
@@ -12,10 +11,11 @@ public class Lottos {
 
     public Lottos(final int money) {
         checkDivideMoney(money);
+        LottoNumber numbers = new LottoNumber();
         int count = money / BASIC_LOTTO_MONEY;
 
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(LottoNumber.createLottoNumbers()));
+            lottos.add(new Lotto(numbers.createLottoNumbers()));
         }
     }
 

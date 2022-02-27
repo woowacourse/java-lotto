@@ -1,7 +1,5 @@
 package lotto.exception;
 
-import lotto.domain.LottoConstant;
-
 public final class InvalidException {
     public static final String ERROR_CREATE_LOTTO = "[ERROR] 잘못된 숫자 입력입니다.";
     public static final String ERROR_INTEGER_RANGE = "[ERROR] 1~45 사이의 수가 아닙니다.";
