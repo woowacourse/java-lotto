@@ -18,4 +18,8 @@ public class LottoNumber {
     private void getRangeLottoNumbers() {
         lottoNumbers = LottoRange.getRangeLottoNumbers();
     }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }
