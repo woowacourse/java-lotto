@@ -2,7 +2,6 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,16 +14,9 @@ public class LottoTest {
         List<Integer> lottoNumber = Arrays.asList(46, 1, 2, 3, 4, 5);
         assertThatThrownBy(() -> {
             new Lotto(lottoNumber);
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    public void createMaximumLimitExceedNumberErrorMessageTest() {
-        List<Integer> lottoNumber = Arrays.asList(46, 1, 2, 3, 4, 5);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Lotto(lottoNumber);
-        });
-        assertThat(exception.getMessage()).contains(String.valueOf(46));
+        })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("46");
     }
 
     @Test
@@ -39,7 +31,9 @@ public class LottoTest {
         List<Integer> lottoNumber = Arrays.asList(-1, 0, 2, 3, 4, 5);
         assertThatThrownBy(() -> {
             Lotto lotto = new Lotto(lottoNumber);
-        }).isInstanceOf(IllegalArgumentException.class);
+        })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("-1");
     }
 
     @Test
@@ -47,16 +41,9 @@ public class LottoTest {
         List<Integer> lottoNumber = Arrays.asList(2, 2, 2, 3, 4, 5);
         assertThatThrownBy(() -> {
             Lotto lotto = new Lotto(lottoNumber);
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    public void createDuplicatedNumberErrorMessageTest() {
-        List<Integer> lottoNumber = Arrays.asList(2, 2, 2, 3, 4, 5);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Lotto(lottoNumber);
-        });
-        assertThat(exception.getMessage()).contains(String.valueOf(2));
+        })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("2");
     }
 
     @Test

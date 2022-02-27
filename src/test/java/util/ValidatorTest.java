@@ -13,7 +13,9 @@ public class ValidatorTest {
         int price = -4000;
         assertThatThrownBy(() -> {
             Validator.validateNegativePrice(price);
-        }).isInstanceOf(IllegalArgumentException.class);
+        })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("음수");
     }
 
     @Test
@@ -29,7 +31,9 @@ public class ValidatorTest {
         String[] winningNumbers = new String[]{"1", "2", "3", "4", "5"};
         assertThatThrownBy(() -> {
             Validator.validateWinningNumberInput(winningNumbers);
-        }).isInstanceOf(IllegalArgumentException.class);
+        })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("6");
     }
 
     @Test
@@ -45,6 +49,8 @@ public class ValidatorTest {
         String input = "a";
         assertThatThrownBy(() -> {
             Validator.validateInteger(input);
-        }).isInstanceOf(IllegalArgumentException.class);
+        })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("문자");
     }
 }
