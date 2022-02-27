@@ -9,11 +9,15 @@ public class RankDto {
     private final boolean isBonus;
     private final long amount;
 
-    public RankDto(Rank rank, long amount) {
+    private RankDto(Rank rank, long amount) {
         this.prizeMoney = rank.getPrizeMoney();
         this.count = rank.getCount();
         this.isBonus = rank.isBonus();
         this.amount = amount;
+    }
+
+    public static RankDto from(Rank rank, long amount) {
+        return new RankDto(rank, amount);
     }
 
     public int getPrizeMoney() {

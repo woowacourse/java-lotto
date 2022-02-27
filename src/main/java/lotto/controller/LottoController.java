@@ -28,14 +28,18 @@ public class LottoController {
 
     public WinningNumberDto createWinningNumber(List<Integer> normalNumbers, int bonusNumber) {
         WinningNumber winningNumber = new WinningNumber(new LottoTicket(normalNumbers), new LottoNumber(bonusNumber));
+
         return WinningNumberDto.from(winningNumber);
     }
 
     public LottoResultDto createLottoResult(int money, WinningNumberDto winningNumberDto,
                                             LottoTicketsDto lottoTicketsDto) {
+
         WinningNumber winningNumber = winningNumberDto.toWinningNumber();
         LottoTickets lottoTickets = lottoTicketsDto.toLottoTickets();
+
         LottoResult lottoResult = lottoTickets.determine(winningNumber);
-        return new LottoResultDto(lottoResult.getRanks(), lottoResult.calculateYield(new Money(money)));
+
+        return LottoResultDto.from(lottoResult.getRanks(), lottoResult.calculateYield(new Money(money)));
     }
 }
