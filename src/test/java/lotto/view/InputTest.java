@@ -42,7 +42,7 @@ class InputTest {
     void win_number_null() {
         assertThatThrownBy(() -> {
             Entering entering = () -> null;
-            List<Integer> winNumber = inputWinNumber(entering);
+            List<Integer> winNumber = inputWinningNumbers(entering);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -51,7 +51,7 @@ class InputTest {
     void win_number_empty() {
         assertThatThrownBy(() -> {
             Entering entering = () -> "";
-            List<Integer> winNumber = inputWinNumber(entering);
+            List<Integer> winNumber = inputWinningNumbers(entering);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -60,7 +60,7 @@ class InputTest {
     void win_number_not_number() {
         assertThatThrownBy(() -> {
             Entering entering = () -> "1번, 2번";
-            List<Integer> winNumber = inputWinNumber(entering);
+            List<Integer> winNumber = inputWinningNumbers(entering);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

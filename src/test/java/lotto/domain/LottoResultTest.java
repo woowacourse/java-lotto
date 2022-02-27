@@ -14,7 +14,7 @@ class LottoResultTest {
 
     @BeforeEach
     void before() {
-        Lotto winLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Ball bonusBall = new Ball(7);
         winningLotto = new WinningLotto(winLotto, bonusBall);
     }
@@ -22,7 +22,7 @@ class LottoResultTest {
     @Test
     @DisplayName("로또들의 일치 개수를 확인 - 1등")
     void match_lottos_first() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lottos lottos = new Lottos(List.of(lotto));
         LottoResult lottoResult = new LottoResult();
 
@@ -34,7 +34,7 @@ class LottoResultTest {
     @Test
     @DisplayName("로또들의 일치 개수를 확인 - 2등")
     void match_lottos_second() {
-        Lotto lotto = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
+        Lotto lotto = new Lotto(List.of(2, 3, 4, 5, 6, 7));
         Lottos lottos = new Lottos(List.of(lotto));
         LottoResult lottoResult = new LottoResult();
 
@@ -46,7 +46,7 @@ class LottoResultTest {
     @Test
     @DisplayName("로또들의 일치 개수를 확인 - 4등")
     void match_lottos_fourth() {
-        Lotto lotto = new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8));
+        Lotto lotto = new Lotto(List.of(3, 4, 5, 6, 7, 8));
         Lottos lottos = new Lottos(List.of(lotto));
         LottoResult lottoResult = new LottoResult();
 

@@ -1,9 +1,5 @@
 package lotto.controller;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import lotto.domain.Ball;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
@@ -15,7 +11,7 @@ import lotto.view.Entering;
 import lotto.view.KeyEnter;
 
 import static lotto.view.Input.*;
-import static lotto.view.Input.inputWinNumber;
+import static lotto.view.Input.inputWinningNumbers;
 import static lotto.view.Output.*;
 
 public class LottoController {
@@ -52,27 +48,27 @@ public class LottoController {
 
     private static WinningLotto getWinningLotto() {
         printRequestWinNumber();
-        Lotto winLotto = createWinNumber();
+        Lotto winningNumbers = createWinningNumbers();
         printRequestBonusBall();
-        return createWinningLotto(winLotto);
+        return createWinningLotto(winningNumbers);
     }
 
-    private static Lotto createWinNumber() {
+    private static Lotto createWinningNumbers() {
         try {
-            return new Lotto(inputWinNumber(entering));
+            return new Lotto(inputWinningNumbers(entering));
         } catch (IllegalArgumentException error) {
             printErrorMessage(error.getMessage());
-            return createWinNumber();
+            return createWinningNumbers();
         }
     }
 
-    private static WinningLotto createWinningLotto(Lotto winLotto) {
+    private static WinningLotto createWinningLotto(Lotto winningNumbers) {
         try {
             Ball bonusBall = new Ball(inputBonusBall(entering));
-            return new WinningLotto(winLotto, bonusBall);
+            return new WinningLotto(winningNumbers, bonusBall);
         } catch (IllegalArgumentException error) {
             printErrorMessage(error.getMessage());
-            return createWinningLotto(winLotto);
+            return createWinningLotto(winningNumbers);
         }
     }
 

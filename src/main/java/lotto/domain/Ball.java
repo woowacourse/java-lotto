@@ -33,7 +33,7 @@ public class Ball {
         if (!(obj instanceof Ball)) {
             return false;
         }
-        Ball ball = (Ball)obj;
+        Ball ball = (Ball) obj;
         return this.number == ball.number;
     }
 

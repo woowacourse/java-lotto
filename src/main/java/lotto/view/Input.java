@@ -15,12 +15,12 @@ public class Input {
         return Integer.parseInt(payment);
     }
 
-    public static List<Integer> inputWinNumber(final Entering entering) {
-        String[] winNumber = getWinNumber(entering);
-        for (String number : winNumber) {
+    public static List<Integer> inputWinningNumbers(final Entering entering) {
+        String[] winningNumbers = getWinningNumbers(entering);
+        for (String number : winningNumbers) {
             validateNumber(number);
         }
-        return Arrays.stream(winNumber)
+        return Arrays.stream(winningNumbers)
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
@@ -32,12 +32,12 @@ public class Input {
         return Integer.parseInt(bonusBall);
     }
 
-    private static String[] getWinNumber(final Entering entering) {
-        String winNumber = entering.enter();
-        if (isBlank(winNumber)) {
+    private static String[] getWinningNumbers(final Entering entering) {
+        String winningNumbers = entering.enter();
+        if (isBlank(winningNumbers)) {
             throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
         }
-        return winNumber.split(DELIMITER);
+        return winningNumbers.split(DELIMITER);
     }
 
     private static void validateNumber(final String input) {
