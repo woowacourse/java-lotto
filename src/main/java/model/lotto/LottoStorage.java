@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.bonusball.BonusBallDTO;
+import model.result.RateOfReturn;
 import model.winningnumber.LottoWinningNumberDTO;
 
 public class LottoStorage {
@@ -29,7 +30,9 @@ public class LottoStorage {
 		return lottoDTOS;
 	}
 
-	public void checkWithWinningNumberAndBonus(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumbersDTO) {
-		lottoStorage.forEach(lotto -> lotto.checkWithWinningNumberAndBonus(bonusBallDTO, winningNumbersDTO));
+	public void checkWithWinningNumberAndBonus(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumbersDTO,
+		RateOfReturn rateOfReturn) {
+		lottoStorage.forEach(
+			lotto -> lotto.checkWithWinningNumberAndBonus(bonusBallDTO, winningNumbersDTO, rateOfReturn));
 	}
 }

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import model.bonusball.BonusBallDTO;
+import model.result.RateOfReturn;
 import model.result.Statistics;
 import model.winningnumber.LottoWinningNumberDTO;
 
@@ -20,15 +21,16 @@ public class Lotto {
 		return new LottoDTO(numbers);
 	}
 
-	public void checkWithWinningNumberAndBonus(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumberDTO) {
+	public void checkWithWinningNumberAndBonus(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumberDTO,
+		RateOfReturn rateOfReturn) {
 		List<Integer> winningNumbers = winningNumberDTO.getWinningNumbers();
 		long count = countMatchingWinningNumber(winningNumbers);
 
 		if (count == CHECKING_BONUS_NUMBER) {
-			checkWithBonusBallAndStore(bonusBallDTO);
+			checkWithBonusBallAndStore(bonusBallDTO, rateOfReturn);
 			return;
 		}
-		storeResult(count);
+		storeResult(count, rateOfReturn);
 	}
 
 	private long countMatchingWinningNumber(List<Integer> winningNumbers) {
@@ -37,17 +39,17 @@ public class Lotto {
 			.count();
 	}
 
-	private void checkWithBonusBallAndStore(BonusBallDTO bonusBallDTO) {
+	private void checkWithBonusBallAndStore(BonusBallDTO bonusBallDTO, RateOfReturn rateOfReturn) {
 		if (numbers.contains(bonusBallDTO.getNumber())) {
-			Statistics.BONUS.addCount();
+			rateOfReturn.saveResult(Statistics.BONUS);
 			return;
 		}
-		Statistics.FIVE.addCount();
+		rateOfReturn.saveResult(Statistics.FIVE);
 	}
 
-	private void storeResult(long count) {
+	private void storeResult(long count, RateOfReturn rateOfReturn) {
 		Arrays.stream(Statistics.values())
 			.filter(statistics -> statistics.getMatchNumber() == count)
-			.forEach(Statistics::addCount);
+			.forEach(statistics -> rateOfReturn.saveResult(statistics));
 	}
 }

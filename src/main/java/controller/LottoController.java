@@ -78,14 +78,14 @@ public class LottoController {
 
 	private void compareLottoWithWinningNumber() {
 		lottoStorage.checkWithWinningNumberAndBonus(bonusBall.getBonusBallDTO(),
-			lottoWinningNumber.getWinningNumbersDTO());
+			lottoWinningNumber.getWinningNumbersDTO(), rateOfReturn);
 	}
 
 	private void showResult() {
 		outputView.printResultMessage();
 		Arrays.stream(Statistics.values())
 			.forEach(statistics -> outputView.printResult(statistics.getMatchNumber(), statistics.getValue(),
-				statistics.getCount(),
+				rateOfReturn.countStatistics(statistics),
 				Statistics.BONUS.getValue()));
 		outputView.printRateOfReturn(rateOfReturn.getRateOfReturn());
 	}
