@@ -10,14 +10,17 @@ import org.junit.jupiter.api.Test;
 class LottoStatisticsTest {
 
     @Test
-    @DisplayName("로또 순위로 통계를 만든다.")
+    @DisplayName("로또 순위로 통계를 정상적으로 만드는지 확인.")
     void createStatisticsWithLottoRanks() {
         // given
         List<LottoRank> ranks = List.of(LottoRank.values());
+        LottoStatistics expected = new LottoStatistics(
+            List.of(LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD, LottoRank.FOURTH,
+                LottoRank.FIFTH));
         // when
         LottoStatistics statistics = new LottoStatistics(ranks);
         // then
-        assertThat(statistics).isNotNull();
+        assertThat(statistics).isEqualTo(expected);
     }
 
     @Test

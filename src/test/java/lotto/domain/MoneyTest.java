@@ -13,7 +13,7 @@ class MoneyTest {
         // given
         Money money = new Money(1000);
         // then
-        assertThat(money).isNotNull();
+        assertThat(money.count()).isEqualTo(1);
     }
 
     @Test

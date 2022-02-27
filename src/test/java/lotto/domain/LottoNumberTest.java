@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 class LottoNumberTest {
 
     @Test
-    @DisplayName("숫자값으로 로또 번호를 생성한다.")
+    @DisplayName("숫자값으로 로또 번호를 정상적으로 생성하는지 확인.")
     void createLottoNumber() {
         // given
         int value = 10;
         // when
         LottoNumber number = new LottoNumber(value);
         // then
-        assertThat(number).isNotNull();
+        assertThat(number.getNumber()).isEqualTo(10);
     }
 
     @Test

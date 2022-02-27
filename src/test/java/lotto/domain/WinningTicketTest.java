@@ -23,7 +23,6 @@ public class WinningTicketTest {
         // then
         assertThatCode(() -> new WinningTicket(lottoTicket, bonusball))
             .doesNotThrowAnyException();
-
     }
 
     @Test
