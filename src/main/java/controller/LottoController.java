@@ -12,7 +12,6 @@ import dto.LottoCountsDto;
 import domain.LottoNumber;
 import domain.LottoReferee;
 import domain.Lottos;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,8 +37,8 @@ public class LottoController {
     }
 
     private List<Lotto> getValidManuals(List<String> manualStrings) {
-        if (manualStrings == null) {
-            return new ArrayList<>();
+        if (manualStrings.isEmpty()) {
+            return List.of();
         }
 
         return manualStrings

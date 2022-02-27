@@ -34,7 +34,7 @@ public class InputView {
 
     public static List<String> requestManualsNumbers(int manualsCount) {
         if (manualsCount == 0) {
-            return null;
+            return List.of();
         }
 
         print(REQUEST_MANUALS_NUMBERS_INPUT_MESSAGE);
