@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 class WinningStatisticsTest {
 
     @Test
-    @DisplayName("당첨된 각 로또들의 통계를 생성하는 기능")
-    void createStatistics() {
+    @DisplayName("당첨된 각 로또들의 통계를 생성하는 기능 1")
+    void createStatistics_01() {
         List<LottoReward> lottoRewards = new ArrayList<>();
         lottoRewards.add(LottoReward.FIRST);
         lottoRewards.add(LottoReward.FIRST);
@@ -23,6 +23,19 @@ class WinningStatisticsTest {
         Map<LottoReward, Integer> statistics = winningStatistics.getWinningStatistics();
 
         assertThat(statistics.get(LottoReward.FIRST)).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("당첨된 각 로또들의 통계를 생성하는 기능 2")
+    void createStatistics_02() {
+        List<LottoReward> lottoRewards = new ArrayList<>();
+        lottoRewards.add(LottoReward.FIRST);
+        lottoRewards.add(LottoReward.FIRST);
+        lottoRewards.add(LottoReward.SECOND);
+
+        WinningStatistics winningStatistics = new WinningStatistics(lottoRewards);
+        Map<LottoReward, Integer> statistics = winningStatistics.getWinningStatistics();
+
         assertThat(statistics.get(LottoReward.SECOND)).isEqualTo(1);
     }
 
