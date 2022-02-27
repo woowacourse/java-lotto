@@ -35,8 +35,8 @@ public class LottoController {
         InputView.printLottos(autoLottos);
 
         WinningLotto winningLotto = setupWinningLotto();
-        Map<Rank, WinningCount> map = autoLottos.getResultByWinningLotto(winningLotto);
-        ResultView.printResult(LottoResultDto.from(map, lottoQuantity));
+        Map<Rank, WinningCount> lottoResult = autoLottos.getResultByWinningLotto(winningLotto);
+        ResultView.printResult(LottoResultDto.from(lottoResult, lottoQuantity));
     }
 
     private LottoQuantity getLottoQuantityByInputMoney(InputMoney inputMoney) {

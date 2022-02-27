@@ -36,15 +36,15 @@ public class Lottos {
     }
 
     private Map<Rank, WinningCount> setupMap() {
-        Map<Rank, WinningCount> map = new HashMap<>();
-        map.put(Rank.FIRST, new WinningCount(0));
-        map.put(Rank.SECOND, new WinningCount(0));
-        map.put(Rank.THIRD, new WinningCount(0));
-        map.put(Rank.FOURTH, new WinningCount(0));
-        map.put(Rank.FIFTH, new WinningCount(0));
-        map.put(Rank.NO_MATCH, new WinningCount(0));
+        Map<Rank, WinningCount> lottoResult = new HashMap<>();
+        lottoResult.put(Rank.FIRST, new WinningCount(0));
+        lottoResult.put(Rank.SECOND, new WinningCount(0));
+        lottoResult.put(Rank.THIRD, new WinningCount(0));
+        lottoResult.put(Rank.FOURTH, new WinningCount(0));
+        lottoResult.put(Rank.FIFTH, new WinningCount(0));
+        lottoResult.put(Rank.NO_MATCH, new WinningCount(0));
 
-        return map;
+        return lottoResult;
     }
 
     public List<Lotto> getLottos() {
