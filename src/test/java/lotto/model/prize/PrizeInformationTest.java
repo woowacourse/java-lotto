@@ -15,19 +15,20 @@ import lotto.model.number.BonusNumber;
 import lotto.model.number.WinningNumbers;
 
 public class PrizeInformationTest {
-	private Lotto lotto;
+	WinningNumbers winningNumbers;
+	BonusNumber bonusNumber;
 
 	@BeforeEach
 	void initializeLotto() {
-		List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-		lotto = new Lotto(lottoNumbers);
+		winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
+		bonusNumber = BonusNumber.from("10", winningNumbers);
+
 	}
 
 	@DisplayName("5등이 3장 당첨됐을때 당첨금은 15000원이다")
 	@Test
 	void pickAmount_5th_3() {
-		WinningNumbers winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "7", "8", "9"));
-		BonusNumber bonusNumber = BonusNumber.from("10", winningNumbers);
+		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
 		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
@@ -42,8 +43,7 @@ public class PrizeInformationTest {
 	@DisplayName("5등이 2장 당첨됐을때 당첨금은 10000원이다")
 	@Test
 	void pickAmount_5th_2() {
-		WinningNumbers winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "7", "8", "9"));
-		BonusNumber bonusNumber = BonusNumber.from("10", winningNumbers);
+		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
 		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 2; i++) {
@@ -58,8 +58,7 @@ public class PrizeInformationTest {
 	@DisplayName("4등이 3장 당첨됐을때 당첨금은 150000원이다")
 	@Test
 	void pickAmount_4th_3() {
-		WinningNumbers winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "4", "8", "9"));
-		BonusNumber bonusNumber = BonusNumber.from("10", winningNumbers);
+		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8));
 		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
