@@ -9,7 +9,7 @@ public class MoneyTest {
 
 	@ParameterizedTest
 	@ValueSource(ints = {1000, 50000, 100000})
-	void testValidMoney(int money) {
+	void testValidMoney(final int money) {
 		assertThatNoException().isThrownBy(() ->
 			new Money(money)
 		);
@@ -17,7 +17,7 @@ public class MoneyTest {
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1, 0, 999, 100001})
-	void testInvalidMoney(int money) {
+	void testInvalidMoney(final int money) {
 		assertThatThrownBy(() ->
 			new Money(money)
 		).isInstanceOf(IllegalArgumentException.class)

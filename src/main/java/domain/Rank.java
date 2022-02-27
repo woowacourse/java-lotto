@@ -41,7 +41,7 @@ public enum Rank {
 			.orElse(Rank.NONE);
 	}
 
-	private static boolean isThirdRank(boolean hasBonusBall, Rank rank) {
+	private static boolean isThirdRank(final boolean hasBonusBall, final Rank rank) {
 		return rank.getCorrectedBalls() == SECOND_AND_THIRD_BALL && !hasBonusBall;
 	}
 

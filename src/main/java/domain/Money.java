@@ -9,16 +9,16 @@ public class Money {
 
 	private int money;
 
-	public Money(int money) {
+	public Money(final int money) {
 		validateMoney(money);
 		this.money = money;
 	}
 
-	private void validateMoney(int money) {
+	private void validateMoney(final int money) {
 		validateRange(money);
 	}
 
-	private void validateRange(int money) {
+	private void validateRange(final int money) {
 		if (money < MINIMUM_MONEY || money > MAXIMUM_MONEY) {
 			throw new IllegalArgumentException(INVALID_MONEY_RANGE_EXCEPTION.getMessage());
 		}

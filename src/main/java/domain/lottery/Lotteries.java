@@ -34,7 +34,7 @@ public class Lotteries {
 		return winners;
 	}
 
-	private void putCountToWinner(Map<Rank, Integer> winners, Rank rank) {
+	private void putCountToWinner(final Map<Rank, Integer> winners, final Rank rank) {
 		if (!rank.equals(Rank.NONE)) {
 			winners.put(rank, winners.get(rank) + 1);
 		}

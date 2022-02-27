@@ -16,7 +16,7 @@ public class LotteryNumber {
 		this.number = number;
 	}
 
-	private void validateNumber(int number) {
+	private void validateNumber(final int number) {
 		if (number < MIN_LOTTERY_NUMBER || number > MAX_LOTTERY_NUMBER) {
 			throw new IllegalArgumentException(INVALID_RANGE_EXCEPTION.getMessage());
 		}

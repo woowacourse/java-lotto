@@ -16,8 +16,8 @@ public class LotteryGame {
 	private static final int LOTTERY_PRICE = 1000;
 
 	private final int theNumberOfLottery;
+	private final LotteryGenerateFamily lotteryGenerator;
 	private Lotteries lotteries;
-	private LotteryGenerateFamily lotteryGenerator;
 	private WinningLottery winningLottery;
 
 	private LotteryGame(final int inputMoney, LotteryGenerateFamily lotteryGenerator) {
@@ -44,12 +44,12 @@ public class LotteryGame {
 	}
 
 	public void createWinningLottery(final List<Integer> winningNumbers, final int bonusBall) {
-		List<LotteryNumber> lotteryNumbers = generateLotteryNumbers(winningNumbers);
-		LotteryNumber bonusLotteryBall = new LotteryNumber(bonusBall);
+		final List<LotteryNumber> lotteryNumbers = generateLotteryNumbers(winningNumbers);
+		final LotteryNumber bonusLotteryBall = new LotteryNumber(bonusBall);
 		winningLottery = WinningLottery.of(lotteryNumbers, bonusLotteryBall);
 	}
 
-	private List<LotteryNumber> generateLotteryNumbers(List<Integer> winningNumbers) {
+	private List<LotteryNumber> generateLotteryNumbers(final List<Integer> winningNumbers) {
 		return winningNumbers.stream()
 			.map(LotteryNumber::new)
 			.collect(Collectors.toList());
@@ -60,11 +60,11 @@ public class LotteryGame {
 	}
 
 	public double makeReturnRate(final Map<Rank, Integer> rankResult) {
-		int totalReturn = getTotalReturn(rankResult);
+		final int totalReturn = getTotalReturn(rankResult);
 		return calculateReturnRate(totalReturn);
 	}
 
-	private int getTotalReturn(Map<Rank, Integer> rankResult) {
+	private int getTotalReturn(final Map<Rank, Integer> rankResult) {
 		int totalReturn = 0;
 		for (Rank rank : rankResult.keySet()) {
 			totalReturn += rankResult.get(rank) * rank.getPrize();

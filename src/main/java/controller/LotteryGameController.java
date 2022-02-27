@@ -11,8 +11,8 @@ import view.OutputView;
 
 public class LotteryGameController {
 
-	private InputView inputView;
-	private OutputView outputView;
+	private final InputView inputView;
+	private final OutputView outputView;
 	private LotteryGame lotteryGame;
 
 	public LotteryGameController(InputView inputView, OutputView outputView) {
@@ -45,7 +45,7 @@ public class LotteryGameController {
 	}
 
 	public void makeResult() {
-		Map<Rank, Integer> ranking = lotteryGame.makeWinner();
+		final Map<Rank, Integer> ranking = lotteryGame.makeWinner();
 		double incomePercent = lotteryGame.makeReturnRate(ranking);
 		outputView.printStatistics(ranking, incomePercent);
 	}

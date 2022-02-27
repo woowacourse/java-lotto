@@ -57,7 +57,7 @@ public class WinningLotteryTest {
 	@DisplayName("당첨번호, 보너스와 입력된 로또 번호를 비교해 올바른 등수를 확인")
 	@ParameterizedTest(name = "{index} {displayName} rank={0}")
 	@MethodSource("generateParameter")
-	void checkRank(List<Integer> lottoNumbers, Rank rank) {
+	void checkRank(final List<Integer> lottoNumbers, final Rank rank) {
 		//given
 		WinningLottery winningLottery = WinningLottery.of(winningNumbers, new LotteryNumber(7));
 		Lottery lottery = Lottery.from(LotteryNumberGenerator.generateLotteryNumbers(lottoNumbers));

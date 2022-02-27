@@ -22,7 +22,7 @@ public class LotteryGameTest {
 	void createLotteries(final int inputMoney) {
 		//given
 		final LotteryGame lotteryGame = LotteryGame.of(inputMoney, new LotteryRandomGeneratorStrategy());
-		int lotteriesToCreate = inputMoney / 1000;
+		final int lotteriesToCreate = inputMoney / 1000;
 		//when
 		//then
 		assertThat(lotteryGame.getLotteries().size()).isEqualTo(lotteriesToCreate);
@@ -35,7 +35,7 @@ public class LotteryGameTest {
 		final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerateMock());
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
-		Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
+		final Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
 		//then
 		for (Rank rank : rankResult.keySet()) {
 			rankResult.get(rank);
@@ -50,8 +50,8 @@ public class LotteryGameTest {
 		final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerateMock());
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
-		Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
-		double percent = lotteryGame.makeReturnRate(rankResult);
+		final Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
+		final double percent = lotteryGame.makeReturnRate(rankResult);
 		//then
 		assertThat(percent).isEqualTo((double)2031555000 / (6 * 1000));
 	}

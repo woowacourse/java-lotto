@@ -48,7 +48,7 @@ public class LotteriesTest {
 		}
 		final Lotteries lotteries = Lotteries.from(lotteriesNumbers);
 		//when
-		Map<Rank, Integer> rankResult = lotteries.getTheNumberOfWinners(
+		final Map<Rank, Integer> rankResult = lotteries.getTheNumberOfWinners(
 			WinningLottery.of(LotteryNumberGenerator.generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
 				new LotteryNumber(7)));
 		//then

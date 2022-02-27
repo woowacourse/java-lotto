@@ -15,7 +15,7 @@ import domain.lottery.LotteryNumber;
 @DisplayName("LotteryGenerator 클래스 테스트")
 public class LotteryGeneratorTest {
 
-	LotteryRandomGeneratorStrategy lotteryGenerator = new LotteryRandomGeneratorStrategy();
+	private final LotteryRandomGeneratorStrategy lotteryGenerator = new LotteryRandomGeneratorStrategy();
 
 	@Test
 	@DisplayName("생성된 6개의 수가 고유한지 확인")

@@ -8,8 +8,8 @@ import domain.Rank;
 
 public class WinningLottery {
 
-	final Lottery winningNumbers;
-	final LotteryNumber bonusBall;
+	private final Lottery winningNumbers;
+	private final LotteryNumber bonusBall;
 
 	private WinningLottery(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
 		this.winningNumbers = Lottery.from(winningNumbers);

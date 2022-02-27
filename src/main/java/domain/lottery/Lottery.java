@@ -20,11 +20,11 @@ public class Lottery {
 		return new Lottery(numbers);
 	}
 
-	private void validateNumbers(List<LotteryNumber> numbers) {
+	private void validateNumbers(final List<LotteryNumber> numbers) {
 		validateSize(numbers.size());
 	}
 
-	private void validateSize(int size) {
+	private void validateSize(final int size) {
 		if (size != LOTTERY_SIZE) {
 			throw new IllegalArgumentException(INVALID_SIZE_EXCEPTION.getMessage());
 		}

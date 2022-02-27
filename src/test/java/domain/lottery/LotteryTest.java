@@ -64,7 +64,7 @@ public class LotteryTest {
 	@ParameterizedTest
 	@MethodSource("generateLotteryAndCorrectCount")
 	@DisplayName("로또 두개의 번호들이 몇개가 일치하는지 정확히 반환하면 성공")
-	void correct_same_count(List<Integer> lotteryNumbers, int correctWinningCount) {
+	void correct_same_count(final List<Integer> lotteryNumbers, final int correctWinningCount) {
 		//given
 		final Lottery lottery = Lottery.from(
 			LotteryNumberGenerator.generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));

@@ -13,14 +13,14 @@ import domain.lottery.LotteryNumber;
 
 public class OutputView {
 
-	public void printStatistics(Map<Rank, Integer> ranking, double incomePercent) {
+	public void printStatistics(final Map<Rank, Integer> ranking, final double incomePercent) {
 		System.out.println(RESULT_STATISTICS.getMessage());
 		printRanking(ranking);
 		printIncomePercent(incomePercent);
 	}
 
-	private void printRanking(Map<Rank, Integer> ranking) {
-		List<Rank> sortedRank = ranking.keySet()
+	private void printRanking(final Map<Rank, Integer> ranking) {
+		final List<Rank> sortedRank = ranking.keySet()
 			.stream()
 			.sorted(Comparator.comparing(Rank::getPrize))
 			.collect(Collectors.toList());
@@ -43,20 +43,20 @@ public class OutputView {
 		System.out.printf(RETURN_RATE.getMessage(), incomePercent);
 	}
 
-	public void printLotteries(List<Lottery> lotteries) {
+	public void printLotteries(final List<Lottery> lotteries) {
 		lotteries.forEach((lottery ->
 			System.out.println(convertToLotteryNumbers(lottery.getNumbers()))
 		));
 	}
 
-	private String convertToLotteryNumbers(List<LotteryNumber> lotteryNumbers) {
+	private String convertToLotteryNumbers(final List<LotteryNumber> lotteryNumbers) {
 		return lotteryNumbers.stream()
 			.map(LotteryNumber::getNumber)
 			.collect(Collectors.toList())
 			.toString();
 	}
 
-	public void printException(String message) {
+	public void printException(final String message) {
 		System.out.println(EXCEPTION_PREFIX.getMessage() + message);
 	}
 }
