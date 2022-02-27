@@ -50,7 +50,7 @@ public class InputView {
     }
 
     private static List<Integer> inputManualLotto() {
-        try  {
+        try {
             return Arrays.stream(scanner.nextLine().split(INPUT_LOTTO_NUMBERS_DELEIMITER))
                     .map(InputView::removeBlank)
                     .map(Integer::parseInt)
