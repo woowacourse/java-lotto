@@ -28,7 +28,7 @@ public enum Rank {
             .orElse(FAIL);
     }
 
-    static Rank match(Lotto lotto, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+    static Rank match(Lotto lotto, Lotto winningNumbers, LottoNumber bonusNumber) {
         return Rank.find(lotto.getMatchScore(winningNumbers), lotto.isMatchNumber(bonusNumber));
     }
 

@@ -15,7 +15,7 @@ class LottoResultTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lottos lottos = new Lottos(Collections.singletonList(lotto));
 
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 45));
+        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45));
         LottoNumber bonusNumber = new LottoNumber(6);
 
         LottoResult lottoResult = LottoResult.create(lottos, winningNumbers, bonusNumber);
@@ -29,7 +29,7 @@ class LottoResultTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lottos lottos = new Lottos(Collections.singletonList(lotto));
 
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 45));
+        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45));
         LottoNumber bonusNumber = new LottoNumber(44);
 
         LottoResult lottoResult = LottoResult.create(lottos, winningNumbers, bonusNumber);

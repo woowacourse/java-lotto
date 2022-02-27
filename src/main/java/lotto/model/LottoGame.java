@@ -5,12 +5,12 @@ import java.util.List;
 public class LottoGame {
     private static final String ERROR_DUPLICATION_BONUS_NUMBER = "보너스 볼 번호가 당첨 번호와 중복입니다.";
 
-    private final WinningNumbers winningNumbers;
+    private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
     public LottoGame(List<Integer> winningNumbers, Integer bonusNumber) {
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);
-        this.winningNumbers = new WinningNumbers(winningNumbers);
+        this.winningNumbers = new Lotto(winningNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 

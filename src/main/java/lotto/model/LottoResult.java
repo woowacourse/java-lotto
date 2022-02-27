@@ -13,7 +13,7 @@ public class LottoResult {
         this.result = result;
     }
 
-    public static LottoResult create(Lottos lottos, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+    public static LottoResult create(Lottos lottos, Lotto winningNumbers, LottoNumber bonusNumber) {
         EnumMap<Rank, Long> collect = lottos.getLottos().stream()
             .map(lotto -> Rank.match(lotto, winningNumbers, bonusNumber))
             .collect(groupingBy(rank -> rank, () -> new EnumMap<>(Rank.class), counting()));

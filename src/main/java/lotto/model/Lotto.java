@@ -33,7 +33,7 @@ public class Lotto {
     private static List<Integer> generateSequentialIntegers() {
         return IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
             .boxed()
-            .collect(Collectors.toUnmodifiableList());
+            .collect(Collectors.toList());
     }
 
     private void validateNumberOfLottoNumbers(List<Integer> lottoNumbers) {
@@ -55,9 +55,9 @@ public class Lotto {
             .collect(Collectors.toUnmodifiableList());
     }
 
-    public int getMatchScore(WinningNumbers winningNumbers) {
+    public int getMatchScore(Lotto winningNumbers) {
         return (int)lottoNumbers.stream()
-            .filter(winningNumbers::matchNumber)
+            .filter(winningNumbers::isMatchNumber)
             .count();
     }
 

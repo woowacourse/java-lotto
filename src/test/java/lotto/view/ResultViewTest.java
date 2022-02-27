@@ -14,7 +14,6 @@ import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.LottoResult;
 import lotto.model.Lottos;
-import lotto.model.WinningNumbers;
 import lotto.model.Yield;
 
 class ResultViewTest {
@@ -42,7 +41,7 @@ class ResultViewTest {
     @Test
     @DisplayName("당첨 통계 출력 확인")
     void printResultStatisticsTest() {
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(7);
 
         ResultView.printResultStatistics(LottoResult.create(lottos, winningNumbers, bonusNumber));
