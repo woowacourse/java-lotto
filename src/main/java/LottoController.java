@@ -15,8 +15,7 @@ public class LottoController {
 
         lottoGame.enterWinningLottoNumbersAndBonusNumber(InputView.askWinningNumbers(), InputView.askBonusNumber());
 
-        lottoGame.produceResults();
-        OutputView.printWinningStatistic();
+        OutputView.printWinningStatistic(lottoGame.produceResults());
         OutputView.printYield(lottoGame.calculateYield());
     }
 }
