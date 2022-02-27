@@ -16,11 +16,12 @@ public class OutputView {
     private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String DELIMITER = ", ";
 
-    public static void printTicketCount(int ticketCount) {
+    private static void printTicketCount(int ticketCount) {
         System.out.println(ticketCount + PURCHASE_MESSAGE);
     }
 
-    public static void printTickets(Tickets tickets) {
+    public static void printTickets(int ticketCount, Tickets tickets) {
+        printTicketCount(ticketCount);
         List<Ticket> purchasedTickets = tickets.getTickets();
         for (Ticket ticket : purchasedTickets) {
             System.out.print("[");
@@ -41,7 +42,7 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printResult(Map<Rank, Integer> result) {
+    public static void printResult(Map<Rank, Integer> result, double yield) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (Rank rank : Rank.getRanks()) {
@@ -53,6 +54,7 @@ public class OutputView {
                 + getCount(result, rank)
                 + "개");
         }
+        printYield(yield);
     }
 
     private static int getCount(Map<Rank, Integer> result, Rank rank) {
@@ -69,7 +71,7 @@ public class OutputView {
         return " ";
     }
 
-    public static void printYield(double yield) {
+    private static void printYield(double yield) {
         System.out.print("총 수익률은 " + yield + "입니다.");
         if (yield < 1) {
             System.out.print(LOSS_MESSAGE);
