@@ -5,13 +5,12 @@ import java.util.List;
 
 public class Lottos {
 
-    private final List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(final int count) {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto());
         }
-        List.of(lottos);
     }
 
     public List<Lotto> getLottos() {

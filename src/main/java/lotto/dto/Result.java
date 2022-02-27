@@ -1,14 +1,13 @@
 package lotto.dto;
 
 import java.util.EnumMap;
-import java.util.HashMap;
 import lotto.domain.Lotto;
 import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Rank;
 
 public class Result {
 
-    private EnumMap<Rank, Integer> result = new EnumMap<Rank, Integer>(Rank.class);
+    private EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
 
     public Result() {
         initResult();

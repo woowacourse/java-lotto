@@ -6,26 +6,26 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int LOTTO_MIN_RANGE = 1;
     private static final int LOTTO_MAX_RANGE = 45;
-    public static final String ERROR_WRONG_LOTTO_NUMBER = "[ERROR] " + LOTTO_MIN_RANGE + "~" + LOTTO_MAX_RANGE + " 사이의 숫자를 입력해주세요..";
+    private static final String ERROR_WRONG_LOTTO_NUMBER = "[ERROR] " + LOTTO_MIN_RANGE + "~" + LOTTO_MAX_RANGE + " 사이의 숫자를 입력해주세요..";
 
     private final int lottoNumber;
 
     public LottoNumber(final int number) {
-        checkLottoRange(number);
+        checkValidLottoRange(number);
         this.lottoNumber = number;
     }
 
     public LottoNumber(final String number) {
-        checkValidate(number);
+        checkValidLottoNumber(number);
         this.lottoNumber = Integer.parseInt(number);
     }
 
-    private void checkValidate(final String number) {
-        checkValidateInt(number);
-        checkLottoRange(Integer.parseInt(number));
+    private void checkValidLottoNumber(final String number) {
+        checkValidInt(number);
+        checkValidLottoRange(Integer.parseInt(number));
     }
 
-    private void checkValidateInt(final String number) {
+    private void checkValidInt(final String number) {
         try {
             Integer.parseInt(number);
         } catch (NumberFormatException exception) {
@@ -33,7 +33,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    private void checkLottoRange(final int number) {
+    private void checkValidLottoRange(final int number) {
         if (!(number >= LOTTO_MIN_RANGE && number <= LOTTO_MAX_RANGE)) {
             throw new IllegalArgumentException(ERROR_WRONG_LOTTO_NUMBER);
         }
