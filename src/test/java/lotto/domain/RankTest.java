@@ -57,14 +57,15 @@ class RankTest {
     }
 
     @Test
-    @DisplayName("로또를 살 수 있는 최대 갯수로 1등에 모두 당첨될 경우 2000억을 반환한다.")
+    @DisplayName("로또를 살 수 있는 최대 갯수로 1등에 모두 당첨될 경우 해당 금액을 반환한다.")
     void getMaxReward() {
         List<Rank> ranks = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        int maxCount = 100;
+        for (int i = 0; i < maxCount; i++) {
             ranks.add(Rank.FIRST);
         }
         Money money = Rank.calculateReward(ranks);
 
-        assertThat(money).isEqualTo(new Money(2_000_000_000L * 100L));
+        assertThat(money).isEqualTo(new Money(Rank.FIRST.getReward().getValue() * maxCount));
     }
 }
