@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Objects;
+
 public class Money {
 
     private static final String MIN_UNIT_MESSAGE = "[ERROR] 구입 금액은 1000원 단위이어야 합니다.";
@@ -24,5 +26,22 @@ public class Money {
 
     public int getMoney() {
         return money;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Money that = (Money) o;
+        return money == that.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 }
