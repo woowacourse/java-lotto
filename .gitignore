@@ -1,3 +1,6 @@
+# Compiled class file
+*.class
+
 HELP.md
 .gradle
 build/
