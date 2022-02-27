@@ -8,7 +8,7 @@ public class InputValidation {
 
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_PRICE = 1000;
-    private static final String LOTTO_NUMBER_DELIMITER = ", ";
+    private static final String LOTTO_NUMBER_DELIMITER = ", |,";
     private static final String ERROR_PRICE_NON_INTEGER = "가격은 정수만 가능합니다.";
     private static final String ERROR_NEGATIVE_INTEGER = "가격은 1000원 이상만 가능합니다.";
     private static final String ERROR_NUM_OF_BALLS = "로또 번호는 6개의 번호를 입력해줘야 합니다.";
