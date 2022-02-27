@@ -1,35 +1,35 @@
 package lotto.model;
 
-public class Money {
+public class LottoMoney {
     private static final int LOTTO_PRICE = 1000;
     private static final String ERROR_NOT_DIVIDED_BY_UNIT_PRICE = "거스름돈을 지급하지 않습니다. 금액이 남지 않게 지불해주세요.";
     private static final String ERROR_NOT_POSITIVE = "구입 금액은 양수여야 합니다.";
 
-    private final int money;
+    private final int lottoMoney;
 
-    public Money(Integer money) {
-        validatePositive(money);
-        validateUnitPrice(money);
-        this.money = money;
+    public LottoMoney(Integer lottoMoney) {
+        validatePositive(lottoMoney);
+        validateUnitPrice(lottoMoney);
+        this.lottoMoney = lottoMoney;
     }
 
-    private void validatePositive(int money) {
-        if (money <= 0) {
+    private void validatePositive(int lottoMoney) {
+        if (lottoMoney <= 0) {
             throw new IllegalArgumentException(ERROR_NOT_POSITIVE);
         }
     }
 
-    private void validateUnitPrice(int money) {
-        if (money % LOTTO_PRICE != 0) {
+    private void validateUnitPrice(int lottoMoney) {
+        if (lottoMoney % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ERROR_NOT_DIVIDED_BY_UNIT_PRICE);
         }
     }
 
     int getLottoSize() {
-        return money / LOTTO_PRICE;
+        return lottoMoney / LOTTO_PRICE;
     }
 
-    public Yield calculateYield(Long totalWinningMoney) {
-        return new Yield(totalWinningMoney / (float)money);
+    public float divide(Long totalWinningMoney) {
+        return totalWinningMoney / (float)lottoMoney;
     }
 }

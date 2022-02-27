@@ -14,8 +14,8 @@ public class LottoGame {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public static Lottos buyLottos(Money money) {
-        return Lottos.generate(money.getLottoSize());
+    public static Lottos buyLottos(LottoMoney lottoMoney) {
+        return Lottos.generate(lottoMoney.getLottoSize());
     }
 
     private void validateDuplicateBonusNumber(List<Integer> winningNumbers, Integer bonusNumber) {
@@ -28,7 +28,7 @@ public class LottoGame {
         return LottoResult.create(lottos, winningNumbers, bonusNumber);
     }
 
-    public Yield calculateYield(Money money, LottoResult lottoResult) {
-        return money.calculateYield(lottoResult.getTotalWinningMoney());
+    public Yield calculateYield(LottoMoney lottoMoney, LottoResult lottoResult) {
+        return Yield.calculate(lottoMoney, lottoResult.getTotalWinningMoney());
     }
 }

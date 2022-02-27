@@ -18,6 +18,10 @@ public enum Rank {
         this.money = money;
     }
 
+    static Rank match(Lotto lotto, Lotto winningNumbers, LottoNumber bonusNumber) {
+        return Rank.find(lotto.getMatchScore(winningNumbers), lotto.isMatchNumber(bonusNumber));
+    }
+
     static Rank find(int matchWinningNumbers, boolean isMatchBonus) {
         if (isMatchBonus && matchWinningNumbers == SECOND.matchScore) {
             return Rank.SECOND;
@@ -26,10 +30,6 @@ public enum Rank {
             .filter(rank -> rank.matchScore == matchWinningNumbers)
             .findFirst()
             .orElse(FAIL);
-    }
-
-    static Rank match(Lotto lotto, Lotto winningNumbers, LottoNumber bonusNumber) {
-        return Rank.find(lotto.getMatchScore(winningNumbers), lotto.isMatchNumber(bonusNumber));
     }
 
     public int getMatchScore() {
