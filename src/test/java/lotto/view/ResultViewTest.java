@@ -20,7 +20,7 @@ class ResultViewTest {
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
-    private final Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 33, 41, 5, 7));
+    private final Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 5, 7, 33, 41));
     private final Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 
     @BeforeEach

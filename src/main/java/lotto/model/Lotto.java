@@ -1,8 +1,8 @@
 package lotto.model;
 
+import static java.util.Collections.*;
 import static lotto.model.LottoNumber.*;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,15 +19,15 @@ public class Lotto {
     public Lotto(List<Integer> lottoNumbers) {
         validateNumberOfLottoNumbers(lottoNumbers);
         validateDuplicationLottoNumbers(lottoNumbers);
-        Collections.sort(lottoNumbers);
         this.lottoNumbers = convertIntegersToLottoNumbers(lottoNumbers);
     }
 
     static Lotto generate() {
-        List<Integer> lottoNumbers = generateSequentialIntegers();
-        Collections.shuffle(lottoNumbers);
-
-        return new Lotto(lottoNumbers.subList(0, LOTTO_SIZE));
+        List<Integer> sequentialIntegers = generateSequentialIntegers();
+        shuffle(sequentialIntegers);
+        List<Integer> lottoNumbers = sequentialIntegers.subList(0, LOTTO_SIZE);
+        sort(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 
     private static List<Integer> generateSequentialIntegers() {
