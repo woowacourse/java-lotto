@@ -2,26 +2,25 @@ package lotto.model.number;
 
 import java.util.Objects;
 
-public class WinningNumber implements LottoNumber {
-    private static final String ERROR_TYPE = "[ERROR] 당첨 번호는 숫자로만 입력해주세요";
+public class WinningNumber {
 
-    private final int number;
+    private final Number number;
 
-    private WinningNumber(int number) {
-        checkBound(number);
+    private WinningNumber(Number number) {
         this.number = number;
     }
 
     public static WinningNumber from(String input) {
-        try {
-            return new WinningNumber(Integer.parseInt(input.trim()));
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_TYPE);
-        }
+        Number number = Number.from(input.trim());
+        return new WinningNumber(number);
     }
 
     public boolean match(int number) {
-        return this.number == number;
+        return this.number.getNumber() == number;
+    }
+
+    public Number getNumber() {
+        return number;
     }
 
     @Override

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import lotto.model.Lotto;
 import lotto.model.number.BonusNumber;
+import lotto.model.number.Number;
 import lotto.model.number.WinningNumbers;
 
 public class PrizeInformationTest {
@@ -21,7 +22,7 @@ public class PrizeInformationTest {
 	@BeforeEach
 	void initializeLotto() {
 		winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
-		bonusNumber = BonusNumber.from("10", winningNumbers);
+		bonusNumber = BonusNumber.from(Number.from("10"), winningNumbers);
 
 	}
 

@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import lotto.model.Lotto;
 import lotto.model.number.BonusNumber;
+import lotto.model.number.Number;
 import lotto.model.number.WinningNumbers;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +20,7 @@ public class PrizeTest {
 	@BeforeEach
 	void initializePrizeInformation() {
 		winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
-		bonusNumber = BonusNumber.from("10", winningNumbers);
+		bonusNumber = BonusNumber.from(Number.from("10"), winningNumbers);
 	}
 
 	@DisplayName("3개가 일치하면 5등을 반환한다")

@@ -13,7 +13,7 @@ public class WinningNumberTest {
         assertThatThrownBy(() -> {
             WinningNumber.from("일");
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 당첨 번호는 숫자로만 입력해주세요");
+                .hasMessage("[ERROR] 로또 번호는 숫자로만 입력해주세요");
     }
 
     @DisplayName("당첨 번호가 1 이상 45 이하가 아니면 예외가 발생한다")

@@ -5,12 +5,11 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import lotto.model.Lotto;
-import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.number.BonusNumber;
+import lotto.model.number.Number;
 import lotto.model.number.WinningNumbers;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +23,7 @@ public class PrizeInformationsTest {
 	@BeforeEach
 	void initializePrizeInformation() {
 		winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
-		bonusNumber = BonusNumber.from("10", winningNumbers);
+		bonusNumber = BonusNumber.from(Number.from("10"), winningNumbers);
 	}
 
 	@DisplayName("10000원 어치를 사고 5등이 1장 당첨됐을때 수익률은 0.5이다")

@@ -8,6 +8,7 @@ import lotto.model.Money;
 import lotto.model.dto.LottoDTO;
 import lotto.model.dto.PrizeInformationDTO;
 import lotto.model.number.BonusNumber;
+import lotto.model.number.Number;
 import lotto.model.number.WinningNumbers;
 import lotto.model.prize.MatchResult;
 import lotto.model.prize.PrizeInformations;
@@ -71,7 +72,7 @@ public class Controller {
     private static BonusNumber getBonusNumber(WinningNumbers winningNumbers) {
         String bonusNumberInput = InputView.askBonusNumber();
 
-        return BonusNumber.from(bonusNumberInput, winningNumbers);
+        return BonusNumber.from(Number.from(bonusNumberInput), winningNumbers);
     }
 
 }
