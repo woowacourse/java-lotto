@@ -1,18 +1,17 @@
 package lotto.view;
 
-import static lotto.view.StringFormatValidatorFactory.INVALID_BONUS_NUMBER_FORMAT_MESSAGE;
-import static lotto.view.StringFormatValidatorFactory.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE;
-import static lotto.view.StringFormatValidatorFactory.INVALID_MONEY_FORMAT_MESSAGE;
-import static lotto.view.StringFormatValidatorFactory.lottoValidator;
-import static lotto.view.StringFormatValidatorFactory.moneyValidator;
-import static lotto.view.StringFormatValidatorFactory.numberValidator;
+import static lotto.view.StringFormatValidator.INVALID_BONUS_NUMBER_FORMAT_MESSAGE;
+import static lotto.view.StringFormatValidator.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE;
+import static lotto.view.StringFormatValidator.INVALID_MONEY_FORMAT_MESSAGE;
+import static lotto.view.StringFormatValidator.lottoValidator;
+import static lotto.view.StringFormatValidator.moneyValidator;
+import static lotto.view.StringFormatValidator.numberValidator;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import verus.exception.InvalidFormatException;
 
 public class StringFormatValidatorTest {
 
@@ -22,7 +21,7 @@ public class StringFormatValidatorTest {
     @DisplayName("잘못된 로또 번호 포맷 검증")
     void validateInvalidLottoNumberFormat(String text) {
         assertThatThrownBy(() -> lottoValidator().validate(text))
-            .isInstanceOf(InvalidFormatException.class)
+            .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
     }
 
@@ -38,7 +37,7 @@ public class StringFormatValidatorTest {
     @ValueSource(strings = {"00", "05", "0", "-3", "클레이"})
     void invalidNumberFormat(String text) {
         assertThatThrownBy(() -> numberValidator().validate(text))
-            .isInstanceOf(InvalidFormatException.class)
+            .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(INVALID_BONUS_NUMBER_FORMAT_MESSAGE);
     }
 
@@ -54,7 +53,7 @@ public class StringFormatValidatorTest {
     @DisplayName("비정상적인 금액 형식 입력")
     void invalidMoneyFormat(String text) {
         assertThatThrownBy(() -> moneyValidator().validate(text))
-            .isInstanceOf(InvalidFormatException.class)
+            .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(INVALID_MONEY_FORMAT_MESSAGE);
     }
 
