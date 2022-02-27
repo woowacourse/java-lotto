@@ -1,5 +1,6 @@
 package domain;
 
+import dto.LottoCountsDto;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

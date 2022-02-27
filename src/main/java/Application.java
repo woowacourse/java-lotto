@@ -8,7 +8,7 @@ import static view.OutputView.printPrizePriceRatio;
 import static view.OutputView.printPurchaseInfo;
 
 import controller.LottoController;
-import domain.LottoCountsDto;
+import dto.LottoCountsDto;
 import domain.LottoGame;
 import domain.LottoReferee;
 import domain.Lottos;

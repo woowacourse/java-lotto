@@ -1,7 +1,7 @@
 package common;
 
 import domain.Lotto;
-import domain.LottoCountsDto;
+import dto.LottoCountsDto;
 import domain.LottoNumber;
 import java.util.Arrays;
 import java.util.List;

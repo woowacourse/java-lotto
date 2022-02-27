@@ -1,4 +1,4 @@
-package domain;
+package dto;
 
 public class LottoCountsDto {
 

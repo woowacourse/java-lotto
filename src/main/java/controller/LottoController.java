@@ -8,7 +8,7 @@ import static validator.NumberValidators.validateTotalLottoPriceUnit;
 import static validator.NumberValidators.validateLottoNumbersSize;
 
 import domain.Lotto;
-import domain.LottoCountsDto;
+import dto.LottoCountsDto;
 import domain.LottoNumber;
 import domain.LottoReferee;
 import domain.Lottos;
