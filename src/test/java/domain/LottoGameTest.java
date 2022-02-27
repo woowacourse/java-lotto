@@ -36,19 +36,19 @@ public class LottoGameTest {
     }
 
     @Test
-    void getResultStatistics() {
+    void getResultStatistics_initsWithLottosInput() {
         Lottos lottos = Lottos.of(getLottosExample(firstPrizeLotto, secondPrizeLotto, noPrizeLotto),
                 createCountsDto(3, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
-        Map<LottoResult, Integer> actual = game.getResultStatistics();
+        Map<LottoResult, Integer> stats = game.getResultStatistics();
 
-        assertThat(actual).containsOnlyKeys(LottoResult.values());
-        assertThat(actual.get(LottoResult.FIRST)).isEqualTo(1);
-        assertThat(actual.get(LottoResult.SECOND)).isEqualTo(1);
-        assertThat(actual.get(LottoResult.THIRD)).isEqualTo(0);
-        assertThat(actual.get(LottoResult.FOURTH)).isEqualTo(0);
-        assertThat(actual.get(LottoResult.FIFTH)).isEqualTo(0);
+        assertThat(stats).containsOnlyKeys(LottoResult.values());
+        assertThat(stats.get(LottoResult.FIRST)).isEqualTo(1);
+        assertThat(stats.get(LottoResult.SECOND)).isEqualTo(1);
+        assertThat(stats.get(LottoResult.THIRD)).isEqualTo(0);
+        assertThat(stats.get(LottoResult.FOURTH)).isEqualTo(0);
+        assertThat(stats.get(LottoResult.FIFTH)).isEqualTo(0);
     }
 
     @Test

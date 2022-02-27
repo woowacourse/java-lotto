@@ -39,14 +39,14 @@ class ResultStatisticsTest {
     }
 
     @Test
-    void calculateTotalPrize() {
+    void calculateTotalPrize_returnsSumOfAllPrizesFromStats() {
       int totalPrize = resultStatistics.calculateTotalPrize();
 
         assertThat(totalPrize).isEqualTo(defaultTotalPrize());
     }
 
     @Test
-    void getResultStatistics_throwExceptionOnModify() {
+    void getResultStatistics_exceptionOnModify() {
         Map<LottoResult, Integer> stats = resultStatistics.getResultStatistics();
 
         assertThatExceptionOfType(RuntimeException.class)
