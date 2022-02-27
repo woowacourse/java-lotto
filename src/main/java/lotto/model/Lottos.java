@@ -9,7 +9,7 @@ import lotto.model.prize.MatchResult;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;

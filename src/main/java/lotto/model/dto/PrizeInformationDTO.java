@@ -6,10 +6,10 @@ import lotto.model.prize.Prize;
 import lotto.model.prize.PrizeInformations;
 
 public class PrizeInformationDTO {
-    private int matchingCount;
-    private Boolean bonus;
-    private int amount;
-    private int prizeCount;
+    private final int matchingCount;
+    private final Boolean bonus;
+    private final int amount;
+    private final int prizeCount;
 
     private PrizeInformationDTO(int matchingCount, Boolean bonus, int amount, int prizeCount) {
         this.matchingCount = matchingCount;

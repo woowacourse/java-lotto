@@ -5,8 +5,8 @@ import lotto.model.number.BonusNumber;
 import lotto.model.number.WinningNumbers;
 
 public class MatchResult {
-    private int count;
-    private boolean bonus;
+    private final int count;
+    private final boolean bonus;
 
     private MatchResult(int count, boolean bonus) {
         this.count = count;

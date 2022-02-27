@@ -6,7 +6,7 @@ import lotto.model.Lottos;
 
 public class LottoDTO {
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     private LottoDTO(List<Integer> numbers) {
         this.numbers = numbers;
