@@ -20,7 +20,7 @@ public class LottoResult {
     }
 
     private static Rank match(Lotto lotto, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
-        return Rank.find(lotto.matchWinningNumbers(winningNumbers), lotto.matchNumber(bonusNumber));
+        return Rank.find(lotto.matchWinningNumbers(winningNumbers), lotto.isMatchNumber(bonusNumber));
     }
 
     public Long getRankCount(Rank rank) {

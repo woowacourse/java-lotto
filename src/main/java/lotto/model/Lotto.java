@@ -71,7 +71,7 @@ public class Lotto {
             .collect(Collectors.toList());
     }
 
-    public boolean matchNumber(Object number) {
+    public boolean isMatchNumber(Object number) {
         return lottoNumbers.contains(number);
     }
 }

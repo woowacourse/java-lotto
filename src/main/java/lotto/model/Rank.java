@@ -18,13 +18,14 @@ public enum Rank {
         this.money = money;
     }
 
-    static Rank find(int matchWinningNumbers, boolean matchBonus) {
-        if (matchBonus && matchWinningNumbers == SECOND.value) {
+    static Rank find(int matchWinningNumbers, boolean isMatchBonus) {
+        if (isMatchBonus && matchWinningNumbers == SECOND.value) {
             return Rank.SECOND;
         }
         return Arrays.stream(Rank.values())
-            .filter(rank -> rank.value == matchWinningNumbers && rank != Rank.SECOND)
-            .findFirst().orElse(FAIL);
+            .filter(rank -> rank.value == matchWinningNumbers)
+            .findFirst()
+            .orElse(FAIL);
     }
 
     public int getValue() {

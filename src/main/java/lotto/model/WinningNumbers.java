@@ -10,6 +10,6 @@ public class WinningNumbers {
     }
 
     boolean matchNumber(Object number) {
-        return winningNumbers.matchNumber(number);
+        return winningNumbers.isMatchNumber(number);
     }
 }
