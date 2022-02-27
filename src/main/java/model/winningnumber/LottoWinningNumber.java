@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import rule.LottoRule;
+import rule.Rule;
 import utils.InputValidateUtils;
 
 public class LottoWinningNumber {
@@ -41,7 +41,7 @@ public class LottoWinningNumber {
 	}
 
 	private void validateNumberSize(String numbers) {
-		if (split(numbers).size() != LottoRule.LOTTO_SIZE) {
+		if (split(numbers).size() != Rule.LOTTO_SIZE.getRuleNum()) {
 			throw new IllegalArgumentException(WINNING_NUMBER_SIZE_ERROR_MESSAGE);
 		}
 	}

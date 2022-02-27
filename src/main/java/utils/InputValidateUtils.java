@@ -1,6 +1,6 @@
 package utils;
 
-import rule.LottoRule;
+import rule.Rule;
 
 public class InputValidateUtils {
 	private static final String REGEX_NUMBER = "[0-9]+";
@@ -18,8 +18,8 @@ public class InputValidateUtils {
 	}
 
 	public static void inputOutOfRange(String number, String message) {
-		if (Integer.parseInt(number) < LottoRule.LOTTO_MIN_NUMBER
-			|| Integer.parseInt(number) > LottoRule.LOTTO_MAX_NUMBER) {
+		if (Integer.parseInt(number) < Rule.LOTTO_MIN_NUM.getRuleNum()
+			|| Integer.parseInt(number) > Rule.LOTTO_MAX_NUM.getRuleNum()) {
 			throw new IllegalArgumentException(message);
 		}
 	}
