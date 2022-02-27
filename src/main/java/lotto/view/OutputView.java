@@ -53,4 +53,8 @@ public class OutputView {
     public static void printProfit(final double profit) {
         System.out.print(String.format(PRINT_TOTAL_RETURN, profit));
     }
+
+    public static void printErrorMessage(String value) {
+        System.out.println(value);
+    }
 }

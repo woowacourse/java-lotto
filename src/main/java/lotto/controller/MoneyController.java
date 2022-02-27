@@ -8,7 +8,12 @@ import lotto.view.OutputView;
 public class MoneyController {
 
     public Money createMoney() {
-        return new Money(InputView.inputMoney());
+        try {
+            return new Money(InputView.inputMoney());
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return createMoney();
+        }
     }
 
     public double calculateProfit(final Money money, final LottoResult lottoResult) {

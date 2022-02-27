@@ -21,16 +21,24 @@ public class LottoController {
     }
 
     public LottoWinningNumbers createLottoWinningNumbers() {
-        String value = inputLottoWinningNumbers();
-        int bonusNumber = inputBonusNumber();
+        try {
+            String value = inputLottoWinningNumbers();
+            int bonusNumber = inputBonusNumber();
+            return new LottoWinningNumbers(value, bonusNumber);
+        }catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return createLottoWinningNumbers();
+        }
 
-        return new LottoWinningNumbers(value, bonusNumber);
     }
 
     private String inputLottoWinningNumbers() {
-        String value = removeBlank(InputView.inputLottoWinningNumbers());
-
-        return value;
+        try {
+            return removeBlank(InputView.inputLottoWinningNumbers());
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return inputLottoWinningNumbers();
+        }
     }
 
     private String removeBlank(final String value) {
@@ -40,7 +48,6 @@ public class LottoController {
     public int inputBonusNumber() {
         String bonusNumber = InputView.inputBonusNumber();
         checkValidateInt(bonusNumber);
-
         return Integer.parseInt(bonusNumber);
     }
 
