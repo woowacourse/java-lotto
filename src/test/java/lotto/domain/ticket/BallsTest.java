@@ -13,8 +13,8 @@ import lotto.exception.ball.BallNumberExceptionStatus;
 
 class BallsTest {
 
-    @DisplayName("범위 밖의 번호는 생성할 수 없다.")
-    @ParameterizedTest(name = "[{index}] 번호 : {0}")
+    @DisplayName("범위 밖의 로또 번호는 생성할 수 없다.")
+    @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46, 47})
     void ballsOutOfRangeExceptionTest(final int ballNumber) {
         assertThatThrownBy(() -> Balls.getBall(ballNumber))
@@ -22,20 +22,20 @@ class BallsTest {
                 .hasMessageContaining(BallNumberExceptionStatus.BALL_CANNOT_BE_OUT_OF_RANGE.getMessage());
     }
 
-    @DisplayName("범위 안의 번호는 생성할 수 있다.")
-    @ParameterizedTest(name = "[{index}] 번호 : {0}")
+    @DisplayName("범위 안의 로또 번호는 생성할 수 있다.")
+    @ParameterizedTest
     @ValueSource(ints = {1, 2, 44, 45})
     void ballsGenerateTest(final int ballNumber) {
         assertDoesNotThrow(() -> Balls.getBall(ballNumber));
     }
     
-    @DisplayName("번호는 캐싱되어야 한다.")
-    @ParameterizedTest(name = "[{index}] 번호 : {0}")
+    @DisplayName("로또 번호는 캐싱되어야 한다.")
+    @ParameterizedTest
     @ValueSource(ints = {1, 2, 44, 45})
     void ballsCachingTest(final int ballNumber) {
-        final Ball actualBall = Balls.getBall(ballNumber);
-        final Ball expectedBall = Balls.getBall(ballNumber);
-        assertThat(actualBall).isEqualTo(expectedBall);
+        final Ball ball = Balls.getBall(ballNumber);
+        final Ball cachedBall = Balls.getBall(ballNumber);
+        assertThat(ball).isEqualTo(cachedBall);
     }
 
 }
