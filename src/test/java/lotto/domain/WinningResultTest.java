@@ -13,10 +13,11 @@ public class WinningResultTest {
     public void calculate() {
         List<Ranking> lottoNumbersList = new ArrayList<>();
         lottoNumbersList.add(Ranking.FIFTH);
-        lottoNumbersList.add(Ranking.FIFTH);
         lottoNumbersList.add(Ranking.FOURTH);
+        lottoNumbersList.add(Ranking.THIRD);
 
         WinningResult winningResult = new WinningResult(lottoNumbersList);
-        assertThat(winningResult.calculatePrizeSum()).isEqualTo(60000);
+
+        assertThat(winningResult.calculatePrizeSum()).isEqualTo(1555000);
     }
 }
