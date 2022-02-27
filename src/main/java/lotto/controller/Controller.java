@@ -1,9 +1,12 @@
 package lotto.controller;
 
+import java.util.Set;
+
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Ticket;
 import lotto.domain.WinTicket;
+import lotto.utils.WinTicketGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -37,7 +40,8 @@ public class Controller {
 
     private Ticket requestWinNumbers() {
         try {
-            return Ticket.of(InputView.requestWinNumbers());
+            Set<LottoNumber> winLottoNumbers = WinTicketGenerator.generate(InputView.requestWinNumbers());
+            return new Ticket(winLottoNumbers);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return requestWinNumbers();
