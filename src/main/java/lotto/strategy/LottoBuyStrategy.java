@@ -1,4 +1,4 @@
-package lotto.domain.strategy;
+package lotto.strategy;
 
 import java.util.List;
 import lotto.domain.ChoiceNumber;

@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.BonusNumber;
-import lotto.domain.strategy.LottoBuyStrategy;
+import lotto.strategy.LottoBuyStrategy;
 import lotto.domain.LottoResult;
 import lotto.domain.Lotto;
 import lotto.domain.LottoDto;

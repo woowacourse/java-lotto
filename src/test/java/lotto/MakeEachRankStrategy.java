@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.ChoiceNumber;
 import lotto.domain.Money;
-import lotto.domain.strategy.LottoBuyStrategy;
+import lotto.strategy.LottoBuyStrategy;
 
 public class MakeEachRankStrategy implements LottoBuyStrategy {
     /**

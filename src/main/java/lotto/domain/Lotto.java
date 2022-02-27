@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
-import lotto.domain.strategy.LottoBuyStrategy;
+import lotto.strategy.LottoBuyStrategy;
 
 public class Lotto {
 
