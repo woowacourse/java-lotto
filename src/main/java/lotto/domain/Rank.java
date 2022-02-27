@@ -25,7 +25,7 @@ public enum Rank {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount == total)
                 .findFirst()
-                .orElse(Rank.valueOf(Rank.MATCH_ZERO_NUMBERS.name()));
+                .orElseGet(() -> Rank.valueOf(Rank.MATCH_ZERO_NUMBERS.name()));
     }
 
     public double calculateTotalReward(Integer count) {
