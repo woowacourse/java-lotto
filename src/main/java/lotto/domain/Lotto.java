@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.text.MessageFormat;
 import java.util.HashSet;
 import java.util.List;
 
@@ -23,7 +24,8 @@ public class Lotto {
 
     private void validateSize(List<Number> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6자리 이어야 한다.");
+            String exceptionMessage = MessageFormat.format("로또 번호는 {0}자리 이어야 한다.", LOTTO_SIZE);
+            throw new IllegalArgumentException(exceptionMessage);
         }
     }
 
