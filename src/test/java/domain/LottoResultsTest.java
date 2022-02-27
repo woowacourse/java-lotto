@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("NonAsciiCharacters")
 public class LottoResultsTest {
     @Test
     void 로또당첨_등수_개수() {
