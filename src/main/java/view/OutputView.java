@@ -1,6 +1,7 @@
 package view;
 
 import domain.LottoNumber;
+import domain.LottoResults;
 import domain.Rank;
 import domain.Ticket;
 import domain.Tickets;
@@ -38,7 +39,8 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printResult(Map<Rank, Integer> result) {
+    public static void printResult(LottoResults results) {
+        Map<Rank, Integer> LottoResults = results.getLottoResults();
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (Rank rank : Rank.getRanks()) {
@@ -47,7 +49,7 @@ public class OutputView {
                     + getBonus(rank)
                     + "(" + rank.getAmount()
                     + "원) - "
-                    + getCount(result, rank)
+                    + getCount(LottoResults, rank)
                     + "개");
         }
     }

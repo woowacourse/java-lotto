@@ -18,20 +18,20 @@ public class Amount {
     }
 
     private void checkAmountLottoPriceUnit(int amount) {
-        if (isDivisibleLottoPrice(amount)) {
+        if (canNotDividedByLottoPrice(amount)) {
             throw new IllegalArgumentException(REQUEST_UNIT_OF_LOTTO_PRICE);
         }
     }
 
-    private boolean isDivisibleLottoPrice(int amount) {
+    private boolean canNotDividedByLottoPrice(int amount) {
         return amount % LOTTO_PRICE != 0;
     }
 
-    public int getAmountDividedByLottoPrice() {
+    public int getTicketCount() {
         return amount / LOTTO_PRICE;
     }
 
-    public double getYield(long totalAmount) {
-        return (double) totalAmount / amount;
+    public double getYield(long profit) {
+        return Math.floor(((double) profit / amount) * 100) / 100.0;
     }
 }

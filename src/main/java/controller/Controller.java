@@ -1,33 +1,38 @@
 package controller;
 
-import domain.LottoMachine;
+import domain.Amount;
 import domain.LottoNumber;
+import domain.LottoResults;
 import domain.RandomLottoNumbersGenerator;
 import domain.Ticket;
+import domain.Tickets;
 import domain.WinningNumbers;
 import view.InputView;
 import view.OutputView;
 
 public class Controller {
     public void run() {
-        LottoMachine lottoMachine = createLotto();
-        printTickets(lottoMachine);
+        Amount amount = createAmount();
+        OutputView.printTicketCount(amount.getTicketCount());
+        Tickets tickets = createTickets(amount);
+        OutputView.printTickets(tickets);
         WinningNumbers winningNumbers = getWinningNumbers();
-        printResult(lottoMachine, winningNumbers);
+        LottoResults results = LottoResults.of(winningNumbers, tickets);
+        OutputView.printResult(results);
+        OutputView.printYield(amount.getYield(results.getProfit()));
     }
 
-    private LottoMachine createLotto() {
+    private Tickets createTickets(Amount amount) {
+        return Tickets.of(amount.getTicketCount(), new RandomLottoNumbersGenerator());
+    }
+
+    private Amount createAmount() {
         try {
-            return LottoMachine.from(InputView.requestAmount(), new RandomLottoNumbersGenerator());
+            return new Amount(InputView.requestAmount());
         } catch (IllegalArgumentException exception) {
-            OutputView.printErrorMessage(exception.getMessage());
-            return createLotto();
+            System.out.println(exception.getMessage());
+            return createAmount();
         }
-    }
-
-    private void printTickets(LottoMachine lotto) {
-        OutputView.printTicketCount(lotto.getTicketCount());
-        OutputView.printTickets(lotto.getTickets());
     }
 
     private WinningNumbers getWinningNumbers() {
@@ -57,10 +62,5 @@ public class Controller {
             OutputView.printErrorMessage(exception.getMessage());
             return getBonusNumber();
         }
-    }
-
-    private void printResult(LottoMachine lotto, WinningNumbers winningNumbers) {
-        OutputView.printResult(lotto.getResult(winningNumbers));
-        OutputView.printYield(lotto.getYield(winningNumbers));
     }
 }

@@ -41,7 +41,7 @@ public enum Rank {
         return rank != OTHER;
     }
 
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
 

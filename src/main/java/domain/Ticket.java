@@ -6,9 +6,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Ticket {
-    public static final int LOTTO_SIZE = 6;
+    private static final int LOTTO_SIZE = 6;
     private static final String REQUEST_NON_DUPLICATED_NUMBER = String.format("중복되지 않은 숫자 %d개를 입력해주세요.", LOTTO_SIZE);
-    public static final String DELIMITER = ", ";
+    private static final String DELIMITER = ", ";
     private final Set<LottoNumber> lottoNumbers;
 
     public Ticket(LottoNumbersGenerator lottoNumbersGenerator) {
