@@ -20,7 +20,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public int getSize() {
+    public int numberOfLottery() {
         return lottos.size();
     }
 

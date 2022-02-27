@@ -20,7 +20,7 @@ public class LottoGameTest {
     @DisplayName("입력받은 금액 로또로 바꿔주는 기능 테스트")
     void buyLottoTest() {
         LottoGame lottoGame = new LottoGame();
-        assertThat(lottoGame.buyLotto(new Money(14000)).getSize()).isEqualTo(14);
+        assertThat(lottoGame.buyLotto(new Money(14000)).numberOfLottery()).isEqualTo(14);
     }
 
     @Test

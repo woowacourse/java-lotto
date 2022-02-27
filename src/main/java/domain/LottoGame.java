@@ -59,14 +59,14 @@ public class LottoGame {
     }
 
     public float calculateYield() {
-        if (lottos.getSize() == EMPTY) {
+        if (lottos.numberOfLottery() == EMPTY) {
             return NO_YIELD;
         }
         List<Rewards> ranks = convertLottoResultsToRanks();
         int prizeSum = ranks.stream()
                 .map(Rewards::getPrize)
                 .reduce(BASE_SUM, Integer::sum);
-        return (float) prizeSum / lottos.getSize();
+        return (float) prizeSum / lottos.numberOfLottery();
     }
 
     public Lottos getLottos() {
