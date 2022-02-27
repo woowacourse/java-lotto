@@ -11,24 +11,25 @@ import java.util.List;
 
 public class Player {
 
+    private static final int MINIMUM_PURCHASE_AMOUNT = 1000;
+
     private final Money money;
     private List<Lotto> lottos;
 
-    public Player(Money money) {
-        this.money = money;
+    public Player(int money) {
+        this.money = new Money(money);
         this.lottos = new ArrayList<>();
     }
 
-    private int getNumberOfPurchases() {
-        return money.determineQuantity();
+    public boolean canBuyLotto() {
+        return money.isBiggerThanLottoPrice();
     }
 
-    public void purchaseLotto(LottoGenerator lottoGenerator) {
-        int numberOfPurchases = getNumberOfPurchases();
-        for (int i = 0; i < numberOfPurchases; i++) {
-            lottos.add(lottoGenerator.generateLotto());
-        }
+    public void purchaseLotto(Lotto lotto) {
+        money.deductMoney();
+        lottos.add(lotto);
     }
+
 
     public List<Result> judgeAll(WinningLotto winningLotto) {
         List<Result> result = new ArrayList<>();
@@ -39,7 +40,7 @@ public class Player {
     }
 
     public double calculateIncomeRate(double totalIncome) {
-        return totalIncome / money.getAmount();
+        return totalIncome / (lottos.size() * MINIMUM_PURCHASE_AMOUNT);
     }
 
     public List<Lotto> getLottos() {

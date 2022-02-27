@@ -6,15 +6,19 @@ public class Money {
 
     private static final int MINIMUM_PURCHASE_AMOUNT = 1000;
 
-    private final int amount;
+    private int amount;
 
     public Money(int amount) {
         validateAmount(amount);
         this.amount = amount;
     }
 
-    public int determineQuantity() {
-        return amount / MINIMUM_PURCHASE_AMOUNT;
+    public void deductMoney() {
+        amount -= MINIMUM_PURCHASE_AMOUNT;
+    }
+
+    public boolean isBiggerThanLottoPrice() {
+        return amount >= MINIMUM_PURCHASE_AMOUNT;
     }
 
     private void validateAmount(int amount) {

@@ -1,13 +1,13 @@
 package controller;
 
-import domain.*;
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
 import domain.LottoGenerator.LottoGenerator;
 import domain.LottoGenerator.WinningLottoGenerator;
-import domain.player.Money;
+import domain.Rank;
+import domain.Result;
 import domain.player.Player;
 import dto.LottosDto;
 import dto.RanksDto;
@@ -20,8 +20,11 @@ public class LottoController {
     private WinningLotto winningLotto;
 
     public LottosDto purchase(int purchaseAmount) {
-        player = new Player(new Money(purchaseAmount));
-        player.purchaseLotto(new AutoLottoGenerator());
+        player = new Player(purchaseAmount);
+        LottoGenerator lottoGenerator = new AutoLottoGenerator();
+        while (player.canBuyLotto()) {
+            player.purchaseLotto(lottoGenerator.generateLotto());
+        }
         return LottosDto.from(player.getLottos());
     }
 
@@ -38,7 +41,9 @@ public class LottoController {
 
     public RanksDto makeResult(List<Result> judgeLottos) {
         double totalIncome = Rank.calculateAllResult(judgeLottos);
+        System.out.println(totalIncome);
         double incomeRate = player.calculateIncomeRate(totalIncome);
+        System.out.println("incomeRate = " + incomeRate);
 
         return RanksDto.from(incomeRate);
     }
