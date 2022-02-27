@@ -21,7 +21,7 @@ class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 44, 45));
 
-        int actual = lotto.matchWinningNumbers(winningNumbers);
+        int actual = lotto.getMatchScore(winningNumbers);
 
         assertThat(actual).isEqualTo(4);
     }
@@ -32,7 +32,7 @@ class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(6);
 
-        boolean actual = lotto.matchBonusNumber(bonusNumber);
+        boolean actual = lotto.isMatchBonusNumber(bonusNumber);
 
         assertThat(actual).isTrue();
     }
