@@ -2,11 +2,11 @@ package lotto.view.input;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.AppConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.AppConfig;
 import lotto.exception.LottoException;
 import lotto.exception.ball.BallNumberExceptionStatus;
 import lotto.exception.money.MoneyExceptionStatus;

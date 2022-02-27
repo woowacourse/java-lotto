@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import lotto.domain.rank.Rank;
 import org.junit.jupiter.params.provider.Arguments;
 
+import lotto.domain.rank.Rank;
 import lotto.dto.TicketDto;
 
 public class LottoControllerTestProvider {
