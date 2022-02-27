@@ -64,7 +64,7 @@ public class Lotto {
         return Objects.hash(numbers);
     }
 
-    public static Lotto of(List<Integer> numbers) {
+    public static Lotto create(List<Integer> numbers) {
         if (hasDuplicatedNumber(numbers)) {
             throw new DuplicatedNumberException();
         }

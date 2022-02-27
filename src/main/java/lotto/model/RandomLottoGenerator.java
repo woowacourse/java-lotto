@@ -29,7 +29,7 @@ public class RandomLottoGenerator implements LottoGenerator {
         List<Integer> shuffledList = shuffleNumberList();
         Queue<Integer> queue = queueFromShuffledList(shuffledList);
         List<Integer> numbers = numbers(queue);
-        return Lotto.of(numbers);
+        return Lotto.create(numbers);
     }
 
     private List<Integer> shuffleNumberList() {

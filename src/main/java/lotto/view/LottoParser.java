@@ -15,7 +15,7 @@ public class LottoParser extends Parser<Lotto> {
     public Lotto convert(String text) {
         List<String> splitNumbers = splitNumbers(text);
         List<String> trimNumbers = trimNumbers(splitNumbers);
-        return Lotto.of(toInts(trimNumbers));
+        return Lotto.create(toInts(trimNumbers));
     }
 
     private List<String> splitNumbers(String numbers) {
