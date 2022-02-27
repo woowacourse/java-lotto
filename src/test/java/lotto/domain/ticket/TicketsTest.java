@@ -20,7 +20,7 @@ class TicketsTest {
     private final CustomTicketGenerator customTicketGenerator = APP_CONFIG.ticketGenerator;
 
     private Tickets generateTickets(final List<TicketDto> generatedTickets, final int ticketCount) {
-        customTicketGenerator.initNumbers(generatedTickets);
+        customTicketGenerator.initTickets(generatedTickets);
         return new Tickets(ticketCount, customTicketGenerator);
     }
 
