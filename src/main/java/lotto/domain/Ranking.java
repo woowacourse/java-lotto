@@ -1,51 +1,46 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Optional;
 
 public enum Ranking {
-    FIRST(2000000000, 6, false),
-    SECOND(30000000, 5, true),
-    THIRD(1500000, 5, false),
-    FOURTH(50000, 4, false),
-    FIFTH(5000, 3, false);
+    FIRST(2000000000, 6),
+    SECOND(30000000, 5),
+    THIRD(1500000, 5),
+    FOURTH(50000, 4),
+    FIFTH(5000, 3);
 
     private final int prize;
-    private final int count;
-    private final boolean hasBonusNumber;
+    private final int hitCount;
 
-    Ranking(int prize, int count, boolean hasBonusNumber) {
+    Ranking(int prize, int count) {
         this.prize = prize;
-        this.count = count;
-        this.hasBonusNumber = hasBonusNumber;
+        this.hitCount = count;
     }
 
-    public static Optional<Ranking> findRanking(int cnt, boolean hasBonusNumber) {
+    public static Optional<Ranking> findRanking(int hitCount, boolean hasBonusNumber) {
+        if (hitCount == SECOND.hitCount && hasBonusNumber) {
+            return Optional.of(SECOND);
+        }
         return Arrays.stream(Ranking.values())
-                .filter(ranking -> ranking.count == cnt && ranking.hasBonusNumber == hasBonusNumber)
+                .filter(ranking -> ranking != SECOND)
+                .filter(ranking -> ranking.hitCount == hitCount)
                 .findAny();
     }
 
-    public static Ranking[] sortByPrize() {
-        Ranking[] arr = Ranking.values();
-        Arrays.sort(arr, Comparator.comparingInt(a -> a.prize));
-        return arr;
-    }
-
-    public long calculate(Integer count) {
+    public long multiplyPrizeWithCount(Integer count) {
         return (long) prize * count;
     }
 
-    public int getCount() {
-        return count;
+    public int getHitCount() {
+        return hitCount;
     }
 
     public int getPrize() {
         return prize;
     }
 
-    public boolean getHasBonusBall() {
-        return hasBonusNumber;
+    public boolean isSecond() {
+        return this == SECOND;
     }
 }
