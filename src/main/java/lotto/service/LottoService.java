@@ -1,31 +1,46 @@
 package lotto.service;
 
-import lotto.domain.LottoMatchKind;
-import lotto.domain.LottoNumbers;
-import lotto.domain.PurchaseAmount;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.vo.LottoNumber;
 
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoService {
     private static final int LOTTO_PRICE = 1000;
     private static final int INITIAL_MATCH_COUNT = 0;
 
-    private final List<LottoNumbers> lottoNumbersGroup;
+    private List<LottoNumbers> lottoNumbersGroup;
+    private final LottoGenerator lottoGenerator;
     private final PurchaseAmount purchaseAmount;
+    private final ManualPurchaseCounts manualPurchaseCounts;
     private final Map<LottoMatchKind, Integer> matchResult;
 
-    public LottoService(final LottoGenerator lottoGenerator, final String purchaseAmount) {
+    public LottoService(final LottoGenerator lottoGenerator, final String purchaseAmount, final String manualCounts) {
+        this.lottoGenerator = lottoGenerator;
         this.purchaseAmount = PurchaseAmount.fromPurchaseAmountAndLottoPrice(purchaseAmount, LOTTO_PRICE);
-        lottoNumbersGroup =
-                lottoGenerator.generateLottoNumbersGroup(this.purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE));
+        this.manualPurchaseCounts =
+                new ManualPurchaseCounts(manualCounts, this.purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE));
+        lottoNumbersGroup= new ArrayList<>();
         matchResult = new EnumMap<>(LottoMatchKind.class);
         initializeResult(matchResult);
+    }
+
+    public int getCountOfManualLottoNumbers() {
+        return manualPurchaseCounts.getManualLottoCounts();
+    }
+
+    public void generateManualLottoCounts(final List<List<String>> manualLottoNumbersGroup) {
+        final List<LottoNumbers> manualNumbersGroup = manualLottoNumbersGroup.stream()
+                .map(LottoNumbers::new)
+                .collect(Collectors.toUnmodifiableList());
+        lottoNumbersGroup.addAll(manualNumbersGroup);
+    }
+
+    public void generateAutoLottoNumbers() {
+        final int autoLottoCounts = this.purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE) - lottoNumbersGroup.size();
+        lottoNumbersGroup.addAll(lottoGenerator.generateLottoNumbersGroup(autoLottoCounts));
     }
 
     private void initializeResult(final Map<LottoMatchKind, Integer> result) {

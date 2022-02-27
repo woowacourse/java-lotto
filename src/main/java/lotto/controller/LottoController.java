@@ -10,6 +10,7 @@ import lotto.service.LottoService;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,7 +29,8 @@ public class LottoController {
     private LottoService initializeLottoService(final LottoGenerator lottoGenerator) {
         try {
             final String purchaseAmountInput = inputView.inputPurchaseAmount();
-            return new LottoService(lottoGenerator, purchaseAmountInput);
+            final String manualPurchaseCounts = inputView.inputManualPurchaseCounts();
+            return new LottoService(lottoGenerator, purchaseAmountInput, manualPurchaseCounts);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
             return initializeLottoService(lottoGenerator);
@@ -36,10 +38,34 @@ public class LottoController {
     }
 
     public void run() {
-        outputView.printPurchaseCount(lottoService.getCountOfLottoNumbers());
+        generateManualLottoNumbersGroup();
+        generateAutoLottoNumbersGroup();
+        outputView.printPurchaseCount(lottoService.getCountOfManualLottoNumbers(), lottoService.getCountOfLottoNumbers());
         printLottoNumbersGroup();
         final WinningNumbers winningNumbers = generateWinningNumbers();
         printResult(winningNumbers);
+    }
+
+    private void generateManualLottoNumbersGroup() {
+        try {
+            final int manualLottoCounts = lottoService.getCountOfManualLottoNumbers();
+            List<List<String>> manualLottoNumbersGroup = inputByManualLottoNumbersGroup(manualLottoCounts);
+            lottoService.generateManualLottoCounts(manualLottoNumbersGroup);
+        } catch (final Exception e) {
+            inputView.printErrorMessage(e.getMessage());
+            generateManualLottoNumbersGroup();
+        }
+    }
+
+    private List<List<String>> inputByManualLottoNumbersGroup(int manualLottoCounts) {
+        if (manualLottoCounts == 0) {
+            return Arrays.asList();
+        }
+        return inputView.inputManualPurchaseWinningNumbers(manualLottoCounts);
+    }
+
+    private void generateAutoLottoNumbersGroup() {
+        lottoService.generateAutoLottoNumbers();
     }
 
     private void printLottoNumbersGroup() {

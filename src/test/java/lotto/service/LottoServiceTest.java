@@ -6,6 +6,7 @@ import lotto.domain.WinningNumbers;
 import lotto.domain.generator.LottoCustomGenerator;
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.vo.LottoNumber;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,9 +21,30 @@ import static org.assertj.core.api.Assertions.entry;
 class LottoServiceTest {
     private final LottoGenerator lottoGenerator = new LottoCustomGenerator();
     private final String purchaseAmount = "5000";
-    private final LottoService lottoService = new LottoService(lottoGenerator, purchaseAmount);
+    private final String manualPurchaseCounts = "2";
+    private final LottoService lottoService = new LottoService(lottoGenerator, purchaseAmount, manualPurchaseCounts);
     private final WinningNumbers winningNumbers = new WinningNumbers(
             new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.from("1"));
+
+    @BeforeEach
+    void setUp() {
+        lottoService.generateManualLottoCounts(Arrays.asList(
+                Arrays.asList("4", "5", "6", "7", "8", "9"),
+                Arrays.asList("5", "6", "7", "8", "9", "10")
+        ));
+        lottoService.generateAutoLottoNumbers();
+    }
+
+    @Test
+    @DisplayName("수동 구매 개수를 반환한다.")
+    void getCountOfManualLottoNumbers() {
+        //given
+        final int expected = 2;
+        //when
+        final int actual = lottoService.getCountOfManualLottoNumbers();
+        //then
+        assertThat(actual).isEqualTo(expected);
+    }
 
     @Test
     @DisplayName("구매 개수를 반환한다.")
@@ -38,11 +60,11 @@ class LottoServiceTest {
     @DisplayName("구매한 모든 로또 숫자들을 반환한다.")
     void getLottoNumbersGroup() {
         //given
-        final LottoNumbers first = new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        final LottoNumbers second = new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7"));
-        final LottoNumbers third = new LottoNumbers(Arrays.asList("3", "4", "5", "6", "7", "8"));
-        final LottoNumbers fourth = new LottoNumbers(Arrays.asList("4", "5", "6", "7", "8", "9"));
-        final LottoNumbers fifth = new LottoNumbers(Arrays.asList("5", "6", "7", "8", "9", "10"));
+        final LottoNumbers first = new LottoNumbers(Arrays.asList("4", "5", "6", "7", "8", "9"));
+        final LottoNumbers second = new LottoNumbers(Arrays.asList("5", "6", "7", "8", "9", "10"));
+        final LottoNumbers third = new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        final LottoNumbers fourth = new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7"));
+        final LottoNumbers fifth = new LottoNumbers(Arrays.asList("3", "4", "5", "6", "7", "8"));
         final List<LottoNumbers> expected = Arrays.asList(first, second, third, fourth, fifth);
         //when
         final List<LottoNumbers> actual = lottoService.getLottoNumbersGroup();
