@@ -16,13 +16,13 @@ public class Lottos {
     private final List<Lotto> lottos;
     private final Map<Rank, Integer> rankCount;
 
-    public Lottos(Money money) {
+    public Lottos(Money money) throws RuntimeException {
         this.lottos = new ArrayList<>();
         insertLottoToLottos(money.getBuyingLottoCount());
         rankCount = initMap();
     }
 
-    private void insertLottoToLottos(int countLotto) {
+    private void insertLottoToLottos(int countLotto) throws RuntimeException {
         for (int i = 0; i < countLotto; i++) {
             insert(new Lotto(new AutoLottoNumbersGenerator()));
         }

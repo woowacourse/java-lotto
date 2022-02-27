@@ -12,13 +12,13 @@ public class WinningLotto {
     private final LottoNumbers winningNumbers;
     private final BonusNumber bonusNumber;
 
-    public WinningLotto(LottoNumbers winningNumbers, BonusNumber bonusNumber) {
+    public WinningLotto(LottoNumbers winningNumbers, BonusNumber bonusNumber) throws RuntimeException {
         this.winningNumbers = winningNumbers;
         checkDuplicateNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    public void checkDuplicateNumber(BonusNumber number) {
+    public void checkDuplicateNumber(BonusNumber number) throws RuntimeException {
         if ((winningNumbers.getLottoNumbers().stream()
                 .mapToInt(LottoNumber::getLottoNumber)
                 .boxed()

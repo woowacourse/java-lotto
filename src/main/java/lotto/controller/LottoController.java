@@ -28,7 +28,7 @@ public class LottoController {
         return new Lottos(InputValidator.validateMoney(money));
     }
 
-    private WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) {
+    private WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) throws RuntimeException {
         LottoNumbers lottoNumbers = splitWinningNumbers(winningNumbers);
         BonusNumber lottoBonusNumber = new BonusNumber(toIntBonusNumber(bonusNumber));
         return new WinningLotto(lottoNumbers, lottoBonusNumber);

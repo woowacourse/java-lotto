@@ -8,7 +8,7 @@ public class Money {
 
     private int money;
 
-    public Money(int money) {
+    public Money(int money) throws RuntimeException {
         validateMoney(money);
         this.money = money;
     }

@@ -13,7 +13,7 @@ public class Lotto {
     private final LottoNumbers lottoNumbers;
     private Rank rank;
 
-    public Lotto(LottoGenerator autoLottoNumbersGenerator) {
+    public Lotto(LottoGenerator autoLottoNumbersGenerator) throws RuntimeException {
         this.lottoNumbers = autoLottoNumbersGenerator.generateLottoNumbers(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER,
                 LOTTO_LENGTH);
         this.rank = Rank.LOSER;
