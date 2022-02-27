@@ -12,7 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class WinningNumbersTest {
+public class WinTicketTest {
     private Ticket ticket;
 
     @BeforeEach
@@ -33,7 +33,7 @@ public class WinningNumbersTest {
             new LottoNumber(4),
             new LottoNumber(5),
             new LottoNumber(6));
-        assertThatThrownBy(() -> new WinningNumbers(new Ticket(winNumbers), new LottoNumber(6)))
+        assertThatThrownBy(() -> new WinTicket(new Ticket(winNumbers), new LottoNumber(6)))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -45,7 +45,7 @@ public class WinningNumbersTest {
             new LottoNumber(4),
             new LottoNumber(5),
             new LottoNumber(6)));
-        assertThatCode(() -> new WinningNumbers(winTicket, new LottoNumber(7)))
+        assertThatCode(() -> new WinTicket(winTicket, new LottoNumber(7)))
             .doesNotThrowAnyException();
     }
 
@@ -60,8 +60,8 @@ public class WinningNumbersTest {
             new LottoNumber(n5),
             new LottoNumber(n6)));
         LottoNumber bonusNumber = new LottoNumber(bonus);
-        WinningNumbers winningNumbers = new WinningNumbers(winTicket, bonusNumber);
-        assertThat(winningNumbers.getTicketRank(ticket)).isEqualTo(rank);
+        WinTicket winningTicket = new WinTicket(winTicket, bonusNumber);
+        assertThat(winningTicket.getTicketRank(ticket)).isEqualTo(rank);
     }
 
     static Stream<Arguments> parameters() {

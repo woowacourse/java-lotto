@@ -17,12 +17,12 @@ public class Lotto {
         return amount.getAmountDividedByLottoPrice();
     }
 
-    public Map<Rank, Integer> getResult(WinningNumbers winningNumbers) {
-        return tickets.getResult(winningNumbers);
+    public Map<Rank, Integer> getResult(WinTicket winTicket) {
+        return tickets.getResult(winTicket);
     }
 
-    public double getYield(WinningNumbers winningNumbers) {
-        return tickets.getYield(amount, winningNumbers);
+    public double getYield(WinTicket winTicket) {
+        return tickets.getYield(amount, winTicket);
     }
 
     public Tickets getTickets() {

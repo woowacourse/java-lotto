@@ -3,7 +3,7 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Ticket;
-import lotto.domain.WinningNumbers;
+import lotto.domain.WinTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -11,8 +11,8 @@ public class Controller {
     public void run() {
         Lotto lotto = requestAmountForLotto();
         OutputView.printTickets(lotto.getTicketCount(), lotto.getTickets());
-        WinningNumbers winningNumbers = createWinningNumbers();
-        OutputView.printResult(lotto.getResult(winningNumbers), lotto.getYield(winningNumbers));
+        WinTicket winTicket = createWinTicket();
+        OutputView.printResult(lotto.getResult(winTicket), lotto.getYield(winTicket));
     }
 
     private Lotto requestAmountForLotto() {
@@ -24,14 +24,14 @@ public class Controller {
         }
     }
 
-    private WinningNumbers createWinningNumbers() {
+    private WinTicket createWinTicket() {
         Ticket winTicket = requestWinNumbers();
         LottoNumber bonusNumber = requestBonusNumber();
         try {
-            return new WinningNumbers(winTicket, bonusNumber);
+            return new WinTicket(winTicket, bonusNumber);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return createWinningNumbers();
+            return createWinTicket();
         }
     }
 

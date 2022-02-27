@@ -21,7 +21,7 @@ public class TicketsTest {
 
     @Test
     void 로또당첨_등수_개수() {
-        WinningNumbers winningNumbers = getWinningNumbers();
+        WinTicket winTicket = getWinTicket();
 
         List<Ticket> testTickets = new ArrayList<>();
         testTickets.add(getFirstTicket());
@@ -30,7 +30,7 @@ public class TicketsTest {
         testTickets.add(getThirdTicket());
 
         Tickets tickets = new Tickets(testTickets);
-        Map<Rank, Integer> result = tickets.getResult(winningNumbers);
+        Map<Rank, Integer> result = tickets.getResult(winTicket);
 
         assertThat(result).hasSize(3)
             .contains(entry(Rank.FIRST, 2), entry(Rank.SECOND, 1), entry(Rank.THIRD, 1));
@@ -38,7 +38,7 @@ public class TicketsTest {
 
     @Test
     void 수익률_0() {
-        WinningNumbers winningNumbers = getWinningNumbers();
+        WinTicket winTicket = getWinTicket();
 
         List<Ticket> testTickets = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -47,12 +47,12 @@ public class TicketsTest {
 
         Tickets tickets = new Tickets(testTickets);
 
-        assertThat(tickets.getYield(new Amount(3000), winningNumbers)).isEqualTo(0);
+        assertThat(tickets.getYield(new Amount(3000), winTicket)).isEqualTo(0);
     }
 
     @Test
     void 수익률_1000() {
-        WinningNumbers winningNumbers = getWinningNumbers();
+        WinTicket winTicket = getWinTicket();
 
         List<Ticket> testTickets = new ArrayList<>();
         testTickets.add(getOtherTicket());
@@ -61,12 +61,12 @@ public class TicketsTest {
 
         Tickets tickets = new Tickets(testTickets);
 
-        assertThat(tickets.getYield(new Amount(3000), winningNumbers)).isEqualTo(1000);
+        assertThat(tickets.getYield(new Amount(3000), winTicket)).isEqualTo(1000);
     }
 
     @Test
     void 수익률_035() {
-        WinningNumbers winningNumbers = getWinningNumbers();
+        WinTicket winTicket = getWinTicket();
 
         List<Ticket> testTickets = new ArrayList<>();
         testTickets.add(getFifthTicket());
@@ -75,12 +75,12 @@ public class TicketsTest {
         }
         Tickets tickets = new Tickets(testTickets);
 
-        assertThat(tickets.getYield(new Amount(14000), winningNumbers)).isEqualTo(0.35);
+        assertThat(tickets.getYield(new Amount(14000), winTicket)).isEqualTo(0.35);
     }
 
     @Test
     void 수익률_1등_3명() {
-        WinningNumbers winningNumbers = getWinningNumbers();
+        WinTicket winTicket = getWinTicket();
 
         List<Ticket> testTickets = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -88,23 +88,23 @@ public class TicketsTest {
         }
         Tickets tickets = new Tickets(testTickets);
 
-        assertThat(tickets.getYield(new Amount(3000), winningNumbers)).isEqualTo(2000000);
+        assertThat(tickets.getYield(new Amount(3000), winTicket)).isEqualTo(2000000);
     }
 
     @Test
     void 수익률_1등_14명() {
-        WinningNumbers winningNumbers = getWinningNumbers();
+        WinTicket winTicket = getWinTicket();
         List<Ticket> testTickets = new ArrayList<>();
         for (int i = 0; i < 14; i++) {
             testTickets.add(getFirstTicket());
         }
         Tickets tickets = new Tickets(testTickets);
 
-        assertThat(tickets.getYield(new Amount(14000), winningNumbers)).isEqualTo(2000000);
+        assertThat(tickets.getYield(new Amount(14000), winTicket)).isEqualTo(2000000);
     }
 
 
-    private WinningNumbers getWinningNumbers() {
+    private WinTicket getWinTicket() {
         Ticket winTicket = new Ticket(Set.of(new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(3),
@@ -112,7 +112,7 @@ public class TicketsTest {
             new LottoNumber(5),
             new LottoNumber(16)));
         LottoNumber bonusNumber = new LottoNumber(6);
-        return new WinningNumbers(winTicket, bonusNumber);
+        return new WinTicket(winTicket, bonusNumber);
     }
 
     private Ticket getFifthTicket() {

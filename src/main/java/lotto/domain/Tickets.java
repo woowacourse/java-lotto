@@ -29,8 +29,8 @@ public class Tickets {
         return tickets;
     }
 
-    public Map<Rank, Integer> getResult(WinningNumbers winningNumbers) {
-        List<Rank> ranks = getRanks(winningNumbers);
+    public Map<Rank, Integer> getResult(WinTicket winTicket) {
+        List<Rank> ranks = getRanks(winTicket);
         SortedMap<Rank, Integer> result = new TreeMap<>(Comparator.comparingInt(Rank::getAmount));
 
         for (Rank rank : ranks) {
@@ -39,14 +39,14 @@ public class Tickets {
         return result;
     }
 
-    private List<Rank> getRanks(WinningNumbers winningNumbers) {
+    private List<Rank> getRanks(WinTicket winTicket) {
         return tickets.stream()
-            .map(winningNumbers::getTicketRank)
+            .map(winTicket::getTicketRank)
             .collect(Collectors.toList());
     }
 
-    public double getYield(Amount amount, WinningNumbers winningNumbers) {
-        List<Rank> ranks = getRanks(winningNumbers);
+    public double getYield(Amount amount, WinTicket winTicket) {
+        List<Rank> ranks = getRanks(winTicket);
         long totalAmount = ranks.stream()
             .mapToLong(Rank::getAmount)
             .sum();
