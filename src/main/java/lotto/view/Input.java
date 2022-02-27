@@ -9,6 +9,8 @@ public class Input {
     private static final String ERROR_ONLY_NUMBER = "숫자를 입력해주세요!";
     private static final String DELIMITER = ",";
 
+    private Input() {}
+
     public static int inputPayment(final Entering entering) {
         String payment = entering.enter();
         validateNumber(payment);

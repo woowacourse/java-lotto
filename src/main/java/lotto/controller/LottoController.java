@@ -17,6 +17,8 @@ import static lotto.view.Output.*;
 public class LottoController {
     private static final Entering entering = new KeyEnter();
 
+    private LottoController() {}
+
     public static void run() {
         printRequestPayment();
         Payment payment = createPayment();

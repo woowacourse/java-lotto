@@ -22,6 +22,8 @@ public class Output {
     private static final String PROFIT = "이익이";
     private static final String LOSS = "손해";
 
+    private Output() {}
+
     public static void printErrorMessage(String errorMessage) {
         System.out.println(ERROR_PREFIX + errorMessage);
     }
