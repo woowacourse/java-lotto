@@ -6,7 +6,7 @@ import java.util.List;
 import lotto.model.number.WinningNumbers;
 
 public class Lotto {
-    private static final List<Integer> NOMINEE_NUMBERS = new ArrayList<>();
+    private static final List<Integer> LOTTO_BALLS = new ArrayList<>();
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     private static final int NUMBER_COUNT = 6;
@@ -14,15 +14,15 @@ public class Lotto {
 
     static {
         for (int number = MIN_NUMBER; number <= MAX_NUMBER; number++) {
-            NOMINEE_NUMBERS.add(number);
+            LOTTO_BALLS.add(number);
         }
     }
 
     private final List<Integer> numbers;
 
     public Lotto() {
-        Collections.shuffle(NOMINEE_NUMBERS);
-        List<Integer> numbers = NOMINEE_NUMBERS.subList(0, NUMBER_COUNT);
+        Collections.shuffle(LOTTO_BALLS);
+        List<Integer> numbers = LOTTO_BALLS.subList(0, NUMBER_COUNT);
         Collections.sort(numbers);
 
         this.numbers = List.copyOf(numbers);
