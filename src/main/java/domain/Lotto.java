@@ -1,9 +1,11 @@
+package domain;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Lotto extends Numbers{
+public class Lotto extends Numbers {
 
     private static final int LOTTO_START = 0;
     private static final int LOTTO_END = 6;

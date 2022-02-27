@@ -1,3 +1,9 @@
+package domain;
+
+import domain.LottoNumber;
+import domain.Lottos;
+import domain.Statistic;
+import domain.WinningNumber;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

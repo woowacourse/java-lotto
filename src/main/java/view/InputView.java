@@ -1,6 +1,9 @@
+package view;
+
+import domain.LottoNumber;
+import domain.WinningNumber;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InputView {

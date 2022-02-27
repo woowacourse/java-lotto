@@ -1,3 +1,9 @@
+package view;
+
+import domain.Lotto;
+import domain.Lottos;
+import domain.Rank;
+import domain.Statistic;
 import java.util.EnumMap;
 
 public class OutputView {

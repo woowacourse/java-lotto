@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.EnumMap;
 
 import org.junit.jupiter.api.DisplayName;

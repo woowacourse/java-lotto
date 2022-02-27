@@ -1,4 +1,5 @@
-import java.util.Map;
+package domain;
+
 import java.util.EnumMap;
 
 public class Statistic {

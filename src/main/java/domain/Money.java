@@ -1,3 +1,5 @@
+package domain;
+
 public class Money {
 
     private static final String MIN_UNIT_MESSAGE = "[ERROR] 구입 금액은 1000원 단위이어야 합니다.";

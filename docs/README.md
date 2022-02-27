@@ -27,8 +27,8 @@
   - [ ] 인스턴스 변수들이 가변이기에 발생하는 문제점
 - [x] `InputView`, `Lotto`, `Statistics` 모두 로또의 범위가 `1 ~ 45`라는 것을 알고 있어야한다.
   - [x] `VO`에 대한 학습 필요 [링크](https://tecoble.techcourse.co.kr/post/2020-06-11-value-object/)
-- [ ] `WinningNumber`에 존재하는 검증 로직이 `Lotto`에도 있어야함
-  - [ ] 이때 검증 로직의 중복 해결 방법
+- [x] `WinningNumber`에 존재하는 검증 로직이 `Lotto`에도 있어야함
+  - [x] 이때 검증 로직의 중복 해결 방법 -> 상속을 통한 중복 제거 적용
 - [x] `WinningNumber` 검증 로직 중 코드 개선
   - [x] <s>`filter` -> `anyMatch`</s>
   - [x] for-loop와 메서드 분리를 통해 가독성 개선
@@ -150,6 +150,7 @@
 1. Integer Cache 
    - Integer 클래스 내부에는 IntegerCache 클래스로 -128~127 구간 사이의 Integer 인스턴스를 미리 생성하여 캐싱 
    - Integer `valueOf()`는 인자로 전달 받은 값이 캐시에 있다면 꺼내주고 없다면 생성한다.
+
 ### 참조
 1) Date vs. LocalDateTime(1) : https://jeong-pro.tistory.com/163
    - Date vs. LocalDateTime(2) : https://yhmane.tistory.com/121
