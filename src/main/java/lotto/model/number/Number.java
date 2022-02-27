@@ -1,7 +1,5 @@
 package lotto.model.number;
 
-import java.util.Objects;
-
 public class Number {
 	private static final String ERROR_TYPE = "[ERROR] 로또 번호는 숫자로만 입력해주세요";
 	String ERROR_BOUND = "[ERROR] 로또 번호는 1 이상 45 이하로 입력해주세요";
