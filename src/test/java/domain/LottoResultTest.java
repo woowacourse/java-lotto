@@ -2,11 +2,9 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import util.LottoNumberGenerator;
 import util.ShuffleNumberGenerator;
 
 public class LottoResultTest {
@@ -45,13 +43,5 @@ public class LottoResultTest {
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         this.lottoResult = new LottoResult(lottoTicket, winningLotto);
         assertThat(lottoResult.sumTotalPrice()).isEqualTo(2000000000);
-    }
-
-    class AlwaysSameSixNumberGenerator implements LottoNumberGenerator {
-
-        @Override
-        public List<Integer> generate() {
-            return Arrays.asList(1, 2, 3, 4, 5, 6);
-        }
     }
 }

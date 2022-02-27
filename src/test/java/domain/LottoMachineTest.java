@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import util.LottoNumberGenerator;
 import util.ShuffleNumberGenerator;
 
 public class LottoMachineTest {
@@ -47,20 +46,4 @@ public class LottoMachineTest {
         LottoResult lottoResult = lottoMachine.getResults(winningLotto);
         assertThat(lottoResult.getResultCount().get(LottoRank.RANK_1)).isEqualTo(1);
     }
-
-    class AlwaysSameSixNumberGenerator implements LottoNumberGenerator {
-
-        @Override
-        public List<Integer> generate() {
-            return Arrays.asList(1, 2, 3, 4, 5, 6);
-        }
-    }
-
-    class AlwaysSameLastSixNumberGenerator implements LottoNumberGenerator {
-        @Override
-        public List<Integer> generate() {
-            return Arrays.asList(40, 41, 42, 43, 44, 45);
-        }
-    }
-
 }
