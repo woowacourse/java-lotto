@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import model.bonusball.BonusBallDTO;
+import model.result.Rank;
 import model.result.RateOfReturn;
-import model.result.Statistics;
 import model.winningnumber.LottoWinningNumberDTO;
 
 public class Lotto {
@@ -41,14 +41,14 @@ public class Lotto {
 
 	private void checkWithBonusBallAndStore(BonusBallDTO bonusBallDTO, RateOfReturn rateOfReturn) {
 		if (numbers.contains(bonusBallDTO.getNumber())) {
-			rateOfReturn.saveResult(Statistics.BONUS);
+			rateOfReturn.saveResult(Rank.BONUS);
 			return;
 		}
-		rateOfReturn.saveResult(Statistics.FIVE);
+		rateOfReturn.saveResult(Rank.FIVE);
 	}
 
 	private void storeResult(long count, RateOfReturn rateOfReturn) {
-		Arrays.stream(Statistics.values())
+		Arrays.stream(Rank.values())
 			.filter(statistics -> statistics.getMatchNumber() == count)
 			.forEach(statistics -> rateOfReturn.saveResult(statistics));
 	}

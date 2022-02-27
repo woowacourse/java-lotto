@@ -5,8 +5,8 @@ import java.util.Arrays;
 import model.bonusball.BonusBall;
 import model.lotto.LottoCount;
 import model.lotto.LottoStorage;
+import model.result.Rank;
 import model.result.RateOfReturn;
-import model.result.Statistics;
 import model.winningnumber.LottoWinningNumber;
 import view.InputView;
 import view.OutputView;
@@ -94,10 +94,10 @@ public class LottoController {
 
 	private void showResult() {
 		outputView.printResultMessage();
-		Arrays.stream(Statistics.values())
+		Arrays.stream(Rank.values())
 			.forEach(statistics -> outputView.printResult(statistics.getMatchNumber(), statistics.getValue(),
 				rateOfReturn.countStatistics(statistics),
-				Statistics.BONUS.getValue()));
+				Rank.BONUS.getValue()));
 		outputView.printRateOfReturn(rateOfReturn.getRateOfReturn());
 	}
 

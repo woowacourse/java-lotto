@@ -10,7 +10,7 @@ public class RateOfReturn {
 	private static final int UNIT = 1000;
 	private final int money;
 	private int sumMoneyOfReturns;
-	private Map<Statistics, Integer> countOfResult;
+	private Map<Rank, Integer> countOfResult;
 
 	public RateOfReturn(LottoCount lottoCount) {
 		this.money = lottoCount.getCount() * UNIT;
@@ -18,16 +18,16 @@ public class RateOfReturn {
 		countOfResult = new HashMap<>();
 	}
 
-	public void saveResult(Statistics statistics) {
-		countOfResult.put(statistics, countOfResult.getOrDefault(statistics, 0) + 1);
+	public void saveResult(Rank rank) {
+		countOfResult.put(rank, countOfResult.getOrDefault(rank, 0) + 1);
 	}
 
-	public int countStatistics(Statistics statistics) {
-		return countOfResult.getOrDefault(statistics, 0);
+	public int countStatistics(Rank rank) {
+		return countOfResult.getOrDefault(rank, 0);
 	}
 
 	public double getRateOfReturn() {
-		Arrays.stream(Statistics.values())
+		Arrays.stream(Rank.values())
 			.forEach(
 				statistics -> sumMoneyOfReturns += (countOfResult.getOrDefault(statistics, 0) * statistics.getValue()));
 

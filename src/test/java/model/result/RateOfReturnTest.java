@@ -11,21 +11,21 @@ import model.lotto.LottoCount;
 
 public class RateOfReturnTest {
 	@ParameterizedTest
-	@EnumSource(Statistics.class)
+	@EnumSource(Rank.class)
 	@DisplayName("결과가 저장이 잘 되는지 테스트")
-	void saveResultTest(Statistics statistics) {
+	void saveResultTest(Rank rank) {
 		RateOfReturn rateOfReturn = new RateOfReturn(new LottoCount("1000"));
-		rateOfReturn.saveResult(statistics);
-		assertThat(rateOfReturn.countStatistics(statistics)).isEqualTo(1);
+		rateOfReturn.saveResult(rank);
+		assertThat(rateOfReturn.countStatistics(rank)).isEqualTo(1);
 	}
 
 	@Test
 	@DisplayName("수익률이 정상적으로 출력되는지 테스트")
 	void getRateOfReturn() {
 		RateOfReturn rateOfReturn = new RateOfReturn(new LottoCount("1000"));
-		rateOfReturn.saveResult(Statistics.THREE);
-		rateOfReturn.saveResult(Statistics.BONUS);
+		rateOfReturn.saveResult(Rank.THREE);
+		rateOfReturn.saveResult(Rank.BONUS);
 		assertThat(rateOfReturn.getRateOfReturn()).isEqualTo(
-			(Statistics.THREE.getValue() + Statistics.BONUS.getValue()) / 1000);
+			(Rank.THREE.getValue() + Rank.BONUS.getValue()) / 1000);
 	}
 }

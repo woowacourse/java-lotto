@@ -8,8 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import model.bonusball.BonusBallDTO;
+import model.result.Rank;
 import model.result.RateOfReturn;
-import model.result.Statistics;
 import model.winningnumber.LottoWinningNumberDTO;
 
 public class LottoTest {
@@ -23,7 +23,7 @@ public class LottoTest {
 		RateOfReturn rateOfReturn = new RateOfReturn(new LottoCount("1000"));
 		lotto.checkWithWinningNumberAndBonus(bonusBallDTO, lottoWinningNumberDTO, rateOfReturn);
 
-		assertThat(rateOfReturn.countStatistics(Statistics.BONUS)).isEqualTo(0);
+		assertThat(rateOfReturn.countStatistics(Rank.BONUS)).isEqualTo(0);
 	}
 
 	@Test
@@ -34,6 +34,6 @@ public class LottoTest {
 		BonusBallDTO bonusBallDTO = new BonusBallDTO(6);
 		RateOfReturn rateOfReturn = new RateOfReturn(new LottoCount("1000"));
 		lotto.checkWithWinningNumberAndBonus(bonusBallDTO, lottoWinningNumberDTO, rateOfReturn);
-		assertThat(rateOfReturn.countStatistics(Statistics.FIVE)).isEqualTo(0);
+		assertThat(rateOfReturn.countStatistics(Rank.FIVE)).isEqualTo(0);
 	}
 }
