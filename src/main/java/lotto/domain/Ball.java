@@ -20,7 +20,6 @@ public class Ball {
 
     private void validateLottoNumber(final int number) {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
-            // TODO: 예외 처리 별도 객체 생성
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER);
         }
     }
