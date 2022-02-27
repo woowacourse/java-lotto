@@ -4,33 +4,42 @@ import java.util.Arrays;
 
 public enum LottoPrize {
 
-    MISS(0, 0, 0),
-    FIFTH(3, 0, 5_000),
-    FOURTH(4, 0, 50_000),
-    THIRD(5, 0, 1_500_000),
-    TWICE(5, 1, 30_000_000),
-    FIRST(6, 0, 2_000_000_000);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
-    private final int lottoNumberMatches;
-    private final int bonusNumberMatches;
+    private final int lottoNumberMatchCount;
     private final int reward;
 
-    LottoPrize(int lottoNumberMatches, int bonusNumberMatches, int reward) {
-        this.lottoNumberMatches = lottoNumberMatches;
-        this.bonusNumberMatches = bonusNumberMatches;
+    LottoPrize(int lottoNumberMatchCount, int reward) {
+        this.lottoNumberMatchCount = lottoNumberMatchCount;
         this.reward = reward;
     }
 
-    public static LottoPrize match(int lottoNumberMatches, int bonusNumberMatches) {
+    public static LottoPrize match(int lottoNumberMatches, boolean bonusNumberMatch) {
+        if (lottoNumberMatches == SECOND.lottoNumberMatchCount) {
+            return getSecondOrThirdPrize(bonusNumberMatch);
+        }
+
         return Arrays.stream(LottoPrize.values())
-                .filter(prize -> prize.lottoNumberMatches == lottoNumberMatches)
-                .filter(prize -> !(prize.equals(THIRD)) || prize.bonusNumberMatches == bonusNumberMatches)
+                .filter(prize -> prize.lottoNumberMatchCount == lottoNumberMatches)
                 .findFirst()
                 .orElse(MISS);
+
     }
 
-    public int getLottoNumberMatches() {
-        return lottoNumberMatches;
+    private static LottoPrize getSecondOrThirdPrize(boolean bonusNumberMatch) {
+        if (bonusNumberMatch) {
+            return SECOND;
+        }
+        return THIRD;
+    }
+
+    public int getLottoNumberMatchCount() {
+        return lottoNumberMatchCount;
     }
 
     public int getReward() {

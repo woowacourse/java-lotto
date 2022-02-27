@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
@@ -17,17 +18,11 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        validateNull(numbers);
+        Objects.requireNonNull(numbers, ERROR_NULL_MESSAGE);
         this.numbers = new ArrayList<>(numbers);
 
         validateNumberSix(this.numbers);
         validateDuplication(this.numbers);
-    }
-
-    private void validateNull(List<LottoNumber> numbers) {
-        if (numbers == null) {
-            throw new NullPointerException(ERROR_NULL_MESSAGE);
-        }
     }
 
     private void validateNumberSix(List<LottoNumber> numbers) {
@@ -47,17 +42,13 @@ public class Lotto {
         int lottoNumberMatches = (int) numbers.stream()
                 .filter(winningNumbers::containsLottoNumber)
                 .count();
-        int bonusNumberMatches = (int) numbers.stream()
-                .filter(winningNumbers::equalsBonusNumber)
-                .count();
 
-        return LottoPrize.match(lottoNumberMatches, bonusNumberMatches);
+        return LottoPrize.match(lottoNumberMatches, winningNumbers.containsBonusNumber(this));
     }
 
     public boolean contains(LottoNumber target) {
-        if (target == null) {
-            throw new NullPointerException(ERROR_NULL_MESSAGE);
-        }
+        Objects.requireNonNull(target, ERROR_NULL_MESSAGE);
+
         return numbers.contains(target);
     }
 

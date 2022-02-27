@@ -15,20 +15,20 @@ class LottoPrizeTest {
     @DisplayName("match 메서드는 로또 번호의 일치 횟수에 맞는 LottoPrize를 반환한다.")
     @ParameterizedTest(name = DISPLAY_NAME_ARGUMENTS)
     @MethodSource("matchTestSet")
-    void match(int lottoNumberMatches, int bonusNumberMatches, LottoPrize result) {
+    void match(int lottoNumberMatches, boolean bonusNumberMatches, LottoPrize result) {
         LottoPrize lottoPrize = LottoPrize.match(lottoNumberMatches, bonusNumberMatches);
         assertThat(lottoPrize).isEqualTo(result);
     }
 
     private static Stream<Arguments> matchTestSet() {
         return Stream.of(
-                Arguments.of(2, 0, LottoPrize.MISS),
-                Arguments.of(3, 0, LottoPrize.FIFTH),
-                Arguments.of(4, 0, LottoPrize.FOURTH),
-                Arguments.of(4, 1, LottoPrize.FOURTH),
-                Arguments.of(5, 0, LottoPrize.THIRD),
-                Arguments.of(5, 1, LottoPrize.TWICE),
-                Arguments.of(6, 0, LottoPrize.FIRST)
+                Arguments.of(2, false, LottoPrize.MISS),
+                Arguments.of(3, false, LottoPrize.FIFTH),
+                Arguments.of(4, false, LottoPrize.FOURTH),
+                Arguments.of(4, true, LottoPrize.FOURTH),
+                Arguments.of(5, false, LottoPrize.THIRD),
+                Arguments.of(5, true, LottoPrize.SECOND),
+                Arguments.of(6, false, LottoPrize.FIRST)
         );
     }
 }

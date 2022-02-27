@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoResults {
 
@@ -9,16 +10,10 @@ public class LottoResults {
     private final Map<LottoPrize, Integer> results;
 
     public LottoResults(Map<LottoPrize, Integer> results) {
-        validateNull(results);
+        Objects.requireNonNull(results, ERROR_NULL_ARGUMENT_MESSAGE);
         addMissingKey(results);
 
         this.results = results;
-    }
-
-    private void validateNull(Map<LottoPrize, Integer> results) {
-        if (results == null) {
-            throw new NullPointerException(ERROR_NULL_ARGUMENT_MESSAGE);
-        }
     }
 
     private void addMissingKey(Map<LottoPrize, Integer> results) {

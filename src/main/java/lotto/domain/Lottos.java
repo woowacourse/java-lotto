@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Lottos {
 
@@ -13,14 +14,9 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        validateNull(lottos);
-        this.lottos = new ArrayList<>(lottos);
-    }
+        Objects.requireNonNull(lottos, ERROR_NULL_MESSAGE);
 
-    private void validateNull(List<Lotto> numbers) {
-        if (numbers == null) {
-            throw new NullPointerException(ERROR_NULL_MESSAGE);
-        }
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public Map<LottoPrize, Integer> confirmWinnings(WinningNumbers winningNumbers) {
