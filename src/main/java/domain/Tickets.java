@@ -9,6 +9,7 @@ import domain.strategy.TicketGenerator;
 
 public class Tickets {
 	private static final int TICKET_PRICE = 1000;
+	private static final String PAYMENT_ERROR = "구입 금액은 1000원 미만일 수 없습니다.";
 
 	private final List<Ticket> tickets;
 
@@ -17,8 +18,16 @@ public class Tickets {
 	}
 
 	public void makeTickets(int payment, TicketGenerator ticketGenerator) {
+		validatePayment(payment);
+
 		for (int i = 0; i < payment / TICKET_PRICE; i++) {
 			tickets.add(new Ticket(ticketGenerator.generate()));
+		}
+	}
+
+	private void validatePayment(int payment) {
+		if(payment < TICKET_PRICE) {
+			throw new IllegalArgumentException(PAYMENT_ERROR);
 		}
 	}
 
