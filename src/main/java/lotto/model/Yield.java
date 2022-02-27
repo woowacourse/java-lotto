@@ -1,7 +1,8 @@
 package lotto.model;
 
 public class Yield {
-    public static final int GAIN_THRESHOLD = 1;
+    private static final int GAIN_THRESHOLD = 1;
+
     private final float yield;
 
     public Yield(float yield) {

@@ -29,7 +29,7 @@ public class Money {
         return money / LOTTO_PRICE;
     }
 
-    float calculatePercentage(Long numerator) {
-        return numerator / (float)money;
+    public Yield calculateYield(Long totalWinningMoney) {
+        return new Yield(totalWinningMoney / (float)money);
     }
 }
