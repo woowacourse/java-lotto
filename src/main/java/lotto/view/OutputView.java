@@ -3,10 +3,11 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Predicate;
-import lotto.domain.Lotto;
-import lotto.domain.LottoWinningNumbers;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoWinningNumbers;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.Rank;
 
 public class OutputView {
 
@@ -16,8 +17,6 @@ public class OutputView {
     private static final String PRINT_WINNING_STATISTIC = "%d개 일치 (%d원)- %d개";
     private static final String PRINT_SECOND_WINNING_STATISTIC = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String PRINT_TOTAL_RETURN = "총 수익률은 %.2f입니다.";
-    private static final String PRINT_PROFIT = "(기준이 1이기 때문에 결과적으로 이익이라는 의미임)";
-    private static final String PRINT_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public static void printLottos(final Lottos lottos) {
         System.out.println(lottos.getLottos().size() + SUFFIX_LOTTO_COUNT);
@@ -31,32 +30,24 @@ public class OutputView {
         System.out.println(lotto.getNumbers().toString());
     }
 
-    public static void printWinningResult(final LottoWinningNumbers lottoWinningNumbers) {
+    public static void printWinningResult(final LottoWinningNumbers lottoWinningNumbers, LottoResult result) {
         System.out.println();
         System.out.println(EXPLAIN_WINNING_STATISTICS);
         System.out.println(BASIC_LINE);
         Arrays.stream(Rank.values())
                 .sorted(Comparator.reverseOrder())
                         .filter(Predicate.not(rank -> rank == Rank.NO_MATCH))
-                                .forEach(rank -> printLottoResult(rank, lottoWinningNumbers));
+                                .forEach(rank -> printLottoResult(rank, lottoWinningNumbers, result));
     }
 
-    private static void printLottoResult(Rank rank, LottoWinningNumbers lottoWinningNumbers) {
+    private static void printLottoResult(Rank rank, LottoWinningNumbers lottoWinningNumbers, LottoResult result) {
         if (rank == Rank.SECOND){
-            System.out.println(String.format(PRINT_SECOND_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), lottoWinningNumbers.getRankCount(rank)));
+            System.out.println(String.format(PRINT_SECOND_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), result.getRankCount(rank)));
         }
-        System.out.println(String.format(PRINT_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), lottoWinningNumbers.getRankCount(rank)));
+        System.out.println(String.format(PRINT_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), result.getRankCount(rank)));
     }
 
     public static void printProfit(final double profit) {
         System.out.print(String.format(PRINT_TOTAL_RETURN, profit));
-    }
-
-    public static void printWinningLottoProfit() {
-        System.out.println(PRINT_PROFIT);
-    }
-
-    public static void printWinningLottoLoss() {
-        System.out.println(PRINT_LOSS);
     }
 }

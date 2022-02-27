@@ -1,6 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoWinningNumbers;
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.Rank;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -33,11 +37,11 @@ class LottoWinningNumbersTest {
     @Test
     public void 당첨결과_계산_테스트() {
         LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers("1,2,3,4,5,6", 7);
-        lottoWinningNumbers.calculateWinning(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-
-        assertThat(lottoWinningNumbers.getRankCount(Rank.FIRST)).isEqualTo(1);
-        assertThat(lottoWinningNumbers.getRankCount(Rank.SECOND)).isEqualTo(0);
-        assertThat(lottoWinningNumbers.getRankCount(Rank.THIRD)).isEqualTo(0);
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.calculateWinning(lottoWinningNumbers.getWinningLotto(), lottoWinningNumbers.getBonusNumber(), new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        assertThat(lottoResult.getRankCount(Rank.FIRST)).isEqualTo(1);
+        assertThat(lottoResult.getRankCount(Rank.SECOND)).isEqualTo(0);
+        assertThat(lottoResult.getRankCount(Rank.THIRD)).isEqualTo(0);
     }
 
     @ParameterizedTest

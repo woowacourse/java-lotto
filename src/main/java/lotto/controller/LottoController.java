@@ -1,37 +1,28 @@
 package lotto.controller;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-import lotto.domain.Constant;
-import lotto.domain.Lotto;
-import lotto.domain.LottoWinningNumbers;
-import lotto.domain.Lottos;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoWinningNumbers;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.result.LottoResult;
 import lotto.exception.InvalidException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
-    private Lottos lottos;
-    private LottoWinningNumbers lottoWinningNumbers;
-
-    public LottoController() {
-    }
-
-    public void printLottos() {
+    public void printLottos(Lottos lottos) {
         OutputView.printLottos(lottos);
     }
 
-    public void inputLottoMoney(final int money) {
-        lottos = new Lottos(money);
+    public Lottos inputLottoMoney(final int money) {
+        return new Lottos(money);
     }
 
-    public void createLottoWinningNumbers() {
+    public LottoWinningNumbers createLottoWinningNumbers() {
         String value = inputLottoWinningNumbers();
         int bonusNumber = inputBonusNumber();
 
-        lottoWinningNumbers = new LottoWinningNumbers(value, bonusNumber);
+        return new LottoWinningNumbers(value, bonusNumber);
     }
 
     private String inputLottoWinningNumbers() {
@@ -59,28 +50,18 @@ public class LottoController {
         }
     }
 
-    public void calculateRanks() {
-        lottoWinningNumbers.initWinningResult();
+    public LottoResult calculateRanks(Lottos lottos, LottoWinningNumbers lottoWinningNumbers) {
+        LottoResult lottoResult = new LottoResult();
 
         for (Lotto lotto : lottos.getLottos()) {
-            lottoWinningNumbers.calculateWinning(lotto);
+            lottoResult.calculateWinning(lottoWinningNumbers.getWinningLotto(), lottoWinningNumbers.getBonusNumber(), lotto);
         }
+
+        return lottoResult;
     }
 
-    public double calculateProfit(final int money) {
-        return (double) lottoWinningNumbers.calculateWinningMoney() / money;
-    }
 
-    public void printWinningResult() {
-        OutputView.printWinningResult(lottoWinningNumbers);
-    }
-
-    public void printProfit(final double profit) {
-        OutputView.printProfit(profit);
-        if (profit >= 1){
-            OutputView.printWinningLottoProfit();
-            return;
-        }
-        OutputView.printWinningLottoLoss();
+    public void printWinningResult(LottoWinningNumbers lottoWinningNumbers, LottoResult lottoResult) {
+        OutputView.printWinningResult(lottoWinningNumbers, lottoResult);
     }
 }

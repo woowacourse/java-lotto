@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import lotto.domain.lotto.Lotto;
 import lotto.exception.InvalidException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

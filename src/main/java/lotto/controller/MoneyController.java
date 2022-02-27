@@ -1,17 +1,20 @@
 package lotto.controller;
 
-import lotto.domain.Money;
+import lotto.domain.result.LottoResult;
+import lotto.domain.user.Money;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class MoneyController {
-
-    private final Money money;
-
-    public MoneyController() {
-        money = new Money(InputView.inputMoney());
+    public Money createMoney() {
+        return new Money(InputView.inputMoney());
     }
 
-    public int getMoney() {
-        return money.getMoney();
+    public double calculateProfit(Money money, final LottoResult lottoResult) {
+        return (double) lottoResult.calculateWinningMoney() / money.getMoney();
+    }
+
+    public void printProfit(final double profit) {
+        OutputView.printProfit(profit);
     }
 }
