@@ -16,7 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class TicketTest {
 
     @Test
-    void 티켓생성() {
+    void 티켓_전략_객체_생성자_확인() {
         Ticket ticket = new Ticket(() -> Set.of(new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -33,7 +33,7 @@ public class TicketTest {
     }
 
     @Test
-    void 티켓번호개수_정상입력() {
+    void 티켓_번호_개수_정상() {
         assertThatCode(() -> new Ticket(Set.of(new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -44,7 +44,7 @@ public class TicketTest {
     }
 
     @Test
-    void 티켓번호개수_5개() {
+    void 번호_개수_5개_티켓_생성_실패() {
         assertThatThrownBy(() -> new Ticket(Set.of(new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
