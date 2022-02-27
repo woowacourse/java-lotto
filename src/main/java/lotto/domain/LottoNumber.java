@@ -1,9 +1,5 @@
 package lotto.domain;
 
-import java.util.Objects;
-
-import lotto.validator.NumberValidator;
-
 public class LottoNumber {
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
@@ -28,7 +24,7 @@ public class LottoNumber {
 
     @Override
     public boolean equals(Object obj) {
-        if (this.getClass() != obj.getClass()) {
+        if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
         return this.lottoNumber == ((LottoNumber)obj).lottoNumber;
