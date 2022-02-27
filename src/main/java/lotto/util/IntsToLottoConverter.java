@@ -7,12 +7,12 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class IntToLottoConverter {
+public class IntsToLottoConverter {
 
-    private IntToLottoConverter() {
+    private IntsToLottoConverter() {
     }
 
-    public static Lotto toLotto(List<Integer> numbers) {
+    public static Lotto convert(List<Integer> numbers) {
         return new Lotto(numbers.stream()
                 .map(LottoNumber::new)
                 .collect(toList()));

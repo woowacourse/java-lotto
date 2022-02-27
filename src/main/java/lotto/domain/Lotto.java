@@ -13,17 +13,17 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> numbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>(numbers);
-        validateDuplication(lottoNumbers);
+        validateDuplicationAndSize(lottoNumbers);
         this.numbers = lottoNumbers;
     }
 
-    private void validateDuplication(Set<LottoNumber> lottoNumbers) {
+    private void validateDuplicationAndSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 중복되지 않은 6개의 숫자여야합니다.");
         }
     }
 
-    public List<Integer> intValues() {
+    public List<Integer> getIntValues() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());

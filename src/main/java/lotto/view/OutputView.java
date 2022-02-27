@@ -21,13 +21,13 @@ public class OutputView {
 
     public static void printTickets(List<Lotto> tickets) {
         for (Lotto ticket : tickets) {
-            System.out.println(makeTicketsString(ticket));
+            System.out.println(makeTicketString(ticket));
         }
         System.out.println();
     }
 
-    private static String makeTicketsString(Lotto ticket) {
-        String result = ticket.intValues().stream()
+    private static String makeTicketString(Lotto ticket) {
+        String result = ticket.getIntValues().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
         return "[" + result + "]";
@@ -49,11 +49,11 @@ public class OutputView {
         ArrayList<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
         ranks.sort(Comparator.comparing(Rank::getPrize));
         for (Rank rank : ranks) {
-            printEachRank(rank, rankBoard);
+            printRank(rank, rankBoard);
         }
     }
 
-    private static void printEachRank(Rank rank, RankBoard rankBoard) {
+    private static void printRank(Rank rank, RankBoard rankBoard) {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(rank.getMatched() + "개 일치");

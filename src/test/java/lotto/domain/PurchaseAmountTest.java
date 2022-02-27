@@ -11,17 +11,17 @@ class PurchaseAmountTest {
     @Test
     @DisplayName("구입 금액을 생성한다")
     void makePurchaseAmount() {
-        int amount = 14000;
+        int amount = 14_000;
         PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
-        assertThat(purchaseAmount.getAmount()).isEqualTo(14000);
+        assertThat(purchaseAmount.getAmount()).isEqualTo(amount);
     }
 
     @Test
     @DisplayName("구입 금액은 1000원 단위로 생성된다")
     void makePurchaseAmount1000() {
-        int amount = 14500;
+        int amount = 14_500;
         PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
-        assertThat(purchaseAmount.getAmount()).isEqualTo(14000);
+        assertThat(purchaseAmount.getAmount()).isEqualTo(14_000);
     }
 
     @Test
@@ -35,7 +35,7 @@ class PurchaseAmountTest {
     @Test
     @DisplayName("구입 금액만큼 티켓 개수를 반환한다")
     void testCalcTicketAmount() {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(14500);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(14_500);
         int count = purchaseAmount.calculateTheNumberOfTickets();
         assertThat(count).isEqualTo(14);
     }

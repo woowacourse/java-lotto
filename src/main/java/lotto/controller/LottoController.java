@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.util.IntToLottoConverter;
+import lotto.util.IntsToLottoConverter;
 import lotto.util.StringToIntConverter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -18,7 +18,7 @@ public class LottoController {
         List<Lotto> lottoTickets = getTickets(ticketCount);
         OutputView.printTickets(lottoTickets);
 
-        WinningLotto winningLotto = getTotalNumber();
+        WinningLotto winningLotto = getWinningLotto();
         RankBoard rankBoard = new RankBoard(winningLotto, lottoTickets);
 
         OutputView.printResult(rankBoard, rankBoard.calculateProfitRatio(purchaseAmount.getAmount()));
@@ -38,7 +38,7 @@ public class LottoController {
         return lottoMachine.makeLottoTickets(ticketCount);
     }
 
-    private WinningLotto getTotalNumber() {
+    private WinningLotto getWinningLotto() {
         Lotto winningNumber = getWinningNumber();
         return makeWinningLotto(winningNumber);
     }
@@ -46,7 +46,7 @@ public class LottoController {
     private Lotto getWinningNumber() {
         try {
             List<Integer> input = StringToIntConverter.toInts(InputView.getWinningNumber());
-            return IntToLottoConverter.toLotto(input);
+            return IntsToLottoConverter.convert(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getWinningNumber();
