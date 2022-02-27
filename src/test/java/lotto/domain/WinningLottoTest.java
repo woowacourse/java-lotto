@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.util.IntConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,7 @@ class WinningLottoTest {
     @Test
     @DisplayName("보너스 넘버가 당첨번호와 중복될 경우 예외를 발생시킨다")
     void throwExceptionWhenDuplicate() {
-        Lotto winningNumbers = new Lotto(IntConverter.toLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+        Lotto winningNumbers = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(6);
 
         assertThatThrownBy(() -> new WinningLotto(winningNumbers, bonusNumber))
@@ -26,7 +25,7 @@ class WinningLottoTest {
     @Test
     @DisplayName("당첨 번호와 보너스 번호를 가진 set을 반환한다")
     void makeWinningAndBonusNumbers() {
-        Lotto winningNumbers = new Lotto(IntConverter.toLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+        Lotto winningNumbers = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(7);
 
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);

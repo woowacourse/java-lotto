@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 public class Lotto {
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
@@ -21,6 +23,12 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 중복되지 않은 6개의 숫자여야합니다.");
         }
+    }
+
+    public static Lotto of(List<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(toList()));
     }
 
     public List<Integer> getIntValues() {

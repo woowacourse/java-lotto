@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.util.IntConverter;
 import lotto.util.StringConverter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -48,7 +47,7 @@ public class LottoController {
     private Lotto getWinningNumber() {
         try {
             List<Integer> input = StringConverter.toInts(InputView.getWinningNumber(), LOTTO_INPUT_DELIMITER);
-            return new Lotto(IntConverter.toLottoNumbers(input));
+            return Lotto.of(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getWinningNumber();
