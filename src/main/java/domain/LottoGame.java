@@ -12,6 +12,7 @@ public class LottoGame {
 
     public WinningStatistics calculateWinningStatistics(WinningLotto winningLotto) {
         List<LottoReward> lottoRewards = lottos.calculateLottoReward(winningLotto);
+
         return new WinningStatistics(lottoRewards);
     }
 

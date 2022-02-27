@@ -10,6 +10,7 @@ public class LottoFactory {
 
     public static Lotto createLotto(LottoNumberGenerator lottoNumberGenerator) {
         List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
+
         return new Lotto(lottoNumbers);
     }
 
@@ -17,6 +18,7 @@ public class LottoFactory {
         List<LottoNumber> lottoNumbers = numbers.stream()
             .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
+
         return new Lotto(lottoNumbers);
     }
 }

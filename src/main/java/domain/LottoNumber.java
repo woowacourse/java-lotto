@@ -50,6 +50,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (o == null || getClass() != o.getClass())
             return false;
         LottoNumber that = (LottoNumber)o;
+
         return value == that.value;
     }
 

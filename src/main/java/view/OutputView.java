@@ -49,16 +49,17 @@ public class OutputView {
         if (reward.equals(LottoReward.NONE)) {
             return;
         }
-
         if (reward.equals(LottoReward.SECOND)) {
             System.out.printf(REWARD_SECOND_FORMAT, reward.getMatchCount(), reward.getPrice(), rewardCount);
             return;
         }
+
         System.out.printf(REWARD_DEFAULT_FORMAT, reward.getMatchCount(), reward.getPrice(), rewardCount);
     }
 
     public static void showProfitRate(double profitRate) {
         double test = Math.floor(profitRate * SECOND_DECIMAL_POINT) / SECOND_DECIMAL_POINT;
+
         if (profitRate < BENEFIT_STANDARD) {
             System.out.printf(PROFIT_RATE_LOSS_FORMAT, test);
         }
