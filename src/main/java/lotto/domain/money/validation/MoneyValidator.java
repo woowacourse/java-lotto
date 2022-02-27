@@ -12,19 +12,19 @@ public class MoneyValidator {
     }
 
     public static void validateCreditMoney(final int money) {
-        INSTANCE.verifyMoneyIsNotZero(money);
-        INSTANCE.verifyMoneyIsDivisible(money);
+        INSTANCE.verifyMoneyNotZero(money);
+        INSTANCE.verifyMoneyDivisible(money);
     }
 
-    private void verifyMoneyIsNotZero(final int money) {
+    private void verifyMoneyNotZero(final int money) {
         if (money == 0) {
-            throw new LottoException(MoneyExceptionStatus.MONEY_IS_ZERO);
+            throw new LottoException(MoneyExceptionStatus.MONEY_CANNOT_BE_ZERO);
         }
     }
 
-    private void verifyMoneyIsDivisible(final int money) {
+    private void verifyMoneyDivisible(final int money) {
         if (MoneyUnit.isNotDivisible(money)) {
-            throw new LottoException(MoneyExceptionStatus.MONEY_IS_NOT_DIVISIBLE);
+            throw new LottoException(MoneyExceptionStatus.MONEY_MUST_BE_DIVISIBLE);
         }
     }
 

@@ -18,7 +18,7 @@ class MoneyTest {
     void moneyIsZeroExceptionTest(final int money) {
         assertThatThrownBy(() -> new Money(money))
                 .isInstanceOf(LottoException.class)
-                .hasMessageContaining(MoneyExceptionStatus.MONEY_IS_ZERO.getMessage());
+                .hasMessageContaining(MoneyExceptionStatus.MONEY_CANNOT_BE_ZERO.getMessage());
     }
 
     @DisplayName("구입 금액은 1000으로 나누어 떨어져야 한다.")
@@ -27,7 +27,7 @@ class MoneyTest {
     void moneyIsDivisibleExceptionTest(final int money) {
         assertThatThrownBy(() -> new Money(money))
                 .isInstanceOf(LottoException.class)
-                .hasMessageContaining(MoneyExceptionStatus.MONEY_IS_NOT_DIVISIBLE.getMessage());
+                .hasMessageContaining(MoneyExceptionStatus.MONEY_MUST_BE_DIVISIBLE.getMessage());
     }
 
     @DisplayName("구입 금액 생성자 기능 테스트")

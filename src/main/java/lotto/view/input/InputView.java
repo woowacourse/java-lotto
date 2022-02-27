@@ -32,7 +32,7 @@ public class InputView {
     }
 
     private int parseMoney(final String inputValue) {
-        return parseNumber(inputValue, MoneyExceptionStatus.MONEY_IS_NOT_NUMERIC);
+        return parseNumber(inputValue, MoneyExceptionStatus.MONEY_MUST_BE_NUMERIC);
     }
 
     public List<Integer> requestWinningNumbers() {
@@ -48,7 +48,7 @@ public class InputView {
     }
 
     private int parseBallNumber(final String inputValue) {
-        return parseNumber(inputValue, BallNumberExceptionStatus.BALL_IS_NOT_NUMERIC);
+        return parseNumber(inputValue, BallNumberExceptionStatus.BALL_MUST_BE_NUMERIC);
     }
 
     public int requestBonusNumber() {

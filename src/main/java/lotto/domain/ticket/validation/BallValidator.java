@@ -12,12 +12,12 @@ public class BallValidator {
     }
 
     public static void validateBallNumber(final int ballNumber) {
-        INSTANCE.verifyBallNumberIsNotOutOfRange(ballNumber);
+        INSTANCE.verifyBallNumberNotOutOfRange(ballNumber);
     }
 
-    private void verifyBallNumberIsNotOutOfRange(final int ballNumber) {
+    private void verifyBallNumberNotOutOfRange(final int ballNumber) {
         if (BallNumberRange.isOutOfRange(ballNumber)) {
-            throw new LottoException(BallNumberExceptionStatus.BALL_IS_NOT_IN_RANGE);
+            throw new LottoException(BallNumberExceptionStatus.BALL_CANNOT_BE_OUT_OF_RANGE);
         }
     }
 

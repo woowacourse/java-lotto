@@ -4,9 +4,9 @@ import lotto.exception.LottoExceptionStatus;
 
 public enum TicketNumbersExceptionStatus implements LottoExceptionStatus {
 
-    NUMBERS_IS_NULL("숫자 요소는 NULL이 아니어야 합니다."),
-    NUMBERS_OUT_OF_SIZE("숫자 요소는 6개여야 합니다."),
-    NUMBERS_DUPLICATED("숫자 요소는 중복될 수 없습니다.");
+    TICKET_NUMBERS_CANNOT_BE_NULL("로또 번호는 NULL이 아니어야 합니다."),
+    TICKET_NUMBERS_CANNOT_BE_OUT_OF_SIZE("로또 번호는 6개로 구성되어야 합니다."),
+    TICKET_NUMBERS_CANNOT_BE_DUPLICATED("로또 번호는 중복될 수 없습니다.");
 
     private final String message;
 

@@ -23,7 +23,7 @@ class TicketTest {
     void ticketNullExceptionTest(final List<Integer> numbers) {
         assertThatThrownBy(() -> new Ticket(numbers))
                 .isInstanceOf(LottoException.class)
-                .hasMessageContaining(TicketNumbersExceptionStatus.NUMBERS_IS_NULL.getMessage());
+                .hasMessageContaining(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_NULL.getMessage());
     }
 
     @DisplayName("로또 번호 묶음은 6개로 구성되여야 합니다.")
@@ -32,7 +32,7 @@ class TicketTest {
     void ticketOutOfSizeExceptionTest(final List<Integer> numbers) {
         assertThatThrownBy(() -> new Ticket(numbers))
                 .isInstanceOf(LottoException.class)
-                .hasMessageContaining(TicketNumbersExceptionStatus.NUMBERS_OUT_OF_SIZE.getMessage());
+                .hasMessageContaining(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_OUT_OF_SIZE.getMessage());
     }
 
     @DisplayName("로또 번호 묶음 중 중복 값은 존재할 수 없습니다.")
@@ -41,7 +41,7 @@ class TicketTest {
     void ticketNumbersDuplicatedExceptionTest(final List<Integer> numbers) {
         assertThatThrownBy(() -> new Ticket(numbers))
                 .isInstanceOf(LottoException.class)
-                .hasMessageContaining(TicketNumbersExceptionStatus.NUMBERS_DUPLICATED.getMessage());
+                .hasMessageContaining(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED.getMessage());
     }
 
     @DisplayName("특정 번호 포함 여부 확인 테스트")

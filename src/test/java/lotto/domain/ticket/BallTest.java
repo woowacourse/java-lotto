@@ -19,7 +19,7 @@ class BallTest {
     void rangeOutExceptionTest(final int number) {
         assertThatThrownBy(() -> new Ball(number))
                 .isInstanceOf(LottoException.class)
-                .hasMessageContaining(BallNumberExceptionStatus.BALL_IS_NOT_IN_RANGE.getMessage());
+                .hasMessageContaining(BallNumberExceptionStatus.BALL_CANNOT_BE_OUT_OF_RANGE.getMessage());
     }
 
     @DisplayName("생성자 기능 테스트")
