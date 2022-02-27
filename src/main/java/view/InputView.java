@@ -24,7 +24,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static int getPurchaseMoney() {
+    public static int getPurchaseAmount() {
         System.out.println(REQUEST_MESSAGE_INPUT_PURCHASE_MONEY);
         String inputMoney = getInput();
         validatePurchaseMoney(inputMoney);

@@ -11,20 +11,10 @@ public class LottoGameTest {
     @DisplayName("로또 게임을 생성하는 경우")
     void createLottoGame() {
         int amount = 5000;
-        Money money = new Money(amount);
+        LottoGameMoney money = new LottoGameMoney(amount);
 
         LottoGame lottoGame = new LottoGame(money);
 
         assertThat(lottoGame).isNotNull();
-    }
-
-    @Test
-    @DisplayName("로또 구매 금액이 유효하지 않는 경우")
-    void checkInvalidLottoMoney() {
-        int amount = 8800;
-        Money money = new Money(amount);
-
-        assertThatThrownBy(() -> new LottoGame(money))
-            .isInstanceOf(IllegalArgumentException.class);
     }
 }

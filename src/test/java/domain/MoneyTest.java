@@ -10,18 +10,18 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class MoneyTest {
 
     @Test
-    @DisplayName("돈을 생성하는 기능")
+    @DisplayName("로또 게임 머니를 생성하는 기능")
     void createMoney() {
-        Money money = new Money(1000);
+        LottoGameMoney money = new LottoGameMoney(1000);
 
         assertThat(money).isNotNull();
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-100, 0})
-    @DisplayName("돈을 생성하지 못하는 경우")
+    @ValueSource(ints = {-100, 0, 8800})
+    @DisplayName("로또 게임 머니를 생성하지 못하는 경우")
     void createInvalidMoney(int amount) {
-        assertThatThrownBy(() -> new Money(amount))
+        assertThatThrownBy(() -> new LottoGameMoney(amount))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -53,7 +53,7 @@ class WinningStatisticsTest {
     @DisplayName("당첨 통계의 수익률 계산 기능")
     void calculateProfitRate() {
         final int amount = 14000;
-        Money money = new Money(amount);
+        LottoGameMoney money = new LottoGameMoney(amount);
 
         List<LottoReward> lottoRewards = new ArrayList<>();
         lottoRewards.add(LottoReward.FIFTH);

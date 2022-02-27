@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 import domain.Lotto;
 import domain.LottoGame;
 import domain.LottoNumber;
-import domain.Money;
+import domain.LottoGameMoney;
 import domain.WinningLotto;
 import domain.WinningStatistics;
 import view.InputView;
@@ -13,7 +13,7 @@ import view.OutputView;
 public class Application {
 
     public static void main(String[] args) {
-        final Money purchasedMoney = new Money(InputView.getPurchaseMoney());
+        final LottoGameMoney purchasedMoney = new LottoGameMoney(InputView.getPurchaseAmount());
         final LottoGame lottoGame = new LottoGame(purchasedMoney);
         OutputView.showPurchasedLottos(lottoGame.getLottos());
 

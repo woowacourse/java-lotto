@@ -21,15 +21,15 @@ public class WinningStatistics {
         }
     }
 
-    public double calculateProfitRate(Money money) {
-        double profit = DEFAULT_VALUE;
+    public double calculateProfitRate(LottoGameMoney money) {
+        int winningAmount = DEFAULT_VALUE;
 
         for (LottoReward lottoReward : statistics.keySet()) {
             int rewardCount = statistics.get(lottoReward);
-            profit += rewardCount * lottoReward.getPrice();
+            winningAmount += rewardCount * lottoReward.getPrice();
         }
 
-        return profit / money.getAmount();
+        return money.calculateProfitRate(winningAmount);
     }
 
     public Map<LottoReward, Integer> getWinningStatistics() {
