@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public enum LottoRank {
 
-    RANK_5(3, false, 5000),
-    RANK_4(4, false, 50000),
-    RANK_3(5, false, 1500000),
-    RANK_2(5, true, 30000000),
-    RANK_1(6, false, 2000000000),
+    RANK_5(3, false, 5_000),
+    RANK_4(4, false, 50_000),
+    RANK_3(5, false, 1_500_000),
+    RANK_2(5, true, 30_000_000),
+    RANK_1(6, false, 2_000_000_000),
     RANK_NOTHING(0, false, 0);
 
     private static final int SECOND_AND_THIRD_RANK_COUNT = 5;
