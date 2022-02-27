@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -48,6 +47,6 @@ public class LottoGame {
     }
 
     public Map<LottoResult, Integer> getResultStatistics() {
-        return Collections.unmodifiableMap(resultsStatistics);
+        return new TreeMap<>(resultsStatistics);
     }
 }

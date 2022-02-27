@@ -32,20 +32,19 @@ public class LottoController {
     }
 
     private WinningLotto initWinningLotto() {
-        LottoTicket winningNumbers = registerWinningNumbers();
-        LottoNumber bonusNumber = registerBonusNumber();
+        LottoTicket winningNumbers = createWinningNumbers();
+        LottoNumber bonusNumber = createBonusNumber();
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 
-    private LottoTicket registerWinningNumbers() {
+    private LottoTicket createWinningNumbers() {
         String winningNumbersInput = InputView.requestWinningNumbers();
-
         return LottoTicket.createManualLotto(Arrays.stream(winningNumbersInput.split(DELIMITER))
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
 
-    private LottoNumber registerBonusNumber() {
+    private LottoNumber createBonusNumber() {
         String bonusNumberInput = InputView.requestBonusNumber();
         return LottoNumber.of(bonusNumberInput);
     }
