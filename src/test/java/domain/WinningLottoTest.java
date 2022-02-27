@@ -24,7 +24,7 @@ class WinningLottoTest {
     @ParameterizedTest
     @MethodSource("lottoAndExpectedPrize")
     void calculatePrize_rightPrize(Lotto lotto, Prize expected) {
-        WinningLotto winningLotto = new WinningLotto(List.of(10, 15, 20, 25, 30, 35), 40);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(10, 15, 20, 25, 30, 35)), 40);
         assertThat(winningLotto.calculatePrize(lotto)).isEqualTo(expected);
     }
 
