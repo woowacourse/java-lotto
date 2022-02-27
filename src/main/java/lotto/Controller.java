@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
@@ -62,7 +63,7 @@ public class Controller {
     }
 
     private static WinningNumbers getWinningNumbers() {
-        String[] winningNumbersInput = InputView.askWinningNumbers();
+        List<String> winningNumbersInput = Arrays.asList(InputView.askWinningNumbers());
 
         return WinningNumbers.from(winningNumbersInput);
     }

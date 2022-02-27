@@ -33,8 +33,8 @@ public class WinningNumbers {
         }
     }
 
-    public static WinningNumbers from(String[] inputs) {
-        List<WinningNumber> winningNumbers = Arrays.stream(inputs)
+    public static WinningNumbers from(List<String> inputs) {
+        List<WinningNumber> winningNumbers = inputs.stream()
                 .map(WinningNumber::from)
                 .collect(Collectors.toList());
         return new WinningNumbers(winningNumbers);

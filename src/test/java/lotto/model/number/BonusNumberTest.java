@@ -17,7 +17,7 @@ public class BonusNumberTest {
         for (int i = 1; i <= 6; i++) {
             winningNumbers.add(String.valueOf(i));
         }
-        this.winningNumbers = WinningNumbers.from(winningNumbers.toArray(new String[0]));
+        this.winningNumbers = WinningNumbers.from(winningNumbers);
         ;
     }
 
