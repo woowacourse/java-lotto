@@ -1,6 +1,10 @@
 package domain;
 
+import static domain.Lotto.LOTTO_NUMBERS_SIZE;
+import static domain.LottoNumber.LOTTO_NUMBERS_LIST;
+
 import dto.LottoCountsDto;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,8 +30,14 @@ public class Lottos {
     }
 
     private static Stream<Lotto> autosStream(int autosCount) {
-        return Stream.generate(Lotto::new)
+        return Stream.generate(() -> new Lotto(generateAutoNumbers()))
                 .limit(autosCount);
+    }
+
+    private static List<LottoNumber> generateAutoNumbers() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(LOTTO_NUMBERS_LIST);
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers.subList(0, LOTTO_NUMBERS_SIZE);
     }
 
     public List<Lotto> getLottos() {
