@@ -1,4 +1,5 @@
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import domain.Lotto;
 import domain.LottoGame;
@@ -43,7 +44,7 @@ public class LottoGameTest {
                 .collect(Collectors.toList()));
 
         LottoGame lottoGame = new LottoGame(Arrays.asList(lotto1, lotto2, lotto3));
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         int bonusNumber = 9;
         lottoGame.enterWinningLottoNumbersAndBonusNumber(winningNumbers, bonusNumber);
         Map<Rewards, Integer> results = lottoGame.produceResults();
@@ -51,4 +52,43 @@ public class LottoGameTest {
         assertThat(results.get(Rewards.FIRST_REWARD)).isEqualTo(2);
     }
 
+    @Test
+    @DisplayName("당첨 로또 번호, 보너스 번호 입력받는 기능 테스트_out_of_range테스트")
+    void enterWinningLottoNumbersAndBonusNumberTest() {
+        Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+        Lotto lotto2 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+        Lotto lotto3 = new Lotto(Stream.of(11, 12, 13, 14, 15, 16)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+
+        LottoGame lottoGame = new LottoGame(Arrays.asList(lotto1, lotto2, lotto3));
+        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(0, 2, 3, 4, 5, 6));
+        int bonusNumber = 9;
+        assertThatThrownBy(() -> lottoGame.enterWinningLottoNumbersAndBonusNumber(winningNumbers, bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("당첨 로또 번호, 보너스 번호 입력받는 기능 테스트_중복테스트")
+    void enterWinningLottoNumbersAndBonusNumberTest2() {
+        Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+        Lotto lotto2 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+        Lotto lotto3 = new Lotto(Stream.of(11, 12, 13, 14, 15, 16)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+
+        LottoGame lottoGame = new LottoGame(Arrays.asList(lotto1, lotto2, lotto3));
+        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 1;
+        assertThatThrownBy(() -> lottoGame.enterWinningLottoNumbersAndBonusNumber(winningNumbers, bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

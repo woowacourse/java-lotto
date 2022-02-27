@@ -2,8 +2,10 @@ package domain;
 
 import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -15,6 +17,7 @@ public class LottoGame {
     private static final int INCREASE_COUNT = 1;
     private static final int BASE_COUNT = 0;
     private static final int BASE_SUM = 0;
+    private static final String LOTTO_NUMBER_DUPLICATED_EXCEPTION = "[ERROR] 로또번호와 보너스번호는 중복일 수 없습니다.";
 
     private Lotto winningLotto;
     private LottoNumber bonusNumber;
@@ -35,11 +38,20 @@ public class LottoGame {
 
     public void enterWinningLottoNumbersAndBonusNumber(List<Integer> notVerifiedWinningLottoNumbers
             , int notVerifiedBonusNumber) {
+        validateNoDuplication(notVerifiedWinningLottoNumbers, notVerifiedBonusNumber);
         List<LottoNumber> winningLottoNumbers = notVerifiedWinningLottoNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         this.winningLotto = new Lotto(winningLottoNumbers);
         this.bonusNumber = new LottoNumber(notVerifiedBonusNumber);
+    }
+
+    private void validateNoDuplication(List<Integer> targets, int additionalTarget) {
+        targets.add(additionalTarget);
+        Set<Integer> noDuplicatedTargets = new HashSet<>(targets);
+        if (noDuplicatedTargets.size() != targets.size()) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATED_EXCEPTION);
+        }
     }
 
     public Map<Rewards, Integer> produceResults() {
