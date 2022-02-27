@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class LottoTicketsTest {
 
     @Test
-    void 입력한_금액만큼_로또_개수를_생성하는_기능() {
+    void 구입한_로또_개수만큼_로또를_생성하는_기능() {
         LottoTickets lottoTickets = new LottoTickets(14);
         assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(14);
     }
