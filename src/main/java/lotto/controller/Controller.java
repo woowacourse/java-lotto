@@ -9,29 +9,29 @@ import lotto.view.OutputView;
 
 public class Controller {
     public void run() {
-        Lotto lotto = requestLotto();
+        Lotto lotto = requestAmountForLotto();
         OutputView.printTickets(lotto.getTicketCount(), lotto.getTickets());
-        WinningNumbers winningNumbers = requestWinningNumbers();
+        WinningNumbers winningNumbers = createWinningNumbers();
         OutputView.printResult(lotto.getResult(winningNumbers), lotto.getYield(winningNumbers));
     }
 
-    private Lotto requestLotto() {
+    private Lotto requestAmountForLotto() {
         try {
             return new Lotto(InputView.requestAmount());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return requestLotto();
+            return requestAmountForLotto();
         }
     }
 
-    private WinningNumbers requestWinningNumbers() {
+    private WinningNumbers createWinningNumbers() {
         Ticket winTicket = requestWinNumbers();
         LottoNumber bonusNumber = requestBonusNumber();
         try {
             return new WinningNumbers(winTicket, bonusNumber);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return requestWinningNumbers();
+            return createWinningNumbers();
         }
     }
 
