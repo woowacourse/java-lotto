@@ -16,8 +16,11 @@ import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
 import domain.LottoGenerator.LottoGenerator;
 import domain.LottoGenerator.WinningLottoGenerator;
+<<<<<<< HEAD
 import domain.player.Money;
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
+=======
+>>>>>>> 440c90c (refactor : Player 로또 구매 역할 분리)
 import domain.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -84,13 +87,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerTest {
 
     private static final int BONUS_BALL_NUMBER = 22;
-    private final Money money = new Money(15000);
+    private final int money = 15000;
     private final Player player = new Player(money);
 
 
     @BeforeEach
     void setUp() {
-        player.purchaseLotto(new AutoLottoGenerator());
+        LottoGenerator lottoGenerator = new AutoLottoGenerator();
+        while (player.canBuyLotto()) {
+            player.purchaseLotto(lottoGenerator.generateLotto());
+        }
     }
 
     @Test
@@ -112,7 +118,7 @@ class PlayerTest {
             lottoNumbers.add(i);
         }
         LottoGenerator lottoGenerator = new WinningLottoGenerator();
-        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(), new LottoNumber(BONUS_BALL_NUMBER));
+        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateWinningLotto(lottoNumbers), new LottoNumber(BONUS_BALL_NUMBER));
         List<Result> actual = player.judgeAll(winningLotto);
         int expected = 15;
 

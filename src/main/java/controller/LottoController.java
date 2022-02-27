@@ -1,6 +1,7 @@
 package controller;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
@@ -14,13 +15,16 @@ import dto.LottosDto;
 import dto.RanksDto;
 =======
 import domain.*;
+=======
+>>>>>>> 440c90c (refactor : Player 로또 구매 역할 분리)
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
 import domain.LottoGenerator.LottoGenerator;
 import domain.LottoGenerator.WinningLottoGenerator;
-import domain.player.Money;
+import domain.Rank;
+import domain.Result;
 import domain.player.Player;
 import dto.LottosDto;
 <<<<<<< HEAD
@@ -74,8 +78,11 @@ public class LottoController {
 =======
 >>>>>>> 20bb1bf (feat: 2,3등은 보너스볼과 일치하는 숫자의 갯수를 기준으로, 나머지 등수는 일치하는 숫자의 갯수만으로 등수를 판정하는 로직 구현)
     public LottosDto purchase(int purchaseAmount) {
-        player = new Player(new Money(purchaseAmount));
-        player.purchaseLotto(new AutoLottoGenerator());
+        player = new Player(purchaseAmount);
+        LottoGenerator lottoGenerator = new AutoLottoGenerator();
+        while (player.canBuyLotto()) {
+            player.purchaseLotto(lottoGenerator.generateLotto());
+        }
         return LottosDto.from(player.getLottos());
     }
 
@@ -110,7 +117,9 @@ public class LottoController {
 
     public RanksDto makeResult(List<Result> judgeLottos) {
         double totalIncome = Rank.calculateAllResult(judgeLottos);
+        System.out.println(totalIncome);
         double incomeRate = player.calculateIncomeRate(totalIncome);
+        System.out.println("incomeRate = " + incomeRate);
 
 <<<<<<< HEAD
 <<<<<<< HEAD

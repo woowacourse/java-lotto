@@ -19,6 +19,7 @@ import java.util.List;
 public class Player {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private static final int MINIMUM_PURCHASE_AMOUNT = 1000;
 
     private final Money money;
@@ -40,26 +41,32 @@ public class Player {
 
 
 =======
+=======
+    private static final int MINIMUM_PURCHASE_AMOUNT = 1000;
+
+>>>>>>> 440c90c (refactor : Player 로또 구매 역할 분리)
     private final Money money;
     private List<Lotto> lottos;
 
-    public Player(Money money) {
-        this.money = money;
+    public Player(int money) {
+        this.money = new Money(money);
         this.lottos = new ArrayList<>();
     }
 
-    private int getNumberOfPurchases() {
-        return money.determineQuantity();
+    public boolean canBuyLotto() {
+        return money.isBiggerThanLottoPrice();
     }
 
-    public void purchaseLotto(LottoGenerator lottoGenerator) {
-        int numberOfPurchases = getNumberOfPurchases();
-        for (int i = 0; i < numberOfPurchases; i++) {
-            lottos.add(lottoGenerator.generateLotto());
-        }
+    public void purchaseLotto(Lotto lotto) {
+        money.deductMoney();
+        lottos.add(lotto);
     }
 
+<<<<<<< HEAD
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
+=======
+
+>>>>>>> 440c90c (refactor : Player 로또 구매 역할 분리)
     public List<Result> judgeAll(WinningLotto winningLotto) {
         List<Result> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
@@ -70,6 +77,7 @@ public class Player {
 
     public double calculateIncomeRate(double totalIncome) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return totalIncome / (lottos.size() * MINIMUM_PURCHASE_AMOUNT);
     }
 
@@ -77,6 +85,9 @@ public class Player {
         return Collections.unmodifiableList(lottos);
 =======
         return totalIncome / money.getAmount();
+=======
+        return totalIncome / (lottos.size() * MINIMUM_PURCHASE_AMOUNT);
+>>>>>>> 440c90c (refactor : Player 로또 구매 역할 분리)
     }
 
     public List<Lotto> getLottos() {
