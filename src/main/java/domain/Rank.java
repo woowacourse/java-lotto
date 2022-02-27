@@ -23,9 +23,7 @@ public enum Rank {
     }
 
     Rank(int criteria, int reward, int hitCount, boolean hitBonusBall) {
-        this.criteria = criteria;
-        this.reward = reward;
-        this.hitCount = hitCount;
+        this(criteria, reward, hitCount);
         this.hitBonusBall = hitBonusBall;
     }
 
