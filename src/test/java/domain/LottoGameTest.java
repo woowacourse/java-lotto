@@ -2,9 +2,7 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -39,17 +37,13 @@ public class LottoGameTest {
         return LottoTicket.createManualLotto(lottoNumbers);
     }
 
-    private List<LottoTicket> createLottoTicketsExample(LottoTicket... lottoTickets) {
-        List<LottoTicket> lottoTicketsExample = new ArrayList<>();
-        Collections.addAll(lottoTicketsExample, lottoTickets);
-        return lottoTicketsExample;
-    }
-
     @DisplayName("1등 한번, 2등 한번, 낙첨은 세지 않음")
     @Test
     void getResultStatistics_WinningFirstAndSecondAndNoNull_Successful() {
-        LottoTickets lottoTickets = new LottoTickets(
-                createLottoTicketsExample(firstPrizeLottoTicket, secondPrizeLottoTicket, noPrizeLottoTicket));
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(firstPrizeLottoTicket);
+        lottoTickets.add(secondPrizeLottoTicket);
+        lottoTickets.add(noPrizeLottoTicket);
         LottoGame game = new LottoGame(lottoTickets, winningLotto);
 
         Map<LottoResult, Integer> actual = game.getResultStatistics();
@@ -65,8 +59,10 @@ public class LottoGameTest {
     @DisplayName("3등 두번, 4등 한번")
     @Test
     void getResultStatistics_WinningTwoThirdAndFourth_Successful() {
-        LottoTickets lottoTickets = new LottoTickets(
-                createLottoTicketsExample(thirdPrizeLottoTicket, thirdPrizeLottoTicket, fourthPrizeLottoTicket));
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(thirdPrizeLottoTicket);
+        lottoTickets.add(thirdPrizeLottoTicket);
+        lottoTickets.add(fourthPrizeLottoTicket);
         LottoGame game = new LottoGame(lottoTickets, winningLotto);
 
         Map<LottoResult, Integer> actual = game.getResultStatistics();
@@ -82,7 +78,8 @@ public class LottoGameTest {
     @DisplayName("5등 당첨 시 수익률 500%")
     @Test
     void calculateProfitRatio_WinningFifth_ReturnsFiveTimesThePrice() {
-        LottoTickets lottoTickets = new LottoTickets(createLottoTicketsExample(fifthPrizeLottoTicket));
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(fifthPrizeLottoTicket);
         LottoGame game = new LottoGame(lottoTickets, winningLotto);
 
         float actual = game.calculateProfitRatio(1000);
@@ -93,7 +90,8 @@ public class LottoGameTest {
     @DisplayName("낙첨 시 수익률 0%")
     @Test
     void calculateProfitRatio_LosingAll_ReturnsZero() {
-        LottoTickets lottoTickets = new LottoTickets(createLottoTicketsExample(noPrizeLottoTicket));
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(noPrizeLottoTicket);
         LottoGame game = new LottoGame(lottoTickets, winningLotto);
 
         float actual = game.calculateProfitRatio(1000);

@@ -18,27 +18,54 @@ public class LottoController {
 
     public void run() {
         UserBalance userBalance = new UserBalance(InputView.requestUserBalance());
-        LottoTickets lottoTickets = initCustomerLottoTickets(userBalance);
+        int manualLottoCount = parseLottoCount(InputView.requestManualLottoCount(), userBalance);
+        LottoTickets lottoTickets = initCustomerLottoTickets(userBalance, manualLottoCount);
         WinningLotto winningLotto = initWinningLotto();
         LottoGame lottoGame = new LottoGame(lottoTickets, winningLotto);
         OutputView.printLottoResults(lottoGame.getResultStatistics());
         OutputView.printProfitRatio(lottoGame.calculateProfitRatio(userBalance.getUserBalance()));
     }
 
-    private LottoTickets initCustomerLottoTickets(UserBalance userBalance) {
-        LottoTickets lottoTickets = LottoTickets.purchaseBy(userBalance);
-        OutputView.printPurchaseInfo(lottoTickets.getLottoTickets());
+    private LottoTickets initCustomerLottoTickets(UserBalance userBalance, int manualLottoCount) {
+        LottoTickets lottoTickets = new LottoTickets();
+        OutputView.printManualLottoNumbersMessage();
+        for (int i = 0; i < manualLottoCount; i++) {
+            lottoTickets.add(createLottoTicket());
+        }
+        lottoTickets.purchaseBy(userBalance, manualLottoCount);
+        OutputView.printPurchaseInfo(manualLottoCount, lottoTickets.getLottoTickets());
         return lottoTickets;
     }
 
+    private int parseLottoCount(String value, UserBalance userBalance) {
+        int lottoCount = parseNumber(value);
+        validateLottoCount(lottoCount, userBalance);
+        return lottoCount;
+    }
+
+    private int parseNumber(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("구매할 로또 수는 숫자여야 합니다.");
+        }
+    }
+
+    private void validateLottoCount(int lottoCount, UserBalance userBalance) {
+        if (lottoCount < 0 || lottoCount > userBalance.getUserBalance() / 1000) {
+            throw new IllegalArgumentException("수동 입력 가능 횟수는 0번 이상 최대 구입 가능 이하여야 합니다.");
+        }
+    }
+
     private WinningLotto initWinningLotto() {
-        LottoTicket winningNumbers = createWinningNumbers();
+        OutputView.printWinningNumbersMessage();
+        LottoTicket winningNumbers = createLottoTicket();
         LottoNumber bonusNumber = createBonusNumber();
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 
-    private LottoTicket createWinningNumbers() {
-        String winningNumbersInput = InputView.requestWinningNumbers();
+    private LottoTicket createLottoTicket() {
+        String winningNumbersInput = InputView.requestLottoNumbers();
         return LottoTicket.createManualLotto(Arrays.stream(winningNumbersInput.split(DELIMITER))
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));

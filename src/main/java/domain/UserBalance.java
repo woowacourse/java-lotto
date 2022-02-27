@@ -19,7 +19,7 @@ public class UserBalance {
     private int parseNumber(String value) {
         try {
             return Integer.parseInt(value);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INVALID_BALANCE_INPUT_EXCEPTION_MESSAGE);
         }
     }

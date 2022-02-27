@@ -8,19 +8,20 @@ public class LottoTickets {
     public static final int LOTTO_PRICE = 1000;
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    public LottoTickets() {
+        this.lottoTickets = new ArrayList<>();
     }
 
-    public static LottoTickets purchaseBy(UserBalance userBalance) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        int lottoCount = userBalance.getUserBalance() / LOTTO_PRICE;
+    public void add(LottoTicket lottoTicket) {
+        lottoTickets.add(lottoTicket);
+    }
+
+    public void purchaseBy(UserBalance userBalance, int manualLottoCount) {
+        int lottoCount = userBalance.getUserBalance() / LOTTO_PRICE - manualLottoCount;
 
         for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(LottoTicket.createAutoLotto());
         }
-
-        return new LottoTickets(lottoTickets);
     }
 
     public List<LottoTicket> getLottoTickets() {

@@ -9,8 +9,12 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public static void printPurchaseInfo(List<LottoTicket> lottoTickets) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
+    public static void printManualLottoNumbersMessage() {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printPurchaseInfo(int manualLottoCount, List<LottoTicket> lottoTickets) {
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoCount, lottoTickets.size() - manualLottoCount);
 
         StringBuilder builder = new StringBuilder();
 
@@ -29,6 +33,10 @@ public class OutputView {
                 .collect(Collectors.joining(", "));
 
         return "[" + lottoNumberFormat + "]\n";
+    }
+
+    public static void printWinningNumbersMessage() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
     public static void printLottoResults(Map<LottoResult, Integer> lottoResults) {

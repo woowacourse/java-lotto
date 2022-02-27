@@ -11,8 +11,12 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String requestWinningNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    public static String requestManualLottoCount() {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+        return scanner.nextLine();
+    }
+
+    public static String requestLottoNumbers() {
         return scanner.nextLine();
     }
 
