@@ -31,7 +31,7 @@ public class PrizeResult {
 
     public float earningRate(int inputMoney) {
         final float earningRate = (float) totalPrize() / inputMoney;
-        return  (float) (Math.floor(earningRate * 100) / 100.0);
+        return (float) (Math.floor(earningRate * 100) / 100.0);
     }
 
     private int totalPrize() {
