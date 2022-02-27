@@ -3,7 +3,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Lotto {
+public class Lotto extends Numbers{
 
     private static final int LOTTO_START = 0;
     private static final int LOTTO_END = 6;
@@ -11,6 +11,7 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
+        super(numbers);
         this.numbers = numbers;
     }
 

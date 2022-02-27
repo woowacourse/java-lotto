@@ -50,7 +50,7 @@
 - [x] 정규표현식 대신 `Integer.parseInt()` + 범위 검증 으로 대체 (가독성 및 테스트)
   - 정규표현식 사용 대신 `Integer.parseInt()` 사용 시 발생하는 NumberFormatException과 tyr-catch 이용 
   - 로또(당첨) 번호의 범위 검증은 `LottoNumber` 범위 검증으로 대체 
-- [ ] 당첨 번호(WinningNumber) 뿐만이 아닌 Lotto에도 적용되는 검증 규칙.
+- [x] 당첨 번호(WinningNumber) 뿐만이 아닌 Lotto에도 적용되는 검증 규칙.
   - 검증 부분의 중복에 대한 고민이 필요
   - 추천) 주 생성자를 사용해서 검증 로직을 두고 부생성자 또는 팩토리 메서드에서 활용
 - [x] 로또번호 생성 시 List를 생성하는 대신 미리 만들어두고 사용하는 방법
