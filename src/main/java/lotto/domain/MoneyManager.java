@@ -10,19 +10,19 @@ public class MoneyManager {
     private final int inputMoney;
 
     public MoneyManager(int inputMoney) {
-        this.inputMoney = inputMoney;
+        validateIsNegativeOrZero(inputMoney);
+        validateIsDividableByLottoPrice(inputMoney);
 
-        validateIsNegativeOrZero();
-        validateIsDividableByLottoPrice();
+        this.inputMoney = inputMoney;
     }
 
-    private void validateIsDividableByLottoPrice() {
+    private void validateIsDividableByLottoPrice(int inputMoney) {
         if (inputMoney % LOTTO_PRICE != DIVIDABLE) {
             throw new RuntimeException(ERROR_NOT_DIVIDABLE);
         }
     }
 
-    private void validateIsNegativeOrZero() {
+    private void validateIsNegativeOrZero(int inputMoney) {
         if (inputMoney <= 0) {
             throw new RuntimeException(ERROR_NOT_POSITIVE);
         }
