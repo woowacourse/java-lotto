@@ -38,7 +38,8 @@ class LottoWinningNumbersTest {
     public void 당첨결과_계산_테스트() {
         LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers("1,2,3,4,5,6", 7);
         LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateWinning(lottoWinningNumbers.getWinningLotto(), lottoWinningNumbers.getBonusNumber(), new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoResult.calculateWinning(lottoWinningNumbers.getWinningLotto(), lottoWinningNumbers.getBonusNumber(),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThat(lottoResult.getRankCount(Rank.FIRST)).isEqualTo(1);
         assertThat(lottoResult.getRankCount(Rank.SECOND)).isEqualTo(0);
         assertThat(lottoResult.getRankCount(Rank.THIRD)).isEqualTo(0);
@@ -47,7 +48,7 @@ class LottoWinningNumbersTest {
     @ParameterizedTest
     @NullAndEmptySource
     void 당첨번호_빈값_검증(String value) {
-        assertThatThrownBy(() -> new LottoWinningNumbers(null,1))
+        assertThatThrownBy(() -> new LottoWinningNumbers(null, 1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -30,22 +30,24 @@ public class OutputView {
         System.out.println(lotto.getNumbers().toString());
     }
 
-    public static void printWinningResult(LottoResult result) {
+    public static void printWinningResult(final LottoResult result) {
         System.out.println();
         System.out.println(EXPLAIN_WINNING_STATISTICS);
         System.out.println(BASIC_LINE);
         Arrays.stream(Rank.values())
                 .sorted(Comparator.reverseOrder())
-                        .filter(Predicate.not(rank -> rank == Rank.NO_MATCH))
-                                .forEach(rank -> printLottoResult(rank, result));
+                .filter(Predicate.not(rank -> rank == Rank.NO_MATCH))
+                .forEach(rank -> printLottoResult(rank, result));
     }
 
-    private static void printLottoResult(Rank rank, LottoResult result) {
-        if (rank == Rank.SECOND){
-            System.out.println(String.format(PRINT_SECOND_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), result.getRankCount(rank)));
+    private static void printLottoResult(final Rank rank, final LottoResult result) {
+        if (rank == Rank.SECOND) {
+            System.out.println(String.format(PRINT_SECOND_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(),
+                    result.getRankCount(rank)));
             return;
         }
-        System.out.println(String.format(PRINT_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), result.getRankCount(rank)));
+        System.out.println(String.format(PRINT_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(),
+                result.getRankCount(rank)));
     }
 
     public static void printProfit(final double profit) {

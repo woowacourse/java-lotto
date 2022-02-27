@@ -27,15 +27,15 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1,2,3,4,5,6})
-    public void 로또번호_체크_성공(int value){
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    public void 로또번호_체크_성공(int value) {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lotto.contains(value)).isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 7})
-    public void 로또번호_체크_실패(int value){
+    public void 로또번호_체크_실패(int value) {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lotto.contains(value)).isFalse();
     }

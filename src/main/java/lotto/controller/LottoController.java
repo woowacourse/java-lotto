@@ -11,7 +11,7 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    public void printLottos(Lottos lottos) {
+    public void printLottos(final Lottos lottos) {
         OutputView.printLottos(lottos);
     }
 
@@ -52,17 +52,18 @@ public class LottoController {
         }
     }
 
-    public LottoResult calculateRanks(Lottos lottos, LottoWinningNumbers lottoWinningNumbers) {
+    public LottoResult calculateRanks(final Lottos lottos, final LottoWinningNumbers lottoWinningNumbers) {
         LottoResult lottoResult = new LottoResult();
 
         for (Lotto lotto : lottos.getLottos()) {
-            lottoResult.calculateWinning(lottoWinningNumbers.getWinningLotto(), lottoWinningNumbers.getBonusNumber(), lotto);
+            lottoResult.calculateWinning(lottoWinningNumbers.getWinningLotto(), lottoWinningNumbers.getBonusNumber(),
+                    lotto);
         }
 
         return lottoResult;
     }
 
-    public void printWinningResult(LottoResult lottoResult) {
+    public void printWinningResult(final LottoResult lottoResult) {
         OutputView.printWinningResult(lottoResult);
     }
 }

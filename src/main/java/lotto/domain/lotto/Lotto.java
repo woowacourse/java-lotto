@@ -6,8 +6,8 @@ import java.util.Set;
 import lotto.exception.InvalidException;
 
 public class Lotto {
-    private static final int LOTTO_SIZE = 6;
 
+    private static final int LOTTO_SIZE = 6;
     private final List<Integer> lottoNumbers;
 
     public Lotto(final List<Integer> lottoNumbers) {
@@ -16,12 +16,12 @@ public class Lotto {
         Collections.sort(lottoNumbers);
     }
 
-    private void checkNumbers(List<Integer> lottoNumbers) {
+    private void checkNumbers(final List<Integer> lottoNumbers) {
         checkNull(lottoNumbers);
         checkDuplicateNumber(lottoNumbers);
     }
 
-    private void checkNull(List<Integer> lottoNumbers) {
+    private void checkNull(final List<Integer> lottoNumbers) {
         if (lottoNumbers == null) {
             throw new IllegalArgumentException(InvalidException.ERROR_NULL_BLANK);
         }

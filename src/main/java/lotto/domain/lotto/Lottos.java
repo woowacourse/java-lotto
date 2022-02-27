@@ -6,7 +6,6 @@ import lotto.exception.InvalidException;
 
 public class Lottos {
 
-    private static final int BASIC_LOTTO_MONEY = 1000;
     private List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(final int count) {

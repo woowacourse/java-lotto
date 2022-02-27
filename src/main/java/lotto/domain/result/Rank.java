@@ -28,7 +28,7 @@ public enum Rank {
                 .orElse(NO_MATCH);
     }
 
-    private static Rank matchCountFive(boolean hasBonusNumber) {
+    private static Rank matchCountFive(final boolean hasBonusNumber) {
         if (hasBonusNumber){
             return Rank.SECOND;
         }

@@ -20,7 +20,7 @@ class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 44, 45})
-    public void 로또번호_범위_성공(int value){
+    public void 로또번호_범위_성공(int value) {
         LottoNumber lottoNumber = new LottoNumber();
         lottoNumber.createLottoNumbers();
         List<Integer> lottoNumbers = lottoNumber.getLottoNumbers();
@@ -30,7 +30,7 @@ class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46, 47})
-    public void 로또번호_범위_실패(int value){
+    public void 로또번호_범위_실패(int value) {
         LottoNumber lottoNumber = new LottoNumber();
         lottoNumber.createLottoNumbers();
         List<Integer> lottoNumbers = lottoNumber.getLottoNumbers();

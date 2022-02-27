@@ -5,20 +5,21 @@ import java.util.HashMap;
 import lotto.domain.lotto.Lotto;
 
 public class LottoResult {
+
     private HashMap<Rank, Integer> result;
 
     public LottoResult() {
         initResult();
     }
 
-    private void initResult(){
+    private void initResult() {
         result = new HashMap<>();
         for (Rank rank : Rank.values()) {
             result.put(rank, 0);
         }
     }
 
-    public void calculateWinning(final Lotto winninglotto, int bonusNumber, final Lotto comparisonLotto) {
+    public void calculateWinning(final Lotto winninglotto, final int bonusNumber, final Lotto comparisonLotto) {
         int matchCount = (int) winninglotto.getNumbers()
                 .stream()
                 .filter(number -> comparisonLotto.getNumbers().contains(number))

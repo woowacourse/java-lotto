@@ -22,7 +22,7 @@ public class LottoWinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    private void checkNumbers(String numbers) {
+    private void checkNumbers(final String numbers) {
         checkNullAndBlank(numbers);
         checkDelimiterCount(numbers);
         String[] values = numbers.split(LottoWinningNumbers.LOTTO_DELIMITER);
@@ -31,11 +31,12 @@ public class LottoWinningNumbers {
         checkDuplicateNumber(values);
     }
 
-    private void checkNullAndBlank(String numbers) {
-        if (numbers == null || numbers.isBlank()){
+    private void checkNullAndBlank(final String numbers) {
+        if (numbers == null || numbers.isBlank()) {
             throw new IllegalArgumentException(InvalidException.ERROR_NULL_BLANK);
         }
     }
+
     private static void checkDelimiterCount(final String numbers) {
         if (numbers.chars()
                 .filter(c -> c == LOTTO_DELIMITER.charAt(0))
