@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-public class LottoNumberTest {
+public class NumberTest {
 
     @Test
     @DisplayName("같은 숫자를 가진 로또 넘버 객체는 동일하다.")

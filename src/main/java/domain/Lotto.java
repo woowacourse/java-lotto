@@ -18,7 +18,10 @@ public class Lotto {
 
     public Rank calculateRank(WinningNumber winningNumber) {
         int matched = matchedRegularNumbers(winningNumber);
-        boolean hasBonus = hasMatchedNumber(winningNumber.getBonus());
+        boolean hasBonus = false;
+        if (matched == 5) {
+            hasBonus = hasMatchedNumber(winningNumber.getBonus());
+        }
         return Rank.getWinnerPrizeByMatched(matched, hasBonus);
     }
 
