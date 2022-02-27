@@ -11,7 +11,6 @@ import lotto.domain.LottoNumber;
 public class LottoTicket {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int FROM_INDEX = 0;
-
     private static final String DELIMITER = ",";
     private static final String BLANK = " ";
     private static final String EMPTY = "";
@@ -20,7 +19,7 @@ public class LottoTicket {
 
     private final List<LottoNumber> value;
 
-    public LottoTicket() {
+    private LottoTicket() {
         this.value = generateRandomLottoNumbers();
     }
 
@@ -28,6 +27,10 @@ public class LottoTicket {
         final List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumbersCache.cache);
         Collections.shuffle(lottoNumbers);
         return Collections.unmodifiableList(lottoNumbers.subList(FROM_INDEX, LOTTO_NUMBER_COUNT));
+    }
+
+    public static LottoTicket generateRandom() {
+        return new LottoTicket();
     }
 
     public LottoTicket(String lottoNumbers) {
