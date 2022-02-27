@@ -1,19 +1,26 @@
 package model.lotto;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import model.result.WinningResult;
 import model.bonusball.BonusBallDTO;
-import model.result.Statistics;
+import model.result.Rank;
 import model.winningnumber.LottoWinningNumberDTO;
 
 public class LottoTest {
+    private WinningResult winningResult;
+
+    @BeforeEach
+    void init() {
+        winningResult = new WinningResult();
+    }
 
     @Test
     @DisplayName("당첨 번호와 로또의 비교값이 5인 경우")
@@ -22,9 +29,10 @@ public class LottoTest {
         LottoWinningNumberDTO lottoWinningNumberDTO =
                 new LottoWinningNumberDTO(new HashSet<>(List.of(1, 2, 3, 4, 5, 7)));
         BonusBallDTO bonusBallDTO = new BonusBallDTO(8);
-        lotto.compare(bonusBallDTO, lottoWinningNumberDTO);
 
-        assertThat(Statistics.BONUS.getCount()).isEqualTo(0);
+        lotto.calcWinningNumber(winningResult, bonusBallDTO, lottoWinningNumberDTO);
+
+        assertThat(winningResult.getWinningCount().get(Rank.BONUS)).isEqualTo(0);
     }
 
     @Test
@@ -34,8 +42,9 @@ public class LottoTest {
         LottoWinningNumberDTO lottoWinningNumberDTO =
                 new LottoWinningNumberDTO(new HashSet<>(List.of(1, 2, 3, 4, 5, 7)));
         BonusBallDTO bonusBallDTO = new BonusBallDTO(6);
-        lotto.compare(bonusBallDTO, lottoWinningNumberDTO);
 
-        assertThat(Statistics.BONUS.getCount()).isEqualTo(1);
+        lotto.calcWinningNumber(winningResult, bonusBallDTO, lottoWinningNumberDTO);
+
+        assertThat(winningResult.getWinningCount().get(Rank.BONUS)).isEqualTo(1);
     }
 }

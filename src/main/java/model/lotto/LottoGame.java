@@ -1,11 +1,11 @@
 package model.lotto;
 
-import java.util.Arrays;
 import java.util.List;
 
 import model.bonusball.BonusBall;
+import model.result.Rank;
 import model.result.RateOfReturn;
-import model.result.Statistics;
+import model.result.WinningResult;
 import model.winningnumber.LottoWinningNumber;
 import view.OutputView;
 
@@ -37,15 +37,16 @@ public class LottoGame {
         lottoWinningNumber.validateReduplicationWithBonusBall(input);
     }
 
-    public void compareLottoWithWinningNumber() {
-        lottoStorage.compare(bonusBall.getBonusBallDTO(), lottoWinningNumber.getWinningNumbersDTO());
+    public WinningResult calcLottoWithWinningNumber() {
+        return lottoStorage.calcWinningNumber(bonusBall.getBonusBallDTO(), lottoWinningNumber.getWinningNumbersDTO());
     }
 
-    public double showResult() {
-        Arrays.stream(Statistics.values())
-                .forEach(statistics -> outputView.printResult(statistics.getMatchNumber(), statistics.getValue(),
-                        statistics.getCount(), Statistics.BONUS.getValue()));
+    public double showResult(WinningResult winningResult) {
+        for (Rank rank : winningResult.getWinningCount().keySet()) {
+            outputView.printResult(rank.getMatchNumber(), rank.getValue(),
+                    winningResult.getWinningCount().get(rank), Rank.BONUS.getValue());
+        }
 
-        return rateOfReturn.getRateOfReturn();
+        return rateOfReturn.getRateOfReturn(winningResult);
     }
 }

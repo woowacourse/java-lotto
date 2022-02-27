@@ -1,6 +1,6 @@
 package model.result;
 
-public enum Statistics {
+public enum Rank {
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),
@@ -9,21 +9,11 @@ public enum Statistics {
 
     private final int matchNumber;
     private final int value;
-    private int count;
 
-    Statistics(int matchNumber, int value) {
+    Rank(int matchNumber, int value) {
         this.matchNumber = matchNumber;
         this.value = value;
-        this.count = 0;
    }
-
-    public void addCount() {
-        this.count++;
-    }
-
-    public int getCount() {
-        return count;
-    }
 
     public int getMatchNumber() {
         return matchNumber;

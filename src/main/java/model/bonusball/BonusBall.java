@@ -1,8 +1,8 @@
 package model.bonusball;
 
-import utils.InputValidateUtils;
-
 import java.util.Objects;
+
+import utils.InputValidateUtils;
 
 public class BonusBall {
     private static final String BONUS_BALL_BLANK_ERROR_MESSAGE = "[Error]: 보너스 볼을 입력해주세요.";

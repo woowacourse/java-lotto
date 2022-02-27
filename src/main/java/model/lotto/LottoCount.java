@@ -1,8 +1,8 @@
 package model.lotto;
 
-import utils.InputValidateUtils;
-
 import java.util.Objects;
+
+import utils.InputValidateUtils;
 
 public class LottoCount {
     private static final int ZERO = 0;

@@ -1,12 +1,12 @@
 package model.lotto;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import model.result.WinningResult;
 import model.winningnumber.LottoWinningNumberDTO;
-import model.result.Statistics;
+import model.result.Rank;
 import model.bonusball.BonusBallDTO;
 
 public class Lotto {
@@ -18,35 +18,35 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public void compare(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumberDTO) {
-        Set<Integer> winningNumbers = winningNumberDTO.getWinningNumbers();
-        long count = compareWithWinningNumber(winningNumbers);
+    public void calcWinningNumber(WinningResult winningResult, BonusBallDTO bonusDTO, LottoWinningNumberDTO winningDTO) {
+        Set<Integer> winningNumbers = winningDTO.getWinningNumbers();
+        long count = countWinningNumber(winningNumbers);
 
         if (count == CHECKING_BONUS_NUMBER) {
-            compareWithBonusAndStore(bonusBallDTO);
+            compareWithBonusAndStore(winningResult, bonusDTO);
             return;
         }
-        storeResult(count);
+        storeResult(winningResult, count);
     }
 
-    private long compareWithWinningNumber(Set<Integer> winningNumbers) {
+    private long countWinningNumber(Set<Integer> winningNumbers) {
         return numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
     }
 
-    private void compareWithBonusAndStore(BonusBallDTO bonusBallDTO) {
+    private void compareWithBonusAndStore(WinningResult winningResult, BonusBallDTO bonusBallDTO) {
         if (numbers.contains(bonusBallDTO.getNumber())) {
-            Statistics.BONUS.addCount();
+            winningResult.addCount(Rank.BONUS);
             return;
         }
-        Statistics.FIVE.addCount();
+        winningResult.addCount(Rank.FIVE);
     }
 
-    private void storeResult(long count) {
-        Arrays.stream(Statistics.values())
-                .filter(statistics -> statistics.getMatchNumber() == count)
-                .forEach(Statistics::addCount);
+    private void storeResult(WinningResult winningResult, long count) {
+        Arrays.stream(Rank.values())
+                .filter(rank -> rank.getMatchNumber() == count)
+                .forEach(winningResult::addCount);
     }
 
     public LottoDTO getLottoDTO() {

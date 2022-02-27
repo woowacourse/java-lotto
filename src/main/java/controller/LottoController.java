@@ -2,6 +2,7 @@ package controller;
 
 import model.lotto.LottoGame;
 import model.lotto.LottoStorage;
+import model.result.WinningResult;
 import view.InputView;
 import view.OutputView;
 
@@ -16,9 +17,9 @@ public class LottoController {
         receiveWinningNumbers(lottoGame);
         receiveBonusBall(lottoGame);
 
-        lottoGame.compareLottoWithWinningNumber();
+        WinningResult winningResult = lottoGame.calcLottoWithWinningNumber();
 
-        sendStatistics(lottoGame);
+        sendStatistics(winningResult, lottoGame);
     }
 
     private LottoStorage makeLottos(LottoGame lottoGame) {
@@ -48,9 +49,9 @@ public class LottoController {
         }
     }
 
-    private void sendStatistics(LottoGame lottoGame) {
+    private void sendStatistics(WinningResult winningResult, LottoGame lottoGame) {
         outputView.printResultMessage();
-        double rateOfReturn = lottoGame.showResult();
+        double rateOfReturn = lottoGame.showResult(winningResult);
         outputView.printRateOfReturn(rateOfReturn);
     }
 }

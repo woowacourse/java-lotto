@@ -3,11 +3,12 @@ package model.lotto;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.result.WinningResult;
 import model.winningnumber.LottoWinningNumberDTO;
 import model.bonusball.BonusBallDTO;
 
 public class LottoStorage {
-    private List<Lotto> lottoStorage;
+    private final List<Lotto> lottoStorage;
 
     public LottoStorage(LottoCount lottoCount) {
         this.lottoStorage = store(lottoCount);
@@ -29,7 +30,9 @@ public class LottoStorage {
         return lottoDTOS;
     }
 
-    public void compare(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumbersDTO) {
-        lottoStorage.forEach(lotto -> lotto.compare(bonusBallDTO, winningNumbersDTO));
+    public WinningResult calcWinningNumber(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumbersDTO) {
+        WinningResult winningResult = new WinningResult();
+        lottoStorage.forEach(lotto -> lotto.calcWinningNumber(winningResult, bonusBallDTO, winningNumbersDTO));
+        return winningResult;
     }
 }

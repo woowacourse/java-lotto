@@ -1,6 +1,5 @@
 package model.result;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 import model.lotto.LottoCount;
@@ -15,9 +14,10 @@ public class RateOfReturn {
         this.sumMoneyOfReturns = 0;
     }
 
-    public double getRateOfReturn() {
-        Arrays.stream(Statistics.values())
-                .forEach(statistics -> sumMoneyOfReturns += (statistics.getCount() * statistics.getValue()));
+    public double getRateOfReturn(WinningResult winningResult) {
+        for (Rank rank : winningResult.getWinningCount().keySet()) {
+            sumMoneyOfReturns += winningResult.getWinningCount().get(rank) * rank.getValue();
+        }
 
         return (sumMoneyOfReturns / (double) money);
     }
