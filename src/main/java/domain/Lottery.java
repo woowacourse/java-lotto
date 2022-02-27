@@ -6,7 +6,7 @@ import utils.LotteryMessage;
 
 public class Lottery {
 
-	private static final int LOTTERY_SIZE = 6;
+	public static final int LOTTERY_SIZE = 6;
 	private final List<LotteryNumber> numbers;
 
 	public Lottery(final List<LotteryNumber> numbers) {
