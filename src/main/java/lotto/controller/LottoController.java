@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoTickets;
 import lotto.domain.MoneyManager;
 import lotto.domain.Ranks;
@@ -14,7 +15,7 @@ public class LottoController {
 
     public void buyAndMatch() {
         MoneyManager moneyManager = new MoneyManager(InputView.requestMoney());
-        LottoTickets lottoTickets = new LottoTickets(moneyManager.getLottoCount());
+        LottoTickets lottoTickets = new LottoTickets(new LottoNumberGenerator(), moneyManager.getLottoCount());
 
         OutputView.displayLottoTickets(lottoTickets);
 

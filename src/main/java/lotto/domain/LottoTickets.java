@@ -9,14 +9,13 @@ public class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(int lottoCount) {
+    public LottoTickets(LottoNumberGenerator lottoNumberGenerator, int lottoTicketCount) {
         this.lottoTickets = new ArrayList<>();
-        createLottoTickets(lottoCount);
+        createLottoTickets(lottoNumberGenerator, lottoTicketCount);
     }
 
-    private void createLottoTickets(int lottoCount) {
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        for (int i = 0; i < lottoCount; i++) {
+    private void createLottoTickets(LottoNumberGenerator lottoNumberGenerator, int lottoTicketCount) {
+        for (int i = 0; i < lottoTicketCount; i++) {
             lottoTickets.add(new LottoTicket(lottoNumberGenerator.getLottoNumbers(LOTTO_NUMBER_SIZE)));
         }
     }
