@@ -46,6 +46,21 @@
 - [x] `POSIX new Line` [링크](https://blog.coderifleman.com/2015/04/04/text-files-end-with-a-newline/)
   - 인텔리제이 옵션 (항상 개행) [링크](https://velog.io/@d-h-k/intellij-%ED%8C%8C%EC%9D%BC%EB%81%9D%EC%97%90-%EA%B0%9C%ED%96%89%EC%9D%84-%EC%9E%90%EB%8F%99%EC%9C%BC%EB%A1%9C-%EC%B6%94%EA%B0%80%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95) 
 
+### 2차 피드백 기반 추가 변경 사항 
+- [ ] 정규표현식 대신 `Integer.parseInt()` + 범위 검증 으로 대체 (가독성 및 테스트)
+- [ ] 당첨 번호(WinningNumber) 뿐만이 아닌 Lotto에도 적용되는 검증 규칙.
+  - 검증 부분의 중복에 대한 고민이 필요
+  - 추천) 주 생성자를 사용해서 검증 로직을 두고 부생성자 또는 팩토리 메서드에서 활용
+- [ ] 로또번호 생성 시 List를 생성하는 대신 미리 만들어두고 사용하는 방법 
+- [ ] 로또번호의 최소/최대값의 정보를 가지고 올 때 함수가 아닌 상수 자체를 가지고 오도록 수정
+- [ ] 정적 팩토리 메서드(함수의 네이밍 수정)(ex. valueOf())
+- [ ] Integer 클래스는 값을 캐싱해서 사용하고 있는 부분이 존재
+  - 자주 사용될 수 있는 객체는 값을 캐싱하는 식으로 구현
+- [ ] View에서 Statistics가 Money를 받아 수익률 계산하는 것을 모르도록 개선
+- [ ] 테스트 코드 추가
+  1. Rank - valueOf()
+  2. Statistics - getWinningStatistics()
+
 
 - 질문 답변
   - Stream 사용 시 스타일에 대한 문제
