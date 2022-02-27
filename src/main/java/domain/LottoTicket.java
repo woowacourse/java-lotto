@@ -6,6 +6,7 @@ import java.util.List;
 import util.LottoNumberGenerator;
 
 public class LottoTicket {
+
     private final List<Lotto> lottos = new ArrayList<>();
 
     public LottoTicket(int lottoCount, LottoNumberGenerator generatorPolicy) {

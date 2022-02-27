@@ -4,7 +4,7 @@ import java.util.List;
 
 public class WinningLotto {
 
-    public static final String DUPLICATED_BONUS_BALL_ERROR_MESSAGE = " 보너스 볼은 당첨 번호와 중복됩니다.";
+    private static final String DUPLICATED_BONUS_BALL_ERROR_MESSAGE = " 보너스 볼은 당첨 번호와 중복됩니다.";
     private static final int SECOND_AND_THIRD_RANK_COUNT = 5;
 
     private final List<Integer> winningNumbers;
