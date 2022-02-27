@@ -3,27 +3,29 @@ package domain;
 import java.util.List;
 
 public enum Rank {
-    FIFTH(3, 5000, 0),
-    FOURTH(4, 50000, 0),
-    THIRD(5, 1500000, 0, false),
-    SECOND(5, 30000000, 0, true),
-    FIRST(6, 2000000000, 0);
+    FIFTH(5,3, 5000, 0),
+    FOURTH(4, 4, 50000, 0),
+    THIRD(3, 5, 1500000, 0, false),
+    SECOND(2,5, 30000000, 0, true),
+    FIRST(1, 6, 2000000000, 0);
 
     private static final int DEFAULT_TOTAL_INCOME = 0;
 
+    private int rankNumber;
     private int criteria;
     private int reward;
     private int hitCount;
     private boolean hitBonusBall;
 
-    Rank(int criteria, int reward, int hitCount) {
+    Rank(int rankNumber, int criteria, int reward, int hitCount) {
+        this.rankNumber = rankNumber;
         this.criteria = criteria;
         this.reward = reward;
         this.hitCount = hitCount;
     }
 
-    Rank(int criteria, int reward, int hitCount, boolean hitBonusBall) {
-        this(criteria, reward, hitCount);
+    Rank(int rankNumber, int criteria, int reward, int hitCount, boolean hitBonusBall) {
+        this(rankNumber, criteria, reward, hitCount);
         this.hitBonusBall = hitBonusBall;
     }
 
@@ -52,6 +54,10 @@ public enum Rank {
         if (result.compare(value)) {
             value.hitCount++;
         }
+    }
+
+    public int getRankNumber() {
+        return rankNumber;
     }
 
     public int getHitCount() {

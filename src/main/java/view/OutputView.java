@@ -1,5 +1,6 @@
 package view;
 
+import domain.Rank;
 import dto.LottoDto;
 import dto.LottosDto;
 import dto.RankDto;
