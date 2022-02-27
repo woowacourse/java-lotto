@@ -2,7 +2,7 @@ package view;
 
 import domain.Lotto;
 import domain.PrizeResult;
-import domain.PurchasedLotto;
+import domain.LottoGame;
 import domain.Prize;
 
 import java.util.Map;
@@ -24,9 +24,9 @@ public class OutputView {
     private static final String EARNING_RATE_END_MESSAGE = "입니다.";
 
 
-    public static void printPurchasedLotto(PurchasedLotto purchasedLotto) {
-        System.out.println(purchasedLotto.getLottos().size() + PURCHASE_COUNT_MESSAGE);
-        for (Lotto lotto : purchasedLotto.getLottos()) {
+    public static void printPurchasedLotto(LottoGame lottoGame) {
+        System.out.println(lottoGame.getLottos().size() + PURCHASE_COUNT_MESSAGE);
+        for (Lotto lotto : lottoGame.getLottos()) {
             System.out.print(LEFT_BRACKET);
             String lottoNumbers = String.join(DELIMITER, lotto.getLottoNumbers().stream()
                     .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))

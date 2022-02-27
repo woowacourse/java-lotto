@@ -5,22 +5,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DisplayName("상금과 수익률을 옳바르게 계산하는지 테스트한다.")
-public class PurchasedLottosTest {
+public class LottosTestGame {
 
-    PurchasedLotto lottos;
+    LottoGame lottos;
     WinningLotto winningLotto;
     int inputMoney;
 
     @BeforeEach
     void init() {
         inputMoney = 1400;
-        lottos = new PurchasedLotto(inputMoney);
+        lottos = new LottoGame(inputMoney);
         lottos.purchase(new CustomPurchaseStrategy(List.of(1, 2, 3, 43, 44, 45)));
         lottos.purchase(new CustomPurchaseStrategy(List.of(1, 2, 3, 4, 44, 45)));
         lottos.purchase(new CustomPurchaseStrategy(List.of(1, 2, 3, 4, 5, 45)));

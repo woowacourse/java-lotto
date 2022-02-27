@@ -6,7 +6,7 @@ import domain.strategy.RandomPurchaseStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchasedLotto {
+public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
 
@@ -14,7 +14,7 @@ public class PurchasedLotto {
     private PrizeResult prizeResult = new PrizeResult();
     private int inputMoney;
 
-    public PurchasedLotto(int inputMoney) {
+    public LottoGame(int inputMoney) {
         this.inputMoney = inputMoney;
         purchaseMaximumLottos();
     }

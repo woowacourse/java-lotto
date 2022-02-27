@@ -1,27 +1,25 @@
 package controller;
 
 import domain.Lotto;
-import domain.PurchasedLotto;
+import domain.LottoGame;
 import domain.WinningLotto;
 import view.InputView;
 import view.OutputView;
 
-import java.util.List;
-
 public class LottoGameController {
 
-    private PurchasedLotto purchasedLotto;
+    private LottoGame lottoGame;
     private WinningLotto winningLotto;
 
     public void run() {
-        purchasedLotto = new PurchasedLotto(InputView.inputPrice());
-        OutputView.printPurchasedLotto(purchasedLotto);
+        lottoGame = new LottoGame(InputView.inputPrice());
+        OutputView.printPurchasedLotto(lottoGame);
         Lotto lotto  = new Lotto(InputView.inputWinningLottoNumbers());
         int bonus = InputView.inputBonus();
         winningLotto = new WinningLotto(lotto, bonus);
-        purchasedLotto.calculatePrizeResult(winningLotto);
-        OutputView.printFinalStatistic(purchasedLotto.getPrizeResult());
-        OutputView.printEarningRate(purchasedLotto.calculateEarningRate());
+        lottoGame.calculatePrizeResult(winningLotto);
+        OutputView.printFinalStatistic(lottoGame.getPrizeResult());
+        OutputView.printEarningRate(lottoGame.calculateEarningRate());
     }
 
 }
