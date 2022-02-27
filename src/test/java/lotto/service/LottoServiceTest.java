@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import java.util.Map;
 
+import lotto.AppConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -17,8 +18,10 @@ import lotto.dto.WinningTicketDto;
 
 class LottoServiceTest {
 
-    private final CustomTicketGenerator customTicketGenerator = new CustomTicketGenerator();
-    private final LottoService lottoService = new LottoService(customTicketGenerator);
+    private static final AppConfig APP_CONFIG = AppConfig.getInstance();
+
+    private final LottoService lottoService = APP_CONFIG.lottoService;
+    private final CustomTicketGenerator customTicketGenerator = APP_CONFIG.ticketGenerator;
 
     @DisplayName("로또 생성 확인 테스트")
     @ParameterizedTest(name = "[{index}] {1}원어치 로또 구입")
