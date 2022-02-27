@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Predicate;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicketFactory;
 import lotto.domain.PurchaseAmount;
@@ -26,12 +27,22 @@ public class LottoController {
         WinningNumbers winningNumbers = inputWinningNumbers();
 
         WinningStats winningStats = calculateStatistics(lottoTickets, winningNumbers);
+        outputView.printWinningStats(winningStats, purchaseAmount);
+    }
 
-        outputView.printStatistics(winningStats, purchaseAmount);
+    private PurchaseAmount inputMoney() {
+        IndividualInput<PurchaseAmount> input = () -> new PurchaseAmount(inputView.inputMoney());
+        return commonInputProcess(input);
     }
 
     private List<LottoTicket> purchaseLottoTickets(PurchaseAmount purchaseAmount) {
         return lottoTicketFactory.createTickets(purchaseAmount);
+    }
+
+    private WinningNumbers inputWinningNumbers() {
+        IndividualInput<WinningNumbers> input =
+                () -> new WinningNumbers(inputView.inputWinningNumbers(), inputView.inputBonusBall());
+        return commonInputProcess(input);
     }
 
     private WinningStats calculateStatistics(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
@@ -45,17 +56,6 @@ public class LottoController {
             winningStats.put(lottoRank);
         }
         return winningStats;
-    }
-
-    private PurchaseAmount inputMoney() {
-        IndividualInput<PurchaseAmount> input = () -> new PurchaseAmount(inputView.inputMoney());
-        return commonInputProcess(input);
-    }
-
-    private WinningNumbers inputWinningNumbers() {
-        IndividualInput<WinningNumbers> input =
-                () -> new WinningNumbers(inputView.inputWinningNumbers(), inputView.inputBonusBall());
-        return commonInputProcess(input);
     }
 
     private <T> T commonInputProcess(IndividualInput<T> individualInputs) {

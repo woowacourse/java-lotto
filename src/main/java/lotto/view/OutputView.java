@@ -16,17 +16,26 @@ public enum OutputView {
 
     INSTANCE;
 
+    private static final String PURCHASED_TICKET_MESSAGE = "%d개를 구매했습니다.%n";
+    private static final String WINNING_STATS_MESSAGE = "당첨 통계\n---------";
+    public static final String LOTTO_NUMBERS = "[%s]%n";
+    public static final String WINNING_RESULT_MESSAGE = "%s개 일치, 보너스 볼 일치 (%s원) - %s개%n";
+    public static final String WINNING_RESULT_MESSAGE_2 = "%s개 일치 (%s원) - %s개%n";
+    public static final String EARNINGS_RESULT_MESSAGE = "총 수익률은 %.2f 입니다.";
+    public static final String LOSS_WARNING_MESSAGE = "%s(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    public static final String LOTTO_NUMBER_DELIMITER = ", ";
+
     public void printErrorMessage(String message) {
         out.println(message);
     }
 
     public void printPurchasedTickets(List<LottoTicket> lottoTickets) {
-        out.printf("%d개를 구매했습니다.%n", lottoTickets.size());
+        out.printf(PURCHASED_TICKET_MESSAGE, lottoTickets.size());
         lottoTickets.forEach(this::printLottoNumbers);
     }
 
-    public void printStatistics(WinningStats winningStats, PurchaseAmount purchaseAmount) {
-        out.printf("당첨 통계%n---------%n");
+    public void printWinningStats(WinningStats winningStats, PurchaseAmount purchaseAmount) {
+        out.println(WINNING_STATS_MESSAGE);
         List<LottoRank> targetLottoRanks = getLottoRanksToPrint();
         for (LottoRank lottoRank : targetLottoRanks) {
             printWinningResult(winningStats, lottoRank);
@@ -34,33 +43,37 @@ public enum OutputView {
         printEarningsResult(winningStats, purchaseAmount);
     }
 
-    private void printLottoNumbers(LottoTicket lottoTicket) {
-        List<String> lottoNumbers = lottoTicket.lottoNumbers().stream()
-                .map(LottoNumber::toString)
-                .collect(Collectors.toUnmodifiableList());
-        out.printf("[%s]%n", String.join(", ", lottoNumbers));
+    private void printEarningsResult(WinningStats winningStats, PurchaseAmount purchaseAmount) {
+        double earningsRate = winningStats.getEarningsRate(purchaseAmount);
+        String result = String.format(EARNINGS_RESULT_MESSAGE, earningsRate);
+        if (earningsRate < 1) {
+            result = String.format(LOSS_WARNING_MESSAGE, result);
+        }
+        out.println(result);
     }
 
     private void printWinningResult(WinningStats winningStats, LottoRank lottoRank) {
         if (lottoRank == LottoRank.THIRD) {
-            out.printf("%s개 일치, 보너스 볼 일치 (%s원) - %s개%n", LottoRank.THIRD.winningNumberMatchCount(),
-                    LottoRank.THIRD.prizeMoney(), winningStats.get(LottoRank.THIRD));
+            out.printf(WINNING_RESULT_MESSAGE,
+                    LottoRank.THIRD.winningNumberMatchCount(),
+                    LottoRank.THIRD.prizeMoney(),
+                    winningStats.get(LottoRank.THIRD))
+            ;
             return;
         }
-        out.printf("%s개 일치 (%s원) - %s개%n",
+        out.printf(WINNING_RESULT_MESSAGE_2,
                 lottoRank.winningNumberMatchCount(),
                 lottoRank.prizeMoney(),
                 winningStats.get(lottoRank)
         );
     }
 
-    private void printEarningsResult(WinningStats winningStats, PurchaseAmount purchaseAmount) {
-        double earningsRate = winningStats.getEarningsRate(purchaseAmount);
-        String result = String.format("총 수익률은 %.2f 입니다.", earningsRate);
-        if (earningsRate < 1) {
-            result = String.format("%s(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result);
-        }
-        out.println(result);
+    private void printLottoNumbers(LottoTicket lottoTicket) {
+        List<String> lottoNumbers = lottoTicket.lottoNumbers().stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.toUnmodifiableList());
+
+        out.printf(LOTTO_NUMBERS, String.join(LOTTO_NUMBER_DELIMITER, lottoNumbers));
     }
 
     private List<LottoRank> getLottoRanksToPrint() {
