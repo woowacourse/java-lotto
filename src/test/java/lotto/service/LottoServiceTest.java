@@ -27,7 +27,7 @@ class LottoServiceTest {
     @ParameterizedTest(name = "[{index}] {1}원어치 로또 구입")
     @MethodSource("lotto.service.provider.LottoServiceTestProvider#provideForGenerateTicketsTest")
     void generateTicketsTest(final List<TicketDto> expectedTicketDtos, final int money) {
-        customTicketGenerator.initNumbers(expectedTicketDtos);
+        customTicketGenerator.initTickets(expectedTicketDtos);
         lottoService.generateTickets(money);
 
         final List<TicketDto> actualTicketDtos = lottoService.getTicketDtos();
@@ -49,7 +49,7 @@ class LottoServiceTest {
                                        final WinningTicketDto winningTicketDto,
                                        final Map<Rank, Integer> expectedRankCounts,
                                        final String expectedProfitRate) {
-        customTicketGenerator.initNumbers(expectedTicketDtos);
+        customTicketGenerator.initTickets(expectedTicketDtos);
         lottoService.generateTickets(money);
 
         final AnalysisDto analysisDto = lottoService.generateAnalysis(winningTicketDto);
@@ -65,7 +65,7 @@ class LottoServiceTest {
                                         final WinningTicketDto winningTicketDto,
                                         final Map<Rank, Integer> expectedRankCounts,
                                         final String expectedProfitRate) {
-        customTicketGenerator.initNumbers(expectedTicketDtos);
+        customTicketGenerator.initTickets(expectedTicketDtos);
         lottoService.generateTickets(money);
 
         final AnalysisDto analysisDto = lottoService.generateAnalysis(winningTicketDto);

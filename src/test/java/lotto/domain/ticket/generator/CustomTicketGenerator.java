@@ -10,7 +10,7 @@ public class CustomTicketGenerator implements TicketGenerator {
 
     private Iterator<TicketDto> ticketIterator;
 
-    public void initNumbers(final List<TicketDto> tickets) {
+    public void initTickets(final List<TicketDto> tickets) {
         this.ticketIterator = tickets.iterator();
     }
 
