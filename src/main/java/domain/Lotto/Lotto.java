@@ -4,6 +4,7 @@ import domain.Result;
 import utils.ExceptionMessage;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
 
@@ -13,12 +14,19 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lotto) {
         validateLottoSize(lotto);
+        validateDuplicate(lotto);
         this.lotto = lotto;
     }
 
     private void validateLottoSize(List<LottoNumber> lotto) {
         if (lotto.size() != CORRECT_LOTTO_SIZE) {
             throw new IllegalArgumentException(ExceptionMessage.LOTTO_SIZE_IS_NOT_SIX);
+        }
+    }
+
+    private void validateDuplicate(List<LottoNumber> lotto){
+        if(lotto.stream().distinct().count() != lotto.size()){
+            throw new IllegalArgumentException(ExceptionMessage.DUPLICATE_LOTTO_NUMBER);
         }
     }
 
@@ -38,5 +46,18 @@ public class Lotto {
 
     private boolean judgeBonusBall(LottoNumber bonusBall) {
         return lotto.contains(bonusBall);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto1 = (Lotto) o;
+        return Objects.equals(lotto, lotto1.lotto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
     }
 }

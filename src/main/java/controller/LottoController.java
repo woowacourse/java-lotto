@@ -12,8 +12,10 @@ import domain.player.Money;
 import domain.player.Player;
 import dto.LottosDto;
 import dto.RanksDto;
+import utils.ExceptionMessage;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoController {
 
