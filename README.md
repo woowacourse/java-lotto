@@ -170,20 +170,27 @@
 <div markdow="1">
 
 1. Lotto 생성자에 대한 테스트 진행하기
-   - [ ] lotto 객체 두개 생성 후 `isEqualTo()` 이용해 비교하기
-   - [ ] `equals()`, `hashCode()` 재정의
-   - [ ] 테스트가 힘든 코드인 Collection.shuffle() 분리하기
+   - [X] lotto 객체 두개 생성 후 `isEqualTo()` 이용해 비교하기 -> `isNotEqualTo()` 이용
+   - [X] `equals()`, `hashCode()` 재정의 -> 두 객체가 다른 참조값을 가져야하므로 일치할 필요 없음
+   - [X] 테스트가 힘든 코드인 Collection.shuffle() 분리하기
 2. `Arrays.asList()` 의 패키지
-   - [ ] `assertj.core` -> `java.util` 로 변경
+   - [X] `assertj.core` -> `java.util` 로 변경
 3. `assert` 문이 없으면 테스트코드가 아니다
-   - [ ] 학습 테스트에서 출력을 이용해 값을 확인하지 말고 `assert` 문 사용하기
+   - [X] 학습 테스트에서 출력을 이용해 값을 확인하지 말고 `assert` 문 사용하기
 4. 배열보다는 리스트를 사용하기
-   - [ ] 배열이 사용된 곳이 있다면 리스트로 변경하기
+   - [X] 배열이 사용된 곳이 있다면 리스트로 변경하기
 5. LottoNumber 가 인터페이스로 구현된 목적을 확실히 하기
-   - [ ] 함수 재사용이 목적인지, 하나의 타입으로 묶기 위함인지 생각해보기
-   - [ ] 전자라면, 인터페이스가 아닌 조합을 사용하기
+   - [X] 함수 재사용이 목적인지, 하나의 타입으로 묶기 위함인지 생각해보기
+   - [X] 전자라면, 인터페이스가 아닌 조합을 사용하기
 6. static을 사용하는 목적
-   - [ ] Controller 의 모든 메서드를 static 으로 만든 이유 생각해보기
+   - [X] Controller 의 모든 메서드를 static 으로 만든 이유 생각해보기
+7. 개인적 리팩터링
+   - [X] 불변값에 final 을 사용해 불변임을 명시
+   - [X] `NOMINEE_NUMBERS` -> `LOTTO_BALLS` 의미가 들어나는 이름 사용
+   - [X] PrizeInformation 생성자 private 으로 변경
+     - [X] 변경으로 인한 테스트 코드 수정
+   - [X] Prize.getPrize() 변경으로 인한 PrizeTest 의 에러 수정
+
 
 </div>
 </details>
