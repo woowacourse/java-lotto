@@ -8,26 +8,22 @@ public class Ranks {
     private final EnumMap<Rank, Integer> statistics;
 
     public Ranks(List<Rank> ranks) {
-        this.statistics = initializeState();
+        this.statistics = new EnumMap<>(Rank.class);
         createStatistics(ranks);
-    }
-
-    private EnumMap<Rank, Integer> initializeState() {
-        EnumMap<Rank, Integer> temp = new EnumMap<>(Rank.class);
-        for (Rank rank : Rank.values()) {
-            temp.put(rank, 0);
-        }
-        return temp;
     }
 
     private void createStatistics(List<Rank> ranks) {
         for (Rank rank : ranks) {
-            statistics.put(rank, statistics.get(rank) + 1);
+            statistics.put(rank, statistics.getOrDefault(rank, 0) + 1);
         }
     }
 
     public EnumMap<Rank, Integer> getStatistics() {
-        return new EnumMap<>(statistics);
+        EnumMap<Rank, Integer> statisticsResult = new EnumMap<>(Rank.class);
+        for (Rank rank : Rank.values()) {
+            statisticsResult.put(rank, this.statistics.getOrDefault(rank, 0));
+        }
+        return statisticsResult;
     }
 
     public double getLottoTotalReward() {
