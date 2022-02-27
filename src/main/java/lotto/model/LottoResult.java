@@ -4,7 +4,6 @@ import static java.util.stream.Collectors.*;
 
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoResult {
     private final Map<Rank, Long> result;

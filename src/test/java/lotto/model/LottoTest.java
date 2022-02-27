@@ -8,12 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
-    @Test
-    @DisplayName("6개의 랜덤한 로또 번호를 생성하는지 확인")
-    void shuffleTest() {
-        assertThatCode(Lotto::generate)
-            .doesNotThrowAnyException();
-    }
 
     @Test
     @DisplayName("당첨 번호를 비교한다")

@@ -13,7 +13,8 @@ public class Lottos {
 
     public static Lottos generate(int count) {
         return new Lottos(IntStream.range(0, count)
-            .mapToObj(i -> Lotto.generate())
+            .mapToObj(i -> LottoNumberGenerator.generate())
+            .map(Lotto::new)
             .collect(Collectors.toUnmodifiableList()));
     }
 

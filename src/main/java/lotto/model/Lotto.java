@@ -1,16 +1,12 @@
 package lotto.model;
 
-import static java.util.Collections.*;
-import static lotto.model.LottoNumber.*;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
-    private static final int LOTTO_SIZE = 6;
+    static final int LOTTO_SIZE = 6;
     private static final String ERROR_NOT_MATCH_LOTTO_NUMBER_SIZE = "로또 번호 개수는 6개로 입력해주세요.";
     private static final String ERROR_DUPLICATION_LOTTO_NUMBERS = "로또 번호에 중복이 존재합니다.";
 
@@ -20,20 +16,6 @@ public class Lotto {
         validateNumberOfLottoNumbers(lottoNumbers);
         validateDuplicationLottoNumbers(lottoNumbers);
         this.lottoNumbers = convertIntegersToLottoNumbers(lottoNumbers);
-    }
-
-    static Lotto generate() {
-        List<Integer> sequentialIntegers = generateSequentialIntegers();
-        shuffle(sequentialIntegers);
-        List<Integer> lottoNumbers = sequentialIntegers.subList(0, LOTTO_SIZE);
-        sort(lottoNumbers);
-        return new Lotto(lottoNumbers);
-    }
-
-    private static List<Integer> generateSequentialIntegers() {
-        return IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-            .boxed()
-            .collect(Collectors.toList());
     }
 
     private void validateNumberOfLottoNumbers(List<Integer> lottoNumbers) {
