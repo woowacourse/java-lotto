@@ -47,7 +47,9 @@
   - 인텔리제이 옵션 (항상 개행) [링크](https://velog.io/@d-h-k/intellij-%ED%8C%8C%EC%9D%BC%EB%81%9D%EC%97%90-%EA%B0%9C%ED%96%89%EC%9D%84-%EC%9E%90%EB%8F%99%EC%9C%BC%EB%A1%9C-%EC%B6%94%EA%B0%80%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95) 
 
 ### 2차 피드백 기반 추가 변경 사항 
-- [ ] 정규표현식 대신 `Integer.parseInt()` + 범위 검증 으로 대체 (가독성 및 테스트)
+- [x] 정규표현식 대신 `Integer.parseInt()` + 범위 검증 으로 대체 (가독성 및 테스트)
+  - 정규표현식 사용 대신 `Integer.parseInt()` 사용 시 발생하는 NumberFormatException과 tyr-catch 이용 
+  - 로또(당첨) 번호의 범위 검증은 `LottoNumber` 범위 검증으로 대체 
 - [ ] 당첨 번호(WinningNumber) 뿐만이 아닌 Lotto에도 적용되는 검증 규칙.
   - 검증 부분의 중복에 대한 고민이 필요
   - 추천) 주 생성자를 사용해서 검증 로직을 두고 부생성자 또는 팩토리 메서드에서 활용
