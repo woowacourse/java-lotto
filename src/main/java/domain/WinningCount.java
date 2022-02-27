@@ -5,11 +5,8 @@ import java.util.Objects;
 public class WinningCount {
     public static final int POSITIVE_CRITERIA = 0;
     public static final String ERROR_MESSAGE_FOR_NEGATIVE_OR_ZERO_NUMBER = "당첨 횟수는 0이상 이어야 합니다.";
+    
     private final int count;
-
-    public int getCount() {
-        return count;
-    }
 
     public WinningCount(int count) {
         validateNotNegative(count);
@@ -20,6 +17,10 @@ public class WinningCount {
         if (count < POSITIVE_CRITERIA) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_NEGATIVE_OR_ZERO_NUMBER);
         }
+    }
+
+    public int getCount() {
+        return count;
     }
 
     @Override
