@@ -14,6 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class TicketTest {
 
     @Test
+    @DisplayName("티켓 정상 생성")
     void 티켓생성() {
         Ticket ticket = new Ticket(() -> Set.of(new LottoNumber(1),
             new LottoNumber(2),
@@ -31,6 +32,7 @@ public class TicketTest {
     }
 
     @Test
+    @DisplayName("티켓 입력 정상일때")
     void 티켓번호개수_정상입력() {
         assertThatCode(() -> new Ticket(Set.of(new LottoNumber(1),
             new LottoNumber(2),
@@ -42,6 +44,7 @@ public class TicketTest {
     }
 
     @Test
+    @DisplayName("티켓 번호 개수 5개일때 예외테스트")
     void 티켓번호개수_5개() {
         assertThatThrownBy(() -> new Ticket(Set.of(new LottoNumber(1),
             new LottoNumber(2),
@@ -52,6 +55,7 @@ public class TicketTest {
     }
 
     @Test
+    @DisplayName("문자열로 로또 정상 생성")
     void 입력받은_문자열로_로또번호_정상생성() {
         assertThatCode(() -> Ticket.of("1, 2, 3, 4, 5, 6"))
             .doesNotThrowAnyException();
@@ -65,7 +69,7 @@ public class TicketTest {
             .isInstanceOf(IllegalArgumentException.class);
     }
 
-    static Stream<Arguments> parameters() {
+    private static Stream<Arguments> parameters() {
         return Stream.of(
             Arguments.of("1, 2, 3, 4, 5", "5개입력"),
             Arguments.of("1, 2, 3, 4, 5, 6, 7", "7개입력"),

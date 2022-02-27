@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.utils.RandomLottoNumbersGenerator;
@@ -14,12 +15,14 @@ import lotto.utils.RandomLottoNumbersGenerator;
 public class TicketsTest {
 
     @Test
+    @DisplayName("티켓 정상생성")
     void 티켓_생성() {
         Tickets tickets = Tickets.of(5, new RandomLottoNumbersGenerator());
         assertThat(tickets.getTickets().size()).isEqualTo(5);
     }
 
     @Test
+    @DisplayName("로또 당첨 등수와 당첨 개수 테스트")
     void 로또당첨_등수_개수() {
         WinTicket winTicket = getWinTicket();
 
@@ -37,6 +40,7 @@ public class TicketsTest {
     }
 
     @Test
+    @DisplayName("수익률 0일때")
     void 수익률_0() {
         WinTicket winTicket = getWinTicket();
 
@@ -51,6 +55,7 @@ public class TicketsTest {
     }
 
     @Test
+    @DisplayName("수익률 1000일때")
     void 수익률_1000() {
         WinTicket winTicket = getWinTicket();
 
@@ -65,6 +70,7 @@ public class TicketsTest {
     }
 
     @Test
+    @DisplayName("수익률 0.35 일때")
     void 수익률_035() {
         WinTicket winTicket = getWinTicket();
 
@@ -79,6 +85,7 @@ public class TicketsTest {
     }
 
     @Test
+    @DisplayName("수익률 1등이 3명일때")
     void 수익률_1등_3명() {
         WinTicket winTicket = getWinTicket();
 
@@ -92,6 +99,7 @@ public class TicketsTest {
     }
 
     @Test
+    @DisplayName("수익률 1등이 14명일때")
     void 수익률_1등_14명() {
         WinTicket winTicket = getWinTicket();
         List<Ticket> testTickets = new ArrayList<>();

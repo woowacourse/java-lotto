@@ -26,6 +26,7 @@ public class WinTicketTest {
     }
     
     @Test
+    @DisplayName("당첨번호와 보너스번호 중복일떄 예외 발생")
     void 당첨번호_보너스번호_중복검사_실패테스트() {
         Set<LottoNumber> winNumbers = Set.of(new LottoNumber(1),
             new LottoNumber(2),
@@ -38,6 +39,7 @@ public class WinTicketTest {
     }
 
     @Test
+    @DisplayName("당첨번호와 보너스번호 정상 입력")
     void 당첨번호_보너스번호_중복검사_성공테스트() {
         Ticket winTicket = new Ticket(Set.of(new LottoNumber(1),
             new LottoNumber(2),
@@ -64,7 +66,7 @@ public class WinTicketTest {
         assertThat(winningTicket.getTicketRank(ticket)).isEqualTo(rank);
     }
 
-    static Stream<Arguments> parameters() {
+    private static Stream<Arguments> parameters() {
         return Stream.of(
             Arguments.of(1, 2, 3, 4, 5, 6, 7, Rank.FIRST, "1등당첨"),
             Arguments.of(1, 2, 3, 4, 5, 16, 6, Rank.SECOND, "2등당첨"),

@@ -20,7 +20,7 @@ public class AmountTest {
             .isInstanceOf(IllegalArgumentException.class);
     }
 
-    static Stream<Arguments> invalidParameters() {
+    private static Stream<Arguments> invalidParameters() {
         return Stream.of(
             Arguments.of(0, "투입금액 0"),
             Arguments.of(100, "천원단위로 안나누어떨어질때"),
@@ -29,6 +29,7 @@ public class AmountTest {
     }
 
     @Test
+    @DisplayName("투입금액이 정상일때")
     void 투입금액이_정상() {
         assertThatCode(() -> new Amount(10000))
             .doesNotThrowAnyException();

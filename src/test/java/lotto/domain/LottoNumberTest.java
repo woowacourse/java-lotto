@@ -19,7 +19,7 @@ public class LottoNumberTest {
             .isInstanceOf(IllegalArgumentException.class);
     }
 
-    static Stream<Arguments> invalidParameters() {
+    private static Stream<Arguments> invalidParameters() {
         return Stream.of(
             Arguments.of(-1, "로또_숫자_0이하"),
             Arguments.of(46, "로또_숫자_46")
@@ -34,7 +34,7 @@ public class LottoNumberTest {
             .doesNotThrowAnyException();
     }
 
-    static Stream<Arguments> validParameters() {
+    private static Stream<Arguments> validParameters() {
         return Stream.of(
             Arguments.of(1, "로또_숫자_1"),
             Arguments.of(23, "로또_숫자_23"),
