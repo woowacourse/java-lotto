@@ -9,16 +9,14 @@ public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
 
     private final int money;
-    private final LottoResult lottoResult;
     private final LottoTicket lottoTicket;
 
     public LottoMachine(int money, LottoNumberGenerator numberGenerator) {
         this.money = money;
-        this.lottoResult = new LottoResult();
         this.lottoTicket = new LottoTicket(money / LOTTO_PRICE, numberGenerator);
     }
 
-    public double calculateProfit() {
+    public double calculateProfit(LottoResult lottoResult) {
         DecimalFormat decimalFormat = decimalFormatSetting();
         double profitRate = lottoResult.sumTotalPrice() / (double) money;
         return Double.parseDouble(decimalFormat.format(profitRate));
@@ -30,15 +28,8 @@ public class LottoMachine {
         return decimalFormat;
     }
 
-    public void putLotto(LottoRank rank) {
-        this.lottoResult.putLottoRank(rank);
-    }
-
     public LottoResult getResults(WinningLotto winningLotto) {
-        for (Lotto lotto : lottoTicket.getLottos()) {
-            lottoResult.putLottoRank(winningLotto.countLottoRank(lotto));
-        }
-        return lottoResult;
+        return new LottoResult(lottoTicket, winningLotto);
     }
 
     public LottoTicket getLottoTicket() {

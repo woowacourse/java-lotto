@@ -37,6 +37,6 @@ public class LottoController {
     private void announceResult(LottoMachine lottoMachine, WinningLotto winningLotto) {
         LottoResult lottoResult = lottoMachine.getResults(winningLotto);
         OutputView.printLottoResult(lottoResult);
-        OutputView.printProfitRate(lottoMachine.calculateProfit());
+        OutputView.printProfitRate(lottoMachine.calculateProfit(lottoResult));
     }
 }

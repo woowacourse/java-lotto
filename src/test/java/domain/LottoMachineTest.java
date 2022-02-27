@@ -20,17 +20,21 @@ public class LottoMachineTest {
     @Test
     public void calculateNoWinningProfit() {
         int money = 14000;
-        LottoMachine lottoMachine = new LottoMachine(money, new ShuffleNumberGenerator());
-        double profit = lottoMachine.calculateProfit();
+        LottoMachine lottoMachine = new LottoMachine(money, new AlwaysSameLastSixNumberGenerator());
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
+        double profit = lottoMachine.calculateProfit(new LottoResult(lottoMachine.getLottoTicket(), winningLotto));
         assertThat(profit).isEqualTo(0);
     }
 
     @Test
     public void calculateFifthWinningProfit() {
         int money = 14000;
-        LottoMachine lottoMachine = new LottoMachine(money, new ShuffleNumberGenerator());
-        lottoMachine.putLotto(LottoRank.RANK_5);
-        assertThat(lottoMachine.calculateProfit()).isEqualTo(0.35);
+        LottoMachine lottoMachine = new LottoMachine(money, new AlwaysSameSixNumberGenerator());
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 7, 8, 9), 10);
+        assertThat(
+                lottoMachine.calculateProfit(
+                        new LottoResult(lottoMachine.getLottoTicket(), winningLotto))
+        ).isEqualTo(5);
     }
 
     @Test
@@ -48,7 +52,14 @@ public class LottoMachineTest {
 
         @Override
         public List<Integer> generate() {
-            return Arrays.asList(1,2,3,4,5,6);
+            return Arrays.asList(1, 2, 3, 4, 5, 6);
+        }
+    }
+
+    class AlwaysSameLastSixNumberGenerator implements LottoNumberGenerator {
+        @Override
+        public List<Integer> generate() {
+            return Arrays.asList(40, 41, 42, 43, 44, 45);
         }
     }
 
