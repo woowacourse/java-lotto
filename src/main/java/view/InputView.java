@@ -16,37 +16,46 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    private static String input() {
+    private static final InputView inputView = new InputView();
+
+    private InputView() {
+    }
+
+    public static InputView getInstance() {
+        return inputView;
+    }
+
+    private String input() {
         String input = scanner.nextLine();
         InputValidator.validateNull(input);
         InputValidator.validateEmpty(input);
         return input;
     }
 
-    public static int inputPurchaseAmount() {
+    public int inputPurchaseAmount() {
         System.out.println(PURCHASE_AMOUNT_INPUT_MESSAGE);
         return Integer.parseInt(input());
     }
 
-    public static List<Integer> inputWinningNumber() {
+    public List<Integer> inputWinningNumber() {
         System.out.println(WINNING_NUMBER_INPUT_MESSAGE);
         List<String> numberValues = toStrings(input());
         return toNumbers(numberValues);
     }
 
-    private static List<String> toStrings(String stringArray) {
+    private List<String> toStrings(String stringArray) {
         return Arrays.stream(stringArray.split(DELIMITER))
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
 
-    private static List<Integer> toNumbers(List<String> numberValues) {
+    private List<Integer> toNumbers(List<String> numberValues) {
         return numberValues.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    public static int inputBonusBall() {
+    public int inputBonusBall() {
         System.out.println(BONUS_BALL_INPUT_MESSAGE);
         return Integer.parseInt(input());
     }
