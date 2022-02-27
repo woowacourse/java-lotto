@@ -2,6 +2,8 @@ package lotto.controller;
 
 import java.util.List;
 import java.util.Optional;
+import lotto.domain.Lotto;
+import lotto.domain.Number;
 import lotto.domain.WinningNumbers;
 import lotto.utils.StringUtil;
 import lotto.view.InputView;
@@ -9,43 +11,54 @@ import lotto.view.OutputView;
 
 public class WinningNumbersController {
 
+    private static final String DUPLICATE_NUMBER_MESSAGE = "중복입니다.";
+
     public WinningNumbers getWinningNumbers() {
-        Optional<WinningNumbers> winningNumbers;
+        final Lotto winningLotto = getWinningLotto();
+        final Number bonusNumber = getBonusNumber(winningLotto);
+        return new WinningNumbers(winningLotto, bonusNumber);
+    }
+
+    private Lotto getWinningLotto() {
+        Optional<Lotto> winningLotto;
 
         do {
             List<Integer> integers = StringUtil.toIntegers(InputView.inputWinningNumbers());
-            winningNumbers = getWinNumbs(integers);
-        } while (winningNumbers.isEmpty());
+            winningLotto = inputWinningLotto(integers);
+        } while (winningLotto.isEmpty());
 
-        getBonusNumber(winningNumbers.get());
-
-        return winningNumbers.get();
+        return winningLotto.get();
     }
 
-    private Optional<WinningNumbers> getWinNumbs(List<Integer> integers) {
+    private Optional<Lotto> inputWinningLotto(List<Integer> integers) {
         try {
-            return Optional.of(new WinningNumbers(integers));
+            return Optional.of(new Lotto(integers));
         } catch (IllegalArgumentException exception) {
             OutputView.printError(exception.getMessage());
             return Optional.empty();
         }
     }
 
-    private void getBonusNumber(WinningNumbers numbers) {
-        boolean isValid;
+    private Number getBonusNumber(Lotto winningLotto) {
+        Optional<Number> bonusNumber;
 
         do {
-            isValid = validateBonusNumber(numbers);
-        } while (!isValid);
+            bonusNumber = inputBonusNumber(winningLotto);
+        } while (bonusNumber.isEmpty());
+
+        return bonusNumber.get();
     }
 
-    private boolean validateBonusNumber(WinningNumbers numbers) {
+    private Optional<Number> inputBonusNumber(Lotto winningLotto) {
         try {
-            numbers.initBonusNumber(InputView.inputBonusNumber());
-            return true;
+            final Number bonusNumber = Number.getInstance(InputView.inputBonusNumber());
+            if (winningLotto.contains(bonusNumber)) {
+                throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
+            }
+            return Optional.of(bonusNumber);
         } catch (IllegalArgumentException exception) {
             OutputView.printError(exception.getMessage());
-            return false;
+            return Optional.empty();
         }
     }
 }

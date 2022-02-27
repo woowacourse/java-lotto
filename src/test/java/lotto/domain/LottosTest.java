@@ -48,8 +48,10 @@ public class LottosTest {
             @DisplayName("Result를 반환한다.")
             void It_create_result(Lotto lotto, WinningPrice expected) {
                 final Lottos lottos = new Lottos(List.of(lotto));
-                final WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
-                winningNumbers.initBonusNumber(7);
+
+                final Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+                final Number bonusNumber = Number.getInstance(7);
+                final WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 
                 final Result result = lottos.getResult(winningNumbers);
 
