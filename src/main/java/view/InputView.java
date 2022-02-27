@@ -8,8 +8,10 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final String REQUEST_MESSAGE_INPUT_PURCHASE_MONEY = "구입금액을 입력해 주세요.";
+    private static final String REQUEST_MESSAGE_INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String ERROR_MESSAGE_TYPE_OF_MONEY = "금액은 숫자가 아닐 수 없습니다.";
     private static final String ERROR_MESSAGE_RANGE_OF_MONEY = "금액은 0이하일 수 없습니다.";
+    private static final String ERROR_MESSAGE_RANGE_OF_MANUAL_COUNT = "구매할 수동 로또 수량은 음수일 수 없습니다.";
     private static final String REQUEST_MESSAGE_WINNING_LOTTO_NUMBERS = "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String REQUEST_MESSAGE_INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String REGEX_OF_LOTTO_NUMBER = ", ";
@@ -17,7 +19,6 @@ public class InputView {
     private static final int MINIMUM_VALUE = 0;
 
     private static final Scanner scanner = new Scanner(System.in);
-
 
     private static String getInput() {
         return scanner.nextLine();
@@ -47,6 +48,25 @@ public class InputView {
     private static void validateRange(String value) {
         if (Integer.parseInt(value) <= MINIMUM_VALUE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_RANGE_OF_MONEY);
+        }
+    }
+
+    public static int getPurchaseManualCount() {
+        System.out.println(REQUEST_MESSAGE_INPUT_MANUAL_COUNT);
+        String inputManualCount = getInput();
+        validatePurchaseManualCount(inputManualCount);
+
+        return Integer.parseInt(inputManualCount);
+    }
+
+    private static void validatePurchaseManualCount(String inputManualCount) {
+        validateNumber(inputManualCount);
+        validateRangeManualCount(inputManualCount);
+    }
+
+    private static void validateRangeManualCount(String inputManualCount) {
+        if (Integer.parseInt(inputManualCount) < MINIMUM_VALUE) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_RANGE_OF_MANUAL_COUNT);
         }
     }
 
