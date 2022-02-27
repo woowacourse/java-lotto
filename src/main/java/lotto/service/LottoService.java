@@ -8,18 +8,20 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoService {
+    private static final String DUPLICATE_MANUAL_EXCEPTION_MESSAGE = "완전히 동일한 줄이 존재합니다.";
+
     private static final int LOTTO_PRICE = 1000;
     private static final int INITIAL_MATCH_COUNT = 0;
 
-    private List<LottoNumbers> lottoNumbersGroup;
     private final LottoGenerator lottoGenerator;
     private final PurchaseAmount purchaseAmount;
     private final Map<LottoMatchKind, Integer> matchResult;
+    private final List<LottoNumbers> lottoNumbersGroup;
 
     public LottoService(final LottoGenerator lottoGenerator, final String purchaseAmount) {
         this.lottoGenerator = lottoGenerator;
         this.purchaseAmount = PurchaseAmount.fromPurchaseAmountAndLottoPrice(purchaseAmount, LOTTO_PRICE);
-        lottoNumbersGroup= new ArrayList<>();
+        lottoNumbersGroup = new ArrayList<>();
         matchResult = new EnumMap<>(LottoMatchKind.class);
         initializeResult(matchResult);
     }
@@ -31,11 +33,18 @@ public class LottoService {
     }
 
     public int generateManualLottoCounts(final List<List<String>> manualLottoNumbersGroup) {
-        final List<LottoNumbers> manualNumbersGroup = manualLottoNumbersGroup.stream()
+        final Set<LottoNumbers> manualNumbersGroup = manualLottoNumbersGroup.stream()
                 .map(LottoNumbers::new)
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.toUnmodifiableSet());
+        validateDuplicateManualNumbersGroup(manualLottoNumbersGroup, manualNumbersGroup);
         lottoNumbersGroup.addAll(manualNumbersGroup);
         return lottoNumbersGroup.size();
+    }
+
+    private void validateDuplicateManualNumbersGroup(List<List<String>> manualLottoNumbersGroup, Set<LottoNumbers> manualNumbersGroup) {
+        if (manualNumbersGroup.size() != manualLottoNumbersGroup.size()) {
+            throw new IllegalArgumentException(DUPLICATE_MANUAL_EXCEPTION_MESSAGE);
+        }
     }
 
     public void generateAutoLottoNumbers() {
