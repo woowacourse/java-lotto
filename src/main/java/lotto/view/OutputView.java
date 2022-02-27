@@ -7,7 +7,7 @@ import lotto.controller.dto.LottoResultDto;
 import lotto.controller.dto.LottoTicketDto;
 import lotto.controller.dto.LottoTicketsDto;
 import lotto.controller.dto.RankDto;
-import lotto.controller.dto.money.MoneyResponseDto;
+import lotto.controller.dto.MoneyDto;
 
 public class OutputView {
 
@@ -26,7 +26,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printTotalCount(MoneyResponseDto moneyResponseDto) {
+    public void printTotalCount(MoneyDto moneyResponseDto) {
         System.out.println(moneyResponseDto.getTotalCount() + TOTAL_COUNT_SUFFIX);
     }
 

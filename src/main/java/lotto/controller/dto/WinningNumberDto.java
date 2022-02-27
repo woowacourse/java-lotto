@@ -12,13 +12,17 @@ public class WinningNumberDto {
     private final List<Integer> normalNumbers;
     private final int bonusNumber;
 
-    public WinningNumberDto(WinningNumber winningNumber) {
+    private WinningNumberDto(WinningNumber winningNumber) {
         this.normalNumbers = winningNumber.getLottoNumbers()
                 .stream()
                 .map(LottoNumber::getLottoNumber)
                 .collect(toList());
 
         this.bonusNumber = winningNumber.getBonusNumber().getLottoNumber();
+    }
+
+    public static WinningNumberDto from(WinningNumber winningNumber) {
+        return new WinningNumberDto(winningNumber);
     }
 
     public WinningNumber toWinningNumber() {

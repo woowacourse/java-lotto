@@ -1,23 +1,19 @@
-package lotto.controller.dto.money;
+package lotto.controller.dto;
 
 import lotto.domain.Money;
 
-public class MoneyResponseDto {
+public class MoneyDto {
 
     private final int price;
     private final int totalCount;
 
-    private MoneyResponseDto(Money money) {
+    private MoneyDto(Money money) {
         this.price = money.getPrice();
         this.totalCount = money.calculateTicketCount();
     }
 
-    public static MoneyResponseDto from(Money money) {
-        return new MoneyResponseDto(money);
-    }
-
-    public int getPrice() {
-        return price;
+    public static MoneyDto from(Money money) {
+        return new MoneyDto(money);
     }
 
     public int getTotalCount() {

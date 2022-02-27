@@ -4,8 +4,7 @@ import java.util.List;
 import lotto.controller.dto.LottoResultDto;
 import lotto.controller.dto.LottoTicketsDto;
 import lotto.controller.dto.WinningNumberDto;
-import lotto.controller.dto.money.MoneyRequestDto;
-import lotto.controller.dto.money.MoneyResponseDto;
+import lotto.controller.dto.MoneyDto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
@@ -16,19 +15,24 @@ import lotto.domain.WinningNumber;
 
 public class LottoController {
 
-    public MoneyResponseDto createMoney(MoneyRequestDto moneyRequestDto) {
-        return MoneyResponseDto.from(new Money(moneyRequestDto.getPrice()));
+    public MoneyDto createMoney(int money) {
+        return MoneyDto.from(new Money(money));
     }
 
     public LottoTicketsDto createLottoTickets(int money) {
-        return new LottoTicketsDto(new LottoMachine().issue(new Money(money)));
+        LottoMachine lottoMachine = new LottoMachine();
+        LottoTickets lottoTickets = lottoMachine.issue(new Money(money));
+
+        return new LottoTicketsDto(lottoTickets);
     }
 
     public WinningNumberDto createWinningNumber(List<Integer> normalNumbers, int bonusNumber) {
-        return new WinningNumberDto(new WinningNumber(new LottoTicket(normalNumbers), new LottoNumber(bonusNumber)));
+        WinningNumber winningNumber = new WinningNumber(new LottoTicket(normalNumbers), new LottoNumber(bonusNumber));
+        return WinningNumberDto.from(winningNumber);
     }
 
-    public LottoResultDto createLottoResult(int money, WinningNumberDto winningNumberDto, LottoTicketsDto lottoTicketsDto) {
+    public LottoResultDto createLottoResult(int money, WinningNumberDto winningNumberDto,
+                                            LottoTicketsDto lottoTicketsDto) {
         WinningNumber winningNumber = winningNumberDto.toWinningNumber();
         LottoTickets lottoTickets = lottoTicketsDto.toLottoTickets();
         LottoResult lottoResult = lottoTickets.determine(winningNumber);
