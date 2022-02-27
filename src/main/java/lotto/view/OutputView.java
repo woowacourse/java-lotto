@@ -46,7 +46,7 @@ public class OutputView {
     }
 
     private static void printRankCounter(RankBoard rankBoard) {
-        ArrayList<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
+        List<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
         ranks.sort(Comparator.comparing(Rank::getPrize));
         for (Rank rank : ranks) {
             printRank(rank, rankBoard);

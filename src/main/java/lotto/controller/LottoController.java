@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.util.IntsToLottoConverter;
+import lotto.util.IntConverter;
 import lotto.util.StringConverter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -14,7 +14,7 @@ public class LottoController {
 
     public void run() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        int ticketCount = purchaseAmount.calculateTheNumberOfTickets();
+        int ticketCount = purchaseAmount.countTickets();
         OutputView.printTicketCount(ticketCount);
 
         List<Lotto> lottoTickets = getTickets(ticketCount);
@@ -48,7 +48,7 @@ public class LottoController {
     private Lotto getWinningNumber() {
         try {
             List<Integer> input = StringConverter.toInts(InputView.getWinningNumber(), LOTTO_INPUT_DELIMITER);
-            return IntsToLottoConverter.convert(input);
+            return new Lotto(IntConverter.toLottoNumbers(input));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getWinningNumber();
