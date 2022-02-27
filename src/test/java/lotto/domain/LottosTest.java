@@ -36,10 +36,10 @@ class LottosTest {
 
         Lottos lottos = new Lottos(lottoPurchased);
 
-        WinningNumbers winningNumbers = getWinningNumbers();
+        WinningLotto winningLotto = getWinningNumbers();
 
-        Map<LottoPrize, Integer> testMap = initTestMap(lottos, winningNumbers);
-        Map<LottoPrize, Integer> lottoMatches = lottos.confirmWinnings(winningNumbers);
+        Map<LottoPrize, Integer> testMap = initTestMap(lottos, winningLotto);
+        Map<LottoPrize, Integer> lottoMatches = lottos.confirmWinnings(winningLotto);
 
         assertThat(testMap).isEqualTo(lottoMatches);
     }
@@ -52,7 +52,7 @@ class LottosTest {
         return lottoPurchased;
     }
 
-    private Map<LottoPrize, Integer> initTestMap(Lottos lottos, WinningNumbers winningNumbers) {
+    private Map<LottoPrize, Integer> initTestMap(Lottos lottos, WinningLotto winningLotto) {
         Map<LottoPrize, Integer> myMap = new EnumMap<>(LottoPrize.class);
         for (LottoPrize prize : LottoPrize.values()) {
             myMap.put(prize, 0);
@@ -60,20 +60,20 @@ class LottosTest {
 
         List<Lotto> myLottos = lottos.getLottos();
         for (Lotto lotto : myLottos) {
-            LottoPrize prize = lotto.confirmWinning(winningNumbers);
+            LottoPrize prize = lotto.confirmWinning(winningLotto);
             myMap.put(prize, myMap.get(prize) + 1);
         }
 
         return myMap;
     }
 
-    private WinningNumbers getWinningNumbers() {
+    private WinningLotto getWinningNumbers() {
         List<LottoNumber> lottoNumbers;
         LottoNumber bonusNumber = new LottoNumber(30);
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
-        return new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
+        return new WinningLotto(new Lotto(lottoNumbers), bonusNumber);
     }
 }

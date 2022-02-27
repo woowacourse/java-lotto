@@ -26,8 +26,8 @@ public class LottoGame {
     }
 
 
-    public LottoResults confirmWinnings(WinningNumbers winningNumbers) {
-        return new LottoResults(lottos.confirmWinnings(winningNumbers));
+    public LottoResults confirmWinnings(WinningLotto winningLotto) {
+        return new LottoResults(lottos.confirmWinnings(winningLotto));
     }
 
     public List<Lotto> getLottos() {

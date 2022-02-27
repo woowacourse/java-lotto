@@ -7,7 +7,7 @@ import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResults;
 import lotto.domain.Money;
-import lotto.domain.WinningNumbers;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,18 +19,18 @@ public class LottoController {
         lottoGame.purchase(purchaseMoney);
         ResultView.printLottos(lottoGame.getLottos());
 
-        WinningNumbers winningNumbers = requestWinningNumbers();
-        LottoResults lottoResults = lottoGame.confirmWinnings(winningNumbers);
+        WinningLotto winningLotto = requestWinningNumbers();
+        LottoResults lottoResults = lottoGame.confirmWinnings(winningLotto);
         ResultView.printResults(lottoResults);
     }
 
-    private WinningNumbers requestWinningNumbers() {
+    private WinningLotto requestWinningNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (Integer number : InputView.requestWinningNumber()) {
             lottoNumbers.add(new LottoNumber(number));
         }
         LottoNumber bonusNumber = new LottoNumber(InputView.requestBonusNumber());
 
-        return new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
+        return new WinningLotto(new Lotto(lottoNumbers), bonusNumber);
     }
 }

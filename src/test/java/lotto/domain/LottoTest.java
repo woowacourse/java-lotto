@@ -58,9 +58,9 @@ class LottoTest {
     @DisplayName("confirmWinning 메서드는 WinnigNumbers를 입력받아 당첨을 확인한다.")
     @Test
     void confirmWinning() {
-        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), new LottoNumber(30));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(30));
         Lotto lotto = new Lotto(lottoNumbers);
-        LottoPrize prize = lotto.confirmWinning(winningNumbers);
+        LottoPrize prize = lotto.confirmWinning(winningLotto);
 
         assertThat(prize).isEqualTo(LottoPrize.FIRST);
     }

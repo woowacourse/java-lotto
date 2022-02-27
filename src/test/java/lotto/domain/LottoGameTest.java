@@ -39,7 +39,7 @@ class LottoGameTest {
 
         LottoGame lottoGame = new LottoGame();
         lottoGame.purchase(new Money(10000));
-        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
-        assertThat(lottoGame.confirmWinnings(winningNumbers)).isInstanceOf(LottoResults.class);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers), bonusNumber);
+        assertThat(lottoGame.confirmWinnings(winningLotto)).isInstanceOf(LottoResults.class);
     }
 }

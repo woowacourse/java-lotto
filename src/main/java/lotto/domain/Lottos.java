@@ -19,14 +19,14 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public Map<LottoPrize, Integer> confirmWinnings(WinningNumbers winningNumbers) {
+    public Map<LottoPrize, Integer> confirmWinnings(WinningLotto winningLotto) {
         Map<LottoPrize, Integer> result = new EnumMap<>(LottoPrize.class);
         for (LottoPrize prize : LottoPrize.values()) {
             result.put(prize, 0);
         }
 
         for (Lotto lotto : lottos) {
-            LottoPrize prize = lotto.confirmWinning(winningNumbers);
+            LottoPrize prize = lotto.confirmWinning(winningLotto);
             result.put(prize, result.get(prize) + 1);
         }
 

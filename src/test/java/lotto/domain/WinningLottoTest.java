@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class WinningNumbersTest {
+class WinningLottoTest {
 
     private Lotto winningLotto;
     private LottoNumber bonusNumber;
@@ -29,7 +29,7 @@ class WinningNumbersTest {
     @Test
     void constructor() {
         assertThatNoException()
-                .isThrownBy(() -> new WinningNumbers(winningLotto, bonusNumber));
+                .isThrownBy(() -> new WinningLotto(winningLotto, bonusNumber));
     }
 
     @DisplayName("WinningNumbers 생성자는 보너스 번호가 당첨 번호와 중복될 경우 예외가 발생한다.")
@@ -38,7 +38,7 @@ class WinningNumbersTest {
         bonusNumber = new LottoNumber(1);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinningNumbers(winningLotto, bonusNumber))
+                .isThrownBy(() -> new WinningLotto(winningLotto, bonusNumber))
                 .withMessage("보너스 숫자는 로또 숫자와 중복되면 안됩니다.");
     }
 }

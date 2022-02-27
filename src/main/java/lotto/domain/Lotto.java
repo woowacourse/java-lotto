@@ -38,12 +38,12 @@ public class Lotto {
         }
     }
 
-    public LottoPrize confirmWinning(WinningNumbers winningNumbers) {
+    public LottoPrize confirmWinning(WinningLotto winningLotto) {
         int lottoNumberMatches = (int) numbers.stream()
-                .filter(winningNumbers::containsLottoNumber)
+                .filter(winningLotto::containsLottoNumber)
                 .count();
 
-        return LottoPrize.match(lottoNumberMatches, winningNumbers.containsBonusNumber(this));
+        return LottoPrize.match(lottoNumberMatches, winningLotto.containsBonusNumber(this));
     }
 
     public boolean contains(LottoNumber target) {
