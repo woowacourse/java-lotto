@@ -1,9 +1,9 @@
 package lotto.view;
 
 import java.util.stream.Collectors;
-import lotto.model.Rank;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
+import lotto.model.Rank;
 import lotto.model.number.LottoNumber;
 
 public class ResultView {

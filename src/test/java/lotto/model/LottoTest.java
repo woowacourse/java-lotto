@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.model.Lotto;
-import lotto.model.Rank;
 import lotto.model.number.BonusNumber;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;

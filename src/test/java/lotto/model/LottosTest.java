@@ -4,10 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.model.Lotto;
-import lotto.model.Lottos;
-import lotto.model.Money;
-import lotto.model.Rank;
 import lotto.model.number.BonusNumber;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
@@ -29,8 +25,8 @@ public class LottosTest {
 
     @BeforeEach
     void init() {
-        LottoNumbers lottoNumbers1 = makeLottoNumbers(new int[]{1,2,3,4,5,6});
-        LottoNumbers lottoNumbers2 = makeLottoNumbers(new int[]{3,4,5,6,7,8});
+        LottoNumbers lottoNumbers1 = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
+        LottoNumbers lottoNumbers2 = makeLottoNumbers(new int[]{3, 4, 5, 6, 7, 8});
         lotto1 = new Lotto((minimumNumber, maximumNumber, lottoLength) -> lottoNumbers1);
         lotto2 = new Lotto((minimumNumber, maximumNumber, lottoLength) -> lottoNumbers2);
         lottos = new Lottos(new Money(0));
@@ -44,7 +40,7 @@ public class LottosTest {
 
     @Test
     void 등수_개수_테스트() {
-        LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1,2,3,4,5,6});
+        LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
         lottos.insert(lotto1);
         lottos.insert(lotto2);
         lottos.calculateRanks(winningNumbers, new BonusNumber(7));
@@ -54,7 +50,7 @@ public class LottosTest {
 
     @Test
     void 수익률_테스트() {
-        LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1,2,3,4,5,6});
+        LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
         lottos.insert(lotto1); // 1등
         lottos.insert(lotto2); // 4등
         lottos.calculateRanks(winningNumbers, new BonusNumber(7));

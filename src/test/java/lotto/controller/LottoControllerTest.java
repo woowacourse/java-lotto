@@ -2,10 +2,11 @@ package lotto.controller;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import lotto.model.Money;
 import lotto.model.Lottos;
+import lotto.model.Money;
 import lotto.model.WinningLotto;
 import lotto.model.number.BonusNumber;
 import lotto.model.number.LottoNumber;
@@ -14,6 +15,14 @@ import lotto.view.ResultView;
 import org.junit.jupiter.api.Test;
 
 public class LottoControllerTest {
+
+    private LottoNumbers makeLottoNumbers(int[] numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int num : numbers) {
+            lottoNumbers.add(new LottoNumber(num));
+        }
+        return new LottoNumbers(lottoNumbers);
+    }
 
     @Test
     void 실행_테스트() {
@@ -25,9 +34,8 @@ public class LottoControllerTest {
         Lottos lottos = new Lottos(new Money(14000));
         ResultView.printBuyingLottosResult(lottos);
 
-        List<LottoNumber> winningLottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
-                new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(winningLottoNumbers), new BonusNumber(7));
+        LottoNumbers winningLottoNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, new BonusNumber(7));
         winningLotto.checkRank(lottos);
         lottos.countRank();
         ResultView.printTotalResult(lottos);
