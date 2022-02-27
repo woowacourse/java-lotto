@@ -21,13 +21,6 @@ public class InputValidation {
         return price;
     }
 
-    public static List<Integer> validateWinningNumber(final String inputNumbers) {
-        final List<String> splitNumbers = Arrays.asList(inputNumbers.split(LOTTO_NUMBER_DELIMITER));
-        checkNumOfBalls(splitNumbers);
-
-        return checkNonIntegers(splitNumbers);
-    }
-
     private static int checkNonInteger(final String number, final String message) {
         try {
             return Integer.parseInt(number);
@@ -40,6 +33,13 @@ public class InputValidation {
         if (price < LOTTO_PRICE) {
             throw new IllegalArgumentException(ERROR_NEGATIVE_INTEGER);
         }
+    }
+
+    public static List<Integer> validateWinningNumber(final String inputNumbers) {
+        final List<String> splitNumbers = Arrays.asList(inputNumbers.split(LOTTO_NUMBER_DELIMITER));
+        checkNumOfBalls(splitNumbers);
+
+        return checkNonIntegers(splitNumbers);
     }
 
     private static void checkNumOfBalls(List<String> numbers) {
