@@ -25,10 +25,14 @@ class ResultTest {
     void compare_2등_테스트() {
         Result result = new Result(5, true);
 <<<<<<< HEAD
+<<<<<<< HEAD
         boolean actual = result.isWhatRank(Rank.SECOND);
 =======
         boolean actual = result.compare(Rank.SECOND);
 >>>>>>> 20bb1bf (feat: 2,3등은 보너스볼과 일치하는 숫자의 갯수를 기준으로, 나머지 등수는 일치하는 숫자의 갯수만으로 등수를 판정하는 로직 구현)
+=======
+        boolean actual = result.isWhatRank(Rank.SECOND);
+>>>>>>> a879dd3 (feat : 구매한 모든 로또의 결과를 기록하는 클래스 추가)
         boolean expected = true;
         assertThat(actual).isEqualTo(expected);
     }
@@ -38,10 +42,14 @@ class ResultTest {
     void compare_3등_테스트() {
         Result result = new Result(5, false);
 <<<<<<< HEAD
+<<<<<<< HEAD
         boolean actual = result.isWhatRank(Rank.THIRD);
 =======
         boolean actual = result.compare(Rank.THIRD);
 >>>>>>> 20bb1bf (feat: 2,3등은 보너스볼과 일치하는 숫자의 갯수를 기준으로, 나머지 등수는 일치하는 숫자의 갯수만으로 등수를 판정하는 로직 구현)
+=======
+        boolean actual = result.isWhatRank(Rank.THIRD);
+>>>>>>> a879dd3 (feat : 구매한 모든 로또의 결과를 기록하는 클래스 추가)
         boolean expected = true;
         assertThat(actual).isEqualTo(expected);
     }
@@ -51,10 +59,14 @@ class ResultTest {
     void compare_1등_테스트() {
         Result result = new Result(6, true);
 <<<<<<< HEAD
+<<<<<<< HEAD
         boolean actual = result.isWhatRank(Rank.FIRST);
 =======
         boolean actual = result.compare(Rank.FIRST);
 >>>>>>> 20bb1bf (feat: 2,3등은 보너스볼과 일치하는 숫자의 갯수를 기준으로, 나머지 등수는 일치하는 숫자의 갯수만으로 등수를 판정하는 로직 구현)
+=======
+        boolean actual = result.isWhatRank(Rank.FIRST);
+>>>>>>> a879dd3 (feat : 구매한 모든 로또의 결과를 기록하는 클래스 추가)
         boolean expected = true;
         assertThat(actual).isEqualTo(expected);
 

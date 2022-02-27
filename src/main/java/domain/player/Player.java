@@ -24,6 +24,7 @@ public class Player {
 
     private final Money money;
     private final List<Lotto> lottos;
+<<<<<<< HEAD
 
     public Player(int money) {
         this.money = new Money(money);
@@ -47,6 +48,8 @@ public class Player {
 >>>>>>> 440c90c (refactor : Player 로또 구매 역할 분리)
     private final Money money;
     private List<Lotto> lottos;
+=======
+>>>>>>> a879dd3 (feat : 구매한 모든 로또의 결과를 기록하는 클래스 추가)
 
     public Player(int money) {
         this.money = new Money(money);

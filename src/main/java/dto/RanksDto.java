@@ -4,6 +4,9 @@ package dto;
 <<<<<<< HEAD
 import domain.Rank;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a879dd3 (feat : 구매한 모든 로또의 결과를 기록하는 클래스 추가)
 import domain.ResultStatus;
 
 import java.util.ArrayList;
@@ -52,10 +55,9 @@ import java.util.ArrayList;
 =======
 >>>>>>> 3158ddf (refactor : 일급 컬렉션의 List 불변 객체로 만들기)
 import java.util.List;
+import java.util.Map;
 
 public class RanksDto {
-
-    public static final int RANK_NUMBER = 5;
 
     private final List<RankDto> rankDtos;
     private final double incomeRate;
@@ -65,12 +67,12 @@ public class RanksDto {
         this.incomeRate = incomeRate;
     }
 
-    public static RanksDto from(double incomeRate) {
+    public static RanksDto from(ResultStatus resultStatus, double incomeRate) {
         List<RankDto> rankDtos = new ArrayList<>();
-        int rankNumber = RANK_NUMBER;
+        Map<Rank, Integer> resultStatistics = resultStatus.getResultStatistics();
+        for (Rank rank : resultStatistics.keySet()) {
+            rankDtos.add(RankDto.from(rank, resultStatistics.get(rank)));
 
-        for (Rank rank : Rank.values()) {
-            rankDtos.add(RankDto.from(rank, rankNumber--));
         }
         return new RanksDto(rankDtos, incomeRate);
     }

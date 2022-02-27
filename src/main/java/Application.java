@@ -60,8 +60,12 @@ public class Application {
         lottoController.determineWinningNumber(InputView.inputWinningNumber(), InputView.inputBonusBall());
 >>>>>>> 94c4d43 (style: 코드 포멧팅)
 
+<<<<<<< HEAD
         List<Result> results = lottoController.judgeLottos();
         OutputView.printResult(lottoController.makeResult(results));
 >>>>>>> 7eb4fa3 (refactor: 프린트 할 결과물 생성 로직 변경)
+=======
+        OutputView.printResult(lottoController.makeResult());
+>>>>>>> a879dd3 (feat : 구매한 모든 로또의 결과를 기록하는 클래스 추가)
     }
 }

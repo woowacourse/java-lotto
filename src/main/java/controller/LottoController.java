@@ -23,8 +23,8 @@ import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
 import domain.LottoGenerator.LottoGenerator;
 import domain.LottoGenerator.WinningLottoGenerator;
-import domain.Rank;
 import domain.Result;
+import domain.ResultStatus;
 import domain.player.Player;
 import dto.LottosDto;
 <<<<<<< HEAD
@@ -106,19 +106,17 @@ public class LottoController {
 >>>>>>> 5b2a52c (refactor: 로또 생성 기능 인터페이스로 분리)
 =======
         Lotto winningLotto = lottoGenerator.generateWinningLotto(winningNumbers);
-
         this.winningLotto = new WinningLotto(winningLotto, LottoNumber.valueOf(bonusBall));
 >>>>>>> 8185971 (feat : 반복되는 LottoNumber 인스턴스 캐싱하기)
     }
 
-    public List<Result> judgeLottos() {
-        return player.judgeAll(winningLotto);
-    }
-
-    public RanksDto makeResult(List<Result> judgeLottos) {
-        double totalIncome = Rank.calculateAllResult(judgeLottos);
-        System.out.println(totalIncome);
+    public RanksDto makeResult() {
+        List<Result> results = player.judgeAll(winningLotto);
+        ResultStatus resultStatus = new ResultStatus();
+        resultStatus.judgeResult(results);
+        double totalIncome = resultStatus.calculateTotalIncome();
         double incomeRate = player.calculateIncomeRate(totalIncome);
+<<<<<<< HEAD
         System.out.println("incomeRate = " + incomeRate);
 
 <<<<<<< HEAD
@@ -152,5 +150,8 @@ public class LottoController {
 =======
         return RanksDto.from(incomeRate);
 >>>>>>> 1b78799 (refactor : Dto 생성자 private 으로 접근지정자 변경)
+=======
+        return RanksDto.from(resultStatus, incomeRate);
+>>>>>>> a879dd3 (feat : 구매한 모든 로또의 결과를 기록하는 클래스 추가)
     }
 }
