@@ -9,28 +9,27 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.AppConfig;
 import lotto.domain.ticket.generator.CustomTicketGenerator;
 import lotto.domain.rank.Rank;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
+import lotto.dto.TicketsDto;
 import lotto.dto.WinningTicketDto;
 
 class LottoServiceTest {
 
-    private static final AppConfig APP_CONFIG = AppConfig.getInstance();
-
-    private final LottoService lottoService = APP_CONFIG.lottoService;
-    private final CustomTicketGenerator customTicketGenerator = APP_CONFIG.ticketGenerator;
+    private final CustomTicketGenerator customTicketGenerator = new CustomTicketGenerator();
+    private final LottoService lottoService = new LottoService(customTicketGenerator);
 
     @DisplayName("로또 생성 확인 테스트")
     @ParameterizedTest(name = "[{index}] {1}원어치 로또 구입")
     @MethodSource("lotto.service.provider.LottoServiceTestProvider#provideForGenerateTicketsTest")
     void generateTicketsTest(final List<TicketDto> expectedTicketDtos, final int money) {
-        customTicketGenerator.initTickets(expectedTicketDtos);
+        customTicketGenerator.initNumbers(expectedTicketDtos);
         lottoService.generateTickets(money);
 
-        final List<TicketDto> actualTicketDtos = lottoService.getTicketDtos();
+        final TicketsDto ticketsDto = lottoService.getTicketDtos();
+        final List<TicketDto> actualTicketDtos = ticketsDto.getTicketDtos();
         checkTicketEquals(actualTicketDtos, expectedTicketDtos);
     }
 
@@ -49,7 +48,7 @@ class LottoServiceTest {
                                        final WinningTicketDto winningTicketDto,
                                        final Map<Rank, Integer> expectedRankCounts,
                                        final String expectedProfitRate) {
-        customTicketGenerator.initTickets(expectedTicketDtos);
+        customTicketGenerator.initNumbers(expectedTicketDtos);
         lottoService.generateTickets(money);
 
         final AnalysisDto analysisDto = lottoService.generateAnalysis(winningTicketDto);
@@ -65,7 +64,7 @@ class LottoServiceTest {
                                         final WinningTicketDto winningTicketDto,
                                         final Map<Rank, Integer> expectedRankCounts,
                                         final String expectedProfitRate) {
-        customTicketGenerator.initTickets(expectedTicketDtos);
+        customTicketGenerator.initNumbers(expectedTicketDtos);
         lottoService.generateTickets(money);
 
         final AnalysisDto analysisDto = lottoService.generateAnalysis(winningTicketDto);
