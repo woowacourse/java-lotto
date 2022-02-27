@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class NumberValidatorTest {
 
     @Test
-    @DisplayName("Null값을 입력했을 경우")
+    @DisplayName("null 값을 입력했을 경우")
     void input_null() {
         assertThatThrownBy(() -> {
             NumberValidator.validateNumber(null);

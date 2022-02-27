@@ -28,7 +28,7 @@ public class ProfitTest {
 
     @Test
     @DisplayName("수익률 계산")
-    void calculate_profit() {
+    void calculate_profit_rate() {
         Money purchaseAmount = new Money(3000);
         Profit profit = lottoResult.getProfit();
 
