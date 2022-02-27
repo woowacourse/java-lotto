@@ -13,12 +13,12 @@ public enum LottoRank {
     FIFTH(3, BonusBallState.EITHER, 5_000),
     FAILED(0, BonusBallState.EITHER, 0);
 
-    private final int winningNumberMatchCount;
+    private final int hitCount;
     private final BonusBallState bonusBallState;
     private final long prizeMoney;
 
-    LottoRank(int winningNumberMatchCount, BonusBallState bonusBallState, long prizeMoney) {
-        this.winningNumberMatchCount = winningNumberMatchCount;
+    LottoRank(int hitCount, BonusBallState bonusBallState, long prizeMoney) {
+        this.hitCount = hitCount;
         this.bonusBallState = bonusBallState;
         this.prizeMoney = prizeMoney;
     }
@@ -40,8 +40,8 @@ public enum LottoRank {
         }
     }
 
-    public int winningNumberMatchCount() {
-        return winningNumberMatchCount;
+    public int hitCount() {
+        return hitCount;
     }
 
     public long prizeMoney() {
@@ -57,7 +57,7 @@ public enum LottoRank {
 
     private static Predicate<LottoRank> classifyRank(int winningNumberCount, boolean containsBonusBall) {
         return (LottoRank lottoRank) ->
-                lottoRank.winningNumberMatchCount == winningNumberCount
+                lottoRank.hitCount == winningNumberCount
                         && lottoRank.bonusBallState.contains(containsBonusBall);
     }
 }

@@ -19,8 +19,8 @@ public enum OutputView {
     private static final String PURCHASED_TICKET_MESSAGE = "%d개를 구매했습니다.%n";
     private static final String WINNING_STATS_MESSAGE = "당첨 통계\n---------";
     public static final String LOTTO_NUMBERS = "[%s]%n";
-    public static final String WINNING_RESULT_MESSAGE = "%s개 일치, 보너스 볼 일치 (%s원) - %s개%n";
-    public static final String WINNING_RESULT_MESSAGE_2 = "%s개 일치 (%s원) - %s개%n";
+    public static final String WINNING_STATS_SECOND_RESULT_MESSAGE = "%s개 일치, 보너스 볼 일치 (%s원) - %s개%n";
+    public static final String WINNING_STATS_RESULT_MESSAGE = "%s개 일치 (%s원) - %s개%n";
     public static final String EARNINGS_RESULT_MESSAGE = "총 수익률은 %.2f 입니다.";
     public static final String LOSS_WARNING_MESSAGE = "%s(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     public static final String LOTTO_NUMBER_DELIMITER = ", ";
@@ -54,15 +54,15 @@ public enum OutputView {
 
     private void printWinningResult(WinningStats winningStats, LottoRank lottoRank) {
         if (lottoRank == LottoRank.THIRD) {
-            out.printf(WINNING_RESULT_MESSAGE,
-                    LottoRank.THIRD.winningNumberMatchCount(),
+            out.printf(WINNING_STATS_SECOND_RESULT_MESSAGE,
+                    LottoRank.THIRD.hitCount(),
                     LottoRank.THIRD.prizeMoney(),
                     winningStats.get(LottoRank.THIRD))
             ;
             return;
         }
-        out.printf(WINNING_RESULT_MESSAGE_2,
-                lottoRank.winningNumberMatchCount(),
+        out.printf(WINNING_STATS_RESULT_MESSAGE,
+                lottoRank.hitCount(),
                 lottoRank.prizeMoney(),
                 winningStats.get(lottoRank)
         );
