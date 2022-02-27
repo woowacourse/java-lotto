@@ -5,10 +5,10 @@ import lotterymachine.utils.LotteryNumbersGenerator;
 import java.util.List;
 import java.util.Map;
 
-public class LotteryMachineController {
+public class LotteryController {
     private final LotteryTickets lotteryTickets;
 
-    public LotteryMachineController(int number) {
+    public LotteryController(int number) {
         lotteryTickets = new LotteryTickets(number);
     }
 

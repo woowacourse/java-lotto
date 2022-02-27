@@ -7,7 +7,7 @@ public class TicketCount {
         this.number = number;
     }
 
-    public boolean isExistCount() {
+    public boolean isExist() {
         return this.number > 0;
     }
 

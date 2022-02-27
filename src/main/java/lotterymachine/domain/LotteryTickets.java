@@ -26,8 +26,8 @@ public class LotteryTickets {
         return Collections.unmodifiableList(tickets);
     }
 
-    public void add(List<Integer> numbers) {
-        if (ticketCount.isExistCount()) {
+    public void add(List<LotteryNumber> numbers) {
+        if (ticketCount.isExist()) {
             tickets.add(new LotteryTicket(numbers));
             ticketCount.subtract();
         }

@@ -6,50 +6,47 @@ import static lotterymachine.view.ErrorMessage.*;
 import static lotterymachine.view.ErrorMessage.DUPLICATE_NUMBER;
 
 public class WinningLotteryNumbers {
-    private final List<Integer> numbers;
-    private final int bonusNumber;
+    private final List<LotteryNumber> numbers;
+    private final LotteryNumber bonusNumber;
+    private static final int TICKET_SIZE = 6;
 
-    public WinningLotteryNumbers(List<Integer> numbers, int bonusNumber) {
+    public WinningLotteryNumbers(List<LotteryNumber> numbers, LotteryNumber bonusNumber) {
         validateWinningLotteryNumbers(numbers);
         validateBonusNumber(numbers, bonusNumber);
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getNumbers() {
+    public List<LotteryNumber> getNumbers() {
         return numbers;
     }
 
-    public int getBonusNumber() {
+    public LotteryNumber getBonusNumber() {
         return bonusNumber;
     }
 
-    private void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
+    private void validateBonusNumber(List<LotteryNumber> numbers, LotteryNumber bonusNumber) {
         if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER.getMessage());
         }
     }
 
-    private void validateWinningLotteryNumbers(List<Integer> numbers) {
-        validateNumbers(numbers);
+    private void validateWinningLotteryNumbers(List<LotteryNumber> numbers) {
         validateSize(numbers);
         validateDuplication(numbers);
     }
 
-    private void validateNumbers(List<Integer> numbers) {
-        numbers.stream()
-                .filter(LotteryRule::isRangeOfNumber)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(OUT_OF_RANGE.getMessage()));
-    }
-
-    private void validateSize(List<Integer> numbers) {
-        if (!LotteryRule.isLotteryTicketSize(numbers.size())) {
+    private void validateSize(List<LotteryNumber> numbers) {
+        if (!isLotteryTicketSize(numbers.size())) {
             throw new IllegalArgumentException(INVALID_SIZE.getMessage());
         }
     }
 
-    private static void validateDuplication(List<Integer> input) {
+    public static boolean isLotteryTicketSize(int size) {
+        return size == TICKET_SIZE;
+    }
+
+    private static void validateDuplication(List<LotteryNumber> input) {
         int numbers = (int) input.stream()
                 .distinct()
                 .count();
