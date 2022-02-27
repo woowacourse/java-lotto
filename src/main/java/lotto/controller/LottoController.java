@@ -13,21 +13,25 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
+    private final InputView inputView = InputView.INSTANCE;
+    private final OutputView outputView = OutputView.INSTANCE;
+    private final LottoTicketFactory lottoTicketFactory = LottoTicketFactory.INSTANCE;
+
     public void run() {
         PurchaseAmount purchaseAmount = inputMoney();
 
         List<LottoTicket> lottoTickets = purchaseLottoTickets(purchaseAmount);
-        OutputView.printPurchasedTickets(lottoTickets);
+        outputView.printPurchasedTickets(lottoTickets);
 
         WinningNumbers winningNumbers = inputWinningNumbers();
 
         WinningStats winningStats = calculateStatistics(lottoTickets, winningNumbers);
 
-        OutputView.printStatistics(winningStats, purchaseAmount);
+        outputView.printStatistics(winningStats, purchaseAmount);
     }
 
     private List<LottoTicket> purchaseLottoTickets(PurchaseAmount purchaseAmount) {
-        return LottoTicketFactory.createTickets(purchaseAmount);
+        return lottoTicketFactory.createTickets(purchaseAmount);
     }
 
     private WinningStats calculateStatistics(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
@@ -44,13 +48,13 @@ public class LottoController {
     }
 
     private PurchaseAmount inputMoney() {
-        IndividualInput<PurchaseAmount> input = () -> new PurchaseAmount(InputView.inputMoney());
+        IndividualInput<PurchaseAmount> input = () -> new PurchaseAmount(inputView.inputMoney());
         return commonInputProcess(input);
     }
 
     private WinningNumbers inputWinningNumbers() {
         IndividualInput<WinningNumbers> input =
-                () -> new WinningNumbers(InputView.inputWinningNumbers(), InputView.inputBonusBall());
+                () -> new WinningNumbers(inputView.inputWinningNumbers(), inputView.inputBonusBall());
         return commonInputProcess(input);
     }
 
@@ -58,7 +62,7 @@ public class LottoController {
         try {
             return individualInputs.get();
         } catch (IOException | IllegalArgumentException e) {
-            OutputView.printErrorMessage(e.getMessage());
+            outputView.printErrorMessage(e.getMessage());
             return commonInputProcess(individualInputs);
         }
     }

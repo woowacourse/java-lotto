@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.Map;
 
 public class WinningStats {
 
@@ -33,8 +34,15 @@ public class WinningStats {
     long getTotalPrize() {
         long totalPrize = 0;
         for (LottoRank lottoRank : winningStatistics.keySet()) {
-            totalPrize += lottoRank.getPrizeMoney() * winningStatistics.get(lottoRank);
+            totalPrize += lottoRank.prizeMoney() * winningStatistics.get(lottoRank);
         }
+
+        winningStatistics.entrySet().stream()
+                .mapToLong(
+                        (Map.Entry<LottoRank, Integer> winingStat) ->
+                                winingStat.getKey().prizeMoney() * winingStat.getValue()
+                ).sum();
+
         return totalPrize;
     }
 }

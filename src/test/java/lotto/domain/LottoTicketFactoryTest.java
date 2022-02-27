@@ -10,14 +10,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoTicketFactoryTest {
 
+    private final LottoTicketFactory lottoTicketFactory = LottoTicketFactory.INSTANCE;
+
     @ParameterizedTest
     @CsvSource(value = {"7500,7", "8000,8"})
     @DisplayName("천원 당 한 장의 로또를 구매할 수 있다.")
     void purchaseLotto(String money, int ticketCount) {
-        // given
-
-        // when
-        List<LottoTicket> lottoTickets = LottoTicketFactory.createTickets(new PurchaseAmount(money));
+        // given & when
+        List<LottoTicket> lottoTickets = lottoTicketFactory.createTickets(new PurchaseAmount(money));
 
         // then
         assertThat(lottoTickets.size()).isEqualTo(ticketCount);

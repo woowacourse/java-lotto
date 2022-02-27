@@ -42,7 +42,7 @@ class LottoRankTest {
     @DisplayName("등수에 맞는 상금을 반환한다")
     void returnPrize(int winningNumberCount, boolean containsBonusBall, int expected) {
         assertThat(LottoRank.getRank(winningNumberCount, containsBonusBall)
-                .getPrizeMoney())
+                .prizeMoney())
                 .isEqualTo(expected);
     }
 }

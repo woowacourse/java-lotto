@@ -40,6 +40,14 @@ public enum LottoRank {
         }
     }
 
+    public int winningNumberMatchCount() {
+        return winningNumberMatchCount;
+    }
+
+    public long prizeMoney() {
+        return prizeMoney;
+    }
+
     public static LottoRank getRank(int winningNumberCount, boolean containsBonusBall) {
         return Arrays.stream(values())
                 .filter(classifyRank(winningNumberCount, containsBonusBall))
@@ -51,13 +59,5 @@ public enum LottoRank {
         return (LottoRank lottoRank) ->
                 lottoRank.winningNumberMatchCount == winningNumberCount
                         && lottoRank.bonusBallState.contains(containsBonusBall);
-    }
-
-    public int getWinningNumberMatchCount() {
-        return winningNumberMatchCount;
-    }
-
-    public long getPrizeMoney() {
-        return prizeMoney;
     }
 }
