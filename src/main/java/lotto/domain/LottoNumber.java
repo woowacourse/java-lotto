@@ -28,7 +28,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return LOTTO_NUMBER_CACHE.get(number);
     }
 
-    private static void checkLottoNumberRange(int number) {
+    private static void checkLottoNumberRange(final int number) {
         if (!LOTTO_NUMBER_CACHE.containsKey(number)) {
             throw new IllegalArgumentException("[ERROR] 입력값이 1 이상 45 이하여야 합니다.");
         }

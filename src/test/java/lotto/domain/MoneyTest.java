@@ -22,4 +22,29 @@ public class MoneyTest {
                 .isThrownBy(() -> new Money(10))
                 .withMessage("[ERROR] 로또를 구매할 수 없는 금액입니다.");
     }
+
+    @DisplayName("보유금액보다 많은 로또 구매시 예러를 발생한다.")
+    @Test
+    void buyLottoExceptionByLackMoney() {
+        final Money money = new Money(3000);
+        final int manualCounts = 5;
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> money.calculatePurchaseCounts(manualCounts))
+                .withMessage("[ERROR] 보유 금액보다 많은 로또를 구매할 수 없습니다.");
+    }
+
+    @DisplayName("수동 로또 구매 수량 입력 시 총 구매 수량 객체를 반환한다")
+    @Test
+    void calculatePurchaseCounts() {
+        // given
+        final Money money = new Money(5000);
+        final int manualCounts = 3;
+        final PurchaseLottoCounts expected = new PurchaseLottoCounts(3, 2);
+
+        // when
+        final PurchaseLottoCounts result = money.calculatePurchaseCounts(manualCounts);
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
 }

@@ -38,6 +38,12 @@ public class Lotto {
                 .count();
     }
 
+    public static Lotto from(final List<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList()));
+    }
+
     public boolean containNumber(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
