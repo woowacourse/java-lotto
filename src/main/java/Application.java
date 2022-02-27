@@ -16,6 +16,7 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         InputView inputView = InputView.getInstance();
         OutputView outputView = OutputView.getInstance();
         LottoController lottoController = new LottoController();
@@ -27,11 +28,16 @@ public class Application {
 
         outputView.printResult(lottoController.makeResult());
 =======
+=======
+        InputView inputView = InputView.getInstance();
+        OutputView outputView = OutputView.getInstance();
+>>>>>>> 62a4f7d (refactor : InputView, OutputView 싱글턴 패턴으로 관리)
         LottoController lottoController = new LottoController();
 
-        LottosDto lottosDto = lottoController.purchase(InputView.inputPurchaseAmount());
-        OutputView.printPurchasedLotto(lottosDto);
+        LottosDto lottosDto = lottoController.purchase(inputView.inputPurchaseAmount());
+        outputView.printPurchasedLotto(lottosDto);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         List<String> winningNumber = InputView.inputWinningNumber();
@@ -67,5 +73,10 @@ public class Application {
 =======
         OutputView.printResult(lottoController.makeResult());
 >>>>>>> a879dd3 (feat : 구매한 모든 로또의 결과를 기록하는 클래스 추가)
+=======
+        lottoController.determineWinningNumber(inputView.inputWinningNumber(), inputView.inputBonusBall());
+
+        outputView.printResult(lottoController.makeResult());
+>>>>>>> 62a4f7d (refactor : InputView, OutputView 싱글턴 패턴으로 관리)
     }
 }
