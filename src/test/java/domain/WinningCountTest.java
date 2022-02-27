@@ -11,10 +11,10 @@ public class WinningCountTest {
     @ValueSource(ints = {1, 3, 5})
     void createWinningCountTest(int input) {
         // given & when
-        WinningCount winningCount = new WinningCount(input);
+        WinningCount WinningCount = new WinningCount(input);
 
         // then
-        assertThat(winningCount).isNotNull();
+        assertThat(WinningCount).isNotNull();
     }
 
     @ParameterizedTest(name = "생성자에 음수를 전달하면 IAE 발생")

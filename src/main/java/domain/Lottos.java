@@ -30,31 +30,40 @@ public class Lottos {
                 .collect(Collectors.toSet());
     }
 
-    public Map<Rank, WinningCount> getResultByWinningLotto(WinningLotto winningLotto) {
-        Map<Rank, WinningCount> lottoResult = setupLottoResult();
-
-        lottos.stream()
-                .map(winningLotto::getRankByLotto)
-                .forEach(rank -> increaseCountByRank(lottoResult, rank));
-
-        return lottoResult;
+    public WinningResult getWinningResultByWinningLotto(WinningLotto winningLotto) {
+        return new WinningResult.Builder(new LottoQuantity(lottos.size()))
+                .first(getWinningCountByRank(winningLotto, Rank.FIRST))
+                .second(getWinningCountByRank(winningLotto, Rank.SECOND))
+                .third(getWinningCountByRank(winningLotto, Rank.THIRD))
+                .fourth(getWinningCountByRank(winningLotto, Rank.FOURTH))
+                .fifth(getWinningCountByRank(winningLotto, Rank.FIFTH))
+                .noMatch(getWinningCountByRank(winningLotto, Rank.NO_MATCH))
+                .build();
     }
 
-    private void increaseCountByRank(Map<Rank, WinningCount> lottoResult, Rank rank) {
-        int count = lottoResult.get(rank).getCount() + 1;
-        lottoResult.put(rank, new WinningCount(count));
+    private WinningCount getWinningCountByRank(WinningLotto winningLotto, Rank rank) {
+        int winningCount = (int) lottos.stream()
+                .filter(lotto -> winningLotto.getRankByLotto(lotto).equals(rank))
+                .count();
+
+        return new WinningCount(winningCount);
     }
 
-    private Map<Rank, WinningCount> setupLottoResult() {
-        Map<Rank, WinningCount> lottoResult = new HashMap<>();
-        lottoResult.put(Rank.FIRST, new WinningCount(0));
-        lottoResult.put(Rank.SECOND, new WinningCount(0));
-        lottoResult.put(Rank.THIRD, new WinningCount(0));
-        lottoResult.put(Rank.FOURTH, new WinningCount(0));
-        lottoResult.put(Rank.FIFTH, new WinningCount(0));
-        lottoResult.put(Rank.NO_MATCH, new WinningCount(0));
+    private void increaseCountByRank(Map<Rank, WinningCount> winningResult, Rank rank) {
+        int count = winningResult.get(rank).getCount() + 1;
+        winningResult.put(rank, new WinningCount(count));
+    }
 
-        return lottoResult;
+    private Map<Rank, WinningCount> setupWinningResult() {
+        Map<Rank, WinningCount> winningResult = new HashMap<>();
+        winningResult.put(Rank.FIRST, new WinningCount(0));
+        winningResult.put(Rank.SECOND, new WinningCount(0));
+        winningResult.put(Rank.THIRD, new WinningCount(0));
+        winningResult.put(Rank.FOURTH, new WinningCount(0));
+        winningResult.put(Rank.FIFTH, new WinningCount(0));
+        winningResult.put(Rank.NO_MATCH, new WinningCount(0));
+
+        return winningResult;
     }
 
     public List<Lotto> getLottos() {

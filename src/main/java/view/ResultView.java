@@ -1,7 +1,7 @@
 package view;
 
 import domain.Rank;
-import dto.LottoResultDto;
+import dto.WinningResultDto;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -13,10 +13,10 @@ public class ResultView {
     public static final String MESSAGE_FOR_LOSS = "손해";
     public static final String MESSAGE_FOR_PROFIT = "이익";
 
-    public static void printResult(LottoResultDto lottoResultDto) {
+    public static void printResult(WinningResultDto winningResultDto) {
         printTitle();
-        printWinningResults(lottoResultDto);
-        printProfitRatio(lottoResultDto.getProfitRatio());
+        printWinningResults(winningResultDto);
+        printProfitRatio(winningResultDto.getProfitRatio());
     }
 
     private static void printTitle() {
@@ -24,10 +24,10 @@ public class ResultView {
         System.out.println("---------");
     }
 
-    private static void printWinningResults(LottoResultDto lottoResultDto) {
+    private static void printWinningResults(WinningResultDto winningResultDto) {
         getRanks().forEach(rank -> {
-            int winningCount = lottoResultDto.getWinningCountByRank(rank).getCount();
-            printSingleLottoResult(rank, winningCount);
+            int winningCount = winningResultDto.getWinningCountByRank(rank).getCount();
+            printSingleWinningResult(rank, winningCount);
         });
     }
 
@@ -41,7 +41,7 @@ public class ResultView {
         return ranks;
     }
 
-    private static void printSingleLottoResult(Rank rank, int count) {
+    private static void printSingleWinningResult(Rank rank, int count) {
         System.out.println(
                 rank.getSameNumberCount() + "개 일치" + getBonusBallTextByRank(rank)
                         + " (" + rank.getPrize() + "원) - " + count + "개"

@@ -6,13 +6,11 @@ import domain.Lotto;
 import domain.LottoNumber;
 import domain.LottoQuantity;
 import domain.Lottos;
-import domain.Rank;
-import domain.WinningCount;
 import domain.WinningLotto;
+import domain.WinningResult;
 import domain.strategy.LottoNumberGenerateStrategy;
-import dto.LottoResultDto;
+import dto.WinningResultDto;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import view.InputView;
@@ -34,8 +32,8 @@ public class LottoController {
         InputView.printLottos(autoLottos);
 
         WinningLotto winningLotto = setupWinningLotto();
-        Map<Rank, WinningCount> lottoResult = autoLottos.getResultByWinningLotto(winningLotto);
-        ResultView.printResult(LottoResultDto.from(lottoResult, lottoQuantity));
+        WinningResult winningResult = autoLottos.getWinningResultByWinningLotto(winningLotto);
+        ResultView.printResult(WinningResultDto.of(winningResult, lottoQuantity));
     }
 
     private LottoQuantity getLottoQuantityByInputMoney(InputMoney inputMoney) {

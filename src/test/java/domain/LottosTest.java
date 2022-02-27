@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import domain.strategy.LottoNumberGenerateStrategy;
 import domain.strategy.StubRandomLottoNumberGenerator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -56,13 +55,13 @@ public class LottosTest {
 
     @Test
     @DisplayName("Winning Lotto 를 전달 받아 당첨 결과 반환")
-    void getLottoResultByWinningLotto() {
+    void getWinningResultByWinningLotto() {
         // given
         Lottos lottos = new Lottos(new LottoQuantity(3), lottoNumberGenerateStrategy);
-        Map<Rank, WinningCount> map = lottos.getResultByWinningLotto(winningLotto);
+        WinningResult winningResult = lottos.getWinningResultByWinningLotto(winningLotto);
 
         // when
-        WinningCount winningCount = map.get(Rank.FIRST);
+        WinningCount winningCount = winningResult.getWinningCountByRank(Rank.FIRST);
 
         // then
         assertThat(winningCount).isEqualTo(new WinningCount(1));
