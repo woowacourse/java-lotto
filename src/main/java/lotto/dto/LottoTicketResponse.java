@@ -18,11 +18,15 @@ public class LottoTicketResponse {
     public static List<LottoTicketResponse> from(LottoTickets lottoTickets) {
         List<LottoTicket> tickets = lottoTickets.getTickets();
         return tickets.stream().map(
-            ticket -> new LottoTicketResponse(ticket.getNumbers()
-                .stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList()))
+            ticket -> new LottoTicketResponse(getLottoNumbers(ticket))
         ).collect(Collectors.toList());
+    }
+
+    private static List<Integer> getLottoNumbers(LottoTicket ticket) {
+        return ticket.getNumbers()
+            .stream()
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList());
     }
 
     public List<Integer> getLottoTicketResponse() {
