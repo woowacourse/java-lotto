@@ -33,7 +33,7 @@ public class WinningAnalyze {
 	}
 
 	private void calculateProfitRate(Tickets tickets) {
-		double payment = tickets.size() * LOTTO_PRICE;
+		int payment = tickets.size() * LOTTO_PRICE;
 		double profit = getProfit();
 
 		profitRate = (profit / payment);
@@ -64,7 +64,8 @@ public class WinningAnalyze {
 				.append(String.format(PRIZE_COUNT_MESSAGE, analyzeResult.get(rank)))
 				.append(LINE_DELIMITER));
 
-		stringBuilder.append(String.format(PROFIT_RATE_MESSAGE, profitRate));
+		stringBuilder.append(String
+			.format(PROFIT_RATE_MESSAGE, Math.floor(profitRate * 100) / 100.0));
 
 		return stringBuilder.toString();
 	}
