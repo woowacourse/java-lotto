@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Ticket {
+	public static final int LOTTO_SIZE = 6;
 	private static final int CONDITION_FOR_CHECK_BONUS_BALL = 5;
+
+	public static final String SIZE_ERROR = "당첨 번호는 6자리여야 합니다.";
 
 	private static final String START_SIGN = "[";
 	private static final String END_SIGN = "]";
@@ -18,9 +21,17 @@ public class Ticket {
 	}
 
 	private List<Ball> makeNumbersToBalls(List<Integer> numbers) {
+		validateBalls(numbers);
+
 		return numbers.stream()
 			.map(Ball::new)
 			.collect(Collectors.toUnmodifiableList());
+	}
+
+	public static void validateBalls(List<Integer> numbers) {
+		if (numbers.size() != LOTTO_SIZE) {
+			throw new IllegalArgumentException(SIZE_ERROR);
+		}
 	}
 
 	public Rank getRank(WinningNumber winningNumber) {
