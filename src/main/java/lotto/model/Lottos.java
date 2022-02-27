@@ -1,13 +1,11 @@
-package lotto.model.lotto;
+package lotto.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.model.Money;
-import lotto.model.Rank;
-import lotto.model.lotto.generator.AutoLottoNumbersGenerator;
+import lotto.model.generator.AutoLottoNumbersGenerator;
 import lotto.model.number.BonusNumber;
 import lotto.model.number.LottoNumbers;
 
@@ -54,10 +52,6 @@ public class Lottos {
         return lottos;
     }
 
-    public Integer getCount(Rank rank) {
-        return rankCount.get(rank);
-    }
-
     public int getLottoCount() {
         return lottos.size();
     }
@@ -70,7 +64,7 @@ public class Lottos {
         return ((double) sum / (lottos.size() * PRICE_PER_LOTTO));
     }
 
-    private Integer getEachRankCount(Rank rank) {
+    public Integer getEachRankCount(Rank rank) {
         return rankCount.get(rank);
     }
 }

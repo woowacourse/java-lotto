@@ -1,21 +1,21 @@
 package lotto.model.number;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     private static final String NUMBERS_ERROR_MESSAGE = "[ERROR] 중복되지 않은 6자리 수를 입력해주세요.";
     private static final int LOTTO_NUMBERS_SIZE = 6;
+    private static final int NOT_CONTAIN_NUMBER = 0;
 
     private List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    public LottoNumbers(List<LottoNumber> lottoNumbers) throws RuntimeException {
         validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
+    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) throws RuntimeException {
         if (!isValidLength(lottoNumbers) || isDuplicate(lottoNumbers)) {
             throw new RuntimeException(NUMBERS_ERROR_MESSAGE);
         }
@@ -34,17 +34,20 @@ public class LottoNumbers {
 
     public int countMatchingNumber(LottoNumbers winningNumbers) {
         return (int) winningNumbers.lottoNumbers.stream()
-                .filter(number -> containNumber(number))
+                .filter(this::containNumber)
                 .count();
     }
 
-    public boolean containNumber(LottoNumber number) {
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            if (lottoNumber.equals(number)) {
-                return true;
-            }
-        }
-        return false;
+    private boolean containNumber(LottoNumber number) {
+        return lottoNumbers.stream()
+                .filter(lottoNumber -> lottoNumber.equals(number))
+                .count() != NOT_CONTAIN_NUMBER;
+    }
+
+    public boolean containNumber(BonusNumber number) {
+        return lottoNumbers.stream()
+                .filter(lottoNumber -> lottoNumber.compareBonusNumber(number))
+                .count() != NOT_CONTAIN_NUMBER;
     }
 
     public List<LottoNumber> getLottoNumbers() {

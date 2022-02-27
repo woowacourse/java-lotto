@@ -1,4 +1,4 @@
-package lotto.model.lotto;
+package lotto.model;
 
 import java.util.stream.Collectors;
 import lotto.model.number.BonusNumber;

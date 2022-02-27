@@ -22,7 +22,14 @@ public class InputValidator {
         for (String number : splitNumbers) {
             validateNumber(number);
         }
-        return splitNumbers;
+        return trimLottoNumbers(splitNumbers);
+    }
+
+    private static String[] trimLottoNumbers(String[] numbers) {
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = numbers[i].trim();
+        }
+        return numbers;
     }
 
     public static int validateNumber(String number) throws RuntimeException {

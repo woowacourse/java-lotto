@@ -2,8 +2,8 @@ package lotto.view;
 
 import java.util.stream.Collectors;
 import lotto.model.Rank;
-import lotto.model.lotto.Lotto;
-import lotto.model.lotto.Lottos;
+import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.model.number.LottoNumber;
 
 public class ResultView {
@@ -35,7 +35,7 @@ public class ResultView {
     }
 
     private static void printBuyingLotto(Lotto lotto) {
-        System.out.println(lotto.getNumbers().getLottoNumbers().stream()
+        System.out.println(lotto.getLottoNumbers().getLottoNumbers().stream()
                 .mapToInt(LottoNumber::getLottoNumber)
                 .boxed()
                 .collect(Collectors.toList()));
@@ -45,7 +45,7 @@ public class ResultView {
         System.out.println();
         System.out.println(STATISTICS_MESSAGE);
         for (Rank rank : Rank.values()) {
-            System.out.print(printRank(rank, lottos.getCount(rank)));
+            System.out.print(printRank(rank, lottos.getEachRankCount(rank)));
         }
         printRevenue(lottos);
     }

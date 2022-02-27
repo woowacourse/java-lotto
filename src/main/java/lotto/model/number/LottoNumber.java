@@ -10,19 +10,23 @@ public class LottoNumber {
 
     protected int number;
 
-    public LottoNumber(int number) {
-        validateRange(number);
+    public LottoNumber(int number) throws RuntimeException {
+        validateRange(number, NUMBER_RANGE_ERROR_MESSAGE);
         this.number = number;
     }
 
-    protected void validateRange(int number) {
+    protected void validateRange(int number, String errorMessage) throws RuntimeException {
         if (number < LOTTO_NUMBER_MINIMUM_RANGE || number > LOTTO_NUMBER_MAXIMUM_RANGE) {
-            throw new RuntimeException(NUMBER_RANGE_ERROR_MESSAGE);
+            throw new RuntimeException(errorMessage);
         }
     }
 
     public int getLottoNumber() {
         return number;
+    }
+
+    public boolean compareBonusNumber(BonusNumber bonusNumber) {
+        return number == bonusNumber.number;
     }
 
     @Override
@@ -33,8 +37,8 @@ public class LottoNumber {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        LottoNumber lottoNumber = (LottoNumber) o;
+        return number == lottoNumber.number;
     }
 
     @Override
