@@ -23,6 +23,9 @@ public class OutputView {
     private static final int SECOND_DECIMAL_POINT = 100;
     private static final int BENEFIT_STANDARD = 1;
 
+    private OutputView() {
+    }
+
     public static void showPurchasedLottos(Lottos lottos) {
         System.out.println(lottos.getLottos().size() + RESPONSE_MESSAGE_PURCHASED_LOTTO);
 

@@ -19,6 +19,8 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    private InputView() {
+    }
 
     private static String getInput() {
         return scanner.nextLine();
