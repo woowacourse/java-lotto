@@ -20,12 +20,14 @@ public class Lotto {
 
     private final List<Integer> numbers;
 
-    public Lotto() {
-        Collections.shuffle(LOTTO_BALLS);
-        List<Integer> numbers = LOTTO_BALLS.subList(0, NUMBER_COUNT);
+    public Lotto(List<Integer> numbers) {
         Collections.sort(numbers);
-
         this.numbers = List.copyOf(numbers);
+    }
+
+    public static List<Integer> selectNumbers() {
+        Collections.shuffle(LOTTO_BALLS);
+        return LOTTO_BALLS.subList(0, NUMBER_COUNT);
     }
 
     public static int countAvailableTickets(Money money) {
