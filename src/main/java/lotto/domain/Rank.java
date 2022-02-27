@@ -25,7 +25,6 @@ public enum Rank {
         this.bonus = bonus;
     }
 
-    // TODO: 정적 팩토리 메서드 공부하여 수정
     public static Rank getRank(final int matchingCount, final boolean bonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.count == matchingCount && rank.bonus == bonus)

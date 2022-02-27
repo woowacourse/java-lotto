@@ -4,26 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
+    private static final String ERROR_NULL = "올바른 값을 입력해주세요!";
 
     private final List<Lotto> lottos;
 
-    public Lottos(final int count) {
-        this(createRandomLottos(count));
-    }
-
     public Lottos(final List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);
+        validateLottos(this.lottos);
     }
 
     public List<Lotto> getLottos() {
         return new ArrayList<>(lottos);
     }
 
-    private static List<Lotto> createRandomLottos(final int count) {
-        List<Lotto> randomLottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            randomLottos.add(new Lotto());
+    private void validateLottos(final List<Lotto> lottos) {
+        if (lottos == null) {
+            throw new IllegalArgumentException(ERROR_NULL);
         }
-        return randomLottos;
     }
 }

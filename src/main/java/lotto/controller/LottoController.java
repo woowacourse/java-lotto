@@ -10,6 +10,9 @@ import lotto.domain.WinningLotto;
 import lotto.view.Entering;
 import lotto.view.KeyEnter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static lotto.view.Input.*;
 import static lotto.view.Input.inputWinningNumbers;
 import static lotto.view.Output.*;
@@ -23,7 +26,7 @@ public class LottoController {
         printRequestPayment();
         Payment payment = createPayment();
 
-        Lottos lottos = buyLotto(payment);
+        Lottos lottos = buyLottos(payment);
 
         WinningLotto winningLotto = getWinningLotto();
         showResult(lottos, payment, winningLotto);
@@ -38,14 +41,22 @@ public class LottoController {
         }
     }
 
-    private static Lottos buyLotto(Payment payment) {
+    private static Lottos buyLottos(final Payment payment) {
         int lottoCount = payment.getLottoCount();
-        Lottos lottos = new Lottos(lottoCount);
+        Lottos lottos = createLottos(lottoCount);
 
         printLottoCount(lottoCount);
         printLottos(lottos);
 
         return lottos;
+    }
+
+    private static Lottos createLottos(final int lottoCount) {
+        List<Lotto> lottos = new ArrayList<>(lottoCount);
+        for (int i = 0; i < lottoCount; i++) {
+            lottos.add(new Lotto(Lotto.selectRandomNumbers()));
+        }
+        return new Lottos(lottos);
     }
 
     private static WinningLotto getWinningLotto() {
@@ -64,7 +75,7 @@ public class LottoController {
         }
     }
 
-    private static WinningLotto createWinningLotto(Lotto winningNumbers) {
+    private static WinningLotto createWinningLotto(final Lotto winningNumbers) {
         try {
             Ball bonusBall = new Ball(inputBonusBall(entering));
             return new WinningLotto(winningNumbers, bonusBall);
@@ -74,7 +85,7 @@ public class LottoController {
         }
     }
 
-    private static void showResult(Lottos lottos, Payment payment, WinningLotto winningLotto) {
+    private static void showResult(final Lottos lottos, final Payment payment, final WinningLotto winningLotto) {
         printStatisticsTitle();
 
         LottoResult lottoResult = new LottoResult();
@@ -84,7 +95,7 @@ public class LottoController {
         showProfitRate(payment, lottoResult);
     }
 
-    private static void showProfitRate(Payment payment, LottoResult lottoResult) {
+    private static void showProfitRate(final Payment payment, final LottoResult lottoResult) {
         Profit profit = new Profit();
         double profitRate = profit.calculateRate(lottoResult.getTotalMoney(), payment);
         printProfitRate(profitRate);

@@ -15,17 +15,12 @@ public class Lotto implements Comparable<Lotto> {
     private static final String ERROR_BALL_COUNT = BALL_COUNT + "개의 숫자를 입력해주세요";
     private static final String ERROR_DUPLICATED_NUMBER = "번호가 중복됩니다!";
 
-    // TODO: List 말고 Set 으로 바꿀까?
     private final List<Ball> lotto = new ArrayList<>();
 
     static {
         lottoTotalNumbers.addAll(IntStream.range(Ball.MINIMUM_NUMBER, Ball.MAXIMUM_NUMBER + 1)
                 .boxed()
                 .collect(Collectors.toList()));
-    }
-
-    public Lotto() {
-        this(selectNumbers());
     }
 
     public Lotto(final List<Integer> numbers) {
@@ -47,7 +42,7 @@ public class Lotto implements Comparable<Lotto> {
         return lotto.contains(number);
     }
 
-    private static List<Integer> selectNumbers() {
+    public static List<Integer> selectRandomNumbers() {
         List<Integer> lottoNumbers = lottoTotalNumbers;
         Collections.shuffle(lottoNumbers);
 
