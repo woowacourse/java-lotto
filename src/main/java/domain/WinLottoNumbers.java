@@ -56,10 +56,6 @@ public class WinLottoNumbers {
         }
     }
 
-    public boolean isInNumber(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
-    }
-
     public int countSameNumber(LottoTicket lottoTicket) {
         return (int) this.lottoNumbers.stream()
             .filter(lottoTicket::contains)
