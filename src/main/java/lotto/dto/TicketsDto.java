@@ -1,6 +1,5 @@
 package lotto.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +21,7 @@ public class TicketsDto {
     }
 
     public List<TicketDto> getTicketDtos() {
-        return new ArrayList<>(ticketDtos);
+        return List.copyOf(ticketDtos);
     }
 
     public int getSize() {

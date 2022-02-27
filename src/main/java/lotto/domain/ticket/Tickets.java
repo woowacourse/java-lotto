@@ -34,7 +34,7 @@ public class Tickets {
     }
 
     public List<Ticket> getTickets() {
-        return new ArrayList<>(tickets);
+        return List.copyOf(tickets);
     }
 
     public int getSize() {
