@@ -9,16 +9,20 @@ import java.util.List;
 public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
+    private static final String ERROR_MONEY_UNDER_MINIMUM = "최소 1000원의 금액을 입력해주세요.";
 
     private List<Lotto> lottos = new ArrayList<>();
     private PrizeResult prizeResult = new PrizeResult();
 
     public LottoGame(int inputMoney) {
+        if (inputMoney < LOTTO_PRICE) {
+            throw new IllegalArgumentException(ERROR_MONEY_UNDER_MINIMUM);
+        }
         purchaseMaximumLottos(inputMoney);
     }
 
     private void purchaseMaximumLottos(int money) {
-        for (int i = 0; i < money / LOTTO_PRICE; i++) {
+        for (int i = 0; i < money; i += LOTTO_PRICE) {
             purchase(new RandomPurchaseStrategy());
         }
     }
