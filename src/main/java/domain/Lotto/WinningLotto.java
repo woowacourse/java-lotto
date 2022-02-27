@@ -2,6 +2,7 @@ package domain.Lotto;
 
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
+import domain.Result;
 import utils.ExceptionMessage;
 
 import java.util.List;
@@ -23,11 +24,9 @@ public class WinningLotto {
         }
     }
 
-    public List<LottoNumber> getWinningLotto() {
-        return winningLotto.getLotto();
-    }
-
-    public LottoNumber getBonusBall() {
-        return bonusBall;
+    public Result judge(Lotto lotto) {
+        int hitCount = lotto.compareLotto(winningLotto);
+        boolean isHitBonusBall = lotto.compareBonusBall(bonusBall);
+        return new Result(hitCount, isHitBonusBall);
     }
 }

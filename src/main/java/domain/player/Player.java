@@ -32,7 +32,7 @@ public class Player {
     public List<Result> judgeAll(WinningLotto winningLotto) {
         List<Result> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            result.add(lotto.judge(winningLotto));
+            result.add(winningLotto.judge(lotto));
         }
         return result;
     }
