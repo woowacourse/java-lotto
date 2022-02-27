@@ -40,18 +40,6 @@ public class LottoController {
 		}
 	}
 
-	// private void makeLottos2() {
-	// 	try {
-	// 		LottoCount lottoCount = new LottoCount(inputView.inputMoney2());
-	// 		storeMoneyInRateOfReturn(lottoCount);
-	// 		lottoStorage = new LottoStorage(lottoCount);
-	// 		outputView.printLottos(lottoStorage.getLottoStorageDTO());
-	// 	} catch (IllegalArgumentException e) {
-	// 		outputView.printErrorMessage(e.getMessage());
-	// 		makeLottos2();
-	// 	}
-	// }
-
 	private void storeMoneyInRateOfReturn(LottoCount lottoCount) {
 		rateOfReturn = new RateOfReturn(lottoCount);
 	}
@@ -75,17 +63,6 @@ public class LottoController {
 			storeBonusBall();
 		}
 	}
-	//
-	// private void storeBonusBall2() {
-	// 	try {
-	// 		int input = inputView.inputBonusBall2();
-	// 		bonusBall = new BonusBall(input);
-	// 		lottoWinningNumber.validateReduplicationWithBonusBall2(input);
-	// 	} catch (IllegalArgumentException e) {
-	// 		outputView.printErrorMessage(e.getMessage());
-	// 		storeBonusBall2();
-	// 	}
-	// }
 
 	private void compareLottoWithWinningNumber() {
 		lottoStorage.checkWithWinningNumberAndBonus(bonusBall.getBonusBallDTO(),

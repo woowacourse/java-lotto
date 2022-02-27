@@ -14,18 +14,6 @@ public class InputView {
 		return scanner.nextLine();
 	}
 
-	// public int inputMoney2() {
-	// 	System.out.println(INPUT_MONEY_MESSAGE);
-	// 	try {
-	// 		int money = scanner.nextInt();
-	// 		scanner.nextLine();
-	// 		return money;
-	// 	} catch (InputMismatchException e) {
-	// 		scanner.nextLine();
-	// 		throw new IllegalArgumentException("[Error]: 금액은 숫자를 입력해주세요.");
-	// 	}
-	// }
-
 	public String inputWinningNumbers() {
 		System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
 		return scanner.nextLine();
@@ -35,16 +23,4 @@ public class InputView {
 		System.out.println(INPUT_BONUS_BALL_MESSAGE);
 		return scanner.nextLine();
 	}
-
-	// public int inputBonusBall2() {
-	// 	System.out.println(INPUT_BONUS_BALL_MESSAGE);
-	// 	try {
-	// 		int bonus = scanner.nextInt();
-	// 		scanner.nextLine();
-	// 		return bonus;
-	// 	} catch (InputMismatchException e) {
-	// 		scanner.nextLine();
-	// 		throw new IllegalArgumentException("[Error]: 보너스 볼은 숫자여야 합니다.");
-	// 	}
-	// }
 }

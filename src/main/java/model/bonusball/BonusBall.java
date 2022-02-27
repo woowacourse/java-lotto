@@ -16,12 +16,6 @@ public class BonusBall {
 		this.number = makeBonusBallToNumber(number);
 	}
 
-	// public BonusBall(int number) {
-	// 	InputValidateUtils.inputOutOfRange2(number, BONUS_BALL_RANGE_ERROR_MESSAGE);
-	// 	this.number = number;
-	//
-	// }
-
 	private int makeBonusBallToNumber(String number) {
 		return Integer.parseInt(number);
 	}
