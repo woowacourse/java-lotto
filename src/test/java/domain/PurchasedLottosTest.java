@@ -17,11 +17,11 @@ public class PurchasedLottosTest {
     @BeforeEach
     void init() {
         inputMoney = 1400;
-        lottos = new Lottos(inputMoney);
-        lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(1, 2, 3, 43, 44, 45)));
-        lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(1, 2, 3, 4, 44, 45)));
-        lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(1, 2, 3, 4, 5, 45)));
-        lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(1, 2, 3, 4, 5, 12)));
+//        lottos = new Lottos(inputMoney);
+//        lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(1, 2, 3, 43, 44, 45)));
+//        lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(1, 2, 3, 4, 44, 45)));
+//        lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(1, 2, 3, 4, 5, 45)));
+//        lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(1, 2, 3, 4, 5, 12)));
 
         Integer[] winningNumbersArray = {1, 2, 3, 4, 5, 12};
         List<Integer> winningNumbers = Arrays.asList(winningNumbersArray);
