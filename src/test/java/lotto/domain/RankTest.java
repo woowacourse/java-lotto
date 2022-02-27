@@ -34,8 +34,8 @@ class RankTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"0,false", "0,true", "1,false", "1,true", "2,false"})
-    @DisplayName("매칭한 숫자가 이면 Second를 반환한다.")
+    @CsvSource(value = {"0,false", "0,true", "1,false", "1,true", "2,false", "2,true"})
+    @DisplayName("매칭한 숫자가 2개 이하이면 None을 반환한다.")
     void matchCountToRankNone(int matchCount, boolean matchBonus) {
         assertThat(Rank.find(matchCount, matchBonus)).isEqualTo(Rank.NONE);
     }
