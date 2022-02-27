@@ -4,26 +4,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.AppConfig;
 import lotto.domain.ticket.generator.CustomTicketGenerator;
-import lotto.domain.rank.Rank;
-import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
-import lotto.dto.WinningTicketDto;
 import lotto.exception.LottoException;
-import lotto.exception.LottoExceptionStatus;
-import lotto.exception.ball.BallNumberExceptionStatus;
 import lotto.exception.money.MoneyExceptionStatus;
-import lotto.exception.ticket.TicketNumbersExceptionStatus;
 import lotto.service.LottoService;
-import lotto.view.LottoView;
 import lotto.view.input.reader.CustomReader;
 
 class LottoControllerTest {
@@ -32,7 +26,6 @@ class LottoControllerTest {
 
     private final LottoController lottoController = APP_CONFIG.lottoController;
     private final LottoService lottoService = APP_CONFIG.lottoService;
-    private final LottoView lottoView = APP_CONFIG.lottoView;
     private final CustomTicketGenerator customTicketGenerator = APP_CONFIG.ticketGenerator;
     private final CustomReader customReader = APP_CONFIG.reader;
 
@@ -66,9 +59,9 @@ class LottoControllerTest {
 
     @DisplayName("로또 구매 기능, 정상 작동 테스트")
     @ParameterizedTest(name = "[{index}] {1}원어치 로또 구매")
-    @MethodSource("lotto.controller.provider.LottoControllerTestProvider#provideForPurchaseTicketsTest")
+    @MethodSource("provideForPurchaseTicketsTest")
     void purchaseTicketsTest(final List<TicketDto> generatedTickets, final String inputText) {
-        customTicketGenerator.initTickets(generatedTickets);
+        customTicketGenerator.initNumbers(generatedTickets);
         customReader.initText(inputText);
 
         lottoController.purchaseTickets();
@@ -84,146 +77,32 @@ class LottoControllerTest {
         }
     }
 
-    private void winningNumbersAndBonusNumberExceptionTest(final List<String> inputValues,
-                                                           final List<TicketDto> generatedTickets,
-                                                           final LottoExceptionStatus exceptionStatus) {
-        customReader.initText(inputValues);
-        customTicketGenerator.initTickets(generatedTickets);
-        lottoController.purchaseTickets();
-        assertThatThrownBy(lottoController::checkOutAnalysis)
-                .isInstanceOf(LottoException.class)
-                .hasMessageContaining(exceptionStatus.getMessage());
+
+    public static Stream<Arguments> provideForPurchaseTicketsTest() {
+        return Stream.of(
+                Arguments.of(
+                        List.of(
+                                new TicketDto(List.of(1, 2, 3, 4, 5, 6))
+                        ), "1000"
+                ),
+                Arguments.of(
+                        List.of(
+                                new TicketDto(List.of(1, 2, 3, 4, 5, 6)),
+                                new TicketDto(List.of(11, 12, 13, 14, 15, 16)),
+                                new TicketDto(List.of(21, 22, 23, 24, 25, 26))
+                        ), "3000"
+                ),
+                Arguments.of(
+                        List.of(
+                                new TicketDto(List.of(1, 2, 3, 4, 5, 6)),
+                                new TicketDto(List.of(11, 12, 13, 14, 15, 16)),
+                                new TicketDto(List.of(21, 22, 23, 24, 25, 26)),
+                                new TicketDto(List.of(31, 32, 33, 34, 35, 36)),
+                                new TicketDto(List.of(40, 41, 42, 43, 44, 45))
+                        ), "5000"
+                )
+        );
     }
 
-    @DisplayName("로또 당첨 번호 입력, 숫자 이외의 값은 입력할 수 없습니다.")
-    @ParameterizedTest(name = "[{index}] 당첨 번호 입력 : \"{1}\"")
-    @MethodSource(
-            "lotto.controller.provider.LottoControllerTestProvider#provideForWinningNumbersNotNumericExceptionTest")
-    void winningNumbersNotNumericExceptionTest(final String inputMoney,
-                                               final String inputWinningNumbers,
-                                               final String inputBonusNumber,
-                                               final List<TicketDto> generatedTickets) {
-        final List<String> inputValues = List.of(inputMoney, inputWinningNumbers, inputBonusNumber);
-        winningNumbersAndBonusNumberExceptionTest(
-                inputValues, generatedTickets, BallNumberExceptionStatus.BALL_MUST_BE_NUMERIC);
-    }
-
-    @DisplayName("로또 당첨 번호 입력, 번호는 6개로 구성되어야 합니다.")
-    @ParameterizedTest(name = "[{index}] 당첨 번호 입력 : \"{1}\"")
-    @MethodSource(
-            "lotto.controller.provider.LottoControllerTestProvider#provideForWinningNumbersOutOfSizeExceptionTest")
-    void winningNumbersOutOfSizeExceptionTest(final String inputMoney,
-                                              final String inputWinningNumbers,
-                                              final String inputBonusNumber,
-                                              final List<TicketDto> generatedTickets) {
-        final List<String> inputValues = List.of(inputMoney, inputWinningNumbers, inputBonusNumber);
-        winningNumbersAndBonusNumberExceptionTest(
-                inputValues, generatedTickets, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_OUT_OF_SIZE);
-    }
-
-    @DisplayName("로또 당첨 번호 입력, 범위 밖의 값은 입력할 수 없습니다.")
-    @ParameterizedTest(name = "[{index}] 당첨 번호 입력 : \"{1}\"")
-    @MethodSource(
-            "lotto.controller.provider.LottoControllerTestProvider#provideForWinningNumbersOutOfRangeExceptionTest")
-    void winningNumbersOutOfRangeExceptionTest(final String inputMoney,
-                                               final String inputWinningNumbers,
-                                               final String inputBonusNumber,
-                                               final List<TicketDto> generatedTickets) {
-        final List<String> inputValues = List.of(inputMoney, inputWinningNumbers, inputBonusNumber);
-        winningNumbersAndBonusNumberExceptionTest(
-                inputValues, generatedTickets, BallNumberExceptionStatus.BALL_CANNOT_BE_OUT_OF_RANGE);
-    }
-
-    @DisplayName("로또 당첨 번호 입력, 번호는 중복될 수 없습니다.")
-    @ParameterizedTest(name = "[{index}] 당첨 번호 입력 : \"{1}\"")
-    @MethodSource(
-            "lotto.controller.provider.LottoControllerTestProvider#provideForWinningNumbersDuplicatedExceptionTest")
-    void winningNumbersDuplicatedExceptionTest(final String inputMoney,
-                                               final String inputWinningNumbers,
-                                               final String inputBonusNumber,
-                                               final List<TicketDto> generatedTickets) {
-        final List<String> inputValues = List.of(inputMoney, inputWinningNumbers, inputBonusNumber);
-        winningNumbersAndBonusNumberExceptionTest(
-                inputValues, generatedTickets, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
-    }
-
-    @DisplayName("보너스 볼 번호 입력, 숫자 이외의 값은 입력할 수 없습니다.")
-    @ParameterizedTest(name = "[{index}] 보너스 볼 입력 : \"{2}\"")
-    @MethodSource(
-            "lotto.controller.provider.LottoControllerTestProvider#provideForBonusNumberNotNumericExceptionTest")
-    void bonusNumberNotNumericExceptionTest(final String inputMoney,
-                                            final String inputWinningNumbers,
-                                            final String inputBonusNumber,
-                                            final List<TicketDto> generatedTickets) {
-        final List<String> inputValues = List.of(inputMoney, inputWinningNumbers, inputBonusNumber);
-        winningNumbersAndBonusNumberExceptionTest(
-                inputValues, generatedTickets, BallNumberExceptionStatus.BALL_MUST_BE_NUMERIC);
-    }
-
-    @DisplayName("보너스 볼 번호 입력, 범위 밖의 값은 입력할 수 없습니다.")
-    @ParameterizedTest(name = "[{index}] 보너스 볼 입력 : \"{2}\"")
-    @MethodSource(
-            "lotto.controller.provider.LottoControllerTestProvider#provideForBonusNumberOutOfRangeExceptionTest")
-    void bonusNumberOutOfRangeExceptionTest(final String inputMoney,
-                                            final String inputWinningNumbers,
-                                            final String inputBonusNumber,
-                                            final List<TicketDto> generatedTickets) {
-        final List<String> inputValues = List.of(inputMoney, inputWinningNumbers, inputBonusNumber);
-        winningNumbersAndBonusNumberExceptionTest(
-                inputValues, generatedTickets, BallNumberExceptionStatus.BALL_CANNOT_BE_OUT_OF_RANGE);
-    }
-
-    @DisplayName("보너스 볼 번호 입력, 보너스 볼은 당첨 번호와 중복될 수 없습니다.")
-    @ParameterizedTest(name = "[{index}] 보너스 볼 입력 : \"{2}\"")
-    @MethodSource(
-            "lotto.controller.provider.LottoControllerTestProvider#provideForBonusNumberDuplicatedExceptionTest")
-    void bonusNumberDuplicatedExceptionTest(final String inputMoney,
-                                            final String inputWinningNumbers,
-                                            final String inputBonusNumber,
-                                            final List<TicketDto> generatedTickets) {
-        final List<String> inputValues = List.of(inputMoney, inputWinningNumbers, inputBonusNumber);
-        winningNumbersAndBonusNumberExceptionTest(
-                inputValues, generatedTickets, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
-    }
-
-    @DisplayName("당첨 통계, 당첨 등수 개수 확인 테스트")
-    @ParameterizedTest(name = "[{index}] 당첨 등수 : {4}")
-    @MethodSource("lotto.controller.provider.LottoControllerTestProvider#provideForCheckOutAnalysisTest")
-    void checkOutAnalysisRankCountsTest(final String inputMoney,
-                                        final String inputWinningNumbers,
-                                        final String inputBonusNumber,
-                                        final List<TicketDto> generatedTickets,
-                                        final Map<Rank, Integer> expectedRankCounts,
-                                        final String expectedProfitRate) {
-        customReader.initText(List.of(inputMoney, inputWinningNumbers, inputBonusNumber));
-        customTicketGenerator.initTickets(generatedTickets);
-        lottoController.purchaseTickets();
-
-        final WinningTicketDto winningTicketDto = lottoView.requestWinningTicket();
-        final AnalysisDto analysisDto = lottoService.generateAnalysis(winningTicketDto);
-
-        final Map<Rank, Integer> actualRankCounts = analysisDto.getRankCounts();
-        assertThat(actualRankCounts).isEqualTo(expectedRankCounts);
-    }
-
-    @DisplayName("당첨 통계, 수익률 확인 테스트")
-    @ParameterizedTest(name = "[{index}] 수익률 : {5}")
-    @MethodSource("lotto.controller.provider.LottoControllerTestProvider#provideForCheckOutAnalysisTest")
-    void checkOutAnalysisProfitRateTest(final String inputMoney,
-                                        final String inputWinningNumbers,
-                                        final String inputBonusNumber,
-                                        final List<TicketDto> generatedTickets,
-                                        final Map<Rank, Integer> expectedRankCounts,
-                                        final String expectedProfitRate) {
-        customReader.initText(List.of(inputMoney, inputWinningNumbers, inputBonusNumber));
-        customTicketGenerator.initTickets(generatedTickets);
-        lottoController.purchaseTickets();
-
-        final WinningTicketDto winningTicketDto = lottoView.requestWinningTicket();
-        final AnalysisDto analysisDto = lottoService.generateAnalysis(winningTicketDto);
-
-        final String actualProfitRate = String.format("%.2f", analysisDto.getProfitRate());
-        assertThat(actualProfitRate).isEqualTo(expectedProfitRate);
-    }
 
 }
