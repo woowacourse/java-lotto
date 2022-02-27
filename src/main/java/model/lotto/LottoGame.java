@@ -44,12 +44,12 @@ public class LottoGame {
                 new LottoWinningNumberResponse(lottoWinningNumber.getWinningNumbers()));
     }
 
-    public double showResult(WinningResult winningResult) {
+    public double sendResult(WinningResult winningResult) {
         for (Rank rank : winningResult.getWinningCount().keySet()) {
             outputView.printResult(rank.getMatchNumber(), rank.getValue(),
                     winningResult.getWinningCount().get(rank), Rank.BONUS.getValue());
         }
 
-        return rateOfReturn.getRateOfReturn(winningResult);
+        return rateOfReturn.calcRateOfReturn(winningResult);
     }
 }

@@ -51,7 +51,7 @@ public class LottoController {
 
     private void sendStatistics(WinningResult winningResult, LottoGame lottoGame) {
         outputView.printResultMessage();
-        double rateOfReturn = lottoGame.showResult(winningResult);
+        double rateOfReturn = lottoGame.sendResult(winningResult);
         outputView.printRateOfReturn(rateOfReturn);
     }
 }
