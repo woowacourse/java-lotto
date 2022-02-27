@@ -2,13 +2,15 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.util.IntsToLottoConverter;
-import lotto.util.StringToIntConverter;
+import lotto.util.StringConverter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
 
 public class LottoController {
+
+    private static final String LOTTO_INPUT_DELIMITER = ",";
 
     public void run() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
@@ -26,7 +28,7 @@ public class LottoController {
 
     private PurchaseAmount getPurchaseAmount() {
         try {
-            return new PurchaseAmount(StringToIntConverter.toInt(InputView.getAmount()));
+            return new PurchaseAmount(StringConverter.toInt(InputView.getAmount()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getPurchaseAmount();
@@ -45,7 +47,7 @@ public class LottoController {
 
     private Lotto getWinningNumber() {
         try {
-            List<Integer> input = StringToIntConverter.toInts(InputView.getWinningNumber());
+            List<Integer> input = StringConverter.toInts(InputView.getWinningNumber(), LOTTO_INPUT_DELIMITER);
             return IntsToLottoConverter.convert(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -65,7 +67,7 @@ public class LottoController {
 
     private LottoNumber getBonusNumber() {
         try {
-            return new LottoNumber(StringToIntConverter.toInt(InputView.getBonusNumber()));
+            return new LottoNumber(StringConverter.toInt(InputView.getBonusNumber()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getBonusNumber();

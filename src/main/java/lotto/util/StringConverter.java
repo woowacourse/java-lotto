@@ -4,21 +4,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StringToIntConverter {
+public class StringConverter {
 
-    private static final String DELIMITER = ",";
-
-    private StringToIntConverter() {
+    private StringConverter() {
     }
 
-    public static List<Integer> toInts(String input) {
-        return Arrays.stream(trim(split(input)))
-                .map(StringToIntConverter::toInt)
+    public static List<Integer> toInts(String input, String delimiter) {
+        return Arrays.stream(trim(split(input, delimiter)))
+                .map(StringConverter::toInt)
                 .collect(Collectors.toList());
     }
 
-    private static String[] split(String input) {
-        return input.split(DELIMITER);
+    private static String[] split(String input, String delimiter) {
+        return input.split(delimiter);
     }
 
     private static String[] trim(String[] numbers) {
