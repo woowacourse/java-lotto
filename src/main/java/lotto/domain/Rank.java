@@ -58,13 +58,7 @@ public enum Rank {
     }
 
     public int findRewardCount(List<Rank> ranks) {
-        int count = 0;
-        for (Rank rank : ranks) {
-            if (rank == this) {
-                count++;
-            }
-        }
-        return count;
+        return (int) ranks.stream().filter(rank -> rank == this).count();
     }
 
     public int getMatchCount() {
