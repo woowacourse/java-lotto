@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import domain.strategy.CustomTicketGenerator;
+
 class SetUpTicketsAndWinningNumber {
 	private Tickets tickets;
 	private WinningNumber winningNumber;
