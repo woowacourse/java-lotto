@@ -1,6 +1,8 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIFTH(3, 5000),
@@ -25,6 +27,12 @@ public enum Rank {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.correctedBall == matchWinningNumbers && rank != Rank.SECOND)
                 .findFirst().orElse(FAIL);
+    }
+
+    public static List<Rank> getRanksToPrint() {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank != Rank.FAIL)
+                .collect(Collectors.toList());
     }
 
     public int getCorrectedBall() {

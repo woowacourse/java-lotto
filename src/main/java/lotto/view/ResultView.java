@@ -4,7 +4,6 @@ import lotto.model.Lotto;
 import lotto.model.LottoResult;
 import lotto.model.Rank;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ResultView {
@@ -21,8 +20,8 @@ public class ResultView {
         printEmptyLine();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        Arrays.stream(Rank.values())
-                .filter(rank -> rank != Rank.FAIL)
+        Rank.getRanksToPrint()
+                .stream()
                 .map(rank -> getOneRankStatus(rank, lottoResult.getRankCount(rank)))
                 .forEach(System.out::println);
     }
