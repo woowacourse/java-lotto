@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Lottos {
 
@@ -35,10 +36,10 @@ public class Lottos {
     }
 
     private List<Lotto> generateLottos(int lottoAmount) {
-        lottos = new ArrayList<>();
 
+        lottos = new ArrayList<>();
         for (int i = 0; i < lottoAmount; ++i) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.generateLotto());
         }
         return lottos;
     }

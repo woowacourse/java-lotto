@@ -23,6 +23,10 @@ public class Lotto {
         this.lottoNumbers = generateNumber();
     }
 
+    public static Lotto generateLotto() {
+        return new Lotto();
+    }
+
     public Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
