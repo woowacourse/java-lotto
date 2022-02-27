@@ -8,8 +8,6 @@ import java.util.Map;
 import domain.dto.WinningAnalyzeDto;
 
 public class WinningAnalyze {
-	private static final int LOTTO_PRICE = 1000;
-
 	private static final String PRIZE_COUNT_MESSAGE = "%d개";
 	private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
 	private static final String LINE_DELIMITER = "\n";
@@ -42,7 +40,7 @@ public class WinningAnalyze {
 	}
 
 	private double calculateProfitRate(Map<Rank, Integer> analyzeResult) {
-		int payment = tickets.size() * LOTTO_PRICE;
+		int payment = tickets.size() * Ticket.PRICE;
 		double profit = getProfit(analyzeResult);
 
 		return (profit / payment);
