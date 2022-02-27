@@ -10,6 +10,7 @@ import static lotto.view.InputView.inputLottoText;
 import static lotto.view.InputView.inputMoneyText;
 
 import java.util.Map;
+import java.util.function.Supplier;
 import lotto.model.Lotto;
 import lotto.model.LottoGenerator;
 import lotto.model.LottoMachine;
@@ -35,8 +36,8 @@ public class Application {
             InvalidNumberRangeException.class, "로또 번호는 1 ~ 45 사이여야 합니다.");
 
     public static void main(String[] args) {
-        LottoMachine lottoMachine = createLottoMachine();
         Money money = initMoney();
+        LottoMachine lottoMachine = createLottoMachine();
         Lottoes lottoes = issueLottoes(lottoMachine, money);
         WinnerLotto winnerLotto = initWinnerLotto();
         summarize(winnerLotto, lottoes);
@@ -47,13 +48,21 @@ public class Application {
     }
 
     private static Money initMoney() {
+        return createTemplate(Application::createMoney);
+    }
+
+    private static Money createMoney() {
+        String moneyText = inputMoneyText(Application::handleException);
+        int amount = Integer.parseInt(moneyText.trim());
+        return new Money(amount);
+    }
+
+    private static <T> T createTemplate(Supplier<T> supplier) {
         try {
-            String moneyText = inputMoneyText(Application::handleException);
-            int amount = Integer.parseInt(moneyText.trim());
-            return new Money(amount);
+            return supplier.get();
         } catch (LottoException e) {
             handleException(e);
-            return initMoney();
+            return supplier.get();
         }
     }
 
@@ -78,12 +87,7 @@ public class Application {
     }
 
     private static WinnerLotto initWinnerLotto() {
-        try {
-            return new WinnerLotto(createLotto(), createBonusNumber());
-        } catch (LottoException e) {
-            handleException(e);
-            return initWinnerLotto();
-        }
+        return createTemplate(() -> new WinnerLotto(createLotto(), createBonusNumber()));
     }
 
     private static Lotto createLotto() {
