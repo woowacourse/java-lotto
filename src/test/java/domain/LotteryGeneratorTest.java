@@ -2,11 +2,7 @@ package domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,17 +23,5 @@ public class LotteryGeneratorTest {
 		//when
 		//then
 		assertThat(numbers.size()).isEqualTo(6);
-	}
-
-	@Test
-	@DisplayName("생성된 6개의 수가 정렬되어 있는지 확인")
-	void checkSortedNumber() {
-		//given
-		final Set<LotteryNumber> numbers = lotteryGenerator.getNumbers();
-		//when
-		final Set<LotteryNumber> sortedNumbers = numbers.stream()
-			.collect(Collectors.toCollection(TreeSet::new));
-		//then
-		assertThat(sortedNumbers.equals(numbers)).isTrue();
 	}
 }
