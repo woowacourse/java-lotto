@@ -42,7 +42,7 @@ public enum Rank {
 		return properRank;
 	}
 
-	public static List<Rank> getValues() {
+	public static List<Rank> getValuesExceptNoneRank() {
 		return Arrays.stream(values())
 			.filter(rank -> rank != NONE)
 			.collect(Collectors.toList());
