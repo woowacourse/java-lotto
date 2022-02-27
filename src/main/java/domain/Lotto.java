@@ -42,7 +42,7 @@ public class Lotto {
         return new ArrayList<>(numbers);
     }
 
-    public static Lotto generateLottoNumber(int minNumber, int maxNumber) {
+    public static Lotto generateLottoNumbers(int minNumber, int maxNumber) {
         List<LottoNumber> lottoRange = IntStream.rangeClosed(minNumber, maxNumber)
                 .mapToObj(LottoNumber::generateLottoNumber)
                 .collect(Collectors.toList());
