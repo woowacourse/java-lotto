@@ -6,8 +6,8 @@ import utils.LotteryMessage;
 
 public class WinningLottery {
 
-	final Lottery winningNumbers;
-	final LotteryNumber bonusBall;
+	private final Lottery winningNumbers;
+	private final LotteryNumber bonusBall;
 
 	public WinningLottery(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
 		validateBonusBall(winningNumbers, bonusBall);
