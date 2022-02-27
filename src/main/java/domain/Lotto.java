@@ -18,7 +18,7 @@ public class Lotto {
         }
     }
 
-    public Rank calculateRank(WinningNumber winningNumber) {
+    public Rank calculateRank(WinningNumbers winningNumber) {
         int matched = matchedRegularNumbers(winningNumber);
         boolean hasBonus = false;
         if (matched == BONUS_CONFIRMATION_CRITERIA) {
@@ -27,7 +27,7 @@ public class Lotto {
         return Rank.getWinnerPrizeByMatched(matched, hasBonus);
     }
 
-    private int matchedRegularNumbers(WinningNumber winningNumber) {
+    private int matchedRegularNumbers(WinningNumbers winningNumber) {
         return (int) winningNumber.getWinningNumbers().stream()
                 .filter(lottoNumbers::contains).count();
     }

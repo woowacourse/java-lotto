@@ -11,16 +11,16 @@ public class LottoGameController {
         Lottos purchasedLotto = Store.purchaseLottos(inputMoney);
         OutputView.printPurchasedLotto(purchasedLotto.getLottos());
 
-        WinningNumber winningNumber = initWinningNumber();
+        WinningNumbers winningNumber = initWinningNumber();
         PrizeResult prizeResult = purchasedLotto.prizeResult(inputMoney, winningNumber);
 
         OutputView.printFinalStatistic(prizeResult);
         OutputView.printEarningRate(prizeResult.getEarningRate());
     }
 
-    private WinningNumber initWinningNumber() {
+    private WinningNumbers initWinningNumber() {
         try {
-            WinningNumber winningNumber = new WinningNumber(InputView.inputWinningLottoNumbers());
+            WinningNumbers winningNumber = new WinningNumbers(InputView.inputWinningLottoNumbers());
             initBonusNumber(winningNumber);
             return winningNumber;
         } catch (IllegalArgumentException e) {
@@ -29,7 +29,7 @@ public class LottoGameController {
         }
     }
 
-    private void initBonusNumber(WinningNumber winningNumber) {
+    private void initBonusNumber(WinningNumbers winningNumber) {
         try {
             winningNumber.addBonusNumber(InputView.inputBonus());
         } catch (IllegalArgumentException e) {

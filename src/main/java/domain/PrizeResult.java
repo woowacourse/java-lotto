@@ -8,7 +8,7 @@ public class PrizeResult {
     private final Map<Rank, Integer> prizeResult;
     private final float earningRate;
 
-    public PrizeResult(int inputMoney, List<Lotto> lottos, WinningNumber winningNumber) {
+    public PrizeResult(int inputMoney, List<Lotto> lottos, WinningNumbers winningNumber) {
         this.prizeResult = new HashMap<>();
         initFinalResult();
         calculatePrizeResult(lottos, winningNumber);
@@ -20,7 +20,7 @@ public class PrizeResult {
                 .forEach(winnerPrice -> prizeResult.put(winnerPrice, 0));
     }
 
-    private void calculatePrizeResult(List<Lotto> lottos, WinningNumber winningNumber) {
+    private void calculatePrizeResult(List<Lotto> lottos, WinningNumbers winningNumber) {
         for (Lotto lotto : lottos) {
             Rank winnerPrice = lotto.calculateRank(winningNumber);
             updatePrizeResult(winnerPrice);

@@ -14,7 +14,7 @@ class WinningNumberTest {
     @DisplayName("보너스 번호를 이미 갖고 있을 시 예외가 발생한다.")
     void checkBonusDuplicate_throwIllegalException() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        WinningNumber lotto = new WinningNumber(numbers);
+        WinningNumbers lotto = new WinningNumbers(numbers);
         int bonus = 3;
 
         assertThatThrownBy(() -> lotto.addBonusNumber(bonus))
@@ -27,7 +27,7 @@ class WinningNumberTest {
     void checkDuplicateNumber_throwIllegalException() {
         List<Integer> numbers = Arrays.asList(1, 1, 3, 4, 5, 6);
 
-        assertThatThrownBy(() -> new WinningNumber(numbers))
+        assertThatThrownBy(() -> new WinningNumbers(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호는 중복되면 안 됩니다.");
     }

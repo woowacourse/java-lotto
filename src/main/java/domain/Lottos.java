@@ -14,7 +14,7 @@ public class Lottos {
         }
     }
 
-    public PrizeResult prizeResult(int inputMoney, WinningNumber winningNumber) {
+    public PrizeResult prizeResult(int inputMoney, WinningNumbers winningNumber) {
         return new PrizeResult(inputMoney, lottos, winningNumber);
     }
 

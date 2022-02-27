@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class WinningNumber {
+public class WinningNumbers {
 
     private static final int LOTTO_SIZE = 6;
     private static final String ERROR_DUPLICATE_NUMBER = "로또 번호는 중복되면 안 됩니다.";
@@ -13,7 +13,7 @@ public class WinningNumber {
     private final Set<Number> winningNumbers;
     private Number bonus;
 
-    public WinningNumber(List<Integer> numbers) {
+    public WinningNumbers(List<Integer> numbers) {
         winningNumbers = new HashSet<>();
         for (Integer number : numbers) {
             winningNumbers.add(new Number(number));

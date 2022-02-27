@@ -29,7 +29,7 @@ public class LottoTest {
 
         Integer[] winningNumbersArray = {1, 2, 3, 10, 11, 12};
         List<Integer> winningNumbers = Arrays.asList(winningNumbersArray);
-        WinningNumber winningLotto = new WinningNumber(winningNumbers);
+        WinningNumbers winningLotto = new WinningNumbers(winningNumbers);
         winningLotto.addBonusNumber(45);
 
         Rank winnerPrice = lotto.calculateRank(winningLotto);
@@ -45,7 +45,7 @@ public class LottoTest {
 
         Integer[] winningNumbersArray = {1, 2, 3, 4, 5, 12};
         List<Integer> winningNumbers = Arrays.asList(winningNumbersArray);
-        WinningNumber winningLotto = new WinningNumber(winningNumbers);
+        WinningNumbers winningLotto = new WinningNumbers(winningNumbers);
         winningLotto.addBonusNumber(6);
 
         Rank winnerPrice = lotto.calculateRank(winningLotto);
@@ -61,7 +61,7 @@ public class LottoTest {
 
         Integer[] winningNumbersArray = {1, 2, 3, 4, 5, 12};
         List<Integer> winningNumbers = Arrays.asList(winningNumbersArray);
-        WinningNumber winningLotto = new WinningNumber(winningNumbers);
+        WinningNumbers winningLotto = new WinningNumbers(winningNumbers);
         winningLotto.addBonusNumber(6);
 
         Rank winnerPrice = lotto.calculateRank(winningLotto);

@@ -24,7 +24,7 @@ class PrizeResultTest {
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 6, 8)));
 
         Integer[] winningNumbersArray = {1, 2, 3, 4, 5, 12};
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(winningNumbersArray));
+        WinningNumbers winningNumber = new WinningNumbers(Arrays.asList(winningNumbersArray));
         winningNumber.addBonusNumber(6);
 
         prizeResult = new PrizeResult(inputMoney, lottos, winningNumber);
