@@ -64,6 +64,6 @@ public class MainController {
 
     private void printResult(Result result, Money money) {
         OutputView.printResult(result);
-        OutputView.printProfit(money.getProfit(result.getPrice()));
+        OutputView.printProfit(result.getProfit(money.get()));
     }
 }

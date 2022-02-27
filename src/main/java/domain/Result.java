@@ -15,14 +15,18 @@ public class Result {
         return results;
     }
 
-    public long getPrice() {
+    public int getRankCount(Rank rank) {
+        return results.getOrDefault(rank, 0);
+    }
+
+    public float getProfit(int money) {
+        return (float) getPrice() / (float) money;
+    }
+
+    private long getPrice() {
         return results.entrySet()
             .stream()
             .mapToLong(entry -> (long) entry.getKey().getPrizeMoney() * entry.getValue())
             .sum();
-    }
-
-    public int getRankCount(Rank rank) {
-        return results.getOrDefault(rank, 0);
     }
 }

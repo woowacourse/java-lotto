@@ -5,7 +5,7 @@ import static utils.Messages.MONEY_OVER_THOUSANDS_ERROR_MESSAGE;
 
 public class Money {
 
-    private final int MONEY_UNIT = 1000;
+    private static final int MONEY_UNIT = 1000;
 
     private final int money;
 
@@ -37,9 +37,5 @@ public class Money {
 
     public int get() {
         return money;
-    }
-
-    public float getProfit(long price) {
-        return (float) price / (float) money;
     }
 }
