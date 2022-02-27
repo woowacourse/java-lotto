@@ -5,10 +5,10 @@ import utils.ExceptionMessage;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoNumber {
+import static utils.LottoNumberConstants.MAXIMUM_LOTTO_NUMBER;
+import static utils.LottoNumberConstants.MINIMUM_LOTTO_NUMBER;
 
-    private static final int MINIMUM_LOTTO_NUMBER = 1;
-    private static final int MAXIMUM_LOTTO_NUMBER = 45;
+public class LottoNumber {
 
     private final int number;
 

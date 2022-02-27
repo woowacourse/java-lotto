@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumberFactory {
+import static utils.LottoNumberConstants.MAXIMUM_LOTTO_NUMBER;
+import static utils.LottoNumberConstants.MINIMUM_LOTTO_NUMBER;
 
-    private static final int MINIMUM_LOTTO_NUMBER = 1;
-    private static final int MAXIMUM_LOTTO_NUMBER = 45;
+public class LottoNumberFactory {
 
     public static List<Integer> makeBoundary() {
         List<Integer> numbers = new ArrayList<>();
