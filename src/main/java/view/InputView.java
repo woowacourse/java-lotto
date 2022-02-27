@@ -2,7 +2,6 @@ package view;
 
 import domain.Lotto;
 import domain.Lottos;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -20,7 +19,12 @@ public class InputView {
 
     public static int scanInputMoney() {
         System.out.println(MESSAGE_TO_GET_INPUT_MONEY);
-        return Integer.parseInt(SCANNER.nextLine());
+
+        try {
+            return Integer.parseInt(SCANNER.nextLine());
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_NUMBER);
+        }
     }
 
     public static void printException(Exception exception) {
@@ -47,7 +51,12 @@ public class InputView {
 
     public static int scanBonusNumber() {
         System.out.println(MESSAGE_FOR_BONUS_NUMBER);
-        return Integer.parseInt(SCANNER.nextLine());
+
+        try {
+            return Integer.parseInt(SCANNER.nextLine());
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_NUMBER);
+        }
     }
 
     public static void printLottos(Lottos lottos) {
