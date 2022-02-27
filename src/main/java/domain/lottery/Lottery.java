@@ -3,7 +3,6 @@ package domain.lottery;
 import static domain.exception.LotteryExceptionMessages.*;
 
 import java.util.Set;
-import java.util.TreeSet;
 
 public class Lottery {
 
@@ -32,9 +31,9 @@ public class Lottery {
 	}
 
 	public int countSameNumber(final Lottery lottery) {
-		final Set<LotteryNumber> differences = new TreeSet<>(this.numbers);
-		differences.removeAll(lottery.numbers);
-		return LOTTERY_SIZE - differences.size();
+		return (int)lottery.numbers.stream()
+			.filter(this::contains)
+			.count();
 	}
 
 	public boolean contains(final LotteryNumber number) {
