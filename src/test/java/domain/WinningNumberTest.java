@@ -39,4 +39,14 @@ public class WinningNumberTest {
 		assertThatThrownBy(() -> new WinningNumber(winningNumbers, bonusBall))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@DisplayName("당첨 번호 중복이면 예외 테스트")
+	@Test
+	void duplicate_WinningNumber() {
+		List<Integer> winningNumbers = Arrays.asList(1,2,2,4,5,6);
+		int bonusBall = 6;
+
+		assertThatThrownBy(() -> new WinningNumber(winningNumbers, bonusBall))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
 }
