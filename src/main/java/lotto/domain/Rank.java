@@ -25,7 +25,7 @@ public enum Rank {
         if (total == MATCH_FIVE_AND_BONUS_NUMBERS.matchCount) {
             return MATCH_FIVE_AND_BONUS_NUMBERS;
         }
-        return MATCH_FIVE_NUMBERS;
+        return getMatchResult(total);
     }
 
     public static Rank getMatchResult(int total) {
