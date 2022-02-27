@@ -6,7 +6,7 @@ import lotto.domain.LottoNumber;
 
 public class RandomNumberGenerator {
     private static final Random random;
-    public static final int MAX_NUMBER = 45;
+    private static final int MAX_NUMBER = 45;
 
     static {
         random = new Random();
