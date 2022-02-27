@@ -5,6 +5,7 @@ import static view.messages.OutputViewMessages.*;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import domain.lottery.Lottery;
@@ -49,7 +50,7 @@ public class OutputView {
 		));
 	}
 
-	private String convertToLotteryNumbers(final List<LotteryNumber> lotteryNumbers) {
+	private String convertToLotteryNumbers(final Set<LotteryNumber> lotteryNumbers) {
 		return lotteryNumbers.stream()
 			.map(LotteryNumber::getNumber)
 			.collect(Collectors.toList())

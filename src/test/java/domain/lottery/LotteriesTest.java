@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
@@ -26,7 +27,7 @@ public class LotteriesTest {
 	@ValueSource(ints = {1, 100, 50})
 	void lotteries_number(final int lotteryNumber) {
 		//given
-		final List<List<LotteryNumber>> lotteriesNumber = new ArrayList<>();
+		final List<Set<LotteryNumber>> lotteriesNumber = new ArrayList<>();
 		final LotteryGenerateFamily lotteryGenerator = new LotteryRandomGeneratorStrategy();
 		for (int i = 0; i < lotteryNumber; i++) {
 			lotteriesNumber.add(lotteryGenerator.getNumbers());
@@ -41,7 +42,7 @@ public class LotteriesTest {
 	@DisplayName("등수가 제대로 집계되는지 확인")
 	void testRankingCount() {
 		//given
-		final List<List<LotteryNumber>> lotteriesNumbers = new ArrayList<>();
+		final List<Set<LotteryNumber>> lotteriesNumbers = new ArrayList<>();
 		final LotteryGenerateFamily lotteryGenerator = new LotteryGenerateMock();
 		for (int i = 0; i < 6; i++) {
 			lotteriesNumbers.add(lotteryGenerator.getNumbers());

@@ -2,7 +2,7 @@ package domain.lottery;
 
 import static domain.exception.LotteryExceptionMessages.*;
 
-import java.util.List;
+import java.util.Set;
 
 import domain.Rank;
 
@@ -11,21 +11,21 @@ public class WinningLottery {
 	private final Lottery winningNumbers;
 	private final LotteryNumber bonusBall;
 
-	private WinningLottery(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
+	private WinningLottery(final Set<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
 		this.winningNumbers = Lottery.from(winningNumbers);
 		validateBonusBall(winningNumbers, bonusBall);
 		this.bonusBall = bonusBall;
 	}
 
-	public static WinningLottery of(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
+	public static WinningLottery of(final Set<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
 		return new WinningLottery(winningNumbers, bonusBall);
 	}
 
-	private void validateBonusBall(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
+	private void validateBonusBall(final Set<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
 		validateDuplicatedNumber(winningNumbers, bonusBall);
 	}
 
-	private void validateDuplicatedNumber(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
+	private void validateDuplicatedNumber(final Set<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
 		if(winningNumbers.stream()
 			.anyMatch(winningNumber -> winningNumber.equals(bonusBall))) {
 			throw new IllegalArgumentException(DUPLICATE_NUMBER_EXCEPTION.getMessage());

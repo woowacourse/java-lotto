@@ -2,25 +2,26 @@ package domain.lottery;
 
 import static domain.exception.LotteryExceptionMessages.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Lottery {
 
 	private static final int LOTTERY_SIZE = 6;
 
-	private final List<LotteryNumber> numbers;
+	private final Set<LotteryNumber> numbers;
 
-	private Lottery(final List<LotteryNumber> numbers) {
+	private Lottery(final Set<LotteryNumber> numbers) {
 		validateNumbers(numbers);
 		this.numbers = numbers;
+
 	}
 
-	public static Lottery from(final List<LotteryNumber> numbers) {
+	public static Lottery from(final Set<LotteryNumber> numbers) {
 		return new Lottery(numbers);
 	}
 
-	private void validateNumbers(final List<LotteryNumber> numbers) {
+	private void validateNumbers(final Set<LotteryNumber> numbers) {
 		validateSize(numbers.size());
 	}
 
@@ -31,7 +32,7 @@ public class Lottery {
 	}
 
 	public int countSameNumber(final Lottery lottery) {
-		final List<LotteryNumber> differences = new ArrayList<>(this.numbers);
+		final Set<LotteryNumber> differences = new TreeSet<>(this.numbers);
 		differences.removeAll(lottery.numbers);
 		return LOTTERY_SIZE - differences.size();
 	}
@@ -40,7 +41,7 @@ public class Lottery {
 		return numbers.contains(number);
 	}
 
-	public List<LotteryNumber> getNumbers() {
+	public Set<LotteryNumber> getNumbers() {
 		return numbers;
 	}
 }

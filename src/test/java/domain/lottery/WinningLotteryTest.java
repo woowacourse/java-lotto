@@ -5,6 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,7 +21,7 @@ import domain.Rank;
 
 public class WinningLotteryTest {
 
-	private final List<LotteryNumber> winningNumbers = LotteryNumberGenerator.generateLotteryNumbers(
+	private final Set<LotteryNumber> winningNumbers = LotteryNumberGenerator.generateLotteryNumbers(
 		Arrays.asList(1, 2, 3, 4, 5, 6));
 
 	@Nested

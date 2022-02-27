@@ -3,6 +3,8 @@ package domain.generatestrategy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import domain.lottery.LotteryNumber;
@@ -22,12 +24,12 @@ public class LotteryRandomGeneratorStrategy implements LotteryGenerateFamily {
 		}
 	}
 
-	public List<LotteryNumber> getNumbers() {
+	public Set<LotteryNumber> getNumbers() {
 		Collections.shuffle(numbers);
 		return numbers.stream()
 			.limit(LOTTERY_SIZE)
 			.sorted()
 			.map(LotteryNumber::new)
-			.collect(Collectors.toList());
+			.collect(Collectors.toCollection(TreeSet::new));
 	}
 }

@@ -3,6 +3,8 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import domain.generatestrategy.LotteryGenerateFamily;
@@ -31,12 +33,12 @@ public class LotteryGame {
 	}
 
 	private void createAutoLottery() {
-		final List<List<LotteryNumber>> lotteriesNumber = createLotteriesNumber();
+		final List<Set<LotteryNumber>> lotteriesNumber = createLotteriesNumber();
 		lotteries = Lotteries.from(lotteriesNumber);
 	}
 
-	private List<List<LotteryNumber>> createLotteriesNumber() {
-		final List<List<LotteryNumber>> lotteriesNumber = new ArrayList<>();
+	private List<Set<LotteryNumber>> createLotteriesNumber() {
+		final List<Set<LotteryNumber>> lotteriesNumber = new ArrayList<>(new TreeSet<>());
 		for (int i = 0; i < theNumberOfLottery; i++) {
 			lotteriesNumber.add(lotteryGenerator.getNumbers());
 		}
@@ -44,15 +46,15 @@ public class LotteryGame {
 	}
 
 	public void createWinningLottery(final List<Integer> winningNumbers, final int bonusBall) {
-		final List<LotteryNumber> lotteryNumbers = generateLotteryNumbers(winningNumbers);
+		final Set<LotteryNumber> lotteryNumbers = generateLotteryNumbers(winningNumbers);
 		final LotteryNumber bonusLotteryBall = new LotteryNumber(bonusBall);
 		winningLottery = WinningLottery.of(lotteryNumbers, bonusLotteryBall);
 	}
 
-	private List<LotteryNumber> generateLotteryNumbers(final List<Integer> winningNumbers) {
+	private Set<LotteryNumber> generateLotteryNumbers(final List<Integer> winningNumbers) {
 		return winningNumbers.stream()
 			.map(LotteryNumber::new)
-			.collect(Collectors.toList());
+			.collect(Collectors.toCollection(TreeSet::new));
 	}
 
 	public Map<Rank, Integer> makeWinner() {
