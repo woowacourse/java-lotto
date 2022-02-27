@@ -36,15 +36,15 @@ public class OutputView {
         System.out.println();
         System.out.println(STATISTICS_GUIDE_MESSAGE);
         for (Rank rank : statistics.keySet()) {
-            displayStatistics(statistics, rank);
+            displayStatistics(statistics.get(rank), rank);
         }
         System.out.println(String.format(YIELD_FORMAT, calculateYield) + isLoss(calculateYield));
     }
 
-    private static void displayStatistics(Map<Rank, Integer> statistics, Rank rank) {
+    private static void displayStatistics(int rankCount, Rank rank) {
         if (rank.getMatchCount() != Rank.MATCH_ZERO_NUMBERS.getMatchCount()) {
             System.out.println(
-                    rank.getMatchStatus() + String.format(STATISTICS_FORMAT, rank.getReward(), statistics.get(rank)));
+                    rank.getMatchStatus() + String.format(STATISTICS_FORMAT, rank.getReward(), rankCount));
         }
     }
 
