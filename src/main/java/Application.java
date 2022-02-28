@@ -2,6 +2,8 @@ import java.util.List;
 import java.util.Map;
 
 import controller.LotteryGameController;
+import controller.dto.LotteriesDto;
+import controller.dto.LotteryDto;
 import domain.Lottery;
 import domain.Rank;
 import view.InputView;
@@ -17,7 +19,7 @@ public class Application {
 
 	private static void purchaseLotteries(final LotteryGameController controller) {
 		final int purchaseAmount = InputView.inputValidMoney();
-		final List<Lottery> lotteries = controller.purchaseLotteries(purchaseAmount);
+		final LotteriesDto lotteries = controller.purchaseLotteries(purchaseAmount);
 		OutputView.printLotteries(lotteries);
 	}
 

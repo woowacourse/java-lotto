@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import domain.Lottery;
-import domain.LotteryNumber;
+import controller.dto.LotteriesDto;
 import domain.Rank;
 import utils.LotteryMessage;
 
@@ -33,16 +32,12 @@ public class OutputView {
 		System.out.printf(LotteryMessage.TOTAL_EARNING_RATE, incomePercent);
 	}
 
-	public static void printLotteries(List<Lottery> lotteries) {
-		lotteries.forEach(lottery -> printLotteryNumbers(lottery.getNumbers()));
+	public static void printLotteries(LotteriesDto lotteries) {
+		lotteries.getLotteries()
+			.forEach(lottery -> printLotteryNumbers(lottery.getNumbers()));
 	}
 
-	private static void printLotteryNumbers(final List<LotteryNumber> lotteryNumbers) {
-		 String output =  lotteryNumbers.stream()
-			.map(LotteryNumber::getLotteryNumber)
-			.collect(Collectors.toList())
-			.toString();
-
-		System.out.println(output);
+	private static void printLotteryNumbers(final List<Integer> lotteryNumbers) {
+		System.out.println(lotteryNumbers.toString());
 	}
 }

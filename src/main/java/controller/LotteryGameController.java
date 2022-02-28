@@ -3,7 +3,7 @@ package controller;
 import java.util.List;
 import java.util.Map;
 
-import domain.Lottery;
+import controller.dto.LotteriesDto;
 import domain.LotteryGame;
 import domain.PurchaseAmount;
 import domain.Rank;
@@ -13,9 +13,9 @@ public class LotteryGameController {
 
 	private LotteryGame lotteryGame;
 
-	public List<Lottery> purchaseLotteries(final int purchaseAmount) {
+	public LotteriesDto purchaseLotteries(final int purchaseAmount) {
 		lotteryGame = new LotteryGame(new PurchaseAmount(purchaseAmount), new LotteryRandomGeneratorStrategy());
-		return lotteryGame.getLotteries();
+		return LotteriesDto.fromEntity(lotteryGame.getLotteries());
 	}
 
 	public void createWinningLottery(final List<Integer> winingNumbers, final int bonusNumber) {
