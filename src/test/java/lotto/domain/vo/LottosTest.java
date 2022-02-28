@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoPrize;
-import lotto.domain.generator.CustomLottoGenerator;
-import lotto.domain.generator.Generator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,14 +15,15 @@ public class LottosTest {
     @Test
     void lottos_constructor_test() {
         List<Lotto> randomLottos = new ArrayList<>();
-        Generator lottoGenerator = new CustomLottoGenerator();
-        randomLottos.add(lottoGenerator.generate());
+        List<LottoNumber> numbers = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            numbers.add(new LottoNumber(i));
+        }
+        randomLottos.add(new Lotto(numbers));
         Lottos lottos = new Lottos(randomLottos);
 
-        assertThat(lottos)
-                .extracting("lottos")
-                .asList()
-                .hasSize(1);
+        assertThat(lottos.getLottos()).hasSize(1);
+        assertThat(lottos.getLottos()).containsAll(randomLottos);
     }
 
     @DisplayName("null가 파라미터로 주어지면 NullPointerException 예외를 발생시킨다")
@@ -38,22 +37,17 @@ public class LottosTest {
     @DisplayName("confirmWinnings 당첨 결과를 저장하는 Map을 반환한다.")
     @Test
     void confirmWinnings_test() {
-        Generator lottoGenerator = new CustomLottoGenerator();
-        Lottos lottos = new Lottos(new ArrayList<>() {{
-            add(lottoGenerator.generate());
-        }});
-
-        WinningNumbers winningNumbers = getWinningNumbers();
-        Map<LottoPrize, Integer> lottoMatches = lottos.confirmWinnings(winningNumbers);
-
-        assertThat(lottoMatches.get(LottoPrize.FIRST)).isEqualTo(1);
-    }
-
-    private WinningNumbers getWinningNumbers() {
+        List<Lotto> randomLottos = new ArrayList<>();
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
-        return new WinningNumbers(new Lotto(lottoNumbers), new LottoNumber(30));
+        randomLottos.add(new Lotto(lottoNumbers));
+        Lottos lottos = new Lottos(randomLottos);
+
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), new LottoNumber(30));
+        Map<LottoPrize, Integer> lottoMatches = lottos.confirmWinnings(winningNumbers);
+
+        assertThat(lottoMatches.get(LottoPrize.FIRST)).isEqualTo(1);
     }
 }

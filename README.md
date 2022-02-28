@@ -109,8 +109,11 @@
 - [x] `LottosTest`의 `confirmWinnings_test`와 같은 방식보다 좋은 테스트 방식이 있을까?
     - private 메서드가 너무 과하게 생기는 것 같다.
     - 전략 패턴으로 인터페이스를 분리하여 로또 번호가 (1,2,3,4,5,6)으로 고정인 CustomLottoGenerator를 만들어 테스트한다.
-- [ ] 테스트는 무엇을 어떻게 테스트하는지 알기 쉬워야한다.
+- [x] 테스트는 무엇을 어떻게 테스트하는지 알기 쉬워야한다.
     - Test에서 CustomLottoGenerator를 만들어 보는 시도는 좋았지만 Generator에 들어가야 어떤 데이터로 테스트하는지 확인할 수 있다.
+    - LottosTest에서는 CustomLottoGenerator를 쓰지 않고 `List<LottoNumber`를 직접 작성하도록 수정해 조금 더 코드를 이해하기 쉽게 수정했다.
+    - LottoGameTest에서는 `purchase()`와 `confirmWinnings()`를 테스트하기 위해 CustomLottoGenerator를 사용한것이라 수정하지 않아도 될 것 같다.
+- [ ] 더 이해하기 쉬운 테스트를 위해 리펙토링을 해보자!
 - getter를 이용한 테스트
     - getter는 데이터가 필요한 시점에 사용할 수밖에 없기 때문에 테스트에서도 getter를 사용한다.
     - `LottosTest`의 경우도 내부의 데이터가 잘 생성되었는지 검증하려면 어쩔 수 없이 사용할 것 같다.
