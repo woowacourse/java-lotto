@@ -12,7 +12,7 @@ import lotto.exception.ball.BallNumberExceptionStatus;
 
 class BallTest {
 
-    @DisplayName("번호는 1~45 범위의 숫자여야 한다.")
+    @DisplayName("범위 밖의 번호는 생성할 수 없다.")
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}")
     @ValueSource(ints = {-2, -1, 0, 46, 47, 48})
     void rangeOutExceptionTest(final int number) {
@@ -21,7 +21,7 @@ class BallTest {
                 .hasMessageContaining(BallNumberExceptionStatus.BALL_CANNOT_BE_OUT_OF_RANGE.getMessage());
     }
 
-    @DisplayName("번호 생성 기능 테스트")
+    @DisplayName("번호 객체는 생성 당시의 번호 값을 지녀야 한다.")
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}")
     @ValueSource(ints = {1, 2, 3, 43, 44, 45})
     void initTest(final int number) {
