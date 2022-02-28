@@ -8,26 +8,31 @@ public class AnswerLotto {
 
 	private static final String BONUS_AND_ANSWER_MUST_NOT_DUPLICATED = START_ERROR + "보너스 번호는 지난 주 당첨 번호 숫자들과 중복일 수 없습니다";
 
-	private final AnswerLottoNumbers numbers;
-	private final BonusNumber bonusNumber;
+	private final LottoNumbers numbers;
+	private final LottoNumber bonusNumber;
 
-	public AnswerLotto(AnswerLottoNumbers lottoNumbers, BonusNumber bonusNumber) {
-		validateBonusNumberInNumbers(lottoNumbers, bonusNumber);
-		this.numbers = lottoNumbers;
+	private AnswerLotto(LottoNumbers numbers, LottoNumber bonusNumber) {
+		this.numbers = numbers;
 		this.bonusNumber = bonusNumber;
 	}
 
-	public List<Integer> getNumbers() {
+	public static AnswerLotto of(List<Integer> inputNumbers, int inputBonus) {
+		LottoNumbers numbers = LottoNumbers.of(inputNumbers);
+		LottoNumber bonusNumber = new LottoNumber(inputBonus);
+
+		if (numbers.isExist(bonusNumber)) {
+			throw new IllegalArgumentException(BONUS_AND_ANSWER_MUST_NOT_DUPLICATED);
+		}
+
+		return new AnswerLotto(numbers, bonusNumber);
+	}
+
+	public List<LottoNumber> getNumbers() {
 		return this.numbers.getNumbers();
 	}
 
-	public int getBonusNumber() {
-		return this.bonusNumber.getNumber();
+	public LottoNumber getBonusNumber() {
+		return this.bonusNumber;
 	}
 
-	private void validateBonusNumberInNumbers(AnswerLottoNumbers numbers, BonusNumber bonusNumber) {
-		if (numbers.isExists(bonusNumber.getNumber())) {
-			throw new IllegalArgumentException(BONUS_AND_ANSWER_MUST_NOT_DUPLICATED);
-		}
-	}
 }

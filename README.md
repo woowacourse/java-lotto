@@ -1,4 +1,4 @@
-# java-lotto
+# java-lottoTicket
 
 - [x] 로또 구매 금액을 입력
 - [x] 로또 구매 금액 유효성 검증

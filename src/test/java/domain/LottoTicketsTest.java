@@ -3,40 +3,38 @@ package domain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import util.RandomLottoNumberGenerator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static domain.CommonLogic.generateNumberList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottosTest {
-	static Lottos lottos;
+public class LottoTicketsTest {
+	static LottoTickets lottoTickets;
 	static AnswerLotto answerLotto;
 	static Result result;
 
 	@BeforeAll
 	static void setUp() {
-		List<Lotto> nowLotto = new ArrayList<>();
-		nowLotto.add(new Lotto(() -> generateNumberList(1, 2, 3, 4, 5, 6)));
-		nowLotto.add(new Lotto(() -> generateNumberList(7, 8, 9, 10, 11, 12)));
-		nowLotto.add(new Lotto(() -> generateNumberList(13, 14, 15, 16, 17, 18)));
-		nowLotto.add(new Lotto(() -> generateNumberList(19, 20, 21, 22, 23, 24)));
-		nowLotto.add(new Lotto(() -> generateNumberList(25, 26, 27, 28, 29, 30)));
-		lottos = new Lottos(nowLotto);
-		answerLotto = new AnswerLotto(
-			new AnswerLottoNumbers(generateNumberList(1, 2, 3, 43, 44, 45)), new BonusNumber(31));
+		List<LottoTicket> nowLotto = new ArrayList<>();
+		nowLotto.add(new LottoTicket(() -> generateNumberList(1, 2, 3, 4, 5, 6)));
+		nowLotto.add(new LottoTicket(() -> generateNumberList(7, 8, 9, 10, 11, 12)));
+		nowLotto.add(new LottoTicket(() -> generateNumberList(13, 14, 15, 16, 17, 18)));
+		nowLotto.add(new LottoTicket(() -> generateNumberList(19, 20, 21, 22, 23, 24)));
+		nowLotto.add(new LottoTicket(() -> generateNumberList(25, 26, 27, 28, 29, 30)));
+		lottoTickets = new LottoTickets(nowLotto);
+		answerLotto = AnswerLotto.of(generateNumberList(1, 2, 3, 43, 44, 45), 31);
 
-		result = lottos.generateResult(answerLotto);
+		result = lottoTickets.generateResult(answerLotto);
 	}
 
 	@Test
 	@DisplayName("입력된 구매금액만큼 로또를 구매하였는지 확인")
 	void CorrectCountOfLotto() {
-		assertThat(lottos.getLottosSize()).isEqualTo(5);
+		assertThat(lottoTickets.getLottoTicketsSize()).isEqualTo(5);
 	}
 
 	@Test

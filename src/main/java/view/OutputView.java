@@ -1,9 +1,6 @@
 package view;
 
-import domain.Lotto;
-import domain.Lottos;
-import domain.Result;
-import domain.ResultStatics;
+import domain.*;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,16 +11,22 @@ public class OutputView {
 		System.out.println(message);
 	}
 
-	public static void printLottos(Lottos lottos) {
-		System.out.println(lottos.getLottosSize() + "개를 구매했습니다.");
-		for (Lotto lotto : lottos.getLottos()) {
-			printLotto(lotto);
+	public static void printLottoTickets(LottoTickets lottoTickets) {
+		System.out.println(lottoTickets.getLottoTicketsSize() + "개를 구매했습니다.");
+		for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+			printLottoTicket(lottoTicket);
 		}
 	}
 
-	private static void printLotto(Lotto lotto) {
+	private static void printLottoTicket(LottoTicket lottoTicket) {
 		System.out.println(
-			"[" + lotto.getNumbers().stream().map(String::valueOf).collect(Collectors.joining(", ")) + "]");
+			"[" +
+				lottoTicket.getNumbers().getNumbers()
+					.stream()
+					.map(LottoNumber::getNumber)
+					.map(String::valueOf)
+					.collect(Collectors.joining(", "))
+				+ "]");
 	}
 
 	public static void printResults(Result result) {
