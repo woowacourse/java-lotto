@@ -1,17 +1,14 @@
 package view;
 
-import controller.dto.WinningStatDto;
-import domain.LottoRank;
-import domain.LottoTicket;
-import domain.WinningStat;
-
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static constant.LottoConstant.LOTTO_TICKET_PRICE;
+import controller.dto.WinningStatDto;
+import domain.LottoRank;
+import domain.LottoTicket;
 
 public class OutputView {
 

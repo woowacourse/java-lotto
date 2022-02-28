@@ -1,10 +1,4 @@
-import domain.LottoRank;
-import domain.Money;
-import domain.WinningStat;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import view.OutputView;
+import static org.assertj.core.api.Assertions.*;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -12,7 +6,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import domain.LottoRank;
+import domain.WinningStat;
 
 class WinningStatTest {
 

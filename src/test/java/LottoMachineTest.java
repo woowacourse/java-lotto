@@ -1,16 +1,22 @@
-import domain.*;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import domain.LottoMachine;
+import domain.LottoNumber;
+import domain.LottoNumberStrategy;
+import domain.LottoRank;
+import domain.LottoTicket;
+import domain.LottoTicketNumbers;
+import domain.Money;
+import domain.WinningStat;
 
 
 class LottoMachineTest {
