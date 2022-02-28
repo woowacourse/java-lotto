@@ -4,38 +4,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import model.lottonumbergenerator.Generator;
-import model.lottotickets.vo.LottoNumber;
+import model.lottotickets.vo.Number;
 import model.winning.Rank;
 
 public class Lotto {
-    private final List<LottoNumber> lottoNumbers;
+    private final List<Number> numbers;
 
     public Lotto(final Generator generator) {
         List<Integer> generatedNumbers = generator.generateNumbers();
-        lottoNumbers = generatedNumbers.stream()
-                .map(LottoNumber::new)
+        numbers = generatedNumbers.stream()
+                .map(Number::new)
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> lottoNumbers() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::get)
-                .collect(Collectors.toList());
+    public Rank compareWithWinningNumber(final List<Integer> winningNumbers, final int bonusNumber) {
+        return Rank.valueOf(countMatchNumber(winningNumbers), hasBonusNumber(bonusNumber));
     }
 
-    public Rank selectRank(final List<Integer> winningNumbers, final int bonusNumber) {
-        return Rank.valueOf(countMatch(winningNumbers), hasBonus(bonusNumber));
-    }
-
-
-    private int countMatch(final List<Integer> winningNumbers) {
-        return (int) lottoNumbers.stream()
-                .filter(lottoNumber -> lottoNumber.contain(winningNumbers))
+    private int countMatchNumber(final List<Integer> winningNumbers) {
+        return (int) numbers.stream()
+                .filter(number -> number.contain(winningNumbers))
                 .count();
     }
 
-    private boolean hasBonus(final int bonusNumber) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.contain(bonusNumber));
+    private boolean hasBonusNumber(final int bonusNumber) {
+        return numbers.stream()
+                .anyMatch(number -> number.contain(bonusNumber));
     }
 }
