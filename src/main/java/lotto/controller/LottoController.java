@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.LottoRank;
 import lotto.domain.LottoTicketFactory;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningStats;
@@ -15,39 +14,41 @@ public class LottoController {
 
     private final InputView inputView = InputView.INSTANCE;
     private final OutputView outputView = OutputView.INSTANCE;
+
     private final LottoTicketFactory lottoTicketFactory = LottoTicketFactory.INSTANCE;
 
-    public void run() {
-        PurchaseAmount purchaseAmount = getPurchaseAmount();
+    private final ThreadLocal<PurchaseAmount> purchaseAmountRepository = new ThreadLocal<>();
+    private final ThreadLocal<List<LottoTicket>> lottoTicketsRepository = new ThreadLocal<>();
+    private final ThreadLocal<WinningStats> winningStatsRepository = new ThreadLocal<>();
 
-        List<LottoTicket> lottoTickets = purchaseLottoTickets(purchaseAmount);
+    public void buyTicket() {
+        IndividualInput<PurchaseAmount> individualInputs = () -> new PurchaseAmount(inputView.inputMoney());
+        PurchaseAmount purchaseAmount = inputView.commonInputProcess(individualInputs);
+        purchaseAmountRepository.set(purchaseAmount);
+    }
+
+    public void showLottoTickets() {
+        PurchaseAmount purchaseAmount = purchaseAmountRepository.get();
+        List<LottoTicket> lottoTickets = lottoTicketFactory.createTickets(purchaseAmount);
+        lottoTicketsRepository.set(lottoTickets);
         outputView.printPurchasedTickets(lottoTickets);
+    }
 
-        WinningNumbers winningNumbers = inputWinningNumbers();
+    public void showWinningStats() {
+        PurchaseAmount purchaseAmount = purchaseAmountRepository.get();
+        List<LottoTicket> lottoTickets = lottoTicketsRepository.get();
+        WinningNumbers winningNumbers = inputView.commonInputProcess(
+                () -> new WinningNumbers(inputView.inputWinningNumbers(), inputView.inputBonusBall())
+        );
 
-        WinningStats winningStats = calculateStatistics(lottoTickets, winningNumbers);
+        WinningStats winningStats = new WinningStats(lottoTickets, winningNumbers);
+        winningStatsRepository.set(winningStats);
         outputView.printWinningStats(winningStats, purchaseAmount);
     }
 
-    private PurchaseAmount getPurchaseAmount() {
-        IndividualInput<PurchaseAmount> individualInputs =
-                () -> new PurchaseAmount(inputView.inputMoney());
-        return inputView.commonInputProcess(individualInputs);
+    public void clearRepository() {
+        purchaseAmountRepository.remove();
+        lottoTicketsRepository.remove();
+        winningStatsRepository.remove();
     }
-
-    private List<LottoTicket> purchaseLottoTickets(PurchaseAmount purchaseAmount) {
-        return lottoTicketFactory.createTickets(purchaseAmount);
-    }
-
-    private WinningNumbers inputWinningNumbers() {
-        return inputView.commonInputProcess(
-                () -> new WinningNumbers(inputView.inputWinningNumbers(), inputView.inputBonusBall()));
-    }
-
-    private WinningStats calculateStatistics(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
-        WinningStats winningStats = new WinningStats(lottoTickets, winningNumbers);
-        return winningStats;
-    }
-
-
 }
