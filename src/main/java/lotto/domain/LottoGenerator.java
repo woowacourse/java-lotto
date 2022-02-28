@@ -27,7 +27,6 @@ public class LottoGenerator {
 
     public static Lotto generate() {
         List<LottoNumber> numbers = subtractNumbers(shuffleNumbers());
-        numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
         return new Lotto(numbers);
     }
 

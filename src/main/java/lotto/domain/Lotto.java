@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.text.MessageFormat;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -14,7 +15,12 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> numbers) {
         validateNumbers(numbers);
+        sortNumbers(numbers);
         this.numbers = numbers;
+    }
+
+    private void sortNumbers(List<LottoNumber> numbers) {
+        numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
     }
 
     private void validateNumbers(List<LottoNumber> numbers) {
