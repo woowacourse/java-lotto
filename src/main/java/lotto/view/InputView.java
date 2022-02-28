@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.vo.Lotto;
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.Money;
+import lotto.domain.vo.WinningNumbers;
 
 public class InputView {
 
@@ -18,11 +22,11 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int requestPurchaseMoney() {
+    public static Money requestPurchaseMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         String input = nextLine();
         validateEmpty(input);
-        return toInt(input);
+        return new Money(toInt(input));
     }
 
     private static String nextLine() {
@@ -49,19 +53,24 @@ public class InputView {
         }
     }
 
-    public static List<Integer> requestWinningNumber() {
+    public static WinningNumbers requestWinningNumber() {
+        return new WinningNumbers(new Lotto(requestWinningNumbers()), requestBonusNumber());
+    }
+
+    private static List<LottoNumber> requestWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String input = nextLine();
 
         return Arrays.stream(input.split(INPUT_WINNING_DELIMITER))
                 .map(value -> toInt(value.trim()))
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    public static Integer requestBonusNumber() {
+    private static LottoNumber requestBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
-        Integer bonusNumber = toInt(nextLine());
+        int bonusNumber = toInt(nextLine());
         System.out.println();
-        return bonusNumber;
+        return new LottoNumber(bonusNumber);
     }
 }
