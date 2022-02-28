@@ -1,13 +1,26 @@
 package lotto.domain;
 
-import lotto.receiver.MoneyReceiver;
+import lotto.exception.MoneyException;
 
 public class Money {
 
+    private static final int UNIT_SIZE = 1000;
+
     private final int money;
 
-    public Money(String input) {
-        this.money = MoneyReceiver.receive(input);
+    public Money(int input) {
+        validateUnit(input);
+        this.money = input;
+    }
+
+    private static void validateUnit(int input) {
+        if (!isCorrectUnit(input)) {
+            throw new MoneyException(MoneyException.MONEY_UNIT_ERROR_MESSAGE);
+        }
+    }
+
+    private static boolean isCorrectUnit(int input) {
+        return input % UNIT_SIZE == 0;
     }
 
     public int getMoney() {
