@@ -6,16 +6,16 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTickets;
-import lotto.domain.MoneyManager;
+import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
 
 public class LottoController {
 
-    private MoneyManager moneyManager;
+    private Money money;
     private LottoTickets lottoTickets;
 
     public LottoTickets buyLottoTickets(int inputMoney) {
-        moneyManager = new MoneyManager(inputMoney);
+        money = new Money(inputMoney);
         return getLottoTickets();
     }
 
@@ -24,11 +24,11 @@ public class LottoController {
                 getBonusNumber(lottoNumber));
         LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets.getRanksWithWinningNumbers(winningNumbers));
         return new LottoResult(lottoStatistics.getStatistics(),
-                moneyManager.calculateYield(lottoStatistics.getLottoTotalReward()));
+                money.calculateYield(lottoStatistics.getLottoTotalReward()));
     }
 
     private LottoTickets getLottoTickets() {
-        lottoTickets = new LottoTickets(moneyManager.getLottoCount());
+        lottoTickets = new LottoTickets(money.getLottoCount());
         return lottoTickets;
     }
 
