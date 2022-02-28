@@ -13,7 +13,7 @@ public class LottoTicketsTest {
     @Test
     void purchaseBy_createsExactAmountOfLottoTickets_Successful() {
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.purchaseBy(new UserBalance("5000"), 0);
+        lottoTickets.purchaseAutoBy(5);
 
         assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(5);
     }
@@ -22,7 +22,7 @@ public class LottoTicketsTest {
     @Test
     void purchaseBy_createsDistinctLottoTickets_Successful() {
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.purchaseBy(new UserBalance("20000"), 0);
+        lottoTickets.purchaseAutoBy(20);
 
         Set<LottoTicket> noDuplicateLottoTicketSet = new HashSet<>(lottoTickets.getLottoTickets());
         assertThat(noDuplicateLottoTicketSet.size())

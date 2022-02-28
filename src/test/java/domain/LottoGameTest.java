@@ -41,9 +41,8 @@ public class LottoGameTest {
     @Test
     void getResultStatistics_WinningFirstAndSecondAndNoNull_Successful() {
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(firstPrizeLottoTicket);
-        lottoTickets.add(secondPrizeLottoTicket);
-        lottoTickets.add(noPrizeLottoTicket);
+        lottoTickets.purchaseManualBy(Arrays.asList(firstPrizeLottoTicket, secondPrizeLottoTicket, noPrizeLottoTicket));
+
         LottoGame game = new LottoGame(lottoTickets, winningLotto);
 
         Map<LottoResult, Integer> actual = game.getResultStatistics();
@@ -60,9 +59,8 @@ public class LottoGameTest {
     @Test
     void getResultStatistics_WinningTwoThirdAndFourth_Successful() {
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(thirdPrizeLottoTicket);
-        lottoTickets.add(thirdPrizeLottoTicket);
-        lottoTickets.add(fourthPrizeLottoTicket);
+        lottoTickets.purchaseManualBy(Arrays.asList(thirdPrizeLottoTicket, thirdPrizeLottoTicket, fourthPrizeLottoTicket));
+
         LottoGame game = new LottoGame(lottoTickets, winningLotto);
 
         Map<LottoResult, Integer> actual = game.getResultStatistics();
@@ -79,7 +77,8 @@ public class LottoGameTest {
     @Test
     void calculateProfitRatio_WinningFifth_ReturnsFiveTimesThePrice() {
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(fifthPrizeLottoTicket);
+        lottoTickets.purchaseManualBy(List.of(fifthPrizeLottoTicket));
+
         LottoGame game = new LottoGame(lottoTickets, winningLotto);
 
         float actual = game.calculateProfitRatio(1000);
@@ -91,7 +90,8 @@ public class LottoGameTest {
     @Test
     void calculateProfitRatio_LosingAll_ReturnsZero() {
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(noPrizeLottoTicket);
+        lottoTickets.purchaseManualBy(List.of(noPrizeLottoTicket));
+
         LottoGame game = new LottoGame(lottoTickets, winningLotto);
 
         float actual = game.calculateProfitRatio(1000);

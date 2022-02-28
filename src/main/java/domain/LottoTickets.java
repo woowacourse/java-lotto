@@ -5,21 +5,18 @@ import java.util.List;
 
 public class LottoTickets {
 
-    public static final int LOTTO_PRICE = 1000;
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets() {
         this.lottoTickets = new ArrayList<>();
     }
 
-    public void add(LottoTicket lottoTicket) {
-        lottoTickets.add(lottoTicket);
+    public void purchaseManualBy(List<LottoTicket> manualLottoTickets) {
+        lottoTickets.addAll(manualLottoTickets);
     }
 
-    public void purchaseBy(UserBalance userBalance, int manualLottoCount) {
-        int lottoCount = userBalance.getUserBalance() / LOTTO_PRICE - manualLottoCount;
-
-        for (int i = 0; i < lottoCount; i++) {
+    public void purchaseAutoBy(int autoLottoCount) {
+        for (int i = 0; i < autoLottoCount; i++) {
             lottoTickets.add(LottoTicket.createAutoLotto());
         }
     }
