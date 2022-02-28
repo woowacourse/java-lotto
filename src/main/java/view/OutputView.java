@@ -17,8 +17,8 @@ public class OutputView {
     private static final String PROFIT_RATE_RESULT_SUFFIX = "입니다.";
 
     public static void printPurchasedLotto(LottoTicket lottoTicket) {
-        System.out.println(lottoTicket.getLottos().size() + PURCHASED_LOTTO_COUNT_SUFFIX);
-        for (Lotto lotto : lottoTicket.getLottos()) {
+        System.out.println(lottoTicket.getPassiveLottos().size() + PURCHASED_LOTTO_COUNT_SUFFIX);
+        for (Lotto lotto : lottoTicket.getPassiveLottos()) {
             System.out.println(lotto);
         }
     }

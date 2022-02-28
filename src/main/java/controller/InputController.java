@@ -20,10 +20,20 @@ public class InputController {
         return money;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public List<LottoNumber> getWinningLottoNumbers() {
         String[] inputWinningLottoNumbers = InputView.scanWinningLottoNumbers().split(LOTTO_NUMBER_INPUT_DELIMITER);
         Validator.validateLottoNumbers(inputWinningLottoNumbers);
-        return Arrays.stream(inputWinningLottoNumbers)
+        return toLottoNumbers(inputWinningLottoNumbers);
+    }
+
+    public List<LottoNumber> getPassiveLottoNumbers() {
+        String[] passiveLottoNumbers = InputView.scanPassiveLottoNumbers().split(LOTTO_NUMBER_INPUT_DELIMITER);
+        Validator.validateLottoNumbers(passiveLottoNumbers);
+        return toLottoNumbers(passiveLottoNumbers);
+    }
+
+    private List<LottoNumber> toLottoNumbers(String[] passiveLottoNumbers) {
+        return Arrays.stream(passiveLottoNumbers)
                 .mapToInt(Integer::parseInt)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());

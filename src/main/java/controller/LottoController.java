@@ -4,6 +4,7 @@ import domain.*;
 import util.ShuffleNumberGenerator;
 import view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -20,15 +21,25 @@ public class LottoController {
         announceResult(lottoMachine, winningLotto);
     }
 
+    private List<Lotto> getPassiveLottos() {
+        List<Lotto> passiveLottos = new ArrayList<>();
+        int passiveLottoCount = inputController.getPassiveLottoCount();
+        for (int i = 0; i < passiveLottoCount; i++) {
+            passiveLottos.add(new Lotto(inputController.getPassiveLottoNumbers()));
+        }
+        return passiveLottos;
+    }
+
     private LottoMachine createLottoMachine() {
         int money = inputController.getMoney();
-        LottoMachine lottoMachine = new LottoMachine(money, new ShuffleNumberGenerator());
+        List<Lotto> passiveLottos = getPassiveLottos();
+        LottoMachine lottoMachine = new LottoMachine(money, passiveLottos, new ShuffleNumberGenerator());
         OutputView.printPurchasedLotto(lottoMachine.getLottoTicket());
         return lottoMachine;
     }
 
     private WinningLotto requestWinningLotto() {
-        List<LottoNumber> winningLottoNumbers = inputController.getLottoNumbers();
+        List<LottoNumber> winningLottoNumbers = inputController.getWinningLottoNumbers();
         LottoNumber bonusLottoNumber = inputController.getBonusNumber();
         return new WinningLotto(winningLottoNumbers, bonusLottoNumber);
     }
