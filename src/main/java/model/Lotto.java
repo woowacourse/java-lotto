@@ -11,12 +11,12 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     private Lotto(List<LottoNumber> lottoNumbers) {
+        lottoNumbers = List.copyOf(lottoNumbers);
+        validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public static Lotto from(List<LottoNumber> lottoNumbers) {
-        lottoNumbers = List.copyOf(lottoNumbers);
-        validate(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
 
@@ -34,18 +34,18 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    private static void validate(List<LottoNumber> lottoNumbers) {
+    private void validate(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateIsNotDuplicated(lottoNumbers);
     }
 
-    private static void validateSize(List<LottoNumber> lottoNumbers) {
+    private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_COUNT);
         }
     }
 
-    private static void validateIsNotDuplicated(List<LottoNumber> lottoNumbers) {
+    private void validateIsNotDuplicated(List<LottoNumber> lottoNumbers) {
         long distinctSize = lottoNumbers.stream()
                 .distinct().count();
         if (distinctSize != lottoNumbers.size()) {
