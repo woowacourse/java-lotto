@@ -35,14 +35,4 @@ public class RankDto {
     public long getAmount() {
         return amount;
     }
-
-    @Override
-    public String toString() {
-        return "RankDto{" +
-                "prizeMoney=" + prizeMoney +
-                ", count=" + count +
-                ", isBonus=" + isBonus +
-                ", amount=" + amount +
-                '}';
-    }
 }
