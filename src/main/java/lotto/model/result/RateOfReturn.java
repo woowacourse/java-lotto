@@ -7,11 +7,11 @@ public class RateOfReturn {
     private final Profit profit;
 
     public RateOfReturn(String money) {
-        this.money = new Money(ConverterUtils.convertStringToInt(money));
+        this.money = new Money(money);
         this.profit = new Profit();
     }
 
     public double calcRateOfReturn(WinningResult winningResult) {
-        return (profit.sumProfitMoney(winningResult) / (double) money.getNumber());
+        return (profit.sumProfitMoney(winningResult) / (double) ConverterUtils.convertStringToInt(money.getNumber()));
     }
 }

@@ -1,13 +1,13 @@
 package lotto.model.result;
 
 public class Money {
-    private final int number;
+    private final String number;
 
-    public Money(int number) {
+    public Money(String number) {
         this.number = number;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 }

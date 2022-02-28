@@ -11,8 +11,7 @@ import lotto.model.winningnumber.LottoWinningNumberResponse;
 
 public class LottoGame {
 
-    public LottoStorage makeLottos(String input) {
-        LottoCount lottoCount = new LottoCount(input);
+    public LottoStorage makeLottos(LottoCount lottoCount) {
         return new LottoStorage(lottoCount);
     }
 
