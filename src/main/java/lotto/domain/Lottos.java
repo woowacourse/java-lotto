@@ -1,9 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
 
@@ -12,13 +13,11 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(Money money) {
-        int quantity = money.getAvailableQuantity(PRICE);
+        final int quantity = money.getAvailableQuantity(PRICE);
 
-        this.lottos = new ArrayList<>();
-        while (quantity-- > 0) {
-            Lotto lotto = new Lotto();
-            lottos.add(lotto);
-        }
+        this.lottos = IntStream.range(0, quantity)
+                .mapToObj(i -> new Lotto())
+                .collect(Collectors.toList());
     }
 
     Lottos(List<Lotto> lottos) {
