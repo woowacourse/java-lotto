@@ -23,7 +23,7 @@ public class RankCount {
     }
 
     private void increaseCount(Rank rank) {
-        rankCount.put(rank, rankCount.get(rank) + 1);
+        rankCount.computeIfPresent(rank, (keyRank, count) -> count + 1);
     }
 
     public int getCountOfRank(Rank rank) {
