@@ -16,9 +16,9 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static String askMoneyInput() {
+    public static int askMoneyInput() {
         System.out.println(QUESTION_MONEY_INPUT);
-        return scanner.nextLine();
+        return checkAndConvertInteger(scanner.nextLine());
     }
 
     public static WinningNumbers askWinningNumbers() {
@@ -49,6 +49,5 @@ public class InputView {
             throw new IllegalArgumentException(NONE_NUMERIC_ERROR);
         }
     }
-
 
 }
