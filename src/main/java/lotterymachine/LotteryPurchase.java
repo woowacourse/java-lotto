@@ -1,4 +1,4 @@
-package lotterymachine.vo;
+package lotterymachine;
 
 public class LotteryPurchase {
     private static final int PER_LOTTERY_TICKET_PRICE = 1000;

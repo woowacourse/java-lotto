@@ -7,7 +7,6 @@ import lotterymachine.utils.LotteryCalculator;
 import lotterymachine.utils.LotteryNumbersGenerator;
 import lotterymachine.view.InputView;
 import lotterymachine.view.OutputView;
-import lotterymachine.vo.LotteryPurchase;
 
 import java.util.Map;
 
