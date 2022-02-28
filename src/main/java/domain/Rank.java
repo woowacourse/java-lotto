@@ -18,14 +18,14 @@ public enum Rank {
     private boolean hitBonusBall;
 
     Rank(int rankNumber, int criteria, int reward, int hitCount) {
+        this(rankNumber,criteria, reward, hitCount, false);
+    }
+
+    Rank(int rankNumber, int criteria, int reward, int hitCount, boolean hitBonusBall) {
         this.rankNumber = rankNumber;
         this.criteria = criteria;
         this.reward = reward;
         this.hitCount = hitCount;
-    }
-
-    Rank(int rankNumber, int criteria, int reward, int hitCount, boolean hitBonusBall) {
-        this(rankNumber, criteria, reward, hitCount);
         this.hitBonusBall = hitBonusBall;
     }
 
