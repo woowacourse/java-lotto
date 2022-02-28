@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.EnumSource.Mode;
 
 class LottoTest {
     private Money money;
@@ -27,7 +28,7 @@ class LottoTest {
 
     @ParameterizedTest
     @DisplayName("당첨번호와 갖고있는 로또들을 잘 비교하는가?")
-    @EnumSource(LottoRank.class)
+    @EnumSource(value = LottoRank.class, names = {"NOTHING"}, mode = Mode.EXCLUDE)
     void Compute_Rank_Result(LottoRank lottoRank) {
         Assertions.assertThat(lottoResult.getResult().get(lottoRank)).isEqualTo(1);
     }
