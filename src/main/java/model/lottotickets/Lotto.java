@@ -7,10 +7,10 @@ import model.lottonumbergenerator.Generator;
 import model.lottotickets.vo.LottoNumber;
 import model.winning.Rank;
 
-public class LottoTicket {
+public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(final Generator generator) {
+    public Lotto(final Generator generator) {
         List<Integer> generatedNumbers = generator.generateNumbers();
         lottoNumbers = generatedNumbers.stream()
                 .map(LottoNumber::new)
