@@ -2,10 +2,10 @@ package model.winning;
 
 import java.util.Map;
 
-public class Statistics {
+public class WinningResult {
     private final Map<Rank, Integer> statistics;
 
-    public Statistics(final Map<Rank, Integer> statistics) {
+    public WinningResult(final Map<Rank, Integer> statistics) {
         this.statistics = statistics;
     }
 
