@@ -36,16 +36,15 @@ public class Money {
         }
     }
 
-    public int getQuantityOfAuto(int quantityOfManual, int price) {
+    public void validateQuantityOfManual(int quantityOfManual, int price) {
         final int maxQuantity = getAvailableQuantity(price);
-        validateQuantityOfManual(maxQuantity, quantityOfManual);
-        return maxQuantity - quantityOfManual;
-    }
-
-    private void validateQuantityOfManual(int maxQuantity, int quantityOfManual) {
         if (quantityOfManual < 0 || quantityOfManual > maxQuantity) {
             throw new IllegalArgumentException(QUANTITY_OF_MANUAL_PREFIX + maxQuantity + QUANTITY_OF_MANUAL_SUFFIX);
         }
+    }
+
+    public int getQuantityOfAuto(int quantityOfManual, int price) {
+        return getAvailableQuantity(price) - quantityOfManual;
     }
 
     public int getAvailableQuantity(int price) {

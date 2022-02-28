@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -62,10 +63,15 @@ public class MoneyTest {
                 assertThat(quantityOfAuto).isEqualTo(expected);
             }
         }
+    }
+
+    @Nested
+    @DisplayName("수동으로 구매할 로또 수가 유효한지 검증하는 메서드는")
+    class ValidateQuantityOfManual {
 
         @Nested
-        @DisplayName("수동으로 구매할 로또 수가 유효하지 않으면")
-        class Context_with_not_available_amount_of_manual {
+        @DisplayName("값이 유효하지 않으면")
+        class Context_with_not_available_quantity_of_manual {
 
             @ParameterizedTest
             @CsvSource(value = {"-1|10000", "11|10000", "21|20000"}, delimiter = '|')
@@ -73,7 +79,7 @@ public class MoneyTest {
             void It_throws_exception(int quantityOfManual, int moneyValue) {
                 final Money money = new Money(moneyValue);
 
-                assertThatThrownBy(() -> money.getQuantityOfAuto(quantityOfManual, 1000))
+                assertThatThrownBy(() -> money.validateQuantityOfManual(quantityOfManual, 1000))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessage("0개 이상 " + moneyValue / 1000 + "개 이하의 로또만 수동으로 구매할 수 있습니다.");
             }
