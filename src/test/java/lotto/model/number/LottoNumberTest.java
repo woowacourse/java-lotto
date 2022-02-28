@@ -16,7 +16,7 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1,46})
+    @ValueSource(ints = {-1, 46})
     void 로또_숫자_생성_테스트_범위(int lottoNumber) {
         assertThatThrownBy(() ->
                 new LottoNumber(lottoNumber))

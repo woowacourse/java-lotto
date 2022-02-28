@@ -13,7 +13,8 @@ public class AutoLottoNumbersGenerator implements LottoGenerator {
 
     private static List<Integer> numberCollection;
 
-    public LottoNumbers generateLottoNumbers(int minimumNumber, int maximumNumber, int lottoLength) throws RuntimeException {
+    public LottoNumbers generateLottoNumbers(int minimumNumber, int maximumNumber, int lottoLength)
+            throws RuntimeException {
         numberCollection = makeNumberCollection(minimumNumber, maximumNumber);
         Collections.shuffle(numberCollection);
         return new LottoNumbers(numberCollection.subList(LOTTO_START_INDEX, lottoLength).stream()
@@ -23,7 +24,7 @@ public class AutoLottoNumbersGenerator implements LottoGenerator {
     }
 
     private List<Integer> makeNumberCollection(int minimumNumber, int maximumNumber) {
-        return  IntStream.rangeClosed(minimumNumber, maximumNumber)
+        return IntStream.rangeClosed(minimumNumber, maximumNumber)
                 .boxed()
                 .collect(Collectors.toList());
     }

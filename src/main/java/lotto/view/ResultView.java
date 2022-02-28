@@ -1,7 +1,5 @@
 package lotto.view;
 
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.model.Lotto;
 import lotto.model.LottoMachine;

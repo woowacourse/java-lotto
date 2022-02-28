@@ -11,7 +11,7 @@ public class LottoNumbersTest {
 
     @Test
     void 로또_번호_6자리_생성_테스트() {
-        LottoNumbers lottoNumbers = makeLottoNumbers(new int[]{1,2,3,4,5,6});
+        LottoNumbers lottoNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
         assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class);
     }
 

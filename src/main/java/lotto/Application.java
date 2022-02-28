@@ -15,6 +15,5 @@ public class Application {
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
-
     }
 }
