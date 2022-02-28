@@ -32,10 +32,4 @@ public class LottoTicketTest {
     void validInput() {
         assertThatNoException().isThrownBy(() -> new LottoTicket("1,2,3,4,5,6"));
     }
-
-    @Test
-    @DisplayName("공백이 포함된 경우 테스트 통과")
-    void hasBlank() {
-        assertThatNoException().isThrownBy(() -> new LottoTicket("1,  8  ,3,4 ,5 ,6"));
-    }
 }

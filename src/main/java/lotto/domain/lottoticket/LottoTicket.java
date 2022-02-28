@@ -8,12 +8,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 
-public class LottoTicket {
+final public class LottoTicket {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int FROM_INDEX = 0;
     private static final String DELIMITER = ",";
-    private static final String BLANK = " ";
-    private static final String EMPTY = "";
     private static final String DUPLICATE_ERROR = "로또 번호는 중복이 불가능합니다.";
     private static final String COUNT_ERROR = "로또 개수는 " + LOTTO_NUMBER_COUNT + "여야 합니다.";
 
@@ -34,26 +32,22 @@ public class LottoTicket {
     }
 
     public LottoTicket(String lottoNumbers) {
-        String[] parsedLottoNumbers = reduceBlank(lottoNumbers).split(DELIMITER);
+        String[] parsedLottoNumbers = lottoNumbers.split(DELIMITER);
         validateDuplicateCount(parsedLottoNumbers);
         validateLottoCount(parsedLottoNumbers);
         this.value = generateLottoNumbers(parsedLottoNumbers);
     }
 
-    private String reduceBlank(String lottoNumbers) {
-        return lottoNumbers.replaceAll(BLANK, EMPTY);
-    }
-
     private void validateDuplicateCount(String[] parsedLottoNumbers) {
-        long distinctCount = calDistinctCountFromArray(parsedLottoNumbers);
+        int distinctCount = calDistinctCount(parsedLottoNumbers);
 
         if (parsedLottoNumbers.length != distinctCount) {
             throw new IllegalArgumentException(DUPLICATE_ERROR);
         }
     }
 
-    private long calDistinctCountFromArray(String[] parsedLottoNumbers) {
-        return Arrays.stream(parsedLottoNumbers).distinct().count();
+    private int calDistinctCount(String[] parsedLottoNumbers) {
+        return (int) Arrays.stream(parsedLottoNumbers).distinct().count();
     }
 
     private void validateLottoCount(String[] parsedLottoNumbers) {
