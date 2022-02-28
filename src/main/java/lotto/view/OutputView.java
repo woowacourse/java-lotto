@@ -11,7 +11,7 @@ import lotto.domain.Rank;
 public class OutputView {
 
     private static final String ERROR_MESSAGE = "[ERROR] : %s%n";
-    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.%n";
+    private static final String LOTTO_COUNT_MESSAGE = "%n%d개를 구매했습니다.%n";
     private static final String LOTTO_MESSAGE_FORMAT = "[%s]%n";
     private static final String MATCH_RESULT_MESSAGE_PREFIX = "%n당첨 통계%n---------%n";
     private static final String NO_BONUS_BALL = " ";
@@ -21,7 +21,7 @@ public class OutputView {
     private static final String PROFIT_SUFFIX = "(와!! 돈복사 버그!!!)%n";
     private static final String SAME_SUFFIX = "(본전... 이득도 손해도 아님)%n";
     private static final String RATE_OF_PROFIT_MESSAGE_PREFIX = "총 수익률은 %.3f입니다.";
-    private static final String MANUAL_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String MANUAL_NUMBERS_MESSAGE = "%n수동으로 구매할 번호를 입력해 주세요.%n";
 
     private OutputView() {
     }
@@ -90,6 +90,6 @@ public class OutputView {
     }
 
     public static void printManualNumbersMessage() {
-        System.out.println(MANUAL_NUMBERS_MESSAGE);
+        System.out.printf(MANUAL_NUMBERS_MESSAGE);
     }
 }
