@@ -1,9 +1,10 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.receiver.LottoReceiver;
+import lotto.exception.LottoException;
 
 public class Lotto {
 
@@ -18,8 +19,37 @@ public class Lotto {
         return new Lotto(LottoNumber.getRandomLottoNumbers(LOTTO_SIZE));
     }
 
-    public static Lotto generateLottoByManual(String input) {
-        return new Lotto(LottoReceiver.receive(input));
+    public static Lotto generateLottoByManual(List<Integer> numbers) {
+        checkSize(numbers);
+        checkDuplication(numbers);
+        return new Lotto(convertToLottoNumbers(numbers));
+    }
+
+    private static void checkSize(List<Integer> numbers) {
+        if (!isCorrectSize(numbers)) {
+            throw new LottoException(LottoException.WINNING_NUMBERS_SIZE_ERROR_MESSAGE);
+        }
+    }
+
+    private static boolean isCorrectSize(List<Integer> numbers) {
+        return numbers.size() == LOTTO_SIZE;
+    }
+
+    private static void checkDuplication(List<Integer> numbers) {
+        if (isDuplication(numbers)) {
+            throw new LottoException(LottoException.WINNING_NUMBERS_DUPLICATION_ERROR_MESSAGE);
+        }
+    }
+
+    private static boolean isDuplication(List<Integer> numbers) {
+        return new HashSet<>(numbers).size() != numbers.size();
+    }
+
+    private static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::getByNumber)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     public Rank getRank(WinningNumbers winningNumbers) {

@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import lotto.exception.LottoNumberException;
 
@@ -20,7 +19,6 @@ public enum LottoNumber {
     NUMBER_41(41), NUMBER_42(42), NUMBER_43(43), NUMBER_44(44), NUMBER_45(45);
 
     private static final String LOTTO_NUMBER_PREFIX = "NUMBER_";
-    private static final String REGEX_FOR_NATURAL_NUMBER = "^[1-9][0-9]*$";
     private static final int MINIMUM_RANGE = 1;
     private static final int MAXIMUM_RANGE = 45;
 
@@ -48,32 +46,19 @@ public enum LottoNumber {
                 .collect(Collectors.toList());
     }
 
-    public static LottoNumber getByString(String input) {
-        checkNaturalNumber(input);
-        checkRange(input);
-        return valueOf(LOTTO_NUMBER_PREFIX + input);
+    public static LottoNumber getByNumber(int number) {
+        checkRange(number);
+        return valueOf(LOTTO_NUMBER_PREFIX + number);
     }
 
-    private static void checkNaturalNumber(String input) {
-        if (!isNaturalNumber(input)) {
-            throw new LottoNumberException(LottoNumberException.LOTTO_NUMBER_NATURAL_NUMBER_ERROR_MESSAGE);
-        }
-    }
-
-    private static boolean isNaturalNumber(String input) {
-        return Pattern.compile(REGEX_FOR_NATURAL_NUMBER)
-                .matcher(input)
-                .find();
-    }
-
-    private static void checkRange(String input) {
-        if (!isCorrectRange(Integer.parseInt(input))) {
+    private static void checkRange(int number) {
+        if (!isCorrectRange(number)) {
             throw new LottoNumberException(LottoNumberException.LOTTO_NUMBER_RANGE_ERROR_MESSAGE);
         }
     }
 
-    private static boolean isCorrectRange(int input) {
-        return input >= MINIMUM_RANGE && input <= MAXIMUM_RANGE;
+    private static boolean isCorrectRange(int number) {
+        return number >= MINIMUM_RANGE && number <= MAXIMUM_RANGE;
     }
 
     public int getNumber() {

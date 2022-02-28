@@ -6,7 +6,6 @@ import lotto.domain.Money;
 import lotto.domain.ProfitRate;
 import lotto.domain.RankCount;
 import lotto.domain.WinningNumbers;
-import lotto.util.InputConvertor;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -25,7 +24,7 @@ public class Controller {
 
     private Money getMoney(Scanner scanner) {
         try {
-            int inputMoney = InputConvertor.toNaturalNumber(InputView.inputMoney(scanner));
+            int inputMoney = InputView.inputMoney(scanner);
             return new Money(inputMoney);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());

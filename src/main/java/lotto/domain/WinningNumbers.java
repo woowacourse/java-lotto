@@ -1,16 +1,24 @@
 package lotto.domain;
 
 import java.util.List;
-import lotto.receiver.BonusNumberReceiver;
+import lotto.exception.BonusNumberException;
 
 public class WinningNumbers {
 
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    public WinningNumbers(String winningNumbersInput, String bonusNumberInput) {
+    public WinningNumbers(List<Integer> winningNumbersInput, int bonusNumberInput) {
         this.winningLotto = Lotto.generateLottoByManual(winningNumbersInput);
-        this.bonusNumber = BonusNumberReceiver.receive(bonusNumberInput, winningLotto);
+        LottoNumber bonusNumber = LottoNumber.getByNumber(bonusNumberInput);
+        checkDuplication(winningLotto, bonusNumber);
+        this.bonusNumber = bonusNumber;
+    }
+
+    private static void checkDuplication(Lotto winningNumbers, LottoNumber lottoNumber) {
+        if (winningNumbers.isContain(lottoNumber)) {
+            throw new BonusNumberException(BonusNumberException.BONUS_NUMBER_DUPLICATION_ERROR_MESSAGE);
+        }
     }
 
     public int getWinningLottoMatchCount(List<LottoNumber> lotto) {
