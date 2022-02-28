@@ -18,6 +18,7 @@ public class LottoService {
     private static final int LOTTO_NUMBER_MAX = 45;
     private static final int LOTTO_NUMBER_UNIT_TO_CORRECT = 1;
     private static final int INIT_WIN_PRICE = 0;
+    private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "보너스 볼 번호가 지난 주 당첨 번호와 일치할 수 없습니다.";
 
     private final Money money;
     private Lotto lastWinLotto;
@@ -46,6 +47,13 @@ public class LottoService {
         return issuedLotto;
     }
 
+    public void initLastWinLotto(final List<String> lotto) {
+        this.lastWinLotto = new Lotto(lotto.stream()
+            .map(LottoNumber::new)
+            .sorted()
+            .collect(Collectors.toList()));
+    }
+
     private Lotto generateAutoLotto() {
         return getAutoLottoFrom(generateAutoLottoNumbers());
     }
@@ -66,11 +74,25 @@ public class LottoService {
             .collect(Collectors.toList()));
     }
 
-    public SortedMap<RankPrice, Integer> run(final Lotto lastWinLotto, final LottoNumber bonusNumber,
-                                             final List<Lotto> issuedLotto) {
-        this.lastWinLotto = lastWinLotto;
-        this.bonusNumber = bonusNumber;
+//    public SortedMap<RankPrice, Integer> calculateResult(final Lotto lastWinLotto, final LottoNumber bonusNumber,
+//                                                         final List<Lotto> issuedLotto) {
+//        this.lastWinLotto = lastWinLotto;
+//        this.bonusNumber = bonusNumber;
+//        return extractRankCount(issuedLotto);
+//    }
+
+    public SortedMap<RankPrice, Integer> calculateResult(final int bonusNumberInput, final List<Lotto> issuedLotto) {
+        // final List<Lotto> issuedLotto
+        final LottoNumber bonusNumber = new LottoNumber(bonusNumberInput);
+
+        if (isBonusNumberContain(this.lastWinLotto, bonusNumber)) {
+            throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
+        }
         return extractRankCount(issuedLotto);
+    }
+
+    private boolean isBonusNumberContain(final Lotto lotto, final LottoNumber bonusNumber) {
+        return lotto.isContainNumber(bonusNumber);
     }
 
     private SortedMap<RankPrice, Integer> extractRankCount(final List<Lotto> issuedLotto) {
