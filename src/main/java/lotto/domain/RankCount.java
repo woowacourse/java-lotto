@@ -26,7 +26,7 @@ public class RankCount {
         rankCount.put(rank, rankCount.get(rank) + 1);
     }
 
-    public int getCount(Rank rank) {
+    public int getCountOfRank(Rank rank) {
         return rankCount.get(rank);
     }
 

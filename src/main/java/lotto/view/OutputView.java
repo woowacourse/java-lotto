@@ -36,7 +36,7 @@ public class OutputView {
                 .filter(rank -> !rank.equals(Rank.RANK_OUT))
                 .forEach(rank -> System.out.printf((RANK_MESSAGE_FORMAT),
                         rank.toStringWinningNumberCount(), getBonusNumberMessage(rank),
-                        rank.toStringPrize(), rankCount.getCount(rank)));
+                        rank.toStringPrize(), rankCount.getCountOfRank(rank)));
         System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), profitRate.toStringProfitRate());
     }
 
