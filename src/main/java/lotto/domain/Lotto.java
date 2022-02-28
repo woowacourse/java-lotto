@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.receiver.LottoReceiver;
 
 public class Lotto {
@@ -27,8 +28,14 @@ public class Lotto {
         return Rank.getRank(winningNumberMatchCount, bonusNumberMatch);
     }
 
-    public List<LottoNumber> getLotto() {
-        return lotto;
+    public int getMatchCount(List<LottoNumber> lottoToCompare) {
+        return (int) lottoToCompare.stream()
+                .filter(lotto::contains)
+                .count();
+    }
+
+    public boolean isContain(LottoNumber lottoNumberToCompare) {
+        return lotto.contains(lottoNumberToCompare);
     }
 
     @Override

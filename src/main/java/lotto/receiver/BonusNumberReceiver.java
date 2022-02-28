@@ -13,7 +13,7 @@ public class BonusNumberReceiver {
     }
 
     private static void checkDuplication(Lotto winningNumbers, LottoNumber lottoNumber) {
-        if (winningNumbers.getLotto().contains(lottoNumber)) {
+        if (winningNumbers.isContain(lottoNumber)) {
             throw new BonusNumberException(BonusNumberException.BONUS_NUMBER_DUPLICATION_ERROR_MESSAGE);
         }
     }

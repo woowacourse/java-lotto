@@ -14,9 +14,7 @@ public class WinningNumbers {
     }
 
     public int getWinningLottoMatchCount(List<LottoNumber> lotto) {
-        return (int) winningLotto.getLotto().stream()
-                .filter(lotto::contains)
-                .count();
+        return winningLotto.getMatchCount(lotto);
     }
 
     public boolean isBonusNumberContainedAt(List<LottoNumber> lotto) {
