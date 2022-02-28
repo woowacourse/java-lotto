@@ -34,7 +34,7 @@ public class AnalysisDto {
     }
 
     public Map<Rank, Integer> getRankCounts() {
-        return rankCounts;
+        return Map.copyOf(rankCounts);
     }
 
     public double getProfitRate() {
