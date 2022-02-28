@@ -13,25 +13,21 @@ public enum LottoRank {
     NOTHING(Money.ZERO, (matchCount, bonusMatch) -> 0 <= matchCount && matchCount < 3);
 
     private final Money prize;
-    private final BiFunction<Integer, Boolean, Boolean> predicate;
+    private final BiFunction<Integer, Boolean, Boolean> matchCriteria;
 
-    LottoRank(Money prize, BiFunction<Integer, Boolean, Boolean> predicate) {
+    LottoRank(Money prize, BiFunction<Integer, Boolean, Boolean> matchCriteria) {
         this.prize = prize;
-        this.predicate = predicate;
+        this.matchCriteria = matchCriteria;
     }
 
     public static LottoRank of(Integer matchCount, boolean bonusMatch) {
         return Stream.of(values())
-                .filter(rank -> rank.isMatched(matchCount, bonusMatch))
+                .filter(rank -> rank.matchCriteria.apply(matchCount, bonusMatch))
                 .findFirst()
                 .orElseThrow(InvalidMatchCountException::new);
     }
 
     public Money getPrize() {
         return prize;
-    }
-
-    private boolean isMatched(int matchCount, boolean bonusMatch) {
-        return predicate.apply(matchCount, bonusMatch);
     }
 }
