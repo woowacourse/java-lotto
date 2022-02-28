@@ -15,6 +15,10 @@ public enum Rank {
         this.value = value;
    }
 
+   public boolean isMatchNumber(long number) {
+        return matchNumber == number;
+   }
+
     public int getMatchNumber() {
         return matchNumber;
     }

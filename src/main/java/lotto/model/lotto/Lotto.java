@@ -47,7 +47,7 @@ public class Lotto {
 
     private void storeResult(WinningResult winningResult, long count) {
         Arrays.stream(Rank.values())
-                .filter(rank -> rank.getMatchNumber() == count)
+                .filter(rank -> rank.isMatchNumber(count))
                 .forEach(winningResult::addCount);
     }
 
