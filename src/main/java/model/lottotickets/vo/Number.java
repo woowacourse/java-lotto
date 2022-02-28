@@ -1,6 +1,7 @@
 package model.lottotickets.vo;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Number {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -24,15 +25,29 @@ public class Number {
         return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
     }
 
-    public boolean contain(final List<Integer> WinningNumbers) {
-        return WinningNumbers.contains(number);
-    }
-
-    public boolean contain(final int bonusNumber) {
-        return number == bonusNumber;
+    public boolean hasSameNumber(List<Number> winningNumbers) {
+        return winningNumbers.stream()
+                .anyMatch(winningNumber -> this.number == winningNumber.number);
     }
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Number that = (Number) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import model.lottonumbergenerator.Generator;
 import model.lottotickets.vo.Number;
 import model.winning.Rank;
+import model.winning.WinningNumbers;
 
 public class Lotto {
     private final List<Number> numbers;
@@ -17,19 +18,22 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public Rank compareWithWinningNumber(final List<Integer> winningNumbers, final int bonusNumber) {
-        return Rank.valueOf(countMatchNumber(winningNumbers), hasBonusNumber(bonusNumber));
+    public Rank compareWithWinningNumber(final WinningNumbers winningNumbers) {
+        int matchCount = countMatchNumber(winningNumbers.getWinningNumbers());
+        boolean hasBonus = hasBonusNumber(winningNumbers.getBonusNumber());
+
+        return Rank.valueOf(matchCount, hasBonus);
     }
 
-    private int countMatchNumber(final List<Integer> winningNumbers) {
+    private int countMatchNumber(final List<Number> winningNumbers) {
         return (int) numbers.stream()
-                .filter(number -> number.contain(winningNumbers))
+                .filter(number -> number.hasSameNumber(winningNumbers))
                 .count();
     }
 
-    private boolean hasBonusNumber(final int bonusNumber) {
+    private boolean hasBonusNumber(final Number bonusNumber) {
         return numbers.stream()
-                .anyMatch(number -> number.contain(bonusNumber));
+                .anyMatch(number -> number.equals(bonusNumber));
     }
 
     public List<Integer> getLottoNumbers() {

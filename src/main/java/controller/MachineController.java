@@ -24,6 +24,7 @@ public class MachineController {
         Money money = insertMoney();
         Lottos lottos = purchaseLottos(money, generator);
         WinningNumbers winningNumbers = insertWinningNumbers();
+        showWinningResult(lottos, winningNumbers);
     }
 
     private Money insertMoney() {
@@ -53,4 +54,7 @@ public class MachineController {
         }
     }
 
+    private void showWinningResult(Lottos lottos, WinningNumbers winningNumbers) {
+        lottos.sendWinningResult(winningNumbers);
+    }
 }

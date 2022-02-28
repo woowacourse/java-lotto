@@ -1,5 +1,6 @@
 package model;
 
+import java.nio.file.Watchable;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import model.lottotickets.Lotto;
 import model.lottotickets.LottoDto;
 import model.winning.Rank;
 import model.winning.Statistics;
+import model.winning.WinningNumbers;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -24,12 +26,12 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public Statistics winningResult(final List<Integer> winningNumbers, final Integer bonusNumber) {
+    public Statistics sendWinningResult(final WinningNumbers winningNumbers) {
         Map<Rank, Integer> result = new LinkedHashMap<>();
         Arrays.stream(Rank.values()).forEach(rank -> result.put(rank, 0));
 
         for (Lotto lotto : lottos) {
-            Rank key = lotto.compareWithWinningNumber(winningNumbers, bonusNumber);
+            Rank key = lotto.compareWithWinningNumber(winningNumbers);
             result.put(key, result.get(key) + 1);
         }
         return new Statistics(result);
