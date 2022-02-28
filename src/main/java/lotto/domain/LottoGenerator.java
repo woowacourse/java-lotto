@@ -12,7 +12,7 @@ public class LottoGenerator {
     private final int manualCount;
     private final int autoCount;
 
-    public LottoGenerator(final int manualCount, final int autoCount) {
+    private LottoGenerator(final int manualCount, final int autoCount) {
         checkManualCountPositiveNumber(manualCount);
         checkInputMoneyEnough(autoCount);
         this.manualCount = manualCount;
@@ -58,7 +58,7 @@ public class LottoGenerator {
         return manualLottos;
     }
 
-    private  List<Lotto> generateRandomLottos() {
+    private List<Lotto> generateRandomLottos() {
         return IntStream.range(0, autoCount)
                 .mapToObj(index -> new Lotto(RandomLottoMachine.createRandomLottoNumbers()))
                 .collect(Collectors.toList());

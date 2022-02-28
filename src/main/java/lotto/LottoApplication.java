@@ -2,9 +2,7 @@ package lotto;
 
 import static lotto.view.ErrorView.printErrorMessage;
 
-import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
@@ -19,7 +17,8 @@ public class LottoApplication {
 
     public static void main(final String[] args) {
         final LottoGenerator lottoGenerator = createLottoGenerator(payMoney());
-        final Lottos lottos = lottoGenerator.generateLottos(InputView.inputManualLottos(lottoGenerator.getManualCount()));
+        final Lottos lottos = lottoGenerator.generateLottos(
+                InputView.inputManualLottos(lottoGenerator.getManualCount()));
 
         OutputView.outputBuyLottoCounts(lottoGenerator.getManualCount(), lottoGenerator.getAutoCount());
         OutputView.outputLottos(lottos.getLottos());

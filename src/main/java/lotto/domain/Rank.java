@@ -35,10 +35,6 @@ public enum Rank {
                 .orElse(NOT_THING);
     }
 
-    private boolean isSameHitCount(final int hitCounts) {
-        return this.hitCounts == hitCounts;
-    }
-
     public static Map<Rank, Integer> initResultMap() {
         final Map<Rank, Integer> rankMap = new TreeMap<>(rankRewardDescendingComparator());
         Arrays.stream(values())
@@ -52,6 +48,10 @@ public enum Rank {
 
     private static int defaultCount() {
         return 0;
+    }
+
+    private boolean isSameHitCount(final int hitCounts) {
+        return this.hitCounts == hitCounts;
     }
 
     public boolean isNothing() {
