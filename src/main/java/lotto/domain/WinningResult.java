@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class WinningResult {
+final public class WinningResult {
     private static final int INITIAL_COUNT = 0;
 
     private final Map<Ranking, Integer> value = new HashMap<>();

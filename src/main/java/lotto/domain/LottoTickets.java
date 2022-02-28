@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import lotto.domain.lottoticket.LottoTicket;
 
-public class LottoTickets {
+final public class LottoTickets {
     private final List<LottoTicket> value = new ArrayList<>();
 
     private LottoTickets(int count) {

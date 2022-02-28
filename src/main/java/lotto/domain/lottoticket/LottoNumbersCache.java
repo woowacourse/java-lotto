@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import lotto.domain.LottoNumber;
 
-class LottoNumbersCache {
+final class LottoNumbersCache {
     private static final String NOT_INSTANTIATION_ERROR = "LottoNumbersCache 객체를 생성할 수 없습니다.";
     private static final int MIN_NUMBER = LottoNumber.MIN;
     private static final int MAX_NUMBER = LottoNumber.MAX;
