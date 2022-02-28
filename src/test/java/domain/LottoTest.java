@@ -2,12 +2,16 @@ package domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
 
@@ -23,16 +27,24 @@ class LottoTest {
         assertThat(lotto).isNotNull();
     }
 
-    @Test
-    @DisplayName("Lotto 객체 생성 시 LottoNumber 갯수 유효하지 않은 경우")
-    void createLottoNotInSize() {
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 6)
+    @ParameterizedTest
+    @MethodSource("invalidNumberListParameterProvider")
+    @DisplayName("Lotto 객체 생성 시 LottoNumber 갯수가 유효하지 않은 경우")
+    void createLottoNotInSize(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
             .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
 
         assertThatThrownBy(() ->
             new Lotto(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private static Stream<Arguments> invalidNumberListParameterProvider() {
+        return Stream.of(
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7))
+        );
     }
 
     @Test
