@@ -19,15 +19,25 @@ public class InputView {
 	}
 
 	public static int inputManualLottoCount() {
-		System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
+		System.out.println("\n수동으로 구매할 로또 수를 입력해주세요.");
 		return inputSingleNumber();
+	}
+
+	public static List<List<Integer>> inputManualNumbers(int count) {
+		System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+
+		List<List<Integer>> inputs = new ArrayList<>();
+		while (count-- > 0) {
+			System.out.println("purchase");
+			inputs.add(inputMultipleNumber());
+		}
+
+		return inputs;
 	}
 
 	public static List<Integer> inputAnsNumbers() {
 		System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-		String input = inputLine();
-		validateMultipleNumber(input);
-		return parseMultipleNumber(input);
+		return inputMultipleNumber();
 	}
 
 	public static int inputBonusNumber() {
@@ -39,6 +49,12 @@ public class InputView {
 		String input = inputLine();
 		validateNumber(input);
 		return Integer.parseInt(input);
+	}
+
+	private static List<Integer> inputMultipleNumber() {
+		String input = inputLine();
+		validateMultipleNumber(input);
+		return parseMultipleNumber(input);
 	}
 
 	private static String inputLine() {

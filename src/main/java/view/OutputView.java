@@ -11,8 +11,8 @@ public class OutputView {
 		System.out.println(message);
 	}
 
-	public static void printLottoTickets(LottoTickets lottoTickets) {
-		System.out.println(lottoTickets.getLottoTicketsSize() + "개를 구매했습니다.");
+	public static void printLottoTickets(int manualCount, int randomCount, LottoTickets lottoTickets) {
+		System.out.println("\n수동으로 " + manualCount + "장, 자동으로 " + randomCount + "개를 구매했습니다.");
 		for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
 			printLottoTicket(lottoTicket);
 		}
@@ -55,7 +55,7 @@ public class OutputView {
 	}
 
 	private static void printProfitRatio(float ratio) {
-		System.out.println("총 수익률은 " + ratio + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+		System.out.println("총 수익률은 " + ratio + "입니다.");
 	}
 
 }
