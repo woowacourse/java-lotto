@@ -4,6 +4,8 @@ import exception.InvalidRangeLottoNumberException;
 import java.util.Objects;
 
 public class LottoNumber {
+    private static final int MINIMUM_LOTTO_NUMBER = 1;
+    private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private final int lottoNumber;
 
     public LottoNumber(int number) {
@@ -14,7 +16,7 @@ public class LottoNumber {
     }
 
     private boolean isInvalidRange(int number) {
-        return 1 > number || number > 45;
+        return MINIMUM_LOTTO_NUMBER > number || number > MAXIMUM_LOTTO_NUMBER;
     }
 
     public int getIntValue() {
