@@ -23,10 +23,6 @@ public class WinningNumber {
     }
 
     public Rank compare(LottoTicket lottoTicket) {
-        if (lottoTicket.isSame(bonusNumber)) {
-            return Rank.of(lottoNumbers.getSameNumberCount(lottoTicket) + 1, lottoTicket.isSame(bonusNumber));
-        }
-
         return Rank.of(lottoNumbers.getSameNumberCount(lottoTicket), lottoTicket.isSame(bonusNumber));
     }
 
