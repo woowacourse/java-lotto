@@ -24,7 +24,7 @@ public class LottoMachineTest {
         lottos.insert(lotto2);
         winningLotto = makeWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7);
         lottoMachine = new LottoMachine(lottos, winningLotto);
-        lottoMachine.run();
+        lottoMachine.calculateResult();
     }
 
     @Test

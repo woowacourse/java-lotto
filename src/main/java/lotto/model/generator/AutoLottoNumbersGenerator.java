@@ -11,11 +11,9 @@ public class AutoLottoNumbersGenerator implements LottoGenerator {
 
     private static final int LOTTO_START_INDEX = 0;
 
-    private static List<Integer> numberCollection;
-
     public LottoNumbers generateLottoNumbers(int minimumNumber, int maximumNumber, int lottoLength)
             throws RuntimeException {
-        numberCollection = makeNumberCollection(minimumNumber, maximumNumber);
+        List<Integer> numberCollection = makeNumberCollection(minimumNumber, maximumNumber);
         Collections.shuffle(numberCollection);
         return new LottoNumbers(numberCollection.subList(LOTTO_START_INDEX, lottoLength).stream()
                 .sorted()

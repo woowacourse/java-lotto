@@ -47,10 +47,6 @@ public class Lottos {
         return new ArrayList<>(lottos);
     }
 
-    public int getLottoCount() {
-        return lottos.size();
-    }
-
     public int size() {
         return lottos.size();
     }

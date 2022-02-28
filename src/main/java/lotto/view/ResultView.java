@@ -26,7 +26,7 @@ public class ResultView {
     }
 
     private static void printLottoCount(final Lottos lottos) {
-        System.out.println(lottos.getLottoCount() + BUY_COUNT_MESSAGE);
+        System.out.println(lottos.size() + BUY_COUNT_MESSAGE);
     }
 
     private static void printBuyingLottos(final Lottos lottos) {

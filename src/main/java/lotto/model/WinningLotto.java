@@ -19,11 +19,10 @@ public class WinningLotto {
     }
 
     public void checkDuplicateNumber(LottoNumber number) throws RuntimeException {
-        if ((winningNumbers.getLottoNumbers().stream()
-                .mapToInt(LottoNumber::getLottoNumber)
-                .boxed()
-                .collect(Collectors.toList()))
-                .contains(number.getLottoNumber())) {
+        boolean isBonusNumberDuplicate =
+                winningNumbers.getLottoNumbers().stream()
+                        .anyMatch(i -> i.getLottoNumber() == number.getLottoNumber());
+        if (isBonusNumberDuplicate) {
             throw new RuntimeException(DUPLICATED_NUMBER_ERROR_MESSAGE);
         }
     }

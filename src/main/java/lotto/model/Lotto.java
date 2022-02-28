@@ -6,15 +6,15 @@ import lotto.model.number.LottoNumbers;
 
 public class Lotto {
 
+    public static final int LOTTO_LENGTH = 6;
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_LAST_NUMBER = 45;
-    private static final int LOTTO_LENGTH = 6;
 
     private final LottoNumbers lottoNumbers;
     private Rank rank;
 
-    public Lotto(final LottoGenerator autoLottoNumbersGenerator) throws RuntimeException {
-        this.lottoNumbers = autoLottoNumbersGenerator.generateLottoNumbers(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER,
+    public Lotto(final LottoGenerator lottoGenerator) throws RuntimeException {
+        this.lottoNumbers = lottoGenerator.generateLottoNumbers(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER,
                 LOTTO_LENGTH);
         this.rank = null;
     }

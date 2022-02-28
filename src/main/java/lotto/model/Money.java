@@ -2,7 +2,7 @@ package lotto.model;
 
 public class Money {
 
-    private static final int PRICE_PER_LOTTO = 1000;
+    public static final int PRICE_PER_LOTTO = 1000;
 
     private static final String PRICE_ERROR_MESSAGE = "[ERROR] 유효한 입력이 아닙니다.";
 
@@ -15,7 +15,7 @@ public class Money {
 
     private void validateMoney(final int money) throws RuntimeException {
         if (money < 0) {
-            throw new RuntimeException(PRICE_ERROR_MESSAGE);
+            throw new IllegalArgumentException(PRICE_ERROR_MESSAGE);
         }
     }
 

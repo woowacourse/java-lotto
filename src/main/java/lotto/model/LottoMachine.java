@@ -4,8 +4,6 @@ import java.util.Map;
 
 public class LottoMachine {
 
-    private static final int PRICE_PER_LOTTO = 1000;
-
     private final Lottos lottos;
     private final WinningLotto winningLotto;
     private Map<Rank, Integer> rankCount;
@@ -15,7 +13,7 @@ public class LottoMachine {
         this.winningLotto = winningLotto;
     }
 
-    public Map<Rank, Integer> run() {
+    public Map<Rank, Integer> calculateResult() {
         return this.rankCount = winningLotto.checkRank(lottos);
     }
 
@@ -24,7 +22,7 @@ public class LottoMachine {
         for (Rank rank : Rank.values()) {
             sum += rank.getPrice() * getEachRankCount(rank);
         }
-        return ((double) sum / (lottos.size() * PRICE_PER_LOTTO));
+        return ((double) sum / (lottos.size() * Money.PRICE_PER_LOTTO));
     }
 
     public Integer getEachRankCount(final Rank rank) {

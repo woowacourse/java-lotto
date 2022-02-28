@@ -2,11 +2,11 @@ package lotto.model.number;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.model.Lotto;
 
 public class LottoNumbers {
 
     private static final String NUMBERS_ERROR_MESSAGE = "[ERROR] 중복되지 않은 6자리 수를 입력해주세요.";
-    private static final int LOTTO_NUMBERS_SIZE = 6;
 
     public final List<LottoNumber> lottoNumbers;
 
@@ -22,7 +22,7 @@ public class LottoNumbers {
     }
 
     private boolean isValidLength(final List<LottoNumber> numbers) {
-        return numbers.size() == LOTTO_NUMBERS_SIZE;
+        return numbers.size() == Lotto.LOTTO_LENGTH;
     }
 
     private boolean isDuplicate(List<LottoNumber> numbers) {
