@@ -43,7 +43,7 @@ public class WinningLottery {
         }
     }
 
-    public static boolean isLotteryTicketSize(int size) {
+    private static boolean isLotteryTicketSize(int size) {
         return size == TICKET_SIZE;
     }
 

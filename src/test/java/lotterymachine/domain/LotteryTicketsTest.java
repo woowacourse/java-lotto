@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LotteryTicketsTest {
 
@@ -34,7 +35,7 @@ public class LotteryTicketsTest {
                 .mapToObj(LotteryNumber::new)
                 .collect(Collectors.toList());
 
-        Assertions.assertThatThrownBy(() -> {
+        assertThatThrownBy(() -> {
                     lotteryTickets.add(input);
                 }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 숫자는 여섯개를 입력해야합니다.");
