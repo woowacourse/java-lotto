@@ -2,6 +2,7 @@ package lotterymachine.vo;
 
 public class LotteryPurchase {
     private static final int PER_LOTTERY_TICKET_PRICE = 1000;
+
     private int number;
 
     public LotteryPurchase(int number) {

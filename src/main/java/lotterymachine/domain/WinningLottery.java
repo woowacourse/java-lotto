@@ -6,9 +6,10 @@ import static lotterymachine.view.ErrorMessage.*;
 import static lotterymachine.view.ErrorMessage.DUPLICATE_NUMBER;
 
 public class WinningLottery {
+    private static final int TICKET_SIZE = 6;
+
     private final List<LotteryNumber> numbers;
     private final LotteryNumber bonusNumber;
-    private static final int TICKET_SIZE = 6;
 
     public WinningLottery(List<LotteryNumber> numbers, LotteryNumber bonusNumber) {
         validateWinningLotteryNumbers(numbers);

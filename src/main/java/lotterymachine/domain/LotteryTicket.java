@@ -8,6 +8,7 @@ import static lotterymachine.view.ErrorMessage.INVALID_SIZE;
 
 public class LotteryTicket {
     private static final int TICKET_SIZE = 6;
+
     private final List<LotteryNumber> numbers;
 
     public LotteryTicket(final List<LotteryNumber> numbers) {
