@@ -46,13 +46,13 @@ public class Lotto {
             .count();
     }
 
+    boolean isMatchNumber(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
+
     public List<Integer> toIntegers() {
         return lottoNumbers.stream()
             .map(LottoNumber::getNumber)
             .collect(Collectors.toUnmodifiableList());
-    }
-
-    boolean isMatchNumber(LottoNumber number) {
-        return lottoNumbers.contains(number);
     }
 }

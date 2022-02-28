@@ -9,10 +9,10 @@ public class LottoResult {
     private final Map<Rank, Long> result;
 
     public LottoResult(Lottos lottos, Lotto winningNumbers, LottoNumber bonusNumber) {
-        this.result = create(lottos, winningNumbers, bonusNumber);
+        this.result = generateLottoResult(lottos, winningNumbers, bonusNumber);
     }
 
-    private Map<Rank, Long> create(Lottos lottos, Lotto winningNumbers, LottoNumber bonusNumber) {
+    private Map<Rank, Long> generateLottoResult(Lottos lottos, Lotto winningNumbers, LottoNumber bonusNumber) {
         return lottos.getLottos().stream()
             .map(lotto -> Rank.match(lotto, winningNumbers, bonusNumber))
             .collect(groupingBy(rank -> rank, () -> new EnumMap<>(Rank.class), counting()));
