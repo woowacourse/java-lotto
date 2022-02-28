@@ -15,10 +15,8 @@ public class Lottos {
     public List<LottoReward> match(WinningLotto winningLotto) {
         List<LottoReward> lottoRewards = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int matchCount = winningLotto.calculateMatchCount(lotto);
-            boolean hasBonus = lotto.containsNumber(winningLotto.getBonusNumber());
-
-            lottoRewards.add(LottoReward.find(matchCount, hasBonus));
+            LottoReward reward = winningLotto.match(lotto);
+            lottoRewards.add(reward);
         }
 
         return lottoRewards;
