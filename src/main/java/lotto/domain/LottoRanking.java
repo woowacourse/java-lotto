@@ -25,9 +25,6 @@ public enum LottoRanking {
         if (count == 5 && containBonus) {
             return LottoRanking.FiveAndBonus;
         }
-        if (count == 5 && !containBonus) {
-            return LottoRanking.Five;
-        }
         return Arrays.stream(values())
             .filter(it -> it.count == count)
             .findAny()
