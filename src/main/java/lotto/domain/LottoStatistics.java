@@ -6,12 +6,13 @@ import java.util.List;
 public class LottoStatistics {
 
     public static final int NON_COUNT = 0;
-    
+    public static final int COUNT = 1;
+
     private final EnumMap<Rank, Integer> statistics;
 
     public LottoStatistics(List<Rank> ranks) {
         this.statistics = initializeState();
-        createStatistics(ranks);
+        calculateStatistics(ranks);
     }
 
     public double getLottoTotalReward() {
@@ -28,9 +29,9 @@ public class LottoStatistics {
         return temp;
     }
 
-    private void createStatistics(List<Rank> ranks) {
+    private void calculateStatistics(List<Rank> ranks) {
         for (Rank rank : ranks) {
-            statistics.put(rank, statistics.get(rank) + 1);
+            statistics.merge(rank, COUNT, Integer::sum);
         }
     }
 
