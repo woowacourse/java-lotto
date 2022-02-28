@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class LottoQuantity {
     private static final String ERROR_MESSAGE_FOR_INVALID_TRAIL_NUMBER = "개수는 1 보다 작을 수 없습니다.";
+    
     private static final int QUANTITY_CRITERIA = 0;
     private final int lottoQuantity;
 

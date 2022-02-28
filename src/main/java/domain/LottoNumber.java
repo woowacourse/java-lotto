@@ -6,7 +6,7 @@ public class LottoNumber {
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static final String ERROR_MESSAGE_FOR_OUT_OF_RANGE_NUMBER =
-            MINIMUM_LOTTO_NUMBER + "에서 " + MAXIMUM_LOTTO_NUMBER + " 사이의 값을 입력해주세요";
+            MINIMUM_LOTTO_NUMBER + "에서 " + MAXIMUM_LOTTO_NUMBER + " 사이의 값을 입력해주세요.";
 
     private final int number;
 
