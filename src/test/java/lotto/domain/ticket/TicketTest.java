@@ -44,17 +44,27 @@ class TicketTest {
         ticketExceptionTest(numbers, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
     }
 
-    @DisplayName("특정 번호 포함 여부 확인 테스트")
+    @DisplayName("로또 번호는 기댓값을 지니고 있으면 참을 반환한다.")
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}, 특정 번호 : {1}")
-    @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForContainsTest")
-    void containsTest(final List<Integer> numbers, final int targetNumber) {
+    @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForContainsTrueTest")
+    void containsTrueTest(final List<Integer> numbers, final int targetNumber) {
         final Ticket ticket = new Ticket(numbers);
         final Ball targetBall = Balls.getBall(targetNumber);
 
         assertThat(ticket.contains(targetBall)).isTrue();
     }
 
-    @DisplayName("당첨 번호와 일치 개수 확인 테스트")
+    @DisplayName("로또 번호는 기댓값을 지니고 있지 않으면 거짓을 반환한다.")
+    @ParameterizedTest(name = "[{index}] 로또 번호 : {0}, 특정 번호 : {1}")
+    @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForContainsFalseTest")
+    void containsFalseTest(final List<Integer> numbers, final int targetNumber) {
+        final Ticket ticket = new Ticket(numbers);
+        final Ball targetBall = Balls.getBall(targetNumber);
+
+        assertThat(ticket.contains(targetBall)).isFalse();
+    }
+
+    @DisplayName("당첨 번호와의 일치 개수는 기댓값과 일치해야 한다.")
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}, 일치 개수 : {2}, 당첨 번호 : {1}")
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForCountMatchesTest")
     void countMatchesTest(final List<Integer> numbers, final List<Integer> winningNumbers, final int matchCount) {
@@ -68,7 +78,7 @@ class TicketTest {
         assertThat(ticket.countMatches(winningBalls)).isEqualTo(matchCount);
     }
 
-    @DisplayName("당첨 등수 확인 테스트")
+    @DisplayName("당첨 등수 결과는 기댓값과 일치해야 한다.")
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}, 당첨 번호 : {1}, 보너스 번호 : {2}, 당첨 등수 : {3}")
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForCalculateRankTest")
     void calculateRankTest(final List<Integer> numbers,

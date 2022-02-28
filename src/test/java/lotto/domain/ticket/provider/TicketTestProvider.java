@@ -25,11 +25,18 @@ public class TicketTestProvider {
         );
     }
 
-    public static Stream<Arguments> provideForContainsTest() {
+    public static Stream<Arguments> provideForContainsTrueTest() {
         return Stream.of(
                 Arguments.of(List.of(1, 2, 3, 4, 5, 6), 1),
                 Arguments.of(List.of(1, 2, 3, 4, 5, 6), 3),
                 Arguments.of(List.of(1, 2, 3, 4, 5, 6), 6)
+        );
+    }
+
+    public static Stream<Arguments> provideForContainsFalseTest() {
+        return Stream.of(
+                Arguments.of(List.of(1, 2, 3, 4, 5, 6), 7),
+                Arguments.of(List.of(2, 3, 4, 5, 6, 7), 1)
         );
     }
 
