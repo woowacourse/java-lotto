@@ -1,5 +1,6 @@
 package domain;
 
+import dto.LottoDto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,6 +20,7 @@ public class LottoService {
     private static final int LOTTO_NUMBER_UNIT_TO_CORRECT = 1;
     private static final int INIT_WIN_PRICE = 0;
     private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "보너스 볼 번호가 지난 주 당첨 번호와 일치할 수 없습니다.";
+    private static final String ERROR_LOTTO_SIZE_MESSAGE = "번호는 6개를 입력하셔야 합니다.";
 
     private final Money money;
     private Lotto lastWinLotto;
@@ -28,30 +30,36 @@ public class LottoService {
         this.money = new Money(money);
     }
 
-    public List<Lotto> issueLotto() {
-        final ArrayList<Lotto> issuedLotto = generateLotto(money.calculateCounts());
-        return Collections.unmodifiableList(issuedLotto);
+    public void initLastWinLotto(final List<String> inputLotto) {
+        validate(inputLotto);
+        this.lastWinLotto = Lotto.fromInput(inputLotto);
     }
 
-    private ArrayList<Lotto> generateLotto(int number) {
+    private void validate(final List<String> inputLotto) {
+        if (inputLotto.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(ERROR_LOTTO_SIZE_MESSAGE);
+        }
+    }
+
+    public List<LottoDto> issueLotto() {
+        final List<Lotto> issuedLotto = generateLotto(money.calculateCounts());
+        return issuedLotto.stream()
+            .map(LottoDto::from)
+            .collect(Collectors.toUnmodifiableList());
+    }
+
+    private List<Lotto> generateLotto(int number) {
         return issueLottoWithCount(number);
     }
 
-    private ArrayList<Lotto> issueLottoWithCount(final int number) {
-        final ArrayList<Lotto> issuedLotto = new ArrayList<>();
+    private List<Lotto> issueLottoWithCount(final int number) {
+        final List<Lotto> issuedLotto = new ArrayList<>();
         Count count = new Count(number);
         while (!count.isEnd()) {
             count = count.decrease();
             issuedLotto.add(generateAutoLotto());
         }
-        return issuedLotto;
-    }
-
-    public void initLastWinLotto(final List<String> lotto) {
-        this.lastWinLotto = new Lotto(lotto.stream()
-            .map(LottoNumber::new)
-            .sorted()
-            .collect(Collectors.toList()));
+        return Collections.unmodifiableList(issuedLotto);
     }
 
     private Lotto generateAutoLotto() {
@@ -74,25 +82,33 @@ public class LottoService {
             .collect(Collectors.toList()));
     }
 
-//    public SortedMap<RankPrice, Integer> calculateResult(final Lotto lastWinLotto, final LottoNumber bonusNumber,
-//                                                         final List<Lotto> issuedLotto) {
-//        this.lastWinLotto = lastWinLotto;
-//        this.bonusNumber = bonusNumber;
-//        return extractRankCount(issuedLotto);
-//    }
-
-    public SortedMap<RankPrice, Integer> calculateResult(final int bonusNumberInput, final List<Lotto> issuedLotto) {
-        // final List<Lotto> issuedLotto
-        final LottoNumber bonusNumber = new LottoNumber(bonusNumberInput);
+    public SortedMap<RankPrice, Integer> calculateResult(final int bonusNumberInput,
+                                                         final List<LottoDto> issuedLottoDto) {
+        this.bonusNumber = new LottoNumber(bonusNumberInput);
 
         if (isBonusNumberContain(this.lastWinLotto, bonusNumber)) {
             throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
         }
-        return extractRankCount(issuedLotto);
+        // 포함여부 비교를 위해 다시 Lotto Dto -> Lotto로 변환
+        return extractRankCount(convertToLotto(issuedLottoDto));
     }
 
     private boolean isBonusNumberContain(final Lotto lotto, final LottoNumber bonusNumber) {
         return lotto.isContainNumber(bonusNumber);
+    }
+
+    private List<Lotto> convertToLotto(final List<LottoDto> issuedLottoDto) {
+        final List<Lotto> issuedLotto = new ArrayList<>();
+        for (LottoDto lottoDto : issuedLottoDto) {
+            issuedLotto.add(convertToLotto(lottoDto));
+        }
+        return Collections.unmodifiableList(issuedLotto);
+    }
+
+    private Lotto convertToLotto(final LottoDto lottoDto) {
+        return new Lotto(lottoDto.get().stream()
+            .map(lottoNumberDto -> new LottoNumber(lottoNumberDto.getNumber()))
+            .collect(Collectors.toList()));
     }
 
     private SortedMap<RankPrice, Integer> extractRankCount(final List<Lotto> issuedLotto) {

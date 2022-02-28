@@ -3,7 +3,7 @@ package dto;
 import domain.LottoNumber;
 
 public class LottoNumberDto {
-    
+
     private final int number;
 
     public LottoNumberDto(final int number) {
@@ -12,6 +12,10 @@ public class LottoNumberDto {
 
     public static LottoNumberDto from(final LottoNumber lottoNumber) {
         return new LottoNumberDto(lottoNumber.getNumber());
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override
