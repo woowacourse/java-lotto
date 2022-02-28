@@ -54,5 +54,4 @@ public class LottoTest {
 
         assertEquals(Rank.SECOND, lotto.getRank(new WinningLotto(winLotto, bonusBall)));
     }
-
 }

@@ -1,10 +1,9 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class MoneyTest {
 
@@ -22,7 +21,7 @@ public class MoneyTest {
         Money money = new Money(0);
         money.add(100);
 
-        assertTrue(money.getMoney() == 100);
+        assertThat(money.getMoney()).isEqualTo(100);
     }
 
     @Test
@@ -31,6 +30,6 @@ public class MoneyTest {
         Money money = new Money(1000);
         money.multiply(17);
 
-        assertTrue(money.getMoney() == 17000);
+        assertThat(money.getMoney()).isEqualTo(17000);
     }
 }
