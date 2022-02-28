@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.model.Lotto;
+import lotto.model.LottoMoney;
 import lotto.model.LottoNumber;
 import lotto.model.LottoResult;
 import lotto.model.Lottos;
@@ -56,17 +57,21 @@ class ResultViewTest {
     @Test
     @DisplayName("손해인 경우 수익률을 출력한다.")
     void printMinusYieldTest() {
-        Yield yield = new Yield(0.351312312f);
+        LottoMoney lottoMoney = new LottoMoney(14000);
+        Long totalWinningMoney = 5000L;
+        Yield yield = new Yield(lottoMoney, totalWinningMoney);
         ResultView.printYield(yield);
 
         assertThat(outputStreamCaptor.toString())
-            .contains("총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+            .contains("총 수익률은 0.36입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 
     @Test
     @DisplayName("이득인 경우 수익률을 출력한다.")
     void printPlusYieldTest() {
-        Yield yield = new Yield(1.00f);
+        LottoMoney lottoMoney = new LottoMoney(14000);
+        Long totalWinningMoney = 14000L;
+        Yield yield = new Yield(lottoMoney, totalWinningMoney);
         ResultView.printYield(yield);
 
         assertThat(outputStreamCaptor.toString())

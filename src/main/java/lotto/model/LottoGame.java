@@ -29,6 +29,6 @@ public class LottoGame {
     }
 
     public Yield calculateYield(LottoMoney lottoMoney, LottoResult lottoResult) {
-        return Yield.calculate(lottoMoney, lottoResult.getTotalWinningMoney());
+        return new Yield(lottoMoney, lottoResult.getTotalWinningMoney());
     }
 }

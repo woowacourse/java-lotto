@@ -5,12 +5,12 @@ public class Yield {
 
     private final float yield;
 
-    private Yield(float yield) {
-        this.yield = yield;
+    public Yield(LottoMoney lottoMoney, Long totalWinningMoney) {
+        this.yield = calculateYield(lottoMoney, totalWinningMoney);
     }
 
-    public static Yield calculate(LottoMoney lottoMoney, Long totalWinningMoney) {
-        return new Yield(lottoMoney.divide(totalWinningMoney));
+    private float calculateYield(LottoMoney lottoMoney, Long totalWinningMoney) {
+        return lottoMoney.divide(totalWinningMoney);
     }
 
     public boolean isGain() {

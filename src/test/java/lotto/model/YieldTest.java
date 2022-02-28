@@ -11,10 +11,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class YieldTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"1.00f,true", "0.99f, false"}, delimiter = ',')
-    @DisplayName("수익률 1기준 이득여부 테스트")
-    void isGainTest(float value, boolean expected) {
-        Yield yield = new Yield(value);
+    @CsvSource(value = {"14000:true", "13999:false"}, delimiter = ':')
+    @DisplayName("수익률 1기준 이득 테스트")
+    void isGainTest(Long totalWinningMoney, boolean expected) {
+        LottoMoney lottoMoney = new LottoMoney(14000);
+        Yield yield = new Yield(lottoMoney, totalWinningMoney);
 
         assertThat(yield.isGain()).isEqualTo(expected);
     }
@@ -24,7 +25,7 @@ public class YieldTest {
     void calculateTest() {
         LottoMoney lottoMoney = new LottoMoney(14000);
         Long totalWinningMoney = 5000L;
-        Yield yield = Yield.calculate(lottoMoney, totalWinningMoney);
+        Yield yield = new Yield(lottoMoney, totalWinningMoney);
 
         assertThat(yield.getYield()).isCloseTo(0.35714f, Percentage.withPercentage(0.01));
     }

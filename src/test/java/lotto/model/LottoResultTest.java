@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoResultTest {
+
     @ParameterizedTest
     @CsvSource(value = {"6:30_000_000", "44:1_500_000"}, delimiter = ':')
     @DisplayName("2, 3등 당첨 여부를 확인한다")
