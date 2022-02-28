@@ -12,8 +12,8 @@ import lotto.model.result.Money;
 import lotto.model.result.Rank;
 import lotto.model.result.RateOfReturn;
 import lotto.model.result.WinningResult;
-import lotto.model.winningnumber.LottoWinningNumber;
-import lotto.model.winningnumber.LottoWinningNumberResponse;
+import lotto.model.winningnumber.WinningNumber;
+import lotto.model.winningnumber.WinningNumberResponse;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -27,10 +27,9 @@ public class LottoController {
         LottoStorage lottoStorage = lottoGame.makeLottos(new LottoCount(money.getNumber()));
         sendMakeLottoResult(lottoStorage.getLottoStorage());
 
-        LottoWinningNumber lottoWinningNumber = receiveWinningNumbers();
-        BonusBall bonusBall = receiveBonusBall(lottoGame, lottoWinningNumber);
-
-        WinningResult winningResult = receiveWinningResult(lottoGame, lottoStorage, bonusBall, lottoWinningNumber);
+        WinningNumber winningNumber = receiveWinningNumbers();
+        BonusBall bonusBall = receiveBonusBall(lottoGame, winningNumber);
+        WinningResult winningResult = receiveWinningResult(lottoGame, lottoStorage, bonusBall, winningNumber);
         sendResult(lottoGame, money.getNumber(), winningResult);
     }
 
@@ -48,29 +47,29 @@ public class LottoController {
         lottoStorage.forEach(lottoResponse -> outputView.printLottos(lottoResponse.getNumbers()));
     }
 
-    private LottoWinningNumber receiveWinningNumbers() {
+    private WinningNumber receiveWinningNumbers() {
         try {
-            return new LottoWinningNumber(inputView.inputWinningNumbers());
+            return new WinningNumber(inputView.inputWinningNumbers());
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
             return receiveWinningNumbers();
         }
     }
 
-    private BonusBall receiveBonusBall(LottoGame lottoGame, LottoWinningNumber lottoWinningNumber) {
+    private BonusBall receiveBonusBall(LottoGame lottoGame, WinningNumber winningNumber) {
         try {
-            return lottoGame.storeBonusBall(lottoWinningNumber, inputView.inputBonusBall());
+            return lottoGame.storeBonusBall(winningNumber, inputView.inputBonusBall());
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
-            return receiveBonusBall(lottoGame, lottoWinningNumber);
+            return receiveBonusBall(lottoGame, winningNumber);
         }
     }
 
     private WinningResult receiveWinningResult(LottoGame lottoGame, LottoStorage lottoStorage, BonusBall bonusBall,
-                                               LottoWinningNumber lottoWinningNumber) {
+                                               WinningNumber winningNumber) {
         return lottoGame.calcLottoWithWinningNumber(lottoStorage,
                 new BonusBallResponse(bonusBall.getNumber()),
-                new LottoWinningNumberResponse(lottoWinningNumber.getWinningNumbers()));
+                new WinningNumberResponse(winningNumber.getWinningNumbers()));
     }
 
     private void sendResult(LottoGame lottoGame, String money, WinningResult winningResult) {

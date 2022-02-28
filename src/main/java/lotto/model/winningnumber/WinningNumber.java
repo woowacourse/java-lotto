@@ -10,13 +10,13 @@ import lotto.model.message.WinningNumberExceptionMessage;
 import lotto.utils.ConverterUtils;
 import lotto.utils.InputValidateUtils;
 
-public class LottoWinningNumber {
+public class WinningNumber {
     private static final int WINNING_NUMBER_SIZE = 6;
     private static final String CONCAT = "";
 
     private final Set<Integer> winningNumbers;
 
-    public LottoWinningNumber(List<String> numbers) {
+    public WinningNumber(List<String> numbers) {
         inputBlank(numbers);
         InputValidateUtils.inputNumber(makeNumbersToString(numbers), WinningNumberExceptionMessage.NUMBER_ERROR.getMassage());
         validateNumberOutOfRange(numbers);
@@ -78,7 +78,7 @@ public class LottoWinningNumber {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoWinningNumber that = (LottoWinningNumber) o;
+        WinningNumber that = (WinningNumber) o;
         return Objects.equals(winningNumbers, that.winningNumbers);
     }
 

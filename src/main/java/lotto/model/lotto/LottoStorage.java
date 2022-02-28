@@ -6,7 +6,7 @@ import java.util.List;
 
 import lotto.model.bonusball.BonusBallResponse;
 import lotto.model.result.WinningResult;
-import lotto.model.winningnumber.LottoWinningNumberResponse;
+import lotto.model.winningnumber.WinningNumberResponse;
 
 public class LottoStorage {
     private final List<Lotto> lottoNumbers;
@@ -33,7 +33,7 @@ public class LottoStorage {
     }
 
     public WinningResult calcWinningNumber(BonusBallResponse bonusBallResponse,
-                                           LottoWinningNumberResponse winningNumberResponse) {
+                                           WinningNumberResponse winningNumberResponse) {
         WinningResult winningResult = new WinningResult();
         lottoNumbers.forEach(lotto -> lotto.calcWinningNumber(winningResult, bonusBallResponse, winningNumberResponse));
         return winningResult;

@@ -7,7 +7,7 @@ import java.util.Set;
 
 import lotto.model.result.Rank;
 import lotto.model.result.WinningResult;
-import lotto.model.winningnumber.LottoWinningNumberResponse;
+import lotto.model.winningnumber.WinningNumberResponse;
 import lotto.model.bonusball.BonusBallResponse;
 
 public class Lotto {
@@ -20,7 +20,7 @@ public class Lotto {
     }
 
     public void calcWinningNumber(WinningResult winningResult, BonusBallResponse bonusBallResponse,
-                                  LottoWinningNumberResponse winningResponse) {
+                                  WinningNumberResponse winningResponse) {
         Set<Integer> winningNumbers = winningResponse.getWinningNumbers();
         long count = countWinningNumber(winningNumbers);
 
