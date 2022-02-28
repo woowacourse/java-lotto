@@ -15,13 +15,13 @@ public class StoreTest {
     @ValueSource(ints = {1_000, 100_000})
     @DisplayName("입력금액을 전달하면 Store가 생성된다.")
     void createStore(int money) {
-        assertThat(new Store(Money.createMoney(money))).isNotNull();
+        assertThat(new Store(Money.createLottoMoney(money))).isNotNull();
     }
 
     @Test
     @DisplayName("로또 한장을 생성한다.")
     void createLotto() {
-        Store store = new Store(Money.createMoney(1000));
+        Store store = new Store(Money.createLottoMoney(1000));
 
         assertThat(store.buyAutomaticLottos()).hasSize(1);
     }

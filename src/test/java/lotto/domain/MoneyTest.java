@@ -16,16 +16,8 @@ public class MoneyTest {
     @DisplayName("입력금액은 1,000원 미만이면 예외가 발생한다.")
     void throwExceptionWhenUnderThousands() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Money.createMoney(999))
+                .isThrownBy(() -> Money.createLottoMoney(999))
                 .withMessage("입력금액은 1,000 이상이어야 한다.");
-    }
-
-    @Test
-    @DisplayName("입력금액은 100,000원 넘으면 예외가 발생한다.")
-    void throwExceptionWhenOver100Thousands() {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> Money.createMoney(100_001))
-                .withMessage("입력금액은 100,000을 넘을 수 없다.");
     }
 
     @Test
@@ -33,7 +25,7 @@ public class MoneyTest {
     void throwExceptionWhenNegative() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Money.createReward(-1L))
-                .withMessageMatching("상금은 0이상이어야 한다.");
+                .withMessageMatching("돈은 0이상이어야 한다.");
     }
 
     @Test
@@ -54,26 +46,26 @@ public class MoneyTest {
     @Test
     @DisplayName("돈의 합을 구할 수 있다.")
     void plusMoney() {
-        Money money1 = Money.createMoney(1_000L);
-        Money money2 = Money.createMoney(2_000L);
+        Money money1 = Money.createLottoMoney(1_000L);
+        Money money2 = Money.createLottoMoney(2_000L);
 
-        assertThat(money1.plus(money2)).isEqualTo(Money.createMoney(3_000L));
+        assertThat(money1.plus(money2)).isEqualTo(Money.createLottoMoney(3_000L));
     }
 
     @Test
     @DisplayName("돈의 차를 구할 수 있다.")
     void minusMoney() {
-        Money money1 = Money.createMoney(5_000L);
-        Money money2 = Money.createMoney(1_000L);
+        Money money1 = Money.createLottoMoney(5_000L);
+        Money money2 = Money.createLottoMoney(1_000L);
 
-        assertThat(money1.minus(money2)).isEqualTo(Money.createMoney(4_000L));
+        assertThat(money1.minus(money2)).isEqualTo(Money.createLottoMoney(4_000L));
     }
 
     @Test
     @DisplayName("돈을 나누면 비율을 반환한다.")
     void divideMoney() {
-        Money totalMoney = Money.createMoney(50_000L);
-        Money money = Money.createMoney(3_000L);
+        Money totalMoney = Money.createLottoMoney(50_000L);
+        Money money = Money.createLottoMoney(3_000L);
 
         assertThat(totalMoney.divide(money)).isEqualTo(BigDecimal.valueOf(16.66));
     }
@@ -82,8 +74,8 @@ public class MoneyTest {
     @CsvSource(value = {"1001,true", "1000,true"})
     @DisplayName("돈의 크기를 비교한다.")
     void throwExceptionWhenMinusMoneyIsZero(long money, boolean result) {
-        Money money1 = Money.createMoney(money);
-        Money money2 = Money.createMoney(1_000L);
+        Money money1 = Money.createLottoMoney(money);
+        Money money2 = Money.createLottoMoney(1_000L);
 
         assertThat(money1.isGreaterThan(money2)).isEqualTo(result);
     }

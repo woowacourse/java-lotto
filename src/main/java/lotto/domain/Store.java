@@ -7,8 +7,6 @@ import java.util.List;
 
 public class Store {
 
-    public static final int LOTTO_PRICE = 1_000;
-
     private Money leftMoney;
 
     public Store(Money leftMoney) {
@@ -24,11 +22,11 @@ public class Store {
     }
 
     private boolean canBuy() {
-        return leftMoney.isGreaterThan(Money.createMoney(LOTTO_PRICE));
+        return leftMoney.isGreaterThan(Money.createMinimumLottoMoney());
     }
 
     private Lotto buy() {
-        leftMoney = leftMoney.minus(Money.createMoney(LOTTO_PRICE));
+        leftMoney = leftMoney.minus(Money.createMinimumLottoMoney());
         return LottoGenerator.generate();
     }
 }

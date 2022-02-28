@@ -15,11 +15,11 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void run() {
-        Money totalMoney = Money.createMoney(InputView.inputMoney());
+        Money totalMoney = Money.createLottoMoney(InputView.inputMoney());
         int manualLottoCount = InputView.inputManualLottoCount();
-        validateManualLottoCountOutOfMoney(totalMoney, manualLottoCount);
+        Money automaticMoney = totalMoney.minus(Money.createLottoMoneyByCount(manualLottoCount));
 
-        Lottos lottos = buyLottos(totalMoney, manualLottoCount);
+        Lottos lottos = buyLottos(automaticMoney, manualLottoCount);
         OutputView.printLottos(manualLottoCount, lottos.getLottos());
 
         List<Rank> ranks = lottos.matchRanks(createWinnerLotto(winnerNumbers(), bonusNumber()));
@@ -27,21 +27,11 @@ public class LottoController {
         OutputView.printRate(calculateRate(totalMoney, ranks));
     }
 
-    private Lottos buyLottos(Money totalMoney, int manualLottoCount) {
+    private Lottos buyLottos(Money automaticMoney, int manualLottoCount) {
         List<Lotto> manualLottos = InputView.inputManualLottos(manualLottoCount);
-
-        Money manualMoney = Money.createMoneyByCount(manualLottoCount);
-        List<Lotto> automaticLottos = buyAutomaticLottos(totalMoney.minus(manualMoney));
+        List<Lotto> automaticLottos = buyAutomaticLottos(automaticMoney);
         manualLottos.addAll(automaticLottos);
         return new Lottos(manualLottos);
-    }
-
-    private void validateManualLottoCountOutOfMoney(Money totalMoney, int manualLottoCount) {
-        Money manualMoney = Money.createMoneyByCount(manualLottoCount);
-
-        if (manualMoney.isGreaterThan(totalMoney)) {
-            throw new IllegalArgumentException("수동으로 구매할 로또 수가 구매 가능한 로또 수보다 크다.");
-        }
     }
 
     private List<Lotto> buyAutomaticLottos(Money money) {
