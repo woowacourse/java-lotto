@@ -7,12 +7,12 @@ import java.util.*;
 
 public enum Rank {
 
-    FIRST(6, new Money(2_000_000_000L), (matchCount, matchBonus) -> matchCount == 6),
-    SECOND(5, new Money(30_000_000L), (matchCount, matchBonus) -> matchCount == 5 && matchBonus),
-    THIRD(5, new Money(1_500_000L), (matchCount, matchBonus) -> matchCount == 5 && !matchBonus),
-    FOURTH(4, new Money(50_000L), (matchCount, matchBonus) -> matchCount == 4),
-    FIFTH(3, new Money(5_000L), (matchCount, matchBonus) -> matchCount == 3),
-    NONE(0, new Money(0L), (matchCount, matchBonus) -> matchCount <= 2);
+    FIRST(6, Money.createReward(2_000_000_000L), (matchCount, matchBonus) -> matchCount == 6),
+    SECOND(5, Money.createReward(30_000_000L), (matchCount, matchBonus) -> matchCount == 5 && matchBonus),
+    THIRD(5, Money.createReward(1_500_000L), (matchCount, matchBonus) -> matchCount == 5 && !matchBonus),
+    FOURTH(4, Money.createReward(50_000L), (matchCount, matchBonus) -> matchCount == 4),
+    FIFTH(3, Money.createReward(5_000L), (matchCount, matchBonus) -> matchCount == 3),
+    NONE(0, Money.createReward(0L), (matchCount, matchBonus) -> matchCount <= 2);
 
     private final int matchCount;
     private final Money reward;
@@ -32,7 +32,7 @@ public enum Rank {
     }
 
     public static Money calculateReward(List<Rank> ranks) {
-        Money reward = new Money(0L);
+        Money reward = Money.createReward(0L);
         for (Rank rank : ranks) {
             reward = reward.plus(rank.reward);
         }

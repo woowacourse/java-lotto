@@ -2,23 +2,58 @@ package lotto.domain.vo;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.MessageFormat;
 import java.util.Objects;
 
 public class Money {
 
-    private static final int MINIMUM_MONEY = 0;
+    private static final int OVER_LIMIT_MONEY = 100_000;
+    private static final int UNDER_LIMIT_MONEY = 1_000;
+    private static final int MINIMUM_REWARD = 0;
     private static final int DECIMAL_PLACE = 2;
 
     private final long value;
 
-    public Money(long value) {
-        validatePositive(value);
+    private Money(long value) {
         this.value = value;
     }
 
-    private void validatePositive(long value) {
-        if (value < MINIMUM_MONEY) {
-            throw new IllegalArgumentException("돈은 0이상이어야 한다.");
+    public static Money createMoney(long value) {
+        validateMoneyRange(value);
+        return new Money(value);
+    }
+
+    private static void validateMoneyRange(long money) {
+        validateOverLimit(money);
+        validateUnderLimit(money);
+    }
+
+    private static void validateOverLimit(long money) {
+        if (money > OVER_LIMIT_MONEY) {
+            String exceptionMessage = MessageFormat.format("입력금액은 {0}을 넘을 수 없다.", OVER_LIMIT_MONEY);
+            throw new IllegalArgumentException(exceptionMessage);
+        }
+    }
+
+    private static void validateUnderLimit(long money) {
+        if (money < UNDER_LIMIT_MONEY) {
+            String exceptionMessage = MessageFormat.format("입력금액은 {0} 이상이어야 한다.", UNDER_LIMIT_MONEY);
+            throw new IllegalArgumentException(exceptionMessage);
+        }
+    }
+
+    public static Money createReward(long value) {
+        validateRewardRange(value);
+        return new Money(value);
+    }
+
+    private static void validateRewardRange(long value) {
+        validatePositive(value);
+    }
+
+    private static void validatePositive(long value) {
+        if (value < MINIMUM_REWARD) {
+            throw new IllegalArgumentException("상금은 0이상이어야 한다.");
         }
     }
 

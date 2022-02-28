@@ -15,15 +15,14 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void run() {
-        int money = InputView.inputMoney();
+        Money totalMoney = Money.createMoney(InputView.inputMoney());
         int manualLottoCount = InputView.inputManualLottoCount();
-
-        validateManualLottoCountOutOfMoney(money, manualLottoCount);
+        Money manualMoney = Money.createMoney(manualLottoCount * Store.LOTTO_PRICE);
+        validateManualLottoCountOutOfMoney(totalMoney, manualMoney);
 
         List<Lotto> manualLottos = InputView.inputManualLottos(manualLottoCount);
 
-        int subtractMoney = money - 1000 * manualLottoCount;
-        List<Lotto> automaticLottos = buyLottos(subtractMoney);
+        List<Lotto> automaticLottos = buyLottos(totalMoney.minus(manualMoney));
         manualLottos.addAll(automaticLottos);
         Lottos lottos = new Lottos(manualLottos);
         OutputView.printLottoCount(manualLottoCount, lottos.getLottos().size() - manualLottoCount);
@@ -32,17 +31,17 @@ public class LottoController {
         List<Rank> ranks = lottos.matchRanks(createWinnerLotto(winnerNumbers(), bonusNumber()));
         OutputView.printRanks(ranks);
 
-        Rate rate = calculateRate(money, ranks);
+        Rate rate = calculateRate(totalMoney, ranks);
         OutputView.printRate(rate);
     }
 
-    private void validateManualLottoCountOutOfMoney(int money, int manualLottoCount) {
-        if (money < manualLottoCount * 1000) {
+    private void validateManualLottoCountOutOfMoney(Money totalMoney, Money anotherMoney) {
+        if (anotherMoney.isGreaterThan(totalMoney)) {
             throw new IllegalArgumentException("수동으로 구매할 로또 수가 구매 가능한 로또 수보다 크다.");
         }
     }
 
-    private List<Lotto> buyLottos(int money) {
+    private List<Lotto> buyLottos(Money money) {
         Store store = new Store(money);
         return store.buyLottos();
     }
@@ -59,9 +58,9 @@ public class LottoController {
         return InputView.inputBonusNumber();
     }
 
-    private Rate calculateRate(int money, List<Rank> ranks) {
+    private Rate calculateRate(Money money, List<Rank> ranks) {
         Money reward = Rank.calculateReward(ranks);
-        return new Rate(reward.divide(new Money(money)));
+        return new Rate(reward.divide(money));
     }
 
 }

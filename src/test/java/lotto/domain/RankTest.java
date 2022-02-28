@@ -46,7 +46,7 @@ class RankTest {
     void getFirstReward(List<Rank> ranks) {
         Money money = Rank.calculateReward(ranks);
         long totalReward = ranks.stream().mapToLong(rank -> rank.getReward().getValue()).sum();
-        assertThat(money).isEqualTo(new Money(totalReward));
+        assertThat(money).isEqualTo(Money.createReward(totalReward));
     }
 
     private static Stream<List<Rank>> ranks() {
@@ -66,6 +66,6 @@ class RankTest {
         }
         Money money = Rank.calculateReward(ranks);
 
-        assertThat(money).isEqualTo(new Money(Rank.FIRST.getReward().getValue() * maxCount));
+        assertThat(money).isEqualTo(Money.createReward(Rank.FIRST.getReward().getValue() * maxCount));
     }
 }
