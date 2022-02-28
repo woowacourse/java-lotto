@@ -8,6 +8,7 @@ public class InputView {
     private static final String ASK_MONEY_MESSAGE = "구입금액을 입력해주세요.";
 
     private final static Scanner scanner = new Scanner(System.in);
+    private static final String ASK_MANUAL_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
 
     public static String askMoneyInput() {
         System.out.println(ASK_MONEY_MESSAGE);
@@ -24,4 +25,8 @@ public class InputView {
         return scanner.nextLine().trim();
     }
 
+    public static String askManualCountInput() {
+        System.out.println(ASK_MANUAL_COUNT_MESSAGE);
+        return scanner.nextLine().trim();
+    }
 }

@@ -4,6 +4,7 @@ import static lotto.view.InputView.*;
 import static lotto.view.OutputView.*;
 
 import lotto.domain.BonusNumber;
+import lotto.domain.ManualCount;
 import lotto.strategy.LottoBuyStrategy;
 import lotto.domain.LottoResult;
 import lotto.domain.Lotto;
@@ -11,6 +12,7 @@ import lotto.domain.LottoDto;
 import lotto.domain.Money;
 import lotto.domain.ChoiceNumber;
 import lotto.domain.WinningNumber;
+import lotto.view.InputView;
 
 public class LottoController {
     private final LottoBuyStrategy lottoBuyStrategy;
@@ -22,6 +24,7 @@ public class LottoController {
 
     public void start() {
         Money money = initMoney();
+        ManualCount manualCount = initManualCount(money);
         initLotto(money);
         WinningNumber winningNumber = setWinningNumber();
         findAndPrintResult(winningNumber);
@@ -34,6 +37,16 @@ public class LottoController {
         } catch (IllegalArgumentException exception) {
             printErrorMessage(exception);
             return initMoney();
+        }
+    }
+
+    private ManualCount initManualCount(Money money) {
+        try {
+            String inputValue = InputView.askManualCountInput();
+            return new ManualCount(money, inputValue);
+        } catch (IllegalArgumentException exception) {
+            printErrorMessage(exception);
+            return initManualCount(money);
         }
     }
 
