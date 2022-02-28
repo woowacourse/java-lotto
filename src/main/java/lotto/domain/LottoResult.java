@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -10,9 +11,9 @@ public class LottoResult {
 
     public LottoResult() {
         this.result = new LinkedHashMap<>();
-        for (LottoRank lottoRank : LottoRank.values()) {
-            result.put(lottoRank, INIT_VALUE);
-        }
+        Arrays.stream(LottoRank.values())
+                .filter(lottoRank -> lottoRank != LottoRank.NOTHING)
+                .forEach(lottoRank -> result.put(lottoRank, INIT_VALUE));
     }
 
     public void add(LottoRank lottoRank) {

@@ -19,7 +19,7 @@ public class Lotto {
     public LottoResult computeResult(WinningNumber winningNumber) {
         lotto.stream()
                 .map(winningNumber::findLottoRank)
-                .filter(Objects::nonNull)
+                .filter(lottoRank -> lottoRank != LottoRank.NOTHING)
                 .forEach(result::add);
         return result;
     }

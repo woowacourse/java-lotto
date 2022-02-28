@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
+    NOTHING(0, 0),
     FIFTH(3, 5000),
     FOURTH(4, 50000),
     THIRD(5, 1500000),
@@ -32,7 +33,7 @@ public enum LottoRank {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.getCorrectNumber() == sameCount)
                 .findFirst()
-                .orElse(null);
+                .orElse(NOTHING);
     }
 
     private static LottoRank checkSecondOrThird(boolean bonus) {
