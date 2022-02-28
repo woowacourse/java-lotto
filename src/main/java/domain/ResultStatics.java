@@ -1,5 +1,7 @@
 package domain;
 
+import static constant.LottoConstant.NUMBER_FOR_BONUS_CHECK;
+
 public enum ResultStatics {
 
 	NOTHING(0, 0, false),
@@ -26,10 +28,10 @@ public enum ResultStatics {
 		if (numberMatches == 4) {
 			return FOUR;
 		}
-		if (numberMatches == 5 && !hitBonus) {
+		if (numberMatches == NUMBER_FOR_BONUS_CHECK && !hitBonus) {
 			return FIVE;
 		}
-		if (numberMatches == 5 && hitBonus) {
+		if (numberMatches == NUMBER_FOR_BONUS_CHECK && hitBonus) {
 			return FIVE_AND_BONUS;
 		}
 		if (numberMatches == 6) {

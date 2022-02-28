@@ -25,7 +25,7 @@ public class LottoGameController {
 
 	private void purchaseLotto(Money money, int manualCount) {
 		money.canPurchase(manualCount);
-		int randomCount = money.calculateCount() - manualCount;
+		int randomCount = money.calculateTotalCount() - manualCount;
 
 		purchaseManualLotto(manualCount);
 		purchaseRandomLotto(randomCount);

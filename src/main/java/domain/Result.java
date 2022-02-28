@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Result {
 	private Map<ResultStatics, Integer> results;
-	private float profitRate = 0;
+	private float profitRate;
 
 	public Result() {
 		results = new HashMap<>();

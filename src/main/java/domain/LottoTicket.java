@@ -4,7 +4,7 @@ import static constant.LottoConstant.NUMBER_FOR_BONUS_CHECK;
 
 public class LottoTicket {
 
-	LottoNumbers numbers;
+	private final LottoNumbers numbers;
 
 	public LottoTicket(LottoNumbers numbers) {
 		this.numbers = numbers;

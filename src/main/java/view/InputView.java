@@ -13,6 +13,8 @@ public class InputView {
 	private static final String MUST_BE_POSITIVE_INTEGER = START_ERROR + "입력은 양의 정수만 허용됩니다.";
 	private static final String MUST_NOT_EMPTY = START_ERROR + "입력은 빈 입력일 수 없습니다.";
 
+	private InputView(){}
+
 	public static int inputMoney() {
 		System.out.println("구입금액을 입력해 주세요.");
 		return inputSingleNumber();

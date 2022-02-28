@@ -10,7 +10,7 @@ public class LottoNumber {
 
 	private static final String NUMBER_IN_RANGE = START_ERROR + MIN_NUMBER + "이상 " + MAX_NUMBER + "이하의 숫자만 허용됩니다.";
 
-	int number;
+	private final int number;
 
 	public LottoNumber(int number) {
 		validateNumberInRange(number);

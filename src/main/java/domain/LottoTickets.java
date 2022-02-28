@@ -16,10 +16,6 @@ public class LottoTickets {
 		}
 	}
 
-	public List<LottoTicket> getLottoTickets() {
-		return Collections.unmodifiableList(this.lottoTickets);
-	}
-
 	public Result generateResult(AnswerLotto answerLotto) {
 		Result results = new Result();
 		for (LottoTicket lotto : this.lottoTickets) {
@@ -30,4 +26,9 @@ public class LottoTickets {
 
 		return results;
 	}
+
+	public List<LottoTicket> getLottoTickets() {
+		return Collections.unmodifiableList(this.lottoTickets);
+	}
+
 }
