@@ -11,10 +11,12 @@ public class LottoResult {
 
     public static LottoResult create(Lottos lottos, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         LottoResult lottoResult = new LottoResult();
-        lottos.getLottos().forEach(lotto -> {
+
+        for (Lotto lotto: lottos.getLottos()) {
             Rank currentRank = lottoResult.match(lotto, winningNumbers, bonusNumber);
             lottoResult.result.put(currentRank, lottoResult.getRankCount(currentRank) + 1);
-        });
+        }
+
         return lottoResult;
     }
 
