@@ -52,7 +52,7 @@ public class Money {
     }
 
     private void validateManualCount(int manualCount) {
-        if (manualCount < getPurchasableNumber(amount / LOTTO_TICKET_PRICE)) {
+        if (manualCount > getPurchasableNumber(LOTTO_TICKET_PRICE)) {
             throw new IllegalArgumentException("구매하려는 로또가 보유 금액을 초과했습니다.");
         }
     }
