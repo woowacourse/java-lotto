@@ -28,7 +28,10 @@ public class LottoController {
 
     private List<Lotto> buyLottos(Money money) {
         Store store = new Store(money);
-        return store.buyLottos(InputView.inputPassivityLottoNumbers(InputView.inputPassivityLottoAmount()));
+        int amount = InputView.inputPassivityLottoAmount();
+        List<Lotto> lottos = store.buyLottos(InputView.inputPassivityLottoNumbers(amount));
+        OutputView.printLottosSize(amount, lottos.size());
+        return lottos;
     }
 
     private WinnerLotto createWinnerLotto(List<LottoNumber> winnerLottoNumbers, LottoNumber bonusLottoNumber) {
