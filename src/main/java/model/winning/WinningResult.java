@@ -2,24 +2,27 @@ package model.winning;
 
 import java.util.Map;
 
+import model.Money;
+
 public class WinningResult {
-    private final Map<Rank, Integer> statistics;
+    private final Map<Rank, Integer> winningResult;
 
-    public WinningResult(final Map<Rank, Integer> statistics) {
-        this.statistics = statistics;
+    public WinningResult(final Map<Rank, Integer> winningResult) {
+        this.winningResult = winningResult;
     }
 
-    public Map<Rank, Integer> getStatistics() {
-        return statistics;
+    public Map<Rank, Integer> getWinningResult() {
+        return winningResult;
     }
 
-    public Double getRateOfReturn(final int money) {
+    public Double getRateOfReturn(final Money money) {
+        int totalInsertMoney = money.getMoney();
         double totalReturn = calculateTotalReturn();
-        return totalReturn / (double) money;
+        return totalReturn / (double) totalInsertMoney;
     }
 
     private int calculateTotalReturn() {
-        return statistics.entrySet().stream()
+        return winningResult.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();
     }
