@@ -18,6 +18,10 @@ public class Number {
         this.value = number;
     }
 
+    public int getValue() {
+        return value;
+    }
+
     private static int toInt(final String text) {
         try {
             return Integer.parseInt(text);
@@ -30,10 +34,6 @@ public class Number {
         if (MIN_VALUE > number || number > MAX_VALUE) {
             throw new IllegalArgumentException(MIN_VALUE + "부터 " + MAX_VALUE + "의 숫자여야 합니다.");
         }
-    }
-
-    public int getValue() {
-        return value;
     }
 
     @Override

@@ -16,6 +16,14 @@ public class Money {
         this.value = number;
     }
 
+    public double getRateOfProfit(long totalMoney) {
+        return Math.round((double)totalMoney / value * ROUND_OFF_NUMBER) / ROUND_OFF_NUMBER;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
     private int toInt(String text) {
         try {
             return Integer.parseInt(text);
@@ -39,13 +47,5 @@ public class Money {
         if (number % Lotto.PRICE != REMAINDER) {
             throw new IllegalArgumentException(String.format("%d으로 나누어 떨어져야 합니다.", Lotto.PRICE));
         }
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public double getRateOfProfit(long totalMoney) {
-        return Math.round((double)totalMoney / value * ROUND_OFF_NUMBER) / ROUND_OFF_NUMBER;
     }
 }

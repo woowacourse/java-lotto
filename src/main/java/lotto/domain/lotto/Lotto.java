@@ -29,7 +29,9 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers.stream().map(Number::new).collect(Collectors.toSet());
+        this.numbers = numbers.stream()
+            .map(Number::new)
+            .collect(Collectors.toSet());
     }
 
     public static Lotto auto() {
@@ -40,6 +42,14 @@ public class Lotto {
     public static Lotto of(String text) {
         String[] splitText = text.split(TEXT_DELIMITER);
         return new Lotto(toNumberList(splitText));
+    }
+
+    public boolean contains(Number number) {
+        return numbers.contains(number);
+    }
+
+    public Set<Number> getNumbers() {
+        return numbers;
     }
 
     private static List<Integer> toNumberList(String[] splitText) {
@@ -57,13 +67,5 @@ public class Lotto {
         if (numbers.size() != SIZE) {
             throw new IllegalArgumentException("중복되지 않은 6개의 숫자가 필요합니다.");
         }
-    }
-
-    public boolean contains(Number number) {
-        return numbers.contains(number);
-    }
-
-    public Set<Number> getNumbers() {
-        return numbers;
     }
 }
