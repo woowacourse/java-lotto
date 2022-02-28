@@ -3,7 +3,7 @@ import domain.Money;
 import view.InputView;
 import view.OutputView;
 
-public class LottoController {
+public class Application {
 
     public static void main(String[] args) {
         LottoGame lottoGame = new LottoGame();
