@@ -17,9 +17,9 @@ public class RankCount {
     }
 
     private void calculateRank(Lottos lottos, WinningNumbers winningNumbers) {
-        for (Lotto lotto : lottos.getLottos()) {
-            increaseCount(lotto.getRank(winningNumbers));
-        }
+        lottos.getLottos().stream()
+                .map(lotto -> lotto.getRank(winningNumbers))
+                .forEach(this::increaseCount);
     }
 
     private void increaseCount(Rank rank) {
