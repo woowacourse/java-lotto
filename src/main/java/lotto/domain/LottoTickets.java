@@ -9,16 +9,18 @@ import java.util.stream.Collectors;
 import lotto.domain.lottoticket.LottoTicket;
 
 final public class LottoTickets {
-    private final List<LottoTicket> value = new ArrayList<>();
+    private final List<LottoTicket> value;
 
     private LottoTickets(int count) {
-        generateTickets(count);
+        value = generateTickets(count);
     }
 
-    private void generateTickets(int count) {
+    private List<LottoTicket> generateTickets(int count) {
+        final List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            value.add(LottoTicket.generateRandom());
+            tickets.add(LottoTicket.generateRandom());
         }
+        return Collections.unmodifiableList(tickets);
     }
 
     public static LottoTickets generateRandomByCount(int count) {
@@ -34,7 +36,7 @@ final public class LottoTickets {
     }
 
     public List<LottoTicket> getValue() {
-        return Collections.unmodifiableList(value);
+        return value;
     }
 
     @Override

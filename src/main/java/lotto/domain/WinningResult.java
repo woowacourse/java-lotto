@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,23 +9,25 @@ import java.util.Objects;
 final public class WinningResult {
     private static final int INITIAL_COUNT = 0;
 
-    private final Map<Ranking, Integer> value = new HashMap<>();
+    private final Map<Ranking, Integer> value;
 
     public WinningResult(List<Ranking> rankings) {
-        initialMap();
-        putValues(rankings);
+        value = initialMap(rankings);
     }
 
-    private void initialMap() {
+    private Map<Ranking, Integer> initialMap(List<Ranking> rankings) {
+        final Map<Ranking, Integer> result = new HashMap<>();
         for (Ranking ranking : Ranking.values()) {
-            value.put(ranking, INITIAL_COUNT);
+            result.put(ranking, INITIAL_COUNT);
         }
+        putValues(result, rankings);
+        return Collections.unmodifiableMap(result);
     }
 
-    private void putValues(List<Ranking> rankings) {
+    private void putValues(Map<Ranking, Integer> result, List<Ranking> rankings) {
         for (Ranking ranking : rankings) {
-            int count = value.get(ranking);
-            value.put(ranking, ++count);
+            int count = result.get(ranking);
+            result.put(ranking, ++count);
         }
     }
 
