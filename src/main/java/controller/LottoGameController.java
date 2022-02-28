@@ -13,7 +13,7 @@ public class LottoGameController {
 		try {
 			int money = InputView.inputMoney();
 			int manualLottoSize = InputView.inputManualLottoSize();
-			LottoTickets lottoTickets = generateLottoTickets(money);
+			LottoTickets lottoTickets = generateLottoTickets(money, manualLottoSize);
 			List<Integer> lastWeekAnswerNumbers = InputView.inputAnsNumbers();
 			LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
 			AnswerLotto answerLotto = new AnswerLotto(lastWeekAnswerNumbers, bonusNumber);
@@ -23,8 +23,8 @@ public class LottoGameController {
 		}
 	}
 
-	private static LottoTickets generateLottoTickets(int money) {
-		LottoTickets lottoTickets = new LottoTickets(money);
+	private static LottoTickets generateLottoTickets(int money, int manualLottoSize) {
+		LottoTickets lottoTickets = new LottoTickets(money, manualLottoSize);
 		OutputView.printLottoTickets(lottoTickets);
 		return lottoTickets;
 	}
