@@ -27,8 +27,8 @@ public class ResultTest {
             void it_create_ok() {
                 Result result = new Result();
 
-                for (WinningPrice value : WinningPrice.values()) {
-                    assertThat(result.getCount(value)).isEqualTo(0);
+                for (Rank rank : Rank.values()) {
+                    assertThat(result.getCount(rank)).isEqualTo(0);
                 }
             }
         }
@@ -47,9 +47,9 @@ public class ResultTest {
             void it_add_count() {
                 Result result = new Result();
 
-                result.add(WinningPrice.All);
+                result.add(Rank.First);
 
-                assertThat(result.getCount(WinningPrice.All)).isEqualTo(1);
+                assertThat(result.getCount(Rank.First)).isEqualTo(1);
             }
         }
 
@@ -62,10 +62,10 @@ public class ResultTest {
             void it_add_count() {
                 Result result = new Result();
 
-                result.add(WinningPrice.All);
-                result.add(WinningPrice.All);
+                result.add(Rank.First);
+                result.add(Rank.First);
 
-                assertThat(result.getCount(WinningPrice.All)).isEqualTo(2);
+                assertThat(result.getCount(Rank.First)).isEqualTo(2);
             }
         }
     }
@@ -84,7 +84,7 @@ public class ResultTest {
             @DisplayName("당첨금액의 합과 비교하여 수익률을 반환한다.")
             void it_returns_rate_of_profit(int money, double expected) {
                 Result result = new Result();
-                result.add(WinningPrice.Three);
+                result.add(Rank.Fifth);
                 assertThat(result.getRateOfProfit(new Money(money))).isEqualTo(expected);
             }
 

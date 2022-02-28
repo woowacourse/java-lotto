@@ -26,7 +26,7 @@ public class LottosTest {
             @ParameterizedTest
             @MethodSource("provideSource")
             @DisplayName("Result를 반환한다.")
-            void It_create_result(Lotto lotto, WinningPrice expected) {
+            void It_create_result(Lotto lotto, Rank expected) {
                 final Lottos lottos = new Lottos(List.of(lotto));
 
                 final Lotto winningLotto = Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6));
@@ -40,11 +40,11 @@ public class LottosTest {
 
             Stream<Arguments> provideSource() {
                 return Stream.of(
-                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6)), WinningPrice.All),
-                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 5, 7)), WinningPrice.FiveAndBonus),
-                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 5, 45)), WinningPrice.Five),
-                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 44, 45)), WinningPrice.Four),
-                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 43, 44, 45)), WinningPrice.Three)
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6)), Rank.First),
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 5, 7)), Rank.Second),
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 5, 45)), Rank.Third),
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 44, 45)), Rank.Fourth),
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 43, 44, 45)), Rank.Fifth)
                 );
             }
         }

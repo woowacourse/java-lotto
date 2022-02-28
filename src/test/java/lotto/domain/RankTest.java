@@ -11,7 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class WinningPriceTest {
+public class RankTest {
 
     @Nested
     @DisplayName("멤버 변수로 객체를 찾는 기능은")
@@ -25,19 +25,19 @@ public class WinningPriceTest {
             @ParameterizedTest
             @MethodSource("provideSource")
             @DisplayName("Optional 객체를 반환한다.")
-            void it_create_ok(int count, boolean containBonus, WinningPrice expected) {
-                Optional<WinningPrice> winningPrice = WinningPrice.of(count, containBonus);
+            void it_create_ok(int count, boolean containBonus, Rank expected) {
+                Optional<Rank> winningPrice = Rank.of(count, containBonus);
 
                 Assertions.assertThat(winningPrice.get()).isEqualTo(expected);
             }
 
             Stream<Arguments> provideSource() {
                 return Stream.of(
-                        Arguments.of(6, false, WinningPrice.All),
-                        Arguments.of(5, true, WinningPrice.FiveAndBonus),
-                        Arguments.of(5, false, WinningPrice.Five),
-                        Arguments.of(4, false, WinningPrice.Four),
-                        Arguments.of(3, false, WinningPrice.Three)
+                        Arguments.of(6, false, Rank.First),
+                        Arguments.of(5, true, Rank.Second),
+                        Arguments.of(5, false, Rank.Third),
+                        Arguments.of(4, false, Rank.Fourth),
+                        Arguments.of(3, false, Rank.Fifth)
                 );
             }
         }

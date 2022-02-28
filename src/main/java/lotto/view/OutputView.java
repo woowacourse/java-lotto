@@ -6,7 +6,7 @@ import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Number;
 import lotto.domain.Result;
-import lotto.domain.WinningPrice;
+import lotto.domain.Rank;
 
 public class OutputView {
 
@@ -58,17 +58,17 @@ public class OutputView {
     private static void printMatchResult(Result result) {
         System.out.printf(MATCH_RESULT_MESSAGE_PREFIX);
 
-        for (WinningPrice value : WinningPrice.values()) {
-            String bonusBallMessage = getBonusBallMessage(value);
+        for (Rank rank : Rank.values()) {
+            String bonusBallMessage = getBonusBallMessage(rank);
 
             System.out.printf(MATCH_RESULT_MESSAGE,
-                    value.getCount(), bonusBallMessage, value.getPrice(), result.getCount(value));
+                    rank.getCount(), bonusBallMessage, rank.getPrice(), result.getCount(rank));
         }
     }
 
-    private static String getBonusBallMessage(WinningPrice value) {
+    private static String getBonusBallMessage(Rank rank) {
         String bonusBallMessage = NO_BONUS_BALL;
-        if (value.isContainBonus()) {
+        if (rank.isContainBonus()) {
             bonusBallMessage = BONUS_BALL_MESSAGE;
         }
 

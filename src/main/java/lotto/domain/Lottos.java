@@ -26,7 +26,7 @@ public class Lottos {
         Result result = new Result();
 
         for (Lotto lotto : lottos) {
-            Optional<WinningPrice> winningPrice = winningNumbers.getWinningPrice(lotto);
+            Optional<Rank> winningPrice = winningNumbers.getRank(lotto);
             winningPrice.ifPresent(result::add);
         }
 

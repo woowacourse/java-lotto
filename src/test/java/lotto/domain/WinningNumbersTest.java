@@ -39,7 +39,7 @@ public class WinningNumbersTest {
 
     @Nested
     @DisplayName("당첨 순위를 알려주는 메소드는")
-    class GetWinningPrice {
+    class GetRank {
 
         @Nested
         @TestInstance(Lifecycle.PER_CLASS)
@@ -49,25 +49,25 @@ public class WinningNumbersTest {
             @ParameterizedTest
             @MethodSource("provideSource")
             @DisplayName("당첨 순위를 알려준다.")
-            void it_returns_winning_price(List<Integer> integers, WinningPrice key) {
+            void it_returns_winning_price(List<Integer> integers, Rank key) {
                 final Lotto winningLotto = Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6));
                 final Number bonusNumber = Number.getInstance(7);
                 final WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 
                 final Lotto lotto = Lotto.createByManual(integers);
 
-                assertThat(winningNumbers.getWinningPrice(lotto).get()).isEqualTo(key);
+                assertThat(winningNumbers.getRank(lotto).get()).isEqualTo(key);
             }
 
             Stream<Arguments> provideSource() {
                 return Stream.of(
-                        Arguments.of(List.of(1, 2, 3, 4, 5, 6), WinningPrice.All),
-                        Arguments.of(List.of(1, 2, 3, 4, 5, 7), WinningPrice.FiveAndBonus),
-                        Arguments.of(List.of(1, 2, 3, 4, 5, 44), WinningPrice.Five),
-                        Arguments.of(List.of(1, 2, 3, 4, 43, 44), WinningPrice.Four),
-                        Arguments.of(List.of(1, 2, 3, 42, 43, 44), WinningPrice.Three),
-                        Arguments.of(List.of(1, 2, 3, 4, 7, 44), WinningPrice.Four),
-                        Arguments.of(List.of(1, 2, 3, 7, 43, 44), WinningPrice.Three)
+                        Arguments.of(List.of(1, 2, 3, 4, 5, 6), Rank.First),
+                        Arguments.of(List.of(1, 2, 3, 4, 5, 7), Rank.Second),
+                        Arguments.of(List.of(1, 2, 3, 4, 5, 44), Rank.Third),
+                        Arguments.of(List.of(1, 2, 3, 4, 43, 44), Rank.Fourth),
+                        Arguments.of(List.of(1, 2, 3, 42, 43, 44), Rank.Fifth),
+                        Arguments.of(List.of(1, 2, 3, 4, 7, 44), Rank.Fourth),
+                        Arguments.of(List.of(1, 2, 3, 7, 43, 44), Rank.Fifth)
                 );
             }
         }
