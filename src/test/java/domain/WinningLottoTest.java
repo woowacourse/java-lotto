@@ -35,7 +35,7 @@ public class WinningLottoTest {
     void createWinningLottoWithDuplicateBonusNumberShouldFail() {
         assertThatThrownBy(() -> new WinningLotto(lotto, new LottoNumber(1)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageMatching("보너스 번호는 로또 번호와 중복될 수 없습니다.");
+                .hasMessage("보너스 번호는 로또 번호와 중복될 수 없습니다.");
     }
 
     @Test

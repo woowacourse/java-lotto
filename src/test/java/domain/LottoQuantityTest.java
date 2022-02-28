@@ -25,6 +25,6 @@ public class LottoQuantityTest {
     void createLottoQuantityWithNegativeOrZeroShouldFail(int lottoQuantity) {
         assertThatThrownBy(() -> new LottoQuantity(lottoQuantity))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageMatching("개수는 1 보다 작을 수 없습니다.");
+                .hasMessage("개수는 1 보다 작을 수 없습니다.");
     }
 }
