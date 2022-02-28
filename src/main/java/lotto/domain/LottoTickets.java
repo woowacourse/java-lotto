@@ -1,11 +1,11 @@
 package lotto.domain;
 
+import static lotto.domain.LottoTicket.LOTTO_NUMBER_SIZE;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
-
-    private static final int LOTTO_NUMBER_SIZE = 6;
 
     private final List<LottoTicket> lottoTickets;
 
