@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.receiver.LottoReceiver;
@@ -11,7 +11,7 @@ public class Lotto {
     private final List<LottoNumber> lotto;
 
     private Lotto(List<LottoNumber> lotto) {
-        this.lotto = Collections.unmodifiableList(lotto);
+        this.lotto = new ArrayList<>(lotto);
     }
 
     public static Lotto generateLottoByAuto() {
