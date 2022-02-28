@@ -19,6 +19,11 @@ public class InputView {
         return new Money(stringToInt(validateBlank(SCANNER.nextLine())));
     }
 
+    public static int inputPassivityLottoAmount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return stringToInt(validateBlank(SCANNER.nextLine()));
+    }
+
     public static List<LottoNumber> inputWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return convertToNumbers(validateBlank(SCANNER.nextLine()));
