@@ -2,8 +2,8 @@ package view;
 
 import static java.lang.System.out;
 import static model.LottoRank.SECOND;
-import static model.LottoRank.values;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.Lotto;
@@ -24,9 +24,8 @@ public class OutputView {
 
     public static void printStatistics(WinningStatistics winningStatistics, LottoPurchasingMoney inputLottoPurchasingMoney) {
         out.printf("당첨 통계%n---------%n");
-        for (LottoRank lottoRank : values()) {
-            printWinningResult(winningStatistics, lottoRank);
-        }
+        Arrays.stream(LottoRank.values())
+                .forEach(lottoRank -> printWinningResult(winningStatistics, lottoRank));
         printEarningsResult(winningStatistics, inputLottoPurchasingMoney);
     }
 
