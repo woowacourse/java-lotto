@@ -1,6 +1,7 @@
 package controller;
 
 import domain.*;
+import domain.strategy.RandomLottoNumberStrategy;
 import view.InputView;
 import view.OutputView;
 
@@ -22,7 +23,8 @@ public class LottoController {
         lottoMachine.validateMoney(money);
         int manualCount = calculateManualCount(money);
         List<List<Integer>> lottoNumbers = getLottoNumbers(money, manualCount);
-        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(money, lottoNumbers);
+        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(money, lottoNumbers,
+                new RandomLottoNumberStrategy());
 
         OutputView.printPurchasedLottoTicketNumber(lottoTickets.size(), manualCount);
         OutputView.printPurchasedLottoTickets(lottoTickets);

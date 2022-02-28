@@ -1,5 +1,6 @@
 package domain;
 
+import domain.strategy.LottoNumberStrategy;
 import domain.strategy.RandomLottoNumberStrategy;
 
 import java.util.*;
@@ -14,17 +15,18 @@ public class LottoMachine {
     private static final int DEFAULT_VALUE = 0;
     private static final int INCREASE_VALUE = 1;
 
-    public List<LottoTicket> purchaseLottoTickets(Money money, List<List<Integer>> lottoNumbers) {
+    public List<LottoTicket> purchaseLottoTickets(Money money, List<List<Integer>> lottoNumbers,
+                                                  LottoNumberStrategy lottoNumberStrategy) {
         int autoCount = money.getPurchasableNumber() - lottoNumbers.size();
-        
+        validateInsertAmount(money);
         List<LottoTicket> lottoTickets = new ArrayList<>();
         lottoTickets.addAll(purchaseManually(lottoNumbers));
-        lottoTickets.addAll(purchaseAutomatically(autoCount, new RandomLottoNumberStrategy()));
+        lottoTickets.addAll(purchaseAutomatically(autoCount, lottoNumberStrategy));
 
         return lottoTickets;
     }
 
-    private List<LottoTicket> purchaseAutomatically(int count, RandomLottoNumberStrategy strategy) {
+    private List<LottoTicket> purchaseAutomatically(int count, LottoNumberStrategy strategy) {
         return IntStream.range(0, count)
                 .mapToObj(index -> new LottoTicket(strategy.generate()))
                 .collect(Collectors.toList());
