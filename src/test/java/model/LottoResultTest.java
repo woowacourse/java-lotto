@@ -1,6 +1,7 @@
 package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -26,11 +27,13 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(new Money(4000),
                 List.of(LottoRank.FIRST, LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD));
 
-        assertThat(lottoResult.getCountByRank(LottoRank.FIRST)).isEqualTo(2);
-        assertThat(lottoResult.getCountByRank(LottoRank.SECOND)).isEqualTo(1);
-        assertThat(lottoResult.getCountByRank(LottoRank.THIRD)).isEqualTo(1);
-        assertThat(lottoResult.getCountByRank(LottoRank.FOURTH)).isEqualTo(0);
-        assertThat(lottoResult.getCountByRank(LottoRank.FIFTH)).isEqualTo(0);
-        assertThat(lottoResult.getCountByRank(LottoRank.NOTHING)).isEqualTo(0);
+        assertAll("countRank",
+                () -> assertThat(lottoResult.getCountByRank(LottoRank.FIRST)).isEqualTo(2),
+                () -> assertThat(lottoResult.getCountByRank(LottoRank.SECOND)).isEqualTo(1),
+                () -> assertThat(lottoResult.getCountByRank(LottoRank.THIRD)).isEqualTo(1),
+                () -> assertThat(lottoResult.getCountByRank(LottoRank.FOURTH)).isEqualTo(0),
+                () -> assertThat(lottoResult.getCountByRank(LottoRank.FIFTH)).isEqualTo(0),
+                () -> assertThat(lottoResult.getCountByRank(LottoRank.NOTHING)).isEqualTo(0)
+        );
     }
 }

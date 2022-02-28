@@ -3,6 +3,7 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import exception.DuplicatedLottoNumbersException;
 import exception.InvalidLottoNumbersSizeException;
@@ -47,8 +48,11 @@ public class LottoTest {
     @DisplayName("로또 번호에 숫자 포함 여부 테스트")
     void contains() {
         Lotto lotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.contains(new LottoNumber(4))).isTrue();
-        assertThat(lotto.contains(new LottoNumber(9))).isFalse();
+        assertAll("lotto",
+                () -> assertThat(lotto.contains(new LottoNumber(1))).isTrue(),
+                () -> assertThat(lotto.contains(new LottoNumber(6))).isTrue(),
+                () -> assertThat(lotto.contains(new LottoNumber(9))).isFalse()
+        );
     }
 
     @Test
