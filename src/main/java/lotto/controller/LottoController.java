@@ -20,6 +20,8 @@ public class LottoController {
 
         validateManualLottoCountOutOfMoney(money, manualLottoCount);
 
+        List<Lotto> manualLottos = InputView.inputManualLottos(manualLottoCount);
+
         Lottos lottos = new Lottos(buyLottos(money));
         OutputView.printLottos(lottos.getLottos());
 

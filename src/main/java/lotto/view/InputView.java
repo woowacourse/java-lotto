@@ -1,11 +1,9 @@
 package lotto.view;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import lotto.domain.Lotto;
 import lotto.domain.vo.LottoNumber;
 
 public class InputView {
@@ -30,6 +28,17 @@ public class InputView {
         int inputNumber = validateNumber(input);
         validateNotNegative(inputNumber);
         return inputNumber;
+    }
+
+    public static List<Lotto> inputManualLottos(int manualLottoCount) {
+        System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            String input = SCANNER.nextLine();
+            validateBlank(input);
+            lottos.add(new Lotto(convertToNumbers(input)));
+        }
+        return lottos;
     }
 
     public static List<LottoNumber> inputWinnerNumbers() {
