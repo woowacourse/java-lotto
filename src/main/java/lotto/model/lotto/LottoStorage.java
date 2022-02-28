@@ -9,10 +9,10 @@ import lotto.model.result.WinningResult;
 import lotto.model.winningnumber.LottoWinningNumberResponse;
 
 public class LottoStorage {
-    private final List<Lotto> lottoStorage;
+    private final List<Lotto> lottoNumbers;
 
     public LottoStorage(LottoCount lottoCount) {
-        this.lottoStorage = store(lottoCount);
+        this.lottoNumbers = store(lottoCount);
     }
 
     private List<Lotto> store(LottoCount lottoCount) {
@@ -27,14 +27,15 @@ public class LottoStorage {
 
     public List<LottoResponse> getLottoStorage() {
         final List<LottoResponse> lottoResponses = new ArrayList<>();
-        lottoStorage.forEach(lotto -> lottoResponses.add(new LottoResponse(lotto.getNumbers())));
+        lottoNumbers.forEach(lotto -> lottoResponses.add(new LottoResponse(lotto.getNumbers())));
+
         return Collections.unmodifiableList(lottoResponses);
     }
 
     public WinningResult calcWinningNumber(BonusBallResponse bonusBallResponse,
                                            LottoWinningNumberResponse winningNumberResponse) {
         WinningResult winningResult = new WinningResult();
-        lottoStorage.forEach(lotto -> lotto.calcWinningNumber(winningResult, bonusBallResponse, winningNumberResponse));
+        lottoNumbers.forEach(lotto -> lotto.calcWinningNumber(winningResult, bonusBallResponse, winningNumberResponse));
         return winningResult;
     }
 }

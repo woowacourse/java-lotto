@@ -2,7 +2,6 @@ package lotto.model.lotto;
 
 import java.util.Set;
 
-import lotto.model.lotto.RandomLottoNumbersGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
