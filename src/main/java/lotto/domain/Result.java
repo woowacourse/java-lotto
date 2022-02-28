@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class Result {
@@ -11,7 +11,7 @@ public class Result {
     private final Map<LottoRanking, Integer> result;
 
     public Result() {
-        result = new HashMap<>();
+        result = new EnumMap<LottoRanking, Integer>(LottoRanking.class);
         for (LottoRanking value : LottoRanking.values()) {
             result.put(value, INIT_COUNT);
         }
