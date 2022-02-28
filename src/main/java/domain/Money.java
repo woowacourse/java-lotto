@@ -24,8 +24,8 @@ public class Money {
         return this.amount >= amount;
     }
 
-    public int getPurchasableNumber(int amount) {
-        return this.amount / amount;
+    public int getPurchasableNumber() {
+        return this.amount / LOTTO_TICKET_PRICE;
     }
 
     private void validateAmount(int amount) {
@@ -52,7 +52,7 @@ public class Money {
     }
 
     private void validateManualCount(int manualCount) {
-        if (manualCount > getPurchasableNumber(LOTTO_TICKET_PRICE)) {
+        if (manualCount > getPurchasableNumber()) {
             throw new IllegalArgumentException("구매하려는 로또가 보유 금액을 초과했습니다.");
         }
     }
