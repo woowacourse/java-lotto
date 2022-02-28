@@ -43,7 +43,7 @@ class WinningStatisticsTest {
         // given
         WinningStatistics winningStatistics = new WinningStatistics();
         LottoRank lottoRank = LottoRank.getRank(3, true);
-        int money = 10000;
+        LottoPurchasingMoney money = LottoPurchasingMoney.valueOf(10000);
 
         // when
         winningStatistics.put(lottoRank);

@@ -47,7 +47,7 @@ public class OutputView {
     }
 
     private static void printEarningsResult(WinningStatistics winningStatistics, LottoPurchasingMoney inputMoney) {
-        double earningsRate = winningStatistics.getEarningsRate(inputMoney.getAmount());
+        double earningsRate = winningStatistics.getEarningsRate(inputMoney);
         String result = String.format("총 수익률은 %.2f 입니다.", earningsRate);
         if (earningsRate < 1) {
             result = String.format("%s(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result);

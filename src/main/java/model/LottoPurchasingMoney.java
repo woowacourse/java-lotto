@@ -11,7 +11,7 @@ public class LottoPurchasingMoney {
 
     private LottoPurchasingMoney(int amount) {
         validateEnough(amount);
-        this.amount = amount;
+        this.amount = amount / LOTTO_PRICE * LOTTO_PRICE;
     }
 
     public static LottoPurchasingMoney valueOf(int amount) {

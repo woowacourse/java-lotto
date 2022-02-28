@@ -20,9 +20,9 @@ public class WinningStatistics {
         return winningStatistics.get(lottoRank);
     }
 
-    public double getEarningsRate(int money) {
+    public double getEarningsRate(LottoPurchasingMoney lottoPurchasingMoney) {
         long totalPrize = getTotalPrize();
-        return totalPrize / (double)money;
+        return totalPrize / (double)lottoPurchasingMoney.getAmount();
     }
 
     long getTotalPrize() {
