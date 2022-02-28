@@ -48,7 +48,7 @@ public class OutputView {
 
     private static void printLottoNumbers(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            List<LottoNumber> lottoNumbers = List.copyOf(lotto.getNumbers());
+            List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.getNumbers());
             lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
             System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(lottoNumbers)));
         }
