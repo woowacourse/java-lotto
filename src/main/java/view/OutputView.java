@@ -33,6 +33,7 @@ public class OutputView {
         String LottoNumbers = lotto.getLotto()
                 .stream()
                 .map(LottoNumber::getLottoNumber)
+                .sorted()
                 .map(String::valueOf)
                 .collect(Collectors.joining(DELIMITER));
 

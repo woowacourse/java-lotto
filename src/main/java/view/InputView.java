@@ -6,6 +6,7 @@ import domain.LottoNumber;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -38,10 +39,10 @@ public class InputView {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String input = scanner.nextLine();
         String[] numbers = input.split(DELIMITER);
-        List<LottoNumber> collect = Arrays.stream(numbers)
+        Set<LottoNumber> collect = Arrays.stream(numbers)
                 .map(Integer::parseInt)
                 .map(LottoNumber::of)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         return new Lotto(collect);
     }
 
