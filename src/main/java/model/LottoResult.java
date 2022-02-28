@@ -2,6 +2,7 @@ package model;
 
 import java.math.BigDecimal;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
@@ -37,7 +38,9 @@ public class LottoResult {
         return resultMap.get(rank);
     }
 
-    public void add(LottoRank rank) {
-        resultMap.put(rank, getCountByRank(rank) + 1);
+    public void initResultFrom(List<LottoRank> lottoRanks) {
+        for (LottoRank rank : lottoRanks) {
+            resultMap.put(rank, resultMap.get(rank) + 1);
+        }
     }
 }

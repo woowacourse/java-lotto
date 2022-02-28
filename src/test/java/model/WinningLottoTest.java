@@ -31,11 +31,11 @@ public class WinningLottoTest {
             List.of(1, 2, 3, 10, 11, 12));
     private static final Lotto NOTHING_PRIZE_LOTTO_NUMBERS = Lotto.of(
         List.of(1, 2, 9, 11, 12, 13));
-    private static final Money FIRST_PRIZE = LottoRank.FIRST.getPrize();
-    private static final Money SECOND_PRIZE = LottoRank.SECOND.getPrize();
-    private static final Money THIRD_PRIZE = LottoRank.THIRD.getPrize();
-    private static final Money FOURTH_PRIZE = LottoRank.FOURTH.getPrize();
-    private static final Money FIFTH_PRIZE = LottoRank.FIFTH.getPrize();
+    private static final Money FIRST_PRIZE = LottoRank.FIRST.multiplePrizeBy(1);
+    private static final Money SECOND_PRIZE = LottoRank.SECOND.multiplePrizeBy(1);
+    private static final Money THIRD_PRIZE = LottoRank.THIRD.multiplePrizeBy(1);
+    private static final Money FOURTH_PRIZE = LottoRank.FOURTH.multiplePrizeBy(1);
+    private static final Money FIFTH_PRIZE = LottoRank.FIFTH.multiplePrizeBy(1);
 
     private WinningLottoNumbers winningLottoNumbers;
 

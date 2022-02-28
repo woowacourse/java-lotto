@@ -2,6 +2,7 @@ package model;
 
 import exception.DuplicatedLottoNumbersException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningLottoNumbers {
     private final Lotto lotto;
@@ -15,11 +16,12 @@ public class WinningLottoNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoResult summarize(List<Lotto> lottoNumbers, Money inputMoney) {
+    public LottoResult summarize(List<Lotto> lottos, Money inputMoney) {
         LottoResult result = new LottoResult(inputMoney);
-        lottoNumbers.stream()
+        List<LottoRank> ranks = lottos.stream()
                 .map(this::getRankBy)
-                .forEach(result::add);
+                .collect(Collectors.toList());
+        result.initResultFrom(ranks);
         return result;
     }
 
