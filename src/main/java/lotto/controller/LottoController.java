@@ -1,7 +1,7 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import lotto.domain.*;
-import lotto.util.IntsToLottoConverter;
 import lotto.util.StringConverter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -15,7 +15,7 @@ public class LottoController {
         int ticketCount = purchaseAmount.calculateTheNumberOfTicket();
         OutputView.printTicketCount(ticketCount);
 
-        List<Lotto> lottoTickets = getTickets(ticketCount);
+        List<Lotto> lottoTickets = getLottoTickets(ticketCount);
         OutputView.printTickets(lottoTickets);
 
         WinningLotto winningLotto = getWinningLotto();
@@ -33,9 +33,13 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> getTickets(int ticketCount) {
-        LottoMachine lottoMachine = new LottoMachine();
-        return lottoMachine.makeLottoTickets(ticketCount);
+    private List<Lotto> getLottoTickets(int count) {
+        List<Lotto> lottoTickets = new ArrayList<>();
+        LottoMachine lottoMachine = new RandomLottoMachine();
+        for (int i = 0; i < count; i++) {
+            lottoTickets.add(lottoMachine.makeLottoTicket());
+        }
+        return lottoTickets;
     }
 
     private WinningLotto getWinningLotto() {
@@ -46,7 +50,8 @@ public class LottoController {
     private Lotto getWinningNumber() {
         try {
             List<Integer> input = StringConverter.toInts(InputView.getWinningNumber());
-            return IntsToLottoConverter.convert(input);
+            LottoMachine lottoMachine = new FixedLottoMachine(input);
+            return lottoMachine.makeLottoTicket();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getWinningNumber();

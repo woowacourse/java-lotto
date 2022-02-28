@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.util.IntsToLottoConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,7 +17,7 @@ class RankBoardTest {
 
     @BeforeEach
     void setUp() {
-        Lotto winningNumbers = IntsToLottoConverter.convert(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 6)).makeLottoTicket();
         LottoNumber bonusNumber = new LottoNumber(7);
         winningLotto = new WinningLotto(winningNumbers, bonusNumber);
     }
@@ -45,7 +43,7 @@ class RankBoardTest {
     @DisplayName("만약 아무 등수에 해당하지 않는 경우 빈 맵을 반환한다")
     void testCalcRankEdgeCase() {
         List<Lotto> tickets = new ArrayList<>();
-        tickets.add(initTicket(List.of(1, 2, 8, 9, 10, 11)));
+        tickets.add(new FixedLottoMachine(List.of(1, 2, 8, 9, 10, 11)).makeLottoTicket());
 
         RankBoard board = new RankBoard(winningLotto, tickets);
 
@@ -63,7 +61,7 @@ class RankBoardTest {
     @DisplayName("수익률을 계산해 반환한다")
     void calcProfit() {
         List<Lotto> tickets = new ArrayList<>();
-        tickets.add(initTicket(List.of(1, 2, 3, 9, 10, 11)));
+        tickets.add(new FixedLottoMachine(List.of(1, 2, 3, 9, 10, 11)).makeLottoTicket());
 
         RankBoard board = new RankBoard(winningLotto, tickets);
 
@@ -72,17 +70,11 @@ class RankBoardTest {
 
     private List<Lotto> initTickets() {
         ArrayList<Lotto> tickets = new ArrayList<>();
-        tickets.add(initTicket(List.of(1, 2, 3, 4, 5, 6)));
-        tickets.add(initTicket(List.of(1, 2, 3, 4, 5, 7)));
-        tickets.add(initTicket(List.of(1, 2, 3, 4, 5, 8)));
-        tickets.add(initTicket(List.of(1, 2, 3, 4, 8, 9)));
-        tickets.add(initTicket(List.of(1, 2, 3, 8, 9, 10)));
+        tickets.add(new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 6)).makeLottoTicket());
+        tickets.add(new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 7)).makeLottoTicket());
+        tickets.add(new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 8)).makeLottoTicket());
+        tickets.add(new FixedLottoMachine(List.of(1, 2, 3, 4, 8, 9)).makeLottoTicket());
+        tickets.add(new FixedLottoMachine(List.of(1, 2, 3, 8, 9, 10)).makeLottoTicket());
         return tickets;
-    }
-
-    private Lotto initTicket(List<Integer> numbers) {
-        return new Lotto(numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList()));
     }
 }
