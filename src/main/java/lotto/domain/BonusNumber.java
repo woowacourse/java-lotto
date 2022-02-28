@@ -1,11 +1,11 @@
 package lotto.domain;
 
+import static lotto.domain.ChoiceNumber.MAX_BOUND;
+import static lotto.domain.ChoiceNumber.MIN_BOUND;
+
 import java.util.List;
 
 public class BonusNumber {
-    private static final int MIN_BOUND = 1;
-    private static final int MAX_BOUND = 45;
-
     private static final String ERROR_DUPLICATE_NUMBER = "[ERROR] 보너스 번호가 선택한 숫자들과 중복한 값입니다.";
     private static final String ERROR_NOT_IN_RANGE = "[ERROR] 보너스 번호가 범위내에 없습니다.";
 

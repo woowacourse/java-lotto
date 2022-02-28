@@ -9,14 +9,15 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class ChoiceNumber {
+    public static final int MIN_BOUND = 1;
+    public static final int MAX_BOUND = 45;
+
+    private static final List<Integer> numbers = IntStream.rangeClosed(MIN_BOUND, MAX_BOUND).boxed().collect(toList());
+    private static final String NUMBER_DELIMITER = ",";
+    private static final int CHOICE_NUMBER_SIZE = 6;
+
     private static final String ERROR_DUPLICATE_NUMBERS = "[ERROR] 선택한 번호중에 중복되는 값이 있습니다.";
     private static final String ERROR_NOT_IN_RANGE = "[ERROR] 1부터 45까지의 번호로 입력해주세요.";
-
-    private static final List<Integer> numbers = IntStream.rangeClosed(1, 45).boxed().collect(toList());
-    private static final String NUMBER_DELIMITER = ",";
-    private static final int MIN_BOUND = 1;
-    private static final int MAX_BOUND = 45;
-    private static final int CHOICE_NUMBER_SIZE = 6;
     private static final String ERROR_NOT_INTEGER = "[ERROR] 번호는 숫자로 입력해주세요";
     private static final String ERROR_NOT_ENOUGH_NUMBER = "[ERROR] 6개의 숫자를 입력해주세요";
 
