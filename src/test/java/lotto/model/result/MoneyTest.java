@@ -32,11 +32,10 @@ class MoneyTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"100", "1001", "100001"})
-    @DisplayName("투입 금액이 천원 단위가 아닌 경우인")
+    @DisplayName("투입 금액이 천원 단위가 아닌 경우")
     void validateNotThousandUnitInputMoney(String number) {
         assertThatThrownBy(() -> new Money(number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(LottoCountExceptionMessage.UNIT_ERROR.getMassage());
     }
-
 }
