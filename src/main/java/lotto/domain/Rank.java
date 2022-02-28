@@ -22,7 +22,7 @@ public enum Rank {
     }
 
     public static Rank of(int count, boolean isBonus) {
-        if (isBonus) {
+        if (Rank.SECOND.count == count && isBonus) {
             return Rank.SECOND;
         }
 
