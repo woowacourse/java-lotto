@@ -2,7 +2,6 @@ package view;
 
 import java.util.Scanner;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class InputView {
@@ -13,24 +12,7 @@ public class InputView {
         return function.apply(SCANNER.nextLine());
     }
 
-    public static <T> T getUntilValid(Supplier<T> supplier) {
-        T t;
-        do {
-            t = getFrom(supplier);
-        } while(t == null && isRepeatable());
-        return t;
-    }
-
-    private static <T> T getFrom(Supplier<T> supplier) {
-        try {
-            return supplier.get();
-        } catch (Exception e) {
-            OutputView.printErrorMessage(e);
-            return null;
-        }
-    }
-
-    private static boolean isRepeatable() {
+    public static boolean isRepeatable() {
         String value = inputSelectBox("다시 시도하시려면 Y, 아니면 N", "Y", "N", "y", "n");
         if (value.equals("y") || value.equals("Y")) {
             return true;
