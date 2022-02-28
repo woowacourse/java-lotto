@@ -1,5 +1,7 @@
 package lotto.receiver;
 
+import static lotto.domain.Lotto.LOTTO_SIZE;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -10,7 +12,6 @@ import lotto.exception.LottoException;
 public class LottoReceiver {
 
     private static final String INPUT_NUMBERS_DELIMITER = ",";
-    private static final int LOTTO_SIZE = 6;
 
     public static List<LottoNumber> receive(String input) {
         List<String> separatedInput = splitInput(input);
