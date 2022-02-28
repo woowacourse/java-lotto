@@ -10,19 +10,10 @@ public class LottoGame {
     private static final int NO_YIELD = 0;
     private static final int SUM_BASE = 0;
 
-    private Lottos lottos;
-    private LottoGenerator lottoGenerator = new RandomLottoGenerator();
+    private final Lottos lottos;
 
-    public LottoGame() {
-    }
-
-    public LottoGame(List<Lotto> lottos) {
-        this.lottos = new Lottos(lottos);
-    }
-
-    public void buyLotto(Money money) {
-        int lottoAmount = money.convertToAmount();
-        lottos = new Lottos(lottoGenerator.generateLottos(lottoAmount));
+    public LottoGame(Money money, LottoGenerator lottoGenerator) {
+        this.lottos = new Lottos(lottoGenerator.generate(money.convertToAmount()));
     }
 
     public void makeResult(List<Integer> winningNumbers, Integer bonusNumber) {
