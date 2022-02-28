@@ -1,9 +1,6 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.Set;
-
-import lotto.model.lotto.LottoResponse;
 
 public class OutputView {
     private static final String PURCHASE_MESSAGE = "개를 구매했습니다";
