@@ -15,9 +15,11 @@ public class WinningResult {
         this.purchasedLottoQuantity = builder.purchasedLottoQuantity;
     }
 
-    public double getProfitRatio() {
+    public double calculateProfitRatio() {
+        long totalPrice = calculateTotalPrize();
         double purchaseMoney = purchasedLottoQuantity.getLottoQuantity() * LottoConstants.SINGLE_LOTTO_PRICE;
-        return roundToSecondDigit(calculateTotalPrize() / purchaseMoney);
+        
+        return roundToSecondDigit(totalPrice / purchaseMoney);
     }
 
     private long calculateTotalPrize() {
@@ -50,33 +52,8 @@ public class WinningResult {
             this.purchasedLottoQuantity = purchasedLottoQuantity;
         }
 
-        public Builder first(WinningCount winningCount) {
-            winningResult.put(Rank.FIRST, winningCount);
-            return this;
-        }
-
-        public Builder second(WinningCount winningCount) {
-            winningResult.put(Rank.SECOND, winningCount);
-            return this;
-        }
-
-        public Builder third(WinningCount winningCount) {
-            winningResult.put(Rank.THIRD, winningCount);
-            return this;
-        }
-
-        public Builder fourth(WinningCount winningCount) {
-            winningResult.put(Rank.FOURTH, winningCount);
-            return this;
-        }
-
-        public Builder fifth(WinningCount winningCount) {
-            winningResult.put(Rank.FIFTH, winningCount);
-            return this;
-        }
-
-        public Builder noMatch(WinningCount winningCount) {
-            winningResult.put(Rank.NO_MATCH, winningCount);
+        public Builder setWinningCountByRank(Rank rank, WinningCount winningCount) {
+            winningResult.put(rank, winningCount);
             return this;
         }
 

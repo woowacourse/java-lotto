@@ -36,6 +36,15 @@ public class LottoController {
         ResultView.printResult(WinningResultDto.of(winningResult, lottoQuantity));
     }
 
+    private InputMoney getInputMoney() {
+        try {
+            return new InputMoney(InputView.scanInputMoney());
+        } catch (IllegalArgumentException exception) {
+            InputView.printException(exception);
+            return getInputMoney();
+        }
+    }
+
     private LottoQuantity getLottoQuantityByInputMoney(InputMoney inputMoney) {
         return new LottoQuantity(inputMoney.getMoney() / LottoConstants.SINGLE_LOTTO_PRICE);
     }
@@ -72,15 +81,6 @@ public class LottoController {
         } catch (IllegalArgumentException exception) {
             InputView.printException(exception);
             return generateBonusNumber();
-        }
-    }
-
-    private InputMoney getInputMoney() {
-        try {
-            return new InputMoney(InputView.scanInputMoney());
-        } catch (IllegalArgumentException exception) {
-            InputView.printException(exception);
-            return getInputMoney();
         }
     }
 }

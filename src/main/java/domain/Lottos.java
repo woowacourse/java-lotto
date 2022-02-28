@@ -29,14 +29,14 @@ public class Lottos {
     }
 
     public WinningResult getWinningResultByWinningLotto(WinningLotto winningLotto) {
-        return new WinningResult.Builder(new LottoQuantity(lottos.size()))
-                .first(getWinningCountByRank(winningLotto, Rank.FIRST))
-                .second(getWinningCountByRank(winningLotto, Rank.SECOND))
-                .third(getWinningCountByRank(winningLotto, Rank.THIRD))
-                .fourth(getWinningCountByRank(winningLotto, Rank.FOURTH))
-                .fifth(getWinningCountByRank(winningLotto, Rank.FIFTH))
-                .noMatch(getWinningCountByRank(winningLotto, Rank.NO_MATCH))
-                .build();
+        LottoQuantity lottoQuantity = new LottoQuantity(lottos.size());
+        WinningResult.Builder builder = new WinningResult.Builder(lottoQuantity);
+
+        for (Rank rank : Rank.values()) {
+            builder.setWinningCountByRank(rank, getWinningCountByRank(winningLotto, rank));
+        }
+
+        return builder.build();
     }
 
     private WinningCount getWinningCountByRank(WinningLotto winningLotto, Rank rank) {

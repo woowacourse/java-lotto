@@ -18,7 +18,7 @@ public class WinningResultDto {
     public static WinningResultDto of(WinningResult winningResult, LottoQuantity lottoQuantity) {
         return new WinningResultDto(
                 winningResult.getWinningResult(),
-                winningResult.getProfitRatio()
+                winningResult.calculateProfitRatio()
         );
     }
 

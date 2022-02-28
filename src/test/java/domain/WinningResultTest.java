@@ -15,12 +15,7 @@ public class WinningResultTest {
     void setUp() {
         LottoQuantity purchasedLottoQuantity = new LottoQuantity(10);
         winningResult = new WinningResult.Builder(purchasedLottoQuantity)
-                .first(new WinningCount(0))
-                .second(new WinningCount(0))
-                .third(new WinningCount(0))
-                .fourth(new WinningCount(0))
-                .fifth(new WinningCount(10))
-                .noMatch(new WinningCount(0))
+                .setWinningCountByRank(Rank.FIFTH, new WinningCount(10))
                 .build();
     }
 
@@ -31,14 +26,11 @@ public class WinningResultTest {
         LottoQuantity purchasedLottoQuantity = new LottoQuantity(100);
 
         // when
-        WinningResult winningResult = new WinningResult.Builder(purchasedLottoQuantity)
-                .first(new WinningCount(1))
-                .second(new WinningCount(2))
-                .third(new WinningCount(3))
-                .fourth(new WinningCount(4))
-                .fifth(new WinningCount(5))
-                .noMatch(new WinningCount(6))
-                .build();
+        WinningResult.Builder builder = new WinningResult.Builder(purchasedLottoQuantity);
+        for (Rank rank : Rank.values()) {
+            builder.setWinningCountByRank(rank, new WinningCount(1));
+        }
+        builder.build();
 
         // then
         assertThat(winningResult).isNotNull();
@@ -48,7 +40,7 @@ public class WinningResultTest {
     @DisplayName("수익률 계산")
     void getProfitRatio() {
         // given & when
-        double actual = winningResult.getProfitRatio();
+        double actual = winningResult.calculateProfitRatio();
 
         // when
         double expected = 5.0;
