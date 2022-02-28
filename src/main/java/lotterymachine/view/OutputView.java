@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OutputView {
+    private static final int PROFIT_STANDARD = 1;
 
     public static void printNumberOfTicket(int number) {
         System.out.printf("%d개를 구매했습니다.%n", number);
@@ -43,7 +44,7 @@ public class OutputView {
     }
 
     private static String extracted(double calculateProfitRate) {
-        if (calculateProfitRate < 1) {
+        if (calculateProfitRate < PROFIT_STANDARD) {
             return "손해";
         }
         return "이득";
