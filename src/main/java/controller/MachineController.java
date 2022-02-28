@@ -31,6 +31,7 @@ public class MachineController {
             int money = inputView.inputMoney();
             return new Money(money);
         } catch (IllegalArgumentException error) {
+            System.out.println(error.getMessage());
             return insertMoney();
         }
     }
@@ -42,10 +43,14 @@ public class MachineController {
     }
 
     private WinningNumbers insertWinningNumbers() {
-        final List<Integer> winningNumbers = inputView.inputWinningNumbers();
-        final int bonusNumber = inputView.inputBonusNumber();
-
-        return new WinningNumbers(winningNumbers, bonusNumber);
+        try {
+            final List<Integer> winningNumbers = inputView.inputWinningNumbers();
+            final int bonusNumber = inputView.inputBonusNumber();
+            return new WinningNumbers(winningNumbers, bonusNumber);
+        } catch (IllegalArgumentException error) {
+            System.out.println(error.getMessage());
+            return insertWinningNumbers();
+        }
     }
 
 }
