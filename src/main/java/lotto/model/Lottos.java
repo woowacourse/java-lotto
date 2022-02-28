@@ -44,8 +44,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        List<Lotto> newLottos = new ArrayList<>(lottos);
-        return newLottos;
+        return new ArrayList<>(lottos);
     }
 
     public int getLottoCount() {

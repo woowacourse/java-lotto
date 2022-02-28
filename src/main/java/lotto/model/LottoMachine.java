@@ -10,7 +10,7 @@ public class LottoMachine {
     private final WinningLotto winningLotto;
     private Map<Rank, Integer> rankCount;
 
-    public LottoMachine(Lottos lottos, WinningLotto winningLotto) {
+    public LottoMachine(final Lottos lottos, final WinningLotto winningLotto) {
         this.lottos = lottos;
         this.winningLotto = winningLotto;
     }

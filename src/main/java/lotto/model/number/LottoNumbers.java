@@ -43,7 +43,6 @@ public class LottoNumbers {
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        List<LottoNumber> newLottoNumbers = new ArrayList<>(lottoNumbers);
-        return newLottoNumbers;
+        return new ArrayList<>(lottoNumbers);
     }
 }
