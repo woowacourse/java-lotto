@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import view.InputView;
+import view.OutputView;
 import view.ResultView;
 
 public class LottoController {
@@ -27,14 +28,14 @@ public class LottoController {
     public void start() {
         InputMoney inputMoney = getInputMoney();
         LottoQuantity lottoQuantity = getLottoQuantityByInputMoney(inputMoney);
-        InputView.printLottoQuantity(lottoQuantity.getLottoQuantity());
+        OutputView.printLottoQuantity(lottoQuantity.getLottoQuantity());
 
         Lottos autoLottos = new Lottos(lottoQuantity, lottoNumberGenerator);
         List<LottoDto> lottoDtos = autoLottos.getLottos()
                 .stream()
                 .map(LottoDto::new)
                 .collect(Collectors.toList());
-        InputView.printLottos(lottoDtos);
+        OutputView.printLottos(lottoDtos);
 
         WinningLotto winningLotto = setupWinningLotto();
         WinningResult winningResult = autoLottos.getWinningResultByWinningLotto(winningLotto);
@@ -45,7 +46,7 @@ public class LottoController {
         try {
             return new InputMoney(InputView.scanInputMoney());
         } catch (IllegalArgumentException exception) {
-            InputView.printException(exception);
+            OutputView.printException(exception);
             return getInputMoney();
         }
     }
@@ -61,7 +62,7 @@ public class LottoController {
         try {
             return new WinningLotto(lotto, bonusNumber);
         } catch (IllegalArgumentException exception) {
-            InputView.printException(exception);
+            OutputView.printException(exception);
             return setupWinningLotto();
         }
     }
@@ -75,7 +76,7 @@ public class LottoController {
                     .collect(Collectors.toSet());
             return new Lotto(lottoNumbers);
         } catch (IllegalArgumentException exception) {
-            InputView.printException(exception);
+            OutputView.printException(exception);
             return generateLotto();
         }
     }
@@ -84,7 +85,7 @@ public class LottoController {
         try {
             return new LottoNumber(InputView.scanBonusNumber());
         } catch (IllegalArgumentException exception) {
-            InputView.printException(exception);
+            OutputView.printException(exception);
             return generateBonusNumber();
         }
     }
