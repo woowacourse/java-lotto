@@ -1,19 +1,22 @@
 package model;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoResult {
     private static final int INITIAL_RANK_COUNT = 0;
+
     private final Money inputMoney;
     private final Map<LottoRank, Integer> resultMap;
 
     public LottoResult(Money inputMoney) {
         this.inputMoney = inputMoney;
-        this.resultMap = new HashMap<>(Map.of(LottoRank.FIRST, INITIAL_RANK_COUNT, LottoRank.SECOND, INITIAL_RANK_COUNT,
+        this.resultMap = new EnumMap<>(Map.of(
+                LottoRank.FIRST, INITIAL_RANK_COUNT, LottoRank.SECOND, INITIAL_RANK_COUNT,
                 LottoRank.THIRD, INITIAL_RANK_COUNT, LottoRank.FOURTH, INITIAL_RANK_COUNT,
-                LottoRank.FIFTH, INITIAL_RANK_COUNT, LottoRank.NOTHING, INITIAL_RANK_COUNT));
+                LottoRank.FIFTH, INITIAL_RANK_COUNT, LottoRank.NOTHING, INITIAL_RANK_COUNT)
+        );
     }
 
     public BigDecimal getProfitRate() {
