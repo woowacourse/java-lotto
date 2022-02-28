@@ -7,7 +7,7 @@ public class LottoMoney {
 
     private final int lottoMoney;
 
-    public LottoMoney(Integer lottoMoney) {
+    public LottoMoney(int lottoMoney) {
         validatePositive(lottoMoney);
         validateUnitPrice(lottoMoney);
         this.lottoMoney = lottoMoney;
@@ -29,7 +29,7 @@ public class LottoMoney {
         return lottoMoney / LOTTO_PRICE;
     }
 
-    float divide(Long totalWinningMoney) {
+    float divide(long totalWinningMoney) {
         return totalWinningMoney / (float)lottoMoney;
     }
 }

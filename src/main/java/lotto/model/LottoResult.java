@@ -19,11 +19,11 @@ public class LottoResult {
             .collect(groupingBy(rank -> rank, () -> new EnumMap<>(Rank.class), counting())));
     }
 
-    public Long getRankCount(Rank rank) {
+    public long getRankCount(Rank rank) {
         return result.getOrDefault(rank, 0L);
     }
 
-    Long getTotalWinningMoney() {
+    long getTotalWinningMoney() {
         return result.entrySet().stream()
             .map(entry -> entry.getKey().getMoney() * entry.getValue())
             .mapToLong(i -> i)

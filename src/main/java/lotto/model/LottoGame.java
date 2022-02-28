@@ -2,6 +2,7 @@ package lotto.model;
 
 import static lotto.ValidationUtils.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
@@ -10,7 +11,8 @@ public class LottoGame {
     private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public LottoGame(List<Integer> winningNumbers, Integer bonusNumber) {
+    public LottoGame(List<Integer> integers, int bonusNumber) {
+        ArrayList<Integer> winningNumbers = new ArrayList<>(integers);
         validateEmptyCollection(winningNumbers);
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);
         this.winningNumbers = new Lotto(winningNumbers);
@@ -21,7 +23,7 @@ public class LottoGame {
         return new Lottos(new LottoNumberGenerator(), lottoMoney.getLottoSize());
     }
 
-    private void validateDuplicateBonusNumber(List<Integer> winningNumbers, Integer bonusNumber) {
+    private void validateDuplicateBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(ERROR_DUPLICATION_BONUS_NUMBER);
         }
