@@ -2,10 +2,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import domain.Lotto;
+import domain.LottoFactory;
 import domain.LottoGame;
 import domain.LottoNumber;
 import domain.LottoMoney;
 import domain.LottoPurchaseCount;
+import domain.Lottos;
 import domain.strategy.RandomLottoGeneratorStrategy;
 import domain.WinningLotto;
 import domain.WinningStatistics;
@@ -44,6 +46,18 @@ public class Application {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return createLottoPurchaseCount(lottoMoney);
+        }
+    }
+
+    private static Lottos createLottos(LottoPurchaseCount lottoPurchaseCount) {
+        try {
+            return LottoFactory.generateLottos(
+                InputView.getManualLottoNumbers(lottoPurchaseCount.getManualCount()),
+                lottoPurchaseCount,
+                new RandomLottoGeneratorStrategy());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return createLottos(lottoPurchaseCount);
         }
     }
 }

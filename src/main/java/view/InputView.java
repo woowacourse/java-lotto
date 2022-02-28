@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +10,7 @@ public class InputView {
 
     private static final String REQUEST_MESSAGE_INPUT_PURCHASE_MONEY = "구입금액을 입력해 주세요.";
     private static final String REQUEST_MESSAGE_INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String REQUEST_MESSAGE_INPUT_MANUAL_LOTTOS_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String ERROR_MESSAGE_TYPE_OF_MONEY = "금액은 숫자가 아닐 수 없습니다.";
     private static final String ERROR_MESSAGE_RANGE_OF_MONEY = "금액은 0이하일 수 없습니다.";
     private static final String ERROR_MESSAGE_RANGE_OF_MANUAL_COUNT = "구매할 수동 로또 수량은 음수일 수 없습니다.";
@@ -70,12 +72,26 @@ public class InputView {
         }
     }
 
+    public static List<List<Integer>> getManualLottoNumbers(int manualCount) {
+        System.out.println(REQUEST_MESSAGE_INPUT_MANUAL_LOTTOS_NUMBERS);
+
+        List<List<Integer>> manualLottos = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            List<String> manualLottoNumber = convertStringList(getInput());
+            validateLottoNumbers(manualLottoNumber);
+
+            manualLottos.add(convertIntegerList(manualLottoNumber));
+        }
+
+        return manualLottos;
+    }
+
     public static List<Integer> getWinningLottoNumbers() {
         System.out.println(REQUEST_MESSAGE_WINNING_LOTTO_NUMBERS);
         String inputWinningLottoNumbers = getInput();
 
         List<String> winningLottoNumbers = convertStringList(inputWinningLottoNumbers);
-        validateWinningLottoNumbers(winningLottoNumbers);
+        validateLottoNumbers(winningLottoNumbers);
 
         return convertIntegerList(winningLottoNumbers);
     }
@@ -85,7 +101,7 @@ public class InputView {
             .collect(Collectors.toList());
     }
 
-    private static void validateWinningLottoNumbers(List<String> values) {
+    private static void validateLottoNumbers(List<String> values) {
         for (String value : values) {
             validateNumber(value);
         }
