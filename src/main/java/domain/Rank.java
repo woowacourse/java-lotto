@@ -11,7 +11,7 @@ public enum Rank {
 
 	private final int matchCount;
 	private final boolean bonusBallMatched;
-	private final Long prize;
+	private final long prize;
 
 	Rank(final int matchCount, final boolean bonusBallMatched, final Long prize) {
 		this.matchCount = matchCount;
