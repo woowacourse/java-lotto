@@ -45,7 +45,6 @@ class WinningStatisticsTest {
         WinningStatistics winningStatistics = new WinningStatistics(lottoRewards);
 
         double profitRate = winningStatistics.calculateProfitRate();
-        System.out.println(profitRate);
         double expectedAnswer = (double)LottoReward.FIFTH.getPrice() / 1000;
 
         assertThat(profitRate).isEqualTo(expectedAnswer);
