@@ -1,19 +1,17 @@
 package controller;
 
-import domain.AnswerLotto;
-import domain.LottoNumbers;
-import domain.LottoTickets;
-import domain.Money;
-import util.RandomLottoNumberGenerator;
+import domain.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static view.InputView.*;
 import static view.OutputView.*;
 
 public class LottoGameController {
-	LottoTickets lottoTickets = new LottoTickets();
+	private final ArrayList<Integer> LottoNumberCandidates = new ArrayList<>();
+	private final LottoTickets lottoTickets = new LottoTickets();
 
 	public void run() {
 		try {
@@ -35,11 +33,6 @@ public class LottoGameController {
 		printLottoTickets(manualCount, randomCount, this.lottoTickets);
 	}
 
-	private void purchaseRandomLotto(int count) {
-		RandomLottoNumberGenerator randomLottoNumberGenerator = new RandomLottoNumberGenerator();
-		lottoTickets.purchase(randomLottoNumberGenerator.generate(count));
-	}
-
 	private void purchaseManualLotto(int count) {
 		List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
 		for (List<Integer> inputNumbers : inputManualNumbers(count)) {
@@ -47,6 +40,24 @@ public class LottoGameController {
 		}
 
 		lottoTickets.purchase(manualLottoNumbers);
+	}
+
+	private void purchaseRandomLotto(int count) {
+		initCandidates();
+		List<LottoNumbers> randomLottoNumbers = new ArrayList<>();
+
+		while (count-- > 0) {
+			Collections.shuffle(LottoNumberCandidates);
+			randomLottoNumbers.add(LottoNumbers.of(LottoNumberCandidates.subList(0, 6)));
+		}
+
+		lottoTickets.purchase(randomLottoNumbers);
+	}
+
+	private void initCandidates() {
+		for (int eachNumber = 1; eachNumber <= 45; eachNumber++) {
+			LottoNumberCandidates.add(eachNumber);
+		}
 	}
 
 }
