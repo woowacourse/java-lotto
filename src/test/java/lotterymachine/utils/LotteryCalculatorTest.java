@@ -1,7 +1,14 @@
 package lotterymachine.utils;
 
+import lotterymachine.domain.LotteryNumber;
+import lotterymachine.domain.LotteryTickets;
+import lotterymachine.domain.WinningLottery;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,5 +29,23 @@ public class LotteryCalculatorTest {
         int winningLotteryAmount = 1000;
         double result = LotteryCalculator.calculateProfitRate(winningLotteryAmount, amount);
         assertThat(result).isEqualTo(0.06);
+    }
+
+    @Test
+    @DisplayName("로또 결과를 입력 받아, 수익을 계산하여 반환한다.")
+    void totalProfit() {
+        LotteryTickets lotteryTickets = new LotteryTickets(1);
+        List<LotteryNumber> input = IntStream.range(1, 7)
+                .mapToObj(LotteryNumber::new)
+                .collect(Collectors.toList());
+        lotteryTickets.add(input);
+
+        List<LotteryNumber> input2 = IntStream.range(4, 10)
+                .mapToObj(LotteryNumber::new)
+                .collect(Collectors.toList());
+        WinningLottery winningLottery = new WinningLottery(input2, new LotteryNumber(12));
+        lotteryTickets.getLotteriesResult(winningLottery);
+        int result = LotteryCalculator.totalProfit(lotteryTickets.getLotteriesResult(winningLottery));
+        assertThat(result).isEqualTo(5000);
     }
 }
