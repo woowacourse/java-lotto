@@ -1,70 +1,77 @@
 package domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.assertj.core.api.Assertions.*;
+
 public class LottoTest {
 
-	private List<LottoNumber> lottos = new ArrayList<>();
+    private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-	@BeforeEach
-	void setUp() {
-		lottos.add(new LottoNumber(1));
-		lottos.add(new LottoNumber(2));
-		lottos.add(new LottoNumber(3));
-		lottos.add(new LottoNumber(4));
-		lottos.add(new LottoNumber(5));
-	}
+    public static Set<LottoNumber> createLottoNumbers(int... number) {
+        return Arrays.stream(number)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toSet());
+    }
 
-	@DisplayName("개수 성공")
-	@Test
-	void lotto_size_success() {
-		lottos.add(new LottoNumber(6));
-		assertThatCode(() -> new Lotto(lottos))
-			.doesNotThrowAnyException();
-	}
+    @BeforeEach
+    void setUp() {
+        lottoNumbers = createLottoNumbers(1, 2, 3, 4, 5);
+    }
 
-	@DisplayName("개수 실패")
-	@Test
-	void lotto_size_fail() {
-		assertThatThrownBy(() -> new Lotto(lottos))
-			.isInstanceOf(IllegalArgumentException.class);
-	}
+    @DisplayName("로또 생성시 숫자가 6개가 입력되면 성공")
+    @Test
+    void lotto_size_success() {
+        lottoNumbers.add(LottoNumber.valueOf(6));
+        assertThatCode(() -> new Lotto(lottoNumbers))
+                .doesNotThrowAnyException();
+    }
 
-	@DisplayName("중복 금지")
-	@Test
-	void duplicate_fail() {
-		lottos.add(new LottoNumber(5));
-		assertThatThrownBy(() -> new Lotto(lottos))
-			.isInstanceOf(IllegalArgumentException.class);
-	}
+    @DisplayName("로또 생성시 숫자가 6개가 입력되지 않으면 실패")
+    @Test
+    void lotto_size_fail() {
+        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또는 6개의 중복되지 않은 숫자로 이루어져 있어야 합니다.");
+    }
 
-	@DisplayName("매칭 숫자 계산")
-	@Test
-	void calculate_match_count() {
-		//given
-		lottos.add(new LottoNumber(6));
-		Lotto lotto = new Lotto(lottos);
-		Lotto targetLotto = Lotto.of(new String[]{"7", "5", "4", "3", "2", "1"});
+    @DisplayName("로또 생성시 번호가 중복될 경우 실패")
+    @Test
+    void duplicate_fail() {
+        lottoNumbers.add(LottoNumber.valueOf(5));
+        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또는 6개의 중복되지 않은 숫자로 이루어져 있어야 합니다.");
+    }
 
-		//when
-		int count = lotto.calculateMatchCount(targetLotto);
+    @DisplayName("다른 로또와 비교해 매칭되는 번호 개수 계산")
+    @Test
+    void calculate_match_count() {
+        //given
+        lottoNumbers.add(LottoNumber.valueOf(6));
+        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto targetLotto = new Lotto(createLottoNumbers(7, 5, 4, 3, 2, 1));
 
-		//then
-		assertThat(count).isEqualTo(5);
-	}
+        //when
+        int count = lotto.calculateMatchCount(targetLotto);
 
-	@AfterEach
-	void clear() {
-		lottos.clear();
-	}
+        //then
+        assertThat(count).isEqualTo(5);
+    }
+
+    @DisplayName("로또 번호 중 동일한 번호를 포함하는지 확인")
+    @Test
+    void is_contain() {
+        lottoNumbers.add(LottoNumber.valueOf(6));
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        assertThat(lotto.isContain(LottoNumber.valueOf(6))).isEqualTo(true);
+    }
 }
