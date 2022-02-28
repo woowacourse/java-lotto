@@ -3,7 +3,6 @@ package lotto.model.lotto;
 import java.util.HashSet;
 import java.util.List;
 
-import lotto.model.lotto.Lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +32,8 @@ public class LottoTest {
 
         lotto.calcWinningNumber(winningResult, bonusBallResponse, lottoWinningNumberResponse);
 
-        assertThat(winningResult.getWinningCount().get(Rank.BONUS)).isEqualTo(0);
+        assertThat(winningResult.getWinningCount().get(Rank.FIVE)).isOne();
+        assertThat(winningResult.getWinningCount().get(Rank.BONUS)).isZero();
     }
 
     @Test
@@ -46,6 +46,6 @@ public class LottoTest {
 
         lotto.calcWinningNumber(winningResult, bonusBallResponse, lottoWinningNumberResponse);
 
-        assertThat(winningResult.getWinningCount().get(Rank.BONUS)).isEqualTo(1);
+        assertThat(winningResult.getWinningCount().get(Rank.BONUS)).isOne();
     }
 }
