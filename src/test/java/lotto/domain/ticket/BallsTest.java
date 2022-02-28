@@ -35,7 +35,7 @@ class BallsTest {
     void ballsCachingTest(final int ballNumber) {
         final Ball actualBall = Balls.getBall(ballNumber);
         final Ball expectedBall = Balls.getBall(ballNumber);
-        assertThat(actualBall).isEqualTo(expectedBall);
+        assertThat(actualBall).isSameAs(expectedBall);
     }
 
 }
