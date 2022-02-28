@@ -29,16 +29,9 @@ public class LottoMachine {
     }
 
     public List<LottoTicket> purchaseLottoTicketsByAuto(Money amount) {
-        validateInsertAmount(amount);
         return IntStream.range(DEFAULT_VALUE, amount.getPurchasableNumber(LOTTO_TICKET_PRICE))
                 .mapToObj(index -> new LottoTicket(lottoNumberStrategy.generate()))
                 .collect(Collectors.toList());
-    }
-
-    private void validateInsertAmount(Money amount) {
-        if (!amount.isPurchasable(LOTTO_TICKET_PRICE)) {
-            throw new IllegalArgumentException(INVALID_INSERT_AMOUNT);
-        }
     }
 
     public WinningStat createWinningStat(List<LottoTicket> lottoTickets,

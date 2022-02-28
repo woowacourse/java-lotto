@@ -9,7 +9,6 @@ import view.OutputView;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoController {
 
@@ -18,21 +17,14 @@ public class LottoController {
     public void run() {
         Money money = Money.from(InputView.getMoney());
 
-        int manualCount = InputView.getManualCount();
-        validateManualCount(money, manualCount);
+        LottoCount lottoCount = LottoCount.of(InputView.getManualCount(), money);
 
-        List<LottoTicket> lottoTickets = purchaseLottoTickets(money, manualCount);
+        List<LottoTicket> lottoTickets = purchaseLottoTickets(money, lottoCount.getManualCount());
 
-        OutputView.printPurchasedLottoTicketNumber(manualCount, lottoTickets.size() - manualCount);
+        OutputView.printPurchasedLottoTicketNumber(lottoCount.getManualCount(), lottoCount.getAutoCount());
         OutputView.printPurchasedLottoTickets(lottoTickets);
 
         OutputView.printWinningStat(getWinningStatDto(lottoTickets));
-    }
-
-    private void validateManualCount(Money money, int manualCount) {
-        if (!money.isPurchasable(manualCount * LOTTO_TICKET_PRICE)) {
-            throw new IllegalArgumentException(INVALID_MANUAL_COUNT);
-        }
     }
 
     private List<LottoTicket> purchaseLottoTickets(Money money, int manualCount) {

@@ -18,14 +18,6 @@ class LottoMachineTest {
     private LottoMachine lottoMachine = new LottoMachine(new FixedLottoNumberStrategy());
 
     @Test
-    @DisplayName("입력 금액이 1000원 미만일 때 예외")
-    void insertAmountBelowThousand() {
-        assertThatThrownBy(() -> {
-            lottoMachine.purchaseLottoTicketsByAuto(Money.from(900));
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     @DisplayName("입력 금액에 따라 알맞은 개수의 로또 자동 생성 검증")
     void createLottoTicketsByAuto() {
          List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTicketsByAuto(Money.from(10000));
