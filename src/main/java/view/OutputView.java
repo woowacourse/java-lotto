@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 
 import domain.Lotto;
 import domain.LottoNumber;
+import domain.LottoPurchaseCount;
 import domain.LottoReward;
 
 public class OutputView {
 
-    private static final String RESPONSE_MESSAGE_PURCHASED_LOTTO = "개를 구매했습니다.";
     private static final String REWARD_SECOND_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
     private static final String REWARD_DEFAULT_FORMAT = "%d개 일치 (%d원)- %d개\n";
     private static final String PROFIT_RATE_BENEFIT_FORMAT = "총 수익률은 (%.2f)입니다.";
@@ -22,9 +22,9 @@ public class OutputView {
     private static final int SECOND_DECIMAL_POINT = 100;
     private static final int BENEFIT_STANDARD = 1;
 
-    public static void showPurchasedLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + RESPONSE_MESSAGE_PURCHASED_LOTTO);
-
+    public static void showPurchasedLottos(LottoPurchaseCount lottoPurchaseCount, List<Lotto> lottos) {
+        System.out.println("\n" + "수동으로 " + lottoPurchaseCount.getManualCount() + "장" + ", "
+            + "자동으로" + lottoPurchaseCount.getAutomaticCount() + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getLottoNumbers().stream()
                 .map(LottoNumber::getValue)

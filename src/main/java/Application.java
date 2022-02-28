@@ -17,7 +17,7 @@ public class Application {
         final LottoPurchaseCount lottoPurchaseCount = createLottoPurchaseCount(lottoMoney);
 
         final Lottos lottos = createLottos(lottoPurchaseCount);
-        OutputView.showPurchasedLottos(lottos.getLottos());
+        OutputView.showPurchasedLottos(lottoPurchaseCount, lottos.getLottos());
 
         final WinningLotto winningLotto = createWinningLotto();
         final WinningStatistics winningStatistics = createWinningStatistics(lottos, winningLotto);
