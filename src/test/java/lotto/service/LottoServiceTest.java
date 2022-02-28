@@ -23,7 +23,7 @@ class LottoServiceTest {
     private final LottoService lottoService = APP_CONFIG.lottoService;
     private final CustomTicketGenerator customTicketGenerator = APP_CONFIG.ticketGenerator;
 
-    @DisplayName("로또 생성 확인 테스트")
+    @DisplayName("로또는 구입 금액만큼 생성되어야 한다.")
     @ParameterizedTest(name = "[{index}] {1}원어치 로또 구입")
     @MethodSource("lotto.service.provider.LottoServiceTestProvider#provideForGenerateTicketsTest")
     void generateTicketsTest(final List<TicketDto> expectedTicketDtos, final int money) {
@@ -41,7 +41,7 @@ class LottoServiceTest {
         }
     }
 
-    @DisplayName("당첨 통계, 당첨 등수 개수 확인 테스트")
+    @DisplayName("당첨 통계의 당첨 등수 개수는 기댓값과 일치해야 한다.")
     @ParameterizedTest(name = "[{index}] 당첨 등수 개수 : {3}")
     @MethodSource("lotto.service.provider.LottoServiceTestProvider#provideForGenerateAnalysisTest")
     void generateAnalysisRankCountTest(final List<TicketDto> expectedTicketDtos,
@@ -57,7 +57,7 @@ class LottoServiceTest {
         assertThat(actualRankCounts).isEqualTo(expectedRankCounts);
     }
 
-    @DisplayName("당첨 통계, 수익률 확인 테스트")
+    @DisplayName("당첨 통계의 수익률은 기댓값과 일치해야 한다.")
     @ParameterizedTest(name = "[{index}] 수익률 : {4}")
     @MethodSource("lotto.service.provider.LottoServiceTestProvider#provideForGenerateAnalysisTest")
     void generateAnalysisProfitRateTest(final List<TicketDto> expectedTicketDtos,
