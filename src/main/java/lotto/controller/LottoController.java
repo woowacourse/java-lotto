@@ -4,7 +4,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.vo.Money;
-import lotto.domain.vo.Number;
+import lotto.domain.vo.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.Store;
 import lotto.domain.WinnerLotto;
@@ -31,15 +31,15 @@ public class LottoController {
         return store.buyLottos();
     }
 
-    private WinnerLotto createWinnerLotto(List<Number> winnerNumbers, Number bonusNumber) {
-        return new WinnerLotto(new Lotto(winnerNumbers), bonusNumber);
+    private WinnerLotto createWinnerLotto(List<LottoNumber> winnerLottoNumbers, LottoNumber bonusLottoNumber) {
+        return new WinnerLotto(new Lotto(winnerLottoNumbers), bonusLottoNumber);
     }
 
-    private List<Number> winnerNumbers() {
+    private List<LottoNumber> winnerNumbers() {
         return InputView.inputWinnerNumbers();
     }
 
-    private Number bonusNumber() {
+    private LottoNumber bonusNumber() {
         return InputView.inputBonusNumber();
     }
 

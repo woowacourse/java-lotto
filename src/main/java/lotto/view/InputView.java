@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.vo.Money;
-import lotto.domain.vo.Number;
+import lotto.domain.vo.LottoNumber;
 
 public class InputView {
 
@@ -19,21 +19,21 @@ public class InputView {
         return new Money(validateNumber(validateBlank(SCANNER.nextLine())));
     }
 
-    public static List<Number> inputWinnerNumbers() {
+    public static List<LottoNumber> inputWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return convertToNumbers(validateBlank(SCANNER.nextLine()));
     }
 
-    public static Number inputBonusNumber() {
+    public static LottoNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new Number(validateNumber(validateBlank(SCANNER.nextLine())));
+        return new LottoNumber(validateNumber(validateBlank(SCANNER.nextLine())));
     }
 
-    private static List<Number> convertToNumbers(String input) {
+    private static List<LottoNumber> convertToNumbers(String input) {
         return Arrays.stream(input.split(DELIMITER))
             .map(String::trim)
             .map(InputView::validateNumber)
-            .map(Number::new)
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
     }
 

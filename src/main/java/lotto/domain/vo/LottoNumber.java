@@ -2,14 +2,14 @@ package lotto.domain.vo;
 
 import java.util.Objects;
 
-public class Number {
+public class LottoNumber {
 
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
 
     private final int number;
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         validateRangeOfNumber(number);
         this.number = number;
     }
@@ -23,11 +23,11 @@ public class Number {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Number)) {
+        if (!(o instanceof LottoNumber)) {
             return false;
         }
-        Number number = (Number)o;
-        return this.number == number.number;
+        LottoNumber lottoNumber = (LottoNumber)o;
+        return this.number == lottoNumber.number;
     }
 
     @Override

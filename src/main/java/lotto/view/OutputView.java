@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.vo.Money;
-import lotto.domain.vo.Number;
+import lotto.domain.vo.LottoNumber;
 import lotto.domain.Rank;
 
 public class OutputView {
@@ -45,9 +45,9 @@ public class OutputView {
 
     private static void printLottoNumbers(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            List<Number> numbers = lotto.getNumbers();
-            numbers.sort(Comparator.comparingInt(Number::getNumber));
-            System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(numbers)));
+            List<LottoNumber> lottoNumbers = lotto.getNumbers();
+            lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
+            System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(lottoNumbers)));
         }
     }
 
@@ -63,8 +63,8 @@ public class OutputView {
         printOtherRank(matchCount, reward, rewardCount);
     }
 
-    private static String joinWithDelimiter(List<Number> numbers) {
-        return numbers.stream()
+    private static String joinWithDelimiter(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
             .map(number -> String.valueOf(number.getNumber()))
             .collect(Collectors.joining(DELIMITER));
     }

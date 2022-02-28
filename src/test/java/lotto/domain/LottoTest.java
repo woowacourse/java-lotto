@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.domain.vo.Number;
+import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,27 +17,27 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호는 6자리 숫자로 생성된다.")
     void createSixSizeNumbers() {
-        List<Number> numbers = givenNumbers(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> lottoNumbers = givenNumbers(1, 2, 3, 4, 5, 6);
 
-        assertThat(new Lotto(numbers)).isNotNull();
+        assertThat(new Lotto(lottoNumbers)).isNotNull();
     }
 
     @ParameterizedTest(name = "잘못된 로또 번호 : {0}")
     @MethodSource("getNumbers")
     @DisplayName("맞춘 번호에 따라 등수를 반환한다.")
-    void findRank(List<Number> numbers) {
+    void findRank(List<LottoNumber> lottoNumbers) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Lotto(numbers))
+            .isThrownBy(() -> new Lotto(lottoNumbers))
             .withMessageMatching("로또 번호는 6자리 이어야 한다.");
     }
 
     @Test
     @DisplayName("로또 번호가 중복될 경우 예외가 발생한다.")
     void throwExceptionWhenDuplicateNumbers() {
-        List<Number> numbers = givenNumbers(1, 2, 3, 4, 5, 5);
+        List<LottoNumber> lottoNumbers = givenNumbers(1, 2, 3, 4, 5, 5);
 
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Lotto(numbers))
+            .isThrownBy(() -> new Lotto(lottoNumbers))
             .withMessageMatching("로또 번호는 중복될 수 없다.");
     }
 
@@ -47,28 +47,28 @@ class LottoTest {
     void checkNotContainsBonusNumber(int number, boolean expected) {
         Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 6));
 
-        assertThat(lotto.contains(new Number(number))).isEqualTo(expected);
+        assertThat(lotto.contains(new LottoNumber(number))).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("외부에서 생성된 번호가 변경되어도 생성된 로또의 번호는 바뀌지 않는다.")
     void immutabilityLotto() {
-        List<Number> numbers = givenNumbers(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(numbers);
+        List<LottoNumber> lottoNumbers = givenNumbers(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(lottoNumbers);
 
-        Number addNumber = new Number(7);
-        numbers.add(addNumber);
+        LottoNumber addLottoNumber = new LottoNumber(7);
+        lottoNumbers.add(addLottoNumber);
 
-        assertThat(lotto.contains(addNumber)).isFalse();
+        assertThat(lotto.contains(addLottoNumber)).isFalse();
     }
 
-    private static List<Number> givenNumbers(int... numbers) {
+    private static List<LottoNumber> givenNumbers(int... numbers) {
         return Arrays.stream(numbers)
-            .mapToObj(Number::new)
+            .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
     }
 
-    private static Stream<List<Number>> getNumbers() {
+    private static Stream<List<LottoNumber>> getNumbers() {
         return Stream.of(
             givenNumbers(1, 2, 3, 4, 5),
             givenNumbers(1, 2, 3, 4, 5, 6, 7)
