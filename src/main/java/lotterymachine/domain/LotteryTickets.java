@@ -11,6 +11,17 @@ public class LotteryTickets {
         ticketCount = new TicketCount(count);
     }
 
+    public void add(List<LotteryNumber> numbers) {
+        if (ticketCount.isExist()) {
+            tickets.add(new LotteryTicket(numbers));
+            ticketCount.subtract();
+        }
+    }
+
+    public List<LotteryTicket> getLotteryTickets() {
+        return Collections.unmodifiableList(tickets);
+    }
+
     public Map<WinningLotteryRank, Integer> getLotteriesResult(WinningLottery winningLottery) {
         final Map<WinningLotteryRank, Integer> lotteriesResult = WinningLotteryRank.getWinningLotteries();
         for (LotteryTicket lotteryTicket : tickets) {
@@ -20,16 +31,5 @@ public class LotteryTickets {
             lotteriesResult.put(winningLotteryRank, lotteriesResult.getOrDefault(winningLotteryRank, 0) + 1);
         }
         return Collections.unmodifiableMap(lotteriesResult);
-    }
-
-    public List<LotteryTicket> getLotteryTickets() {
-        return Collections.unmodifiableList(tickets);
-    }
-
-    public void add(List<LotteryNumber> numbers) {
-        if (ticketCount.isExist()) {
-            tickets.add(new LotteryTicket(numbers));
-            ticketCount.subtract();
-        }
     }
 }
