@@ -52,7 +52,7 @@ class ResultViewTest {
         InstantiationException,
         IllegalAccessException {
         Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Constructor<LottoNumber> lottoNumberConstructor = LottoNumber.class.getDeclaredConstructor(Integer.class);
+        Constructor<LottoNumber> lottoNumberConstructor = LottoNumber.class.getDeclaredConstructor(int.class);
         lottoNumberConstructor.setAccessible(true);
         LottoNumber bonusNumber = lottoNumberConstructor.newInstance(7);
         ResultView.printResultStatistics(new LottoResult(lottos, winningNumbers, bonusNumber));
