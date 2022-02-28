@@ -3,11 +3,11 @@ package domain;
 import java.util.List;
 
 public enum Rank {
-    FIFTH(5,3, 5000, 0),
-    FOURTH(4, 4, 50000, 0),
+    FIFTH(5,3, 5000, 0, false),
+    FOURTH(4, 4, 50000, 0, false),
     THIRD(3, 5, 1500000, 0, false),
     SECOND(2,5, 30000000, 0, true),
-    FIRST(1, 6, 2000000000, 0);
+    FIRST(1, 6, 2000000000, 0, false);
 
     private static final int DEFAULT_TOTAL_INCOME = 0;
 
@@ -16,10 +16,6 @@ public enum Rank {
     private int reward;
     private int hitCount;
     private boolean hitBonusBall;
-
-    Rank(int rankNumber, int criteria, int reward, int hitCount) {
-        this(rankNumber,criteria, reward, hitCount, false);
-    }
 
     Rank(int rankNumber, int criteria, int reward, int hitCount, boolean hitBonusBall) {
         this.rankNumber = rankNumber;
