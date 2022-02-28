@@ -3,13 +3,14 @@ package lotto.model.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.prize.Prize;
+import lotto.model.prize.PrizeInformation;
 import lotto.model.prize.PrizeInformations;
 
 public class PrizeInformationDTO {
-    private int matchingCount;
-    private boolean bonus;
-    private long amount;
-    private int prizeCount;
+    private final int matchingCount;
+    private final boolean bonus;
+    private final long amount;
+    private final int prizeCount;
 
     private PrizeInformationDTO(int matchingCount, Boolean bonus, long amount, int prizeCount) {
         this.matchingCount = matchingCount;
@@ -20,13 +21,14 @@ public class PrizeInformationDTO {
 
     public static List<PrizeInformationDTO> from(PrizeInformations prizeInformations) {
         return prizeInformations.getPrizeInformations().stream()
-                .map(prizeInformation -> {
-                    Prize prize = prizeInformation.getPrize();
-                    return new PrizeInformationDTO(
-                            prize.getMatchCount(), prize.isBonus(), prize.getAmount(), prizeInformation.getCount());
-
-                })
+                .map(PrizeInformationDTO::from)
                 .collect(Collectors.toList());
+    }
+
+    public static PrizeInformationDTO from(PrizeInformation prizeInformation) {
+        Prize prize = prizeInformation.getPrize();
+        return new PrizeInformationDTO(
+                prize.getMatchCount(), prize.isBonus(), prize.getAmount(), prizeInformation.getCount());
     }
 
     public int getMatchingCount() {
