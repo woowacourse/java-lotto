@@ -54,7 +54,7 @@ public class ResultView {
                 prizeInformation.getPrizeCount());
     }
 
-    public static void showEarningRate(Double earningRate) {
+    public static void showEarningRate(double earningRate) {
         System.out.println();
         System.out.printf(FORMAT_EARNING_RATE, earningRate);
     }

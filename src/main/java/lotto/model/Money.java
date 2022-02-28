@@ -32,8 +32,8 @@ public class Money {
         return amount % unit == 0;
     }
 
-    public double rate(int numerator) {
-        return (double) numerator / this.amount;
+    public double rate(long numerator) {
+        return numerator / (double)this.amount;
     }
 
     public int countAvailable(int price) {

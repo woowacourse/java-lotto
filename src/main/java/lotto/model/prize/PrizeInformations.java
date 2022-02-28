@@ -28,9 +28,9 @@ public class PrizeInformations {
         return money.rate(getTotalAmount());
     }
 
-    private int getTotalAmount() {
+    private long getTotalAmount() {
         return prizeInformations.stream()
-                .mapToInt(PrizeInformation::pickAmount)
+                .mapToLong(PrizeInformation::pickAmount)
                 .sum();
     }
 

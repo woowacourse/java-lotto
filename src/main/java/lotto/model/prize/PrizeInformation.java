@@ -21,7 +21,7 @@ public class PrizeInformation {
         return new PrizeInformation(prize, count);
     }
 
-    public int pickAmount() {
+    public long pickAmount() {
         return this.prize.pickAmount(count);
     }
 

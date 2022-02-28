@@ -14,10 +14,10 @@ public enum Prize {
     NONE(0, 0, false);
 
     private final int matchCount;
-    private final int amount;
+    private final long amount;
     private final boolean bonus;
 
-    Prize(int matchCount, int amount, boolean bonus) {
+    Prize(int matchCount, long amount, boolean bonus) {
         this.matchCount = matchCount;
         this.amount = amount;
         this.bonus = bonus;
@@ -40,7 +40,7 @@ public enum Prize {
                 .orElse(NONE);
     }
 
-    public int pickAmount(int count) {
+    public long pickAmount(int count) {
         return this.amount * count;
     }
 
@@ -48,7 +48,7 @@ public enum Prize {
         return matchCount;
     }
 
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
 

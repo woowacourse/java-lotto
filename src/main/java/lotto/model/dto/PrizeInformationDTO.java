@@ -7,11 +7,11 @@ import lotto.model.prize.PrizeInformations;
 
 public class PrizeInformationDTO {
     private int matchingCount;
-    private Boolean bonus;
-    private int amount;
+    private boolean bonus;
+    private long amount;
     private int prizeCount;
 
-    private PrizeInformationDTO(int matchingCount, Boolean bonus, int amount, int prizeCount) {
+    private PrizeInformationDTO(int matchingCount, Boolean bonus, long amount, int prizeCount) {
         this.matchingCount = matchingCount;
         this.bonus = bonus;
         this.amount = amount;
@@ -37,7 +37,7 @@ public class PrizeInformationDTO {
         return bonus;
     }
 
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
 
