@@ -13,7 +13,7 @@ class RandomTicketGeneratorTest {
 
     private static final int TICKET_DEFAULT_SIZE = 6;
     private static final int TICKET_NUMBER_RANGE_INCLUSIVE_START = 1;
-    private static final int TICKET_NUMBER_RANGE_EXCLUSIVE_END = 45;
+    private static final int TICKET_NUMBER_RANGE_INCLUSIVE_END = 45;
 
     private final TicketGenerator ticketGenerator = new RandomTicketGenerator();
 
@@ -31,7 +31,7 @@ class RandomTicketGeneratorTest {
         final Ticket ticket = ticketGenerator.generateTicket();
         final List<Integer> ballNumbers = ticket.getBallNumbers();
         ballNumbers.forEach(number ->
-            assertThat(number).isBetween(TICKET_NUMBER_RANGE_INCLUSIVE_START, TICKET_NUMBER_RANGE_EXCLUSIVE_END)
+            assertThat(number).isBetween(TICKET_NUMBER_RANGE_INCLUSIVE_START, TICKET_NUMBER_RANGE_INCLUSIVE_END)
         );
     }
 

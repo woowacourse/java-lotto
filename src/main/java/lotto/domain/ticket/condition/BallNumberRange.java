@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 public enum BallNumberRange {
 
     INCLUSIVE_RANGE_START(1),
-    EXCLUSIVE_RANGE_END(46);
+    INCLUSIVE_RANGE_END(45);
 
     private final int number;
 
@@ -14,11 +14,11 @@ public enum BallNumberRange {
     }
 
     public static boolean isOutOfRange(final int ballNumber) {
-        return (ballNumber < INCLUSIVE_RANGE_START.number) || (EXCLUSIVE_RANGE_END.number <= ballNumber);
+        return (ballNumber < INCLUSIVE_RANGE_START.number) || (INCLUSIVE_RANGE_END.number < ballNumber);
     }
 
     public static IntStream getBallNumbers() {
-        return IntStream.range(INCLUSIVE_RANGE_START.number, EXCLUSIVE_RANGE_END.number);
+        return IntStream.range(INCLUSIVE_RANGE_START.number, INCLUSIVE_RANGE_END.number + 1);
     }
 
 }
