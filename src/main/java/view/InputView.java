@@ -1,46 +1,32 @@
 package view;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
-
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.Payment;
-import domain.WinningLotto;
+import java.util.stream.Collectors;
 
 public class InputView {
-	private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
-	private InputView() {}
+    private InputView() {
+    }
 
-	public static Payment insertPayment() {
-		try {
-			OutputView.printGuideMessage("구입금액을 입력해 주세요.");
-			return new Payment(scanner.nextLine());
-		} catch (Exception e) {
-			OutputView.printErrorMessage(e.getMessage());
-			return insertPayment();
-		}
-	}
+    public static String insertPayment() {
+        OutputView.printGuideMessage("구입금액을 입력해 주세요.");
+        return scanner.nextLine();
+    }
 
-	public static Lotto insertLotto() {
-		try {
-			OutputView.printGuideMessage("지난 주 당첨 번호를 입력해 주세요.");
-			String inputValue = scanner.nextLine();
-			String[] numbers = inputValue.split(",");
-			return Lotto.of(numbers);
-		} catch (Exception e) {
-			OutputView.printErrorMessage(e.getMessage());
-			return insertLotto();
-		}
-	}
+    public static List<String> insertLotto() {
+        OutputView.printGuideMessage("지난 주 당첨 번호를 입력해 주세요.");
+        String inputValue = scanner.nextLine();
+        String[] numbers = inputValue.split(",");
+        return Arrays.stream(numbers)
+                .map(String::trim)
+                .collect(Collectors.toUnmodifiableList());
+    }
 
-	public static WinningLotto insertBonus(Lotto lotto) {
-		try {
-			OutputView.printGuideMessage("보너스 볼을 입력해 주세요.");
-			return new WinningLotto(lotto, new LottoNumber(scanner.nextLine()));
-		} catch (Exception e) {
-			OutputView.printErrorMessage(e.getMessage());
-			return insertBonus(lotto);
-		}
-	}
+    public static String insertBonus() {
+        OutputView.printGuideMessage("보너스 볼을 입력해 주세요.");
+        return scanner.nextLine();
+    }
 }
