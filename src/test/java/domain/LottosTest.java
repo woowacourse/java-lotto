@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,7 +45,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
         WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.valueOf(2));
 
-        return lottos.calculateLottoReward(winningLotto);
+        return lottos.match(winningLotto);
     }
 }
 
