@@ -11,4 +11,5 @@ public class LottoConstant {
     public static final String INVALID_INSERT_AMOUNT = "금액은 1000원 이상이어야 합니다.";
     public static final String LOTTO_NUMBER_SIZE_NOT_VALID = "로또 번호는 6자리여야 합니다.";
     public static final String LOTTO_NUMBER_DUPLICATE = "로또 번호는 중복되지 않아야 합니다.";
+    public static final String INVALID_MANUAL_COUNT = "현재 금액으로 살 수 없습니다.";
 }

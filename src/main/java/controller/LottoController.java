@@ -21,12 +21,22 @@ public class LottoController {
 
     private List<LottoTicket> purchaseLottoTickets() {
         Money money = Money.from(InputView.getMoney());
+        int manualCount = InputView.getManualCount();
+
+        validateManualCount(money, manualCount);
+
         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTicketsByAuto(money);
 
         OutputView.printPurchasedLottoTicketNumber(lottoTickets.size());
         OutputView.printPurchasedLottoTickets(lottoTickets);
 
         return lottoTickets;
+    }
+
+    private void validateManualCount(Money money, int manualCount) {
+        if (!money.isPurchasable(manualCount * LOTTO_TICKET_PRICE)) {
+            throw new IllegalArgumentException(INVALID_MANUAL_COUNT);
+        }
     }
 
     private void createResult(List<LottoTicket> lottoTickets) {
