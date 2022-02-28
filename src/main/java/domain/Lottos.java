@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import domain.strategy.LottoGeneratorStrategy;
+
 public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
+    public Lottos(int lottoCount, LottoGeneratorStrategy lottoGeneratorStrategy) {
         lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
+            List<LottoNumber> lottoNumbers = lottoGeneratorStrategy.generate();
             lottos.add(new Lotto(lottoNumbers));
         }
     }

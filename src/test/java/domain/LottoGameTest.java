@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import domain.strategy.RandomLottoGeneratorStrategy;
+
 public class LottoGameTest {
 
     @Test
@@ -13,7 +15,7 @@ public class LottoGameTest {
         int amount = 5000;
         LottoMoney lottoMoney = new LottoMoney(amount);
 
-        LottoGame lottoGame = new LottoGame(lottoMoney.calculateLottoCount(), new RandomLottoNumberGenerator());
+        LottoGame lottoGame = new LottoGame(lottoMoney.calculateLottoCount(), new RandomLottoGeneratorStrategy());
 
         assertThat(lottoGame).isNotNull();
     }

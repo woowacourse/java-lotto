@@ -6,7 +6,7 @@ import domain.LottoGame;
 import domain.LottoNumber;
 import domain.LottoMoney;
 import domain.LottoPurchaseCount;
-import domain.RandomLottoNumberGenerator;
+import domain.strategy.RandomLottoGeneratorStrategy;
 import domain.WinningLotto;
 import domain.WinningStatistics;
 import view.InputView;
@@ -16,7 +16,7 @@ public class Application {
 
     public static void main(String[] args) {
         final LottoMoney lottoMoney = new LottoMoney(InputView.getPurchaseMoney());
-        final LottoGame lottoGame = new LottoGame(lottoMoney.calculateLottoCount(), new RandomLottoNumberGenerator());
+        final LottoGame lottoGame = new LottoGame(lottoMoney.calculateLottoCount(), new RandomLottoGeneratorStrategy());
         OutputView.showPurchasedLottos(lottoGame.getLottos());
 
         final WinningLotto winningLotto = createWinningLotto();

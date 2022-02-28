@@ -9,6 +9,9 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import domain.strategy.LottoGeneratorStrategy;
+import domain.strategy.RandomLottoGeneratorStrategy;
+
 public class LottosTest {
 
     private static List<LottoNumber> createLottoNumbers() {
@@ -27,7 +30,7 @@ public class LottosTest {
     @DisplayName("Lottos를 생성하는 경우")
     void createLottos() {
         int lottoCount = 1;
-        Lottos lottos = new Lottos(lottoCount, new RandomLottoNumberGenerator());
+        Lottos lottos = new Lottos(lottoCount, new RandomLottoGeneratorStrategy());
 
         assertThat(lottos).isNotNull();
     }
@@ -35,10 +38,10 @@ public class LottosTest {
     @Test
     @DisplayName("보유하고 있는 로또들과 당첨 로또의 매칭 결과를 계산")
     void calculateLottoMatchResult() {
-        LottoNumberGenerator lottoNumberGenerator = LottosTest::createLottoNumbers;
+        LottoGeneratorStrategy lottoGeneratorStrategy = LottosTest::createLottoNumbers;
         WinningLotto winningLotto = new WinningLotto(new Lotto(createWinnerLottoNumbers()), LottoNumber.valueOf(2));
 
-        Lottos lottos = new Lottos(1, lottoNumberGenerator);
+        Lottos lottos = new Lottos(1, lottoGeneratorStrategy);
         List<LottoReward> lottoRewards = lottos.calculateLottoReward(winningLotto);
 
         lottoRewards.forEach(lottoReward -> assertThat(lottoReward).isEqualTo(LottoReward.FIRST));

@@ -7,12 +7,14 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import domain.strategy.RandomLottoGeneratorStrategy;
+
 class LottoNumbersGeneratorTest {
 
     @Test
     @DisplayName("1 ~ 45 사이의 LottoNumber 6개를 생성하는 기능")
     void createNumbers() {
-        RandomLottoNumberGenerator lottoNumberGenerator = new RandomLottoNumberGenerator();
+        RandomLottoGeneratorStrategy lottoNumberGenerator = new RandomLottoGeneratorStrategy();
 
         List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
 

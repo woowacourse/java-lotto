@@ -1,4 +1,4 @@
-package domain;
+package domain.strategy;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomLottoNumberGenerator implements LottoNumberGenerator {
+import domain.Lotto;
+import domain.LottoNumber;
+
+public class RandomLottoGeneratorStrategy implements LottoGeneratorStrategy {
 
     private static final List<LottoNumber> lottoNumbers;
 
