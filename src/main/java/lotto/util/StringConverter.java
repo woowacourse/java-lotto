@@ -4,16 +4,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StringToIntConverter {
+public class StringConverter {
 
     private static final String DELIMITER = ",";
 
-    private StringToIntConverter() {
+    private StringConverter() {
     }
 
     public static List<Integer> toInts(String input) {
         return Arrays.stream(trim(split(input)))
-                .map(StringToIntConverter::toInt)
+                .map(StringConverter::toInt)
                 .collect(Collectors.toList());
     }
 

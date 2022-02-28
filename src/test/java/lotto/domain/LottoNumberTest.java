@@ -15,7 +15,7 @@ class LottoNumberTest {
 
     @Test
     @DisplayName("같은 숫자인 로또 번호는 동일하다")
-    void makeLottoNumber() {
+    void testLottoNumberEqual() {
         int number = 5;
         LottoNumber lottoNumber1 = new LottoNumber(number);
         LottoNumber lottoNumber2 = new LottoNumber(number);

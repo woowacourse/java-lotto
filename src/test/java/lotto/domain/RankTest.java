@@ -21,7 +21,7 @@ class RankTest {
     @DisplayName("존재하지 않는 순위일 경우 예외를 발생시킨다.")
     void throwExceptionNotExist() {
         assertThatThrownBy(() -> Rank.of(1, false))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 존재하지 않는 순위에 접근했습니다.");
     }
 }

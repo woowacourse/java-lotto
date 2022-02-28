@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.util.IntToLottoConverter;
+import lotto.util.IntsToLottoConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class RankBoardTest {
 
     @BeforeEach
     void setUp() {
-        Lotto winningNumbers = IntToLottoConverter.toLotto(List.of(1,2,3,4,5,6));
+        Lotto winningNumbers = IntsToLottoConverter.convert(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(7);
         winningLotto = new WinningLotto(winningNumbers, bonusNumber);
     }
@@ -67,7 +67,7 @@ class RankBoardTest {
 
         RankBoard board = new RankBoard(winningLotto, tickets);
 
-        assertThat(board.calcProfitRatio(90_000)).isEqualTo(0.06);
+        assertThat(board.calculateProfitRatio(90_000)).isEqualTo(0.06);
     }
 
     private List<Lotto> initTickets() {
