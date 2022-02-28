@@ -19,8 +19,8 @@ public class LottoStorage {
 
 		while (lottoCount.haveRemainToMake()) {
 			lottos.add(new Lotto(RandomLottoNumbersGenerator.pickSixNumbers()));
-			lottoCount.reduceCountOfRemain();
 		}
+		
 		return lottos;
 	}
 
