@@ -27,7 +27,7 @@ public enum Rank {
         return Arrays.stream(Rank.values())
                 .filter(r -> r.matched == size)
                 .findAny()
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException("[ERROR] 존재하지 않는 순위에 접근했습니다."));
     }
 
     public int getMatched() {

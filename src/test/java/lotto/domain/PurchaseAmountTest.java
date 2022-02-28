@@ -8,6 +8,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PurchaseAmountTest {
 
+    private static final int TICKET_PRICE = 1000;
+
     @Test
     @DisplayName("구입 금액을 생성한다")
     void makePurchaseAmount() {
@@ -29,7 +31,8 @@ class PurchaseAmountTest {
     void throwExceptionWhenInputLessThan1000() {
         int amount = 500;
         assertThatThrownBy(() -> new PurchaseAmount(amount))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 구입금액은 " + TICKET_PRICE + "원 이상이어야 합니다");
     }
 
     @Test
