@@ -18,16 +18,16 @@ public class LottosTest {
     void compareAllLottosWithWinningLottoTest() {
         Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto2 = new Lotto(Stream.of(1, 2, 3, 7, 8, 9)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
 
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 
         Lotto winningLotto = new Lotto(Stream.of(3, 4, 5, 6, 8, 9)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
 
         assertThat(lottos.compareAllLottosWithWinningLotto(winningLotto).size()).isEqualTo(2);
     }
@@ -37,10 +37,10 @@ public class LottosTest {
     void compareAllLottosWithBonusNumberTest() {
         Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto2 = new Lotto(Stream.of(1, 2, 3, 7, 8, 9)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
 
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 

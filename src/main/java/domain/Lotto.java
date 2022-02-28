@@ -1,7 +1,10 @@
 package domain;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,7 +16,7 @@ public class Lotto {
     private static final int MIN_RANGE = 0;
     private static final int MAX_RANGE = 6;
 
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
     public Lotto() {
         this.lottoNumbers = generateNumber();
@@ -23,26 +26,32 @@ public class Lotto {
         return new Lotto();
     }
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return this.lottoNumbers;
     }
 
-    public List<LottoNumber> generateNumber() {
+    public Set<LottoNumber> generateNumber() {
 
-        List<Integer> numbers = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+        List<Integer> lottoNumberCandidates = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .boxed().collect(Collectors.toList());
-        Collections.shuffle(numbers);
-        List<Integer> subNumbers = numbers.subList(MIN_RANGE, MAX_RANGE);
-        Collections.sort(subNumbers);
-        lottoNumbers = subNumbers.stream()
-                .map(number -> new LottoNumber(number))
-                .collect(Collectors.toList());
-
+        List<Integer> pickedLottoNumbers = pickLottoNumbersFromCandidates(lottoNumberCandidates);
+        lottoNumbers = sortAndConvertToLottoNumberSet(pickedLottoNumbers);
         return lottoNumbers;
+    }
+
+    private List<Integer> pickLottoNumbersFromCandidates(List<Integer> cadidates) {
+        Collections.shuffle(cadidates);
+        return cadidates.subList(MIN_RANGE, MAX_RANGE);
+    }
+
+    private Set<LottoNumber> sortAndConvertToLottoNumberSet(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     private List<Integer> getNumbers() {

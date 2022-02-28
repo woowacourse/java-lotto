@@ -29,13 +29,13 @@ public class LottoGameTest {
     void calculateYield() {
         Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto2 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto3 = new Lotto(Stream.of(11, 12, 13, 14, 15, 16)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
 
         LottoGame lottoGame = new LottoGame(Arrays.asList(lotto1, lotto2, lotto3));
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -50,13 +50,13 @@ public class LottoGameTest {
     void produceResultsTest() {
         Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto2 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto3 = new Lotto(Stream.of(11, 12, 13, 14, 15, 16)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
 
         LottoGame lottoGame = new LottoGame(Arrays.asList(lotto1, lotto2, lotto3));
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -72,13 +72,13 @@ public class LottoGameTest {
     void enterWinningLottoNumbersAndBonusNumberTest() {
         Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto2 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto3 = new Lotto(Stream.of(11, 12, 13, 14, 15, 16)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
 
         LottoGame lottoGame = new LottoGame(Arrays.asList(lotto1, lotto2, lotto3));
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(0, 2, 3, 4, 5, 6));
@@ -92,13 +92,13 @@ public class LottoGameTest {
     void enterWinningLottoNumbersAndBonusNumberTest2() {
         Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto2 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto3 = new Lotto(Stream.of(11, 12, 13, 14, 15, 16)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
 
         LottoGame lottoGame = new LottoGame(Arrays.asList(lotto1, lotto2, lotto3));
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -112,13 +112,13 @@ public class LottoGameTest {
     void enterWinningLottoNumbersAndBonusNumberTest3() {
         Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto2 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto3 = new Lotto(Stream.of(11, 12, 13, 14, 15, 16)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
 
         LottoGame lottoGame = new LottoGame(Arrays.asList(lotto1, lotto2, lotto3));
         List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
@@ -132,13 +132,13 @@ public class LottoGameTest {
     void enterWinningLottoNumbersAndBonusNumberTest4() {
         Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto2 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto lotto3 = new Lotto(Stream.of(11, 12, 13, 14, 15, 16)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
 
         LottoGame lottoGame = new LottoGame(Arrays.asList(lotto1, lotto2, lotto3));
         int bonusNumber = 1;

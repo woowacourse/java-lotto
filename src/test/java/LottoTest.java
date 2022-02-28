@@ -24,10 +24,10 @@ public class LottoTest {
     void countDuplicatedNumberTest() {
         Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         Lotto winningLotto = new Lotto(Stream.of(1,2,3,4,5,6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
 
         assertThat(lotto.countDuplicatedNumber(winningLotto)).isEqualTo(6);
     }
@@ -37,7 +37,7 @@ public class LottoTest {
     void isBonusNumberContainTest() {
         Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
         LottoNumber bonusNumber = new LottoNumber(3);
 
         assertThat(lotto.isBonusNumberContain(bonusNumber)).isEqualTo(true);

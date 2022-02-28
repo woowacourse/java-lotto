@@ -42,9 +42,9 @@ public class LottoGame {
     public void enterWinningLottoNumbersAndBonusNumber(List<Integer> notVerifiedWinningLottoNumbers
             , int notVerifiedBonusNumber) {
         validateLottoInput(notVerifiedWinningLottoNumbers, notVerifiedBonusNumber);
-        List<LottoNumber> winningLottoNumbers = notVerifiedWinningLottoNumbers.stream()
+        Set<LottoNumber> winningLottoNumbers = notVerifiedWinningLottoNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         this.winningLotto = new Lotto(winningLottoNumbers);
         this.bonusNumber = new LottoNumber(notVerifiedBonusNumber);
     }
