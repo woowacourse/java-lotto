@@ -10,9 +10,7 @@ public class Lottos {
 
     public Lottos(int count) {
         lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
-        }
+        addAutoCreatedLotto(count);
     }
 
     public Lottos(Money purchaseAmount) {
@@ -23,7 +21,22 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
+    public Lottos(List<Lotto> lottos, Money change) {
+        this.lottos = new ArrayList<>(lottos);
+        addAutoCreatedLotto(change.getMoney() / LOTTO_PRICE);
+    }
+
+    private void addAutoCreatedLotto(int count) {
+        for (int i = 0; i < count; i++) {
+            lottos.add(new Lotto());
+        }
+    }
+
     public List<Lotto> getLottos() {
         return new ArrayList<>(lottos);
+    }
+
+    public List<Lotto> getAutoLottos(int manualCount) {
+        return new ArrayList<>(lottos.subList(manualCount, lottos.size()));
     }
 }

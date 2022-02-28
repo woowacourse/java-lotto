@@ -12,6 +12,10 @@ public class InputView {
         return input();
     }
 
+    public static String inputByHandLottoCount() {
+        return input();
+    }
+
     public static List<String> inputWinningNumber() {
         return Arrays.asList(input().trim().split(DELIMITER));
     }

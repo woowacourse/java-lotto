@@ -1,16 +1,18 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 public class OutputView {
     private static final String ERROR_PREFIX = "[ERROR] ";
     private static final String PURCHASE_AMOUNT_REQUEST_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String LOTTO_BY_HAND_COUNT_REQUEST_MESSAGE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String LOTTO_NUMBERS_BY_HAND_REQUEST_MESSAGE = "\n수동으로 구매할 번호를 입력해 주세요.";
+    private static final String LOTTO_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String LOTTO_DELIMITER = ", ";
     private static final String LOTTO_FORMAT = "[%s]\n";
     private static final String WINNING_NUMBER_REQUEST_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
@@ -32,18 +34,26 @@ public class OutputView {
         System.out.println(PURCHASE_AMOUNT_REQUEST_MESSAGE);
     }
 
-    public static void printLottoCount(int lottoCount) {
-        System.out.printf(LOTTO_COUNT_MESSAGE, lottoCount);
+    public static void printLottoByHandCountRequest() {
+        System.out.println(LOTTO_BY_HAND_COUNT_REQUEST_MESSAGE);
     }
 
-    public static void printLottos(Lottos lottos) {
-        printLottoCount(lottos.getLottos().size());
-        for (Lotto lotto : lottos.getLottos()) {
+    public static void printLottoNumbersByHandRequest() {
+        System.out.println(LOTTO_NUMBERS_BY_HAND_REQUEST_MESSAGE);
+    }
+
+    public static void printLottos(int count, List<Lotto> autoLottos) {
+        printLottoCount(count, autoLottos.size());
+        for (Lotto lotto : autoLottos) {
             String numbers = lotto.getLottoNumbers().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_DELIMITER));
             System.out.printf(LOTTO_FORMAT, numbers);
         }
+    }
+
+    public static void printLottoCount(int handCount, int autoCount) {
+        System.out.printf(LOTTO_COUNT_MESSAGE, handCount, autoCount);
     }
 
     public static void printWinningNumberRequest() {

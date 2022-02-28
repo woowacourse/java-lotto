@@ -15,6 +15,11 @@ public class Money implements Comparable<Money> {
         this.money += money;
     }
 
+    public void subtract(final int money) {
+        validateMoney(this.money - money);
+        this.money -= money;
+    }
+
     public void multiply(final int count) {
         validateMoney(this.money * count);
         this.money *= count;

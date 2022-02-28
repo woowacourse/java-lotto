@@ -1,14 +1,15 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
-import lotto.domain.Profit;
 import lotto.domain.Money;
+import lotto.domain.Profit;
 import lotto.domain.WinningLotto;
 import lotto.validator.NumberValidator;
 import lotto.view.InputView;
@@ -40,8 +41,19 @@ public class LottoController {
     }
 
     private Lottos buyLotto(Money purchaseAmount) {
-        Lottos lottos = new Lottos(purchaseAmount);
-        OutputView.printLottos(lottos);
+        List<Lotto> lottoList = new ArrayList<>();
+
+        OutputView.printLottoByHandCountRequest();
+        int count = Integer.parseInt(InputView.inputByHandLottoCount());
+
+        OutputView.printLottoNumbersByHandRequest();
+        for (int i = 0; i < count; i++) {
+            lottoList.add(new Lotto(convertLottoNumbers(InputView.inputWinningNumber())));
+        }
+
+        purchaseAmount.subtract(count * LOTTO_PRICE);
+        Lottos lottos = new Lottos(lottoList, purchaseAmount);
+        OutputView.printLottos(count, lottos.getAutoLottos(count));
         return lottos;
     }
 
