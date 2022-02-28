@@ -1,6 +1,12 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import lotto.domain.vo.LottoNumber;
 import lotto.domain.vo.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,7 +35,18 @@ public class StoreTest {
     void createLotto() {
         Store store = new Store(new Money(1000L));
 
-        assertThat(store.buyLottos()).hasSize(1);
+        assertThat(store.buyLottos(new ArrayList<>())).hasSize(1);
+    }
+
+    @Test
+    @DisplayName("4000원으로 로또 2장을 미리 구매하고 남은 금액만큼 로또를 구매한다.")
+    void buyLottos() {
+        Store store = new Store(new Money(4000L));
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)));
+        lottos.add(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)));
+
+        assertThat(store.buyLottos(lottos)).hasSize(4);
     }
 
     @Test
@@ -38,5 +55,11 @@ public class StoreTest {
         assertThatIllegalArgumentException()
             .isThrownBy(() -> new Store(new Money(1100L)))
             .withMessage("입력금액은 1,000원 단위어야 한다.");
+    }
+
+    private List<LottoNumber> givenNumbers(int... numbers) {
+        return Arrays.stream(numbers)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 }

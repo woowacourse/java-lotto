@@ -25,6 +25,10 @@ public class Money {
         return new Money(this.amount - money.amount);
     }
 
+    public Money multiply(int amount) {
+        return new Money(this.amount * amount);
+    }
+
     public BigDecimal divide(Money money, int decimalPlace, RoundingMode roundingMode) {
         return BigDecimal.valueOf(this.amount).divide(BigDecimal.valueOf(money.amount), decimalPlace, roundingMode);
     }

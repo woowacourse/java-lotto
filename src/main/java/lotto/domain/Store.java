@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.vo.Money;
 
@@ -17,8 +16,8 @@ public class Store {
         this.leftMoney = money;
     }
 
-    public List<Lotto> buyLottos() {
-        List<Lotto> lottos = new ArrayList<>();
+    public List<Lotto> buyLottos(final List<Lotto> lottos) {
+        leftMoney = leftMoney.minus(LOTTO_PRICE.multiply(lottos.size()));
         while (canBuy()) {
             lottos.add(buy());
         }

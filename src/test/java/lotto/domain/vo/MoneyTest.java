@@ -49,7 +49,15 @@ public class MoneyTest {
     }
 
     @Test
-    @DisplayName("돈을 나누면 비율을 반환한다.")
+    @DisplayName("돈을 곱셈하여 결과를 반환한다.")
+    void multiplyMoney() {
+        Money money1 = new Money(5_000L);
+
+        assertThat(money1.multiply(2)).isEqualTo(new Money(10_000L));
+    }
+
+    @Test
+    @DisplayName("돈을 나누어 결과를 반환한다.")
     void divideMoney() {
         Money totalMoney = new Money(50_000L);
         Money money = new Money(3_000L);

@@ -17,7 +17,7 @@ import lotto.domain.Rank;
 
 public class OutputView {
 
-    private static final String DELIMITER = ",";
+    private static final String DELIMITER = ", ";
     private static final int DECIMAL_PLACE = 2;
 
     public static void printLottos(List<Lotto> lottos) {
