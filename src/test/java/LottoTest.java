@@ -10,13 +10,6 @@ import org.junit.jupiter.api.Test;
 public class LottoTest {
 
     @Test
-    @DisplayName("로또 번호를 생성한다.")
-    void generateNumber() {
-        Lotto lotto = new Lotto();
-        assertThat(lotto.generateNumber().size()).isEqualTo(6);
-    }
-
-    @Test
     @DisplayName("1등 당첨인지 확인하는 기능 테스트")
     void checkWinning() {
         Lotto lotto = new Lotto(Arrays.asList(3, 5, 6, 7, 8, 9));

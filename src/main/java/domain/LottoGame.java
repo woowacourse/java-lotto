@@ -11,6 +11,7 @@ public class LottoGame {
     private static final int SUM_BASE = 0;
 
     private Lottos lottos;
+    private LottoGenerator lottoGenerator = new RandomLottoGenerator();
 
     public LottoGame() {
     }
@@ -21,7 +22,7 @@ public class LottoGame {
 
     public Lottos buyLotto(Money money) {
         int lottoAmount = money.convertToAmount();
-        lottos = new Lottos(lottoAmount);
+        lottos = new Lottos(lottoGenerator.generateLottos(lottoAmount));
         return lottos;
     }
 
