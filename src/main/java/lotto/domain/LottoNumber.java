@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -32,8 +33,8 @@ public enum LottoNumber {
     }
 
     public static List<LottoNumber> getRandomLottoNumbers(int pickupCount) {
-        return IntStream.range(0, pickupCount)
-                .mapToObj(shuffleLottoNumbers()::get)
+        return shuffleLottoNumbers().stream()
+                .limit(pickupCount)
                 .sorted()
                 .collect(Collectors.toList());
     }
