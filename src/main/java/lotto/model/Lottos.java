@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.number.LottoNumbers;
@@ -10,20 +11,27 @@ import lotto.model.prize.MatchResult;
  * 구입한 로또들을 담는 일급 컬렉션 Class
  */
 public class Lottos {
-
     private List<Lotto> lottos;
+    private int count;
+    private int manualCount;
 
-    private Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos(int count, int manualCount) {
+        this.lottos = new ArrayList<>();
+        this.count = count;
+        this.manualCount = manualCount;
     }
 
-    public static Lottos purchaseAuto(Money money) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < Lotto.countAvailableTickets(money); i++) {
-            lottos.add(new Lotto(LottoNumbers.ofRandomNumbers()));
+    public void purchaseAuto() {
+        for (int i = 0; i < (count - manualCount); i++) {
+            this.lottos.add(new Lotto(LottoNumbers.ofRandomNumbers()));
         }
-        return new Lottos(lottos);
+    }
+
+    public void purchaseManual(List<String> inputs) {
+        if (isManualAvailable()) {
+            this.lottos.add(new Lotto(LottoNumbers.from(inputs)));
+            manualCount--;
+        }
     }
 
     public List<MatchResult> match(WinningLotto winningLotto) {
@@ -32,8 +40,12 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
+    public boolean isManualAvailable() {
+        return manualCount > 0;
+    }
+
     public List<Lotto> getLottos() {
-        return this.lottos;
+        return Collections.unmodifiableList(this.lottos);
     }
 
     public int getSize() {

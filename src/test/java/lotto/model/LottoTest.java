@@ -1,6 +1,7 @@
 package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import lotto.model.number.LottoNumbers;
@@ -25,5 +26,13 @@ public class LottoTest {
         for (int index = 0; index < (numberValues.size() - 1); index++) {
             assertThat(numberValues.get(index)).isLessThan(numberValues.get(index + 1));
         }
+    }
+
+    @DisplayName("구매 금액이 1000원 단위가 아니면 예외 발생")
+    @Test
+    void unit_exception() {
+        assertThatThrownBy(() -> Lotto.countAvailableTickets(Money.from("1500")))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 구매 금액은 1000원 단위로 입력하세요");
     }
 }
