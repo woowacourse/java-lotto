@@ -3,39 +3,31 @@ package controller;
 import java.util.List;
 import java.util.Map;
 
+import domain.Lottery;
 import domain.LotteryGame;
 import domain.PurchaseAmount;
 import domain.Rank;
 import domain.generatestrategy.LotteryRandomGeneratorStrategy;
-import view.InputView;
-import view.OutputView;
 
 public class LotteryGameController {
 
-	LotteryGame lotteryGame;
+	private LotteryGame lotteryGame;
 
-	public void startPurchaseLotteries() {
-		lotteryGame = new LotteryGame(new PurchaseAmount(inputMoney()), new LotteryRandomGeneratorStrategy());
-		lotteryGame.createWinningLottery(inputWinningNumber(), inputBonusBall());
-		OutputView.printLotteries(lotteryGame.getLotteries());
+	public List<Lottery> purchaseLotteries(final int purchaseAmount) {
+		lotteryGame = new LotteryGame(new PurchaseAmount(purchaseAmount), new LotteryRandomGeneratorStrategy());
+		return lotteryGame.getLotteries();
 	}
 
-	public void makeResult() {
-		Map<Rank,Integer> ranking = lotteryGame.makeWinner();
-		double incomePercent = lotteryGame.makeRankingPercent(ranking);
-		OutputView.printStatistics(ranking, incomePercent);
+	public void createWinningLottery(final List<Integer> winingNumbers, final int bonusNumber) {
+		lotteryGame.createWinningLottery(winingNumbers, bonusNumber);
 	}
 
-	private int inputBonusBall() {
-		return InputView.inputValidBonusNumber();
+	public Map<Rank, Integer> getRanking() {
+		return lotteryGame.makeWinner();
 	}
 
-	private int inputMoney() {
-		return InputView.inputValidMoney();
-	}
-
-	private List<Integer> inputWinningNumber() {
-		return InputView.inputValidLotteryNumber();
+	public double makeRankingPercent(final Map<Rank, Integer> ranking) {
+		return lotteryGame.makeRankingPercent(ranking);
 	}
 
 }
