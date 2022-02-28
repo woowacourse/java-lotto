@@ -1,7 +1,9 @@
 package lotto.domain.lottonumber;
 
-import static lotto.domain.lottonumber.LottoNumber.*;
-import static org.assertj.core.api.Assertions.*;
+import static lotto.domain.lottonumber.LottoNumber.INVALID_LOTTO_NUMBER_RANGE;
+import static lotto.domain.lottonumber.LottoNumber.NOT_NUMBER_OF_LOTTO;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

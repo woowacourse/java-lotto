@@ -19,7 +19,7 @@ public enum InputView {
         T get() throws IOException, IllegalArgumentException;
     }
 
-    public  <T> T commonInputProcess(IndividualInput<T> individualInputs) {
+    public <T> T commonInputProcess(IndividualInput<T> individualInputs) {
         try {
             return individualInputs.get();
         } catch (IOException | IllegalArgumentException e) {

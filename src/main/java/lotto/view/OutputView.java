@@ -6,10 +6,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningStats;
+import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoTicket;
 
 public enum OutputView {

@@ -81,7 +81,7 @@ class WinningNumbersTest {
                 .hasMessage(DUPLICATED_LOTTO_TICKET_AND_BONUS_BALL);
 
         Assertions.assertDoesNotThrow(
-                ()-> new WinningNumbers("1, 2, 3, 4, 5, 16", "6")
+                () -> new WinningNumbers("1, 2, 3, 4, 5, 16", "6")
         );
     }
 }
