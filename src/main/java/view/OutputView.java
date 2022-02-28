@@ -18,8 +18,8 @@ public class OutputView {
     public static final String PROFIT_PATTERN = "#.##";
     public static final String BLANK = "";
 
-    public static void printPurchasedLottoTicketNumber(int number) {
-        System.out.println(number + "개를 구매했습니다.");
+    public static void printPurchasedLottoTicketNumber(int manualCount, int autoCount) {
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "개를 구매했습니다.");
     }
 
     public static void printPurchasedLottoTickets(List<LottoTicket> lottoTickets) {
