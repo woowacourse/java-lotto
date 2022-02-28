@@ -25,7 +25,7 @@ class RandomTicketGeneratorTest {
         assertThat(ballNumbers.size()).isEqualTo(TICKET_DEFAULT_SIZE);
     }
 
-    @DisplayName("랜덤 생성된 숫자 요소는 1부터 45까지의 범위에 속해야 합니다.")
+    @DisplayName("랜덤 생성된 숫자 요소는 범위 안에 속해 있어야 합니다.")
     @Test
     void rangeTest() {
         final Ticket ticket = ticketGenerator.generateTicket();
