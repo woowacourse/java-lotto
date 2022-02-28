@@ -22,7 +22,7 @@ public class Lottery {
 	}
 
 	public int countSameNumber(final Lottery lottery) {
-		return (int)numbers.stream()
+		return (int) numbers.stream()
 			.filter(lottery::contains)
 			.count();
 	}

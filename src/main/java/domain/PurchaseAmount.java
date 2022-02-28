@@ -24,7 +24,7 @@ public class PurchaseAmount {
 	}
 
 	public double calculateEarningRate(final int earningAmount) {
-		return (double)earningAmount / purchaseAmount;
+		return (double) earningAmount / purchaseAmount;
 	}
 
 }
