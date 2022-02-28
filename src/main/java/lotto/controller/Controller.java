@@ -15,6 +15,7 @@ public class Controller {
         Money money = getMoney(scanner);
         Lottos lottos = Lottos.buyLottosByAuto(getMoney(scanner));
         OutputView.printLottos(lottos);
+
         WinningNumbers winningNumbers = getWinningNumbers(scanner);
         RankCount rankCount = new RankCount(lottos, winningNumbers);
         ProfitRate profitRate = new ProfitRate(rankCount.getTotalPrize(), money);
