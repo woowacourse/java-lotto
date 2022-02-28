@@ -19,11 +19,8 @@ public class LottoTicket {
         return getRank(bonusNumber, totalMatchNumber);
     }
 
-    private Rank getRank(LottoNumber bonusNumber, int total) {
-        if (total == Rank.THIRD.getMatchCount() && numbers.contains(bonusNumber)) {
-            return Rank.SECOND;
-        }
-        return Rank.matchResult(total);
+    private Rank getRank(LottoNumber bonusNumber, int matchCount) {
+        return Rank.matchResult(matchCount, numbers.contains(bonusNumber));
     }
 
     public List<LottoNumber> getNumbers() {

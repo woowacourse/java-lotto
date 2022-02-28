@@ -21,11 +21,18 @@ public enum Rank {
         this.matchStatus = matchStatus;
     }
 
-    public static Rank matchResult(int total) {
+    public static Rank matchResult(int matchCount, boolean matchBonusNumber) {
+        if (isSecondRank(matchCount, matchBonusNumber)) {
+            return Rank.SECOND;
+        }
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchCount == total)
+                .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
-                .orElse(Rank.valueOf(Rank.MISS.name()));
+                .orElse(Rank.MISS);
+    }
+
+    private static boolean isSecondRank(int matchCount, boolean matchBonusNumber) {
+        return matchCount == Rank.THIRD.matchCount && matchBonusNumber;
     }
 
     public double calculateTotalReward(Integer count) {
