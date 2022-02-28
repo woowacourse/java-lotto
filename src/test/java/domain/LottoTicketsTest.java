@@ -13,7 +13,7 @@ import static domain.CommonLogic.generateNumberList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketsTest {
-	static LottoTickets lottoTickets;
+	static LottoTickets lottoTickets = new LottoTickets();
 	static AnswerLotto answerLotto;
 	static Result result;
 
@@ -25,16 +25,10 @@ public class LottoTicketsTest {
 		nowLotto.add(LottoNumbers.of(generateNumberList(13, 14, 15, 16, 17, 18)));
 		nowLotto.add(LottoNumbers.of(generateNumberList(19, 20, 21, 22, 23, 24)));
 		nowLotto.add(LottoNumbers.of(generateNumberList(25, 26, 27, 28, 29, 30)));
-		lottoTickets = LottoTickets.of(new Money(5000), (int count) -> nowLotto);
+		lottoTickets.purchase(nowLotto);
 		answerLotto = AnswerLotto.of(generateNumberList(1, 2, 3, 43, 44, 45), 31);
 
 		result = lottoTickets.generateResult(answerLotto);
-	}
-
-	@Test
-	@DisplayName("입력된 구매금액만큼 로또를 구매하였는지 확인")
-	void CorrectCountOfLotto() {
-		assertThat(lottoTickets.getLottoTicketsSize()).isEqualTo(5);
 	}
 
 	@Test
