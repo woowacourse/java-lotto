@@ -30,10 +30,6 @@ public class LottoMoney {
         }
     }
 
-    public int calculateLottoCount() {
-        return amount / LOTTO_PRICE;
-    }
-
     public LottoPurchaseCount calculateLottoCountRefactor(int manualCount) {
         validateRangeManualCount(manualCount);
 
