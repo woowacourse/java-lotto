@@ -20,7 +20,12 @@ public class InputConvertor {
 	}
 
 	public static WinningLotto createWinningLotto() {
-		return new WinningLotto(createLotto(), createBonusNumber());
+		Lotto winningLotto = createLotto();
+		try {
+			return new WinningLotto(winningLotto, createBonusNumber(winningLotto));
+		} catch (Exception e) {
+			return createWinningLotto();
+		}
 	}
 
 	private static Lotto createLotto() {
@@ -32,12 +37,14 @@ public class InputConvertor {
 		}
 	}
 
-	private static LottoNumber createBonusNumber() {
+	private static LottoNumber createBonusNumber(Lotto winningLotto) {
 		try {
-			return LottoNumber.of(InputView.insertBonus());
+			LottoNumber bonus = LottoNumber.of(InputView.insertBonus());
+			new WinningLotto(winningLotto, bonus);
+			return bonus;
 		} catch (Exception e) {
 			OutputView.printErrorMessage(e.getMessage());
-			return createBonusNumber();
+			return createBonusNumber(winningLotto);
 		}
 	}
 }
