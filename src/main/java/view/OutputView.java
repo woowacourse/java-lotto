@@ -19,14 +19,13 @@ public class OutputView {
     public static final String BLANK = "";
 
     public static void printPurchasedLottoTicketNumber(int manualCount, int autoCount) {
-        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "개를 구매했습니다.");
+        System.out.println("\n수동으로 " + manualCount + "장, 자동으로 " + autoCount + "개를 구매했습니다.");
     }
 
     public static void printPurchasedLottoTickets(List<LottoTicket> lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets) {
             System.out.println(lottoTicket.getTicketNumbers());
         }
-        System.out.println();
     }
 
     public static void printWinningStat(WinningStatDto winningStatDto) {

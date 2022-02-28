@@ -20,19 +20,19 @@ public class InputView {
     }
 
     public static int getManualCount() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         return getNumber();
     }
 
     public static List<List<Integer>> getManualNumbers(int manualCount) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         return IntStream.range(0, manualCount)
             .mapToObj(num -> convertToListInteger(scanner.nextLine()))
             .collect(Collectors.toList());
     }
 
     public static List<Integer> getWinningNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
         return convertToListInteger(input);
     }
