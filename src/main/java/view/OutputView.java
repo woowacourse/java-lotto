@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-	private OutputView(){}
+	private OutputView() {
+	}
 
 	public static void printErrorMessage(String message) {
 		System.out.println(message);
@@ -21,14 +22,13 @@ public class OutputView {
 	}
 
 	private static void printLottoTicket(LottoTicket lottoTicket) {
-		System.out.println(
-			"[" +
-				lottoTicket.getNumbers().getNumbers()
-					.stream()
-					.map(LottoNumber::getNumber)
-					.map(String::valueOf)
-					.collect(Collectors.joining(", "))
-				+ "]");
+		System.out.println("[" +
+			lottoTicket.getNumbers()
+				.stream()
+				.map(LottoNumber::getNumber)
+				.map(String::valueOf)
+				.collect(Collectors.joining(", "))
+			+ "]");
 	}
 
 	public static void printResults(Result result) {

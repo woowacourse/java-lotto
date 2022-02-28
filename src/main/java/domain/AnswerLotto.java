@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 
 import static constant.ErrorConstant.START_ERROR;
@@ -28,7 +29,7 @@ public class AnswerLotto {
 	}
 
 	public List<LottoNumber> getNumbers() {
-		return this.numbers.getNumbers();
+		return Collections.unmodifiableList(this.numbers.getNumbers());
 	}
 
 	public LottoNumber getBonusNumber() {

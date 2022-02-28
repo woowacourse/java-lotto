@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class LottoNumbers {
 	}
 
 	public List<LottoNumber> getNumbers() {
-		return this.numbers;
+		return Collections.unmodifiableList(this.numbers);
 	}
 
 	private void validateNumbers(List<LottoNumber> numbers) {
