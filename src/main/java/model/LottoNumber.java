@@ -1,7 +1,8 @@
 package model;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -10,12 +11,12 @@ public class LottoNumber {
     private static final int MAX_LOTTO_NUMBER = 45;
     static final String INVALID_LOTTO_NUMBER_RANGE = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.";
 
-    private static final List<LottoNumber> LOTTO_NUMBER_POOL;
+    static final Map<Integer, LottoNumber> LOTTO_NUMBER_POOL;
 
     static {
         LOTTO_NUMBER_POOL = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toUnmodifiableList());
+                .boxed()
+                .collect(Collectors.toUnmodifiableMap(Function.identity(), LottoNumber::new));
     }
 
     private final int number;
@@ -27,7 +28,7 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(int number) {
         validateRange(number);
-        return LOTTO_NUMBER_POOL.get(number - 1);
+        return LOTTO_NUMBER_POOL.get(number);
     }
 
     private static void validateRange(int number) {
