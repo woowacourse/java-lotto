@@ -10,26 +10,22 @@ public class Money {
         this.money = checkValidMoney(money);
     }
 
-    private int checkValidMoney(int money) {
-        if (isZeroOrLess(money) || isNotThousandUnits(money)) {
+    private int checkValidMoney(final int money) {
+        if (isLessThanLottoPrice(money) || isNotThousandUnits(money)) {
             throw new IllegalArgumentException(INPUT_MONEY_UNIT_ERROR_MESSAGE);
         }
         return money;
     }
 
-    private boolean isZeroOrLess(int money) {
-        return money <= 0;
+    private boolean isLessThanLottoPrice(final int money) {
+        return money < LOTTO_PRICE;
     }
 
-    private boolean isNotThousandUnits(int money) {
+    private boolean isNotThousandUnits(final int money) {
         return money % LOTTO_PRICE != 0;
     }
 
     public int makePurchaseCount() {
         return money / LOTTO_PRICE;
-    }
-
-    public int getMoney() {
-        return money;
     }
 }
