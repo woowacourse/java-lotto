@@ -16,8 +16,12 @@ public class LottoController {
         Lottos lottos = new Lottos(money);
         OutputView.printLottoCount(lottos.getCount());
         OutputView.printLottos(lottos);
+
         WinningLotto winningLotto = requestWinningLotto();
-        printLottoResult(money, lottos, winningLotto);
+
+        Result result = new Result(lottos, winningLotto);
+        OutputView.printResult(result);
+        OutputView.printRateOfProfit(money.getRateOfProfit(result.getTotalProfit()));
     }
 
     private Money requestMoney() {
@@ -54,11 +58,5 @@ public class LottoController {
             OutputView.printException(exception);
             return requestWinningLottoContainingBonusNumber(lotto);
         }
-    }
-
-    private void printLottoResult(Money money, Lottos lottos, WinningLotto winningLotto) {
-        Result result = lottos.getResult(winningLotto);
-        OutputView.printResult(result);
-        OutputView.printRateOfProfit(money.getRateOfProfit(result.getTotalProfit()));
     }
 }
