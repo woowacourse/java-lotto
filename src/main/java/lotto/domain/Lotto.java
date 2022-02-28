@@ -1,20 +1,20 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lotto.domain.vo.LottoNumber;
 
 public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicateNumbers(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
     public int countMatchNumbers(Lotto lotto) {
@@ -27,8 +27,8 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public List<LottoNumber> getNumbers() {
-        return new ArrayList<>(lottoNumbers);
+    public Set<LottoNumber> getNumbers() {
+        return Set.copyOf(lottoNumbers);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
@@ -38,7 +38,7 @@ public class Lotto {
     }
 
     private void validateDuplicateNumbers(List<LottoNumber> lottoNumbers) {
-        if (new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
+        if (Set.copyOf(lottoNumbers).size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없다.");
         }
     }

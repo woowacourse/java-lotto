@@ -19,7 +19,7 @@ public class LottoController {
         Lottos lottos = new Lottos(buyLottos(inputMoney));
         OutputView.printLottos(lottos.getLottos());
 
-        List<Rank> ranks = lottos.match(createWinnerLotto(winnerNumbers(), bonusNumber()));
+        List<Rank> ranks = lottos.match(createWinnerLotto(InputView.inputWinnerNumbers(), InputView.inputBonusNumber()));
         OutputView.printRanks(ranks);
 
         Money totalReward = Rank.calculateReward(ranks);
@@ -34,13 +34,4 @@ public class LottoController {
     private WinnerLotto createWinnerLotto(List<LottoNumber> winnerLottoNumbers, LottoNumber bonusLottoNumber) {
         return new WinnerLotto(new Lotto(winnerLottoNumbers), bonusLottoNumber);
     }
-
-    private List<LottoNumber> winnerNumbers() {
-        return InputView.inputWinnerNumbers();
-    }
-
-    private LottoNumber bonusNumber() {
-        return InputView.inputBonusNumber();
-    }
-
 }

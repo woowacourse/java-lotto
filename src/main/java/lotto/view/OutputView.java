@@ -4,8 +4,11 @@ import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.vo.Money;
@@ -45,7 +48,7 @@ public class OutputView {
 
     private static void printLottoNumbers(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            List<LottoNumber> lottoNumbers = lotto.getNumbers();
+            List<LottoNumber> lottoNumbers = List.copyOf(lotto.getNumbers());
             lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
             System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(lottoNumbers)));
         }
