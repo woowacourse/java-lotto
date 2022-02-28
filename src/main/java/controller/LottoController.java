@@ -2,7 +2,6 @@ package controller;
 
 import static constant.LottoConstant.*;
 
-import constant.LottoConstant;
 import controller.dto.WinningStatDto;
 import domain.*;
 import view.InputView;
@@ -22,7 +21,7 @@ public class LottoController {
 
     private List<LottoTicket> purchaseLottoTickets() {
         Money money = Money.from(InputView.getMoney());
-        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(money);
+        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTicketsByAuto(money);
 
         OutputView.printPurchasedLottoTicketNumber(lottoTickets.size());
         OutputView.printPurchasedLottoTickets(lottoTickets);

@@ -19,7 +19,16 @@ public class LottoMachine {
         this.lottoNumberStrategy = lottoNumberStrategy;
     }
 
-    public List<LottoTicket> purchaseLottoTickets(Money amount) {
+    public List<LottoTicket> purchaseLottoTicketsByManual(List<List<Integer>> lottoTicketNumbers) {
+        return lottoTicketNumbers.stream()
+            .map(numbers -> numbers.stream()
+                .map(LottoNumber::getInstance)
+                .collect(Collectors.toList()))
+            .map(LottoTicket::new)
+            .collect(Collectors.toList());
+    }
+
+    public List<LottoTicket> purchaseLottoTicketsByAuto(Money amount) {
         validateInsertAmount(amount);
         return IntStream.range(DEFAULT_VALUE, amount.getPurchasableNumber(LOTTO_TICKET_PRICE))
                 .mapToObj(index -> new LottoTicket(lottoNumberStrategy.generate()))
