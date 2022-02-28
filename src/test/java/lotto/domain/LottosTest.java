@@ -49,7 +49,7 @@ public class LottosTest {
             void It_create_result(Lotto lotto, WinningPrice expected) {
                 final Lottos lottos = new Lottos(List.of(lotto));
 
-                final Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+                final Lotto winningLotto = Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6));
                 final Number bonusNumber = Number.getInstance(7);
                 final WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 
@@ -60,11 +60,11 @@ public class LottosTest {
 
             Stream<Arguments> provideSource() {
                 return Stream.of(
-                        Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), WinningPrice.All),
-                        Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 7)), WinningPrice.FiveAndBonus),
-                        Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 45)), WinningPrice.Five),
-                        Arguments.of(new Lotto(List.of(1, 2, 3, 4, 44, 45)), WinningPrice.Four),
-                        Arguments.of(new Lotto(List.of(1, 2, 3, 43, 44, 45)), WinningPrice.Three)
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6)), WinningPrice.All),
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 5, 7)), WinningPrice.FiveAndBonus),
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 5, 45)), WinningPrice.Five),
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 44, 45)), WinningPrice.Four),
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 43, 44, 45)), WinningPrice.Three)
                 );
             }
         }

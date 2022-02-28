@@ -16,7 +16,7 @@ public class Lottos {
         final int quantity = money.getAvailableQuantity(PRICE);
 
         this.lottos = IntStream.range(0, quantity)
-                .mapToObj(i -> new Lotto())
+                .mapToObj(i -> Lotto.createByAuto())
                 .collect(Collectors.toList());
     }
 

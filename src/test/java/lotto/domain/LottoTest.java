@@ -21,11 +21,11 @@ public class LottoTest {
             @Test
             @DisplayName("예외를 발생시킨다.")
             void it_throw_exception() {
-                assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)))
+                assertThatThrownBy(() -> Lotto.createByManual(List.of(1, 2, 3, 4, 5)))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessage("6개의 숫자가 필요합니다.");
 
-                assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7)))
+                assertThatThrownBy(() -> Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6, 7)))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessage("6개의 숫자가 필요합니다.");
             }
@@ -38,7 +38,7 @@ public class LottoTest {
             @Test
             @DisplayName("예외를 발생시킨다.")
             void it_throw_exception() {
-                assertThatThrownBy(() -> new Lotto(List.of(1, 1, 3, 4, 5, 6)))
+                assertThatThrownBy(() -> Lotto.createByManual(List.of(1, 1, 3, 4, 5, 6)))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessage("중복은 허용하지 않습니다.");
             }
@@ -51,7 +51,7 @@ public class LottoTest {
             @Test
             @DisplayName("1~45의 숫자 중 중복되지 않은 6개를 가진다.")
             void it_contains_six_number_1_to_45() {
-                Lotto lotto = new Lotto();
+                Lotto lotto = Lotto.createByAuto();
                 int actual = 0;
                 for (int i = 1; i < 46; i++) {
                     if (lotto.contains(Number.getInstance(i))) {
@@ -74,7 +74,7 @@ public class LottoTest {
             @Test
             @DisplayName("true를 반환한다.")
             void it_returns_true() {
-                Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+                Lotto lotto = Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6));
                 assertThat(lotto.contains(Number.getInstance(1))).isTrue();
             }
         }
@@ -86,7 +86,7 @@ public class LottoTest {
             @Test
             @DisplayName("false를 반환한다.")
             void it_returns_true() {
-                Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+                Lotto lotto = Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6));
                 assertThat(lotto.contains(Number.getInstance(7))).isFalse();
             }
         }

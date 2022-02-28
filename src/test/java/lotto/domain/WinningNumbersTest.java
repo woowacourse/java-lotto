@@ -28,7 +28,7 @@ public class WinningNumbersTest {
             @ValueSource(ints = {1, 2, 3, 4, 5, 6})
             @DisplayName("예외를 던진다.")
             void it_throws_exception(int value) {
-                final Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+                final Lotto winningLotto = Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6));
 
                 assertThatThrownBy(() -> new WinningNumbers(winningLotto, Number.getInstance(value)))
                         .isInstanceOf(IllegalArgumentException.class)
@@ -50,11 +50,11 @@ public class WinningNumbersTest {
             @MethodSource("provideSource")
             @DisplayName("당첨 순위를 알려준다.")
             void it_returns_winning_price(List<Integer> integers, WinningPrice key) {
-                final Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+                final Lotto winningLotto = Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6));
                 final Number bonusNumber = Number.getInstance(7);
                 final WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 
-                final Lotto lotto = new Lotto(integers);
+                final Lotto lotto = Lotto.createByManual(integers);
 
                 assertThat(winningNumbers.getWinningPrice(lotto).get()).isEqualTo(key);
             }
