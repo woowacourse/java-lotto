@@ -21,6 +21,11 @@ public class InputView {
 		return inputSingleNumber();
 	}
 
+	public static int inputManualLottoSize() {
+		System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+		return inputSingleNumber();
+	}
+
 	public static List<Integer> inputAnsNumbers() {
 		System.out.println("\n지난 주 당첨 번호를 구분자(, ) 기준으로 입력해 주세요.");
 		return inputMultipleNumber();

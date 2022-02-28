@@ -12,6 +12,7 @@ public class LottoGameController {
 	public static void run() {
 		try {
 			int money = InputView.inputMoney();
+			int manualLottoSize = InputView.inputManualLottoSize();
 			LottoTickets lottoTickets = generateLottoTickets(money);
 			List<Integer> lastWeekAnswerNumbers = InputView.inputAnsNumbers();
 			LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());

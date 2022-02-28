@@ -39,4 +39,20 @@ public class InputVIewTest {
 		System.setIn(inputStream);
 		assertThatThrownBy(InputView::inputAnsNumbers).isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@Test
+	void ManualLottoSizeMustBeInteger() {
+		String input = "자동";
+		InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+		System.setIn(inputStream);
+		assertThatThrownBy(InputView::inputManualLottoSize).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void ManualLottoSizeMustNotBeEmpty() {
+		String input = "\n";
+		InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+		System.setIn(inputStream);
+		assertThatThrownBy(InputView::inputManualLottoSize).isInstanceOf(IllegalArgumentException.class);
+	}
 }
