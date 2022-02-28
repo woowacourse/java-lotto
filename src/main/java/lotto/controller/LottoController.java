@@ -18,6 +18,8 @@ public class LottoController {
 
         int count = InputView.inputPassivityLottoAmount();
 
+        List<Lotto> passivityLottos = InputView.inputPassivityLottoNumbers(count);
+
         Lottos lottos = new Lottos(buyLottos(inputMoney));
         OutputView.printLottos(lottos.getLottos());
 

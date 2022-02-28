@@ -1,10 +1,13 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import lotto.domain.Lotto;
 import lotto.domain.vo.Money;
 import lotto.domain.vo.LottoNumber;
 
@@ -22,6 +25,14 @@ public class InputView {
     public static int inputPassivityLottoAmount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return stringToInt(validateBlank(SCANNER.nextLine()));
+    }
+
+    public static List<Lotto> inputPassivityLottoNumbers(final int amount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        return IntStream.range(0, amount)
+            .mapToObj(i -> new Lotto(convertToNumbers(validateBlank(SCANNER.nextLine()))))
+            .collect(Collectors.toList());
     }
 
     public static List<LottoNumber> inputWinnerNumbers() {
