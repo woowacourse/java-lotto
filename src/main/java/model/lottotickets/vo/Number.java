@@ -11,17 +11,17 @@ public class Number {
     private final int number;
 
     public Number(final int number) {
-        this.number = checkNumberInLottoRange(number);
+        this.number = checkValidNumber(number);
     }
 
-    private int checkNumberInLottoRange(final int number) {
-        if (isNumberNotInLottoRange(number)) {
+    private int checkValidNumber(final int number) {
+        if (isNotInLottoNumberRange(number)) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR_MESSAGE);
         }
         return number;
     }
 
-    private boolean isNumberNotInLottoRange(final int number) {
+    private boolean isNotInLottoNumberRange(final int number) {
         return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
     }
 

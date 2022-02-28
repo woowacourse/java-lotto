@@ -18,14 +18,14 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public Rank compareWithWinningNumber(final WinningNumbers winningNumbers) {
-        int matchCount = countMatchNumber(winningNumbers.getWinningNumbers());
+    public Rank findWinningRank(final WinningNumbers winningNumbers) {
+        int matchCount = countMatch(winningNumbers.getWinningNumbers());
         boolean hasBonus = hasBonusNumber(winningNumbers.getBonusNumber());
 
         return Rank.valueOf(matchCount, hasBonus);
     }
 
-    private int countMatchNumber(final List<Number> winningNumbers) {
+    private int countMatch(final List<Number> winningNumbers) {
         return (int) numbers.stream()
                 .filter(number -> number.hasSameNumber(winningNumbers))
                 .count();

@@ -1,6 +1,5 @@
 package model;
 
-import java.nio.file.Watchable;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -10,9 +9,8 @@ import java.util.stream.IntStream;
 
 import model.lottonumbergenerator.Generator;
 import model.lottotickets.Lotto;
-import model.lottotickets.LottoDto;
 import model.winning.Rank;
-import model.winning.Statistics;
+import model.winning.WinningResult;
 import model.winning.WinningNumbers;
 
 public class Lottos {
@@ -26,20 +24,18 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public Statistics sendWinningResult(final WinningNumbers winningNumbers) {
+    public WinningResult makeWinningResult(final WinningNumbers winningNumbers) {
         Map<Rank, Integer> result = new LinkedHashMap<>();
         Arrays.stream(Rank.values()).forEach(rank -> result.put(rank, 0));
 
         for (Lotto lotto : lottos) {
-            Rank key = lotto.compareWithWinningNumber(winningNumbers);
-            result.put(key, result.get(key) + 1);
+            Rank foundRank = lotto.findWinningRank(winningNumbers);
+            result.put(foundRank, result.get(foundRank) + 1);
         }
-        return new Statistics(result);
+        return new WinningResult(result);
     }
 
-    public List<LottoDto> sendLottosInformation() {
-        return lottos.stream()
-                .map(lotto -> new LottoDto(lotto.getLottoNumbers()))
-                .collect(Collectors.toList());
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }
