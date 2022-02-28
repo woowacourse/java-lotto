@@ -9,13 +9,13 @@ import java.util.regex.Pattern;
 public class InputView {
 
     private static final String WIN_LOTTO_NUMBER_REGEX = "^[\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+$";
-    private static Scanner scanner;
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static int inputMoney() {
         System.out.println(MONEY_INPUT_MESSAGE);
-        scanner = new Scanner(System.in);
         try {
-            return scanner.nextInt();
+            String money = scanner.nextLine();
+            return Integer.parseInt(money);
         } catch (Exception e) {
             throw new IllegalArgumentException(NUM_ERROR_MESSAGE);
         }
@@ -23,7 +23,6 @@ public class InputView {
 
     public static String inputWinLottoNumbers() {
         System.out.println(LOTTO_NUMBER_INPUT_MESSAGE);
-        scanner = new Scanner(System.in);
         String lottoNumbers = scanner.nextLine();
         validatePattern(lottoNumbers);
         return lottoNumbers;
@@ -31,9 +30,9 @@ public class InputView {
 
     public static int inputBonusNumber() {
         System.out.println(BONUS_INPUT_MESSAGE);
-        scanner = new Scanner(System.in);
         try {
-            return scanner.nextInt();
+            String bonus = scanner.nextLine();
+            return Integer.parseInt(bonus);
         } catch (Exception e) {
             throw new IllegalArgumentException(NUM_ERROR_MESSAGE);
         }
