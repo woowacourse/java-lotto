@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import domain.Lotto;
 import domain.LottoNumber;
 import domain.LottoReward;
-import domain.Lottos;
 
 public class OutputView {
 
@@ -23,10 +22,10 @@ public class OutputView {
     private static final int SECOND_DECIMAL_POINT = 100;
     private static final int BENEFIT_STANDARD = 1;
 
-    public static void showPurchasedLottos(Lottos lottos) {
-        System.out.println(lottos.getLottos().size() + RESPONSE_MESSAGE_PURCHASED_LOTTO);
+    public static void showPurchasedLottos(List<Lotto> lottos) {
+        System.out.println(lottos.size() + RESPONSE_MESSAGE_PURCHASED_LOTTO);
 
-        for (Lotto lotto : lottos.getLottos()) {
+        for (Lotto lotto : lottos) {
             System.out.println(lotto.getLottoNumbers().stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList()));
