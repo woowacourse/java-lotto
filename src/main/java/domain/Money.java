@@ -7,9 +7,9 @@ public class Money {
 
     private final int money;
 
-    public Money(final String input) {
-        this.money = Integer.parseInt(input);
-        validateMoneyRange(this.money);
+    public Money(final int input) {
+        validateMoneyRange(input);
+        this.money = input;
     }
 
     private void validateMoneyRange(final int money) {
