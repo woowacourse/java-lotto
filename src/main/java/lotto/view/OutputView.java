@@ -1,13 +1,10 @@
 package lotto.view;
 
 import java.util.EnumMap;
-import java.util.List;
-import java.util.stream.Collectors;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
+import lotto.dto.LottoResultDto;
+import lotto.dto.LottoTicketDto;
+import lotto.dto.LottoTicketsDto;
 
 public class OutputView {
 
@@ -19,23 +16,17 @@ public class OutputView {
     private static final String YIELD_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final int YIELD_STANDARD = 1;
 
-    public static void displayLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getLottoTickets().size() + LOTTO_COUNT_FORMAT);
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            System.out.println(toIntegerNumbers(lottoTicket.getNumbers()).toString());
+    public static void displayLottoTickets(LottoTicketsDto lottoTicketsDto) {
+        System.out.println(lottoTicketsDto.getLottoTickets().size() + LOTTO_COUNT_FORMAT);
+        for (LottoTicketDto lottoTicketDto : lottoTicketsDto.getLottoTickets()) {
+            System.out.println(lottoTicketDto.getNumbers().toString());
         }
         System.out.println();
     }
 
-    public static void displayLottoResult(LottoResult lottoResult) {
-        displayStatistics(lottoResult.getStatistics());
-        displayYield(lottoResult.getYield());
-    }
-
-    private static List<Integer> toIntegerNumbers(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
+    public static void displayLottoResult(LottoResultDto lottoResultDto) {
+        displayStatistics(lottoResultDto.getStatistics());
+        displayYield(lottoResultDto.getYield());
     }
 
     private static void displayStatistics(EnumMap<Rank, Integer> statistics) {
