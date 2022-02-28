@@ -16,14 +16,14 @@ public class Lottos {
 
     public static Lottos buyLottosByAuto(Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < calculateTotalLottoCount(money); i++) {
+        for (int i = 0; i < getTotalLottoCount(money); i++) {
             lottos.add(Lotto.generateLottoByAuto());
         }
         return new Lottos(lottos);
     }
 
-    private static int calculateTotalLottoCount(Money money) {
-        return money.getMoney() / LOTTO_TICKET_PRICE;
+    private static int getTotalLottoCount(Money money) {
+        return money.calculateTotalLottoCount(LOTTO_TICKET_PRICE);
     }
 
     public List<Lotto> getLottos() {

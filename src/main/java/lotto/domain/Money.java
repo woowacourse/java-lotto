@@ -13,4 +13,8 @@ public class Money {
     public int getMoney() {
         return money;
     }
+
+    public int calculateTotalLottoCount(int lottoTicketPrice) {
+        return money / lottoTicketPrice;
+    }
 }
