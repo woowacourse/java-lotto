@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Lottos;
 import model.lottonumbergenerator.Generator;
-import model.money.Money;
+import model.Money;
 import model.winning.WinningNumbers;
 import view.InputView;
 import view.OutputView;
@@ -22,7 +22,7 @@ public class MachineController {
 
     public void runMachine() {
         Money money = insertMoney();
-        Lottos lottos = purchaseLottos(money.generatePurchaseCount(), generator);
+        Lottos lottos = purchaseLottos(money, generator);
         WinningNumbers winningNumbers = insertWinningNumbers();
     }
 
@@ -35,9 +35,9 @@ public class MachineController {
         }
     }
 
-    private Lottos purchaseLottos(int purchaseCount, Generator generator) {
-        Lottos lottos = new Lottos(purchaseCount, generator);
-        outputView.printPurchasedLottos(lottos.getLottosInformation());
+    private Lottos purchaseLottos(Money money, Generator generator) {
+        Lottos lottos = new Lottos(money, generator);
+        outputView.printPurchasedLottos(lottos.sendLottosInformation());
         return lottos;
     }
 

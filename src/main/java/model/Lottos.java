@@ -16,7 +16,8 @@ import model.winning.Statistics;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(final int purchaseCount, final Generator generator) {
+    public Lottos(final Money money, final Generator generator) {
+        int purchaseCount = money.makePurchaseCount();
         lottos = IntStream
                 .rangeClosed(1, purchaseCount)
                 .mapToObj(index -> new Lotto(generator))
