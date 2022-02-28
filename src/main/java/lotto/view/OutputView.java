@@ -25,10 +25,6 @@ public enum OutputView {
     public static final String LOSS_WARNING_MESSAGE = "%s(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     public static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    public void printErrorMessage(String message) {
-        out.println(message);
-    }
-
     public void printPurchasedTickets(List<LottoTicket> lottoTickets) {
         out.printf(PURCHASED_TICKET_MESSAGE, lottoTickets.size());
         lottoTickets.forEach(this::printLottoNumbers);
@@ -57,14 +53,14 @@ public enum OutputView {
             out.printf(WINNING_STATS_SECOND_RESULT_MESSAGE,
                     LottoRank.THIRD.hitCount(),
                     LottoRank.THIRD.prizeMoney(),
-                    winningStats.get(LottoRank.THIRD))
+                    winningStats.getCorrectAnswerNumbers(LottoRank.THIRD))
             ;
             return;
         }
         out.printf(WINNING_STATS_RESULT_MESSAGE,
                 lottoRank.hitCount(),
                 lottoRank.prizeMoney(),
-                winningStats.get(lottoRank)
+                winningStats.getCorrectAnswerNumbers(lottoRank)
         );
     }
 

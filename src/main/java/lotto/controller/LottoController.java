@@ -1,8 +1,6 @@
 package lotto.controller;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.function.Predicate;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicketFactory;
 import lotto.domain.PurchaseAmount;
@@ -10,6 +8,7 @@ import lotto.domain.WinningStats;
 import lotto.domain.lottonumber.LottoTicket;
 import lotto.domain.lottonumber.WinningNumbers;
 import lotto.view.InputView;
+import lotto.view.InputView.IndividualInput;
 import lotto.view.OutputView;
 
 public class LottoController {
@@ -19,7 +18,7 @@ public class LottoController {
     private final LottoTicketFactory lottoTicketFactory = LottoTicketFactory.INSTANCE;
 
     public void run() {
-        PurchaseAmount purchaseAmount = inputMoney();
+        PurchaseAmount purchaseAmount = getPurchaseAmount();
 
         List<LottoTicket> lottoTickets = purchaseLottoTickets(purchaseAmount);
         outputView.printPurchasedTickets(lottoTickets);
@@ -30,9 +29,10 @@ public class LottoController {
         outputView.printWinningStats(winningStats, purchaseAmount);
     }
 
-    private PurchaseAmount inputMoney() {
-        IndividualInput<PurchaseAmount> input = () -> new PurchaseAmount(inputView.inputMoney());
-        return commonInputProcess(input);
+    private PurchaseAmount getPurchaseAmount() {
+        IndividualInput<PurchaseAmount> individualInputs =
+                () -> new PurchaseAmount(inputView.inputMoney());
+        return inputView.commonInputProcess(individualInputs);
     }
 
     private List<LottoTicket> purchaseLottoTickets(PurchaseAmount purchaseAmount) {
@@ -40,34 +40,14 @@ public class LottoController {
     }
 
     private WinningNumbers inputWinningNumbers() {
-        IndividualInput<WinningNumbers> input =
-                () -> new WinningNumbers(inputView.inputWinningNumbers(), inputView.inputBonusBall());
-        return commonInputProcess(input);
+        return inputView.commonInputProcess(
+                () -> new WinningNumbers(inputView.inputWinningNumbers(), inputView.inputBonusBall()));
     }
 
     private WinningStats calculateStatistics(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
-        WinningStats winningStats = new WinningStats();
-
-        for (LottoTicket lottoTicket : lottoTickets) {
-            LottoRank lottoRank = LottoRank.getRank(
-                    winningNumbers.getMatchCount(lottoTicket),
-                    winningNumbers.doesMatchBonusBall(lottoTicket)
-            );
-            winningStats.put(lottoRank);
-        }
+        WinningStats winningStats = new WinningStats(lottoTickets, winningNumbers);
         return winningStats;
     }
 
-    private <T> T commonInputProcess(IndividualInput<T> individualInputs) {
-        try {
-            return individualInputs.get();
-        } catch (IOException | IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
-            return commonInputProcess(individualInputs);
-        }
-    }
 
-    private interface IndividualInput<T> {
-        T get() throws IOException, IllegalArgumentException;
-    }
 }

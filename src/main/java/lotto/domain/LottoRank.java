@@ -48,9 +48,9 @@ public enum LottoRank {
         return prizeMoney;
     }
 
-    public static LottoRank getRank(int winningNumberCount, boolean containsBonusBall) {
+    public static LottoRank getRank(int hitCount, boolean containsBonusBall) {
         return Arrays.stream(values())
-                .filter(classifyRank(winningNumberCount, containsBonusBall))
+                .filter(classifyRank(hitCount, containsBonusBall))
                 .findFirst()
                 .orElseGet(() -> FAILED);
     }

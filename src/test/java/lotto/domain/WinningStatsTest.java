@@ -2,55 +2,58 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+import lotto.domain.lottonumber.LottoTicket;
+import lotto.domain.lottonumber.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class WinningStatsTest {
 
     @Test
-    @DisplayName("당첨 등수가 나오면 해당 등수의 개수를 +1 한다")
-    void putLottoRank() {
+    @DisplayName("당첨 금액을 맞추면 맞춘 횟수가 +1 만큼 된다")
+    void getCorrectAnswerNumbers() {
         // given
-        WinningStats winningStats = new WinningStats();
-        LottoRank rank = LottoRank.getRank(6, true);
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 10, 11, 12", "13");
+        WinningStats winningStats = new WinningStats(List.of(lottoTicket), winningNumbers);
 
         // when
-        winningStats.put(rank);
-        int result = winningStats.get(rank);
+        int correctAnswerNumbers = winningStats.getCorrectAnswerNumbers(LottoRank.FIFTH);
 
         // then
-        assertThat(result).isEqualTo(1);
+        assertThat(correctAnswerNumbers).isEqualTo(1);
     }
+
 
     @Test
     @DisplayName("당첨 금액의 총합을 반환한다")
     void getTotalPrize() {
         // given
-        WinningStats winningStats = new WinningStats();
-        LottoRank lottoRank = LottoRank.getRank(6, true);
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 10", "6");
+        WinningStats winningStats = new WinningStats(List.of(lottoTicket), winningNumbers);
 
         // when
-        winningStats.put(lottoRank);
-        winningStats.put(lottoRank);
-        long result = winningStats.getTotalPrize();
+        long totalPrize = winningStats.getTotalPrize();
 
         // then
-        assertThat(result).isEqualTo(4_000_000_000L);
+        assertThat(totalPrize).isEqualTo(LottoRank.SECOND.prizeMoney());
     }
 
     @Test
     @DisplayName("수익률을 반환한다")
     void getEarningsRate() {
         // given
-        WinningStats winningStats = new WinningStats();
-        LottoRank lottoRank = LottoRank.getRank(3, true);
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 10, 11, 12", "13");
+        WinningStats winningStats = new WinningStats(List.of(lottoTicket), winningNumbers);
         PurchaseAmount money = new PurchaseAmount("10000");
 
         // when
-        winningStats.put(lottoRank);
-        double result = winningStats.getEarningsRate(money);
+        double earningsRate = winningStats.getEarningsRate(money);
 
         // then
-        assertThat(result).isEqualTo(0.5);
+        assertThat(earningsRate).isEqualTo(0.5);
     }
 }
