@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.domain.vo.Money;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class Store {
         this.leftMoney = leftMoney;
     }
 
-    public List<Lotto> buyLottos() {
+    public List<Lotto> buyAutomaticLottos() {
         List<Lotto> lottos = new ArrayList<>();
         while (canBuy()) {
             lottos.add(buy());

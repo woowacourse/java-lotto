@@ -17,33 +17,36 @@ public class LottoController {
     public void run() {
         Money totalMoney = Money.createMoney(InputView.inputMoney());
         int manualLottoCount = InputView.inputManualLottoCount();
-        Money manualMoney = Money.createMoney(manualLottoCount * Store.LOTTO_PRICE);
-        validateManualLottoCountOutOfMoney(totalMoney, manualMoney);
+        validateManualLottoCountOutOfMoney(totalMoney, manualLottoCount);
 
-        List<Lotto> manualLottos = InputView.inputManualLottos(manualLottoCount);
-
-        List<Lotto> automaticLottos = buyLottos(totalMoney.minus(manualMoney));
-        manualLottos.addAll(automaticLottos);
-        Lottos lottos = new Lottos(manualLottos);
-        OutputView.printLottoCount(manualLottoCount, lottos.getLottos().size() - manualLottoCount);
-        OutputView.printLottos(lottos.getLottos());
+        Lottos lottos = buyLottos(totalMoney, manualLottoCount);
+        OutputView.printLottos(manualLottoCount, lottos.getLottos());
 
         List<Rank> ranks = lottos.matchRanks(createWinnerLotto(winnerNumbers(), bonusNumber()));
         OutputView.printRanks(ranks);
-
-        Rate rate = calculateRate(totalMoney, ranks);
-        OutputView.printRate(rate);
+        OutputView.printRate(calculateRate(totalMoney, ranks));
     }
 
-    private void validateManualLottoCountOutOfMoney(Money totalMoney, Money anotherMoney) {
-        if (anotherMoney.isGreaterThan(totalMoney)) {
+    private Lottos buyLottos(Money totalMoney, int manualLottoCount) {
+        List<Lotto> manualLottos = InputView.inputManualLottos(manualLottoCount);
+
+        Money manualMoney = Money.createMoneyByCount(manualLottoCount);
+        List<Lotto> automaticLottos = buyAutomaticLottos(totalMoney.minus(manualMoney));
+        manualLottos.addAll(automaticLottos);
+        return new Lottos(manualLottos);
+    }
+
+    private void validateManualLottoCountOutOfMoney(Money totalMoney, int manualLottoCount) {
+        Money manualMoney = Money.createMoneyByCount(manualLottoCount);
+
+        if (manualMoney.isGreaterThan(totalMoney)) {
             throw new IllegalArgumentException("수동으로 구매할 로또 수가 구매 가능한 로또 수보다 크다.");
         }
     }
 
-    private List<Lotto> buyLottos(Money money) {
+    private List<Lotto> buyAutomaticLottos(Money money) {
         Store store = new Store(money);
-        return store.buyLottos();
+        return store.buyAutomaticLottos();
     }
 
     private WinnerLotto createWinnerLotto(Lotto winnerNumbers, LottoNumber bonusNumber) {

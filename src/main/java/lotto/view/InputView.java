@@ -31,7 +31,7 @@ public class InputView {
     }
 
     public static List<Lotto> inputManualLottos(int manualLottoCount) {
-        System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
+        printManualLottos(manualLottoCount);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             String input = SCANNER.nextLine();
@@ -39,6 +39,12 @@ public class InputView {
             lottos.add(new Lotto(convertToNumbers(input)));
         }
         return lottos;
+    }
+
+    private static void printManualLottos(int manualLottoCount) {
+        if (manualLottoCount != 0) {
+            System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
+        }
     }
 
     public static List<LottoNumber> inputWinnerNumbers() {

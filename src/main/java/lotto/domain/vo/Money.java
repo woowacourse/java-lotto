@@ -18,6 +18,10 @@ public class Money {
         this.value = value;
     }
 
+    public static Money createMoneyByCount(int count) {
+        return new Money(count * UNDER_LIMIT_MONEY);
+    }
+
     public static Money createMoney(long value) {
         validateMoneyRange(value);
         return new Money(value);
