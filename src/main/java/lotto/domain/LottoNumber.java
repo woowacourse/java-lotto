@@ -33,26 +33,26 @@ public enum LottoNumber {
 
     public static List<LottoNumber> getRandomLottoNumbers(int pickupCount) {
         return IntStream.range(0, pickupCount)
-                .mapToObj(LottoNumber.shuffleLottoNumbers()::get)
+                .mapToObj(shuffleLottoNumbers()::get)
                 .sorted()
                 .collect(Collectors.toList());
     }
 
     private static List<LottoNumber> shuffleLottoNumbers() {
-        List<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbers();
+        List<LottoNumber> lottoNumbers = getLottoNumbers();
         Collections.shuffle(lottoNumbers);
         return lottoNumbers;
     }
 
     private static List<LottoNumber> getLottoNumbers() {
-        return Arrays.stream(LottoNumber.values())
+        return Arrays.stream(values())
                 .collect(Collectors.toList());
     }
 
     public static LottoNumber getByString(String input) {
         checkNaturalNumber(input);
         checkRange(input);
-        return LottoNumber.valueOf(LOTTO_NUMBER_PREFIX + input);
+        return valueOf(LOTTO_NUMBER_PREFIX + input);
     }
 
     private static void checkNaturalNumber(String input) {
