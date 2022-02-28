@@ -1,5 +1,7 @@
 package lotto.model;
 
+import static lotto.ValidationUtils.*;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -8,6 +10,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
+        validateEmptyCollection(lottos);
         this.lottos = lottos;
     }
 
