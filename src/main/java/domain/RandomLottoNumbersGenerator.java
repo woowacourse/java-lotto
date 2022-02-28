@@ -1,5 +1,7 @@
 package domain;
 
+import static domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
+import static domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
 import static domain.Ticket.LOTTO_SIZE;
 
 import java.util.Collections;
@@ -10,13 +12,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
-    public static final int MINIMUM_NUMBER = 1;
-    public static final int MAXIMUM_NUMBER = 45;
-    
-    private final List<LottoNumber> lottoNumbers;
 
-    public RandomLottoNumbersGenerator() {
-        lottoNumbers = IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
+    private static final List<LottoNumber> lottoNumbers;
+
+    static {
+        lottoNumbers = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
