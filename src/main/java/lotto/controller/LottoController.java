@@ -20,8 +20,10 @@ public class LottoController {
     private static final String NUMBER_REGEX = "\\d+";
 
     public LottoMachine ready() {
-        return new LottoMachine(manageLottos(), makeWinningLotto(InputView.inputWinningNumbers(),
-                InputView.inputBonusNumber()));
+        Lottos lottos = manageLottos();
+        WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
+                InputView.inputBonusNumber());
+        return new LottoMachine(lottos, winningLotto);
     }
 
     private Lottos manageLottos() {
