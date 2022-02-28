@@ -11,20 +11,12 @@ public class LottoFactory {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final List<LottoNumber> lottoNumberPool;
-
     private LottoFactory() {
-        lottoNumberPool = createLottoNumbers();
+
     }
 
     public static LottoFactory getInstance() {
         return LOTTO_FACTORY;
-    }
-
-    private List<LottoNumber> createLottoNumbers() {
-        return IntStream.rangeClosed(1, 45)
-                .mapToObj(LottoNumber::valueOf)
-                .collect(Collectors.toList());
     }
 
     public List<Lotto> generateLotteries(LottoPurchasingMoney lottoPurchasingMoney) {
@@ -38,6 +30,7 @@ public class LottoFactory {
     }
 
     private Lotto generateAuto() {
+        List<LottoNumber> lottoNumberPool = new ArrayList<>(LottoNumber.LOTTO_NUMBER_POOL.values());
         Collections.shuffle(lottoNumberPool);
         return Lotto.from(new ArrayList<>(lottoNumberPool.subList(0, 6)));
     }
