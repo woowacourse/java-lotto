@@ -1,6 +1,6 @@
 package dto;
 
-import model.winning.Rank;
+import model.rank.Rank;
 
 public class RankResultDto {
     private final Rank rank;
