@@ -3,9 +3,11 @@ package lotto.view;
 import static org.assertj.core.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Arrays;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -70,5 +72,10 @@ class ResultViewTest {
 
         assertThat(outputStreamCaptor.toString())
             .contains("총 수익률은 1.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
+    }
+
+    @AfterEach
+    void afterAll() {
+        System.setOut(new PrintStream(System.out));
     }
 }
