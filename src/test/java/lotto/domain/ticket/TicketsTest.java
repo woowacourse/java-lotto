@@ -24,7 +24,7 @@ class TicketsTest {
         return new Tickets(ticketCount, customTicketGenerator);
     }
 
-    @DisplayName("로또 목록 생성, 개수 일치 확인 테스트")
+    @DisplayName("로또는 주어진 개수만큼 생성되어야 한다.")
     @ParameterizedTest(name = "[{index}] 로또 개수 : {1}")
     @MethodSource("lotto.domain.ticket.provider.TicketsTestProvider#provideForGenerateTest")
     void generateTicketsSizeCheckTest(final List<TicketDto> generatedTickets, final int ticketCount) {
@@ -32,7 +32,7 @@ class TicketsTest {
         assertThat(tickets.getSize()).isEqualTo(ticketCount);
     }
 
-    @DisplayName("당첨 등수 목록 확인 테스트")
+    @DisplayName("계산된 당첨 등수 목록은 기댓값과 일치해야 한다.")
     @ParameterizedTest(name = "[{index}] 당첨 등수 목록 : {4}")
     @MethodSource("lotto.domain.ticket.provider.TicketsTestProvider#provideForCalculateRanksTest")
     void calculateRanksTest(final TicketDto winningTicketNumbers,
