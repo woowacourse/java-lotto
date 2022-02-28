@@ -12,16 +12,15 @@ public class LottoTickets {
 
 	private final List<LottoTicket> lottoTickets;
 
-	public LottoTickets(List<LottoTicket> lottoTickets) {
+	private LottoTickets(List<LottoTicket> lottoTickets) {
 		this.lottoTickets = lottoTickets;
 	}
 
 	public static LottoTickets of(Money money, LottoNumbersGenerator lottoNumbersGenerator) {
-		int count = money.calculateCount();
-
 		List<LottoTicket> lottoTickets = new ArrayList<>();
-		while (count-- > 0) {
-			lottoTickets.add(new LottoTicket(lottoNumbersGenerator));
+
+		for (LottoNumbers lottoNumbers : lottoNumbersGenerator.generate(money.calculateCount())) {
+			lottoTickets.add(new LottoTicket(lottoNumbers));
 		}
 
 		return new LottoTickets(lottoTickets);

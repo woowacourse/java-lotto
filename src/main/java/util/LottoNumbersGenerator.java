@@ -1,8 +1,10 @@
 package util;
 
+import domain.LottoNumbers;
+
 import java.util.List;
 
 public interface LottoNumbersGenerator {
 
-	List<Integer> generate();
+	List<LottoNumbers> generate(int count);
 }

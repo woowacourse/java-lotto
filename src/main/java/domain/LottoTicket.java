@@ -1,15 +1,13 @@
 package domain;
 
-import util.LottoNumbersGenerator;
-
 import static constant.LottoConstant.NUMBER_FOR_BONUS_CHECK;
 
 public class LottoTicket {
 
 	LottoNumbers numbers;
 
-	public LottoTicket(LottoNumbersGenerator lottoNumbersGenerator) {
-		this.numbers = LottoNumbers.of(lottoNumbersGenerator.generate());
+	public LottoTicket(LottoNumbers numbers) {
+		this.numbers = numbers;
 	}
 
 	public ResultStatics calculate(AnswerLotto answerLotto) {

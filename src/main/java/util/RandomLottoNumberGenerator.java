@@ -1,6 +1,6 @@
 package util;
 
-import util.LottoNumbersGenerator;
+import domain.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,8 +16,14 @@ public class RandomLottoNumberGenerator implements LottoNumbersGenerator {
 	}
 
 	@Override
-	public List<Integer> generate() {
-		Collections.shuffle(candidates);
-		return new ArrayList<>(candidates.subList(0, 6));
+	public List<LottoNumbers> generate(int count) {
+		List<LottoNumbers> result = new ArrayList<>();
+
+		while (count-- > 0) {
+			Collections.shuffle(candidates);
+			result.add(LottoNumbers.of(candidates.subList(0, 6)));
+		}
+
+		return result;
 	}
 }

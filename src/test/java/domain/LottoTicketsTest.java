@@ -19,13 +19,13 @@ public class LottoTicketsTest {
 
 	@BeforeAll
 	static void setUp() {
-		List<LottoTicket> nowLotto = new ArrayList<>();
-		nowLotto.add(new LottoTicket(() -> generateNumberList(1, 2, 3, 4, 5, 6)));
-		nowLotto.add(new LottoTicket(() -> generateNumberList(7, 8, 9, 10, 11, 12)));
-		nowLotto.add(new LottoTicket(() -> generateNumberList(13, 14, 15, 16, 17, 18)));
-		nowLotto.add(new LottoTicket(() -> generateNumberList(19, 20, 21, 22, 23, 24)));
-		nowLotto.add(new LottoTicket(() -> generateNumberList(25, 26, 27, 28, 29, 30)));
-		lottoTickets = new LottoTickets(nowLotto);
+		List<LottoNumbers> nowLotto = new ArrayList<>();
+		nowLotto.add(LottoNumbers.of(generateNumberList(1, 2, 3, 4, 5, 6)));
+		nowLotto.add(LottoNumbers.of(generateNumberList(7, 8, 9, 10, 11, 12)));
+		nowLotto.add(LottoNumbers.of(generateNumberList(13, 14, 15, 16, 17, 18)));
+		nowLotto.add(LottoNumbers.of(generateNumberList(19, 20, 21, 22, 23, 24)));
+		nowLotto.add(LottoNumbers.of(generateNumberList(25, 26, 27, 28, 29, 30)));
+		lottoTickets = LottoTickets.of(new Money(5000), (int count) -> nowLotto);
 		answerLotto = AnswerLotto.of(generateNumberList(1, 2, 3, 43, 44, 45), 31);
 
 		result = lottoTickets.generateResult(answerLotto);
