@@ -33,13 +33,14 @@ public class Controller {
     }
 
     private static void purchaseLottos(Lottos lottos) {
+        InputView.askManualNumbers();
         purchaseManualLotto(lottos);
         lottos.purchaseAuto();
     }
 
     private static void purchaseManualLotto(Lottos lottos) {
         while (lottos.isManualAvailable()) {
-            lottos.purchaseManual(List.of("1", "2", "3", "4", "5", "6"));
+            lottos.purchaseManual(List.of(InputView.readNumbers()));
         }
     }
 
