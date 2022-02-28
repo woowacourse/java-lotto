@@ -15,6 +15,7 @@ public class PickedNumbers {
     private List<Integer> pickedNumbers;
     private static final String DUPLICATION_ERROR_MESSAGE = "중복값이 있습니다";
     private static final String NOT_IN_RANGE_MESSAGE = "범위내에 없습니다";
+    private static final String NUMBER_DELIMITER = ",";
 
     public PickedNumbers() {
         Collections.shuffle(numbers);
@@ -22,7 +23,7 @@ public class PickedNumbers {
     }
 
     public PickedNumbers(String input) {
-        pickedNumbers = Arrays.stream(input.split(","))
+        pickedNumbers = Arrays.stream(input.split(NUMBER_DELIMITER))
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(toList());
@@ -30,11 +31,10 @@ public class PickedNumbers {
         validateDuplicate();
     }
 
-    public int findMatchCount(PickedNumbers numbers) {
+    public long findMatchCount(PickedNumbers numbers) {
         return pickedNumbers.stream()
                 .filter(numbers.getPickedNumbers()::contains)
-                .collect(toList())
-                .size();
+                .count();
     }
 
     public boolean isContainNumber(int targetNumber) {

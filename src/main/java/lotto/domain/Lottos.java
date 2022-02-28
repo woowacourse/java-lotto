@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private List<Lotto> lottos;
-    private LottoResult result;
+    private final List<Lotto> lottos;
+    private final LottoResult result;
 
     public Lottos(Money money) {
         this.lottos = new ArrayList<>();
@@ -31,14 +31,11 @@ public class Lottos {
     }
 
     private void checkLottoResult(WinningLotto winningLotto, PickedNumbers pickedNumbers) {
-        LottoRank lottoRank = winningLotto.findLottoRank(pickedNumbers);
-        if (lottoRank != null) {
-            result.addWinningLotto(lottoRank);
-        }
+        winningLotto.addLottoResult(pickedNumbers, result);
     }
 
     public double getYield(Money money) {
-        return result.sumOfPrize() / money.getMoney();
+        return (double) result.sumOfPrize() / (double) money.getMoney();
     }
 
     private void purchaseLotto(Money money) {

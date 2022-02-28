@@ -4,9 +4,9 @@ import lotto.Constant;
 
 public class Money {
     private int money;
-    private static final String NOT_INTEGER_ERROR_MESSAGE = "숫자가 아니에요";
-    private static final String UNDER_MINIMUM_ERROR_MESSAGE = "1000원 미만인 입력 금액에 대한 예외처리";
-    private static final String NOT_QUANTIZED_ERROR_MESSAGE = "거스름돈이 발생하는 경우에 대한 예외처리";
+    private static final String NOT_INTEGER_ERROR_MESSAGE = "숫자가 아닙니다.";
+    private static final String UNDER_MINIMUM_ERROR_MESSAGE = "1000원 미만의 금액은 입력할 수 없습니다.";
+    private static final String NOT_QUANTIZED_ERROR_MESSAGE = "입력 금액은 1000원 단위여야 합니다.";
 
     public Money(String input) {
         isNumberFormat(input);

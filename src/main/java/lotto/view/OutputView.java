@@ -34,7 +34,7 @@ public class OutputView {
         System.out.println("---------");
         for (LottoRank lottoRank : result.getResult().keySet()) {
             String message = String.format("%d개 일치%s(%d원) - %d개", lottoRank.getCorrectNumber(),
-                    getBonusMessage(lottoRank.getIsBonused()), lottoRank.getPrizeAmount(),
+                    getBonusMessage(lottoRank.isBonused()), lottoRank.getPrizeAmount(),
                     result.getResult().get(lottoRank));
             System.out.println(message);
         }
@@ -48,7 +48,7 @@ public class OutputView {
     }
 
     public void printYield(double yield) {
-        System.out.println(String.format("총 수익률은 %.2f입니다.", yield));
+        System.out.printf("총 수익률은 %.2f입니다.\n", yield);
 
     }
 }

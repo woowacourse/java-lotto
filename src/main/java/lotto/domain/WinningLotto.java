@@ -10,12 +10,19 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public int findSameNumbersInPicked(PickedNumbers pickedNumbers) {
+    public long findSameNumbersInPicked(PickedNumbers pickedNumbers) {
         return winningNumbers.findMatchCount(pickedNumbers);
     }
 
-    public LottoRank findLottoRank(PickedNumbers pickedNumbers) {
-        int correctCount = findSameNumbersInPicked(pickedNumbers);
+    public void addLottoResult(PickedNumbers pickedNumbers, LottoResult result){
+        LottoRank lottoRank = findLottoRank(pickedNumbers);
+        if(lottoRank!=null){
+            result.addWinningLotto(lottoRank);
+        }
+    }
+
+    public LottoRank findLottoRank(PickedNumbers pickedNumbers){
+        long correctCount = findSameNumbersInPicked(pickedNumbers);
         boolean isBonused = false;
         if (isSecondOrThird(correctCount)) {
             isBonused = pickedNumbers.isContainNumber(bonusNumber.getBonusNumber());
@@ -23,11 +30,8 @@ public class WinningLotto {
         return LottoRank.valueOf(correctCount, isBonused);
     }
 
-    private boolean isSecondOrThird(int correctCount) {
-        if (correctCount == SECOND_OR_THIRD_COUNT) {
-            return true;
-        }
-        return false;
+    private boolean isSecondOrThird(long correctCount) {
+        return correctCount == SECOND_OR_THIRD_COUNT;
     }
 }
 

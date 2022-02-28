@@ -11,8 +11,8 @@ class MoneyTest {
     @Test
     @DisplayName("금액을 올바르게 입력받는지")
     void Generate_Money() {
-        Money a = new Money("10000");
-        assertThat(a.getMoney()).isEqualTo(10000);
+        Money money = new Money("10000");
+        assertThat(money.getMoney()).isEqualTo(10000);
     }
 
     @Test

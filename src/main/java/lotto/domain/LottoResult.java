@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class LottoResult {
-    private HashMap<LottoRank, Integer> result;
+    private final HashMap<LottoRank, Integer> result;
 
     public LottoResult() {
         this.result = new LinkedHashMap<>();
