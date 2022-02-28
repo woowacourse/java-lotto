@@ -47,8 +47,8 @@ public class LotteryTicketsTest {
                 .collect(Collectors.toList());
         lotteryTickets.add(input);
         int bonusNumber = 30;
-        WinningLotteryNumbers winningLotteryNumbers = new WinningLotteryNumbers(input, new LotteryNumber(bonusNumber));
-        Map<WinningLottery, Integer> result = lotteryTickets.getLotteriesResult(winningLotteryNumbers);
-        assertThat(result.get(WinningLottery.SIX)).isEqualTo(1);
+        WinningLottery winningLottery = new WinningLottery(input, new LotteryNumber(bonusNumber));
+        Map<WinningLotteryRank, Integer> result = lotteryTickets.getLotteriesResult(winningLottery);
+        assertThat(result.get(WinningLotteryRank.SIX)).isEqualTo(1);
     }
 }

@@ -1,52 +1,57 @@
 package lotterymachine.domain;
 
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.List;
 
-public enum WinningLottery {
-    ZERO(0, 0, false),
-    THREE(3, 5_000, false),
-    FOUR(4, 50_000, false),
-    FIVE(5, 150_000, false),
-    BONUS_FIVE(5, 30_000_000, true),
-    SIX(6, 2_000_000_000, false);
+import static lotterymachine.view.ErrorMessage.*;
+import static lotterymachine.view.ErrorMessage.DUPLICATE_NUMBER;
 
-    private static final int INITIAL_NUMBER_OF_MATCHING_TICKET = 0;
+public class WinningLottery {
+    private final List<LotteryNumber> numbers;
+    private final LotteryNumber bonusNumber;
+    private static final int TICKET_SIZE = 6;
 
-    private final int number;
-    private final int price;
-    private final boolean bonus;
-
-    WinningLottery(int number, int price, boolean bonus) {
-        this.number = number;
-        this.price = price;
-        this.bonus = bonus;
+    public WinningLottery(List<LotteryNumber> numbers, LotteryNumber bonusNumber) {
+        validateWinningLotteryNumbers(numbers);
+        validateBonusNumber(numbers, bonusNumber);
+        this.numbers = numbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLottery find(int number, boolean bonus) {
-        return Arrays.stream(values())
-                .filter(value -> value.matchWinningLottery(number, bonus))
-                .findFirst()
-                .orElse(WinningLottery.ZERO);
+    public List<LotteryNumber> getNumbers() {
+        return numbers;
     }
 
-    private boolean matchWinningLottery(int number, boolean bonus) {
-        return this.number == number && this.bonus == bonus;
+    public LotteryNumber getBonusNumber() {
+        return bonusNumber;
     }
 
-    public int getNumber() {
-        return number;
+    private void validateBonusNumber(List<LotteryNumber> numbers, LotteryNumber bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER.getMessage());
+        }
     }
 
-    public int getPrice() {
-        return price;
+    private void validateWinningLotteryNumbers(List<LotteryNumber> numbers) {
+        validateSize(numbers);
+        validateDuplication(numbers);
     }
 
-    public static Map<WinningLottery, Integer> getWinningLotteries() {
-        Map<WinningLottery, Integer> winningLotteries = new EnumMap<>(WinningLottery.class);
-        Arrays.stream(values())
-                .forEach(value -> winningLotteries.put(value, INITIAL_NUMBER_OF_MATCHING_TICKET));
-        return winningLotteries;
+    private void validateSize(List<LotteryNumber> numbers) {
+        if (!isLotteryTicketSize(numbers.size())) {
+            throw new IllegalArgumentException(INVALID_SIZE.getMessage());
+        }
+    }
+
+    public static boolean isLotteryTicketSize(int size) {
+        return size == TICKET_SIZE;
+    }
+
+    private static void validateDuplication(List<LotteryNumber> input) {
+        int numbers = (int) input.stream()
+                .distinct()
+                .count();
+        if (numbers != input.size()) {
+            throw new IllegalArgumentException(DUPLICATE_NUMBER.getMessage());
+        }
     }
 }

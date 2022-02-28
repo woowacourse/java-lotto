@@ -1,7 +1,7 @@
 package lotterymachine.view;
 
 import lotterymachine.domain.LotteryTicket;
-import lotterymachine.domain.WinningLottery;
+import lotterymachine.domain.WinningLotteryRank;
 
 import java.util.List;
 import java.util.Map;
@@ -21,20 +21,20 @@ public class OutputView {
         System.out.println(stringBuilder);
     }
 
-    public static void printWinningLotteryResults(Map<WinningLottery, Integer> lotteryTicketResults) {
+    public static void printWinningLotteryResults(Map<WinningLotteryRank, Integer> lotteryTicketResults) {
         System.out.println("당첨 통계\n" +
                 "---------");
-        for (WinningLottery winningLottery : lotteryTicketResults.keySet()) {
-            printWinningLotteryResult(winningLottery, lotteryTicketResults.get(winningLottery));
+        for (WinningLotteryRank winningLotteryRank : lotteryTicketResults.keySet()) {
+            printWinningLotteryResult(winningLotteryRank, lotteryTicketResults.get(winningLotteryRank));
         }
     }
 
-    private static void printWinningLotteryResult(WinningLottery winningLottery, int number) {
-        if (winningLottery == WinningLottery.BONUS_FIVE) {
-            System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개%n", winningLottery.getNumber(), winningLottery.getPrice(), number);
+    private static void printWinningLotteryResult(WinningLotteryRank winningLotteryRank, int number) {
+        if (winningLotteryRank == WinningLotteryRank.BONUS_FIVE) {
+            System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개%n", winningLotteryRank.getNumber(), winningLotteryRank.getPrice(), number);
         }
-        if (winningLottery != WinningLottery.ZERO) {
-            System.out.printf("%d개 일치 (%d원)- %d개%n", winningLottery.getNumber(), winningLottery.getPrice(), number);
+        if (winningLotteryRank != WinningLotteryRank.ZERO) {
+            System.out.printf("%d개 일치 (%d원)- %d개%n", winningLotteryRank.getNumber(), winningLotteryRank.getPrice(), number);
         }
     }
 

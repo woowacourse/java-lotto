@@ -11,13 +11,13 @@ public class LotteryTickets {
         ticketCount = new TicketCount(count);
     }
 
-    public Map<WinningLottery, Integer> getLotteriesResult(WinningLotteryNumbers winningLotteryNumbers) {
-        final Map<WinningLottery, Integer> lotteriesResult = WinningLottery.getWinningLotteries();
+    public Map<WinningLotteryRank, Integer> getLotteriesResult(WinningLottery winningLottery) {
+        final Map<WinningLotteryRank, Integer> lotteriesResult = WinningLotteryRank.getWinningLotteries();
         for (LotteryTicket lotteryTicket : tickets) {
-            int matchingNumbers = lotteryTicket.countMatchingNumbers(winningLotteryNumbers.getNumbers());
-            boolean containsBonus = lotteryTicket.containsNumber(winningLotteryNumbers.getBonusNumber());
-            WinningLottery winningLottery = WinningLottery.find(matchingNumbers, containsBonus);
-            lotteriesResult.put(winningLottery, lotteriesResult.getOrDefault(winningLottery, 0) + 1);
+            int matchingNumbers = lotteryTicket.countMatchingNumbers(winningLottery.getNumbers());
+            boolean containsBonus = lotteryTicket.containsNumber(winningLottery.getBonusNumber());
+            WinningLotteryRank winningLotteryRank = WinningLotteryRank.find(matchingNumbers, containsBonus);
+            lotteriesResult.put(winningLotteryRank, lotteriesResult.getOrDefault(winningLotteryRank, 0) + 1);
         }
         return Collections.unmodifiableMap(lotteriesResult);
     }

@@ -1,8 +1,8 @@
 package lotterymachine;
 
 import lotterymachine.domain.LotteryTickets;
-import lotterymachine.domain.WinningLotteryNumbers;
 import lotterymachine.domain.WinningLottery;
+import lotterymachine.domain.WinningLotteryRank;
 import lotterymachine.utils.LotteryCalculator;
 import lotterymachine.utils.LotteryNumbersGenerator;
 import lotterymachine.view.InputView;
@@ -22,8 +22,8 @@ public class LotteryMachine {
         LotteryTickets lotteryTickets = createLotteryTickets(purchaseCount);
         OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
 
-        WinningLotteryNumbers winningLotteryNumbers =  new WinningLotteryNumbers(InputView.getWinningLotteryNumbers(), InputView.getBonusNumber());
-        Map<WinningLottery, Integer> lotteryTicketResult = lotteryTickets.getLotteriesResult(winningLotteryNumbers);
+        WinningLottery winningLottery =  new WinningLottery(InputView.getWinningLotteryNumbers(), InputView.getBonusNumber());
+        Map<WinningLotteryRank, Integer> lotteryTicketResult = lotteryTickets.getLotteriesResult(winningLottery);
         OutputView.printWinningLotteryResults(lotteryTicketResult);
         OutputView.printProfitRate(getTotalProfitRate(lotteryPurchase, lotteryTicketResult));
     }
@@ -36,7 +36,7 @@ public class LotteryMachine {
         return lotteryTickets;
     }
 
-    private static double getTotalProfitRate(LotteryPurchase lotteryPurchase, Map<WinningLottery, Integer> lotteryTicketResult) {
+    private static double getTotalProfitRate(LotteryPurchase lotteryPurchase, Map<WinningLotteryRank, Integer> lotteryTicketResult) {
         int totalProfit = LotteryCalculator.totalProfit(lotteryTicketResult);
         return calculateProfitRate(totalProfit, lotteryPurchase.getPurchasePrice());
     }

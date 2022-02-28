@@ -1,6 +1,6 @@
 package lotterymachine.utils;
 
-import lotterymachine.domain.WinningLottery;
+import lotterymachine.domain.WinningLotteryRank;
 
 import java.util.Map;
 
@@ -18,10 +18,10 @@ public class LotteryCalculator {
         return floor(winningLotteryAmount / amount * DECIMAL_PLACE_SAVER)  / DECIMAL_PLACE_SAVER;
     }
 
-    public static int totalProfit(Map<WinningLottery, Integer> lotteryTicketResult) {
+    public static int totalProfit(Map<WinningLotteryRank, Integer> lotteryTicketResult) {
         int sum = 0;
-        for (WinningLottery winningLottery : lotteryTicketResult.keySet()) {
-            sum += winningLottery.getPrice() * lotteryTicketResult.get(winningLottery);
+        for (WinningLotteryRank winningLotteryRank : lotteryTicketResult.keySet()) {
+            sum += winningLotteryRank.getPrice() * lotteryTicketResult.get(winningLotteryRank);
         }
         return sum;
     }
