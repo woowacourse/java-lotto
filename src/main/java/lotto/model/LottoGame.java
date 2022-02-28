@@ -17,14 +17,14 @@ public class LottoGame {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
+    public static Lottos buyLottos(LottoMoney lottoMoney) {
+        return new Lottos(new LottoNumberGenerator(), lottoMoney.getLottoSize());
+    }
+
     private void validateDuplicateBonusNumber(List<Integer> winningNumbers, Integer bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(ERROR_DUPLICATION_BONUS_NUMBER);
         }
-    }
-
-    public static Lottos buyLottos(LottoMoney lottoMoney) {
-        return new Lottos(new LottoNumberGenerator(), lottoMoney.getLottoSize());
     }
 
     public LottoResult generateLottoResult(Lottos lottos) {

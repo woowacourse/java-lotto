@@ -2,6 +2,7 @@ package lotto.model;
 
 import static java.util.stream.Collectors.*;
 
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -13,9 +14,9 @@ public class LottoResult {
     }
 
     private Map<Rank, Long> generateLottoResult(Lottos lottos, Lotto winningNumbers, LottoNumber bonusNumber) {
-        return lottos.getLottos().stream()
+        return Collections.unmodifiableMap(lottos.getLottos().stream()
             .map(lotto -> Rank.match(lotto, winningNumbers, bonusNumber))
-            .collect(groupingBy(rank -> rank, () -> new EnumMap<>(Rank.class), counting()));
+            .collect(groupingBy(rank -> rank, () -> new EnumMap<>(Rank.class), counting())));
     }
 
     public Long getRankCount(Rank rank) {
