@@ -33,9 +33,9 @@ class MoneyTest {
     @DisplayName("구입 금액 생성자 기능 테스트")
     @ParameterizedTest(name = "[{index}] 구입 금액 : {0}")
     @ValueSource(ints = {1000, 12000, 1300000})
-    void initTest(final int money) {
-        final Money credit = new Money(money);
-        assertThat(credit.getMoney()).isEqualTo(money);
+    void initTest(final int expectedMoney) {
+        final Money money = new Money(expectedMoney);
+        assertThat(money.getMoney()).isEqualTo(expectedMoney);
     }
 
 }

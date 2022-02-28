@@ -8,7 +8,7 @@ public class Money {
     private final int money;
 
     public Money(final int money) {
-        MoneyValidator.validateCreditMoney(money);
+        MoneyValidator.validateMoney(money);
         this.money = money;
     }
 

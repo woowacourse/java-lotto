@@ -9,7 +9,7 @@ public class MoneyValidator {
     private MoneyValidator() {
     }
 
-    public static void validateCreditMoney(final int money) {
+    public static void validateMoney(final int money) {
         verifyMoneyNotZero(money);
         verifyMoneyDivisible(money);
     }

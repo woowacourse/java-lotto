@@ -2,7 +2,7 @@ package lotto.view.output;
 
 public enum OutputMessage {
 
-    REQUEST_CREDIT_MONEY("구입금액을 입력해주세요."),
+    REQUEST_MONEY("구입금액을 입력해주세요."),
     REQUEST_WINNING_NUMBERS("지난 주 당첨 번호를 입력해 주세요."),
     REQUEST_BONUS_NUMBER("보너스 볼을 입력해 주세요."),
 

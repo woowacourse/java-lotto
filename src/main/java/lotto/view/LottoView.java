@@ -21,7 +21,7 @@ public class LottoView {
     }
 
     public int requestMoney() {
-        outputView.printMessage(REQUEST_CREDIT_MONEY);
+        outputView.printMessage(REQUEST_MONEY);
         return inputView.requestMoney();
     }
 
