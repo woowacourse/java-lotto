@@ -13,13 +13,13 @@ public class Number {
     }
 
     private int checkNumber(final int number) {
-        if (isNotCorrectNumber(number)) {
-            throw new RuntimeException();
+        if (isNotCorrectNumberRange(number)) {
+            throw new IllegalArgumentException();
         }
         return number;
     }
 
-    private boolean isNotCorrectNumber(final int number) {
+    private boolean isNotCorrectNumberRange(final int number) {
         return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
     }
 
@@ -29,9 +29,5 @@ public class Number {
 
     public boolean contain(final int otherNumber) {
         return number == otherNumber;
-    }
-
-    public int get() {
-        return number;
     }
 }
