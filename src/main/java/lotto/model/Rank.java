@@ -22,12 +22,10 @@ public enum Rank {
         return Rank.find(lotto.getMatchScore(winningNumbers), lotto.isMatchNumber(bonusNumber));
     }
 
-    static Rank find(int matchWinningNumbers, boolean isMatchBonus) {
-        if (isMatchBonus && matchWinningNumbers == SECOND.matchScore) {
-            return Rank.SECOND;
-        }
+    private static Rank find(int matchWinningNumbers, boolean isMatchBonus) {
         return Arrays.stream(Rank.values())
             .filter(rank -> rank.matchScore == matchWinningNumbers)
+            .filter(rank -> rank != THIRD || !isMatchBonus)
             .findFirst()
             .orElse(FAIL);
     }
