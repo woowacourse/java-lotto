@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,9 +31,10 @@ public class WinningNumbers {
     }
 
     private void checkValidate(List<Integer> winningNumbers, int bonusNumber) {
-        winningNumbers.add(bonusNumber);
-        checkNumbersRange(winningNumbers);
-        checkDuplicate(winningNumbers);
+        List<Integer> numbers = new ArrayList<>(winningNumbers);
+        numbers.add(bonusNumber);
+        checkNumbersRange(numbers);
+        checkDuplicate(numbers);
     }
 
     private static void checkNumbersRange(List<Integer> numbers) {

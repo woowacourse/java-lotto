@@ -3,6 +3,7 @@ import domain.LottoGame;
 import domain.LottoGenerator;
 import domain.Money;
 import domain.RandomLottoGenerator;
+import domain.WinningChecker;
 import domain.WinningNumbers;
 import view.InputView;
 import view.OutputView;
@@ -18,7 +19,8 @@ public class LottoController {
 
         WinningNumbers winningNumbers = InputView.askWinningNumbers();
 
-        lottoGame.makeResult(winningNumbers.getWinningNumbers(), winningNumbers.getBonusNumber());
+        lottoGame.makeResult(winningNumbers);
+
         OutputView.printWinningStatistic();
         OutputView.printYield(lottoGame.getYield());
     }

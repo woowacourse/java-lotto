@@ -13,6 +13,7 @@ public enum Rewards {
     private final int winningCount;
     private final int bonusCount;
     private final int reward;
+
     private int count;
 
     Rewards(int winningCount, int bonusCount, int reward, int count) {
@@ -41,7 +42,14 @@ public enum Rewards {
         return rewards.count;
     }
 
+    public static void removeCount() {
+        for (Rewards reward: Rewards.values()) {
+            reward.count = 0;
+        }
+    }
+
     private static boolean findRanking(Rewards reward, int winningCount, int bonusCount) {
         return (reward.winningCount == winningCount && reward.bonusCount == bonusCount);
     }
+
 }

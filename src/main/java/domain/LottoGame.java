@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class LottoGame {
 
@@ -16,8 +15,9 @@ public class LottoGame {
         this.lottos = new Lottos(lottoGenerator.generate(money.convertToAmount()));
     }
 
-    public void makeResult(List<Integer> winningNumbers, Integer bonusNumber) {
-        lottos.compareAllLotto(winningNumbers, bonusNumber);
+    public void makeResult(WinningNumbers winningNumbers) {
+        WinningChecker winningChecker = new WinningChecker(lottos, winningNumbers);
+        winningChecker.check();
     }
 
     public double getYield() {
@@ -28,7 +28,7 @@ public class LottoGame {
         int prize = Arrays.stream(Rewards.values())
             .map(Rewards::calculateYield)
             .reduce(SUM_BASE, Integer::sum);
-        return (float) prize / (LOTTO_PRICE * lottos.getSize());
+        return (double) prize / (LOTTO_PRICE * lottos.getSize());
     }
 
     public Lottos getLottos() {
