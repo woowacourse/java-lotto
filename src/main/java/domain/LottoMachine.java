@@ -13,7 +13,13 @@ public class LottoMachine {
     private static final int DEFAULT_VALUE = 0;
     private static final int INCREASE_VALUE = 1;
 
-    public List<LottoTicket> purchaseLottoTickets(Money amount, LottoNumberStrategy lottoNumberStrategy) {
+    private final LottoNumberStrategy lottoNumberStrategy;
+
+    public LottoMachine(LottoNumberStrategy lottoNumberStrategy) {
+        this.lottoNumberStrategy = lottoNumberStrategy;
+    }
+
+    public List<LottoTicket> purchaseLottoTickets(Money amount) {
         validateInsertAmount(amount);
         return IntStream.range(DEFAULT_VALUE, amount.getPurchasableNumber(LOTTO_TICKET_PRICE))
                 .mapToObj(index -> new LottoTicket(lottoNumberStrategy.generate()))

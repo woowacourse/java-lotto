@@ -13,8 +13,7 @@ import java.util.stream.Collectors;
 
 public class LottoController {
 
-    private final LottoMachine lottoMachine = new LottoMachine();
-    private final LottoNumberStrategy lottoNumberStrategy = new RandomLottoNumberStrategy();
+    private final LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberStrategy());
 
     public void run() {
         List<LottoTicket> lottoTickets = purchaseLottoTickets();
@@ -23,7 +22,7 @@ public class LottoController {
 
     private List<LottoTicket> purchaseLottoTickets() {
         Money money = Money.from(InputView.getMoney());
-        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(money, lottoNumberStrategy);
+        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(money);
 
         OutputView.printPurchasedLottoTicketNumber(lottoTickets.size());
         OutputView.printPurchasedLottoTickets(lottoTickets);
