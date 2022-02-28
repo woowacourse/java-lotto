@@ -15,4 +15,15 @@ public class MoneyTest {
         assertThat(money.money()).isEqualTo(12000);
     }
 
+    @Test
+    @DisplayName("로또 금액이 1000원 미만일 때 오류 발생")
+    void lotto_amount() {
+        Money money = new Money(999);
+
+        assertThatThrownBy(
+            money::convertToAmount
+        ).isInstanceOf(
+            IllegalArgumentException.class);
+    }
+
 }
