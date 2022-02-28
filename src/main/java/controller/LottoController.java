@@ -24,8 +24,7 @@ public class LottoController {
 
 	public void run() {
 		final Money money = Money.from(requestMoneyInput());
-
-		LottoTicket lottoTicket = new LottoTicket(lottoFactory.generateLottoTicket(money));
+		LottoTicket lottoTicket = new LottoTicket(lottoFactory.generateLottoTicketByAuto(money));
 		outputView.printPurchasedLottoTicket(lottoTicket.getLottoTicket());
 
 		Lotto winningNumber = Lotto.from(requestWinningLottoInput());

@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,14 +17,14 @@ public class LottoFactory {
 		.boxed()
 		.collect(Collectors.toList());
 
-	public List<Lotto> generateLottoTicket(final Money money) {
-		int purchaseCount = money.findPurchaseLottoCount(LOTTO_PRICE);
-		return IntStream.range(INITIAL_INDEX, purchaseCount)
-			.mapToObj(index -> generateLotto())
+	public List<Lotto> generateLottoTicketByAuto(final Money money) {
+		int autoLottoCount = money.findPurchaseLottoCount(LOTTO_PRICE);
+		return IntStream.range(INITIAL_INDEX, autoLottoCount)
+			.mapToObj(index -> generateLottoByAuto())
 			.collect(Collectors.toUnmodifiableList());
 	}
 
-	private Lotto generateLotto() {
+	private Lotto generateLottoByAuto() {
 		Collections.shuffle(lottoNumbers);
 		return new Lotto(abstractLottoNumbersAsMuchAsLottoSize().stream()
 			.map(Number::new)
@@ -33,5 +33,17 @@ public class LottoFactory {
 
 	private List<Integer> abstractLottoNumbersAsMuchAsLottoSize() {
 		return Collections.unmodifiableList(lottoNumbers.subList(INITIAL_INDEX, LOTTO_MAX_SIZE_INDEX));
+	}
+
+	public List<Lotto> generateLottoTicketByManual(String[][] inputManualLotto) {
+		return Arrays.stream(inputManualLotto)
+			.map(this::generateLottoByManual)
+			.collect(Collectors.toUnmodifiableList());
+	}
+
+	private Lotto generateLottoByManual(String[] manualLotto) {
+		return new Lotto(Arrays.stream(manualLotto)
+			.map(Number::from)
+			.collect(Collectors.toList()));
 	}
 }

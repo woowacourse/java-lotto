@@ -43,9 +43,23 @@ class LottoTest {
 
 	@Test
 	@DisplayName("로또 팩토리는 랜덤한 숫자 6개를 뽑아야한다.")
-	void checkLottoSize() {
+	void checkLottoSize_1() {
 		//given
-		List<Number> missLotto = Stream.of(1, 5, 9, 11)
+		List<Number> missLotto = Stream.of(1, 5, 9, 11, 18)
+			.map(Number::new)
+			.collect(Collectors.toList());
+
+		//then
+		assertThatThrownBy(() -> new Lotto(missLotto))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("로또 번호는 6개의 숫자여야 합니다");
+	}
+
+	@Test
+	@DisplayName("로또 팩토리는 랜덤한 숫자 6개를 뽑아야한다.")
+	void checkLottoSize_2() {
+		//given
+		List<Number> missLotto = Stream.of(1, 5, 9, 11, 18, 22, 30)
 			.map(Number::new)
 			.collect(Collectors.toList());
 
