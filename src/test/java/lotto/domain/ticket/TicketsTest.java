@@ -29,7 +29,7 @@ class TicketsTest {
     @MethodSource("lotto.domain.ticket.provider.TicketsTestProvider#provideForGenerateTest")
     void generateTicketsSizeCheckTest(final List<TicketDto> generatedTickets, final int ticketCount) {
         final Tickets tickets = generateTickets(generatedTickets, ticketCount);
-        assertThat(tickets.getTickets().size()).isEqualTo(ticketCount);
+        assertThat(tickets.getSize()).isEqualTo(ticketCount);
     }
 
     @DisplayName("당첨 등수 목록 확인 테스트")
