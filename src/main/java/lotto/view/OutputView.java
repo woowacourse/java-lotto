@@ -14,18 +14,18 @@ public class OutputView {
     private static final String EMPTY_STRING = "";
     private static final String YIELD_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n";
 
-    public void printErrorMessage(Exception exception) {
+    public static void printErrorMessage(Exception exception) {
         System.out.println(exception.getMessage());
     }
 
-    public void printLotto(LottoDto lottoDto) {
+    public static void printLotto(LottoDto lottoDto) {
         System.out.printf(PURCHASE_AMOUNT_MESSAGE, lottoDto.getLottoSize());
         for (ChoiceNumber choiceNumber : lottoDto.getLotto()) {
             System.out.println(choiceNumber);
         }
     }
 
-    public void printResult(LottoResult result) {
+    public static void printResult(LottoResult result) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(WINNING_STATISTIC_MESSAGE);
         for (LottoRank lottoRank : result.getResult().keySet()) {
@@ -37,14 +37,14 @@ public class OutputView {
         System.out.print(stringBuilder);
     }
 
-    private String getBonusMessage(LottoRank lottoRank) {
+    private static String getBonusMessage(LottoRank lottoRank) {
         if (lottoRank == LottoRank.SECOND) {
             return BONUS_BALL_MESSAGE;
         }
         return EMPTY_STRING;
     }
 
-    public void printYield(double yield) {
+    public static void printYield(double yield) {
         System.out.printf(YIELD_MESSAGE_FORMAT, yield);
     }
 }
