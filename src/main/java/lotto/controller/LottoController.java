@@ -25,7 +25,7 @@ public class LottoController {
     public void start() {
         Money money = initMoney();
         ManualCount manualCount = initManualCount(money);
-        initLotto(money);
+        initLotto(money, manualCount);
         WinningNumber winningNumber = setWinningNumber();
         findAndPrintResult(winningNumber);
     }
@@ -50,7 +50,7 @@ public class LottoController {
         }
     }
 
-    private void initLotto(Money money) {
+    private void initLotto(Money money, ManualCount manualCount) {
         lotto = new Lotto(money, lottoBuyStrategy);
         printLotto(LottoDto.from(lotto));
     }

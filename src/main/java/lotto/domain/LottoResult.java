@@ -8,7 +8,6 @@ public class LottoResult {
     private static final int INIT_VALUE = 0;
     private final HashMap<LottoRank, Integer> result;
 
-
     public LottoResult() {
         this.result = new LinkedHashMap<>();
         Arrays.stream(LottoRank.values())

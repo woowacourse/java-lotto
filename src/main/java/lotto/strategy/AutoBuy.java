@@ -1,12 +1,13 @@
 package lotto.strategy;
 
+import static lotto.domain.Money.UNIT_AMOUNT;
+
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.ChoiceNumber;
 import lotto.domain.Money;
 
 public class AutoBuy implements LottoBuyStrategy {
-    private static final int UNIT_AMOUNT = 1000;
 
     @Override
     public List<ChoiceNumber> buyLotto(Money money) {
