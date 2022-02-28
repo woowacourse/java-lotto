@@ -14,7 +14,7 @@ import domain.Lottos;
 public class OutputView {
 
     private static final String RESPONSE_MESSAGE_PURCHASED_LOTTO = "개를 구매했습니다.";
-    private static final String REWARD_SECOND_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
+    private static final String REWARD_WITH_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
     private static final String REWARD_DEFAULT_FORMAT = "%d개 일치 (%d원)- %d개\n";
     private static final String PROFIT_RATE_BENEFIT_FORMAT = "총 수익률은 (%.2f)입니다.";
     private static final String PROFIT_RATE_LOSS_FORMAT = "총 수익률은 (%.2f)입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
@@ -49,11 +49,11 @@ public class OutputView {
     }
 
     private static void printLottoReward(LottoReward reward, int rewardCount) {
-        if (reward.equals(LottoReward.NONE)) {
+        if (reward == LottoReward.NONE) {
             return;
         }
-        if (reward.equals(LottoReward.SECOND)) {
-            System.out.printf(REWARD_SECOND_FORMAT, reward.getMatchCount(), reward.getPrice(), rewardCount);
+        if (reward.hasBonus()) {
+            System.out.printf(REWARD_WITH_BONUS_FORMAT, reward.getMatchCount(), reward.getPrice(), rewardCount);
             return;
         }
 
