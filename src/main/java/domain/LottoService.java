@@ -82,7 +82,7 @@ public class LottoService {
             .collect(Collectors.toList()));
     }
 
-    public SortedMap<RankPrice, Integer> calculateResult(final int bonusNumberInput,
+    public SortedMap<RankPrize, Integer> calculateResult(final int bonusNumberInput,
                                                          final List<LottoDto> issuedLottoDto) {
         this.bonusNumber = new LottoNumber(bonusNumberInput);
 
@@ -111,8 +111,8 @@ public class LottoService {
             .collect(Collectors.toList()));
     }
 
-    private SortedMap<RankPrice, Integer> extractRankCount(final List<Lotto> issuedLotto) {
-        SortedMap<RankPrice, Integer> rankCount = new TreeMap<>(Collections.reverseOrder());
+    private SortedMap<RankPrize, Integer> extractRankCount(final List<Lotto> issuedLotto) {
+        SortedMap<RankPrize, Integer> rankCount = new TreeMap<>(Collections.reverseOrder());
         initRank(rankCount);
         for (Lotto lotto : issuedLotto) {
             countRankedLotto(rankCount, lotto);
@@ -120,16 +120,16 @@ public class LottoService {
         return rankCount;
     }
 
-    private void initRank(final SortedMap<RankPrice, Integer> rankCount) {
-        Arrays.stream(RankPrice.values())
+    private void initRank(final SortedMap<RankPrize, Integer> rankCount) {
+        Arrays.stream(RankPrize.values())
             .forEach(e -> rankCount.put(e, RANK_COUNT_INIT_NUMBER));
     }
 
-    private void countRankedLotto(final SortedMap<RankPrice, Integer> rankCount, final Lotto lotto) {
+    private void countRankedLotto(final SortedMap<RankPrize, Integer> rankCount, final Lotto lotto) {
         final MatchedCount matchedCount = getMatchedCount(lotto);
         if (matchedCount.isInRank()) {
-            final RankPrice rankPrice = matchedCount.findRankPrice(checkBonus(lotto));
-            rankCount.put(rankPrice, rankCount.get(rankPrice) + RANK_COUNT_UNIT);
+            final RankPrize rankPrize = matchedCount.findRankPrice(checkBonus(lotto));
+            rankCount.put(rankPrize, rankCount.get(rankPrize) + RANK_COUNT_UNIT);
         }
     }
 
@@ -138,13 +138,14 @@ public class LottoService {
     }
 
     private boolean checkBonus(final Lotto lotto) {
+        System.out.println("보너스여부: " + lotto.isContainNumber(bonusNumber));
         return lotto.isContainNumber(bonusNumber);
     }
 
-    public double calculateProfit(final SortedMap<RankPrice, Integer> rankCounts) {
+    public double calculateProfit(final SortedMap<RankPrize, Integer> rankCounts) {
         int totalWinPrice = INIT_WIN_PRICE;
-        for (RankPrice rankPrice : rankCounts.keySet()) {
-            totalWinPrice += rankPrice.getPrice() * rankCounts.get(rankPrice);
+        for (RankPrize rankPrize : rankCounts.keySet()) {
+            totalWinPrice += rankPrize.getPrice() * rankCounts.get(rankPrize);
         }
         return money.calculateProfit(totalWinPrice);
     }

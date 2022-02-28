@@ -9,10 +9,10 @@ public class MatchedCount {
     }
 
     public boolean isInRank() {
-        return this.count >= RankPrice.FIFTH.getCount();
+        return this.count >= RankPrize.FIFTH.getCount();
     }
 
-    public RankPrice findRankPrice(final boolean isBonusMatched) {
-        return RankPrice.findByCount(this.count, isBonusMatched);
+    public RankPrize findRankPrice(final boolean isBonusMatched) {
+        return RankPrize.findByCount(this.count, isBonusMatched);
     }
 }
