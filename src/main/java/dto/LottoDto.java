@@ -1,4 +1,4 @@
-package model.lottotickets;
+package dto;
 
 import java.util.List;
 
