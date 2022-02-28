@@ -14,7 +14,7 @@ public class OutputView {
     private static final String NOT_BONUS_MATCH_RANK_PRINT_FORMAT = "%d개 일치 (%d원)- %d개\n";
     private static final String RATE_OF_RETURN_PRINT_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n";
 
-    public void printPurchasedLottos(final List<LottoDto> lottoDtos) {
+    public void printLottos(final List<LottoDto> lottoDtos) {
         System.out.println(lottoDtos.size() + PURCHASE_COUNT_MESSAGE);
         lottoDtos.forEach(this::printLotto);
     }
