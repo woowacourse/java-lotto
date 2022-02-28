@@ -27,7 +27,7 @@ public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     public LottoNumbers createLottoNumbers() {
         Collections.shuffle(numberPool);
         List<Integer> numbers = getNumbersFrom(new LinkedList<>(numberPool));
-        return new LottoNumbers(numbers);
+        return LottoNumbers.of(numbers);
     }
 
     private List<Integer> getNumbersFrom(Queue<Integer> queue) {

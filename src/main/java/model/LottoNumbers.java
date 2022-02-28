@@ -2,6 +2,7 @@ package model;
 
 import exception.DuplicatedLottoNumbersException;
 import exception.InvalidLottoNumbersSizeException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -12,34 +13,30 @@ public class LottoNumbers {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
+    private LottoNumbers(Set<LottoNumber> lottoNumbers) {
         checkLottoNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private void checkLottoNumbers(List<Integer> lottoNumbers) {
-        if (hasDuplicatedNumber(lottoNumbers)) {
+    public static LottoNumbers of(List<Integer> numbers) {
+        if (isDuplicated(numbers)) {
             throw new DuplicatedLottoNumbersException();
         }
-        if (isInvalidSize(lottoNumbers)) {
+        return new LottoNumbers(
+                numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet())
+        );
+    }
+
+    private static <T extends Collection<Integer>> boolean isDuplicated(T numbers) {
+        return numbers.size() != Set.copyOf(numbers).size();
+    }
+
+    private void checkLottoNumbers(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new InvalidLottoNumbersSizeException();
         }
-    }
-
-    private boolean isInvalidSize(List<Integer> lottoNumbers) {
-        return lottoNumbers.size() != LOTTO_NUMBER_SIZE;
-    }
-
-    private boolean hasDuplicatedNumber(List<Integer> numbers) {
-        return getDistinctSize(numbers) != numbers.size();
-    }
-
-    private long getDistinctSize(List<Integer> numbers) {
-        return numbers.stream()
-                .distinct()
-                .count();
     }
 
     public boolean contains(LottoNumber number) {

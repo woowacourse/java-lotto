@@ -59,6 +59,6 @@ public class Application {
         List<Integer> inputLottoNumbers = inputWithMessage("지난 주 당첨 번호를 입력해 주세요.",
                 LOTTO_NUMBERS_PARSER::parse);
         int bonusNumber = inputWithMessage("보너스 볼을 입력해 주세요.", BONUS_NUMBER_PARSER::parse);
-        return new WinningLottoNumbers(new LottoNumbers(inputLottoNumbers), new LottoNumber(bonusNumber));
+        return new WinningLottoNumbers(LottoNumbers.of(inputLottoNumbers), new LottoNumber(bonusNumber));
     }
 }
