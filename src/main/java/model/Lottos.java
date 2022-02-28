@@ -1,4 +1,4 @@
-package model.lottotickets;
+package model;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -8,13 +8,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import model.lottonumbergenerator.Generator;
+import model.lottotickets.LottoTicket;
 import model.winning.Rank;
 import model.winning.Statistics;
 
-public class LottoTickets {
+public class Lottos {
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(final int purchaseCount, final Generator generator) {
+    public Lottos(final int purchaseCount, final Generator generator) {
         lottoTickets = IntStream
                 .rangeClosed(1, purchaseCount)
                 .mapToObj(index -> new LottoTicket(generator))
