@@ -7,6 +7,8 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
+    private static final int MIN_MANUAL_COUNT = 0;
+
     private final int manualCount;
     private final int autoCount;
 
@@ -17,8 +19,15 @@ public class LottoGenerator {
 
     public static LottoGenerator of(final Money money, final int manualCount) {
         int totalCount = money.calculateLottoCount();
+        checkManualCountPositiveNumber(manualCount);
         checkInputMoneyEnough(manualCount, totalCount);
         return new LottoGenerator(manualCount, totalCount - manualCount);
+    }
+
+    private static void checkManualCountPositiveNumber(final int manualCount) {
+        if (manualCount < MIN_MANUAL_COUNT) {
+            throw new IllegalArgumentException("[ERROR] 구매할 수동 로또 수는 0이상을 입력해주세요.");
+        }
     }
 
     private static void checkInputMoneyEnough(final int manualCount, final int totalCount) {
