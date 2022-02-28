@@ -14,7 +14,7 @@ public class Purchase {
         validate(money, manualCount);
         this.money = money;
         this.manualCount = manualCount;
-        this.autoCount = money / 1000 - manualCount;
+        this.autoCount = money / MONEY_UNIT - manualCount;
     }
 
     private void validate(int money, int manualCount) {
@@ -24,19 +24,19 @@ public class Purchase {
     }
 
     private void isRightLottoCount(int money, int manualCount) {
-        if (manualCount > money / 1000) {
+        if (manualCount > money / MONEY_UNIT) {
             throw new IllegalArgumentException(COUNT_OVER_MONEY_ERROR_MESSAGE);
         }
     }
 
     private void isOverThousand(int money) {
-        if (money < 1000) {
+        if (money < MONEY_UNIT) {
             throw new IllegalArgumentException(MONEY_OVER_THOUSANDS_ERROR_MESSAGE);
         }
     }
 
     private void isDivideByThousand(int money) {
-        if (money % 1000 != 0) {
+        if (money % MONEY_UNIT != 0) {
             throw new IllegalArgumentException(MONEY_DIVIDE_ERROR_MESSAGE);
         }
     }
