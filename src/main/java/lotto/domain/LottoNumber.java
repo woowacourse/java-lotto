@@ -1,12 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import lotto.exception.LottoNumberException;
 
 public enum LottoNumber {
@@ -78,8 +76,7 @@ public enum LottoNumber {
         return input >= MINIMUM_RANGE && input <= MAXIMUM_RANGE;
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(number);
+    public int getNumber() {
+        return number;
     }
 }

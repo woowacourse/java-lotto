@@ -1,6 +1,10 @@
 package lotto.view;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.ProfitRate;
 import lotto.domain.Rank;
@@ -21,7 +25,9 @@ public class OutputView {
 
     public static void printLottos(Lottos lottos) {
         System.out.println(lottos.getTotalLottoCount() + TOTAL_LOTTO_COUNT_MESSAGE);
-        lottos.getLottos().forEach(System.out::println);
+        lottos.getLottos().stream()
+                .map(Lotto::getLottoToInteger)
+                .forEach(System.out::println);
     }
 
     public static void printWinningStatistic(RankCount rankCount, ProfitRate profitRate) {

@@ -38,8 +38,9 @@ public class Lotto {
         return lotto.contains(lottoNumberToCompare);
     }
 
-    @Override
-    public String toString() {
-        return lotto.toString();
+    public List<Integer> getLottoToInteger() {
+        return lotto.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
     }
 }
