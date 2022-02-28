@@ -1,6 +1,8 @@
 package controller;
 
 import domain.*;
+import domain.strategy.LottoNumberStrategy;
+import domain.strategy.RandomLottoNumberStrategy;
 import view.InputView;
 import view.OutputView;
 

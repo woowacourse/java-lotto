@@ -1,4 +1,6 @@
-package domain;
+package domain.strategy;
+
+import domain.LottoNumber;
 
 import java.util.List;
 

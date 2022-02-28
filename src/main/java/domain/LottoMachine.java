@@ -1,5 +1,7 @@
 package domain;
 
+import domain.strategy.LottoNumberStrategy;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
