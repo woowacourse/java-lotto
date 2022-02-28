@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
 
@@ -12,10 +14,13 @@ public class LottoNumberGenerator {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumberGenerator() {
-        lottoNumbers = new ArrayList<>();
-        for (int i = MINIMUM_RANGE; i <= MAXIMUM_RANGE; i++) {
-            lottoNumbers.add(new LottoNumber(i));
-        }
+        lottoNumbers = createLottoNumbers();
+    }
+
+    private List<LottoNumber> createLottoNumbers() {
+        return IntStream.rangeClosed(MINIMUM_RANGE, MAXIMUM_RANGE)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private void shuffleNumbers() {
