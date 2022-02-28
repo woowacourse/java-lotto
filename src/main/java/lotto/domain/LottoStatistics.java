@@ -13,11 +13,9 @@ public class LottoStatistics {
     }
 
     public double getLottoTotalReward() {
-        double total = 0;
-        for (Rank rank : statistics.keySet()) {
-            total += rank.calculateTotalReward(statistics.get(rank));
-        }
-        return total;
+        return statistics.keySet().stream()
+                .mapToDouble(rank -> rank.calculateTotalReward(statistics.get(rank)))
+                .sum();
     }
 
     private EnumMap<Rank, Integer> initializeState() {
