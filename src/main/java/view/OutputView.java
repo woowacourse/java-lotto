@@ -13,7 +13,7 @@ import domain.Number;
 public class OutputView {
 
 	private static final String REQUEST_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
-	private static final String NOTIFICATION_PURCHASED_LOTTO = "%d개를 구매했습니다.";
+	private static final String NOTIFICATION_PURCHASED_LOTTO = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 	private static final String REQUEST_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 	private static final String REQUEST_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 	private static final String WINNING_RESULT_MESSAGE = "당첨 통계";
@@ -21,6 +21,8 @@ public class OutputView {
 	private static final String NOTIFICATION_WINNING_RANK_RESULT_WITH_BONUS_BALL = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
 	private static final String NOTIFICATION_WINNING_RANK_RESULT = "%d개 일치 (%d원) - %d개";
 	private static final String NOTIFICATION_RATE_OF_PROFIT = "총 수익률은 %.2f입니다.";
+	public static final String REQUEST_MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+	public static final String REQUEST_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
 	private void printNewLine() {
 		System.out.println();
@@ -30,8 +32,17 @@ public class OutputView {
 		System.out.println(REQUEST_MONEY_MESSAGE);
 	}
 
-	public void printPurchasedLottoTicket(final List<Lotto> lottoTicket) {
-		System.out.println(String.format(NOTIFICATION_PURCHASED_LOTTO, lottoTicket.size()));
+	public void printRequestManualLottoCount() {
+		System.out.println(REQUEST_MANUAL_LOTTO_COUNT_MESSAGE);
+	}
+
+	public void printRequestManualLotto() {
+		System.out.println(REQUEST_MANUAL_LOTTO_MESSAGE);
+	}
+
+	public void printPurchasedLottoTicket(int manualLottoCount, final List<Lotto> lottoTicket) {
+		System.out.println(
+			String.format(NOTIFICATION_PURCHASED_LOTTO, manualLottoCount, lottoTicket.size() - manualLottoCount));
 		for (Lotto lotto : lottoTicket) {
 			printLottoNumber(sortLottoNumbers(lotto.getLotto()));
 		}

@@ -28,11 +28,20 @@ public class MoneyTest {
 	@DisplayName("구매 가능한 개수 확인")
 	void checkFindPurchaseCount() {
 		//given
-		int compareMoney = 3000;
-		//when
-		int lottoPrice = 1000;
 		Money money = Money.from("3000");
 		//then
-		assertThat(money.findPurchaseLottoCount(lottoPrice)).isEqualTo(3);
+		assertThat(money.findPurchaseLottoCount()).isEqualTo(3);
+	}
+
+	@Test
+	@DisplayName("수동 로또 구매 확인")
+	public void checkManualLottoPurchase() {
+		//given
+		Money money = Money.from("5000");
+		int manualLottoCount = 2;
+		//when
+		money.purchaseManualLotto(manualLottoCount);
+		//then
+		assertThat(money.findPurchaseLottoCount()).isEqualTo(3);
 	}
 }

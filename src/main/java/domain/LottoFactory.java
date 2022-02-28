@@ -10,7 +10,6 @@ public class LottoFactory {
 
 	private static final int FIRST_LOTTO_NUMBER = 1;
 	private static final int NEXT_NUMBER_OF_LAST_LOTTO_NUMBER = 46;
-	private static final int LOTTO_PRICE = 1000;
 	private static final int LOTTO_MAX_SIZE_INDEX = 6;
 	private static final int INITIAL_INDEX = 0;
 	private final List<Integer> lottoNumbers = IntStream.range(FIRST_LOTTO_NUMBER, NEXT_NUMBER_OF_LAST_LOTTO_NUMBER)
@@ -18,7 +17,7 @@ public class LottoFactory {
 		.collect(Collectors.toList());
 
 	public List<Lotto> generateLottoTicketByAuto(final Money money) {
-		int autoLottoCount = money.findPurchaseLottoCount(LOTTO_PRICE);
+		int autoLottoCount = money.findPurchaseLottoCount();
 		return IntStream.range(INITIAL_INDEX, autoLottoCount)
 			.mapToObj(index -> generateLottoByAuto())
 			.collect(Collectors.toUnmodifiableList());
@@ -38,7 +37,7 @@ public class LottoFactory {
 	public List<Lotto> generateLottoTicketByManual(String[][] inputManualLotto) {
 		return Arrays.stream(inputManualLotto)
 			.map(this::generateLottoByManual)
-			.collect(Collectors.toUnmodifiableList());
+			.collect(Collectors.toList());
 	}
 
 	private Lotto generateLottoByManual(String[] manualLotto) {

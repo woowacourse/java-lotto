@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import domain.Lotto;
 import domain.LottoFactory;
 import domain.LottoTicket;
@@ -24,11 +27,11 @@ public class LottoController {
 
 	public void run() {
 		final Money money = Money.from(requestMoneyInput());
-		LottoTicket lottoTicket = new LottoTicket(lottoFactory.generateLottoTicketByAuto(money));
-		outputView.printPurchasedLottoTicket(lottoTicket.getLottoTicket());
+		LottoTicket lottoTicket = new LottoTicket(createLottoTicket(money));
 
 		Lotto winningNumber = Lotto.from(requestWinningLottoInput());
 		Number bonusNumber = Number.from(requestBonusNumberInput());
+
 		WinningNumbers winningNumbers = new WinningNumbers(winningNumber, bonusNumber);
 
 		findWinningResult(lottoTicket, winningNumbers, money);
@@ -37,6 +40,28 @@ public class LottoController {
 	private String requestMoneyInput() {
 		outputView.printRequestMoney();
 		return inputView.requestMoney();
+	}
+
+	private List<Lotto> createLottoTicket(Money money) {
+		int manualLottoCount = requestManualLottoCountInput();
+		money.purchaseManualLotto(manualLottoCount);
+
+		String[][] inputManualLotto = requestManualLottoInput(manualLottoCount);
+		List<Lotto> lottoTicket = lottoFactory.generateLottoTicketByManual(inputManualLotto);
+
+		lottoTicket.addAll(lottoFactory.generateLottoTicketByAuto(money));
+		outputView.printPurchasedLottoTicket(manualLottoCount, lottoTicket);
+		return lottoTicket;
+	}
+
+	private int requestManualLottoCountInput() {
+		outputView.printRequestManualLottoCount();
+		return inputView.requestManualLottoCount();
+	}
+
+	private String[][] requestManualLottoInput(int manualLottoCount) {
+		outputView.printRequestManualLotto();
+		return inputView.requestManualLotto(manualLottoCount);
 	}
 
 	private String[] requestWinningLottoInput() {
