@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RandomLottoMachine;
@@ -25,7 +26,7 @@ public class LottoApplication {
         OutputView.outputLottos(lottos.getLottos());
 
         final WinLotto winLotto = revealWinLotto();
-        OutputView.outputResult(lottos.createResult(winLotto));
+        OutputView.outputResult(LottoResult.createLottoResult(lottos, winLotto));
     }
 
     private static Money payMoney() {

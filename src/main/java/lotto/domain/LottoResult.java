@@ -12,6 +12,15 @@ public class LottoResult {
         this.rankResults = rankResults;
     }
 
+    public static LottoResult createLottoResult(final Lottos lottos, final WinLotto winLotto) {
+        final Map<Rank, Integer> rankResults = Rank.initResultMap();
+        for (Lotto lotto : lottos.getLottos()) {
+            Rank rank = winLotto.matchResult(lotto);
+            rankResults.replace(rank, rankResults.get(rank) + 1);
+        }
+        return new LottoResult(rankResults);
+    }
+
     public double calculateYield() {
         final long totalReward = calculateTotalReward();
         final int purchaseMoney = calculatePurchaseMoney();
