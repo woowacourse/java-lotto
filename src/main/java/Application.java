@@ -1,11 +1,8 @@
 import java.util.List;
-import java.util.Map;
 
 import controller.LotteryGameController;
 import controller.dto.LotteriesDto;
-import controller.dto.LotteryDto;
-import domain.Lottery;
-import domain.Rank;
+import controller.dto.WinningResultDto;
 import view.InputView;
 import view.OutputView;
 
@@ -30,9 +27,8 @@ public class Application {
 	}
 
 	private static void calculateWinningResult(final LotteryGameController controller) {
-		final Map<Rank, Integer> ranking = controller.getRanking();
-		final double earningPercent = controller.makeRankingPercent(ranking);
-		OutputView.printStatistics(ranking, earningPercent);
+		WinningResultDto winningResult = controller.getWinningResult();
+		OutputView.printStatistics(winningResult);
 	}
 
 }

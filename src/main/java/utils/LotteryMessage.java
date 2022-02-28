@@ -1,5 +1,6 @@
 package utils;
 
+import controller.dto.RankDto;
 import domain.Rank;
 
 public class LotteryMessage {
@@ -28,9 +29,9 @@ public class LotteryMessage {
 	public static final String WINNING_STATISTICS = "당첨 통계\n--------\n";
 	public static final String TOTAL_EARNING_RATE = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-	public static String makeRankingMessage (final Rank rank, final int winningCount) {
+	public static String makeRankingMessage (final RankDto rank, final int winningCount) {
 		String rakingMessage = rank.getCorrectedBalls() + "개 일치";
-		if(rank == Rank.SECOND) {
+		if(rank.getRankName().equals("SECOND")) {
 			rakingMessage += ", " + BONUS_BALL + " 일치";
 		}
 		return rakingMessage + " (" + rank.getPrize() + "원) - "

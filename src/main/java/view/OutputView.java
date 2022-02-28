@@ -6,21 +6,22 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import controller.dto.LotteriesDto;
-import domain.Rank;
+import controller.dto.RankDto;
+import controller.dto.WinningResultDto;
 import utils.LotteryMessage;
 
 public class OutputView {
 
-	public static void printStatistics(Map<Rank, Integer> ranking, double incomePercent) {
+	public static void printStatistics(final WinningResultDto winningResult) {
 		System.out.println(LotteryMessage.WINNING_STATISTICS);
-		printRanking(ranking);
-		printIncomePercent(incomePercent);
+		printRanking(winningResult.getRanking());
+		printIncomePercent(winningResult.getWinningPercent());
 	}
 
-	private static void printRanking(Map<Rank, Integer> ranking) {
-		List<Rank> sortedRank = ranking.keySet()
+	private static void printRanking(Map<RankDto, Integer> ranking) {
+		List<RankDto> sortedRank = ranking.keySet()
 			.stream()
-			.sorted(Comparator.comparing(Rank::getPrize))
+			.sorted(Comparator.comparing(RankDto::getPrize))
 			.collect(Collectors.toList());
 
 		sortedRank.forEach((rank) -> {
@@ -32,7 +33,7 @@ public class OutputView {
 		System.out.printf(LotteryMessage.TOTAL_EARNING_RATE, incomePercent);
 	}
 
-	public static void printLotteries(LotteriesDto lotteries) {
+	public static void printLotteries(final LotteriesDto lotteries) {
 		lotteries.getLotteries()
 			.forEach(lottery -> printLotteryNumbers(lottery.getNumbers()));
 	}

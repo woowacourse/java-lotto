@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import controller.dto.LotteriesDto;
+import controller.dto.WinningResultDto;
 import domain.LotteryGame;
 import domain.PurchaseAmount;
 import domain.Rank;
@@ -22,12 +23,9 @@ public class LotteryGameController {
 		lotteryGame.createWinningLottery(winingNumbers, bonusNumber);
 	}
 
-	public Map<Rank, Integer> getRanking() {
-		return lotteryGame.makeWinner();
+	public WinningResultDto getWinningResult() {
+		final Map<Rank, Integer> ranking = lotteryGame.makeWinner();
+		final double rankingPercent = lotteryGame.makeRankingPercent(ranking);
+		return WinningResultDto.fromEntity(ranking, rankingPercent);
 	}
-
-	public double makeRankingPercent(final Map<Rank, Integer> ranking) {
-		return lotteryGame.makeRankingPercent(ranking);
-	}
-
 }
