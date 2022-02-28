@@ -1,13 +1,13 @@
-package lotto.exception;
+package lotto.model.message;
 
-public enum BonusBallException {
+public enum BonusBallExceptionMessage {
     BLANK_ERROR("[Error]: 보너스 볼을 입력해주세요."),
     NUMBER_ERROR("[Error]: 보너스 볼은 숫자여야 합니다."),
     RANGE_ERROR("[Error]: 보너스 볼은 1~45의 숫자만 입력해주세요.");
 
     private final String message;
 
-    BonusBallException(String message) {
+    BonusBallExceptionMessage(String message) {
         this.message = message;
     }
 

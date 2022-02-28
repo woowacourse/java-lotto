@@ -1,6 +1,6 @@
-package lotto.exception;
+package lotto.model.message;
 
-public enum WinningNumberException {
+public enum WinningNumberExceptionMessage {
     NUMBER_ERROR("[Error]: 당첨 번호는 숫자여야 합니다."),
     BLANK_ERROR("[Error]: 당첨 번호를 입력하세요."),
     RANGE_ERROR("[Error]: 당첨 번호는 1~45 숫자여야 합니다."),
@@ -10,7 +10,7 @@ public enum WinningNumberException {
 
     private final String massage;
 
-    WinningNumberException(String massage) {
+    WinningNumberExceptionMessage(String massage) {
         this.massage = massage;
     }
 

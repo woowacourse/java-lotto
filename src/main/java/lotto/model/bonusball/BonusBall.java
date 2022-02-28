@@ -2,16 +2,16 @@ package lotto.model.bonusball;
 
 import java.util.Objects;
 
-import lotto.exception.BonusBallException;
+import lotto.model.message.BonusBallExceptionMessage;
 import lotto.utils.InputValidateUtils;
 
 public class BonusBall {
     private final int number;
 
     public BonusBall(String number) {
-        InputValidateUtils.inputBlank(number, BonusBallException.BLANK_ERROR.getMessage());
-        InputValidateUtils.inputNumber(number, BonusBallException.NUMBER_ERROR.getMessage());
-        InputValidateUtils.inputOutOfRange(number, BonusBallException.RANGE_ERROR.getMessage());
+        InputValidateUtils.inputBlank(number, BonusBallExceptionMessage.BLANK_ERROR.getMessage());
+        InputValidateUtils.inputNumber(number, BonusBallExceptionMessage.NUMBER_ERROR.getMessage());
+        InputValidateUtils.inputOutOfRange(number, BonusBallExceptionMessage.RANGE_ERROR.getMessage());
         this.number = makeBonusBallToNumber(number);
     }
 

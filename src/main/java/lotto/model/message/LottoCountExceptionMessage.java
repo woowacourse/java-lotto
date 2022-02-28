@@ -1,6 +1,6 @@
-package lotto.exception;
+package lotto.model.message;
 
-public enum LottoCountException {
+public enum LottoCountExceptionMessage {
     BLANK_ERROR("[Error]: 금액을 입력해주세요."),
     NUMBER_ERROR("[Error]: 금액은 숫자를 입력해주세요."),
     UNIT_ERROR("[Error]: 금액은 천원 단위여야 합니다."),
@@ -8,7 +8,7 @@ public enum LottoCountException {
 
     private final String massage;
 
-    LottoCountException(String massage) {
+    LottoCountExceptionMessage(String massage) {
         this.massage = massage;
     }
 

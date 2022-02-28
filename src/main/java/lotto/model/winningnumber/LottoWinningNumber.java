@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import lotto.exception.WinningNumberException;
+import lotto.model.message.WinningNumberExceptionMessage;
 import lotto.utils.InputValidateUtils;
 
 public class LottoWinningNumber {
@@ -17,7 +17,7 @@ public class LottoWinningNumber {
 
     public LottoWinningNumber(List<String> numbers) {
         inputBlank(numbers);
-        InputValidateUtils.inputNumber(makeNumbersToString(numbers), WinningNumberException.NUMBER_ERROR.getMassage());
+        InputValidateUtils.inputNumber(makeNumbersToString(numbers), WinningNumberExceptionMessage.NUMBER_ERROR.getMassage());
         validateNumberOutOfRange(numbers);
         validateNumberSize(numbers);
         validateNumberReduplication(numbers);
@@ -26,7 +26,7 @@ public class LottoWinningNumber {
 
     private void inputBlank(List<String> numbers) {
         if (numbers == null || numbers.stream().anyMatch(String::isBlank)) {
-            throw new IllegalArgumentException(WinningNumberException.BLANK_ERROR.getMassage());
+            throw new IllegalArgumentException(WinningNumberExceptionMessage.BLANK_ERROR.getMassage());
         }
     }
 
@@ -36,12 +36,12 @@ public class LottoWinningNumber {
 
     private void validateNumberOutOfRange(List<String> numbers) {
                 numbers.forEach(number ->
-                        InputValidateUtils.inputOutOfRange(number, WinningNumberException.RANGE_ERROR.getMassage()));
+                        InputValidateUtils.inputOutOfRange(number, WinningNumberExceptionMessage.RANGE_ERROR.getMassage()));
     }
 
     private void validateNumberSize(List<String> numbers) {
         if (numbers.size() != WINNING_NUMBER_SIZE) {
-            throw new IllegalArgumentException(WinningNumberException.SIZE_ERROR.getMassage());
+            throw new IllegalArgumentException(WinningNumberExceptionMessage.SIZE_ERROR.getMassage());
         }
     }
 
@@ -49,7 +49,7 @@ public class LottoWinningNumber {
         long count = numbers.stream().distinct().count();
 
         if (count != numbers.size()) {
-            throw new IllegalArgumentException(WinningNumberException.REDUPLICATION_ERROR.getMassage());
+            throw new IllegalArgumentException(WinningNumberExceptionMessage.REDUPLICATION_ERROR.getMassage());
         }
     }
 
@@ -61,7 +61,7 @@ public class LottoWinningNumber {
 
     public void validateReduplicationWithBonusBall(String number) {
         if (winningNumbers.contains(Integer.parseInt(number))) {
-            throw new IllegalArgumentException(WinningNumberException.REDUPLICATION_BONUS_BALL_ERROR.getMassage());
+            throw new IllegalArgumentException(WinningNumberExceptionMessage.REDUPLICATION_BONUS_BALL_ERROR.getMassage());
         }
     }
 

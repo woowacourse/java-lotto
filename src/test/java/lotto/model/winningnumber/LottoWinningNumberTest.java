@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import lotto.exception.WinningNumberException;
+import lotto.model.message.WinningNumberExceptionMessage;
 
 public class LottoWinningNumberTest {
 
@@ -24,7 +24,7 @@ public class LottoWinningNumberTest {
     void validateInputLottoNumberBlank(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(List.of(numbers)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(WinningNumberException.BLANK_ERROR.getMassage());
+                .hasMessageContaining(WinningNumberExceptionMessage.BLANK_ERROR.getMassage());
     }
 
     @Test
@@ -32,7 +32,7 @@ public class LottoWinningNumberTest {
     void validateInputLottoNumberNull() {
         assertThatThrownBy(() -> new LottoWinningNumber(null))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(WinningNumberException.BLANK_ERROR.getMassage());
+                .hasMessageContaining(WinningNumberExceptionMessage.BLANK_ERROR.getMassage());
     }
 
     @ParameterizedTest
@@ -41,7 +41,7 @@ public class LottoWinningNumberTest {
     void validateInputLottoWinningNumberIsInt(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(List.of(numbers)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(WinningNumberException.NUMBER_ERROR.getMassage());
+                .hasMessageContaining(WinningNumberExceptionMessage.NUMBER_ERROR.getMassage());
     }
 
     @ParameterizedTest
@@ -53,7 +53,7 @@ public class LottoWinningNumberTest {
                 .map(String::trim)
                 .collect(Collectors.toList())))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(WinningNumberException.RANGE_ERROR.getMassage());
+                .hasMessageContaining(WinningNumberExceptionMessage.RANGE_ERROR.getMassage());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class LottoWinningNumberTest {
     void validateInputLottoWinningNumberSize(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(List.of(numbers.split(","))))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(WinningNumberException.SIZE_ERROR.getMassage());
+                .hasMessageContaining(WinningNumberExceptionMessage.SIZE_ERROR.getMassage());
     }
 
     @ParameterizedTest
@@ -83,7 +83,7 @@ public class LottoWinningNumberTest {
     void validateWinningNumberReduplication(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(List.of(numbers.split(","))))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(WinningNumberException.REDUPLICATION_ERROR.getMassage());
+                .hasMessageContaining(WinningNumberExceptionMessage.REDUPLICATION_ERROR.getMassage());
     }
 
     @ParameterizedTest
@@ -93,6 +93,6 @@ public class LottoWinningNumberTest {
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(List.of("1,2,3,4,5,6".split(",")));
         assertThatThrownBy(() -> lottoWinningNumber.validateReduplicationWithBonusBall(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(WinningNumberException.REDUPLICATION_BONUS_BALL_ERROR.getMassage());
+                .hasMessageContaining(WinningNumberExceptionMessage.REDUPLICATION_BONUS_BALL_ERROR.getMassage());
     }
 }

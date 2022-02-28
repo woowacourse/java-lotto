@@ -2,7 +2,7 @@ package lotto.model.lotto;
 
 import java.util.Objects;
 
-import lotto.exception.LottoCountException;
+import lotto.model.message.LottoCountExceptionMessage;
 import lotto.utils.InputValidateUtils;
 
 public class LottoCount {
@@ -14,8 +14,8 @@ public class LottoCount {
     private int count;
 
     public LottoCount(String money) {
-        InputValidateUtils.inputBlank(money, LottoCountException.BLANK_ERROR.getMassage());
-        InputValidateUtils.inputNumber(money, LottoCountException.NUMBER_ERROR.getMassage());
+        InputValidateUtils.inputBlank(money, LottoCountExceptionMessage.BLANK_ERROR.getMassage());
+        InputValidateUtils.inputNumber(money, LottoCountExceptionMessage.NUMBER_ERROR.getMassage());
         validateInputZero(money);
         this.count = makeMoneyToNumber(money);
     }
@@ -27,13 +27,13 @@ public class LottoCount {
 
     private void validateThousandUnitInputMoney(String money) {
         if (Integer.parseInt(money) % UNIT != NON_REMAINDER) {
-            throw new IllegalArgumentException(LottoCountException.UNIT_ERROR.getMassage());
+            throw new IllegalArgumentException(LottoCountExceptionMessage.UNIT_ERROR.getMassage());
         }
     }
 
     private void validateInputZero(String money) {
         if (Integer.parseInt(money) == NOTHING) {
-            throw new IllegalArgumentException(LottoCountException.LOWER_THAN_THOUSAND.getMassage());
+            throw new IllegalArgumentException(LottoCountExceptionMessage.LOWER_THAN_THOUSAND.getMassage());
         }
     }
 

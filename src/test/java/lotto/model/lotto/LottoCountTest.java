@@ -3,14 +3,13 @@ package lotto.model.lotto;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import lotto.model.lotto.LottoCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.exception.LottoCountException;
+import lotto.model.message.LottoCountExceptionMessage;
 
 public class LottoCountTest {
 
@@ -21,7 +20,7 @@ public class LottoCountTest {
     void validateLottoNumber(String number) {
         assertThatThrownBy(() -> new LottoCount(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoCountException.BLANK_ERROR.getMassage());
+                .hasMessageContaining(LottoCountExceptionMessage.BLANK_ERROR.getMassage());
     }
 
     @ParameterizedTest
@@ -30,7 +29,7 @@ public class LottoCountTest {
     void validateInputMoneyIsNumber(String number) {
         assertThatThrownBy(() -> new LottoCount(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoCountException.NUMBER_ERROR.getMassage());
+                .hasMessageContaining(LottoCountExceptionMessage.NUMBER_ERROR.getMassage());
     }
 
     @ParameterizedTest
@@ -39,7 +38,7 @@ public class LottoCountTest {
     void validateNotThousandUnitInputMoney(String number) {
         assertThatThrownBy(() -> new LottoCount(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoCountException.UNIT_ERROR.getMassage());
+                .hasMessageContaining(LottoCountExceptionMessage.UNIT_ERROR.getMassage());
     }
 
     @Test

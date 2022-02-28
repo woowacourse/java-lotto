@@ -3,14 +3,13 @@ package lotto.model.bonusball;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import lotto.model.bonusball.BonusBall;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.exception.BonusBallException;
+import lotto.model.message.BonusBallExceptionMessage;
 
 public class BonusBallTest {
 
@@ -22,7 +21,7 @@ public class BonusBallTest {
         assertThatThrownBy(() -> {
             new BonusBall(number);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(BonusBallException.BLANK_ERROR.getMessage());
+                .hasMessageContaining(BonusBallExceptionMessage.BLANK_ERROR.getMessage());
     }
 
     @ParameterizedTest
@@ -31,7 +30,7 @@ public class BonusBallTest {
     void validateBonusBallNumber(String number) {
         assertThatThrownBy(() -> new BonusBall(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(BonusBallException.NUMBER_ERROR.getMessage());
+                .hasMessageContaining(BonusBallExceptionMessage.NUMBER_ERROR.getMessage());
     }
 
     @ParameterizedTest
@@ -40,7 +39,7 @@ public class BonusBallTest {
     void validateBonusBallOutOfRange(String number) {
         assertThatThrownBy(() -> new BonusBall(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(BonusBallException.RANGE_ERROR.getMessage());
+                .hasMessageContaining(BonusBallExceptionMessage.RANGE_ERROR.getMessage());
     }
 
     @Test
