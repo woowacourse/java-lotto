@@ -23,8 +23,8 @@ public class LottoService {
     private Lotto lastWinLotto;
     private LottoNumber bonusNumber;
 
-    public LottoService(final Money money) {
-        this.money = money;
+    public LottoService(final int money) {
+        this.money = new Money(money);
     }
 
     public List<Lotto> issueLotto() {

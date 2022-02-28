@@ -47,9 +47,9 @@ class LottoTest {
         final Lotto lotto = new Lotto("1,2,3,4,5,6");
         final Lotto winNumbers = new Lotto("1,2,3,4,5,7");
 
-        final int machedCount = lotto.compare(winNumbers);
+        final int matchedCount = lotto.compare(winNumbers);
 
-        assertThat(machedCount).isEqualTo(5);
+        assertThat(matchedCount).isEqualTo(5);
     }
 
     @DisplayName("발급 로또와 보너스 번호를 비교하여 포함여부를 확인한다.")

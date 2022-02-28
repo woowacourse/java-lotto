@@ -13,7 +13,7 @@ class LottoServiceTest {
 
     @BeforeEach
     void setUp() {
-        final Money money = new Money("100000000");
+        final int money = 100000000;
 
         lottoService = new LottoService(money);
     }
