@@ -1,9 +1,6 @@
 package controller;
 
-import domain.AnswerLotto;
-import domain.BonusNumber;
-import domain.AnswerLottoNumbers;
-import domain.Lottos;
+import domain.*;
 import util.RandomLottoNumberGenerator;
 
 import static view.InputView.*;
@@ -22,7 +19,7 @@ public class LottoGameController {
 	}
 
 	private static Lottos initLottos() {
-		Lottos lottos = Lottos.of(inputMoney(), new RandomLottoNumberGenerator());
+		Lottos lottos = Lottos.of(new Money(inputMoney()), new RandomLottoNumberGenerator());
 		printLottos(lottos);
 
 		return lottos;
