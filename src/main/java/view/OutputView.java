@@ -43,18 +43,22 @@ public class OutputView {
         Map<Rank, Integer> LottoResults = results.getLottoResults();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (Rank rank : Rank.getRanks()) {
-            System.out.println(rank.getCount()
-                    + "개 일치"
-                    + getBonus(rank)
-                    + "(" + rank.getAmount()
-                    + "원) - "
-                    + getCount(LottoResults, rank)
-                    + "개");
-        }
+        Rank.getRanks().stream()
+                .filter(OutputView::isNotOther)
+                .forEach(rank -> System.out.println(rank.getCount()
+                        + "개 일치"
+                        + getBonus(rank)
+                        + "(" + rank.getAmount()
+                        + "원) - "
+                        + getRankCount(LottoResults, rank)
+                        + "개"));
     }
 
-    private static int getCount(Map<Rank, Integer> result, Rank rank) {
+    private static boolean isNotOther(Rank rank) {
+        return rank != Rank.OTHER;
+    }
+
+    private static int getRankCount(Map<Rank, Integer> result, Rank rank) {
         if (result.containsKey(rank)) {
             return result.get(rank);
         }
