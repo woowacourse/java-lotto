@@ -59,10 +59,7 @@ public class OutputView {
 
     private void printRanksInfo(LottoResultDto lottoResultDto) {
         List<RankDto> ranks = lottoResultDto.getRanks();
-        for (int i = ranks.size() - 1; i >= 0; i--) {
-            RankDto rankDto = ranks.get(i);
-            printRankInfo(rankDto);
-        }
+        ranks.forEach(this::printRankInfo);
     }
 
     private void printRankInfo(RankDto rankDto) {
