@@ -27,7 +27,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
         // when
-        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningResult(winningNumbers));
+        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningCountByRank(winningNumbers));
 
         // then
         assertThat(winningResult.getWinningResult().get(LottoRank.FIRST)).isEqualTo(1);
@@ -49,7 +49,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
         // when
-        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningResult(winningNumbers));
+        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningCountByRank(winningNumbers));
 
         // then
         assertThat(winningResult.getWinningResult().get(LottoRank.SECOND)).isEqualTo(1);
@@ -71,7 +71,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
         // when
-        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningResult(winningNumbers));
+        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningCountByRank(winningNumbers));
 
         // then
         assertThat(winningResult.getWinningResult().get(LottoRank.THIRD)).isEqualTo(1);
@@ -93,7 +93,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
         // when
-        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningResult(winningNumbers));
+        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningCountByRank(winningNumbers));
 
         // then
         assertThat(winningResult.getWinningResult().get(LottoRank.FOURTH)).isEqualTo(1);
@@ -115,7 +115,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
         // when
-        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningResult(winningNumbers));
+        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningCountByRank(winningNumbers));
 
         // then
         assertThat(winningResult.getWinningResult().get(LottoRank.FIFTH)).isEqualTo(1);

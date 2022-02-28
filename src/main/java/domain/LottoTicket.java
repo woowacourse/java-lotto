@@ -16,19 +16,19 @@ public class LottoTicket {
         this.lottoTicket = new ArrayList<>(lottoTicket);
     }
 
-    public EnumMap<LottoRank, Integer> checkLottoTicketWinningResult(WinningNumbers winningNumbers) {
-        EnumMap<LottoRank, Integer> winningResult = initializeWinningResult();
+    public EnumMap<LottoRank, Integer> checkLottoTicketWinningCountByRank(WinningNumbers winningNumbers) {
+        EnumMap<LottoRank, Integer> winningCountByRank = initializeWinningCount();
         Lotto winningNumber = winningNumbers.getWinningNumbers();
         Number bonusNumber = winningNumbers.getBonusNumber();
 
         for (Lotto lotto : lottoTicket) {
             LottoRank rank = lotto.checkWinningResult(winningNumber, bonusNumber);
-            addWinningResultCount(winningResult, rank);
+            addWinningResultCount(winningCountByRank, rank);
         }
-        return winningResult;
+        return winningCountByRank;
     }
 
-    private EnumMap<LottoRank, Integer> initializeWinningResult() {
+    private EnumMap<LottoRank, Integer> initializeWinningCount() {
         return new EnumMap<>(Map.ofEntries(
                 Map.entry(LottoRank.FIRST, DEFAULT_RANK_COUNT),
                 Map.entry(LottoRank.SECOND, DEFAULT_RANK_COUNT),

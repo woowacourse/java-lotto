@@ -26,7 +26,7 @@ public class LottoController {
         Money money = insertMoney();
         LottoTicket lottoTicket = buyLottoTicket(money);
         WinningNumbers winningNumbers = generateWinningNumbers();
-        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningResult(winningNumbers));
+        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningCountByRank(winningNumbers));
         announceWinningResult(money, winningResult);
     }
 
