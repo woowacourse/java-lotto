@@ -6,18 +6,18 @@ import java.util.stream.Collectors;
 
 public class Lottos {
 
-    List<Lotto> lottos;
+    private List<Lotto> lottos;
 
     public Lottos(int lottoAmount) {
         this.lottos = generateLottos(lottoAmount);
     }
 
-    public static Lottos buyLottos(int lottoAmount) {
-        return new Lottos(lottoAmount);
-    }
-
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public static Lottos buyLottos(int lottoAmount) {
+        return new Lottos(lottoAmount);
     }
 
     public int numberOfLottery() {
@@ -25,15 +25,6 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
-    }
-
-    private List<Lotto> generateLottos(int lottoAmount) {
-
-        lottos = new ArrayList<>();
-        for (int i = 0; i < lottoAmount; ++i) {
-            lottos.add(Lotto.generateLotto());
-        }
         return lottos;
     }
 
@@ -47,5 +38,13 @@ public class Lottos {
         return lottos.stream()
                 .map(lotto -> lotto.isBonusNumberContain(bonusNumber))
                 .collect(Collectors.toList());
+    }
+
+    private List<Lotto> generateLottos(int lottoAmount) {
+        lottos = new ArrayList<>();
+        for (int i = 0; i < lottoAmount; ++i) {
+            lottos.add(Lotto.generateLotto());
+        }
+        return lottos;
     }
 }

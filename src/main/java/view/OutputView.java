@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import org.w3c.dom.ls.LSOutput;
 
 public class OutputView {
 
@@ -29,7 +28,6 @@ public class OutputView {
     private static final int FIFTH_PRIZE_INDEX = 5;
 
     public static void printLottosInformations(Lottos lottos) {
-
         System.out.printf(MESSAGE_LOTTOS_NUMBER, lottos.getLottos().size());
         for (Lotto lotto : lottos.getLottos()) {
             String str = lotto.getLottoNumbers()
@@ -39,12 +37,6 @@ public class OutputView {
                     .collect(Collectors.joining(NUMBER_DELIMITER));
             System.out.printf(LOTTO_NUMBER_FORMAT, str);
         }
-    }
-
-    private static List<Integer> refineResults(Map<Rewards, Integer> results) {
-        return Arrays.stream(Rewards.values())
-                .map(value -> results.getOrDefault(value, NONE))
-                .collect(Collectors.toList()).subList(FIRST_PRIZE_INDEX, FIFTH_PRIZE_INDEX);
     }
 
     public static void printWinningStatistic(Map<Rewards, Integer> results) {
@@ -60,8 +52,9 @@ public class OutputView {
         System.out.printf(MESSAGE_YIELD, yield);
     }
 
-    private static int reverseIndex(int index) {
-        return 4 - index;
+    private static List<Integer> refineResults(Map<Rewards, Integer> results) {
+        return Arrays.stream(Rewards.values())
+                .map(value -> results.getOrDefault(value, NONE))
+                .collect(Collectors.toList()).subList(FIRST_PRIZE_INDEX, FIFTH_PRIZE_INDEX);
     }
-
 }

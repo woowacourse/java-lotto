@@ -1,10 +1,5 @@
-import domain.Lotto;
 import domain.LottoGame;
-import domain.LottoNumber;
 import domain.Money;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import view.InputView;
 import view.OutputView;
 

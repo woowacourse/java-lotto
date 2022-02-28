@@ -1,7 +1,5 @@
 package domain;
 
-import java.sql.SQLOutput;
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
@@ -49,6 +47,28 @@ public class LottoGame {
         this.bonusNumber = new LottoNumber(notVerifiedBonusNumber);
     }
 
+    public Map<Rewards, Integer> produceResults() {
+        List<Rewards> ranks = convertLottoResultsToRanks();
+        Map<Rewards, Integer> results = new EnumMap<>(Rewards.class);
+        ranks.forEach(rank -> results.put(rank, results.getOrDefault(rank, BASE_COUNT) + INCREASE_COUNT));
+        return results;
+    }
+
+    public float calculateYield() {
+        if (lottos.numberOfLottery() == EMPTY) {
+            return NO_YIELD;
+        }
+        List<Rewards> ranks = convertLottoResultsToRanks();
+        long prizeSum = ranks.stream()
+                .map(Rewards::getPrize)
+                .reduce(BASE_LONG_SUM, Long::sum);
+        return (float) prizeSum / lottos.numberOfLottery();
+    }
+
+    public Lottos getLottos() {
+        return lottos;
+    }
+
     private void validateLottoInput(List<Integer> notVerifiedWinningLottoNumbers
             , int notVerifiedBonusNumber) {
         validateLength(notVerifiedWinningLottoNumbers);
@@ -69,13 +89,6 @@ public class LottoGame {
         }
     }
 
-    public Map<Rewards, Integer> produceResults() {
-        List<Rewards> ranks = convertLottoResultsToRanks();
-        Map<Rewards, Integer> results = new EnumMap<>(Rewards.class);
-        ranks.forEach(rank -> results.put(rank, results.getOrDefault(rank, BASE_COUNT) + INCREASE_COUNT));
-        return results;
-    }
-
     private List<Rewards> convertLottoResultsToRanks() {
         List<Integer> matchCounts = lottos.compareAllLottosWithWinningLotto(winningLotto);
         List<Boolean> bonusNumberContains = lottos.compareAllLottosWithBonusNumber(bonusNumber);
@@ -83,20 +96,5 @@ public class LottoGame {
                 .boxed()
                 .map(index -> LottoRewardLogic.convertToRank(matchCounts.get(index), bonusNumberContains.get(index)))
                 .collect(Collectors.toList());
-    }
-
-    public float calculateYield() {
-        if (lottos.numberOfLottery() == EMPTY) {
-            return NO_YIELD;
-        }
-        List<Rewards> ranks = convertLottoResultsToRanks();
-        long prizeSum = ranks.stream()
-                .map(Rewards::getPrize)
-                .reduce(BASE_LONG_SUM, Long::sum);
-        return (float) prizeSum / lottos.numberOfLottery();
-    }
-
-    public Lottos getLottos() {
-        return lottos;
     }
 }

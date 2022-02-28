@@ -2,9 +2,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.Lotto;
 import domain.LottoNumber;
-import domain.Rewards;
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
