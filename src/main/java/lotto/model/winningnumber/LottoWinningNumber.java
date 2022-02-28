@@ -25,9 +25,13 @@ public class LottoWinningNumber {
     }
 
     private void inputBlank(List<String> numbers) {
-        if (numbers == null || numbers.stream().anyMatch(String::isBlank)) {
+        if (numbers == null || isBlankNumbers(numbers)) {
             throw new IllegalArgumentException(WinningNumberExceptionMessage.BLANK_ERROR.getMassage());
         }
+    }
+
+    private boolean isBlankNumbers(List<String> numbers) {
+        return numbers.stream().anyMatch(String::isBlank);
     }
 
     private String makeNumbersToString(List<String> numbers) {
