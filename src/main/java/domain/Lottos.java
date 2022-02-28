@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 public class Lottos {
 
+    private static final int START_INDEX = 0;
+
     private List<Lotto> lottos;
 
     public Lottos(int lottoAmount) {
@@ -42,7 +44,7 @@ public class Lottos {
 
     private List<Lotto> generateLottos(int lottoAmount) {
         lottos = new ArrayList<>();
-        for (int i = 0; i < lottoAmount; ++i) {
+        for (int i = START_INDEX; i < lottoAmount; ++i) {
             lottos.add(Lotto.generateLotto());
         }
         return lottos;

@@ -15,6 +15,7 @@ public class LottoGame {
     private static final int NO_YIELD = 0;
     private static final int INCREASE_COUNT = 1;
     private static final int BASE_COUNT = 0;
+    private static final int START_INDEX = 0;
     private static final long BASE_LONG_SUM = 0L;
     private static final String LOTTO_NUMBER_DUPLICATED_EXCEPTION = "[ERROR] 로또번호와 보너스번호는 중복일 수 없습니다.";
     private static final int LOTTO_NUMBER_DIGIT = 6;
@@ -92,7 +93,7 @@ public class LottoGame {
     private List<Rewards> convertLottoResultsToRanks() {
         List<Integer> matchCounts = lottos.compareAllLottosWithWinningLotto(winningLotto);
         List<Boolean> bonusNumberContains = lottos.compareAllLottosWithBonusNumber(bonusNumber);
-        return IntStream.range(0, matchCounts.size())
+        return IntStream.range(START_INDEX, matchCounts.size())
                 .boxed()
                 .map(index -> LottoRewardLogic.convertToRank(matchCounts.get(index), bonusNumberContains.get(index)))
                 .collect(Collectors.toList());
