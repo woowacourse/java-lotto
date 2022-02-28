@@ -25,9 +25,9 @@ public class Tickets {
         return tickets;
     }
 
-    public List<Rank> calculateRanks(final Ticket answer, final Ball bonusBall) {
+    public List<Rank> calculateRanks(final Ticket winningTicket, final Ball bonusBall) {
         return tickets.stream()
-                .map(ticket -> ticket.calculateRank(answer, bonusBall))
+                .map(ticket -> ticket.calculateRank(winningTicket, bonusBall))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toUnmodifiableList());
