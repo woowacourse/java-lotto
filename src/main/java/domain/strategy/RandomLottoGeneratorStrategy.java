@@ -11,10 +11,10 @@ import domain.LottoNumber;
 
 public class RandomLottoGeneratorStrategy implements LottoGeneratorStrategy {
 
-    private static final List<LottoNumber> lottoNumbers;
+    private static final List<LottoNumber> LOTTO_NUMBERS;
 
     static {
-        lottoNumbers = IntStream.rangeClosed(LottoNumber.MINIMUM_VALUE, LottoNumber.MAXIMUM_VALUE)
+        LOTTO_NUMBERS = IntStream.rangeClosed(LottoNumber.MINIMUM_VALUE, LottoNumber.MAXIMUM_VALUE)
             .boxed()
             .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
@@ -22,11 +22,11 @@ public class RandomLottoGeneratorStrategy implements LottoGeneratorStrategy {
 
     @Override
     public List<LottoNumber> generate() {
-        Collections.shuffle(lottoNumbers);
+        Collections.shuffle(LOTTO_NUMBERS);
 
         final List<LottoNumber> pickedNumbers = new ArrayList<>();
         for (int i = 0; i < Lotto.LOTTO_NUMBER_SIZE; i++) {
-            pickedNumbers.add(lottoNumbers.get(i));
+            pickedNumbers.add(LOTTO_NUMBERS.get(i));
         }
         Collections.sort(pickedNumbers);
 
