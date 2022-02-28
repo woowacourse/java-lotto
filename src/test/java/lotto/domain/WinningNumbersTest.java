@@ -65,7 +65,9 @@ public class WinningNumbersTest {
                         Arguments.of(List.of(1, 2, 3, 4, 5, 7), WinningPrice.FiveAndBonus),
                         Arguments.of(List.of(1, 2, 3, 4, 5, 44), WinningPrice.Five),
                         Arguments.of(List.of(1, 2, 3, 4, 43, 44), WinningPrice.Four),
-                        Arguments.of(List.of(1, 2, 3, 42, 43, 44), WinningPrice.Three)
+                        Arguments.of(List.of(1, 2, 3, 42, 43, 44), WinningPrice.Three),
+                        Arguments.of(List.of(1, 2, 3, 4, 7, 44), WinningPrice.Four),
+                        Arguments.of(List.of(1, 2, 3, 7, 43, 44), WinningPrice.Three)
                 );
             }
         }
