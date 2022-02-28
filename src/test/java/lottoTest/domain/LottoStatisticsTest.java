@@ -1,6 +1,7 @@
 package lottoTest.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -17,11 +18,12 @@ class LottoStatisticsTest {
         LottoStatistics lottoStatistics = new LottoStatistics(result);
         EnumMap<Rank, Integer> statistics = lottoStatistics.getStatistics();
 
-        assertThat(statistics.get(Rank.FIRST)).isEqualTo(1);
-        assertThat(statistics.get(Rank.SECOND)).isEqualTo(1);
-        assertThat(statistics.get(Rank.THIRD)).isEqualTo(1);
-        assertThat(statistics.get(Rank.FOURTH)).isEqualTo(0);
-        assertThat(statistics.get(Rank.FIFTH)).isEqualTo(0);
-        assertThat(statistics.get(Rank.MISS)).isEqualTo(0);
+        assertAll(
+                () -> assertThat(statistics.get(Rank.FIRST)).isEqualTo(1),
+                () -> assertThat(statistics.get(Rank.SECOND)).isEqualTo(1),
+                () -> assertThat(statistics.get(Rank.FOURTH)).isEqualTo(0),
+                () -> assertThat(statistics.get(Rank.FIFTH)).isEqualTo(0),
+                () -> assertThat(statistics.get(Rank.MISS)).isEqualTo(0)
+        );
     }
 }
