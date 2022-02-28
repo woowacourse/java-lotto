@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.client.ErrorClient;
+import lotto.config.ClientConfig;
 
 public class ErrorView {
 
@@ -8,8 +9,16 @@ public class ErrorView {
 
     private final ErrorClient errorClient;
 
-    public ErrorView(ErrorClient errorClient) {
+    private ErrorView(ErrorClient errorClient) {
         this.errorClient = errorClient;
+    }
+
+    private static class ErrorViewHelper {
+        private static final ErrorView INSTANCE = new ErrorView(ClientConfig.getErrorClient());
+    }
+
+    public static ErrorView getInstance() {
+        return ErrorViewHelper.INSTANCE;
     }
 
     public void error(String message) {

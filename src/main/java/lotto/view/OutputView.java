@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.client.OutputClient;
+import lotto.config.ClientConfig;
 import lotto.dto.LottoStatisticsResponse;
 import lotto.dto.LottoTicketResponse;
 import lotto.dto.LottoWinningResponse;
@@ -12,8 +13,16 @@ public class OutputView {
 
     private final OutputClient client;
 
-    public OutputView(OutputClient client) {
+    private OutputView(OutputClient client) {
         this.client = client;
+    }
+
+    private static class OutputViewHelper {
+        private static final OutputView INSTANCE = new OutputView(ClientConfig.getOutputClient());
+    }
+
+    public static OutputView getInstance() {
+        return OutputViewHelper.INSTANCE;
     }
 
     public void outputTickets(List<LottoTicketResponse> responses) {

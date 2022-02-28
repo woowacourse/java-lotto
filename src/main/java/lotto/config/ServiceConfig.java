@@ -6,14 +6,14 @@ import lotto.service.WinningService;
 
 public class ServiceConfig {
     public static PurchaseService getPurchaseService() {
-        return new PurchaseService(RepositoryConfig.getLottoRepository());
+        return PurchaseService.getInstance();
     }
 
     public static WinningService getWinningService() {
-        return new WinningService(RepositoryConfig.getLottoRepository());
+        return WinningService.getInstance();
     }
 
     public static MoneyService getMoneyService() {
-        return new MoneyService(RepositoryConfig.getMoneyRepository());
+        return MoneyService.getInstance();
     }
 }

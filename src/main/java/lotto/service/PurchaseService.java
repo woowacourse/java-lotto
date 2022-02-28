@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.config.RepositoryConfig;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
@@ -13,12 +14,23 @@ import lotto.repository.LottoRepository;
 
 public class PurchaseService {
 
-    private final NumberGenerator generator = new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX);
-
+    private final NumberGenerator generator;
     private final LottoRepository lottoRepository;
 
-    public PurchaseService(LottoRepository lottoRepository) {
+    private PurchaseService(NumberGenerator generator, LottoRepository lottoRepository) {
+        this.generator = generator;
         this.lottoRepository = lottoRepository;
+    }
+
+    private static class PurchaseServiceHelper {
+        private static final PurchaseService INSTANCE = new PurchaseService(
+            new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX),
+            RepositoryConfig.getLottoRepository()
+        );
+    }
+
+    public static PurchaseService getInstance() {
+        return PurchaseServiceHelper.INSTANCE;
     }
 
     public List<LottoTicket> purchaseAndPersist(Money money) {

@@ -4,7 +4,18 @@ import lotto.domain.Money;
 
 public class MoneyRepository {
 
-    private static Money money = new Money(0);
+    private Money money = new Money(0);
+
+    private MoneyRepository() {
+    }
+
+    private static class MoneyRepositoryHelper {
+        private static final MoneyRepository INSTANCE = new MoneyRepository();
+    }
+
+    public static MoneyRepository getInstance() {
+        return MoneyRepositoryHelper.INSTANCE;
+    }
 
     public void save(Money other) {
         money = other;

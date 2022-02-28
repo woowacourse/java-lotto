@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.config.ServiceConfig;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningTicket;
@@ -15,9 +16,20 @@ public class InputWinningController implements WinningController {
     private final WinningService winningService;
     private final MoneyService moneyService;
 
-    public InputWinningController(WinningService winningService, MoneyService moneyService) {
+    private InputWinningController(WinningService winningService, MoneyService moneyService) {
         this.winningService = winningService;
         this.moneyService = moneyService;
+    }
+
+    private static class InputWinningControllerHelper {
+        private static final WinningController INSTANCE = new InputWinningController(
+            ServiceConfig.getWinningService(),
+            ServiceConfig.getMoneyService()
+        );
+    }
+
+    public static WinningController getInstance() {
+        return InputWinningControllerHelper.INSTANCE;
     }
 
     @Override

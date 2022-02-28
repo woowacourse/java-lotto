@@ -3,6 +3,7 @@ package lotto.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.config.RepositoryConfig;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningTicket;
@@ -12,8 +13,16 @@ public class WinningService {
 
     private final LottoRepository lottoRepository;
 
-    public WinningService(LottoRepository lottoRepository) {
+    private WinningService(LottoRepository lottoRepository) {
         this.lottoRepository = lottoRepository;
+    }
+
+    private static class WinningServiceHelper {
+        private static final WinningService INSTANCE = new WinningService(RepositoryConfig.getLottoRepository());
+    }
+
+    public static WinningService getInstance() {
+        return WinningServiceHelper.INSTANCE;
     }
 
     public List<LottoRank> compare(WinningTicket winningTicket) {

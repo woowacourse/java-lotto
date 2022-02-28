@@ -7,7 +7,18 @@ import lotto.domain.LottoTicket;
 
 public class LottoRepository {
 
-    private static List<LottoTicket> tickets = new ArrayList<>();
+    private List<LottoTicket> tickets = new ArrayList<>();
+
+    private LottoRepository() {
+    }
+
+    private static class LottoRepositoryHelper {
+        private static final LottoRepository INSTANCE = new LottoRepository();
+    }
+
+    public static LottoRepository getInstance() {
+        return LottoRepositoryHelper.INSTANCE;
+    }
 
     public void save(List<LottoTicket> other) {
         tickets = other;

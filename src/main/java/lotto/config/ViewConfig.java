@@ -6,14 +6,14 @@ import lotto.view.OutputView;
 
 public class ViewConfig {
     public static InputView getInputView() {
-        return new InputView(ClientConfig.getInputClient());
+        return InputView.getInstance();
     }
 
     public static OutputView getOutputView() {
-        return new OutputView(ClientConfig.getOutputClient());
+        return OutputView.getInstance();
     }
 
     public static ErrorView getErrorView() {
-        return new ErrorView(ClientConfig.getErrorClient());
+        return ErrorView.getInstance();
     }
 }

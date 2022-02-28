@@ -5,10 +5,10 @@ import lotto.repository.MoneyRepository;
 
 public class RepositoryConfig {
     public static MoneyRepository getMoneyRepository() {
-        return new MoneyRepository();
+        return MoneyRepository.getInstance();
     }
 
     public static LottoRepository getLottoRepository() {
-        return new LottoRepository();
+        return LottoRepository.getInstance();
     }
 }

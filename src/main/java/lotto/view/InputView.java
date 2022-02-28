@@ -1,13 +1,22 @@
 package lotto.view;
 
 import lotto.client.InputClient;
+import lotto.config.ClientConfig;
 
 public class InputView {
 
     private final InputClient client;
 
-    public InputView(InputClient client) {
+    private InputView(InputClient client) {
         this.client = client;
+    }
+
+    private static class InputViewHelper {
+        private static final InputView INSTANCE = new InputView(ClientConfig.getInputClient());
+    }
+
+    public static InputView getInstance() {
+        return InputViewHelper.INSTANCE;
     }
 
     public String inputMoney() {
