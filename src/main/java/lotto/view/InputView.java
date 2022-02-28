@@ -23,6 +23,13 @@ public class InputView {
         return validateNumber(input);
     }
 
+    public static int inputManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        String input = SCANNER.nextLine();
+        validateBlank(input);
+        return validateNumber(input);
+    }
+
     public static List<LottoNumber> inputWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = SCANNER.nextLine();
