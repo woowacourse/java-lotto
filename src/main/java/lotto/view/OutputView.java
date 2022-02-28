@@ -11,7 +11,7 @@ import lotto.domain.Rank;
 public class OutputView {
 
     private static final String ERROR_MESSAGE = "[ERROR] : %s%n";
-    private static final String LOTTO_COUNT_MESSAGE = "%n%d개를 구매했습니다.%n";
+    private static final String LOTTO_COUNT_MESSAGE = "%n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
     private static final String LOTTO_MESSAGE_FORMAT = "[%s]%n";
     private static final String MATCH_RESULT_MESSAGE_PREFIX = "%n당첨 통계%n---------%n";
     private static final String NO_BONUS_BALL = " ";
@@ -30,13 +30,13 @@ public class OutputView {
         System.out.printf(ERROR_MESSAGE, errorMessage);
     }
 
-    public static void printInitResult(Lottos lottos) {
-        printLottoCount(lottos);
+    public static void printInitResult(Lottos lottos, int quantityOfManual) {
+        printLottoCount(lottos, quantityOfManual);
         printLottos(lottos);
     }
 
-    private static void printLottoCount(Lottos lottos) {
-        System.out.printf(LOTTO_COUNT_MESSAGE, lottos.getCount());
+    private static void printLottoCount(Lottos lottos, int quantityOfManual) {
+        System.out.printf(LOTTO_COUNT_MESSAGE, quantityOfManual, lottos.getCount() - quantityOfManual);
     }
 
     private static void printLottos(Lottos lottos) {

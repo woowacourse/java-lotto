@@ -22,7 +22,7 @@ public class LottoController {
         }
 
         final Lottos lottos = new Lottos(money, manualNumbers);
-        OutputView.printInitResult(lottos);
+        OutputView.printInitResult(lottos, quantityOfManual);
         return lottos;
     }
 
