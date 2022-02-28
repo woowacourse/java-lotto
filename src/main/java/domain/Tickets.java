@@ -19,6 +19,10 @@ public class Tickets {
         return new Tickets(tickets);
     }
 
+    public void add(Tickets add) {
+        tickets.addAll(add.tickets);
+    }
+
     public List<Rank> getRanks(WinningNumbers winningNumbers) {
         return tickets.stream()
                 .map(winningNumbers::getTicketRank)
