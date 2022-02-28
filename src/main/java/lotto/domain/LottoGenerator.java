@@ -43,13 +43,13 @@ public class LottoGenerator {
         return new Lottos(manualLottos);
     }
 
-    private void checkRightManualNumbers(List<List<Integer>> numbers) {
+    private void checkRightManualNumbers(final List<List<Integer>> numbers) {
         if (numbers.size() != manualCount) {
             throw new IllegalArgumentException("[ERROR] 수동 번호가 올바르지 않습니다.");
         }
     }
 
-    private List<Lotto> generateManualLottos(List<List<Integer>> numbers) {
+    private List<Lotto> generateManualLottos(final List<List<Integer>> numbers) {
         List<Lotto> manualLottos = numbers.stream()
                 .map(number -> new Lotto(number.stream()
                         .map(LottoNumber::valueOf)
