@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.model.Lotto;
+import lotto.model.LottoMachine;
 import lotto.model.Lottos;
 import lotto.model.Rank;
 import lotto.model.number.LottoNumber;
@@ -43,13 +44,18 @@ public class ResultView {
                 .collect(Collectors.toList()));
     }
 
-    public static void printTotalRankResult(final Map<Rank, Integer> rankCount) {
+    public static void printTotalRankResult(LottoMachine lottoMachine) {
         System.out.println();
         System.out.println(STATISTICS_MESSAGE);
-        Set<Rank> keySet = rankCount.keySet();
-        for (Rank rank : keySet) {
-            printRank(rank, rankCount.get(rank));
+
+        for (Rank rank : Rank.values()) {
+            printRank(rank, lottoMachine.getEachRankCount(rank));
         }
+        printRevenue(lottoMachine);
+    }
+
+    private static void printRevenue(LottoMachine lottoMachine) {
+        System.out.println(START_REVENUE_MESSAGE + lottoMachine.getRevenue() + END_REVENUE_MESSAGE);
     }
 
     private static void printRank(final Rank rank, final Integer integer) {
@@ -70,7 +76,5 @@ public class ResultView {
         return BONUS_BALL_NOT_CORRESPOND_MESSAGE;
     }
 
-    public static void printRevenue(final Lottos lottos) {
-        System.out.println(START_REVENUE_MESSAGE + lottos.getRevenue() + END_REVENUE_MESSAGE);
-    }
+
 }

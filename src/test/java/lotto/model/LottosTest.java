@@ -29,24 +29,6 @@ public class LottosTest {
         assertThat(lottos.getLottos()).contains(lotto1);
     }
 
-    @Test
-    void 등수_개수_테스트() {
-        LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
-        lottos.insert(lotto1);
-        lottos.insert(lotto2);
-        lottos.calculateRanks(winningNumbers, new LottoNumber(7));
-        assertThat(lottos.getEachRankCount(Rank.FIRST)).isEqualTo(1);
-    }
-
-    @Test
-    void 수익률_테스트() {
-        LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
-        lottos.insert(lotto1); // 1등
-        lottos.insert(lotto2); // 4등
-        lottos.calculateRanks(winningNumbers, new LottoNumber(7));
-        assertThat(lottos.getRevenue()).isEqualTo((2000000000 + 50000) / 2000);
-    }
-
     private LottoNumbers makeLottoNumbers(int[] numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int num : numbers) {

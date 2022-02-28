@@ -18,7 +18,7 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public void checkDuplicateNumber(final LottoNumber number) throws RuntimeException {
+    public void checkDuplicateNumber(LottoNumber number) throws RuntimeException {
         if ((winningNumbers.getLottoNumbers().stream()
                 .mapToInt(LottoNumber::getLottoNumber)
                 .boxed()
@@ -28,7 +28,7 @@ public class WinningLotto {
         }
     }
 
-    public Map<Rank, Integer> checkRank(final Lottos lottos) {
+    public Map<Rank, Integer> checkRank(Lottos lottos) {
         return lottos.calculateRanks(winningNumbers, bonusNumber);
     }
 }

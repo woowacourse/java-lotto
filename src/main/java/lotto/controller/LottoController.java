@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import lotto.model.LottoMachine;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
@@ -18,14 +19,15 @@ public class LottoController {
 
     private static final String NUMBER_REGEX = "\\d+";
 
-    public void run() throws RuntimeException {
+    public LottoMachine ready() {
+        return new LottoMachine(manageLottos(), makeWinningLotto(InputView.inputWinningNumbers(),
+                InputView.inputBonusNumber()));
+    }
+
+    private Lottos manageLottos() {
         Lottos lottos = makeLottos(InputView.inputMoney());
         ResultView.printBuyingLottosResult(lottos);
-
-        WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
-                InputView.inputBonusNumber());
-        ResultView.printTotalRankResult(winningLotto.checkRank(lottos));
-        ResultView.printRevenue(lottos);
+        return lottos;
     }
 
     private Lottos makeLottos(String money) throws RuntimeException {

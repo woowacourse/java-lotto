@@ -11,15 +11,11 @@ import lotto.model.number.LottoNumbers;
 
 public class Lottos {
 
-    private static final int PRICE_PER_LOTTO = 1000;
-
     private final List<Lotto> lottos;
-    private final Map<Rank, Integer> rankCount;
 
     public Lottos(final Money money) throws RuntimeException {
         this.lottos = new ArrayList<>();
         insertLottoToLottos(money.getBuyingLottoCount());
-        rankCount = initMap();
     }
 
     private void insertLottoToLottos(final int countLotto) throws RuntimeException {
@@ -32,24 +28,19 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    private Map<Rank, Integer> initMap() {
-        Map<Rank, Integer> map = new LinkedHashMap<>();
-        Arrays.stream(Rank.values()).forEach(rank -> map.put(rank, 0));
-        return map;
-    }
-
     public Map<Rank, Integer> calculateRanks(final LottoNumbers winningNumbers, final LottoNumber bonusNumber) {
-        lottos.forEach(lotto -> lotto.calculateRank(winningNumbers, bonusNumber));
-        countEachRank(winningNumbers, bonusNumber);
-        Map<Rank, Integer> newRankCount = new LinkedHashMap<>(rankCount);
-        return newRankCount;
-    }
-
-    private void countEachRank(final LottoNumbers winningNumbers, final LottoNumber bonusNumber) {
+        Map<Rank, Integer> rankCount = initMap();
         lottos.forEach(lotto -> {
             Rank rank = lotto.calculateRank(winningNumbers, bonusNumber);
             rankCount.put(rank, rankCount.get(rank) + 1);
         });
+        return rankCount;
+    }
+
+    private Map<Rank, Integer> initMap() {
+        Map<Rank, Integer> map = new LinkedHashMap<>();
+        Arrays.stream(Rank.values()).forEach(rank -> map.put(rank, 0));
+        return map;
     }
 
     public List<Lotto> getLottos() {
@@ -61,15 +52,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public double getRevenue() {
-        int sum = 0;
-        for (Rank rank : Rank.values()) {
-            sum += rank.getPrice() * getEachRankCount(rank);
-        }
-        return ((double) sum / (lottos.size() * PRICE_PER_LOTTO));
-    }
-
-    public Integer getEachRankCount(final Rank rank) {
-        return rankCount.get(rank);
+    public int size() {
+        return lottos.size();
     }
 }
