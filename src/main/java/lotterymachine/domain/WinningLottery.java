@@ -2,11 +2,11 @@ package lotterymachine.domain;
 
 import java.util.List;
 
-import static lotterymachine.view.ErrorMessage.*;
-import static lotterymachine.view.ErrorMessage.DUPLICATE_NUMBER;
-
 public class WinningLottery {
     private static final int TICKET_SIZE = 6;
+    private static final String NOT_CORRECT_WINNING_NUMBERS = "당첨 번호 숫자는 여섯개를 입력해야합니다.";
+    private static final String DUPLICATION_INPUT_NUMBERS = "중복된 숫자를 입력 받았습니다.";
+    private static final String DUPLICATION_INPUT_BONUS_NUMBERS = "보너스 볼이 당첨 번호와 중복됩니다.";
 
     private final List<LotteryNumber> numbers;
     private final LotteryNumber bonusNumber;
@@ -28,7 +28,7 @@ public class WinningLottery {
 
     private void validateBonusNumber(List<LotteryNumber> numbers, LotteryNumber bonusNumber) {
         if (numbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER.getMessage());
+            throw new IllegalArgumentException(DUPLICATION_INPUT_BONUS_NUMBERS);
         }
     }
 
@@ -39,7 +39,7 @@ public class WinningLottery {
 
     private void validateSize(List<LotteryNumber> numbers) {
         if (!isLotteryTicketSize(numbers.size())) {
-            throw new IllegalArgumentException(INVALID_SIZE.getMessage());
+            throw new IllegalArgumentException(NOT_CORRECT_WINNING_NUMBERS);
         }
     }
 
@@ -52,7 +52,7 @@ public class WinningLottery {
                 .distinct()
                 .count();
         if (numbers != input.size()) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER.getMessage());
+            throw new IllegalArgumentException(DUPLICATION_INPUT_NUMBERS);
         }
     }
 }

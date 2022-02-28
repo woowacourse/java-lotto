@@ -8,11 +8,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static lotterymachine.view.ErrorMessage.*;
-
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String NUMBER_DELIMITER = ",";
+    private static final String IS_NOT_NUMBER = "숫자만 입력할 수 있습니다.";
 
     public static int getAmount() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -50,7 +49,7 @@ public class InputView {
         try {
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException numberFormatException) {
-            throw new NumberFormatException(IS_NOT_NUMBER.getMessage());
+            throw new NumberFormatException(IS_NOT_NUMBER);
         }
     }
 }

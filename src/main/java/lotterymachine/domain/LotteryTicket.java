@@ -4,10 +4,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotterymachine.view.ErrorMessage.INVALID_SIZE;
-
 public class LotteryTicket {
     private static final int TICKET_SIZE = 6;
+    private static final String NOT_CORRECT_TICKET_SIZE = "로또 숫자는 여섯개를 입력해야합니다.";
+    private static final String DUPLICATION_INPUT_NUMBERS = "중복된 숫자를 입력 받았습니다.";
 
     private final List<LotteryNumber> numbers;
 
@@ -32,6 +32,7 @@ public class LotteryTicket {
                 .map(LotteryNumber::getNumber)
                 .collect(Collectors.toUnmodifiableList());
     }
+
     private void validateNumbers(List<LotteryNumber> numbers) {
         validateSize(numbers);
         validateDuplication(numbers);
@@ -39,7 +40,7 @@ public class LotteryTicket {
 
     private void validateSize(List<LotteryNumber> numbers) {
         if (!isLotteryTicketSize(numbers.size())) {
-            throw new IllegalArgumentException(INVALID_SIZE.getMessage());
+            throw new IllegalArgumentException(NOT_CORRECT_TICKET_SIZE);
         }
     }
 
@@ -52,7 +53,7 @@ public class LotteryTicket {
                 .distinct()
                 .count();
         if (count != numbers.size()) {
-            throw new IllegalArgumentException("중복된 숫자를 입력 받았습니다.");
+            throw new IllegalArgumentException(DUPLICATION_INPUT_NUMBERS);
         }
     }
 }
