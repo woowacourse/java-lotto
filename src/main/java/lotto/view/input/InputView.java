@@ -37,14 +37,14 @@ public class InputView {
 
     public List<Integer> requestWinningNumbers() {
         final String inputValue = reader.readLine();
-        return Arrays.stream(Delimiter.splitWithComma(appendSpaceBeforeSplit(inputValue)))
+        return Arrays.stream(Delimiter.COMMA.splitWith(appendSpaceBeforeSplit(inputValue)))
                 .map(String::trim)
                 .map(this::parseBallNumber)
                 .collect(Collectors.toUnmodifiableList());
     }
 
     private String appendSpaceBeforeSplit(final String targetString) {
-        return Delimiter.appendSpaceBehind(targetString);
+        return Delimiter.SPACE.appendBehind(targetString);
     }
 
     private int parseBallNumber(final String inputValue) {

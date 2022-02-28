@@ -11,7 +11,7 @@ public enum OutputMessage {
     DIVIDING_LINE("---------"),
 
     TICKET_COUNT_FORMAT("%d개를 구매했습니다."),
-    PROFIT_RAGE_FORMAT("총 수익륭은 %.2f입니다."),
+    PROFIT_RAGE_FORMAT("총 수익률은 %.2f입니다."),
     TICKET_FORMAT("[%s]"),
     ANALYSIS_FORMAT("%d개 일치 (%d원) - %d개"),
     ANALYSIS_EXTRA_FORMAT("%d개 일치, 보너스 볼 일치 (%d원) - %d개");

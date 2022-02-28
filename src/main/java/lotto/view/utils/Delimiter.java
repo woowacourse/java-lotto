@@ -13,16 +13,16 @@ public enum Delimiter {
         this.unit = unit;
     }
 
-    public static String[] splitWithComma(final String targetString) {
-        return targetString.split(COMMA.unit);
+    public String[] splitWith(final String targetString) {
+        return targetString.split(this.unit);
     }
 
-    public static String appendSpaceBehind(final String targetString) {
-        return targetString + SPACE.unit;
+    public String appendBehind(final String targetString) {
+        return targetString + this.unit;
     }
 
-    public static String joinWithComma(final List<String> strings) {
-        return String.join(COMMA.unit + SPACE.unit, strings);
+    public String joinWith(final List<String> strings) {
+        return String.join(this.unit + SPACE.unit, strings);
     }
 
 }

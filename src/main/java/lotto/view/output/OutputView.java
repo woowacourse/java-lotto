@@ -39,7 +39,7 @@ public class OutputView {
                 .map(String::valueOf)
                 .collect(Collectors.toUnmodifiableList());
 
-        final String joinedBallNumbers = Delimiter.joinWithComma(ticketBalls);
+        final String joinedBallNumbers = Delimiter.COMMA.joinWith(ticketBalls);
         return String.format(TICKET_FORMAT.getMessage(), joinedBallNumbers);
     }
 
