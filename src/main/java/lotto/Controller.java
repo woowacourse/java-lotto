@@ -9,7 +9,6 @@ import lotto.model.dto.LottoDTO;
 import lotto.model.dto.PrizeInformationDTO;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
-import lotto.model.prize.MatchResult;
 import lotto.model.prize.PrizeInformations;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -19,7 +18,7 @@ public class Controller {
     public static void run() {
         Money money = askMoneyAmount();
 
-        Lottos lottos = initializeLottos(money);
+        Lottos lottos = Lottos.of(money, InputView.askManualCount());
         purchaseLottos(lottos);
         ResultView.showPurchaseCount(lottos.getSize());
         ResultView.showLottos(LottoDTO.from(lottos));
@@ -31,11 +30,6 @@ public class Controller {
 
     private static Money askMoneyAmount() {
         return Money.from(InputView.askMoneyAmount());
-    }
-
-    private static Lottos initializeLottos(Money money) {
-        int manualCount = 3;
-        return new Lottos(Lotto.countAvailableTickets(money), manualCount);
     }
 
     private static void purchaseLottos(Lottos lottos) {
