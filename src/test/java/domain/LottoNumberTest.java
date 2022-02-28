@@ -1,45 +1,33 @@
 package domain;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumberTest {
 
-	@DisplayName("문자를 입력했을 시 실패")
-	@Test
-	void input_data_string_fail() {
-		assertThatThrownBy(() -> new LottoNumber("one"))
-			.isInstanceOf(NumberFormatException.class);
-	}
+    @DisplayName("범위 내 숫자를 입력했을 시 성공")
+    @Test
+    void range_success() {
+        assertThatCode(() -> LottoNumber.valueOf(45))
+                .doesNotThrowAnyException();
+    }
 
-	@DisplayName("숫자를 입력했을 시 성공")
-	@Test
-	void input_data_success() {
-		assertThatCode(() -> new LottoNumber("45"))
-			.doesNotThrowAnyException();
-	}
+    @DisplayName("범위 내 숫자가 아니면 예외 발생")
+    @ValueSource(ints = {0, 46})
+    @ParameterizedTest
+    void range_fail(int lottoNumber) {
+        assertThatThrownBy(() -> LottoNumber.valueOf(lottoNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 범위를 벗어난 숫자입니다.");
+    }
 
-	@DisplayName("빈문자열")
-	@Test
-	void input_data_empty_fail() {
-		assertThatThrownBy(() -> new LottoNumber(""))
-			.isInstanceOf(NumberFormatException.class);
-	}
-
-	@DisplayName("범위 불만족 최대")
-	@Test
-	void range_max() {
-		assertThatThrownBy(() -> new LottoNumber("46"))
-			.isInstanceOf(IllegalArgumentException.class);
-	}
-
-	@DisplayName("범위 불만족 최소")
-	@Test
-	void range_min() {
-		assertThatThrownBy(() -> new LottoNumber("0"))
-			.isInstanceOf(IllegalArgumentException.class);
-	}
+    @DisplayName("LottoNumber는 오름차순 정렬")
+    @Test
+    void comparable() {
+        assertThat(LottoNumber.valueOf(1)).isLessThan(LottoNumber.valueOf(45));
+    }
 }
