@@ -12,6 +12,7 @@ import java.util.stream.IntStream;
 public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
+    
     private final List<LottoNumber> lottoNumbers;
 
     public RandomLottoNumbersGenerator() {

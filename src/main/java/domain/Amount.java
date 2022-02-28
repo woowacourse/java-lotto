@@ -3,6 +3,7 @@ package domain;
 public class Amount {
     private static final int LOTTO_PRICE = 1000;
     private static final String REQUEST_UNIT_OF_LOTTO_PRICE = String.format("%d원 단위로 입력해주세요.", LOTTO_PRICE);
+    
     private final int amount;
 
     public Amount(int amount) {
