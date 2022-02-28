@@ -2,6 +2,7 @@ package lotto.model.result;
 
 public class Profit {
     private static final int INIT = 0;
+
     private int number;
 
     public int sumProfitMoney(WinningResult winningResult) {
