@@ -6,9 +6,10 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("StubRandomLottoNumberGenerator 테스트")
 public class StubRandomLottoNumberGeneratorTest {
     @Test
-    @DisplayName("생성자로 전달한 순서를 generateLottoNumber 호출 시 그대로 순환하며 반환")
+    @DisplayName("생성자로 전달한 순서를 generateLottoNumber 호출 시 그대로 순환하며 반환한다.")
     void generateLottoNumberTest() {
         // given
         List<List<Integer>> numbersSequence = List.of(

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Lottos 테스트")
 public class LottosTest {
     private LottoNumberGenerateStrategy lottoNumberGenerateStrategy;
     private WinningLotto winningLotto;
@@ -41,7 +42,7 @@ public class LottosTest {
     }
 
     @Test
-    @DisplayName("LottoQuantity 와 LottoNumberGenerateStrategy 를 전달받아 Lottos 생성")
+    @DisplayName("LottoQuantity 와 LottoNumberGenerateStrategy 를 전달받으면 Lottos 가 생성된다.")
     void createLottosByLottoQuantity() {
         // given
         LottoQuantity lottoQuantity = new LottoQuantity(10);
@@ -54,7 +55,7 @@ public class LottosTest {
     }
 
     @Test
-    @DisplayName("Winning Lotto 를 전달 받아 당첨 결과 반환")
+    @DisplayName("WinningLotto 를 전달 받으면 당첨 통계를 반환한다.")
     void getWinningResultByWinningLotto() {
         // given
         Lottos lottos = new Lottos(new LottoQuantity(3), lottoNumberGenerateStrategy);

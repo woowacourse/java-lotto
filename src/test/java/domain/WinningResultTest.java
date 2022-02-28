@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("WinningResult 테스트")
 public class WinningResultTest {
     private WinningResult winningResult;
 
@@ -20,7 +21,7 @@ public class WinningResultTest {
     }
 
     @Test
-    @DisplayName("WinningResult 생성 테스트")
+    @DisplayName("Builder 에 LottoQuantity 를 전달하고, setWinningCountByRank 를 실행하여 WinningResult 를 생성할 수 있다.")
     void createWinningResult() {
         // given
         LottoQuantity purchasedLottoQuantity = new LottoQuantity(100);
@@ -37,7 +38,7 @@ public class WinningResultTest {
     }
 
     @Test
-    @DisplayName("수익률 계산")
+    @DisplayName("calculateProfitRatio 는 수익률을 계산할 수 있다.")
     void getProfitRatio() {
         // given & when
         double actual = winningResult.calculateProfitRatio();
@@ -50,7 +51,7 @@ public class WinningResultTest {
     }
 
     @Test
-    @DisplayName("winningResult getter")
+    @DisplayName("getWinningResult 는 Map<Rank, WinningCount> 형태로 당첨 통계를 반환한다.")
     void getWinningResult() {
         // given
         Map<Rank, WinningCount> actual = winningResult.getWinningResult();

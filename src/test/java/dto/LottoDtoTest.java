@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("LottoDto 테스트")
 public class LottoDtoTest {
     private Lotto lotto;
 
@@ -28,7 +29,7 @@ public class LottoDtoTest {
     }
 
     @Test
-    @DisplayName("LottosDto 생성 테스트")
+    @DisplayName("생성자에 Lotto 를 전달받으면 객체가 생성된다.")
     void createLottosDto() {
         // given & when
         LottoDto lottoDto = new LottoDto(lotto);

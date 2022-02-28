@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("WinningLotto 테스트")
 public class WinningLottoTest {
     private Lotto lotto;
     private LottoNumber bonusNumber;
