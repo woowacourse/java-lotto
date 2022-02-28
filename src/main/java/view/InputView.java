@@ -7,6 +7,7 @@ public class InputView {
 	private static final String BLANK = " ";
 	private static final String COMMA = ",";
 	private static final String EMPTY_STRING = "";
+	public static final String NUMBER_IS_NOT_DIGIT_MESSAGE = "숫자를 입력해야 합니다";
 	private final Scanner scanner = new Scanner(System.in);
 
 	private String readLine() {
@@ -21,14 +22,14 @@ public class InputView {
 		try {
 			return Integer.parseInt(scanner.nextLine());
 		} catch (Exception exception) {
-			throw new NumberFormatException("숫자를 입력해야 합니다");
+			throw new NumberFormatException(NUMBER_IS_NOT_DIGIT_MESSAGE);
 		}
 	}
 
 	public String[][] requestManualLotto(int manualLottoCount) {
 		String[][] manualLotto = new String[manualLottoCount][];
-		for (int i = 0; i < manualLottoCount; i++) {
-			manualLotto[i] = removeBlankAndSplitByComma(readLine());
+		for (int lottoIndex = 0; lottoIndex < manualLottoCount; lottoIndex++) {
+			manualLotto[lottoIndex] = removeBlankAndSplitByComma(readLine());
 		}
 		return manualLotto;
 	}

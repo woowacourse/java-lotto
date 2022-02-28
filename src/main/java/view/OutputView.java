@@ -41,8 +41,9 @@ public class OutputView {
 	}
 
 	public void printPurchasedLottoTicket(int manualLottoCount, final List<Lotto> lottoTicket) {
+		int autoLottoCount = lottoTicket.size() - manualLottoCount;
 		System.out.println(
-			String.format(NOTIFICATION_PURCHASED_LOTTO, manualLottoCount, lottoTicket.size() - manualLottoCount));
+			String.format(NOTIFICATION_PURCHASED_LOTTO, manualLottoCount, autoLottoCount));
 		for (Lotto lotto : lottoTicket) {
 			printLottoNumber(sortLottoNumbers(lotto.getLotto()));
 		}

@@ -16,14 +16,14 @@ public class LottoFactory {
 		.boxed()
 		.collect(Collectors.toList());
 
-	public List<Lotto> generateLottoTicketByAuto(final Money money) {
+	public List<Lotto> generateLottoTicketAsAuto(final Money money) {
 		int autoLottoCount = money.findPurchaseLottoCount();
 		return IntStream.range(INITIAL_INDEX, autoLottoCount)
-			.mapToObj(index -> generateLottoByAuto())
+			.mapToObj(index -> generateLottoAsAuto())
 			.collect(Collectors.toUnmodifiableList());
 	}
 
-	private Lotto generateLottoByAuto() {
+	private Lotto generateLottoAsAuto() {
 		Collections.shuffle(lottoNumbers);
 		return new Lotto(abstractLottoNumbersAsMuchAsLottoSize().stream()
 			.map(Number::new)
@@ -34,13 +34,13 @@ public class LottoFactory {
 		return Collections.unmodifiableList(lottoNumbers.subList(INITIAL_INDEX, LOTTO_MAX_SIZE_INDEX));
 	}
 
-	public List<Lotto> generateLottoTicketByManual(String[][] inputManualLotto) {
+	public List<Lotto> generateLottoTicketAsManual(String[][] inputManualLotto) {
 		return Arrays.stream(inputManualLotto)
-			.map(this::generateLottoByManual)
+			.map(this::generateLottoAsManual)
 			.collect(Collectors.toList());
 	}
 
-	private Lotto generateLottoByManual(String[] manualLotto) {
+	private Lotto generateLottoAsManual(String[] manualLotto) {
 		return new Lotto(Arrays.stream(manualLotto)
 			.map(Number::from)
 			.collect(Collectors.toList()));

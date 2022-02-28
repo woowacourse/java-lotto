@@ -43,12 +43,12 @@ public class LottoController {
 
 	private List<Lotto> createLottoTicket(Money money) {
 		int manualLottoCount = requestManualLottoCountInput();
-		money.purchaseManualLotto(manualLottoCount);
 
 		String[][] inputManualLotto = requestManualLottoInput(manualLottoCount);
-		List<Lotto> lottoTicket = lottoFactory.generateLottoTicketByManual(inputManualLotto);
+		List<Lotto> lottoTicket = lottoFactory.generateLottoTicketAsManual(inputManualLotto);
+		money.purchaseManualLotto(manualLottoCount);
 
-		lottoTicket.addAll(lottoFactory.generateLottoTicketByAuto(money));
+		lottoTicket.addAll(lottoFactory.generateLottoTicketAsAuto(money));
 		outputView.printPurchasedLottoTicket(manualLottoCount, lottoTicket);
 		return lottoTicket;
 	}

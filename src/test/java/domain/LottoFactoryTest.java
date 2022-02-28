@@ -17,7 +17,7 @@ public class LottoFactoryTest {
 		String purchaseMoney = "14000";
 		Money money = Money.from(purchaseMoney);
 
-		assertThat(lottoFactory.generateLottoTicketByAuto(money).size()).isEqualTo(14);
+		assertThat(lottoFactory.generateLottoTicketAsAuto(money).size()).isEqualTo(14);
 	}
 
 	@Test
@@ -30,7 +30,7 @@ public class LottoFactoryTest {
 			{"7", "11", "16", "35", "36", "44"}
 		};
 		//when
-		List<Lotto> manualLotto = lottoFactory.generateLottoTicketByManual(inputManualLotto);
+		List<Lotto> manualLotto = lottoFactory.generateLottoTicketAsManual(inputManualLotto);
 		//then
 		assertThat(manualLotto.size()).isEqualTo(3);
 	}
@@ -44,7 +44,7 @@ public class LottoFactoryTest {
 		};
 
 		//when and then
-		assertThatThrownBy(() -> lottoFactory.generateLottoTicketByManual(inputManualLotto))
+		assertThatThrownBy(() -> lottoFactory.generateLottoTicketAsManual(inputManualLotto))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("번호는 1 ~ 45의 숫자여야 합니다");
 	}
@@ -57,7 +57,7 @@ public class LottoFactoryTest {
 			{"8", "21", "23", "37", "41", "42", "45"}
 		};
 		//when and then
-		assertThatThrownBy(() -> lottoFactory.generateLottoTicketByManual(inputManualLotto))
+		assertThatThrownBy(() -> lottoFactory.generateLottoTicketAsManual(inputManualLotto))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("로또 번호는 6개의 숫자여야 합니다");
 	}
@@ -70,7 +70,7 @@ public class LottoFactoryTest {
 			{"8", "21", "23", "37", "41"}
 		};
 		//when and then
-		assertThatThrownBy(() -> lottoFactory.generateLottoTicketByManual(inputManualLotto))
+		assertThatThrownBy(() -> lottoFactory.generateLottoTicketAsManual(inputManualLotto))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("로또 번호는 6개의 숫자여야 합니다");
 	}
@@ -83,7 +83,7 @@ public class LottoFactoryTest {
 			{"8", "21", "23", "37", "41", "41"}
 		};
 		//when and then
-		assertThatThrownBy(() -> lottoFactory.generateLottoTicketByManual(inputManualLotto))
+		assertThatThrownBy(() -> lottoFactory.generateLottoTicketAsManual(inputManualLotto))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("중복된 숫자를 입력할 수 없습니다");
 	}
