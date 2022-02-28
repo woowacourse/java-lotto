@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 class LottoNumberGenerator {
-    static List<Integer> generate() {
+    List<Integer> generate() {
         List<Integer> sequentialIntegers = generateSequentialIntegers();
         shuffle(sequentialIntegers);
         List<Integer> lottoNumbers = sequentialIntegers.subList(0, LOTTO_SIZE);
@@ -18,7 +18,7 @@ class LottoNumberGenerator {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    private static List<Integer> generateSequentialIntegers() {
+    private List<Integer> generateSequentialIntegers() {
         return IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
             .boxed()
             .collect(Collectors.toList());

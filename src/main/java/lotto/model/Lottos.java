@@ -11,11 +11,15 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos generate(int count) {
-        return new Lottos(IntStream.range(0, count)
-            .mapToObj(i -> LottoNumberGenerator.generate())
+    public Lottos(LottoNumberGenerator lottoNumberGenerator, int count) {
+        this.lottos = generateLottos(lottoNumberGenerator, count);
+    }
+
+    public List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int count) {
+        return IntStream.range(0, count)
+            .mapToObj(i -> lottoNumberGenerator.generate())
             .map(Lotto::new)
-            .collect(Collectors.toUnmodifiableList()));
+            .collect(Collectors.toUnmodifiableList());
     }
 
     public List<Lotto> getLottos() {

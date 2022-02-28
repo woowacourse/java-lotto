@@ -3,7 +3,6 @@ package lotto.view;
 import static org.assertj.core.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Arrays;
 
