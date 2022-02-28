@@ -59,7 +59,7 @@ public class MoneyTest {
             void It_returns_amount_of_auto(int value, int expected) {
                 final Money money = new Money(10000);
 
-                final int quantityOfAuto = money.getQuantityOfAuto(value, 1000);
+                final int quantityOfAuto = money.getQuantityOfAuto(value);
                 assertThat(quantityOfAuto).isEqualTo(expected);
             }
         }
@@ -79,7 +79,7 @@ public class MoneyTest {
             void It_throws_exception(int quantityOfManual, int moneyValue) {
                 final Money money = new Money(moneyValue);
 
-                assertThatThrownBy(() -> money.validateQuantityOfManual(quantityOfManual, 1000))
+                assertThatThrownBy(() -> money.validateQuantityOfManual(quantityOfManual))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessage("0개 이상 " + moneyValue / 1000 + "개 이하의 로또만 수동으로 구매할 수 있습니다.");
             }

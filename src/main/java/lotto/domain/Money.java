@@ -2,6 +2,7 @@ package lotto.domain;
 
 public class Money {
 
+    private static final int PRICE = 1000;
     private static final int DIVIDED_STANDARD = 1000;
     private static final int MIN_VALUE = 1000;
     private static final int MAX_VALUE = 2_000_000_000;
@@ -36,19 +37,19 @@ public class Money {
         }
     }
 
-    public void validateQuantityOfManual(int quantityOfManual, int price) {
-        final int maxQuantity = getAvailableQuantity(price);
+    public void validateQuantityOfManual(int quantityOfManual) {
+        final int maxQuantity = getAvailableQuantity();
         if (quantityOfManual < 0 || quantityOfManual > maxQuantity) {
             throw new IllegalArgumentException(QUANTITY_OF_MANUAL_PREFIX + maxQuantity + QUANTITY_OF_MANUAL_SUFFIX);
         }
     }
 
-    public int getQuantityOfAuto(int quantityOfManual, int price) {
-        return getAvailableQuantity(price) - quantityOfManual;
+    public int getQuantityOfAuto(int quantityOfManual) {
+        return getAvailableQuantity() - quantityOfManual;
     }
 
-    public int getAvailableQuantity(int price) {
-        return value / price;
+    public int getAvailableQuantity() {
+        return value / PRICE;
     }
 
     public double calculateRateOfProfit(long totalProfit) {

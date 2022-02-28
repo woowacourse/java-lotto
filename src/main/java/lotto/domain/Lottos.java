@@ -8,12 +8,10 @@ import java.util.stream.IntStream;
 
 public class Lottos {
 
-    private static final int PRICE = 1000;
-
     private final List<Lotto> lottos;
 
     public Lottos(Money money) {
-        final int quantity = money.getAvailableQuantity(PRICE);
+        final int quantity = money.getAvailableQuantity();
 
         this.lottos = IntStream.range(0, quantity)
                 .mapToObj(i -> Lotto.createByAuto())
