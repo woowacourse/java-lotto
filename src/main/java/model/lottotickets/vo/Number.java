@@ -2,13 +2,13 @@ package model.lottotickets.vo;
 
 import java.util.List;
 
-public class LottoNumber {
+public class Number {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
     private final int number;
 
-    public LottoNumber(final int number) {
+    public Number(final int number) {
         this.number = checkNumber(number);
     }
 
