@@ -23,19 +23,23 @@ public class LottoGame {
 
     private Lotto winningLotto;
     private LottoNumber bonusNumber;
-    private Lottos lottos;
+    private final Lottos lottos;
 
-    public LottoGame() {
+    public LottoGame(Money money) {
+        lottos = buyLotto(money);
     }
 
     public LottoGame(List<Lotto> lottos) {
         this.lottos = new Lottos(lottos);
     }
 
-    public Lottos buyLotto(Money money) {
+    public static LottoGame startLottoGame(Money money) {
+        return new LottoGame(money);
+    }
+
+    private Lottos buyLotto(Money money) {
         int lottoAmount = money.money() / LOTTO_PRICE;
-        lottos = Lottos.buyLottos(lottoAmount);
-        return lottos;
+        return Lottos.buyLottos(lottoAmount);
     }
 
     public void enterWinningLottoNumbersAndBonusNumber(List<Integer> notVerifiedWinningLottoNumbers

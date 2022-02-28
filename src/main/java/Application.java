@@ -6,9 +6,8 @@ import view.OutputView;
 public class Application {
 
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame();
-
-        lottoGame.buyLotto(new Money(InputView.askMoneyInput()));
+        Money money = new Money(InputView.askMoneyInput());
+        LottoGame lottoGame = LottoGame.startLottoGame(money);
 
         OutputView.printLottosInformations(lottoGame.getLottos());
 
