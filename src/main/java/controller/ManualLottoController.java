@@ -29,10 +29,15 @@ public class ManualLottoController implements Controller {
     }
 
     private Tickets makeTickets(int manualTicketsCount, int autoTicketCount) {
-        Tickets manualTickets = createManualTicket(manualTicketsCount);
-        Tickets autoTickets = Tickets.of(autoTicketCount, new RandomLottoNumbersGenerator());
-        manualTickets.add(autoTickets);
-        return manualTickets;
+        try {
+            Tickets manualTickets = createManualTicket(manualTicketsCount);
+            Tickets autoTickets = Tickets.of(autoTicketCount, new RandomLottoNumbersGenerator());
+            manualTickets.add(autoTickets);
+            return manualTickets;
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            return makeTickets(manualTicketsCount, autoTicketCount);
+        }
     }
 
     private Amount createAmount() {
