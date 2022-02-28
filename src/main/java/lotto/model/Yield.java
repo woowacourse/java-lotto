@@ -5,7 +5,7 @@ public class Yield {
 
     private final float yield;
 
-    public Yield(LottoMoney lottoMoney, Long totalWinningMoney) {
+    Yield(LottoMoney lottoMoney, Long totalWinningMoney) {
         this.yield = calculateYield(lottoMoney, totalWinningMoney);
     }
 

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class YieldTest {
+class YieldTest {
 
     @ParameterizedTest
     @CsvSource(value = {"14000:true", "13999:false"}, delimiter = ':')

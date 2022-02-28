@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class RankTest {
+class RankTest {
 
     @Test
     @DisplayName("맞은 볼 개수와 보너스 볼 포함 여부에 맞는 등수를 반환한다.")
