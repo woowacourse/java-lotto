@@ -1,7 +1,7 @@
 package controller;
 
 import domain.LottoService;
-import domain.RankPrice;
+import domain.RankPrize;
 import dto.LottoDto;
 import java.util.List;
 import java.util.SortedMap;
@@ -37,7 +37,7 @@ public class LottoController {
 
         initLastWinLotto();
 
-        final SortedMap<RankPrice, Integer> rankCounts = calculateResult(lottoDto);
+        final SortedMap<RankPrize, Integer> rankCounts = calculateResult(lottoDto);
 
         outputView.printWinStatistics(rankCounts);
         outputView.printWinProfit(lottoService.calculateProfit(rankCounts));
@@ -52,7 +52,7 @@ public class LottoController {
         }
     }
 
-    private SortedMap<RankPrice, Integer> calculateResult(final List<LottoDto> issuedLotto) {
+    private SortedMap<RankPrize, Integer> calculateResult(final List<LottoDto> issuedLotto) {
         try {
             return lottoService.calculateResult(inputView.getBonusNumber(), issuedLotto);
         } catch (Exception e) {
