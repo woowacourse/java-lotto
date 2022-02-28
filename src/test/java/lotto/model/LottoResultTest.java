@@ -21,7 +21,7 @@ class LottoResultTest {
 
         Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45));
         LottoNumber bonusNumber = new LottoNumber(bonusNumberInt);
-        LottoResult lottoResult = LottoResult.create(lottos, winningNumbers, bonusNumber);
+        LottoResult lottoResult = new LottoResult(lottos, winningNumbers, bonusNumber);
 
         assertThat(lottoResult.getTotalWinningMoney()).isEqualTo(totalWinningMoney);
     }

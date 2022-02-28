@@ -46,7 +46,7 @@ class ResultViewTest {
         Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(7);
 
-        ResultView.printResultStatistics(LottoResult.create(lottos, winningNumbers, bonusNumber));
+        ResultView.printResultStatistics(new LottoResult(lottos, winningNumbers, bonusNumber));
 
         assertThat(outputStreamCaptor.toString())
             .contains("5개 일치, 보너스 볼 일치(30000000원)- 1개")

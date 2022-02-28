@@ -8,15 +8,14 @@ import java.util.Map;
 public class LottoResult {
     private final Map<Rank, Long> result;
 
-    private LottoResult(Map<Rank, Long> result) {
-        this.result = result;
+    public LottoResult(Lottos lottos, Lotto winningNumbers, LottoNumber bonusNumber) {
+        this.result = create(lottos, winningNumbers, bonusNumber);
     }
 
-    public static LottoResult create(Lottos lottos, Lotto winningNumbers, LottoNumber bonusNumber) {
-        EnumMap<Rank, Long> collect = lottos.getLottos().stream()
+    public Map<Rank, Long> create(Lottos lottos, Lotto winningNumbers, LottoNumber bonusNumber) {
+        return lottos.getLottos().stream()
             .map(lotto -> Rank.match(lotto, winningNumbers, bonusNumber))
             .collect(groupingBy(rank -> rank, () -> new EnumMap<>(Rank.class), counting()));
-        return new LottoResult(collect);
     }
 
     public Long getRankCount(Rank rank) {
