@@ -1,0 +1,170 @@
+package lotto.domain;
+
+import static org.assertj.core.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import lotto.utils.RandomLottoNumbersGenerator;
+
+public class TicketsTest {
+
+    @Test
+    @DisplayName("티켓 정상생성")
+    void 티켓_생성() {
+        Tickets tickets = Tickets.of(5, new RandomLottoNumbersGenerator());
+        assertThat(tickets.getTickets().size()).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("로또 당첨 등수와 당첨 개수 테스트")
+    void 로또당첨_등수_개수() {
+        WinTicket winTicket = getWinTicket();
+
+        List<Ticket> testTickets = new ArrayList<>();
+        testTickets.add(getFirstTicket());
+        testTickets.add(getFirstTicket());
+        testTickets.add(getSecondTicket());
+        testTickets.add(getThirdTicket());
+
+        Tickets tickets = new Tickets(testTickets);
+        Map<Rank, Integer> result = tickets.getResult(winTicket);
+
+        assertThat(result).hasSize(3)
+            .contains(entry(Rank.FIRST, 2), entry(Rank.SECOND, 1), entry(Rank.THIRD, 1));
+    }
+
+    @Test
+    @DisplayName("수익률 0일때")
+    void 수익률_0() {
+        WinTicket winTicket = getWinTicket();
+
+        List<Ticket> testTickets = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            testTickets.add(getOtherTicket());
+        }
+
+        Tickets tickets = new Tickets(testTickets);
+
+        assertThat(tickets.getYield(new Amount(3000), winTicket)).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("수익률 1000일때")
+    void 수익률_1000() {
+        WinTicket winTicket = getWinTicket();
+
+        List<Ticket> testTickets = new ArrayList<>();
+        testTickets.add(getOtherTicket());
+        testTickets.add(getThirdTicket());
+        testTickets.add(getThirdTicket());
+
+        Tickets tickets = new Tickets(testTickets);
+
+        assertThat(tickets.getYield(new Amount(3000), winTicket)).isEqualTo(1000);
+    }
+
+    @Test
+    @DisplayName("수익률 0.35 일때")
+    void 수익률_035() {
+        WinTicket winTicket = getWinTicket();
+
+        List<Ticket> testTickets = new ArrayList<>();
+        testTickets.add(getFifthTicket());
+        for (int i = 0; i < 13; i++) {
+            testTickets.add(getOtherTicket());
+        }
+        Tickets tickets = new Tickets(testTickets);
+
+        assertThat(tickets.getYield(new Amount(14000), winTicket)).isEqualTo(0.35);
+    }
+
+    @Test
+    @DisplayName("수익률 1등이 3명일때")
+    void 수익률_1등_3명() {
+        WinTicket winTicket = getWinTicket();
+
+        List<Ticket> testTickets = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            testTickets.add(getFirstTicket());
+        }
+        Tickets tickets = new Tickets(testTickets);
+
+        assertThat(tickets.getYield(new Amount(3000), winTicket)).isEqualTo(2000000);
+    }
+
+    @Test
+    @DisplayName("수익률 1등이 14명일때")
+    void 수익률_1등_14명() {
+        WinTicket winTicket = getWinTicket();
+        List<Ticket> testTickets = new ArrayList<>();
+        for (int i = 0; i < 14; i++) {
+            testTickets.add(getFirstTicket());
+        }
+        Tickets tickets = new Tickets(testTickets);
+
+        assertThat(tickets.getYield(new Amount(14000), winTicket)).isEqualTo(2000000);
+    }
+
+
+    private WinTicket getWinTicket() {
+        Ticket winTicket = new Ticket(Set.of(new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(16)));
+        LottoNumber bonusNumber = new LottoNumber(6);
+        return new WinTicket(winTicket, bonusNumber);
+    }
+
+    private Ticket getFifthTicket() {
+        return new Ticket(Set.of(new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(14),
+            new LottoNumber(15),
+            new LottoNumber(43)));
+    }
+
+    private Ticket getOtherTicket() {
+        return new Ticket(Set.of(new LottoNumber(11),
+            new LottoNumber(12),
+            new LottoNumber(13),
+            new LottoNumber(14),
+            new LottoNumber(15),
+            new LottoNumber(43)));
+    }
+
+    private Ticket getThirdTicket() {
+        return new Ticket(Set.of(new LottoNumber(40),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(16)));
+    }
+
+    private Ticket getSecondTicket() {
+        return new Ticket(Set.of(new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(6)));
+    }
+
+    private Ticket getFirstTicket() {
+        return new Ticket(Set.of(new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(16)));
+    }
+}
