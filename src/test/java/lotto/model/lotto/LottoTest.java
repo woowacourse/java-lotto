@@ -1,13 +1,14 @@
 package lotto.model.lotto;
 
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import org.assertj.core.api.Assertions;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.entry;
 
 import lotto.model.result.WinningResult;
 import lotto.model.bonusball.BonusBallResponse;
@@ -46,6 +47,6 @@ public class LottoTest {
 
         lotto.calcWinningNumber(winningResult, bonusBallResponse, lottoWinningNumberResponse);
 
-        assertThat(winningResult.getWinningCount().get(Rank.BONUS)).isOne();
+        Assertions.assertThat(winningResult.getWinningCount()).contains(entry(Rank.BONUS, 1));
     }
 }
