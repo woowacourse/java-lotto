@@ -2,6 +2,8 @@ package domain;
 
 import java.util.Objects;
 
+import static constant.LottoConstant.LOTTO_TICKET_PRICE;
+
 public class Money {
 
     private static final int MINIMUM_AMOUNT = 10;
@@ -43,5 +45,15 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    public void createLottoType(int manualCount) {
+        validateManualCount(manualCount);
+    }
+
+    private void validateManualCount(int manualCount) {
+        if (manualCount < getPurchasableNumber(amount / LOTTO_TICKET_PRICE)) {
+            throw new IllegalArgumentException("구매하려는 로또가 보유 금액을 초과했습니다.");
+        }
     }
 }
