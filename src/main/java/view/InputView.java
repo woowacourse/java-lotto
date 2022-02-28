@@ -21,6 +21,16 @@ public class InputView {
         }
     }
 
+    public static int inputLottoAmount() {
+        System.out.println(LOTTO_MANUAL_MESSAGE);
+        try {
+            String amount = scanner.nextLine();
+            return Integer.parseInt(amount);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(NUM_ERROR_MESSAGE);
+        }
+    }
+
     public static String inputWinLottoNumbers() {
         System.out.println(LOTTO_NUMBER_INPUT_MESSAGE);
         String lottoNumbers = scanner.nextLine();

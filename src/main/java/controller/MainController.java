@@ -15,6 +15,9 @@ public class MainController {
 
     public void run() {
         Money money = getMoney();
+        int count = InputView.inputLottoAmount();
+        System.out.println(count);
+
         List<LottoTicket> lottoTickets = createLottoTickets(money.toLottoCount());
         OutputView.printLottoTickets(lottoTickets);
 

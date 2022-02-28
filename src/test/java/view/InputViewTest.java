@@ -22,6 +22,17 @@ class InputViewTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"--!", " ", "."})
+    void 수동_로또_개수_숫자_아닌_경우(String input) {
+        //given
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        //then
+        assertThatThrownBy(InputView::inputLottoAmount).isInstanceOf(Exception.class);
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3", "1, 2, 3, 4, 5, 6, ", ", 1, 2, 3, 4, 5, 6",
         "1, 2, 3, 4, 5, 6, 7"})
     void 당첨_번호_패턴에_맞지_않는_경우_예외처리(String input) {
