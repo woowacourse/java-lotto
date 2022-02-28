@@ -15,13 +15,14 @@ public class Lottos {
     public static final String ERROR_TYPE = "[ERROR] 로또 구매 수량은 숫자로만 입력해주세요";
 
     private final List<Lotto> lottos;
-    private final int autoCount;
-    private int manualCount;
+    private final int count;
+    private final int manualCount;
+    private int purchasedCount;
 
     public Lottos(int count, int manualCount) {
         this.lottos = new ArrayList<>();
         checkCount(count, manualCount);
-        this.autoCount = count - manualCount;
+        this.count = count;
         this.manualCount = manualCount;
     }
 
@@ -40,15 +41,16 @@ public class Lottos {
     }
 
     public void purchaseAuto() {
-        for (int i = 0; i < (autoCount - manualCount); i++) {
+        while (count > purchasedCount) {
             this.lottos.add(new Lotto(LottoNumbers.ofRandomNumbers()));
+            purchasedCount++;
         }
     }
 
     public void purchaseManual(List<String> inputs) {
         if (isManualAvailable()) {
             this.lottos.add(new Lotto(LottoNumbers.from(inputs)));
-            manualCount--;
+            purchasedCount++;
         }
     }
 
@@ -59,14 +61,18 @@ public class Lottos {
     }
 
     public boolean isManualAvailable() {
-        return manualCount > 0;
+        return manualCount > purchasedCount;
     }
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(this.lottos);
     }
 
-    public int getSize() {
-        return this.lottos.size();
+    public int getAutoCount() {
+        return count - manualCount;
+    }
+
+    public int getManualCount() {
+        return manualCount;
     }
 }

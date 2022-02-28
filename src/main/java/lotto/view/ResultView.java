@@ -3,10 +3,11 @@ package lotto.view;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.dto.LottoDTO;
+import lotto.model.dto.LottosDTO;
 import lotto.model.dto.PrizeInformationDTO;
 
 public class ResultView {
-    private static final String MESSAGE_PURCHASE_COUNT = "개를 구매했습니다.";
+    private static final String FORMAT_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
     private static final String FORMAT_LOTTO = "[%s]%n";
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final String FORMAT_PRIZE = "%d개 일치 (%d원)- %d개%n";
@@ -14,9 +15,9 @@ public class ResultView {
     private static final String FORMAT_EARNING_RATE = "총 수익률은 %.2f입니다.";
 
 
-    public static void showPurchaseCount(int count) {
+    public static void showPurchaseCount(LottosDTO lottosDTO) {
         System.out.println();
-        System.out.println(count + MESSAGE_PURCHASE_COUNT);
+        System.out.printf(FORMAT_COUNT, lottosDTO.getAutoCount(), lottosDTO.getManualCount());
     }
 
     public static void showLottos(List<LottoDTO> lottos) {

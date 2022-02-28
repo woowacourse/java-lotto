@@ -6,6 +6,7 @@ import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
 import lotto.model.dto.LottoDTO;
+import lotto.model.dto.LottosDTO;
 import lotto.model.dto.PrizeInformationDTO;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
@@ -20,7 +21,7 @@ public class Controller {
 
         Lottos lottos = Lottos.of(money, InputView.askManualCount());
         purchaseLottos(lottos);
-        ResultView.showPurchaseCount(lottos.getSize());
+        ResultView.showPurchaseCount(LottosDTO.of(lottos));
         ResultView.showLottos(LottoDTO.from(lottos));
 
         PrizeInformations prizeInformations = PrizeInformations.from(lottos.match(makeWinningLotto()));
