@@ -30,7 +30,7 @@ public class LottoGenerator {
 		return lottoNumbers;
 	}
 
-	public static List<LottoNumber> generateAnswerLottoNumbers(List<Integer> userInput) {
+	public static List<LottoNumber> generateUserInputLottoNumbers(List<Integer> userInput) {
 		validateSizeSix(userInput);
 		validateInRange(userInput);
 		validateDuplicate(userInput);

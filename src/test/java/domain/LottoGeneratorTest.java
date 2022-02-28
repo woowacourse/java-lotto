@@ -26,7 +26,7 @@ public class LottoGeneratorTest {
 		sampleInput.add(4);
 		sampleInput.add(5);
 		sampleInput.add(46);
-		assertThatThrownBy(() -> LottoGenerator.generateAnswerLottoNumbers(sampleInput)).isInstanceOf(
+		assertThatThrownBy(() -> LottoGenerator.generateUserInputLottoNumbers(sampleInput)).isInstanceOf(
 			IllegalArgumentException.class);
 	}
 
@@ -39,7 +39,7 @@ public class LottoGeneratorTest {
 		sampleInput.add(4);
 		sampleInput.add(5);
 		sampleInput.add(6);
-		assertThatThrownBy(() -> LottoGenerator.generateAnswerLottoNumbers(sampleInput)).isInstanceOf(
+		assertThatThrownBy(() -> LottoGenerator.generateUserInputLottoNumbers(sampleInput)).isInstanceOf(
 			IllegalArgumentException.class);
 	}
 
@@ -53,7 +53,7 @@ public class LottoGeneratorTest {
 		sampleInput.add(5);
 		sampleInput.add(6);
 		sampleInput.add(7);
-		assertThatThrownBy(() -> LottoGenerator.generateAnswerLottoNumbers(sampleInput)).isInstanceOf(
+		assertThatThrownBy(() -> LottoGenerator.generateUserInputLottoNumbers(sampleInput)).isInstanceOf(
 			IllegalArgumentException.class);
 	}
 
@@ -65,7 +65,7 @@ public class LottoGeneratorTest {
 		sampleInput.add(3);
 		sampleInput.add(4);
 		sampleInput.add(5);
-		assertThatThrownBy(() -> LottoGenerator.generateAnswerLottoNumbers(sampleInput)).isInstanceOf(
+		assertThatThrownBy(() -> LottoGenerator.generateUserInputLottoNumbers(sampleInput)).isInstanceOf(
 			IllegalArgumentException.class);
 	}
 
@@ -78,7 +78,7 @@ public class LottoGeneratorTest {
 		sampleInput.add(3);
 		sampleInput.add(4);
 		sampleInput.add(5);
-		assertThatThrownBy(() -> LottoGenerator.generateAnswerLottoNumbers(sampleInput)).isInstanceOf(
+		assertThatThrownBy(() -> LottoGenerator.generateUserInputLottoNumbers(sampleInput)).isInstanceOf(
 			IllegalArgumentException.class);
 	}
 }

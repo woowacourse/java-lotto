@@ -37,7 +37,7 @@ public class InputVIewTest {
 		String input = "-1,  , asd, ;]-, 5, 가나다";
 		InputStream inputStream = new ByteArrayInputStream(input.getBytes());
 		System.setIn(inputStream);
-		assertThatThrownBy(InputView::inputAnsNumbers).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(InputView::inputSixLottoNumbers).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test

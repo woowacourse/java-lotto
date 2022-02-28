@@ -26,7 +26,7 @@ public class InputView {
 		return inputSingleNumber();
 	}
 
-	public static List<Integer> inputAnsNumbers() {
+	public static List<Integer> inputSixLottoNumbers() {
 		System.out.println("\n지난 주 당첨 번호를 구분자(, ) 기준으로 입력해 주세요.");
 		return inputMultipleNumber();
 	}

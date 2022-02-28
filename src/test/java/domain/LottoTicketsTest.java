@@ -18,12 +18,23 @@ public class LottoTicketsTest {
 	}
 
 	@Test
-	void ticketsSizeEqualToPriceDividedByUnitPrice() {
-		assertThat(new LottoTickets(3000, 0).getLottoTicketsSize()).isEqualTo(3);
+	void ticketsCapacityEqualToPriceDividedByUnitPrice() {
+		assertThat(new LottoTickets(3000, 0).getLottoTicketsCapacity()).isEqualTo(3);
 	}
 
 	@Test
-	void manualLottoSizeMoreThanTotalLottoSize() {
-		assertThatThrownBy(() -> new LottoTickets(4000, 10)).isInstanceOf(IllegalArgumentException.class);
+	void addOneLottoInLottoTickets() {
+		LottoTickets lottoTickets = new LottoTickets(2000, 0);
+		lottoTickets.add(new Lotto(LottoGenerator.generateRandomLottoNumbers()));
+		assertThat(lottoTickets.getLottoTicketsSize()).isEqualTo(1);
+	}
+
+	@Test
+	void addMoreLottoInFullLottoTickets() {
+		LottoTickets lottoTickets = new LottoTickets(2000, 0);
+		lottoTickets.add(new Lotto(LottoGenerator.generateRandomLottoNumbers()));
+		lottoTickets.add(new Lotto(LottoGenerator.generateRandomLottoNumbers()));
+		assertThatThrownBy(() -> lottoTickets.add(new Lotto(LottoGenerator.generateRandomLottoNumbers()))).isInstanceOf(
+			IllegalArgumentException.class);
 	}
 }
