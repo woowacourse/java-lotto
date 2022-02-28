@@ -20,10 +20,9 @@ public class LottoGame {
         this.lottos = new Lottos(lottos);
     }
 
-    public Lottos buyLotto(Money money) {
+    public void buyLotto(Money money) {
         int lottoAmount = money.convertToAmount();
         lottos = new Lottos(lottoGenerator.generateLottos(lottoAmount));
-        return lottos;
     }
 
     public void makeResult(List<Integer> winningNumbers, Integer bonusNumber) {
