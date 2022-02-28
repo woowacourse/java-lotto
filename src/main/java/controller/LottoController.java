@@ -9,6 +9,7 @@ import domain.Lottos;
 import domain.WinningLotto;
 import domain.WinningResult;
 import domain.strategy.LottoNumberGenerateStrategy;
+import dto.LottoDto;
 import dto.WinningResultDto;
 import java.util.List;
 import java.util.Set;
@@ -29,7 +30,11 @@ public class LottoController {
         InputView.printLottoQuantity(lottoQuantity.getLottoQuantity());
 
         Lottos autoLottos = new Lottos(lottoQuantity, lottoNumberGenerator);
-        InputView.printLottos(autoLottos);
+        List<LottoDto> lottoDtos = autoLottos.getLottos()
+                .stream()
+                .map(LottoDto::new)
+                .collect(Collectors.toList());
+        InputView.printLottos(lottoDtos);
 
         WinningLotto winningLotto = setupWinningLotto();
         WinningResult winningResult = autoLottos.getWinningResultByWinningLotto(winningLotto);

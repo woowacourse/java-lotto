@@ -1,7 +1,6 @@
 package view;
 
-import domain.Lotto;
-import domain.Lottos;
+import dto.LottoDto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -60,17 +59,19 @@ public class InputView {
         }
     }
 
-    public static void printLottos(Lottos lottos) {
-        lottos.getLottos()
-                .forEach(InputView::printSingleLotto);
+    public static void printLottos(List<LottoDto> lottoDtos) {
+        for (LottoDto lottoDto : lottoDtos) {
+            printSingleLotto(lottoDto);
+        }
     }
 
-    public static void printSingleLotto(Lotto lotto) {
-        String joinedLottoNumbers = lotto.getLottoNumbers()
-                .stream()
-                .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
-                .collect(Collectors.joining(SPLIT_DELIMITER));
+    public static void printSingleLotto(LottoDto lottoDto) {
+        System.out.println("[" + joinNumbers(lottoDto.getLottoNumbers()) + "]");
+    }
 
-        System.out.println("[" + joinedLottoNumbers + "]");
+    private static String joinNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(SPLIT_DELIMITER));
     }
 }
