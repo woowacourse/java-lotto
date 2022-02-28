@@ -16,7 +16,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import lotto.model.message.WinningNumberExceptionMessage;
 
-public class LottoWinningNumberTest {
+class LottoWinningNumberTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"", "  ", "\t", "\n"})

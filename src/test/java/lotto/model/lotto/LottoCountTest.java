@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.model.message.LottoCountExceptionMessage;
 
-public class LottoCountTest {
+class LottoCountTest {
 
     @ParameterizedTest
     @NullAndEmptySource

@@ -15,7 +15,7 @@ import lotto.model.bonusball.BonusBallResponse;
 import lotto.model.result.Rank;
 import lotto.model.winningnumber.LottoWinningNumberResponse;
 
-public class LottoTest {
+class LottoTest {
     private WinningResult winningResult;
 
     @BeforeEach

@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.model.message.BonusBallExceptionMessage;
 
-public class BonusBallTest {
+class BonusBallTest {
 
     @ParameterizedTest
     @NullAndEmptySource
