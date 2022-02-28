@@ -17,7 +17,7 @@ public class OutputView {
         out.println(message);
     }
 
-    public static void printPurchasedTickets(List<Lotto> lotteries) {
+    public static void printPurchasedLotteries(List<Lotto> lotteries) {
         out.printf("%d개를 구매했습니다.%n", lotteries.size());
         lotteries.forEach(OutputView::printLottoNumbers);
     }

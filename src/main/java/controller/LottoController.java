@@ -13,16 +13,39 @@ import view.OutputView;
 
 public class LottoController {
     public void run() {
-        LottoPurchasingMoney inputLottoPurchasingMoney = inputMoney();
+        LottoPurchasingMoney inputLottoPurchasingMoney = inputPurchasingMoney();
 
-        List<Lotto> lotteries = purchaseLottoTickets(inputLottoPurchasingMoney);
-        OutputView.printPurchasedTickets(lotteries);
+        List<Lotto> lotteries = purchaseLotteries(inputLottoPurchasingMoney);
+        OutputView.printPurchasedLotteries(lotteries);
 
-        WinningLotto winningLotto = inputWinningNumbers();
+        WinningLotto winningLotto = inputWinningLotto();
 
         WinningStatistics winningStatistics = calculateStatistics(lotteries, winningLotto);
 
         OutputView.printStatistics(winningStatistics, inputLottoPurchasingMoney);
+    }
+
+    private LottoPurchasingMoney inputPurchasingMoney() {
+        try {
+            return LottoPurchasingMoney.valueOf(InputView.inputMoney());
+        } catch (IOException | IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return inputPurchasingMoney();
+        }
+    }
+
+    private List<Lotto> purchaseLotteries(LottoPurchasingMoney inputLottoPurchasingMoney) {
+        LottoFactory lottoFactory = LottoFactory.getInstance();
+        return lottoFactory.generateLotteries(inputLottoPurchasingMoney);
+    }
+
+    private WinningLotto inputWinningLotto() {
+        try {
+            return WinningLotto.of(InputView.inputWinningNumbers(), InputView.inputBonusBall());
+        } catch (IOException | IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return inputWinningLotto();
+        }
     }
 
     private WinningStatistics calculateStatistics(List<Lotto> lotteries, WinningLotto winningLotto) {
@@ -37,28 +60,5 @@ public class LottoController {
         });
 
         return winningStatistics;
-    }
-
-    private LottoPurchasingMoney inputMoney() {
-        try {
-            return LottoPurchasingMoney.valueOf(InputView.inputMoney());
-        } catch (IOException | IllegalArgumentException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return inputMoney();
-        }
-    }
-
-    private WinningLotto inputWinningNumbers() {
-        try {
-            return WinningLotto.of(InputView.inputWinningNumbers(), InputView.inputBonusBall());
-        } catch (IOException | IllegalArgumentException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return inputWinningNumbers();
-        }
-    }
-
-    private List<Lotto> purchaseLottoTickets(LottoPurchasingMoney inputLottoPurchasingMoney) {
-        LottoFactory ticketFactory = LottoFactory.getInstance();
-        return ticketFactory.generateLotteries(inputLottoPurchasingMoney);
     }
 }
