@@ -1,7 +1,6 @@
 package model;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class Lottos {
         return new Statistics(result);
     }
 
-    public List<LottoDto> getLottosInformation() {
+    public List<LottoDto> sendLottosInformation() {
         return lottos.stream()
                 .map(lotto -> new LottoDto(lotto.getLottoNumbers()))
                 .collect(Collectors.toList());
