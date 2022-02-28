@@ -13,7 +13,7 @@ public class LottoNumber {
 
     static {
         for (int lottoNumber = LOTTO_NUMBER_MINIMUM; lottoNumber <= LOTTO_NUMBER_MAXIMUM; lottoNumber++) {
-            lottoNumberCache.put(lottoNumber, new LottoNumber());
+            lottoNumberCache.put(lottoNumber, new LottoNumber(lottoNumber));
         }
     }
 

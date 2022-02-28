@@ -3,6 +3,8 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import util.LottoNumberGenerator;
 
@@ -26,11 +28,13 @@ public class LottoTicket {
         return List.copyOf(autoLottos);
     }
 
-    public LottoResult getLottoResult(WinningLotto winningLotto, LottoResult lottoResult) {
-        List<Lotto> totalLottos = new ArrayList<>(passiveLottos);
-        totalLottos.addAll(autoLottos);
+    public List<Lotto> getTotalLottos() {
+        return Stream.concat(passiveLottos.stream(), autoLottos.stream())
+                .collect(Collectors.toList());
+    }
 
-        for (Lotto lotto : totalLottos) {
+    public LottoResult getLottoResult(WinningLotto winningLotto, LottoResult lottoResult) {
+        for (Lotto lotto : getTotalLottos()) {
             lottoResult.putLottoRank(winningLotto.countLottoRank(lotto));
         }
 
