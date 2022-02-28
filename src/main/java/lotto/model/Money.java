@@ -8,12 +8,12 @@ public class Money {
 
     private final int money;
 
-    public Money(final int money) throws RuntimeException {
+    public Money(final int money) throws IllegalArgumentException {
         validateMoney(money);
         this.money = money;
     }
 
-    private void validateMoney(final int money) throws RuntimeException {
+    private void validateMoney(final int money) throws IllegalArgumentException {
         if (money < 0) {
             throw new IllegalArgumentException(PRICE_ERROR_MESSAGE);
         }

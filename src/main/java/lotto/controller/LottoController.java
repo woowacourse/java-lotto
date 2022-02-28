@@ -19,24 +19,24 @@ public class LottoController {
 
     private static final String NUMBER_REGEX = "\\d+";
 
-    public LottoMachine makeLottoMachine() {
+    public LottoMachine makeLottoMachine() throws RuntimeException {
         Lottos lottos = makeAndPrintLottos();
         WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
                 InputView.inputBonusNumber());
         return new LottoMachine(lottos, winningLotto);
     }
 
-    private Lottos makeAndPrintLottos() {
+    private Lottos makeAndPrintLottos() throws IllegalArgumentException {
         Lottos lottos = makeLottos(InputView.inputMoney());
         ResultView.printBuyingLottosResult(lottos);
         return lottos;
     }
 
-    private Lottos makeLottos(String money) throws RuntimeException {
+    private Lottos makeLottos(String money) throws IllegalArgumentException {
         return new Lottos(validateMoney(money));
     }
 
-    private Money validateMoney(String money) throws RuntimeException {
+    private Money validateMoney(String money) throws IllegalArgumentException {
         if (!Pattern.matches(NUMBER_REGEX, money)) {
             throw new IllegalArgumentException(MONEY_ERROR_MESSAGE);
         }

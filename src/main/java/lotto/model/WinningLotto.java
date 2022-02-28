@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.Map;
-import java.util.stream.Collectors;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 
@@ -18,11 +17,8 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public void checkDuplicateNumber(LottoNumber number) throws RuntimeException {
-        boolean isBonusNumberDuplicate =
-                winningNumbers.getLottoNumbers().stream()
-                        .anyMatch(i -> i.getLottoNumber() == number.getLottoNumber());
-        if (isBonusNumberDuplicate) {
+    public void checkDuplicateNumber(LottoNumber bonusNumber) throws RuntimeException {
+        if (winningNumbers.containNumber(bonusNumber)) {
             throw new RuntimeException(DUPLICATED_NUMBER_ERROR_MESSAGE);
         }
     }
