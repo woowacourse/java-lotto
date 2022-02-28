@@ -1,6 +1,9 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Result;
@@ -36,6 +39,26 @@ public class LottoController {
             money.validateQuantityOfManual(quantityOfManual);
 
             return Optional.of(quantityOfManual);
+        } catch (IllegalArgumentException exception) {
+            OutputView.printError(exception.getMessage());
+            return Optional.empty();
+        }
+    }
+
+    private List<Lotto> inputManualNumbers(int quantity) {
+        OutputView.printManualNumbersMessage();
+        final List<Lotto> lottos = new ArrayList<>();
+
+        do {
+            final Optional<Lotto> lotto = getValidManualLotto();
+            lotto.ifPresent(lottos::add);
+        } while (lottos.size() < quantity);
+        return lottos;
+    }
+
+    private Optional<Lotto> getValidManualLotto() {
+        try {
+            return Optional.of(Lotto.createByManual(InputView.inputNumbers()));
         } catch (IllegalArgumentException exception) {
             OutputView.printError(exception.getMessage());
             return Optional.empty();
