@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
@@ -35,6 +36,15 @@ public class LottoApplication {
         } catch (IllegalArgumentException e) {
             printErrorMessage(e);
             return payMoney();
+        }
+    }
+
+    private static LottoGenerator createLottoGenerator(final Money money) {
+        try {
+            return LottoGenerator.of(money, InputView.inputManualCount());
+        } catch (IllegalArgumentException e) {
+            printErrorMessage(e);
+            return createLottoGenerator(money);
         }
     }
 
