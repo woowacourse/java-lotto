@@ -37,6 +37,18 @@ class LottoMachineTest {
                 .hasMessageContaining("금액은 1000원 이상");
     }
 
+    @Test
+    @DisplayName("수동 로또 티켓 구매")
+    void purchaseLottoTicketsManually() {
+        LottoMachine lottoMachine = new LottoMachine();
+        List<List<Integer>> input = List.of(
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(11, 12, 13, 14, 15, 16),
+                List.of(21, 22, 23, 24, 25, 26));
+
+        assertThat(lottoMachine.purchaseLottoTicketsManually(input).size()).isEqualTo(3);
+    }
+
     @ParameterizedTest
     @ValueSource(ints = {10000, 10030, 10300, 10500, 10900, 10950})
     @DisplayName("입력 금액에 따라 알맞은 개수의 로또 생성 검증")

@@ -2,6 +2,7 @@ package domain;
 
 import domain.strategy.LottoNumberStrategy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,5 +46,17 @@ public class LottoMachine {
         }
 
         return new WinningStat(ranks);
+    }
+
+    public List<LottoTicket> purchaseLottoTicketsManually(List<List<Integer>> ticketsInput) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+
+        for (List<Integer> ticket : ticketsInput) {
+            lottoTickets.add(new LottoTicket(ticket.stream()
+                    .map(LottoNumber::getInstance)
+                    .collect(Collectors.toList())));
+        }
+
+        return lottoTickets;
     }
 }
