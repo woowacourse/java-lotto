@@ -13,7 +13,7 @@ public class InputVIewTest {
 		String input = "우테코";
 		InputStream inputStream = new ByteArrayInputStream(input.getBytes());
 		System.setIn(inputStream);
-		assertThatThrownBy(InputView::inputMoney).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(InputView::inputSingleNumber).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
@@ -21,7 +21,7 @@ public class InputVIewTest {
 		String input = "\n";
 		InputStream inputStream = new ByteArrayInputStream(input.getBytes());
 		System.setIn(inputStream);
-		assertThatThrownBy(InputView::inputMoney).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(InputView::inputSingleNumber).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
@@ -29,7 +29,7 @@ public class InputVIewTest {
 		String input = "-100";
 		InputStream inputStream = new ByteArrayInputStream(input.getBytes());
 		System.setIn(inputStream);
-		assertThatThrownBy(InputView::inputBonusNumber).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(InputView::inputSingleNumber).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
@@ -37,7 +37,7 @@ public class InputVIewTest {
 		String input = "-1,  , asd, ;]-, 5, 가나다";
 		InputStream inputStream = new ByteArrayInputStream(input.getBytes());
 		System.setIn(inputStream);
-		assertThatThrownBy(InputView::inputSixLottoNumbers).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(InputView::inputMultipleNumber).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
@@ -45,7 +45,7 @@ public class InputVIewTest {
 		String input = "자동";
 		InputStream inputStream = new ByteArrayInputStream(input.getBytes());
 		System.setIn(inputStream);
-		assertThatThrownBy(InputView::inputManualLottoSize).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(InputView::inputSingleNumber).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
@@ -53,6 +53,6 @@ public class InputVIewTest {
 		String input = "\n";
 		InputStream inputStream = new ByteArrayInputStream(input.getBytes());
 		System.setIn(inputStream);
-		assertThatThrownBy(InputView::inputManualLottoSize).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(InputView::inputSingleNumber).isInstanceOf(IllegalArgumentException.class);
 	}
 }

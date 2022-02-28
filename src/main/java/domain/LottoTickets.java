@@ -11,12 +11,14 @@ public class LottoTickets {
 	private static final int UNIT_PRICE = 1000;
 	private final List<Lotto> lottoTickets = new ArrayList<>();
 	private final int sizeOfLottoTickets;
+	private final int manualLottoSize;
 
 	public LottoTickets(int price, int manualLottoSize) {
 		validateDivisibleByThousand(price);
 		validatePositive(price);
 		validateManualLottoSize(price, manualLottoSize);
 		this.sizeOfLottoTickets = price / UNIT_PRICE;
+		this.manualLottoSize = manualLottoSize;
 	}
 
 	public int getLottoTicketsSize() {
@@ -25,6 +27,10 @@ public class LottoTickets {
 
 	public int getLottoTicketsCapacity() {
 		return this.sizeOfLottoTickets;
+	}
+
+	public int getManualLottoSize() {
+		return this.manualLottoSize;
 	}
 
 	public List<Lotto> getLottoTickets() {

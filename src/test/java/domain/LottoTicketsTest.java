@@ -23,6 +23,11 @@ public class LottoTicketsTest {
 	}
 
 	@Test
+	void manualLottoSizeEqualsToInput() {
+		assertThat(new LottoTickets(3000, 3).getManualLottoSize()).isEqualTo(3);
+	}
+
+	@Test
 	void addOneLottoInLottoTickets() {
 		LottoTickets lottoTickets = new LottoTickets(2000, 0);
 		lottoTickets.add(new Lotto(LottoGenerator.generateRandomLottoNumbers()));
