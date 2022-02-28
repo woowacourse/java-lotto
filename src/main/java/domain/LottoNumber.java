@@ -11,23 +11,13 @@ public class LottoNumber {
 
     static {
         for (int lottoNumber = LOTTO_NUMBER_MINIMUM; lottoNumber <= LOTTO_NUMBER_MAXIMUM; lottoNumber++) {
-            lottoNumberCache.put(lottoNumber, new LottoNumber(lottoNumber));
+            lottoNumberCache.put(lottoNumber, new LottoNumber());
         }
-    }
-
-    private int number;
-
-    private LottoNumber(int number) {
-        this.number = number;
     }
 
     public static LottoNumber of(int number) {
         validateNumberRange(number);
         return lottoNumberCache.get(number);
-    }
-
-    public int getNumber() {
-        return number;
     }
 
     private static void validateNumberRange(Integer lottoNumber) {

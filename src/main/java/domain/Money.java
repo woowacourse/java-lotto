@@ -2,6 +2,8 @@ package domain;
 
 public class Money {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private int remainMoney;
     private int totalMoney;
 
@@ -11,13 +13,13 @@ public class Money {
     }
 
     public void buyLotto(int lottoCount) {
-        int boughtLottoPrice = lottoCount * 1000;
+        int boughtLottoPrice = lottoCount * LOTTO_PRICE;
         validateNegativeMoney(remainMoney - boughtLottoPrice);
         remainMoney -= boughtLottoPrice;
     }
 
     public int getPurchasableLottoCount() {
-        return remainMoney / 1000;
+        return remainMoney / LOTTO_PRICE;
     }
 
     private void validateNegativeMoney(int money) {

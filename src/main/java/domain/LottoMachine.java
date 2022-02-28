@@ -7,9 +7,6 @@ import java.text.DecimalFormat;
 
 public class LottoMachine {
 
-    private static final int LOTTO_PRICE = 1000;
-    private static final int SECOND_DECIMAL_DIGIT = 100;
-
     private final Money money;
     private final LottoResult lottoResult;
     private final LottoTicket lottoTicket;
