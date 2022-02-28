@@ -17,7 +17,8 @@ public class MainController {
 
         List<LottoTicket> lottoTickets = createLottoTickets(purchase.getManualCount(),
             purchase.getAutoCount());
-        OutputView.printLottoTickets(lottoTickets);
+        OutputView.printLottoTickets(purchase.getManualCount(), purchase.getAutoCount(),
+            lottoTickets);
 
         WinLottoNumbers winLottoNumbers = getWinNumbers();
 

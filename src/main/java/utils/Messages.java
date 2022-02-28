@@ -1,10 +1,11 @@
 package utils;
 
-import java.util.List;
-
 public class Messages {
 
-    public static final String BUY_MESSAGE = "개를 구매했습니다.";
+    public static final String MANUAL_MESSAGE = "수동으로 ";
+    public static final String AUTO_MESSAGE = "장, 자동으로 ";
+
+    public static final String BUY_MESSAGE = "장을 구매했습니다.";
     public static final String RESULT_START_MESSAGE =
         "당첨 통계" + System.lineSeparator() + "---------";
     public static final String RESULT_RANK_MESSAGE = "%d개 일치%s(%d원)- %d개" + System.lineSeparator();

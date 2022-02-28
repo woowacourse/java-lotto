@@ -28,9 +28,9 @@ class OutputViewTest {
         lottoTickets.add(LottoTicket.of("1, 2, 3, 4, 5, 6"));
         lottoTickets.add(LottoTicket.of("7, 8, 9, 10, 11, 12"));
 
-        OutputView.printLottoTickets(lottoTickets);
+        OutputView.printLottoTickets(1, 1,lottoTickets);
 
-        assertThat(out.toString()).isEqualTo("2개를 구매했습니다."
+        assertThat(out.toString()).isEqualTo("수동으로 1장, 자동으로 1장을 구매했습니다."
             + System.lineSeparator()
             + "[1, 2, 3, 4, 5, 6]"
             + System.lineSeparator()
