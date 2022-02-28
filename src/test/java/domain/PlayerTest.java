@@ -45,8 +45,7 @@ class PlayerTest {
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(i);
         }
-        LottoGenerator lottoGenerator = new WinningLottoGenerator();
-        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(lottoNumbers), new LottoNumber(BONUS_BALL_NUMBER));
+        WinningLotto winningLotto = new WinningLotto(lottoNumbers,BONUS_BALL_NUMBER);
         List<Result> actual = player.judgeAll(winningLotto);
         int expected = 15;
 

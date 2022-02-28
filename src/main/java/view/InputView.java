@@ -28,14 +28,15 @@ public class InputView {
         return Integer.parseInt(input());
     }
 
-    public static List<String> inputWinningNumber() {
+    public static List<Integer> inputWinningNumber() {
         System.out.println(WINNING_NUMBER_INPUT_MESSAGE);
-        return toStringList(input());
+        return toIntegerList(input());
     }
 
-    private static List<String> toStringList(String stringArray) {
+    private static List<Integer> toIntegerList(String stringArray) {
         return Arrays.stream(stringArray.split(DELIMITER))
                 .map(String::trim)
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 

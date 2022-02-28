@@ -2,7 +2,6 @@ package domain.LottoGenerator;
 
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
-import domain.LottoGenerator.LottoGenerator;
 
 import java.util.List;
 import java.util.stream.Collectors;

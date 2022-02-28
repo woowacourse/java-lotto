@@ -1,7 +1,7 @@
 package domain.Lotto;
 
-import domain.Lotto.Lotto;
-import domain.Lotto.LottoNumber;
+import domain.LottoGenerator.LottoGenerator;
+import domain.LottoGenerator.WinningLottoGenerator;
 import domain.Result;
 import utils.ExceptionMessage;
 
@@ -12,16 +12,23 @@ public class WinningLotto {
     private Lotto winningLotto;
     private LottoNumber bonusBall;
 
-    public WinningLotto(Lotto winningLotto, LottoNumber bonusBallNumber) {
-        validateDuplicate(winningLotto.getLotto(), bonusBallNumber);
+    public WinningLotto(List<Integer> winningNumber, int bonusBallNumber) {
+        validateDuplicate(winningNumber, bonusBallNumber);
+        Lotto winningLotto = determineWinningLotto(winningNumber);
         this.winningLotto = winningLotto;
-        bonusBall = bonusBallNumber;
+        this.bonusBall = new LottoNumber(bonusBallNumber);
     }
 
-    private void validateDuplicate(List<LottoNumber> numbers, LottoNumber bonusBallNumber) {
+    private void validateDuplicate(List<Integer> numbers, int bonusBallNumber) {
         if (numbers.contains(bonusBallNumber)) {
             throw new IllegalArgumentException(ExceptionMessage.LOTTO_AND_BONUS_BALL_DUPLICATION);
         }
+    }
+
+    private Lotto determineWinningLotto(List<Integer> winningNumber) {
+        LottoGenerator lottoGenerator = new WinningLottoGenerator();
+        Lotto winningLotto = lottoGenerator.generateLotto(winningNumber);
+        return winningLotto;
     }
 
     public Result judge(Lotto lotto) {

@@ -3,6 +3,7 @@ package domain.player;
 import domain.Lotto.Lotto;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.LottoGenerator;
+import domain.Rank;
 import domain.Result;
 
 import java.util.ArrayList;
@@ -37,11 +38,13 @@ public class Player {
         return result;
     }
 
-    public double calculateIncomeRate(double totalIncome) {
+    public double calculateIncomeRate(List<Result> results) {
+        double totalIncome = Rank.calculateAllResult(results);
         return totalIncome / money.getAmount();
     }
 
     public List<Lotto> getLottos() {
         return lottos;
     }
+
 }
