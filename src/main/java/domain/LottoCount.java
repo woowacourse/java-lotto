@@ -8,7 +8,6 @@ public class LottoCount {
 	private final int autoCount;
 
 	private LottoCount(int manualCount, Money money) {
-		validateCountRange(manualCount);
 		validateCount(manualCount, money);
 		this.manualCount = manualCount;
 
@@ -20,13 +19,11 @@ public class LottoCount {
 		return new LottoCount(manualCount, money);
 	}
 
-	private void validateCountRange(int count) {
+	private void validateCount(int count, Money money) {
 		if (count < 0) {
 			throw new IllegalArgumentException(INVALID_MANUAL_COUNT);
 		}
-	}
 
-	private void validateCount(int count, Money money) {
 		if (!money.isPurchasable(count * LOTTO_TICKET_PRICE)) {
 			throw new IllegalArgumentException(INVALID_MANUAL_COUNT_WITH_MONEY);
 		}
