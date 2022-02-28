@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.Money;
-import lotto.domain.Result;
 
 public class Lottos {
 
@@ -20,10 +19,6 @@ public class Lottos {
 
     public Lottos(Lotto lotto) {
         lottos.add(lotto);
-    }
-
-    public Result getResult(WinningLotto winningNumbers) {
-        return new Result(this, winningNumbers);
     }
 
     public int getCount() {
