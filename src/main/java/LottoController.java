@@ -1,6 +1,6 @@
 import domain.LottoGame;
 import domain.Money;
-import java.util.List;
+import domain.WinningNumbers;
 import view.InputView;
 import view.OutputView;
 
@@ -13,9 +13,9 @@ public class LottoController {
 
         OutputView.printLottosInformations(lottoGame.getLottos());
 
-        List<Integer> lottoNumbers = InputView.askLottoNumbers();
+        WinningNumbers winningNumbers = InputView.askWinningNumbers();
 
-        lottoGame.makeResult(lottoNumbers.subList(0, 6), lottoNumbers.get(6));
+        lottoGame.makeResult(winningNumbers.getWinningNumbers(), winningNumbers.getBonusNumber());
         OutputView.printWinningStatistic();
         OutputView.printYield(lottoGame.getYield());
     }
