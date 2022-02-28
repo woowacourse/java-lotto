@@ -15,6 +15,9 @@ public class LottoNumbers {
                 .forEach(lottoNumbers::add);
     }
 
+    private LottoNumbers() {
+    }
+
     public static Set<Integer> getLottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
     }

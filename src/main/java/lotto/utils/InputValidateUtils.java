@@ -5,6 +5,9 @@ public class InputValidateUtils {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
 
+    private InputValidateUtils() {
+    }
+
     public static void inputBlank(String number, String message) {
         if (number == null || number.isBlank()) {
             throw new IllegalArgumentException(message);
