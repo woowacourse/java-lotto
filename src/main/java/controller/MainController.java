@@ -5,8 +5,8 @@ import domain.Purchase;
 import domain.Rank;
 import domain.Result;
 import domain.WinLottoNumbers;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import view.InputView;
 import view.OutputView;
 
@@ -37,10 +37,11 @@ public class MainController {
     }
 
     private List<LottoTicket> createLottoTickets(int manualCount, int autoCount) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
-            lottoTickets.add(LottoTicket.of(InputView.inputManualLottoNumbers()));
-        }
+        List<LottoTicket> lottoTickets;
+
+        lottoTickets = InputView.inputManualLottoNumbers(manualCount).stream()
+            .map(LottoTicket::of)
+            .collect(Collectors.toList());
         for (int i = 0; i < autoCount; i++) {
             lottoTickets.add(LottoTicket.ofAuto());
         }
