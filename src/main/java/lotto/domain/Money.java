@@ -1,28 +1,50 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class Money {
 
-    private static final int LOTTO_PRICE = 1000;
-    private static final String PRICE_ERROR_MESSAGE = "로또 1장은 가격은 1000원 이상입니다.";
+    private static final String BUY_ERROR_MESSAGE = "가격 부족으로 구매가 불가능 합니다.";
 
-    private final int price;
+    private final int amount;
 
     public Money(int price) {
-        validatePurchaseCriterion(price);
-        this.price = price;
+        this.amount = price;
     }
 
-    private void validatePurchaseCriterion(int price) {
-        if (price < LOTTO_PRICE) {
-            throw new IllegalArgumentException(PRICE_ERROR_MESSAGE);
+    public Money calculateProduct(int price, int lottoCount) {
+        validateAmount(price, lottoCount);
+        return new Money(amount - lottoCount * price);
+    }
+
+    private void validateAmount(int price, int lottoCount) {
+        if (amount < price * lottoCount) {
+            throw new IllegalArgumentException(BUY_ERROR_MESSAGE);
         }
     }
 
-    public int calculateTicketCount() {
-        return price / LOTTO_PRICE;
+    public int getProductCount(int price) {
+        return amount / price;
     }
 
-    public int getPrice() {
-        return price;
+    public int getAmount() {
+        return amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Money money = (Money) o;
+        return amount == money.amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount);
     }
 }

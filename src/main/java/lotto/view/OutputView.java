@@ -7,12 +7,10 @@ import lotto.controller.dto.LottoResultDto;
 import lotto.controller.dto.LottoTicketDto;
 import lotto.controller.dto.LottoTicketsDto;
 import lotto.controller.dto.RankDto;
-import lotto.controller.dto.MoneyDto;
 
 public class OutputView {
 
     private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";
-    private static final String TOTAL_COUNT_SUFFIX = "개를 구매했습니다.";
     private static final String TICKETS_INFO_DELIMITER = "\n";
     private static final String LOTTO_RESULT_MESSAGE = "\n당첨 통계\n---------";
     private static final String BONUS_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
@@ -24,10 +22,6 @@ public class OutputView {
     public void printErrorMessage(String errorMessage) {
         System.out.println(ERROR_MESSAGE_PREFIX + errorMessage);
         System.out.println();
-    }
-
-    public void printTotalCount(MoneyDto moneyResponseDto) {
-        System.out.println(moneyResponseDto.getTotalCount() + TOTAL_COUNT_SUFFIX);
     }
 
     public void printLottoTicketsInfo(LottoTicketsDto lottoTickets) {

@@ -16,7 +16,7 @@ public class LottoResult {
     }
 
     public double calculateYield(Money money) {
-        return Math.floor(getTotalPrizeMoney() / money.getPrice() * FLOOR_STANDARD) / FLOOR_AFTER_TREATMENT;
+        return Math.floor(getTotalPrizeMoney() / money.getAmount() * FLOOR_STANDARD) / FLOOR_AFTER_TREATMENT;
     }
 
     private double getTotalPrizeMoney() {
