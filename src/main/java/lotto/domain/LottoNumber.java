@@ -21,14 +21,19 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     private LottoNumber(final int number) {
+        checkNumberRightRange(number);
         this.number = number;
     }
 
     public static LottoNumber valueOf(final int number) {
+        checkNumberRightRange(number);
+        return LOTTO_NUMBER_CACHE.get(number);
+    }
+
+    private static void checkNumberRightRange(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("[ERROR] 입력값이 1 이상 45 이하여야 합니다.");
         }
-        return LOTTO_NUMBER_CACHE.get(number);
     }
 
     public int getNumber() {
