@@ -41,7 +41,7 @@ public class LottoGame {
 
     public double calculateEarningRate() {
         long totalPrize = prizeResult.totalPrize();
-        double earningRate = totalPrize / lottos.size();
+        double earningRate = (double)totalPrize / (lottos.size() * LOTTO_PRICE);
         return Math.floor(earningRate * 100) / 100.0;
     }
 
