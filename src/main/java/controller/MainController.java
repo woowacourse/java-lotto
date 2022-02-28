@@ -37,15 +37,21 @@ public class MainController {
     }
 
     private List<LottoTicket> createLottoTickets(int manualCount, int autoCount) {
-        List<LottoTicket> lottoTickets;
+        List<LottoTicket> lottoTickets = addManualLottoTickets(manualCount);
+        addAutoLottoTickets(autoCount, lottoTickets);
+        return lottoTickets;
+    }
 
-        lottoTickets = InputView.inputManualLottoNumbers(manualCount).stream()
+    private List<LottoTicket> addManualLottoTickets(int manualCount) {
+        return InputView.inputManualLottoNumbers(manualCount).stream()
             .map(LottoTicket::of)
             .collect(Collectors.toList());
+    }
+
+    private void addAutoLottoTickets(int autoCount, List<LottoTicket> lottoTickets) {
         for (int i = 0; i < autoCount; i++) {
             lottoTickets.add(LottoTicket.ofAuto());
         }
-        return lottoTickets;
     }
 
     private WinLottoNumbers getWinNumbers() {
