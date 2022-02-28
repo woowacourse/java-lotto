@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputView {
@@ -8,10 +9,10 @@ public class InputView {
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String LOTTO_ERROR_PREFIX = "로또 번호는";
     private static final String NOT_NUMBER_ERROR = "숫자로 입력해주세요.";
-    public static final String NOT_INSTANTIATION_ERROR = "InputView 객체를 생성할 수 없습니다.";
+    private static final String NOT_INSTANTIATION_ERROR = "InputView 객체를 생성할 수 없습니다.";
     private static final String EMPTY = "";
     private static final String BLANK = " ";
-    public static final String BLANK_AND_DELIMITER_REGEX = "[\\s,]*";
+    private static final String DELIMITER = ",";
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -35,19 +36,22 @@ public class InputView {
 
     public static String inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
-        String input = scanner.nextLine();
-
-        return parseWinningNumbers(input);
+        String inputRemovedBlank = scanner.nextLine().replaceAll(BLANK, EMPTY);
+        if (isNumber(inputRemovedBlank)) {
+            return inputRemovedBlank;
+        }
+        return inputWinningNumbers();
     }
 
-    private static String parseWinningNumbers(String input) {
-        String parsedInput = input.replaceAll(BLANK_AND_DELIMITER_REGEX, EMPTY);
+    private static boolean isNumber(String input) {
+        String[] splitInput = input.split(DELIMITER);
+
         try {
-            Integer.parseInt(parsedInput);
-            return input;
+            Arrays.stream(splitInput).forEach(Integer::parseInt);
+            return true;
         } catch (NumberFormatException e) {
             System.out.println(LOTTO_ERROR_PREFIX + BLANK + NOT_NUMBER_ERROR);
-            return inputWinningNumbers();
+            return false;
         }
     }
 
