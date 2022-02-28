@@ -56,11 +56,11 @@ public class OutputView {
     private static void printEachRank(Rank rank, RankBoard rankBoard) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(rank.getMatched() + "개 일치");
+        stringBuilder.append(rank.getMatched()).append("개 일치");
         if (rank == Rank.SECOND) {
             stringBuilder.append(", 보너스 볼 일치");
         }
-        stringBuilder.append(" (" + rank.getPrize() + "원) - " + rankBoard.getCount(rank) + "개");
+        stringBuilder.append(" (").append(rank.getPrize()).append("원) - ").append(rankBoard.getCount(rank)).append("개");
 
         System.out.println(stringBuilder);
     }
