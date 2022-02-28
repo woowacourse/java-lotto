@@ -20,9 +20,9 @@ public class InputController {
         return money;
     }
 
-    public List<LottoNumber> getWinningLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         String[] inputWinningLottoNumbers = InputView.scanWinningLottoNumbers().split(LOTTO_NUMBER_INPUT_DELIMITER);
-        Validator.validateWinningNumberInput(inputWinningLottoNumbers);
+        Validator.validateLottoNumbers(inputWinningLottoNumbers);
         return Arrays.stream(inputWinningLottoNumbers)
                 .mapToInt(Integer::parseInt)
                 .mapToObj(LottoNumber::of)

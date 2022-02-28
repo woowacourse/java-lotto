@@ -31,7 +31,7 @@ public class LottoController {
     }
 
     private WinningLotto requestWinningLotto() {
-        List<LottoNumber> winningLottoNumbers = inputController.getWinningLottoNumbers();
+        List<LottoNumber> winningLottoNumbers = inputController.getLottoNumbers();
         LottoNumber bonusLottoNumber = inputController.getBonusNumber();
         return new WinningLotto(winningLottoNumbers, bonusLottoNumber);
     }
