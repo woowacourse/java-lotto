@@ -17,11 +17,10 @@ public class WinningLottoNumbers {
     }
 
     public LottoResult summarize(List<Lotto> lottos, Money inputMoney) {
-        LottoResult result = new LottoResult(inputMoney);
         List<LottoRank> ranks = lottos.stream()
                 .map(this::getRankBy)
                 .collect(Collectors.toList());
-        result.initResultFrom(ranks);
+        LottoResult result = new LottoResult(inputMoney, ranks);
         return result;
     }
 
