@@ -21,7 +21,8 @@ public class InputValidateUtils {
     }
 
     public static void inputOutOfRange(String number, String message) {
-        if (Integer.parseInt(number) < LOTTO_MIN_NUMBER || Integer.parseInt(number) > LOTTO_MAX_NUMBER) {
+        if (ConverterUtils.convertStringToInt(number) < LOTTO_MIN_NUMBER ||
+                ConverterUtils.convertStringToInt(number) > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException(message);
         }
     }

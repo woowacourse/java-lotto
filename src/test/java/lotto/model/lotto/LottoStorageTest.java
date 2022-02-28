@@ -1,5 +1,6 @@
 package lotto.model.lotto;
 
+import lotto.utils.ConverterUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -13,6 +14,6 @@ class LottoStorageTest {
     @DisplayName("로또 생성 개수 검증")
     void compareLottoWithWinningNumber(String money) {
         LottoStorage lottoStorage = new LottoStorage(new LottoCount(money));
-        assertThat(lottoStorage.getLottoStorage().size()).isEqualTo(Integer.parseInt(money) / 1000);
+        assertThat(lottoStorage.getLottoStorage().size()).isEqualTo(ConverterUtils.convertStringToInt(money) / 1000);
     }
 }

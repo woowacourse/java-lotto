@@ -3,6 +3,7 @@ package lotto.model.lotto;
 import java.util.Objects;
 
 import lotto.model.message.LottoCountExceptionMessage;
+import lotto.utils.ConverterUtils;
 import lotto.utils.InputValidateUtils;
 
 public class LottoCount {
@@ -22,17 +23,17 @@ public class LottoCount {
 
     private int makeLottoCount(String money) {
         validateThousandUnitInputMoney(money);
-        return Integer.parseInt(money) / UNIT;
+        return ConverterUtils.convertStringToInt(money) / UNIT;
     }
 
     private void validateThousandUnitInputMoney(String money) {
-        if (Integer.parseInt(money) % UNIT != NON_REMAINDER) {
+        if (ConverterUtils.convertStringToInt(money) % UNIT != NON_REMAINDER) {
             throw new IllegalArgumentException(LottoCountExceptionMessage.UNIT_ERROR.getMassage());
         }
     }
 
     private void validateInputZero(String money) {
-        if (Integer.parseInt(money) == NOTHING) {
+        if (ConverterUtils.convertStringToInt(money) == NOTHING) {
             throw new IllegalArgumentException(LottoCountExceptionMessage.LOWER_THAN_THOUSAND.getMassage());
         }
     }

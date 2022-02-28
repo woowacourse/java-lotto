@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import lotto.model.message.WinningNumberExceptionMessage;
+import lotto.utils.ConverterUtils;
 import lotto.utils.InputValidateUtils;
 
 public class LottoWinningNumber {
@@ -64,7 +65,7 @@ public class LottoWinningNumber {
     }
 
     public void validateReduplicationWithBonusBall(String number) {
-        if (winningNumbers.contains(Integer.parseInt(number))) {
+        if (winningNumbers.contains(ConverterUtils.convertStringToInt(number))) {
             throw new IllegalArgumentException(WinningNumberExceptionMessage.REDUPLICATION_BONUS_BALL_ERROR.getMassage());
         }
     }

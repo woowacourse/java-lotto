@@ -3,6 +3,7 @@ package lotto.model.bonusball;
 import java.util.Objects;
 
 import lotto.model.message.BonusBallExceptionMessage;
+import lotto.utils.ConverterUtils;
 import lotto.utils.InputValidateUtils;
 
 public class BonusBall {
@@ -12,11 +13,7 @@ public class BonusBall {
         InputValidateUtils.inputBlank(number, BonusBallExceptionMessage.BLANK_ERROR.getMessage());
         InputValidateUtils.inputNumber(number, BonusBallExceptionMessage.NUMBER_ERROR.getMessage());
         InputValidateUtils.inputOutOfRange(number, BonusBallExceptionMessage.RANGE_ERROR.getMessage());
-        this.number = makeBonusBallToNumber(number);
-    }
-
-    private int makeBonusBallToNumber(String number) {
-        return Integer.parseInt(number);
+        this.number = ConverterUtils.convertStringToInt(number);
     }
 
     public int getNumber() {
