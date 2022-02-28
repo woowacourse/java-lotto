@@ -1,29 +1,27 @@
 package view;
 
 import java.util.List;
-import java.util.Map;
 import java.util.StringJoiner;
-import model.lottotickets.LottoTicketDto;
-import model.winning.Rank;
+import dto.RankResultDto;
+import dto.LottoDto;
 
 public class OutputView {
     private static final String PURCHASE_COUNT_MESSAGE = "개를 구매했습니다.";
     private static final String RIGHT_COVER = "[";
     private static final String LEFT_COVER = "]";
     private static final String JOINING_DELIMITER = ", ";
-    private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계\n";
-    private static final String DIVISION_LINE = "---------\n";
+    private static final String WINNING_STATISTICS_MESSAGE = "\n당첨 통계\n---------";
+    private static final String NOT_BONUS_MATCH_RANK_PRINT_FORMAT = "%d개 일치 (%d원)- %d개\n";
+    private static final String RATE_OF_RETURN_PRINT_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n";
 
-    public void printLottos(final List<LottoTicketDto> lottos) {
-        System.out.println(lottos.size() + PURCHASE_COUNT_MESSAGE);
-        for (LottoTicketDto lotto : lottos) {
-            printLotto(lotto);
-        }
+    public void printPurchasedLottos(final List<LottoDto> lottoDtos) {
+        System.out.println(lottoDtos.size() + PURCHASE_COUNT_MESSAGE);
+        lottoDtos.forEach(this::printLotto);
     }
 
-    private void printLotto(final LottoTicketDto lotto) {
+    private void printLotto(final LottoDto lottoDto) {
         System.out.print(RIGHT_COVER);
-        printNumbers(lotto.getLottoNumbers());
+        printNumbers(lottoDto.getLottoNumbers());
         System.out.println(LEFT_COVER);
     }
 
@@ -31,5 +29,25 @@ public class OutputView {
         StringJoiner stringJoiner = new StringJoiner(JOINING_DELIMITER);
         numbers.forEach(number -> stringJoiner.add(String.valueOf(number)));
         System.out.print(stringJoiner);
+    }
+
+    public void printWinningResult(final List<RankResultDto> WinningResult) {
+        System.out.println(WINNING_STATISTICS_MESSAGE);
+        for (RankResultDto rankResultDto : WinningResult) {
+            printRankResult(rankResultDto);
+        }
+    }
+
+    private void printRankResult(RankResultDto rankResultDto) {
+        System.out.printf(printRankResultFormat(), rankResultDto.getMatchCount(), rankResultDto.getRankPrize(),
+                rankResultDto.getWinningCount());
+    }
+
+    private String printRankResultFormat() {
+        return NOT_BONUS_MATCH_RANK_PRINT_FORMAT;
+    }
+
+    public void printRateOfReturn(double rateOfReturn) {
+        System.out.printf(RATE_OF_RETURN_PRINT_FORMAT, rateOfReturn);
     }
 }
