@@ -1,6 +1,6 @@
 package lotto.model.number;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,5 +23,11 @@ public class WinningNumberTest {
 			WinningNumber.from("0");
 		}).isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("[ERROR] 로또 번호는 1 이상 45 이하로 입력해주세요");
+	}
+
+	@DisplayName("같은 숫자일 경우 equals()를 사용하면 같은 값으로 인식된다")
+	@Test
+	void equals_test() {
+		assertThat(WinningNumber.from("1")).isEqualTo(WinningNumber.from("1"));
 	}
 }

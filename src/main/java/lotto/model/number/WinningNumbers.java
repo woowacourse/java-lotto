@@ -41,7 +41,6 @@ public class WinningNumbers {
 
 	private int getDistinctCount(List<WinningNumber> winningNumbers) {
 		return (int)winningNumbers.stream()
-				.map(winningNumber -> winningNumber.getNumber().getNumber())
 				.distinct()
 				.count();
 	}

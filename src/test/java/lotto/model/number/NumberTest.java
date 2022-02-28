@@ -24,4 +24,10 @@ public class NumberTest {
 		}).isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("[ERROR] 로또 번호는 1 이상 45 이하로 입력해주세요");
 	}
+
+	@DisplayName("같은 숫자일 경우 equals()를 사용하면 같은 값으로 인식된다")
+	@Test
+	void equals_test() {
+		assertThat(Number.from("1")).isEqualTo(Number.from("1"));
+	}
 }

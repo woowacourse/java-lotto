@@ -19,20 +19,14 @@ public class WinningNumber {
 		return this.number.getNumber() == number;
 	}
 
-	public Number getNumber() {
-		return number;
-	}
-
 	@Override
-	public boolean equals(Object object) {
-		if (this == object) {
+	public boolean equals(Object o) {
+		if (this == o)
 			return true;
-		}
-		if (object == null || getClass() != object.getClass()) {
+		if (o == null || getClass() != o.getClass())
 			return false;
-		}
-		WinningNumber winningNumber = (WinningNumber)object;
-		return number == winningNumber.number;
+		WinningNumber that = (WinningNumber)o;
+		return number.equals(that.number);
 	}
 
 	@Override
