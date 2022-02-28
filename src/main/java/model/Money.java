@@ -1,4 +1,4 @@
-package model.money;
+package model;
 
 public class Money {
     private static final int LOTTO_PRICE = 1000;
@@ -25,7 +25,7 @@ public class Money {
         return money % LOTTO_PRICE != 0;
     }
 
-    public int generatePurchaseCount() {
+    public int makePurchaseCount() {
         return money / LOTTO_PRICE;
     }
 
