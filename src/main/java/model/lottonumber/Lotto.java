@@ -1,12 +1,11 @@
-package model.lottotickets;
+package model.lottonumber;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import model.lottonumbergenerator.Generator;
-import model.lottotickets.vo.Number;
-import model.winning.Rank;
-import model.winning.WinningNumbers;
+import model.generator.Generator;
+import model.lottonumber.vo.Number;
+import model.rank.Rank;
 
 public class Lotto {
     private final List<Number> numbers;

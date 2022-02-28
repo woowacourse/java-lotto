@@ -1,4 +1,4 @@
-package model.lottonumbergenerator;
+package model.generator;
 
 import java.util.Collections;
 import java.util.List;

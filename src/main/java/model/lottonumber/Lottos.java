@@ -1,4 +1,4 @@
-package model;
+package model.lottonumber;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -7,11 +7,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import model.lottonumbergenerator.Generator;
-import model.lottotickets.Lotto;
-import model.winning.Rank;
-import model.winning.WinningResult;
-import model.winning.WinningNumbers;
+import model.money.Money;
+import model.generator.Generator;
+import model.rank.Rank;
+import model.winningresult.WinningResult;
 
 public class Lottos {
     private final List<Lotto> lottos;

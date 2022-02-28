@@ -1,4 +1,4 @@
-package model.lottotickets.vo;
+package model.lottonumber.vo;
 
 import java.util.List;
 import java.util.Objects;

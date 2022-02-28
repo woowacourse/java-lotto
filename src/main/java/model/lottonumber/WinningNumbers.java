@@ -1,9 +1,9 @@
-package model.winning;
+package model.lottonumber;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import model.lottotickets.vo.Number;
+import model.lottonumber.vo.Number;
 
 public class WinningNumbers {
     private static final int LOTTO_NUMBER_COUNT = 6;
