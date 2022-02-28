@@ -31,12 +31,10 @@ public class Result {
         return result.get(key);
     }
 
-    public double getRateOfProfit(Money money) {
-        long totalMoney = 0L;
-        for (Map.Entry<LottoRanking, Integer> entry : result.entrySet()) {
-            totalMoney += entry.getKey()
-                .multiply(entry.getValue());
-        }
-        return money.getRateOfProfit(totalMoney);
+    public long getTotalProfit() {
+        return result.entrySet()
+            .stream()
+            .mapToLong(entry -> entry.getKey().multiply(entry.getValue()))
+            .sum();
     }
 }
