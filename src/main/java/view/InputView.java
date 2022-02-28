@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import utils.IntegerParser;
+
 public class InputView {
     private static final String SEPARATOR = ",";
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
@@ -15,20 +17,20 @@ public class InputView {
     public int inputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         String money = scanner.nextLine();
-        return Integer.parseInt(money);
+        return IntegerParser.parseInteger(money);
     }
 
     public List<Integer> inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         List<String> numbers = List.of((scanner.nextLine()).split(SEPARATOR));
         return numbers.stream()
-                .map(number -> Integer.parseInt(number))
+                .map(IntegerParser::parseInteger)
                 .collect(Collectors.toList());
     }
 
     public int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
         String number = scanner.nextLine();
-        return Integer.parseInt(number);
+        return IntegerParser.parseInteger(number);
     }
 }
