@@ -26,7 +26,7 @@ public class Lotto {
     public List<Integer> intValues() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public Set<LottoNumber> getMatchedNumbers(Set<LottoNumber> targetNumbers) {
