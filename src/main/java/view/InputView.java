@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+import util.StringUtil;
 
 public class InputView {
 
@@ -32,20 +33,12 @@ public class InputView {
 
     public static int askBonusNumber() {
         System.out.println(QUESTION_BONUS_NUMBER);
-        return validateAndConvertInteger(scanner.nextLine());
+        return StringUtil.convertToInteger(scanner.nextLine());
     }
 
     private static List<Integer> validateAndCovertNumbersToInteger(List<String> numbers) {
         return numbers.stream()
-                .map(InputView::validateAndConvertInteger)
+                .map(StringUtil::convertToInteger)
                 .collect(Collectors.toList());
-    }
-
-    private static int validateAndConvertInteger(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NONE_NUMERIC_ERROR);
-        }
     }
 }

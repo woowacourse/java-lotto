@@ -21,7 +21,5 @@ public class LottoController {
 
         OutputView.printWinningStatistic(lottoGame.produceResults());
         OutputView.printYield(lottoGame.calculateYield());
-
-        Set<LottoNumber> tmp = new TreeSet<>();
     }
 }
