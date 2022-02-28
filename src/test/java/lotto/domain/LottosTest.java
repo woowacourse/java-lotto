@@ -23,7 +23,7 @@ public class LottosTest {
     }
 
     @Test
-    @DisplayName("로또 개수는 1개 이상이어야 한다.")
+    @DisplayName("로또가 한개라도 없다면 Lottos를 생성시 예외가 발생한다.")
     void throwExceptionWhenEmptyLottos() {
         assertThatIllegalArgumentException()
             .isThrownBy(() -> new Lottos(Collections.emptyList()))

@@ -41,6 +41,15 @@ class LottoTest {
             .withMessageMatching("로또 번호는 중복될 수 없다.");
     }
 
+    @Test
+    @DisplayName("로또 숫자가 일치하는 만큼 개수를 반환한다.")
+    void matchNumbers() {
+        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 6));
+
+        assertThat(lotto.countMatchNumbers(lotto)).isEqualTo(6);
+    }
+
+
     @ParameterizedTest
     @CsvSource(value = {"6,true", "7,false"})
     @DisplayName("해당하는 숫자가 포함되어 있는지 확인한다.")

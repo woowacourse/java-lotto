@@ -11,6 +11,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class MoneyTest {
 
     @Test
+    @DisplayName("돈은 0원 이상으로 생성된다.")
+    void createMoney() {
+        assertThatNoException().isThrownBy(() -> new Money(0L));
+    }
+
+    @Test
     @DisplayName("돈은 0이상이어야 한다.")
     void throwExceptionWhenNegative() {
         assertThatIllegalArgumentException()

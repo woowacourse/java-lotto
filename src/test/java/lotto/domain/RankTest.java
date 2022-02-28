@@ -29,6 +29,14 @@ class RankTest {
     }
 
     @Test
+    @DisplayName("같은 등수가 몇개 포함되어있는지 개수를 반환한다.")
+    void getRewardCount() {
+        List<Rank> ranks = List.of(Rank.FIRST, Rank.FIRST, Rank.FIRST, Rank.NONE);
+
+        assertThat(Rank.FIRST.findRewardCount(ranks)).isEqualTo(3);
+    }
+
+    @Test
     @DisplayName("1등에 3번 당첨되면 60억을 반환한다.")
     void getFirstReward() {
         List<Rank> ranks = List.of(Rank.FIRST, Rank.FIRST, Rank.FIRST, Rank.NONE);
