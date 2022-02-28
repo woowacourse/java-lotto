@@ -17,8 +17,13 @@ public class OutputView {
         throw new AssertionError();
     }
 
-    public static void printPurchasedLottoTicketNumber(int number) {
-        System.out.println(number + "개를 구매했습니다.");
+    public static void printPurchasedLottoTicketNumber(int total, int manualCount) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n수동으로 ").append(manualCount)
+                .append("장, 자동으로 ").append(total - manualCount)
+                .append("개를 구매했습니다.");
+
+        System.out.println(stringBuilder);
     }
 
     public static void printPurchasedLottoTickets(List<LottoTicket> lottoTickets) {
