@@ -27,7 +27,9 @@ public class InputView {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         String input = SCANNER.nextLine();
         validateBlank(input);
-        return validateNumber(input);
+        int inputNumber = validateNumber(input);
+        validateNotNegative(inputNumber);
+        return inputNumber;
     }
 
     public static List<LottoNumber> inputWinnerNumbers() {
@@ -63,6 +65,12 @@ public class InputView {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("입력값은 숫자이어야 한다.");
+        }
+    }
+
+    private static void validateNotNegative(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("입력값은 음수일 수 없다.");
         }
     }
 

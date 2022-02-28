@@ -18,6 +18,8 @@ public class LottoController {
         int money = InputView.inputMoney();
         int manualLottoCount = InputView.inputManualLottoCount();
 
+        validateManualLottoCountOutOfMoney(money, manualLottoCount);
+
         Lottos lottos = new Lottos(buyLottos(money));
         OutputView.printLottos(lottos.getLottos());
 
@@ -26,6 +28,12 @@ public class LottoController {
 
         Rate rate = calculateRate(money, ranks);
         OutputView.printRate(rate);
+    }
+
+    private void validateManualLottoCountOutOfMoney(int money, int manualLottoCount) {
+        if (money < manualLottoCount * 1000) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수가 구매 가능한 로또 수보다 크다.");
+        }
     }
 
     private List<Lotto> buyLottos(int money) {
