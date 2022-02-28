@@ -18,8 +18,7 @@ public class LottoApplication {
 
     public static void main(final String[] args) {
         final LottoGenerator lottoGenerator = createLottoGenerator(payMoney());
-        final Lottos lottos = lottoGenerator.generateLottos(
-                inputManualLottoNumbers(lottoGenerator));
+        final Lottos lottos = lottoGenerator.generateLottos(inputManualLottoNumbers(lottoGenerator));
 
         OutputView.outputBuyLottoCounts(lottoGenerator.getManualCount(), lottoGenerator.getAutoCount());
         OutputView.outputLottos(lottos.getLottos());
