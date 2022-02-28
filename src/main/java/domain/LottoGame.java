@@ -20,7 +20,7 @@ public class LottoGame {
     }
 
     public Lottos buyLotto(Money money) {
-        int lottoAmount = money.money() / LOTTO_PRICE;
+        int lottoAmount = money.convertToAmount();
         lottos = new Lottos(lottoAmount);
         return lottos;
     }
@@ -35,8 +35,8 @@ public class LottoGame {
         }
 
         int prize = Arrays.stream(Rewards.values())
-                .map(Rewards::calculateYield)
-                .reduce(SUM_BASE, Integer::sum);
+            .map(Rewards::calculateYield)
+            .reduce(SUM_BASE, Integer::sum);
         return (float) prize / (LOTTO_PRICE * lottos.getSize());
     }
 

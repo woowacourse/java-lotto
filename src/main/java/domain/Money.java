@@ -2,6 +2,8 @@ package domain;
 
 public class Money {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private final int money;
 
     public Money(int money) {
@@ -10,6 +12,11 @@ public class Money {
 
     public int money() {
         return this.money;
+    }
+
+    public int convertToAmount() {
+        return money / LOTTO_PRICE;
+
     }
 
 
