@@ -17,7 +17,7 @@ public class LottoTicket {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public boolean contains(LottoNumber bonus) {
-        return lottoNumbers.contains(bonus);
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 }
