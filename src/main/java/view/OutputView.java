@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import controller.dto.WinningStatDto;
+import domain.LottoCount;
 import domain.LottoRank;
 import domain.LottoTicket;
 
@@ -15,11 +16,10 @@ public class OutputView {
     public static final String PROFIT_PATTERN = "#.##";
     public static final String BLANK = "";
 
-    public static void printPurchasedLottoTicketNumber(int manualCount, int autoCount) {
-        System.out.println("\n수동으로 " + manualCount + "장, 자동으로 " + autoCount + "개를 구매했습니다.");
-    }
+    public static void printPurchasedLottoTicketNumber(List<LottoTicket> lottoTickets, LottoCount lottoCount) {
+        System.out.println("\n수동으로 " + lottoCount.getManualCount() + "장, 자동으로 "
+            + lottoCount.getAutoCount() + "개를 구매했습니다.");
 
-    public static void printPurchasedLottoTickets(List<LottoTicket> lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets) {
             System.out.println(lottoTicket.getTicketNumbers());
         }

@@ -16,18 +16,17 @@ public class LottoController {
 
     public void run() {
         Money money = Money.from(InputView.getMoney());
-
         LottoCount lottoCount = LottoCount.of(InputView.getManualCount(), money);
 
-        List<LottoTicket> lottoTickets = purchaseLottoTickets(money, lottoCount.getManualCount());
+        List<LottoTicket> lottoTickets = purchaseLottoTickets(money, lottoCount);
 
-        OutputView.printPurchasedLottoTicketNumber(lottoCount.getManualCount(), lottoCount.getAutoCount());
-        OutputView.printPurchasedLottoTickets(lottoTickets);
-
+        OutputView.printPurchasedLottoTicketNumber(lottoTickets, lottoCount);
         OutputView.printWinningStat(getWinningStatDto(lottoTickets));
     }
 
-    private List<LottoTicket> purchaseLottoTickets(Money money, int manualCount) {
+    private List<LottoTicket> purchaseLottoTickets(Money money, LottoCount lottoCount) {
+        int manualCount = lottoCount.getManualCount();
+
         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTicketsByManual(
             InputView.getManualNumbers(manualCount));
 
