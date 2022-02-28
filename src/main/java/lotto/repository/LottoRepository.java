@@ -21,10 +21,15 @@ public class LottoRepository {
     }
 
     public void save(List<LottoTicket> other) {
-        tickets = other;
+        synchronized (this) {
+            tickets.clear();
+            tickets.addAll(List.copyOf(other));
+        }
     }
 
     public List<LottoTicket> get() {
-        return List.copyOf(tickets);
+        synchronized (this) {
+            return List.copyOf(tickets);
+        }
     }
 }

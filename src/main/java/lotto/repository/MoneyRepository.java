@@ -18,10 +18,14 @@ public class MoneyRepository {
     }
 
     public void save(Money other) {
-        money = other;
+        synchronized (this) {
+            this.money = new Money(other.getAmount());
+        }
     }
 
     public Money get() {
-        return new Money(money.getAmount());
+        synchronized (this) {
+            return new Money(money.getAmount());
+        }
     }
 }
