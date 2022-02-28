@@ -47,11 +47,7 @@ public class Money {
         return Objects.hash(amount);
     }
 
-    public void createLottoType(int manualCount) {
-        validateManualCount(manualCount);
-    }
-
-    private void validateManualCount(int manualCount) {
+    public void validateManualCount(int manualCount) {
         if (manualCount > getPurchasableNumber()) {
             throw new IllegalArgumentException("구매하려는 로또가 보유 금액을 초과했습니다.");
         }

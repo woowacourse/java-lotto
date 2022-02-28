@@ -21,14 +21,18 @@ public class LottoController {
         Money money = Money.from(InputView.getMoney());
         lottoMachine.validateMoney(money);
         int manualCount = calculateManualCount(money);
-        money.createLottoType(manualCount);
-        List<List<Integer>> lottoNumbers = InputView.getManualLottoNumbers(manualCount);
+        List<List<Integer>> lottoNumbers = getLottoNumbers(money, manualCount);
         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(money, lottoNumbers);
 
         OutputView.printPurchasedLottoTicketNumber(lottoTickets.size(), manualCount);
         OutputView.printPurchasedLottoTickets(lottoTickets);
 
         return lottoTickets;
+    }
+
+    private List<List<Integer>> getLottoNumbers(Money money, int manualCount) {
+        money.validateManualCount(manualCount);
+        return InputView.getManualLottoNumbers(manualCount);
     }
 
     private int calculateManualCount(Money money) {

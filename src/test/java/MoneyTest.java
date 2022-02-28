@@ -30,7 +30,7 @@ class MoneyTest {
     void manuallyPurchasedLottoPriceExceedException() {
         Money money = Money.from(2000);
 
-        assertThatThrownBy(() -> money.createLottoType(5))
+        assertThatThrownBy(() -> money.validateManualCount(5))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("구매하려는 로또가 보유 금액을 초과했습니다.");
     }
