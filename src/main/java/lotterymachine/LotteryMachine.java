@@ -1,9 +1,10 @@
 package lotterymachine;
 
-import lotterymachine.domain.LotteryController;
+import lotterymachine.domain.LotteryTickets;
 import lotterymachine.domain.WinningLotteryNumbers;
 import lotterymachine.domain.WinningLottery;
 import lotterymachine.utils.LotteryCalculator;
+import lotterymachine.utils.LotteryNumbersGenerator;
 import lotterymachine.view.InputView;
 import lotterymachine.view.OutputView;
 import lotterymachine.vo.LotteryPurchase;
@@ -18,23 +19,21 @@ public class LotteryMachine {
         int purchaseCount = lotteryPurchase.getCount();
         OutputView.printNumberOfTicket(purchaseCount);
 
-        LotteryController lotteryController = createLotteryTickets(purchaseCount);
-        OutputView.printLotteryTickets(lotteryController.getLotteryTickets());
-        
-        Map<WinningLottery, Integer> lotteryTicketResult = getWinningLotteryResult(lotteryController);
+        LotteryTickets lotteryTickets = createLotteryTickets(purchaseCount);
+        OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
+
+        WinningLotteryNumbers winningLotteryNumbers =  new WinningLotteryNumbers(InputView.getWinningLotteryNumbers(), InputView.getBonusNumber());
+        Map<WinningLottery, Integer> lotteryTicketResult = lotteryTickets.getLotteriesResult(winningLotteryNumbers);
         OutputView.printWinningLotteryResults(lotteryTicketResult);
         OutputView.printProfitRate(getTotalProfitRate(lotteryPurchase, lotteryTicketResult));
     }
 
-    private static LotteryController createLotteryTickets(int purchaseCount) {
-        LotteryController lotteryController = new LotteryController(purchaseCount);
-        lotteryController.createLotteryTickets(purchaseCount);
-        return lotteryController;
-    }
-
-    private static Map<WinningLottery, Integer> getWinningLotteryResult(LotteryController lotteryController) {
-        WinningLotteryNumbers winningLotteryNumbers =  new WinningLotteryNumbers(InputView.getWinningLotteryNumbers(), InputView.getBonusNumber());
-        return lotteryController.getLotteryTicketResult(winningLotteryNumbers);
+    private static LotteryTickets createLotteryTickets(int purchaseCount) {
+        LotteryTickets lotteryTickets = new LotteryTickets(purchaseCount);
+        for (int i = 0; i < purchaseCount; i++) {
+            lotteryTickets.add(LotteryNumbersGenerator.generate());
+        }
+        return lotteryTickets;
     }
 
     private static double getTotalProfitRate(LotteryPurchase lotteryPurchase, Map<WinningLottery, Integer> lotteryTicketResult) {
