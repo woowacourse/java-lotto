@@ -1,62 +1,51 @@
 package controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import model.Lottos;
 import model.lottonumbergenerator.Generator;
-import model.LottoMachine;
-import model.lottotickets.LottoTicketDto;
+import model.money.Money;
+import model.winning.WinningNumbers;
+import view.InputView;
+import view.OutputView;
 
 public class MachineController {
-    private final LottoMachine lottoMachine;
+    private final InputView inputView;
+    private final OutputView outputView;
     private final Generator generator;
 
-    private final InputController inputController;
-    private final OutputController outputController;
-
-    public MachineController(Generator generator, InputController inputController,
-                             OutputController outputController) {
+    public MachineController(Generator generator, InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
         this.generator = generator;
-        this.lottoMachine = new LottoMachine();
-
-        this.inputController = inputController;
-        this.outputController = outputController;
     }
 
     public void runMachine() {
-        insertMoney();
-        purchaseLottoTickets();
-        settingLottoWinningNumbers();
-        showLottoGameResult();
+        Money money = insertMoney();
+        Lottos lottos = purchaseLottos(money.generatePurchaseCount(), generator);
+        WinningNumbers winningNumbers = insertWinningNumbers();
     }
 
-    private void insertMoney() {
-        int money = inputController.inputMoney();
-        lottoMachine.insertMoney(money);
+    private Money insertMoney() {
+        try {
+            int money = inputView.inputMoney();
+            return new Money(money);
+        } catch (IllegalArgumentException error) {
+            return insertMoney();
+        }
     }
 
-    private void purchaseLottoTickets() {
-        lottoMachine.purchaseLottoTickets(generator);
-
-        List<LottoTicketDto> dto = convertToDto(lottoMachine.lottoTickets());
-        outputController.printPurchasedLottoTickets(dto);
+    private Lottos purchaseLottos(int purchaseCount, Generator generator) {
+        Lottos lottos = new Lottos(purchaseCount, generator);
+        outputView.printPurchasedLottos(lottos.getLottosInformation());
+        return lottos;
     }
 
-    private List<LottoTicketDto> convertToDto(final List<List<Integer>> lottoTickets) {
-        return lottoTickets.stream()
-                .map(LottoTicketDto::new)
-                .collect(Collectors.toList());
+    private WinningNumbers insertWinningNumbers() {
+        final List<Integer> winningNumbers = inputView.inputWinningNumbers();
+        final int bonusNumber = inputView.inputBonusNumber();
+
+        return new WinningNumbers(winningNumbers, bonusNumber);
     }
 
-    private void settingLottoWinningNumbers() {
-        final List<Integer> winningNumbers = inputController.inputWinningNumbers();
-        final int bonusNumber = inputController.inputBonusNumber();
-
-        lottoMachine.insertWinningNumbers(winningNumbers, bonusNumber);
-    }
-
-    private void showLottoGameResult() {
-        outputController.printWinningResults(lottoMachine.winningResult());
-        outputController.printRateOfReturn(lottoMachine.rateOfReturn());
-    }
 }
