@@ -29,7 +29,8 @@ public class LottoController {
 
         WinningNumber winningNumber = receiveWinningNumbers();
         BonusBall bonusBall = receiveBonusBall(lottoGame, winningNumber);
-        WinningResult winningResult = receiveWinningResult(lottoGame, lottoStorage, bonusBall, winningNumber);
+        WinningResult winningResult = lottoGame.calcWinningNumber(lottoStorage, new BonusBallResponse(bonusBall.getNumber()),
+                new WinningNumberResponse(winningNumber.getWinningNumbers()));
         sendResult(lottoGame, money.getNumber(), winningResult);
     }
 
@@ -63,13 +64,6 @@ public class LottoController {
             outputView.printErrorMessage(e.getMessage());
             return receiveBonusBall(lottoGame, winningNumber);
         }
-    }
-
-    private WinningResult receiveWinningResult(LottoGame lottoGame, LottoStorage lottoStorage, BonusBall bonusBall,
-                                               WinningNumber winningNumber) {
-        return lottoGame.calcLottoWithWinningNumber(lottoStorage,
-                new BonusBallResponse(bonusBall.getNumber()),
-                new WinningNumberResponse(winningNumber.getWinningNumbers()));
     }
 
     private void sendResult(LottoGame lottoGame, String money, WinningResult winningResult) {

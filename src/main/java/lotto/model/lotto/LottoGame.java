@@ -23,7 +23,7 @@ public class LottoGame {
         return bonusBall;
     }
 
-    public WinningResult calcLottoWithWinningNumber(LottoStorage lottoStorage, BonusBallResponse bonusBallResponse,
+    public WinningResult calcWinningNumber(LottoStorage lottoStorage, BonusBallResponse bonusBallResponse,
                                                     WinningNumberResponse WinningNumberResponse) {
         return lottoStorage.calcWinningNumber(bonusBallResponse, WinningNumberResponse);
     }
