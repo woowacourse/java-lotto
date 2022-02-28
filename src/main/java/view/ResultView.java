@@ -70,7 +70,5 @@ public class ResultView {
         }
         return MESSAGE_FOR_PROFIT;
     }
-
-
 }
 
