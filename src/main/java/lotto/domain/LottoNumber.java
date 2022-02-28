@@ -45,7 +45,8 @@ public enum LottoNumber {
     }
 
     private static List<LottoNumber> getLottoNumbers() {
-        return Arrays.stream(LottoNumber.values()).collect(Collectors.toList());
+        return Arrays.stream(LottoNumber.values())
+                .collect(Collectors.toList());
     }
 
     public static LottoNumber getByString(String input) {
@@ -61,7 +62,9 @@ public enum LottoNumber {
     }
 
     private static boolean isNaturalNumber(String input) {
-        return Pattern.compile(REGEX_FOR_NATURAL_NUMBER).matcher(input).find();
+        return Pattern.compile(REGEX_FOR_NATURAL_NUMBER)
+                .matcher(input)
+                .find();
     }
 
     private static void checkRange(String input) {
