@@ -1,15 +1,13 @@
 package lotto.controller;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;
-import lotto.model.Rank;
+import lotto.model.Money;
 import lotto.model.WinningLotto;
-import lotto.util.InputValidator;
 import lotto.util.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -17,26 +15,22 @@ import lotto.view.ResultView;
 public class LottoController {
 
     public void run() {
-        int amount = inputAmount();
-        Lottos lottos = createLottos(calculateLottoCount(amount));
+        Money money = inputMoney();
+        Lottos lottos = createLottos(money.purchase(Lotto.LOTTO_PRICE));
         ResultView.printResult(lottos);
 
         WinningLotto winningLotto = createWinningLotto();
 
-        ResultView.printTotalResult(lottos.checkRank(winningLotto), amount);
+        ResultView.printTotalResult(lottos.checkRank(winningLotto));
     }
 
-    private int inputAmount() {
+    private Money inputMoney() {
         try {
-            return InputValidator.validatePurchaseAmount(InputView.inputPurchaseAmount());
+            return new Money(InputView.inputPurchaseAmount());
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return inputAmount();
+            return inputMoney();
         }
-    }
-
-    private int calculateLottoCount(int amount) {
-        return amount / Lotto.LOTTO_PRICE;
     }
 
     private Lottos createLottos(int lottoCount) {

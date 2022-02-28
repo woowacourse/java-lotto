@@ -33,11 +33,11 @@ public class ResultView {
         System.out.println(lotto.getNumbers());
     }
 
-    public static void printTotalResult(LottoStatistics statistics, int amount) {
+    public static void printTotalResult(LottoStatistics statistics) {
         System.out.println('\n' + STATISTICS_MESSAGE);
         statistics.getRankMap()
             .forEach((rank, count) -> System.out.print(printRank(rank, count)));
-        printRevenue(statistics, amount);
+        printRevenue(statistics);
     }
 
     private static String printRank(Rank rank, int count) {
@@ -57,7 +57,7 @@ public class ResultView {
         return BONUS_BALL_NOT_CORRESPOND_MESSAGE;
     }
 
-    private static void printRevenue(LottoStatistics statistics, int amount) {
-        System.out.printf(REVENUE_FORMAT_MESSAGE, statistics.findRevenue(amount));
+    private static void printRevenue(LottoStatistics statistics) {
+        System.out.printf(REVENUE_FORMAT_MESSAGE, statistics.findRevenue());
     }
 }

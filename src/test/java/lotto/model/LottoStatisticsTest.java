@@ -27,8 +27,7 @@ class LottoStatisticsTest {
         Lottos lottos = new Lottos(lottoList);
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         LottoStatistics statistics = lottos.checkRank(winningLotto);
-        int amount = 3000;
 
-        assertThat(statistics.findRevenue(amount)).isEqualTo((double)105_000 / 3_000);
+        assertThat(statistics.findRevenue()).isEqualTo((double)105_000 / 3_000);
     }
 }
