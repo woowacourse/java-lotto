@@ -31,4 +31,10 @@ public class Lotto {
         return numbers.stream()
                 .anyMatch(number -> number.contain(bonusNumber));
     }
+
+    public List<Integer> getLottoNumbers() {
+        return numbers.stream()
+                .map(Number::getNumber)
+                .collect(Collectors.toList());
+    }
 }

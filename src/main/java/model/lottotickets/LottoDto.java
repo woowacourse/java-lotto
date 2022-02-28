@@ -2,10 +2,10 @@ package model.lottotickets;
 
 import java.util.List;
 
-public class LottoTicketDto {
+public class LottoDto {
     private final List<Integer> lottoNumbers;
 
-    public LottoTicketDto(final List<Integer> lottoNumbers) {
+    public LottoDto(final List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 

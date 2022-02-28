@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 
 import model.lottonumbergenerator.Generator;
 import model.lottotickets.Lotto;
+import model.lottotickets.LottoDto;
 import model.winning.Rank;
 import model.winning.Statistics;
 
@@ -34,7 +35,9 @@ public class Lottos {
         return new Statistics(result);
     }
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+    public List<LottoDto> getLottosInformation() {
+        return lottos.stream()
+                .map(lotto -> new LottoDto(lotto.getLottoNumbers()))
+                .collect(Collectors.toList());
     }
 }

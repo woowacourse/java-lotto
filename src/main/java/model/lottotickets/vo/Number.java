@@ -30,4 +30,8 @@ public class Number {
     public boolean contain(final int otherNumber) {
         return number == otherNumber;
     }
+
+    public int getNumber() {
+        return number;
+    }
 }
