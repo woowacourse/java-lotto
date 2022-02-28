@@ -19,7 +19,7 @@ class InputViewTest {
     private final InputView inputView = APP_CONFIG.inputView;
     private final CustomReader customReader = APP_CONFIG.reader;
 
-    @DisplayName("구입 금액은 숫자여야 합니다.")
+    @DisplayName("구입 금액으로 숫자 이외의 값은 입력할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 입력 : \"{0}\"")
     @ValueSource(strings = {"100a", "1 1 1", ""})
     void moneyNotNumericExceptionTest(final String inputText) {
@@ -29,7 +29,7 @@ class InputViewTest {
                 .hasMessageContaining(MoneyExceptionStatus.MONEY_MUST_BE_NUMERIC.getMessage());
     }
 
-    @DisplayName("당첨 번호는 숫자여야 합니다.")
+    @DisplayName("당첨 번호를 구성하는 볼 번호로, 숫자 이외의 값은 입력할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 입력 : \"{0}\"")
     @ValueSource(strings = {"1,1,1,1 1", "1,,,,", "1,a,1,a,1", ""})
     void winningNumbersNotNumericExceptionTest(final String inputText) {
@@ -39,7 +39,7 @@ class InputViewTest {
                 .hasMessageContaining(BallNumberExceptionStatus.BALL_MUST_BE_NUMERIC.getMessage());
     }
 
-    @DisplayName("보너스 볼은 숫자여야 합니다.")
+    @DisplayName("보너스 볼 번호로, 숫자 이외의 값은 입력할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 입력 : \"{0}\"")
     @ValueSource(strings = {"100a", "1 1 1", ""})
     void bonusNumberNotNumericExceptionTest(final String inputText) {
