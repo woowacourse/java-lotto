@@ -21,13 +21,13 @@ public class LottoGame {
 
     public LottoStorage makeLottos(String input) {
         LottoCount lottoCount = new LottoCount(input);
-        storeMoneyInRateOfReturn(lottoCount);
+        storeMoneyInRateOfReturn(input);
         lottoStorage = new LottoStorage(lottoCount);
         return lottoStorage;
     }
 
-    private void storeMoneyInRateOfReturn(LottoCount lottoCount) {
-        rateOfReturn = new RateOfReturn(lottoCount);
+    private void storeMoneyInRateOfReturn(String money) {
+        rateOfReturn = new RateOfReturn(money);
     }
 
     public void storeWinningNumber(List<String> input) {

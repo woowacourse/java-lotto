@@ -1,13 +1,9 @@
 package lotto.model.result;
 
-import lotto.model.result.Rank;
-import lotto.model.result.RateOfReturn;
-import lotto.model.result.WinningResult;
 import org.junit.jupiter.api.DisplayName;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import lotto.model.lotto.LottoCount;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -17,7 +13,7 @@ class RateOfReturnTest {
     @ValueSource(ints = {10000, 14000, 50000})
     @DisplayName("수익률 검증")
     void checkProfit(int money) {
-        RateOfReturn rateOfReturn = new RateOfReturn(new LottoCount(Integer.toString(money)));
+        RateOfReturn rateOfReturn = new RateOfReturn(Integer.toString(money));
 
         WinningResult winningResult = new WinningResult();
         winningResult.addCount(Rank.FOUR);

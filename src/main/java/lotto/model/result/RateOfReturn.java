@@ -1,13 +1,11 @@
 package lotto.model.result;
 
-import lotto.model.lotto.LottoCount;
-
 public class RateOfReturn {
     private final Money money;
     private final Profit profit;
 
-    public RateOfReturn(LottoCount lottoCount) {
-        this.money = new Money(lottoCount.getCount());
+    public RateOfReturn(String money) {
+        this.money = new Money(Integer.parseInt(money));
         this.profit = new Profit();
     }
 

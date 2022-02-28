@@ -17,10 +17,10 @@ public class LottoCount {
         InputValidateUtils.inputBlank(money, LottoCountExceptionMessage.BLANK_ERROR.getMassage());
         InputValidateUtils.inputNumber(money, LottoCountExceptionMessage.NUMBER_ERROR.getMassage());
         validateInputZero(money);
-        this.count = makeMoneyToNumber(money);
+        this.count = makeLottoCount(money);
     }
 
-    private int makeMoneyToNumber(String money) {
+    private int makeLottoCount(String money) {
         validateThousandUnitInputMoney(money);
         return Integer.parseInt(money) / UNIT;
     }
