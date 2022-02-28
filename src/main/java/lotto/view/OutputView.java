@@ -21,6 +21,7 @@ public class OutputView {
     private static final String PROFIT_SUFFIX = "(와!! 돈복사 버그!!!)%n";
     private static final String SAME_SUFFIX = "(본전... 이득도 손해도 아님)%n";
     private static final String RATE_OF_PROFIT_MESSAGE_PREFIX = "총 수익률은 %.3f입니다.";
+    private static final String MANUAL_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
     private OutputView() {
     }
@@ -86,5 +87,9 @@ public class OutputView {
         }
 
         System.out.printf(RATE_OF_PROFIT_MESSAGE_PREFIX + suffix, rateOfProfit);
+    }
+
+    public static void printManualNumbersMessage() {
+        System.out.println(MANUAL_NUMBERS_MESSAGE);
     }
 }

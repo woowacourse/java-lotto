@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Scanner;
 import lotto.utils.StringUtil;
 
@@ -32,5 +33,9 @@ public class InputView {
     public static int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
         return StringUtil.toInt(scanner.nextLine());
+    }
+
+    public static List<Integer> inputNumbers() {
+        return StringUtil.toIntegers(scanner.nextLine());
     }
 }
