@@ -22,6 +22,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public Lottos(Money money, List<Lotto> lottos) {
+        final int quantityOfAuto = money.getQuantityOfAuto(lottos.size());
+        IntStream.range(0, quantityOfAuto)
+                .mapToObj(i -> Lotto.createByAuto())
+                .forEach(lottos::add);
+        this.lottos = lottos;
+    }
+
     public Result getResult(WinningNumbers winningNumbers) {
         Result result = new Result();
 
