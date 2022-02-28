@@ -1,9 +1,6 @@
-import domain.Lotto;
 import domain.LottoGame;
-import domain.LottoGenerator;
 import domain.Money;
 import domain.RandomLottoGenerator;
-import domain.WinningChecker;
 import domain.WinningNumbers;
 import view.InputView;
 import view.OutputView;
