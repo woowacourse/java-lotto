@@ -8,10 +8,9 @@ import lotto.domain.Result;
 
 public class Lottos {
 
-    private final List<Lotto> lottos;
+    private final List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(Money money) {
-        this.lottos = new ArrayList<>();
         int amount = money.getValue();
         while (amount >= Lotto.PRICE) {
             lottos.add(Lotto.auto());
@@ -19,14 +18,12 @@ public class Lottos {
         }
     }
 
+    public Lottos(Lotto lotto) {
+        lottos.add(lotto);
+    }
+
     public Result getResult(WinningLotto winningNumbers) {
-        Result result = new Result();
-
-        for (Lotto lotto : lottos) {
-            result.add(winningNumbers.getLottoRanking(lotto));
-        }
-
-        return result;
+        return new Result(this, winningNumbers);
     }
 
     public int getCount() {
