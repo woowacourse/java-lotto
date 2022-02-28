@@ -2,10 +2,8 @@ package view;
 
 import domain.Lotto;
 import domain.LottoNumber;
-import domain.Lottos;
 import domain.Payment;
 import domain.WinningLotto;
-import service.LottoMachine;
 
 public class InputConvertor {
 
@@ -19,10 +17,6 @@ public class InputConvertor {
 			OutputView.printErrorMessage(e.getMessage());
 			return createPayment();
 		}
-	}
-
-	public static Lottos createLottos(int lottoCount) {
-		return LottoMachine.createLottos(lottoCount);
 	}
 
 	public static WinningLotto createWinningLotto() {
