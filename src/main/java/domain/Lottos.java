@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -23,12 +24,10 @@ public class Lottos {
     }
 
     public Statistic getWinningStatistics(WinningLotto winningNumber) {
-        Statistic statistic = Statistic.initStatistic();
-        lottos.forEach(lotto -> {
-            Rank rank = lotto.match(winningNumber);
-            statistic.add(rank);
-        });
-        return statistic;
+        List<Rank> ranks = lottos.stream()
+                .map(winningNumber::match)
+                .collect(Collectors.toList());
+        return Statistic.valueOf(ranks);
     }
 
     public List<Lotto> getLottos() {

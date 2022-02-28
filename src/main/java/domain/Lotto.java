@@ -4,8 +4,6 @@ import java.util.*;
 
 public class Lotto {
     private static final String LOTTO_SIZE_MESSAGE = "[ERROR] 로또의 숫자는 중복 없이 6개여야 합니다.";
-    private static final int LOTTO_START = 0;
-    private static final int LOTTO_END = 6;
     private static final int LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> numbers;
@@ -30,15 +28,9 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public Rank match(WinningLotto winningNumber) {
-        int matchCount = getMatchCount(winningNumber);
-        boolean hasBonusBall = winningNumber.isBonusBallMatch(this);
-        return Rank.valueOf(matchCount, hasBonusBall);
-    }
-
-    private int getMatchCount(WinningLotto winningNumber) {
+    public int getMatchCount(Lotto lotto) {
         return (int) numbers.stream()
-                .filter(winningNumber::contains)
+                .filter(lotto::contains)
                 .count();
     }
 

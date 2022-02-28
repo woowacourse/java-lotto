@@ -25,7 +25,7 @@ public class LottoTest {
     @DisplayName("6개 일치 -> 1등 당첨 테스트")
     public void checkFirstWinTest() {
         Lotto allMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 6));
-        Rank rank = allMatchLotto.match(winningLotto);
+        Rank rank = winningLotto.match(allMatchLotto);
 
         assertThat(rank).isEqualTo(Rank.FIRST);
     }
@@ -34,7 +34,7 @@ public class LottoTest {
     @DisplayName("5개 일치, 보너스 볼 일치 -> 2등 당첨 테스트")
     public void checkBonusBallMatchSecondWinTest() {
         Lotto fiveMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 7));
-        Rank rank = fiveMatchLotto.match(winningLotto);
+        Rank rank = winningLotto.match(fiveMatchLotto);
 
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
@@ -43,7 +43,7 @@ public class LottoTest {
     @DisplayName("5개일치, 보너스 볼 불일치 -> 3등 당첨 테스트")
     void checkThirdWinTest() {
         Lotto fiveMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 44));
-        Rank rank = fiveMatchLotto.match(winningLotto);
+        Rank rank = winningLotto.match(fiveMatchLotto);
 
         assertThat(rank).isEqualTo(Rank.THIRD);
     }
@@ -52,7 +52,7 @@ public class LottoTest {
     @DisplayName("4개 일치 -> 4등 당첨 테스트")
     void checkFourthWinTest() {
         Lotto fourMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 43, 44));
-        Rank rank = fourMatchLotto.match(winningLotto);
+        Rank rank = winningLotto.match(fourMatchLotto);
 
         assertThat(rank).isEqualTo(Rank.FOURTH);
     }
@@ -61,7 +61,7 @@ public class LottoTest {
     @DisplayName("3개 일치 -> 5등 당첨 테스트")
     void checkFifthWinTest() {
         Lotto threeMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 42, 43, 44));
-        Rank rank = threeMatchLotto.match(winningLotto);
+        Rank rank = winningLotto.match(threeMatchLotto);
 
         assertThat(rank).isEqualTo(Rank.FIFTH);
     }
@@ -70,7 +70,7 @@ public class LottoTest {
     @DisplayName("꽝 테스트")
     void checkNoWinTest() {
         Lotto noMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 41, 42, 43, 44));
-        Rank rank = noMatchLotto.match(winningLotto);
+        Rank rank = winningLotto.match(noMatchLotto);
 
         assertThat(rank).isEqualTo(Rank.SIXTH);
     }

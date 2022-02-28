@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,8 +30,7 @@ public class StatisticTest {
     @DisplayName("해당 순위가 당첨되었을 때 통계에 들어갔는지 테스트")
     public void addTest() {
 
-        Statistic statistic = Statistic.initStatistic();
-        statistic.add(Rank.FIFTH);
+        Statistic statistic = Statistic.valueOf(List.of(Rank.FIFTH));
 
         assertThat(statistic.getStatistics().get(Rank.FIFTH)).isEqualTo(1);
     }
