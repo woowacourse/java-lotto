@@ -3,17 +3,13 @@ package lotto.model.lotto;
 import java.util.List;
 
 import lotto.model.bonusball.BonusBallResponse;
-import lotto.model.result.Rank;
 import lotto.model.result.RateOfReturn;
 import lotto.model.bonusball.BonusBall;
 import lotto.model.result.WinningResult;
 import lotto.model.winningnumber.LottoWinningNumber;
 import lotto.model.winningnumber.LottoWinningNumberResponse;
-import lotto.view.OutputView;
 
 public class LottoGame {
-    private final OutputView outputView = new OutputView();
-
     private LottoStorage lottoStorage;
     private RateOfReturn rateOfReturn;
     private LottoWinningNumber lottoWinningNumber;
@@ -44,12 +40,7 @@ public class LottoGame {
                 new LottoWinningNumberResponse(lottoWinningNumber.getWinningNumbers()));
     }
 
-    public double sendResult(WinningResult winningResult) {
-        for (Rank rank : winningResult.getWinningCount().keySet()) {
-            outputView.printResult(rank.getMatchNumber(), rank.getValue(),
-                    winningResult.getWinningCount().get(rank), Rank.BONUS.getValue());
-        }
-
+    public double sendRateOfReturn(WinningResult winningResult) {
         return rateOfReturn.calcRateOfReturn(winningResult);
     }
 }

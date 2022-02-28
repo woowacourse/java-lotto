@@ -1,9 +1,9 @@
 package lotto.model.result;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Set;
 
 public class WinningResult {
     private static final int INIT_COUNT = 0;
@@ -21,6 +21,6 @@ public class WinningResult {
     }
 
     public Map<Rank, Integer> getWinningCount() {
-        return this.winningCount;
+        return Collections.unmodifiableMap(this.winningCount);
     }
 }

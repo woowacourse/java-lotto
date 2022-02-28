@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.List;
+import java.util.Set;
 
 import lotto.model.lotto.LottoResponse;
 
@@ -18,9 +19,12 @@ public class OutputView {
         printMessage(message);
     }
 
-    public void printLottos(List<LottoResponse> lottoStorage) {
-        printMessage(lottoStorage.size() + PURCHASE_MESSAGE);
-        lottoStorage.forEach(lottoResponse -> System.out.println(lottoResponse.getNumbers()));
+    public void printLottosSize(int size) {
+        printMessage(size + PURCHASE_MESSAGE);
+    }
+
+    public void printLottos(Set<Integer> numbers) {
+        System.out.println(numbers);
     }
 
     public void printResultMessage() {
@@ -29,7 +33,7 @@ public class OutputView {
         printMessage(LINE);
     }
 
-    public void printResult(int matchNumber, int value, int count, int bonusMoney) {
+    public void printWinningResult(int matchNumber, int value, int count, int bonusMoney) {
         if (value == bonusMoney) {
             System.out.printf(RESULT_LOTTO_BONUS_BALL, matchNumber, value, count);
             return;
