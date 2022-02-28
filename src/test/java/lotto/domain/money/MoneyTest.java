@@ -30,7 +30,7 @@ class MoneyTest {
                 .hasMessageContaining(MoneyExceptionStatus.MONEY_MUST_BE_DIVISIBLE.getMessage());
     }
 
-    @DisplayName("구입 금액 생성자 기능 테스트")
+    @DisplayName("금액 객체는 생성 당시 주어진 값을 지니고 있어야 합니다.")
     @ParameterizedTest(name = "[{index}] 구입 금액 : {0}")
     @ValueSource(ints = {1000, 12000, 1300000})
     void initTest(final int expectedMoney) {
