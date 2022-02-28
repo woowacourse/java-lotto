@@ -10,37 +10,32 @@ import lotto.model.winningnumber.LottoWinningNumber;
 import lotto.model.winningnumber.LottoWinningNumberResponse;
 
 public class LottoGame {
-    private LottoStorage lottoStorage;
-    private RateOfReturn rateOfReturn;
-    private LottoWinningNumber lottoWinningNumber;
-    private BonusBall bonusBall;
 
     public LottoStorage makeLottos(String input) {
         LottoCount lottoCount = new LottoCount(input);
-        storeMoneyInRateOfReturn(input);
-        lottoStorage = new LottoStorage(lottoCount);
-        return lottoStorage;
+        return new LottoStorage(lottoCount);
     }
 
-    private void storeMoneyInRateOfReturn(String money) {
-        rateOfReturn = new RateOfReturn(money);
+    public RateOfReturn storeMoneyInRateOfReturn(String money) {
+        return new RateOfReturn(money);
     }
 
-    public void storeWinningNumber(List<String> input) {
-        lottoWinningNumber = new LottoWinningNumber(input);
+    public LottoWinningNumber storeWinningNumber(List<String> input) {
+        return new LottoWinningNumber(input);
     }
 
-    public void storeBonusBall(String input) {
-        bonusBall = new BonusBall(input);
+    public BonusBall storeBonusBall(LottoWinningNumber lottoWinningNumber, String input) {
+        BonusBall bonusBall = new BonusBall(input);
         lottoWinningNumber.validateReduplicationWithBonusBall(input);
+        return bonusBall;
     }
 
-    public WinningResult calcLottoWithWinningNumber() {
-        return lottoStorage.calcWinningNumber(new BonusBallResponse(bonusBall.getNumber()),
-                new LottoWinningNumberResponse(lottoWinningNumber.getWinningNumbers()));
+    public WinningResult calcLottoWithWinningNumber(LottoStorage lottoStorage, BonusBallResponse bonusBallResponse,
+                                                    LottoWinningNumberResponse lottoWinningNumberResponse) {
+        return lottoStorage.calcWinningNumber(bonusBallResponse, lottoWinningNumberResponse);
     }
 
-    public double sendRateOfReturn(WinningResult winningResult) {
+    public double sendRateOfReturn(RateOfReturn rateOfReturn, WinningResult winningResult) {
         return rateOfReturn.calcRateOfReturn(winningResult);
     }
 }
