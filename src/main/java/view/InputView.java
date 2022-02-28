@@ -1,16 +1,10 @@
 package view;
 
-import domain.LottoNumber;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static constant.LottoConstant.MAXIMUM_LOTTO_NUMBER;
-import static constant.LottoConstant.MINIMUM_LOTTO_NUMBER;
 
 public class InputView {
 
