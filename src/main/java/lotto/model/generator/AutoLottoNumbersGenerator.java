@@ -14,13 +14,17 @@ public class AutoLottoNumbersGenerator implements LottoGenerator {
     private static List<Integer> numberCollection;
 
     public LottoNumbers generateLottoNumbers(int minimumNumber, int maximumNumber, int lottoLength) throws RuntimeException {
-        numberCollection = IntStream.rangeClosed(minimumNumber, maximumNumber)
-                .boxed()
-                .collect(Collectors.toList());
+        numberCollection = makeNumberCollection(minimumNumber, maximumNumber);
         Collections.shuffle(numberCollection);
         return new LottoNumbers(numberCollection.subList(LOTTO_START_INDEX, lottoLength).stream()
                 .sorted()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
+    }
+
+    private List<Integer> makeNumberCollection(int minimumNumber, int maximumNumber) {
+        return  IntStream.rangeClosed(minimumNumber, maximumNumber)
+                .boxed()
+                .collect(Collectors.toList());
     }
 }

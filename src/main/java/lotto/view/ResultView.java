@@ -21,29 +21,29 @@ public class ResultView {
     private static final String START_REVENUE_MESSAGE = "총 수익률은 ";
     private static final String END_REVENUE_MESSAGE = "입니다.";
 
-    public static void printBuyingLottosResult(Lottos lottos) {
+    public static void printBuyingLottosResult(final Lottos lottos) {
         printLottoCount(lottos);
         printBuyingLottos(lottos);
     }
 
-    private static void printLottoCount(Lottos lottos) {
+    private static void printLottoCount(final Lottos lottos) {
         System.out.println(lottos.getLottoCount() + BUY_COUNT_MESSAGE);
     }
 
-    private static void printBuyingLottos(Lottos lottos) {
+    private static void printBuyingLottos(final Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             printBuyingLotto(lotto);
         }
     }
 
-    private static void printBuyingLotto(Lotto lotto) {
+    private static void printBuyingLotto(final Lotto lotto) {
         System.out.println(lotto.getLottoNumbers().getLottoNumbers().stream()
                 .mapToInt(LottoNumber::getLottoNumber)
                 .boxed()
                 .collect(Collectors.toList()));
     }
 
-    public static void printTotalRankResult(Map<Rank, Integer> rankCount) {
+    public static void printTotalRankResult(final Map<Rank, Integer> rankCount) {
         System.out.println();
         System.out.println(STATISTICS_MESSAGE);
         Set<Rank> keySet = rankCount.keySet();
@@ -52,7 +52,7 @@ public class ResultView {
         }
     }
 
-    private static void printRank(Rank rank, Integer integer) {
+    private static void printRank(final Rank rank, final Integer integer) {
         StringBuilder message = new StringBuilder();
         if (!rank.equals(Rank.LOSER)) {
             message.append(rank.getCount()).append(COUNT_CORRESPOND_MESSAGE);
@@ -63,14 +63,14 @@ public class ResultView {
         System.out.print(message);
     }
 
-    private static String printBonusNumber(Rank rank) {
+    private static String printBonusNumber(final Rank rank) {
         if (rank.isWinBonusNumber()) {
             return BONUS_BALL_CORRESPOND_MESSAGE;
         }
         return BONUS_BALL_NOT_CORRESPOND_MESSAGE;
     }
 
-    public static void printRevenue(Lottos lottos) {
+    public static void printRevenue(final Lottos lottos) {
         System.out.println(START_REVENUE_MESSAGE + lottos.getRevenue() + END_REVENUE_MESSAGE);
     }
 }

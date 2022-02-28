@@ -14,7 +14,7 @@ public enum Rank {
     private final boolean winBonusNumber;
     private final int price;
 
-    Rank(int count, boolean winBonusNumber, int price) {
+    Rank(final int count, final boolean winBonusNumber, final int price) {
         this.count = count;
         this.winBonusNumber = winBonusNumber;
         this.price = price;
@@ -32,7 +32,7 @@ public enum Rank {
         return price;
     }
 
-    public static Rank getRank(int count, boolean winBonusNumber) {
+    public static Rank getRank(final int count, final boolean winBonusNumber) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.count == count)
                 .filter(rank -> rank.winBonusNumber == winBonusNumber)

@@ -12,13 +12,13 @@ public class WinningLotto {
     private final LottoNumbers winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(LottoNumbers winningNumbers, LottoNumber bonusNumber) throws RuntimeException {
+    public WinningLotto(final LottoNumbers winningNumbers, final LottoNumber bonusNumber) throws RuntimeException {
         this.winningNumbers = winningNumbers;
         checkDuplicateNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    public void checkDuplicateNumber(LottoNumber number) throws RuntimeException {
+    public void checkDuplicateNumber(final LottoNumber number) throws RuntimeException {
         if ((winningNumbers.getLottoNumbers().stream()
                 .mapToInt(LottoNumber::getLottoNumber)
                 .boxed()
@@ -28,7 +28,7 @@ public class WinningLotto {
         }
     }
 
-    public Map<Rank, Integer> checkRank(Lottos lottos) {
+    public Map<Rank, Integer> checkRank(final Lottos lottos) {
         return lottos.calculateRanks(winningNumbers, bonusNumber);
     }
 }

@@ -8,16 +8,16 @@ public class LottoNumber {
     private static final int LOTTO_NUMBER_MINIMUM_RANGE = 1;
     private static final int LOTTO_NUMBER_MAXIMUM_RANGE = 45;
 
-    protected int number;
+    private final int number;
 
-    public LottoNumber(int number) throws RuntimeException {
-        validateRange(number, NUMBER_RANGE_ERROR_MESSAGE);
+    public LottoNumber(final int number) throws RuntimeException {
+        validateRange(number);
         this.number = number;
     }
 
-    protected void validateRange(int number, String errorMessage) throws RuntimeException {
+    protected void validateRange(final int number) throws RuntimeException {
         if (number < LOTTO_NUMBER_MINIMUM_RANGE || number > LOTTO_NUMBER_MAXIMUM_RANGE) {
-            throw new RuntimeException(errorMessage);
+            throw new RuntimeException(NUMBER_RANGE_ERROR_MESSAGE);
         }
     }
 

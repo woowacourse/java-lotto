@@ -6,14 +6,14 @@ public class Money {
 
     private static final String PRICE_ERROR_MESSAGE = "[ERROR] 유효한 입력이 아닙니다.";
 
-    private int money;
+    private final int money;
 
-    public Money(int money) throws RuntimeException {
+    public Money(final int money) throws RuntimeException {
         validateMoney(money);
         this.money = money;
     }
 
-    private void validateMoney(int money) throws RuntimeException {
+    private void validateMoney(final int money) throws RuntimeException {
         if (money < 0) {
             throw new RuntimeException(PRICE_ERROR_MESSAGE);
         }

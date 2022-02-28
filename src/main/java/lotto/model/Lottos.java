@@ -16,19 +16,19 @@ public class Lottos {
     private final List<Lotto> lottos;
     private final Map<Rank, Integer> rankCount;
 
-    public Lottos(Money money) throws RuntimeException {
+    public Lottos(final Money money) throws RuntimeException {
         this.lottos = new ArrayList<>();
         insertLottoToLottos(money.getBuyingLottoCount());
         rankCount = initMap();
     }
 
-    private void insertLottoToLottos(int countLotto) throws RuntimeException {
+    private void insertLottoToLottos(final int countLotto) throws RuntimeException {
         for (int i = 0; i < countLotto; i++) {
             insert(new Lotto(new AutoLottoNumbersGenerator()));
         }
     }
 
-    public void insert(Lotto lotto) {
+    public void insert(final Lotto lotto) {
         lottos.add(lotto);
     }
 
@@ -38,14 +38,14 @@ public class Lottos {
         return map;
     }
 
-    public Map<Rank, Integer> calculateRanks(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+    public Map<Rank, Integer> calculateRanks(final LottoNumbers winningNumbers, final LottoNumber bonusNumber) {
         lottos.forEach(lotto -> lotto.calculateRank(winningNumbers, bonusNumber));
         countEachRank(winningNumbers, bonusNumber);
         Map<Rank, Integer> newRankCount = new LinkedHashMap<>(rankCount);
         return newRankCount;
     }
 
-    private void countEachRank(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+    private void countEachRank(final LottoNumbers winningNumbers, final LottoNumber bonusNumber) {
         lottos.forEach(lotto -> {
             Rank rank = lotto.calculateRank(winningNumbers, bonusNumber);
             rankCount.put(rank, rankCount.get(rank) + 1);
@@ -69,7 +69,7 @@ public class Lottos {
         return ((double) sum / (lottos.size() * PRICE_PER_LOTTO));
     }
 
-    public Integer getEachRankCount(Rank rank) {
+    public Integer getEachRankCount(final Rank rank) {
         return rankCount.get(rank);
     }
 }
