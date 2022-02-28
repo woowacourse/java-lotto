@@ -52,6 +52,22 @@ public class ResultTest {
                 assertThat(result.getCount(WinningPrice.All)).isEqualTo(1);
             }
         }
+
+        @Nested
+        @DisplayName("같은 WinningPrice가 2개 주어지면")
+        class Context_with_tow_winning_price {
+
+            @Test
+            @DisplayName("해당 WinningPrice의 개수가 2 올라간다.")
+            void it_add_count() {
+                Result result = new Result();
+
+                result.add(WinningPrice.All);
+                result.add(WinningPrice.All);
+
+                assertThat(result.getCount(WinningPrice.All)).isEqualTo(2);
+            }
+        }
     }
 
     @Nested
