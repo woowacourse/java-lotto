@@ -23,8 +23,8 @@
 - [x] convertToInt() 메서드 중복 제거
   - convertToInt(String Input) -> convertToInt(String input, String errorMessage)
 - [x] `LottoMachine` : Controller이며 상태를 가지고 있음
-  - [ ] 객체 인스턴스를 여러 스레드에서 동시 사용할 경우 발생하는 문제점
-  - [ ] 인스턴스 변수들이 가변이기에 발생하는 문제점
+  - [x] 객체 인스턴스를 여러 스레드에서 동시 사용할 경우 발생하는 문제점
+  - [x] 인스턴스 변수들이 가변이기에 발생하는 문제점
 - [x] `InputView`, `Lotto`, `Statistics` 모두 로또의 범위가 `1 ~ 45`라는 것을 알고 있어야한다.
   - [x] `VO`에 대한 학습 필요 [링크](https://tecoble.techcourse.co.kr/post/2020-06-11-value-object/)
 - [x] `WinningNumber`에 존재하는 검증 로직이 `Lotto`에도 있어야함
@@ -144,7 +144,10 @@
    - LocalDateTime 
      - <b>정적 팩토리 메서드, of() 메서드 내부에서 객체 생성을 한다.</b>
      - `불변 객체`라는 특징을 가지고 있다.
-     
+9. 객체 내부에 가변 인스턴스 변수가 존재할 경우 `멀티 스레드` 환경에서 값/상태가 변경될 가능성이 있다.
+   - 가변객체 vs. 불변객체
+   - 멀티스레드
+     - 동일 메모리 영역을 공유하게되어 메모리 공유에 대한 문제가 있다.
 
 ### 2차 피드백 학습
 1. Integer Cache 
@@ -158,3 +161,4 @@
    - 정적 팩토리 메서드(1) : https://devlog-wjdrbs96.tistory.com/256
    - 정적 팩토리 메서드(2) : https://tecoble.techcourse.co.kr/post/2020-05-26-static-factory-method/
 2) forEach() vs. for-loop : https://homoefficio.github.io/2016/06/26/for-loop-%EB%A5%BC-Stream-forEach-%EB%A1%9C-%EB%B0%94%EA%BE%B8%EC%A7%80-%EB%A7%90%EC%95%84%EC%95%BC-%ED%95%A0-3%EA%B0%80%EC%A7%80-%EC%9D%B4%EC%9C%A0/
+3) 불변객체와 가변객체 : https://wlgusdn700.tistory.com/121
