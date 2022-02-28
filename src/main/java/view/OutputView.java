@@ -79,4 +79,8 @@ public class OutputView {
         }
         System.out.println();
     }
+
+    public static void printTicketCount(int manualTicketCount, int autoTicketCount) {
+        System.out.println("수동으로 " + manualTicketCount + "장, 자동으로 " + autoTicketCount + "개를 구매했습니다.");
+    }
 }

@@ -3,6 +3,7 @@ package domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Ticket {
@@ -27,11 +28,11 @@ public class Ticket {
         }
     }
 
-    public static Ticket from(String winNumbersInput) {
-        checkEmpty(winNumbersInput);
-        List<LottoNumber> winNumbers = toLottoNumber(toInteger(toList(winNumbersInput)));
-        checkDuplicateNumbers(winNumbers);
-        return new Ticket(new HashSet<>(winNumbers));
+    public static Ticket from(String numbersInput) {
+        checkEmpty(numbersInput);
+        List<LottoNumber> numbers = toLottoNumber(toInteger(toList(numbersInput)));
+        checkDuplicateNumbers(numbers);
+        return new Ticket(new TreeSet<>(numbers));
     }
 
     private static void checkEmpty(String winNumbers) {
