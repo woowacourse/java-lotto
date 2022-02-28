@@ -1,10 +1,8 @@
 import controller.LottoController;
-import service.LottoMachine;
 
 public class Application {
-	public static void main(String[] args) {
-		// TODO: 프로그램 구현
-		LottoController controller = new LottoController(LottoMachine.getInstance());
-		controller.run();
-	}
+    public static void main(String[] args) {
+        LottoController controller = new LottoController();
+        controller.run();
+    }
 }
