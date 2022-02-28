@@ -4,8 +4,9 @@ import constants.LottoConstants;
 import java.util.Objects;
 
 public class InputMoney {
-    public static final String ERROR_MESSAGE_FOR_MINIMUM_NUMBER = "1000 보다 작은 금액을 입력할 수 없습니다.";
-    public static final String ERROR_MESSAGE_FOR_MULTIPLE_OF_UNIT = "1000으로 나누어 떨어지지 않는 금액을 입력할 수 없습니다.";
+    private static final String ERROR_MESSAGE_FOR_MINIMUM_NUMBER = "1000 보다 작은 금액을 입력할 수 없습니다.";
+    private static final String ERROR_MESSAGE_FOR_MULTIPLE_OF_UNIT = "1000으로 나누어 떨어지지 않는 금액을 입력할 수 없습니다.";
+    
     private static final int MINIMUM_INPUT_MONEY = 1000;
     private static final int REMAIN = 0;
 

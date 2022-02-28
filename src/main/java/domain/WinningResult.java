@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WinningResult {
-    public static final double ROUND_UNIT = 100.0;
+    private static final double ROUND_UNIT = 100.0;
 
     private final Map<Rank, WinningCount> winningResult;
     private final LottoQuantity purchasedLottoQuantity;
@@ -18,7 +18,7 @@ public class WinningResult {
     public double calculateProfitRatio() {
         long totalPrice = calculateTotalPrize();
         double purchaseMoney = purchasedLottoQuantity.getLottoQuantity() * LottoConstants.SINGLE_LOTTO_PRICE;
-        
+
         return roundToSecondDigit(totalPrice / purchaseMoney);
     }
 

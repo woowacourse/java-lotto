@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    public static final int NO_MATCH_RANK_INDEX_IN_REVERSED_RANK_VALUES = 0;
-    public static final int PROFIT_CRITERIA = 1;
-    public static final String MESSAGE_FOR_LOSS = "손해";
-    public static final String MESSAGE_FOR_PROFIT = "이익";
+    private static final int NO_MATCH_RANK_INDEX_IN_REVERSED_RANK_VALUES = 0;
+    private static final int PROFIT_CRITERIA = 1;
+    private static final String MESSAGE_FOR_LOSS = "손해";
+    private static final String MESSAGE_FOR_PROFIT = "이익";
 
     public static void printResult(WinningResultDto winningResultDto) {
         printTitle();
