@@ -37,9 +37,8 @@ class WinLottoNumbersTest {
         "1, 2, 3, 4, 8, 7:4"}, delimiter = ':')
     void 로또_번호_일치_검사(String lottoNumbersText, int expected) {
         WinLottoNumbers winLottoNumbers = WinLottoNumbers.of(lottoNumbersText, 10);
-        LottoTicket lottoTicket = new LottoTicket(
-            Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
+
+        LottoTicket lottoTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
 
         int sameNumber = winLottoNumbers.countSameNumber(lottoTicket);
         assertThat(sameNumber).isEqualTo(expected);
@@ -47,9 +46,7 @@ class WinLottoNumbersTest {
 
     @Test
     void 로또_보너스_포함_될때_검사() {
-        LottoTicket lottoTicket = new LottoTicket(
-            Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(10)));
+        LottoTicket lottoTicket = LottoTicket.of("1, 2, 3, 4, 5, 10");
 
         assertThat(winLottoNumbers.isContainsBonus(lottoTicket))
             .isTrue();
@@ -57,9 +54,7 @@ class WinLottoNumbersTest {
 
     @Test
     void 로또_보너스_포함_안될때_검사() {
-        LottoTicket lottoTicket = new LottoTicket(
-            Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
+        LottoTicket lottoTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
 
         assertThat(winLottoNumbers.isContainsBonus(lottoTicket)).isFalse();
     }

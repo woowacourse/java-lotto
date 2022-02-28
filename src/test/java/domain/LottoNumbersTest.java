@@ -17,9 +17,13 @@ class LottoNumbersTest {
 
     @BeforeEach
     void 로또_번호_생성() {
-        lottoTicket = new LottoTicket(
-            Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
+        lottoTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
+    }
+
+    @Test
+    void 로또_자동_생성_확인() {
+        LottoTicket testLottoTicket = LottoTicket.ofAuto();
+        assertThat(testLottoTicket.get().size()).isEqualTo(6);
     }
 
     @Test

@@ -25,13 +25,8 @@ class OutputViewTest {
         System.setOut(new PrintStream(out));
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        lottoTickets.add(new LottoTicket(
-            Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6))));
-
-        lottoTickets.add(new LottoTicket(
-            Arrays.asList(LottoNumber.valueOf(7), LottoNumber.valueOf(8), LottoNumber.valueOf(9),
-                LottoNumber.valueOf(10), LottoNumber.valueOf(11), LottoNumber.valueOf(12))));
+        lottoTickets.add(LottoTicket.of("1, 2, 3, 4, 5, 6"));
+        lottoTickets.add(LottoTicket.of("7, 8, 9, 10, 11, 12"));
 
         OutputView.printLottoTickets(lottoTickets);
 

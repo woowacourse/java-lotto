@@ -31,8 +31,22 @@ public class InputView {
         }
     }
 
+    public static String inputManualLottoNumbers() {
+        System.out.println(LOTTO_MANUAL_INPUT_MESSAGE);
+        try {
+            return getLottoNumbers();
+        } catch (Exception e) {
+            OutputView.printError(e.getMessage());
+            return inputManualLottoNumbers();
+        }
+    }
+
     public static String inputWinLottoNumbers() {
         System.out.println(LOTTO_NUMBER_INPUT_MESSAGE);
+        return getLottoNumbers();
+    }
+
+    private static String getLottoNumbers() {
         String lottoNumbers = scanner.nextLine();
         validatePattern(lottoNumbers);
         return lottoNumbers;

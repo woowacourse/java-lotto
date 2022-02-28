@@ -7,7 +7,6 @@ import domain.Result;
 import domain.WinLottoNumbers;
 import java.util.ArrayList;
 import java.util.List;
-import utils.LottoNumberGenerator;
 import view.InputView;
 import view.OutputView;
 
@@ -15,10 +14,10 @@ public class MainController {
 
     public void run() {
         Money money = getMoney();
-        int count = InputView.inputLottoAmount();
-        System.out.println(count);
+        int manualCount = InputView.inputLottoAmount();
 
-        List<LottoTicket> lottoTickets = createLottoTickets(money.toLottoCount());
+        List<LottoTicket> lottoTickets = createLottoTickets(manualCount,
+            money.toLottoCount() - manualCount);
         OutputView.printLottoTickets(lottoTickets);
 
         WinLottoNumbers winLottoNumbers = getWinNumbers();
@@ -36,10 +35,13 @@ public class MainController {
         }
     }
 
-    private List<LottoTicket> createLottoTickets(int count) {
+    private List<LottoTicket> createLottoTickets(int manualCount, int autoCount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottoTickets.add(new LottoTicket(LottoNumberGenerator.generate()));
+        for (int i = 0; i < manualCount; i++) {
+            lottoTickets.add(LottoTicket.of(InputView.inputManualLottoNumbers()));
+        }
+        for (int i = 0; i < autoCount; i++) {
+            lottoTickets.add(LottoTicket.ofAuto());
         }
         return lottoTickets;
     }
