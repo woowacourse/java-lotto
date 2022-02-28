@@ -8,9 +8,6 @@ import static constant.LottoConstant.*;
 
 public class LottoTicketNumbers {
 
-    private static final String LOTTO_NUMBER_SIZE_NOT_VALID = "로또 번호는 6자리여야 합니다.";
-    private static final String LOTTO_NUMBER_DUPLICATE = "로또 번호는 중복되지 않아야 합니다.";
-
     private final List<LottoNumber> numbers;
 
     public LottoTicketNumbers(List<LottoNumber> lottoNumbers) {

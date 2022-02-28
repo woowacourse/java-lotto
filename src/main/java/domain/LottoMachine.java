@@ -1,24 +1,21 @@
 package domain;
 
+import static constant.LottoConstant.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static constant.LottoConstant.LOTTO_TICKET_PRICE;
-
 public class LottoMachine {
 
-    private static final String INVALID_INSERT_AMOUNT = "금액은 1000원 이상이어야 합니다.";
     private static final int DEFAULT_VALUE = 0;
     private static final int INCREASE_VALUE = 1;
 
     public List<LottoTicket> purchaseLottoTickets(Money amount, LottoNumberStrategy lottoNumberStrategy) {
         validateInsertAmount(amount);
-        int size = amount.getPurchasableNumber(LOTTO_TICKET_PRICE);
-
-        return IntStream.range(0, size)
+        return IntStream.range(DEFAULT_VALUE, amount.getPurchasableNumber(LOTTO_TICKET_PRICE))
                 .mapToObj(index -> new LottoTicket(lottoNumberStrategy.generate()))
                 .collect(Collectors.toList());
     }

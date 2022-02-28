@@ -5,14 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static constant.LottoConstant.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-
-    private static final String INVALID_LOTTO_NUMBER_RANGE = "번호는 1부터 45 사이여야 합니다.";
-    public static final String INVALID_BONUS_NUMBER = "보너스 번호는 당첨 번호와 중복될 수 없습니다.";
 
     private final int number;
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();;
