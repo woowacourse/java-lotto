@@ -14,14 +14,16 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public Lottos initLottos(Money money) {
-        final Lottos lottos = new Lottos(money);
+        final int quantityOfManual = inputQuantityOfManual(money);
+
+        List<Lotto> manualNumbers = new ArrayList<>();
+        if (quantityOfManual > 0) {
+            manualNumbers = inputManualNumbers(quantityOfManual);
+        }
+
+        final Lottos lottos = new Lottos(money, manualNumbers);
         OutputView.printInitResult(lottos);
         return lottos;
-    }
-
-    public void play(Lottos lottos, WinningNumbers winningNumbers, Money money) {
-        final Result result = lottos.getResult(winningNumbers);
-        OutputView.printPlayResult(result, money);
     }
 
     private int inputQuantityOfManual(Money money) {
@@ -63,5 +65,10 @@ public class LottoController {
             OutputView.printError(exception.getMessage());
             return Optional.empty();
         }
+    }
+
+    public void play(Lottos lottos, WinningNumbers winningNumbers, Money money) {
+        final Result result = lottos.getResult(winningNumbers);
+        OutputView.printPlayResult(result, money);
     }
 }
