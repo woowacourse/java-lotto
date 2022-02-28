@@ -3,17 +3,16 @@ package domain;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
+import domain.constant.LottoConstant;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final String ERROR_MESSAGE_NOT_IN_RANGE = "유효한 로또 번호가 아닙니다.";
 
-    public static final int MINIMUM_VALUE = 1;
-    public static final int MAXIMUM_VALUE = 45;
-
-    private static final LottoNumber[] LOTTO_NUMBERS = new LottoNumber[MAXIMUM_VALUE + 1];
+    private static final LottoNumber[] LOTTO_NUMBERS = new LottoNumber[LottoConstant.MAXIMUM_VALUE + 1];
 
     static {
-        IntStream.rangeClosed(MINIMUM_VALUE, MAXIMUM_VALUE)
+        IntStream.rangeClosed(LottoConstant.MINIMUM_VALUE, LottoConstant.MAXIMUM_VALUE)
             .forEach(number -> LOTTO_NUMBERS[number] = new LottoNumber(number));
     }
 
@@ -29,7 +28,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static void validateInRange(int value) {
-        if (value < MINIMUM_VALUE || value > MAXIMUM_VALUE) {
+        if (value < LottoConstant.MINIMUM_VALUE || value > LottoConstant.MAXIMUM_VALUE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NOT_IN_RANGE);
         }
     }
