@@ -14,13 +14,13 @@ public class LottoNumber {
         this.number = number;
     }
 
-    private void validateRangeLottoNumber(Integer number) {
+    private void validateRangeLottoNumber(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(ERROR_OUT_OF_RANGE_BONUS_NUMBER);
         }
     }
 
-    Integer getNumber() {
+    int getNumber() {
         return number;
     }
 

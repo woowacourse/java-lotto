@@ -1,5 +1,7 @@
 package lotto.view;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +10,7 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static Integer insertMoney() {
+    public static int insertMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         return scanner.nextInt();
     }
@@ -23,16 +25,16 @@ public class InputView {
     private static List<Integer> convertStringsToIntegers(List<String> strings) {
         return strings.stream()
             .map(Integer::parseInt)
-            .collect(Collectors.toList());
+            .collect(toUnmodifiableList());
     }
 
     private static List<String> splitAndTrim(String winningNumbers) {
         return Arrays.stream(winningNumbers.split(","))
             .map(String::trim)
-            .collect(Collectors.toList());
+            .collect(toUnmodifiableList());
     }
 
-    public static Integer inputBonusNumber() {
+    public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextInt();
     }
