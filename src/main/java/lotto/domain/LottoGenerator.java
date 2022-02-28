@@ -54,4 +54,12 @@ public class LottoGenerator {
                 .mapToObj(index -> new Lotto(RandomLottoMachine.createRandomLottoNumbers()))
                 .collect(Collectors.toList());
     }
+
+    public int getManualCount() {
+        return manualCount;
+    }
+
+    public int getAutoCount() {
+        return autoCount;
+    }
 }

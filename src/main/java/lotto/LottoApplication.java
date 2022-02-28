@@ -19,9 +19,8 @@ import lotto.view.OutputView;
 public class LottoApplication {
 
     public static void main(final String[] args) {
-        final Money money = payMoney();
-        final int buyCounts = money.calculateLottoCount();
-        OutputView.outputBuyLottoCounts(buyCounts);
+        final LottoGenerator lottoGenerator = createLottoGenerator(payMoney());
+        OutputView.outputBuyLottoCounts(lottoGenerator.getManualCount(), lottoGenerator.getAutoCount());
 
         final Lottos lottos = buyLottos(buyCounts);
         OutputView.outputLottos(lottos.getLottos());
