@@ -13,7 +13,7 @@ public class WinningLotto {
 	}
 
 	private void checkDuplicated(Lotto lotto, LottoNumber bonusNumber) {
-		if (lotto.isContain(bonusNumber)) {
+		if (lotto.contains(bonusNumber)) {
 			throw new IllegalArgumentException("보너스 숫자가 로또 번호에 포함되었습니다.");
 		}
 	}
@@ -23,6 +23,6 @@ public class WinningLotto {
 	}
 
 	private boolean hasBonus(Lotto targetLotto) {
-		return targetLotto.isContain(bonusNumber);
+		return targetLotto.contains(bonusNumber);
 	}
 }

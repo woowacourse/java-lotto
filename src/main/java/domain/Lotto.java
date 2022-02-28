@@ -1,9 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -28,13 +24,13 @@ public class Lotto {
 		return new Lotto(toLotto(lottoNumbers));
 	}
 
-	private static List<LottoNumber> toLotto(String[] lottoNumbers) {
-		List<LottoNumber> lotto = new ArrayList<>();
+	private static Set<LottoNumber> toLotto(String[] lottoNumbers) {
+		Set<LottoNumber> lotto = new TreeSet<>();
 		for (String number : lottoNumbers) {
 			int lottoNumber = Integer.parseInt(number.trim());
 			lotto.add(LottoNumber.of(lottoNumber));
 		}
-		return Collections.unmodifiableList(lotto);
+		return lotto;
 	}
 
 	private void checkLottoSize(List<LottoNumber> lottoNumbers) {
@@ -51,11 +47,11 @@ public class Lotto {
 
 	public int calculateMatchCount(Lotto targetLotto) {
 		return (int)lotto.stream()
-			.filter(lottoNumber -> targetLotto.isContain(lottoNumber))
+			.filter(lottoNumber -> targetLotto.contains(lottoNumber))
 			.count();
 	}
 
-	public boolean isContain(LottoNumber lottoNumber) {
+	public boolean contains(LottoNumber lottoNumber) {
 		return lotto.contains(lottoNumber);
 	}
 
