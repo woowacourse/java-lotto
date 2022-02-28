@@ -25,18 +25,29 @@ public enum Rank {
         if (isSecondRank(matchCount, matchBonusNumber)) {
             return Rank.SECOND;
         }
-        return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchCount == matchCount)
-                .findFirst()
-                .orElse(Rank.MISS);
+        if (isThirdRank(matchCount, matchBonusNumber)) {
+            return Rank.THIRD;
+        }
+        return getRank(matchCount);
+    }
+
+    public double calculateTotalReward(Integer count) {
+        return reward * count;
     }
 
     private static boolean isSecondRank(int matchCount, boolean matchBonusNumber) {
         return matchCount == Rank.THIRD.matchCount && matchBonusNumber;
     }
 
-    public double calculateTotalReward(Integer count) {
-        return reward * count;
+    private static boolean isThirdRank(int matchCount, boolean matchBonusNumber) {
+        return matchCount == Rank.THIRD.matchCount && !matchBonusNumber;
+    }
+
+    private static Rank getRank(int matchCount) {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.matchCount == matchCount)
+                .findFirst()
+                .orElse(Rank.MISS);
     }
 
     public int getMatchCount() {
