@@ -32,8 +32,8 @@ public class Money {
         }
     }
 
-    public boolean isPossibleToPurchase(int purchasePrice) {
-        return money >= purchasePrice;
+    public boolean isPossibleToPurchase(int purchaseCount) {
+        return money >= LOTTO_PRICE * purchaseCount;
     }
 
     @Override
