@@ -2,6 +2,7 @@ package domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import dto.LottoDto;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,8 +23,8 @@ class LottoServiceTest {
     @Test
     void issueLotto_count_correct() {
         lottoService.issueLotto();
-        final List<Lotto> lottoTickets = lottoService.issueLotto();
+        final List<LottoDto> lottoDto = lottoService.issueLotto();
 
-        assertThat(lottoTickets.size()).isEqualTo(100000);
+        assertThat(lottoDto.size()).isEqualTo(100000);
     }
 }

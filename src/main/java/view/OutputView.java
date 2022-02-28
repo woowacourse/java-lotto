@@ -1,7 +1,7 @@
 package view;
 
-import domain.Lotto;
 import domain.RankPrice;
+import dto.LottoDto;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.SortedMap;
@@ -23,10 +23,10 @@ public class OutputView {
         System.out.println(INPUT_MONEY_INSTRUCTION);
     }
 
-    public static void printLotto(final List<Lotto> issuedLotto) {
+    public static void printLotto(final List<LottoDto> issuedLotto) {
         System.out.println(issuedLotto.size() + PURCHASE_MESSAGE);
-        for (Lotto lotto : issuedLotto) {
-            System.out.println(lotto.toDto());
+        for (LottoDto lotto : issuedLotto) {
+            System.out.println(lotto.get());
         }
     }
 
@@ -68,6 +68,6 @@ public class OutputView {
         if (calculateProfit >= 1) {
             profitResultMessage = "이익";
         }
-        System.out.println(String.format(WIN_PROFIT_RESULT_MESSAGE, calculateProfit, profitResultMessage));
+        System.out.printf((WIN_PROFIT_RESULT_MESSAGE) + "%n", calculateProfit, profitResultMessage);
     }
 }
