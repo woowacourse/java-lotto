@@ -16,8 +16,8 @@ import lotto.domain.rank.Rank;
 
 class AnalysisDtoTest {
 
-    @DisplayName("통계 생성, 당첨 등수별 개수 확인")
-    @ParameterizedTest(name = "[{index}] {1}원 : {0}")
+    @DisplayName("당첨 통계의 당첨 등수 개수는 기댓값과 일치해야 한다.")
+    @ParameterizedTest(name = "[{index}] 당첨 등수 개수 : {2}")
     @MethodSource("provideForCalculateTest")
     void calculateRankCountsTest(final List<Rank> ranks,
                                  final int money,
@@ -27,8 +27,8 @@ class AnalysisDtoTest {
         assertThat(analysis.getRankCounts()).isEqualTo(rankCounts);
     }
 
-    @DisplayName("통계 생성, 수익률 계산 결과 확인")
-    @ParameterizedTest(name = "[{index}] {1}원 : {0}")
+    @DisplayName("당첨 통계의 수익률은 기댓값과 일치해야 한다.")
+    @ParameterizedTest(name = "[{index}] 수익률 : {3}")
     @MethodSource("provideForCalculateTest")
     void calculateProfitRateTest(final List<Rank> ranks,
                                  final int money,
