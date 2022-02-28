@@ -10,6 +10,10 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     public Lottos(int lottoCount, LottoGeneratorStrategy lottoGeneratorStrategy) {
         lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
