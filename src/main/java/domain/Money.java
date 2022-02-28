@@ -2,20 +2,22 @@ package domain;
 
 public class Money {
 
-    private int money;
+    private int remainMoney;
+    private int totalMoney;
 
     public Money(int money) {
-        this.money = money;
+        this.totalMoney = money;
+        this.remainMoney = money;
     }
 
     public void buyLotto(int lottoCount) {
         int boughtLottoPrice = lottoCount * 1000;
-        validateNegativeMoney(money - boughtLottoPrice);
-        money -= boughtLottoPrice;
+        validateNegativeMoney(remainMoney - boughtLottoPrice);
+        remainMoney -= boughtLottoPrice;
     }
 
     public int getPurchasableLottoCount() {
-        return money / 1000;
+        return remainMoney / 1000;
     }
 
     private void validateNegativeMoney(int money) {
@@ -24,4 +26,7 @@ public class Money {
         }
     }
 
+    public double calculateProfitRate(long sumTotalPrice) {
+        return sumTotalPrice / (double)totalMoney;
+    }
 }

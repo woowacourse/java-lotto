@@ -10,19 +10,19 @@ public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
     private static final int SECOND_DECIMAL_DIGIT = 100;
 
-    private final int money;
+    private final Money money;
     private final LottoResult lottoResult;
     private final LottoTicket lottoTicket;
 
     public LottoMachine(int money, LottoNumberGenerator numberGenerator) {
-        this.money = money;
+        this.money = new Money(money);
         this.lottoResult = new LottoResult();
-        this.lottoTicket = new LottoTicket(money / LOTTO_PRICE, numberGenerator);
+        this.lottoTicket = new LottoTicket(this.money.getPurchasableLottoCount(), numberGenerator);
     }
 
     public double calculateProfit() {
         DecimalFormat decimalFormat = decimalFormatSetting();
-        double profitRate = lottoResult.sumTotalPrice() / (double) money;
+        double profitRate = money.calculateProfitRate(lottoResult.sumTotalPrice());
         return Double.parseDouble(decimalFormat.format(profitRate));
     }
 
