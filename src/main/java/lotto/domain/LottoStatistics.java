@@ -5,6 +5,8 @@ import java.util.List;
 
 public class LottoStatistics {
 
+    public static final int NON_COUNT = 0;
+    
     private final EnumMap<Rank, Integer> statistics;
 
     public LottoStatistics(List<Rank> ranks) {
@@ -21,7 +23,7 @@ public class LottoStatistics {
     private EnumMap<Rank, Integer> initializeState() {
         EnumMap<Rank, Integer> temp = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
-            temp.put(rank, 0);
+            temp.put(rank, NON_COUNT);
         }
         return temp;
     }
