@@ -11,7 +11,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.RandomLottoMachine;
 import lotto.domain.WinLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -20,9 +19,9 @@ public class LottoApplication {
 
     public static void main(final String[] args) {
         final LottoGenerator lottoGenerator = createLottoGenerator(payMoney());
-        OutputView.outputBuyLottoCounts(lottoGenerator.getManualCount(), lottoGenerator.getAutoCount());
+        final Lottos lottos = lottoGenerator.generateLottos(InputView.inputManualLottos(lottoGenerator.getManualCount()));
 
-        final Lottos lottos = buyLottos(buyCounts);
+        OutputView.outputBuyLottoCounts(lottoGenerator.getManualCount(), lottoGenerator.getAutoCount());
         OutputView.outputLottos(lottos.getLottos());
 
         final WinLotto winLotto = revealWinLotto();
@@ -45,21 +44,6 @@ public class LottoApplication {
             printErrorMessage(e);
             return createLottoGenerator(money);
         }
-    }
-
-    private static Lottos buyLottos(final int buyCounts) {
-        try {
-            return new Lottos(buyRandomLottos(buyCounts));
-        } catch (IllegalArgumentException e) {
-            printErrorMessage(e);
-            return buyLottos(buyCounts);
-        }
-    }
-
-    private static List<Lotto> buyRandomLottos(final int buyCounts) {
-        return IntStream.range(0, buyCounts)
-                .mapToObj(index -> new Lotto(RandomLottoMachine.createRandomLottoNumbers()))
-                .collect(Collectors.toList());
     }
 
     private static WinLotto revealWinLotto() {

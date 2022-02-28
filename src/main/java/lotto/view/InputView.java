@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -17,6 +18,7 @@ public class InputView {
     private static final String INPUT_NOT_BLANK = "";
 
     private static final Scanner scanner = new Scanner(System.in);
+    public static final String INPUT_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
 
     private InputView() {
     }
@@ -36,6 +38,24 @@ public class InputView {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
             throw new NumberFormatException("[ERROR] 수동 구매 로또 수는 숫자로 입력하세요");
+        }
+    }
+
+    public static List<List<Integer>> inputManualLottos(final int counts) {
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBER);
+        return IntStream.range(0, counts)
+                .mapToObj(index -> inputManualLotto())
+                .collect(Collectors.toList());
+    }
+
+    public static List<Integer> inputManualLotto() {
+        try {
+            return Arrays.stream(scanner.nextLine().split(INPUT_WIN_LOTTO_NUMBERS_DELIMITER))
+                    .map(InputView::removeBlank)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("[ERROR] 로또 번호는 숫자로 입력하세요");
         }
     }
 
