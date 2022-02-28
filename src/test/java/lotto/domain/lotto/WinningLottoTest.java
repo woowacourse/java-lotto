@@ -7,14 +7,13 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.domain.LottoRanking;
 
-public class LottoWinningNumberTest {
+public class WinningLottoTest {
 
     @Nested
     @DisplayName("당첨 번호를 생성할 때")
@@ -28,7 +27,7 @@ public class LottoWinningNumberTest {
             @ValueSource(ints = {1, 2, 3, 4, 5, 6})
             @DisplayName("예외를 발생시킨다.")
             void it_throw_exception(int bonusNumber) {
-                assertThatThrownBy(() -> new LottoWinningNumber(
+                assertThatThrownBy(() -> new WinningLotto(
                     new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Number(bonusNumber)
                 )).isInstanceOf(IllegalArgumentException.class);
             }
@@ -52,8 +51,8 @@ public class LottoWinningNumberTest {
                 Lotto lotto = new Lotto(List.of(first, second, third, fourth, fifth, sixth));
                 Lotto winninglotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
                 Number bonusNumber = new Number(7);
-                LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winninglotto, bonusNumber);
-                Assertions.assertThat(lottoWinningNumber.getLottoRanking(lotto))
+                WinningLotto winningLotto = new WinningLotto(winninglotto, bonusNumber);
+                Assertions.assertThat(winningLotto.getLottoRanking(lotto))
                     .isEqualTo(lottoRanking);
 
             }

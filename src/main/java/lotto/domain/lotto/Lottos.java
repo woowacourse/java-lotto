@@ -19,7 +19,7 @@ public class Lottos {
         }
     }
 
-    public Result getResult(LottoWinningNumber winningNumbers) {
+    public Result getResult(WinningLotto winningNumbers) {
         Result result = new Result();
 
         for (Lotto lotto : lottos) {
