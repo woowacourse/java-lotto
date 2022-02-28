@@ -14,7 +14,7 @@ public class Lotto {
     private static final int MIN_RANGE = 0;
     private static final int MAX_RANGE = 6;
 
-    private Set<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto() {
         this.lottoNumbers = generateNumber();
@@ -36,8 +36,7 @@ public class Lotto {
         List<Integer> lottoNumberCandidates = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .boxed().collect(Collectors.toList());
         List<Integer> pickedLottoNumbers = pickLottoNumbersFromCandidates(lottoNumberCandidates);
-        lottoNumbers = sortAndConvertToLottoNumberSet(pickedLottoNumbers);
-        return lottoNumbers;
+        return sortAndConvertToLottoNumberSet(pickedLottoNumbers);
     }
 
     public int countDuplicatedNumber(Lotto winningLotto) {
