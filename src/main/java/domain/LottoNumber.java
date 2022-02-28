@@ -20,7 +20,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	private final int lottoNumber;
 
-	public LottoNumber(int lottoNumber) {
+	private LottoNumber(int lottoNumber) {
 		checkRange(lottoNumber);
 		this.lottoNumber = lottoNumber;
 	}

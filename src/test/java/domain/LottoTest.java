@@ -18,17 +18,17 @@ public class LottoTest {
 
 	@BeforeEach
 	void setUp() {
-		lottos.add(new LottoNumber(1));
-		lottos.add(new LottoNumber(2));
-		lottos.add(new LottoNumber(3));
-		lottos.add(new LottoNumber(4));
-		lottos.add(new LottoNumber(5));
+		lottos.add(LottoNumber.of(1));
+		lottos.add(LottoNumber.of(2));
+		lottos.add(LottoNumber.of(3));
+		lottos.add(LottoNumber.of(4));
+		lottos.add(LottoNumber.of(5));
 	}
 
 	@DisplayName("개수 성공")
 	@Test
 	void lotto_size_success() {
-		lottos.add(new LottoNumber(6));
+		lottos.add(LottoNumber.of(6));
 		assertThatCode(() -> new Lotto(lottos))
 			.doesNotThrowAnyException();
 	}
@@ -43,7 +43,7 @@ public class LottoTest {
 	@DisplayName("중복 금지")
 	@Test
 	void duplicate_fail() {
-		lottos.add(new LottoNumber(5));
+		lottos.add(LottoNumber.of(5));
 		assertThatThrownBy(() -> new Lotto(lottos))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
@@ -52,9 +52,9 @@ public class LottoTest {
 	@Test
 	void calculate_match_count() {
 		//given
-		lottos.add(new LottoNumber(6));
+		lottos.add(LottoNumber.of(6));
 		Lotto lotto = new Lotto(lottos);
-		Lotto targetLotto = Lotto.of(new String[]{"7", "5", "4", "3", "2", "1"});
+		Lotto targetLotto = Lotto.of(new String[] {"7", "5", "4", "3", "2", "1"});
 
 		//when
 		int count = lotto.calculateMatchCount(targetLotto);
