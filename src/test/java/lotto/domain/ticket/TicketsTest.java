@@ -38,8 +38,8 @@ class TicketsTest {
     void calculateRanksTest(final TicketDto winningTicketNumbers,
                             final int bonusNumber,
                             final List<TicketDto> generatedTickets,
-                            final int ticketCount,
                             final List<Rank> expected) {
+        final int ticketCount = generatedTickets.size();
         final Tickets tickets = generateTickets(generatedTickets, ticketCount);
         final Ticket winningTicket = new Ticket(winningTicketNumbers.getBallNumbers());
         final Ball bonusBall = Balls.getBall(bonusNumber);

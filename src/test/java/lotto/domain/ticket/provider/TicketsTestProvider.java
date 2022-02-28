@@ -49,7 +49,7 @@ public class TicketsTestProvider {
                                 new TicketDto(List.of(1, 2, 3, 4, 5, 10)),
                                 new TicketDto(List.of(1, 2, 3, 6, 7, 15)),
                                 new TicketDto(List.of(11, 12, 13, 14, 15, 16))
-                        ), 4,
+                        ),
                         List.of(
                                 Rank.FIRST_GRADE,
                                 Rank.SECOND_GRADE,
@@ -65,7 +65,7 @@ public class TicketsTestProvider {
                                 new TicketDto(List.of(1, 2, 3, 4, 7, 8)),
                                 new TicketDto(List.of(1, 2, 3, 6, 7, 15)),
                                 new TicketDto(List.of(11, 12, 13, 14, 15, 16))
-                        ), 6,
+                        ),
                         List.of(
                                 Rank.FIRST_GRADE,
                                 Rank.SECOND_GRADE,
@@ -79,7 +79,7 @@ public class TicketsTestProvider {
                         List.of(
                                 new TicketDto(List.of(11, 12, 13, 14, 15, 16)),
                                 new TicketDto(List.of(10, 12, 13, 14, 20, 22))
-                        ), 2,
+                        ),
                         List.of()
                 )
         );
