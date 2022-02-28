@@ -5,6 +5,7 @@ import domain.Lotto;
 import domain.LottoGame;
 import domain.LottoNumber;
 import domain.LottoMoney;
+import domain.LottoPurchaseCount;
 import domain.RandomLottoNumberGenerator;
 import domain.WinningLotto;
 import domain.WinningStatistics;
@@ -35,5 +36,14 @@ public class Application {
         LottoNumber bonusLottoNumber = LottoNumber.valueOf(bonusNumber);
 
         return new WinningLotto(winningLotto, bonusLottoNumber);
+    }
+
+    private static LottoPurchaseCount createLottoPurchaseCount(LottoMoney lottoMoney) {
+        try {
+            return lottoMoney.calculateLottoCountRefactor(InputView.getPurchaseManualCount());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return createLottoPurchaseCount(lottoMoney);
+        }
     }
 }
