@@ -38,7 +38,7 @@ public class OutputView {
     }
 
     private static String getBonusNumberMessage(Rank rank) {
-        if (rank.isBonusNumberMatch()) {
+        if (rank.isMatchBonusNumber()) {
             return BONUS_NUMBER_MATCH_MESSAGE;
         }
         return BONUS_NUMBER_MISMATCH_MESSAGE;
