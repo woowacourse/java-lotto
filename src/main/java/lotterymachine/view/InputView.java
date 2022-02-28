@@ -30,8 +30,8 @@ public class InputView {
             return Arrays.stream(SCANNER.nextLine().split(NUMBER_DELIMITER))
                     .map(i -> new LotteryNumber(toInt(i)))
                     .collect(Collectors.toList());
-        } catch (NumberFormatException numberFormatException) {
-            System.out.println(numberFormatException.getMessage());
+        } catch (RuntimeException runtimeException) {
+            System.out.println(runtimeException.getMessage());
             return getWinningLotteryNumbers();
         }
     }
