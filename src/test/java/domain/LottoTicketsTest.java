@@ -1,7 +1,8 @@
+package domain;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import domain.LottoTickets;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketsTest {

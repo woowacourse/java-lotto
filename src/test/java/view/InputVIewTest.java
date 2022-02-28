@@ -1,9 +1,10 @@
+package view;
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import org.junit.jupiter.api.Test;
-import view.InputView;
 
 public class InputVIewTest {
 
