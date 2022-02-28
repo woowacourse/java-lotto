@@ -26,7 +26,7 @@ class WinningResultTest {
         Money money = new Money(1000);
 
         // when
-        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningCountByRank(winningNumbers));
+        WinningResult winningResult = new WinningResult(lottoTicket.findWinningCountByRank(winningNumbers));
 
         //then
         assertThat(winningResult.getRateOfProfit(money)).isEqualTo(2000000.0);

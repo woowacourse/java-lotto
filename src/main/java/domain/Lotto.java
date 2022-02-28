@@ -46,7 +46,7 @@ public class Lotto {
         }
     }
 
-    public LottoRank checkWinningResult(Lotto winningNumbers, Number bonusNumber) {
+    public LottoRank findRank(Lotto winningNumbers, Number bonusNumber) {
         int count = (int) lotto.stream()
                 .filter(winningNumbers::isContain)
                 .count();
