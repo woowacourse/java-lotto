@@ -12,10 +12,6 @@ public class LottoTicket {
 		this.lottoTicket = List.copyOf(lottoTicket);
 	}
 
-	public List<Lotto> getLottoTicket() {
-		return lottoTicket;
-	}
-
 	public EnumMap<LottoRank, Integer> findWinningResult(final WinningNumbers winningNumbers) {
 		EnumMap<LottoRank, Integer> winningResult = LottoRank.createWinningResultMap();
 		Lotto winningNumber = winningNumbers.getWinningNumbers();
