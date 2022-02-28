@@ -1,9 +1,6 @@
 package controller;
 
-import domain.LottoMachine;
-import domain.LottoNumber;
-import domain.LottoResult;
-import domain.WinningLotto;
+import domain.*;
 import util.ShuffleNumberGenerator;
 import view.OutputView;
 

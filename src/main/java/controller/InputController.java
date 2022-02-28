@@ -29,6 +29,14 @@ public class InputController {
                 .collect(Collectors.toList());
     }
 
+    public int getPassiveLottoCount() {
+        String inputPassiveLottoCount = InputView.scanPassiveLottoNumbersCount();
+        Validator.validateInteger(inputPassiveLottoCount);
+        int passiveLottoCount = Integer.parseInt(inputPassiveLottoCount);
+        Validator.validateNegativePrice(passiveLottoCount);
+        return passiveLottoCount;
+    }
+
     public LottoNumber getBonusNumber() {
         String inputBonusNumber = InputView.scanBonusNumber();
         Validator.validateInteger(inputBonusNumber);
