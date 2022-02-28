@@ -11,7 +11,10 @@ public class LottoWheel {
     }
 
     public static LottoNumber get(int number) {
-        return LOTTO_BALLS.get(number - 1);
+        return LOTTO_BALLS.stream()
+                .filter(lottoNumber -> lottoNumber.getValue() == number)
+                .findFirst()
+                .orElse(null);
     }
 
     public static List<LottoNumber> draw(int size) {
