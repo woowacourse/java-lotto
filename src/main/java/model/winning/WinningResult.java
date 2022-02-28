@@ -17,7 +17,7 @@ public class WinningResult {
 
     public Double getRateOfReturn(final Money money) {
         int totalInsertMoney = money.getMoney();
-        double totalReturn = calculateTotalReturn();
+        int totalReturn = calculateTotalReturn();
         return totalReturn / (double) totalInsertMoney;
     }
 
