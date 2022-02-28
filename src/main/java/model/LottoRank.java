@@ -27,7 +27,7 @@ public enum LottoRank {
                 .orElseThrow(InvalidMatchCountException::new);
     }
 
-    public Money getPrize() {
-        return prize;
+    public Money multiplePrizeBy(int multipleAmount) {
+        return prize.multiply(multipleAmount);
     }
 }

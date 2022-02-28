@@ -30,7 +30,7 @@ public class LottoResult {
     }
 
     private Money getTotalPrizeByRank(LottoRank lottoRank) {
-        return lottoRank.getPrize().multiply(getCountByRank(lottoRank));
+        return lottoRank.multiplePrizeBy(getCountByRank(lottoRank));
     }
 
     public int getCountByRank(LottoRank rank) {
