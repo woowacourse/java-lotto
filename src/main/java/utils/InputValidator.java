@@ -13,13 +13,13 @@ public class InputValidator {
 		validateNumber(money);
 	}
 
-	public static void validateNumber(String money) {
+	public static void validateNumber(final String money) {
 		if (!COMPILED_NUMBER_PATTERN.matcher(money).matches()) {
 			throw new IllegalArgumentException(LotteryMessage.PURCHASE_AMOUNT_NOT_NUMBER_ERROR);
 		}
 	}
 
-	public static void validateWinningNumber(String winningNumber) {
+	public static void validateWinningNumber(final String winningNumber) {
 		final String[] winningNumbers = winningNumber.split(WINNING_NUMBER_DISTRIBUTOR);
 		for (String number : winningNumbers) {
 			checkWinningNumber(number);

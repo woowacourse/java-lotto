@@ -18,7 +18,7 @@ public class OutputView {
 		printIncomePercent(winningResult.getWinningPercent());
 	}
 
-	private static void printRanking(Map<RankDto, Integer> ranking) {
+	private static void printRanking(final Map<RankDto, Integer> ranking) {
 		List<RankDto> sortedRank = ranking.keySet()
 			.stream()
 			.sorted(Comparator.comparing(RankDto::getPrize))

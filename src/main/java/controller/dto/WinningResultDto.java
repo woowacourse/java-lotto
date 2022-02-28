@@ -7,10 +7,10 @@ import domain.Rank;
 
 public class WinningResultDto {
 
-	final Map<RankDto, Integer> ranking;
-	final double winningPercent;
+	private final Map<RankDto, Integer> ranking;
+	private final double winningPercent;
 
-	private WinningResultDto(Map<Rank, Integer> ranking, double rankingPercent) {
+	private WinningResultDto(final Map<Rank, Integer> ranking, final double rankingPercent) {
 		this.ranking = ranking.keySet()
 			.stream()
 			.map(RankDto::fromEntity)

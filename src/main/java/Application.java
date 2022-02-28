@@ -8,7 +8,7 @@ import view.OutputView;
 
 public class Application {
 	public static void main(String[] args) {
-		LotteryGameController lotteryGameController = new LotteryGameController();
+		final LotteryGameController lotteryGameController = new LotteryGameController();
 		purchaseLotteries(lotteryGameController);
 		defineWinningLottery(lotteryGameController);
 		calculateWinningResult(lotteryGameController);
@@ -27,7 +27,7 @@ public class Application {
 	}
 
 	private static void calculateWinningResult(final LotteryGameController controller) {
-		WinningResultDto winningResult = controller.getWinningResult();
+		final WinningResultDto winningResult = controller.getWinningResult();
 		OutputView.printStatistics(winningResult);
 	}
 

@@ -14,7 +14,7 @@ public class RankDto {
 		this.rankName = rankName;
 	}
 
-	public static RankDto fromEntity(Rank rank) {
+	public static RankDto fromEntity(final Rank rank) {
 		return new RankDto(rank.getCorrectedBalls(), rank.getPrize(), rank.name());
 	}
 
