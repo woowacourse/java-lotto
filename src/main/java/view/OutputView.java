@@ -3,8 +3,9 @@ package view;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-import model.LottoNumbers;
+import model.Lotto;
 import model.LottoRank;
 import model.LottoResult;
 
@@ -13,15 +14,15 @@ public class OutputView {
     private static final int LOSS = -1;
     private static final int PRINCIPAL = 1;
 
-    public static void printIssuedLottoNumbers(List<LottoNumbers> lottoNumbersList) {
-        System.out.println(lottoNumbersList.size() + "개를 구매했습니다.");
-        for (LottoNumbers numbers : lottoNumbersList) {
+    public static void printIssuedLottoNumbers(List<Set<Integer>> issuedLottoNumbers) {
+        System.out.println(issuedLottoNumbers.size() + "개를 구매했습니다.");
+        for (Set<Integer> numbers : issuedLottoNumbers) {
             printEachLottoNumbers(numbers);
         }
     }
 
-    private static void printEachLottoNumbers(LottoNumbers numbers) {
-        String lottoNumbersText = numbers.getIntValues().stream().sorted().map(String::valueOf)
+    private static void printEachLottoNumbers(Set<Integer> lottoNumbers) {
+        String lottoNumbersText = lottoNumbers.stream().sorted().map(String::valueOf)
                 .collect(Collectors.joining(", ", "[", "]"));
         System.out.println(lottoNumbersText);
     }

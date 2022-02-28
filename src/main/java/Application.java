@@ -6,13 +6,15 @@ import static view.OutputView.printIssuedLottoNumbers;
 import static view.OutputView.printResult;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import model.LottoMachine;
 import model.LottoNumber;
-import model.LottoNumbers;
+import model.Lotto;
 import model.LottoResult;
 import model.Money;
-import model.generator.RandomLottoNumbersGenerator;
+import model.generator.RandomLottoGenerator;
 import model.WinningLottoNumbers;
 import view.InputView;
 import view.OutputView;
@@ -38,11 +40,12 @@ public class Application {
     private static void run() {
         Money inputMoney = getUntilValid(Application::getMoneyFromUser);
 
-        List<LottoNumbers> issuedLottoNumbers = issueLottoNumbers(inputMoney);
-        printIssuedLottoNumbers(issuedLottoNumbers);
+        List<Lotto> issuedLottos = issueLottoNumbers(inputMoney);
+
+        printIssuedLottoNumbers(getNumbersOf(issuedLottos));
 
         WinningLottoNumbers winningLottoNumbers = getUntilValid(Application::getWinningLottoNumbersFromUser);
-        LottoResult result = winningLottoNumbers.summarize(issuedLottoNumbers, inputMoney);
+        LottoResult result = winningLottoNumbers.summarize(issuedLottos, inputMoney);
         printResult(result);
     }
 
@@ -69,27 +72,38 @@ public class Application {
         return inputMoney;
     }
 
-    private static List<LottoNumbers> issueLottoNumbers(Money inputMoney) {
-        LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumbersGenerator(1, 45));
+    private static List<Lotto> issueLottoNumbers(Money inputMoney) {
+        LottoMachine lottoMachine = new LottoMachine(new RandomLottoGenerator(1, 45));
         return lottoMachine.issueLotto(inputMoney);
     }
 
+    private static List<Set<Integer>> getNumbersOf(List<Lotto> issuedLottoNumbers) {
+        return issuedLottoNumbers
+                .stream()
+                .map(lotto -> toInts(lotto.getLottoNumbers()))
+                .collect(Collectors.toList());
+    }
+
+    private static Set<Integer> toInts(Set<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getIntValue)
+                .collect(Collectors.toSet());
+    }
+
     private static WinningLottoNumbers getWinningLottoNumbersFromUser() {
-        LottoNumbers winningLotto = getWinningLotto();
+        Lotto winningLotto = getWinningLotto();
         LottoNumber bonusNumber = getBonusNumber();
         return new WinningLottoNumbers(winningLotto, bonusNumber);
     }
 
-    private static LottoNumbers getWinningLotto() {
+    private static Lotto getWinningLotto() {
         List<Integer> inputLottoNumbers = inputWithMessage("지난 주 당첨 번호를 입력해 주세요.",
                 LOTTO_NUMBERS_PARSER::parse);
-        LottoNumbers winningLotto = LottoNumbers.of(inputLottoNumbers);
-        return winningLotto;
+        return Lotto.of(inputLottoNumbers);
     }
 
     private static LottoNumber getBonusNumber() {
         int bonusNumberInput = inputWithMessage("보너스 볼을 입력해 주세요.", BONUS_NUMBER_PARSER::parse);
-        LottoNumber bonusNumber = new LottoNumber(bonusNumberInput);
-        return bonusNumber;
+        return new LottoNumber(bonusNumberInput);
     }
 }

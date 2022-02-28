@@ -8,21 +8,21 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
-    private LottoNumbers(Set<LottoNumber> lottoNumbers) {
+    private Lotto(Set<LottoNumber> lottoNumbers) {
         checkLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static LottoNumbers of(List<Integer> numbers) {
+    public static Lotto of(List<Integer> numbers) {
         if (isDuplicated(numbers)) {
             throw new DuplicatedLottoNumbersException();
         }
-        return new LottoNumbers(
+        return new Lotto(
                 numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet())
@@ -44,14 +44,14 @@ public class LottoNumbers {
                 .anyMatch(lottoNumber -> lottoNumber.equals(number));
     }
 
-    public int getMatchedNumberCountWith(LottoNumbers otherLottoNumbers) {
+    public int getMatchedNumberCountWith(Lotto otherLotto) {
         return (int) this.lottoNumbers.stream()
-                .filter(number -> otherLottoNumbers.contains(number))
+                .filter(number -> otherLotto.contains(number))
                 .count();
     }
 
-    public List<Integer> getIntValues() {
-        return lottoNumbers.stream().map(LottoNumber::getIntValue).collect(Collectors.toList());
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class LottoNumbers {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        LottoNumbers that = (LottoNumbers) o;
+        Lotto that = (Lotto) o;
         return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 

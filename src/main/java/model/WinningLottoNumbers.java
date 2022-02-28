@@ -4,18 +4,18 @@ import exception.DuplicatedLottoNumbersException;
 import java.util.List;
 
 public class WinningLottoNumbers {
-    private final LottoNumbers lottoNumbers;
+    private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLottoNumbers(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
-        if (lottoNumbers.contains(bonusNumber)) {
+    public WinningLottoNumbers(Lotto lotto, LottoNumber bonusNumber) {
+        if (lotto.contains(bonusNumber)) {
             throw new DuplicatedLottoNumbersException();
         }
-        this.lottoNumbers = lottoNumbers;
+        this.lotto = lotto;
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoResult summarize(List<LottoNumbers> lottoNumbers, Money inputMoney) {
+    public LottoResult summarize(List<Lotto> lottoNumbers, Money inputMoney) {
         LottoResult result = new LottoResult(inputMoney);
         lottoNumbers.stream()
                 .map(this::getRankBy)
@@ -23,17 +23,17 @@ public class WinningLottoNumbers {
         return result;
     }
 
-    private LottoRank getRankBy(LottoNumbers lottoNumbers) {
-        int count = getMatchedCountAboutWinningNumbers(lottoNumbers);
-        boolean bonusMatch = isBonusMatch(lottoNumbers);
+    private LottoRank getRankBy(Lotto lotto) {
+        int count = getMatchedCountAboutWinningNumbers(lotto);
+        boolean bonusMatch = isBonusMatch(lotto);
         return LottoRank.of(count, bonusMatch);
     }
 
-    private int getMatchedCountAboutWinningNumbers(LottoNumbers lottoNumbers) {
-        return this.lottoNumbers.getMatchedNumberCountWith(lottoNumbers);
+    private int getMatchedCountAboutWinningNumbers(Lotto lotto) {
+        return this.lotto.getMatchedNumberCountWith(lotto);
     }
 
-    private boolean isBonusMatch(LottoNumbers lottoNumbers) {
-        return lottoNumbers.contains(bonusNumber);
+    private boolean isBonusMatch(Lotto lotto) {
+        return lotto.contains(bonusNumber);
     }
 }
