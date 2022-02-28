@@ -10,29 +10,9 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottosTest {
-
-    @Nested
-    @DisplayName("Lottos는")
-    class NewLottos {
-
-        @Nested
-        @DisplayName("구입금액이 주어지면")
-        class Context_with_money {
-
-            @ParameterizedTest
-            @CsvSource(value = {"1000|1", "2000|2"}, delimiter = '|')
-            @DisplayName("구입금액에 맞는 개수의 로또를 생성한다.")
-            void It_create_lottos(int value, int expected) {
-                Lottos lottos = new Lottos(new Money(value));
-
-                assertThat(lottos.getCount()).isEqualTo(expected);
-            }
-        }
-    }
 
     @Nested
     @DisplayName("진행 결과를 구하는 메서드는")

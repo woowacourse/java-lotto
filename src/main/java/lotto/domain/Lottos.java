@@ -3,20 +3,11 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
-
-    public Lottos(Money money) {
-        final int quantity = money.getAvailableQuantity();
-
-        this.lottos = IntStream.range(0, quantity)
-                .mapToObj(i -> Lotto.createByAuto())
-                .collect(Collectors.toList());
-    }
 
     Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
@@ -24,6 +15,7 @@ public class Lottos {
 
     public Lottos(Money money, List<Lotto> lottos) {
         final int quantityOfAuto = money.getQuantityOfAuto(lottos.size());
+
         IntStream.range(0, quantityOfAuto)
                 .mapToObj(i -> Lotto.createByAuto())
                 .forEach(lottos::add);

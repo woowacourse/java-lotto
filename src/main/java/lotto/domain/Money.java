@@ -48,7 +48,7 @@ public class Money {
         return getAvailableQuantity() - quantityOfManual;
     }
 
-    public int getAvailableQuantity() {
+    private int getAvailableQuantity() {
         return value / PRICE;
     }
 
