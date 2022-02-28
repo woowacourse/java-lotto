@@ -43,28 +43,28 @@ class LottoControllerTest {
                 .hasMessageContaining(exceptionStatus.getMessage());
     }
 
-    @DisplayName("로또 구매 기능, 숫자 이외의 값은 입력할 수 없습니다.")
+    @DisplayName("구입 금액으로 숫자 이외의 값은 입력할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 입력 : \"{0}\"")
     @ValueSource(strings = {"", "100a", "1 1"})
     void purchaseTicketsNotNumericExceptionTest(final String inputText) {
         purchaseTicketsExceptionTest(inputText, MoneyExceptionStatus.MONEY_MUST_BE_NUMERIC);
     }
 
-    @DisplayName("로또 구매 기능, 1000원 단위로 입력해야 합니다.")
+    @DisplayName("구입 금액은 1000원 단위로 입력해야 합니다.")
     @ParameterizedTest(name = "[{index}] 입력 : \"{0}\"")
     @ValueSource(strings = {"10", "1010", "100001"})
     void purchaseTicketsNotDivisibleExceptionTest(final String inputText) {
         purchaseTicketsExceptionTest(inputText, MoneyExceptionStatus.MONEY_MUST_BE_DIVISIBLE);
     }
 
-    @DisplayName("로또 구매 기능, 0은 입력할 수 없습니다.")
+    @DisplayName("구입 금액으로 0은 입력할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 입력 : \"{0}\"")
     @ValueSource(strings = {"0"})
     void purchaseTicketsNotZeroExceptionTest(final String inputText) {
         purchaseTicketsExceptionTest(inputText, MoneyExceptionStatus.MONEY_CANNOT_BE_ZERO);
     }
 
-    @DisplayName("로또 구매 기능, 정상 작동 테스트")
+    @DisplayName("로또는 입력한 구입 금액만큼 구매되어야 합니다.")
     @ParameterizedTest(name = "[{index}] {1}원어치 로또 구매")
     @MethodSource("lotto.controller.provider.LottoControllerTestProvider#provideForPurchaseTicketsTest")
     void purchaseTicketsTest(final List<TicketDto> generatedTickets, final String inputText) {
@@ -74,13 +74,14 @@ class LottoControllerTest {
         lottoController.purchaseTickets();
         final List<TicketDto> ticketDtos = lottoService.getTicketDtos();
         checkTicketEquals(ticketDtos, generatedTickets);
-
     }
 
     void checkTicketEquals(final List<TicketDto> actual, final List<TicketDto> expected) {
         assertThat(actual.size()).isEqualTo(expected.size());
         for (int i = 0; i < actual.size(); i++) {
-            assertThat(actual.get(i).getBallNumbers()).isEqualTo(expected.get(i).getBallNumbers());
+            final List<Integer> actualBallNumbers = actual.get(i).getBallNumbers();
+            final List<Integer> expectedBallNumbers = expected.get(i).getBallNumbers();
+            assertThat(actualBallNumbers).isEqualTo(expectedBallNumbers);
         }
     }
 
@@ -95,7 +96,7 @@ class LottoControllerTest {
                 .hasMessageContaining(exceptionStatus.getMessage());
     }
 
-    @DisplayName("로또 당첨 번호 입력, 숫자 이외의 값은 입력할 수 없습니다.")
+    @DisplayName("당첨 번호를 구성하는 볼 번호로, 숫자 이외의 값은 입력할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 당첨 번호 입력 : \"{1}\"")
     @MethodSource(
             "lotto.controller.provider.LottoControllerTestProvider#provideForWinningNumbersNotNumericExceptionTest")
@@ -108,7 +109,7 @@ class LottoControllerTest {
                 inputValues, generatedTickets, BallNumberExceptionStatus.BALL_MUST_BE_NUMERIC);
     }
 
-    @DisplayName("로또 당첨 번호 입력, 번호는 6개로 구성되어야 합니다.")
+    @DisplayName("당첨 번호로 6개의 볼 번호를 입력해야 합니다.")
     @ParameterizedTest(name = "[{index}] 당첨 번호 입력 : \"{1}\"")
     @MethodSource(
             "lotto.controller.provider.LottoControllerTestProvider#provideForWinningNumbersOutOfSizeExceptionTest")
@@ -121,7 +122,7 @@ class LottoControllerTest {
                 inputValues, generatedTickets, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_OUT_OF_SIZE);
     }
 
-    @DisplayName("로또 당첨 번호 입력, 범위 밖의 값은 입력할 수 없습니다.")
+    @DisplayName("당첨 번호를 구성하는 볼 번호로, 범위 밖의 값을 입력할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 당첨 번호 입력 : \"{1}\"")
     @MethodSource(
             "lotto.controller.provider.LottoControllerTestProvider#provideForWinningNumbersOutOfRangeExceptionTest")
@@ -134,7 +135,7 @@ class LottoControllerTest {
                 inputValues, generatedTickets, BallNumberExceptionStatus.BALL_CANNOT_BE_OUT_OF_RANGE);
     }
 
-    @DisplayName("로또 당첨 번호 입력, 번호는 중복될 수 없습니다.")
+    @DisplayName("당첨 번호를 구성하는 볼 번호로, 중복되는 값은 입력할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 당첨 번호 입력 : \"{1}\"")
     @MethodSource(
             "lotto.controller.provider.LottoControllerTestProvider#provideForWinningNumbersDuplicatedExceptionTest")
@@ -147,7 +148,7 @@ class LottoControllerTest {
                 inputValues, generatedTickets, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
     }
 
-    @DisplayName("보너스 볼 번호 입력, 숫자 이외의 값은 입력할 수 없습니다.")
+    @DisplayName("보너스 볼 번호로, 숫자 이외의 값은 입력할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 보너스 볼 입력 : \"{2}\"")
     @MethodSource(
             "lotto.controller.provider.LottoControllerTestProvider#provideForBonusNumberNotNumericExceptionTest")
@@ -160,7 +161,7 @@ class LottoControllerTest {
                 inputValues, generatedTickets, BallNumberExceptionStatus.BALL_MUST_BE_NUMERIC);
     }
 
-    @DisplayName("보너스 볼 번호 입력, 범위 밖의 값은 입력할 수 없습니다.")
+    @DisplayName("보너스 볼 번호로, 범위 밖의 값은 입력할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 보너스 볼 입력 : \"{2}\"")
     @MethodSource(
             "lotto.controller.provider.LottoControllerTestProvider#provideForBonusNumberOutOfRangeExceptionTest")
@@ -173,7 +174,7 @@ class LottoControllerTest {
                 inputValues, generatedTickets, BallNumberExceptionStatus.BALL_CANNOT_BE_OUT_OF_RANGE);
     }
 
-    @DisplayName("보너스 볼 번호 입력, 보너스 볼은 당첨 번호와 중복될 수 없습니다.")
+    @DisplayName("보너스 볼 번호로, 당첨 번호와 중복되는 값은 입력할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 보너스 볼 입력 : \"{2}\"")
     @MethodSource(
             "lotto.controller.provider.LottoControllerTestProvider#provideForBonusNumberDuplicatedExceptionTest")
@@ -186,7 +187,7 @@ class LottoControllerTest {
                 inputValues, generatedTickets, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
     }
 
-    @DisplayName("당첨 통계, 당첨 등수 개수 확인 테스트")
+    @DisplayName("당첨 통계의 당첨 등수 개수는 기댓값과 일치해야 한다.")
     @ParameterizedTest(name = "[{index}] 당첨 등수 : {4}")
     @MethodSource("lotto.controller.provider.LottoControllerTestProvider#provideForCheckOutAnalysisTest")
     void checkOutAnalysisRankCountsTest(final String inputMoney,
@@ -206,7 +207,7 @@ class LottoControllerTest {
         assertThat(actualRankCounts).isEqualTo(expectedRankCounts);
     }
 
-    @DisplayName("당첨 통계, 수익률 확인 테스트")
+    @DisplayName("당첨 통계의 수익률은 기댓값과 일치해야 한다.")
     @ParameterizedTest(name = "[{index}] 수익률 : {5}")
     @MethodSource("lotto.controller.provider.LottoControllerTestProvider#provideForCheckOutAnalysisTest")
     void checkOutAnalysisProfitRateTest(final String inputMoney,
