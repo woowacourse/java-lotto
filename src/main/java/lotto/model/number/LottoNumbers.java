@@ -70,12 +70,4 @@ public class LottoNumbers {
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
     }
-
-    public int getSize() {
-        return this.lottoNumbers.size();
-    }
-
-    public LottoNumber get(int index) {
-        return this.lottoNumbers.get(index);
-    }
 }
