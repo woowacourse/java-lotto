@@ -13,7 +13,7 @@ public class Controller {
 
     public void run(Scanner scanner) {
         Money money = getMoney(scanner);
-        Lottos lottos = Lottos.buyLottosByAuto(getMoney(scanner));
+        Lottos lottos = Lottos.buyLottosByAuto(money);
         OutputView.printLottos(lottos);
 
         WinningNumbers winningNumbers = getWinningNumbers(scanner);
