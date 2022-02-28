@@ -22,7 +22,11 @@ public class LottoController {
 
         List<Lotto> manualLottos = InputView.inputManualLottos(manualLottoCount);
 
-        Lottos lottos = new Lottos(buyLottos(money));
+        int subtractMoney = money - 1000 * manualLottoCount;
+        List<Lotto> automaticLottos = buyLottos(subtractMoney);
+        manualLottos.addAll(automaticLottos);
+        Lottos lottos = new Lottos(manualLottos);
+        OutputView.printLottoCount(manualLottoCount, lottos.getLottos().size() - manualLottoCount);
         OutputView.printLottos(lottos.getLottos());
 
         List<Rank> ranks = lottos.matchRanks(createWinnerLotto(winnerNumbers(), bonusNumber()));
