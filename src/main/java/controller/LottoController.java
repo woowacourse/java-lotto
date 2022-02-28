@@ -26,67 +26,96 @@ public class LottoController {
     }
 
     public void start() {
-        InputMoney inputMoney = getInputMoney();
-        LottoQuantity lottoQuantity = getLottoQuantityByInputMoney(inputMoney);
-        OutputView.printLottoQuantity(lottoQuantity.getLottoQuantity());
+        InputMoney inputMoney = generateInputMoney();
+        LottoQuantity lottoQuantity = generateLottoQuantityByInputMoney(inputMoney);
+        printLottoQuantity(lottoQuantity);
 
-        Lottos autoLottos = new Lottos(lottoQuantity, lottoNumberGenerator);
-        List<LottoDto> lottoDtos = autoLottos.getLottos()
-                .stream()
-                .map(LottoDto::new)
-                .collect(Collectors.toList());
-        OutputView.printLottos(lottoDtos);
+        Lottos autoLottos = generateAutoLottosByLottoQuantity(lottoQuantity);
+        printLottos(autoLottos);
 
-        WinningLotto winningLotto = setupWinningLotto();
-        WinningResult winningResult = autoLottos.getWinningResultByWinningLotto(winningLotto);
-        ResultView.printResult(WinningResultDto.of(winningResult, lottoQuantity));
+        WinningLotto winningLotto = generateWinningLotto();
+        WinningResult winningResult = generateWinningResultByLottosAndWinningLotto(autoLottos, winningLotto);
+        printWinningResult(winningResult, lottoQuantity);
     }
 
-    private InputMoney getInputMoney() {
+    private InputMoney generateInputMoney() {
         try {
             return new InputMoney(InputView.scanInputMoney());
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
-            return getInputMoney();
+            return generateInputMoney();
         }
     }
 
-    private LottoQuantity getLottoQuantityByInputMoney(InputMoney inputMoney) {
-        return new LottoQuantity(inputMoney.getMoney() / LottoConstants.SINGLE_LOTTO_PRICE);
+    private LottoQuantity generateLottoQuantityByInputMoney(InputMoney inputMoney) {
+        int lottoQuantity = inputMoney.getMoney() / LottoConstants.SINGLE_LOTTO_PRICE;
+        return new LottoQuantity(lottoQuantity);
     }
 
-    private WinningLotto setupWinningLotto() {
-        Lotto lotto = generateLotto();
-        LottoNumber bonusNumber = generateBonusNumber();
+    private void printLottoQuantity(LottoQuantity lottoQuantity) {
+        OutputView.printLottoQuantity(lottoQuantity.getLottoQuantity());
+    }
+
+    private Lottos generateAutoLottosByLottoQuantity(LottoQuantity lottoQuantity) {
+        return new Lottos(lottoQuantity, lottoNumberGenerator);
+    }
+
+    private void printLottos(Lottos autoLottos) {
+        List<LottoDto> lottoDtos = getLottoDtosByLottos(autoLottos);
+        OutputView.printLottos(lottoDtos);
+    }
+
+    private List<LottoDto> getLottoDtosByLottos(Lottos autoLottos) {
+        return autoLottos.getLottos()
+                .stream()
+                .map(LottoDto::new)
+                .collect(Collectors.toList());
+    }
+
+    private WinningLotto generateWinningLotto() {
+        Lotto lotto = generateLottoOfWinningLotto();
+        LottoNumber bonusNumber = generateBonusNumberOfWinningLotto();
 
         try {
             return new WinningLotto(lotto, bonusNumber);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
-            return setupWinningLotto();
+            return generateWinningLotto();
         }
     }
 
-    private Lotto generateLotto() {
+    private Lotto generateLottoOfWinningLotto() {
         try {
             List<Integer> winningNumberValues = InputView.scanWinningNumbers();
-
-            Set<LottoNumber> lottoNumbers = winningNumberValues.stream()
-                    .map(LottoNumber::new)
-                    .collect(Collectors.toSet());
+            Set<LottoNumber> lottoNumbers = numbersToLottoNumberSet(winningNumberValues);
             return new Lotto(lottoNumbers);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
-            return generateLotto();
+            return generateLottoOfWinningLotto();
         }
     }
 
-    private LottoNumber generateBonusNumber() {
+    private Set<LottoNumber> numbersToLottoNumberSet(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
+    }
+
+    private LottoNumber generateBonusNumberOfWinningLotto() {
         try {
             return new LottoNumber(InputView.scanBonusNumber());
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
-            return generateBonusNumber();
+            return generateBonusNumberOfWinningLotto();
         }
+    }
+
+    private WinningResult generateWinningResultByLottosAndWinningLotto(Lottos autoLottos, WinningLotto winningLotto) {
+        return autoLottos.getWinningResultByWinningLotto(winningLotto);
+    }
+
+    private void printWinningResult(WinningResult winningResult, LottoQuantity lottoQuantity) {
+        WinningResultDto winningResultDto = WinningResultDto.of(winningResult, lottoQuantity);
+        ResultView.printResult(winningResultDto);
     }
 }
