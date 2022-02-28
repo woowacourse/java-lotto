@@ -1,8 +1,4 @@
-package service;
-
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.Lottos;
+package domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,8 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-    private static final LottoMachine instance = new LottoMachine();
     private static final List<LottoNumber> lottoBucket = new ArrayList<>();
+
+    private final Payment payment;
 
     static {
         for (int i = LottoNumber.MIN_BOUND; i <= LottoNumber.MAX_BOUND; i++) {
@@ -19,16 +16,13 @@ public class LottoMachine {
         }
     }
 
-    private LottoMachine() {
+    public LottoMachine(Payment payment) {
+        this.payment = payment;
     }
 
-    public static LottoMachine getInstance() {
-        return instance;
-    }
-
-    public Lottos createLottos(int lottoCount) {
+    public Lottos createAutoLottos() {
         List<Lotto> lottos = new ArrayList<>();
-        for (int count = 0; count < lottoCount; count++) {
+        for (int count = 0; count < payment.calculateLottoCount(); count++) {
             lottos.add(createAutoLotto());
         }
         return new Lottos(lottos);
