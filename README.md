@@ -154,6 +154,9 @@
 ##### LottoNumber
 
 - 로또 번호 입력값 검증
+
+##### LottoWheel
+
 - 랜덤 로또 번호 추첨
 
 ##### LottoNumbers

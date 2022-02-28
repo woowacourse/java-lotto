@@ -21,7 +21,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers ofRandomNumbers() {
-        return new LottoNumbers(LottoNumber.draw(NUMBERS_SIZE));
+        return new LottoNumbers(LottoWheel.draw(NUMBERS_SIZE));
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
