@@ -18,22 +18,27 @@ public class LottoGenerator {
 
     public static LottoGenerator of(final Money money, final int manualCount) {
         int totalCount = money.calculateLottoCount();
-        if (totalCount < manualCount) {
-            throw new IllegalArgumentException("[ERROR] 금액이 부족합니다.");
-        }
+        checkInputMoneyEnough(manualCount, totalCount);
         return new LottoGenerator(manualCount, totalCount - manualCount);
     }
 
-    public Lottos generateLottos(List<List<Integer>> numbers) {
+    private static void checkInputMoneyEnough(final int manualCount, final int totalCount) {
+        if (totalCount < manualCount) {
+            throw new IllegalArgumentException("[ERROR] 금액이 부족합니다.");
+        }
+    }
 
+    public Lottos generateLottos(final List<List<Integer>> numbers) {
+        checkRightManualNumbers(numbers);
+        List<Lotto> manualLottos = generateManualLottos(numbers);
+        manualLottos.addAll(generateRandomLottos());
+        return new Lottos(manualLottos);
+    }
+
+    private void checkRightManualNumbers(List<List<Integer>> numbers) {
         if (numbers.size() != manualCount) {
             throw new IllegalArgumentException("[ERROR] 수동 번호가 올바르지 않습니다.");
         }
-
-        List<Lotto> manualLottos = generateManualLottos(numbers);
-        manualLottos.addAll(generateRandomLottos());
-
-        return new Lottos(manualLottos);
     }
 
     private List<Lotto> generateManualLottos(List<List<Integer>> numbers) {
