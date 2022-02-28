@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 import static lotterymachine.view.ErrorMessage.*;
 
 public class InputView {
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
     private static final String NUMBER_DELIMITER = ",";
 
     public static int getAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
-            return toInt(scanner.nextLine());
+            return toInt(SCANNER.nextLine());
         } catch (IllegalArgumentException illegalArgumentException) {
             System.out.println(illegalArgumentException.getMessage());
             return getAmount();
@@ -27,7 +27,7 @@ public class InputView {
     public static List<LotteryNumber> getWinningLotteryNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         try {
-            return Arrays.stream(scanner.nextLine().split(NUMBER_DELIMITER))
+            return Arrays.stream(SCANNER.nextLine().split(NUMBER_DELIMITER))
                     .map(i -> new LotteryNumber(toInt(i)))
                     .collect(Collectors.toList());
         } catch (IllegalArgumentException illegalArgumentException) {
@@ -39,7 +39,7 @@ public class InputView {
     public static LotteryNumber getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
-            return new LotteryNumber(toInt(scanner.nextLine()));
+            return new LotteryNumber(toInt(SCANNER.nextLine()));
         } catch (IllegalArgumentException illegalArgumentException) {
             System.out.println(illegalArgumentException.getMessage());
             return getBonusNumber();
