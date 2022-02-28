@@ -16,7 +16,7 @@ public class InputView {
 
     public static Money inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new Money(validateNumber(validateBlank(SCANNER.nextLine())));
+        return new Money(stringToInt(validateBlank(SCANNER.nextLine())));
     }
 
     public static List<LottoNumber> inputWinnerNumbers() {
@@ -26,14 +26,12 @@ public class InputView {
 
     public static LottoNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new LottoNumber(validateNumber(validateBlank(SCANNER.nextLine())));
+        return new LottoNumber(stringToInt(validateBlank(SCANNER.nextLine())));
     }
 
     private static List<LottoNumber> convertToNumbers(String input) {
         return Arrays.stream(input.split(DELIMITER))
-            .map(String::trim)
-            .map(InputView::validateNumber)
-            .map(LottoNumber::new)
+            .map(number -> new LottoNumber(stringToInt(number.trim())))
             .collect(Collectors.toList());
     }
 
@@ -44,14 +42,11 @@ public class InputView {
         return input;
     }
 
-    private static int validateNumber(String input) {
-        if (isNumeric(input)) {
+    private static int stringToInt(String input) {
+        try {
             return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("구입금액은 숫자이어야 한다.");
         }
-        throw new IllegalArgumentException("구입금액은 숫자이어야 한다.");
-    }
-
-    private static boolean isNumeric(String value) {
-        return value.chars().allMatch(Character::isDigit);
     }
 }
