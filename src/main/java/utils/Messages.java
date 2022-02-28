@@ -25,6 +25,7 @@ public class Messages {
     public static final String LOTTO_NUMBER_RANGE_ERROR_MESSAGE = "로또 번호는 1에서 45사이의 수여야 합니다.";
     public static final String MONEY_OVER_THOUSANDS_ERROR_MESSAGE = "로또 구입 금액은 1000원 이상이어야 합니다.";
     public static final String MONEY_DIVIDE_ERROR_MESSAGE = "로또 구입 금액은 1000 단위여야 합니다.";
+    public static final String COUNT_OVER_MONEY_ERROR_MESSAGE = "로또 금액을 넘는 수의 로또를 구매할 수 없습니다.";
     public static final String BONUS_DUPLICATED_ERROR_MESSAGE = "보너스 번호는 로또 번호와 중복될 수 없습니다.";
     public static final String LOTTO_NUMS_DUPLICATED_ERROR_MESSAGE = "로또 번호는 중복될 수 없습니다.";
 }

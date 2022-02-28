@@ -31,6 +31,8 @@
 ```
 
 - [x] **2단계** - 수동으로 구매할 로또의 개수를 입력받는다.
+    - [x] [예외처리] 숫자가 아닐 경우
+    - [x] [예외처리] 구매금액 이상의 로또를 구매할 경우
 - [x] **2단계** - 수동으로 구매할 번호를 입력받는다.
 
 
@@ -54,8 +56,8 @@
 
 - [x] 구입 금액을 저장한다.
 - [x] 구입 금액/ 1000 의 개수를 생성한다.
-- [ ] **2단계** - 수동으로 구매한 로또를 생성한다.
-- [ ] **2단계** - **수동을 제외한 개수만큼** 로또를 랜덤으로 생성한다.
+- [x] **2단계** - 수동으로 구매한 로또를 생성한다.
+- [x] **2단계** - **수동을 제외한 개수만큼** 로또를 랜덤으로 생성한다.
     - [x] 로또 생성에는 `Collections.shuffle()`을 활용한다.
 - [x] 생성된 로또마다
     - [x] 지난주 당첨 번호와 일치하는 번호의 개수를 저장한다.
@@ -67,6 +69,7 @@
     - [x] 총 수익률을 계산한다.
 
 ### 로또 통계 출력
+
 - [x] 구매한 로또내역을 출력한다.
 - [x] 3개부터 6개까지 일치하는 로또의 개수를 출력한다.
 - [x] 수익률과 손해여부를 출력한다.
@@ -93,27 +96,27 @@
 ## 💻 구조
 
 - [x] controller
-  - [x] 메인 컨트롤러
+    - [x] 메인 컨트롤러
 - [x] domain
-  - [x] LottoNumber
-  - [x] LottoNumbers
-  - [x] WinLottoNumbers
-  - [x] Money
-  - [x] Rank
-  - [x] Result
+    - [x] LottoNumber
+    - [x] LottoNumbers
+    - [x] WinLottoNumbers
+    - [x] Money
+    - [x] Rank
+    - [x] Result
 - [x] view
-  - [x] InputView
-  - [x] OutputView
+    - [x] InputView
+    - [x] OutputView
 - [x] utils
-  - [x] Constants
-  - [x] LottoNumberGenerator
-  - [x] Separator
+    - [x] Constants
+    - [x] LottoNumberGenerator
+    - [x] Separator
 - [x] validator
-  - [x] InputValidator
-  - [x] LottoNumbersValidator
-  - [x] LottoNumberValidator
-  - [x] MoneyValidator
-  - [x] WinLottoNumbersValidator
+    - [x] InputValidator
+    - [x] LottoNumbersValidator
+    - [x] LottoNumberValidator
+    - [x] MoneyValidator
+    - [x] WinLottoNumbersValidator
 
 ## 💕 페어코딩 협의사항
 

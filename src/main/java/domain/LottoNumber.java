@@ -9,8 +9,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
     private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
+    private static final int INDEX_MINUS_NUMBER = 1;
+
     private static final List<LottoNumber> CACHE = new ArrayList<>();
-    public static final int INDEX_MINUS_NUMBER = 1;
 
     private final int number;
 

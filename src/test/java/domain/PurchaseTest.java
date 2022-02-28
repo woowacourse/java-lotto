@@ -8,24 +8,30 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @SuppressWarnings("NonAsciiCharacters")
-class MoneyTest {
+class PurchaseTest {
 
     @Test
-    void 돈_로또개수로_변경_확인() {
-        Money money = new Money(20000);
-        assertThat(money.toLottoCount())
-            .isEqualTo(20);
+    void 구매_정상_생성_확인() {
+        Purchase purchase = new Purchase(20000, 1);
+        assertThat(purchase.getAutoCount())
+            .isEqualTo(19);
     }
+
+    @Test
+    void 구매_금액_이상의_로또_구매_에러() {
+        assertThatThrownBy(() -> new Purchase(20000, 21)).isInstanceOf(Exception.class);
+    }
+
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 200, 999})
     void 천_미만_값일_경우_예외처리(int input) {
-        assertThatThrownBy(() -> new Money(input)).isInstanceOf(Exception.class);
+        assertThatThrownBy(() -> new Purchase(input, 1)).isInstanceOf(Exception.class);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1500, 2060, 9999})
     void 천으로_나누어_떨어지지_않는_경우_예외처리(int input) {
-        assertThatThrownBy(() -> new Money(input)).isInstanceOf(Exception.class);
+        assertThatThrownBy(() -> new Purchase(input, 1)).isInstanceOf(Exception.class);
     }
 }

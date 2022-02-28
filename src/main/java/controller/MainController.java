@@ -1,7 +1,7 @@
 package controller;
 
 import domain.LottoTicket;
-import domain.Money;
+import domain.Purchase;
 import domain.Rank;
 import domain.Result;
 import domain.WinLottoNumbers;
@@ -13,25 +13,26 @@ import view.OutputView;
 public class MainController {
 
     public void run() {
-        Money money = getMoney();
-        int manualCount = InputView.inputLottoAmount();
+        Purchase purchase = getPurchase();
 
-        List<LottoTicket> lottoTickets = createLottoTickets(manualCount,
-            money.toLottoCount() - manualCount);
+        List<LottoTicket> lottoTickets = createLottoTickets(purchase.getManualCount(),
+            purchase.getAutoCount());
         OutputView.printLottoTickets(lottoTickets);
 
         WinLottoNumbers winLottoNumbers = getWinNumbers();
 
         Result result = makeResult(lottoTickets, winLottoNumbers);
-        printResult(result, money);
+        printResult(result, purchase);
     }
 
-    private Money getMoney() {
+    private Purchase getPurchase() {
         try {
-            return new Money(InputView.inputMoney());
+            int money = InputView.inputMoney();
+            int manualCount = InputView.inputLottoAmount();
+            return new Purchase(money, manualCount);
         } catch (IllegalArgumentException e) {
             OutputView.printError(e.getMessage());
-            return getMoney();
+            return getPurchase();
         }
     }
 
@@ -67,8 +68,8 @@ public class MainController {
         return result;
     }
 
-    private void printResult(Result result, Money money) {
+    private void printResult(Result result, Purchase purchase) {
         OutputView.printResult(result);
-        OutputView.printProfit(result.getProfit(money.get()));
+        OutputView.printProfit(result.getProfit(purchase.getMoney()));
     }
 }
