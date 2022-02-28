@@ -11,6 +11,8 @@ public class RankBoard {
     private static final int INIT_NUMBER = 0;
     private static final int SECOND_RANK_SIZE = 5;
     private static final int SECOND_RANK_MATCHED = 6;
+    private static final int ROUNDING_DIGITS = 100;
+    private static final double ROUNDING_DIGITS_DOUBLE = 100.0;
 
     private final Map<Rank, Integer> board = new HashMap<>();
 
@@ -59,7 +61,7 @@ public class RankBoard {
     }
 
     public double calcProfitRatio(int amount) {
-        return Math.round((double) calcProfit() / amount * 100) / 100.0;
+        return Math.round((double) calcProfit() / amount * ROUNDING_DIGITS) / ROUNDING_DIGITS_DOUBLE;
     }
 
     private int calcProfit() {

@@ -19,7 +19,7 @@ public class Lotto {
 
     private void validateDuplication(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복되지 않은 6개의 숫자여야합니다.");
+            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복되지 않은 " + LOTTO_NUMBERS_SIZE + "개의 숫자여야합니다.");
         }
     }
 
