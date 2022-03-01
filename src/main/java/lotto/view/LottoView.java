@@ -31,14 +31,18 @@ public class LottoView {
     public int requestManualTicketCount(final int totalTicketCount) {
         outputView.printMessage(EMPTY_STRING);
         outputView.printMessage(REQUEST_MANUAL_TICKET_COUNT);
+        return requestTicketCount(totalTicketCount);
+    }
+
+    private int requestTicketCount(final int totalTicketCount) {
         final int manualTicketCount = inputView.requestTicketCount();
         verifyManualTicketCountIsLessThanTotalTicketCount(manualTicketCount, totalTicketCount);
         return manualTicketCount;
     }
 
-    private void verifyManualTicketCountIsLessThanTotalTicketCount(final int manulTicketCount,
+    private void verifyManualTicketCountIsLessThanTotalTicketCount(final int manualTicketCount,
                                                                   final int totalTicketCount) {
-        if (manulTicketCount > totalTicketCount) {
+        if (manualTicketCount > totalTicketCount) {
             throw new IllegalArgumentException();
         }
     }
