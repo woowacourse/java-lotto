@@ -28,12 +28,4 @@ public class LottoGameMoney {
     public int purchasableLottoCount() {
         return amount / LOTTO_PRICE;
     }
-
-    public double calculateProfitRate(int winningAmount) {
-        return (double)winningAmount / amount;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
 }
