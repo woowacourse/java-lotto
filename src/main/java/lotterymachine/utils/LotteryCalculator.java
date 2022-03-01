@@ -19,12 +19,16 @@ public class LotteryCalculator {
         return Money.from(numberOfTickets.getNumber() * LOTTERY_PRICE);
     }
 
-    public static Money getWinningAmount(List<LotteryResultDto> lotteryResult) {
-        int sum = lotteryResult.stream()
-                .map(LotteryResultDto::sumIncome)
+    public static Money getWinningAmount(List<LotteryResultDto> lotteryResults) {
+        int sum = lotteryResults.stream()
+                .map(LotteryCalculator::sumIncome)
                 .map(Money::getAmount)
                 .mapToInt(Integer::intValue)
                 .sum();
         return Money.from(sum);
+    }
+
+    private static Money sumIncome(LotteryResultDto lotteryResult) {
+        return Money.from(lotteryResult.getWinningPrice() * lotteryResult.getNumberOfMatchingTicket().getNumber());
     }
 }

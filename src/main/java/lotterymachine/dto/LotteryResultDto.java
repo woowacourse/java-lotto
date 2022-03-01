@@ -46,10 +46,6 @@ public class LotteryResultDto implements Comparable<LotteryResultDto> {
         return bonus;
     }
 
-    public Money sumIncome() {
-        return Money.from(winningPrice.getAmount() * numberOfMatchingTicket.getNumber());
-    }
-
     @Override
     public int compareTo(LotteryResultDto o) {
         return this.winningPrice.getAmount() - o.winningPrice.getAmount();
