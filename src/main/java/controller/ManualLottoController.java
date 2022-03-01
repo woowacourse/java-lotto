@@ -12,9 +12,8 @@ import java.util.stream.Collectors;
 import view.InputView;
 import view.OutputView;
 
-public class ManualLottoController implements Controller {
-
-    @Override
+public class ManualLottoController {
+    
     public void run() {
         Amount amount = createAmount();
         int manualTicketsCount = createManualTicketCount(amount);
