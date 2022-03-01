@@ -13,7 +13,7 @@ class MoneyTest {
     @ParameterizedTest
     @DisplayName("투입 금액이 천원보다 작으면 오류를 발생한다.")
     @ValueSource(ints = {-1, 0, 900})
-    void generateMoney_underThanThousand(int money) {
+    void generateMoney_UnderThanThousand(int money) {
         assertThatThrownBy(() -> new Money(money))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 투입 금액은 천원 단위의 금액으로 입력하세요.");
@@ -30,7 +30,7 @@ class MoneyTest {
     @Test
     @DisplayName("투입 금액만큼의 로또 구매개수를 반환한다.")
     void getPurchaseCount() {
-        Money money = new Money(100000);
+        final Money money = new Money(100000);
 
         assertThat(money.getPurchaseCount()).isEqualTo(100);
     }
