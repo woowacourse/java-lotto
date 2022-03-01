@@ -2,6 +2,7 @@ package domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,6 +18,22 @@ public class LottosTest {
         Lottos lottos = new Lottos(List.of(lotto));
 
         assertThat(lottos).isNotNull();
+    }
+
+    @Test
+    @DisplayName("Lottos 객체를 null 로 생성하려는 경우")
+    void createLottosWithNull() {
+        assertThatThrownBy(() ->
+            new Lottos(null))
+            .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    @DisplayName("Lottos 객체를 null 로 생성하려는 경우")
+    void createLottosWithEmpty() {
+        assertThatThrownBy(() ->
+            new Lottos(new ArrayList<>()))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
