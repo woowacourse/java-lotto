@@ -17,6 +17,10 @@ public class TicketDto {
         return new TicketDto(ticket.getBallNumbers());
     }
 
+    public Ticket toTicket() {
+        return new Ticket(ballNumbers);
+    }
+
     public List<Integer> getBallNumbers() {
         return List.copyOf(ballNumbers);
     }

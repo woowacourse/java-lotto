@@ -2,9 +2,10 @@ package lotto.view;
 
 import static lotto.view.output.OutputMessage.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import lotto.domain.analysis.Analysis;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
 import lotto.dto.WinningTicketDto;
@@ -26,12 +27,47 @@ public class LottoView {
         return inputView.requestMoney();
     }
 
+    public int requestManualTicketCount(final int totalTicketCount) {
+        outputView.printMessage(EMPTY_STRING);
+        outputView.printMessage(REQUEST_MANUAL_TICKET_COUNT);
+        final int manualTicketCount = inputView.requestTicketCount();
+        verifyManualTicketCountIsLessThanTotalTicketCount(manualTicketCount, totalTicketCount);
+        return manualTicketCount;
+    }
+
+    private void verifyManualTicketCountIsLessThanTotalTicketCount(final int manulTicketCount,
+                                                                  final int totalTicketCount) {
+        if (manulTicketCount > totalTicketCount) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public List<TicketDto> requestManualTicketDtos(final int ticketCount) {
+        if (ticketCount == 0) {
+            return Collections.emptyList();
+        }
+        outputView.printMessage(EMPTY_STRING);
+        outputView.printMessage(REQUEST_MANUAL_TICKETS);
+        return requestTicketDtos(ticketCount);
+    }
+
+    private List<TicketDto> requestTicketDtos(final int ticketCount) {
+        final List<TicketDto> ticketDtos = new ArrayList<>();
+        for (int i = 0; i < ticketCount; i++) {
+            final List<Integer> ticketNumbers = inputView.requestTicketNumbers();
+            ticketDtos.add(new TicketDto(ticketNumbers));
+        }
+        return ticketDtos;
+    }
+
     public void announceTickets(final List<TicketDto> ticketDtos) {
+        outputView.printMessage(EMPTY_STRING);
         outputView.printTicketCount(ticketDtos);
         outputView.printTickets(ticketDtos);
     }
 
     public WinningTicketDto requestWinningTicketDto() {
+        outputView.printMessage(EMPTY_STRING);
         final List<Integer> winningNumbers = requestWinningNumbers();
         final int bonusNumber = requestBonusNumber();
         return new WinningTicketDto(winningNumbers, bonusNumber);
