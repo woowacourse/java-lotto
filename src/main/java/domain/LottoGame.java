@@ -1,10 +1,5 @@
 package domain;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 public class LottoGame {
     private final LottoTickets lottoTickets;
     private final WinningResult winningResult;
@@ -22,7 +17,7 @@ public class LottoGame {
 
     public double getLottoRateOfReturn() {
         double totalReturn = calculateTotalReturn();
-        double purchaseMoney = (double) lottoTickets.getTickets().size() * LottoTickets.TICKET_PRICE;
+        double purchaseMoney = (double) lottoTickets.getTickets().size() * LottoTicket.TICKET_PRICE;
         return totalReturn / purchaseMoney;
     }
 

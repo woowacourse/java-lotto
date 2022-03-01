@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int LOTTO_TICKET_SIZE = 6;
+    public static final int TICKET_PRICE = 1000;
     public static final String LOTTO_TICKET_SIZE_ERROR_MESSAGE = "한 티켓의 로또 번호는 6개여야 합니다.";
     private final Set<LottoNumber> lottoNumbers;
 

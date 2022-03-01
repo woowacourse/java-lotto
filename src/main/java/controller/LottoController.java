@@ -1,5 +1,6 @@
 package controller;
 
+import domain.Money;
 import domain.WinningResult;
 import domain.WinningTicket;
 import java.util.List;
@@ -48,7 +49,7 @@ public class LottoController {
     private LottoTickets purchaseLottoTickets() {
         try {
             int purchaseMoney = inputView.inputPurchaseMoney();
-            return new LottoTickets(purchaseMoney, new LottoNumberGenerateStrategy());
+            return new LottoTickets(new Money(purchaseMoney), new LottoNumberGenerateStrategy());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return purchaseLottoTickets();
