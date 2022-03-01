@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import util.Validator;
 
 public class Lottos {
@@ -48,10 +49,9 @@ public class Lottos {
     }
 
     private List<Lotto> generateLottos(int lottoAmount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = START_INDEX; i<lottoAmount; ++i) {
-            lottos.add(Lotto.generateLotto());
-        }
-        return lottos;
+        return IntStream.range(START_INDEX, lottoAmount)
+                .boxed()
+                .map(i -> Lotto.generateLotto())
+                .collect(Collectors.toList());
     }
 }
