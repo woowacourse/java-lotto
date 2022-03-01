@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 
 public class Lottos {
 	private final List<Lotto> lottos;
@@ -23,7 +24,7 @@ public class Lottos {
 		lottos.stream()
 			.map(lotto -> winningLotto.calculateRank(lotto))
 			.filter(rank -> !rank.isNothing())
-			.collect(groupingBy(Rank::getRank, counting()))
+			.collect(groupingBy(Function.identity(), counting()))
 			.forEach((key, value) -> ranks.merge(key, value, (v1, v2) -> v2));
 		return ranks;
 	}

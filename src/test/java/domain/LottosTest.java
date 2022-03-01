@@ -19,7 +19,7 @@ public class LottosTest {
 		List<Lotto> lotto = Arrays.asList(Lotto.of(new String[]{"6", "5", "4", "3", "2", "1"}),
 			Lotto.of(new String[]{"11", "5", "4", "3", "2", "1"}));
 		Lotto winningLotto = Lotto.of(new String[]{"6", "5", "4", "3", "2", "1"});
-		LottoNumber bonusNumber = new LottoNumber("7");
+		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
 		Map<Rank,Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
@@ -34,7 +34,7 @@ public class LottosTest {
 		List<Lotto> lotto = Arrays.asList(Lotto.of(new String[]{"6", "5", "4", "3", "2", "1"}),
 			Lotto.of(new String[]{"8", "9", "10", "11", "12", "13"}));
 		Lotto winningLotto = Lotto.of(new String[]{"6", "5", "4", "3", "2", "1"});
-		LottoNumber bonusNumber = new LottoNumber("7");
+		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
 		Map<Rank,Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));

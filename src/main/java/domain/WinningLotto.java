@@ -7,9 +7,11 @@ public class WinningLotto {
 	private final LottoNumber bonusNumber;
 
 	public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
-		this.lotto = Objects.requireNonNull(lotto, "[ERROR] WinningLotto에 lotto가 null 입니다.");
-		this.bonusNumber = Objects.requireNonNull(bonusNumber, "[ERROR] WinningLotto에 bonusNumber기 null 입니다.");
+		Objects.requireNonNull(lotto, "[ERROR] WinningLotto에 lotto가 null 입니다.");
+		Objects.requireNonNull(bonusNumber, "[ERROR] WinningLotto에 bonusNumber기 null 입니다.");
 		checkDuplicated(lotto, bonusNumber);
+		this.lotto = lotto;
+		this.bonusNumber = bonusNumber;
 	}
 
 	private void checkDuplicated(Lotto lotto, LottoNumber bonusNumber) {

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
@@ -14,15 +15,12 @@ import org.junit.jupiter.api.Test;
 
 public class LottoTest {
 
-	private List<LottoNumber> lottos = new ArrayList<>();
+	private List<LottoNumber> lottos;
 
 	@BeforeEach
 	void setUp() {
-		lottos.add(LottoNumber.of(1));
-		lottos.add(LottoNumber.of(2));
-		lottos.add(LottoNumber.of(3));
-		lottos.add(LottoNumber.of(4));
-		lottos.add(LottoNumber.of(5));
+		lottos = new ArrayList<>(List.of(LottoNumber.of(1),
+			LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5)));
 	}
 
 	@DisplayName("개수 성공")
@@ -61,10 +59,5 @@ public class LottoTest {
 
 		//then
 		assertThat(count).isEqualTo(5);
-	}
-
-	@AfterEach
-	void clear() {
-		lottos.clear();
 	}
 }
