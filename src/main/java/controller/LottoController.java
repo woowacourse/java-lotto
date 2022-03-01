@@ -6,7 +6,7 @@ import domain.Lotto;
 import domain.LottoFactory;
 import domain.LottoTicket;
 import domain.Money;
-import domain.Number;
+import domain.LottoNumber;
 import domain.WinningNumbers;
 import domain.WinningResult;
 import view.InputView;
@@ -60,8 +60,8 @@ public class LottoController {
 
 	private WinningNumbers createWinningNumbers() {
 		Lotto winningNumber = Lotto.from(requestWinningLottoInput());
-		Number bonusNumber = Number.from(requestBonusNumberInput());
-		return new WinningNumbers(winningNumber, bonusNumber);
+		LottoNumber bonusLottoNumber = LottoNumber.from(requestBonusNumberInput());
+		return new WinningNumbers(winningNumber, bonusLottoNumber);
 	}
 
 	private String[] requestWinningLottoInput() {

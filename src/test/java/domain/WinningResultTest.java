@@ -16,13 +16,13 @@ class WinningResultTest {
 	void checkFirstWinningResult() {
 		// given
 		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
-			.map(Number::new)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
-			.map(Number::new)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
-		Number bonusNumber = new Number(36);
-		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
+		LottoNumber bonusLottoNumber = new LottoNumber(36);
+		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
 		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
@@ -37,13 +37,13 @@ class WinningResultTest {
 	void checkSecondWinningResult() {
 		// given
 		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
-			.map(Number::new)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 34)
-			.map(Number::new)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
-		Number bonusNumber = new Number(35);
-		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
+		LottoNumber bonusLottoNumber = new LottoNumber(35);
+		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
 		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
@@ -58,13 +58,13 @@ class WinningResultTest {
 	void checkThirdWinningResult() {
 		// given
 		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
-			.map(Number::new)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 34)
-			.map(Number::new)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
-		Number bonusNumber = new Number(39);
-		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
+		LottoNumber bonusLottoNumber = new LottoNumber(39);
+		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
 		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
@@ -78,13 +78,13 @@ class WinningResultTest {
 	@DisplayName("1000원으로 5등 당첨 시, 수익률 확인")
 	void checkRateOfProfit() {
 		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
-			.map(Number::new)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 22, 34, 44)
-			.map(Number::new)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
-		Number bonusNumber = new Number(39);
-		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
+		LottoNumber bonusLottoNumber = new LottoNumber(39);
+		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
 		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 		Money money = Money.from("1000");
 
@@ -99,13 +99,13 @@ class WinningResultTest {
 	@DisplayName("1000원으로 1등 당첨 시, 수익률 확인")
 	void checkRateOfProfitFirstWinning() {
 		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
-			.map(Number::new)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
-			.map(Number::new)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
-		Number bonusNumber = new Number(39);
-		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
+		LottoNumber bonusLottoNumber = new LottoNumber(39);
+		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
 		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 		Money money = Money.from("1000");
 

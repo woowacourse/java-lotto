@@ -8,7 +8,7 @@ import java.util.Set;
 
 import domain.Lotto;
 import domain.LottoRank;
-import domain.Number;
+import domain.LottoNumber;
 
 public class OutputView {
 
@@ -45,14 +45,14 @@ public class OutputView {
 		}
 	}
 
-	private List<Number> sortLottoNumbers(final List<Number> lotto) {
-		lotto.sort(Comparator.comparingInt(Number::getNumber));
+	private List<LottoNumber> sortLottoNumbers(final List<LottoNumber> lotto) {
+		lotto.sort(Comparator.comparingInt(LottoNumber::getNumber));
 		return lotto;
 	}
 
-	private void printLottoNumber(final List<Number> lottoNumbers) {
-		int[] printingLottoNumbers = lottoNumbers.stream()
-			.mapToInt(Number::getNumber)
+	private void printLottoNumber(final List<LottoNumber> lottoLottoNumbers) {
+		int[] printingLottoNumbers = lottoLottoNumbers.stream()
+			.mapToInt(LottoNumber::getNumber)
 			.toArray();
 
 		System.out.println(Arrays.toString(printingLottoNumbers));

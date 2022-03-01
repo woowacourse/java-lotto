@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 
 class LottoTest {
 
-	private final List<Number> lottoNumbers = Stream.of(1, 5, 9, 11, 24, 36)
-		.map(Number::new)
+	private final List<LottoNumber> lottoLottoNumbers = Stream.of(1, 5, 9, 11, 24, 36)
+		.map(LottoNumber::new)
 		.collect(Collectors.toList());
 
 	@Test
@@ -21,21 +21,21 @@ class LottoTest {
 		//given
 		int actualNumber = 24;
 		//when
-		Number InclusionExpectedNumber = new Number(actualNumber);
-		Lotto lotto = new Lotto(lottoNumbers);
+		LottoNumber inclusionExpectedLottoNumber = new LottoNumber(actualNumber);
+		Lotto lotto = new Lotto(lottoLottoNumbers);
 		//then
-		assertTrue(lotto.isContain(InclusionExpectedNumber));
+		assertTrue(lotto.isContain(inclusionExpectedLottoNumber));
 	}
 
 	@Test
 	void checkConfirmWinningResult() {
 		//given
-		Lotto lotto = new Lotto(lottoNumbers);
-		Lotto winningLotto = new Lotto(lottoNumbers);
-		Number bonusNumber = new Number(2);
+		Lotto lotto = new Lotto(lottoLottoNumbers);
+		Lotto winningLotto = new Lotto(lottoLottoNumbers);
+		LottoNumber bonusLottoNumber = new LottoNumber(2);
 
 		//when
-		LottoRank lottoRank = lotto.confirmWinningResult(winningLotto, bonusNumber);
+		LottoRank lottoRank = lotto.confirmWinningResult(winningLotto, bonusLottoNumber);
 
 		//then
 		assertThat(lottoRank).isEqualTo(LottoRank.FIRST);
@@ -45,8 +45,8 @@ class LottoTest {
 	@DisplayName("로또 팩토리는 랜덤한 숫자 6개를 뽑아야한다.")
 	void checkLottoSize_1() {
 		//given
-		List<Number> missLotto = Stream.of(1, 5, 9, 11, 18)
-			.map(Number::new)
+		List<LottoNumber> missLotto = Stream.of(1, 5, 9, 11, 18)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList());
 
 		//then
@@ -59,8 +59,8 @@ class LottoTest {
 	@DisplayName("로또 팩토리는 랜덤한 숫자 6개를 뽑아야한다.")
 	void checkLottoSize_2() {
 		//given
-		List<Number> missLotto = Stream.of(1, 5, 9, 11, 18, 22, 30)
-			.map(Number::new)
+		List<LottoNumber> missLotto = Stream.of(1, 5, 9, 11, 18, 22, 30)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList());
 
 		//then
@@ -73,8 +73,8 @@ class LottoTest {
 	@DisplayName("로또 번호는 중복된 숫자가 존재할 수 없다.")
 	void checkDuplicateLottoNumber() {
 		//given
-		List<Number> duplicateLotto = Stream.of(1, 5, 9, 11, 11, 5)
-			.map(Number::new)
+		List<LottoNumber> duplicateLotto = Stream.of(1, 5, 9, 11, 11, 5)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList());
 
 		//then

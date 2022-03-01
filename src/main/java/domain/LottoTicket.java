@@ -15,10 +15,10 @@ public class LottoTicket {
 	public WinningResult findWinningResult(final WinningNumbers winningNumbers) {
 		EnumMap<LottoRank, Integer> winningResult = LottoRank.createWinningResultMap();
 		Lotto winningNumber = winningNumbers.getWinningNumbers();
-		Number bonusNumber = winningNumbers.getBonusNumber();
+		LottoNumber bonusLottoNumber = winningNumbers.getBonusNumber();
 
 		for (Lotto lotto : lottoTicket) {
-			LottoRank rank = lotto.confirmWinningResult(winningNumber, bonusNumber);
+			LottoRank rank = lotto.confirmWinningResult(winningNumber, bonusLottoNumber);
 			addWinningResultCount(winningResult, rank);
 		}
 		return new WinningResult(winningResult);
