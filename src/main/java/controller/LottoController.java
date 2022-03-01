@@ -14,12 +14,14 @@ import java.util.stream.Collectors;
 import view.InputView;
 import view.ResultView;
 import vo.InputMoney;
+import vo.ManualLottoQuantity;
 import vo.NumberOfLottos;
 
 public class LottoController {
 
     public void start() {
         InputMoney inputmoney = getInputMoney();
+        ManualLottoQuantity manualLottoQuantity = getManualLottoQuantity();
         NumberOfLottos numberOfLottos = getNumberOfLottosByInputMoney(inputmoney);
         InputView.printTrialNumber(numberOfLottos.getNumberOfLottos());
 
@@ -36,6 +38,15 @@ public class LottoController {
         } catch (IllegalArgumentException exception) {
             InputView.printException(exception);
             return getInputMoney();
+        }
+    }
+
+    private ManualLottoQuantity getManualLottoQuantity() {
+        try {
+            return new ManualLottoQuantity(InputView.scanManualLottoQuantity());
+        } catch (IllegalArgumentException exception) {
+            InputView.printException(exception);
+            return getManualLottoQuantity();
         }
     }
 
