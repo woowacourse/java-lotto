@@ -3,7 +3,7 @@ package lotto.service;
 import java.util.List;
 
 import lotto.domain.ball.Ball;
-import lotto.domain.ball.Balls;
+import lotto.domain.ball.BallStorage;
 import lotto.domain.money.Money;
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.Analysis;
@@ -25,7 +25,7 @@ public class LottoService {
     }
 
     public Ball generateBall(final int ballNumber) {
-        return Balls.getBall(ballNumber);
+        return BallStorage.getBall(ballNumber);
     }
 
     public Tickets generateTickets(final int money) {

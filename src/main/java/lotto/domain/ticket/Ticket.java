@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lotto.domain.ball.Ball;
-import lotto.domain.ball.Balls;
+import lotto.domain.ball.BallStorage;
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.validation.TicketValidator;
 
@@ -26,7 +26,7 @@ public class Ticket {
 
     private List<Ball> generateBalls(final List<Integer> numbers) {
         return numbers.stream()
-                .map(Balls::getBall)
+                .map(BallStorage::getBall)
                 .collect(Collectors.toUnmodifiableList());
     }
 

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.ball.Ball;
-import lotto.domain.ball.Balls;
+import lotto.domain.ball.BallStorage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -43,7 +43,7 @@ class TicketTest {
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForContainsTrueTest")
     void containsTrueTest(final List<Integer> numbers, final int targetNumber) {
         final Ticket ticket = new Ticket(numbers);
-        final Ball targetBall = Balls.getBall(targetNumber);
+        final Ball targetBall = BallStorage.getBall(targetNumber);
 
         assertThat(ticket.contains(targetBall)).isTrue();
     }
@@ -53,7 +53,7 @@ class TicketTest {
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForContainsFalseTest")
     void containsFalseTest(final List<Integer> numbers, final int targetNumber) {
         final Ticket ticket = new Ticket(numbers);
-        final Ball targetBall = Balls.getBall(targetNumber);
+        final Ball targetBall = BallStorage.getBall(targetNumber);
 
         assertThat(ticket.contains(targetBall)).isFalse();
     }
@@ -66,7 +66,7 @@ class TicketTest {
         final Ticket winningTicket = new Ticket(winningNumbers);
         final List<Integer> winningBallNumbers = winningTicket.getBallNumbers();
         final List<Ball> winningBalls = winningBallNumbers.stream()
-                .map(Balls::getBall)
+                .map(BallStorage::getBall)
                 .collect(Collectors.toUnmodifiableList());
 
         assertThat(ticket.countMatches(winningBalls)).isEqualTo(matchCount);
@@ -81,7 +81,7 @@ class TicketTest {
                            final Rank expected) {
         final Ticket ticket = new Ticket((numbers));
         final Ticket winningTicket = new Ticket(winningNumbers);
-        final Ball bonusBall = Balls.getBall(bonusNumber);
+        final Ball bonusBall = BallStorage.getBall(bonusNumber);
         final Rank rank = ticket.calculateRank(winningTicket, bonusBall).orElse(null);
 
         assertThat(rank).isEqualTo(expected);

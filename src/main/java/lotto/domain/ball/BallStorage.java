@@ -3,7 +3,7 @@ package lotto.domain.ball;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Balls {
+public class BallStorage {
 
     private static final Map<Integer, Ball> balls = new HashMap<>();
 
