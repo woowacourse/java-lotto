@@ -1,16 +1,15 @@
 package lotto.domain.analysis;
 
-import java.util.Collections;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import lotto.domain.winning.Rank;
 import lotto.utils.MoneyUnit;
 
 public class Analysis {
 
-    private final Map<Rank, Integer> rankCounts;
+    private final Map<Rank, Long> rankCounts;
     private final double profitRate;
 
     public Analysis(final List<Rank> ranks, final int ticketCount) {
@@ -18,13 +17,9 @@ public class Analysis {
         this.profitRate = calculateProfitRate(ranks, ticketCount);
     }
 
-    private Map<Rank, Integer> calculateRankCounts(final List<Rank> ranks) {
-        final Map<Rank, Integer> rankMap = new EnumMap<>(Rank.class);
-        for (Rank rank : Rank.values()) {
-            final int count = Collections.frequency(ranks, rank);
-            rankMap.put(rank, count);
-        }
-        return rankMap;
+    private Map<Rank, Long> calculateRankCounts(final List<Rank> ranks) {
+        return ranks.stream()
+                .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
     }
 
     private double calculateProfitRate(final List<Rank> ranks, final int ticketCount) {
@@ -34,7 +29,7 @@ public class Analysis {
         return (double) total / MoneyUnit.multiple(ticketCount);
     }
 
-    public Map<Rank, Integer> getRankCounts() {
+    public Map<Rank, Long> getRankCounts() {
         return Map.copyOf(rankCounts);
     }
 

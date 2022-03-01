@@ -50,11 +50,17 @@ public class OutputView {
     }
 
     private void printAnalysisRankCounts(final Analysis analysis) {
-        final Map<Rank, Integer> rankCounts = analysis.getRankCounts();
-        rankCounts.forEach(this::printAnalysisRankCount);
+        final Map<Rank, Long> rankCounts = analysis.getRankCounts();
+        for (Rank rank : Rank.values()) {
+            long rankCount = 0;
+            if (rankCounts.containsKey(rank)) {
+                rankCount = rankCounts.get(rank);
+            }
+            printAnalysisRankCount(rank, rankCount);
+        }
     }
 
-    private void printAnalysisRankCount(final Rank rank, final int rankCount) {
+    private void printAnalysisRankCount(final Rank rank, final long rankCount) {
         final int matchCount = rank.getMatchCount();
         final long prizeMoney = rank.getPrizeMoney();
 

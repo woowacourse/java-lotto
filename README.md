@@ -44,12 +44,7 @@
   - [x] `보너스 볼`는 숫자로 구성되어야 합니다. 아닌 경우, `IllegalArgumentException` 발생
   - [x] `보너스 볼`는 `1 ~ 45` 범위 안의 숫자로 구성되어야 합니다. 아닌 경우, `IllegalArgumentException` 발생
   - [x] `보너스 볼`는 `당첨 번호`와 중복되어선 안됩니다. 아닌 경우, `IllegalArgumentException` 발생
-
-
-## 이슈 목록
-- [ ] 당첨 통계 - 등수 순서 고정시키기
-  - `AnaysisDto#getRankCounts`에서 `Map.copyOf`로 인해 순서가 엉키는 것으로 판단됨.
-
+  
 
 <br>
 
