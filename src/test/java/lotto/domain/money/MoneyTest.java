@@ -12,13 +12,13 @@ import lotto.exception.LottoExceptionStatus;
 
 class MoneyTest {
 
-    @DisplayName("구입 금액은 0원이 될 수 없습니다.")
+    @DisplayName("구입 금액은 양수여야 합니다.")
     @ParameterizedTest(name = "[{index}] 구입 금액 : {0}")
-    @ValueSource(ints = {0})
-    void moneyIsZeroExceptionTest(final int money) {
+    @ValueSource(ints = {-1000, -5, 0})
+    void moneyNotPositiveExceptionTest(final int money) {
         assertThatThrownBy(() -> new Money(money))
                 .isInstanceOf(LottoException.class)
-                .hasMessageContaining(LottoExceptionStatus.MONEY_CANNOT_BE_ZERO.getMessage());
+                .hasMessageContaining(LottoExceptionStatus.MONEY_MUST_BE_POSITIVE.getMessage());
     }
 
     @DisplayName("구입 금액은 1000으로 나누어 떨어져야 한다.")

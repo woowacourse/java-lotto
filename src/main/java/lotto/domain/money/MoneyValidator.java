@@ -9,13 +9,13 @@ public class MoneyValidator {
     }
 
     public static void validateMoney(final int money) {
-        verifyMoneyNotZero(money);
+        verifyMoneyPositive(money);
         verifyMoneyDivisible(money);
     }
 
-    private static void verifyMoneyNotZero(final int money) {
-        if (money == 0) {
-            throw new LottoException(LottoExceptionStatus.MONEY_CANNOT_BE_ZERO);
+    private static void verifyMoneyPositive(final int money) {
+        if (money <= 0) {
+            throw new LottoException(LottoExceptionStatus.MONEY_MUST_BE_POSITIVE);
         }
     }
 
