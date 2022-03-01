@@ -1,8 +1,20 @@
 package lotterymachine.utils;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import lotterymachine.dto.LotteryResultDto;
+import lotterymachine.model.LotteryTicket;
+import lotterymachine.model.LotteryTickets;
+import lotterymachine.model.WinningLottery;
+import lotterymachine.vo.Ball;
+import lotterymachine.vo.Count;
 import lotterymachine.vo.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,5 +36,23 @@ class LotteryCalculatorTest {
         Money totalTicketAmount = LotteryCalculator.getTotalTicketAmount(numberOfTickets);
         Money expected = Money.from(14000);
         assertThat(totalTicketAmount).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:2000000000", "1,2,3,4,5,7:30000000", "1,2,3,4,5,8:1500000", "1,2,3,4,8,9:50000",
+            "1,2,3,7,8,9:5000", "1,2,7,8,9,10:0"}, delimiter = ':')
+    @DisplayName("당첨 총 금액을 계산한다.")
+    void getWinningAmount(String winningNumbers, int amount) {
+        LotteryTicket lotteryTicket = new LotteryTicket(Ball.createBalls(
+                Arrays.stream(winningNumbers.split(",")).map(Integer::parseInt).collect(Collectors.toList())));
+        LotteryTickets lotteryTickets = new LotteryTickets(List.of(lotteryTicket));
+        LotteryTicket winningTicket = new LotteryTicket(Ball.createBalls(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Ball bonus = Ball.from(7);
+        Map<WinningLottery, Count> ticketsResult = lotteryTickets.getLotteriesResult(winningTicket, bonus);
+        List<LotteryResultDto> lotteryResults = LotteryResultDto.createLotteryResults(ticketsResult);
+        Money winningAmount = LotteryCalculator.getWinningAmount(lotteryResults);
+
+        Money expected = Money.from(amount);
+        assertThat(winningAmount).isEqualTo(expected);
     }
 }
