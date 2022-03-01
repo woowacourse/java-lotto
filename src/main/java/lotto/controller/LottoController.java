@@ -11,11 +11,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.ticket.Analysis;
+import lotto.domain.ticket.Ball;
+import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.WinningTicket;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
-import lotto.dto.WinningTicketDto;
 import lotto.service.LottoService;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
@@ -40,38 +41,40 @@ public class LottoController {
         showAnalysis(analysis);
     }
 
-    public Tickets purchaseTickets() {
+    private Tickets purchaseTickets() {
         final int money = this.requestMoney();
         return lottoService.generateTickets(money);
     }
 
-    public void showTickets(Tickets tickets) {
+    private int requestMoney() {
+        outputView.printMessage(REQUEST_MONEY);
+        return inputView.requestMoney();
+    }
+
+    private void showTickets(Tickets tickets) {
         final List<TicketDto> ticketDtos = tickets.getTickets().stream()
                 .map(TicketDto::toDto)
                 .collect(Collectors.toUnmodifiableList());
         this.announceTickets(ticketDtos);
     }
 
-    public lotto.domain.ticket.Analysis calculateAnalysis(Tickets tickets) {
-        final WinningTicketDto winningTicketDto = this.requestWinningTicket();
-        final WinningTicket winningTicket = winningTicketDto.toWinningTicket();
+    private void announceTickets(List<TicketDto> ticketDtos) {
+        outputView.printTicketCount(ticketDtos);
+        outputView.printTickets(ticketDtos);
+    }
+
+    private Analysis calculateAnalysis(Tickets tickets) {
+        final WinningTicket winningTicket = this.requestWinningTicket();
         return lottoService.generateAnalysis(tickets, winningTicket);
     }
 
-    private void showAnalysis(final lotto.domain.ticket.Analysis analysis) {
-        final AnalysisDto analysisDto = AnalysisDto.toDto(analysis);
-        this.announceAnalysis(analysisDto);
-    }
-
-    public int requestMoney() {
-        outputView.printMessage(REQUEST_MONEY);
-        return inputView.requestMoney();
-    }
-
-    public WinningTicketDto requestWinningTicket() {
+    private WinningTicket requestWinningTicket() {
         final List<Integer> winningNumbers = requestWinningNumbers();
+        final Ticket ticket = lottoService.generateTicket(winningNumbers);
+
         final int bonusNumber = requestBonusNumber();
-        return new WinningTicketDto(winningNumbers, bonusNumber);
+        final Ball bonusBall = lottoService.generateBall(bonusNumber);
+        return new WinningTicket(ticket, bonusBall);
     }
 
     private List<Integer> requestWinningNumbers() {
@@ -84,12 +87,12 @@ public class LottoController {
         return inputView.requestBonusNumber();
     }
 
-    public void announceTickets(List<TicketDto> ticketDtos) {
-        outputView.printTicketCount(ticketDtos);
-        outputView.printTickets(ticketDtos);
+    private void showAnalysis(final lotto.domain.ticket.Analysis analysis) {
+        final AnalysisDto analysisDto = AnalysisDto.toDto(analysis);
+        this.announceAnalysis(analysisDto);
     }
 
-    public void announceAnalysis(AnalysisDto analysis) {
+    private void announceAnalysis(AnalysisDto analysis) {
         outputView.printMessage(EMPTY_STRING);
         outputView.printMessage(TITLE_OF_ANALYSIS);
         outputView.printMessage(DIVIDING_LINE);
