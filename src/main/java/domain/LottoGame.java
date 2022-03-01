@@ -69,7 +69,7 @@ public class LottoGame {
         long prizeSum = ranks.stream()
                 .map(Rewards::getPrize)
                 .reduce(BASE_LONG_SUM, Long::sum);
-        return (float) prizeSum / lottos.numberOfLottery();
+        return (float) prizeSum / lottos.numberOfLottery() / LOTTO_PRICE;
     }
 
     public Lottos getLottos() {

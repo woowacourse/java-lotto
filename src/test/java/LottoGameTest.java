@@ -49,7 +49,7 @@ public class LottoGameTest {
         int bonusNumber = 9;
         lottoGame.enterWinningLottoNumbersAndBonusNumber(winningNumbers, bonusNumber);
         float yield = lottoGame.calculateYield();
-        assertThat(yield).isEqualTo((float) (Rewards.FIRST_REWARD.getPrize() + Rewards.FIRST_REWARD.getPrize()) / 3);
+        assertThat(yield).isEqualTo((float) (Rewards.FIRST_REWARD.getPrize() + Rewards.FIRST_REWARD.getPrize()) / 3000);
     }
 
     @Test
