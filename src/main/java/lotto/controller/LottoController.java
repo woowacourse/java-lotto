@@ -21,7 +21,7 @@ public class LottoController {
             manualNumbers = inputManualNumbers(quantityOfManual);
         }
 
-        final Lottos lottos = new Lottos(money, manualNumbers);
+        final Lottos lottos = new Lottos(money.getQuantityOfAuto(quantityOfManual), manualNumbers);
         OutputView.printInitResult(lottos, quantityOfManual);
         return lottos;
     }

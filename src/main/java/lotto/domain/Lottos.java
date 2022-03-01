@@ -13,9 +13,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Lottos(Money money, List<Lotto> lottos) {
-        final int quantityOfAuto = money.getQuantityOfAuto(lottos.size());
-
+    public Lottos(int quantityOfAuto, List<Lotto> lottos) {
         IntStream.range(0, quantityOfAuto)
                 .mapToObj(i -> Lotto.createByAuto())
                 .forEach(lottos::add);
