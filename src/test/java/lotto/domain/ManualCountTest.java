@@ -12,8 +12,8 @@ class ManualCountTest {
     void Generate_Manual_Count() {
         String input = "5";
         Money money = new Money("10000");
-        ManualCount manualCount = new ManualCount(money, input);
-        assertThat(manualCount.getCount()).isEqualTo(5);
+        Count count = new Count(money, input);
+        assertThat(count.getCount()).isEqualTo(5);
     }
 
     @Test
@@ -22,7 +22,7 @@ class ManualCountTest {
         String input = "abc";
         Money money = new Money("10000");
 
-        assertThatThrownBy(() -> new ManualCount(money, input)).hasMessageContaining(ManualCount.ERROR_NOT_INTEGER);
+        assertThatThrownBy(() -> new Count(money, input)).hasMessageContaining(Count.ERROR_NOT_INTEGER);
     }
 
     @Test
@@ -31,6 +31,6 @@ class ManualCountTest {
         String input = "100";
         Money money = new Money("10000");
 
-        assertThatThrownBy(() -> new ManualCount(money, input)).hasMessageContaining(ManualCount.ERROR_SHORT_MONEY);
+        assertThatThrownBy(() -> new Count(money, input)).hasMessageContaining(Count.ERROR_SHORT_MONEY);
     }
 }

@@ -4,20 +4,17 @@ import java.util.List;
 import lotto.strategy.LottoBuyStrategy;
 
 public class Lotto {
-    private final Money money;
     private final List<ChoiceNumber> lotto;
     private final LottoResult result;
 
-    public Lotto(Money money, LottoBuyStrategy lottoBuyStrategy) {
-        this.money = money;
-        this.lotto = lottoBuyStrategy.buyLotto(money.getCount());
+    public Lotto(int count, LottoBuyStrategy lottoBuyStrategy) {
+        this.lotto = lottoBuyStrategy.buyLotto(count);
         this.result = new LottoResult();
     }
 
-    public Lotto(Money money, List<ChoiceNumber> choiceNumbers, LottoBuyStrategy lottoBuyStrategy) {
-        this.money = money;
+    public Lotto(int count, List<ChoiceNumber> choiceNumbers, LottoBuyStrategy lottoBuyStrategy) {
         this.lotto = choiceNumbers;
-        this.lotto.addAll(lottoBuyStrategy.buyLotto(money.getCount() - choiceNumbers.size()));
+        this.lotto.addAll(lottoBuyStrategy.buyLotto(count));
         this.result = new LottoResult();
     }
 
@@ -29,7 +26,7 @@ public class Lotto {
         return result;
     }
 
-    public double getYield() {
+    public double getYield(Money money) {
         return result.sumOfPrize() / money.getAmount();
     }
 

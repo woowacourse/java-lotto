@@ -19,7 +19,7 @@ class LottoTest {
     void setLotto() {
         money = new Money("10000");
         MakeEachRankStrategy makeEachRankStrategy = new MakeEachRankStrategy();
-        lotto = new Lotto(money, makeEachRankStrategy);
+        lotto = new Lotto(money.getAmount() / Money.UNIT_AMOUNT, makeEachRankStrategy);
         ChoiceNumber choiceNumber = new ChoiceNumber("1,2,3,4,5,6");
         BonusNumber bonusNumber = new BonusNumber("7", choiceNumber);
         WinningNumber winningNumber = new WinningNumber(choiceNumber, bonusNumber);
@@ -40,6 +40,6 @@ class LottoTest {
         for (LottoRank value : LottoRank.values()) {
             totalPrize += value.getPrizeAmount();
         }
-        Assertions.assertThat(lotto.getYield()).isEqualTo(totalPrize / money.getAmount());
+        Assertions.assertThat(lotto.getYield(money)).isEqualTo(totalPrize / money.getAmount());
     }
 }

@@ -20,10 +20,12 @@ public class LottoController {
     private Money money;
     private Lotto lotto;
     private Count manualCount;
+    private Count autoCount;
 
     public void start() {
         money = initMoney();
         manualCount = initManualCount();
+        autoCount = new Count(money.getAmount() / Money.UNIT_AMOUNT - manualCount.getCount());
         initLotto();
         WinningNumber winningNumber = setWinningNumber();
         findAndPrintResult(winningNumber);
@@ -52,8 +54,8 @@ public class LottoController {
     private void initLotto() {
         AutoBuy autoBuy = new AutoBuy();
         List<ChoiceNumber> manualNumbers = initManualNumbers(manualCount.getCount());
-        this.lotto = new Lotto(money, manualNumbers, autoBuy);
-        printLotto(LottoDto.from(this.lotto), manualCount.getCount(), money.getCount() - manualCount.getCount());
+        this.lotto = new Lotto(autoCount.getCount(), manualNumbers, autoBuy);
+        printLotto(LottoDto.from(this.lotto), manualCount.getCount(), autoCount.getCount());
     }
 
     private List<ChoiceNumber> initManualNumbers(int count) {
@@ -99,6 +101,6 @@ public class LottoController {
     private void findAndPrintResult(WinningNumber winningNumber) {
         LottoResult result = lotto.computeResult(winningNumber);
         printResult(result);
-        printYield(lotto.getYield());
+        printYield(lotto.getYield(money));
     }
 }

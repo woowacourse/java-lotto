@@ -1,14 +1,18 @@
 package lotto.domain;
 
-public class ManualCount {
+public class Count {
     protected static final String ERROR_NOT_INTEGER = "[ERROR] 수동으로 구매할 횟수는 숫자로 입력해주세요";
     protected static final String ERROR_SHORT_MONEY = "[ERROR] 금액이 모자랍니다, 수동 구매횟수를 줄여주세요.";
     private final int count;
 
-    public ManualCount(Money money, String text) {
+    public Count(Money money, String text) {
         int value = convertToInt(text);
         checkShortMoney(money, value);
         this.count = value;
+    }
+
+    public Count(int count) {
+        this.count = count;
     }
 
     private int convertToInt(String text) {
