@@ -1,6 +1,8 @@
 package domain;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -10,11 +12,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MINIMUM_VALUE = 1;
     private static final int MAXIMUM_VALUE = 45;
 
-    private static final LottoNumber[] LOTTO_NUMBERS = new LottoNumber[MAXIMUM_VALUE + 1];
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBERS;
 
     static {
-        IntStream.rangeClosed(MINIMUM_VALUE, MAXIMUM_VALUE)
-            .forEach(number -> LOTTO_NUMBERS[number] = new LottoNumber(number));
+        LOTTO_NUMBERS = IntStream.rangeClosed(MINIMUM_VALUE, MAXIMUM_VALUE).boxed()
+            .collect(Collectors.toMap(number -> number, LottoNumber::new));
     }
 
     private final int value;
@@ -25,7 +27,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber valueOf(final int number) {
         validateInRange(number);
-        return LOTTO_NUMBERS[number];
+
+        return LOTTO_NUMBERS.get(number);
     }
 
     private static void validateInRange(int value) {
