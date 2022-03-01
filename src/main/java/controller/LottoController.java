@@ -74,6 +74,8 @@ public class LottoController {
     }
 
     private Lottos setupManualLottos(int manualQuantity) {
+        InputView.printToInformManualLottoInput();
+
         List<Lotto> lottos = new ArrayList<>();
         do {
             lottos.add(getManualLotto());

@@ -31,10 +31,12 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static List<Integer> scanManualLottoNumbers() {
+    public static void printToInformManualLottoInput() {
         System.out.print(System.lineSeparator());
         System.out.println(MESSAGE_FOR_MANUAL_LOTTO_NUMBERS);
+    }
 
+    public static List<Integer> scanManualLottoNumbers() {
         String userInput = SCANNER.nextLine();
         String[] userInputSplit = userInput.split(SPLIT_DELIMITER);
         return Arrays.stream(userInputSplit)
@@ -43,6 +45,7 @@ public class InputView {
     }
 
     public static void printLottos(Wallet wallet, Lottos lottos) {
+        System.out.print(System.lineSeparator());
         System.out.printf(MESSAGE_FOR_PURCHASED_LOTTOS, wallet.getManualQuantity(), wallet.getAutoQuantity());
 
         lottos.getLottos()
