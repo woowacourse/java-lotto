@@ -4,7 +4,6 @@ import lotto.domain.LottoMatchKind;
 import lotto.domain.LottoNumbers;
 import lotto.domain.WinningNumbers;
 import lotto.domain.generator.LottoCustomGenerator;
-import lotto.domain.generator.LottoGenerator;
 import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ class LottoServiceTest {
     private final String manualPurchaseCounts = "2";
     private final WinningNumbers winningNumbers = new WinningNumbers(
             new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.from("1"));
-    private final LottoService lottoService = new LottoService();
+    private final LottoService lottoService = new LottoService(new LottoCustomGenerator());
 
     @Test
     @DisplayName("수동 구매 개수를 반환한다.")
@@ -103,6 +102,6 @@ class LottoServiceTest {
                 Arrays.asList("4", "5", "6", "7", "8", "9"),
                 Arrays.asList("5", "6", "7", "8", "9", "10")
         ));
-        lottoService.generateAutoLottoNumbers(new LottoCustomGenerator(), ALL_COUNTS_OF_LOTTO_NUMBERS);
+        lottoService.generateAutoLottoNumbers(ALL_COUNTS_OF_LOTTO_NUMBERS);
     }
 }

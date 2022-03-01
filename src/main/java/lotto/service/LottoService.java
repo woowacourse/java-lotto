@@ -13,9 +13,11 @@ public class LottoService {
     private static final int LOTTO_PRICE = 1000;
     private static final int INITIAL_MATCH_COUNT = 0;
 
+    private final LottoGenerator lottoGenerator;
     private final List<LottoNumbers> lottoNumbersGroup;
 
-    public LottoService() {
+    public LottoService(final LottoGenerator lottoGenerator) {
+        this.lottoGenerator = lottoGenerator;
         lottoNumbersGroup = new ArrayList<>();
     }
 
@@ -44,7 +46,7 @@ public class LottoService {
         }
     }
 
-    public void generateAutoLottoNumbers(final LottoGenerator lottoGenerator, final int lottoNumbersCount) {
+    public void generateAutoLottoNumbers(final int lottoNumbersCount) {
         final int autoLottoCounts = lottoNumbersCount - lottoNumbersGroup.size();
         lottoNumbersGroup.addAll(lottoGenerator.generateLottoNumbersGroup(autoLottoCounts));
     }

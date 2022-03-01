@@ -17,21 +17,19 @@ import java.util.stream.Collectors;
 
 public class LottoController {
     private final LottoService lottoService;
-    private final LottoGenerator lottoGenerator;
     private final InputView inputView;
     private final OutputView outputView;
 
     public LottoController(final LottoGenerator lottoGenerator, final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoGenerator = lottoGenerator;
-        lottoService = new LottoService();
+        lottoService = new LottoService(lottoGenerator);
     }
 
     public void run() {
         final int allCounts = initializeLottoCounts();
         final int manualCounts = generateManualLottoNumbersGroup(allCounts);
-        lottoService.generateAutoLottoNumbers(lottoGenerator, allCounts);
+        lottoService.generateAutoLottoNumbers(allCounts);
         outputView.printPurchaseCount(manualCounts, allCounts);
         printLottoNumbersGroup();
         final WinningNumbers winningNumbers = generateWinningNumbers();
