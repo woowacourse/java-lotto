@@ -70,7 +70,7 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    public static Integer requestBonusNumber() {
+    public static int requestBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
         Integer bonusNumber = toInt(nextLine());
         System.out.println();
