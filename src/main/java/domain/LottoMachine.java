@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
 
-    private static final int DEFAULT_VALUE = 0;
+    public static final int LOTTO_TICKET_PRICE = 1000;
     private static final int INCREASE_VALUE = 1;
 
     public List<LottoTicket> purchaseLottoTickets(List<List<Integer>> lottoNumbers,
@@ -27,7 +27,7 @@ public class LottoMachine {
         Map<LottoRank, Integer> ranks = new HashMap<>();
 
         for (LottoRank lottoRank : LottoRank.values()) {
-            ranks.put(lottoRank, DEFAULT_VALUE);
+            ranks.put(lottoRank, 0);
         }
 
         for (LottoTicket lottoTicket : lottoTickets) {

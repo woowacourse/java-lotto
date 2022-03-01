@@ -4,8 +4,6 @@ import java.util.*;
 
 public class WinningStat {
 
-    public static final int DEFAULT_VALUE = 0;
-
     private final Map<LottoRank, Integer> stat;
 
     public WinningStat(Map<LottoRank, Integer> ranks) {
@@ -15,10 +13,10 @@ public class WinningStat {
     public double calculateProfit(int ticketPrice) {
         long totalPrize = Arrays.stream(LottoRank.values())
                 .mapToLong(rank -> (long) rank.getPrize() * stat.get(rank))
-                .reduce(DEFAULT_VALUE, Long::sum);
+                .reduce(0, Long::sum);
 
         int num = stat.values().stream()
-                .reduce(DEFAULT_VALUE, Integer::sum);
+                .reduce(0, Integer::sum);
 
         return (double) totalPrize / (num * ticketPrice);
     }

@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Objects;
 
-import static constant.LottoConstant.LOTTO_TICKET_PRICE;
+import static domain.LottoMachine.LOTTO_TICKET_PRICE;
 
 public class Money {
 

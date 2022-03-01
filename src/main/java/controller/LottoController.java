@@ -7,7 +7,7 @@ import view.OutputView;
 
 import java.util.List;
 
-import static constant.LottoConstant.LOTTO_TICKET_PRICE;
+import static domain.LottoMachine.LOTTO_TICKET_PRICE;
 
 public class LottoController {
 
