@@ -12,7 +12,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = List.copyOf(lottos);
     }
 
     public List<MatchResult> match(WinningLotto winningLotto) {
@@ -22,7 +22,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(this.lottos);
+        return this.lottos;
     }
 
     public int getAutoCount() {
@@ -34,7 +34,6 @@ public class Lottos {
     public int getManualCount() {
         return (int) this.lottos.stream()
                 .filter(lotto -> !lotto.isAuto())
-                .peek(lotto -> System.out.println(lotto.isAuto()))
                 .count();
     }
 }
