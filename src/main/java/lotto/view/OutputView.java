@@ -27,6 +27,10 @@ public class OutputView {
         System.out.println(getLottoTicketsInfo(lottoTickets.getLottoTickets()));
     }
 
+    public void printManualLottoGuide() {
+        System.out.println("수동으로 구매할 번호를 입력해주세요.");
+    }
+
     private String getLottoTicketsInfo(List<LottoTicketDto> lottoTickets) {
         String ticketsInfo = "";
 
