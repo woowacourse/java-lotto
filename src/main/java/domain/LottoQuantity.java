@@ -14,6 +14,10 @@ public class LottoQuantity {
         this.lottoQuantity = lottoQuantity;
     }
 
+    public LottoQuantity(InputMoney inputMoney) {
+        this.lottoQuantity = inputMoney.getMoney() / Lotto.SINGLE_LOTTO_PRICE;
+    }
+
     private void validatePositive(int lottoQuantity) {
         if (lottoQuantity <= QUANTITY_CRITERIA) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_TRAIL_NUMBER);

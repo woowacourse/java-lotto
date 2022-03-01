@@ -41,8 +41,7 @@ public class LottoController {
     }
 
     private LottoQuantity generateLottoQuantityByInputMoney(InputMoney inputMoney) {
-        int lottoQuantity = inputMoney.getMoney() / Lotto.SINGLE_LOTTO_PRICE;
-        return new LottoQuantity(lottoQuantity);
+        return new LottoQuantity(inputMoney);
     }
 
     private void printLottoQuantity(LottoQuantity lottoQuantity) {
