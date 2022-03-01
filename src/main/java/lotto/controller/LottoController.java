@@ -10,7 +10,7 @@ import lotto.service.LottoService;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -59,7 +59,7 @@ public class LottoController {
 
     private List<List<String>> inputByManualLottoNumbersGroup(int manualLottoCounts) {
         if (manualLottoCounts == 0) {
-            return Arrays.asList();
+            return Collections.emptyList();
         }
         return inputView.inputManualPurchaseWinningNumbers(manualLottoCounts);
     }
@@ -94,10 +94,11 @@ public class LottoController {
     }
 
     private void printResult(WinningNumbers winningNumbers) {
+        final Map<LottoMatchKind, Integer> matchResult = lottoService.getMatchResult(winningNumbers);
         final List<LottoMatchKindDto> results =
-                convertWinningResultsToDtos(lottoService.getMatchResult(winningNumbers));
+                convertWinningResultsToDtos(matchResult);
         outputView.printCountOfWinningByMatchKind(results);
-        outputView.printProfitRate(lottoService.getProfitRate());
+        outputView.printProfitRate(lottoService.getProfitRate(matchResult));
     }
 
     private List<LottoMatchKindDto> convertWinningResultsToDtos(final Map<LottoMatchKind, Integer> results) {

@@ -15,15 +15,12 @@ public class LottoService {
 
     private final LottoGenerator lottoGenerator;
     private final PurchaseAmount purchaseAmount;
-    private final Map<LottoMatchKind, Integer> matchResult;
     private final List<LottoNumbers> lottoNumbersGroup;
 
     public LottoService(final LottoGenerator lottoGenerator, final String purchaseAmount) {
         this.lottoGenerator = lottoGenerator;
         this.purchaseAmount = PurchaseAmount.fromPurchaseAmountAndLottoPrice(purchaseAmount, LOTTO_PRICE);
         lottoNumbersGroup = new ArrayList<>();
-        matchResult = new EnumMap<>(LottoMatchKind.class);
-        initializeResult(matchResult);
     }
 
     public int countOfManualLottoNumbers(final String manualCounts) {
@@ -52,11 +49,6 @@ public class LottoService {
         lottoNumbersGroup.addAll(lottoGenerator.generateLottoNumbersGroup(autoLottoCounts));
     }
 
-    private void initializeResult(final Map<LottoMatchKind, Integer> result) {
-        Arrays.stream(LottoMatchKind.values())
-                .forEach(lottoMatchKind -> result.put(lottoMatchKind, INITIAL_MATCH_COUNT));
-    }
-
     public int countOfLottoNumbers() {
         return purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE);
     }
@@ -72,10 +64,8 @@ public class LottoService {
     }
 
     public Map<LottoMatchKind, Integer> getMatchResult(final WinningNumbers winningNumbers) {
-        return match(winningNumbers);
-    }
-
-    private Map<LottoMatchKind, Integer> match(final WinningNumbers winningNumbers) {
+        final Map<LottoMatchKind, Integer> matchResult = new EnumMap<>(LottoMatchKind.class);
+        initializeResult(matchResult);
         lottoNumbersGroup.stream()
                 .map(winningNumbers::getLottoMatchResult)
                 .filter(lottoMatchKind -> lottoMatchKind != LottoMatchKind.BLANK)
@@ -83,7 +73,12 @@ public class LottoService {
         return matchResult;
     }
 
-    public double getProfitRate() {
+    private void initializeResult(final Map<LottoMatchKind, Integer> result) {
+        Arrays.stream(LottoMatchKind.values())
+                .forEach(lottoMatchKind -> result.put(lottoMatchKind, INITIAL_MATCH_COUNT));
+    }
+
+    public double getProfitRate(final Map<LottoMatchKind, Integer> matchResult) {
         final long totalProfit = matchResult.keySet()
                 .stream()
                 .mapToLong(lottoMatchKind -> lottoMatchKind.getProfit(matchResult.get(lottoMatchKind)))

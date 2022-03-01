@@ -89,10 +89,10 @@ class LottoServiceTest {
     void getProfitRate() {
         //given
         generateLottoNumbers();
-        lottoService.getMatchResult(winningNumbers);
+        final Map<LottoMatchKind, Integer> matchResult = lottoService.getMatchResult(winningNumbers);
         final double expected = 2031555000 / (double) 5000;
         //when
-        final double actual = lottoService.getProfitRate();
+        final double actual = lottoService.getProfitRate(matchResult);
         //then
         assertThat(actual).isEqualTo(expected);
     }
