@@ -25,7 +25,7 @@ public class Number {
         return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
     }
 
-    public boolean hasSameNumber(List<Number> winningNumbers) {
+    public boolean hasSameNumber(final List<Number> winningNumbers) {
         return winningNumbers.stream()
                 .anyMatch(winningNumber -> this.number == winningNumber.number);
     }
