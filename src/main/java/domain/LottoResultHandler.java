@@ -1,6 +1,6 @@
 package domain;
 
-import static controller.LottoController.LOTTO_PRICE;
+import static domain.Lotto.LOTTO_PRICE;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 

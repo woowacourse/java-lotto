@@ -1,5 +1,6 @@
 package controller;
 
+import static domain.Lotto.LOTTO_PRICE;
 import static domain.LottoResultHandler.getLottoResultDto;
 
 import domain.Lotto;
@@ -16,7 +17,6 @@ import vo.InputMoney;
 import vo.NumberOfLottos;
 
 public class LottoController {
-    public static final int LOTTO_PRICE = 1000;
 
     public void start() {
         InputMoney inputmoney = getInputMoney();

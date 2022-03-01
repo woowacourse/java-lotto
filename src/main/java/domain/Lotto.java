@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
+    public static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_SIZE = 6;
     private static final String ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS = "%d개의 숫자를 골라주세요.";
     private static final String ERROR_MESSAGE_FOR_DUPLICATE_LOTTO_NUMBERS = "숫자는 중복될 수 없습니다.";

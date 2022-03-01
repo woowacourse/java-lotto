@@ -1,6 +1,6 @@
 package vo;
 
-import static controller.LottoController.LOTTO_PRICE;
+import static domain.Lotto.LOTTO_PRICE;
 
 public class InputMoney {
     private static final int REMAIN = 0;
