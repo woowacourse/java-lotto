@@ -14,14 +14,14 @@ class WinningResultTest {
     @Test
     @DisplayName("당첨결과를 생성해서 저장한다.")
     void generateWinningResult() {
-        Map<Rank, Integer> result = new LinkedHashMap<>();
+        final Map<Rank, Integer> result = new LinkedHashMap<>();
         result.put(Rank.FIRST, 0);
         result.put(Rank.SECOND, 0);
         result.put(Rank.THIRD, 0);
         result.put(Rank.FOURTH, 1);
         result.put(Rank.FIFTH, 3);
 
-        WinningResult winningResult = new WinningResult(result);
+        final WinningResult winningResult = new WinningResult(result);
         winningResult.getWinningResult()
                 .forEach((rank, count) -> assertThat(count)
                 .isEqualTo(result.get(rank)));
@@ -30,15 +30,15 @@ class WinningResultTest {
     @Test
     @DisplayName("수익률 계산이 당첨결과와 일치하게 되는지 확인한다.")
     void getRateOfReturn() {
-        Map<Rank, Integer> result = new LinkedHashMap<>();
+        final Map<Rank, Integer> result = new LinkedHashMap<>();
         result.put(Rank.FIRST, 0);
         result.put(Rank.SECOND, 0);
         result.put(Rank.THIRD, 0);
         result.put(Rank.FOURTH, 1);
         result.put(Rank.FIFTH, 3);
 
-        WinningResult winningResult = new WinningResult(result);
-        Money money = new Money(100000);
+        final WinningResult winningResult = new WinningResult(result);
+        final Money money = new Money(100000);
         assertThat(winningResult.getRateOfReturn(money)).isEqualTo(65000 / (double) 100000);
     }
 }
