@@ -30,11 +30,11 @@ public class Money {
         return (double) this.amount / money.amount;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
     public int divideByTicketPrice() {
         return this.getAmount() / TICKET_PRICE;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }
