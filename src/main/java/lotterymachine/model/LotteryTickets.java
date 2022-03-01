@@ -3,6 +3,7 @@ package lotterymachine.model;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import lotterymachine.vo.Ball;
 import lotterymachine.vo.Count;
 
 public class LotteryTickets {
@@ -12,12 +13,12 @@ public class LotteryTickets {
         this.tickets = lotteryTickets;
     }
 
-    public Map<WinningLottery, Count> getLotteriesResult(List<Integer> numbers, int bonusNumber) {
+    public Map<WinningLottery, Count> getLotteriesResult(List<Ball> balls, Ball bonus) {
         final Map<WinningLottery, Count> lotteriesResult = WinningLottery.getWinningLotteries();
         for (LotteryTicket lotteryTicket : tickets) {
-            int matchingNumbers = lotteryTicket.countMatchingNumbers(numbers);
-            boolean containsBonus = lotteryTicket.containsNumber(bonusNumber);
-            WinningLottery winningLottery = WinningLottery.find(containsBonus, matchingNumbers);
+            int numberOfMatchingBalls = lotteryTicket.countMatchingBalls(balls);
+            boolean containsBonus = lotteryTicket.contains(bonus);
+            WinningLottery winningLottery = WinningLottery.find(containsBonus, numberOfMatchingBalls);
             addWinningLottery(lotteriesResult, winningLottery);
         }
         return Collections.unmodifiableMap(lotteriesResult);

@@ -1,27 +1,29 @@
 package lotterymachine.model;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import lotterymachine.vo.Ball;
 
 public class LotteryTicket {
+    private final List<Ball> balls;
 
-    private final List<Integer> numbers;
-
-    public LotteryTicket(final List<Integer> numbers) {
-        this.numbers = numbers;
+    public LotteryTicket(final List<Ball> balls) {
+        this.balls = balls;
     }
 
-    public int countMatchingNumbers(List<Integer> numbers) {
-        return (int) numbers.stream()
-                .filter(this.numbers::contains)
+    public int countMatchingBalls(List<Ball> balls) {
+        return (int) balls.stream()
+                .filter(this.balls::contains)
                 .count();
     }
 
-    public boolean containsNumber(int number) {
-        return this.numbers.contains(number);
+    public boolean contains(Ball ball) {
+        return this.balls.contains(ball);
     }
 
-    public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public List<Integer> getBalls() {
+        return balls.stream()
+                .map(Ball::getNumber)
+                .collect(Collectors.toUnmodifiableList());
     }
 }

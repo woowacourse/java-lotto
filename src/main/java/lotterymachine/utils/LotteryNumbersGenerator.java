@@ -1,14 +1,19 @@
 package lotterymachine.utils;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
-
-import static lotterymachine.utils.LotteryRule.*;
+import java.util.stream.IntStream;
+import lotterymachine.vo.Ball;
 
 public class LotteryNumbersGenerator {
-    public static List<Integer> generate() {
-         return ThreadLocalRandom.current().ints(MINIMUM.getNumber(), MAXIMUM.getNumber())
-                 .distinct().limit(TICKET_SIZE.getNumber()).boxed().collect(Collectors.toList());
+    private static final List<Integer> preparedNumbers = IntStream.rangeClosed(1, 45).boxed()
+            .collect(Collectors.toList());
+    private static final int FIRST_NUMBER_INDEX = 0;
+    private static final int LAST_NUMBER_INDEX = 6;
+
+    public static List<Ball> generate() {
+        Collections.shuffle(preparedNumbers);
+        return Ball.createBalls(preparedNumbers.subList(FIRST_NUMBER_INDEX, LAST_NUMBER_INDEX));
     }
 }

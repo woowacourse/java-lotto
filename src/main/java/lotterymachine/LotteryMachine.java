@@ -5,6 +5,7 @@ import static lotterymachine.utils.LotteryNumbersGenerator.generate;
 
 import java.util.Collections;
 
+import lotterymachine.vo.Ball;
 import lotterymachine.vo.Count;
 import lotterymachine.vo.Money;
 import lotterymachine.dto.LotteryResultDto;
@@ -50,8 +51,9 @@ public class LotteryMachine {
 
     private static List<LotteryResultDto> getLotteryResult(LotteryTickets lotteryTickets) {
         List<Integer> winningNumbers = InputView.getWinningLotteryNumbers();
-        int bonusNumber = InputView.getBonusNumber(winningNumbers);
-        return LotteryResultDto.createLotteryResults(lotteryTickets.getLotteriesResult(winningNumbers, bonusNumber));
+        Ball bonus = Ball.from(InputView.getBonusNumber(winningNumbers));
+        return LotteryResultDto.createLotteryResults(
+                lotteryTickets.getLotteriesResult(Ball.createBalls(winningNumbers), bonus));
     }
 
     private static void printResult(Count numberOfTickets, List<LotteryResultDto> lotteryResult) {

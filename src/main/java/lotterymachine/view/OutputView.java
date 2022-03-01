@@ -14,7 +14,7 @@ public class OutputView {
     public static void printLotteryTickets(List<LotteryTicket> lotteryTickets) {
         StringBuilder stringBuilder = new StringBuilder();
         for (LotteryTicket lotteryTicket : lotteryTickets) {
-            stringBuilder.append(lotteryTicket.getNumbers().toString()).append("\n");
+            stringBuilder.append(lotteryTicket.getBalls().toString()).append("\n");
         }
         System.out.println(stringBuilder);
     }
