@@ -1,17 +1,18 @@
 package domain.strategy;
 
 import java.util.List;
+import java.util.Set;
 
 public class StubRandomLottoNumberGenerator implements LottoNumberGenerateStrategy {
-    private final List<List<Integer>> numberSequences;
+    private final List<Set<Integer>> numberSequences;
     private int sequenceCursor = 0;
 
-    public StubRandomLottoNumberGenerator(List<List<Integer>> numberSequences) {
+    public StubRandomLottoNumberGenerator(List<Set<Integer>> numberSequences) {
         this.numberSequences = numberSequences;
     }
 
     @Override
-    public List<Integer> generateLottoNumbers() {
+    public Set<Integer> generateLottoNumbers() {
         int currentCursor = sequenceCursor;
         sequenceCursor = (sequenceCursor + 1) % numberSequences.size();
 

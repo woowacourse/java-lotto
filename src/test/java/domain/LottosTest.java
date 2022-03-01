@@ -20,9 +20,9 @@ public class LottosTest {
     void setupLottos() {
         lottoNumberGenerateStrategy = new StubRandomLottoNumberGenerator(
                 List.of(
-                        List.of(1, 2, 3, 4, 5, 6),
-                        List.of(7, 8, 9, 10, 11, 12),
-                        List.of(13, 14, 15, 16, 17, 18)
+                        Set.of(1, 2, 3, 4, 5, 6),
+                        Set.of(7, 8, 9, 10, 11, 12),
+                        Set.of(13, 14, 15, 16, 17, 18)
                 )
         );
 
