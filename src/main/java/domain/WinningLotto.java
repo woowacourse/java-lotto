@@ -2,8 +2,6 @@ package domain;
 
 public class WinningLotto {
 
-    private static final String ERROR_MESSAGE_BONUS_NUMBER_DUPLICATE = "보너스 볼은 당첨번호와 중복될 수 없습니다.";
-
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
@@ -15,7 +13,7 @@ public class WinningLotto {
 
     private void validateDuplicate(Lotto winningLotto, LottoNumber bonusNumber) {
         if (winningLotto.containsNumber(bonusNumber)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_BONUS_NUMBER_DUPLICATE);
+            throw new IllegalArgumentException("보너스 볼은 당첨번호와 중복될 수 없습니다.");
         }
     }
 

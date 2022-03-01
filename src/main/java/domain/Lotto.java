@@ -9,9 +9,6 @@ import constant.LottoConstant;
 
 public class Lotto {
 
-    private static final String ERROR_MESSAGE_NOT_IN_SIZE = "로또 숫자 갯수는 6개이여야 합니다.";
-    private static final String ERROR_MESSAGE_NOT_DUPLICATE = "로또 숫자는 중복일 수 없습니다.";
-
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -22,7 +19,7 @@ public class Lotto {
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LottoConstant.LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_NOT_IN_SIZE);
+            throw new IllegalArgumentException("로또 숫자 갯수는 " + LottoConstant.LOTTO_NUMBER_SIZE + "개이여야 합니다.");
         }
     }
 
@@ -31,7 +28,7 @@ public class Lotto {
             .distinct()
             .collect(Collectors.toList());
         if (deDuplicatedNumbers.size() != LottoConstant.LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_NOT_DUPLICATE);
+            throw new IllegalArgumentException("로또 숫자는 중복일 수 없습니다.");
         }
     }
 

@@ -9,12 +9,11 @@ import constant.LottoConstant;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final String ERROR_MESSAGE_NOT_IN_RANGE = "유효한 로또 번호가 아닙니다.";
-
     private static final Map<Integer, LottoNumber> LOTTO_NUMBERS;
 
     static {
-        LOTTO_NUMBERS = IntStream.rangeClosed(LottoConstant.MINIMUM_LOTTO_NUMBER, LottoConstant.MAXIMUM_LOTTO_NUMBER).boxed()
+        LOTTO_NUMBERS = IntStream.rangeClosed(LottoConstant.MINIMUM_LOTTO_NUMBER, LottoConstant.MAXIMUM_LOTTO_NUMBER)
+            .boxed()
             .collect(Collectors.toMap(number -> number, LottoNumber::new));
     }
 
@@ -32,7 +31,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static void validateInRange(int value) {
         if (value < LottoConstant.MINIMUM_LOTTO_NUMBER || value > LottoConstant.MAXIMUM_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_NOT_IN_RANGE);
+            throw new IllegalArgumentException("유효한 로또 번호가 아닙니다.");
         }
     }
 

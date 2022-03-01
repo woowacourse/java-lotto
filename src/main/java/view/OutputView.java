@@ -13,13 +13,6 @@ import domain.Lottos;
 
 public class OutputView {
 
-    private static final String RESPONSE_MESSAGE_PURCHASED_LOTTO = "개를 구매했습니다.";
-    private static final String REWARD_WITH_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
-    private static final String REWARD_DEFAULT_FORMAT = "%d개 일치 (%d원)- %d개\n";
-    private static final String PROFIT_RATE_BENEFIT_FORMAT = "총 수익률은 (%.2f)입니다.";
-    private static final String PROFIT_RATE_LOSS_FORMAT = "총 수익률은 (%.2f)입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-    private static final String WINNING_STATISTICS = "\n당첨 통계";
-    private static final String PRINT_DECISION = "---------";
     private static final int SECOND_DECIMAL_POINT = 100;
     private static final int BENEFIT_STANDARD = 1;
 
@@ -27,7 +20,7 @@ public class OutputView {
     }
 
     public static void showPurchasedLottos(Lottos lottos) {
-        System.out.println(lottos.getLottos().size() + RESPONSE_MESSAGE_PURCHASED_LOTTO);
+        System.out.println(lottos.getLottos().size() + "개를 구매했습니다.");
 
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.getLottoNumbers().stream()
@@ -37,8 +30,8 @@ public class OutputView {
     }
 
     public static void showWinningStatistics(Map<LottoReward, Integer> winningStatistics) {
-        System.out.println(WINNING_STATISTICS);
-        System.out.println(PRINT_DECISION);
+        System.out.println("\n당첨 통계");
+        System.out.println("---------");
 
         List<LottoReward> rewards = Arrays.asList(LottoReward.values());
         Collections.reverse(rewards);
@@ -53,21 +46,22 @@ public class OutputView {
             return;
         }
         if (reward.hasBonus()) {
-            System.out.printf(REWARD_WITH_BONUS_FORMAT, reward.getMatchCount(), reward.getPrice(), rewardCount);
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", reward.getMatchCount(), reward.getPrice(), rewardCount);
             return;
         }
-
-        System.out.printf(REWARD_DEFAULT_FORMAT, reward.getMatchCount(), reward.getPrice(), rewardCount);
+        System.out.printf("%d개 일치 (%d원)- %d개\n", reward.getMatchCount(), reward.getPrice(), rewardCount);
     }
 
     public static void showProfitRate(double profitRate) {
-        double test = Math.floor(profitRate * SECOND_DECIMAL_POINT) / SECOND_DECIMAL_POINT;
+        double processedProfitRate = Math.floor(profitRate * SECOND_DECIMAL_POINT) / SECOND_DECIMAL_POINT;
 
         if (profitRate < BENEFIT_STANDARD) {
-            System.out.printf(PROFIT_RATE_LOSS_FORMAT, test);
+            System.out.printf("총 수익률은 (%.2f)입니다.(기준이 " + BENEFIT_STANDARD + "이기 때문에 결과적으로 손해라는 의미임)",
+                processedProfitRate);
+            return;
         }
         if (profitRate >= BENEFIT_STANDARD) {
-            System.out.printf(PROFIT_RATE_BENEFIT_FORMAT, test);
+            System.out.printf("총 수익률은 (%.2f)입니다.", processedProfitRate);
         }
     }
 }

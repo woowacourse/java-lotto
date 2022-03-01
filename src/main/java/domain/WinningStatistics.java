@@ -11,13 +11,12 @@ import constant.LottoConstant;
 public class WinningStatistics {
 
     private static final int DEFAULT_VALUE = 0;
-    private static final int PLUS_COUNT = 1;
 
     private final Map<LottoReward, Integer> statistics = new EnumMap<>(LottoReward.class);
 
     public WinningStatistics(List<LottoReward> lottoRewards) {
         Arrays.stream(LottoReward.values()).forEach(lottoReward -> statistics.put(lottoReward, DEFAULT_VALUE));
-        lottoRewards.forEach(lottoReward -> statistics.replace(lottoReward, statistics.get(lottoReward) + PLUS_COUNT));
+        lottoRewards.forEach(lottoReward -> statistics.replace(lottoReward, statistics.get(lottoReward) + 1));
     }
 
     public double calculateProfitRate() {

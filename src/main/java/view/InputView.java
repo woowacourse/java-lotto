@@ -9,13 +9,7 @@ import constant.LottoConstant;
 
 public class InputView {
 
-    private static final String REQUEST_MESSAGE_INPUT_PURCHASE_MONEY = "구입금액을 입력해 주세요.";
-    private static final String ERROR_MESSAGE_TYPE_OF_MONEY = "금액은 숫자가 아닐 수 없습니다.";
-    private static final String ERROR_MESSAGE_RANGE_OF_MONEY = "금액은 0이하일 수 없습니다.";
-    private static final String REQUEST_MESSAGE_WINNING_LOTTO_NUMBERS = "\n지난 주 당첨 번호를 입력해 주세요.";
-    private static final String REQUEST_MESSAGE_INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
-    private static final String REGEX_OF_LOTTO_NUMBER = ", ";
-    private static final int REGEX_LIMIT = -1;
+    private static final String NUMBER_SPLITTER = ", ";
     private static final int MINIMUM_VALUE = 0;
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -28,7 +22,7 @@ public class InputView {
     }
 
     public static int getPurchaseAmount() {
-        System.out.println(REQUEST_MESSAGE_INPUT_PURCHASE_MONEY);
+        System.out.println("구입금액을 입력해 주세요.");
         String inputMoney = getInput();
         validatePurchaseMoney(inputMoney);
 
@@ -44,18 +38,18 @@ public class InputView {
         try {
             Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_TYPE_OF_MONEY);
+            throw new IllegalArgumentException("금액은 숫자가 아닐 수 없습니다.");
         }
     }
 
     private static void validateRange(String value) {
         if (Integer.parseInt(value) <= MINIMUM_VALUE) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_RANGE_OF_MONEY);
+            throw new IllegalArgumentException("금액은 " + MINIMUM_VALUE + "이하일 수 없습니다.");
         }
     }
 
     public static List<Integer> getWinningLottoNumbers() {
-        System.out.println(REQUEST_MESSAGE_WINNING_LOTTO_NUMBERS);
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         String inputWinningLottoNumbers = getInput();
 
         List<String> winningLottoNumbers = convertStringList(inputWinningLottoNumbers);
@@ -64,8 +58,8 @@ public class InputView {
         return convertIntegerList(winningLottoNumbers);
     }
 
-    private static List<String> convertStringList(String inputWinningLottoNumbers) {
-        return Arrays.stream(inputWinningLottoNumbers.split(REGEX_OF_LOTTO_NUMBER, REGEX_LIMIT))
+    private static List<String> convertStringList(String lottoNumbers) {
+        return Arrays.stream(lottoNumbers.split(NUMBER_SPLITTER, -1))
             .collect(Collectors.toList());
     }
 
@@ -89,7 +83,7 @@ public class InputView {
     }
 
     public static int getBonusBall() {
-        System.out.println(REQUEST_MESSAGE_INPUT_BONUS_BALL);
+        System.out.println("보너스 볼을 입력해 주세요.");
         String inputBonusBall = getInput();
         validateBonusBall(inputBonusBall);
 
