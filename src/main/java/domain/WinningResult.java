@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class WinningResult {
 
-	private final EnumMap<LottoRank, Integer> winningResult;
+	private final Map<LottoRank, Integer> winningResult;
 
 	public WinningResult(final EnumMap<LottoRank, Integer> winningResult) {
 		this.winningResult = winningResult;

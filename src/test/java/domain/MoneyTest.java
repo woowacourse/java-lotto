@@ -39,7 +39,7 @@ public class MoneyTest {
 		Money money = Money.from("5000");
 		int manualLottoCount = 2;
 		//when
-		money.purchaseManualLotto(manualLottoCount);
+		money = new Money((money.findPurchaseLottoCount() - manualLottoCount) * Money.LOTTO_PRICE);
 		//then
 		assertThat(money.findPurchaseLottoCount()).isEqualTo(3);
 	}
