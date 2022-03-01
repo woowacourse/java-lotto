@@ -43,8 +43,7 @@ public class Input {
     }
 
     private static void validateNumber(final String input) {
-        String number = input.trim();
-        if (isBlank(number) || !isNumber(number)) {
+        if (isBlank(input) || !isNumber(input.trim())) {
             throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
         }
     }

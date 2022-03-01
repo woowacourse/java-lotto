@@ -9,8 +9,8 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(final List<Lotto> lottos) {
+        validateLottos(lottos);
         this.lottos = new ArrayList<>(lottos);
-        validateLottos(this.lottos);
     }
 
     public List<Lotto> getLottos() {
