@@ -14,7 +14,7 @@ public class LottosTest {
     @DisplayName("구입 금액에 따른 개수만큼 로또 생성")
     public void generateLottosTest() {
         int count = 14;
-        Lottos lottos = Lottos.generateLottos(count);
+        Lottos lottos = AutoLottos.generateLottos(count);
         assertThat(lottos.size()).isEqualTo(count);
     }
 

@@ -3,6 +3,7 @@ package view;
 import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
+import domain.ManualLottos;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -69,13 +70,13 @@ public class InputView {
         }
     }
 
-    public static Lottos askManualLottoNumbers(int manualLottoCount) {
+    public static ManualLottos askManualLottoNumbers(int manualLottoCount) {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             String input = scanner.nextLine();
             lottos.add(getLotto(input));
         }
-        return new Lottos(lottos);
+        return new ManualLottos(lottos);
     }
 }
