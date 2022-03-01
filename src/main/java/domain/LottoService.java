@@ -4,11 +4,9 @@ import dto.LottoDto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class LottoService {
@@ -16,8 +14,6 @@ public class LottoService {
     private static final int LOTTO_SIZE = 6;
     private static final int RANK_COUNT_UNIT = 1;
     private static final int RANK_COUNT_INIT_NUMBER = 0;
-    private static final int LOTTO_NUMBER_MAX = 45;
-    private static final int LOTTO_NUMBER_UNIT_TO_CORRECT = 1;
     private static final int INIT_WIN_PRICE = 0;
     private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "보너스 볼 번호가 지난 주 당첨 번호와 일치할 수 없습니다.";
     private static final String ERROR_LOTTO_SIZE_MESSAGE = "번호는 6개를 입력하셔야 합니다.";
@@ -43,41 +39,17 @@ public class LottoService {
     }
 
     public void issueLotto() {
-        this.issuedLotto = generateLotto(money.calculateCounts());
+        this.issuedLotto = generateLotto(money.calculateCounts(), new AutoLottoGenerator());
     }
 
-    private List<Lotto> generateLotto(int number) {
-        return issueLottoWithCount(number);
-    }
-
-    private List<Lotto> issueLottoWithCount(final int number) {
+    private List<Lotto> generateLotto(final int number, LottoGenerator lottoGenerator) {
         final List<Lotto> issuedLotto = new ArrayList<>();
         Count count = new Count(number);
         while (!count.isEnd()) {
             count = count.decrease();
-            issuedLotto.add(generateAutoLotto());
+            issuedLotto.add(lottoGenerator.generate());
         }
         return Collections.unmodifiableList(issuedLotto);
-    }
-
-    private Lotto generateAutoLotto() {
-        return getAutoLottoFrom(generateAutoLottoNumbers());
-    }
-
-    private HashSet<LottoNumber> generateAutoLottoNumbers() {
-        HashSet<LottoNumber> autoLottoNumbers = new HashSet<>();
-        while (autoLottoNumbers.size() < LOTTO_SIZE) {
-            autoLottoNumbers.add(
-                new LottoNumber(
-                    ThreadLocalRandom.current().nextInt(LOTTO_NUMBER_MAX) + LOTTO_NUMBER_UNIT_TO_CORRECT));
-        }
-        return autoLottoNumbers;
-    }
-
-    private Lotto getAutoLottoFrom(final HashSet<LottoNumber> autoLottoNumbers) {
-        return new Lotto(autoLottoNumbers.stream()
-            .sorted()
-            .collect(Collectors.toList()));
     }
 
     public List<LottoDto> getIssuedLotto() {
@@ -96,14 +68,6 @@ public class LottoService {
 
     private boolean isBonusNumberContain(final Lotto lotto, final LottoNumber bonusNumber) {
         return lotto.isContainNumber(bonusNumber);
-    }
-
-    private List<Lotto> convertToLotto(final List<LottoDto> issuedLottoDto) {
-        final List<Lotto> issuedLotto = new ArrayList<>();
-        for (LottoDto lottoDto : issuedLottoDto) {
-            issuedLotto.add(convertToLotto(lottoDto));
-        }
-        return Collections.unmodifiableList(issuedLotto);
     }
 
     private Lotto convertToLotto(final LottoDto lottoDto) {
