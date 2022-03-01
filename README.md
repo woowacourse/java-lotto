@@ -24,7 +24,8 @@
 
 - [ ] `구입 금액` 입력
   - [x] `구입 금액`은 숫자여야 합니다. 아닌 경우, `IllegalArgumentException` 발생
-  - [ ] `구입 금액`은 1000원 단위여야 합니다. 아닌 경우, `IllegalArgumentException` 발생
+  - [x] `구입 금액`은 양수여야 합니다. 아닌 경우, `IllegalArgumentException` 발생
+  - [x] `구입 금액`은 1000원 단위여야 합니다. 아닌 경우, `IllegalArgumentException` 발생
 
 - `수동으로 구매할 로또의 개수` 입력
   - [x] `로또 개수`는 숫자여야 합니다. 아닌 경우, `IllegalArgumentException` 발생
@@ -74,6 +75,17 @@
   - `보너스 볼`을 입력받아 `int`로 변환 후 반환
   - 숫자로 변환하지 못하는 경우, `IllegalArgumentException` 발생
 
+
+### Model - Money
+
+구입 금액을 담당하는 클래스
+
+- 객체 생성 검증 로직
+  - 양수가 아닌 경우, `IllegalArgumentException` 발생
+  - 1000으로 나누어 떨어지지 않는 경우, `IllegalArgumentException` 발생
+
+- getQuotient
+  - 1000으로 나눈 몫을 반환
 
 ### Model - BallStorage
 
