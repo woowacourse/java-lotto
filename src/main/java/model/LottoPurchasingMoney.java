@@ -22,6 +22,10 @@ public class LottoPurchasingMoney {
         return amount;
     }
 
+    public int getPurchasableCount() {
+        return amount / LOTTO_PRICE;
+    }
+
     private void validateEnough(int amount) {
         if (amount < LOTTO_PRICE) {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
