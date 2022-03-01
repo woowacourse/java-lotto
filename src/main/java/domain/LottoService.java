@@ -1,9 +1,7 @@
 package domain;
 
 import domain.generator.AutoLottoGenerator;
-import domain.generator.LottoGenerator;
 import dto.LottoDto;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -41,17 +39,7 @@ public class LottoService {
     }
 
     public void issueLotto() {
-        this.issuedLotto = generateLotto(money.calculateCounts(), new AutoLottoGenerator());
-    }
-
-    private List<Lotto> generateLotto(final int number, LottoGenerator lottoGenerator) {
-        final List<Lotto> issuedLotto = new ArrayList<>();
-        Count count = new Count(number);
-        while (!count.isEnd()) {
-            count = count.decrease();
-            issuedLotto.add(lottoGenerator.generate());
-        }
-        return Collections.unmodifiableList(issuedLotto);
+        this.issuedLotto = LottoFactory.generateLotto(money.calculateCounts(), new AutoLottoGenerator());
     }
 
     public List<LottoDto> getIssuedLotto() {
