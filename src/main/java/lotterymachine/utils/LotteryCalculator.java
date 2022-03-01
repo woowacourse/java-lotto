@@ -4,8 +4,8 @@ import static java.lang.Math.floor;
 
 import java.util.List;
 import lotterymachine.dto.LotteryResultDto;
-import lotterymachine.model.Count;
-import lotterymachine.model.Money;
+import lotterymachine.vo.Count;
+import lotterymachine.vo.Money;
 
 public class LotteryCalculator {
     private static final int LOTTERY_PRICE = 1000;

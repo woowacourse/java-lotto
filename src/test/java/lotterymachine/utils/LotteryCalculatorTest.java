@@ -1,6 +1,6 @@
 package lotterymachine.utils;
 
-import lotterymachine.model.Money;
+import lotterymachine.vo.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

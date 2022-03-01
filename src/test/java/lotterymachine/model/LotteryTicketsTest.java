@@ -1,5 +1,6 @@
 package lotterymachine.model;
 
+import lotterymachine.vo.Count;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package lotterymachine.model;
+package lotterymachine.vo;
 
 import static lotterymachine.model.ErrorMessage.NOT_PURCHASABLE;
 

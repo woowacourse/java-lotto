@@ -5,9 +5,9 @@ import static lotterymachine.utils.LotteryNumbersGenerator.generate;
 
 import java.util.Collections;
 
-import lotterymachine.model.Count;
+import lotterymachine.vo.Count;
+import lotterymachine.vo.Money;
 import lotterymachine.dto.LotteryResultDto;
-import lotterymachine.model.Money;
 import lotterymachine.model.LotteryTicket;
 import lotterymachine.model.LotteryTickets;
 import lotterymachine.utils.LotteryCalculator;

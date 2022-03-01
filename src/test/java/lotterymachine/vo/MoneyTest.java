@@ -1,4 +1,4 @@
-package lotterymachine.model;
+package lotterymachine.vo;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

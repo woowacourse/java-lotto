@@ -3,6 +3,7 @@ package lotterymachine.model;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import lotterymachine.vo.Count;
 
 public class LotteryTickets {
     private final List<LotteryTicket> tickets;

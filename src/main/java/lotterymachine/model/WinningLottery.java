@@ -3,6 +3,7 @@ package lotterymachine.model;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
+import lotterymachine.vo.Count;
 
 public enum WinningLottery {
     THREE(3, 5000),
