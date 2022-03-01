@@ -6,11 +6,11 @@ import java.util.Map;
 import lotterymachine.vo.Count;
 
 public enum WinningLottery {
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 150000),
-    BONUS_FIVE(5, 30000000),
-    SIX(6, 2000000000);
+    THREE(3, 5_000),
+    FOUR(4, 50_000),
+    FIVE(5, 150_000),
+    BONUS_FIVE(5, 30_000_000),
+    SIX(6, 2_000_000_000);
 
     private static final int INITIAL_NUMBER_OF_MATCHING_TICKET = 0;
     private final int number;
