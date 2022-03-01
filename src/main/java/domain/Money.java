@@ -21,9 +21,9 @@ public class Money {
     public int calculateCounts() {
         return this.money / LOTTO_PRICE;
     }
-
-    public double calculateProfit(final int totalWinPrice) {
-        return (double) totalWinPrice / (calculateCounts() * LOTTO_PRICE);
+    
+    public double calculateProfit(final double prizeProfit) {
+        return prizeProfit / (calculateCounts() * LOTTO_PRICE);
     }
 
     @Override

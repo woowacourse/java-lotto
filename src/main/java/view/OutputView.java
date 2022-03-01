@@ -2,9 +2,9 @@ package view;
 
 import domain.RankPrize;
 import dto.LottoDto;
+import dto.ResultDto;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.SortedMap;
 
 public class OutputView {
 
@@ -14,8 +14,6 @@ public class OutputView {
     private static final String RANK_PRICE_MESSAGE = "원)- ";
     private static final String RANK_COUNT_MESSAGE = "개";
     private static final String RANK_CORRECT_MESSAGE = "개 일치 (";
-    private static final String WIN_PROFIT_RESULT_MESSAGE = "총 수익률은 %.2f입니다. (기준이 1 이기 때문에 결과적으로 %s라는 의미임)";
-
 
     public void printLotto(final List<LottoDto> issuedLotto) {
         System.out.println(issuedLotto.size() + PURCHASE_MESSAGE);
@@ -24,11 +22,10 @@ public class OutputView {
         }
     }
 
-
-    public void printWinStatistics(final SortedMap<RankPrize, Integer> result) {
+    public void printWinStatistics(final ResultDto result) {
         System.out.println();
         System.out.println(WIN_STATISTICS_RESULT_MESSAGE);
-        for (Entry<RankPrize, Integer> rankCount : result.entrySet()) {
+        for (Entry<RankPrize, Integer> rankCount : result.getResultDto().entrySet()) {
             printWinStatistics(rankCount);
         }
     }
@@ -51,11 +48,7 @@ public class OutputView {
                 + rankCount.getValue() + RANK_COUNT_MESSAGE);
     }
 
-    public void printWinProfit(final double calculateProfit) {
-        String profitResultMessage = "손해";
-        if (calculateProfit >= 1) {
-            profitResultMessage = "이익";
-        }
-        System.out.printf((WIN_PROFIT_RESULT_MESSAGE) + "%n", calculateProfit, profitResultMessage);
+    public void printWinProfit(final String profitOrNotMessage) {
+        System.out.printf(profitOrNotMessage);
     }
 }
