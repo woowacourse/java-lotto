@@ -21,6 +21,13 @@ class LottoTest {
         assertThat(lotto).isNotNull();
     }
 
+    @Test
+    @DisplayName("Lotto 객체에 null 값이 들어가는 경우")
+    void createLottoCheckNull() {
+        assertThatThrownBy(() -> new Lotto(null))
+            .isInstanceOf(NullPointerException.class);
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
     @DisplayName("Lotto 객체 생성 시 LottoNumber 갯수 유효하지 않은 경우")

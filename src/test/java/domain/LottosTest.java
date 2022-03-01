@@ -19,6 +19,13 @@ public class LottosTest {
     }
 
     @Test
+    @DisplayName("Lottos를 생성시 null 값이 들어가는 경우")
+    void createLottosCheckNull() {
+        assertThatThrownBy(() -> new Lottos(null))
+            .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
     @DisplayName("보유하고 있는 로또들과 당첨 로또의 매칭 결과를 계산")
     void calculateLottoMatchResult() {
         WinningLotto winningLotto = new WinningLotto(LottoFactory.createLotto(

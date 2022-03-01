@@ -28,7 +28,7 @@ public class Application {
     private static LottoMoney createLottoMoney() {
         try {
             return new LottoMoney(InputView.getPurchaseMoney());
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             OutputView.showErrorMessage(e);
             return createLottoMoney();
         }
@@ -37,7 +37,7 @@ public class Application {
     private static LottoPurchaseCount createLottoPurchaseCount(LottoMoney lottoMoney) {
         try {
             return lottoMoney.calculateLottoCountRefactor(InputView.getPurchaseManualCount());
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             OutputView.showErrorMessage(e);
             return createLottoPurchaseCount(lottoMoney);
         }
@@ -49,7 +49,7 @@ public class Application {
                 InputView.getManualLottoNumbers(lottoPurchaseCount.getManualCount()),
                 lottoPurchaseCount,
                 new RandomLottoGeneratorStrategy());
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             OutputView.showErrorMessage(e);
             return createLottos(lottoPurchaseCount);
         }
@@ -62,7 +62,7 @@ public class Application {
     private static Lotto createWinningLottoBall() {
         try {
             return LottoFactory.createLotto(InputView.getWinningLottoNumbers());
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             OutputView.showErrorMessage(e);
             return createWinningLottoBall();
         }
@@ -71,7 +71,7 @@ public class Application {
     private static LottoNumber createBonusBall() {
         try {
             return LottoNumber.valueOf(InputView.getBonusBall());
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             OutputView.showErrorMessage(e);
             return createBonusBall();
         }

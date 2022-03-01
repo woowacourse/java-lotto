@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import domain.constant.LottoConstant;
@@ -12,10 +13,12 @@ public class Lotto {
 
     private static final String ERROR_MESSAGE_NOT_IN_SIZE = "로또 숫자 갯수는 6개이여야 합니다.";
     private static final String ERROR_MESSAGE_NOT_DUPLICATE = "로또 숫자는 중복일 수 없습니다.";
+    private static final String ERROR_MESSAGE_NULL = "값이 null 입니다.";
 
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        Objects.requireNonNull(lottoNumbers, ERROR_MESSAGE_NULL);
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);

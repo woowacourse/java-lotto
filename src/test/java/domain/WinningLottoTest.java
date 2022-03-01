@@ -10,6 +10,13 @@ import org.junit.jupiter.api.Test;
 class WinningLottoTest {
 
     @Test
+    @DisplayName("우승로또 객체 생성시 null 값이 들어가는 경ㅇ")
+    void createWinningLottoCheckNull() {
+        assertThatThrownBy(() -> new WinningLotto(null, null))
+            .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
     @DisplayName("당청번호와 구매의 로또 번호의 일치 여부를 계산하는 경우")
     void compareWithPurchaseLotto() {
         Lotto purchaseLotto = LottoFactory.createLotto(List.of(1, 2, 3, 4, 44, 6));
