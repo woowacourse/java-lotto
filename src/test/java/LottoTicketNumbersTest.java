@@ -71,4 +71,20 @@ class LottoTicketNumbersTest {
         assertThat(lottoTicketNumbers1.countDuplicateNumbers(lottoTicketNumbers2))
             .isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("방어적 복사 테스트")
+    void defensiveCopyTest() {
+        List<LottoNumber> inputLottoNumbers = IntStream.of(4, 3, 2, 1, 6, 5)
+            .mapToObj(LottoNumber::getInstance)
+            .collect(Collectors.toList());
+
+        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputLottoNumbers);
+
+        List<LottoNumber> copiedLottoNumbers = lottoTicketNumbers.getLottoNumbers();
+
+        assertThat(inputLottoNumbers).isNotSameAs(copiedLottoNumbers);
+        assertThatThrownBy(() -> copiedLottoNumbers.add(LottoNumber.getInstance(45)))
+            .isInstanceOf(UnsupportedOperationException.class);
+    }
 }

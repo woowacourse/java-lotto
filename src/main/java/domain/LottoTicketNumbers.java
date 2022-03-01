@@ -14,7 +14,7 @@ public class LottoTicketNumbers {
         validateSize(lottoNumbers);
         validateDuplicateLottoNumber(lottoNumbers);
         Collections.sort(lottoNumbers);
-        numbers = lottoNumbers;
+        numbers = List.copyOf(lottoNumbers);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
@@ -40,7 +40,7 @@ public class LottoTicketNumbers {
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(numbers);
+        return numbers;
     }
 
     public boolean contains(LottoNumber number) {
