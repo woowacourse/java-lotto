@@ -1,123 +1,43 @@
 package domain;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketTest {
 
-    @Test
-    @DisplayName("1등 당첨 결과 확인")
-    void checkFirstWinningResult() {
-        // given
-        Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
-                .map(Number::new)
-                .collect(Collectors.toList()));
-        Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
-                .map(Number::new)
-                .collect(Collectors.toList()));
-        Number bonusNumber = new Number(36);
+    private WinningNumbers winningNumbers;
+    private LottoTicket myLottoTicket;
 
-        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
-        LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
-
-        // when
-        WinningResult winningResult = new WinningResult(lottoTicket.findWinningCountByRank(winningNumbers));
-
-        // then
-        assertThat(winningResult.getWinningResult().get(LottoRank.FIRST)).isEqualTo(1);
+    @BeforeEach
+    void setUpWinningNumbersAndLottoTicket() {
+        Number bonusNumber = new Number(7);
+        Lotto winningNumber = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningNumbers = new WinningNumbers(winningNumber, bonusNumber);
+        myLottoTicket = new LottoTicket(Arrays.asList(
+                Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 7))
+        ));
     }
 
     @Test
-    @DisplayName("2등 당첨 결과 확인")
-    void checkSecondWinningResult() {
-        // given
-        Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
-                .map(Number::new)
-                .collect(Collectors.toList()));
-        Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 34)
-                .map(Number::new)
-                .collect(Collectors.toList()));
-        Number bonusNumber = new Number(35);
+    @DisplayName("로또 티켓은 순위별 당첨 수를 계산한다")
+    void findWinningCountByRank() {
+        EnumMap<LottoRank, Integer> expectedWinningCountByRank = new EnumMap<>(Map.ofEntries(
+                Map.entry(LottoRank.FIRST, 1),
+                Map.entry(LottoRank.SECOND, 1),
+                Map.entry(LottoRank.THIRD, 0),
+                Map.entry(LottoRank.FOURTH, 0),
+                Map.entry(LottoRank.FIFTH, 0)
+        ));
 
-        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
-        LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
+        final EnumMap<LottoRank, Integer> actual = myLottoTicket.findWinningCountByRank(winningNumbers);
 
-        // when
-        WinningResult winningResult = new WinningResult(lottoTicket.findWinningCountByRank(winningNumbers));
-
-        // then
-        assertThat(winningResult.getWinningResult().get(LottoRank.SECOND)).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("3등 당첨 결과 확인")
-    void checkThirdWinningResult() {
-        // given
-        Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
-                .map(Number::new)
-                .collect(Collectors.toList()));
-        Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 34)
-                .map(Number::new)
-                .collect(Collectors.toList()));
-        Number bonusNumber = new Number(30);
-
-        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
-        LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
-
-        // when
-        WinningResult winningResult = new WinningResult(lottoTicket.findWinningCountByRank(winningNumbers));
-
-        // then
-        assertThat(winningResult.getWinningResult().get(LottoRank.THIRD)).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("4등 당첨 결과 확인")
-    void checkFourthWinningResult() {
-        // given
-        Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
-                .map(Number::new)
-                .collect(Collectors.toList()));
-        Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 15, 34)
-                .map(Number::new)
-                .collect(Collectors.toList()));
-        Number bonusNumber = new Number(35);
-
-        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
-        LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
-
-        // when
-        WinningResult winningResult = new WinningResult(lottoTicket.findWinningCountByRank(winningNumbers));
-
-        // then
-        assertThat(winningResult.getWinningResult().get(LottoRank.FOURTH)).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("5등 당첨 결과 확인")
-    void checkFifthWinningResult() {
-        // given
-        Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
-                .map(Number::new)
-                .collect(Collectors.toList()));
-        Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 12, 15, 34)
-                .map(Number::new)
-                .collect(Collectors.toList()));
-        Number bonusNumber = new Number(35);
-
-        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
-        LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
-
-        // when
-        WinningResult winningResult = new WinningResult(lottoTicket.findWinningCountByRank(winningNumbers));
-
-        // then
-        assertThat(winningResult.getWinningResult().get(LottoRank.FIFTH)).isEqualTo(1);
+        assertThat(expectedWinningCountByRank).isEqualTo(actual);
     }
 }
