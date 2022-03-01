@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import model.Lotto;
 import model.LottoNumber;
+import model.LottoOrder;
 import model.LottoPurchasingMoney;
 import model.LottoRank;
 import model.WinningStatistics;
@@ -17,8 +18,8 @@ public class OutputView {
         out.println(message);
     }
 
-    public static void printPurchasedLotteries(List<Lotto> lotteries) {
-        out.printf("%d개를 구매했습니다.%n", lotteries.size());
+    public static void printPurchasedLotteries(LottoOrder lottoOrder, List<Lotto> lotteries) {
+        out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.%n", lottoOrder.getManualLottoCount(), lottoOrder.getAutoLottoCount());
         lotteries.forEach(OutputView::printLottoNumbers);
     }
 

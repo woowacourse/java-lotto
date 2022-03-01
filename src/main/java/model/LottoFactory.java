@@ -29,7 +29,13 @@ public class LottoFactory {
         return lottoPurchasingMoney.getAmount() / LOTTO_PRICE;
     }
 
-    private Lotto generateAuto() {
+    public Lotto generateManual(List<Integer> manualNumbers) {
+        return Lotto.from(manualNumbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toUnmodifiableList()));
+    }
+
+    public Lotto generateAuto() {
         List<LottoNumber> lottoNumberPool = new ArrayList<>(LottoNumber.LOTTO_NUMBER_POOL.values());
         Collections.shuffle(lottoNumberPool);
         return Lotto.from(new ArrayList<>(lottoNumberPool.subList(0, 6)));
