@@ -2,6 +2,8 @@ package lotto.view;
 
 import java.util.Scanner;
 
+import lotto.domain.lotto.LottoFactory;
+
 public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -15,7 +17,7 @@ public class InputView {
     }
 
     public static String inputLastWeekWinningNumbers() {
-        System.out.printf("%n지난 주 당첨 번호를 입력해 주세요.%n");
+        System.out.printf("%n지난 주 당첨 번호를 입력해 주세요.(\"%s\"를 기준으로 6개 입력해주세요.)%n", LottoFactory.TEXT_DELIMITER);
         return scanner.nextLine();
     }
 

@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 
 public class LottoFactory {
 
-    private static final int SUB_LIST_FROM_INDEX = 0;
+    public static final String TEXT_DELIMITER = ", ";
 
-    private static final String TEXT_DELIMITER = ", ";
+    private static final int SUB_LIST_FROM_INDEX = 0;
     private static final List<Integer> LOTTO_NUMBERS = new ArrayList<>();
 
     static {
