@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.domain.ticket;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.rank.Rank;
 
-class AnalysisDtoTest {
+class AnalysisTest {
 
     @DisplayName("당첨 통계의 당첨 등수 개수는 기댓값과 일치해야 한다.")
     @ParameterizedTest(name = "[{index}] 당첨 등수 개수 : {2}")
@@ -23,7 +23,7 @@ class AnalysisDtoTest {
                                  final int money,
                                  final Map<Rank, Integer> rankCounts,
                                  final double profitRate) {
-        final AnalysisDto analysis = new AnalysisDto(ranks, money);
+        final Analysis analysis = new Analysis(ranks, money);
         assertThat(analysis.getRankCounts()).isEqualTo(rankCounts);
     }
 
@@ -34,7 +34,7 @@ class AnalysisDtoTest {
                                  final int money,
                                  final Map<Rank, Integer> rankCounts,
                                  final double profitRate) {
-        final AnalysisDto analysis = new AnalysisDto(ranks, money);
+        final Analysis analysis = new Analysis(ranks, money);
         assertThat(analysis.getProfitRate()).isEqualTo(profitRate);
     }
 

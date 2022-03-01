@@ -10,11 +10,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.AppConfig;
+import lotto.domain.ticket.Analysis;
+import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.CustomTicketGenerator;
+import lotto.domain.ticket.WinningTicket;
 import lotto.domain.rank.Rank;
-import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
-import lotto.dto.WinningTicketDto;
 
 class LottoServiceTest {
 
@@ -28,16 +29,17 @@ class LottoServiceTest {
     @MethodSource("lotto.service.provider.LottoServiceTestProvider#provideForGenerateTicketsTest")
     void generateTicketsTest(final List<TicketDto> expectedTicketDtos, final int money) {
         customTicketGenerator.initTickets(expectedTicketDtos);
-        lottoService.generateTickets(money);
 
-        final List<TicketDto> actualTicketDtos = lottoService.getTicketDtos();
-        checkTicketEquals(actualTicketDtos, expectedTicketDtos);
+        final Tickets tickets = lottoService.generateTickets(money);
+        checkTicketEquals(tickets, expectedTicketDtos);
     }
 
-    void checkTicketEquals(final List<TicketDto> actual, final List<TicketDto> expected) {
-        assertThat(actual.size()).isEqualTo(expected.size());
-        for (int i = 0; i < actual.size(); i++) {
-            assertThat(actual.get(i).getBallNumbers()).isEqualTo(expected.get(i).getBallNumbers());
+    void checkTicketEquals(final Tickets actual, final List<TicketDto> expected) {
+        assertThat(actual.getSize()).isEqualTo(expected.size());
+        for (int i = 0; i < actual.getSize(); i++) {
+            final List<Integer> actualBallNumbers = actual.getTickets().get(i).getBallNumbers();
+            final List<Integer> expectedBallNumbers = expected.get(i).getBallNumbers();
+            assertThat(actualBallNumbers).isEqualTo(expectedBallNumbers);
         }
     }
 
@@ -46,14 +48,14 @@ class LottoServiceTest {
     @MethodSource("lotto.service.provider.LottoServiceTestProvider#provideForGenerateAnalysisTest")
     void generateAnalysisRankCountTest(final List<TicketDto> expectedTicketDtos,
                                        final int money,
-                                       final WinningTicketDto winningTicketDto,
+                                       final WinningTicket winningTicket,
                                        final Map<Rank, Integer> expectedRankCounts,
                                        final String expectedProfitRate) {
         customTicketGenerator.initTickets(expectedTicketDtos);
-        lottoService.generateTickets(money);
 
-        final AnalysisDto analysisDto = lottoService.generateAnalysis(winningTicketDto);
-        final Map<Rank, Integer> actualRankCounts = analysisDto.getRankCounts();
+        final Tickets tickets = lottoService.generateTickets(money);
+        final Analysis analysis = lottoService.generateAnalysis(tickets, winningTicket);
+        final Map<Rank, Integer> actualRankCounts = analysis.getRankCounts();
         assertThat(actualRankCounts).isEqualTo(expectedRankCounts);
     }
 
@@ -62,14 +64,14 @@ class LottoServiceTest {
     @MethodSource("lotto.service.provider.LottoServiceTestProvider#provideForGenerateAnalysisTest")
     void generateAnalysisProfitRateTest(final List<TicketDto> expectedTicketDtos,
                                         final int money,
-                                        final WinningTicketDto winningTicketDto,
+                                        final WinningTicket winningTicket,
                                         final Map<Rank, Integer> expectedRankCounts,
                                         final String expectedProfitRate) {
         customTicketGenerator.initTickets(expectedTicketDtos);
-        lottoService.generateTickets(money);
 
-        final AnalysisDto analysisDto = lottoService.generateAnalysis(winningTicketDto);
-        final String actualProfitRate = String.format("%.2f", analysisDto.getProfitRate());
+        final Tickets tickets = lottoService.generateTickets(money);
+        final Analysis analysis = lottoService.generateAnalysis(tickets, winningTicket);
+        final String actualProfitRate = String.format("%.2f", analysis.getProfitRate());
         assertThat(actualProfitRate).isEqualTo(expectedProfitRate);
     }
 

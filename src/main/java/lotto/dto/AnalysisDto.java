@@ -1,8 +1,5 @@
 package lotto.dto;
 
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 import lotto.domain.rank.Rank;
@@ -12,25 +9,15 @@ public class AnalysisDto {
     private final Map<Rank, Integer> rankCounts;
     private final double profitRate;
 
-    public AnalysisDto(final List<Rank> ranks, final int ticketCount) {
-        this.rankCounts = calculateRankCounts(ranks);
-        this.profitRate = calculateProfitRate(ranks, ticketCount);
+    public AnalysisDto(final Map<Rank, Integer> rankCounts, final double profitRate) {
+        this.rankCounts = rankCounts;
+        this.profitRate = profitRate;
     }
 
-    private Map<Rank, Integer> calculateRankCounts(final List<Rank> ranks) {
-        final Map<Rank, Integer> rankMap = new EnumMap<>(Rank.class);
-        for (Rank rank : Rank.values()) {
-            final int count = Collections.frequency(ranks, rank);
-            rankMap.put(rank, count);
-        }
-        return rankMap;
-    }
-
-    private double calculateProfitRate(final List<Rank> ranks, final int ticketCount) {
-        long total = ranks.stream()
-                .mapToLong(Rank::getPrizeMoney)
-                .sum();
-        return (double) total / ticketCount;
+    public static AnalysisDto toDto(lotto.domain.ticket.Analysis analysis) {
+        final Map<Rank, Integer> rankCounts = analysis.getRankCounts();
+        final double profitRate = analysis.getProfitRate();
+        return new AnalysisDto(rankCounts, profitRate);
     }
 
     public Map<Rank, Integer> getRankCounts() {
