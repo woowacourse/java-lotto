@@ -20,7 +20,7 @@ public class Lotto {
     public static Lotto fromInput(final List<String> inputLotto) {
         validate(inputLotto);
         return new Lotto(inputLotto.stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .sorted()
             .collect(Collectors.toList()));
     }
