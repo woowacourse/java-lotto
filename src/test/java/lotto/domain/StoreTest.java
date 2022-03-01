@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class StoreTest {
 
+    private static final Money tenThousandMoney = Money.createLottoMoney(1_000);
 
     @ParameterizedTest
     @ValueSource(ints = {1_000, 100_000})
@@ -21,9 +22,18 @@ public class StoreTest {
     @Test
     @DisplayName("로또 한장을 생성한다.")
     void createLotto() {
-        Store store = new Store(Money.createLottoMoney(1000));
+        Store store = new Store(tenThousandMoney);
 
         assertThat(store.buyLottos(0)).hasSize(1);
+    }
+
+    @Test
+    @DisplayName("입력한 금액 보다 구매할 로또 개수의 가격이 더 큰경우 예외를 발생한다.")
+    void throwExceptionWhenNotEnoughMoney() {
+        Store store = new Store(tenThousandMoney);
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> store.buyLottos(3))
+                .withMessageMatching("로또를 구매할 돈이 부족하다.");
     }
 
 }
