@@ -28,7 +28,10 @@ public class TicketManager {
     public List<Rank> calculateRanks(final WinningTicket winningTicket) {
         final List<Rank> preparedTicketRanks = preparedTickets.calculateRanks(winningTicket);
         final List<Rank> generatedTicketRanks = generatedTickets.calculateRanks(winningTicket);
+        return concatRanks(preparedTicketRanks, generatedTicketRanks);
+    }
 
+    private List<Rank> concatRanks(final List<Rank> preparedTicketRanks, final List<Rank> generatedTicketRanks) {
         final List<Rank> ranks = new ArrayList<>();
         ranks.addAll(preparedTicketRanks);
         ranks.addAll(generatedTicketRanks);
