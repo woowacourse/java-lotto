@@ -7,7 +7,7 @@ import domain.LottoQuantity;
 import domain.Lottos;
 import domain.WinningLotto;
 import domain.WinningResult;
-import domain.strategy.LottoNumberGenerateStrategy;
+import domain.strategy.RandomLottoNumberGenerator;
 import dto.LottoDto;
 import dto.WinningResultDto;
 import java.util.List;
@@ -18,12 +18,6 @@ import view.OutputView;
 import view.ResultView;
 
 public class LottoController {
-    private final LottoNumberGenerateStrategy lottoNumberGenerator;
-
-    public LottoController(LottoNumberGenerateStrategy lottoNumberGenerator) {
-        this.lottoNumberGenerator = lottoNumberGenerator;
-    }
-
     public void start() {
         InputMoney inputMoney = generateInputMoney();
         LottoQuantity lottoQuantity = generateLottoQuantityByInputMoney(inputMoney);
@@ -56,7 +50,7 @@ public class LottoController {
     }
 
     private Lottos generateAutoLottosByLottoQuantity(LottoQuantity lottoQuantity) {
-        return new Lottos(lottoQuantity, lottoNumberGenerator);
+        return new Lottos(lottoQuantity, new RandomLottoNumberGenerator());
     }
 
     private void printLottos(Lottos autoLottos) {
