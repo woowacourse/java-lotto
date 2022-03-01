@@ -29,11 +29,13 @@ public class LottoCount {
 	}
 
 	public boolean haveRemainToMake() {
-		if (count > STANDARD_CAN_MAKE) {
+		return count > STANDARD_CAN_MAKE;
+	}
+
+	public void reduceCountOfRemain() {
+		if (haveRemainToMake()) {
 			count--;
-			return true;
 		}
-		return false;
 	}
 
 	public int getCount() {
