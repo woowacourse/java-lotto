@@ -2,26 +2,24 @@ package view;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import controller.dto.LottoTicketDto;
 import controller.dto.WinningStatDto;
-import domain.LottoCount;
 import domain.LottoRank;
-import domain.LottoTicket;
 
 public class OutputView {
 
     public static final String PROFIT_PATTERN = "#.##";
     public static final String BLANK = "";
 
-    public static void printPurchasedLottoTicketNumber(List<LottoTicket> lottoTickets, LottoCount lottoCount) {
-        System.out.println("\n수동으로 " + lottoCount.getManualCount() + "장, 자동으로 "
-            + lottoCount.getAutoCount() + "개를 구매했습니다.");
+    public static void printPurchasedLottoTicketNumber(LottoTicketDto lottoTicketDto) {
+        System.out.println("\n수동으로 " + lottoTicketDto.getManualCount() + "장, 자동으로 "
+            + lottoTicketDto.getAutoCount() + "개를 구매했습니다.");
 
-        for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.getTicketNumbers());
+        for (List<Integer> lottoTicket : lottoTicketDto.getLottoTicketNumbers()) {
+            System.out.println(lottoTicket);
         }
     }
 
