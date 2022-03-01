@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import domain.LotteryGame;
+import domain.generatestrategy.LotteryNumberGenerator;
 import domain.Rank;
-import domain.generatestrategy.LotteryRandomGeneratorStrategy;
+import domain.lottery.LotteryGenerator;
 import view.InputView;
 import view.OutputView;
 
@@ -28,7 +29,7 @@ public class LotteryGameController {
 
 	private void purchaseLottery() {
 		try {
-			lotteryGame = LotteryGame.of(inputMoney(), new LotteryRandomGeneratorStrategy());
+			lotteryGame = LotteryGame.of(inputMoney(), new LotteryGenerator(), new LotteryNumberGenerator());
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
 			purchaseLottery();

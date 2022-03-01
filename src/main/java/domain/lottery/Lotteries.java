@@ -1,10 +1,8 @@
 package domain.lottery;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import domain.Rank;
 
@@ -12,13 +10,11 @@ public class Lotteries {
 
 	private final List<Lottery> lotteries;
 
-	private Lotteries(final List<Set<LotteryNumber>> lotteriesNumber) {
-		lotteries = new ArrayList<>();
-		lotteriesNumber.forEach(lotteryNumber ->
-			lotteries.add(Lottery.from(lotteryNumber)));
+	private Lotteries(final List<Lottery> lotteriesNumber) {
+		this.lotteries = lotteriesNumber;
 	}
 
-	public static Lotteries from(final List<Set<LotteryNumber>> lotteriesNumber) {
+	public static Lotteries from(final List<Lottery> lotteriesNumber) {
 		return new Lotteries(lotteriesNumber);
 	}
 

@@ -6,31 +6,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import domain.LotteryGame;
+import domain.generatestrategy.LotteryNumberGenerator;
 import domain.Rank;
-import domain.generateStrategy.LotteryGenerateMock;
-import domain.generatestrategy.LotteryGenerateFamily;
-import domain.generatestrategy.LotteryRandomGeneratorStrategy;
+import domain.generateStrategy.LotteryNumberMockGenerator;
 
 public class LotteriesTest {
+
+	private final LotteryGenerator lotteryGenerator = new LotteryGenerator();
 
 	@DisplayName("로또의 개수가 정해진 수 만큼 만들어지는지 확인")
 	@ParameterizedTest(name = "{index} {displayName} lotteryNumber={0}")
 	@ValueSource(ints = {1, 100, 50})
 	void lotteries_number(final int lotteryNumber) {
 		//given
-		final List<Set<LotteryNumber>> lotteriesNumber = new ArrayList<>();
-		final LotteryGenerateFamily lotteryGenerator = new LotteryRandomGeneratorStrategy();
+		final List<Lottery> lotteriesNumber = new ArrayList<>();
+		final LotteryGenerator lotteryGenerator = new LotteryGenerator();
+		final LotteryNumberGenerator lotteryNumberGenerator = new LotteryNumberGenerator();
 		for (int i = 0; i < lotteryNumber; i++) {
-			lotteriesNumber.add(lotteryGenerator.getNumbers());
+			lotteriesNumber.add(lotteryGenerator.generateLottery(lotteryNumberGenerator.generateNumbers()));
 		}
 		//when
 		final Lotteries lotteries = Lotteries.from(lotteriesNumber);
@@ -42,15 +41,15 @@ public class LotteriesTest {
 	@DisplayName("등수가 제대로 집계되는지 확인")
 	void testRankingCount() {
 		//given
-		final List<Set<LotteryNumber>> lotteriesNumbers = new ArrayList<>();
-		final LotteryGenerateFamily lotteryGenerator = new LotteryGenerateMock();
+		final List<Lottery> lotteriesNumbers = new ArrayList<>();
+		final LotteryNumberMockGenerator lotteryNumberMockGenerator = new LotteryNumberMockGenerator();
 		for (int i = 0; i < 6; i++) {
-			lotteriesNumbers.add(lotteryGenerator.getNumbers());
+			lotteriesNumbers.add(lotteryGenerator.generateLottery(lotteryNumberMockGenerator.generateNumbers()));
 		}
 		final Lotteries lotteries = Lotteries.from(lotteriesNumbers);
 		//when
 		final Map<Rank, Integer> rankResult = lotteries.getTheNumberOfWinners(
-			WinningLottery.of(LotteryNumberGenerator.generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
+			WinningLottery.of(lotteryGenerator.generateLottery(Arrays.asList(1,2,3,4,5,6)),
 				new LotteryNumber(7)));
 		//then
 		for (Rank rank : rankResult.keySet()) {

@@ -10,8 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import domain.generateStrategy.LotteryGenerateMock;
-import domain.generatestrategy.LotteryRandomGeneratorStrategy;
+import domain.generateStrategy.LotteryNumberMockGenerator;
+import domain.generatestrategy.LotteryNumberGenerator;
+import domain.lottery.LotteryGenerator;
 
 @DisplayName("LotteryGame 테스트")
 public class LotteryGameTest {
@@ -21,7 +22,8 @@ public class LotteryGameTest {
 	@ValueSource(ints = {1000, 100000, 50000})
 	void createLotteries(final int inputMoney) {
 		//given
-		final LotteryGame lotteryGame = LotteryGame.of(inputMoney, new LotteryRandomGeneratorStrategy());
+		final LotteryGame lotteryGame = LotteryGame.of(inputMoney, new LotteryGenerator(),
+			new LotteryNumberGenerator());
 		final int lotteriesToCreate = inputMoney / 1000;
 		//when
 		//then
@@ -32,7 +34,9 @@ public class LotteryGameTest {
 	@DisplayName("등수가 제대로 집계되는지 확인")
 	void testRankingCount() {
 		//given
-		final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerateMock());
+		// final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerateMock());
+		final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerator(),
+			new LotteryNumberMockGenerator());
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
 		final Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
@@ -47,7 +51,8 @@ public class LotteryGameTest {
 	@DisplayName("승률이 제대로 집계되는지 확인")
 	void testRankingPercent() {
 		//given
-		final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerateMock());
+		final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerator(),
+			new LotteryNumberMockGenerator());
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
 		final Map<Rank, Integer> rankResult = lotteryGame.makeWinner();

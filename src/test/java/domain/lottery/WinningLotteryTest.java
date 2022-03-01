@@ -5,10 +5,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -21,8 +20,13 @@ import domain.Rank;
 
 public class WinningLotteryTest {
 
-	private final Set<LotteryNumber> winningNumbers = LotteryNumberGenerator.generateLotteryNumbers(
-		Arrays.asList(1, 2, 3, 4, 5, 6));
+	private Lottery winningNumbers;
+	private final LotteryGenerator lotteryGenerator = new LotteryGenerator();
+
+	@BeforeEach
+	void init() {
+		winningNumbers = lotteryGenerator.generateLottery(Arrays.asList(1, 2, 3, 4, 5, 6));
+	}
 
 	@Nested
 	@DisplayName("보너스 볼의")
@@ -30,6 +34,7 @@ public class WinningLotteryTest {
 		@Test
 		@DisplayName("범위가 1~45 이면서 당첨번호와 중복이 없으면 통과")
 		void theNumberOfBonusBall() {
+			winningNumbers = lotteryGenerator.generateLottery(Arrays.asList(1, 2, 3, 4, 5, 6));
 			assertThatNoException().isThrownBy(() ->
 				WinningLottery.of(winningNumbers, new LotteryNumber(10))
 			);
@@ -60,9 +65,9 @@ public class WinningLotteryTest {
 	@MethodSource("generateParameter")
 	void checkRank(final List<Integer> lottoNumbers, final Rank rank) {
 		//given
-		WinningLottery winningLottery = WinningLottery.of(winningNumbers, new LotteryNumber(7));
-		Lottery lottery = Lottery.from(LotteryNumberGenerator.generateLotteryNumbers(lottoNumbers));
+		final Lottery lottery = lotteryGenerator.generateLottery(lottoNumbers);
 		//when
+		WinningLottery winningLottery = WinningLottery.of(winningNumbers, new LotteryNumber(7));
 		//then
 		assertThat(winningLottery.getRank(lottery)).isEqualTo(rank);
 	}

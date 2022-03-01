@@ -43,4 +43,9 @@ public class Lottery {
 	public Set<LotteryNumber> getNumbers() {
 		return numbers;
 	}
+
+	public boolean isDuplicated(LotteryNumber number) {
+		return this.numbers.stream()
+			.anyMatch(lotteryNumber -> lotteryNumber.equals(number));
+	}
 }
