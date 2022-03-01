@@ -31,7 +31,6 @@ public class LottoController {
     }
 
     private List<List<Integer>> getLottoNumbers(Money money, int manualCount) {
-        money.validateManualCount(manualCount);
         return InputView.getManualLottoNumbers(manualCount);
     }
 

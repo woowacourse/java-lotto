@@ -11,7 +11,8 @@ public class Money {
     private final int amount;
 
     public Money(int amount) {
-        validateAmount(amount);
+        validateUnit(amount);
+        validateMinimumAmount(amount);
         this.amount = amount;
     }
 
@@ -22,20 +23,7 @@ public class Money {
     public int getPurchasableNumber() {
         return this.amount / LOTTO_TICKET_PRICE;
     }
-
-
-    public void validateManualCount(int manualCount) {
-        if (manualCount > getPurchasableNumber()) {
-            throw new IllegalArgumentException("구매하려는 로또가 보유 금액을 초과했습니다.");
-        }
-    }
-
-    private void validateAmount(int amount) {
-        validateUnit(amount);
-        validateMinimumAmount(amount);
-
-    }
-
+    
     private void validateUnit(int amount) {
         if (amount < LOTTO_TICKET_PRICE) {
             throw new IllegalArgumentException("금액은 1000원 이상이어야 합니다.");

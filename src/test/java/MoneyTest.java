@@ -33,14 +33,4 @@ class MoneyTest {
     void moneyInsert() {
         assertDoesNotThrow(() -> new Money(1500));
     }
-
-    @Test
-    @DisplayName("수동 로또 구매시 보유 금액을 초과할 경우 예외")
-    void manuallyPurchasedLottoPriceExceedException() {
-        Money money = new Money(2000);
-
-        assertThatThrownBy(() -> money.validateManualCount(5))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("구매하려는 로또가 보유 금액을 초과했습니다.");
-    }
 }
