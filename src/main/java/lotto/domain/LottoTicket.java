@@ -13,6 +13,12 @@ public class LottoTicket {
 
     private final List<LottoNumber> lottoNumbers;
 
+    public LottoTicket(List<LottoNumber> lottoNumbers) {
+        validateLottoTicket(lottoNumbers);
+
+        this.lottoNumbers = lottoNumbers;
+    }
+
     public LottoTicket(LottoTicketGenerator lottoTicketGenerator) {
         List<LottoNumber> lottoNumbers = lottoTicketGenerator.generate();
         validateLottoTicket(lottoNumbers);
