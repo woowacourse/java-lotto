@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.vo.Lotto;
 import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.ManualPurchaseCount;
 import lotto.domain.vo.Money;
 import lotto.domain.vo.WinningNumbers;
 
@@ -18,7 +20,9 @@ public class InputView {
     private static final String ERROR_NOT_NUMBER_MESSAGE = "숫자 이외의 문자가 입력하면 안됩니다.";
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
-    private static final String INPUT_WINNING_DELIMITER = ",";
+    private static final String INPUT_MANUAL_PURCHASE_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_PURCHASE_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String INPUT_LOTTO_NUMBER_DELIMITER = ",";
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -26,6 +30,7 @@ public class InputView {
         System.out.println(INPUT_MONEY_MESSAGE);
         String input = nextLine();
         validateEmpty(input);
+        System.out.println();
         return new Money(toInt(input));
     }
 
@@ -45,12 +50,39 @@ public class InputView {
         }
     }
 
-    private static int toInt(String money) {
+    private static int toInt(String input) {
         try {
-            return Integer.parseInt(money);
+            return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new NumberFormatException(ERROR_NOT_NUMBER_MESSAGE);
         }
+    }
+
+    public static List<List<LottoNumber>> requestManualLottoNumbers() {
+        ManualPurchaseCount manualPurchaseCount = requestManualPurchaseCount();
+        List<List<LottoNumber>> manualLottoNumbers = new ArrayList<>();
+        if (manualPurchaseCount.canBuy()) {
+            System.out.println(INPUT_MANUAL_PURCHASE_NUMBER_MESSAGE);
+            manualLottoNumbers = readManualLottoNumbers(manualPurchaseCount);
+            System.out.println();
+        }
+        return manualLottoNumbers;
+    }
+
+    private static ManualPurchaseCount requestManualPurchaseCount() {
+        System.out.println(INPUT_MANUAL_PURCHASE_COUNT_MESSAGE);
+        String input = nextLine();
+        validateEmpty(input);
+        System.out.println();
+        return new ManualPurchaseCount(toInt(input));
+    }
+
+    private static List<List<LottoNumber>> readManualLottoNumbers(ManualPurchaseCount manualPurchaseCount) {
+        List<List<LottoNumber>> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < manualPurchaseCount.get(); i++) {
+            manualLottoNumbers.add(toLottoNumberList(nextLine()));
+        }
+        return manualLottoNumbers;
     }
 
     public static WinningNumbers requestWinningNumber() {
@@ -60,8 +92,11 @@ public class InputView {
     private static List<LottoNumber> requestWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String input = nextLine();
+        return toLottoNumberList(input);
+    }
 
-        return Arrays.stream(input.split(INPUT_WINNING_DELIMITER))
+    private static List<LottoNumber> toLottoNumberList(String input) {
+        return Arrays.stream(input.split(INPUT_LOTTO_NUMBER_DELIMITER))
                 .map(value -> toInt(value.trim()))
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
