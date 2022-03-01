@@ -1,22 +1,27 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
 
 public enum Rank {
 
-    FIRST(6, new Reward(2_000_000_000L)),
-    SECOND(5, new Reward(30_000_000L)),
-    THIRD(5, new Reward(1_500_000L)),
-    FOURTH(4, new Reward(50_000L)),
-    FIFTH(3, new Reward(5_000L)),
-    NONE(0, new Reward(0L));
+    FIRST(6, new Reward(2_000_000_000L), (matchCount) -> matchCount == 6),
+    SECOND(5, new Reward(30_000_000L), (matchCount) -> matchCount == 5),
+    THIRD(5, new Reward(1_500_000L), (matchCount) -> matchCount == 5),
+    FOURTH(4, new Reward(50_000L), (matchCount) -> matchCount == 4),
+    FIFTH(3, new Reward(5_000L), (matchCount) -> matchCount == 3),
+    NONE(0, new Reward(0L), (matchCount) -> matchCount <= 2),
+    ERROR(7, new Reward(0L), (matchCount) -> matchCount >= 7);
 
     private final int matchCount;
     private final Reward reward;
+    private Function<Integer, Boolean> matchCalculator;
 
-    Rank(int matchCount, Reward reward) {
+    Rank(int matchCount, Reward reward, Function<Integer, Boolean> matchCalculator) {
         this.matchCount = matchCount;
         this.reward = reward;
+        this.matchCalculator = matchCalculator;
     }
 
     public static Rank find(int matchCount, boolean matchBonus) {
@@ -27,12 +32,12 @@ public enum Rank {
     }
 
     private static boolean isMatchBonusAvailable(int matchCount, boolean matchBonus) {
-        return matchCount == SECOND.matchCount && matchBonus;
+        return SECOND.matchCalculator.apply(matchCount) && matchBonus;
     }
 
     private static Rank findWithMatchCount(int matchCount) {
         return exceptMatchBonusAvailableRank().stream()
-                .filter(rank -> rank.matchCount == matchCount)
+                .filter(rank -> rank.matchCalculator.apply(matchCount))
                 .findAny()
                 .orElse(Rank.NONE);
     }

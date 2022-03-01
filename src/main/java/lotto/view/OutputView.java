@@ -50,6 +50,7 @@ public class OutputView {
     private static List<Rank> reverseOrderedRanks() {
         List<Rank> ranks = new ArrayList<>(List.of(Rank.values()));
         ranks.remove(Rank.NONE);
+        ranks.remove(Rank.ERROR);
         ranks.sort(Collections.reverseOrder());
         return ranks;
     }
