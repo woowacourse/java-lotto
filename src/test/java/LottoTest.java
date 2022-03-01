@@ -33,7 +33,8 @@ public class LottoTest {
 
         assertThatThrownBy(
             () -> new Lotto(List.of(1, 2, 3, 4, 5, 46))
-        ).isInstanceOf(IllegalArgumentException.class);
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("[ERROR] 로또 번호는 1~45 사이 정수만 가능합니다.");
 
     }
 
@@ -42,7 +43,8 @@ public class LottoTest {
     void check_size_fail() {
         assertThatThrownBy(
             () -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7))
-        ).isInstanceOf(IllegalArgumentException.class);
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("[ERROR] 로또 번호는 6개만 입력 가능합니다.");
     }
 
     @Test
@@ -51,7 +53,7 @@ public class LottoTest {
         assertThatThrownBy(
             () -> new Lotto(List.of(1, 2, 3, 4, 5, 5))
         ).isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("중복");
+            .hasMessageContaining("[ERROR] 로또 번호는 중복될 수 없습니다.");
     }
 
 }
