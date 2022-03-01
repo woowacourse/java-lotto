@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 public class LottoNumber {
     public static final String LOTTO_NUMBER_RANGE_ERROR_MESSAGE = "로또 번호는 1~45 사이로 입력해주세요.";

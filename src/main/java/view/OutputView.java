@@ -2,8 +2,8 @@ package view;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import model.LottoTicketDto;
-import model.WinningResultDto;
+import domain.LottoTicketDto;
+import domain.WinningResultDto;
 
 public class OutputView {
     private static final String PURCHASE_COUNT_MESSAGE = "개를 구매했습니다.";

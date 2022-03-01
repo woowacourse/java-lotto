@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 public enum WinningPrize {
     FIRST(2_000_000_000),

@@ -5,14 +5,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import model.DefaultLottoWinningPrizeStrategy;
-import model.LottoGame;
-import model.LottoNumberGenerateStrategy;
-import model.LottoTicketDto;
-import model.LottoTickets;
-import model.WinningPrize;
-import model.WinningPrizeStrategy;
-import model.WinningResultDto;
+import domain.DefaultLottoWinningPrizeStrategy;
+import domain.LottoGame;
+import domain.LottoNumberGenerateStrategy;
+import domain.LottoTicketDto;
+import domain.LottoTickets;
+import domain.WinningPrize;
+import domain.WinningPrizeStrategy;
+import domain.WinningResultDto;
 import view.InputView;
 import view.OutputView;
 

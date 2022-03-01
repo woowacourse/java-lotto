@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 public class WinningResultDto {
     private final int matchCount;

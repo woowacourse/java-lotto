@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 public interface WinningPrizeStrategy {
     WinningPrize findWinningPrize(int matchCount, boolean matchBonus);
