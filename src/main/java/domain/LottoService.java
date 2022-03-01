@@ -1,5 +1,7 @@
 package domain;
 
+import domain.generator.AutoLottoGenerator;
+import domain.generator.LottoGenerator;
 import dto.LottoDto;
 import java.util.ArrayList;
 import java.util.Arrays;
