@@ -11,30 +11,12 @@ public class LottoMachine {
     private static final int DEFAULT_VALUE = 0;
     private static final int INCREASE_VALUE = 1;
 
-    public List<LottoTicket> purchaseLottoTickets(Money money, List<List<Integer>> lottoNumbers,
+    public List<LottoTicket> purchaseLottoTickets(List<List<Integer>> lottoNumbers,
+                                                  PurchaseType purchaseType,
                                                   LottoNumberStrategy lottoNumberStrategy) {
-        int autoCount = money.getPurchasableNumber() - lottoNumbers.size();
         List<LottoTicket> lottoTickets = new ArrayList<>();
         lottoTickets.addAll(purchaseManually(lottoNumbers));
-        lottoTickets.addAll(purchaseAutomatically(autoCount, lottoNumberStrategy));
-
-        return lottoTickets;
-    }
-
-    private List<LottoTicket> purchaseAutomatically(int count, LottoNumberStrategy strategy) {
-        return IntStream.range(0, count)
-                .mapToObj(index -> new LottoTicket(strategy.generate()))
-                .collect(Collectors.toList());
-    }
-
-    private List<LottoTicket> purchaseManually(List<List<Integer>> ticketsNumbers) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-
-        for (List<Integer> ticketNumbers : ticketsNumbers) {
-            lottoTickets.add(new LottoTicket(ticketNumbers.stream()
-                    .map(LottoNumber::getInstance)
-                    .collect(Collectors.toList())));
-        }
+        lottoTickets.addAll(purchaseAutomatically(purchaseType, lottoNumberStrategy));
 
         return lottoTickets;
     }
@@ -55,11 +37,17 @@ public class LottoMachine {
         return new WinningStat(ranks);
     }
 
-    public List<LottoTicket> purchaseLottoTicketsManually(List<List<Integer>> ticketsInput) {
+    private List<LottoTicket> purchaseAutomatically(PurchaseType type, LottoNumberStrategy strategy) {
+        return IntStream.range(0, type.getAutomaticCount())
+                .mapToObj(index -> new LottoTicket(strategy.generate()))
+                .collect(Collectors.toList());
+    }
+
+    private List<LottoTicket> purchaseManually(List<List<Integer>> ticketsNumbers) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        for (List<Integer> ticket : ticketsInput) {
-            lottoTickets.add(new LottoTicket(ticket.stream()
+        for (List<Integer> ticketNumbers : ticketsNumbers) {
+            lottoTickets.add(new LottoTicket(ticketNumbers.stream()
                     .map(LottoNumber::getInstance)
                     .collect(Collectors.toList())));
         }

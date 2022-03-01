@@ -16,10 +16,6 @@ public class Money {
         this.amount = amount;
     }
 
-    public boolean isPurchasable(int amount) {
-        return this.amount >= amount;
-    }
-
     public int getPurchasableNumber() {
         return this.amount / LOTTO_TICKET_PRICE;
     }
