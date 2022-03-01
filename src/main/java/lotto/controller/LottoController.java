@@ -24,8 +24,7 @@ public class LottoController {
 
     public void start() {
         money = initMoney();
-        manualCount = initManualCount();
-        autoCount = new Count(money.getAmount() / Money.UNIT_AMOUNT - manualCount.getCount());
+        initCount();
         initLotto();
         WinningNumber winningNumber = setWinningNumber();
         findAndPrintResult(winningNumber);
@@ -39,6 +38,11 @@ public class LottoController {
             printErrorMessage(exception);
             return initMoney();
         }
+    }
+
+    private void initCount() {
+        manualCount = initManualCount();
+        autoCount = new Count(money.getAmount() / Money.UNIT_AMOUNT - manualCount.getCount());
     }
 
     private Count initManualCount() {
