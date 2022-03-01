@@ -5,7 +5,6 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Payment;
-import lotto.domain.Profit;
 import lotto.domain.WinningLotto;
 import lotto.view.Entering;
 import lotto.view.KeyEnter;
@@ -59,9 +58,5 @@ public class Creator {
 
     public static LottoResult createLottoResult() {
         return new LottoResult();
-    }
-
-    public static Profit createProfit() {
-        return new Profit();
     }
 }

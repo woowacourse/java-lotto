@@ -35,6 +35,11 @@ public class LottoResult {
         return totalMoney;
     }
 
+    public double calculateRate(final int totalMoney, final Payment payment) {
+        int money = payment.getPayment();
+        return (double) totalMoney / money;
+    }
+
     private void increaseRankCount(final Rank rank) {
         lottoResult.put(rank, lottoResult.get(rank) + 1);
     }

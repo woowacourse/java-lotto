@@ -62,4 +62,25 @@ class LottoResultTest {
 
         assertEquals(lottoResult.getLottoResult().get(Rank.FOURTH), 1);
     }
+
+    @Test
+    @DisplayName("수익률 계산")
+    void calculate_profit() {
+        Lotto lotto1 = new Lotto(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
+        Lotto lotto2 = new Lotto(List.of(ball2, ball3, ball4, ball5, ball6, ball7));
+        Lotto lotto3 = new Lotto(List.of(ball3, ball4, ball5, ball6, ball7, ball8));
+        Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
+
+        Lotto winLotto = new Lotto(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
+        Ball bonusBall = ball7;
+        WinningLotto winningLotto = new WinningLotto(winLotto, bonusBall);
+
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.match(lottos, winningLotto);
+
+        Payment payment = new Payment(3000);
+        int totalMoney = lottoResult.getTotalMoney();
+
+        assertEquals(lottoResult.calculateRate(totalMoney, payment), 676683.333, 0.01);
+    }
 }

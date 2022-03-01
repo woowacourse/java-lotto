@@ -3,7 +3,6 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
-import lotto.domain.Profit;
 import lotto.domain.Payment;
 import lotto.domain.WinningLotto;
 
@@ -52,8 +51,7 @@ public class LottoController {
     }
 
     private static void showProfitRate(final Payment payment, final LottoResult lottoResult) {
-        Profit profit = createProfit();
-        double profitRate = profit.calculateRate(lottoResult.getTotalMoney(), payment);
+        double profitRate = lottoResult.calculateRate(lottoResult.getTotalMoney(), payment);
         printProfitRate(profitRate);
     }
 }
