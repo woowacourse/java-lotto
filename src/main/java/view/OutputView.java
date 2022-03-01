@@ -68,6 +68,6 @@ public class OutputView {
     }
 
     public static void showErrorMessage(Exception e) {
-        System.out.println(ERROR_KEYWORD + e.getMessage() + "\n");;
+        System.out.println(ERROR_KEYWORD + e.getMessage());;
     }
 }

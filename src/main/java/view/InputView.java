@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final String REQUEST_MESSAGE_INPUT_PURCHASE_MONEY = "구입금액을 입력해 주세요.";
-    private static final String REQUEST_MESSAGE_INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String REQUEST_MESSAGE_INPUT_MANUAL_LOTTOS_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String REQUEST_MESSAGE_INPUT_MANUAL_COUNT = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String REQUEST_MESSAGE_INPUT_MANUAL_LOTTOS_NUMBERS = "\n수동으로 구매할 번호를 입력해 주세요.";
     private static final String ERROR_MESSAGE_TYPE_OF_NUMBER = "잘못된 숫자가 입력되었습니다.";
     private static final String ERROR_MESSAGE_RANGE_OF_MONEY = "금액은 0이하일 수 없습니다.";
     private static final String ERROR_MESSAGE_RANGE_OF_MANUAL_COUNT = "구매할 수동 로또 수량은 음수일 수 없습니다.";
