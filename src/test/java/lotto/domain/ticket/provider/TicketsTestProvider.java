@@ -43,7 +43,7 @@ public class TicketsTestProvider {
     public static Stream<Arguments> provideForCalculateRanksTest() {
         return Stream.of(
                 Arguments.of(
-                        new TicketDto(List.of(1, 2, 3, 4, 5, 6)), 10,
+                        List.of(1, 2, 3, 4, 5, 6), 10,
                         List.of(
                                 new TicketDto(List.of(1, 2, 3, 4, 5, 6)),
                                 new TicketDto(List.of(1, 2, 3, 4, 5, 10)),
@@ -57,7 +57,7 @@ public class TicketsTestProvider {
                         )
                 ),
                 Arguments.of(
-                        new TicketDto(List.of(1, 2, 3, 4, 5, 6)), 10,
+                        List.of(1, 2, 3, 4, 5, 6), 10,
                         List.of(
                                 new TicketDto(List.of(1, 2, 3, 4, 5, 6)),
                                 new TicketDto(List.of(10, 2, 3, 4, 5, 6)),
@@ -75,7 +75,7 @@ public class TicketsTestProvider {
                         )
                 ),
                 Arguments.of(
-                        new TicketDto(List.of(1, 2, 3, 4, 5, 6)), 10,
+                        List.of(1, 2, 3, 4, 5, 6), 10,
                         List.of(
                                 new TicketDto(List.of(11, 12, 13, 14, 15, 16)),
                                 new TicketDto(List.of(10, 12, 13, 14, 20, 22))
