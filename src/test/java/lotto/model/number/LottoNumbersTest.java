@@ -16,7 +16,7 @@ public class LottoNumbersTest {
     }
 
     @Test
-    void 로또_번호_테스트_길이1() {
+    void 로또_번호_테스트_길이_5자리() {
         assertThatThrownBy(() ->
                 makeLottoNumbers(new int[]{1, 2, 3, 4, 5}))
                 .isInstanceOf(RuntimeException.class)
@@ -24,7 +24,7 @@ public class LottoNumbersTest {
     }
 
     @Test
-    void 로또_번호_테스트_길이2() {
+    void 로또_번호_테스트_길이_7자리() {
         assertThatThrownBy(() ->
                 makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6, 7}))
                 .isInstanceOf(RuntimeException.class)

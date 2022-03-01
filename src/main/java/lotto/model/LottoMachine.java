@@ -13,8 +13,8 @@ public class LottoMachine {
         this.winningLotto = winningLotto;
     }
 
-    public Map<Rank, Integer> calculateResult() {
-        return this.rankCount = winningLotto.checkRank(lottos);
+    public void calculateResult() {
+        this.rankCount = winningLotto.checkRank(lottos);
     }
 
     public double getRevenue() {

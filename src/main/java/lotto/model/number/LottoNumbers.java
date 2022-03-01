@@ -1,7 +1,9 @@
 package lotto.model.number;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lotto.model.Lotto;
 
 public class LottoNumbers {
@@ -26,14 +28,12 @@ public class LottoNumbers {
     }
 
     private boolean isDuplicate(List<LottoNumber> numbers) {
-        return numbers.size() != numbers.stream()
-                .map(LottoNumber::getLottoNumber)
-                .distinct()
-                .count();
+        Set<LottoNumber> uniqueLottoNumbers = new HashSet<>(numbers);
+        return numbers.size() != uniqueLottoNumbers.size();
     }
 
-    public int countMatchingNumber(final LottoNumbers winningNumbers) {
-        return (int) winningNumbers.lottoNumbers.stream()
+    public int countMatchingNumber(final LottoNumbers lottoNumbers) {
+        return (int) lottoNumbers.lottoNumbers.stream()
                 .filter(this::containNumber)
                 .count();
     }
