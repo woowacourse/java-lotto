@@ -43,8 +43,7 @@ public class LottoController {
 
         LottoNumber bonusNumber = LottoNumber.createBonus(InputView.getBonusNumber(), winningNumbers);
 
-        WinningStat winningStat = lottoMachine.createWinningStat(lottoTickets, winningNumbers, bonusNumber);
-
-        return WinningStatDto.of(winningStat.getStat(), winningStat.calculateProfit(LOTTO_TICKET_PRICE));
+        return WinningStatDto
+            .from(lottoMachine.createWinningStat(lottoTickets, winningNumbers, bonusNumber));
     }
 }
