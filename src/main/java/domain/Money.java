@@ -4,7 +4,7 @@ import util.StringUtil;
 
 public class Money {
 
-    private int money;
+    private final int money;
 
     public Money(String money) {
         this.money = StringUtil.convertToInteger(money);

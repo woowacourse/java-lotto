@@ -29,7 +29,7 @@ public class Lotto {
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers;
+        return Collections.unmodifiableSet(this.lottoNumbers);
     }
 
     public Set<LottoNumber> generateNumber() {
