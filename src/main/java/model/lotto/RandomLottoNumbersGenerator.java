@@ -15,7 +15,7 @@ public class RandomLottoNumbersGenerator {
 		IntStream.range(Rule.LOTTO_MIN_NUM.getRuleNum(), Rule.LOTTO_MAX_NUM.getRuleNum()).forEach(lottoNumbers::add);
 	}
 
-	public static List<Integer> pickSixNumbers() {
+	public static List<Integer> pickLottoNumbers() {
 		List<Integer> shuffledNumbers = shuffleLottoNumbers();
 		return shuffledNumbers.stream()
 			.limit(Rule.LOTTO_SIZE.getRuleNum())

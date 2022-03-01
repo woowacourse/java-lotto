@@ -18,9 +18,9 @@ public class LottoStorage {
 		List<Lotto> lottos = new ArrayList<>();
 
 		while (lottoCount.haveRemainToMake()) {
-			lottos.add(new Lotto(RandomLottoNumbersGenerator.pickSixNumbers()));
+			lottos.add(new Lotto(RandomLottoNumbersGenerator.pickLottoNumbers()));
 		}
-		
+
 		return lottos;
 	}
 
