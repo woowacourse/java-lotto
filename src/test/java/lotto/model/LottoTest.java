@@ -14,73 +14,77 @@ public class LottoTest {
 
     private Lotto lotto;
 
-    @Test
-    void 로또_생성_테스트_정상() {
-        LottoNumbers lottoNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
-        lotto = new Lotto((minimumNumber, maximumNumber, lottoLength) -> lottoNumbers);
-        assertThat(lotto).isInstanceOf(Lotto.class);
-    }
-
     @BeforeEach
     void init() {
         LottoNumbers lottoNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
-        lotto = new Lotto((minimumNumber, maximumNumber, lottoLength) -> lottoNumbers);
+        lotto = new Lotto(lottoNumbers);
     }
 
+    @DisplayName("로또 생성 정상 테스트")
     @Test
-    void 로또_1등_당첨_테스트() {
+    void lottoTest() {
+        assertThat(lotto).isInstanceOf(Lotto.class);
+    }
+
+    @DisplayName("로또 1등 당첨 테스트")
+    @Test
+    void winFirstLottoTest() {
         LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
         Rank rank = lotto.calculateRank(winningNumbers, new LottoNumber(7));
         assertThat(rank).isEqualTo((Rank.FIRST));
     }
 
+    @DisplayName("로또 2등 당첨 테스트")
     @Test
-    void 로또_2등_당첨_테스트() {
+    void winSecondLottoTest() {
         LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 7});
         Rank rank = lotto.calculateRank(winningNumbers, new LottoNumber(6));
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
 
+    @DisplayName("로또 3등 당첨 테스트")
     @Test
-    void 로또_3등_당첨_테스트() {
+    void winThirdLottoTest() {
         LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 7});
         Rank rank = lotto.calculateRank(winningNumbers, new LottoNumber(8));
         assertThat(rank).isEqualTo((Rank.THIRD));
     }
 
+    @DisplayName("로또 4등 당첨 테스트")
     @Test
-    void 로또_4등_당첨_테스트() {
+    void winFourthLottoTest() {
         LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 7, 8});
         Rank rank = lotto.calculateRank(winningNumbers, new LottoNumber(9));
         assertThat(rank).isEqualTo((Rank.FOURTH));
     }
 
+    @DisplayName("로또 5등 당첨 테스트")
     @Test
-    void 로또_5등_당첨_테스트() {
+    void winFifthLottoTest() {
         LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1, 2, 3, 7, 8, 9});
         Rank rank = lotto.calculateRank(winningNumbers, new LottoNumber(10));
         assertThat(rank).isEqualTo((Rank.FIFTH));
     }
 
-    @DisplayName("0개 일치")
+    @DisplayName("로또 0개 일치 테스트")
     @Test
-    void 로또_낙첨_테스트1() {
+    void zeroMatchingLottoTest() {
         LottoNumbers winningNumbers = makeLottoNumbers(new int[]{7, 8, 9, 10, 11, 12});
         Rank rank = lotto.calculateRank(winningNumbers, new LottoNumber(13));
         assertThat(rank).isEqualTo((Rank.LOSER));
     }
 
-    @DisplayName("1개 일치")
+    @DisplayName("로또 1개 일치 테스트")
     @Test
-    void 로또_낙첨_테스트2() {
+    void oneMatchingLottoTest() {
         LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1, 8, 9, 10, 11, 12});
         Rank rank = lotto.calculateRank(winningNumbers, new LottoNumber(13));
         assertThat(rank).isEqualTo((Rank.LOSER));
     }
 
-    @DisplayName("2개 일치")
+    @DisplayName("로또 2개 일치 테스트")
     @Test
-    void 로또_낙첨_테스트3() {
+    void threeMatchingLottoTest() {
         LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1, 2, 9, 10, 11, 12});
         Rank rank = lotto.calculateRank(winningNumbers, new LottoNumber(13));
         assertThat(rank).isEqualTo((Rank.LOSER));

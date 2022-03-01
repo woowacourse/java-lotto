@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.stream.Collectors;
 import lotto.model.Lotto;
-import lotto.model.LottoCalculator;
+import lotto.model.LottoMachine;
 import lotto.model.Lottos;
 import lotto.model.Rank;
 import lotto.model.number.LottoNumber;
@@ -42,7 +42,7 @@ public class ResultView {
                 .collect(Collectors.toList()));
     }
 
-    public static void printTotalRankResult(LottoCalculator lottoMachine) {
+    public static void printTotalRankResult(LottoMachine lottoMachine) {
         System.out.println();
         System.out.println(STATISTICS_MESSAGE);
 
@@ -52,7 +52,7 @@ public class ResultView {
         printRevenue(lottoMachine);
     }
 
-    private static void printRevenue(LottoCalculator lottoMachine) {
+    private static void printRevenue(LottoMachine lottoMachine) {
         System.out.println(START_REVENUE_MESSAGE + lottoMachine.getRevenue() + END_REVENUE_MESSAGE);
     }
 

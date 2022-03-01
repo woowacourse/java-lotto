@@ -1,16 +1,12 @@
 package lotto.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import lotto.model.Lotto;
-import lotto.model.LottoCalculator;
-import lotto.model.Lottos;
+import lotto.model.LottoMachine;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
-import lotto.model.generator.AutoLottoNumbersGenerator;
+import lotto.model.generator.LottoGenerator;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 import lotto.view.InputView;
@@ -21,15 +17,19 @@ public class LottoController {
     private static final String NOT_NUMBER_ERROR_MESSAGE = "[ERROR] 문자가 입력되었습니다.";
     private static final String NUMBER_REGEX = "\\d+";
 
+    private LottoGenerator lottoGenerator;
+
+    public LottoController(LottoGenerator lottoGenerator) {
+        this.lottoGenerator = lottoGenerator;
+    }
+
     public void run() {
-        Money money = validateMoney(InputView.inputMoney());
-        Lottos lottos = makeLottos(money);
-        ResultView.printBuyingLottosResult(lottos);
+        LottoMachine lottoMachine = new LottoMachine(lottoGenerator, validateMoney(InputView.inputMoney()));
+        ResultView.printBuyingLottosResult(lottoMachine.getLottos());
         WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
                 InputView.inputBonusNumber());
-        LottoCalculator lottoCalculator = new LottoCalculator(money, lottos, winningLotto);
-        lottoCalculator.calculateResult();
-        ResultView.printTotalRankResult(lottoCalculator);
+        lottoMachine.calculateResult(winningLotto);
+        ResultView.printTotalRankResult(lottoMachine);
     }
 
     private Money validateMoney(String money) throws IllegalArgumentException {
@@ -37,14 +37,6 @@ public class LottoController {
             throw new IllegalArgumentException(Money.MONEY_ERROR_MESSAGE);
         }
         return new Money(Integer.parseInt(money));
-    }
-
-    private Lottos makeLottos(Money money) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < money.lottoCount(); i++) {
-            lottos.add(new Lotto(new AutoLottoNumbersGenerator()));
-        }
-        return new Lottos(lottos);
     }
 
     private WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) throws RuntimeException {

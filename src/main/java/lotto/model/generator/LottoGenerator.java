@@ -1,7 +1,7 @@
 package lotto.model.generator;
 
-import lotto.model.number.LottoNumbers;
+import lotto.model.Lottos;
 
 public interface LottoGenerator {
-    LottoNumbers generateLottoNumbers(int minimumNumber, int maximumNumber, int lottoLength);
+    Lottos generateLottos(int lottoCount, int minimumNumber, int maximumNumber, int lottoLength);
 }

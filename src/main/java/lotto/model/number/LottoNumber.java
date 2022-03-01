@@ -5,9 +5,9 @@ import java.util.Objects;
 public class LottoNumber {
 
     private static final String NUMBER_RANGE_ERROR_MESSAGE = "[ERROR] 유효한 숫자가 아닙니다.";
+
     public static final int LOTTO_NUMBER_MINIMUM_RANGE = 1;
     public static final int LOTTO_NUMBER_MAXIMUM_RANGE = 45;
-
 
     private final int number;
 
@@ -16,7 +16,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    protected void validateRange(final int number) throws IllegalArgumentException {
+    private void validateRange(final int number) throws IllegalArgumentException {
         if (number < LOTTO_NUMBER_MINIMUM_RANGE || number > LOTTO_NUMBER_MAXIMUM_RANGE) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR_MESSAGE);
         }

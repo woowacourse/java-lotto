@@ -3,24 +3,37 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottosTest {
 
-    private Lottos lottos = makeLottos();
+    private Lottos lottos;
 
+    @BeforeEach
+    void init() {
+        Lotto lotto = makeLotto(new int[]{1, 2, 3, 4, 5, 6}); //1등
+        Lotto lotto1 = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
+        Lotto lotto2 = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
+        lottos = new Lottos(Arrays.asList(lotto,lotto1,lotto2));
+    }
+
+    @DisplayName("Lottos 생성 테스트")
     @Test
-    void Lottos_생성_테스트() {
+    void LottosTest() {
         assertThat(lottos).isInstanceOf(Lottos.class);
     }
 
+    @DisplayName("등수 계산 테스트")
     @Test
-    void 등수_계산_테스트() {
+    void calculateRanksTest() {
         LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
         LottoNumber bonusNumber = new LottoNumber(7);
         Map<Rank, Integer> rankCount = new LinkedHashMap<>();
@@ -30,25 +43,15 @@ public class LottosTest {
         assertThat(lottos.calculateRanks(winningNumbers, bonusNumber)).containsAllEntriesOf(rankCount);
     }
 
+    @DisplayName("Lottos 크기 테스트")
     @Test
-    void Lottos_크기_테스트() {
+    void lottosSizeTest() {
         assertThat(lottos.size()).isEqualTo(3);
-    }
-
-    private Lottos makeLottos() {
-        List<Lotto> lottos = new ArrayList<>();
-        Lotto lotto = makeLotto(new int[]{1, 2, 3, 4, 5, 6}); //1등
-        Lotto lotto1 = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
-        Lotto lotto2 = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
-        lottos.add(lotto);
-        lottos.add(lotto1);
-        lottos.add(lotto2);
-        return new Lottos(lottos);
     }
 
     private Lotto makeLotto(int[] numbers) {
         LottoNumbers lottoNumbers = makeLottoNumbers(numbers);
-        return new Lotto((minimumNumber, maximumNumber, lottoLength) -> lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 
     private LottoNumbers makeLottoNumbers(int[] numbers) {

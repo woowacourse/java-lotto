@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.model.generator.LottoGenerator;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 
@@ -9,9 +8,8 @@ public class Lotto {
     private final LottoNumbers lottoNumbers;
     private Rank rank;
 
-    public Lotto(final LottoGenerator lottoGenerator) throws IllegalArgumentException {
-        this.lottoNumbers = lottoGenerator.generateLottoNumbers(LottoNumber.LOTTO_NUMBER_MINIMUM_RANGE, LottoNumber.LOTTO_NUMBER_MAXIMUM_RANGE,
-                LottoNumbers.LOTTO_LENGTH);
+    public Lotto(final LottoNumbers lottoNumbers) throws IllegalArgumentException {
+        this.lottoNumbers = lottoNumbers;
         this.rank = null;
     }
 

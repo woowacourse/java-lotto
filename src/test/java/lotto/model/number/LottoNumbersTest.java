@@ -5,34 +5,39 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoNumbersTest {
 
+    @DisplayName("로또 번호 정상 생성 테스트")
     @Test
-    void 로또_번호_6자리_생성_테스트() {
+    void lottoNumbersTest() {
         LottoNumbers lottoNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
         assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class);
     }
 
+    @DisplayName("로또 번호 5자리 생성 테스트")
     @Test
-    void 로또_번호_테스트_길이_5자리() {
+    void fiveLottoNumbersTest() {
         assertThatThrownBy(() ->
                 makeLottoNumbers(new int[]{1, 2, 3, 4, 5}))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("[ERROR]");
     }
 
+    @DisplayName("로또 번호 7자리 생성 테스트")
     @Test
-    void 로또_번호_테스트_길이_7자리() {
+    void sevenLottoNumbersTest() {
         assertThatThrownBy(() ->
                 makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6, 7}))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("[ERROR]");
     }
 
+    @DisplayName("로또 번호 중복 테스트")
     @Test
-    void 로또_번호_테스트_중복() {
+    void duplicatedLottoNumbersTest() {
         assertThatThrownBy(() ->
                 makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 5}))
                 .isInstanceOf(RuntimeException.class)
