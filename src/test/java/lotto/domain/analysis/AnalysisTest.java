@@ -21,7 +21,7 @@ class AnalysisTest {
     @MethodSource("provideForCalculateTest")
     void calculateRankCountsTest(final List<Rank> ranks,
                                  final int money,
-                                 final Map<Rank, Integer> rankCounts,
+                                 final Map<Rank, Long> rankCounts,
                                  final double profitRate) {
         final Analysis analysis = new Analysis(ranks, money);
         assertThat(analysis.getRankCounts()).isEqualTo(rankCounts);
@@ -32,7 +32,7 @@ class AnalysisTest {
     @MethodSource("provideForCalculateTest")
     void calculateProfitRateTest(final List<Rank> ranks,
                                  final int money,
-                                 final Map<Rank, Integer> rankCounts,
+                                 final Map<Rank, Long> rankCounts,
                                  final double profitRate) {
         final Analysis analysis = new Analysis(ranks, money);
         assertThat(analysis.getProfitRate()).isEqualTo(profitRate);
@@ -47,11 +47,7 @@ class AnalysisTest {
                                 )
                         ), 5000,
                         Map.of(
-                                Rank.FIRST_GRADE, 0,
-                                Rank.SECOND_GRADE, 0,
-                                Rank.THIRD_GRADE, 0,
-                                Rank.FOURTH_GRADE, 0,
-                                Rank.FIFTH_GRADE, 1
+                                Rank.FIFTH_GRADE, 1L
                         ), 0.001
                 ),
                 Arguments.of(
@@ -65,11 +61,9 @@ class AnalysisTest {
                                 )
                         ), 5000,
                         Map.of(
-                                Rank.FIRST_GRADE, 0,
-                                Rank.SECOND_GRADE, 1,
-                                Rank.THIRD_GRADE, 0,
-                                Rank.FOURTH_GRADE, 2,
-                                Rank.FIFTH_GRADE, 2
+                                Rank.SECOND_GRADE, 1L,
+                                Rank.FOURTH_GRADE, 2L,
+                                Rank.FIFTH_GRADE, 2L
                         ), 6.022
                 )
         );

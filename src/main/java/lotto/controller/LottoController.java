@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lotto.domain.analysis.Analysis;
 import lotto.domain.money.Money;
@@ -8,6 +9,7 @@ import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
 import lotto.domain.winning.Rank;
 import lotto.domain.winning.WinningTicket;
+import lotto.dto.TicketDto;
 import lotto.dto.WinningTicketDto;
 import lotto.view.LottoView;
 
@@ -34,7 +36,10 @@ public class LottoController {
     }
 
     private void announceTickets(final Tickets tickets) {
-        lottoView.announceTickets(tickets);
+        final List<TicketDto> ticketDtos = tickets.getTickets().stream()
+                .map(TicketDto::toDto)
+                .collect(Collectors.toUnmodifiableList());
+        lottoView.announceTickets(ticketDtos);
     }
 
     private Analysis calculateAnalysis(final Tickets tickets) {
