@@ -21,10 +21,10 @@ public enum LottoNumber {
     private static final int PICKUP_COUNT = 6;
     private static final String LOTTO_NUMBER_PREFIX = "NUMBER_";
 
-    private final int number;
+    private final int lottoNumber;
 
-    LottoNumber(int number) {
-        this.number = number;
+    LottoNumber(int lottoNumber) {
+        this.lottoNumber = lottoNumber;
     }
 
     public static LottoNumber findByNumber(int number) {
@@ -54,6 +54,6 @@ public enum LottoNumber {
 
     @Override
     public String toString() {
-        return String.valueOf(number);
+        return String.valueOf(lottoNumber);
     }
 }
