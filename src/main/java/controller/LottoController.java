@@ -18,9 +18,9 @@ import view.OutputView;
 
 public class LottoController {
     public void run() {
-        LottoPurchasingMoney inputLottoPurchasingMoney = inputPurchasingMoney();
-        int manualLottoCount = inputManualLottoCount();
-        LottoOrder lottoOrder = new LottoOrder(inputLottoPurchasingMoney, manualLottoCount);
+        LottoPurchasingMoney lottoPurchasingMoney = inputPurchasingMoney();
+
+        LottoOrder lottoOrder = inputLottoOrder(lottoPurchasingMoney);
 
         List<Lotto> lotteries = purchaseLotteries(lottoOrder);
         OutputView.printPurchasedLotteries(lottoOrder, lotteries);
@@ -29,7 +29,7 @@ public class LottoController {
 
         WinningStatistics winningStatistics = calculateStatistics(lotteries, winningLotto);
 
-        OutputView.printStatistics(winningStatistics, inputLottoPurchasingMoney);
+        OutputView.printStatistics(winningStatistics, lottoPurchasingMoney);
     }
 
     private LottoPurchasingMoney inputPurchasingMoney() {
@@ -41,12 +41,13 @@ public class LottoController {
         }
     }
 
-    private int inputManualLottoCount() {
+    private LottoOrder inputLottoOrder(LottoPurchasingMoney lottoPurchasingMoney) {
         try {
-            return InputView.inputManualLottoCount();
+            int manualLottoCount = InputView.inputManualLottoCount();
+            return new LottoOrder(lottoPurchasingMoney, manualLottoCount);
         } catch (IOException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return inputManualLottoCount();
+            return inputLottoOrder(lottoPurchasingMoney);
         }
     }
 
