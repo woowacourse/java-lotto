@@ -1,5 +1,6 @@
 package lotterymachine.dto;
 
+import java.util.Map.Entry;
 import lotterymachine.vo.Count;
 import lotterymachine.vo.Money;
 import lotterymachine.model.WinningLottery;
@@ -25,9 +26,16 @@ public class LotteryResultDto implements Comparable<LotteryResultDto> {
 
     public static List<LotteryResultDto> createLotteryResults(Map<WinningLottery, Count> lotteryTickets) {
         List<LotteryResultDto> winningLotteries = new ArrayList<>();
-        lotteryTickets.keySet().forEach(winningLottery -> winningLotteries
-                .add(new LotteryResultDto(winningLottery, lotteryTickets.get(winningLottery))));
+        for (Entry<WinningLottery, Count> ticket : lotteryTickets.entrySet()) {
+            addWinningLottery(winningLotteries, ticket);
+        }
         return winningLotteries;
+    }
+
+    private static void addWinningLottery(List<LotteryResultDto> winningLotteries, Entry<WinningLottery, Count> ticket) {
+        if (!ticket.getKey().equals(WinningLottery.INVALID)) {
+            winningLotteries.add(new LotteryResultDto(ticket.getKey(), ticket.getValue()));
+        }
     }
 
     public int getCountOfMatchingNumbers() {

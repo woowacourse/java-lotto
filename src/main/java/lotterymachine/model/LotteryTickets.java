@@ -19,18 +19,12 @@ public class LotteryTickets {
             int numberOfMatchingBalls = lotteryTicket.countMatchingBalls(balls);
             boolean containsBonus = lotteryTicket.contains(bonus);
             WinningLottery winningLottery = WinningLottery.find(containsBonus, numberOfMatchingBalls);
-            addWinningLottery(lotteriesResult, winningLottery);
+            lotteriesResult.put(winningLottery, lotteriesResult.get(winningLottery).increase());
         }
         return Collections.unmodifiableMap(lotteriesResult);
     }
 
     public List<LotteryTicket> getLotteryTickets() {
         return Collections.unmodifiableList(tickets);
-    }
-
-    private void addWinningLottery(Map<WinningLottery, Count> lotteriesResult, WinningLottery winningLottery) {
-        if (winningLottery != null) {
-            lotteriesResult.put(winningLottery, lotteriesResult.get(winningLottery).increase());
-        }
     }
 }
