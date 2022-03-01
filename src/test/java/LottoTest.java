@@ -18,6 +18,16 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("로또 번호에 null 값이 들어오면 예외 발생 ")
+    void check_null_fail() {
+        assertThatThrownBy(
+            () -> new Lotto(null)
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("[ERROR] 로또 번호로 null 값이 올 수 없습니다.");
+    }
+
+
+    @Test
     @DisplayName("로또 숫자 1~45 사이 아닐 시 예외 발생")
     void check_range_fail() {
 
@@ -28,7 +38,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 숫자가 7개 이상일 시 예외 발생")
+    @DisplayName("로또 숫자가 6개가 아닐 시 예외 발생")
     void check_size_fail() {
         assertThatThrownBy(
             () -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7))
@@ -40,8 +50,8 @@ public class LottoTest {
     void check_unique_fail() {
         assertThatThrownBy(
             () -> new Lotto(List.of(1, 2, 3, 4, 5, 5))
-        ).isInstanceOf(IllegalArgumentException.class);
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("중복");
     }
-
 
 }
