@@ -1,4 +1,4 @@
-package view.inputview;
+package view;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import validator.LottoNumberValidator;
 import validator.PurchaseMoneyValidator;
 
-public class ConsoleInputView implements InputView {
+public class InputView {
     private static final String IS_NULL_OR_BLANK_ERROR_MESSAGE = "입력값이 확인되지 않습니다.";
     private static final String NOT_INTEGER_ERROR_MESSAGE = "입력된 값이 정수가 아닙니다.";
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입럭해 주세요.";
@@ -18,13 +18,12 @@ public class ConsoleInputView implements InputView {
     private static final String INPUT_PURCHASE_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final int LOTTO_TICKET_SIZE = 6;
 
-    private static final ConsoleInputView instance = new ConsoleInputView();
+    private static final InputView instance = new InputView();
     private static final Scanner scanner = new Scanner(System.in);
 
-    private ConsoleInputView() {
+    private InputView() {
     }
 
-    @Override
     public int inputPurchaseMoney() {
         System.out.println(INPUT_PURCHASE_MONEY_MESSAGE);
         String userInput = inputLine();
@@ -33,7 +32,6 @@ public class ConsoleInputView implements InputView {
         return purchaseMoney;
     }
 
-    @Override
     public Set<Integer> inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String userInput = inputLine();
@@ -45,7 +43,6 @@ public class ConsoleInputView implements InputView {
                 .collect(Collectors.toSet());
     }
 
-    @Override
     public int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
         String userInput = inputLine();
@@ -54,7 +51,7 @@ public class ConsoleInputView implements InputView {
         return bonusNumber;
     }
 
-    public static ConsoleInputView getInstance() {
+    public static InputView getInstance() {
         return instance;
     }
 

@@ -1,11 +1,11 @@
-package view.outputview;
+package view;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import model.LottoTicketDto;
 import model.WinningResultDto;
 
-public class ConsoleOutputView implements OutputView {
+public class OutputView {
     private static final String PURCHASE_COUNT_MESSAGE = "개를 구매했습니다.";
     private static final String RIGHT_LIST_COVER = "[";
     private static final String LEFT_LIST_COVER = "]";
@@ -17,30 +17,27 @@ public class ConsoleOutputView implements OutputView {
     private static final String RESULT_MESSAGE_SUFFIX = "(%d원)- %d개\n";
     private static final String TOTAL_RETURN_MESSAGE = "총 수익률은 %.2f입니다.\n";
 
-    private static final ConsoleOutputView instance = new ConsoleOutputView();
+    private static final OutputView instance = new OutputView();
 
-    private ConsoleOutputView() {
+    private OutputView() {
     }
 
-    @Override
     public void showLottoTicket(List<LottoTicketDto> lottoTickets) {
         System.out.println(lottoTickets.size() + PURCHASE_COUNT_MESSAGE);
         lottoTickets.forEach(lottoTicket -> System.out.println(toLottoTicketPrintForm(lottoTicket)));
     }
 
-    @Override
     public void showWinningResult(List<WinningResultDto> winningResults) {
         System.out.println(WINNING_STATISTICS_MESSAGE);
         System.out.println(DIVISION_LINE);
         winningResults.forEach(this::printWinningResult);
     }
 
-    @Override
     public void showRateOfReturn(double rateOfReturn) {
         System.out.printf(TOTAL_RETURN_MESSAGE, rateOfReturn);
     }
 
-    public static ConsoleOutputView getInstance() {
+    public static OutputView getInstance() {
         return instance;
     }
 

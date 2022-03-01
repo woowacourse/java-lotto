@@ -12,14 +12,12 @@ import model.LottoTickets;
 import model.WinningPrize;
 import model.WinningPrizeStrategy;
 import model.WinningResultDto;
-import view.inputview.ConsoleInputView;
-import view.inputview.InputView;
-import view.outputview.ConsoleOutputView;
-import view.outputview.OutputView;
+import view.InputView;
+import view.OutputView;
 
 public class LottoController {
-    private final InputView inputView = ConsoleInputView.getInstance();
-    private final OutputView outputView = ConsoleOutputView.getInstance();
+    private final InputView inputView = InputView.getInstance();
+    private final OutputView outputView = OutputView.getInstance();
     private LottoGame lottoGame;
 
     public void initLottoGame(LottoTickets lottoTickets,
