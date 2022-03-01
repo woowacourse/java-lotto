@@ -1,9 +1,11 @@
 package view;
 
 import domain.Lotto;
+import domain.Number;
 import domain.PrizeResult;
 import domain.Rank;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,6 +30,7 @@ public class OutputView {
         System.out.println(lottos.size() + PURCHASE_COUNT_MESSAGE);
         for (Lotto lotto : lottos) {
             String lottoNumbers = lotto.getLottoNumbers().stream()
+                    .sorted(Comparator.comparing(Number::getNumber))
                     .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
                     .collect(Collectors.joining(DELIMITER, LEFT_BRACKET, RIGHT_BRACKET));
             System.out.println(lottoNumbers);

@@ -2,8 +2,8 @@ package view;
 
 import utils.InputValidation;
 
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class InputView {
 
@@ -23,7 +23,7 @@ public class InputView {
         }
     }
 
-    public static List<Integer> inputWinningLottoNumbers() {
+    public static Set<Integer> inputWinningLottoNumbers() {
         try {
             System.out.println(INPUT_WINNING_LOTTO_NUMBERS);
             return InputValidation.validateWinningNumber(scanner.nextLine());

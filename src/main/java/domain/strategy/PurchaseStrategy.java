@@ -1,9 +1,9 @@
 package domain.strategy;
 
-import java.util.List;
+import java.util.Set;
 
 public interface PurchaseStrategy {
 
-    List<Integer> generateNumbers();
+    Set<Integer> generateNumbers();
 
 }

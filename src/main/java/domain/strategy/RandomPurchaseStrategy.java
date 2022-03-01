@@ -1,9 +1,6 @@
 package domain.strategy;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class RandomPurchaseStrategy implements PurchaseStrategy {
 
@@ -11,16 +8,14 @@ public class RandomPurchaseStrategy implements PurchaseStrategy {
     private static final int MAXIMUM_NUMBER = 45;
 
     @Override
-    public List<Integer> generateNumbers() {
+    public Set<Integer> generateNumbers() {
         final List<Integer> balls = new ArrayList<>();
         for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++) {
             balls.add(i);
         }
         Collections.shuffle(balls);
 
-        return balls.subList(0, 6).stream()
-                .sorted()
-                .collect(Collectors.toList());
+        return new HashSet<>(balls.subList(0, 6));
     }
 
 }

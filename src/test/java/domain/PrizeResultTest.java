@@ -4,10 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -18,12 +15,11 @@ class PrizeResultTest {
     @BeforeEach
     void init() {
         List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 6, 8)));
+        lottos.add(new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottos.add(new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7))));
+        lottos.add(new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 6, 8))));
 
-        Integer[] winningNumbersArray = {1, 2, 3, 4, 5, 12};
-        WinningNumbers winningNumber = new WinningNumbers(Arrays.asList(winningNumbersArray));
+        WinningNumbers winningNumber = new WinningNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 12)));
         winningNumber.addBonusNumber(6);
 
         prizeResult = new PrizeResult(lottos, winningNumber);

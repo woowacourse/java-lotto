@@ -2,6 +2,7 @@ package utils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputValidation {
@@ -35,7 +36,7 @@ public class InputValidation {
         }
     }
 
-    public static List<Integer> validateWinningNumber(final String inputNumbers) {
+    public static Set<Integer> validateWinningNumber(final String inputNumbers) {
         final List<String> splitNumbers = Arrays.asList(inputNumbers.split(LOTTO_NUMBER_DELIMITER));
         checkNumOfBalls(splitNumbers);
 
@@ -48,10 +49,10 @@ public class InputValidation {
         }
     }
 
-    private static List<Integer> checkNonIntegers(List<String> numbers) {
+    private static Set<Integer> checkNonIntegers(List<String> numbers) {
         return numbers.stream()
                 .map(number -> checkNonInteger(number, ERROR_BALL_NON_INTEGER))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public static int validateBonusNumber(final String bonus) {
