@@ -26,7 +26,9 @@ public class LottoController {
     public void run() {
         LottoPurchaseMoney lottoPurchaseMoney = createMoney();
 
-        List<LottoTicket> manualLottoTickets = createManualLottoTicket();
+        int manualCount = getManualCount(lottoPurchaseMoney);
+
+        List<LottoTicket> manualLottoTickets = createManualLottoTicket(manualCount);
 
         LottoTickets lottoTickets = createLottoTickets(lottoPurchaseMoney, manualLottoTickets);
 
@@ -37,16 +39,47 @@ public class LottoController {
         outputView.printYield(lottoResult.getRanks(), lottoResult.calculateYield(lottoPurchaseMoney));
     }
 
-    private List<LottoTicket> createManualLottoTicket() {
-        int manualCount = inputView.getManualCount();
+    private LottoPurchaseMoney createMoney() {
+        try {
+            return LottoPurchaseMoney.create(inputView.getMoney());
+        } catch(IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
 
+            return createMoney();
+        }
+    }
+
+    private int getManualCount(LottoPurchaseMoney lottoPurchaseMoney) {
+        try {
+            int manualCount = inputView.getManualCount();
+            lottoPurchaseMoney.calculate(manualCount);
+
+            return manualCount;
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+
+            return getManualCount(lottoPurchaseMoney);
+        }
+    }
+
+    private List<LottoTicket> createManualLottoTicket(int manualCount) {
+        try {
+            List<LottoTicket> manualLottoTickets = getLottoTickets(manualCount);
+
+            return manualLottoTickets;
+        } catch(IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+
+            return createManualLottoTicket(manualCount);
+        }
+    }
+
+    private List<LottoTicket> getLottoTickets(int manualCount) {
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
 
         if (manualCount > 0) {
-
             setManualLottoTickets(manualCount, manualLottoTickets);
         }
-
         return manualLottoTickets;
     }
 
@@ -60,19 +93,12 @@ public class LottoController {
         }
     }
 
-    private LottoPurchaseMoney createMoney() {
-        try {
-            return LottoPurchaseMoney.create(inputView.getMoney());
-        } catch(IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
-
-            return createMoney();
-        }
-    }
-
     private LottoTickets createLottoTickets(LottoPurchaseMoney lottoPurchaseMoney, List<LottoTicket> manualLottoTickets) {
+
         LottoMachine lottoMachine = new LottoMachine();
+
         LottoTickets lottoTickets = lottoMachine.purchase(lottoPurchaseMoney, manualLottoTickets);
+
         LottoTicketsDto lottoTicketsDto = new LottoTicketsDto(lottoTickets);
 
         outputView.printTotalCount(lottoTickets.totalCount());
