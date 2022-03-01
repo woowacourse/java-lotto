@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.StringJoiner;
 import dto.RankResultDto;
 import dto.LottoDto;
+import model.rank.Rank;
 
 public class OutputView {
     private static final String PURCHASE_COUNT_MESSAGE = "개를 구매했습니다.";
@@ -13,6 +14,7 @@ public class OutputView {
     private static final String WINNING_STATISTICS_MESSAGE = "\n당첨 통계\n---------";
     private static final String NOT_BONUS_MATCH_RANK_PRINT_FORMAT = "%d개 일치 (%d원)- %d개\n";
     private static final String BONUS_MATCH_RANK_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
+    private static final String NO_PRINT_FORMAT = "";
     private static final String RATE_OF_RETURN_PRINT_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n";
 
     public void printLottos(final List<LottoDto> lottoDtos) {
@@ -40,13 +42,16 @@ public class OutputView {
     }
 
     private void printRankResult(final RankResultDto rankResultDto) {
-        System.out.printf(printRankResultFormat(rankResultDto.getMatchCount()), rankResultDto.getMatchCount(),
+        System.out.printf(printRankResultFormat(rankResultDto.getRank()), rankResultDto.getMatchCount(),
                 rankResultDto.getRankPrize(), rankResultDto.getWinningCount());
     }
 
-    private String printRankResultFormat(final int matchCount) {
-        if (matchCount == 5) {
+    private String printRankResultFormat(final Rank rank) {
+        if (rank == Rank.SECOND) {
             return BONUS_MATCH_RANK_PRINT_FORMAT;
+        }
+        if (rank == Rank.NONE) {
+            return NO_PRINT_FORMAT;
         }
         return NOT_BONUS_MATCH_RANK_PRINT_FORMAT;
     }

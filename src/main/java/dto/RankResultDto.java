@@ -23,4 +23,8 @@ public class RankResultDto {
         return winningCount;
     }
 
+    public Rank getRank() {
+        return rank;
+    }
+
 }
