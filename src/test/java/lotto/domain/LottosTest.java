@@ -10,17 +10,9 @@ import org.junit.jupiter.api.Test;
 public class LottosTest {
 
     @Test
-    @DisplayName("로또 수를 입력받은 만큼 로또 생성")
-    void create_lottos_count() {
-        Lottos lottos = new Lottos(14);
-
-        assertEquals(lottos.getLottos().size(), 14);
-    }
-
-    @Test
     @DisplayName("돈을 입력받은 만큼 로또 생성")
     void create_lottos_money() {
-        Lottos lottos = new Lottos(new Money(3650));
+        Lottos lottos = Lottos.newInstanceByMoney(new Money(3650));
 
         assertEquals(lottos.getLottos().size(), 3);
     }
@@ -32,7 +24,7 @@ public class LottosTest {
         Lotto lotto2 = new Lotto(List.of(3, 5, 11, 16, 32, 38));
         Lotto lotto3 = new Lotto(List.of(7, 11, 16, 35, 36, 44));
 
-        Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3), new Money(11000));
+        Lottos lottos = Lottos.newInstanceByLottosMoney(List.of(lotto1, lotto2, lotto3), new Money(11000));
 
         assertEquals(lottos.getLottos().size(), 14);
     }

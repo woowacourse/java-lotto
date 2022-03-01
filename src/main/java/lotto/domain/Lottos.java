@@ -8,22 +8,23 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int count) {
+    private Lottos(int count) {
         lottos = new ArrayList<>();
         addAutoCreatedLotto(count);
     }
 
-    public Lottos(Money purchaseAmount) {
-        this(purchaseAmount.getMoney() / LOTTO_PRICE);
-    }
-
-    public Lottos(List<Lotto> lottos) {
+    private Lottos(List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public Lottos(List<Lotto> lottos, Money change) {
-        this.lottos = new ArrayList<>(lottos);
-        addAutoCreatedLotto(change.getMoney() / LOTTO_PRICE);
+    public static Lottos newInstanceByMoney(Money money) {
+        return new Lottos(money.getMoney() / LOTTO_PRICE);
+    }
+
+    public static Lottos newInstanceByLottosMoney(List<Lotto> lottoList, Money change) {
+        Lottos lottos = new Lottos(lottoList);
+        lottos.addAutoCreatedLotto(change.getMoney() / LOTTO_PRICE);
+        return lottos;
     }
 
     private void addAutoCreatedLotto(int count) {

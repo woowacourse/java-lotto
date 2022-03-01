@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class ProfitTest {
     private final LottoResult lottoResult = new LottoResult();
@@ -17,7 +17,7 @@ public class ProfitTest {
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(List.of(2, 3, 4, 5, 6, 7));
         Lotto lotto3 = new Lotto(List.of(3, 4, 5, 6, 7, 8));
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
+        Lottos lottos = Lottos.newInstanceByLottosMoney(Arrays.asList(lotto1, lotto2, lotto3), new Money(0));
 
         Lotto winLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusBall = new LottoNumber(7);

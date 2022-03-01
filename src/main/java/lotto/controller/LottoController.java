@@ -36,7 +36,7 @@ public class LottoController {
     private Lottos buyLotto(Money purchaseAmount) {
         int count = inputManualLottoCount(purchaseAmount);
         List<Lotto> manualLottos = inputManualLottos(count);
-        Lottos lottos = new Lottos(manualLottos, purchaseAmount);
+        Lottos lottos = Lottos.newInstanceByLottosMoney(manualLottos, purchaseAmount);
         OutputView.printLottos(count, lottos.getAutoLottos(count));
         return lottos;
     }
