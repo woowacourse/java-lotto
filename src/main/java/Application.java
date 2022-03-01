@@ -29,7 +29,7 @@ public class Application {
         try {
             return new LottoMoney(InputView.getPurchaseMoney());
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.showErrorMessage(e);
             return createLottoMoney();
         }
     }
@@ -38,7 +38,7 @@ public class Application {
         try {
             return lottoMoney.calculateLottoCountRefactor(InputView.getPurchaseManualCount());
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.showErrorMessage(e);
             return createLottoPurchaseCount(lottoMoney);
         }
     }
@@ -50,7 +50,7 @@ public class Application {
                 lottoPurchaseCount,
                 new RandomLottoGeneratorStrategy());
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.showErrorMessage(e);
             return createLottos(lottoPurchaseCount);
         }
     }
@@ -63,7 +63,7 @@ public class Application {
         try {
             return LottoFactory.createLotto(InputView.getWinningLottoNumbers());
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.showErrorMessage(e);
             return createWinningLottoBall();
         }
     }
@@ -72,7 +72,7 @@ public class Application {
         try {
             return LottoNumber.valueOf(InputView.getBonusBall());
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.showErrorMessage(e);
             return createBonusBall();
         }
     }

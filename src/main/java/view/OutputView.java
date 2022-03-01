@@ -21,6 +21,7 @@ public class OutputView {
     private static final String PRINT_DECISION = "---------";
     private static final int SECOND_DECIMAL_POINT = 100;
     private static final int BENEFIT_STANDARD = 1;
+    private static final String ERROR_KEYWORD = "[ERROR] ";
 
     public static void showPurchasedLottos(LottoPurchaseCount lottoPurchaseCount, List<Lotto> lottos) {
         System.out.println("\n" + "수동으로 " + lottoPurchaseCount.getManualCount() + "장" + ", "
@@ -64,5 +65,9 @@ public class OutputView {
         if (profitRate >= BENEFIT_STANDARD) {
             System.out.printf(PROFIT_RATE_BENEFIT_FORMAT, test);
         }
+    }
+
+    public static void showErrorMessage(Exception e) {
+        System.out.println(ERROR_KEYWORD + e.getMessage() + "\n");;
     }
 }
