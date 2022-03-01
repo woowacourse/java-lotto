@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 
 public class LottoTicket {
 
@@ -14,15 +15,21 @@ public class LottoTicket {
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(String lottoNumbersString) {
-        this.lottoNumbers = Arrays.stream(lottoNumbersString.split(","))
-                .map(String::trim)
-                .map(LottoNumber::new).collect(Collectors.toUnmodifiableSet());
+        this.lottoNumbers = createLottoNumbersFromString(lottoNumbersString);
         isCorrectLottoNumbers();
     }
 
     public LottoTicket(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = new HashSet<>(lottoNumbers);
         isCorrectLottoNumbers();
+    }
+
+    @NotNull
+    private Set<LottoNumber> createLottoNumbersFromString(String lottoNumbersString) {
+        return Arrays.stream(lottoNumbersString.split(","))
+                .map(String::trim)
+                .map(LottoNumber::new)
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     public Set<LottoNumber> lottoNumbers() {
