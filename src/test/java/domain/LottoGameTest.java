@@ -18,7 +18,7 @@ class LottoGameTest {
         int bonusNumber = 7;
         LottoTickets lottoTickets = new LottoTickets(purchaseMoney, new LottoNumberGenerateStrategy());
         WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusNumber);
-        WinningPrizeStrategy winningPrizeStrategy = new DefaultLottoWinningPrizeStrategy();
+        WinningPrizeStrategy winningPrizeStrategy = new LottoWinningPrizeStrategy();
         LottoGame lottoGame = new LottoGame(lottoTickets, winningTicket, winningPrizeStrategy);
         assertThat(lottoGame.getTickets().size()).isEqualTo(purchaseMoney / TICKET_PRICE);
     }
@@ -32,7 +32,7 @@ class LottoGameTest {
         GenerateStrategy generateStrategy = () -> new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTickets lottoTickets = new LottoTickets(purchaseMoney, generateStrategy);
         WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusNumber);
-        WinningPrizeStrategy winningPrizeStrategy = new DefaultLottoWinningPrizeStrategy();
+        WinningPrizeStrategy winningPrizeStrategy = new LottoWinningPrizeStrategy();
         LottoGame lottoGame = new LottoGame(lottoTickets, winningTicket, winningPrizeStrategy);
         assertThat(lottoGame.getWinningResult().getCountOfWinning().get(WinningPrize.FIRST)).isEqualTo(14);
     }

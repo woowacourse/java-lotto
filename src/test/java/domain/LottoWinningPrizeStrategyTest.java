@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class DefaultLottoWinningPrizeStrategyTest {
+class LottoWinningPrizeStrategyTest {
 
     private static final Map<Integer, WinningPrize> MATCH_COUNT_WINNING_PRIZE_INFO = new HashMap<>() {{
         put(6, WinningPrize.FIRST);
@@ -18,8 +18,8 @@ class DefaultLottoWinningPrizeStrategyTest {
         put(4, WinningPrize.FOURTH);
         put(3, WinningPrize.FIFTH);
     }};
-    private final DefaultLottoWinningPrizeStrategy defaultLottoWinningPrizeStrategy
-            = new DefaultLottoWinningPrizeStrategy();
+    private final LottoWinningPrizeStrategy defaultLottoWinningPrizeStrategy
+            = new LottoWinningPrizeStrategy();
 
     @Test
     @DisplayName("기본 로또 당첨보상 전략이 2등을 잘 판단하는지 확인한다.")

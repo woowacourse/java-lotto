@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import domain.DefaultLottoWinningPrizeStrategy;
+import domain.LottoWinningPrizeStrategy;
 import domain.LottoGame;
 import domain.LottoNumberGenerateStrategy;
 import domain.LottoTicketDto;
@@ -21,7 +21,7 @@ import view.OutputView;
 public class LottoController {
     private final InputView inputView = InputView.getInstance();
     private final OutputView outputView = OutputView.getInstance();
-    private final WinningPrizeStrategy winningPrizeStrategy = new DefaultLottoWinningPrizeStrategy();
+    private final WinningPrizeStrategy winningPrizeStrategy = new LottoWinningPrizeStrategy();
 
     public void run() {
         LottoTickets lottoTickets = purchaseLottoTickets();
