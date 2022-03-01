@@ -50,12 +50,6 @@ public class LottoService {
         return issueLottoWithCount(number);
     }
 
-    public List<LottoDto> getIssuedLotto() {
-        return issuedLotto.stream()
-            .map(LottoDto::from)
-            .collect(Collectors.toUnmodifiableList());
-    }
-
     private List<Lotto> issueLottoWithCount(final int number) {
         final List<Lotto> issuedLotto = new ArrayList<>();
         Count count = new Count(number);
@@ -84,6 +78,12 @@ public class LottoService {
         return new Lotto(autoLottoNumbers.stream()
             .sorted()
             .collect(Collectors.toList()));
+    }
+
+    public List<LottoDto> getIssuedLotto() {
+        return issuedLotto.stream()
+            .map(LottoDto::from)
+            .collect(Collectors.toUnmodifiableList());
     }
 
     public SortedMap<RankPrize, Integer> calculateResult(final int bonusNumberInput) {

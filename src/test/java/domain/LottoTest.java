@@ -47,7 +47,7 @@ class LottoTest {
     @Test
     void compare_bonusNumbers() {
         final Lotto lotto = Lotto.fromInput(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        final LottoNumber bonusNumber = new LottoNumber("6");
+        final LottoNumber bonusNumber = LottoNumber.from("6");
 
         final boolean hasBonus = lotto.isContainNumber(bonusNumber);
 
