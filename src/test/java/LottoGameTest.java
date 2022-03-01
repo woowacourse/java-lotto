@@ -95,6 +95,6 @@ public class LottoGameTest {
     void enterWinningLottoNumbersAndBonusNumberTest4() {
         int bonusNumber = 1;
         assertThatThrownBy(() -> lottoGame.enterWinningLottoNumbersAndBonusNumber(null, bonusNumber))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(NullPointerException.class);
     }
 }
