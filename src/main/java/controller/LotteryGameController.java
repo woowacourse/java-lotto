@@ -1,12 +1,13 @@
 package controller;
 
 import java.util.List;
-import java.util.Map;
 
 import domain.LotteryGame;
+import domain.Result;
 import domain.generatestrategy.LotteryNumberGenerator;
-import domain.Rank;
+import domain.lottery.Lotteries;
 import domain.lottery.LotteryGenerator;
+import domain.lottery.WinningLottery;
 import view.InputView;
 import view.OutputView;
 
@@ -22,33 +23,36 @@ public class LotteryGameController {
 	}
 
 	public void startLotteryGame() {
-		purchaseLottery();
-		createWinningLottery();
-		outputView.printLotteries(lotteryGame.getLotteries());
+		Lotteries lotteries = purchaseLottery();
+		WinningLottery winningLottery = createWinningLottery();
+		outputView.printLotteries(lotteries.getLotteries());
+		makeResult(lotteries, winningLottery);
 	}
 
-	private void purchaseLottery() {
+	private Lotteries purchaseLottery() {
 		try {
 			lotteryGame = LotteryGame.of(inputMoney(), new LotteryGenerator(), new LotteryNumberGenerator());
+			return lotteryGame.createAutoLottery();
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
-			purchaseLottery();
+			return purchaseLottery();
 		}
 	}
 
-	private void createWinningLottery() {
+	private WinningLottery createWinningLottery() {
 		try {
-			lotteryGame.createWinningLottery(inputWinningNumber(), inputBonusBall());
+			return lotteryGame.createWinningLottery(inputWinningNumber(), inputBonusBall());
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
-			createWinningLottery();
+			return createWinningLottery();
 		}
 	}
 
-	public void makeResult() {
-		final Map<Rank, Integer> ranking = lotteryGame.makeWinner();
-		double incomePercent = lotteryGame.makeReturnRate(ranking);
-		outputView.printStatistics(ranking, incomePercent);
+	private void makeResult(Lotteries lotteries, WinningLottery winningLottery) {
+		Result result = new Result();
+		result.makeWinner(lotteries, winningLottery);
+		result.makeReturnRate(lotteryGame);
+		outputView.printStatistics(result);
 	}
 
 	private int inputBonusBall() {

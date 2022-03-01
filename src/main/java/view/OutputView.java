@@ -8,16 +8,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import domain.Result;
 import domain.lottery.Lottery;
 import domain.Rank;
 import domain.lottery.LotteryNumber;
 
 public class OutputView {
 
-	public void printStatistics(final Map<Rank, Integer> ranking, final double incomePercent) {
+	public void printStatistics(final Result result) {
 		System.out.println(RESULT_STATISTICS.getMessage());
-		printRanking(ranking);
-		printIncomePercent(incomePercent);
+		printRanking(result.getRankResult());
+		printIncomePercent(result.getReturnRate());
 	}
 
 	private void printRanking(final Map<Rank, Integer> ranking) {

@@ -12,7 +12,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import domain.generateStrategy.LotteryNumberMockGenerator;
 import domain.generatestrategy.LotteryNumberGenerator;
+import domain.lottery.Lotteries;
 import domain.lottery.LotteryGenerator;
+import domain.lottery.WinningLottery;
 
 @DisplayName("LotteryGame 테스트")
 public class LotteryGameTest {
@@ -24,22 +26,25 @@ public class LotteryGameTest {
 		//given
 		final LotteryGame lotteryGame = LotteryGame.of(inputMoney, new LotteryGenerator(),
 			new LotteryNumberGenerator());
+		Lotteries lotteries = lotteryGame.createAutoLottery();
 		final int lotteriesToCreate = inputMoney / 1000;
 		//when
 		//then
-		assertThat(lotteryGame.getLotteries().size()).isEqualTo(lotteriesToCreate);
+		assertThat(lotteries.getLotteries().size()).isEqualTo(lotteriesToCreate);
 	}
 
 	@Test
 	@DisplayName("등수가 제대로 집계되는지 확인")
 	void testRankingCount() {
 		//given
-		// final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerateMock());
 		final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerator(),
 			new LotteryNumberMockGenerator());
-		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+		Lotteries lotteries = lotteryGame.createAutoLottery();
+		WinningLottery winningLottery = lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
-		final Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
+		Result result = new Result();
+		result.makeWinner(lotteries, winningLottery);
+		final Map<Rank, Integer> rankResult = result.getRankResult();
 		//then
 		for (Rank rank : rankResult.keySet()) {
 			rankResult.get(rank);
@@ -53,11 +58,13 @@ public class LotteryGameTest {
 		//given
 		final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerator(),
 			new LotteryNumberMockGenerator());
-		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+		Lotteries lotteries = lotteryGame.createAutoLottery();
+		WinningLottery winningLottery = lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
-		final Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
-		final double percent = lotteryGame.makeReturnRate(rankResult);
+		Result result = new Result();
+		result.makeWinner(lotteries, winningLottery);
+		result.makeReturnRate(lotteryGame);
 		//then
-		assertThat(percent).isEqualTo((double)2031555000 / (6 * 1000));
+		assertThat(result.getReturnRate()).isEqualTo((double)2031555000 / (6 * 1000));
 	}
 }
