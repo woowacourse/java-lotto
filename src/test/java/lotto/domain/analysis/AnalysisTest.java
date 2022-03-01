@@ -12,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.domain.money.Money;
 import lotto.domain.winning.Rank;
 
 class AnalysisTest {
@@ -20,7 +21,7 @@ class AnalysisTest {
     @ParameterizedTest(name = "[{index}] 당첨 등수 개수 : {2}")
     @MethodSource("provideForCalculateTest")
     void calculateRankCountsTest(final List<Rank> ranks,
-                                 final int money,
+                                 final Money money,
                                  final Map<Rank, Long> rankCounts,
                                  final double profitRate) {
         final Analysis analysis = new Analysis(ranks, money);
@@ -31,7 +32,7 @@ class AnalysisTest {
     @ParameterizedTest(name = "[{index}] 수익률 : {3}")
     @MethodSource("provideForCalculateTest")
     void calculateProfitRateTest(final List<Rank> ranks,
-                                 final int money,
+                                 final Money money,
                                  final Map<Rank, Long> rankCounts,
                                  final double profitRate) {
         final Analysis analysis = new Analysis(ranks, money);
@@ -45,10 +46,10 @@ class AnalysisTest {
                                 List.of(
                                         Rank.FIFTH_GRADE
                                 )
-                        ), 5000,
+                        ), new Money(5000),
                         Map.of(
                                 Rank.FIFTH_GRADE, 1L
-                        ), 0.001
+                        ), 1.00
                 ),
                 Arguments.of(
                         Named.of("2등 1개, 4등 2개, 5등 2개",
@@ -59,12 +60,12 @@ class AnalysisTest {
                                         Rank.FIFTH_GRADE,
                                         Rank.FOURTH_GRADE
                                 )
-                        ), 5000,
+                        ), new Money(5000),
                         Map.of(
                                 Rank.SECOND_GRADE, 1L,
                                 Rank.FOURTH_GRADE, 2L,
                                 Rank.FIFTH_GRADE, 2L
-                        ), 6.022
+                        ), 6022.00
                 )
         );
     }

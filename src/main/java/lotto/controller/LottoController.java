@@ -26,23 +26,23 @@ public class LottoController {
     }
 
     public void run() {
-        final TicketManager ticketManager = purchaseTickets();
-        announceTickets(ticketManager);
+        final Money money = this.payMoney();
+        final TicketManager ticketManager = this.purchaseTickets(money);
+        this.announceTickets(ticketManager);
 
-        final Analysis analysis = calculateAnalysis(ticketManager);
-        announceAnalysis(analysis);
+        final Analysis analysis = this.calculateAnalysis(ticketManager, money);
+        this.announceAnalysis(analysis);
     }
 
-    private TicketManager purchaseTickets() {
-        final int totalTicketCount = calculateTotalTicketCount();
+    private Money payMoney() {
+        return new Money(lottoView.requestMoney());
+    }
+
+    private TicketManager purchaseTickets(final Money money) {
+        final int totalTicketCount = money.getQuotient();
         final int manualTicketCount = lottoView.requestManualTicketCount(totalTicketCount);
-        final Tickets manualTickets = requestManualTickets(manualTicketCount);
+        final Tickets manualTickets = this.requestManualTickets(manualTicketCount);
         return TicketManager.generateTickets(totalTicketCount, manualTickets, new RandomTicketGenerator());
-    }
-
-    private int calculateTotalTicketCount() {
-        final Money money = new Money(lottoView.requestMoney());
-        return money.getQuotient();
     }
 
     private Tickets requestManualTickets(final int manualTicketCount) {
@@ -58,10 +58,10 @@ public class LottoController {
         lottoView.announceTickets(ticketManagerDto);
     }
 
-    private Analysis calculateAnalysis(final TicketManager ticketManager) {
+    private Analysis calculateAnalysis(final TicketManager ticketManager, final Money money) {
         final WinningTicket winningTicket = this.requestWinningTicket();
         final List<Rank> ranks = ticketManager.calculateRanks(winningTicket);
-        return new Analysis(ranks, ticketManager.getSize());
+        return new Analysis(ranks, money);
     }
 
     private WinningTicket requestWinningTicket() {

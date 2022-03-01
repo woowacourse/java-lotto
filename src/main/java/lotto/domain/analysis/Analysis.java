@@ -4,17 +4,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import lotto.domain.money.Money;
 import lotto.domain.winning.Rank;
-import lotto.utils.MoneyUnit;
 
 public class Analysis {
 
     private final Map<Rank, Long> rankCounts;
     private final double profitRate;
 
-    public Analysis(final List<Rank> ranks, final int ticketCount) {
-        this.rankCounts = calculateRankCounts(ranks);
-        this.profitRate = calculateProfitRate(ranks, ticketCount);
+    public Analysis(final List<Rank> ranks, final Money money) {
+        this.rankCounts = this.calculateRankCounts(ranks);
+        this.profitRate = this.calculateProfitRate(ranks, money);
     }
 
     private Map<Rank, Long> calculateRankCounts(final List<Rank> ranks) {
@@ -22,11 +22,11 @@ public class Analysis {
                 .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
     }
 
-    private double calculateProfitRate(final List<Rank> ranks, final int ticketCount) {
-        long total = ranks.stream()
+    private double calculateProfitRate(final List<Rank> ranks, final Money money) {
+        long totalSum = ranks.stream()
                 .mapToLong(Rank::getPrizeMoney)
                 .sum();
-        return (double) total / MoneyUnit.multiple(ticketCount);
+        return money.divide(totalSum);
     }
 
     public Map<Rank, Long> getRankCounts() {

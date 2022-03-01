@@ -15,8 +15,8 @@ public class Money {
         return MoneyUnit.divide(money);
     }
 
-    public int getMoney() {
-        return money;
+    public double divide(final long money) {
+        return (double) money / this.money;
     }
 
 }
