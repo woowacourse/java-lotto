@@ -25,9 +25,7 @@ public class LotteryTickets {
     public Map<WinningLotteryRank, Integer> getLotteriesResult(WinningLottery winningLottery) {
         final Map<WinningLotteryRank, Integer> lotteriesResult = WinningLotteryRank.getWinningLotteries();
         for (LotteryTicket lotteryTicket : tickets) {
-            int matchingNumbers = lotteryTicket.countMatchingNumbers(winningLottery.getNumbers());
-            boolean containsBonus = lotteryTicket.containsNumber(winningLottery.getBonusNumber());
-            WinningLotteryRank winningLotteryRank = WinningLotteryRank.find(matchingNumbers, containsBonus);
+            WinningLotteryRank winningLotteryRank = winningLottery.getWinningLotteryRank(lotteryTicket);
             lotteriesResult.put(winningLotteryRank, lotteriesResult.getOrDefault(winningLotteryRank, 0) + 1);
         }
         return Collections.unmodifiableMap(lotteriesResult);

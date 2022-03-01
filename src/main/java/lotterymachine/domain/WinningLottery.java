@@ -55,4 +55,10 @@ public class WinningLottery {
             throw new IllegalArgumentException(DUPLICATION_INPUT_NUMBERS);
         }
     }
+
+    public WinningLotteryRank getWinningLotteryRank(LotteryTicket lotteryTicket) {
+        int matchingNumbers = lotteryTicket.countMatchingNumbers(this.numbers);
+        boolean containsBonus = lotteryTicket.containsNumber(this.bonusNumber);
+        return WinningLotteryRank.find(matchingNumbers, containsBonus);
+    }
 }

@@ -1,5 +1,6 @@
 package lotterymachine.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningLotteryTest {
@@ -52,5 +54,20 @@ class WinningLotteryTest {
             WinningLottery winningLottery = new WinningLottery(input, inputBonusNumber);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복된 숫자를 입력 받았습니다.");
+    }
+
+    @Test
+    @DisplayName("LotteryTicket을 입력 받아, 해당하는 Rank를 조회한다.")
+    void getWinningLotteryRank() {
+        List<LotteryNumber> input = IntStream.range(7, 13)
+                .mapToObj(LotteryNumber::new)
+                .collect(Collectors.toList());
+        LotteryNumber inputBonusNumber = new LotteryNumber(14);
+        WinningLottery winningLottery = new WinningLottery(input, inputBonusNumber);
+        LotteryTicket lotteryTicket = new LotteryTicket(input);
+
+        WinningLotteryRank winningLotteryRank = winningLottery.getWinningLotteryRank(lotteryTicket);
+
+        assertThat(winningLotteryRank).isEqualTo(WinningLotteryRank.SIX);
     }
 }
