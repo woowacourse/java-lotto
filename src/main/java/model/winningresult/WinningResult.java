@@ -24,7 +24,7 @@ public class WinningResult {
 
     private int calculateTotalReturn() {
         return winningResult.entrySet().stream()
-                .mapToInt(rankResult -> rankResult.getKey().getPrizeMoney() * rankResult.getValue())
+                .mapToInt(rankResult -> rankResult.getKey().getPrize() * rankResult.getValue())
                 .sum();
     }
 }

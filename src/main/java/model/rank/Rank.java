@@ -11,16 +11,16 @@ public enum Rank {
     NONE(0, 0);
 
     private final int matchCount;
-    private final int prizeMoney;
+    private final int prize;
 
-    Rank(final int matchCount, final int prizeMoney) {
+    Rank(final int matchCount, final int prize) {
         this.matchCount = matchCount;
-        this.prizeMoney = prizeMoney;
+        this.prize = prize;
     }
 
-    public static Rank valueOf(final int matchCount, final boolean matchBonus) {
+    public static Rank valueOf(final int matchCount, final boolean hasBonus) {
         if (matchCount == 5) {
-            return checkSecondOrThird(matchBonus);
+            return checkSecondOrThird(hasBonus);
         }
         return Arrays.stream(values())
                 .filter(value -> value.matchCount == matchCount)
@@ -35,8 +35,8 @@ public enum Rank {
         return THIRD;
     }
 
-    public int getPrizeMoney() {
-        return prizeMoney;
+    public int getPrize() {
+        return prize;
     }
 
     public int getMatchCount() {

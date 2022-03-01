@@ -12,7 +12,7 @@ public class RankResultDto {
     }
 
     public int getRankPrize() {
-        return rank.getPrizeMoney();
+        return rank.getPrize();
     }
 
     public int getMatchCount() {
