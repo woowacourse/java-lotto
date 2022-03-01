@@ -11,9 +11,10 @@ public class LottoGame {
         this.lottos = new Lottos(lottoGenerator.generate(money.convertToAmount()));
     }
 
-    public void makeResult(WinningNumbers winningNumbers) {
+    public WinningChecker makeResult(WinningNumbers winningNumbers) {
         winningChecker = new WinningChecker(lottos, winningNumbers);
         winningChecker.check();
+        return winningChecker;
     }
 
     public double getYield() {

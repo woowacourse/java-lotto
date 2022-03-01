@@ -33,6 +33,10 @@ public class WinningChecker {
             .sum();
     }
 
+    public int getRewardsCount(Rewards rewards) {
+        return rewardsCountMap.getOrDefault(rewards, 0);
+    }
+
     private Rewards checkWinning(Lotto lotto) {
 
         List<Integer> winningAndBonusCount = lotto.getWinningAndBonusCount(winningNumbers);
