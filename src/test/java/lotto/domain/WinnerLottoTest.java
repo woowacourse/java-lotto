@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class WinnerLottoTest {
-    private static final LottoNumber BONUS = new LottoNumber(7);
+    private static final LottoNumber BONUS = LottoNumber.of(7);
     private static final Lotto LOTTO = new Lotto(givenNumbers(1, 2, 3, 4, 5, 6));
     private static final WinnerLotto WINNER_LOTTO = new WinnerLotto(LOTTO, BONUS);
 
@@ -28,13 +28,13 @@ public class WinnerLottoTest {
     @DisplayName("보너스볼은 당첨 번호와 중복되면 예외를 발생한다.")
     void throwExceptionWhenDuplicated() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new WinnerLotto(LOTTO, new LottoNumber(6)))
+            .isThrownBy(() -> new WinnerLotto(LOTTO, LottoNumber.of(6)))
             .withMessageMatching("보너스볼은 당첨번호와 중복될 수 없다.");
     }
 
     private static List<LottoNumber> givenNumbers(int... numbers) {
         return Arrays.stream(numbers)
-            .mapToObj(LottoNumber::new)
+            .mapToObj(LottoNumber::of)
             .collect(Collectors.toList());
     }
 

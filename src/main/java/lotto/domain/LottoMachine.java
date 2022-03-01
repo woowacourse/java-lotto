@@ -14,7 +14,13 @@ public class LottoMachine {
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
 
-    private static final List<LottoNumber> LOTTO_NUMBERS = initNumbers();
+    private static final List<LottoNumber> LOTTO_NUMBERS;
+
+    static {
+        LOTTO_NUMBERS = IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
+            .mapToObj(LottoNumber::of)
+            .collect(Collectors.toList());
+    }
 
     public static Lotto generate() {
         return new Lotto(shuffleNumbers().subList(START_INCLUSIVE, END_EXCLUSIVE));
@@ -24,11 +30,5 @@ public class LottoMachine {
         List<LottoNumber> lottoNumbers = new ArrayList<>(LottoMachine.LOTTO_NUMBERS);
         Collections.shuffle(lottoNumbers);
         return lottoNumbers;
-    }
-
-    private static List<LottoNumber> initNumbers() {
-        return IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
     }
 }

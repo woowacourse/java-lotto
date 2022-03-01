@@ -13,7 +13,7 @@ public class LottoNumberTest {
     @DisplayName("로또 번호는 1이상 45이하가 아니면 예외가 발생한다.")
     void throwExceptionWhenOutOfRange(int number) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new LottoNumber(number))
+            .isThrownBy(() -> LottoNumber.of(number))
             .withMessageMatching("로또 번호는 1이상 45이하이어야 한다.");
     }
 
@@ -21,12 +21,12 @@ public class LottoNumberTest {
     @ValueSource(ints = {1, 45})
     @DisplayName("로또 번호는 1이상 45이하로 생성된다.")
     void createNumber(int number) {
-        assertThat(new LottoNumber(number)).isNotNull();
+        assertThat(LottoNumber.of(number)).isNotNull();
     }
 
     @Test
     @DisplayName("숫자가 같으면 동등한 객체이다.")
     void equalsNumber() {
-        assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber(1));
+        assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
     }
 }

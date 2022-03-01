@@ -42,12 +42,12 @@ public class InputView {
 
     public static LottoNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new LottoNumber(stringToInt(validateBlank(SCANNER.nextLine())));
+        return LottoNumber.of(stringToInt(validateBlank(SCANNER.nextLine())));
     }
 
     private static List<LottoNumber> convertToNumbers(String input) {
         return Arrays.stream(input.split(DELIMITER))
-            .map(number -> new LottoNumber(stringToInt(number.trim())))
+            .map(number -> LottoNumber.of(stringToInt(number.trim())))
             .collect(Collectors.toList());
     }
 

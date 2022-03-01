@@ -56,7 +56,7 @@ class LottoTest {
     void checkNotContainsBonusNumber(int number, boolean expected) {
         Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 6));
 
-        assertThat(lotto.contains(new LottoNumber(number))).isEqualTo(expected);
+        assertThat(lotto.contains(LottoNumber.of(number))).isEqualTo(expected);
     }
 
     @Test
@@ -65,7 +65,7 @@ class LottoTest {
         List<LottoNumber> lottoNumbers = givenNumbers(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(lottoNumbers);
 
-        LottoNumber addLottoNumber = new LottoNumber(7);
+        LottoNumber addLottoNumber = LottoNumber.of(7);
         lottoNumbers.add(addLottoNumber);
 
         assertThat(lotto.contains(addLottoNumber)).isFalse();
@@ -73,7 +73,7 @@ class LottoTest {
 
     private static List<LottoNumber> givenNumbers(int... numbers) {
         return Arrays.stream(numbers)
-            .mapToObj(LottoNumber::new)
+            .mapToObj(LottoNumber::of)
             .collect(Collectors.toList());
     }
 

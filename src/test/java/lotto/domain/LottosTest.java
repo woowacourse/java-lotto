@@ -42,7 +42,7 @@ public class LottosTest {
             new Lotto(givenNumbers(11, 12, 13, 14, 15, 16)))
         );
 
-        List<Rank> ranks = lottos.match(new WinnerLotto(LOTTO, new LottoNumber(7)));
+        List<Rank> ranks = lottos.match(new WinnerLotto(LOTTO, LottoNumber.of(7)));
 
         assertThat(ranks).containsExactly(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH, Rank.NONE);
     }
@@ -69,7 +69,7 @@ public class LottosTest {
 
     private static List<LottoNumber> givenNumbers(int... numbers) {
         return Arrays.stream(numbers)
-            .mapToObj(LottoNumber::new)
+            .mapToObj(LottoNumber::of)
             .collect(Collectors.toList());
     }
 }

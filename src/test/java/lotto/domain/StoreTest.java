@@ -59,7 +59,7 @@ public class StoreTest {
 
     private List<LottoNumber> givenNumbers(int... numbers) {
         return Arrays.stream(numbers)
-            .mapToObj(LottoNumber::new)
+            .mapToObj(LottoNumber::of)
             .collect(Collectors.toList());
     }
 }
