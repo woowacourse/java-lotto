@@ -16,10 +16,6 @@ public class LottoGame {
         this.winningResult = WinningResult.from(lottoTickets, winningTicket, winningPrizeStrategy);
     }
 
-    public List<LottoTicket> getTickets() {
-        return lottoTickets.getTickets();
-    }
-
     public WinningResult getWinningResult() {
         return winningResult;
     }

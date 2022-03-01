@@ -18,15 +18,15 @@ public class LottoTicket {
         }
     }
 
-    private void validateTicketSize(Set<Integer> generatedNumbers) {
-        if (generatedNumbers.size() != LOTTO_TICKET_SIZE) {
-            throw new IllegalArgumentException(LOTTO_TICKET_SIZE_ERROR_MESSAGE);
-        }
-    }
-
     public Set<Integer> getLottoNumberValues() {
         return lottoNumbers.stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toSet());
+    }
+
+    private void validateTicketSize(Set<Integer> generatedNumbers) {
+        if (generatedNumbers.size() != LOTTO_TICKET_SIZE) {
+            throw new IllegalArgumentException(LOTTO_TICKET_SIZE_ERROR_MESSAGE);
+        }
     }
 }
