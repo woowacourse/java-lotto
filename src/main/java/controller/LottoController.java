@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import model.DefaultLottoWinningPrizeStrategy;
-import model.GenerateStrategy;
 import model.LottoGame;
 import model.LottoNumberGenerateStrategy;
 import model.LottoTicketDto;
@@ -33,9 +32,14 @@ public class LottoController {
     }
 
     private void settingLottoGame(LottoTickets lottoTickets) {
-        Set<Integer> winningNumbers = inputView.inputWinningNumbers();
-        int bonusNumber = inputView.inputBonusNumber();
-        initLottoGame(lottoTickets, winningNumbers, bonusNumber, new DefaultLottoWinningPrizeStrategy());
+        try {
+            Set<Integer> winningNumbers = inputView.inputWinningNumbers();
+            int bonusNumber = inputView.inputBonusNumber();
+            initLottoGame(lottoTickets, winningNumbers, bonusNumber, new DefaultLottoWinningPrizeStrategy());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            settingLottoGame(lottoTickets);
+        }
     }
 
     private LottoTickets purchaseLottoTickets() {
