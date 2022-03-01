@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-@DisplayName("Ball 저장소, 캐싱 테스트")
 class BallStorageTest {
 
     @DisplayName("Ball 객체는 캐싱되어야 한다.")

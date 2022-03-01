@@ -14,7 +14,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import lotto.AppConfig;
 import lotto.view.input.reader.CustomReader;
 
-@DisplayName("사용자 입력, 타입 변환 테스트")
 class InputViewParseTest {
 
     private static final AppConfig APP_CONFIG = AppConfig.getInstance();

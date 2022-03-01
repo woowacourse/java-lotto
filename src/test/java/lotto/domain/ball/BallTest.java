@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
 
-@DisplayName("Ball 객체, 생성 테스트")
 class BallTest {
 
     @DisplayName("범위 밖의 번호는 생성할 수 없다.")

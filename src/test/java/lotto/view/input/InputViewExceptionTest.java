@@ -11,7 +11,6 @@ import lotto.AppConfig;
 import lotto.exception.LottoExceptionStatus;
 import lotto.view.input.reader.CustomReader;
 
-@DisplayName("사용자 입력, 예외테스트")
 class InputViewExceptionTest {
 
     private static final AppConfig APP_CONFIG = AppConfig.getInstance();
