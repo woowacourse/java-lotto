@@ -1,6 +1,5 @@
-package lotto.domain.money.validation;
+package lotto.domain.money;
 
-import lotto.domain.money.condition.MoneyUnit;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
 
