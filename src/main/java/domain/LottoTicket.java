@@ -11,10 +11,11 @@ import util.LottoNumberGenerator;
 public class LottoTicket {
 
     private final List<Lotto> passiveLottos;
-    private final List<Lotto> autoLottos = new ArrayList<>();
+    private final List<Lotto> autoLottos;
 
     public LottoTicket(int autoLottoCount, List<Lotto> passiveLottos, LottoNumberGenerator generatorPolicy) {
         this.passiveLottos = new ArrayList<>(passiveLottos);
+        this.autoLottos = new ArrayList<>();
         for (int i = 0; i < autoLottoCount; i++) {
             autoLottos.add(new Lotto(generatorPolicy.generate()));
         }
