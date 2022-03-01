@@ -2,7 +2,6 @@ package lotto.controller;
 
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.ProfitRate;
 import lotto.domain.RankCount;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
@@ -47,7 +46,7 @@ public class Controller {
     private void printWinningStatistic(Money money, Lottos lottos, WinningNumbers winningNumbers) {
         OutputView.printNewLine();
         RankCount rankCount = new RankCount(lottos, winningNumbers);
-        ProfitRate profitRate = new ProfitRate(rankCount.getTotalPrize(), money);
+        String profitRate = money.toStringProfitRateUntilSecondDecimal(rankCount.getTotalPrize());
         OutputView.printWinningStatistic(rankCount, profitRate);
     }
 }

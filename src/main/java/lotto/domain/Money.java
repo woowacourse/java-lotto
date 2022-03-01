@@ -15,7 +15,15 @@ public class Money {
         return new Money(Integer.parseInt(money));
     }
 
-    public int getMoney() {
-        return money;
+    public int calculateTotalLottoCount(int lottoPrice) {
+        return money / lottoPrice;
+    }
+
+    public double getProfitRate(long totalPrize) {
+        return (double) totalPrize / (double) money;
+    }
+
+    public String toStringProfitRateUntilSecondDecimal(long totalPrize) {
+        return String.valueOf(Math.floor(getProfitRate(totalPrize) * 100) / 100.0);
     }
 }

@@ -18,7 +18,7 @@ public class WinningNumbers {
                 LottoNumber.findByNumber(Integer.parseInt(lottoNumber)));
     }
 
-    public Rank getRank(Lotto lotto) {
+    public Rank getRankOf(Lotto lotto) {
         int matchCount = lotto.getMatchCount(winningLotto);
         boolean contains = lotto.isContain(lottoNumber);
         return Rank.getRank(matchCount, contains);

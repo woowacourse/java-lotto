@@ -15,7 +15,7 @@ public class RankCount {
     private EnumMap<Rank, Integer> calculateRankCount(Lottos lottos, WinningNumbers winningNumbers) {
         EnumMap<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
         for (Lotto lotto : lottos.getLottos()) {
-            increaseCount(rankCount, winningNumbers.getRank(lotto));
+            increaseCount(rankCount, winningNumbers.getRankOf(lotto));
         }
         return rankCount;
     }

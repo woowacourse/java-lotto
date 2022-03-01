@@ -22,6 +22,6 @@ public class WinningNumbersTest {
     void getRank() {
         WinningNumbers winningNumbers = WinningNumbers.generateWinningNumbersByString("1,2,3,4,5,6", "7");
         Lotto lotto = Lotto.generateLottoByString("1,2,3,4,5,7");
-        Assertions.assertThat(winningNumbers.getRank(lotto)).isEqualTo(Rank.RANK_2);
+        Assertions.assertThat(winningNumbers.getRankOf(lotto)).isEqualTo(Rank.RANK_2);
     }
 }
