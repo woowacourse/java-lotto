@@ -16,7 +16,7 @@ public class ResultView {
     private static final String LOTTO_RESULT_DELIMITER = "---------";
     private static final String LOTTO_RESULT_TWICE_MESSAGE = "%d개, 보너스 볼 일치 일치 (%d원)- %d개" + System.lineSeparator();
     private static final String LOTTO_RESULT_DEFAULT_MESSAGE = "%d개 일치 (%d원)- %d개" + System.lineSeparator();
-    private static final String LOTTO_RATE_RETURN_MESSAGE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String LOTTO_RATE_RETURN_MESSAGE = "총 수익률은 %.2f입니다.";
 
     private static final String EMPTY_MESSAGE = "";
     private static final int HUNDRED_FOR_FLOOR = 100;
