@@ -42,7 +42,7 @@ public class OutputView {
         System.out.println(System.lineSeparator() + WINNING_STATISTIC);
         System.out.println(OUTLINE);
         Map<Rank, Integer> prizeResult = result.getPrizeResult();
-        for (Rank winnerPrice : result.sortedPriceKeySet()) {
+        for (Rank winnerPrice : Rank.ranks()) {
             printEachStatistic(winnerPrice, prizeResult);
         }
     }

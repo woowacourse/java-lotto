@@ -1,7 +1,9 @@
 package domain;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PrizeResult {
 
@@ -40,13 +42,6 @@ public class PrizeResult {
             totalPrice += winnerPrice.getPrize() * prizeResult.get(winnerPrice);
         }
         return totalPrice;
-    }
-
-    public List<Rank> sortedPriceKeySet() {
-        return prizeResult.keySet().stream()
-                .filter(winnerPrice -> winnerPrice != Rank.FAIL)
-                .sorted(Comparator.comparing(Rank::getPrize))
-                .collect(Collectors.toList());
     }
 
     public Map<Rank, Integer> getPrizeResult() {
