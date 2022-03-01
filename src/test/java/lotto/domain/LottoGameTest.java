@@ -55,4 +55,31 @@ public class LottoGameTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("수동으로 구매할 로또 수와 같은 개수의 로또를 입력해주세요.");
     }
+
+    @Test
+    @DisplayName("수동 로또 구매 후 남은 돈으로 살 수 있는 자동 로또를 생성한다.")
+    void makeAutoLottos() {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
+        LottoGame lottoGame = new LottoGame(purchaseAmount, 3);
+
+        lottoGame.makeAutoLottos();
+        assertThat(lottoGame.getLottos().size()).isEqualTo(11);
+    }
+
+    @Test
+    @DisplayName("수동 로또 구매 후 남은 돈으로 살 수 있는 자동 로또를 생성한다.")
+    void makeManualAndAutoLottos() {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
+        LottoGame lottoGame = new LottoGame(purchaseAmount, 3);
+
+        List<List<Integer>> inputLottos = new ArrayList<>();
+        inputLottos.add(List.of(8, 21, 23, 41, 42, 43));
+        inputLottos.add(List.of(3, 5, 11, 16, 32, 38));
+        inputLottos.add(List.of(7, 11, 16, 35, 36, 44));
+
+        lottoGame.makeManualLottos(inputLottos);
+        lottoGame.makeAutoLottos();
+
+        assertThat(lottoGame.getLottos().size()).isEqualTo(14);
+    }
 }

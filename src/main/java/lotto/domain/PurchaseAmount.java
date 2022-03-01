@@ -15,6 +15,10 @@ public class PurchaseAmount {
         return amount >= TICKET_PRICE * count;
     }
 
+    public int calculateAutoLottoCount(int count) {
+        return (amount - TICKET_PRICE * count) / TICKET_PRICE;
+    }
+
     public int calculateTheNumberOfTicket() {
         return amount / TICKET_PRICE;
     }
@@ -32,5 +36,4 @@ public class PurchaseAmount {
     public int getAmount() {
         return amount;
     }
-
 }

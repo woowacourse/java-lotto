@@ -21,7 +21,7 @@ public class LottoController {
             inputLottos.add(StringConverter.toInts(InputView.getManualLotto()));
         }
         lottoGame.makeManualLottos(inputLottos);
-
+        lottoGame.makeAutoLottos();
 
         int ticketCount = purchaseAmount.calculateTheNumberOfTicket();
         OutputView.printTicketCount(ticketCount);

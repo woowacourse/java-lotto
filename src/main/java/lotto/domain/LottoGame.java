@@ -36,6 +36,13 @@ public class LottoGame {
         }
     }
 
+    public void makeAutoLottos() {
+        LottoMachine lottoMachine = new RandomLottoMachine();
+        for (int i = 0; i < purchaseAmount.calculateAutoLottoCount(manualLottoCount); i++) {
+            lottos.add(lottoMachine.makeLottos());
+        }
+    }
+
     public int getManualLottoCount() {
         return manualLottoCount;
     }
