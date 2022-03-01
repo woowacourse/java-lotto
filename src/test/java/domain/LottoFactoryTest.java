@@ -1,6 +1,7 @@
 package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
@@ -31,5 +32,14 @@ class LottoFactoryTest {
         IntStream.rangeClosed(0, 100)
                 .parallel()
                 .forEach(i -> LottoFactory.createAutoLottosByQuantity(10));
+    }
+
+    @ParameterizedTest(name = "생성 시도한 수량 : {0}")
+    @ValueSource(ints = {-1, 0})
+    @DisplayName("LottoFactory에 1 미만의 수량을 요청할 경우, IAE발생")
+    void createAutoLottosWithInvalidQuantityShouldFail(int invalidQuantity) {
+        assertThatThrownBy(() -> LottoFactory.createAutoLottosByQuantity(invalidQuantity))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("자동 로또 생성 수량은 1 이상으로 입력해주세요");
     }
 }
