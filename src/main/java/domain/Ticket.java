@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +54,6 @@ public class Ticket {
 	}
 
 	public List<Ball> getBalls() {
-		return balls;
+		return Collections.unmodifiableList(balls);
 	}
 }

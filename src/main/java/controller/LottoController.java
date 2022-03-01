@@ -1,5 +1,6 @@
 package controller;
 
+import domain.TicketMachine;
 import domain.Tickets;
 import domain.WinningAnalyze;
 import domain.WinningNumber;
@@ -20,9 +21,10 @@ public class LottoController {
 		OutputView.printStatistics(generateStatistics(tickets, winningNumber));
 	}
 
-	private Tickets generateTickets(int payment) {
-		Tickets tickets = new Tickets();
-		tickets.makeTickets(payment, new AutoStrategy());
+	private Tickets generateTickets(int money) {
+		// 수동으로 구매할 로또 수 입력 받고 돈이랑 같이 기계에 넣는다.
+		//
+		Tickets tickets = TicketMachine.generateTickets(money, new AutoStrategy());
 
 		return tickets;
 	}

@@ -1,33 +1,15 @@
 package domain;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import domain.strategy.TicketingStrategy;
-
 public class Tickets {
-	private static final String PAYMENT_ERROR = "구입 금액은 1000원 미만일 수 없습니다.";
-
 	private final List<Ticket> tickets;
 
-	public Tickets() {
-		this.tickets = new ArrayList<>();
-	}
-
-	public void makeTickets(int payment, TicketingStrategy ticketingStrategy) {
-		validatePayment(payment);
-
-		for (int i = 0; i < payment / Ticket.PRICE; i++) {
-			tickets.add(new Ticket(ticketingStrategy.generate()));
-		}
-	}
-
-	private void validatePayment(int payment) {
-		if (payment < Ticket.PRICE) {
-			throw new IllegalArgumentException(PAYMENT_ERROR);
-		}
+	public Tickets(final List<Ticket> tickets) {
+		this.tickets = tickets;
 	}
 
 	public List<Rank> getRanks(WinningNumber winningNumber) {
@@ -38,7 +20,7 @@ public class Tickets {
 	}
 
 	public List<Ticket> getTickets() {
-		return tickets;
+		return Collections.unmodifiableList(tickets);
 	}
 
 	public int size() {

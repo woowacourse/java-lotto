@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,7 +11,7 @@ public class WinningNumber {
 	private final List<Ball> winningBalls;
 	private final Ball bonusBall;
 
-	public WinningNumber(List<Integer> winningBalls, int bonusBall) {
+	public WinningNumber(final List<Integer> winningBalls, final int bonusBall) {
 		validateWinningNumber(winningBalls, bonusBall);
 
 		this.winningBalls = winningBalls.stream()
@@ -39,7 +40,7 @@ public class WinningNumber {
 	}
 
 	public List<Ball> getWinningBalls() {
-		return winningBalls;
+		return Collections.unmodifiableList(winningBalls);
 	}
 
 	public Ball getBonusBall() {

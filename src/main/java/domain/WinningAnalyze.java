@@ -11,7 +11,7 @@ public class WinningAnalyze {
 	private final Tickets tickets;
 	private final WinningNumber winningNumber;
 
-	public WinningAnalyze(Tickets tickets, WinningNumber winningNumber) {
+	public WinningAnalyze(final Tickets tickets, final WinningNumber winningNumber) {
 		this.tickets = tickets;
 		this.winningNumber = winningNumber;
 	}

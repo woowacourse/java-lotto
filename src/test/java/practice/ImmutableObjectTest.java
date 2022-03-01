@@ -1,16 +1,43 @@
-package domain;
+package practice;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import domain.Ticket;
+import domain.TicketMachine;
+import domain.Tickets;
 import domain.strategy.CustomTicketingStrategy;
 
-class SetUpTicketsAndWinningNumber {
-	private Tickets tickets;
-	private WinningNumber winningNumber;
+public class ImmutableObjectTest {
 
-	public void setUp() {
+	@DisplayName("Ticket 불변 객체 테스트")
+	@Test
+	void TicketImmutable() {
+		List<Integer> numbers = new ArrayList<>();
+		numbers.add(1);
+		numbers.add(2);
+		numbers.add(3);
+		numbers.add(4);
+		numbers.add(5);
+		numbers.add(6);
+
+		Ticket ticket = new Ticket(numbers);
+
+		numbers.add(7);
+		numbers.add(8);
+
+		assertThat(numbers.size()).isEqualTo(ticket.getBalls().size() + 2);
+	}
+
+	@DisplayName("Tickets 불변 객체 테스트")
+	@Test
+	void TicketsImmutable() {
 		List<List<Integer>> numbers = new ArrayList<>();
 		numbers.add(Arrays.asList(8, 21, 23, 41, 42, 43));
 		numbers.add(Arrays.asList(3, 5, 11, 16, 32, 38));
@@ -31,18 +58,10 @@ class SetUpTicketsAndWinningNumber {
 		customLottoGenerator.initNumbers(numbers);
 		int payment = 14000;
 
-		tickets = TicketMachine.generateTickets(payment, customLottoGenerator);
+		Tickets tickets = TicketMachine.generateTickets(payment, customLottoGenerator);
 
-		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-		int bonusBall = 7;
-		winningNumber = new WinningNumber(winningNumbers, bonusBall);
-	}
+		numbers.add(Arrays.asList(7, 12, 26, 36, 44, 45));
 
-	public Tickets getTickets() {
-		return tickets;
-	}
-
-	public WinningNumber getWinningNumber() {
-		return winningNumber;
+		assertThat(numbers.size()).isEqualTo(tickets.getTickets().size() + 1);
 	}
 }

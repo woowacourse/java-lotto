@@ -10,7 +10,7 @@ public class Ball {
 
 	private final int number;
 
-	public Ball(int number) {
+	public Ball(final int number) {
 		validateNumberIsInRange(number);
 		this.number = number;
 	}
