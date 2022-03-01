@@ -34,14 +34,14 @@ public class Ticket {
         return balls.contains(ball);
     }
 
-    public int countMatches(final List<Ball> anotherBalls) {
+    public int countMatches(final Ticket ticket) {
         return (int) this.balls.stream()
-                .filter(anotherBalls::contains)
+                .filter(ticket::contains)
                 .count();
     }
 
     public Optional<Rank> calculateRank(final Ticket ticket, final Ball bonusBall) {
-        final int matchCount = ticket.countMatches(this.balls);
+        final int matchCount = countMatches(ticket);
         final boolean bonusBallMatched = this.balls.contains(bonusBall);
         return Rank.of(matchCount, bonusBallMatched);
     }
