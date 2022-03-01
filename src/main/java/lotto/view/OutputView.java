@@ -1,10 +1,10 @@
 package lotto.view;
 
-import java.util.EnumMap;
-import lotto.domain.Rank;
+import java.util.Map;
 import lotto.dto.LottoResultDto;
 import lotto.dto.LottoTicketDto;
 import lotto.dto.LottoTicketsDto;
+import lotto.dto.RankDto;
 
 public class OutputView {
 
@@ -29,7 +29,7 @@ public class OutputView {
         displayYield(lottoResultDto.getYield());
     }
 
-    private static void displayStatistics(EnumMap<Rank, Integer> statistics) {
+    private static void displayStatistics(Map<RankDto, Integer> statistics) {
         System.out.println();
         System.out.println(STATISTICS_GUIDE_MESSAGE);
         statistics.forEach(OutputView::displayRankResult);
@@ -39,11 +39,9 @@ public class OutputView {
         System.out.println(String.format(YIELD_FORMAT, calculateYield) + isLoss(calculateYield));
     }
 
-    private static void displayRankResult(Rank rank, Integer count) {
-        if (rank.getMatchCount() != Rank.MISS.getMatchCount()) {
-            System.out.println(
-                    rank.getMatchStatus() + String.format(STATISTICS_FORMAT, rank.getReward(), count));
-        }
+    private static void displayRankResult(RankDto rankDto, Integer count) {
+        System.out.println(
+                rankDto.getMatchStatus() + String.format(STATISTICS_FORMAT, rankDto.getReward(), count));
     }
 
     private static String isLoss(double calculateYield) {
