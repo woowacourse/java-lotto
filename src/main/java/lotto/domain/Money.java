@@ -11,8 +11,8 @@ public class Money {
         this.money = money;
     }
 
-    public static Money generateMoneyByConsole(String consoleInput) {
-        return new Money(Integer.parseInt(consoleInput));
+    public static Money generateMoneyByString(String money) {
+        return new Money(Integer.parseInt(money));
     }
 
     public int getMoney() {

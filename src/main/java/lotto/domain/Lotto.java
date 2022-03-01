@@ -20,37 +20,31 @@ public class Lotto {
         return new Lotto(LottoNumber.getRandomLottoNumbers());
     }
 
-    public static Lotto generateLottoByConsole(String consoleInput) {
-        return new Lotto(receiveThroughConsole(consoleInput));
+    public static Lotto generateLottoByString(String lottoNumbers) {
+        return new Lotto(receiveStringInput(lottoNumbers));
     }
 
-    private static List<LottoNumber> receiveThroughConsole(String consoleInput) {
-        return convertToLottoNumbers(parseConsoleInput(consoleInput));
+    private static List<LottoNumber> receiveStringInput(String stringInput) {
+        return convertStringToLottoNumbers(parseStringInput(stringInput));
     }
 
-    private static List<Integer> parseConsoleInput(String consoleInput) {
-        return Arrays.stream(consoleInput.split(INPUT_NUMBERS_DELIMITER))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
-
-    private static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+    private static List<LottoNumber> convertStringToLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::findByNumber)
                 .sorted()
                 .collect(Collectors.toList());
     }
 
-    public Rank getRank(WinningLotto winningLotto, BonusNumber bonusNumber) {
-        int matchCount = getMatchCount(winningLotto);
-        boolean contains = isContain(bonusNumber.getBonusNumber());
-        return Rank.getRank(matchCount, contains);
+    private static List<Integer> parseStringInput(String stringInput) {
+        return Arrays.stream(stringInput.split(INPUT_NUMBERS_DELIMITER))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
-    private int getMatchCount(WinningLotto winningLotto) {
+    public int getMatchCount(Lotto winningLotto) {
         return (int) lottoNumbers.stream()
-                .filter(winningLotto.getWinningLotto()::isContain)
+                .filter(winningLotto::isContain)
                 .count();
     }
 
@@ -60,6 +54,8 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        return lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(", "));
     }
 }
