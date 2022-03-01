@@ -51,12 +51,4 @@ public class Money {
     public double calculateRateOfProfit(long totalProfit) {
         return Math.round((double) totalProfit / value * DECIMAL_PLACE) / DECIMAL_PLACE;
     }
-
-    @Override
-    public String toString() {
-        return "Money{" +
-                "value=" + value +
-                ", maxQuantity=" + maxQuantity +
-                '}';
-    }
 }

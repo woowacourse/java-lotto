@@ -52,11 +52,4 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
-
-    @Override
-    public String toString() {
-        return "Lottos{" +
-                "lottos=" + lottos +
-                '}';
-    }
 }

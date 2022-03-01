@@ -50,11 +50,4 @@ public class Number implements Comparable<Number> {
     public int compareTo(Number o) {
         return value - o.value;
     }
-
-    @Override
-    public String toString() {
-        return "Number{" +
-                "value=" + value +
-                '}';
-    }
 }

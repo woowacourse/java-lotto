@@ -31,11 +31,4 @@ public class Result {
 
         return money.calculateRateOfProfit(totalProfit);
     }
-
-    @Override
-    public String toString() {
-        return "Result{" +
-                "result=" + result +
-                '}';
-    }
 }
