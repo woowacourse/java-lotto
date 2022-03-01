@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +33,16 @@ public class StoreTest {
     void createLotto() {
         Store store = new Store(new Money(1000L));
 
-        assertThat(store.buyLottos()).hasSize(1);
+        assertThat(store.buyAutoLottos()).hasSize(1);
+    }
+
+    @Test
+    @DisplayName("수동로또 구매 후 남은 금액만큼 자동 로또를 생성한다.")
+    void buyManualLottto() {
+        Store store = new Store(new Money(3000L));
+        store.buyManualLottos(2);
+
+        assertThat(store.buyAutoLottos()).hasSize(1);
     }
 
     @Test

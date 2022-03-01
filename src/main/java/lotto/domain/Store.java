@@ -16,25 +16,21 @@ public class Store {
         this.leftMoney = money;
     }
 
-    public List<Lotto> buyLottos() {
+    public void buyManualLottos(int manualLottoAmount) {
+        leftMoney = leftMoney.minus(LOTTO_PRICE * manualLottoAmount);
+    }
+
+    public List<Lotto> buyAutoLottos() {
         List<Lotto> lottos = new ArrayList<>();
         while (canBuy()) {
-            lottos.add(buyAutoLottos());
+            leftMoney = leftMoney.minus(LOTTO_PRICE);
+            lottos.add(LottoMachine.generate());
         }
         return lottos;
     }
 
-    public void minusManualLottoPrice(int amount) {
-        this.leftMoney = leftMoney.minus(LOTTO_PRICE * amount);
-    }
-
     private boolean canBuy() {
         return leftMoney.isGreaterThan(Money.LOTTO_PRICE) || leftMoney.equals(Money.LOTTO_PRICE);
-    }
-
-    private Lotto buyAutoLottos() {
-        leftMoney = leftMoney.minus(LOTTO_PRICE);
-        return LottoMachine.generate();
     }
 
     private void validateUnderLimit(Money money) {

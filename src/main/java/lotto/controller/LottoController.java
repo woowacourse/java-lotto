@@ -17,32 +17,36 @@ public class LottoController {
 
     public void run() {
         Money inputMoney = InputView.inputMoney();
-
         Lottos lottos = new Lottos(buyLottos(new Store(inputMoney)));
         OutputView.printLottos(lottos.getLottos());
-
         OutputView.printRate(sumTotalReward(lottos), inputMoney);
     }
 
     private List<Lotto> buyLottos(Store store) {
-        int amount = InputView.inputManualLottoAmount();
-        store.minusManualLottoPrice(amount);
-
-        List<Lotto> manualLottos = InputView.inputManualLottoNumbers(amount);
-        List<Lotto> autoLottos = store.buyLottos();
+        List<Lotto> manualLottos = buyManualLotto(store);
+        List<Lotto> autoLottos = store.buyAutoLottos();
         OutputView.printLottosSize(manualLottos.size(), autoLottos.size());
-
-        return Stream.concat(manualLottos.stream(), autoLottos.stream())
-            .collect(Collectors.toList());
+        return concatLottos(manualLottos, autoLottos);
     }
 
-    private WinnerLotto createWinnerLotto(List<LottoNumber> winnerLottoNumbers, LottoNumber bonusLottoNumber) {
-        return new WinnerLotto(new Lotto(winnerLottoNumbers), bonusLottoNumber);
+    private List<Lotto> buyManualLotto(Store store) {
+        int amount = InputView.inputManualLottoAmount();
+        store.buyManualLottos(amount);
+        return InputView.inputManualLottoNumbers(amount);
+    }
+
+    private List<Lotto> concatLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        return Stream.concat(manualLottos.stream(), autoLottos.stream())
+            .collect(Collectors.toList());
     }
 
     private long sumTotalReward(Lottos lottos) {
         List<Rank> ranks = lottos.match(createWinnerLotto(InputView.inputWinnerNumbers(), InputView.inputBonusNumber()));
         OutputView.printRanks(ranks);
         return Rank.calculateReward(ranks);
+    }
+
+    private WinnerLotto createWinnerLotto(List<LottoNumber> winnerLottoNumbers, LottoNumber bonusLottoNumber) {
+        return new WinnerLotto(new Lotto(winnerLottoNumbers), bonusLottoNumber);
     }
 }
