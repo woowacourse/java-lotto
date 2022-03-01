@@ -51,4 +51,20 @@ public class LottosTest {
                 .isInstanceOf(NullPointerException.class)
                 .hasMessageMatching("Lotto 목록이 비었습니다");
     }
+
+    @Test
+    @DisplayName("두 개의 Lottos를 병합 시 길이는 전달도니 두 Lottos의 합과 같아야 한다")
+    void mergeTwoLottos() {
+        // given
+        Lottos lottos = new Lottos(this.lottos);
+        Lottos anotherLottos = new Lottos(this.lottos);
+
+        // when
+        Lottos mergedLottos = lottos.merge(anotherLottos);
+        int mergedSize = mergedLottos.getLottos().size();
+        int expected = lottos.getLottos().size() + anotherLottos.getLottos().size();
+
+        // then
+        assertThat(mergedSize).isEqualTo(expected);
+    }
 }
