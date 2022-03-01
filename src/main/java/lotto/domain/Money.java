@@ -2,7 +2,6 @@ package lotto.domain;
 
 public class Money {
 
-    private static final int PRICE = 1000;
     private static final int DIVIDED_STANDARD = 1000;
     private static final int MIN_VALUE = 1000;
     private static final int MAX_VALUE = 2_000_000_000;
@@ -14,10 +13,12 @@ public class Money {
     private static final String QUANTITY_OF_MANUAL_SUFFIX = "개 이하의 로또만 수동으로 구매할 수 있습니다.";
 
     private final int value;
+    private final int maxQuantity;
 
     public Money(int value) {
         validate(value);
         this.value = value;
+        this.maxQuantity = value / 1000;
     }
 
     private void validate(int number) {
@@ -38,18 +39,13 @@ public class Money {
     }
 
     public void validateQuantityOfManual(int quantityOfManual) {
-        final int maxQuantity = getAvailableQuantity();
         if (quantityOfManual < 0 || quantityOfManual > maxQuantity) {
             throw new IllegalArgumentException(QUANTITY_OF_MANUAL_PREFIX + maxQuantity + QUANTITY_OF_MANUAL_SUFFIX);
         }
     }
 
     public int getQuantityOfAuto(int quantityOfManual) {
-        return getAvailableQuantity() - quantityOfManual;
-    }
-
-    private int getAvailableQuantity() {
-        return value / PRICE;
+        return maxQuantity - quantityOfManual;
     }
 
     public double calculateRateOfProfit(long totalProfit) {
@@ -60,6 +56,7 @@ public class Money {
     public String toString() {
         return "Money{" +
                 "value=" + value +
+                ", maxQuantity=" + maxQuantity +
                 '}';
     }
 }
