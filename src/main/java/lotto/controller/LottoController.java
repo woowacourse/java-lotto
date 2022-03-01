@@ -30,7 +30,8 @@ public class LottoController {
 
         LottoTickets totalLottoTickets = manualLottoTickets.combine(autoLottoTickets);
 
-        return SalesInfoDto.valueOf(manualCount, autoCount, LottoTicketsDto.from(totalLottoTickets));
+        return SalesInfoDto.valueOf(purchaseInfoDto.getMoney(), manualCount, autoCount,
+                LottoTicketsDto.from(totalLottoTickets));
     }
 
     public WinningNumberDto createWinningNumber(List<Integer> normalNumbers, int bonusNumber) {
@@ -39,14 +40,14 @@ public class LottoController {
         return WinningNumberDto.from(winningNumber);
     }
 
-    public LottoResultDto createLottoResult(int money, WinningNumberDto winningNumberDto,
-                                            LottoTicketsDto lottoTicketsDto) {
-
+    public LottoResultDto createLottoResult(SalesInfoDto salesInfoDto, WinningNumberDto winningNumberDto) {
         WinningNumber winningNumber = winningNumberDto.toWinningNumber();
-        LottoTickets lottoTickets = lottoTicketsDto.toLottoTickets();
+        LottoTicketsDto totalLottoTickets = salesInfoDto.getLottoTickets();
+        LottoTickets lottoTickets = totalLottoTickets.toLottoTickets();
 
         LottoResult lottoResult = lottoTickets.determine(winningNumber);
+        double yield = lottoResult.calculateYield(new Money(salesInfoDto.getMoney()));
 
-        return LottoResultDto.from(lottoResult.getRanks(), lottoResult.calculateYield(new Money(money)));
+        return LottoResultDto.from(lottoResult.getRanks(), yield);
     }
 }
