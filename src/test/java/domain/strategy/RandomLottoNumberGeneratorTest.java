@@ -2,7 +2,7 @@ package domain.strategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.Lotto;
+import domain.LottoNumber;
 import java.util.List;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +18,7 @@ public class RandomLottoNumberGeneratorTest {
         IntStream.range(0, 100000)
                 .forEach(i -> {
                     List<Integer> generatedWinningNumbers = randomLottoNumberGenerator.generateLottoNumbers();
-                    assertThat(Lotto.LOTTO_NUMBERS.containsAll(generatedWinningNumbers)).isTrue();
+                    assertThat(LottoNumber.LOTTO_NUMBERS.containsAll(generatedWinningNumbers)).isTrue();
                 });
     }
 }
