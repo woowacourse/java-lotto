@@ -60,7 +60,12 @@ public class LottoController {
     private WinningNumbers insertWinningInformation() {
         List<Integer> winningNumbers = insertWinningNumbers();
         int bonusNumber = insertBonusNumber();
-        return new WinningNumbers(winningNumbers, bonusNumber);
+        try {
+            return new WinningNumbers(winningNumbers, bonusNumber);
+        } catch (IllegalArgumentException error) {
+            System.out.println(error.getMessage());
+            return insertWinningInformation();
+        }
     }
 
     private List<Integer> insertWinningNumbers() {
