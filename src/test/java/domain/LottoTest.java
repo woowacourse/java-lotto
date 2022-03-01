@@ -2,10 +2,14 @@ package domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
 
@@ -17,10 +21,15 @@ class LottoTest {
         assertThat(lotto).isNotNull();
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
     @DisplayName("Lotto 객체 생성 시 LottoNumber 갯수 유효하지 않은 경우")
-    void createLottoNotInSize() {
-        assertThatThrownBy(() -> LottoFactory.createLotto(List.of(1, 2, 6)))
+    void createLottoNotInSize(String value) {
+        List<Integer> lottoNumbers = Arrays.stream(value.split(","))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
+
+        assertThatThrownBy(() -> LottoFactory.createLotto(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
     }
 

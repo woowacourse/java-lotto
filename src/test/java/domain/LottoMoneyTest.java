@@ -18,7 +18,7 @@ public class LottoMoneyTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-100, 0})
+    @ValueSource(ints = {-100, -1, 0, 999})
     @DisplayName("돈을 생성하지 못하는 경우")
     void createInvalidMoney(int amount) {
         assertThatThrownBy(() -> new LottoMoney(amount))
