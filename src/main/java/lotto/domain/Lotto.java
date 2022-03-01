@@ -2,14 +2,13 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto implements Comparable<Lotto> {
-    private static final List<Integer> lottoTotalNumbers = new ArrayList<>();
+    private static final List<Ball> lottoTotalBalls = new ArrayList<>();
     private static final int BALL_COUNT = 6;
     public static final int LOTTO_PRICE = 1000;
     private static final String ERROR_BALL_COUNT = BALL_COUNT + "개의 숫자를 입력해주세요";
@@ -18,17 +17,14 @@ public class Lotto implements Comparable<Lotto> {
     private final List<Ball> lotto = new ArrayList<>();
 
     static {
-        lottoTotalNumbers.addAll(IntStream.range(Ball.MINIMUM_NUMBER, Ball.MAXIMUM_NUMBER + 1)
-                .boxed()
+        lottoTotalBalls.addAll(IntStream.range(Ball.MINIMUM_NUMBER, Ball.MAXIMUM_NUMBER + 1)
+                .mapToObj(Ball::new)
                 .collect(Collectors.toList()));
     }
 
-    public Lotto(final List<Integer> numbers) {
-        validateLotto(numbers);
-
-        for (Integer number : numbers) {
-            this.lotto.add(new Ball(number));
-        }
+    public Lotto(final List<Ball> lotto) {
+        validateLotto(lotto);
+        this.lotto.addAll(lotto);
     }
 
     public List<String> getLottoNumbers() {
@@ -42,34 +38,36 @@ public class Lotto implements Comparable<Lotto> {
         return lotto.contains(number);
     }
 
-    public static List<Integer> selectRandomNumbers() {
-        List<Integer> lottoNumbers = lottoTotalNumbers;
-        Collections.shuffle(lottoNumbers);
+    public static List<Ball> selectRandomBalls() {
+        List<Ball> lottoBalls = lottoTotalBalls;
+        Collections.shuffle(lottoBalls);
 
-        List<Integer> selectedIntNumbers = splitLottoNumbers(lottoNumbers);
-        return selectedIntNumbers.stream()
-            .sorted()
+        List<Ball> selectedBalls = selectBalls(lottoBalls);
+        return selectedBalls.stream()
+            .sorted(Comparator.comparing(Ball::getNumber))
             .collect(Collectors.toList());
     }
 
-    private static ArrayList<Integer> splitLottoNumbers(final List<Integer> lottoNumbers) {
-        return new ArrayList<>(lottoNumbers.subList(0, BALL_COUNT));
+    private static ArrayList<Ball> selectBalls(final List<Ball> lottoBalls) {
+        return new ArrayList<>(lottoBalls.subList(0, BALL_COUNT));
     }
 
-    private void validateLotto(final List<Integer> numbers) {
-        validateDuplicatedNumber(numbers);
-        validateLottoCount(numbers);
+    private void validateLotto(final List<Ball> lotto) {
+        validateDuplicatedNumber(lotto);
+        validateLottoCount(lotto);
     }
 
-    private void validateDuplicatedNumber(final List<Integer> numbers) {
-        Set<Integer> distinctNumbers = new HashSet<>(numbers);
-        if (distinctNumbers.size() != numbers.size()) {
+    private void validateDuplicatedNumber(final List<Ball> lotto) {
+        List<Ball> distinct = lotto.stream()
+                .distinct()
+                .collect(Collectors.toList());
+        if (distinct.size() != lotto.size()) {
             throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
         }
     }
 
-    private void validateLottoCount(final List<Integer> numbers) {
-        if (numbers.size() != BALL_COUNT) {
+    private void validateLottoCount(final List<Ball> lotto) {
+        if (lotto.size() != BALL_COUNT) {
             throw new IllegalArgumentException(ERROR_BALL_COUNT);
         }
     }

@@ -33,7 +33,7 @@ public class Creator {
     public static Lottos createLottos(final int lottoCount) {
         List<Lotto> lottos = new ArrayList<>(lottoCount);
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(Lotto.selectRandomNumbers()));
+            lottos.add(new Lotto(Lotto.selectRandomBalls()));
         }
         return new Lottos(lottos);
     }

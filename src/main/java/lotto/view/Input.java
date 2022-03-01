@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.Ball;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +19,7 @@ public class Input {
         return Integer.parseInt(payment);
     }
 
-    public static List<Integer> inputWinningNumbers(final Entering entering) {
+    public static List<Ball> inputWinningNumbers(final Entering entering) {
         String[] winningNumbers = getWinningNumbers(entering);
         for (String number : winningNumbers) {
             validateNumber(number);
@@ -25,6 +27,7 @@ public class Input {
         return Arrays.stream(winningNumbers)
                 .map(String::trim)
                 .map(Integer::parseInt)
+                .map(Ball::new)
                 .collect(Collectors.toList());
     }
 
