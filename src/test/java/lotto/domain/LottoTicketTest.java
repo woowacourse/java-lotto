@@ -49,7 +49,7 @@ class LottoTicketTest {
         LottoNumber lottoNumber = new LottoNumber(1);
 
         // when
-        boolean result = lottoTicket.isSame(lottoNumber);
+        boolean result = lottoTicket.contains(lottoNumber);
 
         // then
         assertThat(result).isTrue();
