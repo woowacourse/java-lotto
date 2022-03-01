@@ -6,6 +6,7 @@ import java.util.Map;
 import lotterymachine.vo.Count;
 
 public enum WinningLottery {
+    INVALID(0, 0),
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 150_000),
@@ -28,7 +29,7 @@ public enum WinningLottery {
         return Arrays.stream(values())
                 .filter(value -> value.matchNumber(number))
                 .findFirst()
-                .orElse(null);
+                .orElse(INVALID);
     }
 
     private boolean matchNumber(int number) {
