@@ -1,12 +1,16 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import lotto.model.LottoMachine;
+import lotto.model.Lotto;
+import lotto.model.LottoCalculator;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
+import lotto.model.generator.AutoLottoNumbersGenerator;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 import lotto.view.InputView;
@@ -19,13 +23,15 @@ public class LottoController {
 
     private static final String NUMBER_REGEX = "\\d+";
 
+
     public void run() {
         Money money = validateMoney(InputView.inputMoney());
-        LottoMachine lottoMachine = new LottoMachine(money);
-        ResultView.printBuyingLottosResult(lottoMachine.getLottos());
+        Lottos lottos = makeLottos(money);
+        ResultView.printBuyingLottosResult(lottos);
         WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
                 InputView.inputBonusNumber());
-        lottoMachine.calculateResult(winningLotto);
+        LottoCalculator lottoMachine = new LottoCalculator(lottos, winningLotto);
+        lottoMachine.calculateResult();
         ResultView.printTotalRankResult(lottoMachine);
     }
 
@@ -34,6 +40,14 @@ public class LottoController {
             throw new IllegalArgumentException(MONEY_ERROR_MESSAGE);
         }
         return new Money(Integer.parseInt(money));
+    }
+
+    private Lottos makeLottos(Money money) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < money.count(); i++) {
+            lottos.add(new Lotto(new AutoLottoNumbersGenerator()));
+        }
+        return new Lottos(lottos);
     }
 
     private WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) throws RuntimeException {

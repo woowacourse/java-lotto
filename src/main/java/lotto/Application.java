@@ -1,8 +1,6 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.model.LottoMachine;
-import lotto.view.ResultView;
 
 public class Application {
 
@@ -15,4 +13,5 @@ public class Application {
             System.out.println(e.getMessage());
         }
     }
+
 }
