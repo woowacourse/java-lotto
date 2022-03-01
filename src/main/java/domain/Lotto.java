@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,9 +39,10 @@ public class Lotto {
     }
 
     public long getSameNumberCount(Lotto anotherLotto) {
-        return lottoNumbers.stream()
-                .filter(anotherLotto::containsLottoNumber)
-                .count();
+        List<LottoNumber> lottoNumbers = new ArrayList<>(this.lottoNumbers);
+        lottoNumbers.retainAll(anotherLotto.lottoNumbers);
+
+        return lottoNumbers.size();
     }
 
     public boolean containsLottoNumber(LottoNumber lottoNumber) {
