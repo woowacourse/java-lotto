@@ -21,8 +21,8 @@ import view.OutputView;
 
 public class LottoController {
 
-    public static final String DELIMITER = ",";
-    public static final int INCLUDE_NULL = -1;
+    private static final String DELIMITER = ",";
+    private static final int INCLUDE_NULL = -1;
 
     public void run() {
         Money inputMoney = getUntilValid(this::getMoneyFromUser);

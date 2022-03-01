@@ -18,7 +18,7 @@ public class LottoTest {
     @DisplayName("중복된 로또 번호를 가질 수 없음")
     void checkDuplicatedLottoNumbers() {
         assertThatThrownBy(() -> Lotto.of(LottoNumber.convertAll(List.of(1, 2, 3, 3, 4, 5))))
-            .isInstanceOf(DuplicatedLottoNumbersException.class);
+                .isInstanceOf(DuplicatedLottoNumbersException.class);
     }
 
     @Test

@@ -1,4 +1,3 @@
-
 import static view.OutputView.printErrorMessage;
 
 import controller.LottoController;

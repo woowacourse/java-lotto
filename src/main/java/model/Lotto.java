@@ -5,7 +5,6 @@ import exception.InvalidLottoNumbersSizeException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;

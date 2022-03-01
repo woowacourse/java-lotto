@@ -3,7 +3,6 @@ package model;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 import exception.InvalidRangeLottoNumberException;
-import model.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -15,7 +14,7 @@ public class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void throwExceptionWhenInvalidRange(int number) {
         assertThatCode(() -> new LottoNumber(number))
-            .isInstanceOf(InvalidRangeLottoNumberException.class);
+                .isInstanceOf(InvalidRangeLottoNumberException.class);
     }
 
     @ParameterizedTest

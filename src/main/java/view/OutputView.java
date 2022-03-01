@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import model.Lotto;
 import model.LottoRank;
-import model.LottoResult;
 
 public class OutputView {
 
@@ -23,7 +21,9 @@ public class OutputView {
     }
 
     private static void printEachLottoNumbers(Set<Integer> lottoNumbers) {
-        String lottoNumbersText = lottoNumbers.stream().sorted().map(String::valueOf)
+        String lottoNumbersText = lottoNumbers.stream()
+                .sorted()
+                .map(String::valueOf)
                 .collect(Collectors.joining(", ", "[", "]"));
         System.out.println(lottoNumbersText);
     }
