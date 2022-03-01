@@ -10,12 +10,14 @@ public class LottoMachine {
         int manualLottoCount = InputView.askManualLottoCount(totalLottoCount);
 
         OutputView.printCountOfLotto(totalLottoCount, manualLottoCount);
-        Lottos lottos = createLottos(totalLottoCount);
+        Lottos manualLottos = InputView.askManualLottoNumbers(manualLottoCount);
+        Lottos autoLottos = createAutoLottos(totalLottoCount - manualLottoCount);
+
         WinningLotto winningNumber = inputWinningNumber();
-        getStatistics(lottos, winningNumber, money);
+        getStatistics(manualLottos, winningNumber, money);
     }
 
-    private Lottos createLottos(int lottoCount) {
+    private Lottos createAutoLottos(int lottoCount) {
         Lottos lottos = Lottos.generateLottos(lottoCount);
         OutputView.printLottos(lottos);
         return lottos;

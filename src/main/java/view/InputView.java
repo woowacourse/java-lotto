@@ -2,11 +2,9 @@ package view;
 
 import domain.Lotto;
 import domain.LottoNumber;
+import domain.Lottos;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -16,7 +14,7 @@ public class InputView {
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String INPUT_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String DELIMITER = ", ";
-
+    private static final String INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
     private static final Scanner scanner = new Scanner(System.in);
 
     private InputView() {
@@ -46,6 +44,10 @@ public class InputView {
     public static Lotto askInputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String input = scanner.nextLine();
+        return getLotto(input);
+    }
+
+    private static Lotto getLotto(String input) {
         String[] numbers = input.split(DELIMITER);
         Set<LottoNumber> collect = Arrays.stream(numbers)
                 .map(Integer::parseInt)
@@ -65,5 +67,15 @@ public class InputView {
         if (inputCount < 0 || inputCount > maxLottoCount) {
             throw new IllegalArgumentException("구매할 로또 수를 다시 입력해주세요.");
         }
+    }
+
+    public static Lottos askManualLottoNumbers(int manualLottoCount) {
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            String input = scanner.nextLine();
+            lottos.add(getLotto(input));
+        }
+        return new Lottos(lottos);
     }
 }
