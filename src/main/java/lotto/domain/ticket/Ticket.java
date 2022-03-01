@@ -1,12 +1,10 @@
 package lotto.domain.ticket;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lotto.domain.ball.Ball;
 import lotto.domain.ball.BallStorage;
-import lotto.domain.rank.Rank;
 import lotto.domain.ticket.validation.TicketValidator;
 
 public class Ticket {
@@ -38,12 +36,6 @@ public class Ticket {
         return (int) this.balls.stream()
                 .filter(ticket::contains)
                 .count();
-    }
-
-    public Optional<Rank> calculateRank(final Ticket ticket, final Ball bonusBall) {
-        final int matchCount = countMatches(ticket);
-        final boolean bonusBallMatched = this.balls.contains(bonusBall);
-        return Rank.of(matchCount, bonusBallMatched);
     }
 
     public List<Integer> getBallNumbers() {

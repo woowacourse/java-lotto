@@ -1,7 +1,7 @@
 package lotto.domain.ticket.validation;
 
-import lotto.domain.ball.Ball;
-import lotto.domain.ticket.Ticket;
+import java.util.List;
+
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
 
@@ -10,12 +10,12 @@ public class WinningTicketValidator {
     private WinningTicketValidator() {
     }
 
-    public static void validateWinningTicket(final Ticket ticket, final Ball bonusBall) {
-        verifyBonusBallNotDuplicated(ticket, bonusBall);
+    public static void validateWinningTicket(final List<Integer> numbers, final int bonusNumber) {
+        verifyBonusBallNotDuplicated(numbers, bonusNumber);
     }
 
-    private static void verifyBonusBallNotDuplicated(final Ticket ticket, final Ball bonusBall) {
-        if (ticket.contains(bonusBall)) {
+    private static void verifyBonusBallNotDuplicated(final List<Integer> numbers, final int bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
             throw new LottoException(LottoExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
         }
     }

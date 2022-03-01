@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import lotto.domain.ball.Ball;
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.generator.TicketGenerator;
 
@@ -26,9 +25,9 @@ public class Tickets {
         return tickets;
     }
 
-    public List<Rank> calculateRanks(final Ticket winningTicket, final Ball bonusBall) {
+    public List<Rank> calculateRanks(final WinningTicket winningTicket) {
         return tickets.stream()
-                .map(ticket -> ticket.calculateRank(winningTicket, bonusBall))
+                .map(winningTicket::calculateRank)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toUnmodifiableList());

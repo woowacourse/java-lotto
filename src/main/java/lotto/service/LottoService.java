@@ -34,7 +34,7 @@ public class LottoService {
     }
 
     public Analysis generateAnalysis(final Tickets tickets, final WinningTicket winningTicket) {
-        final List<Rank> ranks = winningTicket.calculateRanks(tickets);
+        final List<Rank> ranks = tickets.calculateRanks(winningTicket);
         return new Analysis(ranks, tickets.getSize());
     }
 

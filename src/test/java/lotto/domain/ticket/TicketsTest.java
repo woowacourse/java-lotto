@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-import lotto.domain.ball.Ball;
-import lotto.domain.ball.BallStorage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -43,10 +41,9 @@ class TicketsTest {
                             final List<Rank> expected) {
         final int ticketCount = generatedTickets.size();
         final Tickets tickets = generateTickets(generatedTickets, ticketCount);
-        final Ticket winningTicket = new Ticket(winningTicketNumbers.getBallNumbers());
-        final Ball bonusBall = BallStorage.getBall(bonusNumber);
+        final WinningTicket winningTicket = new WinningTicket(winningTicketNumbers.getBallNumbers(), bonusNumber);
 
-        final List<Rank> actual = tickets.calculateRanks(winningTicket, bonusBall);
+        final List<Rank> actual = tickets.calculateRanks(winningTicket);
         assertThat(actual).isEqualTo(expected);
     }
 

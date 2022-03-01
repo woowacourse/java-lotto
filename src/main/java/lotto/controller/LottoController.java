@@ -1,18 +1,11 @@
 package lotto.controller;
 
-import static lotto.view.output.OutputMessage.DIVIDING_LINE;
-import static lotto.view.output.OutputMessage.EMPTY_STRING;
-import static lotto.view.output.OutputMessage.REQUEST_BONUS_NUMBER;
-import static lotto.view.output.OutputMessage.REQUEST_MONEY;
-import static lotto.view.output.OutputMessage.REQUEST_WINNING_NUMBERS;
-import static lotto.view.output.OutputMessage.TITLE_OF_ANALYSIS;
+import static lotto.view.output.OutputMessage.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.domain.ball.Ball;
 import lotto.domain.ticket.Analysis;
-import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.WinningTicket;
 import lotto.dto.AnalysisDto;
@@ -70,11 +63,8 @@ public class LottoController {
 
     private WinningTicket requestWinningTicket() {
         final List<Integer> winningNumbers = requestWinningNumbers();
-        final Ticket ticket = lottoService.generateTicket(winningNumbers);
-
         final int bonusNumber = requestBonusNumber();
-        final Ball bonusBall = lottoService.generateBall(bonusNumber);
-        return new WinningTicket(ticket, bonusBall);
+        return new WinningTicket(winningNumbers, bonusNumber);
     }
 
     private List<Integer> requestWinningNumbers() {

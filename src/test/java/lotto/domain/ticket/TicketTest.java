@@ -75,9 +75,8 @@ class TicketTest {
                            final int bonusNumber,
                            final Rank expected) {
         final Ticket ticket = new Ticket((numbers));
-        final Ticket winningTicket = new Ticket(winningNumbers);
-        final Ball bonusBall = BallStorage.getBall(bonusNumber);
-        final Rank rank = ticket.calculateRank(winningTicket, bonusBall).orElse(null);
+        final WinningTicket winningTicket1 = new WinningTicket(winningNumbers, bonusNumber);
+        final Rank rank = winningTicket1.calculateRank(ticket).orElse(null);
 
         assertThat(rank).isEqualTo(expected);
     }

@@ -1,8 +1,10 @@
 package lotto.domain.ticket;
 
 import java.util.List;
+import java.util.Optional;
 
 import lotto.domain.ball.Ball;
+import lotto.domain.ball.BallStorage;
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.validation.WinningTicketValidator;
 
@@ -11,14 +13,16 @@ public class WinningTicket {
     private final Ticket ticket;
     private final Ball bonusBall;
 
-    public WinningTicket(final Ticket ticket, final Ball bonusBall) {
-        WinningTicketValidator.validateWinningTicket(ticket, bonusBall);
-        this.ticket = ticket;
-        this.bonusBall = bonusBall;
+    public WinningTicket(final List<Integer> numbers, final int bonusNumber) {
+        WinningTicketValidator.validateWinningTicket(numbers, bonusNumber);
+        this.ticket = new Ticket(numbers);
+        this.bonusBall = BallStorage.getBall(bonusNumber);
     }
 
-    public List<Rank> calculateRanks(final Tickets tickets) {
-        return tickets.calculateRanks(this.ticket, this.bonusBall);
+    public Optional<Rank> calculateRank(final Ticket anotherTicket) {
+        final int matchCount = anotherTicket.countMatches(this.ticket);
+        final boolean bonusBallMatched = anotherTicket.contains(this.bonusBall);
+        return Rank.of(matchCount, bonusBallMatched);
     }
 
 }
