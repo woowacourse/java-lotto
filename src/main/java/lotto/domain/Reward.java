@@ -1,4 +1,4 @@
-package lotto.domain.vo;
+package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

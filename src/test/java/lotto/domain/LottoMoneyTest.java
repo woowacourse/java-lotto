@@ -2,10 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.math.BigDecimal;
-
-import lotto.domain.vo.LottoMoney;
-import lotto.domain.vo.Reward;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

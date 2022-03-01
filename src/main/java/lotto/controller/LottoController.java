@@ -4,12 +4,12 @@ import java.util.List;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.vo.LottoMoney;
-import lotto.domain.vo.LottoNumber;
+import lotto.domain.LottoMoney;
+import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.Store;
 import lotto.domain.WinnerLotto;
-import lotto.domain.vo.Reward;
+import lotto.domain.Reward;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

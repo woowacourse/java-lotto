@@ -3,8 +3,7 @@ package lotto.view;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import lotto.domain.Lotto;
-import lotto.domain.vo.LottoNumber;
+import lotto.domain.LottoNumber;
 
 public class InputView {
 
