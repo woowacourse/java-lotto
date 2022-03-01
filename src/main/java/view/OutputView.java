@@ -25,7 +25,7 @@ public class OutputView {
 
     public static void showPurchasedLottos(LottoPurchaseCount lottoPurchaseCount, List<Lotto> lottos) {
         System.out.println("\n" + "수동으로 " + lottoPurchaseCount.getManualCount() + "장" + ", "
-            + "자동으로" + lottoPurchaseCount.getAutomaticCount() + "개를 구매했습니다.");
+            + "자동으로 " + lottoPurchaseCount.getAutomaticCount() + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getLottoNumbers().stream()
                 .map(LottoNumber::getValue)
