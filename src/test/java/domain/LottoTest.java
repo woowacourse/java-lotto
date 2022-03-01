@@ -1,5 +1,6 @@
 package domain;
 
+import static domain.Lotto.ERROR_MESSAGE_FOR_NULL_LOTTO_NUMBERS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -30,6 +31,14 @@ public class LottoTest {
 
         // when & then
         assertThat(lotto).isNotNull();
+    }
+
+    @Test
+    @DisplayName("로또 생성자에 Null 전달 시 NPE 발생")
+    void createLottoWithNullShouldFail() {
+        assertThatThrownBy(() -> new Lotto(null))
+                .isInstanceOf(NullPointerException.class)
+                .hasMessage(ERROR_MESSAGE_FOR_NULL_LOTTO_NUMBERS);
     }
 
     @Test

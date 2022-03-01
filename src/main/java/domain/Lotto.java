@@ -1,22 +1,25 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
     private static final String ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS = "%d개의 숫자를 골라주세요.";
     private static final String ERROR_MESSAGE_FOR_DUPLICATE_LOTTO_NUMBERS = "숫자는 중복될 수 없습니다.";
+    static final String ERROR_MESSAGE_FOR_NULL_LOTTO_NUMBERS = "로또 번호가 비었습니다";
 
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
-        final List<LottoNumber> unmodifiableLottoNumbers = Collections.unmodifiableList(lottoNumbers);
-        validateSize(unmodifiableLottoNumbers);
-        validateDuplicate(unmodifiableLottoNumbers);
+        Objects.requireNonNull(lottoNumbers, ERROR_MESSAGE_FOR_NULL_LOTTO_NUMBERS);
 
-        this.lottoNumbers = unmodifiableLottoNumbers;
+        final List<LottoNumber> copiedLottoNumbers = List.copyOf(lottoNumbers);
+        validateSize(copiedLottoNumbers);
+        validateDuplicate(copiedLottoNumbers);
+
+        this.lottoNumbers = copiedLottoNumbers;
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
