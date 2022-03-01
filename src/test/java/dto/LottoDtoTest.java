@@ -16,7 +16,7 @@ class LottoDtoTest {
     void generateLottoDto() {
         final List<Integer> numbers = Arrays.asList(1, 2, 34, 4, 5, 6);
 
-        LottoDto lottoDto = new LottoDto(numbers);
+        final LottoDto lottoDto = new LottoDto(numbers);
         lottoDto.getLottoNumbers()
                 .forEach(lottoNumber -> assertThat(numbers).contains(lottoNumber));
     }
