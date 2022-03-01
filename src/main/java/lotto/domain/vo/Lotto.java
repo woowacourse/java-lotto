@@ -26,10 +26,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<LottoNumber> getNumbers() {
-        return Collections.unmodifiableList(numbers);
-    }
-
     private void validateNull(List<LottoNumber> numbers) {
         if (numbers == null) {
             throw new IllegalArgumentException(ERROR_NULL_MESSAGE);
@@ -47,6 +43,10 @@ public class Lotto {
         if (set.size() != numbers.size()) {
             throw new IllegalArgumentException(ERROR_DUPLICATION_MESSAGE);
         }
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 
     public boolean contains(LottoNumber number) {

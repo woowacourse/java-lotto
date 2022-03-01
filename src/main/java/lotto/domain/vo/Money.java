@@ -19,12 +19,12 @@ public class Money {
         }
     }
 
-    public int divide(Money money) {
-        return this.money / money.money;
-    }
-
     public int get() {
         return money;
+    }
+
+    public int divide(Money money) {
+        return this.money / money.money;
     }
 
     @Override

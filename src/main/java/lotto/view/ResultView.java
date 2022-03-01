@@ -84,13 +84,11 @@ public class ResultView {
             return EMPTY_MESSAGE;
         }
         if (prize == LottoPrize.TWICE) {
-            return String
-                    .format(LOTTO_RESULT_TWICE_MESSAGE, prize.getLottoNumberMatchCount(), prize.getReward().get(),
-                            number);
+            return String.format(
+                    LOTTO_RESULT_TWICE_MESSAGE, prize.getLottoNumberMatchCount(), prize.getReward().get(), number);
         }
-        return String
-                .format(LOTTO_RESULT_DEFAULT_MESSAGE, prize.getLottoNumberMatchCount(), prize.getReward().get(),
-                        number);
+        return String.format(
+                LOTTO_RESULT_DEFAULT_MESSAGE, prize.getLottoNumberMatchCount(), prize.getReward().get(), number);
     }
 
     private static String generateRateReturnMessage(double rateReturn) {
