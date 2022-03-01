@@ -16,15 +16,19 @@ public class LottoResult {
     public double calculateYield(LottoPurchaseMoney lottoPurchaseMoney) {
         int price = lottoPurchaseMoney.getPrice();
 
-        int totalPrizeMoney = ranks.keySet()
-                .stream()
-                .mapToInt(Rank::getPrizeMoney)
-                .sum();
+        int totalPrizeMoney = getTotalPrizeMoney();
 
         return  Math.floor((double) totalPrizeMoney / price * 100) / 100.0;
     }
 
     public Map<Rank, Integer> getRanks() {
         return Collections.unmodifiableMap(ranks);
+    }
+
+    private int getTotalPrizeMoney() {
+        return ranks.keySet()
+                .stream()
+                .mapToInt(Rank::getPrizeMoney)
+                .sum();
     }
 }
