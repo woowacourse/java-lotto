@@ -15,14 +15,13 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         // when
-        int manualCount = 3;
         List<List<Integer>> manualNumbers = List.of(
                 List.of(8, 21, 23, 41, 42, 43),
                 List.of(3, 5, 11, 16, 32, 38),
                 List.of(7, 11, 16, 35, 36, 44));
 
         // then
-        assertDoesNotThrow(() -> lottoMachine.issueManual(manualCount, manualNumbers));
+        assertDoesNotThrow(() -> lottoMachine.issueManual(manualNumbers));
     }
 
     @DisplayName("필요한 로또 개수 만큼 자동 구매가 가능하다.")

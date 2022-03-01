@@ -7,8 +7,8 @@ public class LottoMachine {
 
     public final static int LOTTO_PRICE = 1000;
 
-    public LottoTickets issueManual(int lottoCount, List<List<Integer>> manualNumbers) {
-        return LottoTickets.createManualLottoTickets(lottoCount, manualNumbers);
+    public LottoTickets issueManual(List<List<Integer>> manualNumbers) {
+        return LottoTickets.createManualLottoTickets(manualNumbers);
     }
 
     public LottoTickets issueAuto(int lottoCount) {

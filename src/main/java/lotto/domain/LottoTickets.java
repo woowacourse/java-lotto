@@ -12,7 +12,6 @@ import lotto.domain.generator.LottoNumberGenerator;
 
 public class LottoTickets {
 
-    private static final String LOTTO_COUNT_MISMATCH_ERROR_MESSAGE = "구매할 수량과 수동으로 작성한 로또 개수가 일치하지 않습니다.";
     private static final int LOTTO_COUNT_START_INCLUSIVE = 0;
 
     private final List<LottoTicket> lottoTickets;
@@ -27,21 +26,6 @@ public class LottoTickets {
                 .collect(toList());
     }
 
-    private LottoTickets(int lottoCount, List<List<Integer>> numbers) {
-        List<LottoTicket> lottoTickets = numbers.stream()
-                .map(LottoTicket::new)
-                .collect(toList());
-
-        validateTicketsSize(lottoCount, lottoTickets.size());
-        this.lottoTickets = new ArrayList<>(lottoTickets);
-    }
-
-    private void validateTicketsSize(int lottoCount, int size) {
-        if (lottoCount != size) {
-            throw new IllegalArgumentException(LOTTO_COUNT_MISMATCH_ERROR_MESSAGE);
-        }
-    }
-
     private LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = new ArrayList<>(lottoTickets);
     }
@@ -50,8 +34,12 @@ public class LottoTickets {
         return new LottoTickets(lottoCount, lottoNumberGenerator);
     }
 
-    public static LottoTickets createManualLottoTickets(int lottoCount, List<List<Integer>> manualNumbers) {
-        return new LottoTickets(lottoCount, manualNumbers);
+    public static LottoTickets createManualLottoTickets(List<List<Integer>> manualNumbers) {
+        List<LottoTicket> lottoTickets = manualNumbers.stream()
+                .map(LottoTicket::new)
+                .collect(toList());
+
+        return new LottoTickets(lottoTickets);
     }
 
     public LottoTickets combine(LottoTickets targetLottoTickets) {

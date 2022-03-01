@@ -26,7 +26,7 @@ public class LottoTicketsDto {
                 .map(LottoTicketDto::getLottoNumbers)
                 .collect(toList());
 
-        return LottoTickets.createManualLottoTickets(lottoTickets.size(), lottoNumbers);
+        return LottoTickets.createManualLottoTickets(lottoNumbers);
     }
 
     public List<LottoTicketDto> getLottoTickets() {
