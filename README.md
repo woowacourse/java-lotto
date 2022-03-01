@@ -53,6 +53,8 @@
 ## 이슈 목록
 - [ ] 당첨 통계 - 등수 순서 고정시키기
   - `AnaysisDto#getRankCounts`에서 `Map.copyOf`로 인해 순서가 엉키는 것으로 판단됨.
+- [ ] 당첨 통계 - 수익률 계산 오류
+  - `Anaysis#calculateProfit`에서 `전체 수익`을 `로또의 개수`로 나누고 있음.
 
 
 <br>
