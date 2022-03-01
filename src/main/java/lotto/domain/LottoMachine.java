@@ -1,12 +1,17 @@
 package lotto.domain;
 
+import java.util.List;
 import lotto.domain.generator.AutoLottoNumberGenerator;
 
 public class LottoMachine {
 
-    private final static int LOTTO_PRICE = 1000;
+    public final static int LOTTO_PRICE = 1000;
 
-    public LottoTickets issue(Money money) {
-        return LottoTickets.createAutoLottoTickets(money.getProductCount(LOTTO_PRICE), new AutoLottoNumberGenerator());
+    public LottoTickets issueManualLottoTickets(int lottoCount, List<List<Integer>> manualNumbers) {
+        return LottoTickets.createManualLottoTickets(lottoCount, manualNumbers);
+    }
+
+    public LottoTickets issueAutoLottoTickets(int lottoCount) {
+        return LottoTickets.createAutoLottoTickets(lottoCount, new AutoLottoNumberGenerator());
     }
 }
