@@ -22,8 +22,8 @@ public class MoneyTest {
 
         assertThatThrownBy(
             money::convertToAmount
-        ).isInstanceOf(
-            IllegalArgumentException.class);
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("[ERROR]: 금액이 부족해 로또를 구입할 수 없습니다. (로또는 안사는게 이득임.)");
     }
 
 }
