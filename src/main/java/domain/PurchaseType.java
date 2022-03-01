@@ -20,4 +20,12 @@ public class PurchaseType {
             throw new IllegalArgumentException("현재 금액으로 해당 로또 수를 구매할 수 없습니다.");
         }
     }
+
+    public int getManualCount() {
+        return manualCount;
+    }
+
+    public int getAutomaticCount() {
+        return automaticCount;
+    }
 }

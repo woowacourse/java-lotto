@@ -19,23 +19,15 @@ public class LottoController {
 
     private List<LottoTicket> purchaseLottoTickets(LottoMachine lottoMachine) {
         Money money = new Money(InputView.getMoney());
-        int manualCount = calculateManualCount(money);
-        List<List<Integer>> lottoNumbers = getLottoNumbers(money, manualCount);
+        PurchaseType purchaseType = new PurchaseType(money, InputView.getManualPurchaseCount());
+        List<List<Integer>> lottoNumbers = InputView.getManualLottoNumbers(purchaseType);
         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(money, lottoNumbers,
                 new RandomLottoNumberStrategy());
 
-        OutputView.printPurchasedLottoTicketNumber(lottoTickets.size(), manualCount);
+        OutputView.printPurchasedLottoTicketNumber(purchaseType);
         OutputView.printPurchasedLottoTickets(lottoTickets);
 
         return lottoTickets;
-    }
-
-    private List<List<Integer>> getLottoNumbers(Money money, int manualCount) {
-        return InputView.getManualLottoNumbers(manualCount);
-    }
-
-    private int calculateManualCount(Money money) {
-        return InputView.getManualPurchaseCount();
     }
 
     private void createResult(LottoMachine lottoMachine, List<LottoTicket> lottoTickets) {

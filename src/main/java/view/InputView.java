@@ -1,10 +1,13 @@
 package view;
 
+import domain.PurchaseType;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -58,14 +61,12 @@ public class InputView {
         }
     }
 
-    public static List<List<Integer>> getManualLottoNumbers(int manualCount) {
+    public static List<List<Integer>> getManualLottoNumbers(PurchaseType purchaseType) {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
 
-        for (int i = 0; i < manualCount; i++) {
-            String input = scanner.nextLine();
-            manualLottoNumbers.add(readLottoNumber(input));
-        }
+        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
+        IntStream.range(0, purchaseType.getManualCount())
+                .forEach(count -> manualLottoNumbers.add(readLottoNumber(scanner.nextLine())));
 
         return manualLottoNumbers;
     }

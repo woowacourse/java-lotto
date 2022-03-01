@@ -2,6 +2,7 @@ package view;
 
 import domain.LottoRank;
 import domain.LottoTicket;
+import domain.PurchaseType;
 import domain.WinningStat;
 import util.ProfitFormatter;
 
@@ -17,10 +18,10 @@ public class OutputView {
         throw new AssertionError();
     }
 
-    public static void printPurchasedLottoTicketNumber(int total, int manualCount) {
+    public static void printPurchasedLottoTicketNumber(PurchaseType purchaseType) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n수동으로 ").append(manualCount)
-                .append("장, 자동으로 ").append(total - manualCount)
+        stringBuilder.append("\n수동으로 ").append(purchaseType.getManualCount())
+                .append("장, 자동으로 ").append(purchaseType.getAutomaticCount())
                 .append("개를 구매했습니다.");
 
         System.out.println(stringBuilder);
