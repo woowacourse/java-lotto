@@ -40,7 +40,7 @@ public enum OutputView {
     }
 
     private void printEarningsResult(WinningStats winningStats, PurchaseAmount purchaseAmount) {
-        double earningsRate = winningStats.getEarningsRate(purchaseAmount);
+        double earningsRate = winningStats.getEarningsRate(purchaseAmount).doubleValue();
         String result = String.format(EARNINGS_RESULT_MESSAGE, earningsRate);
         if (earningsRate < 1) {
             result = String.format(LOSS_WARNING_MESSAGE, result);

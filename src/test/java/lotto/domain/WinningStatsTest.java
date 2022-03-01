@@ -51,7 +51,7 @@ class WinningStatsTest {
         PurchaseAmount money = new PurchaseAmount("10000");
 
         // when
-        double earningsRate = winningStats.getEarningsRate(money);
+        double earningsRate = winningStats.getEarningsRate(money).doubleValue();
 
         // then
         assertThat(earningsRate).isEqualTo(0.5);

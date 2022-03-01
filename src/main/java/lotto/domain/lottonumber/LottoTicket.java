@@ -26,7 +26,6 @@ public class LottoTicket {
     }
 
     public Set<LottoNumber> lottoNumbers() {
-//        lottoNumbers = Set.copyOf(lottoNumbers);
         return Collections.unmodifiableSet(lottoNumbers);
     }
 

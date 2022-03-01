@@ -47,9 +47,9 @@ public class WinningStats {
                 .sum();
     }
 
-    public double getEarningsRate(PurchaseAmount money) {
+    public BigDecimal getEarningsRate(PurchaseAmount money) {
         BigDecimal totalPrize = new BigDecimal(getTotalPrize());
         BigDecimal amount = new BigDecimal(money.amount());
-        return totalPrize.divide(amount, EARNING_RATE_PRECISIONS, RoundingMode.HALF_EVEN).doubleValue();
+        return totalPrize.divide(amount, EARNING_RATE_PRECISIONS, RoundingMode.HALF_EVEN);
     }
 }
