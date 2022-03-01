@@ -14,10 +14,14 @@ import lotto.view.ResultView;
 public class LottoController {
 
     public void run() {
-        Money purchaseMoney = new Money(InputView.requestPurchaseMoney());
-        LottoGame lottoGame = new LottoGame();
-        lottoGame.purchase(purchaseMoney);
-        ResultView.printLottos(lottoGame.getLottos());
+        int inputMoney = InputView.requestPurchaseMoney();
+        // 수동 개수 입력
+        int manualCount = InputView.requestManualCount(inputMoney);
+        LottoGame lottoGame = new LottoGame(new Money(inputMoney));
+        List<List<Integer>> manualNumbers = InputView.requestManualNumbers(manualCount);
+        lottoGame.purchase(manualNumbers);
+
+        ResultView.printLottos(lottoGame.getLottos(), manualCount);
 
         WinningLotto winningLotto = requestWinningNumbers();
         LottoResults lottoResults = lottoGame.confirmWinnings(winningLotto);
@@ -33,4 +37,5 @@ public class LottoController {
 
         return new WinningLotto(new Lotto(lottoNumbers), bonusNumber);
     }
+
 }

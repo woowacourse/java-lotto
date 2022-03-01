@@ -23,10 +23,16 @@ public class LottoNumbersGenerator {
     private LottoNumbersGenerator() {
     }
 
-    public static List<LottoNumber> generateLottoNumbers() {
+    public static List<LottoNumber> generateRandomLottoNumbers() {
         Collections.shuffle(originLottoNumbers);
         return originLottoNumbers.subList(0, LOTTO_SIZE).stream()
                 .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public static List<LottoNumber> generateManualLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }

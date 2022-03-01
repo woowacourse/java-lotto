@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.utils.LottoNumbersGenerator.generateLottoNumbers;
+import static lotto.utils.LottoNumbersGenerator.generateRandomLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
@@ -47,7 +47,7 @@ class LottosTest {
     private List<Lotto> getTestLottos() {
         List<Lotto> lottoPurchased = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            lottoPurchased.add(new Lotto(generateLottoNumbers()));
+            lottoPurchased.add(new Lotto(generateRandomLottoNumbers()));
         }
         return lottoPurchased;
     }

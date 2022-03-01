@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.constants.ErrorConstants.ERROR_NULL_MESSAGE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
