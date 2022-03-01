@@ -14,9 +14,9 @@ public class LotteryResultDto implements Comparable<LotteryResultDto> {
     private final Count numberOfMatchingTicket;
     private boolean bonus;
 
-    public LotteryResultDto(WinningLottery winningLottery, Count count) {
-        this.countOfMatchingNumbers = new Count(winningLottery.getNumber());
-        this.winningPrice = new Money(winningLottery.getPrice());
+    private LotteryResultDto(WinningLottery winningLottery, Count count) {
+        this.countOfMatchingNumbers = Count.from(winningLottery.getNumber());
+        this.winningPrice = Money.from(winningLottery.getPrice());
         this.numberOfMatchingTicket = count;
         if (winningLottery.equals(WinningLottery.BONUS_FIVE)) {
             this.bonus = true;
@@ -47,7 +47,7 @@ public class LotteryResultDto implements Comparable<LotteryResultDto> {
     }
 
     public Money sumIncome() {
-        return new Money(winningPrice.getAmount() * numberOfMatchingTicket.getNumber());
+        return Money.from(winningPrice.getAmount() * numberOfMatchingTicket.getNumber());
     }
 
     @Override

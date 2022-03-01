@@ -3,7 +3,7 @@ package lotterymachine.vo;
 public class Count {
     private int number;
 
-    public Count(int number) {
+    private Count(int number) {
         this.number = number;
     }
 
