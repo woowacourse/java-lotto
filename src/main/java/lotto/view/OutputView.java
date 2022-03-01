@@ -1,10 +1,10 @@
 package lotto.view;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
 public class OutputView {
@@ -34,16 +34,16 @@ public class OutputView {
         System.out.println(PURCHASE_AMOUNT_REQUEST_MESSAGE);
     }
 
-    public static void printLottoByHandCountRequest() {
+    public static void printManualLottoCountRequest() {
         System.out.println(LOTTO_BY_HAND_COUNT_REQUEST_MESSAGE);
     }
 
-    public static void printLottoNumbersByHandRequest() {
+    public static void printManualLottoNumbersRequest() {
         System.out.println(LOTTO_NUMBERS_BY_HAND_REQUEST_MESSAGE);
     }
 
-    public static void printLottos(int count, List<Lotto> autoLottos) {
-        printLottoCount(count, autoLottos.size());
+    public static void printLottos(int manualCount, List<Lotto> autoLottos) {
+        printLottoCount(manualCount, autoLottos.size());
         for (Lotto lotto : autoLottos) {
             String numbers = lotto.getLottoNumbers().stream()
                 .map(String::valueOf)
@@ -68,9 +68,9 @@ public class OutputView {
         System.out.println(STATISTICS_TITLE + TITLE_DIVIDING_LINE.repeat(LINE_COUNT));
     }
 
-    public static void printLottosResult(LottoResult lottoResult) {
+    public static void printLottosResult(Map<Rank, Integer> lottoResult) {
         for (Rank rank : Rank.getSortedRanks()) {
-            printLottoResult(lottoResult.getLottoResult().get(rank), rank);
+            printLottoResult(lottoResult.get(rank), rank);
         }
     }
 
