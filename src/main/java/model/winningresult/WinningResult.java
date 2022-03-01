@@ -6,6 +6,8 @@ import model.money.Money;
 import model.rank.Rank;
 
 public class WinningResult {
+    private static final int LOTTO_PRICE = 1000;
+
     private final Map<Rank, Integer> winningResult;
 
     public WinningResult(final Map<Rank, Integer> winningResult) {
@@ -17,7 +19,7 @@ public class WinningResult {
     }
 
     public Double getRateOfReturn(final Money money) {
-        int totalInsertMoney = money.getPurchaseCount();
+        int totalInsertMoney = money.getPurchaseCount() * LOTTO_PRICE;
         int totalReturn = calculateTotalReturn();
         return totalReturn / (double) totalInsertMoney;
     }
