@@ -22,7 +22,7 @@ public class LottoController {
 
         WinningNumbers winningNumbers = getWinningNumbersAndBonusNumber();
 
-        Ranks ranks = new Ranks(lottoTickets.getRanksWithWinningNumbers(winningNumbers));
+        Ranks ranks = Ranks.getRanksFrom(lottoTickets.getRanksWithWinningNumbers(winningNumbers));
         OutputView.displayResult(ranks.getStatistics(), moneyManager.calculateYield(ranks.getLottoTotalReward()));
     }
 

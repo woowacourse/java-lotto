@@ -8,15 +8,16 @@ public class Ranks {
 
     private final Map<Rank, Integer> statistics;
 
-    public Ranks(List<Rank> ranks) {
-        this.statistics = new EnumMap<>(Rank.class);
-        createStatistics(ranks);
+    private Ranks(Map<Rank, Integer> statistics) {
+        this.statistics = statistics;
     }
 
-    private void createStatistics(List<Rank> ranks) {
+    public static Ranks getRanksFrom(List<Rank> ranks) {
+        Map<Rank, Integer> statistics = new EnumMap<>(Rank.class);
         for (Rank rank : ranks) {
             statistics.put(rank, statistics.getOrDefault(rank, 0) + 1);
         }
+        return new Ranks(statistics);
     }
 
     public Map<Rank, Integer> getStatistics() {
