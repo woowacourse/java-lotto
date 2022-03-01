@@ -45,6 +45,6 @@ public class WinningNumbers {
     }
 
     public LottoNumber getBonusNumber() {
-        return new LottoNumber(bonusNumber.getNumber());
+        return LottoNumber.valueOf(bonusNumber.getNumber());
     }
 }

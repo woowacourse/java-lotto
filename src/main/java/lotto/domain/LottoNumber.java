@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -8,17 +10,25 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MINIMUM_RANGE = 1;
     private static final int MAXIMUM_RANGE = 45;
 
+    private static final List<LottoNumber> lottoNumberCache = new ArrayList<>();
+
+    static {
+        for (int i = MINIMUM_RANGE - 1; i <= MAXIMUM_RANGE; i++) {
+            lottoNumberCache.add(i, new LottoNumber(i));
+        }
+    }
+
     private final int number;
 
-    public LottoNumber(int number) throws RuntimeException {
-        validateRange(number);
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void validateRange(int number) {
+    public static LottoNumber valueOf(int number) {
         if (number < MINIMUM_RANGE || number > MAXIMUM_RANGE) {
             throw new RuntimeException(ERROR_NUMBER_RANGE);
         }
+        return lottoNumberCache.get(number);
     }
 
     public int getNumber() {

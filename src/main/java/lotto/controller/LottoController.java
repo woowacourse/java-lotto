@@ -45,10 +45,10 @@ public class LottoController {
     }
 
     private List<LottoNumber> getWinningNumbers() throws RuntimeException {
-        return InputView.requestWinningNumbers().stream().map(LottoNumber::new).collect(Collectors.toList());
+        return InputView.requestWinningNumbers().stream().map(LottoNumber::valueOf).collect(Collectors.toList());
     }
 
     private LottoNumber getBonusNumber() throws RuntimeException {
-        return new LottoNumber(InputView.requestBonusNumber());
+        return LottoNumber.valueOf(InputView.requestBonusNumber());
     }
 }

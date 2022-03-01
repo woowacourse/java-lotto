@@ -14,7 +14,7 @@ public class LottoNumberGenerator {
     public LottoNumberGenerator() {
         lottoNumbers = new ArrayList<>();
         for (int i = MINIMUM_RANGE; i <= MAXIMUM_RANGE; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.valueOf(i));
         }
     }
 
