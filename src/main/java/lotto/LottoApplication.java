@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoController;
+import lotto.view.LottoView;
 import lotto.view.input.InputView;
 import lotto.view.input.reader.ConsoleReader;
 import lotto.view.input.reader.Reader;
@@ -17,7 +18,8 @@ public class LottoApplication {
         final Reader reader = new ConsoleReader();
         final InputView inputView = new InputView(reader);
         final OutputView outputView = new OutputView();
-        final LottoController lottoController = new LottoController(inputView, outputView);
+        final LottoView lottoView = new LottoView(inputView, outputView);
+        final LottoController lottoController = new LottoController(lottoView);
         lottoController.run();
     }
 
