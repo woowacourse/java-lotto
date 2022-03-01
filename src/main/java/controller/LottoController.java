@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import model.DefaultLottoWinningPrizeStrategy;
 import model.GenerateStrategy;
 import model.LottoGame;
+import model.LottoNumberGenerateStrategy;
 import model.LottoTicketDto;
 import model.LottoTickets;
 import model.WinningPrize;
@@ -20,49 +22,47 @@ public class LottoController {
     private final OutputView outputView = OutputView.getInstance();
     private LottoGame lottoGame;
 
-    public void initLottoGame(LottoTickets lottoTickets,
+    public void run() {
+        LottoTickets lottoTickets = purchaseLottoTickets();
+        showGeneratedLottoTickets(lottoTickets);
+        settingLottoGame(lottoTickets);
+        Map<WinningPrize, Integer> winningResults = lottoGame.winningResults();
+        showWinningResults(winningResults);
+        double rateOfReturn = lottoGame.getLottoRateOfReturn();
+        outputView.showRateOfReturn(rateOfReturn);
+    }
+
+    private void settingLottoGame(LottoTickets lottoTickets) {
+        Set<Integer> winningNumbers = inputView.inputWinningNumbers();
+        int bonusNumber = inputView.inputBonusNumber();
+        initLottoGame(lottoTickets, winningNumbers, bonusNumber, new DefaultLottoWinningPrizeStrategy());
+    }
+
+    private LottoTickets purchaseLottoTickets() {
+        try {
+            int purchaseMoney = inputView.inputPurchaseMoney();
+            return new LottoTickets(purchaseMoney, new LottoNumberGenerateStrategy());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return purchaseLottoTickets();
+        }
+    }
+
+    private void initLottoGame(LottoTickets lottoTickets,
                               Set<Integer> winningNumbers,
                               int bonusNumber,
                               WinningPrizeStrategy winningPrizeStrategy) {
         lottoGame = new LottoGame(lottoTickets, winningNumbers, bonusNumber, winningPrizeStrategy);
     }
 
-    public Map<WinningPrize, Integer> winningResults() {
-        return lottoGame.winningResults();
-    }
-
-    public Double rateOfReturn() {
-        return lottoGame.getLottoRateOfReturn();
-    }
-
-    public LottoTickets createLottoTickets(int purchaseMoney, GenerateStrategy generateStrategy) {
-        return new LottoTickets(purchaseMoney, generateStrategy);
-    }
-
-    public int inputPurchaseMoney() {
-        return inputView.inputPurchaseMoney();
-    }
-
-    public void showGeneratedLottoTickets(LottoTickets lottoTickets) {
+    private void showGeneratedLottoTickets(LottoTickets lottoTickets) {
         List<LottoTicketDto> dtos = toLottoTicketDtos(lottoTickets);
         outputView.showLottoTicket(dtos);
     }
 
-    public Set<Integer> inputWinningNumbers() {
-        return inputView.inputWinningNumbers();
-    }
-
-    public int inputBonusNumber() {
-        return inputView.inputBonusNumber();
-    }
-
-    public void showWinningResults(Map<WinningPrize, Integer> winningResults) {
+    private void showWinningResults(Map<WinningPrize, Integer> winningResults) {
         List<WinningResultDto> winningResultDtos = toWinningResultDtos(winningResults);
         outputView.showWinningResult(winningResultDtos);
-    }
-
-    public void showRateOfReturn(double rateOfReturn) {
-        outputView.showRateOfReturn(rateOfReturn);
     }
 
     private List<WinningResultDto> toWinningResultDtos(Map<WinningPrize, Integer> winningResults) {
