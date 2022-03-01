@@ -20,14 +20,16 @@ public class LottoController {
         LottoMachine lottoMachine = new LottoMachine();
         Money money = new Money(purchaseInfo.getMoney());
 
-        LottoTickets manualLottoTickets = lottoMachine.issueManualLottoTickets(purchaseInfo.getManualCount(),
+        LottoTickets manualLottoTickets = lottoMachine.issueManual(purchaseInfo.getManualCount(),
                 purchaseInfo.getManualNumbers());
+
         Money calculateMoney = money.calculateProduct(LottoMachine.LOTTO_PRICE, purchaseInfo.getManualCount());
 
         int autoCount = calculateMoney.getProductCount(LottoMachine.LOTTO_PRICE);
-        LottoTickets autoLottoTickets = lottoMachine.issueAutoLottoTickets(autoCount);
+        LottoTickets autoLottoTickets = lottoMachine.issueAuto(autoCount);
 
         LottoTickets totalLottoTickets = manualLottoTickets.combine(autoLottoTickets);
+
         return SalesInfoDto.valueOf(money.getAmount(), purchaseInfo.getManualCount(), autoCount,
                 LottoTicketsDto.from(totalLottoTickets));
     }

@@ -22,7 +22,7 @@ class LottoMachineTest {
                 List.of(7, 11, 16, 35, 36, 44));
 
         // then
-        assertDoesNotThrow(() -> lottoMachine.issueManualLottoTickets(manualCount, manualNumbers));
+        assertDoesNotThrow(() -> lottoMachine.issueManual(manualCount, manualNumbers));
     }
 
     @DisplayName("필요한 로또 개수 만큼 자동 구매가 가능하다.")
@@ -35,6 +35,6 @@ class LottoMachineTest {
         int autoCount = 3;
 
         // then
-        assertDoesNotThrow(() -> lottoMachine.issueAutoLottoTickets(autoCount));
+        assertDoesNotThrow(() -> lottoMachine.issueAuto(autoCount));
     }
 }

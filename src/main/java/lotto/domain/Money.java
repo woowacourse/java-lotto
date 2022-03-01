@@ -13,18 +13,19 @@ public class Money {
     }
 
     public Money calculateProduct(int price, int lottoCount) {
-        validateAmount(price, lottoCount);
-        return new Money(amount - lottoCount * price);
-    }
-
-    private void validateAmount(int price, int lottoCount) {
-        if (amount < price * lottoCount) {
-            throw new IllegalArgumentException(BUY_ERROR_MESSAGE);
-        }
+        validateAmount(price * lottoCount);
+        return new Money(amount - (price * lottoCount));
     }
 
     public int getProductCount(int price) {
+        validateAmount(price);
         return amount / price;
+    }
+
+    private void validateAmount(int price) {
+        if (amount < price) {
+            throw new IllegalArgumentException(BUY_ERROR_MESSAGE);
+        }
     }
 
     public int getAmount() {
