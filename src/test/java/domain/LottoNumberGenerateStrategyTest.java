@@ -25,4 +25,11 @@ class LottoNumberGenerateStrategyTest {
         Set<Integer> numbers = generateStrategy.generateNumbers();
         numbers.forEach(number -> assertThat(Collections.frequency(numbers, number)).isEqualTo(1));
     }
+
+    @Test
+    @DisplayName("로또 티켓을 뽑을 때 생성되는 숫자의 갯수를 확인한다.")
+    void checkGeneratedNumberCount() {
+        Set<Integer> numbers = generateStrategy.generateNumbers();
+        assertThat(numbers.size()).isEqualTo(LottoTicket.LOTTO_TICKET_SIZE);
+    }
 }
