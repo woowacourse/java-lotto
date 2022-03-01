@@ -16,25 +16,14 @@ public class Money {
     private final int maxQuantity;
 
     public Money(int value) {
-        validate(value);
+        validateValueRange(value);
         this.value = value;
         this.maxQuantity = value / 1000;
-    }
-
-    private void validate(int number) {
-        validateValueRange(number);
-        validateDividedBy(number);
     }
 
     private void validateValueRange(int number) {
         if (MIN_VALUE > number || number > MAX_VALUE) {
             throw new IllegalArgumentException(VALUE_RANGE_ERROR_MESSAGE);
-        }
-    }
-
-    private void validateDividedBy(int number) {
-        if (number % DIVIDED_STANDARD != REMAINDER) {
-            throw new IllegalArgumentException(VALUE_DIVIDED_BY_ERROR_MESSAGE);
         }
     }
 

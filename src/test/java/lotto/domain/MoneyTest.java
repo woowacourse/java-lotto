@@ -28,20 +28,6 @@ public class MoneyTest {
                         .hasMessage("1000부터 20억의 숫자여야 합니다.");
             }
         }
-
-        @Nested
-        @DisplayName("1000으로 나누어지는 값이 아니라면")
-        class Context_with_not_divided_by_1000 {
-
-            @ParameterizedTest
-            @ValueSource(strings = {"1001", "2100"})
-            @DisplayName("예외를 발생시킨다.")
-            void it_throw_exception(int value) {
-                assertThatThrownBy(() -> new Money(value))
-                        .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("1000으로 나누어 떨어져야 합니다.");
-            }
-        }
     }
 
     @Nested
