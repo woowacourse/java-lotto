@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import lotto.domain.analysis.Analysis;
+import lotto.domain.ticket.Ticket;
+import lotto.domain.ticket.Tickets;
 import lotto.domain.winning.Rank;
-import lotto.dto.AnalysisDto;
-import lotto.dto.TicketDto;
 import lotto.view.utils.Delimiter;
 
 public class OutputView {
@@ -21,19 +22,19 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printTicketCount(final List<TicketDto> ticketDtos) {
-        final int ticketCount = ticketDtos.size();
+    public void printTicketCount(final Tickets tickets) {
+        final int ticketCount = tickets.getSize();
         final String message = String.format(TICKET_COUNT_FORMAT.getMessage(), ticketCount);
         printMessage(message);
     }
 
-    public void printTickets(final List<TicketDto> ticketDtos) {
-        ticketDtos.stream()
+    public void printTickets(final Tickets tickets) {
+        tickets.getTickets().stream()
                 .map(this::makeTicketFormat)
                 .forEach(this::printMessage);
     }
 
-    private String makeTicketFormat(final TicketDto ticketDto) {
+    private String makeTicketFormat(final Ticket ticketDto) {
         final List<String> ticketBalls = ticketDto.getBallNumbers()
                 .stream()
                 .map(String::valueOf)
@@ -43,13 +44,13 @@ public class OutputView {
         return String.format(TICKET_FORMAT.getMessage(), joinedBallNumbers);
     }
 
-    public void printAnalysis(final AnalysisDto analysisDto) {
-        printAnalysisRankCounts(analysisDto);
-        printAnalysisProfitRate(analysisDto);
+    public void printAnalysis(final Analysis analysis) {
+        printAnalysisRankCounts(analysis);
+        printAnalysisProfitRate(analysis);
     }
 
-    private void printAnalysisRankCounts(final AnalysisDto analysisDto) {
-        final Map<Rank, Integer> rankCounts = analysisDto.getRankCounts();
+    private void printAnalysisRankCounts(final Analysis analysis) {
+        final Map<Rank, Integer> rankCounts = analysis.getRankCounts();
         rankCounts.forEach(this::printAnalysisRankCount);
     }
 
@@ -68,8 +69,8 @@ public class OutputView {
         return ANALYSIS_FORMAT.getMessage();
     }
 
-    private void printAnalysisProfitRate(final AnalysisDto analysisDto) {
-        final double profitRate = analysisDto.getProfitRate();
+    private void printAnalysisProfitRate(final Analysis analysis) {
+        final double profitRate = analysis.getProfitRate();
         printMessage(String.format(PROFIT_RAGE_FORMAT.getMessage(), profitRate));
     }
 

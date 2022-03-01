@@ -5,8 +5,8 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.params.provider.Arguments;
 
+import lotto.domain.ticket.Ticket;
 import lotto.domain.winning.Rank;
-import lotto.dto.TicketDto;
 
 public class TicketsTestProvider {
 
@@ -14,27 +14,27 @@ public class TicketsTestProvider {
         return Stream.of(
                 Arguments.of(
                         List.of(
-                                new TicketDto(List.of(1, 2, 3, 4, 5, 6))
+                                new Ticket(List.of(1, 2, 3, 4, 5, 6))
                         ), 1
                 ),
                 Arguments.of(
                         List.of(
-                                new TicketDto(List.of(1, 2, 3, 4, 5, 6)),
-                                new TicketDto(List.of(1, 2, 3, 4, 5, 10)),
-                                new TicketDto(List.of(1, 2, 3, 6, 7, 15)),
-                                new TicketDto(List.of(11, 12, 13, 14, 15, 16))
+                                new Ticket(List.of(1, 2, 3, 4, 5, 6)),
+                                new Ticket(List.of(1, 2, 3, 4, 5, 10)),
+                                new Ticket(List.of(1, 2, 3, 6, 7, 15)),
+                                new Ticket(List.of(11, 12, 13, 14, 15, 16))
                         ), 4
                 ),
                 Arguments.of(
                         List.of(
-                                new TicketDto(List.of(1, 2, 3, 4, 5, 6)),
-                                new TicketDto(List.of(1, 2, 3, 4, 5, 10)),
-                                new TicketDto(List.of(1, 2, 3, 6, 7, 15)),
-                                new TicketDto(List.of(11, 12, 13, 14, 15, 16)),
-                                new TicketDto(List.of(1, 2, 3, 4, 5, 6)),
-                                new TicketDto(List.of(1, 2, 3, 4, 5, 10)),
-                                new TicketDto(List.of(1, 2, 3, 6, 7, 15)),
-                                new TicketDto(List.of(11, 12, 13, 14, 15, 16))
+                                new Ticket(List.of(1, 2, 3, 4, 5, 6)),
+                                new Ticket(List.of(1, 2, 3, 4, 5, 10)),
+                                new Ticket(List.of(1, 2, 3, 6, 7, 15)),
+                                new Ticket(List.of(11, 12, 13, 14, 15, 16)),
+                                new Ticket(List.of(1, 2, 3, 4, 5, 6)),
+                                new Ticket(List.of(1, 2, 3, 4, 5, 10)),
+                                new Ticket(List.of(1, 2, 3, 6, 7, 15)),
+                                new Ticket(List.of(11, 12, 13, 14, 15, 16))
                         ), 8
                 )
         );
@@ -45,10 +45,10 @@ public class TicketsTestProvider {
                 Arguments.of(
                         List.of(1, 2, 3, 4, 5, 6), 10,
                         List.of(
-                                new TicketDto(List.of(1, 2, 3, 4, 5, 6)),
-                                new TicketDto(List.of(1, 2, 3, 4, 5, 10)),
-                                new TicketDto(List.of(1, 2, 3, 6, 7, 15)),
-                                new TicketDto(List.of(11, 12, 13, 14, 15, 16))
+                                new Ticket(List.of(1, 2, 3, 4, 5, 6)),
+                                new Ticket(List.of(1, 2, 3, 4, 5, 10)),
+                                new Ticket(List.of(1, 2, 3, 6, 7, 15)),
+                                new Ticket(List.of(11, 12, 13, 14, 15, 16))
                         ),
                         List.of(
                                 Rank.FIRST_GRADE,
@@ -59,12 +59,12 @@ public class TicketsTestProvider {
                 Arguments.of(
                         List.of(1, 2, 3, 4, 5, 6), 10,
                         List.of(
-                                new TicketDto(List.of(1, 2, 3, 4, 5, 6)),
-                                new TicketDto(List.of(10, 2, 3, 4, 5, 6)),
-                                new TicketDto(List.of(1, 2, 3, 4, 5, 10)),
-                                new TicketDto(List.of(1, 2, 3, 4, 7, 8)),
-                                new TicketDto(List.of(1, 2, 3, 6, 7, 15)),
-                                new TicketDto(List.of(11, 12, 13, 14, 15, 16))
+                                new Ticket(List.of(1, 2, 3, 4, 5, 6)),
+                                new Ticket(List.of(10, 2, 3, 4, 5, 6)),
+                                new Ticket(List.of(1, 2, 3, 4, 5, 10)),
+                                new Ticket(List.of(1, 2, 3, 4, 7, 8)),
+                                new Ticket(List.of(1, 2, 3, 6, 7, 15)),
+                                new Ticket(List.of(11, 12, 13, 14, 15, 16))
                         ),
                         List.of(
                                 Rank.FIRST_GRADE,
@@ -77,8 +77,8 @@ public class TicketsTestProvider {
                 Arguments.of(
                         List.of(1, 2, 3, 4, 5, 6), 10,
                         List.of(
-                                new TicketDto(List.of(11, 12, 13, 14, 15, 16)),
-                                new TicketDto(List.of(10, 12, 13, 14, 20, 22))
+                                new Ticket(List.of(11, 12, 13, 14, 15, 16)),
+                                new Ticket(List.of(10, 12, 13, 14, 20, 22))
                         ),
                         List.of()
                 )

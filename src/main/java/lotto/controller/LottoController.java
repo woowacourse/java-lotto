@@ -3,7 +3,6 @@ package lotto.controller;
 import static lotto.view.output.OutputMessage.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import lotto.domain.analysis.Analysis;
 import lotto.domain.money.Money;
@@ -11,8 +10,6 @@ import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
 import lotto.domain.winning.Rank;
 import lotto.domain.winning.WinningTicket;
-import lotto.dto.AnalysisDto;
-import lotto.dto.TicketDto;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
 
@@ -46,15 +43,12 @@ public class LottoController {
     }
 
     private void showTickets(Tickets tickets) {
-        final List<TicketDto> ticketDtos = tickets.getTickets().stream()
-                .map(TicketDto::toDto)
-                .collect(Collectors.toUnmodifiableList());
-        this.announceTickets(ticketDtos);
+        this.announceTickets(tickets);
     }
 
-    private void announceTickets(List<TicketDto> ticketDtos) {
-        outputView.printTicketCount(ticketDtos);
-        outputView.printTickets(ticketDtos);
+    private void announceTickets(Tickets tickets) {
+        outputView.printTicketCount(tickets);
+        outputView.printTickets(tickets);
     }
 
     private Analysis calculateAnalysis(Tickets tickets) {
@@ -79,12 +73,7 @@ public class LottoController {
         return inputView.requestBonusNumber();
     }
 
-    private void showAnalysis(final Analysis analysis) {
-        final AnalysisDto analysisDto = AnalysisDto.toDto(analysis);
-        this.announceAnalysis(analysisDto);
-    }
-
-    private void announceAnalysis(AnalysisDto analysis) {
+    private void showAnalysis(Analysis analysis) {
         outputView.printMessage(EMPTY_STRING);
         outputView.printMessage(TITLE_OF_ANALYSIS);
         outputView.printMessage(DIVIDING_LINE);
