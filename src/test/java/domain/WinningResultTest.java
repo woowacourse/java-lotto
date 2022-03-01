@@ -18,12 +18,13 @@ class WinningResultTest {
 		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
+		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
+
 		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 		LottoNumber bonusLottoNumber = new LottoNumber(36);
 		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
-		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
 		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
@@ -39,12 +40,13 @@ class WinningResultTest {
 		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
+		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
+
 		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 34)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 		LottoNumber bonusLottoNumber = new LottoNumber(35);
 		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
-		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
 		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
@@ -60,12 +62,13 @@ class WinningResultTest {
 		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
+		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
+
 		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 34)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 		LottoNumber bonusLottoNumber = new LottoNumber(39);
 		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
-		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
 		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
@@ -81,12 +84,13 @@ class WinningResultTest {
 		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 17, 35)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
+		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
+
 		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 34)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 		LottoNumber bonusLottoNumber = new LottoNumber(39);
 		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
-		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
 		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
@@ -102,12 +106,13 @@ class WinningResultTest {
 		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 17, 35)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
+		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
+
 		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 34)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 		LottoNumber bonusLottoNumber = new LottoNumber(35);
 		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
-		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
 		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
@@ -122,12 +127,14 @@ class WinningResultTest {
 		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
+		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
+
 		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 22, 34, 44)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 		LottoNumber bonusLottoNumber = new LottoNumber(39);
 		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
-		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
+
 		Money money = Money.from("1000");
 
 		// when
@@ -143,12 +150,14 @@ class WinningResultTest {
 		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
+		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
+
 		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 		LottoNumber bonusLottoNumber = new LottoNumber(39);
 		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
-		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
+
 		Money money = Money.from("1000");
 
 		// when

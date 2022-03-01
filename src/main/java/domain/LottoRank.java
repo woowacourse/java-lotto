@@ -13,6 +13,7 @@ public enum LottoRank {
 	FIRST(2_000_000_000, 6, false);
 
 	private static final int INITIAL_COUNT = 0;
+
 	private final long amount;
 	private final int matchCount;
 	private final boolean hasBonusNumber;

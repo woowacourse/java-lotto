@@ -12,6 +12,7 @@ import java.util.stream.IntStream;
 public class LottoFactory {
 
 	private static final int INITIAL_INDEX = 0;
+
 	private final List<Integer> lottoNumbers = IntStream.rangeClosed(FIRST_LOTTO_NUMBER, LAST_LOTTO_NUMBER)
 		.boxed()
 		.collect(Collectors.toList());

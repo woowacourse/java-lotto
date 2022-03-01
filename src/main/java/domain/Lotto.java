@@ -6,9 +6,10 @@ import java.util.stream.Stream;
 
 public class Lotto {
 
+	public static final int FIXED_LOTTO_SIZE = 6;
 	private static final String DUPLICATION_NUMBERS_MESSAGE = "중복된 숫자를 입력할 수 없습니다";
 	private static final String NOT_LOTTO_FIXED_SIZE_MESSAGE = "로또 번호는 6개의 숫자여야 합니다";
-	public static final int FIXED_LOTTO_SIZE = 6;
+
 	private final List<LottoNumber> lotto;
 
 	public Lotto(final List<LottoNumber> lotto) {

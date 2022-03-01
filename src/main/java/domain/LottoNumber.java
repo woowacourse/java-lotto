@@ -8,6 +8,7 @@ public class LottoNumber {
 	public static final int LAST_LOTTO_NUMBER = 45;
 	private static final String NOT_NUMBER_IN_LOTTO_NUMBER_RANGE_MESSAGE = "번호는 1 ~ 45의 숫자여야 합니다";
 	private static final String NOT_NUMBER_DIGIT_MESSAGE = "숫자만 입력해야 합니다";
+
 	private final int number;
 
 	public LottoNumber(final int number) {
