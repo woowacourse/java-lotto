@@ -1,12 +1,12 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.vo.Money;
 
 public class Store {
 
-    private static final Money UNDER_LIMIT_MONEY = new Money(1_000L);
-    private static final Money LOTTO_PRICE = new Money(1_000L);
+    private static final int LOTTO_PRICE = 1_000;
 
     private Money leftMoney;
 
@@ -16,25 +16,29 @@ public class Store {
         this.leftMoney = money;
     }
 
-    public List<Lotto> buyLottosWithRemainingMoney(final List<Lotto> lottos) {
-        leftMoney = leftMoney.minus(LOTTO_PRICE.multiply(lottos.size()));
+    public List<Lotto> buyLottos() {
+        List<Lotto> lottos = new ArrayList<>();
         while (canBuy()) {
-            lottos.add(buy());
+            lottos.add(buyAutoLottos());
         }
         return lottos;
     }
 
-    private boolean canBuy() {
-        return leftMoney.isGreaterThan(LOTTO_PRICE) || leftMoney.equals(LOTTO_PRICE);
+    public void minusManualLottoPrice(int amount) {
+        this.leftMoney = leftMoney.minus(LOTTO_PRICE * amount);
     }
 
-    private Lotto buy() {
+    private boolean canBuy() {
+        return leftMoney.isGreaterThan(Money.LOTTO_PRICE) || leftMoney.equals(Money.LOTTO_PRICE);
+    }
+
+    private Lotto buyAutoLottos() {
         leftMoney = leftMoney.minus(LOTTO_PRICE);
         return LottoMachine.generate();
     }
 
     private void validateUnderLimit(Money money) {
-        if (UNDER_LIMIT_MONEY.isGreaterThan(money)) {
+        if (Money.LOTTO_PRICE.isGreaterThan(money)) {
             throw new IllegalArgumentException("입력금액은 1,000원 이상이어야 한다.");
         }
     }

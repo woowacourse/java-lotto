@@ -34,18 +34,7 @@ public class StoreTest {
     void createLotto() {
         Store store = new Store(new Money(1000L));
 
-        assertThat(store.buyLottosWithRemainingMoney(new ArrayList<>())).hasSize(1);
-    }
-
-    @Test
-    @DisplayName("4000원으로 로또 2장을 미리 구매하고 남은 금액만큼 로또를 구매한다.")
-    void buyLottos() {
-        Store store = new Store(new Money(4000L));
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)));
-        lottos.add(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)));
-
-        assertThat(store.buyLottosWithRemainingMoney(lottos)).hasSize(4);
+        assertThat(store.buyLottos()).hasSize(1);
     }
 
     @Test

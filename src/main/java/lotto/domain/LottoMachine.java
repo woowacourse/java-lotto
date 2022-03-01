@@ -22,6 +22,8 @@ public class LottoMachine {
             .collect(Collectors.toList());
     }
 
+    private LottoMachine() { }
+
     public static Lotto generate() {
         return new Lotto(shuffleNumbers().subList(START_INCLUSIVE, END_EXCLUSIVE));
     }

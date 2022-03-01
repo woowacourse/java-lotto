@@ -31,21 +31,11 @@ public class MoneyTest {
     }
 
     @Test
-    @DisplayName("돈의 합을 구할 수 있다.")
-    void plusMoney() {
-        Money money1 = new Money(2_000_000_000L);
-        Money money2 = new Money(2_000_000_000L);
-
-        assertThat(money1.plus(money2)).isEqualTo(new Money(4_000_000_000L));
-    }
-
-    @Test
     @DisplayName("돈의 차를 구할 수 있다.")
     void minusMoney() {
         Money money1 = new Money(5_000L);
-        Money money2 = new Money(1_000L);
 
-        assertThat(money1.minus(money2)).isEqualTo(new Money(4_000L));
+        assertThat(money1.minus(1_000)).isEqualTo(new Money(4_000L));
     }
 
     @Test
@@ -54,15 +44,6 @@ public class MoneyTest {
         Money money1 = new Money(5_000L);
 
         assertThat(money1.multiply(2)).isEqualTo(new Money(10_000L));
-    }
-
-    @Test
-    @DisplayName("돈을 나누어 결과를 반환한다.")
-    void divideMoney() {
-        Money totalMoney = new Money(50_000L);
-        Money money = new Money(3_000L);
-
-        assertThat(totalMoney.divide(money, 2, RoundingMode.DOWN)).isEqualTo(BigDecimal.valueOf(16.66));
     }
 
     @ParameterizedTest
@@ -78,6 +59,6 @@ public class MoneyTest {
     @Test
     @DisplayName("돈을 나눌 때 나머지가 있는지 확인한다.")
     void hasRemainder() {
-        assertThat(new Money(1000L).hasRemainder(new Money(300L))).isTrue();
+        assertThat(new Money(1000L).hasRemainder(300)).isTrue();
     }
 }

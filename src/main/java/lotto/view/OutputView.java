@@ -19,15 +19,17 @@ public class OutputView {
 
     private static final String DELIMITER = ", ";
 
-    public static void printLottosSize(int passivityLottoAmount, int totalSize) {
-        System.out.println(MessageFormat.format(
-            "수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", passivityLottoAmount, totalSize - passivityLottoAmount));
+    public static void printLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.getNumbers());
+            lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
+            System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(lottoNumbers)));
+        }
     }
 
-    private static final int DECIMAL_PLACE = 2;
-
-    public static void printLottos(List<Lotto> lottos) {
-        printLottoNumbers(lottos);
+    public static void printLottosSize(int manualLottoAmount, int autoLottoAmount) {
+        System.out.println(MessageFormat.format(
+            "수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", manualLottoAmount, autoLottoAmount));
     }
 
     public static void printRanks(List<Rank> ranks) {
@@ -39,25 +41,13 @@ public class OutputView {
         }
     }
 
-    public static void printRate(Money totalReward, Money inputMoney) {
-        System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", measureRatio(totalReward, inputMoney)));
-    }
-
-    private static BigDecimal measureRatio(Money totalReward, Money inputMoney) {
-        return totalReward.divide(inputMoney, DECIMAL_PLACE, RoundingMode.DOWN);
-    }
-
-    private static void printLottoNumbers(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.getNumbers());
-            lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
-            System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(lottoNumbers)));
-        }
+    public static void printRate(final double totalReward, Money inputMoney) {
+        System.out.printf("총 수익률은 %.2f 입니다.", totalReward / inputMoney.getAmount());
     }
 
     private static void printRank(List<Rank> ranks, Rank rank) {
         int matchCount = rank.getMatchCount();
-        long reward = rank.getReward().getAmount();
+        long reward = rank.getReward();
         int rewardCount = rank.findRewardCount(ranks);
 
         if (rank == Rank.SECOND) {

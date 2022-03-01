@@ -5,17 +5,17 @@ import java.util.List;
 import lotto.domain.vo.Money;
 
 public enum Rank {
-    FIRST(6, new Money(2_000_000_000L)),
-    SECOND(5, new Money(30_000_000L)),
-    THIRD(5, new Money(1_500_000L)),
-    FOURTH(4, new Money(50_000L)),
-    FIFTH(3, new Money(5_000L)),
-    NONE(0, Money.ZERO);
+    FIRST(6, 2_000_000_000L),
+    SECOND(5, 30_000_000L),
+    THIRD(5, 1_500_000L),
+    FOURTH(4, 50_000L),
+    FIFTH(3, 5_000L),
+    NONE(0, 0);
 
     private final int matchCount;
-    private final Money reward;
+    private final long reward;
 
-    Rank(int matchCount, Money reward) {
+    Rank(int matchCount, long reward) {
         this.matchCount = matchCount;
         this.reward = reward;
     }
@@ -27,12 +27,10 @@ public enum Rank {
         return findOtherRanks(matchCount);
     }
 
-    public static Money calculateReward(List<Rank> ranks) {
-        Money reward = Money.ZERO;
-        for (Rank rank : ranks) {
-            reward = reward.plus(rank.reward);
-        }
-        return reward;
+    public static long calculateReward(List<Rank> ranks) {
+        return ranks.stream()
+            .mapToLong(rank -> rank.reward)
+            .sum();
     }
 
     public int findRewardCount(List<Rank> ranks) {
@@ -45,7 +43,7 @@ public enum Rank {
         return this.matchCount;
     }
 
-    public Money getReward() {
+    public long getReward() {
         return this.reward;
     }
 

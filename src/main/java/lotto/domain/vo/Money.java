@@ -1,12 +1,11 @@
 package lotto.domain.vo;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Money {
 
     public static final Money ZERO = new Money(0L);
+    public static final Money LOTTO_PRICE = new Money(1000L);
 
     private static final int MINIMUM_MONEY = 0;
 
@@ -17,28 +16,20 @@ public class Money {
         this.amount = amount;
     }
 
-    public Money plus(Money money) {
-        return new Money(this.amount + money.amount);
-    }
-
-    public Money minus(Money money) {
-        return new Money(this.amount - money.amount);
+    public Money minus(int amount) {
+        return new Money(this.amount - amount);
     }
 
     public Money multiply(int amount) {
         return new Money(this.amount * amount);
     }
 
-    public BigDecimal divide(Money money, int decimalPlace, RoundingMode roundingMode) {
-        return BigDecimal.valueOf(this.amount).divide(BigDecimal.valueOf(money.amount), decimalPlace, roundingMode);
-    }
-
     public boolean isGreaterThan(Money money) {
         return this.amount > money.amount;
     }
 
-    public boolean hasRemainder(Money money) {
-        return this.amount % money.amount > ZERO.amount;
+    public boolean hasRemainder(int amount) {
+        return this.amount % amount > ZERO.amount;
     }
 
     public long getAmount() {
