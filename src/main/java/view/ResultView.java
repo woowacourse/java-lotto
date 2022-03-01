@@ -10,12 +10,13 @@ import dto.LottoResultDto;
 
 public class ResultView {
     public static void printResult(LottoResultDto resultDto) {
+        System.out.print(System.lineSeparator());
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println("3개 일치 (5000원) - " + resultDto.getWinningCountByRank(FIFTH) + "개");
         System.out.println("4개 일치 (50000원) - " + resultDto.getWinningCountByRank(FOURTH) + "개");
         System.out.println("5개 일치 (1500000원) - " + resultDto.getWinningCountByRank(THIRD) + "개");
-        System.out.println("5개 일치, 보너스 볼 일치(30000000원) - " + resultDto.getWinningCountByRank(SECOND) + "개");
+        System.out.println("5개 일치 보너스 볼 일치(30000000원) - " + resultDto.getWinningCountByRank(SECOND) + "개");
         System.out.println("6개 일치 (2000000000원) - " + resultDto.getWinningCountByRank(FIRST) + "개");
         System.out.println(
                 "총 수익률은 " + resultDto.getRateOfReturn() + "입니다.(기준이 1이기 때문에 결과적으로 " +
