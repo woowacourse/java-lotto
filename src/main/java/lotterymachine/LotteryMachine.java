@@ -5,6 +5,8 @@ import static lotterymachine.utils.LotteryNumbersGenerator.generate;
 
 import java.util.Collections;
 
+import java.util.Map;
+import lotterymachine.model.WinningLottery;
 import lotterymachine.vo.Ball;
 import lotterymachine.vo.Count;
 import lotterymachine.vo.Money;
@@ -21,16 +23,15 @@ import java.util.List;
 public class LotteryMachine {
     public static void main(String[] args) {
         Money amount = getInputAmount();
-        Count numberOfTickets = Count.from(amount.divideByTicketPrice());
-        OutputView.printNumberOfTicket(numberOfTickets.getNumber());
+        Count numberOfTickets = getNumberOfTickets(amount);
+        LotteryTickets purchasedLotteryTickets = purchaseLotteryTickets(numberOfTickets);
 
-        LotteryTickets lotteryTickets = new LotteryTickets(createLotteryTickets(numberOfTickets));
-        OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
+        List<Integer> winningNumbers = InputView.getWinningNumbers();
+        int bonusNumber = InputView.getBonusNumber(winningNumbers);
 
-        List<LotteryResultDto> lotteryResult = getLotteryResult(lotteryTickets);
-        Collections.sort(lotteryResult);
-        printResult(numberOfTickets, lotteryResult);
+        getResult(purchasedLotteryTickets, winningNumbers, bonusNumber);
     }
+
 
     private static Money getInputAmount() {
         try {
@@ -41,24 +42,30 @@ public class LotteryMachine {
         }
     }
 
-    private static List<LotteryTicket> createLotteryTickets(Count numberOfTickets) {
-        List<LotteryTicket> lotteryTickets = new ArrayList<>();
+    private static Count getNumberOfTickets(Money money) {
+        Count numberOfTickets = Count.from(money.divideByTicketPrice());
+        OutputView.printNumberOfTicket(numberOfTickets.getNumber());
+        return numberOfTickets;
+    }
+
+    private static LotteryTickets purchaseLotteryTickets(Count numberOfTickets) {
+        List<LotteryTicket> lotteryTicketsList = new ArrayList<>();
         for (int i = 0; i < numberOfTickets.getNumber(); i++) {
-            lotteryTickets.add(new LotteryTicket(generate()));
+            lotteryTicketsList.add(new LotteryTicket(generate()));
         }
+        LotteryTickets lotteryTickets = new LotteryTickets(lotteryTicketsList);
+        OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
         return lotteryTickets;
     }
 
-    private static List<LotteryResultDto> getLotteryResult(LotteryTickets lotteryTickets) {
-        List<Integer> winningNumbers = InputView.getWinningLotteryNumbers();
-        Ball bonus = Ball.from(InputView.getBonusNumber(winningNumbers));
-        return LotteryResultDto.createLotteryResults(
-                lotteryTickets.getLotteriesResult(Ball.createBalls(winningNumbers), bonus));
-    }
-
-    private static void printResult(Count numberOfTickets, List<LotteryResultDto> lotteryResult) {
+    private static void getResult(LotteryTickets lotteryTickets, List<Integer> winningNumbers, int bonusNumber) {
+        Map<WinningLottery, Count> ticketsResult = lotteryTickets.getLotteriesResult(
+                Ball.createBalls(winningNumbers), Ball.from(bonusNumber));
+        List<LotteryResultDto> lotteryResult = LotteryResultDto.createLotteryResults(ticketsResult);
+        Collections.sort(lotteryResult);
         OutputView.printStatistics(lotteryResult);
-        Money totalTicketsAmount = LotteryCalculator.getTotalTicketAmount(numberOfTickets);
+
+        Money totalTicketsAmount = LotteryCalculator.getTotalTicketAmount(lotteryTickets.getLotteryTickets().size());
         Money winningLotteryAmount = LotteryCalculator.getWinningAmount(lotteryResult);
         OutputView.printProfitRate(calculateProfitRate(winningLotteryAmount, totalTicketsAmount));
     }

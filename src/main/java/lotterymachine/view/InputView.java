@@ -19,7 +19,7 @@ public class InputView {
         return toInt(scanner.nextLine());
     }
 
-    public static List<Integer> getWinningLotteryNumbers() {
+    public static List<Integer> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         try {
             String[] input = scanner.nextLine().split(NUMBER_DELIMITER);
@@ -28,7 +28,7 @@ public class InputView {
             return numbers;
         } catch (RuntimeException runtimeException) {
             OutputView.printException(runtimeException.getMessage());
-            return getWinningLotteryNumbers();
+            return getWinningNumbers();
         }
     }
 
