@@ -10,7 +10,8 @@ public class LottoService {
 
     private static final int LOTTO_SIZE = 6;
     private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "보너스 볼 번호가 지난 주 당첨 번호와 일치할 수 없습니다.";
-    private static final String ERROR_LOTTO_SIZE_MESSAGE = "번호는 6개를 입력하셔야 합니다.";
+    private static final String ERROR_TOTAL_LOTTO_SIZE_MESSAGE = "번호는 6개를 입력하셔야 합니다.";
+    private static final String ERROR_MANUAL_LOTTO_SIZE_MESSAGE = "전체 로또 갯수보다 클 수 없습니다.";
     private static final String WIN_PROFIT_RESULT_MESSAGE = "총 수익률은 %.2f입니다. (기준이 1 이기 때문에 결과적으로 %s라는 의미임)";
     private static final String PROFIT_NEGATIVE_MESSAGE = "손해";
     private static final String PROFIT_POSITIVE_MESSAGE = "이익";
@@ -31,12 +32,16 @@ public class LottoService {
 
     private void validate(final List<String> inputLotto) {
         if (inputLotto.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(ERROR_LOTTO_SIZE_MESSAGE);
+            throw new IllegalArgumentException(ERROR_TOTAL_LOTTO_SIZE_MESSAGE);
         }
     }
 
-    public void issueLotto() {
-        this.issuedLotto = LottoFactory.generateLotto(money.calculateCounts(), new AutoLottoGenerator());
+    public void issueLotto(final int manualCount) {
+        final int totalCount = money.calculateCounts();
+        if (manualCount > totalCount) {
+            throw new IllegalArgumentException(ERROR_MANUAL_LOTTO_SIZE_MESSAGE);
+        }
+        this.issuedLotto = LottoFactory.generateLotto(totalCount, manualCount, new AutoLottoGenerator());
     }
 
     public List<LottoDto> getIssuedLotto() {
