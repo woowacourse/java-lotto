@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class LottoResult {
     }
 
     public Map<Rank, Integer> getLottoResult() {
-        return new HashMap<>(lottoResult);
+        return Collections.unmodifiableMap(lottoResult);
     }
 
     public void addMatchingCount(Lottos lottos, WinningLotto winningLotto) {
