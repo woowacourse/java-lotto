@@ -8,19 +8,18 @@ public class LottoMachine {
         Money money = new Money(InputView.askInputMoney());
         int totalLottoCount = money.generateCount();
         int manualLottoCount = InputView.askManualLottoCount(totalLottoCount);
-
-        OutputView.printCountOfLotto(totalLottoCount, manualLottoCount);
         Lottos manualLottos = InputView.askManualLottoNumbers(manualLottoCount);
-        Lottos autoLottos = createAutoLottos(totalLottoCount - manualLottoCount);
-
+        OutputView.printCountOfLotto(totalLottoCount, manualLottoCount);
+        Lottos totalLottos = getLottos(totalLottoCount - manualLottoCount, manualLottos);
         WinningLotto winningNumber = inputWinningNumber();
-        getStatistics(manualLottos, winningNumber, money);
+        getStatistics(totalLottos, winningNumber, money);
     }
 
-    private Lottos createAutoLottos(int lottoCount) {
-        Lottos lottos = Lottos.generateLottos(lottoCount);
-        OutputView.printLottos(lottos);
-        return lottos;
+    private Lottos getLottos(int autoLottoCount, Lottos manualLottos) {
+        Lottos autoLottos = Lottos.generateLottos(autoLottoCount);
+        Lottos totalLottos = manualLottos.add(autoLottos);
+        OutputView.printLottos(totalLottos);
+        return totalLottos;
     }
 
     private WinningLotto inputWinningNumber() {

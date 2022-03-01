@@ -30,6 +30,11 @@ public class Lottos {
         return Statistic.valueOf(ranks);
     }
 
+    public Lottos add(Lottos lottos) {
+        this.lottos.addAll(lottos.getLottos());
+        return this;
+    }
+
     public List<Lotto> getLottos() {
         return new ArrayList<>(lottos);
     }
