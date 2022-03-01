@@ -23,7 +23,7 @@ public class StoreTest {
     void createLotto() {
         Store store = new Store(Money.createLottoMoney(1000));
 
-        assertThat(store.buyAutomaticLottos()).hasSize(1);
+        assertThat(store.buyLottos(0)).hasSize(1);
     }
 
 }

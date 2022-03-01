@@ -30,18 +30,18 @@ public class InputView {
         return inputNumber;
     }
 
-    public static List<Lotto> inputManualLottos(int manualLottoCount) {
-        printManualLottos(manualLottoCount);
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < manualLottoCount; i++) {
-            String input = SCANNER.nextLine();
-            validateBlank(input);
-            lottos.add(new Lotto(convertToNumbers(input)));
-        }
-        return lottos;
-    }
+//    public static List<Lotto> inputManualLottos(int manualLottoCount) {
+//        printManualLottos(manualLottoCount);
+//        List<Lotto> lottos = new ArrayList<>();
+//        for (int i = 0; i < manualLottoCount; i++) {
+//            String input = SCANNER.nextLine();
+//            validateBlank(input);
+//            lottos.add(new Lotto(convertToNumbers(input)));
+//        }
+//        return lottos;
+//    }
 
-    private static void printManualLottos(int manualLottoCount) {
+    public static void printManualLottos(int manualLottoCount) {
         if (manualLottoCount != 0) {
             System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
         }
@@ -54,7 +54,7 @@ public class InputView {
         return convertToNumbers(input);
     }
 
-    private static List<LottoNumber> convertToNumbers(String input) {
+    public static List<LottoNumber> convertToNumbers(String input) {
         return Arrays.stream(input.split(DELIMITER))
                 .map(String::trim)
                 .map(InputView::validateNumber)
@@ -69,7 +69,7 @@ public class InputView {
         return new LottoNumber(validateNumber(input));
     }
 
-    private static void validateBlank(String input) {
+    public static void validateBlank(String input) {
         if (Objects.isNull(input) || input.isBlank()) {
             throw new IllegalArgumentException("입력값은 비어있을 수 없다.");
         }
@@ -87,5 +87,9 @@ public class InputView {
         if (number < 0) {
             throw new IllegalArgumentException("입력값은 음수일 수 없다.");
         }
+    }
+
+    public static String input() {
+        return SCANNER.nextLine();
     }
 }

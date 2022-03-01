@@ -17,9 +17,8 @@ public class LottoController {
     public void run() {
         Money totalMoney = Money.createLottoMoney(InputView.inputMoney());
         int manualLottoCount = InputView.inputManualLottoCount();
-        Money automaticMoney = totalMoney.minus(Money.createLottoMoneyByCount(manualLottoCount));
 
-        Lottos lottos = buyLottos(automaticMoney, manualLottoCount);
+        Lottos lottos = buyLottos(totalMoney, manualLottoCount);
         OutputView.printLottos(manualLottoCount, lottos.getLottos());
 
         List<Rank> ranks = lottos.matchRanks(createWinnerLotto(winnerNumbers(), bonusNumber()));
@@ -27,16 +26,9 @@ public class LottoController {
         OutputView.printRate(calculateRate(totalMoney, ranks));
     }
 
-    private Lottos buyLottos(Money automaticMoney, int manualLottoCount) {
-        List<Lotto> manualLottos = InputView.inputManualLottos(manualLottoCount);
-        List<Lotto> automaticLottos = buyAutomaticLottos(automaticMoney);
-        manualLottos.addAll(automaticLottos);
-        return new Lottos(manualLottos);
-    }
-
-    private List<Lotto> buyAutomaticLottos(Money money) {
-        Store store = new Store(money);
-        return store.buyAutomaticLottos();
+    private Lottos buyLottos(Money totalMoney, int manualLottoCount) {
+        InputView.printManualLottos(manualLottoCount);
+        return new Lottos(new Store(totalMoney).buyLottos(manualLottoCount));
     }
 
     private WinnerLotto createWinnerLotto(Lotto winnerNumbers, LottoNumber bonusNumber) {
