@@ -13,10 +13,10 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<LottoNumber> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         Objects.requireNonNull(lottoNumbers, ERROR_MESSAGE_FOR_NULL_LOTTO_NUMBERS);
 
-        final List<LottoNumber> copiedLottoNumbers = List.copyOf(lottoNumbers);
+        List<LottoNumber> copiedLottoNumbers = List.copyOf(lottoNumbers);
         validateSize(copiedLottoNumbers);
         validateDuplicate(copiedLottoNumbers);
 
