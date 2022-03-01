@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import lotto.domain.analysis.Analysis;
 import lotto.domain.winning.Rank;
+import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
 import lotto.view.utils.Delimiter;
 
@@ -43,13 +43,13 @@ public class OutputView {
         return String.format(TICKET_FORMAT.getMessage(), joinedBallNumbers);
     }
 
-    public void printAnalysis(final Analysis analysis) {
-        printAnalysisRankCounts(analysis);
-        printAnalysisProfitRate(analysis);
+    public void printAnalysis(final AnalysisDto analysisDto) {
+        printAnalysisRankCounts(analysisDto);
+        printAnalysisProfitRate(analysisDto);
     }
 
-    private void printAnalysisRankCounts(final Analysis analysis) {
-        final Map<Rank, Long> rankCounts = analysis.getRankCounts();
+    private void printAnalysisRankCounts(final AnalysisDto analysisDto) {
+        final Map<Rank, Long> rankCounts = analysisDto.getRankCounts();
         for (Rank rank : Rank.values()) {
             long rankCount = 0;
             if (rankCounts.containsKey(rank)) {
@@ -74,8 +74,8 @@ public class OutputView {
         return ANALYSIS_FORMAT.getMessage();
     }
 
-    private void printAnalysisProfitRate(final Analysis analysis) {
-        final double profitRate = analysis.getProfitRate();
+    private void printAnalysisProfitRate(final AnalysisDto analysisDto) {
+        final double profitRate = analysisDto.getProfitRate();
         printMessage(String.format(PROFIT_RAGE_FORMAT.getMessage(), profitRate));
     }
 

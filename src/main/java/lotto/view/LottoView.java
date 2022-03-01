@@ -5,6 +5,7 @@ import static lotto.view.output.OutputMessage.*;
 import java.util.List;
 
 import lotto.domain.analysis.Analysis;
+import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
 import lotto.dto.WinningTicketDto;
 import lotto.view.input.InputView;
@@ -46,11 +47,11 @@ public class LottoView {
         return inputView.requestBonusNumber();
     }
 
-    public void announceAnalysis(final Analysis analysis) {
+    public void announceAnalysis(final AnalysisDto analysisDto) {
         outputView.printMessage(EMPTY_STRING);
         outputView.printMessage(TITLE_OF_ANALYSIS);
         outputView.printMessage(DIVIDING_LINE);
-        outputView.printAnalysis(analysis);
+        outputView.printAnalysis(analysisDto);
     }
 
 }

@@ -9,6 +9,7 @@ import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
 import lotto.domain.winning.Rank;
 import lotto.domain.winning.WinningTicket;
+import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
 import lotto.dto.WinningTicketDto;
 import lotto.view.LottoView;
@@ -53,8 +54,9 @@ public class LottoController {
         return winningTicketDto.toWinningTicket();
     }
 
-    private  void announceAnalysis(final Analysis analysis) {
-        lottoView.announceAnalysis(analysis);
+    private void announceAnalysis(final Analysis analysis) {
+        final AnalysisDto analysisDto = AnalysisDto.toDto(analysis);
+        lottoView.announceAnalysis(analysisDto);
     }
 
 }
