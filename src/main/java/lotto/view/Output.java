@@ -1,9 +1,13 @@
 package lotto.view;
 
+import lotto.domain.Ball;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Output {
     private static final String ERROR_PREFIX = "[ERROR] ";
@@ -36,10 +40,11 @@ public class Output {
         System.out.printf(LOTTO_COUNT, lottoCount);
     }
 
-    public static void printLottos(Lottos lottos) {
+    public static void printLottos(final Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
-            String numbers = String.join(LOTTO_DELIMITER, lotto.getLottoNumbers());
-            System.out.printf(LOTTO_FORMAT,numbers);
+            List<String> lottoNumbers = getLottoNumbers(lotto);
+            String numbers = String.join(LOTTO_DELIMITER, lottoNumbers);
+            System.out.printf(LOTTO_FORMAT, numbers);
         }
     }
 
@@ -69,6 +74,13 @@ public class Output {
             profitFlag = LOSS;
         }
         System.out.printf(PROFIT_FORMAT, profitRateOfResultFormat, profitFlag);
+    }
+
+    private static List<String> getLottoNumbers(Lotto lotto) {
+        return lotto.getLottoBalls().stream()
+                .map(Ball::getNumber)
+                .map(String::valueOf)
+                .collect(Collectors.toList());
     }
 
     private static void printResult(int lottoCount, Rank rank) {

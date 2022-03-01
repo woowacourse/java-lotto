@@ -27,17 +27,15 @@ public class Lotto {
         this.lotto.addAll(lotto);
     }
 
-    public List<String> getLottoNumbers() {
-        return lotto.stream()
-                .map(Ball::getNumber)
-                .map(String::valueOf)
-                .collect(Collectors.toList());
+    public List<Ball> getLottoBalls() {
+        return lotto;
     }
 
     public boolean contains(final Ball number) {
         return lotto.contains(number);
     }
 
+    // TODO: Lotto 의 역할인가?
     public static List<Ball> selectRandomBalls() {
         List<Ball> lottoBalls = lottoTotalBalls;
         Collections.shuffle(lottoBalls);
@@ -46,12 +44,6 @@ public class Lotto {
         return selectedBalls.stream()
             .sorted(Comparator.comparing(Ball::getNumber))
             .collect(Collectors.toList());
-    }
-
-    public int getMatchingCount(final Lotto otherLotto) {
-        return (int) lotto.stream()
-                .filter(otherLotto::contains)
-                .count();
     }
 
     private static ArrayList<Ball> selectBalls(final List<Ball> lottoBalls) {

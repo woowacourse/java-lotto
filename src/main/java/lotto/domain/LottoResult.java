@@ -19,14 +19,6 @@ public class LottoResult {
         return Map.copyOf(lottoResult);
     }
 
-    public void match(final Lottos lottos, final WinningLotto winningLotto) {
-        for (Lotto lotto : lottos.getLottos()) {
-            int matchingCount = lotto.getMatchingCount(winningLotto.getWinningNumbers());
-            boolean bonus = matchingCount == CHECK_BONUS_COUNT && lotto.contains(winningLotto.getBonusBall());
-            increaseRankCount(Rank.getRank(matchingCount, bonus));
-        }
-    }
-
     public int getTotalMoney() {
         int totalMoney = 0;
         for (Rank rank : Rank.values()) {
@@ -35,12 +27,12 @@ public class LottoResult {
         return totalMoney;
     }
 
+    public void increaseRankCount(final Rank rank) {
+        lottoResult.put(rank, lottoResult.get(rank) + 1);
+    }
+
     public double calculateRate(final int totalMoney, final Payment payment) {
         int money = payment.getPayment();
         return (double) totalMoney / money;
-    }
-
-    private void increaseRankCount(final Rank rank) {
-        lottoResult.put(rank, lottoResult.get(rank) + 1);
     }
 }
