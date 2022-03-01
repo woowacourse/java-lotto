@@ -6,18 +6,13 @@ import static constant.LottoConstant.LOTTO_TICKET_PRICE;
 
 public class Money {
 
-    private static final int MINIMUM_AMOUNT = 10;
-    private static final String MONEY_MUST_BE_DIVIDABLE_BY_TEN = "금액은 10 단위로 나누어 떨어져야 합니다.";
+    private static final int MINIMUM_COIN_PRICE = 10;
 
     private final int amount;
 
-    private Money(int amount) {
+    public Money(int amount) {
         validateAmount(amount);
         this.amount = amount;
-    }
-
-    public static Money from(int amount) {
-        return new Money(amount);
     }
 
     public boolean isPurchasable(int amount) {
@@ -28,9 +23,28 @@ public class Money {
         return this.amount / LOTTO_TICKET_PRICE;
     }
 
+
+    public void validateManualCount(int manualCount) {
+        if (manualCount > getPurchasableNumber()) {
+            throw new IllegalArgumentException("구매하려는 로또가 보유 금액을 초과했습니다.");
+        }
+    }
+
     private void validateAmount(int amount) {
-        if (amount % MINIMUM_AMOUNT != 0) {
-            throw new IllegalArgumentException(MONEY_MUST_BE_DIVIDABLE_BY_TEN);
+        validateUnit(amount);
+        validateMinimumAmount(amount);
+
+    }
+
+    private void validateUnit(int amount) {
+        if (amount < LOTTO_TICKET_PRICE) {
+            throw new IllegalArgumentException("금액은 1000원 이상이어야 합니다.");
+        }
+    }
+
+    private void validateMinimumAmount(int amount) {
+        if (amount % MINIMUM_COIN_PRICE != 0) {
+            throw new IllegalArgumentException("금액은 10 단위로 나누어 떨어져야 합니다.");
         }
     }
 
@@ -45,11 +59,5 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
-    }
-
-    public void validateManualCount(int manualCount) {
-        if (manualCount > getPurchasableNumber()) {
-            throw new IllegalArgumentException("구매하려는 로또가 보유 금액을 초과했습니다.");
-        }
     }
 }

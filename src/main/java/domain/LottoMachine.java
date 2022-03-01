@@ -1,24 +1,19 @@
 package domain;
 
 import domain.strategy.LottoNumberStrategy;
-import domain.strategy.RandomLottoNumberStrategy;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static constant.LottoConstant.LOTTO_TICKET_PRICE;
-
 public class LottoMachine {
 
-    private static final String INVALID_INSERT_AMOUNT = "금액은 1000원 이상이어야 합니다.";
     private static final int DEFAULT_VALUE = 0;
     private static final int INCREASE_VALUE = 1;
 
     public List<LottoTicket> purchaseLottoTickets(Money money, List<List<Integer>> lottoNumbers,
                                                   LottoNumberStrategy lottoNumberStrategy) {
         int autoCount = money.getPurchasableNumber() - lottoNumbers.size();
-        validateInsertAmount(money);
         List<LottoTicket> lottoTickets = new ArrayList<>();
         lottoTickets.addAll(purchaseManually(lottoNumbers));
         lottoTickets.addAll(purchaseAutomatically(autoCount, lottoNumberStrategy));
@@ -42,10 +37,6 @@ public class LottoMachine {
         }
 
         return lottoTickets;
-    }
-
-    public void validateMoney(Money money) {
-        validateInsertAmount(money);
     }
 
     public WinningStat createWinningStat(List<LottoTicket> lottoTickets,
@@ -74,11 +65,5 @@ public class LottoMachine {
         }
 
         return lottoTickets;
-    }
-
-    private void validateInsertAmount(Money amount) {
-        if (!amount.isPurchasable(LOTTO_TICKET_PRICE)) {
-            throw new IllegalArgumentException(INVALID_INSERT_AMOUNT);
-        }
     }
 }

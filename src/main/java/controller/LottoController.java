@@ -18,8 +18,7 @@ public class LottoController {
     }
 
     private List<LottoTicket> purchaseLottoTickets(LottoMachine lottoMachine) {
-        Money money = Money.from(InputView.getMoney());
-        lottoMachine.validateMoney(money);
+        Money money = new Money(InputView.getMoney());
         int manualCount = calculateManualCount(money);
         List<List<Integer>> lottoNumbers = getLottoNumbers(money, manualCount);
         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(money, lottoNumbers,
