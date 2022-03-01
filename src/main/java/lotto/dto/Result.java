@@ -7,10 +7,10 @@ import lotto.domain.Rank;
 
 public class Result {
 
-    private EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
+    private EnumMap<Rank, Integer> result;
 
     public Result() {
-        initResult();
+        result = initResult();
     }
 
     public void calculateWinning(final LottoWinningNumbers winningLotto, final Lotto lotto) {
@@ -20,10 +20,12 @@ public class Result {
         result.put(rank, result.get(rank) + 1);
     }
 
-    public void initResult() {
+    public EnumMap<Rank, Integer> initResult() {
+        EnumMap<Rank, Integer> ranks = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
-            result.put(rank, 0);
+            ranks.put(rank, 0);
         }
+        return ranks;
     }
 
     public int getRankCount(Rank rank) {

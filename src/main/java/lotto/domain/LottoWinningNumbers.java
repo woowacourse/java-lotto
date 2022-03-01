@@ -5,7 +5,7 @@ public class LottoWinningNumbers {
     private static final String ERROR_DUPLICATE_BONUS_NUMBER = "[ERROR] 보너스번호는 로또번호와 중복되지 않아야 합니다.";
 
     private final Lotto winningLotto;
-    private LottoNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public LottoWinningNumbers(final Lotto winningLotto, final LottoNumber bonusNumber) {
         this.winningLotto = winningLotto;
