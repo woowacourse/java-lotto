@@ -1,6 +1,5 @@
 package domain;
 
-import constants.LottoConstants;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +16,7 @@ public class WinningResult {
 
     public double calculateProfitRatio() {
         long totalPrice = calculateTotalPrize();
-        double purchaseMoney = purchasedLottoQuantity.getLottoQuantity() * LottoConstants.SINGLE_LOTTO_PRICE;
+        double purchaseMoney = purchasedLottoQuantity.getLottoQuantity() * Lotto.SINGLE_LOTTO_PRICE;
 
         return roundToSecondDigit(totalPrice / purchaseMoney);
     }

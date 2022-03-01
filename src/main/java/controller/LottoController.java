@@ -1,6 +1,5 @@
 package controller;
 
-import constants.LottoConstants;
 import domain.InputMoney;
 import domain.Lotto;
 import domain.LottoNumber;
@@ -48,7 +47,7 @@ public class LottoController {
     }
 
     private LottoQuantity generateLottoQuantityByInputMoney(InputMoney inputMoney) {
-        int lottoQuantity = inputMoney.getMoney() / LottoConstants.SINGLE_LOTTO_PRICE;
+        int lottoQuantity = inputMoney.getMoney() / Lotto.SINGLE_LOTTO_PRICE;
         return new LottoQuantity(lottoQuantity);
     }
 
