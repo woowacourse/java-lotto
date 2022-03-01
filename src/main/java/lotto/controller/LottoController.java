@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.vo.Money;
 import lotto.domain.vo.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.Store;
@@ -17,7 +16,7 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void run() {
-        Money inputMoney = InputView.inputMoney();
+        int inputMoney = InputView.inputMoney();
         Lottos lottos = new Lottos(buyLottos(new Store(inputMoney)));
         OutputView.printLottos(lottos.getLottos());
         OutputView.printRate(sumTotalReward(lottos), inputMoney);

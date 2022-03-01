@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.vo.LottoNumber;
-import lotto.domain.vo.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class StoreTest {
@@ -17,7 +17,7 @@ public class StoreTest {
     @DisplayName("입력금액은 1,000원 미만이면 예외가 발생한다.")
     void throwExceptionWhenUnderThousands() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Store(new Money(999L)))
+            .isThrownBy(() -> new Store(999))
             .withMessage("입력금액은 1,000원 이상이어야 한다.");
     }
 
@@ -25,13 +25,13 @@ public class StoreTest {
     @ValueSource(ints = {1_000, 100_000})
     @DisplayName("입력금액을 전달하면 Store가 생성된다.")
     void createStore(int money) {
-        assertThat(new Store(new Money(money))).isNotNull();
+        assertThat(new Store(money)).isNotNull();
     }
 
     @Test
     @DisplayName("1000원으로 로또 한장을 구매할 수 있다.")
     void createLotto() {
-        Store store = new Store(new Money(1000L));
+        Store store = new Store(1000);
 
         assertThat(store.buyAutoLottos()).hasSize(1);
     }
@@ -39,7 +39,7 @@ public class StoreTest {
     @Test
     @DisplayName("수동로또 구매 후 남은 금액만큼 자동 로또를 생성한다.")
     void buyManualLottto() {
-        Store store = new Store(new Money(3000L));
+        Store store = new Store(3000);
         store.buyManualLottos(2);
 
         assertThat(store.buyAutoLottos()).hasSize(1);
@@ -49,13 +49,16 @@ public class StoreTest {
     @DisplayName("입력금액이 1000원 단위가 아니면 예외를 발생한다.")
     void throwExceptionWhenHasRemainder() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Store(new Money(1100L)))
+            .isThrownBy(() -> new Store(1100))
             .withMessage("입력금액은 1,000원 단위어야 한다.");
     }
 
-    private List<LottoNumber> givenNumbers(int... numbers) {
-        return Arrays.stream(numbers)
-            .mapToObj(LottoNumber::of)
-            .collect(Collectors.toList());
+    @ParameterizedTest
+    @CsvSource(value = {"1, true", "0, false"})
+    @DisplayName("수동 로또는 1개 이상만 구매가 가능하다.")
+    void isBuyManualLotto(int amount, boolean expected) {
+        Store store = new Store(1000);
+
+        assertThat(store.isBuyManualLotto(amount)).isEqualTo(expected);
     }
 }

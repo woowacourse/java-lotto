@@ -1,19 +1,14 @@
 package lotto.view;
 
 import java.io.PrintStream;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
-import lotto.domain.vo.Money;
-import lotto.domain.vo.LottoNumber;
 import lotto.domain.Rank;
+import lotto.domain.vo.LottoNumber;
 
 public class OutputView {
 
@@ -41,8 +36,8 @@ public class OutputView {
         }
     }
 
-    public static void printRate(final double totalReward, Money inputMoney) {
-        System.out.printf("총 수익률은 %.2f 입니다.", totalReward / inputMoney.getAmount());
+    public static void printRate(final double totalReward, int inputMoney) {
+        System.out.printf("총 수익률은 %.2f 입니다.", totalReward / inputMoney);
     }
 
     private static void printRank(List<Rank> ranks, Rank rank) {

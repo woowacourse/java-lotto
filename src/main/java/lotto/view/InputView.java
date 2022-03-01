@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -8,7 +7,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.Lotto;
-import lotto.domain.vo.Money;
 import lotto.domain.vo.LottoNumber;
 
 public class InputView {
@@ -17,9 +15,9 @@ public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static Money inputMoney() {
+    public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new Money(stringToInt(validateBlank(SCANNER.nextLine())));
+        return stringToInt(validateBlank(SCANNER.nextLine()));
     }
 
     public static int inputManualLottoAmount() {

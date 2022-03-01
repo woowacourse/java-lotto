@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.vo.Money;
 
 public enum Rank {
     FIRST(6, 2_000_000_000L),

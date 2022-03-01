@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.domain.vo.LottoNumber;
@@ -14,7 +13,7 @@ public class Lotto {
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicateNumbers(lottoNumbers);
-        this.lottoNumbers = new HashSet<>(lottoNumbers);
+        this.lottoNumbers = Set.copyOf(lottoNumbers);
     }
 
     public int countMatchNumbers(Lotto lotto) {
