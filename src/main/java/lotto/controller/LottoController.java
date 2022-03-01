@@ -6,7 +6,7 @@ import static lotto.view.OutputView.*;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.BonusNumber;
-import lotto.domain.ManualCount;
+import lotto.domain.Count;
 import lotto.domain.LottoResult;
 import lotto.domain.Lotto;
 import lotto.domain.LottoDto;
@@ -17,12 +17,14 @@ import lotto.strategy.AutoBuy;
 import lotto.view.InputView;
 
 public class LottoController {
+    private Money money;
     private Lotto lotto;
+    private Count manualCount;
 
     public void start() {
-        Money money = initMoney();
-        ManualCount manualCount = initManualCount(money);
-        initLotto(money, manualCount);
+        money = initMoney();
+        manualCount = initManualCount();
+        initLotto();
         WinningNumber winningNumber = setWinningNumber();
         findAndPrintResult(winningNumber);
     }
@@ -37,17 +39,17 @@ public class LottoController {
         }
     }
 
-    private ManualCount initManualCount(Money money) {
+    private Count initManualCount() {
         try {
             String inputValue = InputView.askManualCountInput();
-            return new ManualCount(money, inputValue);
+            return new Count(money, inputValue);
         } catch (IllegalArgumentException exception) {
             printErrorMessage(exception);
-            return initManualCount(money);
+            return initManualCount();
         }
     }
 
-    private void initLotto(Money money, ManualCount manualCount) {
+    private void initLotto() {
         AutoBuy autoBuy = new AutoBuy();
         List<ChoiceNumber> manualNumbers = initManualNumbers(manualCount.getCount());
         this.lotto = new Lotto(money, manualNumbers, autoBuy);
