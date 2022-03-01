@@ -5,23 +5,19 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class NumberTest {
 
-    @Test
-    @DisplayName("로또 번호로 45 보다 큰 숫자가 들어오면 오류를 발생한다.")
-    void checkValidNumber_overLottoNumberRange() {
-        assertThatThrownBy(() -> new Number(46))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 로또 번호는 1~45까지의 숫자로 입력하세요.");
-    }
-
-    @Test
-    @DisplayName("로또 번호로 1 보다 작은 숫자가 들어오면 오류를 발생한다.")
-    void checkValidNumber_underLottoNumberRange() {
-        assertThatThrownBy(() -> new Number(-1))
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 46, 57})
+    @DisplayName("로또 번호로 1보다 작거나 45보다 큰 숫자가 들어오면 오류를 발생한다.")
+    void checkValidNumber_overLottoNumberRange(final int number) {
+        assertThatThrownBy(() -> new Number(number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 로또 번호는 1~45까지의 숫자로 입력하세요.");
     }
@@ -34,7 +30,7 @@ class NumberTest {
         winningNumbers.add(new Number(7));
         winningNumbers.add(new Number(12));
 
-        Number number = new Number(12);
+        final Number number = new Number(12);
         assertThat(number.hasSameNumber(winningNumbers)).isTrue();
     }
 
