@@ -14,10 +14,10 @@ class LottosTest {
     @Test
     @DisplayName("투입 금액만큼의 로또를 생성하는지 확인한다.")
     void generateLottos_Test() {
-        Money money = new Money(100000);
-        Generator generator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
+        final Money money = new Money(100000);
+        final Generator generator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        Lottos lottos = new Lottos(money, generator);
+        final Lottos lottos = new Lottos(money, generator);
         assertThat(lottos.getLottos().size()).isEqualTo(100);
     }
 }
