@@ -13,7 +13,9 @@ public class LottoController {
 
 	public void run() {
 		Tickets tickets = generateTickets(InputView.getPayment());
-		OutputView.printTickets(tickets.getTickets());
+
+		// TODO: 수동 로또 구매 갯수 매개인자로
+		OutputView.printTickets(tickets.getTickets(), 3);
 
 		WinningNumber winningNumber =
 			new WinningNumber(InputView.getWinningNumber(), InputView.getBonusBall());

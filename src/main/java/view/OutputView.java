@@ -12,6 +12,8 @@ public class OutputView {
 	private static final String TICKET_END_SIGN = "]";
 	private static final String BALL_DELIMITER = ",";
 	private static final String PAYMENT_COUNT_MESSAGE = "개를 구매했습니다.";
+	private static final String MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 %d, ";
+	private static final String AUTO_LOTTO_NUMBER_MESSAGE = "자동으로 %d";
 	private static final String ANALYSIS_TITLE_MESSAGE = "당첨 통계";
 	private static final String DIVIDING_LINE = "---------";
 	private static final String MATCH_COUNT_PRIZE_MESSAGE = "%d개 일치";
@@ -21,9 +23,13 @@ public class OutputView {
 	private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
 	private static final String LINE_DELIMITER = "\n";
 
-	public static void printTickets(List<Ticket> tickets) {
-		System.out.println(tickets.size() + PAYMENT_COUNT_MESSAGE);
+	public static void printTickets(List<Ticket> tickets, final int manualCount) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(String.format(MANUAL_LOTTO_NUMBER_MESSAGE, manualCount))
+			.append(String.format(AUTO_LOTTO_NUMBER_MESSAGE, tickets.size() - manualCount))
+			.append(PAYMENT_COUNT_MESSAGE);
 
+		System.out.println(stringBuilder.toString());
 		tickets.forEach(OutputView::printTicket);
 	}
 
@@ -32,7 +38,7 @@ public class OutputView {
 		stringBuilder.append(String.join(BALL_DELIMITER, ticket.makeBallsToStrings()))
 			.append(TICKET_END_SIGN);
 
-		System.out.println(stringBuilder.toString());
+		System.out.println(LINE_DELIMITER + stringBuilder.toString());
 	}
 
 	public static void printStatistics(WinningAnalyzeDto winningAnalyzeDto) {
