@@ -9,7 +9,7 @@ public class RankCount {
     private final Map<Rank, Integer> rankCount;
 
     public RankCount(Lottos lottos, WinningLotto winningLotto, BonusNumber bonusNumber) {
-        this.rankCount = new EnumMap<>(calculateRankCount(lottos, winningLotto, bonusNumber));
+        this.rankCount = calculateRankCount(lottos, winningLotto, bonusNumber);
     }
 
     private EnumMap<Rank, Integer> calculateRankCount(Lottos lottos,
