@@ -17,20 +17,25 @@ public class Store {
     }
 
     public void buyManualLottos(int manualLottoAmount) {
+        validateOverAmount(manualLottoAmount);
         leftMoney = leftMoney.minus(LOTTO_PRICE * manualLottoAmount);
     }
 
     public List<Lotto> buyAutoLottos() {
         List<Lotto> lottos = new ArrayList<>();
-        while (canBuy()) {
+        while (canBuy(LOTTO_PRICE)) {
             leftMoney = leftMoney.minus(LOTTO_PRICE);
             lottos.add(LottoMachine.generate());
         }
         return lottos;
     }
 
-    private boolean canBuy() {
-        return leftMoney.isGreaterThan(Money.LOTTO_PRICE) || leftMoney.equals(Money.LOTTO_PRICE);
+    public boolean isBuyManualLotto(int amount) {
+        return amount > 0;
+    }
+
+    private boolean canBuy(int amount) {
+        return leftMoney.isGreaterThan(amount) || leftMoney.equals(new Money(amount));
     }
 
     private void validateUnderLimit(Money money) {
@@ -42,6 +47,12 @@ public class Store {
     private void validateUnderThousands(Money money) {
         if (money.hasRemainder(LOTTO_PRICE)) {
             throw new IllegalArgumentException("입력금액은 1,000원 단위어야 한다.");
+        }
+    }
+
+    private void validateOverAmount(int manualLottoAmount) {
+        if (!canBuy(LOTTO_PRICE * manualLottoAmount)) {
+            throw new IllegalArgumentException("최대 구매 개수를 초과할 수 없다.");
         }
     }
 }

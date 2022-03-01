@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -31,8 +32,12 @@ public class LottoController {
 
     private List<Lotto> buyManualLotto(Store store) {
         int amount = InputView.inputManualLottoAmount();
-        store.buyManualLottos(amount);
-        return InputView.inputManualLottoNumbers(amount);
+
+        if (store.isBuyManualLotto(amount)) {
+            store.buyManualLottos(amount);
+            return InputView.inputManualLottoNumbers(amount);
+        }
+        return Collections.emptyList();
     }
 
     private List<Lotto> concatLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {

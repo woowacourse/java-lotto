@@ -28,6 +28,10 @@ public class Money {
         return this.amount > money.amount;
     }
 
+    public boolean isGreaterThan(int amount) {
+        return this.amount > amount;
+    }
+
     public boolean hasRemainder(int amount) {
         return this.amount % amount > ZERO.amount;
     }
