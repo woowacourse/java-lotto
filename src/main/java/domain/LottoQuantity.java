@@ -10,8 +10,11 @@ public class LottoQuantity {
 
     public LottoQuantity(int lottoQuantity) {
         validatePositive(lottoQuantity);
-
         this.lottoQuantity = lottoQuantity;
+    }
+
+    public LottoQuantity subtract(LottoQuantity otherLottoQuantity) {
+        return new LottoQuantity(this.lottoQuantity - otherLottoQuantity.lottoQuantity);
     }
 
     public LottoQuantity(InputMoney inputMoney) {

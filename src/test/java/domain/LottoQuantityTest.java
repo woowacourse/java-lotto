@@ -60,4 +60,19 @@ public class LottoQuantityTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LottoQuantity.ERROR_MESSAGE_FOR_INVALID_TRAIL_NUMBER);
     }
+
+    @DisplayName("subtract 메소드는 자기자신과 다른 LottoQuantity 를 뺀 LottoQuantity 를 반환한다.")
+    @Test
+    void subtract() {
+        // given
+        LottoQuantity lottoQuantity1 = new LottoQuantity(10);
+        LottoQuantity lottoQuantity2 = new LottoQuantity(6);
+        LottoQuantity expected = new LottoQuantity(4);
+
+        // when
+        LottoQuantity actual = lottoQuantity1.subtract(lottoQuantity2);
+
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
 }
