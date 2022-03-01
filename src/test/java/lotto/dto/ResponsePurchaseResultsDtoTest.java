@@ -17,12 +17,12 @@ public class ResponsePurchaseResultsDtoTest {
         int manualLottoCount = 1;
         int autoLottoCount = 2;
         List<Lotto> lottos = new ArrayList<>();
-        Lotto lotto0 = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
-        Lotto lotto1 = new Lotto(List.of(new LottoNumber(7), new LottoNumber(8), new LottoNumber(9),
-                new LottoNumber(10), new LottoNumber(11), new LottoNumber(12)));
-        Lotto lotto2 = new Lotto(List.of(new LottoNumber(13), new LottoNumber(14), new LottoNumber(15),
-                new LottoNumber(16), new LottoNumber(17), new LottoNumber(18)));
+        Lotto lotto0 = new Lotto(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
+        Lotto lotto1 = new Lotto(List.of(LottoNumber.valueOf(7), LottoNumber.valueOf(8), LottoNumber.valueOf(9),
+                LottoNumber.valueOf(10), LottoNumber.valueOf(11), LottoNumber.valueOf(12)));
+        Lotto lotto2 = new Lotto(List.of(LottoNumber.valueOf(13), LottoNumber.valueOf(14), LottoNumber.valueOf(15),
+                LottoNumber.valueOf(16), LottoNumber.valueOf(17), LottoNumber.valueOf(18)));
         lottos.add(lotto0);
         lottos.add(lotto1);
         lottos.add(lotto2);

@@ -11,7 +11,7 @@ public class CustomLottoGenerator implements Generator {
     public Lotto generate() {
         List<LottoNumber> numbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            numbers.add(new LottoNumber(i));
+            numbers.add(LottoNumber.valueOf(i));
         }
         return new Lotto(numbers);
     }

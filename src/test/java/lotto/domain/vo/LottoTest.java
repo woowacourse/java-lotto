@@ -19,7 +19,7 @@ public class LottoTest {
     void setup() {
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.valueOf(i));
         }
     }
 
@@ -40,7 +40,7 @@ public class LottoTest {
     @DisplayName("6개가 아닌 숫자를 입력 시 IllegalArgumentException 예외가 발생한다")
     @Test
     void lotto_constructor_error_not_six_test() {
-        lottoNumbers.add(new LottoNumber(7));
+        lottoNumbers.add(LottoNumber.valueOf(7));
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
@@ -50,8 +50,8 @@ public class LottoTest {
     @DisplayName("로또 번호가 중복되면 IllegalArgumentException 예외가 발생한다")
     @Test
     void lotto_constructor_error_on_duplication_test() {
-        lottoNumbers.set(0, new LottoNumber(45));
-        lottoNumbers.set(1, new LottoNumber(45));
+        lottoNumbers.set(0, LottoNumber.valueOf(45));
+        lottoNumbers.set(1, LottoNumber.valueOf(45));
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
@@ -62,8 +62,8 @@ public class LottoTest {
     @Test
     void confirmWinning_test() {
         List<LottoNumber> lottoNumbers = new ArrayList<>(this.lottoNumbers);
-        lottoNumbers.set(0, new LottoNumber(45));
-        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(this.lottoNumbers), new LottoNumber(45));
+        lottoNumbers.set(0, LottoNumber.valueOf(45));
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(this.lottoNumbers), LottoNumber.valueOf(45));
         Lotto lotto = new Lotto(lottoNumbers);
         LottoPrize prize = lotto.confirmWinning(winningNumbers);
 

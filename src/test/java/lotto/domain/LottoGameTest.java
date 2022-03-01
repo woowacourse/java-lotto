@@ -28,16 +28,17 @@ public class LottoGameTest {
     @Test
     void purchase_test() {
         LottoGame lottoGame = new LottoGame();
-        List<LottoNumber> manualLottoNumber = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<LottoNumber> manualLottoNumber = List
+                .of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
         List<Lotto> manualLottos = new ArrayList<>();
         manualLottos.add(new Lotto(manualLottoNumber));
 
         ResponsePurchaseResultsDto dto =
                 lottoGame.purchase(new Money(10000), manualLottos, new CustomLottoGenerator());
 
-        Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+        Lotto lotto = new Lotto(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
 
         assertThat(dto.getLottos()).hasSize(10);
         assertThat(dto.getLottos().get(0)).isEqualTo(lotto);
@@ -49,16 +50,17 @@ public class LottoGameTest {
     @Test
     void purchase_manual_test() {
         LottoGame lottoGame = new LottoGame();
-        List<LottoNumber> manualLottoNumber = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<LottoNumber> manualLottoNumber = List
+                .of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
         List<Lotto> manualLottos = new ArrayList<>();
         manualLottos.add(new Lotto(manualLottoNumber));
 
         ResponsePurchaseResultsDto dto =
                 lottoGame.purchase(new Money(1000), manualLottos, new CustomLottoGenerator());
 
-        Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+        Lotto lotto = new Lotto(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
 
         assertThat(dto.getLottos()).hasSize(1);
         assertThat(dto.getLottos().get(0)).isEqualTo(lotto);
@@ -74,8 +76,8 @@ public class LottoGameTest {
         ResponsePurchaseResultsDto dto =
                 lottoGame.purchase(new Money(1000), emptyManualLottos, new CustomLottoGenerator());
 
-        Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+        Lotto lotto = new Lotto(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
 
         assertThat(dto.getLottos()).hasSize(1);
         assertThat(dto.getLottos().get(0)).isEqualTo(lotto);
@@ -87,10 +89,10 @@ public class LottoGameTest {
     @Test
     void confirmWinnings_test() {
         List<LottoNumber> lottoNumbers;
-        LottoNumber bonusNumber = new LottoNumber(30);
+        LottoNumber bonusNumber = LottoNumber.valueOf(30);
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.valueOf(i));
         }
         List<Lotto> emptyManualLottos = new ArrayList<>(new ArrayList<>());
 

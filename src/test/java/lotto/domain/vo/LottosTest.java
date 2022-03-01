@@ -17,7 +17,7 @@ public class LottosTest {
         List<Lotto> randomLottos = new ArrayList<>();
         List<LottoNumber> numbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            numbers.add(new LottoNumber(i));
+            numbers.add(LottoNumber.valueOf(i));
         }
         randomLottos.add(new Lotto(numbers));
         Lottos lottos = new Lottos(randomLottos);
@@ -40,12 +40,12 @@ public class LottosTest {
         List<Lotto> randomLottos = new ArrayList<>();
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.valueOf(i));
         }
         randomLottos.add(new Lotto(lottoNumbers));
         Lottos lottos = new Lottos(randomLottos);
 
-        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), new LottoNumber(30));
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), LottoNumber.valueOf(30));
         Map<LottoPrize, Integer> lottoMatches = lottos.confirmWinnings(winningNumbers);
 
         assertThat(lottoMatches.get(LottoPrize.FIRST)).isEqualTo(1);

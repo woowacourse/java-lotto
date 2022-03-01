@@ -99,7 +99,7 @@ public class InputView {
     private static List<LottoNumber> toLottoNumberList(String input) {
         return Arrays.stream(input.split(INPUT_LOTTO_NUMBER_DELIMITER))
                 .map(value -> toInt(value.trim()))
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 
@@ -107,6 +107,6 @@ public class InputView {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
         int bonusNumber = toInt(nextLine());
         System.out.println();
-        return new LottoNumber(bonusNumber);
+        return LottoNumber.valueOf(bonusNumber);
     }
 }
