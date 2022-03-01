@@ -5,8 +5,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningTicket {
-    private static final int TICKET_SIZE = 6;
-
     private final Set<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
 
@@ -39,7 +37,7 @@ public class WinningTicket {
     }
 
     private void checkSize(Set<Integer> winningNumbers) {
-        if (winningNumbers.size() != TICKET_SIZE) {
+        if (winningNumbers.size() != LottoTicket.LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException();
         }
     }

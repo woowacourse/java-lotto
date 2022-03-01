@@ -9,7 +9,6 @@ public class LottoGame {
     private static final int INIT_COUNT = 0;
     private static final int COUNT_UNIT = 1;
     private static final int WINNING_FLAG = 3;
-    private static final int TICKET_PRICE = 1000;
 
     private final LottoTickets lottoTickets;
     private final WinningTicket winningTicket;
@@ -38,7 +37,7 @@ public class LottoGame {
 
     public Double getLottoRateOfReturn() {
         double totalReturn = calculateTotalReturn();
-        double purchaseMoney = (double) lottoTickets.getSize() * TICKET_PRICE;
+        double purchaseMoney = (double) lottoTickets.getSize() * LottoTickets.TICKET_PRICE;
         return totalReturn / purchaseMoney;
     }
 
