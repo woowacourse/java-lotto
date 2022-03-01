@@ -27,12 +27,10 @@ public class OutputView {
     public static void printPurchasedLotto(List<Lotto> lottos) {
         System.out.println(lottos.size() + PURCHASE_COUNT_MESSAGE);
         for (Lotto lotto : lottos) {
-            System.out.print(LEFT_BRACKET);
-            String lottoNumbers = String.join(DELIMITER, lotto.getLottoNumbers().stream()
+            String lottoNumbers = lotto.getLottoNumbers().stream()
                     .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
-                    .collect(Collectors.toList()));
-            System.out.print(lottoNumbers);
-            System.out.println(RIGHT_BRACKET);
+                    .collect(Collectors.joining(DELIMITER, LEFT_BRACKET, RIGHT_BRACKET));
+            System.out.println(lottoNumbers);
         }
         System.out.print(System.lineSeparator());
     }

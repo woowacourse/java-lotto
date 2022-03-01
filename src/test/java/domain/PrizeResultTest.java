@@ -14,7 +14,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class PrizeResultTest {
 
     private PrizeResult prizeResult;
-    private final int inputMoney = 3000;
 
     @BeforeEach
     void init() {
@@ -46,6 +45,7 @@ class PrizeResultTest {
     @Test
     @DisplayName("올바른 수익률이 계산된다.")
     void lottos_calculateEarningRate() {
+        final int inputMoney = 3000;
         float earningRate = prizeResult.earningRate(inputMoney);
 
         assertThat(earningRate).isEqualTo(10516.66f);

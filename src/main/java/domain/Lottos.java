@@ -9,9 +9,7 @@ public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            this.lottos.add(lotto);
-        }
+        this.lottos.addAll(lottos);
     }
 
     public PrizeResult prizeResult(WinningNumbers winningNumber) {
