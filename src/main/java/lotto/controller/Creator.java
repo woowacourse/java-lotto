@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Ball;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Payment;
@@ -30,11 +31,7 @@ public class Creator {
     }
 
     public static Lottos createLottos(final int lottoCount) {
-        List<Lotto> lottos = new ArrayList<>(lottoCount);
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(Lotto.selectRandomBalls()));
-        }
-        return new Lottos(lottos);
+        return LottoGenerator.pickAutoLottos(lottoCount);
     }
 
     public static Lotto createWinningNumbers() {

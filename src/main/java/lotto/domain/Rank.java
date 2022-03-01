@@ -19,7 +19,7 @@ public enum Rank {
     private final int count;
     private final boolean bonus;
 
-    Rank (final int money, final int count, final boolean bonus) {
+    Rank(final int money, final int count, final boolean bonus) {
         this.money = money;
         this.count = count;
         this.bonus = bonus;
@@ -31,7 +31,7 @@ public enum Rank {
                 .findFirst()
                 .orElse(NOTHING);
     }
-    
+
     public int getMoney() {
         return this.money;
     }
@@ -39,7 +39,7 @@ public enum Rank {
     public int getCount() {
         return this.count;
     }
-    
+
     public boolean isBonus() {
         return this.bonus;
     }
