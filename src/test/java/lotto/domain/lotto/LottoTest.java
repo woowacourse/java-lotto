@@ -5,15 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import lotto.domain.LottoRanking;
 
 public class LottoTest {
 
@@ -58,7 +54,7 @@ public class LottoTest {
             @Test
             @DisplayName("1~45의 숫자 중 중복되지 않은 6개를 가진다.")
             void it_contains_six_number_1_to_45() {
-                Lotto lotto = Lotto.auto();
+                Lotto lotto = LottoFactory.auto();
                 int actual = 0;
                 for (int i = 1; i < 46; i++) {
                     if (lotto.contains(new Number(String.valueOf(i)))) {
@@ -80,7 +76,7 @@ public class LottoTest {
             @ValueSource(strings = {"1, 2, 3, 4, 5, 6"})
             @DisplayName("구분된 숫자 6개로 객체를 반환한다.")
             void it_returns_lotto(String input) {
-                assertDoesNotThrow(() -> Lotto.of(input));
+                assertDoesNotThrow(() -> LottoFactory.valueOf(input));
             }
         }
     }

@@ -12,7 +12,7 @@ public class Lottos {
     public Lottos(Money money) {
         int amount = money.getValue();
         while (amount >= Lotto.PRICE) {
-            lottos.add(Lotto.auto());
+            lottos.add(LottoFactory.auto());
             amount -= Lotto.PRICE;
         }
     }
