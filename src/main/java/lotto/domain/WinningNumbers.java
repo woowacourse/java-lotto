@@ -25,7 +25,7 @@ public class WinningNumbers {
         int count = getCount(lotto);
         boolean containsBonus = false;
 
-        if (count == Rank.Third.getCount()) {
+        if (Rank.needCheckBonus(count)) {
             containsBonus = lotto.contains(bonusNumber);
         }
 

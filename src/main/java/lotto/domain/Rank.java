@@ -28,6 +28,10 @@ public enum Rank {
                 .findAny();
     }
 
+    public static boolean needCheckBonus(int count) {
+        return count == Third.count;
+    }
+
     public int getPrice() {
         return price;
     }
