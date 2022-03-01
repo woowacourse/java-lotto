@@ -9,12 +9,12 @@ import constant.LottoConstant;
 
 public class Lotto {
 
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
-        this.lottoNumbers.addAll(lottoNumbers);
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
