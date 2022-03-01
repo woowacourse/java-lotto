@@ -28,7 +28,7 @@ public class Lotto {
     }
 
     public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+        return new ArrayList<>(lottoNumbers);
     }
 
     public List<Integer> getWinningAndBonusCount(WinningNumbers winningNumbers) {
