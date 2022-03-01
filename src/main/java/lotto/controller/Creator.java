@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.controller;
 
 import lotto.domain.Ball;
 import lotto.domain.Lotto;
@@ -7,6 +7,8 @@ import lotto.domain.Lottos;
 import lotto.domain.Payment;
 import lotto.domain.Profit;
 import lotto.domain.WinningLotto;
+import lotto.view.Entering;
+import lotto.view.KeyEnter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,7 +7,7 @@ import lotto.domain.Profit;
 import lotto.domain.Payment;
 import lotto.domain.WinningLotto;
 
-import static lotto.view.Creator.*;
+import static lotto.controller.Creator.*;
 import static lotto.view.Output.*;
 
 public class LottoController {
