@@ -9,10 +9,9 @@ public class CustomLottoGenerator implements Generator {
 
     @Override
     public Lotto generate() {
-        List<LottoNumber> numbers = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            numbers.add(LottoNumber.valueOf(i));
-        }
+        List<LottoNumber> numbers = new ArrayList<>(List.of(
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
         return new Lotto(numbers);
     }
 }

@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 public class LottoGameTest {
 
-    @DisplayName("로또를 구매하고 당첨 확인을 하는 LottoGame 객체를 생성한다")
+    @DisplayName("로또를 구매하고 당첨 확인을 하는 객체를 생성한다")
     @Test
     void lottoGame_constructor_test() {
         assertThatNoException().isThrownBy(LottoGame::new);
@@ -28,9 +28,9 @@ public class LottoGameTest {
     @Test
     void purchase_test() {
         LottoGame lottoGame = new LottoGame();
-        List<LottoNumber> manualLottoNumber = List
-                .of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
+        List<LottoNumber> manualLottoNumber = List.of(
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
         List<Lotto> manualLottos = new ArrayList<>();
         manualLottos.add(new Lotto(manualLottoNumber));
 
@@ -50,9 +50,9 @@ public class LottoGameTest {
     @Test
     void purchase_manual_test() {
         LottoGame lottoGame = new LottoGame();
-        List<LottoNumber> manualLottoNumber = List
-                .of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
+        List<LottoNumber> manualLottoNumber = List.of(
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
         List<Lotto> manualLottos = new ArrayList<>();
         manualLottos.add(new Lotto(manualLottoNumber));
 
@@ -76,7 +76,8 @@ public class LottoGameTest {
         ResponsePurchaseResultsDto dto =
                 lottoGame.purchase(new Money(1000), emptyManualLottos, new CustomLottoGenerator());
 
-        Lotto lotto = new Lotto(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+        Lotto lotto = new Lotto(List.of(
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
 
         assertThat(dto.getLottos()).hasSize(1);
@@ -88,12 +89,10 @@ public class LottoGameTest {
     @DisplayName("당첨 결과를 계산하여 결과를 반환한다")
     @Test
     void confirmWinnings_test() {
-        List<LottoNumber> lottoNumbers;
+        List<LottoNumber> lottoNumbers = List.of(
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
         LottoNumber bonusNumber = LottoNumber.valueOf(30);
-        lottoNumbers = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(LottoNumber.valueOf(i));
-        }
         List<Lotto> emptyManualLottos = new ArrayList<>(new ArrayList<>());
 
         LottoGame lottoGame = new LottoGame();

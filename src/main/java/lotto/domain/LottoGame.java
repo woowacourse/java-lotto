@@ -17,30 +17,32 @@ public class LottoGame {
 
     private Lottos lottos = new Lottos(new ArrayList<>());
 
-    public ResponsePurchaseResultsDto purchase(Money money,
-                                               List<Lotto> manualLottos,
-                                               Generator lottoGenerator) {
-        int countOfPurchase = money.canBuyNumber(LOTTO_PRICE);
+    public ResponsePurchaseResultsDto purchase(Money money, List<Lotto> manualLottos, Generator lottoGenerator) {
+        int countOfPurchase = money.divide(LOTTO_PRICE);
         int countOfManualPurchase = Math.min(countOfPurchase, manualLottos.size());
         int countOfAuthPurchase = countOfPurchase - countOfManualPurchase;
         List<Lotto> lottos = new ArrayList<>();
-        purchaseManual(manualLottos, countOfManualPurchase, lottos);
-        purchaseAuto(lottoGenerator, countOfAuthPurchase, lottos);
+        lottos.addAll(purchaseManual(manualLottos, countOfManualPurchase));
+        lottos.addAll(purchaseAuto(lottoGenerator, countOfAuthPurchase));
         this.lottos = new Lottos(lottos);
         return new ResponsePurchaseResultsDto(
-                Collections.unmodifiableList(this.lottos.getLottos()), countOfManualPurchase, countOfAuthPurchase);
+                Collections.unmodifiableList(this.lottos.get()), countOfManualPurchase, countOfAuthPurchase);
     }
 
-    private void purchaseManual(List<Lotto> manualLottos, int countOfManualPurchase, List<Lotto> lottos) {
+    private List<Lotto> purchaseManual(List<Lotto> manualLottos, int countOfManualPurchase) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < countOfManualPurchase; i++) {
             lottos.add(manualLottos.get(i));
         }
+        return lottos;
     }
 
-    private void purchaseAuto(Generator lottoGenerator, int countOfAuthPurchase, List<Lotto> lottos) {
+    private List<Lotto> purchaseAuto(Generator lottoGenerator, int countOfAuthPurchase) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < countOfAuthPurchase; i++) {
             lottos.add(lottoGenerator.generate());
         }
+        return lottos;
     }
 
     public ResponseWinningResultsDto confirmWinnings(WinningNumbers winningNumbers) {
@@ -48,6 +50,6 @@ public class LottoGame {
     }
 
     public boolean canBuyLotto(Money money) {
-        return money.canBuyNumber(LOTTO_PRICE) > 0;
+        return money.divide(LOTTO_PRICE) > 0;
     }
 }

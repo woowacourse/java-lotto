@@ -19,8 +19,8 @@ public class Money {
         }
     }
 
-    public int canBuyNumber(Money amount) {
-        return money / amount.money;
+    public int divide(Money money) {
+        return this.money / money.money;
     }
 
     public int get() {

@@ -32,7 +32,7 @@ public class ManualPurchaseCountTest {
         assertThat(manualPurchaseCount.canBuy()).isFalse();
     }
 
-    @DisplayName("음수를 입력했을 때 IllegalArgumentException 예외가 발생한다")
+    @DisplayName("음수를 입력했을 때 예외가 발생한다")
     @Test
     void manualPurchaseCount_constructor_error_on_negative_test() {
         assertThatExceptionOfType(IllegalArgumentException.class)
