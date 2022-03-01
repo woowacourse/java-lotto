@@ -28,8 +28,4 @@ public class Money {
     public int makePurchaseCount() {
         return money / LOTTO_PRICE;
     }
-
-    public int getMoney() {
-        return money;
-    }
 }
