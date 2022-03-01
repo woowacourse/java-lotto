@@ -22,7 +22,7 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public int size() {
+    public int getSize() {
         return lottoTickets.size();
     }
 }

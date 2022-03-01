@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,6 +41,6 @@ class LottoGameTest {
                         bonusNumber,
                         new DefaultLottoWinningPrizeStrategy()
                 );
-        assertThat(lottoGame.winningResults().get(WinningPrize.FIRST)).isEqualTo(14);
+        assertThat(lottoGame.getWinningResults().get(WinningPrize.FIRST)).isEqualTo(14);
     }
 }

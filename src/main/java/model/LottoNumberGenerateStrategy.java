@@ -14,14 +14,14 @@ public class LottoNumberGenerateStrategy implements GenerateStrategy {
 
     @Override
     public Set<Integer> generateNumbers() {
-        List<Integer> numbers = generateRangerNumbers();
+        List<Integer> numbers = generateRangeNumbers();
         Collections.shuffle(numbers);
         return numbers.stream()
                 .limit(LOTTO_TICKET_SIZE)
                 .collect(Collectors.toSet());
     }
 
-    private List<Integer> generateRangerNumbers() {
+    private List<Integer> generateRangeNumbers() {
         return IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());

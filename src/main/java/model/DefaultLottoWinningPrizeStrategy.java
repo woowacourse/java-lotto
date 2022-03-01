@@ -22,7 +22,7 @@ public class DefaultLottoWinningPrizeStrategy implements WinningPrizeStrategy {
     }};
 
     @Override
-    public WinningPrize winningPrize(int matchCount, boolean matchBonus) {
+    public WinningPrize findWinningPrize(int matchCount, boolean matchBonus) {
         if (matchCount == SECOND_PRIZE_MATCH_COUNT && matchBonus) {
             return WinningPrize.SECOND;
         }
@@ -30,12 +30,12 @@ public class DefaultLottoWinningPrizeStrategy implements WinningPrizeStrategy {
     }
 
     @Override
-    public int matchCount(WinningPrize winningPrize) {
+    public int findMatchCount(WinningPrize winningPrize) {
         return WINNING_PRIZE_MATCH_COUNT_INFO.get(winningPrize);
     }
 
     @Override
-    public boolean matchBonus(WinningPrize winningPrize) {
+    public boolean findMatchBonus(WinningPrize winningPrize) {
         return winningPrize.equals(WinningPrize.SECOND);
     }
 }

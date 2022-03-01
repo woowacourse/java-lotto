@@ -28,26 +28,26 @@ public class LottoGame {
         return lottoTickets.getTickets();
     }
 
-    public Map<WinningPrize, Integer> winningResults() {
+    public Map<WinningPrize, Integer> getWinningResults() {
         Map<WinningPrize, Integer> result = initWinningCount();
         lottoTickets.getTickets().stream()
                 .filter(this::isWinning)
-                .forEach(lottoTicket -> countingWinningTicket(result, lottoTicket));
+                .forEach(lottoTicket -> countWinningTicket(result, lottoTicket));
         return result;
     }
 
     public Double getLottoRateOfReturn() {
         double totalReturn = calculateTotalReturn();
-        double purchaseMoney = (double) lottoTickets.size() * TICKET_PRICE;
+        double purchaseMoney = (double) lottoTickets.getSize() * TICKET_PRICE;
         return totalReturn / purchaseMoney;
     }
 
-    public int matchCount(WinningPrize winningPrize) {
-        return winningPrizeStrategy.matchCount(winningPrize);
+    public int findMatchCount(WinningPrize winningPrize) {
+        return winningPrizeStrategy.findMatchCount(winningPrize);
     }
 
-    public boolean matchBonus(WinningPrize winningPrize) {
-        return winningPrizeStrategy.matchBonus(winningPrize);
+    public boolean findMatchBonus(WinningPrize winningPrize) {
+        return winningPrizeStrategy.findMatchBonus(winningPrize);
     }
 
     private LinkedHashMap<WinningPrize, Integer> initWinningCount() {
@@ -60,10 +60,10 @@ public class LottoGame {
         }};
     }
 
-    private void countingWinningTicket(Map<WinningPrize, Integer> result, LottoTicket lottoTicket) {
+    private void countWinningTicket(Map<WinningPrize, Integer> result, LottoTicket lottoTicket) {
         int matchCount = winningTicket.compareMatchCount(lottoTicket);
-        boolean matchBonus = winningTicket.matchBonusNumber(lottoTicket);
-        WinningPrize winningPrize = winningPrizeStrategy.winningPrize(matchCount, matchBonus);
+        boolean matchBonus = winningTicket.isMatchBonusNumber(lottoTicket);
+        WinningPrize winningPrize = winningPrizeStrategy.findWinningPrize(matchCount, matchBonus);
         Integer winningPrizeCount = result.get(winningPrize) + COUNT_UNIT;
         result.put(winningPrize, winningPrizeCount);
     }
@@ -74,7 +74,7 @@ public class LottoGame {
     }
 
     private int calculateTotalReturn() {
-        Map<WinningPrize, Integer> winningPrizeResult = winningResults();
+        Map<WinningPrize, Integer> winningPrizeResult = getWinningResults();
         return winningPrizeResult.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();

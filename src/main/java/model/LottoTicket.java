@@ -15,9 +15,9 @@ public class LottoTicket {
         }
     }
 
-    public Set<Integer> lottoNumberValues() {
+    public Set<Integer> getLottoNumberValues() {
         return lottoNumbers.stream()
-                .map(LottoNumber::value)
+                .map(LottoNumber::getValue)
                 .collect(Collectors.toSet());
     }
 }

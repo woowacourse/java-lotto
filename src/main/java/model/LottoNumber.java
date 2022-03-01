@@ -10,7 +10,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public int value() {
+    public int getValue() {
         return number;
     }
 }

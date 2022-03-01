@@ -20,16 +20,12 @@ public class WinningTicket {
 
     public List<Integer> winningNumberValues() {
         return winningNumbers.stream()
-                .map(LottoNumber::value)
+                .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
     }
 
-    public Integer bonusNumberValue() {
-        return bonusNumber.value();
-    }
-
     public int compareMatchCount(LottoTicket lottoTicket) {
-        Set<Integer> lottoNumbers = lottoTicket.lottoNumberValues();
+        Set<Integer> lottoNumbers = lottoTicket.getLottoNumberValues();
         List<Integer> winningNumbers = this.winningNumberValues();
 
         return (int) lottoNumbers.stream()
@@ -37,9 +33,9 @@ public class WinningTicket {
                 .count();
     }
 
-    public boolean matchBonusNumber(LottoTicket lottoTicket) {
-        Set<Integer> lottoNumbers = lottoTicket.lottoNumberValues();
-        return lottoNumbers.contains(bonusNumberValue());
+    public boolean isMatchBonusNumber(LottoTicket lottoTicket) {
+        Set<Integer> lottoNumbers = lottoTicket.getLottoNumberValues();
+        return lottoNumbers.contains(bonusNumber.getValue());
     }
 
     private void checkSize(Set<Integer> winningNumbers) {

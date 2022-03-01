@@ -1,9 +1,9 @@
 package model;
 
 public interface WinningPrizeStrategy {
-    WinningPrize winningPrize(int matchCount, boolean matchBonus);
+    WinningPrize findWinningPrize(int matchCount, boolean matchBonus);
 
-    int matchCount(WinningPrize winningPrize);
+    int findMatchCount(WinningPrize winningPrize);
 
-    boolean matchBonus(WinningPrize winningPrize);
+    boolean findMatchBonus(WinningPrize winningPrize);
 }

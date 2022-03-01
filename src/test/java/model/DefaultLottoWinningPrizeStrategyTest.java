@@ -23,7 +23,7 @@ class DefaultLottoWinningPrizeStrategyTest {
     @Test
     @DisplayName("기본 로또 당첨보상 전략이 2등을 잘 판단하는지 확인한다.")
     void checkWinningSecond() {
-        WinningPrize winningPrize = defaultLottoWinningPrizeStrategy.winningPrize(5, true);
+        WinningPrize winningPrize = defaultLottoWinningPrizeStrategy.findWinningPrize(5, true);
         assertThat(winningPrize).isEqualTo(WinningPrize.SECOND);
     }
 
@@ -31,7 +31,7 @@ class DefaultLottoWinningPrizeStrategyTest {
     @ValueSource(ints = {6, 5, 4, 3})
     @DisplayName("기본 로또 당첨보상 전략이 2등을 제외한 당첨보상을 잘 판단하는지 확인한다.")
     void checkWinning(int matchCount) {
-        WinningPrize winningPrize = defaultLottoWinningPrizeStrategy.winningPrize(matchCount, false);
+        WinningPrize winningPrize = defaultLottoWinningPrizeStrategy.findWinningPrize(matchCount, false);
         assertThat(winningPrize).isEqualTo(MATCH_COUNT_WINNING_PRIZE_INFO.get(matchCount));
     }
 
@@ -47,13 +47,13 @@ class DefaultLottoWinningPrizeStrategyTest {
             put(WinningPrize.FIFTH, 3);
         }};
 
-        assertThat(defaultLottoWinningPrizeStrategy.matchCount(winningPrize))
+        assertThat(defaultLottoWinningPrizeStrategy.findMatchCount(winningPrize))
                 .isEqualTo(matchCounts.get(winningPrize));
     }
 
     @Test
     @DisplayName("기본 로또 당첨보상 전략이 2등 보상이 입력되었을 때 matchBonus가 true를 반환하는지 확인한다.")
     void checkMatchBonus() {
-        assertThat(defaultLottoWinningPrizeStrategy.matchBonus(WinningPrize.SECOND)).isTrue();
+        assertThat(defaultLottoWinningPrizeStrategy.findMatchBonus(WinningPrize.SECOND)).isTrue();
     }
 }
