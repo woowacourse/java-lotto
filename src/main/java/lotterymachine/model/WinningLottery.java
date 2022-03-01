@@ -22,6 +22,14 @@ public enum WinningLottery {
         this.price = price;
     }
 
+    public static Map<WinningLottery, Count> getWinningLotteries() {
+        Map<WinningLottery, Count> winningLotteries = new EnumMap<>(WinningLottery.class);
+        for (WinningLottery winningLottery: values()) {
+            winningLotteries.put(winningLottery, Count.from(INITIAL_NUMBER_OF_MATCHING_TICKET));
+        }
+        return winningLotteries;
+    }
+
     public static WinningLottery find(boolean bonus, int number) {
         if (number == BONUS_FIVE.number && bonus) {
             return BONUS_FIVE;
@@ -30,6 +38,10 @@ public enum WinningLottery {
                 .filter(value -> value.matchNumber(number))
                 .findFirst()
                 .orElse(INVALID);
+    }
+
+    public boolean isBonus() {
+        return this.equals(BONUS_FIVE);
     }
 
     private boolean matchNumber(int number) {
@@ -42,17 +54,5 @@ public enum WinningLottery {
 
     public int getPrice() {
         return price;
-    }
-
-    public static Map<WinningLottery, Count> getWinningLotteries() {
-        Map<WinningLottery, Count> winningLotteries = new EnumMap<>(WinningLottery.class);
-        for (WinningLottery winningLottery: values()) {
-            winningLotteries.put(winningLottery, Count.from(INITIAL_NUMBER_OF_MATCHING_TICKET));
-        }
-        return winningLotteries;
-    }
-
-    public boolean isBonus() {
-        return this.equals(BONUS_FIVE);
     }
 }
