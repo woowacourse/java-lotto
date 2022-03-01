@@ -1,6 +1,5 @@
 package dto;
 
-import domain.LottoQuantity;
 import domain.Rank;
 import domain.WinningCount;
 import domain.WinningResult;
@@ -15,7 +14,7 @@ public class WinningResultDto {
         this.profitRatio = profitRatio;
     }
 
-    public static WinningResultDto of(WinningResult winningResult, LottoQuantity lottoQuantity) {
+    public static WinningResultDto from(WinningResult winningResult) {
         return new WinningResultDto(
                 winningResult.getWinningResult(),
                 winningResult.calculateProfitRatio()

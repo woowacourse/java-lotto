@@ -108,7 +108,7 @@ public class LottoController {
     }
 
     private void printWinningResult(WinningResult winningResult, LottoQuantity lottoQuantity) {
-        WinningResultDto winningResultDto = WinningResultDto.of(winningResult, lottoQuantity);
+        WinningResultDto winningResultDto = WinningResultDto.from(winningResult);
         ResultView.printResult(winningResultDto);
     }
 }
