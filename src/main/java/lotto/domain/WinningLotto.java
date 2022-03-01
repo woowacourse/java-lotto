@@ -24,7 +24,7 @@ public class WinningLotto {
         return winningLotto.contains(number);
     }
 
-    public boolean containsBonusNumber(Lotto lotto) {
-        return lotto.contains(bonusNumber);
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 }

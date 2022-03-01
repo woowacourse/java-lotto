@@ -43,7 +43,7 @@ public class Lotto {
                 .filter(winningLotto::containsLottoNumber)
                 .count();
 
-        return LottoPrize.match(lottoNumberMatches, winningLotto.containsBonusNumber(this));
+        return LottoPrize.match(lottoNumberMatches, numbers.contains(winningLotto.getBonusNumber()));
     }
 
     public boolean contains(LottoNumber target) {
