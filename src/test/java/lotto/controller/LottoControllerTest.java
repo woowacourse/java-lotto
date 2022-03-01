@@ -26,7 +26,7 @@ public class LottoControllerTest {
         Lottos lottos = makeLottos();
         ResultView.printBuyingLottosResult(lottos);
         WinningLotto winningLotto = makeWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7);
-        LottoCalculator lottoCalculator = new LottoCalculator(lottos, winningLotto);
+        LottoCalculator lottoCalculator = new LottoCalculator(money, lottos, winningLotto);
         lottoCalculator.calculateResult();
         ResultView.printTotalRankResult(lottoCalculator);
     }

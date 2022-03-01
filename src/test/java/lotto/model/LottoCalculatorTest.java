@@ -15,9 +15,10 @@ public class LottoCalculatorTest {
 
     @BeforeEach
     void init() {
+        Money money = new Money(3000);
         Lottos lottos = makeLottos();
         WinningLotto winningLotto = makeWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7);
-        lottoCalculator = new LottoCalculator(lottos, winningLotto);
+        lottoCalculator = new LottoCalculator(money, lottos, winningLotto);
         lottoCalculator.calculateResult();
     }
 

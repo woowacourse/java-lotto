@@ -29,7 +29,7 @@ public class LottoController {
         ResultView.printBuyingLottosResult(lottos);
         WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
                 InputView.inputBonusNumber());
-        LottoCalculator lottoCalculator = new LottoCalculator(lottos, winningLotto);
+        LottoCalculator lottoCalculator = new LottoCalculator(money, lottos, winningLotto);
         lottoCalculator.calculateResult();
         ResultView.printTotalRankResult(lottoCalculator);
     }

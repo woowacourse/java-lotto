@@ -4,12 +4,14 @@ import java.util.Map;
 
 public class LottoCalculator {
 
+    private final Money money;
     private final Lottos lottos;
     private final WinningLotto winningLotto;
 
     private Map<Rank, Integer> rankCount;
 
-    public LottoCalculator(final Lottos lottos, WinningLotto winningLotto) {
+    public LottoCalculator(final Money money, final Lottos lottos, final WinningLotto winningLotto) {
+        this.money = money;
         this.lottos = lottos;
         this.winningLotto = winningLotto;
     }
@@ -23,7 +25,7 @@ public class LottoCalculator {
         for (Rank rank : Rank.values()) {
             sum += rank.getPrice() * getEachRankCount(rank);
         }
-        return ((double) sum / (lottos.size() * Money.PRICE_PER_LOTTO));
+        return ((double) sum / money.money());
     }
 
     public Integer getEachRankCount(final Rank rank) {

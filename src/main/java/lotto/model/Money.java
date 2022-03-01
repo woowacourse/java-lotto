@@ -19,6 +19,10 @@ public class Money {
         }
     }
 
+    public int money() {
+        return money;
+    }
+
     public int count() {
         return money / PRICE_PER_LOTTO;
     }
