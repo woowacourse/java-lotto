@@ -2,6 +2,7 @@ package lotto.domain.ticket;
 
 import java.util.List;
 
+import lotto.domain.ball.Ball;
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.validation.WinningTicketValidator;
 

@@ -10,8 +10,8 @@ import static lotto.view.output.OutputMessage.TITLE_OF_ANALYSIS;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.domain.ball.Ball;
 import lotto.domain.ticket.Analysis;
-import lotto.domain.ticket.Ball;
 import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.WinningTicket;

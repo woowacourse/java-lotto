@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import lotto.domain.ball.Ball;
+import lotto.domain.ball.Balls;
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.validation.TicketValidator;
 

@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
 
 import lotto.domain.rank.Rank;
-import lotto.domain.ticket.Ball;
+import lotto.domain.ball.Ball;
 import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.WinningTicket;
 import lotto.dto.TicketDto;

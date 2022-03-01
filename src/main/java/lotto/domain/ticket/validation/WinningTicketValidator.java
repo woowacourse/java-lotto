@@ -1,6 +1,6 @@
 package lotto.domain.ticket.validation;
 
-import lotto.domain.ticket.Ball;
+import lotto.domain.ball.Ball;
 import lotto.domain.ticket.Ticket;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;

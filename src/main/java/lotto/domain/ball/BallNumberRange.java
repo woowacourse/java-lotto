@@ -1,4 +1,4 @@
-package lotto.domain.ticket.condition;
+package lotto.domain.ball;
 
 import java.util.stream.IntStream;
 

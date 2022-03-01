@@ -1,6 +1,5 @@
-package lotto.domain.ticket.validation;
+package lotto.domain.ball;
 
-import lotto.domain.ticket.condition.BallNumberRange;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
 
