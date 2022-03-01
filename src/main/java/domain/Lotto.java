@@ -5,12 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import constant.LottoConstant;
+
 public class Lotto {
 
     private static final String ERROR_MESSAGE_NOT_IN_SIZE = "로또 숫자 갯수는 6개이여야 합니다.";
     private static final String ERROR_MESSAGE_NOT_DUPLICATE = "로또 숫자는 중복일 수 없습니다.";
-
-    private static final int LOTTO_NUMBER_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
@@ -21,7 +21,7 @@ public class Lotto {
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+        if (lottoNumbers.size() != LottoConstant.LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NOT_IN_SIZE);
         }
     }
@@ -30,7 +30,7 @@ public class Lotto {
         List<LottoNumber> deDuplicatedNumbers = lottoNumbers.stream()
             .distinct()
             .collect(Collectors.toList());
-        if (deDuplicatedNumbers.size() != LOTTO_NUMBER_SIZE) {
+        if (deDuplicatedNumbers.size() != LottoConstant.LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NOT_DUPLICATE);
         }
     }

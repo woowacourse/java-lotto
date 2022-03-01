@@ -6,16 +6,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomLottoNumberGenerator implements LottoNumberGenerator {
+import constant.LottoConstant;
 
-    private static final int MINIMUM_VALUE = 1;
-    private static final int MAXIMUM_VALUE = 45;
-    private static final int LOTTO_NUMBER_SIZE = 6;
+public class RandomLottoNumberGenerator implements LottoNumberGenerator {
 
     private static final List<LottoNumber> lottoNumbers;
 
     static {
-        lottoNumbers = IntStream.rangeClosed(MINIMUM_VALUE, MAXIMUM_VALUE)
+        lottoNumbers = IntStream.rangeClosed(LottoConstant.MINIMUM_LOTTO_NUMBER, LottoConstant.MAXIMUM_LOTTO_NUMBER)
             .boxed()
             .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
@@ -26,7 +24,7 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
         Collections.shuffle(lottoNumbers);
 
         final List<LottoNumber> pickedNumbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_NUMBER_SIZE; i++) {
+        for (int i = 0; i < LottoConstant.LOTTO_NUMBER_SIZE; i++) {
             pickedNumbers.add(lottoNumbers.get(i));
         }
         Collections.sort(pickedNumbers);

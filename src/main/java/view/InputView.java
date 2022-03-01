@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import constant.LottoConstant;
+
 public class InputView {
 
     private static final String REQUEST_MESSAGE_INPUT_PURCHASE_MONEY = "구입금액을 입력해 주세요.";
@@ -14,7 +16,6 @@ public class InputView {
     private static final String REQUEST_MESSAGE_INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String REGEX_OF_LOTTO_NUMBER = ", ";
     private static final int REGEX_LIMIT = -1;
-    private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final int MINIMUM_VALUE = 0;
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -76,7 +77,7 @@ public class InputView {
     }
 
     private static void validateCount(List<String> values) {
-        if (values.size() != LOTTO_NUMBERS_SIZE) {
+        if (values.size() != LottoConstant.LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException();
         }
     }
