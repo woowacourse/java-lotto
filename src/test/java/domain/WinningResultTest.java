@@ -75,6 +75,48 @@ class WinningResultTest {
 	}
 
 	@Test
+	@DisplayName("보너스 볼이 포함되지 않을 때, 4등 당첨 결과 확인")
+	void checkFourthWinningResult() {
+		// given
+		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 17, 35)
+			.map(LottoNumber::new)
+			.collect(Collectors.toList()));
+		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 34)
+			.map(LottoNumber::new)
+			.collect(Collectors.toList()));
+		LottoNumber bonusLottoNumber = new LottoNumber(39);
+		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
+		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
+
+		// when
+		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
+
+		// then
+		assertThat(winningResult.getWinningResult().get(LottoRank.FOURTH)).isEqualTo(1);
+	}
+
+	@Test
+	@DisplayName("보너스 볼이 포함될 때, 4등 당첨 결과 확인")
+	void checkFourthWinningResultWithoutBonus() {
+		// given
+		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 17, 35)
+			.map(LottoNumber::new)
+			.collect(Collectors.toList()));
+		Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 34)
+			.map(LottoNumber::new)
+			.collect(Collectors.toList()));
+		LottoNumber bonusLottoNumber = new LottoNumber(35);
+		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
+		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
+
+		// when
+		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
+
+		// then
+		assertThat(winningResult.getWinningResult().get(LottoRank.FOURTH)).isEqualTo(1);
+	}
+
+	@Test
 	@DisplayName("1000원으로 5등 당첨 시, 수익률 확인")
 	void checkRateOfProfit() {
 		Lotto myLotto = new Lotto(Stream.of(1, 5, 9, 11, 16, 35)

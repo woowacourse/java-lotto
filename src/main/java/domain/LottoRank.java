@@ -25,11 +25,17 @@ public enum LottoRank {
 
 	public static LottoRank findRank(final int count, final boolean bonusNumber) {
 		for (LottoRank rank : values()) {
-			if (rank.getMatchCount() == count && rank.isHasBonusNumber() == bonusNumber) {
+			if (rank.getMatchCount() == count && canSecond(bonusNumber, rank)) {
 				return rank;
 			}
 		}
 		return FAIL;
+	}
+
+	private static boolean canSecond(boolean bonusNumber, LottoRank rank) {
+		if (rank == SECOND || rank == THIRD)
+			return rank.isHasBonusNumber() == bonusNumber;
+		return true;
 	}
 
 	public static EnumMap<LottoRank, Integer> createWinningResultMap() {
