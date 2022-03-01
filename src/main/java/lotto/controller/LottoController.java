@@ -50,5 +50,6 @@ public class LottoController {
         purchaseAmountRepository.remove();
         lottoTicketsRepository.remove();
         winningStatsRepository.remove();
+        inputView.closeResource();
     }
 }

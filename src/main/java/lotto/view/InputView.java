@@ -42,4 +42,12 @@ public enum InputView {
         out.println(INPUT_BONUS_BALL_MESSAGE);
         return reader.readLine();
     }
+
+    public void closeResource() {
+        try {
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -45,7 +45,6 @@ public class WinningStats {
     public long getTotalPrize() {
         return lottoRankMap.entrySet().stream()
                 .mapToLong(this::subTotal)
-                .peek(System.out::println)
                 .sum();
     }
 
