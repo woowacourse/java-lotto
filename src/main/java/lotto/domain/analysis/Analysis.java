@@ -1,4 +1,4 @@
-package lotto.domain.ticket;
+package lotto.domain.analysis;
 
 import java.util.Collections;
 import java.util.EnumMap;
@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.domain.winning.Rank;
+import lotto.utils.MoneyUnit;
 
 public class Analysis {
 
@@ -30,7 +31,7 @@ public class Analysis {
         long total = ranks.stream()
                 .mapToLong(Rank::getPrizeMoney)
                 .sum();
-        return (double) total / ticketCount;
+        return (double) total / MoneyUnit.multiple(ticketCount);
     }
 
     public Map<Rank, Integer> getRankCounts() {

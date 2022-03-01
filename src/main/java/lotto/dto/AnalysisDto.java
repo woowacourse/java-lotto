@@ -2,6 +2,7 @@ package lotto.dto;
 
 import java.util.Map;
 
+import lotto.domain.analysis.Analysis;
 import lotto.domain.winning.Rank;
 
 public class AnalysisDto {
@@ -14,7 +15,7 @@ public class AnalysisDto {
         this.profitRate = profitRate;
     }
 
-    public static AnalysisDto toDto(lotto.domain.ticket.Analysis analysis) {
+    public static AnalysisDto toDto(Analysis analysis) {
         final Map<Rank, Integer> rankCounts = analysis.getRankCounts();
         final double profitRate = analysis.getProfitRate();
         return new AnalysisDto(rankCounts, profitRate);

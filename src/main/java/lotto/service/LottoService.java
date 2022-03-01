@@ -2,10 +2,10 @@ package lotto.service;
 
 import java.util.List;
 
+import lotto.domain.analysis.Analysis;
 import lotto.domain.ball.Ball;
 import lotto.domain.ball.BallStorage;
 import lotto.domain.money.Money;
-import lotto.domain.ticket.Analysis;
 import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.TicketGenerator;

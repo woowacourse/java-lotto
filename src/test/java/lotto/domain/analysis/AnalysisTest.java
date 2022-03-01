@@ -1,4 +1,4 @@
-package lotto.domain.ticket;
+package lotto.domain.analysis;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,14 +45,14 @@ class AnalysisTest {
                                 List.of(
                                         Rank.FIFTH_GRADE
                                 )
-                        ), 50000,
+                        ), 5000,
                         Map.of(
                                 Rank.FIRST_GRADE, 0,
                                 Rank.SECOND_GRADE, 0,
                                 Rank.THIRD_GRADE, 0,
                                 Rank.FOURTH_GRADE, 0,
                                 Rank.FIFTH_GRADE, 1
-                        ), 0.1
+                        ), 0.001
                 ),
                 Arguments.of(
                         Named.of("2등 1개, 4등 2개, 5등 2개",
@@ -70,7 +70,7 @@ class AnalysisTest {
                                 Rank.THIRD_GRADE, 0,
                                 Rank.FOURTH_GRADE, 2,
                                 Rank.FIFTH_GRADE, 2
-                        ), 6022.0
+                        ), 6.022
                 )
         );
     }

@@ -5,7 +5,7 @@ import static lotto.view.output.OutputMessage.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.domain.ticket.Analysis;
+import lotto.domain.analysis.Analysis;
 import lotto.domain.ticket.Tickets;
 import lotto.domain.winning.WinningTicket;
 import lotto.dto.AnalysisDto;
@@ -77,7 +77,7 @@ public class LottoController {
         return inputView.requestBonusNumber();
     }
 
-    private void showAnalysis(final lotto.domain.ticket.Analysis analysis) {
+    private void showAnalysis(final Analysis analysis) {
         final AnalysisDto analysisDto = AnalysisDto.toDto(analysis);
         this.announceAnalysis(analysisDto);
     }

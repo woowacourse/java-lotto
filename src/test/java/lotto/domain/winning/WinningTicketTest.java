@@ -1,4 +1,4 @@
-package lotto.domain.ticket;
+package lotto.domain.winning;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -6,13 +6,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.List;
 import java.util.stream.Stream;
 
-import lotto.domain.winning.WinningTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.domain.winning.Rank;
+import lotto.domain.ticket.Ticket;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
 

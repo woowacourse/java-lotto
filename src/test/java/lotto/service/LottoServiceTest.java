@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.AppConfig;
-import lotto.domain.ticket.Analysis;
+import lotto.domain.analysis.Analysis;
 import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.CustomTicketGenerator;
 import lotto.domain.winning.WinningTicket;
