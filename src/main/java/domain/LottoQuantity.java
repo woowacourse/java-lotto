@@ -3,13 +3,14 @@ package domain;
 import java.util.Objects;
 
 public class LottoQuantity {
-    static final String ERROR_MESSAGE_FOR_INVALID_TRAIL_NUMBER = "개수는 1 보다 작을 수 없습니다.";
+    static final String ERROR_MESSAGE_FOR_INVALID_LOTTO_QUANTITY = "개수는 음수가 될 수 없습니다.";
+    static final String ERROR_MESSAGE_FOR_INVALID_MANUAL_LOTTO_QUANTITY = "입력 금액을 초과하는 수동 로또 수를 입력할 수 없습니다.";
 
     private static final int QUANTITY_CRITERIA = 0;
     private final int lottoQuantity;
 
     public LottoQuantity(int lottoQuantity) {
-        validatePositive(lottoQuantity);
+        validateZeroOrPositive(lottoQuantity);
         this.lottoQuantity = lottoQuantity;
     }
 
@@ -17,13 +18,24 @@ public class LottoQuantity {
         return new LottoQuantity(this.lottoQuantity - otherLottoQuantity.lottoQuantity);
     }
 
+    public static LottoQuantity createManual(int lottoQuantity, InputMoney inputMoney) {
+        validateManualLottoQuantity(lottoQuantity, inputMoney);
+        return new LottoQuantity(lottoQuantity);
+    }
+
     public LottoQuantity(InputMoney inputMoney) {
         this.lottoQuantity = inputMoney.getMoney() / Lotto.SINGLE_LOTTO_PRICE;
     }
 
-    private void validatePositive(int lottoQuantity) {
-        if (lottoQuantity <= QUANTITY_CRITERIA) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_TRAIL_NUMBER);
+    private void validateZeroOrPositive(int lottoQuantity) {
+        if (lottoQuantity < QUANTITY_CRITERIA) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_LOTTO_QUANTITY);
+        }
+    }
+
+    private static void validateManualLottoQuantity(int lottoQuantity, InputMoney inputMoney) {
+        if (lottoQuantity * Lotto.SINGLE_LOTTO_PRICE > inputMoney.getMoney()) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_MANUAL_LOTTO_QUANTITY);
         }
     }
 

@@ -11,9 +11,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("LottoQuantity 테스트")
 public class LottoQuantityTest {
-    @DisplayName("LottoQuantity 에 양의 정수를 전달하면 객체가 생성된다.")
+    @DisplayName("LottoQuantity 에 0 또는 양의 정수를 전달하면 객체가 생성된다.")
     @ParameterizedTest(name = "{0} 전달")
-    @ValueSource(ints = {1, 5, 7})
+    @ValueSource(ints = {0, 1, 5, 7})
     void lottoQuantityCreationTest(int quantity) {
         // given
         LottoQuantity lottoQuantity = new LottoQuantity(quantity);
@@ -52,13 +52,13 @@ public class LottoQuantityTest {
         assertThat(lottoQuantity.getLottoQuantity()).isEqualTo(expected);
     }
 
-    @DisplayName("양수가 아닌 값으로 LottoAmount 생성시 IAE 발생한다.")
+    @DisplayName("음수가 생성자에 전달되면 IAE 발생한다.")
     @ParameterizedTest(name = "{0} 전달")
-    @ValueSource(ints = {-1, 0})
-    void createLottoQuantityWithNegativeOrZeroShouldFail(int lottoQuantity) {
+    @ValueSource(ints = {-10, -1})
+    void createLottoQuantityWithNegativeShouldFail(int lottoQuantity) {
         assertThatThrownBy(() -> new LottoQuantity(lottoQuantity))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoQuantity.ERROR_MESSAGE_FOR_INVALID_TRAIL_NUMBER);
+                .hasMessage(LottoQuantity.ERROR_MESSAGE_FOR_INVALID_LOTTO_QUANTITY);
     }
 
     @DisplayName("subtract 메소드는 자기자신과 다른 LottoQuantity 를 뺀 LottoQuantity 를 반환한다.")
@@ -74,5 +74,32 @@ public class LottoQuantityTest {
 
         // then
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("createManual 메소드는 로또 개수와 입력 금액을 받아 LottoQuantity 를 반환한다.")
+    @Test
+    void createManual() {
+        // given
+        int manualLottoQuantity = 10;
+        InputMoney inputMoney = new InputMoney(15000);
+
+        // when
+        LottoQuantity lottoQuantity = LottoQuantity.createManual(manualLottoQuantity, inputMoney);
+
+        // then
+        assertThat(lottoQuantity).isNotNull();
+    }
+
+    @DisplayName("createManual 메소드에 전달된 로또 개수 * 로또 금액이 입력 금액을 초과하면 IAE 가 발생한다.")
+    @Test
+    void createManualWithInvalidLottoQuantityShouldFail() {
+        // given
+        int manualLottoQuantity = 10;
+        InputMoney inputMoney = new InputMoney(5000);
+
+        // when & then
+        assertThatThrownBy(() -> LottoQuantity.createManual(manualLottoQuantity, inputMoney))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(LottoQuantity.ERROR_MESSAGE_FOR_INVALID_MANUAL_LOTTO_QUANTITY);
     }
 }

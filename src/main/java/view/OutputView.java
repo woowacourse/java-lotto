@@ -10,14 +10,15 @@ public class OutputView {
     private static final String CLOSE_BRACKET = "]";
     private static final String JOIN_DELIMITER = ", ";
 
-    private static final String MESSAGE_FOR_LOTTO_COUNT = "%d개를 구매했습니다.%n";
+    private static final String MESSAGE_FORMAT_FOR_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
     public static void printException(Exception exception) {
         System.out.println(ERROR_MESSAGE_PREFIX + exception.getMessage());
     }
 
-    public static void printLottoQuantity(int count) {
-        System.out.printf(MESSAGE_FOR_LOTTO_COUNT, count);
+    public static void printLottoQuantity(int manualQuantity, int autoQuantity) {
+        System.out.printf(System.lineSeparator() + MESSAGE_FORMAT_FOR_LOTTO_COUNT + System.lineSeparator(),
+                manualQuantity, autoQuantity);
     }
 
     public static void printLottos(List<LottoDto> lottoDtos) {
