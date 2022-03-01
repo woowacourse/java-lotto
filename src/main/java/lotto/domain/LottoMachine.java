@@ -12,17 +12,35 @@ public class LottoMachine {
     private static final int LOTTO_NUMBER_UPPER_BOUND = 46;
 
     private final List<LottoNumber> numbers;
+    private final int totalTicketCount;
+    private final int manualTicketCount;
 
-    public LottoMachine() {
-        numbers = new ArrayList<>();
+    public LottoMachine(int totalTicketCount, int manualTicketCount) {
+        numbers = initNumbers();
+
+        if (totalTicketCount < manualTicketCount) {
+            throw new IllegalArgumentException("[ERROR] 최대 구입 가능 개수를 넘었습니다. 최대 구입 가능 개수 = " + totalTicketCount);
+        }
+        this.totalTicketCount = totalTicketCount;
+        this.manualTicketCount = manualTicketCount;
+    }
+
+    private List<LottoNumber> initNumbers() {
+        List<LottoNumber> numbers = new ArrayList<>();
         for (int i = LOTTO_NUMBER_LOWER_BOUND; i < LOTTO_NUMBER_UPPER_BOUND; i++) {
             numbers.add(new LottoNumber(i));
         }
+        return numbers;
     }
 
-    public List<Lotto> makeLottoTickets(int count) {
+    public List<Lotto> makeLottoTickets(List<Lotto> manualLottos) {
         ArrayList<Lotto> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        if (manualLottos.size() != 0) {
+            lottoTickets.addAll(manualLottos);
+        }
+
+        int autoLottoCount = totalTicketCount - manualTicketCount;
+        for (int i = 0; i < autoLottoCount; i++) {
             lottoTickets.add(makeLottoTicket());
         }
         return lottoTickets;

@@ -5,6 +5,7 @@ import lotto.util.StringConverter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -35,8 +36,8 @@ public class LottoController {
     }
 
     private List<Lotto> getTickets(int ticketCount) {
-        LottoMachine lottoMachine = new LottoMachine();
-        return lottoMachine.makeLottoTickets(ticketCount);
+        LottoMachine lottoMachine = new LottoMachine(ticketCount, 0);
+        return lottoMachine.makeLottoTickets(new ArrayList<>());
     }
 
     private WinningLotto getWinningLotto() {
