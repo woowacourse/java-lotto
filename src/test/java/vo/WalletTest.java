@@ -15,7 +15,7 @@ public class WalletTest {
     @DisplayName("금액은 1000 이상, 1000단위로 입력해야됨")
     void createInputMoneyTest() {
         // given
-        int inputMoney = 1000;
+        int inputMoney = 1_000;
 
         // when
         Wallet wallet = new Wallet(inputMoney);
@@ -55,7 +55,7 @@ public class WalletTest {
     @DisplayName("수동 로또 구매수량이 1장 미만일 경우, IAE 발생")
     void buyingManualLottoWithInvalidQuantityShouldFail(int invalidQuantity) {
         // given & when
-        Wallet wallet = new Wallet(1000);
+        Wallet wallet = new Wallet(1_000);
 
         // then
         assertThatThrownBy(() -> wallet.buyManualLottoByQuantity(invalidQuantity))
@@ -68,11 +68,43 @@ public class WalletTest {
     @DisplayName("구매 가능한 수량(10장) 이상 구매 시도 시 IAE 발생")
     void buyingManualLottoWithIncapableQuantity(int incapableQuantity) {
         // given & when
-        Wallet wallet = new Wallet(10000);
+        Wallet wallet = new Wallet(10_000);
 
         // then
         assertThatThrownBy(() -> wallet.buyManualLottoByQuantity(incapableQuantity))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("이상 구매할 수 없습니다 :");
+    }
+
+    @Test
+    @DisplayName("잔액이 없는 경우, isEmpty 메서드는 true를 반환한다")
+    void walletShouldReturnTrueForIsEmptyWhenCurrentBalanceIsZero() {
+        // given
+        Wallet wallet = new Wallet(10_000);
+
+        // when
+        wallet.buyManualLottoByQuantity(10);
+
+        // then
+        assertThat(wallet.isEmpty()).isTrue();
+    }
+
+    @Test
+    @DisplayName("자동, 수동 로또 구매 이후 잔액은 0, 수량은 각각 구매한 수량과 일치해야 한다.")
+    void walletOperationTestForBuyingManualAndAutoLottos() {
+        // given
+        Wallet wallet = new Wallet(10_000);
+
+        // when
+        wallet.buyManualLottoByQuantity(3);
+        wallet.buyAutoLottoWithCurrentBalance();
+
+        // then
+        assertAll(
+                () -> assertThat(wallet.isEmpty()).isTrue(),
+                () -> assertThat(wallet.getManualQuantity()).isEqualTo(3),
+                () -> assertThat(wallet.getAutoQuantity()).isEqualTo(7),
+                () -> assertThat(wallet.getCurrentBalance()).isEqualTo(0)
+        );
     }
 }
