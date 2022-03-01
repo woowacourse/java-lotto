@@ -6,7 +6,7 @@ import lotto.model.number.LottoNumbers;
 
 public class WinningLotto {
 
-    private static final String DUPLICATED_NUMBER_ERROR_MESSAGE = "[ERROR] 중복된 번호가 존재합니다.";
+    private static final String DUPLICATED_NUMBER_ERROR_MESSAGE = "[ERROR] 보너스 번호가 중복되었습니다.";
 
     private final LottoNumbers winningNumbers;
     private final LottoNumber bonusNumber;
