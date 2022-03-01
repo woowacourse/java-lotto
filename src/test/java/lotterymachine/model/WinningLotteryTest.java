@@ -16,4 +16,12 @@ class WinningLotteryTest {
         WinningLottery winningLottery = WinningLottery.find(bonus, number);
         assertThat(winningLottery).isEqualTo(WinningLottery.valueOf(expected));
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"BONUS_FIVE:true", "FIVE:false"}, delimiter = ':')
+    @DisplayName("보너스 볼 당첨 타입인지 판별한다.")
+    void isBonus(String winningLottery, boolean expected) {
+        WinningLottery given = WinningLottery.valueOf(winningLottery);
+        assertThat(given.isBonus()).isEqualTo(expected);
+    }
 }
