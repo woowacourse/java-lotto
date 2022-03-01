@@ -5,12 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class LottosTest {
     private List<Lotto> lottos = new ArrayList<>();
@@ -37,12 +36,19 @@ public class LottosTest {
         assertThat(validLottos).isNotNull();
     }
 
-    @ParameterizedTest(name = "{0} 을 전달했을 때")
-    @NullAndEmptySource
-    @DisplayName("Lottos 생성자에 null또는 빈 값이 전달됐을 때, IAE 발생")
-    void createLottosWithNullAndEmptyShouldFail(List<Lotto> lottos) {
-        assertThatThrownBy(() -> new Lottos(lottos))
+    @Test
+    @DisplayName("Lottos 생성자에 빈 값이 전달됐을 때, IAE 발생")
+    void createLottosWithEmptyShouldFail() {
+        assertThatThrownBy(() -> new Lottos(Collections.emptyList()))
                 .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("Lotto 목록이 비었습니다");
+    }
+
+    @Test
+    @DisplayName("Lottos 생성자에 Null이 전달됐을 때, NPE 발생")
+    void createLottosWithNullShouldFail() {
+        assertThatThrownBy(() -> new Lottos(null))
+                .isInstanceOf(NullPointerException.class)
                 .hasMessageMatching("Lotto 목록이 비었습니다");
     }
 }

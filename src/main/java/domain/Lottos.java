@@ -9,17 +9,11 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(final List<Lotto> lottos) {
-        validateNull(lottos);
+        Objects.requireNonNull(lottos, ERROR_MESSAGE_FOR_NULL_OR_EMPTY_LIST);
         final List<Lotto> unmodifiableLottos = Collections.unmodifiableList(lottos);
         validateEmpty(lottos);
 
         this.lottos = unmodifiableLottos;
-    }
-
-    private void validateNull(List<Lotto> lottos) {
-        if (Objects.isNull(lottos)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_NULL_OR_EMPTY_LIST);
-        }
     }
 
     private void validateEmpty(List<Lotto> lottos) {
