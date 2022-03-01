@@ -48,4 +48,15 @@ public class LottoPurchaseMoneyTest {
         assertThatThrownBy(() -> LottoPurchaseMoney.create(-1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("수동 입력 개수 체크")
+    @Test
+    void checkManualCount() {
+        // given
+        LottoPurchaseMoney lottoPurchaseMoney = LottoPurchaseMoney.create(14000);
+
+        // when & then
+        assertThatThrownBy(() -> lottoPurchaseMoney.calculate(15))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
