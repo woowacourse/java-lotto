@@ -25,7 +25,6 @@ import lotto.exception.ball.BallNumberExceptionStatus;
 import lotto.exception.money.MoneyExceptionStatus;
 import lotto.exception.ticket.TicketNumbersExceptionStatus;
 import lotto.service.LottoService;
-import lotto.view.LottoView;
 import lotto.view.input.reader.CustomReader;
 
 class LottoControllerTest {
@@ -34,7 +33,6 @@ class LottoControllerTest {
 
     private final LottoController lottoController = APP_CONFIG.lottoController;
     private final LottoService lottoService = APP_CONFIG.lottoService;
-    private final LottoView lottoView = APP_CONFIG.lottoView;
     private final CustomTicketGenerator customTicketGenerator = APP_CONFIG.ticketGenerator;
     private final CustomReader customReader = APP_CONFIG.reader;
 
@@ -194,7 +192,7 @@ class LottoControllerTest {
         customTicketGenerator.initTickets(generatedTickets);
 
         final Tickets tickets = lottoController.purchaseTickets();
-        final WinningTicketDto winningTicketDto = lottoView.requestWinningTicket();
+        final WinningTicketDto winningTicketDto = lottoController.requestWinningTicket();
         final WinningTicket winningTicket = winningTicketDto.toWinningTicket();
         final Analysis analysis = lottoService.generateAnalysis(tickets, winningTicket);
 
@@ -215,7 +213,7 @@ class LottoControllerTest {
         customTicketGenerator.initTickets(generatedTickets);
 
         final Tickets tickets = lottoController.purchaseTickets();
-        final WinningTicketDto winningTicketDto = lottoView.requestWinningTicket();
+        final WinningTicketDto winningTicketDto = lottoController.requestWinningTicket();
         final WinningTicket winningTicket = winningTicketDto.toWinningTicket();
         final Analysis analysis = lottoService.generateAnalysis(tickets, winningTicket);
 
