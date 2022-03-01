@@ -21,14 +21,10 @@ public enum Rank {
         this.matchStatus = matchStatus;
     }
 
-    public static Rank getMatchResultWithBonusNumber(int total) {
-        if (total == MATCH_FIVE_AND_BONUS_NUMBERS.matchCount) {
+    public static Rank getMatchResult(int total, boolean isMatchWithBonusNumber) {
+        if (isMatchWithBonusNumber && total == MATCH_FIVE_AND_BONUS_NUMBERS.matchCount) {
             return MATCH_FIVE_AND_BONUS_NUMBERS;
         }
-        return getMatchResult(total);
-    }
-
-    public static Rank getMatchResult(int total) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount == total)
                 .findFirst()

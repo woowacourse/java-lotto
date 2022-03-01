@@ -19,13 +19,6 @@ public class LottoTicket {
         int totalMatchNumber = (int) numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
-        return getRank(bonusNumber, totalMatchNumber);
-    }
-
-    private Rank getRank(LottoNumber bonusNumber, int total) {
-        if (numbers.contains(bonusNumber)) {
-            return Rank.getMatchResultWithBonusNumber(total);
-        }
-        return Rank.getMatchResult(total);
+        return Rank.getMatchResult(totalMatchNumber, numbers.contains(bonusNumber));
     }
 }
