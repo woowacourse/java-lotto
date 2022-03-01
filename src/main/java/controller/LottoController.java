@@ -1,7 +1,7 @@
 package controller;
 
-import static domain.Lotto.LOTTO_PRICE;
 import static domain.LottoResultHandler.getLottoResultDto;
+import static java.util.stream.Collectors.toList;
 
 import domain.Lotto;
 import domain.LottoFactory;
@@ -9,54 +9,99 @@ import domain.LottoNumber;
 import domain.LottoNumberRepository;
 import domain.Lottos;
 import domain.WinningLotto;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import view.InputView;
 import view.ResultView;
-import vo.InputMoney;
-import vo.ManualLottoQuantity;
-import vo.NumberOfLottos;
+import vo.Wallet;
 
 public class LottoController {
 
-    public void start() {
-        InputMoney inputmoney = getInputMoney();
-        ManualLottoQuantity manualLottoQuantity = getManualLottoQuantity();
-        NumberOfLottos numberOfLottos = getNumberOfLottosByInputMoney(inputmoney);
-        InputView.printTrialNumber(numberOfLottos.getNumberOfLottos());
+    private static final int NO_AUTO_QUANTITY = 0;
 
-        Lottos autoLottos = LottoFactory.createAutoLottosByQuantity(numberOfLottos.getNumberOfLottos());
-        InputView.printLottos(autoLottos);
+    public void start() {
+        Wallet wallet = setupWallet();
+        setupQuantity(wallet);
+
+        Lottos lottos = setupLottos(wallet);
+        InputView.printLottos(wallet, lottos);
 
         WinningLotto winningLotto = setupWinningLotto();
-        ResultView.printResult(getLottoResultDto(winningLotto, autoLottos));
+        ResultView.printResult(getLottoResultDto(winningLotto, lottos));
     }
 
-    private InputMoney getInputMoney() {
+    private Wallet setupWallet() {
         try {
-            return new InputMoney(InputView.scanInputMoney());
+            return new Wallet(InputView.scanInputMoney());
         } catch (IllegalArgumentException exception) {
             InputView.printException(exception);
-            return getInputMoney();
+            return setupWallet();
         }
     }
 
-    private ManualLottoQuantity getManualLottoQuantity() {
+    private void setupQuantity(Wallet wallet) {
+        buyManualLotto(wallet);
+        buyAuttoLotto(wallet);
+    }
+
+    private void buyManualLotto(Wallet wallet) {
         try {
-            return new ManualLottoQuantity(InputView.scanManualLottoQuantity());
+            int manualQuantity = InputView.scanManualLottoQuantity();
+            wallet.buyManualLottoByQuantity(manualQuantity);
         } catch (IllegalArgumentException exception) {
             InputView.printException(exception);
-            return getManualLottoQuantity();
+            buyManualLotto(wallet);
         }
     }
 
-    private NumberOfLottos getNumberOfLottosByInputMoney(InputMoney inputMoney) {
-        return new NumberOfLottos(inputMoney.getMoney() / LOTTO_PRICE);
+    private void buyAuttoLotto(Wallet wallet) {
+        if (wallet.isEmpty()) {
+            return;
+        }
+
+        wallet.buyAutoLottoWithCurrentBalance();
+    }
+
+    private Lottos setupLottos(Wallet wallet) {
+        Lottos manualLottos = setupManualLottos(wallet.getManualQuantity());
+        if (wallet.getAutoQuantity() == NO_AUTO_QUANTITY) {
+            return manualLottos;
+        }
+
+        Lottos autoLottos = LottoFactory.createAutoLottosByQuantity(wallet.getAutoQuantity());
+
+        return manualLottos.merge(autoLottos);
+    }
+
+    private Lottos setupManualLottos(int manualQuantity) {
+        List<Lotto> lottos = new ArrayList<>();
+        do {
+            lottos.add(getManualLotto());
+        } while (lottos.size() < manualQuantity);
+
+        return new Lottos(lottos);
+    }
+
+    private Lotto getManualLotto() {
+        try {
+            List<Integer> lists = InputView.scanManualLottoNumbers();
+            return new Lotto(getLottoNumbers(lists));
+        } catch (IllegalArgumentException exception) {
+            InputView.printException(exception);
+            return getManualLotto();
+        }
+    }
+
+    private List<LottoNumber> getLottoNumbers(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .sorted()
+                .map(LottoNumberRepository::getLottoNumberByInt)
+                .collect(toList());
     }
 
     private WinningLotto setupWinningLotto() {
-        Lotto lotto = generateLotto();
-        LottoNumber bonusNumber = generateBonusNumber();
+        Lotto lotto = getLottoForWinningLotto();
+        LottoNumber bonusNumber = getLottoNumberForBonusNumber();
 
         try {
             return new WinningLotto(lotto, bonusNumber);
@@ -66,27 +111,27 @@ public class LottoController {
         }
     }
 
-    private Lotto generateLotto() {
+    private Lotto getLottoForWinningLotto() {
         try {
             List<Integer> winningNumberValues = InputView.scanWinningNumbers();
 
             List<LottoNumber> lottoNumbers = winningNumberValues.stream()
                     .map(LottoNumberRepository::getLottoNumberByInt)
-                    .collect(Collectors.toList());
+                    .collect(toList());
             return new Lotto(lottoNumbers);
         } catch (IllegalArgumentException exception) {
             InputView.printException(exception);
-            return generateLotto();
+            return getLottoForWinningLotto();
         }
     }
 
-    private LottoNumber generateBonusNumber() {
+    private LottoNumber getLottoNumberForBonusNumber() {
         try {
             int bonusNumberValue = InputView.scanBonusNumber();
             return LottoNumberRepository.getLottoNumberByInt(bonusNumberValue);
         } catch (IllegalArgumentException exception) {
             InputView.printException(exception);
-            return generateBonusNumber();
+            return getLottoNumberForBonusNumber();
         }
     }
 }
