@@ -40,6 +40,14 @@ class WinningStatisticsTest {
     }
 
     @Test
+    @DisplayName("WinningStatistics 객체를 null 로 생성하려는 경우")
+    void createWinningStatisticsWithNull() {
+        assertThatThrownBy(() ->
+            new WinningStatistics(null))
+            .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
     @DisplayName("당첨된 각 로또들의 초기 값 검증")
     void checkInitStatistics() {
         WinningStatistics winningStatistics = new WinningStatistics(new ArrayList<>());

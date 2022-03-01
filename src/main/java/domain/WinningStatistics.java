@@ -15,8 +15,15 @@ public class WinningStatistics {
     private final Map<LottoReward, Integer> statistics = new EnumMap<>(LottoReward.class);
 
     public WinningStatistics(List<LottoReward> lottoRewards) {
+        validateNull(lottoRewards);
         Arrays.stream(LottoReward.values()).forEach(lottoReward -> statistics.put(lottoReward, DEFAULT_VALUE));
         lottoRewards.forEach(lottoReward -> statistics.replace(lottoReward, statistics.get(lottoReward) + 1));
+    }
+
+    private void validateNull(List<LottoReward> lottoRewards) {
+        if (lottoRewards == null) {
+            throw new NullPointerException("null 로 WinningStatistics 를 생성할 수 없습니다.");
+        }
     }
 
     public double calculateProfitRate() {
