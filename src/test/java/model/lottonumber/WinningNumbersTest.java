@@ -18,7 +18,7 @@ class WinningNumbersTest {
         final List<Integer> numbers = Arrays.asList(1, 2, 4, 37, 41, 23);
         final int bonusNumber = 7;
 
-        WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
+        final WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
         for (Number winningNumber : winningNumbers.getWinningNumbers()) {
             assertThat(numbers).contains(winningNumber.getNumber());
         }
