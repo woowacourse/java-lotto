@@ -50,4 +50,12 @@ public class LottoMachine {
         Collections.shuffle(numbers);
         return new Lotto(numbers.subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX));
     }
+
+    public int getManualTicketCount() {
+        return manualTicketCount;
+    }
+
+    public int getAutoTicketCount() {
+        return totalTicketCount - manualTicketCount;
+    }
 }

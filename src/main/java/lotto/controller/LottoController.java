@@ -15,15 +15,42 @@ public class LottoController {
     public void run() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         int ticketCount = purchaseAmount.countTickets();
-        OutputView.printTicketCount(ticketCount);
 
-        List<Lotto> lottoTickets = getTickets(ticketCount);
+        LottoMachine lottoMachine = createLottoMachine(ticketCount);
+        int manualTicketCount = lottoMachine.getManualTicketCount();
+        List<Lotto> manualLottos = getManualLottos(manualTicketCount);
+        OutputView.printTicketCount(lottoMachine);
+        List<Lotto> lottoTickets = lottoMachine.makeLottoTickets(manualLottos);
         OutputView.printTickets(lottoTickets);
 
         WinningLotto winningLotto = getWinningLotto();
         RankBoard rankBoard = new RankBoard(winningLotto, lottoTickets);
 
         OutputView.printResult(rankBoard, rankBoard.calculateProfitRatio(purchaseAmount.getAmount()));
+    }
+
+    private List<Lotto> getManualLottos(int manualTicketCount) {
+        try {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+            List<Lotto> manualLottos = new ArrayList<>();
+            for (int i = 0; i < manualTicketCount; i++) {
+                manualLottos.add(Lotto.of(StringConverter.toInts(InputView.getLottoNumbers(), LOTTO_INPUT_DELIMITER)));
+            }
+            return manualLottos;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getManualLottos(manualTicketCount);
+        }
+    }
+
+    private LottoMachine createLottoMachine(int ticketCount) {
+        try {
+            int manualTicketCount = StringConverter.toInt(InputView.getManualTicketCount());
+            return new LottoMachine(ticketCount, manualTicketCount);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return createLottoMachine(ticketCount);
+        }
     }
 
     private PurchaseAmount getPurchaseAmount() {
@@ -33,11 +60,6 @@ public class LottoController {
             System.out.println(e.getMessage());
             return getPurchaseAmount();
         }
-    }
-
-    private List<Lotto> getTickets(int ticketCount) {
-        LottoMachine lottoMachine = new LottoMachine(ticketCount, 0);
-        return lottoMachine.makeLottoTickets(new ArrayList<>());
     }
 
     private WinningLotto getWinningLotto() {
