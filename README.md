@@ -22,17 +22,17 @@
 
 ### 기능 요구사항 - 사용자 입력
 
-- [ ] `구입 금액` 입력
+- [x] `구입 금액` 입력
   - [x] `구입 금액`은 숫자여야 합니다. 아닌 경우, `IllegalArgumentException` 발생
   - [x] `구입 금액`은 양수여야 합니다. 아닌 경우, `IllegalArgumentException` 발생
   - [x] `구입 금액`은 1000원 단위여야 합니다. 아닌 경우, `IllegalArgumentException` 발생
 
-- `수동으로 구매할 로또의 개수` 입력
+- [x] `수동으로 구매할 로또의 개수` 입력
   - [x] `로또 개수`는 숫자여야 합니다. 아닌 경우, `IllegalArgumentException` 발생
-  - [ ] `로또 개수`는 `구매 가능한 로또의 개수`보다 작아야 합니다. 아닌 경우, `IllegalArgumentException` 발생
+  - [x] `로또 개수`는 `구매 가능한 로또의 개수`보다 작아야 합니다. 아닌 경우, `IllegalArgumentException` 발생
 
-- `로또 번호 (당첨 번호)` 입력
-  - [ ] `로또`는 줄 단위로 구분됩니다.
+- [x] `로또 번호 (당첨 번호)` 입력
+  - [x] `로또`는 줄 단위로 구분됩니다.
   - [x] `로또 번호`는 쉼표(,)를 기준으로 구분됩니다.
   - [x] `로또 번호`를 구성하는 숫자의 앞뒤로 모든 공백은 제거됩니다.
   - [x] `로또 번호`는 숫자로 구성되어야 합니다. 아닌 경우, `IllegalArgumentException` 발생
@@ -40,7 +40,7 @@
   - [x] `로또 번호`는 `1 ~ 45` 범위 안의 숫자로 구성되어야 합니다. 아닌 경우, `IllegalArgumentException` 발생
   - [x] `로또 번호`는 중복된 숫자로 구성될 수 없습니다. 아닌 경우, `IllegalArgumentException` 발생
 
-- `보너스 볼` 입력
+- [x] `보너스 볼` 입력
   - [x] `보너스 볼`는 숫자로 구성되어야 합니다. 아닌 경우, `IllegalArgumentException` 발생
   - [x] `보너스 볼`는 `1 ~ 45` 범위 안의 숫자로 구성되어야 합니다. 아닌 경우, `IllegalArgumentException` 발생
   - [x] `보너스 볼`는 `당첨 번호`와 중복되어선 안됩니다. 아닌 경우, `IllegalArgumentException` 발생
