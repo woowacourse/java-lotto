@@ -13,6 +13,8 @@ import model.LottoPurchasingMoney;
 import model.LottoRank;
 import model.WinningLotto;
 import model.WinningStatistics;
+import model.dto.LottoDto;
+import model.dto.WinningStatisticsDto;
 import view.InputView;
 import view.OutputView;
 
@@ -23,13 +25,20 @@ public class LottoController {
         LottoOrder lottoOrder = inputLottoOrder(lottoPurchasingMoney);
 
         List<Lotto> lotteries = purchaseLotteries(lottoOrder);
-        OutputView.printPurchasedLotteries(lottoOrder, lotteries);
+        printPurchasedLotteries(lottoOrder, lotteries);
 
         WinningLotto winningLotto = inputWinningLotto();
 
         WinningStatistics winningStatistics = calculateStatistics(lotteries, winningLotto);
 
-        OutputView.printStatistics(winningStatistics, lottoPurchasingMoney);
+        printWinningStatistics(winningStatistics, lottoPurchasingMoney);
+    }
+
+    private void printPurchasedLotteries(LottoOrder lottoOrder, List<Lotto> lotteries) {
+        List<LottoDto> lotteriesDto = lotteries.stream()
+                .map(lotto -> new LottoDto(lotto.getLottoNumbers()))
+                .collect(Collectors.toUnmodifiableList());
+        OutputView.printPurchasedLotteries(lottoOrder, lotteriesDto);
     }
 
     private LottoPurchasingMoney inputPurchasingMoney() {
@@ -109,5 +118,10 @@ public class LottoController {
         });
 
         return winningStatistics;
+    }
+
+    private void printWinningStatistics(WinningStatistics winningStatistics, LottoPurchasingMoney lottoPurchasingMoney) {
+        OutputView.printStatistics(new WinningStatisticsDto(winningStatistics.getWinningCounts(),
+                winningStatistics.getEarningsRate(lottoPurchasingMoney)));
     }
 }
