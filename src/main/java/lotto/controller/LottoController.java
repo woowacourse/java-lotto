@@ -6,12 +6,14 @@ import java.util.stream.Collectors;
 import lotto.domain.analysis.Analysis;
 import lotto.domain.money.Money;
 import lotto.domain.ticket.Ticket;
+import lotto.domain.ticket.TicketManager;
 import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
 import lotto.domain.winning.Rank;
 import lotto.domain.winning.WinningTicket;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
+import lotto.dto.TicketManagerDto;
 import lotto.dto.WinningTicketDto;
 import lotto.view.LottoView;
 
@@ -24,18 +26,18 @@ public class LottoController {
     }
 
     public void run() {
-        final Tickets tickets = purchaseTickets();
-        announceTickets(tickets);
+        final TicketManager ticketManager = purchaseTickets();
+        announceTickets(ticketManager);
 
-        final Analysis analysis = calculateAnalysis(tickets);
+        final Analysis analysis = calculateAnalysis(ticketManager);
         announceAnalysis(analysis);
     }
 
-    private Tickets purchaseTickets() {
+    private TicketManager purchaseTickets() {
         final int totalTicketCount = calculateTotalTicketCount();
         final int manualTicketCount = lottoView.requestManualTicketCount(totalTicketCount);
-        final List<Ticket> manualTickets = requestManualTickets(manualTicketCount);
-        return Tickets.generateTickets(totalTicketCount, manualTickets, new RandomTicketGenerator());
+        final Tickets manualTickets = requestManualTickets(manualTicketCount);
+        return TicketManager.generateTickets(totalTicketCount, manualTickets, new RandomTicketGenerator());
     }
 
     private int calculateTotalTicketCount() {
@@ -43,24 +45,23 @@ public class LottoController {
         return money.getQuotient();
     }
 
-    private List<Ticket> requestManualTickets(final int manualTicketCount) {
+    private Tickets requestManualTickets(final int manualTicketCount) {
         final List<TicketDto> manualTicketDtos = lottoView.requestManualTicketDtos(manualTicketCount);
-        return manualTicketDtos.stream()
+        final List<Ticket> manualTickets = manualTicketDtos.stream()
                 .map(TicketDto::toTicket)
                 .collect(Collectors.toUnmodifiableList());
+        return Tickets.generateTickets(manualTickets);
     }
 
-    private void announceTickets(final Tickets tickets) {
-        final List<TicketDto> ticketDtos = tickets.getTickets().stream()
-                .map(TicketDto::toDto)
-                .collect(Collectors.toUnmodifiableList());
-        lottoView.announceTickets(ticketDtos);
+    private void announceTickets(final TicketManager ticketManager) {
+        final TicketManagerDto ticketManagerDto = TicketManagerDto.toDto(ticketManager);
+        lottoView.announceTickets(ticketManagerDto);
     }
 
-    private Analysis calculateAnalysis(final Tickets tickets) {
+    private Analysis calculateAnalysis(final TicketManager ticketManager) {
         final WinningTicket winningTicket = this.requestWinningTicket();
-        final List<Rank> ranks = tickets.calculateRanks(winningTicket);
-        return new Analysis(ranks, tickets.getSize());
+        final List<Rank> ranks = ticketManager.calculateRanks(winningTicket);
+        return new Analysis(ranks, ticketManager.getSize());
     }
 
     private WinningTicket requestWinningTicket() {

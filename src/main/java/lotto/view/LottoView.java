@@ -8,6 +8,7 @@ import java.util.List;
 
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
+import lotto.dto.TicketManagerDto;
 import lotto.dto.WinningTicketDto;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
@@ -60,10 +61,10 @@ public class LottoView {
         return ticketDtos;
     }
 
-    public void announceTickets(final List<TicketDto> ticketDtos) {
+    public void announceTickets(final TicketManagerDto ticketManagerDto) {
         outputView.printMessage(EMPTY_STRING);
-        outputView.printTicketCount(ticketDtos);
-        outputView.printTickets(ticketDtos);
+        outputView.printTicketCount(ticketManagerDto);
+        outputView.printAllTickets(ticketManagerDto);
     }
 
     public WinningTicketDto requestWinningTicketDto() {

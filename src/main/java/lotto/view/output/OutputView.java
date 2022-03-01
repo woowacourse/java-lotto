@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import lotto.domain.winning.Rank;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
+import lotto.dto.TicketManagerDto;
 import lotto.view.utils.Delimiter;
 
 public class OutputView {
@@ -21,13 +22,19 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printTicketCount(final List<TicketDto> ticketDtos) {
-        final int ticketCount = ticketDtos.size();
-        final String message = String.format(TICKET_COUNT_FORMAT.getMessage(), ticketCount);
+    public void printTicketCount(final TicketManagerDto ticketManagerDto) {
+        final int manualTicketCount = ticketManagerDto.getPreparedTicketDtos().size();
+        final int randomTicketCount = ticketManagerDto.getGeneratedTicketDtos().size();
+        final String message = String.format(TICKET_COUNT_FORMAT.getMessage(), manualTicketCount, randomTicketCount);
         printMessage(message);
     }
 
-    public void printTickets(final List<TicketDto> ticketDtos) {
+    public void printAllTickets(final TicketManagerDto ticketManagerDto) {
+        printTickets(ticketManagerDto.getPreparedTicketDtos());
+        printTickets(ticketManagerDto.getGeneratedTicketDtos());
+    }
+
+    private void printTickets(final List<TicketDto> ticketDtos) {
         ticketDtos.stream()
                 .map(this::makeTicketFormat)
                 .forEach(this::printMessage);
