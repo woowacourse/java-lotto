@@ -1,10 +1,12 @@
 package lotto.view;
 
+import java.util.Map;
 import java.util.stream.Collectors;
+import lotto.domain.LottoGame;
 import lotto.domain.vo.Lotto;
 import lotto.domain.LottoPrize;
-import lotto.domain.LottoResults;
-import lotto.dto.ResponsePurchaseDto;
+import lotto.dto.ResponsePurchaseResultsDto;
+import lotto.dto.ResponseWinningResultsDto;
 
 public class ResultView {
 
@@ -22,9 +24,8 @@ public class ResultView {
     private static final String RATE_RETURN_BREAK_EVEN_MESSAGE = "(본전입니다.)";
 
     private static final String EMPTY_MESSAGE = "";
-    private static final int HUNDRED_FOR_FLOOR = 100;
 
-    public static void printPurchaseLottos(ResponsePurchaseDto dto) {
+    public static void printPurchaseLottos(ResponsePurchaseResultsDto dto) {
         System.out.printf(PURCHASE_RESULT_MESSAGE, dto.getManualLottoCount(), dto.getAutoLottoCount());
         for (Lotto lotto : dto.getLottos()) {
             String numbers = lotto.getNumbers().stream()
@@ -35,25 +36,46 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printResults(LottoResults lottoResults) {
+    public static void printResults(ResponseWinningResultsDto dto) {
         System.out.println(LOTTO_RESULT_MESSAGE);
         System.out.println(LOTTO_RESULT_DELIMITER);
+        Map<LottoPrize, Integer> results = dto.getResults();
         for (LottoPrize prize : LottoPrize.values()) {
-            int number = lottoResults.getPrizeNumber(prize);
+            int number = results.get(prize);
             System.out.print(generateLottoResultMessage(prize, number));
         }
-        double rateReturn = Math.floor(lottoResults.getRateReturn() * HUNDRED_FOR_FLOOR) / HUNDRED_FOR_FLOOR;
+        double rateReturn = calculateRateReturn(results);
         System.out.println(generateRateReturnMessage(rateReturn));
     }
 
-    private static String generateRateReturnMessage(double rateReturn) {
-        if (rateReturn > 1.0) {
-            return String.format(LOTTO_RATE_RETURN_MESSAGE + RATE_RETURN_BENEFIT_MESSAGE, rateReturn);
+    private static double calculateRateReturn(Map<LottoPrize, Integer> results) {
+        int totalSpendMoney = getTotalSpendMoney(results);
+        int totalReward = getTotalReward(results);
+        double rateReturn = (double) totalReward / totalSpendMoney;
+        return floor(rateReturn, 2);
+    }
+
+    private static int getTotalSpendMoney(Map<LottoPrize, Integer> results) {
+        int totalSpendMoney = 0;
+        for (LottoPrize prize : LottoPrize.values()) {
+            int count = results.get(prize);
+            totalSpendMoney += count * LottoGame.LOTTO_PRICE.get();
         }
-        if (rateReturn < 1.0) {
-            return String.format(LOTTO_RATE_RETURN_MESSAGE + RATE_RETURN_LOSS_MESSAGE, rateReturn);
+        return totalSpendMoney;
+    }
+
+    private static int getTotalReward(Map<LottoPrize, Integer> results) {
+        int totalReward = 0;
+        for (LottoPrize prize : LottoPrize.values()) {
+            int count = results.get(prize);
+            totalReward += prize.getTotalReward(count);
         }
-        return String.format(LOTTO_RATE_RETURN_MESSAGE + RATE_RETURN_BREAK_EVEN_MESSAGE, rateReturn);
+        return totalReward;
+    }
+
+    private static double floor(double number, int separator) {
+        double separatorNumber = Math.pow(10, separator);
+        return Math.floor(number * separatorNumber) / separatorNumber;
     }
 
     private static String generateLottoResultMessage(LottoPrize prize, int number) {
@@ -68,5 +90,15 @@ public class ResultView {
         return String
                 .format(LOTTO_RESULT_DEFAULT_MESSAGE, prize.getLottoNumberMatchCount(), prize.getReward().get(),
                         number);
+    }
+
+    private static String generateRateReturnMessage(double rateReturn) {
+        if (rateReturn > 1.0) {
+            return String.format(LOTTO_RATE_RETURN_MESSAGE + RATE_RETURN_BENEFIT_MESSAGE, rateReturn);
+        }
+        if (rateReturn < 1.0) {
+            return String.format(LOTTO_RATE_RETURN_MESSAGE + RATE_RETURN_LOSS_MESSAGE, rateReturn);
+        }
+        return String.format(LOTTO_RATE_RETURN_MESSAGE + RATE_RETURN_BREAK_EVEN_MESSAGE, rateReturn);
     }
 }

@@ -5,36 +5,35 @@ import java.util.Collections;
 import java.util.List;
 import lotto.domain.generator.Generator;
 import lotto.domain.vo.Lotto;
-import lotto.domain.vo.LottoNumber;
 import lotto.domain.vo.Lottos;
 import lotto.domain.vo.Money;
 import lotto.domain.vo.WinningNumbers;
-import lotto.dto.ResponsePurchaseDto;
+import lotto.dto.ResponsePurchaseResultsDto;
+import lotto.dto.ResponseWinningResultsDto;
 
 public class LottoGame {
 
-    private static final Money LOTTO_PRICE = new Money(1000);
+    public static final Money LOTTO_PRICE = new Money(1000);
 
     private Lottos lottos = new Lottos(new ArrayList<>());
 
-    public ResponsePurchaseDto purchase(Money money,
-                                        List<List<LottoNumber>> manualLottoNumbers,
-                                        Generator lottoGenerator) {
+    public ResponsePurchaseResultsDto purchase(Money money,
+                                               List<Lotto> manualLottos,
+                                               Generator lottoGenerator) {
         int countOfPurchase = money.canBuyNumber(LOTTO_PRICE);
-        int countOfManualPurchase = Math.min(countOfPurchase, manualLottoNumbers.size());
+        int countOfManualPurchase = Math.min(countOfPurchase, manualLottos.size());
         int countOfAuthPurchase = countOfPurchase - countOfManualPurchase;
         List<Lotto> lottos = new ArrayList<>();
-        purchaseManual(manualLottoNumbers, countOfManualPurchase, lottos);
+        purchaseManual(manualLottos, countOfManualPurchase, lottos);
         purchaseAuto(lottoGenerator, countOfAuthPurchase, lottos);
         this.lottos = new Lottos(lottos);
-        return new ResponsePurchaseDto(
+        return new ResponsePurchaseResultsDto(
                 Collections.unmodifiableList(this.lottos.getLottos()), countOfManualPurchase, countOfAuthPurchase);
     }
 
-    private void purchaseManual(List<List<LottoNumber>> manualLottoNumbers, int countOfManualPurchase,
-                                List<Lotto> lottos) {
+    private void purchaseManual(List<Lotto> manualLottos, int countOfManualPurchase, List<Lotto> lottos) {
         for (int i = 0; i < countOfManualPurchase; i++) {
-            lottos.add(new Lotto(manualLottoNumbers.get(i)));
+            lottos.add(manualLottos.get(i));
         }
     }
 
@@ -44,8 +43,8 @@ public class LottoGame {
         }
     }
 
-    public LottoResults confirmWinnings(WinningNumbers winningNumbers) {
-        return new LottoResults(lottos.confirmWinnings(winningNumbers), LOTTO_PRICE);
+    public ResponseWinningResultsDto confirmWinnings(WinningNumbers winningNumbers) {
+        return new ResponseWinningResultsDto(lottos.confirmWinnings(winningNumbers));
     }
 
     public boolean canBuyLotto(Money money) {

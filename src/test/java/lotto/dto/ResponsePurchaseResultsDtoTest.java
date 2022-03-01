@@ -9,11 +9,11 @@ import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class ResponsePurchaseDtoTest {
+public class ResponsePurchaseResultsDtoTest {
 
-    @DisplayName("로또 구매 결과로 객체를 생성한다.")
+    @DisplayName("구매한 모든 로또를 가지는 dto를 생성한다.")
     @Test
-    void response_purchase_dto_test() {
+    void response_purchase_results_dto_test() {
         int manualLottoCount = 1;
         int autoLottoCount = 2;
         List<Lotto> lottos = new ArrayList<>();
@@ -27,7 +27,7 @@ public class ResponsePurchaseDtoTest {
         lottos.add(lotto1);
         lottos.add(lotto2);
 
-        ResponsePurchaseDto dto = new ResponsePurchaseDto(lottos, manualLottoCount, autoLottoCount);
+        ResponsePurchaseResultsDto dto = new ResponsePurchaseResultsDto(lottos, manualLottoCount, autoLottoCount);
 
         assertThat(dto.getLottos()).hasSize(lottos.size());
         assertThat(dto.getLottos().get(0)).isEqualTo(lotto0);

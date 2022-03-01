@@ -4,13 +4,13 @@ import java.util.Collections;
 import java.util.List;
 import lotto.domain.vo.Lotto;
 
-public class ResponsePurchaseDto {
+public class ResponsePurchaseResultsDto {
 
     private final List<Lotto> lottos;
     private final int manualLottoCount;
     private final int autoLottoCount;
 
-    public ResponsePurchaseDto(List<Lotto> lottos, int manualLottoCount, int autoLottoCount) {
+    public ResponsePurchaseResultsDto(List<Lotto> lottos, int manualLottoCount, int autoLottoCount) {
         this.lottos = Collections.unmodifiableList(lottos);
         this.manualLottoCount = manualLottoCount;
         this.autoLottoCount = autoLottoCount;

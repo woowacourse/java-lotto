@@ -5,12 +5,14 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import lotto.domain.generator.CustomLottoGenerator;
 import lotto.domain.vo.Lotto;
 import lotto.domain.vo.LottoNumber;
 import lotto.domain.vo.Money;
 import lotto.domain.vo.WinningNumbers;
-import lotto.dto.ResponsePurchaseDto;
+import lotto.dto.ResponsePurchaseResultsDto;
+import lotto.dto.ResponseWinningResultsDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,11 +30,11 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame();
         List<LottoNumber> manualLottoNumber = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        List<List<LottoNumber>> manualLottoNumbers = new ArrayList<>();
-        manualLottoNumbers.add(manualLottoNumber);
+        List<Lotto> manualLottos = new ArrayList<>();
+        manualLottos.add(new Lotto(manualLottoNumber));
 
-        ResponsePurchaseDto dto =
-                lottoGame.purchase(new Money(10000), manualLottoNumbers, new CustomLottoGenerator());
+        ResponsePurchaseResultsDto dto =
+                lottoGame.purchase(new Money(10000), manualLottos, new CustomLottoGenerator());
 
         Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
@@ -49,11 +51,11 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame();
         List<LottoNumber> manualLottoNumber = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        List<List<LottoNumber>> manualLottoNumbers = new ArrayList<>();
-        manualLottoNumbers.add(manualLottoNumber);
+        List<Lotto> manualLottos = new ArrayList<>();
+        manualLottos.add(new Lotto(manualLottoNumber));
 
-        ResponsePurchaseDto dto =
-                lottoGame.purchase(new Money(1000), manualLottoNumbers, new CustomLottoGenerator());
+        ResponsePurchaseResultsDto dto =
+                lottoGame.purchase(new Money(1000), manualLottos, new CustomLottoGenerator());
 
         Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
@@ -68,8 +70,8 @@ public class LottoGameTest {
     @Test
     void purchase_auth_test() {
         LottoGame lottoGame = new LottoGame();
-        List<List<LottoNumber>> emptyManualLottos = new ArrayList<>(new ArrayList<>());
-        ResponsePurchaseDto dto =
+        List<Lotto> emptyManualLottos = new ArrayList<>(new ArrayList<>());
+        ResponsePurchaseResultsDto dto =
                 lottoGame.purchase(new Money(1000), emptyManualLottos, new CustomLottoGenerator());
 
         Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
@@ -90,14 +92,15 @@ public class LottoGameTest {
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
-        List<List<LottoNumber>> emptyManualLottos = new ArrayList<>(new ArrayList<>());
+        List<Lotto> emptyManualLottos = new ArrayList<>(new ArrayList<>());
 
         LottoGame lottoGame = new LottoGame();
         lottoGame.purchase(new Money(10000), emptyManualLottos, new CustomLottoGenerator());
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
-        LottoResults results = lottoGame.confirmWinnings(winningNumbers);
+        ResponseWinningResultsDto dto = lottoGame.confirmWinnings(winningNumbers);
+        Map<LottoPrize, Integer> results = dto.getResults();
 
-        assertThat(results.getPrizeNumber(LottoPrize.FIRST)).isEqualTo(10);
+        assertThat(results.get(LottoPrize.FIRST)).isEqualTo(10);
     }
 
     @DisplayName("1000원으로 로또를 살 수 있다.")

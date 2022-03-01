@@ -9,8 +9,9 @@ import java.util.stream.Collectors;
 import lotto.domain.vo.Lotto;
 import lotto.domain.vo.LottoNumber;
 import lotto.domain.vo.ManualPurchaseCount;
-import lotto.domain.vo.Money;
 import lotto.domain.vo.WinningNumbers;
+import lotto.dto.RequestManualLottoNumbers;
+import lotto.dto.RequestPurchaseMoneyDto;
 
 public class InputView {
 
@@ -26,12 +27,12 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static Money requestPurchaseMoney() {
+    public static RequestPurchaseMoneyDto requestPurchaseMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         String input = nextLine();
         validateEmpty(input);
         System.out.println();
-        return new Money(toInt(input));
+        return new RequestPurchaseMoneyDto(toInt(input));
     }
 
     private static String nextLine() {
@@ -58,7 +59,7 @@ public class InputView {
         }
     }
 
-    public static List<List<LottoNumber>> requestManualLottoNumbers() {
+    public static RequestManualLottoNumbers requestManualLottoNumbers() {
         ManualPurchaseCount manualPurchaseCount = requestManualPurchaseCount();
         List<List<LottoNumber>> manualLottoNumbers = new ArrayList<>();
         if (manualPurchaseCount.canBuy()) {
@@ -66,7 +67,7 @@ public class InputView {
             manualLottoNumbers = readManualLottoNumbers(manualPurchaseCount);
             System.out.println();
         }
-        return manualLottoNumbers;
+        return new RequestManualLottoNumbers(manualLottoNumbers);
     }
 
     private static ManualPurchaseCount requestManualPurchaseCount() {
