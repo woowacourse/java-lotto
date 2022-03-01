@@ -17,6 +17,7 @@ public class LottoTest {
         List<LottoNumber> lottoNumbers = List.of(
                 LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
+
         assertThatNoException().isThrownBy(() -> new Lotto(lottoNumbers));
     }
 
@@ -55,6 +56,7 @@ public class LottoTest {
     @DisplayName("confirmWinning 당첨 등수를 반환한다")
     @Test
     void confirmWinning_test() {
+        // given
         List<LottoNumber> buyNumber = List.of(
                 LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(45));
@@ -65,8 +67,11 @@ public class LottoTest {
 
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(winningNumber), bonusNumber);
         Lotto lotto = new Lotto(buyNumber);
+
+        // when
         LottoPrize prize = lotto.confirmWinning(winningNumbers);
 
+        // than
         assertThat(prize).isEqualTo(LottoPrize.TWICE);
     }
 }

@@ -13,12 +13,16 @@ public class LottosTest {
     @DisplayName("구매한 로또들을 가진 객체를 생성한다")
     @Test
     void lottos_constructor_test() {
+        // given
         List<LottoNumber> lottoNumbers = List.of(
                 LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
         List<Lotto> lotto = List.of(new Lotto(lottoNumbers));
+
+        // when
         Lottos lottos = new Lottos(lotto);
 
+        // than
         assertThat(lottos.get()).hasSize(1);
         assertThat(lottos.get()).containsAll(lotto);
     }
@@ -34,15 +38,18 @@ public class LottosTest {
     @DisplayName("구매한 모든 로또들의 당첨 결과를 반환한다.")
     @Test
     void confirmWinnings_test() {
+        // given
         List<LottoNumber> lottoNumbers = List.of(
                 LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), LottoNumber.valueOf(30));
         List<Lotto> lotto = List.of(new Lotto(lottoNumbers));
         Lottos lottos = new Lottos(lotto);
 
-        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), LottoNumber.valueOf(30));
+        // when
         Map<LottoPrize, Integer> lottoMatches = lottos.confirmWinnings(winningNumbers);
 
+        // than
         assertThat(lottoMatches.get(LottoPrize.FIRST)).isEqualTo(1);
     }
 }

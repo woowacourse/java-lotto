@@ -24,10 +24,13 @@ public class LottoNumberTest {
     @DisplayName("LottoNumber 객체는 캐싱하여 재사용한다")
     @Test
     void value_cache_test() {
+        // given
         LottoNumber number1 = LottoNumber.valueOf(1);
         LottoNumber number2 = LottoNumber.valueOf(1);
         LottoNumber number3 = LottoNumber.valueOf(2);
 
+        // when
+        // than
         assertThat(number1 == number2).isTrue();
         assertThat(number1 == number3).isFalse();
         assertThat(number2 == number3).isFalse();

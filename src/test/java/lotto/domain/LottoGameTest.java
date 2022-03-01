@@ -27,21 +27,24 @@ public class LottoGameTest {
     @DisplayName("주어진 금액으로 로또를 수동을 최대한 구매 후 남은 금액만큼 자동으로 구매한다")
     @Test
     void purchase_test() {
+        // given
         LottoGame lottoGame = new LottoGame();
         List<LottoNumber> manualLottoNumber = List.of(
                 LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
+        Lotto compareLotto = new Lotto(List.of(
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
         List<Lotto> manualLottos = new ArrayList<>();
         manualLottos.add(new Lotto(manualLottoNumber));
 
+        // when
         ResponsePurchaseResultsDto dto =
                 lottoGame.purchase(new Money(10000), manualLottos, new CustomLottoGenerator());
 
-        Lotto lotto = new Lotto(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
-
+        // than
         assertThat(dto.getLottos()).hasSize(10);
-        assertThat(dto.getLottos().get(0)).isEqualTo(lotto);
+        assertThat(dto.getLottos().get(0)).isEqualTo(compareLotto);
         assertThat(dto.getManualLottoCount()).isEqualTo(1);
         assertThat(dto.getAutoLottoCount()).isEqualTo(9);
     }
@@ -49,21 +52,24 @@ public class LottoGameTest {
     @DisplayName("로또를 수동으로 1회 구매한다")
     @Test
     void purchase_manual_test() {
+        // given
         LottoGame lottoGame = new LottoGame();
         List<LottoNumber> manualLottoNumber = List.of(
                 LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
+        Lotto compareLotto = new Lotto(List.of(
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
         List<Lotto> manualLottos = new ArrayList<>();
         manualLottos.add(new Lotto(manualLottoNumber));
 
+        // when
         ResponsePurchaseResultsDto dto =
                 lottoGame.purchase(new Money(1000), manualLottos, new CustomLottoGenerator());
 
-        Lotto lotto = new Lotto(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
-
+        // than
         assertThat(dto.getLottos()).hasSize(1);
-        assertThat(dto.getLottos().get(0)).isEqualTo(lotto);
+        assertThat(dto.getLottos().get(0)).isEqualTo(compareLotto);
         assertThat(dto.getManualLottoCount()).isEqualTo(1);
         assertThat(dto.getAutoLottoCount()).isEqualTo(0);
     }
@@ -71,17 +77,20 @@ public class LottoGameTest {
     @DisplayName("로또를 자동으로 1회 구매한다")
     @Test
     void purchase_auth_test() {
+        // given
         LottoGame lottoGame = new LottoGame();
         List<Lotto> emptyManualLottos = new ArrayList<>(new ArrayList<>());
-        ResponsePurchaseResultsDto dto =
-                lottoGame.purchase(new Money(1000), emptyManualLottos, new CustomLottoGenerator());
-
-        Lotto lotto = new Lotto(List.of(
+        Lotto compareLotto = new Lotto(List.of(
                 LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
 
+        // when
+        ResponsePurchaseResultsDto dto =
+                lottoGame.purchase(new Money(1000), emptyManualLottos, new CustomLottoGenerator());
+
+        // than
         assertThat(dto.getLottos()).hasSize(1);
-        assertThat(dto.getLottos().get(0)).isEqualTo(lotto);
+        assertThat(dto.getLottos().get(0)).isEqualTo(compareLotto);
         assertThat(dto.getManualLottoCount()).isEqualTo(0);
         assertThat(dto.getAutoLottoCount()).isEqualTo(1);
     }
@@ -89,18 +98,22 @@ public class LottoGameTest {
     @DisplayName("당첨 결과를 계산하여 결과를 반환한다")
     @Test
     void confirmWinnings_test() {
+        // given
         List<LottoNumber> lottoNumbers = List.of(
                 LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
         LottoNumber bonusNumber = LottoNumber.valueOf(30);
-        List<Lotto> emptyManualLottos = new ArrayList<>(new ArrayList<>());
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
 
         LottoGame lottoGame = new LottoGame();
+        List<Lotto> emptyManualLottos = new ArrayList<>(new ArrayList<>());
         lottoGame.purchase(new Money(10000), emptyManualLottos, new CustomLottoGenerator());
-        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
         ResponseWinningResultsDto dto = lottoGame.confirmWinnings(winningNumbers);
+
+        // when
         Map<LottoPrize, Integer> results = dto.getResults();
 
+        // than
         assertThat(results.get(LottoPrize.FIRST)).isEqualTo(10);
     }
 

@@ -27,7 +27,11 @@ public class LottoPrizeTest {
     @ParameterizedTest(name = DISPLAY_NAME_ARGUMENTS)
     @MethodSource("matchTestSet")
     void match_test(int lottoNumberMatchCount, boolean bonusNumberMatch, LottoPrize result) {
+        // given
+        // when
         LottoPrize lottoPrize = LottoPrize.match(lottoNumberMatchCount, bonusNumberMatch);
+
+        // than
         assertThat(lottoPrize).isEqualTo(result);
     }
 

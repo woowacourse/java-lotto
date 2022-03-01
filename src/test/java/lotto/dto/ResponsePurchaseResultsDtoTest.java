@@ -14,9 +14,9 @@ public class ResponsePurchaseResultsDtoTest {
     @DisplayName("구매한 모든 로또를 가지는 dto를 생성한다.")
     @Test
     void response_purchase_results_dto_test() {
+        // given
         int manualLottoCount = 1;
         int autoLottoCount = 2;
-        List<Lotto> lottos = new ArrayList<>();
         Lotto lotto0 = new Lotto(List.of(
                 LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
@@ -26,12 +26,16 @@ public class ResponsePurchaseResultsDtoTest {
         Lotto lotto2 = new Lotto(List.of(
                 LottoNumber.valueOf(13), LottoNumber.valueOf(14), LottoNumber.valueOf(15),
                 LottoNumber.valueOf(16), LottoNumber.valueOf(17), LottoNumber.valueOf(18)));
+
+        List<Lotto> lottos = new ArrayList<>();
         lottos.add(lotto0);
         lottos.add(lotto1);
         lottos.add(lotto2);
 
+        // when
         ResponsePurchaseResultsDto dto = new ResponsePurchaseResultsDto(lottos, manualLottoCount, autoLottoCount);
 
+        // than
         assertThat(dto.getLottos()).hasSize(lottos.size());
         assertThat(dto.getLottos().get(0)).isEqualTo(lotto0);
         assertThat(dto.getLottos().get(1)).isEqualTo(lotto1);

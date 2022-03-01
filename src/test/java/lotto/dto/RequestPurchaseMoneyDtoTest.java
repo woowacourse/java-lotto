@@ -10,9 +10,13 @@ public class RequestPurchaseMoneyDtoTest {
     @DisplayName("숫자를 받아 구입금액을 가지는 dto를 생성한다.")
     @Test
     void response_purchase_money_dto_test() {
+        // given
         int money = 1000;
+
+        // when
         RequestPurchaseMoneyDto dto = new RequestPurchaseMoneyDto(money);
 
+        // than
         assertThat(dto.getMoney().get()).isEqualTo(money);
     }
 }
