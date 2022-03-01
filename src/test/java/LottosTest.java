@@ -1,9 +1,9 @@
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import domain.Lotto;
 import domain.Lottos;
-import domain.Rewards;
-import domain.WinningNumbers;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -24,5 +24,21 @@ public class LottosTest {
         assertThat(lottos.getSize()).isEqualTo(3);
     }
 
+    @Test
+    @DisplayName("lottos 생성자에 null 값 들어올 시 예외 발생")
+    void check_null() {
+        assertThatThrownBy(
+            () -> new Lottos(null)
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("[ERROR] 로또 리스트엔 null 값이 올 수 없습니다.");
+    }
 
+    @Test
+    @DisplayName("lottos 생성자에 빈 리스트 값 들어올 시 예외 발생")
+    void check_empty() {
+        assertThatThrownBy(
+            () -> new Lottos(new ArrayList<>())
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("[ERROR] 로또 리스트엔 빈 리스트가 올 수 없습니다.");
+    }
 }
