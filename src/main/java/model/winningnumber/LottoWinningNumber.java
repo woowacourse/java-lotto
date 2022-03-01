@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import rule.Rule;
+import model.lotto.LottoNumber;
 import utils.InputValidateUtils;
 
 public class LottoWinningNumber {
@@ -37,11 +37,12 @@ public class LottoWinningNumber {
 
 	private void validateNumberOutOfRange(String numbers) {
 		split(numbers)
-			.forEach(number -> InputValidateUtils.inputOutOfRange(number, WINNING_NUMBER_RANGE_ERROR_MESSAGE));
+			.forEach(
+				number -> LottoNumber.validateOutOfRange(Integer.parseInt(number), WINNING_NUMBER_RANGE_ERROR_MESSAGE));
 	}
 
 	private void validateNumberSize(String numbers) {
-		if (split(numbers).size() != Rule.LOTTO_SIZE.getRuleNum()) {
+		if (!LottoNumber.isSizeCorrect(split(numbers).size())) {
 			throw new IllegalArgumentException(WINNING_NUMBER_SIZE_ERROR_MESSAGE);
 		}
 	}

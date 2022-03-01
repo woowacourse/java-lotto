@@ -1,5 +1,6 @@
 package model.bonusball;
 
+import model.lotto.LottoNumber;
 import utils.InputValidateUtils;
 
 public class BonusBall {
@@ -12,7 +13,7 @@ public class BonusBall {
 	public BonusBall(String number) {
 		InputValidateUtils.inputBlank(number, BONUS_BALL_BLANK_ERROR_MESSAGE);
 		InputValidateUtils.inputNumber(number, BONUS_BALL_NUMBER_ERROR_MESSAGE);
-		InputValidateUtils.inputOutOfRange(number, BONUS_BALL_RANGE_ERROR_MESSAGE);
+		LottoNumber.validateOutOfRange(Integer.parseInt(number), BONUS_BALL_RANGE_ERROR_MESSAGE);
 		this.number = makeBonusBallToNumber(number);
 	}
 
