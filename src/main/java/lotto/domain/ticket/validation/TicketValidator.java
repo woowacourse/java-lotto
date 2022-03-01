@@ -14,15 +14,8 @@ public class TicketValidator {
     }
 
     public static void validateTicket(final List<Integer> ballNumbers) {
-        verifyNumbersNotNull(ballNumbers);
         verifyNumbersNotOutOfSize(ballNumbers);
         verifyNumbersNotDuplicated(ballNumbers);
-    }
-
-    private static void verifyNumbersNotNull(final List<Integer> ballNumbers) {
-        if (Objects.isNull(ballNumbers)) {
-            throw new LottoException(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_NULL);
-        }
     }
 
     private static void verifyNumbersNotOutOfSize(final List<Integer> ballNumbers) {

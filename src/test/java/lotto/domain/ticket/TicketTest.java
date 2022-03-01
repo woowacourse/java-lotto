@@ -23,13 +23,6 @@ class TicketTest {
                 .hasMessageContaining(exceptionStatus.getMessage());
     }
 
-    @DisplayName("로또 번호 묶음은 NULL이 아니어야 합니다.")
-    @ParameterizedTest
-    @NullSource
-    void ticketNullExceptionTest(final List<Integer> numbers) {
-        ticketExceptionTest(numbers, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_NULL);
-    }
-
     @DisplayName("로또 번호 묶음은 6개로 구성되여야 합니다.")
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}")
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForNumbersOutOfSizeExceptionTest")
