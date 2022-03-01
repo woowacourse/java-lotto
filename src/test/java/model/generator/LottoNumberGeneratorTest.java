@@ -19,4 +19,13 @@ class LottoNumberGeneratorTest {
             assertThat(number).isLessThanOrEqualTo(45);
         }
     }
+
+    @Test
+    @DisplayName("생성한 난수가 6개인지 확인한다.")
+    void generateNumbers_SizeEqualSix() {
+        final Generator generator = new LottoNumberGenerator();
+        final List<Integer> numbers = generator.generateNumbers();
+
+        assertThat(numbers.size()).isEqualTo(6);
+    }
 }
