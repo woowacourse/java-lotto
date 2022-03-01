@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import util.LottoNumberGenerator;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,5 +36,15 @@ public class LottosTest {
         assertThat(winningStatistics.getStatistics().get(Rank.SECOND)).isEqualTo(0);
         assertThat(winningStatistics.getStatistics().get(Rank.FIFTH)).isEqualTo(1);
 
+    }
+
+    @Test
+    @DisplayName("수동 로또와 자동 로또가 합쳐서 하나의 로또로 되는지 테스트")
+    void addManualAndAutoLottosTest() {
+        AutoLottos autoLottos = AutoLottos.generateLottos(6);
+        Lotto lotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 6));
+        ManualLottos manualLottos = new ManualLottos(List.of(lotto));
+        Lottos totalLottos = Lottos.add(manualLottos, autoLottos);
+        assertThat(totalLottos.size()).isEqualTo(autoLottos.size() + manualLottos.size());
     }
 }
