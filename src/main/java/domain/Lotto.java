@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import util.Validator;
 
 public class Lotto {
 
@@ -25,6 +26,7 @@ public class Lotto {
     }
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
+        Validator.checkArgumentIsNull(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -40,6 +42,7 @@ public class Lotto {
     }
 
     public int countDuplicatedNumber(Lotto winningLotto) {
+        Validator.checkArgumentIsNull(winningLotto);
         List<Integer> numbers = getNumbers();
         return (int) winningLotto.lottoNumbers
                 .stream()
@@ -49,6 +52,7 @@ public class Lotto {
     }
 
     public boolean isBonusNumberContain(LottoNumber bonusNumber) {
+        Validator.checkArgumentIsNull(bonusNumber);
         return getNumbers().contains(bonusNumber.getNumber());
     }
 

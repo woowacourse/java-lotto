@@ -1,5 +1,7 @@
 package domain;
 
+import util.Validator;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN_VALUE = 1;
@@ -19,6 +21,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber other) {
+        Validator.checkArgumentIsNull(other);
         return this.number - other.number;
     }
 

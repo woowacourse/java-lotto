@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import util.Validator;
 
 public class Lottos {
 
@@ -33,12 +34,14 @@ public class Lottos {
     }
 
     public List<Integer> compareAllLottosWithWinningLotto(Lotto winningLotto) {
+        Validator.checkArgumentIsNull(winningLotto);
         return lottos.stream()
                 .map(lotto -> lotto.countDuplicatedNumber(winningLotto))
                 .collect(Collectors.toList());
     }
 
     public List<Boolean> compareAllLottosWithBonusNumber(LottoNumber bonusNumber) {
+        Validator.checkArgumentIsNull(bonusNumber);
         return lottos.stream()
                 .map(lotto -> lotto.isBonusNumberContain(bonusNumber))
                 .collect(Collectors.toList());

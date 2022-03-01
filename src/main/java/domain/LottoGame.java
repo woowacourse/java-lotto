@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import util.Validator;
 
 public class LottoGame {
 
@@ -44,6 +45,7 @@ public class LottoGame {
 
     public void enterWinningLottoNumbersAndBonusNumber(List<Integer> notVerifiedWinningLottoNumbers
             , int notVerifiedBonusNumber) {
+        Validator.checkArgumentIsNull(notVerifiedWinningLottoNumbers);
         validateLottoInput(notVerifiedWinningLottoNumbers, notVerifiedBonusNumber);
         Set<LottoNumber> winningLottoNumbers = notVerifiedWinningLottoNumbers.stream()
                 .map(LottoNumber::new)
@@ -81,7 +83,7 @@ public class LottoGame {
     }
 
     private void validateLength(List<Integer> target) {
-        if (target == null || target.isEmpty() || target.size() != LOTTO_NUMBER_DIGIT) {
+        if (target.isEmpty() || target.size() != LOTTO_NUMBER_DIGIT) {
             throw new IllegalArgumentException(LOTTO_NUMBER_DIGIT_EXCEPTION);
         }
     }
