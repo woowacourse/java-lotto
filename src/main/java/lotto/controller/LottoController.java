@@ -12,6 +12,8 @@ public class LottoController {
 
     public void run() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
+        LottoGame lottoGame = new LottoGame(purchaseAmount, StringConverter.toInt(InputView.getManualLottoCount()));
+
         int ticketCount = purchaseAmount.calculateTheNumberOfTicket();
         OutputView.printTicketCount(ticketCount);
 

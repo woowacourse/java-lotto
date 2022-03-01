@@ -11,6 +11,10 @@ public class PurchaseAmount {
         this.amount = calculateActualAmount(amount);
     }
 
+    public boolean canPurchase(int count) {
+        return amount >= TICKET_PRICE * count;
+    }
+
     public int calculateTheNumberOfTicket() {
         return amount / TICKET_PRICE;
     }
