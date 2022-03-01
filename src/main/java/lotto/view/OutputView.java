@@ -58,11 +58,11 @@ public class OutputView {
     }
 
     public void printYield(Map<Rank, Integer> ranks, double yield) {
-        System.out.println("3개 일치 (" + FIFTH.getPrizeMoney() + "원)-" + ranks.getOrDefault(FIFTH, 0) + "개");
-        System.out.println("4개 일치 (" + FORTH.getPrizeMoney() + "원)-" + ranks.getOrDefault(FORTH, 0) + "개");
-        System.out.println("5개 일치 (" + THIRD.getPrizeMoney() + "원)-" + ranks.getOrDefault(THIRD, 0) + "개");
-        System.out.println("5개 일치, 보너스 볼 일치(" + SECOND.getPrizeMoney() + "원)-" + ranks.getOrDefault(SECOND, 0) + "개");
-        System.out.println("6개 일치 (" + FIRST.getPrizeMoney() + "원)-" + ranks.getOrDefault(FIRST, 0) + "개");
+        System.out.printf("3개 일치 (%d원)-%d개\n", FIFTH.getPrizeMoney(), ranks.getOrDefault(FIFTH, 0));
+        System.out.printf("4개 일치 (%d원)-%d개\n", FORTH.getPrizeMoney(), ranks.getOrDefault(FORTH, 0));
+        System.out.printf("5개 일치 (%d원)-%d개\n", THIRD.getPrizeMoney(), ranks.getOrDefault(THIRD, 0));
+        System.out.printf("5개 일치, 보너스 볼 일치 (%d원)-%d개\n", SECOND.getPrizeMoney(), ranks.getOrDefault(SECOND, 0));
+        System.out.printf("6개 일치 (%d원)-%d개\n", FIRST.getPrizeMoney(), ranks.getOrDefault(FIRST, 0));
         System.out.printf("총 수익률은 %.2f 입니다.", yield);
     }
 }
