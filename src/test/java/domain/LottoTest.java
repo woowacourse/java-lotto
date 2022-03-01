@@ -10,10 +10,14 @@ import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.LottoGenerator;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import domain.LottoGenerator.ManualLottoGenerator;
 =======
 import domain.LottoGenerator.WinningLottoGenerator;
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
+=======
+import domain.LottoGenerator.ManualLottoGenerator;
+>>>>>>> 27b9569 (refactor : 인터페이스에서 원하는 추상 메서드만 몸체를 구현하고자 어댑터 클래스 추가)
 import org.junit.jupiter.api.BeforeEach;
 =======
 >>>>>>> 20a623d (feat: 로또 구매 기능 구현)
@@ -81,7 +85,7 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lottoGenerator = new WinningLottoGenerator();
+        lottoGenerator = new ManualLottoGenerator();
 
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
@@ -142,7 +146,7 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다.")
     void judge_보너스볼_불일치() {
-        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateWinningLotto(winningNumbers), new LottoNumber(10));
+        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), new LottoNumber(10));
         Result actual = lotto.judge(winningLotto);
         Result expected = new Result(5, false);
         assertThat(actual).isEqualTo(expected);
@@ -151,7 +155,7 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다.")
     void judge_보너스볼_일치() {
-        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateWinningLotto(winningNumbers), new LottoNumber(1));
+        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), new LottoNumber(1));
         Result actual = lotto.judge(winningLotto);
         Result expected = new Result(5, true);
         assertThat(actual).isEqualTo(expected);

@@ -22,7 +22,7 @@ import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
 import domain.LottoGenerator.LottoGenerator;
-import domain.LottoGenerator.WinningLottoGenerator;
+import domain.LottoGenerator.ManualLottoGenerator;
 import domain.Result;
 import domain.ResultStatus;
 import domain.player.Player;
@@ -98,6 +98,7 @@ public class LottoController {
 =======
 =======
     public void determineWinningNumber(List<Integer> winningNumbers, int bonusBall) {
+<<<<<<< HEAD
 >>>>>>> dbac179 (refactor : List<String>을 List<Integer> 로 변환해주는 역할 View에 위임)
         LottoGenerator lottoGenerator = new WinningLottoGenerator();
 <<<<<<< HEAD
@@ -106,6 +107,10 @@ public class LottoController {
 >>>>>>> 5b2a52c (refactor: 로또 생성 기능 인터페이스로 분리)
 =======
         Lotto winningLotto = lottoGenerator.generateWinningLotto(winningNumbers);
+=======
+        LottoGenerator lottoGenerator = new ManualLottoGenerator();
+        Lotto winningLotto = lottoGenerator.generateLotto(winningNumbers);
+>>>>>>> 27b9569 (refactor : 인터페이스에서 원하는 추상 메서드만 몸체를 구현하고자 어댑터 클래스 추가)
         this.winningLotto = new WinningLotto(winningLotto, LottoNumber.valueOf(bonusBall));
 >>>>>>> 8185971 (feat : 반복되는 LottoNumber 인스턴스 캐싱하기)
     }

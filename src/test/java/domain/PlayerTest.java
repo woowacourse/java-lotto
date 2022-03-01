@@ -15,12 +15,16 @@ import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
 import domain.LottoGenerator.LottoGenerator;
+<<<<<<< HEAD
 import domain.LottoGenerator.WinningLottoGenerator;
 <<<<<<< HEAD
 import domain.player.Money;
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
 =======
 >>>>>>> 440c90c (refactor : Player 로또 구매 역할 분리)
+=======
+import domain.LottoGenerator.ManualLottoGenerator;
+>>>>>>> 27b9569 (refactor : 인터페이스에서 원하는 추상 메서드만 몸체를 구현하고자 어댑터 클래스 추가)
 import domain.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -117,8 +121,8 @@ class PlayerTest {
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(i);
         }
-        LottoGenerator lottoGenerator = new WinningLottoGenerator();
-        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateWinningLotto(lottoNumbers), new LottoNumber(BONUS_BALL_NUMBER));
+        LottoGenerator lottoGenerator = new ManualLottoGenerator();
+        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(lottoNumbers), new LottoNumber(BONUS_BALL_NUMBER));
         List<Result> actual = player.judgeAll(winningLotto);
         int expected = 15;
 
