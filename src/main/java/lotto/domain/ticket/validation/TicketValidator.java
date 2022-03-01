@@ -1,8 +1,8 @@
 package lotto.domain.ticket.validation;
 
+import java.util.Collections;
 import java.util.List;
 
-import lotto.domain.ticket.condition.BallNumberDuplication;
 import lotto.domain.ticket.condition.TicketSize;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
@@ -31,7 +31,7 @@ public class TicketValidator {
 
     private static boolean isNumberDuplicated(final List<Integer> ballNumbers) {
         return ballNumbers.stream()
-                .anyMatch(ballNumber -> BallNumberDuplication.isExcessiveDuplicated(ballNumbers, ballNumber));
+                .anyMatch(ballNumber -> Collections.frequency(ballNumbers, ballNumber) > 1);
     }
 
 }
