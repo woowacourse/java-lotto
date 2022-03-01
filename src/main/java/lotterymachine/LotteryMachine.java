@@ -51,7 +51,7 @@ public class LotteryMachine {
     private static List<LotteryResultDto> getLotteryResult(LotteryTickets lotteryTickets) {
         List<Integer> winningNumbers = InputView.getWinningLotteryNumbers();
         int bonusNumber = InputView.getBonusNumber(winningNumbers);
-        return LotteryResultDto.createList(lotteryTickets.getLotteriesResult(winningNumbers, bonusNumber));
+        return LotteryResultDto.createLotteryResults(lotteryTickets.getLotteriesResult(winningNumbers, bonusNumber));
     }
 
     private static void printResult(Count numberOfTickets, List<LotteryResultDto> lotteryResult) {

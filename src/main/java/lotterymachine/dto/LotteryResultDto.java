@@ -23,7 +23,7 @@ public class LotteryResultDto implements Comparable<LotteryResultDto> {
         }
     }
 
-    public static List<LotteryResultDto> createList(Map<WinningLottery, Count> lotteryTickets) {
+    public static List<LotteryResultDto> createLotteryResults(Map<WinningLottery, Count> lotteryTickets) {
         List<LotteryResultDto> winningLotteries = new ArrayList<>();
         lotteryTickets.keySet().forEach(winningLottery -> winningLotteries
                 .add(new LotteryResultDto(winningLottery, lotteryTickets.get(winningLottery))));
