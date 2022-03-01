@@ -12,9 +12,14 @@ import model.LottoTickets;
 import model.WinningPrize;
 import model.WinningPrizeStrategy;
 import model.WinningResultDto;
+import view.inputview.ConsoleInputView;
+import view.inputview.InputView;
+import view.outputview.ConsoleOutputView;
+import view.outputview.OutputView;
 
 public class LottoController {
-    private final ViewContainer viewContainer = new ViewContainer();
+    private final InputView inputView = ConsoleInputView.getInstance();
+    private final OutputView outputView = ConsoleOutputView.getInstance();
     private LottoGame lottoGame;
 
     public void initLottoGame(LottoTickets lottoTickets,
@@ -36,31 +41,30 @@ public class LottoController {
         return new LottoTickets(purchaseMoney, generateStrategy);
     }
 
-    public Integer inputPurchaseMoney() {
-        return viewContainer.getPurchaseMoneyInputView().getUserInputData();
+    public int inputPurchaseMoney() {
+        return inputView.inputPurchaseMoney();
     }
 
-    public void printGeneratedLottoTickets(LottoTickets lottoTickets) {
+    public void showGeneratedLottoTickets(LottoTickets lottoTickets) {
         List<LottoTicketDto> dtos = toLottoTicketDtos(lottoTickets);
-        viewContainer.getLottoTicketOutputView().showOutputData(dtos);
+        outputView.showLottoTicket(dtos);
     }
 
     public Set<Integer> inputWinningNumbers() {
-        return viewContainer.getWinningNumberInputView().getUserInputData();
+        return inputView.inputWinningNumbers();
     }
 
-    public Integer inputBonusNumber() {
-        return viewContainer.getBonusNumberInputView().getUserInputData();
+    public int inputBonusNumber() {
+        return inputView.inputBonusNumber();
     }
 
-    public void printWinningResults(Map<WinningPrize, Integer> winningResults) {
+    public void showWinningResults(Map<WinningPrize, Integer> winningResults) {
         List<WinningResultDto> winningResultDtos = toWinningResultDtos(winningResults);
-        viewContainer.getWinningResultOutputView().showOutputData(winningResultDtos);
+        outputView.showWinningResult(winningResultDtos);
     }
 
-
-    public void printRateOfReturn(Double rateOfReturn) {
-        viewContainer.getRateOfReturnOutputView().showOutputData(rateOfReturn);
+    public void showRateOfReturn(double rateOfReturn) {
+        outputView.showRateOfReturn(rateOfReturn);
     }
 
     private List<WinningResultDto> toWinningResultDtos(Map<WinningPrize, Integer> winningResults) {

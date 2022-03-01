@@ -1,5 +1,4 @@
 import controller.LottoController;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import model.LottoNumberGenerateStrategy;
@@ -19,20 +18,20 @@ public class LottoMain {
     private static LottoTickets purchaseLottoTickets() {
         int purchaseMoney = controller.inputPurchaseMoney();
         LottoTickets lottoTickets = controller.createLottoTickets(purchaseMoney, new LottoNumberGenerateStrategy());
-        controller.printGeneratedLottoTickets(lottoTickets);
+        controller.showGeneratedLottoTickets(lottoTickets);
         return lottoTickets;
     }
 
     private static void settingLottoGame(LottoTickets lottoTickets) {
         Set<Integer> winningNumbers = controller.inputWinningNumbers();
-        Integer bonusNumber = controller.inputBonusNumber();
+        int bonusNumber = controller.inputBonusNumber();
         controller.initLottoGame(lottoTickets, winningNumbers, bonusNumber, new DefaultLottoWinningPrizeStrategy());
     }
 
     private static void printLottoGameResult() {
         Map<WinningPrize, Integer> winningResults = controller.winningResults();
         Double rateOfReturn = controller.rateOfReturn();
-        controller.printWinningResults(winningResults);
-        controller.printRateOfReturn(rateOfReturn);
+        controller.showWinningResults(winningResults);
+        controller.showRateOfReturn(rateOfReturn);
     }
 }
