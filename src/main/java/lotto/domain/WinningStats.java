@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import lotto.domain.lottonumber.LottoTicket;
 import lotto.domain.lottonumber.WinningNumbers;
 
@@ -41,11 +43,18 @@ public class WinningStats {
     }
 
     public long getTotalPrize() {
-        return lottoRankMap.keySet().stream()
-                .mapToLong((LottoRank lottoRank) ->
-                        lottoRank.prizeMoney() * lottoRankMap.get(lottoRank))
+        return lottoRankMap.entrySet().stream()
+                .mapToLong(this::subTotal)
+                .peek(System.out::println)
                 .sum();
     }
+
+    private long subTotal(Entry<LottoRank, Integer> entry) {
+        long prizeMoney = entry.getKey().prizeMoney();
+        Integer hitCount = entry.getValue();
+        return prizeMoney * hitCount;
+    }
+
 
     public BigDecimal getEarningsRate(PurchaseAmount money) {
         BigDecimal totalPrize = new BigDecimal(getTotalPrize());

@@ -15,7 +15,7 @@ class WinningStatsTest {
     void getCorrectAnswerNumbers() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 10, 11, 12", "13");
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 20, 21, 22", "30");
         WinningStats winningStats = new WinningStats(List.of(lottoTicket), winningNumbers);
 
         // when
@@ -31,7 +31,7 @@ class WinningStatsTest {
     void getTotalPrize() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 10", "6");
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 20", "6");
         WinningStats winningStats = new WinningStats(List.of(lottoTicket), winningNumbers);
 
         // when
