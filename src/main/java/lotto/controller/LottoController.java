@@ -79,7 +79,7 @@ public class LottoController {
 
     private List<Integer> requestWinningNumbers() {
         outputView.printMessage(REQUEST_WINNING_NUMBERS);
-        return inputView.requestWinningNumbers();
+        return inputView.requestTicketNumbers();
     }
 
     private int requestBonusNumber() {

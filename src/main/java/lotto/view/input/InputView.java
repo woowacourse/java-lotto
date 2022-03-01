@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
-import lotto.exception.ball.BallNumberExceptionStatus;
-import lotto.exception.money.MoneyExceptionStatus;
 import lotto.view.input.reader.Reader;
 import lotto.view.utils.Delimiter;
 
@@ -28,31 +26,27 @@ public class InputView {
     }
 
     public int requestMoney() {
-        return parseMoney(reader.readLine());
+        final String inputLine = reader.readLine();
+        return parseNumber(inputLine, LottoExceptionStatus.MONEY_MUST_BE_NUMERIC);
     }
 
-    private int parseMoney(final String inputValue) {
-        return parseNumber(inputValue, MoneyExceptionStatus.MONEY_MUST_BE_NUMERIC);
+    public int requestTicketCount() {
+        final String inputLine = reader.readLine();
+        return parseNumber(inputLine, LottoExceptionStatus.TICKET_COUNT_MUST_BE_NUMERIC);
     }
 
-    public List<Integer> requestWinningNumbers() {
-        final String inputValue = reader.readLine();
-        return Arrays.stream(Delimiter.COMMA.splitWith(appendSpaceBeforeSplit(inputValue)))
+    public List<Integer> requestTicketNumbers() {
+        final String inputLine = reader.readLine();
+        final String[] inputValues = Delimiter.COMMA.splitWith(inputLine);
+        return Arrays.stream(inputValues)
                 .map(String::trim)
-                .map(this::parseBallNumber)
+                .map(text -> this.parseNumber(text, LottoExceptionStatus.BALL_NUMBER_MUST_BE_NUMERIC))
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private String appendSpaceBeforeSplit(final String targetString) {
-        return Delimiter.SPACE.appendBehind(targetString);
-    }
-
-    private int parseBallNumber(final String inputValue) {
-        return parseNumber(inputValue, BallNumberExceptionStatus.BALL_MUST_BE_NUMERIC);
-    }
-
     public int requestBonusNumber() {
-        return parseBallNumber(reader.readLine());
+        final String inputLine = reader.readLine();
+        return parseNumber(inputLine, LottoExceptionStatus.BALL_NUMBER_MUST_BE_NUMERIC);
     }
 
 }

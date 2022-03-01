@@ -14,7 +14,8 @@ public enum Delimiter {
     }
 
     public String[] splitWith(final String targetString) {
-        return targetString.split(this.unit);
+        final int limitForSplitAllElement = -1;
+        return targetString.split(this.unit, limitForSplitAllElement);
     }
 
     public String appendBehind(final String targetString) {
