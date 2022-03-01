@@ -31,6 +31,14 @@ public class LottoGameTest {
     }
 
     @Test
+    @DisplayName("LottoGame 객체를 null 로 생성하려는 경우")
+    void createLottoGameWithNull() {
+        assertThatThrownBy(() ->
+            new LottoGame(null))
+            .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
     @DisplayName("로또 게임을 생성하는 경우")
     void createLottoGame() {
         LottoGame lottoGame = new LottoGame(lottos);
