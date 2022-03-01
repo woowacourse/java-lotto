@@ -1,14 +1,14 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.vo.Lotto;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoResults;
+import lotto.dto.ResponsePurchaseDto;
 
 public class ResultView {
 
-    private static final String PURCHASE_RESULT_MESSAGE = "개를 구매했습니다.";
+    private static final String PURCHASE_RESULT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
     private static final String PURCHASE_RESULT_DELIMITER = ", ";
     private static final String PURCHASE_RESULT_PRINT_MESSAGE = "[%s]" + System.lineSeparator();
 
@@ -24,10 +24,9 @@ public class ResultView {
     private static final String EMPTY_MESSAGE = "";
     private static final int HUNDRED_FOR_FLOOR = 100;
 
-    public static void printLottos(List<Lotto> lottos) {
-        int size = lottos.size();
-        System.out.println(size + PURCHASE_RESULT_MESSAGE);
-        for (Lotto lotto : lottos) {
+    public static void printPurchaseLottos(ResponsePurchaseDto dto) {
+        System.out.printf(PURCHASE_RESULT_MESSAGE, dto.getManualLottoCount(), dto.getAutoLottoCount());
+        for (Lotto lotto : dto.getLottos()) {
             String numbers = lotto.getNumbers().stream()
                     .map(lottoNumber -> Integer.toString(lottoNumber.get()))
                     .collect(Collectors.joining(PURCHASE_RESULT_DELIMITER));
@@ -63,9 +62,11 @@ public class ResultView {
         }
         if (prize == LottoPrize.TWICE) {
             return String
-                    .format(LOTTO_RESULT_TWICE_MESSAGE, prize.getLottoNumberMatchCount(), prize.getReward().get(), number);
+                    .format(LOTTO_RESULT_TWICE_MESSAGE, prize.getLottoNumberMatchCount(), prize.getReward().get(),
+                            number);
         }
         return String
-                .format(LOTTO_RESULT_DEFAULT_MESSAGE, prize.getLottoNumberMatchCount(), prize.getReward().get(), number);
+                .format(LOTTO_RESULT_DEFAULT_MESSAGE, prize.getLottoNumberMatchCount(), prize.getReward().get(),
+                        number);
     }
 }

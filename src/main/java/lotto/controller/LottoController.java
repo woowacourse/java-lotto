@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.Collections;
 import java.util.List;
 import lotto.domain.LottoGame;
 import lotto.domain.generator.LottoGenerator;
@@ -14,15 +15,24 @@ public class LottoController {
 
     public void run() {
         Money purchaseMoney = InputView.requestPurchaseMoney();
-        List<List<LottoNumber>> manualLottoNumbers = InputView.requestManualLottoNumbers();
         LottoGame lottoGame = new LottoGame();
-        lottoGame.purchase(purchaseMoney, new LottoGenerator());
-        ResultView.printLottos(lottoGame.getLottos());
-
-        if (lottoGame.hasLottoTickets()) {
-            WinningNumbers winningNumbers = InputView.requestWinningNumber();
-            LottoResults lottoResults = lottoGame.confirmWinnings(winningNumbers);
-            ResultView.printResults(lottoResults);
+        if (lottoGame.canBuyLotto(purchaseMoney)) {
+            purchase(purchaseMoney, lottoGame);
+            return;
         }
+        purchaseNothing(purchaseMoney, lottoGame);
+    }
+
+    private void purchase(Money money, LottoGame lottoGame) {
+        List<List<LottoNumber>> manualLottoNumbers = InputView.requestManualLottoNumbers();
+        ResultView.printPurchaseLottos(lottoGame.purchase(money, manualLottoNumbers, new LottoGenerator()));
+
+        WinningNumbers winningNumbers = InputView.requestWinningNumber();
+        LottoResults lottoResults = lottoGame.confirmWinnings(winningNumbers);
+        ResultView.printResults(lottoResults);
+    }
+
+    private void purchaseNothing(Money money, LottoGame lottoGame) {
+        ResultView.printPurchaseLottos(lottoGame.purchase(money, Collections.EMPTY_LIST, new LottoGenerator()));
     }
 }
