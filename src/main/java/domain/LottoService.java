@@ -139,7 +139,6 @@ public class LottoService {
     }
 
     private boolean checkBonus(final Lotto lotto) {
-        System.out.println("보너스여부: " + lotto.isContainNumber(bonusNumber));
         return lotto.isContainNumber(bonusNumber);
     }
 
