@@ -50,10 +50,6 @@ public class LottoService {
         if (isBonusNumberContain(this.lastWinLotto, bonusNumber)) {
             throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
         }
-
-        //1. 재료들이 모아지면, 결과를 뽑아줄 클래스의 생성자로 받아들이기
-        // -> map으로 카운팅할 것은 이미 예상하지만, 그것을 인변으로 관리하고 + 로직을 담을 클래스
-        // my) input파라미터로 넘어온 보너스번호를 저장하지말고 바로 가보자.
         return new ResultDto(this.issuedLotto, this.lastWinLotto, bonusNumber);
     }
 

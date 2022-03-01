@@ -12,8 +12,12 @@ public class LottoFactory {
         Count count = new Count(number);
         while (!count.isEnd()) {
             count = count.decrease();
-            issuedLotto.add(lottoGenerator.generate());
+            issuedLotto.add(generateLotto(lottoGenerator));
         }
         return Collections.unmodifiableList(issuedLotto);
+    }
+
+    private static Lotto generateLotto(final LottoGenerator lottoGenerator) {
+        return lottoGenerator.generate();
     }
 }
