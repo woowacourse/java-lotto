@@ -10,6 +10,8 @@ import domain.WinningLotto;
 import dto.LottoResultDto;
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.Function;
 
 public class LottoResultHandler {
     private LottoResultHandler() {
@@ -27,14 +29,18 @@ public class LottoResultHandler {
         return lottos.getLottos()
                 .stream()
                 .map(winningLotto::getRankByLotto)
-                .collect(groupingBy(rank -> rank, () -> new EnumMap<>(Rank.class), counting()));
+                .collect(groupingBy(Function.identity(), () -> new EnumMap<>(Rank.class), counting()));
     }
 
     private static long getTotalReturnByLottoResult(Map<Rank, Long> lottoResult) {
         return lottoResult.entrySet()
                 .stream()
-                .mapToLong(map -> map.getKey().getPrize() * map.getValue())
+                .mapToLong(LottoResultHandler::getPrizeByRankAndTimes)
                 .sum();
+    }
+
+    private static long getPrizeByRankAndTimes(Entry<Rank, Long> map) {
+        return map.getKey().getPrize() * map.getValue();
     }
 
     private static double getRateOfReturn(Lottos lottos, long totalReturn) {
