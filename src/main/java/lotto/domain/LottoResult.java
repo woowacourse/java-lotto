@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
 import lotto.domain.enumeration.Rank;
 import lotto.domain.vo.LottoPurchaseMoney;
 
@@ -26,9 +27,23 @@ public class LottoResult {
     }
 
     private int getTotalPrizeMoney() {
-        return ranks.keySet()
-                .stream()
-                .mapToInt(Rank::getPrizeMoney)
-                .sum();
+        int sum = 0;
+
+        Set<Rank> rankSet = ranks.keySet();
+
+        for (Rank rank : rankSet) {
+            sum = getSum(sum, rank);
+        }
+
+        return sum;
+    }
+
+    private int getSum(int sum, Rank rank) {
+        Integer integer = ranks.get(rank);
+
+        for (int i = 0; i < integer; i++) {
+            sum += rank.getPrizeMoney();
+        }
+        return sum;
     }
 }
