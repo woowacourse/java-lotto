@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,12 +29,10 @@ class WinningNumbersTest {
             int numberWinningsExpected
     ) {
         // given
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumbersString, bonusBallString);
+        WinningNumbers winningNumbers =
+                new WinningNumbers(new LottoTicket(winningNumbersString), new LottoNumber(bonusBallString));
 
-        Set<LottoNumber> lottoNumbers = Arrays.stream(ticketNumbersString.split(","))
-                .map(String::trim)
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+        Set<LottoNumber> lottoNumbers = getLottoNumberSet(ticketNumbersString);
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
@@ -56,12 +55,10 @@ class WinningNumbersTest {
             boolean expected
     ) {
         // given
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumbersString, bonusBallString);
+        WinningNumbers winningNumbers =
+                new WinningNumbers(new LottoTicket(winningNumbersString), new LottoNumber(bonusBallString));
 
-        Set<LottoNumber> lottoNumbers = Arrays.stream(ticketNumbersString.split(",", -1))
-                .map(String::trim)
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+        Set<LottoNumber> lottoNumbers = getLottoNumberSet(ticketNumbersString);
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
@@ -76,12 +73,23 @@ class WinningNumbersTest {
     void winningNumbersContainBonusBall() {
         // given & when & then
         assertThatThrownBy(
-                () -> new WinningNumbers("1, 2, 3, 4, 5, 6", "6"))
+                () -> {
+                    WinningNumbers winningNumbers = new WinningNumbers(
+                            new LottoTicket("1, 2, 3, 4, 5, 6"),
+                            new LottoNumber("6"));
+                })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(DUPLICATED_LOTTO_TICKET_AND_BONUS_BALL);
 
         Assertions.assertDoesNotThrow(
                 () -> new WinningNumbers("1, 2, 3, 4, 5, 16", "6")
         );
+    }
+
+    private Set<LottoNumber> getLottoNumberSet(String ticketNumbersString) {
+        return Arrays.stream(ticketNumbersString.split(","))
+                .map(String::trim)
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 }

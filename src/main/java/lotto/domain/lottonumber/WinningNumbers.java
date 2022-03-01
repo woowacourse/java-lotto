@@ -10,6 +10,15 @@ public class WinningNumbers {
     private final LottoTicket lottoTicket;
     private final LottoNumber bonusBall;
 
+    public WinningNumbers(LottoTicket lottoTicket, LottoNumber bonusBall) {
+        if (isDuplicated(lottoTicket, bonusBall)) {
+            throw new IllegalArgumentException(DUPLICATED_LOTTO_TICKET_AND_BONUS_BALL);
+        }
+
+        this.lottoTicket = lottoTicket;
+        this.bonusBall = bonusBall;
+    }
+
     public WinningNumbers(String lottoNumbersString, String bonusBallsString) {
         if (isDuplicated(lottoNumbersString, bonusBallsString)) {
             throw new IllegalArgumentException(DUPLICATED_LOTTO_TICKET_AND_BONUS_BALL);
@@ -17,6 +26,10 @@ public class WinningNumbers {
 
         lottoTicket = new LottoTicket(lottoNumbersString);
         bonusBall = new LottoNumber(bonusBallsString);
+    }
+
+    private boolean isDuplicated(LottoTicket lottoTicket, LottoNumber bonusBall) {
+        return lottoTicket.contains(bonusBall);
     }
 
     private boolean isDuplicated(String lottoNumbersString, String bonusBallsString) {

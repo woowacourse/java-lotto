@@ -4,6 +4,7 @@ import java.util.List;
 import lotto.domain.LottoTicketFactory;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningStats;
+import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoTicket;
 import lotto.domain.lottonumber.WinningNumbers;
 import lotto.view.InputView;
@@ -37,9 +38,9 @@ public class LottoController {
     public void showWinningStats() {
         PurchaseAmount purchaseAmount = purchaseAmountRepository.get();
         List<LottoTicket> lottoTickets = lottoTicketsRepository.get();
-        WinningNumbers winningNumbers = inputView.commonInputProcess(
-                () -> new WinningNumbers(inputView.inputWinningNumbers(), inputView.inputBonusBall())
-        );
+        LottoTicket lottoTicket = inputView.commonInputProcess(() -> new LottoTicket(inputView.inputWinningNumbers()));
+        LottoNumber bonusBall = inputView.commonInputProcess(() -> new LottoNumber(inputView.inputBonusBall()));
+        WinningNumbers winningNumbers = inputView.commonInputProcess(() -> new WinningNumbers(lottoTicket, bonusBall));
 
         WinningStats winningStats = new WinningStats(lottoTickets, winningNumbers);
         winningStatsRepository.set(winningStats);

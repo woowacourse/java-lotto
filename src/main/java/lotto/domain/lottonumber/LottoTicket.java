@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 public class LottoTicket {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
-    static final String INVALID_LOTTO_NUMBER_COUNT = "[ERROR] 로또 숫자는 6개만 입력해야 합니다";
+    static final String INVALID_LOTTO_NUMBER_COUNT = "[ERROR] 로또 숫자의 입력이 올바르지 않습니다.";
 
     private final Set<LottoNumber> lottoNumbers;
 
