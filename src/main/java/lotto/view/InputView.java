@@ -22,12 +22,12 @@ public class InputView {
         return new Money(stringToInt(validateBlank(SCANNER.nextLine())));
     }
 
-    public static int inputPassivityLottoAmount() {
+    public static int inputManualLottoAmount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return stringToInt(validateBlank(SCANNER.nextLine()));
     }
 
-    public static List<Lotto> inputPassivityLottoNumbers(final int amount) {
+    public static List<Lotto> inputManualLottoNumbers(final int amount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
         return IntStream.range(0, amount)

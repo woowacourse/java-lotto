@@ -16,7 +16,7 @@ public class Store {
         this.leftMoney = money;
     }
 
-    public List<Lotto> buyLottos(final List<Lotto> lottos) {
+    public List<Lotto> buyLottosWithRemainingMoney(final List<Lotto> lottos) {
         leftMoney = leftMoney.minus(LOTTO_PRICE.multiply(lottos.size()));
         while (canBuy()) {
             lottos.add(buy());

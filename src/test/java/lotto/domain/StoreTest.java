@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.vo.LottoNumber;
@@ -35,7 +34,7 @@ public class StoreTest {
     void createLotto() {
         Store store = new Store(new Money(1000L));
 
-        assertThat(store.buyLottos(new ArrayList<>())).hasSize(1);
+        assertThat(store.buyLottosWithRemainingMoney(new ArrayList<>())).hasSize(1);
     }
 
     @Test
@@ -46,7 +45,7 @@ public class StoreTest {
         lottos.add(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)));
         lottos.add(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)));
 
-        assertThat(store.buyLottos(lottos)).hasSize(4);
+        assertThat(store.buyLottosWithRemainingMoney(lottos)).hasSize(4);
     }
 
     @Test
