@@ -27,6 +27,14 @@ class LottoTest {
         assertThat(lotto).isNotNull();
     }
 
+    @Test
+    @DisplayName("Lotto 객체를 null 로 생성하려는 경우")
+    void createLottoWithNull() {
+        assertThatThrownBy(() ->
+            new Lotto(null))
+            .isInstanceOf(NullPointerException.class);
+    }
+
     @ParameterizedTest
     @MethodSource("invalidNumberListParameterProvider")
     @DisplayName("Lotto 객체 생성 시 LottoNumber 갯수가 유효하지 않은 경우")

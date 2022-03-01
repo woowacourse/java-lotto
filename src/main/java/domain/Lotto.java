@@ -12,9 +12,16 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        validateNull(lottoNumbers);
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    }
+
+    private void validateNull(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers == null) {
+            throw new NullPointerException("null 로 Lotto 를 생성할 수 없습니다.");
+        }
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
