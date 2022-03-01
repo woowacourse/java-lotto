@@ -1,7 +1,7 @@
 package lotterymachine;
 
 import static lotterymachine.utils.LotteryCalculator.calculateProfitRate;
-import static lotterymachine.utils.LotteryNumbersGenerator.generate;
+import static lotterymachine.utils.LotteryGenerator.generate;
 
 import java.util.Collections;
 
@@ -17,7 +17,6 @@ import lotterymachine.utils.LotteryCalculator;
 import lotterymachine.view.InputView;
 import lotterymachine.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LotteryMachine {
@@ -29,7 +28,7 @@ public class LotteryMachine {
         List<Integer> winningNumbers = InputView.getWinningNumbers();
         int bonusNumber = InputView.getBonusNumber(winningNumbers);
 
-        getResult(purchasedLotteryTickets, winningNumbers, bonusNumber);
+        showResult(purchasedLotteryTickets, winningNumbers, bonusNumber);
     }
 
 
@@ -49,16 +48,13 @@ public class LotteryMachine {
     }
 
     private static LotteryTickets purchaseLotteryTickets(Count numberOfTickets) {
-        List<LotteryTicket> lotteryTicketsList = new ArrayList<>();
-        for (int i = 0; i < numberOfTickets.getNumber(); i++) {
-            lotteryTicketsList.add(new LotteryTicket(generate()));
-        }
+        List<LotteryTicket> lotteryTicketsList = generate(numberOfTickets);
         LotteryTickets lotteryTickets = new LotteryTickets(lotteryTicketsList);
         OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
         return lotteryTickets;
     }
 
-    private static void getResult(LotteryTickets lotteryTickets, List<Integer> winningNumbers, int bonusNumber) {
+    private static void showResult(LotteryTickets lotteryTickets, List<Integer> winningNumbers, int bonusNumber) {
         Map<WinningLottery, Count> ticketsResult = lotteryTickets.getLotteriesResult(
                 Ball.createBalls(winningNumbers), Ball.from(bonusNumber));
         List<LotteryResultDto> lotteryResult = LotteryResultDto.createLotteryResults(ticketsResult);
