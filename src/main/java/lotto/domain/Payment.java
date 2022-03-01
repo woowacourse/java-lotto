@@ -21,7 +21,7 @@ public class Payment {
 
     private void validatePayment(final int payment) {
         validateNaturalNumber(payment);
-        validateBuyLotto(payment);
+        validateLottoPrice(payment);
     }
 
     private void validateNaturalNumber(final int number) {
@@ -30,7 +30,7 @@ public class Payment {
         }
     }
 
-    private void validateBuyLotto(final int number) {
+    private void validateLottoPrice(final int number) {
         if ((number % Lotto.LOTTO_PRICE) != 0) {
             throw new IllegalArgumentException(ERROR_LOTTO_PRICE);
         }

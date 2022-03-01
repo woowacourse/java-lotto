@@ -54,7 +54,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
         Lotto winLotto = new Lotto(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
 
-        int matchingCount = lotto.compareTo(winLotto);
+        int matchingCount = lotto.getMatchingCount(winLotto);
 
         assertEquals(matchingCount, 6);
     }
@@ -65,7 +65,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(List.of(ball1, ball2, ball3, ball4, ball5, ball7));
         Lotto winLotto = new Lotto(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
 
-        int matchingCount = lotto.compareTo(winLotto);
+        int matchingCount = lotto.getMatchingCount(winLotto);
 
         assertNotEquals(matchingCount, 6);
     }

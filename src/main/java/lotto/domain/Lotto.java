@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Lotto implements Comparable<Lotto> {
+public class Lotto {
     private static final List<Ball> lottoTotalBalls = new ArrayList<>();
     private static final int BALL_COUNT = 6;
     public static final int LOTTO_PRICE = 1000;
@@ -48,6 +48,12 @@ public class Lotto implements Comparable<Lotto> {
             .collect(Collectors.toList());
     }
 
+    public int getMatchingCount(final Lotto otherLotto) {
+        return (int) lotto.stream()
+                .filter(otherLotto::contains)
+                .count();
+    }
+
     private static ArrayList<Ball> selectBalls(final List<Ball> lottoBalls) {
         return new ArrayList<>(lottoBalls.subList(0, BALL_COUNT));
     }
@@ -70,12 +76,5 @@ public class Lotto implements Comparable<Lotto> {
         if (lotto.size() != BALL_COUNT) {
             throw new IllegalArgumentException(ERROR_BALL_COUNT);
         }
-    }
-
-    @Override
-    public int compareTo(final Lotto otherLotto) {
-        return (int) lotto.stream()
-                .filter(otherLotto::contains)
-                .count();
     }
 }

@@ -21,7 +21,7 @@ public class LottoResult {
 
     public void match(final Lottos lottos, final WinningLotto winningLotto) {
         for (Lotto lotto : lottos.getLottos()) {
-            int matchingCount = lotto.compareTo(winningLotto.getWinningNumbers());
+            int matchingCount = lotto.getMatchingCount(winningLotto.getWinningNumbers());
             boolean bonus = matchingCount == CHECK_BONUS_COUNT && lotto.contains(winningLotto.getBonusBall());
             increaseRankCount(Rank.getRank(matchingCount, bonus));
         }
