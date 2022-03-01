@@ -2,24 +2,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.Lotto;
 import domain.Lottos;
-import domain.Rewards;
 import domain.WinningChecker;
 import domain.WinningNumbers;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class WinningCheckerTest {
 
-    @BeforeEach
-    void setup() {
-        Rewards.removeCount();
-    }
-
     @Test
-    @DisplayName("1등 당첨인지 확인하는 기능 테스트")
+    @DisplayName("only 1등 당첨일 때 수익은 20억이어야 한다.")
     void checkWinning() {
         Lotto lotto = new Lotto(Arrays.asList(3, 5, 6, 7, 8, 9));
         List<Integer> winningNumber = Arrays.asList(3, 5, 6, 7, 8, 9);
@@ -30,12 +23,12 @@ public class WinningCheckerTest {
 
         winningChecker.check();
 
-        assertThat(Rewards.getCount(Rewards.FIRST_REWARD))
-            .isEqualTo(1);
+        assertThat(winningChecker.sumRewards()).isEqualTo(2000000000);
+
     }
 
     @Test
-    @DisplayName("2등 당첨인지 확인하는 기능 테스트")
+    @DisplayName("only 2등 당첨일 때 수익은 3000만이어야 한다.")
     void checkWinning2() {
         Lotto lotto = new Lotto(Arrays.asList(3, 5, 6, 7, 8, 9));
         List<Integer> winningNumber = Arrays.asList(3, 5, 6, 7, 8, 10);
@@ -46,12 +39,11 @@ public class WinningCheckerTest {
 
         winningChecker.check();
 
-        assertThat(Rewards.getCount(Rewards.SECOND_REWARD))
-            .isEqualTo(1);
+        assertThat(winningChecker.sumRewards()).isEqualTo(30000000);
     }
 
     @Test
-    @DisplayName("3등 당첨인지 확인하는 테스트 ")
+    @DisplayName("only 3등 당첨일 때 수익은 150만이어야 한다.")
     void checkWinning3() {
         Lotto lotto = new Lotto(Arrays.asList(3, 5, 6, 7, 8, 9));
         List<Integer> winningNumber = Arrays.asList(3, 5, 6, 7, 8, 10);
@@ -62,12 +54,11 @@ public class WinningCheckerTest {
 
         winningChecker.check();
 
-        assertThat(Rewards.getCount(Rewards.THIRD_REWARD))
-            .isEqualTo(1);
+        assertThat(winningChecker.sumRewards()).isEqualTo(1500000);
     }
 
     @Test
-    @DisplayName("당첨 안됐을때 확인하는 기능 테스트")
+    @DisplayName("당첨 안됐을때 수익은 0원이어야 한다.")
     void checkWinning4() {
         Lotto lotto = new Lotto(Arrays.asList(11, 12, 13, 14, 8, 9));
         List<Integer> winningNumber = Arrays.asList(3, 5, 6, 7, 8, 10);
@@ -78,8 +69,7 @@ public class WinningCheckerTest {
 
         winningChecker.check();
 
-        assertThat(Rewards.getCount(Rewards.NO_REWARD))
-            .isEqualTo(1);
+        assertThat(winningChecker.sumRewards()).isEqualTo(0);
     }
 
 }

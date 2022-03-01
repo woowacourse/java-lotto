@@ -1,34 +1,23 @@
 package domain;
 
-import java.util.Arrays;
-
 public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
-    private static final int EMPTY = 0;
-    private static final int NO_YIELD = 0;
-    private static final int SUM_BASE = 0;
 
     private final Lottos lottos;
+    private WinningChecker winningChecker;
 
     public LottoGame(Money money, LottoGenerator lottoGenerator) {
         this.lottos = new Lottos(lottoGenerator.generate(money.convertToAmount()));
     }
 
     public void makeResult(WinningNumbers winningNumbers) {
-        WinningChecker winningChecker = new WinningChecker(lottos, winningNumbers);
+        winningChecker = new WinningChecker(lottos, winningNumbers);
         winningChecker.check();
     }
 
     public double getYield() {
-        if (lottos.getSize() == EMPTY) {
-            return NO_YIELD;
-        }
-
-        int prize = Arrays.stream(Rewards.values())
-            .map(Rewards::calculateYield)
-            .reduce(SUM_BASE, Integer::sum);
-        return (double) prize / (LOTTO_PRICE * lottos.getSize());
+        return winningChecker.sumRewards() / (LOTTO_PRICE * lottos.getSize());
     }
 
     public Lottos getLottos() {
