@@ -27,7 +27,7 @@ class LottoRankTest {
 	@DisplayName("상금이 있는 값만 반환 검증")
 	void lottoRankValues_WithoutNOTHING() {
 		assertThat(LottoRank.valuesWithPrize())
-			.containsExactly(LottoRank.FIRST, LottoRank.SECOND,
-				LottoRank.THIRD, LottoRank.FOURTH, LottoRank.FIFTH);
+			.containsExactly(LottoRank.FIFTH, LottoRank.FOURTH,
+				LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST);
 	}
 }

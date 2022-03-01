@@ -26,18 +26,15 @@ public class OutputView {
     }
 
     public static void printWinningStat(WinningStatDto winningStatDto) {
-        List<LottoRank> lottoRanks = LottoRank.valuesWithPrize();
-        Collections.reverse(lottoRanks);
-
         System.out.println("\n당첨 통계");
         System.out.println("--------");
-        System.out.print(createStatView(winningStatDto.getStat(), lottoRanks));
+        System.out.print(createStatView(winningStatDto.getStat()));
         System.out.println("총 수익률은 " + formatProfit(winningStatDto.getProfit()) + "입니다.");
     }
 
-    private static String createStatView(Map<LottoRank, Integer> statistics, List<LottoRank> lottoRanks) {
+    private static String createStatView(Map<LottoRank, Integer> statistics) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (LottoRank lottoRank : lottoRanks) {
+        for (LottoRank lottoRank : LottoRank.valuesWithPrize()) {
             stringBuilder.append(lottoRank.getMatchNumber()).append("개 일치")
                     .append(checkSecond(lottoRank))
                     .append(" (").append(lottoRank.getPrize()).append(") - ")
