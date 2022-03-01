@@ -17,12 +17,13 @@ import static lotto.domain.LottoMatchKind.*;
 import static org.assertj.core.api.Assertions.*;
 
 class LottoServiceTest {
-    private final LottoGenerator lottoGenerator = new LottoCustomGenerator();
+    private static final int ALL_COUNTS_OF_LOTTO_NUMBERS = 5;
+
     private final String purchaseAmount = "5000";
     private final String manualPurchaseCounts = "2";
     private final WinningNumbers winningNumbers = new WinningNumbers(
             new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.from("1"));
-    private final LottoService lottoService = new LottoService(lottoGenerator, purchaseAmount);
+    private final LottoService lottoService = new LottoService();
 
     @Test
     @DisplayName("수동 구매 개수를 반환한다.")
@@ -30,7 +31,7 @@ class LottoServiceTest {
         //given
         final int expected = 2;
         //when
-        final int actual = lottoService.countOfManualLottoNumbers(manualPurchaseCounts);
+        final int actual = lottoService.countOfManualLottoNumbers(manualPurchaseCounts, ALL_COUNTS_OF_LOTTO_NUMBERS);
         //then
         assertThat(actual).isEqualTo(expected);
     }
@@ -54,7 +55,7 @@ class LottoServiceTest {
         //given
         final int expected = 5;
         //when
-        final int actual = lottoService.countOfLottoNumbers();
+        final int actual = lottoService.countOfLottoNumbers(purchaseAmount);
         //then
         assertThat(actual).isEqualTo(expected);
     }
@@ -92,7 +93,7 @@ class LottoServiceTest {
         final Map<LottoMatchKind, Integer> matchResult = lottoService.getMatchResult(winningNumbers);
         final double expected = 2031555000 / (double) 5000;
         //when
-        final double actual = lottoService.getProfitRate(matchResult);
+        final double actual = lottoService.getProfitRate(matchResult, ALL_COUNTS_OF_LOTTO_NUMBERS);
         //then
         assertThat(actual).isEqualTo(expected);
     }
@@ -102,6 +103,6 @@ class LottoServiceTest {
                 Arrays.asList("4", "5", "6", "7", "8", "9"),
                 Arrays.asList("5", "6", "7", "8", "9", "10")
         ));
-        lottoService.generateAutoLottoNumbers();
+        lottoService.generateAutoLottoNumbers(new LottoCustomGenerator(), ALL_COUNTS_OF_LOTTO_NUMBERS);
     }
 }

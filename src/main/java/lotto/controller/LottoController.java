@@ -17,55 +17,54 @@ import java.util.stream.Collectors;
 
 public class LottoController {
     private final LottoService lottoService;
+    private final LottoGenerator lottoGenerator;
     private final InputView inputView;
     private final OutputView outputView;
 
     public LottoController(final LottoGenerator lottoGenerator, final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        lottoService = initializeLottoService(lottoGenerator);
-    }
-
-    private LottoService initializeLottoService(final LottoGenerator lottoGenerator) {
-        try {
-            final String purchaseAmountInput = inputView.inputPurchaseAmount();
-            return new LottoService(lottoGenerator, purchaseAmountInput);
-        } catch (final Exception e) {
-            inputView.printErrorMessage(e.getMessage());
-            return initializeLottoService(lottoGenerator);
-        }
+        this.lottoGenerator = lottoGenerator;
+        lottoService = new LottoService();
     }
 
     public void run() {
-        int manualCounts = generateManualLottoNumbersGroup();
-        generateAutoLottoNumbersGroup();
-        outputView.printPurchaseCount(manualCounts, lottoService.countOfLottoNumbers());
+        final int allCounts = initializeLottoCounts();
+        final int manualCounts = generateManualLottoNumbersGroup(allCounts);
+        lottoService.generateAutoLottoNumbers(lottoGenerator, allCounts);
+        outputView.printPurchaseCount(manualCounts, allCounts);
         printLottoNumbersGroup();
         final WinningNumbers winningNumbers = generateWinningNumbers();
-        printResult(winningNumbers);
+        printResult(winningNumbers, allCounts);
     }
 
-    private int generateManualLottoNumbersGroup() {
+    private int initializeLottoCounts() {
+        try {
+            String inputAmount = inputView.inputPurchaseAmount();
+            return lottoService.countOfLottoNumbers(inputAmount);
+        } catch (final Exception e) {
+            inputView.printErrorMessage(e.getMessage());
+            return initializeLottoCounts();
+        }
+    }
+
+    private int generateManualLottoNumbersGroup(final int allCounts) {
         try {
             final String manualPurchaseCounts = inputView.inputManualPurchaseCounts();
-            final int manualLottoCounts = lottoService.countOfManualLottoNumbers(manualPurchaseCounts);
+            final int manualLottoCounts = lottoService.countOfManualLottoNumbers(manualPurchaseCounts, allCounts);
             List<List<String>> manualLottoNumbersGroup = inputByManualLottoNumbersGroup(manualLottoCounts);
             return lottoService.generateManualLottoCounts(manualLottoNumbersGroup);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
-            return generateManualLottoNumbersGroup();
+            return generateManualLottoNumbersGroup(allCounts);
         }
     }
 
-    private List<List<String>> inputByManualLottoNumbersGroup(int manualLottoCounts) {
+    private List<List<String>> inputByManualLottoNumbersGroup(final int manualLottoCounts) {
         if (manualLottoCounts == 0) {
             return Collections.emptyList();
         }
         return inputView.inputManualPurchaseWinningNumbers(manualLottoCounts);
-    }
-
-    private void generateAutoLottoNumbersGroup() {
-        lottoService.generateAutoLottoNumbers();
     }
 
     private void printLottoNumbersGroup() {
@@ -74,8 +73,7 @@ public class LottoController {
         outputView.printLottoNumbersGroup(numbersGroup);
     }
 
-    private List<LottoNumbersDto> convertLottoNumbersGroupToDtos(
-            final List<LottoNumbers> numbersGroup) {
+    private List<LottoNumbersDto> convertLottoNumbersGroupToDtos(final List<LottoNumbers> numbersGroup) {
         return numbersGroup.stream()
                 .map(LottoNumbers::getValues)
                 .map(LottoNumbersDto::new)
@@ -93,12 +91,12 @@ public class LottoController {
         }
     }
 
-    private void printResult(WinningNumbers winningNumbers) {
+    private void printResult(final WinningNumbers winningNumbers, final int allCounts) {
         final Map<LottoMatchKind, Integer> matchResult = lottoService.getMatchResult(winningNumbers);
         final List<LottoMatchKindDto> results =
                 convertWinningResultsToDtos(matchResult);
         outputView.printCountOfWinningByMatchKind(results);
-        outputView.printProfitRate(lottoService.getProfitRate(matchResult));
+        outputView.printProfitRate(lottoService.getProfitRate(matchResult, allCounts));
     }
 
     private List<LottoMatchKindDto> convertWinningResultsToDtos(final Map<LottoMatchKind, Integer> results) {

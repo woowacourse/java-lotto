@@ -13,19 +13,19 @@ public class LottoService {
     private static final int LOTTO_PRICE = 1000;
     private static final int INITIAL_MATCH_COUNT = 0;
 
-    private final LottoGenerator lottoGenerator;
-    private final PurchaseAmount purchaseAmount;
     private final List<LottoNumbers> lottoNumbersGroup;
 
-    public LottoService(final LottoGenerator lottoGenerator, final String purchaseAmount) {
-        this.lottoGenerator = lottoGenerator;
-        this.purchaseAmount = PurchaseAmount.fromPurchaseAmountAndLottoPrice(purchaseAmount, LOTTO_PRICE);
+    public LottoService() {
         lottoNumbersGroup = new ArrayList<>();
     }
 
-    public int countOfManualLottoNumbers(final String manualCounts) {
-        ManualPurchaseCounts manualPurchaseCounts =
-                new ManualPurchaseCounts(manualCounts, purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE));
+    public int countOfLottoNumbers(final String amount) {
+        return PurchaseAmount.fromPurchaseAmountAndLottoPrice(amount, LOTTO_PRICE).getCountOfLottoNumbers(LOTTO_PRICE);
+    }
+
+    public int countOfManualLottoNumbers(final String manualCounts, final int allCounts) {
+        final ManualPurchaseCounts manualPurchaseCounts =
+                new ManualPurchaseCounts(manualCounts, allCounts);
         return manualPurchaseCounts.getManualLottoCounts();
     }
 
@@ -44,13 +44,9 @@ public class LottoService {
         }
     }
 
-    public void generateAutoLottoNumbers() {
-        final int autoLottoCounts = this.purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE) - lottoNumbersGroup.size();
+    public void generateAutoLottoNumbers(final LottoGenerator lottoGenerator, final int lottoNumbersCount) {
+        final int autoLottoCounts = lottoNumbersCount - lottoNumbersGroup.size();
         lottoNumbersGroup.addAll(lottoGenerator.generateLottoNumbersGroup(autoLottoCounts));
-    }
-
-    public int countOfLottoNumbers() {
-        return purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE);
     }
 
     public List<LottoNumbers> getLottoNumbersGroup() {
@@ -78,11 +74,11 @@ public class LottoService {
                 .forEach(lottoMatchKind -> result.put(lottoMatchKind, INITIAL_MATCH_COUNT));
     }
 
-    public double getProfitRate(final Map<LottoMatchKind, Integer> matchResult) {
+    public double getProfitRate(final Map<LottoMatchKind, Integer> matchResult, final int allCounts) {
         final long totalProfit = matchResult.keySet()
                 .stream()
                 .mapToLong(lottoMatchKind -> lottoMatchKind.getProfit(matchResult.get(lottoMatchKind)))
                 .sum();
-        return purchaseAmount.getProfitRate(totalProfit);
+        return (double) totalProfit / (allCounts * LOTTO_PRICE);
     }
 }
