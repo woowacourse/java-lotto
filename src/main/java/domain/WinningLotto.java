@@ -6,9 +6,19 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+        validateNull(winningLotto, bonusNumber);
         validateDuplicate(winningLotto, bonusNumber);
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validateNull(Lotto winningLotto, LottoNumber bonusNumber) {
+        if (winningLotto == null) {
+            throw new NullPointerException("WinningLotto 생성시 당첨 로또가 null 일 수 없습니다.");
+        }
+        if (bonusNumber == null) {
+            throw new NullPointerException("WinningLotto 생성시 보너스 번호가 null 일 수 없습니다.");
+        }
     }
 
     private void validateDuplicate(Lotto winningLotto, LottoNumber bonusNumber) {
