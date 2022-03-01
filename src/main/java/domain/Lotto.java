@@ -1,7 +1,7 @@
 package domain;
 
-import java.util.Collections;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
@@ -11,14 +11,19 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<LottoNumber> lottoNumbers) {
-        validateSize(lottoNumbers);
-
-        this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
+    public Lotto(Set<Integer> lottoNumberValues) {
+        validateSize(lottoNumberValues);
+        this.lottoNumbers = mapValuesToLottoNumber(lottoNumberValues);
     }
 
-    private void validateSize(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_SIZE) {
+    private Set<LottoNumber> mapValuesToLottoNumber(Set<Integer> lottoNumberValues) {
+        return lottoNumberValues.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toUnmodifiableSet());
+    }
+
+    private void validateSize(Set<Integer> lottoNumberValues) {
+        if (lottoNumberValues.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS);
         }
     }

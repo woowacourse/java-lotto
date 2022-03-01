@@ -15,9 +15,7 @@ public class WinningLottoTest {
 
     @BeforeEach
     void setup() {
-        lotto = new Lotto(Set.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
-
+        lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
         bonusNumber = new LottoNumber(7);
     }
 

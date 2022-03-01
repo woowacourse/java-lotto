@@ -1,8 +1,8 @@
 package view;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -25,14 +25,14 @@ public class InputView {
         }
     }
 
-    public static List<Integer> scanWinningNumbers() {
+    public static Set<Integer> scanWinningNumbers() {
         System.out.println(System.lineSeparator() + MESSAGE_FOR_WINNING_LOTTO_NUMBERS);
 
         String userInput = SCANNER.nextLine();
         try {
             return Arrays.stream(userInput.split(SPLIT_DELIMITER))
                     .map(Integer::parseInt)
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toSet());
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_NUMBER);
         }

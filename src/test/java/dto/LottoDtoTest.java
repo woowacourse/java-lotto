@@ -3,7 +3,6 @@ package dto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.Lotto;
-import domain.LottoNumber;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,16 +15,8 @@ public class LottoDtoTest {
 
     @BeforeEach
     void setUp() {
-        Set<LottoNumber> lottoNumbers = Set.of(
-                new LottoNumber(7),
-                new LottoNumber(10),
-                new LottoNumber(3),
-                new LottoNumber(42),
-                new LottoNumber(5),
-                new LottoNumber(25)
-        );
-
-        lotto = new Lotto(lottoNumbers);
+        Set<Integer> lottoNumberValues = Set.of(7, 10, 3, 42, 5, 25);
+        lotto = new Lotto(lottoNumberValues);
     }
 
     @Test

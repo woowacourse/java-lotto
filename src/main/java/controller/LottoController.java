@@ -78,19 +78,12 @@ public class LottoController {
 
     private Lotto generateLottoOfWinningLotto() {
         try {
-            List<Integer> winningNumberValues = InputView.scanWinningNumbers();
-            Set<LottoNumber> lottoNumbers = numbersToLottoNumberSet(winningNumberValues);
-            return new Lotto(lottoNumbers);
+            Set<Integer> winningNumberValues = InputView.scanWinningNumbers();
+            return new Lotto(winningNumberValues);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
             return generateLottoOfWinningLotto();
         }
-    }
-
-    private Set<LottoNumber> numbersToLottoNumberSet(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
     }
 
     private LottoNumber generateBonusNumberOfWinningLotto() {

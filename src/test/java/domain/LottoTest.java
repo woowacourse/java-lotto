@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,14 +15,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 @DisplayName("Lotto 테스트")
 public class LottoTest {
-    private Set<LottoNumber> lottoNumbers;
+    private Set<Integer> lottoNumbers;
 
     @BeforeEach
     void setup() {
-        lottoNumbers = new HashSet<>();
-        for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
-        }
+        lottoNumbers = IntStream.rangeClosed(1, 6)
+                .boxed()
+                .collect(Collectors.toSet());
     }
 
     @Test
@@ -37,7 +38,7 @@ public class LottoTest {
     @DisplayName("Lotto 생성시 전달된 List 길이가 6이 아니면 IAE 발생한다.")
     void createLottoWithInvalidSizeOfLottoNumbersShouldFail() {
         // given
-        lottoNumbers.add(new LottoNumber(8));
+        lottoNumbers.add(8);
 
         // then
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
@@ -52,9 +53,9 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         // when
-        Set<LottoNumber> newLottoNumbers = new HashSet<>(lottoNumbers);
-        newLottoNumbers.remove(new LottoNumber(6));
-        newLottoNumbers.add(new LottoNumber(7));
+        Set<Integer> newLottoNumbers = new HashSet<>(lottoNumbers);
+        newLottoNumbers.remove(6);
+        newLottoNumbers.add(7);
         Lotto anotherLotto = new Lotto(newLottoNumbers);
 
         // then

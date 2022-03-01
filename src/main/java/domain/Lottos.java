@@ -3,8 +3,6 @@ package domain;
 import domain.strategy.LottoNumberGenerateStrategy;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -16,16 +14,10 @@ public class Lottos {
     private List<Lotto> generateLottos(LottoQuantity lottoQuantity, LottoNumberGenerateStrategy lottoNumberGenerator) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoQuantity.getLottoQuantity(); i++) {
-            lottos.add(new Lotto(generateLottoNumbers(lottoNumberGenerator)));
+            lottos.add(new Lotto(lottoNumberGenerator.generateLottoNumbers()));
         }
-        return lottos;
-    }
 
-    private Set<LottoNumber> generateLottoNumbers(LottoNumberGenerateStrategy lottoNumberGenerator) {
-        return lottoNumberGenerator.generateLottoNumbers()
-                .stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+        return lottos;
     }
 
     public WinningResult getWinningResultByWinningLotto(WinningLotto winningLotto) {
