@@ -7,6 +7,7 @@ import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
+import lotto.domain.lottonumbergenerator.LottoNumberAutoGenerator;
 import lotto.dto.LottoResultDto;
 import lotto.dto.LottoTicketsDto;
 
@@ -17,7 +18,7 @@ public class LottoController {
 
     public LottoTicketsDto buyLottoTickets(int inputMoney) {
         money = new Money(inputMoney);
-        return getLottoTickets();
+        return getAutoLottoTickets();
     }
 
     public LottoResultDto matchLottoTickets(List<Integer> lottoNumbers, int lottoNumber) {
@@ -27,8 +28,8 @@ public class LottoController {
         return LottoResultDto.from(lottoStatistics, money.calculateYield(lottoStatistics.getLottoTotalReward()));
     }
 
-    private LottoTicketsDto getLottoTickets() {
-        lottoTickets = new LottoTickets(money.getLottoCount());
+    private LottoTicketsDto getAutoLottoTickets() {
+        lottoTickets = new LottoTickets(new LottoNumberAutoGenerator(), money.getLottoCount());
         return LottoTicketsDto.from(lottoTickets);
     }
 

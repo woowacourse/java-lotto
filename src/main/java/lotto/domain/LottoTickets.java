@@ -4,15 +4,14 @@ import static lotto.domain.LottoTicket.LOTTO_NUMBER_SIZE;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.lottonumbergenerator.LottoNumberAutoGenerator;
 import lotto.domain.lottonumbergenerator.LottoNumberGenerator;
 
 public class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(int lottoCount) {
-        this.lottoTickets = createLottoTickets(lottoCount);
+    public LottoTickets(LottoNumberGenerator lottoNumberGenerator, int lottoCount) {
+        this.lottoTickets = createLottoTickets(lottoNumberGenerator, lottoCount);
     }
 
     public List<Rank> getRanksWithWinningNumbers(WinningNumbers winningNumbers) {
@@ -23,8 +22,7 @@ public class LottoTickets {
         return ranks;
     }
 
-    private List<LottoTicket> createLottoTickets(int lottoCount) {
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberAutoGenerator();
+    private List<LottoTicket> createLottoTickets(LottoNumberGenerator lottoNumberGenerator, int lottoCount) {
         ArrayList<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(new LottoTicket(lottoNumberGenerator.getLottoNumbers(LOTTO_NUMBER_SIZE)));
