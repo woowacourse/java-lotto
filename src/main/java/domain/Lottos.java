@@ -1,5 +1,6 @@
 package domain;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +9,7 @@ public class Lottos {
 
     private static final int START_INDEX = 0;
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(int lottoAmount) {
         this.lottos = generateLottos(lottoAmount);
@@ -43,8 +44,8 @@ public class Lottos {
     }
 
     private List<Lotto> generateLottos(int lottoAmount) {
-        lottos = new ArrayList<>();
-        for (int i = START_INDEX; i < lottoAmount; ++i) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = START_INDEX; i<lottoAmount; ++i) {
             lottos.add(Lotto.generateLotto());
         }
         return lottos;
