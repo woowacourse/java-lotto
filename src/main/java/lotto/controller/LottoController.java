@@ -23,16 +23,20 @@ public class LottoController {
         lottoGame.makeManualLottos(inputLottos);
         lottoGame.makeAutoLottos();
 
-        int ticketCount = purchaseAmount.calculateTheNumberOfTicket();
-        OutputView.printTicketCount(ticketCount);
+        OutputView.printLottoCount(lottoGame.getManualLottoCount(), lottoGame.getAutoLottoCount());
 
-        List<Lotto> lottoTickets = getLottoTickets(ticketCount);
-        OutputView.printTickets(lottoTickets);
+        OutputView.printLottos(lottoGame.getLottos());
 
-        WinningLotto winningLotto = getWinningLotto();
-        RankBoard rankBoard = new RankBoard(winningLotto, lottoTickets);
-
-        OutputView.printResult(rankBoard, rankBoard.calculateProfitRatio(purchaseAmount.getAmount()));
+//        int ticketCount = purchaseAmount.calculateTheNumberOfTicket();
+//        OutputView.printTicketCount(ticketCount);
+//
+//        List<Lotto> lottoTickets = getLottoTickets(ticketCount);
+//        OutputView.printLottos(lottoTickets);
+//
+//        WinningLotto winningLotto = getWinningLotto();
+//        RankBoard rankBoard = new RankBoard(winningLotto, lottoTickets);
+//
+//        OutputView.printResult(rankBoard, rankBoard.calculateProfitRatio(purchaseAmount.getAmount()));
     }
 
     private PurchaseAmount getPurchaseAmount() {

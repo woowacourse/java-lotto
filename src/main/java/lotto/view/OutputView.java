@@ -12,24 +12,26 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
+    private static final String LOTTO_JOIN_DELIMITER = ", ";
+
     private OutputView() {
     }
 
-    public static void printTicketCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void printLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "개, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
     }
 
-    public static void printTickets(List<Lotto> tickets) {
-        for (Lotto ticket : tickets) {
-            System.out.println(makeTicketString(ticket));
+    public static void printLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            System.out.println(makeLottoString(lotto));
         }
         System.out.println();
     }
 
-    private static String makeTicketString(Lotto ticket) {
-        String result = ticket.getIntValues().stream()
+    private static String makeLottoString(Lotto lotto) {
+        String result = lotto.getIntValues().stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(LOTTO_JOIN_DELIMITER));
         return "[" + result + "]";
     }
 

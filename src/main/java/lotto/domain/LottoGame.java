@@ -7,6 +7,7 @@ public class LottoGame {
 
     private final PurchaseAmount purchaseAmount;
     private final int manualLottoCount;
+    private final int autoLottoCount;
     private final List<Lotto> lottos = new ArrayList<>();
 
     public LottoGame(PurchaseAmount purchaseAmount, int manualLottoCount) {
@@ -14,6 +15,7 @@ public class LottoGame {
 
         validateCanPurchase(manualLottoCount);
         this.manualLottoCount = manualLottoCount;
+        autoLottoCount = purchaseAmount.calculateAutoLottoCount(manualLottoCount);
     }
 
     private void validateCanPurchase(int count) {
@@ -38,13 +40,17 @@ public class LottoGame {
 
     public void makeAutoLottos() {
         LottoMachine lottoMachine = new RandomLottoMachine();
-        for (int i = 0; i < purchaseAmount.calculateAutoLottoCount(manualLottoCount); i++) {
+        for (int i = 0; i < autoLottoCount; i++) {
             lottos.add(lottoMachine.makeLottos());
         }
     }
 
     public int getManualLottoCount() {
         return manualLottoCount;
+    }
+
+    public int getAutoLottoCount() {
+        return autoLottoCount;
     }
 
     public List<Lotto> getLottos() {
