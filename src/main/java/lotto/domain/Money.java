@@ -4,7 +4,7 @@ import lotto.validator.MoneyValidator;
 
 public class Money {
 
-    private final int money;
+    private final long money;
 
     private Money(int money) {
         MoneyValidator.validate(money);
@@ -15,8 +15,8 @@ public class Money {
         return new Money(Integer.parseInt(money));
     }
 
-    public int calculateTotalLottoCount(int lottoPrice) {
-        return money / lottoPrice;
+    public int calculateTotalLottoCount(long lottoPrice) {
+        return (int) (money / lottoPrice);
     }
 
     public double getProfitRate(long totalPrize) {
