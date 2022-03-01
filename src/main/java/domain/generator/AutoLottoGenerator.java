@@ -12,7 +12,6 @@ public class AutoLottoGenerator implements LottoGenerator {
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
-    private static final int LOTTO_NUMBER_UNIT_TO_CORRECT = 1;
 
     private final List<Integer> numbers;
 
@@ -27,6 +26,7 @@ public class AutoLottoGenerator implements LottoGenerator {
         Collections.shuffle(numbers);
         return new Lotto(numbers.stream()
             .limit(LOTTO_SIZE)
+            .sorted()
             .map(LottoNumber::new)
             .collect(Collectors.toList()));
     }

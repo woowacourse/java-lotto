@@ -13,11 +13,7 @@ public class LottoNumberDto {
     public static LottoNumberDto from(final LottoNumber lottoNumber) {
         return new LottoNumberDto(lottoNumber.getNumber());
     }
-
-    public int getNumber() {
-        return number;
-    }
-
+    
     @Override
     public boolean equals(final Object object) {
         if (this == object) {

@@ -1,8 +1,7 @@
 package controller;
 
 import domain.LottoService;
-import domain.RankPrize;
-import java.util.SortedMap;
+import dto.ResultDto;
 import view.InputView;
 import view.OutputView;
 
@@ -12,7 +11,7 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    LottoService lottoService;
+    private LottoService lottoService;
 
     public LottoController(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
@@ -35,9 +34,9 @@ public class LottoController {
 
         initLastWinLotto();
 
-        final SortedMap<RankPrize, Integer> rankCounts = calculateResult();
-        outputView.printWinStatistics(rankCounts);
-        outputView.printWinProfit(lottoService.calculateProfit(rankCounts));
+        final ResultDto resultDto = calculateResult();
+        outputView.printWinStatistics(resultDto);
+        outputView.printWinProfit(lottoService.getProfitOrNotMessage(resultDto));
     }
 
     private void initLastWinLotto() {
@@ -49,7 +48,7 @@ public class LottoController {
         }
     }
 
-    private SortedMap<RankPrize, Integer> calculateResult() {
+    private ResultDto calculateResult() {
         try {
             return lottoService.calculateResult(inputView.getBonusNumber());
         } catch (Exception e) {

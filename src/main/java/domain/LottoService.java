@@ -2,25 +2,22 @@ package domain;
 
 import domain.generator.AutoLottoGenerator;
 import dto.LottoDto;
-import java.util.Arrays;
-import java.util.Collections;
+import dto.ResultDto;
 import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class LottoService {
 
     private static final int LOTTO_SIZE = 6;
-    private static final int RANK_COUNT_UNIT = 1;
-    private static final int RANK_COUNT_INIT_NUMBER = 0;
-    private static final int INIT_WIN_PRICE = 0;
     private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "보너스 볼 번호가 지난 주 당첨 번호와 일치할 수 없습니다.";
     private static final String ERROR_LOTTO_SIZE_MESSAGE = "번호는 6개를 입력하셔야 합니다.";
+    private static final String WIN_PROFIT_RESULT_MESSAGE = "총 수익률은 %.2f입니다. (기준이 1 이기 때문에 결과적으로 %s라는 의미임)";
+    private static final String PROFIT_NEGATIVE_MESSAGE = "손해";
+    private static final String PROFIT_POSITIVE_MESSAGE = "이익";
+    private static final String SYSTEM_SEPERATOR = "%n";
 
     private final Money money;
     private Lotto lastWinLotto;
-    private LottoNumber bonusNumber;
     private List<Lotto> issuedLotto;
 
     public LottoService(final int money) {
@@ -48,59 +45,28 @@ public class LottoService {
             .collect(Collectors.toUnmodifiableList());
     }
 
-    public SortedMap<RankPrize, Integer> calculateResult(final int bonusNumberInput) {
-        this.bonusNumber = new LottoNumber(bonusNumberInput);
+    public ResultDto calculateResult(final int bonusNumberInput) {
+        final LottoNumber bonusNumber = new LottoNumber(bonusNumberInput);
         if (isBonusNumberContain(this.lastWinLotto, bonusNumber)) {
             throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
         }
-        return extractRankCount(this.issuedLotto);
+
+        //1. 재료들이 모아지면, 결과를 뽑아줄 클래스의 생성자로 받아들이기
+        // -> map으로 카운팅할 것은 이미 예상하지만, 그것을 인변으로 관리하고 + 로직을 담을 클래스
+        // my) input파라미터로 넘어온 보너스번호를 저장하지말고 바로 가보자.
+        return new ResultDto(this.issuedLotto, this.lastWinLotto, bonusNumber);
     }
 
     private boolean isBonusNumberContain(final Lotto lotto, final LottoNumber bonusNumber) {
         return lotto.isContainNumber(bonusNumber);
     }
 
-    private Lotto convertToLotto(final LottoDto lottoDto) {
-        return new Lotto(lottoDto.get().stream()
-            .map(lottoNumberDto -> new LottoNumber(lottoNumberDto.getNumber()))
-            .collect(Collectors.toList()));
-    }
-
-    private SortedMap<RankPrize, Integer> extractRankCount(final List<Lotto> issuedLotto) {
-        SortedMap<RankPrize, Integer> rankCount = new TreeMap<>(Collections.reverseOrder());
-        initRank(rankCount);
-        for (Lotto lotto : issuedLotto) {
-            countRankedLotto(rankCount, lotto);
+    public String getProfitOrNotMessage(final ResultDto resultDto) {
+        final double profitRate = money.calculateProfit(resultDto.getPrizeProfit());
+        String resultMessage = PROFIT_NEGATIVE_MESSAGE;
+        if (profitRate >= 1) {
+            resultMessage = PROFIT_POSITIVE_MESSAGE;
         }
-        return rankCount;
-    }
-
-    private void initRank(final SortedMap<RankPrize, Integer> rankCount) {
-        Arrays.stream(RankPrize.values())
-            .forEach(e -> rankCount.put(e, RANK_COUNT_INIT_NUMBER));
-    }
-
-    private void countRankedLotto(final SortedMap<RankPrize, Integer> rankCount, final Lotto lotto) {
-        final MatchedCount matchedCount = getMatchedCount(lotto);
-        if (matchedCount.isInRank()) {
-            final RankPrize rankPrize = matchedCount.findRankPrice(checkBonus(lotto));
-            rankCount.put(rankPrize, rankCount.get(rankPrize) + RANK_COUNT_UNIT);
-        }
-    }
-
-    private MatchedCount getMatchedCount(final Lotto lotto) {
-        return new MatchedCount(lotto.compare(this.lastWinLotto));
-    }
-
-    private boolean checkBonus(final Lotto lotto) {
-        return lotto.isContainNumber(bonusNumber);
-    }
-
-    public double calculateProfit(final SortedMap<RankPrize, Integer> rankCounts) {
-        int totalWinPrice = INIT_WIN_PRICE;
-        for (RankPrize rankPrize : rankCounts.keySet()) {
-            totalWinPrice += rankPrize.getPrice() * rankCounts.get(rankPrize);
-        }
-        return money.calculateProfit(totalWinPrice);
+        return String.format((WIN_PROFIT_RESULT_MESSAGE) + SYSTEM_SEPERATOR, profitRate, resultMessage);
     }
 }
