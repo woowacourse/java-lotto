@@ -3,10 +3,8 @@ package lotto.view;
 import static java.util.Arrays.*;
 import static java.util.stream.Collectors.toList;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
 import lotto.domain.vo.LottoNumber;
 
 public class InputView {
@@ -21,6 +19,12 @@ public class InputView {
 
     public int getMoney() {
         System.out.println("구입금액을 입력해 주세요.");
+
+        return translateInteger(scanner.nextLine());
+    }
+
+    public int getManualCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 
         return translateInteger(scanner.nextLine());
     }
