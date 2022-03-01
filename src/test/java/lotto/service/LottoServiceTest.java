@@ -13,8 +13,8 @@ import lotto.AppConfig;
 import lotto.domain.ticket.Analysis;
 import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.CustomTicketGenerator;
-import lotto.domain.ticket.WinningTicket;
-import lotto.domain.rank.Rank;
+import lotto.domain.winning.WinningTicket;
+import lotto.domain.winning.Rank;
 import lotto.dto.TicketDto;
 
 class LottoServiceTest {

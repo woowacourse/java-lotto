@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import lotto.domain.rank.Rank;
+import lotto.domain.winning.Rank;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
 import lotto.view.utils.Delimiter;

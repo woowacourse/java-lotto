@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import lotto.domain.ticket.Analysis;
 import lotto.domain.ticket.Tickets;
-import lotto.domain.ticket.WinningTicket;
+import lotto.domain.winning.WinningTicket;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
 import lotto.service.LottoService;

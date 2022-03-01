@@ -1,12 +1,11 @@
-package lotto.domain.ticket;
+package lotto.domain.winning;
 
 import java.util.List;
 import java.util.Optional;
 
 import lotto.domain.ball.Ball;
 import lotto.domain.ball.BallStorage;
-import lotto.domain.rank.Rank;
-import lotto.domain.ticket.validation.WinningTicketValidator;
+import lotto.domain.ticket.Ticket;
 
 public class WinningTicket {
 

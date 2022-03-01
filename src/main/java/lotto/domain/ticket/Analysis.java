@@ -5,7 +5,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import lotto.domain.rank.Rank;
+import lotto.domain.winning.Rank;
 
 public class Analysis {
 

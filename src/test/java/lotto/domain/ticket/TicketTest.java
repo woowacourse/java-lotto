@@ -5,13 +5,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 
+import lotto.domain.winning.WinningTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.ball.Ball;
 import lotto.domain.ball.BallStorage;
-import lotto.domain.rank.Rank;
+import lotto.domain.winning.Rank;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
 

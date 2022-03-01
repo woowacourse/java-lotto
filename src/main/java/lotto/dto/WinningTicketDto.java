@@ -2,7 +2,7 @@ package lotto.dto;
 
 import java.util.List;
 
-import lotto.domain.ticket.WinningTicket;
+import lotto.domain.winning.WinningTicket;
 
 public class WinningTicketDto {
 

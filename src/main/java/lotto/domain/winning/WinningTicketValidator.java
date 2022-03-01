@@ -1,4 +1,4 @@
-package lotto.domain.ticket.validation;
+package lotto.domain.winning;
 
 import java.util.List;
 

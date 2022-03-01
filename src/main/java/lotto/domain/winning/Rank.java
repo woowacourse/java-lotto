@@ -1,4 +1,4 @@
-package lotto.domain.rank;
+package lotto.domain.winning;
 
 import java.util.Arrays;
 import java.util.Optional;

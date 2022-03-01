@@ -5,12 +5,12 @@ import java.util.List;
 import lotto.domain.ball.Ball;
 import lotto.domain.ball.BallStorage;
 import lotto.domain.money.Money;
-import lotto.domain.rank.Rank;
 import lotto.domain.ticket.Analysis;
 import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.Tickets;
-import lotto.domain.ticket.WinningTicket;
 import lotto.domain.ticket.generator.TicketGenerator;
+import lotto.domain.winning.Rank;
+import lotto.domain.winning.WinningTicket;
 
 public class LottoService {
 
