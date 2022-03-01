@@ -30,40 +30,43 @@
 
 ### 객체별 역할
 
+#### LottoConstant
+- Lotto 프로그램에서 사용되는 상수를 관리한다.
+
 #### Lotto
 - 6개의 LottoNumber 를 저장하고 있다.
 
-### LottoFactory
-- 여 하나를 생성해준다.
-
-#### Lottos
-- 다수의 Lotto 들을 생성하고 관리한다.
-
-#### LottoNumber
-- 로또 숫자 하나를 의미한다.
-
-#### Money
-- 구입 금액을 의미한다.
-
-#### WinningLotto
-- 당첨 번호를 담고 있다.
-- 당첨된 번호와 생성된 로또 번호의 일치여부를 판단하는 역할을 수행한다.
-
-#### LottoReward
-- 당첨 기준 정보와 금액을 담고있다.
-
-#### WinningStatistics
-- 로또 당첨 결과와 수익률을 담고있다.
+#### LottoFactory
+- Lotto 하나를 생성한다.
 
 #### LottoGame
 - 로또를 관리하는 역할을 수행한다.
 - 로또 당첨 결과를 관리한다.
 
+#### LottoGameMoney
+- 로또 구입 금액을 의미한다.
+
+#### LottoNumber
+- 로또 숫자 하나를 의미한다.
+
 #### LottoNumbersGenerator
 - 로또 번호를 생성하는 전략의 책임을 가진다.
 
+#### LottoReward
+- 당첨 기준 정보와 금액을 담고있다.
+
+#### Lottos
+- 다수의 Lotto 들을 생성하고 관리한다.
+
 #### RandomLottoNumberGenerator
 - 6개의 로또 번호들을 랜덤으로 생성하는 책임을 가진다.
+
+#### WinningLotto
+- 당첨 번호를 담고 있다.
+- 당첨된 번호와 생성된 로또 번호의 일치여부를 판단하는 역할을 수행한다.
+
+#### WinningStatistics
+- 로또 당첨 결과와 수익률을 담고있다.
 
 #### InputView 
 - 입력에 대한 책임을 가지고 요구조건에 적힌 입력 검증의 책임을 가진다.
