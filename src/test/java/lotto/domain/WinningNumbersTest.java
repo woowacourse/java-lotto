@@ -28,8 +28,6 @@ class WinningNumbersTest {
     private static Stream<Arguments> provideBlankLottoNumbersAndMatchKind() {
         return Stream.of(
                 Arguments.of(Arrays.asList("40", "41", "42", "43", "44", "45"), LottoMatchKind.BLANK),
-                Arguments.of(Arrays.asList("4", "5", "6", "7", "8", "1"), LottoMatchKind.BLANK),
-                Arguments.of(Arrays.asList("5", "6", "7", "8", "9", "1"), LottoMatchKind.BLANK),
                 Arguments.of(Arrays.asList("6", "7", "8", "9", "10", "1"), LottoMatchKind.BLANK),
                 Arguments.of(Arrays.asList("7", "8", "9", "10", "11", "1"), LottoMatchKind.BLANK)
         );
