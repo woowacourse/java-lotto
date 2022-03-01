@@ -19,10 +19,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    private void sortNumbers(List<LottoNumber> numbers) {
-        numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
-    }
-
     private void validateNumbers(List<LottoNumber> numbers) {
         validateSize(numbers);
         validateDuplicateNumbers(numbers);
@@ -39,6 +35,10 @@ public class Lotto {
         if (new HashSet<>(numbers).size() != numbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없다.");
         }
+    }
+
+    private void sortNumbers(List<LottoNumber> numbers) {
+        numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
     }
 
     public int countMatchNumbers(Lotto lotto) {

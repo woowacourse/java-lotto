@@ -88,5 +88,4 @@ public class InputView {
             throw new IllegalArgumentException("입력값은 음수일 수 없다.");
         }
     }
-
 }
