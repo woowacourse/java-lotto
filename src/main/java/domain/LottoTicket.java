@@ -17,7 +17,7 @@ public class LottoTicket {
         this.autoLottoCount = autoLottoCount;
         this.lottos = new ArrayList<>(passiveLottos);
         for (int i = 0; i < autoLottoCount; i++) {
-            lottos.add(new AutoLotto(generatorPolicy));
+            lottos.add(new Lotto(generatorPolicy.generate()));
         }
     }
 

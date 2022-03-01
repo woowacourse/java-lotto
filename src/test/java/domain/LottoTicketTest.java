@@ -21,7 +21,7 @@ public class LottoTicketTest {
 
     @Test
     public void createLottoTicketWithPassiveLotto() {
-        Lotto lotto = new PassiveLotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)));
+        Lotto lotto = new Lotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)));
         List<Lotto> passiveLotto = List.of(lotto);
         LottoTicket lottoTicket = new LottoTicket(14, passiveLotto, new ShuffleNumberGenerator());
         assertThat(lottoTicket).isInstanceOf(LottoTicket.class);
@@ -29,7 +29,7 @@ public class LottoTicketTest {
 
     @Test
     public void checkPassiveLottoCount() {
-        Lotto lotto = new PassiveLotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)));
+        Lotto lotto = new Lotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)));
         List<Lotto> passiveLotto = List.of(lotto);
         LottoTicket lottoTicket = new LottoTicket(14, passiveLotto, new ShuffleNumberGenerator());
         assertThat(lottoTicket.getLottos().size() - lottoTicket.getAutoLottoCount()).isEqualTo(1);
@@ -37,7 +37,7 @@ public class LottoTicketTest {
 
     @Test
     public void checkAutoLottoCount() {
-        Lotto lotto = new PassiveLotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)));
+        Lotto lotto = new Lotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)));
         List<Lotto> passiveLotto = List.of(lotto);
         LottoTicket lottoTicket = new LottoTicket(14, passiveLotto, new ShuffleNumberGenerator());
         assertThat(lottoTicket.getAutoLottoCount()).isEqualTo(14);

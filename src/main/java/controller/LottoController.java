@@ -26,7 +26,7 @@ public class LottoController {
         int passiveLottoCount = inputController.getPassiveLottoCount();
         OutputView.printPassiveLottoInputGuide();
         for (int i = 0; i < passiveLottoCount; i++) {
-            passiveLottos.add(new PassiveLotto(inputController.getPassiveLottoNumbers()));
+            passiveLottos.add(new Lotto(inputController.getPassiveLottoNumbers()));
         }
         return passiveLottos;
     }

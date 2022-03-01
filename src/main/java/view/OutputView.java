@@ -5,8 +5,6 @@ import domain.LottoRank;
 import domain.LottoResult;
 import domain.LottoTicket;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class OutputView {
