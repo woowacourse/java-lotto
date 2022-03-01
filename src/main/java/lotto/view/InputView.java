@@ -29,6 +29,18 @@ public class InputView {
         return translateInteger(scanner.nextLine());
     }
 
+    public List<LottoNumber> getManualLottoNumber() {
+        String manualNumbers = scanner.nextLine();
+
+        String[] splitInput = manualNumbers.split(SEPARATOR);
+
+        List<String> result = stream(splitInput)
+                .map(String::trim)
+                .collect(toList());
+
+        return translateLottoNumberList(result);
+    }
+
     public List<LottoNumber> getNormalWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
