@@ -12,6 +12,15 @@ public class InputView {
         return function.apply(SCANNER.nextLine());
     }
 
+    private static boolean isNotNumeric(String text) {
+        try {
+            Integer.parseInt(text);
+            return false;
+        } catch (NumberFormatException e) {
+            return true;
+        }
+    }
+
     public static boolean isRepeatable() {
         String value = inputSelectBox("다시 시도하시려면 Y, 아니면 N", "Y", "N", "y", "n");
         if (value.equals("y") || value.equals("Y")) {

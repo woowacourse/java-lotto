@@ -4,6 +4,7 @@ import exception.InvalidRangeLottoNumberException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import util.NumberFormatStringParser;
 
 public class LottoNumber {
     private static final int MINIMUM_LOTTO_NUMBER = 1;
@@ -18,19 +19,8 @@ public class LottoNumber {
     }
 
     public static LottoNumber parse(String text) {
-        if (isNotNumeric(text)) {
-            throw new IllegalArgumentException("로또번호는 반드시 숫자여야 합니다.");
-        }
-        return new LottoNumber(Integer.parseInt(text));
-    }
-
-    private static boolean isNotNumeric(String text) {
-        try {
-            Integer.parseInt(text);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        int number = NumberFormatStringParser.parse(text);
+        return new LottoNumber(number);
     }
 
     public static List<LottoNumber> convertAll(List<Integer> numbers) {
@@ -43,7 +33,7 @@ public class LottoNumber {
         return MINIMUM_LOTTO_NUMBER > number || number > MAXIMUM_LOTTO_NUMBER;
     }
 
-    public int getIntValue() {
+    public int intValue() {
         return lottoNumber;
     }
 

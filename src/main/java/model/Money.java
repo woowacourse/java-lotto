@@ -2,6 +2,7 @@ package model;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import util.NumberFormatStringParser;
 
 public class Money {
     public static final Money ZERO = new Money(BigDecimal.ZERO);
@@ -17,19 +18,11 @@ public class Money {
     }
 
     public static Money parse(String text) {
-        if (isNotNumeric(text)) {
-            throw new IllegalArgumentException("입금액은 반드시 숫자여야 합니다.");
+        int moneyAmount = NumberFormatStringParser.parse(text);
+        if (moneyAmount % 1000 != 0) {
+            throw new IllegalArgumentException("입력금은 반드시 1000의 배수여야 합니다.");
         }
-        return new Money(Integer.parseInt(text));
-    }
-
-    private static boolean isNotNumeric(String text) {
-        try {
-            Integer.parseInt(text);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return new Money(moneyAmount);
     }
 
     public Money add(Money prize) {

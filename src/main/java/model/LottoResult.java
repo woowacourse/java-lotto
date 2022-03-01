@@ -48,4 +48,8 @@ public class LottoResult {
                 LottoRank.FIFTH, INITIAL_RANK_COUNT, LottoRank.NOTHING, INITIAL_RANK_COUNT)
         );
     }
+
+    public Map<LottoRank, Integer> getResultMap() {
+        return resultMap;
+    }
 }
