@@ -16,14 +16,11 @@ public class LottoController {
     public Lottos initLottos(Money money) {
         final int quantityOfManual = inputQuantityOfManual(money);
 
-        List<Lotto> manualNumbers = new ArrayList<>();
-        if (quantityOfManual > 0) {
-            manualNumbers = inputManualNumbers(quantityOfManual);
-        }
+        final Lottos manualLottos = inputManualNumbers(quantityOfManual);
+        final Lottos autoLottos = Lottos.createByAuto(money.getQuantityOfAuto(quantityOfManual));
 
-        final Lottos lottos = new Lottos(money.getQuantityOfAuto(quantityOfManual), manualNumbers);
-        OutputView.printInitResult(lottos, quantityOfManual);
-        return lottos;
+        OutputView.printInitResult(manualLottos, autoLottos);
+        return Lottos.of(manualLottos.getLottos(), autoLottos.getLottos());
     }
 
     private int inputQuantityOfManual(Money money) {
@@ -47,7 +44,7 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> inputManualNumbers(int quantity) {
+    private Lottos inputManualNumbers(int quantity) {
         OutputView.printManualNumbersMessage();
         final List<Lotto> lottos = new ArrayList<>();
 
@@ -55,7 +52,7 @@ public class LottoController {
             final Optional<Lotto> lotto = getValidManualLotto();
             lotto.ifPresent(lottos::add);
         } while (lottos.size() < quantity);
-        return lottos;
+        return Lottos.createByManual(lottos);
     }
 
     private Optional<Lotto> getValidManualLotto() {

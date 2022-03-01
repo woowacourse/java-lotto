@@ -5,19 +5,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
 
-    Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
-    }
-
-    public Lottos(int quantityOfAuto, List<Lotto> lottos) {
-        IntStream.range(0, quantityOfAuto)
-                .mapToObj(i -> Lotto.createByAuto())
-                .forEach(lottos::add);
+    private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
@@ -31,6 +25,13 @@ public class Lottos {
 
     public static Lottos createByManual(List<Lotto> lottos) {
         return new Lottos(lottos);
+    }
+
+    public static Lottos of(List<Lotto> lottos1, List<Lotto> lottos2) {
+        final List<Lotto> joinedLottos = Stream.concat(lottos1.stream(), lottos2.stream())
+                .collect(Collectors.toList());
+
+        return new Lottos(joinedLottos);
     }
 
     public Result getResult(WinningNumbers winningNumbers) {
