@@ -1,6 +1,5 @@
-package repository;
+package domain;
 
-import domain.LottoNumber;
 import java.util.HashMap;
 import java.util.Map;
 

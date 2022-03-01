@@ -1,14 +1,10 @@
-package factory;
+package domain;
 
 import static java.util.stream.Collectors.toList;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.Lottos;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import repository.LottoNumberRepository;
 
 public class LottoFactory {
     private static final List<Integer> lottoNumbers;

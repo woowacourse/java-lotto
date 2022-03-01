@@ -1,9 +1,7 @@
-package factory;
+package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.Lotto;
-import domain.Lottos;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 

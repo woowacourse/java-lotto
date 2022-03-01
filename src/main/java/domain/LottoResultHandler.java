@@ -1,12 +1,9 @@
-package util;
+package domain;
 
 import static controller.LottoController.LOTTO_PRICE;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
-import domain.Lottos;
-import domain.Rank;
-import domain.WinningLotto;
 import dto.LottoResultDto;
 import java.util.EnumMap;
 import java.util.Map;

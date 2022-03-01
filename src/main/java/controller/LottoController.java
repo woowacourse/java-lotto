@@ -1,15 +1,15 @@
 package controller;
 
-import static util.LottoResultHandler.getLottoResultDto;
+import static domain.LottoResultHandler.getLottoResultDto;
 
 import domain.Lotto;
+import domain.LottoFactory;
 import domain.LottoNumber;
+import domain.LottoNumberRepository;
 import domain.Lottos;
 import domain.WinningLotto;
-import factory.LottoFactory;
 import java.util.List;
 import java.util.stream.Collectors;
-import repository.LottoNumberRepository;
 import view.InputView;
 import view.ResultView;
 import vo.InputMoney;
