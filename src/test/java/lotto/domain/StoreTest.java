@@ -2,7 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import lotto.domain.vo.Money;
+import lotto.domain.vo.LottoMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,13 +10,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class StoreTest {
 
-    private static final Money tenThousandMoney = Money.createLottoMoney(1_000);
+    private static final LottoMoney tenThousandMoney = LottoMoney.createLottoMoney(1_000);
 
     @ParameterizedTest
     @ValueSource(ints = {1_000, 100_000})
     @DisplayName("입력금액을 전달하면 Store가 생성된다.")
     void createStore(int money) {
-        assertThat(new Store(Money.createLottoMoney(money))).isNotNull();
+        assertThat(new Store(LottoMoney.createLottoMoney(money))).isNotNull();
     }
 
     @Test

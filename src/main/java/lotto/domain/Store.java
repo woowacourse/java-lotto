@@ -1,20 +1,16 @@
 package lotto.domain;
 
-import lotto.domain.vo.LottoNumber;
-import lotto.domain.vo.Money;
+import lotto.domain.vo.LottoMoney;
 import lotto.view.InputView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Store {
 
-    private Money leftMoney;
+    private LottoMoney leftMoney;
 
-    public Store(Money leftMoney) {
+    public Store(LottoMoney leftMoney) {
         this.leftMoney = leftMoney;
     }
 
@@ -27,7 +23,7 @@ public class Store {
     }
 
     private void validateManualLottoCount(int manualLottoCount) {
-        if (Money.createLottoMoneyByCount(manualLottoCount).isGreaterThan(leftMoney)) {
+        if (LottoMoney.createLottoMoneyByCount(manualLottoCount).isGreaterThan(leftMoney)) {
             throw new IllegalArgumentException("로또를 구매할 돈이 부족하다.");
         }
     }
@@ -39,7 +35,7 @@ public class Store {
             InputView.validateBlank(input);
             lottos.add(new Lotto(InputView.convertToNumbers(input)));
         }
-        leftMoney = leftMoney.minus(Money.createLottoMoneyByCount(manualLottoCount));
+        leftMoney = leftMoney.minus(LottoMoney.createLottoMoneyByCount(manualLottoCount));
         return lottos;
     }
 
@@ -52,11 +48,11 @@ public class Store {
     }
 
     private boolean canBuy() {
-        return leftMoney.isGreaterThan(Money.createMinimumLottoMoney());
+        return leftMoney.isGreaterThan(LottoMoney.createMinimumLottoMoney());
     }
 
     private Lotto buy() {
-        leftMoney = leftMoney.minus(Money.createMinimumLottoMoney());
+        leftMoney = leftMoney.minus(LottoMoney.createMinimumLottoMoney());
         return LottoGenerator.generate();
     }
 }

@@ -30,17 +30,6 @@ public class InputView {
         return inputNumber;
     }
 
-//    public static List<Lotto> inputManualLottos(int manualLottoCount) {
-//        printManualLottos(manualLottoCount);
-//        List<Lotto> lottos = new ArrayList<>();
-//        for (int i = 0; i < manualLottoCount; i++) {
-//            String input = SCANNER.nextLine();
-//            validateBlank(input);
-//            lottos.add(new Lotto(convertToNumbers(input)));
-//        }
-//        return lottos;
-//    }
-
     public static void printManualLottos(int manualLottoCount) {
         if (manualLottoCount != 0) {
             System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");

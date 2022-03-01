@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import lotto.domain.vo.Money;
+import lotto.domain.vo.LottoMoney;
+import lotto.domain.vo.Reward;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -44,9 +45,9 @@ class RankTest {
     @MethodSource("ranks")
     @DisplayName("당첨 금액의 합을 계산한다.")
     void getFirstReward(List<Rank> ranks) {
-        Money money = Rank.calculateReward(ranks);
+        Reward reward = Rank.calculateReward(ranks);
         long totalReward = ranks.stream().mapToLong(rank -> rank.getReward().getValue()).sum();
-        assertThat(money).isEqualTo(Money.createReward(totalReward));
+        assertThat(reward).isEqualTo(new Reward(totalReward));
     }
 
     private static Stream<List<Rank>> ranks() {
@@ -64,8 +65,8 @@ class RankTest {
         for (int i = 0; i < maxCount; i++) {
             ranks.add(Rank.FIRST);
         }
-        Money money = Rank.calculateReward(ranks);
+        Reward reward = Rank.calculateReward(ranks);
 
-        assertThat(money).isEqualTo(Money.createReward(Rank.FIRST.getReward().getValue() * maxCount));
+        assertThat(reward).isEqualTo(new Reward(Rank.FIRST.getReward().getValue() * maxCount));
     }
 }

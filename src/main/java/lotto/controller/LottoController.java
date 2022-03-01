@@ -4,18 +4,19 @@ import java.util.List;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.vo.Money;
+import lotto.domain.vo.LottoMoney;
 import lotto.domain.vo.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.Store;
 import lotto.domain.WinnerLotto;
+import lotto.domain.vo.Reward;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
     public void run() {
-        Money totalMoney = Money.createLottoMoney(InputView.inputMoney());
+        LottoMoney totalMoney = LottoMoney.createLottoMoney(InputView.inputMoney());
         int manualLottoCount = InputView.inputManualLottoCount();
 
         Lottos lottos = buyLottos(totalMoney, manualLottoCount);
@@ -25,7 +26,7 @@ public class LottoController {
         OutputView.printResult(ranks, calculateRate(totalMoney, ranks));
     }
 
-    private Lottos buyLottos(Money totalMoney, int manualLottoCount) {
+    private Lottos buyLottos(LottoMoney totalMoney, int manualLottoCount) {
         InputView.printManualLottos(manualLottoCount);
         return new Lottos(new Store(totalMoney).buyLottos(manualLottoCount));
     }
@@ -42,8 +43,8 @@ public class LottoController {
         return InputView.inputBonusNumber();
     }
 
-    private Rate calculateRate(Money money, List<Rank> ranks) {
-        Money reward = Rank.calculateReward(ranks);
+    private Rate calculateRate(LottoMoney money, List<Rank> ranks) {
+        Reward reward = Rank.calculateReward(ranks);
         return new Rate(reward.divide(money));
     }
 

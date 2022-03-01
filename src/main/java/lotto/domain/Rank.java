@@ -1,24 +1,25 @@
 package lotto.domain;
 
-import lotto.domain.vo.Money;
+import lotto.domain.vo.LottoMoney;
+import lotto.domain.vo.Reward;
 
 import java.util.function.BiPredicate;
 import java.util.*;
 
 public enum Rank {
 
-    FIRST(6, Money.createReward(2_000_000_000L), (matchCount, matchBonus) -> matchCount == 6),
-    SECOND(5, Money.createReward(30_000_000L), (matchCount, matchBonus) -> matchCount == 5 && matchBonus),
-    THIRD(5, Money.createReward(1_500_000L), (matchCount, matchBonus) -> matchCount == 5 && !matchBonus),
-    FOURTH(4, Money.createReward(50_000L), (matchCount, matchBonus) -> matchCount == 4),
-    FIFTH(3, Money.createReward(5_000L), (matchCount, matchBonus) -> matchCount == 3),
-    NONE(0, Money.createReward(0L), (matchCount, matchBonus) -> matchCount <= 2);
+    FIRST(6, new Reward(2_000_000_000L), (matchCount, matchBonus) -> matchCount == 6),
+    SECOND(5, new Reward(30_000_000L), (matchCount, matchBonus) -> matchCount == 5 && matchBonus),
+    THIRD(5, new Reward(1_500_000L), (matchCount, matchBonus) -> matchCount == 5 && !matchBonus),
+    FOURTH(4, new Reward(50_000L), (matchCount, matchBonus) -> matchCount == 4),
+    FIFTH(3, new Reward(5_000L), (matchCount, matchBonus) -> matchCount == 3),
+    NONE(0, new Reward(0L), (matchCount, matchBonus) -> matchCount <= 2);
 
     private final int matchCount;
-    private final Money reward;
+    private final Reward reward;
     private final BiPredicate<Integer, Boolean> matchCalculator;
 
-    Rank(int matchCount, Money reward, BiPredicate<Integer, Boolean> matchCalculator) {
+    Rank(int matchCount, Reward reward, BiPredicate<Integer, Boolean> matchCalculator) {
         this.matchCount = matchCount;
         this.reward = reward;
         this.matchCalculator = matchCalculator;
@@ -31,8 +32,8 @@ public enum Rank {
                 .orElse(Rank.NONE);
     }
 
-    public static Money calculateReward(List<Rank> ranks) {
-        Money reward = Money.createReward(0L);
+    public static Reward calculateReward(List<Rank> ranks) {
+        Reward reward = new Reward(0L);
         for (Rank rank : ranks) {
             reward = reward.plus(rank.reward);
         }
@@ -47,7 +48,7 @@ public enum Rank {
         return this.matchCount;
     }
 
-    public Money getReward() {
+    public Reward getReward() {
         return this.reward;
     }
 }
