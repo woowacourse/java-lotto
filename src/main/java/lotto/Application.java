@@ -2,6 +2,8 @@ package lotto;
 
 import java.util.List;
 import lotto.controller.LottoController;
+import lotto.controller.dto.LottoResultDto;
+import lotto.controller.dto.LottoTicketsDto;
 import lotto.controller.dto.PurchaseInfoDto;
 import lotto.controller.dto.SalesInfoDto;
 import lotto.controller.dto.WinningNumberDto;
@@ -22,6 +24,14 @@ public class Application {
         PurchaseInfoDto purchaseInfoDto = PurchaseInfoDto.valueOf(money, manualCount, manualNumbers);
 
         SalesInfoDto salesInfoDto = lottoController.purchase(purchaseInfoDto);
+        LottoTicketsDto totalLottoTickets = salesInfoDto.getLottoTickets();
+        outputView.printSalesInfo(salesInfoDto);
+
+        WinningNumberDto winningNumberDto = creatWinningNumber(lottoController, inputView, outputView);
+
+        outputView.printLottoResultMessage();
+        LottoResultDto lottoResultDto = lottoController.createLottoResult(money, winningNumberDto, totalLottoTickets);
+        outputView.printYield(lottoResultDto);
     }
 
     private static int createMoney(InputView inputView, OutputView outputView) {

@@ -2,7 +2,6 @@ package lotto.controller.dto;
 
 import static java.util.stream.Collectors.*;
 
-import java.security.PublicKey;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;

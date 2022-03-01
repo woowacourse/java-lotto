@@ -15,4 +15,16 @@ public class SalesInfoDto {
     public static SalesInfoDto valueOf(int manualCount, int autoCount, LottoTicketsDto lottoTickets) {
         return new SalesInfoDto(manualCount, autoCount, lottoTickets);
     }
+
+    public int getManualCount() {
+        return manualCount;
+    }
+
+    public int getAutoCount() {
+        return autoCount;
+    }
+
+    public LottoTicketsDto getLottoTickets() {
+        return lottoTickets;
+    }
 }

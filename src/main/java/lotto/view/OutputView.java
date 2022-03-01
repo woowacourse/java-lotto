@@ -7,6 +7,7 @@ import lotto.controller.dto.LottoResultDto;
 import lotto.controller.dto.LottoTicketDto;
 import lotto.controller.dto.LottoTicketsDto;
 import lotto.controller.dto.RankDto;
+import lotto.controller.dto.SalesInfoDto;
 
 public class OutputView {
 
@@ -18,10 +19,16 @@ public class OutputView {
     private static final String TOTAL_YIELD_MESSAGE = "총 수익률은 %.2f 입니다.";
     private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String PROFIT_MESSAGE = "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+    private static final String SALES_INFO_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
 
     public void printErrorMessage(String errorMessage) {
         System.out.println(ERROR_MESSAGE_PREFIX + errorMessage);
         System.out.println();
+    }
+
+    public void printSalesInfo(SalesInfoDto salesInfoDto) {
+        System.out.printf(SALES_INFO_MESSAGE, salesInfoDto.getManualCount(), salesInfoDto.getAutoCount());
+        printLottoTicketsInfo(salesInfoDto.getLottoTickets());
     }
 
     public void printLottoTicketsInfo(LottoTicketsDto lottoTickets) {
