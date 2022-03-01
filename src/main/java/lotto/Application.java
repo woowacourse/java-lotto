@@ -2,8 +2,8 @@ package lotto;
 
 import java.util.List;
 import lotto.controller.LottoController;
-import lotto.controller.dto.LottoTicketsDto;
 import lotto.controller.dto.PurchaseInfoDto;
+import lotto.controller.dto.SalesInfoDto;
 import lotto.controller.dto.WinningNumberDto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -17,9 +17,11 @@ public class Application {
 
         int money = createMoney(inputView, outputView);
         int manualCount = createManualCount(inputView, outputView);
-        LottoTicketsDto manualNumbers = LottoTicketsDto.from(inputView.getManualNumbers(manualCount));
+        List<List<Integer>> manualNumbers = inputView.getManualNumbers(manualCount);
 
         PurchaseInfoDto purchaseInfoDto = PurchaseInfoDto.valueOf(money, manualCount, manualNumbers);
+
+        SalesInfoDto salesInfoDto = lottoController.purchase(purchaseInfoDto);
     }
 
     private static int createMoney(InputView inputView, OutputView outputView) {

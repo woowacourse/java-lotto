@@ -3,8 +3,9 @@ package lotto.controller;
 import java.util.List;
 import lotto.controller.dto.LottoResultDto;
 import lotto.controller.dto.LottoTicketsDto;
+import lotto.controller.dto.PurchaseInfoDto;
+import lotto.controller.dto.SalesInfoDto;
 import lotto.controller.dto.WinningNumberDto;
-import lotto.controller.dto.MoneyDto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
@@ -15,15 +16,21 @@ import lotto.domain.WinningNumber;
 
 public class LottoController {
 
-    public MoneyDto createMoney(int money) {
-        return MoneyDto.from(new Money(money));
-    }
-
-    public LottoTicketsDto createLottoTickets(int money) {
+    public SalesInfoDto purchase(PurchaseInfoDto purchaseInfoDto) {
         LottoMachine lottoMachine = new LottoMachine();
-        LottoTickets lottoTickets = lottoMachine.issue(new Money(money));
+        Money money = new Money(purchaseInfoDto.getMoney());
+        int manualCount = purchaseInfoDto.getManualCount();
+        List<List<Integer>> manualNumbers = purchaseInfoDto.getManualNumbers();
 
-        return LottoTicketsDto.from(lottoTickets);
+        LottoTickets manualLottoTickets = lottoMachine.issueManualLottoTickets(manualCount, manualNumbers);
+        Money calculateMoney = money.calculateProduct(LottoMachine.LOTTO_PRICE, manualCount);
+
+        int autoCount = calculateMoney.getProductCount(LottoMachine.LOTTO_PRICE);
+        LottoTickets autoLottoTickets = lottoMachine.issueAutoLottoTickets(autoCount);
+
+        LottoTickets totalLottoTickets = manualLottoTickets.combine(autoLottoTickets);
+
+        return SalesInfoDto.valueOf(manualCount, autoCount, LottoTicketsDto.from(totalLottoTickets));
     }
 
     public WinningNumberDto createWinningNumber(List<Integer> normalNumbers, int bonusNumber) {

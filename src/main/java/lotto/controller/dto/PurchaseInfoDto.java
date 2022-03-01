@@ -1,18 +1,21 @@
 package lotto.controller.dto;
 
+import java.util.Collections;
+import java.util.List;
+
 public class PurchaseInfoDto {
 
     private final int money;
     private final int manualCount;
-    private final LottoTicketsDto manualNumbers;
+    private final List<List<Integer>> manualNumbers;
 
-    private PurchaseInfoDto(int money, int manualCount, LottoTicketsDto manualNumbers) {
+    public PurchaseInfoDto(int money, int manualCount, List<List<Integer>> manualNumbers) {
         this.money = money;
         this.manualCount = manualCount;
         this.manualNumbers = manualNumbers;
     }
 
-    public static PurchaseInfoDto valueOf(int money, int manualCount, LottoTicketsDto manualNumbers) {
+    public static PurchaseInfoDto valueOf(int money, int manualCount, List<List<Integer>> manualNumbers) {
         return new PurchaseInfoDto(money, manualCount, manualNumbers);
     }
 
@@ -24,7 +27,7 @@ public class PurchaseInfoDto {
         return manualCount;
     }
 
-    public LottoTicketsDto getManualNumbers() {
-        return manualNumbers;
+    public List<List<Integer>> getManualNumbers() {
+        return Collections.unmodifiableList(manualNumbers);
     }
 }
