@@ -6,9 +6,8 @@ import java.util.Map;
 
 public class WinningChecker {
 
-    private static final int WINNING_COUNT_LIMIT = 3;
-    private static final int SECOND_PRIZE_CONDITION = 5;
-    private static final int NO_MEANING_COUNT = 0;
+    private final int WINNING_COUNT = 0;
+    private final int BONUS_COUNT = 1;
 
     private final Lottos lottos;
     private final WinningNumbers winningNumbers;
@@ -21,8 +20,7 @@ public class WinningChecker {
 
     public void check() {
         for (Lotto lotto : lottos.getLottos()) {
-            Rewards rewards = checkWinning(lotto, winningNumbers.getWinningNumbers(),
-                winningNumbers.getBonusNumber());
+            Rewards rewards = checkWinning(lotto);
             rewardsCountMap.put(rewards, rewardsCountMap.getOrDefault(rewards, 0) + 1);
         }
     }
@@ -35,41 +33,13 @@ public class WinningChecker {
             .sum();
     }
 
-    private Rewards checkWinning(Lotto lotto, List<Integer> winningNumbers, Integer bonusNumber) {
+    private Rewards checkWinning(Lotto lotto) {
 
-        int winningCount = countWinningNumbers(lotto, winningNumbers);
-        int bonusCount = countBonusNumber(lotto, bonusNumber);
+        List<Integer> winningAndBonusCount = lotto.getWinningAndBonusCount(winningNumbers);
 
-        winningCount = checkNoReward(winningCount);
-        bonusCount = checkSecondPrize(winningCount, bonusCount);
+        return Rewards.findReward(winningAndBonusCount.get(WINNING_COUNT),
+            winningAndBonusCount.get(BONUS_COUNT));
 
-        return Rewards.findReward(winningCount, bonusCount);
-    }
-
-    private int countWinningNumbers(Lotto lotto, List<Integer> winningNumbers) {
-        return (int) lotto.getLottoNumbers().stream()
-            .filter(winningNumbers::contains)
-            .count();
-    }
-
-    private int countBonusNumber(Lotto lotto, Integer bonusNumber) {
-        return (int) lotto.getLottoNumbers().stream()
-            .filter(bonusNumber::equals)
-            .count();
-    }
-
-    private int checkNoReward(Integer winningCount) {
-        if (winningCount < WINNING_COUNT_LIMIT) {
-            return NO_MEANING_COUNT;
-        }
-        return winningCount;
-    }
-
-    private int checkSecondPrize(Integer winningCount, Integer bonusCount) {
-        if (winningCount != SECOND_PRIZE_CONDITION) {
-            return NO_MEANING_COUNT;
-        }
-        return bonusCount;
     }
 
 }

@@ -1,8 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
@@ -16,6 +16,9 @@ public class Lotto {
     private final String LOTTO_SIZE_ERROR = "[ERROR] 로또 번호는 6개만 입력 가능합니다.";
     private final String LOTTO_NUMBER_NOT_UNIQUE_ERROR = "[ERROR] 로또 번호는 중복될 수 없습니다.";
 
+    private static final int WINNING_COUNT_LIMIT = 3;
+    private static final int SECOND_PRIZE_CONDITION = 5;
+    private static final int NO_MEANING_COUNT = 0;
 
     private final List<Integer> lottoNumbers;
 
@@ -25,7 +28,43 @@ public class Lotto {
     }
 
     public List<Integer> getLottoNumbers() {
-        return this.lottoNumbers;
+        return lottoNumbers;
+    }
+
+    public List<Integer> getWinningAndBonusCount(WinningNumbers winningNumbers) {
+        int winningCount = countWinningNumbers(winningNumbers);
+        int bonusCount = countBonusNumber(winningNumbers);
+
+        winningCount = checkNoReward(winningCount);
+        bonusCount = checkSecondPrize(winningCount, bonusCount);
+
+        return new ArrayList<>(List.of(winningCount, bonusCount));
+    }
+
+    private int countWinningNumbers(WinningNumbers winningNumbers) {
+        return (int) lottoNumbers.stream()
+            .filter(winningNumbers::isContain)
+            .count();
+    }
+
+    private int countBonusNumber(WinningNumbers winningNumbers) {
+        return (int) lottoNumbers.stream()
+            .filter(winningNumbers::isEqualToBonusNumber)
+            .count();
+    }
+
+    private int checkNoReward(int winningCount) {
+        if (winningCount < WINNING_COUNT_LIMIT) {
+            return NO_MEANING_COUNT;
+        }
+        return winningCount;
+    }
+
+    private int checkSecondPrize(int winningCount, int bonusCount) {
+        if (winningCount != SECOND_PRIZE_CONDITION) {
+            return NO_MEANING_COUNT;
+        }
+        return bonusCount;
     }
 
 

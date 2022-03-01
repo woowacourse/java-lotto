@@ -22,12 +22,12 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers;
+    public boolean isContain(int number) {
+        return winningNumbers.contains(number);
     }
 
-    public int getBonusNumber() {
-        return bonusNumber;
+    public boolean isEqualToBonusNumber(int number) {
+        return number == bonusNumber;
     }
 
     private void checkValidate(List<Integer> winningNumbers, int bonusNumber) {
