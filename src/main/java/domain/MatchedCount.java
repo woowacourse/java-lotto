@@ -13,6 +13,6 @@ public class MatchedCount {
     }
 
     public RankPrize findRankPrice(final boolean isBonusMatched) {
-        return RankPrize.findByCount(this.count, isBonusMatched);
+        return RankPrize.of(this.count, isBonusMatched);
     }
 }
