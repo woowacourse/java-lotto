@@ -23,16 +23,15 @@ public class LottoController {
 
     private static final String NUMBER_REGEX = "\\d+";
 
-
     public void run() {
         Money money = validateMoney(InputView.inputMoney());
         Lottos lottos = makeLottos(money);
         ResultView.printBuyingLottosResult(lottos);
         WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
                 InputView.inputBonusNumber());
-        LottoCalculator lottoMachine = new LottoCalculator(lottos, winningLotto);
-        lottoMachine.calculateResult();
-        ResultView.printTotalRankResult(lottoMachine);
+        LottoCalculator lottoCalculator = new LottoCalculator(lottos, winningLotto);
+        lottoCalculator.calculateResult();
+        ResultView.printTotalRankResult(lottoCalculator);
     }
 
     private Money validateMoney(String money) throws IllegalArgumentException {
