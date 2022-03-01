@@ -1,5 +1,7 @@
 package domain.lottery;
 
+import static domain.lottery.LotteryNumber.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -7,9 +9,6 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LotteryGenerator {
-
-	private static final int MIN_LOTTERY_NUMBER = 1;
-	private static final int MAX_LOTTERY_NUMBER = 45;
 
 	private final List<Integer> numbers;
 
