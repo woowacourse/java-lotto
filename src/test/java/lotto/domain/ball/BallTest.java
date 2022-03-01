@@ -1,4 +1,4 @@
-package lotto.domain.ticket;
+package lotto.domain.ball;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -10,13 +10,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
 
+@DisplayName("Ball 객체, 생성 테스트")
 class BallTest {
 
     @DisplayName("범위 밖의 번호는 생성할 수 없다.")
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}")
     @ValueSource(ints = {-2, -1, 0, 46, 47, 48})
     void rangeOutExceptionTest(final int number) {
-        assertThatThrownBy(() -> Balls.getBall(number))
+        assertThatThrownBy(() -> new Ball(number))
                 .isInstanceOf(LottoException.class)
                 .hasMessageContaining(LottoExceptionStatus.BALL_NUMBER_CANNOT_BE_OUT_OF_RANGE.getMessage());
     }
@@ -25,7 +26,7 @@ class BallTest {
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}")
     @ValueSource(ints = {1, 2, 3, 43, 44, 45})
     void initTest(final int number) {
-        final Ball ball = Balls.getBall(number);
+        final Ball ball = new Ball(number);
         assertThat(ball.getBallNumber()).isEqualTo(number);
     }
 
