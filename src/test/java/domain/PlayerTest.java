@@ -5,7 +5,7 @@ import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
 import domain.LottoGenerator.LottoGenerator;
-import domain.LottoGenerator.WinningLottoGenerator;
+import domain.LottoGenerator.ManualLottoGenerator;
 import domain.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -46,8 +46,8 @@ class PlayerTest {
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(i);
         }
-        LottoGenerator lottoGenerator = new WinningLottoGenerator();
-        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateWinningLotto(lottoNumbers), new LottoNumber(BONUS_BALL_NUMBER));
+        LottoGenerator lottoGenerator = new ManualLottoGenerator();
+        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(lottoNumbers), new LottoNumber(BONUS_BALL_NUMBER));
         List<Result> actual = player.judgeAll(winningLotto);
         int expected = 15;
 

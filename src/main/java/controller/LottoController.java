@@ -5,7 +5,7 @@ import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
 import domain.LottoGenerator.LottoGenerator;
-import domain.LottoGenerator.WinningLottoGenerator;
+import domain.LottoGenerator.ManualLottoGenerator;
 import domain.Result;
 import domain.ResultStatus;
 import domain.player.Player;
@@ -29,8 +29,8 @@ public class LottoController {
     }
 
     public void determineWinningNumber(List<Integer> winningNumbers, int bonusBall) {
-        LottoGenerator lottoGenerator = new WinningLottoGenerator();
-        Lotto winningLotto = lottoGenerator.generateWinningLotto(winningNumbers);
+        LottoGenerator lottoGenerator = new ManualLottoGenerator();
+        Lotto winningLotto = lottoGenerator.generateLotto(winningNumbers);
         this.winningLotto = new WinningLotto(winningLotto, LottoNumber.valueOf(bonusBall));
     }
 

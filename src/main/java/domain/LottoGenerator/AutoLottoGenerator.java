@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AutoLottoGenerator implements LottoGenerator {
+public class AutoLottoGenerator extends LottoGeneratorAdpater {
 
     private static final int LOTTO_SIZE = 6;
 
@@ -24,10 +24,5 @@ public class AutoLottoGenerator implements LottoGenerator {
                 .collect(Collectors.toList());
 
         return new Lotto(collect);
-    }
-
-    @Override
-    public Lotto generateWinningLotto(List<Integer> numbers) {
-        return null;
     }
 }
