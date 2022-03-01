@@ -16,7 +16,10 @@ public class LottoController {
     public Lottos initLottos(Money money) {
         final int quantityOfManual = inputQuantityOfManual(money);
 
-        final Lottos manualLottos = inputManualNumbers(quantityOfManual);
+        Lottos manualLottos = Lottos.createByManual(new ArrayList<>());
+        if (quantityOfManual > 0) {
+            manualLottos = inputManualNumbers(quantityOfManual);
+        }
         final Lottos autoLottos = Lottos.createByAuto(money.getQuantityOfAuto(quantityOfManual));
 
         OutputView.printInitResult(manualLottos, autoLottos);
