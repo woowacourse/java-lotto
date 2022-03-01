@@ -27,9 +27,7 @@ public class WinningNumbers {
     }
 
     public int getMatchCount(LottoTicket lottoTicket) {
-        return (int) this.lottoTicket.lottoNumbers().stream()
-                .filter(lottoTicket::contains)
-                .count();
+        return this.lottoTicket.getMatchCount(lottoTicket);
     }
 
     public boolean doesMatchBonusBall(LottoTicket lottoTicket) {

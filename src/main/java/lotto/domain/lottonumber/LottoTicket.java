@@ -45,4 +45,10 @@ public class LottoTicket {
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
+
+    public int getMatchCount(LottoTicket lottoTicket) {
+        return (int) this.lottoNumbers.stream()
+                .filter(lottoTicket::contains)
+                .count();
+    }
 }
