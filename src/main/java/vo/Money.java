@@ -2,13 +2,13 @@ package vo;
 
 import static domain.Lotto.LOTTO_PRICE;
 
-public class InputMoney {
-    private static final int REMAIN = 0;
+public class Money {
+    private static final int EXPECTED_REMAIN = 0;
     private static final String ERROR_MESSAGE_FOR_INVALID_INPUT_MONEY = "금액은 1000원 이상, 1000원 단위로 입력해주세요";
 
-    private final int money;
+    private int money;
 
-    public InputMoney(int money) {
+    public Money(int money) {
         validate(money);
         this.money = money;
     }
@@ -20,7 +20,7 @@ public class InputMoney {
     }
 
     private boolean isInvalidInputMoney(int money) {
-        return money < LOTTO_PRICE || money % LOTTO_PRICE != REMAIN;
+        return money < LOTTO_PRICE || money % LOTTO_PRICE != EXPECTED_REMAIN;
     }
 
     public int getMoney() {
