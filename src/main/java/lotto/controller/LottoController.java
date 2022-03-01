@@ -30,7 +30,7 @@ public class LottoController {
 
         List<LottoTicket> manualLottoTickets = createManualLottoTicket(manualCount);
 
-        LottoTickets lottoTickets = createLottoTickets(lottoPurchaseMoney, manualLottoTickets);
+        LottoTickets lottoTickets = createLottoTickets(lottoPurchaseMoney, manualLottoTickets, manualCount);
 
         WinningNumbers winningNumbers = createWinningNumbers();
 
@@ -93,15 +93,14 @@ public class LottoController {
         }
     }
 
-    private LottoTickets createLottoTickets(LottoPurchaseMoney lottoPurchaseMoney, List<LottoTicket> manualLottoTickets) {
-
+    private LottoTickets createLottoTickets(LottoPurchaseMoney lottoPurchaseMoney, List<LottoTicket> manualLottoTickets, int manualCount) {
         LottoMachine lottoMachine = new LottoMachine();
 
         LottoTickets lottoTickets = lottoMachine.purchase(lottoPurchaseMoney, manualLottoTickets);
 
         LottoTicketsDto lottoTicketsDto = new LottoTicketsDto(lottoTickets);
 
-        outputView.printTotalCount(lottoTickets.totalCount());
+        outputView.printTotalCount(manualCount, lottoPurchaseMoney.calculate(manualCount));
         outputView.printLottoTicketsInfo(lottoTicketsDto);
 
         return lottoTickets;

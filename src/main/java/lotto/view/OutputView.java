@@ -19,8 +19,8 @@ public class OutputView {
         System.out.println("[ERROR] " + errorMessage);
     }
 
-    public void printTotalCount(int totalCount) {
-        System.out.println(totalCount + "개를 구매했습니다.");
+    public void printTotalCount(int manualCount, int autoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualCount, autoCount);
     }
 
     public void printLottoTicketsInfo(LottoTicketsDto lottoTickets) {
