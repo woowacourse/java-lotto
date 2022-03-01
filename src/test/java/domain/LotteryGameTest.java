@@ -32,39 +32,4 @@ public class LotteryGameTest {
 		//then
 		assertThat(lotteries.getLotteries().size()).isEqualTo(lotteriesToCreate);
 	}
-
-	@Test
-	@DisplayName("등수가 제대로 집계되는지 확인")
-	void testRankingCount() {
-		//given
-		final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerator(),
-			new LotteryNumberMockGenerator());
-		Lotteries lotteries = lotteryGame.createAutoLottery();
-		WinningLottery winningLottery = lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-		//when
-		Result result = new Result();
-		result.makeWinner(lotteries, winningLottery);
-		final Map<Rank, Integer> rankResult = result.getRankResult();
-		//then
-		for (Rank rank : rankResult.keySet()) {
-			rankResult.get(rank);
-			assertThat(rankResult.get(rank)).isEqualTo(1);
-		}
-	}
-
-	@Test
-	@DisplayName("승률이 제대로 집계되는지 확인")
-	void testRankingPercent() {
-		//given
-		final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerator(),
-			new LotteryNumberMockGenerator());
-		Lotteries lotteries = lotteryGame.createAutoLottery();
-		WinningLottery winningLottery = lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-		//when
-		Result result = new Result();
-		result.makeWinner(lotteries, winningLottery);
-		result.makeReturnRate(lotteryGame);
-		//then
-		assertThat(result.getReturnRate()).isEqualTo((double)2031555000 / (6 * 1000));
-	}
 }
