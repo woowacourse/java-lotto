@@ -7,7 +7,7 @@ import lotto.domain.LottoDto;
 
 public class OutputView {
 
-    private static final String PURCHASE_AMOUNT_MESSAGE = "%d개를 구매했습니다.%n";
+    private static final String PURCHASE_AMOUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
     private static final String WINNING_STATISTIC_MESSAGE = "\n당첨 통계\n---------\n";
     private static final String WINNING_STATISTIC_FORMAT = "%d개 일치 %s(%d원) - %d개";
     private static final String BONUS_BALL_MESSAGE = ", 보너스 볼 일치";
@@ -18,8 +18,8 @@ public class OutputView {
         System.out.println(exception.getMessage());
     }
 
-    public static void printLotto(LottoDto lottoDto) {
-        System.out.printf(PURCHASE_AMOUNT_MESSAGE, lottoDto.getLottoSize());
+    public static void printLotto(LottoDto lottoDto, int manualCount, int autoCount) {
+        System.out.printf(PURCHASE_AMOUNT_MESSAGE, manualCount, autoCount);
         for (ChoiceNumber choiceNumber : lottoDto.getLotto()) {
             System.out.println(choiceNumber);
         }

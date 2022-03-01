@@ -3,24 +3,21 @@ package lotto.controller;
 import static lotto.view.InputView.*;
 import static lotto.view.OutputView.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import lotto.domain.BonusNumber;
 import lotto.domain.ManualCount;
-import lotto.strategy.LottoBuyStrategy;
 import lotto.domain.LottoResult;
 import lotto.domain.Lotto;
 import lotto.domain.LottoDto;
 import lotto.domain.Money;
 import lotto.domain.ChoiceNumber;
 import lotto.domain.WinningNumber;
+import lotto.strategy.AutoBuy;
 import lotto.view.InputView;
 
 public class LottoController {
-    private final LottoBuyStrategy lottoBuyStrategy;
     private Lotto lotto;
-
-    public LottoController(LottoBuyStrategy lottoBuyStrategy) {
-        this.lottoBuyStrategy = lottoBuyStrategy;
-    }
 
     public void start() {
         Money money = initMoney();
@@ -51,8 +48,24 @@ public class LottoController {
     }
 
     private void initLotto(Money money, ManualCount manualCount) {
-        lotto = new Lotto(money, lottoBuyStrategy);
-        printLotto(LottoDto.from(lotto));
+        AutoBuy autoBuy = new AutoBuy();
+        List<ChoiceNumber> manualNumbers = initManualNumbers(manualCount.getCount());
+        this.lotto = new Lotto(money, manualNumbers, autoBuy);
+        printLotto(LottoDto.from(this.lotto), manualCount.getCount(), money.getCount() - manualCount.getCount());
+    }
+
+    private List<ChoiceNumber> initManualNumbers(int count) {
+        try {
+            List<String> inputValues = InputView.askManualNumbers(count);
+            List<ChoiceNumber> manualNumbers = new ArrayList<>();
+            for (String inputValue : inputValues) {
+                manualNumbers.add(new ChoiceNumber(inputValue));
+            }
+            return manualNumbers;
+        } catch (IllegalArgumentException exception) {
+            printErrorMessage(exception);
+            return initManualNumbers(count);
+        }
     }
 
     private WinningNumber setWinningNumber() {

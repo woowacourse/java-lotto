@@ -43,4 +43,8 @@ public class Money {
     public int getAmount() {
         return amount;
     }
+
+    public int getCount() {
+        return amount / UNIT_AMOUNT;
+    }
 }
