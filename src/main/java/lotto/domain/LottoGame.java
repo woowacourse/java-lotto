@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.domain.vo.Lotto.LOTTO_PRICE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,8 +14,6 @@ import lotto.dto.ResponsePurchaseResultsDto;
 import lotto.dto.ResponseWinningResultsDto;
 
 public class LottoGame {
-
-    public static final Money LOTTO_PRICE = new Money(1000);
 
     private Lottos lottos = new Lottos(new ArrayList<>());
 

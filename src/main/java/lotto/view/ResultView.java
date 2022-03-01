@@ -1,8 +1,9 @@
 package lotto.view;
 
+import static lotto.domain.vo.Lotto.LOTTO_PRICE;
+
 import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.domain.LottoGame;
 import lotto.domain.vo.Lotto;
 import lotto.domain.LottoPrize;
 import lotto.dto.ResponsePurchaseResultsDto;
@@ -59,7 +60,7 @@ public class ResultView {
         int totalSpendMoney = 0;
         for (LottoPrize prize : LottoPrize.values()) {
             int count = results.get(prize);
-            totalSpendMoney += count * LottoGame.LOTTO_PRICE.get();
+            totalSpendMoney += count * LOTTO_PRICE.get();
         }
         return totalSpendMoney;
     }
