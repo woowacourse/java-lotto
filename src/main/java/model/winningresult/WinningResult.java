@@ -17,14 +17,14 @@ public class WinningResult {
     }
 
     public Double getRateOfReturn(final Money money) {
-        int totalInsertMoney = money.getMoney();
+        int totalInsertMoney = money.getPurchaseCount();
         int totalReturn = calculateTotalReturn();
         return totalReturn / (double) totalInsertMoney;
     }
 
     private int calculateTotalReturn() {
         return winningResult.entrySet().stream()
-                .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
+                .mapToInt(rankResult -> rankResult.getKey().getPrizeMoney() * rankResult.getValue())
                 .sum();
     }
 }
