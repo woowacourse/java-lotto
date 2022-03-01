@@ -4,5 +4,5 @@ import java.util.Set;
 
 @FunctionalInterface
 public interface LottoNumberGenerateStrategy {
-    Set<Integer> generateLottoNumbers();
+    Set<Integer> generateLottoNumberValues();
 }

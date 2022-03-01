@@ -11,7 +11,7 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerateStrategy {
     private static final int RANDOM_LOTTO_NUMBER_END_INDEX = 6;
 
     @Override
-    public Set<Integer> generateLottoNumbers() {
+    public Set<Integer> generateLottoNumberValues() {
         List<Integer> lottoNumbers = new ArrayList<>(LottoNumber.LOTTO_NUMBERS);
         Collections.shuffle(lottoNumbers);
 
