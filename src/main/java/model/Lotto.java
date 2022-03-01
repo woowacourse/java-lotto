@@ -2,7 +2,6 @@ package model;
 
 import exception.DuplicatedLottoNumbersException;
 import exception.InvalidLottoNumbersSizeException;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -18,18 +17,14 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto of(List<Integer> numbers) {
+    public static Lotto of(List<LottoNumber> numbers) {
         if (isDuplicated(numbers)) {
             throw new DuplicatedLottoNumbersException();
         }
-        return new Lotto(
-                numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet())
-        );
+        return new Lotto(Set.copyOf(numbers));
     }
 
-    private static <T extends Collection<Integer>> boolean isDuplicated(T numbers) {
+    private static boolean isDuplicated(List<LottoNumber> numbers) {
         return numbers.size() != Set.copyOf(numbers).size();
     }
 

@@ -19,19 +19,19 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class WinningLottoTest {
 
     private static final LottoNumber BONUS = new LottoNumber(7);
-    private static final Lotto WINNING_LOTTO_NUMBERS = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+    private static final Lotto WINNING_LOTTO_NUMBERS = Lotto.of(LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 6)));
     private static final Lotto FIRST_PRIZE_LOTTO_NUMBERS = Lotto.of(
-            List.of(1, 2, 3, 4, 5, 6));
+            LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 6)));
     private static final Lotto SECOND_PRIZE_LOTTO_NUMBERS = Lotto.of(
-            List.of(1, 2, 3, 4, 5, 7));
+            LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 7)));
     private static final Lotto THIRD_PRIZE_LOTTO_NUMBERS = Lotto.of(
-            List.of(1, 2, 3, 4, 5, 8));
+            LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 8)));
     private static final Lotto FOURTH_PRIZE_LOTTO_NUMBERS = Lotto.of(
-            List.of(1, 2, 3, 4, 10, 11));
+            LottoNumber.convertAll(List.of(1, 2, 3, 4, 10, 11)));
     private static final Lotto FIFTH_PRIZE_LOTTO_NUMBERS = Lotto.of(
-            List.of(1, 2, 3, 10, 11, 12));
+            LottoNumber.convertAll(List.of(1, 2, 3, 10, 11, 12)));
     private static final Lotto NOTHING_PRIZE_LOTTO_NUMBERS = Lotto.of(
-            List.of(1, 2, 9, 11, 12, 13));
+            LottoNumber.convertAll(List.of(1, 2, 9, 11, 12, 13)));
     private static final Money FIRST_PRIZE = LottoRank.FIRST.multiplePrizeBy(1);
     private static final Money SECOND_PRIZE = LottoRank.SECOND.multiplePrizeBy(1);
     private static final Money THIRD_PRIZE = LottoRank.THIRD.multiplePrizeBy(1);
@@ -52,8 +52,8 @@ public class WinningLottoTest {
 
     private static Stream<Arguments> provideLottoNumbersList() {
         return Stream.of(
-                Arguments.of(Lotto.of(List.of(1, 2, 8, 9, 10, 11))),
-                Arguments.of(Lotto.of(List.of(1, 2, 7, 9, 10, 11)))
+                Arguments.of(Lotto.of(LottoNumber.convertAll(List.of(1, 2, 8, 9, 10, 11)))),
+                Arguments.of(Lotto.of(LottoNumber.convertAll(List.of(1, 2, 7, 9, 10, 11))))
         );
     }
 
@@ -65,7 +65,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨번호와 보너스 번호 정상적으로 생성")
     void createValidWinningLottoNumbers() {
-        Lotto lotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.of(LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 6)));
         LottoNumber bonusNumber = new LottoNumber(7);
         assertThatCode(() -> new WinningLottoNumbers(lotto, bonusNumber))
                 .doesNotThrowAnyException();
@@ -74,7 +74,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨번호와 보너스 번호 중복 생성 예외 발생")
     void duplicatedWinningLottoNumbers() {
-        Lotto lotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.of(LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 6)));
         LottoNumber bonusNumber = new LottoNumber(1);
         assertThatThrownBy(() -> new WinningLottoNumbers(lotto, bonusNumber))
                 .isInstanceOf(DuplicatedLottoNumbersException.class);

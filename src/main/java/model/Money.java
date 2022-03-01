@@ -16,6 +16,22 @@ public class Money {
         this.amount = amount;
     }
 
+    public static Money parse(String text) {
+        if (isNotNumeric(text)) {
+            throw new IllegalArgumentException("입금액은 반드시 숫자여야 합니다.");
+        }
+        return new Money(Integer.parseInt(text));
+    }
+
+    private static boolean isNotNumeric(String text) {
+        try {
+            Integer.parseInt(text);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     public Money add(Money prize) {
         return new Money(this.amount.add(prize.amount));
     }

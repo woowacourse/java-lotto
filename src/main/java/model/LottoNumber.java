@@ -1,7 +1,9 @@
 package model;
 
 import exception.InvalidRangeLottoNumberException;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumber {
     private static final int MINIMUM_LOTTO_NUMBER = 1;
@@ -13,6 +15,28 @@ public class LottoNumber {
             throw new InvalidRangeLottoNumberException();
         }
         this.lottoNumber = number;
+    }
+
+    public static LottoNumber parse(String text) {
+        if (isNotNumeric(text)) {
+            throw new IllegalArgumentException("로또번호는 반드시 숫자여야 합니다.");
+        }
+        return new LottoNumber(Integer.parseInt(text));
+    }
+
+    private static boolean isNotNumeric(String text) {
+        try {
+            Integer.parseInt(text);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static List<LottoNumber> convertAll(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private boolean isInvalidRange(int number) {
