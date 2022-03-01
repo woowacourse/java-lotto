@@ -1,10 +1,12 @@
 package lotto.view;
 
+import static java.util.Arrays.*;
 import static java.util.stream.Collectors.toList;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 import lotto.domain.vo.LottoNumber;
 
 public class InputView {
@@ -28,9 +30,13 @@ public class InputView {
 
         String inputWinningNumbers = scanner.nextLine();
 
-        List<String> strings = Arrays.asList(inputWinningNumbers.replace(" ", "").split(SEPARATOR));
+        String[] splitInput = inputWinningNumbers.split(SEPARATOR);
 
-        return translateLottoNumberList(strings);
+        List<String> result = stream(splitInput)
+                .map(String::trim)
+                .collect(toList());
+
+        return translateLottoNumberList(result);
     }
 
     private List<LottoNumber> translateLottoNumberList(List<String> values) {
