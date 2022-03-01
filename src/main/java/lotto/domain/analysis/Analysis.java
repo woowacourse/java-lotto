@@ -13,8 +13,8 @@ public class Analysis {
     private final double profitRate;
 
     public Analysis(final List<Rank> ranks, final Money money) {
-        this.rankCounts = this.calculateRankCounts(ranks);
-        this.profitRate = this.calculateProfitRate(ranks, money);
+        this.rankCounts = calculateRankCounts(ranks);
+        this.profitRate = calculateProfitRate(ranks, money);
     }
 
     private Map<Rank, Long> calculateRankCounts(final List<Rank> ranks) {

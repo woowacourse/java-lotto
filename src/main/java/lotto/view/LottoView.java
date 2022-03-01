@@ -41,7 +41,7 @@ public class LottoView {
     }
 
     private void verifyManualTicketCountIsLessThanTotalTicketCount(final int manualTicketCount,
-                                                                  final int totalTicketCount) {
+                                                                   final int totalTicketCount) {
         if (manualTicketCount > totalTicketCount) {
             throw new IllegalArgumentException();
         }

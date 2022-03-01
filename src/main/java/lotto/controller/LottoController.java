@@ -26,12 +26,12 @@ public class LottoController {
     }
 
     public void run() {
-        final Money money = this.payMoney();
-        final TicketManager ticketManager = this.purchaseTickets(money);
-        this.announceTickets(ticketManager);
+        final Money money = payMoney();
+        final TicketManager ticketManager = purchaseTickets(money);
+        announceTickets(ticketManager);
 
-        final Analysis analysis = this.calculateAnalysis(ticketManager, money);
-        this.announceAnalysis(analysis);
+        final Analysis analysis = calculateAnalysis(ticketManager, money);
+        announceAnalysis(analysis);
     }
 
     private Money payMoney() {
@@ -41,7 +41,7 @@ public class LottoController {
     private TicketManager purchaseTickets(final Money money) {
         final int totalTicketCount = money.getQuotient();
         final int manualTicketCount = lottoView.requestManualTicketCount(totalTicketCount);
-        final Tickets manualTickets = this.requestManualTickets(manualTicketCount);
+        final Tickets manualTickets = requestManualTickets(manualTicketCount);
         return TicketManager.generateTickets(totalTicketCount, manualTickets, new RandomTicketGenerator());
     }
 
@@ -59,7 +59,7 @@ public class LottoController {
     }
 
     private Analysis calculateAnalysis(final TicketManager ticketManager, final Money money) {
-        final WinningTicket winningTicket = this.requestWinningTicket();
+        final WinningTicket winningTicket = requestWinningTicket();
         final List<Rank> ranks = ticketManager.calculateRanks(winningTicket);
         return new Analysis(ranks, money);
     }

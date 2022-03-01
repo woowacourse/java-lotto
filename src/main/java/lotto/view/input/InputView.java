@@ -40,7 +40,7 @@ public class InputView {
         final String[] inputValues = Delimiter.COMMA.splitWith(inputLine);
         return Arrays.stream(inputValues)
                 .map(String::trim)
-                .map(text -> this.parseNumber(text, LottoExceptionStatus.BALL_NUMBER_MUST_BE_NUMERIC))
+                .map(text -> parseNumber(text, LottoExceptionStatus.BALL_NUMBER_MUST_BE_NUMERIC))
                 .collect(Collectors.toUnmodifiableList());
     }
 
