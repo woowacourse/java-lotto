@@ -4,12 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
+import lotto.exception.LottoExceptionStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.exception.LottoException;
-import lotto.exception.ball.BallNumberExceptionStatus;
 
 class BallsTest {
 
@@ -19,7 +19,7 @@ class BallsTest {
     void ballsOutOfRangeExceptionTest(final int ballNumber) {
         assertThatThrownBy(() -> Balls.getBall(ballNumber))
                 .isInstanceOf(LottoException.class)
-                .hasMessageContaining(BallNumberExceptionStatus.BALL_CANNOT_BE_OUT_OF_RANGE.getMessage());
+                .hasMessageContaining(LottoExceptionStatus.BALL_NUMBER_CANNOT_BE_OUT_OF_RANGE.getMessage());
     }
 
     @DisplayName("범위 안의 번호는 생성할 수 있다.")

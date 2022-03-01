@@ -3,7 +3,7 @@ package lotto.domain.ticket.validation;
 import lotto.domain.ticket.Ball;
 import lotto.domain.ticket.Ticket;
 import lotto.exception.LottoException;
-import lotto.exception.ticket.TicketNumbersExceptionStatus;
+import lotto.exception.LottoExceptionStatus;
 
 public class WinningTicketValidator {
 
@@ -16,7 +16,7 @@ public class WinningTicketValidator {
 
     private static void verifyBonusBallNotDuplicated(final Ticket ticket, final Ball bonusBall) {
         if (ticket.contains(bonusBall)) {
-            throw new LottoException(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
+            throw new LottoException(LottoExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
         }
     }
 

@@ -9,15 +9,14 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.NullSource;
 
 import lotto.domain.rank.Rank;
 import lotto.exception.LottoException;
-import lotto.exception.ticket.TicketNumbersExceptionStatus;
+import lotto.exception.LottoExceptionStatus;
 
 class TicketTest {
 
-    private void ticketExceptionTest(final List<Integer> numbers, final TicketNumbersExceptionStatus exceptionStatus) {
+    private void ticketExceptionTest(final List<Integer> numbers, final LottoExceptionStatus exceptionStatus) {
         assertThatThrownBy(() -> new Ticket(numbers))
                 .isInstanceOf(LottoException.class)
                 .hasMessageContaining(exceptionStatus.getMessage());
@@ -27,14 +26,14 @@ class TicketTest {
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}")
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForNumbersOutOfSizeExceptionTest")
     void ticketOutOfSizeExceptionTest(final List<Integer> numbers) {
-        ticketExceptionTest(numbers, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_OUT_OF_SIZE);
+        ticketExceptionTest(numbers, LottoExceptionStatus.TICKET_NUMBERS_CANNOT_BE_OUT_OF_SIZE);
     }
 
     @DisplayName("로또 번호 묶음 중 중복 값은 존재할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}")
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForNumbersDuplicatedExceptionTest")
     void ticketNumbersDuplicatedExceptionTest(final List<Integer> numbers) {
-        ticketExceptionTest(numbers, TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
+        ticketExceptionTest(numbers, LottoExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
     }
 
     @DisplayName("로또 번호는 기댓값을 지니고 있으면 참을 반환한다.")

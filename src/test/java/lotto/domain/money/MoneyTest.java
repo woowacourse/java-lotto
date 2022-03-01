@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.exception.LottoException;
-import lotto.exception.money.MoneyExceptionStatus;
+import lotto.exception.LottoExceptionStatus;
 
 class MoneyTest {
 
@@ -18,7 +18,7 @@ class MoneyTest {
     void moneyIsZeroExceptionTest(final int money) {
         assertThatThrownBy(() -> new Money(money))
                 .isInstanceOf(LottoException.class)
-                .hasMessageContaining(MoneyExceptionStatus.MONEY_CANNOT_BE_ZERO.getMessage());
+                .hasMessageContaining(LottoExceptionStatus.MONEY_CANNOT_BE_ZERO.getMessage());
     }
 
     @DisplayName("구입 금액은 1000으로 나누어 떨어져야 한다.")
@@ -27,7 +27,7 @@ class MoneyTest {
     void moneyIsDivisibleExceptionTest(final int money) {
         assertThatThrownBy(() -> new Money(money))
                 .isInstanceOf(LottoException.class)
-                .hasMessageContaining(MoneyExceptionStatus.MONEY_MUST_BE_DIVISIBLE.getMessage());
+                .hasMessageContaining(LottoExceptionStatus.MONEY_MUST_BE_DIVISIBLE.getMessage());
     }
 
     @DisplayName("금액 객체는 생성 당시 주어진 값을 지니고 있어야 합니다.")

@@ -2,7 +2,7 @@ package lotto.domain.ticket.validation;
 
 import lotto.domain.ticket.condition.BallNumberRange;
 import lotto.exception.LottoException;
-import lotto.exception.ball.BallNumberExceptionStatus;
+import lotto.exception.LottoExceptionStatus;
 
 public class BallValidator {
 
@@ -15,7 +15,7 @@ public class BallValidator {
 
     private static void verifyBallNumberNotOutOfRange(final int ballNumber) {
         if (BallNumberRange.isOutOfRange(ballNumber)) {
-            throw new LottoException(BallNumberExceptionStatus.BALL_CANNOT_BE_OUT_OF_RANGE);
+            throw new LottoException(LottoExceptionStatus.BALL_NUMBER_CANNOT_BE_OUT_OF_RANGE);
         }
     }
 

@@ -1,12 +1,11 @@
 package lotto.domain.ticket.validation;
 
 import java.util.List;
-import java.util.Objects;
 
 import lotto.domain.ticket.condition.BallNumberDuplication;
 import lotto.domain.ticket.condition.TicketSize;
 import lotto.exception.LottoException;
-import lotto.exception.ticket.TicketNumbersExceptionStatus;
+import lotto.exception.LottoExceptionStatus;
 
 public class TicketValidator {
 
@@ -20,13 +19,13 @@ public class TicketValidator {
 
     private static void verifyNumbersNotOutOfSize(final List<Integer> ballNumbers) {
         if (TicketSize.DEFAULT_SIZE.doesNotMatch(ballNumbers.size())) {
-            throw new LottoException(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_OUT_OF_SIZE);
+            throw new LottoException(LottoExceptionStatus.TICKET_NUMBERS_CANNOT_BE_OUT_OF_SIZE);
         }
     }
 
     private static void verifyNumbersNotDuplicated(final List<Integer> ballNumbers) {
         if (isNumberDuplicated(ballNumbers)) {
-            throw new LottoException(TicketNumbersExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
+            throw new LottoException(LottoExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED);
         }
     }
 

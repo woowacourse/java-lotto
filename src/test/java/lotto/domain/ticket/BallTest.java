@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.exception.LottoException;
-import lotto.exception.ball.BallNumberExceptionStatus;
+import lotto.exception.LottoExceptionStatus;
 
 class BallTest {
 
@@ -18,7 +18,7 @@ class BallTest {
     void rangeOutExceptionTest(final int number) {
         assertThatThrownBy(() -> Balls.getBall(number))
                 .isInstanceOf(LottoException.class)
-                .hasMessageContaining(BallNumberExceptionStatus.BALL_CANNOT_BE_OUT_OF_RANGE.getMessage());
+                .hasMessageContaining(LottoExceptionStatus.BALL_NUMBER_CANNOT_BE_OUT_OF_RANGE.getMessage());
     }
 
     @DisplayName("번호 객체는 생성 당시의 번호 값을 지녀야 한다.")

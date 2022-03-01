@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import lotto.exception.LottoException;
-import lotto.exception.reader.ReaderExceptionStatus;
+import lotto.exception.LottoExceptionStatus;
 
 public class ConsoleReader implements Reader {
 
@@ -16,7 +16,7 @@ public class ConsoleReader implements Reader {
             final BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             return bufferedReader.readLine();
         } catch (IOException exception) {
-            throw new LottoException(ReaderExceptionStatus.READER_CANNOT_READ);
+            throw new LottoException(LottoExceptionStatus.READER_CANNOT_READ);
         }
     }
 
