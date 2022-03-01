@@ -15,55 +15,63 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class Controller {
-    public static void run() {
+    private final InputView inputView;
+    private final ResultView resultView;
+
+    public Controller() {
+        this.inputView = new InputView();
+        this.resultView = new ResultView();
+    }
+
+    public void run() {
         Money money = askMoneyAmount();
         Lottos lottos = makeLottos(money);
         givePrize(money, lottos);
     }
 
-    private static Money askMoneyAmount() {
-        return Money.from(InputView.askMoneyAmount());
+    private Money askMoneyAmount() {
+        return Money.from(inputView.askMoneyAmount());
     }
 
-    private static Lottos makeLottos(Money money) {
-        LottosBuilder lottosBuilder = LottosBuilder.of(money, InputView.askManualCount());
+    private Lottos makeLottos(Money money) {
+        LottosBuilder lottosBuilder = LottosBuilder.of(money, inputView.askManualCount());
         Lottos lottos = purchaseLottos(lottosBuilder);
-        ResultView.showPurchaseCount(LottosDTO.of(lottos));
-        ResultView.showLottos(LottoDTO.from(lottos));
+        resultView.showPurchaseCount(LottosDTO.of(lottos));
+        resultView.showLottos(LottoDTO.from(lottos));
         return lottos;
     }
 
-    private static Lottos purchaseLottos(LottosBuilder lottosBuilder) {
-        InputView.askManualNumbers();
+    private Lottos purchaseLottos(LottosBuilder lottosBuilder) {
+        inputView.askManualNumbers();
         purchaseManualLotto(lottosBuilder);
         lottosBuilder.addAutoLottos();
         return lottosBuilder.toLottos();
     }
 
-    private static void purchaseManualLotto(LottosBuilder lottosBuilder) {
+    private void purchaseManualLotto(LottosBuilder lottosBuilder) {
         while (lottosBuilder.isManualAvailable()) {
-            lottosBuilder.addManualLotto(List.of(InputView.readNumbers()));
+            lottosBuilder.addManualLotto(List.of(inputView.readNumbers()));
         }
     }
 
-    private static void givePrize(Money money, Lottos lottos) {
+    private void givePrize(Money money, Lottos lottos) {
         PrizeInformations prizeInformations = PrizeInformations.from(lottos.match(makeWinningLotto()));
-        ResultView.showPrizeInformation(PrizeInformationDTO.from(prizeInformations));
-        ResultView.showEarningRate(prizeInformations.calculateEarningRate(money));
+        resultView.showPrizeInformation(PrizeInformationDTO.from(prizeInformations));
+        resultView.showEarningRate(prizeInformations.calculateEarningRate(money));
     }
 
-    private static WinningLotto makeWinningLotto() {
+    private WinningLotto makeWinningLotto() {
         LottoNumbers winningNumbers = askWinningNumbers();
         return new WinningLotto(winningNumbers, askBonusNumber());
     }
 
-    private static LottoNumbers askWinningNumbers() {
-        String[] winningNumbersInput = InputView.askWinningNumbers();
+    private LottoNumbers askWinningNumbers() {
+        String[] winningNumbersInput = inputView.askWinningNumbers();
         return LottoNumbers.from(List.of(winningNumbersInput));
     }
 
-    private static LottoNumber askBonusNumber() {
-        String bonusNumberInput = InputView.askBonusNumber();
+    private LottoNumber askBonusNumber() {
+        String bonusNumberInput = inputView.askBonusNumber();
         return LottoNumber.from(bonusNumberInput);
     }
 }
