@@ -33,7 +33,12 @@ public class OutputView {
                 .collect(Collectors.joining(DELIMITER));
     }
 
-    public static void printRanks(List<Rank> ranks) {
+    public static void printResult(List<Rank> ranks, Rate rate) {
+        printRanks(ranks);
+        printRate(rate);
+    }
+
+    private static void printRanks(List<Rank> ranks) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -71,7 +76,7 @@ public class OutputView {
         System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, reward, rewardCount);
     }
 
-    public static void printRate(Rate rate) {
+    private static void printRate(Rate rate) {
         System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", rate.getRate().toString()));
     }
 }

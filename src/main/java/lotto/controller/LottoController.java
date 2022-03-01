@@ -22,8 +22,7 @@ public class LottoController {
         OutputView.printLottos(manualLottoCount, lottos.getLottos());
 
         List<Rank> ranks = lottos.matchRanks(createWinnerLotto(winnerNumbers(), bonusNumber()));
-        OutputView.printRanks(ranks);
-        OutputView.printRate(calculateRate(totalMoney, ranks));
+        OutputView.printResult(ranks, calculateRate(totalMoney, ranks));
     }
 
     private Lottos buyLottos(Money totalMoney, int manualLottoCount) {
