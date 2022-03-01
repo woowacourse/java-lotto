@@ -27,8 +27,8 @@ public class LottoTickets {
                 .collect(toList());
     }
 
-    private LottoTickets(int lottoCount, List<List<Integer>> manualNumbers) {
-        List<LottoTicket> lottoTickets = manualNumbers.stream()
+    private LottoTickets(int lottoCount, List<List<Integer>> numbers) {
+        List<LottoTicket> lottoTickets = numbers.stream()
                 .map(LottoTicket::new)
                 .collect(toList());
 

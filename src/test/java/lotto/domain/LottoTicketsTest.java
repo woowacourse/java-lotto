@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ class LottoTicketsTest {
         assertDoesNotThrow(() -> LottoTickets.createAutoLottoTickets(lottoCount, lottoNumberGenerator));
     }
 
-    @DisplayName("수동 구매한 로또 개수와 수동 번로를 받아 로또 티켓 리스트를 생성한다.")
+    @DisplayName("수동 구매한 로또 개수와 수동 번호를 받아 로또 티켓 리스트를 생성한다.")
     @Test
     void 로또_티켓_수동_발급() {
         // given
@@ -35,6 +36,21 @@ class LottoTicketsTest {
 
         // when & then
         assertDoesNotThrow(() -> LottoTickets.createManualLottoTickets(lottoCount, manualNumbers));
+    }
+
+    @DisplayName("수동 구매한 로또 개수와 수동 번호의 개수가 불일치 한 경우 예외를 던진다.")
+    @Test
+    void 로또_티켓_수동_개수_로또_번호_개수_불일치() {
+        // given
+        int lottoCount = 3;
+        List<List<Integer>> manualNumbers = List.of(
+                List.of(8, 21, 23, 41, 42, 43),
+                List.of(3, 5, 11, 16, 32, 38));
+
+        // when & then
+        assertThatThrownBy(() -> LottoTickets.createManualLottoTickets(lottoCount, manualNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구매할 수량과 수동으로 작성한 로또 개수가 일치하지 않습니다.");
     }
 
     @DisplayName("로또 티켓 여러장을 합쳐 함께 관리할 수 있다.")
