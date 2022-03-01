@@ -57,7 +57,7 @@ public class InputView {
     public static int askManualLottoCount(int maxLottoCount) {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT);
         int manualLottoCount = convertToInt(scanner.nextLine());
-
+        validateCountRange(maxLottoCount, manualLottoCount);
         return manualLottoCount;
     }
 
