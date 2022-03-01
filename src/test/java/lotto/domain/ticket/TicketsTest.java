@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.AppConfig;
 import lotto.domain.ticket.generator.CustomTicketGenerator;
 import lotto.domain.winning.Rank;
 import lotto.domain.winning.WinningTicket;
@@ -16,9 +15,7 @@ import lotto.dto.TicketDto;
 
 class TicketsTest {
 
-    private static final AppConfig APP_CONFIG = AppConfig.getInstance();
-
-    private final CustomTicketGenerator customTicketGenerator = APP_CONFIG.ticketGenerator;
+    private final CustomTicketGenerator customTicketGenerator = new CustomTicketGenerator();
 
     private Tickets generateTickets(final List<TicketDto> generatedTickets, final int ticketCount) {
         customTicketGenerator.initTickets(generatedTickets);

@@ -1,6 +1,10 @@
 package lotto;
 
 import lotto.controller.LottoController;
+import lotto.view.input.InputView;
+import lotto.view.input.reader.ConsoleReader;
+import lotto.view.input.reader.Reader;
+import lotto.view.output.OutputView;
 
 public class LottoApplication {
 
@@ -10,8 +14,10 @@ public class LottoApplication {
     }
 
     private void run() {
-        final AppConfig appConfig = AppConfig.getInstance();
-        final LottoController lottoController = appConfig.lottoController;
+        final Reader reader = new ConsoleReader();
+        final InputView inputView = new InputView(reader);
+        final OutputView outputView = new OutputView();
+        final LottoController lottoController = new LottoController(inputView, outputView);
         lottoController.run();
     }
 

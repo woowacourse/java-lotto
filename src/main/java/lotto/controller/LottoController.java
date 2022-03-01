@@ -6,22 +6,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.analysis.Analysis;
+import lotto.domain.money.Money;
 import lotto.domain.ticket.Tickets;
+import lotto.domain.ticket.generator.RandomTicketGenerator;
+import lotto.domain.winning.Rank;
 import lotto.domain.winning.WinningTicket;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
-import lotto.service.LottoService;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
 
 public class LottoController {
 
-    private final LottoService lottoService;
     private final InputView inputView;
     private final OutputView outputView;
 
-    public LottoController(final LottoService lottoService, final InputView inputView, final OutputView outputView) {
-        this.lottoService = lottoService;
+    public LottoController(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
     }
@@ -36,7 +36,8 @@ public class LottoController {
 
     private Tickets purchaseTickets() {
         final int money = this.requestMoney();
-        return lottoService.generateTickets(money);
+        final int ticketCount = (new Money(money)).getQuotient();
+        return new Tickets(ticketCount, new RandomTicketGenerator());
     }
 
     private int requestMoney() {
@@ -58,7 +59,8 @@ public class LottoController {
 
     private Analysis calculateAnalysis(Tickets tickets) {
         final WinningTicket winningTicket = this.requestWinningTicket();
-        return lottoService.generateAnalysis(tickets, winningTicket);
+        final List<Rank> ranks = tickets.calculateRanks(winningTicket);
+        return new Analysis(ranks, tickets.getSize());
     }
 
     private WinningTicket requestWinningTicket() {

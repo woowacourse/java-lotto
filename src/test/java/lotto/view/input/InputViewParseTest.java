@@ -11,15 +11,12 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.AppConfig;
 import lotto.view.input.reader.CustomReader;
 
 class InputViewParseTest {
 
-    private static final AppConfig APP_CONFIG = AppConfig.getInstance();
-
-    private final InputView inputView = APP_CONFIG.inputView;
-    private final CustomReader customReader = APP_CONFIG.reader;
+    private final CustomReader customReader = new CustomReader();
+    private final InputView inputView = new InputView(customReader);
 
     @DisplayName("구입 금액으로 입력된 문자열은 숫자로 변환되어야 합니다.")
     @ParameterizedTest(name = "[{index}] 입력 : \"{0}\"")
