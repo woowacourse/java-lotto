@@ -25,6 +25,7 @@ public class LottoService {
     private final Money money;
     private Lotto lastWinLotto;
     private LottoNumber bonusNumber;
+    private List<Lotto> issuedLotto;
 
     public LottoService(final int money) {
         this.money = new Money(money);
@@ -41,15 +42,18 @@ public class LottoService {
         }
     }
 
-    public List<LottoDto> issueLotto() {
-        final List<Lotto> issuedLotto = generateLotto(money.calculateCounts());
-        return issuedLotto.stream()
-            .map(LottoDto::from)
-            .collect(Collectors.toUnmodifiableList());
+    public void issueLotto() {
+        this.issuedLotto = generateLotto(money.calculateCounts());
     }
 
     private List<Lotto> generateLotto(int number) {
         return issueLottoWithCount(number);
+    }
+
+    public List<LottoDto> getIssuedLotto() {
+        return issuedLotto.stream()
+            .map(LottoDto::from)
+            .collect(Collectors.toUnmodifiableList());
     }
 
     private List<Lotto> issueLottoWithCount(final int number) {
@@ -82,15 +86,12 @@ public class LottoService {
             .collect(Collectors.toList()));
     }
 
-    public SortedMap<RankPrize, Integer> calculateResult(final int bonusNumberInput,
-                                                         final List<LottoDto> issuedLottoDto) {
+    public SortedMap<RankPrize, Integer> calculateResult(final int bonusNumberInput) {
         this.bonusNumber = new LottoNumber(bonusNumberInput);
-
         if (isBonusNumberContain(this.lastWinLotto, bonusNumber)) {
             throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
         }
-        // 포함여부 비교를 위해 다시 Lotto Dto -> Lotto로 변환
-        return extractRankCount(convertToLotto(issuedLottoDto));
+        return extractRankCount(this.issuedLotto);
     }
 
     private boolean isBonusNumberContain(final Lotto lotto, final LottoNumber bonusNumber) {
