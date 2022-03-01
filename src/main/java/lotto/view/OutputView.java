@@ -82,7 +82,8 @@ public class OutputView {
     }
 
     private static void printRateOfProfit(Result result, Money money) {
-        double rateOfProfit = result.getRateOfProfit(money);
+        final long totalProfit = result.getTotalProfit();
+        final double rateOfProfit = money.calculateRateOfProfit(totalProfit);
         String suffix = LOSS_SUFFIX;
 
         if (rateOfProfit == 1) {

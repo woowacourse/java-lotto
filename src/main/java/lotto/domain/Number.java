@@ -10,7 +10,7 @@ public class Number implements Comparable<Number> {
 
     private static final int MIN_VALUE = 1;
     private static final int MAX_VALUE = 45;
-    private static final String ERROR_MESSAGE = MIN_VALUE + "부터 " + MAX_VALUE + "의 숫자여야 합니다.";
+    private static final String ERROR_MESSAGE = "%d부터 %d의 숫자여야 합니다.";
     private static final List<Number> cache;
 
     static {
@@ -32,7 +32,7 @@ public class Number implements Comparable<Number> {
 
     private static void validateValueRange(final int number) {
         if (MIN_VALUE > number || number > MAX_VALUE) {
-            throw new IllegalArgumentException(ERROR_MESSAGE);
+            throw new IllegalArgumentException(String.format(ERROR_MESSAGE, MIN_VALUE, MAX_VALUE));
         }
     }
 

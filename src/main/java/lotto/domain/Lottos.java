@@ -28,10 +28,8 @@ public class Lottos {
     }
 
     public static Lottos of(List<Lotto> lottos1, List<Lotto> lottos2) {
-        final List<Lotto> joinedLottos = Stream.concat(lottos1.stream(), lottos2.stream())
-                .collect(Collectors.toList());
-
-        return new Lottos(joinedLottos);
+        return new Lottos(Stream.concat(lottos1.stream(), lottos2.stream())
+                .collect(Collectors.toList()));
     }
 
     public Result getResult(WinningNumbers winningNumbers) {
