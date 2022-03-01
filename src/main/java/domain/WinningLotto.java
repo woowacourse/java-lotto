@@ -5,7 +5,7 @@ import java.util.List;
 public class WinningLotto {
 
     private static final int SECOND_AND_THIRD_RANK_COUNT = 5;
-    public static final boolean DEFAULT_BONUS_CHECK = false;
+    private static final boolean DEFAULT_BONUS_CHECK = false;
 
     private final List<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;

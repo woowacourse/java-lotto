@@ -8,8 +8,8 @@ public class Validator {
     private static final int LOTTO_NUMBERS_COUNT = 6;
     public static final String INVALID_LOTTO_NUMBER_COUNT = "로또 번호의 수는 6자리를 입력해주어야 합니다.";
 
-    public static void validateNegativePrice(int price) {
-        if (price < 0) {
+    public static void validateNegativeInteger(int value) {
+        if (value < 0) {
             throw new IllegalArgumentException(ERROR + NEGATIVE_PRICE_ERROR);
         }
     }

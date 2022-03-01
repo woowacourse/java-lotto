@@ -11,11 +11,11 @@ public class Lotto {
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
 
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateDuplicatedNumber(lottoNumbers);
-        this.lottoNumbers.addAll(lottoNumbers);
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     private void validateDuplicatedNumber(List<LottoNumber> lottoNumbers) {

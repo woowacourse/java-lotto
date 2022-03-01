@@ -12,7 +12,7 @@ public class ValidatorTest {
     public void validateNegativePriceTest() {
         int price = -4000;
         assertThatThrownBy(() -> {
-            Validator.validateNegativePrice(price);
+            Validator.validateNegativeInteger(price);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -20,7 +20,7 @@ public class ValidatorTest {
     public void validatePositivePriceTest() {
         int price = 4000;
         assertDoesNotThrow(() -> {
-            Validator.validateNegativePrice(price);
+            Validator.validateNegativeInteger(price);
         });
     }
 
