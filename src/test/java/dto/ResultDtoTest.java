@@ -12,7 +12,7 @@ class ResultDtoTest {
     @Test
     void create_test() {
 
-        final List<Lotto> lottos = LottoFactory.generateLotto(3, new AutoLottoGenerator());
+        final List<Lotto> lottos = LottoFactory.generateLotto(3, 1, new AutoLottoGenerator());
         final ResultDto resultDto = new ResultDto(lottos, Lotto.fromInput(Arrays.asList("1", "2", "3", "4", "5", "6")),
             new LottoNumber(5));
 

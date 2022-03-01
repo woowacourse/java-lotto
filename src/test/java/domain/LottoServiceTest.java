@@ -22,7 +22,7 @@ class LottoServiceTest {
     @DisplayName("구입 금액만큼 발급 받은 로또의 갯수를 확인한다.")
     @Test
     void issueLotto_count_correct() {
-        lottoService.issueLotto();
+        lottoService.issueLotto(5);
         final List<LottoDto> lottoDto = lottoService.getIssuedLotto();
 
         assertThat(lottoDto.size()).isEqualTo(100000);

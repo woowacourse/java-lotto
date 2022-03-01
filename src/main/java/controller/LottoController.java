@@ -29,14 +29,23 @@ public class LottoController {
     }
 
     public void start() {
-        lottoService.issueLotto();
-        outputView.printLotto(lottoService.getIssuedLotto());
+        issueLotto();
 
         initLastWinLotto();
 
         final ResultDto resultDto = calculateResult();
         outputView.printWinStatistics(resultDto);
         outputView.printWinProfit(lottoService.getProfitOrNotMessage(resultDto));
+    }
+
+    private void issueLotto() {
+        try {
+            lottoService.issueLotto(inputView.getManualCount());
+            outputView.printLotto(lottoService.getIssuedLotto());
+        } catch (Exception e) {
+            System.out.println(ERROR_MESSAGE + e.getMessage());
+            issueLotto();
+        }
     }
 
     private void initLastWinLotto() {

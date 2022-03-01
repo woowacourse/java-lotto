@@ -15,6 +15,7 @@ public class InputView {
     private static final String INPUT_BONUS_INSTRUCTION = "보너스 볼을 입력해 주세요.";
 
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static final String INPUT_MANUAL_COUNT_INSTRUCTION = "수동으로 구매할 로또 수를 입력해 주세요.";
 
     private static String getInput() {
         return SCANNER.nextLine();
@@ -41,6 +42,15 @@ public class InputView {
     public int getBonusNumber() {
         System.out.println();
         System.out.println(INPUT_BONUS_INSTRUCTION);
+        final String input = getInput();
+        Validator.checkNullOrEmpty(input);
+        Validator.checkFormat(input);
+        return Integer.parseInt(input);
+    }
+
+    public int getManualCount() {
+        System.out.println();
+        System.out.println(INPUT_MANUAL_COUNT_INSTRUCTION);
         final String input = getInput();
         Validator.checkNullOrEmpty(input);
         Validator.checkFormat(input);

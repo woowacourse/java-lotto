@@ -7,9 +7,10 @@ import java.util.List;
 
 public class LottoFactory {
 
-    public static List<Lotto> generateLotto(final int number, LottoGenerator lottoGenerator) {
+    public static List<Lotto> generateLotto(final int totalCount, final int manualCount,
+                                            LottoGenerator lottoGenerator) {
         final List<Lotto> issuedLotto = new ArrayList<>();
-        Count count = new Count(number);
+        Count count = new Count(totalCount);
         while (!count.isEnd()) {
             count = count.decrease();
             issuedLotto.add(generateLotto(lottoGenerator));
