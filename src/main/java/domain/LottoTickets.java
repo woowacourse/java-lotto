@@ -6,9 +6,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTickets {
-    private static final String NOT_MULTIPLES_OF_1000_ERROR_MESSAGE = "금액을 1,000의 배수로 입력해주세요.";
-    private static final String NOT_POSITIVE_ERROR_MESSAGE = "금액은 양수로 입력해야 합니다.";
     public static final int TICKET_PRICE = 1000;
+    public static final String NOT_POSITIVE_ERROR_MESSAGE = "금액은 양수로 입력해야 합니다.";
+    public static final String NOT_MULTIPLES_OF_PRICE_ERROR_MESSAGE
+            = String.format("금액을 %d의 배수로 입력해주세요.", TICKET_PRICE);
 
     private final List<LottoTicket> lottoTickets;
 
@@ -25,13 +26,9 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public int getSize() {
-        return lottoTickets.size();
-    }
-
     private void validatePurchaseMoney(int purchaseMoney) {
         if (isMultiplesOfTicketPrice(purchaseMoney)) {
-            throw new IllegalArgumentException(NOT_MULTIPLES_OF_1000_ERROR_MESSAGE);
+            throw new IllegalArgumentException(NOT_MULTIPLES_OF_PRICE_ERROR_MESSAGE);
         }
 
         if (isNotPositiveNumber(purchaseMoney)) {

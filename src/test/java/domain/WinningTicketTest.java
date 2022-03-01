@@ -15,6 +15,6 @@ class WinningTicketTest {
     void checkLottoNumberSize() {
         Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3));
         assertThatThrownBy(() -> new WinningTicket(numbers, 10))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class).hasMessage(LottoTicket.LOTTO_TICKET_SIZE_ERROR_MESSAGE);
     }
 }

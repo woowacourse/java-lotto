@@ -9,7 +9,7 @@ public class WinningTicket {
     private final LottoNumber bonusNumber;
 
     public WinningTicket(Set<Integer> winningNumbers, int bonusNumber) {
-        checkSize(winningNumbers);
+        validateSize(winningNumbers);
         this.winningNumbers = winningNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
@@ -36,9 +36,9 @@ public class WinningTicket {
         return lottoNumbers.contains(bonusNumber.getValue());
     }
 
-    private void checkSize(Set<Integer> winningNumbers) {
+    private void validateSize(Set<Integer> winningNumbers) {
         if (winningNumbers.size() != LottoTicket.LOTTO_TICKET_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(LottoTicket.LOTTO_TICKET_SIZE_ERROR_MESSAGE);
         }
     }
 }

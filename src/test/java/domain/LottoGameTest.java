@@ -1,5 +1,6 @@
 package domain;
 
+import static domain.LottoTickets.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
@@ -16,14 +17,10 @@ class LottoGameTest {
         Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
         LottoTickets lottoTickets = new LottoTickets(purchaseMoney, new LottoNumberGenerateStrategy());
-        LottoGame lottoGame = new LottoGame
-                (
-                        lottoTickets,
-                        winningNumbers,
-                        bonusNumber,
-                        new DefaultLottoWinningPrizeStrategy()
-                );
-        assertThat(lottoGame.getTickets().size()).isEqualTo(purchaseMoney / 1000);
+        WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusNumber);
+        WinningPrizeStrategy winningPrizeStrategy = new DefaultLottoWinningPrizeStrategy();
+        LottoGame lottoGame = new LottoGame(lottoTickets, winningTicket, winningPrizeStrategy);
+        assertThat(lottoGame.getTickets().size()).isEqualTo(purchaseMoney / TICKET_PRICE);
     }
 
     @Test
@@ -34,13 +31,9 @@ class LottoGameTest {
         int bonusNumber = 7;
         GenerateStrategy generateStrategy = () -> new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTickets lottoTickets = new LottoTickets(purchaseMoney, generateStrategy);
-        LottoGame lottoGame = new LottoGame
-                (
-                        lottoTickets,
-                        winningNumbers,
-                        bonusNumber,
-                        new DefaultLottoWinningPrizeStrategy()
-                );
-        assertThat(lottoGame.getWinningResults().get(WinningPrize.FIRST)).isEqualTo(14);
+        WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusNumber);
+        WinningPrizeStrategy winningPrizeStrategy = new DefaultLottoWinningPrizeStrategy();
+        LottoGame lottoGame = new LottoGame(lottoTickets, winningTicket, winningPrizeStrategy);
+        assertThat(lottoGame.getWinningResult().getCountOfWinning().get(WinningPrize.FIRST)).isEqualTo(14);
     }
 }

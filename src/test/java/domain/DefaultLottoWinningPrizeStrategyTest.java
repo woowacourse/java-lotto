@@ -18,7 +18,8 @@ class DefaultLottoWinningPrizeStrategyTest {
         put(4, WinningPrize.FOURTH);
         put(3, WinningPrize.FIFTH);
     }};
-    private final DefaultLottoWinningPrizeStrategy defaultLottoWinningPrizeStrategy = new DefaultLottoWinningPrizeStrategy();
+    private final DefaultLottoWinningPrizeStrategy defaultLottoWinningPrizeStrategy
+            = new DefaultLottoWinningPrizeStrategy();
 
     @Test
     @DisplayName("기본 로또 당첨보상 전략이 2등을 잘 판단하는지 확인한다.")

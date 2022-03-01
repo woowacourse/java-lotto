@@ -1,5 +1,6 @@
 package domain;
 
+import static domain.LottoNumber.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Collections;
@@ -15,7 +16,7 @@ class LottoNumberGenerateStrategyTest {
     @DisplayName("LottoNumberGenerateStrategy가 1~45 사이의 숫자를 뽑는지 확인한다.")
     void checkGeneratedNumberRange() {
         Set<Integer> numbers = generateStrategy.generateNumbers();
-        numbers.forEach(number -> assertThat(number).isBetween(1, 45));
+        numbers.forEach(number -> assertThat(number).isBetween(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
     }
 
     @Test
