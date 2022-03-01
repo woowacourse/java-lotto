@@ -16,7 +16,7 @@ public class RankDto {
         this.amount = amount;
     }
 
-    public static RankDto from(Rank rank, long amount) {
+    public static RankDto valueOf(Rank rank, long amount) {
         return new RankDto(rank, amount);
     }
 

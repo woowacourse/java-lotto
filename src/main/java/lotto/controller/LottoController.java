@@ -16,21 +16,19 @@ import lotto.domain.WinningNumber;
 
 public class LottoController {
 
-    public SalesInfoDto purchase(PurchaseInfoDto purchaseInfoDto) {
+    public SalesInfoDto purchase(PurchaseInfoDto purchaseInfo) {
         LottoMachine lottoMachine = new LottoMachine();
-        Money money = new Money(purchaseInfoDto.getMoney());
-        int manualCount = purchaseInfoDto.getManualCount();
-        List<List<Integer>> manualNumbers = purchaseInfoDto.getManualNumbers();
+        Money money = new Money(purchaseInfo.getMoney());
 
-        LottoTickets manualLottoTickets = lottoMachine.issueManualLottoTickets(manualCount, manualNumbers);
-        Money calculateMoney = money.calculateProduct(LottoMachine.LOTTO_PRICE, manualCount);
+        LottoTickets manualLottoTickets = lottoMachine.issueManualLottoTickets(purchaseInfo.getManualCount(),
+                purchaseInfo.getManualNumbers());
+        Money calculateMoney = money.calculateProduct(LottoMachine.LOTTO_PRICE, purchaseInfo.getManualCount());
 
         int autoCount = calculateMoney.getProductCount(LottoMachine.LOTTO_PRICE);
         LottoTickets autoLottoTickets = lottoMachine.issueAutoLottoTickets(autoCount);
 
         LottoTickets totalLottoTickets = manualLottoTickets.combine(autoLottoTickets);
-
-        return SalesInfoDto.valueOf(purchaseInfoDto.getMoney(), manualCount, autoCount,
+        return SalesInfoDto.valueOf(money.getAmount(), purchaseInfo.getManualCount(), autoCount,
                 LottoTicketsDto.from(totalLottoTickets));
     }
 

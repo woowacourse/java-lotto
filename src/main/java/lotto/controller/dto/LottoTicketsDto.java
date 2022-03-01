@@ -17,18 +17,8 @@ public class LottoTicketsDto {
                 .collect(toList());
     }
 
-    private LottoTicketsDto(List<List<Integer>> lottoNumbers) {
-        this.lottoTickets = lottoNumbers.stream()
-                .map(LottoTicketDto::from)
-                .collect(toList());
-    }
-
     public static LottoTicketsDto from(LottoTickets lottoTickets) {
         return new LottoTicketsDto(lottoTickets);
-    }
-
-    public static LottoTicketsDto from(List<List<Integer>> lottoNumbers) {
-        return new LottoTicketsDto(lottoNumbers);
     }
 
     public LottoTickets toLottoTickets() {
