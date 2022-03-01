@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.List;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 
@@ -11,9 +12,16 @@ public class Lotto {
     private static final int PRICE = 1000;
 
     private final LottoNumbers numbers;
+    private final boolean auto;
 
-    public Lotto(LottoNumbers numbers) {
-        this.numbers = numbers;
+    public Lotto() {
+        this.numbers = LottoNumbers.ofRandomNumbers();
+        this.auto = true;
+    }
+
+    public Lotto(List<String> inputs) {
+        this.numbers = LottoNumbers.from(inputs);
+        this.auto = false;
     }
 
     public static int countAvailableTickets(Money money) {
@@ -37,5 +45,9 @@ public class Lotto {
 
     public LottoNumbers getNumbers() {
         return this.numbers;
+    }
+
+    public boolean isAuto() {
+        return auto;
     }
 }

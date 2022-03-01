@@ -17,7 +17,7 @@ public class ResultView {
 
     public static void showPurchaseCount(LottosDTO lottosDTO) {
         System.out.println();
-        System.out.printf(FORMAT_COUNT, lottosDTO.getAutoCount(), lottosDTO.getManualCount());
+        System.out.printf(FORMAT_COUNT, lottosDTO.getManualCount(), lottosDTO.getAutoCount());
     }
 
     public static void showLottos(List<LottoDTO> lottos) {

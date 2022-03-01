@@ -20,10 +20,6 @@ public class LottoNumbers {
         this.lottoNumbers = List.copyOf(lottoNumbers);
     }
 
-    public static LottoNumbers ofRandomNumbers() {
-        return new LottoNumbers(LottoWheel.draw(NUMBERS_SIZE));
-    }
-
     private void validate(List<LottoNumber> lottoNumbers) {
         checkSize(lottoNumbers);
         checkDuplicate(lottoNumbers);
@@ -52,6 +48,10 @@ public class LottoNumbers {
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
         return new LottoNumbers(lottoNumbers);
+    }
+
+    public static LottoNumbers ofRandomNumbers() {
+        return new LottoNumbers(LottoWheel.draw(NUMBERS_SIZE));
     }
 
     public boolean contains(LottoNumber number) {

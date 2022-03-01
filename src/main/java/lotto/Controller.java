@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.model.Lottos;
+import lotto.model.LottosBuilder;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
 import lotto.model.dto.LottoDTO;
@@ -14,38 +15,38 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class Controller {
-    private static Lottos lottos;
-
     public static void run() {
         Money money = askMoneyAmount();
-        makeLottos(money);
-        givePrize(money);
+        Lottos lottos = makeLottos(money);
+        givePrize(money, lottos);
     }
 
     private static Money askMoneyAmount() {
         return Money.from(InputView.askMoneyAmount());
     }
 
-    private static void makeLottos(Money money) {
-        lottos = Lottos.of(money, InputView.askManualCount());
-        purchaseLottos(lottos);
+    private static Lottos makeLottos(Money money) {
+        LottosBuilder lottosBuilder = LottosBuilder.of(money, InputView.askManualCount());
+        Lottos lottos = purchaseLottos(lottosBuilder);
         ResultView.showPurchaseCount(LottosDTO.of(lottos));
         ResultView.showLottos(LottoDTO.from(lottos));
+        return lottos;
     }
 
-    private static void purchaseLottos(Lottos lottos) {
+    private static Lottos purchaseLottos(LottosBuilder lottosBuilder) {
         InputView.askManualNumbers();
-        purchaseManualLotto(lottos);
-        lottos.purchaseAuto();
+        purchaseManualLotto(lottosBuilder);
+        lottosBuilder.addAutoLottos();
+        return lottosBuilder.toLottos();
     }
 
-    private static void purchaseManualLotto(Lottos lottos) {
-        while (lottos.isManualAvailable()) {
-            lottos.purchaseManual(List.of(InputView.readNumbers()));
+    private static void purchaseManualLotto(LottosBuilder lottosBuilder) {
+        while (lottosBuilder.isManualAvailable()) {
+            lottosBuilder.addManualLotto(List.of(InputView.readNumbers()));
         }
     }
 
-    private static void givePrize(Money money) {
+    private static void givePrize(Money money, Lottos lottos) {
         PrizeInformations prizeInformations = PrizeInformations.from(lottos.match(makeWinningLotto()));
         ResultView.showPrizeInformation(PrizeInformationDTO.from(prizeInformations));
         ResultView.showEarningRate(prizeInformations.calculateEarningRate(money));
