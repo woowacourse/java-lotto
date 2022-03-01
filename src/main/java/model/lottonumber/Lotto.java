@@ -19,7 +19,7 @@ public class Lotto {
 
     public Rank findWinningRank(final WinningNumbers winningNumbers) {
         int matchCount = countMatch(winningNumbers.getWinningNumbers());
-        boolean hasBonus = hasBonusNumber(winningNumbers.getBonusNumber());
+        boolean hasBonus = hasBonus(winningNumbers.getBonusNumber());
 
         return Rank.valueOf(matchCount, hasBonus);
     }
@@ -30,7 +30,7 @@ public class Lotto {
                 .count();
     }
 
-    private boolean hasBonusNumber(final Number bonusNumber) {
+    private boolean hasBonus(final Number bonusNumber) {
         return numbers.stream()
                 .anyMatch(number -> number.equals(bonusNumber));
     }
