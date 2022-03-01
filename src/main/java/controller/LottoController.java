@@ -26,13 +26,8 @@ public class LottoController {
 
 	public void run() {
 		final Money money = Money.from(requestMoneyInput());
-		LottoTicket lottoTicket = new LottoTicket(createLottoTicket(money));
-
-		Lotto winningNumber = Lotto.from(requestWinningLottoInput());
-		Number bonusNumber = Number.from(requestBonusNumberInput());
-
-		WinningNumbers winningNumbers = new WinningNumbers(winningNumber, bonusNumber);
-
+		LottoTicket lottoTicket = createLottoTicket(money);
+		WinningNumbers winningNumbers = createWinningNumbers();
 		findWinningResult(lottoTicket, winningNumbers, money);
 	}
 
@@ -41,16 +36,16 @@ public class LottoController {
 		return inputView.requestMoney();
 	}
 
-	private List<Lotto> createLottoTicket(Money money) {
+	private LottoTicket createLottoTicket(Money money) {
 		int manualLottoCount = requestManualLottoCountInput();
-
-		String[][] inputManualLotto = requestManualLottoInput(manualLottoCount);
-		List<Lotto> lottoTicket = lottoFactory.generateLottoTicketAsManual(inputManualLotto);
 		money.purchaseManualLotto(manualLottoCount);
 
-		lottoTicket.addAll(lottoFactory.generateLottoTicketAsAuto(money));
-		outputView.printPurchasedLottoTicket(manualLottoCount, lottoTicket);
-		return lottoTicket;
+		String[][] inputManualLotto = requestManualLottoInput(manualLottoCount);
+		List<Lotto> lottos = lottoFactory.generateLottosAsManual(inputManualLotto);
+		lottos.addAll(lottoFactory.generateLottosAsAuto(money));
+
+		outputView.printPurchasedLottoTicket(manualLottoCount, lottos);
+		return new LottoTicket(lottos);
 	}
 
 	private int requestManualLottoCountInput() {
@@ -61,6 +56,12 @@ public class LottoController {
 	private String[][] requestManualLottoInput(int manualLottoCount) {
 		outputView.printRequestManualLotto();
 		return inputView.requestManualLotto(manualLottoCount);
+	}
+
+	private WinningNumbers createWinningNumbers() {
+		Lotto winningNumber = Lotto.from(requestWinningLottoInput());
+		Number bonusNumber = Number.from(requestBonusNumberInput());
+		return new WinningNumbers(winningNumber, bonusNumber);
 	}
 
 	private String[] requestWinningLottoInput() {

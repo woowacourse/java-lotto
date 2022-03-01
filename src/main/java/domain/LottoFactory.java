@@ -16,7 +16,7 @@ public class LottoFactory {
 		.boxed()
 		.collect(Collectors.toList());
 
-	public List<Lotto> generateLottoTicketAsAuto(final Money money) {
+	public List<Lotto> generateLottosAsAuto(final Money money) {
 		int autoLottoCount = money.findPurchaseLottoCount();
 		return IntStream.range(INITIAL_INDEX, autoLottoCount)
 			.mapToObj(index -> generateLottoAsAuto())
@@ -34,7 +34,7 @@ public class LottoFactory {
 		return Collections.unmodifiableList(lottoNumbers.subList(INITIAL_INDEX, LOTTO_MAX_SIZE_INDEX));
 	}
 
-	public List<Lotto> generateLottoTicketAsManual(String[][] inputManualLotto) {
+	public List<Lotto> generateLottosAsManual(String[][] inputManualLotto) {
 		return Arrays.stream(inputManualLotto)
 			.map(this::generateLottoAsManual)
 			.collect(Collectors.toList());
