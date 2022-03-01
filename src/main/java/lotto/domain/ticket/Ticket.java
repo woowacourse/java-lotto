@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import lotto.domain.ball.Ball;
 import lotto.domain.ball.BallStorage;
-import lotto.domain.ticket.validation.TicketValidator;
 
 public class Ticket {
 

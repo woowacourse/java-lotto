@@ -2,6 +2,7 @@ package lotto.domain.money;
 
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
+import lotto.utils.MoneyUnit;
 
 public class MoneyValidator {
 

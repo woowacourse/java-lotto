@@ -1,5 +1,7 @@
 package lotto.domain.money;
 
+import lotto.utils.MoneyUnit;
+
 public class Money {
 
     private final int money;
