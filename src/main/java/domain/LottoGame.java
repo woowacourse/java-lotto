@@ -16,7 +16,7 @@ public class LottoGame {
         return new WinningStatistics(lottoRewards);
     }
 
-    public Lottos getLottos() {
-        return lottos;
+    public List<Lotto> getLottos() {
+        return lottos.getLottos();
     }
 }

@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import domain.Lotto;
 import domain.LottoNumber;
 import domain.LottoReward;
-import domain.Lottos;
 
 public class OutputView {
 
@@ -19,10 +18,10 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void showPurchasedLottos(Lottos lottos) {
-        System.out.println(lottos.getLottos().size() + "개를 구매했습니다.");
+    public static void showPurchasedLottos(List<Lotto> lottos) {
+        System.out.println(lottos.size() + "개를 구매했습니다.");
 
-        for (Lotto lotto : lottos.getLottos()) {
+        for (Lotto lotto : lottos) {
             System.out.println(lotto.getLottoNumbers().stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList()));
