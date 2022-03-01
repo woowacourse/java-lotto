@@ -23,7 +23,7 @@ class LottoServiceTest {
     @Test
     void issueLotto_count_correct() {
         lottoService.issueLotto();
-        final List<LottoDto> lottoDto = lottoService.issueLotto();
+        final List<LottoDto> lottoDto = lottoService.getIssuedLotto();
 
         assertThat(lottoDto.size()).isEqualTo(100000);
     }
