@@ -52,7 +52,7 @@
 - LottoTicket
   - 당첨 번호, 보너스볼로 몇 등인지 반환한다.
   
-
+  
 - LottoTicketNumbers
   - 중복되지 않는 번호 6개
   - 7개 이상부터 예외
