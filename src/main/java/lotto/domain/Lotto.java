@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.constants.ErrorConstants.ERROR_NULL_MESSAGE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -11,7 +13,6 @@ public class Lotto {
 
     private static final String ERROR_NUMBER_SIX_MESSAGE = "로또 숫자는 6개여야 합니다.";
     private static final String ERROR_DUPLICATION_MESSAGE = "로또 숫자는 중복되면 안됩니다.";
-    private static final String ERROR_NULL_MESSAGE = "입력된 값이 null이면 안됩니다.";
 
     public static final int LOTTO_SIZE = 6;
 
@@ -39,6 +40,7 @@ public class Lotto {
     }
 
     public LottoPrize confirmWinning(WinningLotto winningLotto) {
+        Objects.requireNonNull(winningLotto, ERROR_NULL_MESSAGE);
         int lottoNumberMatches = (int) numbers.stream()
                 .filter(winningLotto::containsLottoNumber)
                 .count();

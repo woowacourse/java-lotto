@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import static lotto.constants.ErrorConstants.ERROR_NULL_MESSAGE;
 import static lotto.utils.LottoNumbersGenerator.generateLottoNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoGame {
 
@@ -12,6 +14,7 @@ public class LottoGame {
     private Lottos lottos;
 
     public void purchase(Money money) {
+        Objects.requireNonNull(money, ERROR_NULL_MESSAGE);
         this.lottos = new Lottos(purchaseLottos(money));
     }
 

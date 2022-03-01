@@ -23,10 +23,6 @@ public class Money {
         return this.amount / itemMoney.amount;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
