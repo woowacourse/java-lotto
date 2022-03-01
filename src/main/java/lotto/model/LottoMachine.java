@@ -1,20 +1,38 @@
 package lotto.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import lotto.model.generator.AutoLottoNumbersGenerator;
 
 public class LottoMachine {
 
+    private Money money;
     private final Lottos lottos;
-    private final WinningLotto winningLotto;
+//    private final WinningLotto winningLotto;
+
     private Map<Rank, Integer> rankCount;
 
-    public LottoMachine(final Lottos lottos, final WinningLotto winningLotto) {
-        this.lottos = lottos;
-        this.winningLotto = winningLotto;
+    public LottoMachine(final Money money) {
+        this.money = money;
+        this.lottos = makeLottos();
     }
 
-    public void calculateResult() {
+    private Lottos makeLottos() {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < money.count(); i++) {
+            lottos.add(new Lotto(new AutoLottoNumbersGenerator()));
+        }
+        return new Lottos(lottos);
+    }
+    
+
+    public void calculateResult(WinningLotto winningLotto) {
         this.rankCount = winningLotto.checkRank(lottos);
+    }
+
+    public Lottos getLottos() {
+        return lottos;
     }
 
     public double getRevenue() {

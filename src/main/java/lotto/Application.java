@@ -10,9 +10,7 @@ public class Application {
         LottoController lottoController = new LottoController();
 
         try{
-            LottoMachine lottoMachine = lottoController.makeLottoMachine();
-            lottoMachine.calculateResult();
-            ResultView.printTotalRankResult(lottoMachine);
+            lottoController.run();
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
