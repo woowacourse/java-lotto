@@ -1,4 +1,4 @@
-package lotto.domain.ticket.condition;
+package lotto.utils;
 
 public enum TicketSize {
 
