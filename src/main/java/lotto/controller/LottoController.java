@@ -30,7 +30,7 @@ public class LottoController {
         try {
             return new MoneyManager(InputView.requestMoney());
         } catch (RuntimeException exception) {
-            System.out.println("[ERROR] " + exception + "\n");
+            System.out.println("[ERROR] " + exception.getMessage() + "\n");
             return getMoney();
         }
     }
@@ -39,7 +39,7 @@ public class LottoController {
         try {
             return new WinningNumbers(getWinningNumbers(), getBonusNumber());
         } catch (RuntimeException exception) {
-            System.out.println("[ERROR] " + exception + "\n");
+            System.out.println("[ERROR] " + exception.getMessage() + "\n");
             return getWinningNumbersAndBonusNumber();
         }
     }
