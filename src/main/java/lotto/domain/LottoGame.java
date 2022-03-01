@@ -1,9 +1,13 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoGame {
 
     private final PurchaseAmount purchaseAmount;
     private final int manualLottoCount;
+    private final List<Lotto> lottos = new ArrayList<>();
 
     public LottoGame(PurchaseAmount purchaseAmount, int manualLottoCount) {
         this.purchaseAmount = purchaseAmount;
@@ -18,7 +22,25 @@ public class LottoGame {
         }
     }
 
+    public void makeManualLottos(List<List<Integer>> inputLottos) {
+        validateEqualToManualLottoCount(inputLottos);
+
+        for (List<Integer> inputLotto : inputLottos) {
+            lottos.add(new FixedLottoMachine(inputLotto).makeLottos());
+        }
+    }
+
+    private void validateEqualToManualLottoCount(List<List<Integer>> inputLottos) {
+        if (inputLottos.size() != manualLottoCount) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수와 같은 개수의 로또를 입력해주세요.");
+        }
+    }
+
     public int getManualLottoCount() {
         return manualLottoCount;
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

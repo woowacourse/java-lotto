@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,5 +26,33 @@ public class LottoGameTest {
         assertThatThrownBy(() -> new LottoGame(new PurchaseAmount(14_000), count))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구입 금액으로 살 수 있는 수량이어야 합니다.");
+    }
+
+    @Test
+    @DisplayName("수동으로 구매할 번호를 입력받아 생성한다.")
+    void makeManualLottos() {
+        LottoGame lottoGame = new LottoGame(new PurchaseAmount(14_000), 3);
+
+        List<List<Integer>> inputLottos = new ArrayList<>();
+        inputLottos.add(List.of(8, 21, 23, 41, 42, 43));
+        inputLottos.add(List.of(3, 5, 11, 16, 32, 38));
+        inputLottos.add(List.of(7, 11, 16, 35, 36, 44));
+
+        lottoGame.makeManualLottos(inputLottos);
+        assertThat(lottoGame.getLottos().size()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("수동으로 구매할 로또 개수가 입력 개수와 다르면 예외를 발생시킨다.")
+    void throwExceptionWhenManulLottoCountNotEqual() {
+        LottoGame lottoGame = new LottoGame(new PurchaseAmount(14_000), 3);
+
+        List<List<Integer>> inputLottos = new ArrayList<>();
+        inputLottos.add(List.of(8, 21, 23, 41, 42, 43));
+        inputLottos.add(List.of(3, 5, 11, 16, 32, 38));
+
+        assertThatThrownBy(() -> lottoGame.makeManualLottos(inputLottos))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("수동으로 구매할 로또 수와 같은 개수의 로또를 입력해주세요.");
     }
 }

@@ -13,7 +13,7 @@ public class FixedLottoMachine implements LottoMachine {
     }
 
     @Override
-    public Lotto makeLottoTicket() {
+    public Lotto makeLottos() {
         return new Lotto(numbers.stream()
                 .map(LottoNumber::new)
                 .collect(toList()));

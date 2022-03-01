@@ -20,7 +20,7 @@ public class RandomLottoMachine implements LottoMachine {
         }
     }
 
-    public Lotto makeLottoTicket() {
+    public Lotto makeLottos() {
         Collections.shuffle(numbers);
         return new Lotto(numbers.subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX));
     }

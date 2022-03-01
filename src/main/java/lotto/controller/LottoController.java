@@ -14,6 +14,15 @@ public class LottoController {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         LottoGame lottoGame = new LottoGame(purchaseAmount, StringConverter.toInt(InputView.getManualLottoCount()));
 
+        InputView.printGetManualLottosMessage();
+
+        List<List<Integer>> inputLottos = new ArrayList<>();
+        for (int i = 0; i < lottoGame.getManualLottoCount(); i++) {
+            inputLottos.add(StringConverter.toInts(InputView.getManualLotto()));
+        }
+        lottoGame.makeManualLottos(inputLottos);
+
+
         int ticketCount = purchaseAmount.calculateTheNumberOfTicket();
         OutputView.printTicketCount(ticketCount);
 
@@ -39,7 +48,7 @@ public class LottoController {
         List<Lotto> lottoTickets = new ArrayList<>();
         LottoMachine lottoMachine = new RandomLottoMachine();
         for (int i = 0; i < count; i++) {
-            lottoTickets.add(lottoMachine.makeLottoTicket());
+            lottoTickets.add(lottoMachine.makeLottos());
         }
         return lottoTickets;
     }
@@ -53,7 +62,7 @@ public class LottoController {
         try {
             List<Integer> input = StringConverter.toInts(InputView.getWinningNumber());
             LottoMachine lottoMachine = new FixedLottoMachine(input);
-            return lottoMachine.makeLottoTicket();
+            return lottoMachine.makeLottos();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getWinningNumber();

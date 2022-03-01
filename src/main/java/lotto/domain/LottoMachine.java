@@ -3,5 +3,5 @@ package lotto.domain;
 
 public interface LottoMachine {
 
-    Lotto makeLottoTicket();
+    Lotto makeLottos();
 }
