@@ -44,9 +44,8 @@ public class LottoController {
     }
 
     private WinningTicket requestWinningTicket() {
-        final List<Integer> winningNumbers = lottoView.requestWinningNumbers();
-        final int bonusNumber = lottoView.requestBonusNumber();
-        return new WinningTicket(winningNumbers, bonusNumber);
+        final WinningTicketDto winningTicketDto = lottoView.requestWinningTicketDto();
+        return winningTicketDto.toWinningTicket();
     }
 
     private  void announceAnalysis(final Analysis analysis) {

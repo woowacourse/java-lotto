@@ -6,6 +6,7 @@ import java.util.List;
 
 import lotto.domain.analysis.Analysis;
 import lotto.domain.ticket.Tickets;
+import lotto.dto.WinningTicketDto;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
 
@@ -29,12 +30,18 @@ public class LottoView {
         outputView.printTickets(tickets);
     }
 
-    public List<Integer> requestWinningNumbers() {
+    public WinningTicketDto requestWinningTicketDto() {
+        final List<Integer> winningNumbers = requestWinningNumbers();
+        final int bonusNumber = requestBonusNumber();
+        return new WinningTicketDto(winningNumbers, bonusNumber);
+    }
+
+    private List<Integer> requestWinningNumbers() {
         outputView.printMessage(REQUEST_WINNING_NUMBERS);
         return inputView.requestTicketNumbers();
     }
 
-    public int requestBonusNumber() {
+    private int requestBonusNumber() {
         outputView.printMessage(REQUEST_BONUS_NUMBER);
         return inputView.requestBonusNumber();
     }
