@@ -36,11 +36,15 @@ public class Money {
         }
     }
 
-    public int getCount(){
-        return money/BASIC_LOTTO_MONEY;
+    public int getCount() {
+        return money / BASIC_LOTTO_MONEY;
     }
 
     public int getMoney() {
         return money;
+    }
+
+    public int getAutoMoney(int purchaseLottoCount) {
+        return money - (BASIC_LOTTO_MONEY * purchaseLottoCount);
     }
 }

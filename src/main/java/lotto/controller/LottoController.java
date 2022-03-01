@@ -1,8 +1,10 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoWinningNumbers;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.ManualLotto;
 import lotto.domain.result.LottoResult;
 import lotto.domain.user.Money;
 import lotto.exception.InvalidException;
@@ -11,8 +13,8 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    public void printLottos(final Lottos lottos) {
-        OutputView.printLottos(lottos);
+    public void printLottos(final Lottos lottos, int purchaseLottoCount, int remainPurchaseLottoCount) {
+        OutputView.printLottos(lottos, purchaseLottoCount, remainPurchaseLottoCount);
     }
 
     public Lottos inputLottoMoney(final int inputMoney) {
@@ -25,7 +27,7 @@ public class LottoController {
             String value = inputLottoWinningNumbers();
             int bonusNumber = inputBonusNumber();
             return new LottoWinningNumbers(value, bonusNumber);
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return createLottoWinningNumbers();
         }
@@ -72,5 +74,22 @@ public class LottoController {
 
     public void printWinningResult(final LottoResult lottoResult) {
         OutputView.printWinningResult(lottoResult);
+    }
+
+    public ManualLotto inputManualLotto(int purchaseLottoCount) {
+        ManualLotto manualLotto = new ManualLotto();
+        OutputView.printManualLotto();
+        addManualLotto(purchaseLottoCount, manualLotto);
+        return manualLotto;
+    }
+
+    private void addManualLotto(int purchaseLottoCount, ManualLotto manualLotto) {
+        for (int i = 0; i < purchaseLottoCount; i++) {
+            manualLotto.add(InputView.inputManualLotto());
+        }
+    }
+
+    public Lottos addLottos(Lottos lottos, List<Lotto> addLottos) {
+        return lottos.addLottos(addLottos);
     }
 }

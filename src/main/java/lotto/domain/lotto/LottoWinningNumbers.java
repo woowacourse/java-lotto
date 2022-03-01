@@ -15,7 +15,8 @@ public class LottoWinningNumbers {
     private final Lotto winningLotto;
     private int bonusNumber;
 
-    public LottoWinningNumbers(final String numbers, final int bonusNumber) {
+    public LottoWinningNumbers(String numbers, final int bonusNumber) {
+        numbers = removeBlank(numbers);
         checkNumbers(numbers);
         this.winningLotto = new Lotto(createWinningLottoNumbers(numbers));
         checkBonusNumber(winningLotto, bonusNumber);
@@ -29,6 +30,10 @@ public class LottoWinningNumbers {
         checkNotInteger(values);
         checkIntegerRange(values);
         checkDuplicateNumber(values);
+    }
+
+    private String removeBlank(final String value) {
+        return value.replace(" ", "");
     }
 
     private void checkNullAndBlank(final String numbers) {
