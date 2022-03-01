@@ -51,4 +51,8 @@ public enum WinningLottery {
         }
         return winningLotteries;
     }
+
+    public boolean isBonus() {
+        return this.equals(BONUS_FIVE);
+    }
 }
