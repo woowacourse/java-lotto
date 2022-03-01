@@ -12,7 +12,7 @@ public class LottoTicket {
 		this.lottoTicket = List.copyOf(lottoTicket);
 	}
 
-	public EnumMap<LottoRank, Integer> findWinningResult(final WinningNumbers winningNumbers) {
+	public WinningResult findWinningResult(final WinningNumbers winningNumbers) {
 		EnumMap<LottoRank, Integer> winningResult = LottoRank.createWinningResultMap();
 		Lotto winningNumber = winningNumbers.getWinningNumbers();
 		Number bonusNumber = winningNumbers.getBonusNumber();
@@ -21,7 +21,7 @@ public class LottoTicket {
 			LottoRank rank = lotto.confirmWinningResult(winningNumber, bonusNumber);
 			addWinningResultCount(winningResult, rank);
 		}
-		return winningResult;
+		return new WinningResult(winningResult);
 	}
 
 	private static void addWinningResultCount(final EnumMap<LottoRank, Integer> winningResult, final LottoRank rank) {

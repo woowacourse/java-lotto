@@ -26,7 +26,7 @@ class WinningResultTest {
 		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
-		WinningResult winningResult = new WinningResult(lottoTicket.findWinningResult(winningNumbers));
+		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
 
 		// then
 		assertThat(winningResult.getWinningResult().get(LottoRank.FIRST)).isEqualTo(1);
@@ -47,7 +47,7 @@ class WinningResultTest {
 		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
-		WinningResult winningResult = new WinningResult(lottoTicket.findWinningResult(winningNumbers));
+		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
 
 		// then
 		assertThat(winningResult.getWinningResult().get(LottoRank.SECOND)).isEqualTo(1);
@@ -68,7 +68,7 @@ class WinningResultTest {
 		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
-		WinningResult winningResult = new WinningResult(lottoTicket.findWinningResult(winningNumbers));
+		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
 
 		// then
 		assertThat(winningResult.getWinningResult().get(LottoRank.THIRD)).isEqualTo(1);
@@ -89,7 +89,7 @@ class WinningResultTest {
 		Money money = Money.from("1000");
 
 		// when
-		WinningResult winningResult = new WinningResult(lottoTicket.findWinningResult(winningNumbers));
+		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
 
 		//then
 		assertThat(winningResult.getRateOfProfit(money)).isEqualTo(5.0);
@@ -110,7 +110,7 @@ class WinningResultTest {
 		Money money = Money.from("1000");
 
 		// when
-		WinningResult winningResult = new WinningResult(lottoTicket.findWinningResult(winningNumbers));
+		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
 
 		//then
 		assertThat(winningResult.getRateOfProfit(money)).isEqualTo(2000000.0);
