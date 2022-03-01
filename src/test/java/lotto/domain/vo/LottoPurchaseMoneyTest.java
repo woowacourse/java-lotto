@@ -14,7 +14,7 @@ public class LottoPurchaseMoneyTest {
         LottoPurchaseMoney lottoPurchaseMoney = LottoPurchaseMoney.create(14000);
 
         // when
-        int count = lottoPurchaseMoney.calculate();
+        int count = lottoPurchaseMoney.calculate(0);
 
         // then
         assertThat(count).isEqualTo(14);
@@ -35,7 +35,7 @@ public class LottoPurchaseMoneyTest {
         LottoPurchaseMoney lottoPurchaseMoney = LottoPurchaseMoney.create(14500);
 
         // when
-        int count = lottoPurchaseMoney.calculate();
+        int count = lottoPurchaseMoney.calculate(0);
 
         // then
         assertThat(count).isEqualTo(14);

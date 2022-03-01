@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import lotto.domain.vo.LottoPurchaseMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         // when & then
-        assertThatCode(() -> lottoMachine.purchase(LottoPurchaseMoney.create(14000)))
+        assertThatCode(() -> lottoMachine.purchase(LottoPurchaseMoney.create(14000), new ArrayList<>(0)))
                 .doesNotThrowAnyException();
     }
 }
