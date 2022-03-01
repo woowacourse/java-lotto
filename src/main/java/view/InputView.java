@@ -7,7 +7,7 @@ public class InputView {
 	private static final String BLANK = " ";
 	private static final String COMMA = ",";
 	private static final String EMPTY_STRING = "";
-	public static final String NUMBER_IS_NOT_DIGIT_MESSAGE = "숫자를 입력해야 합니다";
+	private static final String NUMBER_IS_NOT_DIGIT_MESSAGE = "숫자를 입력해야 합니다";
 	private final Scanner scanner = new Scanner(System.in);
 
 	private String readLine() {
@@ -20,7 +20,7 @@ public class InputView {
 
 	public int requestManualLottoCount() {
 		try {
-			return Integer.parseInt(scanner.nextLine());
+			return Integer.parseInt(readLine());
 		} catch (Exception exception) {
 			throw new NumberFormatException(NUMBER_IS_NOT_DIGIT_MESSAGE);
 		}
