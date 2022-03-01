@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import domain.strategy.TicketGenerateStrategy;
+import domain.strategy.TicketingStrategy;
 
 public class Tickets {
 	private static final String PAYMENT_ERROR = "구입 금액은 1000원 미만일 수 없습니다.";
@@ -16,11 +16,11 @@ public class Tickets {
 		this.tickets = new ArrayList<>();
 	}
 
-	public void makeTickets(int payment, TicketGenerateStrategy ticketGenerateStrategy) {
+	public void makeTickets(int payment, TicketingStrategy ticketingStrategy) {
 		validatePayment(payment);
 
 		for (int i = 0; i < payment / Ticket.PRICE; i++) {
-			tickets.add(new Ticket(ticketGenerateStrategy.generate()));
+			tickets.add(new Ticket(ticketingStrategy.generate()));
 		}
 	}
 

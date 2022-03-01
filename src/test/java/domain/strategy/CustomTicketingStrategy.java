@@ -3,7 +3,7 @@ package domain.strategy;
 import java.util.Iterator;
 import java.util.List;
 
-public class CustomTicketGenerateStrategy implements TicketGenerateStrategy {
+public class CustomTicketingStrategy implements TicketingStrategy {
 
 	private Iterator<List<Integer>> numbers;
 

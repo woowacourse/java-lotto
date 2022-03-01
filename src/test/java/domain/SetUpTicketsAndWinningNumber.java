@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import domain.strategy.CustomTicketGenerateStrategy;
+import domain.strategy.CustomTicketingStrategy;
 
 class SetUpTicketsAndWinningNumber {
 	private Tickets tickets;
@@ -29,7 +29,7 @@ class SetUpTicketsAndWinningNumber {
 		numbers.add(Arrays.asList(17, 21, 29, 37, 42, 45));
 		numbers.add(Arrays.asList(3, 8, 27, 30, 35, 44));
 
-		CustomTicketGenerateStrategy customLottoGenerator = new CustomTicketGenerateStrategy();
+		CustomTicketingStrategy customLottoGenerator = new CustomTicketingStrategy();
 		customLottoGenerator.initNumbers(numbers);
 		int payment = 14000;
 
