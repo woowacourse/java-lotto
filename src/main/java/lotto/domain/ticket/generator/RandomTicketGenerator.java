@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.domain.ball.BallNumberRange;
 import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.condition.TicketSize;
+import lotto.utils.BallNumberRange;
 
 public class RandomTicketGenerator implements TicketGenerator {
 

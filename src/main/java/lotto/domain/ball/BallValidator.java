@@ -2,6 +2,7 @@ package lotto.domain.ball;
 
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
+import lotto.utils.BallNumberRange;
 
 public class BallValidator {
 
