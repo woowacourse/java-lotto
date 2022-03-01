@@ -30,16 +30,16 @@ public class LotteryResultDto implements Comparable<LotteryResultDto> {
         return winningLotteries;
     }
 
-    public Count getCountOfMatchingNumbers() {
-        return countOfMatchingNumbers;
+    public int getCountOfMatchingNumbers() {
+        return countOfMatchingNumbers.getNumber();
     }
 
     public int getWinningPrice() {
         return winningPrice.getAmount();
     }
 
-    public Count getNumberOfMatchingTicket() {
-        return numberOfMatchingTicket;
+    public int getNumberOfMatchingTicket() {
+        return this.numberOfMatchingTicket.getNumber();
     }
 
     public boolean isBonus() {

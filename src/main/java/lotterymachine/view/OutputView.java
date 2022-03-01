@@ -28,9 +28,11 @@ public class OutputView {
 
     private static String getLotteryStatistic(LotteryResultDto lottery) {
         if (lottery.isBonus()) {
-            return String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개%n", lottery.getCountOfMatchingNumbers().getNumber(), lottery.getWinningPrice(), lottery.getNumberOfMatchingTicket().getNumber());
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개%n", lottery.getCountOfMatchingNumbers(),
+                    lottery.getWinningPrice(), lottery.getNumberOfMatchingTicket());
         }
-        return String.format("%d개 일치 (%d원) - %d개%n", lottery.getCountOfMatchingNumbers().getNumber(), lottery.getWinningPrice(), lottery.getNumberOfMatchingTicket().getNumber());
+        return String.format("%d개 일치 (%d원) - %d개%n", lottery.getCountOfMatchingNumbers(),
+                lottery.getWinningPrice(), lottery.getNumberOfMatchingTicket());
     }
 
     public static void printProfitRate(double calculateProfitRate) {

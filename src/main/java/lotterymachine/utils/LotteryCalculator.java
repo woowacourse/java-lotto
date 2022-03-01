@@ -29,6 +29,6 @@ public class LotteryCalculator {
     }
 
     private static Money sumIncome(LotteryResultDto lotteryResult) {
-        return Money.from(lotteryResult.getWinningPrice() * lotteryResult.getNumberOfMatchingTicket().getNumber());
+        return Money.from(lotteryResult.getWinningPrice() * lotteryResult.getNumberOfMatchingTicket());
     }
 }
