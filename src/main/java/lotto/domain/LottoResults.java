@@ -23,20 +23,27 @@ public class LottoResults {
     }
 
     public double getRateReturn() {
-        int totalSpendMoney = 0;
-        int totalReward = 0;
-
-        for (LottoPrize prize : LottoPrize.values()) {
-            int prizeNumber = results.get(prize);
-            totalSpendMoney += prizeNumber * 1000;
-            totalReward += prize.getTotalReward(prizeNumber);
-        }
-
+        int totalSpendMoney = calculateTotalSpendMoney();
         if (totalSpendMoney == 0) {
             return 0;
         }
+        return (double) calculateTotalReward() / totalSpendMoney;
+    }
 
-        return (double) totalReward / totalSpendMoney;
+    private int calculateTotalSpendMoney() {
+        int count = 0;
+        for (Integer prizeCount : results.values()) {
+            count += prizeCount;
+        }
+        return count * LottoGame.LOTTO_PRICE;
+    }
+
+    private int calculateTotalReward() {
+        int totalReward = 0;
+        for (LottoPrize prize : LottoPrize.values()) {
+            totalReward += prize.getTotalReward(results.get(prize));
+        }
+        return totalReward;
     }
 
     public int getPrizeNumber(LottoPrize prize) {
