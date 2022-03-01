@@ -5,8 +5,8 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Number;
-import lotto.domain.Result;
 import lotto.domain.Rank;
+import lotto.domain.Result;
 
 public class OutputView {
 
@@ -30,13 +30,19 @@ public class OutputView {
         System.out.printf(ERROR_MESSAGE, errorMessage);
     }
 
-    public static void printInitResult(Lottos lottos, int quantityOfManual) {
-        printLottoCount(lottos, quantityOfManual);
-        printLottos(lottos);
+    public static void printInitResult(Lottos manualLottos, Lottos autoLottos) {
+        printLottoCount(manualLottos.getCount(), autoLottos.getCount());
+        printAllLotto(manualLottos, autoLottos);
     }
 
-    private static void printLottoCount(Lottos lottos, int quantityOfManual) {
-        System.out.printf(LOTTO_COUNT_MESSAGE, quantityOfManual, lottos.getCount() - quantityOfManual);
+    private static void printLottoCount(int quantityOfManual, int quantityOfAuto) {
+        System.out.printf(LOTTO_COUNT_MESSAGE, quantityOfManual, quantityOfAuto);
+    }
+
+    private static void printAllLotto(Lottos... args) {
+        for (Lottos lottos : args) {
+            printLottos(lottos);
+        }
     }
 
     private static void printLottos(Lottos lottos) {
