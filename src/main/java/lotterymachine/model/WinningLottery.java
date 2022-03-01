@@ -46,8 +46,9 @@ public enum WinningLottery {
 
     public static Map<WinningLottery, Count> getWinningLotteries() {
         Map<WinningLottery, Count> winningLotteries = new EnumMap<>(WinningLottery.class);
-        Arrays.stream(values())
-                .forEach(value -> winningLotteries.put(value, Count.from(INITIAL_NUMBER_OF_MATCHING_TICKET)));
+        for (WinningLottery winningLottery: values()) {
+            winningLotteries.put(winningLottery, Count.from(INITIAL_NUMBER_OF_MATCHING_TICKET));
+        }
         return winningLotteries;
     }
 }
