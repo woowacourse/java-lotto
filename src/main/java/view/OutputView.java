@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public static void printPurchaseInfo(List<LottoTicket> lottoTickets) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
+    public static void printPurchaseInfo(int manualLottoCount, int autoLottoCount, List<LottoTicket> lottoTickets) {
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoCount, autoLottoCount);
 
         StringBuilder builder = new StringBuilder();
 

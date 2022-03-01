@@ -14,23 +14,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
 
-    @DisplayName("문자열로 조회된 LottoNumber 내부에 정확한 값이 들어있는지 확인")
-    @ParameterizedTest(name = DISPLAY_NAME_PLACEHOLDER + " [" + ARGUMENTS_PLACEHOLDER + "]")
-    @ValueSource(strings = {"1", "20", "45"})
-    void of_ValidStringInput_Successful(String value) {
-        LottoNumber lottoNumber = LottoNumber.of(value);
-
-        assertThat(lottoNumber.getNumber()).isEqualTo(Integer.parseInt(value));
-    }
-
-    @DisplayName("숫자가 아닌 문자열 입력 시 예외 발생")
-    @Test
-    void validateAndParseNumber_throwIllegalArgumentException() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> LottoNumber.of("!"))
-                .withMessageMatching("로또 번호는 숫자여야 합니다.");
-    }
-
     @DisplayName("조회된 LottoNumber 내부에 정확한 값이 들어있는지 확인")
     @ParameterizedTest(name = DISPLAY_NAME_PLACEHOLDER + " [" + ARGUMENTS_PLACEHOLDER + "]")
     @ValueSource(ints = {1, 20, 45})

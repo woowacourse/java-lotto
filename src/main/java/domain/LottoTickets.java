@@ -1,30 +1,27 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoTickets {
 
-    public static final int LOTTO_PRICE = 1000;
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    public LottoTickets() {
+        this.lottoTickets = new ArrayList<>();
     }
 
-    public static LottoTickets purchaseBy(UserBalance userBalance) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        int lottoCount = userBalance.getUserBalance() / LOTTO_PRICE;
+    public void purchaseManualBy(List<LottoTicket> manualLottoTickets) {
+        lottoTickets.addAll(manualLottoTickets);
+    }
 
-        for (int i = 0; i < lottoCount; i++) {
+    public void purchaseAutoBy(int autoLottoCount) {
+        for (int i = 0; i < autoLottoCount; i++) {
             lottoTickets.add(LottoTicket.createAutoLotto());
         }
-
-        return new LottoTickets(lottoTickets);
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return Collections.unmodifiableList(lottoTickets);
+        return new ArrayList<>(lottoTickets);
     }
 }

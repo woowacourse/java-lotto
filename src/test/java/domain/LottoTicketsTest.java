@@ -12,7 +12,8 @@ public class LottoTicketsTest {
     @DisplayName("로또 가격에 맞춰 로또 객체 생성 시 성공")
     @Test
     void purchaseBy_createsExactAmountOfLottoTickets_Successful() {
-        LottoTickets lottoTickets = LottoTickets.purchaseBy(new UserBalance("5000"));
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.purchaseAutoBy(5);
 
         assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(5);
     }
@@ -20,7 +21,8 @@ public class LottoTicketsTest {
     @DisplayName("중복되지 않는 로또 티켓 객체 생성 시 성공")
     @Test
     void purchaseBy_createsDistinctLottoTickets_Successful() {
-        LottoTickets lottoTickets = LottoTickets.purchaseBy(new UserBalance("20000"));
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.purchaseAutoBy(20);
 
         Set<LottoTicket> noDuplicateLottoTicketSet = new HashSet<>(lottoTickets.getLottoTickets());
         assertThat(noDuplicateLottoTicketSet.size())
