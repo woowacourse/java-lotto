@@ -26,7 +26,7 @@ public class LottoResultTest {
 		//when
 		Map<Rank, Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
 		LottoResult lottoResult = new LottoResult(ranks);
-		Payment payment = new Payment("5000");
+		Payment payment = new Payment(5000);
 
 		double profitRate = lottoResult.calculateProfitRate(payment);
 
