@@ -13,10 +13,10 @@ public class LotteryTickets {
         this.tickets = lotteryTickets;
     }
 
-    public Map<WinningLottery, Count> getLotteriesResult(List<Ball> balls, Ball bonus) {
+    public Map<WinningLottery, Count> getLotteriesResult(LotteryTicket ticket, Ball bonus) {
         final Map<WinningLottery, Count> lotteriesResult = WinningLottery.getWinningLotteries();
         for (LotteryTicket lotteryTicket : tickets) {
-            int numberOfMatchingBalls = lotteryTicket.countMatchingBalls(balls);
+            int numberOfMatchingBalls = lotteryTicket.countMatchingBalls(ticket);
             boolean containsBonus = lotteryTicket.contains(bonus);
             WinningLottery winningLottery = WinningLottery.find(containsBonus, numberOfMatchingBalls);
             lotteriesResult.put(winningLottery, lotteriesResult.get(winningLottery).increase());

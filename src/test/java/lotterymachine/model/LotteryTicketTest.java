@@ -18,11 +18,9 @@ class LotteryTicketTest {
     @DisplayName("당첨번호와 일치하는 로또 숫자의 개수를 반환한다.")
     void countMatchingNumbers(String winningNumbers, int expected) {
         LotteryTicket lotteryTicket = new LotteryTicket(Ball.createBalls(Arrays.asList(7, 8, 9, 10, 11, 12)));
-        List<Ball> winningBalls = Arrays.stream(winningNumbers.split(","))
-                .map(Integer::parseInt)
-                .map(Ball::from)
-                .collect(Collectors.toList());
-        assertThat(lotteryTicket.countMatchingBalls(winningBalls)).isEqualTo(expected);
+        LotteryTicket winningTicket = new LotteryTicket(Ball.createBalls(
+                Arrays.stream(winningNumbers.split(",")).map(Integer::parseInt).collect(Collectors.toList())));
+        assertThat(lotteryTicket.countMatchingBalls(winningTicket)).isEqualTo(expected);
     }
 
 

@@ -1,13 +1,18 @@
 package lotterymachine.vo;
 
+import static lotterymachine.model.ErrorMessage.OUT_OF_RANGE;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Ball {
+    private static final int MINIMUM = 1;
+    private static final int MAXIMUM = 45;
     private final int number;
 
     private Ball(int number) {
+        validateRange(number);
         this.number = number;
     }
 
@@ -19,6 +24,12 @@ public class Ball {
         return numbers.stream()
                 .map(Ball::new)
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    private void validateRange(int number) {
+        if (number < MINIMUM || MAXIMUM < number) {
+            throw new IllegalArgumentException(OUT_OF_RANGE.getMessage());
+        }
     }
 
     public int getNumber() {

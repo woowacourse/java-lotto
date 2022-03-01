@@ -18,9 +18,9 @@ public class LotteryTicketsTest {
     void findResult() {
         LotteryTicket lotteryTicket = new LotteryTicket(Ball.createBalls(Arrays.asList(7, 8, 9, 10, 11, 12)));
         LotteryTickets lotteryTickets = new LotteryTickets(List.of(lotteryTicket));
-        List<Ball> winningBalls = Ball.createBalls(Arrays.asList(7, 8, 9, 13, 20, 21));
+        LotteryTicket winningTicket = new LotteryTicket(Ball.createBalls(Arrays.asList(7, 8, 9, 13, 20, 21)));
         Ball bonus = Ball.from(30);
-        Map<WinningLottery, Count> result = lotteryTickets.getLotteriesResult(winningBalls, bonus);
+        Map<WinningLottery, Count> result = lotteryTickets.getLotteriesResult(winningTicket, bonus);
         assertThat(result.get(WinningLottery.THREE).getNumber()).isEqualTo(1);
     }
 }

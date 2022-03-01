@@ -25,12 +25,11 @@ public class LotteryMachine {
         Count numberOfTickets = getNumberOfTickets(amount);
         LotteryTickets purchasedLotteryTickets = purchaseLotteryTickets(numberOfTickets);
 
-        List<Integer> winningNumbers = InputView.getWinningNumbers();
-        int bonusNumber = InputView.getBonusNumber(winningNumbers);
+        LotteryTicket winningTicket = getWinningTicket();
+        int bonusNumber = InputView.getBonusNumber(winningTicket.getBalls());
 
-        showResult(purchasedLotteryTickets, winningNumbers, bonusNumber);
+        showResult(purchasedLotteryTickets, winningTicket, bonusNumber);
     }
-
 
     private static Money getInputAmount() {
         try {
@@ -54,9 +53,18 @@ public class LotteryMachine {
         return lotteryTickets;
     }
 
-    private static void showResult(LotteryTickets lotteryTickets, List<Integer> winningNumbers, int bonusNumber) {
-        Map<WinningLottery, Count> ticketsResult = lotteryTickets.getLotteriesResult(
-                Ball.createBalls(winningNumbers), Ball.from(bonusNumber));
+    private static LotteryTicket getWinningTicket() {
+        try {
+            List<Integer> winningNumbers = InputView.getWinningNumbers();
+            return new LotteryTicket(Ball.createBalls(winningNumbers));
+        } catch (RuntimeException exception) {
+            OutputView.printException(exception.getMessage());
+            return getWinningTicket();
+        }
+    }
+
+    private static void showResult(LotteryTickets lotteryTickets, LotteryTicket winningTicket, int bonusNumber) {
+        Map<WinningLottery, Count> ticketsResult = lotteryTickets.getLotteriesResult(winningTicket, Ball.from(bonusNumber));
         List<LotteryResultDto> lotteryResult = LotteryResultDto.createLotteryResults(ticketsResult);
         Collections.sort(lotteryResult);
         OutputView.printStatistics(lotteryResult);
