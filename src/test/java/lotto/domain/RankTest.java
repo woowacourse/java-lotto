@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class RankTest {
 
@@ -30,6 +31,13 @@ class RankTest {
     @DisplayName("매칭한 숫자가 6이면 Second를 반환한다.")
     void matchCountToRankSecond() {
         assertThat(Rank.find(5, true)).isEqualTo(Rank.SECOND);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {7, 8, 9, 10})
+    @DisplayName("매칭한 숫자가 7이상이면 ERROR를 반환한다.")
+    void matchCountToRankError(int matchCount) {
+        assertThat(Rank.find(matchCount, true)).isEqualTo(Rank.ERROR);
     }
 
     @ParameterizedTest

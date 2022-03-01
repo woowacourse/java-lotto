@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.function.BiPredicate;
 import java.util.function.Function;
 
 public enum Rank {
@@ -26,7 +25,7 @@ public enum Rank {
 
     public static Rank find(int matchCount, boolean matchBonus) {
         if (isMatchBonusAvailable(matchCount, matchBonus)) {
-            return Rank.SECOND;
+            return matchBonusAvailableRank();
         }
         return findWithMatchCount(matchCount);
     }
@@ -36,16 +35,20 @@ public enum Rank {
     }
 
     private static Rank findWithMatchCount(int matchCount) {
-        return exceptMatchBonusAvailableRank().stream()
+        return onlyMatchCountAvailableRanks().stream()
                 .filter(rank -> rank.matchCalculator.apply(matchCount))
                 .findAny()
                 .orElse(Rank.NONE);
     }
 
-    private static List<Rank> exceptMatchBonusAvailableRank() {
+    private static List<Rank> onlyMatchCountAvailableRanks() {
         List<Rank> ranks = new ArrayList<>(List.of(Rank.values()));
-        ranks.remove(Rank.SECOND);
+        ranks.remove(matchBonusAvailableRank());
         return ranks;
+    }
+
+    private static Rank matchBonusAvailableRank() {
+        return Rank.SECOND;
     }
 
     public static Reward calculateReward(List<Rank> ranks) {
