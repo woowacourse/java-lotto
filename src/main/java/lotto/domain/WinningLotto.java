@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Set;
 
 public class WinningLotto {
@@ -7,10 +8,11 @@ public class WinningLotto {
     private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto winningNumbers, LottoNumber bonusNumber) {
-        validateDuplication(winningNumbers, bonusNumber);
-        this.winningNumbers = winningNumbers;
-        this.bonusNumber = bonusNumber;
+    public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
+        this.winningNumbers = new FixedLottoMachine(winningNumbers).makeLottos();
+        this.bonusNumber = new LottoNumber(bonusNumber);
+
+        validateDuplication(this.winningNumbers, this.bonusNumber);
     }
 
     private void validateDuplication(Lotto winningNumber, LottoNumber bonusNumber) {

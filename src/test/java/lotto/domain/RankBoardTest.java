@@ -17,8 +17,8 @@ class RankBoardTest {
 
     @BeforeEach
     void setUp() {
-        Lotto winningNumbers = new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 6)).makeLottos();
-        LottoNumber bonusNumber = new LottoNumber(7);
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
         winningLotto = new WinningLotto(winningNumbers, bonusNumber);
     }
 

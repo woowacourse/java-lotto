@@ -27,6 +27,8 @@ public class LottoController {
 
         OutputView.printLottos(lottoGame.getLottos());
 
+        WinningLotto winningLotto = getWinningLotto();
+
 //        int ticketCount = purchaseAmount.calculateTheNumberOfTicket();
 //        OutputView.printTicketCount(ticketCount);
 //
@@ -48,47 +50,14 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> getLottoTickets(int count) {
-        List<Lotto> lottoTickets = new ArrayList<>();
-        LottoMachine lottoMachine = new RandomLottoMachine();
-        for (int i = 0; i < count; i++) {
-            lottoTickets.add(lottoMachine.makeLottos());
-        }
-        return lottoTickets;
-    }
-
     private WinningLotto getWinningLotto() {
-        Lotto winningNumber = getWinningNumber();
-        return makeWinningLotto(winningNumber);
-    }
-
-    private Lotto getWinningNumber() {
         try {
-            List<Integer> input = StringConverter.toInts(InputView.getWinningNumber());
-            LottoMachine lottoMachine = new FixedLottoMachine(input);
-            return lottoMachine.makeLottos();
+            List<Integer> winningNumbers = StringConverter.toInts(InputView.getWinningNumbers());
+            int bonusNumber = StringConverter.toInt(InputView.getBonusNumber());
+            return new WinningLotto(winningNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getWinningNumber();
-        }
-    }
-
-    private WinningLotto makeWinningLotto(Lotto winningNumber) {
-        LottoNumber bonusNumber = getBonusNumber();
-        try {
-            return new WinningLotto(winningNumber, bonusNumber);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return makeWinningLotto(winningNumber);
-        }
-    }
-
-    private LottoNumber getBonusNumber() {
-        try {
-            return new LottoNumber(StringConverter.toInt(InputView.getBonusNumber()));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return getBonusNumber();
+            return getWinningLotto();
         }
     }
 }
