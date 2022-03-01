@@ -25,7 +25,7 @@ public class LottoCalculator {
         for (Rank rank : Rank.values()) {
             sum += rank.getPrice() * getEachRankCount(rank);
         }
-        return ((double) sum / money.money());
+        return ((double) sum / money.getMoney());
     }
 
     public Integer getEachRankCount(final Rank rank) {

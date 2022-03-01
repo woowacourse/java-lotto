@@ -11,15 +11,15 @@ public class WinningLotto {
     private final LottoNumbers winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(final LottoNumbers winningNumbers, final LottoNumber bonusNumber) throws RuntimeException {
+    public WinningLotto(final LottoNumbers winningNumbers, final LottoNumber bonusNumber) throws IllegalArgumentException {
         this.winningNumbers = winningNumbers;
         checkDuplicateNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    public void checkDuplicateNumber(LottoNumber bonusNumber) throws RuntimeException {
+    private void checkDuplicateNumber(LottoNumber bonusNumber) throws IllegalArgumentException {
         if (winningNumbers.containNumber(bonusNumber)) {
-            throw new RuntimeException(DUPLICATED_NUMBER_ERROR_MESSAGE);
+            throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR_MESSAGE);
         }
     }
 

@@ -11,6 +11,7 @@ public class AutoLottoNumbersGenerator implements LottoGenerator {
 
     private static final int LOTTO_START_INDEX = 0;
 
+    @Override
     public LottoNumbers generateLottoNumbers(int minimumNumber, int maximumNumber, int lottoLength)
             throws RuntimeException {
         List<Integer> numberCollection = makeNumberCollection(minimumNumber, maximumNumber);

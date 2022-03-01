@@ -18,9 +18,7 @@ import lotto.view.ResultView;
 
 public class LottoController {
 
-    private static final String MONEY_ERROR_MESSAGE = "[ERROR] 유효한 입력이 아닙니다.";
     private static final String NOT_NUMBER_ERROR_MESSAGE = "[ERROR] 문자가 입력되었습니다.";
-
     private static final String NUMBER_REGEX = "\\d+";
 
     public void run() {
@@ -36,14 +34,14 @@ public class LottoController {
 
     private Money validateMoney(String money) throws IllegalArgumentException {
         if (!Pattern.matches(NUMBER_REGEX, money)) {
-            throw new IllegalArgumentException(MONEY_ERROR_MESSAGE);
+            throw new IllegalArgumentException(Money.MONEY_ERROR_MESSAGE);
         }
         return new Money(Integer.parseInt(money));
     }
 
     private Lottos makeLottos(Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < money.count(); i++) {
+        for (int i = 0; i < money.lottoCount(); i++) {
             lottos.add(new Lotto(new AutoLottoNumbersGenerator()));
         }
         return new Lottos(lottos);

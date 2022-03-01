@@ -2,9 +2,8 @@ package lotto.model;
 
 public class Money {
 
-    public static final int PRICE_PER_LOTTO = 1000;
-
-    private static final String PRICE_ERROR_MESSAGE = "[ERROR] 유효한 입력이 아닙니다.";
+    private static final int PRICE_PER_LOTTO = 1000;
+    public static final String MONEY_ERROR_MESSAGE = "[ERROR] 유효한 입력이 아닙니다.";
 
     private final int money;
 
@@ -15,15 +14,15 @@ public class Money {
 
     private void validateMoney(final int money) throws IllegalArgumentException {
         if (money < 0) {
-            throw new IllegalArgumentException(PRICE_ERROR_MESSAGE);
+            throw new IllegalArgumentException(MONEY_ERROR_MESSAGE);
         }
     }
 
-    public int money() {
+    public int getMoney() {
         return money;
     }
 
-    public int count() {
+    public int lottoCount() {
         return money / PRICE_PER_LOTTO;
     }
 }
