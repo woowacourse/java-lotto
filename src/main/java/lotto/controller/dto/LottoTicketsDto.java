@@ -4,7 +4,6 @@ import static java.util.stream.Collectors.*;
 
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
 public class LottoTicketsDto {
@@ -33,10 +32,11 @@ public class LottoTicketsDto {
     }
 
     public LottoTickets toLottoTickets() {
-        List<LottoTicket> lottoTickets = this.lottoTickets.stream()
-                .map(LottoTicketDto::toLottoTicket)
+        List<List<Integer>> lottoNumbers = lottoTickets.stream()
+                .map(LottoTicketDto::getLottoNumbers)
                 .collect(toList());
-        return new LottoTickets(lottoTickets);
+
+        return LottoTickets.createManualLottoTickets(lottoTickets.size(), lottoNumbers);
     }
 
     public List<LottoTicketDto> getLottoTickets() {

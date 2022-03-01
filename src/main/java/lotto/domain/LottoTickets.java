@@ -12,22 +12,53 @@ import lotto.domain.generator.LottoNumberGenerator;
 
 public class LottoTickets {
 
+    private static final String LOTTO_COUNT_MISMATCH_ERROR_MESSAGE = "구매할 수량과 수동으로 작성한 로또 개수가 일치하지 않습니다.";
     private static final int LOTTO_COUNT_START_INCLUSIVE = 0;
 
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
+    private LottoTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
         this.lottoTickets = generateTickets(lottoCount, lottoNumberGenerator);
-    }
-
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
     private List<LottoTicket> generateTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
         return IntStream.range(LOTTO_COUNT_START_INCLUSIVE, lottoCount)
-                .mapToObj(value -> new LottoTicket(lottoNumberGenerator))
+                .mapToObj(noneUsed -> new LottoTicket(lottoNumberGenerator))
                 .collect(toList());
+    }
+
+    private LottoTickets(int lottoCount, List<List<Integer>> manualNumbers) {
+        List<LottoTicket> lottoTickets = manualNumbers.stream()
+                .map(LottoTicket::new)
+                .collect(toList());
+
+        validateTicketsSize(lottoCount, lottoTickets.size());
+        this.lottoTickets = new ArrayList<>(lottoTickets);
+    }
+
+    private void validateTicketsSize(int lottoCount, int size) {
+        if (lottoCount != size) {
+            throw new IllegalArgumentException(LOTTO_COUNT_MISMATCH_ERROR_MESSAGE);
+        }
+    }
+
+    private LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = new ArrayList<>(lottoTickets);
+    }
+
+    public static LottoTickets createAutoLottoTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
+        return new LottoTickets(lottoCount, lottoNumberGenerator);
+    }
+
+    public static LottoTickets createManualLottoTickets(int lottoCount, List<List<Integer>> manualNumbers) {
+        return new LottoTickets(lottoCount, manualNumbers);
+    }
+
+    public LottoTickets combine(LottoTickets targetLottoTickets) {
+        List<LottoTicket> joined = new ArrayList<>(lottoTickets);
+        joined.addAll(targetLottoTickets.lottoTickets);
+
+        return new LottoTickets(joined);
     }
 
     public LottoResult determine(WinningNumber winningNumber) {
