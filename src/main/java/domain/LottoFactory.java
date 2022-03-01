@@ -32,9 +32,10 @@ public class LottoFactory {
     }
 
     private static List<LottoNumber> getLottoNumbers() {
-        Collections.shuffle(lottoNumbers);
+        List<Integer> lottoNumbersForNewLotto = new ArrayList<>(lottoNumbers);
+        Collections.shuffle(lottoNumbersForNewLotto);
 
-        return lottoNumbers.stream()
+        return lottoNumbersForNewLotto.stream()
                 .limit(6)
                 .sorted()
                 .map(LottoNumberRepository::getLottoNumberByInt)
