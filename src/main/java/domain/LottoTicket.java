@@ -10,32 +10,27 @@ import util.LottoNumberGenerator;
 
 public class LottoTicket {
 
-    private final List<Lotto> passiveLottos;
-    private final List<Lotto> autoLottos;
+    private final List<Lotto> lottos;
+    private int autoLottoCount;
 
     public LottoTicket(int autoLottoCount, List<Lotto> passiveLottos, LottoNumberGenerator generatorPolicy) {
-        this.passiveLottos = new ArrayList<>(passiveLottos);
-        this.autoLottos = new ArrayList<>();
+        this.autoLottoCount = autoLottoCount;
+        this.lottos = new ArrayList<>(passiveLottos);
         for (int i = 0; i < autoLottoCount; i++) {
-            autoLottos.add(new Lotto(generatorPolicy.generate()));
+            lottos.add(new AutoLotto(generatorPolicy));
         }
     }
 
-    public List<Lotto> getPassiveLottos() {
-        return List.copyOf(passiveLottos);
+    public int getAutoLottoCount() {
+        return this.autoLottoCount;
     }
 
-    public List<Lotto> getAutoLottos() {
-        return List.copyOf(autoLottos);
-    }
-
-    public List<Lotto> getTotalLottos() {
-        return Stream.concat(passiveLottos.stream(), autoLottos.stream())
-                .collect(Collectors.toList());
+    public List<Lotto> getLottos() {
+        return List.copyOf(lottos);
     }
 
     public LottoResult getLottoResult(WinningLotto winningLotto, LottoResult lottoResult) {
-        for (Lotto lotto : getTotalLottos()) {
+        for (Lotto lotto : lottos) {
             lottoResult.putLottoRank(winningLotto.countLottoRank(lotto));
         }
 

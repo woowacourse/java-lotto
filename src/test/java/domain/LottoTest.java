@@ -21,7 +21,7 @@ public class LottoTest {
     @Test
     public void createValidLottoNumberTest() {
         List<LottoNumber> lottoNumber = toLottoNumbers(Arrays.asList(6, 1, 2, 3, 4, 5));
-        Lotto lotto = new Lotto(lottoNumber);
+        Lotto lotto = new PassiveLotto(lottoNumber);
         assertThat(lotto).isInstanceOf(Lotto.class);
     }
 
@@ -36,7 +36,7 @@ public class LottoTest {
     public void createDuplicatedNumberTest() {
         assertThatThrownBy(() -> {
             List<LottoNumber> lottoNumber = toLottoNumbers(Arrays.asList(2, 2, 2, 3, 4, 5));
-            Lotto lotto = new Lotto(lottoNumber);
+            Lotto lotto = new PassiveLotto(lottoNumber);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -44,14 +44,14 @@ public class LottoTest {
     void countSameNumbersTest() {
         List<LottoNumber> lottoNumbers = toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<LottoNumber> targetNumbers = toLottoNumbers(Arrays.asList(2, 3, 4, 5, 7, 9));
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new PassiveLotto(lottoNumbers);
         assertThat(lotto.countSameNumbers(targetNumbers)).isEqualTo(4);
     }
 
     @Test
     void checkBonusInLottoNumbersTest() {
         List<LottoNumber> lottoNumbers = toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new PassiveLotto(lottoNumbers);
         LottoNumber bonusNumber = LottoNumber.of(6);
         assertThat(lotto.checkBonus(bonusNumber)).isEqualTo(true);
     }
@@ -59,7 +59,7 @@ public class LottoTest {
     @Test
     void checkBonusNotInLottoNumbersTest() {
         List<LottoNumber> lottoNumbers = toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new PassiveLotto(lottoNumbers);
         LottoNumber bonusNumber = LottoNumber.of(10);
         assertThat(lotto.checkBonus(bonusNumber)).isEqualTo(false);
     }

@@ -24,9 +24,10 @@ public class OutputView {
     }
 
     public static void printPurchasedLotto(LottoTicket lottoTicket) {
-        System.out.printf(PURCHASED_LOTTO_COUNT_FORMAT, lottoTicket.getPassiveLottos().size(),
-                lottoTicket.getAutoLottos().size());
-        for (Lotto lotto : lottoTicket.getTotalLottos()) {
+        int autoLottoCount = lottoTicket.getAutoLottoCount();
+        System.out.printf(PURCHASED_LOTTO_COUNT_FORMAT, lottoTicket.getLottos().size() - autoLottoCount,
+                autoLottoCount);
+        for (Lotto lotto : lottoTicket.getLottos()) {
             System.out.println(lotto);
         }
     }

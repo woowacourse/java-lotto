@@ -35,7 +35,7 @@ public class WinningLottoTest {
         List<LottoNumber> winningNumbers = toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.of(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        Lotto lotto = new Lotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto lotto = new PassiveLotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         LottoRank rank = winningLotto.countLottoRank(lotto);
         assertThat(rank).isEqualTo(LottoRank.RANK_1);
     }
@@ -45,7 +45,7 @@ public class WinningLottoTest {
         List<LottoNumber> winningNumbers = toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.of(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        Lotto lotto = new Lotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        Lotto lotto = new PassiveLotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)));
         LottoRank rank = winningLotto.countLottoRank(lotto);
         assertThat(rank).isEqualTo(LottoRank.RANK_2);
     }
@@ -55,7 +55,7 @@ public class WinningLottoTest {
         List<LottoNumber> winningNumbers = toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.of(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        Lotto lotto = new Lotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)));
+        Lotto lotto = new PassiveLotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)));
         LottoRank rank = winningLotto.countLottoRank(lotto);
         assertThat(rank).isEqualTo(LottoRank.RANK_3);
     }
@@ -65,7 +65,7 @@ public class WinningLottoTest {
         List<LottoNumber> winningNumbers = toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.of(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        Lotto lotto = new Lotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        Lotto lotto = new PassiveLotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 7, 8)));
         LottoRank rank = winningLotto.countLottoRank(lotto);
         assertThat(rank).isEqualTo(LottoRank.RANK_4);
     }
@@ -75,7 +75,7 @@ public class WinningLottoTest {
         List<LottoNumber> winningNumbers = toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.of(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        Lotto lotto = new Lotto(toLottoNumbers(Arrays.asList(1, 2, 3, 10, 11, 12)));
+        Lotto lotto = new PassiveLotto(toLottoNumbers(Arrays.asList(1, 2, 3, 10, 11, 12)));
         LottoRank rank = winningLotto.countLottoRank(lotto);
         assertThat(rank).isEqualTo(LottoRank.RANK_5);
     }
@@ -85,7 +85,7 @@ public class WinningLottoTest {
         List<LottoNumber> winningNumbers = toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.of(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        Lotto lotto = new Lotto(toLottoNumbers(Arrays.asList(5, 6, 7, 8, 9, 10)));
+        Lotto lotto = new PassiveLotto(toLottoNumbers(Arrays.asList(5, 6, 7, 8, 9, 10)));
         LottoRank rank = winningLotto.countLottoRank(lotto);
         assertThat(rank).isEqualTo(LottoRank.RANK_NOTHING);
     }
