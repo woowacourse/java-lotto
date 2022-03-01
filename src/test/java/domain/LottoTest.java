@@ -92,4 +92,18 @@ public class LottoTest {
         // then
         assertThat(lotto.containsLottoNumber(lottoNumber1)).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("Lotto 에서 getter로 가져온 컬렉션 수정 시 UOE 발생")
+    void modifyingCollectionFromGetterOfLottoShouldFail() {
+        // given
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        // when
+        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+
+        // then
+        assertThatThrownBy(() -> lottoNumbers.add(LottoNumberRepository.getLottoNumberByInt(22)))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
 }
