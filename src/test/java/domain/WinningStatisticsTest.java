@@ -5,38 +5,39 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class WinningStatisticsTest {
 
-    @Test
-    @DisplayName("당첨된 각 로또들의 통계를 생성하는 기능 1")
-    void createStatistics_01() {
+    @ParameterizedTest
+    @MethodSource("rewardParameterProvider")
+    @DisplayName("당첨된 로또들의 통계를 생성하는 기능")
+    void createStatistics_02(LottoReward reward, int rewardCount) {
         List<LottoReward> lottoRewards = new ArrayList<>();
         lottoRewards.add(LottoReward.FIRST);
         lottoRewards.add(LottoReward.FIRST);
         lottoRewards.add(LottoReward.SECOND);
+        lottoRewards.add(LottoReward.SECOND);
+        lottoRewards.add(LottoReward.FIFTH);
 
         WinningStatistics winningStatistics = new WinningStatistics(lottoRewards);
         Map<LottoReward, Integer> statistics = winningStatistics.getWinningStatistics();
 
-        assertThat(statistics.get(LottoReward.FIRST)).isEqualTo(2);
+        assertThat(statistics.get(reward)).isEqualTo(rewardCount);
     }
 
-    @Test
-    @DisplayName("당첨된 각 로또들의 통계를 생성하는 기능 2")
-    void createStatistics_02() {
-        List<LottoReward> lottoRewards = new ArrayList<>();
-        lottoRewards.add(LottoReward.FIRST);
-        lottoRewards.add(LottoReward.FIRST);
-        lottoRewards.add(LottoReward.SECOND);
-
-        WinningStatistics winningStatistics = new WinningStatistics(lottoRewards);
-        Map<LottoReward, Integer> statistics = winningStatistics.getWinningStatistics();
-
-        assertThat(statistics.get(LottoReward.SECOND)).isEqualTo(1);
+    private static Stream<Arguments> rewardParameterProvider() {
+        return Stream.of(
+            Arguments.of(LottoReward.FIRST, 2),
+            Arguments.of(LottoReward.SECOND, 2),
+            Arguments.of(LottoReward.FIFTH, 1)
+        );
     }
 
     @Test
