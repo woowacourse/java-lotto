@@ -27,7 +27,7 @@ public class InputMoneyTest {
     void createInputMoneyWithSmallerThan1000ShouldFail(int input) {
         assertThatThrownBy(() -> new InputMoney(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("1000 보다 작은 금액을 입력할 수 없습니다.");
+                .hasMessage(InputMoney.ERROR_MESSAGE_FOR_MINIMUM_NUMBER);
     }
 
     @DisplayName("생성자에 1000 으로 나누어 떨어지지 않는 숫자 전달 시 IAE 발생한다.")
@@ -36,6 +36,6 @@ public class InputMoneyTest {
     void createInputMoneyWithNotMultipleOf1000ShouldFail(int input) {
         assertThatThrownBy(() -> new InputMoney(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("1000으로 나누어 떨어지지 않는 금액을 입력할 수 없습니다.");
+                .hasMessage(InputMoney.ERROR_MESSAGE_FOR_MULTIPLE_OF_UNIT);
     }
 }

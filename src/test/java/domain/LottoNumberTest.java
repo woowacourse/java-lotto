@@ -27,7 +27,7 @@ public class LottoNumberTest {
     void createLottoNumberOutOfRangeShouldFail(int number) {
         assertThatThrownBy(() -> new LottoNumber(number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("1에서 45 사이의 값을 입력해주세요.");
+                .hasMessage(LottoNumber.ERROR_MESSAGE_FOR_OUT_OF_RANGE_NUMBER);
     }
 
     @Test

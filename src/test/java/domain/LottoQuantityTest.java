@@ -29,6 +29,6 @@ public class LottoQuantityTest {
     void createLottoQuantityWithNegativeOrZeroShouldFail(int lottoQuantity) {
         assertThatThrownBy(() -> new LottoQuantity(lottoQuantity))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("개수는 1 보다 작을 수 없습니다.");
+                .hasMessage(LottoQuantity.ERROR_MESSAGE_FOR_INVALID_TRAIL_NUMBER);
     }
 }

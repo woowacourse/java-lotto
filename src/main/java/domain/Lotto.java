@@ -14,8 +14,8 @@ public class Lotto {
 
     public static final List<Integer> LOTTO_NUMBERS;
 
-    private static final String ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS = "%d개의 숫자를 골라주세요.";
-    private static final String ERROR_MESSAGE_FOR_DUPLICATE_LOTTO_NUMBERS = "숫자는 중복될 수 없습니다.";
+    static final String ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS = String.format("%d개의 숫자를 골라주세요.", LOTTO_SIZE);
+    static final String ERROR_MESSAGE_FOR_DUPLICATE_LOTTO_NUMBERS = "숫자는 중복될 수 없습니다.";
 
     static {
         LOTTO_NUMBERS = IntStream.rangeClosed(LOTTO_NUMBER_START, LOTTO_NUMBER_END)
@@ -34,8 +34,7 @@ public class Lotto {
 
     private void validateSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(
-                    String.format(ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS, LOTTO_SIZE));
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS);
         }
     }
 

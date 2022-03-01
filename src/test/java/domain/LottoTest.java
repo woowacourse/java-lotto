@@ -42,7 +42,7 @@ public class LottoTest {
         // then
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageMatching("\\d개의 숫자를 골라주세요.");
+                .hasMessage(Lotto.ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS);
     }
 
     @Test

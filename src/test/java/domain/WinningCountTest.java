@@ -26,6 +26,6 @@ public class WinningCountTest {
     void createWinningCountWithNegativeOrZeroShouldFail(int input) {
         assertThatThrownBy(() -> new WinningCount(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("당첨 횟수는 0이상 이어야 합니다.");
+                .hasMessage(WinningCount.ERROR_MESSAGE_FOR_NEGATIVE_OR_ZERO_NUMBER);
     }
 }
