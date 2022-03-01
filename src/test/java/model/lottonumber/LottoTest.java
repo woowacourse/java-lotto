@@ -23,7 +23,7 @@ class LottoTest {
 
     @Test
     @DisplayName("당첨 번호와 3개 미만으로 일치시 NONE을 반환한다.")
-    void findWinningRank_NONE() {
+    void findWinningRank_None() {
         final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         final int number = 7;
         final WinningNumbers winningNumbers = new WinningNumbers(numbers, number);
