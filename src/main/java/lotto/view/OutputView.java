@@ -39,16 +39,19 @@ public class OutputView {
     }
 
     private String getLottoTicketInfo(String ticketsInfo, List<LottoNumber> lottoNumbers) {
-        ticketsInfo = ticketsInfo + LOTTO_PREFIX;
+        StringBuilder builder = new StringBuilder(ticketsInfo);
+
+        builder.append(LOTTO_PREFIX);
 
         for (LottoNumber lottoNumber : lottoNumbers) {
-            ticketsInfo = ticketsInfo + lottoNumber.getNumber() + SEPARATOR;
+            builder.append(lottoNumber.getNumber());
+            builder.append(SEPARATOR);
         }
 
-        ticketsInfo = ticketsInfo.substring(0, ticketsInfo.length()-2);
-        ticketsInfo = ticketsInfo + LOTTO_SUFFIX;
+        builder.setLength(builder.length() - 2);
+        builder.append(LOTTO_SUFFIX);
 
-        return ticketsInfo;
+        return builder.toString();
     }
 
     public void printLottoResultMessage() {
