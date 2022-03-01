@@ -1,7 +1,9 @@
 package lotto;
 
+import java.util.List;
 import lotto.controller.LottoController;
 import lotto.controller.MoneyController;
+import lotto.domain.Lotto;
 import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -14,8 +16,10 @@ public class Application {
         LottoController lottoController = new LottoController();
 
         Money money = moneyController.inputMoney();
-        Lottos lottos = lottoController.createLottos(money.purchasedLottoAmount());
-        lottoController.printLottos(lottos);
+        List<Lotto> manualLottos = lottoController.inputManualLottos(money.purchasedLottoAmount());
+
+        Lottos lottos = lottoController.createLottos(manualLottos, money.purchasedLottoAmount() - manualLottos.size());
+        lottoController.printLottos(manualLottos.size(), lottos);
         LottoWinningNumbers winningNumbers = lottoController.createLottoWinningNumbers();
 
         Result result = lottoController.calculateResult(winningNumbers, lottos);

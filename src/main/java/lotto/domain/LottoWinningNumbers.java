@@ -8,12 +8,12 @@ public class LottoWinningNumbers {
     private final LottoNumber bonusNumber;
 
     public LottoWinningNumbers(final Lotto winningLotto, final LottoNumber bonusNumber) {
+        checkDuplicateBonusNumber(winningLotto, bonusNumber);
         this.winningLotto = winningLotto;
-        checkDuplicateBonusNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    private void checkDuplicateBonusNumber(final LottoNumber bonusNumber) {
+    private void checkDuplicateBonusNumber(final Lotto winningLotto, final LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_BONUS_NUMBER);
         }

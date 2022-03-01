@@ -10,11 +10,16 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(final int count) {
-        List<Lotto> newLottos = IntStream.range(0, count)
-                .mapToObj(i -> new Lotto())
-                .collect(Collectors.toList());
-        lottos = new ArrayList<>(newLottos);
+    public Lottos(final List<Lotto> lottos, final int count) {
+        List<Lotto> newLottos = new ArrayList<>(lottos);
+        for (int i = 0; i < count; i++) {
+            newLottos.add(new Lotto());
+        }
+        this.lottos = newLottos;
+    }
+
+    public int getSize() {
+        return lottos.size();
     }
 
     public List<Lotto> getLottos() {
