@@ -40,8 +40,6 @@ class WinningNumbersTest {
         // when
         Rank rank = winningNumbers.compare(lottoTicket);
 
-        System.out.println("rank = " + rank);
-
         // then
         assertThat(rank).isEqualTo(Rank.SECOND);
     }

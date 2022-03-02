@@ -15,12 +15,12 @@ class LottoTicketsTest {
     void checkLottoCount() {
         // given
         int lottoCount = 14;
+
         LottoTicketGenerator lottoTicketGenerator = new AutoLottoTicketGenerator();
 
-        // when
         LottoTickets lottoTickets = new LottoTickets(lottoCount, new ArrayList<>(0), lottoTicketGenerator);
 
-        // then
+        // when & then
         assertThat(lottoTickets.totalCount()).isEqualTo(lottoCount);
     }
 }

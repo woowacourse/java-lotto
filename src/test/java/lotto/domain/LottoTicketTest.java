@@ -26,10 +26,9 @@ class LottoTicketTest {
         // given
         LottoTicket lottoTicket = new LottoTicket(new AutoLottoTicketGenerator());
 
-        // when
         List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
-        // then
+        // when & then
         assertThatThrownBy(() -> lottoNumbers.add(new LottoNumber(0)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
