@@ -22,10 +22,6 @@ public class WinningResult {
         return new WinningResult(countOfWinning);
     }
 
-    public Map<WinningPrize, Integer> getCountOfWinning() {
-        return Collections.unmodifiableMap(countOfWinning);
-    }
-
     private static Map<WinningPrize, Integer> countWinning(LottoTickets lottoTickets,
                                                            WinningTicket winningTicket,
                                                            WinningPrizeStrategy winningPrizeStrategy) {
@@ -62,5 +58,9 @@ public class WinningResult {
     private static boolean isWinning(LottoTicket lottoTicket, WinningTicket winningTicket) {
         int count = winningTicket.compareMatchCount(lottoTicket);
         return count >= WINNING_FLAG;
+    }
+
+    public Map<WinningPrize, Integer> getCountOfWinning() {
+        return Collections.unmodifiableMap(countOfWinning);
     }
 }

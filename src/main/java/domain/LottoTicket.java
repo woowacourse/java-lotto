@@ -2,7 +2,6 @@ package domain;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int LOTTO_TICKET_SIZE = 6;
@@ -21,15 +20,15 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbers);
     }
 
-    public Set<Integer> getLottoNumberValues() {
-        Set<Integer> lottoNumberValues = new LinkedHashSet<>();
-        lottoNumbers.forEach(lottoNumber -> lottoNumberValues.add(lottoNumber.getValue()));
-        return lottoNumberValues;
-    }
-
     private static void validateTicketSize(Set<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException(LOTTO_TICKET_SIZE_ERROR_MESSAGE);
         }
+    }
+
+    public Set<Integer> getLottoNumberValues() {
+        Set<Integer> lottoNumberValues = new LinkedHashSet<>();
+        lottoNumbers.forEach(lottoNumber -> lottoNumberValues.add(lottoNumber.getValue()));
+        return lottoNumberValues;
     }
 }

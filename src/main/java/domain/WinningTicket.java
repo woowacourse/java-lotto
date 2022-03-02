@@ -37,7 +37,6 @@ public class WinningTicket {
     public int compareMatchCount(LottoTicket lottoTicket) {
         Set<Integer> lottoNumbers = lottoTicket.getLottoNumberValues();
         List<Integer> winningNumbers = this.winningNumberValues();
-
         return (int) lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();

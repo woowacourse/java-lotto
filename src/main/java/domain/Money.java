@@ -10,10 +10,6 @@ public class Money {
         this.amount = amount;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
     private void validateMoney(int amount) {
         if (isNotPositiveNumber(amount)) {
             throw new IllegalArgumentException(NOT_POSITIVE_ERROR_MESSAGE);
@@ -22,5 +18,9 @@ public class Money {
 
     private boolean isNotPositiveNumber(int purchaseMoney) {
         return purchaseMoney <= 0;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }

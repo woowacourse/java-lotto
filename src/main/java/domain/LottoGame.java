@@ -13,10 +13,6 @@ public class LottoGame {
         this.winningPrizeStrategy = winningPrizeStrategy;
     }
 
-    public LottoTickets getLottoTickets() {
-        return lottoTickets;
-    }
-
     public void purchaseLottoTickets(List<Set<Integer>> selfTicketNumbers, int purchaseMoney,
                                      GenerateStrategy generateStrategy) {
         this.lottoTickets = LottoTickets.from(selfTicketNumbers, new Money(purchaseMoney), generateStrategy);
@@ -24,6 +20,13 @@ public class LottoGame {
 
     public void inputWinningNumbers(Set<Integer> winningNumbers, int bonusNumber) {
         this.winningTicket = WinningTicket.from(winningNumbers, bonusNumber);
+    }
+
+    public double getLottoRateOfReturn() {
+        checkCanGetResult();
+        double totalReturn = calculateTotalReturn();
+        double purchaseMoney = (double) lottoTickets.getTickets().size() * LottoTicket.TICKET_PRICE;
+        return totalReturn / purchaseMoney;
     }
 
     public WinningResult getWinningResult() {
@@ -37,18 +40,15 @@ public class LottoGame {
         }
     }
 
-    public double getLottoRateOfReturn() {
-        checkCanGetResult();
-        double totalReturn = calculateTotalReturn();
-        double purchaseMoney = (double) lottoTickets.getTickets().size() * LottoTicket.TICKET_PRICE;
-        return totalReturn / purchaseMoney;
-    }
-
     private int calculateTotalReturn() {
         return getWinningResult().getCountOfWinning()
                 .entrySet()
                 .stream()
                 .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();
+    }
+
+    public LottoTickets getLottoTickets() {
+        return lottoTickets;
     }
 }
