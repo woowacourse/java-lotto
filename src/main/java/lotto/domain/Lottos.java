@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,7 +13,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     private Lottos(List<Lotto> lottos) {
-        this.lottos = List.copyOf(lottos);
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public static Lottos buyLottosByAuto(Money money) {
@@ -26,6 +28,6 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 }
