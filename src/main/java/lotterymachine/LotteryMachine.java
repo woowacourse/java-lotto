@@ -16,7 +16,8 @@ public class LotteryMachine {
     public static void main(String[] args) {
         LotteryPurchase lotteryPurchase = Converter.createLotteryPurchase();
         LotteryTickets lotteryTickets = Converter.createLotteryTickets(lotteryPurchase);
-        OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
+
+        OutputView.printLotteryTickets(lotteryPurchase, lotteryTickets);
 
 //        WinningLottery winningLottery =  new WinningLottery(InputView.getWinningLotteryNumbers(), InputView.getBonusNumber());
 //        Map<WinningLotteryRank, Integer> lotteryTicketResult = lotteryTickets.getLotteriesResult(winningLottery);

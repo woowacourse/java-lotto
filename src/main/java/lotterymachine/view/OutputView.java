@@ -1,6 +1,8 @@
 package lotterymachine.view;
 
+import lotterymachine.LotteryPurchase;
 import lotterymachine.domain.LotteryTicket;
+import lotterymachine.domain.LotteryTickets;
 import lotterymachine.domain.WinningLotteryRank;
 
 import java.util.List;
@@ -13,12 +15,17 @@ public class OutputView {
         System.out.printf("%d개를 구매했습니다.%n", number);
     }
 
-    public static void printLotteryTickets(List<LotteryTicket> lotteryTickets) {
+    public static void printLotteryTickets(LotteryPurchase lotteryPurchase, LotteryTickets lotteryTickets) {
+        printLotteryPurchase(lotteryPurchase);
         StringBuilder stringBuilder = new StringBuilder();
-        for (LotteryTicket lotteryTicket : lotteryTickets) {
-            stringBuilder.append(lotteryTicket.getNumbers()).append("\n");
+        for (LotteryTicket lotteryTicket: lotteryTickets.getLotteryTickets()) {
+            stringBuilder.append(lotteryTicket.getNumbers()+"\n");
         }
         System.out.println(stringBuilder);
+    }
+
+    private static void printLotteryPurchase(LotteryPurchase lotteryPurchase) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lotteryPurchase.getPassivityCount(), lotteryPurchase.getAutoCount());
     }
 
     public static void printWinningLotteryResults(Map<WinningLotteryRank, Integer> lotteryTicketResults) {
