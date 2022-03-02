@@ -57,6 +57,7 @@ public class InputView {
 	private static List<Integer> getManualLottoTicket() {
 		return Arrays.stream(scanner.nextLine()
 			.split(NUMBER_DELIMITER, -1))
+			.map(String::trim)
 			.map(InputView::parseNumber)
 			.collect(Collectors.toList());
 	}
@@ -65,10 +66,8 @@ public class InputView {
 		System.out.println();
 		System.out.println(WINNING_NUMBER_MESSAGE);
 
-		String[] input = scanner.nextLine()
-			.split(NUMBER_DELIMITER, -1);
-
-		return Arrays.stream(input)
+		return Arrays.stream(scanner.nextLine()
+			.split(NUMBER_DELIMITER, -1))
 			.map(String::trim)
 			.map(InputView::parseNumber)
 			.collect(Collectors.toUnmodifiableList());

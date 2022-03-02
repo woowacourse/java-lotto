@@ -24,6 +24,8 @@ public class OutputView {
 	private static final String LINE_DELIMITER = "\n";
 
 	public static void printTickets(List<Ticket> tickets, final int manualCount) {
+		System.out.println();
+
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(String.format(MANUAL_LOTTO_NUMBER_MESSAGE, manualCount))
 			.append(String.format(AUTO_LOTTO_NUMBER_MESSAGE, tickets.size() - manualCount))
