@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import lotto.domain.lottoticket.LottoTicket;
 
-final public class LottoTickets {
+public final class LottoTickets {
     private final List<LottoTicket> value;
 
     private LottoTickets(List<LottoTicket> manualLottoTickets, int count) {

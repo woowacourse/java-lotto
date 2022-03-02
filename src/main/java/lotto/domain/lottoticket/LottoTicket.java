@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 
-final public class LottoTicket {
+public final class LottoTicket {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int FROM_INDEX = 0;
     private static final String DELIMITER = ",";

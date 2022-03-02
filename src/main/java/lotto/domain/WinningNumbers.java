@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Optional;
 import lotto.domain.lottoticket.LottoTicket;
 
-final public class WinningNumbers {
+public final class WinningNumbers {
     private static final String DUPLICATE_ERROR = "보너스 번호는 당첨 번호와 중복될 수 없습니다";
 
     private final LottoTicket lottoNumbers;
