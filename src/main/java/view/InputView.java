@@ -37,23 +37,24 @@ public class InputView {
 	}
 
 	public int inputValidNumOfManualLottery() {
-		return Integer.parseInt(inputNumOfManualLottery());
-	}
-
-	private String inputNumOfManualLottery() {
 		System.out.println(INPUT_NUM_OF_MANUAL_LOTTERY_MESSAGE.getMessage());
-		final String numOfManualLottery = scanner.nextLine();
 		try {
-			validateNumber(numOfManualLottery);
-			return numOfManualLottery;
+			String numOfManualLottery = inputNumOfManualLottery();
+			return Integer.parseInt(numOfManualLottery);
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
-			return inputNumOfManualLottery();
+			return inputValidNumOfManualLottery();
 		}
 	}
 
+	private String inputNumOfManualLottery() {
+		final String numOfManualLottery = scanner.nextLine();
+		validateNumber(numOfManualLottery);
+		return numOfManualLottery;
+	}
+
 	public List<List<Integer>> inputManualLotteryNumber(final NumOfLottery numOfLottery) {
-		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+		System.out.println(INPUT_MANUAL_LOTTERY_NUMBER_MESSAGE.getMessage());
 		List<List<Integer>> manualNumbers = new ArrayList<>();
 		try {
 			inputLotteryNumberToManualNumbers(numOfLottery, manualNumbers);
