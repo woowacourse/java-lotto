@@ -12,7 +12,7 @@ public class ManualLottoCountTest {
         int inputCount = 3;
         int upperBound = 2;
 
-        assertThatThrownBy(() -> ManualLottoCount.from(inputCount, upperBound)).isInstanceOf(
+        assertThatThrownBy(() -> ManualLottoCount.of(inputCount, upperBound)).isInstanceOf(
                 IllegalArgumentException.class).hasMessageContaining("최대 구매 개수를 초과했습니다.");
     }
 
@@ -21,6 +21,6 @@ public class ManualLottoCountTest {
         int inputCount = 2;
         int upperBound = 2;
 
-        assertThatNoException().isThrownBy(() -> ManualLottoCount.from(inputCount, upperBound));
+        assertThatNoException().isThrownBy(() -> ManualLottoCount.of(inputCount, upperBound));
     }
 }
