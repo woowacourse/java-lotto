@@ -3,21 +3,24 @@ package domain;
 import static utils.Messages.LOTTO_NUMBER_RANGE_ERROR_MESSAGE;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
     private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
-    private static final int INDEX_MINUS_NUMBER = 1;
 
-    private static final List<LottoNumber> CACHE = new ArrayList<>();
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
     private final int number;
 
     static {
         for (int i = LOTTO_NUMBER_LOWER_BOUND; i <= LOTTO_NUMBER_UPPER_BOUND; i++) {
-            CACHE.add(new LottoNumber(i));
+            CACHE.put(i, new LottoNumber(i));
         }
     }
 
@@ -27,12 +30,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber valueOf(final int number) {
         validate(number);
-        int index = number - INDEX_MINUS_NUMBER;
-        return CACHE.get(index);
+        return CACHE.get(number);
     }
 
-    public static List<LottoNumber> values() {
-        return CACHE;
+    public static Collection<LottoNumber> values() {
+        return CACHE.values();
     }
 
     public int get() {
