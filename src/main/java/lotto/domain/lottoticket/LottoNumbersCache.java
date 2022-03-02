@@ -10,13 +10,14 @@ final class LottoNumbersCache {
     private static final int MIN_NUMBER = LottoNumber.MIN;
     private static final int MAX_NUMBER = LottoNumber.MAX;
 
-    static List<LottoNumber> cache = new ArrayList<>();
+    static final List<LottoNumber> cache;
 
     static {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            cache.add(new LottoNumber(i));
+            lottoNumbers.add(new LottoNumber(i));
         }
-        cache = Collections.unmodifiableList(cache);
+        cache = Collections.unmodifiableList(lottoNumbers);
     }
 
     private LottoNumbersCache() throws InstantiationException {
