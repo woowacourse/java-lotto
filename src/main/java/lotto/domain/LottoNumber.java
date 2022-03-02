@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoNumber {
-    private static final int MIN = 1;
-    private static final int MAX = 45;
+    protected static final int MIN = 1;
+    protected static final int MAX = 45;
 
     private static final String NUMBER_RANGE_ERROR = String.format("로또 숫자는 %d 이상 %d 이하의 숫자만 가능합니다.", MIN, MAX);
 

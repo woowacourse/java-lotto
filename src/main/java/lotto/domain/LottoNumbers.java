@@ -9,8 +9,6 @@ import java.util.List;
 
 public class LottoNumbers {
     private static final int LOTTO_COUNT = 6;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
 
     private static final String DUPLICATE_ERROR = "로또 개수는 중복이 불가능합니다.";
     private static final String COUNT_ERROR = String.format("로또 개수는 %d개로 제한됩니다.", LOTTO_COUNT);
@@ -18,7 +16,7 @@ public class LottoNumbers {
     private static final List<LottoNumber> candidateLottoNumbers = new ArrayList<>();
 
     static {
-        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+        for (int i = LottoNumber.MIN; i <= LottoNumber.MAX; i++) {
             candidateLottoNumbers.add(LottoNumber.of(i));
         }
     }
