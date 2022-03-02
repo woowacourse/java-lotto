@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto.domain;
 
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.lottonumber.Lotto;
@@ -11,11 +11,11 @@ import lotto.domain.winningresult.WinningResult;
 import java.util.List;
 import java.util.Map;
 
-public class LottoService {
+public class LottoMachine {
     private final Lottos lottos;
     private final TotalPurchaseAmount totalPurchaseAmount;
 
-    public LottoService(
+    public LottoMachine(
             final LottoGenerator lottoGenerator, final TotalPurchaseAmount totalPurchaseAmount, final List<Lotto> manualLottos) {
         this.totalPurchaseAmount = totalPurchaseAmount;
         lottos = new Lottos(lottoGenerator.generateLottosExceptManualGenerated(

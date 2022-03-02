@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto.domain;
 
 import lotto.domain.matchkind.LottoMatchKind;
 import lotto.domain.lottonumber.Lotto;
@@ -18,13 +18,13 @@ import static lotto.domain.matchkind.LottoMatchKind.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
-class LottoServiceTest {
+class LottoMachineTest {
     private final LottoGenerator lottoGenerator = new LottoCustomGenerator();
     private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount("6000");
     private final Lotto LottoUserInputLotto = new Lotto(Arrays.asList("40", "41", "42", "43", "44", "45"));
     private final List<Lotto> manualLottos =
             Arrays.asList(LottoUserInputLotto);
-    private final LottoService lottoService = new LottoService(lottoGenerator, totalPurchaseAmount, manualLottos);
+    private final LottoMachine lottoMachine = new LottoMachine(lottoGenerator, totalPurchaseAmount, manualLottos);
     private final WinningNumbers winningNumbers = new WinningNumbers(
             new Lotto(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.from("1"));
 
@@ -33,7 +33,7 @@ class LottoServiceTest {
     void getCountOfLottoNumbers_Test() {
         final int expected = 6;
         //when
-        final int actual = lottoService.getCountOfLottoNumbers();
+        final int actual = lottoMachine.getCountOfLottoNumbers();
         //then
         assertThat(actual).isEqualTo(expected);
     }
@@ -49,7 +49,7 @@ class LottoServiceTest {
         final Lotto fifth = new Lotto(Arrays.asList("5", "6", "7", "8", "9", "10"));
         final List<Lotto> expected = Arrays.asList(LottoUserInputLotto, first, second, third, fourth, fifth);
         //when
-        final List<Lotto> actual = lottoService.getLottos();
+        final List<Lotto> actual = lottoMachine.getLottos();
         //then
         assertThat(actual).isEqualTo(expected);
     }
@@ -57,7 +57,7 @@ class LottoServiceTest {
     @Test
     @DisplayName("당첨 결과를 반환한다.")
     void getMatchResult_Test() {
-        final Map<LottoMatchKind, Integer> actual = lottoService.getMatchResult(winningNumbers)
+        final Map<LottoMatchKind, Integer> actual = lottoMachine.getMatchResult(winningNumbers)
                 .getWinningNumberByKind();
         assertThat(actual).containsExactly(
                 entry(LOWER_THAN_THREE, 1), entry(THREE, 1),
@@ -71,7 +71,7 @@ class LottoServiceTest {
         //given
         final double expected = 2031555000 / (double) 6000;
         //when
-        final double actual = lottoService.getMatchResult(winningNumbers)
+        final double actual = lottoMachine.getMatchResult(winningNumbers)
                 .getProfitRate();
         //then
         assertThat(actual).isEqualTo(expected);
