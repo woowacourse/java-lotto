@@ -2,15 +2,14 @@ package lotterymachine;
 
 import lotterymachine.domain.LotteryTicket;
 import lotterymachine.domain.LotteryTickets;
+import lotterymachine.domain.WinningLottery;
 import lotterymachine.utils.LotteryNumbersGenerator;
 import lotterymachine.view.InputView;
-import lotterymachine.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
-public class Converter {
+public class LotteryConverter {
     public static LotteryPurchase createLotteryPurchase() {
         int amount = InputView.getAmount();
         System.out.println();
@@ -41,5 +40,9 @@ public class Converter {
             lotteryTickets.add(InputView.getPassivityLotteryTicket());
         }
         return lotteryTickets;
+    }
+
+    public static WinningLottery createWinningLottery() {
+        return new WinningLottery(InputView.getWinningLotteryNumbers(), InputView.getBonusNumber());
     }
 }

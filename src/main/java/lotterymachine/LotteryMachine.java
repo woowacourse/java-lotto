@@ -1,25 +1,15 @@
 package lotterymachine;
 
 import lotterymachine.domain.*;
-import lotterymachine.utils.LotteryCalculator;
-import lotterymachine.utils.LotteryNumbersGenerator;
-import lotterymachine.view.InputView;
 import lotterymachine.view.OutputView;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import static lotterymachine.utils.LotteryCalculator.calculateProfitRate;
 
 public class LotteryMachine {
     public static void main(String[] args) {
-        LotteryPurchase lotteryPurchase = Converter.createLotteryPurchase();
-        LotteryTickets lotteryTickets = Converter.createLotteryTickets(lotteryPurchase);
-
+        LotteryPurchase lotteryPurchase = LotteryConverter.createLotteryPurchase();
+        LotteryTickets lotteryTickets = LotteryConverter.createLotteryTickets(lotteryPurchase);
         OutputView.printLotteryTickets(lotteryPurchase, lotteryTickets);
 
-//        WinningLottery winningLottery =  new WinningLottery(InputView.getWinningLotteryNumbers(), InputView.getBonusNumber());
+        WinningLottery winningLottery =  LotteryConverter.createWinningLottery();
 //        Map<WinningLotteryRank, Integer> lotteryTicketResult = lotteryTickets.getLotteriesResult(winningLottery);
 //        OutputView.printWinningLotteryResults(lotteryTicketResult);
 //        OutputView.printProfitRate(getTotalProfitRate(lotteryPurchase, lotteryTicketResult));
