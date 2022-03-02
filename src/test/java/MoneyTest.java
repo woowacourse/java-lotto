@@ -19,4 +19,14 @@ class MoneyTest {
     void moneyInsert() {
         assertDoesNotThrow(() -> Money.from(1500));
     }
+
+    @Test
+    @DisplayName("돈을 차감할 때 돈이 모자라면 예외")
+    void moneyConsume() {
+        Money money = Money.from(1000);
+        Money other = Money.from(2010);
+
+        assertThatThrownBy(() -> money.consume(other))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
 }

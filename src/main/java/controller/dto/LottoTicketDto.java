@@ -3,7 +3,6 @@ package controller.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import domain.LottoCount;
 import domain.LottoTicket;
 
 public class LottoTicketDto {
@@ -18,14 +17,12 @@ public class LottoTicketDto {
 		this.autoCount = autoCount;
 	}
 
-	public static LottoTicketDto of(List<LottoTicket> lottoTickets, LottoCount lottoCount) {
+	public static LottoTicketDto of(List<LottoTicket> lottoTickets, int manualCount, int autoCount) {
 		List<List<Integer>> lottoTicketNumbers = lottoTickets.stream()
 			.map(LottoTicket::getTicketNumbers)
 			.collect(Collectors.toList());
 
-		return new LottoTicketDto(lottoTicketNumbers,
-			lottoCount.getManualCount(),
-			lottoCount.getAutoCount());
+		return new LottoTicketDto(lottoTicketNumbers, manualCount, autoCount);
 	}
 
 	public List<List<Integer>> getLottoTicketNumbers() {

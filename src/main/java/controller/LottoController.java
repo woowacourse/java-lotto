@@ -16,23 +16,27 @@ public class LottoController {
     private final LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberStrategy());
 
     public void run() {
-        Money money = Money.from(InputView.getMoney());
-        LottoCount lottoCount = LottoCount.of(InputView.getManualCount(), money);
+        Money totalMoney = Money.from(InputView.getMoney());
 
-        List<LottoTicket> lottoTickets = purchaseLottoTickets(money, lottoCount);
+        Money moneyOfManual = Money.from(InputView.getManualCount() * LOTTO_TICKET_PRICE);
+        Money moneyOfAuto = totalMoney.consume(moneyOfManual);
 
-        OutputView.printPurchasedLottoTicketNumber(LottoTicketDto.of(lottoTickets, lottoCount));
+        List<LottoTicket> lottoTickets = purchaseLottoTickets(moneyOfManual, moneyOfAuto);
+
+        OutputView.printPurchasedLottoTicketNumber(
+            LottoTicketDto.of(lottoTickets,
+                moneyOfManual.getPurchasableNumber(LOTTO_TICKET_PRICE),
+                moneyOfAuto.getPurchasableNumber(LOTTO_TICKET_PRICE)));
         OutputView.printWinningStat(getWinningStatDto(lottoTickets));
     }
 
-    private List<LottoTicket> purchaseLottoTickets(Money money, LottoCount lottoCount) {
-        int manualCount = lottoCount.getManualCount();
+    private List<LottoTicket> purchaseLottoTickets(Money moneyOfManual, Money moneyOfAuto) {
 
         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTicketsByManual(
-            InputView.getManualNumbers(manualCount));
+            InputView.getManualNumbers(moneyOfManual.getPurchasableNumber(LOTTO_TICKET_PRICE)));
 
         lottoTickets.addAll(
-            lottoMachine.purchaseLottoTicketsByAuto(money.consume(manualCount * LOTTO_TICKET_PRICE)));
+            lottoMachine.purchaseLottoTicketsByAuto(moneyOfAuto));
 
         return lottoTickets;
     }
