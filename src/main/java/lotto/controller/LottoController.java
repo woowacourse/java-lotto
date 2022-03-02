@@ -25,10 +25,10 @@ public class LottoController {
     }
 
     private static Lottos buyLottos(final Payment payment) {
-        LottoCount autoCount = payment.getAutoLottoCount();
-        Lottos lottos = createLottos(autoCount);
+        LottoCount totalCount = payment.getTotalLottoCount();
+        Lottos lottos = createLottos(totalCount);
 
-        printLottoCount(autoCount);
+        printLottoCount(totalCount);
         printLottos(lottos);
 
         return lottos;

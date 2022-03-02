@@ -38,7 +38,7 @@ public class Output {
     }
 
     public static void printLottoCount(final LottoCount lottoCount) {
-        System.out.printf(LOTTO_COUNT, lottoCount.getAutoCount());
+        System.out.printf(LOTTO_COUNT, lottoCount.getTotalCount());
     }
 
     public static void printLottos(final Lottos lottos) {
