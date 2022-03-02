@@ -19,18 +19,14 @@ import view.InputView;
 public class LottoController {
 
     public void run() {
-        Budget inputBudget = InputView.getUntilValid(this::getMoneyFromUser);
+        Budget inputBudget = InputView.getUntilValid(() -> Budget.parse(InputView.inputMoney()));
         LottoMachine lottoMachine = new LottoMachine(new RandomLottoGenerator());
         List<Lotto> issuedLottos = lottoMachine.issueLotto(inputBudget);
         printIssuedLottoNumbers(getNumbersOf(issuedLottos));
 
-        WinningLottoNumbers winningLottoNumbers = InputView.getUntilValid(this::getWinningLottoNumbersFromUser);
+        WinningLottoNumbers winningLottoNumbers = InputView.getUntilValid(() -> getWinningLottoNumbers());
         LottoResult result = winningLottoNumbers.summarize(issuedLottos, inputBudget);
         printResult(result.getResultMap(), result.getProfitRate());
-    }
-
-    private Budget getMoneyFromUser() {
-        return inputWithMessage("구입금액을 입력해 주세요.", Budget::parse);
     }
 
     private List<Set<Integer>> getNumbersOf(List<Lotto> issuedLottoNumbers) {
@@ -46,25 +42,15 @@ public class LottoController {
                 .collect(Collectors.toSet());
     }
 
-    private WinningLottoNumbers getWinningLottoNumbersFromUser() {
-        Lotto winningLotto = getWinningLotto();
-        LottoNumber bonusNumber = getBonusNumber();
-        return new WinningLottoNumbers(winningLotto, bonusNumber);
+    private WinningLottoNumbers getWinningLottoNumbers() {
+        Lotto winningLotto = InputView.getUntilValid(() -> Lotto.of(parseLottoNumbers()));
+        LottoNumber bonusLottoNumber = InputView.getUntilValid(() -> LottoNumber.parse(InputView.inputBonusNumber()));
+        return new WinningLottoNumbers(winningLotto, bonusLottoNumber);
     }
 
-    private Lotto getWinningLotto() {
-        List<LottoNumber> inputLottoNumbers = inputWithMessage("지난 주 당첨 번호를 입력해 주세요.",
-                this::parseLottoNumbers);
-        return Lotto.of(inputLottoNumbers);
-    }
-
-    private List<LottoNumber> parseLottoNumbers(String text) {
-        return InputView.splitAndTrim(text).stream()
+    private List<LottoNumber> parseLottoNumbers() {
+        return InputView.inputLottoNumbers().stream()
                 .map(LottoNumber::parse)
                 .collect(Collectors.toList());
-    }
-
-    private LottoNumber getBonusNumber() {
-        return inputWithMessage("보너스 볼을 입력해 주세요.", LottoNumber::parse);
     }
 }
