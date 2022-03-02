@@ -39,6 +39,6 @@ public class WinningResult {
 
     public double getTotalProfitRate(LotteryPurchase lotteryPurchase) {
         int totalProfit = LotteryCalculator.totalProfit(this.result);
-        return calculateProfitRate(totalProfit, lotteryPurchase.getTotalAmount());
+        return LotteryCalculator.calculateProfitRate(totalProfit, lotteryPurchase.getTotalAmount());
     }
 }

@@ -1,7 +1,5 @@
 package lotterymachine.view;
 
-
-import lotterymachine.LotteryPurchase;
 import lotterymachine.domain.LotteryNumber;
 import lotterymachine.domain.LotteryTicket;
 
