@@ -4,10 +4,21 @@ import lotto.model.result.RateOfReturn;
 import lotto.model.result.WinningResult;
 import lotto.model.winningnumber.WinningLottoResponse;
 
+import java.util.List;
+
 public class LottoGame {
 
-    public LottoStorage makeLottos(LottoCount lottoCount) {
-        return new LottoStorage(lottoCount);
+    public void makeManualLottos(List<Lotto> lottos, Lotto lotto, ManualCount manualCount) {
+        lottos.add(lotto);
+        manualCount.createManualLotto();
+    }
+
+    public boolean isPossibleMakeLottos(ManualCount manualCount) {
+        return manualCount.isEnd();
+    }
+
+    public LottoStorage makeLottos(LottoCount lottoCount, List<Lotto> lottos) {
+        return new LottoStorage(lottoCount, lottos);
     }
 
     public RateOfReturn storeMoneyInRateOfReturn(String money) {

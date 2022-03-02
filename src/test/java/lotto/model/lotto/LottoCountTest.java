@@ -10,15 +10,15 @@ class LottoCountTest {
     @Test
     @DisplayName("투입 금액이 천원 단위 경우")
     void validateThousandUnitInputMoney() {
-        LottoCount lottoCount = new LottoCount("10000");
+        LottoCount lottoCount = new LottoCount("10000", 1);
 
-        assertThat(lottoCount.getCount()).isEqualTo(10);
+        assertThat(lottoCount.getCount()).isEqualTo(9);
     }
 
     @Test
     @DisplayName("로또 생성 중단")
     void checkLottoCountIsZero() {
-        LottoCount lottoCount = new LottoCount("1000");
+        LottoCount lottoCount = new LottoCount("2000", 1);
         lottoCount.makeLotto();
 
         assertThat(lottoCount.isZero()).isTrue();
@@ -27,7 +27,7 @@ class LottoCountTest {
     @Test
     @DisplayName("로또 생성 횟수 차감")
     void checkLottoCountReduce() {
-        LottoCount lottoCount = new LottoCount("100000");
+        LottoCount lottoCount = new LottoCount("100000", 0);
         lottoCount.makeLotto();
 
         assertThat(lottoCount.getCount()).isEqualTo(99);

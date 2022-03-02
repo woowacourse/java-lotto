@@ -2,6 +2,7 @@ package lotto.model.lotto;
 
 import java.util.*;
 
+import lotto.model.winningnumber.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,9 +26,10 @@ class LottoTest {
     @Test
     @DisplayName("당첨 번호와 로또의 비교값이 5인 경우")
     void compareWinningNumberWithLottoFive() {
-        Lotto lotto = new Lotto(new HashSet<>(List.of(1, 2, 3, 4, 5, 6)));
+        Lotto lotto = new Lotto(List.of("1", "2", "3", "4", "5", "6"));
+        WinningLotto winningLotto = new WinningLotto(List.of("1", "2", "3", "4", "5", "7"), "8");
         WinningLottoResponse winningNumberResponse =
-                new WinningLottoResponse(new HashSet<>(List.of(1, 2, 3, 4, 5, 7)), 8);
+                new WinningLottoResponse(winningLotto);
 
         lotto.calcWinningNumber(winningResult, winningNumberResponse);
 
@@ -38,9 +40,10 @@ class LottoTest {
     @Test
     @DisplayName("당첨 번호와 로또의 비교값이 5이고, 보너스가 존재하는 경우")
     void compareWinningNumberWithLotto() {
-        Lotto lotto = new Lotto(new HashSet<>(List.of(1, 2, 3, 4, 5, 6)));
+        Lotto lotto = new Lotto(List.of("1", "2", "3", "4", "5", "6"));
+        WinningLotto winningLotto = new WinningLotto(List.of("1", "2", "3", "4", "5", "7"), "6");
         WinningLottoResponse winningNumberResponse =
-                new WinningLottoResponse(new HashSet<>(List.of(1, 2, 3, 4, 5, 7)), 6);
+                new WinningLottoResponse(winningLotto);
 
         lotto.calcWinningNumber(winningResult, winningNumberResponse);
 

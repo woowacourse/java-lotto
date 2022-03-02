@@ -9,11 +9,12 @@ import java.util.stream.Collectors;
 public class RandomLottoNumbersGenerator {
     private static final int LOTTO_SIZE = 6;
 
-    public static Set<Integer> pickSixNumbers() {
+    public static List<String> pickSixNumbers() {
         List<Integer> shuffledNumbers = shuffleLottoNumbers(LottoNumbers.getLottoNumbers());
         return shuffledNumbers.stream()
                 .limit(LOTTO_SIZE)
-                .collect(Collectors.toSet());
+                .map(number -> Integer.toString(number))
+                .collect(Collectors.toList());
     }
 
     private static List<Integer> shuffleLottoNumbers(Set<Integer> numbers) {

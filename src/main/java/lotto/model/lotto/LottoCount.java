@@ -10,12 +10,12 @@ public class LottoCount {
 
     private int count;
 
-    public LottoCount(String money) {
-        this.count = makeLottoCount(money);
+    public LottoCount(String money, int count) {
+        this.count = makeLottoCount(money, count);
     }
 
-    private int makeLottoCount(String money) {
-        return ConverterUtils.convertStringToInt(money) / UNIT;
+    private int makeLottoCount(String money, int count) {
+        return (ConverterUtils.convertStringToInt(money) / UNIT) - count;
     }
 
     public boolean isZero() {

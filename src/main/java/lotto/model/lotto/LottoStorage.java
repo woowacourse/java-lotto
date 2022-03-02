@@ -10,13 +10,13 @@ import lotto.model.winningnumber.WinningLottoResponse;
 public class LottoStorage {
     private final List<Lotto> lottoNumbers;
 
-    public LottoStorage(LottoCount lottoCount) {
-        this.lottoNumbers = store(lottoCount);
+    public LottoStorage(LottoCount lottoCount, List<Lotto> lottos) {
+        this.lottoNumbers = store(lottoCount, lottos);
     }
 
-    private List<Lotto> store(LottoCount lottoCount) {
+    private List<Lotto> store(LottoCount lottoCount, List<Lotto> manualLottos) {
         List<Lotto> lottos = new ArrayList<>();
-
+        lottos.addAll(manualLottos);
         while (!lottoCount.isZero()) {
             lottos.add(new Lotto(RandomLottoNumbersGenerator.pickSixNumbers()));
             lottoCount.makeLotto();

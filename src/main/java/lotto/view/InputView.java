@@ -7,28 +7,51 @@ import java.util.stream.Collectors;
 
 public class InputView {
     private static final String INPUT_MONEY_MESSAGE = "구입급액을 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String DELIMITER = ",";
+    private static final Scanner SCANNER = new Scanner(System.in);
 
-    private final Scanner scanner = new Scanner(System.in);
-
-    public String inputMoney() {
-        System.out.println(INPUT_MONEY_MESSAGE);
-        return scanner.nextLine();
+    private InputView() {
     }
 
-    public List<String> inputWinningNumbers() {
+    public static String inputMoney() {
+        System.out.println(INPUT_MONEY_MESSAGE);
+        return SCANNER.nextLine();
+    }
+
+    public static String inputManualLottoCount() {
+        System.out.println();
+        System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
+        return SCANNER.nextLine();
+    }
+
+    public static void inputManualLottoMessage() {
+        System.out.println();
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE);
+    }
+
+    public static List<String> inputManualLottos() {
+        return inputLottoNumbers();
+    }
+
+    public static List<String> inputWinningLotto() {
         System.out.println();
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
-        return Arrays.stream(scanner.nextLine()
+        return inputLottoNumbers();
+    }
+
+    public static List<String> inputLottoNumbers() {
+        return Arrays.stream(SCANNER.nextLine()
                 .split(DELIMITER))
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
 
-    public String inputBonusBall() {
+    public static String inputBonusBall() {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
-        return scanner.nextLine();
+        return SCANNER.nextLine();
     }
 }
