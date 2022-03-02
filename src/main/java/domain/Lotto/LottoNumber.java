@@ -66,6 +66,7 @@ public class LottoNumber {
         LottoNumber lottoNumber = CACHE.get(number);
 
         if (lottoNumber == null) {
+<<<<<<< HEAD
             lottoNumber = new LottoNumber(number);
 <<<<<<< HEAD
         }
@@ -90,6 +91,10 @@ public class LottoNumber {
             throw new IllegalArgumentException(ExceptionMessage.LOTTO_NUMBER_OUT_OF_BOUND);
 =======
 >>>>>>> 8185971 (feat : 반복되는 LottoNumber 인스턴스 캐싱하기)
+=======
+            CACHE.put(number, new LottoNumber(number));
+            lottoNumber = CACHE.get(number);
+>>>>>>> 1ce39fe (feat: cache 에 로또 번호가 삭제되었을 경우에, cache에 다시 저장하게 함)
         }
         return lottoNumber;
     }
