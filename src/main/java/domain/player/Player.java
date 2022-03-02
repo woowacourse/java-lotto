@@ -11,8 +11,6 @@ import java.util.List;
 
 public class Player {
 
-    private static final int MINIMUM_PURCHASE_AMOUNT = 1000;
-
     private final Money money;
     private final List<Lotto> lottos;
 
@@ -39,7 +37,7 @@ public class Player {
     }
 
     public double calculateIncomeRate(double totalIncome) {
-        return totalIncome / (lottos.size() * MINIMUM_PURCHASE_AMOUNT);
+        return totalIncome / (lottos.size() * Money.MINIMUM_PURCHASE_AMOUNT);
     }
 
     public List<Lotto> getLottos() {
