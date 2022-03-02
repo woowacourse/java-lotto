@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -58,9 +59,9 @@ public class InputView {
 		return manualLottos;
 	}
 
-	public static String[] askWinningNumbers() {
+	public static List<String> askWinningNumbers() {
 		System.out.println(MESSAGE_WINNING_NUMBERS);
-		return splitByComma(scanner.nextLine());
+		return Arrays.asList(splitByComma(scanner.nextLine()));
 	}
 
 	public static String askBonusNumber() {
