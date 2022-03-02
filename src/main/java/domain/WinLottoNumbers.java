@@ -33,12 +33,6 @@ public class WinLottoNumbers {
         isBonusNumberNotDuplicated(numbers, bonus);
     }
 
-    private static void isBonusNumberNotDuplicated(List<Integer> numbers, int bonus) {
-        if (numbers.contains(bonus)) {
-            throw new IllegalArgumentException(BONUS_DUPLICATED_ERROR_MESSAGE);
-        }
-    }
-
     private static void isNotDuplicated(List<Integer> numbers) {
         HashSet<Integer> separateNumbers = new HashSet<>(numbers);
         if (separateNumbers.size() != numbers.size()) {
@@ -46,13 +40,25 @@ public class WinLottoNumbers {
         }
     }
 
-    public int countSameNumber(LottoTicket lottoTicket) {
+    private static void isBonusNumberNotDuplicated(List<Integer> numbers, int bonus) {
+        if (numbers.contains(bonus)) {
+            throw new IllegalArgumentException(BONUS_DUPLICATED_ERROR_MESSAGE);
+        }
+    }
+
+    public Rank match(LottoTicket lottoTicket) {
+        int sameNumber = countSameNumber(lottoTicket);
+        boolean containBonus = isContainsBonus(lottoTicket);
+        return Rank.of(sameNumber, containBonus);
+    }
+
+    private int countSameNumber(LottoTicket lottoTicket) {
         return (int) this.lottoNumbers.stream()
             .filter(lottoTicket::contains)
             .count();
     }
 
-    public boolean isContainsBonus(LottoTicket lottoTicket) {
+    private boolean isContainsBonus(LottoTicket lottoTicket) {
         return lottoTicket.contains(bonus);
     }
 }

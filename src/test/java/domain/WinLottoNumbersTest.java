@@ -33,29 +33,12 @@ class WinLottoNumbersTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1, 2, 3, 4, 5, 6:6", "1, 2, 3, 4, 5, 7:5",
-        "1, 2, 3, 4, 8, 7:4"}, delimiter = ':')
-    void 로또_번호_일치_검사(String lottoNumbersText, int expected) {
-        WinLottoNumbers winLottoNumbers = WinLottoNumbers.of(lottoNumbersText, 10);
+    @CsvSource(value = {"1, 2, 3, 4, 5, 6:false:6", "1, 2, 3, 4, 5, 7:false:5",
+        "1, 2, 3, 4, 8, 7:false:4", "1, 2, 3, 4, 5, 10:true:5"}, delimiter = ':')
+    void 로또_번호_일치_검사(String lottoNumbersText, boolean hasBonus, int expected) {
+        LottoTicket lottoTicket = LottoTicket.of(lottoNumbersText);
 
-        LottoTicket lottoTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
-
-        int sameNumber = winLottoNumbers.countSameNumber(lottoTicket);
-        assertThat(sameNumber).isEqualTo(expected);
-    }
-
-    @Test
-    void 로또_보너스_포함_될때_검사() {
-        LottoTicket lottoTicket = LottoTicket.of("1, 2, 3, 4, 5, 10");
-
-        assertThat(winLottoNumbers.isContainsBonus(lottoTicket))
-            .isTrue();
-    }
-
-    @Test
-    void 로또_보너스_포함_안될때_검사() {
-        LottoTicket lottoTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
-
-        assertThat(winLottoNumbers.isContainsBonus(lottoTicket)).isFalse();
+        Rank rank = winLottoNumbers.match(lottoTicket);
+        assertThat(rank).isEqualTo(Rank.of(expected, hasBonus));
     }
 }
