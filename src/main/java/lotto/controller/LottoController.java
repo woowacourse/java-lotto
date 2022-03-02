@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoFactory;
+import lotto.domain.lotto.NumberFactory;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.Money;
@@ -53,7 +54,7 @@ public class LottoController {
     private WinningLotto requestWinningLottoContainingBonusNumber(Lotto lotto) {
         try {
             String input = InputView.inputBonusNumber();
-            Number bonusNumber = new Number(input);
+            Number bonusNumber = NumberFactory.valueOf(input);
             return new WinningLotto(lotto, bonusNumber);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);

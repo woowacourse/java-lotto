@@ -11,8 +11,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class NumberTest {
 
     @Nested
-    @DisplayName("로또번호는")
-    class NewNumber {
+    @DisplayName("로또 생성은")
+    class New {
         @Nested
         @DisplayName("1~45의 문자열이 주어지면")
         class Context_with_String_1_to_45 {
@@ -21,7 +21,7 @@ public class NumberTest {
             @CsvSource(value = {"1|1", "45|45"}, delimiter = '|')
             @DisplayName("객체가 생성한다.")
             void it_create_ok(String value, int expected) {
-                Number number = new Number(value);
+                Number number = NumberFactory.valueOf(value);
 
                 assertThat(number.getValue()).isEqualTo(expected);
             }
@@ -63,7 +63,7 @@ public class NumberTest {
             @ValueSource(strings = {"a", "%%", "", " "})
             @DisplayName("예외가 발생한다.")
             void it_throw_exception(String value) {
-                assertThatThrownBy(() -> new Number(value)).isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> NumberFactory.valueOf(value)).isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("숫자여야 합니다.");
             }
         }
