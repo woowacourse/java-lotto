@@ -13,9 +13,9 @@ public enum Delimiter {
         this.unit = unit;
     }
 
-    public String[] splitWith(final String targetString) {
+    public List<String> splitWith(final String targetString) {
         final int limitForSplitAllElement = -1;
-        return targetString.split(this.unit, limitForSplitAllElement);
+        return List.of(targetString.split(this.unit, limitForSplitAllElement));
     }
 
     public String joinWith(final List<String> strings) {

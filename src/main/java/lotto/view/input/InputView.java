@@ -37,8 +37,8 @@ public class InputView {
 
     public List<Integer> requestTicketNumbers() {
         final String inputLine = reader.readLine();
-        final String[] inputValues = Delimiter.COMMA.splitWith(inputLine);
-        return Arrays.stream(inputValues)
+        final List<String> inputValues = Delimiter.COMMA.splitWith(inputLine);
+        return inputValues.stream()
                 .map(String::trim)
                 .map(text -> parseNumber(text, LottoExceptionStatus.BALL_NUMBER_MUST_BE_NUMERIC))
                 .collect(Collectors.toUnmodifiableList());
