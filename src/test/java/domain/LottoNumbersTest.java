@@ -8,8 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static domain.CommonLogic.generateNumberList;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumbersTest {
 
@@ -81,7 +81,7 @@ public class LottoNumbersTest {
 		assertThat(count).isEqualTo(6);
 	}
 
-	private List<LottoNumber> generateLottoNumberList(int n1, int n2, int n3, int n4, int n5, int n6) {
+	public static List<LottoNumber> generateLottoNumberList(int n1, int n2, int n3, int n4, int n5, int n6) {
 		List<LottoNumber> lottoNumberList = new ArrayList<>();
 
 		lottoNumberList.add(new LottoNumber(n1));
@@ -93,6 +93,5 @@ public class LottoNumbersTest {
 
 		return lottoNumberList;
 	}
-
 
 }
