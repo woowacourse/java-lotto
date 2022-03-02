@@ -9,8 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PurchaseAmountTest {
-    private final PurchaseAmount purchaseAmount =
-            PurchaseAmount.fromPurchaseAmountAndLottoPrice("2000");
+    private final PurchaseAmount purchaseAmount = new PurchaseAmount("2000");
 
     @ParameterizedTest
     @DisplayName("1000의 양의 배수가 아닌 값으로 생성할 경우 예외를 발생시킨다.")
@@ -20,7 +19,7 @@ class PurchaseAmountTest {
         final String expectedExceptionMessage = "구매 금액은 1000의 양의 배수여야 합니다.";
         //when then
         assertThatThrownBy(
-                () -> PurchaseAmount.fromPurchaseAmountAndLottoPrice(invalidValue))
+                () -> new PurchaseAmount(invalidValue))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
     }

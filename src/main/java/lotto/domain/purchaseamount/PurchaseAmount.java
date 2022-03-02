@@ -8,24 +8,20 @@ public class PurchaseAmount {
 
     private final int amount;
 
-    private PurchaseAmount(final int amount) {
-        this.amount = amount;
-    }
-
-    public static PurchaseAmount fromPurchaseAmountAndLottoPrice(final String amount) {
+    public PurchaseAmount(final String amount) {
         validateNaturalNumber(amount);
         int naturalNumberValue = Integer.parseInt(amount);
         validateMultipleOfPrice(naturalNumberValue);
-        return new PurchaseAmount(naturalNumberValue);
+        this.amount = naturalNumberValue;
     }
 
-    private static void validateNaturalNumber(final String value) {
+    private void validateNaturalNumber(final String value) {
         if (!isNaturalNumber(value)) {
             throw new IllegalArgumentException(INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE);
         }
     }
 
-    private static void validateMultipleOfPrice(final int purchaseAmount) {
+    private void validateMultipleOfPrice(final int purchaseAmount) {
         if (purchaseAmount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE);
         }

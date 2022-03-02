@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ManualPurchaseCountTest {
-    private final PurchaseAmount purchaseAmount = PurchaseAmount.fromPurchaseAmountAndLottoPrice("14000");
+    private final PurchaseAmount purchaseAmount = new PurchaseAmount("14000");
 
     @ParameterizedTest
     @DisplayName("수동 구매 개수가 0 혹은 자연수가 아니면 예외를 발생시킨다.")
