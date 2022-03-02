@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.dto.PrizeInformationDTO;
@@ -19,8 +20,9 @@ public class Controller {
 
 	public void run() {
 		Money money = Money.from(InputView.askMoneyAmount());
-		int manualCount = InputView.askManualLottoCount();
-		Lottos lottos = Lottos.purchase(money, manualCount, InputView.askManualLottoNumbers(manualCount));
+		int totalCount = Lotto.countTickets(money);
+		int manualCount = InputView.askManualLottoCount(totalCount);
+		Lottos lottos = Lottos.purchase(totalCount, manualCount, InputView.askManualLottoNumbers(manualCount));
 
 		WinningBalls winningBalls = getWinningNumbers();
 		PrizeInformations prizeInformations =

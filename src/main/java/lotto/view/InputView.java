@@ -11,6 +11,7 @@ public class InputView {
 	private static final String MESSAGE_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
 	private static final String ERROR_TYPE = "[ERROR] 로또 개수는 숫자로 입력해 주세요";
 	private static final String MESSAGE_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
+	private static final String ERROR_BOUND = "[ERROR] 로또 개수는 0 이상, 총 구매 개수 이하로 입력해 주세요";
 
 	private static final Scanner scanner = new Scanner(System.in);
 	public static final String NUMBER_DELIMITER = ",";
@@ -20,9 +21,14 @@ public class InputView {
 		return scanner.nextLine();
 	}
 
-	public static int askManualLottoCount() {
+	public static int askManualLottoCount(int totalCount) {
 		System.out.println(MESSAGE_MANUAL_LOTTO_COUNT);
-		return checkType(scanner.nextLine());
+		return validateManualLottoCount(scanner.nextLine(), totalCount);
+	}
+
+	private static int validateManualLottoCount(String manualCountInput, int totalCount) {
+		int manualCount = checkType(manualCountInput);
+		return checkBound(totalCount, manualCount);
 	}
 
 	private static int checkType(String manualCountInput) {
@@ -31,6 +37,13 @@ public class InputView {
 			manualCount = Integer.parseInt(manualCountInput);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(ERROR_TYPE);
+		}
+		return manualCount;
+	}
+
+	private static int checkBound(int totalCount, int manualCount) {
+		if (manualCount < 0 || manualCount > totalCount) {
+			throw new IllegalArgumentException(ERROR_BOUND);
 		}
 		return manualCount;
 	}

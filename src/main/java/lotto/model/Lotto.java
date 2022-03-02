@@ -15,6 +15,7 @@ public class Lotto {
 	private static final int MIN_NUMBER = 1;
 	private static final int MAX_NUMBER = 45;
 	private static final int NUMBER_COUNT = 6;
+	private static final int PRICE = 1000;
 	private static final String ERROR_DUPLICATE = "[ERROR] 한 개의 로또 내에서 숫자가 중복될 수 없습니다";
 	private static final String ERROR_COUNT = "[ERROR] 로또 번호는 6개로 입력해야 합니다";
 
@@ -61,6 +62,10 @@ public class Lotto {
 		if (distinctInput.size() < input.length) {
 			throw new IllegalArgumentException(ERROR_DUPLICATE);
 		}
+	}
+
+	public static int countTickets(Money money) {
+		return money.countAvailable(PRICE);
 	}
 
 
