@@ -37,7 +37,7 @@ public class LottoGameController {
 	private void purchaseManualLotto(int count) {
 		List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
 		for (List<Integer> inputNumbers : inputManualNumbers(count)) {
-			manualLottoNumbers.add(LottoNumbers.of(inputNumbers));
+			manualLottoNumbers.add(new LottoNumbers(inputNumbers));
 		}
 
 		lottoTickets.purchase(manualLottoNumbers);
@@ -49,7 +49,7 @@ public class LottoGameController {
 
 		while (count-- > 0) {
 			Collections.shuffle(LottoNumberCandidates);
-			randomLottoNumbers.add(LottoNumbers.of(LottoNumberCandidates.subList(0, NUMBER_OF_NUMBERS)));
+			randomLottoNumbers.add(new LottoNumbers(LottoNumberCandidates.subList(0, NUMBER_OF_NUMBERS)));
 		}
 
 		lottoTickets.purchase(randomLottoNumbers);

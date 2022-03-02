@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketTest {
 
-	static AnswerLotto answerLotto;
+	private static AnswerLotto answerLotto;
 
 	@BeforeAll
 	static void initAnswerLotto() {
@@ -19,7 +19,7 @@ public class LottoTicketTest {
 	@Test
 	@DisplayName("일치하는 숫자가 존재하지 않는 경우 당첨되지 않음")
 	void zeroMatch() {
-		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(10, 11, 12, 13, 14, 15)));
+		LottoTicket lotto = new LottoTicket(new LottoNumbers(generateNumberList(10, 11, 12, 13, 14, 15)));
 
 		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.NOTHING);
 	}
@@ -27,7 +27,7 @@ public class LottoTicketTest {
 	@Test
 	@DisplayName("하나의 숫자만 일치하는 경우 당첨되지 않음")
 	void oneMatch() {
-		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(10, 11, 12, 13, 14, 6)));
+		LottoTicket lotto = new LottoTicket(new LottoNumbers(generateNumberList(10, 11, 12, 13, 14, 6)));
 
 		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.NOTHING);
 	}
@@ -35,7 +35,7 @@ public class LottoTicketTest {
 	@Test
 	@DisplayName("두개의 숫자만 일치하는 경우 당첨되지 않음")
 	void twoMatch() {
-		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(10, 11, 12, 13, 5, 6)));
+		LottoTicket lotto = new LottoTicket(new LottoNumbers(generateNumberList(10, 11, 12, 13, 5, 6)));
 
 		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.NOTHING);
 	}
@@ -43,7 +43,7 @@ public class LottoTicketTest {
 	@Test
 	@DisplayName("3개의 숫자가 일치하고 보너스 숫자와는 일치하지 않는 경우 5등 당첨")
 	void FIFTH_Match() {
-		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(1, 2, 3, 7, 8, 9)));
+		LottoTicket lotto = new LottoTicket(new LottoNumbers(generateNumberList(1, 2, 3, 7, 8, 9)));
 
 		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.FIFTH);
 	}
@@ -51,7 +51,7 @@ public class LottoTicketTest {
 	@Test
 	@DisplayName("3개의 숫자가 일치하고 보너스 숫자와도 일치하는 경우 4등 당첨")
 	void FOURTH_Match() {
-		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(1, 2, 3, 4, 8, 9)));
+		LottoTicket lotto = new LottoTicket(new LottoNumbers(generateNumberList(1, 2, 3, 4, 8, 9)));
 
 		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.FOURTH);
 	}
@@ -59,7 +59,7 @@ public class LottoTicketTest {
 	@Test
 	@DisplayName("4개의 숫자가 일치하는 경우 3등 당첨")
 	void THIRD_Match() {
-		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(1, 2, 3, 4, 5, 9)));
+		LottoTicket lotto = new LottoTicket(new LottoNumbers(generateNumberList(1, 2, 3, 4, 5, 9)));
 
 		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.THIRD);
 	}
@@ -67,7 +67,7 @@ public class LottoTicketTest {
 	@Test
 	@DisplayName("5개의 숫자가 일치하는 경우 2등 당첨")
 	void SECOND_Match() {
-		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(1, 2, 3, 4, 5, 7)));
+		LottoTicket lotto = new LottoTicket(new LottoNumbers(generateNumberList(1, 2, 3, 4, 5, 7)));
 
 		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.SECOND);
 	}
@@ -75,7 +75,7 @@ public class LottoTicketTest {
 	@Test
 	@DisplayName("6개의 숫자가 일치하는 경우 1등 당첨")
 	void FIRST_Match() {
-		LottoTicket lottoTicket = new LottoTicket(LottoNumbers.of(generateNumberList(1, 2, 3, 4, 5, 6)));
+		LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(generateNumberList(1, 2, 3, 4, 5, 6)));
 
 		assertThat(lottoTicket.calculate(answerLotto)).isEqualTo(ResultStatics.FIRST);
 	}

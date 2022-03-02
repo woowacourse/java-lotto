@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.List;
+import java.util.Set;
 
 import static constant.LottoConstant.NUMBER_FOR_BONUS_CHECK;
 
@@ -23,7 +23,7 @@ public class LottoTicket {
 		return ResultStatics.of(count, bonus);
 	}
 
-	public List<LottoNumber> getNumbers() {
+	public Set<LottoNumber> getNumbers() {
 		return this.numbers.getNumbers();
 	}
 }

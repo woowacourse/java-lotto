@@ -3,9 +3,7 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static domain.CommonLogic.generateNumberList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,21 +11,21 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumbersTest {
 
-	private LottoNumbers lottoNumbers = LottoNumbers.of(generateNumberList(1, 2, 3, 4, 5, 6));
+	private LottoNumbers lottoNumbers = new LottoNumbers(generateNumberList(1, 2, 3, 4, 5, 6));
 
 	@Test
-	@DisplayName("6개가 아닌 개수의 번호를 입력 한 경우 예외 발생")
+	@DisplayName("로또 번호 : 6개가 아닌 개수의 번호를 입력 한 경우 예외 발생")
 	void countOfNumbersMustBeSix() {
 		List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
-		assertThatThrownBy(() -> LottoNumbers.of(input))
+		assertThatThrownBy(() -> new LottoNumbers(input))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("개의 숫자만 허용됩니다.");
 	}
 
 	@Test
-	@DisplayName("중복되는 숫자를 입력 한 경우 예외 발생")
+	@DisplayName("로또 번호 : 중복되는 숫자를 입력 한 경우 예외 발생")
 	void duplicateInNumbers() {
-		assertThatThrownBy(() -> LottoNumbers.of(generateNumberList(1, 2, 3, 4, 5, 5)))
+		assertThatThrownBy(() -> new LottoNumbers(generateNumberList(1, 2, 3, 4, 5, 5)))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("숫자들은 중복일 수 없습니다.");
 	}
@@ -81,8 +79,8 @@ public class LottoNumbersTest {
 		assertThat(count).isEqualTo(6);
 	}
 
-	public static List<LottoNumber> generateLottoNumberList(int n1, int n2, int n3, int n4, int n5, int n6) {
-		List<LottoNumber> lottoNumberList = new ArrayList<>();
+	public static Set<LottoNumber> generateLottoNumberList(int n1, int n2, int n3, int n4, int n5, int n6) {
+		Set<LottoNumber> lottoNumberList = new HashSet<>();
 
 		lottoNumberList.add(new LottoNumber(n1));
 		lottoNumberList.add(new LottoNumber(n2));

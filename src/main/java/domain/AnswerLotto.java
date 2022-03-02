@@ -1,7 +1,7 @@
 package domain;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class AnswerLotto {
 
@@ -16,7 +16,7 @@ public class AnswerLotto {
 	}
 
 	public static AnswerLotto of(List<Integer> inputNumbers, int inputBonus) {
-		LottoNumbers numbers = LottoNumbers.of(inputNumbers);
+		LottoNumbers numbers = new LottoNumbers(inputNumbers);
 		LottoNumber bonusNumber = new LottoNumber(inputBonus);
 
 		if (numbers.isExist(bonusNumber)) {
@@ -26,8 +26,8 @@ public class AnswerLotto {
 		return new AnswerLotto(numbers, bonusNumber);
 	}
 
-	public List<LottoNumber> getNumbers() {
-		return Collections.unmodifiableList(this.numbers.getNumbers());
+	public Set<LottoNumber> getNumbers() {
+		return this.numbers.getNumbers();
 	}
 
 	public LottoNumber getBonusNumber() {
