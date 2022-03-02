@@ -13,8 +13,10 @@ public class Controller {
 
     public void run() {
         Lottos lottos = new Lottos(inputMoney());
-        buyLottosByManual(lottos, inputCount());
+        buyLottosByManual(lottos, inputCountForBuy());
         lottos.buyAllLottosByAuto();
+        OutputView.printLottos(lottos);
+
 //        WinningNumbers winningNumbers = inputWinningNumbers();
 //        printWinningStatistic(money, lottos, winningNumbers);
     }
@@ -28,24 +30,26 @@ public class Controller {
         }
     }
 
-    private int inputCount() {
+    private int inputCountForBuy() {
         try {
-            return Integer.parseInt(InputView.inputCount());
+            return InputView.inputCountForBuy();
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
-            return inputCount();
+            return inputCountForBuy();
         }
     }
 
-    private void buyLottosByManual(Lottos lottos, int count) {
-        InputView.printInputLottoNumbersMessage();
-        IntStream.range(0, count)
-                .forEach(integer -> lottos.buyLottoByManual(inputLotto()));
+    private void buyLottosByManual(Lottos lottos, int countOfManualLotto) {
+        if (countOfManualLotto != 0) {
+            InputView.printInputLottoNumbersMessage();
+            IntStream.range(0, countOfManualLotto)
+                    .forEach(integer -> lottos.buyLottoByManual(inputLotto()));
+        }
     }
 
     private Lotto inputLotto() {
         try {
-            return Lotto.generateLottoByString(InputView.inputNextLine());
+            return Lotto.generateLottoByString(InputView.inputLottoNumbers());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
             return inputLotto();

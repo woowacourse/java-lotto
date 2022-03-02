@@ -18,8 +18,8 @@ public class OutputView {
     public static void printLottos(Lottos lottos) {
         printNewLine();
         System.out.printf(TOTAL_LOTTO_COUNT_MESSAGE_FORMAT,
-                lottos.getLottoCountByManual(),
-                lottos.getLottoCountByAuto());
+                lottos.getCountByManual(),
+                lottos.getCountByAuto());
         lottos.getLottos().forEach(lotto -> System.out.printf(EACH_LOTTO_MESSAGE_FORMAT, lotto.toString()));
     }
 

@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.Scanner;
+import lotto.validator.CountForBuyValidator;
 
 public class InputView {
 
@@ -16,18 +17,21 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String inputCount() {
+    public static int inputCountForBuy() {
         OutputView.printNewLine();
         System.out.println(INPUT_LOTTO_COUNT_FOR_MANUAL_MESSAGE);
-        return scanner.nextLine();
+        int countForBuy = Integer.parseInt(scanner.nextLine());
+        CountForBuyValidator.validate(countForBuy);
+        return countForBuy;
     }
+
 
     public static void printInputLottoNumbersMessage() {
         OutputView.printNewLine();
         System.out.println(INPUT_LOTTO_NUMBERS_MESSAGE);
     }
 
-    public static String inputNextLine() {
+    public static String inputLottoNumbers() {
         return scanner.nextLine();
     }
 

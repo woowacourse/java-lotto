@@ -11,20 +11,20 @@ public class Lottos {
 
     private Money money;
     private final List<Lotto> lottos;
-    private int lottoCountByManual;
-    private int lottoCountBAuto;
+    private int countByManual;
+    private int countByAuto;
 
     public Lottos(Money money) {
         this.money = money;
         this.lottos = new ArrayList<>();
-        this.lottoCountByManual = 0;
-        this.lottoCountBAuto = 0;
+        this.countByManual = 0;
+        this.countByAuto = 0;
     }
 
     public void buyLottoByManual(Lotto lotto) {
         lottos.add(lotto);
         money.minusPrice(LOTTO_PRICE);
-        lottoCountByManual++;
+        countByManual++;
     }
 
     public void buyAllLottosByAuto() {
@@ -33,18 +33,18 @@ public class Lottos {
                 .mapToObj(i -> Lotto.generateLottoByAuto())
                 .forEach(lottos::add);
         money.minusPrice(totalLottoCount * LOTTO_PRICE);
-        lottoCountBAuto += totalLottoCount;
+        countByAuto += totalLottoCount;
     }
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
 
-    public int getLottoCountByManual() {
-        return lottoCountByManual;
+    public int getCountByManual() {
+        return countByManual;
     }
 
-    public int getLottoCountByAuto() {
-        return lottoCountBAuto;
+    public int getCountByAuto() {
+        return countByAuto;
     }
 }

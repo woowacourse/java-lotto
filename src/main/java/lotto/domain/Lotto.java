@@ -16,23 +16,12 @@ public class Lotto {
         this.lottoNumbers = List.copyOf(lottoNumbers);
     }
 
-    public static Lotto generateLottoByAuto() {
-        return new Lotto(LottoNumber.getRandomLottoNumbers());
-    }
-
     public static Lotto generateLottoByString(String lottoNumbers) {
         return new Lotto(receiveStringInput(lottoNumbers));
     }
 
     private static List<LottoNumber> receiveStringInput(String stringInput) {
-        return convertStringToLottoNumbers(parseStringInput(stringInput));
-    }
-
-    private static List<LottoNumber> convertStringToLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::findByNumber)
-                .sorted()
-                .collect(Collectors.toList());
+        return convertToLottoNumbers(parseStringInput(stringInput));
     }
 
     private static List<Integer> parseStringInput(String stringInput) {
@@ -40,6 +29,17 @@ public class Lotto {
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    private static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::findByNumber)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public static Lotto generateLottoByAuto() {
+        return new Lotto(LottoNumber.getRandomLottoNumbers());
     }
 
     public int getMatchCount(Lotto winningLotto) {
