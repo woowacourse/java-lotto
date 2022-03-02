@@ -2,6 +2,7 @@ package view;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import domain.Lotto.WinningLotto;
 import domain.player.Money;
 import utils.InputValidator;
@@ -12,6 +13,8 @@ import utils.InputValidator;
 import utils.InputValidator;
 
 >>>>>>> 701f681 (refactor: 입력 유효성 검사 static으로 변경 및 적용)
+=======
+>>>>>>> c3eb2e9 (refactor : InputValidator의 역할 InputView에게 위임)
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -23,12 +26,15 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
+    private static final String INPUT_IS_NULL = "입력 값은 널 값일 수 없습니다.";
+    private static final String INPUT_IS_EMPTY = "입력 값은 비어있을 수 없습니다.";
     private static final String PURCHASE_AMOUNT_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String WINNING_NUMBER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String DELIMITER = ",";
 
     private static final Scanner SCANNER = new Scanner(System.in);
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -41,6 +47,8 @@ public class InputView {
 =======
     private static final InputView inputView = new InputView();
 =======
+=======
+>>>>>>> c3eb2e9 (refactor : InputValidator의 역할 InputView에게 위임)
     private static final InputView INPUT_VIEW = new InputView();
 >>>>>>> 3996d74 (refactor : 상수 네이밍 컨벤션 적용)
 
@@ -57,6 +65,7 @@ public class InputView {
         String input = scanner.nextLine();
 =======
         String input = SCANNER.nextLine();
+<<<<<<< HEAD
 >>>>>>> 3996d74 (refactor : 상수 네이밍 컨벤션 적용)
         InputValidator.validateNull(input);
         InputValidator.validateEmpty(input);
@@ -76,7 +85,23 @@ public class InputView {
         String input = scanner.nextLine();
         InputValidator.validateNull(input);
         InputValidator.validateEmpty(input);
+=======
+        validateNull(input);
+        validateEmpty(input);
+>>>>>>> c3eb2e9 (refactor : InputValidator의 역할 InputView에게 위임)
         return input;
+    }
+
+    public static void validateNull(String purchaseAmount) {
+        if (purchaseAmount == null) {
+            throw new NullPointerException(INPUT_IS_NULL);
+        }
+    }
+
+    public static void validateEmpty(String purchaseAmount) {
+        if (purchaseAmount.isEmpty()) {
+            throw new IllegalArgumentException(INPUT_IS_EMPTY);
+        }
     }
 
     public int inputPurchaseAmount() {
