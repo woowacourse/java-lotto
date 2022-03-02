@@ -47,17 +47,21 @@ public final class LotteryGame {
 	}
 
 	public Lotteries createLottery(final List<List<Integer>> manualLotteryNumber) {
+		final List<Lottery> manualLotteries = createManualLottery(manualLotteryNumber);
+		Lotteries lotteries = Lotteries.from(manualLotteries);
+		return addAutoLottery(lotteries);
+	}
+
+	private List<Lottery> createManualLottery(List<List<Integer>> manualLotteryNumber) {
 		final List<Lottery> manualLotteries = manualLotteryNumber.stream()
 			.map((numbers) -> lotteryGenerator.generateLottery(numbers))
 			.collect(Collectors.toList());
-		Lotteries lotteries = Lotteries.from(manualLotteries);
-		final List<Lottery> autoLotteries = createLotteriesNumber();
-		return lotteries.add(autoLotteries);
+		return manualLotteries;
 	}
 
-	public Lotteries createAutoLottery() {
-		final List<Lottery> lotteriesNumber = createLotteriesNumber();
-		return Lotteries.from(lotteriesNumber);
+	private Lotteries addAutoLottery(Lotteries lotteries) {
+		final List<Lottery> autoLotteries = createLotteriesNumber();
+		return lotteries.add(autoLotteries);
 	}
 
 	private List<Lottery> createLotteriesNumber() {

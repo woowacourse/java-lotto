@@ -23,13 +23,31 @@ public class LotteryGameTest {
 	@DisplayName("입력한 로또 개수 만큼 로또가 자동으로 생성되는지 확인")
 	@ParameterizedTest(name = "{index} {displayName} inputMoney={0}")
 	@ValueSource(ints = {1000, 100000, 50000})
-	void createLotteries(final int inputMoney) {
+	void create_lotteries_test(final int inputMoney) {
 		//given
 		final LotteryGame lotteryGame = LotteryGame.of(inputMoney, new LotteryGenerator(),
 			new LotteryNumberGenerator());
-		Lotteries lotteries = lotteryGame.createLottery(Collections.emptyList());
 		final int lotteriesToCreate = inputMoney / 1000;
 		//when
+		Lotteries lotteries = lotteryGame.createLottery(Collections.emptyList());
+		//then
+		assertThat(lotteries.getLotteries().size()).isEqualTo(lotteriesToCreate);
+	}
+
+	@DisplayName("수동 로또와 자동 로또가 개수만큼 정상적으로 생성되는지 확인")
+	@ParameterizedTest(name = "{index} {displayName} inputMoney={0}")
+	@ValueSource(ints = {3000, 100000, 50000})
+	void manual_and_auto_lotteries_test(final int inputMoney) {
+	    //given
+	    LotteryGame lotteryGame = LotteryGame.of(inputMoney, new LotteryGenerator(), new LotteryNumberGenerator());
+		final int lotteriesToCreate = inputMoney / 1000;
+	    //when
+		lotteryGame = lotteryGame.putNumOfManualLottery(3);
+		Lotteries lotteries = lotteryGame.createLottery(Arrays.asList(
+			Arrays.asList(1, 2, 3, 4, 5, 6),
+			Arrays.asList(2, 3, 4, 5, 6, 7),
+			Arrays.asList(3, 4, 5, 6, 7, 8)
+		));
 		//then
 		assertThat(lotteries.getLotteries().size()).isEqualTo(lotteriesToCreate);
 	}
