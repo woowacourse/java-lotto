@@ -20,11 +20,6 @@ public class LottoRandomGenerator implements LottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> generateLottos(final int numberOfGenerating) {
-        final Set<Lotto> generatedNumbersGroup = new HashSet<>();
-        return generateLottos(generatedNumbersGroup, numberOfGenerating);
-    }
-
     @Override
     public List<Lotto> generateLottosExceptManualGenerated(int numberOfGenerating, List<Lotto> manualGenerated) {
         final Set<Lotto> generatedNumbersGroup = new HashSet<>(manualGenerated);
