@@ -5,11 +5,11 @@ import java.util.Optional;
 
 public enum Rank {
 
-    FIFTH_GRADE(3, false, false, 5_000L),
-    FOURTH_GRADE(4, false, false, 50_000L),
-    THIRD_GRADE(5, true, false, 1_500_000L),
-    SECOND_GRADE(5, true, true, 30_000_000L),
-    FIRST_GRADE(6, false, false, 2_000_000_000L);
+    FIFTH_GRADE(3, 5_000L),
+    FOURTH_GRADE(4, 50_000L),
+    THIRD_GRADE(5, false, 1_500_000L),
+    SECOND_GRADE(5, true, 30_000_000L),
+    FIRST_GRADE(6, 2_000_000_000L);
 
     private final int matchCount;
     private final boolean bonusRequired;
@@ -21,6 +21,14 @@ public enum Rank {
         this.bonusRequired = bonusRequired;
         this.bonusMatched = bonusMatched;
         this.prizeMoney = prizeMoney;
+    }
+
+    Rank(final int matchCount, final boolean bonusMatched, final long prizeMoney) {
+        this(matchCount, true, bonusMatched, prizeMoney);
+    }
+
+    Rank(final int matchCount, final long prizeMoney) {
+        this(matchCount, false, false, prizeMoney);
     }
 
     public static Optional<Rank> of(final int matchCount, final boolean bonusMatched) {
