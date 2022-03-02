@@ -1,13 +1,14 @@
 package lotto.view;
 
 import lotto.model.Lotto;
+import lotto.model.LottoMachine;
 import lotto.model.LottoStatistics;
 import lotto.model.Lottos;
 import lotto.model.Rank;
 
 public class ResultView {
 
-    private static final String BUY_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String BUY_COUNT_FORMAT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String CORRESPOND_FORMAT_MESSAGE = "%d개 일치";
     private static final String PRICE_COUNT_FORMAT_MESSAGE = " (%d원) - %d개\n";
     private static final String BONUS_BALL_NOT_CORRESPOND_MESSAGE = "";
@@ -15,13 +16,13 @@ public class ResultView {
     private static final String BONUS_BALL_CORRESPOND_MESSAGE = ", 보너스 볼 일치";
     private static final String REVENUE_FORMAT_MESSAGE = "총 수익률은 %.2f입니다.";
 
-    public static void printResult(Lottos lottos) {
-        printLottoCount(lottos);
+    public static void printResult(Lottos lottos, LottoMachine lottoMachine) {
+        printLottoCount(lottoMachine);
         printBuyingLottos(lottos);
     }
 
-    private static void printLottoCount(Lottos lottos) {
-        System.out.println(lottos.findLottoCount() + BUY_COUNT_MESSAGE);
+    private static void printLottoCount(LottoMachine lottoMachine) {
+        System.out.printf(BUY_COUNT_FORMAT_MESSAGE, lottoMachine.getManualCount(), lottoMachine.getAutoCount());
     }
 
     private static void printBuyingLottos(Lottos lottos) {
