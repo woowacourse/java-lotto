@@ -20,7 +20,10 @@ import static org.assertj.core.api.Assertions.entry;
 
 class LottoMachineTest {
     private final LottoGenerator lottoGenerator = new LottoCustomGenerator();
-    private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount("6000", 1000);
+    private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount.TotalPurchaseAmountBuilder()
+            .setTotalAmount("6000")
+            .setLottoPrice(1000)
+            .build();
     private final Lotto LottoUserInputLotto = new Lotto(Arrays.asList("40", "41", "42", "43", "44", "45"));
     private final List<Lotto> manualLottos = Arrays.asList(LottoUserInputLotto);
     private final LottoMachine lottoMachine =

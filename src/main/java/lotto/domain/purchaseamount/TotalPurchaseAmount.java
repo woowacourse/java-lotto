@@ -8,12 +8,31 @@ public class TotalPurchaseAmount {
     private final int amount;
     private final int lottoPrice;
 
-    public TotalPurchaseAmount(final String amount, final int lottoPrice) {
-        validateNaturalNumber(amount);
-        int naturalNumberValue = Integer.parseInt(amount);
-        validateMultipleOfPrice(naturalNumberValue, lottoPrice);
+    public TotalPurchaseAmount(final TotalPurchaseAmountBuilder totalPurchaseAmountBuilder) {
+        validateNaturalNumber(totalPurchaseAmountBuilder.totalAmount);
+        int naturalNumberValue = Integer.parseInt(totalPurchaseAmountBuilder.totalAmount);
+        validateMultipleOfPrice(naturalNumberValue, totalPurchaseAmountBuilder.lottoPrice);
         this.amount = naturalNumberValue;
-        this.lottoPrice = lottoPrice;
+        this.lottoPrice = totalPurchaseAmountBuilder.lottoPrice;
+    }
+
+    public static class TotalPurchaseAmountBuilder {
+        private String totalAmount = "5000";
+        private int lottoPrice = 1000;
+
+        public TotalPurchaseAmountBuilder setTotalAmount(final String totalAmount) {
+            this.totalAmount = totalAmount;
+            return this;
+        }
+
+        public TotalPurchaseAmountBuilder setLottoPrice(final int lottoPrice) {
+            this.lottoPrice = lottoPrice;
+            return this;
+        }
+
+        public TotalPurchaseAmount build() {
+            return new TotalPurchaseAmount(this);
+        }
     }
 
     private void validateNaturalNumber(final String value) {

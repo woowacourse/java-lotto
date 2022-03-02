@@ -41,7 +41,10 @@ public class LottoController {
     private TotalPurchaseAmount inputTotalPurchaseAmount(final int lottoPrice) {
         try {
             final String purchaseAmountInput = inputView.inputPurchaseAmount();
-            return new TotalPurchaseAmount(purchaseAmountInput, lottoPrice);
+            return new TotalPurchaseAmount.TotalPurchaseAmountBuilder()
+                    .setTotalAmount(purchaseAmountInput)
+                    .setLottoPrice(lottoPrice)
+                    .build();
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
             return inputTotalPurchaseAmount(lottoPrice);

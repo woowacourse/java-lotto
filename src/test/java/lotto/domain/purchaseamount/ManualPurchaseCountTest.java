@@ -8,8 +8,10 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ManualPurchaseCountTest {
-    private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount("14000", 1000);
-
+    private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount.TotalPurchaseAmountBuilder()
+            .setTotalAmount("14000")
+            .setLottoPrice(1000)
+            .build();
     @ParameterizedTest
     @DisplayName("수동 구매 개수가 0 혹은 자연수가 아니면 예외를 발생시킨다.")
     @ValueSource(strings = {"-1", "1.2", "a", "!"})
