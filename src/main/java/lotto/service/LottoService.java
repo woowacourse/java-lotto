@@ -2,6 +2,7 @@ package lotto.service;
 
 import lotto.domain.*;
 import lotto.domain.generator.LottoGenerator;
+import lotto.domain.generator.LottoManualGenerator;
 import lotto.domain.vo.LottoNumber;
 
 import java.util.*;
@@ -32,30 +33,23 @@ public class LottoService {
     }
 
     public int generateManualLottoCounts(final List<List<String>> manualLottoNumbersGroup) {
-        final Set<LottoNumbers> manualNumbersGroup = manualLottoNumbersGroup.stream()
-                .map(LottoNumbers::new)
-                .collect(Collectors.toUnmodifiableSet());
-        validateDuplicateManualNumbersGroup(manualLottoNumbersGroup, manualNumbersGroup);
-        lottoNumbersGroup.addAll(manualNumbersGroup);
-        return lottoNumbersGroup.size();
-    }
-
-    private void validateDuplicateManualNumbersGroup(List<List<String>> manualLottoNumbersGroup, Set<LottoNumbers> manualNumbersGroup) {
-        if (manualNumbersGroup.size() != manualLottoNumbersGroup.size()) {
-            throw new IllegalArgumentException(DUPLICATE_MANUAL_EXCEPTION_MESSAGE);
-        }
+        LottoGenerator lottoGenerator = new LottoManualGenerator();
+        final int manualLottoCounts = manualLottoNumbersGroup.size();
+        lottoNumbersGroup.addAll(lottoGenerator.generateLottoNumbersGroup(manualLottoCounts, manualLottoNumbersGroup));
+        return manualLottoCounts;
     }
 
     public void generateAutoLottoNumbers(final int lottoNumbersCount) {
         final int autoLottoCounts = lottoNumbersCount - lottoNumbersGroup.size();
-        lottoNumbersGroup.addAll(lottoGenerator.generateLottoNumbersGroup(autoLottoCounts));
+        lottoNumbersGroup.addAll(lottoGenerator.generateLottoNumbersGroup(autoLottoCounts, Collections.EMPTY_LIST));
     }
 
     public List<LottoNumbers> getLottoNumbersGroup() {
         return lottoNumbersGroup;
     }
 
-    public WinningNumbers generateWinningNumbers(List<String> inputLastWeekWinningNumbers, String inputBonusNumber) {
+    public WinningNumbers generateWinningNumbers(
+            final List<String> inputLastWeekWinningNumbers, final String inputBonusNumber) {
         final LottoNumbers lastWinningNumbers = new LottoNumbers(inputLastWeekWinningNumbers);
         final LottoNumber bonusNumber = LottoNumber.from(inputBonusNumber);
         return new WinningNumbers(lastWinningNumbers, bonusNumber);

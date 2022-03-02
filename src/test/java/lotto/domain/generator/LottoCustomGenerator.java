@@ -25,7 +25,7 @@ public class LottoCustomGenerator implements LottoGenerator {
     }
 
     @Override
-    public List<LottoNumbers> generateLottoNumbersGroup(int numberOfGenerating) {
+    public List<LottoNumbers> generateLottoNumbersGroup(final int numberOfGenerating, final List<List<String>> lottoNumbers) {
         if (numberOfGenerating > MAX_GENERATING_LOTTO_NUMBERS_COUNT) {
             throw new TestAbortedException(TEST_LOTTO_NUMBERS_COUNT_EXCEED_EXCEPTION_MESSAGE);
         }
