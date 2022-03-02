@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import lotto.domain.AmountToBuyLotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.ManualLottoCount;
@@ -48,9 +50,15 @@ public class LottoController {
         int automaticLottoCount = amount.calculateAutomaticLottoCount(manualLottoCount);
         OutputView.printTicketCount(amount, manualLottoCount);
 
+        List<LottoTicket> manualLottoTickets = inputManualTickets(manualLottoCount);
+
         LottoTickets lottoTickets = LottoTickets.generateRandomByCount(automaticLottoCount);
         OutputView.printTicket(lottoTickets);
         return lottoTickets;
+    }
+
+    private List<LottoTicket> inputManualTickets(ManualLottoCount manualLottoCount) {
+        return InputView.inputManualLottoNumbers(manualLottoCount);
     }
 
     private WinningNumbers createWinningNumbers() {
