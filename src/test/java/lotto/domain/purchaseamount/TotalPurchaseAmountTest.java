@@ -14,23 +14,6 @@ class TotalPurchaseAmountTest {
             .setLottoPrice(1000)
             .build();
 
-    @ParameterizedTest
-    @DisplayName("1000의 양의 배수가 아닌 값으로 생성할 경우 예외를 발생시킨다.")
-    @ValueSource(strings = {"abc", "1004", "-1000", "12.334"})
-    void create_exceptionByInvalidPurchaseAmountValue_Test(final String invalidValue) {
-        //given
-        final String expectedExceptionMessage = "구매 금액은 로또 가격의 양의 배수여야 합니다.";
-        final int anyLottoPrice = 1000;
-        //when then
-        assertThatThrownBy(
-                () -> new TotalPurchaseAmount.TotalPurchaseAmountBuilder()
-                        .setTotalAmount(invalidValue)
-                        .setLottoPrice(anyLottoPrice)
-                        .build())
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(expectedExceptionMessage);
-    }
-
     @Test
     @DisplayName("구매 개수를 반환한다.")
     void getPurchaseCount_Test() {
@@ -52,5 +35,53 @@ class TotalPurchaseAmountTest {
         final double actual = totalPurchaseAmount.getProfitRate(totalProfit);
         //then
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("로또 가격을 지정하지 않을 시, 1000의 배수가 아닌 값으로 객체 생성할 경우 예외를 발생시킨다.")
+    @ValueSource(strings = {"abc", "1004", "-1000", "12.334"})
+    void create_exceptionByInvalidPurchaseAmountValue_defaultPrice_Test(final String invalidValue) {
+        //given
+        final String expectedExceptionMessage = "구매 금액은 로또 가격의 양의 배수여야 합니다.";
+        final int anyLottoPrice = 1000;
+        //when then
+        assertThatThrownBy(
+                () -> new TotalPurchaseAmount.TotalPurchaseAmountBuilder()
+                        .setLottoPrice(anyLottoPrice)
+                        .setTotalAmount(invalidValue)
+                        .build())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(expectedExceptionMessage);
+    }
+
+    @Test
+    @DisplayName("로또 가격을 지정할 경우, 총 구매 금액이 로또 가격의 배수가 아닐 경우 예외를 발생시킨다.")
+    void create_exceptionByInvalidPurchaseAmountValue_decidedPrice_Test() {
+        //given
+        final String expectedExceptionMessage = "구매 금액은 로또 가격의 양의 배수여야 합니다.";
+        final String invalidValue = "3000";
+        final int lottoPrice = 2000;
+        //when then
+        assertThatThrownBy(
+                () -> new TotalPurchaseAmount.TotalPurchaseAmountBuilder()
+                        .setLottoPrice(lottoPrice)
+                        .setTotalAmount(invalidValue)
+                        .build())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(expectedExceptionMessage);
+    }
+
+    @Test
+    @DisplayName("구매 금액을 지정하기 전에 수동 구매 개수를 지정하면 예외를 발생시킨다.")
+    void setManualPurchaseAmount_exceptionByNotDecidedTotalPurchaseAmount_Test() {
+        final String anyManualPurchaseCount = "3";
+        final String expectedExceptionMessage = "구매 금액을 먼저 지정해야 수동 구매 로또 수를 입력할 수 있습니다.";
+        //when then
+        assertThatThrownBy(
+                () -> new TotalPurchaseAmount.TotalPurchaseAmountBuilder()
+                        .setManualPurchaseAmount(anyManualPurchaseCount)
+                        .build())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(expectedExceptionMessage);
     }
 }

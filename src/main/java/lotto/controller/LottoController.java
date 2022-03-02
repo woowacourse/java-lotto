@@ -7,7 +7,6 @@ import lotto.domain.lottonumber.Lottos;
 import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.lottonumber.vo.LottoNumber;
 import lotto.domain.matchkind.LottoMatchKind;
-import lotto.domain.purchaseamount.ManualPurchaseCount;
 import lotto.domain.purchaseamount.TotalPurchaseAmount;
 import lotto.domain.winningresult.WinningResult;
 import lotto.dto.InputLottoDto;
@@ -32,33 +31,33 @@ public class LottoController {
     }
 
     private LottoMachine initializeLottoService(final int lottoPrice) {
-        final TotalPurchaseAmount totalPurchaseAmount = inputTotalPurchaseAmount(lottoPrice);
-        final int manualPurchaseAmount = inputManualPurchaseAmount(totalPurchaseAmount);
-        final List<Lotto> manualLottos = inputManualLottos(manualPurchaseAmount);
+        final TotalPurchaseAmount.TotalPurchaseAmountBuilder totalPurchaseAmountBuilder =
+                inputTotalPurchaseAmount(lottoPrice);
+        final TotalPurchaseAmount totalPurchaseAmount = inputManualPurchaseAmount(totalPurchaseAmountBuilder).build();
+        final List<Lotto> manualLottos = inputManualLottos(totalPurchaseAmount.getCountOfManualLottoNumber());
         return new LottoMachine(new LottoRandomGenerator(), totalPurchaseAmount, manualLottos);
     }
 
-    private TotalPurchaseAmount inputTotalPurchaseAmount(final int lottoPrice) {
+    private TotalPurchaseAmount.TotalPurchaseAmountBuilder inputTotalPurchaseAmount(final int lottoPrice) {
         try {
             final String purchaseAmountInput = inputView.inputPurchaseAmount();
             return new TotalPurchaseAmount.TotalPurchaseAmountBuilder()
-                    .setTotalAmount(purchaseAmountInput)
                     .setLottoPrice(lottoPrice)
-                    .build();
+                    .setTotalAmount(purchaseAmountInput);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
             return inputTotalPurchaseAmount(lottoPrice);
         }
     }
 
-    private int inputManualPurchaseAmount(final TotalPurchaseAmount totalPurchaseAmount) {
+    private TotalPurchaseAmount.TotalPurchaseAmountBuilder inputManualPurchaseAmount(
+            final TotalPurchaseAmount.TotalPurchaseAmountBuilder totalPurchaseAmountBuilder) {
         try {
             final String manualPurchaseLottoAmount = inputView.inputManualPurchaseAmount();
-            final ManualPurchaseCount manualPurchaseCount = new ManualPurchaseCount(manualPurchaseLottoAmount, totalPurchaseAmount);
-            return manualPurchaseCount.getValue();
+            return totalPurchaseAmountBuilder.setManualPurchaseAmount(manualPurchaseLottoAmount);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
-            return inputManualPurchaseAmount(totalPurchaseAmount);
+            return inputManualPurchaseAmount(totalPurchaseAmountBuilder);
         }
     }
 
