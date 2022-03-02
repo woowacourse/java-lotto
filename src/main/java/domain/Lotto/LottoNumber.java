@@ -2,19 +2,17 @@ package domain.Lotto;
 
 import utils.ExceptionMessage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber {
 
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
-    private static final List<LottoNumber> CACHE = new ArrayList<>();
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
     static {
-        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
-            CACHE.add(new LottoNumber(i));
+        for (int number = MINIMUM_LOTTO_NUMBER; number <= MAXIMUM_LOTTO_NUMBER; number++) {
+            CACHE.put(number, new LottoNumber(number));
         }
     }
 
@@ -32,7 +30,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber valueOf(int number) {
-        LottoNumber lottoNumber = CACHE.get(number - 1);
+        LottoNumber lottoNumber = CACHE.get(number);
 
         if (lottoNumber == null) {
             lottoNumber = new LottoNumber(number);
@@ -41,7 +39,7 @@ public class LottoNumber {
     }
 
     public static List<LottoNumber> values() {
-        return CACHE;
+        return new ArrayList<>(CACHE.values());
     }
 
     public int getNumber() {
