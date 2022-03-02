@@ -40,8 +40,8 @@ public class OutputView {
                 .forEach(this::printMessage);
     }
 
-    private String makeTicketFormat(final TicketDto ticketDtos) {
-        final List<String> ticketBalls = ticketDtos.getBallNumbers()
+    private String makeTicketFormat(final TicketDto ticketDto) {
+        final List<String> ticketBalls = ticketDto.getBallNumbers()
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.toUnmodifiableList());
@@ -67,7 +67,8 @@ public class OutputView {
         if (rankCounts.containsKey(rank)) {
             return rankCounts.get(rank);
         }
-        return 0;
+        final long defaultRankCount = 0;
+        return defaultRankCount;
     }
 
     private void printAnalysisRankCount(final Rank rank, final long rankCount) {
