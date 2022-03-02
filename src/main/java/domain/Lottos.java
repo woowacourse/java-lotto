@@ -1,7 +1,5 @@
 package domain;
 
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,16 +12,12 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int lottoAmount) {
-        this.lottos = generateLottos(lottoAmount);
+    public Lottos(LottoNumberGenerator lottoNumberGenerator, int lottoAmount) {
+        this.lottos = generateLottos(lottoNumberGenerator, lottoAmount);
     }
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
-    }
-
-    public static Lottos buyLottos(int lottoAmount) {
-        return new Lottos(lottoAmount);
+    public static Lottos buyLottos(LottoNumberGenerator lottoNumberGenerator, int lottoAmount) {
+        return new Lottos(lottoNumberGenerator, lottoAmount);
     }
 
     public int numberOfLottery() {
@@ -48,10 +42,10 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    private List<Lotto> generateLottos(int lottoAmount) {
+    private List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int lottoAmount) {
         return IntStream.range(START_INDEX, lottoAmount)
                 .boxed()
-                .map(i -> Lotto.generateLotto())
+                .map(i -> Lotto.generateLotto(lottoNumberGenerator))
                 .collect(Collectors.toList());
     }
 }

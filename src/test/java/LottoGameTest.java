@@ -1,17 +1,15 @@
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import domain.Lotto;
+import domain.IntendedLottoNumberGenerator;
 import domain.LottoGame;
-import domain.LottoNumber;
 import domain.Money;
+import domain.RandomLottoNumberGenerator;
 import domain.Rewards;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,26 +17,23 @@ import org.junit.jupiter.api.Test;
 public class LottoGameTest {
 
     private LottoGame lottoGame;
+    private IntendedLottoNumberGenerator lottoNumberGenerator;
 
     @BeforeEach
     void init() {
-        Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet()));
-        Lotto lotto2 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet()));
-        Lotto lotto3 = new Lotto(Stream.of(11, 12, 13, 14, 15, 16)
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet()));
+        lottoNumberGenerator = new IntendedLottoNumberGenerator();
+        lottoNumberGenerator.init();
+        lottoNumberGenerator.addLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoNumberGenerator.addLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoNumberGenerator.addLottoNumbers(Arrays.asList(11, 12, 13, 14, 15, 16));
 
-        lottoGame = new LottoGame(Arrays.asList(lotto1, lotto2, lotto3));
+        lottoGame = new LottoGame(lottoNumberGenerator, new Money(3000));
     }
 
     @Test
     @DisplayName("입력받은 금액 로또로 바꿔주는 기능 테스트")
     void buyLottoTest() {
-        LottoGame lottoGame = LottoGame.startLottoGame(new Money(14000));
+        LottoGame lottoGame = LottoGame.startLottoGame(new RandomLottoNumberGenerator(), new Money(14000));
         assertThat(lottoGame.getLottos().numberOfLottery()).isEqualTo(14);
     }
 

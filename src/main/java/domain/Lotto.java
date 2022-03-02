@@ -5,24 +5,18 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import util.Validator;
 
 public class Lotto {
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 46;
-    private static final int MIN_RANGE = 0;
-    private static final int MAX_RANGE = 6;
-
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-        this.lottoNumbers = generateNumber();
+    public Lotto(LottoNumberGenerator lottoNumberGenerator) {
+        this.lottoNumbers = generateNumber(lottoNumberGenerator);
     }
 
-    public static Lotto generateLotto() {
-        return new Lotto();
+    public static Lotto generateLotto(LottoNumberGenerator lottoNumberGenerator) {
+        return new Lotto(lottoNumberGenerator);
     }
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
@@ -34,10 +28,8 @@ public class Lotto {
         return Collections.unmodifiableSet(this.lottoNumbers);
     }
 
-    public Set<LottoNumber> generateNumber() {
-        List<Integer> lottoNumberCandidates = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .boxed().collect(Collectors.toList());
-        List<Integer> pickedLottoNumbers = pickLottoNumbersFromCandidates(lottoNumberCandidates);
+    public Set<LottoNumber> generateNumber(LottoNumberGenerator lottoNumberGenerator) {
+        List<Integer> pickedLottoNumbers = lottoNumberGenerator.generateLottoNumbers();
         return sortAndConvertToLottoNumberSet(pickedLottoNumbers);
     }
 
@@ -54,11 +46,6 @@ public class Lotto {
     public boolean isBonusNumberContain(LottoNumber bonusNumber) {
         Validator.checkArgumentIsNull(bonusNumber);
         return getNumbers().contains(bonusNumber.getNumber());
-    }
-
-    private List<Integer> pickLottoNumbersFromCandidates(List<Integer> cadidates) {
-        Collections.shuffle(cadidates);
-        return cadidates.subList(MIN_RANGE, MAX_RANGE);
     }
 
     private Set<LottoNumber> sortAndConvertToLottoNumberSet(List<Integer> lottoNumbers) {

@@ -1,5 +1,6 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.IntendedLottoNumberGenerator;
 import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
@@ -13,17 +14,15 @@ import org.junit.jupiter.api.Test;
 public class LottosTest {
 
     private Lottos lottos;
+    private IntendedLottoNumberGenerator lottoNumberGenerator;
 
     @BeforeEach
     void init() {
-        Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet()));
-        Lotto lotto2 = new Lotto(Stream.of(1, 2, 3, 7, 8, 9)
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet()));
-
-        lottos = new Lottos(Arrays.asList(lotto1, lotto2));
+        lottoNumberGenerator = new IntendedLottoNumberGenerator();
+        lottoNumberGenerator.init();
+        lottoNumberGenerator.addLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoNumberGenerator.addLottoNumbers(Arrays.asList(1, 2, 3, 7, 8, 9));
+        lottos = new Lottos(lottoNumberGenerator, 2);
     }
 
     @Test

@@ -26,21 +26,17 @@ public class LottoGame {
     private LottoNumber bonusNumber;
     private final Lottos lottos;
 
-    public LottoGame(Money money) {
-        lottos = buyLotto(money);
+    public LottoGame(LottoNumberGenerator lottoNumberGenerator, Money money) {
+        lottos = buyLotto(lottoNumberGenerator, money);
     }
 
-    public LottoGame(List<Lotto> lottos) {
-        this.lottos = new Lottos(lottos);
+    public static LottoGame startLottoGame(LottoNumberGenerator lottoNumberGenerator, Money money) {
+        return new LottoGame(lottoNumberGenerator, money);
     }
 
-    public static LottoGame startLottoGame(Money money) {
-        return new LottoGame(money);
-    }
-
-    private Lottos buyLotto(Money money) {
+    private Lottos buyLotto(LottoNumberGenerator lottoNumberGenerator, Money money) {
         int lottoAmount = money.money() / LOTTO_PRICE;
-        return Lottos.buyLottos(lottoAmount);
+        return Lottos.buyLottos(lottoNumberGenerator, lottoAmount);
     }
 
     public void enterWinningLottoNumbersAndBonusNumber(List<Integer> notVerifiedWinningLottoNumbers

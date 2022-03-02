@@ -1,5 +1,6 @@
 import domain.LottoGame;
 import domain.Money;
+import domain.RandomLottoNumberGenerator;
 import view.InputView;
 import view.OutputView;
 
@@ -7,7 +8,7 @@ public class Application {
 
     public static void main(String[] args) {
         Money money = new Money(InputView.askMoneyInput());
-        LottoGame lottoGame = LottoGame.startLottoGame(money);
+        LottoGame lottoGame = LottoGame.startLottoGame(new RandomLottoNumberGenerator(), money);
 
         OutputView.printLottosInformations(lottoGame.getLottos());
 
