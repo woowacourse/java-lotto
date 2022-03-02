@@ -18,10 +18,6 @@ public enum Delimiter {
         return targetString.split(this.unit, limitForSplitAllElement);
     }
 
-    public String appendBehind(final String targetString) {
-        return targetString + this.unit;
-    }
-
     public String joinWith(final List<String> strings) {
         return String.join(this.unit + SPACE.unit, strings);
     }
