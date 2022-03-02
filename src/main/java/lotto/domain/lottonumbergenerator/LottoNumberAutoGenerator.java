@@ -1,5 +1,7 @@
 package lotto.domain.lottonumbergenerator;
 
+import static lotto.domain.LottoTicket.LOTTO_NUMBER_SIZE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,11 +21,12 @@ public class LottoNumberAutoGenerator implements LottoNumberGenerator {
     }
 
     @Override
-    public List<LottoNumber> getLottoNumbers(int count) {
-        shuffleNumbers();
-        List<LottoNumber> numbers = lottoNumbers.subList(0, count);
-        Collections.sort(numbers);
-        return new ArrayList<>(numbers);
+    public List<List<LottoNumber>> getLottoNumbersBy(int count) {
+        List<List<LottoNumber>> allLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            allLottoNumbers.add(getRandomLottoNumbers());
+        }
+        return allLottoNumbers;
     }
 
     private List<LottoNumber> createLottoNumbers() {
@@ -32,7 +35,10 @@ public class LottoNumberAutoGenerator implements LottoNumberGenerator {
                 .collect(Collectors.toList());
     }
 
-    private void shuffleNumbers() {
+    private List<LottoNumber> getRandomLottoNumbers() {
         Collections.shuffle(lottoNumbers);
+        List<LottoNumber> numbers = lottoNumbers.subList(0, LOTTO_NUMBER_SIZE);
+        Collections.sort(numbers);
+        return new ArrayList<>(numbers);
     }
 }

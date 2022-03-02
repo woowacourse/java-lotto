@@ -11,6 +11,6 @@ class LottoNumberAutoGeneratorTest {
     @Test
     void 로또번호를_6개_생성하는_기능() {
         LottoNumberAutoGenerator lottoNumberAutoGenerator = new LottoNumberAutoGenerator();
-        assertThat(lottoNumberAutoGenerator.getLottoNumbers(6).size()).isEqualTo(6);
+        assertThat(lottoNumberAutoGenerator.getLottoNumbersBy(6).size()).isEqualTo(6);
     }
 }

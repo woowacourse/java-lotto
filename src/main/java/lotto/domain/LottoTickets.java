@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import static lotto.domain.LottoTicket.LOTTO_NUMBER_SIZE;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.lottonumbergenerator.LottoNumberGenerator;
 
 public class LottoTickets {
@@ -33,11 +32,9 @@ public class LottoTickets {
     }
 
     private List<LottoTicket> createLottoTickets(LottoNumberGenerator lottoNumberGenerator, int lottoCount) {
-        ArrayList<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.add(new LottoTicket(lottoNumberGenerator.getLottoNumbers(LOTTO_NUMBER_SIZE)));
-        }
-        return lottoTickets;
+        return lottoNumberGenerator.getLottoNumbersBy(lottoCount).stream()
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
     }
 
     public List<LottoTicket> getLottoTickets() {

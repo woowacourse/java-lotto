@@ -5,5 +5,5 @@ import lotto.domain.LottoNumber;
 
 public interface LottoNumberGenerator {
 
-    List<LottoNumber> getLottoNumbers(int count);
+    List<List<LottoNumber>> getLottoNumbersBy(int count);
 }

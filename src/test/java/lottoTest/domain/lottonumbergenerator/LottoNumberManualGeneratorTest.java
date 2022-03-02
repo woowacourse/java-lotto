@@ -20,7 +20,7 @@ class LottoNumberManualGeneratorTest {
         List<Integer> inputNumbers = List.of(1, 2, 3, 4, 5, 6);
         numbers.add(inputNumbers);
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberManualGenerator(numbers);
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator.getLottoNumbers(6);
+        List<LottoNumber> lottoNumbers = lottoNumberGenerator.getLottoNumbersBy(1).get(0);
         assertThat(lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList())
@@ -28,12 +28,12 @@ class LottoNumberManualGeneratorTest {
     }
 
     @Test
-    void 더이상_생성할_수동_로또가_없는_경우_테스트() {
+    void 생성할_로또_개수와_로또_숫자_개수가_다른_경우_테스트() {
         List<List<Integer>> numbers = new ArrayList<>();
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberManualGenerator(numbers);
-        assertThatThrownBy(() -> lottoNumberGenerator.getLottoNumbers(6))
+        assertThatThrownBy(() -> lottoNumberGenerator.getLottoNumbersBy(1))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("생성할 수동 로또 번호가 없습니다.");
+                .hasMessageContaining("생성할 로또 개수와 로또 숫자 개수가 다릅니다.");
     }
 
     @Test
@@ -42,7 +42,7 @@ class LottoNumberManualGeneratorTest {
         List<Integer> inputNumbers = List.of(6, 4, 2, 1, 5, 3);
         numbers.add(inputNumbers);
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberManualGenerator(numbers);
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator.getLottoNumbers(6);
+        List<LottoNumber> lottoNumbers = lottoNumberGenerator.getLottoNumbersBy(1).get(0);
         assertThat(lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList())
