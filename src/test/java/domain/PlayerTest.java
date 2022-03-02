@@ -35,7 +35,7 @@ class PlayerTest {
     }
 
     @Test
-    @DisplayName("로또를 최대한으로 구매한다.")
+    @DisplayName("자동 로또를 잔액을 통해 살 수 있는 최대한으로 구매한다.")
     void getNumberOfPurchases() {
         player.purchaseAutoLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
         List<Lotto> actual = player.getLottos();
@@ -46,6 +46,8 @@ class PlayerTest {
     @Test
     @DisplayName("Player의 모든 로또에 대해 당첨 번호와 비교한다.")
     void judgeAll() {
+        player.purchaseManualLotto(new AutoLottoGenerator(), Arrays.asList(Arrays.asList(1,2,3,4,5,6),Arrays.asList(1,2,3,4,5,7)));
+        player.purchaseAutoLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
         List<Integer> lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(i);
