@@ -1,6 +1,7 @@
 package lotterymachine.utils;
 
 import lotterymachine.domain.LotteryNumber;
+import lotterymachine.domain.LotteryTicket;
 import lotterymachine.domain.LotteryTickets;
 import lotterymachine.domain.WinningLottery;
 import org.junit.jupiter.api.DisplayName;
@@ -34,11 +35,12 @@ public class LotteryCalculatorTest {
     @Test
     @DisplayName("로또 결과를 입력 받아, 수익을 계산하여 반환한다.")
     void totalProfit() {
-        LotteryTickets lotteryTickets = new LotteryTickets(1);
         List<LotteryNumber> input = IntStream.range(1, 7)
                 .mapToObj(LotteryNumber::new)
                 .collect(Collectors.toList());
-        lotteryTickets.add(input);
+        List<LotteryTicket> tickets = List.of(new LotteryTicket(input));
+        LotteryTickets lotteryTickets = new LotteryTickets(tickets);
+
 
         List<LotteryNumber> input2 = IntStream.range(4, 10)
                 .mapToObj(LotteryNumber::new)

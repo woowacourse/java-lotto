@@ -1,13 +1,13 @@
 package lotterymachine;
 
-import lotterymachine.domain.LotteryTickets;
-import lotterymachine.domain.WinningLottery;
-import lotterymachine.domain.WinningLotteryRank;
+import lotterymachine.domain.*;
 import lotterymachine.utils.LotteryCalculator;
 import lotterymachine.utils.LotteryNumbersGenerator;
 import lotterymachine.view.InputView;
 import lotterymachine.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static lotterymachine.utils.LotteryCalculator.calculateProfitRate;
@@ -28,11 +28,11 @@ public class LotteryMachine {
     }
 
     private static LotteryTickets createLotteryTickets(int purchaseCount) {
-        LotteryTickets lotteryTickets = new LotteryTickets(purchaseCount);
+        List<LotteryTicket> lotteryTickets = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
-            lotteryTickets.add(LotteryNumbersGenerator.generate());
+            lotteryTickets.add(new LotteryTicket(LotteryNumbersGenerator.generate()));
         }
-        return lotteryTickets;
+        return new LotteryTickets(lotteryTickets);
     }
 
     private static double getTotalProfitRate(LotteryPurchase lotteryPurchase, Map<WinningLotteryRank, Integer> lotteryTicketResult) {

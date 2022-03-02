@@ -4,18 +4,9 @@ import java.util.*;
 
 public class LotteryTickets {
     private final List<LotteryTicket> tickets;
-    private final TicketCount ticketCount;
 
-    public LotteryTickets(int count) {
-        tickets = new ArrayList<>();
-        ticketCount = new TicketCount(count);
-    }
-
-    public void add(List<LotteryNumber> numbers) {
-        if (ticketCount.isExist()) {
-            tickets.add(new LotteryTicket(numbers));
-            ticketCount.subtract();
-        }
+    public LotteryTickets(List<LotteryTicket> tickets) {
+        this.tickets = tickets;
     }
 
     public List<LotteryTicket> getLotteryTickets() {
