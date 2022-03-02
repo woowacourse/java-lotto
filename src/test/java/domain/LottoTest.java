@@ -4,7 +4,7 @@ import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.LottoGenerator;
-import domain.LottoGenerator.WinningLottoGenerator;
+import domain.LottoGenerator.CustomLottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lottoGenerator = new WinningLottoGenerator();
+        lottoGenerator = new CustomLottoGenerator();
 
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {

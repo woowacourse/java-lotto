@@ -6,7 +6,7 @@ import domain.Lotto.LottoNumber;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningLottoGenerator implements LottoGenerator {
+public class CustomLottoGenerator implements LottoGenerator {
 
     @Override
     public Lotto generateLotto(List<Integer> numbers) {

@@ -2,11 +2,8 @@ package domain;
 
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumberFactory;
-import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
-import domain.LottoGenerator.LottoGenerator;
-import domain.LottoGenerator.WinningLottoGenerator;
 import domain.player.Money;
 import domain.player.Player;
 import org.junit.jupiter.api.BeforeEach;
