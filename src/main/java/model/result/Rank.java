@@ -10,12 +10,18 @@ public enum Rank {
 	BONUS(5, 30000000),
 	SIX(6, 2000000000);
 
+	private static final int REWARD_NUMBER = 3;
+
 	private final int matchNumber;
 	private final int value;
 
 	Rank(int matchNumber, int value) {
 		this.matchNumber = matchNumber;
 		this.value = value;
+	}
+
+	public boolean checkNumberToReward() {
+		return this.matchNumber >= REWARD_NUMBER;
 	}
 
 	public int getMatchNumber() {
