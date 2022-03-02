@@ -13,7 +13,7 @@ import view.InputView;
 import view.OutputView;
 
 public class ManualLottoController {
-    
+
     public void run() {
         Amount amount = createAmount();
         int manualTicketsCount = createManualTicketCount(amount);
@@ -86,7 +86,7 @@ public class ManualLottoController {
 
     private LottoNumber createBonusNumber() {
         try {
-            return new LottoNumber(InputView.requestBonusNumber());
+            return LottoNumber.valueOf(InputView.requestBonusNumber());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return createBonusNumber();

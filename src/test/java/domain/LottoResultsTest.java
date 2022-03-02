@@ -58,58 +58,58 @@ public class LottoResultsTest {
     }
 
     private WinningNumbers getWinningNumbers() {
-        Ticket winTicket = new Ticket(Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(16)));
-        LottoNumber bonusNumber = new LottoNumber(6);
+        Ticket winTicket = new Ticket(Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(16)));
+        LottoNumber bonusNumber = LottoNumber.valueOf(6);
         return new WinningNumbers(winTicket, bonusNumber);
     }
 
     private static Ticket getFifthTicket() {
-        return new Ticket(Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(14),
-                new LottoNumber(15),
-                new LottoNumber(43)));
+        return new Ticket(Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(14),
+                LottoNumber.valueOf(15),
+                LottoNumber.valueOf(43)));
     }
 
     private static Ticket getOtherTicket() {
-        return new Ticket(Set.of(new LottoNumber(11),
-                new LottoNumber(12),
-                new LottoNumber(13),
-                new LottoNumber(14),
-                new LottoNumber(15),
-                new LottoNumber(43)));
+        return new Ticket(Set.of(LottoNumber.valueOf(11),
+                LottoNumber.valueOf(12),
+                LottoNumber.valueOf(13),
+                LottoNumber.valueOf(14),
+                LottoNumber.valueOf(15),
+                LottoNumber.valueOf(43)));
     }
 
     private static Ticket getThirdTicket() {
-        return new Ticket(Set.of(new LottoNumber(40),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(16)));
+        return new Ticket(Set.of(LottoNumber.valueOf(40),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(16)));
     }
 
     private static Ticket getSecondTicket() {
-        return new Ticket(Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
+        return new Ticket(Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)));
     }
 
     private static Ticket getFirstTicket() {
-        return new Ticket(Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(16)));
+        return new Ticket(Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(16)));
     }
 }

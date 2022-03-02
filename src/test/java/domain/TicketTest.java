@@ -17,39 +17,39 @@ public class TicketTest {
 
     @Test
     void 티켓_전략_객체_생성자_확인() {
-        Ticket ticket = new Ticket(() -> Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
-        assertThat(ticket.getLottoNumbers()).isEqualTo(Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6))
+        Ticket ticket = new Ticket(() -> Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)));
+        assertThat(ticket.getLottoNumbers()).isEqualTo(Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6))
         );
     }
 
     @Test
     void 티켓_번호_개수_정상() {
-        assertThatCode(() -> new Ticket(Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6))))
+        assertThatCode(() -> new Ticket(Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6))))
                 .doesNotThrowAnyException();
     }
 
     @Test
     void 번호_개수_5개_티켓_생성_실패() {
-        assertThatThrownBy(() -> new Ticket(Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5))))
+        assertThatThrownBy(() -> new Ticket(Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5))))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

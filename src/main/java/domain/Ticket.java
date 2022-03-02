@@ -43,7 +43,7 @@ public class Ticket {
 
     private static List<LottoNumber> toLottoNumber(List<Integer> winNumbers) {
         return winNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 
