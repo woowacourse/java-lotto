@@ -15,7 +15,7 @@ public enum Rank {
 
     private final int matchCount;
     private final Reward reward;
-    private Function<Integer, Boolean> matchCalculator;
+    private final Function<Integer, Boolean> matchCalculator;
 
     Rank(int matchCount, Reward reward, Function<Integer, Boolean> matchCalculator) {
         this.matchCount = matchCount;
