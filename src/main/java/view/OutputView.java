@@ -40,7 +40,7 @@ public class OutputView {
 		stringBuilder.append(String.join(BALL_DELIMITER, ticket.makeBallsToStrings()))
 			.append(TICKET_END_SIGN);
 
-		System.out.println(LINE_DELIMITER + stringBuilder.toString());
+		System.out.println(stringBuilder.toString());
 	}
 
 	public static void printStatistics(WinningAnalyzeDto winningAnalyzeDto) {
