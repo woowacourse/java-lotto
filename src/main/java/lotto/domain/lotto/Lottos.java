@@ -10,10 +10,9 @@ public class Lottos {
 
     public Lottos(final int count) {
         checkCount(count);
-        LottoNumber numbers = new LottoNumber();
 
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(numbers.createLottoNumbers()));
+            lottos.add(new Lotto());
         }
     }
 

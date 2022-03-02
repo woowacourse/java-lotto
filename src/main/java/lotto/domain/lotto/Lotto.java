@@ -10,6 +10,14 @@ public class Lotto {
     private static final int LOTTO_SIZE = 6;
     private final List<Integer> lottoNumbers;
 
+    public Lotto(){
+        List<Integer> numbers = LottoRange.getRangeLottoNumbers();
+        Collections.shuffle(numbers);
+        checkNumbers(numbers.subList(0, LOTTO_SIZE));
+        lottoNumbers = numbers.subList(0, LOTTO_SIZE);
+        Collections.sort(lottoNumbers);
+    }
+
     public Lotto(final List<Integer> lottoNumbers) {
         checkNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
