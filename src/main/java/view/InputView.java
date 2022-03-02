@@ -73,7 +73,7 @@ public class InputView {
 	}
 
 	private static void validateEmpty(String input) {
-		if (input.isEmpty()) {
+		if (input == null || input.isEmpty()) {
 			throw new IllegalArgumentException(MUST_NOT_EMPTY);
 		}
 	}
