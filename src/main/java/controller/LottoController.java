@@ -43,6 +43,7 @@ public class LottoController {
         final int manualCount = getManualCount();
         if (manualCount > MANUAL_LOTTO_IS_NONE_NUMBER) {
             lottoService.issueLotto(getManualLottoWith(manualCount));
+            outputView.printLotto(lottoService.getIssuedLotto());
             return;
         }
         lottoService.issueLotto(new ArrayList<>());
