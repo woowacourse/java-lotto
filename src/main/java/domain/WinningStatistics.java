@@ -34,9 +34,9 @@ public class WinningStatistics {
     }
 
     private int calculateWinningAmount() {
-        return statistics.entrySet().stream()
-            .map(entry -> entry.getKey().getPrice() * entry.getValue())
-            .reduce(DEFAULT_VALUE, Integer::sum);
+        return Arrays.stream(LottoReward.values())
+            .mapToInt(reward -> reward.getPrice() * statistics.get(reward))
+            .sum();
     }
 
     private int calculatePurchasedLottoAmount() {
