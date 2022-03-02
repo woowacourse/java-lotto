@@ -1,5 +1,9 @@
-package domain;
+package service;
 
+import domain.Lotto;
+import domain.LottoFactory;
+import domain.LottoNumber;
+import domain.Money;
 import dto.LottoDto;
 import dto.ResultDto;
 import java.util.List;

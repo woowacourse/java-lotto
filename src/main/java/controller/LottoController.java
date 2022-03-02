@@ -1,9 +1,9 @@
 package controller;
 
-import domain.LottoService;
 import dto.ResultDto;
 import java.util.ArrayList;
 import java.util.List;
+import service.LottoService;
 import view.InputView;
 import view.OutputView;
 
