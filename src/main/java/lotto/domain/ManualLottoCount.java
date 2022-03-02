@@ -1,10 +1,10 @@
 package lotto.domain;
 
 public class ManualLottoCount {
-    private static final String LOTTO_COUNT_ERROR = "구매 최대 개수는 %s개 입니다.";
+    private static final String LOTTO_COUNT_ERROR = "구매 개수는 최소 0개, 최대 %s개 입니다.";
     private static final int MIN_NATURAL_NUMBER = 0;
 
-    private int value;
+    private final int value;
 
     public ManualLottoCount(int value, int max) {
         validation(value, max);
