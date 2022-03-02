@@ -37,7 +37,7 @@ public class ResultTest {
             @Test
             @DisplayName("당첨된 결과를 저장한다.")
             void it_create_ok() {
-                assertThat(result.getCount(LottoRanking.Three)).isEqualTo(1);
+                assertThat(result.getCount(LottoRanking.FIFTH)).isEqualTo(1);
             }
         }
     }

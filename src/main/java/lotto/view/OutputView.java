@@ -40,7 +40,7 @@ public class OutputView {
                 continue;
             }
             String bonusBallMessage = " ";
-            if (value.isContainBonus()) {
+            if (value.isContainsBonus()) {
                 bonusBallMessage = ", 보너스 볼 일치";
             }
             System.out.printf("%d개 일치%s(%d원) - %d개%n", value.getCount(), bonusBallMessage, value.getPrice(),

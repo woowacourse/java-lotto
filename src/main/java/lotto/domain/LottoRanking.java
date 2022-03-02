@@ -5,30 +5,41 @@ import java.util.Arrays;
 public enum LottoRanking {
 
     Fail(0, false, 0),
-    Three(3, false, 5_000),
-    Four(4, false, 50_000),
-    Five(5, false, 1_500_000),
-    FiveAndBonus(5, true, 30_000_000),
-    All(6, false, 2_000_000_000);
+    FIFTH(3, false, 5_000),
+    FOURTH(4, false, 50_000),
+    THIRD(5, false, 1_500_000) {
+        @Override
+        public boolean match(int count, boolean containsBonus) {
+            return super.match(count, containsBonus) && !containsBonus;
+        }
+    },
+    SECOND(5, true, 30_000_000) {
+        @Override
+        public boolean match(int count, boolean containsBonus) {
+            return super.match(count, containsBonus) && containsBonus;
+        }
+    },
+    FIRST(6, false, 2_000_000_000);
 
     private final int count;
-    private final boolean containBonus;
+    private final boolean containsBonus;
     private final int price;
 
-    LottoRanking(int count, boolean containBonus, int price) {
+    LottoRanking(int count, boolean containsBonus, int price) {
         this.count = count;
-        this.containBonus = containBonus;
+        this.containsBonus = containsBonus;
         this.price = price;
     }
 
-    public static LottoRanking of(int count, boolean containBonus) {
-        if (count == 5 && containBonus) {
-            return LottoRanking.FiveAndBonus;
-        }
+    public static LottoRanking of(int count, boolean containsBonus) {
         return Arrays.stream(values())
-            .filter(it -> it.count == count)
+            .filter(ranking -> ranking.match(count, containsBonus))
             .findAny()
             .orElse(LottoRanking.Fail);
+    }
+
+    public boolean match(int count, boolean containsBonus) {
+        return this.count == count;
     }
 
     public long getPrice() {
@@ -43,7 +54,7 @@ public enum LottoRanking {
         return count;
     }
 
-    public boolean isContainBonus() {
-        return containBonus;
+    public boolean isContainsBonus() {
+        return containsBonus;
     }
 }

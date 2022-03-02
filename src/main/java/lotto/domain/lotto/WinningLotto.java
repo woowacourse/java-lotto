@@ -14,16 +14,16 @@ public class WinningLotto {
     }
 
     public LottoRanking getLottoRanking(Lotto lotto) {
-        boolean containsBonus = false;
-        int count = (int)lotto.getNumbers()
+        int count = getContainsNumberCount(lotto);
+
+        return LottoRanking.of(count, lotto.contains(bonusNumber));
+    }
+
+    private int getContainsNumberCount(Lotto lotto) {
+        return (int)lotto.getNumbers()
             .stream()
             .filter(number -> winningLotto.contains(number))
             .count();
-        if (count == 5 && lotto.contains(bonusNumber)) {
-            containsBonus = true;
-        }
-
-        return LottoRanking.of(count, containsBonus);
     }
 
     private void validateDuplicateBonusNumber(Lotto winninglotto, Number bonusNumber) {
