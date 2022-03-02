@@ -6,12 +6,12 @@ import java.util.function.Predicate;
 
 public enum LottoRank {
 
-    FIRST(6, BonusBallState.IRRELEVANT, 2_000_000_000),
-    SECOND(5, BonusBallState.SHOULD_EXIST, 30_000_000),
-    THIRD(5, BonusBallState.SHOULD_NOT_EXIST, 1_500_000),
-    FOURTH(4, BonusBallState.IRRELEVANT, 50_000),
-    FIFTH(3, BonusBallState.IRRELEVANT, 5_000),
-    FAILED(0, BonusBallState.IRRELEVANT, 0);
+    FIRST(6, BonusBallState.IRRELEVANT, 2_000_000_000L),
+    SECOND(5, BonusBallState.SHOULD_EXIST, 30_000_000L),
+    THIRD(5, BonusBallState.SHOULD_NOT_EXIST, 1_500_000L),
+    FOURTH(4, BonusBallState.IRRELEVANT, 50_000L),
+    FIFTH(3, BonusBallState.IRRELEVANT, 5_000L),
+    NONE(0, BonusBallState.IRRELEVANT, 0L);
 
     private final int hitCount;
     private final BonusBallState bonusBallState;
@@ -52,7 +52,7 @@ public enum LottoRank {
         return Arrays.stream(values())
                 .filter(classifyRank(hitCount, containsBonusBall))
                 .findFirst()
-                .orElse(FAILED);
+                .orElse(NONE);
     }
 
     private static Predicate<LottoRank> classifyRank(int winningNumberCount, boolean containsBonusBall) {

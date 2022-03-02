@@ -74,7 +74,7 @@ public enum OutputView {
 
     private List<LottoRank> getLottoRanksToPrint() {
         return Arrays.stream(LottoRank.values())
-                .filter((LottoRank lottoRank) -> lottoRank != LottoRank.FAILED)
+                .filter((LottoRank lottoRank) -> lottoRank != LottoRank.NONE)
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }

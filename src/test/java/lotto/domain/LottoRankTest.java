@@ -24,7 +24,7 @@ class LottoRankTest {
     void correctUnder3Numbers(int winningNumberCount) {
         assertThat(
                 LottoRank.getRank(winningNumberCount, false)
-        ).isEqualTo(LottoRank.FAILED);
+        ).isEqualTo(LottoRank.NONE);
     }
 
     @ParameterizedTest

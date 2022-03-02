@@ -49,7 +49,6 @@ public class LottoController {
         WinningNumbers winningNumbers = inputView.commonInputProcess(() -> new WinningNumbers(lottoTicket, bonusBall));
         WinningStats winningStats = new WinningStats(lottoTickets, winningNumbers);
         winningStatsRepository.set(winningStats);
-
         outputView.printWinningStats(winningStats, purchaseAmount);
     }
 

@@ -27,19 +27,23 @@ public class WinningStats {
 
     private void fulfillCorrectAnswerNumbers(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
         for (LottoTicket lottoTicket : lottoTickets) {
-            int matchCount = winningNumbers.getMatchCount(lottoTicket);
-            boolean containsBonusBall = winningNumbers.doesMatchBonusBall(lottoTicket);
-            LottoRank lottoRank = LottoRank.getRank(matchCount, containsBonusBall);
+            LottoRank lottoRank = getLottoRank(winningNumbers, lottoTicket);
             plusOneCorrectAnswerNumbers(lottoRank);
         }
     }
 
-    public int getCorrectAnswerNumbers(LottoRank lottoRank) {
-        return lottoRankMap.get(lottoRank);
+    private LottoRank getLottoRank(WinningNumbers winningNumbers, LottoTicket lottoTicket) {
+        int matchCount = winningNumbers.getMatchCount(lottoTicket);
+        boolean containsBonusBall = winningNumbers.doesMatchBonusBall(lottoTicket);
+        return LottoRank.getRank(matchCount, containsBonusBall);
     }
 
     private void plusOneCorrectAnswerNumbers(LottoRank lottoRank) {
         lottoRankMap.put(lottoRank, lottoRankMap.get(lottoRank) + 1);
+    }
+
+    public int getCorrectAnswerNumbers(LottoRank lottoRank) {
+        return lottoRankMap.get(lottoRank);
     }
 
     public long getTotalPrize() {
