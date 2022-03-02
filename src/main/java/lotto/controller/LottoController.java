@@ -5,7 +5,7 @@ import static lotto.view.ResultView.*;
 
 import lotto.model.LottoGame;
 import lotto.model.LottoResult;
-import lotto.model.ShuffleGenerator;
+import lotto.model.numbergenerator.ShuffleGenerator;
 
 public class LottoController {
     public void runGame() {

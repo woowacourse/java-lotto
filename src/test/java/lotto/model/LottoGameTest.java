@@ -9,6 +9,8 @@ import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.model.numbergenerator.LottoNumberGenerator;
+
 class LottoGameTest {
 
     @Test

@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.numbergenerator;
 
 import static java.util.Collections.*;
 import static lotto.model.Lotto.*;

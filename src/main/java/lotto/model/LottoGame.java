@@ -5,6 +5,8 @@ import static lotto.ValidationUtils.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.model.numbergenerator.LottoNumberGenerator;
+
 public class LottoGame {
     private static final String ERROR_DUPLICATION_BONUS_NUMBER = "보너스 볼 번호가 당첨 번호와 중복입니다.";
 

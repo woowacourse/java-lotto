@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_SIZE = 6;
     private static final String ERROR_NOT_MATCH_LOTTO_NUMBER_SIZE = "로또 번호 개수는 6개로 입력해주세요.";
     private static final String ERROR_DUPLICATION_LOTTO_NUMBERS = "로또 번호에 중복이 존재합니다.";
 
