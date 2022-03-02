@@ -9,6 +9,7 @@ import lotto.exception.LottoException;
 public class Lotto {
 
     public static final int LOTTO_SIZE = 6;
+
     private final List<LottoNumber> lotto;
 
     private Lotto(List<LottoNumber> lotto) {
