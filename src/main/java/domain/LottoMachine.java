@@ -21,10 +21,14 @@ public class LottoMachine {
 
     public List<LottoTicket> purchaseLottoTicketsByManual(List<List<Integer>> lottoTicketNumbers) {
         return lottoTicketNumbers.stream()
-            .map(numbers -> numbers.stream()
-                .map(LottoNumber::getInstance)
-                .collect(Collectors.toList()))
+            .map(this::convertToLottoNumbers)
             .map(LottoTicket::new)
+            .collect(Collectors.toList());
+    }
+
+    private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+            .map(LottoNumber::getInstance)
             .collect(Collectors.toList());
     }
 
