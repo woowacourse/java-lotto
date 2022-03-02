@@ -11,12 +11,10 @@ import lotto.view.ResultView;
 public class LottoController {
     public void runGame() {
         LottoMoney lottoMoney = new LottoMoney(InputView.insertMoney());
-        Lottos lottos = LottoGame.buyLottos(lottoMoney, new ShuffleGenerator());
-        ResultView.printGeneratedLottos(lottos.getLottos());
+        LottoGame lottoGame = new LottoGame(lottoMoney, new ShuffleGenerator());
+        ResultView.printGeneratedLottos(lottoGame.getLottos());
 
-        LottoGame lottoGame = new LottoGame(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
-
-        LottoResult lottoResult = lottoGame.generateLottoResult(lottos);
+        LottoResult lottoResult = lottoGame.generateLottoResult(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
         ResultView.printResultStatistics(lottoResult);
         ResultView.printYield(lottoGame.calculateYield(lottoMoney, lottoResult));
     }

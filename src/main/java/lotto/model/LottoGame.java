@@ -8,19 +8,21 @@ import java.util.List;
 public class LottoGame {
     private static final String ERROR_DUPLICATION_BONUS_NUMBER = "보너스 볼 번호가 당첨 번호와 중복입니다.";
 
-    private final Lotto winningNumbers;
-    private final LottoNumber bonusNumber;
+    private final Lottos lottos;
 
-    public LottoGame(List<Integer> integers, int bonusNumber) {
+    public LottoGame(LottoMoney lottoMoney, LottoNumberGenerator lottoNumberGenerator) {
+        this.lottos = buyLottos(lottoMoney, lottoNumberGenerator);
+    }
+
+    private Lottos buyLottos(LottoMoney lottoMoney, LottoNumberGenerator lottoNumberGenerator) {
+        return new Lottos(lottoNumberGenerator, lottoMoney.getLottoSize());
+    }
+
+    public LottoResult generateLottoResult(List<Integer> integers, int bonusNumber) {
         List<Integer> winningNumbers = new ArrayList<>(integers);
         validateEmptyCollection(winningNumbers);
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);
-        this.winningNumbers = new Lotto(winningNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
-    }
-
-    public static Lottos buyLottos(LottoMoney lottoMoney, LottoNumberGenerator lottoNumberGenerator) {
-        return new Lottos(lottoNumberGenerator, lottoMoney.getLottoSize());
+        return new LottoResult(lottos, new Lotto(winningNumbers), new LottoNumber(bonusNumber));
     }
 
     private void validateDuplicateBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
@@ -29,11 +31,11 @@ public class LottoGame {
         }
     }
 
-    public LottoResult generateLottoResult(Lottos lottos) {
-        return new LottoResult(lottos, winningNumbers, bonusNumber);
-    }
-
     public Yield calculateYield(LottoMoney lottoMoney, LottoResult lottoResult) {
         return new Yield(lottoMoney, lottoResult.getTotalWinningMoney());
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos.getLottos();
     }
 }
