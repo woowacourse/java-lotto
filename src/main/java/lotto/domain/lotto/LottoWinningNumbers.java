@@ -13,18 +13,18 @@ public class LottoWinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    private void checkNumbers(Lotto winningLotto, LottoNumber bonusNumber) {
+    private void checkNumbers(final Lotto winningLotto, final LottoNumber bonusNumber) {
         checkNullEmpty(winningLotto, bonusNumber);
         checkDuplicateBonusNumber(winningLotto, bonusNumber);
     }
 
-    private void checkNullEmpty(Lotto winningLotto, LottoNumber bonusNumber) {
+    private void checkNullEmpty(final Lotto winningLotto, final LottoNumber bonusNumber) {
         if (winningLotto == null || bonusNumber == null){
             throw new IllegalArgumentException(InvalidException.ERROR_CREATE_LOTTO);
         }
     }
 
-    private void checkDuplicateBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
+    private void checkDuplicateBonusNumber(final Lotto winningLotto, final LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber.getLottoNumber())){
             throw new IllegalArgumentException(InvalidException.ERROR_DUPLICATE_BONUS_NUMBER);
         }

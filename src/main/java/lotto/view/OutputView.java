@@ -55,7 +55,7 @@ public class OutputView {
         System.out.print(String.format(PRINT_TOTAL_RETURN, profit));
     }
 
-    public static void printErrorMessage(String value) {
+    public static void printErrorMessage(final String value) {
         System.out.println(value);
     }
 

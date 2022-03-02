@@ -6,7 +6,7 @@ public class ManualLottos {
 
     private List<Lotto> lottos = new ArrayList<>();
 
-    public void add(Lotto lotto) {
+    public void add(final Lotto lotto) {
         lottos.add(lotto);
     }
 

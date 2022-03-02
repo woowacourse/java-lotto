@@ -26,9 +26,9 @@ public class LottoController {
 
     public LottoWinningNumbers createLottoWinningNumbers() {
         try {
-            final String numbers = inputLottoWinningNumbers();
-            final Lotto lotto = createLottoByNumbers(numbers);
-            final LottoNumber bonusNumber = new LottoNumber(inputBonusNumber());
+            String numbers = inputLottoWinningNumbers();
+            Lotto lotto = createLottoByNumbers(numbers);
+            LottoNumber bonusNumber = new LottoNumber(inputBonusNumber());
             return new LottoWinningNumbers(lotto, bonusNumber);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());

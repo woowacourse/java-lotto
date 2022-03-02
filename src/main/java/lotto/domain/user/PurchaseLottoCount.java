@@ -16,7 +16,7 @@ public class PurchaseLottoCount {
         checkDivideCount(Integer.parseInt(count), maxCount);
     }
 
-    private void checkValidateInt(String count) {
+    private void checkValidateInt(final String count) {
         try {
             Integer.parseInt(count);
         } catch (NumberFormatException exception) {
@@ -24,7 +24,7 @@ public class PurchaseLottoCount {
         }
     }
 
-    private void checkDivideCount(int count, int maxCount) {
+    private void checkDivideCount(final int count, final int maxCount) {
         if (count <= 0 || count > maxCount){
             throw new IllegalArgumentException(InvalidException.ERROR_WRONG_INPUT_COUNT);
         }

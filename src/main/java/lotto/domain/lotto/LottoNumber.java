@@ -11,17 +11,17 @@ public class LottoNumber {
 
     private final int lottoNumber;
 
-    public LottoNumber(String lottoNumber) {
+    public LottoNumber(final String lottoNumber) {
         checkNumber(lottoNumber);
         this.lottoNumber = Integer.parseInt(lottoNumber);
     }
 
-    private void checkNumber(String lottoNumber) {
+    private void checkNumber(final String lottoNumber) {
         checkCanInteger(lottoNumber);
         checkRangeNumber(Integer.parseInt(lottoNumber));
     }
 
-    private void checkCanInteger(String number) {
+    private void checkCanInteger(final String number) {
         try {
             Integer.parseInt(number);
         } catch (NumberFormatException exception) {
@@ -29,7 +29,7 @@ public class LottoNumber {
         }
     }
 
-    public void checkRangeNumber(int number) {
+    public void checkRangeNumber(final int number) {
         if (!(number >= LOTTO_MIN_RANGE && number <= LOTTO_MAX_RANGE)) {
             throw new IllegalArgumentException(InvalidException.ERROR_INTEGER_RANGE);
         }
