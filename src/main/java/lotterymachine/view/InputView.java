@@ -1,7 +1,9 @@
 package lotterymachine.view;
 
 
+import lotterymachine.LotteryPurchase;
 import lotterymachine.domain.LotteryNumber;
+import lotterymachine.domain.LotteryTicket;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +23,11 @@ public class InputView {
             System.out.println(numberFormatException.getMessage());
             return getAmount();
         }
+    }
+
+    public static int getPassivityPurchaseCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return toInt(SCANNER.nextLine());
     }
 
     public static List<LotteryNumber> getWinningLotteryNumbers() {
@@ -51,5 +58,13 @@ public class InputView {
         } catch (NumberFormatException numberFormatException) {
             throw new NumberFormatException(IS_NOT_NUMBER);
         }
+    }
+
+    public static LotteryTicket getPassivityLotteryTicket() {
+        List<LotteryNumber> lotteryNumbers = Arrays.stream(SCANNER.nextLine().split(","))
+                .map(String::trim)
+                .map(i -> new LotteryNumber(toInt(i)))
+                .collect(Collectors.toList());
+        return new LotteryTicket(lotteryNumbers);
     }
 }

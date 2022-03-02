@@ -1,31 +1,30 @@
 package lotterymachine;
 
 public class LotteryPurchase {
-    public static final int PER_LOTTERY_TICKET_PRICE = 1000;
-    private static final String TERMS_OF_PURCHASE = "로또 구매는 기본 1000원 이상부터 할 수 있습니다.";
+    private final Money money;
+    private final int autoCount;
+    private final int passivityCount;
 
-    private int number;
 
-    public LotteryPurchase(int number) {
-        validateNumber(number);
-        this.number = purchase(number);
+    public LotteryPurchase(int amount, int passivityCount) {
+        this.money = new Money(amount);
+        this.passivityCount = passivityCount;
+        autoCount = getAutoCount(money, passivityCount);
     }
 
-    private void validateNumber(int number) {
-        if (number < PER_LOTTERY_TICKET_PRICE) {
-            throw new IllegalArgumentException(TERMS_OF_PURCHASE);
-        }
+    private int getAutoCount(Money money, int passivityCount) {
+        return getTotalCount(money) - passivityCount;
     }
 
-    private int purchase(int number) {
-        return this.number = number / PER_LOTTERY_TICKET_PRICE;
+    private int getTotalCount(Money money) {
+        return money.getAmount() / Money.PER_LOTTERY_TICKET_PRICE;
     }
 
-    public int getCount() {
-        return number;
+    public int getAutoCount() {
+        return autoCount;
     }
 
-    public int getPurchasePrice() {
-        return this.number * PER_LOTTERY_TICKET_PRICE;
+    public int getPassivityCount() {
+        return passivityCount;
     }
 }
