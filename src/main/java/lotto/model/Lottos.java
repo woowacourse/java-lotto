@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.model.number.BonusNumber;
-import lotto.model.number.WinningNumbers;
+import lotto.model.number.BonusBall;
+import lotto.model.number.WinningBalls;
 import lotto.model.prize.MatchResult;
 
 public class Lottos {
@@ -26,9 +26,9 @@ public class Lottos {
 		return new Lottos(lottos);
 	}
 
-	public List<MatchResult> match(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+	public List<MatchResult> match(WinningBalls winningBalls, BonusBall bonusBall) {
 		return this.lottos.stream()
-				.map(lotto -> MatchResult.of(lotto, winningNumbers, bonusNumber))
+				.map(lotto -> MatchResult.of(lotto, winningBalls, bonusBall))
 				.collect(Collectors.toList());
 	}
 

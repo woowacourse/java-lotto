@@ -5,22 +5,22 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 
 import lotto.model.Lotto;
-import lotto.model.number.BonusNumber;
-import lotto.model.number.Number;
-import lotto.model.number.WinningNumbers;
+import lotto.model.number.BonusBall;
+import lotto.model.number.LottoBall;
+import lotto.model.number.WinningBalls;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PrizeTest {
-	WinningNumbers winningNumbers;
-	BonusNumber bonusNumber;
+	WinningBalls winningBalls;
+	BonusBall bonusBall;
 
 	@BeforeEach
 	void initializePrizeInformation() {
-		winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
-		bonusNumber = BonusNumber.from(Number.from("10"), winningNumbers);
+		winningBalls = WinningBalls.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
+		bonusBall = BonusBall.from(LottoBall.from("10"), winningBalls);
 	}
 
 	@DisplayName("3개가 일치하면 5등을 반환한다")
@@ -28,7 +28,7 @@ public class PrizeTest {
 	void match_3_fifth() {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
 
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 
 		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.FIFTH);
 	}
@@ -38,7 +38,7 @@ public class PrizeTest {
 	void match_4_fourth() {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 8, 9));
 
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 
 		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.FOURTH);
 	}
@@ -48,7 +48,7 @@ public class PrizeTest {
 	void match_5_third() {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 9));
 
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 
 		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.THIRD);
 	}
@@ -58,7 +58,7 @@ public class PrizeTest {
 	void match_6_first() {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 
 		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.FIRST);
 	}
@@ -68,7 +68,7 @@ public class PrizeTest {
 	void match_5_bonus_second() {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10));
 
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 
 		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.SECOND);
 	}

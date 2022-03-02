@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import lotto.model.number.WinningNumbers;
+import lotto.model.number.WinningBalls;
 
 public class Lotto {
 	private static final List<Integer> LOTTO_BALLS = new ArrayList<>();
@@ -35,9 +35,9 @@ public class Lotto {
 		return money.countAvailable(PRICE);
 	}
 
-	public int match(WinningNumbers winningNumbers) {
+	public int match(WinningBalls winningBalls) {
 		return (int)numbers.stream()
-				.filter(winningNumbers::match)
+				.filter(winningBalls::match)
 				.count();
 	}
 

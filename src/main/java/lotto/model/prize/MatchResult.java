@@ -1,8 +1,8 @@
 package lotto.model.prize;
 
 import lotto.model.Lotto;
-import lotto.model.number.BonusNumber;
-import lotto.model.number.WinningNumbers;
+import lotto.model.number.BonusBall;
+import lotto.model.number.WinningBalls;
 
 public class MatchResult {
 	private final int count;
@@ -13,8 +13,8 @@ public class MatchResult {
 		this.bonus = bonus;
 	}
 
-	public static MatchResult of(Lotto lotto, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-		return new MatchResult(lotto.match(winningNumbers), bonusNumber.match(lotto));
+	public static MatchResult of(Lotto lotto, WinningBalls winningBalls, BonusBall bonusBall) {
+		return new MatchResult(lotto.match(winningBalls), bonusBall.match(lotto));
 	}
 
 	public boolean isCount(int count) {

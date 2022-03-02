@@ -2,7 +2,7 @@ package lotto.model.number;
 
 import java.util.Objects;
 
-public class Number {
+public class LottoBall {
 	private static final String ERROR_TYPE = "[ERROR] 로또 번호는 숫자로만 입력해주세요";
 	String ERROR_BOUND = "[ERROR] 로또 번호는 1 이상 45 이하로 입력해주세요";
 	int MIN_WINNING_NUMBER = 1;
@@ -10,7 +10,7 @@ public class Number {
 
 	private final int number;
 
-	private Number(int number) {
+	private LottoBall(int number) {
 		checkBound(number);
 		this.number = number;
 	}
@@ -21,9 +21,9 @@ public class Number {
 		}
 	}
 
-	public static Number from(String input) {
+	public static LottoBall from(String input) {
 		try {
-			return new Number(Integer.parseInt(input));
+			return new LottoBall(Integer.parseInt(input));
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(ERROR_TYPE);
 		}
@@ -39,8 +39,8 @@ public class Number {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		Number number1 = (Number)o;
-		return number == number1.number;
+		LottoBall lottoBall1 = (LottoBall)o;
+		return number == lottoBall1.number;
 	}
 
 	@Override

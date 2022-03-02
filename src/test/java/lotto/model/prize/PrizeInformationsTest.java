@@ -8,29 +8,29 @@ import java.util.List;
 
 import lotto.model.Lotto;
 import lotto.model.Money;
-import lotto.model.number.BonusNumber;
-import lotto.model.number.Number;
-import lotto.model.number.WinningNumbers;
+import lotto.model.number.BonusBall;
+import lotto.model.number.LottoBall;
+import lotto.model.number.WinningBalls;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PrizeInformationsTest {
-	WinningNumbers winningNumbers;
-	BonusNumber bonusNumber;
+	WinningBalls winningBalls;
+	BonusBall bonusBall;
 
 	@BeforeEach
 	void initializePrizeInformation() {
-		winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
-		bonusNumber = BonusNumber.from(Number.from("10"), winningNumbers);
+		winningBalls = WinningBalls.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
+		bonusBall = BonusBall.from(LottoBall.from("10"), winningBalls);
 	}
 
 	@DisplayName("10000원 어치를 사고 5등이 1장 당첨됐을때 수익률은 0.5이다")
 	@Test
 	void calculateEarningRate_10000_5th_1() {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 		List<MatchResult> matchResults = new ArrayList<>();
 		matchResults.add(matchResult);
 		PrizeInformation prizeInformation = PrizeInformation.of(matchResults, Prize.FIFTH);
@@ -44,10 +44,10 @@ public class PrizeInformationsTest {
 	@Test
 	void calculateEarningRate_100000_4th_1_5th_5() {
 		Lotto lotto_5th = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
-		MatchResult matchResult_5th = MatchResult.of(lotto_5th, winningNumbers, bonusNumber);
+		MatchResult matchResult_5th = MatchResult.of(lotto_5th, winningBalls, bonusBall);
 
 		Lotto lotto_4th = new Lotto(Arrays.asList(1, 2, 3, 4, 8, 9));
-		MatchResult matchResult_4th = MatchResult.of(lotto_4th, winningNumbers, bonusNumber);
+		MatchResult matchResult_4th = MatchResult.of(lotto_4th, winningBalls, bonusBall);
 
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 5; i++) {

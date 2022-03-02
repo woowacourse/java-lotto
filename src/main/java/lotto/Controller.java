@@ -8,9 +8,9 @@ import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.dto.LottoDTO;
 import lotto.model.dto.PrizeInformationDTO;
-import lotto.model.number.BonusNumber;
-import lotto.model.number.Number;
-import lotto.model.number.WinningNumbers;
+import lotto.model.number.BonusBall;
+import lotto.model.number.LottoBall;
+import lotto.model.number.WinningBalls;
 import lotto.model.prize.MatchResult;
 import lotto.model.prize.PrizeInformations;
 import lotto.view.InputView;
@@ -23,16 +23,16 @@ public class Controller {
 
 		Lottos lottos = purchaseLottos(money);
 
-		WinningNumbers winningNumbers = getWinningNumbers();
+		WinningBalls winningBalls = getWinningNumbers();
 		PrizeInformations prizeInformations =
-				getPrize(lottos, winningNumbers, getBonusNumber(winningNumbers));
+				getPrize(lottos, winningBalls, getBonusNumber(winningBalls));
 
 		ResultView.showEarningRate(prizeInformations.calculateEarningRate(money));
 	}
 
 	private PrizeInformations getPrize(
-			Lottos lottos, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-		List<MatchResult> matchResults = lottos.match(winningNumbers, bonusNumber);
+			Lottos lottos, WinningBalls winningBalls, BonusBall bonusBall) {
+		List<MatchResult> matchResults = lottos.match(winningBalls, bonusBall);
 
 		return getPrizeInformations(matchResults);
 	}
@@ -64,16 +64,16 @@ public class Controller {
 		return lottos;
 	}
 
-	private WinningNumbers getWinningNumbers() {
+	private WinningBalls getWinningNumbers() {
 		List<String> winningNumbersInput = Arrays.asList(InputView.askWinningNumbers());
 
-		return WinningNumbers.from(winningNumbersInput);
+		return WinningBalls.from(winningNumbersInput);
 	}
 
-	private BonusNumber getBonusNumber(WinningNumbers winningNumbers) {
+	private BonusBall getBonusNumber(WinningBalls winningBalls) {
 		String bonusNumberInput = InputView.askBonusNumber();
 
-		return BonusNumber.from(Number.from(bonusNumberInput), winningNumbers);
+		return BonusBall.from(LottoBall.from(bonusNumberInput), winningBalls);
 	}
 
 }

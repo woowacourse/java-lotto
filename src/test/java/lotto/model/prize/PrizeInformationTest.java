@@ -11,18 +11,18 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.model.Lotto;
-import lotto.model.number.BonusNumber;
-import lotto.model.number.Number;
-import lotto.model.number.WinningNumbers;
+import lotto.model.number.BonusBall;
+import lotto.model.number.LottoBall;
+import lotto.model.number.WinningBalls;
 
 public class PrizeInformationTest {
-	WinningNumbers winningNumbers;
-	BonusNumber bonusNumber;
+	WinningBalls winningBalls;
+	BonusBall bonusBall;
 
 	@BeforeEach
 	void initializeLotto() {
-		winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
-		bonusNumber = BonusNumber.from(Number.from("10"), winningNumbers);
+		winningBalls = WinningBalls.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
+		bonusBall = BonusBall.from(LottoBall.from("10"), winningBalls);
 
 	}
 
@@ -30,7 +30,7 @@ public class PrizeInformationTest {
 	@Test
 	void pickAmount_5th_3() {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
 			matchResults.add(matchResult);
@@ -45,7 +45,7 @@ public class PrizeInformationTest {
 	@Test
 	void pickAmount_5th_2() {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 2; i++) {
 			matchResults.add(matchResult);
@@ -60,7 +60,7 @@ public class PrizeInformationTest {
 	@Test
 	void pickAmount_4th_3() {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8));
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
 			matchResults.add(matchResult);
