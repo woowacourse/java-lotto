@@ -61,7 +61,7 @@ public class ManualLotto {
         if (!Arrays.stream(values)
                 .map(Integer::parseInt)
                 .allMatch(number -> LOTTO_MIN_RANGE <= number
-                        && number <= 45)) {
+                        && number <= LOTTO_MAX_RANGE)) {
             throw new IllegalArgumentException(InvalidException.ERROR_INTEGER_RANGE);
         }
     }

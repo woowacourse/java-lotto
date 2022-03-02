@@ -11,7 +11,7 @@ public class Lotto {
     private final List<Integer> lottoNumbers;
 
     public Lotto(){
-        List<Integer> numbers = LottoRange.getRangeLottoNumbers();
+        List<Integer> numbers = LottoNumber.getRangeLottoNumbers();
         Collections.shuffle(numbers);
         checkNumbers(numbers.subList(0, LOTTO_SIZE));
         lottoNumbers = numbers.subList(0, LOTTO_SIZE);

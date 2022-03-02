@@ -1,7 +1,10 @@
 package lotto.controller;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoWinningNumbers;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.ManualLotto;
@@ -24,9 +27,10 @@ public class LottoController {
 
     public LottoWinningNumbers createLottoWinningNumbers() {
         try {
-            String value = inputLottoWinningNumbers();
-            int bonusNumber = inputBonusNumber();
-            return new LottoWinningNumbers(value, bonusNumber);
+            String numbers = inputLottoWinningNumbers();
+            Lotto lotto = createLottoByNumbers(numbers);
+            LottoNumber bonusNumber = new LottoNumber(inputBonusNumber());
+            return new LottoWinningNumbers(lotto, bonusNumber);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return createLottoWinningNumbers();
@@ -43,30 +47,27 @@ public class LottoController {
         }
     }
 
+    public Lotto createLottoByNumbers(String numbers) {
+        List<Integer> lotto = Arrays.stream(numbers.split(","))
+                .map(this::removeBlank)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        return new Lotto(lotto);
+    }
+
     private String removeBlank(final String value) {
         return value.replace(" ", "");
     }
 
-    public int inputBonusNumber() {
-        String bonusNumber = InputView.inputBonusNumber();
-        checkValidateInt(bonusNumber);
-        return Integer.parseInt(bonusNumber);
-    }
-
-    private static void checkValidateInt(final String money) {
-        try {
-            Integer.parseInt(money);
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(InvalidException.ERROR_WRONG_INPUT_MONEY);
-        }
+    public String  inputBonusNumber() {
+        return InputView.inputBonusNumber();
     }
 
     public LottoResult calculateRanks(final Lottos lottos, final LottoWinningNumbers lottoWinningNumbers) {
         LottoResult lottoResult = new LottoResult();
 
         for (Lotto lotto : lottos.getLottos()) {
-            lottoResult.calculateWinning(lottoWinningNumbers.getWinningLotto(), lottoWinningNumbers.getBonusNumber(),
-                    lotto);
+            lottoResult.calculateWinning(lottoWinningNumbers.getWinningLotto(), lottoWinningNumbers.getBonusNumber(), lotto);
         }
 
         return lottoResult;
