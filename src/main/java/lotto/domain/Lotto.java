@@ -1,9 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
 
@@ -16,20 +15,23 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        this.lottoNumbers = createLotto();
-        Collections.sort(lottoNumbers);
+        this(new ArrayList<>());
     }
 
     public Lotto(List<LottoNumber> numbers) {
+        if (numbers.isEmpty()) {
+            numbers = createLotto();
+        }
         checkLottoNumbers(numbers);
         this.lottoNumbers = numbers;
         Collections.sort(lottoNumbers);
     }
 
-    public List<LottoNumber> createLotto() {
-        List<LottoNumber> lottoNumbers = IntStream.rangeClosed(LOTTO_MIN_RANGE, LOTTO_MAX_RANGE)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+    private List<LottoNumber> createLotto() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int i = LOTTO_MIN_RANGE; i <= LOTTO_MAX_RANGE; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
         Collections.shuffle(lottoNumbers);
 
         return lottoNumbers.subList(0, LOTTO_SIZE);
