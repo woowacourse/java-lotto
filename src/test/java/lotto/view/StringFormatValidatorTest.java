@@ -34,7 +34,7 @@ public class StringFormatValidatorTest {
 
     @ParameterizedTest
     @DisplayName("비정상적인 숫자 입력 처리")
-    @ValueSource(strings = {"00", "05", "0", "-3", "클레이"})
+    @ValueSource(strings = {"00", "05", "-3", "클레이"})
     void invalidNumberFormat(String text) {
         assertThatThrownBy(() -> numberValidator().validate(text))
             .isInstanceOf(IllegalArgumentException.class)
