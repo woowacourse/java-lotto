@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class LottoResult {
     private static final int DEFAULT_COUNT = 0;
-    private static final int CHECK_BONUS_COUNT = 5;
 
     private final Map<Rank, Integer> lottoResult = new HashMap<>();
 
