@@ -6,7 +6,7 @@ import java.util.List;
 
 import lotto.model.number.WinningBalls;
 
-public class Lotto {
+public class AutoLotto {
 	private static final List<Integer> LOTTO_BALLS = new ArrayList<>();
 	private static final int MIN_NUMBER = 1;
 	private static final int MAX_NUMBER = 45;
@@ -21,7 +21,7 @@ public class Lotto {
 
 	private final List<Integer> numbers;
 
-	public Lotto(List<Integer> numbers) {
+	public AutoLotto(List<Integer> numbers) {
 		Collections.sort(numbers);
 		this.numbers = List.copyOf(numbers);
 	}

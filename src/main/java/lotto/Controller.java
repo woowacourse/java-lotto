@@ -3,7 +3,7 @@ package lotto;
 import java.util.Arrays;
 import java.util.List;
 
-import lotto.model.Lotto;
+import lotto.model.AutoLotto;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.dto.LottoDTO;
@@ -51,7 +51,7 @@ public class Controller {
 	}
 
 	private int getPurchaseCount(Money money) {
-		int purchaseCount = Lotto.countAvailableTickets(money);
+		int purchaseCount = AutoLotto.countAvailableTickets(money);
 		ResultView.showPurchaseCount(purchaseCount);
 
 		return purchaseCount;

@@ -10,29 +10,29 @@ import lotto.model.prize.MatchResult;
 
 public class Lottos {
 
-	private final List<Lotto> lottos;
+	private final List<AutoLotto> autoLottos;
 
-	private Lottos(List<Lotto> lottos) {
-		this.lottos = lottos;
+	private Lottos(List<AutoLotto> autoLottos) {
+		this.autoLottos = autoLottos;
 	}
 
 	public static Lottos purchase(int count) {
-		List<Lotto> lottos = new ArrayList<>();
+		List<AutoLotto> autoLottos = new ArrayList<>();
 
 		for (int i = 0; i < count; i++) {
-			lottos.add(new Lotto(Lotto.selectNumbers()));
+			autoLottos.add(new AutoLotto(AutoLotto.selectNumbers()));
 		}
 
-		return new Lottos(lottos);
+		return new Lottos(autoLottos);
 	}
 
 	public List<MatchResult> match(WinningBalls winningBalls, BonusBall bonusBall) {
-		return this.lottos.stream()
+		return this.autoLottos.stream()
 				.map(lotto -> MatchResult.of(lotto, winningBalls, bonusBall))
 				.collect(Collectors.toList());
 	}
 
-	public List<Lotto> getLottos() {
-		return this.lottos;
+	public List<AutoLotto> getLottos() {
+		return this.autoLottos;
 	}
 }
