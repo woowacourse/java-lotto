@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class WinningLotto {
 
     private static final String ERROR_DUPLICATION_BONUS_MESSAGE = "보너스 숫자는 로또 숫자와 중복되면 안됩니다.";
@@ -26,5 +28,23 @@ public class WinningLotto {
 
     public LottoNumber getBonusNumber() {
         return bonusNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        WinningLotto that = (WinningLotto) o;
+        return Objects.equals(winningLotto, that.winningLotto) && Objects.equals(bonusNumber,
+                that.bonusNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningLotto, bonusNumber);
     }
 }

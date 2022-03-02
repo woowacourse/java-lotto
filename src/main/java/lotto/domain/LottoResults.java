@@ -49,4 +49,21 @@ public class LottoResults {
     public int getPrizeNumber(LottoPrize prize) {
         return results.get(prize);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoResults that = (LottoResults) o;
+        return Objects.equals(results, that.results);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(results);
+    }
 }
