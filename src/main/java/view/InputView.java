@@ -72,8 +72,8 @@ public class InputView {
 		validateStandard(input);
 	}
 
-	private static void validateEmpty(String Input) {
-		if (Input.isEmpty()) {
+	private static void validateEmpty(String input) {
+		if (input.isEmpty()) {
 			throw new IllegalArgumentException(MUST_NOT_EMPTY);
 		}
 	}
