@@ -34,7 +34,7 @@ class LottoViewTest {
         final int totalTicketCount = MoneyUnit.divide(money);
         assertThatThrownBy(() -> lottoView.requestManualTicketCount(totalTicketCount))
                 .isInstanceOf(LottoException.class)
-                        .hasMessageContaining(LottoExceptionStatus.MANUAL_TICKET_COUNT_CANNOT_BE_MORE_THAT_TOTAL_TICKET_COUNT.getMessage());
+                        .hasMessageContaining(LottoExceptionStatus.MANUAL_TICKET_COUNT_CANNOT_BE_MORE_THAN_TOTAL_TICKET_COUNT.getMessage());
     }
 
     public static Stream<Arguments> provideForRequestManualTicketCountExceptionTest() {

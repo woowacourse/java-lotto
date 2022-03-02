@@ -44,7 +44,7 @@ public class LottoView {
 
     private void verifyTotalTicketCountIsMoreThanTicketCount(final int totalTicketCount, final int ticketCount) {
         if (ticketCount > totalTicketCount) {
-            throw new LottoException(LottoExceptionStatus.MANUAL_TICKET_COUNT_CANNOT_BE_MORE_THAT_TOTAL_TICKET_COUNT);
+            throw new LottoException(LottoExceptionStatus.MANUAL_TICKET_COUNT_CANNOT_BE_MORE_THAN_TOTAL_TICKET_COUNT);
         }
     }
 
