@@ -6,13 +6,13 @@ public class Money {
 
     private final long money;
 
-    private Money(int money) {
+    private Money(long money) {
         MoneyValidator.validate(money);
         this.money = money;
     }
 
     public static Money generateMoneyByString(String money) {
-        return new Money(Integer.parseInt(money));
+        return new Money(Long.parseLong(money));
     }
 
     public int calculateTotalLottoCount(long lottoPrice) {
