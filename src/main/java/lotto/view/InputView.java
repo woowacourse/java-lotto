@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class InputView {
     private static final String INPUT_LOTTO_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    private static final String INPUT_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String TYPE_ERROR = "숫자만 입력 가능합니다.";
     private static final String BLANK = " ";
     private static final String EMPTY_STRING = "";
@@ -47,6 +48,12 @@ public class InputView {
 
     public static int inputBonusBall() {
         System.out.println(INPUT_BONUS_NUMBER);
+        String input = scanner.nextLine();
+        return convertToInt(input);
+    }
+
+    public static int inputTryCount() {
+        System.out.println(INPUT_LOTTO_COUNT);
         String input = scanner.nextLine();
         return convertToInt(input);
     }

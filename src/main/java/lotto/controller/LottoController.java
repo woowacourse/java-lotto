@@ -16,8 +16,8 @@ public class LottoController {
     public void start() {
         LottoAmount amount = inputAmount();
 
-        // TODO ManualLottoCount input 받도록 수정
-        LottoTicket lottoTicket = buyTicket(amount, new ManualLottoCount(2, amount.calculateLottoCount()));
+        ManualLottoCount manualLottoCount = inputManualLottoCount(amount);
+        LottoTicket lottoTicket = buyTicket(amount, manualLottoCount);
 
         WinningNumbers winningNumbers = createWinningNumbers();
 
@@ -32,6 +32,15 @@ public class LottoController {
         } catch (IllegalArgumentException e) {
             OutputView.printException(e);
             return inputAmount();
+        }
+    }
+
+    private ManualLottoCount inputManualLottoCount(LottoAmount amount) {
+        try {
+            return new ManualLottoCount(InputView.inputTryCount(), amount.calculateLottoCount());
+        } catch (IllegalArgumentException e) {
+            OutputView.printException(e);
+            return inputManualLottoCount(amount);
         }
     }
 
