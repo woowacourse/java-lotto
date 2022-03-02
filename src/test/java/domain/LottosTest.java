@@ -42,7 +42,7 @@ public class LottosTest {
     @DisplayName("생성된 로또에 대해 당첨 결과가 모두 계산되었는지 테스트")
     @CsvSource(value = {"1,2,3,4,5,6,FIRST", "1,2,3,4,5,7,SECOND", "1,2,3,4,5,8,THIRD",
         "1,2,3,4,7,8,FOURTH", "1,2,3,8,9,10,FIFTH", "1,2,9,10,11,12,SIXTH"})
-    public void getWinningStatisticsTest2(int number1, int number2, int number3, int number4, int number5, int number6, String rank) {
+    public void getWinningStatisticsTestByRank(int number1, int number2, int number3, int number4, int number5, int number6, String rank) {
         WinningNumber winningNumber = new WinningNumber(
             List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
@@ -54,7 +54,7 @@ public class LottosTest {
 
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(lotto1);
-        Lottos lottos = new Lottos(lottoList);
+        Lottos lottos = Lottos.generateLottos(lottoList, 0);
         Statistic statistic = lottos.getWinningStatistics(winningNumber, bonusBall);
 
         assertEquals(statistic.getStatistics().get(Rank.valueOf(rank)), 1);
