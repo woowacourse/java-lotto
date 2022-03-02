@@ -1,5 +1,7 @@
 package domain;
 
+import static domain.exception.LotteryExceptionMessages.*;
+
 public final class NumOfLottery {
 
 	private final int numOfAutoLottery;
@@ -21,7 +23,7 @@ public final class NumOfLottery {
 
 	public NumOfLottery putNumOfManualLottery(final int numOfManualLottery) {
 		if (numOfManualLottery > this.numOfAutoLottery) {
-			throw new IllegalArgumentException("수동 로또의 개수가 구입한 로또 총 개수보다 많을 수 없습니다.");
+			throw new IllegalArgumentException(NUM_OF_MANUAL_LOTTERY_EXCEPTION.getMessage());
 		}
 		final int numOfAutoLottery = this.numOfAutoLottery - numOfManualLottery;
 		return new NumOfLottery(numOfAutoLottery, numOfManualLottery);

@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.Collections;
 import java.util.List;
 
 import domain.LotteryGame;
