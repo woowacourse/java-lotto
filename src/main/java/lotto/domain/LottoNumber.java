@@ -9,19 +9,19 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    public LottoNumber(final int number) {
         validateRange(number);
         this.number = number;
     }
 
-    private void validateRange(int number) {
+    private void validateRange(final int number) {
         if (isValidRange(number)) {
             throw new IllegalArgumentException(
                     "[ERROR] 로또 번호는 " + LOWER_BOUND + "~" + UPPER_BOUND + " 사이의 숫자만 가능합니다");
         }
     }
 
-    private boolean isValidRange(int number) {
+    private boolean isValidRange(final int number) {
         return number < LOWER_BOUND || number > UPPER_BOUND;
     }
 

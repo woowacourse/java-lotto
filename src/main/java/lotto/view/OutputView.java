@@ -17,7 +17,7 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottos(int manualLottoCount, int autoLottoCount, List<Lotto> lottos) {
+    public static void printLottos(final int manualLottoCount, final int autoLottoCount, final List<Lotto> lottos) {
         printLottoCount(manualLottoCount, autoLottoCount);
 
         for (Lotto lotto : lottos) {
@@ -26,18 +26,18 @@ public class OutputView {
         System.out.println();
     }
 
-    private static void printLottoCount(int manualLottoCount, int autoLottoCount) {
+    private static void printLottoCount(final int manualLottoCount, final int autoLottoCount) {
         System.out.println("수동으로 " + manualLottoCount + "개, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
     }
 
-    private static String makeLottoString(Lotto lotto) {
-        String result = lotto.getIntValues().stream()
+    private static String makeLottoString(final Lotto lotto) {
+        final String result = lotto.getIntValues().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_JOIN_DELIMITER));
         return "[" + result + "]";
     }
 
-    public static void printResult(RankBoard rankBoard, double profitRatio) {
+    public static void printResult(final RankBoard rankBoard, final double profitRatio) {
         printResultTitle();
         printRankCounter(rankBoard);
         printProfitRatio(profitRatio);
@@ -49,27 +49,22 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    private static void printRankCounter(RankBoard rankBoard) {
-        ArrayList<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
+    private static void printRankCounter(final RankBoard rankBoard) {
+        final List<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
         ranks.sort(Comparator.comparing(Rank::getPrize));
         for (Rank rank : ranks) {
-            printRank(rank, rankBoard);
+            System.out.println(makeRankString(rank, rankBoard.getCount(rank)));
         }
     }
 
-    private static void printRank(Rank rank, RankBoard rankBoard) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append(rank.getMatched()).append("개 일치");
+    private static String makeRankString(final Rank rank, final int count) {
         if (rank == Rank.SECOND) {
-            stringBuilder.append(", 보너스 볼 일치");
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개", rank.getMatched(), rank.getPrize(), count);
         }
-        stringBuilder.append(" (").append(rank.getPrize()).append("원) - ").append(rankBoard.getCount(rank)).append("개");
-
-        System.out.println(stringBuilder);
+        return String.format("%d개 일치 (%d원) - %d개", rank.getMatched(), rank.getPrize(), count);
     }
 
-    private static void printProfitRatio(double profitRatio) {
+    private static void printProfitRatio(final double profitRatio) {
         System.out.println("총 수익률은 " + profitRatio + "입니다.");
     }
 }

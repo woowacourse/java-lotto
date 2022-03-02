@@ -31,13 +31,13 @@ public class LottoGame {
 
     private void makeManualLottos(final Lottos lottos, final List<List<Integer>> manualLottos) {
         for (List<Integer> manualLotto : manualLottos) {
-            LottoMachine lottoMachine = new FixedLottoMachine(manualLotto);
+            final LottoMachine lottoMachine = new FixedLottoMachine(manualLotto);
             lottos.add(new Lotto(lottoMachine));
         }
     }
 
     private void makeAutoLottos(final Lottos lottos) {
-        LottoMachine lottoMachine = new RandomLottoMachine();
+        final LottoMachine lottoMachine = new RandomLottoMachine();
         for (int i = 0; i < autoLottoCount; i++) {
             lottos.add(new Lotto(lottoMachine));
         }

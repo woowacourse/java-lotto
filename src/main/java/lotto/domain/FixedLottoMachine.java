@@ -8,7 +8,7 @@ public class FixedLottoMachine implements LottoMachine {
 
     private final List<Integer> numbers;
 
-    public FixedLottoMachine(List<Integer> numbers) {
+    public FixedLottoMachine(final List<Integer> numbers) {
         this.numbers = numbers;
     }
 

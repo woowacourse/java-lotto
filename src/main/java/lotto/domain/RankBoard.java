@@ -16,7 +16,7 @@ public class RankBoard {
 
     private final Map<Rank, Integer> board = new HashMap<>();
 
-    public RankBoard(WinningLotto winningLotto, List<Lotto> tickets) {
+    public RankBoard(final WinningLotto winningLotto, final List<Lotto> tickets) {
         initBoard();
         countRank(winningLotto, tickets);
     }
@@ -29,14 +29,14 @@ public class RankBoard {
         board.put(Rank.FIFTH, INIT_NUMBER);
     }
 
-    private void countRank(WinningLotto winningLotto, List<Lotto> tickets) {
-        Set<LottoNumber> winningAndBonusNumber = winningLotto.getWinningAndBonusNumber();
+    private void countRank(final WinningLotto winningLotto, final List<Lotto> tickets) {
+        final Set<LottoNumber> winningAndBonusNumber = winningLotto.getWinningAndBonusNumber();
         for (Lotto ticket : tickets) {
             countRankForEach(ticket.getMatchedNumbers(winningAndBonusNumber), winningLotto);
         }
     }
 
-    private void countRankForEach(Set<LottoNumber> matchedNumbers, WinningLotto winningLotto) {
+    private void countRankForEach(final Set<LottoNumber> matchedNumbers, final WinningLotto winningLotto) {
         if (isNotRanked(matchedNumbers)) {
             return;
         }
@@ -47,20 +47,20 @@ public class RankBoard {
         writeBoard(matchedNumbers.size(), false);
     }
 
-    private boolean isNotRanked(Set<LottoNumber> matchedNumbers) {
+    private boolean isNotRanked(final Set<LottoNumber> matchedNumbers) {
         return matchedNumbers.size() < MINIMUM_RANK_SIZE;
     }
 
-    private boolean isSecondRank(Set<LottoNumber> matchedNumbers, WinningLotto winningLotto) {
+    private boolean isSecondRank(final Set<LottoNumber> matchedNumbers, final WinningLotto winningLotto) {
         return matchedNumbers.size() == SECOND_RANK_MATCHED && matchedNumbers.contains(winningLotto.getBonusNumber());
     }
 
-    private void writeBoard(int size, boolean isBonusBallMatched) {
-        Rank rank = Rank.of(size, isBonusBallMatched);
+    private void writeBoard(final int size, final boolean isBonusBallMatched) {
+        final Rank rank = Rank.of(size, isBonusBallMatched);
         board.put(rank, board.get(rank) + 1);
     }
 
-    public double calculateProfitRatio(int amount) {
+    public double calculateProfitRatio(final int amount) {
         return Math.round((double) calculateProfit() / amount * ROUNDING_DIGITS) / ROUNDING_DIGITS_DOUBLE;
     }
 
@@ -73,10 +73,10 @@ public class RankBoard {
     }
 
     public Map<Rank, Integer> getBoard() {
-        return board;
+        return new HashMap<>(board);
     }
 
-    public int getCount(Rank rank) {
+    public int getCount(final Rank rank) {
         return board.get(rank);
     }
 }
