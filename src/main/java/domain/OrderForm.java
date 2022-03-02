@@ -27,7 +27,11 @@ public class OrderForm {
 		return payment.calculateLottoCount() - quantity;
 	}
 
-	public boolean isEqualQuantity(Lottos manualLottos) {
-		return manualLottos.getSize() == quantity;
+	public boolean isEqualQuantity(int targetQuantity) {
+		return targetQuantity == quantity;
+	}
+
+	public int getQuantity() {
+		return quantity;
 	}
 }

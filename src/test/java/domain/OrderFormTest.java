@@ -61,6 +61,6 @@ public class OrderFormTest {
 		Lottos manualLottos = LottoMachine.createLottos(3);
 		//when, then
 
-		assertThat(orderForm.isEqualQuantity(manualLottos)).isEqualTo(true);
+		assertThat(orderForm.isEqualQuantity(manualLottos.getSize())).isEqualTo(true);
 	}
 }
