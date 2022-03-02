@@ -85,6 +85,20 @@ class InputViewTest {
         assertThatThrownBy(InputView::inputMoney).isInstanceOf(Exception.class);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"1, 2, 3", "1, 2, 3, 4, 5, 6, ", ", 1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6, 7"})
+    void 수동_번호_패턴에_맞지_않는_경우_예외처리(String input) {
+        //given
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        assertThatThrownBy(() -> InputView.inputManualTicketGroup(3))
+                .isInstanceOf(Exception.class);
+    }
+
     @Test
     void 당첨_번호_입력_정상작동() {
         //given
