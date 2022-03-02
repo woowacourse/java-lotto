@@ -20,10 +20,8 @@ public class ResultTest {
 
     @BeforeEach
     void setUp() {
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Number(7));
-
-        Lottos lottos = new Lottos(new Lotto(List.of(1, 2, 3, 42, 43, 44)));
-        result = new Result(lottos, winningLotto);
+        result = new Result();
+        result.add(LottoRanking.FIFTH);
     }
 
     @Nested

@@ -15,21 +15,20 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void play() {
+        // 로또 구매
+        Lottos lottos = buyLottos();
+        // 결과 출력
+        printResult(lottos);
+    }
+
+    private Lottos buyLottos() {
         Money money = requestMoney();
-
         int manualLottoCount = requestCountManualLottoToBuy(money);
-        Lottos lottos = new Lottos(money);
-
-        requestManualLottoNumbers(manualLottoCount, lottos);
-
-        OutputView.printLottoCount(manualLottoCount, lottos.getCount() - manualLottoCount);
+        int autoLottoCount = money.countToBuyLotto();
+        Lottos lottos = requestBuyLottos(manualLottoCount, autoLottoCount);
+        OutputView.printLottoCount(manualLottoCount, autoLottoCount);
         OutputView.printLottos(lottos);
-
-        WinningLotto winningLotto = requestWinningLotto();
-
-        Result result = new Result(lottos, winningLotto);
-        OutputView.printResult(result);
-        OutputView.printRateOfProfit(money.getRateOfProfit(result.getTotalProfit()));
+        return lottos;
     }
 
     private Money requestMoney() {
@@ -54,7 +53,14 @@ public class LottoController {
         }
     }
 
-    private void requestManualLottoNumbers(int manualLottoCount, Lottos lottos) {
+    private Lottos requestBuyLottos(int manualLottoCount, int autoLottoCount) {
+        Lottos lottos = new Lottos();
+        requestBuyManualLottoNumbers(manualLottoCount, lottos);
+        buyAutoLottos(autoLottoCount, lottos);
+        return lottos;
+    }
+
+    private void requestBuyManualLottoNumbers(int manualLottoCount, Lottos lottos) {
         OutputView.printRequestManualLottoNumberUI();
         while (manualLottoCount-- > 0) {
             Lotto lotto = requestManualLottoNumber();
@@ -72,9 +78,10 @@ public class LottoController {
         }
     }
 
-    private WinningLotto requestWinningLotto() {
-        Lotto lotto = requestLotto();
-        return requestWinningLottoContainingBonusNumber(lotto);
+    private void buyAutoLottos(int autoLottoCount, Lottos lottos) {
+        while (autoLottoCount-- > 0) {
+            lottos.add(LottoFactory.auto());
+        }
     }
 
     private Lotto requestLotto() {
@@ -85,6 +92,18 @@ public class LottoController {
             OutputView.printException(exception);
             return requestLotto();
         }
+    }
+
+    private void printResult(Lottos lottos) {
+        Money totalMoney = new Money(lottos.getCount() * Lotto.PRICE);
+        Result result = lottos.getResult(requestWinningLotto());
+        OutputView.printResult(result);
+        OutputView.printRateOfProfit(totalMoney.getRateOfProfit(result.getTotalProfit()));
+    }
+
+    private WinningLotto requestWinningLotto() {
+        Lotto lotto = requestLotto();
+        return requestWinningLottoContainingBonusNumber(lotto);
     }
 
     private WinningLotto requestWinningLottoContainingBonusNumber(Lotto lotto) {

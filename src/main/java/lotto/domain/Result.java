@@ -3,10 +3,6 @@ package lotto.domain;
 import java.util.EnumMap;
 import java.util.Map;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.WinningLotto;
-
 public class Result {
 
     private static final int INIT_COUNT = 0;
@@ -20,11 +16,11 @@ public class Result {
         }
     }
 
-    public Result(Lottos lottos, WinningLotto winningLotto) {
-        for (Lotto lotto : lottos.getLottos()) {
-            LottoRanking lottoRanking = winningLotto.getLottoRanking(lotto);
-            result.put(lottoRanking, result.get(lottoRanking) + ADD_NUMBER);
-        }
+    public Result() {
+    }
+
+    public void add(LottoRanking lottoRanking) {
+        result.put(lottoRanking, result.get(lottoRanking) + ADD_NUMBER);
     }
 
     public int getCount(LottoRanking key) {

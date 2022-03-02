@@ -117,4 +117,15 @@ public class MoneyTest {
             }
         }
     }
+
+    @Nested
+    @DisplayName("살 수 있는 로또 개수를 알려주는 기능은")
+    class CountToBuyLotto {
+        @Test
+        @DisplayName("살 수 있는 로또 개수를 알려준다.")
+        void it_returns_count_to_buy_lotto() {
+            Money money = new Money(5000);
+            assertThat(money.countToBuyLotto()).isEqualTo(5);
+        }
+    }
 }

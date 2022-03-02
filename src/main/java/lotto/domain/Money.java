@@ -46,4 +46,8 @@ public class Money {
             throw new IllegalArgumentException(String.format("%d으로 나누어 떨어져야 합니다.", Lotto.PRICE));
         }
     }
+
+    public int countToBuyLotto() {
+        return value / Lotto.PRICE;
+    }
 }
