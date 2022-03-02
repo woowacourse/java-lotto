@@ -28,7 +28,7 @@ public enum Ranking {
                 .findAny();
     }
 
-    public long multiplyPrizeWithCount(Integer count) {
+    public long multiplyPrizeWithCount(int count) {
         return (long) prize * count;
     }
 
