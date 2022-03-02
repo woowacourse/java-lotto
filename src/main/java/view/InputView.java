@@ -42,12 +42,7 @@ public class InputView {
         List<Lotto> manualLottoList = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            String input = scanner.nextLine();
-            String[] numbers = input.split(SPLIT_REGEX);
-            manualLottoList.add(new Lotto(Arrays.stream(numbers)
-                .map(number -> convertToInt(number, INPUT_MANUAL_LOTTO_NUMBER_ONLY_NUMBER_MESSAGE))
-                .map(number -> LottoNumber.valueOf(number))
-                .collect(Collectors.toList())));
+            manualLottoList.add(new Lotto(createLotto(INPUT_MANUAL_LOTTO_NUMBER_ONLY_NUMBER_MESSAGE)));
         }
 
         return manualLottoList;
@@ -55,12 +50,7 @@ public class InputView {
 
     public static WinningNumber askInputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
-        String input = scanner.nextLine();
-        String[] numbers = input.split(SPLIT_REGEX);
-        return new WinningNumber(Arrays.stream(numbers)
-            .map(number -> convertToInt(number, INPUT_WINNING_NUMBER_ONLY_NUMBER_MESSAGE))
-            .map(number -> LottoNumber.valueOf(number))
-            .collect(Collectors.toList()));
+        return new WinningNumber(createLotto(INPUT_WINNING_NUMBER_ONLY_NUMBER_MESSAGE));
     }
 
     public static LottoNumber askInputBonusBall() {
@@ -69,6 +59,15 @@ public class InputView {
         int number = convertToInt(input, INPUT_BONUS_BALL_ONLY_NUMBER_MESSAGE);
         LottoNumber bonusBall = LottoNumber.valueOf(number);
         return bonusBall;
+    }
+
+    private static List<LottoNumber> createLotto(String errorMessage) {
+        String input = scanner.nextLine();
+        String[] numbers = input.split(SPLIT_REGEX);
+        return Arrays.stream(numbers)
+            .map(number -> convertToInt(number, errorMessage))
+            .map(number -> LottoNumber.valueOf(number))
+            .collect(Collectors.toList());
     }
 
     private static int convertToInt(String input, String errorMessage) {
