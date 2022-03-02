@@ -1,11 +1,11 @@
-package domain.strategy;
+package domain.generator;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ManualStrategy implements PurchaseStrategy {
+public class ManualLottoGenerator implements LottoGenerator {
 
     private static final int LOTTO_SIZE = 6;
     private static final String LOTTO_NUMBER_DELIMITER = ", |,";
@@ -15,7 +15,7 @@ public class ManualStrategy implements PurchaseStrategy {
 
     private final String inputNumber;
 
-    public ManualStrategy(String inputNumber) {
+    public ManualLottoGenerator(String inputNumber) {
         this.inputNumber = inputNumber;
     }
 
@@ -42,7 +42,7 @@ public class ManualStrategy implements PurchaseStrategy {
 
     private static Set<Integer> checkNonIntegers(List<String> numbers) {
         return numbers.stream()
-                .map(ManualStrategy::checkNonInteger)
+                .map(ManualLottoGenerator::checkNonInteger)
                 .collect(Collectors.toSet());
     }
 

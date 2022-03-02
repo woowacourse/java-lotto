@@ -1,8 +1,8 @@
 package domain;
 
-import domain.strategy.AutomaticStrategy;
-import domain.strategy.ManualStrategy;
-import domain.strategy.PurchaseStrategy;
+import domain.generator.AutomaticLottoGenerator;
+import domain.generator.ManualLottoGenerator;
+import domain.generator.LottoGenerator;
 
 public class Store {
 
@@ -43,7 +43,7 @@ public class Store {
     public Lottos purchaseManualLottos(final Money money, final int numOfLotto, final String[] inputNumbers) {
         final Lottos lottos = new Lottos();
         for (String inputNumber : inputNumbers) {
-            purchase(lottos, new ManualStrategy(inputNumber));
+            purchase(lottos, new ManualLottoGenerator(inputNumber));
         }
         money.purchaseLotto(numOfLotto);
         return lottos;
@@ -51,13 +51,13 @@ public class Store {
 
     public void purchaseAutomaticLottos(final Lottos lottos, final Money money) {
         for (int i = 0; i < money.numOfAvailablePurchase(); i++) {
-            purchase(lottos, new AutomaticStrategy());
+            purchase(lottos, new AutomaticLottoGenerator());
         }
         money.purchaseLotto(money.numOfAvailablePurchase());
     }
 
 
-    private void purchase(Lottos lottos, PurchaseStrategy purchaseStrategy) {
+    private void purchase(Lottos lottos, LottoGenerator purchaseStrategy) {
         Lotto lotto = new Lotto(purchaseStrategy.generateNumbers());
         lottos.addLotto(lotto);
     }

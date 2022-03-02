@@ -1,8 +1,8 @@
-package domain.strategy;
+package domain.generator;
 
 import java.util.Set;
 
-public interface PurchaseStrategy {
+public interface LottoGenerator {
 
     Set<Integer> generateNumbers();
 

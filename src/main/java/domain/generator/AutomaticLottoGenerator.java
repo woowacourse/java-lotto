@@ -1,8 +1,8 @@
-package domain.strategy;
+package domain.generator;
 
 import java.util.*;
 
-public class AutomaticStrategy implements PurchaseStrategy {
+public class AutomaticLottoGenerator implements LottoGenerator {
 
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
