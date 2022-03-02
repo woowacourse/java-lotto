@@ -1,7 +1,5 @@
 package lotto.controller;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.money.Money;
@@ -21,11 +19,12 @@ public class LottoController {
     public void run() {
         Money money = Money.of(InputView.requestMoney());
         ManualBuyCount manualBuyCount = ManualBuyCount.of(InputView.requestManualBuyCount());
-        LottoTickets lottoTickets = LottoTickets
-                .buy(new RandomNumberGenerator(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER), money);
-        OutputView.outputTickets(lottoTickets);
-        WinningTicket winningTicket = makeWinningTicket();
 
+        LottoTickets lottoTickets = LottoTickets.buyManualTickets(InputView.requestManualTickets(manualBuyCount), money);
+        lottoTickets.buyAutoTickets(new RandomNumberGenerator(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER), money);
+        OutputView.outputTickets(manualBuyCount, lottoTickets);
+
+        WinningTicket winningTicket = makeWinningTicket();
         LottoRanks lottoRanks = lottoTickets.compareResult(winningTicket);
         LottoStatistics lottoStatistics = new LottoStatistics(lottoRanks);
         OutputView.outputStatistics(lottoStatistics, money);

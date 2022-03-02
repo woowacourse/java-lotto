@@ -1,16 +1,20 @@
 package lotto.model.money;
 
+import lotto.model.ticket.buy.ManualBuyCount;
+
 public class Money {
 
     private static final int UNIT = 1000;
     public static final String AMOUNT_POSITIVE_MESSAGE = "금액은 0 이상이어야 합니다.";
     public static final String MONEY_DIVIDABLE_BY_UNIT_MESSAGE = "금액은 천원 단위여야 합니다.";
 
-    private final int amount;
+    private final int originalAmount;
+    private int currentAmount;
 
     private Money(int amount) {
         validate(amount);
-        this.amount = amount;
+        originalAmount = amount;
+        this.currentAmount = amount;
     }
 
     public static Money of(int money) {
@@ -34,11 +38,15 @@ public class Money {
         }
     }
 
-    public int count() {
-        return this.amount / UNIT;
+    public int countBuyable() {
+        return this.currentAmount / UNIT;
     }
 
-    public int getAmount() {
-        return this.amount;
+    public void decreaseByUnit() {
+        this.currentAmount -=  UNIT;
+    }
+
+    public double getOriginalAmount() {
+        return this.originalAmount;
     }
 }
