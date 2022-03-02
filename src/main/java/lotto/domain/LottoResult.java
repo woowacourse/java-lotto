@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 import lotto.domain.enumeration.Rank;
 import lotto.domain.vo.LottoPurchaseMoney;
 
@@ -18,29 +17,29 @@ public class LottoResult {
     public double calculateYield(LottoPurchaseMoney lottoPurchaseMoney) {
         int price = lottoPurchaseMoney.getPrice();
 
-        int totalPrizeMoney = getTotalPrizeMoney();
+        double totalPrizeMoney = getTotalPrizeMoney();
 
-        return  Math.floor((double) totalPrizeMoney / price * 100) / 100.0;
+        return totalPrizeMoney / price;
     }
 
     public Map<Rank, Integer> getRanks() {
         return Collections.unmodifiableMap(ranks);
     }
 
-    private int getTotalPrizeMoney() {
+    private double getTotalPrizeMoney() {
         Set<Rank> rankSet = ranks.keySet();
 
         return rankSet.stream()
-                .mapToInt(this::getSum)
+                .mapToDouble(this::getSum)
                 .sum();
     }
 
-    private int getSum(Rank rank) {
-        int result = 0;
+    private double getSum(Rank rank) {
+        double result = 0;
 
-        Integer integer = ranks.get(rank);
+        Integer count = ranks.get(rank);
 
-        for (int i = 0; i < integer; i++) {
+        for (int i = 0; i < count; i++) {
             result += rank.getPrizeMoney();
         }
 
