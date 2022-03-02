@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 public class NumberTest {
 
     @Test
-    @DisplayName("같은 숫자를 가진 로또 넘버 객체는 동일하다.")
+    @DisplayName("같은 숫자를 가진 로또 넘버 객체는 동등하다.")
     void lottoNumberEqual() {
         Number lottoNumber1 = new Number(12);
         Number lottoNumber2 = new Number(12);

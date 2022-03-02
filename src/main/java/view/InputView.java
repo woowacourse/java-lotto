@@ -11,7 +11,7 @@ public class InputView {
     private final static Scanner scanner = new Scanner(System.in);
 
     public interface IndividualInput<T> {
-        T get() throws IllegalArgumentException;
+        T get();
     }
 
     public static <T> T commonInputProcess(IndividualInput<T> individualInputs) {
