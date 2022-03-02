@@ -14,7 +14,7 @@ public class OutputView {
     private static final String LEFT_BRACKET = "[";
     private static final String RIGHT_BRACKET = "]";
     private static final String DELIMITER = ", ";
-    private static final String WINNING_STATISTIC = "당첨 통계%n---------";
+    private static final String WINNING_STATISTIC = "당첨 통계%n---------%n";
     private static final String STATISTICS_PRIZE_MESSAGE = "%d개 일치 (%d원)- %d개%n";
     private static final String STATISTICS_SECOND_PRIZE_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- %d개%n";
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
@@ -33,7 +33,7 @@ public class OutputView {
     }
 
     public static void printFinalStatistic(PrizeResult result) {
-        System.out.println(System.lineSeparator() + WINNING_STATISTIC);
+        System.out.printf(System.lineSeparator() + WINNING_STATISTIC);
         Map<Prize, Integer> prizeResult = result.getPrizeResult();
         for (Prize winnerPrice : result.validWinnerPrices()) {
             printEachStatistic(winnerPrice, prizeResult);
