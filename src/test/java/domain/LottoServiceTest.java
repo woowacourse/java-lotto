@@ -3,6 +3,7 @@ package domain;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import dto.LottoDto;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,10 +20,10 @@ class LottoServiceTest {
         lottoService = new LottoService(money);
     }
 
-    @DisplayName("구입 금액만큼 발급 받은 로또의 갯수를 확인한다.")
+    @DisplayName("구입 금액만큼 발급 받은 자동 로또의 갯수를 확인한다.")
     @Test
     void issueLotto_count_correct() {
-        lottoService.issueLotto(5);
+        lottoService.issueLotto(new ArrayList<>());
         final List<LottoDto> lottoDto = lottoService.getIssuedLotto();
 
         assertThat(lottoDto.size()).isEqualTo(100000);

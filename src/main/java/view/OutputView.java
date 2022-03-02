@@ -16,6 +16,7 @@ public class OutputView {
     private static final String RANK_CORRECT_MESSAGE = "개 일치 (";
 
     public void printLotto(final List<LottoDto> issuedLotto) {
+        System.out.println();
         System.out.println(issuedLotto.size() + PURCHASE_MESSAGE);
         for (LottoDto lotto : issuedLotto) {
             System.out.println(lotto.get());
