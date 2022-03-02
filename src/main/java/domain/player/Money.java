@@ -4,6 +4,7 @@ import utils.ExceptionMessage;
 
 public class Money {
 
+    public static final int ONE_LOTTO_PRICE = 1000;
     private static final int MINIMUM_PURCHASE_AMOUNT = 1000;
 
     private int amount;
@@ -18,16 +19,22 @@ public class Money {
     }
 
     private void validateAmount(int amount) {
-        if (amount < MINIMUM_PURCHASE_AMOUNT) {
+        if (amount < ONE_LOTTO_PRICE) {
             throw new IllegalArgumentException(ExceptionMessage.NOT_ENOUGH_MONEY);
         }
     }
 
-    public int getAmount() {
-        return amount;
+    public void isEnoughMoney(int manualQuantity) {
+        if(amount < manualQuantity * ONE_LOTTO_PRICE){
+            throw new IllegalArgumentException(ExceptionMessage.NOT_ENOUGH_MONEY);
+        }
     }
 
     public void subAmount() {
         amount -= 1000;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }

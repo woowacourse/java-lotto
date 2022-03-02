@@ -58,4 +58,7 @@ public class Player {
         return lottos;
     }
 
+    public void checkPossible(int manualQuantity) {
+        money.isEnoughMoney(manualQuantity);
+    }
 }
