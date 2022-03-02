@@ -16,18 +16,12 @@ import java.util.List;
 
 public class LottoController {
 
-    private Player player;
-    private WinningLotto winningLotto;
-
-    public void set() {
-        player = new Player(new Money(InputView.inputPurchaseAmount()));
-    }
-
     public void run(){
+        Player player = new Player(new Money(InputView.inputPurchaseAmount()));
         player.purchaseLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
         OutputView.printPurchasedLotto(LottosDto.from(player.getLottos()));
 
-        winningLotto = new WinningLotto(InputView.inputWinningNumber(), InputView.inputBonusBall());
+        WinningLotto winningLotto = new WinningLotto(InputView.inputWinningNumber(), InputView.inputBonusBall());
         List<Result> results = player.judgeAll(winningLotto);
 
         OutputView.printResult(new RanksDto(player.calculateIncomeRate(results)));
