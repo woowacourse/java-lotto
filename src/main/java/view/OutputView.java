@@ -42,13 +42,9 @@ public class OutputView {
         System.out.println("---------");
         Rank.getRanks().stream()
                 .filter(OutputView::isNotOther)
-                .forEach(rank -> System.out.println(rank.getCount()
-                        + "개 일치"
+                .forEach(rank -> System.out.println(rank.getCount() + "개 일치"
                         + getBonus(rank)
-                        + "(" + rank.getAmount()
-                        + "원) - "
-                        + getRankCount(LottoResults, rank)
-                        + "개"));
+                        + "(" + rank.getAmount() + "원) - " + getRankCount(LottoResults, rank) + "개"));
     }
 
     private static boolean isNotOther(Rank rank) {
