@@ -5,6 +5,7 @@ public class UserCount {
     private static final String MAXIMUM_MANUAL_COUNT_ERROR_MESSAGE = "[ERROR] 구매 가능 수량을 초과하여 입력할 수 없습니다.";
     private static final String MANUAL_COUNT_ONLY_NATURAL_ERROR_MESSAGE = "[ERROR] 수동 구매 수량에 음수를 입력할 수 없습니다.";
     private static final int NATURAL = 0;
+
     private final int totalCount;
     private final int manualCount;
     private final int autoCount;
