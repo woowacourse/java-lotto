@@ -15,6 +15,7 @@ import lotto.model.winningnumber.WinningLottoResponse;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoGameTest {
+    private final List<String> numbers = List.of("1", "2", "3", "4", "5", "6");
 
     @Test
     @DisplayName("수동 로또 개수가 없는 경우")
@@ -23,7 +24,7 @@ class LottoGameTest {
 
         ManualCount manualCount = new ManualCount("1");
         List<Lotto> lottos = new ArrayList<>();
-        Lotto lotto = new Lotto(List.of("1", "2", "3", "4", "5", "6"));
+        Lotto lotto = new Lotto(numbers);
         lottoGame.makeManualLottos(lottos, lotto, manualCount);
 
         assertThat(lottoGame.isPossibleMakeLottos(manualCount)).isTrue();
@@ -33,7 +34,7 @@ class LottoGameTest {
     @DisplayName("로또 생성 테스트")
     void checkCreateLotto() {
         List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(List.of("1", "2", "3", "4", "5", "6")));
+        lottos.add(new Lotto(numbers));
         LottoCount lottoCount = new LottoCount("10000", 1);
         LottoGame lottoGame = new LottoGame();
 
@@ -58,11 +59,11 @@ class LottoGameTest {
     @DisplayName("로또와 당첨 번호 비교 결과 테스트")
     void compareLottoWithWinning() {
         List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(List.of("1", "2", "3", "4", "5", "6")));
+        lottos.add(new Lotto(numbers));
         LottoStorage lottoStorage = new LottoStorage(new LottoCount("1000", 0), lottos);
         LottoGame lottoGame = new LottoGame();
         WinningLottoResponse winningLottoResponse =
-                new WinningLottoResponse(new WinningLotto(List.of("1", "2", "3", "4", "5", "6"), "7"));
+                new WinningLottoResponse(new WinningLotto(numbers, "7"));
 
         assertThat(lottoGame.calcWinningNumber(lottoStorage, winningLottoResponse)
                 .getWinningCount()
