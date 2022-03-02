@@ -4,7 +4,6 @@ import static validator.NumberValidators.validateLottoNumbersSize;
 import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
 
-import domain.Lotto;
 import domain.LottoNumber;
 import java.util.Arrays;
 import java.util.List;
@@ -14,17 +13,6 @@ import validator.NumberValidators;
 public class LottoNumberUtils {
 
     private static final String LOTTO_NUMBERS_DELIMITER = ", ";
-
-    public static List<Lotto> getValidManuals(List<String> manualStrings) {
-        if (manualStrings.isEmpty()) {
-            return List.of();
-        }
-
-        return manualStrings.stream()
-                .map(LottoNumberUtils::getValidLottoNumbers)
-                .map(Lotto::new)
-                .collect(Collectors.toList());
-    }
 
     public static List<LottoNumber> getValidLottoNumbers(String lottoNumbersInput) {
         List<LottoNumber> lottoNumbers = parseLottoNumbers(lottoNumbersInput);

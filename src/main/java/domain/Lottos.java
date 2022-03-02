@@ -2,7 +2,6 @@ package domain;
 
 import static domain.Lotto.LOTTO_NUMBERS_SIZE;
 import static domain.LottoNumber.LOTTO_NUMBERS_LIST;
-import static util.LottoNumberUtils.getValidManuals;
 
 import dto.LottoCountsDto;
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import util.LottoNumberUtils;
 
 public class Lottos {
 
@@ -21,19 +21,32 @@ public class Lottos {
         this.countsDto = countsDto;
     }
 
-    public static Lottos of(List<String> manuals, LottoCountsDto lottoCountsDto) {
-        List<Lotto> manualLottos = getValidManuals(manuals);
-        int autosCount = lottoCountsDto.getAutos();
+    public static Lottos of(List<String> manualsRaw, LottoCountsDto countsDto) {
+        List<Lotto> lottos = new ArrayList<>();
 
-        List<Lotto> lottos = Stream.concat(manualLottos.stream(), autosStream(autosCount))
-                .collect(Collectors.toList());
+        lottos.addAll(getValidManuals(manualsRaw));
+        lottos.addAll(generateAutos(countsDto.getAutos()));
 
-        return new Lottos(lottos, lottoCountsDto);
+        return new Lottos(lottos, countsDto);
     }
 
-    private static Stream<Lotto> autosStream(int autosCount) {
-        return Stream.generate(() -> new Lotto(generateAutoNumbers()))
-                .limit(autosCount);
+    private static List<Lotto> getValidManuals(List<String> manualStrings) {
+        if (manualStrings.isEmpty()) {
+            return List.of();
+        }
+
+        return manualStrings.stream()
+                .map(LottoNumberUtils::getValidLottoNumbers)
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+    }
+
+    private static List<Lotto> generateAutos(int autosCount) {
+        List<LottoNumber> lottoNumbers = generateAutoNumbers();
+
+        return Stream.generate(() -> new Lotto(lottoNumbers))
+                .limit(autosCount)
+                .collect(Collectors.toList());
     }
 
     private static List<LottoNumber> generateAutoNumbers() {
