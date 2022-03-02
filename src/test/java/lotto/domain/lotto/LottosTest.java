@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.LottoRanking;
+import lotto.domain.Money;
 import lotto.domain.Result;
 import lotto.domain.factory.LottoFactory;
 
@@ -24,7 +25,7 @@ public class LottosTest {
             void it_add_lotto() {
                 Lottos lottos = new Lottos();
                 lottos.add(LottoFactory.auto());
-                assertThat(lottos.getCount()).isEqualTo(1);
+                assertThat(lottos.totalPrice()).isEqualTo(new Money(1000));
             }
         }
     }
@@ -51,5 +52,21 @@ public class LottosTest {
 
             }
         }
+    }
+
+    @Nested
+    @DisplayName("구매한 가격의 총합을 알려주는 기능은")
+    class totalPrice {
+        @Test
+        @DisplayName("구매한 로또의 총합 가격을 알려준다.")
+        void it_returns_total_price() {
+            Lottos lottos = new Lottos();
+            lottos.add(LottoFactory.auto());
+            lottos.add(LottoFactory.auto());
+            lottos.add(LottoFactory.auto());
+
+            assertThat(lottos.totalPrice()).isEqualTo(new Money(3000));
+        }
+
     }
 }

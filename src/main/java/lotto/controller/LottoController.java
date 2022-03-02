@@ -23,7 +23,7 @@ public class LottoController {
 
     private Lottos buyLottos() {
         Money money = requestMoney();
-        int manualLottoCount = requestCountManualLottoToBuy(money);
+        int manualLottoCount = requestManualLottoCount(money);
         int autoLottoCount = money.countToBuyLotto();
         Lottos lottos = requestBuyLottos(manualLottoCount, autoLottoCount);
         OutputView.printLottoCount(manualLottoCount, autoLottoCount);
@@ -41,7 +41,7 @@ public class LottoController {
         }
     }
 
-    private int requestCountManualLottoToBuy(Money money) {
+    private int requestManualLottoCount(Money money) {
         try {
             String input = InputView.inputCountManualLotto();
             int count = Integer.parseInt(input);
@@ -49,7 +49,7 @@ public class LottoController {
             return count;
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
-            return requestCountManualLottoToBuy(money);
+            return requestManualLottoCount(money);
         }
     }
 
@@ -95,7 +95,7 @@ public class LottoController {
     }
 
     private void printResult(Lottos lottos) {
-        Money totalMoney = new Money(lottos.getCount() * Lotto.PRICE);
+        Money totalMoney = lottos.totalPrice();
         Result result = lottos.getResult(requestWinningLotto());
         OutputView.printResult(result);
         OutputView.printRateOfProfit(totalMoney.getRateOfProfit(result.getTotalProfit()));

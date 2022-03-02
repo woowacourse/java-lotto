@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 import lotto.domain.lotto.Lotto;
 
 public class Money {
@@ -49,5 +51,20 @@ public class Money {
 
     public int countToBuyLotto() {
         return value / Lotto.PRICE;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object)
+            return true;
+        if (object == null || getClass() != object.getClass())
+            return false;
+        Money money = (Money)object;
+        return value == money.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

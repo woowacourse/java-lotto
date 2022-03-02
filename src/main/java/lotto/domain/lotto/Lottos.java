@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.LottoRanking;
+import lotto.domain.Money;
 import lotto.domain.Result;
 
 public class Lottos {
@@ -17,12 +18,8 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public int getCount() {
-        return lottos.size();
-    }
-
-    public List<Lotto> getLottos() {
-        return lottos;
+    public Money totalPrice() {
+        return new Money(lottos.size() * Lotto.PRICE);
     }
 
     public Result getResult(WinningLotto winningLotto) {
@@ -32,5 +29,9 @@ public class Lottos {
             result.add(ranking);
         }
         return result;
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }
