@@ -26,7 +26,7 @@ public class Lotto {
 
     private void checkNumbers(final List<Integer> lottoNumbers) {
         checkNull(lottoNumbers);
-        checkDuplicateNumber(lottoNumbers);
+        checkLottoSize(lottoNumbers);
     }
 
     private void checkNull(final List<Integer> lottoNumbers) {
@@ -35,7 +35,7 @@ public class Lotto {
         }
     }
 
-    private static void checkDuplicateNumber(final List<Integer> numbers) {
+    private static void checkLottoSize(final List<Integer> numbers) {
         if (LOTTO_SIZE != Set.copyOf(numbers).size()) {
             throw new IllegalArgumentException(InvalidException.ERROR_CREATE_LOTTO);
         }

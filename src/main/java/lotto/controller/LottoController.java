@@ -7,10 +7,9 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoWinningNumbers;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.ManualLotto;
+import lotto.domain.lotto.ManualLottos;
 import lotto.domain.result.LottoResult;
 import lotto.domain.user.Money;
-import lotto.exception.InvalidException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -35,7 +34,6 @@ public class LottoController {
             OutputView.printErrorMessage(e.getMessage());
             return createLottoWinningNumbers();
         }
-
     }
 
     private String inputLottoWinningNumbers() {
@@ -59,7 +57,7 @@ public class LottoController {
         return value.replace(" ", "");
     }
 
-    public String  inputBonusNumber() {
+    public String inputBonusNumber() {
         return InputView.inputBonusNumber();
     }
 
@@ -67,7 +65,8 @@ public class LottoController {
         LottoResult lottoResult = new LottoResult();
 
         for (Lotto lotto : lottos.getLottos()) {
-            lottoResult.calculateWinning(lottoWinningNumbers.getWinningLotto(), lottoWinningNumbers.getBonusNumber(), lotto);
+            lottoResult.calculateWinning(lottoWinningNumbers.getWinningLotto(), lottoWinningNumbers.getBonusNumber(),
+                    lotto);
         }
 
         return lottoResult;
@@ -77,16 +76,16 @@ public class LottoController {
         OutputView.printWinningResult(lottoResult);
     }
 
-    public ManualLotto inputManualLotto(int purchaseLottoCount) {
-        ManualLotto manualLotto = new ManualLotto();
+    public ManualLottos inputManualLotto(int purchaseLottoCount) {
+        ManualLottos manualLotto = new ManualLottos();
         OutputView.printManualLotto();
         addManualLotto(purchaseLottoCount, manualLotto);
         return manualLotto;
     }
 
-    private void addManualLotto(int purchaseLottoCount, ManualLotto manualLotto) {
+    private void addManualLotto(int purchaseLottoCount, ManualLottos manualLotto) {
         for (int i = 0; i < purchaseLottoCount; i++) {
-            manualLotto.add(InputView.inputManualLotto());
+            manualLotto.add(createLottoByNumbers(InputView.inputManualLotto()));
         }
     }
 

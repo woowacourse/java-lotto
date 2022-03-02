@@ -4,7 +4,7 @@ import lotto.controller.LottoController;
 import lotto.controller.MoneyController;
 import lotto.domain.lotto.LottoWinningNumbers;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.ManualLotto;
+import lotto.domain.lotto.ManualLottos;
 import lotto.domain.result.LottoResult;
 import lotto.domain.user.Money;
 import lotto.domain.user.PurchaseLottoCount;
@@ -17,7 +17,7 @@ public class Application {
 
         Money money = moneyController.inputMoney();
         PurchaseLottoCount purchaseLottoCount = moneyController.inputPurchaseLottoCount(money.getCount());
-        ManualLotto manualLotto = lottoController.inputManualLotto(purchaseLottoCount.getPurchaseLottoCount());
+        ManualLottos manualLotto = lottoController.inputManualLotto(purchaseLottoCount.getPurchaseLottoCount());
 
         Lottos lottos = lottoController.inputLottoMoney(money.getAutoMoney(purchaseLottoCount.getPurchaseLottoCount()));
         lottoController.printLottos(lottos, purchaseLottoCount.getPurchaseLottoCount(), purchaseLottoCount.getRemainPurchaseLottoCount(
