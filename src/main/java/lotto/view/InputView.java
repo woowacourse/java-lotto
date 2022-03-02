@@ -43,17 +43,26 @@ public class InputView {
         }
     }
 
-    public static String inputWinningNumbers() {
+    public static LottoTicket inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
         return inputLottoNumbers();
     }
 
-    public static String inputLottoNumbers() {
+    private static LottoTicket inputLottoNumbers() {
         String inputRemovedBlank = scanner.nextLine().replaceAll(BLANK, EMPTY);
         if (isNumber(inputRemovedBlank)) {
-            return inputRemovedBlank;
+            return createLottoTicket(inputRemovedBlank);
         }
         return inputLottoNumbers();
+    }
+
+    private static LottoTicket createLottoTicket(String lottoNumbers) {
+        try {
+            return new LottoTicket(lottoNumbers);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputLottoNumbers();
+        }
     }
 
     private static boolean isNumber(String input) {
@@ -95,7 +104,7 @@ public class InputView {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < manualLottoCount.getValue(); i++) {
-            lottoTickets.add(new LottoTicket(inputLottoNumbers()));
+            lottoTickets.add(inputLottoNumbers());
         }
         return lottoTickets;
     }
