@@ -87,14 +87,14 @@ public class LottoTest {
 	void generate_six_number() {
 		Lotto lotto = new Lotto(Lotto.generateAuto());
 
-		assertThat(lotto.getAutoLotto().size()).isEqualTo(6);
+		assertThat(lotto.getLotto().size()).isEqualTo(6);
 	}
 
 	@DisplayName("6개의 숫자가 오름차순으로 정렬된다")
 	@Test
 	void sort_ascending() {
 		Lotto lotto = new Lotto(Lotto.generateAuto());
-		List<LottoBall> numbers = lotto.getAutoLotto();
+		List<LottoBall> numbers = lotto.getLotto();
 
 		for (int index = 0; index < (numbers.size() - 1); index++) {
 			assertThat(numbers.get(index).getNumber() < numbers.get(index + 1).getNumber()).isTrue();
