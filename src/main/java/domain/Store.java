@@ -10,7 +10,7 @@ public class Store {
     private static final String ERROR_COUNT_NEGATIVE_INTEGER = "구매 개수는 양의 정수만 가능합니다.";
     private static final String ERROR_LESS_MONEY = "원하시는 로또 개수를 구매하기에는 돈이 부족합니다.";
 
-    public int checkAvailableBuy(final Money money, final String numOfLotto) {
+    public int checkAvailableBuy(Money money, final String numOfLotto) {
         int numOfManualLotto = validateNumOfLotto(numOfLotto);
         if (numOfManualLotto > money.numOfAvailablePurchase()) {
             throw new IllegalArgumentException(ERROR_LESS_MONEY);
@@ -39,7 +39,7 @@ public class Store {
         }
     }
 
-    public Lottos purchaseManualLottos(final Money money, final int numOfLotto, final String[] inputNumbers) {
+    public Lottos purchaseManualLottos(Money money, final int numOfLotto, final String[] inputNumbers) {
         final Lottos lottos = new Lottos();
         for (String inputNumber : inputNumbers) {
             purchase(lottos, new ManualLottoGenerator(inputNumber));
@@ -48,7 +48,7 @@ public class Store {
         return lottos;
     }
 
-    public void purchaseAutomaticLottos(final Lottos lottos, final Money money) {
+    public void purchaseAutomaticLottos(Lottos lottos, Money money) {
         for (int i = 0; i < money.numOfAvailablePurchase(); i++) {
             purchase(lottos, new AutomaticLottoGenerator());
         }

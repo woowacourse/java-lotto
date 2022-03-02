@@ -13,7 +13,7 @@ public class WinningNumbers {
     private final Set<Number> winningNumbers;
     private final Number bonus;
 
-    public WinningNumbers(String inputNumbers, String bonusNumber) {
+    public WinningNumbers(final String inputNumbers, final String bonusNumber) {
         Set<Integer> numbers = new ManualLottoGenerator(inputNumbers).generateNumbers();
         winningNumbers = new HashSet<>();
         for (Integer number : numbers) {

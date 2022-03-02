@@ -15,7 +15,7 @@ public class ManualLottoGenerator implements LottoGenerator {
 
     private final String inputNumber;
 
-    public ManualLottoGenerator(String inputNumber) {
+    public ManualLottoGenerator(final String inputNumber) {
         this.inputNumber = inputNumber;
     }
 
@@ -54,9 +54,10 @@ public class ManualLottoGenerator implements LottoGenerator {
         }
     }
 
-    private void checkRightSize(final Set<Integer> numbers) {
+    private void checkRightSize(Set<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
         }
     }
+
 }

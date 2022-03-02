@@ -20,7 +20,7 @@ public class Lotto {
         }
     }
 
-    private void checkRightSize(final Set<Integer> numbers) {
+    private void checkRightSize(Set<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
         }
@@ -40,7 +40,7 @@ public class Lotto {
                 .filter(lottoNumbers::contains).count();
     }
 
-    private boolean hasMatchedNumber(final Number number) {
+    private boolean hasMatchedNumber(Number number) {
         return lottoNumbers.contains(number);
     }
 
