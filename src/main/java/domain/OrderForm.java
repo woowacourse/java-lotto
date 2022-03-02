@@ -1,10 +1,13 @@
 package domain;
 
+import java.util.Objects;
+
 public class OrderForm {
 	private final Payment payment;
 	private final int quantity;
 
 	public OrderForm(Payment payment, int quantity) {
+		Objects.requireNonNull(payment);
 		checkNegative(quantity);
 		checkRange(payment, quantity);
 		this.payment = payment;
