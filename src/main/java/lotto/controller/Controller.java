@@ -1,9 +1,7 @@
 package lotto.controller;
 
-import java.util.Scanner;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.ProfitRate;
 import lotto.domain.RankCount;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
@@ -18,8 +16,7 @@ public class Controller {
 
         WinningNumbers winningNumbers = getWinningNumbers();
         RankCount rankCount = new RankCount(lottos, winningNumbers);
-        ProfitRate profitRate = new ProfitRate(rankCount.getTotalPrize(), money);
-        OutputView.printWinningStatistic(rankCount, profitRate);
+        OutputView.printWinningStatistic(money, rankCount);
     }
 
     private Money getMoney() {

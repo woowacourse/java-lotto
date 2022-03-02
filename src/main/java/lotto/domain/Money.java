@@ -23,11 +23,12 @@ public class Money {
         return input % UNIT_SIZE == 0;
     }
 
-    public int getMoney() {
-        return money;
-    }
-
     public int calculateTotalLottoCount(int lottoTicketPrice) {
         return money / lottoTicketPrice;
+    }
+
+    public double calculateProfitRate(long totalPrize) {
+        double profitRate = (double) totalPrize / (double) money;
+        return Math.floor(profitRate * 100) / 100.0;
     }
 }
