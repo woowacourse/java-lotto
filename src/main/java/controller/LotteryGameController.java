@@ -24,20 +24,38 @@ public class LotteryGameController {
 	}
 
 	public void startLotteryGame() {
+		initLotteryGame();
 		final Lotteries lotteries = purchaseLottery();
 		final WinningLottery winningLottery = createWinningLottery();
 		outputView.printLotteries(lotteries.getLotteries());
 		makeResult(lotteries, winningLottery);
 	}
 
-	private Lotteries purchaseLottery() {
+	private void initLotteryGame() {
 		try {
 			lotteryGame = LotteryGame.of(inputMoney(), new LotteryGenerator(), new LotteryNumberGenerator());
-			return lotteryGame.createLottery(Collections.emptyList());
+		} catch (IllegalArgumentException exception) {
+			outputView.printException(exception.getMessage());
+			initLotteryGame();
+		}
+	}
+
+	private Lotteries purchaseLottery() {
+		try {
+			lotteryGame = lotteryGame.putNumOfManualLottery(inputNumOfManualLottery());
+			return lotteryGame.createLottery(inputManualLotteryNumbers());
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
 			return purchaseLottery();
 		}
+	}
+
+	private List<List<Integer>> inputManualLotteryNumbers() {
+		return inputView.inputManualLotteryNumber(lotteryGame.getTheNumberOfLottery());
+	}
+
+	private int inputNumOfManualLottery() {
+		return inputView.inputValidNumOfManualLottery();
 	}
 
 	private WinningLottery createWinningLottery() {

@@ -3,11 +3,14 @@ package view;
 import static view.messages.InputExceptionMessages.*;
 import static view.messages.InputViewMessages.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import domain.NumOfLottery;
 
 public class InputView {
 
@@ -44,19 +47,38 @@ public class InputView {
 	}
 
 	public List<Integer> inputValidLotteryNumber() {
-		final String numbers = inputLotteryNumber();
-		return splitNumbers(numbers);
+		System.out.println(INPUT_WINNING_NUMBER_MESSAGE.getMessage());
+		try {
+			final String numbers = inputLotteryNumber();
+			return splitNumbers(numbers);
+		} catch (IllegalArgumentException exception) {
+			System.out.println(exception.getMessage());
+			return inputValidLotteryNumber();
+		}
 	}
 
 	private String inputLotteryNumber() {
-		System.out.println(INPUT_WINNING_NUMBER_MESSAGE.getMessage());
 		final String winningNumber = scanner.nextLine();
+		validateWinningNumber(winningNumber);
+		return winningNumber;
+	}
+
+	public List<List<Integer>> inputManualLotteryNumber(final NumOfLottery numOfLottery) {
+		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+		List<List<Integer>> manualNumbers = new ArrayList<>();
 		try {
-			validateWinningNumber(winningNumber);
-			return winningNumber;
+			inputLotteryNumberToManualNumbers(numOfLottery, manualNumbers);
+			return manualNumbers;
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
-			return inputLotteryNumber();
+			return inputManualLotteryNumber(numOfLottery);
+		}
+	}
+
+	private void inputLotteryNumberToManualNumbers(final NumOfLottery numOfLottery, final List<List<Integer>> manualNumbers) {
+		for (int i = 0; i < numOfLottery.getNumOfManualLottery(); i++) {
+			final String numbers = inputLotteryNumber();
+			manualNumbers.add(splitNumbers(numbers));
 		}
 	}
 
@@ -75,6 +97,22 @@ public class InputView {
 
 	public int inputValidBonusNumber() {
 		return Integer.parseInt(inputBonusNumber());
+	}
+
+	public int inputValidNumOfManualLottery() {
+		return Integer.parseInt(inputNumOfManualLottery());
+	}
+
+	private String inputNumOfManualLottery() {
+		System.out.println(INPUT_NUM_OF_MANUAL_LOTTERY_MESSAGE.getMessage());
+		final String numOfManualLottery = scanner.nextLine();
+		try {
+			validateNumber(numOfManualLottery);
+			return numOfManualLottery;
+		} catch (IllegalArgumentException exception) {
+			System.out.println(exception.getMessage());
+			return inputNumOfManualLottery();
+		}
 	}
 
 	private String inputBonusNumber() {
