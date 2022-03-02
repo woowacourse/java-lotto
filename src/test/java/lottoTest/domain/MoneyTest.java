@@ -17,7 +17,7 @@ class MoneyTest {
     @Test
     void 구입한_로또_개수_테스트() {
         Money money = new Money(14000);
-        int result = money.getLottoCount();
+        int result = money.getMaxLottoCount();
         assertThat(result).isEqualTo(14);
     }
 
@@ -45,5 +45,19 @@ class MoneyTest {
         Money money = new Money(14000);
         assertThat(money.calculateYield(lottoStatistics.getLottoTotalReward())).isEqualTo(
                 55000 / (double) 14000);
+    }
+
+    @Test
+    void 로또를_구입하고_돈을_감소시키는_기능_테스트() {
+        Money money = new Money(14000);
+        assertThat(money.decrease(14).getMaxLottoCount()).isEqualTo(0);
+    }
+
+    @Test
+    void 로또를_구입할때_돈이_부족한_경우_테스트() {
+        Money money = new Money(1000);
+        assertThatThrownBy(() -> money.decrease(2))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("로또를 구입하기에 돈이 충분하지 않습니다.");
     }
 }
