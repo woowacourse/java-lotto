@@ -16,12 +16,23 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
-    public LottoNumber(int number) {
-        validateNumberBoundary(number);
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void validateNumberBoundary(int number) {
+    public static LottoNumber getInstance(int number) {
+        validateNumberBoundary(number);
+
+        LottoNumber lottoNumber = LOTTO_TOTAL_NUMBERS.get(number - 1);
+
+        if (lottoNumber != null) {
+            return lottoNumber;
+        }
+
+        return new LottoNumber(number);
+    }
+
+    private static void validateNumberBoundary(int number) {
         if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
             throw new IllegalArgumentException("1~45의 숫자이어야 합니다.");
         }

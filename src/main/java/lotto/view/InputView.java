@@ -59,7 +59,7 @@ public class InputView {
         try {
             return values.stream()
                     .map(Integer::parseInt)
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::getInstance)
                     .collect(toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("정수여야 합니다. 형식을 확인해주세요.");
@@ -71,7 +71,7 @@ public class InputView {
 
         int value = translateInteger(scanner.nextLine());
 
-        return new LottoNumber(value);
+        return LottoNumber.getInstance(value);
     }
 
     private int translateInteger(String value) {
