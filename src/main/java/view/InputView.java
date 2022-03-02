@@ -28,4 +28,8 @@ public class InputView {
         OutputView.printManualCountInstruction();
         return getInput();
     }
+
+    public static String getManualLotto() {
+        return getInput();
+    }
 }

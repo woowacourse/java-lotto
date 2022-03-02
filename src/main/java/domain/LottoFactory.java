@@ -1,5 +1,8 @@
 package domain;
 
+import view.InputView;
+import view.OutputView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,22 +21,43 @@ public class LottoFactory {
     private static final int LOTTO_NUMBER_MAX = 45;
     private static final int LOTTO_NUMBER_UNIT_TO_CORRECT = 1;
     private static final int INIT_WIN_PRIZE = 0;
+    private static final String ERROR_MESSAGE = "[ERROR] ";
 
     private final List<Lotto> issuedLotto = new ArrayList<>();
     private final List<CorrectNumber> correctNumbersOfIssuedLotto = new ArrayList<>();
     private final Money money;
+    private Count manualCount;
     private Lotto lastWinLotto;
     private LottoNumber bonusNumber;
 
-    public LottoFactory(final Money money) {
+    public LottoFactory(final Money money, final Count manualCount) {
         this.money = money;
+        this.manualCount = manualCount;
     }
 
     public List<Lotto> issueLotto() {
         issuedLotto.clear();
         correctNumbersOfIssuedLotto.clear();
-        generateLotto(money.calculateCounts());
+        issueManualLotto();
+        generateLotto(money.calculateCounts() - issuedLotto.size());
         return Collections.unmodifiableList(issuedLotto);
+    }
+
+    private void issueManualLotto() {
+        OutputView.printManualLottoInstruction();
+        while (!manualCount.isEnd()) {
+            issuedLotto.add(generateManualLotto());
+            this.manualCount = manualCount.decrease();
+        }
+    }
+
+    private Lotto generateManualLotto() {
+        try {
+            return new Lotto(InputView.getManualLotto());
+        } catch (IllegalArgumentException e) {
+            System.out.println(ERROR_MESSAGE + e.getMessage());
+            return generateManualLotto();
+        }
     }
 
     private void generateLotto(int number) {

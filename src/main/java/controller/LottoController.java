@@ -13,12 +13,11 @@ public class LottoController {
     private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "지난주 당첨번호와 보너스가 중복일 수 없습니다.";
 
     public void start() {
-
         Money money = getMoney();
         Count manualCount = getManualCount(money);
+        final LottoFactory lottoFactory = new LottoFactory(money, manualCount);
 
-        final LottoFactory lottoFactory = new LottoFactory(money);
-        OutputView.printLotto(lottoFactory.issueLotto());
+        OutputView.printLotto(lottoFactory.issueLotto(), manualCount.getCount());
 
         Lotto lastWinLotto = getWinLotto();
         LottoNumber bonusNumber = getBonusNumber(lastWinLotto);

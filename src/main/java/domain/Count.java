@@ -15,6 +15,10 @@ public class Count {
         this.count = count;
     }
 
+    public int getCount() {
+        return count;
+    }
+
     public static Count getManualCount(final String input, final Money money) {
         validateInputManualCount(input, money);
         int count = Integer.parseInt(input);

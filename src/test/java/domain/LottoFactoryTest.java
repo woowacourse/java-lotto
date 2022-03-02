@@ -18,16 +18,7 @@ class LottoFactoryTest {
     void setUp() {
         final Money money = new Money("100000000");
 
-        lottoFactory = new LottoFactory(money);
-    }
-
-    @DisplayName("구입 금액만큼 발급 받은 로또의 갯수를 확인한다.")
-    @Test
-    void issueLotto_count_correct() {
-        lottoFactory.issueLotto();
-        final List<Lotto> lottoTickets = lottoFactory.getLotto();
-
-        assertThat(lottoTickets.size()).isEqualTo(100000);
+        lottoFactory = new LottoFactory(money, new Count(5));
     }
 
     @DisplayName("각각 로또들의 등수에 따라 받을 수 있는 총 상금의 합을 확인한다.")
