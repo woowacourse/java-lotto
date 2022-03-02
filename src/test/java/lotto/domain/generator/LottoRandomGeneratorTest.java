@@ -15,7 +15,7 @@ class LottoRandomGeneratorTest {
     final int numberOfGenerating = 5;
     final LottoGenerator lottoRandomGenerator = new LottoRandomGenerator();
     final List<LottoNumbers> generated =
-            lottoRandomGenerator.generateLottoNumbersGroup(numberOfGenerating, Collections.EMPTY_LIST);
+            lottoRandomGenerator.generateLottoNumbersGroup(numberOfGenerating, (List<List<String>>) Collections.EMPTY_LIST);
 
     @Test
     @DisplayName("올바른 값으로 로또 번호들이 예외 없이 자동으로 만들어지는지 검증한다.")

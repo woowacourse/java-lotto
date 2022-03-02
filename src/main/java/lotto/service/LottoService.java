@@ -6,11 +6,8 @@ import lotto.domain.generator.LottoManualGenerator;
 import lotto.domain.vo.LottoNumber;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoService {
-    private static final String DUPLICATE_MANUAL_EXCEPTION_MESSAGE = "완전히 동일한 줄이 존재합니다.";
-
     private static final int LOTTO_PRICE = 1000;
     private static final int INITIAL_MATCH_COUNT = 0;
 
@@ -41,7 +38,8 @@ public class LottoService {
 
     public void generateAutoLottoNumbers(final int lottoNumbersCount) {
         final int autoLottoCounts = lottoNumbersCount - lottoNumbersGroup.size();
-        lottoNumbersGroup.addAll(lottoGenerator.generateLottoNumbersGroup(autoLottoCounts, Collections.EMPTY_LIST));
+        lottoNumbersGroup.addAll(lottoGenerator.generateLottoNumbersGroup(
+                autoLottoCounts, (List<List<String>>) Collections.EMPTY_LIST));
     }
 
     public List<LottoNumbers> getLottoNumbersGroup() {
