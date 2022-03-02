@@ -25,7 +25,9 @@ public class InputView {
 
     public static int getPassivityPurchaseCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return toInt(SCANNER.nextLine());
+        int passivityPurchaseCount = toInt(SCANNER.nextLine());
+        printEmptyLine();
+        return passivityPurchaseCount;
     }
 
     public static List<LotteryNumber> getWinningLotteryNumbers() {
@@ -43,7 +45,9 @@ public class InputView {
     public static LotteryNumber getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
-            return new LotteryNumber(toInt(SCANNER.nextLine()));
+            LotteryNumber lotteryNumber = new LotteryNumber(toInt(SCANNER.nextLine()));
+            printEmptyLine();
+            return lotteryNumber;
         } catch (NumberFormatException numberFormatException) {
             System.out.println(numberFormatException.getMessage());
             return getBonusNumber();
@@ -64,5 +68,9 @@ public class InputView {
                 .map(i -> new LotteryNumber(toInt(i)))
                 .collect(Collectors.toList());
         return new LotteryTicket(lotteryNumbers);
+    }
+
+    private static void printEmptyLine() {
+        System.out.println();
     }
 }

@@ -6,8 +6,6 @@ import lotterymachine.utils.LotteryCalculator;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static lotterymachine.utils.LotteryCalculator.calculateProfitRate;
-
 public class WinningResult {
     private final Map<WinningLotteryRank, Integer> result = new EnumMap<>(WinningLotteryRank.class);
     private final LotteryTickets lotteryTickets;
