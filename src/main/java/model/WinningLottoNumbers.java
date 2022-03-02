@@ -20,8 +20,7 @@ public class WinningLottoNumbers {
         List<LottoRank> ranks = lottos.stream()
                 .map(this::getRankBy)
                 .collect(Collectors.toList());
-        LottoResult result = new LottoResult(inputBudget, ranks);
-        return result;
+        return new LottoResult(inputBudget, ranks);
     }
 
     private LottoRank getRankBy(Lotto lotto) {

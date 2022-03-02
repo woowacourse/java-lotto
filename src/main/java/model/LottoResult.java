@@ -18,16 +18,16 @@ public class LottoResult {
     }
 
     public BigDecimal getProfitRate() {
-        return getTotalPrize().divide(inputBudget);
+        return inputBudget.getProfitRateFrom(getTotalPrize());
     }
 
-    private Budget getTotalPrize() {
+    private BigDecimal getTotalPrize() {
         return resultMap.keySet().stream()
                 .map(this::getTotalPrizeByRank)
-                .reduce(Budget.ZERO, Budget::add);
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    private Budget getTotalPrizeByRank(LottoRank lottoRank) {
+    private BigDecimal getTotalPrizeByRank(LottoRank lottoRank) {
         return lottoRank.multiplePrizeBy(getCountByRank(lottoRank));
     }
 

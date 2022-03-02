@@ -3,22 +3,23 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoResultTest {
-    private static final Budget FIRST_PRIZE = LottoRank.FIRST.multiplePrizeBy(1);
-    private static final Budget SECOND_PRIZE = LottoRank.SECOND.multiplePrizeBy(1);
-    private static final Budget THIRD_PRIZE = LottoRank.THIRD.multiplePrizeBy(1);
+    private static final BigDecimal FIRST_PRIZE = LottoRank.FIRST.multiplePrizeBy(1);
+    private static final BigDecimal SECOND_PRIZE = LottoRank.SECOND.multiplePrizeBy(1);
+    private static final BigDecimal THIRD_PRIZE = LottoRank.THIRD.multiplePrizeBy(1);
 
     @Test
     @DisplayName("당첨결과 금액 총합 계산 테스트")
     void summarizeLottoPrize() {
         LottoResult lottoResult = new LottoResult(new Budget(4000),
                 List.of(LottoRank.FIRST, LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD));
-        Budget expected = FIRST_PRIZE.multiply(2).add(SECOND_PRIZE).add(THIRD_PRIZE);
-        assertThat(lottoResult.getProfitRate()).isEqualTo(expected.divide(new Budget(4000)));
+        BigDecimal expected = FIRST_PRIZE.multiply(BigDecimal.valueOf(2)).add(SECOND_PRIZE).add(THIRD_PRIZE);
+        assertThat(lottoResult.getProfitRate()).isEqualTo(expected.divide(BigDecimal.valueOf(4000)));
     }
 
     @Test

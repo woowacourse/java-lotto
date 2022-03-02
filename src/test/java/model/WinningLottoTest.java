@@ -32,11 +32,11 @@ public class WinningLottoTest {
             LottoNumber.convertAll(List.of(1, 2, 3, 10, 11, 12)));
     private static final Lotto NOTHING_PRIZE_LOTTO_NUMBERS = Lotto.of(
             LottoNumber.convertAll(List.of(1, 2, 9, 11, 12, 13)));
-    private static final Budget FIRST_PRIZE = LottoRank.FIRST.multiplePrizeBy(1);
-    private static final Budget SECOND_PRIZE = LottoRank.SECOND.multiplePrizeBy(1);
-    private static final Budget THIRD_PRIZE = LottoRank.THIRD.multiplePrizeBy(1);
-    private static final Budget FOURTH_PRIZE = LottoRank.FOURTH.multiplePrizeBy(1);
-    private static final Budget FIFTH_PRIZE = LottoRank.FIFTH.multiplePrizeBy(1);
+    private static final BigDecimal FIRST_PRIZE = LottoRank.FIRST.multiplePrizeBy(1);
+    private static final BigDecimal SECOND_PRIZE = LottoRank.SECOND.multiplePrizeBy(1);
+    private static final BigDecimal THIRD_PRIZE = LottoRank.THIRD.multiplePrizeBy(1);
+    private static final BigDecimal FOURTH_PRIZE = LottoRank.FOURTH.multiplePrizeBy(1);
+    private static final BigDecimal FIFTH_PRIZE = LottoRank.FIFTH.multiplePrizeBy(1);
 
     private WinningLottoNumbers winningLottoNumbers;
 
@@ -83,9 +83,9 @@ public class WinningLottoTest {
     @ParameterizedTest(name = "{2} 판독")
     @MethodSource("provideLottoAndPrizeAndRank")
     @DisplayName("당첨 판독 테스트")
-    void prizeCountTest(Lotto lotto, Budget budget, LottoRank rank) {
+    void prizeCountTest(Lotto lotto, BigDecimal prize, LottoRank rank) {
         LottoResult result = winningLottoNumbers.summarize(List.of(lotto), new Budget(1000));
-        assertThat(result.getProfitRate()).isEqualTo(budget.divide(new Budget(1000)));
+        assertThat(result.getProfitRate()).isEqualTo(prize.divide(BigDecimal.valueOf(1000)));
         assertThat(result.getCountByRank(rank)).isEqualTo(1);
     }
 
@@ -108,9 +108,9 @@ public class WinningLottoTest {
                 new Budget(5000)
         );
 
-        Budget expectedPrize = FIRST_PRIZE.add(FIRST_PRIZE).add(SECOND_PRIZE).add(THIRD_PRIZE)
+        BigDecimal expectedPrize = FIRST_PRIZE.add(FIRST_PRIZE).add(SECOND_PRIZE).add(THIRD_PRIZE)
                 .add(THIRD_PRIZE);
-        assertThat(result.getProfitRate()).isEqualTo(expectedPrize.divide(new Budget(5000)));
+        assertThat(result.getProfitRate()).isEqualTo(expectedPrize.divide(BigDecimal.valueOf(5000)));
         assertAll("rankCounts",
                 () -> assertThat(result.getCountByRank(LottoRank.FIRST)).isEqualTo(2),
                 () -> assertThat(result.getCountByRank(LottoRank.SECOND)).isEqualTo(1),

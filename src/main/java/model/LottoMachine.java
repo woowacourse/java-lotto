@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 import model.generator.LottoGenerator;
 
 public class LottoMachine {
-    private final static Budget LOTTO_PRICE = new Budget(1000);
     private final LottoGenerator lottoGenerator;
 
     public LottoMachine(LottoGenerator lottoGenerator) {
@@ -14,12 +13,8 @@ public class LottoMachine {
     }
 
     public List<Lotto> issueLotto(Budget budget) {
-        return IntStream.range(0, quantity(budget))
+        return IntStream.range(0, budget.getAffordableLottoCount())
                 .mapToObj(i -> lottoGenerator.createLotto())
                 .collect(Collectors.toList());
-    }
-
-    private int quantity(Budget budget) {
-        return budget.divide(LOTTO_PRICE).intValue();
     }
 }
