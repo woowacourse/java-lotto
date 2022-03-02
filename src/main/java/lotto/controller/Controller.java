@@ -11,33 +11,33 @@ import lotto.view.OutputView;
 
 public class Controller {
 
-    public void run(Scanner scanner) {
-        Money money = getMoney(scanner);
+    public void run() {
+        Money money = getMoney();
         Lottos lottos = Lottos.buyLottosByAuto(money);
         OutputView.printLottos(lottos);
 
-        WinningNumbers winningNumbers = getWinningNumbers(scanner);
+        WinningNumbers winningNumbers = getWinningNumbers();
         RankCount rankCount = new RankCount(lottos, winningNumbers);
         ProfitRate profitRate = new ProfitRate(rankCount.getTotalPrize(), money);
         OutputView.printWinningStatistic(rankCount, profitRate);
     }
 
-    private Money getMoney(Scanner scanner) {
+    private Money getMoney() {
         try {
-            int inputMoney = InputView.inputMoney(scanner);
+            int inputMoney = InputView.inputMoney();
             return new Money(inputMoney);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return getMoney(scanner);
+            return getMoney();
         }
     }
 
-    private WinningNumbers getWinningNumbers(Scanner scanner) {
+    private WinningNumbers getWinningNumbers() {
         try {
-            return new WinningNumbers(InputView.inputWinningLotto(scanner), InputView.inputBonusNumber(scanner));
+            return new WinningNumbers(InputView.inputWinningLotto(), InputView.inputBonusNumber());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return getWinningNumbers(scanner);
+            return getWinningNumbers();
         }
     }
 }
