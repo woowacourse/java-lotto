@@ -15,4 +15,15 @@ public class LottoTicketsTest {
 	void zeroPrice() {
 		assertThatThrownBy(() -> new LottoTickets(0)).isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@Test
+	void addMoreThanCapacity() {
+		LottoTickets lottoTickets = new LottoTickets(2000);
+		lottoTickets.add(new Lotto(new AutoGenerator().generateLottoNumbers()));
+		lottoTickets.add(new Lotto(new AutoGenerator().generateLottoNumbers()));
+		assertThatThrownBy(
+			() -> lottoTickets.add(new Lotto(new AutoGenerator().generateLottoNumbers()))).isInstanceOf(
+			IllegalArgumentException.class);
+
+	}
 }
