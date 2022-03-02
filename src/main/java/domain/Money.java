@@ -6,10 +6,6 @@ public class Money {
 
     private final int money;
 
-    public Money(String money) {
-        this.money = StringUtil.convertToInteger(money);
-    }
-
     public Money(int money) {
         this.money = money;
     }
