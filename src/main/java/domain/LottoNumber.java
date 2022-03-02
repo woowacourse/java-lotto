@@ -12,7 +12,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
-    public static final List<LottoNumber> LOTTO_NUMBERS_LIST = IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER)
+    public static final List<LottoNumber> allLottoNumbers = IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER)
             .boxed()
             .map(LottoNumber::of)
             .collect(Collectors.toList());
