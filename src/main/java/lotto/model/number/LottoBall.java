@@ -2,7 +2,7 @@ package lotto.model.number;
 
 import java.util.Objects;
 
-public class LottoBall {
+public class LottoBall implements Comparable<LottoBall> {
 	private static final String ERROR_TYPE = "[ERROR] 로또 번호는 숫자로만 입력해주세요";
 	private static final String ERROR_BOUND = "[ERROR] 로또 번호는 1 이상 45 이하로 입력해주세요";
 	int MIN_WINNING_NUMBER = 1;
@@ -46,5 +46,17 @@ public class LottoBall {
 	@Override
 	public int hashCode() {
 		return Objects.hash(number);
+	}
+
+	@Override
+	public int compareTo(LottoBall o) {
+
+		if (this.number > o.number) {
+			return 1;
+		}
+		if (this.number < o.number) {
+			return -1;
+		}
+		return 0;
 	}
 }
