@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.constants.NumberLimit;
+import lotto.constants.LottoNumberLimit;
 
 import java.util.Objects;
 
@@ -14,7 +14,7 @@ public class LottoNumber {
     }
 
     private void validateRange(int number) {
-        NumberLimit.checkOutOfRange(number);
+        LottoNumberLimit.checkOutOfRange(number);
     }
 
     public int getNumber() {
