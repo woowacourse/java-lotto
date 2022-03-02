@@ -9,8 +9,7 @@ import model.result.Rank;
 import model.winningnumber.LottoWinningNumberDTO;
 
 public class Lotto {
-	private static final int CHECKING_BONUS_NUMBER = 5;
-
+	
 	private final List<Integer> numbers;
 
 	public Lotto(List<Integer> numbers) {
@@ -25,7 +24,7 @@ public class Lotto {
 		List<Integer> winningNumbers = winningNumberDTO.getWinningNumbers();
 		long count = countMatchingWinningNumber(winningNumbers);
 
-		if (count == CHECKING_BONUS_NUMBER) {
+		if (count == Rank.BONUS.getMatchNumber()) {
 			return matchWithBonus(bonusBallDTO);
 		}
 
