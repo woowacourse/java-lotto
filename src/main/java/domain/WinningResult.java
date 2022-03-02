@@ -11,6 +11,9 @@ public class WinningResult {
 	}
 
 	public double getRateOfProfit(final Money money) {
+		if (money.canPurchase()) {
+			return 0;
+		}
 		long profit = winningResult.entrySet()
 			.stream()
 			.mapToLong(result -> result.getKey().getAmount() * result.getValue())

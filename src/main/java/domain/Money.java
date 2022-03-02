@@ -6,6 +6,7 @@ public class Money {
 
 	public static final int LOTTO_PRICE = 1000;
 	private static final int REMAINDER_ZERO = 0;
+	private static final int NO_PURCHASE_MONEY = 0;
 	private static final String NOT_MONEY_UNIT_EQUAL_LOTTO_PRICE_UNIT_MESSAGE = "구입 금액은 1000원 단위여야 합니다";
 
 	private final int money;
@@ -23,6 +24,10 @@ public class Money {
 
 	public int findPurchaseLottoCount() {
 		return money / LOTTO_PRICE;
+	}
+
+	public boolean canPurchase() {
+		return money == NO_PURCHASE_MONEY;
 	}
 
 	@Override

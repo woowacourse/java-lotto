@@ -3,6 +3,7 @@ package domain;
 import static domain.Lotto.*;
 import static domain.LottoNumber.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,17 +15,17 @@ public class LottoFactory {
 		.boxed()
 		.collect(Collectors.toList());
 
-	public List<Lotto> generateLottos(final Money money, final List<List<Integer>> inputManualLotto) {
-		List<Lotto> lottos = generateLottosAsManual(inputManualLotto);
-		lottos.addAll(generateLottosAsAuto(money));
+	public List<Lotto> generateLottos(final int autoLottoCount, final List<List<Integer>> inputManualLotto) {
+		List<Lotto> lottos = new ArrayList<>();
+		generateLottosAsManual(lottos, inputManualLotto);
+		generateLottosAsAuto(lottos, autoLottoCount);
 		return lottos;
 	}
 
-	public List<Lotto> generateLottosAsAuto(final Money money) {
-		int autoLottoCount = money.findPurchaseLottoCount();
-		return IntStream.range(0, autoLottoCount)
+	private void generateLottosAsAuto(List<Lotto> lottos, final int autoLottoCount) {
+		lottos.addAll(IntStream.range(0, autoLottoCount)
 			.mapToObj(index -> generateLottoAsAuto())
-			.collect(Collectors.toUnmodifiableList());
+			.collect(Collectors.toUnmodifiableList()));
 	}
 
 	private Lotto generateLottoAsAuto() {
@@ -38,13 +39,18 @@ public class LottoFactory {
 			.collect(Collectors.toList()));
 	}
 
-	public List<Lotto> generateLottosAsManual(final List<List<Integer>> inputManualLotto) {
-		return inputManualLotto.stream()
+	private void generateLottosAsManual(List<Lotto> lottos,
+		final List<List<Integer>> inputManualLotto) {
+		if (inputManualLotto == null || inputManualLotto.isEmpty()) {
+			return;
+		}
+		lottos.addAll(inputManualLotto.stream()
 			.map(this::generateLottoAsManual)
-			.collect(Collectors.toList());
+			.collect(Collectors.toList()));
 	}
 
 	private Lotto generateLottoAsManual(final List<Integer> manualLotto) {
 		return generateLotto(manualLotto);
 	}
+
 }
