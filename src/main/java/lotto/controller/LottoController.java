@@ -15,20 +15,20 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    public void printLottos(final Lottos lottos, int purchaseLottoCount, int remainPurchaseLottoCount) {
+    public void printLottos(final Lottos lottos, final int purchaseLottoCount, final int remainPurchaseLottoCount) {
         OutputView.printLottos(lottos, purchaseLottoCount, remainPurchaseLottoCount);
     }
 
     public Lottos inputLottoMoney(final int inputMoney) {
-        Money money = new Money(inputMoney);
+        final Money money = new Money(inputMoney);
         return new Lottos(money.getCount());
     }
 
     public LottoWinningNumbers createLottoWinningNumbers() {
         try {
-            String numbers = inputLottoWinningNumbers();
-            Lotto lotto = createLottoByNumbers(numbers);
-            LottoNumber bonusNumber = new LottoNumber(inputBonusNumber());
+            final String numbers = inputLottoWinningNumbers();
+            final Lotto lotto = createLottoByNumbers(numbers);
+            final LottoNumber bonusNumber = new LottoNumber(inputBonusNumber());
             return new LottoWinningNumbers(lotto, bonusNumber);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
@@ -45,8 +45,8 @@ public class LottoController {
         }
     }
 
-    public Lotto createLottoByNumbers(String numbers) {
-        List<Integer> lotto = Arrays.stream(numbers.split(","))
+    public Lotto createLottoByNumbers(final String numbers) {
+        final List<Integer> lotto = Arrays.stream(numbers.split(","))
                 .map(this::removeBlank)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
@@ -76,20 +76,25 @@ public class LottoController {
         OutputView.printWinningResult(lottoResult);
     }
 
-    public ManualLottos inputManualLotto(int purchaseLottoCount) {
-        ManualLottos manualLotto = new ManualLottos();
-        OutputView.printManualLotto();
-        addManualLotto(purchaseLottoCount, manualLotto);
-        return manualLotto;
+    public ManualLottos inputManualLotto(final int purchaseLottoCount) {
+        try{
+            ManualLottos manualLotto = new ManualLottos();
+            OutputView.printManualLotto();
+            addManualLotto(purchaseLottoCount, manualLotto);
+            return manualLotto;
+        }catch (IllegalArgumentException e){
+            OutputView.printErrorMessage(e.getMessage());
+            return inputManualLotto(purchaseLottoCount);
+        }
     }
 
-    private void addManualLotto(int purchaseLottoCount, ManualLottos manualLotto) {
+    private void addManualLotto(final int purchaseLottoCount, final ManualLottos manualLotto) {
         for (int i = 0; i < purchaseLottoCount; i++) {
             manualLotto.add(createLottoByNumbers(InputView.inputManualLotto()));
         }
     }
 
-    public Lottos addLottos(Lottos lottos, List<Lotto> addLottos) {
+    public Lottos addLottos(final Lottos lottos, final List<Lotto> addLottos) {
         return lottos.addLottos(addLottos);
     }
 }

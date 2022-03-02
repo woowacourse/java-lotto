@@ -11,10 +11,10 @@ public class Lotto {
     private final List<Integer> lottoNumbers;
 
     public Lotto(){
-        List<Integer> numbers = LottoNumber.getRangeLottoNumbers();
-        Collections.shuffle(numbers);
-        checkNumbers(numbers.subList(0, LOTTO_SIZE));
-        lottoNumbers = numbers.subList(0, LOTTO_SIZE);
+        List<Integer> numberRange = LottoNumber.getRangeLottoNumbers();
+        Collections.shuffle(numberRange);
+        checkNumbers(numberRange.subList(0, LOTTO_SIZE));
+        lottoNumbers = numberRange.subList(0, LOTTO_SIZE);
         Collections.sort(lottoNumbers);
     }
 
