@@ -4,8 +4,6 @@ package domain;
 <<<<<<< HEAD
 public class Result {
 
-    private static final int HIT_FIVE_RANK = 5;
-
     private final int hitCount;
     private final boolean isHitBonusBall;
 
@@ -36,9 +34,6 @@ public class Result {
 <<<<<<< HEAD
 <<<<<<< HEAD
     public boolean isWhatRank(Rank rank) {
-        if (rank.getCriteria() == HIT_FIVE_RANK) {
-            return this.hitCount == rank.getCriteria() && this.isHitBonusBall == rank.getHitBonusBall();
-        }
         return this.hitCount == rank.getCriteria();
 =======
 =======
@@ -67,6 +62,13 @@ public class Result {
         return Objects.hash(hitCount, isHitBonusBall);
 >>>>>>> ed345ef (feat: 보너스볼 판정 로직 및 Result 객체 구현)
     }
+<<<<<<< HEAD
 =======
 >>>>>>> a879dd3 (feat : 구매한 모든 로또의 결과를 기록하는 클래스 추가)
+=======
+
+    public boolean isSecondRank() {
+        return Rank.isSecondRank(hitCount, isHitBonusBall);
+    }
+>>>>>>> d6f0536 (feat : Rank에 2등인지만 확인하는 메서드 추가)
 }
