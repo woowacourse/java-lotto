@@ -38,7 +38,7 @@ public enum Rank {
         return onlyMatchCountAvailableRanks().stream()
                 .filter(rank -> rank.matchCalculator.apply(matchCount))
                 .findAny()
-                .orElse(Rank.NONE);
+                .orElseGet(() -> Rank.NONE);
     }
 
     private static List<Rank> onlyMatchCountAvailableRanks() {
