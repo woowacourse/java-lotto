@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class Output {
     private static final String ERROR_PREFIX = "[ERROR] ";
     private static final String REQUEST_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
+    private static final String REQUEST_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String LOTTO_COUNT = "%d개를 구매했습니다.\n";
     private static final String LOTTO_DELIMITER = ", ";
     private static final String LOTTO_FORMAT = "[%s]\n";
@@ -37,8 +38,12 @@ public class Output {
         System.out.println(REQUEST_PURCHASE_AMOUNT);
     }
 
+    public static void printRequestManualCount() {
+        System.out.println(REQUEST_MANUAL_COUNT);
+    }
+
     public static void printLottoCount(final LottoCount lottoCount) {
-        System.out.printf(LOTTO_COUNT, lottoCount.getTotalCount());
+        System.out.printf(LOTTO_COUNT, lottoCount.getAutoCount());
     }
 
     public static void printLottos(final Lottos lottos) {

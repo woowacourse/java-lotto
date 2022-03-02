@@ -15,10 +15,6 @@ public class Payment {
         return payment;
     }
 
-    public LottoCount getTotalLottoCount() {
-        return new LottoCount(this.payment / Lotto.LOTTO_PRICE);
-    }
-
     private void validatePayment(final int payment) {
         validateNaturalNumber(payment);
         validateLottoPrice(payment);

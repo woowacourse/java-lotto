@@ -11,9 +11,6 @@ import lotto.domain.WinningLotto;
 import lotto.view.Entering;
 import lotto.view.KeyEnter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static lotto.view.Input.*;
 import static lotto.view.Output.*;
 
@@ -28,6 +25,16 @@ public class Creator {
         } catch (IllegalArgumentException error) {
             printErrorMessage(error.getMessage());
             return createPayment();
+        }
+    }
+
+    public static LottoCount createLottoCount(Payment payment) {
+        try {
+            int manualCount = inputManualCount(entering);
+            return new LottoCount(payment, manualCount);
+        } catch (IllegalArgumentException error) {
+            printErrorMessage(error.getMessage());
+            return createLottoCount(payment);
         }
     }
 

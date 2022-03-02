@@ -30,11 +30,38 @@ class InputTest {
     }
 
     @Test
-    @DisplayName("구입금액에 문자를 입력했을 경우")
+    @DisplayName("구입 금액에 문자를 입력했을 경우")
     void payment_not_number() {
         assertThatThrownBy(() -> {
             Entering entering = () -> "payment";
             int payment = inputPayment(entering);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("수동 로또 개수에 null 을 입력할 경우")
+    void manual_count_null() {
+        assertThatThrownBy(() -> {
+            Entering entering = () -> null;
+            int manualCount = inputManualCount(entering);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("수동 로또 개수에 빈값을 입력했을 경우")
+    void manual_count_empty() {
+        assertThatThrownBy(() -> {
+            Entering entering = () -> "";
+            int manualCount = inputManualCount(entering);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("수동 로또 개수에 문자를 입력했을 경우")
+    void manual_count_not_number() {
+        assertThatThrownBy(() -> {
+            Entering entering = () -> "manualCount";
+            int manualCount = inputManualCount(entering);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

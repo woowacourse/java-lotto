@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.view.Output.printErrorMessage;
+
 public class Input {
     private static final String NUMBER_MATCHES = "-?[0-9]+";
     private static final String ERROR_ONLY_NUMBER = "숫자를 입력해주세요!";
@@ -17,6 +19,12 @@ public class Input {
         String payment = entering.enter();
         validateNumber(payment);
         return Integer.parseInt(payment);
+    }
+
+    public static int inputManualCount(final Entering entering) {
+        String manualCount = entering.enter();
+        validateNumber(manualCount);
+        return Integer.parseInt(manualCount);
     }
 
     public static List<Ball> inputWinningNumbers(final Entering entering) {
