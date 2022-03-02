@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 import utils.LotteryMessage;
 
 public class PurchaseAmount {

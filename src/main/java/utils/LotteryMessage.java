@@ -9,6 +9,7 @@ public class LotteryMessage {
 	private static final String WINNING_NUMBER = "당첨번호";
 	private static final String BONUS_BALL = "보너스볼";
 	private static final String PURCHASE_AMOUNT = "구입 금액";
+	private static final String MANUAL_PURCHASE = "수동 구입";
 
 	// error message
 	public static final String LOTTERY_SIZE_ERROR = LOTTERY_NUMBER + "는 6개여야 합니다.";
@@ -19,6 +20,8 @@ public class LotteryMessage {
 	public static final String PURCHASE_AMOUNT_RANGE_ERROR = PURCHASE_AMOUNT + "의 범위는 1000원~100000원 입니다.";
 	public static final String PURCHASE_AMOUNT_NOT_NUMBER_ERROR = PURCHASE_AMOUNT + "은 숫자여야 합니다.";
 	public static final String WINNING_NUMBER_FORMAT_ERROR = WINNING_NUMBER + "는 \"1,2,3,4,5,6\"과 같은 꼴 이어야 합니다";
+	public static final String MANUAL_PURCHASE_IS_LARGER_THAN_PURCHASE_AMOUNT = MANUAL_PURCHASE + " 갯수가 "
+		+ PURCHASE_AMOUNT + "보다 많습니다";
 
 	// input message
 	public static final String INPUT_PURCHASE_AMOUNT = PURCHASE_AMOUNT + "을 입력해 주세요";
