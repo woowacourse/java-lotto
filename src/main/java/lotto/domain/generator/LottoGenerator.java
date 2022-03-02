@@ -5,5 +5,5 @@ import lotto.domain.lottonumber.Lotto;
 import java.util.List;
 
 public interface LottoGenerator {
-    List<Lotto> generateLottos(final int numberOfGenerating);
+    List<Lotto> generateLottosExceptManualGenerated(final int numberOfGenerating, final List<Lotto> manualGenerated);
 }

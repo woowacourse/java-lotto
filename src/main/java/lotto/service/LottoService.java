@@ -1,12 +1,12 @@
 package lotto.service;
 
-import lotto.domain.winningresult.WinningResult;
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.Lottos;
 import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.matchkind.LottoMatchKind;
 import lotto.domain.purchaseamount.PurchaseAmount;
+import lotto.domain.winningresult.WinningResult;
 
 import java.util.List;
 import java.util.Map;
@@ -15,11 +15,11 @@ public class LottoService {
     private final Lottos lottos;
     private final PurchaseAmount purchaseAmount;
 
-    public LottoService(final LottoGenerator lottoGenerator, final String purchaseAmount) {
-        this.purchaseAmount = PurchaseAmount.fromPurchaseAmountAndLottoPrice(purchaseAmount);
-        final List<Lotto> randomGeneratedLottos =
-                lottoGenerator.generateLottos(this.purchaseAmount.getCountOfLottoNumbers());
-        lottos = new Lottos(randomGeneratedLottos);
+    public LottoService(
+            final LottoGenerator lottoGenerator, final PurchaseAmount purchaseAmount, final List<Lotto> manualLottos) {
+        this.purchaseAmount = purchaseAmount;
+        lottos = new Lottos(lottoGenerator.generateLottosExceptManualGenerated(
+                this.purchaseAmount.getCountOfLottoNumbers(), manualLottos));
     }
 
     public int getCountOfLottoNumbers() {

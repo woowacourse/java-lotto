@@ -3,10 +3,7 @@ package lotto.domain.generator;
 import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.vo.LottoNumber;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -25,14 +22,23 @@ public class LottoRandomGenerator implements LottoGenerator {
 
     public List<Lotto> generateLottos(final int numberOfGenerating) {
         final Set<Lotto> generatedNumbersGroup = new HashSet<>();
-        while (generatedNumbersGroup.size() < numberOfGenerating) {
-            generatedNumbersGroup.add(generateNumbers());
-        }
-        return generatedNumbersGroup.stream()
-                .collect(Collectors.toUnmodifiableList());
+        return generateLottos(generatedNumbersGroup, numberOfGenerating);
     }
 
-    private Lotto generateNumbers() {
+    @Override
+    public List<Lotto> generateLottosExceptManualGenerated(int numberOfGenerating, List<Lotto> manualGenerated) {
+        final Set<Lotto> generatedNumbersGroup = new HashSet<>(manualGenerated);
+        return generateLottos(generatedNumbersGroup, numberOfGenerating);
+    }
+
+    private List<Lotto> generateLottos(final Set<Lotto> generatedNumbersGroup, final int numberOfGenerating) {
+        while (generatedNumbersGroup.size() < numberOfGenerating) {
+            generatedNumbersGroup.add(generateLotto());
+        }
+        return new ArrayList<>(generatedNumbersGroup);
+    }
+
+    private Lotto generateLotto() {
         Collections.shuffle(basicNumbers);
         final Set<LottoNumber> generatedNumbers = basicNumbers.stream()
                 .limit(BONUS_NUMBER_INDEX)

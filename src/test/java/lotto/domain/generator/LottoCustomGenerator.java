@@ -4,8 +4,7 @@ import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.vo.LottoNumber;
 import org.opentest4j.TestAbortedException;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -26,17 +25,28 @@ public class LottoCustomGenerator implements LottoGenerator {
     }
 
     @Override
-    public List<Lotto> generateLottos(int numberOfGenerating) {
+    public List<Lotto> generateLottosExceptManualGenerated(int numberOfGenerating, List<Lotto> manualGenerated) {
+        validateGeneratingNumber(numberOfGenerating);
+        final Set<Lotto> generated = new LinkedHashSet<>(manualGenerated);
+        generate(generated, numberOfGenerating);
+        return new ArrayList<>(generated);
+    }
+
+    private void validateGeneratingNumber(final int numberOfGenerating) {
         if (numberOfGenerating > MAX_GENERATING_LOTTO_NUMBERS_COUNT) {
             throw new TestAbortedException(TEST_LOTTO_NUMBERS_COUNT_EXCEED_EXCEPTION_MESSAGE);
         }
-        return IntStream.range(0, numberOfGenerating)
-                .mapToObj(this::generateLottoNumbers)
-                .collect(Collectors.toUnmodifiableList());
     }
 
-    private Lotto generateLottoNumbers(final int firstValue) {
-        final Set<LottoNumber> numbers = IntStream.range(firstValue, firstValue + SIZE_OF_EACH_LOTTO_NUMBERS)
+    private void generate(final Set<Lotto> generated, final int numberOfGenerating) {
+        int index = 0;
+        while (generated.size() < numberOfGenerating) {
+            generated.add(generateLottoNumbers(index++));
+        }
+    }
+
+    private Lotto generateLottoNumbers(final int firstValueIndex) {
+        final Set<LottoNumber> numbers = IntStream.range(firstValueIndex, firstValueIndex + SIZE_OF_EACH_LOTTO_NUMBERS)
                 .mapToObj(lottoNumbers::get)
                 .collect(Collectors.toUnmodifiableSet());
         return new Lotto(numbers);

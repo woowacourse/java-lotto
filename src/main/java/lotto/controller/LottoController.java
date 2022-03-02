@@ -1,11 +1,15 @@
 package lotto.controller;
 
-import lotto.domain.winningresult.WinningResult;
-import lotto.domain.matchkind.LottoMatchKind;
-import lotto.domain.lottonumber.Lotto;
-import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.generator.LottoGenerator;
+import lotto.domain.lottonumber.Lotto;
+import lotto.domain.lottonumber.Lottos;
+import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.lottonumber.vo.LottoNumber;
+import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.purchaseamount.ManualPurchaseCount;
+import lotto.domain.purchaseamount.PurchaseAmount;
+import lotto.domain.winningresult.WinningResult;
+import lotto.dto.InputLottoDto;
 import lotto.dto.LottoMatchKindDto;
 import lotto.dto.LottoNumbersDto;
 import lotto.service.LottoService;
@@ -28,12 +32,44 @@ public class LottoController {
     }
 
     private LottoService initializeLottoService(final LottoGenerator lottoGenerator) {
+        final PurchaseAmount totalPurchaseAmount = inputTotalPurchaseAmount();
+        final int manualPurchaseAmount = inputManualPurchaseAmount(totalPurchaseAmount);
+        final List<Lotto> manualLottos = inputManualLottos(manualPurchaseAmount);
+        return new LottoService(lottoGenerator, totalPurchaseAmount, manualLottos);
+    }
+
+    private PurchaseAmount inputTotalPurchaseAmount() {
         try {
             final String purchaseAmountInput = inputView.inputPurchaseAmount();
-            return new LottoService(lottoGenerator, purchaseAmountInput);
+            return PurchaseAmount.fromPurchaseAmountAndLottoPrice(purchaseAmountInput);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
-            return initializeLottoService(lottoGenerator);
+            return inputTotalPurchaseAmount();
+        }
+    }
+
+    private int inputManualPurchaseAmount(final PurchaseAmount totalPurchaseAmount) {
+        try {
+            final String manualPurchaseLottoAmount = inputView.inputManualPurchaseAmount();
+            final ManualPurchaseCount manualPurchaseCount = new ManualPurchaseCount(manualPurchaseLottoAmount, totalPurchaseAmount);
+            return manualPurchaseCount.getValue();
+        } catch (final Exception e) {
+            inputView.printErrorMessage(e.getMessage());
+            return inputManualPurchaseAmount(totalPurchaseAmount);
+        }
+    }
+
+    private List<Lotto> inputManualLottos(final int numberOfManualLottos) {
+        try {
+            final List<InputLottoDto> manualInputLottos = inputView.inputManualLottoNumbers(numberOfManualLottos);
+            final List<Lotto> manual = manualInputLottos.stream()
+                    .map(InputLottoDto::getNumbers)
+                    .map(Lotto::new)
+                    .collect(Collectors.toUnmodifiableList());
+            return new Lottos(manual).getLottos();
+        } catch (final Exception e) {
+            inputView.printErrorMessage(e.getMessage());
+            return inputManualLottos(numberOfManualLottos);
         }
     }
 
@@ -50,8 +86,7 @@ public class LottoController {
         outputView.printLottoNumbersGroup(numbersGroup);
     }
 
-    private List<LottoNumbersDto> convertLottoNumbersGroupToDtos(
-            final List<Lotto> numbersGroup) {
+    private List<LottoNumbersDto> convertLottoNumbersGroupToDtos(final List<Lotto> numbersGroup) {
         return numbersGroup.stream()
                 .map(Lotto::getValues)
                 .map(LottoNumbersDto::new)
