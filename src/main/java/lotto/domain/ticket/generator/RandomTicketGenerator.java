@@ -25,8 +25,8 @@ public class RandomTicketGenerator implements TicketGenerator {
     @Override
     public Ticket generateTicket() {
         Collections.shuffle(numbers);
-        List<Integer> lottoNumbers = numbers.subList(SUBLIST_INCLUSIVE_START_INDEX, SUBLIST_EXCLUSIVE_END_INDEX);
-        return new Ticket(lottoNumbers);
+        List<Integer> ticketNumbers = numbers.subList(SUBLIST_INCLUSIVE_START_INDEX, SUBLIST_EXCLUSIVE_END_INDEX);
+        return new Ticket(ticketNumbers);
     }
 
 }

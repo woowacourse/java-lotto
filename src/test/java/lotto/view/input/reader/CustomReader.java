@@ -7,12 +7,12 @@ public class CustomReader implements Reader {
 
     private Iterator<String> textIterator;
 
-    public void initText(final String textValue) {
-        this.textIterator = List.of(textValue).iterator();
+    public void initText(final String inputLine) {
+        this.textIterator = List.of(inputLine).iterator();
     }
 
-    public void initText(final List<String> textValues) {
-        this.textIterator = textValues.iterator();
+    public void initText(final List<String> inputLines) {
+        this.textIterator = inputLines.iterator();
     }
 
     @Override

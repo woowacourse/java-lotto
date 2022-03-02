@@ -43,4 +43,5 @@ class RankTest {
                 Arguments.of(0, false, null)
         );
     }
+
 }

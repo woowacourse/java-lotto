@@ -22,10 +22,11 @@ class AnalysisTest {
     @MethodSource("provideForCalculateTest")
     void calculateRankCountsTest(final List<Rank> ranks,
                                  final Money money,
-                                 final Map<Rank, Long> rankCounts,
-                                 final double profitRate) {
+                                 final Map<Rank, Long> expectedRankCounts,
+                                 final double expectedProfitRate) {
         final Analysis analysis = new Analysis(ranks, money);
-        assertThat(analysis.getRankCounts()).isEqualTo(rankCounts);
+        final Map<Rank, Long> actualRankCounts = analysis.getRankCounts();
+        assertThat(actualRankCounts).isEqualTo(expectedRankCounts);
     }
 
     @DisplayName("당첨 통계의 수익률은 기댓값과 일치해야 한다.")
@@ -33,10 +34,11 @@ class AnalysisTest {
     @MethodSource("provideForCalculateTest")
     void calculateProfitRateTest(final List<Rank> ranks,
                                  final Money money,
-                                 final Map<Rank, Long> rankCounts,
-                                 final double profitRate) {
+                                 final Map<Rank, Long> expectedRankCounts,
+                                 final double expectedProfitRate) {
         final Analysis analysis = new Analysis(ranks, money);
-        assertThat(analysis.getProfitRate()).isEqualTo(profitRate);
+        final double actualProfitRate = analysis.getProfitRate();
+        assertThat(actualProfitRate).isEqualTo(expectedProfitRate);
     }
 
     public static Stream<Arguments> provideForCalculateTest() {

@@ -15,10 +15,6 @@ class InputViewExceptionTest {
     private final CustomReader customReader = new CustomReader();
     private final InputView inputView = new InputView(customReader);
 
-    private interface TestCallback {
-        void run();
-    }
-
     @DisplayName("구입 금액으로, 숫자 이외의 값은 입력할 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 입력 : \"{0}\"")
     @ValueSource(strings = {"100a", "1 1 1", ""})

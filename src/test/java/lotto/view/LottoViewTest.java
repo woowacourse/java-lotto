@@ -28,8 +28,8 @@ class LottoViewTest {
     @ParameterizedTest(name = "[{index}] 구입 금액 : {0}, 수동으로 구매할 로또의 개수 : {1}")
     @MethodSource("provideForRequestManualTicketCountExceptionTest")
     void requestManualTicketCountExceptionTest(final int money, final int manualTicketCount) {
-        final List<String> inputValues = List.of(String.valueOf(money), String.valueOf(manualTicketCount));
-        customReader.initText(inputValues);
+        final List<String> inputLines = List.of(String.valueOf(money), String.valueOf(manualTicketCount));
+        customReader.initText(inputLines);
 
         final int totalTicketCount = MoneyUnit.divide(money);
         assertThatThrownBy(() -> lottoView.requestManualTicketCount(totalTicketCount))

@@ -24,9 +24,9 @@ class InputViewParseTest {
     void requestMoneyTest(final String inputLine) {
         customReader.initText(inputLine);
 
-        final int actual = inputView.requestMoney();
-        final int expected = Integer.parseInt(inputLine);
-        assertThat(actual).isEqualTo(expected);
+        final int actualMoney = inputView.requestMoney();
+        final int expectedMoney = Integer.parseInt(inputLine);
+        assertThat(actualMoney).isEqualTo(expectedMoney);
     }
 
     @DisplayName("로또 개수로 입력된 문자열은 숫자로 변환되어야 합니다.")
@@ -35,19 +35,19 @@ class InputViewParseTest {
     void requestTicketCountTest(final String inputLine) {
         customReader.initText(inputLine);
 
-        final int actual = inputView.requestTicketCount();
-        final int expected = Integer.parseInt(inputLine);
-        assertThat(actual).isEqualTo(expected);
+        final int actualTicketCount = inputView.requestTicketCount();
+        final int expectedTicketCount = Integer.parseInt(inputLine);
+        assertThat(actualTicketCount).isEqualTo(expectedTicketCount);
     }
 
     @DisplayName("로또 번호를 구성하는 볼 번호는 숫자로 변환되어야 합니다.")
     @ParameterizedTest(name = "[{index}] 입력 : \"{0}\"")
     @MethodSource("provideForRequestTicketNumbersTest")
-    void requestTicketNumbersTest(final String inputLine, final List<Integer> expected) {
+    void requestTicketNumbersTest(final String inputLine, final List<Integer> expectedTicketNumbers) {
         customReader.initText(inputLine);
 
-        final List<Integer> actual = inputView.requestTicketNumbers();
-        assertThat(actual).isEqualTo(expected);
+        final List<Integer> actualTicketNumbers = inputView.requestTicketNumbers();
+        assertThat(actualTicketNumbers).isEqualTo(expectedTicketNumbers);
     }
 
     public static Stream<Arguments> provideForRequestTicketNumbersTest() {
@@ -66,9 +66,9 @@ class InputViewParseTest {
     void requestBonusNumberTest(final String inputLine) {
         customReader.initText(inputLine);
 
-        final int actual = inputView.requestBonusNumber();
-        final int expected = Integer.parseInt(inputLine);
-        assertThat(actual).isEqualTo(expected);
+        final int actualBonusNumber = inputView.requestBonusNumber();
+        final int expectedBonusNumber = Integer.parseInt(inputLine);
+        assertThat(actualBonusNumber).isEqualTo(expectedBonusNumber);
     }
 
 }

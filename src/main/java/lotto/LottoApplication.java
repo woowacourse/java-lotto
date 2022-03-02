@@ -26,7 +26,7 @@ public class LottoApplication {
     }
 
     public void run() {
-        final Money money = payMoney();
+        final Money money = insertMoney();
         final TicketManager ticketManager = purchaseTickets(money);
         announceTickets(ticketManager);
 
@@ -34,7 +34,7 @@ public class LottoApplication {
         announceAnalysis(analysis);
     }
 
-    private Money payMoney() {
+    private Money insertMoney() {
         return new Money(lottoView.requestMoney());
     }
 

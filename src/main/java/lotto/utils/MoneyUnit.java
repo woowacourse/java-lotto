@@ -2,7 +2,7 @@ package lotto.utils;
 
 public enum MoneyUnit {
 
-    DIVIDING_UNIT(1000);
+    DEFAULT_UNIT(1000);
 
     private final int unit;
 
@@ -11,11 +11,11 @@ public enum MoneyUnit {
     }
 
     public static boolean isNotDivisible(final int money) {
-        return (money % DIVIDING_UNIT.unit) != 0;
+        return (money % DEFAULT_UNIT.unit) != 0;
     }
 
     public static int divide(final int money) {
-        return money / DIVIDING_UNIT.unit;
+        return money / DEFAULT_UNIT.unit;
     }
 
     public int getUnit() {

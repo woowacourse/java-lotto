@@ -52,7 +52,6 @@ public enum Rank {
         return true;
     }
 
-
     public int getMatchCount() {
         return matchCount;
     }

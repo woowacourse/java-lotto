@@ -20,8 +20,8 @@ class WinningTicketTest {
     @DisplayName("보너스 볼은 당첨 번호와 중복될 수 없습니다.")
     @ParameterizedTest(name = "[{index}] 보너스 볼 : {1}, 당첨 번호 : {0}")
     @MethodSource("provideForBonusNumberDuplicatedExceptionTest")
-    void bonusNumberDuplicatedExceptionTest(final List<Integer> numbers, final int bonusNumber) {
-        assertThatThrownBy(() -> new WinningTicket(numbers, bonusNumber))
+    void bonusNumberDuplicatedExceptionTest(final List<Integer> winningNumbers, final int bonusNumber) {
+        assertThatThrownBy(() -> new WinningTicket(winningNumbers, bonusNumber))
                 .isInstanceOf(LottoException.class)
                 .hasMessageContaining(LottoExceptionStatus.TICKET_NUMBERS_CANNOT_BE_DUPLICATED.getMessage());
     }
@@ -37,12 +37,12 @@ class WinningTicketTest {
     @DisplayName("당첨 등수 계산 결과는 기댓값과 일치해야 합니다.")
     @ParameterizedTest(name = "[{index}] 당첨 등수 : {3}")
     @MethodSource("provideForCalculateRankTest")
-    void calculateRankTest(final List<Integer> numbers,
+    void calculateRankTest(final List<Integer> winningNumbers,
                            final int bonusNumber,
-                           final Ticket anotherTicket,
+                           final Ticket ticket,
                            final Rank expectedRank) {
-        final WinningTicket winningTicket = new WinningTicket(numbers, bonusNumber);
-        final Rank actualRank = winningTicket.calculateRank(anotherTicket).orElse(null);
+        final WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusNumber);
+        final Rank actualRank = winningTicket.calculateRank(ticket).orElse(null);
         assertThat(actualRank).isEqualTo(expectedRank);
     }
 
