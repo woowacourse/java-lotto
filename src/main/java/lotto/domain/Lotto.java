@@ -5,22 +5,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
-    private static final List<Ball> lottoTotalBalls = new ArrayList<>();
     private static final int BALL_COUNT = 6;
     public static final int LOTTO_PRICE = 1000;
     private static final String ERROR_BALL_COUNT = BALL_COUNT + "개의 숫자를 입력해주세요";
     private static final String ERROR_DUPLICATED_NUMBER = "번호가 중복됩니다!";
 
     private final List<Ball> lotto = new ArrayList<>();
-
-    static {
-        lottoTotalBalls.addAll(IntStream.range(Ball.MINIMUM_NUMBER, Ball.MAXIMUM_NUMBER + 1)
-                .mapToObj(Ball::new)
-                .collect(Collectors.toList()));
-    }
 
     public Lotto(final List<Ball> lotto) {
         validateLotto(lotto);
@@ -37,7 +29,7 @@ public class Lotto {
 
     // TODO: Lotto 의 역할인가?
     public static List<Ball> selectRandomBalls() {
-        List<Ball> lottoBalls = lottoTotalBalls;
+        List<Ball> lottoBalls = new ArrayList<>(Ball.getTotalBalls());
         Collections.shuffle(lottoBalls);
 
         List<Ball> selectedBalls = selectBalls(lottoBalls);

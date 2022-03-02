@@ -5,11 +5,21 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class BallTest {
+
+    @Test
+    @DisplayName("로또 번호 캐시 생성")
+    void cache_balls() {
+        List<Ball> balls = Ball.getTotalBalls();
+
+        assertEquals(balls.size(), 45);
+    }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
