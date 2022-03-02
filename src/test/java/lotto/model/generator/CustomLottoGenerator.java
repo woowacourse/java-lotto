@@ -12,6 +12,8 @@ import org.opentest4j.TestAbortedException;
 
 public class CustomLottoGenerator implements LottoGenerator {
 
+    private static final String LOTTO_TEST_ERROR = "[ERROR] 테스트 시에는 로또 갯수를 40개를 넘을 수 없습니다.";
+
     @Override
     public Lottos generateLottos(int lottoCount, int minimumNumber, int maximumNumber, int lottoLength) {
         return makeLottos(lottoCount, minimumNumber, maximumNumber, lottoLength);
@@ -19,12 +21,13 @@ public class CustomLottoGenerator implements LottoGenerator {
 
     private Lottos makeLottos(int lottoCount, int minimumNumber, int maximumNumber, int lottoLength) {
         if (lottoCount > maximumNumber - lottoLength) {
-            throw new TestAbortedException();
+            throw new TestAbortedException(LOTTO_TEST_ERROR);
         }
-        List<Integer> numberCollection = makeNumberCollection(minimumNumber,maximumNumber);
+        List<Integer> numberCollection = makeNumberCollection(minimumNumber, maximumNumber);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = makeLotto(makeLottoNumbers(makeLottoNumber(numberCollection.subList(0+i,lottoLength+i))));
+            Lotto lotto = makeLotto(
+                    makeLottoNumbers(makeLottoNumber(numberCollection.subList(0 + i, lottoLength + i))));
             lottos.add(lotto);
         }
         return new Lottos(lottos);
@@ -33,6 +36,7 @@ public class CustomLottoGenerator implements LottoGenerator {
     private Lotto makeLotto(LottoNumbers lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
+
     private LottoNumbers makeLottoNumbers(List<LottoNumber> lottoNumbers) {
         return new LottoNumbers(lottoNumbers);
     }

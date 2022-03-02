@@ -32,9 +32,9 @@ public class LottoControllerTest {
         ResultView.printBuyingLottosResult(lottos);
         WinningLotto winningLotto = makeWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7);
         LottoGenerator lottoGenerator = new CustomLottoGenerator();
-        LottoMachine lottoCalculator = new LottoMachine(lottoGenerator, money);
-        lottoCalculator.calculateResult(winningLotto);
-        ResultView.printTotalRankResult(lottoCalculator);
+        LottoMachine lottoMachine = new LottoMachine(lottoGenerator, money);
+        lottoMachine.calculateResult(winningLotto);
+        ResultView.printTotalRankResult(lottoMachine);
     }
 
     private Lottos makeLottos() {
