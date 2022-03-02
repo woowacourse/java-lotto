@@ -26,7 +26,7 @@ class ManualPurchaseCountsTest {
     @ParameterizedTest
     @DisplayName("올바르지 않은 수동 구매 개수가 주어질 경우 예외를 발생시킨다.")
     @ValueSource(strings = {"a", "1.2", "-1"})
-    void create_exceptionByInvalidManualCounts(String value) {
+    void create_exceptionByInvalidManualCounts(final String value) {
         //given
         final String expectedExceptionMessage = "0 이상의 정수를 입력해주세요.";
         //when then

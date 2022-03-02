@@ -7,7 +7,7 @@ public interface InputView {
 
     String inputManualPurchaseCounts();
 
-    List<List<String>> inputManualPurchaseWinningNumbers(int counts);
+    List<List<String>> inputManualPurchaseWinningNumbers(final int counts);
 
     List<String> inputLastWeekWinningNumbers();
 

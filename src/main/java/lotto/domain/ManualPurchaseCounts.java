@@ -9,7 +9,7 @@ public class ManualPurchaseCounts {
 
     private final int manualLottoCounts;
 
-    public ManualPurchaseCounts(String inputManualLottoCounts, int allLottoCounts) {
+    public ManualPurchaseCounts(final String inputManualLottoCounts, final int allLottoCounts) {
         validateValidNumber(inputManualLottoCounts);
         int manualLottoCounts = Integer.parseInt(inputManualLottoCounts);
         validateManualCountsNotOverAllCounts(manualLottoCounts, allLottoCounts);
@@ -22,7 +22,7 @@ public class ManualPurchaseCounts {
         }
     }
 
-    private static void validateManualCountsNotOverAllCounts(int manualLottoCounts, int allLottoCounts) {
+    private static void validateManualCountsNotOverAllCounts(final int manualLottoCounts, final int allLottoCounts) {
         if (manualLottoCounts > allLottoCounts) {
             throw new IllegalArgumentException(OVER_COUNTS_EXCEPTION_MESSAGE);
         }

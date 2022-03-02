@@ -30,7 +30,7 @@ public class ConsoleInputView implements InputView {
     }
 
     @Override
-    public List<List<String>> inputManualPurchaseWinningNumbers(int counts) {
+    public List<List<String>> inputManualPurchaseWinningNumbers(final int counts) {
         System.out.println(INPUT_MANUAL_PURCHASE_WINNING_NUMBERS_MESSAGE);
         List<List<String>> manualNumbersGroup = new ArrayList<>();
         for (int i = 0; i < counts; i++) {
