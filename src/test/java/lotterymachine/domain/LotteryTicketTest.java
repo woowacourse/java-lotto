@@ -18,12 +18,12 @@ class LotteryTicketTest {
     @DisplayName("당첨번호와 일치하는 로또 숫자의 개수를 반환한다.")
     void countMatchingNumbers(String winningNumbers, int expected) {
         List<LotteryNumber> input = IntStream.range(7, 13)
-                .mapToObj(LotteryNumber::new)
+                .mapToObj(LotteryNumber::valueOf)
                 .collect(Collectors.toList());
         LotteryTicket lotteryTicket = new LotteryTicket(input);
 
         List<LotteryNumber> inputWinningNumbers = Arrays.stream(winningNumbers.split(","))
-                .map(i -> new LotteryNumber(Integer.parseInt(i)))
+                .map(i -> LotteryNumber.valueOf(Integer.parseInt(i)))
                 .collect(Collectors.toList());
 
         assertThat(lotteryTicket.countMatchingNumbers(inputWinningNumbers)).isEqualTo(expected);
@@ -35,10 +35,10 @@ class LotteryTicketTest {
     @DisplayName("보너스 번호 보유 여부를 확인한다.")
     void matchBonusNumber(int bonusNumber, boolean expected) {
         List<LotteryNumber> input = IntStream.range(7, 13)
-                .mapToObj(LotteryNumber::new)
+                .mapToObj(LotteryNumber::valueOf)
                 .collect(Collectors.toList());
         LotteryTicket lotteryTicket = new LotteryTicket(input);
 
-        assertThat(lotteryTicket.containsNumber(new LotteryNumber(bonusNumber))).isEqualTo(expected);
+        assertThat(lotteryTicket.containsNumber(LotteryNumber.valueOf(bonusNumber))).isEqualTo(expected);
     }
 }

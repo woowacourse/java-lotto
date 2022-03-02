@@ -18,7 +18,7 @@ public class LotteryTicketsTest {
     @DisplayName("6개의 숫자 리스트를 입력 받아 로또 티켓을 추가한다.")
     void add() {
         List<LotteryNumber> input = IntStream.range(7, 13)
-                .mapToObj(LotteryNumber::new)
+                .mapToObj(LotteryNumber::valueOf)
                 .collect(Collectors.toList());
         LotteryTicket lotteryTicket = new LotteryTicket(input);
         List<LotteryTicket> lotteryTicketList = List.of(lotteryTicket);
@@ -32,7 +32,7 @@ public class LotteryTicketsTest {
     @DisplayName("6개의 숫자가 아닌 리스트를 입력 받으면 예외를 throw 한다.")
     void validateAdd() {
         List<LotteryNumber> input = IntStream.range(6, 13)
-                .mapToObj(LotteryNumber::new)
+                .mapToObj(LotteryNumber::valueOf)
                 .collect(Collectors.toList());
 
         assertThatThrownBy(() -> {

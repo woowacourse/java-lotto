@@ -16,12 +16,12 @@ public class WinningResultTest {
     @DisplayName("당첨 번호와 로또 티켓을 입력 받아 결과를 저장한다.")
     void getResult() {
         List<LotteryNumber> lotteryNumbers = IntStream.rangeClosed(1, 6)
-                .mapToObj(LotteryNumber::new)
+                .mapToObj(LotteryNumber::valueOf)
                 .collect(Collectors.toList());
         List<LotteryTicket> tickets = List.of(new LotteryTicket(lotteryNumbers));
         LotteryTickets lotteryTickets = new LotteryTickets(tickets);
 
-        LotteryNumber bonusNumber = new LotteryNumber(7);
+        LotteryNumber bonusNumber = LotteryNumber.valueOf(7);
         WinningLottery winningLottery = new WinningLottery(lotteryNumbers, bonusNumber);
 
         WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);
@@ -34,12 +34,12 @@ public class WinningResultTest {
     void getTotalProfitRate() {
         LotteryPurchase lotteryPurchase = new LotteryPurchase(14000, 3);
         List<LotteryNumber> lotteryNumbers = IntStream.rangeClosed(1, 6)
-                .mapToObj(LotteryNumber::new)
+                .mapToObj(LotteryNumber::valueOf)
                 .collect(Collectors.toList());
         List<LotteryTicket> tickets = List.of(new LotteryTicket(lotteryNumbers));
         LotteryTickets lotteryTickets = new LotteryTickets(tickets);
 
-        LotteryNumber bonusNumber = new LotteryNumber(7);
+        LotteryNumber bonusNumber = LotteryNumber.valueOf(7);
         WinningLottery winningLottery = new WinningLottery(lotteryNumbers, bonusNumber);
 
         WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);

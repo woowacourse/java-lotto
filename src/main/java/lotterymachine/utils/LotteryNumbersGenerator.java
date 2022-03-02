@@ -13,12 +13,11 @@ public class LotteryNumbersGenerator {
     private static final int MAXIMUM_LOTTERY_NUMBER = 45;
     private static final int SIZE_OF_LOTTERY_TICKETS = 6;
 
-    private static final List<LotteryNumber> numbers;
+    private static final List<Integer> numbers;
 
     static {
         numbers = IntStream.range(MINIMUM_LOTTERY_NUMBER, MAXIMUM_LOTTERY_NUMBER + 1)
                 .boxed()
-                .map(LotteryNumber::new)
                 .collect(Collectors.toList());
     }
 
@@ -26,6 +25,7 @@ public class LotteryNumbersGenerator {
         Collections.shuffle(numbers);
         return numbers.stream()
                 .limit(SIZE_OF_LOTTERY_TICKETS)
+                .map(LotteryNumber::valueOf)
                 .collect(Collectors.toList());
     }
 }
