@@ -17,15 +17,17 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottoCount(int manualLottoCount, int autoLottoCount) {
-        System.out.println("수동으로 " + manualLottoCount + "개, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
-    }
+    public static void printLottos(int manualLottoCount, int autoLottoCount, List<Lotto> lottos) {
+        printLottoCount(manualLottoCount, autoLottoCount);
 
-    public static void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             System.out.println(makeLottoString(lotto));
         }
         System.out.println();
+    }
+
+    private static void printLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "개, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
     }
 
     private static String makeLottoString(Lotto lotto) {

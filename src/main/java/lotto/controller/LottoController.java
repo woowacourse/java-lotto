@@ -14,16 +14,11 @@ public class LottoController {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         LottoGame lottoGame = new LottoGame(purchaseAmount, StringConverter.toInt(InputView.getManualLottoCount()));
 
-        InputView.printGetManualLottosMessage();
-        lottoGame.makeManualLottos(getInputManualLottos(lottoGame));
-        lottoGame.makeAutoLottos();
-
-        OutputView.printLottoCount(lottoGame.getManualLottoCount(), lottoGame.getAutoLottoCount());
-        OutputView.printLottos(lottoGame.getLottos());
+        makeManualAndAutoLottos(lottoGame);
+        OutputView.printLottos(lottoGame.getManualLottoCount(), lottoGame.getAutoLottoCount(), lottoGame.getLottos());
 
         WinningLotto winningLotto = getWinningLotto();
         RankBoard rankBoard = new RankBoard(winningLotto, lottoGame.getLottos());
-
         OutputView.printResult(rankBoard, rankBoard.calculateProfitRatio(purchaseAmount.getAmount()));
     }
 
@@ -34,6 +29,12 @@ public class LottoController {
             System.out.println(e.getMessage());
             return getPurchaseAmount();
         }
+    }
+
+    private void makeManualAndAutoLottos(LottoGame lottoGame) {
+        InputView.printGetManualLottosMessage();
+        lottoGame.makeManualLottos(getInputManualLottos(lottoGame));
+        lottoGame.makeAutoLottos();
     }
 
     private List<List<Integer>> getInputManualLottos(LottoGame lottoGame) {
