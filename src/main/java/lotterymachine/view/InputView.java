@@ -62,14 +62,6 @@ public class InputView {
         }
     }
 
-    public static LotteryTicket getPassivityLotteryTicket() {
-        List<LotteryNumber> lotteryNumbers = Arrays.stream(SCANNER.nextLine().split(","))
-                .map(String::trim)
-                .map(i -> LotteryNumber.valueOf(toInt(i)))
-                .collect(Collectors.toList());
-        return new LotteryTicket(lotteryNumbers);
-    }
-
     private static void printEmptyLine() {
         System.out.println();
     }
