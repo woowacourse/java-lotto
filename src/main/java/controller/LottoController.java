@@ -8,12 +8,12 @@ import domain.LottoFactory;
 import domain.LottoNumber;
 import domain.LottoNumberRepository;
 import domain.Lottos;
+import domain.Wallet;
 import domain.WinningLotto;
 import java.util.ArrayList;
 import java.util.List;
 import view.InputView;
 import view.ResultView;
-import vo.Wallet;
 
 public class LottoController {
     private static final int NO_AUTO_QUANTITY = 0;

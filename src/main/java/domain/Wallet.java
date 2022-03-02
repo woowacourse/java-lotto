@@ -1,4 +1,4 @@
-package vo;
+package domain;
 
 import static domain.Lotto.LOTTO_PRICE;
 
