@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 public enum Rank {
     FIFTH(3, 5000),
@@ -25,9 +26,13 @@ public enum Rank {
     private static Rank find(int matchWinningNumbers, boolean isMatchBonus) {
         return Arrays.stream(Rank.values())
             .filter(rank -> rank.matchScore == matchWinningNumbers)
-            .filter(rank -> rank != THIRD || !isMatchBonus)
+            .filter(isThirdOrSecond(isMatchBonus))
             .findFirst()
             .orElse(FAIL);
+    }
+
+    private static Predicate<Rank> isThirdOrSecond(boolean isMatchBonus) {
+        return rank -> rank != THIRD || !isMatchBonus;
     }
 
     public int getMatchScore() {
