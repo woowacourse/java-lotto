@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import domain.Rank;
 
@@ -12,7 +13,14 @@ public final class Lotteries {
 	private final List<Lottery> lotteries;
 
 	private Lotteries(final List<Lottery> lotteriesNumber) {
-		this.lotteries = lotteriesNumber;
+		List<Lottery> tempLotteriesNumber = deepCopyOf(lotteriesNumber);
+		this.lotteries = tempLotteriesNumber;
+	}
+
+	private List<Lottery> deepCopyOf(final List<Lottery> lotteriesNumber) {
+		List<Lottery> tempLotteriesNumber = lotteriesNumber.stream()
+			.collect(Collectors.toList());
+		return tempLotteriesNumber;
 	}
 
 	public static Lotteries from(final List<Lottery> lotteriesNumber) {

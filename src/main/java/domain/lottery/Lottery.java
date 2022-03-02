@@ -4,6 +4,8 @@ import static domain.exception.LotteryExceptionMessages.*;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public final class Lottery {
 
@@ -13,7 +15,13 @@ public final class Lottery {
 
 	private Lottery(final Set<LotteryNumber> numbers) {
 		validateNumbers(numbers);
-		this.numbers = numbers;
+		final Set<LotteryNumber> tempNumbers = deepCopyOf(numbers);
+		this.numbers = tempNumbers;
+	}
+
+	private Set<LotteryNumber> deepCopyOf(final Set<LotteryNumber> numbers) {
+		return numbers.stream()
+			.collect(Collectors.toCollection(TreeSet::new));
 	}
 
 	public static Lottery from(final Set<LotteryNumber> numbers) {
