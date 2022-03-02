@@ -1,27 +1,27 @@
 package controller;
 
-import static constant.LottoConstants.LOTTO_PRICE;
-import static validator.NumberValidators.validateNoDuplicateInList;
-import static validator.NumberValidators.validateNoDuplicates;
-import static validator.NumberValidators.validateTotalLottoPriceUnit;
-import static validator.NumberValidators.validateWinningNumbersSize;
+import static util.LottoCountUtils.getValidAutosCount;
+import static util.LottoCountUtils.getValidTotalCount;
+import static util.LottoNumberUtils.registerBonusNumber;
+import static util.LottoNumberUtils.registerWinningNumbers;
 
+import dto.LottoCountsDto;
 import domain.LottoNumber;
 import domain.LottoReferee;
 import domain.Lottos;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import validator.NumberValidators;
 
 public class LottoController {
 
-    public static final String WINNING_NUMBERS_DELIMITER = ", ";
+    public LottoCountsDto initCountsDto(int totalLottoPrice, int manualsCount) {
+        int totalCount = getValidTotalCount(totalLottoPrice);
+        int autosCount = getValidAutosCount(manualsCount, totalCount);
 
-    public Lottos initCustomerLottos(int totalLottoPrice) {
-        validateTotalLottoPriceUnit(totalLottoPrice);
+        return new LottoCountsDto(manualsCount, autosCount);
+    }
 
-        return Lottos.of(totalLottoPrice / LOTTO_PRICE);
+    public Lottos initLottos(List<String> manualsRaw, LottoCountsDto countsDto) {
+        return Lottos.of(manualsRaw, countsDto);
     }
 
     public LottoReferee initLottoReferee(String winningNumbersInput, int bonusBallValue) {
@@ -29,29 +29,5 @@ public class LottoController {
         LottoNumber bonusNumber = registerBonusNumber(winningNumbers, bonusBallValue);
 
         return new LottoReferee(winningNumbers, bonusNumber);
-    }
-
-    private List<LottoNumber> registerWinningNumbers(String winningNumbersInput) {
-        List<LottoNumber> winningNumbers = getWinningNumbers(winningNumbersInput);
-
-        validateWinningNumbersSize(winningNumbers);
-        validateNoDuplicates(winningNumbers);
-
-        return winningNumbers;
-    }
-
-    private List<LottoNumber> getWinningNumbers(String winningNumbersInput) {
-        return Arrays.stream(winningNumbersInput.split(WINNING_NUMBERS_DELIMITER))
-                .map(NumberValidators::validateAndParseNumber)
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
-    }
-
-    private LottoNumber registerBonusNumber(List<LottoNumber> winningNumbers, int bonusBallValue) {
-        LottoNumber bonusNumber = LottoNumber.of(bonusBallValue);
-
-        validateNoDuplicateInList(bonusNumber, winningNumbers);
-
-        return bonusNumber;
     }
 }

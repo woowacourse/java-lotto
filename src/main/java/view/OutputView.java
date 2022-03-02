@@ -3,16 +3,17 @@ package view;
 import domain.Lotto;
 import domain.LottoNumber;
 import domain.LottoResult;
-import java.util.List;
+import domain.Lottos;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
 
-    private static final String LINE_SEPARATOR = System.lineSeparator();
-    public static final String BLANK_SPACE = " ";
+    public static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final String BLANK_SPACE = " ";
     private static final String OUTPUT_VIEW_SEPARATOR = "---------" + LINE_SEPARATOR;
-    private static final String BOUGHT_LOTTO_COUNT_TEXT_FORMAT = "%d개를 구매했습니다." + LINE_SEPARATOR;
+    private static final String BOUGHT_MANUALS_COUNT_TEXT_FORMAT = LINE_SEPARATOR + "수동으로 %d장," + BLANK_SPACE;
+    private static final String BOUGHT_RANDOM_COUNT_TEXT_FORMAT = "자동으로 %d개를 구매했습니다." + LINE_SEPARATOR;
     private static final String CHOSEN_LOTTO_NUMBERS_DELIMITER = ", ";
     private static final String CHOSEN_LOTTO_NUMBERS_TEXT_FORMAT = "[%s]" + LINE_SEPARATOR;
     private static final String LOTTO_RESULTS_ANNOUNCEMENT_TEXT = "당첨 통계" + LINE_SEPARATOR;
@@ -25,12 +26,13 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printPurchaseInfo(List<Lotto> lottos) {
+    public static void printPurchaseInfo(Lottos lottos) {
         StringBuilder builder = new StringBuilder();
+        builder.append(format(BOUGHT_MANUALS_COUNT_TEXT_FORMAT, lottos.getManuals()))
+                .append(format(BOUGHT_RANDOM_COUNT_TEXT_FORMAT, lottos.getAutos()));
 
-        builder.append(format(BOUGHT_LOTTO_COUNT_TEXT_FORMAT, lottos.size()));
-
-        lottos.stream()
+        lottos.getLottos()
+                .stream()
                 .map(OutputView::formatChosenLottoNumbers)
                 .forEach(builder::append);
 
@@ -85,7 +87,7 @@ public class OutputView {
         return String.format(stringFormat, value);
     }
 
-    private static void print(String value) {
+    public static void print(String value) {
         System.out.println(value);
     }
 }

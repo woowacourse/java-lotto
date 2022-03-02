@@ -1,8 +1,8 @@
 package domain;
 
-import static common.TestUtils.createNewLotto;
-import static constant.LottoConstants.LOTTO_PRICE;
+import static common.TestUtils.createCountsDto;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,12 +16,10 @@ import org.junit.jupiter.api.Test;
 public class LottoGameTest {
 
     private static LottoReferee referee;
-    private final Lotto firstPrizeLotto = createNewLotto(1, 2, 3, 4, 5, 6);
-    private final Lotto secondPrizeLotto = createNewLotto(1, 2, 3, 4, 5, 7);
-    private final Lotto thirdPrizeLotto = createNewLotto(1, 2, 3, 4, 5, 16);
-    private final Lotto fourthPrizeLotto = createNewLotto(1, 2, 3, 4, 15, 16);
-    private final Lotto fifthPrizeLotto = createNewLotto(1, 2, 3, 14, 15, 16);
-    private final Lotto noPrizeLotto = createNewLotto(11, 12, 13, 14, 15, 16);
+    private static final String firstPrize = "1, 2, 3, 4, 5, 6";
+    private static final String secondPrize = "1, 2, 3, 4, 5, 7";
+    private static final String fifthPrize = "1, 2, 3, 14, 15, 16";
+    private static final String noPrize = "11, 12, 13, 14, 15, 16";
 
     @BeforeAll
     static void setup() {
@@ -36,23 +34,36 @@ public class LottoGameTest {
     }
 
     @Test
-    void getResultStatistics() {
-        Lottos lottos = new Lottos(getLottosExample(firstPrizeLotto, secondPrizeLotto, noPrizeLotto));
+    void getResultStatistics_initsWithLottosInput() {
+        Lottos lottos = Lottos.of(getManualsList(firstPrize, secondPrize, noPrize),
+                createCountsDto(3, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
-        Map<LottoResult, Integer> actual = game.getResultStatistics();
+        Map<LottoResult, Integer> stats = game.getResultStatistics();
 
-        assertThat(actual).containsOnlyKeys(LottoResult.values());
-        assertThat(actual.get(LottoResult.FIRST)).isEqualTo(1);
-        assertThat(actual.get(LottoResult.SECOND)).isEqualTo(1);
-        assertThat(actual.get(LottoResult.THIRD)).isEqualTo(0);
-        assertThat(actual.get(LottoResult.FOURTH)).isEqualTo(0);
-        assertThat(actual.get(LottoResult.FIFTH)).isEqualTo(0);
+        assertThat(stats).containsOnlyKeys(LottoResult.values());
+        assertThat(stats.get(LottoResult.FIRST)).isEqualTo(1);
+        assertThat(stats.get(LottoResult.SECOND)).isEqualTo(1);
+        assertThat(stats.get(LottoResult.THIRD)).isEqualTo(0);
+        assertThat(stats.get(LottoResult.FOURTH)).isEqualTo(0);
+        assertThat(stats.get(LottoResult.FIFTH)).isEqualTo(0);
+    }
+
+    @Test
+    void getResultStatistics_exceptionOnModifyingStats() {
+        Lottos lottos = Lottos.of(getManualsList(firstPrize, secondPrize, noPrize),
+                createCountsDto(3, 0));
+        LottoGame game = new LottoGame(lottos, referee);
+
+        Map<LottoResult, Integer> stats = game.getResultStatistics();
+
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> stats.put(LottoResult.FIRST, 10));
     }
 
     @Test
     void calculatePrizePriceRatio_zeroIfNoPrize() {
-        Lottos lottos = new Lottos(getLottosExample(noPrizeLotto));
+        Lottos lottos = Lottos.of(getManualsList(noPrize), createCountsDto(1, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
         float actual = game.calculatePrizePriceRatio();
@@ -62,17 +73,18 @@ public class LottoGameTest {
 
     @Test
     void calculatePrizePriceRatio_fifthPrizeEqualsFiveTimesThePrice() {
-        Lottos lottos = new Lottos(getLottosExample(fifthPrizeLotto));
+        Lottos lottos = Lottos.of(getManualsList(fifthPrize), createCountsDto(1, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
         float actual = game.calculatePrizePriceRatio();
 
-        assertThat(actual).isEqualTo((float) LottoResult.FIFTH.getPrize() / LOTTO_PRICE);
+        assertThat(actual)
+                .isEqualTo((float) LottoResult.FIFTH.getPrize() / Lotto.PRICE);
     }
 
-    private List<Lotto> getLottosExample(Lotto... lottos) {
-        List<Lotto> lottosExample = new ArrayList<>();
-        Collections.addAll(lottosExample, lottos);
+    private List<String> getManualsList(String... manualRaw) {
+        List<String> lottosExample = new ArrayList<>();
+        Collections.addAll(lottosExample, manualRaw);
         return lottosExample;
     }
 }

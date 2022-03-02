@@ -4,23 +4,23 @@ import static common.DisplayFormat.PARAMETERIZED_TEST_DISPLAY_FORMAT;
 import static constant.ExceptionMessages.DUPLICATE_WINNING_NUMBER_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBERS_SIZE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
+import static constant.ExceptionMessages.INVALID_MANUAL_LOTTOS_COUNT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
-import static constant.ExceptionMessages.INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
-import static constant.LottoConstants.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static validator.NumberValidators.validateAndParseNumber;
 import static validator.NumberValidators.validateLottoNumberRange;
-import static validator.NumberValidators.validateManualLottoNumbersSize;
+import static validator.NumberValidators.validateManualLottosCount;
 import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
 import static validator.NumberValidators.validateTotalLottoPriceUnit;
-import static validator.NumberValidators.validateWinningNumbersSize;
+import static validator.NumberValidators.validateLottoNumbersSize;
 
+import domain.Lotto;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -50,24 +50,62 @@ public class NumberValidatorsTest {
     }
 
     @Test
-    void validateTotalLottoPriceUnit_returnsIntOnPass() {
+    void validateTotalLottoPriceUnit_passesOnPositiveNumberInput() {
         assertThatNoException()
-                .isThrownBy(() -> validateTotalLottoPriceUnit(LOTTO_PRICE * 10));
+                .isThrownBy(() -> validateTotalLottoPriceUnit(Lotto.PRICE * 10));
+    }
+
+    @Test
+    void validateTotalLottoPriceUnit_passesOnZeroInput() {
+        assertThatNoException()
+                .isThrownBy(() -> validateTotalLottoPriceUnit(0));
     }
 
     @Test
     void validateTotalLottoPriceUnit_failOnNegativeNumberInput() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> validateTotalLottoPriceUnit(LOTTO_PRICE * -10))
+                .isThrownBy(() -> validateTotalLottoPriceUnit(Lotto.PRICE * -10))
                 .withMessageMatching(NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE);
     }
 
     @Test
     void validateTotalLottoPriceUnit_failIfChangesExist() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> validateTotalLottoPriceUnit(LOTTO_PRICE * 10 + 1))
+                .isThrownBy(() -> validateTotalLottoPriceUnit(Lotto.PRICE * 10 + 1))
                 .withMessageMatching(INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE);
     }
+
+    @Test
+    void validateManualLottosCount_passesOnPositiveNumberOverTotalInput() {
+        assertThatNoException()
+                .isThrownBy(() -> validateManualLottosCount(10, 20));
+    }
+
+    @Test
+    void validateManualLottosCount_passesInZeroInputs() {
+        assertThatNoException()
+                .isThrownBy(() -> validateManualLottosCount(0, 20));
+        assertThatNoException()
+                .isThrownBy(() -> validateManualLottosCount(0, 0));
+    }
+
+    @Test
+    void validateManualLottosCount_failOnNegativeNumberInput() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> validateManualLottosCount(-10, 20))
+                .withMessageMatching(NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE);
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> validateManualLottosCount(-30, -20))
+                .withMessageMatching(NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE);
+    }
+
+    @Test
+    void validateManualLottosCount_failIfManualsIsOverTotal() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> validateManualLottosCount(20, 10))
+                .withMessageMatching(INVALID_MANUAL_LOTTOS_COUNT_EXCEPTION_MESSAGE);
+    }
+
 
     @ParameterizedTest(name = PARAMETERIZED_TEST_DISPLAY_FORMAT)
     @ValueSource(ints = {1, 20, 45})
@@ -85,37 +123,20 @@ public class NumberValidatorsTest {
     }
 
     @Test
-    void validateManualLottoNumbersSize_passOnValidListSize() {
+    void validateLottoNumbersSize_passOnValidListSize() {
         List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         assertThatNoException()
-                .isThrownBy(() -> validateManualLottoNumbersSize(nums));
+                .isThrownBy(() -> validateLottoNumbersSize(nums));
     }
 
     @Test
-    void validateManualLottoNumbersSize_throwsIllegalExceptionOnInvalidListSize() {
+    void validateLottoNumbersSize_throwsIllegalExceptionOnInvalidListSize() {
         List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> validateManualLottoNumbersSize(nums))
+                .isThrownBy(() -> validateLottoNumbersSize(nums))
                 .withMessageMatching(INVALID_LOTTO_NUMBERS_SIZE_EXCEPTION_MESSAGE);
-    }
-
-    @Test
-    void validateWinningNumbersSize_passOnValidListSize() {
-        List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5, 6);
-
-        assertThatNoException()
-                .isThrownBy(() -> validateWinningNumbersSize(nums));
-    }
-
-    @Test
-    void validateWinningNumbersSize_throwsIllegalExceptionOnInvalidListSize() {
-        List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5);
-
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> validateWinningNumbersSize(nums))
-                .withMessageMatching(INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE);
     }
 
     @Test

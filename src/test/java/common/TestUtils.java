@@ -1,6 +1,7 @@
 package common;
 
 import domain.Lotto;
+import dto.LottoCountsDto;
 import domain.LottoNumber;
 import java.util.Arrays;
 import java.util.List;
@@ -20,5 +21,9 @@ public class TestUtils {
                 .map(LottoNumber::of)
                 .sorted()
                 .collect(Collectors.toList());
+    }
+
+    public static LottoCountsDto createCountsDto(int manuals, int randoms) {
+        return new LottoCountsDto(manuals, randoms);
     }
 }

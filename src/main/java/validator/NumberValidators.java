@@ -3,23 +3,21 @@ package validator;
 import static constant.ExceptionMessages.DUPLICATE_WINNING_NUMBER_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBERS_SIZE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
+import static constant.ExceptionMessages.INVALID_MANUAL_LOTTOS_COUNT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
-import static constant.ExceptionMessages.INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
-import static constant.LottoConstants.LOTTO_NUMBERS_SIZE;
-import static constant.LottoConstants.LOTTO_PRICE;
-import static constant.LottoConstants.MAXIMUM_LOTTO_NUMBER;
-import static constant.LottoConstants.MINIMUM_LOTTO_NUMBER;
+import static domain.Lotto.LOTTO_NUMBERS_SIZE;
+import static domain.LottoNumber.MAXIMUM_NUMBER;
+import static domain.LottoNumber.MINIMUM_NUMBER;
 
+import domain.Lotto;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class NumberValidators {
-
-    private static final int WINNING_NUMBERS_SIZE = 6;
 
     private NumberValidators() {
     }
@@ -34,8 +32,16 @@ public class NumberValidators {
 
     public static void validateTotalLottoPriceUnit(int num) {
         validateNotNegative(num);
-        if (num % LOTTO_PRICE > 0) {
+        if (num % Lotto.PRICE > 0) {
             throw new IllegalArgumentException(INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public static void validateManualLottosCount(int manualsCount, int totalCount) {
+        validateNotNegative(manualsCount);
+        validateNotNegative(totalCount);
+        if (manualsCount > totalCount) {
+            throw new IllegalArgumentException(INVALID_MANUAL_LOTTOS_COUNT_EXCEPTION_MESSAGE);
         }
     }
 
@@ -46,20 +52,14 @@ public class NumberValidators {
     }
 
     public static void validateLottoNumberRange(int num) {
-        if (num < MINIMUM_LOTTO_NUMBER || num > MAXIMUM_LOTTO_NUMBER) {
+        if (num < MINIMUM_NUMBER || num > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE);
         }
     }
 
-    public static void validateManualLottoNumbersSize(List<?> list) {
+    public static void validateLottoNumbersSize(List<?> list) {
         if (list.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_SIZE_EXCEPTION_MESSAGE);
-        }
-    }
-
-    public static void validateWinningNumbersSize(List<?> list) {
-        if (list.size() != WINNING_NUMBERS_SIZE) {
-            throw new IllegalArgumentException(INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE);
         }
     }
 
