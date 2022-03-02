@@ -21,15 +21,15 @@ public class WinningNumbers {
         }
     }
 
-    public Optional<WinningPrice> getWinningPrice(Lotto lotto) {
+    public Optional<Rank> getRank(Lotto lotto) {
         int count = getCount(lotto);
         boolean containsBonus = false;
 
-        if (count == WinningPrice.Five.getCount()) {
+        if (Rank.needCheckBonus(count)) {
             containsBonus = lotto.contains(bonusNumber);
         }
 
-        return WinningPrice.of(count, containsBonus);
+        return Rank.of(count, containsBonus);
     }
 
     private int getCount(Lotto lotto) {
@@ -41,13 +41,5 @@ public class WinningNumbers {
         }
 
         return count;
-    }
-
-    @Override
-    public String toString() {
-        return "WinningNumbers{" +
-                "winningLotto=" + winningLotto +
-                ", bonusNumber=" + bonusNumber +
-                '}';
     }
 }

@@ -1,35 +1,42 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lottos {
 
-    private static final int PRICE = 1000;
-
     private final List<Lotto> lottos;
 
-    public Lottos(Money money) {
-        int quantity = money.getAvailableQuantity(PRICE);
-
-        this.lottos = new ArrayList<>();
-        while (quantity-- > 0) {
-            Lotto lotto = new Lotto();
-            lottos.add(lotto);
-        }
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public static Lottos createByAuto(int quantity) {
+        final List<Lotto> lottos = IntStream.range(0, quantity)
+                .mapToObj(i -> Lotto.createByAuto())
+                .collect(Collectors.toList());
+
+        return new Lottos(lottos);
+    }
+
+    public static Lottos createByManual(List<Lotto> lottos) {
+        return new Lottos(lottos);
+    }
+
+    public static Lottos of(List<Lotto> lottos1, List<Lotto> lottos2) {
+        return new Lottos(Stream.concat(lottos1.stream(), lottos2.stream())
+                .collect(Collectors.toList()));
     }
 
     public Result getResult(WinningNumbers winningNumbers) {
         Result result = new Result();
 
         for (Lotto lotto : lottos) {
-            Optional<WinningPrice> winningPrice = winningNumbers.getWinningPrice(lotto);
+            Optional<Rank> winningPrice = winningNumbers.getRank(lotto);
             winningPrice.ifPresent(result::add);
         }
 
@@ -42,12 +49,5 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
-    }
-
-    @Override
-    public String toString() {
-        return "Lottos{" +
-                "lottos=" + lottos +
-                '}';
     }
 }

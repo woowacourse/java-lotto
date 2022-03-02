@@ -14,30 +14,36 @@ public class Lotto {
 
     private final Set<Number> numbers;
 
-    public Lotto() {
+    private Lotto(Set<Number> numbers) {
+        this.numbers = numbers;
+    }
+
+    public static Lotto createByAuto() {
         List<Number> randomNumbers = Number.getRandomNumbers(SIZE);
-        this.numbers = new TreeSet<>(randomNumbers);
+
+        return new Lotto(new TreeSet<>(randomNumbers));
     }
 
-    public Lotto(List<Integer> numbers) {
+    public static Lotto createByManual(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers.stream()
+
+        return new Lotto(numbers.stream()
                 .map(Number::getInstance)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(TreeSet::new)));
     }
 
-    private void validateNumbers(List<Integer> numbers) {
+    private static void validateNumbers(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
     }
 
-    private void validateSize(List<Integer> numbers) {
+    private static void validateSize(List<Integer> numbers) {
         if (numbers.size() != SIZE) {
             throw new IllegalArgumentException(SIZE_ERROR_MESSAGE);
         }
     }
 
-    private void validateDuplicate(List<Integer> numbers) {
+    private static void validateDuplicate(List<Integer> numbers) {
         int noDuplicateCount = (int) numbers.stream()
                 .distinct()
                 .count();
@@ -53,12 +59,5 @@ public class Lotto {
 
     public Set<Number> getNumbers() {
         return Collections.unmodifiableSet(numbers);
-    }
-
-    @Override
-    public String toString() {
-        return "Lotto{" +
-                "numbers=" + numbers +
-                '}';
     }
 }

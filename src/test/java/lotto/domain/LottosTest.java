@@ -6,33 +6,14 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottosTest {
-
-    @Nested
-    @DisplayName("Lottos는")
-    class NewLottos {
-
-        @Nested
-        @DisplayName("구입금액이 주어지면")
-        class Context_with_money {
-
-            @ParameterizedTest
-            @CsvSource(value = {"1000|1", "2000|2"}, delimiter = '|')
-            @DisplayName("구입금액에 맞는 개수의 로또를 생성한다.")
-            void It_create_lottos(int value, int expected) {
-                Lottos lottos = new Lottos(new Money(value));
-
-                assertThat(lottos.getCount()).isEqualTo(expected);
-            }
-        }
-    }
 
     @Nested
     @DisplayName("진행 결과를 구하는 메서드는")
@@ -46,10 +27,10 @@ public class LottosTest {
             @ParameterizedTest
             @MethodSource("provideSource")
             @DisplayName("Result를 반환한다.")
-            void It_create_result(Lotto lotto, WinningPrice expected) {
-                final Lottos lottos = new Lottos(List.of(lotto));
+            void It_create_result(Lotto lotto, Rank expected) {
+                final Lottos lottos = Lottos.createByManual(List.of(lotto));
 
-                final Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+                final Lotto winningLotto = Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6));
                 final Number bonusNumber = Number.getInstance(7);
                 final WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 
@@ -60,12 +41,38 @@ public class LottosTest {
 
             Stream<Arguments> provideSource() {
                 return Stream.of(
-                        Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), WinningPrice.All),
-                        Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 7)), WinningPrice.FiveAndBonus),
-                        Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 45)), WinningPrice.Five),
-                        Arguments.of(new Lotto(List.of(1, 2, 3, 4, 44, 45)), WinningPrice.Four),
-                        Arguments.of(new Lotto(List.of(1, 2, 3, 43, 44, 45)), WinningPrice.Three)
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6)), Rank.First),
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 5, 7)), Rank.Second),
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 5, 45)), Rank.Third),
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 4, 44, 45)), Rank.Fourth),
+                        Arguments.of(Lotto.createByManual(List.of(1, 2, 3, 43, 44, 45)), Rank.Fifth)
                 );
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("2개의 Lottos를 하나의 Lottos로 합치는 메서드는")
+    class Of {
+
+        @Nested
+        @DisplayName("2개의 Lottos가 주어지면")
+        class Context_with_two_lottos {
+
+            @Test
+            @DisplayName("하나로 합쳐진 Lottos를 반환한다.")
+            void It_returns_new_lottos() {
+                final List<Lotto> lottos1 = List.of(
+                        Lotto.createByManual(List.of(1, 2, 3, 4, 5, 6)),
+                        Lotto.createByManual(List.of(7, 8, 9, 10, 11, 12)));
+                final List<Lotto> lottos2 = List.of(
+                        Lotto.createByManual(List.of(11, 12, 13, 14, 15, 16)),
+                        Lotto.createByManual(List.of(21, 22, 23, 24, 25, 26)),
+                        Lotto.createByManual(List.of(31, 32, 33, 34, 35, 36)));
+
+                final Lottos lottos = Lottos.of(lottos1, lottos2);
+
+                assertThat(lottos.getCount()).isEqualTo(5);
             }
         }
     }

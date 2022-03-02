@@ -34,7 +34,7 @@ public class WinningNumbersController {
 
     private Optional<Lotto> getValidWinningLotto(List<Integer> integers) {
         try {
-            return Optional.of(new Lotto(integers));
+            return Optional.of(Lotto.createByManual(integers));
         } catch (IllegalArgumentException exception) {
             OutputView.printError(exception.getMessage());
             return Optional.empty();
