@@ -21,10 +21,15 @@ public class Player {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     private static final int MINIMUM_PURCHASE_AMOUNT = 1000;
 
 =======
 >>>>>>> f3df2f7 (refactor : 상수 접근지정자 변경)
+=======
+    private static final String LACK_OF_LOTTO_PURCHASE_MONEY = "로또를 구매할 수 없습니다.";
+
+>>>>>>> 60412d6 (feat : 로또 구매 기능 구매할 수 있는지 유효성 검증 기능 추가)
     private final Money money;
     private final List<Lotto> lottos;
 <<<<<<< HEAD
@@ -39,6 +44,9 @@ public class Player {
     }
 
     public void purchaseLotto(Lotto lotto) {
+        if (!money.isBiggerThanLottoPrice()) {
+            throw new IllegalArgumentException(LACK_OF_LOTTO_PURCHASE_MONEY);
+        }
         money.deductMoney();
         lottos.add(lotto);
     }
