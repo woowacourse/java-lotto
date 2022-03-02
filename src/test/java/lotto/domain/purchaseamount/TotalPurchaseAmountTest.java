@@ -37,7 +37,7 @@ class TotalPurchaseAmountTest {
         //given
         final int expected = 2;
         //when
-        final int actual = totalPurchaseAmount.getPurchaseCount();
+        final int actual = totalPurchaseAmount.getCountOfLottoNumbers();
         //then
         assertThat(actual).isEqualTo(expected);
     }

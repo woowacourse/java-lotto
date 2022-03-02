@@ -47,10 +47,6 @@ public class TotalPurchaseAmount {
         }
     }
 
-    public int getPurchaseCount() {
-        return amount / lottoPrice;
-    }
-
     public int getCountOfLottoNumbers() {
         return amount / lottoPrice;
     }
