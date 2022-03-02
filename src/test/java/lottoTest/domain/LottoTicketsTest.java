@@ -29,4 +29,12 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(lottoNumberGenerator, numbers.size());
         assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(numbers.size());
     }
+
+    @Test
+    void 로또들을_합치는_기능_테스트() {
+        LottoTickets lottoTickets = new LottoTickets(new LottoNumberAutoGenerator(), 2);
+        LottoTickets newLottoTickets = new LottoTickets(new LottoNumberAutoGenerator(), 3);
+        int totalLottoSize = lottoTickets.combine(newLottoTickets).getLottoTickets().size();
+        assertThat(totalLottoSize).isEqualTo(5);
+    }
 }

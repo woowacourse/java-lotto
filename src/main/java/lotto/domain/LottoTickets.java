@@ -14,6 +14,16 @@ public class LottoTickets {
         this.lottoTickets = createLottoTickets(lottoNumberGenerator, lottoCount);
     }
 
+    private LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
+    }
+
+    public LottoTickets combine(LottoTickets lottoTickets) {
+        List<LottoTicket> combined = new ArrayList<>(this.lottoTickets);
+        combined.addAll(lottoTickets.getLottoTickets());
+        return new LottoTickets(combined);
+    }
+
     public List<Rank> getRanksWithWinningNumbers(WinningNumbers winningNumbers) {
         List<Rank> ranks = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTickets) {
