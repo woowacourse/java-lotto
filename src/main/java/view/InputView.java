@@ -4,6 +4,7 @@ import utils.InputValidation;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -16,7 +17,7 @@ public class InputView {
     public static int inputPrice() {
         try {
             System.out.println(INPUT_PRICE);
-            return InputValidation.validatePrice(scanner.nextLine());
+            return Integer.parseInt(InputValidation.validateIsNum(scanner.nextLine()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputPrice();
@@ -26,7 +27,10 @@ public class InputView {
     public static List<Integer> inputWinningLottoNumbers() {
         try {
             System.out.println(INPUT_WINNING_LOTTO_NUMBERS);
-            return InputValidation.validateWinningNumber(scanner.nextLine());
+            List<String> inputNumbers = InputValidation.validateIsNumsListString(scanner.nextLine());
+            return inputNumbers.stream()
+                    .map(number -> Integer.parseInt(number))
+                    .collect(Collectors.toList());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputWinningLottoNumbers();
@@ -36,7 +40,8 @@ public class InputView {
     public static int inputBonus() {
         try {
             System.out.println(INPUT_BONUS_NUMBER);
-            return InputValidation.validateBonusNumber(scanner.nextLine());
+            String input = InputValidation.validateBallInput(scanner.nextLine());
+            return Integer.parseInt(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputBonus();
