@@ -12,7 +12,7 @@ public class LottoTicket {
     LottoFactory autoLottoFactory;
     LottoFactory passiveLottoFactory;
 
-    public LottoTicket(int autoLottoCount, List<Lotto> passiveLottos, LottoNumberGenerator generatorPolicy) {
+    public LottoTicket(int autoLottoCount, List<List<LottoNumber>> passiveLottos, LottoNumberGenerator generatorPolicy) {
         this.autoLottoCount = autoLottoCount;
         this.autoLottoFactory = new AutoLottoFactory(generatorPolicy, autoLottoCount);
         this.passiveLottoFactory = new PassiveLottoFactory(passiveLottos);

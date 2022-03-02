@@ -21,19 +21,19 @@ public class LottoController {
         announceResult(lottoMachine, winningLotto);
     }
 
-    private List<Lotto> getPassiveLottos() {
-        List<Lotto> passiveLottos = new ArrayList<>();
+    private List<List<LottoNumber>> getPassiveLottoNumbers() {
+        List<List<LottoNumber>> passiveLottos = new ArrayList<>();
         int passiveLottoCount = inputController.getPassiveLottoCount();
         OutputView.printPassiveLottoInputGuide();
         for (int i = 0; i < passiveLottoCount; i++) {
-            passiveLottos.add(new Lotto(inputController.getPassiveLottoNumbers()));
+            passiveLottos.add(inputController.getPassiveLottoNumbers());
         }
         return passiveLottos;
     }
 
     private LottoMachine createLottoMachine() {
         int money = inputController.getMoney();
-        List<Lotto> passiveLottos = getPassiveLottos();
+        List<List<LottoNumber>> passiveLottos = getPassiveLottoNumbers();
         LottoMachine lottoMachine = new LottoMachine(money, passiveLottos, new ShuffleNumberGenerator());
         OutputView.printPurchasedLotto(lottoMachine.getLottoTicket());
         return lottoMachine;

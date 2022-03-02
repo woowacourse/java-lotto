@@ -21,25 +21,22 @@ public class LottoTicketTest {
 
     @Test
     public void createLottoTicketWithPassiveLotto() {
-        Lotto lotto = new Lotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)));
-        List<Lotto> passiveLotto = List.of(lotto);
-        LottoTicket lottoTicket = new LottoTicket(14, passiveLotto, new ShuffleNumberGenerator());
+        List<List<LottoNumber>> passiveLottoNumbers = List.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)));
+        LottoTicket lottoTicket = new LottoTicket(14, passiveLottoNumbers, new ShuffleNumberGenerator());
         assertThat(lottoTicket).isInstanceOf(LottoTicket.class);
     }
 
     @Test
     public void checkPassiveLottoCount() {
-        Lotto lotto = new Lotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)));
-        List<Lotto> passiveLotto = List.of(lotto);
-        LottoTicket lottoTicket = new LottoTicket(14, passiveLotto, new ShuffleNumberGenerator());
+        List<List<LottoNumber>> passiveLottoNumbers = List.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)));
+        LottoTicket lottoTicket = new LottoTicket(14, passiveLottoNumbers, new ShuffleNumberGenerator());
         assertThat(lottoTicket.getLottos().size() - lottoTicket.getAutoLottoCount()).isEqualTo(1);
     }
 
     @Test
     public void checkAutoLottoCount() {
-        Lotto lotto = new Lotto(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)));
-        List<Lotto> passiveLotto = List.of(lotto);
-        LottoTicket lottoTicket = new LottoTicket(14, passiveLotto, new ShuffleNumberGenerator());
+        List<List<LottoNumber>> passiveLottoNumbers = List.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)));
+        LottoTicket lottoTicket = new LottoTicket(14, passiveLottoNumbers, new ShuffleNumberGenerator());
         assertThat(lottoTicket.getAutoLottoCount()).isEqualTo(14);
     }
 

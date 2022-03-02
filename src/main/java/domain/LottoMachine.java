@@ -12,10 +12,10 @@ public class LottoMachine {
     private final LottoResult lottoResult;
     private final LottoTicket lottoTicket;
 
-    public LottoMachine(int money, List<Lotto> passiveLottos, LottoNumberGenerator numberGenerator) {
-        this.money = new Money(money, passiveLottos.size());
+    public LottoMachine(int money, List<List<LottoNumber>> passiveLottoNumbers, LottoNumberGenerator numberGenerator) {
+        this.money = new Money(money, passiveLottoNumbers.size());
         this.lottoResult = new LottoResult();
-        this.lottoTicket = new LottoTicket(this.money.getPurchasableLottoCount(), passiveLottos, numberGenerator);
+        this.lottoTicket = new LottoTicket(this.money.getPurchasableLottoCount(), passiveLottoNumbers, numberGenerator);
     }
 
     public double calculateProfit() {
