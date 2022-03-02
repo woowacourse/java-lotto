@@ -16,9 +16,11 @@ public class LottoGameController {
 
 	public void run() {
 		try {
-			purchaseLotto(new Money(inputMoney()), inputManualLottoCount());
+			Money money = new Money(inputMoney());
+			purchaseLotto(money, inputManualLottoCount());
 			AnswerLotto answerLotto = AnswerLotto.of(inputAnswerNumbers(), inputBonusNumber());
-			printResults(this.lottoTickets.generateResult(answerLotto));
+			Result result = lottoTickets.generateResult(answerLotto);
+			printResults(result, result.calculateProfitRate(money.getValue()));
 		} catch (IllegalArgumentException e) {
 			printErrorMessage(e.getMessage());
 		}

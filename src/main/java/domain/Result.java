@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class Result {
 	private Map<ResultStatics, Integer> results;
-	private float profitRate;
 
 	public Result() {
 		results = new LinkedHashMap<>();
@@ -18,19 +17,16 @@ public class Result {
 		results.put(resultStatics, results.get(resultStatics) + 1);
 	}
 
-	public void setProfitRate(int money) {
+	public float calculateProfitRate(int money) {
 		int profit = 0;
 		for (ResultStatics resultStatics : results.keySet()) {
 			profit += (resultStatics.getPrice() * results.get(resultStatics));
 		}
-		this.profitRate = (float) profit / money;
+		return (float) profit / money;
 	}
 
 	public Map<ResultStatics, Integer> getResults() {
 		return results;
 	}
 
-	public float getProfitRate() {
-		return profitRate;
-	}
 }

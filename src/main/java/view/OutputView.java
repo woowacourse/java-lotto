@@ -33,12 +33,12 @@ public class OutputView {
 			+ "]");
 	}
 
-	public static void printResults(Result result) {
+	public static void printResults(Result result, float profitRate) {
 		System.out.println("\n당첨 통계");
 		System.out.println("---------");
 
 		printResult(result.getResults());
-		printProfitRate(result.getProfitRate());
+		printProfitRate(profitRate);
 	}
 
 	private static void printResult(Map<ResultStatics, Integer> result) {

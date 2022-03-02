@@ -24,6 +24,10 @@ public class Money {
 		return this.value / PRICE_OF_LOTTO;
 	}
 
+	public int getValue() {
+		return value;
+	}
+
 	private void validateMoney(int money) {
 		if (money % PRICE_OF_LOTTO != 0 || money < PRICE_OF_LOTTO) {
 			throw new IllegalArgumentException(DIVIDE_BY_THOUSAND);

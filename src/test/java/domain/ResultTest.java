@@ -17,7 +17,6 @@ public class ResultTest {
 		for (ResultStatics resultStatics : ResultStatics.values()) {
 			Result result = new Result();
 			result.addResult(resultStatics);
-			result.setProfitRate(1000);
 			testCase.put(result, (float) resultStatics.getPrice() / 1000);
 		}
 	}
@@ -26,8 +25,7 @@ public class ResultTest {
 	@DisplayName("올바른 수익률을 산출하였는지 확인")
 	void correctProfitRate() {
 		for (Result result : testCase.keySet()) {
-			result.setProfitRate(1000);
-			assertThat(result.getProfitRate()).isEqualTo(testCase.get(result));
+			assertThat(result.calculateProfitRate(1000)).isEqualTo(testCase.get(result));
 		}
 	}
 }

@@ -43,15 +43,4 @@ public class LottoTicketsTest {
 		}
 	}
 
-	@Test
-	@DisplayName("올바른 수익률을 산출하는지 확인")
-	void generateResult_profit() {
-		int totalPrice = 0;
-		for (ResultStatics resultStatics : ResultStatics.values()) {
-			totalPrice += resultStatics.getPrice();
-		}
-
-		assertThat(result.getProfitRate()).isEqualTo((float) totalPrice / 6000);
-	}
-
 }
