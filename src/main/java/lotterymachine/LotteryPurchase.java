@@ -11,6 +11,12 @@ public class LotteryPurchase {
         this.number = purchase(number);
     }
 
+    private void validateNumber(int number) {
+        if (number < PER_LOTTERY_TICKET_PRICE) {
+            throw new IllegalArgumentException(TERMS_OF_PURCHASE);
+        }
+    }
+
     private int purchase(int number) {
         return this.number = number / PER_LOTTERY_TICKET_PRICE;
     }
@@ -21,11 +27,5 @@ public class LotteryPurchase {
 
     public int getPurchasePrice() {
         return this.number * PER_LOTTERY_TICKET_PRICE;
-    }
-
-    private void validateNumber(int number) {
-        if (number < PER_LOTTERY_TICKET_PRICE) {
-            throw new IllegalArgumentException(TERMS_OF_PURCHASE);
-        }
     }
 }
