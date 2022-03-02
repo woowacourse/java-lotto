@@ -16,6 +16,12 @@ public class LottoFactory {
 		.boxed()
 		.collect(Collectors.toList());
 
+	public List<Lotto> generateLottos(final Money money, List<List<Integer>> inputManualLotto){
+		List<Lotto> lottos = generateLottosAsManual(inputManualLotto);
+		lottos.addAll(generateLottosAsAuto(money));
+		return lottos;
+	}
+
 	public List<Lotto> generateLottosAsAuto(final Money money) {
 		int autoLottoCount = money.findPurchaseLottoCount();
 		return IntStream.range(INITIAL_INDEX, autoLottoCount)
@@ -25,13 +31,17 @@ public class LottoFactory {
 
 	private Lotto generateLottoAsAuto() {
 		Collections.shuffle(lottoNumbers);
-		return new Lotto(abstractLottoNumbersAsMuchAsLottoSize().stream()
-			.map(LottoNumber::new)
-			.collect(Collectors.toList()));
+		return generateLotto(abstractLottoNumbersAsMuchAsLottoSize());
 	}
 
 	private List<Integer> abstractLottoNumbersAsMuchAsLottoSize() {
 		return Collections.unmodifiableList(lottoNumbers.subList(INITIAL_INDEX, FIXED_LOTTO_SIZE));
+	}
+
+	private Lotto generateLotto(List<Integer> numbers) {
+		return new Lotto(numbers.stream()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList()));
 	}
 
 	public List<Lotto> generateLottosAsManual(List<List<Integer>> inputManualLotto) {
@@ -41,8 +51,6 @@ public class LottoFactory {
 	}
 
 	private Lotto generateLottoAsManual(List<Integer> manualLotto) {
-		return new Lotto(manualLotto.stream()
-			.map(LottoNumber::new)
-			.collect(Collectors.toList()));
+		return generateLotto(manualLotto);
 	}
 }

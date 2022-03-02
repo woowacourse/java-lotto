@@ -55,9 +55,13 @@ public class InputView {
 	}
 
 	private List<Integer> inputIntegerListFormat(String message) {
-		return Arrays.stream(removeBlankAndSplitByComma())
-			.map(string -> inputNumberFormat(message))
-			.collect(Collectors.toList());
+		try {
+			return Arrays.stream(removeBlankAndSplitByComma())
+				.map(Integer::parseInt)
+				.collect(Collectors.toList());
+		}catch (Exception exception){
+			throw new NumberFormatException(message);
+		}
 	}
 
 	private String[] removeBlankAndSplitByComma() {
