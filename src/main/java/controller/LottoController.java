@@ -4,7 +4,6 @@ import static view.InputView.inputWithMessage;
 import static view.OutputView.printIssuedLottoNumbers;
 import static view.OutputView.printResult;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -20,9 +19,6 @@ import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-
-    private static final String DELIMITER = ",";
-    private static final int INCLUDE_NULL = -1;
 
     public void run() {
         Money inputMoney = getUntilValid(this::getMoneyFromUser);
@@ -82,9 +78,8 @@ public class LottoController {
     }
 
     private List<LottoNumber> parseLottoNumbers(String text) {
-        String[] tokens = text.split(DELIMITER, INCLUDE_NULL);
-        return Arrays.stream(tokens)
-                .map(token -> LottoNumber.parse(token.trim()))
+        return InputView.splitAndTrim(text).stream()
+                .map(LottoNumber::parse)
                 .collect(Collectors.toList());
     }
 

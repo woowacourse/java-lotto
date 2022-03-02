@@ -1,11 +1,16 @@
 package view;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class InputView {
-    private final static Scanner SCANNER = new Scanner(System.in);
+    private static final String DELIMITER = ",";
+    private static final int INCLUDE_EMPTY = -1;
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     public static <T> T inputWithMessage(String message, Function<String, T> function) {
         System.out.println(message);
@@ -31,5 +36,19 @@ public class InputView {
 
     private static boolean isIncludedInOptions(String value, String[] options) {
         return Stream.of(options).anyMatch(option -> option.equals(value));
+    }
+
+    public static List<String> splitAndTrim(String text) {
+        return trimAll(splitWithEmpty(text));
+    }
+
+    private static List<String> trimAll(List<String> tokens) {
+        return tokens.stream()
+                .map(token -> token.trim())
+                .collect(Collectors.toList());
+    }
+
+    private static List<String> splitWithEmpty(String text) {
+        return Arrays.asList(text.split(DELIMITER, INCLUDE_EMPTY));
     }
 }
