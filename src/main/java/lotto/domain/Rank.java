@@ -15,16 +15,14 @@ public enum Rank {
     private final int winningLottoMatchCount;
     private final boolean isMatchBonusNumber;
 
-    Rank(long prize, int winningLottoMatchCount) {
-        this.prize = prize;
-        this.winningLottoMatchCount = winningLottoMatchCount;
-        this.isMatchBonusNumber = false;
-    }
-
     Rank(long prize, int winningLottoMatchCount, boolean isMatchBonusNumber) {
         this.prize = prize;
         this.winningLottoMatchCount = winningLottoMatchCount;
         this.isMatchBonusNumber = isMatchBonusNumber;
+    }
+
+    Rank(long prize, int winningLottoMatchCount) {
+        this(prize, winningLottoMatchCount, false);
     }
 
     public static Rank getRank(int winningNumbersMatchCount, boolean bonusNumberMatch) {
