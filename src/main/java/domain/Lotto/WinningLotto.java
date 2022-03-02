@@ -15,6 +15,12 @@ public class WinningLotto {
         bonusBall = bonusBallNumber;
     }
 
+    private void validateDuplicate(List<LottoNumber> numbers, LottoNumber bonusBallNumber) {
+        if (numbers.contains(bonusBallNumber)) {
+            throw new IllegalArgumentException(ExceptionMessage.LOTTO_AND_BONUS_BALL_DUPLICATION);
+        }
+    }
+
     public boolean isContainLottoNumber(LottoNumber lottoNumber) {
         List<LottoNumber> winningLottoNumbers = winningLotto.getLotto();
         return winningLottoNumbers.contains(lottoNumber);
@@ -22,19 +28,5 @@ public class WinningLotto {
 
     public boolean isContainBonusBall(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.contains(bonusBall);
-    }
-
-    public void validateDuplicate(List<LottoNumber> numbers, LottoNumber bonusBallNumber) {
-        if (numbers.contains(bonusBallNumber)) {
-            throw new IllegalArgumentException(ExceptionMessage.LOTTO_AND_BONUS_BALL_DUPLICATION);
-        }
-    }
-
-    public List<LottoNumber> getWinningLotto() {
-        return winningLotto.getLotto();
-    }
-
-    public LottoNumber getBonusBall() {
-        return bonusBall;
     }
 }

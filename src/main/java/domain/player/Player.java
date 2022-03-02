@@ -30,7 +30,6 @@ public class Player {
         lottos.add(lotto);
     }
 
-
     public List<Result> judgeAll(WinningLotto winningLotto) {
         List<Result> result = new ArrayList<>();
         for (Lotto lotto : lottos) {

@@ -25,6 +25,12 @@ public class LottoNumber {
         this.number = number;
     }
 
+    private void validateLottoNumberBound(int number) {
+        if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(ExceptionMessage.LOTTO_NUMBER_OUT_OF_BOUND);
+        }
+    }
+
     public static LottoNumber valueOf(int number) {
         LottoNumber lottoNumber = CACHE.get(number - 1);
 
@@ -36,12 +42,6 @@ public class LottoNumber {
 
     public static List<LottoNumber> values() {
         return CACHE;
-    }
-
-    private void validateLottoNumberBound(int number) {
-        if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(ExceptionMessage.LOTTO_NUMBER_OUT_OF_BOUND);
-        }
     }
 
     public int getNumber() {

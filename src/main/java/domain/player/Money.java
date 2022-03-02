@@ -13,21 +13,17 @@ public class Money {
         this.amount = amount;
     }
 
-    public void deductMoney() {
-        amount -= MINIMUM_PURCHASE_AMOUNT;
-    }
-
-    public boolean isBiggerThanLottoPrice() {
-        return amount >= MINIMUM_PURCHASE_AMOUNT;
-    }
-
     private void validateAmount(int amount) {
         if (amount < MINIMUM_PURCHASE_AMOUNT) {
             throw new IllegalArgumentException(ExceptionMessage.NOT_ENOUGH_MONEY);
         }
     }
 
-    public int getAmount() {
-        return amount;
+    public void deductMoney() {
+        amount -= MINIMUM_PURCHASE_AMOUNT;
+    }
+
+    public boolean isBiggerThanLottoPrice() {
+        return amount >= MINIMUM_PURCHASE_AMOUNT;
     }
 }
