@@ -1,39 +1,39 @@
 package controller;
 
+import java.util.List;
+
 import domain.TicketMachine;
 import domain.Tickets;
 import domain.WinningAnalyze;
 import domain.WinningNumber;
 import domain.dto.WinningAnalyzeDto;
-import domain.strategy.AutoStrategy;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
 
 	public void run() {
-		Tickets tickets = generateTickets(InputView.getPayment());
-
-		// TODO: 수동 로또 구매 갯수 매개인자로
-		OutputView.printTickets(tickets.getTickets(), 3);
+		Tickets tickets = generateTickets();
 
 		WinningNumber winningNumber =
 			new WinningNumber(InputView.getWinningNumber(), InputView.getBonusBall());
 
-		OutputView.printStatistics(generateStatistics(tickets, winningNumber));
+		generateStatistics(tickets, winningNumber);
 	}
 
-	private Tickets generateTickets(int money) {
-		// 수동으로 구매할 로또 수 입력 받고 돈이랑 같이 기계에 넣는다.
-		//
-		Tickets tickets = TicketMachine.generateTickets(money, new AutoStrategy());
+	private Tickets generateTickets() {
+		final int money = InputView.getPayment();
+		final List<List<Integer>> manualTickets =
+			InputView.getManualLottoTickets(InputView.getManualLottoNumber());
+
+		Tickets tickets = TicketMachine.generateTickets(money, manualTickets);
+		OutputView.printTickets(tickets.getTickets(), manualTickets.size());
 
 		return tickets;
 	}
 
-	private WinningAnalyzeDto generateStatistics(Tickets tickets, WinningNumber winningNumber) {
+	private void generateStatistics(final Tickets tickets, final WinningNumber winningNumber) {
 		WinningAnalyze winningAnalyze = new WinningAnalyze(tickets, winningNumber);
-
-		return winningAnalyze.analyze();
+		OutputView.printStatistics(winningAnalyze.analyze());
 	}
 }
