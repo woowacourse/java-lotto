@@ -12,7 +12,7 @@ public class ValidatorTest {
     public void validateNegativePriceTest() {
         int price = -4000;
         assertThatThrownBy(() -> {
-            Validator.validateNegativePrice(price);
+            Validator.validateNegativeInteger(price);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -20,25 +20,26 @@ public class ValidatorTest {
     public void validatePositivePriceTest() {
         int price = 4000;
         assertDoesNotThrow(() -> {
-            Validator.validateNegativePrice(price);
+            Validator.validateNegativeInteger(price);
         });
     }
 
     @Test
-    public void validateWrongLengthWinningNumberInputTest() {
+    public void validateWrongLengthLottoNumberInputTest() {
         String[] winningNumbers = new String[]{"1", "2", "3", "4", "5"};
         assertThatThrownBy(() -> {
-            Validator.validateWinningNumberInput(winningNumbers);
+            Validator.validateLottoNumbers(winningNumbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void validateCorrectWinningNumberInputTest() {
+    public void validateCorrectLottoNumberInputTest() {
         String[] winningNumbers = new String[]{"1", "2", "3", "4", "5", "6"};
         assertDoesNotThrow(() -> {
-            Validator.validateWinningNumberInput(winningNumbers);
+            Validator.validateLottoNumbers(winningNumbers);
         });
     }
+
 
     @Test
     public void validateIntegerTest() {

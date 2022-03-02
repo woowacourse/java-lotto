@@ -11,17 +11,11 @@ public class Lotto {
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
 
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateDuplicatedNumber(lottoNumbers);
-        this.lottoNumbers.addAll(lottoNumbers);
-    }
-
-    private void validateDuplicatedNumber(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != Set.copyOf(lottoNumbers).size()) {
-            throw new IllegalArgumentException();
-        }
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     @Override
@@ -40,5 +34,11 @@ public class Lotto {
 
     public boolean checkBonus(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
+    }
+
+    private void validateDuplicatedNumber(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != Set.copyOf(lottoNumbers).size()) {
+            throw new IllegalArgumentException();
+        }
     }
 }

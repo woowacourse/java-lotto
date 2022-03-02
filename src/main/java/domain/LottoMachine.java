@@ -4,25 +4,23 @@ import util.LottoNumberGenerator;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class LottoMachine {
 
-    private static final int LOTTO_PRICE = 1000;
-    private static final int SECOND_DECIMAL_DIGIT = 100;
-
-    private final int money;
+    private final Money money;
     private final LottoResult lottoResult;
     private final LottoTicket lottoTicket;
 
-    public LottoMachine(int money, LottoNumberGenerator numberGenerator) {
-        this.money = money;
+    public LottoMachine(int money, List<List<LottoNumber>> passiveLottoNumbers, LottoNumberGenerator numberGenerator) {
+        this.money = new Money(money, passiveLottoNumbers.size());
         this.lottoResult = new LottoResult();
-        this.lottoTicket = new LottoTicket(money / LOTTO_PRICE, numberGenerator);
+        this.lottoTicket = new LottoTicket(this.money.getPurchasableLottoCount(), passiveLottoNumbers, numberGenerator);
     }
 
     public double calculateProfit() {
         DecimalFormat decimalFormat = decimalFormatSetting();
-        double profitRate = lottoResult.sumTotalPrice() / (double) money;
+        double profitRate = money.calculateProfitRate(lottoResult.sumTotalPrice());
         return Double.parseDouble(decimalFormat.format(profitRate));
     }
 

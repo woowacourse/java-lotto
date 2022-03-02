@@ -1,17 +1,33 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import util.LottoNumberGenerator;
 
-public class LottoTicket {
-    private final List<Lotto> lottos = new ArrayList<>();
+import java.util.ArrayList;
+import java.util.List;
 
-    public LottoTicket(int lottoCount, LottoNumberGenerator generatorPolicy) {
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(generatorPolicy.generate()));
-        }
+public class LottoTicket {
+
+    private final List<Lotto> lottos;
+    private int autoLottoCount;
+    LottoFactory autoLottoFactory;
+    LottoFactory passiveLottoFactory;
+
+    public LottoTicket(int autoLottoCount, List<List<LottoNumber>> passiveLottos, LottoNumberGenerator generatorPolicy) {
+        this.autoLottoCount = autoLottoCount;
+        this.autoLottoFactory = new AutoLottoFactory(generatorPolicy, autoLottoCount);
+        this.passiveLottoFactory = new PassiveLottoFactory(passiveLottos);
+        this.lottos = generateLotto();
+    }
+
+    private List<Lotto> generateLotto() {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(passiveLottoFactory.create());
+        lottos.addAll(autoLottoFactory.create());
+        return lottos;
+    }
+
+    public int getAutoLottoCount() {
+        return this.autoLottoCount;
     }
 
     public List<Lotto> getLottos() {

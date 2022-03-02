@@ -9,13 +9,13 @@ public class LottoNumber {
     private static final int LOTTO_NUMBER_MINIMUM = 1;
     private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
 
+    private int number;
+
     static {
         for (int lottoNumber = LOTTO_NUMBER_MINIMUM; lottoNumber <= LOTTO_NUMBER_MAXIMUM; lottoNumber++) {
             lottoNumberCache.put(lottoNumber, new LottoNumber(lottoNumber));
         }
     }
-
-    private int number;
 
     private LottoNumber(int number) {
         this.number = number;
@@ -26,8 +26,9 @@ public class LottoNumber {
         return lottoNumberCache.get(number);
     }
 
-    public int getNumber() {
-        return number;
+    @Override
+    public String toString() {
+        return Integer.toString(number);
     }
 
     private static void validateNumberRange(Integer lottoNumber) {

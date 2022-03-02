@@ -1,12 +1,10 @@
 package controller;
 
-import domain.LottoMachine;
-import domain.LottoNumber;
-import domain.LottoResult;
-import domain.WinningLotto;
+import domain.*;
 import util.ShuffleNumberGenerator;
 import view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -23,9 +21,20 @@ public class LottoController {
         announceResult(lottoMachine, winningLotto);
     }
 
+    private List<List<LottoNumber>> getPassiveLottoNumbers() {
+        List<List<LottoNumber>> passiveLottos = new ArrayList<>();
+        int passiveLottoCount = inputController.getPassiveLottoCount();
+        OutputView.printPassiveLottoInputGuide();
+        for (int i = 0; i < passiveLottoCount; i++) {
+            passiveLottos.add(inputController.getPassiveLottoNumbers());
+        }
+        return passiveLottos;
+    }
+
     private LottoMachine createLottoMachine() {
         int money = inputController.getMoney();
-        LottoMachine lottoMachine = new LottoMachine(money, new ShuffleNumberGenerator());
+        List<List<LottoNumber>> passiveLottos = getPassiveLottoNumbers();
+        LottoMachine lottoMachine = new LottoMachine(money, passiveLottos, new ShuffleNumberGenerator());
         OutputView.printPurchasedLotto(lottoMachine.getLottoTicket());
         return lottoMachine;
     }
