@@ -18,4 +18,8 @@ public enum MoneyUnit {
         return money / DIVIDING_UNIT.unit;
     }
 
+    public int getUnit() {
+        return this.unit;
+    }
+
 }

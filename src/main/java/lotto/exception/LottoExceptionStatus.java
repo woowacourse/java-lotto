@@ -1,12 +1,13 @@
 package lotto.exception;
 
 import lotto.utils.BallNumberRange;
+import lotto.utils.MoneyUnit;
 
 public enum LottoExceptionStatus {
 
     MONEY_MUST_BE_NUMERIC("구입 금액은 숫자여야 합니다."),
     MONEY_MUST_BE_POSITIVE("구입 금액은 양수여야 합니다."),
-    MONEY_MUST_BE_DIVISIBLE("구입 금액은 1000원으로 나누어 떨어져야 합니다."),
+    MONEY_MUST_BE_DIVISIBLE(String.format("구입 금액은 %d원으로 나누어 떨어져야 합니다.", MoneyUnit.DIVIDING_UNIT.getUnit())),
 
     TICKET_COUNT_MUST_BE_NUMERIC("로또 개수는 숫자여야 합니다."),
 
