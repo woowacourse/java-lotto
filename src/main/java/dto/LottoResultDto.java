@@ -1,7 +1,6 @@
 package dto;
 
 import domain.Rank;
-import java.util.Collections;
 import java.util.LongSummaryStatistics;
 import java.util.Map;
 
@@ -10,7 +9,7 @@ public class LottoResultDto {
     private final double rateOfReturn;
 
     private LottoResultDto(Map<Rank, LongSummaryStatistics> winningCountByRank, double rateOfReturn) {
-        this.winningCountByRank = Collections.unmodifiableMap(winningCountByRank);
+        this.winningCountByRank = Map.copyOf(winningCountByRank);
         this.rateOfReturn = rateOfReturn;
     }
 
