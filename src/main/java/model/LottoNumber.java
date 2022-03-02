@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import util.NumberFormatStringParser;
 
 public class LottoNumber {
+    private static final int INDEX_OFFSET = 1;
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static final List<LottoNumber> LOTTO_NUMBERS;
@@ -29,7 +30,7 @@ public class LottoNumber {
         if (isInvalidRange(number)) {
             throw new InvalidRangeLottoNumberException();
         }
-        return LOTTO_NUMBERS.get(number - 1);
+        return LOTTO_NUMBERS.get(number - INDEX_OFFSET);
     }
 
     private static boolean isInvalidRange(int number) {
