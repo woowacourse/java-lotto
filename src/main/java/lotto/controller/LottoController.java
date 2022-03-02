@@ -88,11 +88,7 @@ public class LottoController {
     }
 
     public Result calculateResult(LottoWinningNumbers lottoWinningNumbers, Lottos lottos) {
-        Result result = new Result();
-        for (Lotto lotto : lottos.getLottos()) {
-            result.calculateWinning(lottoWinningNumbers, lotto);
-        }
-        return result;
+        return new Result(lottoWinningNumbers, lottos);
     }
 
     public void printLottos(int manualLottosAmount, Lottos lottos) {

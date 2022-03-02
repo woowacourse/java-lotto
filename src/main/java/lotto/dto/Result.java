@@ -3,24 +3,29 @@ package lotto.dto;
 import java.util.EnumMap;
 import lotto.domain.Lotto;
 import lotto.domain.LottoWinningNumbers;
+import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 public class Result {
 
-    private EnumMap<Rank, Integer> result;
+    private final EnumMap<Rank, Integer> result;
 
-    public Result() {
-        result = initResult();
+    public Result(LottoWinningNumbers lottoWinningNumbers, Lottos lottos) {
+        this.result = calculateMatchRanks(lottoWinningNumbers, lottos);
     }
 
-    public void calculateWinning(final LottoWinningNumbers winningLotto, final Lotto lotto) {
-        int matchCount = winningLotto.matchCount(lotto);
-        boolean hasBonusNumber = lotto.contains(winningLotto.getBonusNumber());
-        Rank rank = Rank.matchRank(matchCount, hasBonusNumber);
-        result.put(rank, result.get(rank) + 1);
+    private EnumMap<Rank, Integer> calculateMatchRanks(final LottoWinningNumbers winningLotto, final Lottos lottos) {
+        EnumMap<Rank, Integer> result = initResult();
+        for (Lotto lotto : lottos.getLottos()) {
+            int matchCount = winningLotto.matchCount(lotto);
+            boolean hasBonusNumber = lotto.contains(winningLotto.getBonusNumber());
+            Rank rank = Rank.matchRank(matchCount, hasBonusNumber);
+            result.put(rank, result.get(rank) + 1);
+        }
+        return new EnumMap<>(result);
     }
 
-    public EnumMap<Rank, Integer> initResult() {
+    private EnumMap<Rank, Integer> initResult() {
         EnumMap<Rank, Integer> ranks = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             ranks.put(rank, 0);
