@@ -38,7 +38,7 @@ public class OutputView {
 		System.out.println("---------");
 
 		printResult(result.getResults());
-		printProfitRatio(result.getProfitRate());
+		printProfitRate(result.getProfitRate());
 	}
 
 	private static void printResult(Map<ResultStatics, Integer> result) {
@@ -58,8 +58,9 @@ public class OutputView {
 		System.out.println(result.getNumberMatches() + "개 일치" + bonusDisplay + "(" + result.getPrice() + "원) - " + count + "개");
 	}
 
-	private static void printProfitRatio(float ratio) {
-		System.out.println("총 수익률은 " + ratio + "입니다.");
+	private static void printProfitRate(float profitRate) {
+		String profitRateString = String.format("%.2f", profitRate);
+		System.out.println(("총 수익률은 " + profitRateString + "입니다."));
 	}
 
 }
