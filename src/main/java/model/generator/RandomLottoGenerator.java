@@ -13,15 +13,17 @@ import model.Lotto;
 import model.LottoNumber;
 
 public class RandomLottoGenerator implements LottoGenerator {
+    public static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN_LOTTO_NUMBER = 1;
     private final List<Integer> numberPool;
 
-    public RandomLottoGenerator(int start, int end) {
-        numberPool = createNumberPool(start, end);
+    public RandomLottoGenerator() {
+        numberPool = createNumberPool();
     }
 
-    private List<Integer> createNumberPool(int start, int end) {
+    private List<Integer> createNumberPool() {
         return IntStream
-                .rangeClosed(start, end)
+                .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .boxed()
                 .collect(toList());
     }

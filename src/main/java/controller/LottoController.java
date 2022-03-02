@@ -20,7 +20,7 @@ public class LottoController {
 
     public void run() {
         Money inputMoney = InputView.getUntilValid(this::getMoneyFromUser);
-        LottoMachine lottoMachine = new LottoMachine(new RandomLottoGenerator(1, 45));
+        LottoMachine lottoMachine = new LottoMachine(new RandomLottoGenerator());
         List<Lotto> issuedLottos = lottoMachine.issueLotto(inputMoney);
         printIssuedLottoNumbers(getNumbersOf(issuedLottos));
 

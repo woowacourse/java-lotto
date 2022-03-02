@@ -34,8 +34,7 @@ public class Lotto {
     }
 
     public boolean contains(LottoNumber number) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.equals(number));
+        return lottoNumbers.contains(number);
     }
 
     public int getMatchedNumberCountWith(Lotto otherLotto) {
