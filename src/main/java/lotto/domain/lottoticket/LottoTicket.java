@@ -39,14 +39,14 @@ public final class LottoTicket {
     }
 
     private void validateDuplicateCount(String[] parsedLottoNumbers) {
-        int distinctCount = calDistinctCount(parsedLottoNumbers);
+        int distinctCount = calculateDistinctCount(parsedLottoNumbers);
 
         if (parsedLottoNumbers.length != distinctCount) {
             throw new IllegalArgumentException(DUPLICATE_ERROR);
         }
     }
 
-    private int calDistinctCount(String[] parsedLottoNumbers) {
+    private int calculateDistinctCount(String[] parsedLottoNumbers) {
         return (int) Arrays.stream(parsedLottoNumbers).distinct().count();
     }
 
