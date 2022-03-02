@@ -4,7 +4,7 @@ import utils.ExceptionMessage;
 
 public class Money {
 
-    private static final int MINIMUM_PURCHASE_AMOUNT = 1000;
+    static final int MINIMUM_PURCHASE_AMOUNT = 1000;
 
 <<<<<<< HEAD
 <<<<<<< HEAD

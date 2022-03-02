@@ -20,8 +20,11 @@ public class Player {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     private static final int MINIMUM_PURCHASE_AMOUNT = 1000;
 
+=======
+>>>>>>> f3df2f7 (refactor : 상수 접근지정자 변경)
     private final Money money;
     private final List<Lotto> lottos;
 <<<<<<< HEAD
@@ -84,6 +87,7 @@ public class Player {
     public double calculateIncomeRate(double totalIncome) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         return totalIncome / (lottos.size() * MINIMUM_PURCHASE_AMOUNT);
     }
 
@@ -94,6 +98,9 @@ public class Player {
 =======
         return totalIncome / (lottos.size() * MINIMUM_PURCHASE_AMOUNT);
 >>>>>>> 440c90c (refactor : Player 로또 구매 역할 분리)
+=======
+        return totalIncome / (lottos.size() * Money.MINIMUM_PURCHASE_AMOUNT);
+>>>>>>> f3df2f7 (refactor : 상수 접근지정자 변경)
     }
 
     public List<Lotto> getLottos() {
