@@ -3,6 +3,7 @@ package lotto.model.prize;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 import lotto.model.AutoLotto;
 import lotto.model.number.BonusBall;
@@ -26,7 +27,15 @@ public class PrizeTest {
 	@DisplayName("3개가 일치하면 5등을 반환한다")
 	@Test
 	void match_3_fifth() {
-		AutoLotto autoLotto = new AutoLotto(Arrays.asList(1, 2, 3, 7, 8, 9));
+		List<LottoBall> lottoBalls = Arrays.asList(
+				LottoBall.from("1"),
+				LottoBall.from("2"),
+				LottoBall.from("3"),
+				LottoBall.from("7"),
+				LottoBall.from("8"),
+				LottoBall.from("9")
+		);
+		AutoLotto autoLotto = new AutoLotto(lottoBalls);
 
 		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
 
@@ -36,7 +45,15 @@ public class PrizeTest {
 	@DisplayName("4개가 일치하면 4등을 반환한다")
 	@Test
 	void match_4_fourth() {
-		AutoLotto autoLotto = new AutoLotto(Arrays.asList(1, 2, 3, 4, 8, 9));
+		List<LottoBall> lottoBalls = Arrays.asList(
+				LottoBall.from("1"),
+				LottoBall.from("2"),
+				LottoBall.from("3"),
+				LottoBall.from("4"),
+				LottoBall.from("8"),
+				LottoBall.from("9")
+		);
+		AutoLotto autoLotto = new AutoLotto(lottoBalls);
 
 		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
 
@@ -46,7 +63,15 @@ public class PrizeTest {
 	@DisplayName("5개가 일치하면 3등을 반환한다")
 	@Test
 	void match_5_third() {
-		AutoLotto autoLotto = new AutoLotto(Arrays.asList(1, 2, 3, 4, 5, 9));
+		List<LottoBall> lottoBalls = Arrays.asList(
+				LottoBall.from("1"),
+				LottoBall.from("2"),
+				LottoBall.from("3"),
+				LottoBall.from("4"),
+				LottoBall.from("5"),
+				LottoBall.from("9")
+		);
+		AutoLotto autoLotto = new AutoLotto(lottoBalls);
 
 		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
 
@@ -56,7 +81,15 @@ public class PrizeTest {
 	@DisplayName("6개가 일치하면 1등을 반환한다")
 	@Test
 	void match_6_first() {
-		AutoLotto autoLotto = new AutoLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+		List<LottoBall> lottoBalls = Arrays.asList(
+				LottoBall.from("1"),
+				LottoBall.from("2"),
+				LottoBall.from("3"),
+				LottoBall.from("4"),
+				LottoBall.from("5"),
+				LottoBall.from("6")
+		);
+		AutoLotto autoLotto = new AutoLotto(lottoBalls);
 
 		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
 
@@ -66,7 +99,15 @@ public class PrizeTest {
 	@DisplayName("5개가 일치하고 보너스가 일치하면 2등을 반환한다")
 	@Test
 	void match_5_bonus_second() {
-		AutoLotto autoLotto = new AutoLotto(Arrays.asList(1, 2, 3, 4, 5, 10));
+		List<LottoBall> lottoBalls = Arrays.asList(
+				LottoBall.from("1"),
+				LottoBall.from("2"),
+				LottoBall.from("3"),
+				LottoBall.from("4"),
+				LottoBall.from("5"),
+				LottoBall.from("10")
+		);
+		AutoLotto autoLotto = new AutoLotto(lottoBalls);
 
 		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
 

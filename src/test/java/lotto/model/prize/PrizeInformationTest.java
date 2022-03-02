@@ -29,7 +29,15 @@ public class PrizeInformationTest {
 	@DisplayName("5등이 3장 당첨됐을때 당첨금은 15000원이다")
 	@Test
 	void pickAmount_5th_3() {
-		AutoLotto autoLotto = new AutoLotto(Arrays.asList(1, 2, 3, 7, 8, 9));
+		List<LottoBall> lottoBalls = Arrays.asList(
+				LottoBall.from("1"),
+				LottoBall.from("2"),
+				LottoBall.from("3"),
+				LottoBall.from("7"),
+				LottoBall.from("8"),
+				LottoBall.from("9")
+		);
+		AutoLotto autoLotto = new AutoLotto(lottoBalls);
 		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
@@ -44,7 +52,15 @@ public class PrizeInformationTest {
 	@DisplayName("5등이 2장 당첨됐을때 당첨금은 10000원이다")
 	@Test
 	void pickAmount_5th_2() {
-		AutoLotto autoLotto = new AutoLotto(Arrays.asList(1, 2, 3, 7, 8, 9));
+		List<LottoBall> lottoBalls = Arrays.asList(
+				LottoBall.from("1"),
+				LottoBall.from("2"),
+				LottoBall.from("3"),
+				LottoBall.from("7"),
+				LottoBall.from("8"),
+				LottoBall.from("9")
+		);
+		AutoLotto autoLotto = new AutoLotto(lottoBalls);
 		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 2; i++) {
@@ -59,7 +75,15 @@ public class PrizeInformationTest {
 	@DisplayName("4등이 3장 당첨됐을때 당첨금은 150000원이다")
 	@Test
 	void pickAmount_4th_3() {
-		AutoLotto autoLotto = new AutoLotto(Arrays.asList(1, 2, 3, 4, 7, 8));
+		List<LottoBall> lottoBalls = Arrays.asList(
+				LottoBall.from("1"),
+				LottoBall.from("2"),
+				LottoBall.from("3"),
+				LottoBall.from("4"),
+				LottoBall.from("7"),
+				LottoBall.from("8")
+		);
+		AutoLotto autoLotto = new AutoLotto(lottoBalls);
 		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {

@@ -43,7 +43,7 @@ public class WinningBallsTest {
 	public void match_true() {
 		WinningBalls winningBalls = WinningBalls.from(new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6")));
 
-		assertThat(winningBalls.match(1)).isTrue();
+		assertThat(winningBalls.match(LottoBall.from("1"))).isTrue();
 	}
 
 	@DisplayName("당첨된 번호에 포함된 숫자가 아닐 때 false를 반환한다")
@@ -51,6 +51,6 @@ public class WinningBallsTest {
 	public void match_false() {
 		WinningBalls winningBalls = WinningBalls.from(new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6")));
 
-		assertThat(winningBalls.match(7)).isFalse();
+		assertThat(winningBalls.match(LottoBall.from("7"))).isFalse();
 	}
 }

@@ -12,14 +12,14 @@ public class BonusBall {
 	}
 
 	public static BonusBall from(LottoBall lottoBall, WinningBalls winningBalls) {
-		if (winningBalls.match(lottoBall.getNumber())) {
+		if (winningBalls.match(lottoBall)) {
 			throw new IllegalArgumentException(ERROR_DUPLICATE);
 		}
 		return new BonusBall(lottoBall);
 	}
 
 	public boolean match(AutoLotto autoLotto) {
-		return autoLotto.contains(this.lottoBall.getNumber());
+		return autoLotto.contains(this.lottoBall);
 	}
 
 }

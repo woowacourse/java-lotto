@@ -45,7 +45,7 @@ public class WinningBalls {
 				.count();
 	}
 
-	public boolean match(int number) {
-		return winningBalls.stream().anyMatch(winningBall -> winningBall.match(number));
+	public boolean match(LottoBall lottoBall) {
+		return winningBalls.stream().anyMatch(winningBall -> winningBall.match(lottoBall.getNumber()));
 	}
 }
