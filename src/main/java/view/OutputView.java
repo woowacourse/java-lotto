@@ -20,8 +20,9 @@ public class OutputView {
         System.out.println(ERROR_PREFIX + message);
     }
 
-    public static void printLottoTickets(int manualCount, int autoCount, List<LottoTicket> lottoTickets) {
-        System.out.println(MANUAL_MESSAGE+ manualCount+ AUTO_MESSAGE + autoCount + BUY_MESSAGE);
+    public static void printLottoTickets(int manualCount, int autoCount,
+        List<LottoTicket> lottoTickets) {
+        System.out.printf(BUY_MESSAGE, manualCount, autoCount);
         for (LottoTicket lottoTicket : lottoTickets) {
             printLottoTicket(lottoTicket);
         }
