@@ -11,8 +11,8 @@ public class LottoGame {
     private final Lottos lottos;
     private final LottoMoney lottoMoney;
 
-    public LottoGame(LottoMoney lottoMoney, LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoMoney = lottoMoney;
+    public LottoGame(int lottoMoney, LottoNumberGenerator lottoNumberGenerator) {
+        this.lottoMoney = new LottoMoney(lottoMoney);
         this.lottos = buyLottos(lottoNumberGenerator);
     }
 

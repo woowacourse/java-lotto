@@ -1,21 +1,19 @@
 package lotto.controller;
 
+import static lotto.view.InputView.*;
+import static lotto.view.ResultView.*;
+
 import lotto.model.LottoGame;
-import lotto.model.LottoMoney;
 import lotto.model.LottoResult;
-import lotto.model.Lottos;
 import lotto.model.ShuffleGenerator;
-import lotto.view.InputView;
-import lotto.view.ResultView;
 
 public class LottoController {
     public void runGame() {
-        LottoMoney lottoMoney = new LottoMoney(InputView.insertMoney());
-        LottoGame lottoGame = new LottoGame(lottoMoney, new ShuffleGenerator());
-        ResultView.printGeneratedLottos(lottoGame.getLottos());
+        LottoGame lottoGame = new LottoGame(insertMoney(), new ShuffleGenerator());
+        printGeneratedLottos(lottoGame.getLottos());
 
-        LottoResult lottoResult = lottoGame.generateLottoResult(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
-        ResultView.printResultStatistics(lottoResult);
-        ResultView.printYield(lottoGame.calculateYield(lottoResult));
+        LottoResult lottoResult = lottoGame.generateLottoResult(inputWinningNumbers(), inputBonusNumber());
+        printResultStatistics(lottoResult);
+        printYield(lottoGame.calculateYield(lottoResult));
     }
 }

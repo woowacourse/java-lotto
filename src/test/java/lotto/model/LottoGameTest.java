@@ -14,8 +14,7 @@ class LottoGameTest {
     @Test
     @DisplayName("수익률 계산 확인")
     void calculateYieldTest() {
-        LottoMoney lottoMoney = new LottoMoney(1000);
-        LottoGame lottoGame = new LottoGame(lottoMoney, new TestNumberGenerator());
+        LottoGame lottoGame = new LottoGame(1000, new TestNumberGenerator());
         LottoResult lottoResult = lottoGame.generateLottoResult(Arrays.asList(1, 2, 3, 4, 5, 6),
             7);
         Yield yield = lottoGame.calculateYield(lottoResult);
@@ -26,7 +25,7 @@ class LottoGameTest {
     @Test
     @DisplayName("보너스 볼 번호와 지난주 당첨 번호가 중복된 번호인 경우 예외 처리")
     void validateDuplicateBonusBallNumberTest() {
-        LottoGame lottoGame = new LottoGame(new LottoMoney(1000), new TestNumberGenerator());
+        LottoGame lottoGame = new LottoGame(1000, new TestNumberGenerator());
         assertThatThrownBy(() ->
             lottoGame.generateLottoResult(Arrays.asList(1, 2, 3, 4, 5, 6), 6))
             .isInstanceOf(IllegalArgumentException.class)
