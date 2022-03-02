@@ -17,6 +17,7 @@ public class InputView {
     private static final String INPUT_MANUAL_COUNT_INSTRUCTION = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INPUT_MANUAL_LOTTO_INSTRUCTION = "수동으로 구매할 번호를 입력해 주세요.";
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static final int MANUAL_LOTTO_START_INDEX = 0;
 
     private static String getInput() {
         return SCANNER.nextLine();
@@ -33,7 +34,7 @@ public class InputView {
     public List<List<String>> getManualLotto(final int manualCount) {
         System.out.println();
         System.out.println(INPUT_MANUAL_LOTTO_INSTRUCTION);
-        return IntStream.range(0, manualCount)
+        return IntStream.range(MANUAL_LOTTO_START_INDEX, manualCount)
             .mapToObj(i -> getLotto())
             .collect(Collectors.toList());
     }
