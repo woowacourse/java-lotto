@@ -14,9 +14,13 @@ public class PurchaseAmount {
 	}
 
 	private void validateRange(final int number) {
-		if (number < AMOUNT_MIN_RANGE || number > AMOUNT_MAX_RANGE) {
+		if (isOutOfRange(number)) {
 			throw new IllegalArgumentException(LotteryMessage.PURCHASE_AMOUNT_RANGE_ERROR);
 		}
+	}
+
+	private boolean isOutOfRange(final int number) {
+		return number < AMOUNT_MIN_RANGE || number > AMOUNT_MAX_RANGE;
 	}
 
 	public int getTheNumberOfPurchasedLotteries() {

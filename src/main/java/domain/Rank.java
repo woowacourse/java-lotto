@@ -36,10 +36,14 @@ public enum Rank {
 			.findFirst()
 			.orElse(Rank.NONE);
 
-		if (properRank.getCorrectedBalls() == SECOND_THIRD_CORRECTED_BALLS && !hasBonusBall) {
+		if (isThirdRank(properRank, hasBonusBall)) {
 			return Rank.THIRD;
 		}
 		return properRank;
+	}
+
+	private static boolean isThirdRank(final Rank rank, final boolean hasBonusBall) {
+		return rank.getCorrectedBalls() == SECOND_THIRD_CORRECTED_BALLS && !hasBonusBall;
 	}
 
 	public static List<Rank> getValuesExceptNoneRank() {

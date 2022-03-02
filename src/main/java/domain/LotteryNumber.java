@@ -16,9 +16,13 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
 	}
 
 	private void checkNumberRange(final int lotteryNumbers) {
-		if (NUMBER_MIN_RANGE > lotteryNumbers || lotteryNumbers > NUMBER_MAX_RANGE) {
+		if (isOutOfRange(lotteryNumbers)) {
 			throw new IllegalArgumentException(LotteryMessage.LOTTERY_RANGE_ERROR);
 		}
+	}
+
+	private boolean isOutOfRange(final int lotteryNumbers) {
+		return NUMBER_MIN_RANGE > lotteryNumbers || lotteryNumbers > NUMBER_MAX_RANGE;
 	}
 
 	public int getLotteryNumber() {
