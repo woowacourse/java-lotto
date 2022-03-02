@@ -10,8 +10,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos generateLottos(int count) {
-        List<Lotto> lottos = new ArrayList<>();
+    public static Lottos generateLottos(List<Lotto> manualList, int count) {
+        List<Lotto> lottos = new ArrayList<>(manualList);
         for (int i = 0; i < count; i++) {
             lottos.add(Lotto.generateNumber());
         }

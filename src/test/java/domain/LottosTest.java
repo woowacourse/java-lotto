@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ public class LottosTest {
     @DisplayName("구입 금액에 따른 개수만큼 로또 생성")
     public void generateLottosTest() {
         int count = 14;
-        Lottos lottos = Lottos.generateLottos(count);
+        Lottos lottos = Lottos.generateLottos(new ArrayList<>(), count);
 
         assertEquals(lottos.size(), 14);
     }
@@ -25,7 +26,7 @@ public class LottosTest {
             List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
         LottoNumber bonusBall = LottoNumber.valueOf(7);
-        Lottos lottos = Lottos.generateLottos(count);
+        Lottos lottos = Lottos.generateLottos(new ArrayList<>(), count);
         Statistic statistic = lottos.getWinningStatistics(winningNumber, bonusBall);
 
         int sumOfValues = statistic.getStatistics().values().stream()
