@@ -8,7 +8,6 @@ public class LottoGameController {
 
     public void run() {
         Lottos purchasedLotto = purchaseLotto();
-        OutputView.printPurchasedLotto(purchasedLotto.getLottos());
 
         final WinningNumbers winningNumber = InputView.commonInputProcess(
                 () -> new WinningNumbers(InputView.inputWinningLottoNumbers(), InputView.inputBonus()));
@@ -26,6 +25,7 @@ public class LottoGameController {
         final Lottos purchasedLotto = InputView.commonInputProcess(
                 () -> store.purchaseManualLottos(money, numOfManualLotto, InputView.inputManualLottoNumbers(numOfManualLotto)));
         store.purchaseAutomaticLottos(purchasedLotto, money);
+        OutputView.printPurchasedLotto(purchasedLotto.getLottos(), numOfManualLotto);
 
         return purchasedLotto;
     }
