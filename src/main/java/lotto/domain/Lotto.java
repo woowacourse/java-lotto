@@ -7,6 +7,8 @@ import lotto.validator.LottoValidator;
 
 public class Lotto {
 
+    public static final long LOTTO_PRICE = 1000;
+
     private static final String INPUT_NUMBERS_DELIMITER = ",";
 
     private final List<LottoNumber> lottoNumbers;
@@ -42,14 +44,14 @@ public class Lotto {
         return new Lotto(LottoNumber.getRandomLottoNumbers());
     }
 
-    public int getMatchCount(Lotto winningLotto) {
+    public int getMatchCount(Lotto lotto) {
         return (int) lottoNumbers.stream()
-                .filter(winningLotto::isContain)
+                .filter(lotto::isContain)
                 .count();
     }
 
-    public boolean isContain(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean isContain(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override

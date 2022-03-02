@@ -14,8 +14,7 @@ public class Controller {
     public void run() {
         User user = new User(inputMoney());
         buyLottosByManual(user, InputView.inputCountForBuy());
-        user.buyAllLottosByAuto();
-
+        buyAllLottosByAuto(user);
         OutputView.printLottos(user);
         WinningNumbers winningNumbers = inputWinningNumbers();
         printWinningStatistic(user, winningNumbers);
@@ -31,10 +30,14 @@ public class Controller {
     }
 
     private void buyLottosByManual(User user, int countForBuy) {
-        if (countForBuy != 0) {
+        if (countForBuy == 0) {
+            return;
+        }
+        try {
             InputView.printInputLottoNumbersMessage();
-            IntStream.range(0, countForBuy)
-                    .forEach(integer -> user.buyLottoByManual(inputLotto()));
+            IntStream.range(0, countForBuy).forEach(integer -> user.buyLottoByManual(inputLotto()));
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception);
         }
     }
 
@@ -44,6 +47,13 @@ public class Controller {
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
             return inputLotto();
+        }
+    }
+
+    private void buyAllLottosByAuto(User user) {
+        try {
+            user.buyAllLottosByAuto();
+        } catch (IllegalArgumentException exception) {
         }
     }
 

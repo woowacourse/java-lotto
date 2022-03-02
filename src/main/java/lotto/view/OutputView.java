@@ -14,6 +14,7 @@ public class OutputView {
     private static final String BONUS_NUMBER_MATCH_MESSAGE = ", 보너스 볼 일치";
     private static final String BONUS_NUMBER_MISMATCH_MESSAGE = " ";
     private static final String PROFIT_RATE_MASSAGE_FORMAT = "총 수익률은 %s입니다.\n";
+    private static final String ERROR_MESSAGE_PREFIX = "[ERROR]";
 
     public static void printLottos(User user) {
         printNewLine();
@@ -42,7 +43,7 @@ public class OutputView {
     }
 
     public static void printErrorMessage(Exception exception) {
-        System.out.println(exception.getMessage());
+        System.out.println(ERROR_MESSAGE_PREFIX + exception.getMessage());
     }
 
     public static void printNewLine() {

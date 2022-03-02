@@ -25,7 +25,7 @@ public class RankCount {
 
     public long getTotalPrize() {
         return Arrays.stream(Rank.values())
-                .mapToLong(rank -> rank.calculateTotalPrize(rankCount.getOrDefault(rank, 0)))
+                .mapToLong(rank -> rank.calculatePrize(rankCount.getOrDefault(rank, 0)))
                 .sum();
     }
 

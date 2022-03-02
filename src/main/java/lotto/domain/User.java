@@ -7,9 +7,7 @@ import java.util.stream.IntStream;
 
 public class User {
 
-    private static final long LOTTO_PRICE = 1000;
-
-    private Money money;
+    private final Money money;
     private final List<Lotto> lottos;
     private int countByManual;
     private int countByAuto;
@@ -22,18 +20,18 @@ public class User {
     }
 
     public void buyLottoByManual(Lotto lotto) {
+        money.spendMoney(Lotto.LOTTO_PRICE);
         lottos.add(lotto);
-        money.spendMoney(LOTTO_PRICE);
         countByManual++;
     }
 
     public void buyAllLottosByAuto() {
-        int totalLottoCount = money.calculateTotalLottoCount(LOTTO_PRICE);
-        IntStream.range(0, totalLottoCount)
+        int countCanBuy = money.calculateCountCanBuy();
+        money.spendMoney(countCanBuy * Lotto.LOTTO_PRICE);
+        IntStream.range(0, countCanBuy)
                 .mapToObj(i -> Lotto.generateLottoByAuto())
                 .forEach(lottos::add);
-        money.spendMoney(totalLottoCount * LOTTO_PRICE);
-        countByAuto += totalLottoCount;
+        countByAuto += countCanBuy;
     }
 
     public Money getMoney() {
