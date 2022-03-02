@@ -24,6 +24,7 @@ public class ResultView {
 		for (LottoDTO lotto : lottos) {
 			showLotto(lotto);
 		}
+
 		System.out.println();
 	}
 
@@ -32,11 +33,13 @@ public class ResultView {
 				.map(LottoBall::getNumber)
 				.map(String::valueOf)
 				.collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
+
 		System.out.printf(FORMAT_LOTTO, joinedNumbers);
 	}
 
 	public static void showPrizeInformation(List<PrizeInformationDTO> prizeInformations) {
 		System.out.println();
+
 		for (PrizeInformationDTO prizeInformation : prizeInformations) {
 			showOnePrizeInformation(getFormat(prizeInformation), prizeInformation);
 		}

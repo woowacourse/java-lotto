@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import lotto.model.Lotto;
 import lotto.model.Money;
 import lotto.model.number.BonusBall;
 import lotto.model.number.LottoBall;
 import lotto.model.number.WinningBalls;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 public class PrizeInformationsTest {
 	WinningBalls winningBalls;

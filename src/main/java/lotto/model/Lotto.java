@@ -40,7 +40,7 @@ public class Lotto {
 	public static List<LottoBall> generateManual(String[] input) {
 		validate(input);
 		List<LottoBall> lottoBalls = new ArrayList<>();
-		for (String string: input) {
+		for (String string : input) {
 			lottoBalls.add(LottoBall.from(string));
 		}
 		return lottoBalls;
@@ -67,7 +67,6 @@ public class Lotto {
 	public static int countTickets(Money money) {
 		return money.countAvailable(PRICE);
 	}
-
 
 	public int match(WinningBalls winningBalls) {
 		return (int)autoLotto.stream()
