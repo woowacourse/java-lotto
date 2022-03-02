@@ -12,7 +12,7 @@ public class Tickets {
 		this.tickets = tickets;
 	}
 
-	public List<Rank> getRanks(WinningNumber winningNumber) {
+	public List<Rank> getRanks(final WinningNumber winningNumber) {
 		return tickets.stream()
 			.map(ticket -> ticket.getRank(winningNumber))
 			.filter(Objects::nonNull)

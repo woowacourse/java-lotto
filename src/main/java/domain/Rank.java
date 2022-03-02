@@ -19,14 +19,14 @@ public enum Rank {
 		this.prize = prize;
 	}
 
-	public static Rank of(int matchCount, boolean bonusBallMatched) {
+	public static Rank of(final int matchCount, final boolean bonusBallMatched) {
 		return Arrays.stream(Rank.values())
 			.filter(rank -> rank.matches(matchCount, bonusBallMatched))
 			.findFirst()
 			.orElseGet(() -> null);
 	}
 
-	private boolean matches(int matchCount, boolean bonusBallMatched) {
+	private boolean matches(final int matchCount, final boolean bonusBallMatched) {
 		return (matchCount == this.matchCount) && (bonusBallMatched == this.bonusBallMatched);
 	}
 

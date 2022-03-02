@@ -21,12 +21,12 @@ public class WinningNumber {
 		this.bonusBall = new Ball(bonusBall);
 	}
 
-	private void validateWinningNumber(List<Integer> winningBalls, int bonusBall) {
+	private void validateWinningNumber(final List<Integer> winningBalls, final int bonusBall) {
 		Ticket.validateBalls(winningBalls);
 		validateDuplicate(winningBalls, bonusBall);
 	}
 
-	private void validateDuplicate(List<Integer> winningBalls, int bonusBall) {
+	private void validateDuplicate(final List<Integer> winningBalls, final int bonusBall) {
 		List<Integer> duplicateChecker = winningBalls.stream()
 			.distinct().collect(Collectors.toUnmodifiableList());
 

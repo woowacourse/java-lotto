@@ -15,7 +15,7 @@ public class Ball {
 		this.number = number;
 	}
 
-	private void validateNumberIsInRange(int number) {
+	private void validateNumberIsInRange(final int number) {
 		if (number < MIN_NUMBER || number > MAX_NUMBER) {
 			throw new IllegalArgumentException(RANGE_EXCEPTION);
 		}

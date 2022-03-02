@@ -35,14 +35,14 @@ public class WinningAnalyze {
 		return analyzeResult;
 	}
 
-	private double calculateProfitRate(Map<Rank, Integer> analyzeResult) {
+	private double calculateProfitRate(final Map<Rank, Integer> analyzeResult) {
 		int payment = tickets.size() * TicketCounter.TICKET_PRICE;
 		double profit = getProfit(analyzeResult);
 
 		return Math.floor((profit / payment) * 100) / 100.0;
 	}
 
-	private double getProfit(Map<Rank, Integer> analyzeResult) {
+	private double getProfit(final Map<Rank, Integer> analyzeResult) {
 		return analyzeResult.keySet()
 			.stream()
 			.mapToDouble(rank -> rank.getPrize() * analyzeResult.get(rank))

@@ -17,19 +17,19 @@ public class Ticket {
 		this.balls = makeNumbersToBalls(numbers);
 	}
 
-	public static void validateBalls(List<Integer> numbers) {
+	public static void validateBalls(final List<Integer> numbers) {
 		if (numbers.size() != SIZE) {
 			throw new IllegalArgumentException(SIZE_ERROR);
 		}
 	}
 
-	private List<Ball> makeNumbersToBalls(List<Integer> numbers) {
+	private List<Ball> makeNumbersToBalls(final List<Integer> numbers) {
 		return numbers.stream()
 			.map(Ball::new)
 			.collect(Collectors.toUnmodifiableList());
 	}
 
-	public Rank getRank(WinningNumber winningNumber) {
+	public Rank getRank(final WinningNumber winningNumber) {
 		int matchCount = countMatch(winningNumber.getWinningBalls());
 		boolean bonusBallMatched = false;
 
@@ -40,7 +40,7 @@ public class Ticket {
 		return Rank.of(matchCount, bonusBallMatched);
 	}
 
-	private int countMatch(List<Ball> balls) {
+	private int countMatch(final List<Ball> balls) {
 		return (int)balls.stream()
 			.filter(this.balls::contains)
 			.count();
