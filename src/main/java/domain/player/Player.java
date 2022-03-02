@@ -23,11 +23,22 @@ public class Player {
         return money.determineQuantity();
     }
 
-    public void purchaseLotto(LottoGenerator lottoGenerator, List<Integer> lottoNumbers) {
+    public void purchaseManualLotto(LottoGenerator lottoGenerator, List<List<Integer>> inputLottoNumbers) {
+        for(List<Integer> lottoNumbers : inputLottoNumbers){
+            purchase(lottoGenerator, lottoNumbers);
+            money.subAmount();
+        }
+    }
+
+    public void purchaseAutoLotto(LottoGenerator lottoGenerator, List<Integer> lottoNumbers) {
         int numberOfPurchases = getNumberOfPurchases();
         for (int i = 0; i < numberOfPurchases; i++) {
-            lottos.add(lottoGenerator.generateLotto(lottoNumbers));
+            purchase(lottoGenerator, lottoNumbers);
         }
+    }
+
+    private void purchase(LottoGenerator lottoGenerator, List<Integer> lottoNumbers) {
+        lottos.add(lottoGenerator.generateLotto(lottoNumbers));
     }
 
     public List<Result> judgeAll(WinningLotto winningLotto) {

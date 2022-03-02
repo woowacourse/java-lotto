@@ -6,7 +6,7 @@ public class Money {
 
     private static final int MINIMUM_PURCHASE_AMOUNT = 1000;
 
-    private final int amount;
+    private int amount;
 
     public Money(int amount) {
         validateAmount(amount);
@@ -25,5 +25,9 @@ public class Money {
 
     public int getAmount() {
         return amount;
+    }
+
+    public void subAmount() {
+        amount -= 1000;
     }
 }

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,14 +23,21 @@ class PlayerTest {
     private final Player player = new Player(money);
 
 
-    @BeforeEach
-    void setUp() {
-        player.purchaseLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
+    @Test
+    @DisplayName("수동으로 입력한 숫자대로 로또를 구매한 뒤, 잔액을 갱신한다.")
+    void purchaseManualLotto() {
+        player.purchaseManualLotto(new AutoLottoGenerator(), Arrays.asList(Arrays.asList(1,2,3,4,5,6),Arrays.asList(1,2,3,4,5,7)));
+        List<Lotto> actual = player.getLottos();
+        int expectedQuantity = 2;
+        int expectedAmount = 13000;
+        assertThat(actual.size()).isEqualTo(expectedQuantity);
+        assertThat(money.getAmount()).isEqualTo(expectedAmount);
     }
 
     @Test
     @DisplayName("로또를 최대한으로 구매한다.")
     void getNumberOfPurchases() {
+        player.purchaseAutoLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
         List<Lotto> actual = player.getLottos();
         int expected = 15;
         assertThat(actual.size()).isEqualTo(expected);
