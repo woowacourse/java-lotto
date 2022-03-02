@@ -15,24 +15,44 @@ public class LottoMoney {
     }
 
     public static LottoMoney createLottoMoney(int value) {
-        validateLottoMoneyRange(value);
+        validateLottoNumberRange(value);
         return new LottoMoney(value);
     }
 
     public static LottoMoney createMinimumLottoMoney() {
-        validateLottoMoneyRange(MINIMUM_LOTTO_MONEY);
+        validateLottoNumberRange(MINIMUM_LOTTO_MONEY);
         return new LottoMoney(MINIMUM_LOTTO_MONEY);
     }
 
-    private static void validateLottoMoneyRange(long value) {
-        if (value < MINIMUM_LOTTO_MONEY || value > MAXIMUM_LOTTO_MONEY) {
-            String exceptionMessage = MessageFormat.format("입력금액은 {0} 이상, {1} 이하 이어야 한다.", MINIMUM_LOTTO_MONEY, MAXIMUM_LOTTO_MONEY);
+    public static LottoMoney createLottoMoneyByCount(int count) {
+        validateCountPositive(count);
+        validateLottoOverRange(MINIMUM_LOTTO_MONEY * count);
+        return new LottoMoney(MINIMUM_LOTTO_MONEY * count);
+    }
+
+    private static void validateLottoNumberRange(long value) {
+        validateLottoOverRange(value);
+        validateLottoUnderRange(value);
+    }
+
+    private static void validateLottoUnderRange(long value) {
+        if (value < MINIMUM_LOTTO_MONEY) {
+            String exceptionMessage = MessageFormat.format("입력금액은 {0} 이상 이어야 한다.", MINIMUM_LOTTO_MONEY);
             throw new IllegalArgumentException(exceptionMessage);
         }
     }
 
-    public static LottoMoney createLottoMoneyByCount(int count) {
-        return new LottoMoney(MINIMUM_LOTTO_MONEY * count);
+    private static void validateLottoOverRange(long value) {
+        if (value > MAXIMUM_LOTTO_MONEY) {
+            String exceptionMessage = MessageFormat.format("입력금액은 {0} 이하 이어야 한다.", MAXIMUM_LOTTO_MONEY);
+            throw new IllegalArgumentException(exceptionMessage);
+        }
+    }
+
+    private static void validateCountPositive(int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("로또 구매 개수는 음수일 수 없다.");
+        }
     }
 
     public LottoMoney minus(LottoMoney money) {

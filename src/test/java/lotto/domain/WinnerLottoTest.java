@@ -85,4 +85,5 @@ public class WinnerLottoTest {
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
+
 }

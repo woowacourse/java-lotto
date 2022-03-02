@@ -10,13 +10,36 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoMoneyTest {
 
-    @ParameterizedTest
-    @ValueSource(ints = {999, 100_001})
-    @DisplayName("입력금액은 1,000원 미만이고 100,000을 초과하면 예외가 발생한다.")
-    void throwExceptionWhenUnderThousands(int moneyValue) {
+    @Test
+    @DisplayName("입력금액은 1,000원 미만이면 예외가 발생한다.")
+    void throwExceptionLottoNumberWhenUnderLimit() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoMoney.createLottoMoney(moneyValue))
-                .withMessage("입력금액은 1,000 이상, 100,000 이하 이어야 한다.");
+                .isThrownBy(() -> LottoMoney.createLottoMoney(999))
+                .withMessage("입력금액은 1,000 이상 이어야 한다.");
+    }
+
+    @Test
+    @DisplayName("입력금액은 100,000을 초과하면 예외가 발생한다.")
+    void throwExceptionLottoNumberWhenOverLimit() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoMoney.createLottoMoney(100_001))
+                .withMessage("입력금액은 100,000 이하 이어야 한다.");
+    }
+
+    @Test
+    @DisplayName("로또 개수가 음수일 경우 예외를 발생한다.")
+    void throwExceptionLottoNumberByCountWhenUnderLimit() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoMoney.createLottoMoneyByCount(-1))
+                .withMessage("로또 구매 개수는 음수일 수 없다.");
+    }
+
+    @Test
+    @DisplayName("로또 개수가 최대 로또 금액을 넘길 경우 예외를 발생한다.")
+    void throwExceptionLottoNumberByCountWhenOverLimit() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoMoney.createLottoMoneyByCount(101))
+                .withMessage("입력금액은 100,000 이하 이어야 한다.");
     }
 
     @Test
