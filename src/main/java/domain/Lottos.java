@@ -2,6 +2,7 @@ package domain;
 
 import static domain.Lotto.LOTTO_NUMBERS_SIZE;
 import static domain.LottoNumber.LOTTO_NUMBERS_LIST;
+import static util.LottoNumberUtils.getValidManuals;
 
 import dto.LottoCountsDto;
 import java.util.ArrayList;
@@ -20,10 +21,11 @@ public class Lottos {
         this.countsDto = countsDto;
     }
 
-    public static Lottos of(List<Lotto> manuals, LottoCountsDto lottoCountsDto) {
+    public static Lottos of(List<String> manuals, LottoCountsDto lottoCountsDto) {
+        List<Lotto> manualLottos = getValidManuals(manuals);
         int autosCount = lottoCountsDto.getAutos();
 
-        List<Lotto> lottos = Stream.concat(manuals.stream(), autosStream(autosCount))
+        List<Lotto> lottos = Stream.concat(manualLottos.stream(), autosStream(autosCount))
                 .collect(Collectors.toList());
 
         return new Lottos(lottos, lottoCountsDto);
