@@ -13,11 +13,13 @@ import lotto.dto.LottoTicketsDto;
 
 public class LottoController {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private Money money;
     private LottoTickets lottoTickets;
 
     public LottoTicketsDto buyLottoTickets(int inputMoney) {
-        money = new Money(inputMoney);
+        money = new Money(inputMoney, LOTTO_PRICE);
         return getAutoLottoTickets();
     }
 
@@ -29,7 +31,7 @@ public class LottoController {
     }
 
     private LottoTicketsDto getAutoLottoTickets() {
-        lottoTickets = new LottoTickets(new LottoNumberAutoGenerator(), money.getLottoCount());
+        lottoTickets = new LottoTickets(new LottoNumberAutoGenerator(), money.getMaximumPurchase(LOTTO_PRICE));
         return LottoTicketsDto.from(lottoTickets);
     }
 
