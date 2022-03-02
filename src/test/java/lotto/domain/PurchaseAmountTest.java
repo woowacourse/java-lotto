@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PurchaseAmountTest {
 
-    private static final int TICKET_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     @Test
     @DisplayName("구입 금액을 생성한다")
@@ -21,28 +21,20 @@ class PurchaseAmountTest {
     }
 
     @Test
-    @DisplayName("구입 금액은 1000원 단위로 생성된다")
-    void makePurchaseAmount1000() {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(14_500);
-
-        assertThat(purchaseAmount.getAmount()).isEqualTo(14_000);
-    }
-
-    @Test
-    @DisplayName("구입 금액이 1000원 미만일 경우 예외를 발생시킨다.")
+    @DisplayName("구입 금액이 1000원 단위가 아닐 경우 예외를 발생시킨다.")
     void throwExceptionWhenInputLessThan1000() {
         assertThatThrownBy(() -> new PurchaseAmount(500))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 구입금액은 " + TICKET_PRICE + "원 이상이어야 합니다");
+                .hasMessage("[ERROR] 구입금액은 " + LOTTO_PRICE + "원 단위여야 합니다");
     }
 
-    @Test
-    @DisplayName("구입 금액만큼 티켓 개수를 반환한다")
-    void calcTicketAmount() {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(14_500);
-
-        assertThat(purchaseAmount.calculateTheNumberOfTicket()).isEqualTo(14);
-    }
+//    @Test
+//    @DisplayName("구입 금액만큼 티켓 개수를 반환한다")
+//    void calcTicketAmount() {
+//        PurchaseAmount purchaseAmount = new PurchaseAmount(14_500);
+//
+//        assertThat(purchaseAmount.calculateTheNumberOfTicket()).isEqualTo(14);
+//    }
 
     @ParameterizedTest
     @CsvSource({"0, 14", "3, 11", "14, 0"})

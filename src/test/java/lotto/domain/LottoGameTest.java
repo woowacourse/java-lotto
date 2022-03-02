@@ -15,7 +15,7 @@ public class LottoGameTest {
     @ValueSource(ints = {0, 3, 10, 14})
     @DisplayName("수동 구매 개수를 생성한다.")
     void makeManualLottoCount(int count) {
-        LottoGame lottoGame = new LottoGame(new PurchaseAmount(14_000), count);
+        final LottoGame lottoGame = new LottoGame(new PurchaseAmount(14_000), count);
 
         assertThat(lottoGame.getManualLottoCount()).isEqualTo(count);
     }
@@ -30,59 +30,18 @@ public class LottoGameTest {
     }
 
     @Test
-    @DisplayName("수동으로 구매할 번호를 입력받아 생성한다.")
-    void makeManualLottos() {
-        LottoGame lottoGame = new LottoGame(new PurchaseAmount(14_000), 3);
-
-        List<List<Integer>> inputLottos = new ArrayList<>();
-        inputLottos.add(List.of(8, 21, 23, 41, 42, 43));
-        inputLottos.add(List.of(3, 5, 11, 16, 32, 38));
-        inputLottos.add(List.of(7, 11, 16, 35, 36, 44));
-
-        lottoGame.makeManualLottos(inputLottos);
-
-        assertThat(lottoGame.getLottos().size()).isEqualTo(3);
-    }
-
-    @Test
-    @DisplayName("수동으로 구매할 로또 개수가 입력 개수와 다르면 예외를 발생시킨다.")
-    void throwExceptionWhenManulLottoCountNotEqual() {
-        LottoGame lottoGame = new LottoGame(new PurchaseAmount(14_000), 3);
-
-        List<List<Integer>> inputLottos = new ArrayList<>();
-        inputLottos.add(List.of(8, 21, 23, 41, 42, 43));
-        inputLottos.add(List.of(3, 5, 11, 16, 32, 38));
-
-        assertThatThrownBy(() -> lottoGame.makeManualLottos(inputLottos))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("수동으로 구매할 로또 수와 같은 개수의 로또를 입력해주세요.");
-    }
-
-    @Test
-    @DisplayName("수동 로또 구매 후 남은 돈으로 살 수 있는 자동 로또를 생성한다.")
-    void makeAutoLottos() {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
-        LottoGame lottoGame = new LottoGame(purchaseAmount, 3);
-
-        lottoGame.makeAutoLottos();
-
-        assertThat(lottoGame.getLottos().size()).isEqualTo(11);
-    }
-
-    @Test
-    @DisplayName("수동 로또 구매 후 남은 돈으로 살 수 있는 자동 로또를 생성한다.")
+    @DisplayName("수동/자동 로또를 생성한다.")
     void makeManualAndAutoLottos() {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
-        LottoGame lottoGame = new LottoGame(purchaseAmount, 3);
+        final PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
+        final LottoGame lottoGame = new LottoGame(purchaseAmount, 3);
 
-        List<List<Integer>> inputLottos = new ArrayList<>();
+        final List<List<Integer>> inputLottos = new ArrayList<>();
         inputLottos.add(List.of(8, 21, 23, 41, 42, 43));
         inputLottos.add(List.of(3, 5, 11, 16, 32, 38));
         inputLottos.add(List.of(7, 11, 16, 35, 36, 44));
 
-        lottoGame.makeManualLottos(inputLottos);
-        lottoGame.makeAutoLottos();
+        final Lottos lottos = lottoGame.makeManualAndAutoLottos(inputLottos);
 
-        assertThat(lottoGame.getLottos().size()).isEqualTo(14);
+        assertThat(lottos.size()).isEqualTo(14);
     }
 }
