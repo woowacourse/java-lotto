@@ -33,7 +33,8 @@ public class LottoNumber {
         LottoNumber lottoNumber = CACHE.get(number);
 
         if (lottoNumber == null) {
-            lottoNumber = new LottoNumber(number);
+            CACHE.put(number, new LottoNumber(number));
+            lottoNumber = CACHE.get(number);
         }
         return lottoNumber;
     }
