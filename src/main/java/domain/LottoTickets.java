@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTickets {
-
 	private final List<LottoTicket> lottoTickets = new ArrayList<>();
 
 	public void purchase(LottoTicket lottoTicket) {

@@ -8,7 +8,6 @@ public class LottoNumbers {
 
 	private static final String NUMBER_OF_NUMBERS_IS_NOT_CORRECT = NUMBER_OF_NUMBERS + "개의 숫자만 허용됩니다.";
 	private static final String NUMBERS_MUST_NOT_DUPLICATED = "숫자들은 중복일 수 없습니다.";
-
 	private final Set<LottoNumber> numbers;
 
 	public LottoNumbers(List<Integer> input) {

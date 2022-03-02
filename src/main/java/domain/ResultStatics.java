@@ -5,7 +5,6 @@ import java.util.Arrays;
 import static constant.LottoConstant.NUMBER_FOR_WINNER;
 
 public enum ResultStatics {
-
 	NOTHING(0, 0, false),
 	FIFTH(3, 5000, false),
 	FOURTH(4, 50000, false),

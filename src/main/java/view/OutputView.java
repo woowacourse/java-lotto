@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
-
 	private static final String START_ERROR = "[ERROR] ";
 
 	private OutputView() {
