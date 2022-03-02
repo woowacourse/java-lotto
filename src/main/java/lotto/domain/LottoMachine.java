@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
 
-    public final static int LOTTO_PRICE = 1000;
+    public final static Money LOTTO_PRICE = new Money(1000);
 
     private static final int START_INCLUSIVE = 1;
     private static final int END_INCLUSIVE = 45;

@@ -14,7 +14,7 @@ public class MoneyTest {
         Money money = new Money(14000);
 
         // when
-        int count = money.getProductCount(1000);
+        int count = money.getProductCount(new Money(1000));
 
         // then
         assertThat(count).isEqualTo(14);
@@ -30,7 +30,7 @@ public class MoneyTest {
         Money money = new Money(price);
 
         // given & when & then
-        assertThatThrownBy(() -> money.calculateProduct(1000, 1))
+        assertThatThrownBy(() -> money.calculateProduct(new Money(1000), 1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("가격 부족으로 구매가 불가능 합니다.");
     }
@@ -42,7 +42,7 @@ public class MoneyTest {
         Money money = new Money(14500);
 
         // when
-        int count = money.getProductCount(1000);
+        int count = money.getProductCount(new Money(1000));
 
         // then
         assertThat(count).isEqualTo(14);
@@ -56,7 +56,7 @@ public class MoneyTest {
         Money targetMoney = new Money(2000);
 
         // when
-        Money calculateMoney = targetMoney.calculateProduct(1000, 1);
+        Money calculateMoney = targetMoney.calculateProduct(new Money(1000), 1);
 
         // then
         assertThat(money).isEqualTo(calculateMoney);

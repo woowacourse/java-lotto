@@ -8,18 +8,18 @@ public class Money {
 
     private final int amount;
 
-    public Money(int price) {
-        this.amount = price;
+    public Money(int amount) {
+        this.amount = amount;
     }
 
-    public Money calculateProduct(int price, int lottoCount) {
-        validateAmount(price * lottoCount);
-        return new Money(amount - (price * lottoCount));
+    public Money calculateProduct(Money money, int lottoCount) {
+        validateAmount(money.amount * lottoCount);
+        return new Money(amount - (money.amount * lottoCount));
     }
 
-    public int getProductCount(int price) {
-        validateAmount(price);
-        return amount / price;
+    public int getProductCount(Money money) {
+        validateAmount(money.amount);
+        return amount / money.amount;
     }
 
     private void validateAmount(int price) {
