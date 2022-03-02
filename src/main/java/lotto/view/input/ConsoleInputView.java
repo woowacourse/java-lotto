@@ -32,7 +32,7 @@ public class ConsoleInputView implements InputView {
     }
 
     @Override
-    public List<InputLottoDto> inputManualLottoNumbers(int manualPurchaseAmount) {
+    public List<InputLottoDto> inputManualLottoNumbers(final int manualPurchaseAmount) {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
         return IntStream.range(0, manualPurchaseAmount)
                 .mapToObj(index -> scanner.nextLine())

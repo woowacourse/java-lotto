@@ -21,7 +21,7 @@ public class LottoRandomGenerator implements LottoGenerator {
     }
 
     @Override
-    public List<Lotto> generateLottosExceptManualGenerated(int numberOfGenerating, List<Lotto> manualGenerated) {
+    public List<Lotto> generateLottosExceptManualGenerated(final int numberOfGenerating, final List<Lotto> manualGenerated) {
         final Set<Lotto> generatedNumbersGroup = new HashSet<>(manualGenerated);
         return generateLottos(generatedNumbersGroup, numberOfGenerating);
     }

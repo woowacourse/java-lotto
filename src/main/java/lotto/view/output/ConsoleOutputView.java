@@ -46,7 +46,7 @@ public class ConsoleOutputView implements OutputView {
                 winningResult.getMatchedCount(), winningResult.getWinningAmount(), winningResult.getWinningCount());
     }
 
-    private String findMessageFormatByBonus(LottoMatchKindDto winningResult) {
+    private String findMessageFormatByBonus(final LottoMatchKindDto winningResult) {
         if (winningResult.hasMatchedBonus()) {
             return WINNING_STATISTICS_MESSAGE_BONUS_FORMAT;
         }

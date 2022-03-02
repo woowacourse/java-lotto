@@ -9,7 +9,7 @@ public interface InputView {
 
     String inputManualPurchaseAmount();
 
-    List<InputLottoDto> inputManualLottoNumbers(int manualPurchaseAmount);
+    List<InputLottoDto> inputManualLottoNumbers(final int manualPurchaseAmount);
 
     List<String> inputLastWeekWinningNumbers();
 
