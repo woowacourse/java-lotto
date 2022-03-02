@@ -14,8 +14,8 @@ public class LottoService {
     private final LottoGenerator lottoGenerator;
     private final List<LottoNumbers> lottoNumbersGroup;
 
-    public LottoService(final LottoGenerator lottoGenerator) {
-        this.lottoGenerator = lottoGenerator;
+    public LottoService(final LottoGenerator lottoRandomGenerator) {
+        this.lottoGenerator = lottoRandomGenerator;
         lottoNumbersGroup = new ArrayList<>();
     }
 

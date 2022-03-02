@@ -20,10 +20,11 @@ public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
 
-    public LottoController(final LottoGenerator lottoGenerator, final InputView inputView, final OutputView outputView) {
+    public LottoController(
+            final LottoGenerator lottoRandomGenerator, final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        lottoService = new LottoService(lottoGenerator);
+        lottoService = new LottoService(lottoRandomGenerator);
     }
 
     public void run() {
