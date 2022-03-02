@@ -2,9 +2,11 @@ package controller;
 
 import domain.AnswerLotto;
 import domain.Lotto;
+import domain.AutoGenerator;
 import domain.LottoGenerator;
 import domain.LottoNumber;
 import domain.LottoTickets;
+import domain.ManualGenerator;
 import domain.StatisticCalculator;
 import java.util.List;
 import view.InputView;
@@ -32,12 +34,12 @@ public class LottoGameController {
 	}
 
 	private static LottoTickets generateLottoTickets(int money, int manualLottoSize) {
-		LottoTickets lottoTickets = new LottoTickets(money, manualLottoSize);
-		if (lottoTickets.getManualLottoSize() > 0) {
-			generateManualLottos(lottoTickets);
+		LottoTickets lottoTickets = new LottoTickets(money);
+		if (manualLottoSize > 0) {
+			generateManualLottos(lottoTickets, manualLottoSize);
 		}
 		generateAutoLottos(lottoTickets);
-		OutputView.printLottoTickets(lottoTickets);
+		OutputView.printLottoTickets(lottoTickets, manualLottoSize);
 		return lottoTickets;
 	}
 
@@ -46,7 +48,8 @@ public class LottoGameController {
 		List<Integer> lastWeekAnswerNumbers = InputView.inputMultipleNumber();
 		InputView.noticeBonusNumberInput();
 		LottoNumber bonusNumber = new LottoNumber(InputView.inputSingleNumber());
-		return new AnswerLotto(lastWeekAnswerNumbers, bonusNumber);
+		LottoGenerator manualGenerator = new ManualGenerator(lastWeekAnswerNumbers);
+		return new AnswerLotto(manualGenerator.generateLottoNumbers(), bonusNumber);
 	}
 
 
@@ -58,18 +61,19 @@ public class LottoGameController {
 		OutputView.printProfitRatio(statisticCalculator.calculateProfitRatio());
 	}
 
-	private static void generateManualLottos(LottoTickets lottoTickets) {
+	private static void generateManualLottos(LottoTickets lottoTickets, int manualLottoSize) {
 		InputView.noticeManualLottoNumbersInput();
-		for (int index = 0; index < lottoTickets.getManualLottoSize(); index++) {
+		for (int index = 0; index < manualLottoSize; index++) {
+			LottoGenerator manualGenerator = new ManualGenerator(InputView.inputMultipleNumber());
 			lottoTickets.add(
-				new Lotto(LottoGenerator.generateUserInputLottoNumbers(InputView.inputMultipleNumber())));
+				new Lotto(manualGenerator.generateLottoNumbers()));
 		}
 	}
 
 	private static void generateAutoLottos(LottoTickets lottoTickets) {
-		for (int index = 0; index < lottoTickets.getLottoTicketsCapacity() - lottoTickets.getManualLottoSize();
-			 index++) {
-			lottoTickets.add(new Lotto(LottoGenerator.generateRandomLottoNumbers()));
+		for (int index = 0; index < lottoTickets.calculateRemainLottoCount(); index++) {
+			LottoGenerator autoGenerator = new AutoGenerator();
+			lottoTickets.add(new Lotto(autoGenerator.generateLottoNumbers()));
 		}
 	}
 }
