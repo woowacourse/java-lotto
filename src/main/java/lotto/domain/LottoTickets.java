@@ -11,20 +11,19 @@ import lotto.domain.lottoticket.LottoTicket;
 final public class LottoTickets {
     private final List<LottoTicket> value;
 
-    private LottoTickets(int count) {
-        value = generateTickets(count);
+    private LottoTickets(List<LottoTicket> manualLottoTickets, int count) {
+        value = generateTickets(manualLottoTickets, count);
     }
 
-    private List<LottoTicket> generateTickets(int count) {
-        final List<LottoTicket> tickets = new ArrayList<>();
+    private List<LottoTicket> generateTickets(List<LottoTicket> manualLottoTickets, int count) {
         for (int i = 0; i < count; i++) {
-            tickets.add(LottoTicket.generateRandom());
+            manualLottoTickets.add(LottoTicket.generateRandom());
         }
-        return Collections.unmodifiableList(tickets);
+        return Collections.unmodifiableList(manualLottoTickets);
     }
 
-    public static LottoTickets generateRandomByCount(int count) {
-        return new LottoTickets(count);
+    public static LottoTickets generateRandomWithManualTickets(List<LottoTicket> manualLottoTickets, int count) {
+        return new LottoTickets(manualLottoTickets, count);
     }
 
     public WinningResult calculateWinningStatistic(WinningNumbers winningNumbers) {
