@@ -26,7 +26,7 @@ public class BonusBall {
 	}
 
 	public int getNumber() {
-		return number;
+		return Integer.valueOf(number);
 	}
 
 }

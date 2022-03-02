@@ -39,6 +39,6 @@ public class LottoCount {
 	}
 
 	public int getCount() {
-		return count;
+		return Integer.valueOf(count);
 	}
 }
