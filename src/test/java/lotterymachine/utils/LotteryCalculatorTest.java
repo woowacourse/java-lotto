@@ -28,6 +28,4 @@ public class LotteryCalculatorTest {
         double result = LotteryCalculator.calculateProfitRate(winningLotteryAmount, amount);
         assertThat(result).isEqualTo(0.06);
     }
-
-
 }

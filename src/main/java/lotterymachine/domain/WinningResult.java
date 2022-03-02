@@ -17,6 +17,15 @@ public class WinningResult {
         createResult();
     }
 
+    public Map<WinningLotteryRank, Integer> getResult() {
+        return this.result;
+    }
+
+    public double getTotalProfitRate(LotteryPurchase lotteryPurchase) {
+        int totalProfit = totalProfit();
+        return LotteryCalculator.calculateProfitRate(totalProfit, lotteryPurchase.getTotalAmount());
+    }
+
     private void createResult() {
         initResult();
         for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
@@ -29,15 +38,6 @@ public class WinningResult {
         for (WinningLotteryRank winningLotteryRank : WinningLotteryRank.values()) {
             result.put(winningLotteryRank, 0);
         }
-    }
-
-    public Map<WinningLotteryRank, Integer> getResult() {
-        return this.result;
-    }
-
-    public double getTotalProfitRate(LotteryPurchase lotteryPurchase) {
-        int totalProfit = totalProfit();
-        return LotteryCalculator.calculateProfitRate(totalProfit, lotteryPurchase.getTotalAmount());
     }
 
     private int totalProfit() {

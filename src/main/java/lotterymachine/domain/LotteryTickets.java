@@ -1,3 +1,5 @@
+
+
 package lotterymachine.domain;
 
 import java.util.*;
