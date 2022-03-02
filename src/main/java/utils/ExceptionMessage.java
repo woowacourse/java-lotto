@@ -7,6 +7,7 @@ public class ExceptionMessage {
 >>>>>>> d722001 (refactor: 예외 메세지 별도 클래스로 분리)
 
     public static final String NOT_ENOUGH_MONEY = "구입 금액은 1000원 미만일 수 없습니다.";
+    public static final String NOT_1000_UNIT = "구입 금액은 1000원 단위여야 합니다.";
 
     public static final String LOTTO_NUMBER_OUT_OF_BOUND = "로또번호는 1~45 사이값으로 생성할 수 있습니다";
     public static final String LOTTO_SIZE_IS_NOT_SIX = "로또 사이즈는 6이여야 합니다.";

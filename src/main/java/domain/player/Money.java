@@ -18,6 +18,7 @@ public class Money {
 
     public Money(int amount) {
         validateAmount(amount);
+        validateUnit(amount);
         this.amount = amount;
     }
 
@@ -46,6 +47,12 @@ public class Money {
     private void validateAmount(int amount) {
         if (amount < MINIMUM_PURCHASE_AMOUNT) {
             throw new IllegalArgumentException(ExceptionMessage.NOT_ENOUGH_MONEY);
+        }
+    }
+
+    private void validateUnit(int amount) {
+        if (amount % MINIMUM_PURCHASE_AMOUNT != 0) {
+            throw new IllegalArgumentException(ExceptionMessage.NOT_1000_UNIT);
         }
     }
 
