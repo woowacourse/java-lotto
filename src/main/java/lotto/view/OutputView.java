@@ -24,8 +24,9 @@ public class OutputView {
     }
 
     public static void printLottosSize(int manualCount, int size) {
+        printNewLine();
         System.out.printf(PURCHASE_MESSAGE, manualCount, size - manualCount);
-        System.out.println();
+        printNewLine();
     }
 
     public static void printLottos(int manualCount, List<LottoResponse> lottoStorage) {
