@@ -16,16 +16,12 @@ public class WinningLottery {
 	}
 
 	private void validateBonusBall(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
-		validateDuplicatedNumber(winningNumbers, bonusBall);
-	}
-
-	private void validateDuplicatedNumber(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
-		if (isDuplicated(winningNumbers, bonusBall)) {
+		if (hasDuplicatedNumber(winningNumbers, bonusBall)) {
 			throw new IllegalArgumentException(LotteryMessage.DUPLICATED_WINNING_NUMBER_WITH_BONUS_NUMBER);
 		}
 	}
 
-	private boolean isDuplicated(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
+	private boolean hasDuplicatedNumber(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
 		return winningNumbers.stream()
 			.anyMatch(winningNumber -> winningNumber.equals(bonusBall));
 	}
