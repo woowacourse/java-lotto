@@ -32,11 +32,11 @@ public class WinningNumbersTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "1,2,3,4,5,6 : FIRST",
-            "1,2,3,4,5,7 : SECOND",
-            "1,2,3,4,5,8 : THIRD",
-            "1,2,3,4,8,9 : FOURTH",
-            "1,2,3,8,9,10 : FIFTH"},
+            "1,2,3,4,5,6 : FIRST_PLACE",
+            "1,2,3,4,5,7 : SECOND_PLACE",
+            "1,2,3,4,5,8 : THIRD_PLACE",
+            "1,2,3,4,8,9 : FOURTH_PLACE",
+            "1,2,3,8,9,10 : FIFTH_PLACE"},
             delimiter = ':')
     @DisplayName("1,2,3,4,5 등 당첨 결과 반환")
     void calculateRanking(String lottoNumbers, Ranking expectedRanking) {
