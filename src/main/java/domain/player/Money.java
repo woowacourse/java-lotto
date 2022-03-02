@@ -23,6 +23,7 @@ public class Money {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 440c90c (refactor : Player 로또 구매 역할 분리)
     public void deductMoney() {
@@ -40,13 +41,19 @@ public class Money {
 >>>>>>> 440c90c (refactor : Player 로또 구매 역할 분리)
     }
 
+=======
+>>>>>>> 4022ea6 (refactor: 메서드 위치 변경)
     private void validateAmount(int amount) {
         if (amount < MINIMUM_PURCHASE_AMOUNT) {
             throw new IllegalArgumentException(ExceptionMessage.NOT_ENOUGH_MONEY);
         }
     }
 
-    public int getAmount() {
-        return amount;
+    public void deductMoney() {
+        amount -= MINIMUM_PURCHASE_AMOUNT;
+    }
+
+    public boolean isBiggerThanLottoPrice() {
+        return amount >= MINIMUM_PURCHASE_AMOUNT;
     }
 }

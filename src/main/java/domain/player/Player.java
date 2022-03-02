@@ -40,6 +40,7 @@ public class Player {
         lottos.add(lotto);
     }
 
+<<<<<<< HEAD
 
 =======
 =======
@@ -70,6 +71,8 @@ public class Player {
 =======
 
 >>>>>>> 440c90c (refactor : Player 로또 구매 역할 분리)
+=======
+>>>>>>> 4022ea6 (refactor: 메서드 위치 변경)
     public List<Result> judgeAll(WinningLotto winningLotto) {
         List<Result> result = new ArrayList<>();
         for (Lotto lotto : lottos) {

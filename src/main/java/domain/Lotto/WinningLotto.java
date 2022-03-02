@@ -35,6 +35,7 @@ public class WinningLotto {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> c348e4d (refactor : 당첨 로또와 사용자 로또 비교하는 메서드와, 보너스볼과 사용자 로또 비교해주는 메서드 위치 변경)
     public boolean isContainLottoNumber(LottoNumber lottoNumber) {
@@ -52,16 +53,20 @@ public class WinningLotto {
 =======
 >>>>>>> c348e4d (refactor : 당첨 로또와 사용자 로또 비교하는 메서드와, 보너스볼과 사용자 로또 비교해주는 메서드 위치 변경)
     public void validateDuplicate(List<LottoNumber> numbers, LottoNumber bonusBallNumber) {
+=======
+    private void validateDuplicate(List<LottoNumber> numbers, LottoNumber bonusBallNumber) {
+>>>>>>> 4022ea6 (refactor: 메서드 위치 변경)
         if (numbers.contains(bonusBallNumber)) {
             throw new IllegalArgumentException(ExceptionMessage.LOTTO_AND_BONUS_BALL_DUPLICATION);
         }
     }
 
-    public List<LottoNumber> getWinningLotto() {
-        return winningLotto.getLotto();
+    public boolean isContainLottoNumber(LottoNumber lottoNumber) {
+        List<LottoNumber> winningLottoNumbers = winningLotto.getLotto();
+        return winningLottoNumbers.contains(lottoNumber);
     }
 
-    public LottoNumber getBonusBall() {
-        return bonusBall;
+    public boolean isContainBonusBall(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.contains(bonusBall);
     }
 }

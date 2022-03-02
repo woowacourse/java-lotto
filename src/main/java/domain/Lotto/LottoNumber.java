@@ -43,8 +43,17 @@ public class LottoNumber {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 8185971 (feat : 반복되는 LottoNumber 인스턴스 캐싱하기)
+=======
+    private void validateLottoNumberBound(int number) {
+        if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(ExceptionMessage.LOTTO_NUMBER_OUT_OF_BOUND);
+        }
+    }
+
+>>>>>>> 4022ea6 (refactor: 메서드 위치 변경)
     public static LottoNumber valueOf(int number) {
         LottoNumber lottoNumber = CACHE.get(number - 1);
 
@@ -81,6 +90,7 @@ public class LottoNumber {
         return CACHE;
     }
 
+<<<<<<< HEAD
     private void validateLottoNumberBound(int number) {
         if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
             throw new IllegalArgumentException(ExceptionMessage.LOTTO_NUMBER_OUT_OF_BOUND);
@@ -93,6 +103,8 @@ public class LottoNumber {
         return Objects.hash(number);
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
 =======
+=======
+>>>>>>> 4022ea6 (refactor: 메서드 위치 변경)
     public int getNumber() {
         return number;
 >>>>>>> 8185971 (feat : 반복되는 LottoNumber 인스턴스 캐싱하기)
