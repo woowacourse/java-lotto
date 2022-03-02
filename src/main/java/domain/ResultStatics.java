@@ -1,6 +1,8 @@
 package domain;
 
-import static constant.LottoConstant.NUMBER_FOR_BONUS_CHECK;
+import java.util.Arrays;
+
+import static constant.LottoConstant.NUMBER_FOR_WINNER;
 
 public enum ResultStatics {
 
@@ -11,9 +13,9 @@ public enum ResultStatics {
 	SECOND(5, 30000000, true),
 	FIRST(6, 2000000000, false);
 
-	private int numberMatches;
-	private int price;
-	private boolean hitBonus;
+	private final int numberMatches;
+	private final int price;
+	private final boolean hitBonus;
 
 	ResultStatics(int numberMatches, int price, boolean hitBonus) {
 		this.numberMatches = numberMatches;
@@ -22,22 +24,14 @@ public enum ResultStatics {
 	}
 
 	public static ResultStatics of(int numberMatches, boolean hitBonus) {
-		if (numberMatches == 3) {
-			return FIFTH;
+		if (numberMatches < NUMBER_FOR_WINNER) {
+			return NOTHING;
 		}
-		if (numberMatches == 4) {
-			return FOURTH;
-		}
-		if (numberMatches == NUMBER_FOR_BONUS_CHECK && !hitBonus) {
-			return THIRD;
-		}
-		if (numberMatches == NUMBER_FOR_BONUS_CHECK && hitBonus) {
-			return SECOND;
-		}
-		if (numberMatches == 6) {
-			return FIRST;
-		}
-		return NOTHING;
+
+		return Arrays.stream(ResultStatics.values())
+			.filter(r -> ((r.getNumberMatches() == numberMatches) && (r.isHitBonus() == hitBonus)))
+			.findFirst()
+			.get();
 	}
 
 	public int getNumberMatches() {
@@ -51,4 +45,5 @@ public enum ResultStatics {
 	public boolean isHitBonus() {
 		return this.hitBonus;
 	}
+
 }
