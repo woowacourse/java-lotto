@@ -13,12 +13,12 @@ import java.util.stream.Stream;
 
 public class LottoUtils {
 
-    public static List<Lotto> getValidManuals(List<String> manualStrings) {
-        if (manualStrings.isEmpty()) {
+    public static List<Lotto> getValidManuals(List<String> manualsRaw) {
+        if (manualsRaw.isEmpty()) {
             return List.of();
         }
 
-        return manualStrings.stream()
+        return manualsRaw.stream()
                 .map(LottoNumberUtils::getValidLottoNumbers)
                 .map(Lotto::new)
                 .collect(Collectors.toList());
