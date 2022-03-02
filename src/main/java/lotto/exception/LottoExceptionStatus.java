@@ -1,5 +1,7 @@
 package lotto.exception;
 
+import lotto.utils.BallNumberRange;
+
 public enum LottoExceptionStatus {
 
     MONEY_MUST_BE_NUMERIC("구입 금액은 숫자여야 합니다."),
@@ -12,7 +14,9 @@ public enum LottoExceptionStatus {
     TICKET_NUMBERS_CANNOT_BE_DUPLICATED("로또 번호는 중복될 수 없습니다."),
 
     BALL_NUMBER_MUST_BE_NUMERIC("번호는 숫자여야 합니다."),
-    BALL_NUMBER_CANNOT_BE_OUT_OF_RANGE("번호의 범위는 1부터 45까지여야 합니다.");
+    BALL_NUMBER_CANNOT_BE_OUT_OF_RANGE(String.format("번호의 범위는 %d부터 %d까지여야 합니다.",
+            BallNumberRange.INCLUSIVE_RANGE_START.getNumber(), BallNumberRange.INCLUSIVE_RANGE_END.getNumber())
+    );
 
     private final String message;
 

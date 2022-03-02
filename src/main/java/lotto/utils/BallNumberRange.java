@@ -21,4 +21,8 @@ public enum BallNumberRange {
         return IntStream.range(INCLUSIVE_RANGE_START.number, INCLUSIVE_RANGE_END.number + 1);
     }
 
+    public int getNumber() {
+        return this.number;
+    }
+
 }
