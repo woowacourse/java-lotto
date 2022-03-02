@@ -40,8 +40,8 @@ public class OutputView {
 
     private static List<String> convertToStringList(List<LottoNumber> lottoNumberList) {
         return lottoNumberList.stream()
-                .sorted(Comparator.comparingInt(LottoNumber::toInt))
-                .map(lottoNumber -> Integer.toString(lottoNumber.toInt()))
+                .sorted(Comparator.comparingInt(LottoNumber::getValue))
+                .map(lottoNumber -> Integer.toString(lottoNumber.getValue()))
                 .collect(Collectors.toList());
     }
 

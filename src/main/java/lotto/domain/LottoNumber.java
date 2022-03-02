@@ -10,15 +10,15 @@ public class LottoNumber {
 
     private static final LottoNumber[] cacheLottoNumber = new LottoNumber[MAX + 1];
 
-    private final int number;
+    private final int value;
 
     static {
         IntStream.range(MIN, MAX + 1)
                 .forEach(i -> cacheLottoNumber[i] = new LottoNumber(i));
     }
 
-    private LottoNumber(int number) {
-        this.number = number;
+    private LottoNumber(int value) {
+        this.value = value;
     }
 
     public static LottoNumber of(int number) {
@@ -32,14 +32,14 @@ public class LottoNumber {
         }
     }
 
-    public int toInt() {
-        return number;
+    public int getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
         return "LottoNumber{" +
-                "number=" + number +
+                "number=" + value +
                 '}';
     }
 }
