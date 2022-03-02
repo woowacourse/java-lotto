@@ -11,9 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.model.Lotto;
-import lotto.model.number.BonusBall;
-import lotto.model.number.LottoBall;
-import lotto.model.number.WinningBalls;
+import lotto.model.ball.BonusBall;
+import lotto.model.ball.LottoBall;
+import lotto.model.ball.WinningBalls;
 
 public class PrizeInformationTest {
 	WinningBalls winningBalls;

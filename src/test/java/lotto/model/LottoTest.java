@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.model.number.LottoBall;
+import lotto.model.ball.LottoBall;
 
 public class LottoTest {
 

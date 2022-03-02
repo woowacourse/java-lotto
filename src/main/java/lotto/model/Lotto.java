@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import lotto.model.number.LottoBall;
-import lotto.model.number.WinningBalls;
+import lotto.model.ball.LottoBall;
+import lotto.model.ball.WinningBalls;
 
 public class Lotto {
 	private static final List<LottoBall> LOTTO_BALLS = new ArrayList<>();

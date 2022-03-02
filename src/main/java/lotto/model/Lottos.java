@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.model.number.BonusBall;
-import lotto.model.number.WinningBalls;
+import lotto.model.ball.BonusBall;
+import lotto.model.ball.WinningBalls;
 import lotto.model.prize.MatchResult;
 
 public class Lottos {

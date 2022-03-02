@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.model.Lottos;
-import lotto.model.number.LottoBall;
+import lotto.model.ball.LottoBall;
 
 public class LottoDTO {
 
