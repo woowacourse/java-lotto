@@ -99,8 +99,8 @@ public class MoneyTest {
             @DisplayName("필요한 가격만큼 지불한다.")
             void it_pay_money() {
                 Money money = MoneyFactory.valueOf("3000");
-                Money moneyAfterPay = money.pay(Lotto.PRICE, 2);
-                assertThat(moneyAfterPay.getValue()).isEqualTo(1000);
+                money.pay(Lotto.PRICE, 2);
+                assertThat(money.getValue()).isEqualTo(1000);
             }
         }
 

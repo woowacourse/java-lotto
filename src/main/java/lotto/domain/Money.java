@@ -8,18 +8,18 @@ public class Money {
     private static final int REMAINDER = 0;
     private static final double ROUND_OFF_NUMBER = 1e3;
 
-    private final int value;
+    private int value;
 
     public Money(int value) {
         validate(value);
         this.value = value;
     }
 
-    public Money pay(int price, int count) {
+    public void pay(int price, int count) {
         if (value < price * count) {
             throw new IllegalArgumentException("돈이 부족합니다.");
         }
-        return new Money(value - (count * price));
+        value -= price * count;
     }
 
     public double getRateOfProfit(long totalMoney) {
