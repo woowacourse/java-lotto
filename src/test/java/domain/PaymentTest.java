@@ -6,6 +6,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class PaymentTest {
 
@@ -76,5 +78,15 @@ public class PaymentTest {
 		double profitRate = payment.calculateDivision(10000);
 
 		assertThat(profitRate).isEqualTo(2.0);
+	}
+
+	@DisplayName("현재 금액에서 구입 가능한지 확인")
+	@ParameterizedTest
+	@CsvSource(value = {"4:true", "6:false"}, delimiter = ':')
+	void can_buy(int quantity, boolean expected) {
+		//given, when
+		Payment payment = new Payment(5000);
+		//then
+		assertThat(payment.canBuy(quantity)).isEqualTo(expected);
 	}
 }

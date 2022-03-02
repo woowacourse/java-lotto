@@ -9,6 +9,11 @@ import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import service.LottoMachine;
 
 public class LottosTest {
 
@@ -16,13 +21,13 @@ public class LottosTest {
 	@Test
 	void count_rank_success() {
 		//given
-		List<Lotto> lotto = Arrays.asList(Lotto.of(new String[]{"6", "5", "4", "3", "2", "1"}),
-			Lotto.of(new String[]{"11", "5", "4", "3", "2", "1"}));
-		Lotto winningLotto = Lotto.of(new String[]{"6", "5", "4", "3", "2", "1"});
+		List<Lotto> lotto = Arrays.asList(Lotto.of(new String[] {"6", "5", "4", "3", "2", "1"}),
+			Lotto.of(new String[] {"11", "5", "4", "3", "2", "1"}));
+		Lotto winningLotto = Lotto.of(new String[] {"6", "5", "4", "3", "2", "1"});
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		Map<Rank,Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
+		Map<Rank, Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
 		//then
 		assertThat(ranks).containsAnyOf(entry(Rank.FIFTH, 1L), entry(Rank.THIRD, 1L));
 	}
@@ -31,14 +36,24 @@ public class LottosTest {
 	@Test
 	void nothing_count_rank_success() {
 		//given
-		List<Lotto> lotto = Arrays.asList(Lotto.of(new String[]{"6", "5", "4", "3", "2", "1"}),
-			Lotto.of(new String[]{"8", "9", "10", "11", "12", "13"}));
-		Lotto winningLotto = Lotto.of(new String[]{"6", "5", "4", "3", "2", "1"});
+		List<Lotto> lotto = Arrays.asList(Lotto.of(new String[] {"6", "5", "4", "3", "2", "1"}),
+			Lotto.of(new String[] {"8", "9", "10", "11", "12", "13"}));
+		Lotto winningLotto = Lotto.of(new String[] {"6", "5", "4", "3", "2", "1"});
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		Map<Rank,Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
+		Map<Rank, Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
 		//then
 		assertThat(ranks).containsAnyOf(entry(Rank.FIRST, 1L));
+	}
+
+	@DisplayName("사이즈 체크")
+	@ParameterizedTest
+	@CsvSource(value = {"5:true", "6:false"}, delimiter = ':')
+	void check_Lottos_size(int size, boolean expected) {
+		//given, when
+		Lottos lottos = LottoMachine.createLottos(5);
+		//then
+		assertThat(lottos.getSize() == size).isEqualTo(expected);
 	}
 }

@@ -46,4 +46,8 @@ public class Payment {
 	public double calculateDivision(int divisionValue) {
 		return (double)divisionValue / payment;
 	}
+
+	public boolean canBuy(int quantity) {
+		return calculateLottoCount() >= quantity;
+	}
 }
