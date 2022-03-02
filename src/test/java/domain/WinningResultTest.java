@@ -3,6 +3,7 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +14,7 @@ class WinningResultTest {
     private final Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     private final WinningTicket winningTicket = new WinningTicket(winningNumbers, 7);
     private final GenerateStrategy generateStrategy = () -> new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-    private final LottoTickets lottoTickets = new LottoTickets(new Money(14000), generateStrategy);
+    private final LottoTickets lottoTickets = new LottoTickets(new ArrayList<>(), new Money(14000), generateStrategy);
     private final WinningPrizeStrategy winningPrizeStrategy = new LottoWinningPrizeStrategy();
 
     @Test

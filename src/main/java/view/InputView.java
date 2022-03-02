@@ -1,6 +1,8 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -16,6 +18,7 @@ public class InputView {
 
     private static final InputView instance = new InputView();
     private static final Scanner scanner = new Scanner(System.in);
+    public static final String INPUT_SELF_TICKET_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
 
     private InputView() {
     }
@@ -26,13 +29,25 @@ public class InputView {
         return parse(userInput);
     }
 
+    public int inputSelfTicketCount() {
+        System.out.println(INPUT_SELF_TICKET_COUNT_MESSAGE);
+        return parse(inputLine());
+    }
+
+    public List<Set<Integer>> inputSelfTicketNumbers(int selfTicketCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<Set<Integer>> lottoTicketNumbers = new ArrayList<>();
+        for (int i = 0; i < selfTicketCount; i++) {
+            String userInput = inputLine();
+            lottoTicketNumbers.add(parseLottoNumbers(userInput));
+        }
+        return lottoTicketNumbers;
+    }
+
     public Set<Integer> inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String userInput = inputLine();
-        List<String> splitInputData = splitInputData(userInput);
-        return splitInputData.stream()
-                .map(Integer::valueOf)
-                .collect(Collectors.toSet());
+        return parseLottoNumbers(userInput);
     }
 
     public int inputBonusNumber() {
@@ -51,16 +66,19 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    private String inputLine() {
-        String userInput = scanner.nextLine();
-        inputNullOrBlankCheck(userInput);
-        return userInput;
+    private Set<Integer> parseLottoNumbers(String userInput) {
+        Set<Integer> lottoNumbers = new LinkedHashSet<>();
+        List<String> splitInputData = splitInputData(userInput);
+        splitInputData.forEach(numberString -> lottoNumbers.add(Integer.valueOf(numberString)));
+        return lottoNumbers;
     }
 
-    private void inputNullOrBlankCheck(String inputText) {
-        if (isNullOrBlank(inputText)) {
+    private String inputLine() {
+        String userInput = scanner.nextLine();
+        if (isNullOrBlank(userInput)) {
             throw new IllegalArgumentException(IS_NULL_OR_BLANK_ERROR_MESSAGE);
         }
+        return userInput;
     }
 
     private boolean isNullOrBlank(String inputText) {

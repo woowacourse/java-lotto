@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,20 +13,27 @@ public class LottoTicket {
     public LottoTicket(GenerateStrategy generateStrategy) {
         Set<Integer> generatedNumbers = generateStrategy.generateNumbers();
         validateTicketSize(generatedNumbers);
-        lottoNumbers = new HashSet<>();
+        lottoNumbers = new LinkedHashSet<>();
         for (Integer generatedNumber : generatedNumbers) {
             lottoNumbers.add(new LottoNumber(generatedNumber));
         }
     }
 
-    public Set<Integer> getLottoNumberValues() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::getValue)
-                .collect(Collectors.toSet());
+    public LottoTicket(Set<Integer> lottoNumberValues) {
+        validateTicketSize(lottoNumberValues);
+        Set<LottoNumber> lottoNumbers = new LinkedHashSet<>();
+        lottoNumberValues.forEach(number -> lottoNumbers.add(new LottoNumber(number)));
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateTicketSize(Set<Integer> generatedNumbers) {
-        if (generatedNumbers.size() != LOTTO_TICKET_SIZE) {
+    public Set<Integer> getLottoNumberValues() {
+        Set<Integer> lottoNumberValues = new LinkedHashSet<>();
+        lottoNumbers.forEach(lottoNumber -> lottoNumberValues.add(lottoNumber.getValue()));
+        return lottoNumberValues;
+    }
+
+    private void validateTicketSize(Set<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException(LOTTO_TICKET_SIZE_ERROR_MESSAGE);
         }
     }

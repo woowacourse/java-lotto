@@ -1,5 +1,6 @@
 package controller;
 
+import domain.LottoTicket;
 import domain.Money;
 import domain.WinningResult;
 import domain.WinningTicket;
@@ -46,7 +47,10 @@ public class LottoController {
     private LottoTickets purchaseLottoTickets() {
         try {
             int purchaseMoney = inputView.inputPurchaseMoney();
-            return new LottoTickets(new Money(purchaseMoney), new LottoNumberGenerateStrategy());
+            int selfPurchaseCount = inputView.inputSelfTicketCount();
+            purchaseMoney -= selfPurchaseCount * LottoTicket.TICKET_PRICE;
+            List<Set<Integer>> selfTicketNumbers = inputView.inputSelfTicketNumbers(selfPurchaseCount);
+            return new LottoTickets(selfTicketNumbers, new Money(purchaseMoney), new LottoNumberGenerateStrategy());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return purchaseLottoTickets();
@@ -55,7 +59,7 @@ public class LottoController {
 
     private void showGeneratedLottoTickets(LottoTickets lottoTickets) {
         List<LottoTicketDto> dtos = toLottoTicketDtos(lottoTickets);
-        outputView.showLottoTicket(dtos);
+        outputView.showLottoTicket(dtos, lottoTickets.getSelfPurchaseCount());
     }
 
     private void showLottoResult(LottoGame lottoGame) {

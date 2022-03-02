@@ -3,6 +3,7 @@ package domain;
 import static domain.LottoTickets.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +28,7 @@ class LottoGameTest {
     @DisplayName("로또 게임이 총 수익률을 잘 계산하는지 확인한다.")
     void checkRateOfReturn() {
         int purchaseMoney = 1000;
-        LottoTickets lottoTickets = new LottoTickets(new Money(purchaseMoney), generateStrategy);
+        LottoTickets lottoTickets = new LottoTickets(new ArrayList<>(), new Money(purchaseMoney), generateStrategy);
         int bonusNumber = 7;
         WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusNumber);
         lottoGame = new LottoGame(lottoTickets, winningTicket, winningPrizeStrategy);

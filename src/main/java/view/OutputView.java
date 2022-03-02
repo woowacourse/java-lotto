@@ -6,7 +6,7 @@ import domain.LottoTicketDto;
 import domain.WinningResultDto;
 
 public class OutputView {
-    private static final String PURCHASE_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String PURCHASE_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String RIGHT_LIST_COVER = "[";
     private static final String LEFT_LIST_COVER = "]";
     private static final String LIST_JOINING_DELIMITER = ", ";
@@ -22,8 +22,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public void showLottoTicket(List<LottoTicketDto> lottoTickets) {
-        System.out.println(lottoTickets.size() + PURCHASE_COUNT_MESSAGE);
+    public void showLottoTicket(List<LottoTicketDto> lottoTickets, int selfPurchaseCount) {
+        System.out.printf(PURCHASE_COUNT_MESSAGE, selfPurchaseCount, lottoTickets.size() - selfPurchaseCount);
         lottoTickets.forEach(lottoTicket -> System.out.println(toLottoTicketPrintForm(lottoTicket)));
     }
 
