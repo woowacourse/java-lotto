@@ -1,5 +1,6 @@
 package model.winningnumber;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,7 +73,7 @@ public class LottoWinningNumber {
 	}
 
 	public List<Integer> getWinningNumbers() {
-		return winningNumbers;
+		return new ArrayList<>(winningNumbers);
 	}
 
 }
