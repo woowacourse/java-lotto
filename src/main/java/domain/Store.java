@@ -9,7 +9,6 @@ public class Store {
     private static final String ERROR_COUNT_NON_INTEGER = "구매 개수는 정수만 가능합니다.";
     private static final String ERROR_COUNT_NEGATIVE_INTEGER = "구매 개수는 양의 정수만 가능합니다.";
     private static final String ERROR_LESS_MONEY = "원하시는 로또 개수를 구매하기에는 돈이 부족합니다.";
-    private static final int LOTTO_PRICE = 1000;
 
     public int checkAvailableBuy(final Money money, final String numOfLotto) {
         int numOfManualLotto = validateNumOfLotto(numOfLotto);

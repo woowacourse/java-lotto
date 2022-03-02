@@ -3,7 +3,7 @@ package domain;
 public class Money {
 
     private static final String ERROR_PRICE_NON_INTEGER = "가격은 정수만 가능합니다.";
-    private static final String ERROR_NEGATIVE_INTEGER = "가격은 1000원 이상만 가능합니다.";
+    private static final String ERROR_LESS_THAN_MINIMUN_PRICE = "가격은 1000원 이상만 가능합니다.";
     private static final int LOTTO_PRICE = 1000;
 
     private int money;
@@ -29,7 +29,7 @@ public class Money {
 
     private static void checkUnderMinimumPrice(final int price) {
         if (price < LOTTO_PRICE) {
-            throw new IllegalArgumentException(ERROR_NEGATIVE_INTEGER);
+            throw new IllegalArgumentException(ERROR_LESS_THAN_MINIMUN_PRICE);
         }
     }
 

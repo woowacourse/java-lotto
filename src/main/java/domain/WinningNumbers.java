@@ -11,7 +11,7 @@ public class WinningNumbers {
     private static final String ERROR_BALL_NON_INTEGER = "로또 번호는 숫자만 입력해줘야 합니다.";
 
     private final Set<Number> winningNumbers;
-    private Number bonus;
+    private final Number bonus;
 
     public WinningNumbers(String inputNumbers, String bonusNumber) {
         Set<Integer> numbers = new ManualLottoGenerator(inputNumbers).generateNumbers();
