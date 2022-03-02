@@ -34,7 +34,7 @@ public class LottoNumbers {
 	}
 
 	public int calculateDuplicatedCount(List<LottoNumber> target) {
-		return (int) numbers.stream().filter(n -> target.contains(n)).count();
+		return (int) target.stream().filter(t -> isExist(t)).count();
 	}
 
 	public List<LottoNumber> getNumbers() {
