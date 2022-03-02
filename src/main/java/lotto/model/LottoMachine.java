@@ -43,4 +43,12 @@ public class LottoMachine {
     private int quantity(Money money) {
         return money.divide(Lotto.PRICE).intValue();
     }
+
+    public int getManualLottoesSize() {
+        return manualLottoes.size();
+    }
+
+    public int getAutoLottoesSize() {
+        return money.divide(Lotto.PRICE).intValue();
+    }
 }
