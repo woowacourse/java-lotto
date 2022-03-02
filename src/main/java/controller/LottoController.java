@@ -10,6 +10,7 @@ import view.OutputView;
 public class LottoController {
 
     private static final String ERROR_MESSAGE = "[ERROR] ";
+    private static final int MANUAL_LOTTO_IS_NONE_NUMBER = 0;
 
     private final InputView inputView;
     private final OutputView outputView;
@@ -40,8 +41,9 @@ public class LottoController {
 
     private void issueLotto() {
         final int manualCount = getManualCount();
-        if (manualCount > 0) {
+        if (manualCount > MANUAL_LOTTO_IS_NONE_NUMBER) {
             lottoService.issueLotto(getManualLottoWith(manualCount));
+            return;
         }
         lottoService.issueLotto(new ArrayList<>());
         outputView.printLotto(lottoService.getIssuedLotto());
