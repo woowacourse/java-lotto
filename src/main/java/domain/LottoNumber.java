@@ -28,6 +28,13 @@ public class LottoNumber {
 
 	@Override
 	public boolean equals(Object o) {
+		if (o == null || !(o instanceof LottoNumber)) {
+			return false;
+		}
+		if (o == this) {
+			return true;
+		}
+
 		LottoNumber target = (LottoNumber) o;
 		return this.number == target.getNumber();
 	}
