@@ -20,11 +20,11 @@ public class WinningTicketTest {
     public void createWinningTicket() {
         // given
         List<LottoNumber> numbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
+                List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                        LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))
         );
         LottoTicket lottoTicket = new LottoTicket(numbers);
-        LottoNumber bonusball = new LottoNumber(7);
+        LottoNumber bonusball = LottoNumber.from(7);
         // then
         Assertions.assertThatCode(() -> new WinningTicket(lottoTicket, bonusball))
                 .doesNotThrowAnyException();
@@ -36,11 +36,11 @@ public class WinningTicketTest {
     public void compareWinningTicketWithLottoTicket() {
         // given
         List<LottoNumber> numbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
+                List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                        LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))
         );
         LottoTicket lottoTicket = new LottoTicket(numbers);
-        LottoNumber bonusball = new LottoNumber(7);
+        LottoNumber bonusball = LottoNumber.from(7);
         WinningTicket winningTicket = new WinningTicket(lottoTicket, bonusball);
         // when
         LottoRank result = winningTicket.judgeRank(lottoTicket);

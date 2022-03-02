@@ -25,7 +25,7 @@ public class LottoTicket {
         return new LottoTicket(
                 generator.generate(COUNT)
                         .stream()
-                        .map(LottoNumber::new)
+                        .map(LottoNumber::from)
                         .sorted()
                         .collect(Collectors.toList())
         );

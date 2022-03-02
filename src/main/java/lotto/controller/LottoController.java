@@ -41,6 +41,6 @@ public class LottoController {
                         .stream()
                         .map(LottoNumber::from)
                         .collect(Collectors.toList())),
-                new LottoNumber(bonusBall));
+                LottoNumber.from(bonusBall));
     }
 }

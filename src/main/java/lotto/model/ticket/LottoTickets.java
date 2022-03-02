@@ -31,7 +31,7 @@ public class LottoTickets {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (List<Integer> numberTicket : numberTickets) {
             LottoTicket lottoTicket = new LottoTicket(numberTicket.stream()
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::from)
                     .collect(Collectors.toList()));
             lottoTickets.add(lottoTicket);
             money.decreaseByUnit();
