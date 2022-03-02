@@ -8,20 +8,24 @@ import java.util.Map;
 
 public class OutputView {
 
-    private static final String PURCHASED_LOTTO_COUNT_SUFFIX = "개를 구매했습니다.";
+    private static final String LOTTO_PURCHASED_FORMAT = "수동으로 %d장, 자동으로 %d장을 구매했습니다.\n";
     private static final String LOTTO_RESULT_PREFIX = "당첨 통계\n---------";
     private static final String LOTTO_RESULT_WITH_BONUS_BALL_FORMAT = "%d개 일치, 보너스볼 일치(%d원)- %d개\n";
     private static final String LOTTO_RESULT_FORMAT = "%d개 일치 (%d원)- %d개\n";
-    private static final String  PROFIT_RATE_RESULT_PREFIX = "총 수익률은 ";
+    private static final String PROFIT_RATE_RESULT_PREFIX = "총 수익률은 ";
     private static final String PROFIT_RATE_RESULT_SUFFIX = "입니다.";
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
 
-    public static void printPurchasedLotto(LottoTicket lottoTicket) {
-        System.out.println(lottoTicket.getLottos().size() + PURCHASED_LOTTO_COUNT_SUFFIX);
+    public static void printPurchasedLotto(int manualLottoCount, LottoTicket lottoTicket) {
+        System.out.printf(LOTTO_PURCHASED_FORMAT, manualLottoCount, autoLottoCount(manualLottoCount, lottoTicket));
         for (Lotto lotto : lottoTicket.getLottos()) {
             System.out.println(PREFIX + lotto + SUFFIX);
         }
+    }
+
+    private static int autoLottoCount(int manualLottoCount, LottoTicket lottoTicket) {
+        return lottoTicket.getLottos().size() - manualLottoCount;
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
