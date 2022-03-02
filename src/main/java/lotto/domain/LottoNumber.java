@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final String REQUEST_1_TO_45_NUMBER = "1부터 45 사이의 수를 입력해주세요.";
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
 
     private final int number;
     
