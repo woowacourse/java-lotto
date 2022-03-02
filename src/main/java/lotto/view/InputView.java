@@ -52,7 +52,7 @@ public class InputView {
 		System.out.println(MESSAGE_MANUAL_LOTTO_NUMBERS);
 		List<String[]> manualLottos = new ArrayList<>();
 		for (int index = 0; index < count; index++) {
-			manualLottos.add(scanner.nextLine().split(NUMBER_DELIMITER));
+			manualLottos.add(splitByComma(scanner.nextLine()));
 		}
 
 		return manualLottos;
