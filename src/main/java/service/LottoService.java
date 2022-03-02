@@ -20,7 +20,6 @@ public class LottoService {
     private static final String WIN_PROFIT_RESULT_MESSAGE = "총 수익률은 %.2f입니다. (기준이 1 이기 때문에 결과적으로 %s라는 의미임)";
     private static final String PROFIT_NEGATIVE_MESSAGE = "손해";
     private static final String PROFIT_POSITIVE_MESSAGE = "이익";
-    private static final String SYSTEM_SEPARATOR = "%n";
 
     private final Money money;
     private Lotto lastWinLotto;
@@ -93,6 +92,6 @@ public class LottoService {
         if (profitRate >= 1) {
             resultMessage = PROFIT_POSITIVE_MESSAGE;
         }
-        return String.format((WIN_PROFIT_RESULT_MESSAGE) + SYSTEM_SEPARATOR, profitRate, resultMessage);
+        return String.format((WIN_PROFIT_RESULT_MESSAGE), profitRate, resultMessage);
     }
 }
