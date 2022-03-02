@@ -3,9 +3,11 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MoneyTest {
 
@@ -21,5 +23,13 @@ public class MoneyTest {
 	void canNotPurchase() {
 		Money money = new Money(5000);
 		assertThatThrownBy(() -> money.canPurchase(10)).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1000:1", "5000:5", "10000:10"}, delimiter = ':')
+	@DisplayName("구입금액으로 구입 가능한 최대 로또 개수를 올바르게 계산하는지 확인")
+	void calculateTotalCount(String inputMoney, String expected) {
+		Money money = new Money(Integer.parseInt(inputMoney));
+		assertThat(money.calculateTotalCount()).isEqualTo(Integer.parseInt(expected));
 	}
 }
