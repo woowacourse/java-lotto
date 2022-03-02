@@ -1,7 +1,12 @@
 package lotterymachine.domain;
 
+import lotterymachine.LotteryPurchase;
+import lotterymachine.utils.LotteryCalculator;
+
 import java.util.EnumMap;
 import java.util.Map;
+
+import static lotterymachine.utils.LotteryCalculator.calculateProfitRate;
 
 public class WinningResult {
     private final Map<WinningLotteryRank, Integer> result = new EnumMap<>(WinningLotteryRank.class);
@@ -30,5 +35,10 @@ public class WinningResult {
 
     public Map<WinningLotteryRank, Integer> getResult() {
         return this.result;
+    }
+
+    public double getTotalProfitRate(LotteryPurchase lotteryPurchase) {
+        int totalProfit = LotteryCalculator.totalProfit(this.result);
+        return calculateProfitRate(totalProfit, lotteryPurchase.getTotalAmount());
     }
 }

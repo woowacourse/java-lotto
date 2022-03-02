@@ -17,12 +17,6 @@ public class LotteryMachine {
         WinningLottery winningLottery =  LotteryConverter.createWinningLottery();
         WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);
         OutputView.printWinningLotteryResults(winningResult.getResult());
-        OutputView.printProfitRate(getTotalProfitRate(lotteryPurchase, winningResult.getResult()));
-    }
-
-
-    private static double getTotalProfitRate(LotteryPurchase lotteryPurchase, Map<WinningLotteryRank, Integer> lotteryTicketResult) {
-        int totalProfit = LotteryCalculator.totalProfit(lotteryTicketResult);
-        return calculateProfitRate(totalProfit, lotteryPurchase.getTotalAmount());
+        OutputView.printProfitRate(winningResult.getTotalProfitRate(lotteryPurchase));
     }
 }
