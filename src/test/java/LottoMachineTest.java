@@ -1,6 +1,5 @@
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,11 +36,9 @@ class LottoMachineTest {
             List.of(7, 8, 9, 10, 11, 12));
         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTicketsByManual(lottoNumbers);
 
-        Iterator<List<Integer>> iterator = lottoNumbers.iterator();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            List<Integer> ticketNumbers = lottoTicket.getTicketNumbers();
-            assertThat(ticketNumbers).isEqualTo(iterator.next());
-        }
+        assertThat(lottoTickets)
+            .map(LottoTicket::getTicketNumbers)
+            .containsExactly(lottoNumbers.get(0), lottoNumbers.get(1));
     }
 
     @Test
