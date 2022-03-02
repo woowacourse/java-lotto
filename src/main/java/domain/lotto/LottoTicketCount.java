@@ -16,11 +16,11 @@ public class LottoTicketCount {
         return new LottoTicketCount(manualTicketCount, fullTicketCount - manualTicketCount);
     }
 
-    public int getManualTicketCount() {
+    public int getManualCount() {
         return manualTicketCount;
     }
 
-    public int getAutoTicketCount() {
+    public int getAutoCount() {
         return autoTicketCount;
     }
 

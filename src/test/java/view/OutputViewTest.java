@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
 import domain.lotto.LottoNumber;
+import domain.lotto.LottoTicketCount;
 import domain.lotto.WinNumbers;
 import domain.result.Result;
 import java.io.ByteArrayOutputStream;
@@ -38,9 +39,11 @@ class OutputViewTest {
         Lotto lotto2 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(7, 8, 9, 10, 11, 12)));
         lottoTickets.add(lotto2);
 
-        OutputView.printLottoTickets(lottoTickets);
+        LottoTicketCount count = LottoTicketCount.of(2, 1);
 
-        assertThat(out.toString()).isEqualTo("2개를 구매했습니다."
+        OutputView.printLottoTickets(count, lottoTickets);
+
+        assertThat(out.toString()).isEqualTo("\n수동으로 1장, 자동으로 1개를 구매했습니다."
                 + System.lineSeparator()
                 + "[1, 2, 3, 4, 5, 6]"
                 + System.lineSeparator()

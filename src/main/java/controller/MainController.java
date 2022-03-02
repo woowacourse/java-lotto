@@ -31,9 +31,9 @@ public class MainController {
 
     private List<Lotto> makeLottos(final LottoTicketCount count) {
         final List<Lotto> lottos = new ArrayList<>();
-        addManualLottos(lottos, count.getManualTicketCount());
-        addAutoLottos(lottos, count.getAutoTicketCount());
-        OutputView.printLottoTickets(lottos);
+        addManualLottos(lottos, count.getManualCount());
+        addAutoLottos(lottos, count.getAutoCount());
+        OutputView.printLottoTickets(count, lottos);
         return lottos;
     }
 

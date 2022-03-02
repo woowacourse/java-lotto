@@ -2,12 +2,13 @@ package view;
 
 import domain.lotto.Lotto;
 import domain.lotto.LottoNumber;
+import domain.lotto.LottoTicketCount;
 import domain.result.Rank;
 import domain.result.Result;
 import java.util.List;
 
 public class OutputView {
-    public static final String BUY_MESSAGE = "개를 구매했습니다.";
+    public static final String BUY_MESSAGE = System.lineSeparator() + "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
     public static final String LOTTO_PREFIX = "[";
     public static final String LOTTO_ENDFIX = "]";
     public static final String SEPARATOR = ", ";
@@ -20,8 +21,8 @@ public class OutputView {
             "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해%s라는 의미임)" + System.lineSeparator();
     public static final String NO_MESSAGE = " 아니";
 
-    public static void printLottoTickets(final List<Lotto> lottoTickets) {
-        System.out.println(lottoTickets.size() + BUY_MESSAGE);
+    public static void printLottoTickets(final LottoTicketCount count, final List<Lotto> lottoTickets) {
+        System.out.printf(BUY_MESSAGE, count.getManualCount(), count.getAutoCount());
         for (Lotto lotto : lottoTickets) {
             printLottoNumbers(lotto);
         }

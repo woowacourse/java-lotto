@@ -29,12 +29,12 @@ class LottoTicketCountTest {
     @Test
     void 정적팩토리_생성_테스트_오토티켓_수() {
         LottoTicketCount count = LottoTicketCount.of(10,3);
-        assertThat(count.getAutoTicketCount()).isEqualTo(7);
+        assertThat(count.getAutoCount()).isEqualTo(7);
     }
 
     @Test
     void 정적팩토리_생성_테스트_수동티켓_수() {
         LottoTicketCount count = LottoTicketCount.of(10,3);
-        assertThat(count.getManualTicketCount()).isEqualTo(3);
+        assertThat(count.getManualCount()).isEqualTo(3);
     }
 }
