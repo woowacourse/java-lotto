@@ -58,12 +58,16 @@ public class OutputView {
     private void printAnalysisRankCounts(final AnalysisDto analysisDto) {
         final Map<Rank, Long> rankCounts = analysisDto.getRankCounts();
         for (Rank rank : Rank.values()) {
-            long rankCount = 0;
-            if (rankCounts.containsKey(rank)) {
-                rankCount = rankCounts.get(rank);
-            }
+            final long rankCount = selectRankCountIfContainsRank(rankCounts, rank);
             printAnalysisRankCount(rank, rankCount);
         }
+    }
+
+    private long selectRankCountIfContainsRank(final Map<Rank, Long> rankCounts, final Rank rank) {
+        if (rankCounts.containsKey(rank)) {
+            return rankCounts.get(rank);
+        }
+        return 0;
     }
 
     private void printAnalysisRankCount(final Rank rank, final long rankCount) {
