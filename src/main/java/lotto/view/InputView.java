@@ -16,7 +16,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String inputCountForManualLotto() {
+    public static String inputCount() {
         OutputView.printNewLine();
         System.out.println(INPUT_LOTTO_COUNT_FOR_MANUAL_MESSAGE);
         return scanner.nextLine();

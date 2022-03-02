@@ -7,7 +7,8 @@ import lotto.domain.RankCount;
 
 public class OutputView {
 
-    private static final String TOTAL_LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String TOTAL_LOTTO_COUNT_MESSAGE_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
+    private static final String EACH_LOTTO_MESSAGE_FORMAT = "[%s]\n";
     private static final String WINNING_STATISTIC_TITLE = "당첨 통계\n" + "---------";
     private static final String RANK_MESSAGE_FORMAT = "%s개 일치%s(%s원) - %d개\n";
     private static final String BONUS_NUMBER_MATCH_MESSAGE = ", 보너스 볼 일치";
@@ -15,8 +16,11 @@ public class OutputView {
     private static final String PROFIT_RATE_MASSAGE_FORMAT = "총 수익률은 %s입니다.\n";
 
     public static void printLottos(Lottos lottos) {
-        System.out.println(lottos.getTotalLottoCount() + TOTAL_LOTTO_COUNT_MESSAGE);
-        lottos.getLottos().forEach(System.out::println);
+        printNewLine();
+        System.out.printf(TOTAL_LOTTO_COUNT_MESSAGE_FORMAT,
+                lottos.getLottoCountByManual(),
+                lottos.getLottoCountByAuto());
+        lottos.getLottos().forEach(lotto -> System.out.printf(EACH_LOTTO_MESSAGE_FORMAT, lotto.toString()));
     }
 
     public static void printWinningStatistic(RankCount rankCount, String profitRate) {
