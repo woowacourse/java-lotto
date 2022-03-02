@@ -18,17 +18,19 @@ public class InputView {
     }
 
     public static int inputCountForBuy() {
-        OutputView.printNewLine();
-        System.out.println(INPUT_LOTTO_COUNT_FOR_MANUAL_MESSAGE);
-        int countForBuy = Integer.parseInt(scanner.nextLine());
-        CountForBuyValidator.validate(countForBuy);
-        return countForBuy;
+        try {
+            System.out.println("\n" + INPUT_LOTTO_COUNT_FOR_MANUAL_MESSAGE);
+            int countForBuy = Integer.parseInt(scanner.nextLine());
+            CountForBuyValidator.validate(countForBuy);
+            return countForBuy;
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception);
+            return inputCountForBuy();
+        }
     }
 
-
     public static void printInputLottoNumbersMessage() {
-        OutputView.printNewLine();
-        System.out.println(INPUT_LOTTO_NUMBERS_MESSAGE);
+        System.out.println("\n" + INPUT_LOTTO_NUMBERS_MESSAGE);
     }
 
     public static String inputLottoNumbers() {
@@ -36,6 +38,7 @@ public class InputView {
     }
 
     public static String inputWinningLotto() {
+        OutputView.printNewLine();
         System.out.println(INPUT_WINNING_LOTTO_MESSAGE);
         return scanner.nextLine();
     }

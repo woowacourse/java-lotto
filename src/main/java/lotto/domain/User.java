@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class Lottos {
+public class User {
 
     private static final long LOTTO_PRICE = 1000;
 
@@ -14,7 +14,7 @@ public class Lottos {
     private int countByManual;
     private int countByAuto;
 
-    public Lottos(Money money) {
+    public User(Money money) {
         this.money = money;
         this.lottos = new ArrayList<>();
         this.countByManual = 0;
@@ -23,7 +23,7 @@ public class Lottos {
 
     public void buyLottoByManual(Lotto lotto) {
         lottos.add(lotto);
-        money.minusPrice(LOTTO_PRICE);
+        money.spendMoney(LOTTO_PRICE);
         countByManual++;
     }
 
@@ -32,8 +32,12 @@ public class Lottos {
         IntStream.range(0, totalLottoCount)
                 .mapToObj(i -> Lotto.generateLottoByAuto())
                 .forEach(lottos::add);
-        money.minusPrice(totalLottoCount * LOTTO_PRICE);
+        money.spendMoney(totalLottoCount * LOTTO_PRICE);
         countByAuto += totalLottoCount;
+    }
+
+    public Money getMoney() {
+        return money;
     }
 
     public List<Lotto> getLottos() {
