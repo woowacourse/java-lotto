@@ -2,19 +2,22 @@ package lotto.domain;
 
 import java.util.Map;
 
-import lotto.utils.RandomLottoNumbersGenerator;
+import lotto.utils.LottoNumbersGenerator;
 
 public class Lotto {
     private final Amount amount;
     private final Tickets tickets;
 
-    public Lotto(int amount) {
+    public Lotto(int amount, LottoNumbersGenerator lottoNumbersGenerator) {
         this.amount = new Amount(amount);
-        this.tickets = Tickets.of(getTicketCount(), new RandomLottoNumbersGenerator());
+        this.tickets = Tickets.of(getAmountDividedByLottoPrice(), lottoNumbersGenerator);
     }
 
-    public int getTicketCount() {
+    private int getAmountDividedByLottoPrice() {
         return amount.getAmountDividedByLottoPrice();
+    }
+    public int getTicketCount() {
+        return tickets.getTicketCount();
     }
 
     public Map<Rank, Integer> getResult(WinTicket winTicket) {

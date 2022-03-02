@@ -6,6 +6,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Ticket;
 import lotto.domain.WinTicket;
+import lotto.utils.RandomLottoNumbersGenerator;
 import lotto.utils.WinTicketGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -20,7 +21,7 @@ public class Controller {
 
     private Lotto requestAmountForLotto() {
         try {
-            return new Lotto(InputView.requestAmount());
+            return new Lotto(InputView.requestAmount(), new RandomLottoNumbersGenerator());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return requestAmountForLotto();

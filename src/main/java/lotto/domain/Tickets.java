@@ -52,4 +52,8 @@ public class Tickets {
             .sum();
         return Math.floor((amount.getYield(totalAmount) * 100))/ 100.0;
     }
+
+    public int getTicketCount() {
+        return tickets.size();
+    }
 }
