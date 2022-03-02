@@ -6,7 +6,7 @@ import lotto.domain.user.PurchaseLottoCount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class MoneyController {
+public class userController {
 
     public Money inputMoney() {
         try {

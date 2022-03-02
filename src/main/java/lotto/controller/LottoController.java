@@ -77,12 +77,12 @@ public class LottoController {
     }
 
     public ManualLottos inputManualLotto(final int purchaseLottoCount) {
-        try{
+        try {
             ManualLottos manualLotto = new ManualLottos();
             OutputView.printManualLotto();
             addManualLotto(purchaseLottoCount, manualLotto);
             return manualLotto;
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputManualLotto(purchaseLottoCount);
         }

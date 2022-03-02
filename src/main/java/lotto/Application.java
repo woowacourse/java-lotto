@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.controller.MoneyController;
+import lotto.controller.userController;
 import lotto.domain.lotto.LottoWinningNumbers;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.ManualLottos;
@@ -12,11 +12,11 @@ import lotto.domain.user.PurchaseLottoCount;
 public class Application {
 
     public static void main(final String... args) {
-        MoneyController moneyController = new MoneyController();
+        userController userController = new userController();
         LottoController lottoController = new LottoController();
 
-        Money money = moneyController.inputMoney();
-        PurchaseLottoCount purchaseLottoCount = moneyController.inputPurchaseLottoCount(money.getCount());
+        Money money = userController.inputMoney();
+        PurchaseLottoCount purchaseLottoCount = userController.inputPurchaseLottoCount(money.getCount());
         ManualLottos manualLotto = lottoController.inputManualLotto(purchaseLottoCount.getPurchaseLottoCount());
 
         Lottos lottos = lottoController.inputLottoMoney(money.getAutoMoney(purchaseLottoCount.getPurchaseLottoCount()));
@@ -28,7 +28,7 @@ public class Application {
         LottoResult lottoResult = lottoController.calculateRanks(lottos, lottoWinningNumbers);
         lottoController.printWinningResult(lottoResult);
 
-        double profit = moneyController.calculateProfit(money, lottoResult);
-        moneyController.printProfit(profit);
+        double profit = userController.calculateProfit(money, lottoResult);
+        userController.printProfit(profit);
     }
 }
