@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import domain.Ball;
 import domain.Ticket;
 import domain.TicketCounter;
 import domain.TicketMachine;
@@ -34,6 +35,24 @@ public class ImmutableObjectTest {
 		numbers.add(8);
 
 		assertThat(numbers.size()).isEqualTo(ticket.getBalls().size() + 2);
+	}
+
+	@DisplayName("Ticket getter()로 꺼냈을 때 불변이 지켜지는지 테스트")
+	@Test
+	void ticketGetterImmutable() {
+		List<Integer> numbers = new ArrayList<>();
+		numbers.add(1);
+		numbers.add(2);
+		numbers.add(3);
+		numbers.add(4);
+		numbers.add(5);
+		numbers.add(6);
+
+		Ticket ticket = new Ticket(numbers);
+		List<Ball> balls = ticket.getBalls();
+
+		assertThatThrownBy(() -> balls.add(new Ball(7)))
+			.isInstanceOf(UnsupportedOperationException.class);
 	}
 
 	@DisplayName("Tickets 불변 객체 테스트")
