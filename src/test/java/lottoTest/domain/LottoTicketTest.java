@@ -1,6 +1,7 @@
 package lottoTest.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,12 +11,28 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 @SuppressWarnings("NonAsciiCharacters")
 class LottoTicketTest {
+
+    @Test
+    void 로또의_번호가_6개가_아닌_경우_테스트() {
+        assertThatThrownBy(() -> new LottoTicket(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5))))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("로또 번호의 개수는")
+                .hasMessageContaining("개 이어야 합니다.");
+    }
+
+    @Test
+    void 로또의_번호가_중복된_경우_테스트() {
+        assertThatThrownBy(() -> new LottoTicket(toLottoNumbers(Arrays.asList(1, 1, 2, 3, 4, 5))))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("로또 번호가 중복되었습니다.");
+    }
 
     @ParameterizedTest(name = "[{index}] 로또 등수: {3}")
     @MethodSource("provideLottoData")
