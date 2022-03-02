@@ -58,6 +58,6 @@ public class Lotto {
     }
 
     public List<Number> getLotto() {
-        return Collections.unmodifiableList(lotto);
+        return new ArrayList<>(lotto);
     }
 }

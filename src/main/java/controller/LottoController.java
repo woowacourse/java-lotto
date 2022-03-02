@@ -41,11 +41,13 @@ public class LottoController {
         outputView.printRequestManualLottoCount();
         LottoQuantity lottoQuantity = LottoQuantity.of(inputView.requestManualLottoQuantity(), money);
 
+        outputView.printRequestManualLottoNumbers();
         List<List<Integer>> manualLottoNumbers = inputView.requestManualLottoNumbers(lottoQuantity.getManualLotto());
         LottoTicket lottoTicket = new LottoTicket(
                 lottoFactory.generateLottoTicket(manualLottoNumbers, lottoQuantity.getAutoLotto()));
 
-        outputView.printPurchasedLottoTicket(lottoTicket.getLottoTicket());
+        outputView.printPurchasedLottoTicket(lottoQuantity.getManualLotto(), lottoQuantity.getAutoLotto(),
+                lottoTicket.getLottoTicket());
         return lottoTicket;
     }
 
