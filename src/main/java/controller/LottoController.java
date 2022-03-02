@@ -16,7 +16,6 @@ import view.ResultView;
 import vo.Wallet;
 
 public class LottoController {
-
     private static final int NO_AUTO_QUANTITY = 0;
 
     public void start() {

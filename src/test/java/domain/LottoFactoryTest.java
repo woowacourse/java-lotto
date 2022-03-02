@@ -1,6 +1,7 @@
 package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.stream.IntStream;
@@ -29,9 +30,12 @@ class LottoFactoryTest {
     @Test
     @DisplayName("멀티스레드를 활용한 로또 생성 대응")
     void createAutoLottosWithMultiThread() {
-        IntStream.rangeClosed(0, 100)
-                .parallel()
-                .forEach(i -> LottoFactory.createAutoLottosByQuantity(10));
+        assertThatCode(
+                () -> IntStream.rangeClosed(0, 100)
+                        .parallel()
+                        .forEach(i -> LottoFactory.createAutoLottosByQuantity(10)))
+                .doesNotThrowAnyException();
+
     }
 
     @ParameterizedTest(name = "생성 시도한 수량 : {0}")
