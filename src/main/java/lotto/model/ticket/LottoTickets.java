@@ -8,7 +8,10 @@ import java.util.stream.IntStream;
 import lotto.model.money.Money;
 import lotto.model.result.LottoRank;
 import lotto.model.result.LottoRanks;
+<<<<<<< HEAD
 import lotto.model.ticket.number.LottoNumber;
+=======
+>>>>>>> injoon2019
 import lotto.model.utils.NumberGenerator;
 
 public class LottoTickets {
@@ -19,6 +22,7 @@ public class LottoTickets {
         this.tickets = new ArrayList<>(tickets);
     }
 
+<<<<<<< HEAD
     public void buyAutoTickets(NumberGenerator generator, Money money) {
         System.out.println(money.countBuyable());
         List<LottoTicket> tickets = IntStream.range(0, money.countBuyable())
@@ -37,6 +41,13 @@ public class LottoTickets {
             money.decreaseByUnit();
         }
         return new LottoTickets(lottoTickets);
+=======
+    public static LottoTickets buy(NumberGenerator generator, Money money) {
+        List<LottoTicket> tickets = IntStream.range(0, money.count())
+            .mapToObj(x -> LottoTicket.createSortedTicket(generator))
+            .collect(Collectors.toList());
+        return new LottoTickets(tickets);
+>>>>>>> injoon2019
     }
 
     public LottoRanks compareResult(WinningTicket winningTicket) {

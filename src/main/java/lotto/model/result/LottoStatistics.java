@@ -27,7 +27,11 @@ public class LottoStatistics {
         long sum = lottoRankCounter.entrySet().stream()
                 .mapToLong(calculateWinningPrize())
                 .sum();
+<<<<<<< HEAD
         return (double) sum / money.getOriginalAmount();
+=======
+        return (double) sum / money.getAmount();
+>>>>>>> injoon2019
     }
 
     private ToLongFunction<Entry<LottoRank, Long>> calculateWinningPrize() {
