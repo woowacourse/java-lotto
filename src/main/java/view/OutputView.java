@@ -9,7 +9,7 @@ import dto.RanksDto;
 
 public class OutputView {
 
-    public static final String PURCHASE_QUANTITY_FORMAT = "%s개를 구매했습니다.%n";
+    private static final String PURCHASE_QUANTITY_FORMAT = "%s개를 구매했습니다.%n";
     private static final int SECOND_RANK = 2;
     private static final String RESULT_MESSAGE = "당첨 통계";
     private static final String DELIMITER = "---------";
