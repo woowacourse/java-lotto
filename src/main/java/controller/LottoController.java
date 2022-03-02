@@ -2,11 +2,13 @@ package controller;
 
 import domain.Lotto;
 import domain.LottoFactory;
+import domain.LottoQuantity;
 import domain.LottoTicket;
 import domain.Money;
 import domain.Number;
 import domain.WinningNumbers;
 import domain.WinningResult;
+import java.util.List;
 import view.InputView;
 import view.OutputView;
 
@@ -26,7 +28,7 @@ public class LottoController {
         Money money = insertMoney();
         LottoTicket lottoTicket = buyLottoTicket(money);
         WinningNumbers winningNumbers = generateWinningNumbers();
-        WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningCountByRank(winningNumbers));
+        WinningResult winningResult = new WinningResult(lottoTicket.findWinningCountByRank(winningNumbers));
         announceWinningResult(money, winningResult);
     }
 
@@ -36,8 +38,16 @@ public class LottoController {
     }
 
     private LottoTicket buyLottoTicket(Money money) {
-        LottoTicket lottoTicket = new LottoTicket(lottoFactory.generateLottoTicket(money));
-        outputView.printPurchasedLottoTicket(lottoTicket.getLottoTicket());
+        outputView.printRequestManualLottoCount();
+        LottoQuantity lottoQuantity = LottoQuantity.of(inputView.requestManualLottoQuantity(), money);
+
+        outputView.printRequestManualLottoNumbers();
+        List<List<Integer>> manualLottoNumbers = inputView.requestManualLottoNumbers(lottoQuantity.getManualLotto());
+        LottoTicket lottoTicket = new LottoTicket(
+                lottoFactory.generateLottoTicket(manualLottoNumbers, lottoQuantity.getAutoLotto()));
+
+        outputView.printPurchasedLottoTicket(lottoQuantity.getManualLotto(), lottoQuantity.getAutoLotto(),
+                lottoTicket.getLottoTicket());
         return lottoTicket;
     }
 

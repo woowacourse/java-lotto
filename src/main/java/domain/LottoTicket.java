@@ -16,14 +16,14 @@ public class LottoTicket {
         this.lottoTicket = new ArrayList<>(lottoTicket);
     }
 
-    public EnumMap<LottoRank, Integer> checkLottoTicketWinningCountByRank(WinningNumbers winningNumbers) {
+    public EnumMap<LottoRank, Integer> findWinningCountByRank(WinningNumbers winningNumbers) {
         EnumMap<LottoRank, Integer> winningCountByRank = initializeWinningCount();
         Lotto winningNumber = winningNumbers.getWinningNumbers();
         Number bonusNumber = winningNumbers.getBonusNumber();
 
         for (Lotto lotto : lottoTicket) {
-            LottoRank rank = lotto.checkWinningResult(winningNumber, bonusNumber);
-            addWinningResultCount(winningCountByRank, rank);
+            LottoRank rank = lotto.findRank(winningNumber, bonusNumber);
+            addWinningCountByRank(winningCountByRank, rank);
         }
         return winningCountByRank;
     }
@@ -38,7 +38,7 @@ public class LottoTicket {
         ));
     }
 
-    private static void addWinningResultCount(EnumMap<LottoRank, Integer> winningResult, LottoRank lottoRank) {
+    private static void addWinningCountByRank(EnumMap<LottoRank, Integer> winningResult, LottoRank lottoRank) {
         if (lottoRank == LottoRank.FAIL) {
             return;
         }

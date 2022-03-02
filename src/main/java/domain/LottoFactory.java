@@ -3,22 +3,31 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoFactory {
 
-    private static final int MIN_PURCHASE_COUNT = 1;
-
-    public List<Lotto> generateLottoTicket(Money money) {
-        List<Lotto> lottoTicket = new ArrayList<>();
-        int purchaseCount = MIN_PURCHASE_COUNT;
-        while (money.isPossibleToPurchase(purchaseCount)) {
-            lottoTicket.add(generateLotto());
-            ++purchaseCount;
-        }
+    public List<Lotto> generateLottoTicket(List<List<Integer>> manualLottoNumbers, int autoLottoQuantity) {
+        List<Lotto> lottoTicket = new ArrayList<>(generateManualLottoTicket(manualLottoNumbers));
+        lottoTicket.addAll(generateAutoLottoTicket(autoLottoQuantity));
         return lottoTicket;
     }
 
-    private Lotto generateLotto() {
+    private List<Lotto> generateManualLottoTicket(List<List<Integer>> manualLottoNumbers) {
+        return manualLottoNumbers.stream()
+                .map(Lotto::from)
+                .collect(Collectors.toList());
+    }
+
+    private List<Lotto> generateAutoLottoTicket(int autoLottoQuantity) {
+        List<Lotto> autoLottoTicket = new ArrayList<>();
+        while (autoLottoQuantity-- > 0) {
+            autoLottoTicket.add(generateLottoAutomatically());
+        }
+        return autoLottoTicket;
+    }
+
+    private Lotto generateLottoAutomatically() {
         List<Number> numbers = new ArrayList<>(Number.values());
         Collections.shuffle(numbers);
         return new Lotto(new ArrayList<>(pickLottoNumbers(numbers)));
