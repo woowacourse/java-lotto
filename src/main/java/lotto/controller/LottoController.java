@@ -1,9 +1,15 @@
 package lotto.controller;
 
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import lotto.model.Lotto;
+import lotto.model.LottoCount;
 import lotto.model.LottoMachine;
+import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
 import lotto.model.generator.LottoGenerator;
@@ -15,6 +21,7 @@ import lotto.view.ResultView;
 public class LottoController {
 
     private static final String NOT_NUMBER_ERROR_MESSAGE = "[ERROR] 문자가 입력되었습니다.";
+
     private static final String NUMBER_REGEX = "\\d+";
 
     private LottoGenerator lottoGenerator;
@@ -24,8 +31,11 @@ public class LottoController {
     }
 
     public void run() {
-        LottoMachine lottoMachine = new LottoMachine(lottoGenerator, validateMoney(InputView.inputMoney()));
-        ResultView.printBuyingLottosResult(lottoMachine.getLottos());
+        Money money = validateMoney(InputView.inputMoney());
+        LottoCount lottoCount = new LottoCount(validateNumber(InputView.inputManualLottoCount()), money);
+        Lottos manualLottos = inputManualLottos(lottoCount.getManualLottoCount());
+        LottoMachine lottoMachine = new LottoMachine(lottoGenerator, money, lottoCount, manualLottos);
+        ResultView.printBuyingLottosResult(lottoCount, lottoMachine.getLottos());
         WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
                 InputView.inputBonusNumber());
         lottoMachine.calculateResult(winningLotto);
@@ -39,14 +49,36 @@ public class LottoController {
         return new Money(Integer.parseInt(money));
     }
 
+    private int validateNumber(String number) {
+        try {
+            String trimNumber = number.trim();
+            return Integer.parseInt(trimNumber);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(NOT_NUMBER_ERROR_MESSAGE);
+        }
+    }
+
+    private Lottos inputManualLottos(int count) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            manualLottos.add(makeLotto(InputView.inputManualLottoNumbers()));
+        }
+        return new Lottos(manualLottos);
+    }
+
+    private Lotto makeLotto(String numbers) {
+        LottoNumbers lottoNumbers = splitNumbers(numbers);
+        return new Lotto(lottoNumbers);
+    }
+
     private WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) {
-        LottoNumbers lottoNumbers = splitWinningNumbers(winningNumbers);
+        LottoNumbers lottoNumbers = splitNumbers(winningNumbers);
         LottoNumber lottoBonusNumber = new LottoNumber(toIntBonusNumber(bonusNumber));
         return new WinningLotto(lottoNumbers, lottoBonusNumber);
     }
 
-    private LottoNumbers splitWinningNumbers(String winningNumbers) {
-        String[] splitNumbers = validateLottoNumbers(winningNumbers);
+    private LottoNumbers splitNumbers(String numbers) {
+        String[] splitNumbers = validateLottoNumbers(numbers);
         return new LottoNumbers(Arrays.stream(splitNumbers)
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
@@ -61,15 +93,6 @@ public class LottoController {
             validateNumber(number);
         }
         return trimLottoNumbers(splitNumbers);
-    }
-
-    private int validateNumber(String number) {
-        try {
-            String trimNumber = number.trim();
-            return Integer.parseInt(trimNumber);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_NUMBER_ERROR_MESSAGE);
-        }
     }
 
     private String[] trimLottoNumbers(String[] numbers) {

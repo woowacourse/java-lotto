@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.stream.Collectors;
 import lotto.model.Lotto;
+import lotto.model.LottoCount;
 import lotto.model.LottoMachine;
 import lotto.model.Lottos;
 import lotto.model.Rank;
@@ -20,13 +21,14 @@ public class ResultView {
     private static final String START_REVENUE_MESSAGE = "총 수익률은 ";
     private static final String END_REVENUE_MESSAGE = "입니다.";
 
-    public static void printBuyingLottosResult(final Lottos lottos) {
-        printLottoCount(lottos);
+    public static void printBuyingLottosResult(final LottoCount lottoCount, final Lottos lottos) {
+        printLottoCount(lottoCount);
         printBuyingLottos(lottos);
     }
 
-    private static void printLottoCount(final Lottos lottos) {
-        System.out.println(lottos.size() + BUY_COUNT_MESSAGE);
+    private static void printLottoCount(final LottoCount lottoCount) {
+        System.out.println("수동으로 " + lottoCount.getManualLottoCount() + "개, " + "자동으로 " + lottoCount.getAutoLottoCount()
+                + BUY_COUNT_MESSAGE);
     }
 
     private static void printBuyingLottos(final Lottos lottos) {
@@ -73,6 +75,4 @@ public class ResultView {
         }
         return BONUS_BALL_NOT_CORRESPOND_MESSAGE;
     }
-
-
 }

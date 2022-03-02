@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import lotto.model.Lotto;
+import lotto.model.LottoCount;
 import lotto.model.LottoMachine;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
 import lotto.model.generator.CustomLottoGenerator;
-import lotto.model.generator.LottoGenerator;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 import lotto.view.ResultView;
@@ -28,20 +28,19 @@ public class LottoControllerTest {
 
     public void run() {
         Money money = new Money(3000);
-        Lottos lottos = makeLottos();
-        ResultView.printBuyingLottosResult(lottos);
+        LottoCount lottoCount = new LottoCount(2, money);
+        Lottos manualLottos = makeLottos();
+        LottoMachine lottoMachine = new LottoMachine(new CustomLottoGenerator(), money, lottoCount, manualLottos);
+        ResultView.printBuyingLottosResult(lottoCount, lottoMachine.getLottos());
         WinningLotto winningLotto = makeWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7);
-        LottoGenerator lottoGenerator = new CustomLottoGenerator();
-        LottoMachine lottoMachine = new LottoMachine(lottoGenerator, money);
         lottoMachine.calculateResult(winningLotto);
         ResultView.printTotalRankResult(lottoMachine);
     }
 
     private Lottos makeLottos() {
-        Lotto lotto = makeLotto(new int[]{1, 2, 3, 4, 5, 6}); //1등
-        Lotto lotto1 = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
-        Lotto lotto2 = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
-        return new Lottos(Arrays.asList(lotto, lotto1, lotto2));
+        Lotto first = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
+        Lotto second = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
+        return new Lottos(Arrays.asList(first, second));
     }
 
     private Lotto makeLotto(int[] numbers) {

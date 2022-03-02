@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -29,6 +30,13 @@ public class Lottos {
         Map<Rank, Integer> map = new LinkedHashMap<>();
         Arrays.stream(Rank.values()).forEach(rank -> map.put(rank, 0));
         return map;
+    }
+
+    public static Lottos combineLottos(Lottos firstLottos, Lottos secondLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(firstLottos.lottos);
+        lottos.addAll(secondLottos.lottos);
+        return new Lottos(lottos);
     }
 
     public List<Lotto> getLottos() {
