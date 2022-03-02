@@ -16,6 +16,14 @@ public class Numbers {
         this.numbers = numbers;
     }
 
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return numbers;
+    }
+
     private void checkNumbersLength(List<LottoNumber> numbers) {
         if (numbers.size() != LENGTH_STANDARD) {
             throw new IllegalArgumentException(NUMBERS_LENGTH_ONLY_SIX);

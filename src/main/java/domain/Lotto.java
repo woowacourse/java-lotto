@@ -5,16 +5,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Lotto extends Numbers {
+public class Lotto {
 
     private static final int LOTTO_START = 0;
     private static final int LOTTO_END = 6;
 
-    private final List<LottoNumber> numbers;
+    private final Numbers numbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        super(numbers);
-        this.numbers = numbers;
+        this.numbers = new Numbers(numbers);
     }
 
     public static Lotto generateNumber() {
@@ -26,7 +25,7 @@ public class Lotto extends Numbers {
     }
 
     public int match(WinningNumber winningNumber) {
-        return (int) numbers.stream().filter(winningNumber::contains).count();
+        return (int) numbers.getNumbers().stream().filter(winningNumber::contains).count();
     }
 
     public boolean hasBonusBall(LottoNumber bonusBall) {
@@ -35,7 +34,7 @@ public class Lotto extends Numbers {
 
     @Override
     public String toString() {
-        String lotto = numbers.stream().map(number -> number.toString())
+        String lotto = numbers.getNumbers().stream().map(number -> number.toString())
             .collect(Collectors.joining(", "));
         return "[" + lotto + "]";
     }

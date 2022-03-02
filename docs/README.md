@@ -65,7 +65,7 @@
   2. Statistics - getWinningStatistics()
 
 ### 3차 피드백 기반 추가 변경사항
-- [ ] 중복 로직을 제거하기 위해서는 상속보다 `조합` [링크](https://tecoble.techcourse.co.kr/post/2020-05-18-inheritance-vs-composition/)
+- [x] 중복 로직을 제거하기 위해서는 상속보다 `조합` [링크](https://tecoble.techcourse.co.kr/post/2020-05-18-inheritance-vs-composition/)
 - [x] 클래스 메서드에 인스턴스로의 접근
   - `LottosTest`의 중복된 코드 제거 
 - [ ] 생성자, 팩토리 메서드가 외부로 노출되는 것이 합당한가에 대한 고민
@@ -162,6 +162,18 @@
    - Integer 클래스 내부에는 IntegerCache 클래스로 -128~127 구간 사이의 Integer 인스턴스를 미리 생성하여 캐싱 
    - Integer `valueOf()`는 인자로 전달 받은 값이 캐시에 있다면 꺼내주고 없다면 생성한다.
 
+### 3차 피드백 학습
+1. 상속 vs. 조합
+   1. 상속의 장점
+      1. 코드를 재사용함으로써 중복을 줄일 수 있다.
+      2. 변화에 대한 유연성 및 확장성이 증가한다.
+      3. 개발 시간의 단축
+   2. 상속의 단점
+      1. 캡슐화 깨짐
+         - 캡슐화 : 외부에서 특정 속성이나 메서드를 사용할 수 없도록 숨겨놓는 것
+         - 상위 클래스의 구현이 하위 클래스에게 노출되는 상속은 캡슐화를 깨트림.
+   3. 조합 : 기존 클래스가 새로운 클래스의 구성요소로 쓰인다.
+      - 새로운 클래스를 만들고 Private 필드로 기존 클래스의 인스턴스를 참조 
 ### 참조
 1) Date vs. LocalDateTime(1) : https://jeong-pro.tistory.com/163
    - Date vs. LocalDateTime(2) : https://yhmane.tistory.com/121
