@@ -30,8 +30,9 @@ public class LottoController {
 
 	private void makeLottos() {
 		try {
-			LottoCount lottoCount = new LottoCount(inputView.inputMoney());
-			storeMoneyInRateOfReturn(lottoCount);
+			String money = inputView.inputMoney();
+			LottoCount lottoCount = new LottoCount(money);
+			storeMoneyInRateOfReturn(Integer.parseInt(money));
 			lottoStorage = new LottoStorage(lottoCount);
 			outputView.printLottos(lottoStorage.getLottoStorageDTO());
 		} catch (Exception e) {
@@ -40,8 +41,8 @@ public class LottoController {
 		}
 	}
 
-	private void storeMoneyInRateOfReturn(LottoCount lottoCount) {
-		rateOfReturn = new RateOfReturn(lottoCount);
+	private void storeMoneyInRateOfReturn(int money) {
+		rateOfReturn = new RateOfReturn(money);
 	}
 
 	private void storeWinningNumber() {

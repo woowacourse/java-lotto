@@ -4,16 +4,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.lotto.LottoCount;
-
 public class RateOfReturn {
-	private static final int UNIT = 1000;
 	private final int money;
 	private int sumMoneyOfReturns;
 	private Map<Rank, Integer> countOfResult;
 
-	public RateOfReturn(LottoCount lottoCount) {
-		this.money = lottoCount.getCount() * UNIT;
+	public RateOfReturn(int money) {
+		this.money = money;
 		this.sumMoneyOfReturns = 0;
 		countOfResult = new HashMap<>();
 	}
