@@ -2,9 +2,8 @@ package lotto.controller;
 
 import java.util.stream.IntStream;
 import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.RankCount;
+import lotto.domain.User;
+import lotto.domain.RankStatistic;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -12,30 +11,29 @@ import lotto.view.OutputView;
 public class Controller {
 
     public void run() {
-        Lottos lottos = new Lottos();
-        Money money = inputMoney();
-        buyLottosByManual(InputView.inputCountForBuy(), lottos, money);
-        buyAllLottosByAuto(lottos, money);
-        OutputView.printLottos(lottos);
-        printWinningStatistic(lottos,money);
+        User user = generateUserByString();
+        buyLottosByManual(user, InputView.inputCountForBuy());
+        buyAllLottosByAuto(user);
+        OutputView.printLottos(user);
+        OutputView.printLottoResult(user, new RankStatistic(user, inputWinningNumbers()));
     }
 
-    private Money inputMoney() {
+    private User generateUserByString() {
         try {
-            return Money.generateMoneyByString(InputView.inputMoney());
+            return User.generateUserByString(InputView.inputMoney());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
-            return inputMoney();
+            return generateUserByString();
         }
     }
 
-    private void buyLottosByManual(int countForBuy, Lottos lottos, Money money) {
+    private void buyLottosByManual(User user, int countForBuy) {
         if (countForBuy == 0) {
             return;
         }
         try {
             InputView.printInputLottoNumbersMessage();
-            IntStream.range(0, countForBuy).forEach(integer -> lottos.buyLottoByManual(inputLotto(), money));
+            IntStream.range(0, countForBuy).forEach(integer -> user.buyLottoByManual(inputLotto()));
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
         }
@@ -50,18 +48,11 @@ public class Controller {
         }
     }
 
-    private void buyAllLottosByAuto(Lottos lottos, Money money) {
+    private void buyAllLottosByAuto(User user) {
         try {
-            lottos.buyAllLottosByAuto(money);
+            user.buyAllLottosByAuto();
         } catch (IllegalArgumentException exception) {
         }
-    }
-
-    private void printWinningStatistic(Lottos lottos, Money money) {
-        WinningNumbers winningNumbers = inputWinningNumbers();
-        RankCount rankCount = new RankCount(lottos, winningNumbers);
-        double profitRate = money.getProfitRate(rankCount.getTotalPrize());
-        OutputView.printWinningStatistic(rankCount, profitRate);
     }
 
     private WinningNumbers inputWinningNumbers() {

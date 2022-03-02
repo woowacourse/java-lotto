@@ -1,9 +1,9 @@
 package lotto.view;
 
 import java.util.Arrays;
-import lotto.domain.Lottos;
+import lotto.domain.User;
 import lotto.domain.Rank;
-import lotto.domain.RankCount;
+import lotto.domain.RankStatistic;
 
 public class OutputView {
 
@@ -16,16 +16,21 @@ public class OutputView {
     private static final String PROFIT_RATE_MASSAGE_FORMAT = "총 수익률은 %s입니다.\n";
     private static final String ERROR_MESSAGE_PREFIX = "[ERROR]";
 
-    public static void printLottos(Lottos lottos) {
+    public static void printLottos(User user) {
         printNewLine();
         System.out.printf(TOTAL_LOTTO_COUNT_MESSAGE_FORMAT,
-                lottos.getCountOfManualLotto(),
-                lottos.getCountOfAutoLotto());
-        lottos.getLottos().forEach(lotto -> System.out.printf(EACH_LOTTO_MESSAGE_FORMAT, lotto.toString()));
+                user.getCountOfManualLotto(),
+                user.getCountOfAutoLotto());
+        user.getLottos().forEach(lotto -> System.out.printf(EACH_LOTTO_MESSAGE_FORMAT, lotto.toString()));
     }
 
-    public static void printWinningStatistic(RankCount rankCount, double profitRate) {
+    public static void printLottoResult(User user, RankStatistic rankStatistic) {
         printNewLine();
+        printWinningStatistic(rankStatistic);
+        printProfitRate(user, rankStatistic);
+    }
+
+    private static void printWinningStatistic(RankStatistic rankStatistic) {
         System.out.println(WINNING_STATISTIC_TITLE);
         Arrays.stream(Rank.values())
                 .filter(rank -> !rank.equals(Rank.RANK_OUT))
@@ -34,9 +39,8 @@ public class OutputView {
                                 rank.getWinningLottoMatchCount(),
                                 getBonusNumberMessage(rank),
                                 rank.getPrize(),
-                                rankCount.getCount(rank))
+                                rankStatistic.getCount(rank))
                 );
-        System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), toStringProfitRateUntilSecondDecimal(profitRate));
     }
 
     private static String getBonusNumberMessage(Rank rank) {
@@ -44,6 +48,11 @@ public class OutputView {
             return BONUS_NUMBER_MATCH_MESSAGE;
         }
         return BONUS_NUMBER_MISMATCH_MESSAGE;
+    }
+
+    private static void printProfitRate(User user, RankStatistic rankStatistic) {
+        double profitRate = user.getProfitRate(rankStatistic.getTotalPrize());
+        System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), toStringProfitRateUntilSecondDecimal(profitRate));
     }
 
     public static String toStringProfitRateUntilSecondDecimal(double profitRate) {

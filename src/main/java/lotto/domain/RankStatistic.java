@@ -4,17 +4,17 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class RankCount {
+public class RankStatistic {
 
     private final Map<Rank, Integer> rankCount;
 
-    public RankCount(Lottos lottos, WinningNumbers winningNumbers) {
-        this.rankCount = calculateRankCount(lottos, winningNumbers);
+    public RankStatistic(User user, WinningNumbers winningNumbers) {
+        this.rankCount = calculateRankCount(user, winningNumbers);
     }
 
-    private EnumMap<Rank, Integer> calculateRankCount(Lottos lottos, WinningNumbers winningNumbers) {
+    private EnumMap<Rank, Integer> calculateRankCount(User user, WinningNumbers winningNumbers) {
         EnumMap<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
-        lottos.getLottos().forEach(lotto -> increaseCount(rankCount, winningNumbers.getRankOf(lotto)));
+        user.getLottos().forEach(lotto -> increaseCount(rankCount, winningNumbers.getRankOf(lotto)));
         return rankCount;
     }
 
