@@ -31,6 +31,7 @@ public class UserCountTest {
         int totalCount = 14;
         int manualCount = 12;
         UserCount userCount = new UserCount(totalCount, manualCount);
+
         assertEquals(userCount.getAutoCount(), 2);
     }
 }

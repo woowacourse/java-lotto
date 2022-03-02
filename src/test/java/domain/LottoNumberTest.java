@@ -11,6 +11,7 @@ public class LottoNumberTest {
     @DisplayName("로또 번호 정상 생성 테스트")
     public void createLottoNumberTest_true() {
         LottoNumber lottoNumber = LottoNumber.valueOf(10);
+
         assertEquals(lottoNumber.toString(), "10");
     }
 
