@@ -20,7 +20,8 @@ public class WinningAnalyzeTest {
 		setUpTicketsAndWinningNumber.setUp();
 
 		winningAnalyze
-			= new WinningAnalyze(setUpTicketsAndWinningNumber.getTickets(), setUpTicketsAndWinningNumber.getWinningNumber());
+			= new WinningAnalyze(setUpTicketsAndWinningNumber.getTickets(),
+			setUpTicketsAndWinningNumber.getWinningNumber());
 
 		dto = winningAnalyze.analyze();
 	}
