@@ -6,19 +6,12 @@ import lotto.model.result.LottoRank;
 import lotto.model.result.LottoStatistics;
 import lotto.model.ticket.LottoTicket;
 import lotto.model.ticket.LottoTickets;
-<<<<<<< HEAD
 import lotto.model.ticket.buy.ManualBuyCount;
-=======
->>>>>>> injoon2019
 import lotto.model.ticket.number.LottoNumber;
 
 public class OutputView {
 
-<<<<<<< HEAD
     public static final String BUY_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d 개를 구매했습니다.\n";
-=======
-    public static final String BUY_COUNT_MESSAGE = "%d개를 구매했습니다.\n";
->>>>>>> injoon2019
     public static final String MATCH_COUNT_MESSAGE = "%d개 일치 (%d원)- %d개%n";
     public static final String EARNING_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
     public static final String OUTPUT_TITLE = "당첨 통계";
@@ -28,13 +21,9 @@ public class OutputView {
     private OutputView() {
     }
 
-<<<<<<< HEAD
+
     public static void outputTickets(ManualBuyCount manualBuyCount, LottoTickets lottoTickets) {
         System.out.printf(BUY_COUNT_MESSAGE, manualBuyCount.getValue(), lottoTickets.size() - manualBuyCount.getValue());
-=======
-    public static void outputTickets(LottoTickets lottoTickets) {
-        System.out.printf(BUY_COUNT_MESSAGE, lottoTickets.size());
->>>>>>> injoon2019
         List<LottoTicket> tickets = lottoTickets.getTickets();
         for (LottoTicket ticket : tickets) {
             outputTicket(ticket);
