@@ -5,7 +5,7 @@
 > 입력한 금액에 따라서 로또 번호를 자동으로 생성하고, 당첨 결과를 알려주는 프로그램
 
 <details>
-<summary>포키와 작성한 기능 요구사항</summary>
+<summary>1단계 미션 - 포키와 작성한 기능 요구사항</summary>
 <div markdown="1">
 
 ### 목표
@@ -196,20 +196,52 @@
 <div markdow="1">
 
 1. `map` 을 사용하지 않고 `WinningNumber` 자체가 중복인지 확인하기
-   - [ ] Number equals 테스트
-   - [ ] WinningNumber equals 테스트
-   - [ ] getDistinctCount() 에서 map 부분 지우고, 기존의 테스트 진행
+   - [X] Number equals 테스트
+   - [X] WinningNumber equals 테스트
+   - [X] getDistinctCount() 에서 map 부분 지우고, 기존의 테스트 진행
    - [ ] 성공하면 getNumber() 삭제
 2. 테스트에서 for문 사용하지 않고 정확한 값 넣어주기
-   - [ ] WinningNumbersTest 에서 @BeforeEach의 for문 삭제
+   - [X] WinningNumbersTest 에서 @BeforeEach의 for문 삭제
 3. 테스트마다 새로운 given 값이 필요하다면 각각 새로 만들기
-   - [ ] WinningNumbersTest 에서 테스트마다 새로운 given 값 작성
+   - [X] WinningNumbersTest 에서 테스트마다 새로운 given 값 작성
 4. equals() 오버라이딩
-   - [ ] 인텔리제이의 자동완성 함수 내용으로 사용하기 (WinningNumber)
+   - [X] 인텔리제이의 자동완성 함수 내용으로 사용하기 (WinningNumber)
 5. Number의 사용 범위
    - [ ] Lotto 의 Integer 대신 Number 를 사용해도 될까?
 6. Prize의 기본 값을 이용해 getPrize() 역할하기
-   - [ ] getPrizeByCount() 함수에서 필터로 prize.bonus 와 matchResult.isBonus() 값이 같은지 확인
+   - [X] getPrizeByCount() 함수에서 필터로 prize.bonus 와 matchResult.isBonus() 값이 같은지 확인
+</div>
+</details>
+
+<details>
+<summary>2단계 미션 - 야호가 작성한 기능 요구사항</summary>
+<div markdow="1">
+
+### 절차에 따른 목록
+
+1. 수동으로 구매할 로또 수 입력받기
+   - [ ] 숫자로 입력해야 함
+   - [ ] 총 구매한 로또 수 보다 작아야 함
+   - [ ] 0 이상이어야 함
+2. 수동으로 구매할 로또 번호 입력받기
+   - [ ] 수동 구매 로또 수 만큼 입력받아야 함
+   - [ ] `, ` 로 구분되어 입력돼야 함
+   - [ ] 중복되는 숫자가 있으면 안됨
+   - [ ] 각 숫자는 1 이상 45 이하의 숫자여야 함
+   - [ ] 6개의 숫자로 이루어져야 함
+3. 수동 + 자동 생성된 로또 출력하기
+   - [ ] (수동 개수 + 자동 개수)가 구매한 개수와 같아야 함
+   - [ ] 수동과 자동 각각 몇개씩 구입했는지 출력해야 함
+
+### 리팩터링 방향
+
+1. 로또 숫자 하나하나를 LottoBall 로 취급
+   - [ ] LottoBall 은 1 이상 45 이하의 숫자
+2. Lotto 를 AutoLotto 와 ManualLotto 로 나누기
+   - [ ] Lotto 는 LottoBall 6개로 이루어져야 함
+   - [ ] Lotto 의 LottoBall 은 중복될 수 없음
+   - [ ] AutoLotto 와 ManualLotto 개수의 합이 총 구매한 로또 수와 같아야 함
+
 </div>
 </details>
 
