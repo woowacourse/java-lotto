@@ -1,4 +1,4 @@
-package domain;
+package domain.dto;
 
 import java.util.Set;
 

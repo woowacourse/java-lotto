@@ -1,8 +1,10 @@
 package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
+import domain.strategy.GenerateStrategy;
+import domain.strategy.LottoWinningPrizeStrategy;
+import domain.strategy.WinningPrizeStrategy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package domain;
+package domain.strategy;
 
 import java.util.Set;
 

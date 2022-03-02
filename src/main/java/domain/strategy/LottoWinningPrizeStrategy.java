@@ -1,5 +1,6 @@
-package domain;
+package domain.strategy;
 
+import domain.WinningPrize;
 import java.util.HashMap;
 import java.util.Map;
 

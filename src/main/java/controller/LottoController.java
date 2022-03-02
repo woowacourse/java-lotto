@@ -1,6 +1,6 @@
 package controller;
 
-import domain.GenerateStrategy;
+import domain.strategy.GenerateStrategy;
 import domain.LottoTicket;
 import domain.WinningResult;
 import java.util.List;
@@ -8,14 +8,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import domain.LottoWinningPrizeStrategy;
+import domain.strategy.LottoWinningPrizeStrategy;
 import domain.LottoGame;
-import domain.LottoNumberGenerateStrategy;
-import domain.LottoTicketDto;
+import domain.strategy.LottoNumberGenerateStrategy;
+import domain.dto.LottoTicketDto;
 import domain.LottoTickets;
 import domain.WinningPrize;
-import domain.WinningPrizeStrategy;
-import domain.WinningResultDto;
+import domain.strategy.WinningPrizeStrategy;
+import domain.dto.WinningResultDto;
 import view.InputView;
 import view.OutputView;
 

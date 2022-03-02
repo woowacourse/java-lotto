@@ -1,7 +1,9 @@
-package domain;
+package domain.strategy;
 
 import static domain.LottoNumber.*;
 
+import domain.LottoTicket;
+import domain.strategy.GenerateStrategy;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;

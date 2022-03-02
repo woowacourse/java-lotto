@@ -1,8 +1,11 @@
-package domain;
+package domain.strategy;
 
 import static domain.LottoNumber.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.LottoTicket;
+import domain.strategy.GenerateStrategy;
+import domain.strategy.LottoNumberGenerateStrategy;
 import java.util.Collections;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;

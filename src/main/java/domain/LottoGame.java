@@ -1,5 +1,7 @@
 package domain;
 
+import domain.strategy.GenerateStrategy;
+import domain.strategy.WinningPrizeStrategy;
 import java.util.List;
 import java.util.Set;
 

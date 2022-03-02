@@ -1,7 +1,9 @@
-package domain;
+package domain.strategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.WinningPrize;
+import domain.strategy.LottoWinningPrizeStrategy;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +29,7 @@ class LottoWinningPrizeStrategyTest {
         put(WinningPrize.FIFTH, 3);
     }};
 
-    private final LottoWinningPrizeStrategy LottoWinningPrizeStrategy
+    private final domain.strategy.LottoWinningPrizeStrategy LottoWinningPrizeStrategy
             = new LottoWinningPrizeStrategy();
 
     @Test
