@@ -68,24 +68,5 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public String toString() {
         return String.valueOf(number);
     }
-
-    @Override
-    public boolean equals(final Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null || getClass() != object.getClass()) {
-            return false;
-        }
-
-        final LottoNumber that = (LottoNumber) object;
-
-        return number == that.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return number;
-    }
 }
 
