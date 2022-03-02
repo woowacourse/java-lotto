@@ -16,7 +16,7 @@ public class LottoTickets {
 
 	public Result generateResult(AnswerLotto answerLotto) {
 		Result results = new Result();
-		for (LottoTicket lotto : this.lottoTickets) {
+		for (LottoTicket lotto : lottoTickets) {
 			results.addResult(lotto.calculate(answerLotto));
 		}
 
@@ -24,7 +24,7 @@ public class LottoTickets {
 	}
 
 	public List<LottoTicket> getLottoTickets() {
-		return Collections.unmodifiableList(this.lottoTickets);
+		return Collections.unmodifiableList(lottoTickets);
 	}
 
 }

@@ -21,7 +21,7 @@ public class Money {
 	}
 
 	public int calculateTotalCount() {
-		return this.value / PRICE_OF_LOTTO;
+		return value / PRICE_OF_LOTTO;
 	}
 
 	public int getValue() {

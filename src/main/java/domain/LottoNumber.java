@@ -17,7 +17,7 @@ public class LottoNumber {
 	}
 
 	public int getNumber() {
-		return this.number;
+		return number;
 	}
 
 	private void validateNumberInRange(int number) {
@@ -36,7 +36,7 @@ public class LottoNumber {
 		}
 
 		LottoNumber target = (LottoNumber) o;
-		return this.number == target.getNumber();
+		return number == target.getNumber();
 	}
 
 	@Override

@@ -27,11 +27,11 @@ public class AnswerLotto {
 	}
 
 	public Set<LottoNumber> getNumbers() {
-		return this.numbers.getNumbers();
+		return numbers.getNumbers();
 	}
 
 	public LottoNumber getBonusNumber() {
-		return this.bonusNumber;
+		return bonusNumber;
 	}
 
 }

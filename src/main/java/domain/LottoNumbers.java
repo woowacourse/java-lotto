@@ -32,7 +32,7 @@ public class LottoNumbers {
 	}
 
 	public Set<LottoNumber> getNumbers() {
-		return Collections.unmodifiableSet(this.numbers);
+		return Collections.unmodifiableSet(numbers);
 	}
 
 	private static void validateNumbers(int input_size, int numbers_size) {

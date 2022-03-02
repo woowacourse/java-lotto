@@ -33,7 +33,7 @@ public class LottoGameController {
 		purchaseManualLotto(manualCount);
 		purchaseRandomLotto(randomCount);
 
-		printLottoTickets(manualCount, randomCount, this.lottoTickets);
+		printLottoTickets(manualCount, randomCount, lottoTickets);
 	}
 
 	private void purchaseManualLotto(int count) {

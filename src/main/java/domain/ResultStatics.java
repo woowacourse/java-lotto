@@ -35,15 +35,15 @@ public enum ResultStatics {
 	}
 
 	public int getNumberMatches() {
-		return this.numberMatches;
+		return numberMatches;
 	}
 
 	public int getPrice() {
-		return this.price;
+		return price;
 	}
 
 	public boolean isHitBonus() {
-		return this.hitBonus;
+		return hitBonus;
 	}
 
 }

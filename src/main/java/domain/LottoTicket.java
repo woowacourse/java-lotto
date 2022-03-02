@@ -24,6 +24,6 @@ public class LottoTicket {
 	}
 
 	public Set<LottoNumber> getNumbers() {
-		return this.numbers.getNumbers();
+		return numbers.getNumbers();
 	}
 }
