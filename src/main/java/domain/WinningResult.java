@@ -1,18 +1,19 @@
 package domain;
 
-import java.util.Collections;
-import java.util.EnumMap;
 import java.util.Map;
 
 public class WinningResult {
 
-	private final EnumMap<LottoRank, Integer> winningResult;
+	private final Map<LottoRank, Integer> winningResult;
 
-	public WinningResult(final EnumMap<LottoRank, Integer> winningResult) {
-		this.winningResult = winningResult;
+	public WinningResult(final Map<LottoRank, Integer> winningResult) {
+		this.winningResult = Map.copyOf(winningResult);
 	}
 
 	public double getRateOfProfit(final Money money) {
+		if (money.canPurchase()) {
+			return 0;
+		}
 		long profit = winningResult.entrySet()
 			.stream()
 			.mapToLong(result -> result.getKey().getAmount() * result.getValue())
@@ -21,6 +22,6 @@ public class WinningResult {
 	}
 
 	public Map<LottoRank, Integer> getWinningResult() {
-		return Collections.unmodifiableMap(winningResult);
+		return winningResult;
 	}
 }

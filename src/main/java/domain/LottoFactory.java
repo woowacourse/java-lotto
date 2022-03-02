@@ -1,5 +1,8 @@
 package domain;
 
+import static domain.Lotto.*;
+import static domain.LottoNumber.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,30 +11,46 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
 
-	private static final int FIRST_LOTTO_NUMBER = 1;
-	private static final int NEXT_NUMBER_OF_LAST_LOTTO_NUMBER = 46;
-	private static final int LOTTO_PRICE = 1000;
-	private static final int LOTTO_MAX_SIZE_INDEX = 6;
-	private static final int INITIAL_INDEX = 0;
-	private final List<Integer> lottoNumbers = IntStream.range(FIRST_LOTTO_NUMBER, NEXT_NUMBER_OF_LAST_LOTTO_NUMBER)
+	private final List<Integer> lottoNumbers = IntStream.rangeClosed(FIRST_LOTTO_NUMBER, LAST_LOTTO_NUMBER)
 		.boxed()
 		.collect(Collectors.toList());
 
-	public List<Lotto> generateLottoTicket(final Money money) {
-		int purchaseCount = money.findPurchaseLottoCount(LOTTO_PRICE);
-		return IntStream.range(INITIAL_INDEX, purchaseCount)
-			.mapToObj(index -> generateLotto())
-			.collect(Collectors.toUnmodifiableList());
+	public List<Lotto> generateLottos(final int autoLottoCount, final List<List<Integer>> inputManualLotto) {
+		List<Lotto> lottos = new ArrayList<>();
+		generateLottosAsManual(lottos, inputManualLotto);
+		generateLottosAsAuto(lottos, autoLottoCount);
+		return lottos;
 	}
 
-	private Lotto generateLotto() {
+	private void generateLottosAsAuto(List<Lotto> lottos, final int autoLottoCount) {
+		lottos.addAll(IntStream.range(0, autoLottoCount)
+			.mapToObj(index -> generateLottoAsAuto())
+			.collect(Collectors.toUnmodifiableList()));
+	}
+
+	private Lotto generateLottoAsAuto() {
 		Collections.shuffle(lottoNumbers);
-		return new Lotto(abstractLottoNumbersAsMuchAsLottoSize().stream()
-			.map(Number::new)
+		return generateLotto(lottoNumbers.subList(0, FIXED_LOTTO_SIZE));
+	}
+
+	private Lotto generateLotto(final List<Integer> numbers) {
+		return new Lotto(numbers.stream()
+			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 	}
 
-	private List<Integer> abstractLottoNumbersAsMuchAsLottoSize() {
-		return Collections.unmodifiableList(lottoNumbers.subList(INITIAL_INDEX, LOTTO_MAX_SIZE_INDEX));
+	private void generateLottosAsManual(List<Lotto> lottos,
+		final List<List<Integer>> inputManualLotto) {
+		if (inputManualLotto == null || inputManualLotto.isEmpty()) {
+			return;
+		}
+		lottos.addAll(inputManualLotto.stream()
+			.map(this::generateLottoAsManual)
+			.collect(Collectors.toList()));
 	}
+
+	private Lotto generateLottoAsManual(final List<Integer> manualLotto) {
+		return generateLotto(manualLotto);
+	}
+
 }

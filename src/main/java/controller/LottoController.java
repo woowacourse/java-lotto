@@ -1,10 +1,13 @@
 package controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import domain.Lotto;
 import domain.LottoFactory;
 import domain.LottoTicket;
 import domain.Money;
-import domain.Number;
+import domain.LottoNumber;
 import domain.WinningNumbers;
 import domain.WinningResult;
 import view.InputView;
@@ -23,35 +26,59 @@ public class LottoController {
 	}
 
 	public void run() {
-		final Money money = Money.from(requestMoneyInput());
-
-		LottoTicket lottoTicket = new LottoTicket(lottoFactory.generateLottoTicket(money));
-		outputView.printPurchasedLottoTicket(lottoTicket.getLottoTicket());
-
-		Lotto winningNumber = Lotto.from(requestWinningLottoInput());
-		Number bonusNumber = Number.from(requestBonusNumberInput());
-		WinningNumbers winningNumbers = new WinningNumbers(winningNumber, bonusNumber);
-
+		final Money money = new Money(requestMoneyInput());
+		LottoTicket lottoTicket = createLottoTicket(money);
+		WinningNumbers winningNumbers = createWinningNumbers();
 		findWinningResult(lottoTicket, winningNumbers, money);
 	}
 
-	private String requestMoneyInput() {
+	private int requestMoneyInput() {
 		outputView.printRequestMoney();
 		return inputView.requestMoney();
 	}
 
-	private String[] requestWinningLottoInput() {
+	private LottoTicket createLottoTicket(Money money) {
+		int manualLottoCount = requestManualLottoCountInput();
+		int autoLottoCount = money.findPurchaseLottoCount() - manualLottoCount;
+		List<List<Integer>> inputManualLotto = requestManualLottoInput(manualLottoCount);
+
+		List<Lotto> lottos = lottoFactory.generateLottos(autoLottoCount, inputManualLotto);
+		outputView.printPurchasedLottoTicket(manualLottoCount, lottos);
+		return new LottoTicket(lottos);
+	}
+
+	private int requestManualLottoCountInput() {
+		outputView.printRequestManualLottoCount();
+		return inputView.requestManualLottoCount();
+	}
+
+	private List<List<Integer>> requestManualLottoInput(int manualLottoCount) {
+		outputView.printRequestManualLotto();
+		return inputView.requestManualLotto(manualLottoCount);
+	}
+
+	private WinningNumbers createWinningNumbers() {
+		List<LottoNumber> lottoNumbers = requestWinningLottoInput().stream()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList());
+		Lotto winningNumber = new Lotto(lottoNumbers);
+
+		LottoNumber bonusLottoNumber = new LottoNumber(requestBonusNumberInput());
+		return new WinningNumbers(winningNumber, bonusLottoNumber);
+	}
+
+	private List<Integer> requestWinningLottoInput() {
 		outputView.printRequestWinningNumbers();
 		return inputView.requestWinningNumbers();
 	}
 
-	private String requestBonusNumberInput() {
+	private int requestBonusNumberInput() {
 		outputView.printRequestBonusNumber();
 		return inputView.requestBonusNumber();
 	}
 
 	private void findWinningResult(LottoTicket lottoTicket, WinningNumbers winningNumbers, Money money) {
-		WinningResult winningResult = new WinningResult(lottoTicket.findWinningResult(winningNumbers));
+		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
 		outputView.printWinningResult(winningResult.getWinningResult());
 		outputView.printRateOfProfit(winningResult.getRateOfProfit(money));
 	}

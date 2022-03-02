@@ -6,13 +6,14 @@ import java.util.EnumMap;
 public enum LottoRank {
 
 	FAIL(0, -1, false),
-	FIFTH(5000, 3, false),
-	FOURTH(50000, 4, false),
-	THIRD(1500000, 5, false),
-	SECOND(30000000, 5, true),
-	FIRST(2000000000, 6, false);
+	FIFTH(5_000, 3, false),
+	FOURTH(50_000, 4, false),
+	THIRD(1_500_000, 5, false),
+	SECOND(30_000_000, 5, true),
+	FIRST(2_000_000_000, 6, false);
 
 	private static final int INITIAL_COUNT = 0;
+
 	private final long amount;
 	private final int matchCount;
 	private final boolean hasBonusNumber;
@@ -25,11 +26,17 @@ public enum LottoRank {
 
 	public static LottoRank findRank(final int count, final boolean bonusNumber) {
 		for (LottoRank rank : values()) {
-			if (rank.getMatchCount() == count && rank.isHasBonusNumber() == bonusNumber) {
+			if (rank.getMatchCount() == count && canSecond(bonusNumber, rank)) {
 				return rank;
 			}
 		}
 		return FAIL;
+	}
+
+	private static boolean canSecond(boolean bonusNumber, LottoRank rank) {
+		if (rank == SECOND || rank == THIRD)
+			return rank.isHasBonusNumber() == bonusNumber;
+		return true;
 	}
 
 	public static EnumMap<LottoRank, Integer> createWinningResultMap() {
