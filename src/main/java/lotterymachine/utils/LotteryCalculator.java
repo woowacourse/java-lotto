@@ -1,10 +1,7 @@
 package lotterymachine.utils;
 
-import lotterymachine.LotteryPurchase;
 import lotterymachine.Money;
-import lotterymachine.domain.WinningLotteryRank;
 
-import java.util.Map;
 
 import static java.lang.Math.floor;
 
@@ -16,14 +13,6 @@ public class LotteryCalculator {
     }
 
     public static double calculateProfitRate(double winningLotteryAmount, int amount) {
-        return floor(winningLotteryAmount / amount * DECIMAL_PLACE_SAVER)  / DECIMAL_PLACE_SAVER;
-    }
-
-    public static int totalProfit(Map<WinningLotteryRank, Integer> lotteryTicketResult) {
-        int sum = 0;
-        for (WinningLotteryRank winningLotteryRank : lotteryTicketResult.keySet()) {
-            sum += winningLotteryRank.getPrice() * lotteryTicketResult.get(winningLotteryRank);
-        }
-        return sum;
+        return floor(winningLotteryAmount / amount * DECIMAL_PLACE_SAVER) / DECIMAL_PLACE_SAVER;
     }
 }

@@ -19,14 +19,14 @@ public class WinningResult {
 
     private void createResult() {
         initResult();
-        for (LotteryTicket lotteryTicket: lotteryTickets.getLotteryTickets()) {
+        for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
             WinningLotteryRank winningLotteryRank = winningLottery.getWinningLotteryRank(lotteryTicket);
             result.put(winningLotteryRank, result.get(winningLotteryRank) + 1);
         }
     }
 
     private void initResult() {
-        for (WinningLotteryRank winningLotteryRank: WinningLotteryRank.values()) {
+        for (WinningLotteryRank winningLotteryRank : WinningLotteryRank.values()) {
             result.put(winningLotteryRank, 0);
         }
     }
@@ -36,7 +36,15 @@ public class WinningResult {
     }
 
     public double getTotalProfitRate(LotteryPurchase lotteryPurchase) {
-        int totalProfit = LotteryCalculator.totalProfit(this.result);
+        int totalProfit = totalProfit();
         return LotteryCalculator.calculateProfitRate(totalProfit, lotteryPurchase.getTotalAmount());
+    }
+
+    public int totalProfit() {
+        int sum = 0;
+        for (WinningLotteryRank winningLotteryRank : result.keySet()) {
+            sum += winningLotteryRank.getPrice() * result.get(winningLotteryRank);
+        }
+        return sum;
     }
 }
