@@ -2,7 +2,7 @@ package controller;
 
 import java.util.List;
 
-import domain.TicketCount;
+import domain.TicketCounter;
 import domain.TicketMachine;
 import domain.Tickets;
 import domain.WinningAnalyze;
@@ -28,8 +28,9 @@ public class LottoController {
 		final List<List<Integer>> manualTickets =
 			InputView.getManualLottoTickets(count);
 
-		Tickets tickets = TicketMachine.generateTickets(new TicketCount(money, count), manualTickets,
+		Tickets tickets = TicketMachine.generateTickets(new TicketCounter(money, count), manualTickets,
 			new AutoStrategy());
+
 		OutputView.printTickets(tickets.getTickets(), manualTickets.size());
 
 		return tickets;

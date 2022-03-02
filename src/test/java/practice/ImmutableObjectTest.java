@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import domain.Ticket;
-import domain.TicketCount;
+import domain.TicketCounter;
 import domain.TicketMachine;
 import domain.Tickets;
 import domain.strategy.CustomTicketingStrategy;
@@ -58,7 +58,7 @@ public class ImmutableObjectTest {
 		CustomTicketingStrategy customLottoGenerator = new CustomTicketingStrategy();
 		customLottoGenerator.initNumbers(numbers);
 		int money = 14000;
-		TicketCount manualCount = new TicketCount(money, 3);
+		TicketCounter manualCount = new TicketCounter(money, 3);
 
 		List<List<Integer>> manualTickets = new ArrayList<>();
 		manualTickets.add(Arrays.asList(8, 21, 23, 41, 42, 43));

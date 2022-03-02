@@ -1,6 +1,6 @@
 package domain;
 
-public class TicketCount {
+public class TicketCounter {
 	public static final int TICKET_PRICE = 1000;
 	private static final int ZERO_COUNT = 0;
 
@@ -10,7 +10,7 @@ public class TicketCount {
 
 	private final int autoCount;
 
-	public TicketCount(final int money, final int manualCount) {
+	public TicketCounter(final int money, final int manualCount) {
 		validateMoney(money);
 		validateManualCount(money, manualCount);
 

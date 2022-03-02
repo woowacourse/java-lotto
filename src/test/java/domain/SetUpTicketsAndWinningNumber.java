@@ -12,7 +12,7 @@ class SetUpTicketsAndWinningNumber {
 
 	public void setUp() {
 		int money = 14000;
-		TicketCount manualCount = new TicketCount(money, 3);
+		TicketCounter manualCount = new TicketCounter(money, 3);
 		List<List<Integer>> manualNumbers = getManualTickets();
 
 		List<List<Integer>> autoNumbers = new ArrayList<>();
