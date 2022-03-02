@@ -2,8 +2,6 @@ package lotto.exception;
 
 public enum LottoExceptionStatus {
 
-    READER_CANNOT_READ("입력을 읽어들일 수 없습니다."),
-
     MONEY_MUST_BE_NUMERIC("구입 금액은 숫자여야 합니다."),
     MONEY_MUST_BE_POSITIVE("구입 금액은 양수여야 합니다."),
     MONEY_MUST_BE_DIVISIBLE("구입 금액은 1000원으로 나누어 떨어져야 합니다."),
