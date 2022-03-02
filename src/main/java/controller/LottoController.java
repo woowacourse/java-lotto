@@ -7,6 +7,7 @@ import domain.TicketMachine;
 import domain.Tickets;
 import domain.WinningAnalyze;
 import domain.WinningNumber;
+import domain.strategy.AutoStrategy;
 import view.InputView;
 import view.OutputView;
 
@@ -27,7 +28,8 @@ public class LottoController {
 		final List<List<Integer>> manualTickets =
 			InputView.getManualLottoTickets(count);
 
-		Tickets tickets = TicketMachine.generateTickets(new TicketCount(money, count), manualTickets);
+		Tickets tickets = TicketMachine.generateTickets(new TicketCount(money, count), manualTickets,
+			new AutoStrategy());
 		OutputView.printTickets(tickets.getTickets(), manualTickets.size());
 
 		return tickets;
