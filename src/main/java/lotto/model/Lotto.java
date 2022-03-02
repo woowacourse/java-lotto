@@ -79,7 +79,7 @@ public class Lotto {
 		return autoLotto.contains(lottoBall);
 	}
 
-	public List<LottoBall> getAutoLotto() {
+	public List<LottoBall> getLotto() {
 		return autoLotto;
 	}
 }
