@@ -7,9 +7,8 @@ import lotto.view.ResultView;
 public class Application {
 
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController();
         int money = InputView.requestPurchaseMoney();
-        lottoController.inputMoney(money);
+        LottoController lottoController = new LottoController(money);
 
         int manualCount = InputView.requestManualCount(money);
         ResultView.printLottos(lottoController.purchase(InputView.requestManualNumbers(manualCount)), manualCount);
