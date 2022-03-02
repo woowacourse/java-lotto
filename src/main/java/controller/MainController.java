@@ -57,7 +57,7 @@ public class MainController {
 
     private WinLottoNumbers getWinNumbers() {
         try {
-            String winLottoNumber = InputView.inputWinLottoNumbers();
+            List<Integer> winLottoNumber = InputView.inputWinLottoNumbers();
             int bonus = InputView.inputBonusNumber();
             return WinLottoNumbers.of(winLottoNumber, bonus);
         } catch (IllegalArgumentException e) {

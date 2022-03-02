@@ -5,11 +5,9 @@ import java.util.List;
 
 public class Separator {
 
-    private static final String REGEX = ", ";
-
-    public static List<Integer> splitStringToListInt(String input) {
+    public static List<Integer> splitStringToListInt(final String input, final String regex) {
         List<Integer> numbers = new ArrayList<>();
-        for (String number : input.split(REGEX)) {
+        for (String number : input.split(regex)) {
             numbers.add(Integer.parseInt(number));
         }
         return numbers;

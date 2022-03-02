@@ -12,6 +12,7 @@ import utils.Separator;
 public class InputView {
 
     private static final String WIN_LOTTO_NUMBER_REGEX = "^[\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+$";
+    private static final String LOTTO_NUMBERS_SEPARATE_REGEX = ", ";
     private static final Scanner scanner = new Scanner(System.in);
 
     public static int inputMoney() {
@@ -34,7 +35,7 @@ public class InputView {
         }
     }
 
-    public static List<String> inputManualLottoNumbers(int count) {
+    public static List<List<Integer>> inputManualLottoNumbers(int count) {
         System.out.println(LOTTO_MANUAL_INPUT_MESSAGE);
         try {
             return inputMultipleLottoNumbers(count);
@@ -44,24 +45,24 @@ public class InputView {
         }
     }
 
-    public static String inputWinLottoNumbers() {
+    public static List<Integer> inputWinLottoNumbers() {
         System.out.println(LOTTO_NUMBER_INPUT_MESSAGE);
         return inputSingleLottoNumbers();
     }
 
-    private static List<String> inputMultipleLottoNumbers(int count) {
-        List<String> lottoNumbers = new ArrayList<>();
+    private static List<List<Integer>> inputMultipleLottoNumbers(int count) {
+        List<List<Integer>> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottoNumbers.add(inputSingleLottoNumbers());
         }
         return lottoNumbers;
     }
 
-    private static String inputSingleLottoNumbers() {
+    private static List<Integer> inputSingleLottoNumbers() {
         String lottoNumbers = scanner.nextLine();
         validatePattern(lottoNumbers);
         validateNumberRange(lottoNumbers);
-        return lottoNumbers;
+        return Separator.splitStringToListInt(lottoNumbers, LOTTO_NUMBERS_SEPARATE_REGEX);
     }
 
     public static int inputBonusNumber() {
@@ -81,7 +82,8 @@ public class InputView {
     }
 
     private static void validateNumberRange(String lottoNumbers) {
-        int wrongNumberCount = (int) Separator.splitStringToListInt(lottoNumbers).stream()
+        int wrongNumberCount = (int) Separator.splitStringToListInt(lottoNumbers,
+                LOTTO_NUMBERS_SEPARATE_REGEX).stream()
             .filter(number -> 0 > number || number > 46)
             .count();
         if (wrongNumberCount > 0) {

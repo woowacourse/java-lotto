@@ -17,7 +17,7 @@ class LottoNumbersTest {
 
     @BeforeEach
     void 로또_번호_생성() {
-        lottoTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
+        lottoTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test

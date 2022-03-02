@@ -6,7 +6,6 @@ import static utils.Messages.LOTTO_NUMS_DUPLICATED_ERROR_MESSAGE;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import utils.Separator;
 
 public class WinLottoNumbers {
 
@@ -23,8 +22,7 @@ public class WinLottoNumbers {
         this.bonus = LottoNumber.valueOf(bonus);
     }
 
-    public static WinLottoNumbers of(String lottoNumbersText, int bonus) {
-        List<Integer> numbers = Separator.splitStringToListInt(lottoNumbersText);
+    public static WinLottoNumbers of(List<Integer> numbers, int bonus) {
         return new WinLottoNumbers(numbers, bonus);
     }
 

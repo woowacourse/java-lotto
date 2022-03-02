@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import utils.Separator;
 
 @SuppressWarnings("NonAsciiCharacters")
 class WinLottoNumbersTest {
@@ -17,18 +18,18 @@ class WinLottoNumbersTest {
 
     @BeforeEach
     void 당첨번호_생성() {
-        winLottoNumbers = WinLottoNumbers.of("1, 2, 3, 4, 5, 6", 10);
+        winLottoNumbers = WinLottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
     }
 
     @Test
     void 로또_번호_중복_확인() {
-        assertThatThrownBy(() -> WinLottoNumbers.of("1, 2, 3, 4, 5, 5", 10))
+        assertThatThrownBy(() -> WinLottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 5), 10))
             .isInstanceOf(Exception.class);
     }
 
     @Test
     void 로또_번호와_보너스_중복_확인() {
-        assertThatThrownBy(() -> WinLottoNumbers.of("1, 2, 3, 4, 5, 6", 6))
+        assertThatThrownBy(() -> WinLottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6))
             .isInstanceOf(Exception.class);
     }
 
@@ -36,7 +37,8 @@ class WinLottoNumbersTest {
     @CsvSource(value = {"1, 2, 3, 4, 5, 6:false:6", "1, 2, 3, 4, 5, 7:false:5",
         "1, 2, 3, 4, 8, 7:false:4", "1, 2, 3, 4, 5, 10:true:5"}, delimiter = ':')
     void 로또_번호_일치_검사(String lottoNumbersText, boolean hasBonus, int expected) {
-        LottoTicket lottoTicket = LottoTicket.of(lottoNumbersText);
+        LottoTicket lottoTicket = LottoTicket.of(
+            Separator.splitStringToListInt(lottoNumbersText, ", "));
 
         Rank rank = winLottoNumbers.match(lottoTicket);
         assertThat(rank).isEqualTo(Rank.of(expected, hasBonus));

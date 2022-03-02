@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import utils.Separator;
 
 public class LottoTicket {
 
@@ -18,12 +17,12 @@ public class LottoTicket {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public static LottoTicket of(String LottoNumbersText) {
-        List<LottoNumber> test = Separator.splitStringToListInt(LottoNumbersText).stream()
+    public static LottoTicket of(List<Integer> lottoNumbersInput) {
+        List<LottoNumber> tempLottoNumbers = lottoNumbersInput.stream()
             .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
 
-        return new LottoTicket(test);
+        return new LottoTicket(tempLottoNumbers);
     }
 
     public static LottoTicket ofAuto() {
