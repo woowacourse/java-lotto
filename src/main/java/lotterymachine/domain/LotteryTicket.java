@@ -16,23 +16,6 @@ public class LotteryTicket {
         this.numbers = numbers;
     }
 
-    public int countMatchingNumbers(List<LotteryNumber> numbers) {
-        return (int) numbers.stream()
-                .filter(this.numbers::contains)
-                .count();
-    }
-
-    public boolean containsNumber(LotteryNumber number) {
-        return this.numbers.contains(number);
-    }
-
-    public List<Integer> getNumbers() {
-        Collections.sort(this.numbers);
-        return numbers.stream()
-                .map(LotteryNumber::getNumber)
-                .collect(Collectors.toUnmodifiableList());
-    }
-
     private void validateNumbers(List<LotteryNumber> numbers) {
         validateSize(numbers);
         validateDuplication(numbers);
@@ -55,5 +38,22 @@ public class LotteryTicket {
         if (count != numbers.size()) {
             throw new IllegalArgumentException(DUPLICATION_INPUT_NUMBERS);
         }
+    }
+
+    public int countMatchingNumbers(List<LotteryNumber> numbers) {
+        return (int) numbers.stream()
+                .filter(this.numbers::contains)
+                .count();
+    }
+
+    public boolean containsNumber(LotteryNumber number) {
+        return this.numbers.contains(number);
+    }
+
+    public List<Integer> getNumbers() {
+        Collections.sort(this.numbers);
+        return numbers.stream()
+                .map(LotteryNumber::getNumber)
+                .collect(Collectors.toUnmodifiableList());
     }
 }

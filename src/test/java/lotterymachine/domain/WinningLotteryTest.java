@@ -23,7 +23,7 @@ class WinningLotteryTest {
 
         assertThatThrownBy(() -> {
             WinningLottery winningLottery = new WinningLottery(input, inputBonusNumber);
-                }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("보너스 볼이 당첨 번호와 중복됩니다.");
     }
 

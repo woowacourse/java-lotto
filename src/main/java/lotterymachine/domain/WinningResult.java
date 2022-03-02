@@ -40,7 +40,7 @@ public class WinningResult {
         return LotteryCalculator.calculateProfitRate(totalProfit, lotteryPurchase.getTotalAmount());
     }
 
-    public int totalProfit() {
+    private int totalProfit() {
         int sum = 0;
         for (WinningLotteryRank winningLotteryRank : result.keySet()) {
             sum += winningLotteryRank.getPrice() * result.get(winningLotteryRank);

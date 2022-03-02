@@ -25,18 +25,18 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
         return numbers.get(number);
     }
 
+    private static void validateNumber(int number) {
+        if (number < MINIMUM_LOTTERY_NUMBER || number > MAXIMUM_LOTTERY_NUMBER) {
+            throw new IllegalArgumentException(OUT_OF_RANGE);
+        }
+    }
+
     private LotteryNumber(int number) {
         this.number = number;
     }
 
     public int getNumber() {
         return number;
-    }
-
-    private static void validateNumber(int number) {
-        if (number < MINIMUM_LOTTERY_NUMBER || number > MAXIMUM_LOTTERY_NUMBER) {
-            throw new IllegalArgumentException(OUT_OF_RANGE);
-        }
     }
 
     @Override

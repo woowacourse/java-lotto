@@ -24,20 +24,20 @@ public class LotteryConverter {
         return new LotteryTickets(lotteryTickets);
     }
 
-    private static List<LotteryTicket> createAutoLotteryTickets(int count) {
-        List<LotteryTicket> lotteryTickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            LotteryTicket lotteryTicket = new LotteryTicket(LotteryNumbersGenerator.generate());
-            lotteryTickets.add(lotteryTicket);
-        }
-        return lotteryTickets;
-    }
-
     private static List<LotteryTicket> createPassivityLotteryTickets(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lotteryTickets.add(InputView.getPassivityLotteryTicket());
+        }
+        return lotteryTickets;
+    }
+
+    private static List<LotteryTicket> createAutoLotteryTickets(int count) {
+        List<LotteryTicket> lotteryTickets = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            LotteryTicket lotteryTicket = new LotteryTicket(LotteryNumbersGenerator.generate());
+            lotteryTickets.add(lotteryTicket);
         }
         return lotteryTickets;
     }

@@ -1,8 +1,6 @@
 package lotterymachine.domain;
 
 import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.Map;
 
 public enum WinningLotteryRank {
     ZERO(0, 0),

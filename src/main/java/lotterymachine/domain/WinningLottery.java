@@ -17,12 +17,6 @@ public class WinningLottery {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateBonusNumber(List<LotteryNumber> numbers, LotteryNumber bonusNumber) {
-        if (numbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException(DUPLICATION_INPUT_BONUS_NUMBERS);
-        }
-    }
-
     private void validateWinningLotteryNumbers(List<LotteryNumber> numbers) {
         validateSize(numbers);
         validateDuplication(numbers);
@@ -44,6 +38,12 @@ public class WinningLottery {
                 .count();
         if (numbers != input.size()) {
             throw new IllegalArgumentException(DUPLICATION_INPUT_NUMBERS);
+        }
+    }
+
+    private void validateBonusNumber(List<LotteryNumber> numbers, LotteryNumber bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATION_INPUT_BONUS_NUMBERS);
         }
     }
 

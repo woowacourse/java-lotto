@@ -47,23 +47,4 @@ public class WinningResultTest {
         double totalProfitRate = winningResult.getTotalProfitRate(lotteryPurchase);
         assertThat(totalProfitRate).isEqualTo(142857.14);
     }
-
-    @Test
-    @DisplayName("로또 결과를 입력 받아, 수익을 계산하여 반환한다.")
-    void totalProfit() {
-        List<LotteryNumber> input = IntStream.range(1, 7)
-                .mapToObj(LotteryNumber::valueOf)
-                .collect(Collectors.toList());
-        List<LotteryTicket> tickets = List.of(new LotteryTicket(input));
-        LotteryTickets lotteryTickets = new LotteryTickets(tickets);
-
-
-        List<LotteryNumber> input2 = IntStream.range(4, 10)
-                .mapToObj(LotteryNumber::valueOf)
-                .collect(Collectors.toList());
-        WinningLottery winningLottery = new WinningLottery(input2, LotteryNumber.valueOf(12));
-        WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);
-        int result = winningResult.totalProfit();
-        assertThat(result).isEqualTo(5000);
-    }
 }
