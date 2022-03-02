@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static domain.CommonLogic.generateNumberList;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class AnswerLottoTicketTest {
+public class AnswerLottoTest {
 
 	@Test
 	@DisplayName("지난주 당첨 번호와 보너스 번호가 중복되는 경우 예외 발생")

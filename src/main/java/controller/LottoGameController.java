@@ -6,17 +6,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static constant.LottoConstant.*;
 import static view.InputView.*;
 import static view.OutputView.*;
 
 public class LottoGameController {
-	private final ArrayList<Integer> LottoNumberCandidates = new ArrayList<>();
+	private final List<Integer> LottoNumberCandidates = new ArrayList<>();
 	private final LottoTickets lottoTickets = new LottoTickets();
 
 	public void run() {
 		try {
 			purchaseLotto(new Money(inputMoney()), inputManualLottoCount());
-			AnswerLotto answerLotto = AnswerLotto.of(inputAnsNumbers(), inputBonusNumber());
+			AnswerLotto answerLotto = AnswerLotto.of(inputAnswerNumbers(), inputBonusNumber());
 			printResults(this.lottoTickets.generateResult(answerLotto));
 		} catch (IllegalArgumentException e) {
 			printErrorMessage(e.getMessage());
@@ -48,14 +49,14 @@ public class LottoGameController {
 
 		while (count-- > 0) {
 			Collections.shuffle(LottoNumberCandidates);
-			randomLottoNumbers.add(LottoNumbers.of(LottoNumberCandidates.subList(0, 6)));
+			randomLottoNumbers.add(LottoNumbers.of(LottoNumberCandidates.subList(0, NUMBER_OF_NUMBERS)));
 		}
 
 		lottoTickets.purchase(randomLottoNumbers);
 	}
 
 	private void initCandidates() {
-		for (int eachNumber = 1; eachNumber <= 45; eachNumber++) {
+		for (int eachNumber = MIN_NUMBER; eachNumber <= MAX_NUMBER; eachNumber++) {
 			LottoNumberCandidates.add(eachNumber);
 		}
 	}

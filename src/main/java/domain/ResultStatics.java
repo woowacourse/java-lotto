@@ -5,11 +5,11 @@ import static constant.LottoConstant.NUMBER_FOR_BONUS_CHECK;
 public enum ResultStatics {
 
 	NOTHING(0, 0, false),
-	THREE(3, 5000, false),
-	FOUR(4, 50000, false),
-	FIVE(5, 1500000, false),
-	FIVE_AND_BONUS(5, 30000000, true),
-	SIX(6, 2000000000, false);
+	FIFTH(3, 5000, false),
+	FOURTH(4, 50000, false),
+	THIRD(5, 1500000, false),
+	SECOND(5, 30000000, true),
+	FIRST(6, 2000000000, false);
 
 	private int numberMatches;
 	private int price;
@@ -23,19 +23,19 @@ public enum ResultStatics {
 
 	public static ResultStatics of(int numberMatches, boolean hitBonus) {
 		if (numberMatches == 3) {
-			return THREE;
+			return FIFTH;
 		}
 		if (numberMatches == 4) {
-			return FOUR;
+			return FOURTH;
 		}
 		if (numberMatches == NUMBER_FOR_BONUS_CHECK && !hitBonus) {
-			return FIVE;
+			return THIRD;
 		}
 		if (numberMatches == NUMBER_FOR_BONUS_CHECK && hitBonus) {
-			return FIVE_AND_BONUS;
+			return SECOND;
 		}
 		if (numberMatches == 6) {
-			return SIX;
+			return FIRST;
 		}
 		return NOTHING;
 	}

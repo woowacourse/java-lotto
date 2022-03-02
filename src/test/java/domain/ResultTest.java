@@ -10,7 +10,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResultTest {
-	static Map<Result, Float> testCase = new HashMap<>();
+	private static Map<Result, Float> testCase = new HashMap<>();
 
 	@BeforeAll
 	static void generateTestCase() {

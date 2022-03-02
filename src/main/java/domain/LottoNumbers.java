@@ -5,13 +5,12 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-import static constant.ErrorConstant.START_ERROR;
 import static constant.LottoConstant.NUMBER_OF_NUMBERS;
 
 public class LottoNumbers {
 
-	private static final String NUMBER_OF_NUMBERS_IS_NOT_CORRECT = START_ERROR + NUMBER_OF_NUMBERS + "개의 숫자만 허용됩니다.";
-	private static final String NUMBERS_MUST_NOT_DUPLICATED = START_ERROR + "숫자들은 중복일 수 없습니다.";
+	private static final String NUMBER_OF_NUMBERS_IS_NOT_CORRECT = NUMBER_OF_NUMBERS + "개의 숫자만 허용됩니다.";
+	private static final String NUMBERS_MUST_NOT_DUPLICATED = "숫자들은 중복일 수 없습니다.";
 
 	private final List<LottoNumber> numbers;
 

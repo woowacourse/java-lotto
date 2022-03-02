@@ -1,6 +1,7 @@
 package domain;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static domain.CommonLogic.generateNumberList;
@@ -16,6 +17,7 @@ public class LottoTicketTest {
 	}
 
 	@Test
+	@DisplayName("일치하는 숫자가 존재하지 않는 경우 당첨되지 않음")
 	void zeroMatch() {
 		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(10, 11, 12, 13, 14, 15)));
 
@@ -23,6 +25,7 @@ public class LottoTicketTest {
 	}
 
 	@Test
+	@DisplayName("하나의 숫자만 일치하는 경우 당첨되지 않음")
 	void oneMatch() {
 		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(10, 11, 12, 13, 14, 6)));
 
@@ -30,6 +33,7 @@ public class LottoTicketTest {
 	}
 
 	@Test
+	@DisplayName("두개의 숫자만 일치하는 경우 당첨되지 않음")
 	void twoMatch() {
 		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(10, 11, 12, 13, 5, 6)));
 
@@ -37,38 +41,43 @@ public class LottoTicketTest {
 	}
 
 	@Test
-	void threeMatch() {
+	@DisplayName("3개의 숫자가 일치하고 보너스 숫자와는 일치하지 않는 경우 5등 당첨")
+	void FIFTH_Match() {
 		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(1, 2, 3, 7, 8, 9)));
 
-		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.THREE);
+		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.FIFTH);
 	}
 
 	@Test
-	void fourMatch() {
+	@DisplayName("3개의 숫자가 일치하고 보너스 숫자와도 일치하는 경우 4등 당첨")
+	void FOURTH_Match() {
 		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(1, 2, 3, 4, 8, 9)));
 
-		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.FOUR);
+		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.FOURTH);
 	}
 
 	@Test
-	void fiveMatch() {
+	@DisplayName("4개의 숫자가 일치하는 경우 3등 당첨")
+	void THIRD_Match() {
 		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(1, 2, 3, 4, 5, 9)));
 
-		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.FIVE);
+		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.THIRD);
 	}
 
 	@Test
-	void fiveAndBonusMatch() {
+	@DisplayName("5개의 숫자가 일치하는 경우 2등 당첨")
+	void SECOND_Match() {
 		LottoTicket lotto = new LottoTicket(LottoNumbers.of(generateNumberList(1, 2, 3, 4, 5, 7)));
 
-		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.FIVE_AND_BONUS);
+		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.SECOND);
 	}
 
 	@Test
-	void sixMatch() {
+	@DisplayName("6개의 숫자가 일치하는 경우 1등 당첨")
+	void FIRST_Match() {
 		LottoTicket lottoTicket = new LottoTicket(LottoNumbers.of(generateNumberList(1, 2, 3, 4, 5, 6)));
 
-		assertThat(lottoTicket.calculate(answerLotto)).isEqualTo(ResultStatics.SIX);
+		assertThat(lottoTicket.calculate(answerLotto)).isEqualTo(ResultStatics.FIRST);
 	}
 
 }

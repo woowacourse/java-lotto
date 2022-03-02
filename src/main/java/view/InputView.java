@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static constant.ErrorConstant.START_ERROR;
-
 public class InputView {
 	private static final String NUMBER_REGEX = "^[0-9]+$";
 	private static final String STANDARD_OF_ANSWER_NUMBERS = ", ";
-	private static final String WRONG_STANDARD_INPUT = START_ERROR + "입력 형식에 맞춰 입력해주세요.";
-	private static final String MUST_BE_POSITIVE_INTEGER = START_ERROR + "입력은 양의 정수만 허용됩니다.";
-	private static final String MUST_NOT_EMPTY = START_ERROR + "입력은 빈 입력일 수 없습니다.";
+	private static final String WRONG_STANDARD_INPUT = "입력 형식에 맞춰 입력해주세요.";
+	private static final String MUST_BE_POSITIVE_INTEGER = "입력은 양의 정수만 허용됩니다.";
+	private static final String MUST_NOT_EMPTY = "입력은 빈 입력일 수 없습니다.";
 
-	private InputView(){}
+	private InputView() {
+	}
 
 	public static int inputMoney() {
 		System.out.println("구입금액을 입력해 주세요.");
@@ -28,16 +27,15 @@ public class InputView {
 	public static List<List<Integer>> inputManualNumbers(int count) {
 		System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
 
-		List<List<Integer>> inputs = new ArrayList<>();
+		List<List<Integer>> totalManualNumbers = new ArrayList<>();
 		while (count-- > 0) {
-			System.out.println("purchase");
-			inputs.add(inputMultipleNumber());
+			totalManualNumbers.add(inputMultipleNumber());
 		}
 
-		return inputs;
+		return totalManualNumbers;
 	}
 
-	public static List<Integer> inputAnsNumbers() {
+	public static List<Integer> inputAnswerNumbers() {
 		System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
 		return inputMultipleNumber();
 	}
@@ -93,15 +91,15 @@ public class InputView {
 	}
 
 	private static List<Integer> parseMultipleNumber(String input) {
-		List<Integer> answers = new ArrayList<>();
+		List<Integer> parsedMultipleNumbers = new ArrayList<>();
 		String[] parsedInput = input.split(STANDARD_OF_ANSWER_NUMBERS);
 
 		for (String eachInput : parsedInput) {
 			validateNumber(eachInput);
-			answers.add(Integer.parseInt(eachInput));
+			parsedMultipleNumbers.add(Integer.parseInt(eachInput));
 		}
 
-		return answers;
+		return parsedMultipleNumbers;
 	}
 
 }
