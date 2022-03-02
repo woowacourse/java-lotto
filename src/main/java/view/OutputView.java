@@ -8,16 +8,17 @@ import java.util.Map.Entry;
 
 public class OutputView {
 
-    private static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
+    private static final String PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String WIN_STATISTICS_RESULT_MESSAGE = "당첨 통계\n---------";
     private static final String SECOND_RANK_CORRECT_MESSAGE = "개 일치, 보너스 볼 일치(";
     private static final String RANK_PRICE_MESSAGE = "원)- ";
     private static final String RANK_COUNT_MESSAGE = "개";
     private static final String RANK_CORRECT_MESSAGE = "개 일치 (";
 
-    public void printLotto(final List<LottoDto> issuedLotto) {
+    public void printLotto(final List<LottoDto> issuedLotto, final int manualCount) {
         System.out.println();
-        System.out.println(issuedLotto.size() + PURCHASE_MESSAGE);
+        System.out.printf(OutputView.PURCHASE_MESSAGE, manualCount, issuedLotto.size() - manualCount);
+        System.out.println();
         for (LottoDto lotto : issuedLotto) {
             System.out.println(lotto.get());
         }
@@ -50,6 +51,6 @@ public class OutputView {
     }
 
     public void printWinProfit(final String profitOrNotMessage) {
-        System.out.printf(profitOrNotMessage);
+        System.out.println(profitOrNotMessage);
     }
 }
