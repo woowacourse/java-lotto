@@ -1,14 +1,16 @@
 package domain.lottery;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import domain.Rank;
 
 public final class Lotteries {
+
+	private static final int INITIAL_RANK_COUNT = 0;
 
 	private final List<Lottery> lotteries;
 
@@ -41,10 +43,8 @@ public final class Lotteries {
 	}
 
 	private Map<Rank, Integer> initRankResult() {
-		final Map<Rank, Integer> rankResult = new HashMap<>();
-		Rank.valuesWithoutNone()
-			.forEach((rank) -> rankResult.put(rank, 0));
-		return rankResult;
+		return Rank.valuesWithoutNone().stream()
+			.collect(Collectors.toMap(Function.identity(), value -> INITIAL_RANK_COUNT));
 	}
 
 	private void putCountToWinner(final Map<Rank, Integer> winners, final Rank rank) {
