@@ -24,9 +24,7 @@ public class LottoController {
         Money calculateMoney = money.calculateProduct(LottoMachine.LOTTO_PRICE, purchaseInfo.getManualCount());
 
         int autoCount = calculateMoney.getProductCount(LottoMachine.LOTTO_PRICE);
-        LottoTickets autoLottoTickets = lottoMachine.issueAuto(autoCount);
-
-        lottoTickets.combine(autoLottoTickets);
+        lottoTickets.combine(lottoMachine.issueAuto(autoCount));
 
         return SalesInfoDto.valueOf(money.getAmount(), purchaseInfo.getManualCount(), autoCount,
                 LottoTicketsDto.from(lottoTickets));

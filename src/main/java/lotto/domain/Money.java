@@ -12,9 +12,9 @@ public class Money {
         this.amount = amount;
     }
 
-    public Money calculateProduct(Money money, int lottoCount) {
-        validateAmount(money.amount * lottoCount);
-        return new Money(amount - (money.amount * lottoCount));
+    public Money calculateProduct(Money money, int count) {
+        validateAmount(money.amount * count);
+        return new Money(amount - (money.amount * count));
     }
 
     public int getProductCount(Money money) {

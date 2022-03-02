@@ -6,9 +6,6 @@ import java.util.Map;
 
 public class LottoResult {
 
-    private static final int FLOOR_STANDARD = 100;
-    private static final double FLOOR_AFTER_TREATMENT = 100.0;
-
     private final Map<Rank, Long> ranks;
 
     public LottoResult(Map<Rank, Long> ranks) {
@@ -16,14 +13,18 @@ public class LottoResult {
     }
 
     public double calculateYield(Money money) {
-        return Math.floor(getTotalPrizeMoney() / money.getAmount() * FLOOR_STANDARD) / FLOOR_AFTER_TREATMENT;
+        return getTotalPrizeMoney() / money.getAmount();
     }
 
     private double getTotalPrizeMoney() {
         return ranks.keySet()
                 .stream()
-                .mapToDouble(Rank::getPrizeMoney)
+                .mapToDouble(this::calculatePrizeMoney)
                 .sum();
+    }
+
+    private long calculatePrizeMoney(Rank rank) {
+        return rank.getPrizeMoney() * ranks.get(rank);
     }
 
     public Map<Rank, Long> getRanks() {
