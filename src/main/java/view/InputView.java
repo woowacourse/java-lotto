@@ -28,8 +28,9 @@ public class InputView {
     private static final String BONUS_BALL_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String DELIMITER = ",";
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -39,17 +40,24 @@ public class InputView {
     private static String input() {
 =======
     private static final InputView inputView = new InputView();
+=======
+    private static final InputView INPUT_VIEW = new InputView();
+>>>>>>> 3996d74 (refactor : 상수 네이밍 컨벤션 적용)
 
     private InputView() {
     }
 
     public static InputView getInstance() {
-        return inputView;
+        return INPUT_VIEW;
     }
 
     private String input() {
+<<<<<<< HEAD
 >>>>>>> 62a4f7d (refactor : InputView, OutputView 싱글턴 패턴으로 관리)
         String input = scanner.nextLine();
+=======
+        String input = SCANNER.nextLine();
+>>>>>>> 3996d74 (refactor : 상수 네이밍 컨벤션 적용)
         InputValidator.validateNull(input);
         InputValidator.validateEmpty(input);
         return input;
