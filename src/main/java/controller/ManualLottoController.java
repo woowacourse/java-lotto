@@ -3,6 +3,7 @@ package controller;
 import domain.Amount;
 import domain.LottoNumber;
 import domain.LottoResults;
+import domain.PurchaseLottoCounts;
 import domain.RandomLottoNumbersGenerator;
 import domain.Ticket;
 import domain.Tickets;
@@ -17,25 +18,26 @@ public class ManualLottoController {
     public void run() {
         Amount amount = createAmount();
         int manualTicketsCount = createManualTicketCount(amount);
-        int autoTicketCount = amount.getTicketCount() - manualTicketsCount;
-        Tickets tickets = makeTickets(manualTicketsCount, autoTicketCount);
-        OutputView.printTicketCount(manualTicketsCount, autoTicketCount);
+        PurchaseLottoCounts purchaseLottoCounts = new PurchaseLottoCounts(manualTicketsCount,
+                amount.getTicketCount() - manualTicketsCount);
+
+        Tickets tickets = makeTickets(purchaseLottoCounts);
+        OutputView.printTicketCount(purchaseLottoCounts);
         OutputView.printTickets(tickets);
-        WinningNumbers winningNumbers = createWinningNumbers();
-        LottoResults results = LottoResults.of(winningNumbers, tickets);
+
+        LottoResults results = LottoResults.of(createWinningNumbers(), tickets);
         OutputView.printResult(results);
         OutputView.printYield(amount.getYield(results.getProfit()));
     }
 
-    private Tickets makeTickets(int manualTicketsCount, int autoTicketCount) {
+    private Tickets makeTickets(PurchaseLottoCounts purchaseLottoCounts) {
         try {
-            Tickets manualTickets = createManualTicket(manualTicketsCount);
-            Tickets autoTickets = Tickets.of(autoTicketCount, new RandomLottoNumbersGenerator());
-            manualTickets.add(autoTickets);
+            Tickets manualTickets = createManualTicket(purchaseLottoCounts.getManualCount());
+            manualTickets.addAutoTickets(purchaseLottoCounts.getAutoCount(), new RandomLottoNumbersGenerator());
             return manualTickets;
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
-            return makeTickets(manualTicketsCount, autoTicketCount);
+            return makeTickets(purchaseLottoCounts);
         }
     }
 

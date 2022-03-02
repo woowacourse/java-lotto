@@ -2,22 +2,21 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")
 public class TicketsTest {
 
     @Test
-    void 티켓_생성() {
-        Tickets tickets = Tickets.of(5, new RandomLottoNumbersGenerator());
+    void 티켓_정상_생성() {
+        List<String> manualNumber = Arrays.asList("1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6");
+        Tickets tickets = new Tickets(manualNumber.stream()
+                .map(Ticket::from)
+                .collect(Collectors.toList()));
+        tickets.addAutoTickets(3, new RandomLottoNumbersGenerator());
         assertThat(tickets.getTickets().size()).isEqualTo(5);
-    }
-
-    @Test
-    void 티켓_추가() {
-        Tickets tickets = Tickets.of(5, new RandomLottoNumbersGenerator());
-        Tickets addTickets = Tickets.of(5, new RandomLottoNumbersGenerator());
-        tickets.add(addTickets);
-        assertThat(tickets.getTickets().size()).isEqualTo(10);
     }
 }

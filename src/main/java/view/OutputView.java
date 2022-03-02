@@ -2,6 +2,7 @@ package view;
 
 import domain.LottoNumber;
 import domain.LottoResults;
+import domain.PurchaseLottoCounts;
 import domain.Rank;
 import domain.Ticket;
 import domain.Tickets;
@@ -13,10 +14,6 @@ import java.util.stream.Collectors;
 public class OutputView {
 
     private static final String DELIMITER = ", ";
-
-    public static void printTicketCount(int ticketCount) {
-        System.out.println(ticketCount + "개를 구매했습니다.");
-    }
 
     public static void printTickets(Tickets tickets) {
         List<Ticket> purchasedTickets = tickets.getTickets();
@@ -80,7 +77,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printTicketCount(int manualTicketCount, int autoTicketCount) {
+    public static void printTicketCount(PurchaseLottoCounts purchaseLottoCounts) {
+        int manualTicketCount = purchaseLottoCounts.getManualCount();
+        int autoTicketCount = purchaseLottoCounts.getAutoCount();
         System.out.println("수동으로 " + manualTicketCount + "장, 자동으로 " + autoTicketCount + "개를 구매했습니다.");
     }
 }
