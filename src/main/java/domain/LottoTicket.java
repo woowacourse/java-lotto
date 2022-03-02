@@ -5,8 +5,6 @@ import java.util.List;
 
 public class LottoTicket {
 
-	private static final int PLUS_COUNT = 1;
-
 	private final List<Lotto> lottoTicket;
 
 	public LottoTicket(final List<Lotto> lottoTicket) {
@@ -29,6 +27,6 @@ public class LottoTicket {
 		if (LottoRank.isFail(rank)) {
 			return;
 		}
-		winningResult.put(rank, winningResult.get(rank) + PLUS_COUNT);
+		winningResult.put(rank, winningResult.get(rank) + 1);
 	}
 }

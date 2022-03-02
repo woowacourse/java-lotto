@@ -10,13 +10,11 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
 
-	private static final int INITIAL_INDEX = 0;
-
 	private final List<Integer> lottoNumbers = IntStream.rangeClosed(FIRST_LOTTO_NUMBER, LAST_LOTTO_NUMBER)
 		.boxed()
 		.collect(Collectors.toList());
 
-	public List<Lotto> generateLottos(final Money money, List<List<Integer>> inputManualLotto){
+	public List<Lotto> generateLottos(final Money money, List<List<Integer>> inputManualLotto) {
 		List<Lotto> lottos = generateLottosAsManual(inputManualLotto);
 		lottos.addAll(generateLottosAsAuto(money));
 		return lottos;
@@ -24,18 +22,14 @@ public class LottoFactory {
 
 	public List<Lotto> generateLottosAsAuto(final Money money) {
 		int autoLottoCount = money.findPurchaseLottoCount();
-		return IntStream.range(INITIAL_INDEX, autoLottoCount)
+		return IntStream.range(0, autoLottoCount)
 			.mapToObj(index -> generateLottoAsAuto())
 			.collect(Collectors.toUnmodifiableList());
 	}
 
 	private Lotto generateLottoAsAuto() {
 		Collections.shuffle(lottoNumbers);
-		return generateLotto(abstractLottoNumbersAsMuchAsLottoSize());
-	}
-
-	private List<Integer> abstractLottoNumbersAsMuchAsLottoSize() {
-		return Collections.unmodifiableList(lottoNumbers.subList(INITIAL_INDEX, FIXED_LOTTO_SIZE));
+		return generateLotto(lottoNumbers.subList(0, FIXED_LOTTO_SIZE));
 	}
 
 	private Lotto generateLotto(List<Integer> numbers) {
