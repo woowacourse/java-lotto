@@ -12,7 +12,7 @@ public class LottoGame {
     private final LottoNumber bonusNumber;
 
     public LottoGame(List<Integer> integers, int bonusNumber) {
-        ArrayList<Integer> winningNumbers = new ArrayList<>(integers);
+        List<Integer> winningNumbers = new ArrayList<>(integers);
         validateEmptyCollection(winningNumbers);
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);
         this.winningNumbers = new Lotto(winningNumbers);

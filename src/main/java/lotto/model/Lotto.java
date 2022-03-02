@@ -16,7 +16,7 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> integers) {
-        ArrayList<Integer> lottoNumbers = new ArrayList<>(integers);
+        List<Integer> lottoNumbers = new ArrayList<>(integers);
         validateEmptyCollection(lottoNumbers);
         validateNumberOfLottoNumbers(lottoNumbers);
         validateDuplicationLottoNumbers(lottoNumbers);
