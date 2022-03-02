@@ -41,21 +41,26 @@ public class LotteryGameController {
 	}
 
 	private Lotteries purchaseLottery() {
+		putNumOfManualLottery();
+		return createLotteries();
+	}
+
+	private void putNumOfManualLottery() {
 		try {
 			lotteryGame = lotteryGame.putNumOfManualLottery(inputNumOfManualLottery());
-			return lotteryGame.createLottery(inputManualLotteryNumbers());
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
-			return purchaseLottery();
+			putNumOfManualLottery();
 		}
 	}
 
-	private List<List<Integer>> inputManualLotteryNumbers() {
-		return inputView.inputManualLotteryNumber(lotteryGame.getTheNumberOfLottery());
-	}
-
-	private int inputNumOfManualLottery() {
-		return inputView.inputValidNumOfManualLottery();
+	private Lotteries createLotteries() {
+		try {
+			return lotteryGame.createLottery(inputManualLotteryNumbers());
+		} catch (IllegalArgumentException exception) {
+			outputView.printException(exception.getMessage());
+			return createLotteries();
+		}
 	}
 
 	private WinningLottery createWinningLottery() {
@@ -72,15 +77,23 @@ public class LotteryGameController {
 		outputView.printStatistics(result);
 	}
 
-	private int inputBonusBall() {
-		return inputView.inputValidBonusNumber();
-	}
-
 	private int inputMoney() {
 		return inputView.inputValidMoney();
 	}
 
+	private List<List<Integer>> inputManualLotteryNumbers() {
+		return inputView.inputManualLotteryNumber(lotteryGame.getTheNumberOfLottery());
+	}
+
+	private int inputNumOfManualLottery() {
+		return inputView.inputValidNumOfManualLottery();
+	}
+
 	private List<Integer> inputWinningNumber() {
 		return inputView.inputValidLotteryNumber();
+	}
+
+	private int inputBonusBall() {
+		return inputView.inputValidBonusNumber();
 	}
 }

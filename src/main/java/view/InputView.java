@@ -40,8 +40,8 @@ public class InputView {
 		validateNumber(money);
 	}
 
-	private void validateNumber(String money) {
-		if (!NUMBER_PATTERN.matcher(money).matches()) {
+	private void validateNumber(String number) {
+		if (!NUMBER_PATTERN.matcher(number).matches()) {
 			throw new IllegalArgumentException(INVALID_INPUT_NUMBER_EXCEPTION.getMessage());
 		}
 	}
@@ -58,9 +58,9 @@ public class InputView {
 	}
 
 	private String inputLotteryNumber() {
-		final String winningNumber = scanner.nextLine();
-		validateWinningNumber(winningNumber);
-		return winningNumber;
+		final String lotteryNumber = scanner.nextLine();
+		validateLotteryNumber(lotteryNumber);
+		return lotteryNumber;
 	}
 
 	public List<List<Integer>> inputManualLotteryNumber(final NumOfLottery numOfLottery) {
@@ -89,8 +89,8 @@ public class InputView {
 			.collect(Collectors.toList());
 	}
 
-	private void validateWinningNumber(String winningNumber) {
-		if (!WINNING_NUMBER_PATTERN.matcher(winningNumber).matches()) {
+	private void validateLotteryNumber(String lotteryNumber) {
+		if (!WINNING_NUMBER_PATTERN.matcher(lotteryNumber).matches()) {
 			throw new IllegalArgumentException(INVALID_WINNING_NUMBER_EXCEPTION.getMessage());
 		}
 	}
