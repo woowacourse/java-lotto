@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Result {
@@ -8,7 +8,7 @@ public class Result {
 	private float profitRate;
 
 	public Result() {
-		results = new HashMap<>();
+		results = new LinkedHashMap<>();
 		for (ResultStatics resultStatics : ResultStatics.values()) {
 			results.put(resultStatics, 0);
 		}
