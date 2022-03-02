@@ -135,7 +135,7 @@ class WinningResultTest {
 		LottoNumber bonusLottoNumber = new LottoNumber(39);
 		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
 
-		Money money = Money.from("1000");
+		Money money = new Money(1000);
 
 		// when
 		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);
@@ -158,7 +158,7 @@ class WinningResultTest {
 		LottoNumber bonusLottoNumber = new LottoNumber(39);
 		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusLottoNumber);
 
-		Money money = Money.from("1000");
+		Money money = new Money(1000);
 
 		// when
 		WinningResult winningResult = lottoTicket.findWinningResult(winningNumbers);

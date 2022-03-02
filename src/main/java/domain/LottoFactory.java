@@ -3,7 +3,6 @@ package domain;
 import static domain.Lotto.*;
 import static domain.LottoNumber.*;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,15 +34,15 @@ public class LottoFactory {
 		return Collections.unmodifiableList(lottoNumbers.subList(INITIAL_INDEX, FIXED_LOTTO_SIZE));
 	}
 
-	public List<Lotto> generateLottosAsManual(String[][] inputManualLotto) {
-		return Arrays.stream(inputManualLotto)
+	public List<Lotto> generateLottosAsManual(List<List<Integer>> inputManualLotto) {
+		return inputManualLotto.stream()
 			.map(this::generateLottoAsManual)
 			.collect(Collectors.toList());
 	}
 
-	private Lotto generateLottoAsManual(String[] manualLotto) {
-		return new Lotto(Arrays.stream(manualLotto)
-			.map(LottoNumber::from)
+	private Lotto generateLottoAsManual(List<Integer> manualLotto) {
+		return new Lotto(manualLotto.stream()
+			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 	}
 }

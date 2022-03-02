@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import domain.Lotto;
 import domain.LottoFactory;
@@ -25,13 +26,13 @@ public class LottoController {
 	}
 
 	public void run() {
-		final Money money = Money.from(requestMoneyInput());
+		final Money money = new Money(requestMoneyInput());
 		LottoTicket lottoTicket = createLottoTicket(money);
 		WinningNumbers winningNumbers = createWinningNumbers();
 		findWinningResult(lottoTicket, winningNumbers, money);
 	}
 
-	private String requestMoneyInput() {
+	private int requestMoneyInput() {
 		outputView.printRequestMoney();
 		return inputView.requestMoney();
 	}
@@ -40,7 +41,7 @@ public class LottoController {
 		int manualLottoCount = requestManualLottoCountInput();
 		Money autoPurchaseMoney = new Money((money.findPurchaseLottoCount() - manualLottoCount) * Money.LOTTO_PRICE);
 
-		String[][] inputManualLotto = requestManualLottoInput(manualLottoCount);
+		List<List<Integer>> inputManualLotto = requestManualLottoInput(manualLottoCount);
 		List<Lotto> lottos = lottoFactory.generateLottosAsManual(inputManualLotto);
 		lottos.addAll(lottoFactory.generateLottosAsAuto(autoPurchaseMoney));
 
@@ -53,23 +54,27 @@ public class LottoController {
 		return inputView.requestManualLottoCount();
 	}
 
-	private String[][] requestManualLottoInput(int manualLottoCount) {
+	private List<List<Integer>> requestManualLottoInput(int manualLottoCount) {
 		outputView.printRequestManualLotto();
 		return inputView.requestManualLotto(manualLottoCount);
 	}
 
 	private WinningNumbers createWinningNumbers() {
-		Lotto winningNumber = Lotto.from(requestWinningLottoInput());
-		LottoNumber bonusLottoNumber = LottoNumber.from(requestBonusNumberInput());
+		List<LottoNumber> lottoNumbers = requestWinningLottoInput().stream()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList());
+		Lotto winningNumber = new Lotto(lottoNumbers);
+
+		LottoNumber bonusLottoNumber = new LottoNumber(requestBonusNumberInput());
 		return new WinningNumbers(winningNumber, bonusLottoNumber);
 	}
 
-	private String[] requestWinningLottoInput() {
+	private List<Integer> requestWinningLottoInput() {
 		outputView.printRequestWinningNumbers();
 		return inputView.requestWinningNumbers();
 	}
 
-	private String requestBonusNumberInput() {
+	private int requestBonusNumberInput() {
 		outputView.printRequestBonusNumber();
 		return inputView.requestBonusNumber();
 	}
