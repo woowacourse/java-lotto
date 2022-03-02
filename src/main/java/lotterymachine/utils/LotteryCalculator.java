@@ -1,5 +1,6 @@
 package lotterymachine.utils;
 
+import lotterymachine.LotteryPurchase;
 import lotterymachine.domain.WinningLotteryRank;
 
 import java.util.Map;
@@ -7,11 +8,10 @@ import java.util.Map;
 import static java.lang.Math.floor;
 
 public class LotteryCalculator {
-    private static final int LOTTERY_PRICE = 1000;
     private static final double DECIMAL_PLACE_SAVER = 100.0;
 
     public static int divideByLotteryPrice(int amount) {
-        return amount / LOTTERY_PRICE;
+        return amount / LotteryPurchase.PER_LOTTERY_TICKET_PRICE;
     }
 
     public static double calculateProfitRate(double winningLotteryAmount, int amount) {
