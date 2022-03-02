@@ -14,7 +14,7 @@ class WinningTicketTest {
     @DisplayName("로또번호가 6개가 아닌 경우 오류를 발생합니다.")
     void checkLottoNumberSize() {
         Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3));
-        assertThatThrownBy(() -> new WinningTicket(numbers, 10))
+        assertThatThrownBy(() -> WinningTicket.from(numbers, 10))
                 .isInstanceOf(IllegalArgumentException.class).hasMessage(LottoTicket.LOTTO_TICKET_SIZE_ERROR_MESSAGE);
     }
 }

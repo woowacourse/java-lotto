@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 
 class WinningResultTest {
     private final Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-    private final WinningTicket winningTicket = new WinningTicket(winningNumbers, 7);
+    private final WinningTicket winningTicket = WinningTicket.from(winningNumbers, 7);
     private final GenerateStrategy generateStrategy = () -> new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-    private final LottoTickets lottoTickets = new LottoTickets(new ArrayList<>(), new Money(14000), generateStrategy);
+    private final LottoTickets lottoTickets = LottoTickets.from(new ArrayList<>(), new Money(14000), generateStrategy);
     private final WinningPrizeStrategy winningPrizeStrategy = new LottoWinningPrizeStrategy();
 
     @Test

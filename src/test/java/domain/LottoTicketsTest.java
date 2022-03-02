@@ -20,7 +20,7 @@ class LottoTicketsTest {
     @DisplayName("음수의 금액으로 로또 티켓을 생성하려할 시 에러를 발생시키는지 검사한다.")
     void checkNegativeMoney() {
         int purchaseMoney = -17000;
-        assertThatThrownBy(() -> new LottoTickets(selfTicketNumbers, new Money(purchaseMoney), generateStrategy))
+        assertThatThrownBy(() -> LottoTickets.from(selfTicketNumbers, new Money(purchaseMoney), generateStrategy))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(Money.NOT_POSITIVE_ERROR_MESSAGE);
     }
@@ -29,7 +29,7 @@ class LottoTicketsTest {
     @DisplayName("티켓 가격의 배수가 아닌 금액으로 로또 티켓을 생성하려할 시 에러를 발생시키는지 검사한다.")
     void checkNotMultiplesOfPrice() {
         int purchaseMoney = 1700;
-        assertThatThrownBy(() -> new LottoTickets(selfTicketNumbers, new Money(purchaseMoney), generateStrategy))
+        assertThatThrownBy(() -> LottoTickets.from(selfTicketNumbers, new Money(purchaseMoney), generateStrategy))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LottoTickets.NOT_MULTIPLES_OF_PRICE_ERROR_MESSAGE);
     }
@@ -38,7 +38,7 @@ class LottoTicketsTest {
     @DisplayName("로또 티켓이 정상적으로 생성됐는지 검사한다.")
     void createLottoTicketsTest() {
         int purchaseMoney = 17000;
-        LottoTickets lottoTickets = new LottoTickets(selfTicketNumbers, new Money(purchaseMoney), generateStrategy);
+        LottoTickets lottoTickets = LottoTickets.from(selfTicketNumbers, new Money(purchaseMoney), generateStrategy);
         lottoTickets.getTickets()
                 .forEach(lottoTicket -> assertThat(lottoTicket.getLottoNumberValues()).isEqualTo(dummyLottoNumber));
     }
@@ -47,7 +47,7 @@ class LottoTicketsTest {
     @DisplayName("로또 티켓이 가격에 맞게 입력된 금액에 맞춰 티켓을 만드는지 검사한다.")
     void checkLottoTicketsCount() {
         int purchaseMoney = 10000;
-        LottoTickets lottoTickets = new LottoTickets(selfTicketNumbers, new Money(purchaseMoney), generateStrategy);
+        LottoTickets lottoTickets = LottoTickets.from(selfTicketNumbers, new Money(purchaseMoney), generateStrategy);
         assertThat(lottoTickets.getTickets().size()).isEqualTo(10);
     }
 }

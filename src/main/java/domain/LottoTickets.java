@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -13,14 +12,40 @@ public class LottoTickets {
     public static final String NOT_MULTIPLES_OF_PRICE_ERROR_MESSAGE
             = String.format("금액을 %d의 배수로 입력해주세요.", LottoTicket.TICKET_PRICE);
 
-    public LottoTickets(List<Set<Integer>> selfTicketNumbers, Money autoPurchaseMoney,
-                        GenerateStrategy generateStrategy) {
+    private LottoTickets(List<LottoTicket> lottoTickets, int selfPurchaseCount) {
+        this.lottoTickets = lottoTickets;
+        this.selfPurchaseCount = selfPurchaseCount;
+    }
+
+    public static LottoTickets from(List<Set<Integer>> selfTicketNumbers, Money autoPurchaseMoney,
+                                    GenerateStrategy generateStrategy) {
         validatePurchaseMoney(autoPurchaseMoney);
         List<LottoTicket> lottoTickets = generateTicket(selfTicketNumbers);
         int autoPurchaseCount = autoPurchaseMoney.getAmount() / LottoTicket.TICKET_PRICE;
         lottoTickets.addAll(autoGenerateTickets(generateStrategy, autoPurchaseCount));
-        this.lottoTickets = lottoTickets;
-        this.selfPurchaseCount = selfTicketNumbers.size();
+        return new LottoTickets(lottoTickets, selfTicketNumbers.size());
+    }
+
+    private static List<LottoTicket> generateTicket(List<Set<Integer>> selfTicketNumbers) {
+        return selfTicketNumbers.stream()
+                .map(LottoTicket::of)
+                .collect(Collectors.toList());
+    }
+
+    private static List<LottoTicket> autoGenerateTickets(GenerateStrategy generateStrategy, int autoPurchaseCount) {
+        return IntStream.rangeClosed(1, autoPurchaseCount)
+                .mapToObj(index -> LottoTicket.of(generateStrategy.generateNumbers()))
+                .collect(Collectors.toList());
+    }
+
+    private static void validatePurchaseMoney(Money purchaseMoney) {
+        if (isMultiplesOfTicketPrice(purchaseMoney.getAmount())) {
+            throw new IllegalArgumentException(NOT_MULTIPLES_OF_PRICE_ERROR_MESSAGE);
+        }
+    }
+
+    private static boolean isMultiplesOfTicketPrice(int purchaseMoney) {
+        return purchaseMoney % LottoTicket.TICKET_PRICE != 0;
     }
 
     public List<LottoTicket> getTickets() {
@@ -29,27 +54,5 @@ public class LottoTickets {
 
     public int getSelfPurchaseCount() {
         return selfPurchaseCount;
-    }
-
-    private List<LottoTicket> generateTicket(List<Set<Integer>> selfTicketNumbers) {
-        return selfTicketNumbers.stream()
-                .map(LottoTicket::new)
-                .collect(Collectors.toList());
-    }
-
-    private List<LottoTicket> autoGenerateTickets(GenerateStrategy generateStrategy, int autoPurchaseCount) {
-        return IntStream.rangeClosed(1, autoPurchaseCount)
-                .mapToObj(index -> new LottoTicket(generateStrategy))
-                .collect(Collectors.toList());
-    }
-
-    private void validatePurchaseMoney(Money purchaseMoney) {
-        if (isMultiplesOfTicketPrice(purchaseMoney.getAmount())) {
-            throw new IllegalArgumentException(NOT_MULTIPLES_OF_PRICE_ERROR_MESSAGE);
-        }
-    }
-
-    private boolean isMultiplesOfTicketPrice(int purchaseMoney) {
-        return purchaseMoney % LottoTicket.TICKET_PRICE != 0;
     }
 }

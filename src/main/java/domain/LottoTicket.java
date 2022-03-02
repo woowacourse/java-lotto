@@ -10,20 +10,15 @@ public class LottoTicket {
     public static final String LOTTO_TICKET_SIZE_ERROR_MESSAGE = "한 티켓의 로또 번호는 6개여야 합니다.";
     private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(GenerateStrategy generateStrategy) {
-        Set<Integer> generatedNumbers = generateStrategy.generateNumbers();
-        validateTicketSize(generatedNumbers);
-        lottoNumbers = new LinkedHashSet<>();
-        for (Integer generatedNumber : generatedNumbers) {
-            lottoNumbers.add(new LottoNumber(generatedNumber));
-        }
+    private LottoTicket(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoTicket(Set<Integer> lottoNumberValues) {
+    public static LottoTicket of(Set<Integer> lottoNumberValues) {
         validateTicketSize(lottoNumberValues);
         Set<LottoNumber> lottoNumbers = new LinkedHashSet<>();
         lottoNumberValues.forEach(number -> lottoNumbers.add(new LottoNumber(number)));
-        this.lottoNumbers = lottoNumbers;
+        return new LottoTicket(lottoNumbers);
     }
 
     public Set<Integer> getLottoNumberValues() {
@@ -32,7 +27,7 @@ public class LottoTicket {
         return lottoNumberValues;
     }
 
-    private void validateTicketSize(Set<Integer> lottoNumbers) {
+    private static void validateTicketSize(Set<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException(LOTTO_TICKET_SIZE_ERROR_MESSAGE);
         }
