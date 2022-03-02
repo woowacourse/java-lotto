@@ -17,7 +17,7 @@ public class PickedNumberTest {
     @DisplayName("모든 숫자가 1에서 45 사이에 위치하는가")
     void Is_Between_1_To_45() {
         PickedNumbers pickedNumbers = new PickedNumbers();
-        assertThat(pickedNumbers.getPickedNumbers().stream().allMatch(i -> i >= 1 && i <= 45)).isTrue();
+        assertThat(pickedNumbers.getPickedNumbers().stream().allMatch(number -> number >= 1 && number <= 45)).isTrue();
     }
 
     @Test

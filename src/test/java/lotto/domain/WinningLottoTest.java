@@ -18,15 +18,12 @@ class WinningLottoTest {
         Assertions.assertThat(winningLotto.findSameNumbersInPicked(lotto.getPickedNumbers())).isEqualTo(3);
     }
 
+
     @ParameterizedTest
     @DisplayName("올바른 등수를 판별하는지")
-    @CsvSource(value = {"1,2,3,4,5,6:RANK_FIRST", "1,2,3,4,5,7:RANK_SECOND", "1,2,3,4,5,8:RANK_THIRD",
-            "1,2,3,4,9,7:RANK_FOURTH", "1,2,3,11,12,13:RANK_FIFTH"}, delimiter = ':')
-    void Decide_Rank(String input, LottoRank inputRank) {
-        PickedNumbers pickedNumbers = new PickedNumbers("1,2,3,4,5,6");
-        BonusNumber bonusNumber = new BonusNumber("7", pickedNumbers);
-        WinningLotto winningLotto = new WinningLotto(pickedNumbers, bonusNumber);
-
-        Assertions.assertThat(winningLotto.findLottoRank(new PickedNumbers(input))).isEqualTo(inputRank);
+    @CsvSource(value = {"6:false:RANK_FIRST", "5:true:RANK_SECOND", "5:false:RANK_THIRD",
+            "4:false:RANK_FOURTH", "3:false:RANK_FIFTH"}, delimiter = ':')
+    void Decide_Rank(long targetCorrectCount, boolean isTargetBonused, LottoRank inputRank) {
+        Assertions.assertThat(LottoRank.findLottoRank(targetCorrectCount, isTargetBonused)).isEqualTo(inputRank);
     }
 }

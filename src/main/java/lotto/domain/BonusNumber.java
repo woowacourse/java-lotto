@@ -5,9 +5,9 @@ import lotto.Constant;
 import java.util.List;
 
 public class BonusNumber {
-    private int bonusNumber;
     private static final String DUPLICATION_ERROR_MESSAGE = "중복값이 있습니다";
     private static final String NOT_IN_RANGE_MESSAGE = "범위내에 없습니다";
+    private int bonusNumber;
 
     public BonusNumber(String input, PickedNumbers pickedNumbers) {
         bonusNumber = Integer.parseInt(input);

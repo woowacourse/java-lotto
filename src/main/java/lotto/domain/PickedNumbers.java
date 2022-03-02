@@ -12,10 +12,10 @@ import java.util.stream.IntStream;
 
 public class PickedNumbers {
     private static final List<Integer> numbers = IntStream.rangeClosed(Constant.FIRST_NUM, Constant.LAST_NUM).boxed().collect(toList());
-    private List<Integer> pickedNumbers;
     private static final String DUPLICATION_ERROR_MESSAGE = "중복값이 있습니다";
     private static final String NOT_IN_RANGE_MESSAGE = "범위내에 없습니다";
     private static final String NUMBER_DELIMITER = ",";
+    private List<Integer> pickedNumbers;
 
     public PickedNumbers() {
         Collections.shuffle(numbers);

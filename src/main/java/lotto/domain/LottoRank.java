@@ -31,22 +31,30 @@ public enum LottoRank {
         return prizeAmount;
     }
 
-    public static LottoRank valueOf(long targetCorrectCount, boolean isTargetBonused) {
-        return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.findCorrectRank(targetCorrectCount, isTargetBonused))
+    public static LottoRank findLottoRank(long targetCorrectCount, boolean isTargetBonused) {
+        LottoRank lottoRank = Arrays.stream(LottoRank.values())
+                .filter(rank -> rank.findCorrectRank(targetCorrectCount, isTargetBonused))
                 .findFirst()
                 .orElse(null);
+        return lottoRank;
     }
 
-    public boolean findCorrectRank(long targetCorrectCount, boolean isTargetBonused) {
-        return isSameCorrectCount(targetCorrectCount) && isSameBonus(isTargetBonused);
+    public static void addLottoResult(LottoResult lottoResult, long targetCorrectCount, boolean targetBonused) {
+        LottoRank lottoRank = findLottoRank(targetCorrectCount, targetBonused);
+        if (lottoRank != null) {
+            lottoResult.addWinningLotto(lottoRank);
+        }
+    }
+
+    public boolean findCorrectRank(long targetCorrectCount, boolean targetBonused) {
+        return isSameCorrectCount(targetCorrectCount) && isSameBonus(targetBonused);
     }
 
     private boolean isSameCorrectCount(long targetCorrectCount) {
         return correctCount == targetCorrectCount;
     }
 
-    private boolean isSameBonus(boolean isTargetBonused) {
-        return bonused == isTargetBonused;
+    private boolean isSameBonus(boolean targetBonused) {
+        return bonused == targetBonused;
     }
 }

@@ -9,6 +9,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
+    private static final int UNIT_PRICE = 1000;
     private final InputView inputView;
     private final OutputView outputView;
     private Lottos lottos;
@@ -42,7 +43,7 @@ public class LottoController {
     private Money getMoney() {
         try {
             outputView.printAskMoneyInputMessage();
-            Money money = new Money(inputView.getInput());
+            Money money = new Money(inputView.getInput(), UNIT_PRICE);
             return money;
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
