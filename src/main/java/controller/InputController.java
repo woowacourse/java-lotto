@@ -1,5 +1,6 @@
 package controller;
 
+import domain.ManualLotto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,5 +32,22 @@ public class InputController {
         String inputBonusNumber = InputView.scanBonusNumber();
         Validator.validateInteger(inputBonusNumber);
         return Integer.parseInt(inputBonusNumber);
+    }
+
+    public List<ManualLotto> getManualLottos() {
+        int manualLottoCount = Integer.parseInt(InputView.scanManualLottoCount());
+        List<String> rawManualLottoNumbers = InputView.scanManualLottoNumbers(manualLottoCount);
+        return rawManualLottoNumbers.stream()
+                .map(this::createManualLotto)
+                .collect(Collectors.toList());
+    }
+
+    private ManualLotto createManualLotto(String rawManualLottoNumbers) {
+        List<Integer> inputManualLottoNumbers = Arrays.stream(rawManualLottoNumbers.split(LOTTO_NUMBER_INPUT_DELIMITER))
+                .map(String::strip)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList());
+        return new ManualLotto(inputManualLottoNumbers);
     }
 }
