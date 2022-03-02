@@ -1,9 +1,5 @@
 package domain;
 
-import domain.LottoNumber;
-import domain.Lottos;
-import domain.Statistic;
-import domain.WinningNumber;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +13,6 @@ public class LottosTest {
     public void generateLottosTest() {
         int count = 14;
         Lottos lottos = Lottos.generateLottos(count);
-        lottos.generateLottos(count);
 
         assertEquals(lottos.size(), 14);
     }
@@ -31,12 +26,12 @@ public class LottosTest {
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
         LottoNumber bonusBall = LottoNumber.valueOf(7);
         Lottos lottos = Lottos.generateLottos(count);
-        lottos.generateLottos(count);
         Statistic statistic = lottos.getWinningStatistics(winningNumber, bonusBall);
 
         int sumOfValues = statistic.getStatistics().values().stream()
             .mapToInt(Integer::intValue)
             .sum();
+
         assertEquals(sumOfValues, 5);
     }
 }
