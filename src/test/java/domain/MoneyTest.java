@@ -37,14 +37,14 @@ class MoneyTest {
     @ParameterizedTest
     void input_money_invalid_null(String inputMoney) {
         assertThatThrownBy(() -> new Money(inputMoney))
-                .isInstanceOf(IllegalArgumentException.class).hasMessageContaining(ERROR_NULL_OR_EMPTY_MESSAGE);
+                .isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_NULL_OR_EMPTY_MESSAGE);
     }
 
     @DisplayName("로또 구입 금액 입력이 유효하지 않은 경우 예외를 발생시킨다.")
     @Test
     void input_money_invalid_negative_number() {
         assertThatThrownBy(() -> new Money("999"))
-                .isInstanceOf(IllegalArgumentException.class).hasMessageContaining(LOTTO_PRICE + ERROR_LOWER_THAN_LOTTO_PRICE_MESSAGE);
+                .isInstanceOf(IllegalArgumentException.class).hasMessage(LOTTO_PRICE + ERROR_LOWER_THAN_LOTTO_PRICE_MESSAGE);
     }
 
     @DisplayName("로또 구입 금액 입력이 음수인 경우 예외를 발생시킨다.")
@@ -52,7 +52,7 @@ class MoneyTest {
     @ValueSource(strings = {"0", "-1"})
     void input_money_invalid(String inputMoney) {
         assertThatThrownBy(() -> new Money(inputMoney))
-                .isInstanceOf(IllegalArgumentException.class).hasMessageContaining(ERROR_FORMAT_MESSAGE);
+                .isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_FORMAT_MESSAGE);
     }
 
     @DisplayName("구입금액에 맞는 로또 발급 갯수 반환을 확인한다.")
