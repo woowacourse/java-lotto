@@ -35,7 +35,7 @@ class TicketsTest {
     }
 
     @DisplayName("계산된 당첨 등수 목록은 기댓값과 일치해야 한다.")
-    @ParameterizedTest(name = "[{index}] 당첨 등수 목록 : {4}")
+    @ParameterizedTest(name = "[{index}] 당첨 등수 목록 : {3}")
     @MethodSource("lotto.domain.ticket.provider.TicketsTestProvider#provideForCalculateRanksTest")
     void calculateRanksTest(final List<Integer> winningNumbers,
                             final int bonusNumber,

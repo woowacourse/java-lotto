@@ -95,6 +95,20 @@ public class TicketManagerTestProvider {
                                 Rank.FOURTH_GRADE,
                                 Rank.FOURTH_GRADE
                         )
+                ),
+                Arguments.of(
+                        List.of(1, 2, 3, 4, 10, 11), 5,
+                        List.of(
+                                new Ticket(List.of(1, 2, 3, 4, 5, 6)),
+                                new Ticket(List.of(1, 2, 3, 4, 8, 9))
+                        ),
+                        List.of(
+                                new Ticket(List.of(11, 12, 13, 14, 15, 16))
+                        ),
+                        List.of(
+                                Rank.FOURTH_GRADE,
+                                Rank.FOURTH_GRADE
+                        )
                 )
         );
     }
