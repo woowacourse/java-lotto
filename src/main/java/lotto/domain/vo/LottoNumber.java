@@ -25,11 +25,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
         LottoNumber lottoNumber = LOTTO_TOTAL_NUMBERS.get(number - 1);
 
-        if (lottoNumber != null) {
-            return lottoNumber;
-        }
-
-        return new LottoNumber(number);
+        return Objects.requireNonNullElseGet(lottoNumber, () -> new LottoNumber(number));
     }
 
     private static void validateNumberBoundary(int number) {
