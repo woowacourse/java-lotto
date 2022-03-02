@@ -41,18 +41,4 @@ public class LottoDtoTest {
         // then
         assertThat(actual.size()).isEqualTo(6);
     }
-
-    @Test
-    @DisplayName("getLottos 는 오름차순 정렬된 List<Integer> 를 반환한다.")
-    void elementsOfGetLottosShouldSortedInAscendingOrder() {
-        // given
-        LottoDto lottoDto = new LottoDto(lotto);
-
-        // when
-        List<Integer> actual = lottoDto.getLottoNumbers();
-        List<Integer> expected = List.of(3, 5, 7, 10, 25, 42);
-
-        // then
-        assertThat(actual).isEqualTo(expected);
-    }
 }

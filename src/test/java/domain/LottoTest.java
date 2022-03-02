@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -74,5 +75,20 @@ public class LottoTest {
 
         // then
         assertThat(lotto.containsLottoNumber(lottoNumber1)).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("getSortedLottoNumbers 는 오름차순 정렬된 List<LottoNumber> 를 반환한다.")
+    void elementsOfGetLottosShouldSortedInAscendingOrder() {
+        // given
+        Lotto lotto = new Lotto(Set.of(5, 10, 42, 25, 3, 7));
+
+        // when
+        List<LottoNumber> actual = lotto.getSortedLottoNumbers();
+        List<LottoNumber> expected = List.of(new LottoNumber(3), new LottoNumber(5), new LottoNumber(7),
+                new LottoNumber(10), new LottoNumber(25), new LottoNumber(42));
+
+        // then
+        assertThat(actual).isEqualTo(expected);
     }
 }

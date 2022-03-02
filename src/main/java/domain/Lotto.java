@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,10 +15,10 @@ public class Lotto {
 
     public Lotto(Set<Integer> lottoNumberValues) {
         validateSize(lottoNumberValues);
-        this.lottoNumbers = mapValuesToLottoNumber(lottoNumberValues);
+        this.lottoNumbers = createSetOfLottoNumberBySetOfInteger(lottoNumberValues);
     }
 
-    private Set<LottoNumber> mapValuesToLottoNumber(Set<Integer> lottoNumberValues) {
+    private Set<LottoNumber> createSetOfLottoNumberBySetOfInteger(Set<Integer> lottoNumberValues) {
         return lottoNumberValues.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableSet());
@@ -39,8 +40,10 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public List<LottoNumber> getSortedLottoNumbers() {
+        return lottoNumbers.stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     @Override
