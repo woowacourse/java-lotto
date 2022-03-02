@@ -8,7 +8,8 @@ public class Result {
     private final Map<Rank, Integer> results = new LinkedHashMap();
 
     public void add(Rank rank) {
-        results.put(rank, results.getOrDefault(rank, 0) + 1);
+        int previousCount = results.getOrDefault(rank, 0);
+        results.put(rank, previousCount + 1);
     }
 
     public Map<Rank, Integer> get() {
