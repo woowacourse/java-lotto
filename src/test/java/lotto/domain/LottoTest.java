@@ -14,6 +14,11 @@ import static org.assertj.core.api.Assertions.*;
 @Nested
 @DisplayName("한 장의 로또가")
 public class LottoTest {
+
+    private static final int LOTTO_SIZE = 6;
+    private static final String ERROR_WRONG_LOTTO_SIZE = "[ERROR] 로또는 " + LOTTO_SIZE + "개의 숫자로 이루어져야 합니다.";
+    private static final String ERROR_DUPLICATE_LOTTO_NUMBER = "[ERROR] 로또 번호는 서로 중복되지 않아야 합니다.";
+
     @Nested
     @DisplayName("6개의 숫자로 이루어져 있지 않다면")
     class wrong_lotto_count {
@@ -26,7 +31,7 @@ public class LottoTest {
                     .collect(Collectors.toList());
             assertThatThrownBy(() -> new Lotto(lottoNumbers))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("[ERROR]");
+                    .hasMessage(ERROR_WRONG_LOTTO_SIZE);
         }
     }
 
@@ -42,7 +47,7 @@ public class LottoTest {
                     .collect(Collectors.toList());
             assertThatThrownBy(() -> new Lotto(lottoNumbers))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("[ERROR]");
+                    .hasMessageContaining(ERROR_DUPLICATE_LOTTO_NUMBER);
         }
     }
 

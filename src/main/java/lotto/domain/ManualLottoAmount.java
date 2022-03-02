@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class ManualLottoAmount {
 
-    private static final String ERROR_WRONG_INPUT_NUMBER = "[ERROR] 수동으로 구매할 로또 수는 입력주신 금액 내에서 구매가능한 0 이상의 수여야 합니다.";
+    private static final String ERROR_WRONG_INPUT_NUMBER = "[ERROR] 수동으로 구매할 로또 수는 구입금액 내에서 구매가능한 0 이상의 수여야 합니다.";
 
     private final int amount;
 

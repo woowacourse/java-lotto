@@ -11,6 +11,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 @Nested
 @DisplayName("로또 번호가")
 class LottoNumberTest {
+
+    private static final int LOTTO_MIN_RANGE = 1;
+    private static final int LOTTO_MAX_RANGE = 45;
+    private static final String ERROR_WRONG_LOTTO_NUMBER = "[ERROR] " + LOTTO_MIN_RANGE + "~" + LOTTO_MAX_RANGE + " 사이의 숫자를 입력해주세요.";
+
     @Nested
     @DisplayName("정해진 범위 내의 숫자라면")
     class right_range {
@@ -31,7 +36,7 @@ class LottoNumberTest {
         void returns_error(final int number) {
             assertThatThrownBy(() -> new LottoNumber(number))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("[ERROR]");
+                    .hasMessage(ERROR_WRONG_LOTTO_NUMBER);
         }
     }
 
@@ -43,7 +48,7 @@ class LottoNumberTest {
         void returns_error() {
             assertThatThrownBy(() -> new LottoNumber("aki"))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("[ERROR]");
+                    .hasMessage(ERROR_WRONG_LOTTO_NUMBER);
         }
     }
 }

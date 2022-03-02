@@ -9,6 +9,11 @@ import static org.assertj.core.api.Assertions.*;
 @Nested
 @DisplayName("구입금액이")
 class MoneyTest {
+
+    private static final int BASIC_LOTTO_MONEY = 1000;
+    private static final String ERROR_WRONG_INPUT_MONEY = "[ERROR] 구입금액으로 " + BASIC_LOTTO_MONEY + "이상의 숫자를 입력해주세요.";
+    private static final String ERROR_WRONG_DIVIDING_MONEY = "[ERROR] 구입금액으로 " + BASIC_LOTTO_MONEY + "으로 나누어 떨어지는 수를 입력해주세요.";
+
     @Nested
     @DisplayName("숫자가 아닌 문자로 입력이 들어온다면")
     class if_input_not_Number {
@@ -17,7 +22,7 @@ class MoneyTest {
         void returns_error() {
             assertThatThrownBy(() -> new Money("value"))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("[ERROR]");
+                    .hasMessage(ERROR_WRONG_INPUT_MONEY);
         }
     }
 
@@ -29,7 +34,7 @@ class MoneyTest {
         void returns_error() {
             assertThatThrownBy(() -> new Money("500"))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("[ERROR]");
+                    .hasMessage(ERROR_WRONG_INPUT_MONEY);
         }
     }
 
@@ -41,7 +46,7 @@ class MoneyTest {
         void returns_error() {
             assertThatThrownBy(() -> new Money("2500"))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("[ERROR]");
+                    .hasMessage(ERROR_WRONG_DIVIDING_MONEY);
         }
     }
 
