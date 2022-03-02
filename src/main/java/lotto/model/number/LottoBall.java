@@ -29,10 +29,9 @@ public class LottoBall implements Comparable<LottoBall> {
 		}
 	}
 
-	// TODO : WinningBall 과 LottoBall 합칠 수 있다면 합치기
-	// public boolean match(LottoBall lottoBall) {
-	// 	return lottoBall.getNumber() == this.number;
-	// }
+	public boolean match(LottoBall lottoBall) {
+		return lottoBall.getNumber() == this.number;
+	}
 
 	public int getNumber() {
 		return number;
