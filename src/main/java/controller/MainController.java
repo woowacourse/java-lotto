@@ -1,6 +1,6 @@
 package controller;
 
-import domain.Money;
+import domain.lotto.LottoMoney;
 import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
 import domain.lotto.LottoNumber;
@@ -16,17 +16,17 @@ import view.OutputView;
 
 public class MainController {
     public void run() {
-        final Money money = makeMoney();
-        final LottoTicketCount count = LottoTicketCount.of(money.toLottoCount(), InputView.inputManualTicketCount());
+        final LottoMoney lottoMoney = makeLottoMoney();
+        final LottoTicketCount count = LottoTicketCount.of(lottoMoney.toLottoCount(), InputView.inputManualTicketCount());
         final List<Lotto> lottoTickets = makeLottos(count);
         final WinNumbers winNumbers = makeWinNums();
 
         final Result result = new Result(lottoTickets, winNumbers);
-        end(result, money);
+        end(result, lottoMoney);
     }
 
-    private Money makeMoney() {
-        return new Money(InputView.inputMoney());
+    private LottoMoney makeLottoMoney() {
+        return new LottoMoney(InputView.inputMoney());
     }
 
     private List<Lotto> makeLottos(final LottoTicketCount count) {
@@ -56,8 +56,8 @@ public class MainController {
         return LottoFactory.createWinNums(NumsGenerator.generate(winLottoRawNums), bonus);
     }
 
-    private void end(final Result result, final Money money) {
+    private void end(final Result result, final LottoMoney lottoMoney) {
         OutputView.printLottosResult(result);
-        OutputView.printProfit(Util.getProfit((float) result.getPrize(), (float) money.get()));
+        OutputView.printProfit(Util.getProfit((float) result.getPrize(), (float) lottoMoney.get()));
     }
 }
