@@ -62,7 +62,7 @@
 
 ---
 
-<img width="1072" alt="스크린샷 2022-02-24 오후 3 31 50" src="https://user-images.githubusercontent.com/57028386/155471056-d2ccd89f-1e4f-483a-a4f8-1ea320c9d4b3.png">
+<img width="1115" alt="스크린샷 2022-03-02 오전 11 09 39" src="https://user-images.githubusercontent.com/57028386/156281285-09da0804-295e-4363-858b-c611e3c3c88d.png">
 
 <img width="983" alt="스크린샷 2022-02-24 오후 3 31 54" src="https://user-images.githubusercontent.com/57028386/155471018-9c88c6a1-2187-44ae-8582-523050c954e9.png">
 
