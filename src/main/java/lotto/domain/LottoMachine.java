@@ -11,6 +11,7 @@ public class LottoMachine {
 
     public final static Money LOTTO_PRICE = new Money(1000);
 
+    private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final int START_INCLUSIVE = 1;
     private static final int END_INCLUSIVE = 45;
     private static final List<Integer> LOTTO_TOTAL_NUMBERS = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
@@ -23,7 +24,7 @@ public class LottoMachine {
 
     public LottoTickets issueAuto(int lottoCount) {
         List<List<Integer>> numbers = IntStream.range(0, lottoCount)
-                .mapToObj(noneUsed -> generateRandomNumbers(6))
+                .mapToObj(noneUsed -> generateRandomNumbers(LOTTO_NUMBERS_SIZE))
                 .collect(toList());
 
         return new LottoTickets(numbers);
