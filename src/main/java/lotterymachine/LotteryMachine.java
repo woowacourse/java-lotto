@@ -8,7 +8,8 @@ public class LotteryMachine {
     public static void main(String[] args) {
         LotteryPurchase lotteryPurchase = LotteryConverter.createLotteryPurchase();
         LotteryTickets lotteryTickets = LotteryConverter.createLotteryTickets(lotteryPurchase);
-        OutputView.printLotteryTickets(lotteryPurchase, lotteryTickets);
+        OutputView.printLotteryPurchase(lotteryPurchase);
+        OutputView.printLotteryTickets(lotteryTickets);
 
         WinningLottery winningLottery = LotteryConverter.createWinningLottery();
         WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);

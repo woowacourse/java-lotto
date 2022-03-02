@@ -11,12 +11,7 @@ import java.util.Map;
 public class OutputView {
     private static final int PROFIT_STANDARD = 1;
 
-    public static void printNumberOfTicket(int number) {
-        System.out.printf("%d개를 구매했습니다.%n", number);
-    }
-
-    public static void printLotteryTickets(LotteryPurchase lotteryPurchase, LotteryTickets lotteryTickets) {
-        printLotteryPurchase(lotteryPurchase);
+    public static void printLotteryTickets(LotteryTickets lotteryTickets) {
         StringBuilder stringBuilder = new StringBuilder();
         for (LotteryTicket lotteryTicket: lotteryTickets.getLotteryTickets()) {
             stringBuilder.append(lotteryTicket.getNumbers()+"\n");
@@ -24,7 +19,7 @@ public class OutputView {
         System.out.println(stringBuilder);
     }
 
-    private static void printLotteryPurchase(LotteryPurchase lotteryPurchase) {
+    public static void printLotteryPurchase(LotteryPurchase lotteryPurchase) {
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lotteryPurchase.getPassivityCount(), lotteryPurchase.getAutoCount());
     }
 
