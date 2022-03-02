@@ -28,10 +28,7 @@ public class LottoController {
         LottoTickets lottoTickets = purchaseLottoTickets();
         showGeneratedLottoTickets(lottoTickets);
         LottoGame lottoGame = initLottoGame(lottoTickets);
-        WinningResult winningResult = lottoGame.getWinningResult();
-        showWinningResults(winningResult);
-        double rateOfReturn = lottoGame.getLottoRateOfReturn();
-        outputView.showRateOfReturn(rateOfReturn);
+        showLottoResult(lottoGame);
     }
 
     private LottoGame initLottoGame(LottoTickets lottoTickets) {
@@ -61,9 +58,10 @@ public class LottoController {
         outputView.showLottoTicket(dtos);
     }
 
-    private void showWinningResults(WinningResult winningResult) {
+    private void showLottoResult(LottoGame lottoGame) {
+        WinningResult winningResult = lottoGame.getWinningResult();
         List<WinningResultDto> winningResultDtos = toWinningResultDtos(winningResult.getCountOfWinning());
-        outputView.showWinningResult(winningResultDtos);
+        outputView.showLottoResult(winningResultDtos, lottoGame.getLottoRateOfReturn());
     }
 
     private List<WinningResultDto> toWinningResultDtos(Map<WinningPrize, Integer> countOfWinning) {

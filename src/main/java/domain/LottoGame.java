@@ -2,17 +2,19 @@ package domain;
 
 public class LottoGame {
     private final LottoTickets lottoTickets;
-    private final WinningResult winningResult;
+    private final WinningTicket winningTicket;
+    private final WinningPrizeStrategy winningPrizeStrategy;
 
     public LottoGame(LottoTickets lottoTickets,
                      WinningTicket winningTicket,
                      WinningPrizeStrategy winningPrizeStrategy) {
         this.lottoTickets = lottoTickets;
-        this.winningResult = WinningResult.from(lottoTickets, winningTicket, winningPrizeStrategy);
+        this.winningTicket = winningTicket;
+        this.winningPrizeStrategy = winningPrizeStrategy;
     }
 
     public WinningResult getWinningResult() {
-        return winningResult;
+        return WinningResult.from(lottoTickets, winningTicket, winningPrizeStrategy);
     }
 
     public double getLottoRateOfReturn() {
@@ -22,7 +24,7 @@ public class LottoGame {
     }
 
     private int calculateTotalReturn() {
-        return winningResult.getCountOfWinning()
+        return getWinningResult().getCountOfWinning()
                 .entrySet()
                 .stream()
                 .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())

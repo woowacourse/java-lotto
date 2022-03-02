@@ -27,13 +27,10 @@ public class OutputView {
         lottoTickets.forEach(lottoTicket -> System.out.println(toLottoTicketPrintForm(lottoTicket)));
     }
 
-    public void showWinningResult(List<WinningResultDto> winningResults) {
+    public void showLottoResult(List<WinningResultDto> winningResults, double rateOfReturn) {
         System.out.println(WINNING_STATISTICS_MESSAGE);
         System.out.println(DIVISION_LINE);
         winningResults.forEach(this::printWinningResult);
-    }
-
-    public void showRateOfReturn(double rateOfReturn) {
         System.out.printf(TOTAL_RETURN_MESSAGE, rateOfReturn);
     }
 
