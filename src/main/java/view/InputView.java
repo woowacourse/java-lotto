@@ -1,9 +1,6 @@
 package view;
 
-import utils.InputValidation;
-
 import java.util.Scanner;
-import java.util.Set;
 
 public class InputView {
 
@@ -13,34 +10,32 @@ public class InputView {
 
     private final static Scanner scanner = new Scanner(System.in);
 
-    public static int inputPrice() {
+    public interface IndividualInput<T> {
+        T get() throws IllegalArgumentException;
+    }
+
+    public static <T> T commonInputProcess(IndividualInput<T> individualInputs) {
         try {
-            System.out.println(INPUT_PRICE);
-            return InputValidation.validatePrice(scanner.nextLine());
+            return individualInputs.get();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return inputPrice();
+            return commonInputProcess(individualInputs);
         }
     }
 
-    public static Set<Integer> inputWinningLottoNumbers() {
-        try {
-            System.out.println(INPUT_WINNING_LOTTO_NUMBERS);
-            return InputValidation.validateWinningNumber(scanner.nextLine());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputWinningLottoNumbers();
-        }
+    public static String inputPrice() {
+        System.out.println(INPUT_PRICE);
+        return scanner.nextLine();
     }
 
-    public static int inputBonus() {
-        try {
-            System.out.println(INPUT_BONUS_NUMBER);
-            return InputValidation.validateBonusNumber(scanner.nextLine());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputBonus();
-        }
+    public static String  inputWinningLottoNumbers() {
+        System.out.println(INPUT_WINNING_LOTTO_NUMBERS);
+        return scanner.nextLine();
+    }
+
+    public static String inputBonus() {
+        System.out.println(INPUT_BONUS_NUMBER);
+        return scanner.nextLine();
     }
 
 }

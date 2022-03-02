@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Lottos {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private final List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(List<Lotto> lottos) {
@@ -18,6 +20,10 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public int amountOfLottos() {
+        return lottos.size() * LOTTO_PRICE;
     }
 
 }
