@@ -10,9 +10,9 @@ import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
 import lotto.dto.TicketManagerDto;
 import lotto.dto.WinningTicketDto;
+import lotto.exception.LottoException;
+import lotto.exception.LottoExceptionStatus;
 import lotto.view.input.InputView;
-import lotto.view.input.reader.ConsoleReader;
-import lotto.view.input.reader.Reader;
 import lotto.view.output.OutputView;
 
 public class LottoView {
@@ -38,14 +38,13 @@ public class LottoView {
 
     private int requestTicketCount(final int totalTicketCount) {
         final int manualTicketCount = inputView.requestTicketCount();
-        verifyManualTicketCountIsLessThanTotalTicketCount(manualTicketCount, totalTicketCount);
+        verifyTotalTicketCountIsMoreThanTicketCount(totalTicketCount, manualTicketCount);
         return manualTicketCount;
     }
 
-    private void verifyManualTicketCountIsLessThanTotalTicketCount(final int manualTicketCount,
-                                                                   final int totalTicketCount) {
-        if (manualTicketCount > totalTicketCount) {
-            throw new IllegalArgumentException();
+    private void verifyTotalTicketCountIsMoreThanTicketCount(final int totalTicketCount, final int ticketCount) {
+        if (ticketCount > totalTicketCount) {
+            throw new LottoException(LottoExceptionStatus.MANUAL_TICKET_COUNT_CANNOT_BE_MORE_THAT_TOTAL_TICKET_COUNT);
         }
     }
 

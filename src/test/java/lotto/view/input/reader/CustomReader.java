@@ -11,6 +11,10 @@ public class CustomReader implements Reader {
         this.textIterator = List.of(textValue).iterator();
     }
 
+    public void initText(final List<String> textValues) {
+        this.textIterator = textValues.iterator();
+    }
+
     @Override
     public String readLine() {
         return textIterator.next();
