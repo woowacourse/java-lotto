@@ -19,17 +19,23 @@ public class LottoMachine {
         this.lottoNumberStrategy = lottoNumberStrategy;
     }
 
-    public List<LottoTicket> purchaseLottoTickets(Money amount) {
-        validateInsertAmount(amount);
+    public List<LottoTicket> purchaseLottoTicketsByManual(List<List<Integer>> lottoTicketNumbers) {
+        return lottoTicketNumbers.stream()
+            .map(this::convertToLottoNumbers)
+            .map(LottoTicket::new)
+            .collect(Collectors.toList());
+    }
+
+    private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+            .map(LottoNumber::getInstance)
+            .collect(Collectors.toList());
+    }
+
+    public List<LottoTicket> purchaseLottoTicketsByAuto(Money amount) {
         return IntStream.range(DEFAULT_VALUE, amount.getPurchasableNumber(LOTTO_TICKET_PRICE))
                 .mapToObj(index -> new LottoTicket(lottoNumberStrategy.generate()))
                 .collect(Collectors.toList());
-    }
-
-    private void validateInsertAmount(Money amount) {
-        if (!amount.isPurchasable(LOTTO_TICKET_PRICE)) {
-            throw new IllegalArgumentException(INVALID_INSERT_AMOUNT);
-        }
     }
 
     public WinningStat createWinningStat(List<LottoTicket> lottoTickets,

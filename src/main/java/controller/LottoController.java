@@ -2,7 +2,7 @@ package controller;
 
 import static constant.LottoConstant.*;
 
-import constant.LottoConstant;
+import controller.dto.LottoTicketDto;
 import controller.dto.WinningStatDto;
 import domain.*;
 import view.InputView;
@@ -16,30 +16,39 @@ public class LottoController {
     private final LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberStrategy());
 
     public void run() {
-        List<LottoTicket> lottoTickets = purchaseLottoTickets();
-        createResult(lottoTickets);
+        Money totalMoney = Money.from(InputView.getMoney());
+
+        Money moneyOfManual = Money.from(InputView.getManualCount() * LOTTO_TICKET_PRICE);
+        Money moneyOfAuto = totalMoney.consume(moneyOfManual);
+
+        List<LottoTicket> lottoTickets = purchaseLottoTickets(moneyOfManual, moneyOfAuto);
+
+        OutputView.printPurchasedLottoTicketNumber(
+            LottoTicketDto.of(lottoTickets,
+                moneyOfManual.getPurchasableNumber(LOTTO_TICKET_PRICE),
+                moneyOfAuto.getPurchasableNumber(LOTTO_TICKET_PRICE)));
+        OutputView.printWinningStat(getWinningStatDto(lottoTickets));
     }
 
-    private List<LottoTicket> purchaseLottoTickets() {
-        Money money = Money.from(InputView.getMoney());
-        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(money);
+    private List<LottoTicket> purchaseLottoTickets(Money moneyOfManual, Money moneyOfAuto) {
 
-        OutputView.printPurchasedLottoTicketNumber(lottoTickets.size());
-        OutputView.printPurchasedLottoTickets(lottoTickets);
+        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTicketsByManual(
+            InputView.getManualNumbers(moneyOfManual.getPurchasableNumber(LOTTO_TICKET_PRICE)));
+
+        lottoTickets.addAll(
+            lottoMachine.purchaseLottoTicketsByAuto(moneyOfAuto));
 
         return lottoTickets;
     }
 
-    private void createResult(List<LottoTicket> lottoTickets) {
+    private WinningStatDto getWinningStatDto(List<LottoTicket> lottoTickets) {
         LottoTicketNumbers winningNumbers = new LottoTicketNumbers(InputView.getWinningNumbers().stream()
-                .map(LottoNumber::getInstance)
-                .collect(Collectors.toList()));
+            .map(LottoNumber::getInstance)
+            .collect(Collectors.toList()));
+
         LottoNumber bonusNumber = LottoNumber.createBonus(InputView.getBonusNumber(), winningNumbers);
 
-        WinningStat winningStat = lottoMachine.createWinningStat(lottoTickets, winningNumbers, bonusNumber);
-        WinningStatDto winningStatDto = WinningStatDto.of(winningStat.getStat(),
-            winningStat.calculateProfit(LOTTO_TICKET_PRICE));
-
-        OutputView.printWinningStat(winningStatDto);
+        return WinningStatDto
+            .from(lottoMachine.createWinningStat(lottoTickets, winningNumbers, bonusNumber));
     }
 }

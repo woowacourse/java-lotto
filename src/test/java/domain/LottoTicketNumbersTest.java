@@ -1,16 +1,15 @@
-import domain.LottoNumber;
-import domain.LottoTicketNumbers;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+package domain;
+
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTicketNumbersTest {
 
@@ -70,5 +69,21 @@ class LottoTicketNumbersTest {
 
         assertThat(lottoTicketNumbers1.countDuplicateNumbers(lottoTicketNumbers2))
             .isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("방어적 복사 테스트")
+    void defensiveCopyTest() {
+        List<LottoNumber> inputLottoNumbers = IntStream.of(4, 3, 2, 1, 6, 5)
+            .mapToObj(LottoNumber::getInstance)
+            .collect(Collectors.toList());
+
+        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputLottoNumbers);
+
+        List<LottoNumber> copiedLottoNumbers = lottoTicketNumbers.getLottoNumbers();
+
+        assertThat(inputLottoNumbers).isNotSameAs(copiedLottoNumbers);
+        assertThatThrownBy(() -> copiedLottoNumbers.add(LottoNumber.getInstance(45)))
+            .isInstanceOf(UnsupportedOperationException.class);
     }
 }

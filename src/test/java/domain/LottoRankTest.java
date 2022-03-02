@@ -1,12 +1,11 @@
+package domain;
+
 import static org.assertj.core.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import domain.LottoRank;
 
 class LottoRankTest {
 
@@ -28,7 +27,7 @@ class LottoRankTest {
 	@DisplayName("상금이 있는 값만 반환 검증")
 	void lottoRankValues_WithoutNOTHING() {
 		assertThat(LottoRank.valuesWithPrize())
-			.containsExactly(LottoRank.FIRST, LottoRank.SECOND,
-				LottoRank.THIRD, LottoRank.FOURTH, LottoRank.FIFTH);
+			.containsExactly(LottoRank.FIFTH, LottoRank.FOURTH,
+				LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST);
 	}
 }

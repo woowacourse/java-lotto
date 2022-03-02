@@ -1,21 +1,24 @@
 package controller.dto;
 
+import static constant.LottoConstant.*;
+
 import java.util.Map;
 
 import domain.LottoRank;
+import domain.WinningStat;
 
 public class WinningStatDto {
 
 	private final Map<LottoRank, Integer> winningStat;
 	private final double profit;
 
-	private WinningStatDto(Map<LottoRank, Integer> winningStat, double profit) {
-		this.winningStat = winningStat;
-		this.profit = profit;
+	private WinningStatDto(WinningStat winningStat) {
+		this.winningStat = winningStat.getStat();
+		this.profit = winningStat.calculateProfit(LOTTO_TICKET_PRICE);
 	}
 
-	public static WinningStatDto of(Map<LottoRank, Integer> winningStat, double profit) {
-		return new WinningStatDto(winningStat, profit);
+	public static WinningStatDto from(WinningStat winningStat) {
+		return new WinningStatDto(winningStat);
 	}
 
 	public Map<LottoRank, Integer> getStat() {

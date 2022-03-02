@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Map;
 
 public class WinningStat {
@@ -11,11 +10,11 @@ public class WinningStat {
 	private final Map<LottoRank, Integer> stat;
 
 	public WinningStat(Map<LottoRank, Integer> ranks) {
-		stat = ranks;
+		stat = Map.copyOf(ranks);
 	}
 
 	public Map<LottoRank, Integer> getStat() {
-		return Collections.unmodifiableMap(stat);
+		return stat;
 	}
 
 	public double calculateProfit(int ticketPrice) {
