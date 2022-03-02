@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.ManualLottoCount;
@@ -23,7 +22,6 @@ public class InputView {
     private static final int POSITIVE_LOWER_BOUND = 1;
 
     private static final Scanner scanner = new Scanner(System.in);
-
 
     private InputView() throws InstantiationException {
         throw new InstantiationException(NOT_INSTANTIATION_ERROR);
@@ -69,11 +67,17 @@ public class InputView {
         String[] splitInput = input.split(DELIMITER);
 
         try {
-            Arrays.stream(splitInput).forEach(Integer::parseInt);
+            checkNumberType(splitInput);
             return true;
         } catch (NumberFormatException e) {
             System.out.println(LOTTO_ERROR_PREFIX + BLANK + NOT_NUMBER_ERROR);
             return false;
+        }
+    }
+
+    private static void checkNumberType(String[] splitInput) {
+        for (String element : splitInput) {
+            Integer.parseInt(element);
         }
     }
 
