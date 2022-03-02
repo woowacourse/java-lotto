@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -26,6 +27,7 @@ public class Lotto {
     public List<Integer> getIntValues() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
+                .sorted()
                 .collect(Collectors.toUnmodifiableList());
     }
 
