@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.factory.LottoFactory;
+import lotto.domain.factory.NumberFactory;
+
 public class LottoTest {
 
     @Nested

@@ -1,8 +1,9 @@
 package lotto.controller;
 
+import lotto.domain.factory.MoneyFactory;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoFactory;
-import lotto.domain.lotto.NumberFactory;
+import lotto.domain.factory.LottoFactory;
+import lotto.domain.factory.NumberFactory;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.Money;
@@ -29,7 +30,7 @@ public class LottoController {
     private Money requestMoney() {
         try {
             String input = InputView.inputMoney();
-            return new Money(input);
+            return MoneyFactory.valueOf(input);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
             return requestMoney();

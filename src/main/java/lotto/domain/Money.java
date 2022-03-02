@@ -10,10 +10,16 @@ public class Money {
 
     private final int value;
 
-    public Money(String text) {
-        int number = toInt(text);
-        validate(number);
-        this.value = number;
+    public Money(int value) {
+        validate(value);
+        this.value = value;
+    }
+
+    public Money pay(int price, int count) {
+        if (value < price * count) {
+            throw new IllegalArgumentException("돈이 부족합니다.");
+        }
+        return new Money(value - (count * price));
     }
 
     public double getRateOfProfit(long totalMoney) {
@@ -22,14 +28,6 @@ public class Money {
 
     public int getValue() {
         return value;
-    }
-
-    private int toInt(String text) {
-        try {
-            return Integer.parseInt(text);
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("숫자여야 합니다.");
-        }
     }
 
     private void validate(int number) {

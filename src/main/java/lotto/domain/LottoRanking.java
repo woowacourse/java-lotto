@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum LottoRanking {
 
-    Fail(0, false, 0),
+    FAIL(0, false, 0),
     FIFTH(3, false, 5_000),
     FOURTH(4, false, 50_000),
     THIRD(5, false, 1_500_000) {
@@ -35,7 +35,7 @@ public enum LottoRanking {
         return Arrays.stream(values())
             .filter(ranking -> ranking.match(count, containsBonus))
             .findAny()
-            .orElse(LottoRanking.Fail);
+            .orElse(LottoRanking.FAIL);
     }
 
     public boolean match(int count, boolean containsBonus) {

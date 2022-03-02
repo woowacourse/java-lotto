@@ -36,7 +36,7 @@ public class OutputView {
     public static void printResult(Result result) {
         System.out.printf("%n당첨 통계%n---------%n");
         for (LottoRanking value : LottoRanking.values()) {
-            if (value == LottoRanking.Fail) {
+            if (value == LottoRanking.FAIL) {
                 continue;
             }
             String bonusBallMessage = " ";

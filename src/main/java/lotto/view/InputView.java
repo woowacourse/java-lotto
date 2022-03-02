@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.Scanner;
 
-import lotto.domain.lotto.LottoFactory;
+import lotto.domain.factory.LottoFactory;
 
 public class InputView {
 

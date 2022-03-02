@@ -1,4 +1,6 @@
-package lotto.domain.lotto;
+package lotto.domain.factory;
+
+import lotto.domain.lotto.Number;
 
 public class NumberFactory {
 

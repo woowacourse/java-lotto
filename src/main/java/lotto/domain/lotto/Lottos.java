@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.Money;
+import lotto.domain.factory.LottoFactory;
 
 public class Lottos {
 

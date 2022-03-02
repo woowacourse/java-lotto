@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.domain.Money;
+import lotto.domain.factory.MoneyFactory;
 
 public class LottosTest {
 
@@ -23,7 +24,7 @@ public class LottosTest {
             @CsvSource(value = {"1000|1", "3000|3", "5000|5"}, delimiter = '|')
             @DisplayName("구입금액에 맞는 개수의 로또를 생성한다.")
             void It_create_lottos(String money, int expected) {
-                Lottos lottos = new Lottos(new Money(money));
+                Lottos lottos = new Lottos(MoneyFactory.valueOf(money));
 
                 assertThat(lottos.getCount()).isEqualTo(expected);
             }
