@@ -22,6 +22,10 @@ public class Lottos {
         lottos.add(lotto);
     }
 
+    public void add(Lotto lotto) {
+        lottos.add(lotto);
+    }
+
     public int getCount() {
         return lottos.size();
     }
