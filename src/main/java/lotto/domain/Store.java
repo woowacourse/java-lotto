@@ -13,29 +13,22 @@ public class Store {
         this.leftMoney = leftMoney;
     }
 
-    public List<Lotto> buyLottos(int manualLottoCount) {
-        validateManualLottoCount(manualLottoCount);
-        List<Lotto> manualLottos = buyManualLottos(manualLottoCount);
-        List<Lotto> automaticLottos = buyAutomaticLottos();
-        manualLottos.addAll(automaticLottos);
-        return manualLottos;
+    public List<Lotto> buyLottos(List<Lotto> manualLottos) {
+        validateEnoughMoney(manualLottos.size());
+        List<Lotto> lottos = buyManualLottos(manualLottos);
+        lottos.addAll(buyAutomaticLottos());
+        return lottos;
     }
 
-    private void validateManualLottoCount(int manualLottoCount) {
+    public void validateEnoughMoney(int manualLottoCount) {
         if (LottoMoney.createLottoMoneyByCount(manualLottoCount).isGreaterThan(leftMoney)) {
             throw new IllegalArgumentException("로또를 구매할 돈이 부족하다.");
         }
     }
 
-    private List<Lotto> buyManualLottos(int manualLottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < manualLottoCount; i++) {
-            String input = InputView.input();
-            InputView.validateBlank(input);
-            lottos.add(new Lotto(InputView.convertToNumbers(input)));
-        }
-        leftMoney = leftMoney.minus(LottoMoney.createLottoMoneyByCount(manualLottoCount));
-        return lottos;
+    private List<Lotto> buyManualLottos(List<Lotto> manualLottos) {
+        leftMoney = leftMoney.minus(LottoMoney.createLottoMoneyByCount(manualLottos.size()));
+        return new ArrayList<>(manualLottos);
     }
 
     private List<Lotto> buyAutomaticLottos() {
@@ -54,4 +47,5 @@ public class Store {
         leftMoney = leftMoney.minus(LottoMoney.createMinimumLottoMoney());
         return LottoGenerator.generate();
     }
+
 }
