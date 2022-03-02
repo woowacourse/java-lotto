@@ -21,7 +21,7 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank getRank(int winningNumbersMatchCount, boolean bonusNumberMatch) {
+    public static Rank findRank(int winningNumbersMatchCount, boolean bonusNumberMatch) {
         if (winningNumbersMatchCount == 5 && bonusNumberMatch == true) {
             return RANK_2;
         }
@@ -35,15 +35,15 @@ public enum Rank {
         return prize * count;
     }
 
-    public String toStringWinningNumberCount() {
-        return String.valueOf(winningLottoMatchCount);
+    public int getWinningLottoMatchCount() {
+        return winningLottoMatchCount;
     }
 
     public boolean isBonusNumberMatch() {
         return bonusNumberMatch;
     }
 
-    public String toStringPrize() {
-        return String.valueOf(prize);
+    public long getPrize() {
+        return prize;
     }
 }

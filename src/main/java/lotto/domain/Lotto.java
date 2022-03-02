@@ -8,7 +8,6 @@ import lotto.validator.LottoValidator;
 public class Lotto {
 
     public static final long LOTTO_PRICE = 1000;
-
     private static final String INPUT_NUMBERS_DELIMITER = ",";
 
     private final List<LottoNumber> lottoNumbers;
@@ -23,20 +22,20 @@ public class Lotto {
     }
 
     private static List<LottoNumber> receiveStringInput(String stringInput) {
-        return convertToLottoNumbers(parseStringInput(stringInput));
-    }
-
-    private static List<Integer> parseStringInput(String stringInput) {
-        return Arrays.stream(stringInput.split(INPUT_NUMBERS_DELIMITER))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        return convertToLottoNumbers(splitAndParseInteger(stringInput));
     }
 
     private static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::findByNumber)
                 .sorted()
+                .collect(Collectors.toList());
+    }
+
+    private static List<Integer> splitAndParseInteger(String stringInput) {
+        return Arrays.stream(stringInput.split(INPUT_NUMBERS_DELIMITER))
+                .map(String::trim)
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 

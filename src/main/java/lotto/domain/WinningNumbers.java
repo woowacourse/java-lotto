@@ -14,13 +14,15 @@ public class WinningNumbers {
     }
 
     public static WinningNumbers generateWinningNumbersByString(String winningLotto, String lottoNumber) {
-        return new WinningNumbers(Lotto.generateLottoByString(winningLotto),
-                LottoNumber.findByNumber(Integer.parseInt(lottoNumber)));
+        return new WinningNumbers(
+                Lotto.generateLottoByString(winningLotto),
+                LottoNumber.findByNumber(Integer.parseInt(lottoNumber))
+        );
     }
 
     public Rank getRankOf(Lotto lotto) {
-        int matchCount = lotto.getMatchCount(winningLotto);
-        boolean contains = lotto.isContain(lottoNumber);
-        return Rank.getRank(matchCount, contains);
+        return Rank.findRank(
+                lotto.getMatchCount(winningLotto), lotto.isContain(lottoNumber)
+        );
     }
 }

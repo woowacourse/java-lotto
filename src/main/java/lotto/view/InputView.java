@@ -19,7 +19,8 @@ public class InputView {
 
     public static int inputCountForBuy() {
         try {
-            System.out.println("\n" + INPUT_LOTTO_COUNT_FOR_MANUAL_MESSAGE);
+            OutputView.printNewLine();
+            System.out.println(INPUT_LOTTO_COUNT_FOR_MANUAL_MESSAGE);
             int countForBuy = Integer.parseInt(scanner.nextLine());
             CountForBuyValidator.validate(countForBuy);
             return countForBuy;
@@ -30,7 +31,8 @@ public class InputView {
     }
 
     public static void printInputLottoNumbersMessage() {
-        System.out.println("\n" + INPUT_LOTTO_NUMBERS_MESSAGE);
+        OutputView.printNewLine();
+        System.out.println(INPUT_LOTTO_NUMBERS_MESSAGE);
     }
 
     public static String inputLottoNumbers() {

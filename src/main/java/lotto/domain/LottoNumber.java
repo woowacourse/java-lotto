@@ -18,8 +18,8 @@ public enum LottoNumber {
     NUMBER_36(36), NUMBER_37(37), NUMBER_38(38), NUMBER_39(39), NUMBER_40(40),
     NUMBER_41(41), NUMBER_42(42), NUMBER_43(43), NUMBER_44(44), NUMBER_45(45);
 
-    private static final int PICKUP_COUNT = 6;
     private static final String LOTTO_NUMBER_PREFIX = "NUMBER_";
+    private static final int PICKUP_COUNT = 6;
 
     private final int lottoNumber;
 

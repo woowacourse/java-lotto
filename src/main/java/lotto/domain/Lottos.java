@@ -8,19 +8,19 @@ import java.util.stream.IntStream;
 public class Lottos {
 
     private final List<Lotto> lottos;
-    private int countByManual;
-    private int countByAuto;
+    private int countOfManualLotto;
+    private int countOfAutoLotto;
 
     public Lottos() {
         this.lottos = new ArrayList<>();
-        this.countByManual = 0;
-        this.countByAuto = 0;
+        this.countOfManualLotto = 0;
+        this.countOfAutoLotto = 0;
     }
 
     public void buyLottoByManual(Lotto lotto, Money money) {
         money.spendMoney(Lotto.LOTTO_PRICE);
         lottos.add(lotto);
-        countByManual++;
+        countOfManualLotto++;
     }
 
     public void buyAllLottosByAuto(Money money) {
@@ -29,18 +29,18 @@ public class Lottos {
         IntStream.range(0, countCanBuy)
                 .mapToObj(i -> Lotto.generateLottoByAuto())
                 .forEach(lottos::add);
-        countByAuto += countCanBuy;
+        countOfAutoLotto += countCanBuy;
     }
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
 
-    public int getCountByManual() {
-        return countByManual;
+    public int getCountOfManualLotto() {
+        return countOfManualLotto;
     }
 
-    public int getCountByAuto() {
-        return countByAuto;
+    public int getCountOfAutoLotto() {
+        return countOfAutoLotto;
     }
 }
