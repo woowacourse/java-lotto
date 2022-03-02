@@ -18,7 +18,7 @@ public class LottoMachine {
             .collect(toList());
 
     public LottoTickets issueManual(List<List<Integer>> manualNumbers) {
-        return LottoTickets.createManualLottoTickets(manualNumbers);
+        return new LottoTickets(manualNumbers);
     }
 
     public LottoTickets issueAuto(int lottoCount) {
@@ -26,7 +26,7 @@ public class LottoMachine {
                 .mapToObj(noneUsed -> generateRandomNumbers(6))
                 .collect(toList());
 
-        return LottoTickets.createManualLottoTickets(numbers);
+        return new LottoTickets(numbers);
     }
 
     private List<Integer> generateRandomNumbers(int size) {
