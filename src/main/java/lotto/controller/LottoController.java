@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.AmountToBuyLotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.ManualLottoCount;
 import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinningNumbers;
@@ -13,7 +14,9 @@ public class LottoController {
     public void start() {
         AmountToBuyLotto amount = inputAmount();
 
-        LottoTickets lottoTickets = buyTickets(amount);
+        ManualLottoCount manualLottoCount = inputManualLottoCount(amount);
+
+        LottoTickets lottoTickets = buyTickets(amount, manualLottoCount);
 
         WinningNumbers winningNumbers = createWinningNumbers();
 
@@ -31,11 +34,21 @@ public class LottoController {
         }
     }
 
-    private LottoTickets buyTickets(AmountToBuyLotto amount) {
-        int ticketCount = amount.calculateLottoCount();
-        OutputView.printTicketCount(ticketCount);
+    private ManualLottoCount inputManualLottoCount(AmountToBuyLotto amount) {
+        try {
+            return ManualLottoCount.of(InputView.inputManualLottoCount(),
+                    amount.calculateLottoCount());
+        } catch (IllegalArgumentException e) {
+            OutputView.printException(e);
+            return inputManualLottoCount(amount);
+        }
+    }
 
-        LottoTickets lottoTickets = LottoTickets.generateRandomByCount(ticketCount);
+    private LottoTickets buyTickets(AmountToBuyLotto amount, ManualLottoCount manualLottoCount) {
+        int automaticLottoCount = amount.calculateAutomaticLottoCount(manualLottoCount);
+        OutputView.printTicketCount(amount, manualLottoCount);
+
+        LottoTickets lottoTickets = LottoTickets.generateRandomByCount(automaticLottoCount);
         OutputView.printTicket(lottoTickets);
         return lottoTickets;
     }
