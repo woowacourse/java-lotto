@@ -55,7 +55,7 @@ LottoTest {
     @Test
     void compare_bonusNumbers() {
         final Lotto lotto = new Lotto("1,2,3,4,5,6");
-        final LottoNumber bonusNumber = new LottoNumber("6");
+        final LottoNumber bonusNumber = LottoNumber.getLottoNumber("6");
 
         final boolean hasBonus = lotto.isContainNumber(bonusNumber);
 

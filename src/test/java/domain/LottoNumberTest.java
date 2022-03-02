@@ -16,7 +16,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"1", "45"})
     void input_lottoNumber_valid(final String number) {
-        assertDoesNotThrow(() -> new LottoNumber(number));
+        assertDoesNotThrow(() -> LottoNumber.getLottoNumber(number));
     }
 
     @DisplayName("로또 번호가 숫자가 아니거나 0일 경우 예외를 발생시킨다.")
@@ -24,7 +24,7 @@ class LottoNumberTest {
     @ValueSource(strings = {"a", "0", "-1"})
     void input_lottoNumber_invalid_format(final String number) {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
-            new LottoNumber(number);
+            LottoNumber.getLottoNumber(number);
         });
         assertEquals(ERROR_FORMAT_MESSAGE, exception.getMessage());
     }
@@ -33,7 +33,7 @@ class LottoNumberTest {
     @Test
     void input_lottoNumber_invalid_number() {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
-            new LottoNumber("46");
+            LottoNumber.getLottoNumber("46");
         });
         assertEquals(LOTTO_NUMBER_RANGE_MESSAGE, exception.getMessage());
     }

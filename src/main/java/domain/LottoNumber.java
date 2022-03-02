@@ -11,22 +11,27 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
-    public LottoNumber(final String inputNumber) {
-        validateInputLottoNumber(inputNumber);
-        this.number = Integer.parseInt(inputNumber);
-        validateLottoNumberRange(this.number);
+    private LottoNumber(final int number) {
+        this.number = number;
     }
 
-    private void validateInputLottoNumber(final String inputNumber) {
+    public static LottoNumber getLottoNumber(final String inputNumber) {
+        validateInputLottoNumber(inputNumber);
+        int number = Integer.parseInt(inputNumber);
+        validateLottoNumberRange(number);
+        return new LottoNumber(number);
+    }
+
+    public static LottoNumber getNumber(final int number) {
+        return new LottoNumber(number);
+    }
+
+    private static void validateInputLottoNumber(final String inputNumber) {
         Validator.checkNullOrEmpty(inputNumber);
         Validator.checkFormat(inputNumber);
     }
 
-    public LottoNumber(final int inputNumber) {
-        this.number = inputNumber;
-    }
-
-    private void validateLottoNumberRange(final int number) {
+    private static void validateLottoNumberRange(final int number) {
         if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
             throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_MESSAGE);
         }

@@ -7,19 +7,8 @@ import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
-class LottoFactoryTest {
-
-    LottoFactory lottoFactory;
-
-    @BeforeEach
-    void setUp() {
-        final Money money = new Money("100000000");
-
-        lottoFactory = new LottoFactory(money, new Count(5));
-    }
+class PrizeTest {
 
     @DisplayName("각각 로또들의 등수에 따라 받을 수 있는 총 상금의 합을 확인한다.")
     @Test
@@ -29,8 +18,8 @@ class LottoFactoryTest {
         rankCounts.put(RankPrize.SECOND, 1);
         rankCounts.put(RankPrize.THIRD, 1);
 
-        int result = lottoFactory.calculatePrize(rankCounts);
+        Prize result = Prize.calculatePrize(rankCounts);
 
-        assertThat(result).isEqualTo(31550000);
+        assertThat(result.getPrize()).isEqualTo(31550000);
     }
 }

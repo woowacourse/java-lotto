@@ -23,7 +23,7 @@ public class Lotto {
         validateLottoSize(splitNumbers);
         Validator.checkDuplication(splitNumbers);
         this.lotto = splitNumbers.stream()
-                .map(LottoNumber::new)
+                .map(a -> LottoNumber.getLottoNumber(a))
                 .collect(Collectors.toList());
     }
 

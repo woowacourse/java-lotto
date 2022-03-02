@@ -25,8 +25,9 @@ class MoneyTest {
     @Test
     void name() {
         final Money money = new Money("10000");
+        final Prize prize = Prize.getPrize(5000);
 
-        final double profit = money.calculateProfit(5000);
+        final double profit = money.calculateProfit(prize);
 
         assertThat(profit).isEqualTo(0.5);
     }

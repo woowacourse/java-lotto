@@ -30,8 +30,8 @@ public class Money {
         return this.money / LOTTO_PRICE;
     }
 
-    public double calculateProfit(final int totalWinPrize) {
-        return (double) totalWinPrize / (calculateCounts() * LOTTO_PRICE);
+    public double calculateProfit(final Prize totalWinPrize) {
+        return totalWinPrize.calculateProfit(calculateCounts() * LOTTO_PRICE);
     }
 
     @Override

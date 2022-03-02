@@ -9,24 +9,28 @@ import view.OutputView;
 
 public class LottoController {
 
-    private static final String ERROR_MESSAGE = "[ERROR] ";
+    public static final String ERROR_MESSAGE = "[ERROR] ";
     private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "지난주 당첨번호와 보너스가 중복일 수 없습니다.";
 
     public void start() {
-        Money money = getMoney();
-        Count manualCount = getManualCount(money);
-        final LottoFactory lottoFactory = new LottoFactory(money, manualCount);
+        final Money money = getMoney();
+        final Count manualCount = getManualCount(money);
+        final IssuedLotto issuedLotto = new IssuedLotto();
 
-        OutputView.printLotto(lottoFactory.issueLotto(), manualCount.getCount());
+        OutputView.printManualLottoInstruction();
+        OutputView.printLotto(issuedLotto.issue(money, manualCount), manualCount.getCount());
 
-        Lotto lastWinLotto = getWinLotto();
-        LottoNumber bonusNumber = getBonusNumber(lastWinLotto);
-
-        SortedMap<RankPrize, Integer> rankCounts = lottoFactory.run(lastWinLotto, bonusNumber);
-        int totalPrize = lottoFactory.calculatePrize(rankCounts);
+        SortedMap<RankPrize, Integer> rankCounts = pickLotto(issuedLotto);
 
         OutputView.printWinStatistics(rankCounts);
-        OutputView.printWinProfit(lottoFactory.calculateProfit(totalPrize));
+        OutputView.printWinProfit(money.calculateProfit(Prize.calculatePrize(rankCounts)));
+    }
+
+    private SortedMap<RankPrize, Integer> pickLotto(IssuedLotto issuedLotto) {
+        final Lotto lastWinLotto = getWinLotto();
+        final LottoNumber bonusNumber = getBonusNumber(lastWinLotto);
+        final CorrectNumbers correctNumbers = new CorrectNumbers();
+        return correctNumbers.run(issuedLotto, lastWinLotto, bonusNumber);
     }
 
     private Money getMoney() {
@@ -47,6 +51,10 @@ public class LottoController {
         }
     }
 
+    public static String getManualLotto() {
+        return InputView.getManualLotto();
+    }
+
     private Lotto getWinLotto() {
         try {
             return new Lotto(InputView.getWinLotto());
@@ -58,7 +66,7 @@ public class LottoController {
 
     private LottoNumber getBonusNumber(final Lotto lotto) {
         try {
-            LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
+            LottoNumber bonusNumber = LottoNumber.getLottoNumber(InputView.getBonusNumber());
             if (isBonusNumberContain(lotto, bonusNumber)) {
                 throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
             }
