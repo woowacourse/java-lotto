@@ -21,7 +21,7 @@ public class WinningResult {
         initResult();
         for (LotteryTicket lotteryTicket: lotteryTickets.getLotteryTickets()) {
             WinningLotteryRank winningLotteryRank = winningLottery.getWinningLotteryRank(lotteryTicket);
-            result.put(winningLotteryRank, result.getOrDefault(winningLotteryRank, 0) + 1);
+            result.put(winningLotteryRank, result.get(winningLotteryRank) + 1);
         }
     }
 
