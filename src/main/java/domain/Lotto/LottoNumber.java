@@ -4,6 +4,7 @@ import utils.ExceptionMessage;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.ArrayList;
 =======
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
@@ -12,6 +13,9 @@ import java.util.ArrayList;
 >>>>>>> 8185971 (feat : 반복되는 LottoNumber 인스턴스 캐싱하기)
 import java.util.List;
 import java.util.Objects;
+=======
+import java.util.*;
+>>>>>>> 9f88acd (refactor : LottoNumber 컬렉션 Map으로 변경)
 
 public class LottoNumber {
 
@@ -19,13 +23,17 @@ public class LottoNumber {
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 8185971 (feat : 반복되는 LottoNumber 인스턴스 캐싱하기)
     private static final List<LottoNumber> CACHE = new ArrayList<>();
+=======
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
+>>>>>>> 9f88acd (refactor : LottoNumber 컬렉션 Map으로 변경)
 
     static {
-        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
-            CACHE.add(new LottoNumber(i));
+        for (int number = MINIMUM_LOTTO_NUMBER; number <= MAXIMUM_LOTTO_NUMBER; number++) {
+            CACHE.put(number, new LottoNumber(number));
         }
     }
 <<<<<<< HEAD
@@ -55,7 +63,7 @@ public class LottoNumber {
 
 >>>>>>> 4022ea6 (refactor: 메서드 위치 변경)
     public static LottoNumber valueOf(int number) {
-        LottoNumber lottoNumber = CACHE.get(number - 1);
+        LottoNumber lottoNumber = CACHE.get(number);
 
         if (lottoNumber == null) {
             lottoNumber = new LottoNumber(number);
@@ -87,7 +95,7 @@ public class LottoNumber {
     }
 
     public static List<LottoNumber> values() {
-        return CACHE;
+        return new ArrayList<>(CACHE.values());
     }
 
 <<<<<<< HEAD
