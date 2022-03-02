@@ -1,11 +1,8 @@
 package lotto.model.lotto;
 
-import lotto.model.bonusball.BonusBallResponse;
 import lotto.model.result.RateOfReturn;
-import lotto.model.bonusball.BonusBall;
 import lotto.model.result.WinningResult;
-import lotto.model.winningnumber.WinningNumber;
-import lotto.model.winningnumber.WinningNumberResponse;
+import lotto.model.winningnumber.WinningLottoResponse;
 
 public class LottoGame {
 
@@ -17,15 +14,8 @@ public class LottoGame {
         return new RateOfReturn(money);
     }
 
-    public BonusBall storeBonusBall(WinningNumber WinningNumber, String input) {
-        BonusBall bonusBall = new BonusBall(input);
-        WinningNumber.validateReduplicationWithBonusBall(input);
-        return bonusBall;
-    }
-
-    public WinningResult calcWinningNumber(LottoStorage lottoStorage, BonusBallResponse bonusBallResponse,
-                                                    WinningNumberResponse WinningNumberResponse) {
-        return lottoStorage.calcWinningNumber(bonusBallResponse, WinningNumberResponse);
+    public WinningResult calcWinningNumber(LottoStorage lottoStorage, WinningLottoResponse winningLottoResponse) {
+        return lottoStorage.calcWinningNumber(winningLottoResponse);
     }
 
     public double sendRateOfReturn(RateOfReturn rateOfReturn, WinningResult winningResult) {

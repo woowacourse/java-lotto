@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import lotto.model.bonusball.BonusBallResponse;
 import lotto.model.result.WinningResult;
-import lotto.model.winningnumber.WinningNumberResponse;
+import lotto.model.winningnumber.WinningLottoResponse;
 
 public class LottoStorage {
     private final List<Lotto> lottoNumbers;
@@ -32,10 +31,9 @@ public class LottoStorage {
         return Collections.unmodifiableList(lottoResponses);
     }
 
-    public WinningResult calcWinningNumber(BonusBallResponse bonusBallResponse,
-                                           WinningNumberResponse winningNumberResponse) {
+    public WinningResult calcWinningNumber(WinningLottoResponse winningLottoResponse) {
         WinningResult winningResult = new WinningResult();
-        lottoNumbers.forEach(lotto -> lotto.calcWinningNumber(winningResult, bonusBallResponse, winningNumberResponse));
+        lottoNumbers.forEach(lotto -> lotto.calcWinningNumber(winningResult, winningLottoResponse));
         return winningResult;
     }
 }

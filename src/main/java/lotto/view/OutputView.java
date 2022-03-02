@@ -1,6 +1,8 @@
 package lotto.view;
 
-import java.util.Set;
+import java.util.List;
+
+import lotto.model.lotto.LottoResponse;
 
 public class OutputView {
     private static final String PURCHASE_MESSAGE = "개를 구매했습니다";
@@ -20,8 +22,9 @@ public class OutputView {
         printMessage(size + PURCHASE_MESSAGE);
     }
 
-    public void printLottos(Set<Integer> numbers) {
-        System.out.println(numbers);
+    public void printLottos(List<LottoResponse> lottoStorage) {
+        printLottosSize(lottoStorage.size());
+        lottoStorage.forEach(lottoResponse -> System.out.println(lottoResponse.getNumbers()));
     }
 
     public void printResultMessage() {
