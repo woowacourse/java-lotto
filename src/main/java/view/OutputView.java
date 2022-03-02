@@ -20,6 +20,7 @@ public class OutputView {
     private static final String PURCHASE_COUNT_MESSAGE = "%d개를 구매했습니다.";
     private static final String REQUEST_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String REQUEST_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String REQUEST_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
 
     private void printMessage(String message) {
         System.out.println(message);
@@ -81,5 +82,9 @@ public class OutputView {
 
     public void printRateOfProfit(double rateOfProfit) {
         printMessage(String.format(PROFIT_RESULT_MESSAGE, rateOfProfit));
+    }
+
+    public void printRequestManualLottoCount() {
+        printMessage(REQUEST_MANUAL_LOTTO_COUNT);
     }
 }

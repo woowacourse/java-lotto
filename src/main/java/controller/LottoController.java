@@ -2,11 +2,13 @@ package controller;
 
 import domain.Lotto;
 import domain.LottoFactory;
+import domain.LottoQuantity;
 import domain.LottoTicket;
 import domain.Money;
 import domain.Number;
 import domain.WinningNumbers;
 import domain.WinningResult;
+import java.util.List;
 import view.InputView;
 import view.OutputView;
 
@@ -36,7 +38,13 @@ public class LottoController {
     }
 
     private LottoTicket buyLottoTicket(Money money) {
-        LottoTicket lottoTicket = new LottoTicket(lottoFactory.generateLottoTicket(money));
+        outputView.printRequestManualLottoCount();
+        LottoQuantity lottoQuantity = LottoQuantity.of(inputView.requestManualLottoQuantity(), money);
+
+        List<List<Integer>> manualLottoNumbers = inputView.requestManualLottoNumbers(lottoQuantity.getManualLotto());
+        LottoTicket lottoTicket = new LottoTicket(
+                lottoFactory.generateLottoTicket(manualLottoNumbers, lottoQuantity.getAutoLotto()));
+
         outputView.printPurchasedLottoTicket(lottoTicket.getLottoTicket());
         return lottoTicket;
     }
