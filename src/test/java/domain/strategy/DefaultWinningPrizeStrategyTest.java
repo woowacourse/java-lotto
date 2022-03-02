@@ -3,6 +3,7 @@ package domain.strategy;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.WinningPrize;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +21,7 @@ class DefaultWinningPrizeStrategyTest {
         put(3, WinningPrize.FIFTH);
     }};
 
-    private final Map<WinningPrize, Integer> winningPrizeMatchCounts = new HashMap<>() {{
+    private final Map<WinningPrize, Integer> winningPrizeMatchCounts = new EnumMap<>(WinningPrize.class) {{
         put(WinningPrize.FIRST, 6);
         put(WinningPrize.SECOND, 5);
         put(WinningPrize.THIRD, 5);
