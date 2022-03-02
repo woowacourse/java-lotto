@@ -1,7 +1,7 @@
 package domain;
 
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoTicket {
 
@@ -12,7 +12,7 @@ public class LottoTicket {
 	}
 
 	public WinningResult findWinningResult(final WinningNumbers winningNumbers) {
-		EnumMap<LottoRank, Integer> winningResult = LottoRank.createWinningResultMap();
+		Map<LottoRank, Integer> winningResult = LottoRank.createWinningResultMap();
 		Lotto winningNumber = winningNumbers.getWinningNumbers();
 		LottoNumber bonusLottoNumber = winningNumbers.getBonusNumber();
 
@@ -23,7 +23,7 @@ public class LottoTicket {
 		return new WinningResult(winningResult);
 	}
 
-	private static void addWinningResultCount(final EnumMap<LottoRank, Integer> winningResult, final LottoRank rank) {
+	private static void addWinningResultCount(final Map<LottoRank, Integer> winningResult, final LottoRank rank) {
 		if (LottoRank.isFail(rank)) {
 			return;
 		}

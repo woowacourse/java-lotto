@@ -14,7 +14,7 @@ public class LottoFactory {
 		.boxed()
 		.collect(Collectors.toList());
 
-	public List<Lotto> generateLottos(final Money money, List<List<Integer>> inputManualLotto) {
+	public List<Lotto> generateLottos(final Money money, final List<List<Integer>> inputManualLotto) {
 		List<Lotto> lottos = generateLottosAsManual(inputManualLotto);
 		lottos.addAll(generateLottosAsAuto(money));
 		return lottos;
@@ -32,19 +32,19 @@ public class LottoFactory {
 		return generateLotto(lottoNumbers.subList(0, FIXED_LOTTO_SIZE));
 	}
 
-	private Lotto generateLotto(List<Integer> numbers) {
+	private Lotto generateLotto(final List<Integer> numbers) {
 		return new Lotto(numbers.stream()
 			.map(LottoNumber::new)
 			.collect(Collectors.toList()));
 	}
 
-	public List<Lotto> generateLottosAsManual(List<List<Integer>> inputManualLotto) {
+	public List<Lotto> generateLottosAsManual(final List<List<Integer>> inputManualLotto) {
 		return inputManualLotto.stream()
 			.map(this::generateLottoAsManual)
 			.collect(Collectors.toList());
 	}
 
-	private Lotto generateLottoAsManual(List<Integer> manualLotto) {
+	private Lotto generateLottoAsManual(final List<Integer> manualLotto) {
 		return generateLotto(manualLotto);
 	}
 }

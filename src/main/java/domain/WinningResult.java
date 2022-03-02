@@ -1,15 +1,13 @@
 package domain;
 
-import java.util.Collections;
-import java.util.EnumMap;
 import java.util.Map;
 
 public class WinningResult {
 
 	private final Map<LottoRank, Integer> winningResult;
 
-	public WinningResult(final EnumMap<LottoRank, Integer> winningResult) {
-		this.winningResult = winningResult;
+	public WinningResult(final Map<LottoRank, Integer> winningResult) {
+		this.winningResult = Map.copyOf(winningResult);
 	}
 
 	public double getRateOfProfit(final Money money) {
@@ -21,6 +19,6 @@ public class WinningResult {
 	}
 
 	public Map<LottoRank, Integer> getWinningResult() {
-		return Collections.unmodifiableMap(winningResult);
+		return winningResult;
 	}
 }
