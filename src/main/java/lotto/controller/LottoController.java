@@ -50,8 +50,8 @@ public class LottoController {
         try {
             final String manualPurchaseCounts = inputView.inputManualPurchaseCounts();
             final int manualLottoCounts = lottoService.countOfManualLottoNumbers(manualPurchaseCounts, allCounts);
-            List<List<String>> manualLottoNumbersGroup = inputByManualLottoNumbersGroup(manualLottoCounts);
-            return lottoService.generateManualLottoCounts(manualLottoNumbersGroup);
+            lottoService.generateManualLottoCounts(inputByManualLottoNumbersGroup(manualLottoCounts));
+            return manualLottoCounts;
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
             return generateManualLottoNumbersGroup(allCounts);

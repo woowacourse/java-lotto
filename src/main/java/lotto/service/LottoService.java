@@ -29,11 +29,10 @@ public class LottoService {
         return manualPurchaseCounts.getManualLottoCounts();
     }
 
-    public int generateManualLottoCounts(final List<List<String>> manualLottoNumbersGroup) {
+    public void generateManualLottoCounts(final List<List<String>> manualLottoNumbersGroup) {
         LottoGenerator lottoGenerator = new LottoManualGenerator();
         final int manualLottoCounts = manualLottoNumbersGroup.size();
         lottoNumbersGroup.addAll(lottoGenerator.generateLottoNumbersGroup(manualLottoCounts, manualLottoNumbersGroup));
-        return manualLottoCounts;
     }
 
     public void generateAutoLottoNumbers(final int lottoNumbersCount) {
