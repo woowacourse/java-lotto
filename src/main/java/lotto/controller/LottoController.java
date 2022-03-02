@@ -12,7 +12,7 @@ public class LottoController {
 
     public void run() {
         final PurchaseAmount purchaseAmount = getPurchaseAmount();
-        final LottoGame lottoGame = new LottoGame(purchaseAmount, StringConverter.toInt(InputView.getManualLottoCount()));
+        final LottoGame lottoGame = getLottoGame(purchaseAmount);
 
         InputView.printGetManualLottosMessage();
         final Lottos lottos = lottoGame.makeManualAndAutoLottos(getInputManualLottos(lottoGame.getManualLottoCount()));
@@ -32,9 +32,19 @@ public class LottoController {
         }
     }
 
+    private LottoGame getLottoGame(final PurchaseAmount purchaseAmount) {
+        try {
+            final int manualLottoCount = StringConverter.toInt(InputView.getManualLottoCount());
+            return new LottoGame(purchaseAmount, manualLottoCount);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getLottoGame(purchaseAmount);
+        }
+    }
+
     private List<List<Integer>> getInputManualLottos(final int manualLottoCount) {
         try {
-            List<List<Integer>> inputLottos = new ArrayList<>();
+            final List<List<Integer>> inputLottos = new ArrayList<>();
             for (int i = 0; i < manualLottoCount; i++) {
                 inputLottos.add(StringConverter.toInts(InputView.getManualLotto()));
             }
@@ -47,7 +57,7 @@ public class LottoController {
 
     private WinningLotto getWinningLotto() {
         try {
-            List<Integer> winningNumbers = StringConverter.toInts(InputView.getWinningNumbers());
+            final List<Integer> winningNumbers = StringConverter.toInts(InputView.getWinningNumbers());
             int bonusNumber = StringConverter.toInt(InputView.getBonusNumber());
             return new WinningLotto(winningNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {

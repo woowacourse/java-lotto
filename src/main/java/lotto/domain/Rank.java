@@ -12,12 +12,12 @@ public enum Rank {
     private final int matched;
     private final int prize;
 
-    Rank(int matched, int prize) {
+    Rank(final int matched, final int prize) {
         this.matched = matched;
         this.prize = prize;
     }
 
-    public static Rank of(int size, boolean isBonusBallMatched) {
+    public static Rank of(final int size, final boolean isBonusBallMatched) {
         if (size == 5 && isBonusBallMatched) {
             return SECOND;
         }

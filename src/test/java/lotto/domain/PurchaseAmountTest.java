@@ -28,14 +28,6 @@ class PurchaseAmountTest {
                 .hasMessage("[ERROR] 구입금액은 " + LOTTO_PRICE + "원 단위여야 합니다");
     }
 
-//    @Test
-//    @DisplayName("구입 금액만큼 티켓 개수를 반환한다")
-//    void calcTicketAmount() {
-//        PurchaseAmount purchaseAmount = new PurchaseAmount(14_500);
-//
-//        assertThat(purchaseAmount.calculateTheNumberOfTicket()).isEqualTo(14);
-//    }
-
     @ParameterizedTest
     @CsvSource({"0, 14", "3, 11", "14, 0"})
     @DisplayName("수동 로또 구매 후 남은 돈으로 살 수 있는 자동 로또 개수를 반환한다.")
