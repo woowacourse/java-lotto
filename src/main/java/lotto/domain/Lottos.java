@@ -9,10 +9,10 @@ public class Lottos {
     private final List<Lotto> lottos;
     private final LottoResult result;
 
-    public Lottos(Money money) {
+    public Lottos(Money money, int unitPrice) {
         this.lottos = new ArrayList<>();
         this.result = new LottoResult();
-        purchaseLotto(money);
+        purchaseLotto(money, unitPrice);
     }
 
     public List<Lotto> getLottos() {
@@ -38,13 +38,13 @@ public class Lottos {
         return (double) result.sumOfPrize() / (double) money.getMoney();
     }
 
-    private void purchaseLotto(Money money) {
-        for (int i = 0; i < getLottosCount(money); i++) {
+    private void purchaseLotto(Money money, int unitPrice) {
+        for (int i = 0; i < getLottosCount(money, unitPrice); i++) {
             lottos.add(new Lotto(new PickedNumbers()));
         }
     }
 
-    private int getLottosCount(Money money) {
-        return money.getMoney() / Constant.UNIT_PRICE;
+    private int getLottosCount(Money money, int unitPrice) {
+        return money.getMoney() / unitPrice;
     }
 }

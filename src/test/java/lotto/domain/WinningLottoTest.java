@@ -17,13 +17,4 @@ class WinningLottoTest {
         Lotto lotto = new Lotto(new PickedNumbers("1,2,3,12,13,14"));
         Assertions.assertThat(winningLotto.findSameNumbersInPicked(lotto.getPickedNumbers())).isEqualTo(3);
     }
-
-
-    @ParameterizedTest
-    @DisplayName("올바른 등수를 판별하는지")
-    @CsvSource(value = {"6:false:RANK_FIRST", "5:true:RANK_SECOND", "5:false:RANK_THIRD",
-            "4:false:RANK_FOURTH", "3:false:RANK_FIFTH"}, delimiter = ':')
-    void Decide_Rank(long targetCorrectCount, boolean isTargetBonused, LottoRank inputRank) {
-        Assertions.assertThat(LottoRank.findLottoRank(targetCorrectCount, isTargetBonused)).isEqualTo(inputRank);
-    }
 }

@@ -36,7 +36,7 @@ public class LottoController {
     }
 
     private void purchaseLotto(Money money) {
-        lottos = new Lottos(money);
+        lottos = new Lottos(money, UNIT_PRICE);
         outputView.printPurchasedLotto(lottos);
     }
 
