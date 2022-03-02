@@ -40,6 +40,6 @@ public class UserTest {
         user.spendMoney(1000);
         Assertions.assertThatThrownBy(() -> user.spendMoney(1000))
                 .isInstanceOf(MoneyException.class)
-                .hasMessage("사용한 금액이 투입금액을 초과합니다.");
+                .hasMessage("투입한 금액을 모두 사용했습니다.");
     }
 }
