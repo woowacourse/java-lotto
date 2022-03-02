@@ -31,7 +31,7 @@ class SetUpTicketsAndWinningNumber {
 		CustomTicketingStrategy customLottoGenerator = new CustomTicketingStrategy();
 		customLottoGenerator.initNumbers(autoNumbers);
 
-		tickets = TicketMachine.generateTickets(manualCount, getManualTickets(), customLottoGenerator);
+		tickets = TicketMachine.generateTickets(manualCount, manualNumbers, customLottoGenerator);
 
 		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 		int bonusBall = 7;
