@@ -30,21 +30,29 @@ public class LottoController {
     private static Lottos buyLottos(final Payment payment) {
         printRequestManualCount();
         LottoCount lottoCount = createLottoCount(payment);
-
-        printRequestManualLottos();
-        Lottos manualLottos = createManualLottos(lottoCount);
-        Lottos autoLottos = createAutoLottos(lottoCount);
-
-        List<Lotto> totalLottos = new ArrayList<>();
-        totalLottos.addAll(manualLottos.getLottos());
-        totalLottos.addAll(autoLottos.getLottos());
-
-        Lottos lottos = new Lottos(totalLottos);
+        Lottos lottos = getLottos(lottoCount);
 
         printLottoCount(lottoCount);
         printLottos(lottos);
 
         return lottos;
+    }
+
+    private static Lottos getLottos(final LottoCount lottoCount) {
+        if (lottoCount.getManualCount() > 0) {
+            printRequestManualLottos();
+        }
+        Lottos manualLottos = createManualLottos(lottoCount);
+        Lottos autoLottos = createAutoLottos(lottoCount);
+
+        return new Lottos(getTotalLottos(manualLottos, autoLottos));
+    }
+
+    private static List<Lotto> getTotalLottos(final Lottos manualLottos, final Lottos autoLottos) {
+        List<Lotto> totalLottos = new ArrayList<>();
+        totalLottos.addAll(manualLottos.getLottos());
+        totalLottos.addAll(autoLottos.getLottos());
+        return totalLottos;
     }
 
     private static WinningLotto getWinningLotto() {

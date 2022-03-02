@@ -24,10 +24,10 @@ public class PaymentTest {
     }
 
     @Test
-    @DisplayName("구입금액이 1,000원 단위로 나뉘지 않을 경우")
+    @DisplayName("구입금액이 1,000원 이하일 경우 경우")
     void input_not_division_1000() {
         assertThatThrownBy(() -> {
-            Payment payment = new Payment(12345);
+            Payment payment = new Payment(500);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
