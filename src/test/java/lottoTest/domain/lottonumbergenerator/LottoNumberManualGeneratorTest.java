@@ -35,4 +35,17 @@ class LottoNumberManualGeneratorTest {
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("생성할 수동 로또 번호가 없습니다.");
     }
+
+    @Test
+    void 로또번호를_6개_오름차순으로_정렬하여_생성하는_기능_테스트() {
+        List<List<Integer>> numbers = new ArrayList<>();
+        List<Integer> inputNumbers = List.of(6, 4, 2, 1, 5, 3);
+        numbers.add(inputNumbers);
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberManualGenerator(numbers);
+        List<LottoNumber> lottoNumbers = lottoNumberGenerator.getLottoNumbers(6);
+        assertThat(lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList())
+        ).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
+    }
 }

@@ -10,7 +10,7 @@ import lotto.domain.LottoNumber;
 public class LottoNumberManualGenerator implements LottoNumberGenerator {
 
     public static final String EMPTY_LOTTO_NUMBERS = "생성할 수동 로또 번호가 없습니다.";
-    
+
     private final Queue<List<LottoNumber>> lottoNumbers;
 
     public LottoNumberManualGenerator(List<List<Integer>> numbers) {
@@ -32,6 +32,9 @@ public class LottoNumberManualGenerator implements LottoNumberGenerator {
     }
 
     private List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
-        return numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .sorted(LottoNumber::compareTo)
+                .collect(Collectors.toList());
     }
 }
