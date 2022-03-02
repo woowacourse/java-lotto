@@ -8,6 +8,10 @@ public class LottoTickets {
 
 	private final List<LottoTicket> lottoTickets = new ArrayList<>();
 
+	public void purchase(LottoTicket lottoTicket) {
+		lottoTickets.add(lottoTicket);
+	}
+
 	public void purchase(List<LottoNumbers> lottoNumbers) {
 		for (LottoNumbers eachLottoNumbers : lottoNumbers) {
 			lottoTickets.add(new LottoTicket(eachLottoNumbers));

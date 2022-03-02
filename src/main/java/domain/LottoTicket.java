@@ -1,12 +1,18 @@
 package domain;
 
-import java.util.Set;
+import java.util.*;
 
-import static constant.LottoConstant.NUMBER_FOR_BONUS_CHECK;
+import static constant.LottoConstant.*;
 
 public class LottoTicket {
 
+	private final static List<Integer> candidates = initCandidates();
 	private final LottoNumbers numbers;
+
+	public LottoTicket() {
+		Collections.shuffle(candidates);
+		this.numbers = new LottoNumbers(candidates.subList(0, NUMBER_OF_NUMBERS));
+	}
 
 	public LottoTicket(LottoNumbers numbers) {
 		this.numbers = numbers;
@@ -25,5 +31,14 @@ public class LottoTicket {
 
 	public Set<LottoNumber> getNumbers() {
 		return numbers.getNumbers();
+	}
+
+	private static List<Integer> initCandidates() {
+		List<Integer> candidates = new ArrayList<>();
+		for (int eachNumber = MIN_NUMBER; eachNumber <= MAX_NUMBER; eachNumber++) {
+			candidates.add(eachNumber);
+		}
+
+		return candidates;
 	}
 }
