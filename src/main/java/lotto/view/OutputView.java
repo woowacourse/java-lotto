@@ -51,7 +51,7 @@ public class OutputView {
     }
 
     private static void printProfitRate(User user, RankStatistic rankStatistic) {
-        double profitRate = user.getProfitRate(rankStatistic.getTotalPrize());
+        double profitRate = user.calculateProfitRate(rankStatistic.getTotalPrize());
         System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), toStringProfitRateUntilSecondDecimal(profitRate));
     }
 

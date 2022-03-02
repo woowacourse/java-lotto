@@ -13,9 +13,9 @@ public class WinningNumbers {
         this.lottoNumber = lottoNumber;
     }
 
-    public static WinningNumbers generateWinningNumbersByString(String winningLotto, String lottoNumber) {
+    public static WinningNumbers generateByString(String winningLotto, String lottoNumber) {
         return new WinningNumbers(
-                Lotto.generateLottoByString(winningLotto),
+                Lotto.generateByString(winningLotto),
                 LottoNumber.findByNumber(Integer.parseInt(lottoNumber))
         );
     }

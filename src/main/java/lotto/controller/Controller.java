@@ -20,7 +20,7 @@ public class Controller {
 
     private User generateUserByString() {
         try {
-            return User.generateUserByString(InputView.inputMoney());
+            return User.generateByString(InputView.inputMoney());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
             return generateUserByString();
@@ -41,7 +41,7 @@ public class Controller {
 
     private Lotto inputLotto() {
         try {
-            return Lotto.generateLottoByString(InputView.inputLottoNumbers());
+            return Lotto.generateByString(InputView.inputLottoNumbers());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
             return inputLotto();
@@ -57,7 +57,7 @@ public class Controller {
 
     private WinningNumbers inputWinningNumbers() {
         try {
-            return WinningNumbers.generateWinningNumbersByString(
+            return WinningNumbers.generateByString(
                     InputView.inputWinningLotto(),
                     InputView.inputBonusNumber()
             );

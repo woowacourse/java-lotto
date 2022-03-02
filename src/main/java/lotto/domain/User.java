@@ -15,7 +15,7 @@ public class User {
     private int countOfManualLotto;
     private int countOfAutoLotto;
 
-    public User(long money) {
+    private User(long money) {
         MoneyValidator.validate(money);
         this.money = money;
         this.spentMoney = 0;
@@ -24,7 +24,7 @@ public class User {
         this.countOfAutoLotto = 0;
     }
 
-    public static User generateUserByString(String money) {
+    public static User generateByString(String money) {
         return new User(Long.parseLong(money));
     }
 
@@ -38,7 +38,7 @@ public class User {
         int countCanBuy = calculateCountCanBuy();
         spendMoney(countCanBuy * Lotto.LOTTO_PRICE);
         IntStream.range(0, countCanBuy)
-                .mapToObj(i -> Lotto.generateLottoByAuto())
+                .mapToObj(i -> Lotto.generateByAuto())
                 .forEach(lottos::add);
         countOfAutoLotto += countCanBuy;
     }
@@ -54,7 +54,7 @@ public class User {
         return (int) ((money - spentMoney) / Lotto.LOTTO_PRICE);
     }
 
-    public double getProfitRate(long totalPrize) {
+    public double calculateProfitRate(long totalPrize) {
         return (double) totalPrize / (double) spentMoney;
     }
 
