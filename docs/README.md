@@ -64,6 +64,12 @@
   1. Rank - valueOf()
   2. Statistics - getWinningStatistics()
 
+### 3차 피드백 기반 추가 변경사항
+- [ ] 중복 로직을 제거하기 위해서는 상속보다 `조합` [링크](https://tecoble.techcourse.co.kr/post/2020-05-18-inheritance-vs-composition/)
+- [ ] 클래스 메서드에 인스턴스로의 접근
+- [ ] 생성자, 팩토리 메서드가 외부로 노출되는 것이 합당한가에 대한 고민
+
+---
 
 - 질문 답변
   - Stream 사용 시 스타일에 대한 문제
@@ -73,6 +79,7 @@
     3. stream 사용 시 하나의 라인으로 표현하는 것을 지양(winning number 중복 비교 부분)
        - 적당한 선에서 변수로 끊는 것을 추천
 
+---
 
 - 학습 내용
 1. `POSIX new Line`
