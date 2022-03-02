@@ -22,6 +22,7 @@ public class OutputView {
     public static final String WINNING_RESULT_SEPERATOR = "---------";
     public static final String PROFIT_SENTENCE_FORMAT = "총 수익률은 %.2f입니다.%n";
 
+    private static final String INPUT_MANUAL_LOTTO = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 
     private OutputView() {
@@ -96,7 +97,7 @@ public class OutputView {
     }
 
     public static void printInputManualTicketSentence() {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        System.out.println(INPUT_MANUAL_LOTTO);
     }
 
     public static void printInputWinningTicketSentence() {
