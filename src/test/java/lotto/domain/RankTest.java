@@ -34,19 +34,6 @@ class RankTest {
         );
     }
 
-    @DisplayName("보너스볼 포함하여 6개 맞춘 경우 1등이어야 한다.")
-    @Test
-    void 일등_보너스_포함_당첨() {
-        // given
-        Rank rank = Rank.of(6, false);
-
-        // when & then
-        assertAll(
-                () -> assertThat(rank).isEqualTo(Rank.FIRST),
-                () -> assertThat(rank.getPrizeMoney()).isEqualTo(2_000_000_000)
-        );
-    }
-
     @DisplayName("보너스볼 미포함하여 6개 맞춘 경우 1등이어야 한다.")
     @Test
     void 일등_보너스_미포함_당첨() {

@@ -12,8 +12,12 @@ public class RankDto {
     private RankDto(Rank rank, long amount) {
         this.prizeMoney = rank.getPrizeMoney();
         this.count = rank.getCount();
-        this.isBonus = rank.isBonus();
+        this.isBonus = isBonus(rank);
         this.amount = amount;
+    }
+
+    private boolean isBonus(Rank rank) {
+        return rank == Rank.SECOND;
     }
 
     public static RankDto valueOf(Rank rank, long amount) {

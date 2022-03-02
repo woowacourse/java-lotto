@@ -4,21 +4,19 @@ import java.util.Arrays;
 
 public enum Rank {
 
-    NOTHING(0, 0, false),
-    FIFTH(5_000, 3, false),
-    FORTH(50_000, 4, false),
-    THIRD(1_500_000, 5, false),
-    SECOND(30_000_000, 5, true),
-    FIRST(2_000_000_000, 6, false);
+    NOTHING(0, 0),
+    FIFTH(5_000, 3),
+    FORTH(50_000, 4),
+    THIRD(1_500_000, 5),
+    SECOND(30_000_000, 5),
+    FIRST(2_000_000_000, 6);
 
     private final int prizeMoney;
     private final int count;
-    private final boolean isBonus;
 
-    Rank(int prizeMoney, int count, boolean isBonus) {
+    Rank(int prizeMoney, int count) {
         this.prizeMoney = prizeMoney;
         this.count = count;
-        this.isBonus = isBonus;
     }
 
     public static Rank of(int count, boolean isBonus) {
@@ -27,8 +25,7 @@ public enum Rank {
         }
 
         return Arrays.stream(values())
-                .filter(rank -> !rank.isBonus)
-                .filter(rank -> rank.count == count)
+                .filter(rank -> rank != Rank.SECOND && rank.count == count)
                 .findFirst()
                 .orElse(NOTHING);
     }
@@ -39,9 +36,5 @@ public enum Rank {
 
     public int getCount() {
         return count;
-    }
-
-    public boolean isBonus() {
-        return isBonus;
     }
 }
