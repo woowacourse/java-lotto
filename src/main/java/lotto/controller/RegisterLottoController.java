@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import static java.util.stream.Collectors.toList;
-import static lotto.controller.ControllerTemplate.runTemplate;
+import static lotto.controller.ControllerTemplate.runnableTemplate;
 import static lotto.view.InputView.inputManualLottoesText;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class RegisterLottoController {
     }
 
     public void run() {
-        runTemplate(this::registerManualLottoes, ExceptionHandler::handle);
+        runnableTemplate(this::registerManualLottoes, ExceptionHandler::handle);
     }
 
     public void registerManualLottoes() {

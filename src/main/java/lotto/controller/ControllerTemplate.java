@@ -19,7 +19,7 @@ public class ControllerTemplate {
         }
     }
 
-    public static void runTemplate(Runnable runnable, Consumer<Exception> exceptionHandler) {
+    public static void runnableTemplate(Runnable runnable, Consumer<Exception> exceptionHandler) {
         try {
             runnable.run();
         } catch (LottoException e) {

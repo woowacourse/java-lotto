@@ -12,7 +12,11 @@ import lotto.view.LottoConvertor;
 public class InputWinnerLottoController {
 
     public WinnerLotto run() {
-        return supplierTemplate(() -> new WinnerLotto(createLotto(), createBonusNumber()), ExceptionHandler::handle);
+        return supplierTemplate(this::createWinnerLotto, ExceptionHandler::handle);
+    }
+
+    private WinnerLotto createWinnerLotto() {
+        return new WinnerLotto(createLotto(), createBonusNumber());
     }
 
     private Lotto createLotto() {
