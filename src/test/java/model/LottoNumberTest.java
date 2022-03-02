@@ -13,7 +13,7 @@ public class LottoNumberTest {
     @DisplayName("로또 번호가 1 ~ 45 사이에 있지 않은 경우 테스트")
     @ValueSource(ints = {0, 46})
     void throwExceptionWhenInvalidRange(int number) {
-        assertThatCode(() -> new LottoNumber(number))
+        assertThatCode(() -> LottoNumber.of(number))
                 .isInstanceOf(InvalidRangeLottoNumberException.class);
     }
 
@@ -21,7 +21,7 @@ public class LottoNumberTest {
     @DisplayName("로또 번호가 1 ~ 45 사이에 있는 경우 테스트")
     @ValueSource(ints = {1, 45})
     void checkValidLottoNumberRangeTest(int number) {
-        assertThatCode(() -> new LottoNumber(number))
+        assertThatCode(() -> LottoNumber.of(number))
                 .doesNotThrowAnyException();
     }
 }

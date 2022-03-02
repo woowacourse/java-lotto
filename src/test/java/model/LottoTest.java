@@ -49,9 +49,9 @@ public class LottoTest {
     void contains() {
         Lotto lotto = Lotto.of(LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 6)));
         assertAll("lotto",
-                () -> assertThat(lotto.contains(new LottoNumber(1))).isTrue(),
-                () -> assertThat(lotto.contains(new LottoNumber(6))).isTrue(),
-                () -> assertThat(lotto.contains(new LottoNumber(9))).isFalse()
+                () -> assertThat(lotto.contains(LottoNumber.of(1))).isTrue(),
+                () -> assertThat(lotto.contains(LottoNumber.of(6))).isTrue(),
+                () -> assertThat(lotto.contains(LottoNumber.of(9))).isFalse()
         );
     }
 

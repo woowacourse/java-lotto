@@ -1,21 +1,39 @@
 package model;
 
 import exception.InvalidRangeLottoNumberException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import util.NumberFormatStringParser;
 
 public class LottoNumber {
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
+    private static final List<LottoNumber> LOTTO_NUMBERS;
+
     private final int lottoNumber;
 
-    public LottoNumber(int number) {
+    static {
+         LOTTO_NUMBERS = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
+    private LottoNumber(int number) {
+        this.lottoNumber = number;
+    }
+
+    public static LottoNumber of(int number) {
         if (isInvalidRange(number)) {
             throw new InvalidRangeLottoNumberException();
         }
-        this.lottoNumber = number;
+        return LOTTO_NUMBERS.get(number - 1);
+    }
+
+    private static boolean isInvalidRange(int number) {
+        return MINIMUM_LOTTO_NUMBER > number || number > MAXIMUM_LOTTO_NUMBER;
     }
 
     public static LottoNumber parse(String text) {
@@ -25,12 +43,8 @@ public class LottoNumber {
 
     public static List<LottoNumber> convertAll(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
-    }
-
-    private boolean isInvalidRange(int number) {
-        return MINIMUM_LOTTO_NUMBER > number || number > MAXIMUM_LOTTO_NUMBER;
     }
 
     public int intValue() {

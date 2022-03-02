@@ -18,7 +18,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class WinningLottoTest {
 
-    private static final LottoNumber BONUS = new LottoNumber(7);
+    private static final LottoNumber BONUS = LottoNumber.of(7);
     private static final Lotto WINNING_LOTTO_NUMBERS = Lotto.of(LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 6)));
     private static final Lotto FIRST_PRIZE_LOTTO_NUMBERS = Lotto.of(
             LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 6)));
@@ -66,7 +66,7 @@ public class WinningLottoTest {
     @DisplayName("당첨번호와 보너스 번호 정상적으로 생성")
     void createValidWinningLottoNumbers() {
         Lotto lotto = Lotto.of(LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 6)));
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.of(7);
         assertThatCode(() -> new WinningLottoNumbers(lotto, bonusNumber))
                 .doesNotThrowAnyException();
     }
@@ -75,7 +75,7 @@ public class WinningLottoTest {
     @DisplayName("당첨번호와 보너스 번호 중복 생성 예외 발생")
     void duplicatedWinningLottoNumbers() {
         Lotto lotto = Lotto.of(LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 6)));
-        LottoNumber bonusNumber = new LottoNumber(1);
+        LottoNumber bonusNumber = LottoNumber.of(1);
         assertThatThrownBy(() -> new WinningLottoNumbers(lotto, bonusNumber))
                 .isInstanceOf(DuplicatedLottoNumbersException.class);
     }
