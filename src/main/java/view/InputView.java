@@ -13,6 +13,7 @@ public class InputView {
 
     private static final String LOTTO_NUM_INPUT_PATTERN_ERROR_MESSAGE = "로또 번호는 1, 2, 3, 4, 5, 6 과 같은 형태로 입력하여야 합니다.";
     private static final Pattern PATTERN = Pattern.compile("^[\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+$");
+    private static final String MANUAL_TICKET_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
 
     public static int inputMoney() {
         System.out.println(MONEY_INPUT_MESSAGE);
@@ -34,6 +35,16 @@ public class InputView {
 
     public static int inputBonusNumber() {
         System.out.println(BONUS_INPUT_MESSAGE);
+        final Scanner scanner = new Scanner(System.in);
+        try {
+            return scanner.nextInt();
+        } catch (Exception e) {
+            throw new IllegalArgumentException(NUM_ERROR_MESSAGE);
+        }
+    }
+
+    public static int inputManualTicketCount() {
+        System.out.println(MANUAL_TICKET_COUNT_MESSAGE);
         final Scanner scanner = new Scanner(System.in);
         try {
             return scanner.nextInt();

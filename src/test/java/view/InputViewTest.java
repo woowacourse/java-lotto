@@ -35,9 +35,6 @@ class InputViewTest {
     @Test
     void 로또_구입_금액_결과() {
         //given
-        OutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-
         String input = "14000";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -47,6 +44,34 @@ class InputViewTest {
 
         //the
         assertThat(money).isEqualTo(14000);
+    }
+
+    @Test
+    void 로또_수동_구매_개수_입력_정상작동() {
+        //given
+        String input = "3";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        //when
+        int manualTicketCount = InputView.inputManualTicketCount();
+
+        //then
+        assertThat(manualTicketCount).isEqualTo(3);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a"," "})
+    void 로또_수동_구매_개수_숫자아닐시_예외처리(String input) {
+        //given
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        assertThatThrownBy(InputView::inputManualTicketCount)
+                .isInstanceOf(Exception.class);
     }
 
     @Test
