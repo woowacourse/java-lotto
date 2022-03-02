@@ -19,8 +19,8 @@ public class LottoGame {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public static Lottos buyLottos(LottoMoney lottoMoney) {
-        return new Lottos(new LottoNumberGenerator(), lottoMoney.getLottoSize());
+    public static Lottos buyLottos(LottoMoney lottoMoney, LottoNumberGenerator lottoNumberGenerator) {
+        return new Lottos(lottoNumberGenerator, lottoMoney.getLottoSize());
     }
 
     private void validateDuplicateBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
