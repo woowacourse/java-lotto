@@ -7,6 +7,7 @@ import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.Money;
+import lotto.model.dto.LottoDTO;
 import lotto.model.dto.PrizeInformationDTO;
 import lotto.model.number.BonusBall;
 import lotto.model.number.LottoBall;
@@ -23,6 +24,9 @@ public class Controller {
 		int totalCount = Lotto.countTickets(money);
 		int manualCount = InputView.askManualLottoCount(totalCount);
 		Lottos lottos = Lottos.purchase(totalCount, manualCount, InputView.askManualLottoNumbers(manualCount));
+
+		ResultView.showPurchaseCount(totalCount, manualCount);
+		ResultView.showLottos(LottoDTO.from(lottos));
 
 		WinningBalls winningBalls = getWinningNumbers();
 		PrizeInformations prizeInformations =
