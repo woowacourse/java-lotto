@@ -13,9 +13,9 @@ public class FixedLottoMachine implements LottoMachine {
     }
 
     @Override
-    public Lotto makeLottos() {
-        return new Lotto(numbers.stream()
+    public List<LottoNumber> makeLottos() {
+        return numbers.stream()
                 .map(LottoNumber::new)
-                .collect(toList()));
+                .collect(toList());
     }
 }

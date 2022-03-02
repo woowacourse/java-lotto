@@ -9,7 +9,8 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
-        this.winningNumbers = new FixedLottoMachine(winningNumbers).makeLottos();
+        LottoMachine lottoMachine = new FixedLottoMachine(winningNumbers);
+        this.winningNumbers = new Lotto(lottoMachine);
         this.bonusNumber = new LottoNumber(bonusNumber);
 
         validateDuplication(this.winningNumbers, this.bonusNumber);

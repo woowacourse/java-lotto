@@ -25,9 +25,9 @@ class RankBoardTest {
     @Test
     @DisplayName("당첨 결과를 구한다")
     void calcRank() {
-        List<Lotto> tickets = initTickets();
+        List<Lotto> lottos = initLottos();
 
-        RankBoard board = new RankBoard(winningLotto, tickets);
+        RankBoard board = new RankBoard(winningLotto, lottos);
 
         Map<Rank, Integer> expected = new HashMap<>();
         expected.put(Rank.FIRST, 1);
@@ -42,10 +42,11 @@ class RankBoardTest {
     @Test
     @DisplayName("만약 아무 등수에 해당하지 않는 경우 빈 맵을 반환한다")
     void testCalcRankEdgeCase() {
-        List<Lotto> tickets = new ArrayList<>();
-        tickets.add(new FixedLottoMachine(List.of(1, 2, 8, 9, 10, 11)).makeLottos());
+        List<Lotto> lottos = new ArrayList<>();
+        LottoMachine lottoMachine = new FixedLottoMachine(List.of(1, 2, 8, 9, 10, 11));
+        lottos.add(new Lotto(lottoMachine));
 
-        RankBoard board = new RankBoard(winningLotto, tickets);
+        RankBoard board = new RankBoard(winningLotto, lottos);
 
         Map<Rank, Integer> expected = new HashMap<>();
         expected.put(Rank.FIRST, 0);
@@ -60,21 +61,21 @@ class RankBoardTest {
     @Test
     @DisplayName("수익률을 계산해 반환한다")
     void calcProfit() {
-        List<Lotto> tickets = new ArrayList<>();
-        tickets.add(new FixedLottoMachine(List.of(1, 2, 3, 9, 10, 11)).makeLottos());
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto(new FixedLottoMachine(List.of(1, 2, 3, 9, 10, 11))));
 
-        RankBoard board = new RankBoard(winningLotto, tickets);
+        RankBoard board = new RankBoard(winningLotto, lottos);
 
         assertThat(board.calculateProfitRatio(90_000)).isEqualTo(0.06);
     }
 
-    private List<Lotto> initTickets() {
-        ArrayList<Lotto> tickets = new ArrayList<>();
-        tickets.add(new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 6)).makeLottos());
-        tickets.add(new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 7)).makeLottos());
-        tickets.add(new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 8)).makeLottos());
-        tickets.add(new FixedLottoMachine(List.of(1, 2, 3, 4, 8, 9)).makeLottos());
-        tickets.add(new FixedLottoMachine(List.of(1, 2, 3, 8, 9, 10)).makeLottos());
-        return tickets;
+    private List<Lotto> initLottos() {
+        ArrayList<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto(new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 6))));
+        lottos.add(new Lotto(new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 7))));
+        lottos.add(new Lotto(new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 8))));
+        lottos.add(new Lotto(new FixedLottoMachine(List.of(1, 2, 3, 4, 8, 9))));
+        lottos.add(new Lotto(new FixedLottoMachine(List.of(1, 2, 3, 8, 9, 10))));
+        return lottos;
     }
 }

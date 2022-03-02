@@ -1,7 +1,9 @@
 package lotto.domain;
 
 
+import java.util.List;
+
 public interface LottoMachine {
 
-    Lotto makeLottos();
+    List<LottoNumber> makeLottos();
 }

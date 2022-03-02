@@ -28,7 +28,8 @@ public class LottoGame {
         validateEqualToManualLottoCount(inputLottos);
 
         for (List<Integer> inputLotto : inputLottos) {
-            lottos.add(new FixedLottoMachine(inputLotto).makeLottos());
+            LottoMachine lottoMachine = new FixedLottoMachine(inputLotto);
+            lottos.add(new Lotto(lottoMachine));
         }
     }
 
@@ -41,7 +42,7 @@ public class LottoGame {
     public void makeAutoLottos() {
         LottoMachine lottoMachine = new RandomLottoMachine();
         for (int i = 0; i < autoLottoCount; i++) {
-            lottos.add(lottoMachine.makeLottos());
+            lottos.add(new Lotto(lottoMachine));
         }
     }
 
