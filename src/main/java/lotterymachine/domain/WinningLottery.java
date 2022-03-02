@@ -3,7 +3,6 @@ package lotterymachine.domain;
 import java.util.List;
 
 public class WinningLottery {
-    private static final int TICKET_SIZE = 6;
     private static final String NOT_CORRECT_WINNING_NUMBERS = "당첨 번호 숫자는 여섯개를 입력해야합니다.";
     private static final String DUPLICATION_INPUT_NUMBERS = "중복된 숫자를 입력 받았습니다.";
     private static final String DUPLICATION_INPUT_BONUS_NUMBERS = "보너스 볼이 당첨 번호와 중복됩니다.";
@@ -16,14 +15,6 @@ public class WinningLottery {
         validateBonusNumber(numbers, bonusNumber);
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
-    }
-
-    public List<LotteryNumber> getNumbers() {
-        return numbers;
-    }
-
-    public LotteryNumber getBonusNumber() {
-        return bonusNumber;
     }
 
     private void validateBonusNumber(List<LotteryNumber> numbers, LotteryNumber bonusNumber) {
@@ -44,7 +35,7 @@ public class WinningLottery {
     }
 
     private static boolean isLotteryTicketSize(int size) {
-        return size == TICKET_SIZE;
+        return size == LotteryTicket.TICKET_SIZE;
     }
 
     private static void validateDuplication(List<LotteryNumber> input) {

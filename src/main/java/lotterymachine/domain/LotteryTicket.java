@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LotteryTicket {
-    private static final int TICKET_SIZE = 6;
+    public static final int TICKET_SIZE = 6;
     private static final String NOT_CORRECT_TICKET_SIZE = "로또 숫자는 여섯개를 입력해야합니다.";
     private static final String DUPLICATION_INPUT_NUMBERS = "중복된 숫자를 입력 받았습니다.";
 
