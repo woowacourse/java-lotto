@@ -18,8 +18,4 @@ public enum MoneyUnit {
         return money / DIVIDING_UNIT.unit;
     }
 
-    public static int multiple(final int number) {
-        return number * DIVIDING_UNIT.unit;
-    }
-
 }
