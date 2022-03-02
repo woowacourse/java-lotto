@@ -23,12 +23,6 @@ public class Purchase {
         isRightLottoCount(money, manualCount);
     }
 
-    private void isRightLottoCount(int money, int manualCount) {
-        if (manualCount > money / MONEY_UNIT) {
-            throw new IllegalArgumentException(COUNT_OVER_MONEY_ERROR_MESSAGE);
-        }
-    }
-
     private void isOverThousand(int money) {
         if (money < MONEY_UNIT) {
             throw new IllegalArgumentException(MONEY_OVER_THOUSANDS_ERROR_MESSAGE);
@@ -38,6 +32,12 @@ public class Purchase {
     private void isDivideByThousand(int money) {
         if (money % MONEY_UNIT != 0) {
             throw new IllegalArgumentException(MONEY_DIVIDE_ERROR_MESSAGE);
+        }
+    }
+
+    private void isRightLottoCount(int money, int manualCount) {
+        if (manualCount > money / MONEY_UNIT) {
+            throw new IllegalArgumentException(COUNT_OVER_MONEY_ERROR_MESSAGE);
         }
     }
 
