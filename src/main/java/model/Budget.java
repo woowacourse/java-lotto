@@ -32,8 +32,7 @@ public class Budget {
     }
 
     public static Budget parse(String text) {
-        int moneyAmount = NumberFormatStringParser.parse(text);
-        return new Budget(moneyAmount);
+        return new Budget(Integer.parseInt(text));
     }
 
     public BigDecimal getProfitRateFrom(BigDecimal totalPrize) {

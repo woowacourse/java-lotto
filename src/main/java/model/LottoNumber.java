@@ -1,12 +1,10 @@
 package model;
 
 import exception.InvalidRangeLottoNumberException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import util.NumberFormatStringParser;
 
 public class LottoNumber {
     private static final int INDEX_OFFSET = 1;
@@ -17,7 +15,7 @@ public class LottoNumber {
     private final int lottoNumber;
 
     static {
-         LOTTO_NUMBERS = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
+        LOTTO_NUMBERS = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
@@ -38,8 +36,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber parse(String text) {
-        int number = NumberFormatStringParser.parse(text);
-        return new LottoNumber(number);
+        return new LottoNumber(Integer.parseInt(text));
     }
 
     public static List<LottoNumber> convertAll(List<Integer> numbers) {
