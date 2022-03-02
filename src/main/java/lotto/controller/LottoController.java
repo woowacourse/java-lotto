@@ -32,21 +32,13 @@ public class LottoController {
         OutputView.printRateOfProfit(money.getRateOfProfit(result.getTotalProfit()));
     }
 
-    private void requestManualLottoNumbers(int manualLottoCount, Lottos lottos) {
-        OutputView.printRequestManualLottoNumberUI();
-        while (manualLottoCount-- > 0) {
-            Lotto lotto = requestManualLottoNumber();
-            lottos.add(lotto);
-        }
-    }
-
-    private Lotto requestManualLottoNumber() {
+    private Money requestMoney() {
         try {
-            String text = InputView.inputManualLottoNumber();
-            return LottoFactory.valueOf(text);
+            String input = InputView.inputMoney();
+            return MoneyFactory.valueOf(input);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
-            return requestManualLottoNumber();
+            return requestMoney();
         }
     }
 
@@ -62,13 +54,21 @@ public class LottoController {
         }
     }
 
-    private Money requestMoney() {
+    private void requestManualLottoNumbers(int manualLottoCount, Lottos lottos) {
+        OutputView.printRequestManualLottoNumberUI();
+        while (manualLottoCount-- > 0) {
+            Lotto lotto = requestManualLottoNumber();
+            lottos.add(lotto);
+        }
+    }
+
+    private Lotto requestManualLottoNumber() {
         try {
-            String input = InputView.inputMoney();
-            return MoneyFactory.valueOf(input);
+            String text = InputView.inputManualLottoNumber();
+            return LottoFactory.valueOf(text);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
-            return requestMoney();
+            return requestManualLottoNumber();
         }
     }
 
