@@ -80,10 +80,6 @@ public class LottoFactory {
                 .collect(Collectors.toList()));
     }
 
-    public List<Lotto> getLotto() {
-        return Collections.unmodifiableList(issuedLotto);
-    }
-
     public SortedMap<RankPrize, Integer> run(final Lotto lastWinLotto, final LottoNumber bonusNumber) {
         this.lastWinLotto = lastWinLotto;
         this.bonusNumber = bonusNumber;
@@ -98,15 +94,7 @@ public class LottoFactory {
     }
 
     private CorrectNumber getCorrectNumber(final Lotto lotto) {
-        CorrectNumber correctNumber = new CorrectNumber(lotto.compare(this.lastWinLotto), false);
-        if (isSecondRank(lotto, correctNumber)) {
-            correctNumber = correctNumber.convertToSecondRankCount();
-        }
-        return correctNumber;
-    }
-
-    private boolean isSecondRank(final Lotto lotto, final CorrectNumber correctNumber) {
-        return correctNumber.isThirdRankCount() && lotto.isContainNumber(bonusNumber);
+        return CorrectNumber.getCorrectNumber(lotto.compare(this.lastWinLotto), lotto.isContainNumber(bonusNumber));
     }
 
     private SortedMap<RankPrize, Integer> processRankCount() {

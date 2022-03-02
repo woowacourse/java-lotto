@@ -14,18 +14,18 @@ public enum RankPrize {
 
     private final int correctNumber;
     private final int winPrize;
-    private final boolean bonus;
+    private final boolean secondRank;
 
-    RankPrize(final int correctNumber, final int winPRIZE, final boolean bonus) {
+    RankPrize(final int correctNumber, final int winPrize, final boolean secondRank) {
         this.correctNumber = correctNumber;
-        this.winPrize = winPRIZE;
-        this.bonus = bonus;
+        this.winPrize = winPrize;
+        this.secondRank = secondRank;
     }
 
-    public static RankPrize findByCount(final int correctNumber, final boolean bonus) {
+    public static RankPrize findByCount(final int correctNumber, final boolean secondRank) {
         return Arrays.stream(RankPrize.values())
                 .filter(winPrize -> winPrize.correctNumber == correctNumber)
-                .filter(winPrize -> winPrize.bonus == bonus)
+                .filter(winPrize -> winPrize.secondRank == secondRank)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException(ERROR_INVALID_WIN_COUNT_MESSAGE));
     }
