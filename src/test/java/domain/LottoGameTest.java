@@ -28,10 +28,10 @@ class LottoGameTest {
     @DisplayName("로또 게임이 총 수익률을 잘 계산하는지 확인한다.")
     void checkRateOfReturn() {
         int purchaseMoney = 1000;
-        LottoTickets lottoTickets = new LottoTickets(new ArrayList<>(), new Money(purchaseMoney), generateStrategy);
         int bonusNumber = 7;
-        WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusNumber);
-        lottoGame = new LottoGame(lottoTickets, winningTicket, winningPrizeStrategy);
+        lottoGame = new LottoGame(winningPrizeStrategy);
+        lottoGame.purchaseLottoTickets(new ArrayList<>(), purchaseMoney, generateStrategy);
+        lottoGame.inputWinningNumbers(winningNumbers, bonusNumber);
         assertThat(lottoGame.getLottoRateOfReturn())
                 .isEqualTo(WinningPrize.FIRST.getPrizeMoney() / (double) purchaseMoney);
     }

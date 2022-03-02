@@ -15,6 +15,7 @@ public class LottoTickets {
 
     public LottoTickets(List<Set<Integer>> selfTicketNumbers, Money autoPurchaseMoney,
                         GenerateStrategy generateStrategy) {
+        validatePurchaseMoney(autoPurchaseMoney);
         List<LottoTicket> lottoTickets = generateTicket(selfTicketNumbers);
         int autoPurchaseCount = autoPurchaseMoney.getAmount() / LottoTicket.TICKET_PRICE;
         lottoTickets.addAll(autoGenerateTickets(generateStrategy, autoPurchaseCount));

@@ -1,7 +1,7 @@
 package controller;
 
+import domain.GenerateStrategy;
 import domain.LottoTicket;
-import domain.Money;
 import domain.WinningResult;
 import domain.WinningTicket;
 import java.util.List;
@@ -24,45 +24,47 @@ public class LottoController {
     private final InputView inputView = InputView.getInstance();
     private final OutputView outputView = OutputView.getInstance();
     private final WinningPrizeStrategy winningPrizeStrategy = new LottoWinningPrizeStrategy();
+    private final GenerateStrategy generateStrategy = new LottoNumberGenerateStrategy();
+    private final LottoGame lottoGame = new LottoGame(winningPrizeStrategy);
 
     public void run() {
-        LottoTickets lottoTickets = purchaseLottoTickets();
-        showGeneratedLottoTickets(lottoTickets);
-        LottoGame lottoGame = initLottoGame(lottoTickets);
-        showLottoResult(lottoGame);
+        purchaseLottoTickets();
+        showGeneratedLottoTickets();
+        inputWinningNumbers();
+        showLottoResult();
     }
 
-    private LottoGame initLottoGame(LottoTickets lottoTickets) {
+    private void inputWinningNumbers() {
         try {
             Set<Integer> winningNumbers = inputView.inputWinningNumbers();
             int bonusNumber = inputView.inputBonusNumber();
-            WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusNumber);
-            return new LottoGame(lottoTickets, winningTicket, winningPrizeStrategy);
+            lottoGame.inputWinningNumbers(winningNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return initLottoGame(lottoTickets);
+            inputWinningNumbers();
         }
     }
 
-    private LottoTickets purchaseLottoTickets() {
+    private void purchaseLottoTickets() {
         try {
             int purchaseMoney = inputView.inputPurchaseMoney();
             int selfPurchaseCount = inputView.inputSelfTicketCount();
             purchaseMoney -= selfPurchaseCount * LottoTicket.TICKET_PRICE;
             List<Set<Integer>> selfTicketNumbers = inputView.inputSelfTicketNumbers(selfPurchaseCount);
-            return new LottoTickets(selfTicketNumbers, new Money(purchaseMoney), new LottoNumberGenerateStrategy());
+            lottoGame.purchaseLottoTickets(selfTicketNumbers, purchaseMoney, generateStrategy);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return purchaseLottoTickets();
+            purchaseLottoTickets();
         }
     }
 
-    private void showGeneratedLottoTickets(LottoTickets lottoTickets) {
+    private void showGeneratedLottoTickets() {
+        LottoTickets lottoTickets = lottoGame.getLottoTickets();
         List<LottoTicketDto> dtos = toLottoTicketDtos(lottoTickets);
         outputView.showLottoTicket(dtos, lottoTickets.getSelfPurchaseCount());
     }
 
-    private void showLottoResult(LottoGame lottoGame) {
+    private void showLottoResult() {
         WinningResult winningResult = lottoGame.getWinningResult();
         List<WinningResultDto> winningResultDtos = toWinningResultDtos(winningResult.getCountOfWinning());
         outputView.showLottoResult(winningResultDtos, lottoGame.getLottoRateOfReturn());
