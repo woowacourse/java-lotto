@@ -31,17 +31,9 @@ public class InputView {
         return getIntegerInput();
     }
 
-    public static int requestAutoTicketCount(int maximumTicketCount) {
+    public static int requestManualTicketCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int inputCount = getIntegerInput();
-        checkCountRange(maximumTicketCount, inputCount);
-        return inputCount;
-    }
-
-    private static void checkCountRange(int maximumTicketCount, int inputCount) {
-        if (inputCount < 0 || inputCount > maximumTicketCount) {
-            throw new IllegalArgumentException("구매할 로또 수를 다시 입력해주세요.");
-        }
+        return getIntegerInput();
     }
 
     public static List<String> requestManualNumbers(int manualTicketsCount) {

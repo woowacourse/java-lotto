@@ -52,10 +52,18 @@ public class ManualLottoController {
 
     private int createManualTicketCount(Amount amount) {
         try {
-            return InputView.requestAutoTicketCount(amount.getTicketCount());
+            int manualTicket = InputView.requestManualTicketCount();
+            checkCountRange(amount.getTicketCount(), manualTicket);
+            return manualTicket;
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
             return createManualTicketCount(amount);
+        }
+    }
+
+    private static void checkCountRange(int maximumTicketCount, int inputCount) {
+        if (inputCount < 0 || inputCount > maximumTicketCount) {
+            throw new IllegalArgumentException("구매할 로또 수를 다시 입력해주세요.");
         }
     }
 
