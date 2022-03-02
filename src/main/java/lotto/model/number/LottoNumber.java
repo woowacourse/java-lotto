@@ -11,12 +11,12 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(final int number) throws IllegalArgumentException {
+    public LottoNumber(final int number) {
         validateRange(number);
         this.number = number;
     }
 
-    private void validateRange(final int number) throws IllegalArgumentException {
+    private void validateRange(final int number) {
         if (number < LOTTO_NUMBER_MINIMUM_RANGE || number > LOTTO_NUMBER_MAXIMUM_RANGE) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR_MESSAGE);
         }

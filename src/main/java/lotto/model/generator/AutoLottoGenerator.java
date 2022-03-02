@@ -15,8 +15,7 @@ public class AutoLottoGenerator implements LottoGenerator {
     private static final int LOTTO_START_INDEX = 0;
 
     @Override
-    public Lottos generateLottos(int lottoCount, int minimumNumber, int maximumNumber, int lottoLength)
-            throws IllegalArgumentException {
+    public Lottos generateLottos(int lottoCount, int minimumNumber, int maximumNumber, int lottoLength) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             LottoNumbers lottoNumbers = makeLottoNumbers(minimumNumber, maximumNumber, lottoLength);

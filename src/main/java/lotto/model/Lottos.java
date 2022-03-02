@@ -12,7 +12,7 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(final List<Lotto> lottos) throws IllegalArgumentException {
+    public Lottos(final List<Lotto> lottos) {
         this.lottos = lottos;
     }
 

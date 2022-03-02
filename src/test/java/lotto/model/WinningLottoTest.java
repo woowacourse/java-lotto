@@ -28,7 +28,7 @@ public class WinningLottoTest {
         LottoNumbers winningNumbers = makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
         assertThatThrownBy(() ->
                 winningLotto = new WinningLotto(winningNumbers, new LottoNumber(1)))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
 

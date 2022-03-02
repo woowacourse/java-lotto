@@ -32,20 +32,20 @@ public class LottoController {
         ResultView.printTotalRankResult(lottoMachine);
     }
 
-    private Money validateMoney(String money) throws IllegalArgumentException {
+    private Money validateMoney(String money) {
         if (!Pattern.matches(NUMBER_REGEX, money)) {
             throw new IllegalArgumentException(Money.MONEY_ERROR_MESSAGE);
         }
         return new Money(Integer.parseInt(money));
     }
 
-    private WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) throws RuntimeException {
+    private WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) {
         LottoNumbers lottoNumbers = splitWinningNumbers(winningNumbers);
         LottoNumber lottoBonusNumber = new LottoNumber(toIntBonusNumber(bonusNumber));
         return new WinningLotto(lottoNumbers, lottoBonusNumber);
     }
 
-    private LottoNumbers splitWinningNumbers(String winningNumbers) throws RuntimeException {
+    private LottoNumbers splitWinningNumbers(String winningNumbers) {
         String[] splitNumbers = validateLottoNumbers(winningNumbers);
         return new LottoNumbers(Arrays.stream(splitNumbers)
                 .map(String::trim)
@@ -55,7 +55,7 @@ public class LottoController {
                 .collect(Collectors.toList()));
     }
 
-    private String[] validateLottoNumbers(String numbers) throws RuntimeException {
+    private String[] validateLottoNumbers(String numbers) {
         String[] splitNumbers = numbers.split(",");
         for (String number : splitNumbers) {
             validateNumber(number);
@@ -63,12 +63,12 @@ public class LottoController {
         return trimLottoNumbers(splitNumbers);
     }
 
-    private int validateNumber(String number) throws RuntimeException {
+    private int validateNumber(String number) {
         try {
             String trimNumber = number.trim();
             return Integer.parseInt(trimNumber);
         } catch (NumberFormatException e) {
-            throw new RuntimeException(NOT_NUMBER_ERROR_MESSAGE);
+            throw new IllegalArgumentException(NOT_NUMBER_ERROR_MESSAGE);
         }
     }
 
@@ -79,7 +79,7 @@ public class LottoController {
         return numbers;
     }
 
-    private int toIntBonusNumber(String bonusNumber) throws RuntimeException {
+    private int toIntBonusNumber(String bonusNumber) {
         return validateNumber(bonusNumber);
     }
 }

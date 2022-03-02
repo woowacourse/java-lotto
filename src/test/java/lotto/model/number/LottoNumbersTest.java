@@ -22,7 +22,7 @@ public class LottoNumbersTest {
     void fiveLottoNumbersTest() {
         assertThatThrownBy(() ->
                 makeLottoNumbers(new int[]{1, 2, 3, 4, 5}))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
 
@@ -31,7 +31,7 @@ public class LottoNumbersTest {
     void sevenLottoNumbersTest() {
         assertThatThrownBy(() ->
                 makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 6, 7}))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
 
@@ -40,7 +40,7 @@ public class LottoNumbersTest {
     void duplicatedLottoNumbersTest() {
         assertThatThrownBy(() ->
                 makeLottoNumbers(new int[]{1, 2, 3, 4, 5, 5}))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
 

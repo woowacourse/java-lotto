@@ -11,13 +11,13 @@ public class WinningLotto {
     private final LottoNumbers winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(final LottoNumbers winningNumbers, final LottoNumber bonusNumber) throws IllegalArgumentException {
+    public WinningLotto(final LottoNumbers winningNumbers, final LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         checkDuplicateNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    private void checkDuplicateNumber(LottoNumber bonusNumber) throws IllegalArgumentException {
+    private void checkDuplicateNumber(LottoNumber bonusNumber) {
         if (winningNumbers.containNumber(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR_MESSAGE);
         }

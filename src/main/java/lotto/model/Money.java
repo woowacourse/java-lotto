@@ -7,12 +7,12 @@ public class Money {
 
     private final int money;
 
-    public Money(final int money) throws IllegalArgumentException {
+    public Money(final int money) {
         validateMoney(money);
         this.money = money;
     }
 
-    private void validateMoney(final int money) throws IllegalArgumentException {
+    private void validateMoney(final int money) {
         if (money < 0) {
             throw new IllegalArgumentException(MONEY_ERROR_MESSAGE);
         }

@@ -20,6 +20,6 @@ public class MoneyTest {
     void minusMoneyTest() {
         assertThatThrownBy(() ->
                 new Money(-2))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -14,10 +14,11 @@ public class LottoMachine {
 
     public LottoMachine(final LottoGenerator lottoGenerator, final Money money) {
         this.money = money;
-        this.lottos = lottoGenerator.generateLottos(money.lottoCount(), LottoNumber.LOTTO_NUMBER_MINIMUM_RANGE, LottoNumber.LOTTO_NUMBER_MAXIMUM_RANGE, LottoNumbers.LOTTO_LENGTH);
+        this.lottos = lottoGenerator.generateLottos(money.lottoCount(), LottoNumber.LOTTO_NUMBER_MINIMUM_RANGE,
+                LottoNumber.LOTTO_NUMBER_MAXIMUM_RANGE, LottoNumbers.LOTTO_LENGTH);
     }
 
-    public void calculateResult(WinningLotto winningLotto) {
+    public void calculateResult(final WinningLotto winningLotto) {
         this.rankCount = winningLotto.checkRank(lottos);
     }
 

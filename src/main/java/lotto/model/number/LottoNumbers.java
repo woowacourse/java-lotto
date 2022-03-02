@@ -13,12 +13,12 @@ public class LottoNumbers {
 
     public final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(final List<LottoNumber> lottoNumbers) throws IllegalArgumentException {
+    public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateLottoNumbers(final List<LottoNumber> lottoNumbers) throws IllegalArgumentException {
+    private void validateLottoNumbers(final List<LottoNumber> lottoNumbers) {
         if (!isValidLength(lottoNumbers) || isDuplicate(lottoNumbers)) {
             throw new IllegalArgumentException(NUMBERS_ERROR_MESSAGE);
         }

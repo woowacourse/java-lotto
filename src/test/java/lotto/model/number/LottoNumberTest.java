@@ -23,7 +23,7 @@ public class LottoNumberTest {
     void lottoNumberRangeTest(int lottoNumber) {
         assertThatThrownBy(() ->
                 new LottoNumber(lottoNumber))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
 }

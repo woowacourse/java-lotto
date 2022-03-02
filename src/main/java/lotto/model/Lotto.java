@@ -8,7 +8,7 @@ public class Lotto {
     private final LottoNumbers lottoNumbers;
     private Rank rank;
 
-    public Lotto(final LottoNumbers lottoNumbers) throws IllegalArgumentException {
+    public Lotto(final LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         this.rank = null;
     }
