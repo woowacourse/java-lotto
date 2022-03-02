@@ -20,16 +20,9 @@ public class LottoView {
     private final InputView inputView;
     private final OutputView outputView;
 
-    private LottoView(final InputView inputView, final OutputView outputView) {
+    public LottoView(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-    }
-
-    public static LottoView newInstance() {
-        final Reader reader = new ConsoleReader();
-        final InputView inputView = new InputView(reader);
-        final OutputView outputView = new OutputView();
-        return new LottoView(inputView, outputView);
     }
 
     public int requestMoney() {
