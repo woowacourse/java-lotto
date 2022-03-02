@@ -16,10 +16,10 @@ import org.junit.jupiter.api.Test;
 public class LottoGameTest {
 
     private static LottoReferee referee;
-    private static final String firstPrizeLotto = "1, 2, 3, 4, 5, 6";
-    private static final String secondPrizeLotto = "1, 2, 3, 4, 5, 7";
-    private static final String fifthPrizeLotto = "1, 2, 3, 14, 15, 16";
-    private static final String noPrizeLotto = "11, 12, 13, 14, 15, 16";
+    private static final String firstPrize = "1, 2, 3, 4, 5, 6";
+    private static final String secondPrize = "1, 2, 3, 4, 5, 7";
+    private static final String fifthPrize = "1, 2, 3, 14, 15, 16";
+    private static final String noPrize = "11, 12, 13, 14, 15, 16";
 
     @BeforeAll
     static void setup() {
@@ -35,7 +35,7 @@ public class LottoGameTest {
 
     @Test
     void getResultStatistics_initsWithLottosInput() {
-        Lottos lottos = Lottos.of(getManualsList(firstPrizeLotto, secondPrizeLotto, noPrizeLotto),
+        Lottos lottos = Lottos.of(getManualsList(firstPrize, secondPrize, noPrize),
                 createCountsDto(3, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
@@ -51,7 +51,7 @@ public class LottoGameTest {
 
     @Test
     void getResultStatistics_exceptionOnModifyingStats() {
-        Lottos lottos = Lottos.of(getManualsList(firstPrizeLotto, secondPrizeLotto, noPrizeLotto),
+        Lottos lottos = Lottos.of(getManualsList(firstPrize, secondPrize, noPrize),
                 createCountsDto(3, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
@@ -63,7 +63,7 @@ public class LottoGameTest {
 
     @Test
     void calculatePrizePriceRatio_zeroIfNoPrize() {
-        Lottos lottos = Lottos.of(getManualsList(noPrizeLotto), createCountsDto(1, 0));
+        Lottos lottos = Lottos.of(getManualsList(noPrize), createCountsDto(1, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
         float actual = game.calculatePrizePriceRatio();
@@ -73,7 +73,7 @@ public class LottoGameTest {
 
     @Test
     void calculatePrizePriceRatio_fifthPrizeEqualsFiveTimesThePrice() {
-        Lottos lottos = Lottos.of(getManualsList(fifthPrizeLotto), createCountsDto(1, 0));
+        Lottos lottos = Lottos.of(getManualsList(fifthPrize), createCountsDto(1, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
         float actual = game.calculatePrizePriceRatio();

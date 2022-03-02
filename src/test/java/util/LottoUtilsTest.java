@@ -61,6 +61,8 @@ class LottoUtilsTest {
         Lotto lottoWithSameNumbers = new Lotto(getOneToSix());
 
         for (Lotto lotto : actual) {
+            assertThat(lotto.getChosenNumbers())
+                    .isEqualTo(lottoWithSameNumbers.getChosenNumbers());
             assertThat(lotto).doesNotHaveSameHashCodeAs(lottoWithSameNumbers);
         }
     }
