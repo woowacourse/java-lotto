@@ -90,6 +90,14 @@
 - [x] 이름 변경
 - [x] LottoRandomGenerator 제거, LottoFactory 생성
 
+2차 피드백
+
+- [x] Lotto 접근제한자 확인
+- [ ] DTO 생성 판단기준 고민하기
+  1. view에서 도메인 로직을 호출할 가능성이 있는지? 
+  2. ...?
+- [ ] Money를 LottoMoney로 네이밍
+
 1차 피드백
 
 - [x] view에서 도메인로직을 호출할 가능성이 있는지 확인

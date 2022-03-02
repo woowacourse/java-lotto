@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Lotto {
     private static final String LOTTO_NUMS_DUPLICATED_ERROR_MESSAGE = "로또 번호는 중복될 수 없습니다.";
 
-    final List<LottoNumber> lotto;
+    private final List<LottoNumber> lotto;
 
     Lotto(List<LottoNumber> balls) {
         validate(balls);
