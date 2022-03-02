@@ -1,19 +1,13 @@
 package domain.LottoGenerator;
 
 import domain.Lotto.Lotto;
-import domain.Lotto.LottoNumber;
 
-import java.util.List;
-import java.util.stream.Collectors;
+public class ManualLottoGenerator implements LottoGenerator{
 
-public class ManualLottoGenerator extends LottoGeneratorAdpater{
+    private static final String AUTO_LOTTO_GENERATE_LIMIT = "수동 로또 생성기에서는 자동 로또 생성을 할 수 없습니다.";
 
     @Override
-    public Lotto generateLotto(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
-
-        return new Lotto(lottoNumbers);
+    public Lotto generateLotto() {
+        throw new IllegalArgumentException(AUTO_LOTTO_GENERATE_LIMIT);
     }
 }

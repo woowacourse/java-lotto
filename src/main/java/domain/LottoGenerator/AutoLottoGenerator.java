@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class AutoLottoGenerator extends LottoGeneratorAdpater {
 =======
 public class AutoLottoGenerator implements LottoGenerator {
@@ -25,8 +26,12 @@ public class AutoLottoGenerator implements LottoGenerator {
 =======
 public class AutoLottoGenerator extends LottoGeneratorAdpater {
 >>>>>>> 27b9569 (refactor : 인터페이스에서 원하는 추상 메서드만 몸체를 구현하고자 어댑터 클래스 추가)
+=======
+public class AutoLottoGenerator implements LottoGenerator {
+>>>>>>> 8c50980 (refactor : Interface default 메서드 추가)
 
     private static final int LOTTO_SIZE = 6;
+    private static final String MANUAL_LOTTO_GENERATE_LIMIT = "자동 로또 생성기에서는 수동 로또 생성을 할 수 없습니다.";
 
     @Override
 <<<<<<< HEAD
@@ -68,6 +73,14 @@ public class AutoLottoGenerator extends LottoGeneratorAdpater {
         return null;
 >>>>>>> 8185971 (feat : 반복되는 LottoNumber 인스턴스 캐싱하기)
     }
+<<<<<<< HEAD
 =======
 >>>>>>> 27b9569 (refactor : 인터페이스에서 원하는 추상 메서드만 몸체를 구현하고자 어댑터 클래스 추가)
+=======
+
+    @Override
+    public Lotto generateLotto(List<Integer> numbers) {
+        throw new IllegalArgumentException(MANUAL_LOTTO_GENERATE_LIMIT);
+    }
+>>>>>>> 8c50980 (refactor : Interface default 메서드 추가)
 }
