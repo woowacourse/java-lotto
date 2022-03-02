@@ -4,7 +4,6 @@ import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,7 +12,6 @@ public class LottoNumbers {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
-    private static final String DELIMITER = ",";
     private static final String DUPLICATE_ERROR = "로또 개수는 중복이 불가능합니다.";
     private static final String COUNT_ERROR = "로또 개수는 " + LOTTO_COUNT + "개로 제한됩니다.";
 
@@ -31,10 +29,9 @@ public class LottoNumbers {
         this.lottoNumbers = generateRandomLottoNumbers();
     }
 
-    public LottoNumbers(String input) {
-        String[] stringArr = input.split(DELIMITER);
-        validateLottoNumbers(stringArr);
-        this.lottoNumbers = convertStringArrToIntegerList(stringArr);
+    public LottoNumbers(List<Integer> numbers) {
+        validateLottoNumbers(numbers);
+        this.lottoNumbers = convertToLottoNumberList(numbers);
     }
 
     private List<LottoNumber> generateRandomLottoNumbers() {
@@ -42,34 +39,34 @@ public class LottoNumbers {
         return List.copyOf(candidateLottoNumbers.subList(0, LOTTO_COUNT));
     }
 
-    private void validateLottoNumbers(String[] stringArr) {
-        validateLottoCount(stringArr);
-        validateDuplicateCount(stringArr);
+    private void validateLottoNumbers(List<Integer> numbers) {
+        validateLottoCount(numbers);
+        validateDuplicateCount(numbers);
     }
 
-    private void validateLottoCount(String[] array) {
-        if (array.length != LOTTO_COUNT) {
+    private void validateLottoCount(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException(COUNT_ERROR);
         }
     }
 
-    private void validateDuplicateCount(String[] arr) {
-        int distinctCount = calDistinctCountFromArray(arr);
+    private void validateDuplicateCount(List<Integer> numbers) {
+        int distinctCount = calDistinctCountFromArray(numbers);
 
-        if (arr.length != distinctCount) {
+        if (numbers.size() != distinctCount) {
             throw new IllegalArgumentException(DUPLICATE_ERROR);
         }
     }
 
-    private int calDistinctCountFromArray(String[] arr) {
-        return (int) Arrays.stream(arr)
+    private int calDistinctCountFromArray(List<Integer> numbers) {
+        return (int) numbers.stream()
                 .distinct()
                 .count();
     }
 
-    private List<LottoNumber> convertStringArrToIntegerList(String[] array) {
-        return Arrays.stream(array)
-                .map(string -> LottoNumber.of(Integer.parseInt(string)))
+    private List<LottoNumber> convertToLottoNumberList(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::of)
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
     }
 
