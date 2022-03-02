@@ -11,7 +11,8 @@ public class Application {
     public static void main(String[] args) {
         LottoController lottoController = new LottoController();
 
-        LottoTicketsDto lottoTicketsDto = lottoController.buyLottoTickets(InputView.requestMoney());
+        LottoTicketsDto lottoTicketsDto = lottoController.buyLottoTickets(InputView.requestMoney(),
+                InputView.requestManualLotto());
         OutputView.displayLottoTickets(lottoTicketsDto);
 
         LottoResultDto lottoResultDto = lottoController.matchLottoTickets(InputView.requestWinningNumbers(),

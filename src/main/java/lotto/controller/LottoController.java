@@ -8,6 +8,7 @@ import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
 import lotto.domain.lottonumbergenerator.LottoNumberAutoGenerator;
+import lotto.domain.lottonumbergenerator.LottoNumberManualGenerator;
 import lotto.dto.LottoResultDto;
 import lotto.dto.LottoTicketsDto;
 
@@ -18,9 +19,12 @@ public class LottoController {
     private Money money;
     private LottoTickets lottoTickets;
 
-    public LottoTicketsDto buyLottoTickets(int inputMoney) {
+    public LottoTicketsDto buyLottoTickets(int inputMoney, List<List<Integer>> numbers) {
         money = new Money(inputMoney, LOTTO_PRICE);
-        return getAutoLottoTickets();
+        LottoTickets manualLottoTickets = getManualLottoTickets(numbers);
+        LottoTickets autoLottoTickets = getAutoLottoTickets();
+        lottoTickets = manualLottoTickets.combine(autoLottoTickets);
+        return LottoTicketsDto.from(manualLottoTickets, autoLottoTickets);
     }
 
     public LottoResultDto matchLottoTickets(List<Integer> lottoNumbers, int lottoNumber) {
@@ -30,9 +34,13 @@ public class LottoController {
         return LottoResultDto.from(lottoStatistics, money.calculateYield(lottoStatistics.getLottoTotalReward()));
     }
 
-    private LottoTicketsDto getAutoLottoTickets() {
-        lottoTickets = new LottoTickets(new LottoNumberAutoGenerator(), money.getMaximumPurchase(LOTTO_PRICE));
-        return LottoTicketsDto.from(lottoTickets);
+    private LottoTickets getManualLottoTickets(List<List<Integer>> numbers) {
+        money = money.decrease(LOTTO_PRICE, numbers.size());
+        return new LottoTickets(new LottoNumberManualGenerator(numbers), numbers.size());
+    }
+
+    private LottoTickets getAutoLottoTickets() {
+        return new LottoTickets(new LottoNumberAutoGenerator(), money.getMaximumPurchase(LOTTO_PRICE));
     }
 
     private LottoNumber getBonusNumber(int lottoNumber) {

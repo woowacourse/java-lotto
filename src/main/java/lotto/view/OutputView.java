@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Map;
 import lotto.dto.LottoResultDto;
 import lotto.dto.LottoTicketDto;
@@ -8,7 +9,7 @@ import lotto.dto.RankDto;
 
 public class OutputView {
 
-    private static final String LOTTO_COUNT_FORMAT = "개를 구매했습니다.";
+    private static final String LOTTO_COUNT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String STATISTICS_GUIDE_MESSAGE = "당첨 통계\n---------";
     private static final String YIELD_FORMAT = "총 수익률은 %.2f입니다.";
     private static final String STATISTICS_FORMAT = " (%d원) - %d개";
@@ -17,16 +18,25 @@ public class OutputView {
     private static final int YIELD_STANDARD = 1;
 
     public static void displayLottoTickets(LottoTicketsDto lottoTicketsDto) {
-        System.out.println(lottoTicketsDto.getLottoTickets().size() + LOTTO_COUNT_FORMAT);
-        for (LottoTicketDto lottoTicketDto : lottoTicketsDto.getLottoTickets()) {
-            System.out.println(lottoTicketDto.getNumbers().toString());
-        }
+        System.out.println();
+        System.out.printf(LOTTO_COUNT_FORMAT,
+                lottoTicketsDto.getManualLottoTickets().size(),
+                lottoTicketsDto.getAutoLottoTickets().size());
+        System.out.println();
+        displayLottoNumbers(lottoTicketsDto.getManualLottoTickets());
+        displayLottoNumbers(lottoTicketsDto.getAutoLottoTickets());
         System.out.println();
     }
 
     public static void displayLottoResult(LottoResultDto lottoResultDto) {
         displayStatistics(lottoResultDto.getStatistics());
         displayYield(lottoResultDto.getYield());
+    }
+
+    private static void displayLottoNumbers(List<LottoTicketDto> lottoTicketsDto) {
+        for (LottoTicketDto lottoTicketDto : lottoTicketsDto) {
+            System.out.println(lottoTicketDto.getNumbers().toString());
+        }
     }
 
     private static void displayStatistics(Map<RankDto, Integer> statistics) {

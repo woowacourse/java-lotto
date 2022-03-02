@@ -7,19 +7,29 @@ import lotto.domain.LottoTickets;
 
 public class LottoTicketsDto {
 
-    private final List<LottoTicketDto> lottoTickets;
+    private final List<LottoTicketDto> manualLottoTickets;
+    private final List<LottoTicketDto> autoLottoTickets;
 
-    public LottoTicketsDto(List<LottoTicketDto> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    public LottoTicketsDto(List<LottoTicketDto> manualLottoTickets, List<LottoTicketDto> autoLottoTickets) {
+        this.manualLottoTickets = manualLottoTickets;
+        this.autoLottoTickets = autoLottoTickets;
     }
 
-    public static LottoTicketsDto from(LottoTickets lottoTickets) {
-        return new LottoTicketsDto(lottoTickets.getLottoTickets().stream()
+    public static LottoTicketsDto from(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
+        return new LottoTicketsDto(createLottoTicketDto(manualLottoTickets), createLottoTicketDto(autoLottoTickets));
+    }
+
+    private static List<LottoTicketDto> createLottoTicketDto(LottoTickets lottoTickets) {
+        return lottoTickets.getLottoTickets().stream()
                 .map(LottoTicketDto::from)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
-    public List<LottoTicketDto> getLottoTickets() {
-        return new ArrayList<>(lottoTickets);
+    public List<LottoTicketDto> getManualLottoTickets() {
+        return new ArrayList<>(manualLottoTickets);
+    }
+
+    public List<LottoTicketDto> getAutoLottoTickets() {
+        return new ArrayList<>(autoLottoTickets);
     }
 }
