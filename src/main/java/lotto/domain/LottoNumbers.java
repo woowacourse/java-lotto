@@ -13,7 +13,7 @@ public class LottoNumbers {
     private static final int MAX_NUMBER = 45;
 
     private static final String DUPLICATE_ERROR = "로또 개수는 중복이 불가능합니다.";
-    private static final String COUNT_ERROR = "로또 개수는 " + LOTTO_COUNT + "개로 제한됩니다.";
+    private static final String COUNT_ERROR = String.format("로또 개수는 %d개로 제한됩니다.", LOTTO_COUNT);
 
     private static final List<LottoNumber> candidateLottoNumbers = new ArrayList<>();
 
