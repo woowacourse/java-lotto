@@ -6,7 +6,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,13 +25,12 @@ import lotto.model.LottoNumber;
 import lotto.model.LottoResult;
 import lotto.model.Lottos;
 import lotto.model.Yield;
+import lotto.model.numbergenerator.LottoNumberGenerator;
 
 class ResultViewTest {
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private final Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
-    private final Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 5, 7, 33, 41));
-    private final Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
+    private final Lottos lottos = new Lottos(new TestNumberGenerator(), 2);
 
     @BeforeEach
     public void setUp() {
@@ -87,5 +90,23 @@ class ResultViewTest {
     @AfterEach
     void afterAll() {
         System.setOut(new PrintStream(System.out));
+    }
+
+    static class TestNumberGenerator implements LottoNumberGenerator {
+        private final Iterator<List<Integer>> lottoList = generateLotto();
+
+        @Override
+        public List<Integer> generate() {
+            if (lottoList.hasNext()) {
+                return lottoList.next();
+            }
+            return Collections.emptyList();
+        }
+
+        private Iterator<List<Integer>> generateLotto() {
+            List<List<Integer>> LottoNumberList = new ArrayList<>(Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 7),
+                Arrays.asList(1, 2, 5, 7, 33, 41)));
+            return LottoNumberList.iterator();
+        }
     }
 }

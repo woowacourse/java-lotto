@@ -13,13 +13,9 @@ import lotto.model.numbergenerator.LottoNumberGenerator;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
-        validateEmptyCollection(this.lottos);
-    }
-
     public Lottos(LottoNumberGenerator lottoNumberGenerator, int count) {
-        this.lottos = generateLottos(lottoNumberGenerator, count);
+        this.lottos =  new ArrayList<>(generateLottos(lottoNumberGenerator, count));
+        validateEmptyCollection(this.lottos);
     }
 
     private List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int count) {
