@@ -26,7 +26,9 @@ public class CorrectNumbers {
 
     private void initRank(final SortedMap<RankPrize, Integer> rankCount) {
         Arrays.stream(RankPrize.values())
-                .forEach(e -> rankCount.put(e, RANK_COUNT_INIT_NUMBER));
+                .forEach(e -> {
+                    rankCount.put(e, RANK_COUNT_INIT_NUMBER);
+                });
     }
 
     private void countRank(final SortedMap<RankPrize, Integer> rankCount) {
