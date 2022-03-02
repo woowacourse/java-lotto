@@ -23,8 +23,8 @@ public class LotteryGameController {
 	}
 
 	public void startLotteryGame() {
-		Lotteries lotteries = purchaseLottery();
-		WinningLottery winningLottery = createWinningLottery();
+		final Lotteries lotteries = purchaseLottery();
+		final WinningLottery winningLottery = createWinningLottery();
 		outputView.printLotteries(lotteries.getLotteries());
 		makeResult(lotteries, winningLottery);
 	}
@@ -48,10 +48,8 @@ public class LotteryGameController {
 		}
 	}
 
-	private void makeResult(Lotteries lotteries, WinningLottery winningLottery) {
-		Result result = new Result();
-		result.makeWinner(lotteries, winningLottery);
-		result.makeReturnRate(lotteryGame);
+	private void makeResult(final Lotteries lotteries, final WinningLottery winningLottery) {
+		final Result result = Result.makeResult(lotteries, winningLottery, lotteryGame);
 		outputView.printStatistics(result);
 	}
 

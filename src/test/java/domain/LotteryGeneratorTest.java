@@ -11,6 +11,7 @@ import domain.generatestrategy.LotteryNumberGenerator;
 import domain.generatestrategy.LotteryNumberGeneratorStrategy;
 import domain.lottery.Lottery;
 import domain.lottery.LotteryGenerator;
+import domain.lottery.LotteryNumber;
 
 @DisplayName("LotteryGenerator 클래스 테스트")
 public class LotteryGeneratorTest {

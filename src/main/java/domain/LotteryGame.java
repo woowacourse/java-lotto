@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import domain.generatestrategy.LotteryNumberGeneratorStrategy;
@@ -10,7 +11,7 @@ import domain.lottery.Lottery;
 import domain.lottery.LotteryNumber;
 import domain.lottery.WinningLottery;
 
-public class LotteryGame {
+public final class LotteryGame {
 
 	public static final int LOTTERY_PRICE = 1000;
 
@@ -46,7 +47,7 @@ public class LotteryGame {
 		for (int i = 0; i < theNumberOfLottery; i++) {
 			lotteriesNumber.add(lotteryGenerator.generateLottery(lotteryNumberGenerator.generateNumbers()));
 		}
-		return lotteriesNumber;
+		return Collections.unmodifiableList(lotteriesNumber);
 	}
 
 	public WinningLottery createWinningLottery(final List<Integer> winningNumbers, final int bonusBall) {

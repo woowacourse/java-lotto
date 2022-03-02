@@ -4,7 +4,7 @@ import static domain.exception.LotteryExceptionMessages.*;
 
 import domain.Rank;
 
-public class WinningLottery {
+public final class WinningLottery {
 
 	private final Lottery winningNumbers;
 	private final LotteryNumber bonusBall;

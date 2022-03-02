@@ -1,30 +1,41 @@
 package domain;
 
+import java.util.Collections;
 import java.util.Map;
 
 import domain.lottery.Lotteries;
 import domain.lottery.WinningLottery;
 
-public class Result {
+public final class Result {
 
-	private Map<Rank, Integer> rankResult;
-	private double returnRate;
+	private final Map<Rank, Integer> rankResult;
+	private final double returnRate;
+
+	private Result(final Lotteries lotteries, final WinningLottery winningLottery, final LotteryGame lotteryGame) {
+		this.rankResult = makeWinner(lotteries, winningLottery);
+		this.returnRate = makeReturnRate(lotteryGame);
+	}
+
+	public static Result makeResult(final Lotteries lotteries, final WinningLottery winningLottery
+		, final LotteryGame lotteryGame) {
+		return new Result(lotteries, winningLottery, lotteryGame);
+	}
 
 	public Map<Rank, Integer> getRankResult() {
-		return rankResult;
+		return Collections.unmodifiableMap(rankResult);
 	}
 
 	public double getReturnRate() {
 		return returnRate;
 	}
 
-	public void makeWinner(Lotteries lotteries, WinningLottery winningLottery) {
-		this.rankResult = lotteries.getTheNumberOfWinners(winningLottery);
+	private Map<Rank, Integer> makeWinner(final Lotteries lotteries, final WinningLottery winningLottery) {
+		return lotteries.getTheNumberOfWinners(winningLottery);
 	}
 
-	public void makeReturnRate(LotteryGame lotteryGame) {
+	private double makeReturnRate(final LotteryGame lotteryGame) {
 		final int totalReturn = getTotalReturn();
-		this.returnRate = calculateReturnRate(totalReturn, lotteryGame.getTheNumberOfLottery());
+		return calculateReturnRate(totalReturn, lotteryGame.getTheNumberOfLottery());
 	}
 
 	private int getTotalReturn() {

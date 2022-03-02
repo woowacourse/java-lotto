@@ -1,12 +1,13 @@
 package domain.lottery;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import domain.Rank;
 
-public class Lotteries {
+public final class Lotteries {
 
 	private final List<Lottery> lotteries;
 
@@ -19,7 +20,7 @@ public class Lotteries {
 	}
 
 	public List<Lottery> getLotteries() {
-		return lotteries;
+		return Collections.unmodifiableList(lotteries);
 	}
 
 	public Map<Rank, Integer> getTheNumberOfWinners(final WinningLottery winningLottery) {
@@ -31,16 +32,16 @@ public class Lotteries {
 		return winners;
 	}
 
-	private void putCountToWinner(final Map<Rank, Integer> winners, final Rank rank) {
-		if (!rank.equals(Rank.NONE)) {
-			winners.put(rank, winners.get(rank) + 1);
-		}
-	}
-
 	private Map<Rank, Integer> initRankResult() {
 		final Map<Rank, Integer> rankResult = new HashMap<>();
 		Rank.valuesWithoutNone()
 			.forEach((rank) -> rankResult.put(rank, 0));
 		return rankResult;
+	}
+
+	private void putCountToWinner(final Map<Rank, Integer> winners, final Rank rank) {
+		if (!rank.equals(Rank.NONE)) {
+			winners.put(rank, winners.get(rank) + 1);
+		}
 	}
 }

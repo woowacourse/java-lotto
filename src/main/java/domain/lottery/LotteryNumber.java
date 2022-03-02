@@ -4,12 +4,12 @@ import static domain.exception.LotteryExceptionMessages.*;
 
 import java.util.Objects;
 
-public class LotteryNumber implements Comparable<LotteryNumber>{
+public final class LotteryNumber implements Comparable<LotteryNumber>{
 
 	public static final int MIN_LOTTERY_NUMBER = 1;
 	public static final int MAX_LOTTERY_NUMBER = 45;
 
-	private int number;
+	private final int number;
 
 	public LotteryNumber(final int number) {
 		validateNumber(number);

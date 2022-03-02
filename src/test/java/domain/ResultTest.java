@@ -30,8 +30,7 @@ public class ResultTest {
 		Lotteries lotteries = lotteryGame.createAutoLottery();
 		WinningLottery winningLottery = lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
-		Result result = new Result();
-		result.makeWinner(lotteries, winningLottery);
+		Result result = Result.makeResult(lotteries, winningLottery, lotteryGame);
 		final Map<Rank, Integer> rankResult = result.getRankResult();
 		//then
 		for (Rank rank : rankResult.keySet()) {
@@ -47,9 +46,7 @@ public class ResultTest {
 		Lotteries lotteries = lotteryGame.createAutoLottery();
 		WinningLottery winningLottery = lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
-		Result result = new Result();
-		result.makeWinner(lotteries, winningLottery);
-		result.makeReturnRate(lotteryGame);
+		Result result = Result.makeResult(lotteries, winningLottery, lotteryGame);
 		//then
 		assertThat(result.getReturnRate()).isEqualTo((double)2031555000 / (6 * 1000));
 	}

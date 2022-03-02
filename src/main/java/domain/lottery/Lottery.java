@@ -2,9 +2,10 @@ package domain.lottery;
 
 import static domain.exception.LotteryExceptionMessages.*;
 
+import java.util.Collections;
 import java.util.Set;
 
-public class Lottery {
+public final class Lottery {
 
 	private static final int LOTTERY_SIZE = 6;
 
@@ -13,7 +14,6 @@ public class Lottery {
 	private Lottery(final Set<LotteryNumber> numbers) {
 		validateNumbers(numbers);
 		this.numbers = numbers;
-
 	}
 
 	public static Lottery from(final Set<LotteryNumber> numbers) {
@@ -41,7 +41,7 @@ public class Lottery {
 	}
 
 	public Set<LotteryNumber> getNumbers() {
-		return numbers;
+		return Collections.unmodifiableSet(numbers);
 	}
 
 	public boolean isDuplicated(LotteryNumber number) {
