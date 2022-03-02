@@ -13,8 +13,9 @@ public class Money {
     }
 
     public Money calculateProduct(Money money, int count) {
-        validateAmount(money.amount * count);
-        return new Money(amount - (money.amount * count));
+        int totalPrice = money.amount * count;
+        validateAmount(totalPrice);
+        return new Money(amount - totalPrice);
     }
 
     public int getProductCount(Money money) {
