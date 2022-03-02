@@ -24,4 +24,13 @@ public class UserCountTest {
 
         assertThrows(IllegalArgumentException.class, () -> new UserCount(maxCount, manualCount));
     }
+
+    @Test
+    @DisplayName("수동 구매 수량이 정상적으로 입력되었을 경우")
+    public void createUserCountTest_true() {
+        int totalCount = 14;
+        int manualCount = 12;
+        UserCount userCount = new UserCount(totalCount, manualCount);
+        assertEquals(userCount.getAutoCount(), 2);
+    }
 }
