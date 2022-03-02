@@ -1,7 +1,12 @@
 package lotterymachine;
 
 import lotterymachine.domain.*;
+import lotterymachine.utils.LotteryCalculator;
 import lotterymachine.view.OutputView;
+
+import java.util.Map;
+
+import static lotterymachine.utils.LotteryCalculator.calculateProfitRate;
 
 public class LotteryMachine {
     public static void main(String[] args) {
@@ -10,21 +15,14 @@ public class LotteryMachine {
         OutputView.printLotteryTickets(lotteryPurchase, lotteryTickets);
 
         WinningLottery winningLottery =  LotteryConverter.createWinningLottery();
-//        Map<WinningLotteryRank, Integer> lotteryTicketResult = lotteryTickets.getLotteriesResult(winningLottery);
-//        OutputView.printWinningLotteryResults(lotteryTicketResult);
-//        OutputView.printProfitRate(getTotalProfitRate(lotteryPurchase, lotteryTicketResult));
+        WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);
+        OutputView.printWinningLotteryResults(winningResult.getResult());
+        OutputView.printProfitRate(getTotalProfitRate(lotteryPurchase, winningResult.getResult()));
     }
 
-//    private static LotteryTickets createLotteryTickets(int purchaseCount) {
-//        List<LotteryTicket> lotteryTickets = new ArrayList<>();
-//        for (int i = 0; i < purchaseCount; i++) {
-//            lotteryTickets.add(new LotteryTicket(LotteryNumbersGenerator.generate()));
-//        }
-//        return new LotteryTickets(lotteryTickets);
-//    }
-//
-//    private static double getTotalProfitRate(LotteryPurchase lotteryPurchase, Map<WinningLotteryRank, Integer> lotteryTicketResult) {
-//        int totalProfit = LotteryCalculator.totalProfit(lotteryTicketResult);
-//        return calculateProfitRate(totalProfit, lotteryPurchase.getPurchasePrice());
-//    }
+
+    private static double getTotalProfitRate(LotteryPurchase lotteryPurchase, Map<WinningLotteryRank, Integer> lotteryTicketResult) {
+        int totalProfit = LotteryCalculator.totalProfit(lotteryTicketResult);
+        return calculateProfitRate(totalProfit, lotteryPurchase.getTotalAmount());
+    }
 }

@@ -27,4 +27,8 @@ public class LotteryPurchase {
     public int getPassivityCount() {
         return passivityCount;
     }
+
+    public int getTotalAmount() {
+        return this.money.getAmount();
+    }
 }

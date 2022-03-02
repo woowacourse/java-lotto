@@ -12,13 +12,4 @@ public class LotteryTickets {
     public List<LotteryTicket> getLotteryTickets() {
         return Collections.unmodifiableList(tickets);
     }
-
-    public Map<WinningLotteryRank, Integer> getLotteriesResult(WinningLottery winningLottery) {
-        final Map<WinningLotteryRank, Integer> lotteriesResult = WinningLotteryRank.getWinningLotteries();
-        for (LotteryTicket lotteryTicket : tickets) {
-            WinningLotteryRank winningLotteryRank = winningLottery.getWinningLotteryRank(lotteryTicket);
-            lotteriesResult.put(winningLotteryRank, lotteriesResult.getOrDefault(winningLotteryRank, 0) + 1);
-        }
-        return Collections.unmodifiableMap(lotteriesResult);
-    }
 }

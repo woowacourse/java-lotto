@@ -1,9 +1,6 @@
 package lotterymachine.utils;
 
-import lotterymachine.domain.LotteryNumber;
-import lotterymachine.domain.LotteryTicket;
-import lotterymachine.domain.LotteryTickets;
-import lotterymachine.domain.WinningLottery;
+import lotterymachine.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -46,8 +43,8 @@ public class LotteryCalculatorTest {
                 .mapToObj(LotteryNumber::new)
                 .collect(Collectors.toList());
         WinningLottery winningLottery = new WinningLottery(input2, new LotteryNumber(12));
-        lotteryTickets.getLotteriesResult(winningLottery);
-        int result = LotteryCalculator.totalProfit(lotteryTickets.getLotteriesResult(winningLottery));
+        WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);
+        int result = LotteryCalculator.totalProfit(winningResult.getResult());
         assertThat(result).isEqualTo(5000);
     }
 }
