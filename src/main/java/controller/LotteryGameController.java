@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import domain.LotteryGame;
@@ -32,7 +33,7 @@ public class LotteryGameController {
 	private Lotteries purchaseLottery() {
 		try {
 			lotteryGame = LotteryGame.of(inputMoney(), new LotteryGenerator(), new LotteryNumberGenerator());
-			return this.lotteryGame.createAutoLottery();
+			return lotteryGame.createLottery(Collections.emptyList());
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
 			return purchaseLottery();

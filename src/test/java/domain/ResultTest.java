@@ -3,6 +3,7 @@ package domain;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +28,7 @@ public class ResultTest {
 	@DisplayName("등수가 제대로 집계되는지 확인")
 	void testRankingCount() {
 		//given
-		Lotteries lotteries = lotteryGame.createAutoLottery();
+		Lotteries lotteries = lotteryGame.createLottery(Collections.emptyList());
 		WinningLottery winningLottery = lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
 		Result result = Result.makeResult(lotteries, winningLottery, lotteryGame.getTheNumberOfLottery());
@@ -43,7 +44,7 @@ public class ResultTest {
 	@DisplayName("수익률이 제대로 집계되는지 확인")
 	void testRankingPercent() {
 		//given
-		Lotteries lotteries = lotteryGame.createAutoLottery();
+		Lotteries lotteries = lotteryGame.createLottery(Collections.emptyList());
 		WinningLottery winningLottery = lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
 		Result result = Result.makeResult(lotteries, winningLottery, lotteryGame.getTheNumberOfLottery());

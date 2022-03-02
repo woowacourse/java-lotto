@@ -3,6 +3,7 @@ package domain;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
@@ -26,7 +27,7 @@ public class LotteryGameTest {
 		//given
 		final LotteryGame lotteryGame = LotteryGame.of(inputMoney, new LotteryGenerator(),
 			new LotteryNumberGenerator());
-		Lotteries lotteries = lotteryGame.createAutoLottery();
+		Lotteries lotteries = lotteryGame.createLottery(Collections.emptyList());
 		final int lotteriesToCreate = inputMoney / 1000;
 		//when
 		//then

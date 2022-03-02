@@ -15,18 +15,16 @@ public final class Lotteries {
 	private final List<Lottery> lotteries;
 
 	private Lotteries(final List<Lottery> lotteriesNumber) {
-		List<Lottery> tempLotteriesNumber = deepCopyOf(lotteriesNumber);
-		this.lotteries = tempLotteriesNumber;
-	}
-
-	private List<Lottery> deepCopyOf(final List<Lottery> lotteriesNumber) {
-		List<Lottery> tempLotteriesNumber = lotteriesNumber.stream()
-			.collect(Collectors.toList());
-		return tempLotteriesNumber;
+		this.lotteries = lotteriesNumber;
 	}
 
 	public static Lotteries from(final List<Lottery> lotteriesNumber) {
-		return new Lotteries(lotteriesNumber);
+		return new Lotteries(deepCopyOf(lotteriesNumber));
+	}
+
+	private static List<Lottery> deepCopyOf(final List<Lottery> lotteriesNumber) {
+		return lotteriesNumber.stream()
+			.collect(Collectors.toList());
 	}
 
 	public List<Lottery> getLotteries() {
@@ -51,5 +49,13 @@ public final class Lotteries {
 		if (!rank.equals(Rank.NONE)) {
 			winners.put(rank, winners.get(rank) + 1);
 		}
+	}
+
+	public Lotteries add(final List<Lottery> lotteryNumbers) {
+		final List<Lottery> lotteries = deepCopyOf(this.lotteries);
+		lotteryNumbers.forEach((lottery) ->
+			lotteries.add(lottery)
+		);
+		return new Lotteries(lotteries);
 	}
 }

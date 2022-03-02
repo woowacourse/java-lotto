@@ -3,6 +3,8 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import domain.generatestrategy.LotteryNumberGeneratorStrategy;
 import domain.lottery.LotteryGenerator;
@@ -42,6 +44,15 @@ public final class LotteryGame {
 	public LotteryGame putNumOfManualLottery(final int numOfManualLottery) {
 		final NumOfLottery tempNumOfLottery = this.numOfLottery.putNumOfManualLottery(numOfManualLottery);
 		return new LotteryGame(this.money, tempNumOfLottery, this.lotteryGenerator, this.lotteryNumberGenerator);
+	}
+
+	public Lotteries createLottery(final List<List<Integer>> manualLotteryNumber) {
+		final List<Lottery> manualLotteries = manualLotteryNumber.stream()
+			.map((numbers) -> lotteryGenerator.generateLottery(numbers))
+			.collect(Collectors.toList());
+		Lotteries lotteries = Lotteries.from(manualLotteries);
+		final List<Lottery> autoLotteries = createLotteriesNumber();
+		return lotteries.add(autoLotteries);
 	}
 
 	public Lotteries createAutoLottery() {
