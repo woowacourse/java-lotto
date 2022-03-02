@@ -2,13 +2,13 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.domain.LottoTicketFactory;
-import lotto.domain.PurchaseAmount;
+import lotto.domain.vo.PurchaseAmount;
 import lotto.domain.WinningStats;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoTicket;
 import lotto.domain.lottonumber.WinningNumbers;
+import lotto.domain.vo.ManualTicketNumber;
 import lotto.view.InputView;
-import lotto.view.InputView.IndividualInput;
 import lotto.view.OutputView;
 
 public class LottoController {
@@ -23,8 +23,10 @@ public class LottoController {
     private final ThreadLocal<WinningStats> winningStatsRepository = new ThreadLocal<>();
 
     public void buyTicket() {
-        IndividualInput<PurchaseAmount> individualInputs = () -> new PurchaseAmount(inputView.inputMoney());
-        PurchaseAmount purchaseAmount = inputView.commonInputProcess(individualInputs);
+        PurchaseAmount purchaseAmount = inputView.commonInputProcess(() -> new PurchaseAmount(inputView.inputMoney()));
+        ManualTicketNumber manualTicketNumber = inputView.commonInputProcess(() ->
+                new ManualTicketNumber(inputView.inputLottoTicketNumberByManual(), purchaseAmount)
+        );
         purchaseAmountRepository.set(purchaseAmount);
     }
 

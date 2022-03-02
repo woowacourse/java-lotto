@@ -7,12 +7,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoTicket;
+import lotto.domain.vo.PurchaseAmount;
 
 public enum LottoTicketFactory {
 
     INSTANCE;
 
-    private static final int LOTTO_TICKET_PRICE = 1_000;
     private final List<LottoNumber> availableLottoNumbers = createLottoNumbers();
 
     private List<LottoNumber> createLottoNumbers() {
@@ -22,7 +22,7 @@ public enum LottoTicketFactory {
     }
 
     public List<LottoTicket> createTickets(PurchaseAmount money) {
-        int availableTicketNumber = money.getAvailableTicketNumber(LOTTO_TICKET_PRICE);
+        int availableTicketNumber = money.getAvailableTicketNumber();
         return IntStream.range(0, availableTicketNumber)
                 .mapToObj(i -> createTicketShuffled())
                 .collect(Collectors.toUnmodifiableList());

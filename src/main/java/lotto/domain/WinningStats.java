@@ -5,10 +5,10 @@ import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import lotto.domain.lottonumber.LottoTicket;
 import lotto.domain.lottonumber.WinningNumbers;
+import lotto.domain.vo.PurchaseAmount;
 
 public class WinningStats {
 

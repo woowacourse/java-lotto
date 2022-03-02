@@ -16,9 +16,9 @@ public enum InputView {
     public static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     public interface IndividualInput<T> {
+
         T get() throws IOException, IllegalArgumentException;
     }
-
     public <T> T commonInputProcess(IndividualInput<T> individualInputs) {
         try {
             return individualInputs.get();
@@ -30,6 +30,11 @@ public enum InputView {
 
     public String inputMoney() throws IOException {
         out.println(INPUT_MONEY_MESSAGE);
+        return reader.readLine();
+    }
+
+    public String inputLottoTicketNumberByManual() throws IOException {
+        out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return reader.readLine();
     }
 

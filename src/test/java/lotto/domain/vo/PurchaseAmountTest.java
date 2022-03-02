@@ -1,9 +1,10 @@
-package lotto.domain;
+package lotto.domain.vo;
 
-import static lotto.domain.PurchaseAmount.NOT_ENOUGH_MONEY;
-import static lotto.domain.PurchaseAmount.NOT_NUMBER;
+import static lotto.domain.vo.PurchaseAmount.NOT_ENOUGH_MONEY;
+import static lotto.domain.vo.PurchaseAmount.NOT_NUMBER_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.domain.vo.PurchaseAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +31,6 @@ class PurchaseAmountTest {
         // then
         assertThatThrownBy(() -> new PurchaseAmount(notNumberString))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(NOT_NUMBER);
+                .hasMessage(NOT_NUMBER_MESSAGE);
     }
 }

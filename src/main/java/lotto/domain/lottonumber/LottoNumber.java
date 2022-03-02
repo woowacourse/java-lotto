@@ -13,12 +13,12 @@ public class LottoNumber {
 
     public LottoNumber(int number) {
         this.number = number;
-        validateRange();
+        validateLottoNumberRange();
     }
 
     public LottoNumber(String number) {
         this.number = convertStringToInt(number);
-        validateRange();
+        validateLottoNumberRange();
     }
 
     private int convertStringToInt(String numberString) {
@@ -29,7 +29,7 @@ public class LottoNumber {
         }
     }
 
-    private void validateRange() {
+    private void validateLottoNumberRange() {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE);
         }
