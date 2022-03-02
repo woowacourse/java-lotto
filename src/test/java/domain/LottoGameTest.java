@@ -1,6 +1,5 @@
 package domain;
 
-import static domain.LottoTickets.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +30,7 @@ class LottoGameTest {
         lottoGame = new LottoGame(winningPrizeStrategy);
         lottoGame.purchaseLottoTickets(new ArrayList<>(), purchaseMoney, generateStrategy);
         lottoGame.inputWinningNumbers(winningNumbers, bonusNumber);
-        assertThat(lottoGame.getLottoRateOfReturn())
+        assertThat(lottoGame.calculateLottoRateOfReturn())
                 .isEqualTo(WinningPrize.FIRST.getPrizeMoney() / (double) purchaseMoney);
     }
 }

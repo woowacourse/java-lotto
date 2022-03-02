@@ -22,14 +22,14 @@ public class LottoGame {
         this.winningTicket = WinningTicket.from(winningNumbers, bonusNumber);
     }
 
-    public double getLottoRateOfReturn() {
+    public double calculateLottoRateOfReturn() {
         checkCanGetResult();
         double totalReturn = calculateTotalReturn();
         double purchaseMoney = (double) lottoTickets.getTickets().size() * LottoTicket.TICKET_PRICE;
         return totalReturn / purchaseMoney;
     }
 
-    public WinningResult getWinningResult() {
+    public WinningResult createWinningResult() {
         checkCanGetResult();
         return WinningResult.from(lottoTickets, winningTicket, winningPrizeStrategy);
     }
@@ -41,11 +41,7 @@ public class LottoGame {
     }
 
     private int calculateTotalReturn() {
-        return getWinningResult().getCountOfWinning()
-                .entrySet()
-                .stream()
-                .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
-                .sum();
+        return createWinningResult().sumTotalReturn();
     }
 
     public LottoTickets getLottoTickets() {

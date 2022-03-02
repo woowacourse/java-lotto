@@ -60,6 +60,13 @@ public class WinningResult {
         return count >= WINNING_FLAG;
     }
 
+    public int sumTotalReturn() {
+        return countOfWinning.entrySet()
+                .stream()
+                .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
+                .sum();
+    }
+
     public Map<WinningPrize, Integer> getCountOfWinning() {
         return Collections.unmodifiableMap(countOfWinning);
     }
