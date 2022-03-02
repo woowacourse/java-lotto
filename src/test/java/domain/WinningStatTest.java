@@ -1,3 +1,5 @@
+package domain;
+
 import static org.assertj.core.api.Assertions.*;
 
 import java.math.RoundingMode;
@@ -8,9 +10,6 @@ import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import domain.LottoRank;
-import domain.WinningStat;
 
 class WinningStatTest {
 
