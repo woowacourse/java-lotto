@@ -34,7 +34,7 @@ public class LottoController {
         final TotalPurchaseAmount.TotalPurchaseAmountBuilder totalPurchaseAmountBuilder =
                 inputTotalPurchaseAmount(lottoPrice);
         final TotalPurchaseAmount totalPurchaseAmount = inputManualPurchaseAmount(totalPurchaseAmountBuilder).build();
-        final List<Lotto> manualLottos = inputManualLottos(totalPurchaseAmount.getCountOfManualLottoNumber());
+        final List<Lotto> manualLottos = inputManualLottos(totalPurchaseAmount.getCountOfManualLottoNumbers());
         return new LottoMachine(new LottoRandomGenerator(), totalPurchaseAmount, manualLottos);
     }
 
@@ -76,7 +76,8 @@ public class LottoController {
     }
 
     public void run() {
-        outputView.printPurchaseCount(lottoMachine.getCountOfLottoNumbers());
+        outputView.printPurchaseCount(
+                lottoMachine.getCountOfManualLottoNumbers(), lottoMachine.getCountOfAutoLottoNumbers());
         printLottoNumbersGroup();
         final WinningNumbers winningNumbers = generateWinningNumbers();
         printResult(winningNumbers);

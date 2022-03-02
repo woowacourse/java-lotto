@@ -64,11 +64,15 @@ public class TotalPurchaseAmount {
         }
     }
 
-    public int getCountOfLottoNumbers() {
+    public int getCountOfTotalLottoNumbers() {
         return amount / lottoPrice;
     }
 
-    public int getCountOfManualLottoNumber() {
+    public int getCountOfAutoLottoNumbers() {
+        return amount / lottoPrice - manualPurchaseCount.getValue();
+    }
+
+    public int getCountOfManualLottoNumbers() {
         return manualPurchaseCount.getValue();
     }
 

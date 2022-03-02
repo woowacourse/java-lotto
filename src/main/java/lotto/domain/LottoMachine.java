@@ -19,11 +19,15 @@ public class LottoMachine {
                         final List<Lotto> manualLottos) {
         this.totalPurchaseAmount = totalPurchaseAmount;
         lottos = new Lottos(lottoGenerator.generateLottosExceptManualGenerated(
-                this.totalPurchaseAmount.getCountOfLottoNumbers(), manualLottos));
+                this.totalPurchaseAmount.getCountOfTotalLottoNumbers(), manualLottos));
     }
 
-    public int getCountOfLottoNumbers() {
-        return totalPurchaseAmount.getCountOfLottoNumbers();
+    public int getCountOfAutoLottoNumbers() {
+        return totalPurchaseAmount.getCountOfAutoLottoNumbers();
+    }
+
+    public int getCountOfManualLottoNumbers() {
+        return totalPurchaseAmount.getCountOfManualLottoNumbers();
     }
 
     public List<Lotto> getLottos() {

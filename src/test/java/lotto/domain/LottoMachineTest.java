@@ -21,8 +21,9 @@ import static org.assertj.core.api.Assertions.entry;
 class LottoMachineTest {
     private final LottoGenerator lottoGenerator = new LottoCustomGenerator();
     private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount.TotalPurchaseAmountBuilder()
-            .setTotalAmount("6000")
             .setLottoPrice(1000)
+            .setTotalAmount("6000")
+            .setManualPurchaseAmount("1")
             .build();
     private final Lotto LottoUserInputLotto = new Lotto(Arrays.asList("40", "41", "42", "43", "44", "45"));
     private final List<Lotto> manualLottos = Arrays.asList(LottoUserInputLotto);
@@ -32,11 +33,22 @@ class LottoMachineTest {
             new Lotto(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.from("1"));
 
     @Test
-    @DisplayName("구매 개수를 반환한다.")
+    @DisplayName("자동 개수를 반환한다.")
     void getCountOfLottoNumbers_Test() {
-        final int expected = 6;
+        final int expected = 5;
         //when
-        final int actual = lottoMachine.getCountOfLottoNumbers();
+        final int actual = lottoMachine.getCountOfAutoLottoNumbers();
+        //then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("수동 구매 개수를 반환한다.")
+    void getCountOfManualLottoNumbers_Test() {
+        //given
+        final int expected = 1;
+        //when
+        final int actual = lottoMachine.getCountOfManualLottoNumbers();
         //then
         assertThat(actual).isEqualTo(expected);
     }

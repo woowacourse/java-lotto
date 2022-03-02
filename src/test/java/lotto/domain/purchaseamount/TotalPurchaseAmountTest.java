@@ -10,17 +10,40 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class TotalPurchaseAmountTest {
     private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount.TotalPurchaseAmountBuilder()
-            .setTotalAmount("2000")
             .setLottoPrice(1000)
+            .setTotalAmount("8000")
+            .setManualPurchaseAmount("2")
             .build();
 
     @Test
-    @DisplayName("구매 개수를 반환한다.")
-    void getPurchaseCount_Test() {
+    @DisplayName("전체 구매 개수를 반환한다.")
+    void getCountOfTotalLottoNumbers_Test() {
+        //given
+        final int expected = 8;
+        //when
+        final int actual = totalPurchaseAmount.getCountOfTotalLottoNumbers();
+        //then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("자동 구매 개수를 반환한다.")
+    void getCountOfAutoLottoNumbers_Test() {
+        //given
+        final int expected = 6;
+        //when
+        final int actual = totalPurchaseAmount.getCountOfAutoLottoNumbers();
+        //then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("수동 구매 개수를 반환한다.")
+    void getCountOfManualLottoNumbers_Test() {
         //given
         final int expected = 2;
         //when
-        final int actual = totalPurchaseAmount.getCountOfLottoNumbers();
+        final int actual = totalPurchaseAmount.getCountOfManualLottoNumbers();
         //then
         assertThat(actual).isEqualTo(expected);
     }
@@ -30,7 +53,7 @@ class TotalPurchaseAmountTest {
     void getProfitRate_Test() {
         //given
         final long totalProfit = 4000000000L;
-        final double expected = (double) totalProfit / 2000;
+        final double expected = (double) totalProfit / 8000;
         //when
         final double actual = totalPurchaseAmount.getProfitRate(totalProfit);
         //then
