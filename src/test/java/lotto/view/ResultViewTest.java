@@ -74,7 +74,7 @@ class ResultViewTest {
         IllegalAccessException {
         LottoMoney lottoMoney = new LottoMoney(14000);
 
-        Constructor<Yield> yieldConstructor = Yield.class.getDeclaredConstructor(LottoMoney.class, Long.class);
+        Constructor<Yield> yieldConstructor = Yield.class.getDeclaredConstructor(LottoMoney.class, long.class);
         yieldConstructor.setAccessible(true);
         Yield yield = yieldConstructor.newInstance(lottoMoney, totalWinningMoney);
 
