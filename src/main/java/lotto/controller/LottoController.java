@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Payment;
@@ -24,10 +25,10 @@ public class LottoController {
     }
 
     private static Lottos buyLottos(final Payment payment) {
-        int lottoCount = payment.getLottoCount();
-        Lottos lottos = createLottos(lottoCount);
+        LottoCount autoCount = payment.getAutoLottoCount();
+        Lottos lottos = createLottos(autoCount);
 
-        printLottoCount(lottoCount);
+        printLottoCount(autoCount);
         printLottos(lottos);
 
         return lottos;

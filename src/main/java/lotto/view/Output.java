@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Ball;
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
@@ -36,8 +37,8 @@ public class Output {
         System.out.println(REQUEST_PURCHASE_AMOUNT);
     }
 
-    public static void printLottoCount(int lottoCount) {
-        System.out.printf(LOTTO_COUNT, lottoCount);
+    public static void printLottoCount(final LottoCount lottoCount) {
+        System.out.printf(LOTTO_COUNT, lottoCount.getAutoCount());
     }
 
     public static void printLottos(final Lottos lottos) {

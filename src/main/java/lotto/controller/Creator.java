@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Ball;
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
@@ -30,7 +31,7 @@ public class Creator {
         }
     }
 
-    public static Lottos createLottos(final int lottoCount) {
+    public static Lottos createLottos(final LottoCount lottoCount) {
         return LottoGenerator.pickAutoLottos(lottoCount);
     }
 

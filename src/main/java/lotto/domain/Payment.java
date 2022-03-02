@@ -15,8 +15,8 @@ public class Payment {
         return payment;
     }
 
-    public int getLottoCount() {
-        return this.payment / Lotto.LOTTO_PRICE;
+    public LottoCount getAutoLottoCount() {
+        return new LottoCount(this.payment / Lotto.LOTTO_PRICE);
     }
 
     private void validatePayment(final int payment) {
