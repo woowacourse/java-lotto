@@ -7,6 +7,9 @@ import lotto.domain.Lottos;
 import lotto.domain.Payment;
 import lotto.domain.WinningLotto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static lotto.controller.Creator.*;
 import static lotto.view.Output.*;
 
@@ -28,8 +31,17 @@ public class LottoController {
         printRequestManualCount();
         LottoCount lottoCount = createLottoCount(payment);
 
-        Lottos lottos = createLottos(lottoCount);
+        printRequestManualLottos();
+        Lottos manualLottos = createManualLottos(lottoCount);
+        Lottos autoLottos = createAutoLottos(lottoCount);
 
+        List<Lotto> totalLottos = new ArrayList<>();
+        totalLottos.addAll(manualLottos.getLottos());
+        totalLottos.addAll(autoLottos.getLottos());
+
+        Lottos lottos = new Lottos(totalLottos);
+
+        printLottoCount(lottoCount);
         printLottos(lottos);
 
         return lottos;
@@ -37,7 +49,7 @@ public class LottoController {
 
     private static WinningLotto getWinningLotto() {
         printRequestWinNumber();
-        Lotto winningNumbers = createWinningNumbers();
+        Lotto winningNumbers = createLottoNumbers();
         printRequestBonusBall();
         return createWinningLotto(winningNumbers);
     }

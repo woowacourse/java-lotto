@@ -66,29 +66,29 @@ class InputTest {
     }
 
     @Test
-    @DisplayName("당첨 번호에 null 을 입력했을 경우")
+    @DisplayName("로또 번호에 null 을 입력했을 경우")
     void win_number_null() {
         assertThatThrownBy(() -> {
             Entering entering = () -> null;
-            List<Ball> winNumber = inputWinningNumbers(entering);
+            List<Ball> winNumber = inputLottoNumbers(entering);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("당첨 번호에 빈값을 입력했을 경우")
+    @DisplayName("로또 번호에 빈값을 입력했을 경우")
     void win_number_empty() {
         assertThatThrownBy(() -> {
             Entering entering = () -> "";
-            List<Ball> winNumber = inputWinningNumbers(entering);
+            List<Ball> winNumber = inputLottoNumbers(entering);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("당첨 번호에 문자를 입력했을 경우")
+    @DisplayName("로또 번호에 문자를 입력했을 경우")
     void win_number_not_number() {
         assertThatThrownBy(() -> {
-            Entering entering = () -> "1번, 2번";
-            List<Ball> winNumber = inputWinningNumbers(entering);
+            Entering entering = () -> "1번, 2번, 3번, 4번, 5번, 6번";
+            List<Ball> winNumber = inputLottoNumbers(entering);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

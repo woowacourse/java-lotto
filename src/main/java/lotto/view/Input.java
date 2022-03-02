@@ -1,12 +1,12 @@
 package lotto.view;
 
 import lotto.domain.Ball;
+import lotto.domain.LottoCount;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static lotto.view.Output.printErrorMessage;
 
 public class Input {
     private static final String NUMBER_MATCHES = "-?[0-9]+";
@@ -27,12 +27,12 @@ public class Input {
         return Integer.parseInt(manualCount);
     }
 
-    public static List<Ball> inputWinningNumbers(final Entering entering) {
-        String[] winningNumbers = getWinningNumbers(entering);
-        for (String number : winningNumbers) {
+    public static List<Ball> inputLottoNumbers(final Entering entering) {
+        String[] lottoNumbers = getLottoNumbers(entering);
+        for (String number : lottoNumbers) {
             validateNumber(number);
         }
-        return Arrays.stream(winningNumbers)
+        return Arrays.stream(lottoNumbers)
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .map(Ball::new)
@@ -45,7 +45,7 @@ public class Input {
         return Integer.parseInt(bonusBall);
     }
 
-    private static String[] getWinningNumbers(final Entering entering) {
+    private static String[] getLottoNumbers(final Entering entering) {
         String winningNumbers = entering.enter();
         if (isBlank(winningNumbers)) {
             throw new IllegalArgumentException(ERROR_ONLY_NUMBER);

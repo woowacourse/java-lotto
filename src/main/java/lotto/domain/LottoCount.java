@@ -20,6 +20,10 @@ public class LottoCount {
         this.autoCount = totalCount - this.manualCount;
     }
 
+    public int getManualCount() {
+        return this.manualCount;
+    }
+
     public int getAutoCount() {
         return this.autoCount;
     }

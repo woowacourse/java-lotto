@@ -13,8 +13,9 @@ import java.util.stream.Collectors;
 public class Output {
     private static final String ERROR_PREFIX = "[ERROR] ";
     private static final String REQUEST_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
-    private static final String REQUEST_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String LOTTO_COUNT = "%d개를 구매했습니다.\n";
+    private static final String REQUEST_MANUAL_COUNT = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String REQUEST_MANUAL_LOTTOS = "\n수동으로 구매할 번호를 입력해 주세요.";
+    private static final String LOTTO_COUNT = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String LOTTO_DELIMITER = ", ";
     private static final String LOTTO_FORMAT = "[%s]\n";
     private static final String REQUEST_WIN_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요.";
@@ -42,8 +43,12 @@ public class Output {
         System.out.println(REQUEST_MANUAL_COUNT);
     }
 
+    public static void printRequestManualLottos() {
+        System.out.println(REQUEST_MANUAL_LOTTOS);
+    }
+
     public static void printLottoCount(final LottoCount lottoCount) {
-        System.out.printf(LOTTO_COUNT, lottoCount.getAutoCount());
+        System.out.printf(LOTTO_COUNT, lottoCount.getManualCount(), lottoCount.getAutoCount());
     }
 
     public static void printLottos(final Lottos lottos) {

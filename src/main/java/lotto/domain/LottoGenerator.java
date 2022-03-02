@@ -19,7 +19,9 @@ public class LottoGenerator {
         return new Lottos(lottos);
     }
 
-    // TODO: 수동 로또 생성
+    public static Lottos pickManualLottos(final List<Lotto> manualLottos) {
+        return new Lottos(manualLottos);
+    }
 
     private static List<Ball> selectRandomBalls() {
         List<Ball> lottoBalls = new ArrayList<>(Ball.getTotalBalls());

@@ -11,6 +11,9 @@ import lotto.domain.WinningLotto;
 import lotto.view.Entering;
 import lotto.view.KeyEnter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static lotto.view.Input.*;
 import static lotto.view.Output.*;
 
@@ -38,16 +41,24 @@ public class Creator {
         }
     }
 
-    public static Lottos createLottos(final LottoCount lottoCount) {
+    public static Lottos createManualLottos(final LottoCount lottoCount) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 0; i < lottoCount.getManualCount(); i++) {
+            manualLottos.add(createLottoNumbers());
+        }
+        return LottoGenerator.pickManualLottos(manualLottos);
+    }
+
+    public static Lottos createAutoLottos(final LottoCount lottoCount) {
         return LottoGenerator.pickAutoLottos(lottoCount);
     }
 
-    public static Lotto createWinningNumbers() {
+    public static Lotto createLottoNumbers() {
         try {
-            return new Lotto(inputWinningNumbers(entering));
+            return new Lotto(inputLottoNumbers(entering));
         } catch (IllegalArgumentException error) {
             printErrorMessage(error.getMessage());
-            return createWinningNumbers();
+            return createLottoNumbers();
         }
     }
 
