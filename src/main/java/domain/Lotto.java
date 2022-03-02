@@ -16,11 +16,9 @@ public class Lotto {
     public Lotto(List<LottoNumber> lottoNumbers) {
         Objects.requireNonNull(lottoNumbers, ERROR_MESSAGE_FOR_NULL_LOTTO_NUMBERS);
 
-        List<LottoNumber> copiedLottoNumbers = List.copyOf(lottoNumbers);
-        validateSize(copiedLottoNumbers);
-        validateDuplicate(copiedLottoNumbers);
-
-        this.lottoNumbers = copiedLottoNumbers;
+        validateSize(lottoNumbers);
+        validateDuplicate(lottoNumbers);
+        this.lottoNumbers  = List.copyOf(lottoNumbers);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
