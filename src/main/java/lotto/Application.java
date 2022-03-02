@@ -38,7 +38,7 @@ public class Application {
     public static void main(String[] args) {
         Money money = initMoney();
         LottoMachine lottoMachine = createLottoMachine();
-        Lottoes lottoes = issueLottoes(lottoMachine, money);
+        Lottoes lottoes = issueLottoes(lottoMachine);
         WinnerLotto winnerLotto = initWinnerLotto();
         summarize(winnerLotto, lottoes);
     }
@@ -77,8 +77,8 @@ public class Application {
         return e.getMessage();
     }
 
-    private static Lottoes issueLottoes(LottoMachine lottoMachine, Money money) {
-        Lottoes lottoes = lottoMachine.issueLotto(money);
+    private static Lottoes issueLottoes(LottoMachine lottoMachine) {
+        Lottoes lottoes = lottoMachine.issueLotto();
         OutputView.printLottoSize(lottoes.size());
         for (Lotto lotto : lottoes) {
             OutputView.printLotto(lotto.getIntValues());

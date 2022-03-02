@@ -8,17 +8,34 @@ import java.util.stream.IntStream;
 public class LottoMachine {
 
     private final LottoGenerator lottoGenerator;
+    private Money money;
+    private Lottoes manualLottoes;
 
     public LottoMachine(LottoGenerator lottoGenerator) {
         this.lottoGenerator = lottoGenerator;
+        this.money = Money.ZERO;
+        this.manualLottoes = Lottoes.empty();
     }
 
-    public Lottoes issueLotto(Money money) {
-        return new Lottoes(createLottoes(money));
+    public void inputMoney(Money money) {
+        this.money = this.money.plus(money);
     }
 
-    private List<Lotto> createLottoes(Money money) {
-        return IntStream.range(0, quantity(money))
+    public void registerManualLotto(Lottoes lottoes) {
+        money = money.subtract(lottoes.getPrice());
+        manualLottoes = manualLottoes.combine(lottoes);
+    }
+
+    public Lottoes issueLotto() {
+        return manualLottoes.combine(issueAutoLottoes());
+    }
+
+    private Lottoes issueAutoLottoes() {
+        return new Lottoes(createLottoes());
+    }
+
+    private List<Lotto> createLottoes() {
+        return IntStream.range(0, quantity(this.money))
             .mapToObj(i -> lottoGenerator.createLotto())
             .collect(toUnmodifiableList());
     }
