@@ -44,9 +44,14 @@ public class MainController {
     }
 
     private List<LottoTicket> addManualLottoTickets(int manualCount) {
-        return InputView.inputManualLottoNumbers(manualCount).stream()
-            .map(LottoTicket::of)
-            .collect(Collectors.toList());
+        try {
+            return InputView.inputManualLottoNumbers(manualCount).stream()
+                .map(LottoTicket::of)
+                .collect(Collectors.toList());
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e.getMessage());
+            return addManualLottoTickets(manualCount);
+        }
     }
 
     private void addAutoLottoTickets(int autoCount, List<LottoTicket> lottoTickets) {

@@ -61,7 +61,6 @@ public class InputView {
     private static List<Integer> inputSingleLottoNumbers() {
         String lottoNumbers = scanner.nextLine();
         validatePattern(lottoNumbers);
-        validateNumberRange(lottoNumbers);
         return Separator.splitStringToListInt(lottoNumbers, LOTTO_NUMBERS_SEPARATE_REGEX);
     }
 
@@ -78,16 +77,6 @@ public class InputView {
     private static void validatePattern(String lottoNumbers) {
         if (!Pattern.matches(WIN_LOTTO_NUMBER_REGEX, lottoNumbers)) {
             throw new IllegalArgumentException(LOTTO_NUMBER_INPUT_PATTERN_ERROR_MESSAGE);
-        }
-    }
-
-    private static void validateNumberRange(String lottoNumbers) {
-        int wrongNumberCount = (int) Separator.splitStringToListInt(lottoNumbers,
-                LOTTO_NUMBERS_SEPARATE_REGEX).stream()
-            .filter(number -> 0 > number || number > 46)
-            .count();
-        if (wrongNumberCount > 0) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR_MESSAGE);
         }
     }
 }
