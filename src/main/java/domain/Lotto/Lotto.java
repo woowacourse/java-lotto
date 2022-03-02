@@ -19,7 +19,7 @@ import java.util.List;
 
 public class Lotto {
 
-    public static final int CORRECT_LOTTO_SIZE = 6;
+    private static final int CORRECT_LOTTO_SIZE = 6;
 
     private final List<LottoNumber> lotto;
 
