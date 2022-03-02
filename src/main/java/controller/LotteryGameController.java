@@ -32,7 +32,7 @@ public class LotteryGameController {
 	private Lotteries purchaseLottery() {
 		try {
 			lotteryGame = LotteryGame.of(inputMoney(), new LotteryGenerator(), new LotteryNumberGenerator());
-			return lotteryGame.createAutoLottery();
+			return this.lotteryGame.createAutoLottery();
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
 			return purchaseLottery();
@@ -49,7 +49,7 @@ public class LotteryGameController {
 	}
 
 	private void makeResult(final Lotteries lotteries, final WinningLottery winningLottery) {
-		final Result result = Result.makeResult(lotteries, winningLottery, lotteryGame);
+		final Result result = Result.makeResult(lotteries, winningLottery, lotteryGame.getTheNumberOfLottery());
 		outputView.printStatistics(result);
 	}
 
