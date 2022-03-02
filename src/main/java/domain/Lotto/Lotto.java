@@ -33,6 +33,10 @@ public class Lotto {
         return new Result(hitCount, isHitBonusBall);
     }
 
+    public boolean isContainLottoNumber(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
     public List<LottoNumber> getLotto() {
         return Collections.unmodifiableList(lotto);
     }
