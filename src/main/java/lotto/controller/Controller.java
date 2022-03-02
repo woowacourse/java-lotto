@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.stream.IntStream;
+import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RankCount;
@@ -10,10 +12,12 @@ import lotto.view.OutputView;
 public class Controller {
 
     public void run() {
-        Money money = inputMoney();
-        Lottos lottos = buyLottos(money);
-        WinningNumbers winningNumbers = inputWinningNumbers();
-        printWinningStatistic(money, lottos, winningNumbers);
+        Lottos lottos = new Lottos(inputMoney());
+        buyLottosByManual(lottos);
+
+//        buyLottosByAuto(lottos, money);
+//        WinningNumbers winningNumbers = inputWinningNumbers();
+//        printWinningStatistic(money, lottos, winningNumbers);
     }
 
     private Money inputMoney() {
@@ -25,8 +29,34 @@ public class Controller {
         }
     }
 
-    private Lottos buyLottos(Money money) {
-        Lottos lottos = Lottos.buyLottosByAuto(money);
+    private void buyLottosByManual(Lottos lottos) {
+        int countForManualLotto = inputCountForManualLotto();
+        InputView.printInputLottoNumbersMessage();
+        IntStream.range(0, countForManualLotto)
+                .forEach(integer -> lottos.buyLottos(inputLotto()));
+    }
+
+    private int inputCountForManualLotto() {
+        try {
+            return Integer.parseInt(InputView.inputCountForManualLotto());
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception);
+            return inputCountForManualLotto();
+        }
+    }
+
+    private Lotto inputLotto() {
+        try {
+            return Lotto.generateLottoByString(InputView.inputNextLine());
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception);
+            return inputLotto();
+        }
+    }
+
+
+    private Lottos buyLottosByAuto(Lottos lottos) {
+        lottos.buyLottosByAuto();
         OutputView.printLottos(lottos);
         OutputView.printNewLine();
         return lottos;
