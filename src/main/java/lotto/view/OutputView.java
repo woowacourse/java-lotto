@@ -4,7 +4,6 @@ import static java.util.stream.Collectors.joining;
 
 import java.util.List;
 import lotto.controller.dto.LottoResultDto;
-import lotto.controller.dto.LottoTicketDto;
 import lotto.controller.dto.LottoTicketsDto;
 import lotto.controller.dto.RankDto;
 import lotto.controller.dto.SalesInfoDto;
@@ -31,15 +30,13 @@ public class OutputView {
         printLottoTicketsInfo(salesInfoDto.getLottoTickets());
     }
 
-    public void printLottoTicketsInfo(LottoTicketsDto lottoTickets) {
-        System.out.println(getTicketsInfo(lottoTickets.getLottoTickets()));
-    }
-
-    private String getTicketsInfo(List<LottoTicketDto> lottoTickets) {
-        return lottoTickets.stream()
-                .map(LottoTicketDto::getLottoNumbers)
+    public void printLottoTicketsInfo(LottoTicketsDto lottoTicketsDto) {
+        String ticketsInfo = lottoTicketsDto.getLottoTickets()
+                .stream()
                 .map(Object::toString)
                 .collect(joining(TICKETS_INFO_DELIMITER));
+
+        System.out.println(ticketsInfo);
     }
 
     public void printLottoResultMessage() {
