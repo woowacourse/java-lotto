@@ -3,7 +3,6 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -23,7 +22,7 @@ class LottoTest {
 		lottoBalls.add(LottoBall.from("1"));
 
 		assertThatThrownBy(() -> {
-			new Lotto(lottoBalls);
+			Lotto.from(lottoBalls);
 		}).isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("[ERROR] 로또 번호는 6개로 입력해야 합니다");
 	}
@@ -40,7 +39,7 @@ class LottoTest {
 		lottoBalls.add(LottoBall.from("5"));
 
 		assertThatThrownBy(() -> {
-			new Lotto(lottoBalls);
+			Lotto.from(lottoBalls);
 		}).isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("[ERROR] 한 개의 로또 내에서 숫자가 중복될 수 없습니다");
 	}

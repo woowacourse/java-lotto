@@ -11,27 +11,27 @@ public class Lotto {
 
 	List<LottoBall> lotto;
 
-	public Lotto(List<LottoBall> lottoBalls) {
+	private Lotto(List<LottoBall> lottoBalls) {
 		this.lotto = lottoBalls;
 	}
 
-	public Lotto from(List<LottoBall> lottoBalls) {
+	public static Lotto from(List<LottoBall> lottoBalls) {
 		validate(lottoBalls);
 		return new Lotto(lottoBalls);
 	}
 
-	private void validate(List<LottoBall> lottoBalls) {
+	private static void validate(List<LottoBall> lottoBalls) {
 		checkCount(lottoBalls);
 		checkDuplicate(lottoBalls);
 	}
 
-	private void checkCount(List<LottoBall> lottoBalls) {
+	private static void checkCount(List<LottoBall> lottoBalls) {
 		if (lottoBalls.size() != 6) {
 			throw new IllegalArgumentException(ERROR_COUNT);
 		}
 	}
 
-	private void checkDuplicate(List<LottoBall> lottoBalls) {
+	private static void checkDuplicate(List<LottoBall> lottoBalls) {
 		if (Set.copyOf(lottoBalls).size() != lottoBalls.size()) {
 			throw new IllegalArgumentException(ERROR_DUPLICATE);
 		}
