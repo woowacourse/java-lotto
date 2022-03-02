@@ -9,17 +9,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class TotalPurchaseAmountTest {
-    private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount("2000");
+    private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount("2000", 1000);
 
     @ParameterizedTest
     @DisplayName("1000의 양의 배수가 아닌 값으로 생성할 경우 예외를 발생시킨다.")
     @ValueSource(strings = {"abc", "1004", "-1000", "12.334"})
     void create_exceptionByInvalidPurchaseAmountValue_Test(final String invalidValue) {
         //given
-        final String expectedExceptionMessage = "구매 금액은 1000의 양의 배수여야 합니다.";
+        final String expectedExceptionMessage = "구매 금액은 로또 가격의 양의 배수여야 합니다.";
+        final int anyLottoPrice = 1000;
         //when then
         assertThatThrownBy(
-                () -> new TotalPurchaseAmount(invalidValue))
+                () -> new TotalPurchaseAmount(invalidValue, anyLottoPrice))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
     }

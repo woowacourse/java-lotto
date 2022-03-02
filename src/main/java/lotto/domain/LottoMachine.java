@@ -15,8 +15,8 @@ public class LottoMachine {
     private final Lottos lottos;
     private final TotalPurchaseAmount totalPurchaseAmount;
 
-    public LottoMachine(
-            final LottoGenerator lottoGenerator, final TotalPurchaseAmount totalPurchaseAmount, final List<Lotto> manualLottos) {
+    public LottoMachine(final LottoGenerator lottoGenerator, final TotalPurchaseAmount totalPurchaseAmount,
+                        final List<Lotto> manualLottos) {
         this.totalPurchaseAmount = totalPurchaseAmount;
         lottos = new Lottos(lottoGenerator.generateLottosExceptManualGenerated(
                 this.totalPurchaseAmount.getCountOfLottoNumbers(), manualLottos));

@@ -1,6 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.generator.LottoGenerator;
+import lotto.domain.LottoMachine;
+import lotto.domain.generator.LottoRandomGenerator;
 import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.Lottos;
 import lotto.domain.lottonumber.WinningNumbers;
@@ -12,7 +13,6 @@ import lotto.domain.winningresult.WinningResult;
 import lotto.dto.InputLottoDto;
 import lotto.dto.LottoMatchKindDto;
 import lotto.dto.LottoNumbersDto;
-import lotto.domain.LottoMachine;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
 
@@ -25,26 +25,26 @@ public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
 
-    public LottoController(final LottoGenerator lottoGenerator, final InputView inputView, final OutputView outputView) {
+    public LottoController(final InputView inputView, final OutputView outputView, final int lottoPrice) {
         this.inputView = inputView;
         this.outputView = outputView;
-        lottoMachine = initializeLottoService(lottoGenerator);
+        lottoMachine = initializeLottoService(lottoPrice);
     }
 
-    private LottoMachine initializeLottoService(final LottoGenerator lottoGenerator) {
-        final TotalPurchaseAmount totalPurchaseAmount = inputTotalPurchaseAmount();
+    private LottoMachine initializeLottoService(final int lottoPrice) {
+        final TotalPurchaseAmount totalPurchaseAmount = inputTotalPurchaseAmount(lottoPrice);
         final int manualPurchaseAmount = inputManualPurchaseAmount(totalPurchaseAmount);
         final List<Lotto> manualLottos = inputManualLottos(manualPurchaseAmount);
-        return new LottoMachine(lottoGenerator, totalPurchaseAmount, manualLottos);
+        return new LottoMachine(new LottoRandomGenerator(), totalPurchaseAmount, manualLottos);
     }
 
-    private TotalPurchaseAmount inputTotalPurchaseAmount() {
+    private TotalPurchaseAmount inputTotalPurchaseAmount(final int lottoPrice) {
         try {
             final String purchaseAmountInput = inputView.inputPurchaseAmount();
-            return new TotalPurchaseAmount(purchaseAmountInput);
+            return new TotalPurchaseAmount(purchaseAmountInput, lottoPrice);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
-            return inputTotalPurchaseAmount();
+            return inputTotalPurchaseAmount(lottoPrice);
         }
     }
 

@@ -3,16 +3,17 @@ package lotto.domain.purchaseamount;
 import static lotto.util.regex.NumberRegex.isNaturalNumber;
 
 public class TotalPurchaseAmount {
-    private static final String INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE = "구매 금액은 1000의 양의 배수여야 합니다.";
-    private static final int LOTTO_PRICE = 1000;
+    private static final String INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE = "구매 금액은 로또 가격의 양의 배수여야 합니다.";
 
     private final int amount;
+    private final int lottoPrice;
 
-    public TotalPurchaseAmount(final String amount) {
+    public TotalPurchaseAmount(final String amount, final int lottoPrice) {
         validateNaturalNumber(amount);
         int naturalNumberValue = Integer.parseInt(amount);
-        validateMultipleOfPrice(naturalNumberValue);
+        validateMultipleOfPrice(naturalNumberValue, lottoPrice);
         this.amount = naturalNumberValue;
+        this.lottoPrice = lottoPrice;
     }
 
     private void validateNaturalNumber(final String value) {
@@ -21,18 +22,18 @@ public class TotalPurchaseAmount {
         }
     }
 
-    private void validateMultipleOfPrice(final int purchaseAmount) {
-        if (purchaseAmount % LOTTO_PRICE != 0) {
+    private void validateMultipleOfPrice(final int purchaseAmount, final int lottoPrice) {
+        if (purchaseAmount % lottoPrice != 0) {
             throw new IllegalArgumentException(INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE);
         }
     }
 
     public int getPurchaseCount() {
-        return amount / LOTTO_PRICE;
+        return amount / lottoPrice;
     }
 
     public int getCountOfLottoNumbers() {
-        return amount / LOTTO_PRICE;
+        return amount / lottoPrice;
     }
 
     public double getProfitRate(final long totalProfit) {
@@ -40,6 +41,6 @@ public class TotalPurchaseAmount {
     }
 
     public boolean isLowerThan(final int numberOfManualLotto) {
-        return amount < numberOfManualLotto * LOTTO_PRICE;
+        return amount < numberOfManualLotto * lottoPrice;
     }
 }
