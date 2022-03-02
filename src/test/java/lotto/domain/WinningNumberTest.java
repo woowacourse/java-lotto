@@ -50,7 +50,7 @@ class WinningNumberTest {
     void 당첨_정보_확인_2등() {
         // given
         WinningNumber winningNumber = new WinningNumber(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
-        LottoTicket lottoTicket = new LottoTicket(size -> List.of(1, 2, 3, 4, 5, 7));
+        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
 
         // when
         Rank rank = winningNumber.compare(lottoTicket);
@@ -64,7 +64,7 @@ class WinningNumberTest {
     void 당첨_정보_확인_3등() {
         // given
         WinningNumber winningNumber = new WinningNumber(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
-        LottoTicket lottoTicket = new LottoTicket(size -> List.of(1, 2, 3, 4, 5, 8));
+        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 8));
 
         // when
         Rank rank = winningNumber.compare(lottoTicket);

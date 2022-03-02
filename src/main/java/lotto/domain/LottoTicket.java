@@ -5,7 +5,6 @@ import static java.util.stream.Collectors.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import lotto.domain.generator.LottoNumberGenerator;
 
 public class LottoTicket {
 
@@ -13,10 +12,6 @@ public class LottoTicket {
     private static final String DUPLICATED_LOTTO_NUMBERS_ERROR_MESSAGE = "번호의 갯수가 적절하지 않습니다. 또한 중복될 수 없습니다.";
 
     private final Set<LottoNumber> lottoNumbers;
-
-    public LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
-        this(lottoNumberGenerator.generate(DEFAULT_LOTTO_NUMBERS_SIZE));
-    }
 
     public LottoTicket(List<Integer> numbers) {
         Set<LottoNumber> lottoNumber = numbers.stream()

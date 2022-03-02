@@ -7,31 +7,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
-import lotto.domain.generator.LottoNumberGenerator;
 
 public class LottoTickets {
 
-    private static final int LOTTO_COUNT_START_INCLUSIVE = 0;
-
     private final List<LottoTicket> lottoTickets;
-
-    private LottoTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoTickets = generateTickets(lottoCount, lottoNumberGenerator);
-    }
-
-    private List<LottoTicket> generateTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
-        return IntStream.range(LOTTO_COUNT_START_INCLUSIVE, lottoCount)
-                .mapToObj(noneUsed -> new LottoTicket(lottoNumberGenerator))
-                .collect(toList());
-    }
 
     private LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = new ArrayList<>(lottoTickets);
-    }
-
-    public static LottoTickets createAutoLottoTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
-        return new LottoTickets(lottoCount, lottoNumberGenerator);
     }
 
     public static LottoTickets createManualLottoTickets(List<List<Integer>> manualNumbers) {
