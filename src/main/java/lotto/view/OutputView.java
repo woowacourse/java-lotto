@@ -1,7 +1,7 @@
 package lotto.view;
 
 import java.util.Arrays;
-import lotto.domain.User;
+import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.domain.RankCount;
 
@@ -16,15 +16,15 @@ public class OutputView {
     private static final String PROFIT_RATE_MASSAGE_FORMAT = "총 수익률은 %s입니다.\n";
     private static final String ERROR_MESSAGE_PREFIX = "[ERROR]";
 
-    public static void printLottos(User user) {
+    public static void printLottos(Lottos lottos) {
         printNewLine();
         System.out.printf(TOTAL_LOTTO_COUNT_MESSAGE_FORMAT,
-                user.getCountByManual(),
-                user.getCountByAuto());
-        user.getLottos().forEach(lotto -> System.out.printf(EACH_LOTTO_MESSAGE_FORMAT, lotto.toString()));
+                lottos.getCountByManual(),
+                lottos.getCountByAuto());
+        lottos.getLottos().forEach(lotto -> System.out.printf(EACH_LOTTO_MESSAGE_FORMAT, lotto.toString()));
     }
 
-    public static void printWinningStatistic(RankCount rankCount, String profitRate) {
+    public static void printWinningStatistic(RankCount rankCount, double profitRate) {
         printNewLine();
         System.out.println(WINNING_STATISTIC_TITLE);
         Arrays.stream(Rank.values())
@@ -32,7 +32,7 @@ public class OutputView {
                 .forEach(rank -> System.out.printf((RANK_MESSAGE_FORMAT),
                         rank.toStringWinningNumberCount(), getBonusNumberMessage(rank),
                         rank.toStringPrize(), rankCount.getCount(rank)));
-        System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), profitRate);
+        System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), toStringProfitRateUntilSecondDecimal(profitRate));
     }
 
     private static String getBonusNumberMessage(Rank rank) {
@@ -40,6 +40,10 @@ public class OutputView {
             return BONUS_NUMBER_MATCH_MESSAGE;
         }
         return BONUS_NUMBER_MISMATCH_MESSAGE;
+    }
+
+    public static String toStringProfitRateUntilSecondDecimal(double profitRate) {
+        return String.valueOf(Math.floor(profitRate * 100) / 100.0);
     }
 
     public static void printErrorMessage(Exception exception) {

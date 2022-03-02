@@ -8,13 +8,13 @@ public class RankCount {
 
     private final Map<Rank, Integer> rankCount;
 
-    public RankCount(User user, WinningNumbers winningNumbers) {
-        this.rankCount = calculateRankCount(user, winningNumbers);
+    public RankCount(Lottos lottos, WinningNumbers winningNumbers) {
+        this.rankCount = calculateRankCount(lottos, winningNumbers);
     }
 
-    private EnumMap<Rank, Integer> calculateRankCount(User user, WinningNumbers winningNumbers) {
+    private EnumMap<Rank, Integer> calculateRankCount(Lottos lottos, WinningNumbers winningNumbers) {
         EnumMap<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
-        user.getLottos().forEach(lotto -> increaseCount(rankCount, winningNumbers.getRankOf(lotto)));
+        lottos.getLottos().forEach(lotto -> increaseCount(rankCount, winningNumbers.getRankOf(lotto)));
         return rankCount;
     }
 

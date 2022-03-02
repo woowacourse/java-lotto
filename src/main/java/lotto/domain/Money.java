@@ -29,11 +29,7 @@ public class Money {
         return (int) ((money - spentMoney) / Lotto.LOTTO_PRICE);
     }
 
-    private double getProfitRate(long totalPrize) {
+    public double getProfitRate(long totalPrize) {
         return (double) totalPrize / (double) spentMoney;
-    }
-
-    public String toStringProfitRateUntilSecondDecimal(long totalPrize) {
-        return String.valueOf(Math.floor(getProfitRate(totalPrize) * 100) / 100.0);
     }
 }

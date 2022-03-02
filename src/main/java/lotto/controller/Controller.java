@@ -2,7 +2,7 @@ package lotto.controller;
 
 import java.util.stream.IntStream;
 import lotto.domain.Lotto;
-import lotto.domain.User;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RankCount;
 import lotto.domain.WinningNumbers;
@@ -12,12 +12,12 @@ import lotto.view.OutputView;
 public class Controller {
 
     public void run() {
-        User user = new User(inputMoney());
-        buyLottosByManual(user, InputView.inputCountForBuy());
-        buyAllLottosByAuto(user);
-        OutputView.printLottos(user);
-        WinningNumbers winningNumbers = inputWinningNumbers();
-        printWinningStatistic(user, winningNumbers);
+        Lottos lottos = new Lottos();
+        Money money = inputMoney();
+        buyLottosByManual(InputView.inputCountForBuy(), lottos, money);
+        buyAllLottosByAuto(lottos, money);
+        OutputView.printLottos(lottos);
+        printWinningStatistic(lottos,money);
     }
 
     private Money inputMoney() {
@@ -29,13 +29,13 @@ public class Controller {
         }
     }
 
-    private void buyLottosByManual(User user, int countForBuy) {
+    private void buyLottosByManual(int countForBuy, Lottos lottos, Money money) {
         if (countForBuy == 0) {
             return;
         }
         try {
             InputView.printInputLottoNumbersMessage();
-            IntStream.range(0, countForBuy).forEach(integer -> user.buyLottoByManual(inputLotto()));
+            IntStream.range(0, countForBuy).forEach(integer -> lottos.buyLottoByManual(inputLotto(), money));
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
         }
@@ -50,11 +50,18 @@ public class Controller {
         }
     }
 
-    private void buyAllLottosByAuto(User user) {
+    private void buyAllLottosByAuto(Lottos lottos, Money money) {
         try {
-            user.buyAllLottosByAuto();
+            lottos.buyAllLottosByAuto(money);
         } catch (IllegalArgumentException exception) {
         }
+    }
+
+    private void printWinningStatistic(Lottos lottos, Money money) {
+        WinningNumbers winningNumbers = inputWinningNumbers();
+        RankCount rankCount = new RankCount(lottos, winningNumbers);
+        double profitRate = money.getProfitRate(rankCount.getTotalPrize());
+        OutputView.printWinningStatistic(rankCount, profitRate);
     }
 
     private WinningNumbers inputWinningNumbers() {
@@ -67,11 +74,5 @@ public class Controller {
             OutputView.printErrorMessage(exception);
             return inputWinningNumbers();
         }
-    }
-
-    private void printWinningStatistic(User user, WinningNumbers winningNumbers) {
-        RankCount rankCount = new RankCount(user, winningNumbers);
-        String profitRate = user.getMoney().toStringProfitRateUntilSecondDecimal(rankCount.getTotalPrize());
-        OutputView.printWinningStatistic(rankCount, profitRate);
     }
 }

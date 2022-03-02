@@ -25,10 +25,10 @@ public class MoneyTest {
                 .hasMessage("구입금액은 1000원 단위만 가능합니다.");
     }
 
-    @Test
-    @DisplayName("투입한 금액과 당첨으로 얻은 수익으로 수익률 계산")
-    void getProfitRate() {
-        Money money = Money.generateMoneyByString("14000");
-        Assertions.assertThat(money.toStringProfitRateUntilSecondDecimal(5000)).isEqualTo("0.35");
-    }
+//    @Test
+//    @DisplayName("투입한 금액과 당첨으로 얻은 수익으로 수익률 계산")
+//    void getProfitRate() {
+//        Money money = Money.generateMoneyByString("14000");
+//        Assertions.assertThat(money.toStringProfitRateUntilSecondDecimal(5000)).isEqualTo("0.35");
+//    }
 }
