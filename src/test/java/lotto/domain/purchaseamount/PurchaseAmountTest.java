@@ -9,9 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PurchaseAmountTest {
-    private final int lottoPrice = 1000;
     private final PurchaseAmount purchaseAmount =
-            PurchaseAmount.fromPurchaseAmountAndLottoPrice("2000", lottoPrice);
+            PurchaseAmount.fromPurchaseAmountAndLottoPrice("2000");
 
     @ParameterizedTest
     @DisplayName("1000의 양의 배수가 아닌 값으로 생성할 경우 예외를 발생시킨다.")
@@ -19,21 +18,20 @@ class PurchaseAmountTest {
     void create_exceptionByInvalidPurchaseAmountValue_Test(final String invalidValue) {
         //given
         final String expectedExceptionMessage = "구매 금액은 1000의 양의 배수여야 합니다.";
-        final int lottoPrice = 1000;
         //when then
         assertThatThrownBy(
-                () -> PurchaseAmount.fromPurchaseAmountAndLottoPrice(invalidValue, lottoPrice))
+                () -> PurchaseAmount.fromPurchaseAmountAndLottoPrice(invalidValue))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
     }
 
     @Test
-    @DisplayName("로또 가격을 받아 구매 개수를 반환한다.")
+    @DisplayName("구매 개수를 반환한다.")
     void getPurchaseCount_Test() {
         //given
         final int expected = 2;
         //when
-        final int actual = purchaseAmount.getPurchaseCount(lottoPrice);
+        final int actual = purchaseAmount.getPurchaseCount();
         //then
         assertThat(actual).isEqualTo(expected);
     }

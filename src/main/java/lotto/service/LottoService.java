@@ -12,20 +12,18 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoService {
-    private static final int LOTTO_PRICE = 1000;
-
     private final Lottos lottos;
     private final PurchaseAmount purchaseAmount;
 
     public LottoService(final LottoGenerator lottoGenerator, final String purchaseAmount) {
-        this.purchaseAmount = PurchaseAmount.fromPurchaseAmountAndLottoPrice(purchaseAmount, LOTTO_PRICE);
+        this.purchaseAmount = PurchaseAmount.fromPurchaseAmountAndLottoPrice(purchaseAmount);
         final List<Lotto> randomGeneratedLottos =
-                lottoGenerator.generateLottos(this.purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE));
+                lottoGenerator.generateLottos(this.purchaseAmount.getCountOfLottoNumbers());
         lottos = new Lottos(randomGeneratedLottos);
     }
 
     public int getCountOfLottoNumbers() {
-        return purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE);
+        return purchaseAmount.getCountOfLottoNumbers();
     }
 
     public List<Lotto> getLottos() {
