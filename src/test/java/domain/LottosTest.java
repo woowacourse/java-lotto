@@ -16,18 +16,18 @@ public class LottosTest {
 
     private static final int MANUAL_LOTTOS_COUNT = 3;
     private static final int AUTOS_COUNT = 5;
-    private static final List<Lotto> manualLottos = new ArrayList<>();
+    private static final List<String> manualsRaw = new ArrayList<>();
 
     @BeforeAll
     static void setUp() {
-        manualLottos.add(createNewLotto(1, 2, 3, 4, 5, 6));
-        manualLottos.add(createNewLotto(1, 2, 3, 4, 5, 16));
-        manualLottos.add(createNewLotto(1, 2, 3, 4, 5, 26));
+        manualsRaw.add("1, 2, 3, 4, 5, 6");
+        manualsRaw.add("1, 2, 3, 4, 5, 16");
+        manualsRaw.add("1, 2, 3, 4, 5, 26");
     }
 
     @Test
     void of_createsTheSameNumberOfLottosAsManualLottosSizeAndRandomCount() {
-        Lottos lottos = Lottos.of(manualLottos, createCountsDto(MANUAL_LOTTOS_COUNT, AUTOS_COUNT));
+        Lottos lottos = Lottos.of(manualsRaw, createCountsDto(MANUAL_LOTTOS_COUNT, AUTOS_COUNT));
 
         assertThat(lottos.getLottos().size()).isEqualTo(MANUAL_LOTTOS_COUNT + AUTOS_COUNT);
         assertThat(lottos.getManuals()).isEqualTo(MANUAL_LOTTOS_COUNT);
@@ -36,7 +36,7 @@ public class LottosTest {
 
     @Test
     void of_allNewLottosAreDifferent() {
-        Lottos lottos = Lottos.of(manualLottos, createCountsDto(MANUAL_LOTTOS_COUNT, AUTOS_COUNT));
+        Lottos lottos = Lottos.of(manualsRaw, createCountsDto(MANUAL_LOTTOS_COUNT, AUTOS_COUNT));
 
         Set<Lotto> noDuplicateLottoSet = new HashSet<>(lottos.getLottos());
         assertThat(noDuplicateLottoSet.size())
@@ -54,7 +54,7 @@ public class LottosTest {
 
     @Test
     void of_passesOnManualOnly() {
-        Lottos lottos = Lottos.of(manualLottos, createCountsDto(MANUAL_LOTTOS_COUNT, 0));
+        Lottos lottos = Lottos.of(manualsRaw, createCountsDto(MANUAL_LOTTOS_COUNT, 0));
         assertThat(lottos.getLottos().size()).isEqualTo(MANUAL_LOTTOS_COUNT);
         assertThat(lottos.getManuals()).isEqualTo(MANUAL_LOTTOS_COUNT);
         assertThat(lottos.getAutos()).isEqualTo(0);
@@ -62,7 +62,7 @@ public class LottosTest {
 
     @Test
     void getLottos_throwsExceptionOnDirectModification() {
-        Lottos lottos = Lottos.of(manualLottos, createCountsDto(MANUAL_LOTTOS_COUNT, AUTOS_COUNT));
+        Lottos lottos = Lottos.of(manualsRaw, createCountsDto(MANUAL_LOTTOS_COUNT, AUTOS_COUNT));
 
         Lotto newLotto = createNewLotto(1, 2, 3, 4, 5, 6);
 

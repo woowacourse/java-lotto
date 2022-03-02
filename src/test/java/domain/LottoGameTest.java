@@ -1,7 +1,6 @@
 package domain;
 
 import static common.TestUtils.createCountsDto;
-import static common.TestUtils.createNewLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -17,10 +16,10 @@ import org.junit.jupiter.api.Test;
 public class LottoGameTest {
 
     private static LottoReferee referee;
-    private static final Lotto firstPrizeLotto = createNewLotto(1, 2, 3, 4, 5, 6);
-    private static final Lotto secondPrizeLotto = createNewLotto(1, 2, 3, 4, 5, 7);
-    private static final Lotto fifthPrizeLotto = createNewLotto(1, 2, 3, 14, 15, 16);
-    private static final Lotto noPrizeLotto = createNewLotto(11, 12, 13, 14, 15, 16);
+    private static final String firstPrizeLotto = "1, 2, 3, 4, 5, 6";
+    private static final String secondPrizeLotto = "1, 2, 3, 4, 5, 7";
+    private static final String fifthPrizeLotto = "1, 2, 3, 14, 15, 16";
+    private static final String noPrizeLotto = "11, 12, 13, 14, 15, 16";
 
     @BeforeAll
     static void setup() {
@@ -36,7 +35,7 @@ public class LottoGameTest {
 
     @Test
     void getResultStatistics_initsWithLottosInput() {
-        Lottos lottos = Lottos.of(getLottosExample(firstPrizeLotto, secondPrizeLotto, noPrizeLotto),
+        Lottos lottos = Lottos.of(getManualsList(firstPrizeLotto, secondPrizeLotto, noPrizeLotto),
                 createCountsDto(3, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
@@ -52,7 +51,7 @@ public class LottoGameTest {
 
     @Test
     void getResultStatistics_exceptionOnModifyingStats() {
-        Lottos lottos = Lottos.of(getLottosExample(firstPrizeLotto, secondPrizeLotto, noPrizeLotto),
+        Lottos lottos = Lottos.of(getManualsList(firstPrizeLotto, secondPrizeLotto, noPrizeLotto),
                 createCountsDto(3, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
@@ -64,7 +63,7 @@ public class LottoGameTest {
 
     @Test
     void calculatePrizePriceRatio_zeroIfNoPrize() {
-        Lottos lottos = Lottos.of(getLottosExample(noPrizeLotto), createCountsDto(1, 0));
+        Lottos lottos = Lottos.of(getManualsList(noPrizeLotto), createCountsDto(1, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
         float actual = game.calculatePrizePriceRatio();
@@ -74,7 +73,7 @@ public class LottoGameTest {
 
     @Test
     void calculatePrizePriceRatio_fifthPrizeEqualsFiveTimesThePrice() {
-        Lottos lottos = Lottos.of(getLottosExample(fifthPrizeLotto), createCountsDto(1, 0));
+        Lottos lottos = Lottos.of(getManualsList(fifthPrizeLotto), createCountsDto(1, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
         float actual = game.calculatePrizePriceRatio();
@@ -83,9 +82,9 @@ public class LottoGameTest {
                 .isEqualTo((float) LottoResult.FIFTH.getPrize() / Lotto.PRICE);
     }
 
-    private List<Lotto> getLottosExample(Lotto... lottos) {
-        List<Lotto> lottosExample = new ArrayList<>();
-        Collections.addAll(lottosExample, lottos);
+    private List<String> getManualsList(String... manualRaw) {
+        List<String> lottosExample = new ArrayList<>();
+        Collections.addAll(lottosExample, manualRaw);
         return lottosExample;
     }
 }
