@@ -2,6 +2,7 @@ package model;
 
 import exception.DuplicatedLottoNumbersException;
 import exception.InvalidLottoNumbersSizeException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -20,7 +21,8 @@ public class Lotto {
         if (isDuplicated(numbers)) {
             throw new DuplicatedLottoNumbersException();
         }
-        return new Lotto(Set.copyOf(numbers));
+        List<LottoNumber> lottoNumbers = Collections.unmodifiableList(numbers);
+        return new Lotto(Set.copyOf(lottoNumbers));
     }
 
     private static boolean isDuplicated(List<LottoNumber> numbers) {
@@ -44,7 +46,7 @@ public class Lotto {
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     @Override
