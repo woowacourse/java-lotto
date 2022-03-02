@@ -13,8 +13,7 @@ public class LottoResult {
 
     public LottoResult(Budget inputBudget, List<LottoRank> ranks) {
         this.inputBudget = inputBudget;
-        resultMap = setInitialRankCount();
-        allocateResultFrom(ranks);
+        this.resultMap = allocateResultFrom(ranks);
     }
 
     public BigDecimal getProfitRate() {
@@ -35,13 +34,15 @@ public class LottoResult {
         return resultMap.get(rank);
     }
 
-    private void allocateResultFrom(List<LottoRank> lottoRanks) {
+    private Map<LottoRank, Integer> allocateResultFrom(List<LottoRank> lottoRanks) {
+        Map<LottoRank, Integer> result = initRankCount();
         for (LottoRank rank : lottoRanks) {
-            resultMap.put(rank, resultMap.get(rank) + 1);
+            result.put(rank, result.get(rank) + 1);
         }
+        return result;
     }
 
-    private Map<LottoRank, Integer> setInitialRankCount() {
+    private Map<LottoRank, Integer> initRankCount() {
         return new EnumMap<>(Map.of(
                 LottoRank.FIRST, INITIAL_RANK_COUNT, LottoRank.SECOND, INITIAL_RANK_COUNT,
                 LottoRank.THIRD, INITIAL_RANK_COUNT, LottoRank.FOURTH, INITIAL_RANK_COUNT,
