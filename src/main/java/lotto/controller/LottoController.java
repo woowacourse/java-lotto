@@ -1,9 +1,12 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import lotto.domain.LottoAmount;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
+import lotto.domain.ManualLottoCount;
 import lotto.domain.WinningNumbers;
 import lotto.domain.WinningResult;
 import lotto.view.InputView;
@@ -13,7 +16,8 @@ public class LottoController {
     public void start() {
         LottoAmount amount = inputAmount();
 
-        LottoTicket lottoTicket = buyTickets(amount);
+        // TODO ManualLottoCount input 받도록 수정
+        LottoTicket lottoTicket = buyTicket(amount, new ManualLottoCount(2, amount.calculateLottoCount()));
 
         WinningNumbers winningNumbers = createWinningNumbers();
 
@@ -31,16 +35,38 @@ public class LottoController {
         }
     }
 
-    private LottoTicket buyTickets(LottoAmount amount) {
-        int ticketCount = amount.calculateLottoCount();
-        OutputView.printTicketCount(ticketCount);
+    private LottoTicket buyTicket(LottoAmount amount, ManualLottoCount manualLottoCount) {
+        int manualTicketCount = manualLottoCount.getValue();
+        int autoTicketCount = amount.calculateLottoCount() - manualTicketCount;
 
-        LottoTicket lottoTicket = new LottoTicket(ticketCount);
-        OutputView.printTicket(lottoTicket);
+        LottoTicket lottoTicket = new LottoTicket(autoTicketCount);
+
+        if (manualTicketCount != 0) {
+            lottoTicket.buyManualTicket(buyManualTicket(manualLottoCount));
+        }
+
+        printTickets(manualTicketCount, autoTicketCount, lottoTicket);
         return lottoTicket;
     }
 
+    private List<LottoNumbers> buyManualTicket(ManualLottoCount manualLottoCount) {
+        OutputView.printInputManualTicketSentence();
+
+        List<LottoNumbers> manualTickets = new ArrayList<>();
+        int tryCount = manualLottoCount.getValue();
+        for (int i = 0; i < tryCount; i++) {
+            manualTickets.add(getInputLottoNumbers());
+        }
+        return manualTickets;
+    }
+
+    private void printTickets(int manualTryCount, int autoTryCount, LottoTicket lottoTicket) {
+        OutputView.printTicketCount(manualTryCount, autoTryCount);
+        OutputView.printTicket(lottoTicket);
+    }
+
     private WinningNumbers createWinningNumbers() {
+        OutputView.printInputWinningTicketSentence();
         LottoNumbers inputLottoNumbers = getInputLottoNumbers();
         LottoNumber bonusNumber = getBonusNumber();
 
@@ -49,7 +75,7 @@ public class LottoController {
 
     private LottoNumbers getInputLottoNumbers() {
         try {
-            return new LottoNumbers(InputView.inputWinningNumbers());
+            return new LottoNumbers(InputView.inputLottoNumbers());
         } catch (IllegalArgumentException e) {
             OutputView.printException(e);
             return getInputLottoNumbers();

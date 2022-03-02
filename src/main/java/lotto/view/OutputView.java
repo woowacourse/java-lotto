@@ -13,7 +13,7 @@ import lotto.domain.WinningResult;
 public class OutputView {
     public static final String DELIMITER = ", ";
 
-    public static final String TICKET_PURCHASE_SENTENCE_FORMAT = "%d개를 구매했습니다.%n";
+    public static final String TICKET_PURCHASE_SENTENCE_FORMAT = "수동으로 %d장, 자동으로 %d장을 구매했습니다.%n";
     public static final String JOIN_LIST_FORMAT = "[%s]";
     public static final String CORRECT_COUNT_FORMAT = "%d개 일치";
     public static final String CORRECT_BONUS_BALL = ", 보너스 볼 일치";
@@ -22,11 +22,13 @@ public class OutputView {
     public static final String WINNING_RESULT_SEPERATOR = "---------";
     public static final String PROFIT_SENTENCE_FORMAT = "총 수익률은 %.2f입니다.%n";
 
+    private static final String INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+
     private OutputView() {
     }
 
-    public static void printTicketCount(int ticketCount) {
-        System.out.printf(TICKET_PURCHASE_SENTENCE_FORMAT, ticketCount);
+    public static void printTicketCount(int manualTicketCount, int autoTicketCount) {
+        System.out.printf(TICKET_PURCHASE_SENTENCE_FORMAT, manualTicketCount, autoTicketCount);
     }
 
     public static void printTicket(LottoTicket lottoTicket) {
@@ -91,5 +93,13 @@ public class OutputView {
 
     public static void printException(Exception exception) {
         System.out.println(exception.getMessage());
+    }
+
+    public static void printInputManualTicketSentence() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printInputWinningTicketSentence() {
+        System.out.println(INPUT_WINNING_NUMBERS);
     }
 }

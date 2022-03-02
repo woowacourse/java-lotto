@@ -32,4 +32,8 @@ public class LottoTicket {
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
         return new WinningResult(rankings);
     }
+
+    public void buyManualTicket(List<LottoNumbers> manualTickets) {
+        lottoTickets.addAll(manualTickets);
+    }
 }
