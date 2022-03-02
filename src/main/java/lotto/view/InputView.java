@@ -14,6 +14,7 @@ public class InputView {
     public static final String REQUEST_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String REQUEST_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     public static final String NUMBER_DELIMITER = ", ";
+    public static final String REQUEST_MANUAL_BUY_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
 
     // 인스턴스화 방지
     private InputView() {
@@ -37,6 +38,11 @@ public class InputView {
 
     public static int requestBonusBall() {
         System.out.println(REQUEST_BONUS_BALL_MESSAGE);
+        return IntegerUtils.parse(scanner.nextLine());
+    }
+
+    public static int requestManualBuyCount() {
+        System.out.println(REQUEST_MANUAL_BUY_COUNT);
         return IntegerUtils.parse(scanner.nextLine());
     }
 }

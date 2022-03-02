@@ -10,6 +10,7 @@ import lotto.model.result.LottoStatistics;
 import lotto.model.ticket.LottoTicket;
 import lotto.model.ticket.LottoTickets;
 import lotto.model.ticket.WinningTicket;
+import lotto.model.ticket.buy.ManualBuyCount;
 import lotto.model.ticket.number.LottoNumber;
 import lotto.model.utils.RandomNumberGenerator;
 import lotto.view.InputView;
@@ -19,6 +20,7 @@ public class LottoController {
 
     public void run() {
         Money money = Money.of(InputView.requestMoney());
+        ManualBuyCount manualBuyCount = ManualBuyCount.of(InputView.requestManualBuyCount());
         LottoTickets lottoTickets = LottoTickets
                 .buy(new RandomNumberGenerator(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER), money);
         OutputView.outputTickets(lottoTickets);
