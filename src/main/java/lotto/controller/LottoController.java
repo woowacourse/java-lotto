@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoWinningNumbers;
@@ -18,37 +17,54 @@ public class LottoController {
 
     private static final String LOTTO_DELIMITER = ",";
 
+    public List<Lotto> inputManualLottos(int maxAmount) {
+        int amount = inputManualLottoAmount(maxAmount).getAmount();
+        return inputManualLottoNumbers(amount);
+    }
+
+    public ManualLottoAmount inputManualLottoAmount(int maxAmount) {
+        try {
+            String number = InputView.inputManualLottoAmount();
+            return new ManualLottoAmount(number, maxAmount);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputManualLottoAmount(maxAmount);
+        }
+    }
+
+    public List<Lotto> inputManualLottoNumbers(int amount) {
+        InputView.printManualLottoGuideMesseage();
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 0; i < amount; i++) {
+            manualLottos.add(inputManualLottoNumber());
+        }
+        return manualLottos;
+    }
+
+    private Lotto inputManualLottoNumber() {
+        try {
+            String numbers = removeBlank(InputView.inputManualLottoNumber());
+            return changeNumbersToLotto(numbers);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputManualLottoNumber();
+        }
+    }
+
     public Lottos createLottos(List<Lotto> lottos, final int count) {
         return new Lottos(lottos, count);
     }
 
     public LottoWinningNumbers createLottoWinningNumbers() {
-        final String numbers = inputLottoWinningNumbers();
-        final Lotto lotto = changeNumbersToLotto(numbers);
-        final LottoNumber bonusNumber = new LottoNumber(inputBonusNumber());
-
-        return new LottoWinningNumbers(lotto, bonusNumber);
-    }
-
-    public List<Lotto> inputManualLottos(int maxAmount) {
-        int amount = inputManualLottoAmount(maxAmount).getAmount();
-        if (amount == 0) {
-            return new ArrayList<>();
+        try {
+            final String numbers = inputLottoWinningNumbers();
+            final Lotto lotto = changeNumbersToLotto(numbers);
+            final LottoNumber bonusNumber = new LottoNumber(inputBonusNumber());
+            return new LottoWinningNumbers(lotto, bonusNumber);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return createLottoWinningNumbers();
         }
-        InputView.printManualLottoGuideMesseage();
-        return IntStream.range(0, amount)
-                .mapToObj(i -> inputManualLottoNumbers())
-                .map(s -> changeNumbersToLotto(s))
-                .collect(Collectors.toList());
-    }
-
-    public ManualLottoAmount inputManualLottoAmount(int maxAmount) {
-        String number = InputView.inputManualLottoAmount();
-        return new ManualLottoAmount(number, maxAmount);
-    }
-
-    public String inputManualLottoNumbers() {
-        return removeBlank(InputView.inputManualLottoNumbers());
     }
 
     private String inputLottoWinningNumbers() {

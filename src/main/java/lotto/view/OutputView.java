@@ -23,9 +23,9 @@ public class OutputView {
     private static final String SUFFIX_LAST_LINE = "입니다.";
     private static final String PREFIX_PROFIT = "총 수익률은 ";
     private static final String DEFAULT_FORMAT = "%.2f";
-    public static final String PREFIX_PRINT_LOTTO = "[";
-    public static final String SUFFIX_PRINT_LOTTO = "]";
-    public static final String PRINT_LOTTO_DELIMITER = ", ";
+    private static final String PREFIX_PRINT_LOTTO = "[";
+    private static final String SUFFIX_PRINT_LOTTO = "]";
+    private static final String PRINT_LOTTO_DELIMITER = ", ";
 
     public static void printLottos(final int manualLottosAmount, final Lottos lottos) {
         System.out.println();

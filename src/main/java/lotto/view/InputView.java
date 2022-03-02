@@ -30,7 +30,7 @@ public class InputView {
         System.out.println(PRINT_INPUT_MANUAL_LOTTO_NUMBERS);
     }
 
-    public static String inputManualLottoNumbers() {
+    public static String inputManualLottoNumber() {
         return scanner.nextLine();
     }
 
