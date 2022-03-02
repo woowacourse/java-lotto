@@ -23,11 +23,16 @@ public class LottoBall implements Comparable<LottoBall> {
 
 	public static LottoBall from(String input) {
 		try {
-			return new LottoBall(Integer.parseInt(input));
+			return new LottoBall(Integer.parseInt(input.trim()));
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(ERROR_TYPE);
 		}
 	}
+
+	// TODO : WinningBall 과 LottoBall 합칠 수 있다면 합치기
+	// public boolean match(LottoBall lottoBall) {
+	// 	return lottoBall.getNumber() == this.number;
+	// }
 
 	public int getNumber() {
 		return number;
