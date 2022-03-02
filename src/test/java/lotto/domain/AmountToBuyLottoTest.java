@@ -32,4 +32,13 @@ public class AmountToBuyLottoTest {
         AmountToBuyLotto amount = new AmountToBuyLotto(1000);
         assertThat(amount.calculateProfit(prizeSum)).isEqualTo(expectedProfit);
     }
+
+    @Test
+    @DisplayName("자동로또 티켓 개수 구하기")
+    void calculateAutoMaticLottoCount() {
+        AmountToBuyLotto amount = new AmountToBuyLotto(1000);
+        ManualLottoCount manualLottoCount = ManualLottoCount.of(1, amount.calculateLottoCount());
+
+        assertThat(amount.calculateAutomaticLottoCount(manualLottoCount)).isEqualTo(0);
+    }
 }

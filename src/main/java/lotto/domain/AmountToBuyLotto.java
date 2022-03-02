@@ -40,6 +40,11 @@ final public class AmountToBuyLotto {
         return DECIMAL * prizeSum / value;
     }
 
+
+    public int calculateAutomaticLottoCount(ManualLottoCount manualLottoCount) {
+        return calculateLottoCount() - manualLottoCount.getValue();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
