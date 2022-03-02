@@ -2,12 +2,10 @@ package lotto.model;
 
 import java.util.Map;
 import lotto.model.generator.LottoGenerator;
+import lotto.model.number.LottoNumber;
+import lotto.model.number.LottoNumbers;
 
 public class LottoMachine {
-
-    private static final int LOTTO_MINIMUM_NUMBER = 1;
-    private static final int LOTTO_MAXIMUM_NUMBER = 45;
-    private static final int LOTTO_LENGTH = 6;
 
     private final Money money;
     private final Lottos lottos;
@@ -16,7 +14,7 @@ public class LottoMachine {
 
     public LottoMachine(final LottoGenerator lottoGenerator, final Money money) {
         this.money = money;
-        this.lottos = lottoGenerator.generateLottos(money.lottoCount(), LOTTO_MINIMUM_NUMBER, LOTTO_MAXIMUM_NUMBER, LOTTO_LENGTH);
+        this.lottos = lottoGenerator.generateLottos(money.lottoCount(), LottoNumber.LOTTO_NUMBER_MINIMUM_RANGE, LottoNumber.LOTTO_NUMBER_MAXIMUM_RANGE, LottoNumbers.LOTTO_LENGTH);
     }
 
     public void calculateResult(WinningLotto winningLotto) {

@@ -1,7 +1,7 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return new ArrayList<>(lottos);
+        return Collections.unmodifiableList(lottos);
     }
 
     public int size() {

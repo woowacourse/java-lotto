@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private static final String NUMBER_RANGE_ERROR_MESSAGE = "[ERROR] 유효한 숫자가 아닙니다.";
+    private static final String NUMBER_RANGE_ERROR_MESSAGE = "[ERROR] 유효한 로또 번호가 아닙니다.";
 
     public static final int LOTTO_NUMBER_MINIMUM_RANGE = 1;
     public static final int LOTTO_NUMBER_MAXIMUM_RANGE = 45;
