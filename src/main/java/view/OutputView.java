@@ -11,10 +11,10 @@ import java.util.List;
 
 public class OutputView {
 
-    public static final String LOTTO_PREFIX = "[";
-    public static final String LOTTO_ENDFIX = "]";
-    public static final String SEPARATOR = ", ";
-    public static final int DELETE_IDX = 2;
+    private static final String LOTTO_PREFIX = "[";
+    private static final String LOTTO_ENDFIX = "]";
+    private static final String SEPARATOR = ", ";
+    private static final int DELETE_IDX = 2;
 
     public static void printError(String message) {
         System.out.println(ERROR_PREFIX + message);
