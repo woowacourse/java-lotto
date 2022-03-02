@@ -16,13 +16,13 @@ public class OutputView {
     private static final String EMPTY_FORMAT = "";
     private static final String INCOME_RATE_FORMAT = "총 수익률은 %.2f입니다.%n";
 
-    private static final OutputView outputView = new OutputView();
+    private static final OutputView OUTPUT_VIEW = new OutputView();
 
     private OutputView() {
     }
 
     public static OutputView getInstance() {
-        return outputView;
+        return OUTPUT_VIEW;
     }
 
     public void printPurchasedLotto(LottosDto lottosDto) {

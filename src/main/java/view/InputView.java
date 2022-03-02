@@ -14,19 +14,19 @@ public class InputView {
     private static final String BONUS_BALL_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String DELIMITER = ",";
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
-    private static final InputView inputView = new InputView();
+    private static final InputView INPUT_VIEW = new InputView();
 
     private InputView() {
     }
 
     public static InputView getInstance() {
-        return inputView;
+        return INPUT_VIEW;
     }
 
     private String input() {
-        String input = scanner.nextLine();
+        String input = SCANNER.nextLine();
         InputValidator.validateNull(input);
         InputValidator.validateEmpty(input);
         return input;
