@@ -9,12 +9,14 @@ public class LottoGame {
     private static final String ERROR_DUPLICATION_BONUS_NUMBER = "보너스 볼 번호가 당첨 번호와 중복입니다.";
 
     private final Lottos lottos;
+    private final LottoMoney lottoMoney;
 
     public LottoGame(LottoMoney lottoMoney, LottoNumberGenerator lottoNumberGenerator) {
-        this.lottos = buyLottos(lottoMoney, lottoNumberGenerator);
+        this.lottoMoney = lottoMoney;
+        this.lottos = buyLottos(lottoNumberGenerator);
     }
 
-    private Lottos buyLottos(LottoMoney lottoMoney, LottoNumberGenerator lottoNumberGenerator) {
+    private Lottos buyLottos(LottoNumberGenerator lottoNumberGenerator) {
         return new Lottos(lottoNumberGenerator, lottoMoney.getLottoSize());
     }
 
@@ -31,7 +33,7 @@ public class LottoGame {
         }
     }
 
-    public Yield calculateYield(LottoMoney lottoMoney, LottoResult lottoResult) {
+    public Yield calculateYield(LottoResult lottoResult) {
         return new Yield(lottoMoney, lottoResult.getTotalWinningMoney());
     }
 
