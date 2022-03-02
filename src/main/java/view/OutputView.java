@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import domain.Lotto;
 import domain.LottoResult;
 import domain.Lottos;
+import domain.OrderForm;
 import domain.Payment;
 import domain.Rank;
 
@@ -23,8 +24,10 @@ public class OutputView {
 		System.out.println(ERROR_MESSAGE + errorMessage);
 	}
 
-	public static void printLottoCount(int lottoCount) {
-		System.out.println(String.format("%d개를 구매했습니다.", lottoCount));
+	public static void printLottoCount(OrderForm orderForm) {
+		System.out.println(
+			String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
+				orderForm.getQuantity(), orderForm.calculateAutoLottoCount()));
 	}
 
 	public static void printLottos(Lottos lottos) {

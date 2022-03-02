@@ -2,6 +2,8 @@ package view;
 
 import domain.Lotto;
 import domain.LottoNumber;
+import domain.Lottos;
+import domain.OrderForm;
 import domain.Payment;
 import domain.WinningLotto;
 
@@ -16,6 +18,24 @@ public class InputConvertor {
 		} catch (Exception e) {
 			OutputView.printErrorMessage(e.getMessage());
 			return createPayment();
+		}
+	}
+
+	public static OrderForm createOrderForm(Payment payment) {
+		try {
+			return new OrderForm(payment, InputView.insertManualLottoCount());
+		} catch (Exception e) {
+			OutputView.printErrorMessage(e.getMessage());
+			return createOrderForm(payment);
+		}
+	}
+
+	public static Lottos createManualLottos(OrderForm orderForm) {
+		try {
+			return Lottos.of(InputView.insertManualLottos(orderForm));
+		} catch (Exception e) {
+			OutputView.printErrorMessage(e.getMessage());
+			return createManualLottos(orderForm);
 		}
 	}
 
