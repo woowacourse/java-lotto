@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,6 +16,23 @@ public class InputView {
     public static <T> T inputWithMessage(String message, Function<String, T> function) {
         System.out.println(message);
         return function.apply(SCANNER.nextLine());
+    }
+
+    public static <T> T getUntilValid(Supplier<T> supplier) {
+        T t;
+        do {
+            t = getFrom(supplier);
+        } while (t == null && isRepeatable());
+        return t;
+    }
+
+    private static <T> T getFrom(Supplier<T> supplier) {
+        try {
+            return supplier.get();
+        } catch (Exception e) {
+            OutputView.printErrorMessage(e);
+            return null;
+        }
     }
 
     public static boolean isRepeatable() {

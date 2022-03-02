@@ -6,7 +6,6 @@ import static view.OutputView.printResult;
 
 import java.util.List;
 import java.util.Set;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import model.Lotto;
 import model.LottoMachine;
@@ -16,36 +15,18 @@ import model.Money;
 import model.WinningLottoNumbers;
 import model.generator.RandomLottoGenerator;
 import view.InputView;
-import view.OutputView;
 
 public class LottoController {
 
     public void run() {
-        Money inputMoney = getUntilValid(this::getMoneyFromUser);
+        Money inputMoney = InputView.getUntilValid(this::getMoneyFromUser);
         LottoMachine lottoMachine = new LottoMachine(new RandomLottoGenerator(1, 45));
         List<Lotto> issuedLottos = lottoMachine.issueLotto(inputMoney);
         printIssuedLottoNumbers(getNumbersOf(issuedLottos));
 
-        WinningLottoNumbers winningLottoNumbers = getUntilValid(this::getWinningLottoNumbersFromUser);
+        WinningLottoNumbers winningLottoNumbers = InputView.getUntilValid(this::getWinningLottoNumbersFromUser);
         LottoResult result = winningLottoNumbers.summarize(issuedLottos, inputMoney);
         printResult(result.getResultMap(), result.getProfitRate());
-    }
-
-    private <T> T getUntilValid(Supplier<T> supplier) {
-        T t;
-        do {
-            t = getFrom(supplier);
-        } while (t == null && InputView.isRepeatable());
-        return t;
-    }
-
-    private <T> T getFrom(Supplier<T> supplier) {
-        try {
-            return supplier.get();
-        } catch (Exception e) {
-            OutputView.printErrorMessage(e);
-            return null;
-        }
     }
 
     private Money getMoneyFromUser() {
