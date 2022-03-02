@@ -3,7 +3,6 @@ package domain.strategy;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.WinningPrize;
-import domain.strategy.LottoWinningPrizeStrategy;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class LottoWinningPrizeStrategyTest {
+class DefaultWinningPrizeStrategyTest {
 
     private final Map<Integer, WinningPrize> matchCountWinningPrizeInfo = new HashMap<>() {{
         put(6, WinningPrize.FIRST);
@@ -29,8 +28,8 @@ class LottoWinningPrizeStrategyTest {
         put(WinningPrize.FIFTH, 3);
     }};
 
-    private final domain.strategy.LottoWinningPrizeStrategy LottoWinningPrizeStrategy
-            = new LottoWinningPrizeStrategy();
+    private final DefaultWinningPrizeStrategy LottoWinningPrizeStrategy
+            = new DefaultWinningPrizeStrategy();
 
     @Test
     @DisplayName("기본 로또 당첨보상 전략이 2등을 잘 판단하는지 확인한다.")

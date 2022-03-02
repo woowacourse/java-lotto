@@ -1,6 +1,6 @@
 package domain;
 
-import domain.strategy.GenerateStrategy;
+import domain.strategy.NumberGenerateStrategy;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -19,11 +19,11 @@ public class LottoTickets {
     }
 
     public static LottoTickets from(List<Set<Integer>> selfTicketNumbers, Money autoPurchaseMoney,
-                                    GenerateStrategy generateStrategy) {
+                                    NumberGenerateStrategy numberGenerateStrategy) {
         validatePurchaseMoney(autoPurchaseMoney);
         List<LottoTicket> lottoTickets = generateTicket(selfTicketNumbers);
         int autoPurchaseCount = autoPurchaseMoney.getAmount() / LottoTicket.TICKET_PRICE;
-        lottoTickets.addAll(autoGenerateTickets(generateStrategy, autoPurchaseCount));
+        lottoTickets.addAll(autoGenerateTickets(numberGenerateStrategy, autoPurchaseCount));
         return new LottoTickets(lottoTickets, selfTicketNumbers.size());
     }
 
@@ -33,9 +33,10 @@ public class LottoTickets {
                 .collect(Collectors.toList());
     }
 
-    private static List<LottoTicket> autoGenerateTickets(GenerateStrategy generateStrategy, int autoPurchaseCount) {
+    private static List<LottoTicket> autoGenerateTickets(NumberGenerateStrategy numberGenerateStrategy,
+                                                         int autoPurchaseCount) {
         return IntStream.rangeClosed(1, autoPurchaseCount)
-                .mapToObj(index -> LottoTicket.of(generateStrategy.generateNumbers()))
+                .mapToObj(index -> LottoTicket.of(numberGenerateStrategy.generateNumbers()))
                 .collect(Collectors.toList());
     }
 

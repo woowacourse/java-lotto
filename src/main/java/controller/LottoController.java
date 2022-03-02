@@ -1,6 +1,6 @@
 package controller;
 
-import domain.strategy.GenerateStrategy;
+import domain.strategy.NumberGenerateStrategy;
 import domain.LottoTicket;
 import domain.WinningResult;
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import domain.strategy.LottoWinningPrizeStrategy;
+import domain.strategy.DefaultWinningPrizeStrategy;
 import domain.LottoGame;
-import domain.strategy.LottoNumberGenerateStrategy;
+import domain.strategy.RandomNumberGenerateStrategy;
 import domain.dto.LottoTicketDto;
 import domain.LottoTickets;
 import domain.WinningPrize;
@@ -22,8 +22,8 @@ import view.OutputView;
 public class LottoController {
     private final InputView inputView = InputView.getInstance();
     private final OutputView outputView = OutputView.getInstance();
-    private final WinningPrizeStrategy winningPrizeStrategy = new LottoWinningPrizeStrategy();
-    private final GenerateStrategy generateStrategy = new LottoNumberGenerateStrategy();
+    private final WinningPrizeStrategy winningPrizeStrategy = new DefaultWinningPrizeStrategy();
+    private final NumberGenerateStrategy generateStrategy = new RandomNumberGenerateStrategy();
     private final LottoGame lottoGame = new LottoGame(winningPrizeStrategy);
 
     public void run() {

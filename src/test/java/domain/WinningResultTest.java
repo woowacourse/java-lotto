@@ -2,8 +2,8 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.strategy.GenerateStrategy;
-import domain.strategy.LottoWinningPrizeStrategy;
+import domain.strategy.NumberGenerateStrategy;
+import domain.strategy.DefaultWinningPrizeStrategy;
 import domain.strategy.WinningPrizeStrategy;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,9 +15,10 @@ import org.junit.jupiter.api.Test;
 class WinningResultTest {
     private final Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     private final WinningTicket winningTicket = WinningTicket.from(winningNumbers, 7);
-    private final GenerateStrategy generateStrategy = () -> new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-    private final LottoTickets lottoTickets = LottoTickets.from(new ArrayList<>(), new Money(14000), generateStrategy);
-    private final WinningPrizeStrategy winningPrizeStrategy = new LottoWinningPrizeStrategy();
+    private final NumberGenerateStrategy numberGenerateStrategy = () -> new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private final LottoTickets lottoTickets = LottoTickets.from(new ArrayList<>(), new Money(14000),
+            numberGenerateStrategy);
+    private final WinningPrizeStrategy winningPrizeStrategy = new DefaultWinningPrizeStrategy();
 
     @Test
     @DisplayName("당첨 결과 카운팅이 정상적으로 되는지 확인한다.")

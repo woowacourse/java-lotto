@@ -1,6 +1,6 @@
 package domain;
 
-import domain.strategy.GenerateStrategy;
+import domain.strategy.NumberGenerateStrategy;
 import domain.strategy.WinningPrizeStrategy;
 import java.util.List;
 import java.util.Set;
@@ -16,8 +16,8 @@ public class LottoGame {
     }
 
     public void purchaseLottoTickets(List<Set<Integer>> selfTicketNumbers, int purchaseMoney,
-                                     GenerateStrategy generateStrategy) {
-        this.lottoTickets = LottoTickets.from(selfTicketNumbers, new Money(purchaseMoney), generateStrategy);
+                                     NumberGenerateStrategy numberGenerateStrategy) {
+        this.lottoTickets = LottoTickets.from(selfTicketNumbers, new Money(purchaseMoney), numberGenerateStrategy);
     }
 
     public void inputWinningNumbers(Set<Integer> winningNumbers, int bonusNumber) {

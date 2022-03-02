@@ -4,7 +4,7 @@ import domain.WinningPrize;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LottoWinningPrizeStrategy implements WinningPrizeStrategy {
+public class DefaultWinningPrizeStrategy implements WinningPrizeStrategy {
     private static final int SECOND_PRIZE_MATCH_COUNT = 5;
 
     private static final Map<Integer, WinningPrize> MATCH_COUNT_WINNING_PRIZE_INFO = new HashMap<>() {{
