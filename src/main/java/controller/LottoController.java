@@ -2,6 +2,8 @@ package controller;
 
 import domain.LottoService;
 import dto.ResultDto;
+import java.util.ArrayList;
+import java.util.List;
 import view.InputView;
 import view.OutputView;
 
@@ -33,24 +35,39 @@ public class LottoController {
 
         initLastWinLotto();
 
-        final ResultDto resultDto = calculateResult();
-        outputView.printWinStatistics(resultDto);
-        outputView.printWinProfit(lottoService.getProfitOrNotMessage(resultDto));
+        processResult(calculateResult());
     }
 
     private void issueLotto() {
+        final int manualCount = getManualCount();
+        if (manualCount > 0) {
+            lottoService.issueLotto(getManualLottoWith(manualCount));
+        }
+        lottoService.issueLotto(new ArrayList<>());
+        outputView.printLotto(lottoService.getIssuedLotto());
+    }
+
+    private int getManualCount() {
         try {
-            lottoService.issueLotto(inputView.getManualCount());
-            outputView.printLotto(lottoService.getIssuedLotto());
+            return inputView.getManualCount();
         } catch (Exception e) {
             System.out.println(ERROR_MESSAGE + e.getMessage());
-            issueLotto();
+            return getManualCount();
+        }
+    }
+
+    private List<List<String>> getManualLottoWith(final int manualCount) {
+        try {
+            return inputView.getManualLotto(manualCount);
+        } catch (Exception e) {
+            System.out.println(ERROR_MESSAGE + e.getMessage());
+            return getManualLottoWith(getManualCount());
         }
     }
 
     private void initLastWinLotto() {
         try {
-            lottoService.initLastWinLotto(inputView.getLastWinLotto());
+            lottoService.initLastWinLotto(inputView.getWinLotto());
         } catch (Exception e) {
             System.out.println(ERROR_MESSAGE + e.getMessage());
             initLastWinLotto();
@@ -64,5 +81,10 @@ public class LottoController {
             System.out.println(ERROR_MESSAGE + e.getMessage());
             return calculateResult();
         }
+    }
+
+    private void processResult(final ResultDto resultDto) {
+        outputView.printWinStatistics(resultDto);
+        outputView.printWinProfit(lottoService.getProfitOrNotMessage(resultDto));
     }
 }
