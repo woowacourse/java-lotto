@@ -31,8 +31,8 @@ public class RankCount {
     }
 
     public long getTotalPrize() {
-        return Arrays.stream(Rank.values())
-                .mapToLong(rank -> rank.multiplyPrizeBy(rankCount.get(rank)))
+        return rankCount.entrySet().stream()
+                .mapToLong(m -> m.getKey().multiplyPrizeBy(m.getValue()))
                 .sum();
     }
 }
