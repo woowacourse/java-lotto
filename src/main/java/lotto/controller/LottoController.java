@@ -12,11 +12,11 @@ public class LottoController {
 
     public void run() {
         final PurchaseAmount purchaseAmount = getPurchaseAmount();
-        final LottoGame lottoGame = getLottoGame(purchaseAmount);
+        final LottoMachine lottoMachine = getlottoMachine(purchaseAmount);
 
         InputView.printGetManualLottosMessage();
-        final Lottos lottos = lottoGame.makeManualAndAutoLottos(getInputManualLottos(lottoGame.getManualLottoCount()));
-        OutputView.printLottos(lottoGame.getManualLottoCount(), lottoGame.getAutoLottoCount(), lottos.getLottos());
+        final Lottos lottos = lottoMachine.makeManualAndAutoLottos(getInputManualLottos(lottoMachine.getManualLottoCount()));
+        OutputView.printLottos(lottoMachine.getManualLottoCount(), lottoMachine.getAutoLottoCount(), lottos.getLottos());
 
         final WinningLotto winningLotto = getWinningLotto();
         final RankBoard rankBoard = new RankBoard(winningLotto, lottos.getLottos());
@@ -32,13 +32,13 @@ public class LottoController {
         }
     }
 
-    private LottoGame getLottoGame(final PurchaseAmount purchaseAmount) {
+    private LottoMachine getlottoMachine(final PurchaseAmount purchaseAmount) {
         try {
             final int manualLottoCount = StringConverter.toInt(InputView.getManualLottoCount());
-            return new LottoGame(purchaseAmount, manualLottoCount);
+            return new LottoMachine(purchaseAmount, manualLottoCount);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getLottoGame(purchaseAmount);
+            return getlottoMachine(purchaseAmount);
         }
     }
 

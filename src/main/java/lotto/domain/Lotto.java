@@ -11,8 +11,8 @@ public class Lotto {
 
     private final Set<LottoNumber> numbers;
 
-    public Lotto(final LottoMachine lottoMachine) {
-        final Set<LottoNumber> lottoNumbers = new HashSet<>(lottoMachine.makeLottos());
+    public Lotto(final LottoGenerator lottoGenerator) {
+        final Set<LottoNumber> lottoNumbers = new HashSet<>(lottoGenerator.makeLottos());
         validateDuplicationAndSize(lottoNumbers);
         this.numbers = lottoNumbers;
     }

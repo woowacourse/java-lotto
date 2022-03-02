@@ -43,7 +43,7 @@ class RankBoardTest {
     @DisplayName("만약 아무 등수에 해당하지 않는 경우 빈 맵을 반환한다")
     void testCalcRankEdgeCase() {
         List<Lotto> lottos = new ArrayList<>();
-        LottoMachine lottoMachine = new FixedLottoMachine(List.of(1, 2, 8, 9, 10, 11));
+        LottoGenerator lottoMachine = new FixedLottoGenerator(List.of(1, 2, 8, 9, 10, 11));
         lottos.add(new Lotto(lottoMachine));
 
         RankBoard board = new RankBoard(winningLotto, lottos);
@@ -62,7 +62,7 @@ class RankBoardTest {
     @DisplayName("수익률을 계산해 반환한다")
     void calcProfit() {
         List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(new FixedLottoMachine(List.of(1, 2, 3, 9, 10, 11))));
+        lottos.add(new Lotto(new FixedLottoGenerator(List.of(1, 2, 3, 9, 10, 11))));
 
         RankBoard board = new RankBoard(winningLotto, lottos);
 
@@ -71,11 +71,11 @@ class RankBoardTest {
 
     private List<Lotto> initLottos() {
         ArrayList<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 6))));
-        lottos.add(new Lotto(new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 7))));
-        lottos.add(new Lotto(new FixedLottoMachine(List.of(1, 2, 3, 4, 5, 8))));
-        lottos.add(new Lotto(new FixedLottoMachine(List.of(1, 2, 3, 4, 8, 9))));
-        lottos.add(new Lotto(new FixedLottoMachine(List.of(1, 2, 3, 8, 9, 10))));
+        lottos.add(new Lotto(new FixedLottoGenerator(List.of(1, 2, 3, 4, 5, 6))));
+        lottos.add(new Lotto(new FixedLottoGenerator(List.of(1, 2, 3, 4, 5, 7))));
+        lottos.add(new Lotto(new FixedLottoGenerator(List.of(1, 2, 3, 4, 5, 8))));
+        lottos.add(new Lotto(new FixedLottoGenerator(List.of(1, 2, 3, 4, 8, 9))));
+        lottos.add(new Lotto(new FixedLottoGenerator(List.of(1, 2, 3, 8, 9, 10))));
         return lottos;
     }
 }

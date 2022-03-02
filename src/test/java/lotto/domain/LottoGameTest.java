@@ -16,7 +16,7 @@ public class LottoGameTest {
     @ValueSource(ints = {0, 3, 10, 14})
     @DisplayName("수동 구매 개수를 생성한다.")
     void makeManualLottoCount(int count) {
-        final LottoGame lottoGame = new LottoGame(new PurchaseAmount(14_000), count);
+        final LottoMachine lottoGame = new LottoMachine(new PurchaseAmount(14_000), count);
 
         assertThat(lottoGame.getManualLottoCount()).isEqualTo(count);
     }
@@ -25,7 +25,7 @@ public class LottoGameTest {
     @ValueSource(ints = {15, 16, 17})
     @DisplayName("구입 금액이 수동 구매 개수를 만족하지 못하는 경우 에러를 발생시킨다.")
     void throwExceptionWhenManualLottoCountIsBigger(int count) {
-        assertThatThrownBy(() -> new LottoGame(new PurchaseAmount(14_000), count))
+        assertThatThrownBy(() -> new LottoMachine(new PurchaseAmount(14_000), count))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ERROR_CANT_PURCHASE.getMessage());
     }
@@ -34,7 +34,7 @@ public class LottoGameTest {
     @DisplayName("수동/자동 로또를 생성한다.")
     void makeManualAndAutoLottos() {
         final PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
-        final LottoGame lottoGame = new LottoGame(purchaseAmount, 3);
+        final LottoMachine lottoGame = new LottoMachine(purchaseAmount, 3);
 
         final List<List<Integer>> inputLottos = new ArrayList<>();
         inputLottos.add(List.of(8, 21, 23, 41, 42, 43));

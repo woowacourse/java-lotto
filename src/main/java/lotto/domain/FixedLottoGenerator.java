@@ -4,11 +4,11 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 
-public class FixedLottoMachine implements LottoMachine {
+public class FixedLottoGenerator implements LottoGenerator {
 
     private final List<Integer> numbers;
 
-    public FixedLottoMachine(final List<Integer> numbers) {
+    public FixedLottoGenerator(final List<Integer> numbers) {
         this.numbers = numbers;
     }
 

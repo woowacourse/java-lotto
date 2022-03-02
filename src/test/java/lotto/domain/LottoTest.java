@@ -16,7 +16,7 @@ class LottoTest {
     void testLottoNumbers() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 5);
 
-        LottoMachine lottoMachine = new FixedLottoMachine(numbers);
+        LottoGenerator lottoMachine = new FixedLottoGenerator(numbers);
 
         assertThatThrownBy(() -> new Lotto(lottoMachine))
                 .isInstanceOf(IllegalArgumentException.class)

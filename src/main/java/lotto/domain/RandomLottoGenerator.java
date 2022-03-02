@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RandomLottoMachine implements LottoMachine {
+public class RandomLottoGenerator implements LottoGenerator {
 
     private static final int LOTTO_NUMBER_START_INDEX = 0;
     private static final int LOTTO_NUMBER_END_INDEX = 6;
@@ -13,7 +13,7 @@ public class RandomLottoMachine implements LottoMachine {
 
     private final List<LottoNumber> numbers;
 
-    public RandomLottoMachine(){
+    public RandomLottoGenerator(){
         numbers = new ArrayList<>();
         for (int i = LOTTO_NUMBER_LOWER_BOUND; i < LOTTO_NUMBER_UPPER_BOUND; i++) {
             numbers.add(new LottoNumber(i));
