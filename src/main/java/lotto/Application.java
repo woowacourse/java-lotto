@@ -24,8 +24,6 @@ public class Application {
 
         Result result = lottoController.calculateResult(winningNumbers, lottos);
         lottoController.printWinningResult(result);
-
-        double profit = moneyController.calculateProfit(result, money);
-        moneyController.printProfit(profit);
+        moneyController.printProfit(result, money);
     }
 }

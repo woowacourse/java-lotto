@@ -16,11 +16,8 @@ public class MoneyController {
         }
     }
 
-    public double calculateProfit(final Result result, final Money money) {
-        return (double) result.getWinnigMoney() / money.getMoney();
-    }
-
-    public void printProfit(double profit) {
+    public void printProfit(Result result, Money money) {
+        double profit = (double) result.getWinnigMoney() / money.getMoney();
         OutputView.printProfit(profit);
     }
 }
