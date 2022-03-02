@@ -3,10 +3,10 @@ package domain;
 import java.util.List;
 
 public enum Rank {
-    FIFTH(5,3, 5000, 0, false),
+    FIFTH(5, 3, 5000, 0, false),
     FOURTH(4, 4, 50000, 0, false),
     THIRD(3, 5, 1500000, 0, false),
-    SECOND(2,5, 30000000, 0, true),
+    SECOND(2, 5, 30000000, 0, true),
     FIRST(1, 6, 2000000000, 0, false);
 
     private static final int DEFAULT_TOTAL_INCOME = 0;

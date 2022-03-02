@@ -1,7 +1,7 @@
 package domain.Lotto;
 
-import domain.LottoGenerator.LottoGenerator;
 import domain.LottoGenerator.CustomLottoGenerator;
+import domain.LottoGenerator.LottoGenerator;
 import domain.Result;
 import utils.ExceptionMessage;
 

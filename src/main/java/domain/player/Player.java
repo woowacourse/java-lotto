@@ -24,7 +24,7 @@ public class Player {
     }
 
     public void purchaseManualLotto(LottoGenerator lottoGenerator, List<List<Integer>> inputLottoNumbers) {
-        for(List<Integer> lottoNumbers : inputLottoNumbers){
+        for (List<Integer> lottoNumbers : inputLottoNumbers) {
             purchase(lottoGenerator, lottoNumbers);
             money.subAmount();
         }

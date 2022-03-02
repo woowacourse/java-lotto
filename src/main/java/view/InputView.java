@@ -39,7 +39,7 @@ public class InputView {
     public static List<List<Integer>> inputManualNumber(int quantity) {
         ArrayList<List<Integer>> manualNumbers = new ArrayList<>();
         System.out.println(MANUAL_NUMBER_INPUT_MESSAGE);
-        for(int i = 0; i < quantity; i++){
+        for (int i = 0; i < quantity; i++) {
             manualNumbers.add(toIntegerList(input()));
         }
         return manualNumbers;

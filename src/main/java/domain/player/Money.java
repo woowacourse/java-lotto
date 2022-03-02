@@ -25,7 +25,7 @@ public class Money {
     }
 
     public void isEnoughMoney(int manualQuantity) {
-        if(amount < manualQuantity * ONE_LOTTO_PRICE){
+        if (amount < manualQuantity * ONE_LOTTO_PRICE) {
             throw new IllegalArgumentException(ExceptionMessage.NOT_ENOUGH_MONEY);
         }
     }

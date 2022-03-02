@@ -17,7 +17,7 @@ import java.util.List;
 
 public class LottoController {
 
-    public void run(){
+    public void run() {
         Player player = new Player(new Money(InputView.inputPurchaseAmount()));
         int manualQuantity = InputView.inputManualQuantity();
         player.checkPossible(manualQuantity);
