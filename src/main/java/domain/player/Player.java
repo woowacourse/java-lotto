@@ -11,6 +11,8 @@ import java.util.List;
 
 public class Player {
 
+    private static final String LACK_OF_LOTTO_PURCHASE_MONEY = "로또를 구매할 수 없습니다.";
+
     private final Money money;
     private final List<Lotto> lottos;
 
@@ -24,6 +26,9 @@ public class Player {
     }
 
     public void purchaseLotto(Lotto lotto) {
+        if (!money.isBiggerThanLottoPrice()) {
+            throw new IllegalArgumentException(LACK_OF_LOTTO_PURCHASE_MONEY);
+        }
         money.deductMoney();
         lottos.add(lotto);
     }
