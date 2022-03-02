@@ -8,7 +8,7 @@ public enum Ranking {
     THIRD(1500000, 5, false),
     FOURTH(50000, 4, false),
     FIFTH(5000, 3, false),
-    DEFAULT(0, 0, false);
+    NONE(0, 0, false);
 
     private final int prize;
     private final int count;
@@ -24,7 +24,7 @@ public enum Ranking {
         return Arrays.stream(Ranking.values())
                 .filter(ranking -> ranking.count == cnt && ranking.hasBonusNumber == hasBonusNumber)
                 .findAny()
-                .orElse(DEFAULT);
+                .orElse(NONE);
     }
 
     public long multiple(Integer count) {

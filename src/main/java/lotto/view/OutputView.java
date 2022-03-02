@@ -63,7 +63,7 @@ public class OutputView {
     private static List<Map.Entry<Ranking, Integer>> getWinningResultEntryList(WinningResult winningResult) {
         return winningResult.getWinningResult().entrySet()
                 .stream()
-                .filter(entry -> entry.getKey() != Ranking.DEFAULT)
+                .filter(entry -> entry.getKey() != Ranking.NONE)
                 .sorted(Comparator.comparingInt(a -> a.getKey().getPrize()))
                 .collect(Collectors.toList());
     }
