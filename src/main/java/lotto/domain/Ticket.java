@@ -11,7 +11,9 @@ public class Ticket {
     private final Set<LottoNumber> lottoNumbers;
 
     public Ticket(LottoNumbersGenerator lottoNumbersGenerator) {
-        this.lottoNumbers = lottoNumbersGenerator.generate();
+        Set<LottoNumber> lottoNumbers = lottoNumbersGenerator.generate();
+        checkTicketSize(lottoNumbers.size());
+        this.lottoNumbers = lottoNumbers;
     }
 
     public Ticket(Set<LottoNumber> lottoNumbers) {
