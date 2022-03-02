@@ -5,7 +5,6 @@ import lotterymachine.domain.LotteryTicket;
 import lotterymachine.domain.LotteryTickets;
 import lotterymachine.domain.WinningLotteryRank;
 
-import java.util.List;
 import java.util.Map;
 
 public class OutputView {
@@ -34,6 +33,7 @@ public class OutputView {
     private static void printWinningLotteryResult(WinningLotteryRank winningLotteryRank, int number) {
         if (winningLotteryRank == WinningLotteryRank.BONUS_FIVE) {
             System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개%n", winningLotteryRank.getNumber(), winningLotteryRank.getPrice(), number);
+            return;
         }
         if (winningLotteryRank != WinningLotteryRank.ZERO) {
             System.out.printf("%d개 일치 (%d원)- %d개%n", winningLotteryRank.getNumber(), winningLotteryRank.getPrice(), number);
