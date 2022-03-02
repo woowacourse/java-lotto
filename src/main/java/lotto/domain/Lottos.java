@@ -5,11 +5,11 @@ import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private final List<Lotto> lottos;
+    private final List<Lotto> bunchOfLottos;
 
     public Lottos(List<Lotto> lottos) {
         validateSize(lottos);
-        this.lottos = lottos;
+        this.bunchOfLottos = lottos;
     }
 
     private void validateSize(List<Lotto> lottos) {
@@ -19,12 +19,12 @@ public class Lottos {
     }
 
     public List<Rank> matchRanks(WinnerLotto winnerLotto) {
-        return List.copyOf(lottos.stream()
+        return List.copyOf(bunchOfLottos.stream()
                 .map(winnerLotto::findRank)
                 .collect(Collectors.toList()));
     }
 
-    public List<Lotto> getLottos() {
-        return List.copyOf(lottos);
+    public List<Lotto> getBunchOfLottos() {
+        return List.copyOf(bunchOfLottos);
     }
 }

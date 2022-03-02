@@ -52,7 +52,7 @@ public class LottosTest {
     void checkAmount() {
         Lottos lottos = new Lottos(List.of(LOTTO));
 
-        assertThat(lottos.getLottos().size()).isEqualTo(1);
+        assertThat(lottos.getBunchOfLottos().size()).isEqualTo(1);
     }
 
     private static List<LottoNumber> givenNumbers(int... numbers) {
