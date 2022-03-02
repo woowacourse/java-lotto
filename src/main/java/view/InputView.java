@@ -1,7 +1,5 @@
 package view;
 
-import utils.InputValidator;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -9,13 +7,14 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
+    private static final String INPUT_IS_NULL = "입력 값은 널 값일 수 없습니다.";
+    private static final String INPUT_IS_EMPTY = "입력 값은 비어있을 수 없습니다.";
     private static final String PURCHASE_AMOUNT_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String WINNING_NUMBER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String DELIMITER = ",";
 
     private static final Scanner SCANNER = new Scanner(System.in);
-
     private static final InputView INPUT_VIEW = new InputView();
 
     private InputView() {
@@ -27,9 +26,21 @@ public class InputView {
 
     private String input() {
         String input = SCANNER.nextLine();
-        InputValidator.validateNull(input);
-        InputValidator.validateEmpty(input);
+        validateNull(input);
+        validateEmpty(input);
         return input;
+    }
+
+    public static void validateNull(String purchaseAmount) {
+        if (purchaseAmount == null) {
+            throw new NullPointerException(INPUT_IS_NULL);
+        }
+    }
+
+    public static void validateEmpty(String purchaseAmount) {
+        if (purchaseAmount.isEmpty()) {
+            throw new IllegalArgumentException(INPUT_IS_EMPTY);
+        }
     }
 
     public int inputPurchaseAmount() {
