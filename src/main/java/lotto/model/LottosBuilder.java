@@ -35,14 +35,14 @@ public class LottosBuilder {
 
     public void addManualLotto(List<String> inputs) {
         if (isManualAvailable()) {
-            this.lottos.add(Lotto.from(inputs));
+            this.lottos.add(LottoWheel.from(inputs));
             manualCount--;
         }
     }
 
     public void addAutoLottos() {
         for (int i = 0; i < autoCount; i++) {
-            this.lottos.add(new Lotto());
+            this.lottos.add(LottoWheel.draw());
         }
     }
 

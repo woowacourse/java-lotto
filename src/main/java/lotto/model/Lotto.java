@@ -16,18 +16,11 @@ public class Lotto {
     private final List<LottoNumber> numbers;
     private final boolean auto;
 
-    public Lotto() {
-        List<LottoNumber> randomNumbers = LottoWheel.draw(NUMBERS_SIZE);
-        Collections.sort(randomNumbers);
-        this.numbers = randomNumbers;
-        this.auto = true;
-    }
-
-    public Lotto(List<LottoNumber> numbers) {
+    public Lotto(List<LottoNumber> numbers, boolean auto) {
         validate(numbers);
         Collections.sort(numbers);
         this.numbers = List.copyOf(numbers);
-        this.auto = false;
+        this.auto = auto;
     }
 
     private void validate(List<LottoNumber> numbers) {
@@ -51,13 +44,6 @@ public class Lotto {
         return (int) numbers.stream()
                 .distinct()
                 .count();
-    }
-
-    public static Lotto from(List<String> inputs) {
-        List<LottoNumber> lottoNumbers = inputs.stream()
-                .map(LottoNumber::from)
-                .collect(Collectors.toList());
-        return new Lotto(lottoNumbers);
     }
 
     public boolean contains(LottoNumber number) {
