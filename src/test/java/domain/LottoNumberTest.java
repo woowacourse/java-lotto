@@ -12,7 +12,9 @@ public class LottoNumberTest {
 	@DisplayName("허용범위 내에 존재하지 않는 숫자를 압력 한 경우 예외 발생")
 	void numberInRange(int input) {
 		assertThatThrownBy(() -> new LottoNumber(input))
-			.isInstanceOf(IllegalArgumentException.class);
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("이상")
+			.hasMessageContaining("이하의 숫자만 허용됩니다.");
 	}
 
 }

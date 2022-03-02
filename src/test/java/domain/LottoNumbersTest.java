@@ -20,14 +20,16 @@ public class LottoNumbersTest {
 	void countOfNumbersMustBeSix() {
 		List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
 		assertThatThrownBy(() -> LottoNumbers.of(input))
-			.isInstanceOf(IllegalArgumentException.class);
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("개의 숫자만 허용됩니다.");
 	}
 
 	@Test
 	@DisplayName("중복되는 숫자를 입력 한 경우 예외 발생")
 	void duplicateInNumbers() {
 		assertThatThrownBy(() -> LottoNumbers.of(generateNumberList(1, 2, 3, 4, 5, 5)))
-			.isInstanceOf(IllegalArgumentException.class);
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("숫자들은 중복일 수 없습니다.");
 	}
 
 	@Test
