@@ -32,11 +32,11 @@ public class WinningLottoTest {
             LottoNumber.convertAll(List.of(1, 2, 3, 10, 11, 12)));
     private static final Lotto NOTHING_PRIZE_LOTTO_NUMBERS = Lotto.of(
             LottoNumber.convertAll(List.of(1, 2, 9, 11, 12, 13)));
-    private static final Money FIRST_PRIZE = LottoRank.FIRST.multiplePrizeBy(1);
-    private static final Money SECOND_PRIZE = LottoRank.SECOND.multiplePrizeBy(1);
-    private static final Money THIRD_PRIZE = LottoRank.THIRD.multiplePrizeBy(1);
-    private static final Money FOURTH_PRIZE = LottoRank.FOURTH.multiplePrizeBy(1);
-    private static final Money FIFTH_PRIZE = LottoRank.FIFTH.multiplePrizeBy(1);
+    private static final Budget FIRST_PRIZE = LottoRank.FIRST.multiplePrizeBy(1);
+    private static final Budget SECOND_PRIZE = LottoRank.SECOND.multiplePrizeBy(1);
+    private static final Budget THIRD_PRIZE = LottoRank.THIRD.multiplePrizeBy(1);
+    private static final Budget FOURTH_PRIZE = LottoRank.FOURTH.multiplePrizeBy(1);
+    private static final Budget FIFTH_PRIZE = LottoRank.FIFTH.multiplePrizeBy(1);
 
     private WinningLottoNumbers winningLottoNumbers;
 
@@ -83,9 +83,9 @@ public class WinningLottoTest {
     @ParameterizedTest(name = "{2} 판독")
     @MethodSource("provideLottoAndPrizeAndRank")
     @DisplayName("당첨 판독 테스트")
-    void prizeCountTest(Lotto lotto, Money money, LottoRank rank) {
-        LottoResult result = winningLottoNumbers.summarize(List.of(lotto), new Money(1000));
-        assertThat(result.getProfitRate()).isEqualTo(money.divide(new Money(1000)));
+    void prizeCountTest(Lotto lotto, Budget budget, LottoRank rank) {
+        LottoResult result = winningLottoNumbers.summarize(List.of(lotto), new Budget(1000));
+        assertThat(result.getProfitRate()).isEqualTo(budget.divide(new Budget(1000)));
         assertThat(result.getCountByRank(rank)).isEqualTo(1);
     }
 
@@ -93,7 +93,7 @@ public class WinningLottoTest {
     @MethodSource("provideLottoNumbersList")
     @DisplayName("꽝 판독 테스트")
     void nothingPrize(Lotto lotto) {
-        LottoResult result = winningLottoNumbers.summarize(List.of(lotto), new Money(1000));
+        LottoResult result = winningLottoNumbers.summarize(List.of(lotto), new Budget(1000));
         assertThat(result.getProfitRate()).isEqualTo(new BigDecimal(0));
         assertThat(result.getCountByRank(LottoRank.NOTHING)).isEqualTo(1);
     }
@@ -105,12 +105,12 @@ public class WinningLottoTest {
                 List.of(FIRST_PRIZE_LOTTO_NUMBERS, FIRST_PRIZE_LOTTO_NUMBERS,
                         SECOND_PRIZE_LOTTO_NUMBERS, THIRD_PRIZE_LOTTO_NUMBERS, THIRD_PRIZE_LOTTO_NUMBERS,
                         NOTHING_PRIZE_LOTTO_NUMBERS),
-                new Money(5000)
+                new Budget(5000)
         );
 
-        Money expectedPrize = FIRST_PRIZE.add(FIRST_PRIZE).add(SECOND_PRIZE).add(THIRD_PRIZE)
+        Budget expectedPrize = FIRST_PRIZE.add(FIRST_PRIZE).add(SECOND_PRIZE).add(THIRD_PRIZE)
                 .add(THIRD_PRIZE);
-        assertThat(result.getProfitRate()).isEqualTo(expectedPrize.divide(new Money(5000)));
+        assertThat(result.getProfitRate()).isEqualTo(expectedPrize.divide(new Budget(5000)));
         assertAll("rankCounts",
                 () -> assertThat(result.getCountByRank(LottoRank.FIRST)).isEqualTo(2),
                 () -> assertThat(result.getCountByRank(LottoRank.SECOND)).isEqualTo(1),

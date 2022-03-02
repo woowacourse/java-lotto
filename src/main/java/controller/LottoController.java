@@ -11,7 +11,7 @@ import model.Lotto;
 import model.LottoMachine;
 import model.LottoNumber;
 import model.LottoResult;
-import model.Money;
+import model.Budget;
 import model.WinningLottoNumbers;
 import model.generator.RandomLottoGenerator;
 import view.InputView;
@@ -19,18 +19,18 @@ import view.InputView;
 public class LottoController {
 
     public void run() {
-        Money inputMoney = InputView.getUntilValid(this::getMoneyFromUser);
+        Budget inputBudget = InputView.getUntilValid(this::getMoneyFromUser);
         LottoMachine lottoMachine = new LottoMachine(new RandomLottoGenerator());
-        List<Lotto> issuedLottos = lottoMachine.issueLotto(inputMoney);
+        List<Lotto> issuedLottos = lottoMachine.issueLotto(inputBudget);
         printIssuedLottoNumbers(getNumbersOf(issuedLottos));
 
         WinningLottoNumbers winningLottoNumbers = InputView.getUntilValid(this::getWinningLottoNumbersFromUser);
-        LottoResult result = winningLottoNumbers.summarize(issuedLottos, inputMoney);
+        LottoResult result = winningLottoNumbers.summarize(issuedLottos, inputBudget);
         printResult(result.getResultMap(), result.getProfitRate());
     }
 
-    private Money getMoneyFromUser() {
-        return inputWithMessage("구입금액을 입력해 주세요.", Money::parse);
+    private Budget getMoneyFromUser() {
+        return inputWithMessage("구입금액을 입력해 주세요.", Budget::parse);
     }
 
     private List<Set<Integer>> getNumbersOf(List<Lotto> issuedLottoNumbers) {
