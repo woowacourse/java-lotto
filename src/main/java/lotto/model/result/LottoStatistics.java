@@ -9,6 +9,8 @@ import lotto.model.money.Money;
 
 public class LottoStatistics {
 
+    private static final int DEFAULT_VALUE = 0;
+
     private final Map<LottoRank, Long> lottoRankCounter;
 
     public LottoStatistics(LottoRanks ranks) {
@@ -20,7 +22,7 @@ public class LottoStatistics {
         if (lottoRankCounter.get(rank) != null) {
             return lottoRankCounter.get(rank);
         }
-        return 0;
+        return DEFAULT_VALUE;
     }
 
     public double calculateEarningRates(Money money) {
