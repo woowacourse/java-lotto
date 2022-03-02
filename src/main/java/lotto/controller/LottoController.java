@@ -15,30 +15,16 @@ public class LottoController {
         LottoGame lottoGame = new LottoGame(purchaseAmount, StringConverter.toInt(InputView.getManualLottoCount()));
 
         InputView.printGetManualLottosMessage();
-
-        List<List<Integer>> inputLottos = new ArrayList<>();
-        for (int i = 0; i < lottoGame.getManualLottoCount(); i++) {
-            inputLottos.add(StringConverter.toInts(InputView.getManualLotto()));
-        }
-        lottoGame.makeManualLottos(inputLottos);
+        lottoGame.makeManualLottos(getInputManualLottos(lottoGame));
         lottoGame.makeAutoLottos();
 
         OutputView.printLottoCount(lottoGame.getManualLottoCount(), lottoGame.getAutoLottoCount());
-
         OutputView.printLottos(lottoGame.getLottos());
 
         WinningLotto winningLotto = getWinningLotto();
+        RankBoard rankBoard = new RankBoard(winningLotto, lottoGame.getLottos());
 
-//        int ticketCount = purchaseAmount.calculateTheNumberOfTicket();
-//        OutputView.printTicketCount(ticketCount);
-//
-//        List<Lotto> lottoTickets = getLottoTickets(ticketCount);
-//        OutputView.printLottos(lottoTickets);
-//
-//        WinningLotto winningLotto = getWinningLotto();
-//        RankBoard rankBoard = new RankBoard(winningLotto, lottoTickets);
-//
-//        OutputView.printResult(rankBoard, rankBoard.calculateProfitRatio(purchaseAmount.getAmount()));
+        OutputView.printResult(rankBoard, rankBoard.calculateProfitRatio(purchaseAmount.getAmount()));
     }
 
     private PurchaseAmount getPurchaseAmount() {
@@ -47,6 +33,19 @@ public class LottoController {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getPurchaseAmount();
+        }
+    }
+
+    private List<List<Integer>> getInputManualLottos(LottoGame lottoGame) {
+        try {
+            List<List<Integer>> inputLottos = new ArrayList<>();
+            for (int i = 0; i < lottoGame.getManualLottoCount(); i++) {
+                inputLottos.add(StringConverter.toInts(InputView.getManualLotto()));
+            }
+            return inputLottos;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getInputManualLottos(lottoGame);
         }
     }
 
