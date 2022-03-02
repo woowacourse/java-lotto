@@ -16,9 +16,9 @@ public class WinningResult {
         this.countOfWinning = countOfWinning;
     }
 
-    public static WinningResult from(LottoTickets lottoTickets,
-                                     WinningTicket winningTicket,
-                                     WinningPrizeStrategy winningPrizeStrategy) {
+    public static WinningResult of(LottoTickets lottoTickets,
+                                   WinningTicket winningTicket,
+                                   WinningPrizeStrategy winningPrizeStrategy) {
         Map<WinningPrize, Integer> countOfWinning = countWinning(lottoTickets, winningTicket, winningPrizeStrategy);
         return new WinningResult(countOfWinning);
     }

@@ -17,11 +17,11 @@ public class LottoGame {
 
     public void purchaseLottoTickets(List<Set<Integer>> selfTicketNumbers, int purchaseMoney,
                                      NumberGenerateStrategy numberGenerateStrategy) {
-        this.lottoTickets = LottoTickets.from(selfTicketNumbers, new Money(purchaseMoney), numberGenerateStrategy);
+        this.lottoTickets = LottoTickets.of(selfTicketNumbers, new Money(purchaseMoney), numberGenerateStrategy);
     }
 
     public void inputWinningNumbers(Set<Integer> winningNumbers, int bonusNumber) {
-        this.winningTicket = WinningTicket.from(winningNumbers, bonusNumber);
+        this.winningTicket = WinningTicket.of(winningNumbers, bonusNumber);
     }
 
     public double calculateLottoRateOfReturn() {
@@ -33,7 +33,7 @@ public class LottoGame {
 
     public WinningResult createWinningResult() {
         checkCanGetResult();
-        return WinningResult.from(lottoTickets, winningTicket, winningPrizeStrategy);
+        return WinningResult.of(lottoTickets, winningTicket, winningPrizeStrategy);
     }
 
     private void checkCanGetResult() {

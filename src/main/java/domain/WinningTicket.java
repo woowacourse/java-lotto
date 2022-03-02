@@ -13,7 +13,7 @@ public class WinningTicket {
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningTicket from(Set<Integer> winningNumberValues, int bonusNumber) {
+    public static WinningTicket of(Set<Integer> winningNumberValues, int bonusNumber) {
         validateSize(winningNumberValues);
         Set<LottoNumber> winningNumbers = winningNumberValues.stream()
                 .map(LottoNumber::new)
