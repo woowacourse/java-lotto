@@ -2,7 +2,7 @@ package domain.strategy;
 
 import java.util.*;
 
-public class RandomPurchaseStrategy implements PurchaseStrategy {
+public class AutomaticStrategy implements PurchaseStrategy {
 
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;

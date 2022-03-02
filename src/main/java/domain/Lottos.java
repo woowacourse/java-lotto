@@ -10,8 +10,8 @@ public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos.addAll(lottos);
+    public void addLotto(Lotto lotto) {
+        this.lottos.add(lotto);
     }
 
     public PrizeResult prizeResult(WinningNumbers winningNumber) {

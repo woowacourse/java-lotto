@@ -1,17 +1,13 @@
 package controller;
 
-import domain.Lottos;
-import domain.PrizeResult;
-import domain.Store;
-import domain.WinningNumbers;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 
 public class LottoGameController {
 
     public void run() {
-        final Lottos purchasedLotto = InputView.commonInputProcess(
-                () -> Store.purchaseLottos(InputView.inputPrice()));
+        Lottos purchasedLotto = purchaseLotto();
         OutputView.printPurchasedLotto(purchasedLotto.getLottos());
 
         final WinningNumbers winningNumber = InputView.commonInputProcess(
@@ -20,6 +16,18 @@ public class LottoGameController {
 
         OutputView.printFinalStatistic(prizeResult);
         OutputView.printEarningRate(prizeResult.earningRate(purchasedLotto.amountOfLottos()));
+    }
+
+    private Lottos purchaseLotto() {
+        Store store = new Store();
+        final Money money = InputView.commonInputProcess(() -> new Money(InputView.inputPrice()));
+        final int numOfManualLotto = InputView.commonInputProcess(
+                () -> store.checkAvailableBuy(money, InputView.inputNumOfManualLotto()));
+        final Lottos purchasedLotto = InputView.commonInputProcess(
+                () -> store.purchaseManualLottos(money, numOfManualLotto, InputView.inputManualLottoNumbers(numOfManualLotto)));
+        store.purchaseAutomaticLottos(purchasedLotto, money);
+
+        return purchasedLotto;
     }
 
 }

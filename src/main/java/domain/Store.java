@@ -1,50 +1,65 @@
 package domain;
 
+import domain.strategy.AutomaticStrategy;
+import domain.strategy.ManualStrategy;
 import domain.strategy.PurchaseStrategy;
-import domain.strategy.RandomPurchaseStrategy;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Store {
 
-    private static final String ERROR_PRICE_NON_INTEGER = "가격은 정수만 가능합니다.";
-    private static final String ERROR_NEGATIVE_INTEGER = "가격은 1000원 이상만 가능합니다.";
+    private static final String ERROR_COUNT_NON_INTEGER = "구매 개수는 정수만 가능합니다.";
+    private static final String ERROR_COUNT_NEGATIVE_INTEGER = "구매 개수는 양의 정수만 가능합니다.";
+    private static final String ERROR_LESS_MONEY = "원하시는 로또 개수를 구매하기에는 돈이 부족합니다.";
     private static final int LOTTO_PRICE = 1000;
 
-    public static Lottos purchaseLottos(final String inputMoney) {
-        final List<Lotto> lottos = new ArrayList<>();
-        int money = validatePrice(inputMoney);
-        for (int i = 0; i < money / LOTTO_PRICE; i++) {
-            purchase(lottos, new RandomPurchaseStrategy());
+    public int checkAvailableBuy(final Money money, final String numOfLotto) {
+        int numOfManualLotto = validateNumOfLotto(numOfLotto);
+        if (numOfManualLotto > money.numOfAvailablePurchase()) {
+            throw new IllegalArgumentException(ERROR_LESS_MONEY);
         }
-        return new Lottos(lottos);
+        return numOfManualLotto;
     }
 
-    private static int validatePrice(final String inputPrice) {
-        final int price = checkNonInteger(inputPrice, ERROR_PRICE_NON_INTEGER);
-        checkUnderMinimumPrice(price);
+    private int validateNumOfLotto(final String numOfLotto) {
+        int numOfManualLotto = checkNonInteger(numOfLotto);
+        checkNegativeInteger(numOfManualLotto);
 
-        return price;
+        return numOfManualLotto;
     }
 
-    private static int checkNonInteger(final String number, final String message) {
+    private int checkNonInteger(final String number) {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(ERROR_COUNT_NON_INTEGER);
         }
     }
 
-    private static void checkUnderMinimumPrice(final int price) {
-        if (price < LOTTO_PRICE) {
-            throw new IllegalArgumentException(ERROR_NEGATIVE_INTEGER);
+    private void checkNegativeInteger(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException(ERROR_COUNT_NEGATIVE_INTEGER);
         }
     }
 
-    private static void purchase(List<Lotto> lottos, PurchaseStrategy purchaseStrategy) {
+    public Lottos purchaseManualLottos(final Money money, final int numOfLotto, final String[] inputNumbers) {
+        final Lottos lottos = new Lottos();
+        for (String inputNumber : inputNumbers) {
+            purchase(lottos, new ManualStrategy(inputNumber));
+        }
+        money.purchaseLotto(numOfLotto);
+        return lottos;
+    }
+
+    public void purchaseAutomaticLottos(final Lottos lottos, final Money money) {
+        for (int i = 0; i < money.numOfAvailablePurchase(); i++) {
+            purchase(lottos, new AutomaticStrategy());
+        }
+        money.purchaseLotto(money.numOfAvailablePurchase());
+    }
+
+
+    private void purchase(Lottos lottos, PurchaseStrategy purchaseStrategy) {
         Lotto lotto = new Lotto(purchaseStrategy.generateNumbers());
-        lottos.add(lotto);
+        lottos.addLotto(lotto);
     }
 
 }
