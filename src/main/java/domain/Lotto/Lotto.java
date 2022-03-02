@@ -77,6 +77,10 @@ public class Lotto {
 >>>>>>> c348e4d (refactor : 당첨 로또와 사용자 로또 비교하는 메서드와, 보너스볼과 사용자 로또 비교해주는 메서드 위치 변경)
     }
 
+    public boolean isContainLottoNumber(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
     public List<LottoNumber> getLotto() {
         return Collections.unmodifiableList(lotto);
     }
