@@ -15,4 +15,13 @@ public class UserCountTest {
 
         assertThrows(IllegalArgumentException.class, () -> new UserCount(maxCount, manualCount));
     }
+
+    @Test
+    @DisplayName("수동 구매 수량에 음수를 입력한 경우 경우 예외 발생")
+    public void onlyNaturalNumberTest() {
+        int maxCount = 14;
+        int manualCount = -1;
+
+        assertThrows(IllegalArgumentException.class, () -> new UserCount(maxCount, manualCount));
+    }
 }
