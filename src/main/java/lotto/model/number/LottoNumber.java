@@ -3,6 +3,7 @@ package lotto.model.number;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import lotto.model.LottoWheel;
 
 /*
  * 로또 번호로 쓸 수 있는 int에 대한 Wrapper Class

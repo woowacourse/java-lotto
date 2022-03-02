@@ -19,7 +19,7 @@ public class LottoDTO {
     }
 
     private static LottoDTO from(Lotto lotto) {
-        return new LottoDTO(lotto.getNumbers().getValues());
+        return new LottoDTO(lotto.getValues());
     }
 
     public List<Integer> getNumbers() {

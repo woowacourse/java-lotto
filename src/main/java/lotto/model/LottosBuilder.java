@@ -1,6 +1,5 @@
 package lotto.model;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class LottosBuilder {
 
     public void addManualLotto(List<String> inputs) {
         if (isManualAvailable()) {
-            this.lottos.add(new Lotto(inputs));
+            this.lottos.add(Lotto.from(inputs));
             manualCount--;
         }
     }

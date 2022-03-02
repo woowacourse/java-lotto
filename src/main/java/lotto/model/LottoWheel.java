@@ -1,7 +1,9 @@
-package lotto.model.number;
+package lotto.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.model.number.LottoNumber;
 
 public class LottoWheel {
     private static final List<LottoNumber> LOTTO_BALLS;
@@ -19,6 +21,6 @@ public class LottoWheel {
 
     public static List<LottoNumber> draw(int size) {
         Collections.shuffle(LOTTO_BALLS);
-        return LOTTO_BALLS.subList(0, size);
+        return new ArrayList<>(LOTTO_BALLS.subList(0, size));
     }
 }

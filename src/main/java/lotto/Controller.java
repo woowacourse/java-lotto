@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.LottosBuilder;
 import lotto.model.Money;
@@ -9,7 +10,6 @@ import lotto.model.dto.LottoDTO;
 import lotto.model.dto.LottosDTO;
 import lotto.model.dto.PrizeInformationDTO;
 import lotto.model.number.LottoNumber;
-import lotto.model.number.LottoNumbers;
 import lotto.model.prize.PrizeInformations;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -61,13 +61,13 @@ public class Controller {
     }
 
     private WinningLotto makeWinningLotto() {
-        LottoNumbers winningNumbers = askWinningNumbers();
-        return new WinningLotto(winningNumbers, askBonusNumber());
+        Lotto winningLotto = askWinningNumbers();
+        return new WinningLotto(winningLotto, askBonusNumber());
     }
 
-    private LottoNumbers askWinningNumbers() {
+    private Lotto askWinningNumbers() {
         String[] winningNumbersInput = inputView.askWinningNumbers();
-        return LottoNumbers.from(List.of(winningNumbersInput));
+        return Lotto.from(List.of(winningNumbersInput));
     }
 
     private LottoNumber askBonusNumber() {
