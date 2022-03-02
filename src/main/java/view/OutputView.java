@@ -19,9 +19,14 @@ public class OutputView {
     private static final String RANK_COUNT_MESSAGE = "개";
     private static final String RANK_CORRECT_MESSAGE = "개 일치 (";
     private static final String WIN_PROFIT_RESULT_MESSAGE = "총 수익률은 %.2f입니다. (기준이 1 이기 때문에 결과적으로 손해라는 의미임)";
+    public static final String INPUT_MANUAL_COUNT_INSTRUCTION = "수동으로 구매할 로또 수를 입력해 주세요.";
 
     public static void printMoneyInstruction() {
         System.out.println(INPUT_MONEY_INSTRUCTION);
+    }
+
+    public static void printManualCountInstruction() {
+        System.out.println(INPUT_MANUAL_COUNT_INSTRUCTION);
     }
 
     public static void printLotto(final List<Lotto> issuedLotto) {

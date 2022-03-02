@@ -1,10 +1,6 @@
 package controller;
 
-import domain.Lotto;
-import domain.LottoFactory;
-import domain.LottoNumber;
-import domain.Money;
-import domain.RankPrize;
+import domain.*;
 
 import java.util.SortedMap;
 
@@ -17,7 +13,11 @@ public class LottoController {
     private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "지난주 당첨번호와 보너스가 중복일 수 없습니다.";
 
     public void start() {
-        final LottoFactory lottoFactory = new LottoFactory(getMoney());
+
+        Money money = getMoney();
+        Count manualCount = getManualCount(money);
+
+        final LottoFactory lottoFactory = new LottoFactory(money);
         OutputView.printLotto(lottoFactory.issueLotto());
 
         Lotto lastWinLotto = getWinLotto();
@@ -36,6 +36,15 @@ public class LottoController {
         } catch (IllegalArgumentException e) {
             System.out.println(ERROR_MESSAGE + e.getMessage());
             return getMoney();
+        }
+    }
+
+    private Count getManualCount(Money money) {
+        try {
+            return Count.getManualCount(InputView.getManualCount(), money);
+        } catch (IllegalArgumentException e) {
+            System.out.println(ERROR_MESSAGE + e.getMessage());
+            return getManualCount(money);
         }
     }
 
