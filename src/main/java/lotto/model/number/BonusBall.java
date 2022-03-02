@@ -1,6 +1,6 @@
 package lotto.model.number;
 
-import lotto.model.AutoLotto;
+import lotto.model.Lotto;
 
 public class BonusBall {
 	private static final String ERROR_DUPLICATE = "[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다";
@@ -18,8 +18,8 @@ public class BonusBall {
 		return new BonusBall(lottoBall);
 	}
 
-	public boolean match(AutoLotto autoLotto) {
-		return autoLotto.contains(this.lottoBall);
+	public boolean match(Lotto lotto) {
+		return lotto.contains(this.lottoBall);
 	}
 
 }

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.model.AutoLotto;
+import lotto.model.Lotto;
 import lotto.model.number.BonusBall;
 import lotto.model.number.LottoBall;
 import lotto.model.number.WinningBalls;
@@ -37,8 +37,8 @@ public class PrizeInformationTest {
 				LottoBall.from("8"),
 				LottoBall.from("9")
 		);
-		AutoLotto autoLotto = new AutoLotto(lottoBalls);
-		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
+		Lotto lotto = new Lotto(lottoBalls);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
 			matchResults.add(matchResult);
@@ -60,8 +60,8 @@ public class PrizeInformationTest {
 				LottoBall.from("8"),
 				LottoBall.from("9")
 		);
-		AutoLotto autoLotto = new AutoLotto(lottoBalls);
-		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
+		Lotto lotto = new Lotto(lottoBalls);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 2; i++) {
 			matchResults.add(matchResult);
@@ -83,8 +83,8 @@ public class PrizeInformationTest {
 				LottoBall.from("7"),
 				LottoBall.from("8")
 		);
-		AutoLotto autoLotto = new AutoLotto(lottoBalls);
-		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
+		Lotto lotto = new Lotto(lottoBalls);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
 			matchResults.add(matchResult);

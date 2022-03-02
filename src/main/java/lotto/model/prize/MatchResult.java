@@ -1,6 +1,6 @@
 package lotto.model.prize;
 
-import lotto.model.AutoLotto;
+import lotto.model.Lotto;
 import lotto.model.number.BonusBall;
 import lotto.model.number.WinningBalls;
 
@@ -13,8 +13,8 @@ public class MatchResult {
 		this.bonus = bonus;
 	}
 
-	public static MatchResult of(AutoLotto autoLotto, WinningBalls winningBalls, BonusBall bonusBall) {
-		return new MatchResult(autoLotto.match(winningBalls), bonusBall.match(autoLotto));
+	public static MatchResult of(Lotto lotto, WinningBalls winningBalls, BonusBall bonusBall) {
+		return new MatchResult(lotto.match(winningBalls), bonusBall.match(lotto));
 	}
 
 	public boolean isCount(int count) {

@@ -1,12 +1,11 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import lotto.model.AutoLotto;
 import lotto.model.Lottos;
 import lotto.model.Money;
-import lotto.model.dto.LottoDTO;
 import lotto.model.dto.PrizeInformationDTO;
 import lotto.model.number.BonusBall;
 import lotto.model.number.LottoBall;
@@ -20,8 +19,8 @@ public class Controller {
 
 	public void run() {
 		Money money = Money.from(InputView.askMoneyAmount());
-
-		Lottos lottos = purchaseLottos(money);
+		int manualCount = InputView.askManualLottoCount();
+		Lottos lottos = Lottos.purchase(money, manualCount, InputView.askManualLottoNumbers(manualCount));
 
 		WinningBalls winningBalls = getWinningNumbers();
 		PrizeInformations prizeInformations =
@@ -42,26 +41,6 @@ public class Controller {
 		ResultView.showPrizeInformation(PrizeInformationDTO.from(prizeInformations));
 
 		return prizeInformations;
-	}
-
-	private Lottos purchaseLottos(Money money) {
-		int purchaseCount = getPurchaseCount(money);
-
-		return purchaseLottos(purchaseCount);
-	}
-
-	private int getPurchaseCount(Money money) {
-		int purchaseCount = AutoLotto.countAvailableTickets(money);
-		ResultView.showPurchaseCount(purchaseCount);
-
-		return purchaseCount;
-	}
-
-	private Lottos purchaseLottos(int purchaseCount) {
-		Lottos lottos = Lottos.purchase(purchaseCount);
-		ResultView.showLottos(LottoDTO.from(lottos));
-
-		return lottos;
 	}
 
 	private WinningBalls getWinningNumbers() {

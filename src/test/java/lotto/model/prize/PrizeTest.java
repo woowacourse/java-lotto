@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
-import lotto.model.AutoLotto;
+import lotto.model.Lotto;
 import lotto.model.number.BonusBall;
 import lotto.model.number.LottoBall;
 import lotto.model.number.WinningBalls;
@@ -35,9 +35,9 @@ public class PrizeTest {
 				LottoBall.from("8"),
 				LottoBall.from("9")
 		);
-		AutoLotto autoLotto = new AutoLotto(lottoBalls);
+		Lotto lotto = new Lotto(lottoBalls);
 
-		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 
 		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.FIFTH);
 	}
@@ -53,9 +53,9 @@ public class PrizeTest {
 				LottoBall.from("8"),
 				LottoBall.from("9")
 		);
-		AutoLotto autoLotto = new AutoLotto(lottoBalls);
+		Lotto lotto = new Lotto(lottoBalls);
 
-		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 
 		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.FOURTH);
 	}
@@ -71,9 +71,9 @@ public class PrizeTest {
 				LottoBall.from("5"),
 				LottoBall.from("9")
 		);
-		AutoLotto autoLotto = new AutoLotto(lottoBalls);
+		Lotto lotto = new Lotto(lottoBalls);
 
-		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 
 		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.THIRD);
 	}
@@ -89,9 +89,9 @@ public class PrizeTest {
 				LottoBall.from("5"),
 				LottoBall.from("6")
 		);
-		AutoLotto autoLotto = new AutoLotto(lottoBalls);
+		Lotto lotto = new Lotto(lottoBalls);
 
-		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 
 		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.FIRST);
 	}
@@ -107,9 +107,9 @@ public class PrizeTest {
 				LottoBall.from("5"),
 				LottoBall.from("10")
 		);
-		AutoLotto autoLotto = new AutoLotto(lottoBalls);
+		Lotto lotto = new Lotto(lottoBalls);
 
-		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 
 		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.SECOND);
 	}

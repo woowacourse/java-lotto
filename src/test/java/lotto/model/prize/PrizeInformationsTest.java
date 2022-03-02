@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import lotto.model.AutoLotto;
+import lotto.model.Lotto;
 import lotto.model.Money;
 import lotto.model.number.BonusBall;
 import lotto.model.number.LottoBall;
@@ -37,8 +37,8 @@ public class PrizeInformationsTest {
 				LottoBall.from("8"),
 				LottoBall.from("9")
 		);
-		AutoLotto autoLotto = new AutoLotto(lottoBalls);
-		MatchResult matchResult = MatchResult.of(autoLotto, winningBalls, bonusBall);
+		Lotto lotto = new Lotto(lottoBalls);
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 		List<MatchResult> matchResults = new ArrayList<>();
 		matchResults.add(matchResult);
 		PrizeInformation prizeInformation = PrizeInformation.of(matchResults, Prize.FIFTH);
@@ -59,8 +59,8 @@ public class PrizeInformationsTest {
 				LottoBall.from("8"),
 				LottoBall.from("9")
 		);
-		AutoLotto autoLotto_5Th = new AutoLotto(lottoBalls_5th);
-		MatchResult matchResult_5th = MatchResult.of(autoLotto_5Th, winningBalls, bonusBall);
+		Lotto lotto_5Th = new Lotto(lottoBalls_5th);
+		MatchResult matchResult_5th = MatchResult.of(lotto_5Th, winningBalls, bonusBall);
 
 		List<LottoBall> lottoBalls_4th = Arrays.asList(
 				LottoBall.from("1"),
@@ -70,8 +70,8 @@ public class PrizeInformationsTest {
 				LottoBall.from("8"),
 				LottoBall.from("9")
 		);
-		AutoLotto autoLotto_4Th = new AutoLotto(lottoBalls_4th);
-		MatchResult matchResult_4th = MatchResult.of(autoLotto_4Th, winningBalls, bonusBall);
+		Lotto lotto_4Th = new Lotto(lottoBalls_4th);
+		MatchResult matchResult_4th = MatchResult.of(lotto_4Th, winningBalls, bonusBall);
 
 		List<MatchResult> matchResults = new ArrayList<>();
 		for (int i = 0; i < 5; i++) {
