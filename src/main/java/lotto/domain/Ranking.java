@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum Ranking {
-    FIRST(2000000000, 6),
-    SECOND(30000000, 5),
-    THIRD(1500000, 5),
-    FOURTH(50000, 4),
-    FIFTH(5000, 3);
+    FIRST_PLACE(2000000000, 6),
+    SECOND_PLACE(30000000, 5),
+    THIRD_PLACE(1500000, 5),
+    FOURTH_PLACE(50000, 4),
+    FIFTH_PLACE(5000, 3);
 
     private final int prize;
     private final int hitCount;
@@ -19,11 +19,11 @@ public enum Ranking {
     }
 
     public static Optional<Ranking> findRanking(int hitCount, boolean hasBonusNumber) {
-        if (hitCount == SECOND.hitCount && hasBonusNumber) {
-            return Optional.of(SECOND);
+        if (hitCount == SECOND_PLACE.hitCount && hasBonusNumber) {
+            return Optional.of(SECOND_PLACE);
         }
         return Arrays.stream(Ranking.values())
-                .filter(ranking -> ranking != SECOND)
+                .filter(ranking -> ranking != SECOND_PLACE)
                 .filter(ranking -> ranking.hitCount == hitCount)
                 .findAny();
     }
@@ -41,6 +41,6 @@ public enum Ranking {
     }
 
     public boolean isSecond() {
-        return this == SECOND;
+        return this == SECOND_PLACE;
     }
 }
