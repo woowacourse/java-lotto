@@ -5,19 +5,14 @@ public class Money {
     private static final int LOTTO_PRICE = 1000;
     private static final String ERROR_REMAIN_MONEY_NEGATIVE = "[ERROR] 현재 보유금액이 0원 미만입니다.";
 
-    private int remainMoney;
-    private int totalMoney;
+    private final int remainMoney;
+    private final int totalMoney;
 
-    public Money(int money) {
-        validateNegativeMoney(money);
+    public Money(int money, int boughtLottoCount) {
+        int boughtLottoPrice = boughtLottoCount * LOTTO_PRICE;
+        validateNegativeMoney(money - boughtLottoPrice);
         this.totalMoney = money;
-        this.remainMoney = money;
-    }
-
-    public void buyLotto(int lottoCount) {
-        int boughtLottoPrice = lottoCount * LOTTO_PRICE;
-        validateNegativeMoney(remainMoney - boughtLottoPrice);
-        remainMoney -= boughtLottoPrice;
+        this.remainMoney = money - boughtLottoPrice;
     }
 
     public int getPurchasableLottoCount() {

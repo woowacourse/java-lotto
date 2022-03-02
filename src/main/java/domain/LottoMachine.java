@@ -13,8 +13,7 @@ public class LottoMachine {
     private final LottoTicket lottoTicket;
 
     public LottoMachine(int money, List<Lotto> passiveLottos, LottoNumberGenerator numberGenerator) {
-        this.money = new Money(money);
-        this.money.buyLotto(passiveLottos.size());
+        this.money = new Money(money, passiveLottos.size());
         this.lottoResult = new LottoResult();
         this.lottoTicket = new LottoTicket(this.money.getPurchasableLottoCount(), passiveLottos, numberGenerator);
     }

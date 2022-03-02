@@ -10,23 +10,23 @@ public class MoneyTest {
 
     @Test
     public void buyLottoTest() {
-        Money money = new Money(1500);
+
         assertDoesNotThrow(() -> {
-            money.buyLotto(1);
+            Money money = new Money(1500, 1);
         });
     }
 
     @Test
     public void buyLottoExceedMoney() {
-        Money money = new Money(1500);
+
         assertThatThrownBy(() -> {
-            money.buyLotto(2);
+            Money money = new Money(1500, 2);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     public void purchasableLottoCountTest() {
-        Money money = new Money(5000);
+        Money money = new Money(5000, 0);
         assertThat(money.getPurchasableLottoCount()).isEqualTo(5);
     }
 }
