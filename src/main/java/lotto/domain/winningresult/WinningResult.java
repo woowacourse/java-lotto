@@ -1,19 +1,19 @@
 package lotto.domain.winningresult;
 
 import lotto.domain.matchkind.LottoMatchKind;
-import lotto.domain.purchaseamount.PurchaseAmount;
+import lotto.domain.purchaseamount.TotalPurchaseAmount;
 
 import java.util.Map;
 import java.util.Objects;
 
 public class WinningResult {
     private final Map<LottoMatchKind, Integer> winningNumberByMatchKind;
-    private final PurchaseAmount purchaseAmount;
+    private final TotalPurchaseAmount totalPurchaseAmount;
 
     public WinningResult(
-            final Map<LottoMatchKind, Integer> winningNumberByMatchKind, final PurchaseAmount purchaseAmount) {
+            final Map<LottoMatchKind, Integer> winningNumberByMatchKind, final TotalPurchaseAmount totalPurchaseAmount) {
         this.winningNumberByMatchKind = winningNumberByMatchKind;
-        this.purchaseAmount = purchaseAmount;
+        this.totalPurchaseAmount = totalPurchaseAmount;
     }
 
     public Map<LottoMatchKind, Integer> getWinningNumberByKind() {
@@ -25,7 +25,7 @@ public class WinningResult {
                 .stream()
                 .mapToLong(lottoMatchKind -> lottoMatchKind.getProfit(winningNumberByMatchKind.get(lottoMatchKind)))
                 .sum();
-        return purchaseAmount.getProfitRate(totalProfit);
+        return totalPurchaseAmount.getProfitRate(totalProfit);
     }
 
     @Override
@@ -33,11 +33,11 @@ public class WinningResult {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningResult that = (WinningResult) o;
-        return Objects.equals(winningNumberByMatchKind, that.winningNumberByMatchKind) && Objects.equals(purchaseAmount, that.purchaseAmount);
+        return Objects.equals(winningNumberByMatchKind, that.winningNumberByMatchKind) && Objects.equals(totalPurchaseAmount, that.totalPurchaseAmount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winningNumberByMatchKind, purchaseAmount);
+        return Objects.hash(winningNumberByMatchKind, totalPurchaseAmount);
     }
 }

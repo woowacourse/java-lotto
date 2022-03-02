@@ -6,7 +6,7 @@ import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.generator.LottoCustomGenerator;
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.lottonumber.vo.LottoNumber;
-import lotto.domain.purchaseamount.PurchaseAmount;
+import lotto.domain.purchaseamount.TotalPurchaseAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,11 +20,11 @@ import static org.assertj.core.api.Assertions.entry;
 
 class LottoServiceTest {
     private final LottoGenerator lottoGenerator = new LottoCustomGenerator();
-    private final PurchaseAmount purchaseAmount = new PurchaseAmount("6000");
+    private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount("6000");
     private final Lotto LottoUserInputLotto = new Lotto(Arrays.asList("40", "41", "42", "43", "44", "45"));
     private final List<Lotto> manualLottos =
             Arrays.asList(LottoUserInputLotto);
-    private final LottoService lottoService = new LottoService(lottoGenerator, purchaseAmount, manualLottos);
+    private final LottoService lottoService = new LottoService(lottoGenerator, totalPurchaseAmount, manualLottos);
     private final WinningNumbers winningNumbers = new WinningNumbers(
             new Lotto(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.from("1"));
 

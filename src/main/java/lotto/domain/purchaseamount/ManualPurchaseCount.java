@@ -11,10 +11,10 @@ public class ManualPurchaseCount {
 
     private final int value;
 
-    public ManualPurchaseCount(final String value, final PurchaseAmount purchaseAmount) {
+    public ManualPurchaseCount(final String value, final TotalPurchaseAmount totalPurchaseAmount) {
         validateNaturalNumber(value);
         int numberValue = Integer.parseInt(value);
-        validateLowerThanTotalPurchaseAmount(numberValue, purchaseAmount);
+        validateLowerThanTotalPurchaseAmount(numberValue, totalPurchaseAmount);
         this.value = numberValue;
     }
 
@@ -24,8 +24,8 @@ public class ManualPurchaseCount {
         }
     }
 
-    private void validateLowerThanTotalPurchaseAmount(final int value, final PurchaseAmount purchaseAmount) {
-        if (purchaseAmount.isLowerThan(value)) {
+    private void validateLowerThanTotalPurchaseAmount(final int value, final TotalPurchaseAmount totalPurchaseAmount) {
+        if (totalPurchaseAmount.isLowerThan(value)) {
             throw new IllegalArgumentException(MANUAL_PURCHASE_AMOUNT_HIGHER_THAN_TOTAL_AMOUNT_EXCEPTION_MESSAGE);
         }
     }

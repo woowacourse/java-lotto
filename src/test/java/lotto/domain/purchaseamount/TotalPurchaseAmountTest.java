@@ -8,8 +8,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class PurchaseAmountTest {
-    private final PurchaseAmount purchaseAmount = new PurchaseAmount("2000");
+class TotalPurchaseAmountTest {
+    private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount("2000");
 
     @ParameterizedTest
     @DisplayName("1000의 양의 배수가 아닌 값으로 생성할 경우 예외를 발생시킨다.")
@@ -19,7 +19,7 @@ class PurchaseAmountTest {
         final String expectedExceptionMessage = "구매 금액은 1000의 양의 배수여야 합니다.";
         //when then
         assertThatThrownBy(
-                () -> new PurchaseAmount(invalidValue))
+                () -> new TotalPurchaseAmount(invalidValue))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
     }
@@ -30,7 +30,7 @@ class PurchaseAmountTest {
         //given
         final int expected = 2;
         //when
-        final int actual = purchaseAmount.getPurchaseCount();
+        final int actual = totalPurchaseAmount.getPurchaseCount();
         //then
         assertThat(actual).isEqualTo(expected);
     }
@@ -42,7 +42,7 @@ class PurchaseAmountTest {
         final long totalProfit = 4000000000L;
         final double expected = (double) totalProfit / 2000;
         //when
-        final double actual = purchaseAmount.getProfitRate(totalProfit);
+        final double actual = totalPurchaseAmount.getProfitRate(totalProfit);
         //then
         assertThat(actual).isEqualTo(expected);
     }

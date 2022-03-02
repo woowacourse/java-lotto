@@ -2,13 +2,13 @@ package lotto.domain.purchaseamount;
 
 import static lotto.util.regex.NumberRegex.isNaturalNumber;
 
-public class PurchaseAmount {
+public class TotalPurchaseAmount {
     private static final String INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE = "구매 금액은 1000의 양의 배수여야 합니다.";
     private static final int LOTTO_PRICE = 1000;
 
     private final int amount;
 
-    public PurchaseAmount(final String amount) {
+    public TotalPurchaseAmount(final String amount) {
         validateNaturalNumber(amount);
         int naturalNumberValue = Integer.parseInt(amount);
         validateMultipleOfPrice(naturalNumberValue);

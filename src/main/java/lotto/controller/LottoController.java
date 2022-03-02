@@ -7,7 +7,7 @@ import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.lottonumber.vo.LottoNumber;
 import lotto.domain.matchkind.LottoMatchKind;
 import lotto.domain.purchaseamount.ManualPurchaseCount;
-import lotto.domain.purchaseamount.PurchaseAmount;
+import lotto.domain.purchaseamount.TotalPurchaseAmount;
 import lotto.domain.winningresult.WinningResult;
 import lotto.dto.InputLottoDto;
 import lotto.dto.LottoMatchKindDto;
@@ -32,23 +32,23 @@ public class LottoController {
     }
 
     private LottoService initializeLottoService(final LottoGenerator lottoGenerator) {
-        final PurchaseAmount totalPurchaseAmount = inputTotalPurchaseAmount();
+        final TotalPurchaseAmount totalPurchaseAmount = inputTotalPurchaseAmount();
         final int manualPurchaseAmount = inputManualPurchaseAmount(totalPurchaseAmount);
         final List<Lotto> manualLottos = inputManualLottos(manualPurchaseAmount);
         return new LottoService(lottoGenerator, totalPurchaseAmount, manualLottos);
     }
 
-    private PurchaseAmount inputTotalPurchaseAmount() {
+    private TotalPurchaseAmount inputTotalPurchaseAmount() {
         try {
             final String purchaseAmountInput = inputView.inputPurchaseAmount();
-            return new PurchaseAmount(purchaseAmountInput);
+            return new TotalPurchaseAmount(purchaseAmountInput);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
             return inputTotalPurchaseAmount();
         }
     }
 
-    private int inputManualPurchaseAmount(final PurchaseAmount totalPurchaseAmount) {
+    private int inputManualPurchaseAmount(final TotalPurchaseAmount totalPurchaseAmount) {
         try {
             final String manualPurchaseLottoAmount = inputView.inputManualPurchaseAmount();
             final ManualPurchaseCount manualPurchaseCount = new ManualPurchaseCount(manualPurchaseLottoAmount, totalPurchaseAmount);

@@ -1,7 +1,7 @@
 package lotto.domain.winningresult;
 
 import lotto.domain.matchkind.LottoMatchKind;
-import lotto.domain.purchaseamount.PurchaseAmount;
+import lotto.domain.purchaseamount.TotalPurchaseAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +21,8 @@ class WinningResultTest {
                 LottoMatchKind.FIVE, 1,
                 LottoMatchKind.FIVE_BONUS, 1,
                 LottoMatchKind.SIX, 1);
-        final PurchaseAmount purchaseAmount = new PurchaseAmount("5000");
-        final WinningResult winningResult = new WinningResult(winningNumberByMatchKind, purchaseAmount);
+        final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount("5000");
+        final WinningResult winningResult = new WinningResult(winningNumberByMatchKind, totalPurchaseAmount);
         final double expected = 2031555000 / (double) 5000;
         //when
         final double actual = winningResult.getProfitRate();
