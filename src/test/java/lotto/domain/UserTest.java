@@ -14,7 +14,7 @@ public class UserTest {
     void generateByString_checkPositive(String input) {
         Assertions.assertThatThrownBy(() -> User.generateByString(input))
                 .isInstanceOf(MoneyException.class)
-                .hasMessage("투입금액이 음수일 수 없습니다.");
+                .hasMessage("구입금액이 음수일 수 없습니다.");
     }
 
     @ParameterizedTest(name = "1000원 단위가 아닐 경우 예외 발생 - case : {0}")
@@ -22,7 +22,7 @@ public class UserTest {
     void generateByString_checkUnit(String input) {
         Assertions.assertThatThrownBy(() -> User.generateByString(input))
                 .isInstanceOf(MoneyException.class)
-                .hasMessage("투입금액은 1000원 단위만 가능합니다.");
+                .hasMessage("구입금액은 1000원 단위만 가능합니다.");
     }
 
     @Test
@@ -40,6 +40,6 @@ public class UserTest {
         user.spendMoney(1000);
         Assertions.assertThatThrownBy(() -> user.spendMoney(1000))
                 .isInstanceOf(MoneyException.class)
-                .hasMessage("투입한 금액을 모두 사용했습니다.");
+                .hasMessage("입력한 금액을 모두 사용했습니다.");
     }
 }
