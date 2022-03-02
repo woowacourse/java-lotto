@@ -2,16 +2,20 @@ package lotto.domain.vo;
 
 import java.util.Objects;
 
-public class ManualTicketNumber {
+public class ManualTicketSize {
 
     static final String NOT_NUMBER_MESSAGE = "[ERROR] 구입금액은 숫자여야 합니다.";
     public static final String NOT_BUY_MANUAL_MESSAGE = "[ERROR] 구입 가능한 액수를 벗어납니다.";
     private Integer ticketNumber;
 
-    public ManualTicketNumber(String ticketNumber, PurchaseAmount purchaseAmount) {
+    public ManualTicketSize(String ticketNumber, PurchaseAmount purchaseAmount) {
         validateIsNumber(ticketNumber);
         this.ticketNumber = Integer.parseInt(ticketNumber);
         validateCanBuy(purchaseAmount);
+    }
+
+    public Integer ticketNumber() {
+        return ticketNumber;
     }
 
     private void validateIsNumber(String input) {
@@ -29,7 +33,7 @@ public class ManualTicketNumber {
     }
 
     private boolean canBuy(PurchaseAmount purchaseAmount) {
-        int canBuyNumber = purchaseAmount.getAvailableTicketNumber();
+        int canBuyNumber = purchaseAmount.availableTicketCanBuy();
         return ticketNumber <= canBuyNumber;
     }
 
@@ -42,7 +46,7 @@ public class ManualTicketNumber {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ManualTicketNumber that = (ManualTicketNumber) o;
+        ManualTicketSize that = (ManualTicketSize) o;
         return Objects.equals(ticketNumber, that.ticketNumber);
     }
 

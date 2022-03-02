@@ -35,7 +35,7 @@ public class PurchaseAmount {
         }
     }
 
-    public int getAvailableTicketNumber() {
+    public int availableTicketCanBuy() {
         return amount / LOTTO_TICKET_PRICE;
     }
 

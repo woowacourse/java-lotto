@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +15,17 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoTicketTest {
+
+    private Set<LottoNumber> lottoNumberSet = new HashSet<>();
+
+    {
+        lottoNumberSet.add(new LottoNumber(1));
+        lottoNumberSet.add(new LottoNumber(2));
+        lottoNumberSet.add(new LottoNumber(3));
+        lottoNumberSet.add(new LottoNumber(4));
+        lottoNumberSet.add(new LottoNumber(5));
+        lottoNumberSet.add(new LottoNumber(6));
+    }
 
     @ParameterizedTest
     @MethodSource("provideInvalidLottoNumbers")
@@ -42,14 +54,6 @@ public class LottoTicketTest {
     @DisplayName("LottoTicket 은 생성시 방어적 복사가 되어야 한다 : Set 생성자")
     void defensive_copy() {
         // given
-        Set<LottoNumber> lottoNumberSet = new HashSet<>();
-        lottoNumberSet.add(new LottoNumber(1));
-        lottoNumberSet.add(new LottoNumber(2));
-        lottoNumberSet.add(new LottoNumber(3));
-        lottoNumberSet.add(new LottoNumber(4));
-        lottoNumberSet.add(new LottoNumber(5));
-        lottoNumberSet.add(new LottoNumber(6));
-
         LottoTicket lottoTicket = new LottoTicket(lottoNumberSet);
 
         // when
@@ -94,5 +98,16 @@ public class LottoTicketTest {
                 Arguments.of(under6Numbers),
                 Arguments.of(over6Numbers)
         );
+    }
+
+    @Test
+    @DisplayName("로또 티켓을 수동으로 생성시 항상 순서가 보장되어야 한다")
+    void should_guarantee_order_to_create_manually() {
+    	// given & when & then
+        final String expected = lottoNumberSet.toString();
+        for (int i = 0; i < 1_000; i++) {
+            String createdLottoTicket = new LottoTicket("1,2,3,4,5,6").lottoNumbers().toString();
+            assertThat(createdLottoTicket).isEqualTo(expected);
+        }
     }
 }

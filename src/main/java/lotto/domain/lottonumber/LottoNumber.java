@@ -23,7 +23,7 @@ public class LottoNumber {
 
     private int convertStringToInt(String numberString) {
         try {
-            return Integer.parseInt(numberString);
+            return Integer.parseInt(numberString.trim());
         } catch (NumberFormatException e) {
             throw new NumberFormatException(NOT_NUMBER_OF_LOTTO);
         }

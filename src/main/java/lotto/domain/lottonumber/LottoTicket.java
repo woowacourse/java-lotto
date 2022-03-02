@@ -3,6 +3,7 @@ package lotto.domain.lottonumber;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.jetbrains.annotations.NotNull;
@@ -27,9 +28,8 @@ public class LottoTicket {
     @NotNull
     private Set<LottoNumber> createLottoNumbersFromString(String lottoNumbersString) {
         return Arrays.stream(lottoNumbersString.split(","))
-                .map(String::trim)
                 .map(LottoNumber::new)
-                .collect(Collectors.toUnmodifiableSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public Set<LottoNumber> lottoNumbers() {
