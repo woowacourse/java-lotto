@@ -48,7 +48,7 @@ public class LottoService {
     private List<Lotto> addAutoLotto(final List<Lotto> issuedManualLotto) {
         final int autoCount = money.calculateCounts() - issuedManualLotto.size();
         validate(autoCount);
-        if (autoCount > 0) {
+        if (autoCount > AUTO_LOTTO_COUNT_LOWER_BOUND) {
             final List<Lotto> issuedAutoLotto = LottoFactory.generateAutoLottoGroup(autoCount);
             return concatLotto(issuedManualLotto, issuedAutoLotto);
         }

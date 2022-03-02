@@ -16,7 +16,7 @@ public class LottoFactory {
     public static List<Lotto> generateManualLottoGroup(final List<List<String>> issuedManualLottoInput) {
         final List<Lotto> issuedManualLotto = new ArrayList<>();
         for (List<String> manualLotto : issuedManualLottoInput) {
-            issuedManualLotto.add(LottoFactory.generateLotto(new ManualLottoGenerator(manualLotto)));
+            issuedManualLotto.add(generateLotto(new ManualLottoGenerator(manualLotto)));
         }
         return Collections.unmodifiableList(issuedManualLotto);
     }
