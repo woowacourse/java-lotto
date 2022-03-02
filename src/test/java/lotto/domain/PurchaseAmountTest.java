@@ -15,34 +15,33 @@ class PurchaseAmountTest {
     @Test
     @DisplayName("구입 금액을 생성한다")
     void makePurchaseAmount() {
-        int amount = 14_000;
-        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
+
         assertThat(purchaseAmount.getAmount()).isEqualTo(14_000);
     }
 
     @Test
     @DisplayName("구입 금액은 1000원 단위로 생성된다")
     void makePurchaseAmount1000() {
-        int amount = 14_500;
-        PurchaseAmount purchaseAmount = new PurchaseAmount(amount);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(14_500);
+
         assertThat(purchaseAmount.getAmount()).isEqualTo(14_000);
     }
 
     @Test
     @DisplayName("구입 금액이 1000원 미만일 경우 예외를 발생시킨다.")
     void throwExceptionWhenInputLessThan1000() {
-        int amount = 500;
-        assertThatThrownBy(() -> new PurchaseAmount(amount))
+        assertThatThrownBy(() -> new PurchaseAmount(500))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 구입금액은 " + TICKET_PRICE + "원 이상이어야 합니다");
     }
 
     @Test
     @DisplayName("구입 금액만큼 티켓 개수를 반환한다")
-    void testCalcTicketAmount() {
+    void calcTicketAmount() {
         PurchaseAmount purchaseAmount = new PurchaseAmount(14_500);
-        int count = purchaseAmount.calculateTheNumberOfTicket();
-        assertThat(count).isEqualTo(14);
+
+        assertThat(purchaseAmount.calculateTheNumberOfTicket()).isEqualTo(14);
     }
 
     @ParameterizedTest
@@ -50,6 +49,7 @@ class PurchaseAmountTest {
     @DisplayName("수동 로또 구매 후 남은 돈으로 살 수 있는 자동 로또 개수를 반환한다.")
     void calculateAutoLottoCount(int count, int expected) {
         PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
+
         assertThat(purchaseAmount.calculateAutoLottoCount(count)).isEqualTo(expected);
     }
 }

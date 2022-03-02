@@ -16,6 +16,7 @@ public class LottoGameTest {
     @DisplayName("수동 구매 개수를 생성한다.")
     void makeManualLottoCount(int count) {
         LottoGame lottoGame = new LottoGame(new PurchaseAmount(14_000), count);
+
         assertThat(lottoGame.getManualLottoCount()).isEqualTo(count);
     }
 
@@ -39,6 +40,7 @@ public class LottoGameTest {
         inputLottos.add(List.of(7, 11, 16, 35, 36, 44));
 
         lottoGame.makeManualLottos(inputLottos);
+
         assertThat(lottoGame.getLottos().size()).isEqualTo(3);
     }
 
@@ -63,6 +65,7 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame(purchaseAmount, 3);
 
         lottoGame.makeAutoLottos();
+
         assertThat(lottoGame.getLottos().size()).isEqualTo(11);
     }
 
