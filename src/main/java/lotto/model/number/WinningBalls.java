@@ -46,6 +46,6 @@ public class WinningBalls {
 	}
 
 	public boolean match(LottoBall lottoBall) {
-		return winningBalls.stream().anyMatch(winningBall -> winningBall.match(lottoBall.getNumber()));
+		return winningBalls.stream().anyMatch(winningBall -> winningBall.match(lottoBall));
 	}
 }

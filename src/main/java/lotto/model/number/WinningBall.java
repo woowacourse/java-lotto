@@ -15,8 +15,8 @@ public class WinningBall {
 		return new WinningBall(lottoBall);
 	}
 
-	public boolean match(int number) {
-		return this.lottoBall.getNumber() == number;
+	public boolean match(LottoBall lottoBall) {
+		return this.lottoBall.equals(lottoBall);
 	}
 
 	@Override
