@@ -10,10 +10,9 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        validateLottoListSize(lottos);
         this.lottos = lottos;
     }
-
+    
     public Lottos(LottoQuantity lottoQuantity, LottoNumberGenerateStrategy lottoNumberGenerator) {
         this.lottos = generateLottos(lottoQuantity, lottoNumberGenerator);
     }
@@ -24,13 +23,6 @@ public class Lottos {
 
         return new Lottos(newLottoValues);
     }
-
-    private void validateLottoListSize(List<Lotto> lottos) {
-        if (lottos.isEmpty()) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_EMPTY_LOTTO_LIST);
-        }
-    }
-
 
     private List<Lotto> generateLottos(LottoQuantity lottoQuantity, LottoNumberGenerateStrategy lottoNumberGenerator) {
         List<Lotto> lottos = new ArrayList<>();

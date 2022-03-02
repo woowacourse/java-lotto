@@ -2,7 +2,6 @@ package domain;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import domain.strategy.LottoNumberGenerateStrategy;
 import domain.strategy.StubRandomLottoNumberGenerator;
@@ -71,18 +70,6 @@ public class LottosTest {
 
         // then
         assertThat(lottos).isNotNull();
-    }
-
-    @Test
-    @DisplayName("생성자에 전달된 List<Lotto> 의 크기가 1보다 작다면 IAE 가 발생한다.")
-    void createLottosWithEmptyLottoListShouldFail() {
-        // given
-        List<Lotto> lottoValues = List.of();
-
-        // when & then
-        assertThatThrownBy(() -> new Lottos(lottoValues))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(Lottos.ERROR_MESSAGE_FOR_EMPTY_LOTTO_LIST);
     }
 
     @Test

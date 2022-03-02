@@ -65,7 +65,6 @@ public class LottoController {
     private LottoQuantity generateAutoLottoQuantity(LottoQuantity totalLottoQuantity,
                                                     LottoQuantity manualLottoQuantity) {
         try {
-
             return totalLottoQuantity.subtract(manualLottoQuantity);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
