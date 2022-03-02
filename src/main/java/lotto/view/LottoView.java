@@ -11,6 +11,8 @@ import lotto.dto.TicketDto;
 import lotto.dto.TicketManagerDto;
 import lotto.dto.WinningTicketDto;
 import lotto.view.input.InputView;
+import lotto.view.input.reader.ConsoleReader;
+import lotto.view.input.reader.Reader;
 import lotto.view.output.OutputView;
 
 public class LottoView {
@@ -18,9 +20,16 @@ public class LottoView {
     private final InputView inputView;
     private final OutputView outputView;
 
-    public LottoView(final InputView inputView, final OutputView outputView) {
+    private LottoView(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
+    }
+
+    public static LottoView newInstance() {
+        final Reader reader = new ConsoleReader();
+        final InputView inputView = new InputView(reader);
+        final OutputView outputView = new OutputView();
+        return new LottoView(inputView, outputView);
     }
 
     public int requestMoney() {
