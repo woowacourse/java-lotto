@@ -43,14 +43,14 @@ public class User {
         countOfAutoLotto += countCanBuy;
     }
 
-    public void spendMoney(long moneyToSpend) {
+    private void spendMoney(long moneyToSpend) {
         if (money < spentMoney + moneyToSpend) {
             throw new MoneyException(MoneyException.MONEY_SPENT_LIMIT_ERROR_MESSAGE);
         }
         spentMoney += moneyToSpend;
     }
 
-    public int calculateCountCanBuy() {
+    private int calculateCountCanBuy() {
         return (int) ((money - spentMoney) / Lotto.LOTTO_PRICE);
     }
 

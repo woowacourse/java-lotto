@@ -35,10 +35,10 @@ public class UserTest {
 
     @Test
     @DisplayName("사용한 금액이 투입 금액을 초과할 경우 예외 발생")
-    void spendMoney() {
+    void buyLottoByManual() {
         User user = User.generateByString("1000");
-        user.spendMoney(1000);
-        Assertions.assertThatThrownBy(() -> user.spendMoney(1000))
+        user.buyLottoByManual(Lotto.generateByAuto());
+        Assertions.assertThatThrownBy(() -> user.buyLottoByManual(Lotto.generateByAuto()))
                 .isInstanceOf(MoneyException.class)
                 .hasMessage("입력한 금액을 모두 사용했습니다.");
     }
