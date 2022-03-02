@@ -22,7 +22,7 @@ public class LottosBuilder {
     public static LottosBuilder of(Money money, String manualCountInput) {
         try {
             return new LottosBuilder(
-                    Lotto.countAvailableTickets(money), Integer.parseInt(manualCountInput));
+                    money.countAvailableLotto(), Integer.parseInt(manualCountInput));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_TYPE);
         }
