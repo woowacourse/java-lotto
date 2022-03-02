@@ -59,11 +59,11 @@ public class LottoController {
     }
 
     private List<LottoNumbers> buyManualTicket(ManualLottoCount manualLottoCount) {
-        OutputView.printInputManualTicketSentence();
-
         List<LottoNumbers> manualTickets = new ArrayList<>();
         int tryCount = manualLottoCount.getValue();
-        for (int i = 0; i < tryCount; i++) {
+        
+        for (int i = tryCount; i > 0; i--) {
+            OutputView.printInputManualTicketSentence(i);
             manualTickets.add(getInputLottoNumbers());
         }
         return manualTickets;
