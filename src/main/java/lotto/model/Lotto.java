@@ -25,11 +25,11 @@ public class Lotto {
 		}
 	}
 
-	private final List<LottoBall> autoLotto;
+	private final List<LottoBall> lotto;
 
 	public Lotto(List<LottoBall> numbers) {
 		Collections.sort(numbers);
-		this.autoLotto = List.copyOf(numbers);
+		this.lotto = List.copyOf(numbers);
 	}
 
 	public static List<LottoBall> generateAuto() {
@@ -69,16 +69,16 @@ public class Lotto {
 	}
 
 	public int match(WinningBalls winningBalls) {
-		return (int)autoLotto.stream()
+		return (int)lotto.stream()
 				.filter(winningBalls::match)
 				.count();
 	}
 
 	public boolean contains(LottoBall lottoBall) {
-		return autoLotto.contains(lottoBall);
+		return lotto.contains(lottoBall);
 	}
 
 	public List<LottoBall> getLotto() {
-		return autoLotto;
+		return lotto;
 	}
 }
