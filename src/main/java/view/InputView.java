@@ -16,7 +16,6 @@ public class InputView {
     private static final String MANUAL_TICKET_NUMBS_GROUP_MESSAGE = System.lineSeparator() + "수동으로 구매할 번호를 입력해 주세요.";
 
     private static final Pattern PATTERN = Pattern.compile("^[\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+$");
-    private static final Scanner SCANNER = new Scanner(System.in);
 
     public static int inputMoney() {
         System.out.println(MONEY_INPUT_MESSAGE);
@@ -49,14 +48,16 @@ public class InputView {
 
     private static int inputNum() {
         try {
-            return SCANNER.nextInt();
+            final Scanner scanner = new Scanner(System.in);
+            return scanner.nextInt();
         } catch (Exception e) {
             throw new NotNumException();
         }
     }
 
     private static List<Integer> inputLottoNums() {
-        final String lottoNumbers = SCANNER.nextLine();
+        final Scanner scanner = new Scanner(System.in);
+        final String lottoNumbers = scanner.nextLine();
         validateLottoNums(lottoNumbers);
         return Util.separateNumbers(lottoNumbers);
     }
