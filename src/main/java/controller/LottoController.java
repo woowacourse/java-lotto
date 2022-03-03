@@ -16,8 +16,6 @@ import view.InputView;
 import view.ResultView;
 
 public class LottoController {
-    private static final int NO_AUTO_QUANTITY = 0;
-
     public void start() {
         Wallet wallet = setupWallet();
         setupQuantity(wallet);
@@ -63,7 +61,7 @@ public class LottoController {
 
     private Lottos setupLottos(Wallet wallet) {
         Lottos manualLottos = setupManualLottos(wallet.getManualQuantity());
-        if (wallet.getAutoQuantity() == NO_AUTO_QUANTITY) {
+        if (wallet.hasNoAutoQuantity()) {
             return manualLottos;
         }
 
