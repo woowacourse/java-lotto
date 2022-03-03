@@ -2,9 +2,10 @@ package domain;
 
 import java.util.*;
 
+import static domain.RandomNumbersGenerator.LOTTO_LENGTH;
+
 public class Lotto {
     private static final String LOTTO_SIZE_MESSAGE = "[ERROR] 로또의 숫자는 중복 없이 6개여야 합니다.";
-    private static final int LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> numbers;
 
@@ -14,7 +15,7 @@ public class Lotto {
     }
 
     private void validateSize(Set<LottoNumber> lotto) {
-        if (lotto.size() != LOTTO_SIZE) {
+        if (lotto.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException(LOTTO_SIZE_MESSAGE);
         }
     }
