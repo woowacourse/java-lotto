@@ -3,7 +3,7 @@ package lotto.domain;
 import static lotto.domain.Lotto.MAX_BOUND;
 import static lotto.domain.Lotto.MIN_BOUND;
 
-import java.util.List;
+
 
 public class BonusNumber {
     private static final String ERROR_NOT_IN_RANGE = "[ERROR] 보너스 번호가 범위내에 없습니다.";

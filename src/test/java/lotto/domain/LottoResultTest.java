@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.domain.LottoRank.*;
 
+import java.util.Map;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -16,10 +17,11 @@ class LottoResultTest {
     @MethodSource
     @DisplayName("LottoResult 에 값이 추가가 되는가?")
     void Add_Rank_To_Result(LottoRank lottoRank, int value) {
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.add(FIRST);
-        lottoResult.add(FIRST);
-        lottoResult.add(SECOND);
+        Map<LottoRank, Integer> RankMap = initLottoRankMap();
+        RankMap.put(FIRST, 2);
+        RankMap.put(SECOND, 1);
+        LottoResult lottoResult = new LottoResult(RankMap);
+
         Assertions.assertThat(lottoResult.getResult().get(lottoRank)).isEqualTo(value);
     }
 
@@ -40,10 +42,12 @@ class LottoResultTest {
         int fifthPrizeAmount = FIFTH.getPrizeAmount();
         int totalAmount = thirdPrizeAmount + fourthPrizeAmount + fifthPrizeAmount;
 
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.add(THIRD);
-        lottoResult.add(FOURTH);
-        lottoResult.add(FIFTH);
+        Map<LottoRank, Integer> RankMap = initLottoRankMap();
+        RankMap.put(THIRD, 1);
+        RankMap.put(FOURTH, 1);
+        RankMap.put(FIFTH, 1);
+        LottoResult lottoResult = new LottoResult(RankMap);
+
         Assertions.assertThat(lottoResult.sumOfPrize()).isEqualTo(totalAmount);
     }
 }

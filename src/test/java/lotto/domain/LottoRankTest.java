@@ -25,7 +25,8 @@ class LottoRankTest {
                 Arguments.arguments(5, true, SECOND),
                 Arguments.arguments(5, false, THIRD),
                 Arguments.arguments(4, false, FOURTH),
-                Arguments.arguments(3, false, FIFTH)
+                Arguments.arguments(3, false, FIFTH),
+                Arguments.arguments(0, false, NOTHING)
         );
     }
 }
