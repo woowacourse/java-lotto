@@ -10,6 +10,7 @@ import lotto.view.ResultView;
 public class LottoController {
     public static void runGame() {
         Money money = new Money(InputView.insertMoney());
+        int numberOfManualLotto = InputView.insertNumberOfManualLotto();
         Lottos lottos = LottoGame.buyLottos(money);
         ResultView.printBuyingLotto(lottos.getLottos());
 
