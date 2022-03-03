@@ -43,4 +43,8 @@ public class LottoResult {
             .mapToLong(i -> i)
             .sum();
     }
+
+    Yield calculateYield(LottoMoney lottoMoney) {
+        return new Yield(lottoMoney, getTotalWinningMoney());
+    }
 }

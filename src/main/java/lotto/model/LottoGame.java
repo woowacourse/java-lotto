@@ -22,7 +22,7 @@ public class LottoGame {
     }
 
     public Yield calculateYield(LottoResult lottoResult) {
-        return new Yield(lottoMoney, lottoResult.getTotalWinningMoney());
+        return lottoResult.calculateYield(lottoMoney);
     }
 
     public List<Lotto> getLottos() {
