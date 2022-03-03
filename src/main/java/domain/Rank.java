@@ -41,17 +41,6 @@ public enum Rank {
                 .orElse(NO_MATCH);
     }
 
-    public static Rank of(int sameNumberCount) {
-        return Arrays.stream(Rank.values())
-                .filter(rank -> rank.isSameNumberCount(sameNumberCount))
-                .findAny()
-                .orElse(NO_MATCH);
-    }
-
-    public boolean isSameNumberCount(int count) {
-        return sameNumberCount == count;
-    }
-
     public long getPrize() {
         return prize;
     }

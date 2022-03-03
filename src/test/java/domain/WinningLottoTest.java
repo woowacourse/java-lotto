@@ -36,17 +36,4 @@ public class WinningLottoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(WinningLotto.ERROR_MESSAGE_FOR_DUPLICATE_BONUS_NUMBER);
     }
-
-    @Test
-    @DisplayName("Lotto 를 전달받아 Rank를 반환한다")
-    void getRankByLotto() {
-        // given
-        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
-
-        // when
-        Rank rank = winningLotto.getRankByLotto(lotto);
-
-        // then
-        assertThat(rank).isEqualTo(Rank.FIRST);
-    }
 }
