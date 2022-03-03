@@ -23,9 +23,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		this.number = number;
 	}
 
-	public static void makeLottoNumbers(List<LottoNumber> lottoNumbers) {
-		IntStream.range(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
-			.forEach(number -> lottoNumbers.add(new LottoNumber(number)));
+	public static List<LottoNumber> makeLottoNumbers() {
+		return IntStream.range(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
+			.mapToObj(number -> LottoNumber.valueOf(number))
+			.collect(Collectors.toList());
 	}
 
 	public static List<LottoNumber> cutByLottoSize(List<LottoNumber> shuffledNumbers) {

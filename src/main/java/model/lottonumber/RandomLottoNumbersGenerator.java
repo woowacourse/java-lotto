@@ -1,19 +1,18 @@
 package model.lottonumber;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class RandomLottoNumbersGenerator {
-	private static final List<model.lottonumber.LottoNumber> lottoNumbers = new ArrayList<>();
+	private static final List<model.lottonumber.LottoNumber> lottoNumbers;
 
 	static {
-		model.lottonumber.LottoNumber.makeLottoNumbers(lottoNumbers);
+		lottoNumbers = LottoNumber.makeLottoNumbers();
 	}
 
-	public static List<model.lottonumber.LottoNumber> pickLottoNumbers() {
-		List<model.lottonumber.LottoNumber> shuffledNumbers = shuffleLottoNumbers();
-		return model.lottonumber.LottoNumber.cutByLottoSize(shuffledNumbers);
+	public static List<LottoNumber> pickLottoNumbers() {
+		List<LottoNumber> shuffledNumbers = shuffleLottoNumbers();
+		return LottoNumber.cutByLottoSize(shuffledNumbers);
 	}
 
 	private static List<LottoNumber> shuffleLottoNumbers() {
