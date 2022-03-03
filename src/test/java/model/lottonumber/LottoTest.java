@@ -1,6 +1,7 @@
 package model.lottonumber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,11 +15,50 @@ class LottoTest {
 
     @Test
     @DisplayName("생성된 난수를 바탕으로 로또 번호를 생성한다.")
-    void generateLottoNumbers_Test() {
+    void generateLottoNumbers_GeneratorTest() {
         final Generator generator = () -> Arrays.asList(1, 2, 13, 4, 25, 39);
         final Lotto lotto = new Lotto(generator);
 
         assertThat(lotto.getLottoNumbers()).isEqualTo(Arrays.asList(1, 2, 13, 4, 25, 39));
+    }
+
+    @Test
+    @DisplayName("매개변수 List의 숫자를 바탕으로 로또 번호를 생성한다.")
+    void generateLottoNumbers_ListTest() {
+        final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        final Lotto lotto = new Lotto(numbers);
+
+        assertThat(lotto.getLottoNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
+
+    @Test
+    @DisplayName("입력된 숫자의 개수가 6보다 작으면 오류를 발생한다.")
+    void checkValidNumbers_UnderSize() {
+        final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 입력한 수동 로또 번호가 6개가 아닙니다.");
+    }
+
+    @Test
+    @DisplayName("입력된 숫자의 개수가 6보다 크면 오류를 발생한다.")
+    void checkValidNumbers_OverSize() {
+        final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 15);
+
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 입력한 수동 로또 번호가 6개가 아닙니다.");
+    }
+
+    @Test
+    @DisplayName("입력된 숫자에 중복이 있으면 오류를 발생한다..")
+    void checkValidNumbers_Duplicate() {
+        final List<Integer> numbers = Arrays.asList(1, 2, 15, 4, 5, 15);
+
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 입력한 수동 로또티켓 중 번호가 중복되는 티켓이 있습니다.");
     }
 
     @Test
