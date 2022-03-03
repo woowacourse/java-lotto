@@ -2,7 +2,6 @@ package lotto.service;
 
 import lotto.domain.*;
 import lotto.domain.generator.LottoGenerator;
-import lotto.domain.generator.LottoManualGenerator;
 import lotto.domain.vo.LottoNumber;
 
 import java.util.*;
@@ -11,10 +10,12 @@ public class LottoService {
     private static final int LOTTO_PRICE = 1000;
     private static final int INITIAL_MATCH_COUNT = 0;
 
-    private final LottoGenerator lottoGenerator;
+    private final LottoGenerator lottoRandomGenerator;
+    private final LottoGenerator lottoManualGenerator;
 
-    public LottoService(final LottoGenerator lottoRandomGenerator) {
-        this.lottoGenerator = lottoRandomGenerator;
+    public LottoService(final LottoGenerator lottoRandomGenerator, final LottoGenerator lottoManualGenerator) {
+        this.lottoRandomGenerator = lottoRandomGenerator;
+        this.lottoManualGenerator = lottoManualGenerator;
     }
 
     public int countOfLottoNumbers(final String amount) {
@@ -36,14 +37,13 @@ public class LottoService {
     }
 
     private List<LottoNumbers> generateManualLottoCounts(final List<List<String>> manualLottoNumbersGroup) {
-        final LottoGenerator lottoGenerator = new LottoManualGenerator();
         final int manualLottoCounts = manualLottoNumbersGroup.size();
-        return lottoGenerator.generateLottoNumbersGroup(manualLottoCounts, manualLottoNumbersGroup);
+        return lottoManualGenerator.generateLottoNumbersGroup(manualLottoCounts, manualLottoNumbersGroup);
     }
 
     private List<LottoNumbers> generateAutoLottoNumbers(final int allCounts, final int lottoManualNumbersCount) {
         final int autoLottoCounts = allCounts - lottoManualNumbersCount;
-        return lottoGenerator.generateLottoNumbersGroup(
+        return lottoRandomGenerator.generateLottoNumbersGroup(
                 autoLottoCounts, Collections.emptyList());
     }
 
