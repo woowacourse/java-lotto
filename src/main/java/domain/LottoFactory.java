@@ -21,4 +21,10 @@ public class LottoFactory {
 
         return new Lotto(lottoNumbers);
     }
+
+    public static List<Lotto> createLottos(List<List<Integer>> numberLists) {
+        return numberLists.stream()
+            .map(LottoFactory::createLotto)
+            .collect(Collectors.toList());
+    }
 }

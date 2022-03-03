@@ -17,7 +17,6 @@ public class Application {
 
     public static void main(String[] args) {
         final LottoGameMoney purchaseMoney = new LottoGameMoney(InputView.getPurchaseAmount());
-        final int manualLottoCount = InputView.getManualLottoCount();
         final LottoGame lottoGame = createLottoGame(purchaseMoney);
         OutputView.showPurchasedLottos(lottoGame.getLottos());
 
@@ -28,20 +27,34 @@ public class Application {
     }
 
     private static LottoGame createLottoGame(LottoGameMoney purchaseMoney) {
-        int lottoCount = purchaseMoney.purchasableLottoCount();
-        Lottos lottos = createLottos(lottoCount);
+        Lottos lottos = createLottos(purchaseMoney);
 
         return new LottoGame(purchaseMoney, lottos);
     }
 
-    private static Lottos createLottos(int lottoCount) {
+    private static Lottos createLottos(LottoGameMoney purchaseMoney) {
+        final int manualLottoCount = InputView.getManualLottoCount();
+        final List<Lotto> lottos = new ArrayList<>(createManualLottos(manualLottoCount));
+
+        final int autoLottoCount = purchaseMoney.purchasableLottoCount() - manualLottoCount;
+        lottos.addAll(createAutoLottos(autoLottoCount));
+
+        return new Lottos(lottos);
+    }
+
+    private static List<Lotto> createManualLottos(int lottoCount) {
+        List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(lottoCount);
+        return LottoFactory.createLottos(manualLottoNumbers);
+    }
+
+    private static List<Lotto> createAutoLottos(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             Lotto lotto = LottoFactory.createLotto(new RandomLottoNumbersGenerator());
             lottos.add(lotto);
         }
 
-        return new Lottos(lottos);
+        return lottos;
     }
 
     private static WinningLotto createWinningLotto() {
