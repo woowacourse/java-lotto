@@ -7,7 +7,7 @@ import util.NumberFormatStringParser;
 public class Budget {
     private static final BigDecimal PRICE_AMOUNT_PER_LOTTO = BigDecimal.valueOf(1000);
 
-    private final BigDecimal amount;
+    private BigDecimal amount;
 
     public Budget(int amount) {
         this(BigDecimal.valueOf(amount));
@@ -41,6 +41,17 @@ public class Budget {
 
     public int getAffordableLottoCount() {
         return amount.divide(PRICE_AMOUNT_PER_LOTTO).intValue();
+    }
+
+    public void payLottos(int demandCount) {
+        if (getAffordableLottoCount() < demandCount) {
+            throw new IllegalArgumentException("입금액이 부족합니다.");
+        }
+        amount = amount.subtract(getTatalPrice(demandCount));
+    }
+
+    private BigDecimal getTatalPrice(int demandCount) {
+        return PRICE_AMOUNT_PER_LOTTO.multiply(BigDecimal.valueOf(demandCount));
     }
 
     @Override

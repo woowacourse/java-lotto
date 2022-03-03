@@ -1,6 +1,5 @@
 package controller;
 
-import static view.InputView.inputWithMessage;
 import static view.OutputView.printIssuedLottoNumbers;
 import static view.OutputView.printResult;
 
@@ -20,8 +19,8 @@ public class LottoController {
 
     public void run() {
         Budget inputBudget = InputView.getUntilValid(() -> Budget.parse(InputView.inputMoney()));
-        LottoMachine lottoMachine = new LottoMachine(new RandomLottoGenerator());
-        List<Lotto> issuedLottos = lottoMachine.issueLotto(inputBudget);
+        LottoMachine lottoMachine = new LottoMachine(inputBudget, new RandomLottoGenerator());
+        List<Lotto> issuedLottos = lottoMachine.issueAutoLottos();
         printIssuedLottoNumbers(getNumbersOf(issuedLottos));
 
         WinningLottoNumbers winningLottoNumbers = InputView.getUntilValid(() -> getWinningLottoNumbers());
