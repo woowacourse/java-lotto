@@ -8,26 +8,25 @@ import java.util.Set;
 import lotto.model.lotto.Lotto;
 import lotto.model.message.BonusBallExceptionMessage;
 import lotto.model.message.LottoNumberExceptionMessage;
-import lotto.utils.ConverterUtils;
 import lotto.utils.InputValidateUtils;
 
 public class WinningLotto {
     private final Lotto winningNumbers;
     private final int bonusBall;
 
-    public WinningLotto(List<String> numbers, String bonusBall) {
+    public WinningLotto(List<Integer> numbers, int bonusBall) {
         this.winningNumbers = new Lotto(numbers);
         validateBonusBall(bonusBall);
-        this.bonusBall = ConverterUtils.convertStringToInt(bonusBall);
+        this.bonusBall = bonusBall;
     }
 
-    private void validateBonusBall(String bonusBall) {
+    private void validateBonusBall(int bonusBall) {
         InputValidateUtils.inputOutOfRange(bonusBall, BonusBallExceptionMessage.RANGE_ERROR.getMessage());
         validateReduplicationWithBonusBall(bonusBall);
     }
 
-    public void validateReduplicationWithBonusBall(String number) {
-        if (winningNumbers.getNumbers().contains(ConverterUtils.convertStringToInt(number))) {
+    public void validateReduplicationWithBonusBall(int number) {
+        if (winningNumbers.getNumbers().contains(number)) {
             throw new IllegalArgumentException(LottoNumberExceptionMessage.REDUPLICATION_BONUS_BALL_ERROR.getMassage());
         }
     }

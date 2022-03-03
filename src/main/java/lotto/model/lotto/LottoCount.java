@@ -2,8 +2,6 @@ package lotto.model.lotto;
 
 import java.util.Objects;
 
-import lotto.utils.ConverterUtils;
-
 public class LottoCount {
     private static final int END = 0;
     private static final int UNIT = 1000;

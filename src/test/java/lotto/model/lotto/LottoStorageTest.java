@@ -16,8 +16,9 @@ class LottoStorageTest {
     @DisplayName("로또 생성 개수 검증")
     void compareLottoWithWinningNumber(long money) {
         List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(List.of("1", "2", "3", "4", "5", "6")));
+        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
         LottoStorage lottoStorage = new LottoStorage(new LottoCount(money, 0), lottos);
+
         assertThat(lottoStorage.getLottoStorage().size()).isEqualTo((money / 1000 + 1));
     }
 }

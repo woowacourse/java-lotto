@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.utils.ConverterUtils;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -33,20 +35,21 @@ public class InputView {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE);
     }
 
-    public static List<String> inputManualLottos() {
+    public static List<Integer> inputManualLottos() {
         return inputLottoNumbers();
     }
 
-    public static List<String> inputWinningLotto() {
+    public static List<Integer> inputWinningLotto() {
         System.out.println();
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         return inputLottoNumbers();
     }
 
-    public static List<String> inputLottoNumbers() {
+    public static List<Integer> inputLottoNumbers() {
         return Arrays.stream(SCANNER.nextLine()
                 .split(DELIMITER))
                 .map(String::trim)
+                .map(ConverterUtils::convertStringToInt)
                 .collect(Collectors.toList());
     }
 

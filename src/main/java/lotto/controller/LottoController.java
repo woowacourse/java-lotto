@@ -66,7 +66,8 @@ public class LottoController {
 
     private WinningLotto receiveWinningLotto() {
         try {
-            return new WinningLotto(InputView.inputWinningLotto(), InputView.inputBonusBall());
+            return new WinningLotto(InputView.inputWinningLotto(),
+                    ConverterUtils.convertStringToInt(InputView.inputBonusBall()));
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return receiveWinningLotto();

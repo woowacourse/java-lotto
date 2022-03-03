@@ -15,7 +15,7 @@ import lotto.model.winningnumber.WinningLottoResponse;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoGameTest {
-    private final List<String> numbers = List.of("1", "2", "3", "4", "5", "6");
+    private final List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
 
     @Test
     @DisplayName("수동 로또 개수가 없는 경우")
@@ -63,8 +63,7 @@ class LottoGameTest {
         LottoStorage lottoStorage = new LottoStorage(new LottoCount(1000, 0), lottos);
         LottoGame lottoGame = new LottoGame();
         WinningLottoResponse winningLottoResponse =
-                new WinningLottoResponse(new WinningLotto(numbers, "7"));
-
+                new WinningLottoResponse(new WinningLotto(numbers, 7));
         assertThat(lottoGame.calcWinningNumber(lottoStorage, winningLottoResponse)
                 .getWinningCount()
                 .get(Rank.SIX))

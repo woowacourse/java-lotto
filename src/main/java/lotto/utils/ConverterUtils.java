@@ -1,6 +1,6 @@
 package lotto.utils;
 
-import lotto.model.message.LottoCountExceptionMessage;
+import lotto.model.message.InputConverterExceptionMessage;
 
 public class ConverterUtils {
 
@@ -8,8 +8,8 @@ public class ConverterUtils {
     }
 
     public static int convertStringToInt(String number) {
-        InputValidateUtils.inputBlank(number, LottoCountExceptionMessage.BLANK_ERROR.getMassage());
-        InputValidateUtils.inputNumber(number, LottoCountExceptionMessage.NUMBER_ERROR.getMassage());
+        InputValidateUtils.inputBlank(number, InputConverterExceptionMessage.BLANK_ERROR.getMessage());
+        InputValidateUtils.inputNumber(number, InputConverterExceptionMessage.NUMBER_ERROR.getMessage());
         return Integer.parseInt(number);
     }
 }

@@ -1,5 +1,6 @@
 package lotto.model.result;
 
+import lotto.model.message.InputConverterExceptionMessage;
 import lotto.utils.ConverterUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +20,7 @@ class MoneyTest {
     void validateLottoNumber(String number) {
         assertThatThrownBy(() -> new Money(ConverterUtils.convertStringToInt(number)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoCountExceptionMessage.BLANK_ERROR.getMassage());
+                                .hasMessageContaining(InputConverterExceptionMessage.BLANK_ERROR.getMessage());
     }
 
     @ParameterizedTest
@@ -28,7 +29,7 @@ class MoneyTest {
     void validateInputMoneyIsNumber(String number) {
         assertThatThrownBy(() -> new Money(ConverterUtils.convertStringToInt(number)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoCountExceptionMessage.NUMBER_ERROR.getMassage());
+                .hasMessageContaining(InputConverterExceptionMessage.NUMBER_ERROR.getMessage());
     }
 
     @ParameterizedTest
