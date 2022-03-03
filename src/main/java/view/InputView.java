@@ -20,6 +20,12 @@ public class InputView {
         return IntegerParser.parseInteger(money);
     }
 
+    public int inputManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        String manualLottoCount = scanner.nextLine();
+        return IntegerParser.parseInteger(manualLottoCount);
+    }
+
     public List<Integer> inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         List<String> numbers = List.of((scanner.nextLine()).split(SEPARATOR));
