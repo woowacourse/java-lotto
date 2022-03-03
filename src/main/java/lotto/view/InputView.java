@@ -27,7 +27,7 @@ public class InputView {
         return InputConvertor.toInt(scanner.nextLine());
     }
 
-    public static List<List<Integer>> InputManualLottos(int manualLottoCount) {
+    public static List<List<Integer>> inputManualLottos(int manualLottoCount) {
         if (manualLottoCount != 0) {
             OutputView.printNewLine();
             System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);

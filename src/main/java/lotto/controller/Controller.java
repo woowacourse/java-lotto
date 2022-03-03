@@ -41,7 +41,7 @@ public class Controller {
 
     private Lottos getLottos(LottoCounter lottoCounter) {
         try {
-            return new Lottos(InputView.InputManualLottos(lottoCounter.getManualLottoCount()),
+            return new Lottos(InputView.inputManualLottos(lottoCounter.getManualLottoCount()),
                     lottoCounter.getAutoLottoCount());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());

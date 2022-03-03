@@ -9,11 +9,11 @@ public class Money {
     private final int money;
 
     public Money(int input) {
-        validateUnit(input);
+        checkUnit(input);
         this.money = input;
     }
 
-    private static void validateUnit(int input) {
+    private static void checkUnit(int input) {
         if (!isCorrectUnit(input)) {
             throw new MoneyException(MoneyException.MONEY_UNIT_ERROR_MESSAGE);
         }
