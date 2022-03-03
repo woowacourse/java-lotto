@@ -30,7 +30,7 @@ public class Application {
         int lottoCount = purchaseMoney.purchasableLottoCount();
         Lottos lottos = createLottos(lottoCount);
 
-        return new LottoGame(lottos);
+        return new LottoGame(purchaseMoney, lottos);
     }
 
     private static Lottos createLottos(int lottoCount) {

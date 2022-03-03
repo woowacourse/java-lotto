@@ -18,7 +18,8 @@ class WinningStatisticsTest {
     @ParameterizedTest
     @MethodSource("rewardParameterProvider")
     @DisplayName("당첨된 로또들의 통계를 생성하는 기능")
-    void createStatistics_02(LottoReward reward, int rewardCount) {
+    void createStatistics(LottoReward reward, int rewardCount) {
+        LottoGameMoney purchaseMoney = new LottoGameMoney(5000);
         List<LottoReward> lottoRewards = new ArrayList<>();
         lottoRewards.add(LottoReward.FIRST);
         lottoRewards.add(LottoReward.FIRST);
@@ -26,7 +27,7 @@ class WinningStatisticsTest {
         lottoRewards.add(LottoReward.SECOND);
         lottoRewards.add(LottoReward.FIFTH);
 
-        WinningStatistics winningStatistics = new WinningStatistics(lottoRewards);
+        WinningStatistics winningStatistics = new WinningStatistics(purchaseMoney, lottoRewards);
         Map<LottoReward, Integer> statistics = winningStatistics.getWinningStatistics();
 
         assertThat(statistics.get(reward)).isEqualTo(rewardCount);
@@ -41,17 +42,33 @@ class WinningStatisticsTest {
     }
 
     @Test
-    @DisplayName("WinningStatistics 객체를 null 로 생성하려는 경우")
-    void createWinningStatisticsWithNull() {
+    @DisplayName("WinningStatistics 객체 생성 시 로또 구매 금액 값을 null 로 생성하려는 경우")
+    void createWinningStatisticsWithNullMoney() {
+        List<LottoReward> lottoRewards = new ArrayList<>();
+        lottoRewards.add(LottoReward.FIRST);
+        lottoRewards.add(LottoReward.SECOND);
+        lottoRewards.add(LottoReward.FIFTH);
+
         assertThatThrownBy(() ->
-            new WinningStatistics(null))
+            new WinningStatistics(null, lottoRewards))
+            .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    @DisplayName("WinningStatistics 객체 생성 시 로또 리워드 값을 null 로 생성하려는 경우")
+    void createWinningStatisticsWithNullReward() {
+        LottoGameMoney purchaseMoney = new LottoGameMoney(5000);
+
+        assertThatThrownBy(() ->
+            new WinningStatistics(purchaseMoney, null))
             .isInstanceOf(NullPointerException.class);
     }
 
     @Test
     @DisplayName("당첨된 각 로또들의 초기 값 검증")
     void checkInitStatistics() {
-        WinningStatistics winningStatistics = new WinningStatistics(new ArrayList<>());
+        LottoGameMoney purchaseMoney = new LottoGameMoney(5000);
+        WinningStatistics winningStatistics = new WinningStatistics(purchaseMoney, new ArrayList<>());
 
         Map<LottoReward, Integer> statistics = winningStatistics.getWinningStatistics();
 
@@ -61,12 +78,12 @@ class WinningStatisticsTest {
     @Test
     @DisplayName("당첨 통계의 수익률 계산 기능")
     void calculateProfitRate() {
-        final int purchaseLottoAmount = 3000;
+        LottoGameMoney purchaseMoney = new LottoGameMoney(3000);
         List<LottoReward> lottoRewards = List.of(LottoReward.FIFTH, LottoReward.NONE, LottoReward.NONE);
-        WinningStatistics winningStatistics = new WinningStatistics(lottoRewards);
+        WinningStatistics winningStatistics = new WinningStatistics(purchaseMoney, lottoRewards);
 
         double profitRate = winningStatistics.calculateProfitRate();
-        double expectedAnswer = (double)LottoReward.FIFTH.getPrice() / purchaseLottoAmount;
+        double expectedAnswer = (double)LottoReward.FIFTH.getPrice() / purchaseMoney.getAmount();
 
         assertThat(profitRate).isEqualTo(expectedAnswer);
     }

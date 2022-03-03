@@ -14,10 +14,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoGameTest {
 
+    private LottoGameMoney purchaseMoney;
     private Lottos lottos;
 
     @BeforeEach
     void initLottos() {
+        purchaseMoney = new LottoGameMoney(8000);
+
         Lotto lotto1 = LottoFactory.createLotto(List.of(1, 2, 3, 4, 17, 16));
         Lotto lotto2 = LottoFactory.createLotto(List.of(1, 2, 3, 4, 17, 9));
         Lotto lotto3 = LottoFactory.createLotto(List.of(1, 2, 3, 4, 17, 8));
@@ -31,26 +34,34 @@ public class LottoGameTest {
     }
 
     @Test
-    @DisplayName("LottoGame 객체를 null 로 생성하려는 경우")
-    void createLottoGameWithNull() {
+    @DisplayName("LottoGame 을 정상적으로 생성하는 경우")
+    void createLottoGame() {
+        LottoGame lottoGame = new LottoGame(purchaseMoney, lottos);
+
+        assertThat(lottoGame).isNotNull();
+    }
+
+    @Test
+    @DisplayName("LottoGame 생성시 구매금액을 null 로 생성하려는 경우")
+    void createLottoGameWithNullMoney() {
         assertThatThrownBy(() ->
-            new LottoGame(null))
+            new LottoGame(null, lottos))
             .isInstanceOf(NullPointerException.class);
     }
 
     @Test
-    @DisplayName("로또 게임을 생성하는 경우")
-    void createLottoGame() {
-        LottoGame lottoGame = new LottoGame(lottos);
-
-        assertThat(lottoGame).isNotNull();
+    @DisplayName("LottoGame 생성시 로또들을 null 로 생성하려는 경우")
+    void createLottoGameWithNullLottos() {
+        assertThatThrownBy(() ->
+            new LottoGame(purchaseMoney, null))
+            .isInstanceOf(NullPointerException.class);
     }
 
     @ParameterizedTest
     @MethodSource("parameterProvider")
     @DisplayName("로또 게임 결과 통계를 계산하는 경우")
     void calculateWinningStatistics(LottoReward reward, int rewardCount) {
-        LottoGame lottoGame = new LottoGame(lottos);
+        LottoGame lottoGame = new LottoGame(purchaseMoney, lottos);
         Lotto lotto = LottoFactory.createLotto(List.of(1, 2, 3, 4, 17, 16));
         LottoNumber bonusLottoNumber = LottoNumber.valueOf(9);
         WinningLotto winningLotto = new WinningLotto(lotto, bonusLottoNumber);

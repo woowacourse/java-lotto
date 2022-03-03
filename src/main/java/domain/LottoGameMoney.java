@@ -26,4 +26,8 @@ public class LottoGameMoney {
     public int purchasableLottoCount() {
         return amount / LottoConstant.LOTTO_PRICE;
     }
+
+    public int getAmount() {
+        return amount;
+    }
 }
