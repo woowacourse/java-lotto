@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
-import domain.lotto.LottoNumber;
 import domain.lotto.WinNumbers;
 import java.util.Arrays;
 import java.util.List;

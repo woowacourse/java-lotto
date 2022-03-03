@@ -3,12 +3,10 @@ package controller;
 import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
 import domain.lotto.LottoMoney;
-import domain.lotto.LottoNumber;
 import domain.lotto.LottoTicketCount;
 import domain.lotto.WinNumbers;
 import domain.result.Result;
 import java.util.List;
-import utils.NumsGenerator;
 import utils.Util;
 import view.InputView;
 import view.OutputView;
@@ -49,7 +47,6 @@ public class MainController {
     }
 
     private WinNumbers makeWinNums() {
-        LottoNumber bonus = LottoNumber.getInstance(InputView.inputBonusNumber());
         return LottoFactory.createWinNums(InputView.inputWinLottoNums(), InputView.inputBonusNumber());
     }
 

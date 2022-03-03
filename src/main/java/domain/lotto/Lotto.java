@@ -1,16 +1,14 @@
 package domain.lotto;
 
+import exception.lotto.LottoNumDuplicatedException;
+import exception.lotto.LottoNumWrongSizeException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private static final String LOTTO_NUMS_DUPLICATED_ERROR_MESSAGE = "로또 번호는 중복될 수 없습니다.";
     private static final int LOTTO_NUMS_SIZE = 6;
-    private static final String LOTTO_NUMS_SIZE_ERROR_MESSAGE = String.format("로또 번호는 %d개로 이루어져야 합니다.",
-            LOTTO_NUMS_SIZE);
-
     private final List<LottoNumber> lotto;
 
     private Lotto(List<LottoNumber> balls) {
@@ -26,10 +24,10 @@ public class Lotto {
     private static void validate(List<LottoNumber> lottoNumbers) {
         HashSet<LottoNumber> compareNums = new HashSet<>(lottoNumbers);
         if (compareNums.size() != lottoNumbers.size()) {
-            throw new IllegalArgumentException(LOTTO_NUMS_DUPLICATED_ERROR_MESSAGE);
+            throw new LottoNumDuplicatedException();
         }
         if (lottoNumbers.size() != LOTTO_NUMS_SIZE) {
-            throw new IllegalArgumentException(LOTTO_NUMS_SIZE_ERROR_MESSAGE);
+            throw new LottoNumWrongSizeException();
         }
     }
 
@@ -70,4 +68,4 @@ public class Lotto {
                 "lotto=" + lotto +
                 '}';
     }
-}/**/
+}
