@@ -139,4 +139,12 @@
 - [ ] Collections.EMPTY_LIST, Collections.emptyList()의 사용을 지양해야하는 이유는 무엇일까?
 - [ ] 변수명으로 유추하려면 할 수 있는 상황이라도 메서드를 통해 추상화하면 더 읽기 좋은 코드가 될 수 있지 않을까?
 - [ ] 공백 라인도 중요한 의미를 가지게 되는데 문맥에 맞게 공백라인을 사용해보면 좋을 것 같다.
-- [ ] LottoPrize에서 2등을 Early return을 하는데 filter로 다시 검사해야할까?
+- [x] LottoPrize에서 2등을 Early return을 하는데 filter로 다시 검사해야할까?
+    - early return로 2등인 경우를 판별하지만 stream식에서 `values()`로 검사를 하다보니 2등인 경우에 다시 filter에 걸리게 된다.
+    - `.filter(prize -> prize.lottoNumberMatchCount == lottoNumberMatchCount)`로 2등과 3등이 모두 true가 나오기 때문이다.
+    - 그 상태로 `findFirst()`를 하게되면 Enum의 순서가 3등, 2등 순으로 되어있으면 첫번째는 3등을 반환하지만 Enum의 순서가 바뀌면 2등이 출력되게 된다.
+    - 결국 첫번째 filter에서 2등과 3등을 제대로 구분하지 못하기 때문에 발생한 문제이다. 이 문제를 해결하기 위해 세 가지 방법을 생각해봤다.
+        - LottoPrize.values()에서 2등을 빼고 stream()식을 실행한다.
+        - 절대 enum의 순서를 바꾸지 않는다.
+        - early return으로 확인하는 2등은 stream()에서 무조건 걸러낸다.
+    - 3번째 방법이 가장 이해하기 쉽고 이후에 발생할 Enum에 수정이 발생해도 문제가 발생할 가능성이 적다고 생각했다.
