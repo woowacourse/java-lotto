@@ -28,8 +28,10 @@ public class InputView {
     }
 
     public static List<List<Integer>> InputManualLottos(int manualLottoCount) {
-        OutputView.printNewLine();
-        System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
+        if (manualLottoCount != 0) {
+            OutputView.printNewLine();
+            System.out.println(INPUT_MANUAL_LOTTO_MESSAGE);
+        }
         return IntStream.range(0, manualLottoCount)
                 .mapToObj(i -> InputConvertor.toInt(
                         InputConvertor.splitInput(scanner.nextLine(), INPUT_NUMBERS_DELIMITER)))
