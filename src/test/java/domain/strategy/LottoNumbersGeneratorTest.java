@@ -53,4 +53,14 @@ class LottoNumbersGeneratorTest {
 
         Assertions.assertThat(flatNumbers).isSorted();
     }
+
+    @Test
+    @DisplayName("생성할 로또 수가 입력 값과 일치하지 않을 경우 에러")
+    void manualLottoCountMismatchException() {
+        List<List<Integer>> numbers = List.of(List.of(1,2,3,4,5,6), List.of(1,2,3,4,5,6));
+        PurchaseCount purchaseCount = new PurchaseCount(new Money(4000), 1);
+        assertThatThrownBy(() -> new ManualLottoNumberStrategy(numbers).generate(purchaseCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("입력 값이 구매하려는 로또의 수와 일치하지 않습니다");
+    }
 }
