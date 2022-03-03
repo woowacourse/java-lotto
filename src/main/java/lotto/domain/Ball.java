@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Ball {
+public class Ball implements Comparable<Ball> {
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
     private static final String ERROR_LOTTO_NUMBER = "로또 숫자가 아닙니다";
@@ -21,6 +21,7 @@ public class Ball {
                 .collect(Collectors.toList()));
     }
 
+    // TODO: 정적 팩토리 메소드 사용하여 cacheBalls 에서 꺼내 쓰기, 없으면 생성
     public Ball(final int number) {
         validateLottoNumber(number);
         this.number = number;
@@ -55,5 +56,10 @@ public class Ball {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(Ball otherBall) {
+        return Integer.compare(this.number, otherBall.number);
     }
 }

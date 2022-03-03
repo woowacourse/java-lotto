@@ -1,7 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -10,14 +11,14 @@ public class Lotto {
     private static final String ERROR_BALL_COUNT = BALL_COUNT + "개의 숫자를 입력해주세요";
     private static final String ERROR_DUPLICATED_NUMBER = "번호가 중복됩니다!";
 
-    private final List<Ball> lotto = new ArrayList<>();
+    private final Set<Ball> lotto = new TreeSet<>();
 
     public Lotto(final List<Ball> lotto) {
         validateLotto(lotto);
         this.lotto.addAll(lotto);
     }
 
-    public List<Ball> getLottoBalls() {
+    public Set<Ball> getLottoBalls() {
         return lotto;
     }
 

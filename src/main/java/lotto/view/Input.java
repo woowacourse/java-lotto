@@ -1,9 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Ball;
-import lotto.domain.LottoCount;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
