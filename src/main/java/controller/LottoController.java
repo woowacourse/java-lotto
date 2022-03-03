@@ -13,6 +13,7 @@ import model.LottoPurchasingMoney;
 import model.WinningLotto;
 import model.WinningStatistics;
 import model.dto.LottoDto;
+import model.dto.LottoNumberRequestDto;
 import model.dto.WinningStatisticsDto;
 import view.InputView;
 import view.OutputView;
@@ -65,25 +66,25 @@ public class LottoController {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private List<List<Integer>> inputManualLottoNumbers(LottoOrder lottoOrder) {
+    private List<Lotto> purchaseManualLotteries(LottoOrder lottoOrder) {
+        LottoFactory lottoFactory = LottoFactory.getInstance();
+        try {
+            List<LottoNumberRequestDto> manualLottoNumbers = inputManualLottoNumbers(lottoOrder);
+            return manualLottoNumbers.stream()
+                    .map(numbers -> lottoFactory.generateManual(numbers.getNumbers()))
+                    .collect(Collectors.toUnmodifiableList());
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return purchaseManualLotteries(lottoOrder);
+        }
+    }
+
+    private List<LottoNumberRequestDto> inputManualLottoNumbers(LottoOrder lottoOrder) {
         try {
             return InputView.inputManualLottoNumbers(lottoOrder.getManualLottoCount());
         } catch (IOException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputManualLottoNumbers(lottoOrder);
-        }
-    }
-
-    private List<Lotto> purchaseManualLotteries(LottoOrder lottoOrder) {
-        LottoFactory lottoFactory = LottoFactory.getInstance();
-        try {
-            List<List<Integer>> manualLottoNumbers = inputManualLottoNumbers(lottoOrder);
-            return manualLottoNumbers.stream()
-                    .map(lottoFactory::generateManual)
-                    .collect(Collectors.toUnmodifiableList());
-        } catch (IllegalArgumentException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return purchaseManualLotteries(lottoOrder);
         }
     }
 
