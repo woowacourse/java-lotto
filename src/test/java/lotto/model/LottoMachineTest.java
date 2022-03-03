@@ -80,7 +80,7 @@ public class LottoMachineTest {
     @DisplayName("1,2,4등 개수 테스트")
     @ParameterizedTest
     @EnumSource(value = Rank.class, names = {"FIRST", "SECOND", "FOURTH"})
-    void firstCalculateResultTest(Rank rank) {
+    void calculateResultTest(Rank rank) {
         calculateLottoMachine();
         assertThat(lottoMachine.getEachRankCount(rank)).isEqualTo(1);
     }

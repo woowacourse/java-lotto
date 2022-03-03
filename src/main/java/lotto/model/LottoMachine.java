@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.Map;
 import lotto.model.generator.LottoGenerator;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
@@ -12,8 +11,7 @@ public class LottoMachine {
 
     private final Money money;
     private final Lottos lottos;
-
-    private Map<Rank, Integer> rankCount;
+    private RankCount score;
 
     public LottoMachine(final LottoGenerator lottoGenerator, final Money money, final LottoCount lottoCount,
                         final Lottos manualLottos) {
@@ -36,8 +34,8 @@ public class LottoMachine {
         return Lottos.combineLottos(manualLottos, autoLottos);
     }
 
-    public void calculateResult(WinningLotto winningLotto) {
-        this.rankCount = winningLotto.checkRank(lottos);
+    public void calculateResult(final WinningLotto winningLotto) {
+        this.score = new RankCount(winningLotto.checkRank(lottos));
     }
 
     public Lottos getLottos() {
@@ -45,14 +43,10 @@ public class LottoMachine {
     }
 
     public double getRevenue() {
-        long sum = 0;
-        for (Rank rank : Rank.values()) {
-            sum += (long) rank.getPrice() * getEachRankCount(rank);
-        }
-        return ((double) sum / money.getMoney());
+        return ((double) score.addTotalScore() / money.getMoney());
     }
 
-    public Integer getEachRankCount(final Rank rank) {
-        return rankCount.get(rank);
+    public Integer getEachRankCount(Rank rank) {
+        return score.getEachRankCount(rank);
     }
 }
