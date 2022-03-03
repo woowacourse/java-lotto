@@ -39,8 +39,8 @@ public class LottoController {
 
     private void printLottoPurchaseProcess() {
         int purchaseMoney = inputView.inputMoney();
-        int manualLottoCount = inputView.inputManualLottoCount();
-        ManualLottoCount manualLottoCount1 = new ManualLottoCount(manualLottoCount);
+        int purchasedManualLottoCount = inputView.inputManualLottoCount();
+        ManualLottoCount manualLottoCount = new ManualLottoCount(purchasedManualLottoCount, purchaseMoney);
 
     }
 
