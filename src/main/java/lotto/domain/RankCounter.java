@@ -14,15 +14,15 @@ public class RankCounter {
         calculateRank(lottos, winningNumbers);
     }
 
+    private void initRankCount() {
+        Arrays.stream(Rank.values())
+                .forEach(rank -> rankCount.put(rank, 0));
+    }
+
     private void calculateRank(Lottos lottos, WinningNumbers winningNumbers) {
         lottos.getLottos().stream()
                 .map(lotto -> lotto.getRank(winningNumbers))
                 .forEach(this::increaseCount);
-    }
-
-    private void initRankCount() {
-        Arrays.stream(Rank.values())
-                .forEach(rank -> rankCount.put(rank, 0));
     }
 
     private void increaseCount(Rank rank) {
