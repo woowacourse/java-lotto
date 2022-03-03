@@ -26,7 +26,7 @@ public class LottoMoney {
 
     public static LottoMoney createLottoMoneyByCount(int count) {
         validateCountPositive(count);
-        validateLottoOverRange(MINIMUM_LOTTO_MONEY * count);
+        validateLottoOverRange((long) MINIMUM_LOTTO_MONEY * count);
         return new LottoMoney(MINIMUM_LOTTO_MONEY * count);
     }
 
@@ -57,6 +57,12 @@ public class LottoMoney {
 
     public LottoMoney minus(LottoMoney money) {
         return new LottoMoney(this.value - money.value);
+    }
+
+    public void validateCanBuyLotto(int lottoCount) {
+        if (this.value < LottoMoney.createLottoMoneyByCount(lottoCount).getValue()) {
+            throw new IllegalArgumentException("로또를 구매할 돈이 부족하다.");
+        }
     }
 
     public boolean isGreaterThan(LottoMoney money) {

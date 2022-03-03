@@ -31,18 +31,6 @@ public class StoreTest {
         assertThat(store.buyLottos(Collections.emptyList())).hasSize(1);
     }
 
-    @Test
-    @DisplayName("입력한 금액 보다 구매할 로또 개수의 가격이 더 큰경우 예외를 발생한다.")
-    void throwExceptionWhenNotEnoughMoney() {
-        Store store = new Store(tenThousandMoney);
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> store.buyLottos(List.of(
-                        new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)),
-                        new Lotto(givenNumbers(1, 2, 3, 4, 5, 7)),
-                        new Lotto(givenNumbers(1, 2, 3, 4, 5, 8))
-                )))
-                .withMessageMatching("로또를 구매할 돈이 부족하다.");
-    }
 
     private static List<LottoNumber> givenNumbers(int... numbers) {
         return Arrays.stream(numbers)

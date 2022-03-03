@@ -14,16 +14,9 @@ public class Store {
     }
 
     public List<Lotto> buyLottos(List<Lotto> manualLottos) {
-        validateEnoughMoney(manualLottos.size());
         List<Lotto> lottos = buyManualLottos(manualLottos);
         lottos.addAll(buyAutomaticLottos());
         return lottos;
-    }
-
-    public void validateEnoughMoney(int manualLottoCount) {
-        if (LottoMoney.createLottoMoneyByCount(manualLottoCount).isGreaterThan(leftMoney)) {
-            throw new IllegalArgumentException("로또를 구매할 돈이 부족하다.");
-        }
     }
 
     private List<Lotto> buyManualLottos(List<Lotto> manualLottos) {

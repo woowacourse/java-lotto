@@ -27,8 +27,8 @@ public class LottoController {
     }
 
     private Lottos buyLottos(LottoMoney totalMoney, int manualLottoCount) {
+        totalMoney.validateCanBuyLotto(manualLottoCount);
         Store store = new Store(totalMoney);
-        store.validateEnoughMoney(manualLottoCount);
         return new Lottos(store.buyLottos(InputView.inputManualLottos(manualLottoCount)));
     }
 

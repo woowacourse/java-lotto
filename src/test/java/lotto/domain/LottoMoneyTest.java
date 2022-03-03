@@ -8,6 +8,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+
 public class LottoMoneyTest {
 
     @Test
@@ -60,5 +62,14 @@ public class LottoMoneyTest {
         LottoMoney money2 = LottoMoney.createLottoMoney(1_000);
 
         assertThat(money1.isGreaterThan(money2)).isEqualTo(result);
+    }
+
+    @Test
+    @DisplayName("입력한 금액 보다 구매할 로또 개수의 가격이 더 큰경우 예외를 발생한다.")
+    void throwExceptionWhenNotEnoughMoney() {
+        LottoMoney money = LottoMoney.createLottoMoney(1_000);
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> money.validateCanBuyLotto(2))
+                .withMessageMatching("로또를 구매할 돈이 부족하다.");
     }
 }
