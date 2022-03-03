@@ -25,6 +25,7 @@ public class LottoFactory {
     public static Lotto createLotto(List<Integer> lottoNumbers) {
         return new Lotto(lottoNumbers.stream()
             .map(LottoNumber::valueOf)
+            .sorted()
             .collect(Collectors.toList()));
     }
 
@@ -37,7 +38,6 @@ public class LottoFactory {
     private static List<Lotto> createAutomaticLottos(int automaticCount, LottoGeneratorStrategy lottoGeneratorStrategy) {
         return IntStream.range(0, automaticCount)
             .mapToObj(count -> lottoGeneratorStrategy.generate())
-            .map(lottoNumbers -> new Lotto(lottoNumbers))
             .collect(Collectors.toList());
     }
 }

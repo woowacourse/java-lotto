@@ -2,6 +2,7 @@ package domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,14 +35,19 @@ class LottoFactoryTest {
     }
 
     @Test
-    @DisplayName("수동 로또와 랜덤 로또들을 생성하는 기")
+    @DisplayName("수동 로또와 랜덤 로또들을 생성하는 기능")
     void createLottos() {
         List<List<Integer>> lottoNumbers = List.of(
             List.of(1, 2, 3, 4, 5, 6), List.of(2, 3, 4, 5, 6, 7), List.of(3, 4, 5, 6, 7, 8));
         LottoPurchaseCount purchaseCount = new LottoPurchaseCount(3, 1);
-        LottoGeneratorStrategy lottoGeneratorStrategy = () -> List.of(4, 5, 6, 7, 8, 9).stream()
-            .map(LottoNumber::valueOf)
-            .collect(Collectors.toList());
+        LottoGeneratorStrategy lottoGeneratorStrategy = () -> {
+            List<LottoNumber> list = new ArrayList<>();
+            for (Integer integer : List.of(4, 5, 6, 7, 8, 9)) {
+                LottoNumber lottoNumber = LottoNumber.valueOf(integer);
+                list.add(lottoNumber);
+            }
+            return Lotto.fromLotto(list);
+        };
 
         assertThat(LottoFactory.generateLottos(lottoNumbers, purchaseCount, lottoGeneratorStrategy)).isNotNull();
     }

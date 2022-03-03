@@ -6,14 +6,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-
-import domain.constant.LottoConstant;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
 
     private static final String ERROR_MESSAGE_NOT_IN_SIZE = "로또 숫자 갯수는 6개이여야 합니다.";
     private static final String ERROR_MESSAGE_NOT_DUPLICATE = "로또 숫자는 중복일 수 없습니다.";
     private static final String ERROR_MESSAGE_NULL = "값이 null 입니다.";
+
+    private static final int LOTTO_NUMBER_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -25,7 +27,7 @@ public class Lotto {
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LottoConstant.LOTTO_NUMBER_SIZE) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NOT_IN_SIZE);
         }
     }
@@ -36,6 +38,12 @@ public class Lotto {
         if (deDuplicatedNumbers.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NOT_DUPLICATE);
         }
+    }
+
+    public static Lotto fromLotto(List<LottoNumber> lottoNumbers) {
+        return new Lotto(IntStream.range(0, LOTTO_NUMBER_SIZE)
+            .mapToObj(lottoNumbers::get)
+            .collect(Collectors.toList()));
     }
 
     public int calculateMatchCount(Lotto otherLotto) {

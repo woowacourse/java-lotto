@@ -1,19 +1,22 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
-
-import domain.constant.LottoConstant;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final String ERROR_MESSAGE_NOT_IN_RANGE = "유효한 로또 번호가 아닙니다.";
 
+    private static final int MINIMUM_VALUE = 1;
+    private static final int MAXIMUM_VALUE = 45;
+
     private static final HashMap<Integer, LottoNumber> LOTTO_NUMBERS = new HashMap<>();
 
     static {
-        IntStream.rangeClosed(LottoConstant.MINIMUM_VALUE, LottoConstant.MAXIMUM_VALUE)
+        IntStream.rangeClosed(MINIMUM_VALUE, MAXIMUM_VALUE)
                 .forEach(number -> LOTTO_NUMBERS.put(number, new LottoNumber(number)));
     }
 
@@ -24,7 +27,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static void validateInRange(int value) {
-        if (value < LottoConstant.MINIMUM_VALUE || value > LottoConstant.MAXIMUM_VALUE) {
+        if (value < MINIMUM_VALUE || value > MAXIMUM_VALUE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NOT_IN_RANGE);
         }
     }
@@ -32,6 +35,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static LottoNumber valueOf(final int number) {
         validateInRange(number);
         return LOTTO_NUMBERS.get(number);
+    }
+
+    public static List<LottoNumber> getLottoNumbers() {
+        return new ArrayList<>(LOTTO_NUMBERS.values());
     }
 
     public int getValue() {
