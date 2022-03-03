@@ -5,15 +5,19 @@ import java.util.List;
 import java.util.Map;
 
 public class WinningStatistics {
-    private final EnumMap<LottoRank, Integer> winningCounts = new EnumMap<LottoRank, Integer>(LottoRank.class);
+    private final EnumMap<LottoRank, Integer> winningCounts = new EnumMap<>(LottoRank.class);
     private final double earningsRate;
 
-    public WinningStatistics(List<Lotto> lotteries, WinningLotto winningLotto, LottoPurchasingMoney lottoPurchasingMoney) {
+    private WinningStatistics(List<Lotto> lotteries, WinningLotto winningLotto, LottoPurchasingMoney lottoPurchasingMoney) {
         for (LottoRank each : LottoRank.values()) {
             winningCounts.put(each, 0);
         }
         countWinningLotto(lotteries, winningLotto);
         this.earningsRate = calculateEarningsRate(lottoPurchasingMoney);
+    }
+
+    public static WinningStatistics of(List<Lotto> lotteries, WinningLotto winningLotto, LottoPurchasingMoney lottoPurchasingMoney) {
+        return new WinningStatistics(lotteries, winningLotto, lottoPurchasingMoney);
     }
 
     public Map<LottoRank, Integer> getWinningCounts() {

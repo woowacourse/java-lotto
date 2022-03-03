@@ -108,7 +108,7 @@ public class LottoController {
 
     private WinningStatistics calculateStatistics(List<Lotto> lotteries, WinningLotto winningLotto,
                                                   LottoPurchasingMoney lottoPurchasingMoney) {
-        return new WinningStatistics(lotteries, winningLotto, lottoPurchasingMoney);
+        return WinningStatistics.of(lotteries, winningLotto, lottoPurchasingMoney);
     }
 
     private void printWinningStatistics(WinningStatistics winningStatistics) {

@@ -20,7 +20,7 @@ class WinningStatisticsTest {
         LottoPurchasingMoney money = LottoPurchasingMoney.valueOf(10000);
 
         // when
-        WinningStatistics winningStatistics = new WinningStatistics(List.of(lotto), winningLotto, money);
+        WinningStatistics winningStatistics = WinningStatistics.of(List.of(lotto), winningLotto, money);
         int result = winningStatistics.getWinningCounts().get(LottoRank.FIFTH);
 
         // then
@@ -38,7 +38,7 @@ class WinningStatisticsTest {
         LottoPurchasingMoney money = LottoPurchasingMoney.valueOf(10000);
 
         // when
-        WinningStatistics winningStatistics = new WinningStatistics(List.of(lotto), winningLotto, money);
+        WinningStatistics winningStatistics = WinningStatistics.of(List.of(lotto), winningLotto, money);
         double result = winningStatistics.getEarningsRate();
 
         // then
