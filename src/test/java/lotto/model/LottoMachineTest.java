@@ -32,17 +32,13 @@ public class LottoMachineTest {
     }
 
     private Lottos makeLottos() {
-        Lotto first = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
-        Lotto second = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
-        return new Lottos(Arrays.asList(first, second));
+        Lotto second = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
+        Lotto fourth = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
+        return new Lottos(Arrays.asList(second, fourth));
     }
 
     private Lotto makeLotto(int[] numbers) {
         return new Lotto(makeLottoNumbers(numbers));
-    }
-
-    private WinningLotto makeWinningLotto(int[] numbers, int bonusNumber) {
-        return new WinningLotto(makeLottoNumbers(numbers), new LottoNumber(bonusNumber));
     }
 
     private LottoNumbers makeLottoNumbers(int[] numbers) {
@@ -96,5 +92,9 @@ public class LottoMachineTest {
         lottoMachine = new LottoMachine(lottoGenerator, money, new LottoCount(2, money), lottos);
         WinningLotto winningLotto = makeWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7);
         lottoMachine.calculateResult(winningLotto);
+    }
+
+    private WinningLotto makeWinningLotto(int[] numbers, int bonusNumber) {
+        return new WinningLotto(makeLottoNumbers(numbers), new LottoNumber(bonusNumber));
     }
 }

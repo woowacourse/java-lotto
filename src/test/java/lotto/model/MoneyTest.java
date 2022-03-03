@@ -20,6 +20,25 @@ public class MoneyTest {
     void minusMoneyTest() {
         assertThatThrownBy(() ->
                 new Money(-2))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @DisplayName("0원 생성 테스트")
+    @Test
+    void zeroMoneyTest() {
+        assertThatThrownBy(() ->
+                new Money(0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @DisplayName("1000원 미만 돈 생성 테스트")
+    @Test
+    void thousandMoneyTest() {
+        assertThatThrownBy(() ->
+                new Money(999))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
     }
 }

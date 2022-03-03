@@ -21,8 +21,8 @@ public class LottosTest {
     void init() {
         Lotto first = makeLotto(new int[]{1, 2, 3, 4, 5, 6}); //1등
         Lotto second = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
-        Lotto third = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
-        lottos = new Lottos(Arrays.asList(first, second, third));
+        Lotto fourth = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
+        lottos = new Lottos(Arrays.asList(first, second, fourth));
     }
 
     private Lotto makeLotto(int[] numbers) {
@@ -65,9 +65,9 @@ public class LottosTest {
     @DisplayName("Lottos 합치기 테스트")
     @Test
     void combineLottosTest() {
-        Lotto newLotto = makeLotto(new int[]{40,41,42,43,44,45});
+        Lotto newLotto = makeLotto(new int[]{40, 41, 42, 43, 44, 45});
         Lottos newLottos = new Lottos(Arrays.asList(newLotto));
-        Lottos combineLottos = Lottos.combineLottos(lottos,newLottos);
+        Lottos combineLottos = Lottos.combineLottos(lottos, newLottos);
         assertThat(combineLottos.size()).isEqualTo(4);
     }
 }
