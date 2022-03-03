@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import lotto.domain.lottoticket.LottoTicket;
 
@@ -28,7 +27,6 @@ public final class LottoTickets {
     public WinningResult calculateWinningStatistic(WinningNumbers winningNumbers) {
         List<Ranking> rankings = value.stream()
                 .map(winningNumbers::calculateRanking)
-                .flatMap(Optional::stream)
                 .collect(Collectors.toList());
         return new WinningResult(rankings);
     }

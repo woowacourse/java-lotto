@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,7 +69,7 @@ public class OutputView {
 
         final StringBuilder stringBuilder = new StringBuilder();
 
-        final Ranking[] sortedRankings = sortDescendingByPrize();
+        final List<Ranking> sortedRankings = sortDescendingByPrize();
 
         for (Ranking ranking : sortedRankings) {
             int count = winningResult.getValue().get(ranking);
@@ -81,9 +80,9 @@ public class OutputView {
         System.out.println(stringBuilder);
     }
 
-    private static Ranking[] sortDescendingByPrize() {
-        final Ranking[] rankings = Ranking.values();
-        Arrays.sort(rankings, Comparator.comparingInt(Ranking::getPrize));
+    private static List<Ranking> sortDescendingByPrize() {
+        final List<Ranking> rankings = Ranking.valuesWithoutDefault();
+        rankings.sort(Comparator.comparingInt(Ranking::getPrize));
         return rankings;
     }
 

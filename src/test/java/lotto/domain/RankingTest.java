@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -13,10 +14,11 @@ public class RankingTest {
             "5,true,SECOND_PLACE",
             "5,false,THIRD_PLACE",
             "4,false,FOURTH_PLACE",
-            "3,false,FIFTH_PLACE"})
+            "3,false,FIFTH_PLACE",
+            "2,true,NONE_PLACE"})
     @DisplayName("맞은 개수와 보너스볼 유무로 일치하는 순위를 반환")
     void findRanking(int hitCount, boolean hasBonusNumber, Ranking expectedRanking) {
-        assertThat(Ranking.findRanking(hitCount, hasBonusNumber).get()).isEqualTo(expectedRanking);
+        assertThat(Ranking.findRanking(hitCount, hasBonusNumber)).isEqualTo(expectedRanking);
     }
 
     @ParameterizedTest
@@ -39,5 +41,11 @@ public class RankingTest {
     @DisplayName("SECOND_PLACE 라면 true 아니면 false 반환")
     void multiplyPrizeWithCount(Ranking ranking, boolean expected) {
         assertThat(ranking.isSecond()).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("기본값을 제외한 리스트 반환 테스트")
+    void valuesWithoutDefault() {
+        assertThat(Ranking.valuesWithoutDefault()).doesNotContain(Ranking.NONE_PLACE);
     }
 }

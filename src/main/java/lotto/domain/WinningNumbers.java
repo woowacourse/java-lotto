@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Objects;
-import java.util.Optional;
 import lotto.domain.lottoticket.LottoTicket;
 
 public final class WinningNumbers {
@@ -16,7 +15,7 @@ public final class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public Optional<Ranking> calculateRanking(LottoTicket otherLottoNumbers) {
+    public Ranking calculateRanking(LottoTicket otherLottoNumbers) {
         int hitCount = lottoNumbers.calculateSameCount(otherLottoNumbers);
         boolean hasBonusBall = otherLottoNumbers.isContains(bonusNumber);
         return Ranking.findRanking(hitCount, hasBonusBall);

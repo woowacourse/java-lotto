@@ -42,14 +42,6 @@ public class WinningNumbersTest {
     void calculateRanking(String lottoNumbers, Ranking expectedRanking) {
         LottoTicket myLotto = new LottoTicket(lottoNumbers);
 
-        assertThat(winningNumbers.calculateRanking(myLotto).get()).isEqualTo(expectedRanking);
-    }
-
-    @Test
-    @DisplayName("당첨되지 않았을 경우")
-    void noPrize() {
-        LottoTicket myLotto = new LottoTicket("1,2,11,8,9,10");
-
-        assertThat(winningNumbers.calculateRanking(myLotto).isEmpty()).isTrue();
+        assertThat(winningNumbers.calculateRanking(myLotto)).isEqualTo(expectedRanking);
     }
 }
