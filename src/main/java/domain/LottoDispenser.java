@@ -56,7 +56,7 @@ public class LottoDispenser {
                 .collect(Collectors.toList());
     }
 
-    private class Money{
+    private static class Money{
 
         private int amount;
 
