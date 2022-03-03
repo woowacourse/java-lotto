@@ -3,7 +3,7 @@ package domain.LottoGenerator;
 import domain.Lotto.Lotto;
 import utils.ExceptionMessage;
 
-public class ManualLottoGenerator implements LottoGenerator{
+public class ManualLottoGenerator implements LottoGenerator {
 
     @Override
     public Lotto generateLotto() {
