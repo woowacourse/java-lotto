@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    static final String ERROR_MESSAGE_FOR_EMPTY_LOTTO_LIST = "빈 Lotto 리스트로 Lottos 를 생성할 수 없습니다.";
-
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
-    
+
     public Lottos(LottoQuantity lottoQuantity, LottoNumberGenerateStrategy lottoNumberGenerator) {
         this.lottos = generateLottos(lottoQuantity, lottoNumberGenerator);
     }
