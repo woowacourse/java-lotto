@@ -18,7 +18,7 @@ public class RankingTest {
             "2,true,NONE_PLACE"})
     @DisplayName("맞은 개수와 보너스볼 유무로 일치하는 순위를 반환")
     void findRanking(int hitCount, boolean hasBonusNumber, Ranking expectedRanking) {
-        assertThat(Ranking.findRanking(hitCount, hasBonusNumber)).isEqualTo(expectedRanking);
+        assertThat(Ranking.of(hitCount, hasBonusNumber)).isEqualTo(expectedRanking);
     }
 
     @ParameterizedTest

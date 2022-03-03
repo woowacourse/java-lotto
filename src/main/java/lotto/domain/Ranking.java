@@ -20,7 +20,7 @@ public enum Ranking {
         this.hitCount = count;
     }
 
-    public static Ranking findRanking(int hitCount, boolean hasBonusNumber) {
+    public static Ranking of(int hitCount, boolean hasBonusNumber) {
         return Arrays.stream(Ranking.values())
                 .filter(ranking -> ranking.hitCount == hitCount)
                 .filter(ranking -> ranking != SECOND_PLACE || hasBonusNumber)
