@@ -1,7 +1,7 @@
 package controller;
 
 import dto.ResultDto;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import service.LottoService;
 import view.InputView;
@@ -10,7 +10,7 @@ import view.OutputView;
 public class LottoController {
 
     private static final String ERROR_MESSAGE = "[ERROR] ";
-    private static final int MANUAL_LOTTO_IS_NONE_NUMBER = 0;
+    private static final int LOTTO_COUNT_IS_NONE_NUMBER = 0;
 
     private final InputView inputView;
     private final OutputView outputView;
@@ -41,12 +41,7 @@ public class LottoController {
 
     private void issueLotto() {
         final int manualCount = getManualCount();
-        if (manualCount > MANUAL_LOTTO_IS_NONE_NUMBER) {
-            lottoService.issueLotto(getManualLottoWith(manualCount));
-            outputView.printLotto(lottoService.getIssuedLotto(), manualCount);
-            return;
-        }
-        lottoService.issueLotto(new ArrayList<>());
+        lottoService.issueLotto(getManualLottoWith(manualCount));
         outputView.printLotto(lottoService.getIssuedLotto(), manualCount);
     }
 
@@ -60,6 +55,9 @@ public class LottoController {
     }
 
     private List<List<String>> getManualLottoWith(final int manualCount) {
+        if (manualCount == LOTTO_COUNT_IS_NONE_NUMBER) {
+            return Collections.emptyList();
+        }
         try {
             return inputView.getManualLotto(manualCount);
         } catch (Exception e) {
