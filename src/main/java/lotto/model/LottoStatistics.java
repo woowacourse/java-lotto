@@ -16,10 +16,10 @@ public class LottoStatistics {
     }
 
     public double findRevenue() {
-        return calculateRevenue(getSum(), calculateMoney());
+        return calculateRevenue(calculateTotalPrize(), calculateMoney());
     }
 
-    private int getSum() {
+    private int calculateTotalPrize() {
         return Arrays.stream(Rank.values())
             .mapToInt(rank -> rank.sum(rankMap.get(rank)))
             .sum();
