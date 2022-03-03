@@ -2,6 +2,7 @@ package view;
 
 import domain.Lotto;
 import domain.Lottos;
+import domain.Money;
 import domain.Rewards;
 import domain.WinningChecker;
 import java.util.LinkedHashMap;
@@ -9,10 +10,10 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    private static final String MESSAGE_LOTTOS_NUMBER = "%d개를 구매했습니다.\n";
+    private static final String MESSAGE_LOTTOS_NUMBER = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String MESSAGE_WINNING_STATISTIC = "당첨 통계";
     private static final String SEPERATOR_LINE = "------------";
-    private static final String MESSAGE_YIELD = "총 수익률은 %f입니다.(1초과 시 이득, 1미만일 시 손해라는 의미임)";
+    private static final String MESSAGE_YIELD = "총 수익률은 %2f입니다.(1초과 시 이득, 1미만일 시 손해라는 의미임)";
     private static final String NUMBER_DELIMITER = ", ";
     private static final String LOTTO_NUMBER_FORMAT = "[%s]\n";
 
@@ -26,9 +27,9 @@ public class OutputView {
         }
     };
 
-    public static void printLottosInformations(Lottos lottos) {
+    public static void printLottosInformations(Money money, Lottos lottos) {
 
-        System.out.printf(MESSAGE_LOTTOS_NUMBER, lottos.getLottos().size());
+        System.out.printf(MESSAGE_LOTTOS_NUMBER, money.getManualAmount(), money.getAutoAmount());
 
         for (Lotto lotto : lottos.getLottos()) {
             String str = lotto.getLottoNumbers()

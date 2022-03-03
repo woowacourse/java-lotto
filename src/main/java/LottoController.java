@@ -5,7 +5,6 @@ import domain.Money;
 import domain.RandomLottoGenerator;
 import domain.WinningChecker;
 import domain.WinningNumbers;
-import java.util.List;
 import view.InputView;
 import view.OutputView;
 
@@ -21,7 +20,7 @@ public class LottoController {
                     InputView.askManualLottoNumbers(money.getManualAmount())),
                 new RandomLottoGenerator(money.getAutoAmount())));
 
-        OutputView.printLottosInformations(lottoGame.getLottos());
+        OutputView.printLottosInformations(money, lottoGame.getLottos());
 
         WinningNumbers winningNumbers = InputView.askWinningNumbers();
 
