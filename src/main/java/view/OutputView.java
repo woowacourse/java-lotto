@@ -1,9 +1,6 @@
 package view;
 
-import dto.LottoDto;
-import dto.LottosDto;
-import dto.RankDto;
-import dto.RanksDto;
+import dto.*;
 
 public class OutputView {
 
@@ -15,6 +12,7 @@ public class OutputView {
     private static final String BONUS_FORMAT = ", 보너스 볼 일치";
     private static final String EMPTY_FORMAT = "";
     private static final String INCOME_RATE_FORMAT = "총 수익률은 %.2f입니다.%n";
+    private static final String LOTTO_COUNT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
 
     private static final OutputView OUTPUT_VIEW = new OutputView();
 
@@ -25,8 +23,9 @@ public class OutputView {
         return OUTPUT_VIEW;
     }
 
-    public void printPurchasedLotto(LottosDto lottosDto) {
-        System.out.printf((PURCHASE_QUANTITY_FORMAT), lottosDto.getQuantity());
+    public void printPurchasedLotto(LottoCountDto lottoCountDto, LottosDto lottosDto) {
+        System.out.print(System.lineSeparator());
+        System.out.printf(LOTTO_COUNT_FORMAT, lottoCountDto.getManualLottoCount(), lottoCountDto.getAutoLottoCount());
         for (LottoDto lottoDto : lottosDto.getLottoDtos()) {
             printLottoNumbers(lottoDto);
         }
