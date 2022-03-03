@@ -17,6 +17,7 @@ public class InputView {
     private static final String MANUAL_TICKET_NUMBS_GROUP_MESSAGE = System.lineSeparator() + "수동으로 구매할 번호를 입력해 주세요.";
 
     private static final Pattern PATTERN = Pattern.compile("^[\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+$");
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     public static int inputMoney() {
         System.out.println(MONEY_INPUT_MESSAGE);
@@ -39,8 +40,8 @@ public class InputView {
     }
 
     public static List<List<Integer>> inputManualNums(int repeatCount) {
-        List<List<Integer>> numsGroup = new ArrayList<>();
         System.out.println(MANUAL_TICKET_NUMBS_GROUP_MESSAGE);
+        List<List<Integer>> numsGroup = new ArrayList<>();
         for (int i = 0; i < repeatCount; i++) {
             numsGroup.add(inputLottoNums());
         }
@@ -48,17 +49,15 @@ public class InputView {
     }
 
     private static int inputNum() {
-        final Scanner scanner = new Scanner(System.in);
         try {
-            return scanner.nextInt();
+            return SCANNER.nextInt();
         } catch (Exception e) {
             throw new IllegalArgumentException(NUM_ERROR_MESSAGE);
         }
     }
 
     private static List<Integer> inputLottoNums() {
-        final Scanner scanner = new Scanner(System.in);
-        final String lottoNumbers = scanner.nextLine();
+        final String lottoNumbers = SCANNER.nextLine();
         validateLottoNums(lottoNumbers);
         return Util.separateNumbers(lottoNumbers);
     }
