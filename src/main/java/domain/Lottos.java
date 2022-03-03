@@ -15,13 +15,6 @@ public class Lottos {
         this.lottos = generateLottos(lottoQuantity, lottoNumberGenerator);
     }
 
-    public static Lottos concat(Lottos lottos1, Lottos lottos2) {
-        List<Lotto> newLottoValues = new ArrayList<>(lottos1.lottos);
-        newLottoValues.addAll(lottos2.lottos);
-
-        return new Lottos(newLottoValues);
-    }
-
     private List<Lotto> generateLottos(LottoQuantity lottoQuantity, LottoNumberGenerateStrategy lottoNumberGenerator) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoQuantity.getLottoQuantity(); i++) {
@@ -29,6 +22,13 @@ public class Lottos {
         }
 
         return lottos;
+    }
+
+    public static Lottos concat(Lottos lottos1, Lottos lottos2) {
+        List<Lotto> newLottoValues = new ArrayList<>(lottos1.lottos);
+        newLottoValues.addAll(lottos2.lottos);
+
+        return new Lottos(newLottoValues);
     }
 
     public List<Lotto> getLottos() {
