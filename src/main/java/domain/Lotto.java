@@ -40,7 +40,7 @@ public class Lotto {
         }
     }
 
-    public static Lotto fromLotto(List<LottoNumber> lottoNumbers) {
+    public static Lotto fromRangeLotto(List<LottoNumber> lottoNumbers) {
         return new Lotto(IntStream.range(0, LOTTO_NUMBER_SIZE)
             .mapToObj(lottoNumbers::get)
             .sorted()

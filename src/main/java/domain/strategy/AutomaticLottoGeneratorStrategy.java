@@ -20,7 +20,7 @@ public class AutomaticLottoGeneratorStrategy implements LottoGeneratorStrategy {
 
         for (int i = 0; i < lottoPurchaseInfo.getAutomaticCount(); i++) {
             Collections.shuffle(lottoNumbers);
-            lottos.add(Lotto.fromLotto(lottoNumbers));
+            lottos.add(Lotto.fromRangeLotto(lottoNumbers));
         }
 
         return lottos;
