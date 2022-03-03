@@ -25,8 +25,8 @@ public class Money {
         }
     }
 
-    public int getLottoSize() {
-        return money / LOTTO_PRICE;
+    public int getAutoLottoSize(int manualLottoSize) {
+        return money / LOTTO_PRICE - manualLottoSize;
     }
 
     public float calculateYield(Long numerator) {
