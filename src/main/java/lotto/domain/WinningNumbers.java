@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import lotto.exception.BonusNumberException;
+import lotto.generator.LottoGenerator;
 
 public class WinningNumbers {
 
@@ -9,7 +10,7 @@ public class WinningNumbers {
     private final LottoNumber bonusNumber;
 
     public WinningNumbers(List<Integer> winningNumbersInput, int bonusNumberInput) {
-        this.winningLotto = Lotto.generateLottoByManual(winningNumbersInput);
+        this.winningLotto = LottoGenerator.generateLottoByManual(winningNumbersInput);
         LottoNumber bonusNumber = LottoNumber.getByNumber(bonusNumberInput);
         checkDuplication(winningLotto, bonusNumber);
         this.bonusNumber = bonusNumber;
