@@ -17,6 +17,12 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
+    public Lotto(final List<Integer> numbers) {
+        this.numbers = numbers.stream()
+                .map(Number::new)
+                .collect(Collectors.toList());
+    }
+
     public Rank findWinningRank(final WinningNumbers winningNumbers) {
         int matchCount = countMatch(winningNumbers.getWinningNumbers());
         boolean hasBonus = hasBonus(winningNumbers.getBonusNumber());
