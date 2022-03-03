@@ -1,10 +1,15 @@
 package lotto;
 
-import lotto.controller.LottoController;
+import lotto.controller.PurchaseController;
+import lotto.controller.WinningController;
+import lotto.dto.PurchaseResult;
 
 public class Application {
     public static void main(String[] args) {
-        LottoController controller = LottoController.getInstance();
-        controller.run();
+        PurchaseController purchaseController = PurchaseController.getInstance();
+        PurchaseResult purchaseResult = purchaseController.purchase();
+
+        WinningController winningController = WinningController.getInstance();
+        winningController.drawLots(purchaseResult);
     }
 }
