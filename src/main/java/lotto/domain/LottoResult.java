@@ -11,11 +11,17 @@ public class LottoResult {
     }
 
     public int sumOfPrize() {
-        int sum = 0;
-        for (LottoRank lottoRank : result.keySet()) {
-            sum += result.get(lottoRank) * lottoRank.getPrizeAmount();
-        }
-        return sum;
+        return result.keySet().stream()
+                .mapToInt(lottoRank -> result.get(lottoRank) * lottoRank.getPrizeAmount())
+                .sum();
+    }
+
+    public double calculateYield(Money money) {
+        return sumOfPrize() / (double) money.getAmount();
+    }
+
+    public Map<LottoRank, Integer> getResult() {
+        return result;
     }
 
     @Override
@@ -23,13 +29,5 @@ public class LottoResult {
         return "LottoResult{" +
                 "result=" + result +
                 '}';
-    }
-
-    public Map<LottoRank, Integer> getResult() {
-        return result;
-    }
-
-    public double calculateYield(Money money) {
-        return sumOfPrize() / (double) money.getAmount();
     }
 }

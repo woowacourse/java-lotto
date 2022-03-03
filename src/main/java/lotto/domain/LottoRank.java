@@ -36,7 +36,7 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int sameCount, boolean bonus) {
-        if (sameCount == 5) {
+        if (sameCount == SECOND.getCorrectNumber()) {
             return checkSecondOrThird(bonus);
         }
         return Arrays.stream(LottoRank.values())

@@ -14,8 +14,15 @@ public class OutputView {
     private static final String SECOND_RANK_RESULT_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개\n";
     private static final String YIELD_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n";
 
+    private OutputView() {
+    }
+
     public static void printErrorMessage(Exception exception) {
         System.out.println(exception.getMessage());
+    }
+
+    public static void printCount(Count count) {
+        System.out.printf(PURCHASE_COUNT_MESSAGE, count.getManualCount(), count.getAutoCount());
     }
 
     public static void printLotto(LottosDto lottosDto) {
@@ -40,7 +47,8 @@ public class OutputView {
 
     private static void printEachRank(LottoRank lottoRank, Integer count) {
         if (lottoRank == LottoRank.SECOND) {
-            System.out.printf(SECOND_RANK_RESULT_FORMAT, lottoRank.getCorrectNumber(), lottoRank.getPrizeAmount(), count);
+            System.out.printf(SECOND_RANK_RESULT_FORMAT, lottoRank.getCorrectNumber(), lottoRank.getPrizeAmount(),
+                    count);
             return;
         }
         System.out.printf(RANK_RESULT_FORMAT, lottoRank.getCorrectNumber(), lottoRank.getPrizeAmount(), count);
@@ -48,9 +56,5 @@ public class OutputView {
 
     public static void printYield(double yield) {
         System.out.printf(YIELD_MESSAGE_FORMAT, yield);
-    }
-
-    public static void printCount(Count count) {
-        System.out.printf(PURCHASE_COUNT_MESSAGE, count.getManualCount(), count.getAutoCount());
     }
 }

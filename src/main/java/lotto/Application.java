@@ -17,21 +17,11 @@ public class Application {
         final Count count = initCount(money);
         OutputView.printCount(count);
 
-        final Lottos lottos = buyLottos(count);
+        final Lottos lottos = initLottos(count);
         OutputView.printLotto(LottosDto.from(lottos));
 
         final WinningNumber winningNumber = initWinningNumber();
         OutputView.printResult(money, lottos.createLottoResult(winningNumber));
-    }
-
-    private static Lottos buyLottos(Count count) {
-        try {
-            List<List<Integer>> manualNumbers = InputView.askManualNumbers(count.getManualCount());
-            return new Lottos(manualNumbers, count.getAutoCount());
-        } catch (IllegalArgumentException e) {
-            OutputView.printErrorMessage(e);
-            return buyLottos(count);
-        }
     }
 
     private static Money initMoney() {
@@ -49,6 +39,16 @@ public class Application {
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
             return initCount(money);
+        }
+    }
+
+    private static Lottos initLottos(Count count) {
+        try {
+            List<List<Integer>> manualNumbers = InputView.askManualNumbers(count.getManualCount());
+            return new Lottos(manualNumbers, count.getAutoCount());
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e);
+            return initLottos(count);
         }
     }
 

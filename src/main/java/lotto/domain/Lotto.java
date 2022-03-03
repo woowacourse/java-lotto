@@ -33,7 +33,6 @@ public class Lotto {
         this.lotto = inputValues;
     }
 
-
     private void checkSize(List<Integer> inputValues) {
         if (inputValues.size() != CHOICE_NUMBER_SIZE) {
             throw new IllegalArgumentException(ERROR_NOT_ENOUGH_NUMBER);

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 public class Count {
-
     private final int manualCount;
     private final int autoCount;
 

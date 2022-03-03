@@ -3,11 +3,7 @@ package lotto.domain;
 import static lotto.domain.Lotto.MAX_BOUND;
 import static lotto.domain.Lotto.MIN_BOUND;
 
-
-
 public class BonusNumber {
-    private static final String ERROR_NOT_IN_RANGE = "[ERROR] 보너스 번호가 범위내에 없습니다.";
-
     private final int bonusNumber;
 
     public BonusNumber(int value) {
@@ -17,7 +13,7 @@ public class BonusNumber {
 
     private void checkRange(Integer value) {
         if (value < MIN_BOUND || value > MAX_BOUND) {
-            throw new IllegalArgumentException(ERROR_NOT_IN_RANGE);
+            throw new IllegalArgumentException("[ERROR] 보너스 번호가 범위내에 없습니다.");
         }
     }
 
