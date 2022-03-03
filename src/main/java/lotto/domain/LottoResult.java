@@ -35,14 +35,8 @@ public class LottoResult {
     }
 
     private double getSum(Rank rank) {
-        double result = 0;
-
         Integer count = ranks.get(rank);
 
-        for (int i = 0; i < count; i++) {
-            result += rank.getPrizeMoney();
-        }
-
-        return result;
+        return count * rank.getPrizeMoney();
     }
 }
