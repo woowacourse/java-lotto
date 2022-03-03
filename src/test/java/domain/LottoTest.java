@@ -5,10 +5,24 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
+
+    public static Stream<Arguments> provideOtherLottoAndExpected() {
+        return Stream.of(
+            Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6"), 6),
+            Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "7"), 5),
+            Arguments.of(Arrays.asList("1", "2", "3", "4", "7", "8"), 4),
+            Arguments.of(Arrays.asList("1", "2", "3", "7", "8", "9"), 3)
+        );
+    }
 
     @DisplayName("유효한 로또 번호를 발급을 확인한다.")
     @Test
@@ -41,6 +55,18 @@ class LottoTest {
         final int matchedCount = lotto.compare(winNumbers);
 
         assertThat(matchedCount).isEqualTo(5);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideOtherLottoAndExpected")
+    void compare_lotto_by_lotto(final List<String> otherLottoInput, final int matchedCount) {
+        //given
+        final Lotto lotto = Lotto.fromInput(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        final Lotto otherLotto = Lotto.fromInput(otherLottoInput);
+        //when
+        final int actual = lotto.compare(otherLotto);
+        //then
+        assertThat(actual).isEqualTo(matchedCount);
     }
 
     @DisplayName("발급 로또와 보너스 번호를 비교하여 포함여부를 확인한다.")

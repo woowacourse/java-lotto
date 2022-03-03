@@ -4,13 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.Arguments;
 import service.LottoService;
 
 class ResultTest {
 
     @Test
-    void result_meesage_valid_test() {
+    void result_message_valid_test() {
         final List<Lotto> lottos = new LottoService().issueManualLottoGroup(
             List.of(
                 Arrays.asList("1", "2", "3", "4", "5", "6"),
