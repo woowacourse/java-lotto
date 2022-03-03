@@ -35,10 +35,10 @@ public class LottoController {
 
     public WinningNumberDto createWinningNumber(List<Integer> normalNumbers, int bonusNumber) {
         List<LottoNumber> numbers = normalNumbers.stream()
-                .map(LottoNumber::of)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
-        
-        WinningNumber winningNumber = new WinningNumber(new LottoTicket(numbers), LottoNumber.of(bonusNumber));
+
+        WinningNumber winningNumber = new WinningNumber(new LottoTicket(numbers), LottoNumber.from(bonusNumber));
 
         return WinningNumberDto.from(winningNumber);
     }

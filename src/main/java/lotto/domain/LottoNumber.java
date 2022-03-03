@@ -22,7 +22,7 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber of(int lottoNumber) {
+    public static LottoNumber from(int lottoNumber) {
         if (!LOTTO_NUMBERS.containsKey(lottoNumber)) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR_MESSAGE);
         }

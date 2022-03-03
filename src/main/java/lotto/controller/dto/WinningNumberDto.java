@@ -27,9 +27,9 @@ public class WinningNumberDto {
 
     public WinningNumber toWinningNumber() {
         List<LottoNumber> lottoNumbers = normalNumbers.stream()
-                .map(LottoNumber::of)
+                .map(LottoNumber::from)
                 .collect(toList());
 
-        return new WinningNumber(new LottoTicket(lottoNumbers), LottoNumber.of(bonusNumber));
+        return new WinningNumber(new LottoTicket(lottoNumbers), LottoNumber.from(bonusNumber));
     }
 }

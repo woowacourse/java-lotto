@@ -15,7 +15,7 @@ class LottoNumberTest {
     @ValueSource(ints = {1, 10, 20, 45})
     void 로또_번호_정상(int number) {
         // given & when & then
-        assertDoesNotThrow(() -> LottoNumber.of(number));
+        assertDoesNotThrow(() -> LottoNumber.from(number));
     }
 
     @DisplayName("로또 번호가 1 ~ 45이외인 경우 예외를 던진다.")
@@ -23,7 +23,7 @@ class LottoNumberTest {
     @ValueSource(ints = {0, 46, -1})
     void 로또_번호_범위_초과(int number) {
         // given & when & then
-        assertThatThrownBy(() -> LottoNumber.of(number))
+        assertThatThrownBy(() -> LottoNumber.from(number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호의 범위는 1 ~ 45 사이입니다.");
     }
@@ -35,8 +35,8 @@ class LottoNumberTest {
         int number = 1;
 
         // when
-        LottoNumber lottoNumber = LottoNumber.of(number);
-        LottoNumber targetLottoNumber = LottoNumber.of(number);
+        LottoNumber lottoNumber = LottoNumber.from(number);
+        LottoNumber targetLottoNumber = LottoNumber.from(number);
 
         // then
         assertThat(lottoNumber).isEqualTo(targetLottoNumber);

@@ -20,7 +20,7 @@ public class LottoTestDataGenerator {
 
     public static List<LottoNumber> parseLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::of)
+                .map(LottoNumber::from)
                 .collect(toList());
     }
 }

@@ -22,7 +22,7 @@ class LottoTicketTest {
     @Test
     void 로또_티켓_번호_개수_초과() {
         // given & when & then
-        assertThatThrownBy(() -> new LottoTicket(List.of(LottoNumber.of(1), LottoNumber.of(2))))
+        assertThatThrownBy(() -> new LottoTicket(List.of(LottoNumber.from(1), LottoNumber.from(2))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("번호의 갯수가 적절하지 않습니다. 또한 중복될 수 없습니다.");
     }
@@ -32,8 +32,8 @@ class LottoTicketTest {
     void 로또_티켓_중복() {
         // given & when & then
         assertThatThrownBy(() -> new LottoTicket(
-                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
-                        LottoNumber.of(5))))
+                List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5),
+                        LottoNumber.from(5))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("번호의 갯수가 적절하지 않습니다. 또한 중복될 수 없습니다.");
     }
@@ -48,7 +48,7 @@ class LottoTicketTest {
         Set<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
         // then
-        assertThatThrownBy(() -> lottoNumbers.add(LottoNumber.of(1)))
+        assertThatThrownBy(() -> lottoNumbers.add(LottoNumber.from(1)))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
@@ -57,9 +57,9 @@ class LottoTicketTest {
     void 당첨_번호_인지_확인() {
         // given
         LottoTicket lottoTicket = new LottoTicket(
-                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
-                        LottoNumber.of(6)));
-        LottoNumber lottoNumber = LottoNumber.of(1);
+                List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5),
+                        LottoNumber.from(6)));
+        LottoNumber lottoNumber = LottoNumber.from(1);
 
         // when
         boolean result = lottoTicket.contains(lottoNumber);

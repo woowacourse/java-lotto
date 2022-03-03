@@ -16,7 +16,7 @@ public class LottoMachine {
     private static final int END_INCLUSIVE = 45;
 
     private static final List<LottoNumber> LOTTO_TOTAL_NUMBERS = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
-            .mapToObj(LottoNumber::of)
+            .mapToObj(LottoNumber::from)
             .collect(toList());
 
     public LottoTickets issueManual(List<List<Integer>> numbers) {
@@ -29,16 +29,16 @@ public class LottoMachine {
 
     private List<LottoNumber> parseLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::of)
+                .map(LottoNumber::from)
                 .collect(toList());
     }
 
     public LottoTickets issueAuto(int lottoCount) {
-        List<List<LottoNumber>> numbers = IntStream.range(0, lottoCount)
+        List<List<LottoNumber>> lottoNumbers = IntStream.range(0, lottoCount)
                 .mapToObj(noneUsed -> generateRandomLottoNumbers(LOTTO_NUMBERS_SIZE))
                 .collect(toList());
 
-        return new LottoTickets(numbers);
+        return new LottoTickets(lottoNumbers);
     }
 
     private List<LottoNumber> generateRandomLottoNumbers(int size) {
