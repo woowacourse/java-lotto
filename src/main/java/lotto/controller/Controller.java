@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
 import lotto.domain.LottoCounter;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -14,8 +13,7 @@ public class Controller {
     public void run() {
         Money money = getMoney();
         LottoCounter lottoCounter = getLottoCounter(money);
-        Lottos lottos = getLottos(InputView.InputManualLottos(lottoCounter.getManualLottoCount()),
-                lottoCounter.getAutoLottoCount());
+        Lottos lottos = getLottos(lottoCounter);
         OutputView.printLottos(lottoCounter, lottos);
 
         RankCounter rankCounter = new RankCounter(lottos, getWinningNumbers());
@@ -41,12 +39,13 @@ public class Controller {
         }
     }
 
-    private Lottos getLottos(List<List<Integer>> manualLottos, int autoLottoCount) {
+    private Lottos getLottos(LottoCounter lottoCounter) {
         try {
-            return new Lottos(manualLottos, autoLottoCount);
+            return new Lottos(InputView.InputManualLottos(lottoCounter.getManualLottoCount()),
+                    lottoCounter.getAutoLottoCount());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return getLottos(manualLottos, autoLottoCount);
+            return getLottos(lottoCounter);
         }
     }
 

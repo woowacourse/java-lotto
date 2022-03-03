@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.generator.LottoGenerator;
 
 public class Lottos {
 
@@ -16,13 +17,13 @@ public class Lottos {
 
     private void buyLottosByManual(List<List<Integer>> manualLottos) {
         lottos.addAll(manualLottos.stream()
-                .map(Lotto::generateLottoByManual)
+                .map(LottoGenerator::generateLottoByManual)
                 .collect(Collectors.toList()));
     }
 
     private void buyLottosByAuto(int autoLottoCount) {
         for (int i = 0; i < autoLottoCount; i++) {
-            lottos.add(Lotto.generateLottoByAuto());
+            lottos.add(LottoGenerator.generateLottoByAuto());
         }
     }
 

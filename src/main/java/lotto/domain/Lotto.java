@@ -5,46 +5,37 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.exception.LottoException;
-import lotto.generator.LottoGenerator;
 
 public class Lotto {
 
-    public static final int LOTTO_SIZE = 6;
+    private static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> lotto;
 
-    private Lotto(List<LottoNumber> lotto) {
+    public Lotto(List<LottoNumber> lotto) {
+        checkSize(lotto);
+        checkDuplication(lotto);
         this.lotto = new ArrayList<>(lotto);
     }
 
-    public static Lotto generateLottoByManual(List<Integer> numbers) {
-        checkSize(numbers);
-        checkDuplication(numbers);
-        return new Lotto(LottoGenerator.convertToLottoNumbers(numbers));
-    }
-
-    public static Lotto generateLottoByAuto() {
-        return new Lotto(LottoGenerator.getRandomLottoNumbers(LOTTO_SIZE));
-    }
-
-    private static void checkSize(List<Integer> numbers) {
-        if (!isCorrectSize(numbers)) {
+    private static void checkSize(List<LottoNumber> lotto) {
+        if (!isCorrectSize(lotto)) {
             throw new LottoException(LottoException.WINNING_NUMBERS_SIZE_ERROR_MESSAGE);
         }
     }
 
-    private static boolean isCorrectSize(List<Integer> numbers) {
-        return numbers.size() == LOTTO_SIZE;
+    private static boolean isCorrectSize(List<LottoNumber> lotto) {
+        return lotto.size() == LOTTO_SIZE;
     }
 
-    private static void checkDuplication(List<Integer> numbers) {
-        if (isDuplication(numbers)) {
+    private static void checkDuplication(List<LottoNumber> lotto) {
+        if (isDuplication(lotto)) {
             throw new LottoException(LottoException.WINNING_NUMBERS_DUPLICATION_ERROR_MESSAGE);
         }
     }
 
-    private static boolean isDuplication(List<Integer> numbers) {
-        return new HashSet<>(numbers).size() != numbers.size();
+    private static boolean isDuplication(List<LottoNumber> lotto) {
+        return new HashSet<>(lotto).size() != lotto.size();
     }
 
     public Rank getRank(WinningNumbers winningNumbers) {
