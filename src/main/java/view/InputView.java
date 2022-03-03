@@ -13,13 +13,13 @@ public class InputView {
     private static final String NUMBER_SPLITTER = ", ";
     private static final int MINIMUM_POSITIVE_NUMBER = 0;
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
     }
 
     private static String getInput() {
-        return scanner.nextLine();
+        return SCANNER.nextLine();
     }
 
     public static int getPurchaseAmount() {
