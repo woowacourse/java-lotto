@@ -60,7 +60,7 @@ public class InputView {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구입금액은 숫자이어야 한다.");
+            throw new IllegalArgumentException("올바른 숫자를 입력해야 한다.");
         }
     }
 }
