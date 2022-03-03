@@ -30,7 +30,6 @@ class LottoResultTest {
                 Arguments.arguments(FIRST, 2),
                 Arguments.arguments(SECOND, 1),
                 Arguments.arguments(THIRD, 0)
-
         );
     }
 
@@ -49,5 +48,21 @@ class LottoResultTest {
         LottoResult lottoResult = new LottoResult(RankMap);
 
         Assertions.assertThat(lottoResult.sumOfPrize()).isEqualTo(totalAmount);
+    }
+
+    @Test
+    @DisplayName("수익률을 잘 계산하는가?")
+    void Calculate_Yield() {
+        Map<LottoRank, Integer> RankMap = initLottoRankMap();
+        RankMap.put(THIRD, 1);
+        RankMap.put(FOURTH, 1);
+        RankMap.put(FIFTH, 1);
+
+        int totalPrize = THIRD.getPrizeAmount() + FOURTH.getPrizeAmount() + FIFTH.getPrizeAmount();
+        int moneyAmount = 10000;
+
+        LottoResult lottoResult = new LottoResult(RankMap);
+        double yield = lottoResult.calculateYield(new Money(moneyAmount));
+        Assertions.assertThat(yield).isEqualTo(totalPrize / (double) moneyAmount);
     }
 }

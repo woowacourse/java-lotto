@@ -2,14 +2,23 @@ package lotto.domain;
 
 import static lotto.domain.LottoRank.*;
 
+import java.util.Map;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoRankTest {
+
+    @Test
+    @DisplayName("맵을 초기화 할 수 있는가?")
+    void Init_Lotto_Rank_Map() {
+        Map<LottoRank, Integer> lottoRankIntegerMap = initLottoRankMap();
+        Assertions.assertThat(lottoRankIntegerMap.keySet()).containsExactly(LottoRank.values());
+    }
 
     @ParameterizedTest
     @DisplayName("등수를 올바르게 결정하는지 확인")
