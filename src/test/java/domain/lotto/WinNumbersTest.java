@@ -3,6 +3,7 @@ package domain.lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import exception.lotto.BonusNumDuplicatedException;
 import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,14 +34,9 @@ class WinNumbersTest {
     }
 
     @Test
-    void 로또_번호_중복_확인() {
-        assertThatThrownBy(() -> LottoFactory.createWinNums(Arrays.asList(1, 2, 3, 4, 5, 2), 10))
-                .isInstanceOf(Exception.class);
-    }
-
-    @Test
     void 로또_번호와_보너스_중복_확인() {
-        assertThatThrownBy(() -> LottoFactory.createWinNums(Arrays.asList(1, 2, 3, 4, 5, 2), 5))
-                .isInstanceOf(Exception.class);
+        assertThatThrownBy(() -> LottoFactory.createWinNums(Arrays.asList(1, 2, 3, 4, 5, 6), 5))
+                .isInstanceOf(BonusNumDuplicatedException.class)
+                .hasMessage("보너스 번호는 로또 번호와 중복될 수 없습니다.");
     }
 }

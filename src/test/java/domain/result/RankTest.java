@@ -26,6 +26,30 @@ class RankTest {
     }
 
     @Test
+    void of_테스트_4등() {
+        Rank rank = Rank.of(4, false);
+        assertThat(rank).isEqualTo(Rank.FOURTH);
+    }
+
+    @Test
+    void of_테스트_4등_2() {
+        Rank rank = Rank.of(4, true);
+        assertThat(rank).isEqualTo(Rank.FOURTH);
+    }
+
+    @Test
+    void of_테스트_5등() {
+        Rank rank = Rank.of(3, false);
+        assertThat(rank).isEqualTo(Rank.FIFTH);
+    }
+
+    @Test
+    void of_테스트_5등_2() {
+        Rank rank = Rank.of(3, true);
+        assertThat(rank).isEqualTo(Rank.FIFTH);
+    }
+
+    @Test
     void of_테스트_꼴등() {
         Rank rank = Rank.of(1, true);
         assertThat(rank).isEqualTo(Rank.NONE);

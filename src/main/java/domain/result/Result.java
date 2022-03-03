@@ -2,7 +2,7 @@ package domain.result;
 
 import domain.lotto.Lotto;
 import domain.lotto.WinNumbers;
-import exception.lotto.LottosNullException;
+import exception.NullException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +23,8 @@ public class Result {
     }
 
     private void validate(List<Lotto> lottos) {
-        if (lottos == null || lottos.size() == 0) {
-            throw new LottosNullException();
+        if (lottos.size() == 0) {
+            throw new NullException();
         }
     }
 

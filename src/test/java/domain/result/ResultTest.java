@@ -6,6 +6,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
 import domain.lotto.WinNumbers;
+import exception.NullException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,12 +26,10 @@ class ResultTest {
 
     @Test
     void 생성자_빈로또_에러() {
-        //given
-        Lotto lotto = null;
-
         //then
-        assertThatThrownBy(() -> Result.of(List.of(lotto), winNumbers))
-                .isInstanceOf(Exception.class);
+        assertThatThrownBy(() -> Result.of(new ArrayList<>(), winNumbers))
+                .isInstanceOf(NullException.class)
+                .hasMessage("1개 이상의 값이 포함되어야 한다.");
     }
 
     @Test
