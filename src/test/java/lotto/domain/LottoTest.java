@@ -9,9 +9,10 @@ import lotto.utils.RandomLottoNumbersGenerator;
 
 public class LottoTest {
     @Test
-    @DisplayName("로또 구매개수 입력이 정상일 때")
-    void 로또_구매_개수_판별() {
+    @DisplayName("로또 구매개수 입력이 14000일 때 티켓의 개수는 14개여야 합니다.")
+    void lottoCreateValidTest() {
         Lotto lotto = new Lotto(14000, new RandomLottoNumbersGenerator());
-        assertThat(lotto.getTicketCount()).isEqualTo(14);
+        int ticketCount = lotto.getTicketCount();
+        assertThat(ticketCount).isEqualTo(14);
     }
 }

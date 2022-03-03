@@ -15,15 +15,15 @@ import lotto.utils.RandomLottoNumbersGenerator;
 public class TicketsTest {
 
     @Test
-    @DisplayName("티켓 정상생성")
-    void 티켓_생성() {
+    @DisplayName("생성된 tickets의 개수가 5개여야 합니다.")
+    void ticketsCreateValidTest() {
         Tickets tickets = Tickets.of(5, new RandomLottoNumbersGenerator());
-        assertThat(tickets.getTickets().size()).isEqualTo(5);
+        assertThat(tickets.getTickets()).hasSize(5);
     }
 
     @Test
-    @DisplayName("로또 당첨 등수와 당첨 개수 테스트")
-    void 로또당첨_등수_개수() {
+    @DisplayName("로또 당첨 등수와 당첨 개수가 1등 2개, 2등 1개, 3등 1개가 나와야 합니다.")
+    void ticketsResultTest() {
         WinTicket winTicket = getWinTicket();
 
         List<Ticket> testTickets = new ArrayList<>();
@@ -40,8 +40,8 @@ public class TicketsTest {
     }
 
     @Test
-    @DisplayName("수익률 0일때")
-    void 수익률_0() {
+    @DisplayName("하나라도 당첨되지 않으면 수익율은 0이어야 합니다.")
+    void yieldTest0() {
         WinTicket winTicket = getWinTicket();
 
         List<Ticket> testTickets = new ArrayList<>();
@@ -51,12 +51,13 @@ public class TicketsTest {
 
         Tickets tickets = new Tickets(testTickets);
 
-        assertThat(tickets.getYield(new Amount(3000), winTicket)).isEqualTo(0);
+        double yield = tickets.getYield(new Amount(3000), winTicket);
+        assertThat(yield).isEqualTo(0);
     }
 
     @Test
-    @DisplayName("수익률 1000일때")
-    void 수익률_1000() {
+    @DisplayName("3,000원 투입에 1,500,000원 당첨(3등)이 2개이면 수익율은 1000이어야 합니다.")
+    void yieldTest1() {
         WinTicket winTicket = getWinTicket();
 
         List<Ticket> testTickets = new ArrayList<>();
@@ -66,12 +67,13 @@ public class TicketsTest {
 
         Tickets tickets = new Tickets(testTickets);
 
-        assertThat(tickets.getYield(new Amount(3000), winTicket)).isEqualTo(1000);
+        double yield = tickets.getYield(new Amount(3000), winTicket);
+        assertThat(yield).isEqualTo(1000);
     }
 
     @Test
-    @DisplayName("수익률 0.35 일때")
-    void 수익률_035() {
+    @DisplayName("14,000원 투입에 5,000원(5등) 당첨이면 수익율은 0.35이어야 합니다.")
+    void yieldTest035() {
         WinTicket winTicket = getWinTicket();
 
         List<Ticket> testTickets = new ArrayList<>();
@@ -81,26 +83,28 @@ public class TicketsTest {
         }
         Tickets tickets = new Tickets(testTickets);
 
-        assertThat(tickets.getYield(new Amount(14000), winTicket)).isEqualTo(0.35);
+        double yield = tickets.getYield(new Amount(14000), winTicket);
+        assertThat(yield).isEqualTo(0.35);
     }
 
     @Test
-    @DisplayName("수익률 1등이 3명일때")
-    void 수익률_1등_3명() {
+    @DisplayName("8000원 투입에 1등 당첨이 4명일때 수익율은 1,000,000원이어야 합니다.")
+    void yieldTest1000000() {
         WinTicket winTicket = getWinTicket();
 
         List<Ticket> testTickets = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             testTickets.add(getFirstTicket());
         }
         Tickets tickets = new Tickets(testTickets);
 
-        assertThat(tickets.getYield(new Amount(3000), winTicket)).isEqualTo(2000000);
+        double yield = tickets.getYield(new Amount(8000), winTicket);
+        assertThat(yield).isEqualTo(1_000_000);
     }
 
     @Test
-    @DisplayName("수익률 1등이 14명일때")
-    void 수익률_1등_14명() {
+    @DisplayName("14,000원 투입에 1등 당첨이 14명일때 수익율은 2,000,000원이어야 합니다.")
+    void yieldTest2000000() {
         WinTicket winTicket = getWinTicket();
         List<Ticket> testTickets = new ArrayList<>();
         for (int i = 0; i < 14; i++) {
@@ -108,7 +112,8 @@ public class TicketsTest {
         }
         Tickets tickets = new Tickets(testTickets);
 
-        assertThat(tickets.getYield(new Amount(14000), winTicket)).isEqualTo(2000000);
+        double yield = tickets.getYield(new Amount(14000), winTicket);
+        assertThat(yield).isEqualTo(2000000);
     }
 
 

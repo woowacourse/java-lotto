@@ -21,8 +21,8 @@ public class LottoNumberTest {
 
     private static Stream<Arguments> invalidParameters() {
         return Stream.of(
-            Arguments.of(-1, "로또_숫자_0이하"),
-            Arguments.of(46, "로또_숫자_46")
+            Arguments.of(-1, "로또 숫자 0이하"),
+            Arguments.of(46, "로또 숫자 46")
         );
     }
 
@@ -36,8 +36,8 @@ public class LottoNumberTest {
 
     private static Stream<Arguments> validParameters() {
         return Stream.of(
-            Arguments.of(1, "로또_숫자_1"),
-            Arguments.of(23, "로또_숫자_23"),
-            Arguments.of(45, "로또_숫자_45"));
+            Arguments.of(1, "로또_숫자 1"),
+            Arguments.of(23, "로또_숫자 23"),
+            Arguments.of(45, "로또_숫자 45"));
     }
 }

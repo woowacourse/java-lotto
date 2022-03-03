@@ -26,8 +26,8 @@ public class WinTicketTest {
     }
     
     @Test
-    @DisplayName("당첨번호와 보너스번호 중복일떄 예외 발생")
-    void 당첨번호_보너스번호_중복검사_실패테스트() {
+    @DisplayName("당첨번호와 보너스번호가 중복일때 예외가 발생해야 합니다.")
+    void winTicketInvalidTest() {
         Set<LottoNumber> winNumbers = Set.of(new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(3),
@@ -39,8 +39,8 @@ public class WinTicketTest {
     }
 
     @Test
-    @DisplayName("당첨번호와 보너스번호 정상 입력")
-    void 당첨번호_보너스번호_중복검사_성공테스트() {
+    @DisplayName("당첨번호와 보너스번호 정상 입력일때 예외를 반환하지 않아야 합니다.")
+    void winTicketValidTest() {
         Ticket winTicket = new Ticket(Set.of(new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(3),
@@ -54,7 +54,7 @@ public class WinTicketTest {
     @ParameterizedTest(name = "{index}: {8}")
     @MethodSource("parameters")
     @DisplayName("로또 등수 확인 테스트")
-    void 로또등수확인(int n1, int n2, int n3, int n4, int n5, int n6, int bonus, Rank rank, String testName) {
+    void lottoRankTest(int n1, int n2, int n3, int n4, int n5, int n6, int bonus, Rank rank, String testName) {
         Ticket winTicket = new Ticket(Set.of(new LottoNumber(n1),
             new LottoNumber(n2),
             new LottoNumber(n3),
@@ -63,7 +63,8 @@ public class WinTicketTest {
             new LottoNumber(n6)));
         LottoNumber bonusNumber = new LottoNumber(bonus);
         WinTicket winningTicket = new WinTicket(winTicket, bonusNumber);
-        assertThat(winningTicket.getTicketRank(ticket)).isEqualTo(rank);
+        Rank ticketRank = winningTicket.getTicketRank(ticket);
+        assertThat(ticketRank).isEqualTo(rank);
     }
 
     private static Stream<Arguments> parameters() {

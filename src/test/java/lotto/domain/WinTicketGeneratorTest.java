@@ -14,16 +14,16 @@ import lotto.utils.WinTicketGenerator;
 
 public class WinTicketGeneratorTest {
     @Test
-    @DisplayName("문자열로 로또 정상 생성")
-    void 입력받은_문자열로_로또번호_정상생성() {
+    @DisplayName("올바른 문자열이면 예외를 반환하지 않아야 합니다.")
+    void winTicketGeneratorValidTest() {
         assertThatCode(() -> WinTicketGenerator.generate("1, 2, 3, 4, 5, 6"))
             .doesNotThrowAnyException();
     }
 
     @ParameterizedTest(name = "{index}: {1}")
     @MethodSource("parameters")
-    @DisplayName("로또 번호 입력 테스트")
-    void 로또번호입력(String input, String testName) {
+    @DisplayName("로또 번호 입력 실패 테스트")
+    void winTicketGeneratorInvalidTest(String input, String testName) {
         assertThatThrownBy(() -> WinTicketGenerator.generate(input))
             .isInstanceOf(IllegalArgumentException.class);
     }

@@ -29,8 +29,8 @@ public class AmountTest {
     }
 
     @Test
-    @DisplayName("투입금액이 정상일때")
-    void 투입금액이_정상() {
+    @DisplayName("투입금액이 10000원일땐 예외를 던지지 않아야 합니다.")
+    void amountValidTest() {
         assertThatCode(() -> new Amount(10000))
             .doesNotThrowAnyException();
     }
