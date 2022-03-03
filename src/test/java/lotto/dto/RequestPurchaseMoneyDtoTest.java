@@ -16,7 +16,7 @@ public class RequestPurchaseMoneyDtoTest {
         // when
         RequestPurchaseMoneyDto dto = new RequestPurchaseMoneyDto(money);
 
-        // than
+        // then
         assertThat(dto.getMoney().get()).isEqualTo(money);
     }
 }

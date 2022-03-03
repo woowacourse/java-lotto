@@ -30,7 +30,7 @@ public class LottoNumberTest {
         LottoNumber number3 = LottoNumber.valueOf(2);
 
         // when
-        // than
+        // then
         assertThat(number1 == number2).isTrue();
         assertThat(number1 == number3).isFalse();
         assertThat(number2 == number3).isFalse();

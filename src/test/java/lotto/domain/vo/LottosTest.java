@@ -22,7 +22,7 @@ public class LottosTest {
         // when
         Lottos lottos = new Lottos(lotto);
 
-        // than
+        // then
         assertThat(lottos.get()).hasSize(1);
         assertThat(lottos.get()).containsAll(lotto);
     }
@@ -49,7 +49,7 @@ public class LottosTest {
         // when
         Map<LottoPrize, Integer> lottoMatches = lottos.confirmWinnings(winningNumbers);
 
-        // than
+        // then
         assertThat(lottoMatches.get(LottoPrize.FIRST)).isEqualTo(1);
     }
 }

@@ -31,7 +31,7 @@ public class LottoPrizeTest {
         // when
         LottoPrize lottoPrize = LottoPrize.match(lottoNumberMatchCount, bonusNumberMatch);
 
-        // than
+        // then
         assertThat(lottoPrize).isEqualTo(result);
     }
 

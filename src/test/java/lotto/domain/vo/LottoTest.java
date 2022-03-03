@@ -71,7 +71,7 @@ public class LottoTest {
         // when
         LottoPrize prize = lotto.confirmWinning(winningNumbers);
 
-        // than
+        // then
         assertThat(prize).isEqualTo(LottoPrize.TWICE);
     }
 }

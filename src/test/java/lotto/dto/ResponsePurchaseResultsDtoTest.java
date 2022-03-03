@@ -35,7 +35,7 @@ public class ResponsePurchaseResultsDtoTest {
         // when
         ResponsePurchaseResultsDto dto = new ResponsePurchaseResultsDto(lottos, manualLottoCount, autoLottoCount);
 
-        // than
+        // then
         assertThat(dto.getLottos()).hasSize(lottos.size());
         assertThat(dto.getLottos().get(0)).isEqualTo(lotto0);
         assertThat(dto.getLottos().get(1)).isEqualTo(lotto1);

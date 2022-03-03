@@ -42,7 +42,7 @@ public class LottoGameTest {
         ResponsePurchaseResultsDto dto =
                 lottoGame.purchase(new Money(10000), manualLottos, new CustomLottoGenerator());
 
-        // than
+        // then
         assertThat(dto.getLottos()).hasSize(10);
         assertThat(dto.getLottos().get(0)).isEqualTo(compareLotto);
         assertThat(dto.getManualLottoCount()).isEqualTo(1);
@@ -67,7 +67,7 @@ public class LottoGameTest {
         ResponsePurchaseResultsDto dto =
                 lottoGame.purchase(new Money(1000), manualLottos, new CustomLottoGenerator());
 
-        // than
+        // then
         assertThat(dto.getLottos()).hasSize(1);
         assertThat(dto.getLottos().get(0)).isEqualTo(compareLotto);
         assertThat(dto.getManualLottoCount()).isEqualTo(1);
@@ -88,7 +88,7 @@ public class LottoGameTest {
         ResponsePurchaseResultsDto dto =
                 lottoGame.purchase(new Money(1000), emptyManualLottos, new CustomLottoGenerator());
 
-        // than
+        // then
         assertThat(dto.getLottos()).hasSize(1);
         assertThat(dto.getLottos().get(0)).isEqualTo(compareLotto);
         assertThat(dto.getManualLottoCount()).isEqualTo(0);
@@ -113,7 +113,7 @@ public class LottoGameTest {
         // when
         Map<LottoPrize, Integer> results = dto.getResults();
 
-        // than
+        // then
         assertThat(results.get(LottoPrize.FIRST)).isEqualTo(10);
     }
 

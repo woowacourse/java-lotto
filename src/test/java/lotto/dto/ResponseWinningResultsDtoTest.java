@@ -19,7 +19,7 @@ public class ResponseWinningResultsDtoTest {
         // when
         ResponseWinningResultsDto dto = new ResponseWinningResultsDto(map);
 
-        // than
+        // then
         assertThat(dto.getResults()).isEqualTo(map);
     }
 }

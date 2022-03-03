@@ -25,7 +25,7 @@ public class RequestManualLottoNumbersDtoTest {
         // when
         RequestManualLottoNumbersDto dto = new RequestManualLottoNumbersDto(manualLottoNumbers);
 
-        // than
+        // then
         assertThat(dto.getManualLottos()).hasSize(1);
         assertThat(dto.getManualLottos().get(0)).isEqualTo(lotto);
     }
