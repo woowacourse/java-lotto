@@ -35,25 +35,15 @@ public class AutoPurchaseController {
         return AutoPurchaseControllerHelper.INSTANCE;
     }
 
-    public List<LottoTicketResponse> purchase(String inputMoney) {
-        Money money = insertMoney(inputMoney);
-        int ticketCount = calculatePurchasableCount(money);
+    public List<LottoTicketResponse> purchase(int purchasedCount) {
+        int ticketCount = calculatePurchasableCount(purchasedCount);
         List<LottoTicket> tickets = purchaseTicketByMoney(ticketCount);
         return toResponse(tickets);
     }
 
-    private Money insertMoney(String inputMoney) {
-        Money money = createMoney(inputMoney);
-        moneyService.insert(money);
-        return money;
-    }
-
-    private Money createMoney(String inputMoney) {
-        return new Money(IntegerUtils.parse(inputMoney));
-    }
-
-    private int calculatePurchasableCount(Money money) {
-        return money.divide(Money.from(LottoTicket.PRICE)).getAmount();
+    private int calculatePurchasableCount(int purchasedCount) {
+        int initialCount = moneyService.inquire().getAmount() / LottoTicket.PRICE;
+        return initialCount - purchasedCount;
     }
 
     private List<LottoTicket> purchaseTicketByMoney(int ticketCount) {

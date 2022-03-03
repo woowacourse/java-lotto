@@ -23,9 +23,10 @@ public class MoneyController {
         return MoneyControllerHelper.INSTANCE;
     }
 
-    public void insertMoney(String inputMoney) {
+    public Money insertMoney(String inputMoney) {
         Money money = toMoney(inputMoney);
         moneyService.insert(money);
+        return moneyService.inquire();
     }
 
     private Money toMoney(String inputMoney) {

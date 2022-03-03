@@ -12,13 +12,16 @@ import lotto.dto.LottoTicketResponse;
 class AutoPurchaseControllerTest {
 
     @Test
-    @DisplayName("금액으로 입력한 문자열로 로또를 구매할 수 있다.")
+    @DisplayName("남은 금액으로 자동 로또를 구매할 수 있다.")
     public void purchaseLottoTicketByString() {
         // given
-        String input = "2000";
-        AutoPurchaseController controller = ControllerConfig.getAutoPurchaseController();
+        String input = "3000";
+        MoneyController moneyController = ControllerConfig.getMoneyController();
+        moneyController.insertMoney(input);
+
+        AutoPurchaseController autoPurchaseController = ControllerConfig.getAutoPurchaseController();
         // when
-        List<LottoTicketResponse> ticketResponses = controller.purchase(input);
+        List<LottoTicketResponse> ticketResponses = autoPurchaseController.purchase(1);
         // then
         Assertions.assertThat(ticketResponses.size()).isEqualTo(2);
     }

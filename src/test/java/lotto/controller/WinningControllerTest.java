@@ -16,8 +16,12 @@ class WinningControllerTest {
     @DisplayName("당첨번호와 로또번호를 비교한다.")
     public void compareWinningNumber() {
         // given
+        MoneyController moneyController = ControllerConfig.getMoneyController();
+        moneyController.insertMoney("3000");
+
         AutoPurchaseController purchaseController = ControllerConfig.getAutoPurchaseController();
-        purchaseController.purchase("3000");
+        purchaseController.purchase(1);
+
         InputWinningController winningController = ControllerConfig.getInputWinningController();
         LottoStatisticsResponse lottoStatisticsResponse = winningController.compareWinningNumber("1, 2, 3, 4, 5, 6",
             "7");
@@ -30,7 +34,7 @@ class WinningControllerTest {
                     .stream()
                     .mapToInt(LottoWinningResponse::getTicketCount)
                     .sum()
-            ).isLessThanOrEqualTo(3)
+            ).isLessThanOrEqualTo(2)
         );
 
         // then
