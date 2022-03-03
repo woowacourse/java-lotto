@@ -25,6 +25,15 @@ public class MoneyTest {
     }
 
     @Test
+    @DisplayName("금액 빼기")
+    void subtract_money() {
+        Money money = new Money(2000);
+        money.subtract(1000);
+
+        assertThat(money.getMoney()).isEqualTo(1000);
+    }
+
+    @Test
     @DisplayName("금액 배수로 저장")
     void multiply_money() {
         Money money = new Money(1000);
