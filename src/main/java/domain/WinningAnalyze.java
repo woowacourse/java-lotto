@@ -36,7 +36,7 @@ public class WinningAnalyze {
 	}
 
 	private double calculateProfitRate(final Map<Rank, Integer> analyzeResult) {
-		int payment = tickets.size() * TicketCounter.TICKET_PRICE;
+		int payment = tickets.size() * Ticket.PRICE;
 		double profit = getProfit(analyzeResult);
 
 		return Math.floor((profit / payment) * 100) / 100.0;

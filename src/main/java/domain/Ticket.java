@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Ticket {
+	public static final int PRICE = 1000;
 	public static final int SIZE = 6;
-	private static final int CONDITION_FOR_CHECK_BONUS_BALL = 5;
 
 	public static final String SIZE_ERROR = "로또 번호는 6자리여야 합니다.";
 
@@ -33,7 +33,7 @@ public class Ticket {
 		int matchCount = countMatch(winningNumber.getWinningBalls());
 		boolean bonusBallMatched = false;
 
-		if (matchCount == CONDITION_FOR_CHECK_BONUS_BALL) {
+		if (matchCount == Rank.CONDITION_FOR_CHECK_BONUS_BALL) {
 			bonusBallMatched = balls.contains(winningNumber.getBonusBall());
 		}
 

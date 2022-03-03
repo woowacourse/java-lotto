@@ -1,7 +1,6 @@
 package domain;
 
 public class TicketCounter {
-	public static final int TICKET_PRICE = 1000;
 	private static final int ZERO_COUNT = 0;
 
 	private static final String INVALID_MONEY_ERROR = "구입 금액은 1000원 이상이어야 합니다.";
@@ -14,11 +13,11 @@ public class TicketCounter {
 		validateMoney(money);
 		validateManualCount(money, manualCount);
 
-		this.autoCount = (money - (manualCount * TICKET_PRICE)) / TICKET_PRICE;
+		this.autoCount = (money - (manualCount * Ticket.PRICE)) / Ticket.PRICE;
 	}
 
 	private void validateMoney(final int money) {
-		if (money < TICKET_PRICE) {
+		if (money < Ticket.PRICE) {
 			throw new IllegalArgumentException(INVALID_MONEY_ERROR);
 		}
 	}
@@ -28,7 +27,7 @@ public class TicketCounter {
 			throw new IllegalArgumentException(NEGATIVE_COUNT_ERROR);
 		}
 
-		if (manualCount * TICKET_PRICE > money) {
+		if (manualCount * Ticket.PRICE > money) {
 			throw new IllegalArgumentException(OVER_COUNT_ERROR);
 		}
 	}
