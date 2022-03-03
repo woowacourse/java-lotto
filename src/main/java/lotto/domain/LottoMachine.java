@@ -15,7 +15,7 @@ public class LottoMachine {
     }
 
     public List<Lotto> makeLottoTickets(List<Lotto> manualLottos) {
-        ArrayList<Lotto> lottoTickets = new ArrayList<>();
+        List<Lotto> lottoTickets = new ArrayList<>();
         if (manualLottos.size() != 0) {
             lottoTickets.addAll(manualLottos);
         }
