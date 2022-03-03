@@ -11,7 +11,7 @@ public class ManualPurchaseCounts {
 
     public ManualPurchaseCounts(final String inputManualLottoCounts, final int allLottoCounts) {
         validateValidNumber(inputManualLottoCounts);
-        int manualLottoCounts = Integer.parseInt(inputManualLottoCounts);
+        final int manualLottoCounts = Integer.parseInt(inputManualLottoCounts);
         validateManualCountsNotOverAllCounts(manualLottoCounts, allLottoCounts);
         this.manualLottoCounts = manualLottoCounts;
     }
