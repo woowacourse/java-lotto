@@ -6,8 +6,9 @@ import java.util.Map;
 
 public class WinningChecker {
 
-    private final int WINNING_COUNT = 0;
-    private final int BONUS_COUNT = 1;
+    private static final int WINNING_COUNT = 0;
+    private static final int BONUS_COUNT = 1;
+    private static final int NO_COUNT = 0;
 
     private final Lottos lottos;
     private final WinningNumbers winningNumbers;
@@ -34,7 +35,7 @@ public class WinningChecker {
     }
 
     public int getRewardsCount(Rewards rewards) {
-        return rewardsCountMap.getOrDefault(rewards, 0);
+        return rewardsCountMap.getOrDefault(rewards, NO_COUNT);
     }
 
     private Rewards checkWinning(Lotto lotto) {
