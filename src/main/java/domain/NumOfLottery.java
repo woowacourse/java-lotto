@@ -22,11 +22,15 @@ public final class NumOfLottery {
 	}
 
 	public NumOfLottery putNumOfManualLottery(final int numOfManualLottery) {
+		validateBound(numOfManualLottery);
+		final int numOfAutoLottery = this.numOfAutoLottery - numOfManualLottery;
+		return new NumOfLottery(numOfAutoLottery, numOfManualLottery);
+	}
+
+	private void validateBound(final int numOfManualLottery) {
 		if (numOfManualLottery > this.numOfAutoLottery) {
 			throw new IllegalArgumentException(NUM_OF_MANUAL_LOTTERY_EXCEPTION.getMessage());
 		}
-		final int numOfAutoLottery = this.numOfAutoLottery - numOfManualLottery;
-		return new NumOfLottery(numOfAutoLottery, numOfManualLottery);
 	}
 
 	public int getNumOfAutoLottery() {
