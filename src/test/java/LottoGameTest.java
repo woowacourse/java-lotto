@@ -2,7 +2,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.Lotto;
 import domain.LottoGame;
-import domain.RandomLottoGenerator;
+import domain.AutoLottoGenerator;
 import domain.WinningNumbers;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class LottoGameTest {
     @Test
     @DisplayName("입력받은 금액 로또로 바꿔주는 기능 테스트")
     void buyLottoTest() {
-        LottoGame lottoGame = new LottoGame( new RandomLottoGenerator(14));
+        LottoGame lottoGame = new LottoGame( new AutoLottoGenerator(14));
         assertThat(lottoGame.getLottos().getSize()).isEqualTo(14);
     }
 

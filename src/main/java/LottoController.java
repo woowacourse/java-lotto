@@ -2,7 +2,7 @@ import domain.LottoGame;
 import domain.LottoGenerators;
 import domain.ManualLottoGenerator;
 import domain.Money;
-import domain.RandomLottoGenerator;
+import domain.AutoLottoGenerator;
 import domain.WinningChecker;
 import domain.WinningNumbers;
 import view.InputView;
@@ -18,7 +18,7 @@ public class LottoController {
             new LottoGenerators(
                 new ManualLottoGenerator(money.getManualAmount(),
                     InputView.askManualLottoNumbers(money.getManualAmount())),
-                new RandomLottoGenerator(money.getAutoAmount())));
+                new AutoLottoGenerator(money.getAutoAmount())));
 
         OutputView.printLottosInformations(money, lottoGame.getLottos());
 

@@ -6,11 +6,11 @@ import java.util.List;
 public class LottoGenerators implements LottoGenerator{
 
     private final ManualLottoGenerator manualLottoGenerator;
-    private final RandomLottoGenerator randomLottoGenerator;
+    private final AutoLottoGenerator autoLottoGenerator;
 
-    public LottoGenerators(ManualLottoGenerator manualLottoGenerator, RandomLottoGenerator randomLottoGenerator) {
+    public LottoGenerators(ManualLottoGenerator manualLottoGenerator, AutoLottoGenerator autoLottoGenerator) {
         this.manualLottoGenerator = manualLottoGenerator;
-        this.randomLottoGenerator = randomLottoGenerator;
+        this.autoLottoGenerator = autoLottoGenerator;
     }
 
 
@@ -18,7 +18,7 @@ public class LottoGenerators implements LottoGenerator{
     public List<Lotto> generate() {
         List<Lotto> lottos = new ArrayList<>();
         lottos.addAll(manualLottoGenerator.generate());
-        lottos.addAll(randomLottoGenerator.generate());
+        lottos.addAll(autoLottoGenerator.generate());
         return lottos;
     }
 

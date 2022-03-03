@@ -3,7 +3,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import domain.LottoGenerator;
 import domain.LottoGenerators;
 import domain.ManualLottoGenerator;
-import domain.RandomLottoGenerator;
+import domain.AutoLottoGenerator;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,11 +15,11 @@ public class LottoGeneratorsTest {
     void generate_lottos() {
         ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(1,
             List.of(List.of(1, 2, 3, 4, 5, 6)));
-        RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator(1);
+        AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(1);
 
         LottoGenerator lottoGenerators = new LottoGenerators(
             manualLottoGenerator,
-            randomLottoGenerator);
+            autoLottoGenerator);
 
         assertThat(lottoGenerators.generate().size()).isEqualTo(2);
     }
@@ -29,11 +29,11 @@ public class LottoGeneratorsTest {
     void generate_manual_lottos() {
         ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(1,
             List.of(List.of(1, 2, 3, 4, 5, 6)));
-        RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator(0);
+        AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(0);
 
         LottoGenerator lottoGenerators = new LottoGenerators(
             manualLottoGenerator,
-            randomLottoGenerator);
+            autoLottoGenerator);
 
         assertThat(lottoGenerators.generate().size()).isEqualTo(1);
     }
@@ -43,11 +43,11 @@ public class LottoGeneratorsTest {
     void generate_auto_lottos() {
         ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(1,
             List.of(List.of(1, 2, 3, 4, 5, 6)));
-        RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator(0);
+        AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(0);
 
         LottoGenerator lottoGenerators = new LottoGenerators(
             manualLottoGenerator,
-            randomLottoGenerator);
+            autoLottoGenerator);
 
         assertThat(lottoGenerators.generate().size()).isEqualTo(1);
     }
