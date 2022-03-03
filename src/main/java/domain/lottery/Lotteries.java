@@ -37,7 +37,7 @@ public final class Lotteries {
 			Rank rank = winningLottery.getRank(lottery);
 			putCountToWinner(winners, rank);
 		});
-		return winners;
+		return Collections.unmodifiableMap(winners);
 	}
 
 	private Map<Rank, Integer> initRankResult() {
