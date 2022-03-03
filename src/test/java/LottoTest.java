@@ -2,6 +2,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import domain.Lotto;
+import domain.WinningNumbers;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -54,6 +55,32 @@ public class LottoTest {
             () -> new Lotto(List.of(1, 2, 3, 4, 5, 5))
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("[ERROR] 로또 번호는 중복될 수 없습니다.");
+    }
+
+    @Test
+    @DisplayName("로또 당첨 번호 3개 미만 시 winningCount 0으로 변환")
+    void convert_winningCount() {
+
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(5, 6, 7, 8, 9, 10), 11);
+
+        List<Integer> counts = lotto.getWinningAndBonusCount(winningNumbers);
+
+        assertThat(counts.get(0)).isEqualTo(0);
+
+    }
+
+    @Test
+    @DisplayName("로또 당첨 번호 5개 아닐 시 bonusCount 0으로 변환")
+    void convert_bonusCount() {
+
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(5, 6, 7, 8, 9, 10), 1);
+
+        List<Integer> counts = lotto.getWinningAndBonusCount(winningNumbers);
+
+        assertThat(counts.get(1)).isEqualTo(0);
+
     }
 
 }
