@@ -46,7 +46,7 @@ class LottoTicketTest {
         Set<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
         // then
-        assertThatThrownBy(() -> lottoNumbers.add(new LottoNumber(1)))
+        assertThatThrownBy(() -> lottoNumbers.add(LottoNumber.of(1)))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
@@ -55,7 +55,7 @@ class LottoTicketTest {
     void 당첨_번호_인지_확인() {
         // given
         LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumber lottoNumber = new LottoNumber(1);
+        LottoNumber lottoNumber = LottoNumber.of(1);
 
         // when
         boolean result = lottoTicket.contains(lottoNumber);

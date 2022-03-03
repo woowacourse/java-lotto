@@ -33,7 +33,7 @@ public class LottoController {
     }
 
     public WinningNumberDto createWinningNumber(List<Integer> normalNumbers, int bonusNumber) {
-        WinningNumber winningNumber = new WinningNumber(new LottoTicket(normalNumbers), new LottoNumber(bonusNumber));
+        WinningNumber winningNumber = new WinningNumber(new LottoTicket(normalNumbers), LottoNumber.of(bonusNumber));
 
         return WinningNumberDto.from(winningNumber);
     }

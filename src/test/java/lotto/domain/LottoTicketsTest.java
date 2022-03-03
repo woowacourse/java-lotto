@@ -39,7 +39,7 @@ class LottoTicketsTest {
     void 당첨_번호_판별() {
         // given
         LottoTickets lottoTickets = new LottoTickets(generateLottoTickets());
-        WinningNumber winningNumber = new WinningNumber(new LottoTicket(generateNumbers()), new LottoNumber(7));
+        WinningNumber winningNumber = new WinningNumber(new LottoTicket(generateNumbers()), LottoNumber.of(7));
 
         // when
         LottoResult lottoResult = lottoTickets.determine(winningNumber);

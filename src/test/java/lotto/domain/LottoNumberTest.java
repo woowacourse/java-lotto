@@ -5,27 +5,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumberTest {
 
     @DisplayName("로또 번호는 1 ~ 45 사이이다.")
-    @Test
-    void 로또_번호_정상() {
-        // given
-        int number = 10;
-
-        // when & then
-        assertDoesNotThrow(() -> new LottoNumber(number));
+    @ParameterizedTest
+    @ValueSource(ints = {1, 10, 20, 45})
+    void 로또_번호_정상(int number) {
+        // given & when & then
+        assertDoesNotThrow(() -> LottoNumber.of(number));
     }
 
     @DisplayName("로또 번호가 1 ~ 45이외인 경우 예외를 던진다.")
-    @Test
-    void 로또_번호_범위_초과() {
-        // given
-        int number = 0;
-
-        // when & then
-        assertThatThrownBy(() -> new LottoNumber(number))
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46, -1})
+    void 로또_번호_범위_초과(int number) {
+        // given & when & then
+        assertThatThrownBy(() -> LottoNumber.of(number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호의 범위는 1 ~ 45 사이입니다.");
     }
@@ -37,8 +35,8 @@ class LottoNumberTest {
         int number = 1;
 
         // when
-        LottoNumber lottoNumber = new LottoNumber(number);
-        LottoNumber targetLottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.of(number);
+        LottoNumber targetLottoNumber = LottoNumber.of(number);
 
         // then
         assertThat(lottoNumber).isEqualTo(targetLottoNumber);

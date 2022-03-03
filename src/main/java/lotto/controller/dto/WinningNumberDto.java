@@ -26,6 +26,6 @@ public class WinningNumberDto {
     }
 
     public WinningNumber toWinningNumber() {
-        return new WinningNumber(new LottoTicket(normalNumbers), new LottoNumber(bonusNumber));
+        return new WinningNumber(new LottoTicket(normalNumbers), LottoNumber.of(bonusNumber));
     }
 }

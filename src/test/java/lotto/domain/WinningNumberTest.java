@@ -17,7 +17,7 @@ class WinningNumberTest {
         int bonusBall = 7;
 
         // when & then
-        assertDoesNotThrow(() -> new WinningNumber(new LottoTicket(winningNumbers), new LottoNumber(bonusBall)));
+        assertDoesNotThrow(() -> new WinningNumber(new LottoTicket(winningNumbers), LottoNumber.of(bonusBall)));
     }
 
     @DisplayName("당첨 번호의 총 개수가 7개가 아닌 경우 예외를 던진다.")
@@ -28,7 +28,7 @@ class WinningNumberTest {
         int bonusBall = 7;
 
         // when & then
-        assertThatThrownBy(() -> new WinningNumber(new LottoTicket(winningNumbers), new LottoNumber(bonusBall)))
+        assertThatThrownBy(() -> new WinningNumber(new LottoTicket(winningNumbers), LottoNumber.of(bonusBall)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("번호의 갯수가 적절하지 않습니다. 또한 중복될 수 없습니다.");
     }
@@ -40,7 +40,7 @@ class WinningNumberTest {
         int bonusBall = 1;
 
         // when & then
-        assertThatThrownBy(() -> new WinningNumber(new LottoTicket(winningNumbers), new LottoNumber(bonusBall)))
+        assertThatThrownBy(() -> new WinningNumber(new LottoTicket(winningNumbers), LottoNumber.of(bonusBall)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호는 중복될 수 없습니다.");
     }
@@ -49,7 +49,7 @@ class WinningNumberTest {
     @Test
     void 당첨_정보_확인_2등() {
         // given
-        WinningNumber winningNumber = new WinningNumber(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
+        WinningNumber winningNumber = new WinningNumber(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), LottoNumber.of(7));
         LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
 
         // when
@@ -63,7 +63,7 @@ class WinningNumberTest {
     @Test
     void 당첨_정보_확인_3등() {
         // given
-        WinningNumber winningNumber = new WinningNumber(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
+        WinningNumber winningNumber = new WinningNumber(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), LottoNumber.of(7));
         LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 8));
 
         // when
