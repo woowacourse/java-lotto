@@ -9,11 +9,13 @@ public class Money {
     private static final String ERROR_UNIT = "[ERROR] 구매 금액은 1000원 단위로 입력하세요";
     private static final int PRICE_LOTTO = 1000;
 
-    private int amount;
+    private final int amount;
+    private int purchasedAmount;
 
     private Money(int amount) {
         validate(amount);
         this.amount = amount;
+        this.purchasedAmount = 0;
     }
 
     private void validate(int amount) {
@@ -46,7 +48,7 @@ public class Money {
     }
 
     public void payLotto(int count) {
-        this.amount = this.amount - (PRICE_LOTTO * count);
+        this.purchasedAmount = this.purchasedAmount + (PRICE_LOTTO * count);
     }
 
     public void payLotto() {
@@ -54,7 +56,7 @@ public class Money {
     }
 
     public boolean isLottoAvailable(int count) {
-        return this.amount >= (PRICE_LOTTO * count);
+        return (this.amount - this.purchasedAmount) >= (PRICE_LOTTO * count);
     }
 
     public boolean isLottoAvailable() {
