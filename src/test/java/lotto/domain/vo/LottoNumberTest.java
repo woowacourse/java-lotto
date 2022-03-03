@@ -1,6 +1,9 @@
 package lotto.domain.vo;
 
 import static org.assertj.core.api.Assertions.*;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,5 +31,15 @@ public class LottoNumberTest {
     @DisplayName("숫자가 같으면 동등한 객체이다.")
     void equalsNumber() {
         assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
+    }
+
+    @Test
+    @DisplayName("1부터 45까지의 숫자를 생성한다.")
+    void numberValues() {
+        List<LottoNumber> values = LottoNumber.values();
+
+        assertThat(values).isEqualTo(IntStream.rangeClosed(1, 45)
+            .mapToObj(LottoNumber::of)
+            .collect(Collectors.toList()));
     }
 }
