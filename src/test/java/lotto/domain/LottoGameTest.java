@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.utils.RandomLottoGenerateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ class LottoGameTest {
     @Test
     void purchase() {
         LottoGame lottoGame = new LottoGame(new Money(10000));
-        lottoGame.purchase(new ArrayList<>());
+        lottoGame.purchase(new ArrayList<>(), new RandomLottoGenerateStrategy());
 
         List<Lotto> lottoResults = lottoGame.getLottos();
 
@@ -35,7 +36,7 @@ class LottoGameTest {
 
         List<List<Integer>> manualNumbers = new ArrayList<>(List.of(integers, integers1));
         LottoGame lottoGame = new LottoGame(new Money(2000));
-        lottoGame.purchase(manualNumbers);
+        lottoGame.purchase(manualNumbers, new RandomLottoGenerateStrategy());
 
         List<Lotto> lottos = lottoGame.getLottos();
 
@@ -61,7 +62,7 @@ class LottoGameTest {
         }
 
         LottoGame lottoGame = new LottoGame(new Money(10000));
-        lottoGame.purchase(new ArrayList<>());
+        lottoGame.purchase(new ArrayList<>(), new RandomLottoGenerateStrategy());
         WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers), bonusNumber);
         assertThat(lottoGame.confirmWinnings(winningLotto)).isInstanceOf(LottoResults.class);
     }

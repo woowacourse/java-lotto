@@ -1,12 +1,12 @@
 package lotto.domain;
 
 import static lotto.constants.ErrorConstants.ERROR_NULL_MESSAGE;
-import static lotto.utils.LottoNumbersGenerator.generateManualLottoNumbers;
-import static lotto.utils.LottoNumbersGenerator.generateRandomLottoNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import lotto.utils.LottoGenerateStrategy;
 
 public class LottoGame {
 
@@ -20,15 +20,11 @@ public class LottoGame {
         this.money = money;
     }
 
-    public void purchase(List<List<Integer>> manualNumbers) {
+    public void purchase(List<List<Integer>> manualNumbers, LottoGenerateStrategy lottoGenerateStrategy) {
         Objects.requireNonNull(manualNumbers, ERROR_NULL_MESSAGE);
-        purchaseLottos(manualNumbers);
-    }
-
-    private void purchaseLottos(List<List<Integer>> manualNumbers) {
         List<Lotto> purchasedLottos = new ArrayList<>();
         purchaseManualLottos(purchasedLottos, manualNumbers);
-        purchaseRandomLottos(purchasedLottos);
+        purchaseRandomLottos(purchasedLottos, lottoGenerateStrategy);
         this.lottos = new Lottos(purchasedLottos);
     }
 
@@ -38,15 +34,22 @@ public class LottoGame {
         }
 
         for (List<Integer> manualNumber : manualNumbers) {
-            origin.add(new Lotto(generateManualLottoNumbers(manualNumber)));
+            origin.add(generateManualLotto(manualNumber));
         }
         money.minus(new Money(manualNumbers.size() * LOTTO_PRICE));
     }
 
-    private void purchaseRandomLottos(List<Lotto> origin) {
+    private Lotto generateManualLotto(List<Integer> manualNumber) {
+        return new Lotto(manualNumber.stream()
+                .map(LottoNumber::new)
+                .sorted()
+                .collect(Collectors.toList()));
+    }
+
+    private void purchaseRandomLottos(List<Lotto> origin, LottoGenerateStrategy lottoGenerateStrategy) {
         int purchaseNumber = money.canBuyNumber(new Money(LOTTO_PRICE));
         for (int i = 0; i < purchaseNumber; i++) {
-            origin.add(new Lotto(generateRandomLottoNumbers()));
+            origin.add(lottoGenerateStrategy.generate());
         }
     }
 

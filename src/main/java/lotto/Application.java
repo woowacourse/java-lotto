@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.controller.LottoController;
+import lotto.utils.RandomLottoGenerateStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -13,7 +14,7 @@ public class Application {
 
         int manualCount = InputView.requestManualCount(money);
         List<List<Integer>> manualNumbers = InputView.requestManualNumbers(manualCount);
-        ResultView.printLottos(lottoController.purchase(manualNumbers), manualCount);
+        ResultView.printLottos(lottoController.purchase(manualNumbers, new RandomLottoGenerateStrategy()), manualCount);
 
         List<Integer> winningNumbers = InputView.requestWinningNumber();
         int bonusNumber = InputView.requestBonusNumber();

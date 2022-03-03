@@ -1,10 +1,9 @@
 package lotto.utils;
 
-import static lotto.domain.Lotto.LOTTO_SIZE;
 import static lotto.domain.LottoNumber.LOTTO_MAXIMUM;
 import static lotto.domain.LottoNumber.LOTTO_MINIMUM;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -23,16 +22,7 @@ public class LottoNumbersGenerator {
     private LottoNumbersGenerator() {
     }
 
-    public static List<LottoNumber> generateRandomLottoNumbers() {
-        Collections.shuffle(originLottoNumbers);
-        return originLottoNumbers.subList(0, LOTTO_SIZE).stream()
-                .sorted()
-                .collect(Collectors.toList());
-    }
-
-    public static List<LottoNumber> generateManualLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+    public static List<LottoNumber> getOriginLottoNumbers() {
+        return new ArrayList<>(originLottoNumbers);
     }
 }

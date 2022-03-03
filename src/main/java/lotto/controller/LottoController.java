@@ -8,6 +8,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoResults;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
+import lotto.utils.LottoGenerateStrategy;
 
 public class LottoController {
 
@@ -17,8 +18,8 @@ public class LottoController {
         lottoGame = new LottoGame(new Money(money));
     }
 
-    public List<Lotto> purchase(List<List<Integer>> manualNumbers) {
-        lottoGame.purchase(manualNumbers);
+    public List<Lotto> purchase(List<List<Integer>> manualNumbers, LottoGenerateStrategy lottoGenerateStrategy) {
+        lottoGame.purchase(manualNumbers, lottoGenerateStrategy);
         return lottoGame.getLottos();
     }
 
