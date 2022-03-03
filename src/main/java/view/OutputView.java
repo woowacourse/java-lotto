@@ -55,8 +55,8 @@ public class OutputView {
     public static void showProfitRate(double profitRate) {
         double processedProfitRate = Math.floor(profitRate * SECOND_DECIMAL_POINT) / SECOND_DECIMAL_POINT;
         if (profitRate < BENEFIT_STANDARD) {
-            System.out.printf("총 수익률은 (%.2f)입니다.(기준이 " + BENEFIT_STANDARD + "이기 때문에 결과적으로 손해라는 의미임)",
-                processedProfitRate);
+            System.out.printf("총 수익률은 (%.2f)입니다.(기준이 %d이기 때문에 결과적으로 손해라는 의미임)\n",
+                processedProfitRate, BENEFIT_STANDARD);
             return;
         }
         if (profitRate >= BENEFIT_STANDARD) {
