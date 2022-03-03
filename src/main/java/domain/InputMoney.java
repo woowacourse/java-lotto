@@ -24,7 +24,8 @@ public class InputMoney {
     }
 
     private void validateMultiple(int money) {
-        if (money % Lotto.SINGLE_LOTTO_PRICE != REMAIN) {
+        boolean isDivided = money % Lotto.SINGLE_LOTTO_PRICE != REMAIN;
+        if (isDivided) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_MULTIPLE_OF_UNIT);
         }
     }
