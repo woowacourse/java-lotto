@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import static lotto.domain.LottoMachine.*;
+
 import java.util.List;
 import lotto.controller.dto.LottoResultDto;
 import lotto.controller.dto.LottoTicketsDto;
@@ -23,7 +25,7 @@ public class LottoController {
         LottoTickets lottoTickets = lottoMachine.issueManual(purchaseInfo.getManualNumbers());
         Money calculateMoney = money.calculateProduct(LottoMachine.LOTTO_PRICE, purchaseInfo.getManualCount());
 
-        int autoCount = calculateMoney.getProductCount(LottoMachine.LOTTO_PRICE);
+        int autoCount = calculateMoney.getProductCount(LOTTO_PRICE);
         lottoTickets.combine(lottoMachine.issueAuto(autoCount));
 
         return SalesInfoDto.valueOf(money.getAmount(), purchaseInfo.getManualCount(), autoCount,

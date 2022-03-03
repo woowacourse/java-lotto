@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.domain.LottoTestDataGenerator.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -8,18 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTicketsTest {
-
-    private static List<List<Integer>> generateLottoTickets() {
-        return List.of(
-                List.of(8, 21, 23, 41, 42, 43),
-                List.of(3, 5, 11, 16, 32, 38),
-                List.of(7, 11, 16, 35, 36, 44)
-        );
-    }
-
-    private static List<Integer> generateNumbers() {
-        return List.of(8, 21, 23, 41, 42, 43);
-    }
 
     @DisplayName("로또 번호 리스트들을 받아 로또 티켓 리스트를 생성한다.")
     @Test
