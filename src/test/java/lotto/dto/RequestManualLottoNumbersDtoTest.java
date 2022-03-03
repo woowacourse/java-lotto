@@ -9,7 +9,7 @@ import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class RequestManualLottoNumbersTest {
+public class RequestManualLottoNumbersDtoTest {
 
     @DisplayName("수동 로또 번호 리스트로 로또 리스트를 가지는 dto를 생성한다.")
     @Test
@@ -23,7 +23,7 @@ public class RequestManualLottoNumbersTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         // when
-        RequestManualLottoNumbers dto = new RequestManualLottoNumbers(manualLottoNumbers);
+        RequestManualLottoNumbersDto dto = new RequestManualLottoNumbersDto(manualLottoNumbers);
 
         // than
         assertThat(dto.getManualLottos()).hasSize(1);

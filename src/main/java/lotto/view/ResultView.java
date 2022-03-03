@@ -23,11 +23,14 @@ public class ResultView {
     private static final String RATE_RETURN_LOSS_MESSAGE = "(손해입니다.)";
     private static final String RATE_RETURN_BENEFIT_MESSAGE = "(이득입니다.)";
     private static final String RATE_RETURN_BREAK_EVEN_MESSAGE = "(본전입니다.)";
+    private static final int RATE_RETURN_FLOOR_SEPARATOR = 2;
+    private static final double RATE_RETURN_STANDARD = 1.0;
 
     private static final String EMPTY_MESSAGE = "";
 
     public static void printPurchaseLottos(ResponsePurchaseResultsDto dto) {
         System.out.printf(PURCHASE_RESULT_MESSAGE, dto.getManualLottoCount(), dto.getAutoLottoCount());
+
         for (Lotto lotto : dto.getLottos()) {
             String numbers = lotto.getNumbers().stream()
                     .map(lottoNumber -> Integer.toString(lottoNumber.get()))
@@ -40,20 +43,21 @@ public class ResultView {
     public static void printResults(ResponseWinningResultsDto dto) {
         System.out.println(LOTTO_RESULT_MESSAGE);
         System.out.println(LOTTO_RESULT_DELIMITER);
+
         Map<LottoPrize, Integer> results = dto.getResults();
         for (LottoPrize prize : LottoPrize.values()) {
             int number = results.get(prize);
             System.out.print(generateLottoResultMessage(prize, number));
         }
-        double rateReturn = calculateRateReturn(results);
-        System.out.println(generateRateReturnMessage(rateReturn));
+
+        System.out.println(generateRateReturnMessage(calculateRateReturn(results)));
     }
 
     private static double calculateRateReturn(Map<LottoPrize, Integer> results) {
         int totalSpendMoney = getTotalSpendMoney(results);
         int totalReward = getTotalReward(results);
         double rateReturn = (double) totalReward / totalSpendMoney;
-        return floor(rateReturn, 2);
+        return floor(rateReturn, RATE_RETURN_FLOOR_SEPARATOR);
     }
 
     private static int getTotalSpendMoney(Map<LottoPrize, Integer> results) {
@@ -92,10 +96,10 @@ public class ResultView {
     }
 
     private static String generateRateReturnMessage(double rateReturn) {
-        if (rateReturn > 1.0) {
+        if (rateReturn > RATE_RETURN_STANDARD) {
             return String.format(LOTTO_RATE_RETURN_MESSAGE + RATE_RETURN_BENEFIT_MESSAGE, rateReturn);
         }
-        if (rateReturn < 1.0) {
+        if (rateReturn < RATE_RETURN_STANDARD) {
             return String.format(LOTTO_RATE_RETURN_MESSAGE + RATE_RETURN_LOSS_MESSAGE, rateReturn);
         }
         return String.format(LOTTO_RATE_RETURN_MESSAGE + RATE_RETURN_BREAK_EVEN_MESSAGE, rateReturn);

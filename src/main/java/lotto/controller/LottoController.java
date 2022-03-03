@@ -13,8 +13,9 @@ import lotto.view.ResultView;
 public class LottoController {
 
     public void run() {
-        Money purchaseMoney = InputView.requestPurchaseMoney().getMoney();
         LottoGame lottoGame = new LottoGame();
+
+        Money purchaseMoney = InputView.requestPurchaseMoney().getMoney();
         if (lottoGame.canBuyLotto(purchaseMoney)) {
             purchase(purchaseMoney, lottoGame);
             return;

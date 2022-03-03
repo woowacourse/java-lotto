@@ -10,7 +10,7 @@ import lotto.domain.vo.Lotto;
 import lotto.domain.vo.LottoNumber;
 import lotto.domain.vo.ManualPurchaseCount;
 import lotto.domain.vo.WinningNumbers;
-import lotto.dto.RequestManualLottoNumbers;
+import lotto.dto.RequestManualLottoNumbersDto;
 import lotto.dto.RequestPurchaseMoneyDto;
 
 public class InputView {
@@ -59,7 +59,7 @@ public class InputView {
         }
     }
 
-    public static RequestManualLottoNumbers requestManualLottoNumbers() {
+    public static RequestManualLottoNumbersDto requestManualLottoNumbers() {
         ManualPurchaseCount manualPurchaseCount = requestManualPurchaseCount();
         List<List<LottoNumber>> manualLottoNumbers = new ArrayList<>();
         if (manualPurchaseCount.canBuy()) {
@@ -67,7 +67,7 @@ public class InputView {
             manualLottoNumbers = readManualLottoNumbers(manualPurchaseCount);
             System.out.println();
         }
-        return new RequestManualLottoNumbers(manualLottoNumbers);
+        return new RequestManualLottoNumbersDto(manualLottoNumbers);
     }
 
     private static ManualPurchaseCount requestManualPurchaseCount() {

@@ -24,6 +24,7 @@ public enum LottoPrize {
         if (isTwice(lottoNumberMatchCount, bonusNumberMatch)) {
             return TWICE;
         }
+
         return Arrays.stream(LottoPrize.values())
                 .filter(prize -> prize.lottoNumberMatchCount == lottoNumberMatchCount)
                 .filter(prize -> !prize.equals(TWICE))

@@ -76,7 +76,7 @@ public class LottoGameTest {
 
     @DisplayName("로또를 자동으로 1회 구매한다")
     @Test
-    void purchase_auth_test() {
+    void purchase_auto_test() {
         // given
         LottoGame lottoGame = new LottoGame();
         List<Lotto> emptyManualLottos = new ArrayList<>(new ArrayList<>());
