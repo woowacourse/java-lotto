@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.user.Money;
-import lotto.exception.InvalidException;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -14,6 +14,6 @@ public class MoneyTest {
     public void 구입금액입력_실패_테스트(String value) {
         assertThatThrownBy(() -> new Money(value))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(InvalidException.ERROR_WRONG_INPUT_MONEY);
+                .hasMessage("[ERROR] 올바른 구매 값을 입력해주세요");
     }
 }

@@ -1,9 +1,10 @@
 package lotto.domain.user;
 
-import lotto.exception.InvalidException;
+
 
 public class Money {
 
+    private static final String ERROR_WRONG_INPUT_MONEY = "[ERROR] 올바른 구매 값을 입력해주세요";
     private static final int BASIC_LOTTO_MONEY = 1000;
     private final int money;
 
@@ -26,13 +27,13 @@ public class Money {
         try {
             Integer.parseInt(money);
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(InvalidException.ERROR_WRONG_INPUT_MONEY);
+            throw new IllegalArgumentException(ERROR_WRONG_INPUT_MONEY);
         }
     }
 
     private void checkDivideMoney(final int money) {
         if (!(money >= BASIC_LOTTO_MONEY && money % BASIC_LOTTO_MONEY == 0)) {
-            throw new IllegalArgumentException(InvalidException.ERROR_WRONG_INPUT_MONEY);
+            throw new IllegalArgumentException(ERROR_WRONG_INPUT_MONEY);
         }
     }
 

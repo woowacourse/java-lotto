@@ -2,10 +2,11 @@ package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.exception.InvalidException;
+
 
 public class LottoNumber {
 
+    private static final String ERROR_INTEGER_RANGE = "[ERROR] 1~45 사이의 수가 아닙니다.";
     private static final int LOTTO_MIN_RANGE = 1;
     private static final int LOTTO_MAX_RANGE = 45;
 
@@ -25,13 +26,13 @@ public class LottoNumber {
         try {
             Integer.parseInt(number);
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(InvalidException.ERROR_INTEGER_RANGE);
+            throw new IllegalArgumentException(ERROR_INTEGER_RANGE);
         }
     }
 
     public void checkRangeNumber(final int number) {
         if (!(number >= LOTTO_MIN_RANGE && number <= LOTTO_MAX_RANGE)) {
-            throw new IllegalArgumentException(InvalidException.ERROR_INTEGER_RANGE);
+            throw new IllegalArgumentException(ERROR_INTEGER_RANGE);
         }
     }
 

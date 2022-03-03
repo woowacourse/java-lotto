@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Arrays;
 import lotto.domain.lotto.Lotto;
-import lotto.exception.InvalidException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -16,14 +15,14 @@ public class LottoTest {
     public void 로또번호_개수_검증() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(InvalidException.ERROR_CREATE_LOTTO);
+                .hasMessage("[ERROR] 잘못된 숫자 입력입니다.");
     }
 
     @Test
     public void 로또번호_중복_검증() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 5)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(InvalidException.ERROR_CREATE_LOTTO);
+                .hasMessage("[ERROR] 잘못된 숫자 입력입니다.");
     }
 
     @ParameterizedTest
