@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import domain.Lotto;
+import domain.LottoCount;
 import domain.LottoNumber;
 import domain.LottoReward;
 
@@ -18,8 +19,9 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void showPurchasedLottos(int manualLottoCount, int autoLottoCount, List<Lotto> lottos) {
-        System.out.println("\n수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
+    public static void showPurchasedLottos(LottoCount lottoCount, List<Lotto> lottos) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoCount.getManualLottoCount(),
+            lottoCount.getAutoLottoCount());
 
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getLottoNumbers().stream()

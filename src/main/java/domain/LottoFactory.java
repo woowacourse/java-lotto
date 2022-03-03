@@ -9,8 +9,8 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static List<Lotto> createLottos(int LottoCount, LottoNumbersGenerator lottoNumbersGenerator) {
-        return IntStream.range(0, LottoCount).boxed()
+    public static List<Lotto> createLottos(LottoCount LottoCount, LottoNumbersGenerator lottoNumbersGenerator) {
+        return IntStream.range(0, LottoCount.getAutoLottoCount()).boxed()
             .map(i -> createLotto(lottoNumbersGenerator))
             .collect(Collectors.toList());
     }

@@ -1,7 +1,7 @@
-import java.util.ArrayList;
 import java.util.List;
 
 import domain.Lotto;
+import domain.LottoCount;
 import domain.LottoFactory;
 import domain.LottoGame;
 import domain.LottoNumber;
@@ -27,19 +27,16 @@ public class Application {
 
     private static LottoGame createLottoGame(LottoGameMoney purchaseMoney) {
         Lottos lottos = createLottos(purchaseMoney);
-
         return new LottoGame(purchaseMoney, lottos);
     }
 
     private static Lottos createLottos(LottoGameMoney purchaseMoney) {
         final int manualLottoCount = InputView.getManualLottoCount();
-        purchaseMoney.checkPurchasableLottoCount(manualLottoCount);
-        final List<Lotto> lottos = new ArrayList<>(createManualLottos(manualLottoCount));
+        final LottoCount lottoCount = purchaseMoney.getPurchaseLottoCount(manualLottoCount);
 
-        final int autoLottoCount = purchaseMoney.purchasableLottoCount() - manualLottoCount;
-        lottos.addAll(createAutoLottos(autoLottoCount));
-
-        OutputView.showPurchasedLottos(manualLottoCount, autoLottoCount, lottos);
+        final List<Lotto> lottos = createManualLottos(manualLottoCount);
+        lottos.addAll(createAutoLottos(lottoCount));
+        OutputView.showPurchasedLottos(lottoCount, lottos);
 
         return new Lottos(lottos);
     }
@@ -50,7 +47,7 @@ public class Application {
         return LottoFactory.createLottos(manualLottoNumbers);
     }
 
-    private static List<Lotto> createAutoLottos(int lottoCount) {
+    private static List<Lotto> createAutoLottos(LottoCount lottoCount) {
         return LottoFactory.createLottos(lottoCount, new RandomLottoNumbersGenerator());
     }
 

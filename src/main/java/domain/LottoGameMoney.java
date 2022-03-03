@@ -23,14 +23,20 @@ public class LottoGameMoney {
         }
     }
 
-    public int purchasableLottoCount() {
-        return amount / LottoConstant.LOTTO_PRICE;
+    public LottoCount getPurchaseLottoCount(int autoLottoCount) {
+        checkPurchasableLottoCount(autoLottoCount);
+
+        return new LottoCount(autoLottoCount, purchasableLottoCount() - autoLottoCount);
     }
 
     public void checkPurchasableLottoCount(int lottoCount) {
         if (lottoCount < 0 || lottoCount > purchasableLottoCount()) {
             throw new IllegalArgumentException("구매할 수 있는 로또 갯수는 0~" + purchasableLottoCount() + "개 입니다.");
         }
+    }
+
+    public int purchasableLottoCount() {
+        return amount / LottoConstant.LOTTO_PRICE;
     }
 
     public int getAmount() {
