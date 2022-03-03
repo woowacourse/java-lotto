@@ -8,8 +8,9 @@ import org.junit.jupiter.api.Test;
 import service.LottoService;
 
 class ResultTest {
+
     @Test
-    void create_test() {
+    void result_meesage_valid_test() {
         final List<Lotto> lottos = new LottoService().issueManualLottoGroup(
             List.of(
                 Arrays.asList("1", "2", "3", "4", "5", "6"),
@@ -17,8 +18,10 @@ class ResultTest {
             )
         );
 
-        final Result result = new Result(lottos, Lotto.fromInput(Arrays.asList("1", "2", "3", "4", "5", "6")),
+        final WinLotto winLotto = new WinLotto(Lotto.fromInput(Arrays.asList("1", "2", "3", "4", "5", "6")),
             new LottoNumber(7));
+
+        final Result result = new Result(lottos, winLotto);
 
         assertThat(result.getStatistics()).contains(
             "5개 일치, 보너스 볼 일치(30000000원)- 1개"

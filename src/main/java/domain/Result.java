@@ -22,13 +22,13 @@ public class Result {
     private final EnumMap<RankPrize, Integer> result = new EnumMap<>(RankPrize.class);
 
     {
-        Arrays.stream(RankPrize.values())
-            .forEach(rank -> result.put(rank, RESULT_INIT_NUMBER));
+        Arrays.stream(RankPrize.values()).forEach(rank -> result.put(rank, RESULT_INIT_NUMBER));
     }
 
-    public Result(final List<Lotto> issuedLotto, final Lotto lastWinLotto, final LottoNumber bonusNumber) {
+    public Result(final List<Lotto> issuedLotto, final WinLotto winLotto) {
         for (Lotto lotto : issuedLotto) {
-            final RankPrize rankPrize = RankPrize.of(lotto.compare(lastWinLotto), lotto.isContainNumber(bonusNumber));
+            final RankPrize rankPrize = RankPrize.of(lotto.compare(winLotto.getLotto()),
+                lotto.isContainNumber(winLotto.getBonusNumber()));
             result.put(rankPrize, result.getOrDefault(rankPrize, 0) + 1);
         }
     }
@@ -47,15 +47,11 @@ public class Result {
             return LOTTO_STATISTICS_EMPTY;
         }
         if (rankPrize == RankPrize.SECOND) {
-            return rankPrize.getCount() + SECOND_RANK_CORRECT_MESSAGE + rankPrize.getPrice()
-                + RANK_PRICE_MESSAGE
-                + rankCount.getValue()
-                + RANK_COUNT_MESSAGE
-                + System.lineSeparator();
+            return rankPrize.getCount() + SECOND_RANK_CORRECT_MESSAGE + rankPrize.getPrice() + RANK_PRICE_MESSAGE
+                + rankCount.getValue() + RANK_COUNT_MESSAGE + System.lineSeparator();
         }
         return rankPrize.getCount() + RANK_CORRECT_MESSAGE + rankPrize.getPrice() + RANK_PRICE_MESSAGE
-            + rankCount.getValue() + RANK_COUNT_MESSAGE
-            + System.lineSeparator();
+            + rankCount.getValue() + RANK_COUNT_MESSAGE + System.lineSeparator();
     }
 
     public String getProfitOrNotMessage(final Money money) {

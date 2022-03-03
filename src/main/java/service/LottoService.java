@@ -3,9 +3,7 @@ package service;
 import domain.Count;
 import domain.Lotto;
 import domain.LottoFactory;
-import domain.LottoNumber;
 import domain.Money;
-import domain.Result;
 import domain.generator.AutoLottoGenerator;
 import domain.generator.LottoGenerator;
 import domain.generator.ManualLottoGenerator;
@@ -18,7 +16,6 @@ import java.util.stream.Stream;
 public class LottoService {
 
     private static final int AUTO_LOTTO_COUNT_LOWER_BOUND = 0;
-    private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "보너스 볼 번호가 지난 주 당첨 번호와 일치할 수 없습니다.";
     private static final String ERROR_MANUAL_LOTTO_SIZE_MESSAGE = "전체 로또 갯수보다 클 수 없습니다.";
 
     public List<Lotto> issueManualLottoGroup(final List<List<String>> issuedManualLottoInput) {
@@ -41,14 +38,6 @@ public class LottoService {
             return concatLotto(issuedManualLotto, issuedAutoLotto);
         }
         return issuedManualLotto;
-    }
-
-    public Result calculateResult(final List<Lotto> issuedLotto, final Lotto winLotto,
-                                  final LottoNumber bonusNumber) {
-        if (isBonusNumberContain(winLotto, bonusNumber)) {
-            throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
-        }
-        return new Result(issuedLotto, winLotto, bonusNumber);
     }
 
     public static List<Lotto> generateAutoLottoGroup(final int count) {
@@ -76,9 +65,5 @@ public class LottoService {
                 issuedManualLotto.stream(),
                 issuedAutoLotto.stream())
             .collect(Collectors.toList());
-    }
-    
-    private boolean isBonusNumberContain(final Lotto lotto, final LottoNumber bonusNumber) {
-        return lotto.isContainNumber(bonusNumber);
     }
 }

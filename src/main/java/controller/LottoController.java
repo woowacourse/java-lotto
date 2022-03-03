@@ -5,6 +5,7 @@ import domain.Lotto;
 import domain.LottoNumber;
 import domain.Money;
 import domain.Result;
+import domain.WinLotto;
 import dto.LottoDto;
 import java.util.Collections;
 import java.util.List;
@@ -14,8 +15,6 @@ import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-
-    private static final String ERROR_MESSAGE = "[ERROR] ";
 
     private final InputView inputView;
     private final OutputView outputView;
@@ -31,18 +30,31 @@ public class LottoController {
         final Money totalMoney = getMoney();
         final List<Lotto> issuedLotto = issueLotto(totalMoney);
 
-        final Lotto winLotto = getWinLotto();
-        final LottoNumber bonusNumber = getBonusNumber();
-        final Result result = lottoService.calculateResult(issuedLotto, winLotto, bonusNumber);
+        final Result result = getResult(issuedLotto);
 
         printResult(totalMoney, result);
+    }
+
+    private Result getResult(final List<Lotto> issuedLotto) {
+        final WinLotto winLotto = generateWinLotto(getWinLottoNumbers());
+        return new Result(issuedLotto, winLotto);
+    }
+
+    private WinLotto generateWinLotto(final Lotto lastWinLotto) {
+        try {
+            final LottoNumber bonusNumber = getBonusNumber();
+            return new WinLotto(lastWinLotto, bonusNumber);
+        } catch (Exception e) {
+            outputView.printInputError(e);
+            return generateWinLotto(lastWinLotto);
+        }
     }
 
     private Money getMoney() {
         try {
             return new Money(inputView.getMoney());
         } catch (Exception e) {
-            System.out.println(ERROR_MESSAGE + e.getMessage());
+            outputView.printInputError(e);
             return getMoney();
         }
     }
@@ -65,7 +77,7 @@ public class LottoController {
         try {
             return new Count(inputView.getManualCount());
         } catch (Exception e) {
-            System.out.println(ERROR_MESSAGE + e.getMessage());
+            outputView.printInputError(e);
             return getManualCount();
         }
     }
@@ -78,18 +90,18 @@ public class LottoController {
             final List<List<String>> manualLottoInput = inputView.getManualLotto(manualCount.getCount());
             return lottoService.issueManualLottoGroup(manualLottoInput);
         } catch (Exception e) {
-            System.out.println(ERROR_MESSAGE + e.getMessage());
+            outputView.printInputError(e);
             return getManualLottoWith(getManualCount());
         }
     }
 
-    private Lotto getWinLotto() {
+    private Lotto getWinLottoNumbers() {
         try {
             final List<String> winLotto = inputView.getWinLotto();
             return Lotto.fromInput(winLotto);
         } catch (Exception e) {
-            System.out.println(ERROR_MESSAGE + e.getMessage());
-            return getWinLotto();
+            outputView.printInputError(e);
+            return getWinLottoNumbers();
         }
     }
 
@@ -98,7 +110,7 @@ public class LottoController {
             final int bonusNumber = inputView.getBonusNumber();
             return new LottoNumber(bonusNumber);
         } catch (Exception e) {
-            System.out.println(ERROR_MESSAGE + e.getMessage());
+            outputView.printInputError(e);
             return getBonusNumber();
         }
     }

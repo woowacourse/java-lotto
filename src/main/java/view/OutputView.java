@@ -5,6 +5,7 @@ import java.util.List;
 
 public class OutputView {
 
+    private static final String ERROR_MESSAGE = "[ERROR] ";
     private static final String PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String WIN_STATISTICS_RESULT_MESSAGE = "당첨 통계\n---------";
 
@@ -25,5 +26,9 @@ public class OutputView {
 
     public void printWinProfit(final String profitOrNotMessage) {
         System.out.println(profitOrNotMessage);
+    }
+
+    public void printInputError(final Exception e) {
+        System.out.println(ERROR_MESSAGE + e.getMessage());
     }
 }
