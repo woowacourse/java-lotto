@@ -15,7 +15,7 @@ public enum Rank {
 	private static final int SECOND_THIRD_CORRECTED_BALLS = 5;
 
 	private final int correctedBalls;
-	private final int prize;
+	private final long prize;
 
 	Rank(final int correctedBalls, final int prize) {
 		this.correctedBalls = correctedBalls;
@@ -26,7 +26,7 @@ public enum Rank {
 		return correctedBalls;
 	}
 
-	public int getPrize() {
+	public long getPrize() {
 		return prize;
 	}
 

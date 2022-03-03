@@ -29,7 +29,7 @@ public class PurchaseAmount {
 		return purchaseAmount / AMOUNT_MIN_RANGE;
 	}
 
-	public double calculateEarningRate(final int earningAmount) {
+	public double calculateEarningRate(final long earningAmount) {
 		return (double) earningAmount / purchaseAmount;
 	}
 

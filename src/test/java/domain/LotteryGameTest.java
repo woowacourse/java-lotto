@@ -45,7 +45,7 @@ public class LotteryGameTest {
 	@DisplayName("승률이 제대로 집계되는지 확인")
 	@ParameterizedTest(name = "{index} {displayName} purchaseAmount={0}, rank={1}")
 	@CsvSource(value = {"6000, 1, 2000000000", "100000, 2, 30000000", "1000, 5, 5000"})
-	void testRankingPercent(final int purchaseAmount, final int expectedRank, final int prize) {
+	void testRankingPercent(final int purchaseAmount, final int expectedRank, final long prize) {
 		final LotteryGame lotteryGame = initRankingTest(purchaseAmount, expectedRank);
 
 		Map<Rank, Integer> rankResult = lotteryGame.makeWinner();

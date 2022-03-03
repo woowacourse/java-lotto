@@ -37,7 +37,7 @@ public class PurchaseInformation {
 		return manualLotteries.getLotteries();
 	}
 
-	public double calculateEarningRate(final int earningAmount) {
+	public double calculateEarningRate(final long earningAmount) {
 		return purchaseAmount.calculateEarningRate(earningAmount);
 	}
 

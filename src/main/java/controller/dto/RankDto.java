@@ -5,10 +5,10 @@ import domain.Rank;
 public class RankDto {
 
 	private final int correctedBalls;
-	private final int prize;
+	private final long prize;
 	private final String rankName;
 
-	private RankDto(final int correctedBalls, final int prize, final String rankName) {
+	private RankDto(final int correctedBalls, final long prize, final String rankName) {
 		this.correctedBalls = correctedBalls;
 		this.prize = prize;
 		this.rankName = rankName;
@@ -22,7 +22,7 @@ public class RankDto {
 		return correctedBalls;
 	}
 
-	public int getPrize() {
+	public long getPrize() {
 		return prize;
 	}
 

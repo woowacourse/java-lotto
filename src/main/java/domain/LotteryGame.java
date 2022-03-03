@@ -47,7 +47,7 @@ public class LotteryGame {
 	}
 
 	public double makeRankingPercent(final Map<Rank, Integer> rankResult) {
-		int earningAmount = 0;
+		long earningAmount = 0;
 		for (Rank rank : rankResult.keySet()) {
 			earningAmount += rankResult.get(rank) * rank.getPrize();
 		}
