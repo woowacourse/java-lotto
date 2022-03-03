@@ -8,6 +8,7 @@ public class LotteryPurchase {
 
     public LotteryPurchase(int amount, int passivityCount) {
         this.money = new Money(amount);
+        validateCount(passivityCount);
         this.passivityCount = passivityCount;
         autoCount = getAutoCount(money, passivityCount);
     }
@@ -30,5 +31,11 @@ public class LotteryPurchase {
 
     public int getTotalAmount() {
         return this.money.getAmount();
+    }
+
+    private void validateCount(int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("구매 개수는 음수가 들어올 수 없습니다.");
+        }
     }
 }
