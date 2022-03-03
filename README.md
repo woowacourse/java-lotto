@@ -131,7 +131,10 @@ Out.toString();
 - [x] 이름 변경
 - [x] LottoRandomGenerator 제거, LottoFactory 생성
 
-2차피드백
+- [x] 생성자 -> 정적 팩토리 메소드로 전환
+- [ ] 검증 어디서 할지 고민
+
+2차 피드백
 
 - [x] Lotto 접근제한자 확인
 - [x] Money를 LottoMoney로 네이밍

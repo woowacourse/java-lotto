@@ -9,11 +9,15 @@ import java.util.Map;
 public class Result {
     private final LinkedHashMap<Rank, Integer> result = new LinkedHashMap<>();
 
-    public Result(List<Lotto> lottos, WinNumbers winNumbers) {
+    private Result(List<Lotto> lottos, WinNumbers winNumbers) {
         for (Lotto lotto : lottos) {
             Rank rank = Rank.of(lotto.countSameNum(winNumbers), lotto.contains(winNumbers.getBonus()));
             add(rank);
         }
+    }
+
+    public static Result of(List<Lotto> lottos, WinNumbers winNumbers) {
+        return new Result(lottos, winNumbers);
     }
 
     private void add(final Rank rank) {

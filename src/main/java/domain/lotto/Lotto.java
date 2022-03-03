@@ -10,10 +10,14 @@ public class Lotto {
 
     private final List<LottoNumber> lotto;
 
-    Lotto(List<LottoNumber> balls) {
+    private Lotto(List<LottoNumber> balls) {
         validate(balls);
         Collections.sort(balls);
         this.lotto = balls;
+    }
+
+    public static Lotto from(List<LottoNumber> lotto) {
+        return new Lotto(lotto);
     }
 
     private static void validate(List<LottoNumber> lottoNumbers) {
@@ -60,4 +64,4 @@ public class Lotto {
                 "lotto=" + lotto +
                 '}';
     }
-}
+}/**/

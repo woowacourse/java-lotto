@@ -13,7 +13,7 @@ class LottoMoneyTest {
 
     @Test
     void 돈_로또개수로_변경_확인() {
-        LottoMoney lottoMoney = new LottoMoney(20000);
+        LottoMoney lottoMoney = LottoMoney.from(20000);
         assertThat(lottoMoney.toLottoCount())
                 .isEqualTo(20);
     }
@@ -21,12 +21,12 @@ class LottoMoneyTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 200, 999})
     void 천_미만_값일_경우_예외처리(int input) {
-        assertThatThrownBy(() -> new LottoMoney(input)).isInstanceOf(Exception.class);
+        assertThatThrownBy(() -> LottoMoney.from(input)).isInstanceOf(Exception.class);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1500, 2060, 9999})
     void 천으로_나누어_떨어지지_않는_경우_예외처리(int input) {
-        assertThatThrownBy(() -> new LottoMoney(input)).isInstanceOf(Exception.class);
+        assertThatThrownBy(() -> LottoMoney.from(input)).isInstanceOf(Exception.class);
     }
 }

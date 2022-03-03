@@ -28,7 +28,7 @@ class ResultTest {
         Lotto lotto = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         //when
-        Result result = new Result(List.of(lotto), winNumbers);
+        Result result = Result.of(List.of(lotto), winNumbers);
 
         //then
         assertThat(result.get().get(Rank.FIRST)).isEqualTo(1);
@@ -40,7 +40,7 @@ class ResultTest {
         Lotto lotto = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         //when
-        Result result = new Result(Arrays.asList(lotto, lotto), winNumbers);
+        Result result = Result.of(Arrays.asList(lotto, lotto), winNumbers);
 
         //then
         assertThat(result.get().get(Rank.FIRST)).isEqualTo(2);
@@ -54,7 +54,7 @@ class ResultTest {
         Lotto lotto0 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(7, 8, 9, 11, 12, 13)));
 
         //when
-        Result result = new Result(Arrays.asList(lotto2, lotto1, lotto0), winNumbers);
+        Result result = Result.of(Arrays.asList(lotto2, lotto1, lotto0), winNumbers);
 
         //then
         assertThat(result.get().get(Rank.NONE)).isEqualTo(3);
@@ -66,7 +66,7 @@ class ResultTest {
         Lotto lotto = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         //when
-        Result result = new Result(Arrays.asList(lotto, lotto), winNumbers);
+        Result result = Result.of(Arrays.asList(lotto, lotto), winNumbers);
 
         assertThat(result.getPrize()).isEqualTo(4000000000L);
     }
@@ -79,7 +79,7 @@ class ResultTest {
         Lotto lotto0 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(7, 8, 9, 11, 12, 13)));
 
         //when
-        Result result = new Result(Arrays.asList(lotto2, lotto1, lotto0), winNumbers);
+        Result result = Result.of(Arrays.asList(lotto2, lotto1, lotto0), winNumbers);
 
         //then
         assertThat(result.getPrize()).isEqualTo(0);

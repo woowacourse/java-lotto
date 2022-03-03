@@ -6,13 +6,17 @@ public class WinNumbers {
     private final Lotto lotto;
     private final LottoNumber bonus;
 
-    WinNumbers(final Lotto lotto, LottoNumber bonus) {
+    private WinNumbers(final Lotto lotto, final LottoNumber bonus) {
         validate(lotto, bonus);
         this.lotto = lotto;
         this.bonus = bonus;
     }
 
-    private static void validate(Lotto lotto, LottoNumber bonus) {
+    public static WinNumbers of(final Lotto lotto, final LottoNumber bonus) {
+        return new WinNumbers(lotto, bonus);
+    }
+
+    private static void validate(final Lotto lotto, final LottoNumber bonus) {
         if (lotto.contains(bonus)) {
             throw new IllegalArgumentException(BONUS_DUPLICATED_ERROR_MESSAGE);
         }

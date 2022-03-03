@@ -9,17 +9,13 @@ public class LottoMoney {
 
     private final int lottoMoney;
 
-    public LottoMoney(final int lottoMoney) {
+    private LottoMoney(final int lottoMoney) {
         validate(lottoMoney);
         this.lottoMoney = lottoMoney;
     }
 
-    public int toLottoCount() {
-        return lottoMoney / 1000;
-    }
-
-    public int get() {
-        return lottoMoney;
+    public static LottoMoney from(final int money) {
+        return new LottoMoney(money);
     }
 
     private static void validate(final int money) {
@@ -29,6 +25,14 @@ public class LottoMoney {
         if (money % DIVIDE_UNIT != 0) {
             throw new IllegalArgumentException(LOTTO_MONEY_DIVIDE_ERROR_MESSAGE);
         }
+    }
+
+    public int toLottoCount() {
+        return lottoMoney / 1000;
+    }
+
+    public int get() {
+        return lottoMoney;
     }
 
     @Override

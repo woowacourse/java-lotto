@@ -8,7 +8,8 @@ import domain.result.Result;
 import java.util.List;
 
 public class OutputView {
-    public static final String BUY_MESSAGE = System.lineSeparator() + "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
+    public static final String BUY_MESSAGE =
+            System.lineSeparator() + "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
     public static final String LOTTO_PREFIX = "[";
     public static final String LOTTO_ENDFIX = "]";
     public static final String SEPARATOR = ", ";

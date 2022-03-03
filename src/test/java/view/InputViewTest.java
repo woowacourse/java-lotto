@@ -61,7 +61,7 @@ class InputViewTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"a"," "})
+    @ValueSource(strings = {"a", " "})
     void 로또_수동_구매_개수_숫자아닐시_예외처리(String input) {
         //given
         OutputStream out = new ByteArrayOutputStream();

@@ -20,32 +20,17 @@ public class InputView {
 
     public static int inputMoney() {
         System.out.println(MONEY_INPUT_MESSAGE);
-        final Scanner scanner = new Scanner(System.in);
-        try {
-            return scanner.nextInt();
-        } catch (Exception e) {
-            throw new IllegalArgumentException(NUM_ERROR_MESSAGE);
-        }
+        return inputNum();
     }
 
     public static int inputManualTicketCount() {
         System.out.println(MANUAL_TICKET_COUNT_MESSAGE);
-        final Scanner scanner = new Scanner(System.in);
-        try {
-            return scanner.nextInt();
-        } catch (Exception e) {
-            throw new IllegalArgumentException(NUM_ERROR_MESSAGE);
-        }
+        return inputNum();
     }
 
     public static int inputBonusNumber() {
         System.out.println(BONUS_INPUT_MESSAGE);
-        final Scanner scanner = new Scanner(System.in);
-        try {
-            return scanner.nextInt();
-        } catch (Exception e) {
-            throw new IllegalArgumentException(NUM_ERROR_MESSAGE);
-        }
+        return inputNum();
     }
 
     public static List<Integer> inputWinLottoNums() {
@@ -60,6 +45,15 @@ public class InputView {
             numsGroup.add(inputLottoNums());
         }
         return numsGroup;
+    }
+
+    private static int inputNum() {
+        final Scanner scanner = new Scanner(System.in);
+        try {
+            return scanner.nextInt();
+        } catch (Exception e) {
+            throw new IllegalArgumentException(NUM_ERROR_MESSAGE);
+        }
     }
 
     private static List<Integer> inputLottoNums() {

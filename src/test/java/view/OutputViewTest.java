@@ -62,7 +62,7 @@ class OutputViewTest {
         Lotto lotto3 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 9)));
 
         //when
-        Result result = new Result(Arrays.asList(lotto1, lotto3), winNumbers);
+        Result result = Result.of(Arrays.asList(lotto1, lotto3), winNumbers);
 
         OutputView.printLottosResult(result);
 
