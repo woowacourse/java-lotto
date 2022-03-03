@@ -11,7 +11,7 @@ import lotto.service.MoneyService;
 import lotto.service.PurchaseService;
 import lotto.utils.IntegerUtils;
 
-public class AutoPurchaseController implements PurchaseController {
+public class AutoPurchaseController {
 
     private final PurchaseService purchaseService;
     private final MoneyService moneyService;
@@ -22,17 +22,16 @@ public class AutoPurchaseController implements PurchaseController {
     }
 
     private static class AutoPurchaseControllerHelper {
-        private static final PurchaseController INSTANCE = new AutoPurchaseController(
+        private static final AutoPurchaseController INSTANCE = new AutoPurchaseController(
             ServiceConfig.getPurchaseService(),
             ServiceConfig.getMoneyService()
         );
     }
 
-    public static PurchaseController getInstance() {
+    public static AutoPurchaseController getInstance() {
         return AutoPurchaseControllerHelper.INSTANCE;
     }
 
-    @Override
     public List<LottoTicketResponse> purchase(String inputMoney) {
         Money money = createMoney(inputMoney);
         moneyService.insert(money);

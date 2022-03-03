@@ -11,7 +11,7 @@ import lotto.service.MoneyService;
 import lotto.service.WinningService;
 import lotto.utils.IntegerUtils;
 
-public class InputWinningController implements WinningController {
+public class InputWinningController {
 
     private final WinningService winningService;
     private final MoneyService moneyService;
@@ -22,17 +22,16 @@ public class InputWinningController implements WinningController {
     }
 
     private static class InputWinningControllerHelper {
-        private static final WinningController INSTANCE = new InputWinningController(
+        private static final InputWinningController INSTANCE = new InputWinningController(
             ServiceConfig.getWinningService(),
             ServiceConfig.getMoneyService()
         );
     }
 
-    public static WinningController getInstance() {
+    public static InputWinningController getInstance() {
         return InputWinningControllerHelper.INSTANCE;
     }
 
-    @Override
     public LottoStatisticsResponse compareWinningNumber(String inputWinningNumber, String inputBonusBall) {
         WinningTicket winningTicket = createWinningTicket(inputWinningNumber, inputBonusBall);
         return new LottoStatisticsResponse(winningService.compare(winningTicket), moneyService.inquire());

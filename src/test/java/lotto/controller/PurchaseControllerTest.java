@@ -16,7 +16,7 @@ class PurchaseControllerTest {
     public void purchaseLottoTicketByString() {
         // given
         String input = "2000";
-        PurchaseController controller = ControllerConfig.getPurchaseController();
+        AutoPurchaseController controller = ControllerConfig.getAutoPurchaseController();
         // when
         List<LottoTicketResponse> ticketResponses = controller.purchase(input);
         // then

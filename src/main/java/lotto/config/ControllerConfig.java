@@ -2,15 +2,13 @@ package lotto.config;
 
 import lotto.controller.AutoPurchaseController;
 import lotto.controller.InputWinningController;
-import lotto.controller.PurchaseController;
-import lotto.controller.WinningController;
 
 public class ControllerConfig {
-    public static PurchaseController getPurchaseController() {
+    public static AutoPurchaseController getAutoPurchaseController() {
         return AutoPurchaseController.getInstance();
     }
 
-    public static WinningController getWinningController() {
+    public static InputWinningController getInputWinningController() {
         return InputWinningController.getInstance();
     }
 }

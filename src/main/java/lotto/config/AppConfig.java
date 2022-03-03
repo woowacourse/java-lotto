@@ -6,7 +6,12 @@ import lotto.shop.Shop;
 public class AppConfig {
 
     public static Shop getShop() {
-        return new LottoShop(ViewConfig.getInputView(), ViewConfig.getOutputView(), ViewConfig.getErrorView(),
-            ControllerConfig.getPurchaseController(), ControllerConfig.getWinningController());
+        return new LottoShop(
+            ViewConfig.getInputView(),
+            ViewConfig.getOutputView(),
+            ViewConfig.getErrorView(),
+            ControllerConfig.getAutoPurchaseController(),
+            ControllerConfig.getInputWinningController()
+        );
     }
 }

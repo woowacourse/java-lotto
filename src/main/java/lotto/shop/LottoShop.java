@@ -1,7 +1,7 @@
 package lotto.shop;
 
-import lotto.controller.PurchaseController;
-import lotto.controller.WinningController;
+import lotto.controller.AutoPurchaseController;
+import lotto.controller.InputWinningController;
 import lotto.view.ErrorView;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -11,11 +11,11 @@ public class LottoShop implements Shop {
     private final InputView inputView;
     private final OutputView outputView;
     private final ErrorView errorView;
-    private final PurchaseController purchaseController;
-    private final WinningController inputWinningController;
+    private final AutoPurchaseController purchaseController;
+    private final InputWinningController inputWinningController;
 
     public LottoShop(InputView inputView, OutputView outputView, ErrorView errorView,
-        PurchaseController purchaseController, WinningController inputWinningController) {
+        AutoPurchaseController purchaseController, InputWinningController inputWinningController) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.errorView = errorView;
