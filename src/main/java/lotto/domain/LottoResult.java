@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,29 +15,21 @@ public class LottoResult {
     }
 
     public Map<Rank, Integer> getLottoResult() {
-        return Collections.unmodifiableMap(lottoResult);
+        return Map.copyOf(lottoResult);
     }
 
     public void addMatchingCount(Lottos lottos, WinningLotto winningLotto) {
         for (Lotto lotto : lottos.getLottos()) {
-            Rank rank = lotto.getRank(winningLotto);
+            Rank rank = winningLotto.getLottoRank(lotto);
             lottoResult.put(rank, lottoResult.get(rank) + 1);
         }
     }
 
-    private Money getProfit() {
-        Money profit = new Money(0);
-
-        for (Rank rank : Rank.values()) {
-            Money prizeMoney = rank.getPrizeMoney();
-            prizeMoney.multiply(lottoResult.get(rank));
-            profit.add(prizeMoney.getMoney());
-        }
-
-        return profit;
+    public double calculateProfitRate(Money payment) {
+        return (double)getProfit().getMoney() / payment.getMoney();
     }
 
-    public double calculateProfitRate(Money purchaseAmount) {
-        return (double)getProfit().getMoney() / purchaseAmount.getMoney();
+    private Money getProfit() {
+        return Rank.getTotalWinningPrize(lottoResult);
     }
 }

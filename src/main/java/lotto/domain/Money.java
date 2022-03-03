@@ -10,14 +10,14 @@ public class Money implements Comparable<Money> {
         this.money = money;
     }
 
-    public void add(final int money) {
-        validateMoney(this.money + money);
-        this.money += money;
+    public void add(final Money money) {
+        validateMoney(this.money + money.money);
+        this.money += money.money;
     }
 
-    public void subtract(final int money) {
-        validateMoney(this.money - money);
-        this.money -= money;
+    public void subtract(final Money money) {
+        validateMoney(this.money - money.money);
+        this.money -= money.money;
     }
 
     public void multiply(final int count) {
@@ -25,8 +25,8 @@ public class Money implements Comparable<Money> {
         this.money *= count;
     }
 
-    private void validateMoney(final int purchaseAmount) {
-        if (purchaseAmount < 0) {
+    private void validateMoney(final int money) {
+        if (money < 0) {
             throw new IllegalArgumentException(ERROR_ONLY_NATURAL_NUMBER);
         }
     }

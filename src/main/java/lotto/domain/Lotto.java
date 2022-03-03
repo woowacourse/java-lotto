@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    private static final int CHECK_BONUS_COUNT = 5;
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
     private static final int LOTTO_COUNT = 6;
@@ -67,21 +66,13 @@ public class Lotto {
             .collect(Collectors.toList()));
     }
 
-    public boolean contains(LottoNumber number) {
-        return lotto.contains(number);
-    }
-
-    public Rank getRank(WinningLotto winningLotto) {
-        int matchingCount = getMatchingCount(winningLotto.getWinningLotto());
-        if (matchingCount == CHECK_BONUS_COUNT && lotto.contains(winningLotto.getBonusBall())) {
-            return Rank.of(matchingCount, true);
-        }
-        return Rank.of(matchingCount, false);
-    }
-
-    private int getMatchingCount(Lotto compareLotto) {
+    public int getMatchingCount(Lotto compareLotto) {
         return (int)lotto.stream()
             .filter(compareLotto::contains)
             .count();
+    }
+
+    public boolean contains(LottoNumber number) {
+        return lotto.contains(number);
     }
 }

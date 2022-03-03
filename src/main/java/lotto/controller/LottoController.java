@@ -40,15 +40,15 @@ public class LottoController {
         }
     }
 
-    private int inputManualLottoCount(Money payAmount) {
+    private int inputManualLottoCount(Money payment) {
         OutputView.printManualLottoCountRequest();
         try {
             int count = InputView.inputManualLottoCount();
-            payAmount.subtract(count * LOTTO_PRICE);
+            payment.subtract(new Money(count * LOTTO_PRICE));
             return count;
         } catch (IllegalArgumentException error) {
             OutputView.printErrorMessage(error.getMessage());
-            return inputManualLottoCount(payAmount);
+            return inputManualLottoCount(payment);
         }
     }
 

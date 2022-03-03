@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public enum Rank {
@@ -29,6 +30,17 @@ public enum Rank {
             .filter(rank -> rank.count == matchingCount && rank.isBonus == isBonus)
             .findFirst()
             .orElse(NOTHING);
+    }
+
+    public static Money getTotalWinningPrize(Map<Rank, Integer> lottoResult) {
+        Money totalWinningPrize = new Money(0);
+        for (Rank rank : Rank.values()) {
+            Money winningPrize = new Money(0);
+            winningPrize.add(rank.prizeMoney);
+            winningPrize.multiply(lottoResult.get(rank));
+            totalWinningPrize.add(winningPrize);
+        }
+        return totalWinningPrize;
     }
 
     public Money getPrizeMoney() {

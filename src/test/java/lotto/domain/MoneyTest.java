@@ -19,7 +19,7 @@ public class MoneyTest {
     @DisplayName("금액 추가")
     void add_money() {
         Money money = new Money(0);
-        money.add(100);
+        money.add(new Money(100));
 
         assertThat(money.getMoney()).isEqualTo(100);
     }
@@ -28,7 +28,7 @@ public class MoneyTest {
     @DisplayName("금액 빼기")
     void subtract_money() {
         Money money = new Money(2000);
-        money.subtract(1000);
+        money.subtract(new Money(1000));
 
         assertThat(money.getMoney()).isEqualTo(1000);
     }

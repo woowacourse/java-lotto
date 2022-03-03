@@ -20,7 +20,7 @@ class RankTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 3, 4})
     @DisplayName("정렬 된 랭크 반환")
-    void sorted_rank_correct(int input) {
+    void sorted_rank(int input) {
         List<Rank> sortedRanks = List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
         assertEquals(sortedRanks.get(input), sortedRanks.get(input));
     }
