@@ -1,11 +1,11 @@
 package view;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -36,12 +36,9 @@ public class InputView {
     public static List<Set<Integer>> scanManualLottoNumbers(int quantity) {
         System.out.println(System.lineSeparator() + MESSAGE_FOR_MANUAL_LOTTO_NUMBERS);
 
-        List<Set<Integer>> lottoValues = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            lottoValues.add(scanLottoNumbers());
-        }
-
-        return lottoValues;
+        return IntStream.range(0, quantity)
+                .mapToObj(i -> scanLottoNumbers())
+                .collect(Collectors.toList());
     }
 
     public static Set<Integer> scanWinningLottoNumbers() {
