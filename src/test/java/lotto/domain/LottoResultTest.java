@@ -19,7 +19,7 @@ class LottoResultTest {
         Lotto lotto2 = new Lotto(List.of(2, 3, 4, 5, 6, 7));
         Lotto lotto3 = new Lotto(List.of(3, 4, 5, 6, 7, 8));
 
-        lottos = Lottos.newInstanceByLottosMoney(Arrays.asList(lotto1, lotto2, lotto3), new Money(0));
+        lottos = Lottos.of(Arrays.asList(lotto1, lotto2, lotto3), new Money(0));
         winningLotto = new WinningLotto(lotto1, new LottoNumber(7));
     }
 

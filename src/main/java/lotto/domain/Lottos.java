@@ -18,11 +18,11 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public static Lottos newInstanceByMoney(Money money) {
+    public static Lottos from(Money money) {
         return new Lottos(money.getMoney() / LOTTO_PRICE);
     }
 
-    public static Lottos newInstanceByLottosMoney(List<Lotto> lottoList, Money change) {
+    public static Lottos of(List<Lotto> lottoList, Money change) {
         Lottos lottos = new Lottos(lottoList);
         lottos.addAutoCreatedLotto(change.getMoney() / LOTTO_PRICE);
         return lottos;
