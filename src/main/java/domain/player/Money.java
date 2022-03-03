@@ -67,4 +67,8 @@ public class Money {
     public int calculateTotalLottoCount() {
         return amount / MINIMUM_PURCHASE_AMOUNT;
     }
+
+    public int getAmount() {
+        return amount;
+    }
 }
