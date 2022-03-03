@@ -1,6 +1,7 @@
 package domain.result;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
@@ -19,7 +20,17 @@ class ResultTest {
     @BeforeEach
     void setup() {
         winNumbers = LottoFactory.createWinNums(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                LottoNumber.from(10));
+                LottoNumber.getInstance(10));
+    }
+
+    @Test
+    void 생성자_빈로또_에러() {
+        //given
+        Lotto lotto = null;
+
+        //then
+        assertThatThrownBy(() -> Result.of(List.of(lotto), winNumbers))
+                .isInstanceOf(Exception.class);
     }
 
     @Test

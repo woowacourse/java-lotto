@@ -5,7 +5,7 @@ import java.util.Objects;
 public class LottoMoney {
     private static final String LOTTO_MONEY_OVER_THOUSANDS_ERROR_MESSAGE = "로또 구입 금액은 1000원 이상이어야 합니다.";
     private static final String LOTTO_MONEY_DIVIDE_ERROR_MESSAGE = "로또 구입 금액은 1000 단위여야 합니다.";
-    private static final int DIVIDE_UNIT = 1000;
+    private static final int LOTTO_MONEY_DIVIDE_UNIT = 1000;
 
     private final int lottoMoney;
 
@@ -19,10 +19,10 @@ public class LottoMoney {
     }
 
     private static void validate(final int money) {
-        if (money < DIVIDE_UNIT) {
+        if (money < LOTTO_MONEY_DIVIDE_UNIT) {
             throw new IllegalArgumentException(LOTTO_MONEY_OVER_THOUSANDS_ERROR_MESSAGE);
         }
-        if (money % DIVIDE_UNIT != 0) {
+        if (money % LOTTO_MONEY_DIVIDE_UNIT != 0) {
             throw new IllegalArgumentException(LOTTO_MONEY_DIVIDE_ERROR_MESSAGE);
         }
     }

@@ -7,12 +7,20 @@ import java.util.List;
 import java.util.Map;
 
 public class Result {
+    private static final String LOTTOS_NULL_ERROR_MESSAGE = "lottos 리스트에는 1개 이상의 lotto가 포함되어야 한다.";
     private final LinkedHashMap<Rank, Integer> result = new LinkedHashMap<>();
 
     private Result(List<Lotto> lottos, WinNumbers winNumbers) {
+        validate(lottos);
         for (Lotto lotto : lottos) {
             Rank rank = Rank.of(lotto.countSameNum(winNumbers), lotto.contains(winNumbers.getBonus()));
             add(rank);
+        }
+    }
+
+    private void validate(List<Lotto> lottos) {
+        if (lottos == null || lottos.size() == 0) {
+            throw new IllegalArgumentException(LOTTOS_NULL_ERROR_MESSAGE);
         }
     }
 

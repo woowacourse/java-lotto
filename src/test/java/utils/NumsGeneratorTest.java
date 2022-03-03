@@ -14,8 +14,8 @@ class NumsGeneratorTest {
     void generateByRandom_숫자범위_검사() {
         List<LottoNumber> lottoNumbers = NumsGenerator.generateByRandom();
         assertThat(lottoNumbers.listIterator().next())
-                .isLessThanOrEqualTo(LottoNumber.from(45))
-                .isGreaterThanOrEqualTo(LottoNumber.from(1));
+                .isLessThanOrEqualTo(LottoNumber.getInstance(45))
+                .isGreaterThanOrEqualTo(LottoNumber.getInstance(1));
     }
 
     @Test
@@ -29,12 +29,12 @@ class NumsGeneratorTest {
     void generate_개수검사() {
         assertThat(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)))
                 .isEqualTo(Arrays.asList(
-                                LottoNumber.from(1),
-                                LottoNumber.from(2),
-                                LottoNumber.from(3),
-                                LottoNumber.from(4),
-                                LottoNumber.from(5),
-                                LottoNumber.from(6)
+                                LottoNumber.getInstance(1),
+                                LottoNumber.getInstance(2),
+                                LottoNumber.getInstance(3),
+                                LottoNumber.getInstance(4),
+                                LottoNumber.getInstance(5),
+                                LottoNumber.getInstance(6)
                         )
                 );
     }

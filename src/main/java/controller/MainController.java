@@ -60,7 +60,7 @@ public class MainController {
 
     private WinNumbers makeWinNums() {
         List<Integer> winLottoRawNums = InputView.inputWinLottoNums();
-        LottoNumber bonus = LottoNumber.from(InputView.inputBonusNumber());
+        LottoNumber bonus = LottoNumber.getInstance(InputView.inputBonusNumber());
         return LottoFactory.createWinNums(NumsGenerator.generate(winLottoRawNums), bonus);
     }
 

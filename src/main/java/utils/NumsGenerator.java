@@ -18,7 +18,7 @@ public class NumsGenerator {
 
     public static List<LottoNumber> generate(final List<Integer> lottoNums) {
         return lottoNums.stream()
-                .map(LottoNumber::from)
+                .map(LottoNumber::getInstance)
                 .sorted()
                 .collect(Collectors.toList());
     }

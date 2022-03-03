@@ -25,7 +25,7 @@ class OutputViewTest {
     @BeforeEach
     void setup() {
         winNumbers = LottoFactory.createWinNums(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                LottoNumber.from(10));
+                LottoNumber.getInstance(10));
     }
 
     @Test

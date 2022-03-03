@@ -24,35 +24,35 @@ class LottoFactoryTest {
         assertThat(lotto)
                 .extracting("lotto")
                 .isEqualTo(Arrays.asList(
-                        LottoNumber.from(1),
-                        LottoNumber.from(2),
-                        LottoNumber.from(3),
-                        LottoNumber.from(4),
-                        LottoNumber.from(5),
-                        LottoNumber.from(6)
+                        LottoNumber.getInstance(1),
+                        LottoNumber.getInstance(2),
+                        LottoNumber.getInstance(3),
+                        LottoNumber.getInstance(4),
+                        LottoNumber.getInstance(5),
+                        LottoNumber.getInstance(6)
                 ));
     }
 
     @Test
     void 당첨번호_생성_값_확인() {
-        WinNumbers winNumbers = LottoFactory.createWinNums(NumsGenerator.generate(nums), LottoNumber.from(10));
+        WinNumbers winNumbers = LottoFactory.createWinNums(NumsGenerator.generate(nums), LottoNumber.getInstance(10));
         assertThat(winNumbers)
                 .extracting("lotto")
                 .extracting("lotto")
                 .isEqualTo(Arrays.asList(
-                        LottoNumber.from(1),
-                        LottoNumber.from(2),
-                        LottoNumber.from(3),
-                        LottoNumber.from(4),
-                        LottoNumber.from(5),
-                        LottoNumber.from(6)
+                        LottoNumber.getInstance(1),
+                        LottoNumber.getInstance(2),
+                        LottoNumber.getInstance(3),
+                        LottoNumber.getInstance(4),
+                        LottoNumber.getInstance(5),
+                        LottoNumber.getInstance(6)
                 ));
     }
 
     @Test
     void 당첨번호_생성_보너스_확인() {
-        WinNumbers winNumbers = LottoFactory.createWinNums(NumsGenerator.generate(nums), LottoNumber.from(10));
+        WinNumbers winNumbers = LottoFactory.createWinNums(NumsGenerator.generate(nums), LottoNumber.getInstance(10));
         assertThat(winNumbers.getBonus())
-                .isEqualTo(LottoNumber.from(10));
+                .isEqualTo(LottoNumber.getInstance(10));
     }
 }

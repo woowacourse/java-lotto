@@ -9,12 +9,6 @@ import org.junit.jupiter.api.Test;
 class LottoTicketCountTest {
 
     @Test
-    void 정적팩토리_생성_테스트_0이하의_수동티켓_0() {
-        assertThatThrownBy(() -> LottoTicketCount.of(1, 0))
-                .isInstanceOf(Exception.class);
-    }
-
-    @Test
     void 정적팩토리_생성_테스트_0이하의_수동티켓_음수() {
         assertThatThrownBy(() -> LottoTicketCount.of(1, -1))
                 .isInstanceOf(Exception.class);

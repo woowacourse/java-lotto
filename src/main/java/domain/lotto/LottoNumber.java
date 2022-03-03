@@ -20,12 +20,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     private LottoNumber(final int number) {
+        validate(number);
         this.number = number;
     }
 
-    public static LottoNumber from(final int num) {
-        validate(num);
-        return LOTTO_NUMBER_CACHE.get(num);
+    public static LottoNumber getInstance(final int number) {
+        validate(number);
+        return LOTTO_NUMBER_CACHE.get(number);
     }
 
     private static void validate(final int number) {
