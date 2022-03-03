@@ -1,7 +1,5 @@
 package controller;
 
-import static java.util.stream.Collectors.toList;
-
 import domain.Lotto;
 import domain.LottoNumber;
 import domain.LottoNumberRepository;
@@ -10,7 +8,6 @@ import domain.Lottos;
 import domain.Wallet;
 import domain.WinningLotto;
 import domain.service.LottoService;
-import java.util.List;
 import view.InputView;
 import view.ResultView;
 
@@ -105,17 +102,8 @@ public class LottoController {
     }
 
     private Lotto getLottoForWinningLotto() {
-        try {
-            List<Integer> winningNumberValues = InputView.scanWinningNumbers();
-
-            List<LottoNumber> lottoNumbers = winningNumberValues.stream()
-                    .map(LottoNumberRepository::getLottoNumberByInt)
-                    .collect(toList());
-            return new Lotto(lottoNumbers);
-        } catch (IllegalArgumentException exception) {
-            InputView.printException(exception);
-            return getLottoForWinningLotto();
-        }
+        InputView.printMessageToScanLottoNumbers();
+        return new Lotto(manualLottoService.getLottoNumbers());
     }
 
     private LottoNumber getLottoNumberForBonusNumber() {

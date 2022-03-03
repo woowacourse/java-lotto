@@ -82,18 +82,9 @@ public class InputView {
         System.out.println("[" + joinedLottoNumbers + "]");
     }
 
-    public static List<Integer> scanWinningNumbers() {
+    public static void printMessageToScanLottoNumbers() {
         System.out.print(System.lineSeparator());
         System.out.println(MESSAGE_FOR_WINNING_LOTTO_NUMBERS);
-        String userInput = SCANNER.nextLine();
-
-        try {
-            return Arrays.stream(userInput.split(SPLIT_DELIMITER))
-                    .map(Integer::parseInt)
-                    .collect(toList());
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("숫자만 입력해주세요");
-        }
     }
 
     public static int scanBonusNumber() {
