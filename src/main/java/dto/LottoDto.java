@@ -13,7 +13,7 @@ public class LottoDto {
     }
 
     public static LottoDto from(final Lotto lotto) {
-        return new LottoDto(lotto.get().stream()
+        return new LottoDto(lotto.getLotto().stream()
             .map(LottoNumberDto::from)
             .collect(Collectors.toList()));
     }

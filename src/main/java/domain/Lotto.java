@@ -51,7 +51,7 @@ public class Lotto {
             .count();
     }
 
-    public List<LottoNumber> get() {
+    public List<LottoNumber> getLotto() {
         return this.lotto;
     }
 }

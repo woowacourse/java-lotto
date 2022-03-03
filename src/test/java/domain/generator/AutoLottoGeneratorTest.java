@@ -12,6 +12,6 @@ class AutoLottoGeneratorTest {
 
         final Lotto autoLotto = autoLottoGenerator.generate();
 
-        assertThat(autoLotto.get().size()).isEqualTo(6);
+        assertThat(autoLotto.getLotto().size()).isEqualTo(6);
     }
 }
