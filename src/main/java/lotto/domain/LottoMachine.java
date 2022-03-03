@@ -12,6 +12,9 @@ public class LottoMachine {
         if (totalTicketCount < manualTicketCount) {
             throw new IllegalArgumentException("[ERROR] 최대 구입 가능 개수를 넘었습니다. 최대 구입 가능 개수 = " + totalTicketCount);
         }
+        if (manualTicketCount < 0) {
+            throw new IllegalArgumentException("[ERROR] 최소 티켓 구매 입력값은 0입니다.");
+        }
         this.totalTicketCount = totalTicketCount;
         this.manualTicketCount = manualTicketCount;
     }

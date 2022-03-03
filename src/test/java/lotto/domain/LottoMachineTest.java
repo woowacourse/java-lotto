@@ -43,4 +43,14 @@ class LottoMachineTest {
 
         assertThat(lottos.size()).isEqualTo(totalTicketCount);
     }
+
+    @Test
+    @DisplayName("수동 구매 로또의 개수가 음수인 경우 예외를 발생시킨다")
+    void throwExceptionWhenGetNegativeInput() {
+        int totalTicketCount = 1;
+        int manualTicketCount = -1;
+
+        assertThatThrownBy(() -> new LottoMachine(totalTicketCount, manualTicketCount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
