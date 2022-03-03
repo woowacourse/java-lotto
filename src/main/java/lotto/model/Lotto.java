@@ -37,28 +37,27 @@ public class Lotto {
 		return LOTTO_BALLS.subList(0, NUMBER_COUNT);
 	}
 
-	public static List<LottoBall> generateManual(String[] input) {
+	public static List<LottoBall> generateManual(List<String> input) {
 		validate(input);
 		List<LottoBall> lottoBalls = new ArrayList<>();
-		Arrays.stream(input)
-			.forEach(string -> lottoBalls.add(LottoBall.from(string)));
+		input.forEach(string -> lottoBalls.add(LottoBall.from(string)));
 		return lottoBalls;
 	}
 
-	private static void validate(String[] input) {
+	private static void validate(List<String> input) {
 		checkCount(input);
 		checkDuplicate(input);
 	}
 
-	private static void checkCount(String[] input) {
-		if (input.length != 6) {
+	private static void checkCount(List<String> input) {
+		if (input.size() != 6) {
 			throw new IllegalArgumentException(ERROR_COUNT);
 		}
 	}
 
-	private static void checkDuplicate(String[] input) {
-		Set<String> distinctInput = new HashSet<>(Arrays.asList(input));
-		if (distinctInput.size() < input.length) {
+	private static void checkDuplicate(List<String> input) {
+		Set<String> distinctInput = new HashSet<>(input);
+		if (distinctInput.size() < input.size()) {
 			throw new IllegalArgumentException(ERROR_DUPLICATE);
 		}
 	}

@@ -16,7 +16,7 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
-	public static Lottos purchase(int totalCount, int manualCount, List<String[]> manualLottoNumbers) {
+	public static Lottos purchase(int totalCount, int manualCount, List<List<String>> manualLottoNumbers) {
 		int autoCount = totalCount - manualCount;
 		List<Lotto> lottos = new ArrayList<>();
 		generateLottos(autoCount, manualLottoNumbers, lottos);
@@ -24,12 +24,12 @@ public class Lottos {
 		return new Lottos(lottos);
 	}
 
-	private static void generateLottos(int autoCount, List<String[]> input, List<Lotto> lottos) {
+	private static void generateLottos(int autoCount, List<List<String>> input, List<Lotto> lottos) {
 		generateManualLotto(input, lottos);
 		generateAutoLotto(autoCount, lottos);
 	}
 
-	private static void generateManualLotto(List<String[]> input, List<Lotto> lottos) {
+	private static void generateManualLotto(List<List<String>> input, List<Lotto> lottos) {
 		input.forEach(
 			numbers -> lottos.add(new Lotto(Lotto.generateManual(numbers)))
 		);

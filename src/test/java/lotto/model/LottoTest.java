@@ -15,10 +15,10 @@ public class LottoTest {
 	@DisplayName("Lotto에 LottoBall이 6개가 아니면 예외를 반환한다")
 	@Test
 	void count_exception() {
-		String[] manualLottoNumbers = {"1", "2", "3", "4"};
+		List<String> manualLottoNumber = Arrays.asList("1", "2", "3", "4");
 
 		assertThatThrownBy(() -> {
-			new Lotto(Lotto.generateManual(manualLottoNumbers));
+			new Lotto(Lotto.generateManual(manualLottoNumber));
 		}).isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("[ERROR] 로또 번호는 6개로 입력해야 합니다");
 	}
@@ -26,7 +26,7 @@ public class LottoTest {
 	@DisplayName("Lotto 의 LottoBall 에 중복된 값이 있으면 예외를 반환한다")
 	@Test
 	void duplicate_exception() {
-		String[] manualLottoNumber = {"1", "1", "2", "3", "4", "5"};
+		List<String> manualLottoNumber = Arrays.asList("1", "1", "2", "3", "4", "5");
 
 		assertThatThrownBy(() -> {
 			new Lotto(Lotto.generateManual(manualLottoNumber));
@@ -37,7 +37,7 @@ public class LottoTest {
 	@DisplayName("Lotto 의 LottoBall 에 1 미만 값이 있으면 예외를 반환한다")
 	@Test
 	void bound_exception_under() {
-		String[] manualLottoNumber = {"-100", "1", "2", "3", "4", "5"};
+		List<String> manualLottoNumber = Arrays.asList("-100", "1", "2", "3", "4", "5");
 
 		assertThatThrownBy(() -> {
 			new Lotto(Lotto.generateManual(manualLottoNumber));
@@ -48,7 +48,7 @@ public class LottoTest {
 	@DisplayName("Lotto 의 LottoBall 에 45 초과 값이 있으면 예외를 반환한다")
 	@Test
 	void bound_exception_over() {
-		String[] manualLottoNumber = {"100", "1", "2", "3", "4", "5"};
+		List<String> manualLottoNumber = Arrays.asList("100", "1", "2", "3", "4", "5");
 
 		assertThatThrownBy(() -> {
 			new Lotto(Lotto.generateManual(manualLottoNumber));

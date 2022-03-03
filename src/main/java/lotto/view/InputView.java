@@ -53,13 +53,13 @@ public class InputView {
 		return manualCount;
 	}
 
-	public static List<String[]> askManualLottoNumbers(int count) {
+	public static List<List<String>> askManualLottoNumbers(int count) {
 		System.out.println();
 		System.out.println(MESSAGE_MANUAL_LOTTO_NUMBERS);
 
-		List<String[]> manualLottos = new ArrayList<>();
+		List<List<String>> manualLottos = new ArrayList<>();
 		for (int index = 0; index < count; index++) {
-			manualLottos.add(splitByComma(scanner.nextLine()));
+			manualLottos.add(Arrays.asList(splitByComma(scanner.nextLine())));
 		}
 
 		return manualLottos;
