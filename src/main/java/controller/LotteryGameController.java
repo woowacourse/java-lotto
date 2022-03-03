@@ -26,7 +26,7 @@ public class LotteryGameController {
 		initLotteryGame();
 		final Lotteries lotteries = purchaseLottery();
 		final WinningLottery winningLottery = createWinningLottery();
-		outputView.printLotteries(lotteries.getLotteries());
+		printLotteries(lotteries);
 		makeResult(lotteries, winningLottery);
 	}
 
@@ -69,6 +69,10 @@ public class LotteryGameController {
 			outputView.printException(exception.getMessage());
 			return createWinningLottery();
 		}
+	}
+
+	private void printLotteries(Lotteries lotteries) {
+		outputView.printLotteries(lotteries.getLotteries());
 	}
 
 	private void makeResult(final Lotteries lotteries, final WinningLottery winningLottery) {
