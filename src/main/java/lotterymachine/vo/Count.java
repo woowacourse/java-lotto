@@ -1,15 +1,24 @@
 package lotterymachine.vo;
 
+import static lotterymachine.model.ErrorMessage.IS_NOT_INTEGER;
+import static lotterymachine.model.ErrorMessage.NOT_PURCHASABLE_COUNT;
+
 import java.util.Objects;
 
 public class Count {
     private int number;
 
     private Count(int number) {
+        validateInteger(number);
         this.number = number;
     }
 
     public static Count from(int number) {
+        return new Count(number);
+    }
+
+    public static Count of(Count total, int number) {
+        validateRange(total.getNumber(), number);
         return new Count(number);
     }
 
@@ -20,6 +29,18 @@ public class Count {
 
     public int getNumber() {
         return number;
+    }
+
+    private void validateInteger(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException(IS_NOT_INTEGER.getMessage());
+        }
+    }
+
+    private static void validateRange(int total, int number) {
+        if (total < number) {
+            throw new IllegalArgumentException(NOT_PURCHASABLE_COUNT.getMessage());
+        }
     }
 
     @Override

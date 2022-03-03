@@ -22,8 +22,9 @@ import java.util.List;
 public class LotteryMachine {
     public static void main(String[] args) {
         Money amount = getInputAmount();
-        Count numberOfTickets = getNumberOfTickets(amount);
-        LotteryTickets purchasedLotteryTickets = purchaseLotteryTickets(numberOfTickets);
+        Count totalTickets = getNumberOfTickets(amount);
+        Count manualTickets = getNumberOfManualTickets(totalTickets);
+        LotteryTickets purchasedLotteryTickets = purchaseLotteryTickets(totalTickets);
 
         LotteryTicket winningTicket = getWinningTicket();
         int bonusNumber = InputView.getBonusNumber(winningTicket.getBalls());
@@ -41,9 +42,17 @@ public class LotteryMachine {
     }
 
     private static Count getNumberOfTickets(Money money) {
-        Count numberOfTickets = Count.from(money.divideByTicketPrice());
-        OutputView.printNumberOfTicket(numberOfTickets.getNumber());
-        return numberOfTickets;
+        return Count.from(money.divideByTicketPrice());
+    }
+
+    private static Count getNumberOfManualTickets(Count totalTickets) {
+        try {
+            int numberOfManualTickets = InputView.getNumberOfManualTickets();
+            return Count.of(totalTickets, numberOfManualTickets);
+        } catch (RuntimeException exception) {
+            OutputView.printException(exception.getMessage());
+            return getNumberOfManualTickets(totalTickets);
+        }
     }
 
     private static LotteryTickets purchaseLotteryTickets(Count numberOfTickets) {
