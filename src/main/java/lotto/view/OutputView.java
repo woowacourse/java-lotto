@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
 import lotto.domain.Rank;
 import lotto.domain.RankBoard;
 
@@ -15,8 +16,9 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printTicketCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void printTicketCount(LottoMachine lottoMachine) {
+        System.out.println("수동으로 " + lottoMachine.getManualTicketCount() +"장," +
+                " 자동으로 " + lottoMachine.getAutoTicketCount() +"개를 구매했습니다.");
     }
 
     public static void printTickets(List<Lotto> tickets) {

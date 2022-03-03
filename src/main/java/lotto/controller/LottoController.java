@@ -6,6 +6,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoController {
 
@@ -13,16 +14,42 @@ public class LottoController {
 
     public void run() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        int ticketCount = purchaseAmount.countTickets();
-        OutputView.printTicketCount(ticketCount);
+        LottoMachine lottoMachine = createLottoMachine(purchaseAmount.countTickets());
 
-        List<Lotto> lottoTickets = getTickets(ticketCount);
+        List<Lotto> manualLottos = getManualLottos(lottoMachine.getManualTicketCount());
+        OutputView.printTicketCount(lottoMachine);
+
+        List<Lotto> lottoTickets = lottoMachine.makeLottoTickets(manualLottos);
         OutputView.printTickets(lottoTickets);
 
-        WinningLotto winningLotto = getWinningLotto();
-        RankBoard rankBoard = new RankBoard(winningLotto, lottoTickets);
-
+        RankBoard rankBoard = new RankBoard(getWinningLotto(), lottoTickets);
         OutputView.printResult(rankBoard, rankBoard.calculateProfitRatio(purchaseAmount.getAmount()));
+    }
+
+    private LottoMachine createLottoMachine(int ticketCount) {
+        try {
+            int manualTicketCount = StringConverter.toInt(InputView.getManualTicketCount());
+            return new LottoMachine(ticketCount, manualTicketCount);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return createLottoMachine(ticketCount);
+        }
+    }
+
+    private List<Lotto> getManualLottos(int manualTicketCount) {
+        try {
+            return getLottoNumbers(manualTicketCount);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getManualLottos(manualTicketCount);
+        }
+    }
+
+    private List<Lotto> getLottoNumbers(int manualTicketCount) {
+        List<String> lottoNumbers = InputView.getLottoNumbers(manualTicketCount);
+        return lottoNumbers.stream()
+                .map(numbers -> Lotto.of(StringConverter.toInts(numbers, LOTTO_INPUT_DELIMITER)))
+                .collect(Collectors.toList());
     }
 
     private PurchaseAmount getPurchaseAmount() {
@@ -32,11 +59,6 @@ public class LottoController {
             System.out.println(e.getMessage());
             return getPurchaseAmount();
         }
-    }
-
-    private List<Lotto> getTickets(int ticketCount) {
-        LottoMachine lottoMachine = new LottoMachine();
-        return lottoMachine.makeLottoTickets(ticketCount);
     }
 
     private WinningLotto getWinningLotto() {
