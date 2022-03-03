@@ -18,7 +18,7 @@ public class Lotto {
 
     public Lotto(List<String> numbers) {
         validateNumbers(numbers);
-        this.numbers = makeWinningNumbers(numbers);
+        this.numbers = makeWinningToNumbers(numbers);
     }
 
     private void validateNumbers(List<String> numbers) {
@@ -36,7 +36,8 @@ public class Lotto {
     }
 
     private boolean isBlankNumbers(List<String> numbers) {
-        return numbers.stream().anyMatch(String::isBlank);
+        return numbers.stream()
+                .anyMatch(String::isBlank);
     }
 
     private String makeNumbersToString(List<String> numbers) {
@@ -55,14 +56,16 @@ public class Lotto {
     }
 
     private void validateNumberReduplication(List<String> numbers) {
-        long count = numbers.stream().distinct().count();
+        long count = numbers.stream()
+                .distinct()
+                .count();
 
         if (count != numbers.size()) {
             throw new IllegalArgumentException(LottoNumberExceptionMessage.REDUPLICATION_ERROR.getMassage());
         }
     }
 
-    private Set<Integer> makeWinningNumbers(List<String> numbers) {
+    private Set<Integer> makeWinningToNumbers(List<String> numbers) {
         return numbers.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
