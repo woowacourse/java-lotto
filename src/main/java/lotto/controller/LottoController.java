@@ -61,12 +61,11 @@ public class LottoController {
         return InputView.inputBonusNumber();
     }
 
-    public LottoResult calculateRanks(final Lottos lottos, final LottoWinningNumbers lottoWinningNumbers) {
+    public LottoResult calculateRanks(final Lottos lottos, final LottoWinningNumbers numbers) {
         LottoResult lottoResult = new LottoResult();
 
         for (Lotto lotto : lottos.getLottos()) {
-            lottoResult.calculateWinning(lottoWinningNumbers.getWinningLotto(), lottoWinningNumbers.getBonusNumber(),
-                    lotto);
+            lottoResult.calculateWinning(lotto, numbers.getWinningLotto(), numbers.getBonusNumber());
         }
 
         return lottoResult;

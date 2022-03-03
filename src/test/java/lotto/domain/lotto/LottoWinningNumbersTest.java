@@ -45,16 +45,16 @@ class LottoWinningNumbersTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    public void 당첨결과_계산_테스트() {
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new Lotto(Arrays.asList(1,2,3,4,5,6)), new LottoNumber("7"));
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateWinning(lottoWinningNumbers.getWinningLotto(), lottoWinningNumbers.getBonusNumber(),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(lottoResult.getRankCount(Rank.FIRST)).isEqualTo(1);
-        assertThat(lottoResult.getRankCount(Rank.SECOND)).isEqualTo(0);
-        assertThat(lottoResult.getRankCount(Rank.THIRD)).isEqualTo(0);
-    }
+//    @Test
+//    public void 당첨결과_계산_테스트() {
+//        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(new Lotto(Arrays.asList(1,2,3,4,5,6)), new LottoNumber("7"));
+//        LottoResult lottoResult = new LottoResult();
+//        lottoResult.calculateWinning(lottoWinningNumbers.getWinningLotto(), lottoWinningNumbers.getBonusNumber(),
+//                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+//        assertThat(lottoResult.getRankCount(Rank.FIRST)).isEqualTo(1);
+//        assertThat(lottoResult.getRankCount(Rank.SECOND)).isEqualTo(0);
+//        assertThat(lottoResult.getRankCount(Rank.THIRD)).isEqualTo(0);
+//    }
 
     @Test
     void 당첨번호_빈값_검증() {

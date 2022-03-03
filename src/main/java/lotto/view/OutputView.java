@@ -1,9 +1,12 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.Rank;
@@ -28,7 +31,11 @@ public class OutputView {
     }
 
     private static void printLotto(final Lotto lotto) {
-        System.out.println(lotto.getNumbers().toString());
+        List<Integer> numbers = new ArrayList<>();
+        for (LottoNumber number : lotto.getLottoNumbers()) {
+            numbers.add(number.getLottoNumber());
+        }
+        System.out.println(numbers.toString());
     }
 
     public static void printWinningResult(final LottoResult result) {

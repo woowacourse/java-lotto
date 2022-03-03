@@ -19,12 +19,12 @@ public class LottoResult {
         }
     }
 
-    public void calculateWinning(final Lotto winninglotto, final int bonusNumber, final Lotto comparisonLotto) {
-        int matchCount = (int) winninglotto.getNumbers()
+    public void calculateWinning(final Lotto lotto, final Lotto winninglotto, final int bonusNumber) {
+        int matchCount = (int) winninglotto.getLottoNumbers()
                 .stream()
-                .filter(number -> comparisonLotto.getNumbers().contains(number))
+                .filter(lottoNumber -> lotto.contains(lottoNumber.getLottoNumber()))
                 .count();
-        boolean hasBonusNumber = comparisonLotto.getNumbers().contains(bonusNumber);
+        boolean hasBonusNumber = lotto.contains(bonusNumber);
         Rank rank = Rank.matchRank(matchCount, hasBonusNumber);
 
         result.put(rank, result.get(rank) + 1);
