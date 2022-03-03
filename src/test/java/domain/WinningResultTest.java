@@ -81,23 +81,4 @@ public class WinningResultTest {
         // then
         assertThat(actual).isEqualTo(expected);
     }
-
-    @Test
-    @DisplayName("getWinningResult 는 Map<Rank, WinningCount> 형태로 당첨 통계를 반환한다.")
-    void getWinningResult() {
-        // given
-        Map<Rank, WinningCount> actual = winningResult.getWinningResult();
-
-        // when
-        Map<Rank, WinningCount> expected = new HashMap<>();
-        expected.put(Rank.FIRST, new WinningCount(0));
-        expected.put(Rank.SECOND, new WinningCount(0));
-        expected.put(Rank.THIRD, new WinningCount(0));
-        expected.put(Rank.FOURTH, new WinningCount(0));
-        expected.put(Rank.FIFTH, new WinningCount(10));
-        expected.put(Rank.NO_MATCH, new WinningCount(0));
-
-        // then
-        assertThat(actual).isEqualTo(expected);
-    }
 }
