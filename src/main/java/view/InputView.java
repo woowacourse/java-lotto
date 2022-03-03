@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import java.util.stream.IntStream;
+import model.lottonumber.Lotto;
 import utils.IntegerParser;
 
 public class InputView {
@@ -24,6 +26,13 @@ public class InputView {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         String manualLottoCount = scanner.nextLine();
         return IntegerParser.parseInteger(manualLottoCount);
+    }
+
+    public List<Integer> inputManualLottoNumbers() {
+        List<String> numbers = List.of((scanner.nextLine()).split(SEPARATOR));
+        return numbers.stream()
+                .map(IntegerParser::parseInteger)
+                .collect(Collectors.toList());
     }
 
     public List<Integer> inputWinningNumbers() {

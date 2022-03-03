@@ -26,9 +26,7 @@ public class LottoMachineInitializer {
     private void buyManualLotto(LottoMachine lottoMachine) {
         ManualLottoCount manualLottoCount = new ManualLottoCount(inputView.inputManualLottoCount(),
                 lottoMachine.getPurchaseLottoCount());
-    }
 
-
-    private void initManualLottoCount() {
+        inputView.inputManualLottoNumbers();
     }
 }
