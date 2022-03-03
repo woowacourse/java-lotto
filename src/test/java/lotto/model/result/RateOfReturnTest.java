@@ -13,7 +13,7 @@ class RateOfReturnTest {
     @ValueSource(ints = {10000, 14000, 50000})
     @DisplayName("수익률 검증")
     void checkProfit(int money) {
-        RateOfReturn rateOfReturn = new RateOfReturn(Integer.toString(money));
+        RateOfReturn rateOfReturn = new RateOfReturn(money);
 
         WinningResult winningResult = new WinningResult();
         winningResult.addCount(Rank.FOUR);

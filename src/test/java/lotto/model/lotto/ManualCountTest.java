@@ -12,19 +12,19 @@ class ManualCountTest {
     @Test
     @DisplayName("수동 로또 생성 종료 테스트")
     void checkMakeManualEnd() {
-        ManualCount manualCount = new ManualCount("1");
+        ManualCount manualCount = new ManualCount(1);
         manualCount.createManualLotto();
 
         assertThat(manualCount.isEnd()).isTrue();
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1", "2", "100"})
+    @ValueSource(ints = {1, 2, 100})
     @DisplayName("수동 로또 생성 개수 감소 테스트")
-    void checkManualLottoCount(String number) {
+    void checkManualLottoCount(int number) {
         ManualCount manualCount = new ManualCount(number);
         manualCount.createManualLotto();
 
-        assertThat(manualCount.getNumber()).isEqualTo(Integer.parseInt(number) - 1);
+        assertThat(manualCount.getNumber()).isEqualTo(number - 1);
     }
 }

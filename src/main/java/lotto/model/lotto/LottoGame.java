@@ -1,10 +1,10 @@
 package lotto.model.lotto;
 
+import java.util.List;
+
 import lotto.model.result.RateOfReturn;
 import lotto.model.result.WinningResult;
 import lotto.model.winningnumber.WinningLottoResponse;
-
-import java.util.List;
 
 public class LottoGame {
 
@@ -21,7 +21,7 @@ public class LottoGame {
         return new LottoStorage(lottoCount, lottos);
     }
 
-    public RateOfReturn storeMoneyInRateOfReturn(String money) {
+    public RateOfReturn storeMoneyInRateOfReturn(long money) {
         return new RateOfReturn(money);
     }
 

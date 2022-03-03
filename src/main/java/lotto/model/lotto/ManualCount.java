@@ -1,17 +1,11 @@
 package lotto.model.lotto;
 
-import lotto.model.message.LottoManualCountExceptionMessage;
-import lotto.utils.ConverterUtils;
-import lotto.utils.InputValidateUtils;
-
 public class ManualCount {
     public static final int END = 0;
     private int number;
 
-    public ManualCount(String number) {
-        InputValidateUtils.inputBlank(number, LottoManualCountExceptionMessage.BLANK_ERROR.getMassage());
-        InputValidateUtils.inputNumber(number, LottoManualCountExceptionMessage.NUMBER_ERROR.getMassage());
-        this.number = ConverterUtils.convertStringToInt(number);
+    public ManualCount(int number) {
+        this.number = number;
     }
 
     public void createManualLotto() {

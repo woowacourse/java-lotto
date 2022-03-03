@@ -8,14 +8,14 @@ public class LottoCount {
     private static final int END = 0;
     private static final int UNIT = 1000;
 
-    private int count;
+    private long count;
 
-    public LottoCount(String money, int count) {
+    public LottoCount(long money, int count) {
         this.count = makeLottoCount(money, count);
     }
 
-    private int makeLottoCount(String money, int count) {
-        return (ConverterUtils.convertStringToInt(money) / UNIT) - count;
+    private long makeLottoCount(long money, int count) {
+        return (money / UNIT) - count;
     }
 
     public boolean isZero() {
@@ -26,7 +26,7 @@ public class LottoCount {
         this.count--;
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 

@@ -22,8 +22,6 @@ public class WinningLotto {
     }
 
     private void validateBonusBall(String bonusBall) {
-        InputValidateUtils.inputBlank(bonusBall, BonusBallExceptionMessage.BLANK_ERROR.getMessage());
-        InputValidateUtils.inputNumber(bonusBall, BonusBallExceptionMessage.NUMBER_ERROR.getMessage());
         InputValidateUtils.inputOutOfRange(bonusBall, BonusBallExceptionMessage.RANGE_ERROR.getMessage());
         validateReduplicationWithBonusBall(bonusBall);
     }

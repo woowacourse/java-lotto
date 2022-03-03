@@ -22,7 +22,7 @@ class LottoGameTest {
     void checkLottoCount() {
         LottoGame lottoGame = new LottoGame();
 
-        ManualCount manualCount = new ManualCount("1");
+        ManualCount manualCount = new ManualCount(1);
         List<Lotto> lottos = new ArrayList<>();
         Lotto lotto = new Lotto(numbers);
         lottoGame.makeManualLottos(lottos, lotto, manualCount);
@@ -35,7 +35,7 @@ class LottoGameTest {
     void checkCreateLotto() {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(numbers));
-        LottoCount lottoCount = new LottoCount("10000", 1);
+        LottoCount lottoCount = new LottoCount(10000, 1);
         LottoGame lottoGame = new LottoGame();
 
         assertThat(lottoGame.makeLottos(lottoCount, lottos)
@@ -48,7 +48,7 @@ class LottoGameTest {
     @DisplayName("수익률 검증 테스트")
     void checkRateOfReturn() {
         LottoGame lottoGame = new LottoGame();
-        RateOfReturn rateOfReturn = lottoGame.storeMoneyInRateOfReturn("10000");
+        RateOfReturn rateOfReturn = lottoGame.storeMoneyInRateOfReturn(10000);
 
         WinningResult winningResult = new WinningResult();
         winningResult.addCount(Rank.FOUR);
@@ -60,7 +60,7 @@ class LottoGameTest {
     void compareLottoWithWinning() {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(numbers));
-        LottoStorage lottoStorage = new LottoStorage(new LottoCount("1000", 0), lottos);
+        LottoStorage lottoStorage = new LottoStorage(new LottoCount(1000, 0), lottos);
         LottoGame lottoGame = new LottoGame();
         WinningLottoResponse winningLottoResponse =
                 new WinningLottoResponse(new WinningLotto(numbers, "7"));

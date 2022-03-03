@@ -9,6 +9,7 @@ import lotto.model.result.RateOfReturn;
 import lotto.model.result.WinningResult;
 import lotto.model.winningnumber.WinningLotto;
 import lotto.model.winningnumber.WinningLottoResponse;
+import lotto.utils.ConverterUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -29,7 +30,7 @@ public class LottoController {
 
     private Money receiveMoney() {
         try {
-            return new Money(InputView.inputMoney());
+            return new Money(ConverterUtils.convertStringToInt(InputView.inputMoney()));
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return receiveMoney();
@@ -38,7 +39,7 @@ public class LottoController {
 
     private ManualCount receiveManualCount() {
         try {
-            return new ManualCount(InputView.inputManualLottoCount());
+            return new ManualCount(ConverterUtils.convertStringToInt(InputView.inputManualLottoCount()));
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return receiveManualCount();
@@ -72,7 +73,7 @@ public class LottoController {
         }
     }
 
-    private void sendResult(LottoGame lottoGame, String money, WinningResult winningResult) {
+    private void sendResult(LottoGame lottoGame, long money, WinningResult winningResult) {
         OutputView.printWinningResult(winningResult);
         RateOfReturn rateOfReturn = lottoGame.storeMoneyInRateOfReturn(money);
         OutputView.printRateOfReturn(lottoGame.sendRateOfReturn(rateOfReturn, winningResult));
