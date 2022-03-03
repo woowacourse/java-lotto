@@ -20,23 +20,14 @@ import view.ResultView;
 public class LottoController {
     public void start() {
         InputMoney inputMoney = generateInputMoney();
-
         LottoQuantity totalLottoQuantity = generateLottoQuantityByInputMoney(inputMoney);
         LottoQuantity manualLottoQuantity = generateManualLottoQuantity(inputMoney);
         LottoQuantity autoLottoQuantity = generateAutoLottoQuantity(totalLottoQuantity, manualLottoQuantity);
 
         Lottos manualLottos = generateManualLottos(manualLottoQuantity);
-
         printLottoQuantity(manualLottoQuantity, autoLottoQuantity);
-
         Lottos autoLottos = generateAutoLottosByLottoQuantity(autoLottoQuantity);
-        printLottos(autoLottos);
-
-        Lottos totalLottos = generateTotalLottos(manualLottos, autoLottos);
-
-        WinningLotto winningLotto = generateWinningLotto();
-        WinningResult winningResult = generateWinningResultByLottosAndWinningLotto(totalLottos, winningLotto);
-        printWinningResult(winningResult);
+        runResultStep(manualLottos, autoLottos);
     }
 
     private InputMoney generateInputMoney() {
@@ -93,7 +84,9 @@ public class LottoController {
     }
 
     private Lottos generateAutoLottosByLottoQuantity(LottoQuantity lottoQuantity) {
-        return new Lottos(lottoQuantity, new RandomLottoNumberGenerator());
+        Lottos autoLottos = new Lottos(lottoQuantity, new RandomLottoNumberGenerator());
+        printLottos(autoLottos);
+        return autoLottos;
     }
 
     private void printLottos(Lottos autoLottos) {
@@ -141,6 +134,13 @@ public class LottoController {
             OutputView.printException(exception);
             return generateBonusNumberOfWinningLotto();
         }
+    }
+
+    private void runResultStep(Lottos manualLottos, Lottos autoLottos) {
+        Lottos totalLottos = generateTotalLottos(manualLottos, autoLottos);
+        WinningLotto winningLotto = generateWinningLotto();
+        WinningResult winningResult = generateWinningResultByLottosAndWinningLotto(totalLottos, winningLotto);
+        printWinningResult(winningResult);
     }
 
     private WinningResult generateWinningResultByLottosAndWinningLotto(Lottos lottos, WinningLotto winningLotto) {
