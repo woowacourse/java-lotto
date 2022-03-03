@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.Objects;
-
-public final class ManualLottoCount {
+public class ManualLottoCount {
     private static final String EXCEED_UPPER_BOUND_ERROR = "최대 구매 개수를 초과했습니다.";
 
     private final int value;
@@ -20,23 +18,6 @@ public final class ManualLottoCount {
 
     public int getValue() {
         return value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ManualLottoCount that = (ManualLottoCount) o;
-        return value == that.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
     }
 
     @Override

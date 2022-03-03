@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.Objects;
-
 public final class AmountToBuyLotto {
     private static final int LOWER_BOUND = 1000;
     private static final double DECIMAL = 1.0;
@@ -43,23 +41,6 @@ public final class AmountToBuyLotto {
 
     public int calculateAutomaticLottoCount(ManualLottoCount manualLottoCount) {
         return calculateLottoCount() - manualLottoCount.getValue();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        AmountToBuyLotto amount = (AmountToBuyLotto) o;
-        return value == amount.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
     }
 
     @Override

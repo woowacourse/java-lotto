@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Objects;
 import lotto.domain.lottoticket.LottoTicket;
 
 public final class WinningNumbers {
@@ -18,31 +17,13 @@ public final class WinningNumbers {
     public Ranking calculateRanking(LottoTicket otherLottoNumbers) {
         int hitCount = lottoNumbers.calculateSameCount(otherLottoNumbers);
         boolean hasBonusBall = otherLottoNumbers.isContains(bonusNumber);
-        return Ranking.findRanking(hitCount, hasBonusBall);
+        return Ranking.of(hitCount, hasBonusBall);
     }
 
     private void validateDuplicateNumber(LottoTicket lottoNumbers, LottoNumber bonusNumber) {
         if (lottoNumbers.isContains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_ERROR);
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        WinningNumbers that = (WinningNumbers) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers) && Objects.equals(bonusNumber,
-                that.bonusNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumbers, bonusNumber);
     }
 
     @Override

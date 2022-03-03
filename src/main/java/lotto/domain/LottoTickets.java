@@ -2,11 +2,10 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import lotto.domain.lottoticket.LottoTicket;
 
-public final class LottoTickets {
+public class LottoTickets {
     private final List<LottoTicket> value;
 
     private LottoTickets(List<LottoTicket> manualLottoTickets, int count) {
@@ -33,23 +32,6 @@ public final class LottoTickets {
 
     public List<LottoTicket> getValue() {
         return value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LottoTickets that = (LottoTickets) o;
-        return Objects.equals(value, that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
     }
 
     @Override
