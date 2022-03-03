@@ -7,6 +7,7 @@ import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoController {
 
@@ -46,16 +47,10 @@ public class LottoController {
     }
 
     private List<Lotto> getLottoNumbers(int manualTicketCount) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<Lotto> manualLottos = new ArrayList<>();
-        addLottoNumbers(manualTicketCount, manualLottos);
-        return manualLottos;
-    }
-
-    private void addLottoNumbers(int manualTicketCount, List<Lotto> manualLottos) {
-        for (int i = 0; i < manualTicketCount; i++) {
-            manualLottos.add(Lotto.of(StringConverter.toInts(InputView.getLottoNumbers(), LOTTO_INPUT_DELIMITER)));
-        }
+        List<String> lottoNumbers = InputView.getLottoNumbers(manualTicketCount);
+        return lottoNumbers.stream()
+                .map(numbers -> Lotto.of(StringConverter.toInts(numbers, LOTTO_INPUT_DELIMITER)))
+                .collect(Collectors.toList());
     }
 
     private PurchaseAmount getPurchaseAmount() {
