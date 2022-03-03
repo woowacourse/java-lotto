@@ -74,9 +74,9 @@ public class Lotto {
     public Rank getRank(WinningLotto winningLotto) {
         int matchingCount = getMatchingCount(winningLotto.getWinningLotto());
         if (matchingCount == CHECK_BONUS_COUNT && lotto.contains(winningLotto.getBonusBall())) {
-            return Rank.getInstance(matchingCount, true);
+            return Rank.of(matchingCount, true);
         }
-        return Rank.getInstance(matchingCount, false);
+        return Rank.of(matchingCount, false);
     }
 
     private int getMatchingCount(Lotto compareLotto) {

@@ -24,7 +24,7 @@ public enum Rank {
         this.isBonus = isBonus;
     }
 
-    public static Rank getInstance(int matchingCount, boolean isBonus) {
+    public static Rank of(int matchingCount, boolean isBonus) {
         return Arrays.stream(values())
             .filter(rank -> rank.count == matchingCount && rank.isBonus == isBonus)
             .findFirst()
