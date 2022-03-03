@@ -17,7 +17,7 @@ public class LottoGame {
 
     public void purchaseLottoTickets(List<Set<Integer>> selfTicketNumbers, int purchaseMoney,
                                      NumberGenerateStrategy numberGenerateStrategy) {
-        this.lottoTickets = LottoTickets.of(selfTicketNumbers, new Money(purchaseMoney), numberGenerateStrategy);
+        this.lottoTickets = LottoTickets.of(selfTicketNumbers, new LottoMoney(purchaseMoney), numberGenerateStrategy);
     }
 
     public void inputWinningNumbers(Set<Integer> winningNumbers, int bonusNumber) {

@@ -8,7 +8,6 @@ import domain.strategy.WinningPrizeStrategy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,7 @@ class LottoResultTest {
     private final Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     private final WinningTicket winningTicket = WinningTicket.of(winningNumbers, 7);
     private final NumberGenerateStrategy numberGenerateStrategy = () -> new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-    private final LottoTickets lottoTickets = LottoTickets.of(new ArrayList<>(), new Money(1000),
+    private final LottoTickets lottoTickets = LottoTickets.of(new ArrayList<>(), new LottoMoney(1000),
             numberGenerateStrategy);
     private final WinningPrizeStrategy winningPrizeStrategy = new DefaultWinningPrizeStrategy();
 
