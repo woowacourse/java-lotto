@@ -1,7 +1,7 @@
 package view;
 
+import domain.LottoNumbers;
 import domain.LottoRank;
-import domain.LottoTicket;
 import domain.PurchaseType;
 import domain.WinningStat;
 import util.ProfitFormatter;
@@ -27,9 +27,9 @@ public class OutputView {
         System.out.println(stringBuilder);
     }
 
-    public static void printPurchasedLottoTickets(List<LottoTicket> lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.getTicketNumbers());
+    public static void printPurchasedLottoTickets(List<LottoNumbers> lottos) {
+        for (LottoNumbers lotto : lottos) {
+            System.out.println(lotto.getLottoNumbers());
         }
         System.out.println();
     }

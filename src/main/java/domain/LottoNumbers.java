@@ -16,8 +16,7 @@ public class LottoNumbers {
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicateLottoNumber(lottoNumbers);
-        Collections.sort(lottoNumbers);
-        numbers = lottoNumbers;
+        numbers = new ArrayList<>(lottoNumbers);
     }
 
     public static LottoNumbers convertToLottoNumber(List<Integer> lottoNumbers) {
@@ -52,7 +51,10 @@ public class LottoNumbers {
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public List<Integer> getLottoNumbers() {
+        return numbers.stream()
+                .mapToInt(LottoNumber::getNumber)
+                .boxed()
+                .collect(Collectors.toList());
     }
 }

@@ -11,47 +11,49 @@ public class LottoMachine {
     public static final int LOTTO_TICKET_PRICE = 1000;
     private static final int INCREASE_VALUE = 1;
 
-    public List<LottoTicket> purchaseLottoTickets(List<List<Integer>> lottoNumbers,
+    public List<LottoNumbers> purchaseLottoTickets(List<List<Integer>> lottoNumbers,
                                                   PurchaseType purchaseType,
                                                   LottoNumberStrategy lottoNumberStrategy) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        lottoTickets.addAll(purchaseManually(lottoNumbers));
-        lottoTickets.addAll(purchaseAutomatically(purchaseType, lottoNumberStrategy));
+        List<LottoNumbers> lottos = new ArrayList<>();
+        lottos.addAll(purchaseManually(lottoNumbers));
+        lottos.addAll(purchaseAutomatically(purchaseType, lottoNumberStrategy));
 
-        return lottoTickets;
+        return lottos;
     }
 
-    public WinningStat createWinningStat(List<LottoTicket> lottoTickets,
-                                         LottoNumbers winningNumbers,
-                                         LottoNumber bonusNumber) {
+
+    public WinningStat createWinningStat(List<LottoNumbers> lottos, WinLotto winLotto) {
         Map<LottoRank, Integer> ranks = new HashMap<>();
+        initializeRank(ranks);
 
-        for (LottoRank lottoRank : LottoRank.values()) {
-            ranks.put(lottoRank, 0);
-        }
-
-        for (LottoTicket lottoTicket : lottoTickets) {
-            ranks.merge(lottoTicket.rank(winningNumbers, bonusNumber), INCREASE_VALUE, Integer::sum);
+        for (LottoNumbers lotto : lottos) {
+            ranks.merge(winLotto.rank(lotto), INCREASE_VALUE, Integer::sum);
         }
 
         return new WinningStat(ranks);
     }
 
-    private List<LottoTicket> purchaseAutomatically(PurchaseType type, LottoNumberStrategy strategy) {
+    private void initializeRank(Map<LottoRank, Integer> ranks) {
+        for (LottoRank lottoRank : LottoRank.values()) {
+            ranks.put(lottoRank, 0);
+        }
+    }
+
+    private List<LottoNumbers> purchaseAutomatically(PurchaseType type, LottoNumberStrategy strategy) {
         return IntStream.range(0, type.getAutomaticCount())
-                .mapToObj(index -> new LottoTicket(strategy.generate()))
+                .mapToObj(index -> new LottoNumbers(strategy.generate()))
                 .collect(Collectors.toList());
     }
 
-    private List<LottoTicket> purchaseManually(List<List<Integer>> ticketsNumbers) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+    private List<LottoNumbers> purchaseManually(List<List<Integer>> lottosNumbers) {
+        List<LottoNumbers> lottos = new ArrayList<>();
 
-        for (List<Integer> ticketNumbers : ticketsNumbers) {
-            lottoTickets.add(new LottoTicket(ticketNumbers.stream()
+        for (List<Integer> lottoNumbers : lottosNumbers) {
+            lottos.add(new LottoNumbers(lottoNumbers.stream()
                     .map(LottoNumber::getInstance)
                     .collect(Collectors.toList())));
         }
 
-        return lottoTickets;
+        return lottos;
     }
 }

@@ -40,21 +40,6 @@ class LottoNumbersTest {
     }
 
     @Test
-    @DisplayName("로또 번호 정렬")
-    void sortLottoNumbers() {
-        List<LottoNumber> inputLottoNumbers = IntStream.of(4, 3, 2, 1, 6, 5)
-                .mapToObj(LottoNumber::getInstance)
-                .collect(Collectors.toList());
-
-        LottoNumbers lottoTicketNumbers = new LottoNumbers(inputLottoNumbers);
-
-        List<LottoNumber> lottoNumbers = lottoTicketNumbers.getLottoNumbers();
-
-        assertThat(lottoNumbers).extracting(LottoNumber::getNumber)
-                .containsExactly(1, 2, 3, 4, 5, 6);
-    }
-
-    @Test
     @DisplayName("로또 번호 비교")
     void countMatchingNumbers() {
         List<LottoNumber> inputLottoNumbers = IntStream.of(4, 3, 2, 1, 6, 5)

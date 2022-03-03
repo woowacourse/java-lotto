@@ -15,6 +15,7 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
     @Override
     public List<LottoNumber> generate() {
         Collections.shuffle(numbers);
+        Collections.sort(numbers);
         return numbers.stream()
                 .limit(LOTTO_NUMBERS_SIZE)
                 .collect(Collectors.toList());

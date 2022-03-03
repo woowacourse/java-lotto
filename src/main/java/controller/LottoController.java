@@ -13,28 +13,29 @@ public class LottoController {
 
     public void run() {
         LottoMachine lottoMachine = new LottoMachine();
-        List<LottoTicket> lottoTickets = purchaseLottoTickets(lottoMachine);
-        createResult(lottoMachine, lottoTickets);
+        List<LottoNumbers> lottos = purchaseLottoTickets(lottoMachine);
+        createResult(lottoMachine, lottos);
     }
 
-    private List<LottoTicket> purchaseLottoTickets(LottoMachine lottoMachine) {
+    private List<LottoNumbers> purchaseLottoTickets(LottoMachine lottoMachine) {
         Money money = new Money(InputView.getMoney());
         PurchaseType purchaseType = new PurchaseType(money, InputView.getManualPurchaseCount());
         List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(purchaseType);
-        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(manualLottoNumbers, purchaseType,
+        List<LottoNumbers> lottos = lottoMachine.purchaseLottoTickets(manualLottoNumbers, purchaseType,
                 new RandomLottoNumberStrategy());
 
         OutputView.printPurchasedLottoTicketNumber(purchaseType);
-        OutputView.printPurchasedLottoTickets(lottoTickets);
+        OutputView.printPurchasedLottoTickets(lottos);
 
-        return lottoTickets;
+        return lottos;
     }
 
-    private void createResult(LottoMachine lottoMachine, List<LottoTicket> lottoTickets) {
+    private void createResult(LottoMachine lottoMachine, List<LottoNumbers> lottos) {
         LottoNumbers winningNumbers = LottoNumbers.convertToLottoNumber(InputView.getWinningNumbers());
         LottoNumber bonusNumber = LottoNumber.createBonus(InputView.getBonusNumber(), winningNumbers);
+        WinLotto winLotto = new WinLotto(winningNumbers, bonusNumber);
 
-        WinningStat winningStat = lottoMachine.createWinningStat(lottoTickets, winningNumbers, bonusNumber);
+        WinningStat winningStat = lottoMachine.createWinningStat(lottos, winLotto);
         OutputView.printWinningStat(winningStat, winningStat.calculateProfit(LOTTO_TICKET_PRICE));
     }
 }

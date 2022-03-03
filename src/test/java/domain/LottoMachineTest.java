@@ -46,30 +46,33 @@ class LottoMachineTest {
     @DisplayName("입력 금액에 따라 알맞은 개수의 로또 생성 검증")
     void createLottoTicketsByAmount(int amount) {
         LottoMachine lottoMachine = new LottoMachine();
-        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(lottoNumbers,
+        List<LottoNumbers> lottoNumbers = lottoMachine.purchaseLottoTickets(LottoMachineTest.lottoNumbers,
                 new PurchaseType(new Money(amount), 0), strategy);
 
-        assertThat(lottoTickets.size()).isEqualTo(10);
+        assertThat(lottoNumbers.size()).isEqualTo(10);
     }
 
     @Test
     @DisplayName("로또 당첨 통계 확인")
     void calculateWinningStat() {
         LottoMachine lottoMachine = new LottoMachine();
-        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(lottoNumbers,
+        List<LottoNumbers> lottos = lottoMachine.purchaseLottoTickets(LottoMachineTest.lottoNumbers,
                 new PurchaseType(new Money(2000), 0), strategy);
-        System.out.println(lottoTickets.size());
+
         List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 4, 3, 5, 6)
                 .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
         LottoNumbers winningNumbers = new LottoNumbers(inputWinningNumbers);
-        WinningStat actual = lottoMachine.createWinningStat(lottoTickets, winningNumbers, LottoNumber.getInstance(7));
+
+        WinningStat actual = lottoMachine.createWinningStat(lottos,
+                new WinLotto(winningNumbers, LottoNumber.getInstance(7)));
 
         Map<LottoRank, Integer> ranks = new HashMap<>();
         for (LottoRank lottoRank : LottoRank.values()) {
             ranks.put(lottoRank, 0);
         }
         ranks.put(LottoRank.FIRST, 2);
+
         WinningStat expected = new WinningStat(ranks);
 
         assertThat(actual).isEqualTo(expected);
