@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class LottoNumber {
 
     private static final String ERROR_INTEGER_RANGE = "[ERROR] 1~45 사이의 수가 아닙니다.";

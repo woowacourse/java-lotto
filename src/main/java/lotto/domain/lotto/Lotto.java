@@ -31,7 +31,7 @@ public class Lotto {
     }
 
     private void checkNull(final List<Integer> lottoNumbers) {
-        if (lottoNumbers == null) {
+        if (lottoNumbers == null || lottoNumbers.isEmpty()) {
             throw new IllegalArgumentException(ERROR_NULL_BLANK);
         }
     }
