@@ -10,6 +10,8 @@ public class AppConfig {
             ViewConfig.getInputView(),
             ViewConfig.getOutputView(),
             ViewConfig.getErrorView(),
+            ControllerConfig.getMoneyController(),
+            ControllerConfig.getManualPurchaseController(),
             ControllerConfig.getAutoPurchaseController(),
             ControllerConfig.getInputWinningController()
         );
