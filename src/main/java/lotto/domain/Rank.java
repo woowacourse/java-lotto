@@ -22,7 +22,7 @@ public enum Rank {
     }
 
     public static Rank findRank(int winningNumbersMatchCount, boolean bonusNumberMatch) {
-        if (winningNumbersMatchCount == 5 && bonusNumberMatch == true) {
+        if (winningNumbersMatchCount == 5 && bonusNumberMatch) {
             return RANK_2;
         }
         return Arrays.stream(Rank.values())

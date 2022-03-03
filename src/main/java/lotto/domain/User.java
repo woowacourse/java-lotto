@@ -19,11 +19,11 @@ public class User {
     }
 
     public static User generate(long money, int countOfManualLotto, List<Lotto> manualLottos) {
-        int countOfAutoLotto = calcualteCountOfAutoLotto(money, countOfManualLotto);
+        int countOfAutoLotto = calculateCountOfAutoLotto(money, countOfManualLotto);
         return new User(money, countOfManualLotto, buyLottos(manualLottos, countOfAutoLotto));
     }
 
-    private static int calcualteCountOfAutoLotto(long money, int countOfManualLotto) {
+    private static int calculateCountOfAutoLotto(long money, int countOfManualLotto) {
         return (int) (money / Lotto.LOTTO_PRICE) - countOfManualLotto;
     }
 
@@ -52,6 +52,6 @@ public class User {
     }
 
     public int getCountOfAutoLotto() {
-        return calcualteCountOfAutoLotto(money, countOfManualLotto);
+        return calculateCountOfAutoLotto(money, countOfManualLotto);
     }
 }
