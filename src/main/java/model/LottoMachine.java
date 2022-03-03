@@ -4,7 +4,9 @@ import java.util.List;
 
 import model.lottonumber.Lotto;
 import model.lottonumber.Lottos;
+import model.lottonumber.WinningNumbers;
 import model.totalmoney.TotalPurchaseMoney;
+import model.winningresult.WinningResult;
 
 public class LottoMachine {
 
@@ -29,7 +31,15 @@ public class LottoMachine {
         return totalPurchaseMoney.getAutoPurchaseCount();
     }
 
+    public int sendTotalPurchaseLottoCount() {
+        return totalPurchaseMoney.getTotalPurchaseLottoCount();
+    }
+
     public List<Lotto> sendLottosInMachine() {
         return lottos.getLottos();
+    }
+
+    public WinningResult makeLottoWinningResult(List<Integer> winningNumbers, int bonusNumber) {
+        return lottos.makeWinningResult(new WinningNumbers(winningNumbers, bonusNumber));
     }
 }

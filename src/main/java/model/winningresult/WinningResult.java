@@ -9,6 +9,7 @@ public class WinningResult {
     private static final int LOTTO_PRICE = 1000;
 
     private final Map<Rank, Integer> winningResult;
+    private int totalPurchaseMoney;
 
     public WinningResult(final Map<Rank, Integer> winningResult) {
         this.winningResult = winningResult;
@@ -18,8 +19,8 @@ public class WinningResult {
         return winningResult;
     }
 
-    public Double getRateOfReturn(final TotalPurchaseMoney totalPurchaseMoney) {
-        int totalInsertMoney = totalPurchaseMoney.getTotalPurchaseLottoCount() * LOTTO_PRICE;
+    public Double sendRateOfReturn(final int totalPurchaseLottoCount) {
+        int totalInsertMoney = totalPurchaseLottoCount * LOTTO_PRICE;
         int totalReturn = calculateTotalReturn();
         return totalReturn / (double) totalInsertMoney;
     }

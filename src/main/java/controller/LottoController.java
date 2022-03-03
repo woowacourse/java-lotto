@@ -3,11 +3,8 @@ package controller;
 import dto.LottoDto;
 import dto.RankResultDto;
 import model.LottoMachine;
-import model.lottonumber.Lottos;
-import model.totalmoney.TotalPurchaseMoney;
 import model.lottonumber.Lotto;
 import model.rank.Rank;
-import model.lottonumber.WinningNumbers;
 import model.winningresult.WinningResult;
 import view.InputView;
 import view.OutputView;
@@ -27,11 +24,11 @@ public class LottoController {
     }
 
     public void run() {
-        printProcessOfPurchaseLottos();
-
+        purchaseLottos();
+        showLottoWinningResult();
     }
 
-    private void printProcessOfPurchaseLottos() {
+    private void purchaseLottos() {
         lottoMachine = new LottoMachineInitializer(inputView).initLottoMachine();
 
         outputView.printTotalPurchaseLottoCount(lottoMachine.sendManualLottoCount(), lottoMachine.sendAutoLottoCount());
@@ -44,42 +41,20 @@ public class LottoController {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private WinningNumbers insertWinningInformation() {
-        List<Integer> winningNumbers = insertWinningNumbers();
-        int bonusNumber = insertBonusNumber();
-        try {
-            return new WinningNumbers(winningNumbers, bonusNumber);
-        } catch (IllegalArgumentException error) {
-            System.out.println(error.getMessage());
-            return insertWinningInformation();
-        }
+    private void showLottoWinningResult() {
+        List<Integer> winningNumbers = inputView.inputWinningNumbers();
+        int bonusNumber = inputView.inputBonusNumber();
+
+        WinningResult winningResult = lottoMachine.makeLottoWinningResult(winningNumbers, bonusNumber);
+        int totalPurchaseCount = lottoMachine.sendTotalPurchaseLottoCount();
+        printWinningResult(winningResult, totalPurchaseCount);
     }
 
-    private List<Integer> insertWinningNumbers() {
-        try {
-            return inputView.inputWinningNumbers();
-        } catch (IllegalArgumentException error) {
-            System.out.println(error.getMessage());
-            return insertWinningNumbers();
-        }
-    }
-
-    private int insertBonusNumber() {
-        try {
-            return inputView.inputBonusNumber();
-        } catch (IllegalArgumentException error) {
-            System.out.println(error.getMessage());
-            return insertBonusNumber();
-        }
-    }
-
-    private void showWinningResult(Lottos lottos, WinningNumbers winningNumbers,
-                                   TotalPurchaseMoney totalPurchaseMoney) {
-        WinningResult winningResult = lottos.makeWinningResult(winningNumbers);
+    private void printWinningResult(WinningResult winningResult, int totalPurchaseLottoCount) {
         List<RankResultDto> rankResultDtos = convertWinningResultToDtos(winningResult.getWinningResult());
 
         outputView.printWinningResult(rankResultDtos);
-        outputView.printRateOfReturn(winningResult.getRateOfReturn(totalPurchaseMoney));
+        outputView.printRateOfReturn(winningResult.sendRateOfReturn(totalPurchaseLottoCount));
     }
 
     private List<RankResultDto> convertWinningResultToDtos(final Map<Rank, Integer> results) {

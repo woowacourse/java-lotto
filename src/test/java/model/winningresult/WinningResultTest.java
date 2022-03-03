@@ -39,6 +39,6 @@ class WinningResultTest {
 
         final WinningResult winningResult = new WinningResult(result);
         final TotalPurchaseMoney totalPurchaseMoney = new TotalPurchaseMoney(100000);
-        assertThat(winningResult.getRateOfReturn(totalPurchaseMoney)).isEqualTo(65000 / (double) 100000);
+        assertThat(winningResult.sendRateOfReturn(totalPurchaseMoney)).isEqualTo(65000 / (double) 100000);
     }
 }
