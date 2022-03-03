@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class LottoNumbersGeneratorTest {
 
-    @DisplayName("generateLottoNumbers 메서드는 캐싱된 원본 LottoNumber 리스트에서 LottoNumber 사이즈가 6인 리스트를 추출한다.")
+    @DisplayName("generateRandomLottoNumbers 메서드는 캐싱된 원본 LottoNumber 리스트에서 LottoNumber 사이즈가 6인 리스트를 추출한다.")
     @Test
     void generateLottoNumbers() {
         List<LottoNumber> lottoNumbers = LottoNumbersGenerator.generateRandomLottoNumbers();

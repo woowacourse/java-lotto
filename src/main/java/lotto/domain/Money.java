@@ -24,7 +24,7 @@ public class Money {
         return this.amount / itemMoney.amount;
     }
 
-    public void pay(Money money){
+    public void minus(Money money){
         if(money.amount > this.amount){
             throw new IllegalArgumentException(ERROR_NOT_OVER_PAY_MESSAGE);
         }

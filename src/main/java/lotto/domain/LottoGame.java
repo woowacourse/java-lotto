@@ -40,7 +40,7 @@ public class LottoGame {
         for (List<Integer> manualNumber : manualNumbers) {
             origin.add(new Lotto(generateManualLottoNumbers(manualNumber)));
         }
-        money.pay(new Money(manualNumbers.size() * LOTTO_PRICE));
+        money.minus(new Money(manualNumbers.size() * LOTTO_PRICE));
     }
 
     private void purchaseRandomLottos(List<Lotto> origin) {
