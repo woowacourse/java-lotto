@@ -1,5 +1,9 @@
 package lotto.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.LottoCounter;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RankCounter;
@@ -11,8 +15,11 @@ public class Controller {
 
     public void run() {
         Money money = getMoney();
-        Lottos lottos = Lottos.buyLottosByAuto(money);
-        OutputView.printLottos(lottos);
+        Lottos lottos = new Lottos();
+        LottoCounter lottoCounter = getLottoCounter(money);
+        lottos.buyLottosByManual(getManualLottos(lottoCounter));
+        lottos.buyLottosByAuto(lottoCounter.getAutoLottoCount());
+        OutputView.printLottos(lottoCounter, lottos);
 
         WinningNumbers winningNumbers = getWinningNumbers();
         RankCounter rankCounter = new RankCounter(lottos, winningNumbers);
@@ -26,6 +33,27 @@ public class Controller {
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return getMoney();
+        }
+    }
+
+    private LottoCounter getLottoCounter(Money money) {
+        try {
+            return new LottoCounter(money, InputView.inputManualLottoCount());
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception.getMessage());
+            return getLottoCounter(money);
+        }
+    }
+
+    private List<Lotto> getManualLottos(LottoCounter lottoCounter) {
+        try {
+            return InputView.InputManualLottos(lottoCounter.getManualLottoCount())
+                    .stream()
+                    .map(Lotto::generateLottoByManual)
+                    .collect(Collectors.toList());
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception.getMessage());
+            return getManualLottos(lottoCounter);
         }
     }
 

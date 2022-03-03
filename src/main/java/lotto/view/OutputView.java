@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.Arrays;
 import lotto.domain.Lotto;
+import lotto.domain.LottoCounter;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Rank;
@@ -9,7 +10,7 @@ import lotto.domain.RankCounter;
 
 public class OutputView {
 
-    private static final String TOTAL_LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String TOTAL_LOTTO_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String WINNING_STATISTIC_TITLE = "당첨 통계\n" + "---------";
     private static final String RANK_MESSAGE_FORMAT = "%s개 일치%s(%s원) - %d개\n";
     private static final String BONUS_NUMBER_MATCH_MESSAGE = ", 보너스 볼 일치";
@@ -20,14 +21,17 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printLottos(Lottos lottos) {
-        System.out.println(lottos.getTotalLottoCount() + TOTAL_LOTTO_COUNT_MESSAGE);
+    public static void printLottos(LottoCounter lottoCounter, Lottos lottos) {
+        printNewLine();
+        System.out.printf(TOTAL_LOTTO_COUNT_MESSAGE,
+                lottoCounter.getManualLottoCount(), lottoCounter.getAutoLottoCount());
         lottos.getLottos().stream()
                 .map(Lotto::getLottoToInteger)
                 .forEach(System.out::println);
     }
 
     public static void printWinningStatistic(Money money, RankCounter rankCounter) {
+        printNewLine();
         System.out.println(WINNING_STATISTIC_TITLE);
         Arrays.stream(Rank.values())
                 .filter(rank -> !rank.equals(Rank.RANK_OUT))

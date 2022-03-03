@@ -8,16 +8,8 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    private Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
-    }
-
-    public static Lottos buyLottosByAuto(Money money) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < LottoCounter.getTotalLottoCount(money); i++) {
-            lottos.add(Lotto.generateLottoByAuto());
-        }
-        return new Lottos(lottos);
+    public Lottos() {
+        this.lottos = new ArrayList<>();
     }
 
     public void buyLottosByManual(List<Lotto> manualLottos) {
@@ -32,9 +24,5 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
-    }
-
-    public int getTotalLottoCount() {
-        return lottos.size();
     }
 }
