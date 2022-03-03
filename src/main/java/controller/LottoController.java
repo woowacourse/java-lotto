@@ -67,9 +67,7 @@ public class LottoController {
     private LottoNumber getBonusNumber(final Lotto lotto) {
         try {
             LottoNumber bonusNumber = LottoNumber.getLottoNumber(InputView.getBonusNumber());
-            if (isBonusNumberContain(lotto, bonusNumber)) {
-                throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
-            }
+            checkDuplication(lotto, bonusNumber);
             return bonusNumber;
         } catch (IllegalArgumentException e) {
             System.out.println(ERROR_MESSAGE + e.getMessage());
@@ -77,7 +75,9 @@ public class LottoController {
         }
     }
 
-    private boolean isBonusNumberContain(final Lotto lotto, final LottoNumber bonusNumber) {
-        return lotto.isContainNumber(bonusNumber);
+    private void checkDuplication(Lotto lotto, LottoNumber bonusNumber) {
+        if (lotto.isContainNumber(bonusNumber)) {
+            throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
+        }
     }
 }
