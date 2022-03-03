@@ -14,8 +14,14 @@ public class LottoQuantity {
         this.lottoQuantity = lottoQuantity;
     }
 
-    public LottoQuantity subtract(LottoQuantity otherLottoQuantity) {
-        return new LottoQuantity(this.lottoQuantity - otherLottoQuantity.lottoQuantity);
+    private void validateZeroOrPositive(int lottoQuantity) {
+        if (lottoQuantity < QUANTITY_CRITERIA) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_LOTTO_QUANTITY);
+        }
+    }
+
+    public LottoQuantity(InputMoney inputMoney) {
+        this.lottoQuantity = inputMoney.getMoney() / Lotto.SINGLE_LOTTO_PRICE;
     }
 
     public static LottoQuantity createManual(int lottoQuantity, InputMoney inputMoney) {
@@ -23,20 +29,14 @@ public class LottoQuantity {
         return new LottoQuantity(lottoQuantity);
     }
 
-    public LottoQuantity(InputMoney inputMoney) {
-        this.lottoQuantity = inputMoney.getMoney() / Lotto.SINGLE_LOTTO_PRICE;
-    }
-
-    private void validateZeroOrPositive(int lottoQuantity) {
-        if (lottoQuantity < QUANTITY_CRITERIA) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_LOTTO_QUANTITY);
-        }
-    }
-
     private static void validateManualLottoQuantity(int lottoQuantity, InputMoney inputMoney) {
         if (lottoQuantity * Lotto.SINGLE_LOTTO_PRICE > inputMoney.getMoney()) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_MANUAL_LOTTO_QUANTITY);
         }
+    }
+
+    public LottoQuantity subtract(LottoQuantity otherLottoQuantity) {
+        return new LottoQuantity(this.lottoQuantity - otherLottoQuantity.lottoQuantity);
     }
 
     public int getLottoQuantity() {
