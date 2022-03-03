@@ -1,5 +1,6 @@
 package controller;
 
+import domain.Money;
 import domain.Result;
 import java.util.Collections;
 import java.util.List;
@@ -22,26 +23,25 @@ public class LottoController {
         this.lottoService = new LottoService();
     }
 
-
     public void start() {
-        final int money = getMoney();
-        issueLotto(money);
+        final Money totalMoney = getMoney();
+        issueLotto(totalMoney);
 
         initLastWinLotto();
 
-        printResult(money, getResult());
+        printResult(totalMoney, getResult());
     }
 
-    private int getMoney() {
+    private Money getMoney() {
         try {
-            return inputView.getMoney();
+            return new Money(inputView.getMoney());
         } catch (Exception e) {
             System.out.println(ERROR_MESSAGE + e.getMessage());
             return getMoney();
         }
     }
 
-    private void issueLotto(final int money) {
+    private void issueLotto(final Money money) {
         final int manualCount = getManualCount();
         lottoService.issueLotto(money, getManualLottoWith(manualCount));
         outputView.printLotto(lottoService.getIssuedLotto(), manualCount);
@@ -86,7 +86,7 @@ public class LottoController {
         }
     }
 
-    private void printResult(final int money, final Result result) {
+    private void printResult(final Money money, final Result result) {
         outputView.printWinStatistics(result.getStatistics());
         outputView.printWinProfit(result.getProfitOrNotMessage(money));
     }

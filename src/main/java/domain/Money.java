@@ -18,10 +18,15 @@ public class Money {
         }
     }
 
+
     public int getLottoCount() {
         return this.money / LOTTO_PRICE;
     }
 
+    public int getMoney() {
+        return money;
+    }
+    
     @Override
     public boolean equals(final Object object) {
         if (this == object) {

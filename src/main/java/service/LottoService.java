@@ -32,9 +32,9 @@ public class LottoService {
         }
     }
 
-    public void issueLotto(final int money, final List<List<String>> issuedManualLottoInput) {
+    public void issueLotto(final Money money, final List<List<String>> issuedManualLottoInput) {
         final List<Lotto> issuedManualLotto = LottoFactory.generateManualLottoGroup(issuedManualLottoInput);
-        this.issuedLotto = addAutoLotto(new Money(money), issuedManualLotto);
+        this.issuedLotto = addAutoLotto(money, issuedManualLotto);
     }
 
     private List<Lotto> addAutoLotto(final Money money, final List<Lotto> issuedManualLotto) {

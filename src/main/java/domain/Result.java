@@ -58,7 +58,7 @@ public class Result {
             + System.lineSeparator();
     }
 
-    public String getProfitOrNotMessage(final int money) {
+    public String getProfitOrNotMessage(final Money money) {
         final double profitRate = getProfitRate(money);
         String resultMessage = PROFIT_NEGATIVE_MESSAGE;
         if (profitRate >= 1) {
@@ -67,9 +67,8 @@ public class Result {
         return String.format((WIN_PROFIT_RESULT_MESSAGE), profitRate, resultMessage);
     }
 
-    private double getProfitRate(final int money) {
-        final Money totalMoney = new Money(money);
-        return getWinningPrice() / ((double) totalMoney.getLottoCount() * LOTTO_PRICE);
+    private double getProfitRate(final Money money) {
+        return getWinningPrice() / ((double) money.getLottoCount() * LOTTO_PRICE);
     }
 
     private int getWinningPrice() {
