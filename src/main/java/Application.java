@@ -18,7 +18,6 @@ public class Application {
     public static void main(String[] args) {
         final LottoGameMoney purchaseMoney = new LottoGameMoney(InputView.getPurchaseAmount());
         final LottoGame lottoGame = createLottoGame(purchaseMoney);
-        OutputView.showPurchasedLottos(lottoGame.getLottos());
 
         final WinningLotto winningLotto = createWinningLotto();
         final WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics(winningLotto);
@@ -39,6 +38,8 @@ public class Application {
 
         final int autoLottoCount = purchaseMoney.purchasableLottoCount() - manualLottoCount;
         lottos.addAll(createAutoLottos(autoLottoCount));
+
+        OutputView.showPurchasedLottos(manualLottoCount, autoLottoCount, lottos);
 
         return new Lottos(lottos);
     }

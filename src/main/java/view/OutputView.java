@@ -18,8 +18,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void showPurchasedLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void showPurchasedLottos(int manualLottoCount, int autoLottoCount, List<Lotto> lottos) {
+        System.out.println("\n수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
 
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getLottoNumbers().stream()
