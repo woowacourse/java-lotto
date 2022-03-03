@@ -2,8 +2,10 @@ package controller;
 
 import dto.LottoDto;
 import dto.RankResultDto;
+import model.LottoMachine;
 import model.lottonumber.Lottos;
 import model.generator.Generator;
+import model.money.ManualLottoCount;
 import model.money.PurchaseMoney;
 import model.lottonumber.Lotto;
 import model.rank.Rank;
@@ -28,10 +30,17 @@ public class LottoController {
     }
 
     public void run() {
+        LottoMachine lottoMachine;
         PurchaseMoney purchaseMoney = insertPurchaseMoney();
         Lottos lottos = purchaseLottos(purchaseMoney, generator);
         WinningNumbers winningNumbers = insertWinningInformation();
         showWinningResult(lottos, winningNumbers, purchaseMoney);
+    }
+
+    private LottoMachine printLottoPurchaseProcess() {
+        int purchaseMoney = inputView.inputMoney();
+        int manualLottoCount = inputView.inputManualLottoCount();
+        ManualLottoCount manualLottoCount1 = new ManualLottoCount(manualLottoCount);
     }
 
     private PurchaseMoney insertPurchaseMoney() {
