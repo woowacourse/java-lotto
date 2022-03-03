@@ -21,12 +21,9 @@ public enum Ranking {
     }
 
     public static Ranking findRanking(int hitCount, boolean hasBonusNumber) {
-        if (hitCount == SECOND_PLACE.hitCount && hasBonusNumber) {
-            return SECOND_PLACE;
-        }
         return Arrays.stream(Ranking.values())
-                .filter(ranking -> ranking != SECOND_PLACE)
                 .filter(ranking -> ranking.hitCount == hitCount)
+                .filter(ranking -> ranking != SECOND_PLACE || hasBonusNumber)
                 .findFirst()
                 .orElse(NONE_PLACE);
     }
