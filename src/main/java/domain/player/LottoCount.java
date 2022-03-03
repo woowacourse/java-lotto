@@ -31,4 +31,8 @@ public class LottoCount {
     public int getManualLottoCount() {
         return manualLottoCount;
     }
+
+    public int getAutoLottoCount() {
+        return autoLottoCount;
+    }
 }

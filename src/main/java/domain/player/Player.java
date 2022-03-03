@@ -2,8 +2,9 @@ package domain.player;
 
 import domain.Lotto.Lotto;
 import domain.Lotto.WinningLotto;
-import domain.LottoGenerator.LottoGenerator;
 import domain.Result;
+import dto.LottoCountDto;
+import utils.ExceptionMessage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +24,12 @@ public class Player {
 
     public boolean canBuyLotto() {
         return money.isBiggerThanLottoPrice();
+    }
+
+    public LottoCountDto selectLottoCount(int manualLottoCount) {
+        int totalLottoCount = money.calculateTotalLottoCount();
+        LottoCount lottoCount = new LottoCount(manualLottoCount, totalLottoCount - manualLottoCount);
+        return LottoCountDto.of(lottoCount);
     }
 
     public void purchaseLotto(Lotto lotto) {
