@@ -15,6 +15,8 @@ import view.InputView;
 import view.OutputView;
 
 public class LottoController {
+	private static final String LOTTO_COUNT_BLANK_ERROR_MESSAGE = "[Error]: 금액을 입력해주세요.";
+	private static final String LOTTO_COUNT_NUMBER_ERROR_MESSAGE = "[Error]: 금액은 숫자를 입력해주세요.";
 	private static final String WINNING_NUMBER_ERROR_MESSAGE = "[Error]: 당첨 번호는 숫자여야 합니다.";
 	private static final String WINNING_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 당첨 번호를 입력하세요.";
 	private static final String BONUS_BALL_BLANK_ERROR_MESSAGE = "[Error]: 보너스 볼을 입력해주세요.";
@@ -39,9 +41,10 @@ public class LottoController {
 	private void makeLottos() {
 		try {
 			String money = inputView.inputMoney();
-			LottoCount lottoCount = new LottoCount(money);
+			InputValidateUtils.inputBlankAndNumber(money, LOTTO_COUNT_BLANK_ERROR_MESSAGE,
+				LOTTO_COUNT_NUMBER_ERROR_MESSAGE);
 			storeMoneyInRateOfReturn(Integer.parseInt(money));
-			lottoStorage = new LottoStorage(lottoCount);
+			lottoStorage = new LottoStorage(new LottoCount(Integer.parseInt(money)));
 			outputView.printLottos(lottoStorage.getLottoStorageDTO());
 		} catch (Exception e) {
 			outputView.printErrorMessage(e.getMessage());
@@ -83,8 +86,8 @@ public class LottoController {
 	private void storeBonusBall() {
 		try {
 			String input = inputView.inputBonusBall();
-			InputValidateUtils.inputBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
-			InputValidateUtils.inputNumber(input, BONUS_BALL_NUMBER_ERROR_MESSAGE);
+			InputValidateUtils.inputBlankAndNumber(input, BONUS_BALL_BLANK_ERROR_MESSAGE,
+				BONUS_BALL_NUMBER_ERROR_MESSAGE);
 			bonusBall = new BonusBall(Integer.parseInt(input));
 			lottoWinningNumber.validateReduplicationWithBonusBall(Integer.parseInt(input));
 		} catch (IllegalArgumentException e) {

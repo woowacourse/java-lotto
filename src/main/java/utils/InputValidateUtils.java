@@ -3,6 +3,11 @@ package utils;
 public class InputValidateUtils {
 	private static final String REGEX_NUMBER = "[0-9]+";
 
+	public static void inputBlankAndNumber(String number, String blankMessage, String numberMessage) {
+		inputBlank(number, blankMessage);
+		inputNumber(number, numberMessage);
+	}
+
 	public static void inputBlank(String number, String message) {
 		if (number == null || number.isBlank()) {
 			throw new IllegalArgumentException(message);
