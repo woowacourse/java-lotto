@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import domain.dto.ManualTicketsDto;
+
 public class InputView {
 	private static final String PAYMENT_MESSAGE = "구입금액을 입력해 주세요.";
 	private static final String MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
@@ -42,7 +44,7 @@ public class InputView {
 		}
 	}
 
-	public static List<List<Integer>> getManualLottoTickets(final int count) {
+	public static ManualTicketsDto getManualLottoTickets(final int count) {
 		System.out.println();
 		System.out.println(MANUAL_LOTTO_TICKETS_PURCHASE_MESSAGE);
 
@@ -51,7 +53,7 @@ public class InputView {
 			tickets.add(getManualLottoTicket());
 		}
 
-		return tickets;
+		return new ManualTicketsDto(tickets);
 	}
 
 	private static List<Integer> getManualLottoTicket() {

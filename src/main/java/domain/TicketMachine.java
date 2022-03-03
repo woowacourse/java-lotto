@@ -3,15 +3,16 @@ package domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import domain.dto.ManualTicketsDto;
 import domain.strategy.TicketingStrategy;
 
 public class TicketMachine {
 
 	public static Tickets generateTickets(final TicketCounter ticketCounter,
-		final List<List<Integer>> manualLottoTickets,
+		final ManualTicketsDto manualTicketsDto,
 		final TicketingStrategy ticketingStrategy) {
 
-		List<Ticket> manualTickets = doManually(manualLottoTickets);
+		List<Ticket> manualTickets = doManually(manualTicketsDto.getManualTickets());
 		Tickets tickets = doAutomatically(manualTickets, ticketCounter, ticketingStrategy);
 
 		return tickets;

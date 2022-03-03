@@ -1,12 +1,11 @@
 package controller;
 
-import java.util.List;
-
 import domain.TicketCounter;
 import domain.TicketMachine;
 import domain.Tickets;
 import domain.WinningAnalyze;
 import domain.WinningNumber;
+import domain.dto.ManualTicketsDto;
 import domain.strategy.AutoStrategy;
 import view.InputView;
 import view.OutputView;
@@ -25,13 +24,13 @@ public class LottoController {
 	private Tickets generateTickets() {
 		final int money = InputView.getPayment();
 		final int count = InputView.getManualLottoNumber();
-		final List<List<Integer>> manualTickets =
+		final ManualTicketsDto manualTicketsDto =
 			InputView.getManualLottoTickets(count);
 
-		Tickets tickets = TicketMachine.generateTickets(new TicketCounter(money, count), manualTickets,
+		Tickets tickets = TicketMachine.generateTickets(new TicketCounter(money, count), manualTicketsDto,
 			new AutoStrategy());
 
-		OutputView.printTickets(tickets.getTickets(), manualTickets.size());
+		OutputView.printTickets(tickets.getTickets(), manualTicketsDto.size());
 
 		return tickets;
 	}

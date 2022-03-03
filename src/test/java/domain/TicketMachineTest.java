@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import domain.dto.ManualTicketsDto;
 import domain.strategy.AutoStrategy;
 
 public class TicketMachineTest {
@@ -23,7 +24,9 @@ public class TicketMachineTest {
 		manualTickets.add(Arrays.asList(13, 14, 16, 38, 42, 45));
 		manualTickets.add(Arrays.asList(7, 11, 30, 40, 42, 43));
 
-		Tickets tickets = TicketMachine.generateTickets(ticketCounter, manualTickets, new AutoStrategy());
+		ManualTicketsDto manualTicketsDto = new ManualTicketsDto(manualTickets);
+
+		Tickets tickets = TicketMachine.generateTickets(ticketCounter, manualTicketsDto, new AutoStrategy());
 
 		assertThat(tickets.size()).isEqualTo(14);
 	}

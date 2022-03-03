@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import domain.dto.ManualTicketsDto;
 import domain.strategy.CustomTicketingStrategy;
 
 class TicketsTest {
@@ -71,7 +72,9 @@ class TicketsTest {
 		manualTickets.add(Arrays.asList(3, 5, 11, 16, 32, 38));
 		manualTickets.add(Arrays.asList(7, 11, 16, 35, 36, 44));
 
-		Tickets tickets = TicketMachine.generateTickets(manualCount, manualTickets, customLottoGenerator);
+		ManualTicketsDto manualTicketsDto = new ManualTicketsDto(manualTickets);
+
+		Tickets tickets = TicketMachine.generateTickets(manualCount, manualTicketsDto, customLottoGenerator);
 
 		numbers.add(Arrays.asList(7, 12, 26, 36, 44, 45));
 
