@@ -6,26 +6,30 @@ import lotto.util.InputValidator;
 
 public class WinningLotto {
 
-    private final List<Integer> winningNumbers;
-    private final int bonusNumber;
+    private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
-        InputValidator.validateContain(winningNumbers, bonusNumber);
-        this.winningNumbers = InputValidator.validateLotto(winningNumbers);
-        this.bonusNumber = InputValidator.validateBonusNumber(bonusNumber);
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+        InputValidator.validateContain(winningLotto, bonusNumber);
+        this.winningLotto = winningLotto;
+        this.bonusNumber = bonusNumber;
     }
 
-    public Rank calculate(List<Integer> numbers) {
-        return Rank.of(countMatchingNumber(numbers), isBonusNumber(numbers));
+    public Rank calculate(List<LottoNumber> numbers) {
+        int count = countMatchingNumber(numbers);
+        return Rank.of(count, isBonusNumber(numbers, count));
     }
 
-    private int countMatchingNumber(List<Integer> numbers) {
+    private int countMatchingNumber(List<LottoNumber> numbers) {
         return (int)numbers.stream()
-            .filter(winningNumbers::contains)
+            .filter(winningLotto::contains)
             .count();
     }
 
-    private boolean isBonusNumber(List<Integer> numbers) {
-        return numbers.contains(bonusNumber);
+    private boolean isBonusNumber(List<LottoNumber> numbers, int count) {
+        if (count == 5) {
+            return numbers.contains(bonusNumber);
+        }
+        return false;
     }
 }

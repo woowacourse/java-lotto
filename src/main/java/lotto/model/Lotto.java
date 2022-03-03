@@ -8,9 +8,9 @@ public class Lotto {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<LottoNumber> numbers) {
         this.numbers = InputValidator.validateLotto(numbers);
     }
 
@@ -18,7 +18,11 @@ public class Lotto {
         return winningLotto.calculate(numbers);
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
+    }
+
+    public boolean contains(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 }

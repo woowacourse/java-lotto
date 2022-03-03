@@ -3,6 +3,7 @@ package lotto.util;
 import java.util.List;
 
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 
 public class InputValidator {
 
@@ -21,27 +22,26 @@ public class InputValidator {
         return amount;
     }
 
-    public static void validateContain(List<Integer> winningNumbers, Integer bonusNumber) {
-        if (winningNumbers.contains(bonusNumber)) {
+    public static void validateContain(Lotto winningLotto, LottoNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(NUMBER_DUPLICATE_ERROR_MESSAGE);
         }
     }
 
-    public static List<Integer> validateLotto(List<Integer> winningNumbers) {
-        validateLength(winningNumbers);
-        validateDuplicate(winningNumbers);
-        winningNumbers.forEach(InputValidator::validateRange);
+    public static List<LottoNumber> validateLotto(List<LottoNumber> numbers) {
+        validateLength(numbers);
+        validateDuplicate(numbers);
 
-        return winningNumbers;
+        return numbers;
     }
 
-    private static void validateLength(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != 6) {
+    private static void validateLength(List<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
             throw new IllegalArgumentException(LENGTH_ERROR_MESSAGE);
         }
     }
 
-    private static void validateDuplicate(List<Integer> numbers) {
+    private static void validateDuplicate(List<LottoNumber> numbers) {
         long count = numbers.stream()
             .distinct()
             .count();
@@ -49,16 +49,5 @@ public class InputValidator {
         if (numbers.size() != count) {
             throw new IllegalArgumentException(NUMBER_DUPLICATE_ERROR_MESSAGE);
         }
-    }
-
-    private static void validateRange(int number) {
-        if (number < 1 || number > 45) {
-            throw new IllegalArgumentException(RANGE_ERROR_MESSAGE);
-        }
-    }
-
-    public static int validateBonusNumber(int bonusNumber) {
-        validateRange(bonusNumber);
-        return bonusNumber;
     }
 }

@@ -54,7 +54,7 @@ public class InputView {
             .collect(Collectors.toList());
     }
 
-    public static List<Integer> inputWinningNumbers() {
+    public static List<Integer> inputWinningLotto() {
         System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
         return inputLotto();
     }

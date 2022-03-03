@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import lotto.model.Lotto;
 import lotto.model.LottoMachine;
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
@@ -42,7 +43,7 @@ public class LottoController {
     private List<Lotto> createManualLottos(LottoMachine lottoMachine) {
         try {
             return InputView.inputManualLottos(lottoMachine).stream()
-                .map(Lotto::new)
+                .map(this::convertToLotto)
                 .collect(Collectors.toList());
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -52,10 +53,21 @@ public class LottoController {
 
     private WinningLotto createWinningLotto() {
         try {
-            return new WinningLotto(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
+            return new WinningLotto(convertToLotto(InputView.inputWinningLotto()), inputBonusNumber());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return createWinningLotto();
         }
+    }
+
+    private Lotto convertToLotto(List<Integer> numbers) {
+        return new Lotto(numbers.stream()
+            .sorted()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
+    }
+
+    private LottoNumber inputBonusNumber() {
+        return new LottoNumber(InputView.inputBonusNumber());
     }
 }

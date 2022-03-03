@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,9 +33,9 @@ class LottoMachineTest {
     @Test
     @DisplayName("수동 구매한 로또와 자동 구매한 로또가 잘 구매되었는지 확인")
     void purchaseTest() {
-        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(List.of(1, 2, 3, 4, 5, 7));
-        Lotto lotto3 = new Lotto(List.of(1, 2, 3, 4, 5, 8));
+        Lotto lotto1 = new Lotto(convertList(List.of(1, 2, 3, 4, 5, 6)));
+        Lotto lotto2 = new Lotto(convertList(List.of(1, 2, 3, 4, 5, 7)));
+        Lotto lotto3 = new Lotto(convertList(List.of(1, 2, 3, 4, 5, 8)));
         List<Lotto> manualLottos = new ArrayList<>(List.of(lotto1, lotto2, lotto3));
         LottoMachine lottoMachine = new LottoMachine(5, 3);
 
@@ -43,5 +44,11 @@ class LottoMachineTest {
         assertThat(lottos)
             .hasSize(5)
             .contains(lotto1, lotto2, lotto3);
+    }
+
+    List<LottoNumber> convertList(List<Integer> numbers) {
+        return numbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 }

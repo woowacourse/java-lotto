@@ -32,7 +32,7 @@ public class LottoMachine {
 
     private List<Lotto> createAutoLottos() {
         return IntStream.range(manualCount, count())
-            .mapToObj(i -> RandomLottoGenerator.generate())
+            .mapToObj(i -> RandomLottoGenerator.generateAutoLotto())
             .collect(Collectors.toList());
     }
 
