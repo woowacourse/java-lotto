@@ -18,7 +18,8 @@ public class Lotto {
         checkRightSize(numbers);
         checkNoDuplicated(numbers);
         lottoBalls = new ArrayList<>();
-        numbers.forEach(number -> lottoBalls.add(new LottoBall(number)));
+        numbers.stream().sorted()
+                .forEach(number -> lottoBalls.add(new LottoBall(number)));
     }
 
     public boolean hasBall(LottoBall lottoBall) {
