@@ -48,7 +48,7 @@ public class Application {
     }
 
     private static List<Lotto> createAutoLottos(LottoCount lottoCount) {
-        return LottoFactory.createLottos(lottoCount, new RandomLottoNumbersGenerator());
+        return LottoFactory.createAutoLottos(lottoCount, new RandomLottoNumbersGenerator());
     }
 
     private static WinningLotto createWinningLotto() {

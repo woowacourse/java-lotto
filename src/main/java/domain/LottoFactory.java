@@ -9,13 +9,13 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static List<Lotto> createLottos(LottoCount LottoCount, LottoNumbersGenerator lottoNumbersGenerator) {
+    public static List<Lotto> createAutoLottos(LottoCount LottoCount, LottoNumbersGenerator lottoNumbersGenerator) {
         return IntStream.range(0, LottoCount.getAutoLottoCount()).boxed()
-            .map(i -> createLotto(lottoNumbersGenerator))
+            .map(i -> createAutoLotto(lottoNumbersGenerator))
             .collect(Collectors.toList());
     }
 
-    public static Lotto createLotto(LottoNumbersGenerator lottoNumbersGenerator) {
+    public static Lotto createAutoLotto(LottoNumbersGenerator lottoNumbersGenerator) {
         List<LottoNumber> lottoNumbers = lottoNumbersGenerator.generate();
 
         return new Lotto(lottoNumbers);
