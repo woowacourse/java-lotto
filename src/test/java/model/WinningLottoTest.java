@@ -42,11 +42,11 @@ public class WinningLottoTest {
 
     private static Stream<Arguments> provideLottoAndPrizeAndRank() {
         return Stream.of(
-                Arguments.of(FIRST_PRIZE_LOTTO_NUMBERS, FIRST_PRIZE, LottoRank.FIRST),
-                Arguments.of(SECOND_PRIZE_LOTTO_NUMBERS, SECOND_PRIZE, LottoRank.SECOND),
-                Arguments.of(THIRD_PRIZE_LOTTO_NUMBERS, THIRD_PRIZE, LottoRank.THIRD),
-                Arguments.of(FOURTH_PRIZE_LOTTO_NUMBERS, FOURTH_PRIZE, LottoRank.FOURTH),
-                Arguments.of(FIFTH_PRIZE_LOTTO_NUMBERS, FIFTH_PRIZE, LottoRank.FIFTH)
+                Arguments.of(FIRST_PRIZE_LOTTO_NUMBERS,  LottoRank.FIRST),
+                Arguments.of(SECOND_PRIZE_LOTTO_NUMBERS, LottoRank.SECOND),
+                Arguments.of(THIRD_PRIZE_LOTTO_NUMBERS,  LottoRank.THIRD),
+                Arguments.of(FOURTH_PRIZE_LOTTO_NUMBERS, LottoRank.FOURTH),
+                Arguments.of(FIFTH_PRIZE_LOTTO_NUMBERS,  LottoRank.FIFTH)
         );
     }
 
@@ -83,41 +83,16 @@ public class WinningLottoTest {
     @ParameterizedTest(name = "{2} 판독")
     @MethodSource("provideLottoAndPrizeAndRank")
     @DisplayName("당첨 판독 테스트")
-    void prizeCountTest(Lotto lotto, BigDecimal prize, LottoRank rank) {
-        LottoResult result = winningLottoNumbers.summarize(List.of(lotto), new Budget(1000));
-        assertThat(result.getProfitRate()).isEqualTo(prize.divide(BigDecimal.valueOf(1000)));
-        assertThat(result.getCountByRank(rank)).isEqualTo(1);
+    void prizeCountTest(Lotto lotto, LottoRank rank) {
+        LottoRank actualRank = winningLottoNumbers.getRankBy(lotto);
+        assertThat(actualRank).isEqualTo(rank);
     }
 
     @ParameterizedTest(name = "꽝 판독 테스트 : 로또 번호 - {0}")
     @MethodSource("provideLottoNumbersList")
     @DisplayName("꽝 판독 테스트")
     void nothingPrize(Lotto lotto) {
-        LottoResult result = winningLottoNumbers.summarize(List.of(lotto), new Budget(1000));
-        assertThat(result.getProfitRate()).isEqualTo(new BigDecimal(0));
-        assertThat(result.getCountByRank(LottoRank.NOTHING)).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("다양한 로또 순위 구하기")
-    void summarize() {
-        LottoResult result = winningLottoNumbers.summarize(
-                List.of(FIRST_PRIZE_LOTTO_NUMBERS, FIRST_PRIZE_LOTTO_NUMBERS,
-                        SECOND_PRIZE_LOTTO_NUMBERS, THIRD_PRIZE_LOTTO_NUMBERS, THIRD_PRIZE_LOTTO_NUMBERS,
-                        NOTHING_PRIZE_LOTTO_NUMBERS),
-                new Budget(5000)
-        );
-
-        BigDecimal expectedPrize = FIRST_PRIZE.add(FIRST_PRIZE).add(SECOND_PRIZE).add(THIRD_PRIZE)
-                .add(THIRD_PRIZE);
-        assertThat(result.getProfitRate()).isEqualTo(expectedPrize.divide(BigDecimal.valueOf(5000)));
-        assertAll("rankCounts",
-                () -> assertThat(result.getCountByRank(LottoRank.FIRST)).isEqualTo(2),
-                () -> assertThat(result.getCountByRank(LottoRank.SECOND)).isEqualTo(1),
-                () -> assertThat(result.getCountByRank(LottoRank.THIRD)).isEqualTo(2),
-                () -> assertThat(result.getCountByRank(LottoRank.FOURTH)).isEqualTo(0),
-                () -> assertThat(result.getCountByRank(LottoRank.FIFTH)).isEqualTo(0),
-                () -> assertThat(result.getCountByRank(LottoRank.NOTHING)).isEqualTo(1)
-        );
+        LottoRank rank = winningLottoNumbers.getRankBy(lotto);
+        assertThat(rank).isEqualTo(LottoRank.NOTHING);
     }
 }

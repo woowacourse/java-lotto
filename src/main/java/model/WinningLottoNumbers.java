@@ -16,14 +16,7 @@ public class WinningLottoNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoResult summarize(List<Lotto> lottos, Budget inputBudget) {
-        List<LottoRank> ranks = lottos.stream()
-                .map(this::getRankBy)
-                .collect(Collectors.toList());
-        return new LottoResult(inputBudget, ranks);
-    }
-
-    private LottoRank getRankBy(Lotto lotto) {
+    public LottoRank getRankBy(Lotto lotto) {
         int count = getMatchedCountAboutWinningNumbers(lotto);
         boolean bonusMatch = isBonusMatch(lotto);
         return LottoRank.of(count, bonusMatch);

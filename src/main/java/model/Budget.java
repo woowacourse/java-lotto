@@ -2,7 +2,6 @@ package model;
 
 import java.math.BigDecimal;
 import java.util.Objects;
-import util.NumberFormatStringParser;
 
 public class Budget {
     private static final BigDecimal PRICE_AMOUNT_PER_LOTTO = BigDecimal.valueOf(1000);
@@ -23,6 +22,10 @@ public class Budget {
         this.amount = amount;
     }
 
+    public static Budget parse(String text) {
+        return new Budget(Integer.parseInt(text));
+    }
+
     private boolean isPositive(BigDecimal amount) {
         return amount.compareTo(BigDecimal.ZERO) > 0;
     }
@@ -31,27 +34,12 @@ public class Budget {
         return moneyAmount.remainder(PRICE_AMOUNT_PER_LOTTO).equals(BigDecimal.ZERO);
     }
 
-    public static Budget parse(String text) {
-        return new Budget(Integer.parseInt(text));
-    }
-
     public BigDecimal getProfitRateFrom(BigDecimal totalPrize) {
         return totalPrize.divide(amount);
     }
 
-    public int getAffordableLottoCount() {
+    public int getMaxCountForLottoIssue() {
         return amount.divide(PRICE_AMOUNT_PER_LOTTO).intValue();
-    }
-
-    public void payLottos(int demandCount) {
-        if (getAffordableLottoCount() < demandCount) {
-            throw new IllegalArgumentException("입금액이 부족합니다.");
-        }
-        amount = amount.subtract(getTatalPrice(demandCount));
-    }
-
-    private BigDecimal getTatalPrice(int demandCount) {
-        return PRICE_AMOUNT_PER_LOTTO.multiply(BigDecimal.valueOf(demandCount));
     }
 
     @Override

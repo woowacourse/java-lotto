@@ -47,24 +47,6 @@ public class BudgetTest {
     @Test
     @DisplayName("구매 가능한 로또 갯수 구하기 테스트")
     void getAffordableLottoCount() {
-        assertThat(new Budget(4000).getAffordableLottoCount()).isEqualTo(4);
-    }
-
-    @Test
-    @DisplayName("로또 구매 기능 정상 작동 확인")
-    void payLotto() {
-        Budget budget = new Budget(10000);
-        assertThatCode(() -> budget.payLottos(1))
-                .doesNotThrowAnyException();
-        assertThat(budget).isEqualTo(new Budget(9000));
-    }
-
-    @Test
-    @DisplayName("지나치게 많은 양을 구매하려는 경우 예외 확인")
-    void payInvalid() {
-        Budget budget = new Budget(1000);
-        assertThatThrownBy(() -> budget.payLottos(2))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("입금액이 부족합니다.");
+        assertThat(new Budget(4000).getMaxCountForLottoIssue()).isEqualTo(4);
     }
 }

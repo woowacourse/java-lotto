@@ -18,6 +18,6 @@ public class ExceptionHandler {
         if (errorMessages.containsKey(e.getClass()))  {
             return errorMessages.get(e.getClass()).apply(e);
         }
-        return "예상하지 못한 문제가 생겼습니다.";
+        return "예상하지 못한 문제가 생겼습니다." + e;
     }
 }
