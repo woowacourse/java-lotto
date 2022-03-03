@@ -2,16 +2,15 @@ package utils;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class InputValidation {
 
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
-    private static final String ERROR_PRICE_NON_INTEGER = "가격은 정수만 가능합니다.";
+    private static final String ERROR_NON_INTEGER = "정수 입력만 가능합니다.";
     private static final String ERROR_BALL_NON_INTEGER = "로또 번호는 숫자만 입력해줘야 합니다.";
 
     public static String validateIsNum(final String inputPrice) {
-        checkIsInteger(inputPrice, ERROR_PRICE_NON_INTEGER);
+        checkIsInteger(inputPrice, ERROR_NON_INTEGER);
         return inputPrice;
     }
 

@@ -15,7 +15,7 @@ public class InputValidationTest {
     void checkNonIntegerPriceInput_throwIllegalException(final String price) {
         assertThatThrownBy(() -> InputValidation.validateIsNum(price))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("가격은 정수만 가능합니다.");
+                .hasMessageContaining("정수 입력만 가능합니다.");
     }
 
     @DisplayName("로또에 숫자가 아닌 입력이 들어왔을 때 예외 발생")
