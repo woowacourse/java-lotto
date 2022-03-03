@@ -43,7 +43,8 @@ public class Numbers {
 
     @Override
     public String toString() {
-        String lotto = numbers.stream().map(number -> number.toString())
+        String lotto = numbers.stream()
+            .map(number -> number.toString())
             .collect(Collectors.joining(JOIN_DELIMITER));
         return TO_STRING_PREFIX + lotto + TO_STRING_SUFFIX;
     }
