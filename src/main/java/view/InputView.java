@@ -14,10 +14,16 @@ public class InputView {
     private static final String NUMBER_DELIMITER = ", ";
     private static final Scanner scanner = new Scanner(System.in);
 
+<<<<<<< HEAD
     public static int askMoneyInput() {
         System.out.println(QUESTION_MONEY_INPUT);
         String moneyInput = scanner.nextLine();
         return StringUtil.convertToInteger(moneyInput);
+=======
+    public static String askMoneyInput() {
+        System.out.println(QUESTION_MONEY_INPUT);
+        return scanner.nextLine();
+>>>>>>> b694d594de2bfb389fd414a7cf2d9a0ea23d3c9b
     }
 
     public static List<Integer> askWinningNumbers() {
