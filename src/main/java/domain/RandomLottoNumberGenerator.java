@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,12 +22,9 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     public List<LottoNumber> generate() {
         Collections.shuffle(lottoNumbers);
 
-        final List<LottoNumber> pickedNumbers = new ArrayList<>();
-        for (int i = 0; i < LottoConstant.LOTTO_NUMBER_SIZE; i++) {
-            pickedNumbers.add(lottoNumbers.get(i));
-        }
-        Collections.sort(pickedNumbers);
-
-        return pickedNumbers;
+        return IntStream.range(0, LottoConstant.LOTTO_NUMBER_SIZE).boxed()
+            .map(lottoNumbers::get)
+            .sorted()
+            .collect(Collectors.toList());
     }
 }
