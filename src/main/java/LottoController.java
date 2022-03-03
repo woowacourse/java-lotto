@@ -4,7 +4,6 @@ import domain.ManualLottoGenerator;
 import domain.Money;
 import domain.AutoLottoGenerator;
 import domain.WinningChecker;
-import domain.WinningNumbers;
 import view.InputView;
 import view.OutputView;
 
@@ -21,9 +20,7 @@ public class LottoController {
 
         OutputView.printLottosInformations(money, lottoGame.getLottos());
 
-        WinningNumbers winningNumbers = InputView.askWinningNumbers();
-
-        WinningChecker winningChecker = lottoGame.makeResult(winningNumbers);
+        WinningChecker winningChecker = lottoGame.makeResult(InputView.askWinningNumbers());
 
         OutputView.printWinningStatistic(winningChecker);
         OutputView.printYield(lottoGame.getYield(winningChecker));
