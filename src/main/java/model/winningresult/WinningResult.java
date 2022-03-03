@@ -9,7 +9,6 @@ public class WinningResult {
     private static final int LOTTO_PRICE = 1000;
 
     private final Map<Rank, Integer> winningResult;
-    private int totalPurchaseMoney;
 
     public WinningResult(final Map<Rank, Integer> winningResult) {
         this.winningResult = winningResult;

@@ -24,7 +24,7 @@ class WinningResultTest {
         final WinningResult winningResult = new WinningResult(result);
         winningResult.getWinningResult()
                 .forEach((rank, count) -> assertThat(count)
-                .isEqualTo(result.get(rank)));
+                        .isEqualTo(result.get(rank)));
     }
 
     @Test
@@ -38,7 +38,7 @@ class WinningResultTest {
         result.put(Rank.FIFTH, 3);
 
         final WinningResult winningResult = new WinningResult(result);
-        final TotalPurchaseMoney totalPurchaseMoney = new TotalPurchaseMoney(100000);
-        assertThat(winningResult.sendRateOfReturn(totalPurchaseMoney)).isEqualTo(65000 / (double) 100000);
+        final int totalPurchaseLottoCount = 100;
+        assertThat(winningResult.sendRateOfReturn(totalPurchaseLottoCount)).isEqualTo(65000 / (double) 100000);
     }
 }
