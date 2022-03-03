@@ -2,6 +2,7 @@ package domain.LottoGenerator;
 
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
+import utils.ExceptionMessage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +13,6 @@ import java.util.stream.Collectors;
 public class AutoLottoGenerator implements LottoGenerator {
 
     private static final int LOTTO_SIZE = 6;
-    private static final String MANUAL_LOTTO_GENERATE_LIMIT = "자동 로또 생성기에서는 수동 로또 생성을 할 수 없습니다.";
 
     @Override
     public Lotto generateLotto() {
@@ -29,6 +29,6 @@ public class AutoLottoGenerator implements LottoGenerator {
 
     @Override
     public Lotto generateLotto(List<Integer> numbers) {
-        throw new IllegalArgumentException(MANUAL_LOTTO_GENERATE_LIMIT);
+        throw new IllegalArgumentException(ExceptionMessage.MANUAL_LOTTO_GENERATE_LIMIT);
     }
 }
