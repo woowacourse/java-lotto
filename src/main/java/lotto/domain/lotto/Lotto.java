@@ -25,7 +25,7 @@ public class Lotto {
     }
 
     public Set<Number> getNumbers() {
-        return numbers;
+        return Set.copyOf(numbers);
     }
 
     private static void validateNumbers(List<Integer> numbers) {
