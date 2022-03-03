@@ -22,7 +22,7 @@ public class RankCounter {
 
     private void initRankCount() {
         Arrays.stream(Rank.values())
-                        .forEach(rank -> rankCount.put(rank, 0));
+                .forEach(rank -> rankCount.put(rank, 0));
     }
 
     private void increaseCount(Rank rank) {

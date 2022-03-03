@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 
 public class LottoGenerator {
+
     private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>(LottoNumber.getLottoNumbers());
 
     public static List<LottoNumber> getRandomLottoNumbers(int pickupCount) {
