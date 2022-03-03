@@ -1,11 +1,10 @@
 package lotto.domain.vo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoNumber {
 
@@ -35,9 +34,7 @@ public class LottoNumber {
     }
 
     public static List<LottoNumber> values() {
-        return IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
-            .mapToObj(LottoNumber::of)
-            .collect(Collectors.toList());
+        return new ArrayList<>(LOTTO_NUMBERS.values());
     }
 
     public int getNumber() {
