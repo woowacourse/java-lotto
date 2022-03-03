@@ -1,6 +1,5 @@
 package view;
 
-import domain.Money;
 import domain.WinningNumbers;
 import java.util.ArrayList;
 import java.util.Arrays;
