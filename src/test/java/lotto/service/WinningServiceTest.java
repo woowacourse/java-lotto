@@ -12,6 +12,8 @@ import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 import lotto.domain.WinningTicket;
+import lotto.domain.generator.NumberGenerator;
+import lotto.domain.generator.RandomNumberGenerator;
 
 class WinningServiceTest {
 
@@ -20,9 +22,12 @@ class WinningServiceTest {
     public void compareWinningTicketWithLottoTicket() {
         // given
         MoneyService moneyService = ServiceConfig.getMoneyService();
-        moneyService.insert(new Money(8000));
-        AutoPurchaseService autoPurchaseService = ServiceConfig.getPurchaseService();
-        autoPurchaseService.purchaseAll();
+        int amount = 8000;
+        moneyService.insert(new Money(amount));
+
+        NumberGenerator generator = new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX);
+        PurchaseService purchaseService = ServiceConfig.getPurchaseService();
+        purchaseService.purchase(generator, amount / LottoTicket.PRICE);
 
         WinningService winningService = ServiceConfig.getWinningService();
         WinningTicket winningTicket = new WinningTicket(new LottoTicket(

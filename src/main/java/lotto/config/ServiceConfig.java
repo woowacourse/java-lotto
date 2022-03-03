@@ -1,12 +1,13 @@
 package lotto.config;
 
-import lotto.service.AutoPurchaseService;
+import lotto.service.PurchaseService;
 import lotto.service.MoneyService;
 import lotto.service.WinningService;
 
 public class ServiceConfig {
-    public static AutoPurchaseService getPurchaseService() {
-        return AutoPurchaseService.getInstance();
+
+    public static PurchaseService getPurchaseService() {
+        return PurchaseService.getInstance();
     }
 
     public static WinningService getWinningService() {
@@ -16,4 +17,5 @@ public class ServiceConfig {
     public static MoneyService getMoneyService() {
         return MoneyService.getInstance();
     }
+    
 }

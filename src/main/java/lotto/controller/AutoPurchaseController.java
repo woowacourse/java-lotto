@@ -4,20 +4,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.config.ServiceConfig;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
+import lotto.domain.generator.NumberGenerator;
+import lotto.domain.generator.RandomNumberGenerator;
 import lotto.dto.LottoTicketResponse;
-import lotto.service.AutoPurchaseService;
+import lotto.service.PurchaseService;
 import lotto.service.MoneyService;
 import lotto.utils.IntegerUtils;
 
 public class AutoPurchaseController {
 
-    private final AutoPurchaseService autoPurchaseService;
+    private final PurchaseService purchaseService;
     private final MoneyService moneyService;
 
-    private AutoPurchaseController(AutoPurchaseService autoPurchaseService, MoneyService moneyService) {
-        this.autoPurchaseService = autoPurchaseService;
+    private AutoPurchaseController(PurchaseService purchaseService, MoneyService moneyService) {
+        this.purchaseService = purchaseService;
         this.moneyService = moneyService;
     }
 
@@ -33,10 +36,29 @@ public class AutoPurchaseController {
     }
 
     public List<LottoTicketResponse> purchase(String inputMoney) {
+        Money money = insertMoney(inputMoney);
+        int ticketCount = calculatePurchasableCount(money);
+        List<LottoTicket> tickets = purchaseTicketByMoney(ticketCount);
+        return toResponse(tickets);
+    }
+
+    private Money insertMoney(String inputMoney) {
         Money money = createMoney(inputMoney);
         moneyService.insert(money);
-        List<LottoTicket> tickets = autoPurchaseService.purchaseAll();
-        return toResponse(tickets);
+        return money;
+    }
+
+    private Money createMoney(String inputMoney) {
+        return new Money(IntegerUtils.parse(inputMoney));
+    }
+
+    private int calculatePurchasableCount(Money money) {
+        return money.divide(Money.from(LottoTicket.PRICE)).getAmount();
+    }
+
+    private List<LottoTicket> purchaseTicketByMoney(int ticketCount) {
+        NumberGenerator generator = new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX);
+        return purchaseService.purchase(generator, ticketCount);
     }
 
     private List<LottoTicketResponse> toResponse(List<LottoTicket> tickets) {
@@ -45,7 +67,4 @@ public class AutoPurchaseController {
             .collect(Collectors.toList());
     }
 
-    private Money createMoney(String inputMoney) {
-        return new Money(IntegerUtils.parse(inputMoney));
-    }
 }

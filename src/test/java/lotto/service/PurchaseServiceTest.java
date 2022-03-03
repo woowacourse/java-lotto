@@ -7,10 +7,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.config.ServiceConfig;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
+import lotto.domain.generator.NumberGenerator;
+import lotto.domain.generator.RandomNumberGenerator;
 
-class AutoPurchaseServiceTest {
+class PurchaseServiceTest {
 
     @Test
     @DisplayName("로또티켓을 구매할 수 있다.")
@@ -21,8 +24,9 @@ class AutoPurchaseServiceTest {
         moneyService.insert(money);
 
         // when
-        AutoPurchaseService service = ServiceConfig.getPurchaseService();
-        List<LottoTicket> lottoTickets = service.purchaseAll();
+        PurchaseService service = ServiceConfig.getPurchaseService();
+        NumberGenerator generator = new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX);
+        List<LottoTicket> lottoTickets = service.purchase(generator, money.getAmount() / LottoTicket.PRICE);
 
         // then
         Assertions.assertThat(lottoTickets.size()).isEqualTo(2);
