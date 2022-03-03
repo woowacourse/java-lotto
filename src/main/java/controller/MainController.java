@@ -9,7 +9,7 @@ import domain.result.Result;
 import java.util.List;
 import utils.Util;
 import view.InputView;
-import view.OutputView;
+import view.ResultView;
 
 public class MainController {
     private MainController() {
@@ -23,7 +23,7 @@ public class MainController {
         final LottoMoney lottoMoney = makeLottoMoney();
         final LottoTicketCount count = makeLottoTicketCount(lottoMoney);
         final List<Lotto> lottoTickets = makeLottos(count);
-        OutputView.printLottoTickets(count, lottoTickets);
+        ResultView.printLottoTickets(count, lottoTickets);
 
         final WinNumbers winNumbers = makeWinNums();
 
@@ -51,7 +51,7 @@ public class MainController {
     }
 
     private void end(final Result result, final LottoMoney lottoMoney) {
-        OutputView.printLottosResult(result);
-        OutputView.printProfit(Util.getProfit((float) result.getPrize(), (float) lottoMoney.get()));
+        ResultView.printLottosResult(result);
+        ResultView.printProfit(Util.getProfit((float) result.getPrize(), (float) lottoMoney.get()));
     }
 }
