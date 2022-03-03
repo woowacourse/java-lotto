@@ -6,6 +6,8 @@ import java.util.Objects;
 
 public class LottoResult {
 
+    private static final int MATCH_RESULT_ADD_UNIT = 1;
+
     private final Map<Rank, Integer> rankResults;
 
     public LottoResult(final Map<Rank, Integer> rankResults) {
@@ -16,7 +18,7 @@ public class LottoResult {
         final Map<Rank, Integer> rankResults = Rank.initResultMap();
         for (Lotto lotto : lottos.getLottos()) {
             Rank rank = winLotto.matchResult(lotto);
-            rankResults.replace(rank, rankResults.get(rank) + 1);
+            rankResults.replace(rank, rankResults.get(rank) + MATCH_RESULT_ADD_UNIT);
         }
         return new LottoResult(rankResults);
     }
