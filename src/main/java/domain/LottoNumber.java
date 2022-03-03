@@ -10,6 +10,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAXIMUM_LOTTO_NUMBER = 45;
 
+    static final String ERROR_MESSAGE_FOR_OUT_OF_RANGE_NUMBER =
+            String.format("%d에서 %d 사이의 값을 입력해주세요.", MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER);
+
     static {
         LOTTO_NUMBERS = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
                 .boxed()
@@ -17,9 +20,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private final int number;
-
-    static final String ERROR_MESSAGE_FOR_OUT_OF_RANGE_NUMBER =
-            String.format("%d에서 %d 사이의 값을 입력해주세요.", MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER);
 
     public LottoNumber(int number) {
         validateRange(number);
