@@ -8,28 +8,29 @@ public class LottosBuilder {
     public static final String ERROR_TYPE = "[ERROR] 로또 구매 수량은 숫자로만 입력해주세요";
 
     private final List<Lotto> lottos;
-    private int autoCount;
+    private Money money;
     private int manualCount;
 
-    private LottosBuilder(int count, int manualCount) {
-        checkCount(count, manualCount);
+    private LottosBuilder(Money money, int manualCount) {
+        checkCount(money, manualCount);
+        money.payLotto(manualCount);
         this.lottos = new ArrayList<>();
-        this.autoCount = count - manualCount;
+        this.money = money;
         this.manualCount = manualCount;
+    }
+
+    private void checkCount(Money money, int manualCount) {
+        if (!money.isLottoAvailable(manualCount)) {
+            throw new IllegalArgumentException(ERROR_COUNT_OVER);
+        }
     }
 
     public static LottosBuilder of(Money money, String manualCountInput) {
         try {
             return new LottosBuilder(
-                    money.countAvailableLotto(), Integer.parseInt(manualCountInput));
+                    money, Integer.parseInt(manualCountInput));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_TYPE);
-        }
-    }
-
-    private void checkCount(int count, int manualCount) {
-        if (manualCount > count) {
-            throw new IllegalArgumentException(ERROR_COUNT_OVER);
         }
     }
 
@@ -41,8 +42,9 @@ public class LottosBuilder {
     }
 
     public void addAutoLottos() {
-        for (int i = 0; i < autoCount; i++) {
+        while (money.isLottoAvailable()) {
             this.lottos.add(Lotto.ofRandom());
+            money.payLotto();
         }
     }
 

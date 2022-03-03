@@ -9,7 +9,7 @@ public class Money {
     private static final String ERROR_UNIT = "[ERROR] 구매 금액은 1000원 단위로 입력하세요";
     private static final int PRICE_LOTTO = 1000;
 
-    private final int amount;
+    private int amount;
 
     private Money(int amount) {
         validate(amount);
@@ -41,15 +41,27 @@ public class Money {
         }
     }
 
-    public boolean isUnit(int unit) {
-        return amount % unit == 0;
+    public int countAvailableLotto() {
+        return this.amount / PRICE_LOTTO;
+    }
+
+    public void payLotto(int count) {
+        this.amount = this.amount - (PRICE_LOTTO * count);
+    }
+
+    public void payLotto() {
+        payLotto(1);
+    }
+
+    public boolean isLottoAvailable(int count) {
+        return this.amount >= (PRICE_LOTTO * count);
+    }
+
+    public boolean isLottoAvailable() {
+        return isLottoAvailable(1);
     }
 
     public double rate(long numerator) {
         return numerator / (double)this.amount;
-    }
-
-    public int countAvailableLotto() {
-        return this.amount / PRICE_LOTTO;
     }
 }
