@@ -5,16 +5,18 @@ import java.util.List;
 
 import lotto.domain.LottoRanking;
 import lotto.domain.Result;
+import lotto.domain.factory.LottoFactory;
 
 public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos() {
-    }
-
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
+    public Lottos(Count autoCount, List<Lotto> manualLottos) {
+        lottos.addAll(manualLottos);
+        int autoCountValue = autoCount.value();
+        while (autoCountValue-- > 0) {
+            lottos.add(LottoFactory.auto());
+        }
     }
 
     public Money totalPrice() {

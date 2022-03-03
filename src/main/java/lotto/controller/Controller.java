@@ -18,6 +18,7 @@ public class Controller {
     public void play() {
         // 로또 구매
         Lottos lottos = lottosController.buyLottos();
+        OutputView.printLottos(lottos);
         // 결과 출력
         printResult(lottos);
     }

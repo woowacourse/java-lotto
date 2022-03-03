@@ -1,5 +1,8 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lotto.domain.lotto.Count;
 import lotto.domain.lotto.Money;
 import lotto.domain.factory.LottoFactory;
@@ -16,10 +19,8 @@ public class LottosController {
         Count totalLottoCount = money.countToBuyLotto();
         Count manualLottoCount = requestManualLottoCount(money);
         Count autoLottoCount = totalLottoCount.subtract(manualLottoCount);
-        Lottos lottos = requestBuyLottos(manualLottoCount, autoLottoCount.value());
         OutputView.printLottoCount(manualLottoCount, autoLottoCount);
-        OutputView.printLottos(lottos);
-        return lottos;
+        return new Lottos(autoLottoCount, requestBuyManualLottoNumbers(manualLottoCount));
     }
 
     private Money requestMoney() {
@@ -44,20 +45,15 @@ public class LottosController {
         }
     }
 
-    private Lottos requestBuyLottos(Count manualLottoCount, int autoLottoCount) {
-        Lottos lottos = new Lottos();
-        requestBuyManualLottoNumbers(manualLottoCount, lottos);
-        buyAutoLottos(autoLottoCount, lottos);
-        return lottos;
-    }
-
-    private void requestBuyManualLottoNumbers(Count manualLottoCount, Lottos lottos) {
+    private List<Lotto> requestBuyManualLottoNumbers(Count manualLottoCount) {
+        List<Lotto> lottos = new ArrayList<>();
         OutputView.printRequestManualLottoNumberUI();
         int countValue = manualLottoCount.value();
         while (countValue-- > 0) {
             Lotto lotto = requestManualLottoNumber();
             lottos.add(lotto);
         }
+        return lottos;
     }
 
     private Lotto requestManualLottoNumber() {
@@ -67,12 +63,6 @@ public class LottosController {
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
             return requestManualLottoNumber();
-        }
-    }
-
-    private void buyAutoLottos(int autoLottoCount, Lottos lottos) {
-        while (autoLottoCount-- > 0) {
-            lottos.add(LottoFactory.auto());
         }
     }
 }
