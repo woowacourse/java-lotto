@@ -25,6 +25,10 @@ public class Money implements Comparable<Money> {
         this.money *= count;
     }
 
+    public double calculateProfitRate(Money payment) {
+        return (double)this.money / payment.money;
+    }
+
     private void validateMoney(final int money) {
         if (money < 0) {
             throw new IllegalArgumentException(ERROR_ONLY_NATURAL_NUMBER);

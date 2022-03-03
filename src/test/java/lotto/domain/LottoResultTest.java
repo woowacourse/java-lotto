@@ -44,7 +44,7 @@ class LottoResultTest {
     }
 
     @Test
-    @DisplayName("로또들의 일치 개수를 확인 - 3등")
+    @DisplayName("로또들의 일치 개수를 확인 - 4등")
     void match_lottos_third() {
         LottoResult lottoResult = new LottoResult();
 
@@ -54,13 +54,12 @@ class LottoResultTest {
     }
 
     @Test
-    @DisplayName("수익률 계산")
-    void calculate_profit_rate() {
+    @DisplayName("총 수익 계산")
+    void calculate_profit() {
         LottoResult lottoResult = new LottoResult();
-        Money purchaseAmount = new Money(3000);
 
         lottoResult.addMatchingCount(lottos, winningLotto);
 
-        assertEquals(lottoResult.calculateProfitRate(purchaseAmount), 676683.333, 0.01);
+        assertEquals(2_030_050_000, lottoResult.getProfit().getMoney());
     }
 }

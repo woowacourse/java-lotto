@@ -14,10 +14,6 @@ public class LottoResult {
         }
     }
 
-    public Map<Rank, Integer> getLottoResult() {
-        return Map.copyOf(lottoResult);
-    }
-
     public void addMatchingCount(Lottos lottos, WinningLotto winningLotto) {
         for (Lotto lotto : lottos.getLottos()) {
             Rank rank = winningLotto.getLottoRank(lotto);
@@ -25,11 +21,11 @@ public class LottoResult {
         }
     }
 
-    public double calculateProfitRate(Money payment) {
-        return (double)getProfit().getMoney() / payment.getMoney();
+    public Money getProfit() {
+        return Rank.getTotalWinningPrize(lottoResult);
     }
 
-    private Money getProfit() {
-        return Rank.getTotalWinningPrize(lottoResult);
+    public Map<Rank, Integer> getLottoResult() {
+        return Map.copyOf(lottoResult);
     }
 }
