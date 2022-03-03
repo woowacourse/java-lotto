@@ -35,4 +35,9 @@ public class LottoTickets {
         }
         return ranks;
     }
+
+    public LottoTickets combine(LottoTickets lottoTickets) {
+        this.lottoTickets.addAll(lottoTickets.getLottoTickets());
+        return new LottoTickets(this.lottoTickets);
+    }
 }
