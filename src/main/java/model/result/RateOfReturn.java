@@ -13,13 +13,16 @@ public class RateOfReturn {
 		this.money = money;
 		this.sumMoneyOfReturns = 0;
 		countOfResult = new HashMap<>();
+		for (final Rank rank : Rank.values()) {
+			countOfResult.put(rank, 0);
+		}
 	}
 
-	public void saveResult(Rank rank) {
-		countOfResult.put(rank, countOfResult.getOrDefault(rank, 0) + 1);
+	public void increaseCountOfRank(Rank rank) {
+		countOfResult.compute(rank, (r, count) -> count + 1);
 	}
 
-	public int countStatistics(Rank rank) {
+	public int getCountOfResult(Rank rank) {
 		return countOfResult.getOrDefault(rank, 0);
 	}
 

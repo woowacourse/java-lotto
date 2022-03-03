@@ -35,6 +35,6 @@ public class LottoStorage {
 	public void checkWithWinningNumberAndBonus(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumbersDTO,
 		RateOfReturn rateOfReturn) {
 		lottoStorage.forEach(
-			lotto -> rateOfReturn.saveResult(lotto.match(bonusBallDTO, winningNumbersDTO)));
+			lotto -> rateOfReturn.increaseCountOfRank(lotto.match(bonusBallDTO, winningNumbersDTO)));
 	}
 }

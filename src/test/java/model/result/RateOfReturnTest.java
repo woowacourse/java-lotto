@@ -13,16 +13,16 @@ public class RateOfReturnTest {
 	@DisplayName("결과가 저장이 잘 되는지 테스트")
 	void saveResultTest(Rank rank) {
 		RateOfReturn rateOfReturn = new RateOfReturn(1000);
-		rateOfReturn.saveResult(rank);
-		assertThat(rateOfReturn.countStatistics(rank)).isEqualTo(1);
+		rateOfReturn.increaseCountOfRank(rank);
+		assertThat(rateOfReturn.getCountOfResult(rank)).isEqualTo(1);
 	}
 
 	@Test
 	@DisplayName("수익률이 정상적으로 출력되는지 테스트")
 	void getRateOfReturn() {
 		RateOfReturn rateOfReturn = new RateOfReturn(1000);
-		rateOfReturn.saveResult(Rank.THREE);
-		rateOfReturn.saveResult(Rank.BONUS);
+		rateOfReturn.increaseCountOfRank(Rank.THREE);
+		rateOfReturn.increaseCountOfRank(Rank.BONUS);
 		assertThat(rateOfReturn.getRateOfReturn()).isEqualTo(
 			(Rank.THREE.getValue() + Rank.BONUS.getValue()) / 1000);
 	}
