@@ -11,21 +11,29 @@ public class LottoCounter {
 
     public LottoCounter(Money money, int manualLottoCount) {
         checkNegative(manualLottoCount);
-        checkOverMoney(money, manualLottoCount);
+        checkLottoCountOverMoney(money, manualLottoCount);
         this.manualLottoCount = manualLottoCount;
         this.autoLottoCount = getTotalLottoCount(money) - manualLottoCount;
     }
 
     private void checkNegative(int manualLottoCount) {
-        if (manualLottoCount < 0) {
+        if (isNegativeNumber(manualLottoCount)) {
             throw new LottoCounterException(LottoCounterException.LOTTO_COUNT_NOT_NEGATIVE_NUMBER_ERROR);
         }
     }
 
-    private void checkOverMoney(Money money, int manualLottoCount) {
-        if (getTotalLottoCount(money) < manualLottoCount) {
+    private boolean isNegativeNumber(int manualLottoCount) {
+        return manualLottoCount < 0;
+    }
+
+    private void checkLottoCountOverMoney(Money money, int lottoCount) {
+        if (isLottoCountOverMoney(money, lottoCount)) {
             throw new LottoCounterException(LottoCounterException.LOTTO_COUNT_OVER_MONEY_ERROR);
         }
+    }
+
+    private boolean isLottoCountOverMoney(Money money, int lottoCount) {
+        return getTotalLottoCount(money) < lottoCount;
     }
 
     public static int getTotalLottoCount(Money money) {
