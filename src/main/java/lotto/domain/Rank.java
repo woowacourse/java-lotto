@@ -31,10 +31,6 @@ public enum Rank {
                 .orElse(RANK_OUT);
     }
 
-    public long calculateWinningPrize(int count) {
-        return prize * count;
-    }
-
     public int getWinningLottoMatchCount() {
         return winningLottoMatchCount;
     }

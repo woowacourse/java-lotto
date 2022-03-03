@@ -25,7 +25,7 @@ public class RankStatistic {
 
     public long getTotalWinningPrize() {
         return Arrays.stream(Rank.values())
-                .mapToLong(rank -> rank.calculateWinningPrize(rankCount.getOrDefault(rank, 0)))
+                .mapToLong(rank -> rank.getPrize() * rankCount.getOrDefault(rank, 0))
                 .sum();
     }
 
