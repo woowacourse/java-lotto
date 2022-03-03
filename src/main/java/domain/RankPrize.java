@@ -22,6 +22,14 @@ public enum RankPrize {
         this.secondRank = secondRank;
     }
 
+    public int getCount() {
+        return correctNumber;
+    }
+
+    public int getPrize() {
+        return winPrize;
+    }
+
     public static RankPrize findByCount(final int correctNumber, final boolean secondRank) {
         return Arrays.stream(RankPrize.values())
                 .filter(winPrize -> winPrize.correctNumber == correctNumber)
@@ -30,11 +38,15 @@ public enum RankPrize {
                 .orElseThrow(() -> new RuntimeException(ERROR_INVALID_WIN_COUNT_MESSAGE));
     }
 
-    public int getCount() {
-        return correctNumber;
+    public static boolean isSecondRank(final int count, final boolean bonus) {
+        return (count == SECOND.correctNumber) && bonus;
     }
 
-    public int getPrize() {
-        return winPrize;
+    public static boolean isInRank(final int count) {
+        return count >= FIFTH.correctNumber;
+    }
+
+    public int calculatePrize(Integer count) {
+        return this.winPrize * count;
     }
 }

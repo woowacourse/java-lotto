@@ -2,7 +2,6 @@ package domain;
 
 public class CorrectNumber {
 
-    private static final int RANK_SECOND = RankPrize.SECOND.getCount();
     private final int count;
     private final boolean secondRank;
 
@@ -12,15 +11,11 @@ public class CorrectNumber {
     }
 
     public static CorrectNumber getCorrectNumber(final int count, final boolean bonus) {
-        return new CorrectNumber(count, isSecondRank(count, bonus));
-    }
-
-    private static boolean isSecondRank(final int count, final boolean bonus) {
-        return (count == RANK_SECOND) && bonus;
+        return new CorrectNumber(count, RankPrize.isSecondRank(count, bonus));
     }
 
     public boolean isInRank() {
-        return this.count >= RankPrize.FIFTH.getCount();
+        return RankPrize.isInRank(count);
     }
 
     public RankPrize findRankPrize() {

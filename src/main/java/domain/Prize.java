@@ -23,7 +23,7 @@ public class Prize {
     public static Prize calculatePrize(SortedMap<RankPrize, Integer> rankCounts) {
         int totalPrize = INIT_WIN_PRIZE;
         for (RankPrize rankPrize : rankCounts.keySet()) {
-            totalPrize += rankPrize.getPrize() * rankCounts.get(rankPrize);
+            totalPrize += rankPrize.calculatePrize(rankCounts.get(rankPrize));
         }
         return new Prize(totalPrize);
     }

@@ -18,7 +18,7 @@ public class IssuedLotto {
     private final List<Lotto> issuedLotto = new ArrayList<>();
 
     public List<Lotto> getIssuedLotto() {
-        return issuedLotto;
+        return new ArrayList<>(issuedLotto);
     }
 
     public List<Lotto> issue(Money money, Count manualCount) {
