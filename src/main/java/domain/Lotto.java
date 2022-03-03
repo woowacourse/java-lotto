@@ -23,8 +23,7 @@ public class Lotto {
         return new HashSet<>(numbers);
     }
 
-    public static Lotto generateLottoNumbers(LottoNumbersGenerator lottoNumberGenerator) {
-        Set<LottoNumber> lottoNumbers = lottoNumberGenerator.generateNumbers();
+    public static Lotto from(Set<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 

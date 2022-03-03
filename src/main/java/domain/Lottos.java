@@ -17,8 +17,9 @@ public class Lottos {
 
     public static Lottos generateLottos(int count) {
         List<Lotto> lottos = new ArrayList<>();
+        RandomNumbersGenerator lottoNumberGenerator = new RandomNumbersGenerator();
         for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.generateLottoNumbers(new RandomNumbersGenerator()));
+            lottos.add(Lotto.from(lottoNumberGenerator.generateNumbers()));
         }
         return new Lottos(lottos);
     }
