@@ -8,7 +8,7 @@ import domain.Lotto;
 import domain.LottoNumber;
 import domain.LottoPurchaseInfo;
 
-public class RandomLottoGeneratorStrategy implements LottoGeneratorStrategy {
+public class AutomaticLottoGeneratorStrategy implements LottoGeneratorStrategy {
 
     private List<LottoNumber> lottoNumbers;
 

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import domain.strategy.LottoGeneratorStrategy;
 import domain.strategy.ManualLottoGeneratorStrategy;
-import domain.strategy.RandomLottoGeneratorStrategy;
+import domain.strategy.AutomaticLottoGeneratorStrategy;
 
 public class LottoFactory {
 
@@ -15,7 +15,7 @@ public class LottoFactory {
 
     public LottoFactory() {
         this.lottoGeneratorStrategies = new ArrayList<>(
-            Arrays.asList(new ManualLottoGeneratorStrategy(), new RandomLottoGeneratorStrategy()));
+            Arrays.asList(new ManualLottoGeneratorStrategy(), new AutomaticLottoGeneratorStrategy()));
     }
 
     public Lottos generateLottos(List<List<Integer>> lottosNumbers, LottoPurchaseCount lottoPurchaseCount) {
