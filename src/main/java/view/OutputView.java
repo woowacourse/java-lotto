@@ -1,9 +1,6 @@
 package view;
 
-import domain.LottoNumbers;
-import domain.LottoRank;
-import domain.PurchaseType;
-import domain.WinningStat;
+import domain.*;
 import util.ProfitFormatter;
 
 import java.util.Collections;
@@ -18,18 +15,18 @@ public class OutputView {
         throw new AssertionError();
     }
 
-    public static void printPurchasedLottoTicketNumber(PurchaseType purchaseType) {
+    public static void printPurchasedLottoTicketNumber(PurchaseCount purchaseCount) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n수동으로 ").append(purchaseType.getManualCount())
-                .append("장, 자동으로 ").append(purchaseType.getAutomaticCount())
+        stringBuilder.append("\n수동으로 ").append(purchaseCount.getManualCount())
+                .append("장, 자동으로 ").append(purchaseCount.getAutomaticCount())
                 .append("개를 구매했습니다.");
 
         System.out.println(stringBuilder);
     }
 
-    public static void printPurchasedLottoTickets(List<LottoNumbers> lottos) {
-        for (LottoNumbers lotto : lottos) {
-            System.out.println(lotto.getLottoNumbers());
+    public static void printPurchasedLottoTickets(Lottos lottos) {
+        for (LottoNumbers numbers : lottos.getLottos()) {
+            System.out.println(numbers.getLottoNumbers());
         }
         System.out.println();
     }

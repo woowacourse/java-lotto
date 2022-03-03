@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
-class winLottoTest {
+class WinLottoTest {
 
     private static LottoNumbers lottoNumbers;
 
@@ -30,7 +30,7 @@ class winLottoTest {
 
         WinLotto winLotto = new WinLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
 
-        assertThat(winLotto.rank(winLottoTest.lottoNumbers))
+        assertThat(winLotto.rank(WinLottoTest.lottoNumbers))
                 .isEqualTo(LottoRank.FIRST);
     }
 
@@ -43,7 +43,7 @@ class winLottoTest {
 
         WinLotto winLotto = new WinLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
 
-        assertThat(winLotto.rank(winLottoTest.lottoNumbers))
+        assertThat(winLotto.rank(WinLottoTest.lottoNumbers))
                 .isEqualTo(LottoRank.SECOND);
     }
 
@@ -56,7 +56,7 @@ class winLottoTest {
 
         WinLotto winLotto = new WinLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
 
-        assertThat(winLotto.rank(winLottoTest.lottoNumbers))
+        assertThat(winLotto.rank(WinLottoTest.lottoNumbers))
                 .isEqualTo(LottoRank.THIRD);
     }
 
@@ -69,7 +69,7 @@ class winLottoTest {
 
         WinLotto winLotto = new WinLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
 
-        assertThat(winLotto.rank(winLottoTest.lottoNumbers))
+        assertThat(winLotto.rank(WinLottoTest.lottoNumbers))
                 .isEqualTo(LottoRank.FOURTH);
     }
 
@@ -82,7 +82,7 @@ class winLottoTest {
 
         WinLotto winLotto = new WinLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
 
-        assertThat(winLotto.rank(winLottoTest.lottoNumbers))
+        assertThat(winLotto.rank(WinLottoTest.lottoNumbers))
                 .isEqualTo(LottoRank.FIFTH);
     }
 
@@ -95,7 +95,7 @@ class winLottoTest {
 
         WinLotto winLotto = new WinLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
 
-        assertThat(winLotto.rank(winLottoTest.lottoNumbers))
+        assertThat(winLotto.rank(WinLottoTest.lottoNumbers))
                 .isEqualTo(LottoRank.NOTHING);
     }
 }

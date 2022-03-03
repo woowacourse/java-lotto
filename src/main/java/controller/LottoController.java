@@ -1,7 +1,6 @@
 package controller;
 
 import domain.*;
-import domain.strategy.RandomLottoNumberStrategy;
 import view.InputView;
 import view.OutputView;
 
@@ -13,24 +12,22 @@ public class LottoController {
 
     public void run() {
         LottoMachine lottoMachine = new LottoMachine();
-        List<LottoNumbers> lottos = purchaseLottoTickets(lottoMachine);
+        Lottos lottos = purchaseLottos(lottoMachine);
         createResult(lottoMachine, lottos);
     }
 
-    private List<LottoNumbers> purchaseLottoTickets(LottoMachine lottoMachine) {
+    private Lottos purchaseLottos(LottoMachine lottoMachine) {
         Money money = new Money(InputView.getMoney());
-        PurchaseType purchaseType = new PurchaseType(money, InputView.getManualPurchaseCount());
-        List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(purchaseType);
-        List<LottoNumbers> lottos = lottoMachine.purchaseLottoTickets(manualLottoNumbers, purchaseType,
-                new RandomLottoNumberStrategy());
-
-        OutputView.printPurchasedLottoTicketNumber(purchaseType);
+        PurchaseCount purchaseCount = new PurchaseCount(money, InputView.getManualPurchaseCount());
+        List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(purchaseCount);
+        Lottos lottos = lottoMachine.purchase(manualLottoNumbers, purchaseCount);
+        OutputView.printPurchasedLottoTicketNumber(purchaseCount);
         OutputView.printPurchasedLottoTickets(lottos);
 
         return lottos;
     }
 
-    private void createResult(LottoMachine lottoMachine, List<LottoNumbers> lottos) {
+    private void createResult(LottoMachine lottoMachine, Lottos lottos) {
         LottoNumbers winningNumbers = LottoNumbers.convertToLottoNumber(InputView.getWinningNumbers());
         LottoNumber bonusNumber = LottoNumber.createBonus(InputView.getBonusNumber(), winningNumbers);
         WinLotto winLotto = new WinLotto(winningNumbers, bonusNumber);

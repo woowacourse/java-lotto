@@ -1,10 +1,14 @@
 package domain.strategy;
 
 import domain.LottoNumber;
+import domain.LottoNumbers;
+import domain.PurchaseCount;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static domain.LottoNumbers.LOTTO_NUMBERS_SIZE;
 
@@ -12,12 +16,22 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 
     private static final List<LottoNumber> numbers = LottoNumber.getNumbers();
 
+    public RandomLottoNumberStrategy() {
+    }
+
     @Override
-    public List<LottoNumber> generate() {
-        Collections.shuffle(numbers);
-        Collections.sort(numbers);
-        return numbers.stream()
-                .limit(LOTTO_NUMBERS_SIZE)
+    public List<LottoNumbers> generate(PurchaseCount count) {
+        return IntStream.range(0, count.getAutomaticCount())
+                .mapToObj(number -> createAutoTickets())
+                .map(LottoNumbers::new)
                 .collect(Collectors.toList());
+    }
+
+    private List<LottoNumber> createAutoTickets() {
+        Collections.shuffle(numbers);
+        List<LottoNumber> lottoNumbers = new ArrayList<>(numbers.subList(0, LOTTO_NUMBERS_SIZE));
+        Collections.sort(lottoNumbers);
+
+        return lottoNumbers;
     }
 }

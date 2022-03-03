@@ -11,7 +11,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static final String INVALID_LOTTO_NUMBER_RANGE = "번호는 1부터 45 사이여야 합니다.";
     private static final String INVALID_BONUS_NUMBER = "보너스 번호는 당첨 번호와 중복될 수 없습니다.";
-
     private static final Map<Integer, LottoNumber> lottoNumbers;
 
     private final int number;

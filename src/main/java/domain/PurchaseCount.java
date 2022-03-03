@@ -2,12 +2,12 @@ package domain;
 
 import java.util.Objects;
 
-public class PurchaseType {
+public class PurchaseCount {
 
     private final int manualCount;
     private final int automaticCount;
 
-    public PurchaseType(Money money, int manualCount) {
+    public PurchaseCount(Money money, int manualCount) {
         validateManualCount(money, manualCount);
         this.manualCount = manualCount;
         this.automaticCount = calculateTotalCount(money) - manualCount;
@@ -35,7 +35,7 @@ public class PurchaseType {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PurchaseType that = (PurchaseType) o;
+        PurchaseCount that = (PurchaseCount) o;
         return manualCount == that.manualCount && automaticCount == that.automaticCount;
     }
 
