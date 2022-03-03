@@ -17,6 +17,7 @@ public class Application {
 
     public static void main(String[] args) {
         final LottoGameMoney purchaseMoney = new LottoGameMoney(InputView.getPurchaseAmount());
+        final int manualLottoCount = InputView.getManualLottoCount();
         final LottoGame lottoGame = createLottoGame(purchaseMoney);
         OutputView.showPurchasedLottos(lottoGame.getLottos());
 

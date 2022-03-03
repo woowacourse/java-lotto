@@ -48,6 +48,19 @@ public class InputView {
         }
     }
 
+    public static int getManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        String lottoCount = getInput();
+        validateLottoCount(lottoCount);
+
+        return Integer.parseInt(lottoCount);
+    }
+
+    private static void validateLottoCount(String lottoCount) {
+        validateNumberType(lottoCount);
+        validatePositiveNumberRange(lottoCount);
+    }
+
     public static List<Integer> getWinningLottoNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         String inputWinningLottoNumbers = getInput();
