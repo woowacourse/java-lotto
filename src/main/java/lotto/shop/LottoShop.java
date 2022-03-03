@@ -1,7 +1,11 @@
 package lotto.shop;
 
+import java.util.List;
+
 import lotto.controller.AutoPurchaseController;
 import lotto.controller.InputWinningController;
+import lotto.controller.ManualPurchaseController;
+import lotto.dto.LottoTicketResponse;
 import lotto.view.ErrorView;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -11,15 +15,18 @@ public class LottoShop implements Shop {
     private final InputView inputView;
     private final OutputView outputView;
     private final ErrorView errorView;
-    private final AutoPurchaseController purchaseController;
+    private final ManualPurchaseController manualPurchaseController;
+    private final AutoPurchaseController autoPurchaseController;
     private final InputWinningController inputWinningController;
 
     public LottoShop(InputView inputView, OutputView outputView, ErrorView errorView,
-        AutoPurchaseController purchaseController, InputWinningController inputWinningController) {
+        ManualPurchaseController manualPurchaseController, AutoPurchaseController autoPurchaseController,
+        InputWinningController inputWinningController) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.errorView = errorView;
-        this.purchaseController = purchaseController;
+        this.manualPurchaseController = manualPurchaseController;
+        this.autoPurchaseController = autoPurchaseController;
         this.inputWinningController = inputWinningController;
     }
 
@@ -32,7 +39,12 @@ public class LottoShop implements Shop {
     private void purchaseLotto() {
         try {
             String inputMoney = inputView.inputMoney();
-            outputView.outputTickets(purchaseController.purchase(inputMoney));
+            List<String> inputLottoNumbers = inputView.inputLottoNumbers();
+
+            List<LottoTicketResponse> manualLottoTickets = manualPurchaseController.purchase(inputLottoNumbers);
+            List<LottoTicketResponse> autoLottoTickets = autoPurchaseController.purchase(inputMoney);
+
+            outputView.outputTickets(manualLottoTickets, autoLottoTickets);
         } catch (IllegalArgumentException e) {
             errorView.error(e.getMessage());
             purchaseLotto();

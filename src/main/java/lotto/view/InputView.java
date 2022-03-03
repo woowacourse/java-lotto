@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.List;
+
 import lotto.client.InputClient;
 import lotto.config.ClientConfig;
 
@@ -21,6 +23,11 @@ public class InputView {
 
     public String inputMoney() {
         return client.input("구입금액을 입력해 주세요.\n");
+    }
+
+    public List<String> inputLottoNumbers() {
+        int lottoCount = Integer.parseInt(client.input("수동으로 구매할 로또 수를 입력해 주세요."));
+        return client.inputRepeat("수동으로 구매할 번호를 입력해 주세요.", lottoCount);
     }
 
     public String inputWinningNumber() {

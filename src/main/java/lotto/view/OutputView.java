@@ -25,10 +25,12 @@ public class OutputView {
         return OutputViewHelper.INSTANCE;
     }
 
-    public void outputTickets(List<LottoTicketResponse> responses) {
-        client.output(String.format("%d개를 구매했습니다.\n", responses.size()));
-        responses.forEach(this::outputTicket);
-        client.output("");
+    public void outputTickets(List<LottoTicketResponse> manualResponses, List<LottoTicketResponse> autoResponses) {
+        client.output(String.format(
+            "수동으로 %d개, 자동으로 %d개를 구매했습니다.\n", manualResponses.size(), autoResponses.size()
+        ));
+        manualResponses.forEach(this::outputTicket);
+        autoResponses.forEach(this::outputTicket);
     }
 
     private void outputTicket(LottoTicketResponse response) {
