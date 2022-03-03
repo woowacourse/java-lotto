@@ -18,6 +18,10 @@ public class Lotteries {
 		return lotteries;
 	}
 
+	public void addLotteries(final List<Lottery> newLotteries) {
+		lotteries.addAll(newLotteries);
+	}
+
 	public Map<Rank, Integer> getTheNumberOfWinners(final WinningLottery winningLottery) {
 		Map<Rank,Integer> winners = initRankResult();
 		lotteries.forEach(lottery -> {

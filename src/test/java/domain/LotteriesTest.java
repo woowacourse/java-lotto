@@ -20,7 +20,7 @@ public class LotteriesTest {
 		final List<Lottery> lotteriesNumber = new ArrayList<>();
 		final LotteryRandomGeneratorStrategy lotteryGenerator = new LotteryRandomGeneratorStrategy();
 
-		for (int i = 0 ; i < lotteryNumber; i++) {
+		for (int i = 0; i < lotteryNumber; i++) {
 			lotteriesNumber.add(lotteryGenerator.getNumbers());
 		}
 		final Lotteries lotteries = new Lotteries(lotteriesNumber);

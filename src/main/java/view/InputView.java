@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -20,15 +21,36 @@ public class InputView {
 	}
 
 	public static List<Integer> inputValidLotteryNumber() {
-		final String numbers = inputData(LotteryMessage.LAST_WEEK_WINNING_NUMBERS, InputValidator::validateWinningNumber);
+		final String numbers = inputData(LotteryMessage.LAST_WEEK_WINNING_NUMBERS,
+			InputValidator::validateWinningNumber);
+		return parseStringToIntegerList(numbers);
+	}
+
+	public static int inputValidBonusNumber() {
+		return Integer.parseInt(inputData(LotteryMessage.LAST_WEEK_BONUS_NUMBER, InputValidator::validateBonusNumber));
+	}
+
+	public static int inputTheNumberOfValidManualLottery() {
+		return Integer.parseInt(inputData(LotteryMessage.THE_NUMBER_OF_MANUAL_LOTTERY_TO_PURCHASE,
+			InputValidator::validateTheNumberOfManualLottery));
+	}
+
+	public static List<List<Integer>> inputValidManualLotteries(final int theNumberOfLottery) {
+		System.out.println(LotteryMessage.INPUT_MANUAL_LOTTERIES_NUMBER);
+		List<List<Integer>> manualLotteries = new ArrayList<>();
+		for (int i = 0; i < theNumberOfLottery; i++) {
+			final List<Integer> lottery = parseStringToIntegerList(
+				inputData("", InputValidator::validateManualLottery));
+			manualLotteries.add(lottery);
+		}
+		return manualLotteries;
+	}
+
+	private static List<Integer> parseStringToIntegerList(final String numbers) {
 		return Arrays.stream(numbers.split(WINNING_NUMBER_DISTRIBUTOR))
 			.map(String::trim)
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
-	}
-
-	public static int inputValidBonusNumber() {
-		return Integer.parseInt(inputData(LotteryMessage.LAST_WEEK_BONUS_NUMBER, InputValidator::validateNumber));
 	}
 
 	private static String inputData(final String inputMessage, final Consumer<String> validation) {

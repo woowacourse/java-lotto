@@ -2,7 +2,9 @@ package domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
@@ -20,8 +22,10 @@ public class LotteryGameTest {
 	@ParameterizedTest(name = "{index} {displayName} lotteriesToCreate={0}")
 	@ValueSource(ints = {1, 100, 50})
 	void createLotteries(final int lotteriesToCreate) {
-		final LotteryGame lotteryGame = new LotteryGame(new PurchaseAmount(lotteriesToCreate * 1000),
-			new LotteryRandomGeneratorStrategy());
+		final int theNumberOfManualLotteries = lotteriesToCreate - 1;
+		final PurchaseInformation purchaseInformation = createPurchaseInformation(lotteriesToCreate,
+			theNumberOfManualLotteries);
+		final LotteryGame lotteryGame = new LotteryGame(purchaseInformation, new LotteryRandomGeneratorStrategy());
 
 		assertThat(lotteryGame.getLotteries().size()).isEqualTo(lotteriesToCreate);
 	}
@@ -51,10 +55,22 @@ public class LotteryGameTest {
 	}
 
 	private LotteryGame initRankingTest(final int purchaseAmount, final int expectedRank) {
-		final LotteryGame lotteryGame = new LotteryGame(new PurchaseAmount(purchaseAmount),
+		final PurchaseInformation purchaseInformation =
+			createPurchaseInformation(purchaseAmount / 1000, 0);
+		final LotteryGame lotteryGame = new LotteryGame(purchaseInformation,
 			new LotteryGenerateMock(expectedRank, purchaseAmount / 1000));
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		return lotteryGame;
 	}
 
+	private PurchaseInformation createPurchaseInformation(final int lotteriesToCreate,
+			final int theNumberOfManualLotteries) {
+		final LotteryGenerateMock lotteryGenerator = new LotteryGenerateMock(1, theNumberOfManualLotteries);
+		final PurchaseAmount purchaseAmount = new PurchaseAmount(lotteriesToCreate * 1000);
+		final List<Lottery> lotteries = new ArrayList<>();
+		for (int i = 0; i < theNumberOfManualLotteries; i++) {
+			lotteries.add(lotteryGenerator.getNumbers());
+		}
+		return new PurchaseInformation(purchaseAmount, new Lotteries(lotteries), theNumberOfManualLotteries);
+	}
 }
