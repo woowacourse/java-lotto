@@ -18,7 +18,7 @@ public class LottoController {
                 new ManualLottoGenerator(InputView.askManualLottoNumbers(money.getManualAmount())),
                 new AutoLottoGenerator(money.getAutoAmount())));
 
-        OutputView.printLottosInformations(money, lottoGame.getLottos());
+        OutputView.printLottosInformation(money, lottoGame.getLottos());
 
         WinningChecker winningChecker = lottoGame.makeResult(InputView.askWinningNumbers());
 

@@ -17,7 +17,7 @@ public class WinningNumbers {
     private final int bonusNumber;
 
     public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
-        checkWinningAndBonusNumberValidate(winningNumbers, bonusNumber);
+        checkWinningAndBonusNumberValidation(winningNumbers, bonusNumber);
         this.winningNumbers = new ArrayList<>(winningNumbers);
         this.bonusNumber = bonusNumber;
     }
@@ -30,7 +30,7 @@ public class WinningNumbers {
         return number == bonusNumber;
     }
 
-    private void checkWinningAndBonusNumberValidate(List<Integer> winningNumbers, int bonusNumber) {
+    private void checkWinningAndBonusNumberValidation(List<Integer> winningNumbers, int bonusNumber) {
         List<Integer> numbers = new ArrayList<>(winningNumbers);
         numbers.add(bonusNumber);
         checkNumbersRange(numbers);

@@ -23,7 +23,7 @@ public class Lotto {
     private final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
-        checkValidate(lottoNumbers);
+        checkValidation(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
@@ -68,7 +68,7 @@ public class Lotto {
     }
 
 
-    private void checkValidate(List<Integer> numbers) {
+    private void checkValidation(List<Integer> numbers) {
         checkNull(numbers);
         checkRange(numbers);
         checkSize(numbers);

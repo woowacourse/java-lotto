@@ -27,7 +27,7 @@ public class OutputView {
         }
     };
 
-    public static void printLottosInformations(Money money, Lottos lottos) {
+    public static void printLottosInformation(Money money, Lottos lottos) {
 
         System.out.printf(MESSAGE_LOTTOS_NUMBER, money.getManualAmount(), money.getAutoAmount());
 
