@@ -14,6 +14,8 @@ public class AutoLottoGenerator implements LottoGenerator {
     private static final int MIN_RANGE = 0;
     private static final int MAX_RANGE = 6;
 
+    private static final int START_INDEX = 0;
+
     private static final List<Integer> numbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER,
             MAX_LOTTO_NUMBER)
         .boxed()
@@ -29,7 +31,7 @@ public class AutoLottoGenerator implements LottoGenerator {
     public List<Lotto> generate() {
         List<Lotto> lottos = new ArrayList<>();
 
-        for (int i = 0; i < amount; ++i) {
+        for (int i = START_INDEX; i < amount; ++i) {
             lottos.add(generateLotto());
         }
         return lottos;
