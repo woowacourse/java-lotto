@@ -60,7 +60,7 @@ public class LottoController {
     }
 
     private List<Lotto> issueLotto(final Money totalMoney) {
-        final Count manualCount = getManualCount();
+        final Count manualCount = getManualCount(totalMoney);
         final List<Lotto> issuedManualLotto = getManualLottoWith(manualCount);
         final List<Lotto> issuedLotto = lottoService.issueLotto(totalMoney, issuedManualLotto);
         outputView.printLotto(getIssuedLottoDto(issuedLotto), manualCount.getCount());
@@ -73,12 +73,13 @@ public class LottoController {
             .collect(Collectors.toList());
     }
 
-    private Count getManualCount() {
+    private Count getManualCount(final Money totalMoney) {
         try {
-            return new Count(inputView.getManualCount());
+            final int manualCount = inputView.getManualCount();
+            return new Count(manualCount, totalMoney.getLottoCount());
         } catch (Exception e) {
             outputView.printInputError(e);
-            return getManualCount();
+            return getManualCount(totalMoney);
         }
     }
 
@@ -91,7 +92,7 @@ public class LottoController {
             return lottoService.issueManualLottoGroup(manualLottoInput);
         } catch (Exception e) {
             outputView.printInputError(e);
-            return getManualLottoWith(getManualCount());
+            return getManualLottoWith(manualCount);
         }
     }
 

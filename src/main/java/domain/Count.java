@@ -4,11 +4,23 @@ public class Count {
 
     private static final int COUNT_END_NUMBER = 0;
     private static final int COUNT_DECREASE_UNIT = 1;
+    private static final String MANUAL_COUNT_CANNOT_EXCEED_TOTAL_MESSAGE = "투입 금액보다 더 많은 갯수를 선택할 수 없습니다.";
 
     private final int count;
 
     public Count(final int count) {
         this.count = count;
+    }
+
+    public Count(final int manualCount, final int totalCount) {
+        validate(manualCount, totalCount);
+        this.count = manualCount;
+    }
+
+    private void validate(final int manualCount, final int totalCount) {
+        if (manualCount > totalCount) {
+            throw new IllegalArgumentException(MANUAL_COUNT_CANNOT_EXCEED_TOTAL_MESSAGE);
+        }
     }
 
     public boolean isEnd() {
