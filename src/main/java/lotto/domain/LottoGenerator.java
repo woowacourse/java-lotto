@@ -42,16 +42,16 @@ public class LottoGenerator {
         return new Lottos(concatManualAndAutoLottos(numbers));
     }
 
-    private List<Lotto> concatManualAndAutoLottos(final List<List<Integer>> numbers) {
-        return Stream.concat(generateManualLottos(numbers).stream(),
-                        generateRandomLottos().stream())
-                .collect(Collectors.toList());
-    }
-
     private void checkRightManualNumbers(final List<List<Integer>> numbers) {
         if (numbers.size() != manualCount) {
             throw new IllegalArgumentException("[ERROR] 수동 번호가 올바르지 않습니다.");
         }
+    }
+
+    private List<Lotto> concatManualAndAutoLottos(final List<List<Integer>> numbers) {
+        return Stream.concat(generateManualLottos(numbers).stream(),
+                        generateRandomLottos().stream())
+                .collect(Collectors.toList());
     }
 
     private List<Lotto> generateManualLottos(final List<List<Integer>> numbers) {
