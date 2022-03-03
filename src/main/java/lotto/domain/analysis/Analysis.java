@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.money.Money;
-import lotto.domain.winning.Rank;
+import lotto.utils.Rank;
 
 public class Analysis {
 

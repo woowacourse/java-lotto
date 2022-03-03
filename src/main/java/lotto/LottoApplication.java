@@ -9,12 +9,12 @@ import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.TicketManager;
 import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
-import lotto.domain.winning.Rank;
 import lotto.domain.winning.WinningTicket;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
 import lotto.dto.TicketManagerDto;
 import lotto.dto.WinningTicketDto;
+import lotto.utils.Rank;
 import lotto.view.LottoView;
 
 public class LottoApplication {

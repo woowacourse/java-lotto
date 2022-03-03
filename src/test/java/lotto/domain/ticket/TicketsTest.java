@@ -9,8 +9,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.ticket.generator.CustomTicketGenerator;
-import lotto.domain.winning.Rank;
 import lotto.domain.winning.WinningTicket;
+import lotto.utils.Rank;
 
 class TicketsTest {
 

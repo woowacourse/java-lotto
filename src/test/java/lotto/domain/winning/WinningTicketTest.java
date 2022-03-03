@@ -14,6 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import lotto.domain.ticket.Ticket;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
+import lotto.utils.Rank;
 
 class WinningTicketTest {
 

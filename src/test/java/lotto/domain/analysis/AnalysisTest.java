@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.money.Money;
-import lotto.domain.winning.Rank;
+import lotto.utils.Rank;
 
 class AnalysisTest {
 

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.ticket.generator.TicketGenerator;
-import lotto.domain.winning.Rank;
 import lotto.domain.winning.WinningTicket;
+import lotto.utils.Rank;
 
 public class TicketManager {
 

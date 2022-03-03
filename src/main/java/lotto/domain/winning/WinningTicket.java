@@ -6,6 +6,7 @@ import java.util.Optional;
 import lotto.domain.ball.Ball;
 import lotto.domain.ball.BallStorage;
 import lotto.domain.ticket.Ticket;
+import lotto.utils.Rank;
 
 public class WinningTicket {
 
