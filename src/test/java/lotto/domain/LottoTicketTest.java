@@ -22,7 +22,7 @@ class LottoTicketTest {
     @Test
     void 로또_티켓_번호_개수_초과() {
         // given & when & then
-        assertThatThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5, 6, 7)))
+        assertThatThrownBy(() -> new LottoTicket(List.of(LottoNumber.of(1), LottoNumber.of(2))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("번호의 갯수가 적절하지 않습니다. 또한 중복될 수 없습니다.");
     }
@@ -31,7 +31,9 @@ class LottoTicketTest {
     @Test
     void 로또_티켓_중복() {
         // given & when & then
-        assertThatThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5, 5)))
+        assertThatThrownBy(() -> new LottoTicket(
+                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                        LottoNumber.of(5))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("번호의 갯수가 적절하지 않습니다. 또한 중복될 수 없습니다.");
     }
@@ -54,7 +56,9 @@ class LottoTicketTest {
     @Test
     void 당첨_번호_인지_확인() {
         // given
-        LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket = new LottoTicket(
+                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                        LottoNumber.of(6)));
         LottoNumber lottoNumber = LottoNumber.of(1);
 
         // when

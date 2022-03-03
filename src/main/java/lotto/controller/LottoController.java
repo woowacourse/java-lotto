@@ -3,6 +3,7 @@ package lotto.controller;
 import static lotto.domain.LottoMachine.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.controller.dto.LottoResultDto;
 import lotto.controller.dto.LottoTicketsDto;
 import lotto.controller.dto.PurchaseInfoDto;
@@ -33,7 +34,11 @@ public class LottoController {
     }
 
     public WinningNumberDto createWinningNumber(List<Integer> normalNumbers, int bonusNumber) {
-        WinningNumber winningNumber = new WinningNumber(new LottoTicket(normalNumbers), LottoNumber.of(bonusNumber));
+        List<LottoNumber> numbers = normalNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+        
+        WinningNumber winningNumber = new WinningNumber(new LottoTicket(numbers), LottoNumber.of(bonusNumber));
 
         return WinningNumberDto.from(winningNumber);
     }

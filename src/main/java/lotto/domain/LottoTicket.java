@@ -13,9 +13,8 @@ public class LottoTicket {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> numbers) {
+    public LottoTicket(List<LottoNumber> numbers) {
         Set<LottoNumber> lottoNumber = numbers.stream()
-                .map(LottoNumber::of)
                 .collect(toSet());
 
         validateSize(lottoNumber);

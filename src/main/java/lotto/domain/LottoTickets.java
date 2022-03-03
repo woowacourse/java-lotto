@@ -11,7 +11,7 @@ public class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<List<Integer>> manualNumbers) {
+    public LottoTickets(List<List<LottoNumber>> manualNumbers) {
         this.lottoTickets = manualNumbers.stream()
                 .map(LottoTicket::new)
                 .collect(toList());

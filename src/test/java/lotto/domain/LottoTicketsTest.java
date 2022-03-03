@@ -14,7 +14,7 @@ class LottoTicketsTest {
     @Test
     void 로또_티켓_발급() {
         // given
-        List<List<Integer>> numbers = generateLottoTickets();
+        List<List<LottoNumber>> numbers = generateLottoTickets();
 
         // when & then
         assertDoesNotThrow(() -> new LottoTickets(numbers));

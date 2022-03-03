@@ -31,7 +31,17 @@ public class LottoTicketsDto {
     }
 
     public LottoTickets toLottoTickets() {
-        return new LottoTickets(lottoTickets);
+        List<List<LottoNumber>> lottoNumbers = lottoTickets.stream()
+                .map(this::parseLottoNumbers)
+                .collect(toList());
+
+        return new LottoTickets(lottoNumbers);
+    }
+
+    private List<LottoNumber> parseLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::of)
+                .collect(toList());
     }
 
     public List<List<Integer>> getLottoTickets() {

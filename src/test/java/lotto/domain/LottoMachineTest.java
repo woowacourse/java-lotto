@@ -16,7 +16,11 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         // when
-        List<List<Integer>> manualNumbers = generateLottoTickets();
+        List<List<Integer>> manualNumbers = List.of(
+                List.of(8, 21, 23, 41, 42, 43),
+                List.of(3, 5, 11, 16, 32, 38),
+                List.of(7, 11, 16, 35, 36, 44)
+        );
 
         // then
         assertDoesNotThrow(() -> lottoMachine.issueManual(manualNumbers));
