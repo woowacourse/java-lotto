@@ -18,7 +18,7 @@ public class LottoResultDto {
     }
 
     public LongSummaryStatistics getWinningCountByRank(Rank rank) {
-        return winningCountByRank.get(rank);
+        return winningCountByRank.getOrDefault(rank, new LongSummaryStatistics());
     }
 
     public double getRateOfReturn() {
