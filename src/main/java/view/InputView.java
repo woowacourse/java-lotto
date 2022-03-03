@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import constant.LottoConstant;
 
@@ -49,7 +50,7 @@ public class InputView {
     }
 
     public static int getManualLottoCount() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         String lottoCount = getInput();
         validateLottoCount(lottoCount);
 
@@ -61,22 +62,34 @@ public class InputView {
         validatePositiveNumberRange(lottoCount);
     }
 
-    public static List<Integer> getWinningLottoNumbers() {
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        String inputWinningLottoNumbers = getInput();
+    public static List<List<Integer>> getManualLottoNumbers(int lottoCount) {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
 
-        List<String> winningLottoNumbers = convertStringList(inputWinningLottoNumbers);
-        validateWinningLottoNumbers(winningLottoNumbers);
-
-        return convertIntegerList(winningLottoNumbers);
-    }
-
-    private static List<String> convertStringList(String lottoNumbers) {
-        return Arrays.stream(lottoNumbers.split(NUMBER_SPLITTER, -1))
+        return IntStream.range(0, lottoCount).boxed()
+            .map(i -> getLottoNumbers(getInput()))
             .collect(Collectors.toList());
     }
 
-    private static void validateWinningLottoNumbers(List<String> values) {
+    public static List<Integer> getWinningLottoNumbers() {
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        String winningLottoNumbers = getInput();
+
+        return getLottoNumbers(winningLottoNumbers);
+    }
+
+    private static List<Integer> getLottoNumbers(String numbers) {
+        List<String> lottoNumbers = convertNumberList(numbers);
+        validateLottoNumbers(lottoNumbers);
+
+        return convertIntegerList(lottoNumbers);
+    }
+
+    private static List<String> convertNumberList(String numbers) {
+        return Arrays.stream(numbers.split(NUMBER_SPLITTER, -1))
+            .collect(Collectors.toList());
+    }
+
+    private static void validateLottoNumbers(List<String> values) {
         validateLottoNumberCount(values);
         for (String value : values) {
             validateNumberType(value);
