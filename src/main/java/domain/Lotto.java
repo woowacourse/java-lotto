@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -30,10 +31,11 @@ public class Lotto {
         }
     }
 
-    public int getSameNumberCount(Lotto anotherLotto) {
-        return (int) lottoNumbers.stream()
-                .filter(anotherLotto::containsLottoNumber)
-                .count();
+    public int getSameNumberCount(Lotto otherLotto) {
+        List<LottoNumber> intersections = new ArrayList<>(lottoNumbers);
+        intersections.retainAll(otherLotto.lottoNumbers);
+
+        return intersections.size();
     }
 
     public boolean containsLottoNumber(LottoNumber lottoNumber) {
