@@ -15,7 +15,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public static Lottos generateLottos(int count) {
+    public static Lottos generateAutoLottos(int count) {
         List<Lotto> lottos = new ArrayList<>();
         RandomNumbersGenerator lottoNumberGenerator = new RandomNumbersGenerator();
         for (int i = 0; i < count; i++) {

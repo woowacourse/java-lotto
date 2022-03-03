@@ -18,7 +18,7 @@ public class LottoMachine {
     }
 
     private Lottos getLottos(int autoLottoCount, Lottos manualLottos) {
-        Lottos autoLottos = Lottos.generateLottos(autoLottoCount);
+        Lottos autoLottos = Lottos.generateAutoLottos(autoLottoCount);
         Lottos totalLottos = manualLottos.concat(autoLottos);
         OutputView.printLottos(totalLottos);
         return totalLottos;
