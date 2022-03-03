@@ -9,13 +9,15 @@ import java.util.stream.IntStream;
 public class AutoLottoGenerator implements LottoGenerator {
 
     private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 46;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
     private static final int MIN_RANGE = 0;
     private static final int MAX_RANGE = 6;
 
-    private static final List<Integer> numbers = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-        .boxed().collect(Collectors.toList());
+    private static final List<Integer> numbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER,
+            MAX_LOTTO_NUMBER)
+        .boxed()
+        .collect(Collectors.toList());
 
     private final int amount;
 
