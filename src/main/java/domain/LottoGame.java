@@ -26,7 +26,6 @@ public class LottoGame {
     private LottoNumber bonusNumber;
     private final Lottos lottos;
 
-<<<<<<< HEAD
     public LottoGame(LottoNumberGenerator lottoNumberGenerator, Money money) {
         lottos = buyLotto(lottoNumberGenerator, money);
     }
@@ -38,23 +37,6 @@ public class LottoGame {
     private Lottos buyLotto(LottoNumberGenerator lottoNumberGenerator, Money money) {
         int lottoAmount = money.money() / LOTTO_PRICE;
         return Lottos.buyLottos(lottoNumberGenerator, lottoAmount);
-=======
-    public LottoGame(Money money) {
-        lottos = buyLotto(money);
-    }
-
-    public LottoGame(List<Lotto> lottos) {
-        this.lottos = new Lottos(lottos);
-    }
-
-    public static LottoGame startLottoGame(Money money) {
-        return new LottoGame(money);
-    }
-
-    private Lottos buyLotto(Money money) {
-        int lottoAmount = money.money() / LOTTO_PRICE;
-        return Lottos.buyLottos(lottoAmount);
->>>>>>> b694d594de2bfb389fd414a7cf2d9a0ea23d3c9b
     }
 
     public void enterWinningLottoNumbersAndBonusNumber(List<Integer> notVerifiedWinningLottoNumbers

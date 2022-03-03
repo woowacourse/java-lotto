@@ -20,16 +20,6 @@ public class LottoTest {
     }
 
     @Test
-<<<<<<< HEAD
-=======
-    @DisplayName("로또 번호를 생성한다.")
-    void generateNumber() {
-        Lotto lotto = new Lotto();
-        assertThat(lotto.generateNumber().size()).isEqualTo(6);
-    }
-
-    @Test
->>>>>>> b694d594de2bfb389fd414a7cf2d9a0ea23d3c9b
     @DisplayName("당첨 로또와 비교 기능 테스트_6개")
     void countDuplicatedNumberTest() {
         Lotto winningLotto = new Lotto(Stream.of(1,2,3,4,5,6)
