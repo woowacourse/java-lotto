@@ -12,11 +12,11 @@ import lotto.domain.Money;
 public class LottoStatisticsResponse {
 
     private final List<LottoWinningResponse> winningResponses;
-    private final int money;
+    private final double profitRate;
 
     public LottoStatisticsResponse(List<LottoRank> ranks, Money money) {
         this.winningResponses = toWinningResponses(ranks);
-        this.money = money.getAmount();
+        this.profitRate = calculateProfit(money);
     }
 
     private List<LottoWinningResponse> toWinningResponses(List<LottoRank> ranks) {
@@ -41,11 +41,23 @@ public class LottoStatisticsResponse {
             .collect(Collectors.toList());
     }
 
+    private double calculateProfit(Money money) {
+        long sum = winningResponses.stream()
+            .mapToLong(this::calculateProfitPerWinning)
+            .sum();
+        return (double)sum / money.getAmount();
+    }
+
+    private long calculateProfitPerWinning(LottoWinningResponse response) {
+        return (long)response.getPrize() * response.getTicketCount();
+    }
+
     public List<LottoWinningResponse> getWinningResponses() {
         return winningResponses;
     }
 
-    public int getMoney() {
-        return money;
+    public double getProfitRate() {
+        return profitRate;
     }
+
 }

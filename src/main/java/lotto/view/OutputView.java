@@ -70,19 +70,6 @@ public class OutputView {
     }
 
     private void outputProfit(LottoStatisticsResponse statistics) {
-        client.output(String.format("총 수익률은 %.2f입니다.\n", calculateProfit(statistics)));
-    }
-
-    private double calculateProfit(LottoStatisticsResponse statistics) {
-        List<LottoWinningResponse> responses = statistics.getWinningResponses();
-        int money = statistics.getMoney();
-        long sum = responses.stream()
-            .mapToLong(this::calculateProfitPerWinning)
-            .sum();
-        return (double)sum / money;
-    }
-
-    private long calculateProfitPerWinning(LottoWinningResponse response) {
-        return (long) response.getPrize() * response.getTicketCount();
+        client.output(String.format("총 수익률은 %.2f입니다.\n", statistics.getProfitRate()));
     }
 }
