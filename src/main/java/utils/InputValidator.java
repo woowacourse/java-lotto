@@ -21,20 +21,12 @@ public class InputValidator {
 		validateNumber(number, LotteryMessage.BONUS_BALL_NOT_NUMBER_ERROR);
 	}
 
-	public static void validateManualLottery(final String manualLottery) {
-		final String[] manualLotteryNumbers = manualLottery.split(WINNING_NUMBER_DISTRIBUTOR);
-		for (String number : manualLotteryNumbers) {
-			validateNumber(number, LotteryMessage.LOTTERY_NUMBER_NOT_NUMBER_ERROR);
-		}
-		checkTheNumberOfNumber(manualLotteryNumbers.length, LotteryMessage.LOTTERY_SIZE_ERROR);
-	}
-
-	public static void validateWinningNumber(final String winningNumber) {
-		final String[] winningNumbers = winningNumber.split(WINNING_NUMBER_DISTRIBUTOR);
-		for (String number : winningNumbers) {
-			validateNumber(number, LotteryMessage.LOTTERY_NUMBER_NOT_NUMBER_ERROR);
-		}
-		checkTheNumberOfNumber(winningNumbers.length, LotteryMessage.LOTTERY_SIZE_ERROR);
+	public static void validateLottery(final String lottery) {
+		 final String[] lotteryNumbers = lottery.split(WINNING_NUMBER_DISTRIBUTOR);
+		 for (String number : lotteryNumbers) {
+			 validateNumber(number, LotteryMessage.LOTTERY_NUMBER_NOT_NUMBER_ERROR);
+		 }
+		 checkTheNumberOfNumber(lotteryNumbers.length, LotteryMessage.LOTTERY_SIZE_ERROR);
 	}
 
 	private static void validateNumber(final String number, final String errorMessage) {

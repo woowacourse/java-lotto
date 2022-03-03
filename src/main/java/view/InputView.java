@@ -22,7 +22,7 @@ public class InputView {
 
 	public static List<Integer> inputValidLotteryNumber() {
 		final String numbers = inputData(LotteryMessage.LAST_WEEK_WINNING_NUMBERS,
-			InputValidator::validateWinningNumber);
+			InputValidator::validateLottery);
 		return parseStringToIntegerList(numbers);
 	}
 
@@ -40,7 +40,7 @@ public class InputView {
 		List<List<Integer>> manualLotteries = new ArrayList<>();
 		for (int i = 0; i < theNumberOfLottery; i++) {
 			final List<Integer> lottery = parseStringToIntegerList(
-				inputData("", InputValidator::validateManualLottery));
+				inputData("", InputValidator::validateLottery));
 			manualLotteries.add(lottery);
 		}
 		return manualLotteries;
