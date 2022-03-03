@@ -8,8 +8,8 @@ import java.util.stream.IntStream;
 
 public class User {
 
-    private long money;
-    private int countOfManualLotto;
+    private final long money;
+    private final int countOfManualLotto;
     private final List<Lotto> lottos;
 
     private User(long money, int countOfManualLotto, List<Lotto> lottos) {
