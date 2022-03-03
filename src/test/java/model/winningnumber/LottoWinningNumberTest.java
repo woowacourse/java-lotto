@@ -37,7 +37,7 @@ public class LottoWinningNumberTest {
 	@DisplayName("보너스 볼이 당첨 번호와 중복되는지 검증")
 	void validateReduplicationWithBonusBall() {
 		LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-		assertThatThrownBy(() -> lottoWinningNumber.validateReduplicationWithBonusBall("1"))
+		assertThatThrownBy(() -> lottoWinningNumber.validateReduplicationWithBonusBall(1))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("[Error]: 당첨 번호와 보너스 볼이 중복됩니다.");
 	}

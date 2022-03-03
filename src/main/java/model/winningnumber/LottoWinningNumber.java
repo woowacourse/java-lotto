@@ -5,8 +5,6 @@ import java.util.List;
 import model.lotto.LottoNumber;
 
 public class LottoWinningNumber {
-	private static final String WINNING_NUMBER_ERROR_MESSAGE = "[Error]: 당첨 번호는 숫자여야 합니다.";
-	private static final String WINNING_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 당첨 번호를 입력하세요.";
 	private static final String WINNING_NUMBER_RANGE_ERROR_MESSAGE = "[Error]: 당첨 번호는 1~45 숫자여야 합니다.";
 	private static final String WINNING_NUMBER_SIZE_ERROR_MESSAGE = "[Error]: 당첨 번호는 6개의 숫자여야 합니다.";
 	private static final String WINNING_NUMBER_REDUPLICATION_ERROR_MESSAGE = "[Error]: 당첨 번호는 중복이 있으면 안됩니다";
@@ -39,8 +37,8 @@ public class LottoWinningNumber {
 		}
 	}
 
-	public void validateReduplicationWithBonusBall(String number) {
-		if (winningNumbers.contains(Integer.parseInt(number))) {
+	public void validateReduplicationWithBonusBall(int number) {
+		if (winningNumbers.contains(number)) {
 			throw new IllegalArgumentException(REDUPLICATION_WITH_BONUS_BALL_ERROR_MESSAGE);
 		}
 	}

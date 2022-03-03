@@ -17,6 +17,8 @@ import view.OutputView;
 public class LottoController {
 	private static final String WINNING_NUMBER_ERROR_MESSAGE = "[Error]: 당첨 번호는 숫자여야 합니다.";
 	private static final String WINNING_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 당첨 번호를 입력하세요.";
+	private static final String BONUS_BALL_BLANK_ERROR_MESSAGE = "[Error]: 보너스 볼을 입력해주세요.";
+	private static final String BONUS_BALL_NUMBER_ERROR_MESSAGE = "[Error]: 보너스 볼은 숫자여야 합니다.";
 
 	private final InputView inputView = new InputView();
 	private final OutputView outputView = new OutputView();
@@ -81,8 +83,10 @@ public class LottoController {
 	private void storeBonusBall() {
 		try {
 			String input = inputView.inputBonusBall();
-			bonusBall = new BonusBall(input);
-			lottoWinningNumber.validateReduplicationWithBonusBall(input);
+			InputValidateUtils.inputBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
+			InputValidateUtils.inputNumber(input, BONUS_BALL_NUMBER_ERROR_MESSAGE);
+			bonusBall = new BonusBall(Integer.parseInt(input));
+			lottoWinningNumber.validateReduplicationWithBonusBall(Integer.parseInt(input));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
 			storeBonusBall();
