@@ -213,11 +213,13 @@ public class InputView {
     }
 
     public int inputManualLottoCount() {
+        System.out.print(System.lineSeparator());
         System.out.println(MANUAL_LOTTO_COUNT_MESSAGE);
         return Integer.parseInt(input());
     }
 
     public List<List<Integer>> inputManualLottoNumber(int manualLottoCount) {
+        System.out.print(System.lineSeparator());
         System.out.println(MANUAL_LOTTO_NUMBER_INPUT_MESSAGE);
 
         List<List<Integer>> manualLottoNumbers = new ArrayList<>();
