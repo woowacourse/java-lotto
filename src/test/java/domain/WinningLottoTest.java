@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
-class WinLottoTest {
+class WinningLottoTest {
 
     private static LottoNumbers lottoNumbers;
 
@@ -28,9 +28,9 @@ class WinLottoTest {
                 .map(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
-        WinLotto winLotto = new WinLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
 
-        assertThat(winLotto.rank(WinLottoTest.lottoNumbers))
+        assertThat(winningLotto.rank(WinningLottoTest.lottoNumbers))
                 .isEqualTo(LottoRank.FIRST);
     }
 
@@ -41,9 +41,9 @@ class WinLottoTest {
                 .map(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
-        WinLotto winLotto = new WinLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
 
-        assertThat(winLotto.rank(WinLottoTest.lottoNumbers))
+        assertThat(winningLotto.rank(WinningLottoTest.lottoNumbers))
                 .isEqualTo(LottoRank.SECOND);
     }
 
@@ -54,9 +54,9 @@ class WinLottoTest {
                 .map(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
-        WinLotto winLotto = new WinLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
 
-        assertThat(winLotto.rank(WinLottoTest.lottoNumbers))
+        assertThat(winningLotto.rank(WinningLottoTest.lottoNumbers))
                 .isEqualTo(LottoRank.THIRD);
     }
 
@@ -67,9 +67,9 @@ class WinLottoTest {
                 .map(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
-        WinLotto winLotto = new WinLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
 
-        assertThat(winLotto.rank(WinLottoTest.lottoNumbers))
+        assertThat(winningLotto.rank(WinningLottoTest.lottoNumbers))
                 .isEqualTo(LottoRank.FOURTH);
     }
 
@@ -80,9 +80,9 @@ class WinLottoTest {
                 .map(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
-        WinLotto winLotto = new WinLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
 
-        assertThat(winLotto.rank(WinLottoTest.lottoNumbers))
+        assertThat(winningLotto.rank(WinningLottoTest.lottoNumbers))
                 .isEqualTo(LottoRank.FIFTH);
     }
 
@@ -93,9 +93,9 @@ class WinLottoTest {
                 .map(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
-        WinLotto winLotto = new WinLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(input), LottoNumber.getInstance(7));
 
-        assertThat(winLotto.rank(WinLottoTest.lottoNumbers))
+        assertThat(winningLotto.rank(WinningLottoTest.lottoNumbers))
                 .isEqualTo(LottoRank.NOTHING);
     }
 }

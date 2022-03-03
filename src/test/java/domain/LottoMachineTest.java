@@ -51,7 +51,7 @@ class LottoMachineTest {
                 .collect(Collectors.toList());
         LottoNumbers winningNumbers = new LottoNumbers(inputWinningNumbers);
         WinningStat actual = lottoMachine.createWinningStat(lottos,
-                new WinLotto(winningNumbers, LottoNumber.getInstance(7)));
+                new WinningLotto(winningNumbers, LottoNumber.getInstance(7)));
 
         Map<LottoRank, Integer> ranks = new HashMap<>();
         for (LottoRank lottoRank : LottoRank.values()) {

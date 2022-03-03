@@ -17,12 +17,12 @@ public class LottoMachine {
         return manualLottos.concatenate(autoLottos);
     }
 
-    public WinningStat createWinningStat(Lottos lottos, WinLotto winLotto) {
+    public WinningStat createWinningStat(Lottos lottos, WinningLotto winningLotto) {
         Map<LottoRank, Integer> ranks = new HashMap<>(); // enumMap 굿
         initializeRank(ranks);
 
         for (LottoNumbers lotto : lottos.getLottos()) {
-            ranks.merge(winLotto.rank(lotto), INCREASE_VALUE, Integer::sum);
+            ranks.merge(winningLotto.rank(lotto), INCREASE_VALUE, Integer::sum);
         }
 
         return new WinningStat(ranks);

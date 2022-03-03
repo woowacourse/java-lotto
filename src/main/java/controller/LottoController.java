@@ -30,9 +30,9 @@ public class LottoController {
     private void createResult(LottoMachine lottoMachine, Lottos lottos) {
         LottoNumbers winningNumbers = LottoNumbers.convertToLottoNumber(InputView.getWinningNumbers());
         LottoNumber bonusNumber = LottoNumber.createBonus(InputView.getBonusNumber(), winningNumbers);
-        WinLotto winLotto = new WinLotto(winningNumbers, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        WinningStat winningStat = lottoMachine.createWinningStat(lottos, winLotto);
+        WinningStat winningStat = lottoMachine.createWinningStat(lottos, winningLotto);
         OutputView.printWinningStat(winningStat, winningStat.calculateProfit(LOTTO_TICKET_PRICE));
     }
 }

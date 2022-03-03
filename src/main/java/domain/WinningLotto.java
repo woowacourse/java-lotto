@@ -1,11 +1,11 @@
 package domain;
 
-public class WinLotto {
+public class WinningLotto {
 
     private final LottoNumbers lottoNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinLotto(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+    public WinningLotto(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
