@@ -11,10 +11,11 @@ public class RandomLottoNumbersGenerator {
 
     public static List<String> pickSixNumbers() {
         List<Integer> shuffledNumbers = shuffleLottoNumbers(LottoNumbers.getLottoNumbers());
-        return shuffledNumbers.stream()
+        return Collections.unmodifiableList(shuffledNumbers
+                .stream()
                 .limit(LOTTO_SIZE)
                 .map(number -> Integer.toString(number))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     private static List<Integer> shuffleLottoNumbers(Set<Integer> numbers) {
