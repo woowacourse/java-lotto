@@ -21,6 +21,10 @@ public class Money {
         }
     }
 
+    public Money minus(Money other) {
+        return Money.from(this.amount - other.amount);
+    }
+
     public Money divide(Money other) {
         if (other.amount == 0) {
             throw new IllegalArgumentException("나누는 금액은 0이 될 수 없습니다.");
