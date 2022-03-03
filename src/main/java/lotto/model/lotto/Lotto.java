@@ -11,7 +11,6 @@ import lotto.utils.InputValidateUtils;
 public class Lotto {
     private static final int CHECKING_BONUS_NUMBER = 5;
     private static final int WINNING_NUMBER_SIZE = 6;
-    private static final String CONCAT = "";
 
     private final Set<Integer> numbers;
 

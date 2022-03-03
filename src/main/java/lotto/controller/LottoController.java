@@ -19,11 +19,10 @@ public class LottoController {
         LottoGame lottoGame = new LottoGame();
         Money money = receiveMoney();
         ManualCount manual = receiveManualCount();
-        final int manualCount = manual.getNumber();
         List<Lotto> manualLottos = receiveManualLottos(lottoGame, manual);
 
-        LottoStorage lottos = lottoGame.makeLottos(new LottoCount(money.getNumber(), manualCount), manualLottos);
-        OutputView.printLottos(manualCount, lottos.getLottoStorage());
+        LottoStorage lottos = lottoGame.makeLottos(new LottoCount(money.getNumber(), manual.getNumber()), manualLottos);
+        OutputView.printLottos(manual.getNumber(), lottos.getLottoStorage());
         WinningResult winnings = lottoGame.calcWinningNumber(lottos, new WinningLottoResponse(receiveWinningLotto()));
         sendResult(lottoGame, money.getNumber(), winnings);
     }
