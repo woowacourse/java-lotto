@@ -143,8 +143,8 @@ public class LottoController {
         }
     }
 
-    private WinningResult generateWinningResultByLottosAndWinningLotto(Lottos autoLottos, WinningLotto winningLotto) {
-        return autoLottos.getWinningResultByWinningLotto(winningLotto);
+    private WinningResult generateWinningResultByLottosAndWinningLotto(Lottos lottos, WinningLotto winningLotto) {
+        return lottos.getWinningResultByWinningLotto(winningLotto);
     }
 
     private void printWinningResult(WinningResult winningResult, LottoQuantity lottoQuantity) {
