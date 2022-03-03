@@ -20,6 +20,16 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public void buyLottosByManual(List<Lotto> manualLottos) {
+        lottos.addAll(manualLottos);
+    }
+
+    public void buyLottosByAuto(int autoLottoCount) {
+        for (int i = 0; i < autoLottoCount; i++) {
+            lottos.add(Lotto.generateLottoByAuto());
+        }
+    }
+
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
