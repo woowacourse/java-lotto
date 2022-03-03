@@ -5,7 +5,6 @@ package controller;
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
-import domain.LottoGenerator.AutoLottoGenerator;
 import domain.LottoGenerator.LottoGenerator;
 import domain.LottoGenerator.ManualLottoGenerator;
 import domain.Result;
@@ -87,16 +86,18 @@ public class LottoController {
         return player.selectLottoCount(ManualLottoCount);
     }
 
-    public void purchaseManualLotto(List<List<Integer>> manualNumber) {
-        LottoGenerator lottoGenerator = new ManualLottoGenerator();
+    public LottosDto purchaseLotto(LottoGenerator lottoGenerator, List<List<Integer>> manualNumber) {
+        if (manualNumber == null) {
+            return purchaseAutoLotto(lottoGenerator);
+        }
         for (List<Integer> numbers : manualNumber) {
             Lotto lotto = lottoGenerator.generateLotto(numbers);
             player.purchaseLotto(lotto);
         }
+        return LottosDto.from(player.getLottos());
     }
 
-    public LottosDto purchase() {
-        LottoGenerator lottoGenerator = new AutoLottoGenerator();
+    private LottosDto purchaseAutoLotto(LottoGenerator lottoGenerator) {
         while (player.canBuyLotto()) {
             player.purchaseLotto(lottoGenerator.generateLotto());
         }

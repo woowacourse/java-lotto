@@ -2,6 +2,7 @@ import controller.LottoController;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import domain.Result;
 =======
 >>>>>>> 6a49a84 (feat: 로또 구매 및 당첨번호 세팅 기능 구현)
@@ -9,12 +10,18 @@ import domain.Result;
 import domain.Result;
 >>>>>>> 7eb4fa3 (refactor: 프린트 할 결과물 생성 로직 변경)
 =======
+=======
+import domain.Lotto.LottoNumber;
+import domain.LottoGenerator.AutoLottoGenerator;
+import domain.LottoGenerator.ManualLottoGenerator;
+>>>>>>> 107d435 (refactor : purchaseLotto의 파라미터로 외부에서 LottoGenerator 구현체를 생성해서 주입해주면서 메서드를 재사용하는 형식으로 리팩토링)
 import dto.LottoCountDto;
 >>>>>>> 8334008 (feat : 수동 로또 구매 기능 추가)
 import dto.LottosDto;
 import view.InputView;
 import view.OutputView;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Application {
@@ -40,8 +47,8 @@ public class Application {
 
         LottoCountDto lottoCountDto = lottoController.selectLottoCount(inputView.inputPurchaseAmount(), inputView.inputManualLottoCount());
 
-        lottoController.purchaseManualLotto(inputView.inputManualLottoNumber(lottoCountDto.getManualLottoCount()));
-        LottosDto lottosDto = lottoController.purchase();
+        lottoController.purchaseLotto(new ManualLottoGenerator(), inputView.inputManualLottoNumber(lottoCountDto.getManualLottoCount()));
+        LottosDto lottosDto = lottoController.purchaseLotto(new AutoLottoGenerator(), null);
 
         outputView.printPurchasedLotto(lottoCountDto, lottosDto);
 
