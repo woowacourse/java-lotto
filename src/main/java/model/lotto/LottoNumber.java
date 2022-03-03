@@ -11,12 +11,14 @@ public class LottoNumber {
 
 	public static void validateOutOfRange(int number, String message) {
 		if (number > LOTTO_MAX_NUM || number < LOTTO_MIN_NUM) {
-			throw new IllegalArgumentException(message);
+			throw new IllegalArgumentException(String.format(message, LOTTO_MIN_NUM, LOTTO_MAX_NUM));
 		}
 	}
 
-	public static boolean isSizeCorrect(int size) {
-		return size == LOTTO_SIZE;
+	public static void validateSize(List<Integer> numbers, String message) {
+		if (numbers.size() != LOTTO_SIZE) {
+			throw new IllegalArgumentException(String.format(message, LOTTO_SIZE));
+		}
 	}
 
 	public static void makeLottoNumbers(List<Integer> lottoNumbers) {
