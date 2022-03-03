@@ -4,18 +4,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import domain.generateStrategy.LotteryNumberMockGenerator;
 import domain.generatestrategy.LotteryNumberGenerator;
 import domain.lottery.Lotteries;
 import domain.lottery.LotteryGenerator;
-import domain.lottery.WinningLottery;
 
 @DisplayName("LotteryGame 테스트")
 public class LotteryGameTest {

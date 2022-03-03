@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import domain.generatestrategy.LotteryNumberGenerator;
 import domain.Rank;
 import domain.generateStrategy.LotteryNumberMockGenerator;
+import domain.generatestrategy.LotteryNumberGeneratorStrategy;
 
 public class LotteriesTest {
 
@@ -27,9 +28,9 @@ public class LotteriesTest {
 		//given
 		final List<Lottery> lotteriesNumber = new ArrayList<>();
 		final LotteryGenerator lotteryGenerator = new LotteryGenerator();
-		final LotteryNumberGenerator lotteryNumberGenerator = new LotteryNumberGenerator();
+		final LotteryNumberGeneratorStrategy lotteryNumberGeneratorStrategy = new LotteryNumberGenerator();
 		for (int i = 0; i < lotteryNumber; i++) {
-			lotteriesNumber.add(lotteryGenerator.generateLottery(lotteryNumberGenerator.generateNumbers()));
+			lotteriesNumber.add(lotteryGenerator.generateLottery(lotteryNumberGeneratorStrategy.generateNumbers()));
 		}
 		//when
 		final Lotteries lotteries = Lotteries.from(lotteriesNumber);
@@ -42,9 +43,9 @@ public class LotteriesTest {
 	void testRankingCount() {
 		//given
 		final List<Lottery> lotteriesNumbers = new ArrayList<>();
-		final LotteryNumberMockGenerator lotteryNumberMockGenerator = new LotteryNumberMockGenerator();
+		final LotteryNumberGeneratorStrategy lotteryNumberGeneratorStrategy = new LotteryNumberMockGenerator();
 		for (int i = 0; i < 6; i++) {
-			lotteriesNumbers.add(lotteryGenerator.generateLottery(lotteryNumberMockGenerator.generateNumbers()));
+			lotteriesNumbers.add(lotteryGenerator.generateLottery(lotteryNumberGeneratorStrategy.generateNumbers()));
 		}
 		final Lotteries lotteries = Lotteries.from(lotteriesNumbers);
 		//when
