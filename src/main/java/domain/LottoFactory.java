@@ -22,11 +22,11 @@ public class LottoFactory {
     }
 
     public static List<Lotto> generateAutoLottoGroup(final int count) {
-        final List<Lotto> issuedAutoLotto = AccumulateAutoLottoWithCount(new AutoLottoGenerator(), new Count(count));
+        final List<Lotto> issuedAutoLotto = accumulateAutoLottoWithCount(new AutoLottoGenerator(), new Count(count));
         return Collections.unmodifiableList(issuedAutoLotto);
     }
 
-    private static List<Lotto> AccumulateAutoLottoWithCount(final LottoGenerator lottoGenerator, Count count) {
+    private static List<Lotto> accumulateAutoLottoWithCount(final LottoGenerator lottoGenerator, Count count) {
         final List<Lotto> issuedLotto = new ArrayList<>();
         while (!count.isEnd()) {
             count = count.decrease();
