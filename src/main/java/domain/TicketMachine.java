@@ -9,13 +9,13 @@ public class TicketMachine {
 
 	public static Tickets generateTickets(final TicketCounter ticketCounter, final List<List<Integer>> manualLottoTickets,
 		final TicketingStrategy ticketingStrategy) {
-		List<Ticket> manualTickets = manual(ticketCounter, manualLottoTickets);
+		List<Ticket> manualTickets = manual(manualLottoTickets);
 		Tickets tickets = auto(manualTickets, ticketCounter, ticketingStrategy);
 
 		return tickets;
 	}
 
-	private static List<Ticket> manual(final TicketCounter ticketCounter, final List<List<Integer>> lottoTickets) {
+	private static List<Ticket> manual(final List<List<Integer>> lottoTickets) {
 		return lottoTickets.stream()
 			.map(Ticket::new)
 			.collect(Collectors.toList());
