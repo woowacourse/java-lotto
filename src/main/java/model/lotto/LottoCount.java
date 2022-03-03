@@ -7,12 +7,6 @@ public class LottoCount {
 
 	private int count;
 
-	// public LottoCount(String money) {
-	// 	InputValidateUtils.inputBlank(money, LOTTO_COUNT_BLANK_ERROR_MESSAGE);
-	// 	InputValidateUtils.inputNumber(money, LOTTO_COUNT_NUMBER_ERROR_MESSAGE);
-	// 	this.count = makeMoneyToNumber(money);
-	// }
-
 	public LottoCount(int money) {
 		validateThousandUnitInputMoney(money);
 		this.count = money / UNIT;
