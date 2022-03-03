@@ -3,9 +3,9 @@ package lotto.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoOrder;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTickets;
-import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
 import lotto.domain.lottonumbergenerator.LottoNumberAutoGenerator;
 import lotto.domain.lottonumbergenerator.LottoNumberManualGenerator;
@@ -14,15 +14,17 @@ import lotto.dto.LottoTicketsDto;
 
 public class LottoController {
 
-    private static final int LOTTO_PRICE = 1000;
-
-    private Money money;
+    private final LottoOrder lottoOrder;
     private LottoTickets lottoTickets;
 
-    public LottoTicketsDto buyLottoTickets(int inputMoney, List<List<Integer>> numbers) {
-        money = new Money(inputMoney, LOTTO_PRICE);
-        LottoTickets manualLottoTickets = getManualLottoTickets(numbers);
-        LottoTickets autoLottoTickets = getAutoLottoTickets();
+    public LottoController(LottoOrder lottoOrder) {
+        this.lottoOrder = lottoOrder;
+    }
+
+    public LottoTicketsDto publishLottoTickets() {
+        lottoOrder.billingManualLottoOrder();
+        LottoTickets manualLottoTickets = getManualLottoTickets(lottoOrder.getManualLottoNumbers());
+        LottoTickets autoLottoTickets = getAutoLottoTickets(lottoOrder.getNumberOfAutoLotto());
         lottoTickets = manualLottoTickets.combine(autoLottoTickets);
         return LottoTicketsDto.from(manualLottoTickets, autoLottoTickets);
     }
@@ -31,16 +33,15 @@ public class LottoController {
         WinningNumbers winningNumbers = new WinningNumbers(getWinningNumbers(lottoNumbers),
                 getBonusNumber(lottoNumber));
         LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets.getRanksWithWinningNumbers(winningNumbers));
-        return LottoResultDto.from(lottoStatistics, money.calculateYield(lottoStatistics.getLottoTotalReward()));
+        return LottoResultDto.from(lottoStatistics, lottoOrder.getYield(lottoStatistics.getLottoTotalReward()));
     }
 
     private LottoTickets getManualLottoTickets(List<List<Integer>> numbers) {
-        money = money.decrease(LOTTO_PRICE, numbers.size());
         return new LottoTickets(new LottoNumberManualGenerator(numbers), numbers.size());
     }
 
-    private LottoTickets getAutoLottoTickets() {
-        return new LottoTickets(new LottoNumberAutoGenerator(), money.getMaximumPurchase(LOTTO_PRICE));
+    private LottoTickets getAutoLottoTickets(int autoLottoCount) {
+        return new LottoTickets(new LottoNumberAutoGenerator(), autoLottoCount);
     }
 
     private LottoNumber getBonusNumber(int lottoNumber) {
