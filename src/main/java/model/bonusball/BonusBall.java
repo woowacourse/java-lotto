@@ -1,14 +1,11 @@
 package model.bonusball;
 
-import model.lotto.LottoNumber;
+import model.lottonumber.LottoNumber;
 
 public class BonusBall {
-	private static final String BONUS_BALL_RANGE_ERROR_MESSAGE = "[Error]: 보너스 볼은 %d~%d의 숫자만 입력해주세요.";
+	private final LottoNumber number;
 
-	private final int number;
-
-	public BonusBall(int number) {
-		LottoNumber.validateOutOfRange(number, BONUS_BALL_RANGE_ERROR_MESSAGE);
+	public BonusBall(LottoNumber number) {
 		this.number = number;
 	}
 

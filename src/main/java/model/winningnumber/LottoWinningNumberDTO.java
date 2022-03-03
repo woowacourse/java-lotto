@@ -3,14 +3,16 @@ package model.winningnumber;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoWinningNumberDTO {
-	private final List<Integer> winningNumbers;
+import model.lottonumber.LottoNumber;
 
-	public LottoWinningNumberDTO(List<Integer> winningNumbers) {
+public class LottoWinningNumberDTO {
+	private final List<LottoNumber> winningNumbers;
+
+	public LottoWinningNumberDTO(List<LottoNumber> winningNumbers) {
 		this.winningNumbers = new ArrayList<>(winningNumbers);
 	}
 
-	public List<Integer> getWinningNumbers() {
+	public List<LottoNumber> getWinningNumbers() {
 		return new ArrayList<>(winningNumbers);
 	}
 }

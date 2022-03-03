@@ -1,13 +1,15 @@
 package model.bonusball;
 
-public class BonusBallDTO {
-	private final int number;
+import model.lottonumber.LottoNumber;
 
-	public BonusBallDTO(int number) {
-		this.number = Integer.valueOf(number);
+public class BonusBallDTO {
+	private final LottoNumber number;
+
+	public BonusBallDTO(LottoNumber number) {
+		this.number = LottoNumber.valueOf(number);
 	}
 
-	public int getNumber() {
-		return Integer.valueOf(number);
+	public LottoNumber getNumber() {
+		return LottoNumber.valueOf(number);
 	}
 }

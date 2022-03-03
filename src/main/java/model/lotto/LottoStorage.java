@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.bonusball.BonusBallDTO;
+import model.lottonumber.RandomLottoNumbersGenerator;
 import model.result.RateOfReturn;
 import model.winningnumber.LottoWinningNumberDTO;
 

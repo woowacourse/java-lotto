@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import model.bonusball.BonusBall;
 import model.lotto.LottoCount;
 import model.lotto.LottoStorage;
+import model.lottonumber.LottoNumber;
 import model.result.Rank;
 import model.result.RateOfReturn;
 import model.winningnumber.LottoWinningNumber;
@@ -63,8 +64,8 @@ public class LottoController {
 			String input = inputView.inputWinningNumbers();
 			InputValidateUtils.inputBlank(input, WINNING_NUMBER_BLANK_ERROR_MESSAGE);
 			List<String> numbers = splitWinningNumber(input);
-			InputValidateUtils.inputNumber(String.join("", numbers), WINNING_NUMBER_ERROR_MESSAGE);
-			lottoWinningNumber = new LottoWinningNumber(makeInputWinningNumbersToNumbers(numbers));
+			//InputValidateUtils.inputNumber(String.join("", numbers), WINNING_NUMBER_ERROR_MESSAGE);
+			lottoWinningNumber = new LottoWinningNumber(makeInputWinningNumbersToLottoNumbers(numbers));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
 			storeWinningNumber();
@@ -77,9 +78,9 @@ public class LottoController {
 			.collect(Collectors.toList());
 	}
 
-	private List<Integer> makeInputWinningNumbersToNumbers(List<String> numbers) {
+	private List<LottoNumber> makeInputWinningNumbersToLottoNumbers(List<String> numbers) {
 		return numbers.stream()
-			.map(number -> Integer.parseInt(number))
+			.map(number -> LottoNumber.parseLottoNumber(number))
 			.collect(Collectors.toList());
 	}
 
@@ -87,10 +88,9 @@ public class LottoController {
 	private void storeBonusBall() {
 		try {
 			String input = inputView.inputBonusBall();
-			InputValidateUtils.inputBlankAndNumber(input, BONUS_BALL_BLANK_ERROR_MESSAGE,
-				BONUS_BALL_NUMBER_ERROR_MESSAGE);
-			bonusBall = new BonusBall(Integer.parseInt(input));
-			lottoWinningNumber.validateReduplicationWithBonusBall(Integer.parseInt(input));
+			InputValidateUtils.inputBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
+			bonusBall = new BonusBall(LottoNumber.parseLottoNumber(input));
+			lottoWinningNumber.validateReduplicationWithBonusBall(LottoNumber.valueOf(Integer.parseInt(input)));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
 			storeBonusBall();
