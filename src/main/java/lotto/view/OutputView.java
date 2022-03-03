@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.stream.Collectors;
 
+import lotto.domain.lotto.Count;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.Number;
@@ -21,8 +22,8 @@ public class OutputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.(\", \"를 기준으로 6개 입력해주세요.)");
     }
 
-    public static void printLottoCount(int manualLottoCount, int autoLottoCount) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLottoCount, autoLottoCount);
+    public static void printLottoCount(Count manualLottoCount, Count autoLottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLottoCount.value(), autoLottoCount.value());
     }
 
     public static void printLottos(Lottos lottos) {

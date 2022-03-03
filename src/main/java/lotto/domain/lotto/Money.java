@@ -15,11 +15,15 @@ public class Money {
         this.value = value;
     }
 
-    public void pay(int price, int count) {
-        if (value < price * count) {
-            throw new IllegalArgumentException("돈이 부족합니다.");
+    public Count countToBuyLotto() {
+        return new Count(value / Lotto.PRICE);
+    }
+
+    public void validateBuyableLottoCount(Count count) {
+        int buyableCount = value / Lotto.PRICE;
+        if (value < count.value() * Lotto.PRICE) {
+            throw new IllegalArgumentException(String.format("%d장 까지 살 수 있습니다.", buyableCount));
         }
-        value -= price * count;
     }
 
     public double getRateOfProfit(long totalMoney) {
@@ -45,10 +49,6 @@ public class Money {
         if (number % Lotto.PRICE != REMAINDER) {
             throw new IllegalArgumentException(String.format("%d으로 나누어 떨어져야 합니다.", Lotto.PRICE));
         }
-    }
-
-    public int countToBuyLotto() {
-        return value / Lotto.PRICE;
     }
 
     @Override

@@ -10,8 +10,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.domain.factory.MoneyFactory;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Money;
 
 public class MoneyTest {
 
@@ -89,44 +87,32 @@ public class MoneyTest {
             }
         }
     }
-    
-    @Nested
-    @DisplayName("로또를 구매하는 로직은")
-    class Pay {
-        @Nested
-        @DisplayName("구매할 상품의 가격과 개수가 주어지면")
-        class Context_with_can_pay {
-            @Test
-            @DisplayName("필요한 가격만큼 지불한다.")
-            void it_pay_money() {
-                Money money = MoneyFactory.valueOf("3000");
-                money.pay(Lotto.PRICE, 2);
-                assertThat(money.getValue()).isEqualTo(1000);
-            }
-        }
-
-        @Nested
-        @DisplayName("구매할 수 없는 상품의 가격과 개수가 주어지면")
-        class Context_with_cant_price {
-            @Test
-            @DisplayName("예외를 발생시킨다.")
-            void it_pay_money() {
-                Money money = MoneyFactory.valueOf("3000");
-                assertThatThrownBy(() -> money.pay(Lotto.PRICE, 4))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("돈이 부족합니다.");
-            }
-        }
-    }
 
     @Nested
     @DisplayName("살 수 있는 로또 개수를 알려주는 기능은")
-    class CountToBuyLotto {
+    class countToBuyLotto {
         @Test
         @DisplayName("살 수 있는 로또 개수를 알려준다.")
         void it_returns_count_to_buy_lotto() {
             Money money = new Money(5000);
-            assertThat(money.countToBuyLotto()).isEqualTo(5);
+            assertThat(money.countToBuyLotto().value()).isEqualTo(5);
+        }
+    }
+
+    @Nested
+    @DisplayName("입력한 수 만큼 로또를 살 수 있는지 알려주는 기능은")
+    class validateBuyableLottoCount {
+        @Nested
+        @DisplayName("살 수 없는 개수가 주어지면")
+        class Context_with_Count_to_cant_buy {
+            @Test
+            @DisplayName("예외를 발생시킨다.")
+            void it_throw_exception() {
+                Money money = new Money(5000);
+                assertThatThrownBy(() -> money.validateBuyableLottoCount(new Count(6)))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("5장 까지 살 수 있습니다.");
+            }
         }
     }
 }

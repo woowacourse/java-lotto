@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.lotto.Count;
 import lotto.domain.lotto.Money;
 import lotto.domain.factory.LottoFactory;
 import lotto.domain.factory.MoneyFactory;
@@ -12,9 +13,10 @@ public class LottosController {
 
     public Lottos buyLottos() {
         Money money = requestMoney();
-        int manualLottoCount = requestManualLottoCount(money);
-        int autoLottoCount = money.countToBuyLotto();
-        Lottos lottos = requestBuyLottos(manualLottoCount, autoLottoCount);
+        Count totalLottoCount = money.countToBuyLotto();
+        Count manualLottoCount = requestManualLottoCount(money);
+        Count autoLottoCount = totalLottoCount.subtract(manualLottoCount);
+        Lottos lottos = requestBuyLottos(manualLottoCount, autoLottoCount.value());
         OutputView.printLottoCount(manualLottoCount, autoLottoCount);
         OutputView.printLottos(lottos);
         return lottos;
@@ -30,11 +32,11 @@ public class LottosController {
         }
     }
 
-    private int requestManualLottoCount(Money money) {
+    private Count requestManualLottoCount(Money money) {
         try {
             String input = InputView.inputCountManualLotto();
-            int count = Integer.parseInt(input);
-            money.pay(Lotto.PRICE, count);
+            Count count = new Count(Integer.parseInt(input));
+            money.validateBuyableLottoCount(count);
             return count;
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
@@ -42,16 +44,17 @@ public class LottosController {
         }
     }
 
-    private Lottos requestBuyLottos(int manualLottoCount, int autoLottoCount) {
+    private Lottos requestBuyLottos(Count manualLottoCount, int autoLottoCount) {
         Lottos lottos = new Lottos();
         requestBuyManualLottoNumbers(manualLottoCount, lottos);
         buyAutoLottos(autoLottoCount, lottos);
         return lottos;
     }
 
-    private void requestBuyManualLottoNumbers(int manualLottoCount, Lottos lottos) {
+    private void requestBuyManualLottoNumbers(Count manualLottoCount, Lottos lottos) {
         OutputView.printRequestManualLottoNumberUI();
-        while (manualLottoCount-- > 0) {
+        int countValue = manualLottoCount.value();
+        while (countValue-- > 0) {
             Lotto lotto = requestManualLottoNumber();
             lottos.add(lotto);
         }
