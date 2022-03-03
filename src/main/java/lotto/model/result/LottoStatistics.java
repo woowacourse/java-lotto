@@ -1,5 +1,6 @@
 package lotto.model.result;
 
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
@@ -15,7 +16,8 @@ public class LottoStatistics {
 
     public LottoStatistics(LottoRanks ranks) {
         this.lottoRankCounter = ranks.getLottoRanks().stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                .collect(Collectors
+                        .groupingBy(Function.identity(), () -> new EnumMap<>(LottoRank.class), Collectors.counting()));
     }
 
     public long count(LottoRank rank) {
