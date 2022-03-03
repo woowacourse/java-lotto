@@ -30,9 +30,9 @@ public class Lottos {
 	}
 
 	private static void generateManualLotto(List<String[]> input, List<Lotto> lottos) {
-		for (String[] numbers : input) {
-			lottos.add(new Lotto(Lotto.generateManual(numbers)));
-		}
+		input.forEach(
+			numbers -> lottos.add(new Lotto(Lotto.generateManual(numbers)))
+		);
 	}
 
 	private static void generateAutoLotto(int autoCount, List<Lotto> lottos) {

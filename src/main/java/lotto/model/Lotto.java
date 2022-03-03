@@ -40,9 +40,8 @@ public class Lotto {
 	public static List<LottoBall> generateManual(String[] input) {
 		validate(input);
 		List<LottoBall> lottoBalls = new ArrayList<>();
-		for (String string : input) {
-			lottoBalls.add(LottoBall.from(string));
-		}
+		Arrays.stream(input)
+			.forEach(string -> lottoBalls.add(LottoBall.from(string)));
 		return lottoBalls;
 	}
 
