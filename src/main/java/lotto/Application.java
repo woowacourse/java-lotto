@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import lotto.controller.LottoController;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -11,8 +12,11 @@ public class Application {
         LottoController lottoController = new LottoController(money);
 
         int manualCount = InputView.requestManualCount(money);
-        ResultView.printLottos(lottoController.purchase(InputView.requestManualNumbers(manualCount)), manualCount);
-        ResultView.printResults(
-                lottoController.requestLottoResults(InputView.requestWinningNumber(), InputView.requestBonusNumber()));
+        List<List<Integer>> manualNumbers = InputView.requestManualNumbers(manualCount);
+        ResultView.printLottos(lottoController.purchase(manualNumbers), manualCount);
+
+        List<Integer> winningNumbers = InputView.requestWinningNumber();
+        int bonusNumber = InputView.requestBonusNumber();
+        ResultView.printResults(lottoController.requestLottoResults(winningNumbers, bonusNumber));
     }
 }
