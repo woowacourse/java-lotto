@@ -4,7 +4,6 @@ import domain.Lotto.Lotto;
 import domain.Lotto.WinningLotto;
 import domain.Result;
 import dto.LottoCountDto;
-import utils.ExceptionMessage;
 
 import java.util.ArrayList;
 import java.util.Collections;

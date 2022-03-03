@@ -71,3 +71,4 @@ public class LottoTest {
         assertThat(actual).isEqualTo(expected);
     }
 }
+

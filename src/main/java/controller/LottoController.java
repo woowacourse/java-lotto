@@ -57,3 +57,4 @@ public class LottoController {
         return RanksDto.from(resultStatus, incomeRate);
     }
 }
+

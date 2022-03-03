@@ -1,14 +1,10 @@
 import controller.LottoController;
-import domain.Lotto.LottoNumber;
 import domain.LottoGenerator.AutoLottoGenerator;
 import domain.LottoGenerator.ManualLottoGenerator;
 import dto.LottoCountDto;
 import dto.LottosDto;
 import view.InputView;
 import view.OutputView;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class Application {
     public static void main(String[] args) {

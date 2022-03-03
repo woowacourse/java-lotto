@@ -29,3 +29,4 @@ public class WinningLotto {
         return lottoNumbers.contains(bonusBall);
     }
 }
+

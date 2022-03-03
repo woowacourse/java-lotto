@@ -41,3 +41,4 @@ public class Lotto {
         return Collections.unmodifiableList(lotto);
     }
 }
+

@@ -15,7 +15,4 @@ public class ExceptionMessage {
 
     public static final String MANUAL_LOTTO_GENERATE_LIMIT = "자동 로또 생성기에서는 수동 로또 생성을 할 수 없습니다.";
     public static final String AUTO_LOTTO_GENERATE_LIMIT = "수동 로또 생성기에서는 자동 로또 생성을 할 수 없습니다.";
-
-
-
 }

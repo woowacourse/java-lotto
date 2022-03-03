@@ -32,3 +32,4 @@ public class AutoLottoGenerator implements LottoGenerator {
         throw new IllegalArgumentException(ExceptionMessage.MANUAL_LOTTO_GENERATE_LIMIT);
     }
 }
+
