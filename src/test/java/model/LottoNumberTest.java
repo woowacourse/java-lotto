@@ -1,6 +1,5 @@
 package model;
 
-import static model.LottoNumber.INVALID_LOTTO_NUMBER_RANGE;
 import static model.LottoNumber.LOTTO_NUMBER_POOL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -17,7 +16,7 @@ public class LottoNumberTest {
         // then
         assertThatThrownBy(() -> LottoNumber.valueOf(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(INVALID_LOTTO_NUMBER_RANGE);
+                .hasMessage("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
     }
 
     @ParameterizedTest

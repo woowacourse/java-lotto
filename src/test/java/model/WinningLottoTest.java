@@ -1,6 +1,5 @@
 package model;
 
-import static model.WinningLotto.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -69,7 +68,7 @@ class WinningLottoTest {
         // then
         assertThatThrownBy(() -> WinningLotto.of(winnings, bonusBallNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(WINNING_NUMBERS_CONTAIN_BONUS_BALL);
+                .hasMessage("[ERROR] 당첨 번호와 보너스 볼은 중복될 수 없습니다.");
     }
 
     private static Stream<Arguments> provideTicketForCountMatching() {

@@ -1,6 +1,5 @@
 package model;
 
-import static model.LottoPurchasingMoney.NOT_ENOUGH_MONEY;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
@@ -16,6 +15,6 @@ class LottoPurchasingMoneyTest {
         // then
         assertThatThrownBy(() -> LottoPurchasingMoney.valueOf(notEnoughAmount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(NOT_ENOUGH_MONEY);
+                .hasMessage("[ERROR] 로또를 구매하려면 최소 천원 이상 투입해야 합니다.");
     }
 }

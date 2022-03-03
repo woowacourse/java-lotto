@@ -1,7 +1,7 @@
 package model;
 
 public class LottoOrder {
-    static final String TOO_MANY_MANUAL = "[ERROR] 수동 로또 구매 수는 전체 구매 수를 넘을 수 없습니다.";
+    private static final String TOO_MANY_MANUAL = "[ERROR] 수동 로또 구매 수는 전체 구매 수를 넘을 수 없습니다.";
 
     private final int manualLottoCount;
     private final int autoLottoCount;

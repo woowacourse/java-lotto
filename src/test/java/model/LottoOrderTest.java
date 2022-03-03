@@ -17,7 +17,7 @@ class LottoOrderTest {
         // then
         assertThatThrownBy(() -> new LottoOrder(purchasingMoney, manualCount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoOrder.TOO_MANY_MANUAL);
+                .hasMessage("[ERROR] 수동 로또 구매 수는 전체 구매 수를 넘을 수 없습니다.");
     }
 
     @Test

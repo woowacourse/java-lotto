@@ -3,7 +3,7 @@ package model;
 import java.util.Objects;
 
 public class LottoPurchasingMoney {
-    static final String NOT_ENOUGH_MONEY = "[ERROR] 로또를 구매하려면 최소 천원 이상 투입해야 합니다.";
+    private static final String NOT_ENOUGH_MONEY = "[ERROR] 로또를 구매하려면 최소 천원 이상 투입해야 합니다.";
 
     private static final int LOTTO_PRICE = 1000;
 

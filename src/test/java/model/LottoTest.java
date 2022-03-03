@@ -1,7 +1,5 @@
 package model;
 
-import static model.Lotto.INVALID_LOTTO_NUMBER_COUNT;
-import static model.Lotto.LOTTO_NUMBER_DUPLICATED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -30,7 +28,7 @@ public class LottoTest {
         // then
         assertThatThrownBy(() -> Lotto.from(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LOTTO_NUMBER_DUPLICATED);
+                .hasMessage("[ERROR] 중복된 번호는 고를 수 없습니다.");
     }
 
     @ParameterizedTest
@@ -40,7 +38,7 @@ public class LottoTest {
         // then
         assertThatThrownBy(() -> Lotto.from(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(INVALID_LOTTO_NUMBER_COUNT);
+                .hasMessage("[ERROR] 로또 숫자는 6개만 입력해야 합니다");
     }
 
     @Test
