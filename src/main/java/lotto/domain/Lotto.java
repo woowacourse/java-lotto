@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.exception.LottoException;
+import lotto.generator.LottoGenerator;
 
 public class Lotto {
 
@@ -17,13 +18,13 @@ public class Lotto {
     }
 
     public static Lotto generateLottoByAuto() {
-        return new Lotto(LottoNumber.getRandomLottoNumbers(LOTTO_SIZE));
+        return new Lotto(LottoGenerator.getRandomLottoNumbers(LOTTO_SIZE));
     }
 
     public static Lotto generateLottoByManual(List<Integer> numbers) {
         checkSize(numbers);
         checkDuplication(numbers);
-        return new Lotto(convertToLottoNumbers(numbers));
+        return new Lotto(LottoGenerator.convertToLottoNumbers(numbers));
     }
 
     private static void checkSize(List<Integer> numbers) {
@@ -46,13 +47,6 @@ public class Lotto {
         return new HashSet<>(numbers).size() != numbers.size();
     }
 
-    private static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::getByNumber)
-                .sorted()
-                .collect(Collectors.toList());
-    }
-
     public Rank getRank(WinningNumbers winningNumbers) {
         int winningNumberMatchCount = winningNumbers.getWinningLottoMatchCount(lotto);
         boolean bonusNumberMatch = winningNumbers.isBonusNumberContainedAt(lotto);
@@ -71,7 +65,7 @@ public class Lotto {
 
     public List<Integer> getLottoToInteger() {
         return lotto.stream()
-                .map(LottoNumber::getNumber)
+                .map(LottoNumber::getLottoNumber)
                 .collect(Collectors.toList());
     }
 }
