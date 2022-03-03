@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.LottoGame;
 import lotto.domain.generator.LottoGenerator;
@@ -31,6 +31,6 @@ public class LottoController {
     }
 
     private void purchaseNothing(Money money, LottoGame lottoGame) {
-        ResultView.printPurchaseLottos(lottoGame.purchase(money, Collections.EMPTY_LIST, new LottoGenerator()));
+        ResultView.printPurchaseLottos(lottoGame.purchase(money, new ArrayList<>(), new LottoGenerator()));
     }
 }

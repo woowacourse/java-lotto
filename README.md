@@ -136,7 +136,16 @@
         - 어떤 숫자로 LottoNumber 생성 요청이 왔을 때, 해당 자료구조에 기존에 만들어둔 인스턴스가 있는지 확인하고, 있으면 그대로 반환, 없으면 새로 생성한 후 캐싱한 뒤 반환한다.
         - 캐싱한 자료구조를 위한 별도 클래스 (pool)를 만들어도 좋다. (혹은 LottoNumber 내부에 있어도 좋다.)
         - 위 경로 외에 LottoNumber를 생성할 수 있는 다른 방법이 있어서는 안 된다. (캐싱하는 의미가 없어지므로)
-- [ ] Collections.EMPTY_LIST, Collections.emptyList()의 사용을 지양해야하는 이유는 무엇일까?
+- [x] Collections.EMPTY_LIST, Collections.emptyList()의 사용을 지양해야하는 이유는 무엇일까?
+    - [EmptyList() vs new](https://www.baeldung.com/java-collections-emptylist-new-list)
+    - <궁금한점> 수정이 안되는 빈 List를 사용하고 싶다면 EmptyList()를 써도 되지 않을까?
+        - 원시값에 final을 써서 수정하지 못하게 하는 것 처럼 빈 수정 불가 List를 쓰고 싶다면 쓸 수도 있지 않을까?
+        - 어쩌면 어떤 로직에서 수정되지 않는 빈 List를 꼭 써야한다면 설계를 잘못한건가?
+    - EmptyList와 new ArrayList<>()의 차이점은 불변과 가변이다.
+    - 나는 데이터가 없는 List를 사용하기 위해 Collections.EMPTY_LIST를 사용했다. `new ArrayList<>()`도 데이터가 없는 List를 반환한다.
+    - 하지만 이 List는 구매를 할 수 없는 경우에 실행되는 메서드에서 사용된다. 그래서 이후에도 데이터 추가 등 수정이 없어야 한다고 생각해서 Collections.EMPTY_LIST를 사용했었다.
+    - Collections.EMPTY_LIST()를 지양해야 하는 이유 중 하나가 제네릭과 관련될 수도 있다고 생각했지만 `Collections.<>emptyList()` 또는 `List.<>of()`으로
+      제네릭 설정도 되는 것 같다. (List가 데이터를 가질 수 없기 때문에 제네릭이 중요하지 않을 수도 있지만 그래도 잘못설정하면 컴파일이 되지 않는다.)
 - [ ] 변수명으로 유추하려면 할 수 있는 상황이라도 메서드를 통해 추상화하면 더 읽기 좋은 코드가 될 수 있지 않을까?
 - [ ] 공백 라인도 중요한 의미를 가지게 되는데 문맥에 맞게 공백라인을 사용해보면 좋을 것 같다.
 - [x] LottoPrize에서 2등을 Early return을 하는데 filter로 다시 검사해야할까?
