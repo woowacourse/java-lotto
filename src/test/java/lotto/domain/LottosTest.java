@@ -12,14 +12,12 @@ public class LottosTest {
     @Test
     @DisplayName("원하는 만큼 수동 + 자동으로 로또티켓을 구입")
     void buyLottos() {
-        Lottos lottos = new Lottos();
-        List<Lotto> manualLottos = Arrays.asList(
-                Lotto.generateLottoByManual(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                Lotto.generateLottoByManual(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                Lotto.generateLottoByManual(Arrays.asList(1, 2, 3, 4, 5, 6))
+        List<List<Integer>> manualLottos = Arrays.asList(
+                Arrays.asList(1, 2, 3, 4, 5, 6),
+                Arrays.asList(1, 2, 3, 4, 5, 6),
+                Arrays.asList(1, 2, 3, 4, 5, 6)
         );
-        lottos.buyLottosByManual(manualLottos);
-        lottos.buyLottosByAuto(7);
+        Lottos lottos = new Lottos(manualLottos, 7);
         assertThat(lottos.getLottos().size()).isEqualTo(10);
     }
 }

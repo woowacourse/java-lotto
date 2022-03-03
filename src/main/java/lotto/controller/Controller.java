@@ -1,8 +1,6 @@
 package lotto.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import lotto.domain.Lotto;
 import lotto.domain.LottoCounter;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -15,14 +13,12 @@ public class Controller {
 
     public void run() {
         Money money = getMoney();
-        Lottos lottos = new Lottos();
         LottoCounter lottoCounter = getLottoCounter(money);
-        lottos.buyLottosByManual(getManualLottos(lottoCounter));
-        lottos.buyLottosByAuto(lottoCounter.getAutoLottoCount());
+        Lottos lottos = getLottos(InputView.InputManualLottos(lottoCounter.getManualLottoCount()),
+                lottoCounter.getAutoLottoCount());
         OutputView.printLottos(lottoCounter, lottos);
 
-        WinningNumbers winningNumbers = getWinningNumbers();
-        RankCounter rankCounter = new RankCounter(lottos, winningNumbers);
+        RankCounter rankCounter = new RankCounter(lottos, getWinningNumbers());
         OutputView.printWinningStatistic(money, rankCounter);
     }
 
@@ -45,15 +41,12 @@ public class Controller {
         }
     }
 
-    private List<Lotto> getManualLottos(LottoCounter lottoCounter) {
+    private Lottos getLottos(List<List<Integer>> manualLottos, int autoLottoCount) {
         try {
-            return InputView.InputManualLottos(lottoCounter.getManualLottoCount())
-                    .stream()
-                    .map(Lotto::generateLottoByManual)
-                    .collect(Collectors.toList());
+            return new Lottos(manualLottos, autoLottoCount);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return getManualLottos(lottoCounter);
+            return getLottos(manualLottos, autoLottoCount);
         }
     }
 

@@ -3,20 +3,24 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private final List<Lotto> lottos;
+    private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos() {
-        this.lottos = new ArrayList<>();
+    public Lottos(List<List<Integer>> manualLottos, int autoLottoCount) {
+        buyLottosByManual(manualLottos);
+        buyLottosByAuto(autoLottoCount);
     }
 
-    public void buyLottosByManual(List<Lotto> manualLottos) {
-        lottos.addAll(manualLottos);
+    private void buyLottosByManual(List<List<Integer>> manualLottos) {
+        lottos.addAll(manualLottos.stream()
+                .map(Lotto::generateLottoByManual)
+                .collect(Collectors.toList()));
     }
 
-    public void buyLottosByAuto(int autoLottoCount) {
+    private void buyLottosByAuto(int autoLottoCount) {
         for (int i = 0; i < autoLottoCount; i++) {
             lottos.add(Lotto.generateLottoByAuto());
         }
