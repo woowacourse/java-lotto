@@ -1,50 +1,68 @@
 package service;
 
+import domain.Count;
 import domain.Lotto;
 import domain.LottoFactory;
 import domain.LottoNumber;
 import domain.Money;
 import domain.Result;
-import dto.LottoDto;
+import domain.generator.AutoLottoGenerator;
+import domain.generator.LottoGenerator;
+import domain.generator.ManualLottoGenerator;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoService {
 
-    private static final int LOTTO_SIZE = 6;
     private static final int AUTO_LOTTO_COUNT_LOWER_BOUND = 0;
     private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "보너스 볼 번호가 지난 주 당첨 번호와 일치할 수 없습니다.";
-    private static final String ERROR_TOTAL_LOTTO_SIZE_MESSAGE = "번호는 6개를 입력하셔야 합니다.";
     private static final String ERROR_MANUAL_LOTTO_SIZE_MESSAGE = "전체 로또 갯수보다 클 수 없습니다.";
 
-    private Lotto lastWinLotto;
-    private List<Lotto> issuedLotto;
-
-    public void initLastWinLotto(final List<String> inputLotto) {
-        validate(inputLotto);
-        this.lastWinLotto = Lotto.fromInput(inputLotto);
-    }
-
-    private void validate(final List<String> inputLotto) {
-        if (inputLotto.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(ERROR_TOTAL_LOTTO_SIZE_MESSAGE);
+    public List<Lotto> issueManualLottoGroup(final List<List<String>> issuedManualLottoInput) {
+        final List<Lotto> issuedManualLotto = new ArrayList<>();
+        for (List<String> manualLottoInput : issuedManualLottoInput) {
+            issuedManualLotto.add(LottoFactory.generateLotto(new ManualLottoGenerator(manualLottoInput)));
         }
+        return Collections.unmodifiableList(issuedManualLotto);
     }
 
-    public void issueLotto(final Money money, final List<List<String>> issuedManualLottoInput) {
-        final List<Lotto> issuedManualLotto = LottoFactory.generateManualLottoGroup(issuedManualLottoInput);
-        this.issuedLotto = addAutoLotto(money, issuedManualLotto);
+    public List<Lotto> issueLotto(final Money totalMoney, final List<Lotto> issuedManualLotto) {
+        return issueAutoLottoGroup(totalMoney, issuedManualLotto);
     }
 
-    private List<Lotto> addAutoLotto(final Money money, final List<Lotto> issuedManualLotto) {
-        final int autoCount = money.getLottoCount() - issuedManualLotto.size();
+    private List<Lotto> issueAutoLottoGroup(final Money totalMoney, final List<Lotto> issuedManualLotto) {
+        final int autoCount = totalMoney.getLottoCount() - issuedManualLotto.size();
         validate(autoCount);
         if (autoCount > AUTO_LOTTO_COUNT_LOWER_BOUND) {
-            final List<Lotto> issuedAutoLotto = LottoFactory.generateAutoLottoGroup(autoCount);
+            final List<Lotto> issuedAutoLotto = generateAutoLottoGroup(autoCount);
             return concatLotto(issuedManualLotto, issuedAutoLotto);
         }
         return issuedManualLotto;
+    }
+
+    public Result calculateResult(final List<Lotto> issuedLotto, final Lotto winLotto,
+                                  final LottoNumber bonusNumber) {
+        if (isBonusNumberContain(winLotto, bonusNumber)) {
+            throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
+        }
+        return new Result(issuedLotto, winLotto, bonusNumber);
+    }
+
+    public static List<Lotto> generateAutoLottoGroup(final int count) {
+        final List<Lotto> issuedAutoLotto = accumulateAutoLottoWithCount(new AutoLottoGenerator(), new Count(count));
+        return Collections.unmodifiableList(issuedAutoLotto);
+    }
+
+    private static List<Lotto> accumulateAutoLottoWithCount(final LottoGenerator lottoGenerator, Count count) {
+        final List<Lotto> issuedLotto = new ArrayList<>();
+        while (!count.isEnd()) {
+            count = count.decrease();
+            issuedLotto.add(LottoFactory.generateLotto(lottoGenerator));
+        }
+        return issuedLotto;
     }
 
     private void validate(final int autoCount) {
@@ -59,21 +77,7 @@ public class LottoService {
                 issuedAutoLotto.stream())
             .collect(Collectors.toList());
     }
-
-    public List<LottoDto> getIssuedLotto() {
-        return issuedLotto.stream()
-            .map(LottoDto::from)
-            .collect(Collectors.toUnmodifiableList());
-    }
-
-    public Result calculateResult(final int bonusNumberInput) {
-        final LottoNumber bonusNumber = new LottoNumber(bonusNumberInput);
-        if (isBonusNumberContain(this.lastWinLotto, bonusNumber)) {
-            throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
-        }
-        return new Result(this.issuedLotto, this.lastWinLotto, bonusNumber);
-    }
-
+    
     private boolean isBonusNumberContain(final Lotto lotto, final LottoNumber bonusNumber) {
         return lotto.isContainNumber(bonusNumber);
     }

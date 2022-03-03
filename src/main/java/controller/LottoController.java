@@ -1,9 +1,14 @@
 package controller;
 
+import domain.Count;
+import domain.Lotto;
+import domain.LottoNumber;
 import domain.Money;
 import domain.Result;
+import dto.LottoDto;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import service.LottoService;
 import view.InputView;
 import view.OutputView;
@@ -11,7 +16,6 @@ import view.OutputView;
 public class LottoController {
 
     private static final String ERROR_MESSAGE = "[ERROR] ";
-    private static final int LOTTO_COUNT_IS_NONE_NUMBER = 0;
 
     private final InputView inputView;
     private final OutputView outputView;
@@ -25,11 +29,13 @@ public class LottoController {
 
     public void start() {
         final Money totalMoney = getMoney();
-        issueLotto(totalMoney);
+        final List<Lotto> issuedLotto = issueLotto(totalMoney);
 
-        initLastWinLotto();
+        final Lotto winLotto = getWinLotto();
+        final LottoNumber bonusNumber = getBonusNumber();
+        final Result result = lottoService.calculateResult(issuedLotto, winLotto, bonusNumber);
 
-        printResult(totalMoney, getResult());
+        printResult(totalMoney, result);
     }
 
     private Money getMoney() {
@@ -41,48 +47,59 @@ public class LottoController {
         }
     }
 
-    private void issueLotto(final Money money) {
-        final int manualCount = getManualCount();
-        lottoService.issueLotto(money, getManualLottoWith(manualCount));
-        outputView.printLotto(lottoService.getIssuedLotto(), manualCount);
+    private List<Lotto> issueLotto(final Money totalMoney) {
+        final Count manualCount = getManualCount();
+        final List<Lotto> issuedManualLotto = getManualLottoWith(manualCount);
+        final List<Lotto> issuedLotto = lottoService.issueLotto(totalMoney, issuedManualLotto);
+        outputView.printLotto(getIssuedLottoDto(issuedLotto), manualCount.getCount());
+        return issuedLotto;
     }
 
-    private int getManualCount() {
+    private List<LottoDto> getIssuedLottoDto(final List<Lotto> issuedLotto) {
+        return issuedLotto.stream()
+            .map(LottoDto::from)
+            .collect(Collectors.toList());
+    }
+
+    private Count getManualCount() {
         try {
-            return inputView.getManualCount();
+            return new Count(inputView.getManualCount());
         } catch (Exception e) {
             System.out.println(ERROR_MESSAGE + e.getMessage());
             return getManualCount();
         }
     }
 
-    private List<List<String>> getManualLottoWith(final int manualCount) {
-        if (manualCount == LOTTO_COUNT_IS_NONE_NUMBER) {
+    private List<Lotto> getManualLottoWith(final Count manualCount) {
+        if (manualCount.isEnd()) {
             return Collections.emptyList();
         }
         try {
-            return inputView.getManualLotto(manualCount);
+            final List<List<String>> manualLottoInput = inputView.getManualLotto(manualCount.getCount());
+            return lottoService.issueManualLottoGroup(manualLottoInput);
         } catch (Exception e) {
             System.out.println(ERROR_MESSAGE + e.getMessage());
             return getManualLottoWith(getManualCount());
         }
     }
 
-    private void initLastWinLotto() {
+    private Lotto getWinLotto() {
         try {
-            lottoService.initLastWinLotto(inputView.getWinLotto());
+            final List<String> winLotto = inputView.getWinLotto();
+            return Lotto.fromInput(winLotto);
         } catch (Exception e) {
             System.out.println(ERROR_MESSAGE + e.getMessage());
-            initLastWinLotto();
+            return getWinLotto();
         }
     }
 
-    private Result getResult() {
+    private LottoNumber getBonusNumber() {
         try {
-            return lottoService.calculateResult(inputView.getBonusNumber());
+            final int bonusNumber = inputView.getBonusNumber();
+            return new LottoNumber(bonusNumber);
         } catch (Exception e) {
             System.out.println(ERROR_MESSAGE + e.getMessage());
-            return getResult();
+            return getBonusNumber();
         }
     }
 

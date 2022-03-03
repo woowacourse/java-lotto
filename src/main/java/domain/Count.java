@@ -19,6 +19,10 @@ public class Count {
         return new Count(this.count - COUNT_DECREASE_UNIT);
     }
 
+    public int getCount() {
+        return this.count;
+    }
+
     @Override
     public boolean equals(final Object object) {
         if (this == object) {
