@@ -12,8 +12,8 @@ public class RandomLottoGeneratorTest {
     @Test
     @DisplayName("로또 amount만큼 로또 생성에 성공한다.")
     void lotto_generate() {
-        LottoGenerator lottoGenerator = new RandomLottoGenerator();
-        List<Lotto> lottos = lottoGenerator.generate(3);
+        LottoGenerator lottoGenerator = new RandomLottoGenerator(3);
+        List<Lotto> lottos = lottoGenerator.generate();
 
         assertThat(lottos.size()).isEqualTo(3);
     }

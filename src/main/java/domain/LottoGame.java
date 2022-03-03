@@ -8,7 +8,7 @@ public class LottoGame {
     private WinningChecker winningChecker;
 
     public LottoGame(Money money, LottoGenerator lottoGenerator) {
-        this.lottos = new Lottos(lottoGenerator.generate(money.convertToAmount()));
+        this.lottos = new Lottos(lottoGenerator.generate());
     }
 
     public WinningChecker makeResult(WinningNumbers winningNumbers) {

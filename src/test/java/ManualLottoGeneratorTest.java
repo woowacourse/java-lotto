@@ -17,7 +17,7 @@ public class ManualLottoGeneratorTest {
             List.of(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 5, 6),
                 List.of(1, 2, 3, 4, 5, 6)));
 
-        assertThat(manualLottoGenerator.generate(3).size()).isEqualTo(3);
+        assertThat(manualLottoGenerator.generate().size()).isEqualTo(3);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class ManualLottoGeneratorTest {
         LottoGenerator manualLottoGenerator = new ManualLottoGenerator(1,
             List.of(List.of(1, 2, 3, 4, 5, 6)));
 
-        assertThat(manualLottoGenerator.generate(1)
+        assertThat(manualLottoGenerator.generate()
             .get(0)
             .getLottoNumbers())
             .containsExactly(1, 2, 3, 4, 5, 6);
@@ -41,7 +41,7 @@ public class ManualLottoGeneratorTest {
                 List.of(1, 2, 3, 4, 5, 6)));
 
         assertThatThrownBy(
-            () -> manualLottoGenerator.generate(3)
+            () -> manualLottoGenerator.generate()
         ).isInstanceOf(IllegalArgumentException.class);
 
     }
@@ -51,7 +51,7 @@ public class ManualLottoGeneratorTest {
     void no_maualLotto() {
         LottoGenerator manualLottoGenerator = new ManualLottoGenerator(0, new ArrayList<>());
 
-        assertThat(manualLottoGenerator.generate(0).size())
+        assertThat(manualLottoGenerator.generate().size())
             .isEqualTo(0);
 
     }

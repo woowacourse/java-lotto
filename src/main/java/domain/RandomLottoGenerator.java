@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -17,8 +18,14 @@ public class RandomLottoGenerator implements LottoGenerator {
     private static final List<Integer> numbers = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
         .boxed().collect(Collectors.toList());
 
+    private final int amount;
+
+    public RandomLottoGenerator(int amount) {
+        this.amount = amount;
+    }
+
     @Override
-    public List<Lotto> generate(int amount) {
+    public List<Lotto> generate() {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < amount; ++i) {

@@ -10,8 +10,10 @@ public class LottoController {
 
     public static void main(String[] args) {
 
-        LottoGame lottoGame = new LottoGame(new Money(InputView.askMoneyInput()),
-            new RandomLottoGenerator());
+        Money money = new Money(InputView.askMoneyInput());
+
+        LottoGame lottoGame = new LottoGame(money,
+            new RandomLottoGenerator(money.convertToAmount()));
 
         OutputView.printLottosInformations(lottoGame.getLottos());
 

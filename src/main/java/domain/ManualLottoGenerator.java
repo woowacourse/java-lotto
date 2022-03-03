@@ -14,7 +14,7 @@ public class ManualLottoGenerator implements LottoGenerator{
     }
 
     @Override
-    public List<Lotto> generate(int amount) {
+    public List<Lotto> generate() {
 
         List<Lotto> lottos = new ArrayList<>();
 

@@ -16,7 +16,7 @@ public class LottoGameTest {
     @Test
     @DisplayName("입력받은 금액 로또로 바꿔주는 기능 테스트")
     void buyLottoTest() {
-        LottoGame lottoGame = new LottoGame(new Money(14000), new RandomLottoGenerator());
+        LottoGame lottoGame = new LottoGame(new Money(14000), new RandomLottoGenerator(14));
         assertThat(lottoGame.getLottos().getSize()).isEqualTo(14);
     }
 
@@ -31,7 +31,7 @@ public class LottoGameTest {
         Money money = new Money(3000);
 
         LottoGame lottoGame = new LottoGame(money,
-            (mockAmount) -> List.of(lotto1, lotto2, lotto3));
+            () -> List.of(lotto1, lotto2, lotto3));
 
         WinningNumbers winningNumbers = new WinningNumbers(
             new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)), 9);
