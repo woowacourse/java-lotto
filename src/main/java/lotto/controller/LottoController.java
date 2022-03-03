@@ -32,8 +32,8 @@ public class LottoController {
 
     private Money initMoney() {
         try {
-            String inputValue = askMoneyInput();
-            return new Money(inputValue);
+            int moneyInput = askMoneyInput();
+            return new Money(moneyInput);
         } catch (IllegalArgumentException exception) {
             printErrorMessage(exception);
             return initMoney();
@@ -47,7 +47,7 @@ public class LottoController {
 
     private Count initManualCount() {
         try {
-            String inputValue = InputView.askManualCountInput();
+            int inputValue = InputView.askManualCountInput();
             return new Count(money, inputValue);
         } catch (IllegalArgumentException exception) {
             printErrorMessage(exception);
@@ -64,9 +64,9 @@ public class LottoController {
 
     private List<ChoiceNumber> initManualNumbers(int count) {
         try {
-            List<String> inputValues = InputView.askManualNumbers(count);
+            List<List<Integer>> inputValues = askManualNumbers(count);
             List<ChoiceNumber> manualNumbers = new ArrayList<>();
-            for (String inputValue : inputValues) {
+            for (List<Integer> inputValue : inputValues) {
                 manualNumbers.add(new ChoiceNumber(inputValue));
             }
             return manualNumbers;
@@ -84,7 +84,7 @@ public class LottoController {
 
     private ChoiceNumber initChoiceNumber() {
         try {
-            String inputValue = askWinningNumbers();
+            List<Integer> inputValue = askWinningNumbers();
             return new ChoiceNumber(inputValue);
         } catch (IllegalArgumentException exception) {
             printErrorMessage(exception);
@@ -94,7 +94,7 @@ public class LottoController {
 
     private BonusNumber initBonusNumber(ChoiceNumber choiceNumber) {
         try {
-            String inputValue = askBonusNumber();
+            int inputValue = askBonusNumber();
             return new BonusNumber(inputValue, choiceNumber);
         } catch (IllegalArgumentException exception) {
             printErrorMessage(exception);

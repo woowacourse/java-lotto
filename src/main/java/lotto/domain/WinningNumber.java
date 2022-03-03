@@ -12,7 +12,6 @@ public class WinningNumber {
     public LottoRank findLottoRank(ChoiceNumber choiceNumber) {
         int sameCount = findSameValueWith(choiceNumber);
         boolean isBonus = containsBonusNumber(choiceNumber);
-
         return LottoRank.valueOf(sameCount, isBonus);
     }
 

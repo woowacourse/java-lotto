@@ -11,23 +11,10 @@ public class BonusNumber {
 
     private final int bonusNumber;
 
-    public BonusNumber(String input, ChoiceNumber choiceNumber) {
-        int value = convertToInt(input);
-        validateBonusNumber(value, choiceNumber);
-        bonusNumber = Integer.parseInt(input);
-    }
-
-    private void validateBonusNumber(int value, ChoiceNumber choiceNumber) {
+    public BonusNumber(int value, ChoiceNumber choiceNumber) {
         checkRange(value);
         checkDuplicate(value, choiceNumber.getChoiceNumbers());
-    }
-
-    private int convertToInt(String text) {
-        try {
-            return Integer.parseInt(text);
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자입니다.");
-        }
+        bonusNumber = value;
     }
 
     private void checkRange(Integer value) {
