@@ -21,6 +21,6 @@ public class LottoGame {
     }
 
     public Lottos getLottos() {
-        return lottos;
+        return new Lottos(lottos.getLottos());
     }
 }
