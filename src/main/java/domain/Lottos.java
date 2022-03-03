@@ -3,11 +3,13 @@ package domain;
 import static java.util.stream.Collectors.toList;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
 public class Lottos {
+    public static final Lottos EMPTY_LOTTOS = new Lottos();
     private static final String ERROR_MESSAGE_FOR_NULL_OR_EMPTY_LIST = "Lotto 목록이 비었습니다";
 
     private final List<Lotto> lottos;
@@ -18,6 +20,10 @@ public class Lottos {
         validateEmpty(lottos);
 
         this.lottos = copiedLottos;
+    }
+
+    private Lottos() {
+        this.lottos = Collections.emptyList();
     }
 
     private void validateEmpty(List<Lotto> lottos) {
