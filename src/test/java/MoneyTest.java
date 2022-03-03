@@ -26,4 +26,18 @@ public class MoneyTest {
             .hasMessageContaining("[ERROR]: 금액이 부족해 로또를 구입할 수 없습니다. (로또는 안사는게 이득임.)");
     }
 
+    @Test
+    @DisplayName("돈 보다 적은 양의 로또 장 수 들어올 시 true 반환")
+    void money_isAffordable_true() {
+        Money money = new Money(2000);
+        assertThat(money.isAffordable(1)).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("돈 보다 많은 양의 로또 장 수 들어올 시 false 반환")
+    void money_isAffordable_false() {
+        Money money = new Money(2000);
+        assertThat(money.isAffordable(3)).isEqualTo(false);
+    }
+
 }
