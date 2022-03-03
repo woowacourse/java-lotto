@@ -48,7 +48,7 @@ public class OutputView {
         }
     }
 
-    private static void printResult(int matchNumber, int value, int count, int bonusMoney) {
+    private static void printResult(int matchNumber, long value, int count, long bonusMoney) {
         if (value == bonusMoney) {
             System.out.printf(RESULT_LOTTO_BONUS_BALL, matchNumber, value, count);
             return;
