@@ -6,9 +6,9 @@ public class Wallet {
     private static final int EXPECTED_REMAIN = 0;
     private static final int EMPTY_AUTO_QUANTITY = 0;
     private static final int ZERO_FOR_EMPTY_WALLET = 0;
-    private static final int MINIMUM_MANUAL_LOTTO_QUANTITY_TO_BUY = 1;
+    private static final int MINIMUM_MANUAL_LOTTO_QUANTITY_TO_BUY = 0;
     private static final String ERROR_MESSAGE_FOR_INVALID_INPUT_MONEY = "금액은 1000원 이상, 1000원 단위로 입력해주세요";
-    private static final String ERROR_MESSAGE_FOR_BUYING_LESS_THEN_ONE = "구매 수량은 1장 이상이어야 합니다";
+    private static final String ERROR_MESSAGE_FOR_BUYING_LESS_THEN_ONE = "구매 수량은 0 이상이어야 합니다";
     private static final String ERROR_MESSAGE_FOR_NOT_ENOUGH_MONEY = " 이상 구매할 수 없습니다 : ";
 
     private int currentBalance;

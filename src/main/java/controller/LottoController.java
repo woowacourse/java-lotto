@@ -15,6 +15,8 @@ import view.InputView;
 import view.ResultView;
 
 public class LottoController {
+    public static final int ZERO_FOR_EMPTY_QUANTITY = 0;
+
     private final LottoService manualLottoService;
     private final LottoService autoLottoService;
 
@@ -67,15 +69,27 @@ public class LottoController {
     }
 
     private Lottos setupLottos(Wallet wallet) {
-        InputView.printToInformManualLottoInput();
-        Lottos manualLottos = manualLottoService.createLottosByQuantity(wallet.getManualQuantity());
-        if (wallet.hasNoAutoQuantity()) {
-            return manualLottos;
-        }
-
-        Lottos autoLottos = autoLottoService.createLottosByQuantity(wallet.getAutoQuantity());
+        Lottos manualLottos = setupManualLottos(wallet);
+        Lottos autoLottos = setupAutoLottos(wallet);
 
         return manualLottos.merge(autoLottos);
+    }
+
+    private Lottos setupManualLottos(Wallet wallet) {
+        if (wallet.getManualQuantity() == ZERO_FOR_EMPTY_QUANTITY) {
+            return Lottos.EMPTY_LOTTOS;
+        }
+
+        InputView.printToInformManualLottoInput();
+        return manualLottoService.createLottosByQuantity(wallet.getManualQuantity());
+    }
+
+    private Lottos setupAutoLottos(Wallet wallet) {
+        if (wallet.getAutoQuantity() == ZERO_FOR_EMPTY_QUANTITY) {
+            return Lottos.EMPTY_LOTTOS;
+        }
+
+        return autoLottoService.createLottosByQuantity(wallet.getAutoQuantity());
     }
 
     private WinningLotto setupWinningLotto() {
