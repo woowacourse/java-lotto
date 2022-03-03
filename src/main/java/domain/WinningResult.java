@@ -53,11 +53,6 @@ public class WinningResult {
         return new LottoQuantity(lottos.getLottos().size());
     }
 
-    private WinningResult(Builder builder) {
-        this.winningResult = builder.winningResult;
-        this.purchasedLottoQuantity = builder.purchasedLottoQuantity;
-    }
-
     public double calculateProfitRatio() {
         long totalPrice = calculateTotalPrize();
         double purchaseMoney = purchasedLottoQuantity.getLottoQuantity() * Lotto.SINGLE_LOTTO_PRICE;
@@ -78,31 +73,6 @@ public class WinningResult {
 
     public Map<Rank, WinningCount> getWinningResult() {
         return winningResult;
-    }
-
-    public WinningCount getWinningCountByRank(Rank rank) {
-        return winningResult.get(rank);
-    }
-
-    public static class Builder {
-        private final Map<Rank, WinningCount> winningResult = new HashMap<>();
-        private final LottoQuantity purchasedLottoQuantity;
-
-        public Builder(LottoQuantity purchasedLottoQuantity) {
-            for (Rank rank : Rank.values()) {
-                winningResult.put(rank, new WinningCount(0));
-            }
-            this.purchasedLottoQuantity = purchasedLottoQuantity;
-        }
-
-        public Builder setWinningCountByRank(Rank rank, WinningCount winningCount) {
-            winningResult.put(rank, winningCount);
-            return this;
-        }
-
-        public WinningResult build() {
-            return new WinningResult(this);
-        }
     }
 
     @Override

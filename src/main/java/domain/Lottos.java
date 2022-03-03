@@ -31,25 +31,6 @@ public class Lottos {
         return lottos;
     }
 
-    public WinningResult getWinningResultByWinningLotto(WinningLotto winningLotto) {
-        LottoQuantity lottoQuantity = new LottoQuantity(lottos.size());
-        WinningResult.Builder builder = new WinningResult.Builder(lottoQuantity);
-
-        for (Rank rank : Rank.values()) {
-            builder.setWinningCountByRank(rank, getWinningCountByRank(winningLotto, rank));
-        }
-
-        return builder.build();
-    }
-
-    private WinningCount getWinningCountByRank(WinningLotto winningLotto, Rank rank) {
-        int winningCount = (int) lottos.stream()
-                .filter(lotto -> winningLotto.getRankByLotto(lotto).equals(rank))
-                .count();
-
-        return new WinningCount(winningCount);
-    }
-
     public List<Lotto> getLottos() {
         return lottos;
     }

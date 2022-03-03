@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Lottos 테스트")
 public class LottosTest {
     private LottoNumberGenerateStrategy lottoNumberGenerateStrategy;
-    private WinningLotto winningLotto;
 
     @BeforeEach
     void setupLottos() {
@@ -24,11 +23,6 @@ public class LottosTest {
                         Set.of(7, 8, 9, 10, 11, 12),
                         Set.of(13, 14, 15, 16, 17, 18)
                 )
-        );
-
-        winningLotto = new WinningLotto(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                new LottoNumber(7)
         );
     }
 
@@ -43,20 +37,6 @@ public class LottosTest {
 
         // then
         assertThat(createLottos).isNotNull();
-    }
-
-    @Test
-    @DisplayName("WinningLotto 를 전달 받으면 당첨 통계를 반환한다.")
-    void getWinningResultByWinningLotto() {
-        // given
-        Lottos lottos = new Lottos(new LottoQuantity(3), lottoNumberGenerateStrategy);
-        WinningResult winningResult = lottos.getWinningResultByWinningLotto(winningLotto);
-
-        // when
-        WinningCount winningCount = winningResult.getWinningCountByRank(Rank.FIRST);
-
-        // then
-        assertThat(winningCount).isEqualTo(new WinningCount(1));
     }
 
     @Test
