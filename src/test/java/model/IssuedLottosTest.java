@@ -46,7 +46,8 @@ public class IssuedLottosTest {
     @DisplayName("자동으로 로또 발급")
     void issueAutoLotto() {
         Lotto lotto = Lotto.of(LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 6)));
-        IssuedLottos issuedLottos = new IssuedLottos(new Budget(1000), () -> lotto, new ArrayList<>());
+        IssuedLottos issuedLottos = new IssuedLottos(new Budget(5000), () -> lotto, new ArrayList<>());
         assertThat(issuedLottos.getAutoIssuedLotto().get(0)).isEqualTo(lotto);
+        assertThat(issuedLottos.getAutoIssuedLotto().size()).isEqualTo(5);
     }
 }

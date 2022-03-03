@@ -22,7 +22,8 @@ public class LottoController {
 
     public void run() {
         Budget inputBudget = InputView.getUntilValid(() -> Budget.parse(InputView.inputMoney()));
-        IssuedLottos issuedLottos = new IssuedLottos(inputBudget, new RandomLottoGenerator(), getManualLottos());
+        IssuedLottos issuedLottos = InputView.getUntilValid(() -> new IssuedLottos(inputBudget, new RandomLottoGenerator(), getManualLottos()));
+
         printIssuedLottoNumbers(issuedLottos.getManualLottoCount(), issuedLottos.getAutoLottoCount(), getNumbersOf(issuedLottos));
 
         WinningLottoNumbers winningLottoNumbers = InputView.getUntilValid(() -> getWinningLottoNumbers());
