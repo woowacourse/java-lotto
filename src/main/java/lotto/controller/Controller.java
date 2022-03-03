@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.RankCount;
+import lotto.domain.RankCounter;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -15,8 +15,8 @@ public class Controller {
         OutputView.printLottos(lottos);
 
         WinningNumbers winningNumbers = getWinningNumbers();
-        RankCount rankCount = new RankCount(lottos, winningNumbers);
-        OutputView.printWinningStatistic(money, rankCount);
+        RankCounter rankCounter = new RankCounter(lottos, winningNumbers);
+        OutputView.printWinningStatistic(money, rankCounter);
     }
 
     private Money getMoney() {

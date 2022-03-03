@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class RankCount {
+public class RankCounter {
 
     private final Map<Rank, Integer> rankCount;
 
-    public RankCount(Lottos lottos, WinningNumbers winningNumbers) {
+    public RankCounter(Lottos lottos, WinningNumbers winningNumbers) {
         this.rankCount = new EnumMap<>(Rank.class);
         initRankCount();
         calculateRank(lottos, winningNumbers);

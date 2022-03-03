@@ -5,7 +5,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Rank;
-import lotto.domain.RankCount;
+import lotto.domain.RankCounter;
 
 public class OutputView {
 
@@ -27,14 +27,14 @@ public class OutputView {
                 .forEach(System.out::println);
     }
 
-    public static void printWinningStatistic(Money money, RankCount rankCount) {
+    public static void printWinningStatistic(Money money, RankCounter rankCounter) {
         System.out.println(WINNING_STATISTIC_TITLE);
         Arrays.stream(Rank.values())
                 .filter(rank -> !rank.equals(Rank.RANK_OUT))
                 .forEach(rank -> System.out.printf((RANK_MESSAGE_FORMAT),
                         rank.toStringWinningNumberCount(), getBonusNumberMessage(rank),
-                        rank.toStringPrize(), rankCount.getCountOfRank(rank)));
-        System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), money.calculateProfitRate(rankCount.getTotalPrize()));
+                        rank.toStringPrize(), rankCounter.getCountOfRank(rank)));
+        System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), money.calculateProfitRate(rankCounter.getTotalPrize()));
     }
 
     private static String getBonusNumberMessage(Rank rank) {
