@@ -17,7 +17,7 @@ public class WinningResultDto {
     public static WinningResultDto from(WinningResult winningResult) {
         return new WinningResultDto(
                 winningResult.getWinningResult(),
-                winningResult.calculateProfitRatio()
+                winningResult.getProfitRatio()
         );
     }
 

@@ -53,7 +53,7 @@ public class WinningResult {
         return new LottoQuantity(lottos.getLottos().size());
     }
 
-    public double calculateProfitRatio() {
+    public double getProfitRatio() {
         long totalPrice = calculateTotalPrize();
         double purchaseMoney = purchasedLottoQuantity.getLottoQuantity() * Lotto.SINGLE_LOTTO_PRICE;
 

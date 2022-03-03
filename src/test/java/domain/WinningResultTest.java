@@ -73,7 +73,7 @@ public class WinningResultTest {
     @DisplayName("calculateProfitRatio 는 수익률을 계산할 수 있다.")
     void getProfitRatio() {
         // given & when
-        double actual = winningResult.calculateProfitRatio();
+        double actual = winningResult.getProfitRatio();
 
         // when
         double expected = 10000.0;
