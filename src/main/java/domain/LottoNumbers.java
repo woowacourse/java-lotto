@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoTicketNumbers {
+public class LottoNumbers {
 
     public static final int LOTTO_NUMBERS_SIZE = 6;
     private static final String LOTTO_NUMBER_SIZE_NOT_VALID = "로또 번호는 6자리여야 합니다.";
@@ -13,22 +13,22 @@ public class LottoTicketNumbers {
 
     private final List<LottoNumber> numbers;
 
-    public LottoTicketNumbers(List<LottoNumber> lottoNumbers) {
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicateLottoNumber(lottoNumbers);
         Collections.sort(lottoNumbers);
         numbers = lottoNumbers;
     }
 
-    public static LottoTicketNumbers convertToLottoNumber(List<Integer> lottoNumbers) {
-        return new LottoTicketNumbers(lottoNumbers.stream()
+    public static LottoNumbers convertToLottoNumber(List<Integer> lottoNumbers) {
+        return new LottoNumbers(lottoNumbers.stream()
                 .map(LottoNumber::getInstance)
                 .collect(Collectors.toList()));
     }
 
-    public int countDuplicateNumbers(LottoTicketNumbers lottoTicketNumbers) {
+    public int countDuplicateNumbers(LottoNumbers lottoNumbers) {
         List<LottoNumber> duplicatedLottoNumbers = new ArrayList<>(numbers);
-        duplicatedLottoNumbers.retainAll(lottoTicketNumbers.numbers);
+        duplicatedLottoNumbers.retainAll(lottoNumbers.numbers);
         return duplicatedLottoNumbers.size();
     }
 

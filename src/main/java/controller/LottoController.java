@@ -31,7 +31,7 @@ public class LottoController {
     }
 
     private void createResult(LottoMachine lottoMachine, List<LottoTicket> lottoTickets) {
-        LottoTicketNumbers winningNumbers = LottoTicketNumbers.convertToLottoNumber(InputView.getWinningNumbers());
+        LottoNumbers winningNumbers = LottoNumbers.convertToLottoNumber(InputView.getWinningNumbers());
         LottoNumber bonusNumber = LottoNumber.createBonus(InputView.getBonusNumber(), winningNumbers);
 
         WinningStat winningStat = lottoMachine.createWinningStat(lottoTickets, winningNumbers, bonusNumber);

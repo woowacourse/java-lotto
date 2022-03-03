@@ -62,7 +62,7 @@ class LottoMachineTest {
         List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 4, 3, 5, 6)
                 .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
-        LottoTicketNumbers winningNumbers = new LottoTicketNumbers(inputWinningNumbers);
+        LottoNumbers winningNumbers = new LottoNumbers(inputWinningNumbers);
         WinningStat actual = lottoMachine.createWinningStat(lottoTickets, winningNumbers, LottoNumber.getInstance(7));
 
         Map<LottoRank, Integer> ranks = new HashMap<>();

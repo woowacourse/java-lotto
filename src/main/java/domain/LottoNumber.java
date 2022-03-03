@@ -33,7 +33,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumbers.get(number);
     }
 
-    public static LottoNumber createBonus(int inputBonusNumber, LottoTicketNumbers winningNumbers) {
+    public static LottoNumber createBonus(int inputBonusNumber, LottoNumbers winningNumbers) {
         LottoNumber bonusNumber = LottoNumber.getInstance(inputBonusNumber);
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(INVALID_BONUS_NUMBER);

@@ -22,7 +22,7 @@ public class LottoMachine {
     }
 
     public WinningStat createWinningStat(List<LottoTicket> lottoTickets,
-                                         LottoTicketNumbers winningNumbers,
+                                         LottoNumbers winningNumbers,
                                          LottoNumber bonusNumber) {
         Map<LottoRank, Integer> ranks = new HashMap<>();
 

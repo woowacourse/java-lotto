@@ -37,7 +37,7 @@ class LottoNumberTest {
                 .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> LottoNumber.createBonus(6, new LottoTicketNumbers(inputLottoNumbers)))
+        assertThatThrownBy(() -> LottoNumber.createBonus(6, new LottoNumbers(inputLottoNumbers)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("보너스 번호는 당첨 번호와 중복");
     }
@@ -49,7 +49,7 @@ class LottoNumberTest {
                 .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
-        assertThat(LottoNumber.createBonus(7, new LottoTicketNumbers(inputLottoNumbers)))
+        assertThat(LottoNumber.createBonus(7, new LottoNumbers(inputLottoNumbers)))
                 .isEqualTo(LottoNumber.getInstance(7));
     }
 }

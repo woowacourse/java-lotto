@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoTicketNumbersTest {
+class LottoNumbersTest {
 
     @ParameterizedTest
     @ValueSource(ints = {5, 7})
@@ -22,7 +22,7 @@ class LottoTicketNumbersTest {
                 .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> new LottoTicketNumbers(inputLottoNumbers))
+        assertThatThrownBy(() -> new LottoNumbers(inputLottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호는 6자리");
     }
@@ -34,7 +34,7 @@ class LottoTicketNumbersTest {
                 .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> new LottoTicketNumbers(inputLottoNumbers))
+        assertThatThrownBy(() -> new LottoNumbers(inputLottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호는 중복");
     }
@@ -46,7 +46,7 @@ class LottoTicketNumbersTest {
                 .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
-        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputLottoNumbers);
+        LottoNumbers lottoTicketNumbers = new LottoNumbers(inputLottoNumbers);
 
         List<LottoNumber> lottoNumbers = lottoTicketNumbers.getLottoNumbers();
 
@@ -60,8 +60,8 @@ class LottoTicketNumbersTest {
         List<LottoNumber> inputLottoNumbers = IntStream.of(4, 3, 2, 1, 6, 5)
                 .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
-        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputLottoNumbers);
+        LottoNumbers lottoNumbers = new LottoNumbers(inputLottoNumbers);
 
-        assertThat(lottoTicketNumbers.countDuplicateNumbers(lottoTicketNumbers)).isEqualTo(6);
+        assertThat(lottoNumbers.countDuplicateNumbers(lottoNumbers)).isEqualTo(6);
     }
 }
