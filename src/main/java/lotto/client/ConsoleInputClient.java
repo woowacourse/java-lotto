@@ -8,17 +8,15 @@ import java.util.stream.IntStream;
 
 public class ConsoleInputClient implements InputClient {
 
-    private final Scanner scanner;
+    private static final Scanner scanner = new Scanner(System.in);
     private final OutputClient outputClient;
 
-    private ConsoleInputClient(Scanner scanner, OutputClient outputClient) {
-        this.scanner = scanner;
+    public ConsoleInputClient(OutputClient outputClient) {
         this.outputClient = outputClient;
     }
 
     private static class ConsoleInputClientHelper {
         private static final InputClient INSTANCE = new ConsoleInputClient(
-            new Scanner(System.in),
             ConsoleOutputClient.getInstance()
         );
     }
