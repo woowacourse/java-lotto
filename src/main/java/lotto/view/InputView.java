@@ -13,27 +13,45 @@ public class InputView {
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     public static long inputMoney() {
-        try {
+        String input = "";
+        boolean retryFlag = true;
+        while (retryFlag) {
             System.out.println(INPUT_MONEY_MESSAGE);
-            long money = Long.parseLong(scanner.nextLine());
-            MoneyValidator.validate(money);
-            return money;
+            input = scanner.nextLine();
+            retryFlag = validateInputMoney(input);
+        }
+        return Long.parseLong(input);
+    }
+
+    private static boolean validateInputMoney(String input) {
+        try {
+            MoneyValidator.validate(Long.parseLong(input));
+            return false;
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
-            return inputMoney();
+            return true;
         }
     }
 
     public static int inputCountOfManualLotto(long money) {
-        try {
+        String input = "";
+        boolean retryFlag = true;
+        while (retryFlag) {
             OutputView.printNewLine();
             System.out.println(INPUT_LOTTO_COUNT_FOR_MANUAL_MESSAGE);
-            int countForBuy = Integer.parseInt(scanner.nextLine());
-            CountOfManualLottoValidator.validate(countForBuy,money);
-            return countForBuy;
+            input = scanner.nextLine();
+            retryFlag = validateInputCountOfManualLotto(input, money);
+        }
+        return Integer.parseInt(input);
+    }
+
+    private static boolean validateInputCountOfManualLotto(String input, long money) {
+        try {
+            CountOfManualLottoValidator.validate(Integer.parseInt(input),money);
+            return false;
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
-            return inputCountOfManualLotto(money);
+            return true;
         }
     }
 

@@ -32,23 +32,44 @@ public class Controller {
     }
 
     private Lotto inputLotto() {
+        String input = "";
+        boolean retryFlag = true;
+        while (retryFlag) {
+            input = InputView.inputLottoNumbers();
+            retryFlag = validateInputLotto(input);
+        }
+        return Lotto.generateByManual(input);
+    }
+
+    private boolean validateInputLotto(String input) {
         try {
-            return Lotto.generateByManual(InputView.inputLottoNumbers());
+            Lotto.generateByManual(input);
+            return false;
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
-            return inputLotto();
+            return true;
         }
     }
 
     private WinningNumbers inputWinningNumbers() {
+        String winningLottoInput = "";
+        String bonusNumberInput = "";
+        boolean retryFlag = true;
+        while (retryFlag) {
+            winningLottoInput = InputView.inputWinningLotto();
+            bonusNumberInput = InputView.inputBonusNumber();
+            retryFlag = validateWinningNumbers(winningLottoInput, bonusNumberInput);
+        }
+        return WinningNumbers.generateByString(winningLottoInput, bonusNumberInput);
+    }
+
+    private boolean validateWinningNumbers(String winningLottoInput, String bonusNumberInput) {
         try {
-            return WinningNumbers.generateByString(
-                    InputView.inputWinningLotto(),
-                    InputView.inputBonusNumber()
-            );
+            WinningNumbers.generateByString(winningLottoInput, bonusNumberInput);
+            return false;
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
-            return inputWinningNumbers();
+            return true;
         }
     }
 }
