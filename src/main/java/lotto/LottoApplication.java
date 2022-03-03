@@ -38,7 +38,7 @@ public class LottoApplication {
 
     private static LottoGenerator createLottoGenerator(final Money money) {
         try {
-            return LottoGenerator.of(money, InputView.inputManualCount());
+            return LottoGenerator.createLottoGeneratorByMoneyAndManualCount(money, InputView.inputManualCount());
         } catch (IllegalArgumentException e) {
             printErrorMessage(e);
             return createLottoGenerator(money);

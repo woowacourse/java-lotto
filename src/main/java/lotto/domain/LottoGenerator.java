@@ -4,6 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoGenerator {
 
@@ -19,7 +20,7 @@ public class LottoGenerator {
         this.autoCount = autoCount;
     }
 
-    public static LottoGenerator of(final Money money, final int manualCount) {
+    public static LottoGenerator createLottoGeneratorByMoneyAndManualCount(final Money money, final int manualCount) {
         int totalCount = money.calculateLottoCount();
         return new LottoGenerator(manualCount, totalCount - manualCount);
     }
@@ -32,15 +33,19 @@ public class LottoGenerator {
 
     private static void checkInputMoneyEnough(final int autoCount) {
         if (autoCount < MIN_LOTTO_COUNT) {
-            throw new IllegalArgumentException("[ERROR] 금액이 부족합니다.");
+            throw new IllegalArgumentException("[ERROR] 자동 구매 개수는 0개 이상이어야 합니다.");
         }
     }
 
     public Lottos generateLottos(final List<List<Integer>> numbers) {
         checkRightManualNumbers(numbers);
-        List<Lotto> manualLottos = generateManualLottos(numbers);
-        manualLottos.addAll(generateRandomLottos());
-        return new Lottos(manualLottos);
+        return new Lottos(concatManualAndAutoLottos(numbers));
+    }
+
+    private List<Lotto> concatManualAndAutoLottos(final List<List<Integer>> numbers) {
+        return Stream.concat(generateManualLottos(numbers).stream(),
+                        generateRandomLottos().stream())
+                .collect(Collectors.toList());
     }
 
     private void checkRightManualNumbers(final List<List<Integer>> numbers) {
@@ -51,11 +56,15 @@ public class LottoGenerator {
 
     private List<Lotto> generateManualLottos(final List<List<Integer>> numbers) {
         List<Lotto> manualLottos = numbers.stream()
-                .map(number -> new Lotto(number.stream()
-                        .map(LottoNumber::valueOf)
-                        .collect(Collectors.toCollection(LinkedHashSet::new))))
+                .map(this::createLotto)
                 .collect(Collectors.toList());
         return manualLottos;
+    }
+
+    private Lotto createLotto(final List<Integer> number) {
+        return new Lotto(number.stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
     }
 
     private List<Lotto> generateRandomLottos() {
