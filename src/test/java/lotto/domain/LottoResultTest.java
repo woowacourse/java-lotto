@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 class LottoResultTest {
     Lottos lottos;
     WinningLotto winningLotto;
+    LottoResult lottoResult;
 
     @BeforeEach
     void init() {
@@ -21,45 +22,12 @@ class LottoResultTest {
 
         lottos = Lottos.of(Arrays.asList(lotto1, lotto2, lotto3), new Money(0));
         winningLotto = new WinningLotto(lotto1, new LottoNumber(7));
-    }
-
-    @Test
-    @DisplayName("로또들의 일치 개수를 확인 - 1등")
-    void match_lottos_first() {
-        LottoResult lottoResult = new LottoResult();
-
-        lottoResult.addMatchingCount(lottos, winningLotto);
-
-        assertEquals(1, lottoResult.getLottoResult().get(Rank.FIRST));
-    }
-
-    @Test
-    @DisplayName("로또들의 일치 개수를 확인 - 2등")
-    void match_lottos_second() {
-        LottoResult lottoResult = new LottoResult();
-
-        lottoResult.addMatchingCount(lottos, winningLotto);
-
-        assertEquals(1, lottoResult.getLottoResult().get(Rank.SECOND));
-    }
-
-    @Test
-    @DisplayName("로또들의 일치 개수를 확인 - 4등")
-    void match_lottos_third() {
-        LottoResult lottoResult = new LottoResult();
-
-        lottoResult.addMatchingCount(lottos, winningLotto);
-
-        assertEquals(1, lottoResult.getLottoResult().get(Rank.FOURTH));
+        lottoResult = new LottoResult(lottos.countLottoRank(winningLotto));
     }
 
     @Test
     @DisplayName("총 수익 계산")
     void calculate_profit() {
-        LottoResult lottoResult = new LottoResult();
-
-        lottoResult.addMatchingCount(lottos, winningLotto);
-
         assertEquals(2_030_050_000, lottoResult.getProfit().getMoney());
     }
 }

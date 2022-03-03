@@ -93,8 +93,7 @@ public class LottoController {
 
     private void calculateLottoResult(Lottos lottos, WinningLotto winningLotto) {
         OutputView.printStatisticsTitle();
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.addMatchingCount(lottos, winningLotto);
+        LottoResult lottoResult = new LottoResult(lottos.countLottoRank(winningLotto));
         OutputView.printLottosResult(lottoResult.getLottoResult());
 
         Money payment = new Money(lottos.getLottos().size() * LOTTO_PRICE);

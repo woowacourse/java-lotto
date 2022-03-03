@@ -1,8 +1,11 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
     private static final int LOTTO_PRICE = 1000;
@@ -32,6 +35,16 @@ public class Lottos {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto());
         }
+    }
+
+    public Map<Rank, Integer> countLottoRank(WinningLotto winningLotto) {
+        Map<Rank, Integer> lottoResult = new HashMap<>();
+        Arrays.stream(Rank.values()).forEach((rank -> lottoResult.put(rank, 0)));
+        for (Lotto lotto : lottos) {
+            Rank rank = winningLotto.getLottoRank(lotto);
+            lottoResult.put(rank, lottoResult.get(rank) + 1);
+        }
+        return lottoResult;
     }
 
     public List<Lotto> getLottos() {
