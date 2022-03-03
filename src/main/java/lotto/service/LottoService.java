@@ -12,11 +12,9 @@ public class LottoService {
     private static final int INITIAL_MATCH_COUNT = 0;
 
     private final LottoGenerator lottoGenerator;
-    private final List<LottoNumbers> lottoNumbersGroup;
 
     public LottoService(final LottoGenerator lottoRandomGenerator) {
         this.lottoGenerator = lottoRandomGenerator;
-        lottoNumbersGroup = new ArrayList<>();
     }
 
     public int countOfLottoNumbers(final String amount) {
@@ -29,20 +27,24 @@ public class LottoService {
         return manualPurchaseCounts.getManualLottoCounts();
     }
 
-    public void generateManualLottoCounts(final List<List<String>> manualLottoNumbersGroup) {
+    public List<LottoNumbers> generateLottoNumbersGroup(
+            final int allCounts, final List<List<String>> manualLottoNumbersGroup) {
+        final List<LottoNumbers> lottoNumbersGroup = new ArrayList<>();
+        lottoNumbersGroup.addAll(generateManualLottoCounts(manualLottoNumbersGroup));
+        lottoNumbersGroup.addAll(generateAutoLottoNumbers(allCounts, lottoNumbersGroup.size()));
+        return lottoNumbersGroup;
+    }
+
+    private List<LottoNumbers> generateManualLottoCounts(final List<List<String>> manualLottoNumbersGroup) {
         final LottoGenerator lottoGenerator = new LottoManualGenerator();
         final int manualLottoCounts = manualLottoNumbersGroup.size();
-        lottoNumbersGroup.addAll(lottoGenerator.generateLottoNumbersGroup(manualLottoCounts, manualLottoNumbersGroup));
+        return lottoGenerator.generateLottoNumbersGroup(manualLottoCounts, manualLottoNumbersGroup);
     }
 
-    public void generateAutoLottoNumbers(final int lottoNumbersCount) {
-        final int autoLottoCounts = lottoNumbersCount - lottoNumbersGroup.size();
-        lottoNumbersGroup.addAll(lottoGenerator.generateLottoNumbersGroup(
-                autoLottoCounts, (List<List<String>>) Collections.EMPTY_LIST));
-    }
-
-    public List<LottoNumbers> getLottoNumbersGroup() {
-        return lottoNumbersGroup;
+    private List<LottoNumbers> generateAutoLottoNumbers(final int allCounts, final int lottoManualNumbersCount) {
+        final int autoLottoCounts = allCounts - lottoManualNumbersCount;
+        return lottoGenerator.generateLottoNumbersGroup(
+                autoLottoCounts, Collections.emptyList());
     }
 
     public WinningNumbers generateWinningNumbers(
@@ -52,7 +54,8 @@ public class LottoService {
         return new WinningNumbers(lastWinningNumbers, bonusNumber);
     }
 
-    public Map<LottoMatchKind, Integer> getMatchResult(final WinningNumbers winningNumbers) {
+    public Map<LottoMatchKind, Integer> getMatchResult(
+            final List<LottoNumbers> lottoNumbersGroup, final WinningNumbers winningNumbers) {
         final Map<LottoMatchKind, Integer> matchResult = new EnumMap<>(LottoMatchKind.class);
         initializeResult(matchResult);
         lottoNumbersGroup.stream()
