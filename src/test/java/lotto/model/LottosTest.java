@@ -13,4 +13,16 @@ class LottosTest {
 
         assertThat(lottos.getLottos().size()).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("자동 로또와 수동 로또를 더한 총 리스트를 반환하는지 확인")
+    void getTotalLottosTest() {
+        Lottos auto = Lottos.generate(3);
+        Lottos manual = Lottos.generate(2);
+
+        Lottos lottos = Lottos.getTotalLottos(auto, manual);
+
+        assertThat(lottos.getLottos().size()).isEqualTo(5);
+    }
+
 }

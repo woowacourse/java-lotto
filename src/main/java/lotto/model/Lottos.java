@@ -17,6 +17,11 @@ public class Lottos {
                 .collect(Collectors.toList()));
     }
 
+    public static Lottos getTotalLottos(Lottos auto, Lottos manual) {
+        manual.lottos.addAll(auto.lottos);
+        return manual;
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }
