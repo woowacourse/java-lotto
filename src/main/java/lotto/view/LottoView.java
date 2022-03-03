@@ -38,13 +38,24 @@ public class LottoView {
 
     private int requestTicketCount(final int totalTicketCount) {
         final int manualTicketCount = inputView.requestTicketCount();
-        verifyTotalTicketCountIsMoreThanTicketCount(totalTicketCount, manualTicketCount);
+        verifyTicketCount(totalTicketCount, manualTicketCount);
         return manualTicketCount;
+    }
+
+    private void verifyTicketCount(final int totalTicketCount, final int ticketCount) {
+        verifyTicketCountPositive(ticketCount);
+        verifyTotalTicketCountIsMoreThanTicketCount(totalTicketCount, ticketCount);
+    }
+
+    private void verifyTicketCountPositive(final int ticketCount) {
+        if (ticketCount <= 0) {
+            throw new LottoException(LottoExceptionStatus.MANUAL_TICKET_COUNT_MUST_BE_POSITIVE);
+        }
     }
 
     private void verifyTotalTicketCountIsMoreThanTicketCount(final int totalTicketCount, final int ticketCount) {
         if (ticketCount > totalTicketCount) {
-            throw new LottoException(LottoExceptionStatus.MANUAL_TICKET_COUNT_CANNOT_BE_MORE_THAN_TOTAL_TICKET_COUNT);
+            throw new LottoException(LottoExceptionStatus.MANUAL_TICKET_COUNT_CANNOT_BE_TOO_MANY);
         }
     }
 
