@@ -26,8 +26,8 @@ public class InputView {
     }
 
     public List<String> inputLottoNumbers() {
-        int lottoCount = Integer.parseInt(client.input("수동으로 구매할 로또 수를 입력해 주세요."));
-        return client.inputRepeat("수동으로 구매할 번호를 입력해 주세요.", lottoCount);
+        int lottoCount = Integer.parseInt(client.input("수동으로 구매할 로또 수를 입력해 주세요.\n"));
+        return client.inputRepeat("수동으로 구매할 번호를 입력해 주세요.\n", lottoCount);
     }
 
     public String inputWinningNumber() {
