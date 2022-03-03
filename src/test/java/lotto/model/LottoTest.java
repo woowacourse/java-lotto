@@ -10,25 +10,26 @@ import org.junit.jupiter.api.Test;
 class LottoTest {
 
     @Test
-    @DisplayName("당첨 번호를 비교한다")
+    @DisplayName("4등 당첨 판정을 확인한다.")
     void matchNumber() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 44, 45));
 
-        int actual = lotto.getMatchScore(winningNumbers);
+        Rank actual = lotto.match(winningNumbers, new LottoNumber(7));
 
-        assertThat(actual).isEqualTo(4);
+        assertThat(actual).isEqualTo(Rank.FOURTH);
     }
 
     @Test
-    @DisplayName("보너스 번호 당첨 여부를 확인한다")
+    @DisplayName("2등 당첨으로 보너스 번호 일치 여부를 확인한다")
     void matchBonusNumberTest() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45));
         LottoNumber bonusNumber = new LottoNumber(6);
 
-        boolean actual = lotto.isMatchNumber(bonusNumber);
+        Rank actual = lotto.match(winningNumbers, bonusNumber);
 
-        assertThat(actual).isTrue();
+        assertThat(actual).isEqualTo(Rank.SECOND);
     }
 
     @Test
@@ -65,14 +66,5 @@ class LottoTest {
             new Lotto(Arrays.asList(1, 2, 3, 3, 4, 6)))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("로또 번호에 중복이 존재합니다.");
-    }
-
-    @Test
-    @DisplayName("Lotto가 LottoNumber를 포함하는지 확인한다")
-    void matchTest() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber lottoNumber = new LottoNumber(6);
-
-        assertThat(lotto.isMatchNumber(lottoNumber)).isTrue();
     }
 }

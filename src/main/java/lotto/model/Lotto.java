@@ -42,13 +42,17 @@ public class Lotto {
             .collect(Collectors.toUnmodifiableList());
     }
 
-    int getMatchScore(Lotto winningNumbers) {
+    Rank match(Lotto winningNumbers, LottoNumber bonusNumber) {
+        return Rank.find(getMatchScore(winningNumbers), isMatchNumber(bonusNumber));
+    }
+
+    private int getMatchScore(Lotto winningNumbers) {
         return (int)lottoNumbers.stream()
             .filter(winningNumbers::isMatchNumber)
             .count();
     }
 
-    boolean isMatchNumber(LottoNumber number) {
+    private boolean isMatchNumber(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 

@@ -20,7 +20,7 @@ class RankTest {
             new Lotto(Arrays.asList(1, 2, 3, 4, 5, 44)));
 
         List<Rank> actual = lottoList.stream()
-            .map(lotto -> Rank.match(lotto, winningNumbers, bonusNumber))
+            .map(lotto -> lotto.match(winningNumbers, bonusNumber))
             .collect(Collectors.toList());
 
         List<Rank> expected = Arrays.asList(Rank.SECOND, Rank.THIRD);

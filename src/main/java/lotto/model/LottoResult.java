@@ -29,7 +29,7 @@ public class LottoResult {
 
     private Map<Rank, Long> generateLottoResult(Lottos lottos, Lotto winningNumbers, LottoNumber bonusNumber) {
         return Collections.unmodifiableMap(lottos.getLottos().stream()
-            .map(lotto -> Rank.match(lotto, winningNumbers, bonusNumber))
+            .map(lotto -> lotto.match(winningNumbers, bonusNumber))
             .collect(groupingBy(rank -> rank, () -> new EnumMap<>(Rank.class), counting())));
     }
 
