@@ -20,10 +20,6 @@ public class Numbers {
         return numbers.contains(number);
     }
 
-    public List<LottoNumber> getNumbers() {
-        return numbers;
-    }
-
     private void checkNumbersLength(List<LottoNumber> numbers) {
         if (numbers.size() != LENGTH_STANDARD) {
             throw new IllegalArgumentException(NUMBERS_LENGTH_ONLY_SIX);
@@ -35,5 +31,9 @@ public class Numbers {
         if (duplicatedCount != numbers.size()) {
             throw new IllegalArgumentException(NUMBERS_DUPLICATE_MESSAGE);
         }
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return numbers;
     }
 }
