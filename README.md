@@ -6,19 +6,6 @@
 
 ### 입력
 
-- 인아웃풋 test :ps://choichumji.tistory.com/118
-- https://regexr.com/5mhou
-
-```text
-String input = "1 + 2 k 3";
-InputStream in = new ByteArrayInputStream(input.getBytes());
-System.setIn(in); // 
-
-OutputStream out = new ByteArrayOutputStream();
-System.setOut(new PrintStream(out));
-Out.toString();
-```
-
 - [x] 로또 구입 금액을 입력받는다.
     - [x] [예외처리] 숫자가 아닐 경우
     - [x] [예외처리] 1000 미만의 값일 경우
@@ -38,8 +25,8 @@ Out.toString();
 ```
 
 - [x] 수동,자동 로또 수들을 인스턴스로 저장한다
-  - [x] [예외처리] 로또 티켓 수가 0 이하의 수일 경우
-  - [x] [예외처리] 수동로또 수가 구매한 로또 수보다 많을 경우
+    - [x] [예외처리] 로또 티켓 수가 0 이하의 수일 경우
+    - [x] [예외처리] 수동로또 수가 구매한 로또 수보다 많을 경우
 
 - [x] 수동으로 구매할 로또 번호를 입력받는다
     - [x] [예외처리] 입력 형식이 아래 예시와 같지 않은 경우
@@ -143,9 +130,10 @@ Out.toString();
 - [x] Money를 LottoMoney로 네이밍
 - [x] 커스텀 예외
 
-- [ ] DTO 생성 판단기준 고민하기
+- [x] DTO 생성 판단기준 고민하기
     1. view에서 도메인 로직을 호출할 가능성이 있는지?
-    2. ...?
+    2. 기존 Domain 객체들이 불변인지
+    3. ...
 
 1차 피드백
 
@@ -160,38 +148,3 @@ Out.toString();
 - [x] Result : add 쓰는 대신 생성자 안에서 반복문
 - [x] Controller에서 확인이 필요한 로직을 도메인에 넣기
     - [x] 옮긴 로직의 테스트코드 작성
-- [ ] 커스텀 예외 -> 2단계 때 도전!
-
-## 💻 구조
-
-- [x] controller
-    - [x] 메인 컨트롤러
-- [x] domain
-    - [x] LottoNumber
-    - [x] LottoNumbers
-    - [x] WinLottoNumbers
-    - [x] Money
-    - [x] Rank
-    - [x] Result
-- [x] view
-    - [x] InputView
-    - [x] OutputView
-- [x] utils
-    - [x] Constants
-    - [x] LottoNumberGenerator
-    - [x] Separator
-- [x] validator
-    - [x] InputValidator
-    - [x] LottoNumbersValidator
-    - [x] LottoNumberValidator
-    - [x] MoneyValidator
-    - [x] WinLottoNumbersValidator
-
-## 💕 페어코딩 협의사항
-
-1. exception 클래스를 사용할까?
-    1. exception 클래스를 사용해서 하면 깔끔해서 좋은 것 같다! 사용하기로.
-2. Dto -> 나중에 필요하면 리팩토링 과정에서 추가하는거로.
-3. 전략패턴 -> 테스트 구현하다가 부족할때 추가
-4. validator 클래스 따로 빼보기
-5. MVC 패턴으로 진행!
