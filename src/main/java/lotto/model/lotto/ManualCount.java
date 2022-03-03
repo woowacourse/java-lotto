@@ -15,7 +15,7 @@ public class ManualCount {
     }
 
     public void createManualLotto() {
-        this.number --;
+        this.number--;
     }
 
     public boolean isEnd() {

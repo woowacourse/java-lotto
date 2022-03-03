@@ -23,7 +23,7 @@ public class LottoCount {
     }
 
     public void makeLotto() {
-        count--;
+        this.count--;
     }
 
     public int getCount() {
