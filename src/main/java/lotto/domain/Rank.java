@@ -41,6 +41,10 @@ public enum Rank {
         return rank != OTHER;
     }
 
+    public static boolean isThirdCount(int count) {
+        return count == THIRD.count;
+    }
+
     public int getAmount() {
         return amount;
     }
