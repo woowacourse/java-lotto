@@ -58,7 +58,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public int getNumber() {
-		return Integer.valueOf(number);
+		return number;
 	}
 
 	@Override
