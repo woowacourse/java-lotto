@@ -1,6 +1,8 @@
 package controller;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import model.bonusball.BonusBall;
 import model.lotto.LottoCount;
@@ -8,10 +10,14 @@ import model.lotto.LottoStorage;
 import model.result.Rank;
 import model.result.RateOfReturn;
 import model.winningnumber.LottoWinningNumber;
+import utils.InputValidateUtils;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
+	private static final String WINNING_NUMBER_ERROR_MESSAGE = "[Error]: 당첨 번호는 숫자여야 합니다.";
+	private static final String WINNING_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 당첨 번호를 입력하세요.";
+
 	private final InputView inputView = new InputView();
 	private final OutputView outputView = new OutputView();
 
@@ -45,15 +51,33 @@ public class LottoController {
 		rateOfReturn = new RateOfReturn(money);
 	}
 
+	//WinningNumber
 	private void storeWinningNumber() {
 		try {
-			lottoWinningNumber = new LottoWinningNumber(inputView.inputWinningNumbers());
+			String input = inputView.inputWinningNumbers();
+			InputValidateUtils.inputBlank(input, WINNING_NUMBER_BLANK_ERROR_MESSAGE);
+			List<String> numbers = splitWinningNumber(input);
+			InputValidateUtils.inputNumber(String.join("", numbers), WINNING_NUMBER_ERROR_MESSAGE);
+			lottoWinningNumber = new LottoWinningNumber(makeInputWinningNumbersToNumbers(numbers));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
 			storeWinningNumber();
 		}
 	}
 
+	private List<String> splitWinningNumber(String input) {
+		return Arrays.stream(input.split(","))
+			.map(String::trim)
+			.collect(Collectors.toList());
+	}
+
+	private List<Integer> makeInputWinningNumbersToNumbers(List<String> numbers) {
+		return numbers.stream()
+			.map(number -> Integer.parseInt(number))
+			.collect(Collectors.toList());
+	}
+
+	//BonusBall
 	private void storeBonusBall() {
 		try {
 			String input = inputView.inputBonusBall();
