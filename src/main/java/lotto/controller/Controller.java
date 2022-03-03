@@ -25,7 +25,7 @@ public class Controller {
         if (countOfManualLotto == 0) {
             return new ArrayList<>();
         }
-        InputView.printInputLottoNumbersMessage();
+        OutputView.printInputLottoNumbersMessage();
         return IntStream.range(0, countOfManualLotto)
                 .mapToObj(i -> inputLotto())
                 .collect(Collectors.toList());

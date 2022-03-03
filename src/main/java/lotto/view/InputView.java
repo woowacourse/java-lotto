@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.Scanner;
-import lotto.domain.Lotto;
 import lotto.validator.CountOfManualLottoValidator;
 import lotto.validator.MoneyValidator;
 
@@ -10,7 +9,6 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_LOTTO_COUNT_FOR_MANUAL_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String INPUT_LOTTO_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_WINNING_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
@@ -37,11 +35,6 @@ public class InputView {
             OutputView.printErrorMessage(exception);
             return inputCountOfManualLotto(money);
         }
-    }
-
-    public static void printInputLottoNumbersMessage() {
-        OutputView.printNewLine();
-        System.out.println(INPUT_LOTTO_NUMBERS_MESSAGE);
     }
 
     public static String inputLottoNumbers() {
