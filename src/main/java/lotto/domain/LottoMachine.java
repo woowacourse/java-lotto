@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.domain.vo.LottoNumber;
 
 public class LottoMachine {
@@ -14,8 +16,10 @@ public class LottoMachine {
 
     private LottoMachine() {}
 
-    public static Lotto generate() {
-        return new Lotto(shuffleNumbers().subList(START_INCLUSIVE, END_EXCLUSIVE));
+    public static List<Lotto> generateLottos(int size) {
+        return IntStream.range(0, size)
+            .mapToObj(i -> new Lotto(shuffleNumbers().subList(START_INCLUSIVE, END_EXCLUSIVE)))
+            .collect(Collectors.toList());
     }
 
     private static List<LottoNumber> shuffleNumbers() {
