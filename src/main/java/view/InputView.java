@@ -10,7 +10,7 @@ import constant.LottoConstant;
 public class InputView {
 
     private static final String NUMBER_SPLITTER = ", ";
-    private static final int MINIMUM_VALUE = 0;
+    private static final int MINIMUM_POSITIVE_NUMBER = 0;
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -29,22 +29,22 @@ public class InputView {
         return Integer.parseInt(inputMoney);
     }
 
-    private static void validatePurchaseMoney(String value) {
-        validateNumber(value);
-        validateRange(value);
+    private static void validatePurchaseMoney(String purchaseMoney) {
+        validateNumberType(purchaseMoney);
+        validatePositiveNumberRange(purchaseMoney);
     }
 
-    private static void validateNumber(String value) {
+    private static void validateNumberType(String value) {
         try {
             Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("금액은 숫자가 아닐 수 없습니다.");
+            throw new IllegalArgumentException("입력값은 숫자여야 합니다.");
         }
     }
 
-    private static void validateRange(String value) {
-        if (Integer.parseInt(value) <= MINIMUM_VALUE) {
-            throw new IllegalArgumentException("금액은 " + MINIMUM_VALUE + "이하일 수 없습니다.");
+    private static void validatePositiveNumberRange(String value) {
+        if (Integer.parseInt(value) <= MINIMUM_POSITIVE_NUMBER) {
+            throw new IllegalArgumentException("입력값은 " + MINIMUM_POSITIVE_NUMBER + "이하일 수 없습니다.");
         }
     }
 
@@ -64,15 +64,15 @@ public class InputView {
     }
 
     private static void validateWinningLottoNumbers(List<String> values) {
-        validateCount(values);
+        validateLottoNumberCount(values);
         for (String value : values) {
-            validateNumber(value);
+            validateNumberType(value);
         }
     }
 
-    private static void validateCount(List<String> values) {
+    private static void validateLottoNumberCount(List<String> values) {
         if (values.size() != LottoConstant.LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 숫자는 " + LottoConstant.LOTTO_NUMBER_SIZE + "개여야 합니다.");
         }
     }
 
@@ -90,8 +90,8 @@ public class InputView {
         return Integer.parseInt(inputBonusBall);
     }
 
-    private static void validateBonusBall(String value) {
-        validateNumber(value);
-        validateRange(value);
+    private static void validateBonusBall(String bonusBall) {
+        validateNumberType(bonusBall);
+        validatePositiveNumberRange(bonusBall);
     }
 }
