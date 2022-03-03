@@ -3,6 +3,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import domain.Lotto;
 import domain.LottoGame;
 import domain.AutoLottoGenerator;
+import domain.WinningChecker;
 import domain.WinningNumbers;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +34,9 @@ public class LottoGameTest {
         WinningNumbers winningNumbers = new WinningNumbers(
             new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)), 9);
 
-        lottoGame.makeResult(winningNumbers);
+        WinningChecker winningChecker = lottoGame.makeResult(winningNumbers);
 
-        double yield = lottoGame.getYield();
+        double yield = lottoGame.getYield(winningChecker);
 
         assertThat(yield).isEqualTo((double) 2000005000 / (double) 3000);
     }

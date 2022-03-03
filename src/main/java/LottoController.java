@@ -26,6 +26,6 @@ public class LottoController {
         WinningChecker winningChecker = lottoGame.makeResult(winningNumbers);
 
         OutputView.printWinningStatistic(winningChecker);
-        OutputView.printYield(lottoGame.getYield());
+        OutputView.printYield(lottoGame.getYield(winningChecker));
     }
 }
