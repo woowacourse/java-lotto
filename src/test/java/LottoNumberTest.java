@@ -41,4 +41,16 @@ class LottoNumberTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("보너스 번호는 당첨 번호와 중복");
     }
+
+    @Test
+    @DisplayName("보너스 번호 생성")
+    void bonusNumberCreate() {
+        List<LottoNumber> inputLottoNumbers = IntStream.of(1, 2, 3, 4, 5, 6)
+                .mapToObj(LottoNumber::getInstance)
+                .collect(Collectors.toList());
+
+        assertThat(LottoNumber.createBonus(7, new LottoTicketNumbers(inputLottoNumbers)))
+                .isEqualTo(LottoNumber.getInstance(7));
+    }
 }
+
