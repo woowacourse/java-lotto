@@ -34,11 +34,6 @@ public class LottoGame {
         return new LottoGame(lottoNumberGenerator, money);
     }
 
-    private Lottos buyLotto(LottoNumberGenerator lottoNumberGenerator, Money money) {
-        int lottoAmount = money.money() / LOTTO_PRICE;
-        return Lottos.buyLottos(lottoNumberGenerator, lottoAmount);
-    }
-
     public void enterWinningLottoNumbersAndBonusNumber(List<Integer> notVerifiedWinningLottoNumbers
             , int notVerifiedBonusNumber) {
         Validator.checkArgumentIsNull(notVerifiedWinningLottoNumbers);
@@ -70,6 +65,11 @@ public class LottoGame {
 
     public Lottos getLottos() {
         return lottos;
+    }
+
+    private Lottos buyLotto(LottoNumberGenerator lottoNumberGenerator, Money money) {
+        int lottoAmount = money.money() / LOTTO_PRICE;
+        return Lottos.buyLottos(lottoNumberGenerator, lottoAmount);
     }
 
     private void validateLottoInput(List<Integer> notVerifiedWinningLottoNumbers

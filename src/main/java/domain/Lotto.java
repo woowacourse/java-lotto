@@ -9,16 +9,10 @@ import util.Validator;
 
 public class Lotto {
 
-
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(LottoNumberGenerator lottoNumberGenerator) {
         this.lottoNumbers = generateNumber(lottoNumberGenerator);
-    }
-
-    public static Lotto generateLotto(LottoNumberGenerator lottoNumberGenerator) {
-        return new Lotto(lottoNumberGenerator);
-
     }
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
@@ -26,15 +20,13 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableSet(this.lottoNumbers);
+    public static Lotto generateLotto(LottoNumberGenerator lottoNumberGenerator) {
+        return new Lotto(lottoNumberGenerator);
+
     }
 
-
-    public Set<LottoNumber> generateNumber(LottoNumberGenerator lottoNumberGenerator) {
-        List<Integer> pickedLottoNumbers = lottoNumberGenerator.generateLottoNumbers();
-
-        return sortAndConvertToLottoNumberSet(pickedLottoNumbers);
+    public Set<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableSet(this.lottoNumbers);
     }
 
     public int countDuplicatedNumber(Lotto winningLotto) {
@@ -50,6 +42,12 @@ public class Lotto {
     public boolean isBonusNumberContain(LottoNumber bonusNumber) {
         Validator.checkArgumentIsNull(bonusNumber);
         return getNumbers().contains(bonusNumber.getNumber());
+    }
+
+    private Set<LottoNumber> generateNumber(LottoNumberGenerator lottoNumberGenerator) {
+        List<Integer> pickedLottoNumbers = lottoNumberGenerator.generateLottoNumbers();
+
+        return sortAndConvertToLottoNumberSet(pickedLottoNumbers);
     }
 
     private Set<LottoNumber> sortAndConvertToLottoNumberSet(List<Integer> lottoNumbers) {
