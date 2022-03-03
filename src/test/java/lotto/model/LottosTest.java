@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class LottosTest {
 
@@ -29,18 +31,23 @@ public class LottosTest {
     void lottosSaveTest() {
         Lottos lottos = new Lottos(lottoList);
 
-        assertThat(lottos.getLottos()).containsExactly(lotto1, lotto2, lotto3);
-        assertThat(lottos.findLottoCount()).isEqualTo(3);
+        assertThat(lottos.getLottos())
+            .hasSize(3)
+            .containsExactly(lotto1, lotto2, lotto3);
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+        "FIRST,1",
+        "SECOND,2"
+    })
     @DisplayName("로또의 등수 계산하는 테스트")
-    void countLottoRankTest() {
+    void countLottoRankTest(String name, int expected) {
         Lottos lottos = new Lottos(lottoList);
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         LottoStatistics statistics = lottos.checkRank(winningLotto);
 
-        assertThat(statistics.getRankMap().get(Rank.FIRST)).isEqualTo(1);
-        assertThat(statistics.getRankMap().get(Rank.SECOND)).isEqualTo(2);
+        assertThat(statistics.getRankMap().get(Rank.valueOf(name)))
+            .isEqualTo(expected);
     }
 }

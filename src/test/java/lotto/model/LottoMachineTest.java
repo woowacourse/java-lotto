@@ -22,10 +22,11 @@ class LottoMachineTest {
     @Test
     @DisplayName("자동 구매 개수가 잘 계산되는지 확인")
     void initTest2() {
-        int actual = 3;
         LottoMachine lottoMachine = new LottoMachine(5, 2);
+        int actual = lottoMachine.getAutoCount();
+        int expected = 3;
 
-        assertThat(lottoMachine.getAutoCount()).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -39,7 +40,8 @@ class LottoMachineTest {
 
         List<Lotto> lottos = lottoMachine.createLottos(manualLottos);
 
-        assertThat(lottos).contains(lotto1, lotto2, lotto3);
-        assertThat(lottos.size()).isEqualTo(5);
+        assertThat(lottos)
+            .hasSize(5)
+            .contains(lotto1, lotto2, lotto3);
     }
 }
