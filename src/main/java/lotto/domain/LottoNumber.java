@@ -6,9 +6,9 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    public static final int MINIMUM_RANGE = 1;
+    public static final int MAXIMUM_RANGE = 45;
     private static final String ERROR_NUMBER_RANGE = "로또 번호가 범위를 벗어났습니다.";
-    private static final int MINIMUM_RANGE = 1;
-    private static final int MAXIMUM_RANGE = 45;
 
     private static final List<LottoNumber> lottoNumberCache = new ArrayList<>();
 
