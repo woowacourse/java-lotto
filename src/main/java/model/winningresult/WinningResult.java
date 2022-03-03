@@ -2,7 +2,7 @@ package model.winningresult;
 
 import java.util.Map;
 
-import model.money.Money;
+import model.money.PurchaseMoney;
 import model.rank.Rank;
 
 public class WinningResult {
@@ -18,8 +18,8 @@ public class WinningResult {
         return winningResult;
     }
 
-    public Double getRateOfReturn(final Money money) {
-        int totalInsertMoney = money.getPurchaseCount() * LOTTO_PRICE;
+    public Double getRateOfReturn(final PurchaseMoney purchaseMoney) {
+        int totalInsertMoney = purchaseMoney.getPurchaseCount() * LOTTO_PRICE;
         int totalReturn = calculateTotalReturn();
         return totalReturn / (double) totalInsertMoney;
     }

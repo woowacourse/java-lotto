@@ -4,7 +4,7 @@ import dto.LottoDto;
 import dto.RankResultDto;
 import model.lottonumber.Lottos;
 import model.generator.Generator;
-import model.money.Money;
+import model.money.PurchaseMoney;
 import model.lottonumber.Lotto;
 import model.rank.Rank;
 import model.lottonumber.WinningNumbers;
@@ -28,24 +28,24 @@ public class LottoController {
     }
 
     public void run() {
-        Money money = insertMoney();
-        Lottos lottos = purchaseLottos(money, generator);
+        PurchaseMoney purchaseMoney = insertPurchaseMoney();
+        Lottos lottos = purchaseLottos(purchaseMoney, generator);
         WinningNumbers winningNumbers = insertWinningInformation();
-        showWinningResult(lottos, winningNumbers, money);
+        showWinningResult(lottos, winningNumbers, purchaseMoney);
     }
 
-    private Money insertMoney() {
+    private PurchaseMoney insertPurchaseMoney() {
         try {
-            int money = inputView.inputMoney();
-            return new Money(money);
+            int purchaseMoney = inputView.inputMoney();
+            return new PurchaseMoney(purchaseMoney);
         } catch (IllegalArgumentException error) {
             System.out.println(error.getMessage());
-            return insertMoney();
+            return insertPurchaseMoney();
         }
     }
 
-    private Lottos purchaseLottos(Money money, Generator generator) {
-        Lottos lottos = new Lottos(money, generator);
+    private Lottos purchaseLottos(PurchaseMoney purchaseMoney, Generator generator) {
+        Lottos lottos = new Lottos(purchaseMoney, generator);
         List<LottoDto> lottoDtos = convertLottosToDtos(lottos.getLottos());
         outputView.printLottos(lottoDtos);
         return lottos;
@@ -86,12 +86,12 @@ public class LottoController {
         }
     }
 
-    private void showWinningResult(Lottos lottos, WinningNumbers winningNumbers, Money money) {
+    private void showWinningResult(Lottos lottos, WinningNumbers winningNumbers, PurchaseMoney purchaseMoney) {
         WinningResult winningResult = lottos.makeWinningResult(winningNumbers);
         List<RankResultDto> rankResultDtos = convertWinningResultToDtos(winningResult.getWinningResult());
 
         outputView.printWinningResult(rankResultDtos);
-        outputView.printRateOfReturn(winningResult.getRateOfReturn(money));
+        outputView.printRateOfReturn(winningResult.getRateOfReturn(purchaseMoney));
     }
 
     private List<RankResultDto> convertWinningResultToDtos(final Map<Rank, Integer> results) {

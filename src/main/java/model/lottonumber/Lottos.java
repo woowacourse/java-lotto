@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import model.money.Money;
+import model.money.PurchaseMoney;
 import model.generator.Generator;
 import model.rank.Rank;
 import model.winningresult.WinningResult;
@@ -15,8 +15,8 @@ import model.winningresult.WinningResult;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(final Money money, final Generator generator) {
-        int purchaseCount = money.getPurchaseCount();
+    public Lottos(final PurchaseMoney purchaseMoney, final Generator generator) {
+        int purchaseCount = purchaseMoney.getPurchaseCount();
         lottos = IntStream
                 .rangeClosed(1, purchaseCount)
                 .mapToObj(index -> new Lotto(generator))

@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import model.money.Money;
+import model.money.PurchaseMoney;
 import model.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ class WinningResultTest {
         result.put(Rank.FIFTH, 3);
 
         final WinningResult winningResult = new WinningResult(result);
-        final Money money = new Money(100000);
-        assertThat(winningResult.getRateOfReturn(money)).isEqualTo(65000 / (double) 100000);
+        final PurchaseMoney purchaseMoney = new PurchaseMoney(100000);
+        assertThat(winningResult.getRateOfReturn(purchaseMoney)).isEqualTo(65000 / (double) 100000);
     }
 }
