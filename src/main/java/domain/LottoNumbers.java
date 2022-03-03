@@ -21,6 +21,7 @@ public class LottoNumbers {
     public static LottoNumbers convertToLottoNumber(List<Integer> lottoNumbers) {
         return new LottoNumbers(lottoNumbers.stream()
                 .map(LottoNumber::getInstance)
+                .sorted(LottoNumber::compareTo)
                 .collect(Collectors.toList()));
     }
 
