@@ -20,12 +20,16 @@ public class OutputView {
             "5개 일치 (1500000원)- %d개\n",
             "4개 일치 (50000원)- %d개\n",
             "3개 일치 (5000원)- %d개\n");
-    private static final String MESSAGE_YIELD = "총 수익률은 %f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final List<String> MESSAGE_YIELD = List.of("총 수익률은 %f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)",
+            "총 수익률은 %f입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
     private static final String NUMBER_DELIMITER = ", ";
     private static final String LOTTO_NUMBER_FORMAT = "[%s]\n";
     private static final int NONE = 0;
     private static final int FIRST_PRIZE_INDEX = 0;
     private static final int FIFTH_PRIZE_INDEX = 5;
+    private static final int BENEFIT_INDEX = 1;
+    private static final int LOSS_INDEX = 0;
+    private static final double breakEvenPoint = 1L;
 
     public static void printLottosInformations(Lottos lottos) {
         System.out.printf(MESSAGE_LOTTOS_NUMBER, lottos.getLottos().size());
@@ -49,7 +53,15 @@ public class OutputView {
     }
 
     public static void printYield(double yield) {
-        System.out.printf(MESSAGE_YIELD, yield);
+        int index = getProperIndexAccordingYield(yield);
+        System.out.printf(MESSAGE_YIELD.get(index), yield);
+    }
+
+    private static int getProperIndexAccordingYield(double yield) {
+        if (yield > breakEvenPoint) {
+            return BENEFIT_INDEX;
+        }
+        return LOSS_INDEX;
     }
 
     private static List<Integer> refineResults(Map<Rewards, Integer> results) {
