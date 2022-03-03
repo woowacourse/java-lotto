@@ -30,35 +30,12 @@ public class LottoController {
     }
 
     public void run() {
-        PurchaseMoney purchaseMoney = insertPurchaseMoney();
-        LottoMachine lottoMachine;
-        Lottos lottos = purchaseLottos(purchaseMoney, generator);
+        LottoMachine lottoMachine = new LottoMachineInitializer(inputView).initLottoMachine();
+
+        /*
         WinningNumbers winningNumbers = insertWinningInformation();
         showWinningResult(lottos, winningNumbers, purchaseMoney);
-    }
-
-    private void printLottoPurchaseProcess() {
-        int purchaseMoney = inputView.inputPurchaseMoney();
-        int purchasedManualLottoCount = inputView.inputManualLottoCount();
-        ManualLottoCount manualLottoCount = new ManualLottoCount(purchasedManualLottoCount, purchaseMoney);
-
-    }
-
-    private PurchaseMoney insertPurchaseMoney() {
-        try {
-            int purchaseMoney = inputView.inputPurchaseMoney();
-            return new PurchaseMoney(purchaseMoney);
-        } catch (IllegalArgumentException error) {
-            System.out.println(error.getMessage());
-            return insertPurchaseMoney();
-        }
-    }
-
-    private Lottos purchaseLottos(PurchaseMoney purchaseMoney, Generator generator) {
-        Lottos lottos = new Lottos(purchaseMoney, generator);
-        List<LottoDto> lottoDtos = convertLottosToDtos(lottos.getLottos());
-        outputView.printLottos(lottoDtos);
-        return lottos;
+    */
     }
 
     private List<LottoDto> convertLottosToDtos(List<Lotto> lottos) {

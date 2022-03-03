@@ -17,10 +17,11 @@ public class LottoMachineInitializer {
         this.inputView = inputView;
     }
 
-    public void initLottoMachine() {
+    public LottoMachine initLottoMachine() {
         LottoMachine lottoMachine = new LottoMachine();
         insertPurchaseMoneyToLottoMachine(lottoMachine);
-        List<Lotto> manualLottos = buyManualLotto(lottoMachine);
+        purchaseLottos(lottoMachine);
+        return lottoMachine;
     }
 
     private void insertPurchaseMoneyToLottoMachine(LottoMachine lottoMachine) {
@@ -28,14 +29,25 @@ public class LottoMachineInitializer {
         lottoMachine.insertPurchaseMoney(purchaseMoney);
     }
 
-    private List<Lotto> buyManualLotto(LottoMachine lottoMachine) {
-        ManualLottoCount manualLottoCount = new ManualLottoCount(inputView.inputManualLottoCount(),
-                lottoMachine.getPurchaseLottoCount());
-
-        return makeManualLottos(lottoMachine.getPurchaseLottoCount());
+    private void purchaseLottos(LottoMachine lottoMachine) {
+        ManualLottoCount manualLottoCount = prepareManualLottoCount(lottoMachine);
+        List<Lotto> manualLottos = purchaseManualLottos(manualLottoCount);
+        lottoMachine.purchaseLottos(manualLottos, manualLottoCount);
     }
 
-    private List<Lotto> makeManualLottos(int manualLottoCount) {
+    private ManualLottoCount prepareManualLottoCount(LottoMachine lottoMachine) {
+        int purchaseLottoCount = lottoMachine.getPurchaseLottoCount();
+
+        return new ManualLottoCount(inputView.inputManualLottoCount(), purchaseLottoCount);
+    }
+
+    private List<Lotto> purchaseManualLottos(ManualLottoCount manualLottoCount) {
+        int manualLottoCountForPurchase = manualLottoCount.getCount();
+
+        return makeManualLottoNumberGroups(manualLottoCountForPurchase);
+    }
+
+    private List<Lotto> makeManualLottoNumberGroups(int manualLottoCount) {
         return IntStream.range(0, manualLottoCount)
                 .mapToObj(index -> new Lotto(makeManualLottoNumberGroup()))
                 .collect(Collectors.toList());
