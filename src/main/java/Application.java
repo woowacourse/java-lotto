@@ -61,7 +61,7 @@ public class Application {
 
     private static Lotto createWinningLottoBall() {
         try {
-            return lottoFactory.createLotto(InputView.getWinningLottoNumbers());
+            return lottoFactory.generateLotto(InputView.getWinningLottoNumbers());
         } catch (Exception e) {
             OutputView.showErrorMessage(e);
             return createWinningLottoBall();

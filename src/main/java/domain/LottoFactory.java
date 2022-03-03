@@ -29,7 +29,7 @@ public class LottoFactory {
         return new Lottos(lottos);
     }
 
-    public Lotto createLotto(List<Integer> lottoNumbers) {
+    public Lotto generateLotto(List<Integer> lottoNumbers) {
         return new Lotto(lottoNumbers.stream()
             .map(LottoNumber::valueOf)
             .sorted()

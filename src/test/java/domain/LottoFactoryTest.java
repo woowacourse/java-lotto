@@ -18,7 +18,7 @@ class LottoFactoryTest {
     @Test
     @DisplayName("로또를 생성하는 기능")
     void createLotto() {
-        assertThat(lottoFactory.createLotto(List.of(1, 2, 3, 4, 5, 6))).isNotNull();
+        assertThat(lottoFactory.generateLotto(List.of(1, 2, 3, 4, 5, 6))).isNotNull();
     }
 
     @ParameterizedTest
@@ -29,7 +29,7 @@ class LottoFactoryTest {
             .map(Integer::parseInt)
             .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> lottoFactory.createLotto(numbers))
+        assertThatThrownBy(() -> lottoFactory.generateLotto(numbers))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
