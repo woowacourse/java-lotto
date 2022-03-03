@@ -1,6 +1,8 @@
 import static view.InputView.askManualLottoNumbers;
 
 import domain.LottoGame;
+import domain.LottoGenerators;
+import domain.ManualLottoGenerator;
 import domain.Money;
 import domain.RandomLottoGenerator;
 import domain.WinningChecker;
@@ -18,10 +20,12 @@ public class LottoController {
         int manualAmount = InputView.askManualAmount(money);
 
         List<List<Integer>> manualLottoNumbers = InputView.askManualLottoNumbers(manualAmount);
-        System.out.println(manualLottoNumbers);
+
+        int autoAmount = money.convertToAmount() - manualAmount;
 
         LottoGame lottoGame = new LottoGame(money,
-            new RandomLottoGenerator(money.convertToAmount()));
+            new LottoGenerators(new ManualLottoGenerator(manualAmount, manualLottoNumbers),
+                new RandomLottoGenerator(autoAmount)));
 
         OutputView.printLottosInformations(lottoGame.getLottos());
 
