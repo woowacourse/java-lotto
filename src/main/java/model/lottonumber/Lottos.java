@@ -15,11 +15,11 @@ import model.winningresult.WinningResult;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(final List<Lotto> manualLottos, final int autoPurchaseCount) {
+    public Lottos(final List<Lotto> manualLottos, final int autoLottoCount) {
         Generator generator = new LottoNumberGenerator();
 
         lottos = IntStream
-                .rangeClosed(1, autoPurchaseCount)
+                .rangeClosed(1, autoLottoCount)
                 .mapToObj(index -> new Lotto(generator))
                 .collect(Collectors.toList());
         lottos.addAll(manualLottos);

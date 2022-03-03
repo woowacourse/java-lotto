@@ -18,9 +18,9 @@ public class LottoMachine {
     }
 
     public void purchaseLottos(List<Lotto> manualLottos) {
-        int autoPurchaseCount = totalPurchaseMoney.getAutoPurchaseCount();
+        int autoLottoCount = totalPurchaseMoney.getAutoLottoCount();
 
-        lottos = new Lottos(manualLottos, autoPurchaseCount);
+        lottos = new Lottos(manualLottos, autoLottoCount);
     }
 
     public int sendManualLottoCount() {
@@ -28,7 +28,7 @@ public class LottoMachine {
     }
 
     public int sendAutoLottoCount() {
-        return totalPurchaseMoney.getAutoPurchaseCount();
+        return totalPurchaseMoney.getAutoLottoCount();
     }
 
     public int sendTotalPurchaseLottoCount() {

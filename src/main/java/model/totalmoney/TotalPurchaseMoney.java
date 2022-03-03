@@ -35,7 +35,7 @@ public class TotalPurchaseMoney {
         return manualLottoCount * LOTTO_PRICE > purchaseMoney;
     }
 
-    public int getAutoPurchaseCount() {
+    public int getAutoLottoCount() {
         return this.getTotalPurchaseLottoCount() - manualLottoCount.getCount();
     }
 
