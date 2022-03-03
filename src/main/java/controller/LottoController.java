@@ -28,26 +28,11 @@ public class LottoController {
 
     public void start() {
         final Money totalMoney = getMoney();
-        final List<Lotto> issuedLotto = issueLotto(totalMoney);
+        final List<Lotto> issuedManualLotto = buyManualLotto(totalMoney);
 
-        final Result result = getResult(issuedLotto);
+        final Result result = issueLotto(totalMoney, issuedManualLotto);
 
-        printResult(totalMoney, result);
-    }
-
-    private Result getResult(final List<Lotto> issuedLotto) {
-        final WinLotto winLotto = generateWinLotto(getWinLottoNumbers());
-        return new Result(issuedLotto, winLotto);
-    }
-
-    private WinLotto generateWinLotto(final Lotto lastWinLotto) {
-        try {
-            final LottoNumber bonusNumber = getBonusNumber();
-            return new WinLotto(lastWinLotto, bonusNumber);
-        } catch (Exception e) {
-            outputView.printInputError(e);
-            return generateWinLotto(lastWinLotto);
-        }
+        announceResult(totalMoney, result);
     }
 
     private Money getMoney() {
@@ -59,15 +44,12 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> issueLotto(final Money totalMoney) {
+    private List<Lotto> buyManualLotto(final Money totalMoney) {
         final Count manualCount = getManualCount(totalMoney);
-        final List<Lotto> issuedManualLotto = getManualLottoWith(manualCount);
-        final List<Lotto> issuedLotto = lottoService.issueLotto(totalMoney, issuedManualLotto);
-        outputView.printLotto(getIssuedLottoDto(issuedLotto), manualCount.getCount());
-        return issuedLotto;
+        return getManualLottoWith(manualCount);
     }
 
-    private List<LottoDto> getIssuedLottoDto(final List<Lotto> issuedLotto) {
+    private List<LottoDto> toLottoDto(final List<Lotto> issuedLotto) {
         return issuedLotto.stream()
             .map(LottoDto::from)
             .collect(Collectors.toList());
@@ -88,12 +70,25 @@ public class LottoController {
             return Collections.emptyList();
         }
         try {
-            final List<List<String>> manualLottoInput = inputView.getManualLotto(manualCount.getCount());
-            return lottoService.issueManualLottoGroup(manualLottoInput);
+            return inputView.getManualLotto(manualCount.getCount());
         } catch (Exception e) {
             outputView.printInputError(e);
             return getManualLottoWith(manualCount);
         }
+    }
+
+    private Result issueLotto(final Money totalMoney, final List<Lotto> issuedManualLotto) {
+        final List<Lotto> issuedLotto = lottoService.issueLotto(
+            totalMoney,
+            issuedManualLotto
+        );
+        outputView.printLotto(toLottoDto(issuedLotto), issuedManualLotto.size());
+
+        final Lotto lastWinLotto = getWinLottoNumbers();
+        final LottoNumber bonusNumber = getBonusNumber();
+        final WinLotto winLotto = new WinLotto(lastWinLotto, bonusNumber);
+
+        return lottoService.getResult(issuedLotto, winLotto);
     }
 
     private Lotto getWinLottoNumbers() {
@@ -116,8 +111,8 @@ public class LottoController {
         }
     }
 
-    private void printResult(final Money money, final Result result) {
+    private void announceResult(final Money totalMoney, final Result result) {
         outputView.printWinStatistics(result);
-        outputView.printWinProfit(result.getProfitOrNotMessage(money));
+        outputView.printWinProfit(result.getProfitOrNotMessage(totalMoney));
     }
 }

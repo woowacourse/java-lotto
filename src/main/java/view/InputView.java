@@ -1,5 +1,6 @@
 package view;
 
+import domain.Lotto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -31,11 +32,11 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public List<List<String>> getManualLotto(final int manualCount) {
+    public List<Lotto> getManualLotto(final int manualCount) {
         System.out.println();
         System.out.println(INPUT_MANUAL_LOTTO_INSTRUCTION);
         return IntStream.range(MANUAL_LOTTO_START_INDEX, manualCount)
-            .mapToObj(i -> getLotto())
+            .mapToObj(i -> Lotto.fromInput(getLotto()))
             .collect(Collectors.toList());
     }
 

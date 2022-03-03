@@ -4,9 +4,10 @@ import domain.Count;
 import domain.Lotto;
 import domain.LottoFactory;
 import domain.Money;
+import domain.Result;
+import domain.WinLotto;
 import domain.generator.AutoLottoGenerator;
 import domain.generator.LottoGenerator;
-import domain.generator.ManualLottoGenerator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,16 +19,12 @@ public class LottoService {
     private static final int AUTO_LOTTO_COUNT_LOWER_BOUND = 0;
     private static final String ERROR_MANUAL_LOTTO_SIZE_MESSAGE = "전체 로또 갯수보다 클 수 없습니다.";
 
-    public List<Lotto> issueManualLottoGroup(final List<List<String>> issuedManualLottoInput) {
-        final List<Lotto> issuedManualLotto = new ArrayList<>();
-        for (List<String> manualLottoInput : issuedManualLottoInput) {
-            issuedManualLotto.add(LottoFactory.generateLotto(new ManualLottoGenerator(manualLottoInput)));
-        }
-        return Collections.unmodifiableList(issuedManualLotto);
-    }
-
     public List<Lotto> issueLotto(final Money totalMoney, final List<Lotto> issuedManualLotto) {
         return issueAutoLottoGroup(totalMoney, issuedManualLotto);
+    }
+
+    public Result getResult(final List<Lotto> issuedLotto, final WinLotto lastWinLotto) {
+        return new Result(issuedLotto, lastWinLotto);
     }
 
     private List<Lotto> issueAutoLottoGroup(final Money totalMoney, final List<Lotto> issuedManualLotto) {
