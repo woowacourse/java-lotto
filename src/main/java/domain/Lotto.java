@@ -14,19 +14,19 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<Integer> lottoNumberValues) {
-        validateSize(lottoNumberValues);
-        this.lottoNumbers = createSetOfLottoNumberBySetOfInteger(lottoNumberValues);
+    public Lotto(Set<Integer> numbers) {
+        validateSize(numbers);
+        this.lottoNumbers = createLottoNumbersByNumbers(numbers);
     }
 
-    private Set<LottoNumber> createSetOfLottoNumberBySetOfInteger(Set<Integer> lottoNumberValues) {
-        return lottoNumberValues.stream()
+    private Set<LottoNumber> createLottoNumbersByNumbers(Set<Integer> numbers) {
+        return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    private void validateSize(Set<Integer> lottoNumberValues) {
-        if (lottoNumberValues.size() != LOTTO_SIZE) {
+    private void validateSize(Set<Integer> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS);
         }
     }

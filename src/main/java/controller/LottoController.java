@@ -126,8 +126,8 @@ public class LottoController {
 
     private Lotto generateLottoOfWinningLotto() {
         try {
-            Set<Integer> winningNumberValues = InputView.scanWinningLottoNumbers();
-            return new Lotto(winningNumberValues);
+            Set<Integer> numbers = InputView.scanWinningLottoNumbers();
+            return new Lotto(numbers);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
             return generateLottoOfWinningLotto();

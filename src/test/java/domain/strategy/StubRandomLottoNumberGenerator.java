@@ -12,7 +12,7 @@ public class StubRandomLottoNumberGenerator implements LottoNumberGenerateStrate
     }
 
     @Override
-    public Set<Integer> generateLottoNumberValues() {
+    public Set<Integer> generateNumbers() {
         int currentCursor = sequenceCursor;
         sequenceCursor = (sequenceCursor + 1) % numberSequences.size();
 

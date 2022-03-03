@@ -23,7 +23,7 @@ public class StubRandomLottoNumberGeneratorTest {
         // when & then
         for (int i = 0; i < 6; i++) {
             int cursor = i % numbersSequence.size();
-            Set<Integer> actual = fixedLottoNumberGenerator.generateLottoNumberValues();
+            Set<Integer> actual = fixedLottoNumberGenerator.generateNumbers();
             assertThat(actual).containsAll(numbersSequence.get(cursor));
         }
     }
