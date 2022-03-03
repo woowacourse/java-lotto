@@ -1,4 +1,5 @@
-import domain.*;
+package domain;
+
 import domain.strategy.LottoNumberStrategy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

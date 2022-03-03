@@ -1,5 +1,5 @@
-import domain.strategy.RandomLottoNumberStrategy;
-import domain.strategy.LottoNumberStrategy;
+package domain.strategy;
+
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
