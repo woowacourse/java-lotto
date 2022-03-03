@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class RankTest {
 
-    @DisplayName("보너스 볼을 포함하여 4개를 맞춘 경우 2등이어야한다.")
+    @DisplayName("보너스 볼과 5개를 맞춘 경우 2등이어야한다.")
     @Test
     void 이등_보너스_포함_당첨() {
         // given
@@ -34,19 +34,6 @@ class RankTest {
         );
     }
 
-    @DisplayName("보너스볼 포함하여 6개 맞춘 경우 1등이어야 한다.")
-    @Test
-    void 일등_보너스_포함_당첨() {
-        // given
-        Rank rank = Rank.of(6, false);
-
-        // when & then
-        assertAll(
-                () -> assertThat(rank).isEqualTo(Rank.FIRST),
-                () -> assertThat(rank.getPrizeMoney()).isEqualTo(2_000_000_000)
-        );
-    }
-
     @DisplayName("보너스볼 미포함하여 6개 맞춘 경우 1등이어야 한다.")
     @Test
     void 일등_보너스_미포함_당첨() {
@@ -60,7 +47,7 @@ class RankTest {
         );
     }
 
-    @DisplayName("2개 맞춘 경우 NOTTING 이다.")
+    @DisplayName("2개 맞춘 경우 NOTHING 이다.")
     @Test
     void 두개_맞은_경우_NOTTING() {
         // given

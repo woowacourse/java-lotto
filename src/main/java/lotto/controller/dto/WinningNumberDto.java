@@ -26,6 +26,10 @@ public class WinningNumberDto {
     }
 
     public WinningNumber toWinningNumber() {
-        return new WinningNumber(new LottoTicket(normalNumbers), new LottoNumber(bonusNumber));
+        List<LottoNumber> lottoNumbers = normalNumbers.stream()
+                .map(LottoNumber::from)
+                .collect(toList());
+
+        return new WinningNumber(new LottoTicket(lottoNumbers), LottoNumber.from(bonusNumber));
     }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.domain.LottoTestDataGenerator.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -13,22 +14,21 @@ class WinningNumberTest {
     @Test
     void 당첨_번호_생성_확인() {
         // given
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
         int bonusBall = 7;
 
         // when & then
-        assertDoesNotThrow(() -> new WinningNumber(new LottoTicket(winningNumbers), new LottoNumber(bonusBall)));
+        assertDoesNotThrow(() -> new WinningNumber(new LottoTicket(generateNumbers()), LottoNumber.from(bonusBall)));
     }
 
     @DisplayName("당첨 번호의 총 개수가 7개가 아닌 경우 예외를 던진다.")
     @Test
     void 당첨_번호_개수_확인() {
         // given
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5);
+        List<LottoNumber> winningNumbers = parseLottoNumbers(List.of(1, 2, 3, 4, 5));
         int bonusBall = 7;
 
         // when & then
-        assertThatThrownBy(() -> new WinningNumber(new LottoTicket(winningNumbers), new LottoNumber(bonusBall)))
+        assertThatThrownBy(() -> new WinningNumber(new LottoTicket(winningNumbers), LottoNumber.from(bonusBall)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("번호의 갯수가 적절하지 않습니다. 또한 중복될 수 없습니다.");
     }
@@ -36,11 +36,11 @@ class WinningNumberTest {
     @DisplayName("당첨 번호는 서로 중복되는 경우 예외를 던진다.")
     @Test
     void 당첨_번호_중복_확인() {
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> winningNumbers = parseLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         int bonusBall = 1;
 
         // when & then
-        assertThatThrownBy(() -> new WinningNumber(new LottoTicket(winningNumbers), new LottoNumber(bonusBall)))
+        assertThatThrownBy(() -> new WinningNumber(new LottoTicket(winningNumbers), LottoNumber.from(bonusBall)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호는 중복될 수 없습니다.");
     }
@@ -49,8 +49,9 @@ class WinningNumberTest {
     @Test
     void 당첨_정보_확인_2등() {
         // given
-        WinningNumber winningNumber = new WinningNumber(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
-        LottoTicket lottoTicket = new LottoTicket(size -> List.of(1, 2, 3, 4, 7, 8));
+        WinningNumber winningNumber = new WinningNumber(new LottoTicket(parseLottoNumbers(List.of(1, 2, 3, 4, 5, 6))),
+                LottoNumber.from(7));
+        LottoTicket lottoTicket = new LottoTicket(parseLottoNumbers(List.of(1, 2, 3, 4, 5, 7)));
 
         // when
         Rank rank = winningNumber.compare(lottoTicket);
@@ -63,8 +64,9 @@ class WinningNumberTest {
     @Test
     void 당첨_정보_확인_3등() {
         // given
-        WinningNumber winningNumber = new WinningNumber(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
-        LottoTicket lottoTicket = new LottoTicket(size -> List.of(1, 2, 3, 4, 5, 8));
+        WinningNumber winningNumber = new WinningNumber(new LottoTicket(parseLottoNumbers(List.of(1, 2, 3, 4, 5, 6))),
+                LottoNumber.from(7));
+        LottoTicket lottoTicket = new LottoTicket(parseLottoNumbers(List.of(1, 2, 3, 4, 5, 8)));
 
         // when
         Rank rank = winningNumber.compare(lottoTicket);

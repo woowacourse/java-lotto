@@ -3,31 +3,22 @@ package lotto.domain;
 import static java.util.function.Function.*;
 import static java.util.stream.Collectors.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
-import lotto.domain.generator.LottoNumberGenerator;
 
 public class LottoTickets {
 
-    private static final int LOTTO_COUNT_START_INCLUSIVE = 0;
-
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoTickets = generateTickets(lottoCount, lottoNumberGenerator);
-    }
-
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = new ArrayList<>(lottoTickets);
-    }
-
-    private List<LottoTicket> generateTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
-        return IntStream.range(LOTTO_COUNT_START_INCLUSIVE, lottoCount)
-                .mapToObj(value -> new LottoTicket(lottoNumberGenerator))
+    public LottoTickets(List<List<LottoNumber>> manualNumbers) {
+        this.lottoTickets = manualNumbers.stream()
+                .map(LottoTicket::new)
                 .collect(toList());
+    }
+
+    public void combine(LottoTickets targetLottoTickets) {
+        lottoTickets.addAll(targetLottoTickets.lottoTickets);
     }
 
     public LottoResult determine(WinningNumber winningNumber) {

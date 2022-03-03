@@ -3,9 +3,9 @@ package lotto;
 import java.util.List;
 import lotto.controller.LottoController;
 import lotto.controller.dto.LottoResultDto;
-import lotto.controller.dto.LottoTicketsDto;
+import lotto.controller.dto.PurchaseInfoDto;
+import lotto.controller.dto.SalesInfoDto;
 import lotto.controller.dto.WinningNumberDto;
-import lotto.controller.dto.MoneyDto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -16,39 +16,40 @@ public class Application {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        int money = createMoney(inputView, outputView);
-        MoneyDto moneyDto = lottoController.createMoney(money);
-        outputView.printTotalCount(moneyDto);
-
-        LottoTicketsDto lottoTicketsDto = lottoController.createLottoTickets(money);
-        outputView.printLottoTicketsInfo(lottoTicketsDto);
+        SalesInfoDto salesInfoDto = createSalesInfo(lottoController, inputView, outputView);
+        outputView.printSalesInfo(salesInfoDto);
 
         WinningNumberDto winningNumberDto = creatWinningNumber(lottoController, inputView, outputView);
 
         outputView.printLottoResultMessage();
-        LottoResultDto lottoResultDto = lottoController.createLottoResult(money, winningNumberDto,
-                lottoTicketsDto);
+        LottoResultDto lottoResultDto = lottoController.createLottoResult(salesInfoDto, winningNumberDto);
         outputView.printYield(lottoResultDto);
     }
 
-    private static int createMoney(InputView inputView, OutputView outputView) {
+    private static SalesInfoDto createSalesInfo(LottoController lottoController, InputView inputView,
+                                                OutputView outputView) {
         try {
-            return inputView.getMoney();
+            int money = inputView.getMoney();
+            int manualCount = inputView.getManualCount();
+            List<List<Integer>> manualNumbers = inputView.getManualNumbers(manualCount);
+
+            return lottoController.purchase(PurchaseInfoDto.valueOf(money, manualCount, manualNumbers));
         } catch (RuntimeException e) {
             outputView.printErrorMessage(e.getMessage());
-            return createMoney(inputView, outputView);
+            return createSalesInfo(lottoController, inputView, outputView);
         }
     }
 
-    private static WinningNumberDto creatWinningNumber(LottoController controller, InputView input, OutputView output) {
+    private static WinningNumberDto creatWinningNumber(LottoController controller, InputView inputView,
+                                                       OutputView outputView) {
         try {
-            List<Integer> normalNumbers = input.getNormalNumbers();
-            int bonusNumber = input.getBonusNumber();
+            List<Integer> normalNumbers = inputView.getNormalNumbers();
+            int bonusNumber = inputView.getBonusNumber();
 
             return controller.createWinningNumber(normalNumbers, bonusNumber);
         } catch (RuntimeException e) {
-            output.printErrorMessage(e.getMessage());
-            return creatWinningNumber(controller, input, output);
+            outputView.printErrorMessage(e.getMessage());
+            return creatWinningNumber(controller, inputView, outputView);
         }
     }
 }

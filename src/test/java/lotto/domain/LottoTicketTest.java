@@ -1,28 +1,39 @@
 package lotto.domain;
 
+import static lotto.domain.LottoTestDataGenerator.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.List;
 import java.util.Set;
-import lotto.domain.generator.AutoLottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTicketTest {
 
-    @DisplayName("로또 티켓 생성 시점에 로또 번호 생성을 위한 전략을 활용한다.")
+    @DisplayName("번호 리스트를 활용하여 로또 티켓을 생성한다.")
     @Test
     void 로또_티켓_정상_생성() {
         // given & when & then
-        assertDoesNotThrow(() -> new LottoTicket(new AutoLottoNumberGenerator()));
+        assertDoesNotThrow(() -> new LottoTicket(generateNumbers()));
+    }
+
+    @DisplayName("로또 번호의 개수가 7개 이상이면 예외를 던진다.")
+    @Test
+    void 로또_티켓_번호_개수_초과() {
+        // given & when & then
+        assertThatThrownBy(() -> new LottoTicket(List.of(LottoNumber.from(1), LottoNumber.from(2))))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("번호의 갯수가 적절하지 않습니다. 또한 중복될 수 없습니다.");
     }
 
     @DisplayName("로또 번호가 중복이면 예외를 던진다.")
     @Test
     void 로또_티켓_중복() {
         // given & when & then
-        assertThatThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5, 5)))
+        assertThatThrownBy(() -> new LottoTicket(
+                List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5),
+                        LottoNumber.from(5))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("번호의 갯수가 적절하지 않습니다. 또한 중복될 수 없습니다.");
     }
@@ -31,13 +42,13 @@ class LottoTicketTest {
     @Test
     void 로또_티켓_불변_검증() {
         // given
-        LottoTicket lottoTicket = new LottoTicket(new AutoLottoNumberGenerator());
+        LottoTicket lottoTicket = new LottoTicket(generateNumbers());
 
         // when
         Set<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
         // then
-        assertThatThrownBy(() -> lottoNumbers.add(new LottoNumber(1)))
+        assertThatThrownBy(() -> lottoNumbers.add(LottoNumber.from(1)))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
@@ -45,11 +56,13 @@ class LottoTicketTest {
     @Test
     void 당첨_번호_인지_확인() {
         // given
-        LottoTicket lottoTicket = new LottoTicket(size -> List.of(1, 2, 3, 4, 5, 6));
-        LottoNumber lottoNumber = new LottoNumber(1);
+        LottoTicket lottoTicket = new LottoTicket(
+                List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3), LottoNumber.from(4), LottoNumber.from(5),
+                        LottoNumber.from(6)));
+        LottoNumber lottoNumber = LottoNumber.from(1);
 
         // when
-        boolean result = lottoTicket.isSame(lottoNumber);
+        boolean result = lottoTicket.contains(lottoNumber);
 
         // then
         assertThat(result).isTrue();
@@ -59,8 +72,8 @@ class LottoTicketTest {
     @Test
     void 맞는_번호_갯수_확인() {
         // given
-        LottoTicket lottoTicket = new LottoTicket(size -> List.of(1, 2, 3, 4, 5, 6));
-        LottoTicket targetLottoTicket = new LottoTicket(size -> List.of(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket = new LottoTicket(generateNumbers());
+        LottoTicket targetLottoTicket = new LottoTicket(generateNumbers());
 
         // when
         int sameNumberCount = lottoTicket.getSameNumberCount(targetLottoTicket);

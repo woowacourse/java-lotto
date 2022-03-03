@@ -1,10 +1,14 @@
 package lotto.controller;
 
+import static lotto.domain.LottoMachine.*;
+
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.controller.dto.LottoResultDto;
 import lotto.controller.dto.LottoTicketsDto;
+import lotto.controller.dto.PurchaseInfoDto;
+import lotto.controller.dto.SalesInfoDto;
 import lotto.controller.dto.WinningNumberDto;
-import lotto.controller.dto.MoneyDto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
@@ -15,31 +19,38 @@ import lotto.domain.WinningNumber;
 
 public class LottoController {
 
-    public MoneyDto createMoney(int money) {
-        return MoneyDto.from(new Money(money));
-    }
-
-    public LottoTicketsDto createLottoTickets(int money) {
+    public SalesInfoDto purchase(PurchaseInfoDto purchaseInfo) {
         LottoMachine lottoMachine = new LottoMachine();
-        LottoTickets lottoTickets = lottoMachine.issue(new Money(money));
+        Money money = new Money(purchaseInfo.getMoney());
 
-        return LottoTicketsDto.from(lottoTickets);
+        LottoTickets lottoTickets = lottoMachine.issueManual(purchaseInfo.getManualNumbers());
+        Money calculateMoney = money.calculateProduct(LottoMachine.LOTTO_PRICE, purchaseInfo.getManualCount());
+
+        int autoCount = calculateMoney.getProductCount(LOTTO_PRICE);
+        lottoTickets.combine(lottoMachine.issueAuto(autoCount));
+
+        return SalesInfoDto.valueOf(money.getAmount(), purchaseInfo.getManualCount(), autoCount,
+                LottoTicketsDto.from(lottoTickets));
     }
 
     public WinningNumberDto createWinningNumber(List<Integer> normalNumbers, int bonusNumber) {
-        WinningNumber winningNumber = new WinningNumber(new LottoTicket(normalNumbers), new LottoNumber(bonusNumber));
+        List<LottoNumber> numbers = normalNumbers.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList());
+
+        WinningNumber winningNumber = new WinningNumber(new LottoTicket(numbers), LottoNumber.from(bonusNumber));
 
         return WinningNumberDto.from(winningNumber);
     }
 
-    public LottoResultDto createLottoResult(int money, WinningNumberDto winningNumberDto,
-                                            LottoTicketsDto lottoTicketsDto) {
-
+    public LottoResultDto createLottoResult(SalesInfoDto salesInfoDto, WinningNumberDto winningNumberDto) {
         WinningNumber winningNumber = winningNumberDto.toWinningNumber();
-        LottoTickets lottoTickets = lottoTicketsDto.toLottoTickets();
+        LottoTicketsDto totalLottoTickets = salesInfoDto.getLottoTickets();
+        LottoTickets lottoTickets = totalLottoTickets.toLottoTickets();
 
         LottoResult lottoResult = lottoTickets.determine(winningNumber);
+        double yield = lottoResult.calculateYield(new Money(salesInfoDto.getMoney()));
 
-        return LottoResultDto.from(lottoResult.getRanks(), lottoResult.calculateYield(new Money(money)));
+        return LottoResultDto.from(lottoResult.getRanks(), yield);
     }
 }

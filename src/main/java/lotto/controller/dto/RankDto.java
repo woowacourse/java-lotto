@@ -12,11 +12,15 @@ public class RankDto {
     private RankDto(Rank rank, long amount) {
         this.prizeMoney = rank.getPrizeMoney();
         this.count = rank.getCount();
-        this.isBonus = rank.isBonus();
+        this.isBonus = isBonus(rank);
         this.amount = amount;
     }
 
-    public static RankDto from(Rank rank, long amount) {
+    private boolean isBonus(Rank rank) {
+        return rank == Rank.SECOND;
+    }
+
+    public static RankDto valueOf(Rank rank, long amount) {
         return new RankDto(rank, amount);
     }
 
@@ -34,15 +38,5 @@ public class RankDto {
 
     public long getAmount() {
         return amount;
-    }
-
-    @Override
-    public String toString() {
-        return "RankDto{" +
-                "prizeMoney=" + prizeMoney +
-                ", count=" + count +
-                ", isBonus=" + isBonus +
-                ", amount=" + amount +
-                '}';
     }
 }

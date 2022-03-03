@@ -5,7 +5,6 @@ import static java.util.stream.Collectors.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import lotto.domain.generator.LottoNumberGenerator;
 
 public class LottoTicket {
 
@@ -14,13 +13,8 @@ public class LottoTicket {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
-        this(lottoNumberGenerator.generate(DEFAULT_LOTTO_NUMBERS_SIZE));
-    }
-
-    public LottoTicket(List<Integer> numbers) {
+    public LottoTicket(List<LottoNumber> numbers) {
         Set<LottoNumber> lottoNumber = numbers.stream()
-                .map(LottoNumber::new)
                 .collect(toSet());
 
         validateSize(lottoNumber);
@@ -36,11 +30,11 @@ public class LottoTicket {
     public int getSameNumberCount(LottoTicket lottoTicket) {
         return (int) lottoTicket.lottoNumbers
                 .stream()
-                .filter(this::isSame)
+                .filter(this::contains)
                 .count();
     }
 
-    public boolean isSame(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 

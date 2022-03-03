@@ -17,17 +17,13 @@ public class WinningNumber {
     }
 
     private void validateDuplicateBonusNumber(LottoTicket lottoNumbers, LottoNumber bonusNumber) {
-        if (lottoNumbers.isSame(bonusNumber)) {
+        if (lottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATED_WINNING_NUMBER_ERROR_MESSAGE);
         }
     }
 
     public Rank compare(LottoTicket lottoTicket) {
-        if (lottoTicket.isSame(bonusNumber)) {
-            return Rank.of(lottoNumbers.getSameNumberCount(lottoTicket) + 1, lottoTicket.isSame(bonusNumber));
-        }
-
-        return Rank.of(lottoNumbers.getSameNumberCount(lottoTicket), lottoTicket.isSame(bonusNumber));
+        return Rank.of(lottoNumbers.getSameNumberCount(lottoTicket), lottoTicket.contains(bonusNumber));
     }
 
     public Set<LottoNumber> getLottoNumbers() {
@@ -35,6 +31,6 @@ public class WinningNumber {
     }
 
     public LottoNumber getBonusNumber() {
-        return new LottoNumber(bonusNumber.getLottoNumber());
+        return LottoNumber.from(bonusNumber.getLottoNumber());
     }
 }
