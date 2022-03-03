@@ -27,8 +27,4 @@ public class LottoGame {
 
         return new WinningStatistics(purchaseMoney, lottoRewards);
     }
-
-    public List<Lotto> getLottos() {
-        return lottos.getLottos();
-    }
 }
