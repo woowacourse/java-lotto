@@ -33,4 +33,8 @@ public class Money {
     public boolean isBiggerThanLottoPrice() {
         return amount >= MINIMUM_PURCHASE_AMOUNT;
     }
+
+    public int calculateTotalLottoCount() {
+        return amount / MINIMUM_PURCHASE_AMOUNT;
+    }
 }
