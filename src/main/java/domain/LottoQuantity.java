@@ -25,11 +25,11 @@ public class LottoQuantity {
     }
 
     public static LottoQuantity createManual(int lottoQuantity, InputMoney inputMoney) {
-        validateManualLottoQuantity(lottoQuantity, inputMoney);
+        validateNotOverInputMoney(lottoQuantity, inputMoney);
         return new LottoQuantity(lottoQuantity);
     }
 
-    private static void validateManualLottoQuantity(int lottoQuantity, InputMoney inputMoney) {
+    private static void validateNotOverInputMoney(int lottoQuantity, InputMoney inputMoney) {
         if (lottoQuantity * Lotto.SINGLE_LOTTO_PRICE > inputMoney.getMoney()) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_MANUAL_LOTTO_QUANTITY);
         }
