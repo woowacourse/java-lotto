@@ -1,14 +1,11 @@
-package lotto.model;
+package lotto.model.number;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import lotto.model.number.LottoNumber;
 
-public class LottoWheel {
+public class LottoNumberCache {
     private static final String ERROR_TYPE = "[ERROR] 로또 번호는 숫자로만 입력해주세요";
-    public static final int LOTTO_SIZE = 6; //없애야 함
     private static final List<LottoNumber> LOTTO_BALLS;
 
     static {
@@ -25,22 +22,14 @@ public class LottoWheel {
     public static LottoNumber getNumber(String input) {
         try {
             int number = Integer.parseInt(input.trim());
-            return LottoWheel.getNumber(number);
+            return LottoNumberCache.getNumber(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_TYPE);
         }
     }
 
-    public static Lotto draw() {
+    public static List<LottoNumber> getRandomNumbers(int size) {
         Collections.shuffle(LOTTO_BALLS);
-        List<LottoNumber> numbers = new ArrayList<>(LOTTO_BALLS.subList(0, LOTTO_SIZE));
-        return new Lotto(numbers, true);
-    }
-
-    public static Lotto from(List<String> inputs) {
-        List<LottoNumber> numbers = inputs.stream()
-                .map(LottoWheel::getNumber)
-                .collect(Collectors.toList());
-        return new Lotto(numbers, false);
+        return new ArrayList<>(LOTTO_BALLS.subList(0, size));
     }
 }

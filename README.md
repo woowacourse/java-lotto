@@ -156,7 +156,7 @@
 
 - 로또 번호 입력값 검증
 
-##### LottoWheel
+##### LottoNumberCache
 
 - 랜덤 로또 번호 추첨
 

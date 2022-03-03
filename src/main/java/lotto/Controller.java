@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.model.Lotto;
-import lotto.model.LottoWheel;
+import lotto.model.number.LottoNumberCache;
 import lotto.model.Lottos;
 import lotto.model.LottosBuilder;
 import lotto.model.Money;
@@ -68,11 +68,11 @@ public class Controller {
 
     private Lotto askWinningNumbers() {
         String[] winningNumbersInput = inputView.askWinningNumbers();
-        return LottoWheel.from(List.of(winningNumbersInput));
+        return Lotto.from(List.of(winningNumbersInput));
     }
 
     private LottoNumber askBonusNumber() {
         String bonusNumberInput = inputView.askBonusNumber();
-        return LottoWheel.getNumber(bonusNumberInput);
+        return LottoNumberCache.getNumber(bonusNumberInput);
     }
 }
