@@ -27,7 +27,7 @@ public class IntendedLottoNumberGenerator implements LottoNumberGenerator {
         }
     }
 
-    public void init() {
+    private void init() {
         index = 0;
         lottoNumbersBucket = new ArrayList<>();
     }

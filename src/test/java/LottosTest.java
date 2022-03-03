@@ -7,27 +7,23 @@ import domain.Lottos;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottosTest {
 
-    private Lottos lottos;
-    private IntendedLottoNumberGenerator lottoNumberGenerator;
-
-    @BeforeEach
-    void init() {
-        lottoNumberGenerator = new IntendedLottoNumberGenerator();
-        lottoNumberGenerator.init();
+    private Lottos makeLottos() {
+        IntendedLottoNumberGenerator lottoNumberGenerator = new IntendedLottoNumberGenerator();
         lottoNumberGenerator.addLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        lottoNumberGenerator.addLottoNumbers(Arrays.asList(1, 2, 3, 7, 8, 9));
-        lottos = new Lottos(lottoNumberGenerator, 2);
+        lottoNumberGenerator.addLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoNumberGenerator.addLottoNumbers(Arrays.asList(11, 12, 13, 14, 15, 16));
+        return Lottos.buyLottos(lottoNumberGenerator, 2);
     }
 
     @Test
     @DisplayName("모든 로또 우승 로또와 비교하는 기능 로또 수만큼 카운트 세는지 확인하는 테스트")
     void compareAllLottosWithWinningLottoTest() {
+        Lottos lottos = makeLottos();
         Lotto winningLotto = new Lotto(Stream.of(3, 4, 5, 6, 8, 9)
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
@@ -38,6 +34,7 @@ public class LottosTest {
     @Test
     @DisplayName("모든 로또 보너스넘버 포함 확인 기능 로또 수만큼 카운트 세는지 확인하는 테스트")
     void compareAllLottosWithBonusNumberTest() {
+        Lottos lottos = makeLottos();
         LottoNumber bonusNumber = new LottoNumber(3);
 
         assertThat(lottos.compareAllLottosWithBonusNumber(bonusNumber).size()).isEqualTo(2);
