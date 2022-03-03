@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
@@ -38,9 +37,8 @@ public class LottoTest {
         assertThat(lotto.contains(value)).isFalse();
     }
 
-    @ParameterizedTest
-    @NullAndEmptySource
-    void 로또번호_빈값_검증(String value) {
+    @Test
+    void 로또번호_빈값_검증() {
         assertThatThrownBy(() -> new Lotto(null))
                 .isInstanceOf(IllegalArgumentException.class);
     }

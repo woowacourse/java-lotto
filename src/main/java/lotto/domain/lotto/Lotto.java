@@ -48,10 +48,11 @@ public class Lotto {
     private List<LottoNumber> generateRandomNumbers(){
         List<Integer> numbers = LottoNumber.getcandidateLottoNumbers();
         Collections.shuffle(numbers);
-        List<Integer> randomNumbers = numbers.subList(0, LOTTO_SIZE);
-        Collections.sort(randomNumbers);
 
-        return convertLottoNumbers(randomNumbers);
+        return convertLottoNumbers(numbers.stream()
+                .limit(LOTTO_SIZE)
+                .sorted()
+                .collect(Collectors.toList()));
     }
 
     public boolean contains(final int number) {
