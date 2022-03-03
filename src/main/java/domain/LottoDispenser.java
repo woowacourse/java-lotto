@@ -10,6 +10,7 @@ public class LottoDispenser {
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
     private static final String ERROR_UNDER_MINIMUM_MONEY = "최소 1000원을 입력하세요.";
+    private static final String ERROR_INVALID_COUNT = "로또 수는 자연수로 입력하세요.";
     private static final String ERROR_NOT_ENOUGH_MONEY = "돈이 모자라 구매할 수 없습니다.";
 
     private List<Lotto> lottos;
@@ -21,6 +22,9 @@ public class LottoDispenser {
     }
 
     public void checkEnoughMoneyRemain(int lottoCount) {
+        if (lottoCount < 0) {
+            throw new IllegalArgumentException(ERROR_INVALID_COUNT);
+        }
         money.enoughToBuy(lottoCount);
     }
 
