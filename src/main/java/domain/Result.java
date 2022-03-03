@@ -14,6 +14,10 @@ public class Result {
     private static final String RANK_PRICE_MESSAGE = "원)- ";
     private static final String RANK_COUNT_MESSAGE = "개";
     private static final String RANK_CORRECT_MESSAGE = "개 일치 (";
+    private static final String PROFIT_NEGATIVE_MESSAGE = "손해";
+    private static final String PROFIT_POSITIVE_MESSAGE = "이익";
+    private static final String WIN_PROFIT_RESULT_MESSAGE = "총 수익률은 %.2f입니다. (기준이 1 이기 때문에 결과적으로 %s라는 의미임)";
+    private static final int LOTTO_PRICE = 1_000;
 
     private final EnumMap<RankPrize, Integer> result = new EnumMap<>(RankPrize.class);
 
@@ -54,11 +58,26 @@ public class Result {
             + System.lineSeparator();
     }
 
-    public double getPrizeProfit() {
+    public String getProfitOrNotMessage(final int money) {
+        final double profitRate = getProfitRate(money);
+        String resultMessage = PROFIT_NEGATIVE_MESSAGE;
+        if (profitRate >= 1) {
+            resultMessage = PROFIT_POSITIVE_MESSAGE;
+        }
+        return String.format((WIN_PROFIT_RESULT_MESSAGE), profitRate, resultMessage);
+    }
+
+    private double getProfitRate(final int money) {
+        final Money totalMoney = new Money(money);
+        return getWinningPrice() / ((double) totalMoney.getLottoCount() * LOTTO_PRICE);
+    }
+
+    private int getWinningPrice() {
         int totalWinPrice = INIT_WIN_PRICE;
         for (RankPrize rankPrize : result.keySet()) {
             totalWinPrice += rankPrize.getPrice() * result.get(rankPrize);
         }
         return totalWinPrice;
     }
+
 }

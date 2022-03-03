@@ -18,12 +18,8 @@ public class Money {
         }
     }
 
-    public int calculateCounts() {
+    public int getLottoCount() {
         return this.money / LOTTO_PRICE;
-    }
-    
-    public double calculateProfit(final double prizeProfit) {
-        return prizeProfit / (calculateCounts() * LOTTO_PRICE);
     }
 
     @Override

@@ -14,34 +14,36 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private LottoService lottoService;
+    private final LottoService lottoService;
 
     public LottoController(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        initLottoService();
+        this.lottoService = new LottoService();
     }
 
-    private void initLottoService() {
-        try {
-            lottoService = new LottoService(inputView.getMoney());
-        } catch (Exception e) {
-            System.out.println(ERROR_MESSAGE + e.getMessage());
-            initLottoService();
-        }
-    }
 
     public void start() {
-        issueLotto();
+        final int money = getMoney();
+        issueLotto(money);
 
         initLastWinLotto();
 
-        processResult(calculateResult());
+        printResult(money, getResult());
     }
 
-    private void issueLotto() {
+    private int getMoney() {
+        try {
+            return inputView.getMoney();
+        } catch (Exception e) {
+            System.out.println(ERROR_MESSAGE + e.getMessage());
+            return getMoney();
+        }
+    }
+
+    private void issueLotto(final int money) {
         final int manualCount = getManualCount();
-        lottoService.issueLotto(getManualLottoWith(manualCount));
+        lottoService.issueLotto(money, getManualLottoWith(manualCount));
         outputView.printLotto(lottoService.getIssuedLotto(), manualCount);
     }
 
@@ -75,17 +77,17 @@ public class LottoController {
         }
     }
 
-    private Result calculateResult() {
+    private Result getResult() {
         try {
             return lottoService.calculateResult(inputView.getBonusNumber());
         } catch (Exception e) {
             System.out.println(ERROR_MESSAGE + e.getMessage());
-            return calculateResult();
+            return getResult();
         }
     }
 
-    private void processResult(final Result result) {
+    private void printResult(final int money, final Result result) {
         outputView.printWinStatistics(result.getStatistics());
-        outputView.printWinProfit(lottoService.getProfitOrNotMessage(result));
+        outputView.printWinProfit(result.getProfitOrNotMessage(money));
     }
 }
