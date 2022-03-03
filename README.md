@@ -184,11 +184,8 @@
 - 당첨 결과에 따른 등수 구하기
 - 한 등수의 총 당첨금 구하기
 
-##### PrizeInformation
+##### PrizeCountMap
 
-- 해당 등수 당첨된 개수 구하기
-
-##### PrizeInformations
-
+- 각 등수별 당첨 개수
 - 총 당첨금 구하기
 - 수익률 구하기
