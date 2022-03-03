@@ -5,36 +5,42 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domain.Lotto;
+import lotto.domain.LottoPurchaseMoney;
 import lotto.domain.Lottos;
-import lotto.domain.vo.LottoNumber;
 import lotto.domain.Rank;
-import lotto.domain.Store;
 import lotto.domain.WinnerLotto;
+import lotto.domain.vo.LottoNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
+    private final Store store;
+
+    public LottoController(Store store) {
+        this.store = store;
+    }
+
     public void run() {
-        int inputMoney = InputView.inputMoney();
-        Lottos lottos = new Lottos(buyLottos(new Store(inputMoney)));
+        LottoPurchaseMoney money = new LottoPurchaseMoney(InputView.inputMoney());
+        Lottos lottos = purchaseLottos(money);
         OutputView.printLottos(lottos.getLottos());
-        OutputView.printRate(sumTotalReward(lottos), inputMoney);
+        OutputView.printRate(sumTotalReward(lottos), money.getMoney());
     }
 
-    private List<Lotto> buyLottos(Store store) {
-        List<Lotto> manualLottos = buyManualLotto(store);
-        List<Lotto> autoLottos = store.buyAutoLottos();
+    private Lottos purchaseLottos(LottoPurchaseMoney money) {
+        int manualAmount = InputView.inputManualLottoAmount();
+
+        List<Lotto> manualLottos = purchaseManualLottos(money, manualAmount);
+        List<Lotto> autoLottos = store.buyAutoLotto(money.calculateAvailablePurchaseAmount(manualAmount));
         OutputView.printLottosSize(manualLottos.size(), autoLottos.size());
-        return concatLottos(manualLottos, autoLottos);
+
+        return new Lottos(concatLottos(manualLottos, autoLottos));
     }
 
-    private List<Lotto> buyManualLotto(Store store) {
-        int amount = InputView.inputManualLottoAmount();
-
-        if (store.isBuyManualLotto(amount)) {
-            store.buyManualLottos(amount);
-            return InputView.inputManualLottoNumbers(amount);
+    private List<Lotto> purchaseManualLottos(LottoPurchaseMoney money, int manualAmount) {
+        if (money.isPurchaseLotto(manualAmount)) {
+            return store.buyManualLotto(manualAmount);
         }
         return Collections.emptyList();
     }
