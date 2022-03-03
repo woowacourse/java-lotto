@@ -4,13 +4,14 @@ import domain.LottoNumber;
 import domain.LottoMoney;
 import domain.LottoPurchaseCount;
 import domain.Lottos;
-import domain.strategy.RandomLottoGeneratorStrategy;
 import domain.WinningLotto;
 import domain.WinningStatistics;
 import view.InputView;
 import view.OutputView;
 
 public class Application {
+
+    private static final LottoFactory lottoFactory = new LottoFactory();
 
     public static void main(String[] args) {
         final LottoMoney lottoMoney = createLottoMoney();
@@ -45,10 +46,9 @@ public class Application {
 
     private static Lottos createLottos(LottoPurchaseCount lottoPurchaseCount) {
         try {
-            return LottoFactory.generateLottos(
+            return lottoFactory.generateLottos(
                 InputView.getManualLottoNumbers(lottoPurchaseCount.getManualCount()),
-                lottoPurchaseCount,
-                new RandomLottoGeneratorStrategy());
+                lottoPurchaseCount);
         } catch (Exception e) {
             OutputView.showErrorMessage(e);
             return createLottos(lottoPurchaseCount);
@@ -61,7 +61,7 @@ public class Application {
 
     private static Lotto createWinningLottoBall() {
         try {
-            return LottoFactory.createLotto(InputView.getWinningLottoNumbers());
+            return lottoFactory.createLotto(InputView.getWinningLottoNumbers());
         } catch (Exception e) {
             OutputView.showErrorMessage(e);
             return createWinningLottoBall();

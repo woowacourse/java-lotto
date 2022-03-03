@@ -1,43 +1,38 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import domain.strategy.LottoGeneratorStrategy;
+import domain.strategy.ManualLottoGeneratorStrategy;
+import domain.strategy.RandomLottoGeneratorStrategy;
 
 public class LottoFactory {
 
-    private LottoFactory() {
+    private final List<LottoGeneratorStrategy> lottoGeneratorStrategies;
+
+    public LottoFactory() {
+        this.lottoGeneratorStrategies = new ArrayList<>(
+            Arrays.asList(new ManualLottoGeneratorStrategy(), new RandomLottoGeneratorStrategy()));
     }
 
-    public static Lottos generateLottos(List<List<Integer>> lottosNumbers, LottoPurchaseCount lottoPurchaseCount,
-        LottoGeneratorStrategy lottoGeneratorStrategy) {
-
+    public Lottos generateLottos(List<List<Integer>> lottosNumbers, LottoPurchaseCount lottoPurchaseCount) {
+        final LottoPurchaseInfo purchaseInfo = new LottoPurchaseInfo(lottosNumbers, lottoPurchaseCount);
         final List<Lotto> lottos = new ArrayList<>();
-        lottos.addAll(createManualLottos(lottosNumbers));
-        lottos.addAll(createAutomaticLottos(lottoPurchaseCount.getAutomaticCount(), lottoGeneratorStrategy));
+
+        for (LottoGeneratorStrategy lottoGeneratorStrategy : lottoGeneratorStrategies) {
+            lottos.addAll(lottoGeneratorStrategy.generate(purchaseInfo));
+        }
 
         return new Lottos(lottos);
     }
 
-    public static Lotto createLotto(List<Integer> lottoNumbers) {
+    public Lotto createLotto(List<Integer> lottoNumbers) {
         return new Lotto(lottoNumbers.stream()
             .map(LottoNumber::valueOf)
             .sorted()
             .collect(Collectors.toList()));
-    }
-
-    private static List<Lotto> createManualLottos(List<List<Integer>> lottoNumbers) {
-        return lottoNumbers.stream()
-            .map(lottoNumber -> createLotto(lottoNumber))
-            .collect(Collectors.toList());
-    }
-
-    private static List<Lotto> createAutomaticLottos(int automaticCount, LottoGeneratorStrategy lottoGeneratorStrategy) {
-        return IntStream.range(0, automaticCount)
-            .mapToObj(count -> lottoGeneratorStrategy.generate())
-            .collect(Collectors.toList());
     }
 }

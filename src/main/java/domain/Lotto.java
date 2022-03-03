@@ -43,6 +43,7 @@ public class Lotto {
     public static Lotto fromLotto(List<LottoNumber> lottoNumbers) {
         return new Lotto(IntStream.range(0, LOTTO_NUMBER_SIZE)
             .mapToObj(lottoNumbers::get)
+            .sorted()
             .collect(Collectors.toList()));
     }
 
@@ -59,5 +60,20 @@ public class Lotto {
 
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Lotto))
+            return false;
+        Lotto lotto = (Lotto)o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

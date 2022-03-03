@@ -2,7 +2,6 @@ package domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,14 +11,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import domain.strategy.LottoGeneratorStrategy;
-
 class LottoFactoryTest {
+
+    private static final LottoFactory lottoFactory = new LottoFactory();
 
     @Test
     @DisplayName("로또를 생성하는 기능")
     void createLotto() {
-        assertThat(LottoFactory.createLotto(List.of(1, 2, 3, 4, 5, 6))).isNotNull();
+        assertThat(lottoFactory.createLotto(List.of(1, 2, 3, 4, 5, 6))).isNotNull();
     }
 
     @ParameterizedTest
@@ -30,7 +29,7 @@ class LottoFactoryTest {
             .map(Integer::parseInt)
             .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> LottoFactory.createLotto(numbers))
+        assertThatThrownBy(() -> lottoFactory.createLotto(numbers))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -39,16 +38,8 @@ class LottoFactoryTest {
     void createLottos() {
         List<List<Integer>> lottoNumbers = List.of(
             List.of(1, 2, 3, 4, 5, 6), List.of(2, 3, 4, 5, 6, 7), List.of(3, 4, 5, 6, 7, 8));
-        LottoPurchaseCount purchaseCount = new LottoPurchaseCount(3, 1);
-        LottoGeneratorStrategy lottoGeneratorStrategy = () -> {
-            List<LottoNumber> list = new ArrayList<>();
-            for (Integer integer : List.of(4, 5, 6, 7, 8, 9)) {
-                LottoNumber lottoNumber = LottoNumber.valueOf(integer);
-                list.add(lottoNumber);
-            }
-            return Lotto.fromLotto(list);
-        };
+        LottoPurchaseCount purchaseCount = new LottoPurchaseCount(2, 1);
 
-        assertThat(LottoFactory.generateLottos(lottoNumbers, purchaseCount, lottoGeneratorStrategy)).isNotNull();
+        assertThat(lottoFactory.generateLottos(lottoNumbers, purchaseCount)).isNotNull();
     }
 }
