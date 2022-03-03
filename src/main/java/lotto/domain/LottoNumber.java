@@ -23,7 +23,10 @@ public class LottoNumber {
 
     public static LottoNumber from(int number) {
         validate(number);
-        return NUMBER_CACHE.get(number - MIN);
+        return NUMBER_CACHE.stream()
+            .filter(lottoNumber -> lottoNumber.number == number)
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("입력받은 숫자에 해당하는 로또 번호가 없습니다."));
     }
 
     private static void validate(int number) {
