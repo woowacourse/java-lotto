@@ -34,7 +34,7 @@ public enum Rank {
     public static List<Rank> getRanks() {
         return Arrays.stream(Rank.values())
             .filter(Rank::isNotOther)
-            .collect(Collectors.toList());
+            .collect(Collectors.toUnmodifiableList());
     }
 
     private static boolean isNotOther(Rank rank) {

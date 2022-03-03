@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Set;
 
 import lotto.utils.LottoNumbersGenerator;
@@ -28,7 +29,7 @@ public class Ticket {
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     public boolean contains(LottoNumber number) {

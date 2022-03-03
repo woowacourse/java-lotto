@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class Tickets {
     }
 
     public List<Ticket> getTickets() {
-        return tickets;
+        return Collections.unmodifiableList(tickets);
     }
 
     public Map<Rank, Integer> getResult(WinTicket winTicket) {
@@ -36,13 +37,13 @@ public class Tickets {
         for (Rank rank : ranks) {
             result.merge(rank, 1, (value, putValue) -> value + 1);
         }
-        return result;
+        return Collections.unmodifiableMap(result);
     }
 
     private List<Rank> getRanks(WinTicket winTicket) {
         return tickets.stream()
             .map(winTicket::getTicketRank)
-            .collect(Collectors.toList());
+            .collect(Collectors.toUnmodifiableList());
     }
 
     public double getYield(Amount amount, WinTicket winTicket) {
