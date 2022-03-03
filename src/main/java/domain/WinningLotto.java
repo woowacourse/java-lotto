@@ -33,6 +33,14 @@ public class WinningLotto {
         return Rank.of(sameNumberCount);
     }
 
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
+
     @Override
     public String toString() {
         return "WinningLotto{" +

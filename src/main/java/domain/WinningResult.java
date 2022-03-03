@@ -2,12 +2,56 @@ package domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class WinningResult {
     private static final double ROUND_UNIT = 100.0;
 
     private final Map<Rank, WinningCount> winningResult;
     private final LottoQuantity purchasedLottoQuantity;
+
+    public WinningResult(Lottos lottos, WinningLotto winningLotto) {
+        winningResult = generateWinningResult(lottos, winningLotto);
+        purchasedLottoQuantity = generateLottoQuantityByLottos(lottos);
+    }
+
+    private Map<Rank, WinningCount> generateWinningResult(Lottos lottos, WinningLotto winningLotto) {
+        Map<Rank, Long> winningResultWithLongValue = groupRankByCount(lottos, winningLotto);
+        Map<Rank, WinningCount> winningResultWithoutDefault = mapValueToWinningCount(winningResultWithLongValue);
+
+        return putDefaultWinningCount(winningResultWithoutDefault);
+    }
+
+    private Map<Rank, Long> groupRankByCount(Lottos lottos, WinningLotto winningLotto) {
+        return lottos.getLottos()
+                .stream()
+                .collect(Collectors.groupingBy(
+                        lotto -> Rank.createByLottoAndWinningLotto(lotto, winningLotto),
+                        Collectors.counting()
+                ));
+    }
+
+    private Map<Rank, WinningCount> mapValueToWinningCount(Map<Rank, Long> rankCount) {
+        return rankCount.entrySet()
+                .stream().collect(Collectors.toMap(
+                        Entry::getKey,
+                        entrySet -> new WinningCount(entrySet.getValue().intValue())
+                ));
+    }
+
+    private Map<Rank, WinningCount> putDefaultWinningCount(Map<Rank, WinningCount> winningResultWithoutDefault) {
+        Map<Rank, WinningCount> winningResult = new HashMap<>(winningResultWithoutDefault);
+        for (Rank rank : Rank.values()) {
+            winningResult.putIfAbsent(rank, new WinningCount(0));
+        }
+
+        return winningResult;
+    }
+
+    private LottoQuantity generateLottoQuantityByLottos(Lottos lottos) {
+        return new LottoQuantity(lottos.getLottos().size());
+    }
 
     private WinningResult(Builder builder) {
         this.winningResult = builder.winningResult;
