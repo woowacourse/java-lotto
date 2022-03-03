@@ -85,7 +85,7 @@ public class LottoController {
     }
 
     private void processResult(final Result result) {
-        outputView.printWinStatistics(result);
+        outputView.printWinStatistics(result.getStatistics());
         outputView.printWinProfit(lottoService.getProfitOrNotMessage(result));
     }
 }
