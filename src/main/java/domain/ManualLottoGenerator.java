@@ -1,10 +1,9 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class ManualLottoGenerator implements LottoGenerator{
+public class ManualLottoGenerator implements LottoGenerator {
 
     private final List<List<Integer>> lottoNumbers;
 
@@ -17,7 +16,6 @@ public class ManualLottoGenerator implements LottoGenerator{
         List<Lotto> lottos = new ArrayList<>();
 
         for (List<Integer> lottoNumber : lottoNumbers) {
-            Collections.sort(lottoNumber);
             lottos.add(new Lotto(lottoNumber));
         }
 

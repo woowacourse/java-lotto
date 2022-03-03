@@ -3,6 +3,7 @@ package view;
 import domain.WinningNumbers;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -64,12 +65,14 @@ public class InputView {
             List<String> numbers = Arrays.asList(scanner.nextLine().split(NUMBER_DELIMITER));
             lottoNumbers.add(covertNumbersToInteger(numbers));
         }
+
         return new ArrayList<>(lottoNumbers);
     }
 
     private static List<Integer> covertNumbersToInteger(List<String> numbers) {
         return numbers.stream()
             .map(InputView::checkAndConvertInteger)
+            .sorted()
             .collect(Collectors.toList());
     }
 
