@@ -1,7 +1,7 @@
 package domain;
 
 import domain.strategy.ManualLottoNumberStrategy;
-import domain.strategy.RandomLottoNumberStrategy;
+import domain.strategy.AutoLottoNumberStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,7 +35,7 @@ class LottoMachineTest {
     @DisplayName("입력 금액에 따라 알맞은 개수의 로또 생성 검증")
     void createLottoTicketsByAmount(int amount) {
         PurchaseCount purchaseCount = new PurchaseCount(new Money(amount), 0);
-        Lottos lottos = new Lottos(new RandomLottoNumberStrategy(), purchaseCount);
+        Lottos lottos = new Lottos(new AutoLottoNumberStrategy(), purchaseCount);
 
         assertThat(lottos.getLottos().size()).isEqualTo(10);
     }

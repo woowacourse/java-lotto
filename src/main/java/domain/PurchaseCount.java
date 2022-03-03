@@ -1,16 +1,16 @@
 package domain;
 
-import java.util.Objects;
+import static java.util.Objects.*;
 
 public class PurchaseCount {
 
     private final int manualCount;
-    private final int automaticCount;
+    private final int autoCount;
 
     public PurchaseCount(Money money, int manualCount) {
         validateManualCount(money, manualCount);
         this.manualCount = manualCount;
-        this.automaticCount = calculateTotalCount(money) - manualCount;
+        this.autoCount = calculateTotalCount(money) - manualCount;
     }
 
     private int calculateTotalCount(Money money) {
@@ -27,8 +27,8 @@ public class PurchaseCount {
         return manualCount;
     }
 
-    public int getAutomaticCount() {
-        return automaticCount;
+    public int getAutoCount() {
+        return autoCount;
     }
 
     @Override
@@ -36,11 +36,11 @@ public class PurchaseCount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PurchaseCount that = (PurchaseCount) o;
-        return manualCount == that.manualCount && automaticCount == that.automaticCount;
+        return manualCount == that.manualCount && autoCount == that.autoCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(manualCount, automaticCount);
+        return hash(manualCount, autoCount);
     }
 }

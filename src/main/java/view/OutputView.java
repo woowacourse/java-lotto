@@ -18,7 +18,7 @@ public class OutputView {
     public static void printPurchasedLottoTicketNumber(PurchaseCount purchaseCount) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n수동으로 ").append(purchaseCount.getManualCount())
-                .append("장, 자동으로 ").append(purchaseCount.getAutomaticCount())
+                .append("장, 자동으로 ").append(purchaseCount.getAutoCount())
                 .append("개를 구매했습니다.");
 
         System.out.println(stringBuilder);

@@ -16,7 +16,7 @@ class LottoNumbersGeneratorTest {
     @Test
     @DisplayName("자동 생성된 로또 번호는 6자리")
     void generatedLottoNumbersSize() {
-        List<List<Integer>> numbers = new RandomLottoNumberStrategy()
+        List<List<Integer>> numbers = new AutoLottoNumberStrategy()
                 .generate(new PurchaseCount(new Money(1000), 0)).stream()
                 .map(LottoNumbers::getLottoNumbers)
                 .collect(Collectors.toList());
@@ -28,7 +28,7 @@ class LottoNumbersGeneratorTest {
     @Test
     @DisplayName("자동 생성된 로또 번호 미중복")
     void generatedLottoNumbersDistinct() {
-        List<List<Integer>> numbers = new RandomLottoNumberStrategy()
+        List<List<Integer>> numbers = new AutoLottoNumberStrategy()
                 .generate(new PurchaseCount(new Money(1000), 0)).stream()
                 .map(LottoNumbers::getLottoNumbers)
                 .collect(Collectors.toList());
@@ -42,7 +42,7 @@ class LottoNumbersGeneratorTest {
     @Test
     @DisplayName("자동 생성된 로또 번호 정렬")
     void sortLottoNumbers() {
-        List<List<Integer>> numbers = new RandomLottoNumberStrategy()
+        List<List<Integer>> numbers = new AutoLottoNumberStrategy()
                 .generate(new PurchaseCount(new Money(1000), 0)).stream()
                 .map(LottoNumbers::getLottoNumbers)
                 .collect(Collectors.toList());

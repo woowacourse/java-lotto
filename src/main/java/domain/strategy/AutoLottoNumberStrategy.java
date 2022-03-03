@@ -12,26 +12,23 @@ import java.util.stream.IntStream;
 
 import static domain.LottoNumbers.LOTTO_NUMBERS_SIZE;
 
-public class RandomLottoNumberStrategy implements LottoNumberStrategy {
+public class AutoLottoNumberStrategy implements LottoNumberStrategy {
 
     private static final List<LottoNumber> numbers = LottoNumber.getNumbers();
 
-    public RandomLottoNumberStrategy() {
-    }
-
     @Override
     public List<LottoNumbers> generate(PurchaseCount count) {
-        return IntStream.range(0, count.getAutomaticCount())
-                .mapToObj(number -> createAutoTickets())
+        return IntStream.range(0, count.getAutoCount())
+                .mapToObj(number -> createAutoLotto())
                 .map(LottoNumbers::new)
                 .collect(Collectors.toList());
     }
 
-    private List<LottoNumber> createAutoTickets() {
+    private List<LottoNumber> createAutoLotto() {
         Collections.shuffle(numbers);
         List<LottoNumber> lottoNumbers = new ArrayList<>(numbers.subList(0, LOTTO_NUMBERS_SIZE));
         Collections.sort(lottoNumbers);
 
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }

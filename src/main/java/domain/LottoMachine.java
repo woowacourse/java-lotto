@@ -1,7 +1,7 @@
 package domain;
 
 import domain.strategy.ManualLottoNumberStrategy;
-import domain.strategy.RandomLottoNumberStrategy;
+import domain.strategy.AutoLottoNumberStrategy;
 
 import java.util.*;
 
@@ -12,13 +12,13 @@ public class LottoMachine {
 
     public Lottos purchase(List<List<Integer>> manualLottoNumbers, PurchaseCount purchaseCount) {
         Lottos manualLottos = new Lottos(new ManualLottoNumberStrategy(manualLottoNumbers), purchaseCount);
-        Lottos autoLottos = new Lottos(new RandomLottoNumberStrategy(), purchaseCount);
+        Lottos autoLottos = new Lottos(new AutoLottoNumberStrategy(), purchaseCount);
 
         return manualLottos.concatenate(autoLottos);
     }
 
     public WinningStat createWinningStat(Lottos lottos, WinLotto winLotto) {
-        Map<LottoRank, Integer> ranks = new HashMap<>();
+        Map<LottoRank, Integer> ranks = new HashMap<>(); // enumMap 굿
         initializeRank(ranks);
 
         for (LottoNumbers lotto : lottos.getLottos()) {
