@@ -18,22 +18,22 @@ public class User {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public static User generateWithManualLottos(long money, int countOfManualLotto, List<Lotto> manualLottos) {
+    public static User generate(long money, int countOfManualLotto, List<Lotto> manualLottos) {
         int countOfAutoLotto = calcualteCountOfAutoLotto(money, countOfManualLotto);
-        return new User(money, countOfManualLotto, buyLottosWithManualLottos(manualLottos, countOfAutoLotto));
+        return new User(money, countOfManualLotto, buyLottos(manualLottos, countOfAutoLotto));
     }
 
     private static int calcualteCountOfAutoLotto(long money, int countOfManualLotto) {
         return (int) (money / Lotto.LOTTO_PRICE) - countOfManualLotto;
     }
 
-    private static List<Lotto> buyLottosWithManualLottos(List<Lotto> manualLottos, int countOfAutoLotto) {
+    private static List<Lotto> buyLottos(List<Lotto> manualLottos, int countOfAutoLotto) {
         List<Lotto> lottos = new ArrayList<>(manualLottos);
-        lottos.addAll(buyLottosByAuto(countOfAutoLotto));
+        lottos.addAll(generateLottosByAuto(countOfAutoLotto));
         return lottos;
     }
 
-    private static List<Lotto> buyLottosByAuto(int countOfAutoLotto) {
+    private static List<Lotto> generateLottosByAuto(int countOfAutoLotto) {
         return IntStream.range(0, countOfAutoLotto)
                 .mapToObj(i -> Lotto.generateByAuto())
                 .collect(Collectors.toList());

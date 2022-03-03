@@ -12,7 +12,7 @@ public class UserTest {
 //    @ParameterizedTest(name = "음수가 입력될 경우 예외 발생 - case : {0}")
 //    @ValueSource(strings = {"-1", "-1200", "-3000"})
 //    void generateByString_checkPositive(String input) {
-//        Assertions.assertThatThrownBy(() -> User.generateWithManualLottos(input))
+//        Assertions.assertThatThrownBy(() -> User.generate(input))
 //                .isInstanceOf(MoneyException.class)
 //                .hasMessage("구입금액이 음수일 수 없습니다.");
 //    }
@@ -20,7 +20,7 @@ public class UserTest {
 //    @ParameterizedTest(name = "1000원 단위가 아닐 경우 예외 발생 - case : {0}")
 //    @ValueSource(strings = {"100", "1200", "1234"})
 //    void generateByString_checkUnit(String input) {
-//        Assertions.assertThatThrownBy(() -> User.generateWithManualLottos(input))
+//        Assertions.assertThatThrownBy(() -> User.generate(input))
 //                .isInstanceOf(MoneyException.class)
 //                .hasMessage("구입금액은 1000원 단위만 가능합니다.");
 //    }
@@ -28,7 +28,7 @@ public class UserTest {
 //    @Test
 //    @DisplayName("남은금액 만큼 자동 로또티켓을 구입")
 //    void buyAllLottosByAuto() {
-//        User user = User.generateWithManualLottos("9000");
+//        User user = User.generate("9000");
 //        user.buyAllLottosByAuto();
 //        Assertions.assertThat(user.getLottos().size()).isEqualTo(9);
 //    }
@@ -36,7 +36,7 @@ public class UserTest {
 //    @Test
 //    @DisplayName("사용한 금액이 투입 금액을 초과할 경우 예외 발생")
 //    void buyLottoByManual() {
-//        User user = User.generateWithManualLottos("1000");
+//        User user = User.generate("1000");
 //        user.buyLottoByManual(Lotto.generateByAuto());
 //        Assertions.assertThatThrownBy(() -> user.buyLottoByManual(Lotto.generateByAuto()))
 //                .isInstanceOf(MoneyException.class)

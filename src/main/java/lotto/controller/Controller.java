@@ -16,7 +16,7 @@ public class Controller {
     public void run() {
         long money = InputView.inputMoney();
         int countOfManualLotto = InputView.inputCountOfManualLotto(money);
-        User user = User.generateWithManualLottos(money, countOfManualLotto, inputManualLottos(countOfManualLotto));
+        User user = User.generate(money, countOfManualLotto, inputManualLottos(countOfManualLotto));
         OutputView.printLottos(user);
         OutputView.printLottoResult(user, new RankStatistic(user, inputWinningNumbers()));
     }
