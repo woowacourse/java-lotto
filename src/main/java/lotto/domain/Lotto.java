@@ -17,7 +17,7 @@ public class Lotto {
         this.lottoNumbers = List.copyOf(lottoNumbers);
     }
 
-    public static Lotto generateByString(String lottoNumbers) {
+    public static Lotto generateByManual(String lottoNumbers) {
         return new Lotto(receiveStringInput(lottoNumbers));
     }
 

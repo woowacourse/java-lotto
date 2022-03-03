@@ -1,7 +1,9 @@
 package lotto.view;
 
 import java.util.Scanner;
-import lotto.validator.CountForBuyValidator;
+import lotto.domain.Lotto;
+import lotto.validator.CountOfManualLottoValidator;
+import lotto.validator.MoneyValidator;
 
 public class InputView {
 
@@ -12,21 +14,28 @@ public class InputView {
     private static final String INPUT_WINNING_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
-    public static String inputMoney() {
-        System.out.println(INPUT_MONEY_MESSAGE);
-        return scanner.nextLine();
+    public static long inputMoney() {
+        try {
+            System.out.println(INPUT_MONEY_MESSAGE);
+            long money = Long.parseLong(scanner.nextLine());
+            MoneyValidator.validate(money);
+            return money;
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception);
+            return inputMoney();
+        }
     }
 
-    public static int inputCountForBuy() {
+    public static int inputCountOfManualLotto(long money) {
         try {
             OutputView.printNewLine();
             System.out.println(INPUT_LOTTO_COUNT_FOR_MANUAL_MESSAGE);
             int countForBuy = Integer.parseInt(scanner.nextLine());
-            CountForBuyValidator.validate(countForBuy);
+            CountOfManualLottoValidator.validate(countForBuy,money);
             return countForBuy;
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
-            return inputCountForBuy();
+            return inputCountOfManualLotto(money);
         }
     }
 

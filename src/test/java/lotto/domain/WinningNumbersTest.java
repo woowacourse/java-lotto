@@ -21,7 +21,7 @@ public class WinningNumbersTest {
     @DisplayName("당첨 번호와 보너스 번호를 이용해서 당첨 등급 검색")
     void getRank() {
         WinningNumbers winningNumbers = WinningNumbers.generateByString("1,2,3,4,5,6", "7");
-        Lotto lotto = Lotto.generateByString("1,2,3,4,5,7");
-        Assertions.assertThat(winningNumbers.getRankOf(lotto)).isEqualTo(Rank.RANK_2);
+        Lotto lotto = Lotto.generateByManual("1,2,3,4,5,7");
+        Assertions.assertThat(winningNumbers.findRankOf(lotto)).isEqualTo(Rank.RANK_2);
     }
 }

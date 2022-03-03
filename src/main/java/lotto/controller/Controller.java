@@ -1,5 +1,8 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.User;
@@ -11,47 +14,29 @@ import lotto.view.OutputView;
 public class Controller {
 
     public void run() {
-        User user = generateUserByString();
-        buyLottosByManual(user, InputView.inputCountForBuy());
-        buyAllLottosByAuto(user);
+        long money = InputView.inputMoney();
+        int countOfManualLotto = InputView.inputCountOfManualLotto(money);
+        User user = User.generateWithManualLottos(money, countOfManualLotto, inputManualLottos(countOfManualLotto));
         OutputView.printLottos(user);
         OutputView.printLottoResult(user, new RankStatistic(user, inputWinningNumbers()));
     }
 
-    private User generateUserByString() {
-        try {
-            return User.generateByString(InputView.inputMoney());
-        } catch (IllegalArgumentException exception) {
-            OutputView.printErrorMessage(exception);
-            return generateUserByString();
+    private List<Lotto> inputManualLottos(int countOfManualLotto) {
+        if (countOfManualLotto == 0) {
+            return new ArrayList<>();
         }
-    }
-
-    private void buyLottosByManual(User user, int countForBuy) {
-        if (countForBuy == 0) {
-            return;
-        }
-        try {
-            InputView.printInputLottoNumbersMessage();
-            IntStream.range(0, countForBuy).forEach(integer -> user.buyLottoByManual(inputLotto()));
-        } catch (IllegalArgumentException exception) {
-            OutputView.printErrorMessage(exception);
-        }
+        InputView.printInputLottoNumbersMessage();
+        return IntStream.range(0, countOfManualLotto)
+                .mapToObj(i -> inputLotto())
+                .collect(Collectors.toList());
     }
 
     private Lotto inputLotto() {
         try {
-            return Lotto.generateByString(InputView.inputLottoNumbers());
+            return Lotto.generateByManual(InputView.inputLottoNumbers());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
             return inputLotto();
-        }
-    }
-
-    private void buyAllLottosByAuto(User user) {
-        try {
-            user.buyAllLottosByAuto();
-        } catch (IllegalArgumentException exception) {
         }
     }
 

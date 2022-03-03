@@ -3,59 +3,44 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.exception.MoneyException;
-import lotto.validator.MoneyValidator;
 
 public class User {
 
     private long money;
-    private long spentMoney;
-    private final List<Lotto> lottos;
     private int countOfManualLotto;
-    private int countOfAutoLotto;
+    private final List<Lotto> lottos;
 
-    private User(long money) {
-        MoneyValidator.validate(money);
+    private User(long money, int countOfManualLotto, List<Lotto> lottos) {
         this.money = money;
-        this.spentMoney = 0;
-        this.lottos = new ArrayList<>();
-        this.countOfManualLotto = 0;
-        this.countOfAutoLotto = 0;
+        this.countOfManualLotto = countOfManualLotto;
+        this.lottos = new ArrayList<>(lottos);
     }
 
-    public static User generateByString(String money) {
-        return new User(Long.parseLong(money));
+    public static User generateWithManualLottos(long money, int countOfManualLotto, List<Lotto> manualLottos) {
+        int countOfAutoLotto = calcualteCountOfAutoLotto(money, countOfManualLotto);
+        return new User(money, countOfManualLotto, buyLottosWithManualLottos(manualLottos, countOfAutoLotto));
     }
 
-    public void buyLottoByManual(Lotto lotto) {
-        spendMoney(Lotto.LOTTO_PRICE);
-        lottos.add(lotto);
-        countOfManualLotto++;
+    private static int calcualteCountOfAutoLotto(long money, int countOfManualLotto) {
+        return (int) (money / Lotto.LOTTO_PRICE) - countOfManualLotto;
     }
 
-    public void buyAllLottosByAuto() {
-        int countCanBuy = calculateCountCanBuy();
-        spendMoney(countCanBuy * Lotto.LOTTO_PRICE);
-        IntStream.range(0, countCanBuy)
+    private static List<Lotto> buyLottosWithManualLottos(List<Lotto> manualLottos, int countOfAutoLotto) {
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
+        lottos.addAll(buyLottosByAuto(countOfAutoLotto));
+        return lottos;
+    }
+
+    private static List<Lotto> buyLottosByAuto(int countOfAutoLotto) {
+        return IntStream.range(0, countOfAutoLotto)
                 .mapToObj(i -> Lotto.generateByAuto())
-                .forEach(lottos::add);
-        countOfAutoLotto += countCanBuy;
-    }
-
-    private void spendMoney(long moneyToSpend) {
-        if (money < spentMoney + moneyToSpend) {
-            throw new MoneyException(MoneyException.MONEY_SPENT_LIMIT_ERROR_MESSAGE);
-        }
-        spentMoney += moneyToSpend;
-    }
-
-    private int calculateCountCanBuy() {
-        return (int) ((money - spentMoney) / Lotto.LOTTO_PRICE);
+                .collect(Collectors.toList());
     }
 
     public double calculateProfitRate(long totalPrize) {
-        return (double) totalPrize / (double) spentMoney;
+        return (double) totalPrize / (double) money;
     }
 
     public List<Lotto> getLottos() {
@@ -67,6 +52,6 @@ public class User {
     }
 
     public int getCountOfAutoLotto() {
-        return countOfAutoLotto;
+        return calcualteCountOfAutoLotto(money, countOfManualLotto);
     }
 }
