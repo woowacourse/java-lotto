@@ -58,7 +58,7 @@ public class LotteryMachine {
 
     private static LotteryTickets purchaseLotteryTickets(Count numberOfTickets, Count manualTickets) {
         List<LotteryTicket> manualLotteryTickets = purchaseManualLotteryTickets(manualTickets);
-        List<LotteryTicket> autoLotteryTickets = generate(numberOfTickets);
+        List<LotteryTicket> autoLotteryTickets = generate(numberOfTickets.subtract(manualTickets));
         LotteryTickets lotteryTickets = new LotteryTickets(autoLotteryTickets);
         OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
         return lotteryTickets;

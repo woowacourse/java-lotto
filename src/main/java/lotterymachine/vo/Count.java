@@ -27,6 +27,10 @@ public class Count {
         return this;
     }
 
+    public Count subtract(Count manualTickets) {
+        return new Count(this.number - manualTickets.getNumber());
+    }
+
     public boolean isInteger() {
         return this.number > 0;
     }
