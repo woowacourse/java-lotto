@@ -76,7 +76,7 @@ public class LottoController {
     private Count getManualCount(final Money totalMoney) {
         try {
             final int manualCount = inputView.getManualCount();
-            return new Count(manualCount, totalMoney.getLottoCount());
+            return Count.createWithTotal(manualCount, totalMoney.getLottoCount());
         } catch (Exception e) {
             outputView.printInputError(e);
             return getManualCount(totalMoney);

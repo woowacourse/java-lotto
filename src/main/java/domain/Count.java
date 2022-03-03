@@ -12,12 +12,12 @@ public class Count {
         this.count = count;
     }
 
-    public Count(final int manualCount, final int totalCount) {
+    public static Count createWithTotal(final int manualCount, final int totalCount) {
         validate(manualCount, totalCount);
-        this.count = manualCount;
+        return new Count(manualCount);
     }
 
-    private void validate(final int manualCount, final int totalCount) {
+    private static void validate(final int manualCount, final int totalCount) {
         if (manualCount > totalCount) {
             throw new IllegalArgumentException(MANUAL_COUNT_CANNOT_EXCEED_TOTAL_MESSAGE);
         }
