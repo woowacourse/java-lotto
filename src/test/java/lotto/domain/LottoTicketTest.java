@@ -29,7 +29,7 @@ class LottoTicketTest {
         List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
         // when & then
-        assertThatThrownBy(() -> lottoNumbers.add(LottoNumber.getInstance(0)))
+        assertThatThrownBy(() -> lottoNumbers.add(LottoNumber.from(0)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -39,7 +39,7 @@ class LottoTicketTest {
         // given
         LottoTicket lottoTicket = new LottoTicket(() -> getLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
 
-        WinningNumber winningNumber = new WinningNumber(LottoNumber.getInstance(2), BallType.BONUS);
+        WinningNumber winningNumber = new WinningNumber(LottoNumber.from(2), BallType.BONUS);
 
         // when
         boolean result = lottoTicket.isSame(winningNumber);
@@ -72,7 +72,7 @@ class LottoTicketTest {
 
     private List<LottoNumber> getLottoNumbers(List<Integer> values) {
         return values.stream()
-                .map(LottoNumber::getInstance)
+                .map(LottoNumber::from)
                 .collect(toList());
     }
 }

@@ -13,7 +13,7 @@ class WinningNumberTest {
     @Test
     void checkBonusBall() {
         // given
-        WinningNumber winningNumber = new WinningNumber(LottoNumber.getInstance(1), BONUS);
+        WinningNumber winningNumber = new WinningNumber(LottoNumber.from(1), BONUS);
 
         // when
         boolean result = winningNumber.isBonus();

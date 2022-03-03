@@ -18,7 +18,7 @@ class WinningNumbersTest {
         // given
         List<LottoNumber> normalWinningNumbers = getLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
-        LottoNumber bonusBall = LottoNumber.getInstance(7);
+        LottoNumber bonusBall = LottoNumber.from(7);
 
         // when & then
         assertThatCode(() -> WinningNumbers.create(normalWinningNumbers, bonusBall))
@@ -31,7 +31,7 @@ class WinningNumbersTest {
         // given
         List<LottoNumber> normalWinningNumbers = getLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
-        LottoNumber bonusBall = LottoNumber.getInstance(7);
+        LottoNumber bonusBall = LottoNumber.from(7);
 
         WinningNumbers winningNumbers = WinningNumbers.create(normalWinningNumbers, bonusBall);
 
@@ -50,7 +50,7 @@ class WinningNumbersTest {
         // given
         List<LottoNumber> normalWinningNumbers = getLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
-        LottoNumber bonusBall = LottoNumber.getInstance(7);
+        LottoNumber bonusBall = LottoNumber.from(7);
 
         WinningNumbers winningNumbers = WinningNumbers.create(normalWinningNumbers, bonusBall);
 
@@ -69,7 +69,7 @@ class WinningNumbersTest {
         // given
         List<LottoNumber> normalWinningNumber = getLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
-        LottoNumber bonusWinningNumber = LottoNumber.getInstance(6);
+        LottoNumber bonusWinningNumber = LottoNumber.from(6);
 
         // when & then
         Assertions.assertThatThrownBy(() -> WinningNumbers.create(normalWinningNumber, bonusWinningNumber))
@@ -82,7 +82,7 @@ class WinningNumbersTest {
         // given
         List<LottoNumber> normalWinningNumber = getLottoNumbers(List.of(1, 2, 3, 4, 5, 5));
 
-        LottoNumber bonusWinningNumber = LottoNumber.getInstance(6);
+        LottoNumber bonusWinningNumber = LottoNumber.from(6);
 
         //given & when & then
         Assertions.assertThatThrownBy(() -> WinningNumbers.create(normalWinningNumber, bonusWinningNumber))
@@ -91,7 +91,7 @@ class WinningNumbersTest {
 
     private List<LottoNumber> getLottoNumbers(List<Integer> values) {
         return values.stream()
-                .map(LottoNumber::getInstance)
+                .map(LottoNumber::from)
                 .collect(toList());
     }
 }

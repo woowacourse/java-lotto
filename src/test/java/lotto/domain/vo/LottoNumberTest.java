@@ -11,7 +11,7 @@ class LottoNumberTest {
     @Test
     public void checkLottoNumberBoundaryWith0() {
         // given & when & then
-        assertThatThrownBy(() -> LottoNumber.getInstance(0))
+        assertThatThrownBy(() -> LottoNumber.from(0))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -19,7 +19,7 @@ class LottoNumberTest {
     @Test
     public void checkLottoNumberBoundaryWith46() {
         // given & when & then
-        assertThatThrownBy(() -> LottoNumber.getInstance(46))
+        assertThatThrownBy(() -> LottoNumber.from(46))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -27,10 +27,10 @@ class LottoNumberTest {
     @Test
     public void checkSameInstance() {
         // given
-        LottoNumber sameInstance1 = LottoNumber.getInstance(1);
-        LottoNumber sameInstance2 = LottoNumber.getInstance(1);
+        LottoNumber sameInstance1 = LottoNumber.from(1);
+        LottoNumber sameInstance2 = LottoNumber.from(1);
 
-        LottoNumber otherInstance3 = LottoNumber.getInstance(2);
+        LottoNumber otherInstance3 = LottoNumber.from(2);
 
         // when & then
         assertThat(sameInstance1).isEqualTo(sameInstance2);
