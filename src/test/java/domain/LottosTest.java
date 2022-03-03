@@ -53,7 +53,7 @@ public class LottosTest {
     }
 
     @Test
-    @DisplayName("두 개의 Lottos를 병합 시 길이는 전달도니 두 Lottos의 합과 같아야 한다")
+    @DisplayName("두 개의 Lottos를 병합했을 때의 길이는, 전달했던 두 Lottos의 합과 같아야 한다")
     void mergeTwoLottos() {
         // given
         Lottos lottos = new Lottos(this.lottos);
