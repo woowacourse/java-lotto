@@ -7,8 +7,8 @@ public class AnswerLotto {
 	private final List<LottoNumber> answerNumbers;
 	private final LottoNumber bonusLottoNumber;
 
-	public AnswerLotto(List<Integer> answerNumbers, LottoNumber bonusLottoNumber) {
-		this.answerNumbers = LottoGenerator.generateAnswerLottoNumbers(answerNumbers);
+	public AnswerLotto(List<LottoNumber> answerLottoNumbers, LottoNumber bonusLottoNumber) {
+		this.answerNumbers = answerLottoNumbers;
 		this.bonusLottoNumber = bonusLottoNumber;
 		validateBonusNumberInNumbers();
 	}

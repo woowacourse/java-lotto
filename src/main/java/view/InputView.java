@@ -9,21 +9,31 @@ public class InputView {
 	private static final String DELIMITER = ", ";
 	private static final String ERROR_NOT_NUMBER = "[ERROR] 입력은 반드시 숫자여야 합니다.";
 	private static final String ERROR_BLANK_DETECT = "[ERROR] 입력은 빈 입력일 수 없습니다.";
+	private static final String NOTICE_INPUT_MONEY = "구입금액을 입력해 주세요.";
+	private static final String NOTICE_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+	private static final String NOTICE_INPUT_MANUAL_LOTTO_SIZE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+	private static final String NOTICE_INPUT_MANUAL_LOTTO_NUMBER = "\n수동으로 구매할 번호를 구분자(, ) 기준으로 입력해 주세요.";
+	private static final String NOTICE_INPUT_ANSWER_LOTTO_NUMBER = "\n지난 주 당첨 번호를 구분자(, ) 기준으로 입력해 주세요.";
 
 
-	public static int inputMoney() {
-		System.out.println("구입금액을 입력해 주세요.");
-		return inputSingleNumber();
+	public static void noticeMoneyInput() {
+		System.out.println(NOTICE_INPUT_MONEY);
 	}
 
-	public static int inputBonusNumber() {
-		System.out.println("보너스 볼을 입력해 주세요.");
-		return inputSingleNumber();
+	public static void noticeBonusNumberInput() {
+		System.out.println(NOTICE_INPUT_BONUS_NUMBER);
 	}
 
-	public static List<Integer> inputAnsNumbers() {
-		System.out.println("\n지난 주 당첨 번호를 구분자(, ) 기준으로 입력해 주세요.");
-		return inputMultipleNumber();
+	public static void noticeManualLottoSizeInput() {
+		System.out.println(NOTICE_INPUT_MANUAL_LOTTO_SIZE);
+	}
+
+	public static void noticeAnswerLottoNumbersInput() {
+		System.out.println(NOTICE_INPUT_ANSWER_LOTTO_NUMBER);
+	}
+
+	public static void noticeManualLottoNumbersInput() {
+		System.out.println(NOTICE_INPUT_MANUAL_LOTTO_NUMBER);
 	}
 
 	private static String inputLine() {
@@ -31,14 +41,14 @@ public class InputView {
 		return scanner.nextLine();
 	}
 
-	private static int inputSingleNumber() {
+	public static int inputSingleNumber() {
 		String userInput = inputLine();
 		validateEmpty(userInput);
 		validateAllNumber(userInput);
 		return Integer.parseInt(userInput);
 	}
 
-	private static List<Integer> inputMultipleNumber() {
+	public static List<Integer> inputMultipleNumber() {
 		String userInput = inputLine();
 		validateEmpty(userInput);
 		List<Integer> multipleNumbers = new ArrayList<>();

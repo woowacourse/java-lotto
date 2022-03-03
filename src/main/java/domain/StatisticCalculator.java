@@ -24,12 +24,12 @@ public class StatisticCalculator {
 	}
 
 	public double calculateProfitRatio() {
-		int totalPrice =
+		long totalPrice =
 			this.resultStatistics
 				.keySet()
 				.stream()
 				.filter(num -> this.resultStatistics.get(num) > 0)
-				.mapToInt(this.resultStatistics::get)
+				.mapToLong(this.resultStatistics::get)
 				.sum() * UNIT_PRICE;
 		int totalPrize = this.resultStatistics.keySet().stream().filter(num -> this.resultStatistics.get(num) > 0)
 			.mapToInt(num -> num.getProfit() * this.resultStatistics.get(num)).sum();
