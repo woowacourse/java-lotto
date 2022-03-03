@@ -10,16 +10,20 @@ import lotto.config.ServiceConfig;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 
-class PurchaseServiceTest {
+class AutoPurchaseServiceTest {
 
     @Test
-    @DisplayName("금액으로 로또티켓을 구매할 수 있다.")
+    @DisplayName("로또티켓을 구매할 수 있다.")
     public void purchaseTicketByMoney() {
         // given
-        PurchaseService service = ServiceConfig.getPurchaseService();
+        MoneyService moneyService = ServiceConfig.getMoneyService();
         Money money = new Money(2000);
+        moneyService.insert(money);
+
         // when
-        List<LottoTicket> lottoTickets = service.purchaseAndPersist(money);
+        AutoPurchaseService service = ServiceConfig.getPurchaseService();
+        List<LottoTicket> lottoTickets = service.purchaseAll();
+
         // then
         Assertions.assertThat(lottoTickets.size()).isEqualTo(2);
     }

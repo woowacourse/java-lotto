@@ -11,40 +11,43 @@ import lotto.domain.Money;
 import lotto.domain.generator.NumberGenerator;
 import lotto.domain.generator.RandomNumberGenerator;
 import lotto.repository.LottoRepository;
+import lotto.repository.MoneyRepository;
 
-public class PurchaseService {
+public class AutoPurchaseService {
 
-    private final NumberGenerator generator;
+    private final MoneyRepository moneyRepository;
     private final LottoRepository lottoRepository;
 
-    private PurchaseService(NumberGenerator generator, LottoRepository lottoRepository) {
-        this.generator = generator;
+    public AutoPurchaseService(MoneyRepository moneyRepository, LottoRepository lottoRepository) {
+        this.moneyRepository = moneyRepository;
         this.lottoRepository = lottoRepository;
     }
 
     private static class PurchaseServiceHelper {
-        private static final PurchaseService INSTANCE = new PurchaseService(
-            new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX),
+        private static final AutoPurchaseService INSTANCE = new AutoPurchaseService(
+            RepositoryConfig.getMoneyRepository(),
             RepositoryConfig.getLottoRepository()
         );
     }
 
-    public static PurchaseService getInstance() {
+    public static AutoPurchaseService getInstance() {
         return PurchaseServiceHelper.INSTANCE;
     }
 
-    public List<LottoTicket> purchaseAndPersist(Money money) {
-        List<LottoTicket> tickets = purchase(money);
-        persist(tickets);
+    public List<LottoTicket> purchaseAll() {
+        List<LottoTicket> tickets = purchaseLottoTickets();
+        saveTickets(tickets);
         return tickets;
     }
 
-    private List<LottoTicket> purchase(Money money) {
-        int ticketCount = createPurchasableCount(money);
+    private List<LottoTicket> purchaseLottoTickets() {
+        NumberGenerator generator = new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX);
+        int ticketCount = calculatePurchasableCount();
         return createTickets(generator, ticketCount);
     }
 
-    private int createPurchasableCount(Money money) {
+    private int calculatePurchasableCount() {
+        Money money = moneyRepository.get();
         return money.divide(Money.from(LottoTicket.PRICE)).getAmount();
     }
 
@@ -54,7 +57,7 @@ public class PurchaseService {
             .collect(Collectors.toList());
     }
 
-    private void persist(List<LottoTicket> tickets) {
+    private void saveTickets(List<LottoTicket> tickets) {
         lottoRepository.save(tickets);
     }
 }

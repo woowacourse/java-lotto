@@ -7,17 +7,17 @@ import lotto.config.ServiceConfig;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 import lotto.dto.LottoTicketResponse;
+import lotto.service.AutoPurchaseService;
 import lotto.service.MoneyService;
-import lotto.service.PurchaseService;
 import lotto.utils.IntegerUtils;
 
 public class AutoPurchaseController {
 
-    private final PurchaseService purchaseService;
+    private final AutoPurchaseService autoPurchaseService;
     private final MoneyService moneyService;
 
-    private AutoPurchaseController(PurchaseService purchaseService, MoneyService moneyService) {
-        this.purchaseService = purchaseService;
+    private AutoPurchaseController(AutoPurchaseService autoPurchaseService, MoneyService moneyService) {
+        this.autoPurchaseService = autoPurchaseService;
         this.moneyService = moneyService;
     }
 
@@ -35,7 +35,7 @@ public class AutoPurchaseController {
     public List<LottoTicketResponse> purchase(String inputMoney) {
         Money money = createMoney(inputMoney);
         moneyService.insert(money);
-        List<LottoTicket> tickets = purchaseService.purchaseAndPersist(money);
+        List<LottoTicket> tickets = autoPurchaseService.purchaseAll();
         return toResponse(tickets);
     }
 

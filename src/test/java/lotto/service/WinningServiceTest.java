@@ -19,8 +19,10 @@ class WinningServiceTest {
     @DisplayName("구매한 로또티켓을 당첨번호와 비교한다.")
     public void compareWinningTicketWithLottoTicket() {
         // given
-        PurchaseService purchaseService = ServiceConfig.getPurchaseService();
-        purchaseService.purchaseAndPersist(new Money(8000));
+        MoneyService moneyService = ServiceConfig.getMoneyService();
+        moneyService.insert(new Money(8000));
+        AutoPurchaseService autoPurchaseService = ServiceConfig.getPurchaseService();
+        autoPurchaseService.purchaseAll();
 
         WinningService winningService = ServiceConfig.getWinningService();
         WinningTicket winningTicket = new WinningTicket(new LottoTicket(
