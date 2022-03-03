@@ -11,7 +11,7 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String DELIMITER = ",";
 
-    public static int inputPurchaseAmount() {
+    public static int inputPayment() {
         String value = scanner.nextLine();
         NumberValidator.validateNumber(value);
         return Integer.parseInt(value);
@@ -24,7 +24,7 @@ public class InputView {
     }
 
     public static List<Integer> inputLottoNumbers() {
-        List<String> numbers = Arrays.asList(scanner.nextLine().split(DELIMITER)).stream()
+        List<String> numbers = Arrays.stream(scanner.nextLine().split(DELIMITER))
             .map(String::trim)
             .collect(Collectors.toList());
 

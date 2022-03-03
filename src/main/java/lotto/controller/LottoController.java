@@ -16,39 +16,39 @@ public class LottoController {
     private static final int LOTTO_PRICE = 1000;
 
     public void run() {
-        Money purchaseAmount = payForLotto();
-        Lottos lottos = buyLotto(new Money(purchaseAmount.getMoney()));
+        Lottos lottos = buyLotto();
         WinningLotto winningLotto = pickLastWeekWinningNumbers();
-        calculateLottoResult(purchaseAmount, lottos, winningLotto);
+        calculateLottoResult(lottos, winningLotto);
+    }
+
+    private Lottos buyLotto() {
+        Money payment = payForLotto();
+        int count = inputManualLottoCount(payment);
+        List<Lotto> manualLottos = inputManualLottos(count);
+        Lottos lottos = Lottos.of(manualLottos, payment);
+        OutputView.printLottos(count, lottos.getAutoLottos(count));
+        return lottos;
     }
 
     private Money payForLotto() {
-        OutputView.printPurchaseAmountRequest();
+        OutputView.printPaymentRequest();
         try {
-            return new Money(InputView.inputPurchaseAmount() / LOTTO_PRICE * LOTTO_PRICE);
+            return new Money(InputView.inputPayment() / LOTTO_PRICE * LOTTO_PRICE);
         } catch (IllegalArgumentException error) {
             OutputView.printErrorMessage(error.getMessage());
             return payForLotto();
         }
     }
 
-    private Lottos buyLotto(Money purchaseAmount) {
-        int count = inputManualLottoCount(purchaseAmount);
-        List<Lotto> manualLottos = inputManualLottos(count);
-        Lottos lottos = Lottos.of(manualLottos, purchaseAmount);
-        OutputView.printLottos(count, lottos.getAutoLottos(count));
-        return lottos;
-    }
-
-    private int inputManualLottoCount(Money purchaseAmount) {
+    private int inputManualLottoCount(Money payAmount) {
         OutputView.printManualLottoCountRequest();
         try {
             int count = InputView.inputManualLottoCount();
-            purchaseAmount.subtract(count * LOTTO_PRICE);
+            payAmount.subtract(count * LOTTO_PRICE);
             return count;
         } catch (IllegalArgumentException error) {
             OutputView.printErrorMessage(error.getMessage());
-            return inputManualLottoCount(purchaseAmount);
+            return inputManualLottoCount(payAmount);
         }
     }
 
@@ -91,13 +91,14 @@ public class LottoController {
         }
     }
 
-    private void calculateLottoResult(Money purchaseAmount, Lottos lottos, WinningLotto winningLotto) {
+    private void calculateLottoResult(Lottos lottos, WinningLotto winningLotto) {
         OutputView.printStatisticsTitle();
         LottoResult lottoResult = new LottoResult();
         lottoResult.addMatchingCount(lottos, winningLotto);
         OutputView.printLottosResult(lottoResult.getLottoResult());
 
-        double profitRate = lottoResult.calculateProfitRate(purchaseAmount);
+        Money payment = new Money(lottos.getLottos().size() * LOTTO_PRICE);
+        double profitRate = lottoResult.calculateProfitRate(payment);
         OutputView.printProfitRate(profitRate);
     }
 }
