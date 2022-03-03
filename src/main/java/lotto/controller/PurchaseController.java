@@ -40,10 +40,15 @@ public class PurchaseController {
     }
 
     public PurchaseResult purchase() {
-        Money money = insertMoney();
-        LottoMachine lottoMachine = new LottoMachine(money);
-        List<LottoTicket> tickets = purchaseLottos(lottoMachine);
-        return new PurchaseResult(money, tickets);
+        try {
+            Money money = insertMoney();
+            LottoMachine lottoMachine = new LottoMachine(money);
+            List<LottoTicket> tickets = purchaseLottos(lottoMachine);
+            return new PurchaseResult(money, tickets);
+        } catch (IllegalArgumentException e) {
+            errorView.error(e.getMessage());
+            return purchase();
+        }
     }
 
     private Money insertMoney() {

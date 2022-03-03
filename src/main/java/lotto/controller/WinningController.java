@@ -38,8 +38,13 @@ public class WinningController {
     }
 
     public void drawLots(PurchaseResult purchaseResult) {
-        WinningTicket winningTicket = createWinningTicket();
-        showStatistics(winningTicket, purchaseResult);
+        try {
+            WinningTicket winningTicket = createWinningTicket();
+            showStatistics(winningTicket, purchaseResult);
+        } catch (IllegalArgumentException e) {
+            errorView.error(e.getMessage());
+            drawLots(purchaseResult);
+        }
     }
 
     private WinningTicket createWinningTicket() {
