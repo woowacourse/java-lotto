@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class WinningStatistics {
     }
 
     public Map<LottoRank, Integer> getWinningCounts() {
-        return winningCounts;
+        return Collections.unmodifiableMap(winningCounts);
     }
 
     public double getEarningsRate() {
