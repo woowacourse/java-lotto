@@ -18,10 +18,8 @@ import view.OutputView;
 public class LottoController {
 	private static final String LOTTO_COUNT_BLANK_ERROR_MESSAGE = "[Error]: 금액을 입력해주세요.";
 	private static final String LOTTO_COUNT_NUMBER_ERROR_MESSAGE = "[Error]: 금액은 숫자를 입력해주세요.";
-	private static final String WINNING_NUMBER_ERROR_MESSAGE = "[Error]: 당첨 번호는 숫자여야 합니다.";
 	private static final String WINNING_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 당첨 번호를 입력하세요.";
 	private static final String BONUS_BALL_BLANK_ERROR_MESSAGE = "[Error]: 보너스 볼을 입력해주세요.";
-	private static final String BONUS_BALL_NUMBER_ERROR_MESSAGE = "[Error]: 보너스 볼은 숫자여야 합니다.";
 	private static final String DELIMITER_COMMA = ",";
 
 	private final InputView inputView = new InputView();
@@ -64,7 +62,6 @@ public class LottoController {
 			String input = inputView.inputWinningNumbers();
 			InputValidateUtils.inputBlank(input, WINNING_NUMBER_BLANK_ERROR_MESSAGE);
 			List<String> numbers = splitWinningNumber(input);
-			//InputValidateUtils.inputNumber(String.join("", numbers), WINNING_NUMBER_ERROR_MESSAGE);
 			lottoWinningNumber = new LottoWinningNumber(makeInputWinningNumbersToLottoNumbers(numbers));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
