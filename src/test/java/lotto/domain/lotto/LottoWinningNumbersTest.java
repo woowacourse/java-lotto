@@ -2,9 +2,6 @@ package lotto.domain.lotto;
 
 import java.util.Arrays;
 import lotto.controller.LottoController;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoWinningNumbers;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.Rank;
 import org.junit.jupiter.api.Test;

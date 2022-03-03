@@ -1,7 +1,6 @@
 package lotto.domain.lotto;
 
 import java.util.Arrays;
-import lotto.domain.lotto.Lotto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;

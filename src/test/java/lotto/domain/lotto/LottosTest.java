@@ -1,7 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.lotto.Lottos;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
