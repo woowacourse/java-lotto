@@ -36,7 +36,7 @@ public class MainController {
                 InputView.inputMoney());
     }
 
-    private LottoTicketCount makeLottoTicketCount(LottoMoney money) {
+    private LottoTicketCount makeLottoTicketCount(final LottoMoney money) {
         return LottoTicketCount.of(money.toLottoCount(),
                 InputView.inputManualTicketCount());
     }

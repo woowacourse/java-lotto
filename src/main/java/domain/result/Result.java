@@ -5,12 +5,11 @@ import domain.lotto.WinNumbers;
 import exception.NullException;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Result {
     private final LinkedHashMap<Rank, Integer> result = new LinkedHashMap<>();
 
-    private Result(List<Lotto> lottos, WinNumbers winNumbers) {
+    private Result(final List<Lotto> lottos, final WinNumbers winNumbers) {
         validate(lottos);
         for (Lotto lotto : lottos) {
             Rank rank = Rank.of(lotto.countSameNum(winNumbers), lotto.contains(winNumbers.getBonus()));
@@ -18,11 +17,11 @@ public class Result {
         }
     }
 
-    public static Result of(List<Lotto> lottos, WinNumbers winNumbers) {
+    public static Result of(final List<Lotto> lottos, final WinNumbers winNumbers) {
         return new Result(lottos, winNumbers);
     }
 
-    private void validate(List<Lotto> lottos) {
+    private void validate(final List<Lotto> lottos) {
         if (lottos.size() == 0) {
             throw new NullException();
         }
@@ -30,10 +29,6 @@ public class Result {
 
     private void add(final Rank rank) {
         result.put(rank, result.getOrDefault(rank, 0) + 1);
-    }
-
-    public Map<Rank, Integer> get() {
-        return result;
     }
 
     public long getPrize() {
@@ -44,7 +39,7 @@ public class Result {
         return prize;
     }
 
-    public int getRankCount(Rank rank) {
+    public int getRankCount(final Rank rank) {
         return result.getOrDefault(rank, 0);
     }
 }

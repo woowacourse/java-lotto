@@ -11,7 +11,7 @@ public class NumsGenerator {
     private static final int FROM_INDEX = 0;
 
     public static List<LottoNumber> generateByRandom() {
-        final List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.LOTTO_NUMBER_CACHE.values());
+        final List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.getLottoNumberCache().values());
         Collections.shuffle(lottoNumbers);
         return lottoNumbers.subList(FROM_INDEX, END_INDEX);
     }

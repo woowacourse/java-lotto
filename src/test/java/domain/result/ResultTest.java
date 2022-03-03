@@ -41,7 +41,7 @@ class ResultTest {
         Result result = Result.of(List.of(lotto), winNumbers);
 
         //then
-        assertThat(result.get().get(Rank.FIRST)).isEqualTo(1);
+        assertThat(result.getRankCount(Rank.FIRST)).isEqualTo(1);
     }
 
     @Test
@@ -53,7 +53,7 @@ class ResultTest {
         Result result = Result.of(Arrays.asList(lotto, lotto), winNumbers);
 
         //then
-        assertThat(result.get().get(Rank.FIRST)).isEqualTo(2);
+        assertThat(result.getRankCount(Rank.FIRST)).isEqualTo(2);
     }
 
     @Test
@@ -67,7 +67,7 @@ class ResultTest {
         Result result = Result.of(Arrays.asList(lotto2, lotto1, lotto0), winNumbers);
 
         //then
-        assertThat(result.get().get(Rank.NONE)).isEqualTo(3);
+        assertThat(result.getRankCount(Rank.NONE)).isEqualTo(3);
     }
 
     @Test
