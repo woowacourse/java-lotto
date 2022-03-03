@@ -36,7 +36,7 @@ public class LottoController {
 
         WinningLotto winningLotto = generateWinningLotto();
         WinningResult winningResult = generateWinningResultByLottosAndWinningLotto(totalLottos, winningLotto);
-        printWinningResult(winningResult, totalLottoQuantity);
+        printWinningResult(winningResult);
     }
 
     private InputMoney generateInputMoney() {
@@ -147,7 +147,7 @@ public class LottoController {
         return lottos.getWinningResultByWinningLotto(winningLotto);
     }
 
-    private void printWinningResult(WinningResult winningResult, LottoQuantity lottoQuantity) {
+    private void printWinningResult(WinningResult winningResult) {
         WinningResultDto winningResultDto = WinningResultDto.from(winningResult);
         ResultView.printResult(winningResultDto);
     }
