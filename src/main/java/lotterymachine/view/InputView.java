@@ -34,7 +34,7 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         try {
             return Arrays.stream(SCANNER.nextLine().split(NUMBER_DELIMITER))
-                    .map(i -> LotteryNumber.valueOf(toInt(i)))
+                    .map(i -> LotteryNumber.of(toInt(i)))
                     .collect(Collectors.toList());
         } catch (RuntimeException runtimeException) {
             System.out.println(runtimeException.getMessage());
@@ -45,7 +45,7 @@ public class InputView {
     public static LotteryNumber getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
-            LotteryNumber lotteryNumber = LotteryNumber.valueOf(toInt(SCANNER.nextLine()));
+            LotteryNumber lotteryNumber = LotteryNumber.of(toInt(SCANNER.nextLine()));
             printEmptyLine();
             return lotteryNumber;
         } catch (NumberFormatException numberFormatException) {
@@ -65,7 +65,7 @@ public class InputView {
     public static LotteryTicket getPassivityLotteryTicket() {
         List<LotteryNumber> lotteryNumbers = Arrays.stream(SCANNER.nextLine().split(","))
                 .map(String::trim)
-                .map(i -> LotteryNumber.valueOf(toInt(i)))
+                .map(i -> LotteryNumber.of(toInt(i)))
                 .collect(Collectors.toList());
         return new LotteryTicket(lotteryNumbers);
     }

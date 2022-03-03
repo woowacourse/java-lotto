@@ -1,6 +1,5 @@
 package lotterymachine.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +16,9 @@ class WinningLotteryTest {
     @DisplayName("당첨 번호와 보너스 번호가 일치할 시, 에러를 발생시킨다.")
     void validateBonusNumber() {
         List<LotteryNumber> input = IntStream.range(7, 13)
-                .mapToObj(LotteryNumber::valueOf)
+                .mapToObj(LotteryNumber::of)
                 .collect(Collectors.toList());
-        LotteryNumber inputBonusNumber = LotteryNumber.valueOf(7);
+        LotteryNumber inputBonusNumber = LotteryNumber.of(7);
 
         assertThatThrownBy(() -> {
             WinningLottery winningLottery = new WinningLottery(input, inputBonusNumber);
@@ -31,9 +30,9 @@ class WinningLotteryTest {
     @DisplayName("당첨 번호 개수가 6개가 아닐 시, 에러를 발생시킨다.")
     void validateSize() {
         List<LotteryNumber> input = IntStream.range(7, 12)
-                .mapToObj(LotteryNumber::valueOf)
+                .mapToObj(LotteryNumber::of)
                 .collect(Collectors.toList());
-        LotteryNumber inputBonusNumber = LotteryNumber.valueOf(7);
+        LotteryNumber inputBonusNumber = LotteryNumber.of(7);
 
         assertThatThrownBy(() -> {
             WinningLottery winningLottery = new WinningLottery(input, inputBonusNumber);
@@ -45,10 +44,10 @@ class WinningLotteryTest {
     @DisplayName("당첨 번호가 서로 중복될 시, 에러를 발생시킨다.")
     void validateDuplication() {
         List<LotteryNumber> input = IntStream.range(7, 12)
-                .mapToObj(LotteryNumber::valueOf)
+                .mapToObj(LotteryNumber::of)
                 .collect(Collectors.toList());
-        input.add(LotteryNumber.valueOf(7));
-        LotteryNumber inputBonusNumber = LotteryNumber.valueOf(7);
+        input.add(LotteryNumber.of(7));
+        LotteryNumber inputBonusNumber = LotteryNumber.of(7);
 
         assertThatThrownBy(() -> {
             WinningLottery winningLottery = new WinningLottery(input, inputBonusNumber);
@@ -60,9 +59,9 @@ class WinningLotteryTest {
     @DisplayName("LotteryTicket을 입력 받아, 해당하는 Rank를 조회한다.")
     void getWinningLotteryRank() {
         List<LotteryNumber> input = IntStream.range(7, 13)
-                .mapToObj(LotteryNumber::valueOf)
+                .mapToObj(LotteryNumber::of)
                 .collect(Collectors.toList());
-        LotteryNumber inputBonusNumber = LotteryNumber.valueOf(14);
+        LotteryNumber inputBonusNumber = LotteryNumber.of(14);
         WinningLottery winningLottery = new WinningLottery(input, inputBonusNumber);
         LotteryTicket lotteryTicket = new LotteryTicket(input);
 

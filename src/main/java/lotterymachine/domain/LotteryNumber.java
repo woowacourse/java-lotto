@@ -20,7 +20,7 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
                 .collect(Collectors.toList());
     }
 
-    public static LotteryNumber valueOf(int number) {
+    public static LotteryNumber of(int number) {
         validateNumber(number);
         return numbers.get(number);
     }
