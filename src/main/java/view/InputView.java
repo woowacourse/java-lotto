@@ -18,6 +18,9 @@ public class InputView {
     private static final String NUMBER_DELIMITER = ", ";
     private static final String NONE_NUMERIC_ERROR = "[ERROR] 숫자만 입력이 가능합니다.";
 
+    private static final int NO_AMOUNT = 0;
+    private static final int START_INDEX = 0;
+
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -32,16 +35,13 @@ public class InputView {
     }
 
     public static List<List<Integer>> askManualLottoNumbers(int amount) {
-        System.out.println(QUESTION_MANUAL_LOTTO_NUMBERS);
-        if (amount == 0) {
+        if (amount == NO_AMOUNT) {
             return new ArrayList<>();
         }
-        List<List<Integer>> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < amount; i++) {
-            List<String> numbers = Arrays.asList(scanner.nextLine().split(NUMBER_DELIMITER));
-            lottoNumbers.add(covertNumbersToInteger(numbers));
-        }
-        return lottoNumbers;
+
+        System.out.println(QUESTION_MANUAL_LOTTO_NUMBERS);
+
+        return askLottoNumbers(amount);
     }
 
     public static WinningNumbers askWinningNumbers() {
@@ -57,6 +57,15 @@ public class InputView {
     public static int askBonusNumber() {
         System.out.println(QUESTION_BONUS_NUMBER);
         return checkAndConvertInteger(scanner.nextLine());
+    }
+
+    private static List<List<Integer>> askLottoNumbers(int amount) {
+        List<List<Integer>> lottoNumbers = new ArrayList<>();
+        for (int i = START_INDEX; i < amount; i++) {
+            List<String> numbers = Arrays.asList(scanner.nextLine().split(NUMBER_DELIMITER));
+            lottoNumbers.add(covertNumbersToInteger(numbers));
+        }
+        return new ArrayList<>(lottoNumbers);
     }
 
     private static List<Integer> covertNumbersToInteger(List<String> numbers) {
