@@ -19,9 +19,7 @@ class LottoResultTest {
     void matchNumber(int bonusNumberInt, Long totalWinningMoney) {
         Lottos lottos = new Lottos(new TestNumberGenerator(), 1);
 
-        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45));
-        LottoNumber bonusNumber = new LottoNumber(bonusNumberInt);
-        LottoResult lottoResult = new LottoResult(lottos, winningNumbers, bonusNumber);
+        LottoResult lottoResult = new LottoResult(lottos, Arrays.asList(1, 2, 3, 4, 5, 45), bonusNumberInt);
 
         assertThat(lottoResult.getTotalWinningMoney()).isEqualTo(totalWinningMoney);
     }

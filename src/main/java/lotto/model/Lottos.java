@@ -14,7 +14,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(LottoNumberGenerator lottoNumberGenerator, int count) {
-        this.lottos =  new ArrayList<>(generateLottos(lottoNumberGenerator, count));
+        this.lottos = new ArrayList<>(generateLottos(lottoNumberGenerator, count));
         validateEmptyCollection(this.lottos);
     }
 

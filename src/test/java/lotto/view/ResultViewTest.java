@@ -19,9 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.model.Lotto;
 import lotto.model.LottoMoney;
-import lotto.model.LottoNumber;
 import lotto.model.LottoResult;
 import lotto.model.Lottos;
 import lotto.model.Yield;
@@ -49,16 +47,8 @@ class ResultViewTest {
 
     @Test
     @DisplayName("당첨 통계 출력 확인")
-    void printResultStatisticsTest() throws
-        NoSuchMethodException,
-        InvocationTargetException,
-        InstantiationException,
-        IllegalAccessException {
-        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Constructor<LottoNumber> lottoNumberConstructor = LottoNumber.class.getDeclaredConstructor(int.class);
-        lottoNumberConstructor.setAccessible(true);
-        LottoNumber bonusNumber = lottoNumberConstructor.newInstance(7);
-        ResultView.printResultStatistics(new LottoResult(lottos, winningNumbers, bonusNumber));
+    void printResultStatisticsTest() {
+        ResultView.printResultStatistics(new LottoResult(lottos, Arrays.asList(1, 2, 3, 4, 5, 6), 7));
 
         assertThat(outputStreamCaptor.toString())
             .contains("5개 일치, 보너스 볼 일치(30000000원)- 1개")
