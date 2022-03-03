@@ -14,14 +14,14 @@ class LottoResultTest {
 
     @BeforeEach
     void before() {
-        ball1 = new Ball(1);
-        ball2 = new Ball(2);
-        ball3 = new Ball(3);
-        ball4 = new Ball(4);
-        ball5 = new Ball(5);
-        ball6 = new Ball(6);
-        ball7 = new Ball(7);
-        ball8 = new Ball(8);
+        ball1 = Ball.of(1);
+        ball2 = Ball.of(2);
+        ball3 = Ball.of(3);
+        ball4 = Ball.of(4);
+        ball5 = Ball.of(5);
+        ball6 = Ball.of(6);
+        ball7 = Ball.of(7);
+        ball8 = Ball.of(8);
 
         Lotto winningNumbers = new Lotto(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
         Ball bonusBall = ball7;

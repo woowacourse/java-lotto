@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Ball implements Comparable<Ball> {
-    public static final int MINIMUM_NUMBER = 1;
-    public static final int MAXIMUM_NUMBER = 45;
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
     private static final String ERROR_LOTTO_NUMBER = "로또 숫자가 아닙니다";
     public static final List<Ball> cacheBalls = new ArrayList<>();
 
@@ -21,10 +21,16 @@ public class Ball implements Comparable<Ball> {
                 .collect(Collectors.toList()));
     }
 
-    // TODO: 정적 팩토리 메소드 사용하여 cacheBalls 에서 꺼내 쓰기, 없으면 생성
-    public Ball(final int number) {
+    private Ball(final int number) {
         validateLottoNumber(number);
         this.number = number;
+    }
+
+    public static Ball of(final int number) {
+        return cacheBalls.stream()
+                .filter(ball -> ball.number == number)
+                .findFirst()
+                .orElse(new Ball(number));
     }
 
     public int getNumber() {
@@ -35,7 +41,7 @@ public class Ball implements Comparable<Ball> {
         return Collections.unmodifiableList(cacheBalls);
     }
 
-    private void validateLottoNumber(final int number) {
+    private static void validateLottoNumber(final int number) {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER);
         }

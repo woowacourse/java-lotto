@@ -64,7 +64,7 @@ public class Creator {
 
     public static WinningLotto createWinningLotto(final Lotto winningNumbers) {
         try {
-            Ball bonusBall = new Ball(inputBonusBall(entering));
+            Ball bonusBall = Ball.of(inputBonusBall(entering));
             return new WinningLotto(winningNumbers, bonusBall);
         } catch (IllegalArgumentException error) {
             printErrorMessage(error.getMessage());

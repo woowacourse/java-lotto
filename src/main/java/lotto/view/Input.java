@@ -33,7 +33,7 @@ public class Input {
         return Arrays.stream(lottoNumbers)
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .map(Ball::new)
+                .map(Ball::of)
                 .collect(Collectors.toList());
     }
 

@@ -26,15 +26,15 @@ public class BallTest {
     @DisplayName("1에서 45 사이의 문자열 값이 아닌 값을 입력했을 경우")
     void incorrect_range_1_to_45(int input) {
         assertThatThrownBy(() -> {
-            Ball ball = new Ball(input);
+            Ball ball = Ball.of(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("숫자 비교")
     void equals() {
-        Ball ball1 = new Ball(1);
-        Ball ball2 = new Ball(1);
+        Ball ball1 = Ball.of(1);
+        Ball ball2 = Ball.of(1);
 
         assertEquals(ball1, ball2);
     }
@@ -42,8 +42,8 @@ public class BallTest {
     @Test
     @DisplayName("해시코드 비교")
     void hash_code() {
-        Ball ball1 = new Ball(1);
-        Ball ball2 = new Ball(1);
+        Ball ball1 = Ball.of(1);
+        Ball ball2 = Ball.of(1);
 
         assertSame(ball1.hashCode(), ball2.hashCode());
     }
