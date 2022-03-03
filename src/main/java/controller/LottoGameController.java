@@ -3,6 +3,7 @@ package controller;
 import domain.AnswerLotto;
 import domain.Lotto;
 import domain.AutoGenerator;
+import domain.LottoCounter;
 import domain.LottoGenerator;
 import domain.LottoNumber;
 import domain.LottoTickets;
@@ -34,12 +35,12 @@ public class LottoGameController {
 	}
 
 	private static LottoTickets generateLottoTickets(int money, int manualLottoSize) {
-		LottoTickets lottoTickets = new LottoTickets(money);
+		LottoTickets lottoTickets = new LottoTickets(new LottoCounter(money, manualLottoSize));
 		if (manualLottoSize > 0) {
 			generateManualLottos(lottoTickets, manualLottoSize);
 		}
 		generateAutoLottos(lottoTickets);
-		OutputView.printLottoTickets(lottoTickets, manualLottoSize);
+		OutputView.printLottoTickets(lottoTickets);
 		return lottoTickets;
 	}
 
@@ -71,7 +72,7 @@ public class LottoGameController {
 	}
 
 	private static void generateAutoLottos(LottoTickets lottoTickets) {
-		for (int index = 0; index < lottoTickets.calculateRemainLottoCount(); index++) {
+		for (int index = 0; index < lottoTickets.getAutoLottoTicketsSize(); index++) {
 			LottoGenerator autoGenerator = new AutoGenerator();
 			lottoTickets.add(new Lotto(autoGenerator.generateLottoNumbers()));
 		}

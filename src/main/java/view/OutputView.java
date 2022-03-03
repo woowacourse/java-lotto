@@ -13,8 +13,9 @@ public class OutputView {
 	private static final String LOSE = "손실";
 	private static final double BASE_RATIO = 1.0;
 
-	public static void printLottoTickets(LottoTickets lottoTickets, int manualLottoSize) {
-		int autoSize = lottoTickets.getLottoTicketsSize() - manualLottoSize;
+	public static void printLottoTickets(LottoTickets lottoTickets) {
+		int autoSize = lottoTickets.getAutoLottoTicketsSize();
+		int manualLottoSize = lottoTickets.getManualLottoTicketsSize();
 		System.out.println("수동으로 " + manualLottoSize + "장, 자동으로 " + autoSize + "개를 구매했습니다.");
 		for (Lotto lotto : lottoTickets.getLottoTickets()) {
 			printLotto(lotto);
