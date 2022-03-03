@@ -7,6 +7,10 @@ import java.util.List;
 
 public class OutputView {
 
+    public static void printInputManualPurchase() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
     public static void printNumberOfTicket(int number) {
         System.out.printf("%d개를 구매했습니다.%n", number);
     }

@@ -21,6 +21,11 @@ public class InputView {
         return toInt(scanner.nextLine());
     }
 
+    public static List<Integer> getManualTicket() {
+        String[] input = scanner.nextLine().split(NUMBER_DELIMITER);
+        return toIntegers(input);
+    }
+
     public static List<Integer> getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String[] input = scanner.nextLine().split(NUMBER_DELIMITER);

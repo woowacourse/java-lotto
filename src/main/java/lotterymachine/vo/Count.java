@@ -27,6 +27,10 @@ public class Count {
         return this;
     }
 
+    public boolean isInteger() {
+        return this.number > 0;
+    }
+
     public int getNumber() {
         return number;
     }

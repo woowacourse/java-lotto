@@ -3,6 +3,7 @@ package lotterymachine;
 import static lotterymachine.utils.LotteryCalculator.calculateProfitRate;
 import static lotterymachine.utils.LotteryGenerator.generate;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 import java.util.Map;
@@ -24,7 +25,7 @@ public class LotteryMachine {
         Money amount = getInputAmount();
         Count totalTickets = getNumberOfTickets(amount);
         Count manualTickets = getNumberOfManualTickets(totalTickets);
-        LotteryTickets purchasedLotteryTickets = purchaseLotteryTickets(totalTickets);
+        LotteryTickets purchasedLotteryTickets = purchaseLotteryTickets(totalTickets, manualTickets);
 
         LotteryTicket winningTicket = getWinningTicket();
         int bonusNumber = InputView.getBonusNumber(winningTicket.getBalls());
@@ -55,11 +56,34 @@ public class LotteryMachine {
         }
     }
 
-    private static LotteryTickets purchaseLotteryTickets(Count numberOfTickets) {
-        List<LotteryTicket> lotteryTicketsList = generate(numberOfTickets);
-        LotteryTickets lotteryTickets = new LotteryTickets(lotteryTicketsList);
+    private static LotteryTickets purchaseLotteryTickets(Count numberOfTickets, Count manualTickets) {
+        List<LotteryTicket> manualLotteryTickets = purchaseManualLotteryTickets(manualTickets);
+        List<LotteryTicket> autoLotteryTickets = generate(numberOfTickets);
+        LotteryTickets lotteryTickets = new LotteryTickets(autoLotteryTickets);
         OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
         return lotteryTickets;
+    }
+
+    private static List<LotteryTicket> purchaseManualLotteryTickets(Count manualTickets) {
+        List<LotteryTicket> lotteryTickets = new ArrayList<>();
+        if (!manualTickets.isInteger()) {
+            return lotteryTickets;
+        }
+        OutputView.printInputManualPurchase();
+        for (int i = 0; i < manualTickets.getNumber(); i++) {
+            lotteryTickets.add(getManualLotteryTicket());
+        }
+        return lotteryTickets;
+    }
+
+    private static LotteryTicket getManualLotteryTicket() {
+        try {
+            List<Ball> selectedBalls = Ball.createBalls(InputView.getManualTicket());
+            return new LotteryTicket(selectedBalls);
+        } catch (Exception exception) {
+            OutputView.printException(exception.getMessage());
+            return getManualLotteryTicket();
+        }
     }
 
     private static LotteryTicket getWinningTicket() {
