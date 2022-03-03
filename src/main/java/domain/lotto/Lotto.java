@@ -1,6 +1,5 @@
 package domain.lotto;
 
-import exception.NullException;
 import exception.lotto.LottoNumDuplicatedException;
 import exception.lotto.LottoNumWrongSizeException;
 import java.util.Collections;

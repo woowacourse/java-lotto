@@ -34,12 +34,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public int get() {
-        return this.number;
-    }
-
     public static Map<Integer, LottoNumber> getLottoNumberCache() {
         return LOTTO_NUMBER_CACHE;
+    }
+
+    public int get() {
+        return this.number;
     }
 
     @Override
