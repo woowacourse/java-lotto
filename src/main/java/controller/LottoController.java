@@ -18,7 +18,7 @@ public class LottoController {
 
     private Lottos purchaseLottos(LottoMachine lottoMachine) {
         Money money = new Money(InputView.getMoney());
-        PurchaseCount purchaseCount = new PurchaseCount(money, InputView.getManualPurchaseCount());
+        PurchaseCount purchaseCount = PurchaseCount.from(money, InputView.getManualPurchaseCount());
         List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(purchaseCount);
         Lottos lottos = lottoMachine.purchase(manualLottoNumbers, purchaseCount);
         OutputView.printPurchasedLottoTicketNumber(purchaseCount);

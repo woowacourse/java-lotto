@@ -15,9 +15,9 @@ class LottosTest {
     @DisplayName("두 개의 Lottos 객체 합치기")
     void concatenate() {
         Lottos firstLottos = new Lottos(new ManualLottoNumberStrategy(List.of(List.of(1, 2, 3, 4, 5, 6))),
-                new PurchaseCount(new Money(1000), 1));
+                PurchaseCount.from(new Money(1000), 1));
         Lottos secondLottos = new Lottos(new ManualLottoNumberStrategy(List.of(List.of(7, 8, 9, 10, 11, 12))),
-                new PurchaseCount(new Money(1000), 1));
+                PurchaseCount.from(new Money(1000), 1));
         firstLottos.concatenate(secondLottos);
 
         List<Integer> numbers = firstLottos.concatenate(secondLottos).getLottos().stream()

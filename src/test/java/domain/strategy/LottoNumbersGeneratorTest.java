@@ -17,7 +17,7 @@ class LottoNumbersGeneratorTest {
     @DisplayName("자동 생성된 로또 번호는 6자리")
     void generatedLottoNumbersSize() {
         List<List<Integer>> numbers = new AutoLottoNumberStrategy()
-                .generate(new PurchaseCount(new Money(1000), 0)).stream()
+                .generate(PurchaseCount.from(new Money(1000), 0)).stream()
                 .map(LottoNumbers::getLottoNumbers)
                 .collect(Collectors.toList());
 
@@ -29,7 +29,7 @@ class LottoNumbersGeneratorTest {
     @DisplayName("자동 생성된 로또 번호 미중복")
     void generatedLottoNumbersDistinct() {
         List<List<Integer>> numbers = new AutoLottoNumberStrategy()
-                .generate(new PurchaseCount(new Money(1000), 0)).stream()
+                .generate(PurchaseCount.from(new Money(1000), 0)).stream()
                 .map(LottoNumbers::getLottoNumbers)
                 .collect(Collectors.toList());
 
@@ -43,7 +43,7 @@ class LottoNumbersGeneratorTest {
     @DisplayName("자동 생성된 로또 번호 정렬")
     void sortLottoNumbers() {
         List<List<Integer>> numbers = new AutoLottoNumberStrategy()
-                .generate(new PurchaseCount(new Money(1000), 0)).stream()
+                .generate(PurchaseCount.from(new Money(1000), 0)).stream()
                 .map(LottoNumbers::getLottoNumbers)
                 .collect(Collectors.toList());
 
@@ -58,7 +58,7 @@ class LottoNumbersGeneratorTest {
     @DisplayName("생성할 로또 수가 입력 값과 일치하지 않을 경우 에러")
     void manualLottoCountMismatchException() {
         List<List<Integer>> numbers = List.of(List.of(1,2,3,4,5,6), List.of(1,2,3,4,5,6));
-        PurchaseCount purchaseCount = new PurchaseCount(new Money(4000), 1);
+        PurchaseCount purchaseCount = PurchaseCount.from(new Money(4000), 1);
         assertThatThrownBy(() -> new ManualLottoNumberStrategy(numbers).generate(purchaseCount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력 값이 구매하려는 로또의 수와 일치하지 않습니다");

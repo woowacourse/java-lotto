@@ -27,14 +27,14 @@ class LottoMachineTest {
                 List.of(21, 22, 23, 24, 25, 26));
 
         assertThat(lottoMachine.purchase(input,
-                new PurchaseCount(new Money(3000), 3)).getLottos().size()).isEqualTo(3);
+                PurchaseCount.from(new Money(3000), 3)).getLottos().size()).isEqualTo(3);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {10000, 10030, 10300, 10500, 10900, 10950})
     @DisplayName("입력 금액에 따라 알맞은 개수의 로또 생성 검증")
     void createLottoTicketsByAmount(int amount) {
-        PurchaseCount purchaseCount = new PurchaseCount(new Money(amount), 0);
+        PurchaseCount purchaseCount = PurchaseCount.from(new Money(amount), 0);
         Lottos lottos = new Lottos(new AutoLottoNumberStrategy(), purchaseCount);
 
         assertThat(lottos.getLottos().size()).isEqualTo(10);
@@ -45,7 +45,7 @@ class LottoMachineTest {
     void calculateWinningStat() {
         LottoMachine lottoMachine = new LottoMachine();
         Lottos lottos = new Lottos(new ManualLottoNumberStrategy(List.of(List.of(1, 2, 3, 4, 5, 6))),
-                new PurchaseCount(new Money(1000), 1));
+                PurchaseCount.from(new Money(1000), 1));
         List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 4, 3, 5, 6)
                 .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
