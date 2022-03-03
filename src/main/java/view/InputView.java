@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final String INPUT_PRICE = "구입금액을 입력해 주세요.";
-    private static final String MANUAL_LOTTOS_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTOS_COUNT = "%n수동으로 구매할 로또 수를 입력해 주세요.%n";
     private static final String INPUT_WINNING_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String INPUT_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String INPUT_LOTTO_NUMBERS = "%n수동으로 구매할 번호를 입력해 주세요.%n";
     private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
     private final static Scanner scanner = new Scanner(System.in);
@@ -28,7 +28,7 @@ public class InputView {
 
     public static int inputManualLottosCount() {
         try {
-            System.out.println(MANUAL_LOTTOS_COUNT);
+            System.out.printf(MANUAL_LOTTOS_COUNT);
             return Integer.parseInt(InputValidation.validateIsNum(scanner.nextLine()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -50,7 +50,7 @@ public class InputView {
     }
 
     public static void showMessageInputLottoNumbers() {
-        System.out.println(INPUT_LOTTO_NUMBERS);
+        System.out.printf(INPUT_LOTTO_NUMBERS);
     }
 
     public static List<Integer> inputLottoNumbers() {
