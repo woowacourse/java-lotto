@@ -4,7 +4,7 @@ import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.number.LottoNumberCache;
 import lotto.model.Lottos;
-import lotto.model.LottosBuilder;
+import lotto.model.LottoCart;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
 import lotto.model.dto.LottoDTO;
@@ -35,23 +35,23 @@ public class Controller {
     }
 
     private Lottos makeLottos(Money money) {
-        LottosBuilder lottosBuilder = LottosBuilder.of(money, inputView.askManualCount());
-        Lottos lottos = purchaseLottos(lottosBuilder);
+        LottoCart lottoCart = LottoCart.of(money, inputView.askManualCount());
+        Lottos lottos = purchaseLottos(lottoCart);
         resultView.showPurchaseCount(LottosDTO.of(lottos));
         resultView.showLottos(LottoDTO.from(lottos));
         return lottos;
     }
 
-    private Lottos purchaseLottos(LottosBuilder lottosBuilder) {
+    private Lottos purchaseLottos(LottoCart lottoCart) {
         inputView.askManualNumbers();
-        purchaseManualLotto(lottosBuilder);
-        lottosBuilder.addAutoLottos();
-        return lottosBuilder.toLottos();
+        purchaseManualLotto(lottoCart);
+        lottoCart.addAutoLottos();
+        return lottoCart.getLottos();
     }
 
-    private void purchaseManualLotto(LottosBuilder lottosBuilder) {
-        while (lottosBuilder.isManualAvailable()) {
-            lottosBuilder.addManualLotto(List.of(inputView.readNumbers()));
+    private void purchaseManualLotto(LottoCart lottoCart) {
+        while (lottoCart.isManualAvailable()) {
+            lottoCart.addManualLotto(List.of(inputView.readNumbers()));
         }
     }
 

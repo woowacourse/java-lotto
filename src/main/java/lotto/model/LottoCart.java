@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottosBuilder {
+public class LottoCart {
     private static final String ERROR_COUNT_OVER = "[ERROR] 구매할 수 있는 수량을 초과했습니다";
     public static final String ERROR_TYPE = "[ERROR] 로또 구매 수량은 숫자로만 입력해주세요";
 
@@ -11,7 +11,7 @@ public class LottosBuilder {
     private Money money;
     private int manualCount;
 
-    private LottosBuilder(Money money, int manualCount) {
+    private LottoCart(Money money, int manualCount) {
         checkCount(money, manualCount);
         money.payLotto(manualCount);
         this.lottos = new ArrayList<>();
@@ -25,9 +25,9 @@ public class LottosBuilder {
         }
     }
 
-    public static LottosBuilder of(Money money, String manualCountInput) {
+    public static LottoCart of(Money money, String manualCountInput) {
         try {
-            return new LottosBuilder(
+            return new LottoCart(
                     money, Integer.parseInt(manualCountInput));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_TYPE);
@@ -48,7 +48,7 @@ public class LottosBuilder {
         }
     }
 
-    public Lottos toLottos() {
+    public Lottos getLottos() {
         return new Lottos(this.lottos);
     }
 
