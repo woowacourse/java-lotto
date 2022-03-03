@@ -37,10 +37,11 @@ public class LottoController {
         showWinningResult(lottos, winningNumbers, purchaseMoney);
     }
 
-    private LottoMachine printLottoPurchaseProcess() {
+    private void printLottoPurchaseProcess() {
         int purchaseMoney = inputView.inputMoney();
         int manualLottoCount = inputView.inputManualLottoCount();
         ManualLottoCount manualLottoCount1 = new ManualLottoCount(manualLottoCount);
+
     }
 
     private PurchaseMoney insertPurchaseMoney() {
