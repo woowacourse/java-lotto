@@ -43,7 +43,6 @@ public class Application {
 
     private static List<Lotto> createManualLottos(int lottoCount) {
         List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(lottoCount);
-
         return LottoFactory.createLottos(manualLottoNumbers);
     }
 

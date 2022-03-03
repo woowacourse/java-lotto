@@ -32,7 +32,6 @@ public class Lottos {
             LottoReward reward = winningLotto.match(lotto);
             lottoRewards.add(reward);
         }
-
         return lottoRewards;
     }
 

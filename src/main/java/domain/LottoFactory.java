@@ -17,7 +17,6 @@ public class LottoFactory {
 
     public static Lotto createAutoLotto(LottoNumbersGenerator lottoNumbersGenerator) {
         List<LottoNumber> lottoNumbers = lottoNumbersGenerator.generate();
-
         return new Lotto(lottoNumbers);
     }
 
@@ -28,10 +27,8 @@ public class LottoFactory {
     }
 
     public static Lotto createLotto(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream()
+        return new Lotto(numbers.stream()
             .map(LottoNumber::valueOf)
-            .collect(Collectors.toList());
-
-        return new Lotto(lottoNumbers);
+            .collect(Collectors.toList()));
     }
 }

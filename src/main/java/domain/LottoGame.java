@@ -24,7 +24,6 @@ public class LottoGame {
 
     public WinningStatistics calculateWinningStatistics(WinningLotto winningLotto) {
         List<LottoReward> lottoRewards = lottos.match(winningLotto);
-
         return new WinningStatistics(purchaseMoney, lottoRewards);
     }
 }

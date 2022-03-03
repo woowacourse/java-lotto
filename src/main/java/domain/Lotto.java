@@ -42,7 +42,6 @@ public class Lotto {
     public int calculateSameNumber(Lotto otherLotto) {
         List<LottoNumber> copiedNumbers = new ArrayList<>(List.copyOf(lottoNumbers));
         copiedNumbers.retainAll(otherLotto.lottoNumbers);
-
         return copiedNumbers.size();
     }
 

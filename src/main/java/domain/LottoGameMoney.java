@@ -25,7 +25,6 @@ public class LottoGameMoney {
 
     public LottoCount getPurchaseLottoCount(int manualLottoCount) {
         checkPurchasableLottoCount(manualLottoCount);
-
         return new LottoCount(manualLottoCount, purchasableLottoCount() - manualLottoCount);
     }
 

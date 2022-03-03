@@ -36,7 +36,6 @@ public class WinningStatistics {
     public double calculateProfitRate() {
         int winningAmount = calculateWinningAmount();
         int purchasedLottoAmount = purchaseMoney.getAmount();
-
         return (double)winningAmount / purchasedLottoAmount;
     }
 

@@ -30,7 +30,6 @@ public class WinningLotto {
     public LottoReward match(Lotto lotto) {
         int matchCount = calculateMatchCount(lotto);
         boolean hasBonus = lotto.containsNumber(bonusNumber);
-
         return LottoReward.find(matchCount, hasBonus);
     }
 

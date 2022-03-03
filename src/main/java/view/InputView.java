@@ -26,7 +26,6 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
         String inputMoney = getInput();
         validatePurchaseMoney(inputMoney);
-
         return Integer.parseInt(inputMoney);
     }
 
@@ -53,7 +52,6 @@ public class InputView {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         String lottoCount = getInput();
         validateLottoCount(lottoCount);
-
         return Integer.parseInt(lottoCount);
     }
 
@@ -64,7 +62,6 @@ public class InputView {
 
     public static List<List<Integer>> getManualLottoNumbers(int lottoCount) {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-
         return IntStream.range(0, lottoCount).boxed()
             .map(i -> getLottoNumbers(getInput()))
             .collect(Collectors.toList());
@@ -73,14 +70,12 @@ public class InputView {
     public static List<Integer> getWinningLottoNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         String winningLottoNumbers = getInput();
-
         return getLottoNumbers(winningLottoNumbers);
     }
 
     private static List<Integer> getLottoNumbers(String numbers) {
         List<String> lottoNumbers = convertNumberList(numbers);
         validateLottoNumbers(lottoNumbers);
-
         return convertIntegerList(lottoNumbers);
     }
 
@@ -112,7 +107,6 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         String inputBonusBall = getInput();
         validateBonusBall(inputBonusBall);
-
         return Integer.parseInt(inputBonusBall);
     }
 

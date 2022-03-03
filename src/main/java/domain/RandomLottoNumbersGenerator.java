@@ -21,7 +21,6 @@ public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     @Override
     public List<LottoNumber> generate() {
         Collections.shuffle(lottoNumbers);
-
         return IntStream.range(0, LottoConstant.LOTTO_NUMBER_SIZE).boxed()
             .map(lottoNumbers::get)
             .sorted()

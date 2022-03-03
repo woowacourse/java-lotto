@@ -25,7 +25,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber valueOf(final int number) {
         validateInRange(number);
-
         return LOTTO_NUMBERS.get(number);
     }
 
