@@ -57,7 +57,13 @@ public class InputView {
 
     private static void validateLottoCount(String lottoCount) {
         validateNumberType(lottoCount);
-        validatePositiveNumberRange(lottoCount);
+        validateClosedPositiveNumberRange(lottoCount);
+    }
+
+    private static void validateClosedPositiveNumberRange(String value) {
+        if (Integer.parseInt(value) < MINIMUM_POSITIVE_NUMBER) {
+            throw new IllegalArgumentException("입력값은 " + MINIMUM_POSITIVE_NUMBER + "보다 작을 수 없습니다.");
+        }
     }
 
     public static List<List<Integer>> getManualLottoNumbers(int lottoCount) {
@@ -112,6 +118,5 @@ public class InputView {
 
     private static void validateBonusBall(String bonusBall) {
         validateNumberType(bonusBall);
-        validatePositiveNumberRange(bonusBall);
     }
 }
