@@ -39,8 +39,8 @@ public class User {
                 .collect(Collectors.toList());
     }
 
-    public double calculateProfitRate(long totalPrize) {
-        return (double) totalPrize / (double) money;
+    public double calculateProfitRate(long totalWinningPrize) {
+        return (double) totalWinningPrize / (double) money;
     }
 
     public List<Lotto> getLottos() {
