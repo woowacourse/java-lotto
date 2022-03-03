@@ -12,6 +12,8 @@ public class LottoController {
 
         Money money = new Money(InputView.askMoneyInput());
 
+        int manulAmount = InputView.askManualAmount(money);
+
         LottoGame lottoGame = new LottoGame(money,
             new RandomLottoGenerator(money.convertToAmount()));
 

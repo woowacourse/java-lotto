@@ -24,6 +24,10 @@ public class Money {
         return lottoAmount;
     }
 
+    public boolean isAffordable(int amount) {
+        return convertToAmount() < amount;
+    }
+
     private void checkLottoAmount() {
         if (lottoAmount < LOTTO_AMOUNT_MINIMUM) {
             throw new IllegalArgumentException(LOTTO_AMOUNT_ERROR);
