@@ -1,6 +1,9 @@
 package lotto.util;
 
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -11,20 +14,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RandomLottoGeneratorTest {
 
     @Test
-    void 중복_테스트() {
-        Lotto lotto = RandomLottoGenerator.generate();
-        List<Integer> actual = lotto.getNumbers()
+    @DisplayName("중복 테스트")
+    void duplicateTest() {
+        Lotto lotto = RandomLottoGenerator.generateAutoLotto();
+        List<LottoNumber> actual = lotto.getNumbers()
                 .stream()
                 .distinct()
                 .collect(Collectors.toList());
         assertThat(actual.size()).isEqualTo(lotto.getNumbers().size());
-    }
-
-    @Test
-    void 범위_테스트() {
-        Lotto lotto = RandomLottoGenerator.generate();
-        lotto.getNumbers().forEach(number -> {
-            assertThat(number).isGreaterThan(0).isLessThan(46);
-        });
     }
 }

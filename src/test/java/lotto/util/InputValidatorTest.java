@@ -4,9 +4,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 
 public class InputValidatorTest {
 
@@ -23,7 +27,7 @@ public class InputValidatorTest {
     void winningNumbersAndBonusBallTest() {
         List<Integer> list = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
 
-        assertThatThrownBy(() -> InputValidator.validateContain(list, 1))
+        assertThatThrownBy(() -> InputValidator.validateContain(convertLotto(list), new LottoNumber(1)))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("[ERROR] 중복된 숫자가 존재합니다.");
     }
@@ -31,7 +35,7 @@ public class InputValidatorTest {
     @Test
     @DisplayName("로또 번호의 숫자가 6개가 아닐 경우")
     void lottoTest1() {
-        assertThatThrownBy(() -> InputValidator.validateLotto(List.of(1, 2, 3)))
+        assertThatThrownBy(() -> InputValidator.validateLotto(convertList(List.of(1, 2, 3))))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("[ERROR] 6개의 숫자가 입력되지 않았습니다.");
     }
@@ -39,7 +43,7 @@ public class InputValidatorTest {
     @Test
     @DisplayName("로또 번호가 중복될 경우")
     void lottoTest2() {
-        assertThatThrownBy(() -> InputValidator.validateLotto(List.of(1, 1, 2, 3, 4, 5)))
+        assertThatThrownBy(() -> InputValidator.validateLotto(convertList(List.of(1, 1, 2, 3, 4, 5))))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("[ERROR] 중복된 숫자가 존재합니다.");
     }
@@ -47,16 +51,20 @@ public class InputValidatorTest {
     @Test
     @DisplayName("로또번호의 각 숫자가 1 ~ 45 사이의 값이 아닐 경우")
     void lottoTest4() {
-        assertThatThrownBy(() -> InputValidator.validateLotto(List.of(1, 2, 3, 4, 5, 50)))
+        assertThatThrownBy(() -> InputValidator.validateLotto(convertList(List.of(1, 2, 3, 4, 5, 50))))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("[ERROR] 1 ~ 45 사이의 숫자를 입력해주세요.");
+            .hasMessageContaining("사이의 수를 입력해 주세요.");
     }
 
-    @Test
-    @DisplayName("보너스볼이 1 ~ 45 사이의 값이 아닐 경우")
-    void bonusBallTest2() {
-        assertThatThrownBy(() -> InputValidator.validateBonusNumber(47))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("[ERROR] 1 ~ 45 사이의 숫자를 입력해주세요.");
+    Lotto convertLotto(List<Integer> numbers) {
+        return new Lotto(numbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
+    }
+
+    List<LottoNumber> convertList(List<Integer> numbers) {
+        return numbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 }
