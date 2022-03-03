@@ -1,12 +1,16 @@
 import controller.LottoController;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import domain.Result;
 =======
 >>>>>>> 6a49a84 (feat: 로또 구매 및 당첨번호 세팅 기능 구현)
 =======
 import domain.Result;
 >>>>>>> 7eb4fa3 (refactor: 프린트 할 결과물 생성 로직 변경)
+=======
+import dto.LottoCountDto;
+>>>>>>> 8334008 (feat : 수동 로또 구매 기능 추가)
 import dto.LottosDto;
 import view.InputView;
 import view.OutputView;
@@ -34,8 +38,12 @@ public class Application {
 >>>>>>> 62a4f7d (refactor : InputView, OutputView 싱글턴 패턴으로 관리)
         LottoController lottoController = new LottoController();
 
-        LottosDto lottosDto = lottoController.purchase(inputView.inputPurchaseAmount());
-        outputView.printPurchasedLotto(lottosDto);
+        LottoCountDto lottoCountDto = lottoController.selectLottoCount(inputView.inputPurchaseAmount(), inputView.inputManualLottoCount());
+
+        lottoController.purchaseManualLotto(inputView.inputManualLottoNumber(lottoCountDto.getManualLottoCount()));
+        LottosDto lottosDto = lottoController.purchase();
+
+        outputView.printPurchasedLotto(lottoCountDto, lottosDto);
 
 <<<<<<< HEAD
 <<<<<<< HEAD

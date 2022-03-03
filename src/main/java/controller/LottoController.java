@@ -11,6 +11,7 @@ import domain.LottoGenerator.ManualLottoGenerator;
 import domain.Result;
 import domain.ResultStatus;
 import domain.player.Player;
+import dto.LottoCountDto;
 import dto.LottosDto;
 import dto.RanksDto;
 =======
@@ -52,6 +53,7 @@ public class LottoController {
     private WinningLotto winningLotto;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public LottosDto purchase(int purchaseAmount) {
         player = new Player(purchaseAmount);
         LottoGenerator lottoGenerator = new AutoLottoGenerator();
@@ -78,7 +80,22 @@ public class LottoController {
 =======
 >>>>>>> 20bb1bf (feat: 2,3등은 보너스볼과 일치하는 숫자의 갯수를 기준으로, 나머지 등수는 일치하는 숫자의 갯수만으로 등수를 판정하는 로직 구현)
     public LottosDto purchase(int purchaseAmount) {
+=======
+    public LottoCountDto selectLottoCount(int purchaseAmount, int ManualLottoCount) {
+>>>>>>> 8334008 (feat : 수동 로또 구매 기능 추가)
         player = new Player(purchaseAmount);
+        return player.selectLottoCount(ManualLottoCount);
+    }
+
+    public void purchaseManualLotto(List<List<Integer>> manualNumber) {
+        LottoGenerator lottoGenerator = new ManualLottoGenerator();
+        for (List<Integer> numbers : manualNumber) {
+            Lotto lotto = lottoGenerator.generateLotto(numbers);
+            player.purchaseLotto(lotto);
+        }
+    }
+
+    public LottosDto purchase() {
         LottoGenerator lottoGenerator = new AutoLottoGenerator();
         while (player.canBuyLotto()) {
             player.purchaseLotto(lottoGenerator.generateLotto());
