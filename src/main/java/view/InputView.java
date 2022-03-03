@@ -3,6 +3,7 @@ package view;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import domain.Lotto.WinningLotto;
 import domain.player.Money;
 import utils.InputValidator;
@@ -15,6 +16,9 @@ import utils.InputValidator;
 >>>>>>> 701f681 (refactor: 입력 유효성 검사 static으로 변경 및 적용)
 =======
 >>>>>>> c3eb2e9 (refactor : InputValidator의 역할 InputView에게 위임)
+=======
+import java.util.ArrayList;
+>>>>>>> 69b76f6 (feat : 수동 로또 뷰 구현)
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -32,6 +36,8 @@ public class InputView {
     private static final String WINNING_NUMBER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String DELIMITER = ",";
+    private static final String MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_NUMBER_INPUT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 <<<<<<< HEAD
@@ -143,6 +149,10 @@ public class InputView {
     public List<Integer> inputWinningNumber() {
 >>>>>>> 62a4f7d (refactor : InputView, OutputView 싱글턴 패턴으로 관리)
         System.out.println(WINNING_NUMBER_INPUT_MESSAGE);
+        return inputLottoNumbres();
+    }
+
+    private List<Integer> inputLottoNumbres() {
         List<String> numberValues = toStrings(input());
         return toNumbers(numberValues);
     }
@@ -200,5 +210,20 @@ public class InputView {
 =======
         return Integer.parseInt(input());
 >>>>>>> 701f681 (refactor: 입력 유효성 검사 static으로 변경 및 적용)
+    }
+
+    public int inputManualLottoCount() {
+        System.out.println(MANUAL_LOTTO_COUNT_MESSAGE);
+        return Integer.parseInt(input());
+    }
+
+    public List<List<Integer>> inputManualLottoNumber(int manualLottoCount) {
+        System.out.println(MANUAL_LOTTO_NUMBER_INPUT_MESSAGE);
+
+        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            manualLottoNumbers.add(inputLottoNumbres());
+        }
+        return manualLottoNumbers;
     }
 }
