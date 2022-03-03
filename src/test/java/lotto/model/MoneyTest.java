@@ -35,4 +35,14 @@ class MoneyTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("구입 금액은 양수여야 합니다.");
     }
+
+    @Test
+    @DisplayName("수동 로또 구매를 구입 금액보다 많이할 시 예외를 던진다")
+    void validatePositiveManualLottoSizeTest() {
+        assertThatThrownBy(() -> {
+            Money money = new Money(2000);
+            money.getAutoLottoSize(3);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 구입 금액보다 수동 로또 구매 갯수가 많습니다.");
+    }
 }
