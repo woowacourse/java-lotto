@@ -1,12 +1,12 @@
 package controller;
 
-import static domain.LottoResultHandler.getLottoResultDto;
 import static java.util.stream.Collectors.toList;
 
 import domain.Lotto;
 import domain.LottoFactory;
 import domain.LottoNumber;
 import domain.LottoNumberRepository;
+import domain.LottoResult;
 import domain.Lottos;
 import domain.Wallet;
 import domain.WinningLotto;
@@ -24,7 +24,7 @@ public class LottoController {
         InputView.printLottos(wallet, lottos);
 
         WinningLotto winningLotto = setupWinningLotto();
-        ResultView.printResult(getLottoResultDto(winningLotto, lottos));
+        ResultView.printResult(getLottoResultByWinningLottoAndLottos(winningLotto, lottos));
     }
 
     private Wallet setupWallet() {
@@ -132,5 +132,12 @@ public class LottoController {
             InputView.printException(exception);
             return getLottoNumberForBonusNumber();
         }
+    }
+
+    private LottoResult getLottoResultByWinningLottoAndLottos(WinningLotto winningLotto, Lottos lottos) {
+        return LottoResult.builder()
+                .winningLotto(winningLotto)
+                .lottos(lottos)
+                .build();
     }
 }
