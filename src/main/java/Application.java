@@ -1,9 +1,13 @@
 import controller.LottoController;
+import domain.Lotto.LottoNumber;
+import domain.LottoGenerator.AutoLottoGenerator;
+import domain.LottoGenerator.ManualLottoGenerator;
 import dto.LottoCountDto;
 import dto.LottosDto;
 import view.InputView;
 import view.OutputView;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Application {
@@ -14,8 +18,8 @@ public class Application {
 
         LottoCountDto lottoCountDto = lottoController.selectLottoCount(inputView.inputPurchaseAmount(), inputView.inputManualLottoCount());
 
-        lottoController.purchaseManualLotto(inputView.inputManualLottoNumber(lottoCountDto.getManualLottoCount()));
-        LottosDto lottosDto = lottoController.purchase();
+        lottoController.purchaseLotto(new ManualLottoGenerator(), inputView.inputManualLottoNumber(lottoCountDto.getManualLottoCount()));
+        LottosDto lottosDto = lottoController.purchaseLotto(new AutoLottoGenerator(), null);
 
         outputView.printPurchasedLotto(lottoCountDto, lottosDto);
 
