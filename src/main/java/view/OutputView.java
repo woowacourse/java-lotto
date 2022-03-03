@@ -20,7 +20,7 @@ public class OutputView {
     }
 
     public static void showPurchasedLottos(LottoCount lottoCount, List<Lotto> lottos) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoCount.getManualLottoCount(),
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottoCount.getManualLottoCount(),
             lottoCount.getAutoLottoCount());
 
         for (Lotto lotto : lottos) {
