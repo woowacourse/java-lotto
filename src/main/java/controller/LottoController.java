@@ -36,7 +36,7 @@ public class LottoController {
 
     private void printPurchasedLotteries(LottoOrder lottoOrder, List<Lotto> lotteries) {
         List<LottoDto> lotteriesDto = lotteries.stream()
-                .map(lotto -> new LottoDto(lotto.getLottoNumbers()))
+                .map(LottoDto::new)
                 .collect(Collectors.toUnmodifiableList());
         OutputView.printPurchasedLotteries(lottoOrder, lotteriesDto);
     }
@@ -121,7 +121,6 @@ public class LottoController {
     }
 
     private void printWinningStatistics(WinningStatistics winningStatistics, LottoPurchasingMoney lottoPurchasingMoney) {
-        OutputView.printStatistics(new WinningStatisticsDto(winningStatistics.getWinningCounts(),
-                winningStatistics.getEarningsRate(lottoPurchasingMoney)));
+        OutputView.printStatistics(new WinningStatisticsDto(winningStatistics, lottoPurchasingMoney));
     }
 }
