@@ -13,7 +13,7 @@ public class LottoGeneratorsTest {
     @Test
     @DisplayName("로또 생성 성공")
     void generate_lottos() {
-        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(1,
+        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(
             List.of(List.of(1, 2, 3, 4, 5, 6)));
         AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(1);
 
@@ -27,7 +27,7 @@ public class LottoGeneratorsTest {
     @Test
     @DisplayName("수동 1장, 자동 0장 생성 성공")
     void generate_manual_lottos() {
-        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(1,
+        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(
             List.of(List.of(1, 2, 3, 4, 5, 6)));
         AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(0);
 
@@ -41,7 +41,7 @@ public class LottoGeneratorsTest {
     @Test
     @DisplayName("수동 0장, 자동 1장 생성 성공")
     void generate_auto_lottos() {
-        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(1,
+        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(
             List.of(List.of(1, 2, 3, 4, 5, 6)));
         AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(0);
 

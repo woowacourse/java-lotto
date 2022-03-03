@@ -5,11 +5,9 @@ import java.util.List;
 
 public class ManualLottoGenerator implements LottoGenerator{
 
-    private int amount;
-    private List<List<Integer>> lottoNumbers;
+    private final List<List<Integer>> lottoNumbers;
 
-    public ManualLottoGenerator(int amount, List<List<Integer>> lottoNumbers) {
-        this.amount = amount;
+    public ManualLottoGenerator(List<List<Integer>> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 

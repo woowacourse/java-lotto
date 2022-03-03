@@ -13,7 +13,7 @@ public class ManualLottoGeneratorTest {
     @Test
     @DisplayName("입력 받은 로또 장수만큼 수동 로또를 생성한다")
     void generate_lottos() {
-        LottoGenerator manualLottoGenerator = new ManualLottoGenerator(3,
+        LottoGenerator manualLottoGenerator = new ManualLottoGenerator(
             List.of(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 5, 6),
                 List.of(1, 2, 3, 4, 5, 6)));
 
@@ -23,7 +23,7 @@ public class ManualLottoGeneratorTest {
     @Test
     @DisplayName("수동 로또 생성 확인")
     void check_lottos_generated() {
-        LottoGenerator manualLottoGenerator = new ManualLottoGenerator(1,
+        LottoGenerator manualLottoGenerator = new ManualLottoGenerator(
             List.of(List.of(1, 2, 3, 4, 5, 6)));
 
         assertThat(manualLottoGenerator.generate()
@@ -35,7 +35,7 @@ public class ManualLottoGeneratorTest {
     @Test
     @DisplayName("입력 받은 각각의 로또에 대하여 로또 번호에 중복이 있을 경우 예외 발생")
     void no_unique_fail() {
-        LottoGenerator manualLottoGenerator = new ManualLottoGenerator(3,
+        LottoGenerator manualLottoGenerator = new ManualLottoGenerator(
             List.of(List.of(1, 2, 3, 4, 5, 5),
                 List.of(1, 2, 3, 4, 5, 6),
                 List.of(1, 2, 3, 4, 5, 6)));
@@ -49,7 +49,7 @@ public class ManualLottoGeneratorTest {
     @Test
     @DisplayName("입력받은 로또 개수가 0인 경우 빈 로또 리스트 반환")
     void no_maualLotto() {
-        LottoGenerator manualLottoGenerator = new ManualLottoGenerator(0, new ArrayList<>());
+        LottoGenerator manualLottoGenerator = new ManualLottoGenerator( new ArrayList<>());
 
         assertThat(manualLottoGenerator.generate().size())
             .isEqualTo(0);
