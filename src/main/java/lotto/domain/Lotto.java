@@ -17,14 +17,14 @@ public class Lotto {
         this.lotto = new ArrayList<>(lotto);
     }
 
-    public static Lotto generateLottoByAuto() {
-        return new Lotto(LottoGenerator.getRandomLottoNumbers(LOTTO_SIZE));
-    }
-
     public static Lotto generateLottoByManual(List<Integer> numbers) {
         checkSize(numbers);
         checkDuplication(numbers);
         return new Lotto(LottoGenerator.convertToLottoNumbers(numbers));
+    }
+
+    public static Lotto generateLottoByAuto() {
+        return new Lotto(LottoGenerator.getRandomLottoNumbers(LOTTO_SIZE));
     }
 
     private static void checkSize(List<Integer> numbers) {
