@@ -4,8 +4,6 @@ import dto.LottoDto;
 import dto.RankResultDto;
 import model.LottoMachine;
 import model.lottonumber.Lottos;
-import model.generator.Generator;
-import model.money.ManualLottoCount;
 import model.money.PurchaseMoney;
 import model.lottonumber.Lotto;
 import model.rank.Rank;
@@ -21,12 +19,10 @@ import java.util.stream.Collectors;
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
-    private final Generator generator;
 
-    public LottoController(Generator generator, InputView inputView, OutputView outputView) {
+    public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.generator = generator;
     }
 
     public void run() {
