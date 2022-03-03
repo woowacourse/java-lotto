@@ -17,7 +17,7 @@ public class InputView {
     private static final String QUESTION_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String NUMBER_DELIMITER = ", ";
     private static final String NONE_NUMERIC_ERROR = "[ERROR] 숫자만 입력이 가능합니다.";
-    private static final String NOT_AFFORDABLE_MANUAL_AMOUNT_ERROR = "[ERROR] 수동 로또를 구매하기에 입력하신 금액이 너무 적습니다.";
+
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -26,11 +26,9 @@ public class InputView {
         return checkAndConvertInteger(scanner.nextLine());
     }
 
-    public static int askManualAmount(Money money) {
+    public static int askManualAmount() {
         System.out.println(QUESTION_MANUAL_AMOUNT);
-        int manualAmount = checkAndConvertInteger(scanner.nextLine());
-        checkAffordable(money, manualAmount);
-        return manualAmount;
+        return checkAndConvertInteger(scanner.nextLine());
     }
 
     public static List<List<Integer>> askManualLottoNumbers(int amount) {
@@ -75,10 +73,5 @@ public class InputView {
         }
     }
 
-    private static void checkAffordable(Money money, int amount) {
-        if (!money.isAffordable(amount)) {
-            throw new IllegalArgumentException(NOT_AFFORDABLE_MANUAL_AMOUNT_ERROR);
-        }
-    }
 
 }

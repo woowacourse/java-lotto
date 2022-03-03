@@ -7,7 +7,7 @@ public class LottoGame {
     private final Lottos lottos;
     private WinningChecker winningChecker;
 
-    public LottoGame(Money money, LottoGenerator lottoGenerator) {
+    public LottoGame(LottoGenerator lottoGenerator) {
         this.lottos = new Lottos(lottoGenerator.generate());
     }
 

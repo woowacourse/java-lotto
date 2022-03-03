@@ -2,7 +2,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.Lotto;
 import domain.LottoGame;
-import domain.Money;
 import domain.RandomLottoGenerator;
 import domain.WinningNumbers;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class LottoGameTest {
     @Test
     @DisplayName("입력받은 금액 로또로 바꿔주는 기능 테스트")
     void buyLottoTest() {
-        LottoGame lottoGame = new LottoGame(new Money(14000), new RandomLottoGenerator(14));
+        LottoGame lottoGame = new LottoGame( new RandomLottoGenerator(14));
         assertThat(lottoGame.getLottos().getSize()).isEqualTo(14);
     }
 
@@ -28,9 +27,7 @@ public class LottoGameTest {
         Lotto lotto2 = new Lotto(List.of(4, 5, 6, 7, 8, 9));
         Lotto lotto3 = new Lotto(List.of(11, 12, 13, 14, 15, 16));
 
-        Money money = new Money(3000);
-
-        LottoGame lottoGame = new LottoGame(money,
+        LottoGame lottoGame = new LottoGame(
             () -> List.of(lotto1, lotto2, lotto3));
 
         WinningNumbers winningNumbers = new WinningNumbers(
