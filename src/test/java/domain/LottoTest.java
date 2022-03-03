@@ -15,18 +15,18 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoTest {
 
-    private static Stream<Arguments> twoLottosForMatchedEachOther() {
-        return Stream.of(
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(40, 41, 42, 43, 44, 45)), 0),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(1, 2, 3, 43, 44, 45)), 3),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(1, 2, 3, 4, 5, 6)), 6));
-    }
-
     @DisplayName("두 로또의 일치하는 수 반환")
     @ParameterizedTest(name ="{displayName} expected={2}")
     @MethodSource("twoLottosForMatchedEachOther")
     void matchedEachOther_rightResult(Lotto lotto, Lotto otherLotto, int expected) {
         assertThat(lotto.matchedEachOther(otherLotto)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> twoLottosForMatchedEachOther() {
+        return Stream.of(
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(40, 41, 42, 43, 44, 45)), 0),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(1, 2, 3, 43, 44, 45)), 3),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(1, 2, 3, 4, 5, 6)), 6));
     }
 
     @DisplayName("해당 숫자 볼의 포함 여부 반환")
