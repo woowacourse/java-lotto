@@ -19,7 +19,7 @@ public class Lotto {
         }
     }
 
-    public Set<LottoNumber> getLotto() {
+    public Set<LottoNumber> getNumbers() {
         return new HashSet<>(numbers);
     }
 

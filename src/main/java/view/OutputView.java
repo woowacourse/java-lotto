@@ -30,7 +30,7 @@ public class OutputView {
     }
 
     private static void printLotto(Lotto lotto) {
-        String LottoNumbers = lotto.getLotto()
+        String LottoNumbers = lotto.getNumbers()
                 .stream()
                 .map(LottoNumber::getLottoNumber)
                 .sorted()
