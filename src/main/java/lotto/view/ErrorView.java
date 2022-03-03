@@ -1,7 +1,7 @@
 package lotto.view;
 
+import lotto.client.ConsoleErrorClient;
 import lotto.client.ErrorClient;
-import lotto.config.ClientConfig;
 
 public class ErrorView {
 
@@ -14,7 +14,7 @@ public class ErrorView {
     }
 
     private static class ErrorViewHelper {
-        private static final ErrorView INSTANCE = new ErrorView(ClientConfig.getErrorClient());
+        private static final ErrorView INSTANCE = new ErrorView(ConsoleErrorClient.getInstance());
     }
 
     public static ErrorView getInstance() {

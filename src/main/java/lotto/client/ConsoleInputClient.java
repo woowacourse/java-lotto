@@ -5,7 +5,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import lotto.config.ClientConfig;
 
 public class ConsoleInputClient implements InputClient {
 
@@ -20,7 +19,7 @@ public class ConsoleInputClient implements InputClient {
     private static class ConsoleInputClientHelper {
         private static final InputClient INSTANCE = new ConsoleInputClient(
             new Scanner(System.in),
-            ClientConfig.getOutputClient()
+            ConsoleOutputClient.getInstance()
         );
     }
 

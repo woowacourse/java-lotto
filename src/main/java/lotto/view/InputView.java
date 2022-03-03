@@ -2,8 +2,8 @@ package lotto.view;
 
 import java.util.List;
 
+import lotto.client.ConsoleInputClient;
 import lotto.client.InputClient;
-import lotto.config.ClientConfig;
 
 public class InputView {
 
@@ -14,7 +14,7 @@ public class InputView {
     }
 
     private static class InputViewHelper {
-        private static final InputView INSTANCE = new InputView(ClientConfig.getInputClient());
+        private static final InputView INSTANCE = new InputView(ConsoleInputClient.getInstance());
     }
 
     public static InputView getInstance() {

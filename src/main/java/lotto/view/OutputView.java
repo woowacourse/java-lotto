@@ -3,8 +3,8 @@ package lotto.view;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.client.ConsoleOutputClient;
 import lotto.client.OutputClient;
-import lotto.config.ClientConfig;
 import lotto.dto.LottoStatisticsResponse;
 import lotto.dto.LottoTicketResponse;
 import lotto.dto.LottoWinningResponse;
@@ -18,7 +18,7 @@ public class OutputView {
     }
 
     private static class OutputViewHelper {
-        private static final OutputView INSTANCE = new OutputView(ClientConfig.getOutputClient());
+        private static final OutputView INSTANCE = new OutputView(ConsoleOutputClient.getInstance());
     }
 
     public static OutputView getInstance() {
