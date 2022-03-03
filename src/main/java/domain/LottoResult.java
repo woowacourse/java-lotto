@@ -5,22 +5,24 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class WinningResult {
+public class LottoResult {
     private static final int INIT_COUNT = 0;
     private static final int COUNT_UNIT = 1;
     private static final int WINNING_FLAG = 3;
 
     private final Map<WinningPrize, Integer> countOfWinning;
+    private final int purchaseTicketCount;
 
-    private WinningResult(Map<WinningPrize, Integer> countOfWinning) {
+    private LottoResult(Map<WinningPrize, Integer> countOfWinning, int purchaseTicketCount) {
         this.countOfWinning = countOfWinning;
+        this.purchaseTicketCount = purchaseTicketCount;
     }
 
-    public static WinningResult of(LottoTickets lottoTickets,
-                                   WinningTicket winningTicket,
-                                   WinningPrizeStrategy winningPrizeStrategy) {
+    public static LottoResult of(LottoTickets lottoTickets,
+                                 WinningTicket winningTicket,
+                                 WinningPrizeStrategy winningPrizeStrategy) {
         Map<WinningPrize, Integer> countOfWinning = countWinning(lottoTickets, winningTicket, winningPrizeStrategy);
-        return new WinningResult(countOfWinning);
+        return new LottoResult(countOfWinning, lottoTickets.getTickets().size());
     }
 
     private static Map<WinningPrize, Integer> countWinning(LottoTickets lottoTickets,
@@ -70,5 +72,10 @@ public class WinningResult {
 
     public Map<WinningPrize, Integer> getCountOfWinning() {
         return Collections.unmodifiableMap(countOfWinning);
+    }
+
+    public double calculateLottoRateOfReturn() {
+        int totalReturn = sumTotalReturn();
+        return totalReturn / (double)(purchaseTicketCount * LottoTicket.TICKET_PRICE);
     }
 }

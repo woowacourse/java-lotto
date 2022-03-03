@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 class LottoGameTest {
 
-    private final Set<Integer> winningNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     private final WinningPrizeStrategy winningPrizeStrategy = new DefaultWinningPrizeStrategy();
     private final NumberGenerateStrategy numberGenerateStrategy = () -> new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     private LottoGame lottoGame;
@@ -24,18 +23,6 @@ class LottoGameTest {
     @AfterEach
     void afterEach() {
         lottoGame = null;
-    }
-
-    @Test
-    @DisplayName("로또 게임이 총 수익률을 잘 계산하는지 확인한다.")
-    void checkRateOfReturn() {
-        int purchaseMoney = 1000;
-        int bonusNumber = 7;
-        lottoGame = new LottoGame(winningPrizeStrategy);
-        lottoGame.purchaseLottoTickets(new ArrayList<>(), purchaseMoney, numberGenerateStrategy);
-        lottoGame.inputWinningNumbers(winningNumbers, bonusNumber);
-        assertThat(lottoGame.calculateLottoRateOfReturn())
-                .isEqualTo(WinningPrize.FIRST.getPrizeMoney() / (double) purchaseMoney);
     }
 
     @Test

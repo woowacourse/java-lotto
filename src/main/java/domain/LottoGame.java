@@ -24,26 +24,15 @@ public class LottoGame {
         this.winningTicket = WinningTicket.of(winningNumbers, bonusNumber);
     }
 
-    public double calculateLottoRateOfReturn() {
+    public LottoResult createWinningResult() {
         checkCanGetResult();
-        double totalReturn = calculateTotalReturn();
-        double purchaseMoney = (double) lottoTickets.getTickets().size() * LottoTicket.TICKET_PRICE;
-        return totalReturn / purchaseMoney;
-    }
-
-    public WinningResult createWinningResult() {
-        checkCanGetResult();
-        return WinningResult.of(lottoTickets, winningTicket, winningPrizeStrategy);
+        return LottoResult.of(lottoTickets, winningTicket, winningPrizeStrategy);
     }
 
     private void checkCanGetResult() {
         if (this.lottoTickets == null || this.winningTicket == null) {
             throw new IllegalStateException(NOT_INPUT_RESULT_ERROR_MESSAGE);
         }
-    }
-
-    private int calculateTotalReturn() {
-        return createWinningResult().sumTotalReturn();
     }
 
     public LottoTickets getLottoTickets() {

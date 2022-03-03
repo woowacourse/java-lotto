@@ -2,7 +2,7 @@ package controller;
 
 import domain.strategy.NumberGenerateStrategy;
 import domain.LottoTicket;
-import domain.WinningResult;
+import domain.LottoResult;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -64,9 +64,9 @@ public class LottoController {
     }
 
     private void showLottoResult() {
-        WinningResult winningResult = lottoGame.createWinningResult();
-        List<WinningResultDto> winningResultDtos = toWinningResultDtos(winningResult.getCountOfWinning());
-        outputView.showLottoResult(winningResultDtos, lottoGame.calculateLottoRateOfReturn());
+        LottoResult lottoResult = lottoGame.createWinningResult();
+        List<WinningResultDto> winningResultDtos = toWinningResultDtos(lottoResult.getCountOfWinning());
+        outputView.showLottoResult(winningResultDtos, lottoResult.calculateLottoRateOfReturn());
     }
 
     private List<WinningResultDto> toWinningResultDtos(Map<WinningPrize, Integer> countOfWinning) {
