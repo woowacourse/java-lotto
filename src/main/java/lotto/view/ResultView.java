@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.dto.LottoDTO;
 import lotto.model.dto.LottosDTO;
-import lotto.model.dto.PrizeInformationDTO;
+import lotto.model.dto.PrizeCountDTO;
 
 public class ResultView {
     private final String FORMAT_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
@@ -34,24 +34,24 @@ public class ResultView {
         System.out.printf(FORMAT_LOTTO, joinedNumbers);
     }
 
-    public void showPrizeInformation(List<PrizeInformationDTO> prizeInformations) {
+    public void showPrizeInformation(List<PrizeCountDTO> prizeInformations) {
         System.out.println();
-        for (PrizeInformationDTO prizeInformation : prizeInformations) {
+        for (PrizeCountDTO prizeInformation : prizeInformations) {
             showOnePrizeInformation(getFormat(prizeInformation), prizeInformation);
         }
     }
 
-    private String getFormat(PrizeInformationDTO prizeInformation) {
-        if (prizeInformation.getBonus()) {
+    private String getFormat(PrizeCountDTO prizeInformation) {
+        if (prizeInformation.getPrize().isBonus()) {
             return FORMAT_PRIZE_BONUS;
         }
         return FORMAT_PRIZE;
     }
 
-    private void showOnePrizeInformation(String format, PrizeInformationDTO prizeInformation) {
+    private void showOnePrizeInformation(String format, PrizeCountDTO prizeInformation) {
         System.out.printf(format,
-                prizeInformation.getMatchingCount(),
-                prizeInformation.getAmount(),
+                prizeInformation.getPrize().getMatchingCount(),
+                prizeInformation.getPrize().getAmount(),
                 prizeInformation.getPrizeCount());
     }
 

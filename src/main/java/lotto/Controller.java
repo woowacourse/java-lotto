@@ -9,9 +9,9 @@ import lotto.model.Money;
 import lotto.model.WinningLotto;
 import lotto.model.dto.LottoDTO;
 import lotto.model.dto.LottosDTO;
-import lotto.model.dto.PrizeInformationDTO;
+import lotto.model.dto.PrizeCountDTO;
 import lotto.model.number.LottoNumber;
-import lotto.model.prize.PrizeInformations;
+import lotto.model.prize.PrizeCountMap;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -56,9 +56,9 @@ public class Controller {
     }
 
     private void givePrize(Money money, Lottos lottos) {
-        PrizeInformations prizeInformations = PrizeInformations.from(lottos.match(makeWinningLotto()));
-        resultView.showPrizeInformation(PrizeInformationDTO.from(prizeInformations));
-        resultView.showEarningRate(prizeInformations.calculateEarningRate(money));
+        PrizeCountMap prizeCountMap = PrizeCountMap.from(lottos.match(makeWinningLotto()));
+        resultView.showPrizeInformation(PrizeCountDTO.from(prizeCountMap));
+        resultView.showEarningRate(prizeCountMap.calculateEarningRate(money));
     }
 
     private WinningLotto makeWinningLotto() {
