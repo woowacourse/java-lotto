@@ -46,17 +46,12 @@ public class Application {
 
     private static List<Lotto> createManualLottos(int lottoCount) {
         List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(lottoCount);
+
         return LottoFactory.createLottos(manualLottoNumbers);
     }
 
     private static List<Lotto> createAutoLottos(int lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = LottoFactory.createLotto(new RandomLottoNumbersGenerator());
-            lottos.add(lotto);
-        }
-
-        return lottos;
+        return LottoFactory.createLottos(lottoCount, new RandomLottoNumbersGenerator());
     }
 
     private static WinningLotto createWinningLotto() {
