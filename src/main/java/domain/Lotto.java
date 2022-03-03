@@ -24,7 +24,7 @@ public class Lotto {
 
     public Lotto(List<Integer> lottoNumbers) {
         checkValidate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     public List<Integer> getLottoNumbers() {

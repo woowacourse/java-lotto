@@ -41,7 +41,7 @@ public class InputView {
 
         System.out.println(QUESTION_MANUAL_LOTTO_NUMBERS);
 
-        return askLottoNumbers(amount);
+        return new ArrayList<>(askLottoNumbers(amount));
     }
 
     public static WinningNumbers askWinningNumbers() {
@@ -51,7 +51,7 @@ public class InputView {
     public static List<Integer> askWinningNumber() {
         System.out.println(QUESTION_WINNING_NUMBERS);
         List<String> numbers = Arrays.asList(scanner.nextLine().split(NUMBER_DELIMITER));
-        return covertNumbersToInteger(numbers);
+        return new ArrayList<>(covertNumbersToInteger(numbers));
     }
 
     public static int askBonusNumber() {
@@ -70,10 +70,10 @@ public class InputView {
     }
 
     private static List<Integer> covertNumbersToInteger(List<String> numbers) {
-        return numbers.stream()
+        return new ArrayList<>(numbers.stream()
             .map(InputView::checkAndConvertInteger)
             .sorted()
-            .collect(Collectors.toList());
+            .collect(Collectors.toList()));
     }
 
     private static int checkAndConvertInteger(String input) {

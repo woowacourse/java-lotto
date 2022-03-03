@@ -9,9 +9,9 @@ public class Money {
     private static final String NOT_AFFORDABLE_MANUAL_AMOUNT_ERROR = "[ERROR] 수동 로또를 구매하기에 입력하신 금액이 너무 적습니다.";
 
     private final int money;
-    private int lottoAmount;
     private final int manualAmount;
     private final int autoAmount;
+    private int lottoAmount;
 
     public Money(int money, int manualAmount) {
         this.money = money;
@@ -35,10 +35,9 @@ public class Money {
         }
     }
 
-    private int convertToLottoAmount() {
+    private void convertToLottoAmount() {
         lottoAmount = money / LOTTO_PRICE;
         checkLottoAmount();
-        return lottoAmount;
     }
 
     private int calculateAutoAmount() {

@@ -8,7 +8,7 @@ public class ManualLottoGenerator implements LottoGenerator {
     private final List<List<Integer>> lottoNumbers;
 
     public ManualLottoGenerator(List<List<Integer>> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class ManualLottoGenerator implements LottoGenerator {
             lottos.add(new Lotto(lottoNumber));
         }
 
-        return lottos;
+        return new ArrayList<>(lottos);
     }
 
 }

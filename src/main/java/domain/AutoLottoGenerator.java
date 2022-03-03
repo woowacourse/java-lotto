@@ -34,7 +34,7 @@ public class AutoLottoGenerator implements LottoGenerator {
         for (int i = START_INDEX; i < amount; ++i) {
             lottos.add(generateLotto());
         }
-        return lottos;
+        return new ArrayList<>(lottos);
 
     }
 

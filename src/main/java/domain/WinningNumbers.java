@@ -18,7 +18,7 @@ public class WinningNumbers {
 
     public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
         checkWinningAndBonusNumberValidate(winningNumbers, bonusNumber);
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = new ArrayList<>(winningNumbers);
         this.bonusNumber = bonusNumber;
     }
 
