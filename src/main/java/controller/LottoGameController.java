@@ -32,9 +32,9 @@ public class LottoGameController {
             lottoDispenser.buyManualLotto(InputView.inputLottoNumbers());
         }
         lottoDispenser.buyAutoLottos();
-        int autoLottosCount = lottoDispenser.getBoughtLottos().size() - manualLottosCount;
-        OutputView.printLottosCount(manualLottosCount, autoLottosCount);
-        return lottoDispenser.getBoughtLottos();
+        List<Lotto> lottos = lottoDispenser.getBoughtLottos();
+        OutputView.printLottosCount(manualLottosCount, lottos.size() - manualLottosCount);
+        return lottos;
     }
 
     private WinningLotto getWinningLotto() {
