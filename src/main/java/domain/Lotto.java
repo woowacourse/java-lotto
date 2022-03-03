@@ -7,9 +7,6 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final String JOIN_DELIMITER = ", ";
-    private static final String TO_STRING_SUFFIX = "]";
-    private static final String TO_STRING_PREFIX = "[";
     private static final int LOTTO_START = 0;
     private static final int LOTTO_END = 6;
 
@@ -28,7 +25,7 @@ public class Lotto {
     }
 
     public int match(WinningNumber winningNumber) {
-        return (int) numbers.getNumbers().stream().filter(winningNumber::contains).count();
+        return numbers.match(winningNumber);
     }
 
     public boolean hasBonusBall(LottoNumber bonusBall) {
@@ -37,8 +34,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        String lotto = numbers.getNumbers().stream().map(number -> number.toString())
-            .collect(Collectors.joining(JOIN_DELIMITER));
-        return TO_STRING_PREFIX + lotto + TO_STRING_SUFFIX;
+        return numbers.toString();
     }
 }

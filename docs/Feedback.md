@@ -63,7 +63,7 @@
 
 ### 2차 피드백 기반 추가 변경 사항
 - [x] Getter 메서드는 로직 아래에 두는 것을 권장
-- [ ] Numbers의 Get 메서드 제거 
+- [x] Numbers의 Get 메서드 제거 
 - [ ] LottosTest - List 생성 시 내용이 길어지면 한줄의 원소 하나만 배치하여 가독성을 높임.()
 - [ ] LottosTest - 변수명 수정 
 - [ ] @MethodSource 를 통한 테스트 시도 
