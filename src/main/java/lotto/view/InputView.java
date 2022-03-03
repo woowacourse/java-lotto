@@ -19,7 +19,7 @@ public class InputView {
     private InputView() {
     }
 
-    public static int askMoneyInput() {
+    public static int askMoney() {
         System.out.println(ASK_MONEY_MESSAGE);
         try {
             return Integer.parseInt(scanner.nextLine());
@@ -49,7 +49,7 @@ public class InputView {
         }
     }
 
-    public static int askManualCountInput() {
+    public static int askManualCount() {
         System.out.println(ASK_MANUAL_COUNT_MESSAGE);
         try {
             return Integer.parseInt(scanner.nextLine().trim());
@@ -59,20 +59,22 @@ public class InputView {
     }
 
     public static List<List<Integer>> askManualNumbers(int count) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<List<Integer>> manualNumbers = new ArrayList<>();
+        if (count == 0) {
+            return manualNumbers;
+        }
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         for (int i = 0; i < count; i++) {
-            List<Integer> collect = collectManualNumber();
-            manualNumbers.add(collect);
+            List<Integer> collectManualNumber = collectManualNumber();
+            manualNumbers.add(collectManualNumber);
         }
         return manualNumbers;
     }
 
     private static List<Integer> collectManualNumber() {
-        List<Integer> collect = Arrays.stream(scanner.nextLine().split(NUMBER_DELIMITER))
+        return Arrays.stream(scanner.nextLine().split(NUMBER_DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        return collect;
     }
 }

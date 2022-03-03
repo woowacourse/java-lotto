@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public enum LottoRank {
     NOTHING(0, 0),
@@ -16,6 +18,13 @@ public enum LottoRank {
     LottoRank(final int correctNumber, final int prizeAmount) {
         this.correctNumber = correctNumber;
         this.prizeAmount = prizeAmount;
+    }
+
+    public static Map<LottoRank, Integer> initLottoRankMap() {
+        Map<LottoRank, Integer> lottoRankMap = new LinkedHashMap<>();
+        Arrays.stream(LottoRank.values())
+                .forEach(lottoRank -> lottoRankMap.put(lottoRank, 0));
+        return lottoRankMap;
     }
 
     public int getCorrectNumber() {

@@ -1,22 +1,13 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class LottoResult {
-    private static final int INIT_VALUE = 0;
-    private final HashMap<LottoRank, Integer> result;
+    private final Map<LottoRank, Integer> result;
 
-    public LottoResult() {
-        this.result = new LinkedHashMap<>();
-        Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank != LottoRank.NOTHING)
-                .forEach(lottoRank -> result.put(lottoRank, INIT_VALUE));
-    }
-
-    public void add(LottoRank lottoRank) {
-        result.put(lottoRank, result.get(lottoRank) + 1);
+    public LottoResult(Map<LottoRank, Integer> rankMap) {
+        this.result = new LinkedHashMap<>(rankMap);
     }
 
     public int sumOfPrize() {
@@ -27,14 +18,18 @@ public class LottoResult {
         return sum;
     }
 
-    public HashMap<LottoRank, Integer> getResult() {
-        return result;
-    }
-
     @Override
     public String toString() {
         return "LottoResult{" +
                 "result=" + result +
                 '}';
+    }
+
+    public Map<LottoRank, Integer> getResult() {
+        return result;
+    }
+
+    public double calculateYield(Money money) {
+        return sumOfPrize() / (double) money.getAmount();
     }
 }

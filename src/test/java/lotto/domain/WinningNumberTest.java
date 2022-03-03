@@ -17,11 +17,11 @@ class WinningNumberTest {
     @DisplayName("올바른 등수를 판별하는지")
     @MethodSource("rankProvider")
     void Decide_Rank(List<Integer> inputValues, LottoRank inputRank) {
-        ChoiceNumber choiceNumber = new ChoiceNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        BonusNumber bonusNumber = new BonusNumber(7, choiceNumber);
-        WinningNumber winningNumber = new WinningNumber(choiceNumber, bonusNumber);
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        BonusNumber bonusNumber = new BonusNumber(7, lotto);
+        WinningNumber winningNumber = new WinningNumber(lotto, bonusNumber);
 
-        Assertions.assertThat(winningNumber.findLottoRank(new ChoiceNumber(inputValues))).isEqualTo(inputRank);
+        Assertions.assertThat(winningNumber.findLottoRank(new Lotto(inputValues))).isEqualTo(inputRank);
     }
 
     private static Stream<Arguments> rankProvider() {
