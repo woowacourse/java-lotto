@@ -29,6 +29,7 @@
 
 - [x] `수동으로 구매할 로또의 개수` 입력
   - [x] `로또 개수`는 숫자여야 합니다. 아닌 경우, `IllegalArgumentException` 발생
+  - [x] `로또 개수`는 양수여야 합니다. 아닌 경우, `IllegalArgumentException` 발생
   - [x] `로또 개수`는 `구매 가능한 로또의 개수`보다 작아야 합니다. 아닌 경우, `IllegalArgumentException` 발생
 
 - [x] `로또 번호 (당첨 번호)` 입력
