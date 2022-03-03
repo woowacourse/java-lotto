@@ -28,6 +28,12 @@ public class Money {
         return money;
     }
 
+    public void validateCountRange(int maxLottoCount, int inputCount) {
+        if (inputCount < 0 || inputCount > maxLottoCount) {
+            throw new IllegalArgumentException("구매할 로또 수를 다시 입력해주세요.");
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

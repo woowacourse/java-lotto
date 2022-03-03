@@ -56,17 +56,9 @@ public class InputView {
         return new Lotto(collect);
     }
 
-    public static int askManualLottoCount(int maxLottoCount) {
+    public static int askManualLottoCount() {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT);
-        int manualLottoCount = convertToInt(scanner.nextLine());
-        validateCountRange(maxLottoCount, manualLottoCount);
-        return manualLottoCount;
-    }
-
-    private static void validateCountRange(int maxLottoCount, int inputCount) {
-        if (inputCount < 0 || inputCount > maxLottoCount) {
-            throw new IllegalArgumentException("구매할 로또 수를 다시 입력해주세요.");
-        }
+        return convertToInt(scanner.nextLine());
     }
 
     public static Lottos askManualLottoNumbers(int manualLottoCount) {
