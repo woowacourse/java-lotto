@@ -4,7 +4,7 @@ import dto.LottoDto;
 import dto.RankResultDto;
 import model.LottoMachine;
 import model.lottonumber.Lottos;
-import model.money.TotalPurchaseMoney;
+import model.totalmoney.TotalPurchaseMoney;
 import model.lottonumber.Lotto;
 import model.rank.Rank;
 import model.lottonumber.WinningNumbers;

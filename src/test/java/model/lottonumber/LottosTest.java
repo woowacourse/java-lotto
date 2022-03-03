@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import model.generator.Generator;
-import model.money.TotalPurchaseMoney;
+import model.totalmoney.TotalPurchaseMoney;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

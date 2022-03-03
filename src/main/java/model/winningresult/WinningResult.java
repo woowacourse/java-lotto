@@ -2,7 +2,7 @@ package model.winningresult;
 
 import java.util.Map;
 
-import model.money.TotalPurchaseMoney;
+import model.totalmoney.TotalPurchaseMoney;
 import model.rank.Rank;
 
 public class WinningResult {

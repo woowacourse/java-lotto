@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.lottonumber.Lotto;
 import model.lottonumber.Lottos;
-import model.money.TotalPurchaseMoney;
+import model.totalmoney.TotalPurchaseMoney;
 
 public class LottoMachine {
 

@@ -1,4 +1,4 @@
-package model.money;
+package model.totalmoney;
 
 public class TotalPurchaseMoney {
     private static final int LOTTO_PRICE = 1000;

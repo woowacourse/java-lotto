@@ -1,4 +1,4 @@
-package model.money;
+package model.totalmoney;
 
 public class ManualLottoCount {
     private static final String INPUT_MANUAL_LOTTO_COUNT_NEGATIVE_MESSAGE = "[ERROR] 입력한 수동 구매 로또 개수가 음수입니다.";
