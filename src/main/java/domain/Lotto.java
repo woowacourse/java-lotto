@@ -44,7 +44,10 @@ public class Lotto {
     }
 
     public boolean isContainNumber(final LottoNumber lottoNumber) {
-        return this.lotto.contains(lottoNumber);
+        long count = lotto.stream()
+                .filter(number -> number.equals(lottoNumber))
+                .count();
+        return count > 0;
     }
 
     public int compare(final Lotto lotto) {
