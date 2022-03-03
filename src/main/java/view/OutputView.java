@@ -1,8 +1,8 @@
 package view;
 
 import domain.RankPrize;
+import domain.Result;
 import dto.LottoDto;
-import dto.ResultDto;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -24,7 +24,7 @@ public class OutputView {
         }
     }
 
-    public void printWinStatistics(final ResultDto result) {
+    public void printWinStatistics(final Result result) {
         System.out.println();
         System.out.println(WIN_STATISTICS_RESULT_MESSAGE);
         for (Entry<RankPrize, Integer> rankCount : result.getResultDto().entrySet()) {

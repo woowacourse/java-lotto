@@ -1,6 +1,6 @@
 package controller;
 
-import dto.ResultDto;
+import domain.Result;
 import java.util.Collections;
 import java.util.List;
 import service.LottoService;
@@ -75,7 +75,7 @@ public class LottoController {
         }
     }
 
-    private ResultDto calculateResult() {
+    private Result calculateResult() {
         try {
             return lottoService.calculateResult(inputView.getBonusNumber());
         } catch (Exception e) {
@@ -84,8 +84,8 @@ public class LottoController {
         }
     }
 
-    private void processResult(final ResultDto resultDto) {
-        outputView.printWinStatistics(resultDto);
-        outputView.printWinProfit(lottoService.getProfitOrNotMessage(resultDto));
+    private void processResult(final Result result) {
+        outputView.printWinStatistics(result);
+        outputView.printWinProfit(lottoService.getProfitOrNotMessage(result));
     }
 }

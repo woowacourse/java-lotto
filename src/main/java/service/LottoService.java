@@ -4,8 +4,8 @@ import domain.Lotto;
 import domain.LottoFactory;
 import domain.LottoNumber;
 import domain.Money;
+import domain.Result;
 import dto.LottoDto;
-import dto.ResultDto;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -74,20 +74,20 @@ public class LottoService {
             .collect(Collectors.toUnmodifiableList());
     }
 
-    public ResultDto calculateResult(final int bonusNumberInput) {
+    public Result calculateResult(final int bonusNumberInput) {
         final LottoNumber bonusNumber = new LottoNumber(bonusNumberInput);
         if (isBonusNumberContain(this.lastWinLotto, bonusNumber)) {
             throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
         }
-        return new ResultDto(this.issuedLotto, this.lastWinLotto, bonusNumber);
+        return new Result(this.issuedLotto, this.lastWinLotto, bonusNumber);
     }
 
     private boolean isBonusNumberContain(final Lotto lotto, final LottoNumber bonusNumber) {
         return lotto.isContainNumber(bonusNumber);
     }
 
-    public String getProfitOrNotMessage(final ResultDto resultDto) {
-        final double profitRate = money.calculateProfit(resultDto.getPrizeProfit());
+    public String getProfitOrNotMessage(final Result result) {
+        final double profitRate = money.calculateProfit(result.getPrizeProfit());
         String resultMessage = PROFIT_NEGATIVE_MESSAGE;
         if (profitRate >= 1) {
             resultMessage = PROFIT_POSITIVE_MESSAGE;
