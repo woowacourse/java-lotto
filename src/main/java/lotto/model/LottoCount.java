@@ -10,7 +10,7 @@ public class LottoCount {
         validateLottoCount(manualLottoCount, money);
         this.lottoCount = money.lottoCount();
         this.manualLottoCount = manualLottoCount;
-        this.autoLottoCount = money.lottoCount() - manualLottoCount;
+        this.autoLottoCount = lottoCount - manualLottoCount;
     }
 
     private void validateLottoCount(final int manualLottoCount, final Money money) {

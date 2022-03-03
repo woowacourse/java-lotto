@@ -32,8 +32,11 @@ public class InputView {
         return input.nextLine().trim();
     }
 
-    public static String inputManualLottoNumbers() {
+    public static void printManualLottoNumbersMessage() {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
+    }
+
+    public static String inputManualLottoNumbers() {
         return input.nextLine().trim();
     }
 }

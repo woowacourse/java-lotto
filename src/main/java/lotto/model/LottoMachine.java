@@ -45,9 +45,9 @@ public class LottoMachine {
     }
 
     public double getRevenue() {
-        int sum = 0;
+        long sum = 0;
         for (Rank rank : Rank.values()) {
-            sum += rank.getPrice() * getEachRankCount(rank);
+            sum += (long) rank.getPrice() * getEachRankCount(rank);
         }
         return ((double) sum / money.getMoney());
     }

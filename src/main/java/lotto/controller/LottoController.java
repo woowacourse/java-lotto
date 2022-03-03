@@ -33,7 +33,7 @@ public class LottoController {
     public void run() {
         Money money = validateMoney(InputView.inputMoney());
         LottoCount lottoCount = new LottoCount(validateNumber(InputView.inputManualLottoCount()), money);
-        Lottos manualLottos = inputManualLottos(lottoCount.getManualLottoCount());
+        Lottos manualLottos = makeManualLottos(lottoCount.getManualLottoCount());
         LottoMachine lottoMachine = new LottoMachine(lottoGenerator, money, lottoCount, manualLottos);
         ResultView.printBuyingLottosResult(lottoCount, lottoMachine.getLottos());
         WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
@@ -58,8 +58,9 @@ public class LottoController {
         }
     }
 
-    private Lottos inputManualLottos(int count) {
+    private Lottos makeManualLottos(int count) {
         List<Lotto> manualLottos = new ArrayList<>();
+        InputView.printManualLottoNumbersMessage();
         for (int i = 0; i < count; i++) {
             manualLottos.add(makeLotto(InputView.inputManualLottoNumbers()));
         }
