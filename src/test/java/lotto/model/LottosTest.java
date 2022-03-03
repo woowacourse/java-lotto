@@ -22,7 +22,7 @@ public class LottosTest {
         Lotto first = makeLotto(new int[]{1, 2, 3, 4, 5, 6}); //1등
         Lotto second = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
         Lotto fourth = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
-        lottos = new Lottos(Arrays.asList(first, second, fourth));
+        lottos = new Lottos(new ArrayList<>(Arrays.asList(first,second,fourth)));
     }
 
     private Lotto makeLotto(int[] numbers) {
@@ -66,8 +66,8 @@ public class LottosTest {
     @Test
     void combineLottosTest() {
         Lotto newLotto = makeLotto(new int[]{40, 41, 42, 43, 44, 45});
-        Lottos newLottos = new Lottos(Arrays.asList(newLotto));
-        Lottos combineLottos = Lottos.combineLottos(lottos, newLottos);
-        assertThat(combineLottos.size()).isEqualTo(4);
+        Lottos newLottos = new Lottos(new ArrayList<>(Arrays.asList(newLotto)));
+        lottos.plusLottos(newLottos);
+        assertThat(lottos.size()).isEqualTo(4);
     }
 }

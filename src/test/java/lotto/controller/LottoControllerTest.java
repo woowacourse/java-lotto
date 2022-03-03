@@ -40,7 +40,7 @@ public class LottoControllerTest {
     private Lottos makeLottos() {
         Lotto first = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
         Lotto second = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
-        return new Lottos(Arrays.asList(first, second));
+        return new Lottos(new ArrayList<>(Arrays.asList(first, second)));
     }
 
     private Lotto makeLotto(int[] numbers) {

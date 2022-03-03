@@ -10,7 +10,7 @@ public class RankCount {
         this.rankCount = rankCount;
     }
 
-    public long addTotalScore() {
+    public long gatherTotalMoney() {
         long sum = 0;
         for (Rank rank : Rank.values()) {
             sum += (long) rank.getPrice() * getEachRankCount(rank);

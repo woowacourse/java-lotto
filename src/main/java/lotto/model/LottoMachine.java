@@ -31,7 +31,8 @@ public class LottoMachine {
         Lottos autoLottos = lottoGenerator.generateLottos(autoLottoCount, LottoNumber.LOTTO_NUMBER_MINIMUM_RANGE,
                 LottoNumber.LOTTO_NUMBER_MAXIMUM_RANGE,
                 LottoNumbers.LOTTO_LENGTH);
-        return Lottos.combineLottos(manualLottos, autoLottos);
+        manualLottos.plusLottos(autoLottos);
+        return manualLottos;
     }
 
     public void calculateResult(final WinningLotto winningLotto) {
@@ -43,7 +44,7 @@ public class LottoMachine {
     }
 
     public double getRevenue() {
-        return ((double) score.addTotalScore() / money.getMoney());
+        return ((double) score.gatherTotalMoney() / money.getMoney());
     }
 
     public Integer getEachRankCount(Rank rank) {

@@ -33,7 +33,7 @@ public class RankCountTest {
     @DisplayName("당첨금 합계 테스트")
     @Test
     void addTotalScoreTest() {
-        long actual = rankCount.addTotalScore();
+        long actual = rankCount.gatherTotalMoney();
         System.out.println(actual);
         assertThat(actual).isEqualTo(4000000000L + 50000);
     }
