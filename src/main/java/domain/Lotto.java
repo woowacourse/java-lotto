@@ -7,14 +7,14 @@ import java.util.Set;
 
 public class Lotto {
 
-    private final int MINIMUM_LOTTO_NUMBER = 1;
-    private final int MAXIMUM_LOTTO_NUMBER = 45;
-    private final int LOTTO_SIZE = 6;
+    private static final int MINIMUM_LOTTO_NUMBER = 1;
+    private static final int MAXIMUM_LOTTO_NUMBER = 45;
+    private static final int LOTTO_SIZE = 6;
 
-    private final String LOTTO_NUMBER_NULL_ERROR = "[ERROR] 로또 번호로 null 값이 올 수 없습니다.";
-    private final String LOTTO_NUMBER_RANGE_ERROR = "[ERROR] 로또 번호는 1~45 사이 정수만 가능합니다.";
-    private final String LOTTO_SIZE_ERROR = "[ERROR] 로또 번호는 6개만 입력 가능합니다.";
-    private final String LOTTO_NUMBER_NOT_UNIQUE_ERROR = "[ERROR] 로또 번호는 중복될 수 없습니다.";
+    private static final String LOTTO_NUMBER_NULL_ERROR = "[ERROR] 로또 번호로 null 값이 올 수 없습니다.";
+    private static final String LOTTO_NUMBER_RANGE_ERROR = "[ERROR] 로또 번호는 1~45 사이 정수만 가능합니다.";
+    private static final String LOTTO_SIZE_ERROR = "[ERROR] 로또 번호는 6개만 입력 가능합니다.";
+    private static final String LOTTO_NUMBER_NOT_UNIQUE_ERROR = "[ERROR] 로또 번호는 중복될 수 없습니다.";
 
     private static final int WINNING_COUNT_LIMIT = 3;
     private static final int SECOND_PRIZE_CONDITION = 5;
