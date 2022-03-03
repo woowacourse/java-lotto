@@ -1,30 +1,35 @@
 package model;
 
 import java.util.List;
-import model.generator.Generator;
-import model.generator.LottoNumberGenerator;
+
 import model.lottonumber.Lotto;
 import model.lottonumber.Lottos;
-import model.money.ManualLottoCount;
-import model.money.PurchaseMoney;
+import model.money.TotalPurchaseMoney;
 
 public class LottoMachine {
 
     private Lottos lottos;
-    private PurchaseMoney purchaseMoney;
+    private TotalPurchaseMoney totalPurchaseMoney;
 
-    public void insertPurchaseMoney(int purchaseMoney) {
-        this.purchaseMoney = new PurchaseMoney(purchaseMoney);
+    public void insertTotalPurchaseMoney(final int totalPurchaseMoney, final int manualLottoCount) {
+        this.totalPurchaseMoney = new TotalPurchaseMoney(totalPurchaseMoney, manualLottoCount);
     }
 
-    public void purchaseLottos(List<Lotto> manualLottos, ManualLottoCount manualLottoCount) {
-        int autoPurchaseCount = purchaseMoney.makePurchaseLottoCount() - manualLottoCount.getCount();
-        Generator generator = new LottoNumberGenerator();
+    public void purchaseLottos(List<Lotto> manualLottos) {
+        int autoPurchaseCount = totalPurchaseMoney.getAutoPurchaseCount();
 
-        new Lottos(manualLottos, autoPurchaseCount, generator);
+        lottos = new Lottos(manualLottos, autoPurchaseCount);
     }
 
-    public int getPurchaseLottoCount() {
-        return purchaseMoney.makePurchaseLottoCount();
+    public int sendManualLottoCount() {
+        return totalPurchaseMoney.getManualLottoCount();
+    }
+
+    public int sendAutoLottoCount() {
+        return totalPurchaseMoney.getAutoPurchaseCount();
+    }
+
+    public List<Lotto> sendLottosInMachine() {
+        return lottos.getLottos();
     }
 }

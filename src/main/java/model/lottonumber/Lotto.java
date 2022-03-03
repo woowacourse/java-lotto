@@ -8,6 +8,11 @@ import model.lottonumber.vo.Number;
 import model.rank.Rank;
 
 public class Lotto {
+    private static final int LOTTO_NUMBER_SIZE_COUNT = 6;
+    private static final String NOT_CORRECT_LOTTO_NUMBER_COUNT_ERROR_MESSAGE = "[ERROR] 입력한 수동 로또 번호가 6개가 아닙니다.";
+    private static final String DUPLICATE_IN_MANUAL_LOTTO_NUMBERS_ERROR_MESSAGE = "[ERROR] 입력한 수동 로또티켓 중 번호가 중복되는 티켓이 있습니다.";
+
+
     private final List<Number> numbers;
 
     public Lotto(final Generator generator) {
@@ -18,9 +23,19 @@ public class Lotto {
     }
 
     public Lotto(final List<Integer> numbers) {
+        checkValidNumbers(numbers);
         this.numbers = numbers.stream()
                 .map(Number::new)
                 .collect(Collectors.toList());
+    }
+
+    private void checkValidNumbers(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_SIZE_COUNT) {
+            throw new IllegalArgumentException(NOT_CORRECT_LOTTO_NUMBER_COUNT_ERROR_MESSAGE);
+        }
+        if (numbers.stream().distinct().count() != LOTTO_NUMBER_SIZE_COUNT) {
+            throw new IllegalArgumentException(DUPLICATE_IN_MANUAL_LOTTO_NUMBERS_ERROR_MESSAGE);
+        }
     }
 
     public Rank findWinningRank(final WinningNumbers winningNumbers) {

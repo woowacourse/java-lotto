@@ -8,13 +8,16 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import model.generator.Generator;
+import model.generator.LottoNumberGenerator;
 import model.rank.Rank;
 import model.winningresult.WinningResult;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(final List<Lotto> manualLottos, final int autoPurchaseCount, final Generator generator) {
+    public Lottos(final List<Lotto> manualLottos, final int autoPurchaseCount) {
+        Generator generator = new LottoNumberGenerator();
+
         lottos = IntStream
                 .rangeClosed(1, autoPurchaseCount)
                 .mapToObj(index -> new Lotto(generator))

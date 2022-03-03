@@ -4,7 +4,7 @@ import dto.LottoDto;
 import dto.RankResultDto;
 import model.LottoMachine;
 import model.lottonumber.Lottos;
-import model.money.PurchaseMoney;
+import model.money.TotalPurchaseMoney;
 import model.lottonumber.Lotto;
 import model.rank.Rank;
 import model.lottonumber.WinningNumbers;
@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
+    private LottoMachine lottoMachine;
 
     public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -26,12 +27,15 @@ public class LottoController {
     }
 
     public void run() {
-        LottoMachine lottoMachine = new LottoMachineInitializer(inputView).initLottoMachine();
+        printProcessOfPurchaseLottos();
 
-        /*
-        WinningNumbers winningNumbers = insertWinningInformation();
-        showWinningResult(lottos, winningNumbers, purchaseMoney);
-    */
+    }
+
+    private void printProcessOfPurchaseLottos() {
+        lottoMachine = new LottoMachineInitializer(inputView).initLottoMachine();
+
+        outputView.printTotalPurchaseLottoCount(lottoMachine.sendManualLottoCount(), lottoMachine.sendAutoLottoCount());
+        outputView.printTotalLottos(convertLottosToDtos(lottoMachine.sendLottosInMachine()));
     }
 
     private List<LottoDto> convertLottosToDtos(List<Lotto> lottos) {
@@ -69,12 +73,13 @@ public class LottoController {
         }
     }
 
-    private void showWinningResult(Lottos lottos, WinningNumbers winningNumbers, PurchaseMoney purchaseMoney) {
+    private void showWinningResult(Lottos lottos, WinningNumbers winningNumbers,
+                                   TotalPurchaseMoney totalPurchaseMoney) {
         WinningResult winningResult = lottos.makeWinningResult(winningNumbers);
         List<RankResultDto> rankResultDtos = convertWinningResultToDtos(winningResult.getWinningResult());
 
         outputView.printWinningResult(rankResultDtos);
-        outputView.printRateOfReturn(winningResult.getRateOfReturn(purchaseMoney));
+        outputView.printRateOfReturn(winningResult.getRateOfReturn(totalPurchaseMoney));
     }
 
     private List<RankResultDto> convertWinningResultToDtos(final Map<Rank, Integer> results) {
