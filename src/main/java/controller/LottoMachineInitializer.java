@@ -11,7 +11,7 @@ public class LottoMachineInitializer {
 
     private final InputView inputView;
 
-    public LottoMachineInitializer(InputView inputView) {
+    public LottoMachineInitializer(final InputView inputView) {
         this.inputView = inputView;
     }
 
@@ -29,14 +29,14 @@ public class LottoMachineInitializer {
         lottoMachine.insertTotalPurchaseMoney(purchaseMoney, manualLottoCount);
     }
 
-    private void purchaseLottos(LottoMachine lottoMachine) {
+    private void purchaseLottos(final LottoMachine lottoMachine) {
         int manualLottoCount = lottoMachine.sendManualLottoCount();
         List<Lotto> manualLottos = purchaseManualLottos(manualLottoCount);
 
         lottoMachine.purchaseLottos(manualLottos);
     }
 
-    private List<Lotto> purchaseManualLottos(int manualLottoCount) {
+    private List<Lotto> purchaseManualLottos(final int manualLottoCount) {
         List<List<Integer>> manualLottoNumberGroups = inputView.inputManualLottoNumberGroups(manualLottoCount);
 
         return manualLottoNumberGroups.stream()

@@ -22,7 +22,7 @@ public class WinningNumbers {
         this.bonusNumber = new Number(bonusNumber);
     }
 
-    private void checkValidNumbers(List<Integer> winningNumbers, int bonusNumber) {
+    private void checkValidNumbers(final List<Integer> winningNumbers, final int bonusNumber) {
         checkCountOfWinningNumbers(winningNumbers);
         checkDuplicateInNumbers(winningNumbers, bonusNumber);
     }
@@ -33,7 +33,7 @@ public class WinningNumbers {
         }
     }
 
-    private void checkDuplicateInNumbers(List<Integer> winningNumbers, int bonusNumber) {
+    private void checkDuplicateInNumbers(final List<Integer> winningNumbers, final int bonusNumber) {
         if (isDuplicateInWinningNumbers(winningNumbers)) {
             throw new IllegalArgumentException(DUPLICATE_IN_WINNING_NUMBER_ERROR_MESSAGE);
         }
@@ -42,11 +42,11 @@ public class WinningNumbers {
         }
     }
 
-    private boolean isDuplicateInWinningNumbers(List<Integer> winningNumbers) {
+    private boolean isDuplicateInWinningNumbers(final List<Integer> winningNumbers) {
         return winningNumbers.stream().distinct().count() != LOTTO_NUMBER_SIZE_COUNT;
     }
 
-    private boolean isDuplicateWithBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
+    private boolean isDuplicateWithBonusNumber(final List<Integer> winningNumbers, final int bonusNumber) {
         return winningNumbers.stream().anyMatch(winningNumber -> winningNumber == bonusNumber);
     }
 

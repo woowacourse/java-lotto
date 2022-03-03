@@ -35,7 +35,7 @@ public class LottoController {
         outputView.printTotalLottos(convertLottosToDtos(lottoMachine.sendLottosInMachine()));
     }
 
-    private List<LottoDto> convertLottosToDtos(List<Lotto> lottos) {
+    private List<LottoDto> convertLottosToDtos(final List<Lotto> lottos) {
         return lottos.stream()
                 .map(lotto -> new LottoDto(lotto.getLottoNumbers()))
                 .collect(Collectors.toUnmodifiableList());
@@ -50,8 +50,8 @@ public class LottoController {
         printWinningResult(winningResult, totalPurchaseCount);
     }
 
-    private void printWinningResult(WinningResult winningResult, int totalPurchaseLottoCount) {
-        List<RankResultDto> rankResultDtos = convertWinningResultToDtos(winningResult.getWinningResult());
+    private void printWinningResult(final WinningResult winningResult, final int totalPurchaseLottoCount) {
+        final List<RankResultDto> rankResultDtos = convertWinningResultToDtos(winningResult.getWinningResult());
 
         outputView.printWinningResult(rankResultDtos);
         outputView.printRateOfReturn(winningResult.sendRateOfReturn(totalPurchaseLottoCount));

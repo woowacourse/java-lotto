@@ -6,7 +6,7 @@ public class RankResultDto {
     private final Rank rank;
     private final int winningCount;
 
-    public RankResultDto(Rank rank, int winningCount) {
+    public RankResultDto(final Rank rank, final int winningCount) {
         this.rank = rank;
         this.winningCount = winningCount;
     }

@@ -5,16 +5,16 @@ public class ManualLottoCount {
 
     private final int count;
 
-    public ManualLottoCount(int count) {
+    public ManualLottoCount(final int count) {
         checkValidCount(count);
         this.count = count;
     }
 
-    private void checkValidCount(int count) {
+    private void checkValidCount(final int count) {
         checkCountIsNegative(count);
     }
 
-    private void checkCountIsNegative(int count) {
+    private void checkCountIsNegative(final int count) {
         if (count < 0) {
             throw new IllegalArgumentException(INPUT_MANUAL_LOTTO_COUNT_NEGATIVE_MESSAGE);
         }

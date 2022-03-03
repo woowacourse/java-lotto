@@ -17,7 +17,7 @@ public class LottoMachine {
         this.totalPurchaseMoney = new TotalPurchaseMoney(totalPurchaseMoney, manualLottoCount);
     }
 
-    public void purchaseLottos(List<Lotto> manualLottos) {
+    public void purchaseLottos(final List<Lotto> manualLottos) {
         int autoLottoCount = totalPurchaseMoney.getAutoLottoCount();
 
         lottos = new Lottos(manualLottos, autoLottoCount);
@@ -39,7 +39,7 @@ public class LottoMachine {
         return lottos.getLottos();
     }
 
-    public WinningResult makeLottoWinningResult(List<Integer> winningNumbers, int bonusNumber) {
+    public WinningResult makeLottoWinningResult(final List<Integer> winningNumbers, final int bonusNumber) {
         return lottos.makeWinningResult(new WinningNumbers(winningNumbers, bonusNumber));
     }
 }

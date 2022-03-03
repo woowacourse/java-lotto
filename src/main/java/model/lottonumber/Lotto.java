@@ -29,7 +29,7 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    private void checkValidNumbers(List<Integer> numbers) {
+    private void checkValidNumbers(final List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE_COUNT) {
             throw new IllegalArgumentException(NOT_CORRECT_LOTTO_NUMBER_COUNT_ERROR_MESSAGE);
         }

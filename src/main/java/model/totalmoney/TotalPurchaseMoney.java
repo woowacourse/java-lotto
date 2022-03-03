@@ -31,7 +31,7 @@ public class TotalPurchaseMoney {
         return purchaseMoney % LOTTO_PRICE != 0;
     }
 
-    private boolean isLessThanSumOfManualLottoCountPrice(int purchaseMoney, int manualLottoCount) {
+    private boolean isLessThanSumOfManualLottoCountPrice(final int purchaseMoney, final int manualLottoCount) {
         return manualLottoCount * LOTTO_PRICE > purchaseMoney;
     }
 

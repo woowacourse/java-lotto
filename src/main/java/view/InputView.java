@@ -29,7 +29,7 @@ public class InputView {
         return IntegerParser.parseInteger(manualLottoCount);
     }
 
-    public List<List<Integer>> inputManualLottoNumberGroups(int manualLottoCount) {
+    public List<List<Integer>> inputManualLottoNumberGroups(final int manualLottoCount) {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
         return IntStream.range(0, manualLottoCount)
                 .mapToObj(index -> inputManualLottoNumbers())

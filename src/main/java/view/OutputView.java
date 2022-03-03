@@ -59,7 +59,7 @@ public class OutputView {
         return NOT_BONUS_MATCH_RANK_PRINT_FORMAT;
     }
 
-    public void printRateOfReturn(double rateOfReturn) {
+    public void printRateOfReturn(final double rateOfReturn) {
         System.out.printf(RATE_OF_RETURN_PRINT_FORMAT, rateOfReturn);
     }
 }
