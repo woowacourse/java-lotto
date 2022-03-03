@@ -1,6 +1,7 @@
 package lotto.domain;
 
 
+import java.util.Arrays;
 import lotto.MakeEachRankStrategy;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,11 +18,11 @@ class LottoTest {
 
     @BeforeEach
     void setLotto() {
-        money = new Money("10000");
+        money = new Money(10000);
         MakeEachRankStrategy makeEachRankStrategy = new MakeEachRankStrategy();
         lotto = new Lotto(money.getAmount() / Money.UNIT_AMOUNT, makeEachRankStrategy);
-        ChoiceNumber choiceNumber = new ChoiceNumber("1,2,3,4,5,6");
-        BonusNumber bonusNumber = new BonusNumber("7", choiceNumber);
+        ChoiceNumber choiceNumber = new ChoiceNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        BonusNumber bonusNumber = new BonusNumber(7, choiceNumber);
         WinningNumber winningNumber = new WinningNumber(choiceNumber, bonusNumber);
         lottoResult = lotto.computeResult(winningNumber);
     }

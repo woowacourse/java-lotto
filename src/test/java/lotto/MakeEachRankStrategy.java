@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import lotto.domain.ChoiceNumber;
 import lotto.strategy.LottoBuyStrategy;
@@ -12,12 +13,12 @@ public class MakeEachRankStrategy implements LottoBuyStrategy {
     @Override
     public List<ChoiceNumber> buyLotto(int Count) {
         List<ChoiceNumber> choiceNumbers = new ArrayList<>();
-        choiceNumbers.add(new ChoiceNumber("1,2,3,4,5,6"));
-        choiceNumbers.add(new ChoiceNumber("1,2,3,4,5,7"));
-        choiceNumbers.add(new ChoiceNumber("1,2,3,4,5,8"));
-        choiceNumbers.add(new ChoiceNumber("1,2,3,4,7,8"));
-        choiceNumbers.add(new ChoiceNumber("1,2,3,7,8,9"));
-        choiceNumbers.add(new ChoiceNumber("7,8,9,10,11,12"));
+        choiceNumbers.add(new ChoiceNumber(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        choiceNumbers.add(new ChoiceNumber(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        choiceNumbers.add(new ChoiceNumber(Arrays.asList(1, 2, 3, 4, 5, 8)));
+        choiceNumbers.add(new ChoiceNumber(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        choiceNumbers.add(new ChoiceNumber(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        choiceNumbers.add(new ChoiceNumber(Arrays.asList(7, 8, 9, 10, 11, 12)));
         return choiceNumbers;
     }
 }
