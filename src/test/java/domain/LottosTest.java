@@ -1,12 +1,16 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -49,18 +53,13 @@ public class LottosTest {
 
     @ParameterizedTest
     @DisplayName("생성된 로또에 대해 당첨 결과가 모두 계산되었는지 테스트")
-    @CsvSource(value = {"1,2,3,4,5,6,FIRST", "1,2,3,4,5,7,SECOND", "1,2,3,4,5,8,THIRD",
-        "1,2,3,4,7,8,FOURTH", "1,2,3,8,9,10,FIFTH", "1,2,9,10,11,12,SIXTH"})
-    public void getWinningStatisticsTestByRank(int number1, int number2, int number3, int number4,
-        int number5, int number6, Rank rank) {
+    @MethodSource("generateLottoData")
+    public void getWinningStatisticsTestByRank(List<Integer> lottoNumbers, Rank rank) {
 
         Lotto lotto = new Lotto(
-            List.of(LottoNumber.valueOf(number1),
-                LottoNumber.valueOf(number2),
-                LottoNumber.valueOf(number3),
-                LottoNumber.valueOf(number4),
-                LottoNumber.valueOf(number5),
-                LottoNumber.valueOf(number6)));
+            lottoNumbers.stream()
+                .map(number -> LottoNumber.valueOf(number))
+                .collect(Collectors.toList()));
 
         List<Lotto> lottoList = new ArrayList<>(List.of(lotto));
         Lottos lottos = Lottos.generateLottos(lottoList, 0);
@@ -68,5 +67,16 @@ public class LottosTest {
         int countOfRank = statistic.getStatistics().get(rank);
 
         assertEquals(countOfRank, 1);
+    }
+
+    static Stream<Arguments> generateLottoData() {
+        return Stream.of(
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Rank.FIRST),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), Rank.SECOND),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 8), Rank.THIRD),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 8, 9), Rank.FOURTH),
+            Arguments.of(Arrays.asList(1, 2, 3, 10, 11, 12), Rank.FIFTH),
+            Arguments.of(Arrays.asList(1, 2, 10, 11, 12, 13), Rank.SIXTH)
+        );
     }
 }

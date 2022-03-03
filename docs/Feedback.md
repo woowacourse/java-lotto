@@ -66,5 +66,5 @@
 - [x] Numbers의 Get 메서드 제거 
 - [x] LottosTest - List 생성 시 내용이 길어지면 한줄의 원소 하나만 배치하여 가독성을 높임.()
 - [x] LottosTest - 변수명 수정 
-- [ ] @MethodSource 를 통한 테스트 시도 
+- [x] @MethodSource 를 통한 테스트 시도 
 - [x] @CsvSource 이용 시 Enum타입을 바로 선언할 수 있음 
