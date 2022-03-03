@@ -14,7 +14,7 @@ public class LottosTest {
     @Test
     @DisplayName("Lottos를 생성하는 경우")
     void createLottos() {
-        Lotto lotto = LottoFactory.createLotto(new RandomLottoNumberGenerator());
+        Lotto lotto = LottoFactory.createLotto(new RandomLottoNumbersGenerator());
         Lottos lottos = new Lottos(List.of(lotto));
 
         assertThat(lottos).isNotNull();

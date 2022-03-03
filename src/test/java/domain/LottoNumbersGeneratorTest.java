@@ -14,9 +14,9 @@ class LottoNumbersGeneratorTest {
     @Test
     @DisplayName("랜덤 방식의 로또 숫자를 생성하는 기능")
     void createRandomLottoNumbers() {
-        LottoNumberGenerator lottoNumberGenerator = new RandomLottoNumberGenerator();
+        LottoNumbersGenerator lottoNumbersGenerator = new RandomLottoNumbersGenerator();
 
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
+        List<LottoNumber> lottoNumbers = lottoNumbersGenerator.generate();
 
         assertThat(lottoNumbers.size()).isEqualTo(LottoConstant.LOTTO_NUMBER_SIZE);
     }

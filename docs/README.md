@@ -58,7 +58,7 @@
 #### Lottos
 - 다수의 Lotto 들을 생성하고 관리한다.
 
-#### RandomLottoNumberGenerator
+#### RandomLottoNumbersGenerator
 - 6개의 로또 번호들을 랜덤으로 생성하는 책임을 가진다.
 
 #### WinningLotto

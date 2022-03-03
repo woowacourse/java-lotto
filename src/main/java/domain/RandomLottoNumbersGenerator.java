@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 import constant.LottoConstant;
 
-public class RandomLottoNumberGenerator implements LottoNumberGenerator {
+public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
 
     private static final List<LottoNumber> lottoNumbers;
 

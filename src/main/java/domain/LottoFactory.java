@@ -8,8 +8,8 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static Lotto createLotto(LottoNumberGenerator lottoNumberGenerator) {
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
+    public static Lotto createLotto(LottoNumbersGenerator lottoNumbersGenerator) {
+        List<LottoNumber> lottoNumbers = lottoNumbersGenerator.generate();
 
         return new Lotto(lottoNumbers);
     }

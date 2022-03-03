@@ -7,7 +7,7 @@ import domain.LottoGame;
 import domain.LottoNumber;
 import domain.LottoGameMoney;
 import domain.Lottos;
-import domain.RandomLottoNumberGenerator;
+import domain.RandomLottoNumbersGenerator;
 import domain.WinningLotto;
 import domain.WinningStatistics;
 import view.InputView;
@@ -36,7 +36,7 @@ public class Application {
     private static Lottos createLottos(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = LottoFactory.createLotto(new RandomLottoNumberGenerator());
+            Lotto lotto = LottoFactory.createLotto(new RandomLottoNumbersGenerator());
             lottos.add(lotto);
         }
 
