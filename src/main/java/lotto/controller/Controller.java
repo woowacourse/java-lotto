@@ -5,7 +5,7 @@ import lotto.domain.factory.LottoFactory;
 import lotto.domain.factory.NumberFactory;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.Money;
+import lotto.domain.lotto.Money;
 import lotto.domain.lotto.Number;
 import lotto.domain.Result;
 import lotto.view.InputView;

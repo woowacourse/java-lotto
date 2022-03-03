@@ -1,8 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.Objects;
-
-import lotto.domain.lotto.Lotto;
 
 public class Money {
 

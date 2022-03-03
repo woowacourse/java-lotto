@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.LottoRanking;
-import lotto.domain.Money;
 import lotto.domain.Result;
 
 public class Lottos {

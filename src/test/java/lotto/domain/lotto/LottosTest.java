@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.LottoRanking;
-import lotto.domain.Money;
 import lotto.domain.Result;
 import lotto.domain.factory.LottoFactory;
 

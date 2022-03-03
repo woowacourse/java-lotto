@@ -1,6 +1,6 @@
 package lotto.domain.factory;
 
-import lotto.domain.Money;
+import lotto.domain.lotto.Money;
 
 public class MoneyFactory {
 
