@@ -8,10 +8,10 @@ import model.lottonumber.RandomLottoNumbersGenerator;
 import model.result.RateOfReturn;
 import model.winningnumber.LottoWinningNumberDTO;
 
-public class LottoStorage {
+public class Lottos {
 	private List<Lotto> lottoStorage;
 
-	public LottoStorage(LottoCount lottoCount) {
+	public Lottos(LottoCount lottoCount) {
 		this.lottoStorage = store(lottoCount);
 	}
 
@@ -26,10 +26,10 @@ public class LottoStorage {
 		return lottos;
 	}
 
-	public List<LottoDTO> getLottoStorageDTO() {
-		List<LottoDTO> lottoDTOS = new ArrayList<>();
-		lottoStorage.forEach(lotto -> lottoDTOS.add(lotto.getLottoDTO()));
-		return lottoDTOS;
+	public List<LottoDTO> getLottosDTO() {
+		List<LottoDTO> lottosDTOS = new ArrayList<>();
+		lottoStorage.forEach(lotto -> lottosDTOS.add(lotto.getLottoDTO()));
+		return lottosDTOS;
 	}
 
 	public void checkWithWinningNumberAndBonus(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumbersDTO,

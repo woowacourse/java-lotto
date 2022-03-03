@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import model.bonusball.BonusBall;
 import model.lotto.LottoCount;
-import model.lotto.LottoStorage;
+import model.lotto.Lottos;
 import model.lottonumber.LottoNumber;
 import model.result.Rank;
 import model.result.RateOfReturn;
@@ -25,7 +25,7 @@ public class LottoController {
 	private final InputView inputView = new InputView();
 	private final OutputView outputView = new OutputView();
 
-	private LottoStorage lottoStorage;
+	private Lottos lottos;
 	private LottoWinningNumber lottoWinningNumber;
 	private BonusBall bonusBall;
 	private RateOfReturn rateOfReturn;
@@ -44,8 +44,8 @@ public class LottoController {
 			InputValidateUtils.inputBlankAndNumber(money, LOTTO_COUNT_BLANK_ERROR_MESSAGE,
 				LOTTO_COUNT_NUMBER_ERROR_MESSAGE);
 			storeMoneyInRateOfReturn(Integer.parseInt(money));
-			lottoStorage = new LottoStorage(new LottoCount(Integer.parseInt(money)));
-			outputView.printLottos(lottoStorage.getLottoStorageDTO());
+			lottos = new Lottos(new LottoCount(Integer.parseInt(money)));
+			outputView.printLottos(lottos.getLottosDTO());
 		} catch (Exception e) {
 			outputView.printErrorMessage(e.getMessage());
 			makeLottos();
@@ -95,7 +95,7 @@ public class LottoController {
 	}
 
 	private void compareLottoWithWinningNumber() {
-		lottoStorage.checkWithWinningNumberAndBonus(bonusBall.getBonusBallDTO(),
+		lottos.checkWithWinningNumberAndBonus(bonusBall.getBonusBallDTO(),
 			lottoWinningNumber.getWinningNumbersDTO(), rateOfReturn);
 	}
 
