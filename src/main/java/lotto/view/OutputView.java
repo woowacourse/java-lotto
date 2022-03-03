@@ -7,7 +7,8 @@ import lotto.domain.Rank;
 
 public class OutputView {
 
-    private static final String LOTTO_COUNT_FORMAT = "개를 구매했습니다.";
+    private static final String SINGLE_LOTTO_COUNT_FORMAT = "개를 구매했습니다.";
+    private static final String LOTTO_COUNT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String STATISTICS_GUIDE_MESSAGE = "당첨 통계\n---------";
     private static final String YIELD_FORMAT = "총 수익률은 %.2f입니다.";
     private static final String STATISTICS_FORMAT = " (%d원) - %d개";
@@ -15,8 +16,15 @@ public class OutputView {
     private static final String YIELD_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final int YIELD_STANDARD = 1;
 
+    public static void displaySingleLottoCount(int count) {
+        System.out.println(count + SINGLE_LOTTO_COUNT_FORMAT);
+    }
+
+    public static void displayLottoCount(int manualLottoCount, int possibleLottoCount) {
+        System.out.printf((LOTTO_COUNT_FORMAT) + "%n", manualLottoCount, possibleLottoCount);
+    }
+
     public static void displayLottoTickets(LottoTicketsDTO lottoTickets) {
-        System.out.println(lottoTickets.getLottoTickets().size() + LOTTO_COUNT_FORMAT);
         for (LottoTicketDTO lottoTicket : lottoTickets.getLottoTickets()) {
             System.out.println(lottoTicket.getLottoNumbers().toString());
         }
