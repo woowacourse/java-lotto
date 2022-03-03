@@ -20,16 +20,16 @@ public class LottoTicketCount {
         if (autoTicketCount < 0) {
             throw new IllegalArgumentException(LOTTO_TICKET_COUNT_MAX_ERROR_MESSAGE);
         }
-        if (manualTicketCount < 0  || manualTicketCount + autoTicketCount <= 0) {
+        if (manualTicketCount < 0 || manualTicketCount + autoTicketCount <= 0) {
             throw new IllegalArgumentException(LOTTO_TICKET_COUNT_LESS_ZERO_ERROR_MESSAGE);
         }
     }
 
-    public int getManualCount() {
+    public int ofManual() {
         return manualTicketCount;
     }
 
-    public int getAutoCount() {
+    public int ofAuto() {
         return autoTicketCount;
     }
 }

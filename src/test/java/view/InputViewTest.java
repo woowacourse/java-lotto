@@ -95,7 +95,7 @@ class InputViewTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        assertThatThrownBy(() -> InputView.inputManualTicketGroup(3))
+        assertThatThrownBy(() -> InputView.inputManualNums(3))
                 .isInstanceOf(Exception.class);
     }
 

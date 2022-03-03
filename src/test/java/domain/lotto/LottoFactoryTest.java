@@ -19,7 +19,7 @@ class LottoFactoryTest {
 
     @Test
     void 일부터_육까지_여섯개_번호생성_확인() {
-        Lotto lotto = LottoFactory.createLotto(NumsGenerator.generate(nums));
+        Lotto lotto = Lotto.from(NumsGenerator.generate(nums));
         System.out.println(lotto);
         assertThat(lotto)
                 .extracting("lotto")
@@ -35,7 +35,7 @@ class LottoFactoryTest {
 
     @Test
     void 당첨번호_생성_값_확인() {
-        WinNumbers winNumbers = LottoFactory.createWinNums(NumsGenerator.generate(nums), LottoNumber.getInstance(10));
+        WinNumbers winNumbers = LottoFactory.createWinNums(nums, 10);
         assertThat(winNumbers)
                 .extracting("lotto")
                 .extracting("lotto")
@@ -51,8 +51,18 @@ class LottoFactoryTest {
 
     @Test
     void 당첨번호_생성_보너스_확인() {
-        WinNumbers winNumbers = LottoFactory.createWinNums(NumsGenerator.generate(nums), LottoNumber.getInstance(10));
+        WinNumbers winNumbers = LottoFactory.createWinNums(nums, 10);
         assertThat(winNumbers.getBonus())
                 .isEqualTo(LottoNumber.getInstance(10));
+    }
+
+    @Test
+    void 로또티켓_생성_검사() {
+        List<Lotto> lottos = LottoFactory
+                .createLottos(LottoTicketCount
+                                .of(1, 1)
+                        , List.of(nums));
+        assertThat(lottos)
+                .containsOnly(Lotto.from(NumsGenerator.generate(nums)));
     }
 }

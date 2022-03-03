@@ -24,8 +24,7 @@ class OutputViewTest {
 
     @BeforeEach
     void setup() {
-        winNumbers = LottoFactory.createWinNums(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                LottoNumber.getInstance(10));
+        winNumbers = LottoFactory.createWinNums(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
     }
 
     @Test
@@ -34,9 +33,9 @@ class OutputViewTest {
         System.setOut(new PrintStream(out));
 
         List<Lotto> lottoTickets = new ArrayList<>();
-        Lotto lotto1 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto lotto1 = Lotto.from(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottoTickets.add(lotto1);
-        Lotto lotto2 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(7, 8, 9, 10, 11, 12)));
+        Lotto lotto2 = Lotto.from(NumsGenerator.generate(Arrays.asList(7, 8, 9, 10, 11, 12)));
         lottoTickets.add(lotto2);
 
         LottoTicketCount count = LottoTicketCount.of(2, 1);
@@ -58,8 +57,8 @@ class OutputViewTest {
         System.setOut(new PrintStream(out));
 
         //given
-        Lotto lotto1 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        Lotto lotto3 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 9)));
+        Lotto lotto1 = Lotto.from(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto lotto3 = Lotto.from(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 9)));
 
         //when
         Result result = Result.of(Arrays.asList(lotto1, lotto3), winNumbers);

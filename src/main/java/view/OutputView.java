@@ -23,7 +23,7 @@ public class OutputView {
     public static final String NO_MESSAGE = " 아니";
 
     public static void printLottoTickets(final LottoTicketCount count, final List<Lotto> lottoTickets) {
-        System.out.printf(BUY_MESSAGE, count.getManualCount(), count.getAutoCount());
+        System.out.printf(BUY_MESSAGE, count.ofManual(), count.ofAuto());
         for (Lotto lotto : lottoTickets) {
             printLottoNumbers(lotto);
         }

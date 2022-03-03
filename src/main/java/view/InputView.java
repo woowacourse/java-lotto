@@ -38,7 +38,7 @@ public class InputView {
         return inputLottoNums();
     }
 
-    public static List<List<Integer>> inputManualTicketGroup(int repeatCount) {
+    public static List<List<Integer>> inputManualNums(int repeatCount) {
         List<List<Integer>> numsGroup = new ArrayList<>();
         System.out.println(MANUAL_TICKET_NUMBS_GROUP_MESSAGE);
         for (int i = 0; i < repeatCount; i++) {

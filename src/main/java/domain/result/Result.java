@@ -18,14 +18,14 @@ public class Result {
         }
     }
 
+    public static Result of(List<Lotto> lottos, WinNumbers winNumbers) {
+        return new Result(lottos, winNumbers);
+    }
+
     private void validate(List<Lotto> lottos) {
         if (lottos == null || lottos.size() == 0) {
             throw new IllegalArgumentException(LOTTOS_NULL_ERROR_MESSAGE);
         }
-    }
-
-    public static Result of(List<Lotto> lottos, WinNumbers winNumbers) {
-        return new Result(lottos, winNumbers);
     }
 
     private void add(final Rank rank) {
