@@ -1,7 +1,5 @@
 package lotto.domain.money;
 
-import java.util.Objects;
-
 import lotto.utils.MoneyUnit;
 
 public class Money {
@@ -19,23 +17,6 @@ public class Money {
 
     public double divide(final long money) {
         return (double) money / this.money;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null || getClass() != object.getClass()) {
-            return false;
-        }
-        Money otherMoney = (Money) object;
-        return money == otherMoney.money;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(money);
     }
 
 }
