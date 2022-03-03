@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import lotto.config.ControllerConfig;
 import lotto.dto.LottoTicketResponse;
 
-class PurchaseControllerTest {
+class AutoPurchaseControllerTest {
 
     @Test
     @DisplayName("금액으로 입력한 문자열로 로또를 구매할 수 있다.")
