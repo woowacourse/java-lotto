@@ -25,7 +25,7 @@ public class LottoTest {
 			.map(number -> LottoNumber.valueOf(number))
 			.collect(Collectors.toList()));
 		BonusBallDTO bonusBallDTO = new BonusBallDTO(LottoNumber.valueOf(8));
-		assertThat(lotto.match(bonusBallDTO, lottoWinningNumberDTO)).isEqualTo(Rank.FIVE);
+		assertThat(lotto.match(bonusBallDTO, lottoWinningNumberDTO)).isEqualTo(Rank.THIRD);
 	}
 
 	@Test
@@ -38,6 +38,6 @@ public class LottoTest {
 			.map(number -> LottoNumber.valueOf(number))
 			.collect(Collectors.toList()));
 		BonusBallDTO bonusBallDTO = new BonusBallDTO(LottoNumber.valueOf(6));
-		assertThat(lotto.match(bonusBallDTO, lottoWinningNumberDTO)).isEqualTo(Rank.BONUS);
+		assertThat(lotto.match(bonusBallDTO, lottoWinningNumberDTO)).isEqualTo(Rank.SECOND);
 	}
 }

@@ -1,14 +1,12 @@
 package model.result;
 
 public enum Rank {
-	ZERO(0, 0),
-	ONE(1, 0),
-	TWO(2, 0),
-	THREE(3, 5000),
-	FOUR(4, 50000),
-	FIVE(5, 1500000),
-	BONUS(5, 30000000),
-	SIX(6, 2000000000);
+	FIRST(6, 2000000000),
+	SECOND(5, 30000000),
+	THIRD(5, 1500000),
+	FOURTH(4, 50000),
+	FIFTH(3, 5000),
+	FAIL(0, 0);
 
 	private static final int REWARD_NUMBER = 3;
 

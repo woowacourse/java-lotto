@@ -105,7 +105,7 @@ public class LottoController {
 			.filter(rank -> rank.getMatchNumber() >= 3)
 			.forEach(statistics -> outputView.printResult(statistics.getMatchNumber(), statistics.getValue(),
 				rateOfReturn.getCountOfResult(statistics),
-				Rank.BONUS.getValue()));
+				Rank.SECOND.getValue()));
 		outputView.printRateOfReturn(rateOfReturn.getRateOfReturn());
 	}
 

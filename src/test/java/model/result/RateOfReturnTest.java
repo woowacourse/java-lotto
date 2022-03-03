@@ -21,9 +21,9 @@ public class RateOfReturnTest {
 	@DisplayName("수익률이 정상적으로 출력되는지 테스트")
 	void getRateOfReturn() {
 		RateOfReturn rateOfReturn = new RateOfReturn(1000);
-		rateOfReturn.increaseCountOfRank(Rank.THREE);
-		rateOfReturn.increaseCountOfRank(Rank.BONUS);
+		rateOfReturn.increaseCountOfRank(Rank.FIFTH);
+		rateOfReturn.increaseCountOfRank(Rank.SECOND);
 		assertThat(rateOfReturn.getRateOfReturn()).isEqualTo(
-			(Rank.THREE.getValue() + Rank.BONUS.getValue()) / 1000);
+			(Rank.FIFTH.getValue() + Rank.SECOND.getValue()) / 1000);
 	}
 }
