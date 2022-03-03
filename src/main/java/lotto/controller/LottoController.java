@@ -8,7 +8,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.Profit;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -98,8 +97,7 @@ public class LottoController {
         lottoResult.addMatchingCount(lottos, winningLotto);
         OutputView.printLottosResult(lottoResult.getLottoResult());
 
-        Profit profit = lottoResult.getProfit();
-        double profitRate = profit.calculateProfitRate(purchaseAmount);
+        double profitRate = lottoResult.calculateProfitRate(purchaseAmount);
         OutputView.printProfitRate(profitRate);
     }
 }

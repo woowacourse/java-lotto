@@ -26,15 +26,19 @@ public class LottoResult {
         }
     }
 
-    public Profit getProfit() {
-        Money totalMoney = new Money(0);
+    private Money getProfit() {
+        Money profit = new Money(0);
 
         for (Rank rank : Rank.values()) {
             Money prizeMoney = rank.getPrizeMoney();
             prizeMoney.multiply(lottoResult.get(rank));
-            totalMoney.add(prizeMoney.getMoney());
+            profit.add(prizeMoney.getMoney());
         }
 
-        return new Profit(totalMoney);
+        return profit;
+    }
+
+    public double calculateProfitRate(Money purchaseAmount) {
+        return (double)getProfit().getMoney() / purchaseAmount.getMoney();
     }
 }
