@@ -23,10 +23,10 @@ public class LottoGameMoney {
         }
     }
 
-    public LottoCount getPurchaseLottoCount(int autoLottoCount) {
-        checkPurchasableLottoCount(autoLottoCount);
+    public LottoCount getPurchaseLottoCount(int manualLottoCount) {
+        checkPurchasableLottoCount(manualLottoCount);
 
-        return new LottoCount(autoLottoCount, purchasableLottoCount() - autoLottoCount);
+        return new LottoCount(manualLottoCount, purchasableLottoCount() - manualLottoCount);
     }
 
     public void checkPurchasableLottoCount(int lottoCount) {
