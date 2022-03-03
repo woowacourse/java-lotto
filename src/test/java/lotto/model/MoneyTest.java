@@ -34,6 +34,22 @@ public class MoneyTest {
 				.hasMessage("[ERROR] 구매 금액은 1000원 단위로 입력하세요");
 	}
 
+	@DisplayName("분모가 15000, 현재 보유 금액이 5000원일 경우 rate 는 3이다")
+	@Test
+	void rate_numerator_15000_amount_5000() {
+		Money money = Money.from("5000");
+
+		assertThat(money.rate(15000)).isEqualTo(3);
+	}
+
+	@DisplayName("분모가 1000, 현재 보유 금액이 2000원일 경우 rate 는 0.5이다")
+	@Test
+	void rate_numerator_1000_amount_2000() {
+		Money money = Money.from("2000");
+
+		assertThat(money.rate(1000)).isEqualTo(0.5);
+	}
+
 	@DisplayName("2000원치 로또가 2장인지 확인한다")
 	@Test
 	public void purchase_amount_2000() {
