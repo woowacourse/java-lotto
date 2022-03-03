@@ -34,6 +34,7 @@ public class Application {
 
     private static Lottos createLottos(LottoGameMoney purchaseMoney) {
         final int manualLottoCount = InputView.getManualLottoCount();
+        purchaseMoney.checkPurchasableLottoCount(manualLottoCount);
         final List<Lotto> lottos = new ArrayList<>(createManualLottos(manualLottoCount));
 
         final int autoLottoCount = purchaseMoney.purchasableLottoCount() - manualLottoCount;

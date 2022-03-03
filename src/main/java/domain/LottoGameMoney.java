@@ -27,6 +27,12 @@ public class LottoGameMoney {
         return amount / LottoConstant.LOTTO_PRICE;
     }
 
+    public void checkPurchasableLottoCount(int lottoCount) {
+        if (lottoCount < 0 || lottoCount > purchasableLottoCount()) {
+            throw new IllegalArgumentException("구매할 수 있는 로또 갯수는 0~" + purchasableLottoCount() + "개 입니다.");
+        }
+    }
+
     public int getAmount() {
         return amount;
     }
