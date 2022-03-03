@@ -9,9 +9,9 @@ import domain.generatestrategy.LotteryGenerateStrategy;
 
 public class LotteryGame {
 
-	// private final PurchaseAmount purchaseAmount;
 	private final PurchaseInformation purchaseInformation;
 	private final LotteryGenerateStrategy lotteryGenerator;
+
 	private Lotteries lotteries;
 	private WinningLottery winningLottery;
 
@@ -19,7 +19,6 @@ public class LotteryGame {
 		this.purchaseInformation = purchaseInformation;
 		this.lotteryGenerator = lotteryGenerator;
 		createLottery();
-		// createAutoLottery();
 	}
 
 	private void createLottery() {
