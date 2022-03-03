@@ -8,13 +8,8 @@ import lotto.model.winningnumber.WinningLottoResponse;
 
 public class LottoGame {
 
-    public void makeManualLottos(List<Lotto> lottos, Lotto lotto, ManualCount manualCount) {
+    public void makeManualLottos(List<Lotto> lottos, Lotto lotto) {
         lottos.add(lotto);
-        manualCount.createManualLotto();
-    }
-
-    public boolean isPossibleMakeLottos(ManualCount manualCount) {
-        return manualCount.isEnd();
     }
 
     public LottoStorage makeLottos(LottoCount lottoCount, List<Lotto> lottos) {

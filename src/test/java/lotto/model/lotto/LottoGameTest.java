@@ -18,19 +18,6 @@ class LottoGameTest {
     private final List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
 
     @Test
-    @DisplayName("수동 로또 개수가 없는 경우")
-    void checkLottoCount() {
-        LottoGame lottoGame = new LottoGame();
-
-        ManualCount manualCount = new ManualCount(1);
-        List<Lotto> lottos = new ArrayList<>();
-        Lotto lotto = new Lotto(numbers);
-        lottoGame.makeManualLottos(lottos, lotto, manualCount);
-
-        assertThat(lottoGame.isPossibleMakeLottos(manualCount)).isTrue();
-    }
-
-    @Test
     @DisplayName("로또 생성 테스트")
     void checkCreateLotto() {
         List<Lotto> lottos = new ArrayList<>();
