@@ -21,6 +21,7 @@ public class LottoController {
 	private static final String WINNING_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 당첨 번호를 입력하세요.";
 	private static final String BONUS_BALL_BLANK_ERROR_MESSAGE = "[Error]: 보너스 볼을 입력해주세요.";
 	private static final String BONUS_BALL_NUMBER_ERROR_MESSAGE = "[Error]: 보너스 볼은 숫자여야 합니다.";
+	private static final String DELIMITER_COMMA = ",";
 
 	private final InputView inputView = new InputView();
 	private final OutputView outputView = new OutputView();
@@ -71,7 +72,7 @@ public class LottoController {
 	}
 
 	private List<String> splitWinningNumber(String input) {
-		return Arrays.stream(input.split(","))
+		return Arrays.stream(input.split(DELIMITER_COMMA))
 			.map(String::trim)
 			.collect(Collectors.toList());
 	}
