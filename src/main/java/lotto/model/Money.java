@@ -6,7 +6,7 @@ public class Money {
     private static final String ERROR_NOT_POSITIVE = "구입 금액은 양수여야 합니다.";
     private static final String ERROR_NOT_POSITIVE_SIZE = "로또 구입 금액보다 수동 로또 구매 갯수가 많습니다.";
 
-    private int money;
+    private final int money;
 
     public Money(Integer money) {
         validatePositive(money);
