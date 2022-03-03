@@ -25,7 +25,7 @@ public class Money {
     }
 
     public boolean isAffordable(int amount) {
-        return convertToAmount() < amount;
+        return convertToAmount() >= amount;
     }
 
     private void checkLottoAmount() {
