@@ -23,9 +23,9 @@ public class RankStatistic {
         rankCount.computeIfPresent(rank, (key, value) -> value + 1);
     }
 
-    public long getTotalPrize() {
+    public long getTotalWinningPrize() {
         return Arrays.stream(Rank.values())
-                .mapToLong(rank -> rank.calculatePrize(rankCount.getOrDefault(rank, 0)))
+                .mapToLong(rank -> rank.calculateWinningPrize(rankCount.getOrDefault(rank, 0)))
                 .sum();
     }
 
