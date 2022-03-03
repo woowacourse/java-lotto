@@ -66,5 +66,5 @@ public class InputView {
 			return inputData(validation, inputMessage);
 		}
 	}
-
+  
 }
