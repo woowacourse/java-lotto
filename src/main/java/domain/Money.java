@@ -4,8 +4,8 @@ import utils.Validator;
 
 public class Money {
 
-    public static final int LOTTO_PRICE = 1_000;
-    public static final String ERROR_LOWER_THAN_LOTTO_PRICE_MESSAGE = "원 미만은 입력할 수 없습니다.";
+    private static final int LOTTO_PRICE = 1_000;
+    private static final String ERROR_LOWER_THAN_LOTTO_PRICE_MESSAGE = "원 미만은 입력할 수 없습니다.";
     private static final String ERROR_UPPER_THAN_MONEY_MESSAGE = "수동으로 구매하려는 로또 수가 구입금액보다 많습니다.";
 
     private final int money;

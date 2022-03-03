@@ -9,7 +9,7 @@ import view.OutputView;
 
 public class LottoController {
 
-    public static final String ERROR_MESSAGE = "[ERROR] ";
+    private static final String ERROR_MESSAGE = "[ERROR] ";
     private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "지난주 당첨번호와 보너스가 중복일 수 없습니다.";
 
     public void start() {

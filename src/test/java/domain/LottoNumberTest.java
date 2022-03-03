@@ -1,9 +1,6 @@
 package domain;
 
-import static domain.LottoNumber.LOTTO_NUMBER_RANGE_MESSAGE;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
-import static utils.Validator.ERROR_FORMAT_MESSAGE;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +23,7 @@ class LottoNumberTest {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
             LottoNumber.getLottoNumber(number);
         });
-        assertEquals(ERROR_FORMAT_MESSAGE, exception.getMessage());
+        assertEquals("잘못된 값을 입력하였습니다.", exception.getMessage());
     }
 
     @DisplayName("로또 번호가 유효한 범위가 아닌 경우 예외를 발생시킨다.")
@@ -35,7 +32,7 @@ class LottoNumberTest {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
             LottoNumber.getLottoNumber("46");
         });
-        assertEquals(LOTTO_NUMBER_RANGE_MESSAGE, exception.getMessage());
+        assertEquals("로또 번호가 유효한 범위(1-45)가 아닙니다.", exception.getMessage());
     }
 
 }

@@ -9,10 +9,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static controller.LottoController.ERROR_MESSAGE;
-
 public class IssuedLotto {
 
+    private static final String ERROR_MESSAGE = "[ERROR] ";
     private static final int LOTTO_SIZE = 6;
 
     private final List<Lotto> issuedLotto = new ArrayList<>();

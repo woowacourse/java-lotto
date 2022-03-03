@@ -1,10 +1,7 @@
 package domain;
 
-import static domain.Money.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static utils.Validator.ERROR_FORMAT_MESSAGE;
-import static utils.Validator.ERROR_NULL_OR_EMPTY_MESSAGE;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,14 +34,14 @@ class MoneyTest {
     @ParameterizedTest
     void input_money_invalid_null(String inputMoney) {
         assertThatThrownBy(() -> new Money(inputMoney))
-                .isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_NULL_OR_EMPTY_MESSAGE);
+                .isInstanceOf(IllegalArgumentException.class).hasMessage("null 또는 빈값을 입력할 수 없습니다.");
     }
 
     @DisplayName("로또 구입 금액 입력이 유효하지 않은 경우 예외를 발생시킨다.")
     @Test
     void input_money_invalid_negative_number() {
         assertThatThrownBy(() -> new Money("999"))
-                .isInstanceOf(IllegalArgumentException.class).hasMessage(LOTTO_PRICE + ERROR_LOWER_THAN_LOTTO_PRICE_MESSAGE);
+                .isInstanceOf(IllegalArgumentException.class).hasMessage("1000원 미만은 입력할 수 없습니다.");
     }
 
     @DisplayName("로또 구입 금액 입력이 음수인 경우 예외를 발생시킨다.")
@@ -52,7 +49,7 @@ class MoneyTest {
     @ValueSource(strings = {"0", "-1"})
     void input_money_invalid(String inputMoney) {
         assertThatThrownBy(() -> new Money(inputMoney))
-                .isInstanceOf(IllegalArgumentException.class).hasMessage(ERROR_FORMAT_MESSAGE);
+                .isInstanceOf(IllegalArgumentException.class).hasMessage("잘못된 값을 입력하였습니다.");
     }
 
     @DisplayName("구입금액에 맞는 로또 발급 갯수 반환을 확인한다.")
