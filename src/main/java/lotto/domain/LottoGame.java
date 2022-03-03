@@ -10,24 +10,43 @@ import lotto.domain.vo.Lotto;
 import lotto.domain.vo.Lottos;
 import lotto.domain.vo.Money;
 import lotto.domain.vo.WinningNumbers;
-import lotto.dto.ResponsePurchaseResultsDto;
+import lotto.dto.ResponsePurchaseResults;
 import lotto.dto.ResponseWinningResultsDto;
 
 public class LottoGame {
 
     private Lottos lottos = new Lottos(new ArrayList<>());
 
-    public ResponsePurchaseResultsDto purchase(Money money, List<Lotto> manualLottos, Generator lottoGenerator) {
-        int totalCountOfPurchase = getTotalCountOfPurchase(money);
-        int countOfManualPurchase = getCountOfManualPurchase(money, manualLottos);
-        int countOfAutoPurchase = totalCountOfPurchase - countOfManualPurchase;
+    public ResponsePurchaseResults purchaseManual(List<Lotto> manualLottos, Money money) {
+        int countOfPurchase = getCountOfManualPurchase(money, manualLottos);
 
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.addAll(purchaseManual(manualLottos, countOfManualPurchase));
-        lottos.addAll(purchaseAuto(lottoGenerator, countOfAutoPurchase));
-        this.lottos = new Lottos(lottos);
+        List<Lotto> newLottos = new ArrayList<>();
+        for (int i = 0; i < countOfPurchase; i++) {
+            newLottos.add(manualLottos.get(i));
+        }
+        addAllLottos(newLottos);
 
-        return new ResponsePurchaseResultsDto(this.lottos.get(), countOfManualPurchase, countOfAutoPurchase);
+        Money changes = getChanges(money, countOfPurchase);
+        return new ResponsePurchaseResults(Collections.unmodifiableList(newLottos), changes);
+    }
+
+    public ResponsePurchaseResults purchaseAuto(Generator lottoGenerator, Money money) {
+        int countOfPurchase = getTotalCountOfPurchase(money);
+
+        List<Lotto> newLottos = new ArrayList<>();
+        for (int i = 0; i < countOfPurchase; i++) {
+            newLottos.add(lottoGenerator.generate());
+        }
+        addAllLottos(newLottos);
+
+        Money changes = getChanges(money, countOfPurchase);
+        return new ResponsePurchaseResults(Collections.unmodifiableList(newLottos), changes);
+    }
+
+    private void addAllLottos(List<Lotto> newLottos) {
+        List<Lotto> ownLottos = new ArrayList<>(lottos.get());
+        ownLottos.addAll(newLottos);
+        lottos = new Lottos(ownLottos);
     }
 
     private int getTotalCountOfPurchase(Money money) {
@@ -38,20 +57,9 @@ public class LottoGame {
         return Math.min(getTotalCountOfPurchase(money), manualLottos.size());
     }
 
-    private List<Lotto> purchaseManual(List<Lotto> manualLottos, int countOfManualPurchase) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < countOfManualPurchase; i++) {
-            lottos.add(manualLottos.get(i));
-        }
-        return lottos;
-    }
-
-    private List<Lotto> purchaseAuto(Generator lottoGenerator, int countOfAutoPurchase) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < countOfAutoPurchase; i++) {
-            lottos.add(lottoGenerator.generate());
-        }
-        return lottos;
+    private Money getChanges(Money money, int count) {
+        Money totalPrice = new Money(LOTTO_PRICE.get() * count);
+        return money.subtract(totalPrice);
     }
 
     public ResponseWinningResultsDto confirmWinnings(WinningNumbers winningNumbers) {

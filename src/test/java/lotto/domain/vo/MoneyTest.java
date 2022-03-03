@@ -14,6 +14,28 @@ public class MoneyTest {
                 .isThrownBy(() -> new Money(10000));
     }
 
+    @DisplayName("금액과 가격이 주어질 때 몇개 구매할 수 있는지 반환한다.")
+    @Test
+    void divide_test() {
+        Money money = new Money(10000);
+        Money price = new Money(3000);
+
+        int count = money.divide(price);
+
+        assertThat(count).isEqualTo(3);
+    }
+
+    @DisplayName("금액과 사용 금액이 주어질 때 남은 금액을 계산한다.")
+    @Test
+    void subtract_test() {
+        Money money = new Money(10000);
+        Money price = new Money(3000);
+
+        Money changes = money.subtract(price);
+
+        assertThat(changes.get()).isEqualTo(7000);
+    }
+
     @DisplayName("음수를 입력했을 때 예외가 발생한다")
     @Test
     void money_constructor_error_on_negative_test() {

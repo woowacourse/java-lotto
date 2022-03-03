@@ -2,6 +2,8 @@ package lotto.view;
 
 import static lotto.domain.vo.Lotto.LOTTO_PRICE;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.vo.Lotto;
@@ -31,13 +33,21 @@ public class ResultView {
     public static void printPurchaseLottos(ResponsePurchaseResultsDto dto) {
         System.out.printf(PURCHASE_RESULT_MESSAGE, dto.getManualLottoCount(), dto.getAutoLottoCount());
 
-        for (Lotto lotto : dto.getLottos()) {
+        List<Lotto> totalLottos = getTotalLottos(dto);
+        for (Lotto lotto : totalLottos) {
             String numbers = lotto.getNumbers().stream()
                     .map(lottoNumber -> Integer.toString(lottoNumber.get()))
                     .collect(Collectors.joining(PURCHASE_RESULT_DELIMITER));
             System.out.printf(PURCHASE_RESULT_PRINT_MESSAGE, numbers);
         }
         System.out.println();
+    }
+
+    private static List<Lotto> getTotalLottos(ResponsePurchaseResultsDto dto) {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(dto.getManualLottos());
+        lottos.addAll(dto.getAutoLottos());
+        return lottos;
     }
 
     public static void printResults(ResponseWinningResultsDto dto) {

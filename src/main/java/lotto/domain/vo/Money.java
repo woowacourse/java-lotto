@@ -27,6 +27,10 @@ public class Money {
         return this.money / money.money;
     }
 
+    public Money subtract(Money money) {
+        return new Money(this.money - money.money);
+    }
+
     @Override
     public String toString() {
         return "Money{" +

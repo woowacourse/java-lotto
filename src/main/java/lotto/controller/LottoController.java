@@ -7,6 +7,8 @@ import lotto.domain.generator.LottoGenerator;
 import lotto.domain.vo.Lotto;
 import lotto.domain.vo.Money;
 import lotto.domain.vo.WinningNumbers;
+import lotto.dto.ResponsePurchaseResults;
+import lotto.dto.ResponsePurchaseResultsDto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -20,18 +22,28 @@ public class LottoController {
             purchase(purchaseMoney, lottoGame);
             return;
         }
-        purchaseNothing(purchaseMoney, lottoGame);
+        purchaseNothing();
     }
 
     private void purchase(Money money, LottoGame lottoGame) {
         List<Lotto> manualLottos = InputView.requestManualLottoNumbers().getManualLottos();
-        ResultView.printPurchaseLottos(lottoGame.purchase(money, manualLottos, new LottoGenerator()));
+        ResponsePurchaseResults manualResults = lottoGame.purchaseManual(manualLottos, money);
+        ResponsePurchaseResults autoResults = lottoGame.purchaseAuto(new LottoGenerator(), manualResults.getChanges());
+        ResultView.printPurchaseLottos(new ResponsePurchaseResultsDto(manualResults, autoResults));
 
         WinningNumbers winningNumbers = InputView.requestWinningNumber();
         ResultView.printResults(lottoGame.confirmWinnings(winningNumbers));
     }
 
-    private void purchaseNothing(Money money, LottoGame lottoGame) {
-        ResultView.printPurchaseLottos(lottoGame.purchase(money, new ArrayList<>(), new LottoGenerator()));
+    private void purchaseNothing() {
+        List<Lotto> emptyLottos = new ArrayList<>();
+        Money emptyMoney = new Money(0);
+
+        ResponsePurchaseResults manualResults = new ResponsePurchaseResults(emptyLottos, emptyMoney);
+        ResponsePurchaseResults autoResults = new ResponsePurchaseResults(emptyLottos, emptyMoney);
+        ResponsePurchaseResultsDto purchaseResultsDto =
+                new ResponsePurchaseResultsDto(manualResults, autoResults);
+
+        ResultView.printPurchaseLottos(purchaseResultsDto);
     }
 }
