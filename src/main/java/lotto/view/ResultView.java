@@ -18,7 +18,6 @@ public class ResultView {
     }
 
     public static void printResultStatistics(LottoResult lottoResult) {
-        printEmptyLine();
         System.out.println("당첨 통계");
         System.out.println("---------");
         Arrays.stream(Rank.values())

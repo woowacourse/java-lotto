@@ -11,11 +11,19 @@ public class InputView {
 
     public static int insertMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        int lottoMoney = inputInteger();
+        printEmptyLine();
+        return lottoMoney;
+    }
+
+    public static int inputNumberOfManualLottos() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int numberOfManualLottos = inputInteger();
+        printEmptyLine();
+        return numberOfManualLottos;
     }
 
     public static List<Integer> inputWinningNumbers() {
-        scanner.nextLine();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningNumbers = scanner.nextLine();
         return convertStringsToIntegers(splitAndTrim(winningNumbers));
@@ -35,6 +43,18 @@ public class InputView {
 
     public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        int bonusNumber = inputInteger();
+        printEmptyLine();
+        return bonusNumber;
+    }
+
+    private static int inputInteger() {
+        int result = scanner.nextInt();
+        scanner.nextLine();
+        return result;
+    }
+
+    private static void printEmptyLine() {
+        System.out.println();
     }
 }
