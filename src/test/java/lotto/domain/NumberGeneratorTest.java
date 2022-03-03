@@ -85,4 +85,15 @@ class NumberGeneratorTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> generator.generate(3));
     }
+
+    @Test
+    @DisplayName("저장된 숫자 개수보다 더 큰 길이를 요구하면 예외를 던진다.")
+    public void throwsExceptionWhenSizeTooBig() {
+        // when
+        NumberGenerator generator = new StringInputNumberGenerator("1, 2, 3, 4, 5, 6");
+
+        // then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> generator.generate(7));
+    }
 }

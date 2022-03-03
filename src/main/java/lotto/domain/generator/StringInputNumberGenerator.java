@@ -32,9 +32,22 @@ public class StringInputNumberGenerator implements NumberGenerator {
     }
 
     private List<Integer> readLine(String line, int size) {
+        List<Integer> integers = toIntegers(line);
+        validateLength(size, integers);
+        return integers.subList(0, size);
+    }
+
+    private void validateLength(int size, List<Integer> integers) {
+        if (integers.size() < size) {
+            throw new IllegalArgumentException(String.format(
+                "입력된 리스트의 길이(%d)가 요구된 길이(%d)보다 작습니다.", integers.size(), size
+            ));
+        }
+    }
+
+    private List<Integer> toIntegers(String line) {
         return Arrays.stream(line.split(NUMBER_DELIMITER))
             .map(number -> IntegerUtils.parse(number.trim()))
-            .collect(Collectors.toList())
-            .subList(0, size);
+            .collect(Collectors.toList());
     }
 }
