@@ -37,6 +37,10 @@ public class LottoTickets {
                 .collect(Collectors.toList());
     }
 
+    private static boolean isMultiplesOfTicketPrice(int purchaseMoney) {
+        return purchaseMoney % LottoTicket.TICKET_PRICE != 0;
+    }
+
     public List<LottoTicket> getTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }

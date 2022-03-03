@@ -1,5 +1,7 @@
 package controller;
 
+import domain.LottoMoney;
+import domain.SelfPurchaseCount;
 import domain.strategy.NumberGenerateStrategy;
 import domain.LottoTicket;
 import domain.LottoResult;
@@ -46,11 +48,11 @@ public class LottoController {
 
     private void purchaseLottoTickets() {
         try {
-            int purchaseMoney = inputView.inputPurchaseMoney();
-            int selfPurchaseCount = inputView.inputSelfTicketCount();
-            purchaseMoney -= selfPurchaseCount * LottoTicket.TICKET_PRICE;
-            List<Set<Integer>> selfTicketNumbers = inputView.inputSelfTicketNumbers(selfPurchaseCount);
-            lottoGame.purchaseLottoTickets(selfTicketNumbers, purchaseMoney, generateStrategy);
+            LottoMoney purchaseMoney = new LottoMoney(inputView.inputPurchaseMoney());
+            SelfPurchaseCount selfPurchaseCount = new SelfPurchaseCount(inputView.inputSelfTicketCount());
+            purchaseMoney.purchaseSelfTicket(selfPurchaseCount.getValue());
+            List<Set<Integer>> selfTicketNumbers = inputView.inputSelfTicketNumbers(selfPurchaseCount.getValue());
+            lottoGame.purchaseLottoTickets(selfTicketNumbers, purchaseMoney.getAmount(), generateStrategy);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             purchaseLottoTickets();
