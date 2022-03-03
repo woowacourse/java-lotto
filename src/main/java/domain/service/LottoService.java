@@ -14,11 +14,11 @@ public interface LottoService {
     int MINIMUM_LOTTO_NUMBER = 1;
     int MAXIMUM_LOTTO_NUMBER = 45;
     int MINIMUM_LOTTO_QUANTITY = 1;
+    String ERROR_MESSAGE_FOR_INVALID_QUANTITY = "자동 로또 생성 수량은 1 이상으로 입력해주세요";
     List<Integer> lottoNumbers = IntStream
             .rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
             .boxed()
             .collect(toList());
-    String ERROR_MESSAGE_FOR_INVALID_QUANTITY = "자동 로또 생성 수량은 1 이상으로 입력해주세요";
 
     List<LottoNumber> getLottoNumbers();
 

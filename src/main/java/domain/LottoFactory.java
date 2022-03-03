@@ -7,11 +7,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoFactory {
-    private static final List<Integer> lottoNumbers;
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
-    private static final String ERROR_MESSAGE_FOR_INVALID_QUANTITY = "자동 로또 생성 수량은 1 이상으로 입력해주세요";
     private static final int MINIMUM_AUTO_LOTTO_QUANTITY = 1;
+    private static final String ERROR_MESSAGE_FOR_INVALID_QUANTITY = "자동 로또 생성 수량은 1 이상으로 입력해주세요";
+    private static final List<Integer> lottoNumbers;
 
     static {
         lottoNumbers = new ArrayList<>();
