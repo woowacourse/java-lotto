@@ -33,8 +33,8 @@ class LottoNumberTest {
         LottoNumber otherInstance3 = LottoNumber.from(2);
 
         // when & then
-        assertThat(sameInstance1).isEqualTo(sameInstance2);
-        assertThat(sameInstance1).isNotEqualTo(otherInstance3);
-        assertThat(sameInstance2).isNotEqualTo(otherInstance3);
+        assertThat(sameInstance1).isSameAs(sameInstance2);
+        assertThat(sameInstance1).isNotSameAs(otherInstance3);
+        assertThat(sameInstance2).isNotSameAs(otherInstance3);
     }
 }
