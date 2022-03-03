@@ -19,7 +19,7 @@ public class WinningResult {
     }
 
     public Double getRateOfReturn(final PurchaseMoney purchaseMoney) {
-        int totalInsertMoney = purchaseMoney.getPurchaseCount() * LOTTO_PRICE;
+        int totalInsertMoney = purchaseMoney.makePurchaseLottoCount() * LOTTO_PRICE;
         int totalReturn = calculateTotalReturn();
         return totalReturn / (double) totalInsertMoney;
     }

@@ -16,7 +16,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(final PurchaseMoney purchaseMoney, final Generator generator) {
-        int purchaseCount = purchaseMoney.getPurchaseCount();
+        int purchaseCount = purchaseMoney.makePurchaseLottoCount();
         lottos = IntStream
                 .rangeClosed(1, purchaseCount)
                 .mapToObj(index -> new Lotto(generator))

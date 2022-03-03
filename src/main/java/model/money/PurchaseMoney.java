@@ -25,7 +25,7 @@ public class PurchaseMoney {
         return money % LOTTO_PRICE != 0;
     }
 
-    public int getPurchaseCount() {
+    public int makePurchaseLottoCount() {
         return purchaseMoney / LOTTO_PRICE;
     }
 }

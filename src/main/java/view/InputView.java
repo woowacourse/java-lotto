@@ -14,7 +14,7 @@ public class InputView {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public int inputMoney() {
+    public int inputPurchaseMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         String money = scanner.nextLine();
         return IntegerParser.parseInteger(money);

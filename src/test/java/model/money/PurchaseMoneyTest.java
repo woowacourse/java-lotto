@@ -32,6 +32,6 @@ class PurchaseMoneyTest {
     void getPurchaseCount() {
         final PurchaseMoney purchaseMoney = new PurchaseMoney(100000);
 
-        assertThat(purchaseMoney.getPurchaseCount()).isEqualTo(100);
+        assertThat(purchaseMoney.makePurchaseLottoCount()).isEqualTo(100);
     }
 }

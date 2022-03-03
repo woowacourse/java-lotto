@@ -30,15 +30,15 @@ public class LottoController {
     }
 
     public void run() {
-        LottoMachine lottoMachine;
         PurchaseMoney purchaseMoney = insertPurchaseMoney();
+        LottoMachine lottoMachine;
         Lottos lottos = purchaseLottos(purchaseMoney, generator);
         WinningNumbers winningNumbers = insertWinningInformation();
         showWinningResult(lottos, winningNumbers, purchaseMoney);
     }
 
     private void printLottoPurchaseProcess() {
-        int purchaseMoney = inputView.inputMoney();
+        int purchaseMoney = inputView.inputPurchaseMoney();
         int purchasedManualLottoCount = inputView.inputManualLottoCount();
         ManualLottoCount manualLottoCount = new ManualLottoCount(purchasedManualLottoCount, purchaseMoney);
 
@@ -46,7 +46,7 @@ public class LottoController {
 
     private PurchaseMoney insertPurchaseMoney() {
         try {
-            int purchaseMoney = inputView.inputMoney();
+            int purchaseMoney = inputView.inputPurchaseMoney();
             return new PurchaseMoney(purchaseMoney);
         } catch (IllegalArgumentException error) {
             System.out.println(error.getMessage());
