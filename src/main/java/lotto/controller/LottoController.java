@@ -12,7 +12,7 @@ public class LottoController {
         int numberOfManualLotto = InputView.insertNumberOfManualLotto();
         List<Lotto> manualLottos = InputView.insertManualLottos(numberOfManualLotto);
         Lottos lottos = LottoGame.buyLottos(money, manualLottos);
-        ResultView.printBuyingLotto(lottos.getLottos());
+        ResultView.printBuyingLotto(lottos.getLottos(), numberOfManualLotto);
 
         LottoGame lottoGame = new LottoGame(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 

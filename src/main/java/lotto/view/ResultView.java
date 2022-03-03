@@ -8,8 +8,9 @@ import java.util.List;
 
 public class ResultView {
 
-    public static void printBuyingLotto(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void printBuyingLotto(List<Lotto> lottos, int manualLottoSize) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoSize, lottos.size() - manualLottoSize);
+        System.out.println();
         lottos.stream()
                 .map(Lotto::toIntegers)
                 .forEach(System.out::println);
