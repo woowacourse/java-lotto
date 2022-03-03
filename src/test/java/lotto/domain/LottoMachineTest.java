@@ -7,18 +7,20 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoMachineTest {
 
     @Test
     @DisplayName("자동 로또 티켓을 생성한다")
     void makeLottoTicketsAuto() {
-        LottoMachine lottoMachine = new LottoMachine(14, 0);
+        int totalTicketCount = 14;
+        LottoMachine lottoMachine = new LottoMachine(totalTicketCount, 0);
         List<Lotto> manualLottos = List.of();
 
         List<Lotto> lottoTickets = lottoMachine.makeLottoTickets(manualLottos);
-        assertThat(lottoTickets.size()).isEqualTo(14);
+        assertThat(lottoTickets.size()).isEqualTo(totalTicketCount);
     }
 
     @Test

@@ -31,7 +31,7 @@ public class LottoNumber {
 
     public static List<LottoNumber> getShuffledNumbers() {
         Collections.shuffle(LOTTO_NUMBERS);
-        return new ArrayList<>(LOTTO_NUMBERS.subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX));
+        return LOTTO_NUMBERS.subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX);
     }
 
     private void validateRange(int number) {
