@@ -9,8 +9,9 @@ public class LottoMachine {
         int totalLottoCount = money.generateCount();
         int manualLottoCount = InputView.askManualLottoCount(totalLottoCount);
         Lottos manualLottos = InputView.askManualLottoNumbers(manualLottoCount);
-        OutputView.printCountOfLotto(totalLottoCount, manualLottoCount);
-        Lottos totalLottos = getLottos(totalLottoCount - manualLottoCount, manualLottos);
+        int autoLottoCount = totalLottoCount - manualLottoCount;
+        OutputView.printCountOfLotto(autoLottoCount, manualLottoCount);
+        Lottos totalLottos = getLottos(autoLottoCount, manualLottos);
         WinningLotto winningNumber = inputWinningNumber();
         getStatistics(totalLottos, winningNumber, money);
     }

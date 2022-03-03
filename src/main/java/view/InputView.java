@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
-    private static final String INPUT_MONEY_ONLY_NUMBER_MESSAGE = "[ERROR] 숫자를 입력해주세요.";
+    private static final String NUMBER_FORMAT_ERROR_MESSAGE = "[ERROR] 숫자를 입력해주세요.";
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
@@ -37,7 +37,7 @@ public class InputView {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INPUT_MONEY_ONLY_NUMBER_MESSAGE);
+            throw new IllegalArgumentException(NUMBER_FORMAT_ERROR_MESSAGE);
         }
     }
 
