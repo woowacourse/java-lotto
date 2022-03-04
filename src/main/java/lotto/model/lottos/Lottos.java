@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.lottos;
 
 import static lotto.ValidationUtils.*;
 
@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.model.Lotto;
 import lotto.model.numbergenerator.LottoNumberGenerator;
 
 public class Lottos {
@@ -15,10 +16,9 @@ public class Lottos {
 
     public Lottos(LottoNumberGenerator lottoNumberGenerator, int count) {
         this.lottos = new ArrayList<>(generateLottos(lottoNumberGenerator, count));
-        validateEmptyCollection(this.lottos);
     }
 
-    private List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int count) {
+    public List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int count) {
         return IntStream.range(0, count)
             .mapToObj(i -> lottoNumberGenerator.generate())
             .map(Lotto::new)
@@ -27,5 +27,11 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public List<Lotto> getTotalLottos(AutoLottos autoLottos) {
+        List<Lotto> copiedLottos = new ArrayList<>(this.lottos);
+        copiedLottos.addAll(autoLottos.getLottos());
+        return List.copyOf(copiedLottos);
     }
 }

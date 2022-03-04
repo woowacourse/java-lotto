@@ -3,13 +3,17 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import lotto.model.lottos.AutoLottos;
+import lotto.model.lottos.Lottos;
 import lotto.model.numbergenerator.LottoNumberGenerator;
+import lotto.model.numbergenerator.ManualGenerator;
 
 class LottoResultTest {
 
@@ -17,9 +21,12 @@ class LottoResultTest {
     @CsvSource(value = {"6:30_000_000", "44:1_500_000"}, delimiter = ':')
     @DisplayName("2, 3등 당첨 여부를 확인한다")
     void matchNumber(int bonusNumberInt, Long totalWinningMoney) {
-        Lottos lottos = new Lottos(new TestNumberGenerator(), 1);
+        AutoLottos autoLottos = new AutoLottos(new Lottos(new TestNumberGenerator(), 1));
 
-        LottoResult lottoResult = new LottoResult(lottos, Arrays.asList(1, 2, 3, 4, 5, 45), bonusNumberInt);
+        LottoResult lottoResult = new LottoResult(new Lottos(new ManualGenerator(Collections.emptyList()),0),
+            autoLottos,
+            Arrays.asList(1, 2, 3, 4, 5, 45),
+            bonusNumberInt);
 
         assertThat(lottoResult.getTotalWinningMoney()).isEqualTo(totalWinningMoney);
     }

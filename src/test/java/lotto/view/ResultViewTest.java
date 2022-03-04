@@ -21,14 +21,15 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.model.LottoMoney;
 import lotto.model.LottoResult;
-import lotto.model.Lottos;
+import lotto.model.lottos.AutoLottos;
+import lotto.model.lottos.Lottos;
 import lotto.model.Yield;
 import lotto.model.numbergenerator.LottoNumberGenerator;
 
 class ResultViewTest {
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private final Lottos lottos = new Lottos(new TestNumberGenerator(), 2);
+    private final AutoLottos autoLottos = new AutoLottos(new Lottos(new TestNumberGenerator(), 2));
     private final Lottos manualLottos = new Lottos(new ManualTestNumberGenerator(), 1);
 
     @BeforeEach
@@ -39,7 +40,7 @@ class ResultViewTest {
     @Test
     @DisplayName("생성된 로또 출력 확인")
     void printGeneratedLottosTest() {
-        ResultView.printGeneratedLottos(manualLottos.getLottos(), lottos.getLottos());
+        ResultView.printGeneratedLottos(manualLottos.getLottos(), autoLottos.getLottos());
 
         assertThat(outputStreamCaptor.toString())
             .contains("수동으로 1장")
@@ -51,7 +52,7 @@ class ResultViewTest {
     @Test
     @DisplayName("당첨 통계 출력 확인")
     void printResultStatisticsTest() {
-        ResultView.printResultStatistics(new LottoResult(lottos, Arrays.asList(1, 2, 3, 4, 5, 6), 7));
+        ResultView.printResultStatistics(new LottoResult(manualLottos, autoLottos, Arrays.asList(1, 2, 3, 4, 5, 6), 7));
 
         assertThat(outputStreamCaptor.toString())
             .contains("5개 일치, 보너스 볼 일치(30000000원)- 1개")
