@@ -21,8 +21,8 @@ class WinningResultTest {
                 LottoMatchKind.FIVE, 1,
                 LottoMatchKind.FIVE_BONUS, 1,
                 LottoMatchKind.SIX, 1);
-        final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount.TotalPurchaseAmountBuilder()
-                .setTotalAmount("5000")
+        final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount.Builder()
+                .setTotalAmount(5000)
                 .setLottoPrice(1000)
                 .build();
         final WinningResult winningResult = new WinningResult(winningNumberByMatchKind, totalPurchaseAmount);
