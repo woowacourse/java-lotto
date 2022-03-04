@@ -15,11 +15,10 @@ public class InputView {
     private static final String LOTTO_ERROR_PREFIX = "로또 번호는";
     private static final String NOT_NUMBER_ERROR = "숫자로 입력해주세요.";
     private static final String NOT_INSTANTIATION_ERROR = "InputView 객체를 생성할 수 없습니다.";
-    private static final String NOT_POSITIVE_ERROR = "0이 넘는 값을 입력하세요.";
+    private static final String NEGATIVE_ERROR = "0 이상의 값을 입력하세요.";
     private static final String EMPTY = "";
     private static final String BLANK = " ";
     private static final String DELIMITER = ",";
-    private static final int POSITIVE_LOWER_BOUND = 1;
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -90,7 +89,7 @@ public class InputView {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
         final int manualLottoCount = convertToNumber(scanner.nextLine(), NOT_NUMBER_ERROR);
         try {
-            checkPositive(manualLottoCount);
+            checkMoreThanZero(manualLottoCount);
             return manualLottoCount;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -98,9 +97,9 @@ public class InputView {
         }
     }
 
-    private static void checkPositive(int number) {
-        if (number < POSITIVE_LOWER_BOUND) {
-            throw new IllegalArgumentException(NOT_POSITIVE_ERROR);
+    private static void checkMoreThanZero(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException(NEGATIVE_ERROR);
         }
     }
 
