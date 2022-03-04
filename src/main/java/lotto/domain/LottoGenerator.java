@@ -25,13 +25,13 @@ public class LottoGenerator {
         return new LottoGenerator(manualCount, totalCount - manualCount);
     }
 
-    private static void checkManualCountPositiveNumber(final int manualCount) {
+    private void checkManualCountPositiveNumber(final int manualCount) {
         if (manualCount < MIN_LOTTO_COUNT) {
             throw new IllegalArgumentException("[ERROR] 구매할 수동 로또 수는 0이상을 입력해주세요.");
         }
     }
 
-    private static void checkInputMoneyEnough(final int autoCount) {
+    private void checkInputMoneyEnough(final int autoCount) {
         if (autoCount < MIN_LOTTO_COUNT) {
             throw new IllegalArgumentException("[ERROR] 자동 구매 개수는 0개 이상이어야 합니다.");
         }
