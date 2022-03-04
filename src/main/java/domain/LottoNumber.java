@@ -2,12 +2,9 @@ package domain;
 
 import static utils.Messages.LOTTO_NUMBER_RANGE_ERROR_MESSAGE;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -29,7 +26,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber valueOf(final int number) {
-        validate(number);
+        isInCache(number);
         return CACHE.get(number);
     }
 
@@ -41,8 +38,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return number;
     }
 
-    private static void validate(int number) {
-        if (number < LOTTO_NUMBER_LOWER_BOUND || number > LOTTO_NUMBER_UPPER_BOUND) {
+    private static void isInCache(int number) {
+        if (!CACHE.containsKey(number)) {
             throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR_MESSAGE);
         }
     }
