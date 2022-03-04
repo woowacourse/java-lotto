@@ -1,25 +1,19 @@
 package domain;
 
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class WinningTicket {
-    private final Set<LottoNumber> winningNumbers;
+    private final LottoTicket ticket;
     private final LottoNumber bonusNumber;
 
-    private WinningTicket(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        this.winningNumbers = winningNumbers;
+    private WinningTicket(LottoTicket ticket, LottoNumber bonusNumber) {
+        this.ticket = ticket;
         this.bonusNumber = bonusNumber;
     }
 
     public static WinningTicket of(Set<Integer> winningNumberValues, int bonusNumber) {
         validateSize(winningNumberValues);
-        Set<LottoNumber> winningNumbers = winningNumberValues.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
-
-        return new WinningTicket(winningNumbers, new LottoNumber(bonusNumber));
+        return new WinningTicket(LottoTicket.from(winningNumberValues), new LottoNumber(bonusNumber));
     }
 
     private static void validateSize(Set<Integer> winningNumbers) {
@@ -28,17 +22,11 @@ public class WinningTicket {
         }
     }
 
-    public List<Integer> winningNumberValues() {
-        return winningNumbers.stream()
-                .map(LottoNumber::getValue)
-                .collect(Collectors.toList());
-    }
-
     public int compareMatchCount(LottoTicket lottoTicket) {
-        Set<Integer> lottoNumbers = lottoTicket.getLottoNumberValues();
-        List<Integer> winningNumbers = this.winningNumberValues();
-        return (int) lottoNumbers.stream()
-                .filter(winningNumbers::contains)
+        Set<Integer> lottoNumberValues = lottoTicket.getLottoNumberValues();
+        Set<Integer> winningNumberValues = ticket.getLottoNumberValues();
+        return (int) lottoNumberValues.stream()
+                .filter(winningNumberValues::contains)
                 .count();
     }
 

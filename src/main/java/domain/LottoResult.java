@@ -63,13 +63,6 @@ public class LottoResult {
         return count >= WINNING_FLAG;
     }
 
-    public int sumTotalReturn() {
-        return countOfWinning.entrySet()
-                .stream()
-                .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
-                .sum();
-    }
-
     public Map<WinningPrize, Integer> getCountOfWinning() {
         return Collections.unmodifiableMap(countOfWinning);
     }
@@ -77,5 +70,12 @@ public class LottoResult {
     public double calculateLottoRateOfReturn() {
         int totalReturn = sumTotalReturn();
         return totalReturn / (double)(purchaseTicketCount * LottoTicket.TICKET_PRICE);
+    }
+
+    private int sumTotalReturn() {
+        return countOfWinning.entrySet()
+                .stream()
+                .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
+                .sum();
     }
 }
