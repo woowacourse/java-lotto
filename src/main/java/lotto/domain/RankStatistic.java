@@ -2,19 +2,20 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class RankStatistic {
 
     private final Map<Rank, Integer> rankCount;
 
-    public RankStatistic(User user, WinningNumbers winningNumbers) {
-        this.rankCount = calculateRankCount(user, winningNumbers);
+    public RankStatistic(List<Lotto> lottos, WinningNumbers winningNumbers) {
+        this.rankCount = calculateRankCount(lottos, winningNumbers);
     }
 
-    private EnumMap<Rank, Integer> calculateRankCount(User user, WinningNumbers winningNumbers) {
+    private EnumMap<Rank, Integer> calculateRankCount(List<Lotto> lottos, WinningNumbers winningNumbers) {
         EnumMap<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
-        user.getLottos().forEach(lotto -> increaseCount(rankCount, winningNumbers.findRankOf(lotto)));
+        lottos.forEach(lotto -> increaseCount(rankCount, winningNumbers.findRankOf(lotto)));
         return rankCount;
     }
 

@@ -18,7 +18,7 @@ public class Controller {
         int countOfManualLotto = InputView.inputCountOfManualLotto();
         User user = User.generate(money, countOfManualLotto, inputManualLottos(countOfManualLotto));
         OutputView.printLottos(user);
-        OutputView.printLottoResult(user, new RankStatistic(user, inputWinningNumbers()));
+        OutputView.printLottoResult(user, new RankStatistic(user.getLottos(), inputWinningNumbers()));
     }
 
     private List<Lotto> inputManualLottos(int countOfManualLotto) {

@@ -17,7 +17,7 @@ class RankStatisticTest {
         user = User.generate(2000, 2,
                 List.of(Lotto.generateByManual("1,2,3,4,5,6"), Lotto.generateByManual("1,2,3,14,15,16")));
         winningNumbers = WinningNumbers.generateByString("1,2,3,4,5,7", "6");
-        rankStatistic = new RankStatistic(user, winningNumbers);
+        rankStatistic = new RankStatistic(user.getLottos(), winningNumbers);
     }
 
     @Test
