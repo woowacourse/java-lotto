@@ -1,24 +1,22 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Ball implements Comparable<Ball> {
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
     private static final String ERROR_LOTTO_NUMBER = "로또 숫자가 아닙니다";
-    public static final List<Ball> cacheBalls = new ArrayList<>();
+    public static final Map<Integer, Ball> cacheBalls = new HashMap<>();
 
     private final int number;
 
     static {
-        cacheBalls.addAll(IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER + 1)
-                .mapToObj(Ball::new)
-                .collect(Collectors.toList()));
+        for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++) {
+            cacheBalls.put(i, new Ball(i));
+        }
     }
 
     private Ball(final int number) {
@@ -27,10 +25,10 @@ public class Ball implements Comparable<Ball> {
     }
 
     public static Ball of(final int number) {
-        return cacheBalls.stream()
-                .filter(ball -> ball.number == number)
-                .findFirst()
-                .orElse(new Ball(number));
+        if (cacheBalls.containsKey(number)) {
+            return cacheBalls.get(number);
+        }
+        return new Ball(number);
     }
 
     public int getNumber() {
@@ -38,7 +36,7 @@ public class Ball implements Comparable<Ball> {
     }
 
     public static List<Ball> getTotalBalls() {
-        return Collections.unmodifiableList(cacheBalls);
+        return List.copyOf(cacheBalls.values());
     }
 
     private static void validateLottoNumber(final int number) {
