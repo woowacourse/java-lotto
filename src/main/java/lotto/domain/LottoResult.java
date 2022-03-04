@@ -18,10 +18,11 @@ public class LottoResult {
     }
 
     public static LottoResult createLottoResult(final Lottos lottos, final WinLotto winLotto) {
-        return new LottoResult(
-                lottos.getLottos().stream()
-                        .collect(groupingBy(winLotto::matchResult
-                                , summingInt(value -> MATCH_RESULT_ADD_UNIT))));
+        final Map<Rank, Integer> rankResult = lottos.getLottos().stream()
+                .collect(groupingBy(winLotto::matchResult
+                        , summingInt(value -> MATCH_RESULT_ADD_UNIT)));
+
+        return new LottoResult(rankResult);
     }
 
     public double calculateYield() {
