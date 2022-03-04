@@ -11,6 +11,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningLottoTest {
 
+    @ParameterizedTest
+    @MethodSource("lottoAndExpectedPrize")
+    void calculatePrize_rightPrize(Lotto lotto, Prize expected) {
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(10, 15, 20, 25, 30, 35)), 40);
+        assertThat(winningLotto.calculatePrize(lotto)).isEqualTo(expected);
+    }
+
     private static Stream<Arguments> lottoAndExpectedPrize() {
         return Stream.of(
                 Arguments.of(new Lotto(List.of(3, 4, 5, 6, 10, 15)), Prize.FAIL),
@@ -19,13 +26,6 @@ class WinningLottoTest {
                 Arguments.of(new Lotto(List.of(6, 10, 15, 20, 25, 30)), Prize.THIRD),
                 Arguments.of(new Lotto(List.of(10, 15, 20, 25, 30, 40)), Prize.SECOND),
                 Arguments.of(new Lotto(List.of(10, 15, 20, 25, 30, 35)), Prize.FIRST));
-    }
-
-    @ParameterizedTest
-    @MethodSource("lottoAndExpectedPrize")
-    void calculatePrize_rightPrize(Lotto lotto, Prize expected) {
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(10, 15, 20, 25, 30, 35)), 40);
-        assertThat(winningLotto.calculatePrize(lotto)).isEqualTo(expected);
     }
 
 }

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    public static final int PRICE = 1000;
     private static final int LOTTO_SIZE = 6;
     private static final String ERROR_LOTTO_SIZE = "로또는 여섯 개의 숫자를 입력하셔야 합니다.";
     private static final String ERROR_LOTTO_DUPLICATE_BALL = "로또는 중복되는 숫자가 없어야 합니다.";
@@ -17,7 +18,8 @@ public class Lotto {
         checkRightSize(numbers);
         checkNoDuplicated(numbers);
         lottoBalls = new ArrayList<>();
-        numbers.forEach(number -> lottoBalls.add(new LottoBall(number)));
+        numbers.stream().sorted()
+                .forEach(number -> lottoBalls.add(new LottoBall(number)));
     }
 
     public boolean hasBall(LottoBall lottoBall) {
