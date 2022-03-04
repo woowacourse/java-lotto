@@ -6,19 +6,19 @@ import java.util.Set;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
-    private static final Set<Integer> lottoNumbers = new HashSet<>();
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final Set<Integer> numbers = new HashSet<>();
+    private static final int MIN = 1;
+    private static final int MAX = 45;
 
     static {
-        IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-                .forEach(lottoNumbers::add);
+        IntStream.range(MIN, MAX)
+                .forEach(numbers::add);
     }
 
     private LottoNumbers() {
     }
 
-    public static Set<Integer> getLottoNumbers() {
-        return Collections.unmodifiableSet(lottoNumbers);
+    public static Set<Integer> getNumbers() {
+        return Collections.unmodifiableSet(numbers);
     }
 }
