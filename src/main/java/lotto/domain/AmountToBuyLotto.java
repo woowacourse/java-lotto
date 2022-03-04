@@ -40,7 +40,7 @@ public final class AmountToBuyLotto {
 
 
     public int calculateAutomaticLottoCount(ManualLottoCount manualLottoCount) {
-        return calculateLottoCount() - manualLottoCount.getValue();
+        return manualLottoCount.subtract(calculateLottoCount());
     }
 
     @Override

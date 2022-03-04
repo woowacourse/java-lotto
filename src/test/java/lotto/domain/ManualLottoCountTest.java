@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -22,5 +23,13 @@ public class ManualLottoCountTest {
         int upperBound = 2;
 
         assertThatNoException().isThrownBy(() -> ManualLottoCount.of(inputCount, upperBound));
+    }
+
+    @Test
+    void 뺄셈_연산_기능() {
+        ManualLottoCount manualLottoCount = ManualLottoCount.of(2, 2);
+
+        assertThat(manualLottoCount.subtract(2)).isEqualTo(0);
+
     }
 }
