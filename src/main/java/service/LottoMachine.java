@@ -22,9 +22,7 @@ public class LottoMachine {
 
 	public static Lottos createManualAndAutoMixLottos(Lottos manualLottos, int lottoCount) {
 		List<Lotto> lottos = new ArrayList<>(manualLottos.getLottos());
-		for (int count = 0; count < lottoCount; count++) {
-			lottos.add(createAutoLotto());
-		}
+		lottos.addAll(createLottos(lottoCount).getLottos());
 		return new Lottos(lottos);
 	}
 
