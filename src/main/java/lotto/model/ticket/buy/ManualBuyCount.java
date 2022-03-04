@@ -25,6 +25,7 @@ public class ManualBuyCount {
     }
 
     public void decrease() {
+        validate(count);
         count -= 1;
     }
 
