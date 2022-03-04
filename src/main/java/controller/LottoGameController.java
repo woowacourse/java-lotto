@@ -1,6 +1,7 @@
 package controller;
 
-import domain.*;
+import domain.AnswerLotto;
+import domain.LottoMachine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,44 +10,30 @@ import static view.InputView.*;
 import static view.OutputView.*;
 
 public class LottoGameController {
-	private final LottoTickets lottoTickets = new LottoTickets();
+
+	LottoMachine lottoMachine;
 
 	public void run() {
 		try {
-			Money money = new Money(inputMoney());
-			purchaseLotto(money, inputManualLottoCount());
-			AnswerLotto answerLotto = AnswerLotto.of(inputAnswerNumbers(), inputBonusNumber());
-			Result result = lottoTickets.generateResult(answerLotto);
-			printResults(result, result.calculateProfitRate(money.getValue()));
+			lottoMachine = new LottoMachine(inputMoney());
+			purchase();
+			printResult(lottoMachine.generateResult(AnswerLotto.of(inputAnswerNumbers(), inputBonusNumber())));
 		} catch (IllegalArgumentException e) {
 			printErrorMessage(e.getMessage());
 		}
 	}
 
-	private void purchaseLotto(Money money, int manualCount) {
-		money.canPurchase(manualCount);
-		int randomCount = money.calculateTotalCount() - manualCount;
-
-		purchaseManualLotto(manualCount);
-		purchaseRandomLotto(randomCount);
-
-		printLottoTickets(manualCount, randomCount, lottoTickets);
+	private void purchase() {
+		int manualCount = inputmanualCount();
+		lottoMachine.purchase(inputTotalManualNumbers(manualCount));
+		printLottoTickets(manualCount, lottoMachine.getLottoTickets());
 	}
 
-	private void purchaseManualLotto(int count) {
-		List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
-
-		for (List<Integer> inputNumbers : inputManualNumbers(count)) {
-			manualLottoNumbers.add(new LottoNumbers(inputNumbers));
+	private List<List<Integer>> inputTotalManualNumbers(int manualCount) {
+		if (manualCount == 0) {
+			return new ArrayList<>();
 		}
-
-		lottoTickets.purchase(manualLottoNumbers);
-	}
-
-	private void purchaseRandomLotto(int count) {
-		while (count-- > 0) {
-			lottoTickets.purchase(LottoTicket.byRandom());
-		}
+		return inputManualNumbers(manualCount);
 	}
 
 }

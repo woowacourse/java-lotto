@@ -32,18 +32,18 @@ public class InputVIewTest {
 
 	@Test
 	@DisplayName("수동으로 구매할 로또 수 : 문자를 입력 한 경우 예외 발생")
-	void manualLottoCountMustBeInteger() {
+	void manualCountMustBeInteger() {
 		setInput("wooteco");
-		assertThatThrownBy(InputView::inputManualLottoCount)
+		assertThatThrownBy(InputView::inputmanualCount)
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("입력은 양의 정수만 허용됩니다.");
 	}
 
 	@Test
 	@DisplayName("수동으로 구매할 로또 수 : 빈 문자를 입력 한 경우 예외 발생")
-	void manualLottoCountMustNotBeEmpty() {
+	void manualCountMustNotBeEmpty() {
 		setInput("\n");
-		assertThatThrownBy(InputView::inputManualLottoCount)
+		assertThatThrownBy(InputView::inputmanualCount)
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("입력은 빈 입력일 수 없습니다.");
 	}

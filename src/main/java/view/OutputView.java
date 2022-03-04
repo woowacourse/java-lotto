@@ -1,7 +1,11 @@
 package view;
 
-import domain.*;
+import domain.LottoNumber;
+import domain.LottoTicket;
+import domain.Result;
+import domain.ResultStatics;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -15,9 +19,10 @@ public class OutputView {
 		System.out.println(START_ERROR + message);
 	}
 
-	public static void printLottoTickets(int manualCount, int randomCount, LottoTickets lottoTickets) {
+	public static void printLottoTickets(int manualCount, List<LottoTicket> lottoTickets) {
+		int randomCount = lottoTickets.size() - manualCount;
 		System.out.println("\n수동으로 " + manualCount + "장, 자동으로 " + randomCount + "개를 구매했습니다.");
-		for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+		for (LottoTicket lottoTicket : lottoTickets) {
 			printLottoTicket(lottoTicket);
 		}
 	}
@@ -32,12 +37,12 @@ public class OutputView {
 			+ "]");
 	}
 
-	public static void printResults(Result result, float profitRate) {
+	public static void printResult(Result result) {
 		System.out.println("\n당첨 통계");
 		System.out.println("---------");
 
 		printResult(result.getResults());
-		printProfitRate(profitRate);
+		printProfitRate(result.getProfitRate());
 	}
 
 	private static void printResult(Map<ResultStatics, Integer> result) {

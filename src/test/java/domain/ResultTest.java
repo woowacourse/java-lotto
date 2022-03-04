@@ -25,7 +25,8 @@ public class ResultTest {
 	@DisplayName("올바른 수익률을 산출하였는지 확인")
 	void correctProfitRate() {
 		for (Result result : testCase.keySet()) {
-			assertThat(result.calculateProfitRate(1000)).isEqualTo(testCase.get(result));
+			result.calculateProfitRate(1000);
+			assertThat(result.getProfitRate()).isEqualTo(testCase.get(result));
 		}
 	}
 }

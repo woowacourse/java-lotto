@@ -19,7 +19,7 @@ public class InputView {
 		return inputSingleNumber();
 	}
 
-	public static int inputManualLottoCount() {
+	public static int inputmanualCount() {
 		System.out.println("\n수동으로 구매할 로또 수를 입력해주세요.");
 		return inputSingleNumber();
 	}
