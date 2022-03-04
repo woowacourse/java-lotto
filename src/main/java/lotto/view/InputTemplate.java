@@ -13,9 +13,8 @@ public class InputTemplate {
     }
 
     public static String input(String message, StringFormatValidator validator,
-        Consumer<Exception> exceptionHandler, Supplier<String> supplier) {
-        return inputTemplate(() -> inputWithMessage(message), validator, exceptionHandler,
-            supplier);
+        Consumer<Exception> exceptionHandler) {
+        return inputTemplate(() -> inputWithMessage(message), validator, exceptionHandler);
     }
 
     private static String inputWithMessage(String message) {
@@ -24,20 +23,20 @@ public class InputTemplate {
     }
 
     private static String inputTemplate(Supplier<String> input, StringFormatValidator validator,
-        Consumer<Exception> exceptionHandler, Supplier<String> supplier) {
+        Consumer<Exception> exceptionHandler) {
         try {
             String value = input.get();
             validator.validate(value);
             return value;
         } catch (IllegalArgumentException e) {
             exceptionHandler.accept(e);
-            return supplier.get();
+            return inputTemplate(input, validator, exceptionHandler);
         }
     }
 
     public static String input(StringFormatValidator validator,
-        Consumer<Exception> exceptionHandler, Supplier<String> supplier) {
-        return inputTemplate(() -> inputWithoutMessage(), validator, exceptionHandler, supplier);
+        Consumer<Exception> exceptionHandler) {
+        return inputTemplate(() -> inputWithoutMessage(), validator, exceptionHandler);
     }
 
     private static String inputWithoutMessage() {

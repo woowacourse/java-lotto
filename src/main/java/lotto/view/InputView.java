@@ -16,8 +16,7 @@ public class InputView {
     }
 
     public static String inputMoneyText(Consumer<Exception> exceptionHandler) {
-        return input("구입금액을 입력해 주세요.", moneyValidator(), exceptionHandler,
-            () -> inputMoneyText(exceptionHandler));
+        return input("구입금액을 입력해 주세요.", moneyValidator(), exceptionHandler);
     }
 
     public static List<String> inputManualLottoesText(Consumer<Exception> exceptionHandler) {
@@ -27,8 +26,7 @@ public class InputView {
     }
 
     private static String inputManualLottoSizeText(Consumer<Exception> exceptionHandler) {
-        return input("수동으로 구매할 로또 수를 입력해 주세요.", numberValidator(), exceptionHandler,
-            () -> inputManualLottoSizeText(exceptionHandler));
+        return input("수동으로 구매할 로또 수를 입력해 주세요.", numberValidator(), exceptionHandler);
     }
 
     private static List<String> inputManualLottoesText(Consumer<Exception> exceptionHandler,
@@ -45,18 +43,15 @@ public class InputView {
     }
 
     private static String inputManualLottoText(Consumer<Exception> exceptionHandler) {
-        return input(lottoValidator(), exceptionHandler,
-            () -> inputManualLottoText(exceptionHandler));
+        return input(lottoValidator(), exceptionHandler);
     }
 
     public static String inputWinnerLottoText(Consumer<Exception> exceptionHandler) {
-        return input("지난 주 당첨 번호를 입력해 주세요.", lottoValidator(), exceptionHandler,
-            () -> inputWinnerLottoText(exceptionHandler));
+        return input("지난 주 당첨 번호를 입력해 주세요.", lottoValidator(), exceptionHandler);
     }
 
     public static String inputBonusText(Consumer<Exception> exceptionHandler) {
-        return input("보너스 볼을 입력해 주세요.", numberValidator(), exceptionHandler,
-            () -> inputBonusText(exceptionHandler));
+        return input("보너스 볼을 입력해 주세요.", numberValidator(), exceptionHandler);
     }
 
 }
