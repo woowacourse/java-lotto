@@ -3,11 +3,11 @@ package domain;
 import java.util.List;
 
 public enum Rank {
-    FIFTH(5, 3, 5000,  false),
-    FOURTH(4, 4, 50000,  false),
-    THIRD(3, 5, 1500000,  false),
-    SECOND(2, 5, 30000000,  true),
-    FIRST(1, 6, 2000000000,  false);
+    FIFTH(5, 3, 5000, false),
+    FOURTH(4, 4, 50000, false),
+    THIRD(3, 5, 1500000, false),
+    SECOND(2, 5, 30000000, true),
+    FIRST(1, 6, 2000000000, false);
 
     private static final double DEFAULT_TOTAL_INCOME = 0;
 
@@ -46,7 +46,7 @@ public enum Rank {
 
     private static void judgeHit(Result result, Rank value, HitResult hitResult) {
         if (result.compare(value)) {
-           hitResult.increase(value);
+            hitResult.increase(value);
         }
     }
 
