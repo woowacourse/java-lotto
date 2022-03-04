@@ -12,8 +12,8 @@ public class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(int lottoCount, LottoTicketGenerator lottoTicketGenerator) {
-        this.lottoTickets = generateTickets(lottoCount, lottoTicketGenerator);
+    public LottoTickets(int autoCount, List<LottoTicket> manualLottoTickets, LottoTicketGenerator lottoTicketGenerator) {
+        this.lottoTickets = generateTickets(autoCount, manualLottoTickets, lottoTicketGenerator);
     }
 
     public int totalCount() {
@@ -35,10 +35,10 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    private List<LottoTicket> generateTickets(int lottoCount, LottoTicketGenerator lottoTicketGenerator) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+    private List<LottoTicket> generateTickets(int autoCount, List<LottoTicket> manualLottoTickets, LottoTicketGenerator lottoTicketGenerator) {
+        List<LottoTicket> lottoTickets = new ArrayList<>(manualLottoTickets);
 
-        for (int i = 0; i < lottoCount; i++) {
+        for (int i = 0; i < autoCount; i++) {
             LottoTicket lottoTicket = new LottoTicket(lottoTicketGenerator);
 
             lottoTickets.add(lottoTicket);

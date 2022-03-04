@@ -1,8 +1,8 @@
 package lotto.view;
 
+import static java.util.Arrays.*;
 import static java.util.stream.Collectors.toList;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.vo.LottoNumber;
@@ -23,21 +23,43 @@ public class InputView {
         return translateInteger(scanner.nextLine());
     }
 
+    public int getManualCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        return translateInteger(scanner.nextLine());
+    }
+
+    public List<LottoNumber> getManualLottoNumber() {
+        String manualNumbers = scanner.nextLine();
+
+        String[] splitInput = manualNumbers.split(SEPARATOR);
+
+        List<String> result = stream(splitInput)
+                .map(String::trim)
+                .collect(toList());
+
+        return translateLottoNumberList(result);
+    }
+
     public List<LottoNumber> getNormalWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         String inputWinningNumbers = scanner.nextLine();
 
-        List<String> strings = Arrays.asList(inputWinningNumbers.replace(" ", "").split(SEPARATOR));
+        String[] splitInput = inputWinningNumbers.split(SEPARATOR);
 
-        return translateLottoNumberList(strings);
+        List<String> result = stream(splitInput)
+                .map(String::trim)
+                .collect(toList());
+
+        return translateLottoNumberList(result);
     }
 
     private List<LottoNumber> translateLottoNumberList(List<String> values) {
         try {
             return values.stream()
                     .map(Integer::parseInt)
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::from)
                     .collect(toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("정수여야 합니다. 형식을 확인해주세요.");
@@ -49,7 +71,7 @@ public class InputView {
 
         int value = translateInteger(scanner.nextLine());
 
-        return new LottoNumber(value);
+        return LottoNumber.from(value);
     }
 
     private int translateInteger(String value) {

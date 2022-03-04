@@ -1,6 +1,8 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.LottoTicket;
 import lotto.domain.vo.LottoNumber;
 import lotto.domain.vo.LottoPurchaseMoney;
 import lotto.domain.LottoMachine;
@@ -24,7 +26,12 @@ public class LottoController {
     public void run() {
         LottoPurchaseMoney lottoPurchaseMoney = createMoney();
 
-        LottoTickets lottoTickets = createLottoTickets(lottoPurchaseMoney);
+        int manualCount = getManualCount(lottoPurchaseMoney);
+
+        List<LottoTicket> manualLottoTickets = createManualLottoTicket(manualCount);
+
+        LottoTickets lottoTickets = createLottoTickets(lottoPurchaseMoney, manualLottoTickets, manualCount);
+
         WinningNumbers winningNumbers = createWinningNumbers();
 
         LottoResult lottoResult = createLottoResult(lottoTickets, winningNumbers);
@@ -42,12 +49,58 @@ public class LottoController {
         }
     }
 
-    private LottoTickets createLottoTickets(LottoPurchaseMoney lottoPurchaseMoney) {
+    private int getManualCount(LottoPurchaseMoney lottoPurchaseMoney) {
+        try {
+            int manualCount = inputView.getManualCount();
+            lottoPurchaseMoney.calculate(manualCount);
+
+            return manualCount;
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+
+            return getManualCount(lottoPurchaseMoney);
+        }
+    }
+
+    private List<LottoTicket> createManualLottoTicket(int manualCount) {
+        try {
+            List<LottoTicket> manualLottoTickets = getLottoTickets(manualCount);
+
+            return manualLottoTickets;
+        } catch(IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+
+            return createManualLottoTicket(manualCount);
+        }
+    }
+
+    private List<LottoTicket> getLottoTickets(int manualCount) {
+        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+
+        if (manualCount > 0) {
+            setManualLottoTickets(manualCount, manualLottoTickets);
+        }
+        return manualLottoTickets;
+    }
+
+    private void setManualLottoTickets(int manualCount, List<LottoTicket> manualLottoTickets) {
+        outputView.printManualLottoGuide();
+
+        for (int i = 0; i < manualCount; i++) {
+            List<LottoNumber> manualLottoNumber = inputView.getManualLottoNumber();
+
+            manualLottoTickets.add(new LottoTicket(manualLottoNumber));
+        }
+    }
+
+    private LottoTickets createLottoTickets(LottoPurchaseMoney lottoPurchaseMoney, List<LottoTicket> manualLottoTickets, int manualCount) {
         LottoMachine lottoMachine = new LottoMachine();
-        LottoTickets lottoTickets = lottoMachine.purchase(lottoPurchaseMoney);
+
+        LottoTickets lottoTickets = lottoMachine.purchase(lottoPurchaseMoney, manualLottoTickets);
+
         LottoTicketsDto lottoTicketsDto = new LottoTicketsDto(lottoTickets);
 
-        outputView.printTotalCount(lottoTickets.totalCount());
+        outputView.printTotalCount(manualCount, lottoPurchaseMoney.calculate(manualCount));
         outputView.printLottoTicketsInfo(lottoTicketsDto);
 
         return lottoTickets;

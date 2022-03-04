@@ -17,8 +17,12 @@ public class LottoPurchaseMoney {
         return new LottoPurchaseMoney(money);
     }
 
-    public int calculate() {
-        return this.price / PRICE_CRITERION;
+    public int calculate(int manualCount) {
+        int totalCount = this.price / PRICE_CRITERION;
+
+        validateManualCount(manualCount, totalCount);
+
+        return totalCount - manualCount;
     }
 
     public int getPrice() {
@@ -28,6 +32,12 @@ public class LottoPurchaseMoney {
     private void validateCriterion(int price) {
         if (price < PRICE_CRITERION) {
             throw new IllegalArgumentException("티켓은 1000원 입니다. 1000원 이상 입력해주세요.");
+        }
+    }
+
+    private void validateManualCount(int manualCount, int totalCount) {
+        if (manualCount > totalCount) {
+            throw new IllegalArgumentException("전체 금액보다 큰 수동 티켓을 구매할 수 없습니다.");
         }
     }
 

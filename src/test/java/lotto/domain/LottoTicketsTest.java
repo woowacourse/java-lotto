@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import lotto.domain.generator.AutoLottoTicketGenerator;
 import lotto.domain.generator.LottoTicketGenerator;
 import org.junit.jupiter.api.DisplayName;
@@ -14,12 +15,12 @@ class LottoTicketsTest {
     void checkLottoCount() {
         // given
         int lottoCount = 14;
+
         LottoTicketGenerator lottoTicketGenerator = new AutoLottoTicketGenerator();
 
-        // when
-        LottoTickets lottoTickets = new LottoTickets(lottoCount, lottoTicketGenerator);
+        LottoTickets lottoTickets = new LottoTickets(lottoCount, new ArrayList<>(0), lottoTicketGenerator);
 
-        // then
+        // when & then
         assertThat(lottoTickets.totalCount()).isEqualTo(lottoCount);
     }
 }
