@@ -33,7 +33,7 @@ class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(6);
 
-        boolean actual = lotto.isBonusNumberMatch(bonusNumber);
+        boolean actual = lotto.isNumberMatch(bonusNumber);
 
         assertThat(actual).isTrue();
     }

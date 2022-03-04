@@ -61,10 +61,6 @@ public class Lotto {
                 .count();
     }
 
-    public boolean isBonusNumberMatch(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
-    }
-
     public List<Integer> toIntegers() {
         return lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
