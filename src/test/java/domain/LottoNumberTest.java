@@ -13,14 +13,14 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"1", "45"})
     void input_lottoNumber_valid(final String number) {
-        assertDoesNotThrow(() -> new LottoNumber(number));
+        assertDoesNotThrow(() -> LottoNumber.from(number));
     }
 
     @DisplayName("로또 번호가 유효하지 않는 경우 예외를 발생시킨다.")
     @ParameterizedTest
     @ValueSource(strings = {"0", "46", "-1"})
     void input_lottoNumber_invalid(final String number) {
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.from(number))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("로또 번호가 유효한 범위");
     }

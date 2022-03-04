@@ -5,7 +5,7 @@ import java.util.List;
 public class Validator {
 
     private static final String ERROR_NULL_OR_EMPTY_MESSAGE = "null 또는 빈값을 입력할 수 없습니다.";
-    private static final String POSITIVE_NUMBER_FORMAT = "^[1-9]([0-9]*)$";
+    private static final String NUMBER_FORMAT_REGEX = "^[0-9]+$";
     private static final String ERROR_FORMAT_MESSAGE = "입력한 값이 숫자의 형태가 아닙니다.";
     private static final String ERROR_DUPLICATION_MESSAGE = "중복값을 입력할 수 없습니다.";
 
@@ -16,7 +16,7 @@ public class Validator {
     }
 
     public static void checkFormat(final String input) {
-        if (!input.matches(POSITIVE_NUMBER_FORMAT)) {
+        if (!input.matches(NUMBER_FORMAT_REGEX)) {
             throw new IllegalArgumentException(ERROR_FORMAT_MESSAGE);
         }
     }

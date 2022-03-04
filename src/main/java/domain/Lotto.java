@@ -1,44 +1,46 @@
 package domain;
 
-import dto.LottoNumberDto;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-import utils.Validator;
 
 public class Lotto {
 
-    private static final String INPUT_NUMBER_DELIMITER = ",";
-    private static final int INPUT_NUMBER_SPLIT_OPTION = -1;
     private static final int LOTTO_SIZE = 6;
-    private static final String ERROR_LOTTO_SIZE_MESSAGE = "로또 번호 6개를 입력해주세요.";
+    private static final String ERROR_LOTTO_DUPLICATION_MESSAGE = "로또 번호를 중복해서 입력할 수 없습니다.";
+    private static final String ERROR_LOTTO_LENGTH_MESSAGE = "로또 번호 6개를 입력하세요.";
 
     private final List<LottoNumber> lotto;
 
-    public Lotto(final String inputLotto) {
-        List<String> splitNumbers = splitInput(inputLotto);
-        Validator.checkDuplication(splitNumbers);
-        checkSplitNumbersCount(splitNumbers);
-        this.lotto = splitNumbers.stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+    public Lotto(final List<LottoNumber> lottoNumbers) {
+        this.lotto = lottoNumbers;
     }
 
-    public Lotto(final List<LottoNumber> lotto) {
-        this.lotto = lotto;
+    public static Lotto fromInput(final List<String> inputLotto) {
+        validate(inputLotto);
+        return new Lotto(inputLotto.stream()
+            .map(LottoNumber::from)
+            .sorted()
+            .collect(Collectors.toList()));
     }
 
-    private List<String> splitInput(final String inputNumbers) {
-        return Arrays.stream(inputNumbers.split(INPUT_NUMBER_DELIMITER, INPUT_NUMBER_SPLIT_OPTION))
-            .map(String::trim)
-            .collect(Collectors.toList());
+    private static void validate(final List<String> inputLotto) {
+        checkLottoDuplicated(inputLotto);
+        checkoutLottoLength(inputLotto);
     }
 
-    private void checkSplitNumbersCount(final List<String> splitNumbers) {
-        if (splitNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(ERROR_LOTTO_SIZE_MESSAGE);
+    private static void checkoutLottoLength(final List<String> inputLotto) {
+        if (inputLotto.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(ERROR_LOTTO_LENGTH_MESSAGE);
         }
     }
+
+    private static void checkLottoDuplicated(final List<String> inputLotto) {
+        if (new HashSet<>(inputLotto).size() != inputLotto.size()) {
+            throw new IllegalArgumentException(ERROR_LOTTO_DUPLICATION_MESSAGE);
+        }
+    }
+
 
     public boolean isContainNumber(final LottoNumber lottoNumber) {
         return this.lotto.contains(lottoNumber);
@@ -50,9 +52,7 @@ public class Lotto {
             .count();
     }
 
-    public List<LottoNumberDto> toDto() {
-        return this.lotto.stream()
-            .map(LottoNumberDto::from)
-            .collect(Collectors.toList());
+    public List<LottoNumber> getLotto() {
+        return this.lotto;
     }
 }
