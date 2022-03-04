@@ -2,13 +2,19 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class LottoMachine {
+    private static final String DELIMITER = ", ";
 
     public void start() {
         Money money = new Money(InputView.askInputMoney());
         int manualLottoCount = InputView.askManualLottoCount();
         int autoLottoCount = money.getAutoLottoCount(manualLottoCount);
-        Lottos manualLottos = InputView.askManualLottoNumbers(manualLottoCount);
+        List<String> manualLottoNumbers = InputView.askManualLottoNumbers(manualLottoCount);
+        Lottos manualLottos = createManualLottos(manualLottoNumbers);
+
         OutputView.printCountOfLotto(autoLottoCount, manualLottoCount);
         Lottos totalLottos = getLottos(autoLottoCount, manualLottos);
         WinningLotto winningNumber = inputWinningNumber();
@@ -22,10 +28,24 @@ public class LottoMachine {
         return totalLottos;
     }
 
+    private Lottos createManualLottos(List<String> manualLottoNumbers) {
+        List<Lotto> lottos = manualLottoNumbers.stream()
+                .map(LottoMachine::generateManualLotto)
+                .collect(Collectors.toList());
+        return new Lottos(lottos);
+    }
+
     private WinningLotto inputWinningNumber() {
-        Lotto winningNumber = InputView.askInputWinningNumber();
-        LottoNumber bonusBall = InputView.askInputBonusBall();
+        String inputWinningNumber = InputView.askInputWinningNumber();
+        Lotto winningNumber = generateManualLotto(inputWinningNumber);
+        LottoNumber bonusBall = LottoNumber.of(InputView.askInputBonusBall());
         return new WinningLotto(winningNumber, bonusBall);
+    }
+
+    private static Lotto generateManualLotto(String input) {
+        String[] numbers = input.split(DELIMITER);
+        LottoGenerator lottoGenerator = new ManualLottoGenerator(numbers);
+        return lottoGenerator.generateLotto();
     }
 
     private void getStatistics(Lottos lottos, WinningLotto winningNumber, Money money) {
