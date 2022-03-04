@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoNumberCache {
+public class LottoNumberFactory {
     private static final String ERROR_TYPE = "[ERROR] 로또 번호는 숫자로만 입력해주세요";
     private static final List<LottoNumber> LOTTO_BALLS;
 
@@ -22,7 +22,7 @@ public class LottoNumberCache {
     public static LottoNumber getNumber(String input) {
         try {
             int number = Integer.parseInt(input.trim());
-            return LottoNumberCache.getNumber(number);
+            return LottoNumberFactory.getNumber(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_TYPE);
         }

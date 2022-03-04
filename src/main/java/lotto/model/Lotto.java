@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.number.LottoNumber;
-import lotto.model.number.LottoNumberCache;
+import lotto.model.number.LottoNumberFactory;
 
 /*
  * 로또 한 장을 의미하는 Class
@@ -48,12 +48,12 @@ public class Lotto {
     }
 
     public static Lotto ofRandom() {
-        return new Lotto(LottoNumberCache.getRandomNumbers(NUMBERS_SIZE), true);
+        return new Lotto(LottoNumberFactory.getRandomNumbers(NUMBERS_SIZE), true);
     }
 
     public static Lotto from(List<String> inputs) {
         List<LottoNumber> numbers = inputs.stream()
-                .map(LottoNumberCache::getNumber)
+                .map(LottoNumberFactory::getNumber)
                 .collect(Collectors.toList());
         return new Lotto(numbers, false);
     }

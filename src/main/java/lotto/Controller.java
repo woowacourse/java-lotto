@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.model.Lotto;
-import lotto.model.number.LottoNumberCache;
+import lotto.model.number.LottoNumberFactory;
 import lotto.model.Lottos;
 import lotto.model.LottoCart;
 import lotto.model.Money;
@@ -74,6 +74,6 @@ public class Controller {
 
     private LottoNumber askBonusNumber() {
         String bonusNumberInput = inputView.askBonusNumber();
-        return LottoNumberCache.getNumber(bonusNumberInput);
+        return LottoNumberFactory.getNumber(bonusNumberInput);
     }
 }

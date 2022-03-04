@@ -14,7 +14,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int value;
 
-    public LottoNumber(int value) {
+    LottoNumber(int value) {
         checkBound(value);
         this.value = value;
     }
@@ -25,7 +25,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public static List<LottoNumber> ofAllNumbers() {
+    static List<LottoNumber> ofAllNumbers() {
         List<LottoNumber> allNumbers = new ArrayList<>();
         for (int value = MIN_NUMBER; value <= MAX_NUMBER; value++) {
             allNumbers.add(new LottoNumber(value));

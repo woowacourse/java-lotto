@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class LottoNumberCacheTest {
+public class LottoNumberFactoryTest {
     @DisplayName("로또 번호가 숫자가 아니면 예외가 발생한다")
     @Test
     void type_exception() {
-        assertThatThrownBy(() -> LottoNumberCache.getNumber("일"))
+        assertThatThrownBy(() -> LottoNumberFactory.getNumber("일"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 로또 번호는 숫자로만 입력해주세요");
     }
@@ -20,15 +20,15 @@ public class LottoNumberCacheTest {
     @ParameterizedTest(name = "{0}에 해당하는 LottoNumber를 반환한다")
     @ValueSource(ints = {1, 15, 40, 23})
     void get_number(int number) {
-        assertThat(LottoNumberCache.getNumber(String.valueOf(number)).getValue()).isEqualTo(number);
+        assertThat(LottoNumberFactory.getNumber(String.valueOf(number)).getValue()).isEqualTo(number);
     }
 
     @DisplayName("랜덤 로또를 추출한 후에도 알맞는 LottoNumber를 반환한다")
     @ParameterizedTest(name = "{0}에 해당하는 LottoNumber를 반환한다")
     @ValueSource(ints = {1, 15, 40, 23})
     void get_number_after_shuffle(int number) {
-        LottoNumberCache.getRandomNumbers(1);
+        LottoNumberFactory.getRandomNumbers(1);
 
-        assertThat(LottoNumberCache.getNumber(String.valueOf(number)).getValue()).isEqualTo(number);
+        assertThat(LottoNumberFactory.getNumber(String.valueOf(number)).getValue()).isEqualTo(number);
     }
 }
