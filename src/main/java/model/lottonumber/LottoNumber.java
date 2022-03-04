@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-	private static final int LOTTO_SIZE = 6;
 	private static final int LOTTO_MIN_NUM = 1;
 	private static final int LOTTO_MAX_NUM = 45;
 	public static final String OUT_OF_RANGE_ERROR_MESSAGE = "[Error]: 로또 번호는 %d~%d 숫자여야 합니다.";
