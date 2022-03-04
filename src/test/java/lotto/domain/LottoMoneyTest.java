@@ -6,9 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.List;
 
 public class LottoMoneyTest {
 
@@ -49,8 +46,8 @@ public class LottoMoneyTest {
     void minusMoney() {
         LottoMoney money1 = LottoMoney.createLottoMoney(5_000);
         LottoMoney money2 = LottoMoney.createLottoMoney(1_000);
-
-        assertThat(money1.minus(money2)).isEqualTo(LottoMoney.createLottoMoney(4_000));
+        money1.subtract(money2);
+        assertThat(money1).isEqualTo(LottoMoney.createLottoMoney(4_000));
     }
 
 

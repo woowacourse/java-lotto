@@ -5,36 +5,37 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StoreTest {
 
-    private static final LottoMoney tenThousandMoney = LottoMoney.createLottoMoney(1_000);
-
     @ParameterizedTest
-    @ValueSource(ints = {1_000, 100_000})
-    @DisplayName("입력금액을 전달하면 Store가 생성된다.")
-    void createStore(int money) {
-        assertThat(new Store(LottoMoney.createLottoMoney(money))).isNotNull();
+    @MethodSource("buyLottoArguments")
+    @DisplayName("로또를 구매한다.")
+    void createLotto(LottoMoney money, List<Lotto> manualLottos, int size) {
+        assertThat(Store.buyLottos(money, manualLottos)).hasSize(size);
     }
 
-    @Test
-    @DisplayName("로또 한장을 생성한다.")
-    void createLotto() {
-        Store store = new Store(tenThousandMoney);
-
-        assertThat(store.buyLottos(Collections.emptyList())).hasSize(1);
+    private static Stream<Arguments> buyLottoArguments() {
+        return Stream.of(
+                Arguments.of(LottoMoney.createLottoMoney(1_000), Collections.emptyList(), 1),
+                Arguments.of(LottoMoney.createLottoMoney(2_000), List.of(givenNumbers(1, 2, 3, 4, 5, 6)), 2),
+                Arguments.of(LottoMoney.createLottoMoney(1_000), List.of(givenNumbers(1, 2, 3, 4, 5, 6)), 1)
+        );
     }
-
 
     private static List<LottoNumber> givenNumbers(int... numbers) {
         return Arrays.stream(numbers)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
+
 }

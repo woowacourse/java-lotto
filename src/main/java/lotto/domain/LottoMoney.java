@@ -8,7 +8,7 @@ public class LottoMoney {
     private static final int MINIMUM_LOTTO_MONEY = 1_000;
     private static final int MAXIMUM_LOTTO_MONEY = 100_000;
 
-    private final int value;
+    private int value;
 
     private LottoMoney(int value) {
         this.value = value;
@@ -55,8 +55,8 @@ public class LottoMoney {
         }
     }
 
-    public LottoMoney minus(LottoMoney money) {
-        return new LottoMoney(this.value - money.value);
+    public void subtract(LottoMoney money) {
+        this.value -= money.value;
     }
 
     public void validateCanBuyLotto(int lottoCount) {
@@ -69,8 +69,8 @@ public class LottoMoney {
         return this.value >= money.value;
     }
 
-    public long getValue() {
-        return value;
+    public LottoMoney copy() {
+        return new LottoMoney(this.value);
     }
 
     @Override
@@ -88,5 +88,9 @@ public class LottoMoney {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public long getValue() {
+        return value;
     }
 }

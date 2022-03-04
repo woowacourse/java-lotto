@@ -1,43 +1,38 @@
 package lotto.domain;
 
-import lotto.view.InputView;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
 
-    private LottoMoney leftMoney;
-
-    public Store(LottoMoney leftMoney) {
-        this.leftMoney = leftMoney;
+    private Store() {
     }
 
-    public List<Lotto> buyLottos(List<Lotto> manualLottos) {
-        List<Lotto> lottos = buyManualLottos(manualLottos);
-        lottos.addAll(buyAutomaticLottos());
+    public static List<Lotto> buyLottos(LottoMoney leftMoney, List<Lotto> manualLottos) {
+        List<Lotto> lottos = buyManualLottos(leftMoney, manualLottos);
+        lottos.addAll(buyAutomaticLottos(leftMoney));
         return lottos;
     }
 
-    private List<Lotto> buyManualLottos(List<Lotto> manualLottos) {
-        leftMoney = leftMoney.minus(LottoMoney.createLottoMoneyByCount(manualLottos.size()));
+    private static List<Lotto> buyManualLottos(LottoMoney leftMoney, List<Lotto> manualLottos) {
+        leftMoney.subtract(LottoMoney.createLottoMoneyByCount(manualLottos.size()));
         return new ArrayList<>(manualLottos);
     }
 
-    private List<Lotto> buyAutomaticLottos() {
+    private static List<Lotto> buyAutomaticLottos(LottoMoney leftMoney) {
         List<Lotto> lottos = new ArrayList<>();
-        while (canBuy()) {
-            lottos.add(buy());
+        while (canBuy(leftMoney)) {
+            lottos.add(buy(leftMoney));
         }
         return lottos;
     }
 
-    private boolean canBuy() {
+    private static boolean canBuy(LottoMoney leftMoney) {
         return leftMoney.isGreaterThan(LottoMoney.createMinimumLottoMoney());
     }
 
-    private Lotto buy() {
-        leftMoney = leftMoney.minus(LottoMoney.createMinimumLottoMoney());
+    private static Lotto buy(LottoMoney leftMoney) {
+        leftMoney.subtract(LottoMoney.createMinimumLottoMoney());
         return LottoGenerator.generate();
     }
 
