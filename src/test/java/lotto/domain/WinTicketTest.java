@@ -19,7 +19,7 @@ public class WinTicketTest {
 
     @BeforeEach
     void initialize() {
-        ticket = new Ticket(new BasicLottoNumberGenerator());
+        ticket = Ticket.createByAuto(new BasicLottoNumberGenerator());
     }
     
     @Test

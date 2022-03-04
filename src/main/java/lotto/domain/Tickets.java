@@ -21,7 +21,7 @@ public class Tickets {
     public static Tickets of(int count, LottoNumbersGenerator lottoNumbersGenerator) {
         List<Ticket> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            tickets.add(new Ticket(lottoNumbersGenerator));
+            tickets.add(Ticket.createByAuto(lottoNumbersGenerator));
         }
         return new Tickets(tickets);
     }
