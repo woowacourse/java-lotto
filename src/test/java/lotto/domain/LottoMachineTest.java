@@ -16,12 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
 class LottoMachineTest {
-    private final Lotto first = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
-    private final Lotto second = new Lotto(Arrays.asList("2", "3", "4", "5", "6", "7"));
-    private final Lotto third = new Lotto(Arrays.asList("3", "4", "5", "6", "7", "8"));
-    private final Lotto fourth = new Lotto(Arrays.asList("4", "5", "6", "7", "8", "9"));
-    private final Lotto fifth = new Lotto(Arrays.asList("5", "6", "7", "8", "9", "10"));
-    private final Lotto sixth = new Lotto(Arrays.asList("6", "7", "8", "9", "10", "11"));
+    private final Lotto first = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private final Lotto second = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
+    private final Lotto third = new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8));
+    private final Lotto fourth = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
+    private final Lotto fifth = new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10));
+    private final Lotto sixth = new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11));
 
     private final List<Lotto> lottos = Arrays.asList(first, second, third, fourth, fifth, sixth);
     private final LottoMachine lottoMachine = new LottoMachine.Builder()
@@ -29,8 +29,9 @@ class LottoMachineTest {
             .setTotalPurchaseAmount(6000)
             .setManualLottos(lottos)
             .build();
-    private final WinningNumbers winningNumbers = new WinningNumbers(
-            new Lotto(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.from("1"));
+
+    private final List<Integer> winningLotto = Arrays.asList(2, 3, 4, 5, 6, 7);
+    private final int bonusNumber = 1;
 
     @Test
     @DisplayName("자동 개수를 반환한다.")
@@ -67,7 +68,7 @@ class LottoMachineTest {
     @Test
     @DisplayName("당첨 결과를 반환한다.")
     void getMatchResult_Test() {
-        final Map<LottoMatchKind, Integer> actual = lottoMachine.getMatchResult(winningNumbers)
+        final Map<LottoMatchKind, Integer> actual = lottoMachine.getMatchResult(winningLotto, bonusNumber)
                 .getWinningNumberByKind();
         assertThat(actual).containsExactly(
                 entry(LOWER_THAN_THREE, 1), entry(THREE, 1),
@@ -81,7 +82,7 @@ class LottoMachineTest {
         //given
         final double expected = 2031555000 / (double) 6000;
         //when
-        final double actual = lottoMachine.getMatchResult(winningNumbers)
+        final double actual = lottoMachine.getMatchResult(winningLotto, bonusNumber)
                 .getProfitRate();
         //then
         assertThat(actual).isEqualTo(expected);
