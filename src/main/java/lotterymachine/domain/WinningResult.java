@@ -1,6 +1,5 @@
 package lotterymachine.domain;
 
-import lotterymachine.LotteryPurchase;
 import lotterymachine.utils.LotteryCalculator;
 
 import java.util.EnumMap;
@@ -21,9 +20,9 @@ public class WinningResult {
         return this.result;
     }
 
-    public double getTotalProfitRate(LotteryPurchase lotteryPurchase) {
+    public double getTotalProfitRate(Money money) {
         int totalProfit = totalProfit();
-        return LotteryCalculator.calculateProfitRate(totalProfit, lotteryPurchase.getTotalAmount());
+        return LotteryCalculator.calculateProfitRate(totalProfit, money.getValue());
     }
 
     private void createResult() {

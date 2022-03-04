@@ -1,12 +1,10 @@
 package lotterymachine.domain;
 
-import lotterymachine.Money;
-
 public class Count {
     private final int value;
 
     public Count(Money money) {
-        this.value = money.getAmount() / Money.PER_LOTTERY_TICKET_PRICE;
+        this.value = money.getValue() / LotteryTicket.PER_PRICE;
     }
 
     public int getValue() {

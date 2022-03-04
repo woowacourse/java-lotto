@@ -1,7 +1,6 @@
 package lotterymachine.view;
 
 import lotterymachine.domain.LotteryNumber;
-import lotterymachine.domain.LotteryTicket;
 
 import java.util.Arrays;
 import java.util.List;
@@ -60,15 +59,7 @@ public class InputView {
         }
     }
 
-    public static LotteryTicket getPassivityLotteryTicket() {
-        List<LotteryNumber> lotteryNumbers = Arrays.stream(SCANNER.nextLine().split(","))
-                .map(String::trim)
-                .map(i -> LotteryNumber.from(toInt(i)))
-                .collect(Collectors.toList());
-        return new LotteryTicket(lotteryNumbers);
-    }
-
-    public static List<Integer> getPassivityLotteryTicket2() {
+    public static List<Integer> getPassivityLotteryTicket() {
         return Arrays.stream(SCANNER.nextLine().split(","))
                 .map(i -> toInt(i.trim()))
                 .collect(Collectors.toList());

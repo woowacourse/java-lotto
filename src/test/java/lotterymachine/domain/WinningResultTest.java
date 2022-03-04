@@ -1,6 +1,5 @@
 package lotterymachine.domain;
 
-import lotterymachine.LotteryPurchase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +31,8 @@ public class WinningResultTest {
     @Test
     @DisplayName("당첨 결과에 대한 투자 수익률을 조회한다.")
     void getTotalProfitRate() {
-        LotteryPurchase lotteryPurchase = new LotteryPurchase(14000, 3);
+        Money money = new Money(14000);
+        Count count = new Count(money);
         List<LotteryNumber> lotteryNumbers = IntStream.rangeClosed(1, 6)
                 .mapToObj(LotteryNumber::from)
                 .collect(Collectors.toList());
@@ -43,7 +43,7 @@ public class WinningResultTest {
         WinningLottery winningLottery = new WinningLottery(lotteryNumbers, bonusNumber);
 
         WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);
-        double totalProfitRate = winningResult.getTotalProfitRate(lotteryPurchase);
+        double totalProfitRate = winningResult.getTotalProfitRate(money);
         assertThat(totalProfitRate).isEqualTo(142857.14);
     }
 }
