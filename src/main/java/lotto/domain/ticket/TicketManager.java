@@ -1,7 +1,10 @@
 package lotto.domain.ticket;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import lotto.domain.ticket.generator.TicketGenerator;
 import lotto.domain.winning.WinningTicket;
@@ -42,14 +45,9 @@ public class TicketManager {
     public List<Rank> calculateRanks(final WinningTicket winningTicket) {
         final List<Rank> manualTicketRanks = manualTickets.calculateRanks(winningTicket);
         final List<Rank> automaticTicketRanks = automaticTickets.calculateRanks(winningTicket);
-        return concatRanks(manualTicketRanks, automaticTicketRanks);
-    }
-
-    private List<Rank> concatRanks(final List<Rank> manualTicketRanks, final List<Rank> automaticTicketRanks) {
-        final List<Rank> ranks = new ArrayList<>();
-        ranks.addAll(manualTicketRanks);
-        ranks.addAll(automaticTicketRanks);
-        return ranks;
+        return Stream.of(manualTicketRanks, automaticTicketRanks)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public int getSize() {
