@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lotto.utils.IntegerUtils;
 
@@ -28,8 +29,8 @@ public class LottoTicket {
         );
     }
 
-    public static LottoTicket createWinningTicket(String[] numbers) {
-        return new LottoTicket(Arrays.stream(numbers)
+    public static LottoTicket createTicket(String numbers) {
+        return new LottoTicket(Arrays.stream(numbers.split(","))
             .map(number -> new LottoNumber(IntegerUtils.parse(number.trim())))
             .collect(Collectors.toList()));
     }
@@ -76,5 +77,22 @@ public class LottoTicket {
 
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(getNumbers(), that.getNumbers());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNumbers());
     }
 }

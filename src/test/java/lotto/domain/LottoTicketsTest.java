@@ -4,20 +4,28 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 import lotto.TestLottoFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTicketsTest {
 
+    private static LottoTickets lottoTickets;
+    private static NumberGenerator generator;
+    private static Money money;
+
+    @BeforeEach
+    void setUp() {
+        money = new Money(3000);
+         generator = new RandomNumberGenerator(LottoNumber.MIN,
+            LottoNumber.MAX);
+        lottoTickets = LottoTickets.buy(generator, money);
+    }
+
     @Test
     @DisplayName("로또 티켓들이 정상적으로 생성되는지 확인")
     void createLottoTickets() {
         // given
-        Money money = new Money(3000);
-        RandomNumberGenerator generator = new RandomNumberGenerator(LottoNumber.MIN,
-            LottoNumber.MAX);
-        // when
-        LottoTickets lottoTickets = LottoTickets.buy(generator, money);
         List<LottoTicket> tickets = lottoTickets.getTickets();
         // then
         assertThat(tickets.size()).isEqualTo(3);
@@ -34,9 +42,19 @@ class LottoTicketsTest {
         // when
         LottoStatistics lottoStatistics = tickets.findLottoWinners(
             new WinningTicket(new LottoTicket(numbers), new LottoNumber(7)));
-
         // then
         assertThat(lottoStatistics).isEqualTo(new LottoStatistics(
             List.of(LottoRank.FIRST, LottoRank.FIFTH)));
+    }
+
+    @Test
+    @DisplayName("수동 로또 티켓이 정상적으로 생성되는지 확인")
+    void createManualLotto() {
+        // given
+        List<String> input = List.of("1, 2, 3, 4, 5, 6");
+        LottoTicket expected = new LottoTicket(TestLottoFactory.getNumbers(1, 2, 3, 4, 5, 6));
+        lottoTickets.generatorManualTickets(input);
+        // then
+        assertThat(lottoTickets.getTickets()).contains(expected);
     }
 }
