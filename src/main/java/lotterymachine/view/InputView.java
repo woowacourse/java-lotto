@@ -46,7 +46,7 @@ public class InputView {
 
     private static void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
         if (numbers.contains(bonusNumber)) {
-            throw new RuntimeException(DUPLICATE_BONUS_NUMBER.getMessage());
+            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER.getMessage());
         }
     }
 
