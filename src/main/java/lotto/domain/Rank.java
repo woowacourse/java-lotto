@@ -13,9 +13,9 @@ public enum Rank {
     private static final int MATCHED_FOURTH_OR_THIRD = 5;
 
     private final int matched;
-    private final int prize;
+    private final long prize;
 
-    Rank(final int matched, final int prize) {
+    Rank(final int matched, final long prize) {
         this.matched = matched;
         this.prize = prize;
     }
@@ -37,7 +37,7 @@ public enum Rank {
         return matched;
     }
 
-    public int getPrize() {
+    public long getPrize() {
         return prize;
     }
 }

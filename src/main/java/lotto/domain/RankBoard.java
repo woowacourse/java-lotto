@@ -64,8 +64,8 @@ public class RankBoard {
         return Math.round((double) calculateProfit() / amount * ROUNDING_DIGITS) / ROUNDING_DIGITS_DOUBLE;
     }
 
-    private int calculateProfit() {
-        int profit = 0;
+    private long calculateProfit() {
+        long profit = 0;
         for (Rank rank : board.keySet()) {
             profit += board.get(rank) * rank.getPrize();
         }
