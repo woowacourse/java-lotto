@@ -18,7 +18,7 @@ class LottoTicketsTest {
         Money money = Money.of(3000);
         RandomNumberGenerator generator = new RandomNumberGenerator(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER);
         // when
-        LottoTickets lottoTickets = LottoTickets.buyManualTickets(List.of(List.of(1, 2, 3, 4, 5, 6)), money);
+        LottoTickets lottoTickets = LottoTickets.buyManualTicketsAndDecreaseMoney(List.of(List.of(1, 2, 3, 4, 5, 6)), money);
         // then
         Assertions.assertThat(lottoTickets).isNotNull();
     }

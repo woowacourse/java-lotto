@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.model.money.Money;
-import lotto.model.result.LottoRank;
 import lotto.model.result.LottoRanks;
 import lotto.model.ticket.number.LottoNumber;
 import lotto.model.utils.NumberGenerator;
@@ -19,15 +18,14 @@ public class LottoTickets {
         this.tickets = new ArrayList<>(tickets);
     }
 
-    public void buyAutoTickets(NumberGenerator generator, Money money) {
-        System.out.println(money.countBuyable());
-        List<LottoTicket> tickets = IntStream.range(0, money.countBuyable())
-            .mapToObj(x -> LottoTicket.createSortedTicket(generator))
-            .collect(Collectors.toList());
-        this.tickets.addAll(tickets);
+    public LottoTickets buyAutoTickets(NumberGenerator generator, Money money) {
+        this.tickets.addAll(IntStream.range(0, money.countBuyable())
+                .mapToObj(x -> LottoTicket.createSortedTicket(generator))
+                .collect(Collectors.toList()));
+        return this;
     }
 
-    public static LottoTickets buyManualTickets(List<List<Integer>> numberTickets, Money money) {
+    public static LottoTickets buyManualTicketsAndDecreaseMoney(List<List<Integer>> numberTickets, Money money) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (List<Integer> numberTicket : numberTickets) {
             LottoTicket lottoTicket = new LottoTicket(numberTicket.stream()

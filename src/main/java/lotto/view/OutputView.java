@@ -21,9 +21,7 @@ public class OutputView {
     private OutputView() {
     }
 
-
-    public static void outputTickets(ManualBuyCount manualBuyCount, LottoTickets lottoTickets) {
-        System.out.printf(BUY_COUNT_MESSAGE, manualBuyCount.getValue(), lottoTickets.size() - manualBuyCount.getValue());
+    public static void outputTickets(LottoTickets lottoTickets) {
         List<LottoTicket> tickets = lottoTickets.getTickets();
         for (LottoTicket ticket : tickets) {
             outputTicket(ticket);
