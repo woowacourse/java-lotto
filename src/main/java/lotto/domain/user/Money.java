@@ -2,7 +2,7 @@ package lotto.domain.user;
 
 public class Money {
 
-    private static final String ERROR_WRONG_INPUT_MONEY = "[ERROR] 올바른 구매 값을 입력해주세요";
+    private static final String ERROR_WRONG_INPUT_MONEY = "[ERROR] 올바른 정수값을 입력해주세요";
     private static final int BASIC_LOTTO_MONEY = 1000;
     private final int money;
 
@@ -43,7 +43,7 @@ public class Money {
         return money;
     }
 
-    public int getAutoMoney(int purchaseLottoCount) {
-        return money - (BASIC_LOTTO_MONEY * purchaseLottoCount);
+    public static int getMoneyByCount(int count) {
+        return BASIC_LOTTO_MONEY * count;
     }
 }

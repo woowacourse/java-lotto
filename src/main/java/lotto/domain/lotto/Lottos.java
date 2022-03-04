@@ -8,6 +8,9 @@ public class Lottos {
     private static final String ERROR_WRONG_INPUT_MONEY = "[ERROR] 올바른 구매 값을 입력해주세요";
     private List<Lotto> lottos = new ArrayList<>();
 
+    public Lottos() {
+    }
+
     public Lottos(final int count) {
         checkCount(count);
 
@@ -24,7 +27,7 @@ public class Lottos {
         }
     }
 
-    public void add(final Lotto lotto) {
+    public void addLotto(final Lotto lotto) {
         lottos.add(lotto);
     }
 

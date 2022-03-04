@@ -15,19 +15,18 @@ public class Application {
         LottoController lottoController = new LottoController();
 
         Money money = userController.inputMoney();
-        PurchaseLottoCount purchaseLottoCount = userController.inputPurchaseLottoCount(money.getCount());
-        Lottos manualLotto = lottoController.createManualLotto(purchaseLottoCount.getPurchaseLottoCount());
+        PurchaseLottoCount purchaseLottoCount = userController.calculatePurchaseLottoCountInfo(money);
 
-        Lottos lottos = lottoController.createLottosByMoney(money.getAutoMoney(purchaseLottoCount.getPurchaseLottoCount()));
-        lottoController.printLottos(lottos, purchaseLottoCount.getPurchaseLottoCount(), purchaseLottoCount.getRemainPurchaseLottoCount(
-                money.getCount()));
-        lottos = lottoController.addLottos(lottos, manualLotto.getLottos());
+        Lottos manualLottos = lottoController.createManualLottos(purchaseLottoCount);
+        Lottos autoLottos = lottoController.createAutoLottos(purchaseLottoCount);
+
+        lottoController.printLottos(autoLottos, purchaseLottoCount);
+        Lottos totalLottos = lottoController.combineLottos(autoLottos, manualLottos);
 
         LottoWinningNumbers lottoWinningNumbers = lottoController.createLottoWinningNumbers();
-        LottoResult lottoResult = lottoController.calculateRanks(lottos, lottoWinningNumbers);
-        lottoController.printWinningResult(lottoResult);
+        LottoResult lottoResult = lottoController.calculateRanks(totalLottos, lottoWinningNumbers);
 
-        double profit = userController.calculateProfit(money, lottoResult);
-        userController.printProfit(profit);
+        lottoController.printWinningResult(lottoResult);
+        userController.printProfit(userController.calculateProfit(money, lottoResult));
     }
 }

@@ -12,7 +12,7 @@ public class MoneyTest {
     public void 구입금액입력_실패(String value) {
         assertThatThrownBy(() -> new Money(value))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 올바른 구매 값을 입력해주세요");
+                .hasMessage("[ERROR] 올바른 정수값을 입력해주세요");
     }
 
     @ParameterizedTest

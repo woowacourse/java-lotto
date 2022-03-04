@@ -9,16 +9,18 @@ import lotto.domain.lotto.LottoWinningNumbers;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.result.LottoResult;
 import lotto.domain.user.Money;
+import lotto.domain.user.PurchaseLottoCount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
-    public void printLottos(final Lottos lottos, final int purchaseLottoCount, final int remainPurchaseLottoCount) {
-        OutputView.printLottos(lottos, purchaseLottoCount, remainPurchaseLottoCount);
+    public void printLottos(final Lottos lottos, final PurchaseLottoCount purchaseLottoCount) {
+        OutputView.printLottos(lottos, purchaseLottoCount.getAutoLottoCount(), purchaseLottoCount.getManualLottoCount());
     }
 
-    public Lottos createLottosByMoney(final int inputMoney) {
+    public Lottos createAutoLottos(final PurchaseLottoCount purchaseLottoCount) {
+        int inputMoney = Money.getMoneyByCount(purchaseLottoCount.getAutoLottoCount());
         final Money money = new Money(inputMoney);
         return new Lottos(money.getCount());
     }
@@ -74,25 +76,25 @@ public class LottoController {
         OutputView.printWinningResult(lottoResult);
     }
 
-    public Lottos createManualLotto(final int purchaseLottoCount) {
+    public Lottos createManualLottos(final PurchaseLottoCount purchaseLottoCount) {
         try {
-            Lottos lottos = new Lottos(purchaseLottoCount);
+            Lottos lottos = new Lottos(purchaseLottoCount.getManualLottoCount());
             OutputView.printManualLotto();
-            addManualLotto(purchaseLottoCount, lottos);
+            addManualLotto(purchaseLottoCount.getManualLottoCount(), lottos);
             return lottos;
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return createManualLotto(purchaseLottoCount);
+            return createManualLottos(purchaseLottoCount);
         }
     }
 
     private void addManualLotto(final int purchaseLottoCount, final Lottos lottos) {
         for (int i = 0; i < purchaseLottoCount; i++) {
-            lottos.add(createLottoByNumbers(InputView.inputManualLotto()));
+            lottos.addLotto(createLottoByNumbers(InputView.inputManualLotto()));
         }
     }
 
-    public Lottos addLottos(final Lottos lottos, final List<Lotto> addLottos) {
-        return lottos.addLottos(addLottos);
+    public Lottos combineLottos(final Lottos lottos, final Lottos addLottos) {
+        return lottos.addLottos(addLottos.getLottos());
     }
 }

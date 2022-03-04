@@ -17,12 +17,12 @@ public class userController {
         }
     }
 
-    public PurchaseLottoCount inputPurchaseLottoCount(final int maxCount) {
+    public PurchaseLottoCount calculatePurchaseLottoCountInfo(final Money money) {
         try {
-            return new PurchaseLottoCount(InputView.inputPurchaseLottoCount(), maxCount);
+            return new PurchaseLottoCount(InputView.inputPurchaseLottoCount(), money.getCount());
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return inputPurchaseLottoCount(maxCount);
+            return calculatePurchaseLottoCountInfo(money);
         }
     }
 

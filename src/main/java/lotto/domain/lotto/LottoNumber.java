@@ -62,9 +62,4 @@ public class LottoNumber {
     public int getLottoNumber() {
         return lottoNumber;
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumber);
-    }
 }
