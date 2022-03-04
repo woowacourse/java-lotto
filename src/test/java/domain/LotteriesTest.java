@@ -21,7 +21,7 @@ public class LotteriesTest {
 		final LotteryRandomGeneratorStrategy lotteryGenerator = new LotteryRandomGeneratorStrategy();
 
 		for (int i = 0; i < lotteryNumber; i++) {
-			lotteriesNumber.add(lotteryGenerator.getNumbers());
+			lotteriesNumber.add(lotteryGenerator.getLottery());
 		}
 		final Lotteries lotteries = new Lotteries(lotteriesNumber);
 

@@ -31,7 +31,7 @@ public class LotteryGenerateMock implements LotteryGenerateStrategy {
 	}
 
 	@Override
-	public Lottery getNumbers() {
+	public Lottery getLottery() {
 		if (theNumberOfLotteries-- > 0) {
 			return lotteriesNumber.get(rank);
 		}

@@ -18,7 +18,7 @@ public class LotteryRandomGeneratorStrategy implements LotteryGenerateStrategy {
 			.collect(Collectors.toList());
 	}
 
-	public Lottery getNumbers() {
+	public Lottery getLottery() {
 		Collections.shuffle(numbers);
 		List<LotteryNumber> lotteryNumbers =  numbers.stream()
 			.limit(Lottery.LOTTERY_SIZE)

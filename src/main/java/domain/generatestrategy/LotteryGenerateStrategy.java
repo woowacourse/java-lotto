@@ -5,5 +5,5 @@ import domain.Lottery;
 
 @FunctionalInterface
 public interface LotteryGenerateStrategy {
-	Lottery getNumbers();
+	Lottery getLottery();
 }

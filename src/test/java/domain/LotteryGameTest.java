@@ -69,7 +69,7 @@ public class LotteryGameTest {
 		final PurchaseAmount purchaseAmount = new PurchaseAmount(lotteriesToCreate * 1000);
 		final List<Lottery> lotteries = new ArrayList<>();
 		for (int i = 0; i < theNumberOfManualLotteries; i++) {
-			lotteries.add(lotteryGenerator.getNumbers());
+			lotteries.add(lotteryGenerator.getLottery());
 		}
 		return new PurchaseInformation(purchaseAmount, new Lotteries(lotteries), theNumberOfManualLotteries);
 	}
