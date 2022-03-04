@@ -33,9 +33,9 @@ public class Money {
         }
     }
 
-    public static Money from(String input) {
+    public static Money from(String rawAmount) {
         try {
-            return new Money(Integer.parseInt(input));
+            return new Money(Integer.parseInt(rawAmount));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_TYPE);
         }

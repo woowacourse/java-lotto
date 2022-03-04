@@ -19,10 +19,10 @@ public class PurchaseCount {
         }
     }
 
-    public static PurchaseCount of(Money money, String manualCountInput) {
+    public static PurchaseCount of(Money money, String rawManualCount) {
         try {
             return new PurchaseCount(
-                    money.countAvailableLotto(), Integer.parseInt(manualCountInput));
+                    money.countAvailableLotto(), Integer.parseInt(rawManualCount));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_TYPE);
         }

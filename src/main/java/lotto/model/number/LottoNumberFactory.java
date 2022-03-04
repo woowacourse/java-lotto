@@ -19,9 +19,9 @@ public class LottoNumberFactory {
                 .orElse(new LottoNumber(number));
     }
 
-    public static LottoNumber getNumber(String input) {
+    public static LottoNumber getNumber(String rawNumber) {
         try {
-            int number = Integer.parseInt(input.trim());
+            int number = Integer.parseInt(rawNumber.trim());
             return LottoNumberFactory.getNumber(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_TYPE);

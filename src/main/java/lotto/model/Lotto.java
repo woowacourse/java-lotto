@@ -51,8 +51,8 @@ public class Lotto {
         return new Lotto(LottoNumberFactory.getRandomNumbers(NUMBERS_SIZE), true);
     }
 
-    public static Lotto from(List<String> inputs) {
-        List<LottoNumber> numbers = inputs.stream()
+    public static Lotto from(List<String> rawNumbers) {
+        List<LottoNumber> numbers = rawNumbers.stream()
                 .map(LottoNumberFactory::getNumber)
                 .collect(Collectors.toList());
         return new Lotto(numbers, false);
