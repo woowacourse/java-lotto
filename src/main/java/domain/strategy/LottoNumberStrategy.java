@@ -1,9 +1,10 @@
 package domain.strategy;
 
-import domain.LottoNumber;
+import domain.LottoNumbers;
+import domain.PurchaseCount;
 
 import java.util.List;
 
 public interface LottoNumberStrategy {
-    List<LottoNumber> generate();
+    List<LottoNumbers> generate(PurchaseCount count);
 }

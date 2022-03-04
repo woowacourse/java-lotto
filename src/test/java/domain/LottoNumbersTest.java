@@ -1,5 +1,5 @@
-import domain.LottoNumber;
-import domain.LottoTicketNumbers;
+package domain;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoTicketNumbersTest {
+class LottoNumbersTest {
 
     @ParameterizedTest
     @ValueSource(ints = {5, 7})
@@ -22,7 +22,7 @@ class LottoTicketNumbersTest {
                 .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> new LottoTicketNumbers(inputLottoNumbers))
+        assertThatThrownBy(() -> new LottoNumbers(inputLottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호는 6자리");
     }
@@ -34,24 +34,9 @@ class LottoTicketNumbersTest {
                 .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> new LottoTicketNumbers(inputLottoNumbers))
+        assertThatThrownBy(() -> new LottoNumbers(inputLottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호는 중복");
-    }
-
-    @Test
-    @DisplayName("로또 번호 정렬")
-    void sortLottoNumbers() {
-        List<LottoNumber> inputLottoNumbers = IntStream.of(4, 3, 2, 1, 6, 5)
-                .mapToObj(LottoNumber::getInstance)
-                .collect(Collectors.toList());
-
-        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputLottoNumbers);
-
-        List<LottoNumber> lottoNumbers = lottoTicketNumbers.getLottoNumbers();
-
-        assertThat(lottoNumbers).extracting(LottoNumber::getNumber)
-                .containsExactly(1, 2, 3, 4, 5, 6);
     }
 
     @Test
@@ -60,8 +45,8 @@ class LottoTicketNumbersTest {
         List<LottoNumber> inputLottoNumbers = IntStream.of(4, 3, 2, 1, 6, 5)
                 .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
-        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputLottoNumbers);
+        LottoNumbers lottoNumbers = new LottoNumbers(inputLottoNumbers);
 
-        assertThat(lottoTicketNumbers.countDuplicateNumbers(lottoTicketNumbers)).isEqualTo(6);
+        assertThat(lottoNumbers.countDuplicateNumbers(lottoNumbers)).isEqualTo(6);
     }
 }

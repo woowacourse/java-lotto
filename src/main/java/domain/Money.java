@@ -2,33 +2,33 @@ package domain;
 
 import java.util.Objects;
 
+import static domain.LottoMachine.LOTTO_TICKET_PRICE;
+
 public class Money {
 
-    private static final int MINIMUM_AMOUNT = 10;
-    private static final String MONEY_MUST_BE_DIVIDABLE_BY_TEN = "금액은 10 단위로 나누어 떨어져야 합니다.";
+    private static final int MINIMUM_COIN_PRICE = 10;
 
     private final int amount;
 
-    private Money(int amount) {
-        validateAmount(amount);
+    public Money(int amount) {
+        validateUnit(amount);
+        validateMinimumAmount(amount);
         this.amount = amount;
     }
 
-    public static Money from(int amount) {
-        return new Money(amount);
+    public int getPurchasableNumber() {
+        return this.amount / LOTTO_TICKET_PRICE;
+    }
+    
+    private void validateUnit(int amount) {
+        if (amount < LOTTO_TICKET_PRICE) {
+            throw new IllegalArgumentException("금액은 1000원 이상이어야 합니다.");
+        }
     }
 
-    public boolean isPurchasable(int amount) {
-        return this.amount >= amount;
-    }
-
-    public int getPurchasableNumber(int amount) {
-        return this.amount / amount;
-    }
-
-    private void validateAmount(int amount) {
-        if (amount % MINIMUM_AMOUNT != 0) {
-            throw new IllegalArgumentException(MONEY_MUST_BE_DIVIDABLE_BY_TEN);
+    private void validateMinimumAmount(int amount) {
+        if (amount % MINIMUM_COIN_PRICE != 0) {
+            throw new IllegalArgumentException("금액은 10 단위로 나누어 떨어져야 합니다.");
         }
     }
 
