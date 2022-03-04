@@ -10,23 +10,23 @@ import lotto.domain.ticket.generator.TicketGenerator;
 import lotto.domain.winning.WinningTicket;
 import lotto.utils.Rank;
 
-public class TicketManager {
+public class TicketBundles {
 
     private final Tickets manualTickets;
     private final Tickets automaticTickets;
 
-    private TicketManager(final Tickets manualTickets, final Tickets automaticTickets) {
+    private TicketBundles(final Tickets manualTickets, final Tickets automaticTickets) {
         this.manualTickets = manualTickets;
         this.automaticTickets = automaticTickets;
     }
 
-    public static TicketManager generateTickets(final int totalTicketCount,
-                                                final List<Ticket> preparedTickets,
-                                                final TicketGenerator ticketGenerator) {
+    public static TicketBundles generateTicketBundles(final int totalTicketCount,
+                                                      final List<Ticket> preparedTickets,
+                                                      final TicketGenerator ticketGenerator) {
         final int restTicketCount = totalTicketCount - preparedTickets.size();
         final Tickets manualTickets = generateManualTickets(preparedTickets);
         final Tickets automaticTickets = generateAutomaticTickets(restTicketCount, ticketGenerator);
-        return new TicketManager(manualTickets, automaticTickets);
+        return new TicketBundles(manualTickets, automaticTickets);
     }
 
     private static Tickets generateManualTickets(final List<Ticket> manualTickets) {

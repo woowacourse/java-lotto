@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 import lotto.domain.analysis.Analysis;
 import lotto.domain.money.Money;
 import lotto.domain.ticket.Ticket;
-import lotto.domain.ticket.TicketManager;
+import lotto.domain.ticket.TicketBundles;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
 import lotto.domain.winning.WinningTicket;
 import lotto.dto.AnalysisDto;
+import lotto.dto.TicketBundlesDto;
 import lotto.dto.TicketDto;
-import lotto.dto.TicketManagerDto;
 import lotto.dto.WinningTicketDto;
 import lotto.utils.Rank;
 import lotto.view.LottoView;
@@ -26,10 +26,10 @@ public class LottoApplication {
 
     public void run() {
         final Money money = insertMoney();
-        final TicketManager ticketManager = purchaseTickets(money);
-        announceTickets(ticketManager);
+        final TicketBundles ticketBundles = purchaseTickets(money);
+        announceTickets(ticketBundles);
 
-        final Analysis analysis = calculateAnalysis(ticketManager, money);
+        final Analysis analysis = calculateAnalysis(ticketBundles, money);
         announceAnalysis(analysis);
     }
 
@@ -37,11 +37,11 @@ public class LottoApplication {
         return new Money(lottoView.requestMoney());
     }
 
-    private TicketManager purchaseTickets(final Money money) {
+    private TicketBundles purchaseTickets(final Money money) {
         final int totalTicketCount = money.getQuotient();
         final int manualTicketCount = lottoView.requestManualTicketCount(totalTicketCount);
         final List<Ticket> manualTickets = requestManualTickets(manualTicketCount);
-        return TicketManager.generateTickets(totalTicketCount, manualTickets, new RandomTicketGenerator());
+        return TicketBundles.generateTicketBundles(totalTicketCount, manualTickets, new RandomTicketGenerator());
     }
 
     private List<Ticket> requestManualTickets(final int manualTicketCount) {
@@ -51,14 +51,14 @@ public class LottoApplication {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private void announceTickets(final TicketManager ticketManager) {
-        final TicketManagerDto ticketManagerDto = TicketManagerDto.toDto(ticketManager);
-        lottoView.announceTickets(ticketManagerDto);
+    private void announceTickets(final TicketBundles ticketBundles) {
+        final TicketBundlesDto ticketBundlesDto = TicketBundlesDto.toDto(ticketBundles);
+        lottoView.announceTickets(ticketBundlesDto);
     }
 
-    private Analysis calculateAnalysis(final TicketManager ticketManager, final Money money) {
+    private Analysis calculateAnalysis(final TicketBundles ticketBundles, final Money money) {
         final WinningTicket winningTicket = requestWinningTicket();
-        final List<Rank> ranks = ticketManager.calculateRanks(winningTicket);
+        final List<Rank> ranks = ticketBundles.calculateRanks(winningTicket);
         return new Analysis(ranks, money);
     }
 

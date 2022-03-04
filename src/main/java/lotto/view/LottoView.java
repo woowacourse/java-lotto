@@ -14,8 +14,8 @@ import java.util.Collections;
 import java.util.List;
 
 import lotto.dto.AnalysisDto;
+import lotto.dto.TicketBundlesDto;
 import lotto.dto.TicketDto;
-import lotto.dto.TicketManagerDto;
 import lotto.dto.WinningTicketDto;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
@@ -65,10 +65,10 @@ public class LottoView {
         return ticketDtos;
     }
 
-    public void announceTickets(final TicketManagerDto ticketManagerDto) {
+    public void announceTickets(final TicketBundlesDto ticketBundlesDto) {
         outputView.printMessage(EMPTY_STRING);
-        outputView.printTicketCount(ticketManagerDto);
-        outputView.printAllTickets(ticketManagerDto);
+        outputView.printTicketCount(ticketBundlesDto);
+        outputView.printAllTickets(ticketBundlesDto);
     }
 
     public WinningTicketDto requestWinningTicketDto() {

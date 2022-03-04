@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.dto.AnalysisDto;
+import lotto.dto.TicketBundlesDto;
 import lotto.dto.TicketDto;
-import lotto.dto.TicketManagerDto;
 import lotto.utils.Rank;
 import lotto.view.utils.Delimiter;
 
@@ -26,16 +26,16 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printTicketCount(final TicketManagerDto ticketManagerDto) {
-        final int manualTicketCount = ticketManagerDto.getManualTickets().size();
-        final int randomTicketCount = ticketManagerDto.getAutomaticTickets().size();
+    public void printTicketCount(final TicketBundlesDto ticketBundlesDto) {
+        final int manualTicketCount = ticketBundlesDto.getManualTickets().size();
+        final int randomTicketCount = ticketBundlesDto.getAutomaticTickets().size();
         final String message = String.format(TICKET_COUNT_FORMAT.getMessage(), manualTicketCount, randomTicketCount);
         printMessage(message);
     }
 
-    public void printAllTickets(final TicketManagerDto ticketManagerDto) {
-        printTickets(ticketManagerDto.getManualTickets());
-        printTickets(ticketManagerDto.getAutomaticTickets());
+    public void printAllTickets(final TicketBundlesDto ticketBundlesDto) {
+        printTickets(ticketBundlesDto.getManualTickets());
+        printTickets(ticketBundlesDto.getAutomaticTickets());
     }
 
     private void printTickets(final List<TicketDto> ticketDtos) {

@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import lotto.domain.ticket.Ticket;
 import lotto.utils.Rank;
 
-public class TicketManagerTestProvider {
+public class TicketBundlesTestProvider {
 
     public static Stream<Arguments> provideForGenerateTest() {
         return Stream.of(
