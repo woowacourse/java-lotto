@@ -4,10 +4,10 @@ import static utils.Messages.*;
 
 import domain.LottoNumber;
 import domain.LottoTicket;
+import domain.LottoTickets;
+import domain.Purchase;
 import domain.Rank;
 import domain.Result;
-
-import java.util.List;
 
 public class OutputView {
 
@@ -20,10 +20,9 @@ public class OutputView {
         System.out.println(ERROR_PREFIX + message);
     }
 
-    public static void printLottoTickets(int manualCount, int autoCount,
-        List<LottoTicket> lottoTickets) {
-        System.out.printf(BUY_MESSAGE, manualCount, autoCount);
-        for (LottoTicket lottoTicket : lottoTickets) {
+    public static void printLottoTickets(Purchase purchase, LottoTickets lottoTickets) {
+        System.out.printf(BUY_MESSAGE, purchase.getManualCount(), purchase.getAutoCount());
+        for (LottoTicket lottoTicket : lottoTickets.get()) {
             printLottoTicket(lottoTicket);
         }
     }

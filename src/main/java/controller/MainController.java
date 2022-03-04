@@ -1,11 +1,11 @@
 package controller;
 
 import domain.LottoTicket;
+import domain.LottoTickets;
 import domain.Purchase;
 import domain.Result;
 import domain.WinLottoNumbers;
 import java.util.List;
-import java.util.stream.Collectors;
 import view.InputView;
 import view.OutputView;
 
@@ -14,13 +14,10 @@ public class MainController {
     public void run() {
         Purchase purchase = getPurchase();
 
-        List<LottoTicket> lottoTickets = createLottoTickets(purchase.getManualCount(),
-            purchase.getAutoCount());
-        OutputView.printLottoTickets(purchase.getManualCount(), purchase.getAutoCount(),
-            lottoTickets);
+        LottoTickets lottoTickets = getLottoTickets(purchase);
+        OutputView.printLottoTickets(purchase, lottoTickets);
 
         WinLottoNumbers winLottoNumbers = getWinNumbers();
-
         Result result = makeResult(lottoTickets, winLottoNumbers);
         printResult(result, purchase);
     }
@@ -54,28 +51,17 @@ public class MainController {
         }
     }
 
-    private List<LottoTicket> createLottoTickets(int manualCount, int autoCount) {
-        List<LottoTicket> lottoTickets = addManualLottoTickets(manualCount);
-        addAutoLottoTickets(autoCount, lottoTickets);
-        return lottoTickets;
-    }
-
-    private List<LottoTicket> addManualLottoTickets(int manualCount) {
+    private LottoTickets getLottoTickets(Purchase purchase) {
         try {
-            return InputView.inputManualLottoNumbers(manualCount).stream()
-                .map(LottoTicket::of)
-                .collect(Collectors.toList());
+            List<List<Integer>> manualLottoNumberInput = InputView.inputManualLottoNumbers(
+                purchase);
+            return new LottoTickets(manualLottoNumberInput, purchase.getAutoCount());
         } catch (IllegalArgumentException e) {
             OutputView.printError(e.getMessage());
-            return addManualLottoTickets(manualCount);
+            return getLottoTickets(purchase);
         }
     }
 
-    private void addAutoLottoTickets(int autoCount, List<LottoTicket> lottoTickets) {
-        for (int i = 0; i < autoCount; i++) {
-            lottoTickets.add(LottoTicket.ofAuto());
-        }
-    }
 
     private WinLottoNumbers getWinNumbers() {
         try {
@@ -88,9 +74,9 @@ public class MainController {
         }
     }
 
-    private Result makeResult(List<LottoTicket> lottoTickets, WinLottoNumbers winLottoNumbers) {
+    private Result makeResult(LottoTickets lottoTickets, WinLottoNumbers winLottoNumbers) {
         Result result = new Result();
-        for (LottoTicket lottoTicket : lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.get()) {
             result.add(winLottoNumbers.match(lottoTicket));
         }
         return result;

@@ -2,6 +2,7 @@ package view;
 
 import static utils.Messages.*;
 
+import domain.Purchase;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -35,13 +36,13 @@ public class InputView {
         }
     }
 
-    public static List<List<Integer>> inputManualLottoNumbers(int count) {
+    public static List<List<Integer>> inputManualLottoNumbers(Purchase purchase) {
         System.out.println(LOTTO_MANUAL_INPUT_MESSAGE);
         try {
-            return inputMultipleLottoNumbers(count);
+            return inputMultipleLottoNumbers(purchase.getManualCount());
         } catch (Exception e) {
             OutputView.printError(e.getMessage());
-            return inputManualLottoNumbers(count);
+            return inputManualLottoNumbers(purchase);
         }
     }
 
