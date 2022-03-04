@@ -32,9 +32,9 @@ public class OutputView {
     private static final double breakEvenPoint = 1L;
 
     public static void printLottosInformations(Lottos lottos) {
-        System.out.printf(MESSAGE_LOTTOS_NUMBER, lottos.getLottos().size());
-        for (Lotto lotto : lottos.getLottos()) {
-            String str = lotto.getLottoNumbers()
+        System.out.printf(MESSAGE_LOTTOS_NUMBER, lottos.getMembers().size());
+        for (Lotto lotto : lottos.getMembers()) {
+            String str = lotto.getNumbers()
                     .stream()
                     .map(LottoNumber::getNumber)
                     .map(String::valueOf)

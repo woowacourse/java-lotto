@@ -9,15 +9,15 @@ import util.Validator;
 
 public class Lotto {
 
-    private final Set<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto(LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoNumbers = generateNumber(lottoNumberGenerator);
+        this.numbers = generateNumber(lottoNumberGenerator);
     }
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
         Validator.checkArgumentIsNull(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.numbers = lottoNumbers;
     }
 
     public static Lotto generateLotto(LottoNumberGenerator lottoNumberGenerator) {
@@ -25,14 +25,13 @@ public class Lotto {
 
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableSet(this.lottoNumbers);
+    public Set<LottoNumber> getNumbers() {
+        return Collections.unmodifiableSet(this.numbers);
     }
 
     public int countDuplicatedNumber(Lotto winningLotto) {
         Validator.checkArgumentIsNull(winningLotto);
-        List<Integer> numbers = getNumbers();
-        return (int) winningLotto.lottoNumbers
+        return (int) winningLotto.numbers
                 .stream()
                 .map(LottoNumber::getNumber)
                 .filter(numbers::contains)
@@ -54,12 +53,5 @@ public class Lotto {
         return lottoNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toCollection(TreeSet::new));
-    }
-
-    private List<Integer> getNumbers() {
-        return this.lottoNumbers
-                .stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
     }
 }
