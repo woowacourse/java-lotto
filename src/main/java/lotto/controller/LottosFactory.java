@@ -1,7 +1,10 @@
-package lotto.domain;
+package lotto.controller;
 
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
+import lotto.domain.LottoMachine;
 import lotto.view.InputView;
 
 public enum LottosFactory {

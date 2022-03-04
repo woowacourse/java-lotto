@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoPurchaseMoney;
 import lotto.domain.Lottos;
-import lotto.domain.LottosFactory;
 import lotto.domain.Rank;
 import lotto.domain.WinnerLotto;
 import lotto.domain.vo.LottoNumber;
