@@ -12,6 +12,7 @@ import java.util.stream.IntStream;
 
 public class PickedNumbers {
     private static final List<Integer> numbers = IntStream.rangeClosed(Constant.FIRST_NUM, Constant.LAST_NUM).boxed().collect(toList());
+    private static final String NOT_SIX_NUMBERS_MESSAGE = "6개의 숫자를 입력해야 합니다";
     private static final String DUPLICATION_ERROR_MESSAGE = "중복값이 있습니다";
     private static final String NOT_IN_RANGE_MESSAGE = "범위내에 없습니다";
     private static final String NUMBER_DELIMITER = ",";
@@ -27,6 +28,7 @@ public class PickedNumbers {
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(toList());
+        validateNumberCount();
         validateRange();
         validateDuplicate();
     }
@@ -43,6 +45,12 @@ public class PickedNumbers {
 
     public List<Integer> getPickedNumbers() {
         return pickedNumbers;
+    }
+
+    private void validateNumberCount() {
+        if (pickedNumbers.size() != 6) {
+            throw new IllegalArgumentException(NOT_SIX_NUMBERS_MESSAGE);
+        }
     }
 
     private void validateDuplicate() {
