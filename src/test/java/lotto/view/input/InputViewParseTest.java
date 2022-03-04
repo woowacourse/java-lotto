@@ -54,9 +54,9 @@ class InputViewParseTest {
         return Stream.of(
                 Arguments.of("-1", List.of(-1)),
                 Arguments.of("1", List.of(1)),
-                Arguments.of("1,1,1", List.of(1,1,1)),
-                Arguments.of("1,2,3,4,5", List.of(1,2,3,4,5)),
-                Arguments.of("1 ,  2  ,  3  ", List.of(1,2,3))
+                Arguments.of("1,1,1", List.of(1, 1, 1)),
+                Arguments.of("1,2,3,4,5", List.of(1, 2, 3, 4, 5)),
+                Arguments.of("1 ,  2  ,  3  ", List.of(1, 2, 3))
         );
     }
 

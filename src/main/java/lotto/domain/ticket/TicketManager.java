@@ -18,8 +18,8 @@ public class TicketManager {
     }
 
     public static TicketManager generateTickets(final int totalTicketCount,
-                                          final Tickets preparedTickets,
-                                          final TicketGenerator ticketGenerator) {
+                                                final Tickets preparedTickets,
+                                                final TicketGenerator ticketGenerator) {
         final int restTicketCount = totalTicketCount - preparedTickets.getSize();
         final Tickets generatedTickets = Tickets.generateTickets(restTicketCount, ticketGenerator);
         return new TicketManager(preparedTickets, generatedTickets);

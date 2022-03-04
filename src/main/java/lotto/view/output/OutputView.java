@@ -1,6 +1,10 @@
 package lotto.view.output;
 
-import static lotto.view.output.OutputMessage.*;
+import static lotto.view.output.OutputMessage.ANALYSIS_EXTRA_FORMAT;
+import static lotto.view.output.OutputMessage.ANALYSIS_FORMAT;
+import static lotto.view.output.OutputMessage.PROFIT_RAGE_FORMAT;
+import static lotto.view.output.OutputMessage.TICKET_COUNT_FORMAT;
+import static lotto.view.output.OutputMessage.TICKET_FORMAT;
 
 import java.util.List;
 import java.util.Map;

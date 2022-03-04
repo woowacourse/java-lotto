@@ -1,6 +1,13 @@
 package lotto.view;
 
-import static lotto.view.output.OutputMessage.*;
+import static lotto.view.output.OutputMessage.DIVIDING_LINE;
+import static lotto.view.output.OutputMessage.EMPTY_STRING;
+import static lotto.view.output.OutputMessage.REQUEST_BONUS_NUMBER;
+import static lotto.view.output.OutputMessage.REQUEST_MANUAL_TICKETS;
+import static lotto.view.output.OutputMessage.REQUEST_MANUAL_TICKET_COUNT;
+import static lotto.view.output.OutputMessage.REQUEST_MONEY;
+import static lotto.view.output.OutputMessage.REQUEST_WINNING_NUMBERS;
+import static lotto.view.output.OutputMessage.TITLE_OF_ANALYSIS;
 
 import java.util.ArrayList;
 import java.util.Collections;

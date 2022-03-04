@@ -1,6 +1,6 @@
 package lotto.domain.ticket.generator;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ class RandomTicketGeneratorTest {
         final Ticket ticket = ticketGenerator.generateTicket();
         final List<Integer> ballNumbers = ticket.getBallNumbers();
         ballNumbers.forEach(number ->
-            assertThat(number).isBetween(TICKET_NUMBER_RANGE_INCLUSIVE_START, TICKET_NUMBER_RANGE_INCLUSIVE_END)
+                assertThat(number).isBetween(TICKET_NUMBER_RANGE_INCLUSIVE_START, TICKET_NUMBER_RANGE_INCLUSIVE_END)
         );
     }
 

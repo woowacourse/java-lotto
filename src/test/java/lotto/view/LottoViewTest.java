@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
@@ -16,8 +17,6 @@ import lotto.utils.MoneyUnit;
 import lotto.view.input.InputView;
 import lotto.view.input.reader.CustomReader;
 import lotto.view.output.OutputView;
-
-import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoViewTest {
 
@@ -48,7 +47,7 @@ class LottoViewTest {
         final int totalTicketCount = MoneyUnit.divide(money);
         assertThatThrownBy(() -> lottoView.requestManualTicketCount(totalTicketCount))
                 .isInstanceOf(LottoException.class)
-                        .hasMessageContaining(LottoExceptionStatus.MANUAL_TICKET_COUNT_CANNOT_BE_TOO_MANY.getMessage());
+                .hasMessageContaining(LottoExceptionStatus.MANUAL_TICKET_COUNT_CANNOT_BE_TOO_MANY.getMessage());
     }
 
     public static Stream<Arguments> provideForManualTicketCountTooManyExceptionTest() {
