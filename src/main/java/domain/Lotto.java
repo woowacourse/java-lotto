@@ -19,7 +19,7 @@ public class Lotto {
 
 	public static Lotto of(String[] lottoNumbers) {
 		return new Lotto(Arrays.stream(lottoNumbers)
-			.mapToInt(Integer::parseInt)
+			.mapToInt(number -> Integer.parseInt(number.trim()))
 			.mapToObj(LottoNumber::of)
 			.collect(Collectors.toList()));
 	}
