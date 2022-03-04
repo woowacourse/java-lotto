@@ -38,7 +38,7 @@ public class WinningLottoNumberTest {
 			.map(number -> LottoNumber.valueOf(number))
 			.collect(Collectors.toList()), LottoNumber.valueOf(10)))
 			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining("[Error]: 당첨 번호는 중복이 있으면 안됩니다");
+			.hasMessageContaining("[Error]: 로또 번호는 중복이 있으면 안됩니다");
 	}
 
 	@Test

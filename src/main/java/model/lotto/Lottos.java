@@ -31,10 +31,16 @@ public class Lottos {
 		lottoStorage.forEach(lotto -> lottosDTOS.add(lotto.getLottoDTO()));
 		return lottosDTOS;
 	}
-	
+
 	public void checkWithWinningNumberAndBonus(WinningLottoNumberDTO winningLottoNumbersDTO,
 		RateOfReturn rateOfReturn) {
 		lottoStorage.forEach(
 			lotto -> rateOfReturn.increaseCountOfRank(lotto.match(winningLottoNumbersDTO)));
+	}
+
+	public void add(List<LottoNumbers> passiveLottos) {
+		for (LottoNumbers passiveLotto : passiveLottos) {
+			lottoStorage.add(passiveLottos.indexOf(passiveLotto), new Lotto(passiveLotto));
+		}
 	}
 }

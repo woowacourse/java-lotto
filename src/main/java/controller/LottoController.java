@@ -72,6 +72,12 @@ public class LottoController {
 		}
 	}
 
+	private Lottos makeLottos() {
+		Lottos lottos = new Lottos(automaticlottoCount);
+		lottos.add(makePassiveLottos());
+		return lottos;
+	}
+
 	private List<LottoNumbers> makePassiveLottos() {
 		List<LottoNumbers> passiveLottos = new ArrayList<>();
 		while (passiveLottoCount.haveRemainToMake()) {
@@ -92,12 +98,8 @@ public class LottoController {
 		}
 	}
 
-	private Lottos makeLottos() {
-		return new Lottos(automaticlottoCount);
-	}
-
 	private void printLottos() {
-		outputView.printLottos(lottos.getLottosDTO());
+		outputView.printLottos(passiveLottoCount.getCount(), automaticlottoCount.getCount(), lottos.getLottosDTO());
 	}
 
 	private WinningLottoNumber storeWinningNumber() {

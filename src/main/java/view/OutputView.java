@@ -5,7 +5,7 @@ import java.util.List;
 import model.lotto.LottoDTO;
 
 public class OutputView {
-	private static final String PURCHASE_MESSAGE = "개를 구매했습니다";
+	private static final String PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 	private static final String RATE_OF_RETURN_MESSAGE = "\n당첨 통계";
 	private static final String LINE = "---------";
 	private static final String RESULT_LOTTO_BONUS_BALL = "%d개 일치, 보너스 볼 일치(%d원) - %d개%n";
@@ -18,8 +18,8 @@ public class OutputView {
 		System.out.println(message);
 	}
 
-	public void printLottos(List<LottoDTO> lottosDTO) {
-		System.out.println(lottosDTO.size() + PURCHASE_MESSAGE);
+	public void printLottos(int passiveSize, int autoSize, List<LottoDTO> lottosDTO) {
+		System.out.println(String.format(PURCHASE_MESSAGE, passiveSize, autoSize));
 		lottosDTO
 			.forEach(lottoDTO -> System.out.println(lottoDTO.getNumbers()));
 	}
