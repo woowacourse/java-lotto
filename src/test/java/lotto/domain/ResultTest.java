@@ -23,7 +23,7 @@ public class ResultTest {
     void setUp() {
 
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lottos lottos = new Lottos(new Count(0), List.of(lotto));
+        Lottos lottos = new Lottos(List.of(lotto));
         WinningLotto winningLotto = new WinningLotto(lotto, new Number(7));
         result = lottos.getResult(winningLotto);
     }

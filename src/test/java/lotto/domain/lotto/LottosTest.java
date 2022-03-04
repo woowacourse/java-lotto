@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import lotto.domain.LottoRanking;
 import lotto.domain.Result;
+import lotto.domain.factory.LottoFactory;
 
 public class LottosTest {
 
@@ -26,9 +27,10 @@ public class LottosTest {
                 Lotto winninglotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
                 Number bonusNumber = new Number(7);
                 WinningLotto winningLotto = new WinningLotto(winninglotto, bonusNumber);
-
-                Lottos lottos = new Lottos(new Count(0), List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-                    new Lotto(List.of(1, 2, 3, 4, 5, 7))));
+                List<Lotto> lottoList = new ArrayList<>();
+                lottoList.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+                lottoList.add(new Lotto(List.of(1, 2, 3, 4, 5, 7)));
+                Lottos lottos = new Lottos(lottoList);
                 Result result = lottos.getResult(winningLotto);
                 assertThat(result.getCount(LottoRanking.FIRST)).isEqualTo(1);
                 assertThat(result.getCount(LottoRanking.SECOND)).isEqualTo(1);
@@ -43,7 +45,10 @@ public class LottosTest {
         @Test
         @DisplayName("구매한 로또의 총합 가격을 알려준다.")
         void it_returns_total_price() {
-            Lottos lottos = new Lottos(new Count(3), new ArrayList<>());
+            Count count = new Count(3);
+            List<Lotto> lottoList = new ArrayList<>();
+            count.play(lottoList, lottos -> lottos.add(LottoFactory.auto()));
+            Lottos lottos = new Lottos(lottoList);
 
             assertThat(lottos.totalPrice()).isEqualTo(new Money(3000));
         }

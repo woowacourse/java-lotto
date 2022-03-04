@@ -20,7 +20,13 @@ public class LottoController {
 
     public void play() {
         Money money = requestMoney();
-        Lottos lottos = requestBuyLottos(money);
+        Count totalLottoCount = money.countToBuyLotto();
+        Count manualLottoCount = requestManualLottoCount(money);
+        Count autoLottoCount = totalLottoCount.subtract(manualLottoCount);
+        OutputView.printLottoCount(manualLottoCount, autoLottoCount);
+        OutputView.printRequestManualLottoNumberUI();
+        Lottos lottos = requestBuyLottos(manualLottoCount, autoLottoCount);
+        OutputView.printLottos(lottos);
         WinningLotto winningLotto = requestWinningLotto();
         printResult(lottos, winningLotto);
     }
@@ -35,14 +41,11 @@ public class LottoController {
         }
     }
 
-    private Lottos requestBuyLottos(Money money) {
-        Count totalLottoCount = money.countToBuyLotto();
-        Count manualLottoCount = requestManualLottoCount(money);
-        Count autoLottoCount = totalLottoCount.subtract(manualLottoCount);
-        OutputView.printRequestManualLottoNumberUI();
-        Lottos lottos = new Lottos(autoLottoCount, requestBuyManualLottoNumbers(manualLottoCount));
-        OutputView.printLottos(lottos);
-        return lottos;
+    private Lottos requestBuyLottos(Count manualLottoCount, Count autoLottoCount) {
+        List<Lotto> lottos = new ArrayList<>();
+        requestBuyManualLottos(lottos, manualLottoCount);
+        requestBuyAutoLottos(lottos, autoLottoCount);
+        return new Lottos(lottos);
     }
 
     private Count requestManualLottoCount(Money money) {
@@ -57,13 +60,15 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> requestBuyManualLottoNumbers(Count manualLottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        int countValue = manualLottoCount.value();
-        while (countValue-- > 0) {
-            Lotto lotto = requestManualLottoNumber();
-            lottos.add(lotto);
-        }
+    private List<Lotto> requestBuyManualLottos(List<Lotto> lottos, Count manualLottoCount) {
+        manualLottoCount.play(lottos, item ->
+            item.add(requestManualLottoNumber()));
+        return lottos;
+    }
+
+    private List<Lotto> requestBuyAutoLottos(List<Lotto> lottos, Count autoLottoCount) {
+        autoLottoCount.play(lottos, item ->
+            item.add(LottoFactory.auto()));
         return lottos;
     }
 
