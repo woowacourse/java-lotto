@@ -19,10 +19,10 @@ class LottoTest {
     @DisplayName("로또 번호들 간에 중복이 있으면 예외를 발생시킨다.")
     void create_exceptionByDuplicatedLottoNumbers_Test() {
         //given
-        final List<Integer> duplicatedNumberValues = Arrays.asList(1, 1, 2, 3, 4, 5);
+        final List<Integer> duplicatedNumbers = Arrays.asList(1, 1, 2, 3, 4, 5);
         final String expectedExceptionMessage = "같은 줄 로또 번호 간에 중복이 존재합니다.";
         //when then
-        assertThatThrownBy(() -> new Lotto(duplicatedNumberValues))
+        assertThatThrownBy(() -> new Lotto(duplicatedNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
     }
@@ -34,12 +34,12 @@ class LottoTest {
         final List<Integer> numbers = Arrays.asList(7, 4, 5, 3, 6, 2);
         final Lotto lotto = new Lotto(numbers);
         final List<Integer> otherNumbers = Arrays.asList(2, 3, 6, 7, 4, 5);
-        final Lotto otherLottoNumbers = new Lotto(otherNumbers);
+        final Lotto anotherLotto = new Lotto(otherNumbers);
         final LottoNumber expectedFirstLottoNumber = LottoNumber.from(2);
         //when
         final LottoNumber actualFirstLottoNumber = lotto.getValues().get(0);
         //then
-        assertThat(lotto).isEqualTo(otherLottoNumbers);
+        assertThat(lotto).isEqualTo(anotherLotto);
         assertThat(actualFirstLottoNumber).isEqualTo(expectedFirstLottoNumber);
     }
 
@@ -56,14 +56,14 @@ class LottoTest {
     }
 
     @ParameterizedTest
-    @DisplayName("보너스 숫자를 제외하고, 당첨된 숫자의 개수를 반환한다.")
+    @DisplayName("다른 로또를 받아 같은 로또 번호의 개수를 반환한다.")
     @MethodSource("provideOtherNumbersAndExpected")
     void getMatchNumbersCount_Test(final List<Integer> otherNumbers, final int expected) {
         //given
-        final Lotto target = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final Lotto otherLottoNumbers = new Lotto(otherNumbers);
+        final Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final Lotto another = new Lotto(otherNumbers);
         //when
-        final int actual = target.getMatchCount(otherLottoNumbers);
+        final int actual = lotto.getMatchCount(another);
         //then
         assertThat(actual).isEqualTo(expected);
     }
