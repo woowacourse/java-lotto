@@ -51,22 +51,22 @@ public class LottoController {
         LottoTicket lottoTicket = new LottoTicket(autoTicketCount);
 
         if (manualTicketCount != 0) {
-            lottoTicket.buyManualTicket(buyManualTicket(manualLottoCount));
+            lottoTicket.addLottoTicket(buyManualTicket(manualLottoCount));
         }
 
         printTickets(manualTicketCount, autoTicketCount, lottoTicket);
         return lottoTicket;
     }
 
-    private List<LottoNumbers> buyManualTicket(ManualLottoCount manualLottoCount) {
+    private LottoTicket buyManualTicket(ManualLottoCount manualLottoCount) {
         List<LottoNumbers> manualTickets = new ArrayList<>();
         int tryCount = manualLottoCount.getValue();
-        
+
         for (int i = tryCount; i > 0; i--) {
             OutputView.printInputManualTicketSentence(i);
             manualTickets.add(getInputLottoNumbers());
         }
-        return manualTickets;
+        return new LottoTicket(manualTickets);
     }
 
     private void printTickets(int manualTryCount, int autoTryCount, LottoTicket lottoTicket) {

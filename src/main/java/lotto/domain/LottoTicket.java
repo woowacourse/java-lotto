@@ -9,31 +9,35 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
-    private final List<LottoNumbers> lottoTickets = new ArrayList<>();
+    private List<LottoNumbers> lottoTicket = new ArrayList<>();
 
     public LottoTicket(int count) {
         generateTickets(count);
     }
 
+    public LottoTicket(final List<LottoNumbers> lottoTicket) {
+        this.lottoTicket = lottoTicket;
+    }
+
     private void generateTickets(int count) {
         for (int i = 0; i < count; i++) {
-            lottoTickets.add(new LottoNumbers());
+            lottoTicket.add(new LottoNumbers());
         }
     }
 
-    public List<LottoNumbers> getLottoTickets() {
-        return Collections.unmodifiableList(lottoTickets);
+    public List<LottoNumbers> getLottoTicket() {
+        return Collections.unmodifiableList(lottoTicket);
     }
 
     public WinningResult calculateWinningStatistic(WinningNumbers winningNumbers) {
-        List<Ranking> rankings = lottoTickets.stream()
+        List<Ranking> rankings = lottoTicket.stream()
                 .map(winningNumbers::calculateRanking)
                 .filter(Objects::nonNull)
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
         return new WinningResult(rankings);
     }
 
-    public void buyManualTicket(List<LottoNumbers> manualTickets) {
-        lottoTickets.addAll(manualTickets);
+    public void addLottoTicket(LottoTicket otherLottoTicket) {
+        lottoTicket.addAll(otherLottoTicket.getLottoTicket());
     }
 }

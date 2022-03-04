@@ -33,7 +33,7 @@ public class OutputView {
     }
 
     public static void printTicket(LottoTicket lottoTicket) {
-        for (LottoNumbers lottoNumbers : lottoTicket.getLottoTickets()) {
+        for (LottoNumbers lottoNumbers : lottoTicket.getLottoTicket()) {
             List<LottoNumber> lottoNumberList = lottoNumbers.getLottoNumbers();
             String sentence = joinList(convertToStringList(lottoNumberList));
             System.out.println(sentence);
