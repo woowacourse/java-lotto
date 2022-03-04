@@ -48,4 +48,16 @@ class MoneyTest {
         // then
         Assertions.assertThat(compare).isTrue();
     }
+
+    @Test
+    @DisplayName("빼기 연산을 할 수 있다.")
+    public void minusMoneyWithOtherMoney() {
+        // given
+        Money aMoney = Money.from(1000);
+        Money bMoney = Money.from(500);
+        // when
+        Money minusMoney = aMoney.minus(bMoney);
+        // then
+        Assertions.assertThat(minusMoney.getAmount()).isEqualTo(500);
+    }
 }
