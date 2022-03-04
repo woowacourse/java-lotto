@@ -31,12 +31,11 @@ public enum LottoRank {
         return prizeAmount;
     }
 
-    public static LottoRank findLottoRank(long targetCorrectCount, boolean isTargetBonused) {
-        LottoRank lottoRank = Arrays.stream(LottoRank.values())
-                .filter(rank -> rank.findCorrectRank(targetCorrectCount, isTargetBonused))
+    public static LottoRank findLottoRank(long targetCorrectCount, boolean targetBonused) {
+        return Arrays.stream(LottoRank.values())
+                .filter(rank -> rank.isSameCorrectCount(targetCorrectCount) && rank.isSameBonus(targetBonused))
                 .findFirst()
                 .orElse(null);
-        return lottoRank;
     }
 
     public static void addLottoResult(LottoResult lottoResult, long targetCorrectCount, boolean targetBonused) {
@@ -44,10 +43,6 @@ public enum LottoRank {
         if (lottoRank != null) {
             lottoResult.addWinningLotto(lottoRank);
         }
-    }
-
-    public boolean findCorrectRank(long targetCorrectCount, boolean targetBonused) {
-        return isSameCorrectCount(targetCorrectCount) && isSameBonus(targetBonused);
     }
 
     private boolean isSameCorrectCount(long targetCorrectCount) {
