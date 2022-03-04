@@ -4,7 +4,6 @@ import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.lottonumber.vo.LottoNumber;
 import lotto.domain.matchkind.LottoMatchKind;
-import lotto.domain.purchaseamount.TotalPurchaseAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,13 +23,12 @@ class LottoMachineTest {
     private final Lotto fifth = new Lotto(Arrays.asList("5", "6", "7", "8", "9", "10"));
     private final Lotto sixth = new Lotto(Arrays.asList("6", "7", "8", "9", "10", "11"));
 
-    private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount.TotalPurchaseAmountBuilder()
-            .setLottoPrice(1000)
-            .setTotalAmount("6000")
-            .setManualPurchaseAmount("6")
-            .build();
     private final List<Lotto> lottos = Arrays.asList(first, second, third, fourth, fifth, sixth);
-    private final LottoMachine lottoMachine = new LottoMachine(totalPurchaseAmount, lottos);
+    private final LottoMachine lottoMachine = new LottoMachine.Builder()
+            .setLottoPrice(1000)
+            .setTotalPurchaseAmount(6000)
+            .setManualLottos(lottos)
+            .build();
     private final WinningNumbers winningNumbers = new WinningNumbers(
             new Lotto(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.from("1"));
 
