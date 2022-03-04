@@ -31,24 +31,24 @@ public class LottoController {
 	private RateOfReturn rateOfReturn;
 
 	public void playGame() {
-		makeLottos();
-		storeWinningNumber();
-		storeBonusBall();
+		lottos = makeLottos();
+		printLottos();
+		lottoWinningNumber = storeWinningNumber();
+		bonusBall = storeBonusBall();
 		compareLottoWithWinningNumber();
 		showResult();
 	}
 
-	private void makeLottos() {
+	private Lottos makeLottos() {
 		try {
 			String money = inputView.inputMoney();
 			InputValidateUtils.inputBlankAndNumber(money, LOTTO_COUNT_BLANK_ERROR_MESSAGE,
 				LOTTO_COUNT_NUMBER_ERROR_MESSAGE);
 			storeMoneyInRateOfReturn(Integer.parseInt(money));
-			lottos = new Lottos(new LottoCount(Integer.parseInt(money)));
-			outputView.printLottos(lottos.getLottosDTO());
+			return new Lottos(new LottoCount(Integer.parseInt(money)));
 		} catch (Exception e) {
 			outputView.printErrorMessage(e.getMessage());
-			makeLottos();
+			return makeLottos();
 		}
 	}
 
@@ -56,16 +56,20 @@ public class LottoController {
 		rateOfReturn = new RateOfReturn(money);
 	}
 
+	private void printLottos() {
+		outputView.printLottos(lottos.getLottosDTO());
+	}
+
 	//WinningNumber
-	private void storeWinningNumber() {
+	private LottoWinningNumber storeWinningNumber() {
 		try {
 			String input = inputView.inputWinningNumbers();
 			InputValidateUtils.inputBlank(input, WINNING_NUMBER_BLANK_ERROR_MESSAGE);
 			List<String> numbers = splitWinningNumber(input);
-			lottoWinningNumber = new LottoWinningNumber(makeInputWinningNumbersToLottoNumbers(numbers));
+			return new LottoWinningNumber(makeInputWinningNumbersToLottoNumbers(numbers));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
-			storeWinningNumber();
+			return storeWinningNumber();
 		}
 	}
 
@@ -82,15 +86,16 @@ public class LottoController {
 	}
 
 	//BonusBall
-	private void storeBonusBall() {
+	private BonusBall storeBonusBall() {
 		try {
 			String input = inputView.inputBonusBall();
 			InputValidateUtils.inputBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
 			bonusBall = new BonusBall(LottoNumber.parseLottoNumber(input));
 			lottoWinningNumber.validateReduplicationWithBonusBall(LottoNumber.valueOf(Integer.parseInt(input)));
+			return bonusBall;
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
-			storeBonusBall();
+			return storeBonusBall();
 		}
 	}
 
