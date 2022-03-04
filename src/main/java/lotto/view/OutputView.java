@@ -23,7 +23,8 @@ public class OutputView {
     }
 
     public void printPurchasedLotto(Lottos lottos) {
-        System.out.printf("%d개를 구매했습니다.\n", lottos.getLottosSize());
+        int passiveLottoCount = lottos.getPassiveLottoCount();
+        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.\n", passiveLottoCount, lottos.getLottosSize() - passiveLottoCount);
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.getPickedNumbers());
         }
@@ -49,5 +50,13 @@ public class OutputView {
     public void printYield(double yield) {
         System.out.printf("총 수익률은 %.2f입니다.\n", yield);
 
+    }
+
+    public void printAskPassivePurchaseCountInputMessage() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public void printPassivePurchaseInputMessage() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 }
