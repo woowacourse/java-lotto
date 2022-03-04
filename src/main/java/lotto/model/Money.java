@@ -26,16 +26,8 @@ public class Money {
         }
     }
 
-    public int getAutoLottoSize(int manualLottoSize) {
-        int autoLottoSize = money / LOTTO_PRICE - manualLottoSize;
-        validateLottoSize(autoLottoSize);
-        return autoLottoSize;
-    }
-
-    private void validateLottoSize(int autoLottoSize) {
-        if (autoLottoSize < 0) {
-            throw new IllegalArgumentException(ERROR_NOT_POSITIVE_SIZE);
-        }
+    public int getBuyableLottoSize() {
+        return money / LOTTO_PRICE;
     }
 
     public float calculateYield(Long numerator) {

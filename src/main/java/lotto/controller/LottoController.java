@@ -9,10 +9,10 @@ import java.util.List;
 public class LottoController {
     public static void runGame() {
         Money money = new Money(InputView.insertMoney());
-        int numberOfManualLotto = InputView.insertNumberOfManualLotto();
+        LottoSize numberOfManualLotto = new LottoSize(InputView.insertNumberOfManualLotto());
         List<Lotto> manualLottos = InputView.insertManualLottos(numberOfManualLotto);
-        Lottos lottos = LottoGame.buyLottos(money, manualLottos);
-        ResultView.printBuyingLotto(lottos.getLottos(), numberOfManualLotto);
+        Lottos lottos = LottoGame.buyLottos(money, manualLottos, numberOfManualLotto);
+        ResultView.printBuyingLotto(lottos.getLottos(), numberOfManualLotto.getSize());
 
         LottoGame lottoGame = new LottoGame(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 

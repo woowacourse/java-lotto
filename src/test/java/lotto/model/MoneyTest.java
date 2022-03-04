@@ -12,9 +12,9 @@ class MoneyTest {
     @DisplayName("로또 구입 금액 입력시 몇 장의 로또 생성하는지 확인")
     void generateLottosTest() {
         Money money = new Money(14000);
-        int numberOfLottos = money.getAutoLottoSize(3);
+        int numberOfLottos = money.getBuyableLottoSize();
 
-        assertThat(numberOfLottos).isEqualTo(11);
+        assertThat(numberOfLottos).isEqualTo(14);
     }
 
     @Test
@@ -22,7 +22,7 @@ class MoneyTest {
     void validateUnitPrice() {
         assertThatThrownBy(() -> {
             Money money = new Money(14001);
-            money.getAutoLottoSize(3);
+            money.getBuyableLottoSize();
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("거스름돈을 지급하지 않습니다. 금액이 남지 않게 지불해주세요.");
     }
@@ -34,15 +34,5 @@ class MoneyTest {
             new Money(-14000);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("구입 금액은 양수여야 합니다.");
-    }
-
-    @Test
-    @DisplayName("수동 로또 구매를 구입 금액보다 많이할 시 예외를 던진다")
-    void validatePositiveManualLottoSizeTest() {
-        assertThatThrownBy(() -> {
-            Money money = new Money(2000);
-            money.getAutoLottoSize(3);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 구입 금액보다 수동 로또 구매 갯수가 많습니다.");
     }
 }

@@ -24,5 +24,4 @@ class LottosTest {
 
         assertThat(lottos.getLottos().size()).isEqualTo(5);
     }
-
 }

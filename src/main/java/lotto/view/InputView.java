@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.Lotto;
+import lotto.model.LottoSize;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,11 +22,11 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Lotto> insertManualLottos(int numberOfManualLotto) {
+    public static List<Lotto> insertManualLottos(LottoSize numberOfManualLotto) {
         scanner.nextLine();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Lotto> manualLottos = new ArrayList<>();
-        for (int i = 0; i < numberOfManualLotto; i++) {
+        for (int i = 0; i < numberOfManualLotto.getSize(); i++) {
             manualLottos.add(new Lotto(convertStringsToIntegers(splitAndTrim(scanner.nextLine()))));
         }
         return manualLottos;

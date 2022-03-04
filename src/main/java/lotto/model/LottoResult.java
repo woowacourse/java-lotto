@@ -12,7 +12,7 @@ public class LottoResult {
     public static LottoResult create(Lottos lottos, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         LottoResult lottoResult = new LottoResult();
 
-        for (Lotto lotto: lottos.getLottos()) {
+        for (Lotto lotto : lottos.getLottos()) {
             Rank currentRank = Rank.find(lotto.matchWinningNumbers(winningNumbers), lotto.isNumberMatch(bonusNumber));
             lottoResult.result.put(currentRank, lottoResult.getRankCount(currentRank) + 1);
         }

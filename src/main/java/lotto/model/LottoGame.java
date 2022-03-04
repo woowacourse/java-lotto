@@ -14,9 +14,9 @@ public class LottoGame {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public static Lottos buyLottos(Money money, List<Lotto> manualLottos) {
+    public static Lottos buyLottos(Money money, List<Lotto> manualLottos, LottoSize numberOfManualLotto) {
         Lottos manual = Lottos.generateManual(manualLottos);
-        Lottos auto = Lottos.generateAuto(money.getAutoLottoSize(manualLottos.size()));
+        Lottos auto = Lottos.generateAuto(numberOfManualLotto.getAutoLottoSize(money));
         return Lottos.generate(auto, manual);
     }
 
