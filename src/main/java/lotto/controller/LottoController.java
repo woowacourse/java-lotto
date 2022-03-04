@@ -22,7 +22,7 @@ public class LottoController {
         return inputManualLottoNumbers(amount);
     }
 
-    public ManualLottoAmount inputManualLottoAmount(int maxAmount) {
+    private ManualLottoAmount inputManualLottoAmount(int maxAmount) {
         try {
             String number = InputView.inputManualLottoAmount();
             return new ManualLottoAmount(number, maxAmount);
@@ -32,7 +32,7 @@ public class LottoController {
         }
     }
 
-    public List<Lotto> inputManualLottoNumbers(int amount) {
+    private List<Lotto> inputManualLottoNumbers(int amount) {
         InputView.printManualLottoGuideMesseage();
         List<Lotto> manualLottos = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
@@ -51,8 +51,10 @@ public class LottoController {
         }
     }
 
-    public Lottos createLottos(List<Lotto> lottos, final int count) {
-        return new Lottos(lottos, count);
+    public Lottos createLottos(final List<Lotto> manualLottos, final int count) {
+        Lottos lottos = new Lottos(manualLottos, count);
+        OutputView.printLottos(manualLottos.size(), lottos);
+        return lottos;
     }
 
     public LottoWinningNumbers createLottoWinningNumbers() {
@@ -88,14 +90,8 @@ public class LottoController {
     }
 
     public Result calculateResult(LottoWinningNumbers lottoWinningNumbers, Lottos lottos) {
-        return new Result(lottoWinningNumbers, lottos);
-    }
-
-    public void printLottos(int manualLottosAmount, Lottos lottos) {
-        OutputView.printLottos(manualLottosAmount, lottos);
-    }
-
-    public void printWinningResult(Result result) {
+        Result result = new Result(lottoWinningNumbers, lottos);
         OutputView.printWinningResult(result);
+        return result;
     }
 }

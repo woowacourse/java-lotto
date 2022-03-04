@@ -19,11 +19,9 @@ public class Application {
         List<Lotto> manualLottos = lottoController.inputManualLottos(money.purchasedLottoAmount());
 
         Lottos lottos = lottoController.createLottos(manualLottos, money.purchasedLottoAmount() - manualLottos.size());
-        lottoController.printLottos(manualLottos.size(), lottos);
         LottoWinningNumbers winningNumbers = lottoController.createLottoWinningNumbers();
 
         Result result = lottoController.calculateResult(winningNumbers, lottos);
-        lottoController.printWinningResult(result);
         moneyController.printProfit(result, money);
     }
 }
