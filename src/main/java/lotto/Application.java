@@ -10,6 +10,8 @@ import lotto.view.output.OutputView;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.util.converter.NumberConverter.convertStringToInt;
+
 public class Application {
     private static final InputView inputView = new ConsoleInputView();
     private static final OutputView outputView = new ConsoleOutputView();
@@ -22,17 +24,25 @@ public class Application {
 
         outputView.printPurchaseCount(lottoController.getManualPurchaseCount(), lottoController.getAutoPurchaseCount());
         outputView.printLottoNumbersGroup(lottoController.getLottos());
-        final List<Integer> winningLotto = getWinningLotto();
-        final int bonusBall = inputBonusBall();
 
-        outputView.printCountOfWinningByMatchKind(lottoController.getWinningResult(winningLotto, bonusBall));
-        outputView.printProfitRate(lottoController.getProfitRate(winningLotto, bonusBall));
+        inputWinningInfoAndPrintResult();
+    }
 
+    private static void inputWinningInfoAndPrintResult() {
+        try {
+            final List<Integer> winningLotto = getWinningLotto2();
+            final int bonusBall = inputBonusBall2();
+            outputView.printCountOfWinningByMatchKind(lottoController.getWinningResult(winningLotto, bonusBall));
+            outputView.printProfitRate(lottoController.getProfitRate(winningLotto, bonusBall));
+        } catch (final Exception e) {
+            inputView.printErrorMessage(e.getMessage());
+            inputWinningInfoAndPrintResult();
+        }
     }
 
     private static void inputPurchaseAmount() {
         try {
-            final int purchaseAmount = Integer.parseInt(inputView.inputPurchaseAmount());
+            final int purchaseAmount = convertStringToInt(inputView.inputPurchaseAmount());
             lottoController.setPurchaseAmount(purchaseAmount);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
@@ -43,7 +53,7 @@ public class Application {
     private static int inputManualPurchaseCount() {
         try {
             final String manualPurchaseCount = inputView.inputManualPurchaseAmount();
-            return Integer.parseInt(manualPurchaseCount);
+            return convertStringToInt(manualPurchaseCount);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
             return inputManualPurchaseCount();
@@ -54,30 +64,20 @@ public class Application {
         try {
             final List<String> manualLottos = inputView.inputManualLottoNumbers(manualPurchaseCount);
             lottoController.setManualLottoNumbers(manualLottos);
-        } catch (final IllegalArgumentException e) {
+        } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
             inputManualLottoNumbers(manualPurchaseCount);
         }
     }
 
-    private static List<Integer> getWinningLotto() {
+    private static List<Integer> getWinningLotto2() {
         final List<String> winningLotto = inputView.inputLastWeekWinningNumbers();
-        try {
-            return winningLotto.stream()
-                    .map(NumberConverter::convertStringToInt)
-                    .collect(Collectors.toUnmodifiableList());
-        } catch (Exception e) {
-            inputView.printErrorMessage(e.getMessage());
-            return getWinningLotto();
-        }
+        return winningLotto.stream()
+                .map(NumberConverter::convertStringToInt)
+                .collect(Collectors.toUnmodifiableList());
     }
 
-    private static int inputBonusBall() {
-        try {
-            return Integer.parseInt(inputView.inputBonusNumber());
-        } catch (final Exception e) {
-            inputView.printErrorMessage(e.getMessage());
-            return inputBonusBall();
-        }
+    private static int inputBonusBall2() {
+        return convertStringToInt(inputView.inputBonusNumber());
     }
 }
