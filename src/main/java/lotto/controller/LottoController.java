@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.model.lotto.*;
-import lotto.model.result.Money;
-import lotto.model.result.RateOfReturn;
-import lotto.model.result.WinningResult;
+import lotto.model.lotto.result.Money;
+import lotto.model.lotto.result.RateOfReturn;
+import lotto.model.lotto.result.WinningResult;
 import lotto.model.lotto.WinningLotto;
 import lotto.model.lotto.WinningLottoResponse;
 import lotto.utils.ConverterUtils;

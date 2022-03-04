@@ -3,8 +3,8 @@ package lotto.view;
 import java.util.List;
 
 import lotto.model.lotto.LottoResponse;
-import lotto.model.result.Rank;
-import lotto.model.result.WinningResult;
+import lotto.model.lotto.result.Rank;
+import lotto.model.lotto.result.WinningResult;
 
 public class OutputView {
     private static final String PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";

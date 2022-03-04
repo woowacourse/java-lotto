@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import lotto.model.result.WinningResult;
+import lotto.model.lotto.result.WinningResult;
 
 public class LottoStorage {
     private final List<Lotto> lottoNumbers;

@@ -7,7 +7,6 @@ import java.util.Set;
 
 import lotto.model.message.BonusBallExceptionMessage;
 import lotto.model.message.LottoNumberExceptionMessage;
-import lotto.utils.InputValidateUtils;
 
 import static lotto.model.lotto.LottoNumbers.MAX;
 import static lotto.model.lotto.LottoNumbers.MIN;

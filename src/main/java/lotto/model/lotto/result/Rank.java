@@ -1,4 +1,4 @@
-package lotto.model.result;
+package lotto.model.lotto.result;
 
 public enum Rank {
     THREE(3, 5000),

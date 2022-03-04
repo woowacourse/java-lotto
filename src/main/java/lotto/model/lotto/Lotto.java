@@ -3,8 +3,8 @@ package lotto.model.lotto;
 import java.util.*;
 
 import lotto.model.message.LottoNumberExceptionMessage;
-import lotto.model.result.Rank;
-import lotto.model.result.WinningResult;
+import lotto.model.lotto.result.Rank;
+import lotto.model.lotto.result.WinningResult;
 
 import static lotto.model.lotto.LottoNumbers.MAX;
 import static lotto.model.lotto.LottoNumbers.MIN;

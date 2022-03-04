@@ -2,8 +2,8 @@ package lotto.model.lotto;
 
 import java.util.List;
 
-import lotto.model.result.RateOfReturn;
-import lotto.model.result.WinningResult;
+import lotto.model.lotto.result.RateOfReturn;
+import lotto.model.lotto.result.WinningResult;
 
 public class LottoGame {
 

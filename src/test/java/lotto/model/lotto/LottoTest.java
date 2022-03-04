@@ -10,8 +10,8 @@ import org.assertj.core.api.Assertions;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.entry;
 
-import lotto.model.result.WinningResult;
-import lotto.model.result.Rank;
+import lotto.model.lotto.result.WinningResult;
+import lotto.model.lotto.result.Rank;
 
 class LottoTest {
     private WinningResult winningResult;

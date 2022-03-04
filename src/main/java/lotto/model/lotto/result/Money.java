@@ -1,4 +1,4 @@
-package lotto.model.result;
+package lotto.model.lotto.result;
 
 import lotto.model.message.LottoCountExceptionMessage;
 

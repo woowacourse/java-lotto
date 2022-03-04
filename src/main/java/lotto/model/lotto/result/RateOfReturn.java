@@ -1,4 +1,4 @@
-package lotto.model.result;
+package lotto.model.lotto.result;
 
 public class RateOfReturn {
     private final Money money;

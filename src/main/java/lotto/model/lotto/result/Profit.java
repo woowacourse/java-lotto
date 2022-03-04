@@ -1,4 +1,4 @@
-package lotto.model.result;
+package lotto.model.lotto.result;
 
 public class Profit {
     private static final int INIT = 0;
