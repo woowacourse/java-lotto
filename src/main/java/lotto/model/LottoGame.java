@@ -8,7 +8,7 @@ import lotto.model.numbergenerator.LottoNumberGenerator;
 import lotto.model.numbergenerator.ManualGenerator;
 
 public class LottoGame {
-    private final AutoLottos autoLottos;
+    private final Lottos autoLottos;
     private final LottoMoney lottoMoney;
 
     public LottoGame(int lottoMoney, int numberOfManualLottos, LottoNumberGenerator lottoNumberGenerator) {
@@ -16,8 +16,8 @@ public class LottoGame {
         this.autoLottos = buyAutoLottos(lottoNumberGenerator);
     }
 
-    private AutoLottos buyAutoLottos(LottoNumberGenerator lottoNumberGenerator) {
-        return new AutoLottos(new Lottos(lottoNumberGenerator, lottoMoney.getAutoLottoSize()));
+    private Lottos buyAutoLottos(LottoNumberGenerator lottoNumberGenerator) {
+        return new AutoLottos(lottoNumberGenerator, lottoMoney.getAutoLottoSize());
     }
 
     public Lottos buyManualLottos(List<List<Integer>> inputManualLottos) {

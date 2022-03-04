@@ -8,7 +8,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import lotto.model.lottos.AutoLottos;
 import lotto.model.lottos.Lottos;
 
 public class LottoResult {
@@ -16,11 +15,12 @@ public class LottoResult {
 
     private final Map<Rank, Long> result;
 
-    public LottoResult(Lottos manualLottos, AutoLottos autoLottos, List<Integer> integers, int bonusNumber) {
+    public LottoResult(Lottos manualLottos, Lottos autoLottos, List<Integer> integers, int bonusNumber) {
         List<Integer> winningNumbers = new ArrayList<>(integers);
         validateEmptyCollection(winningNumbers);
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);
-        this.result = generateLottoResult(manualLottos, autoLottos, new Lotto(winningNumbers), new LottoNumber(bonusNumber));
+        this.result = generateLottoResult(manualLottos, autoLottos, new Lotto(winningNumbers),
+            new LottoNumber(bonusNumber));
     }
 
     private void validateDuplicateBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
@@ -29,7 +29,7 @@ public class LottoResult {
         }
     }
 
-    private Map<Rank, Long> generateLottoResult(Lottos manualLottos, AutoLottos autoLottos, Lotto winningNumbers,
+    private Map<Rank, Long> generateLottoResult(Lottos manualLottos, Lottos autoLottos, Lotto winningNumbers,
         LottoNumber bonusNumber) {
         return Map.copyOf(manualLottos.getTotalLottos(autoLottos).stream()
             .map(lotto -> lotto.match(winningNumbers, bonusNumber))

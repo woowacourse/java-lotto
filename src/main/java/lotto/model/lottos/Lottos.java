@@ -1,7 +1,5 @@
 package lotto.model.lottos;
 
-import static lotto.ValidationUtils.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +27,7 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public List<Lotto> getTotalLottos(AutoLottos autoLottos) {
+    public List<Lotto> getTotalLottos(Lottos autoLottos) {
         List<Lotto> copiedLottos = new ArrayList<>(this.lottos);
         copiedLottos.addAll(autoLottos.getLottos());
         return List.copyOf(copiedLottos);

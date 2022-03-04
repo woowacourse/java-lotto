@@ -20,7 +20,8 @@ class LottoGameTest {
     @DisplayName("수익률 계산 확인")
     void calculateYieldTest() {
         LottoGame lottoGame = new LottoGame(1000, 0, new TestNumberGenerator());
-        LottoResult lottoResult = lottoGame.generateLottoResult(new Lottos(new ManualGenerator(Collections.emptyList()), 0),
+        LottoResult lottoResult = lottoGame.generateLottoResult(
+            new Lottos(new ManualGenerator(Collections.emptyList()), 0),
             Arrays.asList(1, 2, 3, 4, 5, 6),
             7);
         Yield yield = lottoGame.calculateYield(lottoResult);

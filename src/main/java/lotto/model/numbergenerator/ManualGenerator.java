@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class ManualGenerator implements LottoNumberGenerator{
+public class ManualGenerator implements LottoNumberGenerator {
     private final Iterator<List<Integer>> manualLottos;
 
     public ManualGenerator(List<List<Integer>> manualLottos) {

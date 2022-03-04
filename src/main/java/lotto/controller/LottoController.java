@@ -17,7 +17,8 @@ public class LottoController {
         Lottos manualLottos = lottoGame.buyManualLottos(inputManualLottos(numberOfManualLottos));
         printGeneratedLottos(manualLottos.getLottos(), lottoGame.getAutoLottos());
 
-        LottoResult lottoResult = lottoGame.generateLottoResult(manualLottos, inputWinningNumbers(), inputBonusNumber());
+        LottoResult lottoResult = lottoGame.generateLottoResult(manualLottos, inputWinningNumbers(),
+            inputBonusNumber());
         printResultStatistics(lottoResult);
         printYield(lottoGame.calculateYield(lottoResult));
     }

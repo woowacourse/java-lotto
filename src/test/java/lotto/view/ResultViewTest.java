@@ -21,15 +21,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.model.LottoMoney;
 import lotto.model.LottoResult;
-import lotto.model.lottos.AutoLottos;
-import lotto.model.lottos.Lottos;
 import lotto.model.Yield;
+import lotto.model.lottos.Lottos;
 import lotto.model.numbergenerator.LottoNumberGenerator;
 
 class ResultViewTest {
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private final AutoLottos autoLottos = new AutoLottos(new Lottos(new TestNumberGenerator(), 2));
+    private final Lottos autoLottos = new Lottos(new TestNumberGenerator(), 2);
     private final Lottos manualLottos = new Lottos(new ManualTestNumberGenerator(), 1);
 
     @BeforeEach
