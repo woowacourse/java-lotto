@@ -18,7 +18,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber valueOf(final int number) {
+    public synchronized static LottoNumber valueOf(final int number) {
         checkNumberRightRange(number);
         if (LOTTO_NUMBER_CACHE == null) {
             LOTTO_NUMBER_CACHE = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
