@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class RateOfReturn {
 	private final int money;
-	private int sumMoneyOfReturns;
+	private long sumMoneyOfReturns;
 	private Map<Rank, Integer> countOfResult;
 
 	public RateOfReturn(int money) {
