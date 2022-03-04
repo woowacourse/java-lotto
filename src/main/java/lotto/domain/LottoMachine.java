@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.generator.LottoGenerator;
+import lotto.domain.generator.LottoRandomGenerator;
 import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.Lottos;
 import lotto.domain.lottonumber.WinningNumbers;
@@ -15,10 +15,10 @@ public class LottoMachine {
     private final Lottos lottos;
     private final TotalPurchaseAmount totalPurchaseAmount;
 
-    public LottoMachine(final LottoGenerator lottoGenerator, final TotalPurchaseAmount totalPurchaseAmount,
+    public LottoMachine(final TotalPurchaseAmount totalPurchaseAmount,
                         final List<Lotto> manualLottos) {
         this.totalPurchaseAmount = totalPurchaseAmount;
-        lottos = new Lottos(lottoGenerator.generateLottosExceptManualGenerated(
+        lottos = new Lottos(new LottoRandomGenerator().generateLottosExceptManualGenerated(
                 this.totalPurchaseAmount.getCountOfTotalLottoNumbers(), manualLottos));
     }
 

@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 import static lotto.util.constants.Lotto.LAST_LOTTO_NUMBER;
 
-public class LottoRandomGenerator implements LottoGenerator {
+public class LottoRandomGenerator {
     private static final int BONUS_NUMBER_INDEX = 6;
 
     private final List<LottoNumber> basicNumbers;
@@ -20,9 +20,8 @@ public class LottoRandomGenerator implements LottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    @Override
     public List<Lotto> generateLottosExceptManualGenerated(final int numberOfGenerating, final List<Lotto> manualGenerated) {
-        final Set<Lotto> generatedNumbersGroup = new HashSet<>(manualGenerated);
+        final Set<Lotto> generatedNumbersGroup = new LinkedHashSet<>(manualGenerated);
         return generateLottos(generatedNumbersGroup, numberOfGenerating);
     }
 

@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.LottoMachine;
-import lotto.domain.generator.LottoRandomGenerator;
 import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.Lottos;
 import lotto.domain.purchaseamount.TotalPurchaseAmount;
@@ -23,7 +22,7 @@ public class LottoMachineInitializer {
                 inputTotalPurchaseAmount(lottoPrice);
         final TotalPurchaseAmount totalPurchaseAmount = inputManualPurchaseAmount(totalPurchaseAmountBuilder).build();
         final List<Lotto> manualLottos = inputManualLottos(totalPurchaseAmount.getCountOfManualLottoNumbers());
-        return new LottoMachine(new LottoRandomGenerator(), totalPurchaseAmount, manualLottos);
+        return new LottoMachine(totalPurchaseAmount, manualLottos);
     }
 
     private TotalPurchaseAmount.TotalPurchaseAmountBuilder inputTotalPurchaseAmount(final int lottoPrice) {

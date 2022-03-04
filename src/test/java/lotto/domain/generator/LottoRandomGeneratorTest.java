@@ -18,7 +18,7 @@ class LottoRandomGeneratorTest {
         final Lotto secondUserInputLotto = new Lotto(Arrays.asList("2", "3", "4", "5", "6", "7"));
         final List<Lotto> userInputLottos = Arrays.asList(firstUserInputLotto, secondUserInputLotto);
         final int numberOfGenerating = 6;
-        final LottoGenerator lottoRandomGenerator = new LottoRandomGenerator();
+        final LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
         //when
         final List<Lotto> generated =
                 lottoRandomGenerator.generateLottosExceptManualGenerated(numberOfGenerating, userInputLottos);
