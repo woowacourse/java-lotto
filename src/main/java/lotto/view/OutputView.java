@@ -10,10 +10,10 @@ import lotto.dto.Result;
 
 public class OutputView {
 
-    private static final String PREFIX_MANUAL_LOTTO_AMOUNT = "수동으로 ";
-    private static final String SUFFIX_MANUAL_LOTTO_AMOUNT = "장, ";
-    private static final String PREFIX_AUTOMATIC_LOTTO_AMOUNT = "자동으로 ";
-    private static final String SUFFIX_AUTOMATIC_LOTTO_AMOUNT = "개를 구매했습니다.";
+    private static final String PREFIX_MANUAL_LOTTO_COUNT = "수동으로 ";
+    private static final String SUFFIX_MANUAL_LOTTO_COUNT = "장, ";
+    private static final String PREFIX_AUTOMATIC_LOTTO_COUNT = "자동으로 ";
+    private static final String SUFFIX_AUTOMATIC_LOTTO_COUNT = "개를 구매했습니다.";
     private static final String EXPLAIN_WINNING_STATISTICS = "당첨 통계";
     private static final String BASIC_LINE = "---------";
     private static final String SUFFIX_SAME_NUMBER = "개 일치 (";
@@ -27,12 +27,12 @@ public class OutputView {
     private static final String SUFFIX_PRINT_LOTTO = "]";
     private static final String PRINT_LOTTO_DELIMITER = ", ";
 
-    public static void printLottos(final int manualLottosAmount, final Lottos lottos) {
+    public static void printLottos(final int manualLottosCount, final Lottos lottos) {
         System.out.println();
-        if (manualLottosAmount != 0) {
-            System.out.print(PREFIX_MANUAL_LOTTO_AMOUNT + manualLottosAmount + SUFFIX_MANUAL_LOTTO_AMOUNT);
+        if (manualLottosCount != 0) {
+            System.out.print(PREFIX_MANUAL_LOTTO_COUNT + manualLottosCount + SUFFIX_MANUAL_LOTTO_COUNT);
         }
-        System.out.println(PREFIX_AUTOMATIC_LOTTO_AMOUNT + (lottos.getSize() - manualLottosAmount) + SUFFIX_AUTOMATIC_LOTTO_AMOUNT);
+        System.out.println(PREFIX_AUTOMATIC_LOTTO_COUNT + (lottos.getSize() - manualLottosCount) + SUFFIX_AUTOMATIC_LOTTO_COUNT);
         lottos.getLottos()
                 .stream()
                 .forEach(lotto -> printLotto(lotto));

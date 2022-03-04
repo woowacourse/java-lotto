@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 @Nested
 @DisplayName("수동으로 구매할 로또 수는")
-public class ManualLottoAmountTest {
+public class ManualLottoCountTest {
 
     private static final String ERROR_WRONG_INPUT_NUMBER = "[ERROR] 수동으로 구매할 로또 수는 구입금액 내에서 구매가능한 0 이상의 수여야 합니다.";
 
@@ -19,7 +19,7 @@ public class ManualLottoAmountTest {
         @Test
         @DisplayName("에러를 출력한다.")
         void returns_error() {
-            assertThatThrownBy(() -> new ManualLottoAmount("value", 10))
+            assertThatThrownBy(() -> new ManualLottoCount("value", 10))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ERROR_WRONG_INPUT_NUMBER);
         }
@@ -31,7 +31,7 @@ public class ManualLottoAmountTest {
         @Test
         @DisplayName("에러를 출력한다.")
         void returns_error() {
-            assertThatThrownBy(() -> new ManualLottoAmount("-1", 10))
+            assertThatThrownBy(() -> new ManualLottoCount("-1", 10))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ERROR_WRONG_INPUT_NUMBER);
         }
@@ -43,7 +43,7 @@ public class ManualLottoAmountTest {
         @Test
         @DisplayName("에러를 출력한다.")
         void returns_error() {
-            assertThatThrownBy(() -> new ManualLottoAmount("20", 10))
+            assertThatThrownBy(() -> new ManualLottoCount("20", 10))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ERROR_WRONG_INPUT_NUMBER);
         }
@@ -55,7 +55,7 @@ public class ManualLottoAmountTest {
         @Test
         @DisplayName("정상적으로 생성된다.")
         void returns_error() {
-            assertThatCode(() -> new ManualLottoAmount("10", 10)).doesNotThrowAnyException();
+            assertThatCode(() -> new ManualLottoCount("10", 10)).doesNotThrowAnyException();
         }
     }
 }

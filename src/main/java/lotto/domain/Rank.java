@@ -22,10 +22,8 @@ public enum Rank {
         if (matchCount == 5 && hasBonusNumber) {
             return Rank.SECOND;
         }
-        if (matchCount == 5 && !hasBonusNumber) {
-            return Rank.THIRD;
-        }
         return Arrays.stream(Rank.values())
+                .filter(rank -> rank != SECOND)
                 .filter(rank -> rank.isSameMatchCount(matchCount))
                 .findFirst()
                 .orElse(NO_MATCH);

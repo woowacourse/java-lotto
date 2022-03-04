@@ -19,9 +19,9 @@ public class Money {
         checkDividingMoney(Integer.parseInt(money));
     }
 
-    private void checkValidInt(final String money) {
+    private void checkValidInt(final String number) {
         try {
-            Integer.parseInt(money);
+            Integer.parseInt(number);
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(ERROR_WRONG_INPUT_MONEY);
         }
@@ -39,7 +39,7 @@ public class Money {
         }
     }
 
-    public int purchasedLottoAmount() {
+    public int purchasedLottoCount() {
         return money / BASIC_LOTTO_MONEY;
     }
 

@@ -38,7 +38,7 @@ class LottosTest {
                     .collect(Collectors.toList());
             List<Lotto> manualLottos = new ArrayList<>();
             manualLottos.add(new Lotto(manualLottoNumbers));
-            assertThat(new Lottos(manualLottos, 3).getLottos()).hasSize(4);
+            assertThat(new Lottos(manualLottos, 4).getLottos()).hasSize(4);
         }
     }
 }

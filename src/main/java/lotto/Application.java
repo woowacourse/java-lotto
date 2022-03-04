@@ -16,12 +16,12 @@ public class Application {
         LottoController lottoController = new LottoController();
 
         Money money = moneyController.inputMoney();
-        List<Lotto> manualLottos = lottoController.inputManualLottos(money.purchasedLottoAmount());
+        List<Lotto> manualLottos = lottoController.inputManualLottos(money.purchasedLottoCount());
 
-        Lottos lottos = lottoController.createLottos(manualLottos, money.purchasedLottoAmount() - manualLottos.size());
+        Lottos lottos = lottoController.createLottos(manualLottos, money.purchasedLottoCount());
         LottoWinningNumbers winningNumbers = lottoController.createLottoWinningNumbers();
 
-        Result result = lottoController.calculateResult(winningNumbers, lottos);
+        Result result = lottoController.createResult(winningNumbers, lottos);
         moneyController.printProfit(result, money);
     }
 }

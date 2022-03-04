@@ -8,8 +8,9 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(final List<Lotto> lottos, final int count) {
+    public Lottos(final List<Lotto> lottos, final int totalCount) {
         List<Lotto> newLottos = new ArrayList<>(lottos);
+        int count = totalCount - lottos.size();
         for (int i = 0; i < count; i++) {
             newLottos.add(new Lotto());
         }

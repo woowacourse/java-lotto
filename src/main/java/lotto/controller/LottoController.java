@@ -8,7 +8,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Lottos;
-import lotto.domain.ManualLottoAmount;
+import lotto.domain.ManualLottoCount;
 import lotto.dto.Result;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -17,42 +17,38 @@ public class LottoController {
 
     private static final String LOTTO_DELIMITER = ",";
 
-    public List<Lotto> inputManualLottos(int maxAmount) {
-        int amount = inputManualLottoAmount(maxAmount).getAmount();
-        return inputManualLottoNumbers(amount);
-    }
-
-    private ManualLottoAmount inputManualLottoAmount(int maxAmount) {
-        try {
-            String number = InputView.inputManualLottoAmount();
-            return new ManualLottoAmount(number, maxAmount);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputManualLottoAmount(maxAmount);
-        }
-    }
-
-    private List<Lotto> inputManualLottoNumbers(int amount) {
+    public List<Lotto> inputManualLottos(final int totalCount) {
+        ManualLottoCount manualLottoCount = inputManualLottoCount(totalCount);
         InputView.printManualLottoGuideMesseage();
         List<Lotto> manualLottos = new ArrayList<>();
-        for (int i = 0; i < amount; i++) {
-            manualLottos.add(inputManualLottoNumber());
+        for (int i = 0; i < manualLottoCount.getCount(); i++) {
+            manualLottos.add(inputManualLottoNumbers());
         }
         return manualLottos;
     }
 
-    private Lotto inputManualLottoNumber() {
+    private ManualLottoCount inputManualLottoCount(int totalCount) {
         try {
-            String numbers = removeBlank(InputView.inputManualLottoNumber());
-            return changeNumbersToLotto(numbers);
+            String count = InputView.inputManualLottoCount();
+            return new ManualLottoCount(count, totalCount);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return inputManualLottoNumber();
+            return inputManualLottoCount(totalCount);
         }
     }
 
-    public Lottos createLottos(final List<Lotto> manualLottos, final int count) {
-        Lottos lottos = new Lottos(manualLottos, count);
+    private Lotto inputManualLottoNumbers() {
+        try {
+            String numbers = removeBlank(InputView.inputManualLottoNumbers());
+            return changeNumbersToLotto(numbers);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputManualLottoNumbers();
+        }
+    }
+
+    public Lottos createLottos(final List<Lotto> manualLottos, final int totalCount) {
+        Lottos lottos = new Lottos(manualLottos, totalCount);
         OutputView.printLottos(manualLottos.size(), lottos);
         return lottos;
     }
@@ -89,7 +85,7 @@ public class LottoController {
         return value.replace(" ", "");
     }
 
-    public Result calculateResult(LottoWinningNumbers lottoWinningNumbers, Lottos lottos) {
+    public Result createResult(LottoWinningNumbers lottoWinningNumbers, Lottos lottos) {
         Result result = new Result(lottoWinningNumbers, lottos);
         OutputView.printWinningResult(result);
         return result;
