@@ -11,7 +11,7 @@ import lotto.model.lotto.BonusBall;
 import lotto.model.lotto.LottoBall;
 import lotto.model.lotto.WinningBalls;
 import lotto.model.prize.MatchResult;
-import lotto.model.prize.PrizeInformations;
+import lotto.model.prize.PrizeInformation;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -26,10 +26,10 @@ public class Controller {
 		showPurchase(totalCount, manualCount, lottos);
 
 		WinningBalls winningBalls = getWinningNumbers();
-		PrizeInformations prizeInformations =
+		PrizeInformation prizeInformation =
 				getPrize(lottos, winningBalls, getBonusNumber(winningBalls));
 
-		ResultView.showEarningRate(prizeInformations.calculateEarningRate(money));
+		ResultView.showEarningRate(prizeInformation.calculateEarningRate(money));
 	}
 
 	private Money getMoney() {
@@ -73,18 +73,18 @@ public class Controller {
 		ResultView.showLottos(LottoDTO.from(lottos));
 	}
 
-	private PrizeInformations getPrize(
+	private PrizeInformation getPrize(
 			Lottos lottos, WinningBalls winningBalls, BonusBall bonusBall) {
 		List<MatchResult> matchResults = lottos.match(winningBalls, bonusBall);
 
 		return getPrizeInformations(matchResults);
 	}
 
-	private PrizeInformations getPrizeInformations(List<MatchResult> matchResults) {
-		PrizeInformations prizeInformations = PrizeInformations.from(matchResults);
-		ResultView.showPrizeInformation(PrizeInformationDTO.from(prizeInformations));
+	private PrizeInformation getPrizeInformations(List<MatchResult> matchResults) {
+		PrizeInformation prizeInformation = PrizeInformation.from(matchResults);
+		ResultView.showPrizeInformation(PrizeInformationDTO.from(prizeInformation));
 
-		return prizeInformations;
+		return prizeInformation;
 	}
 
 	private WinningBalls getWinningNumbers() {
