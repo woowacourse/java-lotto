@@ -20,24 +20,24 @@ class WinningNumbersTest {
     @DisplayName("당첨 번호와 보너스 번호에 중복이 있으면 예외를 발생시킨다.")
     void create_exceptionByDuplicationOfTargetNumbersAndBonusNumber_Test() {
         //given
-        final List<Integer> winningLotto = Arrays.asList(1, 2, 3, 4, 5, 6);
+        final List<Integer> winningLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         final int bonusNumber = 1;
         final String expectedExceptionMessage = "당첨 번호와 보너스 번호에 중복이 있으면 안됩니다.";
         //when then
-        assertThatThrownBy(() -> new WinningNumbers(winningLotto, bonusNumber))
+        assertThatThrownBy(() -> new WinningNumbers(winningLottoNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
     }
 
     @ParameterizedTest
-    @DisplayName("로또 숫자 6개를 받아 당첨 번호와 보너스 번호를 비교해 당첨 종류를 반환한다.")
+    @DisplayName("로또 하나를 받아 당첨 번호와 보너스 번호를 비교해 당첨 종류를 반환한다.")
     @MethodSource("provideLottoNumbersAndMatchKind")
-    void getLottoMatchResult_Test(final List<Integer> numbers, final WinningKind expected) {
+    void getLottoMatchResult_Test(final List<Integer> otherLottoNumbers, final WinningKind expected) {
         //given
-        final List<Integer> winningLotto = Arrays.asList(1, 2, 3, 4, 5, 6);
+        final List<Integer> winningLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         final int bonusNumber = 45;
-        final WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
-        final Lotto lotto = new Lotto(numbers);
+        final WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
+        final Lotto lotto = new Lotto(otherLottoNumbers);
         //when
         final WinningKind actual = winningNumbers.getLottoMatchResult(lotto);
         //then

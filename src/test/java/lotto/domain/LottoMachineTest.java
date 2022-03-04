@@ -36,7 +36,7 @@ class LottoMachineTest {
     private final int bonusNumber = 1;
 
     @Test
-    @DisplayName("자동 개수를 반환한다.")
+    @DisplayName("자동 구매 개수를 반환한다.")
     void getCountOfLottoNumbers_Test() {
         final int expected = 0;
         //when
@@ -57,7 +57,7 @@ class LottoMachineTest {
     }
 
     @Test
-    @DisplayName("구매한 모든 로또 숫자들을 반환한다.")
+    @DisplayName("모든 로또들을 반환한다.")
     void getLottoNumbersGroup_Test() {
         //given
         final List<Lotto> expected = Arrays.asList(

@@ -24,7 +24,7 @@ class LottosTest {
     private final WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(2, 3, 4, 5, 6, 7), 1);
 
     @Test
-    @DisplayName("구매한 모든 로또 숫자들을 반환한다.")
+    @DisplayName("모든 로또들을 반환한다.")
     void getLottos_Test() {
         final List<Lotto> expected = Arrays.asList(first, second, third, fourth, fifth, sixth);
         //when
@@ -34,7 +34,7 @@ class LottosTest {
     }
 
     @Test
-    @DisplayName("당첨 번호와 구매 금액을 받아 당첨 결과를 반환한다.")
+    @DisplayName("우승 번호들을 받아 당첨 결과를 반환한다.")
     void getWinningResult_Test() {
         //given
         final Map<WinningKind, Integer> expected = Map.of(

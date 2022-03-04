@@ -13,7 +13,7 @@ class TotalPurchaseAmountTest {
             .build();
 
     @Test
-    @DisplayName("전체 구매 개수를 반환한다.")
+    @DisplayName("로또 총 구매 개수를 반환한다.")
     void getCountOfTotalLottoNumbers_Test() {
         //given
         final int expected = 8;
