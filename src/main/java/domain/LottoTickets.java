@@ -17,20 +17,20 @@ public class LottoTickets {
         this.selfPurchaseCount = selfPurchaseCount;
     }
 
-    public static LottoTickets generateTickets(LottoMoney autoPurchaseLottoMoney,
-                                               NumberGenerateStrategy numberGenerateStrategy) {
+    public static LottoTickets generateAutoTickets(LottoMoney autoPurchaseLottoMoney,
+                                                   NumberGenerateStrategy numberGenerateStrategy) {
         int autoPurchaseCount = autoPurchaseLottoMoney.getValue() / LottoGame.TICKET_PRICE;
         List<LottoTicket> lottoTickets = new ArrayList<>(
                 autoGenerateTickets(numberGenerateStrategy, autoPurchaseCount));
         return new LottoTickets(lottoTickets, 0);
     }
 
-    public static LottoTickets from(List<Set<Integer>> selfTicketNumbers) {
-        List<LottoTicket> lottoTickets = generateTicket(selfTicketNumbers);
-        return new LottoTickets(lottoTickets, selfTicketNumbers.size());
+    public static LottoTickets fromTicketNumbers(List<Set<Integer>> ticketNumbers) {
+        List<LottoTicket> lottoTickets = boxTicket(ticketNumbers);
+        return new LottoTickets(lottoTickets, ticketNumbers.size());
     }
 
-    private static List<LottoTicket> generateTicket(List<Set<Integer>> selfTicketNumbers) {
+    private static List<LottoTicket> boxTicket(List<Set<Integer>> selfTicketNumbers) {
         return selfTicketNumbers.stream()
                 .map(LottoTicket::fromNumberValues)
                 .collect(Collectors.toList());

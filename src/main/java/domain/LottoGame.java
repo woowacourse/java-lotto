@@ -15,7 +15,7 @@ public class LottoGame {
     }
 
     public LottoTickets purchaseAutoTickets(LottoMoney purchaseMoney) {
-        return LottoTickets.generateTickets(purchaseMoney, numberGenerateStrategy);
+        return LottoTickets.generateAutoTickets(purchaseMoney, numberGenerateStrategy);
     }
 
     public LottoResult createWinningResult(LottoTickets lottoTickets, WinningTicket winningTicket) {

@@ -6,6 +6,7 @@ import java.util.Set;
 public class LottoTicket {
     public static final int SIZE = 6;
     public static final String SIZE_ERROR_MESSAGE = String.format("한 티켓의 로또 번호는 %d개여야 합니다.", SIZE);
+    
     private final Set<LottoNumber> lottoNumbers;
 
     private LottoTicket(Set<LottoNumber> lottoNumbers) {

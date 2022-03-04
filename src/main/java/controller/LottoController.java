@@ -60,7 +60,7 @@ public class LottoController {
 
     private LottoTickets inputSelfLottoTicket(SelfPurchaseCount selfPurchaseCount) {
         try {
-            return LottoTickets.from(InputView.inputSelfTicketNumbers(selfPurchaseCount.getValue()));
+            return LottoTickets.fromTicketNumbers(InputView.inputSelfTicketNumbers(selfPurchaseCount.getValue()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputSelfLottoTicket(selfPurchaseCount);

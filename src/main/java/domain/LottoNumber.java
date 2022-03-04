@@ -13,10 +13,6 @@ public class LottoNumber {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
-    }
-
     public void validate(int number) {
         if (isNotInRangeNumber(number)) {
             throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR_MESSAGE);
@@ -25,5 +21,9 @@ public class LottoNumber {
 
     private boolean isNotInRangeNumber(int number) {
         return !(number <= MAX_VALUE && number >= MIN_VALUE);
+    }
+
+    public int getValue() {
+        return value;
     }
 }
