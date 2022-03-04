@@ -79,6 +79,7 @@ public class LottoController {
 			inputView.inputPassiveLottoMessage();
 			passiveLottos.add(makeOnePassiveLotto());
 		}
+		return passiveLottos;
 	}
 
 	private LottoNumbers makeOnePassiveLotto() {
