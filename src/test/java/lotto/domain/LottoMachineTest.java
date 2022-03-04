@@ -7,12 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static lotto.domain.Exception.ERROR_CANT_PURCHASE;
 import static org.assertj.core.api.Assertions.*;
 
-public class LottoGameTest {
+public class LottoMachineTest {
 
-    @ParameterizedTest
+    private static final String ERROR_NON_PURCHASABLE = "[ERROR] 구입 금액으로 살 수 있는 수량이어야 합니다.";
+
+    @ParameterizedTest(name = "[{index}] {0}개")
     @ValueSource(ints = {0, 3, 10, 14})
     @DisplayName("수동 구매 개수를 생성한다.")
     void makeManualLottoCount(int count) {
@@ -21,13 +22,13 @@ public class LottoGameTest {
         assertThat(lottoGame.getManualLottoCount()).isEqualTo(count);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] {0}개")
     @ValueSource(ints = {15, 16, 17})
     @DisplayName("구입 금액이 수동 구매 개수를 만족하지 못하는 경우 에러를 발생시킨다.")
     void throwExceptionWhenManualLottoCountIsBigger(int count) {
         assertThatThrownBy(() -> new LottoMachine(new PurchaseAmount(14_000), count))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ERROR_CANT_PURCHASE.getMessage());
+                .hasMessage(ERROR_NON_PURCHASABLE);
     }
 
     @Test

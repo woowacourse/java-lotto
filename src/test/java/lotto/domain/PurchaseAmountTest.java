@@ -28,7 +28,7 @@ class PurchaseAmountTest {
                 .hasMessage("[ERROR] 구입금액은 " + LOTTO_PRICE + "원 단위여야 합니다");
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] 수동 로또가 {0}개면, 자동 로또는 {1}개")
     @CsvSource({"0, 14", "3, 11", "14, 0"})
     @DisplayName("수동 로또 구매 후 남은 돈으로 살 수 있는 자동 로또 개수를 반환한다.")
     void calculateAutoLottoCount(int count, int expected) {

@@ -35,7 +35,7 @@ public class StringConverter {
 
     private static void validateNullOrBlank(final String input) {
         if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException("입력값은 공백일 수 없습니다");
+            throw new IllegalArgumentException("[ERROR] 입력값은 공백일 수 없습니다.");
         }
     }
 
@@ -43,7 +43,7 @@ public class StringConverter {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("입력값은 숫자여야합니다");
+            throw new IllegalArgumentException("[ERROR] 입력값은 숫자여야합니다.");
         }
     }
 }

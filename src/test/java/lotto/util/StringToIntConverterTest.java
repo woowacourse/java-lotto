@@ -15,7 +15,7 @@ class StringToIntConverterTest {
         String input = "notNumber";
         assertThatThrownBy(() -> StringConverter.toInt(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("입력값은 숫자여야합니다");
+                .hasMessage("[ERROR] 입력값은 숫자여야합니다.");
     }
 
     @ParameterizedTest
@@ -24,6 +24,6 @@ class StringToIntConverterTest {
     void throwExceptionWhenInputIsEmptyOrBlank(String input) {
         assertThatThrownBy(() -> StringConverter.toInt(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("입력값은 공백일 수 없습니다");
+                .hasMessage("[ERROR] 입력값은 공백일 수 없습니다.");
     }
 }

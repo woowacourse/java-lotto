@@ -61,10 +61,11 @@ public class OutputView {
         if (rank == Rank.SECOND) {
             return String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개", rank.getMatched(), rank.getPrize(), count);
         }
-        return String.format("%d개 일치 (%d원) - %d개", rank.getMatched(), rank.getPrize(), count);
+        return String.format("%d개 일치 (%d원) - %d개", rank.getMatched(), rank.getPrize(),
+                count);
     }
 
     private static void printProfitRatio(final double profitRatio) {
-        System.out.println("총 수익률은 " + profitRatio + "입니다.");
+        System.out.println("총 수익률은 " + profitRatio + "입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }
