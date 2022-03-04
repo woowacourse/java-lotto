@@ -1,32 +1,36 @@
 package lotto.model.prize;
 
+import static java.util.stream.Collectors.summingInt;
+
 import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import lotto.model.Money;
 
 /*
  * 모든 등수에 대한 당첨 정보를 가지는 일급 컬렉션 Class
  */
 public class PrizeCountMap {
-    private final EnumMap<Prize, Integer> prizeMap;
+    private final EnumMap<Prize, Long> prizeMap;
 
-    public PrizeCountMap(EnumMap<Prize, Integer> prizeMap) {
+    public PrizeCountMap(EnumMap<Prize, Long> prizeMap) {
         this.prizeMap = new EnumMap<>(prizeMap);
     }
 
     public static PrizeCountMap from(List<MatchResult> matchResults) {
-        EnumMap<Prize, Integer> prizeMap = new EnumMap<>(Prize.class);
-        Arrays.stream(Prize.values())
-                .filter(prize -> prize != Prize.NONE)
-                .forEach(prize -> prizeMap.put(prize, count(matchResults, prize)));
+        EnumMap<Prize, Long> prizeMap = matchResults.stream()
+                .collect(getMatchResultEnumMapCollector());
         return new PrizeCountMap(prizeMap);
     }
 
-    private static int count(List<MatchResult> matchResults, Prize prize) {
-        return (int) matchResults.stream()
-                .filter(matchResult -> Prize.getPrize(matchResult) == prize)
-                .count();
+    private static Collector<MatchResult, ?, EnumMap<Prize, Long>> getMatchResultEnumMapCollector() {
+        return Collectors.groupingBy(Prize::getPrize,
+                () -> new EnumMap<>(Prize.class),
+                Collectors.counting());
     }
 
     public double calculateEarningRate(Money money) {
@@ -39,7 +43,10 @@ public class PrizeCountMap {
                 .sum();
     }
 
-    public EnumMap<Prize, Integer> getPrizeMap() {
-        return prizeMap;
+    public Long getCount(Prize prize) {
+        if (prizeMap.get(prize) == null) {
+            return 0L;
+        }
+        return prizeMap.get(prize);
     }
 }

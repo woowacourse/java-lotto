@@ -43,7 +43,7 @@ public enum Prize {
 
     }
 
-    public long pickAmount(int count) {
+    public long pickAmount(Long count) {
         return this.amount * count;
     }
 
