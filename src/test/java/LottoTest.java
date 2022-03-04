@@ -34,6 +34,6 @@ public class LottoTest {
     void isBonusNumberContainTest() {
         LottoNumber bonusNumber = new LottoNumber(3);
 
-        assertThat(lotto.isBonusNumberContain(bonusNumber)).isEqualTo(true);
+        assertThat(lotto.contains(bonusNumber)).isEqualTo(true);
     }
 }

@@ -38,7 +38,7 @@ public class Lottos {
     public List<Boolean> compareAllLottosWithBonusNumber(LottoNumber bonusNumber) {
         Validator.checkArgumentIsNull(bonusNumber);
         return members.stream()
-                .map(lotto -> lotto.isBonusNumberContain(bonusNumber))
+                .map(lotto -> lotto.contains(bonusNumber))
                 .collect(Collectors.toList());
     }
 

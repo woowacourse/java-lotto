@@ -38,9 +38,9 @@ public class Lotto {
                 .count();
     }
 
-    public boolean isBonusNumberContain(LottoNumber bonusNumber) {
-        Validator.checkArgumentIsNull(bonusNumber);
-        return getNumbers().contains(bonusNumber.getNumber());
+    public boolean contains(LottoNumber number) {
+        Validator.checkArgumentIsNull(number);
+        return unboxNumbers().contains(number.getNumber());
     }
 
     private Set<LottoNumber> generateNumber(LottoNumberGenerator lottoNumberGenerator) {
@@ -53,5 +53,11 @@ public class Lotto {
         return lottoNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    private Set<Integer> unboxNumbers() {
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toSet());
     }
 }
