@@ -83,7 +83,7 @@ public class LottoController {
 		inputView.inputPassiveLottoMessage();
 
 		while (passiveLottoCount.haveRemainToMake()) {
-			passiveLottoCount.reduceCountOfRemain();
+			passiveLottoCount.countMadeLotto();
 			passiveLottos.add(makeOnePassiveLotto());
 		}
 		return passiveLottos;

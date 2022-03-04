@@ -19,7 +19,7 @@ public class Lottos {
 		List<Lotto> lottos = new ArrayList<>();
 
 		while (lottoCount.haveRemainToMake()) {
-			lottoCount.reduceCountOfRemain();
+			lottoCount.countMadeLotto();
 			lottos.add(new Lotto(LottoNumbers.from(new RandomLottoNumbersGenerationStrategy())));
 		}
 
