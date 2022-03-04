@@ -17,9 +17,9 @@ public class LottoResult {
         this.purchaseTicketCount = purchaseTicketCount;
     }
 
-    public static LottoResult of(LottoTickets lottoTickets,
-                                 WinningTicket winningTicket,
-                                 WinningPrizeStrategy winningPrizeStrategy) {
+    public static LottoResult toExtract(LottoTickets lottoTickets,
+                                        WinningTicket winningTicket,
+                                        WinningPrizeStrategy winningPrizeStrategy) {
         Map<WinningPrize, Integer> countOfWinning = countWinning(lottoTickets, winningTicket, winningPrizeStrategy);
         return new LottoResult(countOfWinning, lottoTickets.getTickets().size());
     }

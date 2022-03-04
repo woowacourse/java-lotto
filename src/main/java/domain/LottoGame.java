@@ -15,11 +15,11 @@ public class LottoGame {
     }
 
     public LottoTickets purchaseAutoTickets(LottoMoney purchaseMoney) {
-        return LottoTickets.of(purchaseMoney, numberGenerateStrategy);
+        return LottoTickets.generateTickets(purchaseMoney, numberGenerateStrategy);
     }
 
     public LottoResult createWinningResult(LottoTickets lottoTickets, WinningTicket winningTicket) {
-        return LottoResult.of(lottoTickets, winningTicket, winningPrizeStrategy);
+        return LottoResult.toExtract(lottoTickets, winningTicket, winningPrizeStrategy);
     }
 
     public int findMatchCount(WinningPrize winningPrize) {

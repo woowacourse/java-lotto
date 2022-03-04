@@ -17,8 +17,8 @@ public class LottoTickets {
         this.selfPurchaseCount = selfPurchaseCount;
     }
 
-    public static LottoTickets of(LottoMoney autoPurchaseLottoMoney,
-                                  NumberGenerateStrategy numberGenerateStrategy) {
+    public static LottoTickets generateTickets(LottoMoney autoPurchaseLottoMoney,
+                                               NumberGenerateStrategy numberGenerateStrategy) {
         int autoPurchaseCount = autoPurchaseLottoMoney.getValue() / LottoGame.TICKET_PRICE;
         List<LottoTicket> lottoTickets = new ArrayList<>(
                 autoGenerateTickets(numberGenerateStrategy, autoPurchaseCount));
@@ -32,14 +32,14 @@ public class LottoTickets {
 
     private static List<LottoTicket> generateTicket(List<Set<Integer>> selfTicketNumbers) {
         return selfTicketNumbers.stream()
-                .map(LottoTicket::from)
+                .map(LottoTicket::fromNumberValues)
                 .collect(Collectors.toList());
     }
 
     private static List<LottoTicket> autoGenerateTickets(NumberGenerateStrategy numberGenerateStrategy,
                                                          int autoPurchaseCount) {
         return IntStream.rangeClosed(1, autoPurchaseCount)
-                .mapToObj(index -> LottoTicket.from(numberGenerateStrategy.generateNumbers()))
+                .mapToObj(index -> LottoTicket.fromNumberValues(numberGenerateStrategy.generateNumbers()))
                 .collect(Collectors.toList());
     }
 

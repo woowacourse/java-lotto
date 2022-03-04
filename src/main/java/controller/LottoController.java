@@ -3,7 +3,6 @@ package controller;
 import domain.LottoMoney;
 import domain.SelfPurchaseCount;
 import domain.WinningTicket;
-import domain.strategy.NumberGenerateStrategy;
 import domain.LottoResult;
 import domain.strategy.RandomNumberGenerateStrategy;
 import java.util.List;
@@ -84,7 +83,7 @@ public class LottoController {
         try {
             Set<Integer> winningNumbers = InputView.inputWinningNumbers();
             int bonusNumber = InputView.inputBonusNumber();
-            return WinningTicket.of(winningNumbers, bonusNumber);
+            return WinningTicket.create(winningNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputWinningNumbers();

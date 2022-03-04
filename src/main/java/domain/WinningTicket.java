@@ -11,9 +11,9 @@ public class WinningTicket {
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningTicket of(Set<Integer> winningNumberValues, int bonusNumber) {
+    public static WinningTicket create(Set<Integer> winningNumberValues, int bonusNumber) {
         validateSize(winningNumberValues);
-        return new WinningTicket(LottoTicket.from(winningNumberValues), new LottoNumber(bonusNumber));
+        return new WinningTicket(LottoTicket.fromNumberValues(winningNumberValues), new LottoNumber(bonusNumber));
     }
 
     private static void validateSize(Set<Integer> winningNumbers) {

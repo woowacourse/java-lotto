@@ -15,7 +15,7 @@ class WinningTicketTest {
     @DisplayName("로또번호가 6개가 아닌 경우 오류를 발생시키는지 확인한다.")
     void checkLottoNumberSize() {
         Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3));
-        assertThatThrownBy(() -> WinningTicket.of(numbers, 10))
+        assertThatThrownBy(() -> WinningTicket.create(numbers, 10))
                 .isInstanceOf(IllegalArgumentException.class).hasMessage(LottoTicket.SIZE_ERROR_MESSAGE);
     }
 
@@ -24,8 +24,8 @@ class WinningTicketTest {
     void compareMatchCountTest() {
         Set<Integer> winningNumberValues = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
-        WinningTicket winningTicket = WinningTicket.of(winningNumberValues, bonusNumber);
-        LottoTicket lottoTicket = LottoTicket.from(winningNumberValues);
+        WinningTicket winningTicket = WinningTicket.create(winningNumberValues, bonusNumber);
+        LottoTicket lottoTicket = LottoTicket.fromNumberValues(winningNumberValues);
         assertThat(winningTicket.compareMatchCount(lottoTicket)).isEqualTo(6);
     }
 
@@ -34,8 +34,8 @@ class WinningTicketTest {
     void isMatchBonusNumberTest() {
         Set<Integer> winningNumberValues = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7));
         int bonusNumber = 7;
-        WinningTicket winningTicket = WinningTicket.of(winningNumberValues, bonusNumber);
-        LottoTicket lottoTicket = LottoTicket.from(winningNumberValues);
+        WinningTicket winningTicket = WinningTicket.create(winningNumberValues, bonusNumber);
+        LottoTicket lottoTicket = LottoTicket.fromNumberValues(winningNumberValues);
         assertThat(winningTicket.isMatchBonusNumber(lottoTicket)).isTrue();
     }
 }

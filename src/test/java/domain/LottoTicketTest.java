@@ -11,7 +11,7 @@ class LottoTicketTest {
     @Test
     @DisplayName("로또 티켓에 6개의 로또 넘버가 들어오지 않으면 에러를 던지는지 확인한다.")
     void checkTicketSizeError() {
-        assertThatThrownBy(() -> LottoTicket.from(Set.of(1, 2, 3, 4, 5, 6, 7)))
+        assertThatThrownBy(() -> LottoTicket.fromNumberValues(Set.of(1, 2, 3, 4, 5, 6, 7)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LottoTicket.SIZE_ERROR_MESSAGE);
     }
