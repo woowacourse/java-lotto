@@ -7,9 +7,9 @@ import java.util.List;
 
 public class LottosDto {
 
-    int manualQuantity;
-    int autoQuantity;
-    List<LottoDto> lottoDtos;
+    private int manualQuantity;
+    private int autoQuantity;
+    private List<LottoDto> lottoDtos;
 
     public LottosDto(List<LottoDto> lottoDtos, int manualQuantity) {
         this.lottoDtos = lottoDtos;
