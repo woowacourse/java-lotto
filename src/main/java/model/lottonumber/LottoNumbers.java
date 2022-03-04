@@ -2,8 +2,6 @@ package model.lottonumber;
 
 import java.util.List;
 
-import model.result.Rank;
-
 public class LottoNumbers {
 	private static final int LOTTO_SIZE = 6;
 
@@ -29,11 +27,8 @@ public class LottoNumbers {
 			.count();
 	}
 
-	public Rank validateMatchWithBonus(LottoNumber number) {
-		if (numbers.contains(number)) {
-			return Rank.SECOND;
-		}
-		return Rank.THIRD;
+	public boolean validateMatchWithBonus(LottoNumber number) {
+		return numbers.contains(number);
 	}
 
 	public List<LottoNumber> getNumbers() {

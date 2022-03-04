@@ -22,16 +22,8 @@ public class Lotto {
 
 	public Rank match(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumberDTO) {
 		long matchCount = numbers.countMatchedNumbers(winningNumberDTO.getWinningNumbers());
-
-		if (matchCount < Rank.FIFTH.getMatchNumber()) {
-			return Rank.FAIL;
-		}
-
-		if (matchCount == Rank.SECOND.getMatchNumber()) {
-			return numbers.validateMatchWithBonus(bonusBallDTO.getNumber());
-		}
-
-		return findRank(matchCount);
+		boolean matchBonus = numbers.validateMatchWithBonus(bonusBallDTO.getNumber());
+		return Rank.getRank(matchCount, matchBonus);
 	}
 
 	private Rank findRank(long count) {
