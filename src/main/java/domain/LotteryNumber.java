@@ -2,12 +2,14 @@ package domain;
 
 import java.util.Objects;
 
-import utils.LotteryMessage;
-
 public class LotteryNumber implements Comparable<LotteryNumber> {
 
 	public static final int NUMBER_MIN_RANGE = 1;
 	public static final int NUMBER_MAX_RANGE = 45;
+	public static final String LOTTERY_NUMBER = "로또번호";
+
+	private static final String LOTTERY_RANGE_ERROR = "각 " + LOTTERY_NUMBER
+		+ "는 " + NUMBER_MIN_RANGE + "~" + NUMBER_MAX_RANGE + " 사이여야 합니다";
 
 	private final int lotteryNumber;
 
@@ -18,7 +20,7 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
 
 	private void checkNumberRange(final int lotteryNumbers) {
 		if (isOutOfRange(lotteryNumbers)) {
-			throw new IllegalArgumentException(LotteryMessage.LOTTERY_RANGE_ERROR);
+			throw new IllegalArgumentException(LOTTERY_RANGE_ERROR);
 		}
 	}
 

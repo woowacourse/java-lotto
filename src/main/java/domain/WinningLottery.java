@@ -2,9 +2,13 @@ package domain;
 
 import java.util.List;
 
-import utils.LotteryMessage;
-
 public class WinningLottery {
+
+	public static final String WINNING_NUMBER = "당첨번호";
+	public static final String BONUS_BALL = "보너스볼";
+
+	private static final String DUPLICATED_WINNING_NUMBER_WITH_BONUS_NUMBER = WINNING_NUMBER + "와 "
+		+ BONUS_BALL + "에 중복된 번호가 있으면 안됩니다.";
 
 	private final Lottery winningNumbers;
 	private final LotteryNumber bonusBall;
@@ -17,7 +21,7 @@ public class WinningLottery {
 
 	private void validateBonusBall(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
 		if (hasDuplicatedNumber(winningNumbers, bonusBall)) {
-			throw new IllegalArgumentException(LotteryMessage.DUPLICATED_WINNING_NUMBER_WITH_BONUS_NUMBER);
+			throw new IllegalArgumentException(DUPLICATED_WINNING_NUMBER_WITH_BONUS_NUMBER);
 		}
 	}
 

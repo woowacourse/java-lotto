@@ -1,11 +1,14 @@
 package domain;
 
-import utils.LotteryMessage;
-
 public class PurchaseAmount {
+
+	public static final String MONEY_UNIT = "원";
+	public static final String PURCHASE_AMOUNT = "구입 금액";
 
 	private static final int AMOUNT_MIN_RANGE = 1_000;
 	private static final int AMOUNT_MAX_RANGE = 100_000;
+	private static final String PURCHASE_AMOUNT_RANGE_ERROR = PURCHASE_AMOUNT + "의 범위는 "
+		+ AMOUNT_MIN_RANGE + MONEY_UNIT + "~" + AMOUNT_MAX_RANGE + MONEY_UNIT + " 입니다.";
 
 	private final int purchaseAmount;
 
@@ -16,7 +19,7 @@ public class PurchaseAmount {
 
 	private void validateRange(final int number) {
 		if (isOutOfRange(number)) {
-			throw new IllegalArgumentException(LotteryMessage.PURCHASE_AMOUNT_RANGE_ERROR);
+			throw new IllegalArgumentException(PURCHASE_AMOUNT_RANGE_ERROR);
 		}
 	}
 

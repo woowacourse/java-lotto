@@ -2,9 +2,12 @@ package domain;
 
 import java.util.List;
 
-import utils.LotteryMessage;
-
 public class PurchaseInformation {
+
+	public static final String MANUAL_PURCHASE = "수동 구입";
+
+	private static final String MANUAL_PURCHASE_IS_LARGER_THAN_PURCHASE_AMOUNT = MANUAL_PURCHASE + " 갯수가 "
+		+ PurchaseAmount.PURCHASE_AMOUNT + "보다 많습니다";
 
 	private final PurchaseAmount purchaseAmount;
 	private final Lotteries manualLotteries;
@@ -21,7 +24,7 @@ public class PurchaseInformation {
 	private void validateTheNumberOfLotteries(final PurchaseAmount purchaseAmount,
 			final int theNumberOfManualLotteries) {
 		if (!hasEnoughMoney(purchaseAmount, theNumberOfManualLotteries)) {
-			throw new IllegalArgumentException(LotteryMessage.MANUAL_PURCHASE_IS_LARGER_THAN_PURCHASE_AMOUNT);
+			throw new IllegalArgumentException(MANUAL_PURCHASE_IS_LARGER_THAN_PURCHASE_AMOUNT);
 		}
 	}
 
