@@ -15,11 +15,15 @@ public class Lottos {
 	}
 
 	public static Lottos purchase(int totalCount, int manualCount, List<List<String>> manualLottoNumbers) {
-		int autoCount = totalCount - manualCount;
+		int autoCount = getAutoCount(totalCount, manualCount);
 		List<Lotto> lottos = new ArrayList<>();
 		generateLottos(autoCount, manualLottoNumbers, lottos);
 
 		return new Lottos(lottos);
+	}
+
+	private static int getAutoCount(int totalCount, int manualCount) {
+		return totalCount - manualCount;
 	}
 
 	private static void generateLottos(int autoCount, List<List<String>> input, List<Lotto> lottos) {
