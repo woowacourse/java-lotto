@@ -7,20 +7,12 @@
 ---
 
 ![Generic badge](https://img.shields.io/badge/Level1-lotto-green.svg)
-![Generic badge](https://img.shields.io/badge/test-31_passed-blue.svg)
-![Generic badge](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)
+![Generic badge](https://img.shields.io/badge/test-48_passed-blue.svg)
+![Generic badge](https://img.shields.io/badge/version-2.0.0-brightgreen.svg)
 
 > 우아한테크코스 웹 백엔드 4기, 로또 - OOP 저장소입니다.
 
-<img src="./lotto-operation.gif" alt="java-lotto-operation" width="400px">
-
-<br><br>
-
-## 코딩 전 설계
-
----
-
-<img src="class diagram - 2.png" alt="lotto-operation" width="600px">
+<img src="./lotto-step2-operation.gif" alt="java-lotto-operation" width="400px">
 
 <br><br>
 
@@ -30,11 +22,11 @@
 
 ### 도메인
 
-#### LottoNumber : `int number`를 가지는 로또 숫자 값 객체
+#### Wallet : 잔액, 수동 로또 구매 수량, 자동 로또 구매 수량을 보관하는 VO
 
-- [x] 동등성 검사를 위한 equals & hashCode 재정의
-- [x] 유효성 검사
-    - [x] 1 ~ 45 사이의 정수값으로 생성
+- [x] 1000원 이상, 1000원 단위로만 생성 가능
+- [x] 수동 구매 수량 전달 시 잔액 차감 처리 및 수동 구매 수량 주입
+- [x] 잔액 전액으로 자동 로또 구매 처리
 
 #### Lotto : 길이가 6인 `List<LottoNumber>` 를 가진 일급 컬렉션
 
@@ -45,7 +37,7 @@
 
 #### Lottos : 길이가 1 이상인 `List<Lotto>` 를 가진 일급 컬렉션
 
-- [x] WinningLotto 를 전달 받아, 당첨 결과를 반환
+- [x] 또다른 Lottos를 전달 받아 하나의 Lottos를 반환하는 기능 추가
 - [x] 유효성 검사
     - [x] 비어있는 Lotto 가 전달 되었는지 검사
 
@@ -54,20 +46,21 @@
 - [x] 유효성 검사
     - [x] BonusNumber 가 Lotto 에 포함되어 있는지 검사
 
-#### InputMoney : 사용자가 입력한 구매 희망 금액을 `int money` 로 가진 값 객체
+#### LottoFactory : 자동 로또 생성 역할
 
+- [x] 전달된 수량 만큼 자동로또를 생성해 Lottos에 담아 반환
 - [x] 유효성 검사
-    - [x] 1000 미만 입력 시 IAE 발생
-    - [x] 1000으로 나누어 떨어지지 않는 금액 입력 시 IAE 발생
+    - [x] 요청 수량이 1 미만일 경우 IAE 발생
 
-#### RandomLottoNumberGenerateStrategy
+#### LottoNumberRepository : LottoNumber 캐싱 저장소
 
-- [x] 랜덤 번호 7개 생성
+- [x] 로또 번호를 요청 받아, 요청에 따른 LottoNumber 캐싱값을 반환
+- [x] 유효성 검사는 LottoNumber 생성자에 위임
 
-#### TrialNumber
+#### LottoResultHandler : 당첨 결과 집계 및 DTO로 반환
 
-- [x] 유효성 검사
-    - [x] 양수가 아닌 값을 전달 받았을 경우 IAE 발생
+- [x] WinningLotto, Lottos를 전달 받아, LottoResultDto를 반환
+- [x] 수익률, 등수별 당첨 횟수를 집계하여 반환
 
 <br>
 
@@ -79,8 +72,11 @@
     - [x] (입력값 검증) 정수가 아닌 문자열을 입력 받을 수 없다.
     - [x] (입력값 검증) 0이하의 숫자를 입력 받을 수 없다.
     - [x] (입력값 검증, 선택) 1000으로 나누어 떨어지지 않는 금액은 입력받을 수 없다.
-- [x] 로또를 생성한다.
-    - [x] 로또 생성 개수는 구입금액 /1000
+- [x] 수동 로또 구매 수량을 입력한다.
+- [x] 수동 로또 구매 수량 만큼 로또 번호를 입력한다.
+- [x] 수동 로또를 생성한다.
+- [x] 수동 로또를 사고 잔액은 모두 자동 로또를 구매, 생성한다.
+    - [x] 로또 생성 개수는 잔액 / 1000
     - [x] 랜덤 번호 6개를 생성한다
         - [x] 번호의 범위는 `1 ~ 45`
 - [x] 생성된 로또 개수와 각 로또들을 출력한다.

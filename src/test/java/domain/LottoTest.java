@@ -33,6 +33,14 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("로또 생성자에 Null 전달 시 NPE 발생")
+    void createLottoWithNullShouldFail() {
+        assertThatThrownBy(() -> new Lotto(null))
+                .isInstanceOf(NullPointerException.class)
+                .hasMessage("로또 번호가 비었습니다");
+    }
+
+    @Test
     @DisplayName("Lotto 생성시 전달된 List 길이가 6이 아니면 IAE 발생")
     void createLottoWithInvalidSizeOfLottoNumbersShouldFail() {
         // given
@@ -83,5 +91,19 @@ public class LottoTest {
 
         // then
         assertThat(lotto.containsLottoNumber(lottoNumber1)).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("Lotto 에서 getter로 가져온 컬렉션 수정 시 UOE 발생")
+    void modifyingCollectionFromGetterOfLottoShouldFail() {
+        // given
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        // when
+        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+
+        // then
+        assertThatThrownBy(() -> lottoNumbers.add(LottoNumberRepository.getLottoNumberByInt(22)))
+                .isInstanceOf(UnsupportedOperationException.class);
     }
 }

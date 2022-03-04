@@ -1,51 +1,97 @@
 package controller;
 
-import static util.LottoResultHandler.getLottoResultDto;
-
 import domain.Lotto;
 import domain.LottoNumber;
+import domain.LottoNumberRepository;
+import domain.LottoResult;
 import domain.Lottos;
+import domain.Wallet;
 import domain.WinningLotto;
-import factory.LottoFactory;
-import java.util.List;
-import java.util.stream.Collectors;
-import repository.LottoNumberRepository;
+import domain.service.LottoService;
 import view.InputView;
 import view.ResultView;
-import vo.InputMoney;
-import vo.NumberOfLottos;
 
 public class LottoController {
-    public static final int LOTTO_PRICE = 1000;
+    public static final int ZERO_FOR_EMPTY_QUANTITY = 0;
 
-    public void start() {
-        InputMoney inputmoney = getInputMoney();
-        NumberOfLottos numberOfLottos = getNumberOfLottosByInputMoney(inputmoney);
-        InputView.printTrialNumber(numberOfLottos.getNumberOfLottos());
+    private final LottoService manualLottoService;
+    private final LottoService autoLottoService;
 
-        Lottos autoLottos = LottoFactory.createAutoLottosByQuantity(numberOfLottos.getNumberOfLottos());
-        InputView.printLottos(autoLottos);
-
-        WinningLotto winningLotto = setupWinningLotto();
-        ResultView.printResult(getLottoResultDto(winningLotto, autoLottos));
+    public LottoController(LottoService manualLottoService, LottoService autoLottoService) {
+        this.manualLottoService = manualLottoService;
+        this.autoLottoService = autoLottoService;
     }
 
-    private InputMoney getInputMoney() {
+    public void start() {
+        Wallet wallet = setupWallet();
+        setupQuantity(wallet);
+
+        Lottos lottos = setupLottos(wallet);
+        InputView.printLottos(wallet, lottos);
+
+        WinningLotto winningLotto = setupWinningLotto();
+        ResultView.printResult(getLottoResult(winningLotto, lottos));
+    }
+
+    private Wallet setupWallet() {
         try {
-            return new InputMoney(InputView.scanInputMoney());
+            return new Wallet(InputView.scanInputMoney());
         } catch (IllegalArgumentException exception) {
             InputView.printException(exception);
-            return getInputMoney();
+            return setupWallet();
         }
     }
 
-    private NumberOfLottos getNumberOfLottosByInputMoney(InputMoney inputMoney) {
-        return new NumberOfLottos(inputMoney.getMoney() / LOTTO_PRICE);
+    private void setupQuantity(Wallet wallet) {
+        buyManualLotto(wallet);
+        buyAutoLotto(wallet);
+    }
+
+    private void buyManualLotto(Wallet wallet) {
+        try {
+            int manualQuantity = InputView.scanManualLottoQuantity();
+            wallet.buyManualLottoByQuantity(manualQuantity);
+        } catch (IllegalArgumentException exception) {
+            InputView.printException(exception);
+            buyManualLotto(wallet);
+        }
+    }
+
+    private void buyAutoLotto(Wallet wallet) {
+        if (wallet.isEmpty()) {
+            return;
+        }
+
+        wallet.buyAutoLottoWithCurrentBalance();
+    }
+
+    private Lottos setupLottos(Wallet wallet) {
+        Lottos manualLottos = setupManualLottos(wallet);
+        Lottos autoLottos = setupAutoLottos(wallet);
+
+        return manualLottos.merge(autoLottos);
+    }
+
+    private Lottos setupManualLottos(Wallet wallet) {
+        if (wallet.getManualQuantity() == ZERO_FOR_EMPTY_QUANTITY) {
+            return Lottos.EMPTY_LOTTOS;
+        }
+
+        InputView.printToInformManualLottoInput();
+        return manualLottoService.createLottosByQuantity(wallet.getManualQuantity());
+    }
+
+    private Lottos setupAutoLottos(Wallet wallet) {
+        if (wallet.getAutoQuantity() == ZERO_FOR_EMPTY_QUANTITY) {
+            return Lottos.EMPTY_LOTTOS;
+        }
+
+        return autoLottoService.createLottosByQuantity(wallet.getAutoQuantity());
     }
 
     private WinningLotto setupWinningLotto() {
-        Lotto lotto = generateLotto();
-        LottoNumber bonusNumber = generateBonusNumber();
+        Lotto lotto = getLottoForWinningLotto();
+        LottoNumber bonusNumber = getLottoNumberForBonusNumber();
 
         try {
             return new WinningLotto(lotto, bonusNumber);
@@ -55,27 +101,25 @@ public class LottoController {
         }
     }
 
-    private Lotto generateLotto() {
-        try {
-            List<Integer> winningNumberValues = InputView.scanWinningNumbers();
-
-            List<LottoNumber> lottoNumbers = winningNumberValues.stream()
-                    .map(LottoNumberRepository::getLottoNumberByInt)
-                    .collect(Collectors.toList());
-            return new Lotto(lottoNumbers);
-        } catch (IllegalArgumentException exception) {
-            InputView.printException(exception);
-            return generateLotto();
-        }
+    private Lotto getLottoForWinningLotto() {
+        InputView.printMessageToScanLottoNumbers();
+        return new Lotto(manualLottoService.getLottoNumbers());
     }
 
-    private LottoNumber generateBonusNumber() {
+    private LottoNumber getLottoNumberForBonusNumber() {
         try {
             int bonusNumberValue = InputView.scanBonusNumber();
             return LottoNumberRepository.getLottoNumberByInt(bonusNumberValue);
         } catch (IllegalArgumentException exception) {
             InputView.printException(exception);
-            return generateBonusNumber();
+            return getLottoNumberForBonusNumber();
         }
+    }
+
+    private LottoResult getLottoResult(WinningLotto winningLotto, Lottos lottos) {
+        return LottoResult.builder()
+                .winningLotto(winningLotto)
+                .lottos(lottos)
+                .build();
     }
 }

@@ -1,8 +1,7 @@
-package repository;
+package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
