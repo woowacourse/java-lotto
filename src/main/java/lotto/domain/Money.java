@@ -1,21 +1,33 @@
 package lotto.domain;
 
-import lotto.Constant;
-
 public class Money {
     private static final String NOT_INTEGER_ERROR_MESSAGE = "숫자가 아닙니다.";
     private static final String UNDER_MINIMUM_ERROR_MESSAGE = "1000원 미만의 금액은 입력할 수 없습니다.";
     private static final String NOT_QUANTIZED_ERROR_MESSAGE = "입력 금액은 1000원 단위여야 합니다.";
-    private final int UNIT_PRICE;
+    private static final int UNIT_PRICE = 1000;
+    private final int initialMoney;
     private int money;
 
-    public Money(String input, int unitPrice) {
-        UNIT_PRICE = unitPrice;
+    public Money(String input) {
         isNumberFormat(input);
         int value = Integer.parseInt(input);
         isUnderMinimum(value);
         isDivideByUnitPrice(value);
-        this.money = value;
+        this.initialMoney = value;
+        this.money = initialMoney;
+
+    }
+
+    public void buyLotto(int purchasedLottoCount) {
+        money -= purchasedLottoCount * UNIT_PRICE;
+    }
+
+    public int getLottoCount() {
+        return money / UNIT_PRICE;
+    }
+
+    public int getInitialMoney() {
+        return initialMoney;
     }
 
     private void isNumberFormat(String input) {
@@ -36,9 +48,5 @@ public class Money {
         if (value % UNIT_PRICE != 0) {
             throw new IllegalArgumentException(NOT_QUANTIZED_ERROR_MESSAGE);
         }
-    }
-
-    public int getMoney() {
-        return money;
     }
 }
