@@ -113,16 +113,11 @@ public class LottoController {
 		}
 	}
 
+	///////LOTTO_SIZE짜리 로또 숫자 입력으로 받기
 	private List<LottoNumber> makeLottoNumber(String input) {
 		InputValidateUtils.inputBlank(input, LOTTO_NUMBER_BLANK_ERROR_MESSAGE);
 		List<String> numbers = splitLottoNumber(input);
 		return makeInputNumbersToLottoNumbers(numbers);
-	}
-
-	private LottoNumber makeBonusBall() {
-		String input = inputView.inputBonusBall();
-		InputValidateUtils.inputBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
-		return LottoNumber.parseLottoNumber(input);
 	}
 
 	private List<String> splitLottoNumber(String input) {
@@ -135,6 +130,13 @@ public class LottoController {
 		return numbers.stream()
 			.map(number -> LottoNumber.parseLottoNumber(number))
 			.collect(Collectors.toList());
+	}
+	//////////
+
+	private LottoNumber makeBonusBall() {
+		String input = inputView.inputBonusBall();
+		InputValidateUtils.inputBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
+		return LottoNumber.parseLottoNumber(input);
 	}
 
 	private void compareLottoWithWinningNumber() {
