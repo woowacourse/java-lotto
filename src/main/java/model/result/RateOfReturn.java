@@ -28,7 +28,8 @@ public class RateOfReturn {
 		Arrays.stream(Rank.values())
 			.filter(rank -> rank.checkNumberToReward())
 			.forEach(
-				statistics -> sumMoneyOfReturns += (countOfResult.getOrDefault(statistics, 0) * statistics.getValue()));
+				statistics -> sumMoneyOfReturns += (countOfResult.getOrDefault(statistics, 0)
+					* (long)statistics.getValue()));
 
 		return sumMoneyOfReturns;
 	}
