@@ -80,9 +80,10 @@ public class LottoController {
 
 	private List<LottoNumbers> makePassiveLottos() {
 		List<LottoNumbers> passiveLottos = new ArrayList<>();
+		inputView.inputPassiveLottoMessage();
+
 		while (passiveLottoCount.haveRemainToMake()) {
 			passiveLottoCount.reduceCountOfRemain();
-			inputView.inputPassiveLottoMessage();
 			passiveLottos.add(makeOnePassiveLotto());
 		}
 		return passiveLottos;
