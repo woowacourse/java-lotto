@@ -25,7 +25,7 @@ public class LotteryNumbersGenerator {
         Collections.shuffle(numbers);
         return numbers.stream()
                 .limit(SIZE_OF_LOTTERY_TICKETS)
-                .map(LotteryNumber::of)
+                .map(LotteryNumber::from)
                 .collect(Collectors.toList());
     }
 }

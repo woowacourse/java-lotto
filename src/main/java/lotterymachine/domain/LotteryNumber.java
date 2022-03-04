@@ -24,9 +24,15 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
         this.number = number;
     }
 
-    public static LotteryNumber of(int number) {
+    public static LotteryNumber from(int number) {
         validateNumber(number);
         return numbers.get(number);
+    }
+
+    public static List<LotteryNumber> from(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LotteryNumber::from)
+                .collect(Collectors.toList());
     }
 
     private static void validateNumber(int number) {

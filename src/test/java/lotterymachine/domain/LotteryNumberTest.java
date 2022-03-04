@@ -19,7 +19,7 @@ class LotteryNumberTest {
     @DisplayName("1~45 범위에 벗어난 숫자를 입력 시, 에러 발생")
     void validateNumber(int input) {
         Assertions.assertThatThrownBy(() -> {
-                    LotteryNumber lotteryNumber = LotteryNumber.of(input);
+                    LotteryNumber lotteryNumber = LotteryNumber.from(input);
                 }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호는 1~45 사이의 값이어야 합니다.");
     }
@@ -28,14 +28,14 @@ class LotteryNumberTest {
     @ValueSource(ints = {1, 2, 3, 45})
     @DisplayName("1~45 범위의 숫자를 입력 받아 캐싱된 객체를 가져온다.")
     void create(int input) {
-        LotteryNumber lotteryNumber = LotteryNumber.of(input);
+        LotteryNumber lotteryNumber = LotteryNumber.from(input);
         assertThat(lotteryNumber.getNumber()).isEqualTo(input);
     }
 
     @Test
     @DisplayName("로또 숫자 리스트를 숫자 크기에 따라 정렬한다.")
     void comparable() {
-        List<LotteryNumber> numbers = Arrays.asList(LotteryNumber.of(10), LotteryNumber.of(1));
+        List<LotteryNumber> numbers = Arrays.asList(LotteryNumber.from(10), LotteryNumber.from(1));
         Collections.sort(numbers);
         assertThat(numbers.get(0).getNumber()).isEqualTo(1);
     }
