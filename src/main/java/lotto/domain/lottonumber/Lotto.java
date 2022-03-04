@@ -24,20 +24,15 @@ public class Lotto {
     public Lotto(final List<Integer> numbers) {
         validateDuplication(numbers);
         validateCountOfNumbers(numbers);
-        final List<LottoNumber> mappedLottoNumbers = mapToLottoNumbers(numbers);
-        this.values = sortAscendingLottoNumbers(mappedLottoNumbers);
+        this.values = numbers.stream()
+                .sorted()
+                .map(LottoNumber::from)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private void validateDuplication(final List<Integer> numbers) {
-        final Set<Integer> checkedNumberValues = new HashSet<>();
-        for (int number : numbers) {
-            checkDuplication(checkedNumberValues, number);
-            checkedNumberValues.add(number);
-        }
-    }
-
-    private void checkDuplication(final Set<Integer> checkedNumbers, final int checkingNumber) {
-        if (checkedNumbers.contains(checkingNumber)) {
+        final Set<Integer> duplicationRemovedNumbers = new HashSet<>(numbers);
+        if (duplicationRemovedNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBERS_EXCEPTION_MESSAGE);
         }
     }
@@ -46,18 +41,6 @@ public class Lotto {
         if (numbers.size() != VALID_LOTTO_NUMBERS_COUNT) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_COUNT_EXCEPTION_MESSAGE);
         }
-    }
-
-    private List<LottoNumber> mapToLottoNumbers(final List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::from)
-                .collect(Collectors.toUnmodifiableList());
-    }
-
-    private List<LottoNumber> sortAscendingLottoNumbers(final List<LottoNumber> numbers) {
-        return numbers.stream()
-                .sorted()
-                .collect(Collectors.toUnmodifiableList());
     }
 
     public int getMatchCount(final Lotto others) {
