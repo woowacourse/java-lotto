@@ -16,7 +16,7 @@ public class WinningBallsTest {
 		assertThatThrownBy(() -> {
 			WinningBalls.from(new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7")));
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("[ERROR] 당첨 번호는 6개여야 합니다");
+				.hasMessage("[ERROR] 로또 번호는 6개로 입력해야 합니다");
 	}
 
 	@DisplayName("숫자가 5개일 때 예외가 발생한다")
@@ -25,7 +25,7 @@ public class WinningBallsTest {
 		assertThatThrownBy(() -> {
 			WinningBalls.from(new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5")));
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("[ERROR] 당첨 번호는 6개여야 합니다");
+				.hasMessage("[ERROR] 로또 번호는 6개로 입력해야 합니다");
 	}
 
 	@DisplayName("당첨 번호끼리 숫자 5가 중복될 때 예외가 발생한다")
@@ -34,7 +34,7 @@ public class WinningBallsTest {
 		assertThatThrownBy(() -> {
 			WinningBalls.from(new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "5")));
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("[ERROR] 당첨 번호는 중복되면 안됩니다");
+				.hasMessage("[ERROR] 한 개의 로또 내에서 숫자가 중복될 수 없습니다");
 	}
 
 	@DisplayName("당첨된 번호에 포함된 숫자일 때 true를 반환한다")
