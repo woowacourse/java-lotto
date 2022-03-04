@@ -11,7 +11,8 @@ import lotto.utils.IntegerUtils;
 
 public class LottoTicket {
 
-    private static final int COUNT = 6;
+    public static final String DELIMITER = ",";
+    private static final int NUMBER_COUNT = 6;
 
     private final List<LottoNumber> numbers;
 
@@ -20,9 +21,9 @@ public class LottoTicket {
         this.numbers = new ArrayList<>(numbers);
     }
 
-    public static LottoTicket createTicket(NumberGenerator generator) {
+    public static LottoTicket createRandomTicket(NumberGenerator generator) {
         return new LottoTicket(
-            generator.generate(COUNT)
+            generator.generate(NUMBER_COUNT)
                 .stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList())
@@ -30,7 +31,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket createTicket(String numbers) {
-        return new LottoTicket(Arrays.stream(numbers.split(","))
+        return new LottoTicket(Arrays.stream(numbers.split(DELIMITER))
             .map(number -> new LottoNumber(IntegerUtils.parse(number.trim())))
             .collect(Collectors.toList()));
     }
@@ -54,12 +55,12 @@ public class LottoTicket {
     }
 
     private boolean isDistinct(List<LottoNumber> numbers) {
-        return new HashSet<>(numbers).size() == COUNT;
+        return new HashSet<>(numbers).size() == NUMBER_COUNT;
     }
 
     private void validateLength(List<LottoNumber> numbers) {
-        if (numbers.size() != COUNT) {
-            throw new IllegalArgumentException(String.format("로또 번호의 개수는 %d 이어야 합니다.", COUNT));
+        if (numbers.size() != NUMBER_COUNT) {
+            throw new IllegalArgumentException(String.format("로또 번호의 개수는 %d 이어야 합니다.", NUMBER_COUNT));
         }
     }
 

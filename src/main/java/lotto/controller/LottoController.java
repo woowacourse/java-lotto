@@ -38,7 +38,7 @@ public class LottoController {
 
     private LottoTickets createLottoTickets(Money money, ManualCount manualCount) {
         List<String> manualLottoTickets = inputView.inputManualLottoTickets(manualCount.getCount());
-        LottoTickets lottoTickets = LottoTickets.buy(
+        LottoTickets lottoTickets = LottoTickets.buyRandomTicket(
             new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX),
             money.changes(manualCount.getCount())
         );
