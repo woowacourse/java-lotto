@@ -8,11 +8,11 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottos;
     private final LottoResult result;
+    private int passiveLottoCount;
 
-    public Lottos(Money money, int unitPrice) {
+    public Lottos() {
         this.lottos = new ArrayList<>();
         this.result = new LottoResult();
-        purchaseLotto(money, unitPrice);
     }
 
     public List<Lotto> getLottos() {
@@ -23,6 +23,10 @@ public class Lottos {
         return lottos.size();
     }
 
+    public int getPassiveLottoCount() {
+        return passiveLottoCount;
+    }
+
     public LottoResult getResult(WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
             checkLottoResult(winningLotto, lotto.getPickedNumbers());
@@ -30,21 +34,21 @@ public class Lottos {
         return result;
     }
 
+    public void purchaseActiveLotto(Money money) {
+        for (int i = 0; i < money.getLottoCount(); i++) {
+            lottos.add(new Lotto(new PickedNumbers()));
+        }
+    }
+
+    public void purchaseLotto(PickedNumbers pickedNumbers) {
+        lottos.add(new Lotto(pickedNumbers));
+    }
+
     private void checkLottoResult(WinningLotto winningLotto, PickedNumbers pickedNumbers) {
         winningLotto.addLottoResult(pickedNumbers, result);
     }
 
     public double getYield(Money money) {
-        return (double) result.sumOfPrize() / (double) money.getMoney();
-    }
-
-    private void purchaseLotto(Money money, int unitPrice) {
-        for (int i = 0; i < getLottosCount(money, unitPrice); i++) {
-            lottos.add(new Lotto(new PickedNumbers()));
-        }
-    }
-
-    private int getLottosCount(Money money, int unitPrice) {
-        return money.getMoney() / unitPrice;
+        return (double) result.sumOfPrize() / (double) money.getInitialMoney();
     }
 }
