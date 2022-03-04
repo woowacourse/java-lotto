@@ -17,15 +17,6 @@ class LottoTicketsTest {
     private final NumberGenerateStrategy numberGenerateStrategy = () -> new HashSet<>(dummyLottoNumber);
 
     @Test
-    @DisplayName("음수의 금액으로 로또 티켓을 생성하려할 시 에러를 발생시키는지 검사한다.")
-    void checkNegativeMoney() {
-        int purchaseMoney = -17000;
-        assertThatThrownBy(() -> LottoTickets.generateAutoTickets(new LottoMoney(purchaseMoney), numberGenerateStrategy))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoMoney.NOT_POSITIVE_ERROR_MESSAGE);
-    }
-
-    @Test
     @DisplayName("로또 티켓이 정상적으로 자동 생성됐는지 검사한다.")
     void autoLottoTicketsTest() {
         int purchaseMoney = 17000;
