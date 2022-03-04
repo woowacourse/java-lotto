@@ -1,5 +1,6 @@
 package domain.dto;
 
+import java.util.Collections;
 import java.util.Set;
 
 public class LottoTicketDto {
@@ -10,6 +11,6 @@ public class LottoTicketDto {
     }
 
     public Set<Integer> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 }
