@@ -1,16 +1,15 @@
 package lotto.dto;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class InputLottoDto {
-    private final List<String> inputNumbers;
+    private final List<Integer> inputNumbers;
 
-    public InputLottoDto(final String[] inputNumbers) {
-        this.inputNumbers = Arrays.asList(inputNumbers);
+    public InputLottoDto(final List<Integer> inputNumbers) {
+        this.inputNumbers = inputNumbers;
     }
 
-    public List<String> getNumbers() {
+    public List<Integer> getNumbers() {
         return inputNumbers;
     }
 }
