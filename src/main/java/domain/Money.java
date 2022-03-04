@@ -1,10 +1,11 @@
 package domain;
 
+import static domain.LottoMachine.LOTTO_PRICE;
+
 public class Money {
 
     private static final String ERROR_MONEY_NON_INTEGER = "가격은 정수만 가능합니다.";
     private static final String ERROR_LESS_THAN_MINIMUM_MONEY = "가격은 1000원 이상만 가능합니다.";
-    private static final int LOTTO_PRICE = 1000;
 
     private int money;
 

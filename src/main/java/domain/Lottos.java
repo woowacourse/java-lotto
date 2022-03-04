@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Lottos {
+import static domain.LottoMachine.LOTTO_PRICE;
 
-    private static final int LOTTO_PRICE = 1000;
+public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
