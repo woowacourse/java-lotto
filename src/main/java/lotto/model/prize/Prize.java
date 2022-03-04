@@ -21,8 +21,11 @@ public enum Prize {
 	}
 
 	public static Prize getPrize(MatchResult matchResult) {
+		if (matchResult.isCount(5) && matchResult.isBonus()) {
+			return SECOND;
+		}
 		return Arrays.stream(values())
-				.filter(prize -> matchResult.isCount(prize.matchCount) && matchResult.isBonus() == prize.bonus)
+				.filter(prize -> matchResult.isCount(prize.matchCount))
 				.findFirst()
 				.orElse(NONE);
 	}

@@ -27,15 +27,19 @@ public class PrizeTest {
 	@DisplayName("3개가 일치하면 5등을 반환한다")
 	@Test
 	void match_3_fifth() {
-		List<LottoBall> lottoBalls = Arrays.asList(
-				LottoBall.from("1"),
-				LottoBall.from("2"),
-				LottoBall.from("3"),
-				LottoBall.from("7"),
-				LottoBall.from("8"),
-				LottoBall.from("9")
-		);
-		Lotto lotto = new Lotto(lottoBalls);
+		List<String> lottoBalls = Arrays.asList("1", "2", "3", "7", "8", "9");
+		Lotto lotto = Lotto.fromManual(lottoBalls);
+
+		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
+
+		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.FIFTH);
+	}
+
+	@DisplayName("3개가 일치하고 보너스가 일치해도 5등을 반환한다")
+	@Test
+	void match_3_bonus_fifth() {
+		List<String> lottoBalls = Arrays.asList("1", "2", "3", "7", "8", "10");
+		Lotto lotto = Lotto.fromManual(lottoBalls);
 
 		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 
