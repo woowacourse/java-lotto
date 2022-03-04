@@ -19,11 +19,12 @@ public class LottoTicket {
         validateNumberDuplication();
     }
 
-    public Rank compareNumbers(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public Rank getRankBy(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         int totalMatchNumber = (int) numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
-        return getRank(bonusNumber, totalMatchNumber);
+        boolean hasBonusNumber = numbers.contains(bonusNumber);
+        return Rank.matchResult(totalMatchNumber, hasBonusNumber);
     }
 
     private void validateLottoNumberSize() {
@@ -44,10 +45,6 @@ public class LottoTicket {
 
     private boolean isDuplicateNumber() {
         return new HashSet<>(numbers).size() != LOTTO_NUMBER_SIZE;
-    }
-
-    private Rank getRank(LottoNumber bonusNumber, int matchCount) {
-        return Rank.matchResult(matchCount, numbers.contains(bonusNumber));
     }
 
     public List<LottoNumber> getNumbers() {

@@ -40,7 +40,7 @@ class LottoTicketTest {
                                 Rank rank) {
         WinningNumbers winningNumbers = new WinningNumbers(winningNumber, bonusNumber);
         LottoTicket lottoTicket = new LottoTicket(lottoNumber);
-        Rank lottoRank = lottoTicket.compareNumbers(winningNumbers.getWinningNumbers(),
+        Rank lottoRank = lottoTicket.getRankBy(winningNumbers.getWinningNumbers(),
                 winningNumbers.getBonusNumber());
         assertThat(lottoRank).isEqualTo(rank);
     }
