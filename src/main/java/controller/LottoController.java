@@ -3,7 +3,6 @@ package controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import model.Money;
 import model.lotto.LottoCount;
@@ -13,6 +12,7 @@ import model.lottonumber.LottoNumbers;
 import model.result.Rank;
 import model.result.RateOfReturn;
 import model.winningnumber.WinningLottoNumber;
+import utils.InputLottoNumbersUtils;
 import utils.InputValidateUtils;
 import view.InputView;
 import view.OutputView;
@@ -22,9 +22,7 @@ public class LottoController {
 	private static final String MONEY_NUMBER_ERROR_MESSAGE = "[Error]: 금액은 숫자를 입력해주세요.";
 	private static final String COUNT_BLANK_ERROR_MESSAGE = "[Error]: 갯수을 입력해주세요.";
 	private static final String COUNT_NUMBER_ERROR_MESSAGE = "[Error]: 갯수는 숫자를 입력해주세요.";
-	private static final String LOTTO_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 번호를 입력하세요.";
 	private static final String BONUS_BALL_BLANK_ERROR_MESSAGE = "[Error]: 보너스 볼을 입력해주세요.";
-	private static final String DELIMITER_COMMA = ",";
 
 	private final InputView inputView = new InputView();
 	private final OutputView outputView = new OutputView();
@@ -92,7 +90,7 @@ public class LottoController {
 	private LottoNumbers makeOnePassiveLotto() {
 		try {
 			String input = inputView.inputLottoNumbers();
-			return LottoNumbers.changeFrom(makeLottoNumber(input));
+			return LottoNumbers.changeFrom(InputLottoNumbersUtils.makeLottoNumber(input));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
 			return makeOnePassiveLotto();
@@ -106,32 +104,12 @@ public class LottoController {
 	private WinningLottoNumber storeWinningNumber() {
 		try {
 			String input = inputView.inputWinningNumbers();
-			return new WinningLottoNumber(makeLottoNumber(input), makeBonusBall());
+			return new WinningLottoNumber(InputLottoNumbersUtils.makeLottoNumber(input), makeBonusBall());
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
 			return storeWinningNumber();
 		}
 	}
-
-	///////LOTTO_SIZE짜리 로또 숫자 입력으로 받기
-	private List<LottoNumber> makeLottoNumber(String input) {
-		InputValidateUtils.inputBlank(input, LOTTO_NUMBER_BLANK_ERROR_MESSAGE);
-		List<String> numbers = splitLottoNumber(input);
-		return makeInputNumbersToLottoNumbers(numbers);
-	}
-
-	private List<String> splitLottoNumber(String input) {
-		return Arrays.stream(input.split(DELIMITER_COMMA))
-			.map(String::trim)
-			.collect(Collectors.toList());
-	}
-
-	private List<LottoNumber> makeInputNumbersToLottoNumbers(List<String> numbers) {
-		return numbers.stream()
-			.map(number -> LottoNumber.parseLottoNumber(number))
-			.collect(Collectors.toList());
-	}
-	//////////
 
 	private LottoNumber makeBonusBall() {
 		String input = inputView.inputBonusBall();
