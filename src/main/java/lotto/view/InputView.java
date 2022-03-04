@@ -7,9 +7,6 @@ import lotto.utils.IntegerUtils;
 
 public class InputView {
 
-    private static final String DELIMITER = ",";
-    private static final int SPLIT_LIMIT = -1;
-
     private final Scanner scanner;
 
     public InputView(Scanner scanner) {
@@ -22,10 +19,9 @@ public class InputView {
         return IntegerUtils.parse(input);
     }
 
-    public String[] inputWinningNumber() {
+    public String inputWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String input = scanner.nextLine();
-        return input.split(DELIMITER, SPLIT_LIMIT);
+        return scanner.nextLine();
     }
 
     public int inputBonusBall() {
