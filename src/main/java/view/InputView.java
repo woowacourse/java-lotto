@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import model.dto.LottoNumberRequestDto;
+import model.dto.LottoRequestDto;
 
 public class InputView {
     private static final String NOT_INTEGER = "[ERROR] 숫자를 입력해주세요";
@@ -31,14 +31,14 @@ public class InputView {
         return inputInteger();
     }
 
-    public static List<LottoNumberRequestDto> inputManualLottoNumbers(int manualLottoCount) throws IOException {
+    public static List<LottoRequestDto> inputManualLottoNumbers(int manualLottoCount) throws IOException {
         if (manualLottoCount == 0) {
             return Collections.emptyList();
         }
         out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<LottoNumberRequestDto> manualLottoNumbers = new ArrayList<>();
+        List<LottoRequestDto> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
-            manualLottoNumbers.add(new LottoNumberRequestDto(inputNumbers()));
+            manualLottoNumbers.add(new LottoRequestDto(inputNumbers()));
         }
         return manualLottoNumbers;
     }

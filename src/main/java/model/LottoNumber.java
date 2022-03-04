@@ -7,23 +7,23 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final String INVALID_LOTTO_NUMBER_RANGE = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.";
+    private static final int MIN_VALUE = 1;
+    private static final int MAX_VALUE = 45;
+    private static final String INVALID_RANGE = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.";
 
     static final Map<Integer, LottoNumber> LOTTO_NUMBER_POOL;
 
     static {
-        LOTTO_NUMBER_POOL = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+        LOTTO_NUMBER_POOL = IntStream.rangeClosed(MIN_VALUE, MAX_VALUE)
                 .boxed()
                 .collect(Collectors.toUnmodifiableMap(Function.identity(), LottoNumber::new));
     }
 
-    private final int number;
+    private final int value;
 
-    private LottoNumber(int number) {
-        validateRange(number);
-        this.number = number;
+    private LottoNumber(int value) {
+        validateRange(value);
+        this.value = value;
     }
 
     public static LottoNumber valueOf(int number) {
@@ -31,9 +31,9 @@ public class LottoNumber {
         return LOTTO_NUMBER_POOL.get(number);
     }
 
-    private static void validateRange(int number) {
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE);
+    private static void validateRange(int value) {
+        if (value < MIN_VALUE || value > MAX_VALUE) {
+            throw new IllegalArgumentException(INVALID_RANGE);
         }
     }
 
@@ -46,16 +46,16 @@ public class LottoNumber {
             return false;
         }
         LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        return value == that.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
-        return String.valueOf(number);
+        return String.valueOf(value);
     }
 }

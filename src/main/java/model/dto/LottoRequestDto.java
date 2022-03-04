@@ -2,10 +2,10 @@ package model.dto;
 
 import java.util.List;
 
-public class LottoNumberRequestDto {
+public class LottoRequestDto {
     private final List<Integer> numbers;
 
-    public LottoNumberRequestDto(List<Integer> numbers) {
+    public LottoRequestDto(List<Integer> numbers) {
         this.numbers = List.copyOf(numbers);
     }
 

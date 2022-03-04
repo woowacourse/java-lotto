@@ -41,7 +41,7 @@ public class WinningStatistics {
 
     private double calculateEarningsRate(LottoPurchasingMoney lottoPurchasingMoney) {
         long totalPrize = getTotalPrize();
-        return totalPrize / (double)lottoPurchasingMoney.getAmount();
+        return totalPrize / (double)lottoPurchasingMoney.getValue();
     }
 
     private long getTotalPrize() {

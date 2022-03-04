@@ -13,7 +13,7 @@ import model.LottoPurchasingMoney;
 import model.WinningLotto;
 import model.WinningStatistics;
 import model.dto.LottoDto;
-import model.dto.LottoNumberRequestDto;
+import model.dto.LottoRequestDto;
 import model.dto.WinningStatisticsDto;
 import view.InputView;
 import view.OutputView;
@@ -69,7 +69,7 @@ public class LottoController {
     private List<Lotto> purchaseManualLotteries(LottoOrder lottoOrder) {
         LottoFactory lottoFactory = LottoFactory.getInstance();
         try {
-            List<LottoNumberRequestDto> manualLottoNumbers = inputManualLottoNumbers(lottoOrder);
+            List<LottoRequestDto> manualLottoNumbers = inputManualLottoNumbers(lottoOrder);
             return manualLottoNumbers.stream()
                     .map(numbers -> lottoFactory.generateManual(numbers.getNumbers()))
                     .collect(Collectors.toUnmodifiableList());
@@ -79,7 +79,7 @@ public class LottoController {
         }
     }
 
-    private List<LottoNumberRequestDto> inputManualLottoNumbers(LottoOrder lottoOrder) {
+    private List<LottoRequestDto> inputManualLottoNumbers(LottoOrder lottoOrder) {
         try {
             return InputView.inputManualLottoNumbers(lottoOrder.getManualLottoCount());
         } catch (IOException e) {

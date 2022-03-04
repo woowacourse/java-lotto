@@ -7,27 +7,27 @@ public class LottoPurchasingMoney {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final int amount;
+    private final int value;
 
-    private LottoPurchasingMoney(int amount) {
-        validateEnough(amount);
-        this.amount = amount / LOTTO_PRICE * LOTTO_PRICE;
+    private LottoPurchasingMoney(int value) {
+        validateEnough(value);
+        this.value = value / LOTTO_PRICE * LOTTO_PRICE;
     }
 
-    public static LottoPurchasingMoney valueOf(int amount) {
-        return new LottoPurchasingMoney(amount);
+    public static LottoPurchasingMoney valueOf(int money) {
+        return new LottoPurchasingMoney(money);
     }
 
-    public int getAmount() {
-        return amount;
+    public int getValue() {
+        return value;
     }
 
     public int getPurchasableCount() {
-        return amount / LOTTO_PRICE;
+        return value / LOTTO_PRICE;
     }
 
-    private void validateEnough(int amount) {
-        if (amount < LOTTO_PRICE) {
+    private void validateEnough(int value) {
+        if (value < LOTTO_PRICE) {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
         }
     }
@@ -41,11 +41,11 @@ public class LottoPurchasingMoney {
             return false;
         }
         LottoPurchasingMoney lottoPurchasingMoney = (LottoPurchasingMoney) o;
-        return amount == lottoPurchasingMoney.amount;
+        return value == lottoPurchasingMoney.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount);
+        return Objects.hash(value);
     }
 }
