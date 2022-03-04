@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.Lotto;
+import lotto.domain.LottoPurchaseMoney;
 import lotto.domain.vo.LottoNumber;
 
 public class InputView {
@@ -15,9 +16,9 @@ public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static int inputMoney() {
+    public static LottoPurchaseMoney inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return stringToInt(validateBlank(SCANNER.nextLine()));
+        return new LottoPurchaseMoney(stringToInt(validateBlank(SCANNER.nextLine())));
     }
 
     public static int inputManualLottoAmount() {

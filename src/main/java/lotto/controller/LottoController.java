@@ -16,31 +16,25 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void run() {
-        LottoPurchaseMoney money = new LottoPurchaseMoney(InputView.inputMoney());
-        Lottos lottos = purchaseLottos(money);
-        OutputView.printLottos(lottos.getLottos());
-        OutputView.printRate(sumTotalReward(lottos), money.getMoney());
-    }
+        LottoPurchaseMoney money = InputView.inputMoney();
 
-    private Lottos purchaseLottos(LottoPurchaseMoney money) {
         int manualAmount = InputView.inputManualLottoAmount();
 
         List<Lotto> manualLottos = LottosFactory.MANUAL.generate(manualAmount);
         List<Lotto> autoLottos = LottosFactory.AUTO.generate(money.calculateAvailablePurchaseAmount(manualAmount));
         OutputView.printLottosSize(manualLottos.size(), autoLottos.size());
 
-        return new Lottos(concatLottos(manualLottos, autoLottos));
+        Lottos lottos = new Lottos(concatLottos(manualLottos, autoLottos));
+        OutputView.printLottos(lottos.getLottos());
+
+        List<Rank> ranks = lottos.match(createWinnerLotto(InputView.inputWinnerNumbers(), InputView.inputBonusNumber()));
+        OutputView.printRanks(ranks);
+        OutputView.printRate(Rank.calculateReward(ranks), money.getMoney());
     }
 
     private List<Lotto> concatLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
         return Stream.concat(manualLottos.stream(), autoLottos.stream())
             .collect(Collectors.toList());
-    }
-
-    private long sumTotalReward(Lottos lottos) {
-        List<Rank> ranks = lottos.match(createWinnerLotto(InputView.inputWinnerNumbers(), InputView.inputBonusNumber()));
-        OutputView.printRanks(ranks);
-        return Rank.calculateReward(ranks);
     }
 
     private WinnerLotto createWinnerLotto(List<LottoNumber> winnerLottoNumbers, LottoNumber bonusLottoNumber) {
