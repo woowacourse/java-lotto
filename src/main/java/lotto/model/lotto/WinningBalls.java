@@ -11,7 +11,7 @@ public class WinningBalls {
 	}
 
 	public static WinningBalls from(List<String> inputs) {
-		return new WinningBalls(new Lotto(Lotto.generateManual(inputs)));
+		return new WinningBalls(Lotto.fromManual(inputs));
 	}
 
 	public boolean match(LottoBall lottoBall) {

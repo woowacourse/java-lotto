@@ -29,15 +29,9 @@ public class PrizeInformationsTest {
 	@DisplayName("10000원 어치를 사고 5등이 1장 당첨됐을때 수익률은 0.5이다")
 	@Test
 	void calculateEarningRate_10000_5th_1() {
-		List<LottoBall> lottoBalls = Arrays.asList(
-				LottoBall.from("1"),
-				LottoBall.from("2"),
-				LottoBall.from("3"),
-				LottoBall.from("7"),
-				LottoBall.from("8"),
-				LottoBall.from("9")
-		);
-		Lotto lotto = new Lotto(lottoBalls);
+		List<String> lottoBalls = Arrays.asList("1", "2", "3", "7", "8", "9");
+		Lotto lotto = Lotto.fromManual(lottoBalls);
+
 		MatchResult matchResult = MatchResult.of(lotto, winningBalls, bonusBall);
 		List<MatchResult> matchResults = new ArrayList<>();
 		matchResults.add(matchResult);
@@ -51,26 +45,14 @@ public class PrizeInformationsTest {
 	@DisplayName("100000원 어치를 사고 5등 5장, 4등 1장이 당첨됐을때 수익률은 0.75이다")
 	@Test
 	void calculateEarningRate_100000_4th_1_5th_5() {
-		List<LottoBall> lottoBalls_5th = Arrays.asList(
-				LottoBall.from("1"),
-				LottoBall.from("2"),
-				LottoBall.from("3"),
-				LottoBall.from("7"),
-				LottoBall.from("8"),
-				LottoBall.from("9")
-		);
-		Lotto lotto_5Th = new Lotto(lottoBalls_5th);
+		List<String> lottoBalls_5th = Arrays.asList("1", "2", "3", "7", "8", "9");
+		Lotto lotto_5Th = Lotto.fromManual(lottoBalls_5th);
+
 		MatchResult matchResult_5th = MatchResult.of(lotto_5Th, winningBalls, bonusBall);
 
-		List<LottoBall> lottoBalls_4th = Arrays.asList(
-				LottoBall.from("1"),
-				LottoBall.from("2"),
-				LottoBall.from("3"),
-				LottoBall.from("4"),
-				LottoBall.from("8"),
-				LottoBall.from("9")
-		);
-		Lotto lotto_4Th = new Lotto(lottoBalls_4th);
+		List<String> lottoBalls_4th = Arrays.asList("1", "2", "3", "4", "8", "9");
+		Lotto lotto_4Th = Lotto.fromManual(lottoBalls_4th);
+
 		MatchResult matchResult_4th = MatchResult.of(lotto_4Th, winningBalls, bonusBall);
 
 		List<MatchResult> matchResults = new ArrayList<>();

@@ -25,17 +25,25 @@ public class Lotto {
 
 	private final List<LottoBall> lotto;
 
-	public Lotto(List<LottoBall> numbers) {
+	private Lotto(List<LottoBall> numbers) {
 		Collections.sort(numbers);
 		this.lotto = List.copyOf(numbers);
 	}
 
-	public static List<LottoBall> generateAuto() {
+	public static Lotto fromAuto() {
+		return new Lotto(generateAuto());
+	}
+
+	private static List<LottoBall> generateAuto() {
 		Collections.shuffle(LOTTO_BALLS);
 		return LOTTO_BALLS.subList(0, NUMBER_COUNT);
 	}
 
-	public static List<LottoBall> generateManual(List<String> input) {
+	public static Lotto fromManual(List<String> input) {
+		return new Lotto(generateManual(input));
+	}
+
+	private static List<LottoBall> generateManual(List<String> input) {
 		validate(input);
 		List<LottoBall> lottoBalls = new ArrayList<>();
 		input.forEach(string -> lottoBalls.add(LottoBall.from(string)));

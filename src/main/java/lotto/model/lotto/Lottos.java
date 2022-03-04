@@ -29,13 +29,13 @@ public class Lottos {
 
 	private static void generateManualLotto(List<List<String>> input, List<Lotto> lottos) {
 		input.forEach(
-			numbers -> lottos.add(new Lotto(Lotto.generateManual(numbers)))
+			numbers -> lottos.add(Lotto.fromManual(numbers))
 		);
 	}
 
 	private static void generateAutoLotto(int autoCount, List<Lotto> lottos) {
 		for (int index = 0; index < autoCount; index++) {
-			lottos.add(new Lotto(Lotto.generateAuto()));
+			lottos.add(Lotto.fromAuto());
 		}
 	}
 
