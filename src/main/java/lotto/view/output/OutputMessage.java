@@ -12,7 +12,7 @@ public enum OutputMessage {
     TITLE_OF_ANALYSIS("당첨 통계"),
     DIVIDING_LINE("---------"),
 
-    TICKET_COUNT_FORMAT("수동으로 %d장, 자동으로 %d개를 구매했습니다."),
+    TICKET_COUNT_FORMAT("수동으로 %d장, 자동으로 %d장을 구매했습니다."),
     PROFIT_RAGE_FORMAT("총 수익률은 %.2f입니다."),
     TICKET_FORMAT("[%s]"),
     ANALYSIS_FORMAT("%d개 일치 (%d원) - %d개"),
