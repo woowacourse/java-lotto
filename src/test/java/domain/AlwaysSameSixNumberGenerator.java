@@ -2,9 +2,9 @@ package domain;
 
 import java.util.Arrays;
 import java.util.List;
-import util.LottoNumberGenerator;
+import util.NumberGenerator;
 
-class AlwaysSameSixNumberGenerator implements LottoNumberGenerator {
+class AlwaysSameSixNumberGenerator implements NumberGenerator {
 
     @Override
     public List<Integer> generate() {

@@ -2,7 +2,7 @@ package domain;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import util.LottoNumberGenerator;
+import util.NumberGenerator;
 
 public class LottoMachine {
 
@@ -11,7 +11,7 @@ public class LottoMachine {
     private final int money;
     private final LottoTicket lottoTicket;
 
-    public LottoMachine(int money, LottoNumberGenerator numberGenerator) {
+    public LottoMachine(int money, NumberGenerator numberGenerator) {
         this.money = money;
         this.lottoTicket = new LottoTicket(money / LOTTO_PRICE, numberGenerator);
     }

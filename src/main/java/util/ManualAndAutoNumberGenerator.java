@@ -1,12 +1,10 @@
 package util;
 
 import domain.ManualLotto;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class ManualAndAutoNumberGenerator implements LottoNumberGenerator {
+public class ManualAndAutoNumberGenerator extends LottoNumberGenerator implements NumberGenerator {
 
     private final Iterator<ManualLotto> manualLottoIterator;
 
@@ -14,10 +12,12 @@ public class ManualAndAutoNumberGenerator implements LottoNumberGenerator {
         this.manualLottoIterator = manualLottos.listIterator();
     }
 
+    @Override
     public List<Integer> generate() {
         if (manualLottoIterator.hasNext()) {
             return manualLottoIterator.next().getManualLottoNumbers();
         }
-        return LottoNumberGenerator.super.generate();
+
+        return super.generate();
     }
 }
