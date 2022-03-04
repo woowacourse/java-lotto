@@ -5,6 +5,8 @@ import java.util.*;
 import static constant.LottoConstant.*;
 
 public class LottoTicket {
+	private static final int NUMBER_FOR_BONUS_CHECK = 5;
+
 	private final static List<Integer> candidates = initCandidates();
 	private final LottoNumbers numbers;
 

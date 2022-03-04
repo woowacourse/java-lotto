@@ -1,8 +1,7 @@
 package domain;
 
-import static constant.LottoConstant.PRICE_OF_LOTTO;
-
 public class Money {
+	private static final int PRICE_OF_LOTTO = 1000;
 	private static final String DIVIDE_BY_THOUSAND = "1000원으로 나누어 떨어지는 금액을 입력해주세요.";
 	private static final String CANT_PURCHASE = "구입금액이 부족합니다.";
 

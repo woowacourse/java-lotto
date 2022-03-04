@@ -2,8 +2,6 @@ package domain;
 
 import java.util.Arrays;
 
-import static constant.LottoConstant.MIN_NUMBER_TO_WIN;
-
 public enum ResultStatics {
 	NOTHING(0, 0, false),
 	FIFTH(3, 5000, false),
@@ -11,6 +9,8 @@ public enum ResultStatics {
 	THIRD(5, 1500000, false),
 	SECOND(5, 30000000, true),
 	FIRST(6, 2000000000, false);
+
+	private static final int MIN_NUMBER_TO_WIN = 3;
 
 	private final int numberMatches;
 	private final int price;
