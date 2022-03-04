@@ -7,7 +7,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.ManualCount;
 import lotto.domain.Money;
-import lotto.domain.RandomNumberGenerator;
+import lotto.utils.RandomNumberGenerator;
 import lotto.domain.WinningTicket;
 import lotto.dto.LottoTicketResponse;
 import lotto.dto.StatisticsResult;

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import lotto.utils.IntegerUtils;
+import lotto.utils.NumberGenerator;
 
 public class LottoTicket {
 
