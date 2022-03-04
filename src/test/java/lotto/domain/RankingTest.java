@@ -13,9 +13,12 @@ public class RankingTest {
     @CsvSource(value = {"6,false,FIRST_PLACE",
             "5,true,SECOND_PLACE",
             "5,false,THIRD_PLACE",
+            "4,true,FOURTH_PLACE",
             "4,false,FOURTH_PLACE",
+            "3,true,FIFTH_PLACE",
             "3,false,FIFTH_PLACE",
-            "2,true,NONE_PLACE"})
+            "2,true,NONE_PLACE",
+            "2,false,NONE_PLACE"})
     @DisplayName("맞은 개수와 보너스볼 유무로 일치하는 순위를 반환")
     void findRanking(int hitCount, boolean hasBonusNumber, Ranking expectedRanking) {
         assertThat(Ranking.of(hitCount, hasBonusNumber)).isEqualTo(expectedRanking);
