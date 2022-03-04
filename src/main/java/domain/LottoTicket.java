@@ -8,7 +8,7 @@ public class LottoTicket {
 	private final static List<Integer> candidates = initCandidates();
 	private final LottoNumbers numbers;
 
-	public LottoTicket(LottoNumbers numbers) {
+	private LottoTicket(LottoNumbers numbers) {
 		this.numbers = numbers;
 	}
 
