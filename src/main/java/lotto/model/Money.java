@@ -48,7 +48,7 @@ public class Money {
     }
 
     public void payLotto(int count) {
-        this.purchasedAmount = this.purchasedAmount + (PRICE_LOTTO * count);
+        this.purchasedAmount += (PRICE_LOTTO * count);
     }
 
     public void payLotto() {
