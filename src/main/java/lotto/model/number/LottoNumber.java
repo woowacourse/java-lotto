@@ -12,34 +12,34 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
-    private final int number;
+    private final int value;
 
-    public LottoNumber(int number) {
-        checkBound(number);
-        this.number = number;
+    public LottoNumber(int value) {
+        checkBound(value);
+        this.value = value;
     }
 
-    private static void checkBound(int number) {
-        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+    private static void checkBound(int value) {
+        if (value < MIN_NUMBER || value > MAX_NUMBER) {
             throw new IllegalArgumentException(ERROR_BOUND);
         }
     }
 
     public static List<LottoNumber> ofAllNumbers() {
         List<LottoNumber> allNumbers = new ArrayList<>();
-        for (int number = MIN_NUMBER; number <= MAX_NUMBER; number++) {
-            allNumbers.add(new LottoNumber(number));
+        for (int value = MIN_NUMBER; value <= MAX_NUMBER; value++) {
+            allNumbers.add(new LottoNumber(value));
         }
         return allNumbers;
     }
 
     public int getValue() {
-        return number;
+        return value;
     }
 
     @Override
     public int compareTo(LottoNumber lottoNumber) {
-        return Integer.compare(this.number, lottoNumber.number);
+        return Integer.compare(this.value, lottoNumber.value);
     }
 
     @Override
@@ -56,6 +56,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(value);
     }
 }
