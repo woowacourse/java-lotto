@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import domain.generatestrategy.LotteryGenerateStrategy;
+import domain.generatestrategy.ManualLotteryGeneratorStrategy;
 
 public class LotteryGame {
 
@@ -22,8 +23,18 @@ public class LotteryGame {
 	}
 
 	private void createLottery() {
-		lotteries = new Lotteries(purchaseInformation.getManualLotteries());
+		lotteries = new Lotteries();
+		createManualLottery();
 		createAutoLottery();
+	}
+
+	private void createManualLottery() {
+		final List<List<Integer>> rawManualLotteries = purchaseInformation.getManualLotteries();
+		final List<Lottery> manualLottery = new ArrayList<>();
+		for (List<Integer> rawLottery : rawManualLotteries) {
+			manualLottery.add((new ManualLotteryGeneratorStrategy(rawLottery)).getLottery());
+		}
+		lotteries.addLotteries(manualLottery);
 	}
 
 	private void createAutoLottery() {

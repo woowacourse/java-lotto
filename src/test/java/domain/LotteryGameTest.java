@@ -14,6 +14,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import domain.generateStrategy.LotteryGenerateMock;
 import domain.generatestrategy.LotteryRandomGeneratorStrategy;
+import utils.Parser;
 
 @DisplayName("LotteryGame 테스트")
 public class LotteryGameTest {
@@ -67,10 +68,11 @@ public class LotteryGameTest {
 			final int theNumberOfManualLotteries) {
 		final LotteryGenerateMock lotteryGenerator = new LotteryGenerateMock(1, theNumberOfManualLotteries);
 		final PurchaseAmount purchaseAmount = new PurchaseAmount(lotteriesToCreate * 1000);
-		final List<Lottery> lotteries = new ArrayList<>();
+		final List<List<Integer>> lotteries = new ArrayList<>();
 		for (int i = 0; i < theNumberOfManualLotteries; i++) {
-			lotteries.add(lotteryGenerator.getLottery());
+			Lottery lottery = lotteryGenerator.getLottery();
+			lotteries.add(Parser.toIntegerList(lottery.getNumbers()));
 		}
-		return new PurchaseInformation(purchaseAmount, new Lotteries(lotteries), theNumberOfManualLotteries);
+		return new PurchaseInformation(purchaseAmount, lotteries, theNumberOfManualLotteries);
 	}
 }
