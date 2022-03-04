@@ -9,10 +9,10 @@ import lotto.model.Rank;
 import lotto.model.Yield;
 
 public class ResultView {
-    public static void printGeneratedLottos(List<Lotto> manualLottos, List<Lotto> lottos) {
-        System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + lottos.size() + "개를 구매했습니다.");
+    public static void printGeneratedLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + autoLottos.size() + "개를 구매했습니다.");
         printEachLottos(manualLottos);
-        printEachLottos(lottos);
+        printEachLottos(autoLottos);
         printEmptyLine();
     }
 

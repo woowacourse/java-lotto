@@ -25,7 +25,7 @@ public class InputView {
     }
 
     public static List<List<Integer>> inputManualLottos(int numberOfManualLottos) {
-        if (numberOfManualLottos <= 0) {
+        if (numberOfManualLottos == 0) {
             return List.of();
         }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
@@ -64,17 +64,25 @@ public class InputView {
 
     private static int inputInteger() {
         int result = scanner.nextInt();
+        validatePositive(result);
         scanner.nextLine();
         return result;
     }
 
     private static long inputLong() {
         long result = scanner.nextLong();
+        validatePositive(result);
         scanner.nextLine();
         return result;
     }
 
     private static void printEmptyLine() {
         System.out.println();
+    }
+
+    private static void validatePositive(long input) {
+        if (input < 0) {
+            throw new IllegalArgumentException("0 이상의 정수를 입력해주세요.");
+        }
     }
 }
