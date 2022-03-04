@@ -24,7 +24,7 @@ public class LotteryGenerator {
 
     private static LotteryTicket generateTicket() {
         Collections.shuffle(preparedNumbers);
-        List<Ball> selectedBalls = Ball.createBalls(preparedNumbers.subList(FIRST_NUMBER_INDEX, LAST_NUMBER_INDEX));
+        List<Ball> selectedBalls = Ball.getBalls(preparedNumbers.subList(FIRST_NUMBER_INDEX, LAST_NUMBER_INDEX));
         return new LotteryTicket(selectedBalls);
     }
 }

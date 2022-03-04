@@ -43,10 +43,10 @@ class LotteryCalculatorTest {
             "1,2,3,7,8,9:5000", "1,2,7,8,9,10:0"}, delimiter = ':')
     @DisplayName("당첨 총 금액을 계산한다.")
     void getWinningAmount(String winningNumbers, int amount) {
-        LotteryTicket lotteryTicket = new LotteryTicket(Ball.createBalls(
+        LotteryTicket lotteryTicket = new LotteryTicket(Ball.getBalls(
                 Arrays.stream(winningNumbers.split(",")).map(Integer::parseInt).collect(Collectors.toList())));
         LotteryTickets lotteryTickets = new LotteryTickets(List.of(lotteryTicket));
-        LotteryTicket winningTicket = new LotteryTicket(Ball.createBalls(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LotteryTicket winningTicket = new LotteryTicket(Ball.getBalls(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Ball bonus = Ball.from(7);
         Map<WinningLottery, Count> ticketsResult = lotteryTickets.getLotteriesResult(winningTicket, bonus);
         List<LotteryResultDto> lotteryResults = LotteryResultDto.createLotteryResults(ticketsResult);

@@ -90,7 +90,7 @@ public class LotteryMachine {
 
     private static LotteryTicket getManualLotteryTicket() {
         try {
-            List<Ball> selectedBalls = Ball.createBalls(InputView.getManualTicket());
+            List<Ball> selectedBalls = Ball.getBalls(InputView.getManualTicket());
             return new LotteryTicket(selectedBalls);
         } catch (Exception exception) {
             OutputView.printException(exception.getMessage());
@@ -101,7 +101,7 @@ public class LotteryMachine {
     private static LotteryTicket getWinningTicket() {
         try {
             List<Integer> winningNumbers = InputView.getWinningNumbers();
-            return new LotteryTicket(Ball.createBalls(winningNumbers));
+            return new LotteryTicket(Ball.getBalls(winningNumbers));
         } catch (RuntimeException exception) {
             OutputView.printException(exception.getMessage());
             return getWinningTicket();
