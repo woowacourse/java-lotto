@@ -33,8 +33,7 @@ public class Lotto {
         Validator.checkArgumentIsNull(winningLotto);
         return (int) winningLotto.numbers
                 .stream()
-                .map(LottoNumber::getNumber)
-                .filter(numbers::contains)
+                .filter(this::contains)
                 .count();
     }
 
