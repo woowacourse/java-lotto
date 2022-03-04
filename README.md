@@ -142,7 +142,7 @@
 
 - [ ] List<Lotto>의 래핑 클래스를 도메인에 추가 구현, 로직 이동
 - [ ] 커스텀 예외/메세지에 잘못된 사이즈에 대한 정보를 같이 넘기기(Lotto)
-- [ ] [링크](https://github.com/woowacourse/java-lotto/pull/480#discussion_r819151156) LottoMoney의 toLottoCount() 속 매직넘버
+- [x] [링크](https://github.com/woowacourse/java-lotto/pull/480#discussion_r819151156) LottoMoney의 toLottoCount() 속 매직넘버
   상수로 변경
 - [ ] LOTTO_NUMBER_CACHE 게터에서 새로이 자료구조 만들어 리턴(수정가능성 차단!!)
 - [ ] Integer.java에 IntegerCache 부분 한번 참고
