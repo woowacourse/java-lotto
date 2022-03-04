@@ -15,6 +15,8 @@ public class LotteryMachineApplication {
 
         List<LotteryTicket> passivityLotteryTickets = createPassivityLotteryTickets(passivityLotteryCount);
 
+
+
         LotteryPurchase lotteryPurchase = LotteryConverter.createLotteryPurchase();
         LotteryTickets lotteryTickets = LotteryConverter.createLotteryTickets(lotteryPurchase);
         OutputView.printLotteryPurchase(lotteryPurchase);
