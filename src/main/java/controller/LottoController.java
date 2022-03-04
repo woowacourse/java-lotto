@@ -27,18 +27,59 @@ public class LottoController {
             new DefaultWinningPrizeStrategy());
 
     public void run() {
-        LottoMoney purchaseMoney = new LottoMoney(inputView.inputPurchaseMoney());
-        SelfPurchaseCount selfPurchaseCount = new SelfPurchaseCount(inputView.inputSelfTicketCount());
-        purchaseMoney.purchaseSelfTicket(selfPurchaseCount.getValue());
-        LottoTickets selfPurchaseTickets = LottoTickets.from(
-                inputView.inputSelfTicketNumbers(selfPurchaseCount.getValue()));
-        LottoTickets autoPurchaseTickets = lottoGame.purchaseAutoTickets(purchaseMoney);
-        LottoTickets lottoTickets = selfPurchaseTickets.concat(autoPurchaseTickets);
+        LottoMoney purchaseMoney = inputPurchaseMoney();
+        SelfPurchaseCount selfPurchaseCount = inputSelfTicketCount();
+        LottoMoney autoPurchaseMoney = purchaseMoney.purchaseSelfTicket(selfPurchaseCount.getValue());
+        LottoTickets lottoTickets = purchaseTickets(selfPurchaseCount, autoPurchaseMoney);
         showGeneratedLottoTickets(lottoTickets);
         WinningTicket winningTicket = inputWinningNumbers();
         LottoResult lottoResult = lottoGame.createWinningResult(lottoTickets, winningTicket);
-        List<WinningResultDto> winningResultDtos = toWinningResultDtos(lottoResult.getCountOfWinning());
-        outputView.showLottoResult(winningResultDtos, lottoResult.calculateLottoRateOfReturn());
+        showLottoResult(lottoResult);
+    }
+
+    private LottoMoney inputPurchaseMoney() {
+        try {
+            return new LottoMoney(inputView.inputPurchaseMoney());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputPurchaseMoney();
+        }
+    }
+
+    private SelfPurchaseCount inputSelfTicketCount() {
+        try {
+            return new SelfPurchaseCount(inputView.inputSelfTicketCount());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputSelfTicketCount();
+        }
+    }
+
+    private LottoTickets purchaseTickets(SelfPurchaseCount selfPurchaseCount, LottoMoney autoPurchaseMoney) {
+        LottoTickets selfPurchaseTickets = inputSelfLottoTicket(selfPurchaseCount);
+        LottoTickets autoPurchaseTickets = lottoGame.purchaseAutoTickets(autoPurchaseMoney);
+        return selfPurchaseTickets.concat(autoPurchaseTickets);
+    }
+
+    private LottoTickets inputSelfLottoTicket(SelfPurchaseCount selfPurchaseCount) {
+        try {
+            return LottoTickets.from(inputView.inputSelfTicketNumbers(selfPurchaseCount.getValue()));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputSelfLottoTicket(selfPurchaseCount);
+        }
+    }
+
+    private void showGeneratedLottoTickets(LottoTickets lottoTickets) {
+        List<LottoTicketDto> dtos = toLottoTicketDtos(lottoTickets);
+        outputView.showLottoTicket(dtos, lottoTickets.getSelfPurchaseCount());
+    }
+
+    private List<LottoTicketDto> toLottoTicketDtos(LottoTickets lottoTickets) {
+        return lottoTickets.getTickets()
+                .stream()
+                .map(lottoTicket -> new LottoTicketDto(lottoTicket.getLottoNumberValues()))
+                .collect(Collectors.toList());
     }
 
     private WinningTicket inputWinningNumbers() {
@@ -52,9 +93,9 @@ public class LottoController {
         }
     }
 
-    private void showGeneratedLottoTickets(LottoTickets lottoTickets) {
-        List<LottoTicketDto> dtos = toLottoTicketDtos(lottoTickets);
-        outputView.showLottoTicket(dtos, lottoTickets.getSelfPurchaseCount());
+    private void showLottoResult(LottoResult lottoResult) {
+        List<WinningResultDto> winningResultDtos = toWinningResultDtos(lottoResult.getCountOfWinning());
+        outputView.showLottoResult(winningResultDtos, lottoResult.calculateLottoRateOfReturn());
     }
 
     private List<WinningResultDto> toWinningResultDtos(Map<WinningPrize, Integer> countOfWinning) {
@@ -64,15 +105,8 @@ public class LottoController {
                 .collect(Collectors.toList());
     }
 
-    public WinningResultDto toWinningResultDto(WinningPrize winningPrize, int count) {
+    private WinningResultDto toWinningResultDto(WinningPrize winningPrize, int count) {
         return new WinningResultDto(lottoGame.findMatchCount(winningPrize), lottoGame.findMatchBonus(winningPrize),
                 winningPrize.getPrizeMoney(), count);
-    }
-
-    private List<LottoTicketDto> toLottoTicketDtos(LottoTickets lottoTickets) {
-        return lottoTickets.getTickets()
-                .stream()
-                .map(lottoTicket -> new LottoTicketDto(lottoTicket.getLottoNumberValues()))
-                .collect(Collectors.toList());
     }
 }

@@ -19,7 +19,7 @@ public class LottoTickets {
 
     public static LottoTickets of(LottoMoney autoPurchaseLottoMoney,
                                   NumberGenerateStrategy numberGenerateStrategy) {
-        int autoPurchaseCount = autoPurchaseLottoMoney.getAmount() / LottoGame.TICKET_PRICE;
+        int autoPurchaseCount = autoPurchaseLottoMoney.getValue() / LottoGame.TICKET_PRICE;
         List<LottoTicket> lottoTickets = new ArrayList<>(
                 autoGenerateTickets(numberGenerateStrategy, autoPurchaseCount));
         return new LottoTickets(lottoTickets, 0);

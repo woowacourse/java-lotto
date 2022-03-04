@@ -5,11 +5,11 @@ public class LottoMoney {
     public static final String NOT_MULTIPLES_OF_PRICE_ERROR_MESSAGE
             = String.format("금액을 %d의 배수로 입력해주세요.", LottoGame.TICKET_PRICE);
 
-    private int amount;
+    private final int value;
 
-    public LottoMoney(int amount) {
-        validateMoney(amount);
-        this.amount = amount;
+    public LottoMoney(int value) {
+        validateMoney(value);
+        this.value = value;
     }
 
     private void validateMoney(int amount) {
@@ -30,11 +30,11 @@ public class LottoMoney {
         return purchaseMoney % LottoGame.TICKET_PRICE != 0;
     }
 
-    public void purchaseSelfTicket(int count) {
-        this.amount -= count * LottoGame.TICKET_PRICE;
+    public LottoMoney purchaseSelfTicket(int count) {
+        return new LottoMoney(this.value - count * LottoGame.TICKET_PRICE);
     }
 
-    public int getAmount() {
-        return amount;
+    public int getValue() {
+        return value;
     }
 }

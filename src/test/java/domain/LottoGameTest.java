@@ -20,7 +20,7 @@ class LottoGameTest {
     void checkMoneyTicketCount() {
         LottoMoney purchaseMoney = new LottoMoney(17000);
         LottoTickets lottoTickets = lottoGame.purchaseAutoTickets(purchaseMoney);
-        assertThat(lottoTickets.getTickets().size()).isEqualTo(purchaseMoney.getAmount() / LottoGame.TICKET_PRICE);
+        assertThat(lottoTickets.getTickets().size()).isEqualTo(purchaseMoney.getValue() / LottoGame.TICKET_PRICE);
     }
 
     @Test
