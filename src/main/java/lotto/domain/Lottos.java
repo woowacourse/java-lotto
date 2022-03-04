@@ -31,7 +31,7 @@ public class Lottos {
     private void confirmLottoMatch(WinningLotto winningLotto, Map<LottoPrize, Integer> result) {
         for (Lotto lotto : lottos) {
             LottoPrize prize = lotto.confirmWinning(winningLotto);
-            result.put(prize, result.get(prize) + 1);
+            result.merge(prize, 1, Integer::sum);
         }
     }
 
