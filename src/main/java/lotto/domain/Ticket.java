@@ -12,7 +12,7 @@ public class Ticket {
     private final Set<LottoNumber> lottoNumbers;
 
     public Ticket(LottoNumbersGenerator lottoNumbersGenerator) {
-        Set<LottoNumber> lottoNumbers = lottoNumbersGenerator.generate();
+        Set<LottoNumber> lottoNumbers = lottoNumbersGenerator.generate(LOTTO_SIZE);
         checkTicketSize(lottoNumbers.size());
         this.lottoNumbers = lottoNumbers;
     }

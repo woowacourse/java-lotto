@@ -7,6 +7,8 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.utils.BasicLottoNumberGenerator;
+
 public class TicketTest {
 
     @Test
@@ -35,12 +37,7 @@ public class TicketTest {
     @Test
     @DisplayName("티켓 끼리의 비교는 LottoNumber의 숫자가 같으면 같은 티켓으로 판단합니다.")
     void ticketCompareTest() {
-        Ticket ticket = new Ticket(() -> Set.of(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)));
+        Ticket ticket = new Ticket(new BasicLottoNumberGenerator());
         assertThat(ticket.getLottoNumbers()).isEqualTo(Set.of(new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(3),

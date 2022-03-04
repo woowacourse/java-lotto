@@ -6,5 +6,5 @@ import lotto.domain.LottoNumber;
 
 @FunctionalInterface
 public interface LottoNumbersGenerator {
-    Set<LottoNumber> generate();
+    Set<LottoNumber> generate(int size);
 }

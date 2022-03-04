@@ -12,17 +12,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.utils.BasicLottoNumberGenerator;
+
 public class WinTicketTest {
     private Ticket ticket;
 
     @BeforeEach
     void initialize() {
-        ticket = new Ticket(() -> Set.of(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)));
+        ticket = new Ticket(new BasicLottoNumberGenerator());
     }
     
     @Test
