@@ -15,10 +15,10 @@ public class WinningNumber {
 		validateWinningNumber(winningBalls, bonusBall);
 
 		this.winningBalls = winningBalls.stream()
-			.map(Ball::new)
+			.map(Ball::from)
 			.collect(Collectors.toUnmodifiableList());
 
-		this.bonusBall = new Ball(bonusBall);
+		this.bonusBall = Ball.from(bonusBall);
 	}
 
 	private void validateWinningNumber(final List<Integer> winningBalls, final int bonusBall) {

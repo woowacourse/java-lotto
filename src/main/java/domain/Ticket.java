@@ -25,7 +25,7 @@ public class Ticket {
 
 	private List<Ball> makeNumbersToBalls(final List<Integer> numbers) {
 		return numbers.stream()
-			.map(Ball::new)
+			.map(Ball::from)
 			.collect(Collectors.toUnmodifiableList());
 	}
 

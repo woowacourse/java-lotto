@@ -92,7 +92,7 @@ class TicketTest {
 		Ticket ticket = new Ticket(numbers);
 		List<Ball> balls = ticket.getBalls();
 
-		assertThatThrownBy(() -> balls.add(new Ball(7)))
+		assertThatThrownBy(() -> balls.add(Ball.from(7)))
 			.isInstanceOf(UnsupportedOperationException.class);
 	}
 }
