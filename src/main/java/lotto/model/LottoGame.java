@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lotto.model.lottos.AutoLottos;
@@ -21,7 +22,7 @@ public class LottoGame {
     }
 
     public Lottos buyManualLottos(List<List<Integer>> inputManualLottos) {
-        return new Lottos(new ManualGenerator(List.copyOf(inputManualLottos)), inputManualLottos.size());
+        return new Lottos(new ManualGenerator(inputManualLottos), inputManualLottos.size());
     }
 
     public LottoResult generateLottoResult(Lottos manualLottos, List<Integer> winningNumbers, int bonusNumber) {

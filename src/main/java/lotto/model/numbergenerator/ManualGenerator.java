@@ -1,6 +1,7 @@
 package lotto.model.numbergenerator;
 
-import java.util.ArrayList;
+import static java.util.stream.Collectors.*;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -9,11 +10,17 @@ public class ManualGenerator implements LottoNumberGenerator {
     private final Iterator<List<Integer>> manualLottos;
 
     public ManualGenerator(List<List<Integer>> manualLottos) {
-        List<List<Integer>> result = new ArrayList<>(manualLottos);
-        for (List<Integer> manualLotto : result) {
-            Collections.sort(manualLotto);
-        }
-        this.manualLottos = result.iterator();
+        List<List<Integer>> copyOfManualLottos = List.copyOf(manualLottos);
+        this.manualLottos = List.copyOf(copyOfManualLottos.stream()
+                .map(this::sorted)
+                .collect(toList()))
+            .iterator();
+    }
+
+    private List<Integer> sorted(List<Integer> integers) {
+        return integers.stream()
+            .sorted()
+            .collect(toList());
     }
 
     @Override

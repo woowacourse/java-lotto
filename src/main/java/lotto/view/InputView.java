@@ -70,8 +70,8 @@ public class InputView {
         List<List<Integer>> manualLottos = IntStream.range(0, numberOfManualLottos)
             .mapToObj(i -> scanner.nextLine())
             .map(manualLotto -> convertStringsToIntegers(splitAndTrim(manualLotto)))
-            .collect(toUnmodifiableList());
+            .collect(toList());
         printEmptyLine();
-        return manualLottos;
+        return List.copyOf(manualLottos);
     }
 }
