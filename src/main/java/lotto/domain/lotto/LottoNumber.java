@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoNumber {
 
@@ -60,5 +61,10 @@ public class LottoNumber {
 
     public int getLottoNumber() {
         return lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }

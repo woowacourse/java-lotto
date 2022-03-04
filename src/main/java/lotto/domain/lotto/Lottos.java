@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Lottos {
 
     private static final String ERROR_WRONG_INPUT_MONEY = "[ERROR] 올바른 구매 값을 입력해주세요";
@@ -13,7 +12,9 @@ public class Lottos {
         checkCount(count);
 
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
+            Lotto lotto = new Lotto();
+            lotto.generateRandomNumbers();
+            lottos.add(lotto);
         }
     }
 
@@ -21,6 +22,10 @@ public class Lottos {
         if (count < 1) {
             throw new IllegalArgumentException(ERROR_WRONG_INPUT_MONEY);
         }
+    }
+
+    public void add(final Lotto lotto) {
+        lottos.add(lotto);
     }
 
     public List<Lotto> getLottos() {

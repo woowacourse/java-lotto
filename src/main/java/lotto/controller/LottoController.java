@@ -7,7 +7,6 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoWinningNumbers;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.ManualLottos;
 import lotto.domain.result.LottoResult;
 import lotto.domain.user.Money;
 import lotto.view.InputView;
@@ -19,7 +18,7 @@ public class LottoController {
         OutputView.printLottos(lottos, purchaseLottoCount, remainPurchaseLottoCount);
     }
 
-    public Lottos inputLottoMoney(final int inputMoney) {
+    public Lottos createLottosByMoney(final int inputMoney) {
         final Money money = new Money(inputMoney);
         return new Lottos(money.getCount());
     }
@@ -75,21 +74,21 @@ public class LottoController {
         OutputView.printWinningResult(lottoResult);
     }
 
-    public ManualLottos inputManualLotto(final int purchaseLottoCount) {
+    public Lottos createManualLotto(final int purchaseLottoCount) {
         try {
-            ManualLottos manualLotto = new ManualLottos();
+            Lottos lottos = new Lottos(purchaseLottoCount);
             OutputView.printManualLotto();
-            addManualLotto(purchaseLottoCount, manualLotto);
-            return manualLotto;
+            addManualLotto(purchaseLottoCount, lottos);
+            return lottos;
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return inputManualLotto(purchaseLottoCount);
+            return createManualLotto(purchaseLottoCount);
         }
     }
 
-    private void addManualLotto(final int purchaseLottoCount, final ManualLottos manualLotto) {
+    private void addManualLotto(final int purchaseLottoCount, final Lottos lottos) {
         for (int i = 0; i < purchaseLottoCount; i++) {
-            manualLotto.add(createLottoByNumbers(InputView.inputManualLotto()));
+            lottos.add(createLottoByNumbers(InputView.inputManualLotto()));
         }
     }
 
