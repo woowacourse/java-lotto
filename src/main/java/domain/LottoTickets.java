@@ -1,6 +1,7 @@
 package domain;
 
 import domain.strategy.NumberGenerateStrategy;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -16,11 +17,16 @@ public class LottoTickets {
         this.selfPurchaseCount = selfPurchaseCount;
     }
 
-    public static LottoTickets of(List<Set<Integer>> selfTicketNumbers, LottoMoney autoPurchaseLottoMoney,
+    public static LottoTickets of(LottoMoney autoPurchaseLottoMoney,
                                   NumberGenerateStrategy numberGenerateStrategy) {
-        List<LottoTicket> lottoTickets = generateTicket(selfTicketNumbers);
         int autoPurchaseCount = autoPurchaseLottoMoney.getAmount() / LottoTicket.TICKET_PRICE;
-        lottoTickets.addAll(autoGenerateTickets(numberGenerateStrategy, autoPurchaseCount));
+        List<LottoTicket> lottoTickets = new ArrayList<>(
+                autoGenerateTickets(numberGenerateStrategy, autoPurchaseCount));
+        return new LottoTickets(lottoTickets, 0);
+    }
+
+    public static LottoTickets from(List<Set<Integer>> selfTicketNumbers) {
+        List<LottoTicket> lottoTickets = generateTicket(selfTicketNumbers);
         return new LottoTickets(lottoTickets, selfTicketNumbers.size());
     }
 
@@ -37,8 +43,10 @@ public class LottoTickets {
                 .collect(Collectors.toList());
     }
 
-    private static boolean isMultiplesOfTicketPrice(int purchaseMoney) {
-        return purchaseMoney % LottoTicket.TICKET_PRICE != 0;
+    public LottoTickets concat(LottoTickets other) {
+        List<LottoTicket> concatTickets = new ArrayList<>(lottoTickets);
+        concatTickets.addAll(other.getTickets());
+        return new LottoTickets(concatTickets, selfPurchaseCount + other.getSelfPurchaseCount());
     }
 
     public List<LottoTicket> getTickets() {
