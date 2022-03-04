@@ -45,7 +45,7 @@ public class LottoGameController {
 
 	private void purchaseRandomLotto(int count) {
 		while (count-- > 0) {
-			lottoTickets.purchase(new LottoTicket());
+			lottoTickets.purchase(LottoTicket.byRandom());
 		}
 	}
 

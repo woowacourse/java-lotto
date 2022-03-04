@@ -8,13 +8,17 @@ public class LottoTicket {
 	private final static List<Integer> candidates = initCandidates();
 	private final LottoNumbers numbers;
 
-	public LottoTicket() {
-		Collections.shuffle(candidates);
-		this.numbers = new LottoNumbers(candidates.subList(0, NUMBER_OF_NUMBERS));
-	}
-
 	public LottoTicket(LottoNumbers numbers) {
 		this.numbers = numbers;
+	}
+
+	public static LottoTicket byRandom() {
+		Collections.shuffle(candidates);
+		return new LottoTicket(new LottoNumbers(candidates.subList(0, NUMBER_OF_NUMBERS)));
+	}
+
+	public static LottoTicket byManual(LottoNumbers lottoNumbers) {
+		return new LottoTicket(lottoNumbers);
 	}
 
 	public ResultStatics calculate(AnswerLotto answerLotto) {

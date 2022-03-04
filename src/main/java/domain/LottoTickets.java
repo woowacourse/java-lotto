@@ -13,7 +13,7 @@ public class LottoTickets {
 
 	public void purchase(List<LottoNumbers> lottoNumbers) {
 		for (LottoNumbers eachLottoNumbers : lottoNumbers) {
-			lottoTickets.add(new LottoTicket(eachLottoNumbers));
+			lottoTickets.add(LottoTicket.byManual(eachLottoNumbers));
 		}
 	}
 
