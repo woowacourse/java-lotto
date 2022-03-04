@@ -21,7 +21,7 @@ public class LottoMachine {
 
     private LottoMachine(final LottoMachine.Builder builder) {
         this.totalPurchaseAmount = builder.totalPurchaseAmount;
-        lottos = new Lottos(new LottoRandomGenerator().generateLottosExceptManualGenerated(
+        lottos = new Lottos(new LottoRandomGenerator().generateLottosExceptDefaultLottos(
                 this.totalPurchaseAmount.getTotalPurchaseCount(), builder.manualLottos));
         manualPurchaseCount = new ManualPurchaseCount(builder.manualLottos.size(), totalPurchaseAmount.getTotalPurchaseCount());
     }

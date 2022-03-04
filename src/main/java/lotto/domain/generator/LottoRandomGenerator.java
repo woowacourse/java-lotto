@@ -20,8 +20,8 @@ public class LottoRandomGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> generateLottosExceptManualGenerated(final int numberOfGenerating, final List<Lotto> manualGenerated) {
-        final Set<Lotto> generatedNumbersGroup = new LinkedHashSet<>(manualGenerated);
+    public List<Lotto> generateLottosExceptDefaultLottos(final int numberOfGenerating, final List<Lotto> defaultLotts) {
+        final Set<Lotto> generatedNumbersGroup = new LinkedHashSet<>(defaultLotts);
         return generateLottos(generatedNumbersGroup, numberOfGenerating);
     }
 
