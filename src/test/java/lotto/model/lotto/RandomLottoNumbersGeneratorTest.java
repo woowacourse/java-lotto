@@ -14,6 +14,7 @@ class RandomLottoNumbersGeneratorTest {
     void validateLottoNumbersSize() {
          RandomLottoNumbersGenerator randomLottoNumbersGenerator = new RandomLottoNumbersGenerator();
         List<Integer> lottoNumbers = randomLottoNumbersGenerator.pickSixNumbers();
+
         assertThat(lottoNumbers.size()).isEqualTo(6);
     }
 }

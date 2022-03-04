@@ -29,9 +29,7 @@ class LottoTest {
     void compareWinningNumberWithLottoFive() {
         Lotto lotto = new Lotto(numbers);
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 7), 8);
-        WinningLottoResponse winningNumberResponse =
-                new WinningLottoResponse(winningLotto);
-
+        WinningLottoResponse winningNumberResponse = new WinningLottoResponse(winningLotto);
         lotto.calcWinningNumber(winningResult, winningNumberResponse);
 
         assertThat(winningResult.getWinningCount().get(Rank.FIVE)).isOne();

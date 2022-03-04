@@ -16,6 +16,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoGameTest {
     private final List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+    private final LottoGame lottoGame = new LottoGame();
 
     @Test
     @DisplayName("로또 생성 테스트")
@@ -23,7 +24,6 @@ class LottoGameTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(numbers));
         LottoCount lottoCount = new LottoCount(10000, 1);
-        LottoGame lottoGame = new LottoGame();
 
         assertThat(lottoGame.makeLottos(lottoCount, lottos)
                 .getLottoStorage()
@@ -34,11 +34,11 @@ class LottoGameTest {
     @Test
     @DisplayName("수익률 검증 테스트")
     void checkRateOfReturn() {
-        LottoGame lottoGame = new LottoGame();
         RateOfReturn rateOfReturn = lottoGame.storeMoneyInRateOfReturn(10000);
 
         WinningResult winningResult = new WinningResult();
         winningResult.addCount(Rank.FOUR);
+
         assertThat(lottoGame.sendRateOfReturn(rateOfReturn, winningResult)).isEqualTo(5.0);
     }
 
@@ -48,9 +48,9 @@ class LottoGameTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(numbers));
         LottoStorage lottoStorage = new LottoStorage(new LottoCount(1000, 0), lottos);
-        LottoGame lottoGame = new LottoGame();
         WinningLottoResponse winningLottoResponse =
                 new WinningLottoResponse(new WinningLotto(numbers, 7));
+
         assertThat(lottoGame.calcWinningNumber(lottoStorage, winningLottoResponse)
                 .getWinningCount()
                 .get(Rank.SIX))

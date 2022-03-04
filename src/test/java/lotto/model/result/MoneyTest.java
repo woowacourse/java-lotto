@@ -1,13 +1,13 @@
 package lotto.model.result;
 
-import lotto.model.message.InputConverterExceptionMessage;
-import lotto.utils.ConverterUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.model.message.LottoCountExceptionMessage;
+import lotto.model.message.InputConverterExceptionMessage;
+import lotto.utils.ConverterUtils;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -19,8 +19,8 @@ class MoneyTest {
     @DisplayName("투입 금액 공백 검증")
     void validateLottoNumber(String number) {
         assertThatThrownBy(() -> new Money(ConverterUtils.convertStringToInt(number)))
-                .isInstanceOf(IllegalArgumentException.class)
-                                .hasMessageContaining(InputConverterExceptionMessage.BLANK_ERROR.getMessage());
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining(InputConverterExceptionMessage.BLANK_ERROR.getMessage());
     }
 
     @ParameterizedTest

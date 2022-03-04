@@ -27,7 +27,6 @@ public class LottoStorage {
     public List<LottoResponse> getLottoStorage() {
         final List<LottoResponse> lottoResponses = new ArrayList<>();
         lottoNumbers.forEach(lotto -> lottoResponses.add(new LottoResponse(lotto.getNumbers())));
-
         return Collections.unmodifiableList(lottoResponses);
     }
 
