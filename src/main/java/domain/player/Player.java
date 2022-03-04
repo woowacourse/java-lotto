@@ -1,5 +1,6 @@
 package domain.player;
 
+import domain.HitResult;
 import domain.Lotto.Lotto;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.LottoGenerator;
@@ -23,11 +24,22 @@ public class Player {
         return money.determineQuantity();
     }
 
-    public void purchaseLotto(LottoGenerator lottoGenerator, List<Integer> lottoNumbers) {
+    public void purchaseManualLotto(LottoGenerator lottoGenerator, List<List<Integer>> inputLottoNumbers) {
+        for (List<Integer> lottoNumbers : inputLottoNumbers) {
+            purchase(lottoGenerator, lottoNumbers);
+            money.subtractAmount();
+        }
+    }
+
+    public void purchaseAutoLotto(LottoGenerator lottoGenerator, List<Integer> lottoNumbers) {
         int numberOfPurchases = getNumberOfPurchases();
         for (int i = 0; i < numberOfPurchases; i++) {
-            lottos.add(lottoGenerator.generateLotto(lottoNumbers));
+            purchase(lottoGenerator, lottoNumbers);
         }
+    }
+
+    private void purchase(LottoGenerator lottoGenerator, List<Integer> lottoNumbers) {
+        lottos.add(lottoGenerator.generateLotto(lottoNumbers));
     }
 
     public List<Result> judgeAll(WinningLotto winningLotto) {
@@ -38,13 +50,16 @@ public class Player {
         return result;
     }
 
-    public double calculateIncomeRate(List<Result> results) {
-        double totalIncome = Rank.calculateAllResult(results);
-        return totalIncome / money.getAmount();
+    public double calculateIncomeRate(List<Result> results, HitResult hitResult) {
+        double totalIncome = Rank.calculateAllResult(results, hitResult);
+        return totalIncome / money.getInitialPrice();
     }
 
     public List<Lotto> getLottos() {
         return lottos;
     }
 
+    public void checkPossible(int manualQuantity) {
+        money.isEnoughMoney(manualQuantity);
+    }
 }

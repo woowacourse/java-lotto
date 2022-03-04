@@ -18,4 +18,14 @@ class MoneyTest {
                 .hasMessage(ExceptionMessage.NOT_ENOUGH_MONEY);
     }
 
+    @Test
+    @DisplayName("현재 잔액으로 수동로또를 구매할 수 있는지 확인하고, 잔액으로 구매할 수 없을 경우 예외를 발생시킵니다.")
+    void isEnoughMoney() {
+        Money money = new Money(5000);
+        assertThatThrownBy(() -> money.isEnoughMoney(6))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.NOT_ENOUGH_MONEY);
+
+    }
+
 }

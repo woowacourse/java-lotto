@@ -7,25 +7,31 @@ import java.util.List;
 
 public class LottosDto {
 
-    int quantity;
-    List<LottoDto> lottoDtos;
+    private int manualQuantity;
+    private int autoQuantity;
+    private List<LottoDto> lottoDtos;
 
-    public LottosDto(List<LottoDto> lottoDtos) {
+    public LottosDto(List<LottoDto> lottoDtos, int manualQuantity) {
         this.lottoDtos = lottoDtos;
-        this.quantity = lottoDtos.size();
+        this.manualQuantity = manualQuantity;
+        this.autoQuantity = lottoDtos.size() - manualQuantity;
     }
 
-    public static LottosDto from(List<Lotto> lottos) {
+    public static LottosDto from(List<Lotto> lottos, int manualQuantity) {
         List<LottoDto> lottoDtos = new ArrayList<>();
         for (Lotto lotto : lottos) {
             LottoDto lottoDto = LottoDto.from(lotto.getLotto());
             lottoDtos.add(lottoDto);
         }
-        return new LottosDto(lottoDtos);
+        return new LottosDto(lottoDtos, manualQuantity);
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getAutoQuantity() {
+        return autoQuantity;
+    }
+
+    public int getManualQuantity() {
+        return manualQuantity;
     }
 
     public List<LottoDto> getLottoDtos() {

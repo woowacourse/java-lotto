@@ -23,8 +23,8 @@ public class Lotto {
         }
     }
 
-    private void validateDuplicate(List<LottoNumber> lotto){
-        if(lotto.stream().distinct().count() != lotto.size()){
+    private void validateDuplicate(List<LottoNumber> lotto) {
+        if (lotto.stream().distinct().count() != lotto.size()) {
             throw new IllegalArgumentException(ExceptionMessage.DUPLICATE_LOTTO_NUMBER);
         }
     }
@@ -33,10 +33,10 @@ public class Lotto {
         return lotto;
     }
 
-    public int compareLotto(Lotto winningLotto){
+    public int compareLotto(Lotto winningLotto) {
         int hitCount = 0;
         for (LottoNumber lottoNumber : lotto) {
-           hitCount += lottoNumber.checkHit(winningLotto.lotto);
+            hitCount += lottoNumber.checkHit(winningLotto.lotto);
         }
         return hitCount;
     }

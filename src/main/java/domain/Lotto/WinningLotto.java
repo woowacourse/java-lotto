@@ -1,7 +1,7 @@
 package domain.Lotto;
 
+import domain.LottoGenerator.CustomLottoGenerator;
 import domain.LottoGenerator.LottoGenerator;
-import domain.LottoGenerator.WinningLottoGenerator;
 import domain.Result;
 import utils.ExceptionMessage;
 
@@ -26,7 +26,7 @@ public class WinningLotto {
     }
 
     private Lotto determineWinningLotto(List<Integer> winningNumber) {
-        LottoGenerator lottoGenerator = new WinningLottoGenerator();
+        LottoGenerator lottoGenerator = new CustomLottoGenerator();
         Lotto winningLotto = lottoGenerator.generateLotto(winningNumber);
         return winningLotto;
     }

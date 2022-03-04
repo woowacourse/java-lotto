@@ -1,9 +1,11 @@
 package controller;
 
 
+import domain.HitResult;
 import domain.Lotto.LottoNumberFactory;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
+import domain.LottoGenerator.CustomLottoGenerator;
 import domain.Result;
 import domain.player.Money;
 import domain.player.Player;
@@ -14,50 +16,26 @@ import view.OutputView;
 
 import java.util.List;
 
+import static domain.Lotto.LottoNumberFactory.LOTTO_NUMBER_BOUNDARY_CACHE;
+
 public class LottoController {
 
-    private Player player;
-    private WinningLotto winningLotto;
+    public void run() {
+        Player player = new Player(new Money(InputView.inputPurchaseAmount()));
+        int manualQuantity = InputView.inputManualQuantity();
+        player.checkPossible(manualQuantity);
+        List<List<Integer>> manualNumbers = InputView.inputManualNumber(manualQuantity);
 
-    public void set() {
-        player = new Player(new Money(InputView.inputPurchaseAmount()));
-    }
+        player.purchaseManualLotto(new CustomLottoGenerator(), manualNumbers);
+        player.purchaseAutoLotto(new AutoLottoGenerator(), LOTTO_NUMBER_BOUNDARY_CACHE);
+        OutputView.printPurchasedLotto(LottosDto.from(player.getLottos(), manualQuantity));
 
-    public void run(){
-        player.purchaseLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
-        OutputView.printPurchasedLotto(LottosDto.from(player.getLottos()));
-
-        winningLotto = new WinningLotto(InputView.inputWinningNumber(), InputView.inputBonusBall());
+        WinningLotto winningLotto = new WinningLotto(InputView.inputWinningNumber(), InputView.inputBonusBall());
         List<Result> results = player.judgeAll(winningLotto);
 
-        OutputView.printResult(new RanksDto(player.calculateIncomeRate(results)));
+        HitResult hitResult = new HitResult();
+        OutputView.printResult(new RanksDto(player.calculateIncomeRate(results, hitResult), hitResult));
 
     }
-//
-//    public LottosDto purchase(int purchaseAmount) {
-//        player = new Player(new Money(purchaseAmount));
-//        player.purchaseLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
-//        return LottosDto.from(player.getLottos());
-//    }
-//
-//    public Game run(){
-//        {
-//        LottosDto lottosDto = lottoController.purchase(InputView.inputPurchaseAmount());
-//        OutputView.printPurchasedLotto(lottosDto);
-//
-//        lottoController.determineWinningNumber(InputView.inputWinningNumber(), InputView.inputBonusBall());
-//
-//        List<Result> results = lottoController.judgeLottos();
-//        OutputView.printResult(lottoController.makeResult(results));
-//    }
-//    public List<Result> judgeLottos() {
-//        return player.judgeAll(winningLotto);
-//    }
-//
-//    public RanksDto makeResult(List<Result> judgeLottos) {
-//        double totalIncome = Rank.calculateAllResult(judgeLottos);
-//        double incomeRate = player.calculateIncomeRate(totalIncome);
-//
-//        return new RanksDto(incomeRate);
-//    }
+
 }
