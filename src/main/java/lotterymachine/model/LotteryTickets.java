@@ -19,7 +19,7 @@ public class LotteryTickets {
             int numberOfMatchingBalls = lotteryTicket.countMatchingBalls(ticket);
             boolean containsBonus = lotteryTicket.contains(bonus);
             WinningLottery winningLottery = WinningLottery.find(containsBonus, numberOfMatchingBalls);
-            lotteriesResult.put(winningLottery, lotteriesResult.get(winningLottery).increase());
+            lotteriesResult.get(winningLottery).increase();
         }
         return Collections.unmodifiableMap(lotteriesResult);
     }

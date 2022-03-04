@@ -22,9 +22,8 @@ public class Count {
         return new Count(number);
     }
 
-    public Count increase() {
+    public void increase() {
         this.number++;
-        return this;
     }
 
     public Count subtract(Count manualTickets) {
