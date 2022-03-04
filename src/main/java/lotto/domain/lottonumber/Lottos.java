@@ -2,9 +2,7 @@ package lotto.domain.lottonumber;
 
 import lotto.domain.matchkind.WinningKind;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Lottos {
     private static final int INITIAL_MATCH_COUNT = 0;
@@ -18,10 +16,8 @@ public class Lottos {
     }
 
     private void validateDuplication(final List<Lotto> values) {
-        final int distinctCount = (int) values.stream()
-                .distinct()
-                .count();
-        if (distinctCount != values.size()) {
+        final Set<Lotto> duplicationRemovedLottos = new HashSet<>(values);
+        if (duplicationRemovedLottos.size() != values.size()) {
             throw new IllegalArgumentException(LOTTOS_DUPLICATION_EXCEPTION_MESSAGE);
         }
     }
