@@ -1,6 +1,7 @@
 package controller;
 
 
+import domain.HitResult;
 import domain.Lotto.LottoNumberFactory;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
@@ -30,7 +31,8 @@ public class LottoController {
         WinningLotto winningLotto = new WinningLotto(InputView.inputWinningNumber(), InputView.inputBonusBall());
         List<Result> results = player.judgeAll(winningLotto);
 
-        OutputView.printResult(new RanksDto(player.calculateIncomeRate(results)));
+        HitResult hitResult = new HitResult();
+        OutputView.printResult(new RanksDto(player.calculateIncomeRate(results, hitResult), hitResult));
 
     }
 

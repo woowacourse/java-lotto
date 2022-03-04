@@ -6,7 +6,6 @@ import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
 import domain.player.Money;
 import domain.player.Player;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -73,7 +72,8 @@ class PlayerTest {
         }
         WinningLotto winningLotto = new WinningLotto(lottoNumbers,BONUS_BALL_NUMBER);
         List<Result> results = player.judgeAll(winningLotto);
-        double actual = player.calculateIncomeRate(results);
+        HitResult hitResult = new HitResult();
+        double actual = player.calculateIncomeRate(results, hitResult);
         double expected = 1000000;
         assertThat(actual).isEqualTo(expected);
     }

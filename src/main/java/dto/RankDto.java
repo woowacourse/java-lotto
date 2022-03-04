@@ -1,5 +1,6 @@
 package dto;
 
+import domain.HitResult;
 import domain.Rank;
 
 public class RankDto {
@@ -16,8 +17,8 @@ public class RankDto {
         this.hitCount = hitCount;
     }
 
-    public static RankDto from(Rank rank) {
-        return new RankDto(rank.getRankNumber(), rank.getCriteria(), rank.getReward(), rank.getHitCount());
+    public static RankDto from(Rank rank, HitResult hitResult) {
+        return new RankDto(rank.getRankNumber(), rank.getCriteria(), rank.getReward(), hitResult.get(rank));
     }
 
     public int getRankNumber() {
@@ -28,8 +29,8 @@ public class RankDto {
         return criteria;
     }
 
-    public double getReward() {
-        return reward;
+    public int getReward() {
+        return (int) reward;
     }
 
     public int getHitCount() {

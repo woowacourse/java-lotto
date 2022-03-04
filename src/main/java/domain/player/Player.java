@@ -1,5 +1,6 @@
 package domain.player;
 
+import domain.HitResult;
 import domain.Lotto.Lotto;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.LottoGenerator;
@@ -49,8 +50,8 @@ public class Player {
         return result;
     }
 
-    public double calculateIncomeRate(List<Result> results) {
-        double totalIncome = Rank.calculateAllResult(results);
+    public double calculateIncomeRate(List<Result> results, HitResult hitResult) {
+        double totalIncome = Rank.calculateAllResult(results, hitResult);
         return totalIncome / money.getInitialPrice();
     }
 
