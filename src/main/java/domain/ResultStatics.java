@@ -28,9 +28,9 @@ public enum ResultStatics {
 		}
 
 		return Arrays.stream(ResultStatics.values())
-			.filter(r -> ((r.getNumberMatches() == numberMatches) && (r.isHitBonus() == hitBonus)))
+			.filter(r -> ((r.numberMatches == numberMatches) && (r.hitBonus == hitBonus)))
 			.findFirst()
-			.get();
+			.orElse(NOTHING);
 	}
 
 	public int getNumberMatches() {
