@@ -1,7 +1,7 @@
 package lotto.domain.lottonumber;
 
 import lotto.domain.lottonumber.vo.LottoNumber;
-import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.matchkind.WinningKind;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ public class WinningNumbers {
         }
     }
 
-    public LottoMatchKind getLottoMatchResult(final Lotto numbers) {
+    public WinningKind getLottoMatchResult(final Lotto numbers) {
         final int matchedCount = numbers.getMatchCount(lastWinningLotto);
-        return LottoMatchKind.from(matchedCount, numbers.hasSameNumberWith(bonusNumber));
+        return WinningKind.from(matchedCount, numbers.hasSameNumberWith(bonusNumber));
     }
 }

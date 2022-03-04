@@ -1,6 +1,6 @@
 package lotto.domain.lottonumber;
 
-import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.matchkind.WinningKind;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -37,15 +37,15 @@ class LottosTest {
     @DisplayName("당첨 번호와 구매 금액을 받아 당첨 결과를 반환한다.")
     void getWinningResult_Test() {
         //given
-        final Map<LottoMatchKind, Integer> expected = Map.of(
-                LottoMatchKind.LOWER_THAN_THREE, 1,
-                LottoMatchKind.THREE, 1,
-                LottoMatchKind.FOUR, 1,
-                LottoMatchKind.FIVE, 1,
-                LottoMatchKind.FIVE_BONUS, 1,
-                LottoMatchKind.SIX, 1);
+        final Map<WinningKind, Integer> expected = Map.of(
+                WinningKind.LOWER_THAN_THREE, 1,
+                WinningKind.THREE, 1,
+                WinningKind.FOUR, 1,
+                WinningKind.FIVE, 1,
+                WinningKind.FIVE_BONUS, 1,
+                WinningKind.SIX, 1);
         //when
-        final Map<LottoMatchKind, Integer> actual = lottos.match(winningNumbers);
+        final Map<WinningKind, Integer> actual = lottos.match(winningNumbers);
         //then
         assertThat(actual).isEqualTo(expected);
     }

@@ -1,22 +1,22 @@
 package lotto.domain.winningresult;
 
-import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.matchkind.WinningKind;
 import lotto.domain.purchaseamount.TotalPurchaseAmount;
 
 import java.util.Map;
 import java.util.Objects;
 
 public class WinningResult {
-    private final Map<LottoMatchKind, Integer> winningNumberByMatchKind;
+    private final Map<WinningKind, Integer> winningNumberByMatchKind;
     private final TotalPurchaseAmount totalPurchaseAmount;
 
     public WinningResult(
-            final Map<LottoMatchKind, Integer> winningNumberByMatchKind, final TotalPurchaseAmount totalPurchaseAmount) {
+            final Map<WinningKind, Integer> winningNumberByMatchKind, final TotalPurchaseAmount totalPurchaseAmount) {
         this.winningNumberByMatchKind = winningNumberByMatchKind;
         this.totalPurchaseAmount = totalPurchaseAmount;
     }
 
-    public Map<LottoMatchKind, Integer> getWinningNumberByKind() {
+    public Map<WinningKind, Integer> getWinningNumberByKind() {
         return winningNumberByMatchKind;
     }
 

@@ -4,7 +4,7 @@ import lotto.domain.generator.LottoRandomGenerator;
 import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.Lottos;
 import lotto.domain.lottonumber.WinningNumbers;
-import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.matchkind.WinningKind;
 import lotto.domain.purchaseamount.ManualPurchaseCount;
 import lotto.domain.purchaseamount.TotalPurchaseAmount;
 import lotto.domain.winningresult.WinningResult;
@@ -70,7 +70,7 @@ public class LottoMachine {
 
     public WinningResult getMatchResult(final List<Integer> winningLotto, final int bonusNumber) {
         final WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
-        final Map<LottoMatchKind, Integer> winningNumberByMatchKind = lottos.match(winningNumbers);
+        final Map<WinningKind, Integer> winningNumberByMatchKind = lottos.match(winningNumbers);
         return new WinningResult(winningNumberByMatchKind, totalPurchaseAmount);
     }
 }

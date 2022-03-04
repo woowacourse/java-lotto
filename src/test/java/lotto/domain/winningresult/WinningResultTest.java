@@ -1,6 +1,6 @@
 package lotto.domain.winningresult;
 
-import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.matchkind.WinningKind;
 import lotto.domain.purchaseamount.TotalPurchaseAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,13 +14,13 @@ class WinningResultTest {
     @DisplayName("수익률을 반환한다.")
     void getProfitRate_Test() {
         //given
-        final Map<LottoMatchKind, Integer> winningNumberByMatchKind = Map.of(
-                LottoMatchKind.LOWER_THAN_THREE, 0,
-                LottoMatchKind.THREE, 1,
-                LottoMatchKind.FOUR, 1,
-                LottoMatchKind.FIVE, 1,
-                LottoMatchKind.FIVE_BONUS, 1,
-                LottoMatchKind.SIX, 1);
+        final Map<WinningKind, Integer> winningNumberByMatchKind = Map.of(
+                WinningKind.LOWER_THAN_THREE, 0,
+                WinningKind.THREE, 1,
+                WinningKind.FOUR, 1,
+                WinningKind.FIVE, 1,
+                WinningKind.FIVE_BONUS, 1,
+                WinningKind.SIX, 1);
         final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount.Builder()
                 .setTotalAmount(5000)
                 .setLottoPrice(1000)

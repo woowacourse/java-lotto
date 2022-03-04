@@ -1,6 +1,6 @@
 package lotto.domain.lottonumber;
 
-import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.matchkind.WinningKind;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static lotto.domain.matchkind.LottoMatchKind.*;
+import static lotto.domain.matchkind.WinningKind.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -32,14 +32,14 @@ class WinningNumbersTest {
     @ParameterizedTest
     @DisplayName("로또 숫자 6개를 받아 당첨 번호와 보너스 번호를 비교해 당첨 종류를 반환한다.")
     @MethodSource("provideLottoNumbersAndMatchKind")
-    void getLottoMatchResult_Test(final List<Integer> numbers, final LottoMatchKind expected) {
+    void getLottoMatchResult_Test(final List<Integer> numbers, final WinningKind expected) {
         //given
         final List<Integer> winningLotto = Arrays.asList(1, 2, 3, 4, 5, 6);
         final int bonusNumber = 45;
         final WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
         final Lotto lotto = new Lotto(numbers);
         //when
-        final LottoMatchKind actual = winningNumbers.getLottoMatchResult(lotto);
+        final WinningKind actual = winningNumbers.getLottoMatchResult(lotto);
         //then
         assertThat(actual).isEqualTo(expected);
     }

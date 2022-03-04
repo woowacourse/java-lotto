@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.lottonumber.Lotto;
-import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.matchkind.WinningKind;
 import lotto.dto.InputLottoDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.domain.matchkind.LottoMatchKind.*;
+import static lotto.domain.matchkind.WinningKind.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
@@ -73,7 +73,7 @@ class LottoMachineTest {
     @Test
     @DisplayName("당첨 결과를 반환한다.")
     void getMatchResult_Test() {
-        final Map<LottoMatchKind, Integer> actual = lottoMachine.getMatchResult(winningLotto, bonusNumber)
+        final Map<WinningKind, Integer> actual = lottoMachine.getMatchResult(winningLotto, bonusNumber)
                 .getWinningNumberByKind();
         assertThat(actual).containsExactly(
                 entry(LOWER_THAN_THREE, 1), entry(THREE, 1),

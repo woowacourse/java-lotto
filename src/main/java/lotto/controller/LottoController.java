@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoMachine;
 import lotto.domain.lottonumber.Lotto;
-import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.matchkind.WinningKind;
 import lotto.domain.winningresult.WinningResult;
 import lotto.dto.InputLottoDto;
 import lotto.dto.LottoNumbersDto;
@@ -61,11 +61,11 @@ public class LottoController {
 
     public List<WinningKindDto> getWinningResult(final List<Integer> winningLotto, final int bonusNumber) {
         final WinningResult winningResult = lottoMachine.getMatchResult(winningLotto, bonusNumber);
-        final Map<LottoMatchKind, Integer> winningNumberByKind = winningResult.getWinningNumberByKind();
+        final Map<WinningKind, Integer> winningNumberByKind = winningResult.getWinningNumberByKind();
         return convertToDto(winningNumberByKind);
     }
 
-    private List<WinningKindDto> convertToDto(final Map<LottoMatchKind, Integer> winningNumberByKind) {
+    private List<WinningKindDto> convertToDto(final Map<WinningKind, Integer> winningNumberByKind) {
         return winningNumberByKind.keySet().stream()
                 .map(winningKind -> new WinningKindDto(winningKind, winningNumberByKind.get(winningKind)))
                 .collect(Collectors.toUnmodifiableList());

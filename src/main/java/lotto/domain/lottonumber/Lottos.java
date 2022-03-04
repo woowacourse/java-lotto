@@ -1,6 +1,6 @@
 package lotto.domain.lottonumber;
 
-import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.matchkind.WinningKind;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -26,20 +26,20 @@ public class Lottos {
         }
     }
 
-    public Map<LottoMatchKind, Integer> match(final WinningNumbers winningNumbers) {
-        final Map<LottoMatchKind, Integer> matchResult = new EnumMap<>(LottoMatchKind.class);
+    public Map<WinningKind, Integer> match(final WinningNumbers winningNumbers) {
+        final Map<WinningKind, Integer> matchResult = new EnumMap<>(WinningKind.class);
         initializeResult(matchResult);
         match(matchResult, winningNumbers);
         return matchResult;
     }
 
-    private void initializeResult(final Map<LottoMatchKind, Integer> result) {
-        for (LottoMatchKind matchKind : LottoMatchKind.values()) {
+    private void initializeResult(final Map<WinningKind, Integer> result) {
+        for (WinningKind matchKind : WinningKind.values()) {
             result.put(matchKind, INITIAL_MATCH_COUNT);
         }
     }
 
-    private void match(final Map<LottoMatchKind, Integer> matchResult, final WinningNumbers winningNumbers) {
+    private void match(final Map<WinningKind, Integer> matchResult, final WinningNumbers winningNumbers) {
         values.stream()
                 .map(winningNumbers::getLottoMatchResult)
                 .forEach(lottoMatchKind -> matchResult.put(lottoMatchKind, matchResult.get(lottoMatchKind) + 1));

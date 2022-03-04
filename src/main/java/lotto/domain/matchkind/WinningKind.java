@@ -2,7 +2,7 @@ package lotto.domain.matchkind;
 
 import java.util.Arrays;
 
-public enum LottoMatchKind {
+public enum WinningKind {
     LOWER_THAN_THREE(0, false, 0),
     THREE(3, false, 5000),
     FOUR(4, false, 50000),
@@ -14,13 +14,13 @@ public enum LottoMatchKind {
     private final boolean bonusNumberHit;
     private final long winningAmount;
 
-    LottoMatchKind(final int matchCount, final boolean bonus, final long winningAmount) {
+    WinningKind(final int matchCount, final boolean bonus, final long winningAmount) {
         this.matchCount = matchCount;
         this.bonusNumberHit = bonus;
         this.winningAmount = winningAmount;
     }
 
-    public static LottoMatchKind from(final int matchCount, final boolean bonusNumberHit) {
+    public static WinningKind from(final int matchCount, final boolean bonusNumberHit) {
         if (matchCount == 5 && bonusNumberHit) {
             return FIVE_BONUS;
         }
