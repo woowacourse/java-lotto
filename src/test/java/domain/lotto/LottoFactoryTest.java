@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utils.NumsGenerator;
@@ -11,6 +12,11 @@ import utils.NumsGenerator;
 @SuppressWarnings("NonAsciiCharacters")
 class LottoFactoryTest {
     private List<Integer> nums;
+
+    private List<LottoNumber> toNumberList(List<Integer> raw) {
+        return raw.stream().map(LottoNumber::getInstance).collect(Collectors.toList());
+    }
+
 
     @BeforeEach
     void 로또_번호_생성() {
@@ -23,14 +29,7 @@ class LottoFactoryTest {
         System.out.println(lotto);
         assertThat(lotto)
                 .extracting("value")
-                .isEqualTo(Arrays.asList(
-                        LottoNumber.getInstance(1),
-                        LottoNumber.getInstance(2),
-                        LottoNumber.getInstance(3),
-                        LottoNumber.getInstance(4),
-                        LottoNumber.getInstance(5),
-                        LottoNumber.getInstance(6)
-                ));
+                .isEqualTo(toNumberList(nums));
     }
 
     @Test
@@ -39,14 +38,7 @@ class LottoFactoryTest {
         assertThat(winningLotto)
                 .extracting("lotto")
                 .extracting("value")
-                .isEqualTo(Arrays.asList(
-                        LottoNumber.getInstance(1),
-                        LottoNumber.getInstance(2),
-                        LottoNumber.getInstance(3),
-                        LottoNumber.getInstance(4),
-                        LottoNumber.getInstance(5),
-                        LottoNumber.getInstance(6)
-                ));
+                .isEqualTo(toNumberList(nums));
     }
 
     @Test
