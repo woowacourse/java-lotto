@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Arrays;
 
-import static constant.LottoConstant.NUMBER_FOR_WINNER;
+import static constant.LottoConstant.MIN_NUMBER_TO_WIN;
 
 public enum ResultStatics {
 	NOTHING(0, 0, false),
@@ -23,7 +23,7 @@ public enum ResultStatics {
 	}
 
 	public static ResultStatics of(int numberMatches, boolean hitBonus) {
-		if (numberMatches < NUMBER_FOR_WINNER) {
+		if (numberMatches < MIN_NUMBER_TO_WIN) {
 			return NOTHING;
 		}
 
