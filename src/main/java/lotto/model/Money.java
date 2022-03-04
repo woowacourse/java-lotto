@@ -24,11 +24,14 @@ public class Money implements Comparable<Money> {
     }
 
     public Money subtract(Money money) {
-        if (this.compareTo(money) == -1) {
+        if (isLessThan(money)) {
             throw new NotEnoughMoneyException();
         }
-
         return new Money(this.amount.subtract(money.amount));
+    }
+
+    private boolean isLessThan(Money money) {
+        return this.compareTo(money) < 0;
     }
 
     public Money multiply(int factor) {
