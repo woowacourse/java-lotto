@@ -39,7 +39,7 @@ public class LottoMoney {
         return lottoMoney / LOTTO_PRICE - numberOfManualLottos;
     }
 
-    float divide(long totalWinningMoney) {
-        return totalWinningMoney / (float)lottoMoney;
+    public long getLottoMoney() {
+        return lottoMoney;
     }
 }

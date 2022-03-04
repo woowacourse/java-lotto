@@ -17,17 +17,17 @@ import lotto.model.numbergenerator.ManualGenerator;
 class LottoResultTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"6:30_000_000", "44:1_500_000"}, delimiter = ':')
+    @CsvSource(value = {"6:SECOND", "44:THIRD"}, delimiter = ':')
     @DisplayName("2, 3등 당첨 여부를 확인한다")
-    void matchNumber(int bonusNumberInt, Long totalWinningMoney) {
+    void matchNumber(int bonusNumberInt, Rank winningRank) {
         Lottos autoLottos = new Lottos(new TestNumberGenerator(), 1);
+        Lottos manualLottos = new Lottos(new ManualGenerator(Collections.emptyList()), 0);
 
-        LottoResult lottoResult = new LottoResult(new Lottos(new ManualGenerator(Collections.emptyList()), 0),
-            autoLottos,
+        LottoResult lottoResult = new LottoResult(manualLottos, autoLottos,
             Arrays.asList(1, 2, 3, 4, 5, 45),
             bonusNumberInt);
 
-        assertThat(lottoResult.getTotalWinningMoney()).isEqualTo(totalWinningMoney);
+        assertThat(lottoResult.getRankCount(winningRank)).isEqualTo(1);
     }
 
     static class TestNumberGenerator implements LottoNumberGenerator {

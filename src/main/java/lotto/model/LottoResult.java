@@ -40,14 +40,7 @@ public class LottoResult {
         return result.getOrDefault(rank, 0L);
     }
 
-    long getTotalWinningMoney() {
-        return result.entrySet().stream()
-            .map(entry -> entry.getKey().getMoney() * entry.getValue())
-            .mapToLong(i -> i)
-            .sum();
-    }
-
     Yield calculateYield(LottoMoney lottoMoney) {
-        return new Yield(lottoMoney, getTotalWinningMoney());
+        return new Yield(lottoMoney, Map.copyOf(result));
     }
 }
