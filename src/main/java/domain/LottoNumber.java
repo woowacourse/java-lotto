@@ -2,8 +2,8 @@ package domain;
 
 import java.util.*;
 
-import static domain.RandomNumbersGenerator.MAX_LOTTO_NUMBER;
-import static domain.RandomNumbersGenerator.MIN_LOTTO_NUMBER;
+import static domain.AutoLottoGenerator.MAX_LOTTO_NUMBER;
+import static domain.AutoLottoGenerator.MIN_LOTTO_NUMBER;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 

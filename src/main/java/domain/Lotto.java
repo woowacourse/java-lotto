@@ -2,7 +2,7 @@ package domain;
 
 import java.util.*;
 
-import static domain.RandomNumbersGenerator.LOTTO_LENGTH;
+import static domain.AutoLottoGenerator.LOTTO_LENGTH;
 
 public class Lotto {
     private static final String LOTTO_SIZE_MESSAGE = "[ERROR] 로또의 숫자는 중복 없이 6개여야 합니다.";
@@ -22,10 +22,6 @@ public class Lotto {
 
     public Set<LottoNumber> getNumbers() {
         return new HashSet<>(numbers);
-    }
-
-    public static Lotto from(Set<LottoNumber> lottoNumbers) {
-        return new Lotto(lottoNumbers);
     }
 
     public int getMatchCount(Lotto lotto) {

@@ -15,7 +15,7 @@ public class MoneyTest {
     @DisplayName("구매할수 있는 로또 개수가 1개인지 테스트")
     public void generateLottoOneTest(int inputMoney) {
         Money money = new Money(inputMoney);
-        int count = money.generateCount();
+        int count = money.getLottoCount();
 
         assertThat(count).isEqualTo(1);
     }
@@ -25,7 +25,7 @@ public class MoneyTest {
     @DisplayName("구매할수 있는 로또 개수가 2개인지 테스트")
     public void generateLottoTwoTest(int inputMoney) {
         Money money = new Money(inputMoney);
-        int count = money.generateCount();
+        int count = money.getLottoCount();
 
         assertThat(count).isEqualTo(2);
     }

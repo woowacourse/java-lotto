@@ -27,6 +27,10 @@ public class Money {
         return money;
     }
 
+    public int getLottoCount() {
+        return lottoCount;
+    }
+
     public int getAutoLottoCount(int manualLottoCount) {
         validateCountRange(lottoCount, manualLottoCount);
         return lottoCount - manualLottoCount;

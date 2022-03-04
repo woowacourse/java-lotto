@@ -1,8 +1,6 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.Lottos;
+import domain.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -49,11 +47,8 @@ public class InputView {
 
     private static Lotto getLotto(String input) {
         String[] numbers = input.split(DELIMITER);
-        Set<LottoNumber> collect = Arrays.stream(numbers)
-                .map(Integer::parseInt)
-                .map(LottoNumber::of)
-                .collect(Collectors.toSet());
-        return new Lotto(collect);
+        LottoGenerator manualLottoGenerator = new ManualLottoGenerator(numbers);
+        return manualLottoGenerator.generateLotto();
     }
 
     public static int askManualLottoCount() {
@@ -61,6 +56,7 @@ public class InputView {
         return convertToInt(scanner.nextLine());
     }
 
+    //TODO: List<List<>> 반환하기 고려해보기
     public static Lottos askManualLottoNumbers(int manualLottoCount) {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
         List<Lotto> lottos = new ArrayList<>();

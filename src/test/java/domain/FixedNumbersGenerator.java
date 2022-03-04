@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Set;
 
-public class FixedNumbersGenerator implements LottoNumbersGenerator {
+public class FixedNumbersGenerator implements LottoGenerator {
 
     private final Set<LottoNumber> numbers;
 
@@ -11,7 +11,7 @@ public class FixedNumbersGenerator implements LottoNumbersGenerator {
     }
 
     @Override
-    public Set<LottoNumber> generateNumbers() {
-        return numbers;
+    public Lotto generateLotto() {
+        return new Lotto(numbers);
     }
 }
