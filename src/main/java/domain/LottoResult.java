@@ -70,6 +70,6 @@ public class LottoResult {
     }
 
     public Map<WinningPrize, Integer> getCountOfWinning() {
-        return Collections.unmodifiableMap(countOfWinning);
+        return Map.copyOf(countOfWinning);
     }
 }

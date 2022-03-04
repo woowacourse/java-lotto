@@ -50,7 +50,7 @@ public class LottoTickets {
     }
 
     public List<LottoTicket> getTickets() {
-        return Collections.unmodifiableList(lottoTickets);
+        return List.copyOf(lottoTickets);
     }
 
     public int getSelfPurchaseCount() {

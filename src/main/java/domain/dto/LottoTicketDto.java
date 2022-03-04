@@ -11,6 +11,6 @@ public class LottoTicketDto {
     }
 
     public Set<Integer> getLottoNumbers() {
-        return Collections.unmodifiableSet(lottoNumbers);
+        return Set.copyOf(lottoNumbers);
     }
 }
