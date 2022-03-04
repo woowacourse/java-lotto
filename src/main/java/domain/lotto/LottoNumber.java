@@ -35,7 +35,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static Map<Integer, LottoNumber> getCache() {
-        return CACHE;
+        return Map.copyOf(CACHE);
     }
 
     public int get() {
