@@ -4,6 +4,8 @@ import domain.strategy.NumberGenerateStrategy;
 import domain.strategy.WinningPrizeStrategy;
 
 public class LottoGame {
+    public static final int TICKET_PRICE = 1000;
+
     private final WinningPrizeStrategy winningPrizeStrategy;
     private final NumberGenerateStrategy numberGenerateStrategy;
 

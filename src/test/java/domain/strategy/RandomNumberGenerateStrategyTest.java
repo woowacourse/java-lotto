@@ -17,7 +17,7 @@ class RandomNumberGenerateStrategyTest {
     @DisplayName("LottoNumberGenerateStrategy가 1~45 사이의 숫자를 뽑는지 확인한다.")
     void checkGeneratedNumberRange() {
         Set<Integer> numbers = numberGenerateStrategy.generateNumbers();
-        numbers.forEach(number -> assertThat(number).isBetween(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
+        numbers.forEach(number -> assertThat(number).isBetween(MIN_VALUE, MAX_VALUE));
     }
 
     @Test
@@ -31,6 +31,6 @@ class RandomNumberGenerateStrategyTest {
     @DisplayName("로또 티켓을 뽑을 때 생성되는 숫자의 갯수를 확인한다.")
     void checkGeneratedNumberCount() {
         Set<Integer> numbers = numberGenerateStrategy.generateNumbers();
-        assertThat(numbers.size()).isEqualTo(LottoTicket.LOTTO_TICKET_SIZE);
+        assertThat(numbers.size()).isEqualTo(LottoTicket.SIZE);
     }
 }

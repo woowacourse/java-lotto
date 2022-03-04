@@ -69,7 +69,7 @@ public class LottoResult {
 
     public double calculateLottoRateOfReturn() {
         int totalReturn = sumTotalReturn();
-        return totalReturn / (double)(purchaseTicketCount * LottoTicket.TICKET_PRICE);
+        return totalReturn / (double)(purchaseTicketCount * LottoGame.TICKET_PRICE);
     }
 
     private int sumTotalReturn() {

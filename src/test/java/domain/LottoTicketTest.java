@@ -1,10 +1,8 @@
 package domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Set;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +13,6 @@ class LottoTicketTest {
     void checkTicketSizeError() {
         assertThatThrownBy(() -> LottoTicket.from(Set.of(1, 2, 3, 4, 5, 6, 7)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoTicket.LOTTO_TICKET_SIZE_ERROR_MESSAGE);
+                .hasMessage(LottoTicket.SIZE_ERROR_MESSAGE);
     }
 }

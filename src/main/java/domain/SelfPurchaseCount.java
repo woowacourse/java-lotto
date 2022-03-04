@@ -1,7 +1,7 @@
 package domain;
 
 public class SelfPurchaseCount {
-    public static final String SELF_PURCHASE_COUNT_ERROR_MESSAGE = "0보다 큰 값을 횟수로 입력해야 합니다.";
+    public static final String MIN_COUNT_ERROR_MESSAGE = "0보다 큰 값을 횟수로 입력해야 합니다.";
     private final int count;
 
     public SelfPurchaseCount(int count) {
@@ -11,7 +11,7 @@ public class SelfPurchaseCount {
 
     public void validateCount(int count) {
         if (count < 0) {
-            throw new IllegalArgumentException(SELF_PURCHASE_COUNT_ERROR_MESSAGE);
+            throw new IllegalArgumentException(MIN_COUNT_ERROR_MESSAGE);
         }
     }
 

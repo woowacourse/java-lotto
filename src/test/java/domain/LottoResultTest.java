@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import domain.strategy.NumberGenerateStrategy;
 import domain.strategy.DefaultWinningPrizeStrategy;
 import domain.strategy.WinningPrizeStrategy;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,6 +32,6 @@ class LottoResultTest {
         LottoResult lottoResult = LottoResult.of(lottoTickets, winningTicket, winningPrizeStrategy);
         assertThat(lottoResult.calculateLottoRateOfReturn())
                 .isEqualTo(WinningPrize.FIRST.getPrizeMoney() / (double)(lottoTickets.getTickets().size()
-                        * LottoTicket.TICKET_PRICE));
+                        * LottoGame.TICKET_PRICE));
     }
 }

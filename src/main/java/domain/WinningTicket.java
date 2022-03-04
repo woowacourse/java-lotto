@@ -17,8 +17,8 @@ public class WinningTicket {
     }
 
     private static void validateSize(Set<Integer> winningNumbers) {
-        if (winningNumbers.size() != LottoTicket.LOTTO_TICKET_SIZE) {
-            throw new IllegalArgumentException(LottoTicket.LOTTO_TICKET_SIZE_ERROR_MESSAGE);
+        if (winningNumbers.size() != LottoTicket.SIZE) {
+            throw new IllegalArgumentException(LottoTicket.SIZE_ERROR_MESSAGE);
         }
     }
 

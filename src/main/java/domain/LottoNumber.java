@@ -1,19 +1,20 @@
 package domain;
 
 public class LottoNumber {
-    public static final String LOTTO_NUMBER_RANGE_ERROR_MESSAGE = "로또 번호는 1~45 사이로 입력해주세요.";
-    public static final int MAX_LOTTO_NUMBER = 45;
-    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MIN_VALUE = 1;
+    public static final int MAX_VALUE = 45;
+    public static final String LOTTO_NUMBER_RANGE_ERROR_MESSAGE = String.format("로또 번호는 %d~%d 사이로 입력해주세요.",
+            MIN_VALUE, MAX_VALUE);
 
-    private final int number;
+    private final int value;
 
-    public LottoNumber(int number) {
-        validate(number);
-        this.number = number;
+    public LottoNumber(int value) {
+        validate(value);
+        this.value = value;
     }
 
     public int getValue() {
-        return number;
+        return value;
     }
 
     public void validate(int number) {
@@ -23,6 +24,6 @@ public class LottoNumber {
     }
 
     private boolean isNotInRangeNumber(int number) {
-        return !(number <= MAX_LOTTO_NUMBER && number >= MIN_LOTTO_NUMBER);
+        return !(number <= MAX_VALUE && number >= MIN_VALUE);
     }
 }

@@ -4,9 +4,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class LottoTicket {
-    public static final int LOTTO_TICKET_SIZE = 6;
-    public static final int TICKET_PRICE = 1000;
-    public static final String LOTTO_TICKET_SIZE_ERROR_MESSAGE = "한 티켓의 로또 번호는 6개여야 합니다.";
+    public static final int SIZE = 6;
+    public static final String SIZE_ERROR_MESSAGE = String.format("한 티켓의 로또 번호는 %d개여야 합니다.", SIZE);
     private final Set<LottoNumber> lottoNumbers;
 
     private LottoTicket(Set<LottoNumber> lottoNumbers) {
@@ -21,8 +20,8 @@ public class LottoTicket {
     }
 
     private static void validateTicketSize(Set<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
-            throw new IllegalArgumentException(LOTTO_TICKET_SIZE_ERROR_MESSAGE);
+        if (lottoNumbers.size() != SIZE) {
+            throw new IllegalArgumentException(SIZE_ERROR_MESSAGE);
         }
     }
 

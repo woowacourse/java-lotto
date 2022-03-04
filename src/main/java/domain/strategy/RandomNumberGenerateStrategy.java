@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomNumberGenerateStrategy implements NumberGenerateStrategy {
-    private final static List<Integer> lottoNumbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+    private final static List<Integer> lottoNumbers = IntStream.rangeClosed(MIN_VALUE, MAX_VALUE)
             .boxed()
             .collect(Collectors.toList());
 
@@ -18,7 +18,7 @@ public class RandomNumberGenerateStrategy implements NumberGenerateStrategy {
     public Set<Integer> generateNumbers() {
         Collections.shuffle(lottoNumbers);
         return lottoNumbers.stream()
-                .limit(LottoTicket.LOTTO_TICKET_SIZE)
+                .limit(LottoTicket.SIZE)
                 .collect(Collectors.toSet());
     }
 }
