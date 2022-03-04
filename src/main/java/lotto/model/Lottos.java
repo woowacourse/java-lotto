@@ -21,9 +21,9 @@ public class Lottos {
                 .collect(Collectors.toList()));
     }
 
-    public static Lottos getTotalLottos(Lottos auto, Lottos manual) {
+    public static Lottos generate(Lottos auto, Lottos manual) {
         manual.lottos.addAll(auto.lottos);
-        return manual;
+        return new Lottos(manual.lottos);
     }
 
     public List<Lotto> getLottos() {
