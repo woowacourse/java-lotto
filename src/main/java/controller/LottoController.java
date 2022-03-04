@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,6 +9,7 @@ import model.Money;
 import model.lotto.LottoCount;
 import model.lotto.Lottos;
 import model.lottonumber.LottoNumber;
+import model.lottonumber.LottoNumbers;
 import model.result.Rank;
 import model.result.RateOfReturn;
 import model.winningnumber.WinningLottoNumber;
@@ -20,7 +22,7 @@ public class LottoController {
 	private static final String MONEY_NUMBER_ERROR_MESSAGE = "[Error]: 금액은 숫자를 입력해주세요.";
 	private static final String COUNT_BLANK_ERROR_MESSAGE = "[Error]: 갯수을 입력해주세요.";
 	private static final String COUNT_NUMBER_ERROR_MESSAGE = "[Error]: 갯수는 숫자를 입력해주세요.";
-	private static final String WINNING_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 당첨 번호를 입력하세요.";
+	private static final String LOTTO_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 번호를 입력하세요.";
 	private static final String BONUS_BALL_BLANK_ERROR_MESSAGE = "[Error]: 보너스 볼을 입력해주세요.";
 	private static final String DELIMITER_COMMA = ",";
 
@@ -70,6 +72,25 @@ public class LottoController {
 		}
 	}
 
+	private List<LottoNumbers> makePassiveLottos() {
+		List<LottoNumbers> passiveLottos = new ArrayList<>();
+		while (passiveLottoCount.haveRemainToMake()) {
+			passiveLottoCount.reduceCountOfRemain();
+			inputView.inputPassiveLottoMessage();
+			passiveLottos.add(makeOnePassiveLotto());
+		}
+	}
+
+	private LottoNumbers makeOnePassiveLotto() {
+		try {
+			String input = inputView.inputLottoNumbers();
+			return LottoNumbers.changeFrom(makeLottoNumber(input));
+		} catch (IllegalArgumentException e) {
+			outputView.printErrorMessage(e.getMessage());
+			return makeOnePassiveLotto();
+		}
+	}
+
 	private Lottos makeLottos() {
 		return new Lottos(automaticlottoCount);
 	}
@@ -78,21 +99,20 @@ public class LottoController {
 		outputView.printLottos(lottos.getLottosDTO());
 	}
 
-	//WinningNumber
 	private WinningLottoNumber storeWinningNumber() {
 		try {
-			return new WinningLottoNumber(makeWinningNumber(), makeBonusBall());
+			String input = inputView.inputWinningNumbers();
+			return new WinningLottoNumber(makeLottoNumber(input), makeBonusBall());
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
 			return storeWinningNumber();
 		}
 	}
 
-	private List<LottoNumber> makeWinningNumber() {
-		String input = inputView.inputWinningNumbers();
-		InputValidateUtils.inputBlank(input, WINNING_NUMBER_BLANK_ERROR_MESSAGE);
-		List<String> numbers = splitWinningNumber(input);
-		return makeInputWinningNumbersToWinningLottoNumbers(numbers);
+	private List<LottoNumber> makeLottoNumber(String input) {
+		InputValidateUtils.inputBlank(input, LOTTO_NUMBER_BLANK_ERROR_MESSAGE);
+		List<String> numbers = splitLottoNumber(input);
+		return makeInputNumbersToLottoNumbers(numbers);
 	}
 
 	private LottoNumber makeBonusBall() {
@@ -101,13 +121,13 @@ public class LottoController {
 		return LottoNumber.parseLottoNumber(input);
 	}
 
-	private List<String> splitWinningNumber(String input) {
+	private List<String> splitLottoNumber(String input) {
 		return Arrays.stream(input.split(DELIMITER_COMMA))
 			.map(String::trim)
 			.collect(Collectors.toList());
 	}
 
-	private List<LottoNumber> makeInputWinningNumbersToWinningLottoNumbers(List<String> numbers) {
+	private List<LottoNumber> makeInputNumbersToLottoNumbers(List<String> numbers) {
 		return numbers.stream()
 			.map(number -> LottoNumber.parseLottoNumber(number))
 			.collect(Collectors.toList());
