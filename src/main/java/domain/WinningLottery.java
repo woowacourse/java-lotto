@@ -20,14 +20,10 @@ public class WinningLottery {
 	}
 
 	private void validateBonusBall(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
-		if (hasDuplicatedNumber(winningNumbers, bonusBall)) {
+		final boolean hasDuplicatedNumberWithWinningNumber = winningNumbers.contains(bonusBall);
+		if (hasDuplicatedNumberWithWinningNumber) {
 			throw new IllegalArgumentException(DUPLICATED_WINNING_NUMBER_WITH_BONUS_NUMBER);
 		}
-	}
-
-	private boolean hasDuplicatedNumber(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
-		return winningNumbers.stream()
-			.anyMatch(winningNumber -> winningNumber.equals(bonusBall));
 	}
 
 	public Rank getRank(final Lottery lottery) {
