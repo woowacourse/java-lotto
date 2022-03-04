@@ -2,7 +2,6 @@ package controller;
 
 import domain.LottoTicket;
 import domain.Purchase;
-import domain.Rank;
 import domain.Result;
 import domain.WinLottoNumbers;
 import java.util.List;
@@ -27,13 +26,31 @@ public class MainController {
     }
 
     private Purchase getPurchase() {
+        int money = getMoney();
+        int manualCount = getManualCount();
         try {
-            int money = InputView.inputMoney();
-            int manualCount = InputView.inputLottoAmount();
             return new Purchase(money, manualCount);
         } catch (IllegalArgumentException e) {
             OutputView.printError(e.getMessage());
             return getPurchase();
+        }
+    }
+
+    private int getMoney() {
+        try {
+            return InputView.inputMoney();
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e.getMessage());
+            return getMoney();
+        }
+    }
+
+    private int getManualCount() {
+        try {
+            return InputView.inputLottoAmount();
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e.getMessage());
+            return getManualCount();
         }
     }
 
