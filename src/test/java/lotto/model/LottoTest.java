@@ -12,7 +12,7 @@ class LottoTest {
     @Test
     @DisplayName("6개의 랜덤한 로또 번호를 생성하는지 확인")
     void shuffleTest() {
-        assertThatCode(Lotto::generate)
+        assertThatCode(Lotto::generateAuto)
                 .doesNotThrowAnyException();
     }
 

@@ -15,8 +15,8 @@ public class LottoGame {
     }
 
     public static Lottos buyLottos(Money money, List<Lotto> manualLottos) {
-        Lottos manual = new Lottos(manualLottos);
-        Lottos auto = Lottos.generate(money.getAutoLottoSize(manualLottos.size()));
+        Lottos manual = Lottos.generateManual(manualLottos);
+        Lottos auto = Lottos.generateAuto(money.getAutoLottoSize(manualLottos.size()));
         return Lottos.getTotalLottos(auto, manual);
     }
 

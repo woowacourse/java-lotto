@@ -30,7 +30,7 @@ public enum Rank {
                 .orElse(FAIL);
     }
 
-    public static List<Rank> getRanksToPrint() {
+    public static List<Rank> getWinningRanks() {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.FAIL)
                 .collect(Collectors.toList());

@@ -21,7 +21,7 @@ public class ResultView {
         printEmptyLine();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        Rank.getRanksToPrint()
+        Rank.getWinningRanks()
                 .stream()
                 .map(rank -> getOneRankStatus(rank, lottoResult.getRankCount(rank)))
                 .forEach(System.out::println);

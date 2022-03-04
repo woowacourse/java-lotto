@@ -17,7 +17,7 @@ class LottoGameTest {
     void calculateYieldTest() {
         LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         Money money = new Money(14000);
-        Lottos lottos = new Lottos(Collections.singletonList(new Lotto(Arrays.asList(1, 2, 3, 11, 12, 13))));
+        Lottos lottos = Lottos.generateManual(Collections.singletonList(new Lotto(Arrays.asList(1, 2, 3, 11, 12, 13))));
         LottoResult lottoResult = lottoGame.generateLottoResult(lottos);
         float yield = lottoGame.calculateYield(money, lottoResult);
 
