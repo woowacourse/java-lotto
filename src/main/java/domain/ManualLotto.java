@@ -6,15 +6,15 @@ import java.util.stream.Collectors;
 
 public class ManualLotto {
 
-    List<Integer> manualLottoNumbers;
+    private final List<Integer> numbers;
 
-    public ManualLotto(List<Integer> manualLottoNumbers) {
-        this.manualLottoNumbers = manualLottoNumbers.stream()
+    public ManualLotto(List<Integer> numbers) {
+        this.numbers = numbers.stream()
                 .sorted()
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> getManualLottoNumbers() {
-        return Collections.unmodifiableList(manualLottoNumbers);
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 }

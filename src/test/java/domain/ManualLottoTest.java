@@ -1,7 +1,6 @@
 package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +22,6 @@ class ManualLottoTest {
     public void checkLottoNumbersSort() {
         List<Integer> manualLottoNumbers = List.of(6, 5, 4, 3, 2, 1);
         ManualLotto manualLotto = new ManualLotto(manualLottoNumbers);
-        assertThat(manualLotto.getManualLottoNumbers().get(0)).isEqualTo(1);
+        assertThat(manualLotto.getNumbers().get(0)).isEqualTo(1);
     }
 }

@@ -15,7 +15,9 @@ public class ManualAndAutoNumberGenerator extends LottoNumberGenerator implement
     @Override
     public List<Integer> generate() {
         if (manualLottoIterator.hasNext()) {
-            return manualLottoIterator.next().getManualLottoNumbers();
+            ManualLotto manualLotto = manualLottoIterator.next();
+
+            return manualLotto.getNumbers();
         }
 
         return super.generate();
