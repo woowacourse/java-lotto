@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.lotto.Count;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.Number;
@@ -20,8 +21,11 @@ public class ResultTest {
 
     @BeforeEach
     void setUp() {
-        result = new Result();
-        result.add(LottoRanking.FIFTH);
+
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lottos lottos = new Lottos(new Count(0), List.of(lotto));
+        WinningLotto winningLotto = new WinningLotto(lotto, new Number(7));
+        result = lottos.getResult(winningLotto);
     }
 
     @Nested
@@ -35,7 +39,7 @@ public class ResultTest {
             @Test
             @DisplayName("당첨된 결과를 저장한다.")
             void it_create_ok() {
-                assertThat(result.getCount(LottoRanking.FIFTH)).isEqualTo(1);
+                assertThat(result.getCount(LottoRanking.FIRST)).isEqualTo(1);
             }
         }
     }
@@ -47,7 +51,7 @@ public class ResultTest {
         @Test
         @DisplayName("당첨 금액의 총합을 반환한다.")
         void it_returns_total_profit() {
-            assertThat(result.getTotalProfit()).isEqualTo(5000L);
+            assertThat(result.getTotalProfit()).isEqualTo(2000000000L);
         }
     }
 }
