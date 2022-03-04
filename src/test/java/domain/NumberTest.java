@@ -27,5 +27,4 @@ public class NumberTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호는 1에서 45 사이의 값을 입력해줘야 합니다.");
     }
-
 }

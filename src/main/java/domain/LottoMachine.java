@@ -6,9 +6,9 @@ import domain.generator.ManualLottoGenerator;
 
 public class LottoMachine {
 
+    public static final int LOTTO_PRICE = 1000;
     private static final String ERROR_COUNT_NEGATIVE_INTEGER = "구매 개수는 양의 정수만 가능합니다.";
     private static final String ERROR_LESS_MONEY = "원하시는 로또 개수를 구매하기에는 돈이 부족합니다.";
-    public static final int LOTTO_PRICE = 1000;
 
     public int checkAvailableBuy(Money money, final int numOfLotto) {
         checkNegativeInteger(numOfLotto);
@@ -44,5 +44,4 @@ public class LottoMachine {
         Lotto lotto = new Lotto(purchaseStrategy.generateNumbers());
         lottos.addLotto(lotto);
     }
-
 }

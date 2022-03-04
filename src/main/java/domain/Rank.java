@@ -52,5 +52,4 @@ public enum Rank {
     public int getMatched() {
         return matched;
     }
-
 }

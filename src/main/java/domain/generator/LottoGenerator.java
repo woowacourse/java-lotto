@@ -5,5 +5,4 @@ import java.util.Set;
 public interface LottoGenerator {
 
     Set<Integer> generateNumbers();
-
 }

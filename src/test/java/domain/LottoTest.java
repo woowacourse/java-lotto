@@ -58,5 +58,4 @@ public class LottoTest {
         Rank winnerPrice = lotto.calculateRank(winningLotto);
         assertThat(winnerPrice).isEqualTo(Rank.SECOND);
     }
-
 }

@@ -38,5 +38,4 @@ class LottoMachineTest {
 
         assertThat(lottos.getLottos().size()).isEqualTo(expected);
     }
-
 }

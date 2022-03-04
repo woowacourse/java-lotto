@@ -26,5 +26,4 @@ public class Money {
     public void purchaseLotto(int numOfLotto) {
         money -= (LOTTO_PRICE * numOfLotto);
     }
-
 }

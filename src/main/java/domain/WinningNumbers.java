@@ -46,5 +46,4 @@ public class WinningNumbers {
     public Number getBonus() {
         return bonus;
     }
-
 }

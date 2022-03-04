@@ -7,7 +7,6 @@ import java.util.Set;
 public class Lotto {
 
     public static final int LOTTO_SIZE = 6;
-
     private static final int BONUS_CONFIRMATION_CRITERIA = 5;
     private static final String ERROR_DUPLICATE_NUMBER = "로또 번호는 중복되지 않은 6자리 숫자여야 합니다.";
 
@@ -48,5 +47,4 @@ public class Lotto {
     public Set<Number> getLottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
     }
-
 }

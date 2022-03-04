@@ -59,5 +59,4 @@ public class OutputView {
     public static void printEarningRate(final float earningRate) {
         System.out.printf(EARNING_RATE_MESSAGE + "%n", earningRate);
     }
-
 }

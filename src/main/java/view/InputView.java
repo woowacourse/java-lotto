@@ -60,5 +60,4 @@ public class InputView {
         }
         return inputLottoNumbers;
     }
-
 }

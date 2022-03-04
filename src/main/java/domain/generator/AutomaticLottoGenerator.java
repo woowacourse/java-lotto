@@ -17,5 +17,4 @@ public class AutomaticLottoGenerator implements LottoGenerator {
 
         return new HashSet<>(balls.subList(0, 6));
     }
-
 }

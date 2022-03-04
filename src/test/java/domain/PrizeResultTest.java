@@ -47,5 +47,4 @@ class PrizeResultTest {
 
         assertThat(earningRate).isEqualTo(10516.66f);
     }
-
 }

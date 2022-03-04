@@ -25,5 +25,4 @@ public class Lottos {
     public int totalPurchasePrice() {
         return lottos.size() * LOTTO_PRICE;
     }
-
 }

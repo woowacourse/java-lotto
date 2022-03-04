@@ -18,5 +18,4 @@ public class ManualLottoGenerator implements LottoGenerator {
         return new HashSet<>(Arrays.stream(inputNumbers)
                 .boxed().collect(Collectors.toList()));
     }
-
 }

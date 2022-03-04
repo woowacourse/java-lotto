@@ -47,5 +47,4 @@ public class PrizeResult {
     public Map<Rank, Integer> getPrizeResult() {
         return Collections.unmodifiableMap(prizeResult);
     }
-
 }
