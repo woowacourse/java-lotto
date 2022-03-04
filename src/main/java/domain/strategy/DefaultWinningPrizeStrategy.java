@@ -15,7 +15,8 @@ public class DefaultWinningPrizeStrategy implements WinningPrizeStrategy {
         put(3, WinningPrize.FIFTH);
     }};
 
-    private static final Map<WinningPrize, Integer> WINNING_PRIZE_MATCH_COUNT_INFO = new EnumMap<>(WinningPrize.class) {{
+    private static final Map<WinningPrize, Integer> WINNING_PRIZE_MATCH_COUNT_INFO = new EnumMap<>(
+            WinningPrize.class) {{
         put(WinningPrize.FIRST, 6);
         put(WinningPrize.SECOND, 5);
         put(WinningPrize.THIRD, 5);
