@@ -1,20 +1,20 @@
-package domain.lotto;
+package domain.result;
 
 import exception.ticketCount.CountLessZeroException;
 import exception.ticketCount.CountMoreMaxException;
 
-public class LottoTicketCount {
+public class TicketCount {
     private final int manualValue;
     private final int autoValue;
 
-    private LottoTicketCount(final int manualValue, final int autoValue) {
+    private TicketCount(final int manualValue, final int autoValue) {
         validate(manualValue, autoValue);
         this.manualValue = manualValue;
         this.autoValue = autoValue;
     }
 
-    public static LottoTicketCount of(final int fullValue, final int manualValue) {
-        return new LottoTicketCount(manualValue, fullValue - manualValue);
+    public static TicketCount of(final int fullValue, final int manualValue) {
+        return new TicketCount(manualValue, fullValue - manualValue);
     }
 
     private static void validate(final int manualValue, final int autoValue) {

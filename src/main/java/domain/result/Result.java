@@ -1,30 +1,22 @@
 package domain.result;
 
 import domain.lotto.Lotto;
+import domain.lotto.LottoGroup;
 import domain.lotto.WinningLotto;
-import exception.NullException;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 public class Result {
     private final LinkedHashMap<Rank, Integer> value = new LinkedHashMap<>();
 
-    private Result(final List<Lotto> lottos, final WinningLotto winningLotto) {
-        validate(lottos);
-        for (Lotto lotto : lottos) {
+    private Result(final LottoGroup lottos, final WinningLotto winningLotto) {
+        for (Lotto lotto : lottos.get()) {
             Rank rank = Rank.of(lotto.countSameNum(winningLotto), lotto.contains(winningLotto.getBonusNumber()));
             add(rank);
         }
     }
 
-    public static Result of(final List<Lotto> lottos, final WinningLotto winningLotto) {
+    public static Result of(final LottoGroup lottos, final WinningLotto winningLotto) {
         return new Result(lottos, winningLotto);
-    }
-
-    private void validate(final List<Lotto> lottos) {
-        if (lottos.size() == 0) {
-            throw new NullException();
-        }
     }
 
     private void add(final Rank rank) {

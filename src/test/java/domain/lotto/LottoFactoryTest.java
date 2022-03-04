@@ -2,6 +2,7 @@ package domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.result.TicketCount;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,11 +51,11 @@ class LottoFactoryTest {
 
     @Test
     void 로또티켓_생성_검사() {
-        List<Lotto> lottos = LottoFactory
-                .createLottos(LottoTicketCount
-                                .of(1, 1)
+        LottoGroup lottos = LottoFactory
+                .createLottos(
+                        TicketCount.of(1, 1)
                         , List.of(nums));
-        assertThat(lottos)
+        assertThat(lottos.get())
                 .containsOnly(Lotto.from(NumsGenerator.generate(nums)));
     }
 }

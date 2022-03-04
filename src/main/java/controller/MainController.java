@@ -1,12 +1,11 @@
 package controller;
 
-import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
+import domain.lotto.LottoGroup;
 import domain.lotto.LottoMoney;
-import domain.lotto.LottoTicketCount;
+import domain.result.TicketCount;
 import domain.lotto.WinningLotto;
 import domain.result.Result;
-import java.util.List;
 import utils.Util;
 import view.InputView;
 import view.ResultView;
@@ -21,8 +20,8 @@ public class MainController {
 
     public void run() {
         final LottoMoney lottoMoney = makeLottoMoney();
-        final LottoTicketCount count = makeLottoTicketCount(lottoMoney);
-        final List<Lotto> lottoTickets = makeLottos(count);
+        final TicketCount count = makeLottoTicketCount(lottoMoney);
+        final LottoGroup lottoTickets = makeLottos(count);
         ResultView.printLottoTickets(count, lottoTickets);
 
         final WinningLotto winningLotto = makeWinNums();
@@ -36,12 +35,12 @@ public class MainController {
                 InputView.inputMoney());
     }
 
-    private LottoTicketCount makeLottoTicketCount(final LottoMoney money) {
-        return LottoTicketCount.of(money.toLottoCount(),
+    private TicketCount makeLottoTicketCount(final LottoMoney money) {
+        return TicketCount.of(money.toLottoCount(),
                 InputView.inputManualTicketCount());
     }
 
-    private List<Lotto> makeLottos(final LottoTicketCount count) {
+    private LottoGroup makeLottos(final TicketCount count) {
         return LottoFactory.createLottos(count,
                 InputView.inputManualNums(count.ofManual()));
     }

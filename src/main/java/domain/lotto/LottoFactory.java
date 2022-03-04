@@ -1,5 +1,6 @@
 package domain.lotto;
 
+import domain.result.TicketCount;
 import java.util.ArrayList;
 import java.util.List;
 import utils.NumsGenerator;
@@ -10,10 +11,16 @@ public class LottoFactory {
         return WinningLotto.of(Lotto.from(NumsGenerator.generate(rawLottoNumbers)), bonus);
     }
 
-    public static List<Lotto> createLottos(final LottoTicketCount count, final List<List<Integer>> rawLottoNumsGroup) {
-        final List<Lotto> lottos = new ArrayList<>(createManualLottos(rawLottoNumsGroup));
+    public static List<Lotto> createLotto2(final TicketCount count, final List<List<Integer>> rawLottoNumsGroup) {
+        final List<Lotto> lottos = new ArrayList<>(List.copyOf(createManualLottos(rawLottoNumsGroup)));
         lottos.addAll(createAutoLottos(count.ofAuto()));
         return lottos;
+    }
+
+    public static LottoGroup createLottos(final TicketCount count, final List<List<Integer>> rawLottoNumsGroup) {
+        final List<Lotto> lottos = new ArrayList<>(List.copyOf(createManualLottos(rawLottoNumsGroup)));
+        lottos.addAll(createAutoLottos(count.ofAuto()));
+        return LottoGroup.of(lottos);
     }
 
     private static List<Lotto> createManualLottos(final List<List<Integer>> rawLottoNumsGroup) {

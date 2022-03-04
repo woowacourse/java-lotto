@@ -1,11 +1,11 @@
 package view;
 
 import domain.lotto.Lotto;
+import domain.lotto.LottoGroup;
 import domain.lotto.LottoNumber;
-import domain.lotto.LottoTicketCount;
+import domain.result.TicketCount;
 import domain.result.Rank;
 import domain.result.Result;
-import java.util.List;
 
 public class ResultView {
     private static final String BUY_MESSAGE =
@@ -22,9 +22,9 @@ public class ResultView {
             "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해%s라는 의미임)" + System.lineSeparator();
     private static final String NO_MESSAGE = " 아니";
 
-    public static void printLottoTickets(final LottoTicketCount count, final List<Lotto> lottoTickets) {
+    public static void printLottoTickets(final TicketCount count, final LottoGroup lottoTickets) {
         System.out.printf(BUY_MESSAGE, count.ofManual(), count.ofAuto());
-        for (Lotto lotto : lottoTickets) {
+        for (Lotto lotto : lottoTickets.get()) {
             printLottoNumbers(lotto);
         }
     }
