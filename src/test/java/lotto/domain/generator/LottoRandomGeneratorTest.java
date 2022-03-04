@@ -14,8 +14,8 @@ class LottoRandomGeneratorTest {
     @DisplayName("사용자 입력 로또 번호들과 숫자 값을 입력받아, 사용자 입력 숫자들을 포함하여 숫자 값만큼의 로또들을 생성해 반환한다.")
     void generate_Test() {
         //given
-        final Lotto firstUserInputLotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        final Lotto secondUserInputLotto = new Lotto(Arrays.asList("2", "3", "4", "5", "6", "7"));
+        final Lotto firstUserInputLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final Lotto secondUserInputLotto = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
         final List<Lotto> userInputLottos = Arrays.asList(firstUserInputLotto, secondUserInputLotto);
         final int numberOfGenerating = 6;
         final LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();

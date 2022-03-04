@@ -21,34 +21,34 @@ public class Lotto {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public Lotto(final List<String> numbers) {
+    public Lotto(final List<Integer> numbers) {
         validateDuplication(numbers);
         validateCountOfNumbers(numbers);
         final List<LottoNumber> mappedLottoNumbers = mapToLottoNumbers(numbers);
         this.values = sortAscendingLottoNumbers(mappedLottoNumbers);
     }
 
-    private void validateDuplication(final List<String> numbers) {
-        final Set<String> checkedNumberValues = new HashSet<>();
-        for (String number : numbers) {
+    private void validateDuplication(final List<Integer> numbers) {
+        final Set<Integer> checkedNumberValues = new HashSet<>();
+        for (int number : numbers) {
             checkDuplication(checkedNumberValues, number);
             checkedNumberValues.add(number);
         }
     }
 
-    private void checkDuplication(final Set<String> checkedNumbers, final String checkingNumber) {
+    private void checkDuplication(final Set<Integer> checkedNumbers, final int checkingNumber) {
         if (checkedNumbers.contains(checkingNumber)) {
             throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBERS_EXCEPTION_MESSAGE);
         }
     }
 
-    private void validateCountOfNumbers(final List<String> numbers) {
+    private void validateCountOfNumbers(final List<Integer> numbers) {
         if (numbers.size() != VALID_LOTTO_NUMBERS_COUNT) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_COUNT_EXCEPTION_MESSAGE);
         }
     }
 
-    private List<LottoNumber> mapToLottoNumbers(final List<String> numbers) {
+    private List<LottoNumber> mapToLottoNumbers(final List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::from)
                 .collect(Collectors.toUnmodifiableList());
