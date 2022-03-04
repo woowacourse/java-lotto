@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
@@ -37,7 +38,7 @@ public class OutputView {
 
     private static String getLottoInfos(final Lotto lotto) {
         return lotto.getLottoNumbers().stream()
-                .map(String::valueOf)
+                .map(LottoNumber::toString)
                 .collect(Collectors.joining(OUTPUT_LOTTO_INFO_DELIMITER));
     }
 

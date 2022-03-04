@@ -33,9 +33,7 @@ public class Lotto {
                 .count();
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
+    public Set<LottoNumber> getLottoNumbers() {
+        return Set.copyOf(lottoNumbers);
     }
 }
