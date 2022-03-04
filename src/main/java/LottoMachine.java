@@ -6,11 +6,9 @@ public class LottoMachine {
 
     public void start() {
         Money money = new Money(InputView.askInputMoney());
-        int totalLottoCount = money.generateCount();
         int manualLottoCount = InputView.askManualLottoCount();
-        money.validateCountRange(totalLottoCount, manualLottoCount);
+        int autoLottoCount = money.getAutoLottoCount(manualLottoCount);
         Lottos manualLottos = InputView.askManualLottoNumbers(manualLottoCount);
-        int autoLottoCount = totalLottoCount - manualLottoCount;
         OutputView.printCountOfLotto(autoLottoCount, manualLottoCount);
         Lottos totalLottos = getLottos(autoLottoCount, manualLottos);
         WinningLotto winningNumber = inputWinningNumber();
