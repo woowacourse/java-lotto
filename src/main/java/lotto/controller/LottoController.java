@@ -5,7 +5,7 @@ import static lotto.view.ResultView.*;
 
 import lotto.model.LottoGame;
 import lotto.model.LottoResult;
-import lotto.model.lottos.Lottos;
+import lotto.model.Lottos;
 import lotto.model.numbergenerator.ShuffleGenerator;
 
 public class LottoController {

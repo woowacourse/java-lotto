@@ -10,7 +10,6 @@ import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.model.lottos.Lottos;
 import lotto.model.numbergenerator.LottoNumberGenerator;
 import lotto.model.numbergenerator.ManualGenerator;
 

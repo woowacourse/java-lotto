@@ -23,16 +23,25 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.model.LottoMoney;
 import lotto.model.LottoResult;
+import lotto.model.Lottos;
 import lotto.model.Rank;
 import lotto.model.Yield;
-import lotto.model.lottos.Lottos;
 import lotto.model.numbergenerator.LottoNumberGenerator;
 
 class ResultViewTest {
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private final Lottos autoLottos = new Lottos(new TestNumberGenerator(), 2);
-    private final Lottos manualLottos = new Lottos(new ManualTestNumberGenerator(), 1);
+
+    Constructor<Lottos> lottosConstructor = Lottos.class
+        .getDeclaredConstructor(LottoNumberGenerator.class, int.class);
+    Constructor<LottoResult> lottoResultConstructor = LottoResult.class.
+        getDeclaredConstructor(Lottos.class, Lottos.class, List.class, int.class);
+    Constructor<LottoMoney> lottoMoneyConstructor = LottoMoney.class.getDeclaredConstructor(long.class, int.class);
+    Constructor<Yield> yieldConstructor = Yield.class.getDeclaredConstructor(LottoMoney.class, Map.class);
+
+    ResultViewTest() throws
+        NoSuchMethodException {
+    }
 
     @BeforeEach
     public void setUp() {
@@ -41,7 +50,12 @@ class ResultViewTest {
 
     @Test
     @DisplayName("생성된 로또 출력 확인")
-    void printGeneratedLottosTest() {
+    void printGeneratedLottosTest() throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        lottosConstructor.setAccessible(true);
+
+        Lottos manualLottos = lottosConstructor.newInstance(new ManualTestNumberGenerator(), 1);
+        Lottos autoLottos = lottosConstructor.newInstance(new TestNumberGenerator(), 2);
+
         ResultView.printGeneratedLottos(manualLottos.getLottos(), autoLottos.getLottos());
 
         assertThat(outputStreamCaptor.toString())
@@ -54,13 +68,13 @@ class ResultViewTest {
     @Test
     @DisplayName("당첨 통계 출력 확인")
     void printResultStatisticsTest() throws
-        NoSuchMethodException,
-        InvocationTargetException,
-        InstantiationException,
-        IllegalAccessException {
-        Constructor<LottoResult> lottoResultConstructor = LottoResult.class.
-            getDeclaredConstructor(Lottos.class, Lottos.class, List.class, int.class);
+        InvocationTargetException, InstantiationException, IllegalAccessException {
+        lottosConstructor.setAccessible(true);
         lottoResultConstructor.setAccessible(true);
+        lottosConstructor.setAccessible(true);
+
+        Lottos manualLottos = lottosConstructor.newInstance(new ManualTestNumberGenerator(), 1);
+        Lottos autoLottos = lottosConstructor.newInstance(new TestNumberGenerator(), 2);
 
         LottoResult lottoResult = lottoResultConstructor
             .newInstance(manualLottos, autoLottos, Arrays.asList(1, 2, 3, 4, 5, 6), 7);
@@ -78,19 +92,17 @@ class ResultViewTest {
         "5000:총 수익률은 1.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)"}, delimiter = ':')
     @DisplayName("손해인 경우 수익률을 출력한다.")
     void printMinusYieldTest(long rawlottoMoney, String expectedMessage) throws
-        NoSuchMethodException,
         InvocationTargetException,
         InstantiationException,
         IllegalAccessException {
-        Constructor<LottoMoney> lottoMoneyConstructor = LottoMoney.class.getDeclaredConstructor(long.class, int.class);
         lottoMoneyConstructor.setAccessible(true);
+        yieldConstructor.setAccessible(true);
+
         LottoMoney lottoMoney = lottoMoneyConstructor.newInstance(rawlottoMoney, 0);
 
         Map<Rank, Long> result = new EnumMap<>(Rank.class);
         result.put(Rank.FIFTH, 1L);
 
-        Constructor<Yield> yieldConstructor = Yield.class.getDeclaredConstructor(LottoMoney.class, Map.class);
-        yieldConstructor.setAccessible(true);
         Yield yield = yieldConstructor.newInstance(lottoMoney, result);
 
         ResultView.printYield(yield);

@@ -1,19 +1,20 @@
-package lotto.model.lottos;
+package lotto.model;
 
 import static java.util.stream.Collectors.*;
+import static lotto.ValidationUtils.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import lotto.model.Lotto;
 import lotto.model.numbergenerator.LottoNumberGenerator;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(LottoNumberGenerator lottoNumberGenerator, int count) {
+    Lottos(LottoNumberGenerator lottoNumberGenerator, int count) {
         this.lottos = generateLottos(lottoNumberGenerator, count);
+        validateNullCollection(this.lottos);
     }
 
     List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int count) {
@@ -27,7 +28,7 @@ public class Lottos {
         return List.copyOf(lottos);
     }
 
-    public List<Lotto> getTotalLottos(Lottos otherLottos) {
+    List<Lotto> getTotalLottos(Lottos otherLottos) {
         List<Lotto> thisLottos = new ArrayList<>(this.lottos);
         thisLottos.addAll(otherLottos.getLottos());
         return List.copyOf(thisLottos);
