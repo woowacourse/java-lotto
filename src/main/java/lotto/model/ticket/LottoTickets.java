@@ -25,16 +25,12 @@ public class LottoTickets {
         return this;
     }
 
-    public static LottoTickets buyManualTicketsAndDecreaseMoney(List<List<Integer>> numberTickets, Money money) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (List<Integer> numberTicket : numberTickets) {
-            LottoTicket lottoTicket = new LottoTicket(numberTicket.stream()
-                    .map(LottoNumber::from)
-                    .collect(Collectors.toList()));
-            lottoTickets.add(lottoTicket);
-            money.decreaseByUnit();
-        }
-        return new LottoTickets(lottoTickets);
+    public static LottoTickets buyManualTickets(List<List<Integer>> numberTickets) {
+        return new LottoTickets(numberTickets.stream().
+                map(numberTicket -> new LottoTicket(numberTicket.stream()
+                        .map(LottoNumber::from)
+                        .collect(Collectors.toList())))
+                .collect(Collectors.toList()));
     }
 
     public LottoRanks compareResult(WinningTicket winningTicket) {

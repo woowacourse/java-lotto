@@ -21,8 +21,9 @@ public class LottoController {
         Money money = Money.of(InputView.requestMoney());
         ManualBuyCount manualBuyCount = ManualBuyCount.of(InputView.requestManualBuyCount());
 
-        LottoTickets manualLottoTickets = LottoTickets.buyManualTicketsAndDecreaseMoney(InputView.requestManualTickets(manualBuyCount), money);
-        LottoTickets lottoTickets = manualLottoTickets.buyAutoTickets(new RandomNumberGenerator(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER), money);
+        LottoTickets manualLottoTickets = LottoTickets.buyManualTickets(InputView.requestManualTickets(manualBuyCount));
+        Money leftMoney = money.decreaseByCount(manualBuyCount);
+        LottoTickets lottoTickets = manualLottoTickets.buyAutoTickets(new RandomNumberGenerator(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER), leftMoney);
         OutputView.outputTickets(lottoTickets);
 
         WinningTicket winningTicket = makeWinningTicket();
