@@ -144,7 +144,7 @@
 
 - [x] List<Lotto>의 래핑 클래스를 도메인에 추가 구현, 로직 이동
 - [x] CACHE 게터에서 새로이 자료구조 만들어 리턴(수정가능성 차단!!)
-- [ ] 스캐너 상수화 후 단계마다 nextLine()등으로 버퍼를 비워주는 작업
+- [x] 스캐너 상수화 후 단계마다 nextLine()등으로 버퍼를 비워주는 작업
 - [ ] 커스텀 예외/메세지에 잘못된 사이즈에 대한 정보를 같이 넘기기(Lotto)
 - [ ] 
 - [x] [링크](https://github.com/woowacourse/java-lotto/pull/480#discussion_r819151156) LottoMoney의 toLottoCount() 속 매직넘버
