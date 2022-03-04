@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.model.Money;
+
 public class LottoTest {
 
 	@DisplayName("Lotto에 LottoBall이 6개가 아니면 예외를 반환한다")
@@ -83,5 +85,57 @@ public class LottoTest {
 		for (int index = 0; index < (numbers.size() - 1); index++) {
 			assertThat(numbers.get(index).getNumber() < numbers.get(index + 1).getNumber()).isTrue();
 		}
+	}
+
+	@DisplayName("10000원을 넣으면 로또 10장을 구매 가능하다")
+	@Test
+	void count_tickets_10000() {
+		int count = Lotto.countTickets(Money.from("10000"));
+
+		assertThat(count).isEqualTo(10);
+	}
+
+	@DisplayName("1000원을 넣으면 로또 1장을 구매 가능하다")
+	@Test
+	void count_tickets_1000() {
+		int count = Lotto.countTickets(Money.from("1000"));
+
+		assertThat(count).isEqualTo(1);
+	}
+
+	@DisplayName("당첨 번호와 3개가 일치하면 3을 반환한다")
+	@Test
+	void match_3() {
+		WinningBalls winningBalls = WinningBalls.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
+		Lotto lotto = Lotto.fromManual(Arrays.asList("1", "2", "3", "7", "8", "9"));
+
+		assertThat(lotto.match(winningBalls)).isEqualTo(3);
+	}
+
+	@DisplayName("당첨 번호와 5개가 일치하면 5을 반환한다")
+	@Test
+	void match_5() {
+		WinningBalls winningBalls = WinningBalls.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
+		Lotto lotto = Lotto.fromManual(Arrays.asList("1", "2", "3", "4", "5", "9"));
+
+		assertThat(lotto.match(winningBalls)).isEqualTo(5);
+	}
+
+	@DisplayName("로또에 3이 포함된다면 true를 반환한다")
+	@Test
+	void contains_3() {
+		LottoBall lottoBall = LottoBall.from("3");
+		Lotto lotto = Lotto.fromManual(Arrays.asList("1", "2", "3", "4", "5", "9"));
+
+		assertThat(lotto.contains(lottoBall)).isTrue();
+	}
+
+	@DisplayName("로또에 10이 포함되지 않는다면 false를 반환한다")
+	@Test
+	void contains_10() {
+		LottoBall lottoBall = LottoBall.from("10");
+		Lotto lotto = Lotto.fromManual(Arrays.asList("1", "2", "3", "4", "5", "9"));
+
+		assertThat(lotto.contains(lottoBall)).isFalse();
 	}
 }
