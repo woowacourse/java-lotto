@@ -25,12 +25,12 @@ public class LottoBallTest {
 	@Test
 	void compareTo_override() {
 		List<LottoBall> lottoBalls = new ArrayList<>(Arrays.asList(
-				LottoBall.from("8"),
-				LottoBall.from("1"),
-				LottoBall.from("5"),
-				LottoBall.from("2"),
-				LottoBall.from("9"),
-				LottoBall.from("3")
+			LottoBall.from("8"),
+			LottoBall.from("1"),
+			LottoBall.from("5"),
+			LottoBall.from("2"),
+			LottoBall.from("9"),
+			LottoBall.from("3")
 		));
 
 		Collections.sort(lottoBalls);
@@ -46,7 +46,7 @@ public class LottoBallTest {
 		assertThatThrownBy(() -> {
 			LottoBall.from("일");
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("[ERROR] 로또 번호는 숫자로만 입력해주세요");
+			.hasMessage("[ERROR] 로또 번호는 숫자로만 입력해주세요");
 	}
 
 	@DisplayName("로또 번호가 1 이상 45 이하가 아니면 예외가 발생한다")
@@ -55,7 +55,7 @@ public class LottoBallTest {
 		assertThatThrownBy(() -> {
 			LottoBall.from("100");
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("[ERROR] 로또 번호는 1 이상 45 이하로 입력해주세요");
+			.hasMessage("[ERROR] 로또 번호는 1 이상 45 이하로 입력해주세요");
 	}
 
 	@DisplayName("같은 숫자일 경우 equals()를 사용하면 같은 값으로 인식된다")

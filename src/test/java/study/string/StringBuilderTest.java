@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class StringBuilderTest {
 	@Test
-	public void append () {
+	public void append() {
 		assertThat(createMessage("야호")).isEqualTo("안녕하세요, 저는 야호입니다.");
 	}
 

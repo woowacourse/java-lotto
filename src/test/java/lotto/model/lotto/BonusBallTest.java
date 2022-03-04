@@ -42,7 +42,7 @@ public class BonusBallTest {
 		assertThatThrownBy(() -> {
 			BonusBall.from(LottoBall.from("1"), winningBalls);
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다");
+			.hasMessage("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다");
 	}
 
 	@DisplayName("로또에 보너스 볼이 포함된다면 true를 반환한다")

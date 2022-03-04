@@ -20,7 +20,7 @@ public class LottoTest {
 		assertThatThrownBy(() -> {
 			Lotto.fromManual(manualLottoNumber);
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("[ERROR] 로또 번호는 6개로 입력해야 합니다");
+			.hasMessage("[ERROR] 로또 번호는 6개로 입력해야 합니다");
 	}
 
 	@DisplayName("Lotto 의 LottoBall 에 중복된 값이 있으면 예외를 반환한다")
@@ -31,7 +31,7 @@ public class LottoTest {
 		assertThatThrownBy(() -> {
 			Lotto.fromManual(manualLottoNumber);
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("[ERROR] 한 개의 로또 내에서 숫자가 중복될 수 없습니다");
+			.hasMessage("[ERROR] 한 개의 로또 내에서 숫자가 중복될 수 없습니다");
 	}
 
 	@DisplayName("Lotto 의 LottoBall 에 1 미만 값이 있으면 예외를 반환한다")
@@ -42,7 +42,7 @@ public class LottoTest {
 		assertThatThrownBy(() -> {
 			Lotto.fromManual(manualLottoNumber);
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("[ERROR] 로또 번호는 1 이상 45 이하로 입력해주세요");
+			.hasMessage("[ERROR] 로또 번호는 1 이상 45 이하로 입력해주세요");
 	}
 
 	@DisplayName("Lotto 의 LottoBall 에 45 초과 값이 있으면 예외를 반환한다")
@@ -53,7 +53,7 @@ public class LottoTest {
 		assertThatThrownBy(() -> {
 			Lotto.fromManual(manualLottoNumber);
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("[ERROR] 로또 번호는 1 이상 45 이하로 입력해주세요");
+			.hasMessage("[ERROR] 로또 번호는 1 이상 45 이하로 입력해주세요");
 	}
 
 	@DisplayName("같은 숫자 리스트로 생성된 로또여도, 다른 값을 갖는다")

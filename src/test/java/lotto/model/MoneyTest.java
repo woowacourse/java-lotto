@@ -13,7 +13,7 @@ public class MoneyTest {
 		assertThatThrownBy(() -> {
 			Money.from("2000원");
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("[ERROR] 구매 금액은 숫자로만 입력하세요");
+			.hasMessage("[ERROR] 구매 금액은 숫자로만 입력하세요");
 	}
 
 	@DisplayName("구매 금액이 0원 이하이면 예외 발생")
@@ -22,7 +22,7 @@ public class MoneyTest {
 		assertThatThrownBy(() -> {
 			Money.from("0");
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("[ERROR] 구매 금액은 0원보다 커야 합니다");
+			.hasMessage("[ERROR] 구매 금액은 0원보다 커야 합니다");
 	}
 
 	@DisplayName("구매 금액이 1000원 단위가 아니면 예외 발생")
@@ -31,7 +31,7 @@ public class MoneyTest {
 		assertThatThrownBy(() -> {
 			Money.from("1500");
 		}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessage("[ERROR] 구매 금액은 1000원 단위로 입력하세요");
+			.hasMessage("[ERROR] 구매 금액은 1000원 단위로 입력하세요");
 	}
 
 	@DisplayName("분모가 15000, 현재 보유 금액이 5000원일 경우 rate 는 3이다")

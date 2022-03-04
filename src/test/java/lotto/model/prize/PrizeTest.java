@@ -9,8 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.model.lotto.Lotto;
 import lotto.model.lotto.BonusBall;
+import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoBall;
 import lotto.model.lotto.WinningBalls;
 
