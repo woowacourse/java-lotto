@@ -8,9 +8,11 @@ import lotto.domain.matchkind.LottoMatchKind;
 import lotto.domain.purchaseamount.ManualPurchaseCount;
 import lotto.domain.purchaseamount.TotalPurchaseAmount;
 import lotto.domain.winningresult.WinningResult;
+import lotto.dto.InputLottoDto;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
     private final Lottos lottos;
@@ -42,8 +44,10 @@ public class LottoMachine {
             return this;
         }
 
-        public Builder setManualLottos(final List<Lotto> manualLottos) {
-            this.manualLottos = manualLottos;
+        public Builder setManualLottos(final List<InputLottoDto> manualLottos) {
+            this.manualLottos = manualLottos.stream()
+                    .map(manualLotto -> new Lotto(manualLotto.getNumbers()))
+                    .collect(Collectors.toUnmodifiableList());
             return this;
         }
 

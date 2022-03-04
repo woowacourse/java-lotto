@@ -1,9 +1,8 @@
 package lotto.domain;
 
 import lotto.domain.lottonumber.Lotto;
-import lotto.domain.lottonumber.WinningNumbers;
-import lotto.domain.lottonumber.vo.LottoNumber;
 import lotto.domain.matchkind.LottoMatchKind;
+import lotto.dto.InputLottoDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,14 +15,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
 class LottoMachineTest {
-    private final Lotto first = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-    private final Lotto second = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
-    private final Lotto third = new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8));
-    private final Lotto fourth = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
-    private final Lotto fifth = new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10));
-    private final Lotto sixth = new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11));
+    private final List<Integer> firstLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+    private final List<Integer> secondLottoNumbers = Arrays.asList(2, 3, 4, 5, 6, 7);
+    private final List<Integer> thirdLottoNumbers = Arrays.asList(3, 4, 5, 6, 7, 8);
+    private final List<Integer> fourthLottoNumbers = Arrays.asList(4, 5, 6, 7, 8, 9);
+    private final List<Integer> fifthLottoNumbers = Arrays.asList(5, 6, 7, 8, 9, 10);
+    private final List<Integer> sixthLottoNumbers = Arrays.asList(6, 7, 8, 9, 10, 11);
 
-    private final List<Lotto> lottos = Arrays.asList(first, second, third, fourth, fifth, sixth);
+    private final List<InputLottoDto> lottos = Arrays.asList(
+            new InputLottoDto(firstLottoNumbers), new InputLottoDto(secondLottoNumbers),
+            new InputLottoDto(thirdLottoNumbers), new InputLottoDto(fourthLottoNumbers),
+            new InputLottoDto(fifthLottoNumbers), new InputLottoDto(sixthLottoNumbers));
     private final LottoMachine lottoMachine = new LottoMachine.Builder()
             .setLottoPrice(1000)
             .setTotalPurchaseAmount(6000)
@@ -58,7 +60,10 @@ class LottoMachineTest {
     @DisplayName("구매한 모든 로또 숫자들을 반환한다.")
     void getLottoNumbersGroup_Test() {
         //given
-        final List<Lotto> expected = Arrays.asList(first, second, third, fourth, fifth, sixth);
+        final List<Lotto> expected = Arrays.asList(
+                new Lotto(firstLottoNumbers), new Lotto(secondLottoNumbers),
+                new Lotto(thirdLottoNumbers), new Lotto(fourthLottoNumbers),
+                new Lotto(fifthLottoNumbers), new Lotto(sixthLottoNumbers));
         //when
         final List<Lotto> actual = lottoMachine.getLottos();
         //then
