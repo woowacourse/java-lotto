@@ -1,5 +1,7 @@
 package lotto.view;
 
+import static lotto.view.OutputView.NEW_LINE;
+
 import java.util.Scanner;
 import lotto.utils.IntegerUtils;
 
@@ -28,6 +30,12 @@ public class InputView {
 
     public int inputBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
+        String input = scanner.nextLine();
+        return IntegerUtils.parse(input);
+    }
+
+    public int inputManualLottoCount() {
+        System.out.println(NEW_LINE + "수동으로 구매할 로또 수를 입력해 주세요.");
         String input = scanner.nextLine();
         return IntegerUtils.parse(input);
     }
