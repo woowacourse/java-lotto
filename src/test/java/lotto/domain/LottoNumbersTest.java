@@ -29,7 +29,7 @@ public class LottoNumbersTest {
     @DisplayName("숫자가 6개 미만")
     void incorrect4() {
         // given
-        List<Integer> numbers = getNumbers(2, 5, 6);
+        List<Integer> numbers = getNumbers(1, 2, 3, 4, 5);
 
         // then
         assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(IllegalArgumentException.class)
