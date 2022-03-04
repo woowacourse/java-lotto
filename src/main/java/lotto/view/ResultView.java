@@ -17,9 +17,7 @@ public class ResultView {
     }
 
     private static void printEachLottos(List<Lotto> lottos) {
-        lottos.stream()
-            .map(Lotto::toIntegers)
-            .forEach(System.out::println);
+        lottos.forEach(System.out::println);
     }
 
     public static void printResultStatistics(LottoResult lottoResult) {

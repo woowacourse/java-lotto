@@ -28,9 +28,9 @@ public class Lotto {
         }
     }
 
-    private void validateDuplicationLottoNumbers(List<Integer> winningNumbers) {
-        Set<Integer> distinct = new HashSet<>(winningNumbers);
-        if (distinct.size() != winningNumbers.size()) {
+    private void validateDuplicationLottoNumbers(List<Integer> lottoNumbers) {
+        Set<Integer> distinct = new HashSet<>(lottoNumbers);
+        if (distinct.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException(ERROR_DUPLICATION_LOTTO_NUMBERS);
         }
     }
@@ -55,9 +55,8 @@ public class Lotto {
         return lottoNumbers.contains(number);
     }
 
-    public List<Integer> toIntegers() {
-        return List.copyOf(lottoNumbers.stream()
-            .map(LottoNumber::getNumber)
-            .collect(toList()));
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }
