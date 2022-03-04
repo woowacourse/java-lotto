@@ -30,9 +30,9 @@ public class ResultView {
 
 	private static void showLotto(LottoDTO lotto) {
 		String joinedNumbers = lotto.getLottoBalls().stream()
-				.map(LottoBall::getNumber)
-				.map(String::valueOf)
-				.collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
+			.map(LottoBall::getNumber)
+			.map(String::valueOf)
+			.collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
 
 		System.out.printf(FORMAT_LOTTO, joinedNumbers);
 	}
@@ -54,9 +54,9 @@ public class ResultView {
 
 	private static void showOnePrizeInformation(String format, PrizeInformationDTO prizeInformation) {
 		System.out.printf(format,
-				prizeInformation.getMatchingCount(),
-				prizeInformation.getAmount(),
-				prizeInformation.getPrizeCount());
+			prizeInformation.getMatchingCount(),
+			prizeInformation.getAmount(),
+			prizeInformation.getPrizeCount());
 	}
 
 	public static void showEarningRate(Double earningRate) {

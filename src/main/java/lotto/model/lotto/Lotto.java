@@ -75,8 +75,8 @@ public class Lotto {
 
 	public int match(WinningBalls winningBalls) {
 		return (int)lotto.stream()
-				.filter(winningBalls::match)
-				.count();
+			.filter(winningBalls::match)
+			.count();
 	}
 
 	public boolean contains(LottoBall lottoBall) {

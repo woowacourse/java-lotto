@@ -20,9 +20,9 @@ public class PrizeInformationDTO {
 
 	public static List<PrizeInformationDTO> from(PrizeInformation prizeInformation) {
 		return prizeInformation.getKeys().stream()
-				.map(prize -> new PrizeInformationDTO(
-						prize.getMatchCount(), prize.isBonus(), prize.getAmount(), prizeInformation.getCount(prize)))
-				.collect(Collectors.toList());
+			.map(prize -> new PrizeInformationDTO(
+				prize.getMatchCount(), prize.isBonus(), prize.getAmount(), prizeInformation.getCount(prize)))
+			.collect(Collectors.toList());
 	}
 
 	public int getMatchingCount() {

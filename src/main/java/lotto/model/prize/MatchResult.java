@@ -1,7 +1,7 @@
 package lotto.model.prize;
 
-import lotto.model.lotto.Lotto;
 import lotto.model.lotto.BonusBall;
+import lotto.model.lotto.Lotto;
 import lotto.model.lotto.WinningBalls;
 
 public class MatchResult {

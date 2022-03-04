@@ -45,8 +45,8 @@ public class PrizeInformation {
 
 	private int getTotalAmount() {
 		return prizeInformation.keySet().stream()
-				.mapToInt(this::getAmount)
-				.sum();
+			.mapToInt(this::getAmount)
+			.sum();
 	}
 
 	private int getAmount(Prize prize) {

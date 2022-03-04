@@ -3,8 +3,8 @@ package lotto.model.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.model.lotto.Lottos;
 import lotto.model.lotto.LottoBall;
+import lotto.model.lotto.Lottos;
 
 public class LottoDTO {
 
@@ -16,8 +16,8 @@ public class LottoDTO {
 
 	public static List<LottoDTO> from(Lottos lottos) {
 		return lottos.getLottos().stream()
-				.map(lotto -> new LottoDTO(lotto.getLotto()))
-				.collect(Collectors.toList());
+			.map(lotto -> new LottoDTO(lotto.getLotto()))
+			.collect(Collectors.toList());
 	}
 
 	public List<LottoBall> getLottoBalls() {

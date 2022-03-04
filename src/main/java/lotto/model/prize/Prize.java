@@ -25,9 +25,9 @@ public enum Prize {
 			return SECOND;
 		}
 		return Arrays.stream(values())
-				.filter(prize -> matchResult.isCount(prize.matchCount))
-				.findFirst()
-				.orElse(NONE);
+			.filter(prize -> matchResult.isCount(prize.matchCount))
+			.findFirst()
+			.orElse(NONE);
 	}
 
 	public int pickAmount(int count) {

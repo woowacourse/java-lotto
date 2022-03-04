@@ -3,6 +3,7 @@ package lotto.model.lotto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import lotto.model.prize.MatchResult;
 
@@ -38,15 +39,13 @@ public class Lottos {
 	}
 
 	private static void generateAutoLotto(int autoCount, List<Lotto> lottos) {
-		for (int index = 0; index < autoCount; index++) {
-			lottos.add(Lotto.fromAuto());
-		}
+		IntStream.range(0, autoCount).mapToObj(index -> Lotto.fromAuto()).forEach(lottos::add);
 	}
 
 	public List<MatchResult> match(WinningBalls winningBalls, BonusBall bonusBall) {
 		return this.lottos.stream()
-				.map(lotto -> MatchResult.of(lotto, winningBalls, bonusBall))
-				.collect(Collectors.toList());
+			.map(lotto -> MatchResult.of(lotto, winningBalls, bonusBall))
+			.collect(Collectors.toList());
 	}
 
 	public List<Lotto> getLottos() {
