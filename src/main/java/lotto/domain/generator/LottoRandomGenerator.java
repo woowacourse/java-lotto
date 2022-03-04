@@ -16,7 +16,7 @@ public class LottoRandomGenerator {
 
     public LottoRandomGenerator() {
         basicNumbers = IntStream.range(0, LAST_LOTTO_NUMBER)
-                .mapToObj(index -> LottoNumber.from(String.valueOf(index + 1)))
+                .mapToObj(index -> LottoNumber.from(index + 1))
                 .collect(Collectors.toList());
     }
 
