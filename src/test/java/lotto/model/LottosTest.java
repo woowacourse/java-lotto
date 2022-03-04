@@ -22,7 +22,7 @@ public class LottosTest {
         Lotto first = makeLotto(new int[]{1, 2, 3, 4, 5, 6}); //1등
         Lotto second = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
         Lotto fourth = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
-        lottos = new Lottos(new ArrayList<>(Arrays.asList(first,second,fourth)));
+        lottos = new Lottos(new ArrayList<>(Arrays.asList(first, second, fourth)));
     }
 
     private Lotto makeLotto(int[] numbers) {

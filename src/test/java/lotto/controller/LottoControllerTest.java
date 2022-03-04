@@ -14,11 +14,14 @@ import lotto.model.WinningLotto;
 import lotto.model.generator.CustomLottoGenerator;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
+import lotto.view.InputView;
 import lotto.view.ResultView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoControllerTest {
+
+    private LottoMachine lottoMachine;
 
     @DisplayName("실행 테스트")
     @Test
@@ -27,14 +30,22 @@ public class LottoControllerTest {
     }
 
     public void run() {
+        do {
+            makeAndPrintLottoMachine();
+            WinningLotto winningLotto = makeWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7);
+            lottoMachine.calculateResult(winningLotto);
+            ResultView.printTotalRankResult(lottoMachine);
+            int continueNumber = LottoMachine.STOP_NUMBER;
+            lottoMachine.isEnd(continueNumber);
+        } while (lottoMachine.isWorking());
+    }
+
+    private void makeAndPrintLottoMachine() {
         Money money = new Money(3000);
         LottoCount lottoCount = new LottoCount(2, money);
         Lottos manualLottos = makeLottos();
-        LottoMachine lottoMachine = new LottoMachine(new CustomLottoGenerator(), money, lottoCount, manualLottos);
+        lottoMachine = new LottoMachine(new CustomLottoGenerator(), money, lottoCount, manualLottos);
         ResultView.printBuyingLottosResult(lottoCount, lottoMachine.getLottos());
-        WinningLotto winningLotto = makeWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7);
-        lottoMachine.calculateResult(winningLotto);
-        ResultView.printTotalRankResult(lottoMachine);
     }
 
     private Lottos makeLottos() {

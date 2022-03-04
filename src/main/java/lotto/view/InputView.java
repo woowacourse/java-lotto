@@ -9,6 +9,7 @@ public class InputView {
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해주세요";
     private static final String INPUT_MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String INPUT_CONTINUE_MESSAGE = "다시 시작 하려면 1, 종료하려면 0을 입력해주세요.";
 
     private static final Scanner input = new Scanner(System.in);
 
@@ -38,5 +39,11 @@ public class InputView {
 
     public static String inputManualLottoNumbers() {
         return input.nextLine().trim();
+    }
+
+    public static String inputContinueNumber() {
+        System.out.println();
+        System.out.println(INPUT_CONTINUE_MESSAGE);
+        return input.nextLine();
     }
 }

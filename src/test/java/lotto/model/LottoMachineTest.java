@@ -88,6 +88,23 @@ public class LottoMachineTest {
         assertThat(lottoMachine.getRevenue()).isEqualTo((double) (2000000000 + 30000000 + 50000) / 3000);
     }
 
+    @DisplayName("머신 작동 테스트")
+    @Test
+    void isEndTest() {
+        calculateLottoMachine();
+        boolean actual = lottoMachine.isEnd(0);
+        assertThat(actual).isEqualTo(false);
+    }
+
+    @DisplayName("거스름돈 테스트")
+    @Test
+    void getChangeTest() {
+        money = new Money(3900);
+        calculateLottoMachine();
+        int actual = lottoMachine.getChange();
+        assertThat(actual).isEqualTo(900);
+    }
+
     private void calculateLottoMachine() {
         lottoMachine = new LottoMachine(lottoGenerator, money, new LottoCount(2, money), lottos);
         WinningLotto winningLotto = makeWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7);

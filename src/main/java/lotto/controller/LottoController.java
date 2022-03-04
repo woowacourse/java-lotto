@@ -1,6 +1,5 @@
 package lotto.controller;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,25 +20,35 @@ import lotto.view.ResultView;
 public class LottoController {
 
     private static final String NOT_NUMBER_ERROR_MESSAGE = "[ERROR] 문자가 입력되었습니다.";
+    private static final String CONTINUE_ERROR_MESSAGE = "[ERROR] 다시 시작하려면 1, 종료하려면 0을 입력해주세요.";
 
     private static final String NUMBER_REGEX = "\\d+";
 
     private LottoGenerator lottoGenerator;
+    private LottoMachine lottoMachine;
 
     public LottoController(LottoGenerator lottoGenerator) {
         this.lottoGenerator = lottoGenerator;
     }
 
     public void run() {
+        do {
+            makeAndPrintLottoMachine();
+            WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
+                    InputView.inputBonusNumber());
+            lottoMachine.calculateResult(winningLotto);
+            ResultView.printTotalRankResult(lottoMachine);
+            int continueNumber = validateContinueNumber(InputView.inputContinueNumber());
+            lottoMachine.isEnd(continueNumber);
+        } while (lottoMachine.isWorking());
+    }
+
+    private void makeAndPrintLottoMachine() {
         Money money = validateMoney(InputView.inputMoney());
         LottoCount lottoCount = new LottoCount(validateNumber(InputView.inputManualLottoCount()), money);
         Lottos manualLottos = makeManualLottos(lottoCount.getManualLottoCount());
-        LottoMachine lottoMachine = new LottoMachine(lottoGenerator, money, lottoCount, manualLottos);
+        lottoMachine = new LottoMachine(lottoGenerator, money, lottoCount, manualLottos);
         ResultView.printBuyingLottosResult(lottoCount, lottoMachine.getLottos());
-        WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
-                InputView.inputBonusNumber());
-        lottoMachine.calculateResult(winningLotto);
-        ResultView.printTotalRankResult(lottoMachine);
     }
 
     private Money validateMoney(String money) {
@@ -105,5 +114,13 @@ public class LottoController {
 
     private int toIntBonusNumber(String bonusNumber) {
         return validateNumber(bonusNumber);
+    }
+
+    private int validateContinueNumber(String number) {
+        int continueNumber = validateNumber(number);
+        if (continueNumber != LottoMachine.WORKING_NUMBER && continueNumber != LottoMachine.STOP_NUMBER) {
+            throw new IllegalArgumentException(CONTINUE_ERROR_MESSAGE);
+        }
+        return continueNumber;
     }
 }
