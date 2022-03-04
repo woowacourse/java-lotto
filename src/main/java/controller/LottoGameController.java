@@ -5,6 +5,7 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoGameController {
 
@@ -13,12 +14,12 @@ public class LottoGameController {
         List<Lotto> lottos = buyLottos(lottoDispenser);
         OutputView.printLottos(lottos);
 
-        LottoGame lottoGame = new LottoGame(lottos);
         WinningLotto winningLotto = getWinningLottoFromInput();
-        lottoGame.calculatePrizeResult(winningLotto);
+        PrizeMachine prizeMachine = new PrizeMachine(lottos);
+        Map<Prize, Integer> prizeResult = prizeMachine.calculatePrizeResult(winningLotto);
 
-        OutputView.printFinalStatistic(lottoGame.getPrizeResult());
-        OutputView.printEarningRate(lottoGame.calculateEarningRate());
+        OutputView.printFinalStatistic(prizeResult);
+        OutputView.printEarningRate(prizeMachine.calculateEarningRate());
     }
 
     private List<Lotto> buyLottos(LottoDispenser lottoDispenser) {

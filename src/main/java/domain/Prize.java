@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,13 @@ public enum Prize {
     public static List<Prize> getWinnerPrices() {
         return Arrays.stream(Prize.values())
                 .sequential()
+                .collect(Collectors.toList());
+    }
+
+    public static List<Prize> getValidPrizes() {
+        return getWinnerPrices().stream()
+                .filter(prize -> prize != Prize.FAIL)
+                .sorted(Comparator.comparing(Prize::getPrize))
                 .collect(Collectors.toList());
     }
 

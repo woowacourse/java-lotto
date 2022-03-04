@@ -1,8 +1,6 @@
 package view;
 
 import domain.Lotto;
-import domain.PrizeResult;
-import domain.LottoGame;
 import domain.Prize;
 
 import java.util.List;
@@ -36,10 +34,9 @@ public class OutputView {
         System.out.print(System.lineSeparator());
     }
 
-    public static void printFinalStatistic(PrizeResult result) {
+    public static void printFinalStatistic(Map<Prize, Integer> prizeResult) {
         System.out.printf(System.lineSeparator() + WINNING_STATISTIC);
-        Map<Prize, Integer> prizeResult = result.getPrizeResult();
-        for (Prize winnerPrice : result.validWinnerPrices()) {
+        for (Prize winnerPrice : Prize.getValidPrizes()) {
             printEachStatistic(winnerPrice, prizeResult);
         }
     }
