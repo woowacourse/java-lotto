@@ -18,7 +18,7 @@ public class LottoNumbers {
     private LottoNumbers() {
     }
 
-    public static Set<Integer> getNumbers() {
+    static Set<Integer> getNumbers() {
         return Collections.unmodifiableSet(numbers);
     }
 }

@@ -29,7 +29,7 @@ public class LottoStorage {
         return Collections.unmodifiableList(lottoResponses);
     }
 
-    public WinningResult calcWinningNumber(WinningLottoResponse winningLottoResponse) {
+    WinningResult calcWinningNumber(WinningLottoResponse winningLottoResponse) {
         WinningResult winningResult = new WinningResult();
         lottoNumbers.forEach(lotto -> lotto.calcWinningNumber(winningResult, winningLottoResponse));
         return winningResult;

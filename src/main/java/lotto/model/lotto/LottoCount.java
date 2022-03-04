@@ -16,15 +16,15 @@ public class LottoCount {
         return (money / UNIT) - count;
     }
 
-    public boolean isZero() {
+    boolean isZero() {
         return count == END;
     }
 
-    public void makeLotto() {
+    void makeLotto() {
         this.count--;
     }
 
-    public long getCount() {
+    long getCount() {
         return count;
     }
 

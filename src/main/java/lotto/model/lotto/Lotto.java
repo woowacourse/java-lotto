@@ -52,7 +52,7 @@ public class Lotto {
         }
     }
 
-    public void calcWinningNumber(WinningResult winningResult, WinningLottoResponse winningLottoResponse) {
+    void calcWinningNumber(WinningResult winningResult, WinningLottoResponse winningLottoResponse) {
         Set<Integer> winningNumbers = winningLottoResponse.getWinningNumbers();
         long count = countWinningNumber(winningNumbers);
 

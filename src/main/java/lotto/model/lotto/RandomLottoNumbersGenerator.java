@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class RandomLottoNumbersGenerator {
     private static final int LOTTO_SIZE = 6;
 
-    public static List<Integer> pickSixNumbers() {
+    static List<Integer> pickSixNumbers() {
         List<Integer> shuffledNumbers = shuffleLottoNumbers(LottoNumbers.getNumbers());
         return Collections.unmodifiableList(shuffledNumbers
                 .stream()

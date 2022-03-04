@@ -5,7 +5,7 @@ public class Profit {
 
     private long number;
 
-    public long sumProfitMoney(WinningResult winningResult) {
+    long sumProfitMoney(WinningResult winningResult) {
         init();
         for (Rank rank : winningResult.getWinningCount().keySet()) {
             number += winningResult.getWinningCount().get(rank) * rank.getValue();

@@ -32,17 +32,17 @@ public class WinningLotto {
         }
     }
 
-    public void validateReduplicationWithBonusBall(int number) {
+    void validateReduplicationWithBonusBall(int number) {
         if (winningNumbers.getNumbers().contains(number)) {
             throw new IllegalArgumentException(LottoNumberExceptionMessage.REDUPLICATION_BONUS_BALL_ERROR.getMassage());
         }
     }
 
-    public Set<Integer> getNumbers() {
+    Set<Integer> getNumbers() {
         return Collections.unmodifiableSet(winningNumbers.getNumbers());
     }
 
-    public int getBonusBall() {
+    int getBonusBall() {
         return bonusBall;
     }
 
