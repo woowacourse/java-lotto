@@ -127,7 +127,7 @@
     - [x] VO 변수명 value로 변경
     - [x] 래핑 전 변수명에 raw 붙이기
     - [x] 인자 값을 메서드 내 역할에 맞게 명명
-- [ ] collect(Collectors.toSet()) 사용
+- [x] set 변수 간소화
 - [ ] 클라이언트를 편하게 하기 위해 테스트클래스에 날것 변환용 메서드 생성
 - [ ] 리스트 불변 추가
 - [ ] winLotto winningLotto로 이름 변

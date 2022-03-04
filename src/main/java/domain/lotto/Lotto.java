@@ -22,6 +22,15 @@ public class Lotto {
     }
 
     private static void validate(List<LottoNumber> value) {
+        if (new HashSet<>(value).size() != value.size()) {
+            throw new LottoNumDuplicatedException();
+        }
+        if (value.size() != SIZE) {
+            throw new LottoNumWrongSizeException();
+        }
+    }
+
+    private static void validate1(List<LottoNumber> value) {
         HashSet<LottoNumber> compareNums = new HashSet<>(value);
         if (compareNums.size() != value.size()) {
             throw new LottoNumDuplicatedException();
