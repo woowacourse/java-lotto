@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
+    
     private static final String ERROR_MESSAGE = "[ERROR] ";
 
     private OutputView() {
@@ -25,8 +26,8 @@ public class OutputView {
         System.out.println(ERROR_MESSAGE + errorMessage);
     }
 
-    public static void printLottos(Lottos lottos) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottos.getLottos().size()));
+    public static void printLottos(Lottos lottos, int manualTicketCount, int autoTicketCount) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualTicketCount, autoTicketCount));
         lottos.getLottos().stream()
                 .forEach(OutputView::printLotto);
         System.out.println();

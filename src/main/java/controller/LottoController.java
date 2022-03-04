@@ -8,7 +8,8 @@ public class LottoController {
 
     public void run() {
         Payment payment = InputConvertor.createPayment();
-        LottoGame lottoGame = new LottoGame(new LottoMachine(payment));
+        LottoOrder lottoOrder = InputConvertor.createManualTicketCount(payment);
+        LottoGame lottoGame = new LottoGame(new LottoMachine(), lottoOrder);
 
         Lottos lottos = createLottos(lottoGame);
         WinningLotto winningLotto = InputConvertor.createWinningLotto();
@@ -19,8 +20,8 @@ public class LottoController {
     }
 
     private Lottos createLottos(LottoGame lottoGame) {
-        Lottos lottos = lottoGame.createAutoLottos();
-        OutputView.printLottos(lottos);
+        Lottos lottos = lottoGame.createLottos();
+        OutputView.printLottos(lottos, lottoGame.getManualTicketCount(), lottoGame.getAutoTicketCount());
         return lottos;
     }
 }
