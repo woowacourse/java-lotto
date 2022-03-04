@@ -22,7 +22,7 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public int amountOfLottos() {
+    public int totalPurchasePrice() {
         return lottos.size() * LOTTO_PRICE;
     }
 

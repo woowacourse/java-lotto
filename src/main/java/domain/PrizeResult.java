@@ -27,8 +27,8 @@ public class PrizeResult {
         }
     }
 
-    private void updatePrizeResult(Rank winnerPrice) {
-        prizeResult.put(winnerPrice, prizeResult.get(winnerPrice) + 1);
+    private void updatePrizeResult(Rank winnerRank) {
+        prizeResult.put(winnerRank, prizeResult.get(winnerRank) + 1);
     }
 
     public float earningRate(int inputMoney) {

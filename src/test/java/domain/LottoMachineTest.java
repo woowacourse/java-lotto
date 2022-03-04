@@ -21,19 +21,19 @@ class LottoMachineTest {
     }
 
     @DisplayName("정수가 아닌 값이 들어오면 예외가 발생한다.")
-    @ParameterizedTest(name = "{index} {displayName} price={0}")
+    @ParameterizedTest(name = "{index} {displayName} money={0}")
     @ValueSource(strings = {"qwe", "asd"})
-    void checkNonIntegerPriceInput_throwIllegalException(final String price) {
-        assertThatThrownBy(() -> new Money(price))
+    void checkNonIntegerMoneyInput_throwIllegalException(final String money) {
+        assertThatThrownBy(() -> new Money(money))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("가격은 정수만 가능합니다.");
     }
 
     @DisplayName("1000원 이하의 입력 들어오면 예외가 발생한다.")
-    @ParameterizedTest(name = "{index} {displayName} price={0}")
+    @ParameterizedTest(name = "{index} {displayName} money={0}")
     @ValueSource(strings = {"-10000", "-50000", "700", "999"})
-    void checkUnderMinimumPriceInput_throwIllegalException(final String price) {
-        assertThatThrownBy(() -> new Money(price))
+    void checkUnderMinimumMoneyInput_throwIllegalException(final String money) {
+        assertThatThrownBy(() -> new Money(money))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("가격은 1000원 이상만 가능합니다.");
     }

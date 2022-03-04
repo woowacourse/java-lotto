@@ -14,12 +14,12 @@ public class LottoGameController {
         final PrizeResult prizeResult = purchasedLotto.prizeResult(winningNumber);
 
         OutputView.printFinalStatistic(prizeResult);
-        OutputView.printEarningRate(prizeResult.earningRate(purchasedLotto.amountOfLottos()));
+        OutputView.printEarningRate(prizeResult.earningRate(purchasedLotto.totalPurchasePrice()));
     }
 
     private Lottos purchaseLotto() {
         LottoMachine lottoMachine = new LottoMachine();
-        final Money money = InputView.commonInputProcess(() -> new Money(InputView.inputPrice()));
+        final Money money = InputView.commonInputProcess(() -> new Money(InputView.inputMoney()));
         final int numOfManualLotto = InputView.commonInputProcess(
                 () -> lottoMachine.checkAvailableBuy(money, InputView.inputNumOfManualLotto()));
         final Lottos purchasedLotto = InputView.commonInputProcess(
