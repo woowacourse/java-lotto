@@ -4,15 +4,19 @@ import java.util.Objects;
 
 public class ManualLottoCount {
     private final int count;
-    public ManualLottoCount(int count) {
+
+    public ManualLottoCount(int count, Budget budget) {
         if (count < 0) {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
+        if (budget.getMaxCountForLottoIssue() < count) {
+            throw new IllegalArgumentException("수동 로또를 사기엔 돈이 모자랍니다.");
         }
         this.count = count;
     }
 
-    public static ManualLottoCount parse(String text) {
-        return new ManualLottoCount(Integer.parseInt(text));
+    public static ManualLottoCount parse(String text, Budget budget) {
+        return new ManualLottoCount(Integer.parseInt(text), budget);
     }
 
     public boolean hasCountAs(int count) {

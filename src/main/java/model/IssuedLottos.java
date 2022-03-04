@@ -13,9 +13,6 @@ public class IssuedLottos {
     private final List<Lotto> autoIssuedLotto;
 
     public IssuedLottos(Budget budget,LottoGenerator generator, List<Lotto> manualIssuedLotto) {
-        if (budget.getMaxCountForLottoIssue() < manualIssuedLotto.size()) {
-            throw new IllegalArgumentException("수동 로또를 사기엔 돈이 모자랍니다.");
-        }
         this.budget = budget;
         this.manualIssuedLotto = Collections.unmodifiableList(manualIssuedLotto);
         this.autoIssuedLotto = Collections.unmodifiableList(issueAffordableAutoLotto(generator));

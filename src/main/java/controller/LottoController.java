@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import model.Budget;
 import model.IssuedLottos;
 import model.Lotto;
 import model.LottoNumber;
 import model.LottoResult;
-import model.Budget;
 import model.ManualLottoCount;
 import model.WinningLottoNumbers;
 import model.generator.RandomLottoGenerator;
@@ -22,9 +22,11 @@ public class LottoController {
 
     public void run() {
         Budget inputBudget = InputView.getUntilValid(() -> Budget.parse(InputView.inputMoney()));
-        IssuedLottos issuedLottos = InputView.getUntilValid(() -> new IssuedLottos(inputBudget, new RandomLottoGenerator(), getManualLottos()));
+        IssuedLottos issuedLottos = InputView.getUntilValid(
+                () -> new IssuedLottos(inputBudget, new RandomLottoGenerator(), getManualLottos(inputBudget)));
 
-        printIssuedLottoNumbers(issuedLottos.getManualLottoCount(), issuedLottos.getAutoLottoCount(), getNumbersOf(issuedLottos));
+        printIssuedLottoNumbers(issuedLottos.getManualLottoCount(), issuedLottos.getAutoLottoCount(),
+                getNumbersOf(issuedLottos));
 
         WinningLottoNumbers winningLottoNumbers = InputView.getUntilValid(() -> getWinningLottoNumbers());
         LottoResult result = issuedLottos.summary(winningLottoNumbers);
@@ -32,8 +34,9 @@ public class LottoController {
         printResult(result.getResultMap(), result.getProfitRate());
     }
 
-    private List<Lotto> getManualLottos() {
-        ManualLottoCount manualLottoCount = InputView.getUntilValid(() -> ManualLottoCount.parse(InputView.inputManualCount()));
+    private List<Lotto> getManualLottos(Budget budget) {
+        ManualLottoCount manualLottoCount = InputView.getUntilValid(
+                () -> ManualLottoCount.parse(InputView.inputManualCount(), budget));
         List<Lotto> inputManualLottos = InputView.getUntilValid(() -> inputManualLotto(manualLottoCount));
         return inputManualLottos;
     }
@@ -41,7 +44,7 @@ public class LottoController {
     private List<Lotto> inputManualLotto(ManualLottoCount manualLottoCount) {
         InputView.printManualLottoMessage();
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0 ; !manualLottoCount.hasCountAs(i); i++) {
+        for (int i = 0; !manualLottoCount.hasCountAs(i); i++) {
             lottos.add(parseManualLotto());
         }
         return lottos;
