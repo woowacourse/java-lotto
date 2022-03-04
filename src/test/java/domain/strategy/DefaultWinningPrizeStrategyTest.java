@@ -52,7 +52,7 @@ class DefaultWinningPrizeStrategyTest {
     @DisplayName("기본 로또 당첨보상 전략이 보상으로 맞는 숫자 갯수를 도출할 수 있는지 확인한다.")
     void checkWinningPriceToMatchCount(WinningPrize winningPrize) {
         assertThat(LottoWinningPrizeStrategy.findMatchCount(winningPrize))
-                .isEqualTo(winningPrizeMatchCounts.get(winningPrize));
+                .isEqualTo(winningPrizeMatchCounts.getOrDefault(winningPrize, 0));
     }
 
     @Test

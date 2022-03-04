@@ -21,6 +21,7 @@ public class DefaultWinningPrizeStrategy implements WinningPrizeStrategy {
         put(WinningPrize.THIRD, 5);
         put(WinningPrize.FOURTH, 4);
         put(WinningPrize.FIFTH, 3);
+        put(WinningPrize.NONE, 0);
     }};
 
     @Override
@@ -28,12 +29,12 @@ public class DefaultWinningPrizeStrategy implements WinningPrizeStrategy {
         if (matchCount == SECOND_PRIZE_MATCH_COUNT && matchBonus) {
             return WinningPrize.SECOND;
         }
-        return MATCH_COUNT_WINNING_PRIZE_INFO.get(matchCount);
+        return MATCH_COUNT_WINNING_PRIZE_INFO.getOrDefault(matchCount, WinningPrize.NONE);
     }
 
     @Override
     public int findMatchCount(WinningPrize winningPrize) {
-        return WINNING_PRIZE_MATCH_COUNT_INFO.get(winningPrize);
+        return WINNING_PRIZE_MATCH_COUNT_INFO.getOrDefault(winningPrize, 0);
     }
 
     @Override

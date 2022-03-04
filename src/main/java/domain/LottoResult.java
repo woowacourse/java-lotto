@@ -8,7 +8,6 @@ import java.util.Map;
 public class LottoResult {
     private static final int INIT_COUNT = 0;
     private static final int COUNT_UNIT = 1;
-    private static final int WINNING_FLAG = 3;
 
     private final Map<WinningPrize, Integer> countOfWinning;
     private final int purchaseTicketCount;
@@ -30,8 +29,6 @@ public class LottoResult {
                                                            WinningPrizeStrategy winningPrizeStrategy) {
         Map<WinningPrize, Integer> countOfWinning = initWinningCount();
         lottoTickets.getTickets()
-                .stream()
-                .filter(lottoTicket -> isWinning(lottoTicket, winningTicket))
                 .forEach(lottoTicket -> countWinningTicket(countOfWinning, lottoTicket, winningTicket,
                         winningPrizeStrategy));
         return countOfWinning;
@@ -54,13 +51,10 @@ public class LottoResult {
         int matchCount = winningTicket.compareMatchCount(lottoTicket);
         boolean matchBonus = winningTicket.isMatchBonusNumber(lottoTicket);
         WinningPrize winningPrize = winningPrizeStrategy.findWinningPrize(matchCount, matchBonus);
-        Integer winningPrizeCount = result.get(winningPrize) + COUNT_UNIT;
-        result.put(winningPrize, winningPrizeCount);
-    }
-
-    private static boolean isWinning(LottoTicket lottoTicket, WinningTicket winningTicket) {
-        int count = winningTicket.compareMatchCount(lottoTicket);
-        return count >= WINNING_FLAG;
+        if (!winningPrize.equals(WinningPrize.NONE)) {
+            Integer winningPrizeCount = result.get(winningPrize) + COUNT_UNIT;
+            result.put(winningPrize, winningPrizeCount);
+        }
     }
 
     public Map<WinningPrize, Integer> getCountOfWinning() {
@@ -69,7 +63,7 @@ public class LottoResult {
 
     public double calculateLottoRateOfReturn() {
         int totalReturn = sumTotalReturn();
-        return totalReturn / (double)(purchaseTicketCount * LottoGame.TICKET_PRICE);
+        return totalReturn / (double) (purchaseTicketCount * LottoGame.TICKET_PRICE);
     }
 
     private int sumTotalReturn() {
