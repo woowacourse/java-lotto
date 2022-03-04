@@ -24,4 +24,12 @@ public class ValidationUtilsTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("빈 컬렉션");
     }
+
+    @Test
+    @DisplayName("null 입력만 검증하는 메소드 테스트")
+    void validateNullOnlyCollectionTest() {
+        assertThatThrownBy(() -> ValidationUtils.validateNullCollection(null))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("null 값");
+    }
 }

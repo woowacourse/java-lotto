@@ -2,7 +2,6 @@ package lotto.model;
 
 import java.util.List;
 
-import lotto.model.lottos.AutoLottos;
 import lotto.model.lottos.Lottos;
 import lotto.model.numbergenerator.LottoNumberGenerator;
 import lotto.model.numbergenerator.ManualGenerator;
@@ -17,7 +16,7 @@ public class LottoGame {
     }
 
     private Lottos buyAutoLottos(LottoNumberGenerator lottoNumberGenerator) {
-        return new AutoLottos(lottoNumberGenerator, lottoMoney.getAutoLottoSize());
+        return new Lottos(lottoNumberGenerator, lottoMoney.getAutoLottoSize());
     }
 
     public Lottos buyManualLottos(List<List<Integer>> inputManualLottos) {

@@ -1,6 +1,7 @@
 package lotto.model.lottos;
 
 import static java.util.stream.Collectors.*;
+import static lotto.ValidationUtils.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class Lottos {
 
     public Lottos(LottoNumberGenerator lottoNumberGenerator, int count) {
         this.lottos = generateLottos(lottoNumberGenerator, count);
+        validateNullCollection(this.lottos);
     }
 
     List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int count) {
