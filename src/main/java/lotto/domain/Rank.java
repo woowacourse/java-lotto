@@ -29,9 +29,13 @@ public enum Rank {
     public static Rank calculateCurrentRank(final int hitCounts, final boolean hasBonusNumber) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isSameHitCount(hitCounts))
-                .filter(rank -> !rank.equals(SECOND) || hasBonusNumber)
+                .filter(rank -> isSecond(hasBonusNumber, rank))
                 .findFirst()
                 .orElse(NOT_THING);
+    }
+
+    private static boolean isSecond(boolean hasBonusNumber, Rank rank) {
+        return !rank.equals(SECOND) || hasBonusNumber;
     }
 
     public static List<Rank> toReverseList() {
