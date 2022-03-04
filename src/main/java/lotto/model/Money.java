@@ -10,12 +10,10 @@ public class Money {
     private static final int PRICE_LOTTO = 1000;
 
     private final int amount;
-    private int purchasedAmount;
 
     private Money(int amount) {
         validate(amount);
         this.amount = amount;
-        this.purchasedAmount = 0;
     }
 
     private void validate(int amount) {
@@ -47,23 +45,7 @@ public class Money {
         return this.amount / PRICE_LOTTO;
     }
 
-    public void payLotto(int count) {
-        this.purchasedAmount += (PRICE_LOTTO * count);
-    }
-
-    public void payLotto() {
-        payLotto(1);
-    }
-
-    public boolean isLottoAvailable(int count) {
-        return (this.amount - this.purchasedAmount) >= (PRICE_LOTTO * count);
-    }
-
-    public boolean isLottoAvailable() {
-        return isLottoAvailable(1);
-    }
-
     public double rate(long numerator) {
-        return numerator / (double)this.amount;
+        return numerator / (double) this.amount;
     }
 }
