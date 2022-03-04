@@ -68,26 +68,16 @@ public class LottoController {
 	}
 
 	private List<LottoNumber> makeWinningNumber() {
-		try {
-			String input = inputView.inputWinningNumbers();
-			InputValidateUtils.inputBlank(input, WINNING_NUMBER_BLANK_ERROR_MESSAGE);
-			List<String> numbers = splitWinningNumber(input);
-			return makeInputWinningNumbersToWinningLottoNumbers(numbers);
-		} catch (IllegalArgumentException e) {
-			outputView.printErrorMessage(e.getMessage());
-			return makeWinningNumber();
-		}
+		String input = inputView.inputWinningNumbers();
+		InputValidateUtils.inputBlank(input, WINNING_NUMBER_BLANK_ERROR_MESSAGE);
+		List<String> numbers = splitWinningNumber(input);
+		return makeInputWinningNumbersToWinningLottoNumbers(numbers);
 	}
 
 	private LottoNumber makeBonusBall() {
-		try {
-			String input = inputView.inputBonusBall();
-			InputValidateUtils.inputBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
-			return LottoNumber.parseLottoNumber(input);
-		} catch (IllegalArgumentException e) {
-			outputView.printErrorMessage(e.getMessage());
-			return makeBonusBall();
-		}
+		String input = inputView.inputBonusBall();
+		InputValidateUtils.inputBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
+		return LottoNumber.parseLottoNumber(input);
 	}
 
 	private List<String> splitWinningNumber(String input) {
