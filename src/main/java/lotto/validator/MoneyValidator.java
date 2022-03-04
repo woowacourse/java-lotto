@@ -12,7 +12,7 @@ public class MoneyValidator {
     }
 
     private static void checkPositive(long input) {
-        if (input < 0) {
+        if (input <= 0) {
             throw new MoneyException(MoneyException.MONEY_ONLY_POSITIVE_NUMBER_ERROR_MESSAGE);
         }
     }
