@@ -6,24 +6,18 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResults;
-import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.utils.LottoGenerateStrategy;
 
 public class LottoController {
 
-    private final LottoGame lottoGame;
-
-    public LottoController(int money) {
-        lottoGame = new LottoGame(new Money(money));
-    }
-
-    public List<Lotto> purchase(List<List<Integer>> manualNumbers, LottoGenerateStrategy lottoGenerateStrategy) {
+    public List<Lotto> purchase(LottoGame lottoGame, List<List<Integer>> manualNumbers,
+                                LottoGenerateStrategy lottoGenerateStrategy) {
         lottoGame.purchase(manualNumbers, lottoGenerateStrategy);
         return lottoGame.getLottos();
     }
 
-    public LottoResults requestLottoResults(List<Integer> winningNumbers, int bonusNumber) {
+    public LottoResults requestLottoResults(LottoGame lottoGame, List<Integer> winningNumbers, int bonusNumber) {
         WinningLotto winningLotto = requestWinningNumbers(winningNumbers, bonusNumber);
         return lottoGame.confirmWinnings(winningLotto);
     }
