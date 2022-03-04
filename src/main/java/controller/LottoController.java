@@ -4,13 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import model.bonusball.BonusBall;
 import model.lotto.LottoCount;
 import model.lotto.Lottos;
 import model.lottonumber.LottoNumber;
 import model.result.Rank;
 import model.result.RateOfReturn;
-import model.winningnumber.LottoWinningNumber;
+import model.winningnumber.WinningLottoNumber;
 import utils.InputValidateUtils;
 import view.InputView;
 import view.OutputView;
@@ -26,15 +25,13 @@ public class LottoController {
 	private final OutputView outputView = new OutputView();
 
 	private Lottos lottos;
-	private LottoWinningNumber lottoWinningNumber;
-	private BonusBall bonusBall;
+	private WinningLottoNumber winningLottoNumber;
 	private RateOfReturn rateOfReturn;
 
 	public void playGame() {
 		lottos = makeLottos();
 		printLottos();
-		lottoWinningNumber = storeWinningNumber();
-		bonusBall = storeBonusBall();
+		winningLottoNumber = storeWinningNumber();
 		compareLottoWithWinningNumber();
 		showResult();
 	}
@@ -61,15 +58,35 @@ public class LottoController {
 	}
 
 	//WinningNumber
-	private LottoWinningNumber storeWinningNumber() {
+	private WinningLottoNumber storeWinningNumber() {
+		try {
+			return new WinningLottoNumber(makeWinningNumber(), makeBonusBall());
+		} catch (IllegalArgumentException e) {
+			outputView.printErrorMessage(e.getMessage());
+			return storeWinningNumber();
+		}
+	}
+
+	private List<LottoNumber> makeWinningNumber() {
 		try {
 			String input = inputView.inputWinningNumbers();
 			InputValidateUtils.inputBlank(input, WINNING_NUMBER_BLANK_ERROR_MESSAGE);
 			List<String> numbers = splitWinningNumber(input);
-			return new LottoWinningNumber(makeInputWinningNumbersToLottoNumbers(numbers));
+			return makeInputWinningNumbersToWinningLottoNumbers(numbers);
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
-			return storeWinningNumber();
+			return makeWinningNumber();
+		}
+	}
+
+	private LottoNumber makeBonusBall() {
+		try {
+			String input = inputView.inputBonusBall();
+			InputValidateUtils.inputBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
+			return LottoNumber.parseLottoNumber(input);
+		} catch (IllegalArgumentException e) {
+			outputView.printErrorMessage(e.getMessage());
+			return makeBonusBall();
 		}
 	}
 
@@ -79,29 +96,14 @@ public class LottoController {
 			.collect(Collectors.toList());
 	}
 
-	private List<LottoNumber> makeInputWinningNumbersToLottoNumbers(List<String> numbers) {
+	private List<LottoNumber> makeInputWinningNumbersToWinningLottoNumbers(List<String> numbers) {
 		return numbers.stream()
 			.map(number -> LottoNumber.parseLottoNumber(number))
 			.collect(Collectors.toList());
 	}
 
-	//BonusBall
-	private BonusBall storeBonusBall() {
-		try {
-			String input = inputView.inputBonusBall();
-			InputValidateUtils.inputBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
-			bonusBall = new BonusBall(LottoNumber.parseLottoNumber(input));
-			lottoWinningNumber.validateReduplicationWithBonusBall(LottoNumber.valueOf(Integer.parseInt(input)));
-			return bonusBall;
-		} catch (IllegalArgumentException e) {
-			outputView.printErrorMessage(e.getMessage());
-			return storeBonusBall();
-		}
-	}
-
 	private void compareLottoWithWinningNumber() {
-		lottos.checkWithWinningNumberAndBonus(bonusBall.getBonusBallDTO(),
-			lottoWinningNumber.getWinningNumbersDTO(), rateOfReturn);
+		lottos.checkWithWinningNumberAndBonus(winningLottoNumber.getWinningLottoNumbersDTO(), rateOfReturn);
 	}
 
 	private void showResult() {

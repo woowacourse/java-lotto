@@ -3,11 +3,10 @@ package model.lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.bonusball.BonusBallDTO;
 import model.lottonumber.LottoNumbers;
 import model.lottonumber.RandomLottoNumbersGenerationStrategy;
 import model.result.RateOfReturn;
-import model.winningnumber.LottoWinningNumberDTO;
+import model.winningnumber.WinningLottoNumberDTO;
 
 public class Lottos {
 	private List<Lotto> lottoStorage;
@@ -32,10 +31,10 @@ public class Lottos {
 		lottoStorage.forEach(lotto -> lottosDTOS.add(lotto.getLottoDTO()));
 		return lottosDTOS;
 	}
-
-	public void checkWithWinningNumberAndBonus(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumbersDTO,
+	
+	public void checkWithWinningNumberAndBonus(WinningLottoNumberDTO winningLottoNumbersDTO,
 		RateOfReturn rateOfReturn) {
 		lottoStorage.forEach(
-			lotto -> rateOfReturn.increaseCountOfRank(lotto.match(bonusBallDTO, winningNumbersDTO)));
+			lotto -> rateOfReturn.increaseCountOfRank(lotto.match(winningLottoNumbersDTO)));
 	}
 }

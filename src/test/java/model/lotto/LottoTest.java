@@ -9,12 +9,11 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import model.bonusball.BonusBallDTO;
 import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbers;
 import model.lottonumber.LottoNumbersGenerationStrategy;
 import model.result.Rank;
-import model.winningnumber.LottoWinningNumberDTO;
+import model.winningnumber.WinningLottoNumberDTO;
 
 public class LottoTest {
 
@@ -30,11 +29,10 @@ public class LottoTest {
 			}
 		};
 		Lotto lotto = new Lotto(LottoNumbers.from(lottoNumbersGenerationStrategy));
-		LottoWinningNumberDTO lottoWinningNumberDTO = new LottoWinningNumberDTO(Arrays.asList(1, 2, 3, 4, 5, 7).stream()
+		WinningLottoNumberDTO winningLottoNumberDTO = new WinningLottoNumberDTO(Arrays.asList(1, 2, 3, 4, 5, 7).stream()
 			.map(number -> LottoNumber.valueOf(number))
-			.collect(Collectors.toList()));
-		BonusBallDTO bonusBallDTO = new BonusBallDTO(LottoNumber.valueOf(8));
-		assertThat(lotto.match(bonusBallDTO, lottoWinningNumberDTO)).isEqualTo(Rank.THIRD);
+			.collect(Collectors.toList()), LottoNumber.valueOf(8));
+		assertThat(lotto.match(winningLottoNumberDTO)).isEqualTo(Rank.THIRD);
 	}
 
 	@Test
@@ -49,10 +47,9 @@ public class LottoTest {
 			}
 		};
 		Lotto lotto = new Lotto(LottoNumbers.from(lottoNumbersGenerationStrategy));
-		LottoWinningNumberDTO lottoWinningNumberDTO = new LottoWinningNumberDTO(Arrays.asList(1, 2, 3, 4, 5, 7).stream()
+		WinningLottoNumberDTO winningLottoNumberDTO = new WinningLottoNumberDTO(Arrays.asList(1, 2, 3, 4, 5, 7).stream()
 			.map(number -> LottoNumber.valueOf(number))
-			.collect(Collectors.toList()));
-		BonusBallDTO bonusBallDTO = new BonusBallDTO(LottoNumber.valueOf(6));
-		assertThat(lotto.match(bonusBallDTO, lottoWinningNumberDTO)).isEqualTo(Rank.SECOND);
+			.collect(Collectors.toList()), LottoNumber.valueOf(6));
+		assertThat(lotto.match(winningLottoNumberDTO)).isEqualTo(Rank.SECOND);
 	}
 }
