@@ -1,8 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -33,7 +33,7 @@ public class Lotto {
                 .count();
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
-        return Set.copyOf(lottoNumbers);
+    public List<LottoNumber> toList() {
+        return new ArrayList<>(lottoNumbers);
     }
 }

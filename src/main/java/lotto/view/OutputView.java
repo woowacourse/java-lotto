@@ -37,7 +37,7 @@ public class OutputView {
     }
 
     private static String getLottoInfos(final Lotto lotto) {
-        return lotto.getLottoNumbers().stream()
+        return lotto.toList().stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(OUTPUT_LOTTO_INFO_DELIMITER));
     }
