@@ -17,10 +17,6 @@ public class LottoNumber {
         LottoNumberLimit.checkOutOfRange(number);
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -36,5 +32,9 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    public int getNumber() {
+        return number;
     }
 }
