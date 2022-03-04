@@ -9,8 +9,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +23,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.model.LottoMoney;
 import lotto.model.LottoResult;
+import lotto.model.Rank;
 import lotto.model.Yield;
 import lotto.model.lottos.Lottos;
 import lotto.model.numbergenerator.LottoNumberGenerator;
@@ -60,19 +63,21 @@ class ResultViewTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5000:총 수익률은 0.36입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)",
-        "14000:총 수익률은 1.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)"}, delimiter = ':')
+    @CsvSource(value = {"14000:총 수익률은 0.36입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)",
+        "5000:총 수익률은 1.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)"}, delimiter = ':')
     @DisplayName("손해인 경우 수익률을 출력한다.")
-    void printMinusYieldTest(Long totalWinningMoney, String expectedMessage) throws
+    void printMinusYieldTest(long rawlottoMoney, String expectedMessage) throws
         NoSuchMethodException,
         InvocationTargetException,
         InstantiationException,
         IllegalAccessException {
-        LottoMoney lottoMoney = new LottoMoney(14000, 0);
+        LottoMoney lottoMoney = new LottoMoney(rawlottoMoney, 0);
+        Map<Rank, Long> result = new EnumMap<>(Rank.class);
+        result.put(Rank.FIFTH, 1L);
 
-        Constructor<Yield> yieldConstructor = Yield.class.getDeclaredConstructor(LottoMoney.class, long.class);
+        Constructor<Yield> yieldConstructor = Yield.class.getDeclaredConstructor(LottoMoney.class, Map.class);
         yieldConstructor.setAccessible(true);
-        Yield yield = yieldConstructor.newInstance(lottoMoney, totalWinningMoney);
+        Yield yield = yieldConstructor.newInstance(lottoMoney, result);
 
         ResultView.printYield(yield);
 

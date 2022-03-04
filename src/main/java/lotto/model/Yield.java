@@ -14,6 +14,7 @@ public class Yield {
     private float calculateYield(LottoMoney lottoMoney, Map<Rank, Long> result) {
         return getTotalWinningMoney(result) / (float)lottoMoney.getLottoMoney();
     }
+
     long getTotalWinningMoney(Map<Rank, Long> result) {
         return result.entrySet().stream()
             .map(entry -> entry.getKey().getMoney() * entry.getValue())

@@ -10,7 +10,7 @@ import lotto.model.numbergenerator.ShuffleGenerator;
 
 public class LottoController {
     public void runGame() {
-        int lottoMoney = insertMoney();
+        long lottoMoney = insertMoney();
         int numberOfManualLottos = inputNumberOfManualLottos();
         LottoGame lottoGame = new LottoGame(lottoMoney, numberOfManualLottos, new ShuffleGenerator());
 

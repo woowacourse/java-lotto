@@ -10,9 +10,9 @@ import java.util.stream.IntStream;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int insertMoney() {
+    public static long insertMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        int lottoMoney = inputInteger();
+        long lottoMoney = inputLong();
         printEmptyLine();
         return lottoMoney;
     }
@@ -51,6 +51,12 @@ public class InputView {
 
     private static int inputInteger() {
         int result = scanner.nextInt();
+        scanner.nextLine();
+        return result;
+    }
+
+    private static long inputLong() {
+        long result = scanner.nextLong();
         scanner.nextLine();
         return result;
     }
