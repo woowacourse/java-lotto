@@ -20,7 +20,19 @@ public class Lottos {
         return lottos.size();
     }
 
+    public List<Rank> matchRanks(LottoWinningNumbers winningLotto) {
+        List<Rank> ranks = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            int matchCount = winningLotto.matchCount(lotto);
+            boolean hasBonusNumber = lotto.contains(winningLotto.getBonusNumber());
+            Rank rank = Rank.matchRank(matchCount, hasBonusNumber);
+            ranks.add(rank);
+        }
+        return ranks;
+    }
+
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
+
 }

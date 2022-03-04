@@ -1,7 +1,7 @@
 package lotto.dto;
 
 import java.util.EnumMap;
-import lotto.domain.Lotto;
+import java.util.List;
 import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
@@ -16,13 +16,11 @@ public class Result {
 
     private EnumMap<Rank, Integer> calculateMatchRanks(final LottoWinningNumbers winningLotto, final Lottos lottos) {
         EnumMap<Rank, Integer> result = initResult();
-        for (Lotto lotto : lottos.getLottos()) {
-            int matchCount = winningLotto.matchCount(lotto);
-            boolean hasBonusNumber = lotto.contains(winningLotto.getBonusNumber());
-            Rank rank = Rank.matchRank(matchCount, hasBonusNumber);
+        List<Rank> ranks = lottos.matchRanks(winningLotto);
+        for (Rank rank : ranks) {
             result.put(rank, result.get(rank) + 1);
         }
-        return new EnumMap<>(result);
+        return result;
     }
 
     private EnumMap<Rank, Integer> initResult() {
