@@ -10,7 +10,7 @@ public class ManualGenerator implements LottoNumberGenerator {
 
     public ManualGenerator(List<List<Integer>> manualLottos) {
         List<List<Integer>> result = new ArrayList<>(manualLottos);
-        for (List<Integer> manualLotto : new ArrayList<>(manualLottos)) {
+        for (List<Integer> manualLotto : result) {
             Collections.sort(manualLotto);
         }
         this.manualLottos = result.iterator();

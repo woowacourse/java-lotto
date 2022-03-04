@@ -3,7 +3,6 @@ package lotto.model;
 import static java.util.stream.Collectors.*;
 import static lotto.ValidationUtils.*;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,7 @@ public class LottoResult {
     private final Map<Rank, Long> result;
 
     public LottoResult(Lottos manualLottos, Lottos autoLottos, List<Integer> integers, int bonusNumber) {
-        List<Integer> winningNumbers = new ArrayList<>(integers);
+        List<Integer> winningNumbers = List.copyOf(integers);
         validateEmptyCollection(winningNumbers);
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);
         this.result = generateLottoResult(manualLottos, autoLottos, new Lotto(winningNumbers),

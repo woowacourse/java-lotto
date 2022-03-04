@@ -1,12 +1,11 @@
 package lotto.model;
 
+import static java.util.stream.Collectors.*;
 import static lotto.ValidationUtils.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
@@ -16,7 +15,7 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> integers) {
-        List<Integer> lottoNumbers = new ArrayList<>(integers);
+        List<Integer> lottoNumbers = List.copyOf(integers);
         validateEmptyCollection(lottoNumbers);
         validateNumberOfLottoNumbers(lottoNumbers);
         validateDuplicationLottoNumbers(lottoNumbers);
@@ -37,9 +36,9 @@ public class Lotto {
     }
 
     private List<LottoNumber> convertIntegersToLottoNumbers(List<Integer> integers) {
-        return integers.stream()
+        return List.copyOf(integers.stream()
             .map(LottoNumber::new)
-            .collect(Collectors.toUnmodifiableList());
+            .collect(toList()));
     }
 
     Rank match(Lotto winningNumbers, LottoNumber bonusNumber) {
@@ -57,8 +56,8 @@ public class Lotto {
     }
 
     public List<Integer> toIntegers() {
-        return lottoNumbers.stream()
+        return List.copyOf(lottoNumbers.stream()
             .map(LottoNumber::getNumber)
-            .collect(Collectors.toUnmodifiableList());
+            .collect(toList()));
     }
 }

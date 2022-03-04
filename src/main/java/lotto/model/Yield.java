@@ -8,7 +8,7 @@ public class Yield {
     private final float yield;
 
     Yield(LottoMoney lottoMoney, Map<Rank, Long> result) {
-        this.yield = calculateYield(lottoMoney, result);
+        this.yield = calculateYield(lottoMoney, Map.copyOf(result));
     }
 
     private float calculateYield(LottoMoney lottoMoney, Map<Rank, Long> result) {

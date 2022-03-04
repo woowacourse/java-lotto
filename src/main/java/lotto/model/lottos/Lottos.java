@@ -1,9 +1,9 @@
 package lotto.model.lottos;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import lotto.model.Lotto;
@@ -13,23 +13,23 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(LottoNumberGenerator lottoNumberGenerator, int count) {
-        this.lottos = new ArrayList<>(generateLottos(lottoNumberGenerator, count));
+        this.lottos = generateLottos(lottoNumberGenerator, count);
     }
 
     public List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int count) {
-        return IntStream.range(0, count)
+        return List.copyOf(IntStream.range(0, count)
             .mapToObj(i -> lottoNumberGenerator.generate())
             .map(Lotto::new)
-            .collect(Collectors.toUnmodifiableList());
+            .collect(toList()));
     }
 
     public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+        return List.copyOf(lottos);
     }
 
-    public List<Lotto> getTotalLottos(Lottos autoLottos) {
-        List<Lotto> copiedLottos = new ArrayList<>(this.lottos);
-        copiedLottos.addAll(autoLottos.getLottos());
-        return List.copyOf(copiedLottos);
+    public List<Lotto> getTotalLottos(Lottos otherLottos) {
+        List<Lotto> thisLottos = new ArrayList<>(this.lottos);
+        thisLottos.addAll(otherLottos.getLottos());
+        return List.copyOf(thisLottos);
     }
 }
