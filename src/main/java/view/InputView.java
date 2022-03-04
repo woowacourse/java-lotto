@@ -6,6 +6,7 @@ import static java.lang.System.lineSeparator;
 
 public class InputView {
 
+    private static final String LOTTO_NUMBER_DELIMITER = ", |,";
     private static final String INPUT_PRICE = "구입금액을 입력해 주세요.";
     private static final String INPUT_WINNING_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
@@ -32,9 +33,9 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String inputWinningLottoNumbers() {
+    public static String[] inputWinningLottoNumbers() {
         System.out.println(lineSeparator() + INPUT_WINNING_LOTTO_NUMBERS);
-        return scanner.nextLine();
+        return splitNumbers(scanner.nextLine());
     }
 
     public static String inputBonus() {
@@ -47,13 +48,17 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String[] inputManualLottoNumbers(final int numOfManualLotto) {
+    public static String[][] inputManualLottoNumbers(final int numOfManualLotto) {
         System.out.println(lineSeparator() + INPUT_MANUAL_LOTTO_NUMBERS);
-        String[] inputLottoNumbers = new String[numOfManualLotto];
+        String[][] inputLottoNumbers = new String[numOfManualLotto][6];
         for (int i = 0; i < numOfManualLotto; i++) {
-            inputLottoNumbers[i] = scanner.nextLine();
+            inputLottoNumbers[i] = splitNumbers(scanner.nextLine());
         }
         return inputLottoNumbers;
+    }
+
+    private static String[] splitNumbers(final String inputNumbers) {
+        return inputNumbers.split(LOTTO_NUMBER_DELIMITER);
     }
 
 }

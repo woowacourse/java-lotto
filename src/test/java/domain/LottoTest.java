@@ -25,7 +25,7 @@ public class LottoTest {
     void lotto_calculateRightFifthRank() {
         Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        String numbers = "1, 2, 3, 10, 11, 12";
+        String[] numbers = {"1", "2", "3", "10", "11", "12"};
         String bonus = "45";
         WinningNumbers winningLotto = new WinningNumbers(numbers, bonus);
 
@@ -38,7 +38,7 @@ public class LottoTest {
     void lotto_calculateRightFourthRank() {
         Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 6, 8)));
 
-        String numbers = "1, 2, 3, 4, 5, 12";
+        String[] numbers = {"1", "2", "3", "4", "5", "12"};
         String bonus = "6";
         WinningNumbers winningLotto = new WinningNumbers(numbers, bonus);
 
@@ -51,7 +51,7 @@ public class LottoTest {
     void lotto_calculateRightSecondRank() {
         Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        String numbers = "1, 2, 3, 4, 5, 12";
+        String[] numbers = {"1", "2", "3", "4", "5", "12"};
         String bonus = "6";
         WinningNumbers winningLotto = new WinningNumbers(numbers, bonus);
 

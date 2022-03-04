@@ -8,14 +8,12 @@ import java.util.stream.Collectors;
 public class ManualLottoGenerator implements LottoGenerator {
 
     private static final int LOTTO_SIZE = 6;
-    private static final String LOTTO_NUMBER_DELIMITER = ", |,";
     private static final String ERROR_DUPLICATE_NUMBER = "로또 번호는 중복되지 않은 6자리 숫자여야 합니다.";
-    private static final String ERROR_NUM_OF_BALLS = "로또 번호는 6개의 번호를 입력해줘야 합니다.";
     private static final String ERROR_BALL_NON_INTEGER = "로또 번호는 숫자만 입력해줘야 합니다.";
 
-    private final String inputNumber;
+    private final String[] inputNumber;
 
-    public ManualLottoGenerator(final String inputNumber) {
+    public ManualLottoGenerator(final String[] inputNumber) {
         this.inputNumber = inputNumber;
     }
 
@@ -23,20 +21,19 @@ public class ManualLottoGenerator implements LottoGenerator {
     public Set<Integer> generateNumbers() {
         Set<Integer> lottoNumbers = validateNumbers(inputNumber);
         checkRightSize(lottoNumbers);
-
         return lottoNumbers;
     }
 
-    private static Set<Integer> validateNumbers(final String inputNumbers) {
-        final List<String> splitNumbers = Arrays.asList(inputNumbers.split(LOTTO_NUMBER_DELIMITER));
-        checkNumOfBalls(splitNumbers);
+    private static Set<Integer> validateNumbers(final String[] inputNumbers) {
+        final List<String> numbers = Arrays.asList(inputNumbers);
 
-        return checkNonIntegers(splitNumbers);
+
+        return checkNonIntegers(numbers);
     }
 
-    private static void checkNumOfBalls(List<String> numbers) {
+    private static void checkRightSize(Set<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(ERROR_NUM_OF_BALLS);
+            throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
         }
     }
 
@@ -51,12 +48,6 @@ public class ManualLottoGenerator implements LottoGenerator {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_BALL_NON_INTEGER);
-        }
-    }
-
-    private void checkRightSize(Set<Integer> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
         }
     }
 
