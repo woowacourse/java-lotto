@@ -7,7 +7,6 @@ import lotto.domain.analysis.Analysis;
 import lotto.domain.money.Money;
 import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.TicketManager;
-import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
 import lotto.domain.winning.WinningTicket;
 import lotto.dto.AnalysisDto;
@@ -41,16 +40,15 @@ public class LottoApplication {
     private TicketManager purchaseTickets(final Money money) {
         final int totalTicketCount = money.getQuotient();
         final int manualTicketCount = lottoView.requestManualTicketCount(totalTicketCount);
-        final Tickets manualTickets = requestManualTickets(manualTicketCount);
+        final List<Ticket> manualTickets = requestManualTickets(manualTicketCount);
         return TicketManager.generateTickets(totalTicketCount, manualTickets, new RandomTicketGenerator());
     }
 
-    private Tickets requestManualTickets(final int manualTicketCount) {
+    private List<Ticket> requestManualTickets(final int manualTicketCount) {
         final List<TicketDto> manualTicketDtos = lottoView.requestManualTicketDtos(manualTicketCount);
-        final List<Ticket> manualTickets = manualTicketDtos.stream()
+        return manualTicketDtos.stream()
                 .map(TicketDto::toTicket)
                 .collect(Collectors.toUnmodifiableList());
-        return Tickets.generateTickets(manualTickets);
     }
 
     private void announceTickets(final TicketManager ticketManager) {

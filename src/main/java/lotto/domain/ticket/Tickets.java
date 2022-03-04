@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import lotto.domain.ticket.generator.TicketGenerator;
 import lotto.domain.winning.WinningTicket;
 import lotto.utils.Rank;
 
@@ -18,15 +17,6 @@ public class Tickets {
     }
 
     public static Tickets generateTickets(final List<Ticket> tickets) {
-        return new Tickets(tickets);
-    }
-
-    public static Tickets generateTickets(final int ticketCount, final TicketGenerator ticketGenerator) {
-        final List<Ticket> tickets = new ArrayList<>();
-        for (int i = 0; i < ticketCount; i++) {
-            final Ticket ticket = ticketGenerator.generateTicket();
-            tickets.add(ticket);
-        }
         return new Tickets(tickets);
     }
 

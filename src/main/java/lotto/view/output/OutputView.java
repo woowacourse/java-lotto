@@ -27,15 +27,15 @@ public class OutputView {
     }
 
     public void printTicketCount(final TicketManagerDto ticketManagerDto) {
-        final int manualTicketCount = ticketManagerDto.getPreparedTicketDtos().size();
-        final int randomTicketCount = ticketManagerDto.getGeneratedTicketDtos().size();
+        final int manualTicketCount = ticketManagerDto.getManualTickets().size();
+        final int randomTicketCount = ticketManagerDto.getAutomaticTickets().size();
         final String message = String.format(TICKET_COUNT_FORMAT.getMessage(), manualTicketCount, randomTicketCount);
         printMessage(message);
     }
 
     public void printAllTickets(final TicketManagerDto ticketManagerDto) {
-        printTickets(ticketManagerDto.getPreparedTicketDtos());
-        printTickets(ticketManagerDto.getGeneratedTicketDtos());
+        printTickets(ticketManagerDto.getManualTickets());
+        printTickets(ticketManagerDto.getAutomaticTickets());
     }
 
     private void printTickets(final List<TicketDto> ticketDtos) {

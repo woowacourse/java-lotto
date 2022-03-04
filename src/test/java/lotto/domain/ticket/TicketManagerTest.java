@@ -19,26 +19,26 @@ class TicketManagerTest {
     @DisplayName("부족한 개수만큼 로또를 추가로 생성해야 한다.")
     @ParameterizedTest(name = "[{index}] 총 로또 개수 : {2}")
     @MethodSource("lotto.domain.ticket.provider.TicketManagerTestProvider#provideForGenerateTest")
-    void generateTicketsSizeCheckTest(final List<Ticket> preparedTickets,
-                                      final List<Ticket> generatedTickets,
+    void generateTicketsSizeCheckTest(final List<Ticket> manualTickets,
+                                      final List<Ticket> automaticTickets,
                                       final int totalTicketCount) {
-        customTicketGenerator.initTickets(generatedTickets);
+        customTicketGenerator.initTickets(automaticTickets);
         final TicketManager ticketManager = TicketManager.generateTickets(
-                totalTicketCount, Tickets.generateTickets(preparedTickets), customTicketGenerator);
+                totalTicketCount, manualTickets, customTicketGenerator);
         assertThat(ticketManager.getSize()).isEqualTo(totalTicketCount);
     }
 
     @DisplayName("주어진 로또 번호와 생성된 로또 번호는 생성 당시의 값을 지니고 있어야 한다.")
     @ParameterizedTest(name = "[{index}] 총 로또 개수 : {2}")
     @MethodSource("lotto.domain.ticket.provider.TicketManagerTestProvider#provideForGenerateTest")
-    void generateTicketsValueCheckTest(final List<Ticket> preparedTickets,
-                                       final List<Ticket> generatedTickets,
+    void generateTicketsValueCheckTest(final List<Ticket> manualTickets,
+                                       final List<Ticket> automaticTickets,
                                        final int totalTicketCount) {
-        customTicketGenerator.initTickets(generatedTickets);
+        customTicketGenerator.initTickets(automaticTickets);
         final TicketManager ticketManager = TicketManager.generateTickets(
-                totalTicketCount, Tickets.generateTickets(preparedTickets), customTicketGenerator);
-        compareTickets(ticketManager.getPreparedTickets(), preparedTickets);
-        compareTickets(ticketManager.getGeneratedTickets(), generatedTickets);
+                totalTicketCount, manualTickets, customTicketGenerator);
+        compareTickets(ticketManager.getManualTickets(), manualTickets);
+        compareTickets(ticketManager.getAutomaticTickets(), automaticTickets);
     }
 
     private void compareTickets(final List<Ticket> actualTickets, final List<Ticket> expectedTickets) {
@@ -54,13 +54,13 @@ class TicketManagerTest {
     @MethodSource("lotto.domain.ticket.provider.TicketManagerTestProvider#provideForCalculateRanksTest")
     void calculateRanksTest(final List<Integer> winningNumbers,
                             final int bonusNumber,
-                            final List<Ticket> preparedTickets,
-                            final List<Ticket> generatedTickets,
+                            final List<Ticket> manualTickets,
+                            final List<Ticket> automaticTickets,
                             final List<Rank> expected) {
-        customTicketGenerator.initTickets(generatedTickets);
-        final int totalTicketCount = preparedTickets.size() + generatedTickets.size();
+        customTicketGenerator.initTickets(automaticTickets);
+        final int totalTicketCount = manualTickets.size() + automaticTickets.size();
         final TicketManager ticketManager = TicketManager.generateTickets(
-                totalTicketCount, Tickets.generateTickets(preparedTickets), customTicketGenerator);
+                totalTicketCount, manualTickets, customTicketGenerator);
         final WinningTicket winningTicket = new WinningTicket(winningNumbers, bonusNumber);
 
         final List<Rank> actual = ticketManager.calculateRanks(winningTicket);

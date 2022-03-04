@@ -8,12 +8,12 @@ import lotto.domain.ticket.TicketManager;
 
 public class TicketManagerDto {
 
-    private final List<TicketDto> preparedTicketDtos;
-    private final List<TicketDto> generatedTicketDtos;
+    private final List<TicketDto> manualTickets;
+    private final List<TicketDto> automaticTickets;
 
-    public TicketManagerDto(final List<Ticket> preparedTickets, final List<Ticket> generatedTickets) {
-        this.preparedTicketDtos = convertTicketsToDto(preparedTickets);
-        this.generatedTicketDtos = convertTicketsToDto(generatedTickets);
+    public TicketManagerDto(final List<Ticket> manualTickets, final List<Ticket> automaticTickets) {
+        this.manualTickets = convertTicketsToDto(manualTickets);
+        this.automaticTickets = convertTicketsToDto(automaticTickets);
     }
 
     private List<TicketDto> convertTicketsToDto(final List<Ticket> tickets) {
@@ -23,15 +23,15 @@ public class TicketManagerDto {
     }
 
     public static TicketManagerDto toDto(final TicketManager ticketManager) {
-        return new TicketManagerDto(ticketManager.getPreparedTickets(), ticketManager.getGeneratedTickets());
+        return new TicketManagerDto(ticketManager.getManualTickets(), ticketManager.getAutomaticTickets());
     }
 
-    public List<TicketDto> getPreparedTicketDtos() {
-        return preparedTicketDtos;
+    public List<TicketDto> getManualTickets() {
+        return manualTickets;
     }
 
-    public List<TicketDto> getGeneratedTicketDtos() {
-        return generatedTicketDtos;
+    public List<TicketDto> getAutomaticTickets() {
+        return automaticTickets;
     }
 
 }

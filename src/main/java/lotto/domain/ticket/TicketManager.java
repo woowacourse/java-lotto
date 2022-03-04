@@ -9,45 +9,59 @@ import lotto.utils.Rank;
 
 public class TicketManager {
 
-    private final Tickets preparedTickets;
-    private final Tickets generatedTickets;
+    private final Tickets manualTickets;
+    private final Tickets automaticTickets;
 
-    private TicketManager(final Tickets preparedTickets, final Tickets generatedTickets) {
-        this.preparedTickets = preparedTickets;
-        this.generatedTickets = generatedTickets;
+    private TicketManager(final Tickets manualTickets, final Tickets automaticTickets) {
+        this.manualTickets = manualTickets;
+        this.automaticTickets = automaticTickets;
     }
 
     public static TicketManager generateTickets(final int totalTicketCount,
-                                                final Tickets preparedTickets,
+                                                final List<Ticket> preparedTickets,
                                                 final TicketGenerator ticketGenerator) {
-        final int restTicketCount = totalTicketCount - preparedTickets.getSize();
-        final Tickets generatedTickets = Tickets.generateTickets(restTicketCount, ticketGenerator);
-        return new TicketManager(preparedTickets, generatedTickets);
+        final int restTicketCount = totalTicketCount - preparedTickets.size();
+        final Tickets manualTickets = generateManualTickets(preparedTickets);
+        final Tickets automaticTickets = generateAutomaticTickets(restTicketCount, ticketGenerator);
+        return new TicketManager(manualTickets, automaticTickets);
+    }
+
+    private static Tickets generateManualTickets(final List<Ticket> manualTickets) {
+        return Tickets.generateTickets(manualTickets);
+    }
+
+    private static Tickets generateAutomaticTickets(final int ticketCount, final TicketGenerator ticketGenerator) {
+        final List<Ticket> tickets = new ArrayList<>();
+        for (int i = 0; i < ticketCount; i++) {
+            final Ticket ticket = ticketGenerator.generateTicket();
+            tickets.add(ticket);
+        }
+        return Tickets.generateTickets(tickets);
     }
 
     public List<Rank> calculateRanks(final WinningTicket winningTicket) {
-        final List<Rank> preparedTicketRanks = preparedTickets.calculateRanks(winningTicket);
-        final List<Rank> generatedTicketRanks = generatedTickets.calculateRanks(winningTicket);
-        return concatRanks(preparedTicketRanks, generatedTicketRanks);
+        final List<Rank> manualTicketRanks = manualTickets.calculateRanks(winningTicket);
+        final List<Rank> automaticTicketRanks = automaticTickets.calculateRanks(winningTicket);
+        return concatRanks(manualTicketRanks, automaticTicketRanks);
     }
 
-    private List<Rank> concatRanks(final List<Rank> preparedTicketRanks, final List<Rank> generatedTicketRanks) {
+    private List<Rank> concatRanks(final List<Rank> manualTicketRanks, final List<Rank> automaticTicketRanks) {
         final List<Rank> ranks = new ArrayList<>();
-        ranks.addAll(preparedTicketRanks);
-        ranks.addAll(generatedTicketRanks);
+        ranks.addAll(manualTicketRanks);
+        ranks.addAll(automaticTicketRanks);
         return ranks;
     }
 
     public int getSize() {
-        return preparedTickets.getSize() + generatedTickets.getSize();
+        return manualTickets.getSize() + automaticTickets.getSize();
     }
 
-    public List<Ticket> getPreparedTickets() {
-        return preparedTickets.getTickets();
+    public List<Ticket> getManualTickets() {
+        return manualTickets.getTickets();
     }
 
-    public List<Ticket> getGeneratedTickets() {
-        return generatedTickets.getTickets();
+    public List<Ticket> getAutomaticTickets() {
+        return automaticTickets.getTickets();
     }
 
 }
