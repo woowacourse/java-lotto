@@ -30,7 +30,7 @@ public class LottoController {
 	private final OutputView outputView = new OutputView();
 
 	private Money insertedMoney;
-	private LottoCount automaticlottoCount;
+	private LottoCount automaticLottoCount;
 	private LottoCount passiveLottoCount;
 	private Lottos lottos;
 	private WinningLottoNumber winningLottoNumber;
@@ -38,7 +38,7 @@ public class LottoController {
 
 	public void playGame() {
 		insertedMoney = insertMoney();
-		automaticlottoCount = new LottoCount(insertedMoney.makeMoneyToCount());
+		automaticLottoCount = new LottoCount(insertedMoney.makeMoneyToCount());
 		rateOfReturn = new RateOfReturn();
 		passiveLottoCount = inputPassiveLottoCount();
 		lottos = makeLottos();
@@ -64,7 +64,7 @@ public class LottoController {
 		try {
 			String count = inputView.inputPassiveLottoCount();
 			InputValidateUtils.inputBlankAndNumber(count, COUNT_BLANK_ERROR_MESSAGE, COUNT_NUMBER_ERROR_MESSAGE);
-			automaticlottoCount.useCountForPassive(Integer.parseInt(count));
+			automaticLottoCount.useCountForPassive(Integer.parseInt(count));
 			return new LottoCount(Integer.parseInt(count));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
@@ -73,7 +73,7 @@ public class LottoController {
 	}
 
 	private Lottos makeLottos() {
-		Lottos lottos = new Lottos(automaticlottoCount);
+		Lottos lottos = new Lottos(automaticLottoCount);
 		lottos.add(makePassiveLottos());
 		return lottos;
 	}
@@ -100,7 +100,7 @@ public class LottoController {
 	}
 
 	private void printLottos() {
-		outputView.printLottos(passiveLottoCount.getCount(), automaticlottoCount.getCount(), lottos.getLottosDTO());
+		outputView.printLottos(passiveLottoCount.getCount(), automaticLottoCount.getCount(), lottos.getLottosDTO());
 	}
 
 	private WinningLottoNumber storeWinningNumber() {
