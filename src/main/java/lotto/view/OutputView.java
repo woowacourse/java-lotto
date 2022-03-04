@@ -9,10 +9,13 @@ import lotto.dto.StatisticsResult;
 
 public class OutputView {
 
-    private static final String NEW_LINE = System.getProperty("line.separator");
+    public static final String NEW_LINE = System.getProperty("line.separator");
+
+    public void outputLottoCount(final int manualCount, final int randomCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다." + NEW_LINE, manualCount, randomCount);
+    }
 
     public void outputTickets(final List<LottoTicketResponse> responses) {
-        System.out.printf("%d개를 구매했습니다." + NEW_LINE, responses.size());
         for (LottoTicketResponse response : responses) {
             outputTicket(response);
         }
@@ -49,6 +52,7 @@ public class OutputView {
     }
 
     public void outputEarningRate(final double earningRate) {
+        System.out.println(earningRate);
         System.out.printf("총 수익률은 %.2f입니다.", earningRate);
     }
 }

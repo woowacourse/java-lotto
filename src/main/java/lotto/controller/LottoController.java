@@ -5,6 +5,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.ManualCount;
 import lotto.domain.Money;
 import lotto.domain.RandomNumberGenerator;
 import lotto.domain.WinningTicket;
@@ -25,7 +26,9 @@ public class LottoController {
 
     public void run() {
         Money money = new Money(inputView.inputMoney());
-        LottoTickets lottoTickets = createLottoTickets(money);
+        ManualCount manualCount = ManualCount.of(money, inputView.inputManualLottoCount());
+
+        LottoTickets lottoTickets = createLottoTickets(money, manualCount);
         WinningTicket winningTicket = getWinningTicket();
 
         StatisticsResult result = getStatisticsResult(money, lottoTickets, winningTicket);
@@ -33,18 +36,22 @@ public class LottoController {
         outputView.outputEarningRate(result.getEarningRate());
     }
 
-    private LottoTickets createLottoTickets(Money money) {
-        LottoTickets lottoTickets = LottoTickets.buy(new RandomNumberGenerator(LottoNumber.MIN,
-            LottoNumber.MAX), money);
-        List<LottoTicketResponse> lottoTicketsResponse = LottoTicketResponse.from(
-            lottoTickets);
+    private LottoTickets createLottoTickets(Money money, ManualCount manualCount) {
+        List<String> manualLottoTickets = inputView.inputManualLottoTickets(manualCount.getCount());
+        LottoTickets lottoTickets = LottoTickets.buy(
+            new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX),
+            money.changes(manualCount.getCount())
+        );
+        lottoTickets.generatorManualTickets(manualLottoTickets);
+        List<LottoTicketResponse> lottoTicketsResponse = LottoTicketResponse.from(lottoTickets);
+        outputView.outputLottoCount(manualCount.getCount(), money.count());
         outputView.outputTickets(lottoTicketsResponse);
         return lottoTickets;
     }
 
     private WinningTicket getWinningTicket() {
         return new WinningTicket(
-            LottoTicket.createWinningTicket(inputView.inputWinningNumber()),
+            LottoTicket.createTicket(inputView.inputWinningNumber()),
             new LottoNumber(inputView.inputBonusBall()));
     }
 
