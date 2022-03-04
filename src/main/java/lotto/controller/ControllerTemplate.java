@@ -15,16 +15,7 @@ public class ControllerTemplate {
             return supplier.get();
         } catch (LottoException e) {
             exceptionHandler.accept(e);
-            return supplier.get();
-        }
-    }
-
-    public static void runnableTemplate(Runnable runnable, Consumer<Exception> exceptionHandler) {
-        try {
-            runnable.run();
-        } catch (LottoException e) {
-            exceptionHandler.accept(e);
-            runnable.run();
+            return supplierTemplate(supplier, exceptionHandler);
         }
     }
 

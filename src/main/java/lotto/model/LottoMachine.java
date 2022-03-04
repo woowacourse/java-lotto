@@ -8,22 +8,17 @@ import java.util.stream.IntStream;
 public class LottoMachine {
 
     private final LottoGenerator lottoGenerator;
-    private Money money;
-    private Lottoes manualLottoes;
+    private final Money money;
+    private final Lottoes manualLottoes;
 
-    public LottoMachine(LottoGenerator lottoGenerator) {
+    public LottoMachine(LottoGenerator lottoGenerator, Money money, Lottoes manualLottoes) {
         this.lottoGenerator = lottoGenerator;
-        this.money = Money.ZERO;
-        this.manualLottoes = Lottoes.empty();
+        this.money = remainMoney(money, manualLottoes);
+        this.manualLottoes = manualLottoes;
     }
 
-    public void inputMoney(Money money) {
-        this.money = this.money.plus(money);
-    }
-
-    public void registerManualLotto(Lottoes lottoes) {
-        money = money.subtract(lottoes.getPrice());
-        manualLottoes = manualLottoes.combine(lottoes);
+    private Money remainMoney(Money money, Lottoes lottoes) {
+        return money.subtract(lottoes.getPrice());
     }
 
     public Lottoes issueLotto() {

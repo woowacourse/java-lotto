@@ -2,8 +2,8 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import lotto.model.exception.NotEnoughMoneyException;
@@ -22,8 +22,8 @@ public class LottoMachineTest {
             Lotto.create(List.of(21, 22, 23, 24, 25, 26))
         };
 
-        LottoMachine lottoMachine = new LottoMachine(() -> lottoes[count.getAndIncrement()]);
-        lottoMachine.inputMoney(new Money(3000));
+        LottoMachine lottoMachine = new LottoMachine(() -> lottoes[count.getAndIncrement()],
+            new Money(3000), new Lottoes(Collections.emptyList()));
         Lottoes actual = lottoMachine.issueLotto();
         assertThat(count.get()).isEqualTo(3);
         assertThat(actual).hasSize(3);
@@ -37,9 +37,8 @@ public class LottoMachineTest {
         Lotto manualLotto1 = Lotto.create(List.of(11, 12, 13, 14, 15, 16));
         Lotto manualLotto2 = Lotto.create(List.of(21, 22, 23, 24, 25, 26));
 
-        LottoMachine lottoMachine = new LottoMachine(() -> autoLotto);
-        lottoMachine.inputMoney(new Money(3000));
-        lottoMachine.registerManualLotto(new Lottoes(List.of(manualLotto1, manualLotto2)));
+        LottoMachine lottoMachine = new LottoMachine(() -> autoLotto, new Money(3000),
+            new Lottoes(List.of(manualLotto1, manualLotto2)));
         Lottoes actual = lottoMachine.issueLotto();
 
         assertThat(actual).hasSize(3);
@@ -53,9 +52,8 @@ public class LottoMachineTest {
         Lotto manualLotto1 = Lotto.create(List.of(11, 12, 13, 14, 15, 16));
         Lotto manualLotto2 = Lotto.create(List.of(21, 22, 23, 24, 25, 26));
 
-        LottoMachine lottoMachine = new LottoMachine(() -> autoLotto);
-        lottoMachine.inputMoney(new Money(3000));
-        lottoMachine.registerManualLotto(new Lottoes(List.of(manualLotto1, manualLotto2)));
+        LottoMachine lottoMachine = new LottoMachine(() -> autoLotto, new Money(3000),
+            new Lottoes(List.of(manualLotto1, manualLotto2)));
 
         assertThat(lottoMachine.getManualLottoesSize()).isEqualTo(2);
         assertThat(lottoMachine.getAutoLottoesSize()).isEqualTo(1);
@@ -68,10 +66,8 @@ public class LottoMachineTest {
         Lotto manualLotto1 = Lotto.create(List.of(11, 12, 13, 14, 15, 16));
         Lotto manualLotto2 = Lotto.create(List.of(21, 22, 23, 24, 25, 26));
 
-        LottoMachine lottoMachine = new LottoMachine(() -> autoLotto);
-        lottoMachine.inputMoney(new Money(1000));
-
-        assertThatThrownBy(() -> lottoMachine.registerManualLotto(new Lottoes(List.of(manualLotto1, manualLotto2))))
+        assertThatThrownBy(() -> new LottoMachine(() -> autoLotto, new Money(1000),
+            new Lottoes(List.of(manualLotto1, manualLotto2))))
             .isInstanceOf(NotEnoughMoneyException.class);
     }
 }
