@@ -119,7 +119,7 @@ public class TerminationOperator {
 		assertThat(anyMatch_aa).isEqualTo(true);
 	}
 
-	@DisplayName("allMatch를 사용하면 하나라도 조건을 만족하는 요소가 있는지 확인한다")
+	@DisplayName("allMatch를 사용하면 모든 요소가 조건을 만족하는지 확인한다")
 	@Test
 	void allMatch_test() {
 
@@ -130,7 +130,7 @@ public class TerminationOperator {
 		assertThat(allMatch_aa).isEqualTo(false);
 	}
 
-	@DisplayName("noneMatch를 사용하면 하나라도 조건을 만족하는 요소가 있는지 확인한다")
+	@DisplayName("noneMatch를 사용하면 조건을 만족하는 요소가 하나도 없는지 확인한다")
 	@Test
 	void noneMatch_test() {
 
