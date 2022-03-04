@@ -5,10 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,31 +17,31 @@ public class LottoTest {
 
 	@BeforeEach
 	void setUp() {
-		lottos = new ArrayList<>(List.of(LottoNumber.of(1),
-			LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5)));
+		lottos = new ArrayList<>();
+
+		for (int i = 1; i < 6; i++) {
+			lottos.add(LottoNumber.of(i));
+		}
 	}
 
 	@DisplayName("개수 성공")
 	@Test
 	void lotto_size_success() {
 		lottos.add(LottoNumber.of(6));
-		assertThatCode(() -> new Lotto(lottos))
-			.doesNotThrowAnyException();
+		assertThatCode(() -> new Lotto(lottos)).doesNotThrowAnyException();
 	}
 
 	@DisplayName("개수 실패")
 	@Test
 	void lotto_size_fail() {
-		assertThatThrownBy(() -> new Lotto(lottos))
-			.isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> new Lotto(lottos)).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@DisplayName("중복 금지")
 	@Test
 	void duplicate_fail() {
 		lottos.add(LottoNumber.of(5));
-		assertThatThrownBy(() -> new Lotto(lottos))
-			.isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> new Lotto(lottos)).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@DisplayName("매칭 숫자 계산")

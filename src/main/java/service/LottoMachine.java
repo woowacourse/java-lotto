@@ -32,6 +32,6 @@ public class LottoMachine {
 		Collections.shuffle(LOTTO_BUCKET);
 		return new Lotto(LOTTO_BUCKET.stream()
 			.limit(Lotto.LOTTO_SIZE)
-			.collect(Collectors.toUnmodifiableSet()));
+			.collect(Collectors.toUnmodifiableList()));
 	}
 }

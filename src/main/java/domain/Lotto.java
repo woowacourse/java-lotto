@@ -1,13 +1,15 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Lotto {
 	public static final int LOTTO_SIZE = 6;
 
-	private final TreeSet<LottoNumber> lotto;
+	private final Set<LottoNumber> lotto;
 
 	public Lotto(List<LottoNumber> lottoNumbers) {
 		checkLottoSize(lottoNumbers);
@@ -15,22 +17,11 @@ public class Lotto {
 		checkDuplicatedLottoNumber(lotto);
 	}
 
-	public Lotto(Set<LottoNumber> lottoNumbers) {
-		checkDuplicatedLottoNumber(lottoNumbers);
-		this.lotto = new TreeSet<>(lottoNumbers);
-	}
-
 	public static Lotto of(String[] lottoNumbers) {
-		return new Lotto(toLotto(lottoNumbers));
-	}
-
-	private static Set<LottoNumber> toLotto(String[] lottoNumbers) {
-		Set<LottoNumber> lotto = new TreeSet<>();
-		for (String number : lottoNumbers) {
-			int lottoNumber = Integer.parseInt(number.trim());
-			lotto.add(LottoNumber.of(lottoNumber));
-		}
-		return lotto;
+		return new Lotto(Arrays.stream(lottoNumbers)
+			.mapToInt(Integer::parseInt)
+			.mapToObj(LottoNumber::of)
+			.collect(Collectors.toList()));
 	}
 
 	private void checkLottoSize(List<LottoNumber> lottoNumbers) {
@@ -47,7 +38,7 @@ public class Lotto {
 
 	public int calculateMatchCount(Lotto targetLotto) {
 		return (int)lotto.stream()
-			.filter(lottoNumber -> targetLotto.contains(lottoNumber))
+			.filter(targetLotto::contains)
 			.count();
 	}
 
