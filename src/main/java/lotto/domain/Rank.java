@@ -54,7 +54,7 @@ public enum Rank {
     public static Reward calculateReward(List<Rank> ranks) {
         Reward reward = new Reward(0L);
         for (Rank rank : ranks) {
-            reward = reward.plus(rank.reward);
+            reward.plus(rank.reward);
         }
         return reward;
     }

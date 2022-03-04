@@ -9,7 +9,7 @@ public class Reward {
     private static final int MINIMUM_REWARD = 0;
     private static final int DECIMAL_PLACE = 2;
 
-    private final long value;
+    private long value;
 
     public Reward(long value) {
         validatePositive(value);
@@ -22,8 +22,8 @@ public class Reward {
         }
     }
 
-    public Reward plus(Reward reward) {
-        return new Reward(this.value + reward.value);
+    public void plus(Reward reward) {
+        this.value += reward.value;
     }
 
     public BigDecimal divide(LottoMoney money) {

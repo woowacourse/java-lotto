@@ -29,8 +29,9 @@ public class RewardTest {
     void plusReward() {
         Reward reward1 = new Reward(2_000_000_000L);
         Reward reward2 = new Reward(2_000_000_000L);
+        reward1.plus(reward2);
 
-        assertThat(reward1.plus(reward2)).isEqualTo(new Reward(4_000_000_000L));
+        assertThat(reward1).isEqualTo(new Reward(4_000_000_000L));
     }
 
     @Test
