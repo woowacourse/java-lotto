@@ -12,7 +12,7 @@ public class RateOfReturnTest {
 	@EnumSource(Rank.class)
 	@DisplayName("결과가 저장이 잘 되는지 테스트")
 	void saveResultTest(Rank rank) {
-		RateOfReturn rateOfReturn = new RateOfReturn(1000);
+		RateOfReturn rateOfReturn = new RateOfReturn();
 		rateOfReturn.increaseCountOfRank(rank);
 		assertThat(rateOfReturn.getCountOfResult(rank)).isEqualTo(1);
 	}
@@ -20,10 +20,10 @@ public class RateOfReturnTest {
 	@Test
 	@DisplayName("수익률이 정상적으로 출력되는지 테스트")
 	void getRateOfReturn() {
-		RateOfReturn rateOfReturn = new RateOfReturn(1000);
+		RateOfReturn rateOfReturn = new RateOfReturn();
 		rateOfReturn.increaseCountOfRank(Rank.FIFTH);
 		rateOfReturn.increaseCountOfRank(Rank.SECOND);
 		assertThat(rateOfReturn.getRateOfReturn()).isEqualTo(
-			(Rank.FIFTH.getValue() + Rank.SECOND.getValue()) / 1000);
+			(Rank.FIFTH.getValue() + Rank.SECOND.getValue()));
 	}
 }

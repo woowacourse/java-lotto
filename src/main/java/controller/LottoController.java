@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import model.Money;
 import model.lotto.LottoCount;
 import model.lotto.Lottos;
 import model.lottonumber.LottoNumber;
@@ -15,8 +16,8 @@ import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-	private static final String LOTTO_COUNT_BLANK_ERROR_MESSAGE = "[Error]: 금액을 입력해주세요.";
-	private static final String LOTTO_COUNT_NUMBER_ERROR_MESSAGE = "[Error]: 금액은 숫자를 입력해주세요.";
+	private static final String MONEY_BLANK_ERROR_MESSAGE = "[Error]: 금액을 입력해주세요.";
+	private static final String MONEY_NUMBER_ERROR_MESSAGE = "[Error]: 금액은 숫자를 입력해주세요.";
 	private static final String WINNING_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 당첨 번호를 입력하세요.";
 	private static final String BONUS_BALL_BLANK_ERROR_MESSAGE = "[Error]: 보너스 볼을 입력해주세요.";
 	private static final String DELIMITER_COMMA = ",";
@@ -24,11 +25,16 @@ public class LottoController {
 	private final InputView inputView = new InputView();
 	private final OutputView outputView = new OutputView();
 
+	private Money insertedMoney;
+	private LottoCount lottoCount;
 	private Lottos lottos;
 	private WinningLottoNumber winningLottoNumber;
 	private RateOfReturn rateOfReturn;
 
 	public void playGame() {
+		insertedMoney = insertMoney();
+		lottoCount = new LottoCount(insertedMoney.makeMoneyToCount());
+		rateOfReturn = new RateOfReturn();
 		lottos = makeLottos();
 		printLottos();
 		winningLottoNumber = storeWinningNumber();
@@ -36,21 +42,20 @@ public class LottoController {
 		showResult();
 	}
 
-	private Lottos makeLottos() {
+	private Money insertMoney() {
 		try {
 			String money = inputView.inputMoney();
-			InputValidateUtils.inputBlankAndNumber(money, LOTTO_COUNT_BLANK_ERROR_MESSAGE,
-				LOTTO_COUNT_NUMBER_ERROR_MESSAGE);
-			storeMoneyInRateOfReturn(Integer.parseInt(money));
-			return new Lottos(new LottoCount(Integer.parseInt(money)));
-		} catch (Exception e) {
+			InputValidateUtils.inputBlankAndNumber(money, MONEY_BLANK_ERROR_MESSAGE,
+				MONEY_NUMBER_ERROR_MESSAGE);
+			return new Money(Integer.parseInt(money));
+		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
-			return makeLottos();
+			return insertMoney();
 		}
 	}
 
-	private void storeMoneyInRateOfReturn(int money) {
-		rateOfReturn = new RateOfReturn(money);
+	private Lottos makeLottos() {
+		return new Lottos(lottoCount);
 	}
 
 	private void printLottos() {
@@ -103,7 +108,7 @@ public class LottoController {
 			.forEach(statistics -> outputView.printResult(statistics.getMatchNumber(), statistics.getValue(),
 				rateOfReturn.getCountOfResult(statistics),
 				Rank.SECOND.getValue()));
-		outputView.printRateOfReturn(rateOfReturn.getRateOfReturn());
+		outputView.printRateOfReturn(rateOfReturn.getRateOfReturn() / insertedMoney.getMoney());
 	}
 
 }

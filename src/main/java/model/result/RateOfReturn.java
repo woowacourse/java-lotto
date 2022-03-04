@@ -5,12 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RateOfReturn {
-	private final int money;
 	private long sumMoneyOfReturns;
 	private Map<Rank, Integer> countOfResult;
 
-	public RateOfReturn(int money) {
-		this.money = money;
+	public RateOfReturn() {
 		this.sumMoneyOfReturns = 0;
 		countOfResult = new HashMap<>();
 		for (final Rank rank : Rank.values()) {
@@ -26,12 +24,12 @@ public class RateOfReturn {
 		return countOfResult.getOrDefault(rank, 0);
 	}
 
-	public double getRateOfReturn() {
+	public long getRateOfReturn() {
 		Arrays.stream(Rank.values())
 			.filter(rank -> rank.checkNumberToReward())
 			.forEach(
 				statistics -> sumMoneyOfReturns += (countOfResult.getOrDefault(statistics, 0) * statistics.getValue()));
 
-		return (sumMoneyOfReturns / (double)money);
+		return sumMoneyOfReturns;
 	}
 }
