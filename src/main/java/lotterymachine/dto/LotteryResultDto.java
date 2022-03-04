@@ -23,21 +23,23 @@ public class LotteryResultDto implements Comparable<LotteryResultDto> {
     }
 
     public static List<LotteryResultDto> createLotteryResults(Map<WinningLottery, Count> lotteryTickets) {
-        List<LotteryResultDto> winningLotteries = new ArrayList<>();
+        List<LotteryResultDto> lotteryResults = new ArrayList<>();
         for (Entry<WinningLottery, Count> ticket : lotteryTickets.entrySet()) {
-            addWinningLottery(winningLotteries, ticket);
+            addWinningLottery(lotteryResults, ticket);
         }
-        return winningLotteries;
+        return lotteryResults;
     }
 
-    private static void addWinningLottery(List<LotteryResultDto> winningLotteries, Entry<WinningLottery, Count> ticket) {
-        WinningLottery winningLottery = ticket.getKey();
-        if (!winningLottery.equals(WinningLottery.INVALID)) {
-            Count countOfMatchingNumbers = Count.from(winningLottery.getNumber());
-            Money winningPrice = Money.from(winningLottery.getPrice());
-            boolean bonus = winningLottery.isBonus();
-            winningLotteries.add(new LotteryResultDto(countOfMatchingNumbers, winningPrice, ticket.getValue(), bonus));
+    private static void addWinningLottery(List<LotteryResultDto> lotteryResults, Entry<WinningLottery, Count> ticket) {
+        WinningLottery winningType = ticket.getKey();
+        if (winningType.equals(WinningLottery.INVALID)) {
+            return;
         }
+        Count matchingBalls = Count.from(winningType.getNumber());
+        Money winningPrice = Money.from(winningType.getPrice());
+        boolean bonus = winningType.isBonus();
+        Count matchingLotteryTickets = ticket.getValue();
+        lotteryResults.add(new LotteryResultDto(matchingBalls, winningPrice, matchingLotteryTickets, bonus));
     }
 
     public int getCountOfMatchingNumbers() {
