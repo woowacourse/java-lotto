@@ -19,8 +19,8 @@ class PrizeResultTest {
         lottos.add(new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7))));
         lottos.add(new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 6, 8))));
 
-        String[] numbers = {"1", "2", "3", "4", "5", "12"};
-        String bonus = "6";
+        int[] numbers = {1, 2, 3, 4, 5, 12};
+        int bonus = 6;
         WinningNumbers winningNumber = new WinningNumbers(numbers, bonus);
 
         prizeResult = new PrizeResult(lottos, winningNumber);

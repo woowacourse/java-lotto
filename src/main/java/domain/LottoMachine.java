@@ -6,33 +6,16 @@ import domain.generator.ManualLottoGenerator;
 
 public class LottoMachine {
 
-    private static final String ERROR_COUNT_NON_INTEGER = "구매 개수는 정수만 가능합니다.";
     private static final String ERROR_COUNT_NEGATIVE_INTEGER = "구매 개수는 양의 정수만 가능합니다.";
     private static final String ERROR_LESS_MONEY = "원하시는 로또 개수를 구매하기에는 돈이 부족합니다.";
     public static final int LOTTO_PRICE = 1000;
 
-
-    public int checkAvailableBuy(Money money, final String numOfLotto) {
-        int numOfManualLotto = validateNumOfLotto(numOfLotto);
-        if (numOfManualLotto > money.numOfAvailablePurchase()) {
+    public int checkAvailableBuy(Money money, final int numOfLotto) {
+        checkNegativeInteger(numOfLotto);
+        if (numOfLotto > money.numOfAvailablePurchase()) {
             throw new IllegalArgumentException(ERROR_LESS_MONEY);
         }
-        return numOfManualLotto;
-    }
-
-    private int validateNumOfLotto(final String numOfLotto) {
-        int numOfManualLotto = checkNonInteger(numOfLotto);
-        checkNegativeInteger(numOfManualLotto);
-
-        return numOfManualLotto;
-    }
-
-    private int checkNonInteger(final String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_COUNT_NON_INTEGER);
-        }
+        return numOfLotto;
     }
 
     private void checkNegativeInteger(int number) {
@@ -41,9 +24,9 @@ public class LottoMachine {
         }
     }
 
-    public Lottos purchaseManualLottos(Money money, final int numOfLotto, final String[][] inputNumbers) {
+    public Lottos purchaseManualLottos(Money money, final int numOfLotto, final int[][] inputNumbers) {
         final Lottos lottos = new Lottos();
-        for (String[] inputNumber : inputNumbers) {
+        for (int[] inputNumber : inputNumbers) {
             purchase(lottos, new ManualLottoGenerator(inputNumber));
         }
         money.purchaseLotto(numOfLotto);

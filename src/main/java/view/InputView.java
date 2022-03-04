@@ -1,5 +1,6 @@
 package view;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static java.lang.System.lineSeparator;
@@ -12,6 +13,9 @@ public class InputView {
     private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String INPUT_NUM_OF_MANUAL_LOTTO = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String ERROR_BALL_NON_INTEGER = "로또 번호는 숫자만 입력해줘야 합니다.";
+    private static final String ERROR_MONEY_NON_INTEGER = "가격은 정수만 가능합니다.";
+    private static final String ERROR_COUNT_NON_INTEGER = "구매 개수는 정수만 가능합니다.";
 
     private final static Scanner scanner = new Scanner(System.in);
 
@@ -28,37 +32,48 @@ public class InputView {
         }
     }
 
-    public static String inputMoney() {
+    public static int inputMoney() {
         System.out.println(INPUT_MONEY);
-        return scanner.nextLine();
+        return validateAndChangeToInt(scanner.nextLine(), ERROR_MONEY_NON_INTEGER);
     }
 
-    public static String[] inputWinningLottoNumbers() {
+    public static int[] inputWinningLottoNumbers() {
         System.out.println(lineSeparator() + INPUT_WINNING_LOTTO_NUMBERS);
-        return splitNumbers(scanner.nextLine());
+        return splitAndChangeToInt(scanner.nextLine(), ERROR_BALL_NON_INTEGER);
     }
 
-    public static String inputBonus() {
+    public static int inputBonus() {
         System.out.println(INPUT_BONUS_NUMBER);
-        return scanner.nextLine();
+        return validateAndChangeToInt(scanner.nextLine(), ERROR_BALL_NON_INTEGER);
     }
 
-    public static String inputNumOfManualLotto() {
+    public static int inputNumOfManualLotto() {
         System.out.println(lineSeparator() + INPUT_NUM_OF_MANUAL_LOTTO);
-        return scanner.nextLine();
+        return validateAndChangeToInt(scanner.nextLine(), ERROR_COUNT_NON_INTEGER);
     }
 
-    public static String[][] inputManualLottoNumbers(final int numOfManualLotto) {
+    public static int[][] inputManualLottoNumbers(final int numOfManualLotto) {
         System.out.println(lineSeparator() + INPUT_MANUAL_LOTTO_NUMBERS);
-        String[][] inputLottoNumbers = new String[numOfManualLotto][6];
+        int[][] inputLottoNumbers = new int[numOfManualLotto][6];
         for (int i = 0; i < numOfManualLotto; i++) {
-            inputLottoNumbers[i] = splitNumbers(scanner.nextLine());
+            inputLottoNumbers[i] = splitAndChangeToInt(scanner.nextLine(), ERROR_BALL_NON_INTEGER);
         }
         return inputLottoNumbers;
     }
 
-    private static String[] splitNumbers(final String inputNumbers) {
-        return inputNumbers.split(LOTTO_NUMBER_DELIMITER);
+    private static int[] splitAndChangeToInt(final String inputNumbers, final String message) {
+        String[] splitNumbers = inputNumbers.split(LOTTO_NUMBER_DELIMITER);
+        return Arrays.asList(splitNumbers).stream()
+                .mapToInt(number -> validateAndChangeToInt(number, message))
+                .toArray();
+    }
+
+    private static int validateAndChangeToInt(final String number, final String message) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(message);
+        }
     }
 
 }
