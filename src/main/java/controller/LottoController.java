@@ -18,6 +18,8 @@ import view.OutputView;
 public class LottoController {
 	private static final String MONEY_BLANK_ERROR_MESSAGE = "[Error]: 금액을 입력해주세요.";
 	private static final String MONEY_NUMBER_ERROR_MESSAGE = "[Error]: 금액은 숫자를 입력해주세요.";
+	private static final String COUNT_BLANK_ERROR_MESSAGE = "[Error]: 갯수을 입력해주세요.";
+	private static final String COUNT_NUMBER_ERROR_MESSAGE = "[Error]: 갯수는 숫자를 입력해주세요.";
 	private static final String WINNING_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 당첨 번호를 입력하세요.";
 	private static final String BONUS_BALL_BLANK_ERROR_MESSAGE = "[Error]: 보너스 볼을 입력해주세요.";
 	private static final String DELIMITER_COMMA = ",";
@@ -26,15 +28,17 @@ public class LottoController {
 	private final OutputView outputView = new OutputView();
 
 	private Money insertedMoney;
-	private LottoCount lottoCount;
+	private LottoCount automaticlottoCount;
+	private LottoCount passiveLottoCount;
 	private Lottos lottos;
 	private WinningLottoNumber winningLottoNumber;
 	private RateOfReturn rateOfReturn;
 
 	public void playGame() {
 		insertedMoney = insertMoney();
-		lottoCount = new LottoCount(insertedMoney.makeMoneyToCount());
+		automaticlottoCount = new LottoCount(insertedMoney.makeMoneyToCount());
 		rateOfReturn = new RateOfReturn();
+		passiveLottoCount = inputPassiveLottoCount();
 		lottos = makeLottos();
 		printLottos();
 		winningLottoNumber = storeWinningNumber();
@@ -54,8 +58,20 @@ public class LottoController {
 		}
 	}
 
+	private LottoCount inputPassiveLottoCount() {
+		try {
+			String count = inputView.inputPassiveLottoCount();
+			InputValidateUtils.inputBlankAndNumber(count, COUNT_BLANK_ERROR_MESSAGE, COUNT_NUMBER_ERROR_MESSAGE);
+			automaticlottoCount.useCountForPassive(Integer.parseInt(count));
+			return new LottoCount(Integer.parseInt(count));
+		} catch (IllegalArgumentException e) {
+			outputView.printErrorMessage(e.getMessage());
+			return inputPassiveLottoCount();
+		}
+	}
+
 	private Lottos makeLottos() {
-		return new Lottos(lottoCount);
+		return new Lottos(automaticlottoCount);
 	}
 
 	private void printLottos() {
