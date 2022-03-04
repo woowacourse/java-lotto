@@ -1,10 +1,10 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.IntendedLottoNumberGenerator;
 import domain.Lotto;
 import domain.LottoNumber;
+import domain.LottoNumberGenerator;
 import domain.Lottos;
-import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -13,11 +13,12 @@ import org.junit.jupiter.api.Test;
 public class LottosTest {
 
     private Lottos makeLottos() {
-        IntendedLottoNumberGenerator lottoNumberGenerator = new IntendedLottoNumberGenerator();
-        lottoNumberGenerator.addLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        lottoNumberGenerator.addLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        lottoNumberGenerator.addLottoNumbers(Arrays.asList(11, 12, 13, 14, 15, 16));
-        return Lottos.buyLottos(lottoNumberGenerator, 2);
+        List<List<Integer>> pickLottoNumbersBucket = List.of(
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(11, 12, 13, 14, 15, 16)
+        );
+        return Lottos.buyLottos(LottoNumberGenerator.build(3000, pickLottoNumbersBucket), 3);
     }
 
     @Test
@@ -28,7 +29,7 @@ public class LottosTest {
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
 
-        assertThat(lottos.compareAllLottosWithWinningLotto(winningLotto).size()).isEqualTo(2);
+        assertThat(lottos.compareAllLottosWithWinningLotto(winningLotto).size()).isEqualTo(3);
     }
 
     @Test
@@ -37,6 +38,6 @@ public class LottosTest {
         Lottos lottos = makeLottos();
         LottoNumber bonusNumber = new LottoNumber(3);
 
-        assertThat(lottos.compareAllLottosWithBonusNumber(bonusNumber).size()).isEqualTo(2);
+        assertThat(lottos.compareAllLottosWithBonusNumber(bonusNumber).size()).isEqualTo(3);
     }
 }

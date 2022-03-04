@@ -9,15 +9,18 @@ import util.Validator;
 
 public class Lotto {
 
+    private final boolean isPicked;
     private final Set<LottoNumber> numbers;
 
     public Lotto(LottoNumberGenerator lottoNumberGenerator) {
+        this.isPicked = lottoNumberGenerator.isPicked();
         this.numbers = generateNumber(lottoNumberGenerator);
     }
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
         Validator.checkArgumentIsNull(lottoNumbers);
         this.numbers = lottoNumbers;
+        this.isPicked = true;
     }
 
     public static Lotto generateLotto(LottoNumberGenerator lottoNumberGenerator) {
@@ -42,8 +45,12 @@ public class Lotto {
         return unboxNumbers().contains(number.getNumber());
     }
 
+    public boolean isPickedLotto() {
+        return isPicked;
+    }
+
     private Set<LottoNumber> generateNumber(LottoNumberGenerator lottoNumberGenerator) {
-        List<Integer> pickedLottoNumbers = lottoNumberGenerator.generateLottoNumbers();
+        List<Integer> pickedLottoNumbers = lottoNumberGenerator.generateNumbers();
 
         return sortAndConvertToLottoNumberSet(pickedLottoNumbers);
     }

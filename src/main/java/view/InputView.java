@@ -1,9 +1,12 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import util.StringUtil;
 
 public class InputView {
@@ -11,8 +14,12 @@ public class InputView {
     private static final String QUESTION_MONEY_INPUT = "구매금액을 입력해 주세요.";
     private static final String QUESTION_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String QUESTION_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    private static final String QUESTION_PICK_LOTTO = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String QUESTION_NUMBER_OF_PICK_LOTTO = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String NUMBER_DELIMITER = ", ";
     private static final Scanner scanner = new Scanner(System.in);
+    private static final int NONE = 0;
+    private static final int START_INDEX = 0;
 
     public static int askMoneyInput() {
         System.out.println(QUESTION_MONEY_INPUT);
@@ -22,8 +29,7 @@ public class InputView {
 
     public static List<Integer> askWinningNumbers() {
         System.out.println(QUESTION_WINNING_NUMBERS);
-        List<String> numbers = Arrays.asList(scanner.nextLine().split(NUMBER_DELIMITER));
-        return validateAndCovertNumbersToInteger(numbers);
+        return validateAndCovertNumbersToInteger(askLottoNumberCandidate());
     }
 
     public static int askBonusNumber() {
@@ -35,5 +41,31 @@ public class InputView {
         return numbers.stream()
                 .map(StringUtil::convertToInteger)
                 .collect(Collectors.toList());
+    }
+
+    public static List<List<Integer>> askPickLotto() {
+        int numberOfPickLotto = StringUtil.convertToInteger(askNumberOfPickLotto());
+        if (numberOfPickLotto == NONE) {
+            return Collections.emptyList();
+        }
+        System.out.println(QUESTION_NUMBER_OF_PICK_LOTTO);
+        return makePickLotto(numberOfPickLotto);
+    }
+
+    private static List<List<Integer>> makePickLotto(int numberOfPickLotto) {
+        List<List<Integer>> pickLottos = new ArrayList<>();
+        for (int i = 0; i<numberOfPickLotto; ++i) {
+            pickLottos.add(validateAndCovertNumbersToInteger(askLottoNumberCandidate()));
+        }
+        return pickLottos;
+    }
+
+    private static List<String> askLottoNumberCandidate() {
+        return Arrays.asList(scanner.nextLine().split(NUMBER_DELIMITER));
+    }
+
+    private static String askNumberOfPickLotto() {
+        System.out.println(QUESTION_PICK_LOTTO);
+        return scanner.nextLine();
     }
 }

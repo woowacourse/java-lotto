@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 
 public class OutputView {
 
-    private static final String MESSAGE_LOTTOS_NUMBER = "%d개를 구매했습니다.\n";
+    private static final String MESSAGE_LOTTOS_NUMBER = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String MESSAGE_WINNING_STATISTIC = "당첨 통계";
     private static final String SEPERATOR_LINE = "------------";
     private static final List<String> MESSAGE_WINNING_RANKING = Arrays.asList("6개 일치 (2000000000원)- %d개\n",
@@ -30,9 +30,13 @@ public class OutputView {
     private static final int BENEFIT_INDEX = 1;
     private static final int LOSS_INDEX = 0;
     private static final double breakEvenPoint = 1L;
+    private static final int PICK_NUMBER_INDEX = 0;
+    private static final int QUICK_NUMBER_INDEX = 1;
 
     public static void printLottosInformations(Lottos lottos) {
-        System.out.printf(MESSAGE_LOTTOS_NUMBER, lottos.getMembers().size());
+        List<Integer> pickAndQuickPickNumbers = getPickAndQuickPickNumbers(lottos);
+        System.out.printf(MESSAGE_LOTTOS_NUMBER, pickAndQuickPickNumbers.get(PICK_NUMBER_INDEX),
+                pickAndQuickPickNumbers.get(QUICK_NUMBER_INDEX));
         for (Lotto lotto : lottos.getMembers()) {
             String str = lotto.getNumbers()
                     .stream()
@@ -41,6 +45,14 @@ public class OutputView {
                     .collect(Collectors.joining(NUMBER_DELIMITER));
             System.out.printf(LOTTO_NUMBER_FORMAT, str);
         }
+    }
+
+    private static List<Integer> getPickAndQuickPickNumbers(Lottos lottos) {
+        int pickedNum = (int) lottos.getMembers()
+                .stream()
+                .filter(Lotto::isPickedLotto)
+                .count();
+        return List.of(pickedNum, lottos.numberOfLottery() - pickedNum);
     }
 
     public static void printWinningStatistic(Map<Rewards, Integer> results) {
