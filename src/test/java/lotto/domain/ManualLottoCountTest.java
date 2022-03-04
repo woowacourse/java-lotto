@@ -14,9 +14,9 @@ class ManualLottoCountTest {
     public void correct() {
         // given
         int max = 10;
+        int tryCount = 9;
 
         // when
-        int tryCount = 9;
 
         // then
         assertDoesNotThrow(() -> new ManualLottoCount(tryCount, max));

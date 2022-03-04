@@ -27,9 +27,9 @@ public class WinningNumbersTest {
     @DisplayName("중복 문자")
     void test() {
         // given
+        LottoNumber bonusNumber = LottoNumber.of(1);
 
         // when
-        LottoNumber bonusNumber = LottoNumber.of(1);
 
         // then
         assertThatThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber))
@@ -43,12 +43,13 @@ public class WinningNumbersTest {
         // given
         LottoNumber bonusNumber = LottoNumber.of(7);
         WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusNumber);
-
-        // when
         LottoNumbers myLotto = new LottoNumbers(list);
 
+        // when
+        Ranking ranking = winningNumbers.calculateRanking(myLotto);
+
         // then
-        assertThat(winningNumbers.calculateRanking(myLotto)).isEqualTo(expect);
+        assertThat(ranking).isEqualTo(expect);
     }
 
     private static Stream<Arguments> parameterProvider() {
