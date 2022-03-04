@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class Result {
 	}
 
 	public Map<ResultStatics, Integer> getResults() {
-		return results;
+		return Collections.unmodifiableMap(results);
 	}
 
 	public float getProfitRate() {

@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -15,7 +17,7 @@ public class AnswerLotto {
 	}
 
 	public static AnswerLotto of(List<Integer> inputNumbers, int inputBonus) {
-		LottoNumbers numbers = new LottoNumbers(inputNumbers);
+		LottoNumbers numbers = new LottoNumbers(new ArrayList<>(inputNumbers));
 		LottoNumber bonusNumber = new LottoNumber(inputBonus);
 
 		if (numbers.isExist(bonusNumber)) {
@@ -26,7 +28,7 @@ public class AnswerLotto {
 	}
 
 	public Set<LottoNumber> getNumbers() {
-		return numbers.getNumbers();
+		return Collections.unmodifiableSet(numbers.getNumbers());
 	}
 
 	public LottoNumber getBonusNumber() {

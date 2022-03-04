@@ -11,9 +11,10 @@ public class LottoNumbers {
 	private final Set<LottoNumber> numbers;
 
 	public LottoNumbers(List<Integer> input) {
+		List<Integer> inputNumbers = new ArrayList<>(input);
 		Set<LottoNumber> numbers = new HashSet<>();
 
-		for (int i : input) {
+		for (int i : inputNumbers) {
 			numbers.add(new LottoNumber(i));
 		}
 

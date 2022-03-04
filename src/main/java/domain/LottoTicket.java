@@ -35,7 +35,7 @@ public class LottoTicket {
 	}
 
 	public Set<LottoNumber> getNumbers() {
-		return numbers.getNumbers();
+		return Collections.unmodifiableSet(numbers.getNumbers());
 	}
 
 	private static List<Integer> initCandidates() {

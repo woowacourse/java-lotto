@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoMachine {
@@ -30,7 +31,7 @@ public class LottoMachine {
 	}
 
 	public List<LottoTicket> getLottoTickets() {
-		return lottoTickets;
+		return Collections.unmodifiableList(lottoTickets);
 	}
 
 	private void purchaseByManual(List<List<Integer>> totalManualNumbers) {
