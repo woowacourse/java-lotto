@@ -5,7 +5,7 @@ import java.util.List;
 
 public class InputValidation {
 
-    private static final String LOTTO_NUMBER_DELIMITER = ", ";
+    private static final String LOTTO_NUMBER_DELIMITER = ",";
     private static final String ERROR_NON_INTEGER = "정수 입력만 가능합니다.";
     private static final String ERROR_BALL_NON_INTEGER = "로또 번호는 숫자만 입력해줘야 합니다.";
 
@@ -29,7 +29,7 @@ public class InputValidation {
 
     private static void checkIsInteger(final String number, final String message) {
         try {
-            Integer.parseInt(number);
+            Integer.parseInt(number.trim());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(message);
         }

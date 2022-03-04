@@ -32,7 +32,7 @@ public class InputView {
             return Integer.parseInt(InputValidation.validateIsNum(scanner.nextLine()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return inputMoney();
+            return inputManualLottosCount();
         }
     }
 
@@ -41,7 +41,7 @@ public class InputView {
             System.out.println(INPUT_WINNING_LOTTO_NUMBERS);
             List<String> inputNumbers = InputValidation.validateIsNumsListString(scanner.nextLine());
             return inputNumbers.stream()
-                    .map(number -> Integer.parseInt(number))
+                    .map(number -> Integer.parseInt(number.trim()))
                     .collect(Collectors.toList());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -57,7 +57,7 @@ public class InputView {
         try {
             List<String> inputNumbers = InputValidation.validateIsNumsListString(scanner.nextLine());
             return inputNumbers.stream()
-                    .map(number -> Integer.parseInt(number))
+                    .map(number -> Integer.parseInt(number.trim()))
                     .collect(Collectors.toList());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
