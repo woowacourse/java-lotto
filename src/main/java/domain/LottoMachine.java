@@ -4,7 +4,7 @@ import domain.generator.AutomaticLottoGenerator;
 import domain.generator.LottoGenerator;
 import domain.generator.ManualLottoGenerator;
 
-public class Store {
+public class LottoMachine {
 
     private static final String ERROR_COUNT_NON_INTEGER = "구매 개수는 정수만 가능합니다.";
     private static final String ERROR_COUNT_NEGATIVE_INTEGER = "구매 개수는 양의 정수만 가능합니다.";

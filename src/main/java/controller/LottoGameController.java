@@ -18,13 +18,13 @@ public class LottoGameController {
     }
 
     private Lottos purchaseLotto() {
-        Store store = new Store();
+        LottoMachine lottoMachine = new LottoMachine();
         final Money money = InputView.commonInputProcess(() -> new Money(InputView.inputPrice()));
         final int numOfManualLotto = InputView.commonInputProcess(
-                () -> store.checkAvailableBuy(money, InputView.inputNumOfManualLotto()));
+                () -> lottoMachine.checkAvailableBuy(money, InputView.inputNumOfManualLotto()));
         final Lottos purchasedLotto = InputView.commonInputProcess(
-                () -> store.purchaseManualLottos(money, numOfManualLotto, InputView.inputManualLottoNumbers(numOfManualLotto)));
-        store.purchaseAutomaticLottos(purchasedLotto, money);
+                () -> lottoMachine.purchaseManualLottos(money, numOfManualLotto, InputView.inputManualLottoNumbers(numOfManualLotto)));
+        lottoMachine.purchaseAutomaticLottos(purchasedLotto, money);
         OutputView.printPurchasedLotto(purchasedLotto.getLottos(), numOfManualLotto);
 
         return purchasedLotto;

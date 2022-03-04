@@ -9,14 +9,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-class StoreTest {
+class LottoMachineTest {
 
-    private Store store;
+    private LottoMachine lottoMachine;
     private Lottos lottos;
 
     @BeforeEach
     void init() {
-        store = new Store();
+        lottoMachine = new LottoMachine();
         lottos = new Lottos();
     }
 
@@ -43,7 +43,7 @@ class StoreTest {
     @CsvSource(value = {"20000, 20", "18500, 18", "1500, 1"})
     void purchaseLottos(final String inputMoney, final int expected) {
         Money money = new Money(inputMoney);
-        store.purchaseAutomaticLottos(lottos, money);
+        lottoMachine.purchaseAutomaticLottos(lottos, money);
 
         assertThat(lottos.getLottos().size()).isEqualTo(expected);
     }
