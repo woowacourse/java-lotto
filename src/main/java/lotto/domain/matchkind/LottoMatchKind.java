@@ -21,20 +21,13 @@ public enum LottoMatchKind {
     }
 
     public static LottoMatchKind from(final int matchCount, final boolean bonusNumberHit) {
-        if (bonusNumberHit) {
-            return getInstanceIncludingBonus(matchCount);
+        if (matchCount == 5 && bonusNumberHit) {
+            return FIVE_BONUS;
         }
         return Arrays.stream(values())
                 .filter(matchKind -> matchKind.matchCount == matchCount)
                 .findFirst()
                 .orElse(LOWER_THAN_THREE);
-    }
-
-    private static LottoMatchKind getInstanceIncludingBonus(final int matchCount) {
-        if (matchCount == 5) {
-            return FIVE_BONUS;
-        }
-        return from(matchCount + 1, false);
     }
 
     public long getProfit(final int countOfMatchedLottoNumbers) {

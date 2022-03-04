@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static lotto.domain.matchkind.LottoMatchKind.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -46,18 +47,18 @@ class WinningNumbersTest {
 
     private static Stream<Arguments> provideLottoNumbersAndMatchKind() {
         return Stream.of(
-                Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6"), LottoMatchKind.SIX),
-                Arguments.of(Arrays.asList("2", "3", "4", "5", "6", "45"), LottoMatchKind.FIVE_BONUS),
-                Arguments.of(Arrays.asList("2", "3", "4", "5", "6", "7"), LottoMatchKind.FIVE),
-                Arguments.of(Arrays.asList("3", "4", "5", "6", "7", "45"), LottoMatchKind.FIVE),
-                Arguments.of(Arrays.asList("3", "4", "5", "6", "7", "8"), LottoMatchKind.FOUR),
-                Arguments.of(Arrays.asList("4", "5", "6", "7", "8", "45"), LottoMatchKind.FOUR),
-                Arguments.of(Arrays.asList("4", "5", "6", "7", "8", "9"), LottoMatchKind.THREE),
-                Arguments.of(Arrays.asList("5", "6", "7", "8", "9", "45"), LottoMatchKind.THREE),
-                Arguments.of(Arrays.asList("7", "8", "9", "10", "11", "12"), LottoMatchKind.LOWER_THAN_THREE),
-                Arguments.of(Arrays.asList("8", "9", "10", "11", "12", "13"), LottoMatchKind.LOWER_THAN_THREE),
-                Arguments.of(Arrays.asList("9", "10", "11", "12", "13", "14"), LottoMatchKind.LOWER_THAN_THREE),
-                Arguments.of(Arrays.asList("10", "11", "12", "13", "14", "15"), LottoMatchKind.LOWER_THAN_THREE)
+                Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6"), SIX),
+                Arguments.of(Arrays.asList("2", "3", "4", "5", "6", "45"), FIVE_BONUS),
+                Arguments.of(Arrays.asList("2", "3", "4", "5", "6", "7"), FIVE),
+                Arguments.of(Arrays.asList("3", "4", "5", "6", "7", "45"), FOUR),
+                Arguments.of(Arrays.asList("3", "4", "5", "6", "7", "8"), FOUR),
+                Arguments.of(Arrays.asList("4", "5", "6", "7", "8", "45"), THREE),
+                Arguments.of(Arrays.asList("4", "5", "6", "7", "8", "9"), THREE),
+                Arguments.of(Arrays.asList("5", "6", "7", "8", "9", "45"), LOWER_THAN_THREE),
+                Arguments.of(Arrays.asList("7", "8", "9", "10", "11", "12"), LOWER_THAN_THREE),
+                Arguments.of(Arrays.asList("8", "9", "10", "11", "12", "13"), LOWER_THAN_THREE),
+                Arguments.of(Arrays.asList("9", "10", "11", "12", "13", "14"), LOWER_THAN_THREE),
+                Arguments.of(Arrays.asList("10", "11", "12", "13", "14", "15"), LOWER_THAN_THREE)
         );
     }
 }
