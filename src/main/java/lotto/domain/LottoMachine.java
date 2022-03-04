@@ -21,9 +21,15 @@ public class LottoMachine {
 
     private LottoMachine(final LottoMachine.Builder builder) {
         this.totalPurchaseAmount = builder.totalPurchaseAmount;
-        lottos = new Lottos(new LottoRandomGenerator().generateLottosExceptDefaultLottos(
-                this.totalPurchaseAmount.getTotalPurchaseCount(), builder.manualLottos));
-        manualPurchaseCount = new ManualPurchaseCount(builder.manualLottos.size(), totalPurchaseAmount.getTotalPurchaseCount());
+        lottos = new Lottos(generateLottos(builder.manualLottos));
+        manualPurchaseCount =
+                new ManualPurchaseCount(builder.manualLottos.size(), totalPurchaseAmount.getTotalPurchaseCount());
+    }
+
+    private List<Lotto> generateLottos(final List<Lotto> manualLottos) {
+        final LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
+        return lottoRandomGenerator.generateLottosExceptDefaultLottos(
+                this.totalPurchaseAmount.getTotalPurchaseCount(), manualLottos);
     }
 
     public static class Builder {
