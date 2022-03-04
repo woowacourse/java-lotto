@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.bonusball.BonusBallDTO;
-import model.lottonumber.RandomLottoNumbersGenerator;
+import model.lottonumber.LottoNumbers;
+import model.lottonumber.RandomLottoNumbersGenerationStrategy;
 import model.result.RateOfReturn;
 import model.winningnumber.LottoWinningNumberDTO;
 
@@ -20,7 +21,7 @@ public class Lottos {
 
 		while (lottoCount.haveRemainToMake()) {
 			lottoCount.reduceCountOfRemain();
-			lottos.add(new Lotto(RandomLottoNumbersGenerator.pickLottoNumbers()));
+			lottos.add(new Lotto(LottoNumbers.from(new RandomLottoNumbersGenerationStrategy())));
 		}
 
 		return lottos;

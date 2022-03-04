@@ -1,20 +1,20 @@
 package model.lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import model.lottonumber.LottoNumber;
+import model.lottonumber.LottoNumbers;
 
 public class LottoDTO {
-	private final List<LottoNumber> numbers;
+	private final LottoNumbers numbers;
 
-	public LottoDTO(List<LottoNumber> numbers) {
-		this.numbers = new ArrayList<>(numbers);
+	public LottoDTO(LottoNumbers numbers) {
+		this.numbers = LottoNumbers.valueOf(numbers);
 	}
 
 	public List<Integer> getNumbers() {
-		return numbers.stream()
+		return numbers.getNumbers()
+			.stream()
 			.map(number -> number.getNumber())
 			.collect(Collectors.toList());
 	}

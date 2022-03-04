@@ -5,15 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import model.bonusball.BonusBallDTO;
-import model.lottonumber.LottoNumber;
+import model.lottonumber.LottoNumbers;
 import model.result.Rank;
 import model.winningnumber.LottoWinningNumberDTO;
 
 public class Lotto {
+	private final LottoNumbers numbers;
 
-	private final List<LottoNumber> numbers;
-
-	public Lotto(List<LottoNumber> numbers) {
+	public Lotto(LottoNumbers numbers) {
 		this.numbers = numbers;
 	}
 
@@ -22,30 +21,17 @@ public class Lotto {
 	}
 
 	public Rank match(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumberDTO) {
-		long count = countMatchingWinningNumber(winningNumberDTO.getWinningNumbers());
+		long matchCount = numbers.countMatchedNumbers(winningNumberDTO.getWinningNumbers());
 
-		if (count < Rank.FIFTH.getMatchNumber()) {
+		if (matchCount < Rank.FIFTH.getMatchNumber()) {
 			return Rank.FAIL;
 		}
 
-		if (count == Rank.SECOND.getMatchNumber()) {
-			return matchWithBonus(bonusBallDTO);
+		if (matchCount == Rank.SECOND.getMatchNumber()) {
+			return numbers.validateMatchWithBonus(bonusBallDTO.getNumber());
 		}
 
-		return findRank(count);
-	}
-
-	private long countMatchingWinningNumber(List<LottoNumber> winningNumbers) {
-		return numbers.stream()
-			.filter(winningNumbers::contains)
-			.count();
-	}
-
-	private Rank matchWithBonus(BonusBallDTO bonusBallDTO) {
-		if (numbers.contains(bonusBallDTO.getNumber())) {
-			return Rank.SECOND;
-		}
-		return Rank.THIRD;
+		return findRank(matchCount);
 	}
 
 	private Rank findRank(long count) {
