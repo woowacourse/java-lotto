@@ -18,14 +18,14 @@ public class WinningNumbers {
         this.bonusNumber = LottoNumber.from(bonusNumber);
     }
 
-    private void validateDuplication(final List<Integer> lastWinningLotto, final int bonusNumber) {
-        if (lastWinningLotto.contains(bonusNumber)) {
+    private void validateDuplication(final List<Integer> winningLotto, final int bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(TARGET_BONUS_DUPLICATION_EXCEPTION_MESSAGE);
         }
     }
 
-    public WinningKind getLottoMatchResult(final Lotto numbers) {
-        final int matchedCount = numbers.getMatchCount(lastWinningLotto);
-        return WinningKind.from(matchedCount, numbers.hasSameNumberWith(bonusNumber));
+    public WinningKind getLottoMatchResult(final Lotto anotherLotto) {
+        final int matchedCount = anotherLotto.getMatchCount(lastWinningLotto);
+        return WinningKind.from(matchedCount, anotherLotto.hasSameNumberWith(bonusNumber));
     }
 }

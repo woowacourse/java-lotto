@@ -30,8 +30,8 @@ public enum WinningKind {
                 .orElse(LOWER_THAN_THREE);
     }
 
-    public long getProfit(final int countOfMatchedLottoNumbers) {
-        return winningAmount * countOfMatchedLottoNumbers;
+    public long getProfit(final int winningCount) {
+        return winningAmount * winningCount;
     }
 
     public int getMatchCount() {

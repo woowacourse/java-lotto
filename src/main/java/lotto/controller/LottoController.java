@@ -61,7 +61,7 @@ public class LottoController {
 
     public List<WinningKindDto> getWinningResult(final List<Integer> winningLotto, final int bonusNumber) {
         final WinningResult winningResult = lottoMachine.getMatchResult(winningLotto, bonusNumber);
-        final Map<WinningKind, Integer> winningNumberByKind = winningResult.getWinningNumberByKind();
+        final Map<WinningKind, Integer> winningNumberByKind = winningResult.getWinningNumberByWinningKind();
         return convertToDto(winningNumberByKind);
     }
 

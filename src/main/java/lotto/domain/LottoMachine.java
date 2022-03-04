@@ -74,8 +74,8 @@ public class LottoMachine {
         return lottos.getLottos();
     }
 
-    public WinningResult getMatchResult(final List<Integer> winningLotto, final int bonusNumber) {
-        final WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
+    public WinningResult getMatchResult(final List<Integer> winningLottoNumbers, final int bonusNumber) {
+        final WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
         final Map<WinningKind, Integer> winningNumberByMatchKind = lottos.match(winningNumbers);
         return new WinningResult(winningNumberByMatchKind, totalPurchaseAmount);
     }

@@ -74,7 +74,7 @@ class LottoMachineTest {
     @DisplayName("당첨 결과를 반환한다.")
     void getMatchResult_Test() {
         final Map<WinningKind, Integer> actual = lottoMachine.getMatchResult(winningLotto, bonusNumber)
-                .getWinningNumberByKind();
+                .getWinningNumberByWinningKind();
         assertThat(actual).containsExactly(
                 entry(LOWER_THAN_THREE, 1), entry(THREE, 1),
                 entry(FOUR, 1), entry(FIVE, 1),
