@@ -29,9 +29,11 @@ public class LottoTest {
 			}
 		};
 		Lotto lotto = new Lotto(LottoNumbers.from(lottoNumbersGenerationStrategy));
-		WinningLottoNumberDTO winningLottoNumberDTO = new WinningLottoNumberDTO(Arrays.asList(1, 2, 3, 4, 5, 7).stream()
+		List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 7).stream()
 			.map(number -> LottoNumber.valueOf(number))
-			.collect(Collectors.toList()), LottoNumber.valueOf(8));
+			.collect(Collectors.toList());
+		WinningLottoNumberDTO winningLottoNumberDTO = new WinningLottoNumberDTO(LottoNumbers.changeFrom(lottoNumbers),
+			LottoNumber.valueOf(8));
 		assertThat(lotto.match(winningLottoNumberDTO)).isEqualTo(Rank.THIRD);
 	}
 
@@ -47,9 +49,11 @@ public class LottoTest {
 			}
 		};
 		Lotto lotto = new Lotto(LottoNumbers.from(lottoNumbersGenerationStrategy));
-		WinningLottoNumberDTO winningLottoNumberDTO = new WinningLottoNumberDTO(Arrays.asList(1, 2, 3, 4, 5, 7).stream()
+		List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 7).stream()
 			.map(number -> LottoNumber.valueOf(number))
-			.collect(Collectors.toList()), LottoNumber.valueOf(6));
+			.collect(Collectors.toList());
+		WinningLottoNumberDTO winningLottoNumberDTO = new WinningLottoNumberDTO(LottoNumbers.changeFrom(lottoNumbers),
+			LottoNumber.valueOf(6));
 		assertThat(lotto.match(winningLottoNumberDTO)).isEqualTo(Rank.SECOND);
 	}
 }

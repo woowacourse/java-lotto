@@ -10,7 +10,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	private static final int LOTTO_MIN_NUM = 1;
 	private static final int LOTTO_MAX_NUM = 45;
 	public static final String OUT_OF_RANGE_ERROR_MESSAGE = "[Error]: 로또 번호는 %d~%d 숫자여야 합니다.";
-	private static final String NUMBER_SIZE_ERROR_MESSAGE = "[Error]: 로또는 %d개의 숫자여야 합니다.";
 	private static final String NUMBER_ERROR_MESSAGE = "[Error]: 로또 번호는 숫자여야 합니다.";
 
 	private final int number;
@@ -27,12 +26,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return IntStream.range(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
 			.mapToObj(number -> LottoNumber.valueOf(number))
 			.collect(Collectors.toList());
-	}
-
-	public static void validateSize(List<LottoNumber> numbers) {
-		if (numbers.size() != LOTTO_SIZE) {
-			throw new IllegalArgumentException(String.format(NUMBER_SIZE_ERROR_MESSAGE, LOTTO_SIZE));
-		}
 	}
 
 	public static LottoNumber valueOf(int number) {
