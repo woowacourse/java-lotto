@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.constant.ErrorMessage.ERROR_PURCHASE_AMOUNT_WRONG_UNIT;
+
 public class PurchaseAmount {
 
     private static final int LOTTO_PRICE = 1000;
@@ -22,7 +24,7 @@ public class PurchaseAmount {
 
     private void validateUnit(final int amount) {
         if (amount % LOTTO_PRICE != REMAIN_ZERO) {
-            throw new IllegalArgumentException("[ERROR] 구입금액은 " + LOTTO_PRICE + "원 단위여야 합니다");
+            throw new IllegalArgumentException(ERROR_PURCHASE_AMOUNT_WRONG_UNIT.message());
         }
     }
 

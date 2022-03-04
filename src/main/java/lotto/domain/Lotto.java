@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.constant.ErrorMessage.ERROR_LOTTO_DUPLICATE_OR_WRONG_SIZE;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +21,7 @@ public class Lotto {
 
     private void validateDuplicationAndSize(final Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복되지 않은 " + LOTTO_NUMBERS_SIZE + "개의 숫자여야합니다.");
+            throw new IllegalArgumentException(ERROR_LOTTO_DUPLICATE_OR_WRONG_SIZE.message());
         }
     }
 

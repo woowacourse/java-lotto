@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.constant.ErrorMessage.ERROR_LOTTO_NUMBER_WRONG_RANGE;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -16,8 +18,7 @@ public class LottoNumber {
 
     private void validateRange(final int number) {
         if (isValidRange(number)) {
-            throw new IllegalArgumentException(
-                    "[ERROR] 로또 번호는 " + LOWER_BOUND + "~" + UPPER_BOUND + " 사이의 숫자만 가능합니다");
+            throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_WRONG_RANGE.message());
         }
     }
 

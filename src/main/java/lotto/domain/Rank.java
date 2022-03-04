@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.constant.ErrorMessage.ERROR_RANK_NOT_EXIST;
+
 import java.util.Arrays;
 
 public enum Rank {
@@ -30,7 +32,7 @@ public enum Rank {
         return Arrays.stream(Rank.values())
                 .filter(r -> r.matched == size)
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 순위에 접근했습니다."));
+                .orElseThrow(() -> new IllegalArgumentException(ERROR_RANK_NOT_EXIST.message()));
     }
 
     public int getMatched() {

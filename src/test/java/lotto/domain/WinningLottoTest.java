@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static lotto.constant.ErrorMessage.ERROR_WINNING_LOTTO_DUPLICATE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -20,7 +21,7 @@ class WinningLottoTest {
 
         assertThatThrownBy(() -> new WinningLotto(winningNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 보너스 볼은 당첨 번호와 중복될 수 없습니다.");
+                .hasMessage(ERROR_WINNING_LOTTO_DUPLICATE.message());
     }
 
     @Test

@@ -5,12 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static lotto.constant.ErrorMessage.ERROR_PURCHASE_AMOUNT_WRONG_UNIT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PurchaseAmountTest {
-
-    private static final int LOTTO_PRICE = 1000;
 
     @Test
     @DisplayName("구입 금액을 생성한다")
@@ -25,7 +24,7 @@ class PurchaseAmountTest {
     void throwExceptionWhenInputLessThan1000() {
         assertThatThrownBy(() -> new PurchaseAmount(500))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 구입금액은 " + LOTTO_PRICE + "원 단위여야 합니다");
+                .hasMessage(ERROR_PURCHASE_AMOUNT_WRONG_UNIT.message());
     }
 
     @ParameterizedTest(name = "[{index}] 수동 로또가 {0}개면, 자동 로또는 {1}개")

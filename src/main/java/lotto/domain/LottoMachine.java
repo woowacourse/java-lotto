@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.constant.ErrorMessage.ERROR_LOTTO_MACHINE_NON_PURCHASABLE;
+
 import java.util.List;
 
 public class LottoMachine {
@@ -16,7 +18,7 @@ public class LottoMachine {
 
     private void validateCanPurchase(final PurchaseAmount purchaseAmount, final int count) {
         if (!purchaseAmount.canPurchase(count)) {
-            throw new IllegalArgumentException("[ERROR] 구입 금액으로 살 수 있는 수량이어야 합니다.");
+            throw new IllegalArgumentException(ERROR_LOTTO_MACHINE_NON_PURCHASABLE.message());
         }
     }
 

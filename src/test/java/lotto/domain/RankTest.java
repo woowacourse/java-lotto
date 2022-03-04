@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static lotto.constant.ErrorMessage.ERROR_RANK_NOT_EXIST;
 import static org.assertj.core.api.Assertions.*;
 
 class RankTest {
@@ -22,6 +23,6 @@ class RankTest {
     void throwExceptionNotExist() {
         assertThatThrownBy(() -> Rank.of(1, false))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 존재하지 않는 순위에 접근했습니다.");
+                .hasMessage(ERROR_RANK_NOT_EXIST.message());
     }
 }

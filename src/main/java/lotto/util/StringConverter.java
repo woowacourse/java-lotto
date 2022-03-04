@@ -1,5 +1,8 @@
 package lotto.util;
 
+import static lotto.constant.ErrorMessage.ERROR_STRING_CONVERTER_NOT_NUMBER;
+import static lotto.constant.ErrorMessage.ERROR_STRING_CONVERTER_NULL_OR_BLANK;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +38,7 @@ public class StringConverter {
 
     private static void validateNullOrBlank(final String input) {
         if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException("[ERROR] 입력값은 공백일 수 없습니다.");
+            throw new IllegalArgumentException(ERROR_STRING_CONVERTER_NULL_OR_BLANK.message());
         }
     }
 
@@ -43,7 +46,7 @@ public class StringConverter {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 입력값은 숫자여야합니다.");
+            throw new IllegalArgumentException(ERROR_STRING_CONVERTER_NOT_NUMBER.message());
         }
     }
 }
