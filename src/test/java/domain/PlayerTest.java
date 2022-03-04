@@ -58,4 +58,23 @@ class PlayerTest {
 
         assertThat(actual.size()).isEqualTo(expected);
     }
+
+
+    @Test
+    @DisplayName("Player의 수익률을 계산한다.")
+    void calculateIncomeRate() {
+        Money money = new Money(2000);
+        Player player = new Player(money);
+
+        player.purchaseManualLotto(new AutoLottoGenerator(), Arrays.asList(Arrays.asList(1,2,3,4,5,6),Arrays.asList(1,2,3,4,5,7)));
+        List<Integer> lottoNumbers = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            lottoNumbers.add(i);
+        }
+        WinningLotto winningLotto = new WinningLotto(lottoNumbers,BONUS_BALL_NUMBER);
+        List<Result> results = player.judgeAll(winningLotto);
+        double actual = player.calculateIncomeRate(results);
+        double expected = 1000000;
+        assertThat(actual).isEqualTo(expected);
+    }
 }
