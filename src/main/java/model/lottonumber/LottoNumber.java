@@ -29,12 +29,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 			.collect(Collectors.toList());
 	}
 
-	public static List<LottoNumber> cutByLottoSize(List<LottoNumber> shuffledNumbers) {
-		return shuffledNumbers.stream()
-			.limit(LOTTO_SIZE)
-			.collect(Collectors.toList());
-	}
-
 	public static void validateSize(List<LottoNumber> numbers) {
 		if (numbers.size() != LOTTO_SIZE) {
 			throw new IllegalArgumentException(String.format(NUMBER_SIZE_ERROR_MESSAGE, LOTTO_SIZE));
