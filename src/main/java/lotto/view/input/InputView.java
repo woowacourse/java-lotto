@@ -1,7 +1,5 @@
 package lotto.view.input;
 
-import lotto.dto.InputLottoDto;
-
 import java.util.List;
 
 public interface InputView {
@@ -9,7 +7,7 @@ public interface InputView {
 
     String inputManualPurchaseAmount();
 
-    List<InputLottoDto> inputManualLottoNumbers(final int manualPurchaseAmount);
+    List<String> inputManualLottoNumbers(final int manualPurchaseAmount);
 
     List<String> inputLastWeekWinningNumbers();
 
