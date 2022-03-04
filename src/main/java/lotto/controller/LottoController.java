@@ -73,7 +73,7 @@ public class LottoController {
     }
 
     private static void showProfitRate(final Payment payment, final LottoResult lottoResult) {
-        double profitRate = lottoResult.calculateRate(lottoResult.getTotalMoney(), payment);
+        double profitRate = lottoResult.calculateRate(payment);
         printProfitRate(profitRate);
     }
 }

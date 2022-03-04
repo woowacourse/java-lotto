@@ -44,8 +44,7 @@ class LottoResultTest {
         winningLotto.match(lottos, lottoResult);
 
         Payment payment = new Payment(3000);
-        int totalMoney = lottoResult.getTotalMoney();
 
-        assertEquals(lottoResult.calculateRate(totalMoney, payment), 676683.333, 0.01);
+        assertEquals(lottoResult.calculateRate(payment), 676683.333, 0.01);
     }
 }
