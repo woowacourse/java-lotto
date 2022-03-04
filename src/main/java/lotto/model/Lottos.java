@@ -17,7 +17,7 @@ public class Lottos {
         validateNullCollection(this.lottos);
     }
 
-    List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int count) {
+    private List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int count) {
         return List.copyOf(IntStream.range(0, count)
             .mapToObj(i -> lottoNumberGenerator.generate())
             .map(Lotto::new)
