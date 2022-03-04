@@ -8,6 +8,9 @@ public class StringUtil {
     private static final String REQUEST_DELIMITER_MESSAGE = ",(콤마)와 공백으로 구분된 숫자 6자리를 입력해주세요. ex) 1, 2, 3, 4, 5, 6";
     private static final String DELIMITER = ", ";
 
+    private StringUtil() {
+    }
+
     public static List<Integer> splitToIntegers(String input) {
         checkEmpty(input);
         List<String> splitInputs = List.of(input.split(DELIMITER, -1));
@@ -15,7 +18,7 @@ public class StringUtil {
             return splitInputs.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        } catch (IllegalArgumentException e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException(REQUEST_DELIMITER_MESSAGE);
         }
     }

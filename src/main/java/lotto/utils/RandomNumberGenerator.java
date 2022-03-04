@@ -8,6 +8,9 @@ public class RandomNumberGenerator {
     private static final Random random;
     private static final int MAX_NUMBER = 45;
 
+    private RandomNumberGenerator() {
+    }
+
     static {
         random = new Random();
         random.setSeed(System.currentTimeMillis());
