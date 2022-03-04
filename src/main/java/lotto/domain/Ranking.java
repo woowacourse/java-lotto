@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.BiPredicate;
-import java.util.stream.Collectors;
 
 public enum Ranking {
     FIRST_PLACE(2000000000, Constants.FIRST_PLACE_HIT_COUNT,
@@ -49,11 +47,6 @@ public enum Ranking {
 
     public int getPrize() {
         return prize;
-    }
-
-    public static List<Ranking> valuesWithoutDefault() {
-        return Arrays.stream(Ranking.values()).filter(ranking -> ranking != Ranking.NONE_PLACE)
-                .collect(Collectors.toList());
     }
 
     private static class Constants {

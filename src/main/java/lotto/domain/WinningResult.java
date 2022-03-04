@@ -16,7 +16,7 @@ public final class WinningResult {
 
     private Map<Ranking, Integer> initialMap(List<Ranking> rankings) {
         final Map<Ranking, Integer> result = new HashMap<>();
-        for (Ranking ranking : Ranking.valuesWithoutDefault()) {
+        for (Ranking ranking : Ranking.values()) {
             result.put(ranking, INITIAL_COUNT);
         }
         putValues(result, rankings);
