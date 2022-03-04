@@ -34,6 +34,10 @@ public class LottoMoney {
         return new LottoMoney(this.value - count * LottoGame.TICKET_PRICE);
     }
 
+    public int getCanPurchaseTicketCount() {
+        return value / LottoGame.TICKET_PRICE;
+    }
+
     public int getValue() {
         return value;
     }
