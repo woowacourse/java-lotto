@@ -25,9 +25,8 @@ public class WinningTicket {
     public int compareMatchCount(LottoTicket lottoTicket) {
         Set<Integer> lottoNumberValues = lottoTicket.getLottoNumberValues();
         Set<Integer> winningNumberValues = ticket.getLottoNumberValues();
-        return (int) lottoNumberValues.stream()
-                .filter(winningNumberValues::contains)
-                .count();
+        winningNumberValues.retainAll(lottoNumberValues);
+        return winningNumberValues.size();
     }
 
     public boolean isMatchBonusNumber(LottoTicket lottoTicket) {

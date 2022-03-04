@@ -28,4 +28,14 @@ class WinningTicketTest {
         LottoTicket lottoTicket = LottoTicket.from(winningNumberValues);
         assertThat(winningTicket.compareMatchCount(lottoTicket)).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("보너스 넘버와 비교해서 맞는지 확인한다.")
+    void isMatchBonusNumberTest() {
+        Set<Integer> winningNumberValues = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7));
+        int bonusNumber = 7;
+        WinningTicket winningTicket = WinningTicket.of(winningNumberValues, bonusNumber);
+        LottoTicket lottoTicket = LottoTicket.from(winningNumberValues);
+        assertThat(winningTicket.isMatchBonusNumber(lottoTicket)).isTrue();
+    }
 }
