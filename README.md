@@ -109,7 +109,7 @@
 ```
 
 ## ✅ TODO
-
+1차
 - [x] 인풋 검증 클래스 구현
 - [x] 셔플 후 sort 사용
 - [x] 상수로 변환
@@ -117,6 +117,17 @@
 - [x] 1~45 로또 공 객체를 캐싱해 성능 개선
 - [x] 이름 변경
 - [x] LottoRandomGenerator 제거, LottoFactory 생성
+
+2차-1
+
+- [x] Rank 클래스에서 Bipredicate를 사용해보자
+- [ ] VO 변수명 value로 변경
+- [ ] 래핑 전 변수명에 raw 붙이기
+- [ ] 인자 값을 메서드 내 역할에 맞게 명명
+- [ ] collect(Collectors.toSet()) 사용
+- [ ] 클라이언트를 편하게 하기 위해 테스트클래스에 날것 변환용 메서드 생성
+- [ ] 리스트 불변 추가
+- [ ] winLotto winningLotto로 이름 변
 
 - [x] 생성자 -> 정적 팩토리 메소드로 전환
 - [x] 검증 로직 생성자 안으로 이동
@@ -126,14 +137,17 @@
 
 2차 피드백
 
+- [ ] List<Lotto>의 래핑 클래스를 도메인에 추가 구현, 로직 이동
+- [ ] 커스텀 예외/메세지에 잘못된 사이즈에 대한 정보를 같이 넘기기(Lotto)
+- [ ] [링크](https://github.com/woowacourse/java-lotto/pull/480#discussion_r819151156) LottoMoney의 toLottoCount() 속 매직넘버 상수로 변경
+- [ ] LOTTO_NUMBER_CACHE 게터에서 새로이 자료구조 만들어 리턴(수정가능성 차단!!)
+- [ ] Integer.java에 IntegerCache 부분 한번 참고
+- [ ] 스캐너 상수화 후 단계마다 nextLine()등으로 버퍼를 비워주는 작업
+- [ ] 
+
 - [x] Lotto 접근제한자 확인
 - [x] Money를 LottoMoney로 네이밍
 - [x] 커스텀 예외
-
-- [x] DTO 생성 판단기준 고민하기
-    1. view에서 도메인 로직을 호출할 가능성이 있는지?
-    2. 기존 Domain 객체들이 불변인지
-    3. ...
 
 1차 피드백
 
