@@ -2,13 +2,13 @@ package lotto.dto;
 
 import lotto.domain.matchkind.LottoMatchKind;
 
-public class LottoMatchKindDto {
+public class WinningKindDto {
     private final int matchedCount;
     private final boolean matchedBonus;
     private final long winningAmount;
     private final int winningCount;
 
-    public LottoMatchKindDto(final LottoMatchKind lottoMatchKind, final int winningCount) {
+    public WinningKindDto(final LottoMatchKind lottoMatchKind, final int winningCount) {
         this.matchedCount = lottoMatchKind.getMatchCount();
         this.matchedBonus = lottoMatchKind.hasSameNumberWithBonus();
         this.winningAmount = lottoMatchKind.getWinningAmount();

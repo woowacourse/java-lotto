@@ -1,6 +1,6 @@
 package lotto.view.output;
 
-import lotto.dto.LottoMatchKindDto;
+import lotto.dto.WinningKindDto;
 import lotto.dto.LottoNumbersDto;
 
 import java.util.List;
@@ -36,17 +36,17 @@ public class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void printCountOfWinningByMatchKind(final List<LottoMatchKindDto> winningResults) {
+    public void printCountOfWinningByMatchKind(final List<WinningKindDto> winningResults) {
         System.out.println(WINNING_STATISTICS_MESSAGE);
         winningResults.forEach(this::printEachCountOfWinningByMatchKind);
     }
 
-    private void printEachCountOfWinningByMatchKind(final LottoMatchKindDto winningResult) {
+    private void printEachCountOfWinningByMatchKind(final WinningKindDto winningResult) {
         System.out.printf(findMessageFormatByBonus(winningResult),
                 winningResult.getMatchedCount(), winningResult.getWinningAmount(), winningResult.getWinningCount());
     }
 
-    private String findMessageFormatByBonus(final LottoMatchKindDto winningResult) {
+    private String findMessageFormatByBonus(final WinningKindDto winningResult) {
         if (winningResult.hasMatchedBonus()) {
             return WINNING_STATISTICS_MESSAGE_BONUS_FORMAT;
         }
