@@ -20,18 +20,12 @@ public class LotteryMachineApplication {
 
         int autoCount = count.getValue() - passivityLotteryCount;
         OutputView.printLotteryPurchaseCount(passivityLotteryCount, autoCount);
+        OutputView.printLotteryTickets(lotteryTickets);
 
-
-//
-//        OutputView.printLotteryPurchase(lotteryPurchase);
-//        LotteryPurchase lotteryPurchase = LotteryConverter.createLotteryPurchase();
-//        LotteryTickets lotteryTickets = LotteryConverter.createLotteryTickets(lotteryPurchase);
-//        OutputView.printLotteryTickets(lotteryTickets);
-//
-//        WinningLottery winningLottery = LotteryConverter.createWinningLottery();
-//        WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);
-//        OutputView.printWinningLotteryResults(winningResult.getResult());
-//        OutputView.printProfitRate(winningResult.getTotalProfitRate(lotteryPurchase));
+        WinningLottery winningLottery = new WinningLottery(InputView.getWinningLotteryNumbers(), InputView.getBonusNumber());
+        WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);
+        OutputView.printWinningLotteryResults(winningResult.getResult());
+        OutputView.printProfitRate(winningResult.getTotalProfitRate(money));
     }
 
     private static LotteryTickets createLotteryTickets(Count count, int passivityLotteryCount) {
@@ -59,6 +53,7 @@ public class LotteryMachineApplication {
     private static List<LotteryTicket> createPassivityLotteryTickets(int passivityLotteryCount) {
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
         for (int i = 0; i < passivityLotteryCount; i++) {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
             List<LotteryNumber> lotteryNumbers = LotteryNumber.from(InputView.getPassivityLotteryTicket2());
             LotteryTicket lotteryTicket = new LotteryTicket(lotteryNumbers);
             lotteryTickets.add(lotteryTicket);

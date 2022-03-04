@@ -1,6 +1,5 @@
 package lotterymachine.view;
 
-import lotterymachine.LotteryPurchase;
 import lotterymachine.domain.LotteryTicket;
 import lotterymachine.domain.LotteryTickets;
 import lotterymachine.domain.WinningLotteryRank;
@@ -16,10 +15,6 @@ public class OutputView {
             stringBuilder.append(lotteryTicket.getNumbers()+"\n");
         }
         System.out.println(stringBuilder);
-    }
-
-    public static void printLotteryPurchase(LotteryPurchase lotteryPurchase) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lotteryPurchase.getPassivityCount(), lotteryPurchase.getAutoCount());
     }
 
     public static void printLotteryPurchaseCount(int passivityCount, int autoCount) {
