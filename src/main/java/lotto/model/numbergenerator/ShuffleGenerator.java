@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ShuffleGenerator implements LottoNumberGenerator {
+
     @Override
     public List<Integer> generate() {
         List<Integer> sequentialIntegers = generateSequentialIntegers();

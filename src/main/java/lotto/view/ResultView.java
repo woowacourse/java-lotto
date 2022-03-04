@@ -29,7 +29,7 @@ public class ResultView {
             .forEach(System.out::println);
     }
 
-    private static String getOneRankStatus(Rank rank, Long winningCount) {
+    private static String getOneRankStatus(Rank rank, long winningCount) {
         if (rank == Rank.SECOND) {
             return String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개", rank.getMatchScore(), rank.getMoney(), winningCount);
         }

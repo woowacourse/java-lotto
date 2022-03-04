@@ -53,8 +53,19 @@ class ResultViewTest {
 
     @Test
     @DisplayName("당첨 통계 출력 확인")
-    void printResultStatisticsTest() {
-        ResultView.printResultStatistics(new LottoResult(manualLottos, autoLottos, Arrays.asList(1, 2, 3, 4, 5, 6), 7));
+    void printResultStatisticsTest() throws
+        NoSuchMethodException,
+        InvocationTargetException,
+        InstantiationException,
+        IllegalAccessException {
+        Constructor<LottoResult> lottoResultConstructor = LottoResult.class.
+            getDeclaredConstructor(Lottos.class, Lottos.class, List.class, int.class);
+        lottoResultConstructor.setAccessible(true);
+
+        LottoResult lottoResult = lottoResultConstructor
+            .newInstance(manualLottos, autoLottos, Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+
+        ResultView.printResultStatistics(lottoResult);
 
         assertThat(outputStreamCaptor.toString())
             .contains("5개 일치, 보너스 볼 일치(30000000원)- 1개")
@@ -71,7 +82,10 @@ class ResultViewTest {
         InvocationTargetException,
         InstantiationException,
         IllegalAccessException {
-        LottoMoney lottoMoney = new LottoMoney(rawlottoMoney, 0);
+        Constructor<LottoMoney> lottoMoneyConstructor = LottoMoney.class.getDeclaredConstructor(long.class, int.class);
+        lottoMoneyConstructor.setAccessible(true);
+        LottoMoney lottoMoney = lottoMoneyConstructor.newInstance(rawlottoMoney, 0);
+
         Map<Rank, Long> result = new EnumMap<>(Rank.class);
         result.put(Rank.FIFTH, 1L);
 

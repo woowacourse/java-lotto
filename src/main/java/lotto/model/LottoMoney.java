@@ -9,7 +9,7 @@ public class LottoMoney {
     private final long lottoMoney;
     private final int numberOfManualLottos;
 
-    public LottoMoney(long lottoMoney, int numberOfManualLottos) {
+    LottoMoney(long lottoMoney, int numberOfManualLottos) {
         validatePositive(lottoMoney);
         validateUnitPrice(lottoMoney);
         validateCanBuyLottos(lottoMoney, numberOfManualLottos);
@@ -39,7 +39,7 @@ public class LottoMoney {
         return Math.toIntExact(lottoMoney / LOTTO_PRICE - numberOfManualLottos);
     }
 
-    public long getLottoMoney() {
+    long getLottoMoney() {
         return lottoMoney;
     }
 }

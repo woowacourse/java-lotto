@@ -14,7 +14,7 @@ public class LottoResult {
 
     private final Map<Rank, Long> result;
 
-    public LottoResult(Lottos manualLottos, Lottos autoLottos, List<Integer> integers, int bonusNumber) {
+    LottoResult(Lottos manualLottos, Lottos autoLottos, List<Integer> integers, int bonusNumber) {
         List<Integer> winningNumbers = List.copyOf(integers);
         validateEmptyCollection(winningNumbers);
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);

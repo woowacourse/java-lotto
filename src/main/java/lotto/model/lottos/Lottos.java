@@ -16,7 +16,7 @@ public class Lottos {
         this.lottos = generateLottos(lottoNumberGenerator, count);
     }
 
-    public List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int count) {
+    List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int count) {
         return List.copyOf(IntStream.range(0, count)
             .mapToObj(i -> lottoNumberGenerator.generate())
             .map(Lotto::new)
