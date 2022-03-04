@@ -9,15 +9,15 @@ public enum Rank {
     SECOND(2, 5, 30000000, 0, true),
     FIRST(1, 6, 2000000000, 0, false);
 
-    private static final int DEFAULT_TOTAL_INCOME = 0;
+    private static final double DEFAULT_TOTAL_INCOME = 0;
 
     private int rankNumber;
     private int criteria;
-    private int reward;
+    private double reward;
     private int hitCount;
     private boolean hitBonusBall;
 
-    Rank(int rankNumber, int criteria, int reward, int hitCount, boolean hitBonusBall) {
+    Rank(int rankNumber, int criteria, double reward, int hitCount, boolean hitBonusBall) {
         this.rankNumber = rankNumber;
         this.criteria = criteria;
         this.reward = reward;
@@ -64,7 +64,7 @@ public enum Rank {
         return criteria;
     }
 
-    public int getReward() {
+    public double getReward() {
         return reward;
     }
 

@@ -40,7 +40,7 @@ public class OutputView {
 
     private static void printByRank(RankDto rankDto) {
         int criteria = rankDto.getCriteria();
-        int reward = rankDto.getReward();
+        double reward = rankDto.getReward();
         int hitCount = rankDto.getHitCount();
 
         if (rankDto.getRankNumber() == SECOND_RANK) {

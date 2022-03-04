@@ -6,10 +6,10 @@ public class RankDto {
 
     private final int rankNumber;
     private final int criteria;
-    private final int reward;
+    private final double reward;
     private final int hitCount;
 
-    public RankDto(int rankNumber, int criteria, int reward, int hitCount) {
+    public RankDto(int rankNumber, int criteria, double reward, int hitCount) {
         this.rankNumber = rankNumber;
         this.criteria = criteria;
         this.reward = reward;
@@ -28,7 +28,7 @@ public class RankDto {
         return criteria;
     }
 
-    public int getReward() {
+    public double getReward() {
         return reward;
     }
 

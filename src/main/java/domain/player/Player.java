@@ -26,7 +26,7 @@ public class Player {
     public void purchaseManualLotto(LottoGenerator lottoGenerator, List<List<Integer>> inputLottoNumbers) {
         for (List<Integer> lottoNumbers : inputLottoNumbers) {
             purchase(lottoGenerator, lottoNumbers);
-            money.subAmount();
+            money.subtractAmount();
         }
     }
 
@@ -51,7 +51,7 @@ public class Player {
 
     public double calculateIncomeRate(List<Result> results) {
         double totalIncome = Rank.calculateAllResult(results);
-        return totalIncome / money.getAmount();
+        return totalIncome / money.getInitialPrice();
     }
 
     public List<Lotto> getLottos() {
