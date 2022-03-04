@@ -16,6 +16,8 @@ import view.OutputView;
 
 import java.util.List;
 
+import static domain.Lotto.LottoNumberFactory.LOTTO_NUMBER_BOUNDARY_CACHE;
+
 public class LottoController {
 
     public void run() {
@@ -25,7 +27,7 @@ public class LottoController {
         List<List<Integer>> manualNumbers = InputView.inputManualNumber(manualQuantity);
 
         player.purchaseManualLotto(new CustomLottoGenerator(), manualNumbers);
-        player.purchaseAutoLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
+        player.purchaseAutoLotto(new AutoLottoGenerator(), LOTTO_NUMBER_BOUNDARY_CACHE);
         OutputView.printPurchasedLotto(LottosDto.from(player.getLottos(), manualQuantity));
 
         WinningLotto winningLotto = new WinningLotto(InputView.inputWinningNumber(), InputView.inputBonusBall());

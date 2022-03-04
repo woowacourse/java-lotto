@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static domain.Lotto.LottoNumberFactory.LOTTO_NUMBER_BOUNDARY_CACHE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PlayerTest {
@@ -36,7 +37,7 @@ class PlayerTest {
     @Test
     @DisplayName("자동 로또를 잔액을 통해 살 수 있는 최대한으로 구매한다.")
     void getNumberOfPurchases() {
-        player.purchaseAutoLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
+        player.purchaseAutoLotto(new AutoLottoGenerator(), LOTTO_NUMBER_BOUNDARY_CACHE);
         List<Lotto> actual = player.getLottos();
         int expected = 15;
         assertThat(actual.size()).isEqualTo(expected);
@@ -46,7 +47,7 @@ class PlayerTest {
     @DisplayName("Player의 모든 로또에 대해 당첨 번호와 비교한다.")
     void judgeAll() {
         player.purchaseManualLotto(new AutoLottoGenerator(), Arrays.asList(Arrays.asList(1,2,3,4,5,6),Arrays.asList(1,2,3,4,5,7)));
-        player.purchaseAutoLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
+        player.purchaseAutoLotto(new AutoLottoGenerator(), LOTTO_NUMBER_BOUNDARY_CACHE);
         List<Integer> lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(i);
