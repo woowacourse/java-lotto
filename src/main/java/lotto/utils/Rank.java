@@ -1,6 +1,7 @@
 package lotto.utils;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public enum Rank {
@@ -17,23 +18,23 @@ public enum Rank {
 
     private enum BonusMatched {
 
-        CAN_BE_WHATEVER(Optional.empty()),
-        MUST_BE_FALSE(Optional.of(Boolean.FALSE)),
-        MUST_BE_TRUE(Optional.of(Boolean.TRUE));
+        CAN_BE_WHATEVER(true, false),
+        MUST_BE_FALSE(false),
+        MUST_BE_TRUE(true);
 
-        private final Optional<Boolean> matchState;
+        private final List<Boolean> states;
 
-        BonusMatched(final Optional<Boolean> matchState) {
-            this.matchState = matchState;
+        BonusMatched(final boolean state1, final boolean state2) {
+            this.states = List.of(state1, state2);
+        }
+
+        BonusMatched(final boolean state) {
+            this.states = List.of(state);
         }
 
         private boolean matches(final boolean bonusMatched) {
-            return matchState.map(matchState -> matchState == bonusMatched)
-                    .orElse(true);
-        }
-
-        boolean getState() {
-            return matchState.orElse(false);
+            return states.stream()
+                    .anyMatch(state -> state == bonusMatched);
         }
 
     }
@@ -51,12 +52,12 @@ public enum Rank {
                 .findAny();
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public boolean isTrueThatBonusMatchMustBeTrue() {
+        return bonusMatched.equals(BonusMatched.MUST_BE_TRUE);
     }
 
-    public boolean getBonusMatched() {
-        return bonusMatched.getState();
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public long getPrizeMoney() {

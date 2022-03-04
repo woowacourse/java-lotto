@@ -84,7 +84,7 @@ public class OutputView {
     }
 
     private String selectMessageFormatOfAnalysisRank(final Rank rank) {
-        if (rank.getBonusMatched()) {
+        if (rank.isTrueThatBonusMatchMustBeTrue()) {
             return ANALYSIS_EXTRA_FORMAT.getMessage();
         }
         return ANALYSIS_FORMAT.getMessage();
