@@ -1,9 +1,8 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.Collections;
+import java.util.List;
 
 public enum Rank {
 
@@ -35,19 +34,10 @@ public enum Rank {
                 .orElse(NOT_THING);
     }
 
-    public static Map<Rank, Integer> initResultMap() {
-        final Map<Rank, Integer> rankMap = new TreeMap<>(rankRewardDescendingComparator());
-        Arrays.stream(values())
-                .forEach(rank -> rankMap.put(rank, defaultCount()));
-        return rankMap;
-    }
-
-    private static Comparator<Rank> rankRewardDescendingComparator() {
-        return (o1, o2) -> Long.compare(o1.reward, o2.reward);
-    }
-
-    private static int defaultCount() {
-        return 0;
+    public static List<Rank> toReverseList() {
+        List<Rank> ranks = Arrays.asList(values());
+        Collections.reverse(ranks);
+        return ranks;
     }
 
     private boolean isSameHitCount(final int hitCounts) {

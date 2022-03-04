@@ -107,19 +107,5 @@ public class RankTest {
 
             assertThat(rank).isEqualTo(Rank.NOT_THING);
         }
-
-        @DisplayName("초기 생성 맵을 생성할 수 있다.")
-        @Test
-        void createRankMap() {
-            final Map<Rank, Integer> expected = new HashMap<>();
-            expected.put(Rank.FIRST, 0);
-            expected.put(Rank.SECOND, 0);
-            expected.put(Rank.THIRD, 0);
-            expected.put(Rank.FOURTH, 0);
-            expected.put(Rank.FIFTH, 0);
-            expected.put(Rank.NOT_THING, 0);
-
-            assertThat(Rank.initResultMap()).isEqualTo(expected);
-        }
     }
 }

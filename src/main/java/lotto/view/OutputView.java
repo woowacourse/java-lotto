@@ -51,9 +51,10 @@ public class OutputView {
     }
 
     private static void printRankResults(final LottoResult lottoResult) {
-        lottoResult.getRankResults().entrySet().stream()
-                .filter(rank -> !rank.getKey().isNothing())
-                .forEach(rank -> printRankResult(rank.getKey(), rank.getValue()));
+        Rank.toReverseList().stream()
+                .filter(rank -> !rank.isNothing())
+                .forEach(rank -> printRankResult(rank,
+                        lottoResult.getRankResults().getOrDefault(rank, 0)));
     }
 
     private static void printRankResult(final Rank rank, final int count) {

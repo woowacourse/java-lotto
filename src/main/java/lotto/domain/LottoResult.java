@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingInt;
+
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -15,12 +18,10 @@ public class LottoResult {
     }
 
     public static LottoResult createLottoResult(final Lottos lottos, final WinLotto winLotto) {
-        final Map<Rank, Integer> rankResults = Rank.initResultMap();
-        for (Lotto lotto : lottos.getLottos()) {
-            Rank rank = winLotto.matchResult(lotto);
-            rankResults.replace(rank, rankResults.get(rank) + MATCH_RESULT_ADD_UNIT);
-        }
-        return new LottoResult(rankResults);
+        return new LottoResult(
+                lottos.getLottos().stream()
+                        .collect(groupingBy(winLotto::matchResult
+                                , summingInt(value -> MATCH_RESULT_ADD_UNIT))));
     }
 
     public double calculateYield() {
@@ -31,15 +32,13 @@ public class LottoResult {
     }
 
     private Long calculateTotalReward() {
-        return rankResults.entrySet().stream()
-                .map(result -> Rank.calculateMoney(result.getKey(), result.getValue()))
+        return rankResults.entrySet().stream().map(result -> Rank.calculateMoney(result.getKey(), result.getValue()))
                 .reduce(0L, Long::sum);
     }
 
     private int calculatePurchaseMoney() {
-        return rankResults.entrySet().stream()
-                .map(Entry::getValue)
-                .reduce(0, Integer::sum) * Lotto.LOTTO_PURCHASE_MONEY;
+        return rankResults.entrySet().stream().map(Entry::getValue).reduce(0, Integer::sum)
+                * Lotto.LOTTO_PURCHASE_MONEY;
     }
 
     public Map<Rank, Integer> getRankResults() {
