@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.validator.CountOfManualLottoValidator;
+import lotto.validator.MoneyValidator;
 
 public class User {
 
@@ -13,6 +15,8 @@ public class User {
     private final List<Lotto> lottos;
 
     private User(long money, int countOfManualLotto, List<Lotto> lottos) {
+        MoneyValidator.validate(money);
+        CountOfManualLottoValidator.validate(countOfManualLotto, money);
         this.money = money;
         this.countOfManualLotto = countOfManualLotto;
         this.lottos = new ArrayList<>(lottos);

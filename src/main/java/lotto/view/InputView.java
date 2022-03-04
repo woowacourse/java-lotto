@@ -25,7 +25,7 @@ public class InputView {
 
     private static boolean validateInputMoney(String input) {
         try {
-            MoneyValidator.validate(Long.parseLong(input));
+            Long.parseLong(input);
             return false;
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
@@ -33,21 +33,21 @@ public class InputView {
         }
     }
 
-    public static int inputCountOfManualLotto(long money) {
+    public static int inputCountOfManualLotto() {
         String input = "";
         boolean retryFlag = true;
         while (retryFlag) {
             OutputView.printNewLine();
             System.out.println(INPUT_LOTTO_COUNT_FOR_MANUAL_MESSAGE);
             input = scanner.nextLine();
-            retryFlag = validateInputCountOfManualLotto(input, money);
+            retryFlag = validateInputCountOfManualLotto(input);
         }
         return Integer.parseInt(input);
     }
 
-    private static boolean validateInputCountOfManualLotto(String input, long money) {
+    private static boolean validateInputCountOfManualLotto(String input) {
         try {
-            CountOfManualLottoValidator.validate(Integer.parseInt(input),money);
+            Integer.parseInt(input);
             return false;
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
