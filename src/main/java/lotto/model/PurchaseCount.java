@@ -9,10 +9,14 @@ public class PurchaseCount {
     private int manual;
 
     private PurchaseCount(int total, int manual) {
-        checkCount(total, manual);
-        checkNegative(manual);
+        validate(total, manual);
         this.auto = total - manual;
         this.manual = manual;
+    }
+
+    private void validate(int total, int manual) {
+        checkCount(total, manual);
+        checkNegative(manual);
     }
 
     private void checkCount(int total, int manual) {
