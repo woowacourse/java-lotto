@@ -17,7 +17,7 @@ public class Lotto {
 
 	public Rank match(WinningLottoNumberDTO winningLottoNumbersDTO) {
 		long matchCount = numbers.countMatchedNumbers(winningLottoNumbersDTO.getWinningNumbers());
-		boolean matchBonus = numbers.validateMatchWithBonus(winningLottoNumbersDTO.getBonusBall());
+		boolean matchBonus = numbers.checkMatchWithBonus(winningLottoNumbersDTO.getBonusBall());
 		return Rank.getRank(matchCount, matchBonus);
 	}
 }

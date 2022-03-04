@@ -43,7 +43,7 @@ public class LottoNumbers {
 			.count();
 	}
 
-	public boolean validateMatchWithBonus(LottoNumber number) {
+	public boolean checkMatchWithBonus(LottoNumber number) {
 		return numbers.contains(number);
 	}
 
