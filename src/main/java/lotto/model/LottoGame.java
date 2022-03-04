@@ -8,13 +8,13 @@ public class LottoGame {
     private final Lottos lottos;
     private final LottoMoney lottoMoney;
 
-    public LottoGame(int lottoMoney, LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoMoney = new LottoMoney(lottoMoney);
-        this.lottos = buyLottos(lottoNumberGenerator);
+    public LottoGame(int lottoMoney, int numberOfManualLottos, LottoNumberGenerator lottoNumberGenerator) {
+        this.lottoMoney = new LottoMoney(lottoMoney, numberOfManualLottos);
+        this.lottos = buyAutoLottos(lottoNumberGenerator);
     }
 
-    private Lottos buyLottos(LottoNumberGenerator lottoNumberGenerator) {
-        return new Lottos(lottoNumberGenerator, lottoMoney.getLottoSize());
+    private Lottos buyAutoLottos(LottoNumberGenerator lottoNumberGenerator) {
+        return new Lottos(lottoNumberGenerator, lottoMoney.getAutoLottoSize());
     }
 
     public LottoResult generateLottoResult(List<Integer> winningNumbers, int bonusNumber) {

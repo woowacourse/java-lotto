@@ -9,12 +9,17 @@ import lotto.model.Rank;
 import lotto.model.Yield;
 
 public class ResultView {
-    public static void printGeneratedLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void printGeneratedLottos(List<Lotto> manualLottos, List<Lotto> lottos) {
+        System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + lottos.size() + "개를 구매했습니다.");
+        printEachLottos(manualLottos);
+        printEachLottos(lottos);
+        printEmptyLine();
+    }
+
+    private static void printEachLottos(List<Lotto> lottos) {
         lottos.stream()
             .map(Lotto::toIntegers)
             .forEach(System.out::println);
-        printEmptyLine();
     }
 
     public static void printResultStatistics(LottoResult lottoResult) {

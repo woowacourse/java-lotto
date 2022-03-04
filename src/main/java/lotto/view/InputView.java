@@ -2,9 +2,11 @@ package lotto.view;
 
 import static java.util.stream.Collectors.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -56,5 +58,15 @@ public class InputView {
 
     private static void printEmptyLine() {
         System.out.println();
+    }
+
+    public static List<List<Integer>> inputManualLottos(int numberOfManualLottos) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> manualLottos = IntStream.range(0, numberOfManualLottos)
+            .mapToObj(i -> scanner.nextLine())
+            .map(manualLotto -> convertStringsToIntegers(splitAndTrim(manualLotto)))
+            .collect(toUnmodifiableList());
+        printEmptyLine();
+        return manualLottos;
     }
 }

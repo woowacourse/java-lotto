@@ -14,7 +14,7 @@ class YieldTest {
     @CsvSource(value = {"14000:true", "13999:false"}, delimiter = ':')
     @DisplayName("수익률 1기준 이득 테스트")
     void isGainTest(Long totalWinningMoney, boolean expected) {
-        LottoMoney lottoMoney = new LottoMoney(14000);
+        LottoMoney lottoMoney = new LottoMoney(14000, 0);
         Yield yield = new Yield(lottoMoney, totalWinningMoney);
 
         assertThat(yield.isGain()).isEqualTo(expected);
@@ -23,8 +23,8 @@ class YieldTest {
     @Test
     @DisplayName("수익률 계산 테스트")
     void calculateTest() {
-        LottoMoney lottoMoney = new LottoMoney(14000);
-        Long totalWinningMoney = 5000L;
+        LottoMoney lottoMoney = new LottoMoney(14000, 0);
+        long totalWinningMoney = 5000L;
         Yield yield = new Yield(lottoMoney, totalWinningMoney);
 
         assertThat(yield.getYield()).isCloseTo(0.35714f, Percentage.withPercentage(0.01));
