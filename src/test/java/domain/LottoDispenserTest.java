@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -34,11 +35,15 @@ public class LottoDispenserTest {
     @DisplayName("금액에 맞는 수의 로또 구매")
     void dispenser_makeMaximumLottos(int money, int manualCount, int expectedTotalLottos) {
         LottoDispenser lottoDispenser = new LottoDispenser(money);
+        List<Lotto> manualLottos = new ArrayList<>();
         for (int i = 0; i < manualCount; i++) {
-            lottoDispenser.buyManualLotto(List.of(1, 2, 3, 4, 5, 6));
+            manualLottos.add(lottoDispenser.buyManualLotto(List.of(1, 2, 3, 4, 5, 6)));
         }
-        lottoDispenser.buyAutoLottos();
-        assertThat(lottoDispenser.getBoughtLottos().size()).isEqualTo(expectedTotalLottos);
+        List<Lotto> autoLottos = lottoDispenser.buyAutoLottos();
+        List<Lotto> totalLottos = new ArrayList<>();
+        totalLottos.addAll(manualLottos);
+        totalLottos.addAll(autoLottos);
+        assertThat(totalLottos.size()).isEqualTo(expectedTotalLottos);
     }
 
 }

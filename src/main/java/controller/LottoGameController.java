@@ -4,8 +4,11 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoGameController {
 
@@ -23,15 +26,12 @@ public class LottoGameController {
     }
 
     private List<Lotto> buyLottos(LottoDispenser lottoDispenser) {
-        int manualLottosCount = getManualLottoCountFromInput(lottoDispenser);
-        InputView.showMessageInputLottoNumbers();
-        for (int i = 0; i < manualLottosCount; i++) {
-            buyLottoFromInput(lottoDispenser);
-        }
-        lottoDispenser.buyAutoLottos();
-        List<Lotto> lottos = lottoDispenser.getBoughtLottos();
-        OutputView.printLottosCount(manualLottosCount, lottos.size() - manualLottosCount);
-        return lottos;
+        List<Lotto> manualLottos = buyManualLottos(lottoDispenser);
+        List<Lotto> autoLottos = buyAutoLottos(lottoDispenser);
+        OutputView.printLottosCount(manualLottos.size(), autoLottos.size());
+        return Stream.of(manualLottos, autoLottos)
+                .flatMap(lottos -> lottos.stream())
+                .collect(Collectors.toList());
     }
 
     private LottoDispenser buildDispenserFromInputMoney() {
@@ -54,12 +54,27 @@ public class LottoGameController {
         }
     }
 
-    private void buyLottoFromInput(LottoDispenser lottoDispenser) {
+    private List<Lotto> buyManualLottos(LottoDispenser lottoDispenser) {
+        int manualLottosCount = getManualLottoCountFromInput(lottoDispenser);
+        InputView.showMessageInputLottoNumbers();
+
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 0; i < manualLottosCount; i++) {
+            manualLottos.add(buyLottoFromInput(lottoDispenser));
+        }
+        return manualLottos;
+    }
+
+    private List<Lotto> buyAutoLottos(LottoDispenser lottoDispenser) {
+        return lottoDispenser.buyAutoLottos();
+    }
+
+    private Lotto buyLottoFromInput(LottoDispenser lottoDispenser) {
         try {
-            lottoDispenser.buyManualLotto(InputView.inputLottoNumbers());
+            return lottoDispenser.buyManualLotto(InputView.inputLottoNumbers());
         }catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            buyLottoFromInput(lottoDispenser);
+            return buyLottoFromInput(lottoDispenser);
         }
     }
 
