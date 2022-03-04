@@ -9,20 +9,26 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
-    private List<LottoNumbers> lottoTicket = new ArrayList<>();
+    private final List<LottoNumbers> lottoTicket;
 
-    public LottoTicket(int count) {
-        generateTickets(count);
-    }
-
-    public LottoTicket(final List<LottoNumbers> lottoTicket) {
+    private LottoTicket(final List<LottoNumbers> lottoTicket) {
         this.lottoTicket = lottoTicket;
     }
 
-    private void generateTickets(int count) {
+    public static LottoTicket createAutoLottoTicket(int count) {
+        return new LottoTicket(generateTickets(count));
+    }
+
+    private static List<LottoNumbers> generateTickets(int count) {
+        List<LottoNumbers> lottoTicket = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottoTicket.add(new LottoNumbers());
         }
+        return lottoTicket;
+    }
+
+    public static LottoTicket createManualLottoTicket(List<LottoNumbers> lottoTicket) {
+        return new LottoTicket(lottoTicket);
     }
 
     public List<LottoNumbers> getLottoTicket() {

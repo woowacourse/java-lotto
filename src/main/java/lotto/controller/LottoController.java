@@ -48,7 +48,7 @@ public class LottoController {
         int manualTicketCount = manualLottoCount.getValue();
         int autoTicketCount = amount.calculateLottoCount() - manualTicketCount;
 
-        LottoTicket lottoTicket = new LottoTicket(autoTicketCount);
+        LottoTicket lottoTicket = LottoTicket.createAutoLottoTicket(autoTicketCount);
 
         if (manualTicketCount != 0) {
             lottoTicket.addLottoTicket(buyManualTicket(manualLottoCount));
@@ -66,7 +66,7 @@ public class LottoController {
             OutputView.printInputManualTicketSentence(i);
             manualTickets.add(getInputLottoNumbers());
         }
-        return new LottoTicket(manualTickets);
+        return LottoTicket.createManualLottoTicket(manualTickets);
     }
 
     private void printTickets(int manualTryCount, int autoTryCount, LottoTicket lottoTicket) {
