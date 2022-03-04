@@ -22,7 +22,7 @@ class LottoFactoryTest {
         Lotto lotto = Lotto.from(NumsGenerator.generate(nums));
         System.out.println(lotto);
         assertThat(lotto)
-                .extracting("lotto")
+                .extracting("value")
                 .isEqualTo(Arrays.asList(
                         LottoNumber.getInstance(1),
                         LottoNumber.getInstance(2),
@@ -35,10 +35,10 @@ class LottoFactoryTest {
 
     @Test
     void 당첨번호_생성_값_확인() {
-        WinNumbers winNumbers = LottoFactory.createWinNums(nums, 10);
-        assertThat(winNumbers)
+        WinningLotto winningLotto = LottoFactory.createWinNums(nums, 10);
+        assertThat(winningLotto)
                 .extracting("lotto")
-                .extracting("lotto")
+                .extracting("value")
                 .isEqualTo(Arrays.asList(
                         LottoNumber.getInstance(1),
                         LottoNumber.getInstance(2),
@@ -51,8 +51,8 @@ class LottoFactoryTest {
 
     @Test
     void 당첨번호_생성_보너스_확인() {
-        WinNumbers winNumbers = LottoFactory.createWinNums(nums, 10);
-        assertThat(winNumbers.getBonus())
+        WinningLotto winningLotto = LottoFactory.createWinNums(nums, 10);
+        assertThat(winningLotto.getBonusNumber())
                 .isEqualTo(LottoNumber.getInstance(10));
     }
 

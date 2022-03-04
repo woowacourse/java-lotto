@@ -1,24 +1,24 @@
 package domain.result;
 
 import domain.lotto.Lotto;
-import domain.lotto.WinNumbers;
+import domain.lotto.WinningLotto;
 import exception.NullException;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Result {
-    private final LinkedHashMap<Rank, Integer> result = new LinkedHashMap<>();
+    private final LinkedHashMap<Rank, Integer> value = new LinkedHashMap<>();
 
-    private Result(final List<Lotto> lottos, final WinNumbers winNumbers) {
+    private Result(final List<Lotto> lottos, final WinningLotto winningLotto) {
         validate(lottos);
         for (Lotto lotto : lottos) {
-            Rank rank = Rank.of(lotto.countSameNum(winNumbers), lotto.contains(winNumbers.getBonus()));
+            Rank rank = Rank.of(lotto.countSameNum(winningLotto), lotto.contains(winningLotto.getBonusNumber()));
             add(rank);
         }
     }
 
-    public static Result of(final List<Lotto> lottos, final WinNumbers winNumbers) {
-        return new Result(lottos, winNumbers);
+    public static Result of(final List<Lotto> lottos, final WinningLotto winningLotto) {
+        return new Result(lottos, winningLotto);
     }
 
     private void validate(final List<Lotto> lottos) {
@@ -28,18 +28,18 @@ public class Result {
     }
 
     private void add(final Rank rank) {
-        result.put(rank, result.getOrDefault(rank, 0) + 1);
+        value.put(rank, value.getOrDefault(rank, 0) + 1);
     }
 
     public long getPrize() {
         long prize = 0;
-        for (Rank rank : result.keySet()) {
-            prize += (long) rank.getPrize() * result.get(rank);
+        for (Rank rank : value.keySet()) {
+            prize += (long) rank.getPrize() * value.get(rank);
         }
         return prize;
     }
 
     public int getRankCount(final Rank rank) {
-        return result.getOrDefault(rank, 0);
+        return value.getOrDefault(rank, 0);
     }
 }

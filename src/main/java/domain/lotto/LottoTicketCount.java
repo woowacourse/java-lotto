@@ -4,33 +4,33 @@ import exception.ticketCount.CountLessZeroException;
 import exception.ticketCount.CountMoreMaxException;
 
 public class LottoTicketCount {
-    private final int manualTicketCount;
-    private final int autoTicketCount;
+    private final int manualValue;
+    private final int autoValue;
 
-    private LottoTicketCount(final int manualTicketCount, final int autoTicketCount) {
-        validate(manualTicketCount, autoTicketCount);
-        this.manualTicketCount = manualTicketCount;
-        this.autoTicketCount = autoTicketCount;
+    private LottoTicketCount(final int manualValue, final int autoValue) {
+        validate(manualValue, autoValue);
+        this.manualValue = manualValue;
+        this.autoValue = autoValue;
     }
 
-    public static LottoTicketCount of(final int fullTicketCount, final int manualTicketCount) {
-        return new LottoTicketCount(manualTicketCount, fullTicketCount - manualTicketCount);
+    public static LottoTicketCount of(final int fullValue, final int manualValue) {
+        return new LottoTicketCount(manualValue, fullValue - manualValue);
     }
 
-    private static void validate(final int manualTicketCount, final int autoTicketCount) {
-        if (autoTicketCount < 0) {
+    private static void validate(final int manualValue, final int autoValue) {
+        if (autoValue < 0) {
             throw new CountMoreMaxException();
         }
-        if (manualTicketCount < 0 || manualTicketCount + autoTicketCount <= 0) {
+        if (manualValue < 0 || manualValue + autoValue <= 0) {
             throw new CountLessZeroException();
         }
     }
 
     public int ofManual() {
-        return manualTicketCount;
+        return manualValue;
     }
 
     public int ofAuto() {
-        return autoTicketCount;
+        return autoValue;
     }
 }

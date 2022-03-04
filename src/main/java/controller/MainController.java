@@ -4,7 +4,7 @@ import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
 import domain.lotto.LottoMoney;
 import domain.lotto.LottoTicketCount;
-import domain.lotto.WinNumbers;
+import domain.lotto.WinningLotto;
 import domain.result.Result;
 import java.util.List;
 import utils.Util;
@@ -25,9 +25,9 @@ public class MainController {
         final List<Lotto> lottoTickets = makeLottos(count);
         ResultView.printLottoTickets(count, lottoTickets);
 
-        final WinNumbers winNumbers = makeWinNums();
+        final WinningLotto winningLotto = makeWinNums();
 
-        final Result result = Result.of(lottoTickets, winNumbers);
+        final Result result = Result.of(lottoTickets, winningLotto);
         end(result, lottoMoney);
     }
 
@@ -46,7 +46,7 @@ public class MainController {
                 InputView.inputManualNums(count.ofManual()));
     }
 
-    private WinNumbers makeWinNums() {
+    private WinningLotto makeWinNums() {
         return LottoFactory.createWinNums(InputView.inputWinLottoNums(), InputView.inputBonusNumber());
     }
 

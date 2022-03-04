@@ -62,8 +62,8 @@ public class InputView {
         return Util.separateNumbers(lottoNumbers);
     }
 
-    private static void validateLottoNums(final String lottoNumbers) {
-        if (!PATTERN.matcher(lottoNumbers).matches()) {
+    private static void validateLottoNums(final String rawLottoNumbers) {
+        if (!PATTERN.matcher(rawLottoNumbers).matches()) {
             throw new LottoNumWrongPatternException();
         }
     }

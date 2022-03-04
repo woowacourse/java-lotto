@@ -8,41 +8,41 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private static final int LOTTO_NUMS_SIZE = 6;
-    private final List<LottoNumber> lotto;
+    private static final int SIZE = 6;
+    private final List<LottoNumber> value;
 
-    private Lotto(List<LottoNumber> balls) {
-        validate(balls);
-        Collections.sort(balls);
-        this.lotto = balls;
+    private Lotto(List<LottoNumber> value) {
+        validate(value);
+        Collections.sort(value);
+        this.value = value;
     }
 
-    public static Lotto from(List<LottoNumber> lotto) {
-        return new Lotto(lotto);
+    public static Lotto from(List<LottoNumber> value) {
+        return new Lotto(value);
     }
 
-    private static void validate(List<LottoNumber> lottoNumbers) {
-        HashSet<LottoNumber> compareNums = new HashSet<>(lottoNumbers);
-        if (compareNums.size() != lottoNumbers.size()) {
+    private static void validate(List<LottoNumber> value) {
+        HashSet<LottoNumber> compareNums = new HashSet<>(value);
+        if (compareNums.size() != value.size()) {
             throw new LottoNumDuplicatedException();
         }
-        if (lottoNumbers.size() != LOTTO_NUMS_SIZE) {
+        if (value.size() != SIZE) {
             throw new LottoNumWrongSizeException();
         }
     }
 
-    public int countSameNum(final WinNumbers winNumbers) {
-        return (int) lotto.stream()
-                .filter(winNumbers::contains)
+    public int countSameNum(final WinningLotto winningLotto) {
+        return (int) value.stream()
+                .filter(winningLotto::contains)
                 .count();
     }
 
     public boolean contains(final LottoNumber lottoNumber) {
-        return lotto.contains(lottoNumber);
+        return value.contains(lottoNumber);
     }
 
     public List<LottoNumber> get() {
-        return lotto;
+        return value;
     }
 
     @Override
@@ -54,18 +54,18 @@ public class Lotto {
             return false;
         }
         Lotto lotto1 = (Lotto) o;
-        return Objects.equals(lotto, lotto1.lotto);
+        return Objects.equals(value, lotto1.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lotto);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
         return "Lotto{" +
-                "lotto=" + lotto +
+                "lotto=" + value +
                 '}';
     }
 }

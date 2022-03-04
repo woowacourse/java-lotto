@@ -5,33 +5,33 @@ import exception.lottoMoney.LottoMoneyLessException;
 import java.util.Objects;
 
 public class LottoMoney {
-    private static final int LOTTO_MONEY_DIVIDE_UNIT = 1000;
-    private final int lottoMoney;
+    private static final int DIVIDE_UNIT = 1000;
+    private final int value;
 
-    private LottoMoney(final int lottoMoney) {
-        validate(lottoMoney);
-        this.lottoMoney = lottoMoney;
+    private LottoMoney(final int value) {
+        validate(value);
+        this.value = value;
     }
 
-    public static LottoMoney from(final int money) {
-        return new LottoMoney(money);
+    public static LottoMoney from(final int value) {
+        return new LottoMoney(value);
     }
 
-    private static void validate(final int money) {
-        if (money < LOTTO_MONEY_DIVIDE_UNIT) {
+    private static void validate(final int value) {
+        if (value < DIVIDE_UNIT) {
             throw new LottoMoneyLessException();
         }
-        if (money % LOTTO_MONEY_DIVIDE_UNIT != 0) {
+        if (value % DIVIDE_UNIT != 0) {
             throw new LottoMoneyDivideException();
         }
     }
 
     public int toLottoCount() {
-        return lottoMoney / 1000;
+        return value / DIVIDE_UNIT;
     }
 
     public int get() {
-        return lottoMoney;
+        return value;
     }
 
     @Override
@@ -43,11 +43,11 @@ public class LottoMoney {
             return false;
         }
         LottoMoney lottoMoney1 = (LottoMoney) o;
-        return lottoMoney == lottoMoney1.lottoMoney;
+        return value == lottoMoney1.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoMoney);
+        return Objects.hash(value);
     }
 }
