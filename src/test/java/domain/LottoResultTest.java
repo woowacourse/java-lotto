@@ -2,8 +2,6 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,8 +22,7 @@ public class LottoResultTest {
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		Map<Rank, Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
-		LottoResult lottoResult = new LottoResult(ranks);
+		LottoResult lottoResult = lottos.createLottoResult(new WinningLotto(winningLotto, bonusNumber));
 		Payment payment = new Payment(5000);
 
 		double profitRate = lottoResult.calculateProfitRate(payment);

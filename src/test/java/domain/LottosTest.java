@@ -10,7 +10,6 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import service.LottoMachine;
@@ -27,9 +26,9 @@ public class LottosTest {
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		Map<Rank, Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
+		LottoResult lottoResult = lottos.createLottoResult(new WinningLotto(winningLotto, bonusNumber));
 		//then
-		assertThat(ranks).containsAnyOf(entry(Rank.FIFTH, 1L), entry(Rank.THIRD, 1L));
+		assertThat(lottoResult.getRanks()).containsAnyOf(entry(Rank.FIFTH, 1L), entry(Rank.THIRD, 1L));
 	}
 
 	@DisplayName("아무것도 맞지 않을 경우를 미포함 한 결과가 출력 되는지")
@@ -42,9 +41,9 @@ public class LottosTest {
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		Map<Rank, Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
+		LottoResult lottoResult = lottos.createLottoResult(new WinningLotto(winningLotto, bonusNumber));
 		//then
-		assertThat(ranks).containsAnyOf(entry(Rank.FIRST, 1L));
+		assertThat(lottoResult.getRanks()).containsAnyOf(entry(Rank.FIRST, 1L));
 	}
 
 	@DisplayName("사이즈 체크")

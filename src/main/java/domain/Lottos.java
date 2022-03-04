@@ -4,7 +4,6 @@ import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -27,19 +26,19 @@ public class Lottos {
 		return new Lottos(lottos);
 	}
 
-	public Map<Rank, Long> countRank(WinningLotto winningLotto) {
+	public LottoResult createLottoResult(WinningLotto winningLotto) {
 		Map<Rank, Long> ranks = LottoResult.getRankMap();
 
 		lottos.stream()
-			.map(lotto -> winningLotto.calculateRank(lotto))
+			.map(winningLotto::calculateRank)
 			.filter(rank -> !rank.isNothing())
 			.collect(groupingBy(Function.identity(), counting()))
 			.forEach((key, value) -> ranks.merge(key, value, (v1, v2) -> v2));
-		return ranks;
+		return new LottoResult(ranks);
 	}
 
 	public List<Lotto> getLottos() {
-		return Collections.unmodifiableList(lottos);
+		return new ArrayList<>(lottos);
 	}
 
 	public int getSize() {

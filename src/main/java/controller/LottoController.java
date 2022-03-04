@@ -23,7 +23,7 @@ public class LottoController {
 
 		WinningLotto winningLotto = InputConvertor.createWinningLotto();
 
-		OutputView.printLottoResult(new LottoResult(lottos.countRank(winningLotto)), payment);
+		OutputView.printLottoResult(lottos.createLottoResult(winningLotto), payment);
 	}
 
 	private static Lottos createLottos(Lottos manualLottos, OrderForm orderForm) {
