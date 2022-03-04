@@ -18,10 +18,12 @@ class ManualLottoTest {
     }
 
     @Test
-    @DisplayName("정렬 되는지 테스트")
+    @DisplayName("수동으로 만든 로또 번호 오름차순 정렬 테스트")
     public void checkLottoNumbersSort() {
         List<Integer> manualLottoNumbers = List.of(6, 5, 4, 3, 2, 1);
         ManualLotto manualLotto = new ManualLotto(manualLottoNumbers);
-        assertThat(manualLotto.getNumbers().get(0)).isEqualTo(1);
+        for (int i = 0; i < 6; i++) {
+            assertThat(manualLotto.getNumbers().get(i)).isEqualTo(i+1);
+        }
     }
 }
