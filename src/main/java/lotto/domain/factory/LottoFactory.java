@@ -27,7 +27,7 @@ public class LottoFactory {
         return new Lotto(LOTTO_NUMBERS.subList(SUB_LIST_FROM_INDEX, Lotto.SIZE));
     }
 
-    public static Lotto valueOf(String text) {
+    public static Lotto manual(String text) {
         String[] splitText = text.split(TEXT_DELIMITER);
         return new Lotto(toNumberList(splitText));
     }

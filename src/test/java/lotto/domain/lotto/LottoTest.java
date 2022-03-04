@@ -79,7 +79,7 @@ public class LottoTest {
             @ValueSource(strings = {"1, 2, 3, 4, 5, 6"})
             @DisplayName("구분된 숫자 6개로 객체를 반환한다.")
             void it_returns_lotto(String input) {
-                assertDoesNotThrow(() -> LottoFactory.valueOf(input));
+                assertDoesNotThrow(() -> LottoFactory.manual(input));
             }
         }
     }

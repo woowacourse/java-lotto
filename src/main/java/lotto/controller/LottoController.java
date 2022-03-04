@@ -70,7 +70,7 @@ public class LottoController {
     private Lotto requestManualLottoNumber() {
         try {
             String text = InputView.inputManualLottoNumber();
-            return LottoFactory.valueOf(text);
+            return LottoFactory.manual(text);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
             return requestManualLottoNumber();
@@ -93,7 +93,7 @@ public class LottoController {
     private Lotto requestLotto() {
         try {
             String input = InputView.inputLastWeekWinningNumbers();
-            return LottoFactory.valueOf(input);
+            return LottoFactory.manual(input);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
             return requestLotto();
