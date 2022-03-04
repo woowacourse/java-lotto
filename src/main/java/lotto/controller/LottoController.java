@@ -17,7 +17,7 @@ public class LottoController {
 
     public void playGame() {
         LottoGame lottoGame = new LottoGame();
-        Money money = receiveMoney();
+        Money money = makeMoney();
         ManualCount manual = receiveManualCount();
         List<Lotto> manualLottos = receiveManualLottos(lottoGame, manual);
 
@@ -27,13 +27,17 @@ public class LottoController {
         sendResult(lottoGame, money.getNumber(), winnings);
     }
 
-    private Money receiveMoney() {
+    private Money makeMoney() {
         try {
-            return new Money(ConverterUtils.convertStringToInt(InputView.inputMoney()));
+            return new Money(ConverterUtils.convertStringToInt(receiveMoney()));
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return receiveMoney();
+            return makeMoney();
         }
+    }
+
+    private String receiveMoney() {
+        return InputView.inputMoney();
     }
 
     private ManualCount receiveManualCount() {
