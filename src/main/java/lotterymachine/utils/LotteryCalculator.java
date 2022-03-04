@@ -21,8 +21,7 @@ public class LotteryCalculator {
     public static Money getWinningAmount(List<LotteryResultDto> lotteryResults) {
         int sum = lotteryResults.stream()
                 .map(LotteryCalculator::sumIncome)
-                .map(Money::getAmount)
-                .mapToInt(Integer::intValue)
+                .mapToInt(Money::getAmount)
                 .sum();
         return Money.from(sum);
     }
