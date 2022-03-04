@@ -1,6 +1,4 @@
-package lotto.model.ball;
-
-import lotto.model.Lotto;
+package lotto.model.lotto;
 
 public class BonusBall {
 	private static final String ERROR_DUPLICATE = "[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다";

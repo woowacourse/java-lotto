@@ -1,4 +1,4 @@
-package lotto.model.ball;
+package lotto.model.lotto;
 
 import java.util.Objects;
 
@@ -27,10 +27,6 @@ public class LottoBall implements Comparable<LottoBall> {
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(ERROR_TYPE);
 		}
-	}
-
-	public boolean match(LottoBall lottoBall) {
-		return lottoBall.getNumber() == this.number;
 	}
 
 	public int getNumber() {

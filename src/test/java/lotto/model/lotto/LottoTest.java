@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import lotto.model.ball.LottoBall;
 
 public class LottoTest {
 

@@ -9,10 +9,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.model.Lotto;
-import lotto.model.ball.BonusBall;
-import lotto.model.ball.LottoBall;
-import lotto.model.ball.WinningBalls;
+import lotto.model.lotto.Lotto;
+import lotto.model.lotto.BonusBall;
+import lotto.model.lotto.LottoBall;
+import lotto.model.lotto.WinningBalls;
 
 public class PrizeTest {
 	WinningBalls winningBalls;

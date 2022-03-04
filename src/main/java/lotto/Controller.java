@@ -2,14 +2,14 @@ package lotto;
 
 import java.util.List;
 
-import lotto.model.Lotto;
-import lotto.model.Lottos;
+import lotto.model.lotto.Lotto;
+import lotto.model.lotto.Lottos;
 import lotto.model.Money;
 import lotto.model.dto.LottoDTO;
 import lotto.model.dto.PrizeInformationDTO;
-import lotto.model.ball.BonusBall;
-import lotto.model.ball.LottoBall;
-import lotto.model.ball.WinningBalls;
+import lotto.model.lotto.BonusBall;
+import lotto.model.lotto.LottoBall;
+import lotto.model.lotto.WinningBalls;
 import lotto.model.prize.MatchResult;
 import lotto.model.prize.PrizeInformations;
 import lotto.view.InputView;

@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import lotto.model.dto.LottoDTO;
 import lotto.model.dto.PrizeInformationDTO;
-import lotto.model.ball.LottoBall;
+import lotto.model.lotto.LottoBall;
 
 public class ResultView {
 	private static final String MESSAGE_PURCHASE_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";

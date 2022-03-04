@@ -1,9 +1,6 @@
-package lotto.model.ball;
+package lotto.model.lotto;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
-import lotto.model.Lotto;
 
 public class WinningBalls {
 

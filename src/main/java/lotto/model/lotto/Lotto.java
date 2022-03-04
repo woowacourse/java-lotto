@@ -1,14 +1,12 @@
-package lotto.model;
+package lotto.model.lotto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import lotto.model.ball.LottoBall;
-import lotto.model.ball.WinningBalls;
+import lotto.model.Money;
 
 public class Lotto {
 	private static final List<LottoBall> LOTTO_BALLS = new ArrayList<>();

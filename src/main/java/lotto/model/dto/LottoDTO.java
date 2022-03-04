@@ -3,8 +3,8 @@ package lotto.model.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.model.Lottos;
-import lotto.model.ball.LottoBall;
+import lotto.model.lotto.Lottos;
+import lotto.model.lotto.LottoBall;
 
 public class LottoDTO {
 

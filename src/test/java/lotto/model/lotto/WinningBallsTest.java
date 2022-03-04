@@ -1,4 +1,4 @@
-package lotto.model.ball;
+package lotto.model.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
