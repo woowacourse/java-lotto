@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 import lotto.model.Money;
 
@@ -18,9 +19,9 @@ public class Lotto {
 	private static final String ERROR_COUNT = "[ERROR] 로또 번호는 6개로 입력해야 합니다";
 
 	static {
-		for (int number = MIN_NUMBER; number <= MAX_NUMBER; number++) {
-			LOTTO_BALLS.add(LottoBall.from(String.valueOf(number)));
-		}
+		IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+			.mapToObj(number -> LottoBall.from(String.valueOf(number)))
+			.forEach(LOTTO_BALLS::add);
 	}
 
 	private final List<LottoBall> lotto;
