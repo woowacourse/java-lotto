@@ -13,6 +13,7 @@ public class RankTest {
     @DisplayName("당첨 숫자의 개수, 보너스볼 당첨 여부로 당첨 순위 계산 테스트")
     public void rankValueOfTest(int count, boolean hasBonusBall, String rankName) {
         Rank rank = Rank.valueOf(count, hasBonusBall);
+
         assertEquals(Rank.valueOf(rankName).equals(rank), true);
     }
 }

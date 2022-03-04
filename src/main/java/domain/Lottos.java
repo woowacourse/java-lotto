@@ -10,9 +10,9 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos generateLottos(int count) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+    public static Lottos generateLottos(List<Lotto> lottoList, int generateCount) {
+        List<Lotto> lottos = new ArrayList<>(lottoList);
+        for (int i = 0; i < generateCount; i++) {
             lottos.add(Lotto.generateNumber());
         }
         return new Lottos(lottos);

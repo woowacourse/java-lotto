@@ -1,10 +1,13 @@
 package controller;
 
+import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
 import domain.Money;
 import domain.Statistic;
+import domain.UserCount;
 import domain.WinningNumber;
+import java.util.List;
 import view.InputView;
 import view.OutputView;
 
@@ -12,8 +15,10 @@ public class LottoMachine {
 
     public void start() {
         Money money = new Money(InputView.askInputMoney());
-        int lottoCount = calculateCount(money);
-        Lottos lottos = generateLottos(lottoCount);
+        UserCount userCount = calculateUserCount(money);
+
+        List<Lotto> manualLottoList = InputView.askInputManualLottoNumber(userCount.getManualCount());
+        Lottos lottos = generateLottos(manualLottoList, userCount);
 
         WinningNumber winningNumber = InputView.askInputWinningNumber();
         LottoNumber bonusBall = inputBonusBall(winningNumber);
@@ -22,15 +27,15 @@ public class LottoMachine {
         printTotalStatistic(money, winningStatistics);
     }
 
-    private int calculateCount(Money money) {
-        int lottoCount = money.generateCount();
-        OutputView.printCountOfLotto(lottoCount);
-        return lottoCount;
+    private UserCount calculateUserCount(Money money) {
+        int totalCount = money.generateCount();
+        int manualCount = InputView.astInputManualLottoCount();
+        return new UserCount(totalCount, manualCount);
     }
 
-    private Lottos generateLottos(int lottoCount) {
-        Lottos lottos = Lottos.generateLottos(lottoCount);
-        OutputView.printLottos(lottos);
+    private Lottos generateLottos(List<Lotto> manualLottoList, UserCount userCount) {
+        Lottos lottos = Lottos.generateLottos(manualLottoList, userCount.getAutoCount());
+        OutputView.printLottos(lottos, userCount);
         return lottos;
     }
 
