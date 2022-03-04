@@ -1,13 +1,13 @@
 package view;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 import static java.lang.System.lineSeparator;
+import static util.InputUtil.splitAndChangeToInt;
+import static util.InputUtil.validateAndChangeToInt;
 
 public class InputView {
 
-    private static final String LOTTO_NUMBER_DELIMITER = ", |,";
     private static final String INPUT_MONEY = "구입금액을 입력해 주세요.";
     private static final String INPUT_WINNING_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
@@ -59,21 +59,6 @@ public class InputView {
             inputLottoNumbers[i] = splitAndChangeToInt(scanner.nextLine(), ERROR_BALL_NON_INTEGER);
         }
         return inputLottoNumbers;
-    }
-
-    private static int[] splitAndChangeToInt(final String inputNumbers, final String message) {
-        String[] splitNumbers = inputNumbers.split(LOTTO_NUMBER_DELIMITER);
-        return Arrays.asList(splitNumbers).stream()
-                .mapToInt(number -> validateAndChangeToInt(number, message))
-                .toArray();
-    }
-
-    private static int validateAndChangeToInt(final String number, final String message) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(message);
-        }
     }
 
 }
