@@ -45,4 +45,16 @@ class MoneyTest {
         // then
         assertThat(money.divideByAmount(4500L)).isEqualTo(1.50);
     }
+
+    @Test
+    @DisplayName("로또 티켓을 사고 남은 잔돈이 정상적인 확인")
+    void createChanges() {
+        // given
+        int amount = 3000;
+        int lottoTicketCount = 2;
+        Money money = new Money(amount);
+        Money changes = money.changes(lottoTicketCount);
+        // then
+        assertThat(changes.count()).isEqualTo(1);
+    }
 }

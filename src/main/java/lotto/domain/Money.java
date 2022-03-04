@@ -35,4 +35,8 @@ public class Money {
     public double divideByAmount(long target) {
         return (double) target / this.amount;
     }
+
+    public Money changes(int count) {
+        return new Money(amount - count * UNIT);
+    }
 }
