@@ -64,7 +64,7 @@ public class LottoController {
 
         for (int i = tryCount; i > 0; i--) {
             OutputView.printInputManualTicketSentence(i);
-            manualTickets.add(getInputLottoNumbers());
+            manualTickets.add(inputLottoNumbers());
         }
         return LottoTicket.createManualLottoTicket(manualTickets);
     }
@@ -76,27 +76,27 @@ public class LottoController {
 
     private WinningNumbers createWinningNumbers() {
         OutputView.printInputWinningTicketSentence();
-        LottoNumbers inputLottoNumbers = getInputLottoNumbers();
-        LottoNumber bonusNumber = getBonusNumber();
+        LottoNumbers inputLottoNumbers = inputLottoNumbers();
+        LottoNumber bonusNumber = inputBonusNumber();
 
         return getWinningNumbers(inputLottoNumbers, bonusNumber);
     }
 
-    private LottoNumbers getInputLottoNumbers() {
+    private LottoNumbers inputLottoNumbers() {
         try {
             return new LottoNumbers(InputView.inputLottoNumbers());
         } catch (IllegalArgumentException e) {
             OutputView.printException(e);
-            return getInputLottoNumbers();
+            return inputLottoNumbers();
         }
     }
 
-    private LottoNumber getBonusNumber() {
+    private LottoNumber inputBonusNumber() {
         try {
             return LottoNumber.of(InputView.inputBonusBall());
         } catch (IllegalArgumentException e) {
             OutputView.printException(e);
-            return getBonusNumber();
+            return inputBonusNumber();
         }
     }
 
@@ -105,7 +105,7 @@ public class LottoController {
             return new WinningNumbers(lottoNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {
             OutputView.printException(e);
-            return getWinningNumbers(lottoNumbers, getBonusNumber());
+            return getWinningNumbers(lottoNumbers, inputBonusNumber());
         }
     }
 
