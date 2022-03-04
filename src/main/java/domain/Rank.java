@@ -31,19 +31,18 @@ public enum Rank {
 	}
 
 	public static Rank getRank(final int winningCount, boolean hasBonusBall) {
-		Rank properRank = Arrays.stream(values())
+		if (isThirdRank(winningCount, hasBonusBall)) {
+			return Rank.THIRD;
+		}
+
+		return Arrays.stream(values())
 			.filter(rank -> rank.getCorrectedBalls() == winningCount)
 			.findFirst()
 			.orElse(Rank.NONE);
-
-		if (isThirdRank(properRank, hasBonusBall)) {
-			return Rank.THIRD;
-		}
-		return properRank;
 	}
 
-	private static boolean isThirdRank(final Rank rank, final boolean hasBonusBall) {
-		return rank.getCorrectedBalls() == SECOND_THIRD_CORRECTED_BALLS && !hasBonusBall;
+	private static boolean isThirdRank(final int winningCount, final boolean hasBonusBall) {
+		return winningCount == SECOND_THIRD_CORRECTED_BALLS && !hasBonusBall;
 	}
 
 	public static List<Rank> getValuesExceptNoneRank() {
