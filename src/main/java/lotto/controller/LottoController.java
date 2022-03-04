@@ -1,12 +1,12 @@
 package lotto.controller;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoPurchaseMoney;
 import lotto.domain.Lottos;
+import lotto.domain.LottosFactory;
 import lotto.domain.Rank;
 import lotto.domain.WinnerLotto;
 import lotto.domain.vo.LottoNumber;
@@ -14,12 +14,6 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-
-    private final Store store;
-
-    public LottoController(Store store) {
-        this.store = store;
-    }
 
     public void run() {
         LottoPurchaseMoney money = new LottoPurchaseMoney(InputView.inputMoney());
@@ -31,18 +25,11 @@ public class LottoController {
     private Lottos purchaseLottos(LottoPurchaseMoney money) {
         int manualAmount = InputView.inputManualLottoAmount();
 
-        List<Lotto> manualLottos = purchaseManualLottos(money, manualAmount);
-        List<Lotto> autoLottos = store.buyAutoLotto(money.calculateAvailablePurchaseAmount(manualAmount));
+        List<Lotto> manualLottos = LottosFactory.MANUAL.generate(manualAmount);
+        List<Lotto> autoLottos = LottosFactory.AUTO.generate(money.calculateAvailablePurchaseAmount(manualAmount));
         OutputView.printLottosSize(manualLottos.size(), autoLottos.size());
 
         return new Lottos(concatLottos(manualLottos, autoLottos));
-    }
-
-    private List<Lotto> purchaseManualLottos(LottoPurchaseMoney money, int manualAmount) {
-        if (money.isPurchaseLotto(manualAmount)) {
-            return store.buyManualLotto(manualAmount);
-        }
-        return Collections.emptyList();
     }
 
     private List<Lotto> concatLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
