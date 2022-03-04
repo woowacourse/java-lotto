@@ -1,23 +1,27 @@
 package lotterymachine.domain;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LotteryNumber implements Comparable<LotteryNumber> {
+    public static final Map<Integer, LotteryNumber> numbers;
     private static final int MINIMUM_LOTTERY_NUMBER = 1;
     private static final int MAXIMUM_LOTTERY_NUMBER = 45;
     private static final String OUT_OF_RANGE = "로또 번호는 1~45 사이의 값이어야 합니다.";
-    public static final List<LotteryNumber> numbers;
+
+    static {
+        numbers = IntStream.rangeClosed(MINIMUM_LOTTERY_NUMBER, MAXIMUM_LOTTERY_NUMBER)
+                .mapToObj(LotteryNumber::new)
+                .collect(Collectors.toMap(LotteryNumber::getNumber, i -> i));
+    }
 
     private final int number;
 
-    static {
-        numbers = IntStream.rangeClosed(MINIMUM_LOTTERY_NUMBER - 1, MAXIMUM_LOTTERY_NUMBER)
-                .boxed()
-                .map(LotteryNumber::new)
-                .collect(Collectors.toList());
+    private LotteryNumber(int number) {
+        this.number = number;
     }
 
     public static LotteryNumber of(int number) {
@@ -29,10 +33,6 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
         if (number < MINIMUM_LOTTERY_NUMBER || number > MAXIMUM_LOTTERY_NUMBER) {
             throw new IllegalArgumentException(OUT_OF_RANGE);
         }
-    }
-
-    private LotteryNumber(int number) {
-        this.number = number;
     }
 
     public int getNumber() {
