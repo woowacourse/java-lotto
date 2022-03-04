@@ -5,5 +5,5 @@ import lotto.domain.LottoNumbers;
 import java.util.List;
 
 public interface LottoGenerator {
-    List<LottoNumbers> generateLottoNumbersGroup(final int numberOfGenerating);
+    List<LottoNumbers> generateLottoNumbersGroup(final int numberOfGenerating, final List<List<String>> lottoNumbers);
 }

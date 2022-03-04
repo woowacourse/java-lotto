@@ -24,16 +24,13 @@ public class WinningNumbers {
 
     public LottoMatchKind getLottoMatchResult(final LottoNumbers numbers) {
         final int matchedCount = numbers.getMatchCount(lastWinningNumbers);
-        if (getBlankMatchResult(numbers, matchedCount)) {
+        boolean bonusMatch = false;
+        if (matchedCount < WINNING_MINIMUM_MATCH_COUNTS) {
             return LottoMatchKind.BLANK;
         }
-        return LottoMatchKind.from(matchedCount, numbers.hasSameNumberWith(bonusNumber));
-    }
-
-    private boolean getBlankMatchResult(LottoNumbers numbers, int matchedCount) {
-        if (matchedCount < WINNING_MINIMUM_MATCH_COUNTS) {
-            return true;
+        if (matchedCount == WINNING_WITH_BONUS_MATCH_COUNTS) {
+            bonusMatch = numbers.hasSameNumberWith(bonusNumber);
         }
-        return numbers.hasSameNumberWith(bonusNumber) && matchedCount != WINNING_WITH_BONUS_MATCH_COUNTS;
+        return LottoMatchKind.from(matchedCount, bonusMatch);
     }
 }

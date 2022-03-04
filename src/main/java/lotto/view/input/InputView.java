@@ -5,6 +5,10 @@ import java.util.List;
 public interface InputView {
     String inputPurchaseAmount();
 
+    String inputManualPurchaseCounts();
+
+    List<List<String>> inputManualPurchaseWinningNumbers(final int counts);
+
     List<String> inputLastWeekWinningNumbers();
 
     String inputBonusNumber();

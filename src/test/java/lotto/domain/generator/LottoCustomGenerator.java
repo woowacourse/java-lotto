@@ -9,9 +9,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.util.constants.Lotto.LAST_LOTTO_NUMBER;
-
 public class LottoCustomGenerator implements LottoGenerator {
+    private static final int LAST_LOTTO_NUMBER = 45;
     private static final int MAX_GENERATING_LOTTO_NUMBERS_COUNT = 39;
     private static final String TEST_LOTTO_NUMBERS_COUNT_EXCEED_EXCEPTION_MESSAGE =
             "테스트 시에는 로또 번호들을 39개까지 생성할 수 있습니다.";
@@ -26,7 +25,7 @@ public class LottoCustomGenerator implements LottoGenerator {
     }
 
     @Override
-    public List<LottoNumbers> generateLottoNumbersGroup(int numberOfGenerating) {
+    public List<LottoNumbers> generateLottoNumbersGroup(final int numberOfGenerating, final List<List<String>> lottoNumbers) {
         if (numberOfGenerating > MAX_GENERATING_LOTTO_NUMBERS_COUNT) {
             throw new TestAbortedException(TEST_LOTTO_NUMBERS_COUNT_EXCEED_EXCEPTION_MESSAGE);
         }

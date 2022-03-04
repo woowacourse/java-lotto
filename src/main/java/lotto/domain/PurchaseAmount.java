@@ -13,7 +13,7 @@ public class PurchaseAmount {
 
     public static PurchaseAmount fromPurchaseAmountAndLottoPrice(final String amount, final int price) {
         validateNaturalNumber(amount);
-        int naturalNumberValue = Integer.parseInt(amount);
+        final int naturalNumberValue = Integer.parseInt(amount);
         validateMultipleOfPrice(naturalNumberValue, price);
         return new PurchaseAmount(naturalNumberValue);
     }
