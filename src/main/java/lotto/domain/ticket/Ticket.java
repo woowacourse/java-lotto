@@ -27,14 +27,14 @@ public class Ticket {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public boolean contains(final Ball ball) {
-        return balls.contains(ball);
-    }
-
     public int countMatches(final Ticket ticket) {
         return (int) this.balls.stream()
                 .filter(ticket::contains)
                 .count();
+    }
+
+    public boolean contains(final Ball ball) {
+        return balls.contains(ball);
     }
 
     public List<Integer> getBallNumbers() {
