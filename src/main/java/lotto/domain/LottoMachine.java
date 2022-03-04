@@ -18,7 +18,7 @@ public class LottoMachine {
 
     public static List<Lotto> generateLottos(int size) {
         return IntStream.range(0, size)
-            .mapToObj(i -> new Lotto(shuffleNumbers().subList(START_INCLUSIVE, END_EXCLUSIVE)))
+            .mapToObj(i -> Lotto.of(shuffleNumbers().subList(START_INCLUSIVE, END_EXCLUSIVE)))
             .collect(Collectors.toList());
     }
 

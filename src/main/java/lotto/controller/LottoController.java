@@ -57,6 +57,6 @@ public class LottoController {
     }
 
     private WinnerLotto createWinnerLotto(List<LottoNumber> winnerLottoNumbers, LottoNumber bonusLottoNumber) {
-        return new WinnerLotto(new Lotto(winnerLottoNumbers), bonusLottoNumber);
+        return new WinnerLotto(Lotto.of(winnerLottoNumbers), bonusLottoNumber);
     }
 }

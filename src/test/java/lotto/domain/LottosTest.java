@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class LottosTest {
 
-    private static final Lotto LOTTO = new Lotto(givenNumbers(1, 2, 3, 4, 5, 6));
+    private static final Lotto LOTTO = Lotto.of(givenNumbers(1, 2, 3, 4, 5, 6));
 
     @Test
     @DisplayName("로또 개수는 1개 이상이어야 한다.")
@@ -34,12 +34,12 @@ public class LottosTest {
     @DisplayName("로또들의 등수들을 반환한다.")
     void findRanks() {
         Lottos lottos = new Lottos(List.of(
-            new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)),
-            new Lotto(givenNumbers(1, 2, 3, 4, 5, 7)),
-            new Lotto(givenNumbers(1, 2, 3, 4, 5, 8)),
-            new Lotto(givenNumbers(1, 2, 3, 4, 9, 10)),
-            new Lotto(givenNumbers(1, 2, 3, 9, 10, 11)),
-            new Lotto(givenNumbers(11, 12, 13, 14, 15, 16)))
+            Lotto.of(givenNumbers(1, 2, 3, 4, 5, 6)),
+            Lotto.of(givenNumbers(1, 2, 3, 4, 5, 7)),
+            Lotto.of(givenNumbers(1, 2, 3, 4, 5, 8)),
+            Lotto.of(givenNumbers(1, 2, 3, 4, 9, 10)),
+            Lotto.of(givenNumbers(1, 2, 3, 9, 10, 11)),
+            Lotto.of(givenNumbers(11, 12, 13, 14, 15, 16)))
         );
 
         List<Rank> ranks = lottos.match(new WinnerLotto(LOTTO, LottoNumber.of(7)));

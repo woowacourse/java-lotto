@@ -29,7 +29,7 @@ public class InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
         return IntStream.range(0, amount)
-            .mapToObj(i -> new Lotto(convertToNumbers(validateBlank(SCANNER.nextLine()))))
+            .mapToObj(i -> Lotto.of(convertToNumbers(validateBlank(SCANNER.nextLine()))))
             .collect(Collectors.toList());
     }
 

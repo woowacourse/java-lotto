@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class WinnerLottoTest {
     private static final LottoNumber BONUS = LottoNumber.of(7);
-    private static final Lotto LOTTO = new Lotto(givenNumbers(1, 2, 3, 4, 5, 6));
+    private static final Lotto LOTTO = Lotto.of(givenNumbers(1, 2, 3, 4, 5, 6));
     private static final WinnerLotto WINNER_LOTTO = new WinnerLotto(LOTTO, BONUS);
 
     @ParameterizedTest(name = "로또번호 : {0}, 결과 : {1}")
@@ -40,12 +40,12 @@ public class WinnerLottoTest {
 
     static Stream<Arguments> lottoNumbersAndRank() {
         return Stream.of(
-            Arguments.arguments(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)), Rank.FIRST),
-            Arguments.arguments(new Lotto(givenNumbers(1, 2, 3, 4, 5, 7)), Rank.SECOND),
-            Arguments.arguments(new Lotto(givenNumbers(1, 2, 3, 4, 5, 9)), Rank.THIRD),
-            Arguments.arguments(new Lotto(givenNumbers(1, 2, 3, 4, 9, 10)), Rank.FOURTH),
-            Arguments.arguments(new Lotto(givenNumbers(1, 2, 3, 8, 9, 10)), Rank.FIFTH),
-            Arguments.arguments(new Lotto(givenNumbers(1, 2, 8, 9, 10, 11)), Rank.NONE)
+            Arguments.arguments(Lotto.of(givenNumbers(1, 2, 3, 4, 5, 6)), Rank.FIRST),
+            Arguments.arguments(Lotto.of(givenNumbers(1, 2, 3, 4, 5, 7)), Rank.SECOND),
+            Arguments.arguments(Lotto.of(givenNumbers(1, 2, 3, 4, 5, 9)), Rank.THIRD),
+            Arguments.arguments(Lotto.of(givenNumbers(1, 2, 3, 4, 9, 10)), Rank.FOURTH),
+            Arguments.arguments(Lotto.of(givenNumbers(1, 2, 3, 8, 9, 10)), Rank.FIFTH),
+            Arguments.arguments(Lotto.of(givenNumbers(1, 2, 8, 9, 10, 11)), Rank.NONE)
         );
     }
 }
