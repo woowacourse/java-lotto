@@ -24,17 +24,6 @@ class TotalPurchaseAmountTest {
     }
 
     @Test
-    @DisplayName("자동 구매 개수를 반환한다.")
-    void getCountOfAutoLottoNumbers_Test() {
-        //given
-        final int expected = 6;
-        //when
-        final int actual = totalPurchaseAmount.getTotalPurchaseCount();
-        //then
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
     @DisplayName("총 수익을 받아 수익률을 반환한다.")
     void getProfitRate_Test() {
         //given
