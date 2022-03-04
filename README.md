@@ -280,4 +280,31 @@
 </div>
 </details>
 
+<details>
+<summary>희봉의 세번째 리뷰에 따른 수정사항</summary>
+<div markdow="1">
+
+1. 같은 일급 컬렉션이 두개 존재
+    - [X] `WinningBalls` 를 `Lotto winningBalls` 로 만들기
+2. 테스트가 없는 메서드
+    - [X] `Money` 의 `rate()` 에 대한 테스트 진행
+    - [X] 그 외에 테스트를 안한 메서드는 없는지 확인
+3. 너무 많은 역할을 하는 메서드
+    - [X] `Lottos` 의 `purchase()` 메서드의 역할 분리
+      1. 함수로 나누기
+      2. 클래스로 나누기
+    - [X] 테스트 진행
+4. 배열보다는 리스트를 사용하자
+    - [X] 배열을 사용 중인 곳이 있다면 리스트로 변경
+5. 보너스 번호를 포함한 5등
+    - [X] `Prize` 의 `getPrize()` 가 제대로 역할을 하는지 테스트 추가
+    - [X] 테스트를 통과시키기 위한 리팩터링
+6. 개인적 리팩터링
+    - [X] 자동 로또와 수동 로또에 대한 생성자를 각각 정적 팩터리 메서드로 생성
+    - [X] `PrizeInformations` 를 `EnumMap` 으로 만들어보기
+    - [X] for 문을 최대한 Stream 을 이용해 작성해보기
+
+</div>
+</details>
+
 - [온라인 코드 리뷰 과정](https://github.com/woowacourse/woowacourse-docs/blob/master/maincourse/README.md)
