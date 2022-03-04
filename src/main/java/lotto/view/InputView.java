@@ -24,6 +24,19 @@ public class InputView {
         return numberOfManualLottos;
     }
 
+    public static List<List<Integer>> inputManualLottos(int numberOfManualLottos) {
+        if (numberOfManualLottos <= 0) {
+            return List.of();
+        }
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> manualLottos = IntStream.range(0, numberOfManualLottos)
+            .mapToObj(i -> scanner.nextLine())
+            .map(manualLotto -> convertStringsToIntegers(splitAndTrim(manualLotto)))
+            .collect(toList());
+        printEmptyLine();
+        return List.copyOf(manualLottos);
+    }
+
     public static List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningNumbers = scanner.nextLine();
@@ -63,15 +76,5 @@ public class InputView {
 
     private static void printEmptyLine() {
         System.out.println();
-    }
-
-    public static List<List<Integer>> inputManualLottos(int numberOfManualLottos) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<List<Integer>> manualLottos = IntStream.range(0, numberOfManualLottos)
-            .mapToObj(i -> scanner.nextLine())
-            .map(manualLotto -> convertStringsToIntegers(splitAndTrim(manualLotto)))
-            .collect(toList());
-        printEmptyLine();
-        return List.copyOf(manualLottos);
     }
 }
