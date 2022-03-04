@@ -3,27 +3,31 @@ package model;
 import java.util.Objects;
 
 public class LottoPurchasingMoney {
-    static final String NOT_ENOUGH_MONEY = "[ERROR] 로또를 구매하려면 최소 천원 이상 투입해야 합니다.";
+    private static final String NOT_ENOUGH_MONEY = "[ERROR] 로또를 구매하려면 최소 천원 이상 투입해야 합니다.";
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final int amount;
+    private final int value;
 
-    private LottoPurchasingMoney(int amount) {
-        this.amount = amount;
+    private LottoPurchasingMoney(int value) {
+        validateEnough(value);
+        this.value = value / LOTTO_PRICE * LOTTO_PRICE;
     }
 
-    public static LottoPurchasingMoney valueOf(int amount) {
-        validateEnough(amount);
-        return new LottoPurchasingMoney(amount);
+    public static LottoPurchasingMoney valueOf(int money) {
+        return new LottoPurchasingMoney(money);
     }
 
-    public int getAmount() {
-        return amount;
+    public int getValue() {
+        return value;
     }
 
-    private static void validateEnough(int amount) {
-        if (amount < LOTTO_PRICE) {
+    public int getPurchasableCount() {
+        return value / LOTTO_PRICE;
+    }
+
+    private void validateEnough(int value) {
+        if (value < LOTTO_PRICE) {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
         }
     }
@@ -37,11 +41,11 @@ public class LottoPurchasingMoney {
             return false;
         }
         LottoPurchasingMoney lottoPurchasingMoney = (LottoPurchasingMoney) o;
-        return amount == lottoPurchasingMoney.amount;
+        return value == lottoPurchasingMoney.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount);
+        return Objects.hash(value);
     }
 }
