@@ -1,5 +1,8 @@
 package view;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
@@ -8,6 +11,8 @@ import domain.Payment;
 import domain.WinningLotto;
 
 public class InputConvertor {
+
+	public static final String DELIMITER_COMMA = ",";
 
 	private InputConvertor() {
 	}
@@ -32,7 +37,12 @@ public class InputConvertor {
 
 	public static Lottos createManualLottos(OrderForm orderForm) {
 		try {
-			return Lottos.of(InputView.insertManualLottos(orderForm));
+			List<Lotto> lottos = InputView.insertManualLottos(orderForm)
+				.stream()
+				.map(lotto -> Lotto.of(lotto.split(DELIMITER_COMMA)))
+				.collect(Collectors.toUnmodifiableList());
+
+			return new Lottos(lottos);
 		} catch (Exception e) {
 			OutputView.printErrorMessage(e.getMessage());
 			return createManualLottos(orderForm);
