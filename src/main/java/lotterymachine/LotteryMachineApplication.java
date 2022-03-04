@@ -4,7 +4,7 @@ import lotterymachine.domain.*;
 import lotterymachine.view.OutputView;
 
 
-public class LotteryMachine {
+public class LotteryMachineApplication {
     public static void main(String[] args) {
         LotteryPurchase lotteryPurchase = LotteryConverter.createLotteryPurchase();
         LotteryTickets lotteryTickets = LotteryConverter.createLotteryTickets(lotteryPurchase);
