@@ -1,4 +1,4 @@
-package lotto.model.winningnumber;
+package lotto.model.lotto;
 
 import java.util.Collections;
 import java.util.HashSet;

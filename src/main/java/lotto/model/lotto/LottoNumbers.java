@@ -7,8 +7,8 @@ import java.util.stream.IntStream;
 
 public class LottoNumbers {
     private static final Set<Integer> numbers = new HashSet<>();
-    private static final int MIN = 1;
-    private static final int MAX = 45;
+    static final int MIN = 1;
+    static final int MAX = 45;
 
     static {
         IntStream.range(MIN, MAX)

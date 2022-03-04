@@ -2,8 +2,6 @@ package lotto.utils;
 
 public class InputValidateUtils {
     private static final String REGEX_NUMBER = "[0-9]+";
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
 
     private InputValidateUtils() {
     }
@@ -16,12 +14,6 @@ public class InputValidateUtils {
 
     public static void inputNumber(String number, String message) {
         if (!number.matches(REGEX_NUMBER)) {
-            throw new IllegalArgumentException(message);
-        }
-    }
-
-    public static void inputOutOfRange(int number, String message) {
-        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException(message);
         }
     }

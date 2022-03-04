@@ -1,14 +1,16 @@
-package lotto.model.winningnumber;
+package lotto.model.lotto;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import lotto.model.lotto.Lotto;
 import lotto.model.message.BonusBallExceptionMessage;
 import lotto.model.message.LottoNumberExceptionMessage;
 import lotto.utils.InputValidateUtils;
+
+import static lotto.model.lotto.LottoNumbers.MAX;
+import static lotto.model.lotto.LottoNumbers.MIN;
 
 public class WinningLotto {
     private final Lotto winningNumbers;
@@ -21,8 +23,14 @@ public class WinningLotto {
     }
 
     private void validateBonusBall(int bonusBall) {
-        InputValidateUtils.inputOutOfRange(bonusBall, BonusBallExceptionMessage.RANGE_ERROR.getMessage());
+        inputOutOfRange(bonusBall, BonusBallExceptionMessage.RANGE_ERROR.getMessage());
         validateReduplicationWithBonusBall(bonusBall);
+    }
+
+    private void inputOutOfRange(int number, String message) {
+        if (number < MIN || number > MAX) {
+            throw new IllegalArgumentException(message);
+        }
     }
 
     public void validateReduplicationWithBonusBall(int number) {

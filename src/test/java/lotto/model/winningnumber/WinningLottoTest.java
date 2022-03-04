@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import lotto.model.lotto.WinningLotto;
 import lotto.model.message.BonusBallExceptionMessage;
 import lotto.model.message.InputConverterExceptionMessage;
 import lotto.utils.ConverterUtils;

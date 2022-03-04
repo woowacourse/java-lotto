@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 import lotto.model.result.Rank;
 import lotto.model.result.RateOfReturn;
 import lotto.model.result.WinningResult;
-import lotto.model.winningnumber.WinningLotto;
-import lotto.model.winningnumber.WinningLottoResponse;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

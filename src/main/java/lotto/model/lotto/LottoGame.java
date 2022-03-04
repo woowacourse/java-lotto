@@ -4,7 +4,6 @@ import java.util.List;
 
 import lotto.model.result.RateOfReturn;
 import lotto.model.result.WinningResult;
-import lotto.model.winningnumber.WinningLottoResponse;
 
 public class LottoGame {
 

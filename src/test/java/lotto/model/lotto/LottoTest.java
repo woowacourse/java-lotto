@@ -12,8 +12,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.entry;
 
 import lotto.model.result.WinningResult;
 import lotto.model.result.Rank;
-import lotto.model.winningnumber.WinningLottoResponse;
-import lotto.model.winningnumber.WinningLotto;
 
 class LottoTest {
     private WinningResult winningResult;

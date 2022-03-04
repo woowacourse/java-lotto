@@ -5,8 +5,9 @@ import java.util.*;
 import lotto.model.message.LottoNumberExceptionMessage;
 import lotto.model.result.Rank;
 import lotto.model.result.WinningResult;
-import lotto.model.winningnumber.WinningLottoResponse;
-import lotto.utils.InputValidateUtils;
+
+import static lotto.model.lotto.LottoNumbers.MAX;
+import static lotto.model.lotto.LottoNumbers.MIN;
 
 public class Lotto {
     private static final int CHECKING_BONUS_NUMBER = 5;
@@ -26,8 +27,13 @@ public class Lotto {
     }
 
     private void validateNumberOutOfRange(List<Integer> numbers) {
-        numbers.forEach(number ->
-                InputValidateUtils.inputOutOfRange(number, LottoNumberExceptionMessage.RANGE_ERROR.getMassage()));
+        numbers.forEach(number -> inputOutOfRange(number, LottoNumberExceptionMessage.RANGE_ERROR.getMassage()));
+    }
+
+    private void inputOutOfRange(int number, String message) {
+        if (number < MIN || number > MAX) {
+            throw new IllegalArgumentException(message);
+        }
     }
 
     private void validateNumberSize(List<Integer> numbers) {

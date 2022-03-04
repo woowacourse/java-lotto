@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import lotto.model.result.WinningResult;
-import lotto.model.winningnumber.WinningLottoResponse;
 
 public class LottoStorage {
     private final List<Lotto> lottoNumbers;
