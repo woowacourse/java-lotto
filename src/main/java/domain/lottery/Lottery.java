@@ -8,7 +8,7 @@ import java.util.TreeSet;
 
 public final class Lottery {
 
-	private static final int LOTTERY_SIZE = 6;
+	public static final int LOTTERY_SIZE = 6;
 
 	private final Set<LotteryNumber> numbers;
 

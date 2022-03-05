@@ -6,7 +6,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LotteryGenerator {
-	public Lottery generateLottery(final List<Integer> lotteryNumbers) {
+	public static Lottery generateLottery(final List<Integer> lotteryNumbers) {
 		Set<LotteryNumber> collect = lotteryNumbers.stream()
 			.map(LotteryNumber::new)
 			.collect(Collectors.toCollection(TreeSet::new));

@@ -21,11 +21,10 @@ import domain.Rank;
 public class WinningLotteryTest {
 
 	private Lottery winningNumbers;
-	private final LotteryGenerator lotteryGenerator = new LotteryGenerator();
 
 	@BeforeEach
 	void init() {
-		winningNumbers = lotteryGenerator.generateLottery(Arrays.asList(1, 2, 3, 4, 5, 6));
+		winningNumbers = LotteryGenerator.generateLottery(Arrays.asList(1, 2, 3, 4, 5, 6));
 	}
 
 	@Nested
@@ -34,7 +33,7 @@ public class WinningLotteryTest {
 		@Test
 		@DisplayName("범위가 1~45 이면서 당첨번호와 중복이 없으면 통과")
 		void theNumberOfBonusBall() {
-			winningNumbers = lotteryGenerator.generateLottery(Arrays.asList(1, 2, 3, 4, 5, 6));
+			winningNumbers = LotteryGenerator.generateLottery(Arrays.asList(1, 2, 3, 4, 5, 6));
 			assertThatNoException().isThrownBy(() ->
 				WinningLottery.of(winningNumbers, new LotteryNumber(10))
 			);
@@ -65,7 +64,7 @@ public class WinningLotteryTest {
 	@MethodSource("generateParameter")
 	void checkRank(final List<Integer> lottoNumbers, final Rank rank) {
 		//given
-		final Lottery lottery = lotteryGenerator.generateLottery(lottoNumbers);
+		final Lottery lottery = LotteryGenerator.generateLottery(lottoNumbers);
 		//when
 		WinningLottery winningLottery = WinningLottery.of(winningNumbers, new LotteryNumber(7));
 		//then

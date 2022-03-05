@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import domain.generateStrategy.LotteryNumberMockGenerator;
 import domain.lottery.Lotteries;
-import domain.lottery.LotteryGenerator;
 import domain.lottery.WinningLottery;
 
 public class ResultTest {
@@ -21,7 +20,7 @@ public class ResultTest {
 
 	@BeforeEach
 	void lotteryGameInit() {
-		lotteryGame = LotteryGame.of(6000, 0, new LotteryGenerator(), new LotteryNumberMockGenerator());
+		lotteryGame = LotteryGame.of(6000, 0, new LotteryNumberMockGenerator());
 	}
 
 	@Test

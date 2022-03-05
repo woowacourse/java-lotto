@@ -19,7 +19,6 @@ import domain.generatestrategy.LotteryNumberGeneratorStrategy;
 
 public class LotteriesTest {
 
-	private final LotteryGenerator lotteryGenerator = new LotteryGenerator();
 
 	@DisplayName("로또의 개수가 정해진 수 만큼 만들어지는지 확인")
 	@ParameterizedTest(name = "{index} {displayName} lotteryNumber={0}")
@@ -27,10 +26,9 @@ public class LotteriesTest {
 	void lotteries_number(final int lotteryNumber) {
 		//given
 		final List<Lottery> lotteriesNumber = new ArrayList<>();
-		final LotteryGenerator lotteryGenerator = new LotteryGenerator();
 		final LotteryNumberGeneratorStrategy lotteryNumberGeneratorStrategy = new LotteryNumberGenerator();
 		for (int i = 0; i < lotteryNumber; i++) {
-			lotteriesNumber.add(lotteryGenerator.generateLottery(lotteryNumberGeneratorStrategy.generateNumbers()));
+			lotteriesNumber.add(LotteryGenerator.generateLottery(lotteryNumberGeneratorStrategy.generateNumbers()));
 		}
 		//when
 		final Lotteries lotteries = Lotteries.from(lotteriesNumber);
@@ -45,12 +43,12 @@ public class LotteriesTest {
 		final List<Lottery> lotteriesNumbers = new ArrayList<>();
 		final LotteryNumberGeneratorStrategy lotteryNumberGeneratorStrategy = new LotteryNumberMockGenerator();
 		for (int i = 0; i < 6; i++) {
-			lotteriesNumbers.add(lotteryGenerator.generateLottery(lotteryNumberGeneratorStrategy.generateNumbers()));
+			lotteriesNumbers.add(LotteryGenerator.generateLottery(lotteryNumberGeneratorStrategy.generateNumbers()));
 		}
 		final Lotteries lotteries = Lotteries.from(lotteriesNumbers);
 		//when
 		final Map<Rank, Integer> rankResult = lotteries.getTheNumberOfWinners(
-			WinningLottery.of(lotteryGenerator.generateLottery(Arrays.asList(1,2,3,4,5,6)),
+			WinningLottery.of(LotteryGenerator.generateLottery(Arrays.asList(1,2,3,4,5,6)),
 				new LotteryNumber(7)));
 		//then
 		for (Rank rank : rankResult.keySet()) {

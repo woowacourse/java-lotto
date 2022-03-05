@@ -6,7 +6,6 @@ import domain.LotteryGame;
 import domain.Result;
 import domain.generatestrategy.LotteryNumberGenerator;
 import domain.lottery.Lotteries;
-import domain.lottery.LotteryGenerator;
 import domain.lottery.WinningLottery;
 import view.InputView;
 import view.OutputView;
@@ -34,7 +33,7 @@ public class LotteryGameController {
 		try {
 			final int inputMoney = inputMoney();
 			final int numOfManualLottery = inputNumOfManualLottery();
-			lotteryGame = LotteryGame.of(inputMoney, numOfManualLottery, new LotteryGenerator(), new LotteryNumberGenerator());
+			lotteryGame = LotteryGame.of(inputMoney, numOfManualLottery, new LotteryNumberGenerator());
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
 			initLotteryGame();

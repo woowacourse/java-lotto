@@ -1,15 +1,15 @@
 package domain.generatestrategy;
 
+import static domain.lottery.LotteryNumber.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LotteryNumberGenerator implements LotteryNumberGeneratorStrategy{
+import domain.lottery.Lottery;
 
-	private static final int MIN_LOTTERY_NUMBER = 1;
-	private static final int MAX_LOTTERY_NUMBER = 45;
-	private static final int LOTTERY_SIZE = 6;
+public class LotteryNumberGenerator implements LotteryNumberGeneratorStrategy{
 
 	private final List<Integer> numbers;
 
@@ -24,7 +24,7 @@ public class LotteryNumberGenerator implements LotteryNumberGeneratorStrategy{
 	public List<Integer> generateNumbers() {
 		Collections.shuffle(numbers);
 		return numbers.stream()
-			.limit(LOTTERY_SIZE)
+			.limit(Lottery.LOTTERY_SIZE)
 			.sorted()
 			.collect(Collectors.toList());
 	}

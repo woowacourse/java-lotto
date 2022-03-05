@@ -16,14 +16,13 @@ import domain.lottery.LotteryNumber;
 @DisplayName("LotteryGenerator 클래스 테스트")
 public class LotteryGeneratorTest {
 
-	private final LotteryGenerator lotteryGenerator = new LotteryGenerator();
 	private final LotteryNumberGeneratorStrategy lotteryNumberGeneratorStrategy = new LotteryNumberGenerator();
 
 	@Test
 	@DisplayName("생성된 6개의 수가 고유한지 확인")
 	void checkDuplicatedNumber() {
 		//given
-		final Lottery lottery = lotteryGenerator.generateLottery(
+		final Lottery lottery = LotteryGenerator.generateLottery(
 			lotteryNumberGeneratorStrategy.generateNumbers());
 		//when
 		//then
