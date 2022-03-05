@@ -14,7 +14,7 @@ public class WinningLotto {
         this.bonusBall = bonusBall;
     }
 
-    public void match(Lottos lottos, LottoResult lottoResult) {
+    public void match(final Lottos lottos, final LottoResult lottoResult) {
         for (Lotto lotto : lottos.getLottos()) {
             int matchingCount = getMatchingCount(lotto);
             boolean bonus = isBonus(lotto, matchingCount);

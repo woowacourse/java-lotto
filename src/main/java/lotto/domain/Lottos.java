@@ -18,7 +18,7 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResult compareWinningLotto(WinningLotto winningLotto) {
+    public LottoResult compareWinningLotto(final WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
 
         winningLotto.match(this, lottoResult);
