@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import domain.dto.ManualTicketDto;
 import domain.dto.ManualTicketsDto;
 import domain.strategy.CustomTicketingStrategy;
 
@@ -67,10 +68,10 @@ class TicketsTest {
 		int money = 14000;
 		TicketCounter manualCount = new TicketCounter(money, 3);
 
-		List<List<Integer>> manualTickets = new ArrayList<>();
-		manualTickets.add(Arrays.asList(8, 21, 23, 41, 42, 43));
-		manualTickets.add(Arrays.asList(3, 5, 11, 16, 32, 38));
-		manualTickets.add(Arrays.asList(7, 11, 16, 35, 36, 44));
+		List<ManualTicketDto> manualTickets = new ArrayList<>();
+		manualTickets.add(new ManualTicketDto(Arrays.asList(8, 21, 23, 41, 42, 43)));
+		manualTickets.add(new ManualTicketDto(Arrays.asList(7, 11, 16, 35, 36, 44)));
+		manualTickets.add(new ManualTicketDto(Arrays.asList(3, 5, 11, 16, 32, 38)));
 
 		ManualTicketsDto manualTicketsDto = new ManualTicketsDto(manualTickets);
 

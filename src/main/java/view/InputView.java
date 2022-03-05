@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import domain.dto.ManualTicketDto;
 import domain.dto.ManualTicketsDto;
 
 public class InputView {
@@ -48,9 +49,9 @@ public class InputView {
 		System.out.println();
 		System.out.println(MANUAL_LOTTO_TICKETS_PURCHASE_MESSAGE);
 
-		List<List<Integer>> tickets = new ArrayList<>();
+		List<ManualTicketDto> tickets = new ArrayList<>();
 		for(int i = 0; i<count; i++) {
-			tickets.add(getManualLottoTicket());
+			tickets.add(new ManualTicketDto(getManualLottoTicket()));
 		}
 
 		return new ManualTicketsDto(tickets);

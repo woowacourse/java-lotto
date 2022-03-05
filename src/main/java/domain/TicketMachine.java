@@ -3,6 +3,7 @@ package domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import domain.dto.ManualTicketDto;
 import domain.dto.ManualTicketsDto;
 import domain.strategy.TicketingStrategy;
 
@@ -18,8 +19,9 @@ public class TicketMachine {
 		return new Tickets(manualAndAutoTickets);
 	}
 
-	private static List<Ticket> generateManualTickets(final List<List<Integer>> lottoTickets) {
+	private static List<Ticket> generateManualTickets(final List<ManualTicketDto> lottoTickets) {
 		return lottoTickets.stream()
+			.map(ManualTicketDto::getTicket)
 			.map(Ticket::new)
 			.collect(Collectors.toList());
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import domain.dto.ManualTicketDto;
 import domain.dto.ManualTicketsDto;
 import domain.strategy.CustomTicketingStrategy;
 
@@ -40,10 +41,10 @@ class SetUpTicketsAndWinningNumber {
 	}
 
 	private ManualTicketsDto getManualTickets() {
-		List<List<Integer>> manualTickets = new ArrayList<>();
-		manualTickets.add(Arrays.asList(8, 21, 23, 41, 42, 43));
-		manualTickets.add(Arrays.asList(3, 5, 11, 16, 32, 38));
-		manualTickets.add(Arrays.asList(7, 11, 16, 35, 36, 44));
+		List<ManualTicketDto> manualTickets = new ArrayList<>();
+		manualTickets.add(new ManualTicketDto(Arrays.asList(8, 21, 23, 41, 42, 43)));
+		manualTickets.add(new ManualTicketDto(Arrays.asList(3, 5, 11, 16, 32, 38)));
+		manualTickets.add(new ManualTicketDto(Arrays.asList(7, 11, 16, 35, 36, 44)));
 
 		return new ManualTicketsDto(manualTickets);
 	}
