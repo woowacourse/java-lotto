@@ -24,7 +24,8 @@ public class LottoTest {
     @DisplayName("랜덤으로 생성한 모든 숫자가 1~45 사이에 위치하는가")
     void Is_Between_1_To_45() {
         Lotto lotto = new Lotto();
-        assertThat(lotto.getLotto().stream().allMatch(i -> i >= 1 && i <= 45)).isTrue();
+        assertThat(lotto.getLotto().stream()
+                .allMatch(lottoNumber -> lottoNumber.getNumber() >= 1 && lottoNumber.getNumber() <= 45)).isTrue();
     }
 
     @ParameterizedTest

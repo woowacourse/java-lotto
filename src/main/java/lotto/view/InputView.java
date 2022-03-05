@@ -9,12 +9,13 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final String ASK_MONEY_MESSAGE = "구입금액을 입력해주세요.";
     private static final String ASK_MANUAL_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String ASK_MANUAL_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String ASK_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ASK_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     private static final String NUMBER_DELIMITER = ",";
 
-    private final static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     private InputView() {
     }
@@ -42,7 +43,7 @@ public class InputView {
         if (count == 0) {
             return manualNumbers;
         }
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        System.out.println(ASK_MANUAL_NUMBERS_MESSAGE);
         for (int i = 0; i < count; i++) {
             List<Integer> collectManualNumber = collectManualNumber();
             manualNumbers.add(collectManualNumber);
