@@ -1,36 +1,33 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoTicket;
-import lotto.domain.vo.PurchaseAmount;
-import org.jetbrains.annotations.NotNull;
 
 public enum LottoTicketFactory {
 
     INSTANCE;
 
-    private final List<LottoNumber> availableLottoNumbers = createLottoNumbers();
+    private static final List<LottoNumber> LOTTO_NUMBER_CACHE = createLottoNumbers();
 
-    private List<LottoNumber> createLottoNumbers() {
+    private static List<LottoNumber> createLottoNumbers() {
         return IntStream.rangeClosed(1, 45)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    public List<LottoTicket> createTickets(PurchaseAmount money, List<String> manualTicketNumbers) {
+    public List<LottoTicket> createTickets(TicketPurchaseDecider ticketPurchaseDecider, List<String> manualTicketNumbers) {
 
         List<LottoTicket> manualTickets = getManualTickets(manualTicketNumbers);
-        int availableTicketCanBuy = money.availableTicketCanBuy();
-        List<LottoTicket> autoTickets = getAutoTickets(manualTicketNumbers, availableTicketCanBuy);
+        int autoTicketCount = ticketPurchaseDecider.getAutoTicketCount();
+        List<LottoTicket> autoTickets = getAutoTickets(autoTicketCount);
 
-        List<LottoTicket> resultTickets = new ArrayList<>();
-        resultTickets.addAll(manualTickets);
+        List<LottoTicket> resultTickets = new LinkedList<>(manualTickets);
         resultTickets.addAll(autoTickets);
 
         return Collections.unmodifiableList(resultTickets);
@@ -42,14 +39,14 @@ public enum LottoTicketFactory {
                 .collect(Collectors.toList());
     }
 
-    private List<LottoTicket> getAutoTickets(List<String> manualTicketNumbers, int availableTicketCanBuy) {
-        return IntStream.range(0, availableTicketCanBuy - manualTicketNumbers.size())
+    private List<LottoTicket> getAutoTickets(int autoTicketCount) {
+        return IntStream.range(0, autoTicketCount)
                 .mapToObj(lottoNumber -> createTicketShuffled())
                 .collect(Collectors.toList());
     }
 
     private LottoTicket createTicketShuffled() {
-        Collections.shuffle(availableLottoNumbers);
-        return new LottoTicket(new HashSet<>(availableLottoNumbers.subList(0, 6)));
+        Collections.shuffle(LOTTO_NUMBER_CACHE);
+        return new LottoTicket(new HashSet<>(LOTTO_NUMBER_CACHE.subList(0, 6)));
     }
 }

@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoRank;
+import lotto.domain.TicketPurchaseDecider;
 import lotto.domain.vo.PurchaseAmount;
 import lotto.domain.WinningStats;
 import lotto.domain.lottonumber.LottoNumber;
@@ -25,8 +26,10 @@ public enum OutputView {
     public static final String LOSS_WARNING_MESSAGE = "%s(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     public static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    public void printPurchasedTickets(List<LottoTicket> lottoTickets, int manualTicketSize) {
-        out.printf(PURCHASED_TICKET_MESSAGE, manualTicketSize, lottoTickets.size() - manualTicketSize);
+    public void printPurchasedTickets(List<LottoTicket> lottoTickets, TicketPurchaseDecider ticketPurchaseDecider) {
+        int manualTicketCount = ticketPurchaseDecider.getManualTicketCount();
+        int autoTicketCount = ticketPurchaseDecider.getAutoTicketCount();
+        out.printf(PURCHASED_TICKET_MESSAGE, manualTicketCount, autoTicketCount);
         lottoTickets.forEach(this::printLottoNumbers);
     }
 

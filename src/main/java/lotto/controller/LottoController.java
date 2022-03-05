@@ -2,15 +2,15 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.domain.LottoTicketFactory;
+import lotto.domain.TicketPurchaseDecider;
 import lotto.domain.vo.PurchaseAmount;
 import lotto.domain.WinningStats;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoTicket;
 import lotto.domain.lottonumber.WinningNumbers;
-import lotto.domain.vo.ManualTicketSize;
+import lotto.domain.vo.ManualTicketCount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import org.jetbrains.annotations.NotNull;
 
 public class LottoController {
 
@@ -21,12 +21,13 @@ public class LottoController {
     public void run() {
         // #1
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        ManualTicketSize manualTicketSize = getManualTicketSize(purchaseAmount);
-        List<String> manualTicketNumbers = inputView.inputTicketNumbersManually(manualTicketSize);
+        ManualTicketCount manualTicketCount = getManualTicketSize(purchaseAmount);
+        List<String> manualTicketNumbers = inputView.inputTicketNumbersManually(manualTicketCount);
+        TicketPurchaseDecider ticketPurchaseDecider = new TicketPurchaseDecider(purchaseAmount, manualTicketCount);
 
         // #2
-        List<LottoTicket> lottoTickets = lottoTicketFactory.createTickets(purchaseAmount, manualTicketNumbers);
-        outputView.printPurchasedTickets(lottoTickets, manualTicketNumbers.size());
+        List<LottoTicket> lottoTickets = lottoTicketFactory.createTickets(ticketPurchaseDecider, manualTicketNumbers);
+        outputView.printPurchasedTickets(lottoTickets, ticketPurchaseDecider);
 
         // #3
         LottoTicket lottoTicket = getLottoTicket();
@@ -48,9 +49,9 @@ public class LottoController {
         }
     }
 
-    private ManualTicketSize getManualTicketSize(PurchaseAmount purchaseAmount) {
+    private ManualTicketCount getManualTicketSize(PurchaseAmount purchaseAmount) {
         try {
-            return new ManualTicketSize(inputView.inputTicketSizeManually(), purchaseAmount);
+            return new ManualTicketCount(inputView.inputTicketSizeManually(), purchaseAmount);
         } catch (Exception e) {
             inputView.printErrorMessage(e);
             return getManualTicketSize(purchaseAmount);

@@ -2,20 +2,20 @@ package lotto.domain.vo;
 
 import java.util.Objects;
 
-public class ManualTicketSize {
+public class ManualTicketCount {
 
     static final String NOT_NUMBER_MESSAGE = "[ERROR] 구입금액은 숫자여야 합니다.";
     public static final String NOT_BUY_MANUAL_MESSAGE = "[ERROR] 구입 가능한 액수를 벗어납니다.";
-    private Integer ticketNumber;
+    private int value;
 
-    public ManualTicketSize(String ticketNumber, PurchaseAmount purchaseAmount) {
-        validateIsNumber(ticketNumber);
-        this.ticketNumber = Integer.parseInt(ticketNumber);
+    public ManualTicketCount(String ticketCount, PurchaseAmount purchaseAmount) {
+        validateIsNumber(ticketCount);
+        this.value = Integer.parseInt(ticketCount);
         validateCanBuy(purchaseAmount);
     }
 
-    public Integer ticketNumber() {
-        return ticketNumber;
+    public int ticketNumber() {
+        return value;
     }
 
     private void validateIsNumber(String input) {
@@ -34,7 +34,7 @@ public class ManualTicketSize {
 
     private boolean canBuy(PurchaseAmount purchaseAmount) {
         int canBuyNumber = purchaseAmount.availableTicketCanBuy();
-        return ticketNumber <= canBuyNumber;
+        return value <= canBuyNumber;
     }
 
 
@@ -46,19 +46,19 @@ public class ManualTicketSize {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ManualTicketSize that = (ManualTicketSize) o;
-        return Objects.equals(ticketNumber, that.ticketNumber);
+        ManualTicketCount that = (ManualTicketCount) o;
+        return Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ticketNumber);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
         return "ManualTicketNumber{" +
-                "ticketNumber=" + ticketNumber +
+                "ticketNumber=" + value +
                 '}';
     }
 }

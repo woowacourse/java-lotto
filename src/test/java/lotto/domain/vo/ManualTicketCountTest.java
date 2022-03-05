@@ -1,13 +1,13 @@
 package lotto.domain.vo;
 
-import static lotto.domain.vo.ManualTicketSize.NOT_BUY_MANUAL_MESSAGE;
+import static lotto.domain.vo.ManualTicketCount.NOT_BUY_MANUAL_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ManualTicketSizeTest {
+class ManualTicketCountTest {
 
     @Test
     @DisplayName("수동 구매가 가능하면 정상 입력된다")
@@ -15,7 +15,7 @@ class ManualTicketSizeTest {
         // given & when & then
         Assertions.assertDoesNotThrow(() -> {
             PurchaseAmount purchaseAmount = new PurchaseAmount("2000");
-            new ManualTicketSize("1", purchaseAmount);
+            new ManualTicketCount("1", purchaseAmount);
         });
     }
 
@@ -24,7 +24,7 @@ class ManualTicketSizeTest {
     void can_not_buy_manual_ticket() {
         // given & when & then
         assertThatThrownBy(
-                () -> new ManualTicketSize("3", new PurchaseAmount("2000")))
+                () -> new ManualTicketCount("3", new PurchaseAmount("2000")))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(NOT_BUY_MANUAL_MESSAGE);
     }

@@ -5,7 +5,7 @@ import static java.lang.System.out;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import lotto.domain.vo.ManualTicketSize;
+import lotto.domain.vo.ManualTicketCount;
 
 public enum InputView {
 
@@ -32,10 +32,10 @@ public enum InputView {
         return READER.nextLine();
     }
 
-    public List<String> inputTicketNumbersManually(ManualTicketSize manualTicketSize) {
+    public List<String> inputTicketNumbersManually(ManualTicketCount manualTicketCount) {
         out.println(INPUT_LOTTO_NUMBERS_MANUALLY_MESSAGE);
         List<String> manualTicketNumbers = new LinkedList<>();
-        for (int i = 0; i < manualTicketSize.ticketNumber(); i++) {
+        for (int i = 0; i < manualTicketCount.ticketNumber(); i++) {
             manualTicketNumbers.add(READER.nextLine());
         }
         return manualTicketNumbers;
