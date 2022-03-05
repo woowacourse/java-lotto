@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.function.BiPredicate;
 
 public enum Ranking {
     FIRST(2000_000_000, 6, false),
@@ -20,16 +21,18 @@ public enum Ranking {
         this.hasBonusNumber = hasBonusNumber;
     }
 
-    public static Ranking findRanking(int cnt, boolean hasBonusNumber) {
+    public static Ranking findRanking(int count, boolean hasBonusNumber) {
         return Arrays.stream(Ranking.values())
-                .filter(ranking -> {
-                    if(cnt == 5) {
-                        return ranking.hasBonusNumber == hasBonusNumber;
-                    }
-                    return ranking.count == cnt;
-                })
+                .filter(ranking -> checkCountAndBonusNumber(ranking, count, hasBonusNumber))
                 .findAny()
                 .orElse(NONE);
+    }
+
+    private static boolean checkCountAndBonusNumber(Ranking ranking, int count, boolean hasBonusNumber) {
+        if(count == 5) {
+            return ranking.hasBonusNumber == hasBonusNumber;
+        }
+        return ranking.count == count;
     }
 
     public long multiple(Integer count) {
