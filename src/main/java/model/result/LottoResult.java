@@ -5,11 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-	private long sumMoneyOfReturns;
 	private Map<Rank, Integer> countOfResult;
 
 	public LottoResult() {
-		this.sumMoneyOfReturns = 0;
 		countOfResult = new HashMap<>();
 		for (final Rank rank : Rank.values()) {
 			countOfResult.put(rank, 0);
@@ -26,12 +24,9 @@ public class LottoResult {
 	}
 
 	public long getSumOfRewards() {
-		Arrays.stream(Rank.values())
-			.filter(rank -> rank.checkNumberToReward())
-			.forEach(
-				statistics -> sumMoneyOfReturns += (countOfResult.getOrDefault(statistics, 0)
-					* (long)statistics.getValue()));
-
-		return sumMoneyOfReturns;
+		return Arrays.stream(Rank.values())
+			.filter(Rank::checkNumberToReward)
+			.mapToLong(rank -> (countOfResult.getOrDefault(rank, 0) * (long)rank.getValue()))
+			.sum();
 	}
 }
