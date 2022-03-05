@@ -3,13 +3,16 @@ package controller;
 import domain.Amount;
 import domain.LottoNumber;
 import domain.LottoResults;
+import domain.ManualLottoNumberGenerator;
 import domain.PurchaseLottoCounts;
 import domain.RandomLottoNumbersGenerator;
 import domain.Ticket;
 import domain.Tickets;
 import domain.WinningNumbers;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import view.InputView;
 import view.OutputView;
 
@@ -50,20 +53,30 @@ public class ManualLottoController {
 
     private Tickets makeTickets(PurchaseLottoCounts purchaseLottoCounts) {
         try {
-            Tickets manualTickets = createManualTicket(purchaseLottoCounts.getManualCount());
-            manualTickets.addAutoTickets(purchaseLottoCounts.getAutoCount(), new RandomLottoNumbersGenerator());
-            return manualTickets;
+            List<Ticket> manualTickets = createManualTicket(purchaseLottoCounts.getManualCount());
+            List<Ticket> autoTickets = createAutoTicket(purchaseLottoCounts.getAutoCount());
+
+            List<Ticket> allTickets = new ArrayList<>();
+            allTickets.addAll(manualTickets);
+            allTickets.addAll(autoTickets);
+            return new Tickets(allTickets);
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
             return makeTickets(purchaseLottoCounts);
         }
     }
 
-    private Tickets createManualTicket(int manualTicketsCount) {
+    private List<Ticket> createAutoTicket(int autoCount) {
+        return IntStream.rangeClosed(1, autoCount)
+                .mapToObj(index -> new Ticket(new RandomLottoNumbersGenerator()))
+                .collect(Collectors.toList());
+    }
+
+    private List<Ticket> createManualTicket(int manualTicketsCount) {
         List<List<Integer>> manualNumbersInput = InputView.requestManualNumbers(manualTicketsCount);
-        return new Tickets(manualNumbersInput.stream()
-                .map(Ticket::from)
-                .collect(Collectors.toList()));
+        return manualNumbersInput.stream()
+                .map(manualNumbers -> new Ticket(new ManualLottoNumberGenerator(manualNumbers)))
+                .collect(Collectors.toList());
     }
 
     private WinningNumbers createWinningNumbers() {
@@ -79,7 +92,7 @@ public class ManualLottoController {
 
     private Ticket createWinTicket() {
         try {
-            return Ticket.from(InputView.requestWinNumbers());
+            return new Ticket(new ManualLottoNumberGenerator(InputView.requestWinNumbers()));
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return createWinTicket();
