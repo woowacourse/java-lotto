@@ -31,12 +31,11 @@ public class LottoController {
 	public void playGame() {
 		Money insertedMoney = insertMoney();
 		LottoCount automaticLottoCount = new LottoCount(insertedMoney.makeMoneyToCount());
-		LottoResult lottoResult = new LottoResult();
 		LottoCount manualLottoCount = inputManualLottoCount(automaticLottoCount);
 		Lottos lottos = makeLottos(manualLottoCount, automaticLottoCount);
 		printLottos(manualLottoCount, automaticLottoCount, lottos);
 		WinningLottoNumber winningLottoNumber = storeWinningNumber();
-		compareLottoWithWinningNumber(lottos, winningLottoNumber, lottoResult);
+		LottoResult lottoResult = compareLottoWithWinningNumber(lottos, winningLottoNumber);
 		showResult(insertedMoney, lottoResult);
 	}
 
@@ -96,9 +95,8 @@ public class LottoController {
 		return LottoNumber.parseLottoNumber(input);
 	}
 
-	private void compareLottoWithWinningNumber(Lottos lottos, WinningLottoNumber winningLottoNumber,
-		LottoResult lottoResult) {
-		lottos.checkWithWinningNumberAndBonus(winningLottoNumber.getWinningLottoNumbersDTO(), lottoResult);
+	private LottoResult compareLottoWithWinningNumber(Lottos lottos, WinningLottoNumber winningLottoNumber) {
+		return lottos.getResultOfLottos(winningLottoNumber.getWinningLottoNumbersDTO());
 	}
 
 	private void showResult(Money insertedMoney, LottoResult lottoResult) {

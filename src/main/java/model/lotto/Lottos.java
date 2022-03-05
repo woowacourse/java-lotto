@@ -32,10 +32,11 @@ public class Lottos {
 		return lottosDTOS;
 	}
 
-	public void checkWithWinningNumberAndBonus(WinningLottoNumberDTO winningLottoNumbersDTO,
-		LottoResult lottoResult) {
+	public LottoResult getResultOfLottos(WinningLottoNumberDTO winningLottoNumbersDTO) {
+		LottoResult lottoResult = new LottoResult();
 		lottoStorage.forEach(
 			lotto -> lottoResult.increaseCountOfRank(lotto.match(winningLottoNumbersDTO)));
+		return lottoResult;
 	}
 
 	public List<Lotto> getLottoStorage() {
