@@ -44,24 +44,14 @@ public class Lotto {
     }
 
     public boolean isContainNumber(final LottoNumber lottoNumber) {
-        long count = lotto.stream()
-                .filter(number -> number.equals(lottoNumber))
-                .count();
-        return count > 0;
+        return this.lotto.contains(lottoNumber);
     }
 
     public int compare(final Lotto lotto) {
         int count = INIT_COUNT;
-        for (LottoNumber lottoNumber : this.lotto) {
-            count = countIncrease(lotto, count, lottoNumber);
-        }
-        return count;
-    }
-
-    private int countIncrease(Lotto lotto, int count, LottoNumber lottoNumber) {
-        if (lotto.isContainNumber(lottoNumber)) {
-            count += COUNT_INCREASE_UNIT;
-        }
+        count += this.lotto.stream()
+                .filter(lotto::isContainNumber)
+                .count();
         return count;
     }
 
