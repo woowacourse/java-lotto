@@ -25,8 +25,7 @@ class LottoWinningNumbersTest {
                     .stream()
                     .map(LottoNumber::new)
                     .collect(Collectors.toList());
-            assertThatThrownBy(
-                    () -> new LottoWinningNumbers(new Lotto(lottoNumbers), new LottoNumber(6)))
+            assertThatThrownBy(() -> new LottoWinningNumbers(Lotto.createManualLotto(lottoNumbers), new LottoNumber(6)))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ERROR_DUPLICATE_BONUS_NUMBER);
         }
@@ -42,7 +41,7 @@ class LottoWinningNumbersTest {
                     .stream()
                     .map(LottoNumber::new)
                     .collect(Collectors.toList());
-            assertThatCode(() -> new LottoWinningNumbers(new Lotto(lottoNumbers),
+            assertThatCode(() -> new LottoWinningNumbers(Lotto.createManualLotto(lottoNumbers),
                     new LottoNumber(7))).doesNotThrowAnyException();
         }
     }

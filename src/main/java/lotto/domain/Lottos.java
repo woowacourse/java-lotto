@@ -12,7 +12,7 @@ public class Lottos {
         List<Lotto> newLottos = new ArrayList<>(lottos);
         int count = totalCount - lottos.size();
         for (int i = 0; i < count; i++) {
-            newLottos.add(new Lotto());
+            newLottos.add(Lotto.createAutoLotto());
         }
         this.lottos = newLottos;
     }

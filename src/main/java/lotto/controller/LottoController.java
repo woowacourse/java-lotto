@@ -78,7 +78,7 @@ public class LottoController {
                 .map((s) -> removeBlank(s))
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-        return new Lotto(lottoNumbers);
+        return Lotto.createManualLotto(lottoNumbers);
     }
 
     private String removeBlank(final String value) {

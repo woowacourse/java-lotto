@@ -29,7 +29,7 @@ public class LottoTest {
                     .stream()
                     .map(LottoNumber::new)
                     .collect(Collectors.toList());
-            assertThatThrownBy(() -> new Lotto(lottoNumbers))
+            assertThatThrownBy(() -> Lotto.createManualLotto(lottoNumbers))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ERROR_WRONG_LOTTO_SIZE);
         }
@@ -45,7 +45,7 @@ public class LottoTest {
                     .stream()
                     .map(LottoNumber::new)
                     .collect(Collectors.toList());
-            assertThatThrownBy(() -> new Lotto(lottoNumbers))
+            assertThatThrownBy(() -> Lotto.createManualLotto(lottoNumbers))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessageContaining(ERROR_DUPLICATE_LOTTO_NUMBER);
         }
@@ -61,7 +61,7 @@ public class LottoTest {
                     .stream()
                     .map(LottoNumber::new)
                     .collect(Collectors.toList());
-            assertThatCode(() -> new Lotto(lottoNumbers)).doesNotThrowAnyException();
+            assertThatCode(() -> Lotto.createManualLotto(lottoNumbers)).doesNotThrowAnyException();
         }
 
         @ParameterizedTest
