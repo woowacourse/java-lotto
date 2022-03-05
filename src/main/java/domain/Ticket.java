@@ -39,12 +39,6 @@ public class Ticket {
 		return balls.contains(ball);
 	}
 
-	public List<String> makeBallsToStrings() {
-		return balls.stream()
-			.map(Object::toString)
-			.collect(Collectors.toList());
-	}
-
 	public List<Ball> getBalls() {
 		return Collections.unmodifiableList(balls);
 	}

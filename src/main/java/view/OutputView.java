@@ -2,6 +2,7 @@ package view;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import domain.Rank;
 import domain.Ticket;
@@ -37,10 +38,17 @@ public class OutputView {
 
 	private static void printTicket(Ticket ticket) {
 		StringBuilder stringBuilder = new StringBuilder(TICKET_START_SIGN);
-		stringBuilder.append(String.join(BALL_DELIMITER, ticket.makeBallsToStrings()))
+		stringBuilder.append(String.join(BALL_DELIMITER, makeBallsToStrings(ticket)))
 			.append(TICKET_END_SIGN);
 
 		System.out.println(stringBuilder.toString());
+	}
+
+	private static  List<String> makeBallsToStrings(Ticket ticket) {
+		return ticket.getBalls()
+			.stream()
+			.map(ball -> String.valueOf(ball.getNumber()))
+			.collect(Collectors.toList());
 	}
 
 	public static void printStatistics(WinningAnalyzeDto winningAnalyzeDto) {

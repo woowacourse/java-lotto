@@ -35,6 +35,10 @@ public class Ball {
 		}
 	}
 
+	public int getNumber() {
+		return number;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -48,10 +52,5 @@ public class Ball {
 	@Override
 	public int hashCode() {
 		return Objects.hash(number);
-	}
-
-	@Override
-	public String toString() {
-		return String.valueOf(number);
 	}
 }
