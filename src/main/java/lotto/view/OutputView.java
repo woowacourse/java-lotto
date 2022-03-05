@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +24,7 @@ public class OutputView {
     private static final String SUFFIX_COUNT = "개";
     private static final String SUFFIX_LAST_LINE = "입니다.";
     private static final String PREFIX_PROFIT = "총 수익률은 ";
-    private static final String DEFAULT_FORMAT = "%.2f";
+    private static final String DEFAULT_FORMAT = "0.00";
     private static final String PREFIX_PRINT_LOTTO = "[";
     private static final String SUFFIX_PRINT_LOTTO = "]";
     private static final String PRINT_LOTTO_DELIMITER = ", ";
@@ -68,6 +70,8 @@ public class OutputView {
     }
 
     public static void printProfit(final double profit) {
-        System.out.print(PREFIX_PROFIT + Double.parseDouble(String.format(DEFAULT_FORMAT, profit)) + SUFFIX_LAST_LINE);
+        DecimalFormat decimalFormat = new DecimalFormat(DEFAULT_FORMAT);
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
+        System.out.print(PREFIX_PROFIT + decimalFormat.format(profit) + SUFFIX_LAST_LINE);
     }
 }
