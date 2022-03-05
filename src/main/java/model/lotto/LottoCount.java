@@ -12,12 +12,12 @@ public class LottoCount {
 		this.count = count;
 	}
 
-	public void deductCountForManual(int count) {
-		checkCanMake(count);
+	public void decreaseCount(int count) {
+		checkCanDecrease(count);
 		this.count -= count;
 	}
 
-	private void checkCanMake(int count) {
+	private void checkCanDecrease(int count) {
 		if (this.count < count) {
 			throw new IllegalArgumentException(CANT_MAKE_AMOUNT_ERROR_MESSAGE);
 		}

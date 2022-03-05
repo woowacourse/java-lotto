@@ -10,14 +10,14 @@ public class LottoCountTest {
 	@DisplayName("수동 로또 한도 초과")
 	void makeManualLotto_X() {
 		LottoCount lottoCount = new LottoCount(1);
-		assertThatThrownBy(() -> lottoCount.deductCountForManual(2)).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> lottoCount.decreaseCount(2)).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	@DisplayName("수동 로또 정상")
 	void makeManualLotto_O() {
 		LottoCount lottoCount = new LottoCount(3);
-		lottoCount.deductCountForManual(2);
+		lottoCount.decreaseCount(2);
 		assertThat(lottoCount.getCount()).isEqualTo(1);
 	}
 }

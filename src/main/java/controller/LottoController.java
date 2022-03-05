@@ -56,7 +56,7 @@ public class LottoController {
 		try {
 			String count = inputView.inputManualLottoCount();
 			InputValidateUtils.checkInputIsBlankAndNumber(count, COUNT_BLANK_ERROR_MESSAGE, COUNT_NUMBER_ERROR_MESSAGE);
-			automaticLottoCount.deductCountForManual(Integer.parseInt(count));
+			automaticLottoCount.decreaseCount(Integer.parseInt(count));
 			return new LottoCount(Integer.parseInt(count));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
