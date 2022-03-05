@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class WinningLottoTest {
         LottoNumber bonusBall = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(lotto2, bonusBall);
 
-        assertEquals(Rank.FIRST, winningLotto.getLottoRank(lotto));
+        assertThat(winningLotto.getLottoRank(lotto)).isEqualTo(Rank.FIRST);
     }
 
     @Test
@@ -40,6 +39,6 @@ public class WinningLottoTest {
         LottoNumber bonusBall = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(lotto2, bonusBall);
 
-        assertEquals(Rank.SECOND, winningLotto.getLottoRank(lotto));
+        assertThat(winningLotto.getLottoRank(lotto)).isEqualTo(Rank.SECOND);
     }
 }

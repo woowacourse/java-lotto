@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,6 +48,6 @@ public class MoneyTest {
         Money payment = new Money(14000);
         Money profit = new Money(5000);
 
-        assertEquals(profit.calculateProfitRate(payment), 0.35, 0.01);
+        assertThat(profit.calculateProfitRate(payment)).isEqualTo(0.35, offset(0.01));
     }
 }

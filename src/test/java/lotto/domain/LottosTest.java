@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +30,7 @@ public class LottosTest {
     void create_lottos_money() {
         Lottos lottos = Lottos.from(new Money(3650));
 
-        assertEquals(lottos.getLottos().size(), 3);
+        assertThat(lottos.getLottos().size()).isEqualTo(3);
     }
 
     @Test
@@ -38,24 +38,24 @@ public class LottosTest {
     void get_total_size() {
         Lottos lottos = Lottos.of(lottoList, new Money(11000));
 
-        assertEquals(lottos.getLottos().size(), 14);
+        assertThat(lottos.getLottos().size()).isEqualTo(14);
     }
 
     @Test
     @DisplayName("로또들의 일치 개수를 확인 - 1등")
     void match_lottos_first() {
-        assertEquals(1, lottos.countLottoRank(winningLotto).get(Rank.FIRST));
+        assertThat(lottos.countLottoRank(winningLotto).get(Rank.FIRST)).isEqualTo(1);
     }
 
     @Test
     @DisplayName("로또들의 일치 개수를 확인 - 2등")
     void match_lottos_second() {
-        assertEquals(1, lottos.countLottoRank(winningLotto).get(Rank.SECOND));
+        assertThat(lottos.countLottoRank(winningLotto).get(Rank.SECOND)).isEqualTo(1);
     }
 
     @Test
     @DisplayName("로또들의 일치 개수를 확인 - 4등")
     void match_lottos_third() {
-        assertEquals(1, lottos.countLottoRank(winningLotto).get(Rank.FOURTH));
+        assertThat(lottos.countLottoRank(winningLotto).get(Rank.FOURTH)).isEqualTo(1);
     }
 }

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +28,6 @@ class LottoResultTest {
     @Test
     @DisplayName("총 수익 계산")
     void calculate_profit() {
-        assertEquals(2_030_050_000, lottoResult.getProfit().getMoney());
+        assertThat(lottoResult.getProfit().getMoney()).isEqualTo(2_030_050_000);
     }
 }
