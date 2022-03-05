@@ -1,12 +1,8 @@
 package lotterymachine;
 
-import lotterymachine.domain.LotteryTicket;
-import lotterymachine.domain.LotteryTickets;
-import lotterymachine.domain.WinningLottery;
-import lotterymachine.domain.WinningResult;
+import lotterymachine.domain.*;
 import lotterymachine.domain.vo.Count;
 import lotterymachine.domain.vo.Money;
-import lotterymachine.domain.RandomLotteryNumbersGenerator;
 import lotterymachine.view.InputView;
 import lotterymachine.view.OutputView;
 
@@ -21,7 +17,8 @@ public class LotteryMachineApplication {
         OutputView.printLotteryPurchaseCount(count);
         OutputView.printLotteryTickets(lotteryTickets);
 
-        WinningLottery winningLottery = new WinningLottery(InputView.getWinningLotteryNumbers(), InputView.getBonusNumber());
+        LotteryTicket winningLotteryNumbers = new LotteryTicket(InputView.getWinningLotteryNumbers());
+        WinningLottery winningLottery = new WinningLottery(winningLotteryNumbers, InputView.getBonusNumber());
         WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
         OutputView.printWinningLotteryResults(winningResult.getResult());
         OutputView.printProfitRate(winningResult.getTotalProfitRate(money.getValue()));

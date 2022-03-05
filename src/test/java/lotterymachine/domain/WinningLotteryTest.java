@@ -19,9 +19,10 @@ class WinningLotteryTest {
                 .mapToObj(LotteryNumber::from)
                 .collect(Collectors.toList());
         LotteryNumber inputBonusNumber = LotteryNumber.from(7);
+        LotteryTicket lotteryTicket = new LotteryTicket(input);
 
         assertThatThrownBy(() -> {
-            WinningLottery winningLottery = new WinningLottery(input, inputBonusNumber);
+            WinningLottery winningLottery = new WinningLottery(lotteryTicket, inputBonusNumber);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("보너스 볼이 당첨 번호와 중복됩니다.");
     }
@@ -33,11 +34,11 @@ class WinningLotteryTest {
                 .mapToObj(LotteryNumber::from)
                 .collect(Collectors.toList());
         LotteryNumber inputBonusNumber = LotteryNumber.from(7);
-
         assertThatThrownBy(() -> {
-            WinningLottery winningLottery = new WinningLottery(input, inputBonusNumber);
+            LotteryTicket lotteryTicket = new LotteryTicket(input);
+            WinningLottery winningLottery = new WinningLottery(lotteryTicket, inputBonusNumber);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("당첨 번호 숫자는 여섯개를 입력해야합니다.");
+                .hasMessageContaining("로또 숫자는 여섯개를 입력해야합니다.");
     }
 
     @Test
@@ -50,7 +51,8 @@ class WinningLotteryTest {
         LotteryNumber inputBonusNumber = LotteryNumber.from(7);
 
         assertThatThrownBy(() -> {
-            WinningLottery winningLottery = new WinningLottery(input, inputBonusNumber);
+            LotteryTicket lotteryTicket = new LotteryTicket(input);
+            WinningLottery winningLottery = new WinningLottery(lotteryTicket, inputBonusNumber);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복된 숫자를 입력 받았습니다.");
     }
@@ -62,7 +64,7 @@ class WinningLotteryTest {
                 .mapToObj(LotteryNumber::from)
                 .collect(Collectors.toList());
         LotteryNumber inputBonusNumber = LotteryNumber.from(14);
-        WinningLottery winningLottery = new WinningLottery(input, inputBonusNumber);
+        WinningLottery winningLottery = new WinningLottery(new LotteryTicket(input), inputBonusNumber);
         LotteryTicket lotteryTicket = new LotteryTicket(input);
 
         WinningLotteryRank winningLotteryRank = winningLottery.getWinningLotteryRank(lotteryTicket);

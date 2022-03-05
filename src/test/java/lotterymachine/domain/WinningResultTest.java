@@ -22,7 +22,7 @@ public class WinningResultTest {
         LotteryTickets lotteryTickets = new LotteryTickets(tickets);
 
         LotteryNumber bonusNumber = LotteryNumber.from(7);
-        WinningLottery winningLottery = new WinningLottery(lotteryNumbers, bonusNumber);
+        WinningLottery winningLottery = new WinningLottery(new LotteryTicket(lotteryNumbers), bonusNumber);
 
         WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
         Map<WinningLotteryRank, Integer> value = winningResult.getResult();
@@ -40,7 +40,7 @@ public class WinningResultTest {
         LotteryTickets lotteryTickets = new LotteryTickets(tickets);
 
         LotteryNumber bonusNumber = LotteryNumber.from(7);
-        WinningLottery winningLottery = new WinningLottery(lotteryNumbers, bonusNumber);
+        WinningLottery winningLottery = new WinningLottery(new LotteryTicket(lotteryNumbers), bonusNumber);
 
         WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
         double totalProfitRate = winningResult.getTotalProfitRate(money.getValue());

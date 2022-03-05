@@ -29,7 +29,7 @@ class LotteryTicketTest {
                 .map(i -> LotteryNumber.from(Integer.parseInt(i)))
                 .collect(Collectors.toList());
 
-        assertThat(lotteryTicket.countMatchingNumbers(inputWinningNumbers)).isEqualTo(expected);
+        assertThat(lotteryTicket.countMatchingNumbers(new LotteryTicket(inputWinningNumbers))).isEqualTo(expected);
     }
 
 

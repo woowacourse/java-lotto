@@ -59,9 +59,9 @@ public class LotteryTicket {
         }
     }
 
-    public int countMatchingNumbers(List<LotteryNumber> numbers) {
-        return (int) numbers.stream()
-                .filter(this.numbers::contains)
+    public int countMatchingNumbers(LotteryTicket numbers) {
+        return (int) this.numbers.stream()
+                .filter(numbers::containsNumber)
                 .count();
     }
 
