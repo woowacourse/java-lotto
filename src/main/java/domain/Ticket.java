@@ -1,10 +1,6 @@
 package domain;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 public class Ticket {
     public static final int LOTTO_SIZE = 6;
@@ -23,24 +19,6 @@ public class Ticket {
 
     private void checkTicketSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(REQUEST_NON_DUPLICATED_NUMBER);
-        }
-    }
-
-    public static Ticket from(List<Integer> numbersInput) {
-        List<LottoNumber> numbers = toLottoNumber(numbersInput);
-        checkDuplicateNumbers(numbers);
-        return new Ticket(new TreeSet<>(numbers));
-    }
-
-    private static List<LottoNumber> toLottoNumber(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
-    }
-
-    private static void checkDuplicateNumbers(List<LottoNumber> numbers) {
-        if (numbers.size() != new HashSet<>(numbers).size()) {
             throw new IllegalArgumentException(REQUEST_NON_DUPLICATED_NUMBER);
         }
     }

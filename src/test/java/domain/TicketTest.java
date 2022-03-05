@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -66,7 +67,7 @@ public class TicketTest {
     @Test
     void 입력받은_문자열로_로또번호_정상생성() {
         /* when */
-        assertThatCode(() -> Ticket.from(List.of(1, 2, 3, 4, 5, 6)))
+        assertThatCode(() -> new Ticket(new ManualLottoNumberGenerator(Arrays.asList(1, 2, 3, 4, 5, 6))))
                 /* then */
                 .doesNotThrowAnyException();
     }
@@ -76,7 +77,7 @@ public class TicketTest {
     @DisplayName("로또 번호 입력 테스트")
     void 로또번호입력(List<Integer> input, String testName) {
         /* when */
-        assertThatThrownBy(() -> Ticket.from(input))
+        assertThatThrownBy(() -> new Ticket(new ManualLottoNumberGenerator(input)))
                 /* then */
                 .isInstanceOf(IllegalArgumentException.class);
     }

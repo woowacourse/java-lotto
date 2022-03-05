@@ -10,12 +10,6 @@ public class Tickets {
         this.tickets = tickets;
     }
 
-    public void addAutoTickets(int count, LottoNumbersGenerator lottoNumbersGenerator) {
-        for (int i = 0; i < count; i++) {
-            tickets.add(new Ticket(lottoNumbersGenerator));
-        }
-    }
-    
     public List<Rank> getRanks(WinningNumbers winningNumbers) {
         return tickets.stream()
                 .map(winningNumbers::getTicketRank)
