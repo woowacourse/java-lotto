@@ -26,6 +26,7 @@ public class ManualLottoCount {
     public int getAutoCount(Budget budget) {
         return budget.getMaxCountForLottoIssue() - count;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
