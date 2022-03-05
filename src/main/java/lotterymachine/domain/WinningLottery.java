@@ -17,17 +17,6 @@ public class WinningLottery {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateWinningLotteryNumbers(List<LotteryNumber> numbers) {
-        validateSize(numbers);
-        validateDuplication(numbers);
-    }
-
-    private void validateSize(List<LotteryNumber> numbers) {
-        if (!isLotteryTicketSize(numbers.size())) {
-            throw new IllegalArgumentException(NOT_CORRECT_WINNING_NUMBERS);
-        }
-    }
-
     private static boolean isLotteryTicketSize(int size) {
         return size == LotteryTicket.TICKET_SIZE;
     }
@@ -38,6 +27,17 @@ public class WinningLottery {
                 .count();
         if (numbers != input.size()) {
             throw new IllegalArgumentException(DUPLICATION_INPUT_NUMBERS);
+        }
+    }
+
+    private void validateWinningLotteryNumbers(List<LotteryNumber> numbers) {
+        validateSize(numbers);
+        validateDuplication(numbers);
+    }
+
+    private void validateSize(List<LotteryNumber> numbers) {
+        if (!isLotteryTicketSize(numbers.size())) {
+            throw new IllegalArgumentException(NOT_CORRECT_WINNING_NUMBERS);
         }
     }
 

@@ -12,8 +12,8 @@ public class OutputView {
 
     public static void printLotteryTickets(LotteryTickets lotteryTickets) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (LotteryTicket lotteryTicket: lotteryTickets.getLotteryTickets()) {
-            stringBuilder.append(lotteryTicket.getNumbers()+"\n");
+        for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
+            stringBuilder.append(lotteryTicket.getNumbers() + "\n");
         }
         System.out.println(stringBuilder);
     }
@@ -21,6 +21,7 @@ public class OutputView {
     public static void printLotteryPurchaseCount(Count count) {
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", count.getPassivityValue(), count.getAutoValue());
     }
+
     public static void printWinningLotteryResults(Map<WinningLotteryRank, Integer> lotteryTicketResults) {
         System.out.println("당첨 통계\n" +
                 "---------");

@@ -23,7 +23,7 @@ public class LotteryTicket {
 
     public static List<LotteryTicket> from(List<List<Integer>> value) {
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
-        for (List<Integer> numbers:  value) {
+        for (List<Integer> numbers : value) {
             List<LotteryNumber> lotteryNumbers = LotteryNumber.from(numbers);
             lotteryTickets.add(new LotteryTicket(lotteryNumbers));
         }
@@ -38,6 +38,10 @@ public class LotteryTicket {
         return lotteryTickets;
     }
 
+    private static boolean isLotteryTicketSize(int size) {
+        return size == TICKET_SIZE;
+    }
+
     private void validateNumbers(List<LotteryNumber> numbers) {
         validateSize(numbers);
         validateDuplication(numbers);
@@ -47,10 +51,6 @@ public class LotteryTicket {
         if (!isLotteryTicketSize(numbers.size())) {
             throw new IllegalArgumentException(NOT_CORRECT_TICKET_SIZE);
         }
-    }
-
-    private static boolean isLotteryTicketSize(int size) {
-        return size == TICKET_SIZE;
     }
 
     private void validateDuplication(List<LotteryNumber> numbers) {

@@ -1,9 +1,9 @@
 package lotterymachine.domain;
 
 public class Count {
+    private static final String INVALID_PASSIVITY_VALUE = "수동 로또 개수가 총 구매 개수 보다 높습니다.";
     private final int autoValue;
     private final int passivityValue;
-    private static final String INVALID_PASSIVITY_VALUE  = "수동 로또 개수가 총 구매 개수 보다 높습니다.";
 
     public Count(int passivityValue, int totalValue) {
         validatePassivityValue(passivityValue, totalValue);

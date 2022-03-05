@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomLotteryNumbersGenerator implements LotteryNumbersGenerator{
+public class RandomLotteryNumbersGenerator implements LotteryNumbersGenerator {
     private static final int MINIMUM_LOTTERY_NUMBER = 1;
     private static final int MAXIMUM_LOTTERY_NUMBER = 45;
     private static final int SIZE_OF_LOTTERY_TICKETS = 6;
