@@ -18,6 +18,10 @@ public enum InputView {
     public static final String INPUT_TICKET_SIZE_MANUALLY_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     public static final String INPUT_LOTTO_NUMBERS_MANUALLY_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
+    private void printExceptionMessage(RuntimeException exception) {
+        out.println(exception.getMessage());
+    }
+
     public String inputMoney() {
         out.println(INPUT_MONEY_MESSAGE);
         return READER.nextLine();
@@ -49,5 +53,9 @@ public enum InputView {
 
     public void closeResource() {
         READER.close();
+    }
+
+    public void printErrorMessage(Exception e) {
+        out.println(e.getMessage());
     }
 }
