@@ -3,7 +3,7 @@ package model.lottonumber;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import model.lottonumber.vo.Number;
+import model.lottonumber.vo.LottoNumber;
 
 public class WinningNumbers {
     private static final int LOTTO_NUMBER_SIZE_COUNT = 6;
@@ -11,15 +11,15 @@ public class WinningNumbers {
     private static final String DUPLICATE_IN_WINNING_NUMBER_ERROR_MESSAGE = "[ERROR] 입력한 당첨번호들 중 중복되는 번호가 있습니다.";
     private static final String DUPLICATE_WITH_WINNING_NUMBER_ERROR_MESSAGE = "[ERROR] 입력한 보너스볼 번호가 당첨 번호와 중복됩니다.";
 
-    private final List<Number> winningNumbers;
-    private final Number bonusNumber;
+    private final List<LottoNumber> winningLottoNumbers;
+    private final LottoNumber bonusLottoNumber;
 
     public WinningNumbers(final List<Integer> winningNumbers, final int bonusNumber) {
         checkValidNumbers(winningNumbers, bonusNumber);
-        this.winningNumbers = winningNumbers.stream()
-                .map(Number::new)
+        this.winningLottoNumbers = winningNumbers.stream()
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
-        this.bonusNumber = new Number(bonusNumber);
+        this.bonusLottoNumber = new LottoNumber(bonusNumber);
     }
 
     private void checkValidNumbers(final List<Integer> winningNumbers, final int bonusNumber) {
@@ -50,11 +50,11 @@ public class WinningNumbers {
         return winningNumbers.stream().anyMatch(winningNumber -> winningNumber == bonusNumber);
     }
 
-    public List<Number> getWinningNumbers() {
-        return winningNumbers;
+    public List<LottoNumber> getWinningNumbers() {
+        return winningLottoNumbers;
     }
 
-    public Number getBonusNumber() {
-        return bonusNumber;
+    public LottoNumber getBonusNumber() {
+        return bonusLottoNumber;
     }
 }

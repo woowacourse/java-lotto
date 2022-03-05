@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.Arrays;
 import java.util.List;
 
-import model.lottonumber.vo.Number;
+import model.lottonumber.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +19,8 @@ class WinningNumbersTest {
         final int bonusNumber = 7;
 
         final WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
-        for (Number winningNumber : winningNumbers.getWinningNumbers()) {
-            assertThat(numbers).contains(winningNumber.getNumber());
+        for (LottoNumber winningLottoNumber : winningNumbers.getWinningNumbers()) {
+            assertThat(numbers).contains(winningLottoNumber.getNumber());
         }
         assertThat(winningNumbers.getBonusNumber().getNumber()).isEqualTo(7);
     }
