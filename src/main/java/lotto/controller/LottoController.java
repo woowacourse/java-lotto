@@ -8,7 +8,7 @@ import lotto.model.lotto.result.Money;
 import lotto.model.lotto.result.RateOfReturn;
 import lotto.model.lotto.result.WinningResult;
 import lotto.model.lotto.WinningLotto;
-import lotto.model.lotto.WinningLottoResponse;
+import lotto.dto.WinningLottoResponse;
 import lotto.utils.ConverterUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -53,6 +53,7 @@ public class LottoController {
         InputView.inputManualLottoMessage();
         List<Lotto> lottos = new ArrayList<>();
         for (int idx = 0; idx < manualCount.getNumber(); idx++) {
+            lottos.add(new Lotto(InputView.inputManualLottos()));
             lottoGame.makeManualLottos(lottos, receiveManualLotto());
         }
         return lottos;

@@ -3,6 +3,7 @@ package lotto.model.lotto;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.dto.WinningLottoResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

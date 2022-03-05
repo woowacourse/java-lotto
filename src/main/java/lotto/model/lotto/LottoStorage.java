@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import lotto.dto.LottoResponse;
+import lotto.dto.WinningLottoResponse;
 import lotto.model.lotto.result.WinningResult;
 
 public class LottoStorage {

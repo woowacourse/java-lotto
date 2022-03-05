@@ -38,11 +38,11 @@ public class WinningLotto {
         }
     }
 
-    Set<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return Collections.unmodifiableSet(winningNumbers.getNumbers());
     }
 
-    int getBonusBall() {
+    public int getBonusBall() {
         return bonusBall;
     }
 

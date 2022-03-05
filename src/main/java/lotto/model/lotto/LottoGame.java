@@ -2,6 +2,7 @@ package lotto.model.lotto;
 
 import java.util.List;
 
+import lotto.dto.WinningLottoResponse;
 import lotto.model.lotto.result.RateOfReturn;
 import lotto.model.lotto.result.WinningResult;
 

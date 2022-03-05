@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.List;
 
-import lotto.model.lotto.LottoResponse;
+import lotto.dto.LottoResponse;
 import lotto.model.lotto.result.Rank;
 import lotto.model.lotto.result.WinningResult;
 
