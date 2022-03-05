@@ -28,23 +28,16 @@ public class LottoController {
 	private final InputLottoNumbersGenerationStrategy manualStrategy = new InputLottoNumbersGenerationStrategy();
 	private final RandomLottoNumbersGenerationStrategy automaticStrategy = new RandomLottoNumbersGenerationStrategy();
 
-	private Money insertedMoney;
-	private LottoCount automaticLottoCount;
-	private LottoCount manualLottoCount;
-	private Lottos lottos;
-	private WinningLottoNumber winningLottoNumber;
-	private LottoResult lottoResult;
-
 	public void playGame() {
-		insertedMoney = insertMoney();
-		automaticLottoCount = new LottoCount(insertedMoney.makeMoneyToCount());
-		lottoResult = new LottoResult();
-		manualLottoCount = inputManualLottoCount();
-		lottos = makeLottos();
-		printLottos();
-		winningLottoNumber = storeWinningNumber();
-		compareLottoWithWinningNumber();
-		showResult();
+		Money insertedMoney = insertMoney();
+		LottoCount automaticLottoCount = new LottoCount(insertedMoney.makeMoneyToCount());
+		LottoResult lottoResult = new LottoResult();
+		LottoCount manualLottoCount = inputManualLottoCount(automaticLottoCount);
+		Lottos lottos = makeLottos(manualLottoCount, automaticLottoCount);
+		printLottos(manualLottoCount, automaticLottoCount, lottos);
+		WinningLottoNumber winningLottoNumber = storeWinningNumber();
+		compareLottoWithWinningNumber(lottos, winningLottoNumber, lottoResult);
+		showResult(insertedMoney, lottoResult);
 	}
 
 	private Money insertMoney() {
@@ -59,7 +52,7 @@ public class LottoController {
 		}
 	}
 
-	private LottoCount inputManualLottoCount() {
+	private LottoCount inputManualLottoCount(LottoCount automaticLottoCount) {
 		try {
 			String count = inputView.inputPassiveLottoCount();
 			InputValidateUtils.inputBlankAndNumber(count, COUNT_BLANK_ERROR_MESSAGE, COUNT_NUMBER_ERROR_MESSAGE);
@@ -67,21 +60,21 @@ public class LottoController {
 			return new LottoCount(Integer.parseInt(count));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
-			return inputManualLottoCount();
+			return inputManualLottoCount(automaticLottoCount);
 		}
 	}
 
-	private Lottos makeLottos() {
+	private Lottos makeLottos(LottoCount manualLottoCount, LottoCount automaticLottoCount) {
 		try {
 			inputView.inputPassiveLottoMessage();
 			return new Lottos(manualLottoCount, manualStrategy, automaticLottoCount, automaticStrategy);
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
-			return makeLottos();
+			return makeLottos(manualLottoCount, automaticLottoCount);
 		}
 	}
 
-	private void printLottos() {
+	private void printLottos(LottoCount manualLottoCount, LottoCount automaticLottoCount, Lottos lottos) {
 		outputView.printLottos(manualLottoCount.getCount(), automaticLottoCount.getCount(), lottos.getLottosDTO());
 	}
 
@@ -102,16 +95,17 @@ public class LottoController {
 		return LottoNumber.parseLottoNumber(input);
 	}
 
-	private void compareLottoWithWinningNumber() {
+	private void compareLottoWithWinningNumber(Lottos lottos, WinningLottoNumber winningLottoNumber,
+		LottoResult lottoResult) {
 		lottos.checkWithWinningNumberAndBonus(winningLottoNumber.getWinningLottoNumbersDTO(), lottoResult);
 	}
 
-	private void showResult() {
+	private void showResult(Money insertedMoney, LottoResult lottoResult) {
 		outputView.printResultMessage();
 		Arrays.stream(Rank.values())
 			.filter(rank -> rank.getMatchNumber() >= 3)
-			.forEach(statistics -> outputView.printResult(statistics.getMatchNumber(), statistics.getValue(),
-				lottoResult.getCountOfResult(statistics),
+			.forEach(rank -> outputView.printResult(rank.getMatchNumber(), rank.getValue(),
+				lottoResult.getCountOfResult(rank),
 				Rank.SECOND.getValue()));
 		outputView.printRateOfReturn(lottoResult.getSumOfRewards() / insertedMoney.getMoney());
 	}
