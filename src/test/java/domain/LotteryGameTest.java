@@ -77,4 +77,5 @@ public class LotteryGameTest {
 		}
 		return new PurchaseInformation(purchaseAmount, lotteries, theNumberOfManualLotteries);
 	}
+  
 }
