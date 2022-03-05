@@ -1,14 +1,13 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.validator.LottoValidator;
 
 public class Lotto {
 
+    public static final long LOTTO_PRICE = 1000;
     private static final String INPUT_NUMBERS_DELIMITER = ",";
 
     private final List<LottoNumber> lottoNumbers;
@@ -18,23 +17,12 @@ public class Lotto {
         this.lottoNumbers = List.copyOf(lottoNumbers);
     }
 
-    public static Lotto generateLottoByAuto() {
-        return new Lotto(LottoNumber.getRandomLottoNumbers());
+    public static Lotto generateByManual(String lottoNumbers) {
+        return new Lotto(receiveStringInput(lottoNumbers));
     }
 
-    public static Lotto generateLottoByConsole(String consoleInput) {
-        return new Lotto(receiveThroughConsole(consoleInput));
-    }
-
-    private static List<LottoNumber> receiveThroughConsole(String consoleInput) {
-        return convertToLottoNumbers(parseConsoleInput(consoleInput));
-    }
-
-    private static List<Integer> parseConsoleInput(String consoleInput) {
-        return Arrays.stream(consoleInput.split(INPUT_NUMBERS_DELIMITER))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+    private static List<LottoNumber> receiveStringInput(String stringInput) {
+        return convertToLottoNumbers(splitAndParseInteger(stringInput));
     }
 
     private static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
@@ -44,24 +32,31 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public Rank getRank(WinningLotto winningLotto, BonusNumber bonusNumber) {
-        int matchCount = getMatchCount(winningLotto);
-        boolean contains = isContain(bonusNumber.getBonusNumber());
-        return Rank.getRank(matchCount, contains);
+    private static List<Integer> splitAndParseInteger(String stringInput) {
+        return Arrays.stream(stringInput.split(INPUT_NUMBERS_DELIMITER))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
-    private int getMatchCount(WinningLotto winningLotto) {
+    public static Lotto generateByAuto() {
+        return new Lotto(LottoNumber.getRandomLottoNumbers());
+    }
+
+    public int getMatchCount(Lotto lotto) {
         return (int) lottoNumbers.stream()
-                .filter(winningLotto.getWinningLotto()::isContain)
+                .filter(lotto::isContain)
                 .count();
     }
 
-    public boolean isContain(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean isContain(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        return lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(", "));
     }
 }
