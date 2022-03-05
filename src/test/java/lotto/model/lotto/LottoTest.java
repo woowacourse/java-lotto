@@ -103,22 +103,22 @@ public class LottoTest {
 		assertThat(count).isEqualTo(1);
 	}
 
-	@DisplayName("당첨 번호와 3개가 일치하면 3을 반환한다")
+	@DisplayName("로또끼리 3개가 일치하면 3을 반환한다")
 	@Test
 	void match_3() {
-		WinningBalls winningBalls = WinningBalls.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
 		Lotto lotto = Lotto.fromManual(Arrays.asList("1", "2", "3", "7", "8", "9"));
+		Lotto lotto1 = Lotto.fromManual(Arrays.asList("1", "2", "3", "4", "5", "6"));
 
-		assertThat(lotto.match(winningBalls)).isEqualTo(3);
+		assertThat(lotto.match(lotto1)).isEqualTo(3);
 	}
 
 	@DisplayName("당첨 번호와 5개가 일치하면 5을 반환한다")
 	@Test
 	void match_5() {
-		WinningBalls winningBalls = WinningBalls.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
 		Lotto lotto = Lotto.fromManual(Arrays.asList("1", "2", "3", "4", "5", "9"));
+		Lotto lotto1 = Lotto.fromManual(Arrays.asList("1", "2", "3", "4", "5", "6"));
 
-		assertThat(lotto.match(winningBalls)).isEqualTo(5);
+		assertThat(lotto.match(lotto1)).isEqualTo(5);
 	}
 
 	@DisplayName("로또에 3이 포함된다면 true를 반환한다")

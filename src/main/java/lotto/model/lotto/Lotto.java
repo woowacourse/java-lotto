@@ -73,9 +73,9 @@ public class Lotto {
 		return money.countAvailable(PRICE);
 	}
 
-	public int match(WinningBalls winningBalls) {
-		return (int)lotto.stream()
-			.filter(winningBalls::match)
+	public int match(Lotto lotto) {
+		return (int)this.lotto.stream()
+			.filter(lotto::contains)
 			.count();
 	}
 

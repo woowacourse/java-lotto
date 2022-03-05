@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import lotto.model.prize.MatchResult;
+import lotto.model.prize.Prize;
 
 public class Lottos {
 
@@ -42,9 +42,9 @@ public class Lottos {
 		IntStream.range(0, autoCount).mapToObj(index -> Lotto.fromAuto()).forEach(lottos::add);
 	}
 
-	public List<MatchResult> match(WinningBalls winningBalls, BonusBall bonusBall) {
+	public List<Prize> match(WinningBalls winningBalls) {
 		return this.lottos.stream()
-			.map(lotto -> MatchResult.of(lotto, winningBalls, bonusBall))
+			.map(winningBalls::getPrize)
 			.collect(Collectors.toList());
 	}
 

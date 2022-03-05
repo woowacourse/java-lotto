@@ -1,16 +1,11 @@
 package lotto;
 
-import java.util.List;
-
 import lotto.model.Money;
 import lotto.model.dto.LottoDTO;
 import lotto.model.dto.PrizeInformationDTO;
-import lotto.model.lotto.BonusBall;
 import lotto.model.lotto.Lotto;
-import lotto.model.lotto.LottoBall;
 import lotto.model.lotto.Lottos;
 import lotto.model.lotto.WinningBalls;
-import lotto.model.prize.MatchResult;
 import lotto.model.prize.PrizeInformation;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -27,7 +22,7 @@ public class Controller {
 
 		WinningBalls winningBalls = getWinningNumbers();
 		PrizeInformation prizeInformation =
-			getPrize(lottos, winningBalls, getBonusNumber(winningBalls));
+			getPrize(lottos, winningBalls);
 
 		ResultView.showEarningRate(prizeInformation.calculateEarningRate(money));
 	}
@@ -73,15 +68,8 @@ public class Controller {
 		ResultView.showLottos(LottoDTO.from(lottos));
 	}
 
-	private PrizeInformation getPrize(
-		Lottos lottos, WinningBalls winningBalls, BonusBall bonusBall) {
-		List<MatchResult> matchResults = lottos.match(winningBalls, bonusBall);
-
-		return getPrizeInformations(matchResults);
-	}
-
-	private PrizeInformation getPrizeInformations(List<MatchResult> matchResults) {
-		PrizeInformation prizeInformation = PrizeInformation.from(matchResults);
+	private PrizeInformation getPrize(Lottos lottos, WinningBalls winningBalls) {
+		PrizeInformation prizeInformation = PrizeInformation.from(lottos, winningBalls);
 		ResultView.showPrizeInformation(PrizeInformationDTO.from(prizeInformation));
 
 		return prizeInformation;
@@ -89,21 +77,11 @@ public class Controller {
 
 	private WinningBalls getWinningNumbers() {
 		try {
-			return WinningBalls.from(InputView.askWinningNumbers());
+			return WinningBalls.from(InputView.askWinningNumbers(), InputView.askBonusNumber());
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return getWinningNumbers();
 		}
-	}
-
-	private BonusBall getBonusNumber(WinningBalls winningBalls) {
-		try {
-			return BonusBall.from(LottoBall.from(InputView.askBonusNumber()), winningBalls);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			return getBonusNumber(winningBalls);
-		}
-
 	}
 
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 import lotto.model.Money;
+import lotto.model.lotto.Lottos;
+import lotto.model.lotto.WinningBalls;
 
 public class PrizeInformation {
 	private final EnumMap<Prize, Integer> prizeInformation;
@@ -14,10 +16,12 @@ public class PrizeInformation {
 		this.prizeInformation = prizeInformation;
 	}
 
-	public static PrizeInformation from(List<MatchResult> matchResults) {
+	public static PrizeInformation from(Lottos lottos, WinningBalls winningBalls) {
 		EnumMap<Prize, Integer> prizeInformation = new EnumMap<>(Prize.class);
 		initializeInformation(prizeInformation);
-		getPrizeCount(prizeInformation, matchResults);
+
+		List<Prize> prizes = getPrizes(lottos, winningBalls);
+		addCount(prizeInformation, prizes);
 
 		return new PrizeInformation(prizeInformation);
 	}
@@ -28,9 +32,12 @@ public class PrizeInformation {
 			.forEach(prize -> prizeInformation.put(prize, 0));
 	}
 
-	private static void getPrizeCount(EnumMap<Prize, Integer> prizeInformation, List<MatchResult> matchResults) {
-		matchResults.stream()
-			.map(Prize::getPrize)
+	private static List<Prize> getPrizes(Lottos lottos, WinningBalls winningBalls) {
+		return lottos.match(winningBalls);
+	}
+
+	private static void addCount(EnumMap<Prize, Integer> prizeInformation, List<Prize> prizes) {
+		prizes.stream()
 			.filter(prize -> prize != Prize.NONE)
 			.forEach(prize -> addCount(prizeInformation, prize));
 	}
