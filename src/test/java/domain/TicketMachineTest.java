@@ -26,7 +26,7 @@ public class TicketMachineTest {
 
 		ManualTicketsDto manualTicketsDto = new ManualTicketsDto(manualTickets);
 
-		Tickets tickets = TicketMachine.generateTickets(ticketCounter, manualTicketsDto, new AutoStrategy());
+		Tickets tickets = TicketMachine.buyTickets(ticketCounter, manualTicketsDto, new AutoStrategy());
 
 		assertThat(tickets.size()).isEqualTo(14);
 	}

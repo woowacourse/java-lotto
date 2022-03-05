@@ -74,7 +74,7 @@ class TicketsTest {
 
 		ManualTicketsDto manualTicketsDto = new ManualTicketsDto(manualTickets);
 
-		Tickets tickets = TicketMachine.generateTickets(manualCount, manualTicketsDto, customLottoGenerator);
+		Tickets tickets = TicketMachine.buyTickets(manualCount, manualTicketsDto, customLottoGenerator);
 
 		numbers.add(Arrays.asList(7, 12, 26, 36, 44, 45));
 

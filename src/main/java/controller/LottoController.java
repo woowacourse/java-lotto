@@ -27,7 +27,7 @@ public class LottoController {
 		final ManualTicketsDto manualTicketsDto =
 			InputView.getManualLottoTickets(count);
 
-		Tickets tickets = TicketMachine.generateTickets(new TicketCounter(money, count), manualTicketsDto,
+		Tickets tickets = TicketMachine.buyTickets(new TicketCounter(money, count), manualTicketsDto,
 			new AutoStrategy());
 
 		OutputView.printTickets(tickets.getTickets(), manualTicketsDto.size());
