@@ -3,7 +3,7 @@ package model.lottonumber;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.lottonumber.generationstrategy.LottoNumbersGenerationStrategy;
+import strategy.LottoNumbersGenerationStrategy;
 
 public class LottoNumbers {
 	private static final String NUMBER_SIZE_ERROR_MESSAGE = "[Error]: 로또는 %d개의 숫자여야 합니다.";

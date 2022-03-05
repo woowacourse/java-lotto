@@ -4,23 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import model.lottonumber.LottoNumbers;
-import model.lottonumber.generationstrategy.LottoNumbersGenerationStrategy;
-import model.lottonumber.generationstrategy.RandomLottoNumbersGenerationStrategy;
 import model.result.LottoResult;
 import model.winningnumber.WinningLottoNumberDTO;
+import strategy.InputLottoNumbersGenerationStrategy;
+import strategy.LottoNumbersGenerationStrategy;
+import strategy.RandomLottoNumbersGenerationStrategy;
 
 public class Lottos {
 	private List<Lotto> lottoStorage;
 
-	public Lottos(LottoCount lottoCount) {
-		this.lottoStorage = makeLottos(lottoCount);
+	public Lottos(LottoCount manualLottoCount, LottoCount automaticLottoCount) {
+		lottoStorage = Stream.concat(makeLottos(manualLottoCount, new InputLottoNumbersGenerationStrategy()).stream(),
+			makeLottos(automaticLottoCount, new RandomLottoNumbersGenerationStrategy()).stream()).collect(
+			Collectors.toList());
 	}
 
-	private List<Lotto> makeLottos(LottoCount lottoCount) {
-		LottoNumbersGenerationStrategy strategy = new RandomLottoNumbersGenerationStrategy();
-
+	private List<Lotto> makeLottos(LottoCount lottoCount, LottoNumbersGenerationStrategy strategy) {
 		return IntStream.range(0, lottoCount.getCount())
 			.mapToObj((lottoNumbers) -> new Lotto(LottoNumbers.from(strategy)))
 			.collect(Collectors.toList());
@@ -36,12 +38,6 @@ public class Lottos {
 		LottoResult lottoResult) {
 		lottoStorage.forEach(
 			lotto -> lottoResult.increaseCountOfRank(lotto.match(winningLottoNumbersDTO)));
-	}
-
-	public void add(List<Lotto> passiveLottos) {
-		for (Lotto passiveLotto : passiveLottos) {
-			lottoStorage.add(passiveLottos.indexOf(passiveLotto), passiveLotto);
-		}
 	}
 
 	public List<Lotto> getLottoStorage() {

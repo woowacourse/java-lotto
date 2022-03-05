@@ -1,4 +1,4 @@
-package model.lottonumber.generationstrategy;
+package strategy;
 
 import java.util.Collections;
 import java.util.List;

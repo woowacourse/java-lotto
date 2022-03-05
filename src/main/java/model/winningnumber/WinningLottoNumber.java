@@ -1,7 +1,5 @@
 package model.winningnumber;
 
-import java.util.List;
-
 import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbers;
 
@@ -11,14 +9,14 @@ public class WinningLottoNumber {
 	private final LottoNumbers winningNumbers;
 	private final LottoNumber bonusBall;
 
-	public WinningLottoNumber(List<LottoNumber> winningNumbers, LottoNumber bonusBall) {
+	public WinningLottoNumber(LottoNumbers winningNumbers, LottoNumber bonusBall) {
 		validateReduplicationWithBonusBall(winningNumbers, bonusBall);
-		this.winningNumbers = LottoNumbers.changeFrom(winningNumbers);
+		this.winningNumbers = winningNumbers;
 		this.bonusBall = bonusBall;
 	}
-
-	private void validateReduplicationWithBonusBall(List<LottoNumber> numbers, LottoNumber number) {
-		if (numbers.contains(number)) {
+	
+	private void validateReduplicationWithBonusBall(LottoNumbers numbers, LottoNumber number) {
+		if (numbers.checkMatchWithBonus(number)) {
 			throw new IllegalArgumentException(REDUPLICATION_WITH_BONUS_BALL_ERROR_MESSAGE);
 		}
 	}

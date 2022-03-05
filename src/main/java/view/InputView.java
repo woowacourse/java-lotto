@@ -16,9 +16,8 @@ public class InputView {
 		return scanner.nextLine();
 	}
 
-	public String inputWinningNumbers() {
+	public void inputWinningNumbersMessage() {
 		System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
-		return scanner.nextLine();
 	}
 
 	public String inputBonusBall() {
@@ -28,10 +27,6 @@ public class InputView {
 
 	public String inputPassiveLottoCount() {
 		System.out.println(INPUT_PASSIVE_COUNT_MESSAGE);
-		return scanner.nextLine();
-	}
-
-	public String inputLottoNumbers() {
 		return scanner.nextLine();
 	}
 

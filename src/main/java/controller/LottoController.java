@@ -1,12 +1,8 @@
 package controller;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import model.Money;
-import model.lotto.Lotto;
 import model.lotto.LottoCount;
 import model.lotto.Lottos;
 import model.lottonumber.LottoNumber;
@@ -14,7 +10,7 @@ import model.lottonumber.LottoNumbers;
 import model.result.LottoResult;
 import model.result.Rank;
 import model.winningnumber.WinningLottoNumber;
-import utils.InputLottoNumbersUtils;
+import strategy.InputLottoNumbersGenerationStrategy;
 import utils.InputValidateUtils;
 import view.InputView;
 import view.OutputView;
@@ -73,25 +69,12 @@ public class LottoController {
 	}
 
 	private Lottos makeLottos() {
-		Lottos lottos = new Lottos(automaticLottoCount);
-		lottos.add(makeManualLottos());
-		return lottos;
-	}
-
-	private List<Lotto> makeManualLottos() {
-		inputView.inputPassiveLottoMessage();
-		return IntStream.range(0, manualLottoCount.getCount())
-			.mapToObj((lottoNumbers) -> new Lotto(makeOnePassiveLotto()))
-			.collect(Collectors.toList());
-	}
-
-	private LottoNumbers makeOnePassiveLotto() {
 		try {
-			String input = inputView.inputLottoNumbers();
-			return LottoNumbers.changeFrom(InputLottoNumbersUtils.makeLottoNumber(input));
+			inputView.inputPassiveLottoMessage();
+			return new Lottos(manualLottoCount, automaticLottoCount);
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
-			return makeOnePassiveLotto();
+			return makeLottos();
 		}
 	}
 
@@ -101,8 +84,9 @@ public class LottoController {
 
 	private WinningLottoNumber storeWinningNumber() {
 		try {
-			String input = inputView.inputWinningNumbers();
-			return new WinningLottoNumber(InputLottoNumbersUtils.makeLottoNumber(input), makeBonusBall());
+			inputView.inputWinningNumbersMessage();
+			LottoNumbers lottoNumbers = LottoNumbers.from(new InputLottoNumbersGenerationStrategy());
+			return new WinningLottoNumber(lottoNumbers, makeBonusBall());
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
 			return storeWinningNumber();
