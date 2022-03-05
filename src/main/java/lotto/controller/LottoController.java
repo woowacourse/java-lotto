@@ -26,7 +26,7 @@ public class LottoController {
         int count = inputManualLottoCount(payment);
         List<Lotto> manualLottos = inputManualLottos(count);
         Lottos lottos = Lottos.of(manualLottos, payment);
-        OutputView.printLottos(count, lottos.getAutoLottos(count));
+        OutputView.printLottos(count, lottos.getLottos());
         return lottos;
     }
 

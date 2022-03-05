@@ -11,7 +11,7 @@ public class OutputView {
     private static final String ERROR_PREFIX = "[ERROR] ";
     private static final String PAYMENT_REQUEST_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String LOTTO_BY_HAND_COUNT_REQUEST_MESSAGE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
-    public static final String LOTTO_NUMBERS_BY_HAND_REQUEST_MESSAGE = "\n수동으로 구매할 번호를 입력해 주세요.";
+    private static final String LOTTO_NUMBERS_BY_HAND_REQUEST_MESSAGE = "\n수동으로 구매할 번호를 입력해 주세요.";
     private static final String LOTTO_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String LOTTO_DELIMITER = ", ";
     private static final String LOTTO_FORMAT = "[%s]\n";
@@ -42,9 +42,9 @@ public class OutputView {
         System.out.println(LOTTO_NUMBERS_BY_HAND_REQUEST_MESSAGE);
     }
 
-    public static void printLottos(int manualCount, List<Lotto> autoLottos) {
-        printLottoCount(manualCount, autoLottos.size());
-        for (Lotto lotto : autoLottos) {
+    public static void printLottos(int manualCount, List<Lotto> lottoList) {
+        printLottoCount(manualCount, lottoList.size());
+        for (Lotto lotto : lottoList) {
             String numbers = lotto.getLottoNumbers().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_DELIMITER));

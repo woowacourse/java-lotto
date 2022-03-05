@@ -50,8 +50,4 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
-
-    public List<Lotto> getAutoLottos(int manualCount) {
-        return Collections.unmodifiableList(lottos.subList(manualCount, lottos.size()));
-    }
 }

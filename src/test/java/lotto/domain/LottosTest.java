@@ -34,14 +34,6 @@ public class LottosTest {
     }
 
     @Test
-    @DisplayName("남은 돈을 가지고 자동으로 로또 생성")
-    void get_auto_size() {
-        Lottos lottos = Lottos.of(lottoList, new Money(11000));
-
-        assertEquals(lottos.getAutoLottos(3).size(), 11);
-    }
-
-    @Test
     @DisplayName("수동으로 고른 로또와 남은 돈을 가지고 로또 생성")
     void get_total_size() {
         Lottos lottos = Lottos.of(lottoList, new Money(11000));
