@@ -21,9 +21,9 @@ public enum LottoTicketFactory {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoTicket> createTickets(TicketPurchaseDecider ticketPurchaseDecider, List<String> manualTicketNumbers) {
+    public List<LottoTicket> createTickets(TicketPurchaseDecider ticketPurchaseDecider, LottoTickets lottoTickets) {
 
-        List<LottoTicket> manualTickets = getManualTickets(manualTicketNumbers);
+        List<LottoTicket> manualTickets = lottoTickets.values();
         int autoTicketCount = ticketPurchaseDecider.getAutoTicketCount();
         List<LottoTicket> autoTickets = getAutoTickets(autoTicketCount);
 
@@ -31,12 +31,6 @@ public enum LottoTicketFactory {
         resultTickets.addAll(autoTickets);
 
         return Collections.unmodifiableList(resultTickets);
-    }
-
-    private List<LottoTicket> getManualTickets(List<String> manualTicketNumbers) {
-        return manualTicketNumbers.stream()
-                .map(LottoTicket::new)
-                .collect(Collectors.toList());
     }
 
     private List<LottoTicket> getAutoTickets(int autoTicketCount) {

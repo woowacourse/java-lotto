@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.domain.LottoTicketFactory;
+import lotto.domain.LottoTickets;
 import lotto.domain.TicketPurchaseDecider;
 import lotto.domain.vo.PurchaseAmount;
 import lotto.domain.WinningStats;
@@ -11,7 +12,6 @@ import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.vo.ManualTicketCount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import org.jetbrains.annotations.NotNull;
 
 public class LottoController {
 
@@ -22,13 +22,13 @@ public class LottoController {
     public void run() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         ManualTicketCount manualTicketCount = getManualTicketSize(purchaseAmount);
-        List<String> manualTicketNumbers = inputView.inputTicketNumbersManually(manualTicketCount);
+        LottoTickets manualLottoTickets = getLottoTickets(manualTicketCount);
         TicketPurchaseDecider ticketPurchaseDecider = new TicketPurchaseDecider(purchaseAmount, manualTicketCount);
 
-        List<LottoTicket> lottoTickets = lottoTicketFactory.createTickets(ticketPurchaseDecider, manualTicketNumbers);
-        outputView.printPurchasedTickets(lottoTickets, ticketPurchaseDecider);
+        List<LottoTicket> createdLottoTickets = lottoTicketFactory.createTickets(ticketPurchaseDecider, manualLottoTickets);
+        outputView.printPurchasedTickets(createdLottoTickets, ticketPurchaseDecider);
 
-        WinningStats winningStats = getWinningStats(lottoTickets);
+        WinningStats winningStats = getWinningStats(createdLottoTickets);
         outputView.printWinningStats(winningStats, purchaseAmount);
 
         closeResource();
@@ -49,6 +49,15 @@ public class LottoController {
         } catch (Exception e) {
             inputView.printErrorMessage(e);
             return getManualTicketSize(purchaseAmount);
+        }
+    }
+
+    private LottoTickets getLottoTickets(ManualTicketCount manualTicketCount) {
+        try {
+            return new LottoTickets(inputView.inputTicketNumbersManually(manualTicketCount));
+        } catch (Exception e) {
+            inputView.printErrorMessage(e);
+            return getLottoTickets(manualTicketCount);
         }
     }
 

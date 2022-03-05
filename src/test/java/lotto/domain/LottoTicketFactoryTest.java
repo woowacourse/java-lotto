@@ -22,15 +22,15 @@ class LottoTicketFactoryTest {
         // given
         PurchaseAmount purchaseAmount = new PurchaseAmount(money);
         ManualTicketCount manualTicketCount = new ManualTicketCount("0", purchaseAmount);
-        List<String> manualTickets = new ArrayList<>();
+        LottoTickets manualLottoTickets = new LottoTickets(new ArrayList<>());
 
         // when
         TicketPurchaseDecider ticketPurchaseDecider = new TicketPurchaseDecider(purchaseAmount, manualTicketCount);
-        List<LottoTicket> lottoTickets = lottoTicketFactory.createTickets(ticketPurchaseDecider, manualTickets);
+        List<LottoTicket> createdLottoTickets = lottoTicketFactory.createTickets(ticketPurchaseDecider, manualLottoTickets);
 
         // then
-        assertThat(ticketPurchaseDecider.getAutoTicketCount()).isEqualTo(totalTicketCount - manualTickets.size());
-        assertThat(lottoTickets.size()).isEqualTo(totalTicketCount);
+        assertThat(ticketPurchaseDecider.getAutoTicketCount()).isEqualTo(totalTicketCount - manualLottoTickets.size());
+        assertThat(createdLottoTickets.size()).isEqualTo(totalTicketCount);
     }
 
     @ParameterizedTest
@@ -40,14 +40,14 @@ class LottoTicketFactoryTest {
         // given
         PurchaseAmount purchaseAmount = new PurchaseAmount(money);
         ManualTicketCount manualTicketCount = new ManualTicketCount("2", purchaseAmount);
-        List<String> manualTickets = List.of("1,2,3,4,5,6", "7,8,9,10,11,12");
+        LottoTickets manualLottoTickets = new LottoTickets(List.of("1,2,3,4,5,6", "7,8,9,10,11,12"));
 
         // when
         TicketPurchaseDecider ticketPurchaseDecider = new TicketPurchaseDecider(purchaseAmount, manualTicketCount);
-        List<LottoTicket> lottoTickets = lottoTicketFactory.createTickets(ticketPurchaseDecider, manualTickets);
+        List<LottoTicket> createdLottoTickets = lottoTicketFactory.createTickets(ticketPurchaseDecider, manualLottoTickets);
 
         // then
-        assertThat(ticketPurchaseDecider.getAutoTicketCount()).isEqualTo(totalTicketCount - manualTickets.size());
-        assertThat(lottoTickets.size()).isEqualTo(totalTicketCount);
+        assertThat(ticketPurchaseDecider.getAutoTicketCount()).isEqualTo(totalTicketCount - manualLottoTickets.size());
+        assertThat(createdLottoTickets.size()).isEqualTo(totalTicketCount);
     }
 }
