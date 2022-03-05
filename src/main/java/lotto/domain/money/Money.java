@@ -1,14 +1,13 @@
 package lotto.domain.money;
 
-import lotto.domain.money.condition.MoneyUnit;
-import lotto.domain.money.validation.MoneyValidator;
+import lotto.utils.MoneyUnit;
 
 public class Money {
 
     private final int money;
 
     public Money(final int money) {
-        MoneyValidator.validateCreditMoney(money);
+        MoneyValidator.validateMoney(money);
         this.money = money;
     }
 
@@ -16,8 +15,8 @@ public class Money {
         return MoneyUnit.divide(money);
     }
 
-    public int getMoney() {
-        return money;
+    public double divide(final long money) {
+        return (double) money / this.money;
     }
 
 }

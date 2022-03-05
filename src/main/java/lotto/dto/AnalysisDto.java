@@ -1,40 +1,26 @@
 package lotto.dto;
 
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
-import lotto.domain.rank.Rank;
+import lotto.domain.analysis.Analysis;
+import lotto.utils.Rank;
 
 public class AnalysisDto {
 
-    private final Map<Rank, Integer> rankCounts;
+    private final Map<Rank, Long> rankCounts;
     private final double profitRate;
 
-    public AnalysisDto(final List<Rank> ranks, final int ticketCount) {
-        this.rankCounts = calculateRankCounts(ranks);
-        this.profitRate = calculateProfitRate(ranks, ticketCount);
+    public AnalysisDto(final Map<Rank, Long> rankCounts, final double profitRate) {
+        this.rankCounts = Map.copyOf(rankCounts);
+        this.profitRate = profitRate;
     }
 
-    private Map<Rank, Integer> calculateRankCounts(final List<Rank> ranks) {
-        final Map<Rank, Integer> rankMap = new EnumMap<>(Rank.class);
-        for (Rank rank : Rank.values()) {
-            final int count = Collections.frequency(ranks, rank);
-            rankMap.put(rank, count);
-        }
-        return rankMap;
+    public static AnalysisDto toDto(final Analysis analysis) {
+        return new AnalysisDto(analysis.getRankCounts(), analysis.getProfitRate());
     }
 
-    private double calculateProfitRate(final List<Rank> ranks, final int ticketCount) {
-        long total = ranks.stream()
-                .mapToLong(Rank::getPrizeMoney)
-                .sum();
-        return (double) total / ticketCount;
-    }
-
-    public Map<Rank, Integer> getRankCounts() {
-        return rankCounts;
+    public Map<Rank, Long> getRankCounts() {
+        return Map.copyOf(rankCounts);
     }
 
     public double getProfitRate() {

@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.ticket.Ticket;
-import lotto.domain.ticket.condition.BallNumberRange;
-import lotto.domain.ticket.condition.TicketSize;
+import lotto.utils.BallNumberRange;
+import lotto.utils.TicketSize;
 
 public class RandomTicketGenerator implements TicketGenerator {
 
@@ -25,8 +25,8 @@ public class RandomTicketGenerator implements TicketGenerator {
     @Override
     public Ticket generateTicket() {
         Collections.shuffle(numbers);
-        List<Integer> lottoNumbers = numbers.subList(SUBLIST_INCLUSIVE_START_INDEX, SUBLIST_EXCLUSIVE_END_INDEX);
-        return new Ticket(lottoNumbers);
+        List<Integer> ticketNumbers = numbers.subList(SUBLIST_INCLUSIVE_START_INDEX, SUBLIST_EXCLUSIVE_END_INDEX);
+        return new Ticket(ticketNumbers);
     }
 
 }
