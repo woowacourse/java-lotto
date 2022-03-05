@@ -26,8 +26,8 @@ public class LotteryMachineApplication {
     }
 
     private static LotteryTickets createLotteryTickets(Count count) {
-        List<List<Integer>> passivityLotteryTicket = InputView.getPassivityLotteryTicket(count.getPassivityValue());
-        List<LotteryTicket> passivityTickets = LotteryTicket.getLotteryTickets(passivityLotteryTicket);
+        List<List<Integer>> passivityLotteryNumbers = InputView.getPassivityLotteryNumbers(count.getPassivityValue());
+        List<LotteryTicket> passivityTickets = LotteryTicket.getLotteryTickets(passivityLotteryNumbers);
         List<LotteryTicket> autoTickets = LotteryTicket.createAutoLotteryTickets(count.getAutoValue()
                 , new RandomLotteryNumbersGenerator());
         return LotteryTickets.of(autoTickets, passivityTickets);
