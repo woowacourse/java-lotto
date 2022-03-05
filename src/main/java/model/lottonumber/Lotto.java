@@ -3,7 +3,6 @@ package model.lottonumber;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import model.generator.Generator;
 import model.lottonumber.vo.LottoNumber;
 import model.rank.Rank;
 
@@ -12,15 +11,7 @@ public class Lotto {
     private static final String NOT_CORRECT_NUMBER_COUNT_ERROR_MESSAGE = "[ERROR] 입력한 수동 로또 번호가 6개가 아닙니다.";
     private static final String DUPLICATE_IN_NUMBERS_ERROR_MESSAGE = "[ERROR] 입력한 수동 로또티켓 중 번호가 중복되는 티켓이 있습니다.";
 
-
     private final List<LottoNumber> numbers;
-
-    public Lotto(final Generator generator) {
-        List<Integer> generatedNumbers = generator.generateNumbers();
-        numbers = generatedNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
 
     public Lotto(final List<Integer> numbers) {
         checkValidNumbers(numbers);

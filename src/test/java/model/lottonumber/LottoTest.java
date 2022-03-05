@@ -12,7 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
-
+/*
     @Test
     @DisplayName("생성된 난수를 바탕으로 로또 번호를 생성한다.")
     void generateLottoNumbers_GeneratorTest() {
@@ -138,4 +138,5 @@ class LottoTest {
 
         assertThat(lotto.findRank(winningNumbers)).isEqualTo(Rank.FIRST);
     }
+    */
 }

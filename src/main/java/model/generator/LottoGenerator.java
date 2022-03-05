@@ -28,7 +28,7 @@ public class LottoGenerator {
         Generator generator = new LottoNumberGenerator();
 
         return IntStream.range(0, autoLottoCount)
-                .mapToObj(index -> new Lotto(generator))
+                .mapToObj(index -> new Lotto(generator.generateNumbers()))
                 .collect(Collectors.toList());
     }
 }
