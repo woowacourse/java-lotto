@@ -66,6 +66,9 @@ public class ResultView {
     private static double calculateRateReturn(Map<LottoPrize, Integer> results) {
         int totalSpendMoney = getTotalSpendMoney(results);
         int totalReward = getTotalReward(results);
+        if (totalSpendMoney == 0) {
+            return 1.00;
+        }
         double rateReturn = (double) totalReward / totalSpendMoney;
         return floor(rateReturn, RATE_RETURN_FLOOR_SEPARATOR);
     }

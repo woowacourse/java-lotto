@@ -161,4 +161,4 @@
         - 절대 enum의 순서를 바꾸지 않는다.
         - early return으로 확인하는 2등은 stream()에서 무조건 걸러낸다.
     - 3번째 방법이 가장 이해하기 쉽고 이후에 발생할 Enum에 수정이 발생해도 문제가 발생할 가능성이 적다고 생각했다.
-- [ ] LottoController의 `purchase()`와 `purchaseNothing()`을 합칠 수 있지않을까?
+- [x] LottoController의 `purchase()`와 `purchaseNothing()`을 합칠 수 있지않을까?
