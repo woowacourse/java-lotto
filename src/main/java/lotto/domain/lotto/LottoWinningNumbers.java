@@ -20,13 +20,13 @@ public class LottoWinningNumbers {
     }
 
     private void checkNullEmpty(final Lotto winningLotto, final LottoNumber bonusNumber) {
-        if (winningLotto == null || bonusNumber == null){
+        if (winningLotto == null || bonusNumber == null) {
             throw new IllegalArgumentException(ERROR_CREATE_LOTTO);
         }
     }
 
     private void checkDuplicateBonusNumber(final Lotto winningLotto, final LottoNumber bonusNumber) {
-        if (winningLotto.contains(bonusNumber.getLottoNumber())){
+        if (winningLotto.contains(bonusNumber.getLottoNumber())) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_BONUS_NUMBER);
         }
     }

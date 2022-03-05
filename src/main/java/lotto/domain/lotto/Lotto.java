@@ -46,7 +46,7 @@ public class Lotto {
         }
     }
 
-    public void generateRandomNumbers(){
+    public void generateRandomNumbers() {
         List<Integer> numbers = LottoNumber.getcandidateLottoNumbers();
         Collections.shuffle(numbers);
         List<Integer> randomNumbers = numbers.subList(0, LOTTO_SIZE);

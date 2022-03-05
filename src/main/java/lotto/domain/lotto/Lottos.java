@@ -28,16 +28,16 @@ public class Lottos {
         }
     }
 
+    public Lottos addLottos(List<Lotto> addLottos) {
+        this.lottos.addAll(addLottos);
+        return this;
+    }
+
     public void addLotto(final Lotto lotto) {
         lottos.add(lotto);
     }
 
     public List<Lotto> getLottos() {
         return lottos;
-    }
-
-    public Lottos addLottos(List<Lotto> addLottos) {
-        this.lottos.addAll(addLottos);
-        return this;
     }
 }

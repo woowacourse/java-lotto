@@ -51,11 +51,11 @@ public class LottoNumber {
         return candidateLottoNumbers;
     }
 
-    public boolean equals(int number) {
-        return this.lottoNumber == number;
-    }
-
     public int getLottoNumber() {
         return lottoNumber;
+    }
+
+    public boolean equals(int number) {
+        return this.lottoNumber == number;
     }
 }

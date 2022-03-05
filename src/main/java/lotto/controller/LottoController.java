@@ -16,7 +16,8 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void printLottos(final Lottos lottos, final PurchaseLottoCount purchaseLottoCount) {
-        OutputView.printLottos(lottos, purchaseLottoCount.getManualLottoCount(), purchaseLottoCount.getAutoLottoCount());
+        OutputView.printLottos(lottos, purchaseLottoCount.getManualLottoCount(),
+                purchaseLottoCount.getAutoLottoCount());
     }
 
     public Lottos createAutoLottos(final PurchaseLottoCount purchaseLottoCount) {
