@@ -17,28 +17,32 @@ import model.winningnumber.WinningLottoNumberDTO;
 
 public class LottoTest {
 
+	class TestLottoNumberGenerationStrategy implements LottoNumbersGenerationStrategy {
+
+		@Override
+		public List<LottoNumber> generate(int size) {
+			return Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+				.map(number -> LottoNumber.valueOf(number))
+				.collect(Collectors.toList());
+		}
+	}
+
+	class TestWinningNumberGenerationStrategy implements LottoNumbersGenerationStrategy {
+
+		@Override
+		public List<LottoNumber> generate(int size) {
+			return Arrays.asList(1, 2, 3, 4, 5, 7).stream()
+				.map(number -> LottoNumber.valueOf(number))
+				.collect(Collectors.toList());
+		}
+	}
+
 	@Test
 	@DisplayName("당첨 번호와 로또의 비교값이 5인 경우")
 	void compareWinningNumberWithLottoFive() {
-		LottoNumbersGenerationStrategy lottoNumbersGenerationStrategy = new LottoNumbersGenerationStrategy() {
-			@Override
-			public List<LottoNumber> generate(int size) {
-				return Arrays.asList(1, 2, 3, 4, 5, 6).stream()
-					.map(number -> LottoNumber.valueOf(number))
-					.collect(Collectors.toList());
-			}
-		};
-		LottoNumbersGenerationStrategy lottoNumbersGenerationStrategy2 = new LottoNumbersGenerationStrategy() {
-			@Override
-			public List<LottoNumber> generate(int size) {
-				return Arrays.asList(1, 2, 3, 4, 5, 7).stream()
-					.map(number -> LottoNumber.valueOf(number))
-					.collect(Collectors.toList());
-			}
-		};
-		Lotto lotto = new Lotto(LottoNumbers.from(lottoNumbersGenerationStrategy));
+		Lotto lotto = new Lotto(LottoNumbers.from(new TestLottoNumberGenerationStrategy()));
 		WinningLottoNumberDTO winningLottoNumberDTO = new WinningLottoNumberDTO(
-			LottoNumbers.from(lottoNumbersGenerationStrategy2),
+			LottoNumbers.from(new TestWinningNumberGenerationStrategy()),
 			LottoNumber.valueOf(8));
 		assertThat(lotto.match(winningLottoNumberDTO)).isEqualTo(Rank.THIRD);
 	}
@@ -46,26 +50,10 @@ public class LottoTest {
 	@Test
 	@DisplayName("당첨 번호와 로또의 비교값이 5이고, 보너스가 존재하는 경우")
 	void compareWinningNumberWithLotto() {
-		LottoNumbersGenerationStrategy lottoNumbersGenerationStrategy = new LottoNumbersGenerationStrategy() {
-			@Override
-			public List<LottoNumber> generate(int size) {
-				return Arrays.asList(1, 2, 3, 4, 5, 6).stream()
-					.map(number -> LottoNumber.valueOf(number))
-					.collect(Collectors.toList());
-			}
-		};
-		LottoNumbersGenerationStrategy lottoNumbersGenerationStrategy2 = new LottoNumbersGenerationStrategy() {
-			@Override
-			public List<LottoNumber> generate(int size) {
-				return Arrays.asList(1, 2, 3, 4, 5, 7).stream()
-					.map(number -> LottoNumber.valueOf(number))
-					.collect(Collectors.toList());
-			}
-		};
-		Lotto lotto = new Lotto(LottoNumbers.from(lottoNumbersGenerationStrategy));
+		Lotto lotto = new Lotto(LottoNumbers.from(new TestLottoNumberGenerationStrategy()));
 
 		WinningLottoNumberDTO winningLottoNumberDTO = new WinningLottoNumberDTO(
-			LottoNumbers.from(lottoNumbersGenerationStrategy2),
+			LottoNumbers.from(new TestWinningNumberGenerationStrategy()),
 			LottoNumber.valueOf(6));
 		assertThat(lotto.match(winningLottoNumberDTO)).isEqualTo(Rank.SECOND);
 	}
