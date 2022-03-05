@@ -23,6 +23,7 @@ public class LotteryNumberMockGenerator implements LotteryNumberGeneratorStrateg
 		index = 0;
 	}
 
+	@Override
 	public List<Integer> generateNumbers() {
 		if (index < lotteriesNumber.size()) {
 			return lotteriesNumber.get(index++);

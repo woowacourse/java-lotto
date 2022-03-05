@@ -20,6 +20,7 @@ public class LotteryNumberGenerator implements LotteryNumberGeneratorStrategy{
 		}
 	}
 
+	@Override
 	public List<Integer> generateNumbers() {
 		Collections.shuffle(numbers);
 		return numbers.stream()
