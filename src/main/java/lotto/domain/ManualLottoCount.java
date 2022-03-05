@@ -16,7 +16,7 @@ public class ManualLottoCount {
         return new ManualLottoCount(count);
     }
 
-    public int subtract(int number) {
+    public int subtractBy(int number) {
         return number - value;
     }
 
