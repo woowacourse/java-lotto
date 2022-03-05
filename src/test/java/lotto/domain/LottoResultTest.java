@@ -34,23 +34,6 @@ class LottoResultTest {
     }
 
     @Test
-    @DisplayName("당첨금 총합을 계산하는 기능")
-    void Calculate_Sum_Of_Prize() {
-        int thirdPrizeAmount = THIRD.getPrizeAmount();
-        int fourthPrizeAmount = FOURTH.getPrizeAmount();
-        int fifthPrizeAmount = FIFTH.getPrizeAmount();
-        int totalAmount = thirdPrizeAmount + fourthPrizeAmount + fifthPrizeAmount;
-
-        Map<LottoRank, Integer> RankMap = initLottoRankMap();
-        RankMap.put(THIRD, 1);
-        RankMap.put(FOURTH, 1);
-        RankMap.put(FIFTH, 1);
-        LottoResult lottoResult = new LottoResult(RankMap);
-
-        Assertions.assertThat(lottoResult.sumOfPrize()).isEqualTo(totalAmount);
-    }
-
-    @Test
     @DisplayName("수익률을 잘 계산하는가?")
     void Calculate_Yield() {
         Map<LottoRank, Integer> RankMap = initLottoRankMap();

@@ -10,7 +10,7 @@ public class LottoResult {
         this.result = new LinkedHashMap<>(rankMap);
     }
 
-    public int sumOfPrize() {
+    private int sumOfPrize() {
         return result.keySet().stream()
                 .mapToInt(lottoRank -> result.get(lottoRank) * lottoRank.getPrizeAmount())
                 .sum();
