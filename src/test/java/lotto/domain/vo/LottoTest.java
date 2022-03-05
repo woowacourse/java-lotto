@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.LottoPrize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,9 +15,9 @@ public class LottoTest {
     @DisplayName("로또 번호를 가진 Lotto 객체를 생성한다")
     @Test
     void lotto_constructor_test() {
-        List<LottoNumber> lottoNumbers = List.of(
-                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
+        List<LottoNumber> lottoNumbers = List.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
 
         assertThatNoException().isThrownBy(() -> new Lotto(lottoNumbers));
     }
@@ -32,9 +33,9 @@ public class LottoTest {
     @DisplayName("6개가 아닌 숫자를 입력 시 예외가 발생한다")
     @Test
     void lotto_constructor_error_not_six_test() {
-        List<LottoNumber> lottoNumbers = List.of(
-                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6), LottoNumber.valueOf(7));
+        List<LottoNumber> lottoNumbers = List.of(1, 2, 3, 4, 5, 6, 7).stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
@@ -44,9 +45,9 @@ public class LottoTest {
     @DisplayName("로또 번호가 중복되면 예외가 발생한다")
     @Test
     void lotto_constructor_error_on_duplication_test() {
-        List<LottoNumber> lottoNumbers = List.of(
-                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(10), LottoNumber.valueOf(10));
+        List<LottoNumber> lottoNumbers = List.of(1, 1, 2, 3, 4, 5).stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
@@ -57,12 +58,12 @@ public class LottoTest {
     @Test
     void confirmWinning_test() {
         // given
-        List<LottoNumber> buyNumber = List.of(
-                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(45));
-        List<LottoNumber> winningNumber = List.of(
-                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
+        List<LottoNumber> buyNumber = List.of(1, 2, 3, 4, 5, 45).stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+        List<LottoNumber> winningNumber = List.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
         LottoNumber bonusNumber = LottoNumber.valueOf(45);
 
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(winningNumber), bonusNumber);

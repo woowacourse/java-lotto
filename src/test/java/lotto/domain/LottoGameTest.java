@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.domain.generator.CustomLottoGenerator;
 import lotto.domain.vo.Lotto;
 import lotto.domain.vo.LottoNumber;
@@ -29,18 +30,17 @@ public class LottoGameTest {
     void purchase_manual_test() {
         // given
         Money money = new Money(1000);
-        CustomLottoGenerator generator = new CustomLottoGenerator();
 
         LottoGame lottoGame = new LottoGame();
-        List<Lotto> manualLottos = List.of(new Lotto(List.of(
-                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6))));
-        Lotto compareLotto = new Lotto(List.of(
-                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
+        List<Lotto> manualLottos = List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList())));
+        Lotto compareLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList()));
 
         // when
-        ResponsePurchaseResults results = lottoGame.purchaseManual(manualLottos, new Money(1000));
+        ResponsePurchaseResults results = lottoGame.purchaseManual(manualLottos, money);
 
         // then
         assertThat(results.getLottos()).hasSize(1);
@@ -56,9 +56,9 @@ public class LottoGameTest {
         CustomLottoGenerator generator = new CustomLottoGenerator();
 
         LottoGame lottoGame = new LottoGame();
-        Lotto compareLotto = new Lotto(List.of(
-                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
+        Lotto compareLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList()));
 
         // when
         ResponsePurchaseResults results = lottoGame.purchaseAuto(generator, money);
@@ -74,9 +74,9 @@ public class LottoGameTest {
     void confirmWinnings_test() {
         // given
         Money money = new Money(10000);
-        List<LottoNumber> lottoNumbers = List.of(
-                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
+        List<LottoNumber> lottoNumbers = List.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
         LottoNumber bonusNumber = LottoNumber.valueOf(30);
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
 
@@ -87,9 +87,9 @@ public class LottoGameTest {
 
         // when
         ResponseWinningResultsDto dto = lottoGame.confirmWinnings(winningNumbers);
-        Map<LottoPrize, Integer> results = dto.getResults();
 
         // then
+        Map<LottoPrize, Integer> results = dto.getResults();
         assertThat(results.get(LottoPrize.FIRST)).isEqualTo(10);
     }
 

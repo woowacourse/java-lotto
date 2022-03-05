@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.domain.LottoPrize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,9 +15,9 @@ public class LottosTest {
     @Test
     void lottos_constructor_test() {
         // given
-        List<LottoNumber> lottoNumbers = List.of(
-                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
+        List<LottoNumber> lottoNumbers = List.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
         List<Lotto> lotto = List.of(new Lotto(lottoNumbers));
 
         // when
@@ -39,10 +40,11 @@ public class LottosTest {
     @Test
     void confirmWinnings_test() {
         // given
-        List<LottoNumber> lottoNumbers = List.of(
-                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
-        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), LottoNumber.valueOf(30));
+        List<LottoNumber> lottoNumbers = List.of(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+        LottoNumber bonusNumber = LottoNumber.valueOf(30);
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
         List<Lotto> lotto = List.of(new Lotto(lottoNumbers));
         Lottos lottos = new Lottos(lotto);
 
