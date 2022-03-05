@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
-import lotto.domain.vo.Number;
+import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 import lotto.controller.Rate;
 
@@ -18,30 +18,27 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottos(List<Lotto> lottos) {
-        printLottosSize(lottos);
-        printLottoNumbers(lottos);
-    }
-
-    private static void printLottosSize(List<Lotto> lottos) {
-        System.out.println(MessageFormat.format("{0}개를 구매했습니다.", lottos.size()));
-    }
-
-    private static void printLottoNumbers(List<Lotto> lottos) {
+    public static void printLottos(int manualCount, List<Lotto> lottos) {
+        System.out.println(MessageFormat.format("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", manualCount, lottos.size() - manualCount));
         for (Lotto lotto : lottos) {
-            List<Number> numbers = lotto.getNumbers();
+            List<LottoNumber> numbers = lotto.getNumbers();
 
             System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(numbers)));
         }
     }
 
-    private static String joinWithDelimiter(List<Number> numbers) {
+    private static String joinWithDelimiter(List<LottoNumber> numbers) {
         return numbers.stream()
                 .map(number -> String.valueOf(number.getNumber()))
                 .collect(Collectors.joining(DELIMITER));
     }
 
-    public static void printRanks(List<Rank> ranks) {
+    public static void printResult(List<Rank> ranks, Rate rate) {
+        printRanks(ranks);
+        printRate(rate);
+    }
+
+    private static void printRanks(List<Rank> ranks) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -53,6 +50,7 @@ public class OutputView {
     private static List<Rank> reverseOrderedRanks() {
         List<Rank> ranks = new ArrayList<>(List.of(Rank.values()));
         ranks.remove(Rank.NONE);
+        ranks.remove(Rank.ERROR);
         ranks.sort(Collections.reverseOrder());
         return ranks;
     }
@@ -68,22 +66,18 @@ public class OutputView {
     private static void printSecondRank(List<Rank> ranks, Rank rank) {
         int matchCount = rank.getMatchCount();
         long reward = rank.getReward().getValue();
-        int rewardCount = findRewardCount(rank, ranks);
+        int rewardCount = rank.findRewardCount(ranks);
         System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", matchCount, reward, rewardCount);
     }
 
     private static void printOtherRank(List<Rank> ranks, Rank rank) {
         int matchCount = rank.getMatchCount();
         long reward = rank.getReward().getValue();
-        int rewardCount = findRewardCount(rank, ranks);
+        int rewardCount = rank.findRewardCount(ranks);
         System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, reward, rewardCount);
     }
 
-    private static int findRewardCount(Rank rank, List<Rank> ranks) {
-        return rank.findRewardCount(ranks);
-    }
-
-    public static void printRate(Rate rate) {
+    private static void printRate(Rate rate) {
         System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", rate.getRate().toString()));
     }
 }

@@ -1,77 +1,73 @@
 package lotto.domain;
 
-import lotto.domain.vo.Money;
-
 import java.util.*;
+import java.util.function.Function;
 
 public enum Rank {
 
-    FIRST(6, new Money(2_000_000_000L)),
-    SECOND(5, new Money(30_000_000L)),
-    THIRD(5, new Money(1_500_000L)),
-    FOURTH(4, new Money(50_000L)),
-    FIFTH(3, new Money(5_000L)),
-    NONE(0, new Money(0L));
+    FIRST(6, new Reward(2_000_000_000L), (matchCount) -> matchCount == 6),
+    SECOND(5, new Reward(30_000_000L), (matchCount) -> matchCount == 5),
+    THIRD(5, new Reward(1_500_000L), (matchCount) -> matchCount == 5),
+    FOURTH(4, new Reward(50_000L), (matchCount) -> matchCount == 4),
+    FIFTH(3, new Reward(5_000L), (matchCount) -> matchCount == 3),
+    NONE(0, new Reward(0L), (matchCount) -> matchCount <= 2),
+    ERROR(7, new Reward(0L), (matchCount) -> matchCount >= 7);
 
     private final int matchCount;
-    private final Money reward;
+    private final Reward reward;
+    private final Function<Integer, Boolean> matchCalculator;
 
-    Rank(int matchCount, Money reward) {
+    Rank(int matchCount, Reward reward, Function<Integer, Boolean> matchCalculator) {
         this.matchCount = matchCount;
         this.reward = reward;
+        this.matchCalculator = matchCalculator;
     }
 
     public static Rank find(int matchCount, boolean matchBonus) {
-        if (isSecond(matchCount, matchBonus)) {
-            return Rank.SECOND;
+        if (isMatchBonusAvailable(matchCount, matchBonus)) {
+            return matchBonusAvailableRank();
         }
-
-        return getRank(matchCount);
+        return findWithMatchCount(matchCount);
     }
 
-    private static boolean isSecond(int matchCount, boolean matchBonus) {
-        return equalMatchCount(Rank.SECOND.matchCount, matchCount) && matchBonus;
+    private static boolean isMatchBonusAvailable(int matchCount, boolean matchBonus) {
+        return SECOND.matchCalculator.apply(matchCount) && matchBonus;
     }
 
-    private static Rank getRank(int matchCount) {
-        return Arrays.stream(Rank.values())
-                .filter(rank -> equalMatchCount(matchCount, rank.matchCount))
-                .filter(Rank::isNotSecond)
+    private static Rank findWithMatchCount(int matchCount) {
+        return onlyMatchCountAvailableRanks().stream()
+                .filter(rank -> rank.matchCalculator.apply(matchCount))
                 .findAny()
-                .orElse(Rank.NONE);
+                .orElseGet(() -> Rank.NONE);
     }
 
-    private static boolean equalMatchCount(int matchCount, int otherMatchCount) {
-        return matchCount == otherMatchCount;
+    private static List<Rank> onlyMatchCountAvailableRanks() {
+        List<Rank> ranks = new ArrayList<>(List.of(Rank.values()));
+        ranks.remove(matchBonusAvailableRank());
+        return ranks;
     }
 
-    private static boolean isNotSecond(Rank rank) {
-        return rank != Rank.SECOND;
+    private static Rank matchBonusAvailableRank() {
+        return Rank.SECOND;
     }
 
-    public static Money calculateReward(List<Rank> ranks) {
-        Money reward = new Money(0L);
+    public static Reward calculateReward(List<Rank> ranks) {
+        Reward reward = new Reward(0L);
         for (Rank rank : ranks) {
-            reward = reward.plus(rank.reward);
+            reward.plus(rank.reward);
         }
         return reward;
     }
 
     public int findRewardCount(List<Rank> ranks) {
-        int count = 0;
-        for (Rank rank : ranks) {
-            if (rank == this) {
-                count++;
-            }
-        }
-        return count;
+        return (int) ranks.stream().filter(rank -> rank == this).count();
     }
 
     public int getMatchCount() {
         return this.matchCount;
     }
 
-    public Money getReward() {
+    public Reward getReward() {
         return this.reward;
     }
 }

@@ -7,14 +7,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import lotto.domain.vo.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class WinnerLottoTest {
-    private static final Number BONUS = new Number(7);
+    private static final LottoNumber BONUS = new LottoNumber(7);
     private static final Lotto LOTTO = new Lotto(givenNumbers(1, 2, 3, 4, 5, 6));
     private static final WinnerLotto WINNER_LOTTO = new WinnerLotto(LOTTO, BONUS);
 
@@ -59,13 +58,13 @@ public class WinnerLottoTest {
     @ParameterizedTest
     @MethodSource("lottoNumbers")
     @DisplayName("당첨 번호가 2개 이하로 일치하면 None을 반환한다.")
-    void containsNumbersBelowSecondReturnNone(List<Number> lottoNumbers) {
+    void containsNumbersBelowSecondReturnNone(List<LottoNumber> lottoNumbers) {
         Lotto lotto = new Lotto(lottoNumbers);
 
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.NONE);
     }
 
-    private static Stream<List<Number>> lottoNumbers() {
+    private static Stream<List<LottoNumber>> lottoNumbers() {
         return Stream.of(
                 givenNumbers(1, 2, 8, 9, 10, 11),
                 givenNumbers(1, 8, 9, 10, 11, 12),
@@ -77,13 +76,14 @@ public class WinnerLottoTest {
     @DisplayName("보너스볼은 당첨 번호와 중복되면 예외를 발생한다.")
     void throwExceptionWhenDuplicated() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new WinnerLotto(LOTTO, new Number(6)))
+                .isThrownBy(() -> new WinnerLotto(LOTTO, new LottoNumber(6)))
                 .withMessageMatching("보너스볼은 당첨번호와 중복될 수 없다.");
     }
 
-    private static List<Number> givenNumbers(int... numbers) {
+    private static List<LottoNumber> givenNumbers(int... numbers) {
         return Arrays.stream(numbers)
-                .mapToObj(Number::new)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
+
 }

@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.domain.vo.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +42,7 @@ public class LottosTest {
                 new Lotto(givenNumbers(11, 12, 13, 14, 15, 16)))
         );
 
-        List<Rank> ranks = lottos.matchRanks(new WinnerLotto(LOTTO, new Number(7)));
+        List<Rank> ranks = lottos.matchRanks(new WinnerLotto(LOTTO, new LottoNumber(7)));
 
         assertThat(ranks).containsExactly(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH, Rank.NONE);
     }
@@ -53,12 +52,12 @@ public class LottosTest {
     void checkAmount() {
         Lottos lottos = new Lottos(List.of(LOTTO));
 
-        assertThat(lottos.getLottos().size()).isEqualTo(1);
+        assertThat(lottos.getBunchOfLottos().size()).isEqualTo(1);
     }
 
-    private static List<Number> givenNumbers(int... numbers) {
+    private static List<LottoNumber> givenNumbers(int... numbers) {
         return Arrays.stream(numbers)
-                .mapToObj(Number::new)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }

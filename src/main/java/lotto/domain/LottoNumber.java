@@ -1,24 +1,20 @@
-package lotto.domain.vo;
+package lotto.domain;
 
-import lotto.constants.NumberLimit;
+import lotto.constants.LottoNumberLimit;
 
 import java.util.Objects;
 
-public class Number {
+public class LottoNumber {
 
     private final int number;
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         validateRange(number);
         this.number = number;
     }
 
     private void validateRange(int number) {
-        NumberLimit.checkOutOfRange(number);
-    }
-
-    public int getNumber() {
-        return number;
+        LottoNumberLimit.checkOutOfRange(number);
     }
 
     @Override
@@ -26,15 +22,19 @@ public class Number {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Number)) {
+        if (!(o instanceof LottoNumber)) {
             return false;
         }
-        Number number = (Number) o;
+        LottoNumber number = (LottoNumber) o;
         return this.number == number.number;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    public int getNumber() {
+        return number;
     }
 }
