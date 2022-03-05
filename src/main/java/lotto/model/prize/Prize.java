@@ -3,9 +3,6 @@ package lotto.model.prize;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-/*
- * 등수별 상금과 매칭 정보를 가지는 Enum Class
- */
 public enum Prize {
     FIRST(6, false, 2_000_000_000),
     SECOND(5, true, 30_000_000),
@@ -23,16 +20,16 @@ public enum Prize {
         this.matchCount = matchCount;
         this.bonus = bonus;
         this.amount = amount;
-        instanceWinningCondition();
+        instanceWinningCondition(matchCount, bonus);
     }
 
-    private void instanceWinningCondition() {
-        if (this.bonus) {
+    private void instanceWinningCondition(int matchCount, boolean bonus) {
+        if (bonus) {
             this.winningCondition =
-                    (matchResult) -> matchResult.isCount(this.matchCount) && matchResult.isBonus();
+                    (matchResult) -> matchResult.isCount(matchCount) && matchResult.isBonus();
             return;
         }
-        this.winningCondition = (matchResult) -> matchResult.isCount(this.matchCount);
+        this.winningCondition = (matchResult) -> matchResult.isCount(matchCount);
     }
 
     public static Prize getPrize(MatchResult matchResult) {
