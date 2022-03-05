@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import domain.generatestrategy.LotteryNumberGeneratorStrategy;
 import domain.lottery.LotteryGenerator;
@@ -45,9 +46,15 @@ public final class LotteryGame {
 	}
 
 	public Lotteries createLottery(final List<List<Integer>> manualLotteryNumber) {
+		final List<Lottery> totalLotteries = generateTotalLotteries(manualLotteryNumber);
+		return Lotteries.from(totalLotteries);
+	}
+
+	private List<Lottery> generateTotalLotteries(List<List<Integer>> manualLotteryNumber) {
 		final List<Lottery> manualLotteries = createManualLottery(manualLotteryNumber);
-		Lotteries lotteries = Lotteries.from(manualLotteries);
-		return addAutoLottery(lotteries);
+		final List<Lottery> autoLotteries = createAutoLotteriesNumber();
+		return Stream.concat(manualLotteries.stream(), autoLotteries.stream())
+			.collect(Collectors.toList());
 	}
 
 	private List<Lottery> createManualLottery(List<List<Integer>> manualLotteryNumber) {
@@ -56,12 +63,7 @@ public final class LotteryGame {
 			.collect(Collectors.toList());
 	}
 
-	private Lotteries addAutoLottery(Lotteries lotteries) {
-		final List<Lottery> autoLotteries = createLotteriesNumber();
-		return lotteries.add(autoLotteries);
-	}
-
-	private List<Lottery> createLotteriesNumber() {
+	private List<Lottery> createAutoLotteriesNumber() {
 		final List<Lottery> lotteriesNumber = new ArrayList<>();
 		for (int i = 0; i < numOfLottery.getNumOfAutoLottery(); i++) {
 			lotteriesNumber.add(lotteryGenerator.generateLottery(lotteryNumberGenerator.generateNumbers()));
