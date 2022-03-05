@@ -17,6 +17,7 @@ public class Lottos {
     }
 
     public static Lottos buyLottos(LottoNumberGenerator lottoNumberGenerator, int lottoAmount) {
+        Validator.checkArgumentIsNull(lottoNumberGenerator);
         return new Lottos(lottoNumberGenerator, lottoAmount);
     }
 
