@@ -5,8 +5,7 @@ public class Money {
     private static final String ERROR_NOT_DIVIDABLE_FORMAT = "구입 금액은 %d원 단위로 나누어 떨어져야 합니다.";
     private static final String ERROR_NOT_POSITIVE = "구입 금액은 양의 정수 형태로 입력해야 합니다.";
     private static final String ERROR_NOT_ENOUGH = "구입하기에 돈이 충분하지 않습니다.";
-    private static final int DIVIDABLE = 0;
-    public static final int NONE_MONEY = 0;
+    private static final int ZERO = 0;
 
     private final int inputMoney;
 
@@ -37,19 +36,19 @@ public class Money {
     }
 
     private void validateIsNegativeOrZero() {
-        if (inputMoney <= NONE_MONEY) {
+        if (inputMoney <= ZERO) {
             throw new RuntimeException(ERROR_NOT_POSITIVE);
         }
     }
 
     private void validateIsDividableBy(int price) {
-        if (inputMoney % price != DIVIDABLE) {
+        if (inputMoney % price != ZERO) {
             throw new RuntimeException(String.format(ERROR_NOT_DIVIDABLE_FORMAT, price));
         }
     }
 
     private void validateEnoughMoney() {
-        if (inputMoney < NONE_MONEY) {
+        if (inputMoney < ZERO) {
             throw new RuntimeException(ERROR_NOT_ENOUGH);
         }
     }
