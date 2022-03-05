@@ -17,6 +17,7 @@ public class LottoResult {
 	}
 
 	public void increaseCountOfRank(Rank rank) {
+		countOfResult.putIfAbsent(rank, 0);
 		countOfResult.compute(rank, (r, count) -> count + 1);
 	}
 
