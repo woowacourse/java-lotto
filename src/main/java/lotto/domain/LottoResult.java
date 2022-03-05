@@ -25,13 +25,13 @@ public class LottoResult {
 
     public double calculateRate(final Payment payment) {
         int money = payment.getPayment();
-        int totalMoney = getTotalMoney();
+        long totalMoney = getTotalMoney();
         return (double) totalMoney / money;
     }
 
-    private int getTotalMoney() {
+    private long getTotalMoney() {
         return Arrays.stream(Rank.values())
-                .mapToInt(rank -> rank.getMoney() * lottoResult.get(rank))
+                .mapToLong(rank -> (long) rank.getMoney() * lottoResult.get(rank))
                 .sum();
     }
 }
