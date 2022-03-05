@@ -24,31 +24,6 @@ public class LottoGameTest {
         assertThatNoException().isThrownBy(LottoGame::new);
     }
 
-//    @DisplayName("주어진 금액으로 로또를 수동을 최대한 구매 후 남은 금액만큼 자동으로 구매한다")
-//    @Test
-//    void purchase_test() {
-//        // given
-//        LottoGame lottoGame = new LottoGame();
-//        List<LottoNumber> manualLottoNumber = List.of(
-//                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-//                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
-//        Lotto compareLotto = new Lotto(List.of(
-//                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-//                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
-//        List<Lotto> manualLottos = new ArrayList<>();
-//        manualLottos.add(new Lotto(manualLottoNumber));
-//
-//        // when
-//        ResponsePurchaseResultsDto dto =
-//                lottoGame.purchase(new Money(10000), manualLottos, new CustomLottoGenerator());
-//
-//        // then
-//        assertThat(dto.getLottos()).hasSize(10);
-//        assertThat(dto.getLottos().get(0)).isEqualTo(compareLotto);
-//        assertThat(dto.getManualLottoCount()).isEqualTo(1);
-//        assertThat(dto.getAutoLottoCount()).isEqualTo(9);
-//    }
-
     @DisplayName("로또를 수동으로 1회 구매한다")
     @Test
     void purchase_manual_test() {
