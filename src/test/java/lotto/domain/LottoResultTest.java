@@ -28,6 +28,6 @@ class LottoResultTest {
     @Test
     @DisplayName("총 수익 계산")
     void calculate_profit() {
-        assertThat(lottoResult.getProfit().getMoney()).isEqualTo(2_030_050_000);
+        assertThat(lottoResult.getTotalWinningPrize().getMoney()).isEqualTo(2_030_050_000);
     }
 }

@@ -76,7 +76,7 @@ public class OutputView {
 
     private static void printLottoResult(int lottoCount, Rank rank) {
         String bonusText = " ";
-        if (rank.isBonus()) {
+        if (rank == Rank.SECOND) {
             bonusText = BONUS_FORMAT;
         }
         System.out.printf(RESULT_FORMAT, rank.getCount(), bonusText, rank.getPrizeMoney().getMoney(), lottoCount);
