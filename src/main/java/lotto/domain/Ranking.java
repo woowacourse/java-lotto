@@ -22,7 +22,12 @@ public enum Ranking {
 
     public static Ranking findRanking(int cnt, boolean hasBonusNumber) {
         return Arrays.stream(Ranking.values())
-                .filter(ranking -> ranking.count == cnt && ranking.hasBonusNumber == hasBonusNumber)
+                .filter(ranking -> {
+                    if(cnt == 5) {
+                        return ranking.hasBonusNumber == hasBonusNumber;
+                    }
+                    return ranking.count == cnt;
+                })
                 .findAny()
                 .orElse(NONE);
     }
