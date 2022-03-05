@@ -109,7 +109,7 @@ public class LottoController {
 	private void showResult(Money insertedMoney, LottoResult lottoResult) {
 		outputView.printResultMessage();
 		Arrays.stream(Rank.values())
-			.filter(rank -> rank.getMatchNumber() >= 3)
+			.filter(Rank::checkNumberToReward)
 			.forEach(rank -> outputView.printResult(rank.getMatchNumber(), rank.getValue(),
 				lottoResult.getCountOfResult(rank),
 				Rank.SECOND.getValue()));
