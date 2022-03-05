@@ -6,9 +6,6 @@ import java.util.List;
 import strategy.LottoNumbersGenerationStrategy;
 
 public class LottoNumbers {
-	private static final String NUMBER_SIZE_ERROR_MESSAGE = "[Error]: 로또는 %d개의 숫자여야 합니다.";
-	private static final String LOTTO_NUMBER_REDUPLICATION_ERROR_MESSAGE = "[Error]: 로또 번호는 중복이 있으면 안됩니다";
-
 	private static final int LOTTO_SIZE = 6;
 
 	private final List<LottoNumber> numbers;
