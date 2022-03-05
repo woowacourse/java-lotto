@@ -1,8 +1,10 @@
-package model.lottonumber;
+package model.lottonumber.generationstrategy;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import model.lottonumber.LottoNumber;
 
 public class RandomLottoNumbersGenerationStrategy implements LottoNumbersGenerationStrategy {
 	private static final List<LottoNumber> lottoNumbers;

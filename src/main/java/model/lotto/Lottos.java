@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.lottonumber.LottoNumbers;
-import model.lottonumber.RandomLottoNumbersGenerationStrategy;
+import model.lottonumber.generationstrategy.RandomLottoNumbersGenerationStrategy;
 import model.result.RateOfReturn;
 import model.winningnumber.WinningLottoNumberDTO;
 

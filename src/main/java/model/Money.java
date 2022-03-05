@@ -1,5 +1,7 @@
 package model;
 
+import utils.InputValidateUtils;
+
 public class Money {
 	private static final int UNIT = 1000;
 	private static final String LOTTO_COUNT_UNIT_ERROR_MESSAGE = "[Error]: 금액은 천원 단위여야 합니다.";
@@ -7,6 +9,7 @@ public class Money {
 	private final int money;
 
 	public Money(int money) {
+		InputValidateUtils.inputNegative(money);
 		validateThousandUnitInputMoney(money);
 		this.money = money;
 	}
