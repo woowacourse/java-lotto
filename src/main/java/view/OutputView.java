@@ -59,7 +59,7 @@ public class OutputView {
 	private static void printStatistic(Rank rank, int count) {
 		System.out.printf(MATCH_COUNT_PRIZE_MESSAGE, rank.getMatchCount());
 
-		if (rank.isBonusBallMatched()) {
+		if (rank == Rank.SECOND_GRADE) {
 			System.out.print(BONUS_BALL_MESSAGE);
 		}
 

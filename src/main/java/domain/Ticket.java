@@ -29,21 +29,14 @@ public class Ticket {
 			.collect(Collectors.toUnmodifiableList());
 	}
 
-	public Rank getRank(final WinningNumber winningNumber) {
-		int matchCount = countMatch(winningNumber.getWinningBalls());
-		boolean bonusBallMatched = false;
-
-		if (matchCount == Rank.CONDITION_FOR_CHECK_BONUS_BALL) {
-			bonusBallMatched = balls.contains(winningNumber.getBonusBall());
-		}
-
-		return Rank.of(matchCount, bonusBallMatched);
+	public int countMatch(final List<Ball> balls) {
+		return (int)balls.stream()
+			.filter(this::contains)
+			.count();
 	}
 
-	private int countMatch(final List<Ball> balls) {
-		return (int)balls.stream()
-			.filter(this.balls::contains)
-			.count();
+	public boolean contains(Ball ball) {
+		return balls.contains(ball);
 	}
 
 	public List<String> makeBallsToStrings() {

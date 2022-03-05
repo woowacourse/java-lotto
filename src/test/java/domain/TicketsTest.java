@@ -35,15 +35,6 @@ class TicketsTest {
 		assertThat(tickets.getTickets().size()).isEqualTo(14);
 	}
 
-	@DisplayName("로또목록 등수 확인 테스트")
-	@Test
-	void rankTest() {
-		List<Rank> actual = tickets.getRanks(winningNumber);
-		List<Rank> expected = Arrays.asList(Rank.FIFTH_GRADE);
-
-		assertThat(actual).isEqualTo(expected);
-	}
-
 	@DisplayName("Tickets 불변 객체 테스트")
 	@Test
 	void TicketsImmutable() {

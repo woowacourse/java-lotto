@@ -2,7 +2,6 @@ package domain;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import domain.dto.WinningAnalyzeDto;
@@ -18,8 +17,8 @@ public class WinningAnalyze {
 
 	public WinningAnalyzeDto analyze() {
 		Map<Rank, Integer> analyzeResult = initRankResult();
-		List<Rank> ranks = tickets.getRanks(winningNumber);
-		ranks.forEach(rank -> analyzeResult.put(rank, analyzeResult.get(rank) + 1));
+		Rank.getRanks(tickets, winningNumber)
+			.forEach(rank -> analyzeResult.put(rank, analyzeResult.get(rank) + 1));
 
 		double profitRate = calculateProfitRate(analyzeResult);
 
@@ -35,9 +34,10 @@ public class WinningAnalyze {
 		return analyzeResult;
 	}
 
-	private double calculateProfitRate(final Map<Rank, Integer> analyzeResult) {
+
+	private double calculateProfitRate(final Map<Rank, Integer> countByRank) {
 		int payment = tickets.size() * Ticket.PRICE;
-		double profit = getProfit(analyzeResult);
+		double profit = getProfit(countByRank);
 
 		return Math.floor((profit / payment) * 100) / 100.0;
 	}
