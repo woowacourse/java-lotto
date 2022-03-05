@@ -28,7 +28,11 @@ public class InputView {
 
     public static int inputAmount() {
         System.out.println(INPUT_AMOUNT_MESSAGE);
-        return convertToNumber(scanner.nextLine(), NOT_NUMBER_ERROR);
+        return convertToNumber(nextLine(), NOT_NUMBER_ERROR);
+    }
+
+    private static String nextLine() {
+        return scanner.nextLine();
     }
 
     private static int convertToNumber(String input, String errorMessage) {
@@ -36,7 +40,7 @@ public class InputView {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             System.out.println(errorMessage);
-            return convertToNumber(scanner.nextLine(), errorMessage);
+            return convertToNumber(nextLine(), errorMessage);
         }
     }
 
@@ -46,7 +50,7 @@ public class InputView {
     }
 
     private static LottoTicket inputLottoNumbers() {
-        String inputRemovedBlank = scanner.nextLine().replaceAll(BLANK, EMPTY);
+        String inputRemovedBlank = nextLine().replaceAll(BLANK, EMPTY);
         if (isNumber(inputRemovedBlank)) {
             return createLottoTicket(inputRemovedBlank);
         }
@@ -82,12 +86,12 @@ public class InputView {
 
     public static int inputBonusBall() {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
-        return convertToNumber(scanner.nextLine(), NOT_NUMBER_ERROR);
+        return convertToNumber(nextLine(), NOT_NUMBER_ERROR);
     }
 
     public static int inputManualLottoCount() {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
-        final int manualLottoCount = convertToNumber(scanner.nextLine(), NOT_NUMBER_ERROR);
+        final int manualLottoCount = convertToNumber(nextLine(), NOT_NUMBER_ERROR);
         try {
             checkMoreThanZero(manualLottoCount);
             return manualLottoCount;
