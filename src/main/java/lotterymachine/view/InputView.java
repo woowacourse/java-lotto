@@ -28,11 +28,11 @@ public class InputView {
         return toInt(SCANNER.nextLine());
     }
 
-    public static List<LotteryNumber> getWinningLotteryNumbers() {
+    public static List<Integer> getWinningLotteryNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         try {
             return Arrays.stream(SCANNER.nextLine().split(NUMBER_DELIMITER))
-                    .map(i -> LotteryNumber.from(toInt(i)))
+                    .map(i -> toInt(i.trim()))
                     .collect(Collectors.toList());
         } catch (RuntimeException runtimeException) {
             System.out.println(runtimeException.getMessage());
@@ -40,12 +40,12 @@ public class InputView {
         }
     }
 
-    public static LotteryNumber getBonusNumber() {
+    public static int getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
-            LotteryNumber lotteryNumber = LotteryNumber.from(toInt(SCANNER.nextLine()));
+            int number = toInt(SCANNER.nextLine());
             printEmptyLine();
-            return lotteryNumber;
+            return number;
         } catch (NumberFormatException numberFormatException) {
             System.out.println(numberFormatException.getMessage());
             return getBonusNumber();

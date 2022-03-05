@@ -13,12 +13,19 @@ public class LotteryTicket {
 
     private final List<LotteryNumber> numbers;
 
-    public LotteryTicket(final List<LotteryNumber> numbers) {
+    private LotteryTicket(final List<LotteryNumber> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
     }
 
-    public static List<LotteryTicket> from(List<List<Integer>> value) {
+    public static LotteryTicket from(List<Integer> value) {
+        List<LotteryNumber> numbers = value.stream()
+                .map(LotteryNumber::from)
+                .collect(Collectors.toList());
+        return new LotteryTicket(numbers);
+    }
+
+    public static List<LotteryTicket> getLotteryTickets(List<List<Integer>> value) {
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
         for (List<Integer> numbers : value) {
             List<LotteryNumber> lotteryNumbers = LotteryNumber.from(numbers);

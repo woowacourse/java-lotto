@@ -15,14 +15,14 @@ public class WinningResultTest {
     @Test
     @DisplayName("당첨 번호와 로또 티켓을 입력 받아 결과를 저장한다.")
     void getResult() {
-        List<LotteryNumber> lotteryNumbers = IntStream.rangeClosed(1, 6)
-                .mapToObj(LotteryNumber::from)
+        List<Integer> lotteryNumbers = IntStream.rangeClosed(1, 6)
+                .boxed()
                 .collect(Collectors.toList());
-        List<LotteryTicket> tickets = List.of(new LotteryTicket(lotteryNumbers));
+        List<LotteryTicket> tickets = List.of(LotteryTicket.from(lotteryNumbers));
         LotteryTickets lotteryTickets = new LotteryTickets(tickets);
 
         LotteryNumber bonusNumber = LotteryNumber.from(7);
-        WinningLottery winningLottery = new WinningLottery(new LotteryTicket(lotteryNumbers), bonusNumber);
+        WinningLottery winningLottery = new WinningLottery(LotteryTicket.from(lotteryNumbers), bonusNumber);
 
         WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
         Map<WinningLotteryRank, Integer> value = winningResult.getResult();
@@ -33,14 +33,14 @@ public class WinningResultTest {
     @DisplayName("당첨 결과에 대한 투자 수익률을 조회한다.")
     void getTotalProfitRate() {
         Money money = new Money(14000);
-        List<LotteryNumber> lotteryNumbers = IntStream.rangeClosed(1, 6)
-                .mapToObj(LotteryNumber::from)
+        List<Integer> lotteryNumbers = IntStream.rangeClosed(1, 6)
+                .boxed()
                 .collect(Collectors.toList());
-        List<LotteryTicket> tickets = List.of(new LotteryTicket(lotteryNumbers));
+        List<LotteryTicket> tickets = List.of(LotteryTicket.from(lotteryNumbers));
         LotteryTickets lotteryTickets = new LotteryTickets(tickets);
 
         LotteryNumber bonusNumber = LotteryNumber.from(7);
-        WinningLottery winningLottery = new WinningLottery(new LotteryTicket(lotteryNumbers), bonusNumber);
+        WinningLottery winningLottery = new WinningLottery(LotteryTicket.from(lotteryNumbers), bonusNumber);
 
         WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
         double totalProfitRate = winningResult.getTotalProfitRate(money.getValue());
