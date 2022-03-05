@@ -23,7 +23,8 @@ public class ManualLottoController {
         OutputView.printTicketCount(purchaseLottoCounts);
         OutputView.printTickets(tickets);
 
-        LottoResults results = LottoResults.of(createWinningNumbers(), tickets);
+        WinningNumbers winningNumbers = createWinningNumbers();
+        LottoResults results = LottoResults.of(winningNumbers, tickets);
         OutputView.printResult(results);
         OutputView.printYield(amount.getYield(results.getProfit()));
     }
