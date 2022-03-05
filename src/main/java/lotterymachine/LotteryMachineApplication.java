@@ -1,6 +1,11 @@
 package lotterymachine;
 
-import lotterymachine.domain.*;
+import lotterymachine.domain.LotteryTicket;
+import lotterymachine.domain.LotteryTickets;
+import lotterymachine.domain.WinningLottery;
+import lotterymachine.domain.WinningResult;
+import lotterymachine.domain.vo.Count;
+import lotterymachine.domain.vo.Money;
 import lotterymachine.utils.RandomLotteryNumbersGenerator;
 import lotterymachine.view.InputView;
 import lotterymachine.view.OutputView;

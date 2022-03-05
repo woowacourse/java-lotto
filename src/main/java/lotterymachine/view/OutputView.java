@@ -1,9 +1,9 @@
 package lotterymachine.view;
 
-import lotterymachine.domain.Count;
 import lotterymachine.domain.LotteryTicket;
 import lotterymachine.domain.LotteryTickets;
 import lotterymachine.domain.WinningLotteryRank;
+import lotterymachine.domain.vo.Count;
 
 import java.util.Map;
 

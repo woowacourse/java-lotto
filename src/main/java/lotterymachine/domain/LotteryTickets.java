@@ -1,8 +1,8 @@
 package lotterymachine.domain;
 
-import lotterymachine.view.InputView;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LotteryTickets {
     private final List<LotteryTicket> tickets;

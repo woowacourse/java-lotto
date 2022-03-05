@@ -1,5 +1,6 @@
 package lotterymachine.domain;
 
+import lotterymachine.domain.vo.Count;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

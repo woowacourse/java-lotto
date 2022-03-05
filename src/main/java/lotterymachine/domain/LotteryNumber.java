@@ -1,6 +1,8 @@
 package lotterymachine.domain;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,15 +32,6 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     public static List<LotteryNumber> from(List<Integer> numbers) {
         return numbers.stream()
                 .map(LotteryNumber::from)
-                .collect(Collectors.toList());
-    }
-
-    public static List<LotteryNumber> getAutoValues() {
-        ArrayList<Integer> value = new ArrayList<>(numbers.keySet());
-        Collections.shuffle(value);
-        return value.stream()
-                .limit(LotteryTicket.TICKET_SIZE)
-                .map(numbers::get)
                 .collect(Collectors.toList());
     }
 

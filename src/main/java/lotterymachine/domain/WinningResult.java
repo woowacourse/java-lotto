@@ -1,5 +1,6 @@
 package lotterymachine.domain;
 
+import lotterymachine.domain.vo.Money;
 import lotterymachine.utils.LotteryCalculator;
 
 import java.util.EnumMap;

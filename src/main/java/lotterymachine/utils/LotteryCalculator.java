@@ -1,8 +1,6 @@
 package lotterymachine.utils;
 
 import lotterymachine.domain.LotteryTicket;
-import lotterymachine.domain.Money;
-
 
 import static java.lang.Math.floor;
 
