@@ -28,7 +28,7 @@ public class LottoResult {
         return lottoRank.multiplePrizeBy(getCountByRank(lottoRank));
     }
 
-    public int getCountByRank(LottoRank rank) {
+    private int getCountByRank(LottoRank rank) {
         return resultMap.get(rank);
     }
 

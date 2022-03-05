@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,13 +29,14 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(
                 List.of(LottoRank.FIRST, LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD));
 
+        Map<LottoRank, Integer> resultMap = lottoResult.getResultMap();
         assertAll("countRank",
-                () -> assertThat(lottoResult.getCountByRank(LottoRank.FIRST)).isEqualTo(2),
-                () -> assertThat(lottoResult.getCountByRank(LottoRank.SECOND)).isEqualTo(1),
-                () -> assertThat(lottoResult.getCountByRank(LottoRank.THIRD)).isEqualTo(1),
-                () -> assertThat(lottoResult.getCountByRank(LottoRank.FOURTH)).isEqualTo(0),
-                () -> assertThat(lottoResult.getCountByRank(LottoRank.FIFTH)).isEqualTo(0),
-                () -> assertThat(lottoResult.getCountByRank(LottoRank.NOTHING)).isEqualTo(0)
+                () -> assertThat(resultMap.get(LottoRank.FIRST)).isEqualTo(2),
+                () -> assertThat(resultMap.get(LottoRank.SECOND)).isEqualTo(1),
+                () -> assertThat(resultMap.get(LottoRank.THIRD)).isEqualTo(1),
+                () -> assertThat(resultMap.get(LottoRank.FOURTH)).isEqualTo(0),
+                () -> assertThat(resultMap.get(LottoRank.FIFTH)).isEqualTo(0),
+                () -> assertThat(resultMap.get(LottoRank.NOTHING)).isEqualTo(0)
         );
     }
 }
