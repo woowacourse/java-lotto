@@ -1,9 +1,11 @@
 package controller;
 
+import domain.TicketCounter;
+import domain.TicketMachine;
 import domain.Tickets;
 import domain.WinningAnalyze;
 import domain.WinningNumber;
-import domain.dto.WinningAnalyzeDto;
+import domain.dto.ManualTicketsDto;
 import domain.strategy.AutoStrategy;
 import view.InputView;
 import view.OutputView;
@@ -11,25 +13,30 @@ import view.OutputView;
 public class LottoController {
 
 	public void run() {
-		Tickets tickets = generateTickets(InputView.getPayment());
-		OutputView.printTickets(tickets.getTickets());
+		Tickets tickets = generateTickets();
 
 		WinningNumber winningNumber =
 			new WinningNumber(InputView.getWinningNumber(), InputView.getBonusBall());
 
-		OutputView.printStatistics(generateStatistics(tickets, winningNumber));
+		generateStatistics(tickets, winningNumber);
 	}
 
-	private Tickets generateTickets(int payment) {
-		Tickets tickets = new Tickets();
-		tickets.makeTickets(payment, new AutoStrategy());
+	private Tickets generateTickets() {
+		final int money = InputView.getPayment();
+		final int count = InputView.getManualLottoNumber();
+		final ManualTicketsDto manualTicketsDto =
+			InputView.getManualLottoTickets(count);
+
+		Tickets tickets = TicketMachine.buyTickets(new TicketCounter(money, count), manualTicketsDto,
+			new AutoStrategy());
+
+		OutputView.printTickets(tickets.getTickets(), manualTicketsDto.size());
 
 		return tickets;
 	}
 
-	private WinningAnalyzeDto generateStatistics(Tickets tickets, WinningNumber winningNumber) {
+	private void generateStatistics(final Tickets tickets, final WinningNumber winningNumber) {
 		WinningAnalyze winningAnalyze = new WinningAnalyze(tickets, winningNumber);
-
-		return winningAnalyze.analyze();
+		OutputView.printStatistics(winningAnalyze.analyze());
 	}
 }

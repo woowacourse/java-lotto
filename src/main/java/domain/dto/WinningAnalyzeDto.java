@@ -9,7 +9,7 @@ public class WinningAnalyzeDto {
 	private final double profitRate;
 
 	public WinningAnalyzeDto(Map<Rank, Integer> analyzeResult, double profitRate) {
-		this.analyzeResult = analyzeResult;
+		this.analyzeResult = Map.copyOf(analyzeResult);
 		this.profitRate = profitRate;
 	}
 

@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,22 +11,22 @@ public class WinningNumber {
 	private final List<Ball> winningBalls;
 	private final Ball bonusBall;
 
-	public WinningNumber(List<Integer> winningBalls, int bonusBall) {
+	public WinningNumber(final List<Integer> winningBalls, final int bonusBall) {
 		validateWinningNumber(winningBalls, bonusBall);
 
-		this.winningBalls = winningBalls.stream()
-			.map(Ball::new)
+		this.winningBalls = List.copyOf(winningBalls).stream()
+			.map(Ball::from)
 			.collect(Collectors.toUnmodifiableList());
 
-		this.bonusBall = new Ball(bonusBall);
+		this.bonusBall = Ball.from(bonusBall);
 	}
 
-	private void validateWinningNumber(List<Integer> winningBalls, int bonusBall) {
+	private void validateWinningNumber(final List<Integer> winningBalls, final int bonusBall) {
 		Ticket.validateBalls(winningBalls);
 		validateDuplicate(winningBalls, bonusBall);
 	}
 
-	private void validateDuplicate(List<Integer> winningBalls, int bonusBall) {
+	private void validateDuplicate(final List<Integer> winningBalls, final int bonusBall) {
 		List<Integer> duplicateChecker = winningBalls.stream()
 			.distinct().collect(Collectors.toUnmodifiableList());
 
@@ -39,7 +40,7 @@ public class WinningNumber {
 	}
 
 	public List<Ball> getWinningBalls() {
-		return winningBalls;
+		return Collections.unmodifiableList(winningBalls);
 	}
 
 	public Ball getBonusBall() {

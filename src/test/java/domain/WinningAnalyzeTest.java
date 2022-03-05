@@ -20,7 +20,8 @@ public class WinningAnalyzeTest {
 		setUpTicketsAndWinningNumber.setUp();
 
 		winningAnalyze
-			= new WinningAnalyze(setUpTicketsAndWinningNumber.getTickets(), setUpTicketsAndWinningNumber.getWinningNumber());
+			= new WinningAnalyze(setUpTicketsAndWinningNumber.getTickets(),
+			setUpTicketsAndWinningNumber.getWinningNumber());
 
 		dto = winningAnalyze.analyze();
 	}
@@ -28,6 +29,7 @@ public class WinningAnalyzeTest {
 	@DisplayName("통계 자료 테스트")
 	@Test
 	void analyze() {
+		System.out.println(dto.getAnalyzeResult());
 		assertThat(dto.getAnalyzeResult().get(Rank.FIFTH_GRADE)).isEqualTo(1);
 	}
 

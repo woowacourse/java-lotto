@@ -14,7 +14,7 @@ class BallTest {
 	@ParameterizedTest
 	@ValueSource(ints = {46, 47, 48})
 	void rangeOutExceptionTest(int number) {
-		assertThatThrownBy(() -> new Ball(number))
+		assertThatThrownBy(() -> Ball.from(number))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -22,14 +22,14 @@ class BallTest {
 	@ParameterizedTest
 	@ValueSource(ints = {43, 44, 45})
 	void initTest(int number) {
-		assertDoesNotThrow(() -> new Ball(number));
+		assertDoesNotThrow(() -> Ball.from(number));
 	}
 
 	@DisplayName("숫자 비교 기능 테스트")
 	@Test
 	void equalsNumberTest() {
-		Ball ball = new Ball(40);
-		Ball ball2 = new Ball(40);
+		Ball ball = Ball.from(40);
+		Ball ball2 = Ball.from(40);
 		assertThat(ball.equals(ball2)).isTrue();
 	}
 }
