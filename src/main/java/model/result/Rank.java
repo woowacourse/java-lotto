@@ -26,14 +26,21 @@ public enum Rank {
 	}
 
 	public static Rank getRank(long matchNumber, boolean matchBonus) {
-		if (matchNumber == BONUS_NUMBER && matchBonus) {
-			return SECOND;
+		if (matchNumber == BONUS_NUMBER) {
+			return getRankWithCheckingBonus(matchBonus);
 		}
 
 		return Arrays.stream(Rank.values())
 			.filter(rank -> rank.getMatchNumber() == matchNumber)
 			.findAny()
 			.orElse(FAIL);
+	}
+
+	private static Rank getRankWithCheckingBonus(boolean matchBonus) {
+		if (matchBonus) {
+			return SECOND;
+		}
+		return THIRD;
 	}
 
 	public int getMatchNumber() {
