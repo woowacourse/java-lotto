@@ -3,7 +3,6 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import model.generator.LottoGenerator;
 import model.generator.LottosGenerator;
 import model.generator.ManualGenerator;
 import model.generator.RandomGenerator;

@@ -3,53 +3,35 @@ package model;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import model.generator.LottoGenerator;
+import model.generator.LottosGenerator;
 
 public class IssuedLottos {
-    private final Budget budget;
-    private final List<Lotto> manualIssuedLotto;
-    private final List<Lotto> autoIssuedLotto;
+    private List<Lotto> lottos;
 
-    public IssuedLottos(Budget budget,LottoGenerator generator, List<Lotto> manualIssuedLotto) {
-        this.budget = budget;
-        this.manualIssuedLotto = Collections.unmodifiableList(manualIssuedLotto);
-        this.autoIssuedLotto = Collections.unmodifiableList(issueAffordableAutoLotto(generator));
+    public IssuedLottos(LottosGenerator generator) {
+        this.lottos = Collections.unmodifiableList(generator.createLottos());
     }
 
-    private List<Lotto> issueAffordableAutoLotto(LottoGenerator generator) {
-        int affordableLottoCount = getAffordableLottoCount();
-        return IntStream.range(0, affordableLottoCount)
-                .mapToObj(i -> generator.createLotto())
+    public static IssuedLottos merge(IssuedLottos from, IssuedLottos to) {
+        List<Lotto> collect = Stream.of(from, to)
+                .flatMap(issuedLottos -> issuedLottos.getLottos().stream())
                 .collect(Collectors.toList());
-    }
-
-    private int getAffordableLottoCount() {
-        return budget.getMaxCountForLottoIssue() - manualIssuedLotto.size();
+        return new IssuedLottos(() -> collect);
     }
 
     public LottoResult summary(WinningLottoNumbers winningLottoNumbers) {
-        List<LottoRank> ranks = Stream.of(manualIssuedLotto, autoIssuedLotto)
-                .flatMap(lottos -> lottos.stream())
+        List<LottoRank> ranks = lottos.stream()
                 .map(winningLottoNumbers::getRankBy)
                 .collect(Collectors.toList());
-        return new LottoResult(budget, ranks);
+        return new LottoResult(ranks);
     }
 
-    public int getManualLottoCount() {
-        return manualIssuedLotto.size();
+    public int getLottosCount() {
+        return lottos.size();
     }
 
-    public int getAutoLottoCount() {
-        return autoIssuedLotto.size();
-    }
-
-    public List<Lotto> getManualIssuedLotto() {
-        return Collections.unmodifiableList(manualIssuedLotto);
-    }
-
-    public List<Lotto> getAutoIssuedLotto() {
-        return Collections.unmodifiableList(autoIssuedLotto);
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

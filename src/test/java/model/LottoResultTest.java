@@ -16,16 +16,16 @@ public class LottoResultTest {
     @Test
     @DisplayName("당첨결과 금액 총합 계산 테스트")
     void summarizeLottoPrize() {
-        LottoResult lottoResult = new LottoResult(new Budget(4000),
+        LottoResult lottoResult = new LottoResult(
                 List.of(LottoRank.FIRST, LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD));
         BigDecimal expected = FIRST_PRIZE.multiply(BigDecimal.valueOf(2)).add(SECOND_PRIZE).add(THIRD_PRIZE);
-        assertThat(lottoResult.getProfitRate()).isEqualTo(expected.divide(BigDecimal.valueOf(4000)));
+        assertThat(lottoResult.getProfitRate(new Budget(4000))).isEqualTo(expected.divide(BigDecimal.valueOf(4000)));
     }
 
     @Test
     @DisplayName("당첨 결과 순위 갯수 조회 테스트")
     void summarizeCountByLottoRank() {
-        LottoResult lottoResult = new LottoResult(new Budget(4000),
+        LottoResult lottoResult = new LottoResult(
                 List.of(LottoRank.FIRST, LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD));
 
         assertAll("countRank",

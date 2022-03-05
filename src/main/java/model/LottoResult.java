@@ -8,16 +8,14 @@ import java.util.Map;
 public class LottoResult {
     private static final int INITIAL_RANK_COUNT = 0;
 
-    private final Budget inputBudget;
     private final Map<LottoRank, Integer> resultMap;
 
-    public LottoResult(Budget inputBudget, List<LottoRank> ranks) {
-        this.inputBudget = inputBudget;
+    public LottoResult(List<LottoRank> ranks) {
         this.resultMap = allocateResultFrom(ranks);
     }
 
-    public BigDecimal getProfitRate() {
-        return inputBudget.getProfitRateFrom(getTotalPrize());
+    public BigDecimal getProfitRate(Budget budget) {
+        return budget.getProfitRateFrom(getTotalPrize());
     }
 
     private BigDecimal getTotalPrize() {
