@@ -33,7 +33,7 @@ public class LottoController {
 
     public void run() {
         do {
-            makeAndPrintLottoMachine();
+            makeLottoMachine();
             WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
                     InputView.inputBonusNumber());
             lottoMachine.calculateResult(winningLotto);
@@ -43,7 +43,7 @@ public class LottoController {
         } while (lottoMachine.isWorking());
     }
 
-    private void makeAndPrintLottoMachine() {
+    private void makeLottoMachine() {
         Money money = validateMoney(InputView.inputMoney());
         LottoCount lottoCount = new LottoCount(validateNumber(InputView.inputManualLottoCount()), money);
         Lottos manualLottos = makeManualLottos(lottoCount.getManualLottoCount());

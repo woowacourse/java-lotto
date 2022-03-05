@@ -10,7 +10,7 @@ public class Money {
 
     public Money(final int money) {
         validateMoney(money);
-        buyPossibleMoney(money);
+        validateLottoPrice(money);
         this.money = money;
     }
 
@@ -20,7 +20,7 @@ public class Money {
         }
     }
 
-    private void buyPossibleMoney(final int money) {
+    private void validateLottoPrice(final int money) {
         if (money < PRICE_PER_LOTTO) {
             throw new IllegalArgumentException(BUYING_IMPOSSIBLE_ERROR);
         }

@@ -67,7 +67,7 @@ public class LottosTest {
     void combineLottosTest() {
         Lotto newLotto = makeLotto(new int[]{40, 41, 42, 43, 44, 45});
         Lottos newLottos = new Lottos(new ArrayList<>(Arrays.asList(newLotto)));
-        lottos.plusLottos(newLottos);
-        assertThat(lottos.size()).isEqualTo(4);
+        Lottos combineLottos = lottos.plusLottos(newLottos);
+        assertThat(combineLottos.size()).isEqualTo(4);
     }
 }

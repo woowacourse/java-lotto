@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 
@@ -31,8 +33,11 @@ public class Lottos {
         return map;
     }
 
-    public void plusLottos(Lottos lottos) {
-        this.lottos.addAll(lottos.lottos);
+    public Lottos plusLottos(Lottos lottos) {
+        List<Lotto> newLottos = Stream.concat(this.lottos.stream(), lottos.lottos.stream())
+                .collect(Collectors.toList());
+        newLottos = Collections.unmodifiableList(newLottos);
+        return new Lottos(newLottos);
     }
 
     public List<Lotto> getLottos() {
