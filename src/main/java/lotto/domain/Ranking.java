@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.function.BiPredicate;
 
 public enum Ranking {
     FIRST(2000_000_000, 6, false),
@@ -29,7 +28,7 @@ public enum Ranking {
     }
 
     private static boolean checkCountAndBonusNumber(Ranking ranking, int count, boolean hasBonusNumber) {
-        if(count == 5) {
+        if (count == 5) {
             return ranking.hasBonusNumber == hasBonusNumber;
         }
         return ranking.count == count;
