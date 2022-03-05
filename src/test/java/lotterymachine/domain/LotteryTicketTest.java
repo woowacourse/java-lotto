@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -40,5 +41,13 @@ class LotteryTicketTest {
         LotteryTicket lotteryTicket = new LotteryTicket(input);
 
         assertThat(lotteryTicket.containsNumber(LotteryNumber.from(bonusNumber))).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("수동 로또 번호들을 입력 받아 LotteryTicket 리스트를 생성한다.")
+    void createLotteryTicks() {
+        List<List<Integer>> input = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<LotteryTicket> value = LotteryTicket.from(input);
+        assertThat(value.size()).isEqualTo(2);
     }
 }

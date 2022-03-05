@@ -25,32 +25,15 @@ public class LotteryMachineApplication {
     }
 
     private static LotteryTickets createLotteryTickets(Count count) {
-        List<LotteryTicket> passivityLotteryTickets = createPassivityLotteryTickets(count.getPassivityValue());
-        List<LotteryTicket> autoLotteryTickets = createAutoLotteryTickets(count.getAutoValue());
-        return createLotteryTickets(passivityLotteryTickets, autoLotteryTickets);
+        List<LotteryTicket> passivityTickets = LotteryTicket.from(InputView.getPassivityLotteryTicket(count.getAutoValue()));
+        List<LotteryTicket> autoTickets = createAutoLotteryTickets(count.getAutoValue());
+        return LotteryTickets.of(autoTickets, passivityTickets);
     }
 
-    private static LotteryTickets createLotteryTickets(List<LotteryTicket> passivityLotteryTickets, List<LotteryTicket> autoLotteryTickets) {
-        List<LotteryTicket> tickets = new ArrayList<>();
-        tickets.addAll(passivityLotteryTickets);
-        tickets.addAll(autoLotteryTickets);
-        return new LotteryTickets(tickets);
-    }
-
-    private static List<LotteryTicket> createAutoLotteryTickets(int number) {
+    private static List<LotteryTicket> createAutoLotteryTickets(int count) {
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            LotteryTicket lotteryTicket = new LotteryTicket(LotteryNumbersGenerator.generate());
-            lotteryTickets.add(lotteryTicket);
-        }
-        return lotteryTickets;
-    }
-
-    private static List<LotteryTicket> createPassivityLotteryTickets(int count) {
-        List<LotteryTicket> lotteryTickets = new ArrayList<>();
-        for (List<Integer> numbers:  InputView.getPassivityLotteryTicket(count)) {
-            List<LotteryNumber> lotteryNumbers = LotteryNumber.from(numbers);
-            lotteryTickets.add(new LotteryTicket(lotteryNumbers));
+        for (int i = 0; i < count; i++) {
+            lotteryTickets.add(new LotteryTicket(LotteryNumber.getAutoValues()));
         }
         return lotteryTickets;
     }

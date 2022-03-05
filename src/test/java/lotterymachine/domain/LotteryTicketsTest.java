@@ -1,8 +1,10 @@
 package lotterymachine.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -37,5 +39,16 @@ public class LotteryTicketsTest {
             LotteryTickets lotteryTickets = new LotteryTickets(tickets);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 숫자는 여섯개를 입력해야합니다.");
+    }
+
+    @Test
+    @DisplayName("두개의 로또 리스트를 입력 받아, LotteryTickets를 생성한다.")
+    void create() {
+        List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<LotteryTicket> lotteryTicket = LotteryTicket.from(List.of(input));
+
+        LotteryTickets value = LotteryTickets.of(lotteryTicket, lotteryTicket);
+
+        assertThat(value.getLotteryTickets().size()).isEqualTo(2);
     }
 }

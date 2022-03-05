@@ -1,5 +1,6 @@
 package lotterymachine.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,15 @@ public class LotteryTicket {
     public LotteryTicket(final List<LotteryNumber> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
+    }
+
+    public static List<LotteryTicket> from(List<List<Integer>> value) {
+        List<LotteryTicket> lotteryTickets = new ArrayList<>();
+        for (List<Integer> numbers:  value) {
+            List<LotteryNumber> lotteryNumbers = LotteryNumber.from(numbers);
+            lotteryTickets.add(new LotteryTicket(lotteryNumbers));
+        }
+        return lotteryTickets;
     }
 
     private void validateNumbers(List<LotteryNumber> numbers) {
