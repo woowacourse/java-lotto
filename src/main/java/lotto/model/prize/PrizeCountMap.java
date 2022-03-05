@@ -21,8 +21,8 @@ public class PrizeCountMap {
 
     private static Collector<MatchResult, ?, EnumMap<Prize, Long>> groupToEnumMapCollector() {
         return Collectors.groupingBy(Prize::getPrize,
-                        () -> new EnumMap<>(Prize.class),
-                        Collectors.counting());
+                () -> new EnumMap<>(Prize.class),
+                Collectors.counting());
     }
 
     public double calculateEarningRate(Money money) {

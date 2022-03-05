@@ -1,8 +1,5 @@
 package lotto.model;
 
-/*
- * 사용자가 투입한 금액을 담는 Class
- */
 public class Money {
     private static final String ERROR_NEGATIVE = "[ERROR] 구매 금액은 0원보다 커야 합니다";
     private static final String ERROR_TYPE = "[ERROR] 구매 금액은 숫자로만 입력하세요";

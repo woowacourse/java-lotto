@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/*
- * 로또 번호로 쓸 수 있는 int에 대한 Wrapper Class
- */
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final String ERROR_BOUND = "[ERROR] 로또 번호는 1 이상 45 이하로 입력해주세요";
     private static final int MIN_NUMBER = 1;

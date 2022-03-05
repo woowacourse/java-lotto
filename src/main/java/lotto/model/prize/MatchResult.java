@@ -1,8 +1,5 @@
 package lotto.model.prize;
 
-/*
- * 당첨 번호와 구입한 로또의 대조 결과를 담는 Class
- */
 public class MatchResult {
     private final int count;
     private final boolean bonus;
