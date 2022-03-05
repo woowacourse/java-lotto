@@ -20,7 +20,7 @@ public class ManualLottoCount {
     }
 
     public boolean isSameCount(int count) {
-        return this.count ==  count;
+        return this.count == count;
     }
 
     @Override

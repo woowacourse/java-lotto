@@ -3,7 +3,6 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -28,11 +27,11 @@ public class WinningLottoTest {
 
     private static Stream<Arguments> provideLottoAndPrizeAndRank() {
         return Stream.of(
-                Arguments.of(FIRST_PRIZE_LOTTO_NUMBERS,  LottoRank.FIRST),
+                Arguments.of(FIRST_PRIZE_LOTTO_NUMBERS, LottoRank.FIRST),
                 Arguments.of(SECOND_PRIZE_LOTTO_NUMBERS, LottoRank.SECOND),
-                Arguments.of(THIRD_PRIZE_LOTTO_NUMBERS,  LottoRank.THIRD),
+                Arguments.of(THIRD_PRIZE_LOTTO_NUMBERS, LottoRank.THIRD),
                 Arguments.of(FOURTH_PRIZE_LOTTO_NUMBERS, LottoRank.FOURTH),
-                Arguments.of(FIFTH_PRIZE_LOTTO_NUMBERS,  LottoRank.FIFTH)
+                Arguments.of(FIFTH_PRIZE_LOTTO_NUMBERS, LottoRank.FIFTH)
         );
     }
 
@@ -40,7 +39,7 @@ public class WinningLottoTest {
         return Stream.of(
                 Arguments.of(Lotto.of((List.of(1, 2, 8, 9, 10, 11)))),
                 Arguments.of(Lotto.of((List.of(1, 7, 8, 9, 10, 11)))),
-                Arguments.of(Lotto.of(List.of(7,8,9,10,11,12)))
+                Arguments.of(Lotto.of(List.of(7, 8, 9, 10, 11, 12)))
         );
     }
 

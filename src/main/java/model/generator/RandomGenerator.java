@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import model.Lotto;
 
-public class RandomGenerator implements LottosGenerator{
+public class RandomGenerator implements LottosGenerator {
     public static final int MAX_LOTTO_NUMBER = 45;
     public static final int MIN_LOTTO_NUMBER = 1;
 

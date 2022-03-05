@@ -11,8 +11,8 @@ public class IssuedLottosTest {
 
     @Test
     void mergeTest() {
-        Lotto lotto1 = Lotto.of(List.of(1,2,3,4,5,6));
-        Lotto lotto2 = Lotto.of(List.of(7,8,9,10,11,12));
+        Lotto lotto1 = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = Lotto.of(List.of(7, 8, 9, 10, 11, 12));
         IssuedLottos from = new IssuedLottos(new ManualGenerator(List.of(lotto1)));
         IssuedLottos to = new IssuedLottos(new ManualGenerator(List.of(lotto2)));
         assertThat(from.getLottos()).contains(lotto1);
@@ -22,7 +22,7 @@ public class IssuedLottosTest {
 
     @Test
     void summarizeTest() {
-        Lotto lotto1 = Lotto.of(List.of(1,2,3,4,5,6));
+        Lotto lotto1 = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
         IssuedLottos issuedLottos = new IssuedLottos(new ManualGenerator(List.of(lotto1)));
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(lotto1, LottoNumber.of(7));
         LottoResult result = issuedLottos.summarize(winningLottoNumbers);

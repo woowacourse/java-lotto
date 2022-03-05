@@ -7,13 +7,13 @@ public class LottoNumber {
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static final LottoNumber[] LOTTO_NUMBERS = new LottoNumber[MAXIMUM_LOTTO_NUMBER + 1];
 
-    private final int lottoNumber;
-
     static {
         for (int i = MINIMUM_LOTTO_NUMBER; i < LOTTO_NUMBERS.length; i++) {
             LOTTO_NUMBERS[i] = new LottoNumber(i);
         }
     }
+
+    private final int lottoNumber;
 
     private LottoNumber(int number) {
         checkRange(number);

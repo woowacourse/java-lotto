@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class ManualLottoCountTest {
     private Budget budgetForThree;
+
     @BeforeEach
     void setUp() {
         budgetForThree = new Budget(3000);

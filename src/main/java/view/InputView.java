@@ -30,7 +30,7 @@ public class InputView {
     }
 
     private static boolean isRepeatable() {
-        String value = inputRepeatOptionFrom( "Y", "N", "y", "n");
+        String value = inputRepeatOptionFrom("Y", "N", "y", "n");
         if (value.equals("y") || value.equals("Y")) {
             return true;
         }
@@ -41,7 +41,7 @@ public class InputView {
         String value;
         do {
             value = inputRepeatOption();
-        } while(!isIncludedInOptions(value, options));
+        } while (!isIncludedInOptions(value, options));
         return value;
     }
 

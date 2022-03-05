@@ -15,7 +15,7 @@ public class ExceptionHandler {
     }
 
     public static String getExceptionMessage(Exception e) {
-        if (errorMessages.containsKey(e.getClass()))  {
+        if (errorMessages.containsKey(e.getClass())) {
             return errorMessages.get(e.getClass()).apply(e);
         }
         return "예상하지 못한 문제가 생겼습니다." + e;
