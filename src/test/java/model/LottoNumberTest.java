@@ -2,7 +2,6 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-import exception.InvalidRangeLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -14,7 +13,8 @@ public class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void throwExceptionWhenInvalidRange(int number) {
         assertThatCode(() -> LottoNumber.of(number))
-                .isInstanceOf(InvalidRangeLottoNumberException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 1 ~ 45 사이여야 합니다.");
     }
 
     @ParameterizedTest

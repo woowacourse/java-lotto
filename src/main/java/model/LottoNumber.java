@@ -1,6 +1,5 @@
 package model;
 
-import exception.InvalidRangeLottoNumberException;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -23,7 +22,7 @@ public class LottoNumber {
 
     private static void checkRange(int number) {
         if (isInvalidRange(number)) {
-            throw new InvalidRangeLottoNumberException();
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이여야 합니다.");
         }
     }
 

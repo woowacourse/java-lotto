@@ -1,7 +1,5 @@
 package model;
 
-import exception.DuplicatedLottoNumbersException;
-import exception.InvalidLottoNumbersSizeException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -15,14 +13,14 @@ public class Lotto {
 
     private Lotto(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new InvalidLottoNumbersSizeException();
+            throw new IllegalArgumentException("로또 번호 갯수는 6개여야 합니다.");
         }
         this.lottoNumbers = lottoNumbers;
     }
 
     public static Lotto of(List<Integer> numbers) {
         if (isDuplicated(numbers)) {
-            throw new DuplicatedLottoNumbersException();
+            throw new IllegalArgumentException("중복된 로또 번호는 입력할 수 없습니다.");
         }
         Set<LottoNumber> lottoNumbers = convertAll(numbers);
         return new Lotto(lottoNumbers);

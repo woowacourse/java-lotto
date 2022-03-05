@@ -1,16 +1,12 @@
 package model;
 
-import exception.DuplicatedLottoNumbersException;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class WinningLottoNumbers {
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
     public WinningLottoNumbers(Lotto lotto, LottoNumber bonusNumber) {
         if (lotto.contains(bonusNumber)) {
-            throw new DuplicatedLottoNumbersException();
+            throw new IllegalArgumentException("중복된 로또 번호는 입력할 수 없습니다.");
         }
         this.lotto = lotto;
         this.bonusNumber = bonusNumber;

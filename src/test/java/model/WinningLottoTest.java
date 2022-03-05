@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import exception.DuplicatedLottoNumbersException;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -65,7 +64,8 @@ public class WinningLottoTest {
         Lotto lotto = Lotto.of((List.of(1, 2, 3, 4, 5, 6)));
         LottoNumber bonusNumber = LottoNumber.of(1);
         assertThatThrownBy(() -> new WinningLottoNumbers(lotto, bonusNumber))
-                .isInstanceOf(DuplicatedLottoNumbersException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("중복된 로또 번호는 입력할 수 없습니다.");
     }
 
     @ParameterizedTest(name = "{2} 판독")

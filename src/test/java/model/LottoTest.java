@@ -5,9 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import exception.DuplicatedLottoNumbersException;
-import exception.InvalidLottoNumbersSizeException;
-import exception.InvalidRangeLottoNumberException;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +15,8 @@ public class LottoTest {
     @DisplayName("중복된 로또 번호를 가질 수 없음")
     void checkDuplicatedLottoNumbers() {
         assertThatThrownBy(() -> Lotto.of(List.of(1, 2, 3, 3, 4, 5)))
-                .isInstanceOf(DuplicatedLottoNumbersException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("중복된 로또 번호는 입력할 수 없습니다.");
     }
 
     @Test
@@ -32,7 +30,8 @@ public class LottoTest {
     @DisplayName("로또 번호 리스트가 1 ~ 45 사이에 있지 않은 경우 테스트")
     void checkInvalidLottoNumbersRangeTest() {
         assertThatThrownBy(() -> Lotto.of(List.of(1, 2, 3, 0, 5, 46)))
-                .isInstanceOf(InvalidRangeLottoNumberException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 1 ~ 45 사이여야 합니다.");
     }
 
     @Test
@@ -59,6 +58,7 @@ public class LottoTest {
     @DisplayName("로또 숫자가 6개가 아닌 경우 로또 생성")
     void invalidLottoNumbersSize() {
         assertThatThrownBy(() -> Lotto.of(List.of(1, 2, 3, 4, 5)))
-                .isInstanceOf(InvalidLottoNumbersSizeException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호 갯수는 6개여야 합니다.");
     }
 }
