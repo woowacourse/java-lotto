@@ -13,7 +13,7 @@ import lotto.domain.result.Rank;
 
 public class OutputView {
 
-    public static final String PRINT_MANUAL_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String PRINT_MANUAL_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String SUFFIX_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String EXPLAIN_WINNING_STATISTICS = "당첨 통계";
     private static final String BASIC_LINE = "---------";

@@ -6,6 +6,7 @@ import java.util.List;
 public class Lottos {
 
     private static final String ERROR_WRONG_INPUT_MONEY = "[ERROR] 올바른 구매 값을 입력해주세요";
+
     private List<Lotto> lottos = new ArrayList<>();
 
     public Lottos() {

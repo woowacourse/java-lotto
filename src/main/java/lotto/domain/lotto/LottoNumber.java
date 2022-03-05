@@ -5,15 +5,19 @@ import java.util.List;
 
 public class LottoNumber {
 
-    private static final int LOTTO_MIN_RANGE = 1;
-    private static final int LOTTO_MAX_RANGE = 45;
-    private static final String ERROR_INTEGER_RANGE = String.format("[ERROR] %d~%d 사이의 수가 아닙니다.", LOTTO_MIN_RANGE, LOTTO_MAX_RANGE);
+    private static final int MIN = 1;
+    private static final int MAX = 45;
+
+    private static final String ERROR_INTEGER_RANGE = String.format("[ERROR] %d~%d 사이의 수가 아닙니다.", MIN, MAX);
+
     private static final List<Integer> candidateLottoNumbers = new ArrayList<>();
+
     static {
-        for (int i=LottoNumber.LOTTO_MIN_RANGE; i<= LottoNumber.LOTTO_MAX_RANGE; i++){
+        for (int i = MIN; i <= MAX; i++) {
             candidateLottoNumbers.add(i);
         }
     }
+
     private final int lottoNumber;
 
     public LottoNumber(final String lottoNumber) {
@@ -44,7 +48,7 @@ public class LottoNumber {
     }
 
     public static void checkRangeNumber(final int number) {
-        if (!(number >= LOTTO_MIN_RANGE && number <= LOTTO_MAX_RANGE)) {
+        if (!(number >= MIN && number <= MAX)) {
             throw new IllegalArgumentException(ERROR_INTEGER_RANGE);
         }
     }

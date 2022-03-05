@@ -3,6 +3,7 @@ package lotto.domain.user;
 public class PurchaseLottoCount {
 
     private static final String ERROR_WRONG_INPUT_COUNT = "[ERROR] 올바른 정수값을 입력해주세요";
+
     private int manualLottoCount;
     private int autoLottoCount;
 
