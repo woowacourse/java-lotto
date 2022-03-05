@@ -12,12 +12,10 @@ import java.util.List;
 public class LotteryMachineApplication {
     public static void main(String[] args) {
         Money money = new Money(InputView.getAmount());
-        Count count = new Count(money);
-        int passivityLotteryCount = InputView.getPassivityPurchaseCount();
+        Count count = new Count(InputView.getPassivityPurchaseCount(), money.getPurchasePossibleCount());
 
-        LotteryTickets lotteryTickets = createLotteryTickets(count, passivityLotteryCount);
-        int autoCount = count.getValue() - passivityLotteryCount;
-        OutputView.printLotteryPurchaseCount(passivityLotteryCount, autoCount);
+        LotteryTickets lotteryTickets = createLotteryTickets(count);
+        OutputView.printLotteryPurchaseCount(count);
         OutputView.printLotteryTickets(lotteryTickets);
 
         WinningLottery winningLottery = new WinningLottery(InputView.getWinningLotteryNumbers(), InputView.getBonusNumber());
@@ -26,9 +24,9 @@ public class LotteryMachineApplication {
         OutputView.printProfitRate(winningResult.getTotalProfitRate(money));
     }
 
-    private static LotteryTickets createLotteryTickets(Count count, int passivityLotteryCount) {
-        List<LotteryTicket> passivityLotteryTickets = createPassivityLotteryTickets(passivityLotteryCount);
-        List<LotteryTicket> autoLotteryTickets = createAutoLotteryTickets(count.getValue() - passivityLotteryCount);
+    private static LotteryTickets createLotteryTickets(Count count) {
+        List<LotteryTicket> passivityLotteryTickets = createPassivityLotteryTickets(count.getPassivityValue());
+        List<LotteryTicket> autoLotteryTickets = createAutoLotteryTickets(count.getAutoValue());
         return createLotteryTickets(passivityLotteryTickets, autoLotteryTickets);
     }
 
@@ -48,13 +46,11 @@ public class LotteryMachineApplication {
         return lotteryTickets;
     }
 
-    private static List<LotteryTicket> createPassivityLotteryTickets(int passivityLotteryCount) {
+    private static List<LotteryTicket> createPassivityLotteryTickets(int count) {
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
-        for (int i = 0; i < passivityLotteryCount; i++) {
-            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-            List<LotteryNumber> lotteryNumbers = LotteryNumber.from(InputView.getPassivityLotteryTicket());
-            LotteryTicket lotteryTicket = new LotteryTicket(lotteryNumbers);
-            lotteryTickets.add(lotteryTicket);
+        for (List<Integer> numbers:  InputView.getPassivityLotteryTicket(count)) {
+            List<LotteryNumber> lotteryNumbers = LotteryNumber.from(numbers);
+            lotteryTickets.add(new LotteryTicket(lotteryNumbers));
         }
         return lotteryTickets;
     }

@@ -1,13 +1,19 @@
 package lotterymachine.domain;
 
 public class Count {
-    private final int value;
+    private final int autoValue;
+    private final int passivityValue;
 
-    public Count(Money money) {
-        this.value = money.getValue() / LotteryTicket.PER_PRICE;
+    public Count(int autoValue, int totalValue) {
+        this.autoValue = autoValue;
+        this.passivityValue = totalValue - autoValue;
     }
 
-    public int getValue() {
-        return this.value;
+    public int getAutoValue() {
+        return this.autoValue;
+    }
+
+    public int getPassivityValue() {
+        return this.passivityValue;
     }
 }

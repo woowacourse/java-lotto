@@ -32,7 +32,7 @@ public class WinningResultTest {
     @DisplayName("당첨 결과에 대한 투자 수익률을 조회한다.")
     void getTotalProfitRate() {
         Money money = new Money(14000);
-        Count count = new Count(money);
+        Count count = new Count(3, money.getPurchasePossibleCount());
         List<LotteryNumber> lotteryNumbers = IntStream.rangeClosed(1, 6)
                 .mapToObj(LotteryNumber::from)
                 .collect(Collectors.toList());

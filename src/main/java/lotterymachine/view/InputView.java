@@ -2,10 +2,12 @@ package lotterymachine.view;
 
 import lotterymachine.domain.LotteryNumber;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -59,10 +61,15 @@ public class InputView {
         }
     }
 
-    public static List<Integer> getPassivityLotteryTicket() {
-        return Arrays.stream(SCANNER.nextLine().split(","))
-                .map(i -> toInt(i.trim()))
-                .collect(Collectors.toList());
+    public static List<List<Integer>> getPassivityLotteryTicket(int count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> value = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            value.add(Arrays.stream(SCANNER.nextLine().split(","))
+                    .map(input -> toInt(input.trim()))
+                    .collect(Collectors.toList()));
+        }
+        return value;
     }
 
     private static void printEmptyLine() {

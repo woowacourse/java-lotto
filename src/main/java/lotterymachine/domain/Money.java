@@ -19,4 +19,8 @@ public class Money {
     public int getValue() {
         return value;
     }
+
+    public int getPurchasePossibleCount() {
+        return this.value / LotteryTicket.PER_PRICE;
+    }
 }
