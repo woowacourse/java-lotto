@@ -7,6 +7,7 @@ public class LottoQuantity {
     static final String ERROR_MESSAGE_FOR_INVALID_MANUAL_LOTTO_QUANTITY = "입력 금액을 초과하는 수동 로또 수를 입력할 수 없습니다.";
 
     private static final int QUANTITY_CRITERIA = 0;
+
     private final int lottoQuantity;
 
     private LottoQuantity(int lottoQuantity) {
