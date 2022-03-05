@@ -1,9 +1,12 @@
 package controller;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import model.Money;
 import model.lotto.LottoCount;
+import model.lotto.LottoDTO;
 import model.lotto.Lottos;
 import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbers;
@@ -75,7 +78,11 @@ public class LottoController {
 	}
 
 	private void printLottos(LottoCount manualLottoCount, LottoCount automaticLottoCount, Lottos lottos) {
-		outputView.printLottos(manualLottoCount.getCount(), automaticLottoCount.getCount(), lottos.getLottosDTO());
+		List<String> lottoPrint = lottos.getLottosDTO()
+			.stream()
+			.map(LottoDTO::toString)
+			.collect(Collectors.toList());
+		outputView.printLottos(manualLottoCount.getCount(), automaticLottoCount.getCount(), lottoPrint);
 	}
 
 	private WinningLottoNumber storeWinningNumber() {

@@ -2,8 +2,6 @@ package view;
 
 import java.util.List;
 
-import model.lotto.LottoDTO;
-
 public class OutputView {
 	private static final String PURCHASE_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 	private static final String RATE_OF_RETURN_MESSAGE = "\n당첨 통계";
@@ -18,10 +16,10 @@ public class OutputView {
 		System.out.println(message);
 	}
 
-	public void printLottos(int passiveSize, int autoSize, List<LottoDTO> lottoDTOs) {
+	public void printLottos(int passiveSize, int autoSize, List<String> lottoPrints) {
 		System.out.println(String.format(PURCHASE_MESSAGE, passiveSize, autoSize));
-		lottoDTOs
-			.forEach(lottoDTO -> System.out.println(lottoDTO.toString()));
+		lottoPrints.stream()
+			.forEach(lottoPrint -> System.out.println(lottoPrint));
 	}
 
 	public void printResultMessage() {
