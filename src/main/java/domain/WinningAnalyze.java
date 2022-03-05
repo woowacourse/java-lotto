@@ -1,8 +1,8 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import domain.dto.WinningAnalyzeDto;
 
@@ -16,7 +16,9 @@ public class WinningAnalyze {
 	}
 
 	public WinningAnalyzeDto analyze() {
-		Map<Rank, Integer> analyzeResult = initRankResult();
+		Map<Rank, Integer> analyzeResult = Arrays.stream(Rank.values())
+			.collect(Collectors.toMap(rank -> rank, rank -> 0));
+
 		Rank.getRanks(tickets, winningNumber)
 			.forEach(rank -> analyzeResult.put(rank, analyzeResult.get(rank) + 1));
 
@@ -24,16 +26,6 @@ public class WinningAnalyze {
 
 		return new WinningAnalyzeDto(analyzeResult, profitRate);
 	}
-
-	private Map<Rank, Integer> initRankResult() {
-		Map<Rank, Integer> analyzeResult = new LinkedHashMap<>();
-
-		Arrays.stream(Rank.values())
-			.forEach(rank -> analyzeResult.put(rank, 0));
-
-		return analyzeResult;
-	}
-
 
 	private double calculateProfitRate(final Map<Rank, Integer> countByRank) {
 		int payment = tickets.size() * Ticket.PRICE;

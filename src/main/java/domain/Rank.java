@@ -40,7 +40,7 @@ public enum Rank {
 		return Rank.of(matchCount);
 	}
 
-	public static Rank of(final int matchCount) {
+	private static Rank of(final int matchCount) {
 		return Arrays.stream(Rank.values())
 			.filter(rank -> rank.matches(matchCount))
 			.findFirst()
