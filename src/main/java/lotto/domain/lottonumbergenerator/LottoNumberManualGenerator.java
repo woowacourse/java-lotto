@@ -7,7 +7,7 @@ import lotto.domain.LottoNumber;
 
 public class LottoNumberManualGenerator implements LottoNumberGenerator {
 
-    public static final String ERROR_LOTTO_SIZE = "생성할 로또 개수와 로또 숫자 개수가 다릅니다.";
+    private static final String ERROR_LOTTO_SIZE = "생성할 로또 개수와 로또 숫자 개수가 다릅니다.";
 
     private final List<List<LottoNumber>> lottoNumbers;
 
