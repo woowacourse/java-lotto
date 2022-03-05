@@ -17,7 +17,6 @@ public class LotteryMachineApplication {
     public static void main(String[] args) {
         Money money = new Money(InputView.getAmount());
         Count count = new Count(InputView.getPassivityPurchaseCount(), money.getPurchasePossibleCount());
-
         LotteryTickets lotteryTickets = createLotteryTickets(count);
         OutputView.printLotteryPurchaseCount(count);
         OutputView.printLotteryTickets(lotteryTickets);

@@ -9,11 +9,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteryNumberTest {
-
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     @DisplayName("1~45 범위에 벗어난 숫자를 입력 시, 에러 발생")
@@ -30,6 +31,16 @@ class LotteryNumberTest {
     void create(int input) {
         LotteryNumber lotteryNumber = LotteryNumber.from(input);
         assertThat(lotteryNumber.getNumber()).isEqualTo(input);
+    }
+
+    @Test
+    @DisplayName("숫자 리스트를 입력 받아 캐싱된 객체 리스트를 가져온다.")
+    void createLotteryNumbers() {
+        List<Integer> input = IntStream.rangeClosed(1, 6)
+                .boxed()
+                .collect(Collectors.toList());
+        List<LotteryNumber> value = LotteryNumber.from(input);
+        assertThat(value.size()).isEqualTo(6);
     }
 
     @Test
