@@ -6,22 +6,17 @@ import java.util.stream.Collectors;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumberFactory;
 
-/*
- * 로또 한 장을 의미하는 Class
- */
 public class Lotto {
     private static final String ERROR_SIZE = "[ERROR] 로또 번호는 6개여야 합니다";
     private static final String ERROR_DUPLICATE = "[ERROR] 로또 번호는 중복되면 안됩니다";
     private static final int NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> numbers;
-    private final boolean auto;
 
-    public Lotto(List<LottoNumber> numbers, boolean auto) {
+    public Lotto(List<LottoNumber> numbers) {
         validate(numbers);
         Collections.sort(numbers);
         this.numbers = List.copyOf(numbers);
-        this.auto = auto;
     }
 
     private void validate(List<LottoNumber> numbers) {
@@ -48,14 +43,14 @@ public class Lotto {
     }
 
     public static Lotto ofRandom() {
-        return new Lotto(LottoNumberFactory.getRandomNumbers(NUMBERS_SIZE), true);
+        return new Lotto(LottoNumberFactory.getRandomNumbers(NUMBERS_SIZE));
     }
 
     public static Lotto from(List<String> rawNumbers) {
         List<LottoNumber> numbers = rawNumbers.stream()
                 .map(LottoNumberFactory::getNumber)
                 .collect(Collectors.toList());
-        return new Lotto(numbers, false);
+        return new Lotto(numbers);
     }
 
     public boolean contains(LottoNumber number) {
@@ -73,9 +68,5 @@ public class Lotto {
         return this.numbers.stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
-    }
-
-    public boolean isAuto() {
-        return auto;
     }
 }
