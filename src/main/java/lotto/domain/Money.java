@@ -23,11 +23,11 @@ public class Money {
         }
     }
 
-    public Count calculateCount(int manualCount) {
+    public LottoBuyCount calculateCount(int manualCount) {
         if (calculateLottoCount() < manualCount) {
             throw new IllegalArgumentException("[ERROR] 금액이 모자랍니다, 수동 구매횟수를 줄여주세요.");
         }
-        return new Count(manualCount, calculateLottoCount() - manualCount);
+        return new LottoBuyCount(manualCount, calculateLottoCount() - manualCount);
     }
 
     private int calculateLottoCount() {

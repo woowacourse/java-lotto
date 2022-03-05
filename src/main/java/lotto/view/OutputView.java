@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Count;
+import lotto.domain.LottoBuyCount;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 import lotto.domain.LottosDto;
@@ -21,8 +21,8 @@ public class OutputView {
         System.out.println(exception.getMessage());
     }
 
-    public static void printCount(Count count) {
-        System.out.printf(PURCHASE_COUNT_MESSAGE, count.getManualCount(), count.getAutoCount());
+    public static void printCount(LottoBuyCount lottoBuyCount) {
+        System.out.printf(PURCHASE_COUNT_MESSAGE, lottoBuyCount.getManualCount(), lottoBuyCount.getAutoCount());
     }
 
     public static void printLotto(LottosDto lottosDto) {

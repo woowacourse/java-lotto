@@ -1,10 +1,10 @@
 package lotto.domain;
 
-public class Count {
+public class LottoBuyCount {
     private final int manualCount;
     private final int autoCount;
 
-    public Count(int manualCount, int autoCount) {
+    public LottoBuyCount(int manualCount, int autoCount) {
         checkManualCount(manualCount);
         this.manualCount = manualCount;
         this.autoCount = autoCount;

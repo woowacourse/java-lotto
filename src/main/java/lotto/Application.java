@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.BonusNumber;
-import lotto.domain.Count;
+import lotto.domain.LottoBuyCount;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.LottosDto;
@@ -14,10 +14,10 @@ import lotto.view.OutputView;
 public class Application {
     public static void main(String[] args) {
         final Money money = initMoney();
-        final Count count = initCount(money);
-        OutputView.printCount(count);
+        final LottoBuyCount lottoBuyCount = initCount(money);
+        OutputView.printCount(lottoBuyCount);
 
-        final Lottos lottos = initLottos(count);
+        final Lottos lottos = initLottos(lottoBuyCount);
         OutputView.printLotto(LottosDto.from(lottos));
 
         final WinningNumber winningNumber = initWinningNumber();
@@ -33,7 +33,7 @@ public class Application {
         }
     }
 
-    private static Count initCount(Money money) {
+    private static LottoBuyCount initCount(Money money) {
         try {
             return money.calculateCount(InputView.askManualCount());
         } catch (IllegalArgumentException e) {
@@ -42,13 +42,13 @@ public class Application {
         }
     }
 
-    private static Lottos initLottos(Count count) {
+    private static Lottos initLottos(LottoBuyCount lottoBuyCount) {
         try {
-            List<List<Integer>> manualNumbers = InputView.askManualNumbers(count.getManualCount());
-            return new Lottos(manualNumbers, count.getAutoCount());
+            List<List<Integer>> manualNumbers = InputView.askManualNumbers(lottoBuyCount.getManualCount());
+            return new Lottos(manualNumbers, lottoBuyCount.getAutoCount());
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
-            return initLottos(count);
+            return initLottos(lottoBuyCount);
         }
     }
 
