@@ -20,10 +20,8 @@ public class WinningResultTest {
                 .collect(Collectors.toList());
         List<LotteryTicket> tickets = List.of(LotteryTicket.from(lotteryNumbers));
         LotteryTickets lotteryTickets = new LotteryTickets(tickets);
-
         LotteryNumber bonusNumber = LotteryNumber.from(7);
         WinningLottery winningLottery = new WinningLottery(LotteryTicket.from(lotteryNumbers), bonusNumber);
-
         WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
         Map<WinningLotteryRank, Integer> value = winningResult.getResult();
         assertThat(value.get(WinningLotteryRank.SIX)).isEqualTo(1);
@@ -38,10 +36,8 @@ public class WinningResultTest {
                 .collect(Collectors.toList());
         List<LotteryTicket> tickets = List.of(LotteryTicket.from(lotteryNumbers));
         LotteryTickets lotteryTickets = new LotteryTickets(tickets);
-
         LotteryNumber bonusNumber = LotteryNumber.from(7);
         WinningLottery winningLottery = new WinningLottery(LotteryTicket.from(lotteryNumbers), bonusNumber);
-
         WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
         double totalProfitRate = winningResult.getTotalProfitRate(money.getValue());
         assertThat(totalProfitRate).isEqualTo(142857.14);

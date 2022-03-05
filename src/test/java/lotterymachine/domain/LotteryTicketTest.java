@@ -24,11 +24,9 @@ class LotteryTicketTest {
                 .boxed()
                 .collect(Collectors.toList());
         LotteryTicket lotteryTicket = LotteryTicket.from(input);
-
         List<Integer> inputWinningNumbers = Arrays.stream(winningNumbers.split(","))
                 .map(i-> Integer.valueOf(i.trim()))
                 .collect(Collectors.toList());
-
         assertThat(lotteryTicket.countMatchingNumbers(LotteryTicket.from(inputWinningNumbers))).isEqualTo(expected);
     }
 

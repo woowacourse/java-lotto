@@ -21,8 +21,6 @@ public class LotteryTicketsTest {
         LotteryTicket lotteryTicket = LotteryTicket.from(input);
         List<LotteryTicket> lotteryTicketList = List.of(lotteryTicket);
         LotteryTickets lotteryTickets = new LotteryTickets(lotteryTicketList);
-
-
         assertThat(lotteryTickets.getLotteryTickets().size()).isEqualTo(1);
     }
 
@@ -32,7 +30,6 @@ public class LotteryTicketsTest {
         List<Integer> input = IntStream.range(6, 13)
                 .boxed()
                 .collect(Collectors.toList());
-
         assertThatThrownBy(() -> {
             List<LotteryTicket> tickets = List.of(LotteryTicket.from(input));
             LotteryTickets lotteryTickets = new LotteryTickets(tickets);
@@ -45,9 +42,7 @@ public class LotteryTicketsTest {
     void create() {
         List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<LotteryTicket> lotteryTicket = LotteryTicket.getLotteryTickets(List.of(input));
-
         LotteryTickets value = LotteryTickets.of(lotteryTicket, lotteryTicket);
-
         assertThat(value.getLotteryTickets().size()).isEqualTo(2);
     }
 }

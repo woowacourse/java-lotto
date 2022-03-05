@@ -49,7 +49,6 @@ class WinningLotteryTest {
                 .collect(Collectors.toList());
         input.add(7);
         LotteryNumber inputBonusNumber = LotteryNumber.from(7);
-
         assertThatThrownBy(() -> {
             LotteryTicket lotteryTicket = LotteryTicket.from(input);
             WinningLottery winningLottery = new WinningLottery(lotteryTicket, inputBonusNumber);
@@ -66,9 +65,7 @@ class WinningLotteryTest {
         LotteryNumber inputBonusNumber = LotteryNumber.from(14);
         WinningLottery winningLottery = new WinningLottery(LotteryTicket.from(input), inputBonusNumber);
         LotteryTicket lotteryTicket = LotteryTicket.from(input);
-
         WinningLotteryRank winningLotteryRank = winningLottery.getWinningLotteryRank(lotteryTicket);
-
         assertThat(winningLotteryRank).isEqualTo(WinningLotteryRank.SIX);
     }
 }
