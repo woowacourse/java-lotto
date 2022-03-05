@@ -9,16 +9,16 @@ import java.util.stream.Stream;
 import model.lottonumber.LottoNumbers;
 import model.result.LottoResult;
 import model.winningnumber.WinningLottoNumberDTO;
-import strategy.InputLottoNumbersGenerationStrategy;
 import strategy.LottoNumbersGenerationStrategy;
-import strategy.RandomLottoNumbersGenerationStrategy;
 
 public class Lottos {
 	private List<Lotto> lottoStorage;
 
-	public Lottos(LottoCount manualLottoCount, LottoCount automaticLottoCount) {
-		lottoStorage = Stream.concat(makeLottos(manualLottoCount, new InputLottoNumbersGenerationStrategy()).stream(),
-			makeLottos(automaticLottoCount, new RandomLottoNumbersGenerationStrategy()).stream()).collect(
+	public Lottos(LottoCount manualLottoCount, LottoNumbersGenerationStrategy manualStrategy,
+		LottoCount automaticLottoCount,
+		LottoNumbersGenerationStrategy automaticStrategy) {
+		lottoStorage = Stream.concat(makeLottos(manualLottoCount, manualStrategy).stream(),
+			makeLottos(automaticLottoCount, automaticStrategy).stream()).collect(
 			Collectors.toList());
 	}
 

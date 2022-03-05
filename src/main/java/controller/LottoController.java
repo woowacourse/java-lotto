@@ -11,6 +11,7 @@ import model.result.LottoResult;
 import model.result.Rank;
 import model.winningnumber.WinningLottoNumber;
 import strategy.InputLottoNumbersGenerationStrategy;
+import strategy.RandomLottoNumbersGenerationStrategy;
 import utils.InputValidateUtils;
 import view.InputView;
 import view.OutputView;
@@ -24,6 +25,8 @@ public class LottoController {
 
 	private final InputView inputView = new InputView();
 	private final OutputView outputView = new OutputView();
+	private final InputLottoNumbersGenerationStrategy manualStrategy = new InputLottoNumbersGenerationStrategy();
+	private final RandomLottoNumbersGenerationStrategy automaticStrategy = new RandomLottoNumbersGenerationStrategy();
 
 	private Money insertedMoney;
 	private LottoCount automaticLottoCount;
@@ -71,7 +74,7 @@ public class LottoController {
 	private Lottos makeLottos() {
 		try {
 			inputView.inputPassiveLottoMessage();
-			return new Lottos(manualLottoCount, automaticLottoCount);
+			return new Lottos(manualLottoCount, manualStrategy, automaticLottoCount, automaticStrategy);
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
 			return makeLottos();
@@ -85,7 +88,7 @@ public class LottoController {
 	private WinningLottoNumber storeWinningNumber() {
 		try {
 			inputView.inputWinningNumbersMessage();
-			LottoNumbers lottoNumbers = LottoNumbers.from(new InputLottoNumbersGenerationStrategy());
+			LottoNumbers lottoNumbers = LottoNumbers.from(manualStrategy);
 			return new WinningLottoNumber(lottoNumbers, makeBonusBall());
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());

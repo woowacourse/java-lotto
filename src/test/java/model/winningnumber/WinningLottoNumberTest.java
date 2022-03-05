@@ -31,40 +31,6 @@ public class WinningLottoNumberTest {
 			.hasMessageContaining("[Error]: 로또 번호는 1~45 숫자여야 합니다.");
 	}
 
-	// @Test
-	// @DisplayName("당첨 번호 숫자 사이즈가 6개가 아닌 경우")
-	// void validateInputLottoWinningNumberSize() {
-	// 	LottoNumbersGenerationStrategy lottoNumbersGenerationStrategy = new LottoNumbersGenerationStrategy() {
-	// 		@Override
-	// 		public List<LottoNumber> generate(int size) {
-	// 			return Arrays.asList(1, 2, 3, 4, 5).stream()
-	// 				.map(number -> LottoNumber.valueOf(number))
-	// 				.collect(Collectors.toList());
-	// 		}
-	// 	};
-	// 	assertThatThrownBy(
-	// 		() -> new WinningLottoNumber(LottoNumbers.from(lottoNumbersGenerationStrategy), LottoNumber.valueOf(6)))
-	// 		.isInstanceOf(IllegalArgumentException.class)
-	// 		.hasMessageContaining("[Error]: 로또는 6개의 숫자여야 합니다.");
-	// }
-	//
-	// @Test
-	// @DisplayName("당첨 번호에 중복이 있는지 검증")
-	// void validateWinningNumberReduplication() {
-	// 	LottoNumbersGenerationStrategy lottoNumbersGenerationStrategy = new LottoNumbersGenerationStrategy() {
-	// 		@Override
-	// 		public List<LottoNumber> generate(int size) {
-	// 			return Arrays.asList(1, 2, 3, 4, 5, 1).stream()
-	// 				.map(number -> LottoNumber.valueOf(number))
-	// 				.collect(Collectors.toList());
-	// 		}
-	// 	};
-	// 	assertThatThrownBy(
-	// 		() -> new WinningLottoNumber(LottoNumbers.from(lottoNumbersGenerationStrategy), LottoNumber.valueOf(6)))
-	// 		.isInstanceOf(IllegalArgumentException.class)
-	// 		.hasMessageContaining("[Error]: 로또 번호는 중복이 있으면 안됩니다");
-	// }
-
 	@Test
 	@DisplayName("보너스 볼이 당첨 번호와 중복되는지 검증")
 	void validateReduplicationWithBonusBall() {
