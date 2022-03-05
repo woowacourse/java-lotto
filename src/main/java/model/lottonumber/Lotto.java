@@ -30,7 +30,7 @@ public class Lotto {
     }
 
     public Rank findRank(final WinningNumbers winningNumbers) {
-        int matchCount = countMatch(winningNumbers.getWinningNumbers());
+        int matchCount = countMatch(winningNumbers.getWinningNumberGroup());
         boolean hasBonus = hasBonus(winningNumbers.getBonusNumber());
 
         return Rank.valueOf(matchCount, hasBonus);

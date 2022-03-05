@@ -25,9 +25,9 @@ public class LottoNumber {
         return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
     }
 
-    public boolean hasSameNumber(final List<LottoNumber> winningLottoNumbers) {
-        return winningLottoNumbers.stream()
-                .anyMatch(winningNumber -> this.number == winningNumber.number);
+    public boolean hasSameNumber(final List<LottoNumber> otherNumbers) {
+        return otherNumbers.stream()
+                .anyMatch(otherNumber -> this.number == otherNumber.number);
     }
 
     public int getNumber() {

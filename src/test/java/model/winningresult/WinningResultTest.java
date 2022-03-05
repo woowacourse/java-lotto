@@ -21,7 +21,7 @@ class WinningResultTest {
         result.put(Rank.FIFTH, 3);
 
         final WinningResult winningResult = new WinningResult(result);
-        winningResult.getWinningResult()
+        winningResult.getValue()
                 .forEach((rank, count) -> assertThat(count)
                         .isEqualTo(result.get(rank)));
     }

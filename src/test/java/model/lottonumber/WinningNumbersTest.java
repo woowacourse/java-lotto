@@ -19,7 +19,7 @@ class WinningNumbersTest {
         final int bonusNumber = 7;
 
         final WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
-        for (LottoNumber winningLottoNumber : winningNumbers.getWinningNumbers()) {
+        for (LottoNumber winningLottoNumber : winningNumbers.getWinningNumberGroup()) {
             assertThat(numbers).contains(winningLottoNumber.getNumber());
         }
         assertThat(winningNumbers.getBonusNumber().getNumber()).isEqualTo(7);

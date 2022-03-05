@@ -51,12 +51,13 @@ public class LottoController {
         int bonusNumber = inputView.inputBonusNumber();
 
         WinningResult winningResult = lottoMachine.makeLottoWinningResult(winningNumbers, bonusNumber);
-        int totalPurchaseCount = lottoMachine.sendTotalPurchaseLottoCount();
-        printWinningResult(winningResult, totalPurchaseCount);
+        int totalLottoCount =
+                lottoMachine.bringManualLottoCountForPurchase() + lottoMachine.bringAutoLottoCountForPurchase();
+        printWinningResult(winningResult, totalLottoCount);
     }
 
     private void printWinningResult(final WinningResult winningResult, final int totalPurchaseLottoCount) {
-        final List<RankResultDto> rankResultDtos = convertWinningResultToDtos(winningResult.getWinningResult());
+        final List<RankResultDto> rankResultDtos = convertWinningResultToDtos(winningResult.getValue());
 
         outputView.printWinningResult(rankResultDtos);
         outputView.printRateOfReturn(winningResult.sendRateOfReturn(totalPurchaseLottoCount));
