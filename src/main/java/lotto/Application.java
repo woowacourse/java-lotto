@@ -16,12 +16,10 @@ public class Application {
 
         Money money = userController.inputMoney();
         PurchaseLottoCount purchaseLottoCount = userController.calculatePurchaseLottoCountInfo(money);
-
         Lottos manualLottos = lottoController.createManualLottos(purchaseLottoCount);
         Lottos autoLottos = lottoController.createAutoLottos(purchaseLottoCount);
-
-        lottoController.printLottos(autoLottos, purchaseLottoCount);
         Lottos totalLottos = lottoController.combineLottos(autoLottos, manualLottos);
+        lottoController.printLottos(totalLottos, purchaseLottoCount);
 
         LottoWinningNumbers lottoWinningNumbers = lottoController.createLottoWinningNumbers();
         LottoResult lottoResult = lottoController.calculateRanks(totalLottos, lottoWinningNumbers);

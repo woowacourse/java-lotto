@@ -31,7 +31,7 @@ public class Money {
     }
 
     private void checkDivideMoney(final int money) {
-        if (!(money >= BASIC_LOTTO_MONEY && money % BASIC_LOTTO_MONEY == 0)) {
+        if (money != 0 && !(money >= BASIC_LOTTO_MONEY && money % BASIC_LOTTO_MONEY == 0)) {
             throw new IllegalArgumentException(ERROR_WRONG_INPUT_MONEY);
         }
     }

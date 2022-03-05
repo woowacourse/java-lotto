@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import java.util.List;
 import lotto.controller.LottoController;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,7 +15,7 @@ public class LottosTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, -1})
+    @ValueSource(ints = {-1, -2})
     public void 로또번호들_생성_실패(int count) {
         assertThatThrownBy(() -> new Lottos(count))
                 .isInstanceOf(IllegalArgumentException.class)

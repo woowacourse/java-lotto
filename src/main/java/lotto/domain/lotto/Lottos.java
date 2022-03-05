@@ -23,7 +23,7 @@ public class Lottos {
     }
 
     private static void checkCount(final int count) {
-        if (count < 1) {
+        if (count < 0) {
             throw new IllegalArgumentException(ERROR_WRONG_INPUT_MONEY);
         }
     }

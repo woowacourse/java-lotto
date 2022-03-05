@@ -16,7 +16,7 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void printLottos(final Lottos lottos, final PurchaseLottoCount purchaseLottoCount) {
-        OutputView.printLottos(lottos, purchaseLottoCount.getAutoLottoCount(), purchaseLottoCount.getManualLottoCount());
+        OutputView.printLottos(lottos, purchaseLottoCount.getManualLottoCount(), purchaseLottoCount.getAutoLottoCount());
     }
 
     public Lottos createAutoLottos(final PurchaseLottoCount purchaseLottoCount) {
@@ -78,7 +78,7 @@ public class LottoController {
 
     public Lottos createManualLottos(final PurchaseLottoCount purchaseLottoCount) {
         try {
-            Lottos lottos = new Lottos(purchaseLottoCount.getManualLottoCount());
+            Lottos lottos = new Lottos();
             OutputView.printManualLotto();
             addManualLotto(purchaseLottoCount.getManualLottoCount(), lottos);
             return lottos;
@@ -94,7 +94,10 @@ public class LottoController {
         }
     }
 
-    public Lottos combineLottos(final Lottos lottos, final Lottos addLottos) {
-        return lottos.addLottos(addLottos.getLottos());
+    public Lottos combineLottos(final Lottos firstLottos, final Lottos secondLottos) {
+        Lottos totalLottos = new Lottos();
+        totalLottos.addLottos(firstLottos.getLottos());
+        totalLottos.addLottos(secondLottos.getLottos());
+        return totalLottos;
     }
 }

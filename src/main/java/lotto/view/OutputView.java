@@ -21,16 +21,16 @@ public class OutputView {
     private static final String PRINT_SECOND_WINNING_STATISTIC = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String PRINT_TOTAL_RETURN = "총 수익률은 %.2f입니다.";
 
-    public static void printLottos(final Lottos lottos, int purchaseLottoCount, int remainPurchaseLottoCount) {
+    public static void printLottos(final Lottos lottos, int manualCount, int autoCount) {
         System.out.println();
-        System.out.println(String.format(SUFFIX_LOTTO_COUNT, purchaseLottoCount, remainPurchaseLottoCount));
+        System.out.println(String.format(SUFFIX_LOTTO_COUNT, manualCount, autoCount));
         for (Lotto lotto : lottos.getLottos()) {
             printLotto(lotto);
         }
         System.out.println();
     }
 
-    private static void printLotto(final Lotto lotto) {
+    public static void printLotto(final Lotto lotto) { /////
         List<Integer> numbers = new ArrayList<>();
         for (LottoNumber number : lotto.getLottoNumbers()) {
             numbers.add(number.getLottoNumber());
