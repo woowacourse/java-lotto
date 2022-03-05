@@ -10,7 +10,7 @@ public class PurchaseLottoCount {
     public PurchaseLottoCount(final String count, final int maxCount) {
         checkInputCount(count, maxCount);
         this.manualLottoCount = Integer.parseInt(count);
-        this.autoLottoCount = Integer.parseInt(count) - maxCount;
+        this.autoLottoCount = maxCount - Integer.parseInt(count);
     }
 
     private void checkInputCount(final String count, final int maxCount) {

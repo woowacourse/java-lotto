@@ -4,6 +4,7 @@ public class Money {
 
     private static final String ERROR_WRONG_INPUT_MONEY = "[ERROR] 올바른 정수값을 입력해주세요";
     private static final int BASIC_LOTTO_MONEY = 1000;
+
     private final int money;
 
     public Money(final String money) {

@@ -6,14 +6,13 @@ import lotto.domain.lotto.Lotto;
 
 public class LottoResult {
 
-    private HashMap<Rank, Integer> result;
+    private HashMap<Rank, Integer> result = new HashMap<>();
 
     public LottoResult() {
         initResult();
     }
 
     private void initResult() {
-        result = new HashMap<>();
         for (Rank rank : Rank.values()) {
             result.put(rank, 0);
         }
