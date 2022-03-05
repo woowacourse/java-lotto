@@ -12,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import domain.factory.LotteryNumberFactory;
 import domain.generateStrategy.LotteryGenerateMock;
 import domain.generatestrategy.LotteryRandomGeneratorStrategy;
 import utils.Parser;
@@ -26,7 +27,8 @@ public class LotteryGameTest {
 		final int theNumberOfManualLotteries = lotteriesToCreate - 1;
 		final PurchaseInformation purchaseInformation = createPurchaseInformation(lotteriesToCreate,
 			theNumberOfManualLotteries);
-		final LotteryGame lotteryGame = new LotteryGame(purchaseInformation, new LotteryRandomGeneratorStrategy());
+		final LotteryGame lotteryGame = new LotteryGame(purchaseInformation, new LotteryRandomGeneratorStrategy(),
+			new LotteryNumberFactory());
 
 		assertThat(lotteryGame.getLotteries().size()).isEqualTo(lotteriesToCreate);
 	}
@@ -59,7 +61,7 @@ public class LotteryGameTest {
 		final PurchaseInformation purchaseInformation =
 			createPurchaseInformation(purchaseAmount / 1000, 0);
 		final LotteryGame lotteryGame = new LotteryGame(purchaseInformation,
-			new LotteryGenerateMock(expectedRank, purchaseAmount / 1000));
+			new LotteryGenerateMock(expectedRank, purchaseAmount / 1000), new LotteryNumberFactory());
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		return lotteryGame;
 	}

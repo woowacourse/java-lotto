@@ -18,13 +18,13 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
 		this.lotteryNumber = lotteryNumber;
 	}
 
-	private void checkNumberRange(final int lotteryNumbers) {
+	public static void checkNumberRange(final int lotteryNumbers) {
 		if (isOutOfRange(lotteryNumbers)) {
 			throw new IllegalArgumentException(LOTTERY_RANGE_ERROR);
 		}
 	}
 
-	private boolean isOutOfRange(final int lotteryNumbers) {
+	private static boolean isOutOfRange(final int lotteryNumbers) {
 		return NUMBER_MIN_RANGE > lotteryNumbers || lotteryNumbers > NUMBER_MAX_RANGE;
 	}
 

@@ -7,14 +7,16 @@ import java.util.stream.IntStream;
 
 import domain.Lottery;
 import domain.LotteryNumber;
+import domain.factory.LotteryNumberFactory;
 
 public class LotteryRandomGeneratorStrategy implements LotteryGenerateStrategy {
 
 	private final List<LotteryNumber> numbers;
 
 	public LotteryRandomGeneratorStrategy() {
+		LotteryNumberFactory lotteryNumberFactory = new LotteryNumberFactory();
 		numbers = IntStream.rangeClosed(LotteryNumber.NUMBER_MIN_RANGE, LotteryNumber.NUMBER_MAX_RANGE)
-			.mapToObj(LotteryNumber::new)
+			.mapToObj(lotteryNumberFactory::of)
 			.collect(Collectors.toList());
 	}
 

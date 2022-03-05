@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import domain.factory.LotteryNumberFactory;
 import domain.generatestrategy.LotteryGenerateStrategy;
 import domain.generatestrategy.ManualLotteryGeneratorStrategy;
 
@@ -12,13 +13,16 @@ public class LotteryGame {
 
 	private final PurchaseInformation purchaseInformation;
 	private final LotteryGenerateStrategy lotteryGenerator;
+	private final LotteryNumberFactory lotteryNumberFactory;
 
 	private Lotteries lotteries;
 	private WinningLottery winningLottery;
 
-	public LotteryGame(final PurchaseInformation purchaseInformation, final LotteryGenerateStrategy lotteryGenerator) {
+	public LotteryGame(final PurchaseInformation purchaseInformation, final LotteryGenerateStrategy lotteryGenerator,
+			final LotteryNumberFactory lotteryNumberFactory) {
 		this.purchaseInformation = purchaseInformation;
 		this.lotteryGenerator = lotteryGenerator;
+		this.lotteryNumberFactory = lotteryNumberFactory;
 		createLottery();
 	}
 
@@ -32,7 +36,8 @@ public class LotteryGame {
 		final List<List<Integer>> rawManualLotteries = purchaseInformation.getManualLotteries();
 		final List<Lottery> manualLottery = new ArrayList<>();
 		for (List<Integer> rawLottery : rawManualLotteries) {
-			manualLottery.add((new ManualLotteryGeneratorStrategy(rawLottery)).getLottery());
+			manualLottery.add((new ManualLotteryGeneratorStrategy(rawLottery, new LotteryNumberFactory()))
+				.getLottery());
 		}
 		lotteries.addLotteries(manualLottery);
 	}
@@ -47,9 +52,9 @@ public class LotteryGame {
 
 	public void createWinningLottery(final List<Integer> winningNumbers, final Integer bonusBall) {
 		final List<LotteryNumber> winningLotteryNumbers = winningNumbers.stream()
-			.map(LotteryNumber::new)
+			.map(lotteryNumberFactory::of)
 			.collect(Collectors.toList());
-		winningLottery = new WinningLottery(winningLotteryNumbers, new LotteryNumber(bonusBall));
+		winningLottery = new WinningLottery(winningLotteryNumbers, lotteryNumberFactory.of(bonusBall));
 	}
 
 	public Map<Rank, Integer> makeWinner() {
