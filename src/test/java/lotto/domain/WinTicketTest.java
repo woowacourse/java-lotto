@@ -31,7 +31,7 @@ public class WinTicketTest {
             new LottoNumber(4),
             new LottoNumber(5),
             new LottoNumber(6));
-        assertThatThrownBy(() -> new WinTicket(new Ticket(winNumbers), new LottoNumber(6)))
+        assertThatThrownBy(() -> new WinTicket(new Ticket(winNumbers, false), new LottoNumber(6)))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -43,7 +43,7 @@ public class WinTicketTest {
             new LottoNumber(3),
             new LottoNumber(4),
             new LottoNumber(5),
-            new LottoNumber(6)));
+            new LottoNumber(6)), false);
         assertThatCode(() -> new WinTicket(winTicket, new LottoNumber(7)))
             .doesNotThrowAnyException();
     }
@@ -57,7 +57,7 @@ public class WinTicketTest {
             new LottoNumber(n3),
             new LottoNumber(n4),
             new LottoNumber(n5),
-            new LottoNumber(n6)));
+            new LottoNumber(n6)), false);
         LottoNumber bonusNumber = new LottoNumber(bonus);
         WinTicket winningTicket = new WinTicket(winTicket, bonusNumber);
         Rank ticketRank = winningTicket.getTicketRank(ticket);

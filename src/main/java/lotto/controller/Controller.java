@@ -14,17 +14,57 @@ import lotto.view.OutputView;
 public class Controller {
     public void run() {
         Lotto lotto = requestAmountForLotto();
-        OutputView.printTickets(lotto.getTicketCount(), lotto.getTickets());
+
+        int manualTicketCount = requestManualTicketCount(lotto);
+        createManualTickets(lotto, manualTicketCount);
+        createAutoTickets(lotto);
+
+        OutputView.printTickets(lotto.getManualTicketCount(), lotto.getAutoTicketCount(), lotto.getTickets());
         WinTicket winTicket = createWinTicket();
         OutputView.printResult(lotto.getResult(winTicket), lotto.getYield(winTicket));
     }
 
     private Lotto requestAmountForLotto() {
         try {
-            return new Lotto(InputView.requestAmount(), new RandomLottoNumbersGenerator());
+            return new Lotto(InputView.requestAmount());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return requestAmountForLotto();
+        }
+    }
+
+    private int requestManualTicketCount(Lotto lotto) {
+        int manualTicketCount = InputView.requestManualTicketCount();
+        try {
+            lotto.validateTicketCount(manualTicketCount);
+            return manualTicketCount;
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return requestManualTicketCount(lotto);
+        }
+    }
+
+    private void createManualTickets(Lotto lotto, int manualTicketCount) {
+        InputView.requestManualTicket();
+        for (int i = 0; i < manualTicketCount; i++) {
+            createManualTicket(lotto);
+        }
+    }
+
+    private void createAutoTickets(Lotto lotto) {
+        int numberOfPurchasableCount = lotto.findCountOfPurchasable();
+        for (int i = 0; i < numberOfPurchasableCount; i++) {
+            lotto.addTicket(Ticket.createByAuto(new RandomLottoNumbersGenerator()));
+        }
+    }
+
+    private void createManualTicket(Lotto lotto) {
+        try {
+            List<Integer> integers = StringUtil.splitToIntegers(InputView.requestNumbers());
+            lotto.addTicket(Ticket.createByManual(integers));
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            createManualTicket(lotto);
         }
     }
 

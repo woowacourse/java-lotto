@@ -7,12 +7,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import lotto.utils.LottoNumbersGenerator;
 
 public class Tickets {
-    private final List<Ticket> tickets;
+    private List<Ticket> tickets = new ArrayList<>();
+
+    public Tickets() {
+    }
 
     public Tickets(List<Ticket> tickets) {
         this.tickets = tickets;
@@ -56,5 +60,21 @@ public class Tickets {
 
     public int getTicketCount() {
         return tickets.size();
+    }
+
+    public void add(Ticket ticket) {
+        this.tickets.add(ticket);
+    }
+
+    public int getAutoTicketCount() {
+        return (int)tickets.stream()
+            .filter(Ticket::isAuto)
+            .count();
+    }
+
+    public int getManualTicketCount() {
+        return (int)tickets.stream()
+            .filter(Predicate.not(Ticket::isAuto))
+            .count();
     }
 }

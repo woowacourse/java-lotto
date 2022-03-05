@@ -11,24 +11,26 @@ import lotto.domain.Ticket;
 import lotto.domain.Tickets;
 
 public class OutputView {
-    private static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
     private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String DELIMITER = ", ";
     private static final String RESULT_HEADER_MESSAGE = "당첨 통계";
     private static final String DIVIDER = "---------";
     private static final int PROFIT_BASIS = 1;
 
-    public static void printTickets(int ticketCount, Tickets tickets) {
+    public static void printTickets(int manualTicketCount, int autoTicketCount, Tickets tickets) {
         StringBuilder stringBuilder = new StringBuilder();
-        appendTicketCountToStringBuilder(stringBuilder, ticketCount);
+        appendPrintTicketHeaderToStringBuilder(manualTicketCount, autoTicketCount, stringBuilder);
         appendTicketsToStringBuilder(stringBuilder, tickets);
         System.out.println(stringBuilder);
     }
 
-    private static void appendTicketCountToStringBuilder(StringBuilder stringBuilder, int ticketCount) {
-        stringBuilder.append(ticketCount)
-            .append(PURCHASE_MESSAGE)
-            .append("\n");
+    private static void appendPrintTicketHeaderToStringBuilder(int manualTicketCount, int autoTicketCount,
+        StringBuilder stringBuilder) {
+        stringBuilder.append("수동으로 ")
+            .append(manualTicketCount)
+            .append("장, 자동으로 ")
+            .append(autoTicketCount)
+            .append("개를 구매했습니다.").append("\n");
     }
 
     private static void appendTicketsToStringBuilder(StringBuilder stringBuilder, Tickets tickets) {

@@ -25,7 +25,7 @@ public class TicketTest {
             new LottoNumber(3),
             new LottoNumber(4),
             new LottoNumber(5),
-            new LottoNumber(6))))
+            new LottoNumber(6)), false))
             .doesNotThrowAnyException();
     }
 
@@ -36,7 +36,7 @@ public class TicketTest {
             new LottoNumber(2),
             new LottoNumber(3),
             new LottoNumber(4),
-            new LottoNumber(5))))
+            new LottoNumber(5)), false))
             .isInstanceOf(IllegalArgumentException.class);
     }
 

@@ -123,7 +123,7 @@ public class TicketsTest {
             new LottoNumber(3),
             new LottoNumber(4),
             new LottoNumber(5),
-            new LottoNumber(16)));
+            new LottoNumber(16)), false);
         LottoNumber bonusNumber = new LottoNumber(6);
         return new WinTicket(winTicket, bonusNumber);
     }
@@ -134,7 +134,7 @@ public class TicketsTest {
             new LottoNumber(3),
             new LottoNumber(14),
             new LottoNumber(15),
-            new LottoNumber(43)));
+            new LottoNumber(43)), false);
     }
 
     private Ticket getOtherTicket() {
@@ -143,7 +143,7 @@ public class TicketsTest {
             new LottoNumber(13),
             new LottoNumber(14),
             new LottoNumber(15),
-            new LottoNumber(43)));
+            new LottoNumber(43)), false);
     }
 
     private Ticket getThirdTicket() {
@@ -152,7 +152,7 @@ public class TicketsTest {
             new LottoNumber(3),
             new LottoNumber(4),
             new LottoNumber(5),
-            new LottoNumber(16)));
+            new LottoNumber(16)), false);
     }
 
     private Ticket getSecondTicket() {
@@ -161,7 +161,7 @@ public class TicketsTest {
             new LottoNumber(3),
             new LottoNumber(4),
             new LottoNumber(5),
-            new LottoNumber(6)));
+            new LottoNumber(6)), false);
     }
 
     private Ticket getFirstTicket() {
@@ -170,6 +170,6 @@ public class TicketsTest {
             new LottoNumber(3),
             new LottoNumber(4),
             new LottoNumber(5),
-            new LottoNumber(16)));
+            new LottoNumber(16)), false);
     }
 }

@@ -23,7 +23,6 @@ public class AmountTest {
     private static Stream<Arguments> invalidParameters() {
         return Stream.of(
             Arguments.of(0, "투입금액 0"),
-            Arguments.of(100, "천원단위로 안나누어떨어질때"),
             Arguments.of(-1, "투입금액 음수")
         );
     }
