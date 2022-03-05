@@ -18,10 +18,10 @@ public class OutputView {
 		System.out.println(message);
 	}
 
-	public void printLottos(int passiveSize, int autoSize, List<LottoDTO> lottosDTO) {
+	public void printLottos(int passiveSize, int autoSize, List<LottoDTO> lottoDTOs) {
 		System.out.println(String.format(PURCHASE_MESSAGE, passiveSize, autoSize));
-		lottosDTO
-			.forEach(lottoDTO -> System.out.println(lottoDTO.getNumbers()));
+		lottoDTOs
+			.forEach(lottoDTO -> System.out.println(lottoDTO.toString()));
 	}
 
 	public void printResultMessage() {

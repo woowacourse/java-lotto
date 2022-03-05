@@ -2,6 +2,7 @@ package model.lottonumber;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 	private static final int LOTTO_SIZE = 6;
@@ -38,5 +39,10 @@ public class LottoNumbers {
 
 	public List<LottoNumber> getNumbers() {
 		return new ArrayList<>(numbers);
+	}
+
+	@Override
+	public String toString() {
+		return "[" + String.join(", ", numbers.stream().map(LottoNumber::toString).collect(Collectors.toList())) + "]";
 	}
 }
