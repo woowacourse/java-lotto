@@ -8,7 +8,7 @@ import lotto.model.LottoCart;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
 import lotto.model.dto.LottoDTO;
-import lotto.model.dto.LottosDTO;
+import lotto.model.dto.PurchaseCountDTO;
 import lotto.model.dto.PrizeCountDTO;
 import lotto.model.number.LottoNumber;
 import lotto.model.prize.PrizeCountMap;
@@ -38,7 +38,7 @@ public class Controller {
     private Lottos makeLottos(Money money) {
         LottoCart lottoCart = new LottoCart(PurchaseCount.of(money, inputView.askManualCount()));
         Lottos lottos = purchaseLottos(lottoCart);
-        resultView.showPurchaseCount(LottosDTO.of(lottos));
+        resultView.showPurchaseCount(PurchaseCountDTO.of(lottoCart.getPurchaseCount()));
         resultView.showLottos(LottoDTO.from(lottos));
         return lottos;
     }

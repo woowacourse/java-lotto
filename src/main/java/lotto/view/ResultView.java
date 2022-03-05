@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.dto.LottoDTO;
-import lotto.model.dto.LottosDTO;
+import lotto.model.dto.PurchaseCountDTO;
 import lotto.model.dto.PrizeCountDTO;
 
 public class ResultView {
@@ -15,9 +15,9 @@ public class ResultView {
     private final String FORMAT_EARNING_RATE = "총 수익률은 %.2f입니다.";
 
 
-    public void showPurchaseCount(LottosDTO lottosDTO) {
+    public void showPurchaseCount(PurchaseCountDTO purchaseCountDTO) {
         System.out.println();
-        System.out.printf(FORMAT_COUNT, lottosDTO.getManualCount(), lottosDTO.getAutoCount());
+        System.out.printf(FORMAT_COUNT, purchaseCountDTO.getManualCount(), purchaseCountDTO.getAutoCount());
     }
 
     public void showLottos(List<LottoDTO> lottos) {

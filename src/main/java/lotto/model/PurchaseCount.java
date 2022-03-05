@@ -5,8 +5,8 @@ public class PurchaseCount {
     private static final String ERROR_NEGATIVE = "[ERROR] 구매 수량은 0보다 작을 수 없습니다";
     public static final String ERROR_TYPE = "[ERROR] 로또 구매 수량은 숫자로만 입력해주세요";
 
-    private int auto;
-    private int manual;
+    private final int auto;
+    private final int manual;
 
     private PurchaseCount(int total, int manual) {
         validate(total, manual);
@@ -40,19 +40,19 @@ public class PurchaseCount {
         }
     }
 
-    public void subtractAuto() {
-        this.auto--;
+    public boolean isTotal(int count) {
+        return (this.auto + this.manual) == count;
     }
 
-    public void subtractManual() {
-        this.manual--;
+    public boolean isManual(int count) {
+        return this.manual == count;
     }
 
-    public boolean isAutoAvailable() {
-        return auto != 0;
+    public int getAuto() {
+        return auto;
     }
 
-    public boolean isManualAvailable() {
-        return manual != 0;
+    public int getManual() {
+        return manual;
     }
 }

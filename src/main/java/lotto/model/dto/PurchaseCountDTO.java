@@ -1,12 +1,12 @@
 package lotto.model.dto;
 
-import lotto.model.Lottos;
+import lotto.model.PurchaseCount;
 
-public class LottosDTO {
+public class PurchaseCountDTO {
     private final int autoCount;
     private final int manualCount;
 
-    private LottosDTO(int autoCount, int manualCount) {
+    private PurchaseCountDTO(int autoCount, int manualCount) {
         this.autoCount = autoCount;
         this.manualCount = manualCount;
     }
@@ -19,7 +19,7 @@ public class LottosDTO {
         return manualCount;
     }
 
-    public static LottosDTO of(Lottos lottos) {
-        return new LottosDTO(lottos.getAutoCount(), lottos.getManualCount());
+    public static PurchaseCountDTO of(PurchaseCount purchaseCount) {
+        return new PurchaseCountDTO(purchaseCount.getAuto(), purchaseCount.getManual());
     }
 }

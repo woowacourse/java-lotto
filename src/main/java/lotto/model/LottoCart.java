@@ -13,24 +13,24 @@ public class LottoCart {
     }
 
     public void addManualLotto(List<String> inputs) {
-        if (isManualAvailable()) {
-            this.lottos.add(Lotto.from(inputs));
-            purchaseCount.subtractManual();
-        }
+        this.lottos.add(Lotto.from(inputs));
     }
 
     public void addAutoLottos() {
-        while (purchaseCount.isAutoAvailable()) {
+        while (!purchaseCount.isTotal(lottos.size())) {
             this.lottos.add(Lotto.ofRandom());
-            purchaseCount.subtractAuto();
         }
+    }
+
+    public boolean isManualAvailable() {
+        return !purchaseCount.isManual(lottos.size());
     }
 
     public Lottos getLottos() {
         return new Lottos(this.lottos);
     }
 
-    public boolean isManualAvailable() {
-        return this.purchaseCount.isManualAvailable();
+    public PurchaseCount getPurchaseCount() {
+        return this.purchaseCount;
     }
 }

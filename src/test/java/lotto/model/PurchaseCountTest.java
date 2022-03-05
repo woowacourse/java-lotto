@@ -40,10 +40,7 @@ public class PurchaseCountTest {
         int manualCount = 3;
         PurchaseCount purchaseCount = PurchaseCount.of(
                 Money.from(String.valueOf(count * LOTTO_PRICE)), String.valueOf(manualCount));
-        for (int i = 0; i < (count - manualCount); i++) {
-            purchaseCount.subtractAuto();
-        }
 
-        assertThat(purchaseCount.isAutoAvailable()).isFalse();
+        assertThat(purchaseCount.isTotal(7)).isTrue();
     }
 }
