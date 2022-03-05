@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.List;
 import lotto.domain.LottoBuyCount;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
@@ -22,7 +21,7 @@ public class Application {
 
         final WinningNumber winningNumber = createWinningNumber();
         final LottoResult lottoResult = lottos.createLottoResult(winningNumber);
-        OutputView.printResult(money, lottoResult);
+        OutputView.printResult(lottoResult);
         OutputView.printYield(lottoResult.calculateYield(money));
     }
 

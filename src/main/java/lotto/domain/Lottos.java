@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Lottos {
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(List<List<Integer>> manualNumbers, int autoCount) {
         this.lottos = createLottos(manualNumbers);
@@ -14,7 +14,7 @@ public class Lottos {
 
     private List<Lotto> createLottos(List<List<Integer>> manualNumbers) {
         return manualNumbers.stream()
-                .map(manualNumber -> new Lotto(manualNumber))
+                .map(Lotto::new)
                 .collect(Collectors.toList());
     }
 
@@ -32,8 +32,8 @@ public class Lottos {
         return new LottoResult(RankMap);
     }
 
-    private Integer addRank(Map<LottoRank, Integer> RankMap, LottoRank lottoRank) {
-        return RankMap.put(lottoRank, RankMap.get(lottoRank) + 1);
+    private void addRank(Map<LottoRank, Integer> RankMap, LottoRank lottoRank) {
+        RankMap.put(lottoRank, RankMap.get(lottoRank) + 1);
     }
 
     public List<Lotto> getLottos() {

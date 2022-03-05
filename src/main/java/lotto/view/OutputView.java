@@ -31,7 +31,7 @@ public class OutputView {
         }
     }
 
-    public static void printResult(Money money, LottoResult result) {
+    public static void printResult(LottoResult result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
