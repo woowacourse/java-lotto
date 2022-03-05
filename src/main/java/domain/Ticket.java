@@ -35,21 +35,21 @@ public class Ticket {
         return new Ticket(new TreeSet<>(numbers));
     }
 
-    private static void checkEmpty(String winNumbers) {
-        if (winNumbers == null || winNumbers.isBlank()) {
+    private static void checkEmpty(String numbers) {
+        if (numbers == null || numbers.isBlank()) {
             throw new IllegalArgumentException("빈 문자를 입력할 수 없습니다.");
         }
     }
 
-    private static List<LottoNumber> toLottoNumber(List<Integer> winNumbers) {
-        return winNumbers.stream()
+    private static List<LottoNumber> toLottoNumber(List<Integer> numbers) {
+        return numbers.stream()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 
-    private static List<Integer> toInteger(List<String> winNumbers) {
+    private static List<Integer> toInteger(List<String> numbers) {
         try {
-            return winNumbers.stream()
+            return numbers.stream()
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
         } catch (IllegalArgumentException exception) {
@@ -57,12 +57,12 @@ public class Ticket {
         }
     }
 
-    private static List<String> toList(String winNumbersInput) {
-        return List.of(winNumbersInput.split(DELIMITER, -1));
+    private static List<String> toList(String numberInput) {
+        return List.of(numberInput.split(DELIMITER, -1));
     }
 
-    private static void checkDuplicateNumbers(List<LottoNumber> winNumbers) {
-        if (winNumbers.size() != new HashSet<>(winNumbers).size()) {
+    private static void checkDuplicateNumbers(List<LottoNumber> numbers) {
+        if (numbers.size() != new HashSet<>(numbers).size()) {
             throw new IllegalArgumentException(REQUEST_NON_DUPLICATED_NUMBER);
         }
     }
@@ -71,8 +71,8 @@ public class Ticket {
         return lottoNumbers;
     }
 
-    public boolean contains(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     public int getSameNumberCount(Ticket ticket) {
