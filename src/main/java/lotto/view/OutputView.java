@@ -36,7 +36,6 @@ public class OutputView {
         System.out.println("---------");
 
         printRankResult(result);
-        printYield(result.calculateYield(money));
     }
 
     private static void printRankResult(LottoResult result) {
