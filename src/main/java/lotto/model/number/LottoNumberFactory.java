@@ -13,10 +13,12 @@ public class LottoNumberFactory {
     }
 
     private static LottoNumber getNumber(int number) {
-        return LOTTO_BALLS.stream()
-                .filter(lottoNumber -> lottoNumber.getValue() == number)
-                .findFirst()
-                .orElse(new LottoNumber(number));
+        try {
+            Collections.sort(LOTTO_BALLS);
+            return LOTTO_BALLS.get(number - 1);
+        } catch (IndexOutOfBoundsException e) {
+            return new LottoNumber(number);
+        }
     }
 
     public static LottoNumber getNumber(String rawNumber) {
