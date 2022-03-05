@@ -22,9 +22,9 @@ public class LotteryMachineApplication {
         OutputView.printLotteryTickets(lotteryTickets);
 
         WinningLottery winningLottery = new WinningLottery(InputView.getWinningLotteryNumbers(), InputView.getBonusNumber());
-        WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);
+        WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
         OutputView.printWinningLotteryResults(winningResult.getResult());
-        OutputView.printProfitRate(winningResult.getTotalProfitRate(money));
+        OutputView.printProfitRate(winningResult.getTotalProfitRate(money.getValue()));
     }
 
     private static LotteryTickets createLotteryTickets(Count count) {

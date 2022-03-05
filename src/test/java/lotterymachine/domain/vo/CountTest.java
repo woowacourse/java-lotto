@@ -1,6 +1,5 @@
 package lotterymachine.domain.vo;
 
-import lotterymachine.domain.vo.Count;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +12,8 @@ public class CountTest {
     @DisplayName("수동 로또 구매 개수와 총 로또 구매 개수를 입력 받아, Count를 생성한다.")
     void create() {
         Count count = new Count(3, 14);
-        assertThat(count.getAutoValue()).isEqualTo(3);
-        assertThat(count.getPassivityValue()).isEqualTo(11);
+        assertThat(count.getAutoValue()).isEqualTo(11);
+        assertThat(count.getPassivityValue()).isEqualTo(3);
     }
 
     @Test
