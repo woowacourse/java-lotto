@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import lotto.validator.BonusNumberValidator;
 
 public class WinningNumbers {
@@ -13,10 +14,10 @@ public class WinningNumbers {
         this.lottoNumber = lottoNumber;
     }
 
-    public static WinningNumbers generateByString(String winningLotto, String lottoNumber) {
+    public static WinningNumbers generate(List<Integer> winningLotto, int lottoNumber) {
         return new WinningNumbers(
                 Lotto.generateByManual(winningLotto),
-                LottoNumber.findByNumber(Integer.parseInt(lottoNumber))
+                LottoNumber.findByNumber(lottoNumber)
         );
     }
 

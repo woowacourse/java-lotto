@@ -3,7 +3,7 @@ package lotto.validator;
 import lotto.domain.Lotto;
 import lotto.exception.CountOfManualLottoException;
 
-public class CountOfManualLottoValidator {
+public class CountOfLottoValidator {
 
     public static void validate(int count, long money) {
         checkPositive(count);

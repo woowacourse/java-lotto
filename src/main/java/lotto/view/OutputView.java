@@ -1,7 +1,9 @@
 package lotto.view;
 
 import java.util.Arrays;
-import lotto.domain.User;
+import lotto.domain.CountOfLotto;
+import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.RankStatistic;
 
@@ -22,18 +24,18 @@ public class OutputView {
         System.out.println(INPUT_LOTTO_NUMBERS_MESSAGE);
     }
 
-    public static void printLottos(User user) {
+    public static void printLottos(Lottos lottos, CountOfLotto countOfLotto) {
         printNewLine();
         System.out.printf(TOTAL_LOTTO_COUNT_MESSAGE_FORMAT,
-                user.getCountOfManualLotto(),
-                user.getCountOfAutoLotto());
-        user.getLottos().forEach(lotto -> System.out.printf(EACH_LOTTO_MESSAGE_FORMAT, lotto.toString()));
+                countOfLotto.getCountOfManualLotto(),
+                countOfLotto.getCountOfAutoLotto());
+        lottos.getLottos().forEach(lotto -> System.out.printf(EACH_LOTTO_MESSAGE_FORMAT, lotto.toString()));
     }
 
-    public static void printLottoResult(User user, RankStatistic rankStatistic) {
+    public static void printLottoResult(RankStatistic rankStatistic, Money money) {
         printNewLine();
         printWinningStatistic(rankStatistic);
-        printProfitRate(user, rankStatistic);
+        printProfitRate(money, rankStatistic);
     }
 
     private static void printWinningStatistic(RankStatistic rankStatistic) {
@@ -54,8 +56,8 @@ public class OutputView {
         return BONUS_NUMBER_MISMATCH_MESSAGE;
     }
 
-    private static void printProfitRate(User user, RankStatistic rankStatistic) {
-        double profitRate = user.calculateProfitRate(rankStatistic.getTotalWinningPrize());
+    private static void printProfitRate(Money money, RankStatistic rankStatistic) {
+        double profitRate = money.calculateProfitRate(rankStatistic.getTotalWinningPrize());
         System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), toStringProfitRateUntilSecondDecimal(profitRate));
     }
 
