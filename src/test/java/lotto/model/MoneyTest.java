@@ -50,6 +50,14 @@ public class MoneyTest {
 		assertThat(money.rate(1000)).isEqualTo(0.5);
 	}
 
+	@DisplayName("분모가 1100, 현재 보유 금액이 3000원일 경우 rate 는 0.367이다")
+	@Test
+	void rate_numerator_1100_amount_3000() {
+		Money money = Money.from("3000");
+
+		assertThat(money.rate(1100)).isEqualTo(0.367);
+	}
+
 	@DisplayName("2000원치 로또가 2장인지 확인한다")
 	@Test
 	public void purchase_amount_2000() {

@@ -36,7 +36,7 @@ public class Money {
 	}
 
 	public double rate(int numerator) {
-		return (double)numerator / this.amount;
+		return Math.ceil((double)numerator / this.amount * 1000) / 1000.0;
 	}
 
 	public int countAvailable(int price) {
