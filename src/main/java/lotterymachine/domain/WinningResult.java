@@ -9,6 +9,9 @@ public class WinningResult {
     private static final Map<WinningLotteryRank, Integer> result = new EnumMap<>(WinningLotteryRank.class);
     private static final double DECIMAL_PLACE_SAVER = 100.0;
 
+    private WinningResult() {
+    }
+
     public static WinningResult create(LotteryTickets lotteryTickets, WinningLottery winningLottery) {
         initResult();
         for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
@@ -17,8 +20,6 @@ public class WinningResult {
         }
         return new WinningResult();
     }
-
-    private WinningResult() {}
 
     private static void initResult() {
         for (WinningLotteryRank winningLotteryRank : WinningLotteryRank.values()) {

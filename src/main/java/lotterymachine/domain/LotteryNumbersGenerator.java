@@ -1,6 +1,4 @@
-package lotterymachine.utils;
-
-import lotterymachine.domain.LotteryNumber;
+package lotterymachine.domain;
 
 import java.util.List;
 

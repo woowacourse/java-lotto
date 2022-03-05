@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LotteryNumber implements Comparable<LotteryNumber> {
-    public static final Map<Integer, LotteryNumber> numbers;
+    public static final Map<Integer, LotteryNumber> NUMBERS;
     private static final int MINIMUM_LOTTERY_NUMBER = 1;
     private static final int MAXIMUM_LOTTERY_NUMBER = 45;
     private static final String OUT_OF_RANGE = "로또 번호는 1~45 사이의 값이어야 합니다.";
 
     static {
-        numbers = IntStream.rangeClosed(MINIMUM_LOTTERY_NUMBER, MAXIMUM_LOTTERY_NUMBER)
+        NUMBERS = IntStream.rangeClosed(MINIMUM_LOTTERY_NUMBER, MAXIMUM_LOTTERY_NUMBER)
                 .mapToObj(LotteryNumber::new)
                 .collect(Collectors.toMap(LotteryNumber::getNumber, i -> i));
     }
@@ -26,7 +26,7 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
 
     public static LotteryNumber from(int number) {
         validateNumber(number);
-        return numbers.get(number);
+        return NUMBERS.get(number);
     }
 
     public static List<LotteryNumber> from(List<Integer> numbers) {

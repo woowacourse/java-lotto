@@ -14,16 +14,14 @@ public enum WinningLotteryRank {
     private final int price;
     private final boolean bonus;
 
-    WinningLotteryRank(int number, int price) {
-        this.number = number;
-        this.price = price;
-        this.bonus = false;
-    }
-
     WinningLotteryRank(int number, int price, boolean bonus) {
         this.number = number;
         this.price = price;
         this.bonus = bonus;
+    }
+
+    WinningLotteryRank(int number, int price) {
+        this(number, price, false);
     }
 
     public static WinningLotteryRank find(int number, boolean bonus) {

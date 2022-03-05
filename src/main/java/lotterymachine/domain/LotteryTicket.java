@@ -1,7 +1,5 @@
 package lotterymachine.domain;
 
-import lotterymachine.utils.LotteryNumbersGenerator;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
