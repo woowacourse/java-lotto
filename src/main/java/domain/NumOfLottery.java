@@ -31,8 +31,4 @@ public final class NumOfLottery {
 	public int getNumOfManualLottery() {
 		return this.numOfManualLottery;
 	}
-
-	public int getNumOfTotalLottery() {
-		return this.numOfAutoLottery + this.numOfManualLottery;
-	}
 }

@@ -51,14 +51,6 @@ public final class Lotteries {
 		}
 	}
 
-	public Lotteries add(final List<Lottery> lotteryNumbers) {
-		final List<Lottery> lotteries = deepCopyOf(this.lotteries);
-		lotteryNumbers.forEach((lottery) ->
-			lotteries.add(lottery)
-		);
-		return new Lotteries(lotteries);
-	}
-
 	public int size() {
 		return lotteries.size();
 	}
