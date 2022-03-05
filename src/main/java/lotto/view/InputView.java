@@ -1,24 +1,23 @@
 package lotto.view;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.domain.Lotto;
-import lotto.domain.LottoPurchaseMoney;
-import lotto.domain.vo.LottoNumber;
 
 public class InputView {
 
     private static final String DELIMITER = ",";
+    private static final int MIN = 0;
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static LottoPurchaseMoney inputMoney() {
+    public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new LottoPurchaseMoney(stringToInt(validateBlank(SCANNER.nextLine())));
+        return stringToInt(validateBlank(SCANNER.nextLine()));
     }
 
     public static int inputManualLottoAmount() {
@@ -26,27 +25,30 @@ public class InputView {
         return stringToInt(validateBlank(SCANNER.nextLine()));
     }
 
-    public static List<Lotto> inputManualLottoNumbers(final int amount) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    public static List<List<Integer>> inputManualLottoNumbers(int amount) {
+        if (amount > MIN) {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        return IntStream.range(0, amount)
-            .mapToObj(i -> Lotto.of(convertToNumbers(validateBlank(SCANNER.nextLine()))))
-            .collect(Collectors.toList());
+            return IntStream.range(0, amount)
+                .mapToObj(i -> convertToNumbers(validateBlank(SCANNER.nextLine())))
+                .collect(Collectors.toList());
+        }
+        return Collections.emptyList();
     }
 
-    public static List<LottoNumber> inputWinnerNumbers() {
+    public static List<Integer> inputWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return convertToNumbers(validateBlank(SCANNER.nextLine()));
     }
 
-    public static LottoNumber inputBonusNumber() {
+    public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return LottoNumber.of(stringToInt(validateBlank(SCANNER.nextLine())));
+        return stringToInt(validateBlank(SCANNER.nextLine()));
     }
 
-    private static List<LottoNumber> convertToNumbers(String input) {
+    private static List<Integer> convertToNumbers(String input) {
         return Arrays.stream(input.split(DELIMITER))
-            .map(number -> LottoNumber.of(stringToInt(number.trim())))
+            .map(number -> stringToInt(number.trim()))
             .collect(Collectors.toList());
     }
 

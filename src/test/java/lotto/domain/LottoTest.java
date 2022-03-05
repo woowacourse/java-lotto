@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domain.vo.LottoNumber;
@@ -24,15 +25,15 @@ class LottoTest {
 
     @ParameterizedTest(name = "잘못된 로또 번호 : {0}")
     @MethodSource("getNumbers")
-    @DisplayName("맞춘 번호에 따라 등수를 반환한다.")
-    void findRank(List<LottoNumber> lottoNumbers) {
+    @DisplayName("로또 번호가 6자리가 아닐 경우 예외를 발생한다.")
+    void findRank(Set<LottoNumber> lottoNumbers) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> Lotto.of(lottoNumbers))
-            .withMessageMatching("로또 번호는 중복될 수 없다.");
+            .isThrownBy(() -> new Lotto(lottoNumbers))
+            .withMessageMatching("로또 번호는 6자리 이어야 한다.");
     }
 
     @Test
-    @DisplayName("로또 번호가 중복될 경우 예외가 발생한다.")
+    @DisplayName("로또 번호가 중복될 경우 예외를 발생한다.")
     void throwExceptionWhenDuplicateNumbers() {
         List<LottoNumber> lottoNumbers = givenNumbers(1, 2, 3, 4, 5, 5);
 
@@ -77,10 +78,16 @@ class LottoTest {
             .collect(Collectors.toList());
     }
 
-    private static Stream<List<LottoNumber>> getNumbers() {
+    private static Set<LottoNumber> givenNumbersToSet(int... numbers) {
+        return Arrays.stream(numbers)
+            .mapToObj(LottoNumber::of)
+            .collect(Collectors.toSet());
+    }
+
+    private static Stream<Set<LottoNumber>> getNumbers() {
         return Stream.of(
-            givenNumbers(1, 2, 3, 4, 5),
-            givenNumbers(1, 2, 3, 4, 5, 6, 7)
+            givenNumbersToSet(1, 2, 3, 4, 5),
+            givenNumbersToSet(1, 2, 3, 4, 5, 6, 7)
         );
     }
 }

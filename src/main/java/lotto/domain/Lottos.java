@@ -10,7 +10,7 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottos) {
         validateSize(lottos);
-        this.lottos = new ArrayList<>(lottos);
+        this.lottos = List.copyOf(lottos);
     }
 
     public List<Rank> match(WinnerLotto winnerLotto) {

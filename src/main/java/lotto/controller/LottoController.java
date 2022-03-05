@@ -1,42 +1,34 @@
 package lotto.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Map;
 import lotto.domain.Lotto;
-import lotto.domain.LottoPurchaseMoney;
+import lotto.domain.LottoBuyMoney;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
-import lotto.domain.WinnerLotto;
-import lotto.domain.vo.LottoNumber;
-import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.service.LottoService;
 
 public class LottoController {
 
-    public void run() {
-        LottoPurchaseMoney money = InputView.inputMoney();
+    private final LottoService lottoService;
 
-        int manualAmount = InputView.inputManualLottoAmount();
-
-        List<Lotto> manualLottos = LottosFactory.MANUAL.generate(manualAmount);
-        List<Lotto> autoLottos = LottosFactory.AUTO.generate(money.calculateAvailablePurchaseAmount(manualAmount));
-        OutputView.printLottosSize(manualLottos.size(), autoLottos.size());
-
-        Lottos lottos = new Lottos(concatLottos(manualLottos, autoLottos));
-        OutputView.printLottos(lottos.getLottos());
-
-        List<Rank> ranks = lottos.match(createWinnerLotto(InputView.inputWinnerNumbers(), InputView.inputBonusNumber()));
-        OutputView.printRanks(ranks);
-        OutputView.printRate(Rank.calculateReward(ranks), money.getMoney());
+    public LottoController(LottoService lottoService) {
+        this.lottoService = lottoService;
     }
 
-    private List<Lotto> concatLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
-        return Stream.concat(manualLottos.stream(), autoLottos.stream())
-            .collect(Collectors.toList());
+    public Lottos buyLotto(int inputMoney, int manualAmount, List<List<Integer>> manualNumbers) {
+        LottoBuyMoney lottoBuyMoney = new LottoBuyMoney(inputMoney);
+        int autoLottoAmount = lottoBuyMoney.countAutoAmountByManualAmount(manualAmount);
+        List<Lotto> lottos = lottoService.createManulLottos(manualNumbers);
+        lottos.addAll(lottoService.createAutoLottos(autoLottoAmount));
+        return new Lottos(lottos);
     }
 
-    private WinnerLotto createWinnerLotto(List<LottoNumber> winnerLottoNumbers, LottoNumber bonusLottoNumber) {
-        return new WinnerLotto(Lotto.of(winnerLottoNumbers), bonusLottoNumber);
+    public Map<Rank, Integer> match(Lottos lottos, List<Integer> winnerNumbers, int bonusNumber) {
+        return lottoService.match(lottos, winnerNumbers, bonusNumber);
+    }
+
+    public double rate(Map<Rank, Integer> result, double inputMoney) {
+        return lottoService.caluateRate(result, inputMoney);
     }
 }

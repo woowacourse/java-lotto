@@ -5,6 +5,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
@@ -22,34 +23,25 @@ public class OutputView {
         }
     }
 
-    public static void printLottosSize(int manualLottoAmount, int autoLottoAmount) {
-        System.out.println(MessageFormat.format(
-            "수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", manualLottoAmount, autoLottoAmount));
-    }
-
-    public static void printRanks(List<Rank> ranks) {
+    public static void printRanks(Map<Rank, Integer> result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         for (Rank rank : List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST)) {
-            printRank(ranks, rank);
+            printRank(result, rank);
         }
     }
 
-    public static void printRate(final double totalReward, int inputMoney) {
-        System.out.printf("총 수익률은 %.2f 입니다.", totalReward / inputMoney);
+    public static void printRate(double rate) {
+        System.out.printf("총 수익률은 %.2f 입니다.", rate);
     }
 
-    private static void printRank(List<Rank> ranks, Rank rank) {
-        int matchCount = rank.getMatchCount();
-        long reward = rank.getReward();
-        int rewardCount = rank.findRewardCount(ranks);
-
+    private static void printRank(Map<Rank, Integer> result, Rank rank) {
         if (rank == Rank.SECOND) {
-            printSecondRank(matchCount, reward, rewardCount);
+            printSecondRank(rank.getMatchCount(), rank.getReward(), result.get(rank));
             return;
         }
-        printOtherRank(matchCount, reward, rewardCount);
+        printOtherRank(rank.getMatchCount(), rank.getReward(), result.get(rank));
     }
 
     private static String joinWithDelimiter(List<LottoNumber> lottoNumbers) {
