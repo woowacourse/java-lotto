@@ -1,6 +1,5 @@
 package model;
 
-import dto.LottoDto;
 import java.util.List;
 
 import model.generator.LottoGenerator;
@@ -15,17 +14,19 @@ public class LottoMachine {
     private TotalLottoCount totalLottoCount;
     private Lottos lottos;
 
-    public void makeTotalLottoCountToPurchase(final int purchaseMoney, final int manualLottoCount) {
+    public void makeTotalLottoCountForPurchase(final int purchaseMoney, final int manualLottoCount) {
         this.totalLottoCount = new TotalLottoCount(purchaseMoney, manualLottoCount);
     }
 
-    public void purchaseLottos(final List<LottoDto> manualLottoNumberGroups) {
-        int autoLottoCount = totalLottoCount.getAutoCount();
+    public void purchaseLottos(final List<List<Integer>> manualLottoNumberGroups) {
+        LottoGenerator lottoGenerator = LottoGenerator.getInstance();
+        List<Lotto> manualLottoGroup = lottoGenerator.makeManualLotto(manualLottoNumberGroups);
+        List<Lotto> autoLottoGroup = lottoGenerator.makeAutoLotto(totalLottoCount.getAutoCount());
 
-        lottos = new Lottos(manualLottoNumberGroups, autoLottoCount);
+        lottos = new Lottos(manualLottoGroup, autoLottoGroup);
     }
 
-    public int sendManualLottoCount() {
+    public int bringManualLottoCountForPurchase() {
         return totalLottoCount.getManualCount();
     }
 

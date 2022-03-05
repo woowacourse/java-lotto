@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoController {
+
     private final InputView inputView;
     private final OutputView outputView;
     private LottoMachine lottoMachine;
@@ -24,20 +25,20 @@ public class LottoController {
     }
 
     public void run() {
-        purchaseLottos();
+        showLottoPurchaseProcess();
         showLottoWinningResult();
     }
 
-    private void purchaseLottos() {
+    private void showLottoPurchaseProcess() {
         lottoMachine = new LottoMachineInitializer(inputView).initLottoMachine();
 
-        outputView.printTotalPurchaseLottoCount(lottoMachine.sendManualLottoCount(), lottoMachine.sendAutoLottoCount());
+        outputView.printTotalPurchaseLottoCount(lottoMachine.bringManualLottoCountForPurchase(), lottoMachine.sendAutoLottoCount());
         outputView.printTotalLottos(convertLottosToDtos(lottoMachine.sendLottosInMachine()));
     }
 
     private List<LottoDto> convertLottosToDtos(final List<Lotto> lottos) {
         return lottos.stream()
-                .map(lotto -> new LottoDto(lotto.getLottoNumbers()))
+                .map(lotto -> new LottoDto(lotto.getNumbers()))
                 .collect(Collectors.toUnmodifiableList());
     }
 

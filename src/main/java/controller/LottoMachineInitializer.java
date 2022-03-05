@@ -1,9 +1,7 @@
 package controller;
 
-import dto.LottoDto;
 import java.util.List;
 
-import java.util.stream.Collectors;
 import model.LottoMachine;
 import view.InputView;
 
@@ -26,23 +24,17 @@ public class LottoMachineInitializer {
         final int purchaseMoney = inputView.inputPurchaseMoney();
         final int manualLottoCount = inputView.inputManualLottoCount();
 
-        lottoMachine.makeTotalLottoCountToPurchase(purchaseMoney, manualLottoCount);
+        lottoMachine.makeTotalLottoCountForPurchase(purchaseMoney, manualLottoCount);
     }
 
     private void insertManualLottoNumberGroupsInLottoMachine(final LottoMachine lottoMachine) {
-        int manualLottoCount = lottoMachine.sendManualLottoCount();
-        List<LottoDto> manualLottoNumberGroups = inputManualLottoNumberGroups(manualLottoCount);
+        int manualLottoCount = lottoMachine.bringManualLottoCountForPurchase();
+        List<List<Integer>> manualLottoNumberGroups = inputLottoNumberGroups(manualLottoCount);
 
         lottoMachine.purchaseLottos(manualLottoNumberGroups);
     }
 
-    private List<LottoDto> inputManualLottoNumberGroups(final int manualLottoCount) {
-        return convertToDto(inputView.inputManualLottoNumberGroups(manualLottoCount));
-    }
-
-    private List<LottoDto> convertToDto(final List<List<Integer>> lottoNumberGroups) {
-        return lottoNumberGroups.stream()
-                .map(LottoDto::new)
-                .collect(Collectors.toList());
+    private List<List<Integer>> inputLottoNumberGroups(final int count) {
+        return inputView.inputLottoNumberGroups(count);
     }
 }

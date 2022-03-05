@@ -1,9 +1,10 @@
 package model.LottoCount;
 
 public class TotalLottoCount {
+
     private static final int LOTTO_PRICE = 1000;
-    private static final String INPUT_MONEY_UNIT_ERROR_MESSAGE = "[ERROR] 투입 금액은 천원 단위의 금액으로 입력하세요.";
-    private static final String INPUT_MONEY_LESS_THAN_MANUAL_PRICE_SUM = "[ERROR] 투입 금액이 수동 구매 로또 가격합 보다 적습니다.";
+    private static final String MONEY_UNIT_ERROR_MESSAGE = "[ERROR] 투입 금액은 천원 단위의 금액으로 입력하세요.";
+    private static final String MONEY_LESS_THAN_MANUAL_PRICE_SUM = "[ERROR] 투입 금액이 수동 구매 로또 가격합 보다 적습니다.";
 
     private final int autoCount;
     private final ManualLottoCount manualCount;
@@ -16,10 +17,10 @@ public class TotalLottoCount {
 
     private void checkValidMoney(final int money, final int manualCount) {
         if (isLessThanLottoPrice(money) || isNotThousandUnits(money)) {
-            throw new IllegalArgumentException(INPUT_MONEY_UNIT_ERROR_MESSAGE);
+            throw new IllegalArgumentException(MONEY_UNIT_ERROR_MESSAGE);
         }
         if (isLessThanSumOfManualCountPrice(money, manualCount)) {
-            throw new IllegalArgumentException(INPUT_MONEY_LESS_THAN_MANUAL_PRICE_SUM);
+            throw new IllegalArgumentException(MONEY_LESS_THAN_MANUAL_PRICE_SUM);
         }
     }
 

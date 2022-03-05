@@ -1,32 +1,30 @@
 package model.generator;
 
-import dto.LottoDto;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 import model.lottonumber.Lotto;
 
 public class LottoGenerator {
 
+    private static final LottoGenerator LOTTO_GENERATOR = new LottoGenerator();
+
     private LottoGenerator() {
     }
 
-    public static List<Lotto> makeLottos(final List<LottoDto> lottoNumberGroups, final int autoLottoCount) {
-        List<Lotto> totalLottogroup = new ArrayList<>();
-        totalLottogroup.addAll(makeManualLottos(lottoNumberGroups));
-        totalLottogroup.addAll(makeAutoLottos(autoLottoCount));
-
-        return totalLottogroup;
+    public static LottoGenerator getInstance() {
+        return LOTTO_GENERATOR;
     }
 
-    public static List<Lotto> makeManualLottos(final List<LottoDto> lottoNumberGroups) {
+
+    public List<Lotto> makeManualLotto(final List<List<Integer>> lottoNumberGroups) {
         return lottoNumberGroups.stream()
-                .map(lottoNumberGroup -> new Lotto(lottoNumberGroup.getLottoNumbers()))
+                .map(Lotto::new)
                 .collect(Collectors.toList());
     }
 
-    public static List<Lotto> makeAutoLottos(final int autoLottoCount) {
+    public List<Lotto> makeAutoLotto(final int autoLottoCount) {
         Generator generator = new LottoNumberGenerator();
 
         return IntStream.range(0, autoLottoCount)
