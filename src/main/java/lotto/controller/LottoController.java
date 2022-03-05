@@ -63,7 +63,7 @@ public class LottoController {
     private StatisticsResult getStatisticsResult(Money money, LottoTickets lottoTickets,
         WinningTicket winningTicket) {
         LottoStatistics lottoStatistics = lottoTickets.findLottoWinners(winningTicket);
-        double earningRate = lottoStatistics.calculateEarningRates(money);
+        String earningRate = lottoStatistics.calculateEarningRates(money);
         return new StatisticsResult(lottoStatistics.getStatisticsByRank(),
             earningRate);
     }

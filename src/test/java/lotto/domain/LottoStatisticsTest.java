@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 
 class LottoStatisticsTest {
 
+    private static final int DECIMAL_POINT_MULTIPLE = 100;
+
     @Test
     @DisplayName("로또 순위로 통계를 정상적으로 만드는지 확인.")
     void createStatisticsWithLottoRanks() {
@@ -43,7 +45,9 @@ class LottoStatisticsTest {
         int fifthPrize = LottoRank.FIFTH.getPrize();
         int sixthPrize = LottoRank.SIXTH.getPrize();
         long totalPrize = fifthPrize + sixthPrize + sixthPrize;
-        double expected = money.divideByAmount(totalPrize);
+        double earningRate = (double) totalPrize / 3000;
+        String expected = String.format("%s",
+            Math.floor(earningRate * DECIMAL_POINT_MULTIPLE) / DECIMAL_POINT_MULTIPLE);
         // when
         LottoStatistics statistics = new LottoStatistics(ranks);
         // then
