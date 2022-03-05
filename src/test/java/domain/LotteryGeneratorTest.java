@@ -8,12 +8,12 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import domain.generatestrategy.LotteryRandomGeneratorStrategy;
+import domain.generatestrategy.RandomLotteryGeneratorStrategy;
 
 @DisplayName("LotteryGenerator 클래스 테스트")
 public class LotteryGeneratorTest {
 
-	LotteryRandomGeneratorStrategy lotteryGenerator = new LotteryRandomGeneratorStrategy();
+	RandomLotteryGeneratorStrategy lotteryGenerator = new RandomLotteryGeneratorStrategy();
 
 	@Test
 	@DisplayName("생성된 6개의 수가 고유한지 확인")

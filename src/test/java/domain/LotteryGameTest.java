@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import domain.factory.LotteryNumberFactory;
 import domain.generateStrategy.LotteryGenerateMock;
-import domain.generatestrategy.LotteryRandomGeneratorStrategy;
+import domain.generatestrategy.RandomLotteryGeneratorStrategy;
 import utils.Parser;
 
 @DisplayName("LotteryGame 테스트")
@@ -27,7 +27,7 @@ public class LotteryGameTest {
 		final int theNumberOfManualLotteries = lotteriesToCreate - 1;
 		final PurchaseInformation purchaseInformation = createPurchaseInformation(lotteriesToCreate,
 			theNumberOfManualLotteries);
-		final LotteryGame lotteryGame = new LotteryGame(purchaseInformation, new LotteryRandomGeneratorStrategy(),
+		final LotteryGame lotteryGame = new LotteryGame(purchaseInformation, new RandomLotteryGeneratorStrategy(),
 			new LotteryNumberFactory());
 
 		assertThat(lotteryGame.getLotteries().size()).isEqualTo(lotteriesToCreate);
