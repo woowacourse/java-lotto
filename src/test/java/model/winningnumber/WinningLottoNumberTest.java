@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbers;
 import model.lottonumber.LottoNumbersGenerationStrategy;
+import strategy.TestLottoNumberGenerationStrategy;
 
 public class WinningLottoNumberTest {
 	@Test
@@ -34,16 +35,9 @@ public class WinningLottoNumberTest {
 	@Test
 	@DisplayName("보너스 볼이 당첨 번호와 중복되는지 검증")
 	void validateReduplicationWithBonusBall() {
-		LottoNumbersGenerationStrategy lottoNumbersGenerationStrategy = new LottoNumbersGenerationStrategy() {
-			@Override
-			public List<LottoNumber> generate(int size) {
-				return Arrays.asList(1, 2, 3, 4, 5, 6).stream()
-					.map(number -> LottoNumber.valueOf(number))
-					.collect(Collectors.toList());
-			}
-		};
 		assertThatThrownBy(
-			() -> new WinningLottoNumber(LottoNumbers.from(lottoNumbersGenerationStrategy), LottoNumber.valueOf(6)))
+			() -> new WinningLottoNumber(LottoNumbers.from(new TestLottoNumberGenerationStrategy()),
+				LottoNumber.valueOf(6)))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("[Error]: 당첨 번호와 보너스 볼이 중복됩니다.");
 	}

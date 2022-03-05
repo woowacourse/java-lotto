@@ -14,19 +14,9 @@ import model.lottonumber.LottoNumbers;
 import model.lottonumber.LottoNumbersGenerationStrategy;
 import model.result.Rank;
 import model.winningnumber.WinningLottoNumberDTO;
+import strategy.TestLottoNumberGenerationStrategy;
 
 public class LottoTest {
-
-	class TestLottoNumberGenerationStrategy implements LottoNumbersGenerationStrategy {
-
-		@Override
-		public List<LottoNumber> generate(int size) {
-			return Arrays.asList(1, 2, 3, 4, 5, 6).stream()
-				.map(number -> LottoNumber.valueOf(number))
-				.collect(Collectors.toList());
-		}
-	}
-
 	class TestWinningNumberGenerationStrategy implements LottoNumbersGenerationStrategy {
 
 		@Override
