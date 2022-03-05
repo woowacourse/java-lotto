@@ -9,13 +9,13 @@ public class Money {
 
     private final int value;
 
-    public Money(int number) {
-        validateNumber(number);
-        this.value = number;
+    public Money(int value) {
+        validateValue(value);
+        this.value = value;
     }
 
-    private void validateNumber(int number) {
-        if (number < LotteryTicket.PER_PRICE) {
+    private void validateValue(int value) {
+        if (value < LotteryTicket.PER_PRICE) {
             throw new IllegalArgumentException(TERMS_OF_PURCHASE);
         }
     }
