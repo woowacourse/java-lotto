@@ -26,4 +26,11 @@ class LottoStatisticsTest {
                 () -> assertThat(statistics.get(Rank.MISS)).isEqualTo(0)
         );
     }
+
+    @Test
+    void 당첨_수익률_계산_기능_테스트() {
+        List<Rank> result = List.of(Rank.FIFTH, Rank.FOURTH);
+        LottoStatistics lottoStatistics = new LottoStatistics(result);
+        assertThat(lottoStatistics.getYield()).isEqualTo(55000 / (double) 2000);
+    }
 }
