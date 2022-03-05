@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
@@ -13,26 +14,35 @@ public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
     private Lotto(Set<LottoNumber> lottoNumbers) {
-        checkLottoNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    public static Lotto of(List<LottoNumber> numbers) {
-        if (isDuplicated(numbers)) {
-            throw new DuplicatedLottoNumbersException();
-        }
-        List<LottoNumber> lottoNumbers = Collections.unmodifiableList(numbers);
-        return new Lotto(Set.copyOf(lottoNumbers));
-    }
-
-    private static boolean isDuplicated(List<LottoNumber> numbers) {
-        return numbers.size() != Set.copyOf(numbers).size();
-    }
-
-    private void checkLottoNumbers(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new InvalidLottoNumbersSizeException();
         }
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto of(List<Integer> numbers) {
+        if (isDuplicated(numbers)) {
+            throw new DuplicatedLottoNumbersException();
+        }
+        Set<LottoNumber> lottoNumbers = convertAll(numbers);
+        return new Lotto(lottoNumbers);
+    }
+
+    private static boolean isDuplicated(List<Integer> numbers) {
+        return numbers.size() != Set.copyOf(numbers).size();
+    }
+
+    private static Set<LottoNumber> convertAll(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
+    }
+
+    public static Lotto parse(List<String> tokens) {
+        List<Integer> numbers = tokens.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        return Lotto.of(numbers);
     }
 
     public boolean contains(LottoNumber number) {

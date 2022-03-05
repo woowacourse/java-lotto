@@ -10,7 +10,6 @@ import java.util.Queue;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import model.Lotto;
-import model.LottoNumber;
 
 public class RandomGenerator implements LottosGenerator{
     public static final int MAX_LOTTO_NUMBER = 45;
@@ -40,12 +39,7 @@ public class RandomGenerator implements LottosGenerator{
 
     private Lotto createLotto() {
         Collections.shuffle(numberPool);
-        List<LottoNumber> numbers = getLottoNumbersFrom(new LinkedList<>(numberPool));
-        return Lotto.of(numbers);
-    }
-
-    private List<LottoNumber> getLottoNumbersFrom(Queue<Integer> queue) {
-        return LottoNumber.convertAll(getNumbers(queue));
+        return Lotto.of(getNumbers(new LinkedList<>(numberPool)));
     }
 
     private List<Integer> getNumbers(Queue<Integer> queue) {

@@ -46,13 +46,7 @@ public class LottoController {
     }
 
     private Lotto parseManualLotto() {
-        return InputView.getUntilValid(() -> parseLotto(InputView.inputManualLottoNumbers()));
-    }
-
-    private Lotto parseLotto(List<String> tokens) {
-        return Lotto.of(tokens.stream()
-                .map(LottoNumber::parse)
-                .collect(Collectors.toList()));
+        return InputView.getUntilValid(() -> Lotto.parse(InputView.inputLottos()));
     }
 
     private List<Set<Integer>> getNumbersOf(IssuedLottos issuedLottos) {
@@ -68,7 +62,7 @@ public class LottoController {
     }
 
     private WinningLottoNumbers getWinningLottoNumbers() {
-        Lotto winningLotto = InputView.getUntilValid(() -> parseLotto(InputView.inputLottoNumbers()));
+        Lotto winningLotto = InputView.getUntilValid(() -> Lotto.parse(InputView.inputWinningLotto()));
         LottoNumber bonusLottoNumber = InputView.getUntilValid(() -> LottoNumber.parse(InputView.inputBonusNumber()));
         return new WinningLottoNumbers(winningLotto, bonusLottoNumber);
     }

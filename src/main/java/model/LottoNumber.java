@@ -39,12 +39,6 @@ public class LottoNumber {
         return new LottoNumber(Integer.parseInt(text));
     }
 
-    public static List<LottoNumber> convertAll(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
-    }
-
     public int intValue() {
         return lottoNumber;
     }

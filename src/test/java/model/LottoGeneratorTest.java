@@ -16,7 +16,7 @@ public class LottoGeneratorTest {
 
     @BeforeEach
     void setUp() {
-        List<Lotto> manualLotto = List.of(Lotto.of(LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 6))));
+        List<Lotto> manualLotto = List.of(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
         randomGenerator = new RandomGenerator(3);
         manualGenerator = new ManualGenerator(manualLotto);
     }
@@ -28,6 +28,6 @@ public class LottoGeneratorTest {
 
     @Test
     void generateManual() {
-        assertThat(manualGenerator.createLottos()).contains(Lotto.of(LottoNumber.convertAll(List.of(1, 2, 3, 4, 5, 6))));
+        assertThat(manualGenerator.createLottos()).contains(Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
     }
 }
