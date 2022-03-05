@@ -2,9 +2,10 @@ package controller;
 
 import domain.LottoMachine;
 import domain.LottoResult;
+import domain.ManualLotto;
 import domain.WinningLotto;
 import java.util.List;
-import util.ShuffleNumberGenerator;
+import util.ManualAndAutoNumberGenerator;
 import view.OutputView;
 
 public class LottoController {
@@ -23,8 +24,9 @@ public class LottoController {
 
     private LottoMachine createLottoMachine() {
         int money = inputController.getMoney();
-        LottoMachine lottoMachine = new LottoMachine(money, new ShuffleNumberGenerator());
-        OutputView.printPurchasedLotto(lottoMachine.getLottoTicket());
+        List<ManualLotto> manualLottos = inputController.getManualLottos();
+        LottoMachine lottoMachine = new LottoMachine(money, new ManualAndAutoNumberGenerator(manualLottos));
+        OutputView.printPurchasedLotto(manualLottos.size(), lottoMachine.getLottoTicket());
         return lottoMachine;
     }
 

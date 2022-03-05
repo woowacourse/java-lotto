@@ -11,12 +11,12 @@ public class Lotto {
 
     private static final String DELIMITER = ", ";
 
-    private final List<Integer> lottoNumbers = new ArrayList<>();
+    private final List<Integer> numbers = new ArrayList<>();
 
-    public Lotto(List<Integer> lottoNumbers) {
-        for (Integer lottoNumber : lottoNumbers) {
+    public Lotto(List<Integer> numbers) {
+        for (Integer lottoNumber : numbers) {
             validateLottoNumbers(lottoNumber);
-            this.lottoNumbers.add(lottoNumber);
+            this.numbers.add(lottoNumber);
         }
     }
 
@@ -25,32 +25,32 @@ public class Lotto {
         validateDuplicatedNumber(number);
     }
 
-    private void validateNumberRange(Integer lottoNumber) {
-        if (lottoNumber > LOTTO_NUMBER_MAXIMUM || lottoNumber < LOTTO_NUMBER_MINIMUM) {
-            throw new IllegalArgumentException(String.valueOf(lottoNumber));
+    private void validateNumberRange(Integer number) {
+        if (number > LOTTO_NUMBER_MAXIMUM || number < LOTTO_NUMBER_MINIMUM) {
+            throw new IllegalArgumentException(String.valueOf(number));
         }
     }
 
-    private void validateDuplicatedNumber(Integer lottoNumber) {
-        if (lottoNumbers.contains(lottoNumber)) {
-            throw new IllegalArgumentException(String.valueOf(lottoNumbers));
+    private void validateDuplicatedNumber(Integer number) {
+        if (numbers.contains(number)) {
+            throw new IllegalArgumentException(String.valueOf(numbers));
         }
     }
 
     @Override
     public String toString() {
-        return lottoNumbers.stream()
+        return numbers.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(DELIMITER));
     }
 
     public int countSameNumbers(List<Integer> numbers) {
-        return (int) lottoNumbers.stream()
+        return (int) this.numbers.stream()
                 .filter(numbers::contains)
                 .count();
     }
 
     public boolean checkBonus(int bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+        return numbers.contains(bonusNumber);
     }
 }
