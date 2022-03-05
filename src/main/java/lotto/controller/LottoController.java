@@ -65,8 +65,7 @@ public class LottoController {
     private static void showResult(final Lottos lottos, final Payment payment, final WinningLotto winningLotto) {
         printStatisticsTitle();
 
-        LottoResult lottoResult = createLottoResult();
-        winningLotto.match(lottos, lottoResult);
+        LottoResult lottoResult = createLottoResult(lottos, winningLotto);
         printLottoResult(lottoResult);
 
         showProfitRate(payment, lottoResult);

@@ -72,7 +72,7 @@ public class Creator {
         }
     }
 
-    public static LottoResult createLottoResult() {
-        return new LottoResult();
+    public static LottoResult createLottoResult(Lottos lottos, WinningLotto winningLotto) {
+        return lottos.compareWinningLotto(winningLotto);
     }
 }
