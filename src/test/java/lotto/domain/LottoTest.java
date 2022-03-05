@@ -66,7 +66,7 @@ public class LottoTest {
 
     public static Stream<Arguments> Count_Same_Number() {
         return Stream.of(
-                Arguments.arguments(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
+                Arguments.arguments(List.of(1, 2, 3, 4, 5, 6), 6),
                 Arguments.arguments(Arrays.asList(1, 2, 3, 4, 5, 7), 5),
                 Arguments.arguments(Arrays.asList(1, 2, 3, 4, 7, 8), 4),
                 Arguments.arguments(Arrays.asList(1, 2, 3, 7, 8, 9), 3),

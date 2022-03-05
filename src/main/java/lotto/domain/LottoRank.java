@@ -3,21 +3,24 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.BiPredicate;
 
 public enum LottoRank {
-    NOTHING(0, 0),
-    FIFTH(3, 5000),
-    FOURTH(4, 50000),
-    THIRD(5, 1500000),
-    SECOND(5, 30000000),
-    FIRST(6, 2000000000);
+    NOTHING(0, 0, (correctNumber, matchBonus) -> correctNumber < 3),
+    FIFTH(3, 5000, (correctNumber, matchBonus) -> correctNumber == 3),
+    FOURTH(4, 50000, (correctNumber, matchBonus) -> correctNumber == 4),
+    THIRD(5, 1500000, (correctNumber, matchBonus) -> correctNumber == 5 && !matchBonus),
+    SECOND(5, 30000000, (correctNumber, matchBonus) -> correctNumber == 5 && matchBonus),
+    FIRST(6, 2000000000, (correctNumber, matchBonus) -> correctNumber == 6);
 
     private final int correctNumber;
     private final int prizeAmount;
+    private final BiPredicate<Integer, Boolean> isMatch;
 
-    LottoRank(final int correctNumber, final int prizeAmount) {
+    LottoRank(final int correctNumber, final int prizeAmount, BiPredicate<Integer, Boolean> isMatch) {
         this.correctNumber = correctNumber;
         this.prizeAmount = prizeAmount;
+        this.isMatch = isMatch;
     }
 
     public static Map<LottoRank, Integer> initLottoRankMap() {
@@ -36,19 +39,9 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int sameCount, boolean bonus) {
-        if (sameCount == SECOND.getCorrectNumber()) {
-            return checkSecondOrThird(bonus);
-        }
-        return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.getCorrectNumber() == sameCount)
+        return Arrays.stream(values())
+                .filter(lottoRank -> lottoRank.isMatch.test(sameCount, bonus))
                 .findFirst()
-                .orElse(NOTHING);
-    }
-
-    private static LottoRank checkSecondOrThird(boolean bonus) {
-        if (bonus) {
-            return SECOND;
-        }
-        return THIRD;
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 조건에 맞지 않는 당첨입니다."));
     }
 }
