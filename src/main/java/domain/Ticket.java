@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 public class Ticket {
     public static final int LOTTO_SIZE = 6;
     private static final String REQUEST_NON_DUPLICATED_NUMBER = String.format("중복되지 않은 숫자 %d개를 입력해주세요.", LOTTO_SIZE);
-    private static final String DELIMITER = ", ";
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -28,37 +27,16 @@ public class Ticket {
         }
     }
 
-    public static Ticket from(String numbersInput) {
-        checkEmpty(numbersInput);
-        List<LottoNumber> numbers = toLottoNumber(toInteger(toList(numbersInput)));
+    public static Ticket from(List<Integer> numbersInput) {
+        List<LottoNumber> numbers = toLottoNumber(numbersInput);
         checkDuplicateNumbers(numbers);
         return new Ticket(new TreeSet<>(numbers));
-    }
-
-    private static void checkEmpty(String numbers) {
-        if (numbers == null || numbers.isBlank()) {
-            throw new IllegalArgumentException("빈 문자를 입력할 수 없습니다.");
-        }
     }
 
     private static List<LottoNumber> toLottoNumber(List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
-    }
-
-    private static List<Integer> toInteger(List<String> numbers) {
-        try {
-            return numbers.stream()
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-        } catch (IllegalArgumentException exception) {
-            throw new IllegalArgumentException(REQUEST_NON_DUPLICATED_NUMBER);
-        }
-    }
-
-    private static List<String> toList(String numberInput) {
-        return List.of(numberInput.split(DELIMITER, -1));
     }
 
     private static void checkDuplicateNumbers(List<LottoNumber> numbers) {

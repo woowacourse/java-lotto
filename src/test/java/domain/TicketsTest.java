@@ -12,7 +12,7 @@ public class TicketsTest {
 
     @Test
     void 티켓_정상_생성() {
-        List<String> manualNumber = Arrays.asList("1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6");
+        List<List<Integer>> manualNumber = Arrays.asList(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 5, 6));
         Tickets tickets = new Tickets(manualNumber.stream()
                 .map(Ticket::from)
                 .collect(Collectors.toList()));

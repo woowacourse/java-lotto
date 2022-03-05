@@ -60,7 +60,7 @@ public class ManualLottoController {
     }
 
     private Tickets createManualTicket(int manualTicketsCount) {
-        List<String> manualNumbersInput = InputView.requestManualNumbers(manualTicketsCount);
+        List<List<Integer>> manualNumbersInput = InputView.requestManualNumbers(manualTicketsCount);
         return new Tickets(manualNumbersInput.stream()
                 .map(Ticket::from)
                 .collect(Collectors.toList()));
