@@ -18,7 +18,7 @@ class WinningNumberTest {
     @MethodSource("rankProvider")
     void Decide_Rank(List<Integer> inputValues, LottoRank inputRank) {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        BonusNumber bonusNumber = new BonusNumber(7);
+        LottoNumber bonusNumber = new LottoNumber(7);
         WinningNumber winningNumber = new WinningNumber(lotto, bonusNumber);
 
         Assertions.assertThat(winningNumber.findLottoRank(new Lotto(inputValues))).isEqualTo(inputRank);

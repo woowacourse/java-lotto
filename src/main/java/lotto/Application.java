@@ -1,9 +1,9 @@
 package lotto;
 
 import java.util.List;
-import lotto.domain.BonusNumber;
 import lotto.domain.LottoBuyCount;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.LottosDto;
 import lotto.domain.Money;
@@ -55,7 +55,7 @@ public class Application {
     private static WinningNumber initWinningNumber() {
         try {
             Lotto winningNumbers = new Lotto(InputView.askWinningNumbers());
-            BonusNumber bonusNumber = new BonusNumber(InputView.askBonusNumber());
+            LottoNumber bonusNumber = new LottoNumber(InputView.askBonusNumber());
             return new WinningNumber(winningNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e);

@@ -4,16 +4,16 @@ import java.util.List;
 
 public class WinningNumber {
     private final Lotto winningNumbers;
-    private final BonusNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumber(Lotto lotto, BonusNumber bonusNumber) {
-        checkDuplicate(lotto.getLotto(), bonusNumber.getBonusNumber());
+    public WinningNumber(Lotto lotto, LottoNumber bonusNumber) {
+        checkDuplicate(lotto.getLotto(), bonusNumber);
         this.winningNumbers = lotto;
         this.bonusNumber = bonusNumber;
     }
 
-    private void checkDuplicate(List<Integer> lotto, int value) {
-        if (lotto.contains(value)) {
+    private void checkDuplicate(List<LottoNumber> lotto, LottoNumber lottoNumber) {
+        if (lotto.contains(lottoNumber)) {
             throw new IllegalArgumentException("[ERROR] 보너스 번호가 선택한 숫자들과 중복한 값입니다.");
         }
     }
@@ -25,7 +25,7 @@ public class WinningNumber {
     }
 
     private boolean containsBonusNumber(Lotto lotto) {
-        return lotto.contains(bonusNumber.getBonusNumber());
+        return lotto.contains(bonusNumber);
     }
 
     private int findSameValueWith(Lotto lotto) {

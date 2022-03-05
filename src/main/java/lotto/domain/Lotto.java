@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import static java.util.stream.Collectors.toList;
+import static lotto.domain.LottoNumber.MAX_BOUND;
+import static lotto.domain.LottoNumber.MIN_BOUND;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -8,17 +10,10 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    public static final int MIN_BOUND = 1;
-    public static final int MAX_BOUND = 45;
-
     private static final List<Integer> numbers = IntStream.rangeClosed(MIN_BOUND, MAX_BOUND).boxed().collect(toList());
     private static final int CHOICE_NUMBER_SIZE = 6;
 
-    private static final String ERROR_DUPLICATE_NUMBERS = "[ERROR] 선택한 번호중에 중복되는 값이 있습니다.";
-    private static final String ERROR_NOT_IN_RANGE = "[ERROR] 1부터 45까지의 번호로 입력해주세요.";
-    private static final String ERROR_NOT_ENOUGH_NUMBER = "[ERROR] 6개의 숫자를 입력해주세요";
-
-    private final List<Integer> lotto;
+    private final List<LottoNumber> lotto;
 
     public Lotto() {
         Collections.shuffle(numbers);
@@ -27,28 +22,24 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> inputValues) {
-        checkSize(inputValues);
-        checkNumbersRange(inputValues);
-        checkDuplicateNumbers(inputValues);
-        this.lotto = inputValues;
+        List<LottoNumber> lottoNumbers = inputValues.stream()
+                .map(inputValue -> new LottoNumber(inputValue))
+                .collect(toList());
+        checkSize(lottoNumbers);
+        checkDuplicateNumbers(lottoNumbers);
+        this.lotto = lottoNumbers;
     }
 
-    private void checkSize(List<Integer> inputValues) {
+    private void checkSize(List<LottoNumber> inputValues) {
         if (inputValues.size() != CHOICE_NUMBER_SIZE) {
-            throw new IllegalArgumentException(ERROR_NOT_ENOUGH_NUMBER);
+            throw new IllegalArgumentException("[ERROR] 6개의 숫자를 입력해주세요");
         }
     }
 
-    private void checkNumbersRange(List<Integer> inputValues) {
-        if (inputValues.stream().anyMatch(i -> i < MIN_BOUND || i > MAX_BOUND)) {
-            throw new IllegalArgumentException(ERROR_NOT_IN_RANGE);
-        }
-    }
-
-    private void checkDuplicateNumbers(List<Integer> inputValues) {
-        HashSet<Integer> integers = new HashSet<>(inputValues);
-        if (integers.size() != inputValues.size()) {
-            throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBERS);
+    private void checkDuplicateNumbers(List<LottoNumber> inputValues) {
+        HashSet<LottoNumber> lottoSet = new HashSet<>(inputValues);
+        if (lottoSet.size() != inputValues.size()) {
+            throw new IllegalArgumentException("[ERROR] 선택한 번호중에 중복되는 값이 있습니다.");
         }
     }
 
@@ -58,15 +49,18 @@ public class Lotto {
                 .count();
     }
 
-    private List<Integer> collectRightSizeOfNumber() {
-        return numbers.stream().limit(CHOICE_NUMBER_SIZE).collect(toList());
+    private List<LottoNumber> collectRightSizeOfNumber() {
+        return numbers.stream()
+                .limit(CHOICE_NUMBER_SIZE)
+                .map(number -> new LottoNumber(number))
+                .collect(toList());
     }
 
-    public boolean contains(int targetNumber) {
-        return lotto.contains(targetNumber);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
     }
 
-    public List<Integer> getLotto() {
+    public List<LottoNumber> getLotto() {
         return lotto;
     }
 
