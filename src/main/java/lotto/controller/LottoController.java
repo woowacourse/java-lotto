@@ -17,45 +17,24 @@ public class LottoController {
     private final OutputView outputView = OutputView.INSTANCE;
     private final LottoTicketFactory lottoTicketFactory = LottoTicketFactory.INSTANCE;
 
-    private final ThreadLocal<PurchaseAmount> purchaseAmountRepository = new ThreadLocal<>();
-    private final ThreadLocal<List<LottoTicket>> lottoTicketsRepository = new ThreadLocal<>();
-    private final ThreadLocal<WinningStats> winningStatsRepository = new ThreadLocal<>();
-    private final ThreadLocal<List<String>> manualTicketNumbersRepository = new ThreadLocal<>();
+    public void run() {
+        // #1
+        PurchaseAmount purchaseAmount = new PurchaseAmount(inputView.inputMoney());
+        ManualTicketSize manualTicketSize = new ManualTicketSize(inputView.inputTicketSizeManually(), purchaseAmount);
+        List<String> manualTicketNumbers = inputView.inputTicketNumbersManually(manualTicketSize);
 
-    public void buyTicket() {
-        PurchaseAmount purchaseAmount = inputView.commonInputProcess(() -> new PurchaseAmount(inputView.inputMoney()));
-        purchaseAmountRepository.set(purchaseAmount);
-        ManualTicketSize manualTicketSize = inputView.commonInputProcess(() ->
-                new ManualTicketSize(inputView.inputLottoTicketSizeManually(), purchaseAmount)
-        );
-        List<String> manualTicketNumbers = inputView.commonInputProcess(
-                () -> inputView.inputTicketNumbersManually(manualTicketSize));
-        manualTicketNumbersRepository.set(manualTicketNumbers);
-    }
-
-    public void showLottoTickets() {
-        PurchaseAmount purchaseAmount = purchaseAmountRepository.get();
-        List<String> manualTicketNumbers = manualTicketNumbersRepository.get();
+        // #2
         List<LottoTicket> lottoTickets = lottoTicketFactory.createTickets(purchaseAmount, manualTicketNumbers);
-        lottoTicketsRepository.set(lottoTickets);
         outputView.printPurchasedTickets(lottoTickets, manualTicketNumbers.size());
-    }
 
-    public void showWinningStats() {
-        PurchaseAmount purchaseAmount = purchaseAmountRepository.get();
-        List<LottoTicket> lottoTickets = lottoTicketsRepository.get();
-        LottoTicket lottoTicket = inputView.commonInputProcess(() -> new LottoTicket(inputView.inputWinningNumbers()));
-        LottoNumber bonusBall = inputView.commonInputProcess(() -> new LottoNumber(inputView.inputBonusBall()));
-        WinningNumbers winningNumbers = inputView.commonInputProcess(() -> new WinningNumbers(lottoTicket, bonusBall));
+        // #3
+        LottoTicket lottoTicket = new LottoTicket(inputView.inputWinningNumbers());
+        LottoNumber bonusBall = new LottoNumber(inputView.inputBonusBall());
+        WinningNumbers winningNumbers = new WinningNumbers(lottoTicket, bonusBall);
         WinningStats winningStats = new WinningStats(lottoTickets, winningNumbers);
-        winningStatsRepository.set(winningStats);
         outputView.printWinningStats(winningStats, purchaseAmount);
-    }
 
-    public void clearRepository() {
-        purchaseAmountRepository.remove();
-        lottoTicketsRepository.remove();
-        winningStatsRepository.remove();
+        // #4
         inputView.closeResource();
     }
 }

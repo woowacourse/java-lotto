@@ -25,7 +25,6 @@ public class LottoTicket {
         isCorrectLottoNumbers();
     }
 
-    @NotNull
     private Set<LottoNumber> createLottoNumbersFromString(String lottoNumbersString) {
         return Arrays.stream(lottoNumbersString.split(","))
                 .map(LottoNumber::new)
