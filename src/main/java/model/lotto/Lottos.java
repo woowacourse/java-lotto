@@ -26,12 +26,6 @@ public class Lottos {
 			.collect(Collectors.toList());
 	}
 
-	public List<LottoDTO> getLottosDTO() {
-		List<LottoDTO> lottosDTOS = new ArrayList<>();
-		lottoStorage.forEach(lotto -> lottosDTOS.add(lotto.getLottoDTO()));
-		return lottosDTOS;
-	}
-
 	public LottoResult getResultOfLottos(WinningLottoNumberDTO winningLottoNumbersDTO) {
 		LottoResult lottoResult = new LottoResult();
 		lottoStorage.forEach(

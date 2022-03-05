@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import model.Money;
+import model.lotto.Lotto;
 import model.lotto.LottoCount;
-import model.lotto.LottoDTO;
 import model.lotto.Lottos;
 import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbers;
@@ -78,9 +78,9 @@ public class LottoController {
 	}
 
 	private void printLottos(LottoCount manualLottoCount, LottoCount automaticLottoCount, Lottos lottos) {
-		List<String> lottoPrint = lottos.getLottosDTO()
+		List<String> lottoPrint = lottos.getLottoStorage()
 			.stream()
-			.map(LottoDTO::toString)
+			.map(Lotto::toString)
 			.collect(Collectors.toList());
 		outputView.printLottos(manualLottoCount.getCount(), automaticLottoCount.getCount(), lottoPrint);
 	}

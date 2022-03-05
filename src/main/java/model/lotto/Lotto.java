@@ -10,14 +10,15 @@ public class Lotto {
 	public Lotto(LottoNumbers numbers) {
 		this.numbers = numbers;
 	}
-
-	public LottoDTO getLottoDTO() {
-		return new LottoDTO(numbers);
-	}
-
+	
 	public Rank match(WinningLottoNumberDTO winningLottoNumbersDTO) {
 		long matchCount = numbers.countMatchedNumbers(winningLottoNumbersDTO.getWinningNumbers());
 		boolean matchBonus = numbers.checkMatchWithBonus(winningLottoNumbersDTO.getBonusBall());
 		return Rank.getRank(matchCount, matchBonus);
+	}
+
+	@Override
+	public String toString() {
+		return numbers.toString();
 	}
 }

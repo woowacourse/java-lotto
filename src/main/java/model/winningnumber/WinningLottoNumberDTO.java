@@ -5,7 +5,6 @@ import java.util.List;
 
 import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbers;
-import model.lottonumber.LottoNumbersDTO;
 
 public class WinningLottoNumberDTO {
 	private final LottoNumbers winningNumbers;
@@ -17,8 +16,7 @@ public class WinningLottoNumberDTO {
 	}
 
 	public List<LottoNumber> getWinningNumbers() {
-		LottoNumbersDTO lottoNumbersDTO = winningNumbers.getLottoNumbersDTO();
-		return new ArrayList<>(lottoNumbersDTO.getLottoNumbers());
+		return new ArrayList<>(winningNumbers.getNumbers());
 	}
 
 	public LottoNumber getBonusBall() {

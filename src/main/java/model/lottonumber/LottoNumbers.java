@@ -33,10 +33,6 @@ public class LottoNumbers {
 		return numbers.contains(number);
 	}
 
-	public LottoNumbersDTO getLottoNumbersDTO() {
-		return new LottoNumbersDTO(numbers);
-	}
-
 	public List<LottoNumber> getNumbers() {
 		return new ArrayList<>(numbers);
 	}
