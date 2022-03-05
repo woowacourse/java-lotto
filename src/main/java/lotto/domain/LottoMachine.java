@@ -18,18 +18,20 @@ public class LottoMachine {
     private final Lottos lottos;
     private final TotalPurchaseAmount totalPurchaseAmount;
     private final ManualPurchaseCount manualPurchaseCount;
+    private final int lottoPrice;
 
     private LottoMachine(final LottoMachine.Builder builder) {
         this.totalPurchaseAmount = builder.totalPurchaseAmount;
-        lottos = new Lottos(generateLottos(builder.manualLottos));
-        manualPurchaseCount =
-                new ManualPurchaseCount(builder.manualLottos.size(), totalPurchaseAmount.getTotalPurchaseCount());
+        lottos = new Lottos(generateLottos(builder.manualLottos, builder.lottoPrice));
+        manualPurchaseCount = new ManualPurchaseCount(
+                builder.manualLottos.size(), builder.totalPurchaseAmount.getTotalPurchaseCount(builder.lottoPrice));
+        this.lottoPrice = builder.lottoPrice;
     }
 
-    private List<Lotto> generateLottos(final List<Lotto> manualLottos) {
+    private List<Lotto> generateLottos(final List<Lotto> manualLottos, final int lottoPrice) {
         final LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
         return lottoRandomGenerator.generateLottosExceptDefaultLottos(
-                this.totalPurchaseAmount.getTotalPurchaseCount(), manualLottos);
+                this.totalPurchaseAmount.getTotalPurchaseCount(lottoPrice), manualLottos);
     }
 
     public static class Builder {
@@ -63,7 +65,7 @@ public class LottoMachine {
     }
 
     public int getCountOfAutoLottoNumbers() {
-        return totalPurchaseAmount.getTotalPurchaseCount() - manualPurchaseCount.getValue();
+        return totalPurchaseAmount.getTotalPurchaseCount(lottoPrice) - manualPurchaseCount.getValue();
     }
 
     public int getCountOfManualLottoNumbers() {

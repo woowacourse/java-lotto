@@ -13,12 +13,13 @@ class TotalPurchaseAmountTest {
             .build();
 
     @Test
-    @DisplayName("로또 총 구매 개수를 반환한다.")
+    @DisplayName("로또 가격을 받아 로또 총 구매 개수를 반환한다.")
     void getCountOfTotalLottoNumbers_Test() {
         //given
         final int expected = 8;
+        final int lottoPrice = 1000;
         //when
-        final int actual = totalPurchaseAmount.getTotalPurchaseCount();
+        final int actual = totalPurchaseAmount.getTotalPurchaseCount(lottoPrice);
         //then
         assertThat(actual).isEqualTo(expected);
     }
