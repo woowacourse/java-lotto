@@ -13,7 +13,7 @@ public class OutputView {
     private static final int LOSS = -1;
     private static final int PRINCIPAL = 1;
 
-    public static void printIssuedLottoNumbers(int manualCount, int autoCount, List<Set<Integer>> issuedLottoNumbers) {
+    public static void printIssuedLottos(int manualCount, int autoCount, List<Set<Integer>> issuedLottoNumbers) {
         System.out.println("수동으로 " + manualCount + "개, 자동으로 " + autoCount + "개를 구매했습니다.");
         for (Set<Integer> numbers : issuedLottoNumbers) {
             printEachLottoNumbers(numbers);

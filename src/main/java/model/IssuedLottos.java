@@ -20,7 +20,7 @@ public class IssuedLottos {
         return new IssuedLottos(() -> collect);
     }
 
-    public LottoResult summary(WinningLottoNumbers winningLottoNumbers) {
+    public LottoResult summarize(WinningLottoNumbers winningLottoNumbers) {
         List<LottoRank> ranks = lottos.stream()
                 .map(winningLottoNumbers::getRankBy)
                 .collect(Collectors.toList());

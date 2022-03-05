@@ -1,8 +1,5 @@
 package controller;
 
-import static view.OutputView.printIssuedLottoNumbers;
-import static view.OutputView.printResult;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -16,27 +13,28 @@ import model.LottoResult;
 import model.ManualLottoCount;
 import model.WinningLottoNumbers;
 import view.InputView;
+import view.OutputView;
 
 public class LottoController {
 
     public void run() {
-        Budget budget = InputView.getUntilValid(() -> Budget.parse(InputView.inputMoney()));
-        ManualLottoCount manualCount = InputView.getUntilValid(
-                () -> ManualLottoCount.parse(InputView.inputManualCount(), budget));
-        LottoMachine lottoMachine = new LottoMachine(getManualLottos(manualCount), budget);
-        IssuedLottos issueAllLottos = lottoMachine.IssueAllLottos();
-        printIssuedLottoNumbers(lottoMachine.manualLottoCount(), lottoMachine.autoLottoCount(), getNumbersOf(issueAllLottos));
+        Budget budget = InputView.getUntilValid(() -> Budget.parse(InputView.inputBudget()));
+        LottoMachine lottoMachine = new LottoMachine(getManualLottos(budget), budget);
+        OutputView.printIssuedLottos(lottoMachine.getManualLottoCount(), lottoMachine.getAutoLottoCount(),
+                getNumbersOf(lottoMachine.getAllLottos()));
 
         WinningLottoNumbers winningLottoNumbers = InputView.getUntilValid(() -> getWinningLottoNumbers());
-        LottoResult totalResult = issueAllLottos.summary(winningLottoNumbers);
-        printResult(totalResult.getResultMap(), totalResult.getProfitRate(budget));
+        LottoResult totalResult = lottoMachine.summarize(winningLottoNumbers);
+        OutputView.printResult(totalResult.getResultMap(), totalResult.getProfitRate(budget));
     }
 
-    private List<Lotto> getManualLottos(ManualLottoCount manualLottoCount) {
-        return InputView.getUntilValid(() -> inputManualLotto(manualLottoCount));
+    private List<Lotto> getManualLottos(Budget budget) {
+        ManualLottoCount manualCount = InputView.getUntilValid(
+                () -> ManualLottoCount.parse(InputView.inputManualCount(), budget));
+        return inputManualLottos(manualCount);
     }
 
-    private List<Lotto> inputManualLotto(ManualLottoCount manualLottoCount) {
+    private List<Lotto> inputManualLottos(ManualLottoCount manualLottoCount) {
         InputView.printManualLottoMessage();
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; !manualLottoCount.hasCountAs(i); i++) {

@@ -54,7 +54,7 @@ public class InputView {
         return Stream.of(options).anyMatch(option -> option.equals(value));
     }
 
-    public static String inputMoney() {
+    public static String inputBudget() {
         System.out.println("구입금액을 입력해 주세요.");
         return SCANNER.nextLine();
     }

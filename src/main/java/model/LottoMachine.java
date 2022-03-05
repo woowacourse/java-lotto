@@ -17,15 +17,19 @@ public class LottoMachine {
         return budget.getMaxCountForLottoIssue() - manualIssuedLottos.getLottosCount();
     }
 
-    public IssuedLottos IssueAllLottos() {
+    public IssuedLottos getAllLottos() {
         return IssuedLottos.merge(manualIssuedLottos, autoIssuedLottos);
     }
 
-    public int manualLottoCount() {
+    public int getManualLottoCount() {
         return manualIssuedLottos.getLottosCount();
     }
 
-    public int autoLottoCount() {
+    public int getAutoLottoCount() {
         return autoIssuedLottos.getLottosCount();
+    }
+
+    public LottoResult summarize(WinningLottoNumbers winningLottoNumbers) {
+        return getAllLottos().summarize(winningLottoNumbers);
     }
 }
