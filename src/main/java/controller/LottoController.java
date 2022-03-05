@@ -43,7 +43,7 @@ public class LottoController {
 	private Money insertMoney() {
 		try {
 			String money = inputView.inputMoney();
-			InputValidateUtils.inputBlankAndNumber(money, MONEY_BLANK_ERROR_MESSAGE,
+			InputValidateUtils.checkInputIsBlankAndNumber(money, MONEY_BLANK_ERROR_MESSAGE,
 				MONEY_NUMBER_ERROR_MESSAGE);
 			return new Money(Integer.parseInt(money));
 		} catch (IllegalArgumentException e) {
@@ -55,7 +55,7 @@ public class LottoController {
 	private LottoCount inputManualLottoCount(LottoCount automaticLottoCount) {
 		try {
 			String count = inputView.inputManualLottoCount();
-			InputValidateUtils.inputBlankAndNumber(count, COUNT_BLANK_ERROR_MESSAGE, COUNT_NUMBER_ERROR_MESSAGE);
+			InputValidateUtils.checkInputIsBlankAndNumber(count, COUNT_BLANK_ERROR_MESSAGE, COUNT_NUMBER_ERROR_MESSAGE);
 			automaticLottoCount.deductCountForManual(Integer.parseInt(count));
 			return new LottoCount(Integer.parseInt(count));
 		} catch (IllegalArgumentException e) {
@@ -91,7 +91,7 @@ public class LottoController {
 
 	private LottoNumber makeBonusBall() {
 		String input = inputView.inputBonusBall();
-		InputValidateUtils.inputBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
+		InputValidateUtils.checkInputIsBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
 		return LottoNumber.parseLottoNumber(input);
 	}
 

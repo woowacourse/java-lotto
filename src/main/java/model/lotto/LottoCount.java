@@ -8,7 +8,7 @@ public class LottoCount {
 	private int count;
 
 	public LottoCount(int count) {
-		InputValidateUtils.inputNegative(count);
+		InputValidateUtils.checkInputIsNegative(count);
 		this.count = count;
 	}
 

@@ -9,7 +9,7 @@ public class Money {
 	private final int money;
 
 	public Money(int money) {
-		InputValidateUtils.inputNegative(money);
+		InputValidateUtils.checkInputIsNegative(money);
 		validateThousandUnitInputMoney(money);
 		this.money = money;
 	}

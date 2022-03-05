@@ -11,7 +11,7 @@ public class InputLottoNumbersUtils {
 	private static final String DELIMITER_COMMA = ",";
 
 	public static List<LottoNumber> makeLottoNumber(String input) {
-		InputValidateUtils.inputBlank(input, LOTTO_NUMBER_BLANK_ERROR_MESSAGE);
+		InputValidateUtils.checkInputIsBlank(input, LOTTO_NUMBER_BLANK_ERROR_MESSAGE);
 		List<String> numbers = splitLottoNumber(input);
 		return makeInputNumbersToLottoNumbers(numbers);
 	}
