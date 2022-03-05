@@ -49,14 +49,14 @@ public final class LotteryGame {
 		return Lotteries.from(totalLotteries);
 	}
 
-	private List<Lottery> generateTotalLotteries(List<List<Integer>> manualLotteryNumber) {
+	private List<Lottery> generateTotalLotteries(final List<List<Integer>> manualLotteryNumber) {
 		final List<Lottery> manualLotteries = createManualLottery(manualLotteryNumber);
 		final List<Lottery> autoLotteries = createAutoLotteriesNumber();
 		return Stream.concat(manualLotteries.stream(), autoLotteries.stream())
 			.collect(Collectors.toList());
 	}
 
-	private List<Lottery> createManualLottery(List<List<Integer>> manualLotteryNumber) {
+	private List<Lottery> createManualLottery(final List<List<Integer>> manualLotteryNumber) {
 		return manualLotteryNumber.stream()
 			.map(lotteryGenerator::generateLottery)
 			.collect(Collectors.toList());
