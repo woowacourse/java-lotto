@@ -6,9 +6,9 @@ public class ManualLottoCount {
 
     private final int count;
 
-    public ManualLottoCount(String count, int maxCount) {
+    public ManualLottoCount(String count, int totalCount) {
         checkValidInt(count);
-        checkValidCount(Integer.parseInt(count), maxCount);
+        checkValidCount(Integer.parseInt(count), totalCount);
         this.count = Integer.parseInt(count);
     }
 
@@ -20,8 +20,8 @@ public class ManualLottoCount {
         }
     }
 
-    private void checkValidCount(int number, int maxAmount) {
-        if (number > maxAmount || number < 0) {
+    private void checkValidCount(int count, int totalCount) {
+        if (count > totalCount || count < 0) {
             throw new IllegalArgumentException(ERROR_WRONG_INPUT_NUMBER);
         }
     }

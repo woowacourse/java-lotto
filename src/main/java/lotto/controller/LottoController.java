@@ -27,7 +27,7 @@ public class LottoController {
         return manualLottos;
     }
 
-    private ManualLottoCount inputManualLottoCount(int totalCount) {
+    private ManualLottoCount inputManualLottoCount(final int totalCount) {
         try {
             String count = InputView.inputManualLottoCount();
             return new ManualLottoCount(count, totalCount);
