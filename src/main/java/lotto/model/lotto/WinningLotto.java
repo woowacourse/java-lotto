@@ -22,13 +22,13 @@ public class WinningLotto {
     }
 
     private void validateBonusBall(int bonusBall) {
-        inputOutOfRange(bonusBall, BonusBallExceptionMessage.RANGE_ERROR.getMessage());
+        inputOutOfRange(bonusBall);
         validateReduplicationWithBonusBall(bonusBall);
     }
 
-    private void inputOutOfRange(int number, String message) {
+    private void inputOutOfRange(int number) {
         if (number < MIN || number > MAX) {
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(BonusBallExceptionMessage.RANGE_ERROR.getMessage());
         }
     }
 

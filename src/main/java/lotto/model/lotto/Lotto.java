@@ -27,12 +27,12 @@ public class Lotto {
     }
 
     private void validateNumberOutOfRange(List<Integer> numbers) {
-        numbers.forEach(number -> inputOutOfRange(number, LottoNumberExceptionMessage.RANGE_ERROR.getMassage()));
+        numbers.forEach(this::inputOutOfRange);
     }
 
-    private void inputOutOfRange(int number, String message) {
+    private void inputOutOfRange(int number) {
         if (number < MIN || number > MAX) {
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(LottoNumberExceptionMessage.RANGE_ERROR.getMassage());
         }
     }
 
