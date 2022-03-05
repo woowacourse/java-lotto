@@ -11,6 +11,7 @@ import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.vo.ManualTicketCount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+import org.jetbrains.annotations.NotNull;
 
 public class LottoController {
 
@@ -19,25 +20,18 @@ public class LottoController {
     private final LottoTicketFactory lottoTicketFactory = LottoTicketFactory.INSTANCE;
 
     public void run() {
-        // #1
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         ManualTicketCount manualTicketCount = getManualTicketSize(purchaseAmount);
         List<String> manualTicketNumbers = inputView.inputTicketNumbersManually(manualTicketCount);
         TicketPurchaseDecider ticketPurchaseDecider = new TicketPurchaseDecider(purchaseAmount, manualTicketCount);
 
-        // #2
         List<LottoTicket> lottoTickets = lottoTicketFactory.createTickets(ticketPurchaseDecider, manualTicketNumbers);
         outputView.printPurchasedTickets(lottoTickets, ticketPurchaseDecider);
 
-        // #3
-        LottoTicket lottoTicket = getLottoTicket();
-        LottoNumber bonusBall = getBonusBall();
-        WinningNumbers winningNumbers = new WinningNumbers(lottoTicket, bonusBall);
-        WinningStats winningStats = new WinningStats(lottoTickets, winningNumbers);
+        WinningStats winningStats = getWinningStats(lottoTickets);
         outputView.printWinningStats(winningStats, purchaseAmount);
 
-        // #4
-        inputView.closeResource();
+        closeResource();
     }
 
     private PurchaseAmount getPurchaseAmount() {
@@ -73,5 +67,16 @@ public class LottoController {
         } catch (Exception e) {
             return getBonusBall();
         }
+    }
+
+    private WinningStats getWinningStats(List<LottoTicket> lottoTickets) {
+        LottoTicket lottoTicket = getLottoTicket();
+        LottoNumber bonusBall = getBonusBall();
+        WinningNumbers winningNumbers = new WinningNumbers(lottoTicket, bonusBall);
+        return new WinningStats(lottoTickets, winningNumbers);
+    }
+
+    private void closeResource() {
+        inputView.closeResource();
     }
 }
