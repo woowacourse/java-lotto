@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lottoticket;
 
 import java.util.Objects;
 
@@ -10,9 +10,20 @@ public final class LottoNumber {
 
     private final int value;
 
-    public LottoNumber(int lottoNumber) {
+    LottoNumber(int lottoNumber) {
         validateNumber(lottoNumber);
         this.value = lottoNumber;
+    }
+
+    public static LottoNumber valueOf(int lottoNumber) {
+        return LottoNumbersCache.cache.stream()
+                .filter(cachedLottoNumber -> cachedLottoNumber.isSameNumber(lottoNumber))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(NUMBER_RANGE_ERROR));
+    }
+
+    private boolean isSameNumber(int lottoNumber) {
+        return value == lottoNumber;
     }
 
     private void validateNumber(int number) {

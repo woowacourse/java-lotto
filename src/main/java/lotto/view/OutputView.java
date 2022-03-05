@@ -5,11 +5,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.AmountToBuyLotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTickets;
 import lotto.domain.ManualLottoCount;
 import lotto.domain.Ranking;
 import lotto.domain.WinningResult;
+import lotto.domain.lottoticket.LottoNumber;
 import lotto.domain.lottoticket.LottoTicket;
 
 public class OutputView {

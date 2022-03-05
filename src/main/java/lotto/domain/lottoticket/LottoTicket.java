@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.LottoNumber;
 
 public final class LottoTicket {
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -58,7 +57,7 @@ public final class LottoTicket {
     private List<LottoNumber> generateLottoNumbers(String[] parsedLottoNumbers) {
         return Arrays.stream(parsedLottoNumbers)
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toUnmodifiableList());
     }
 

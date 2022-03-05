@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -42,7 +41,7 @@ public class LottoTicketTest {
     @DisplayName("로또 티켓이 매개변수의 로또번호를 포함하는지 테스트")
     void isContains(int lottoNumber, boolean expected) {
         final LottoTicket myLottoTicket = new LottoTicket("1,2,3,4,5,6");
-        final LottoNumber otherLottoNumber = new LottoNumber(lottoNumber);
+        final LottoNumber otherLottoNumber = LottoNumber.valueOf(lottoNumber);
 
         assertThat(myLottoTicket.isContains(otherLottoNumber)).isEqualTo(expected);
     }

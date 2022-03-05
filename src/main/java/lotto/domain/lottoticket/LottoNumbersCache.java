@@ -3,7 +3,6 @@ package lotto.domain.lottoticket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.LottoNumber;
 
 class LottoNumbersCache {
     private static final String NOT_INSTANTIATION_ERROR = "LottoNumbersCache 객체를 생성할 수 없습니다.";

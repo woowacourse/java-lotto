@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.domain.lottoticket.LottoNumber;
 import lotto.domain.lottoticket.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +17,7 @@ public class WinningNumbersTest {
     @BeforeEach
     void setUp() {
         LottoTicket lottoNumbers = new LottoTicket("1,2,3,4,5,6");
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
         winningNumbers = new WinningNumbers(lottoNumbers, bonusNumber);
     }
 
@@ -24,7 +25,7 @@ public class WinningNumbersTest {
     @DisplayName("1등 당첨번호와 보너스 번호가 중복 될 경우 예외 발생")
     void test() {
         LottoTicket lottoNumbers = new LottoTicket("1,2,3,4,5,6");
-        LottoNumber bonusNumber = new LottoNumber(1);
+        LottoNumber bonusNumber = LottoNumber.valueOf(1);
 
         assertThatThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);

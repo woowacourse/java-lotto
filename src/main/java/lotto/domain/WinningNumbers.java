@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.lottoticket.LottoNumber;
 import lotto.domain.lottoticket.LottoTicket;
 
 public final class WinningNumbers {
