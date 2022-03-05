@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import strategy.LottoNumbersGenerationStrategy;
-
 public class LottoNumbersTest {
 	@Test
 	@DisplayName("로또 넘버와 당첨 번호의 일치 개수 확인")

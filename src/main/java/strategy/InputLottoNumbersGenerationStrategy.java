@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import model.lottonumber.LottoNumber;
+import model.lottonumber.LottoNumbersGenerationStrategy;
 import utils.InputLottoNumbersUtils;
 
 public class InputLottoNumbersGenerationStrategy implements LottoNumbersGenerationStrategy {

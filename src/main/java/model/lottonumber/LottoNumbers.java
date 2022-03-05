@@ -3,8 +3,6 @@ package model.lottonumber;
 import java.util.ArrayList;
 import java.util.List;
 
-import strategy.LottoNumbersGenerationStrategy;
-
 public class LottoNumbers {
 	private static final int LOTTO_SIZE = 6;
 

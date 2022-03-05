@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbers;
+import model.lottonumber.LottoNumbersGenerationStrategy;
 import model.result.Rank;
 import model.winningnumber.WinningLottoNumberDTO;
-import strategy.LottoNumbersGenerationStrategy;
 
 public class LottoTest {
 

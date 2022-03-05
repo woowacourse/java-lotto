@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbers;
-import strategy.LottoNumbersGenerationStrategy;
+import model.lottonumber.LottoNumbersGenerationStrategy;
 
 public class WinningLottoNumberTest {
 	@Test

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import model.lottonumber.LottoNumber;
+import model.lottonumber.LottoNumbersGenerationStrategy;
 
 public class RandomLottoNumbersGenerationStrategy implements LottoNumbersGenerationStrategy {
 	private static final List<LottoNumber> lottoNumbers;

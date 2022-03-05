@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import model.lottonumber.LottoNumbers;
+import model.lottonumber.LottoNumbersGenerationStrategy;
 import model.result.LottoResult;
 import model.winningnumber.WinningLottoNumberDTO;
-import strategy.LottoNumbersGenerationStrategy;
 
 public class Lottos {
 	private List<Lotto> lottoStorage;
