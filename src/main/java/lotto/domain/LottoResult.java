@@ -23,11 +23,4 @@ public class LottoResult {
     public Map<LottoRank, Integer> getResult() {
         return result;
     }
-
-    @Override
-    public String toString() {
-        return "LottoResult{" +
-                "result=" + result +
-                '}';
-    }
 }
