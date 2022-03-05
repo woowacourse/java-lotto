@@ -1,5 +1,6 @@
 package model.lottonumber;
 
+import dto.LottoDto;
 import java.util.List;
 import java.util.stream.Collectors;
 

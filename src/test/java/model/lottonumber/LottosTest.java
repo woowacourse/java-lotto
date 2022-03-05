@@ -12,7 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottosTest {
-
+/*
     @Test
     @DisplayName("자동으로 생성할 로또 개수 만큼의 로또를 생성하는지 확인한다.")
     void generateLottos_Test() {
@@ -45,4 +45,6 @@ class LottosTest {
         assertThat(result.get(Rank.NONE)).isEqualTo(0);
 
     }
+
+ */
 }

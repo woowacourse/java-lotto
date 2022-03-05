@@ -1,10 +1,10 @@
 package controller;
 
+import dto.LottoDto;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import java.util.stream.Collectors;
 import model.LottoMachine;
-import model.lottonumber.Lotto;
 import view.InputView;
 
 public class LottoMachineInitializer {
@@ -18,7 +18,7 @@ public class LottoMachineInitializer {
     public LottoMachine initLottoMachine() {
         final LottoMachine lottoMachine = new LottoMachine();
         insertPurchaseMoneyAndManualLottoCountInLottoMachine(lottoMachine);
-        purchaseLottos(lottoMachine);
+        insertManualLottoNumberGroupsInLottoMachine(lottoMachine);
         return lottoMachine;
     }
 
@@ -29,18 +29,20 @@ public class LottoMachineInitializer {
         lottoMachine.makeTotalLottoCountToPurchase(purchaseMoney, manualLottoCount);
     }
 
-    private void purchaseLottos(final LottoMachine lottoMachine) {
+    private void insertManualLottoNumberGroupsInLottoMachine(final LottoMachine lottoMachine) {
         int manualLottoCount = lottoMachine.sendManualLottoCount();
-        List<Lotto> manualLottos = purchaseManualLottos(manualLottoCount);
+        List<LottoDto> manualLottoNumberGroups = inputManualLottoNumberGroups(manualLottoCount);
 
-        lottoMachine.purchaseLottos(manualLottos);
+        lottoMachine.purchaseLottos(manualLottoNumberGroups);
     }
 
-    private List<Lotto> purchaseManualLottos(final int manualLottoCount) {
-        List<List<Integer>> manualLottoNumberGroups = inputView.inputManualLottoNumberGroups(manualLottoCount);
+    private List<LottoDto> inputManualLottoNumberGroups(final int manualLottoCount) {
+        return convertToDto(inputView.inputManualLottoNumberGroups(manualLottoCount));
+    }
 
-        return manualLottoNumberGroups.stream()
-                .map(Lotto::new)
+    private List<LottoDto> convertToDto(final List<List<Integer>> lottoNumberGroups) {
+        return lottoNumberGroups.stream()
+                .map(LottoDto::new)
                 .collect(Collectors.toList());
     }
 }

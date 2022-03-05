@@ -1,5 +1,7 @@
 package model.lottonumber;
 
+import dto.LottoDto;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import model.generator.Generator;
+import model.generator.LottoGenerator;
 import model.generator.LottoNumberGenerator;
 import model.rank.Rank;
 import model.winningresult.WinningResult;
@@ -15,14 +18,8 @@ import model.winningresult.WinningResult;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(final List<Lotto> manualLottos, final int autoLottoCount) {
-        Generator generator = new LottoNumberGenerator();
-
-        lottos = IntStream
-                .rangeClosed(1, autoLottoCount)
-                .mapToObj(index -> new Lotto(generator))
-                .collect(Collectors.toList());
-        lottos.addAll(manualLottos);
+    public Lottos(final List<LottoDto> manualLottoNumberGroups, final int autoLottoCount) {
+        this.lottos = LottoGenerator.makeLottos(manualLottoNumberGroups, autoLottoCount);
     }
 
     public WinningResult makeWinningResult(final WinningNumbers winningNumbers) {
