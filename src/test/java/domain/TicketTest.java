@@ -18,45 +18,56 @@ public class TicketTest {
 
     @Test
     void 티켓_전략_객체_생성자_확인() {
+        /* given */
         Ticket ticket = new Ticket(() -> Set.of(LottoNumber.valueOf(1),
                 LottoNumber.valueOf(2),
                 LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4),
                 LottoNumber.valueOf(5),
                 LottoNumber.valueOf(6)));
-        assertThat(ticket.getLottoNumbers()).isEqualTo(Set.of(LottoNumber.valueOf(1),
-                LottoNumber.valueOf(2),
-                LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4),
-                LottoNumber.valueOf(5),
-                LottoNumber.valueOf(6))
-        );
+
+        /* when */
+        assertThat(ticket.getLottoNumbers())
+                /* then */
+                .isEqualTo(Set.of(LottoNumber.valueOf(1),
+                        LottoNumber.valueOf(2),
+                        LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(4),
+                        LottoNumber.valueOf(5),
+                        LottoNumber.valueOf(6))
+                );
     }
 
     @Test
     void 티켓_번호_개수_정상() {
+        /* when */
         assertThatCode(() -> new Ticket(Set.of(LottoNumber.valueOf(1),
                 LottoNumber.valueOf(2),
                 LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4),
                 LottoNumber.valueOf(5),
                 LottoNumber.valueOf(6))))
+                /* then */
                 .doesNotThrowAnyException();
     }
 
     @Test
     void 번호_개수_5개_티켓_생성_실패() {
+        /* when */
         assertThatThrownBy(() -> new Ticket(Set.of(LottoNumber.valueOf(1),
                 LottoNumber.valueOf(2),
                 LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4),
                 LottoNumber.valueOf(5))))
+                /* then */
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 입력받은_문자열로_로또번호_정상생성() {
+        /* when */
         assertThatCode(() -> Ticket.from(List.of(1, 2, 3, 4, 5, 6)))
+                /* then */
                 .doesNotThrowAnyException();
     }
 
@@ -64,7 +75,9 @@ public class TicketTest {
     @MethodSource("parameters")
     @DisplayName("로또 번호 입력 테스트")
     void 로또번호입력(List<Integer> input, String testName) {
+        /* when */
         assertThatThrownBy(() -> Ticket.from(input))
+                /* then */
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

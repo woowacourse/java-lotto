@@ -18,7 +18,9 @@ public class AmountTest {
     @MethodSource("invalidParameters")
     @DisplayName("투입금액 생성 유효성 검사")
     void invalidCreate(int amount, String testName) {
+        /* when */
         assertThatThrownBy(() -> new Amount(amount))
+                /* then */
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -32,13 +34,19 @@ public class AmountTest {
 
     @Test
     void 투입금액이_정상() {
+        /* when */
         assertThatCode(() -> new Amount(10000))
+                /* then */
                 .doesNotThrowAnyException();
     }
 
     @Test
     void 티켓구매_개수_확인() {
+        /* given */
         Amount amount = new Amount(14000);
-        assertThat(amount.getTicketCount()).isEqualTo(14);
+        /* when */
+        assertThat(amount.getTicketCount())
+                /* then */
+                .isEqualTo(14);
     }
 }

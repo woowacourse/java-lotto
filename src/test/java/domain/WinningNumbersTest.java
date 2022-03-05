@@ -29,25 +29,33 @@ public class WinningNumbersTest {
 
     @Test
     void 당첨번호_보너스번호_중복검사_실패테스트() {
+        /* given */
         Set<LottoNumber> winNumbers = Set.of(LottoNumber.valueOf(1),
                 LottoNumber.valueOf(2),
                 LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4),
                 LottoNumber.valueOf(5),
                 LottoNumber.valueOf(6));
+
+        /* when */
         assertThatThrownBy(() -> new WinningNumbers(new Ticket(winNumbers), LottoNumber.valueOf(6)))
+                /* then */
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 당첨번호_보너스번호_중복검사_성공테스트() {
+        /* given */
         Ticket winTicket = new Ticket(Set.of(LottoNumber.valueOf(1),
                 LottoNumber.valueOf(2),
                 LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4),
                 LottoNumber.valueOf(5),
                 LottoNumber.valueOf(6)));
+
+        /* when */
         assertThatCode(() -> new WinningNumbers(winTicket, LottoNumber.valueOf(7)))
+                /* then */
                 .doesNotThrowAnyException();
     }
 
@@ -55,6 +63,7 @@ public class WinningNumbersTest {
     @MethodSource("parameters")
     @DisplayName("로또 등수 확인 테스트")
     void 로또등수확인(int n1, int n2, int n3, int n4, int n5, int n6, int bonus, Rank rank, String testName) {
+        /* given */
         Ticket winTicket = new Ticket(Set.of(LottoNumber.valueOf(n1),
                 LottoNumber.valueOf(n2),
                 LottoNumber.valueOf(n3),
@@ -63,7 +72,11 @@ public class WinningNumbersTest {
                 LottoNumber.valueOf(n6)));
         LottoNumber bonusNumber = LottoNumber.valueOf(bonus);
         WinningNumbers winningNumbers = new WinningNumbers(winTicket, bonusNumber);
-        assertThat(winningNumbers.getTicketRank(ticket)).isEqualTo(rank);
+
+        /* when */
+        assertThat(winningNumbers.getTicketRank(ticket))
+                /* then */
+                .isEqualTo(rank);
     }
 
     static Stream<Arguments> parameters() {

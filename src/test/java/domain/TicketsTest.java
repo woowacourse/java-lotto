@@ -12,11 +12,16 @@ public class TicketsTest {
 
     @Test
     void 티켓_정상_생성() {
+        /* given */
         List<List<Integer>> manualNumber = Arrays.asList(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 4, 5, 6));
         Tickets tickets = new Tickets(manualNumber.stream()
                 .map(Ticket::from)
                 .collect(Collectors.toList()));
         tickets.addAutoTickets(3, new RandomLottoNumbersGenerator());
-        assertThat(tickets.getTickets().size()).isEqualTo(5);
+
+        /* when */
+        assertThat(tickets.getTickets().size())
+                /* then */
+                .isEqualTo(5);
     }
 }

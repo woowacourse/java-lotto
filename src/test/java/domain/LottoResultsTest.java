@@ -15,6 +15,7 @@ public class LottoResultsTest {
 
     @Test
     void 등수_계산() {
+        /*given*/
         Ticket ticket1 = createTicket(1, 2, 3, 4, 5, 6);
         Ticket ticket2 = createTicket(2, 3, 4, 5, 6, 7);
         Ticket ticket3 = createTicket(3, 4, 5, 6, 7, 8);
@@ -25,8 +26,10 @@ public class LottoResultsTest {
         WinningNumbers winningNumbers = createWinningTicket(1, 2, 3, 4, 5, 6, 7);
 
         LottoResults lottoResults = LottoResults.of(winningNumbers, tickets);
-
-        assertThat(lottoResults.getLottoResults()).hasSize(4)
+        /* when */
+        assertThat(lottoResults.getLottoResults())
+                /*then*/
+                .hasSize(4)
                 .contains(entry(Rank.FIRST, 1), entry(Rank.SECOND, 1), entry(Rank.FOURTH, 1), entry(Rank.FIFTH, 1));
     }
 
@@ -48,11 +51,16 @@ public class LottoResultsTest {
 
     @Test
     void 수익률_계산() {
+        /* given */
         Map<Rank, Integer> results = new TreeMap<>(Comparator.comparingLong(Rank::getAmount));
         results.put(Rank.FIFTH, 2);
         results.put(Rank.SECOND, 2);
         results.put(Rank.FIRST, 1);
         LottoResults lottoResults = new LottoResults(results);
-        assertThat(lottoResults.getProfit()).isEqualTo(5000 * 2 + 30_000_000 * 2 + 2_000_000_000);
+
+        /* when */
+        assertThat(lottoResults.getProfit())
+                /* then */
+                .isEqualTo(5000 * 2 + 30_000_000 * 2 + 2_000_000_000);
     }
 }

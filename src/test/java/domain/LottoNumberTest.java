@@ -15,7 +15,9 @@ public class LottoNumberTest {
     @MethodSource("invalidParameters")
     @DisplayName("로또 숫자 생성 유효성 실패 검사")
     void invalidCreate(int number, String testName) {
+        /* when */
         assertThatThrownBy(() -> LottoNumber.valueOf(number))
+                /* then */
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -30,7 +32,9 @@ public class LottoNumberTest {
     @MethodSource("validParameters")
     @DisplayName("로또 숫자 생성 유효성 검사")
     void validCreate(int number, String testName) {
+        /* when */
         assertThatCode(() -> LottoNumber.valueOf(number))
+                /* then */
                 .doesNotThrowAnyException();
     }
 
