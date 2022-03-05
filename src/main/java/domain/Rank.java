@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public enum Rank {
 	FIFTH_GRADE(3, false, 5_000L),
@@ -25,7 +26,7 @@ public enum Rank {
 		return Arrays.stream(Rank.values())
 			.filter(rank -> rank.matches(matchCount, bonusBallMatched))
 			.findFirst()
-			.orElseGet(() -> null);
+			.orElse(null);
 	}
 
 	private boolean matches(final int matchCount, final boolean bonusBallMatched) {
@@ -42,5 +43,14 @@ public enum Rank {
 
 	public long getPrize() {
 		return prize;
+	}
+
+	@Override
+	public String toString() {
+		return "Rank{" +
+			"matchCount=" + matchCount +
+			", bonusBallMatched=" + bonusBallMatched +
+			", prize=" + prize +
+			'}';
 	}
 }
