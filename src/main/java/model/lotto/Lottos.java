@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import model.lottonumber.LottoNumbers;
 import model.result.LottoResult;
@@ -17,9 +16,8 @@ public class Lottos {
 	public Lottos(LottoCount manualLottoCount, LottoNumbersGenerationStrategy manualStrategy,
 		LottoCount automaticLottoCount,
 		LottoNumbersGenerationStrategy automaticStrategy) {
-		lottoStorage = Stream.concat(makeLottos(manualLottoCount, manualStrategy).stream(),
-			makeLottos(automaticLottoCount, automaticStrategy).stream()).collect(
-			Collectors.toList());
+		lottoStorage = makeLottos(manualLottoCount, manualStrategy);
+		lottoStorage.addAll(makeLottos(automaticLottoCount, automaticStrategy));
 	}
 
 	private List<Lotto> makeLottos(LottoCount lottoCount, LottoNumbersGenerationStrategy strategy) {
