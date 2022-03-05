@@ -1,9 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoOrder;
+import lotto.domain.LottoGame;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinningNumbers;
@@ -14,17 +12,17 @@ import lotto.dto.LottoTicketsDto;
 
 public class LottoController {
 
-    private final LottoOrder lottoOrder;
+    private final LottoGame lottoGame;
     private LottoTickets lottoTickets;
 
-    public LottoController(LottoOrder lottoOrder) {
-        this.lottoOrder = lottoOrder;
+    public LottoController(LottoGame lottoGame) {
+        this.lottoGame = lottoGame;
     }
 
     public LottoTicketsDto publishLottoTickets() {
-        lottoOrder.billingManualLottoOrder();
-        LottoTickets manualLottoTickets = getManualLottoTickets(lottoOrder.getManualLottoNumbers());
-        LottoTickets autoLottoTickets = getAutoLottoTickets(lottoOrder.getNumberOfAutoLotto());
+        lottoGame.billingManualLottoOrder();
+        LottoTickets manualLottoTickets = getManualLottoTickets(lottoGame.getManualLottoNumbers());
+        LottoTickets autoLottoTickets = getAutoLottoTickets(lottoGame.getNumberOfAutoLotto());
         lottoTickets = manualLottoTickets.combine(autoLottoTickets);
         return LottoTicketsDto.from(manualLottoTickets, autoLottoTickets);
     }
