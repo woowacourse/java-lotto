@@ -38,9 +38,13 @@ public class Lottos {
 			lotto -> lottoResult.increaseCountOfRank(lotto.match(winningLottoNumbersDTO)));
 	}
 
-	public void add(List<LottoNumbers> passiveLottos) {
-		for (LottoNumbers passiveLotto : passiveLottos) {
-			lottoStorage.add(passiveLottos.indexOf(passiveLotto), new Lotto(passiveLotto));
+	public void add(List<Lotto> passiveLottos) {
+		for (Lotto passiveLotto : passiveLottos) {
+			lottoStorage.add(passiveLottos.indexOf(passiveLotto), passiveLotto);
 		}
+	}
+
+	public List<Lotto> getLottoStorage() {
+		return lottoStorage;
 	}
 }

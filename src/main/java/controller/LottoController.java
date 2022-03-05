@@ -1,10 +1,12 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import model.Money;
+import model.lotto.Lotto;
 import model.lotto.LottoCount;
 import model.lotto.Lottos;
 import model.lottonumber.LottoNumber;
@@ -76,15 +78,11 @@ public class LottoController {
 		return lottos;
 	}
 
-	private List<LottoNumbers> makeManualLottos() {
-		List<LottoNumbers> passiveLottos = new ArrayList<>();
+	private List<Lotto> makeManualLottos() {
 		inputView.inputPassiveLottoMessage();
-
-		while (manualLottoCount.haveRemainToMake()) {
-			manualLottoCount.increaseMadeLottoCount();
-			passiveLottos.add(makeOnePassiveLotto());
-		}
-		return passiveLottos;
+		return IntStream.range(0, manualLottoCount.getCount())
+			.mapToObj((lottoNumbers) -> new Lotto(makeOnePassiveLotto()))
+			.collect(Collectors.toList());
 	}
 
 	private LottoNumbers makeOnePassiveLotto() {

@@ -7,20 +7,17 @@ import org.junit.jupiter.api.Test;
 
 public class LottoCountTest {
 	@Test
-	@DisplayName("로또 생성 중단")
-	void checkLottoCountIsZero() {
+	@DisplayName("수동 로또 한도 초과")
+	void makeManualLotto_X() {
 		LottoCount lottoCount = new LottoCount(1);
-		lottoCount.increaseMadeLottoCount();
-
-		assertThat(lottoCount.haveRemainToMake()).isFalse();
+		assertThatThrownBy(() -> lottoCount.deductCountForManual(2)).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
-	@DisplayName("생성된 로또 개수 확인")
-	void checkLottoCountReduce() {
-		LottoCount lottoCount = new LottoCount(100);
-		lottoCount.increaseMadeLottoCount();
-
-		assertThat(lottoCount.getMadeCount()).isEqualTo(1);
+	@DisplayName("수동 로또 정상")
+	void makeManualLotto_O() {
+		LottoCount lottoCount = new LottoCount(3);
+		lottoCount.deductCountForManual(2);
+		assertThat(lottoCount.getCount()).isEqualTo(1);
 	}
 }
