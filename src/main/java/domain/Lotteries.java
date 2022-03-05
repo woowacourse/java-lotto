@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,20 +10,12 @@ public class Lotteries {
 
 	private final List<Lottery> lotteries;
 
-	public Lotteries(){
-		this.lotteries = new ArrayList<>();
-	}
-
 	public Lotteries(final List<Lottery> lotteries) {
 		this.lotteries = lotteries;
 	}
 
 	public List<Lottery> getLotteries() {
 		return lotteries;
-	}
-
-	public void addLotteries(final List<Lottery> newLotteries) {
-		lotteries.addAll(newLotteries);
 	}
 
 	public Map<Rank, Integer> getTheNumberOfWinners(final WinningLottery winningLottery) {

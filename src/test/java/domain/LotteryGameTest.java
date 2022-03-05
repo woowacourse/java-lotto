@@ -56,13 +56,14 @@ public class LotteryGameTest {
 
 	private LotteryGame initRankingTest(final int purchaseAmount, final int expectedRank) {
 		final PurchaseInformation purchaseInformation =
-			createPurchaseInformation(purchaseAmount / 1000, 0);
+			createPurchaseInformation(purchaseAmount / 1000, purchaseAmount / 1000);
 		final List<List<Integer>> rawManualLotteries =
 			createRawManualLotteries(purchaseAmount / 1000, expectedRank);
 		final ManualLotteryGeneratorStrategy manualLotteryGenerator =
 			new ManualLotteryGeneratorStrategy(rawManualLotteries, new LotteryNumberFactory());
-		final LotteryGame lotteryGame = new LotteryGame(purchaseInformation, manualLotteryGenerator,
-			new LotteryGenerateMock(expectedRank, purchaseAmount / 1000), new LotteryNumberFactory());
+		final LotteryGenerateMock lotteryGenerateMock = new LotteryGenerateMock(expectedRank, purchaseAmount / 1000);
+		final LotteryGame lotteryGame = new LotteryGame(purchaseInformation, lotteryGenerateMock,
+			manualLotteryGenerator, new LotteryNumberFactory());
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		return lotteryGame;
 	}
