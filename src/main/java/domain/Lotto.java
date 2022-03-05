@@ -7,8 +7,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int LOTTO_SIZE = 6;
     public static final int SINGLE_LOTTO_PRICE = 1000;
+
+    private static final int LOTTO_SIZE = 6;
 
     static final String ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS = String.format("%d개의 숫자를 골라주세요.", LOTTO_SIZE);
 
