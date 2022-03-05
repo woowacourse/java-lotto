@@ -29,7 +29,7 @@ public class ManualLottoCountTest {
     void 뺄셈_연산_기능() {
         ManualLottoCount manualLottoCount = ManualLottoCount.of(2, 2);
 
-        assertThat(manualLottoCount.subtract(2)).isEqualTo(0);
+        assertThat(manualLottoCount.subtractBy(2)).isEqualTo(0);
 
     }
 }
