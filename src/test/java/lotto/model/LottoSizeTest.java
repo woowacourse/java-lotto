@@ -19,9 +19,8 @@ class LottoSizeTest {
     @Test
     @DisplayName("수동 로또 구매를 구입 금액보다 많이할 시 예외를 던진다")
     void validatePositiveManualLottoSizeTest() {
-        Money money = new Money(12000);
         LottoSize manualLottoSize = new LottoSize(3);
-        int actual = manualLottoSize.getAutoLottoSize(money);
+        int actual = manualLottoSize.getRestOfLottoSize(12);
 
         assertThat(actual).isEqualTo(9);
     }
@@ -30,9 +29,8 @@ class LottoSizeTest {
     @DisplayName("수동 로또 구매를 구입 금액보다 많이할 시 예외를 던진다")
     void getAutoLottoSizeTest() {
         assertThatThrownBy(() -> {
-            Money money = new Money(1000);
             LottoSize manualLottoSize = new LottoSize(2);
-            manualLottoSize.getAutoLottoSize(money);
+            manualLottoSize.getRestOfLottoSize(1);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또는 0장 이상 구매하셔야 합니다.");
     }

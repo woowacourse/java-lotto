@@ -8,10 +8,10 @@ public class LottoSize {
         this.size = size;
     }
 
-    public int getAutoLottoSize(Money money) {
-        int autoLottoSize = money.getBuyableLottoSize() - size;
-        validateLottoSize(autoLottoSize);
-        return autoLottoSize;
+    public int getRestOfLottoSize(int availableSize) {
+        int restSize = availableSize - size;
+        validateLottoSize(restSize);
+        return restSize;
     }
 
     private void validateLottoSize(int size) {
