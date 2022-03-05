@@ -20,8 +20,7 @@ public final class Lottery {
 	}
 
 	private Set<LotteryNumber> deepCopyOf(final Set<LotteryNumber> numbers) {
-		return numbers.stream()
-			.collect(Collectors.toCollection(TreeSet::new));
+		return new TreeSet<>(numbers);
 	}
 
 	public static Lottery from(final Set<LotteryNumber> numbers) {
