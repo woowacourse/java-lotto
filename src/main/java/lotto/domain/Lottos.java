@@ -22,12 +22,12 @@ public class Lottos {
     }
 
     public static Lottos from(Money money) {
-        return new Lottos(money.getMoney() / LOTTO_PRICE);
+        return new Lottos((int)(money.getMoney() / LOTTO_PRICE));
     }
 
     public static Lottos of(List<Lotto> lottoList, Money change) {
         Lottos lottos = new Lottos(lottoList);
-        lottos.addAutoCreatedLotto(change.getMoney() / LOTTO_PRICE);
+        lottos.addAutoCreatedLotto((int)(change.getMoney() / LOTTO_PRICE));
         return lottos;
     }
 

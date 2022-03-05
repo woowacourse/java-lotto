@@ -18,7 +18,7 @@ public class MoneyTest {
     @Test
     @DisplayName("금액 추가")
     void add_money() {
-        Money money = new Money(0);
+        Money money = new Money();
         money.add(new Money(100));
 
         assertThat(money.getMoney()).isEqualTo(100);

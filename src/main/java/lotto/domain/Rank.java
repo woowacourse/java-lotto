@@ -11,7 +11,7 @@ public enum Rank {
     THIRD(new Money(1_500_000), 5),
     FOURTH(new Money(50_000), 4),
     FIFTH(new Money(5_000), 3),
-    NOTHING(new Money(0), 0);
+    NOTHING(new Money(), 0);
 
     private final Money prizeMoney;
     private final int count;

@@ -20,7 +20,7 @@ class LottoResultTest {
         Lotto lotto2 = new Lotto(List.of(2, 3, 4, 5, 6, 7));
         Lotto lotto3 = new Lotto(List.of(3, 4, 5, 6, 7, 8));
 
-        lottos = Lottos.of(Arrays.asList(lotto1, lotto2, lotto3), new Money(0));
+        lottos = Lottos.of(Arrays.asList(lotto1, lotto2, lotto3), new Money());
         winningLotto = new WinningLotto(lotto1, new LottoNumber(7));
         lottoResult = new LottoResult(lottos.countLottoRank(winningLotto));
     }
@@ -28,6 +28,6 @@ class LottoResultTest {
     @Test
     @DisplayName("총 수익 계산")
     void calculate_profit() {
-        assertThat(lottoResult.getTotalWinningPrize().getMoney()).isEqualTo(2_030_050_000);
+        assertThat(lottoResult.calculateTotalWinningPrize().getMoney()).isEqualTo(2_030_050_000);
     }
 }

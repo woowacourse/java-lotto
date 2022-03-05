@@ -11,16 +11,16 @@ public class LottoResult {
         this.lottoResult = new HashMap<>(lottoResult);
     }
 
-    public Money getTotalWinningPrize() {
-        Money totalWinningPrize = new Money(0);
+    public Money calculateTotalWinningPrize() {
+        Money totalWinningPrize = new Money();
         for (Rank rank : Rank.values()) {
-            totalWinningPrize.add(getWinningPrize(rank));
+            totalWinningPrize.add(calculateWinningPrize(rank));
         }
         return totalWinningPrize;
     }
 
-    private Money getWinningPrize(Rank rank) {
-        Money winningPrize = new Money(0);
+    private Money calculateWinningPrize(Rank rank) {
+        Money winningPrize = new Money();
         winningPrize.add(rank.getPrizeMoney());
         winningPrize.multiply(lottoResult.get(rank));
         return winningPrize;

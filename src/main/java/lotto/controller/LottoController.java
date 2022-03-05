@@ -97,7 +97,7 @@ public class LottoController {
         OutputView.printLottosResult(lottoResult.getLottoResult());
 
         Money payment = new Money(lottos.getLottos().size() * LOTTO_PRICE);
-        double profitRate = lottoResult.getTotalWinningPrize().calculateProfitRate(payment);
+        double profitRate = lottoResult.calculateTotalWinningPrize().calculateProfitRate(payment);
         OutputView.printProfitRate(profitRate);
     }
 }

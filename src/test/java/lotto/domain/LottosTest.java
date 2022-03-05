@@ -21,7 +21,7 @@ public class LottosTest {
         Lotto lotto3 = new Lotto(List.of(3, 4, 5, 6, 7, 8));
 
         lottoList = Arrays.asList(lotto1, lotto2, lotto3);
-        lottos = Lottos.of(lottoList, new Money(0));
+        lottos = Lottos.of(lottoList, new Money());
         winningLotto = new WinningLotto(lotto1, new LottoNumber(7));
     }
 

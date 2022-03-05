@@ -3,9 +3,13 @@ package lotto.domain;
 public class Money implements Comparable<Money> {
     private static final String ERROR_ONLY_NATURAL_NUMBER = "금액은 음수가 될 수 없습니다.";
 
-    private int money;
+    private long money;
 
-    public Money(final int money) {
+    public Money() {
+        this.money = 0;
+    }
+
+    public Money(final long money) {
         validateMoney(money);
         this.money = money;
     }
@@ -29,18 +33,18 @@ public class Money implements Comparable<Money> {
         return (double)this.money / payment.money;
     }
 
-    private void validateMoney(final int money) {
+    private void validateMoney(final long money) {
         if (money < 0) {
             throw new IllegalArgumentException(ERROR_ONLY_NATURAL_NUMBER);
         }
     }
 
-    public int getMoney() {
+    public long getMoney() {
         return money;
     }
 
     @Override
     public int compareTo(Money o) {
-        return this.money - o.money;
+        return Long.compare(this.money, o.money);
     }
 }
