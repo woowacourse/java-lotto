@@ -22,6 +22,6 @@ class RanksTest {
         assertThat(statistics.get(Rank.MATCH_FIVE_NUMBERS)).isEqualTo(1);
         assertThat(statistics.get(Rank.MATCH_FOUR_NUMBERS)).isEqualTo(0);
         assertThat(statistics.get(Rank.MATCH_THREE_NUMBERS)).isEqualTo(0);
-        assertThat(statistics.get(Rank.MATCH_ZERO_NUMBERS)).isEqualTo(0);
+        assertThat(statistics.get(Rank.MATCH_MISS)).isEqualTo(0);
     }
 }
