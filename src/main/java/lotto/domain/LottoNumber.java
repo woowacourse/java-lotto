@@ -42,6 +42,25 @@ public class LottoNumber {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LottoNumber)) {
+            return false;
+        }
+
+        LottoNumber that = (LottoNumber) o;
+
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return value;
+    }
+
+    @Override
     public String toString() {
         return "LottoNumber{" +
                 "number=" + value +
