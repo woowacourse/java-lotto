@@ -14,8 +14,7 @@ public class LottoStorage {
     }
 
     private List<Lotto> store(LottoCount lottoCount, List<Lotto> manualLottos) {
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.addAll(manualLottos);
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
         while (!lottoCount.isZero()) {
             lottos.add(new Lotto(RandomLottoNumbersGenerator.pickSixNumbers()));
             lottoCount.makeLotto();
