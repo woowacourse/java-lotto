@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbers;
-import model.lottonumber.LottoNumbersDTO;
 
 public class LottoDTO {
 	private final LottoNumbers numbers;
@@ -15,8 +14,7 @@ public class LottoDTO {
 	}
 
 	public List<Integer> getNumbers() {
-		LottoNumbersDTO lottoNumbersDTO = numbers.getLottoNumbersDTO();
-		return lottoNumbersDTO.getLottoNumbers()
+		return numbers.getNumbers()
 			.stream()
 			.map(LottoNumber::getNumber)
 			.collect(Collectors.toList());
