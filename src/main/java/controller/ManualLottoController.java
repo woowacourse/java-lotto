@@ -17,10 +17,9 @@ public class ManualLottoController {
 
     public void run() {
         Amount amount = createAmount();
-        int manualTicketsCount = createManualTicketCount(amount);
-        PurchaseLottoCounts purchaseLottoCounts = new PurchaseLottoCounts(manualTicketsCount,
-                amount.getTicketCount() - manualTicketsCount);
-
+        int manualTicketsCount = InputView.requestManualTicketCount();
+        PurchaseLottoCounts purchaseLottoCounts = new PurchaseLottoCounts(manualTicketsCount, amount);
+        
         Tickets tickets = makeTickets(purchaseLottoCounts);
         OutputView.printTicketCount(purchaseLottoCounts);
         OutputView.printTickets(tickets);
@@ -47,17 +46,6 @@ public class ManualLottoController {
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
             return createAmount();
-        }
-    }
-
-    private int createManualTicketCount(Amount amount) {
-        try {
-            int manualTicket = InputView.requestManualTicketCount();
-            checkCountRange(amount.getTicketCount(), manualTicket);
-            return manualTicket;
-        } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
-            return createManualTicketCount(amount);
         }
     }
 

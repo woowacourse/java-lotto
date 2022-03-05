@@ -4,16 +4,15 @@ public class PurchaseLottoCounts {
     private final int manualCount;
     private final int autoCount;
 
-    public PurchaseLottoCounts(int manualCount, int autoCount) {
-        checkCountPositive(manualCount);
-        checkCountPositive(autoCount);
+    public PurchaseLottoCounts(int manualCount, Amount amount) {
+        checkCountRange(manualCount, amount);
         this.manualCount = manualCount;
-        this.autoCount = autoCount;
+        this.autoCount = amount.getTicketCount() - manualCount;
     }
 
-    private void checkCountPositive(int count) {
-        if (count < 0) {
-            throw new IllegalArgumentException("구매 개수는 양수를 입력해주세요.");
+    private void checkCountRange(int count, Amount amount) {
+        if (count < 0 || count > amount.getTicketCount()) {
+            throw new IllegalArgumentException("구매 개수는 0이상 " + amount.getTicketCount() + "이하여야합니다.");
         }
     }
 

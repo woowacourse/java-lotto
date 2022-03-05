@@ -12,8 +12,8 @@ public class PurchaseLottoCountsTest {
     @Test
     void 수동_구매_개수_음수() {
         int manualCount = -1;
-        int autoCount = 3;
-        assertThatThrownBy(() -> new PurchaseLottoCounts(manualCount, autoCount))
+        Amount amount = new Amount(1000);
+        assertThatThrownBy(() -> new PurchaseLottoCounts(manualCount, amount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -21,8 +21,8 @@ public class PurchaseLottoCountsTest {
     @Test
     void 자동_구매_개수_음수() {
         int manualCount = 3;
-        int autoCount = -1;
-        assertThatThrownBy(() -> new PurchaseLottoCounts(manualCount, autoCount))
+        Amount amount = new Amount(2000);
+        assertThatThrownBy(() -> new PurchaseLottoCounts(manualCount, amount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
