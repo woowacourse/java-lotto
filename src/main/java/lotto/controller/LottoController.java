@@ -1,12 +1,15 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumberAutoStrategy;
-import lotto.domain.LottoNumberManualStrategy;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketAutoStrategy;
+import lotto.domain.LottoTicketStrategy;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoTicketsDTO;
+import lotto.domain.ManualLottoTicketsGenerator;
 import lotto.domain.MoneyManager;
 import lotto.domain.Ranks;
 import lotto.domain.WinningNumbers;
@@ -53,13 +56,14 @@ public class LottoController {
     }
 
     private LottoTickets createLottoTickets(int manualLottoCount, int autoLottoCount) {
-        return createManualLottoTickets(manualLottoCount).combine(createAutoLottoTickets(autoLottoCount));
+        return createManualLottoTickets(manualLottoCount)
+                .combine(createAutoLottoTickets(autoLottoCount, new LottoTicketAutoStrategy()));
     }
 
     private LottoTickets createManualLottoTickets(int manualLottoCount) {
         try {
-            return LottoTickets.create(
-                    LottoNumberManualStrategy.generateManualLottoNumbers(
+            return new LottoTickets(
+                    ManualLottoTicketsGenerator.createLottoNumbers(
                             InputView.requestManualLottoNumbers(manualLottoCount)
                     ));
         } catch (RuntimeException exception) {
@@ -68,9 +72,12 @@ public class LottoController {
         }
     }
 
-    private LottoTickets createAutoLottoTickets(int autoLottoCount) {
-        return LottoTickets
-                .create(LottoNumberAutoStrategy.generateAutoLottoNumber(autoLottoCount));
+    private LottoTickets createAutoLottoTickets(int autoLottoCount, LottoTicketStrategy lottoTicketGenerator) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < autoLottoCount; i++) {
+            lottoTickets.add(lottoTicketGenerator.generate());
+        }
+        return new LottoTickets(lottoTickets);
     }
 
     private WinningNumbers getWinningNumbersAndBonusNumber() {
@@ -92,7 +99,8 @@ public class LottoController {
 
     public void executeAutoLotto() {
         MoneyManager moneyManager = getMoney();
-        LottoTickets lottoTickets = createAutoLottoTickets(moneyManager.getPossibleLottoCount());
+        LottoTickets lottoTickets =
+                createAutoLottoTickets(moneyManager.getPossibleLottoCount(), new LottoTicketAutoStrategy());
 
         OutputView.displaySingleLottoCount(moneyManager.getPossibleLottoCount());
         OutputView.displayLottoTickets(new LottoTicketsDTO(lottoTickets));
