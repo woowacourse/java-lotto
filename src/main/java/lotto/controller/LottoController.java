@@ -29,7 +29,7 @@ public class LottoController {
 
     public LottoResultDto matchLottoTickets(List<Integer> lottoNumbers, int bonusNumber) {
         WinningLotto winningLotto = new WinningLotto(lottoNumbers, bonusNumber);
-        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets.getRanksWithWinningNumbers(winningLotto));
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets.getRanksBy(winningLotto));
         return LottoResultDto.from(lottoStatistics);
     }
 

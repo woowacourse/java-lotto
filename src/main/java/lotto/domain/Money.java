@@ -17,7 +17,7 @@ public class Money {
 
     public Money(int money) {
         this.inputMoney = money;
-        validateNegative();
+        validateIsNegative();
     }
 
     public Money decrease(int price, int size) {
@@ -45,7 +45,7 @@ public class Money {
         }
     }
 
-    private void validateNegative() {
+    private void validateIsNegative() {
         if (inputMoney < ZERO) {
             throw new RuntimeException(ERROR_NEGATIVE);
         }
