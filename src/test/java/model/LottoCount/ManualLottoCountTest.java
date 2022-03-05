@@ -1,4 +1,4 @@
-package model.totalmoney;
+package model.LottoCount;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

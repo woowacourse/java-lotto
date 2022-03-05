@@ -17,16 +17,16 @@ public class LottoMachineInitializer {
 
     public LottoMachine initLottoMachine() {
         final LottoMachine lottoMachine = new LottoMachine();
-        inputPurchaseMoneyAndManualLottoCount(lottoMachine);
+        insertPurchaseMoneyAndManualLottoCountInLottoMachine(lottoMachine);
         purchaseLottos(lottoMachine);
         return lottoMachine;
     }
 
-    private void inputPurchaseMoneyAndManualLottoCount(final LottoMachine lottoMachine) {
+    private void insertPurchaseMoneyAndManualLottoCountInLottoMachine(final LottoMachine lottoMachine) {
         final int purchaseMoney = inputView.inputPurchaseMoney();
         final int manualLottoCount = inputView.inputManualLottoCount();
 
-        lottoMachine.insertTotalPurchaseMoney(purchaseMoney, manualLottoCount);
+        lottoMachine.makeTotalLottoCountToPurchase(purchaseMoney, manualLottoCount);
     }
 
     private void purchaseLottos(final LottoMachine lottoMachine) {

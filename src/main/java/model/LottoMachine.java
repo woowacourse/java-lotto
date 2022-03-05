@@ -5,34 +5,34 @@ import java.util.List;
 import model.lottonumber.Lotto;
 import model.lottonumber.Lottos;
 import model.lottonumber.WinningNumbers;
-import model.totalmoney.TotalPurchaseMoney;
+import model.LottoCount.TotalLottoCount;
 import model.winningresult.WinningResult;
 
 public class LottoMachine {
 
+    private TotalLottoCount totalLottoCount;
     private Lottos lottos;
-    private TotalPurchaseMoney totalPurchaseMoney;
 
-    public void insertTotalPurchaseMoney(final int totalPurchaseMoney, final int manualLottoCount) {
-        this.totalPurchaseMoney = new TotalPurchaseMoney(totalPurchaseMoney, manualLottoCount);
+    public void makeTotalLottoCountToPurchase(final int purchaseMoney, final int manualLottoCount) {
+        this.totalLottoCount = new TotalLottoCount(purchaseMoney, manualLottoCount);
     }
 
     public void purchaseLottos(final List<Lotto> manualLottos) {
-        int autoLottoCount = totalPurchaseMoney.getAutoLottoCount();
+        int autoLottoCount = totalLottoCount.getAutoCount();
 
         lottos = new Lottos(manualLottos, autoLottoCount);
     }
 
     public int sendManualLottoCount() {
-        return totalPurchaseMoney.getManualLottoCount();
+        return totalLottoCount.getManualCount();
     }
 
     public int sendAutoLottoCount() {
-        return totalPurchaseMoney.getAutoLottoCount();
+        return totalLottoCount.getAutoCount();
     }
 
     public int sendTotalPurchaseLottoCount() {
-        return totalPurchaseMoney.getTotalPurchaseLottoCount();
+        return totalLottoCount.getTotalCount();
     }
 
     public List<Lotto> sendLottosInMachine() {

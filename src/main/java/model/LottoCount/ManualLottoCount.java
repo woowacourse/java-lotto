@@ -1,7 +1,7 @@
-package model.totalmoney;
+package model.LottoCount;
 
 public class ManualLottoCount {
-    private static final String INPUT_MANUAL_LOTTO_COUNT_NEGATIVE_MESSAGE = "[ERROR] 입력한 수동 구매 로또 개수가 음수입니다.";
+    private static final String NEGATIVE_MANUAL_COUNT_MESSAGE = "[ERROR] 입력한 수동 구매 로또 개수가 음수입니다.";
 
     private final int count;
 
@@ -16,7 +16,7 @@ public class ManualLottoCount {
 
     private void checkCountIsNegative(final int count) {
         if (count < 0) {
-            throw new IllegalArgumentException(INPUT_MANUAL_LOTTO_COUNT_NEGATIVE_MESSAGE);
+            throw new IllegalArgumentException(NEGATIVE_MANUAL_COUNT_MESSAGE);
         }
     }
 

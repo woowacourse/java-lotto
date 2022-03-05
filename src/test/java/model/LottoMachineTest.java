@@ -17,7 +17,7 @@ class LottoMachineTest {
     @DisplayName("투입금액으로 totalPurchaseMoney객체를 생성하는지 확인한다.")
     void insertTotalPurchaseMoney() {
         LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.insertTotalPurchaseMoney(30000, 3);
+        lottoMachine.makeTotalLottoCountToPurchase(30000, 3);
 
         assertThat(lottoMachine.sendTotalPurchaseLottoCount()).isEqualTo(30);
         assertThat(lottoMachine.sendAutoLottoCount()).isEqualTo(27);
@@ -32,7 +32,7 @@ class LottoMachineTest {
         lottos.add(new Lotto(Arrays.asList(1, 7, 3, 4, 32, 6)));
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        lottoMachine.insertTotalPurchaseMoney(30000, 0);
+        lottoMachine.makeTotalLottoCountToPurchase(30000, 0);
         lottoMachine.purchaseLottos(lottos);
 
         assertThat(lottoMachine.sendLottosInMachine().size()).isEqualTo(32);
