@@ -11,7 +11,8 @@ public final class WinningResult {
     private final Map<Ranking, Integer> value;
 
     public WinningResult(List<Ranking> rankings) {
-        value = initialMap(rankings);
+        List<Ranking> copiedRankings = List.copyOf(rankings);
+        value = initialMap(copiedRankings);
     }
 
     private Map<Ranking, Integer> initialMap(List<Ranking> rankings) {

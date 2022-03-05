@@ -20,7 +20,8 @@ public class LottoTickets {
     }
 
     public static LottoTickets generateRandomWithManualTickets(List<LottoTicket> manualLottoTickets, int count) {
-        return new LottoTickets(manualLottoTickets, count);
+        List<LottoTicket> copiedManualLottoTickets = List.copyOf(manualLottoTickets);
+        return new LottoTickets(copiedManualLottoTickets, count);
     }
 
     public WinningResult calculateWinningStatistic(WinningNumbers winningNumbers) {
