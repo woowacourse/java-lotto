@@ -17,9 +17,8 @@ public class ManualLottoController {
 
     public void run() {
         Amount amount = createAmount();
-        int manualTicketsCount = InputView.requestManualTicketCount();
-        PurchaseLottoCounts purchaseLottoCounts = new PurchaseLottoCounts(manualTicketsCount, amount);
-        
+        PurchaseLottoCounts purchaseLottoCounts = createPurchaseLottoCounts(amount);
+
         Tickets tickets = makeTickets(purchaseLottoCounts);
         OutputView.printTicketCount(purchaseLottoCounts);
         OutputView.printTickets(tickets);
@@ -27,17 +26,6 @@ public class ManualLottoController {
         LottoResults results = LottoResults.of(createWinningNumbers(), tickets);
         OutputView.printResult(results);
         OutputView.printYield(amount.getYield(results.getProfit()));
-    }
-
-    private Tickets makeTickets(PurchaseLottoCounts purchaseLottoCounts) {
-        try {
-            Tickets manualTickets = createManualTicket(purchaseLottoCounts.getManualCount());
-            manualTickets.addAutoTickets(purchaseLottoCounts.getAutoCount(), new RandomLottoNumbersGenerator());
-            return manualTickets;
-        } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
-            return makeTickets(purchaseLottoCounts);
-        }
     }
 
     private Amount createAmount() {
@@ -49,9 +37,24 @@ public class ManualLottoController {
         }
     }
 
-    private static void checkCountRange(int maximumTicketCount, int inputCount) {
-        if (inputCount < 0 || inputCount > maximumTicketCount) {
-            throw new IllegalArgumentException("구매할 로또 수를 다시 입력해주세요.");
+    private PurchaseLottoCounts createPurchaseLottoCounts(Amount amount) {
+        try {
+            int manualTicketsCount = InputView.requestManualTicketCount();
+            return new PurchaseLottoCounts(manualTicketsCount, amount);
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            return createPurchaseLottoCounts(amount);
+        }
+    }
+
+    private Tickets makeTickets(PurchaseLottoCounts purchaseLottoCounts) {
+        try {
+            Tickets manualTickets = createManualTicket(purchaseLottoCounts.getManualCount());
+            manualTickets.addAutoTickets(purchaseLottoCounts.getAutoCount(), new RandomLottoNumbersGenerator());
+            return manualTickets;
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            return makeTickets(purchaseLottoCounts);
         }
     }
 
