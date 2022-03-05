@@ -1,5 +1,7 @@
 package lotto.domain.lottonumbergenerator;
 
+import static lotto.domain.LottoNumber.MAXIMUM_RANGE;
+import static lotto.domain.LottoNumber.MINIMUM_RANGE;
 import static lotto.domain.LottoTicket.LOTTO_NUMBER_SIZE;
 
 import java.util.ArrayList;
@@ -11,13 +13,12 @@ import lotto.domain.LottoNumber;
 
 public class LottoNumberAutoGenerator implements LottoNumberGenerator {
 
-    private static final int MINIMUM_RANGE = 1;
-    private static final int MAXIMUM_RANGE = 45;
+    private static final List<Integer> numbers;
 
-    private final List<LottoNumber> lottoNumbers;
-
-    public LottoNumberAutoGenerator() {
-        lottoNumbers = createLottoNumbers();
+    static {
+        numbers = IntStream.rangeClosed(MINIMUM_RANGE, MAXIMUM_RANGE)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -29,16 +30,16 @@ public class LottoNumberAutoGenerator implements LottoNumberGenerator {
         return allLottoNumbers;
     }
 
-    private List<LottoNumber> createLottoNumbers() {
-        return IntStream.rangeClosed(MINIMUM_RANGE, MAXIMUM_RANGE)
-                .mapToObj(LottoNumber::new)
+    private List<LottoNumber> getRandomLottoNumbers() {
+        List<Integer> numbers = createRandomNumbers();
+        return numbers.stream()
+                .map(LottoNumber::valueOf)
+                .sorted(LottoNumber::compareTo)
                 .collect(Collectors.toList());
     }
 
-    private List<LottoNumber> getRandomLottoNumbers() {
-        Collections.shuffle(lottoNumbers);
-        List<LottoNumber> numbers = lottoNumbers.subList(0, LOTTO_NUMBER_SIZE);
-        Collections.sort(numbers);
-        return new ArrayList<>(numbers);
+    private List<Integer> createRandomNumbers() {
+        Collections.shuffle(numbers);
+        return numbers.subList(0, LOTTO_NUMBER_SIZE);
     }
 }

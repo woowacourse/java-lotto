@@ -20,7 +20,7 @@ class WinningNumbersTest {
     @Test
     void 당첨번호가_서로_중복인_경우() {
         assertThatThrownBy(
-                () -> new WinningNumbers(toLottoNumbers(Arrays.asList(1, 1, 3, 4, 5, 6)), new LottoNumber(7)))
+                () -> new WinningNumbers(toLottoNumbers(Arrays.asList(1, 1, 3, 4, 5, 6)), LottoNumber.valueOf(7)))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("당첨 번호가 서로 중복되었습니다.");
     }
@@ -36,21 +36,21 @@ class WinningNumbersTest {
     @Test
     void 보너스_볼_숫자가_지난_주_당첨_번호와_중복인_경우() {
         assertThatThrownBy(
-                () -> new WinningNumbers(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(1)))
+                () -> new WinningNumbers(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.valueOf(1)))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("지난주 당첨 번호와 중복되는 숫자입니다.");
     }
 
     private static Stream<Arguments> provideWinningNumbers() {
         return Stream.of(
-                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7)), new LottoNumber(7)),
-                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)), new LottoNumber(7))
+                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7)), LottoNumber.valueOf(7)),
+                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5)), LottoNumber.valueOf(7))
         );
     }
 
     private static List<LottoNumber> toLottoNumbers(List<Integer> integers) {
         return integers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 }

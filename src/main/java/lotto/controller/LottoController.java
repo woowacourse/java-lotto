@@ -45,12 +45,12 @@ public class LottoController {
     }
 
     private LottoNumber getBonusNumber(int lottoNumber) {
-        return new LottoNumber(lottoNumber);
+        return LottoNumber.valueOf(lottoNumber);
     }
 
     private List<LottoNumber> getWinningNumbers(List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 }

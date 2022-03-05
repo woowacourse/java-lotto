@@ -47,19 +47,19 @@ class LottoTicketTest {
 
     private static List<LottoNumber> toLottoNumbers(List<Integer> integers) {
         return integers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 
     private static Stream<Arguments> provideLottoData() {
         return Stream.of(
-                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7),
+                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.valueOf(7),
                         toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
                         Rank.FIRST),
-                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7),
+                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.valueOf(7),
                         toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)),
                         Rank.THIRD),
-                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(8),
+                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.valueOf(8),
                         toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)),
                         Rank.SECOND)
         );
