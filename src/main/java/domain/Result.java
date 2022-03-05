@@ -11,14 +11,13 @@ public final class Result {
 	private final Map<Rank, Integer> rankResult;
 	private final double returnRate;
 
-	private Result(final Lotteries lotteries, final WinningLottery winningLottery, final NumOfLottery numOfLottery) {
+	private Result(final Lotteries lotteries, final WinningLottery winningLottery) {
 		this.rankResult = makeWinner(lotteries, winningLottery);
-		this.returnRate = makeReturnRate(numOfLottery);
+		this.returnRate = makeReturnRate(lotteries.size());
 	}
 
-	public static Result makeResult(final Lotteries lotteries, final WinningLottery winningLottery
-		, final NumOfLottery numOfLottery) {
-		return new Result(lotteries, winningLottery, numOfLottery);
+	public static Result makeResult(final Lotteries lotteries, final WinningLottery winningLottery) {
+		return new Result(lotteries, winningLottery);
 	}
 
 	public Map<Rank, Integer> getRankResult() {
@@ -33,9 +32,9 @@ public final class Result {
 		return lotteries.getTheNumberOfWinners(winningLottery);
 	}
 
-	private double makeReturnRate(final NumOfLottery numOfLottery) {
+	private double makeReturnRate(final int theNumberOfLottery) {
 		final int totalReturn = getTotalReturn();
-		return calculateReturnRate(totalReturn, numOfLottery.getNumOfTotalLottery());
+		return calculateReturnRate(totalReturn, theNumberOfLottery);
 	}
 
 	private int getTotalReturn() {

@@ -58,4 +58,8 @@ public final class Lotteries {
 		);
 		return new Lotteries(lotteries);
 	}
+
+	public int size() {
+		return lotteries.size();
+	}
 }

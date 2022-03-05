@@ -64,7 +64,7 @@ public class LotteryGameController {
 	}
 
 	private void makeResult(final Lotteries lotteries, final WinningLottery winningLottery) {
-		final Result result = Result.makeResult(lotteries, winningLottery, lotteryGame.getTheNumberOfLottery());
+		final Result result = Result.makeResult(lotteries, winningLottery);
 		outputView.printStatistics(result);
 	}
 
