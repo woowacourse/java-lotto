@@ -11,22 +11,29 @@ import lotto.domain.Ranking;
 import lotto.domain.WinningResult;
 
 public class OutputView {
-    public static final String OPEN_BRACKET = "[";
-    public static final String CLOSE_BRACKET = "]";
-    public static final String BLANK = " ";
-    public static final String DELIMITER = ",";
-    public static final String TICKET_PURCHASE_SENTENCE = "개를 구매했습니다.";
-    public static final String LINE_SEPARATOR = System.lineSeparator();
+    public static final String DELIMITER = ", ";
+
+    public static final String TICKET_PURCHASE_SENTENCE_FORMAT = "수동으로 %d장, 자동으로 %d장을 구매했습니다.%n";
+    public static final String JOIN_LIST_FORMAT = "[%s]";
+    public static final String CORRECT_COUNT_FORMAT = "%d개 일치";
+    public static final String CORRECT_BONUS_BALL = ", 보너스 볼 일치";
+    public static final String WINNING_PRICE_AND_WINNING_COUNT_FORMAT = "(%d원)- %d개%n";
+    public static final String WINNING_RESULT_TITLE = "당첨 통계";
+    public static final String WINNING_RESULT_SEPERATOR = "---------";
+    public static final String PROFIT_SENTENCE_FORMAT = "총 수익률은 %.2f입니다.%n";
+
+    private static final String INPUT_MANUAL_LOTTO = "수동으로 구매할 번호를 입력해 주세요. (앞으로 %d회)%n";
+    private static final String INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 
     private OutputView() {
     }
 
-    public static void printTicketCount(int ticketCount) {
-        System.out.println(ticketCount + TICKET_PURCHASE_SENTENCE);
+    public static void printTicketCount(int manualTicketCount, int autoTicketCount) {
+        System.out.printf(TICKET_PURCHASE_SENTENCE_FORMAT, manualTicketCount, autoTicketCount);
     }
 
     public static void printTicket(LottoTicket lottoTicket) {
-        for (LottoNumbers lottoNumbers : lottoTicket.getLottoTickets()) {
+        for (LottoNumbers lottoNumbers : lottoTicket.getLottoTicket()) {
             List<LottoNumber> lottoNumberList = lottoNumbers.getLottoNumbers();
             String sentence = joinList(convertToStringList(lottoNumberList));
             System.out.println(sentence);
@@ -34,14 +41,14 @@ public class OutputView {
     }
 
     private static String joinList(List<String> list) {
-        String str = String.join(DELIMITER + BLANK, list);
-        return String.format("%s%s%s", OPEN_BRACKET, str, CLOSE_BRACKET);
+        String str = String.join(DELIMITER, list);
+        return String.format(JOIN_LIST_FORMAT, str);
     }
 
     private static List<String> convertToStringList(List<LottoNumber> lottoNumberList) {
         return lottoNumberList.stream()
-                .sorted(Comparator.comparingInt(LottoNumber::toInt))
-                .map(lottoNumber -> Integer.toString(lottoNumber.toInt()))
+                .sorted(Comparator.comparingInt(LottoNumber::getValue))
+                .map(lottoNumber -> Integer.toString(lottoNumber.getValue()))
                 .collect(Collectors.toList());
     }
 
@@ -59,34 +66,41 @@ public class OutputView {
     private static List<Map.Entry<Ranking, Integer>> getWinningResultEntryList(WinningResult winningResult) {
         return winningResult.getWinningResult().entrySet()
                 .stream()
-                .filter(entry -> entry.getKey() != Ranking.DEFAULT)
+                .filter(entry -> entry.getKey() != Ranking.NONE)
                 .sorted(Comparator.comparingInt(a -> a.getKey().getPrize()))
                 .collect(Collectors.toList());
     }
 
     private static void generateResultContent(Ranking ranking, int count, StringBuilder stringBuilder) {
-        String countSentence = String.format("%d개 일치", ranking.getCount());
+        String countSentence = String.format(CORRECT_COUNT_FORMAT, ranking.getCount());
         stringBuilder.append(countSentence);
 
         if (ranking.getHasBonusBall()) {
-            stringBuilder.append(", 보너스 볼 일치");
+            stringBuilder.append(CORRECT_BONUS_BALL);
         }
 
-        String str = String.format("(%d원)- %d개%s", ranking.getPrize(), count, LINE_SEPARATOR);
+        String str = String.format(WINNING_PRICE_AND_WINNING_COUNT_FORMAT, ranking.getPrize(), count);
         stringBuilder.append(str);
     }
 
     public static void printResultIntro() {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        System.out.println(WINNING_RESULT_TITLE);
+        System.out.println(WINNING_RESULT_SEPERATOR);
     }
 
     public static void printProfit(double profit) {
-        String sentence = String.format("총 수익률은 %.2f입니다.", profit);
-        System.out.println(sentence);
+        System.out.printf(PROFIT_SENTENCE_FORMAT, profit);
     }
 
     public static void printException(Exception exception) {
         System.out.println(exception.getMessage());
+    }
+
+    public static void printInputManualTicketSentence(int count) {
+        System.out.printf(INPUT_MANUAL_LOTTO, count);
+    }
+
+    public static void printInputWinningTicketSentence() {
+        System.out.println(INPUT_WINNING_NUMBERS);
     }
 }

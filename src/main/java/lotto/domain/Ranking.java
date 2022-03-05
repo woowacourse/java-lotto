@@ -3,12 +3,12 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Ranking {
-    FIRST(2000000000, 6, false),
-    SECOND(30000000, 5, true),
-    THIRD(1500000, 5, false),
-    FOURTH(50000, 4, false),
-    FIFTH(5000, 3, false),
-    DEFAULT(0, 0, false);
+    FIRST(2000_000_000, 6, false),
+    SECOND(30_000_000, 5, true),
+    THIRD(1_500_000, 5, false),
+    FOURTH(50_000, 4, false),
+    FIFTH(5_000, 3, false),
+    NONE(0, 0, false);
 
     private final int prize;
     private final int count;
@@ -20,11 +20,21 @@ public enum Ranking {
         this.hasBonusNumber = hasBonusNumber;
     }
 
-    public static Ranking findRanking(int cnt, boolean hasBonusNumber) {
+    public static Ranking findRanking(int count, boolean hasBonusNumber) {
         return Arrays.stream(Ranking.values())
-                .filter(ranking -> ranking.count == cnt && ranking.hasBonusNumber == hasBonusNumber)
+                .filter(ranking -> checkCountAndBonusNumber(ranking, count, hasBonusNumber))
                 .findAny()
-                .orElse(DEFAULT);
+                .orElse(NONE);
+    }
+
+    private static boolean checkCountAndBonusNumber(Ranking ranking, int count, boolean hasBonusNumber) {
+        if (ranking.count != count) {
+            return false;
+        }
+        if (count == SECOND.getCount()) {
+            return ranking.hasBonusNumber == hasBonusNumber;
+        }
+        return true;
     }
 
     public long multiple(Integer count) {

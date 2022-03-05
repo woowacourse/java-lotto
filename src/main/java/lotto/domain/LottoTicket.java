@@ -9,27 +9,41 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
-    private final List<LottoNumbers> lottoTickets = new ArrayList<>();
+    private final List<LottoNumbers> lottoTicket;
 
-    public LottoTicket(int count) {
-        generateTickets(count);
+    private LottoTicket(final List<LottoNumbers> lottoTicket) {
+        this.lottoTicket = lottoTicket;
     }
 
-    private void generateTickets(int count) {
+    public static LottoTicket createAutoLottoTicket(int count) {
+        return new LottoTicket(generateTickets(count));
+    }
+
+    private static List<LottoNumbers> generateTickets(int count) {
+        List<LottoNumbers> lottoTicket = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottoTickets.add(new LottoNumbers());
+            lottoTicket.add(new LottoNumbers());
         }
+        return lottoTicket;
     }
 
-    public List<LottoNumbers> getLottoTickets() {
-        return Collections.unmodifiableList(lottoTickets);
+    public static LottoTicket createManualLottoTicket(List<LottoNumbers> lottoTicket) {
+        return new LottoTicket(lottoTicket);
+    }
+
+    public List<LottoNumbers> getLottoTicket() {
+        return Collections.unmodifiableList(lottoTicket);
     }
 
     public WinningResult calculateWinningStatistic(WinningNumbers winningNumbers) {
-        List<Ranking> rankings = lottoTickets.stream()
+        List<Ranking> rankings = lottoTicket.stream()
                 .map(winningNumbers::calculateRanking)
                 .filter(Objects::nonNull)
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
         return new WinningResult(rankings);
+    }
+
+    public void addLottoTicket(LottoTicket otherLottoTicket) {
+        lottoTicket.addAll(otherLottoTicket.getLottoTicket());
     }
 }

@@ -1,29 +1,25 @@
 package lotto.domain;
 
-import java.util.stream.IntStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LottoNumber {
-    private static final int MIN = 1;
-    private static final int MAX = 45;
+    protected static final int MIN = 1;
+    protected static final int MAX = 45;
 
-    private static final String NUMBER_RANGE_ERROR = "로또 숫자는 " + MIN + " 이상 " + MAX + " 이하의 숫자만 가능합니다.";
+    private static final String NUMBER_RANGE_ERROR = String.format("로또 숫자는 %d 이상 %d 이하의 숫자만 가능합니다.", MIN, MAX);
 
-    private static final LottoNumber[] cacheLottoNumber = new LottoNumber[MAX + 1];
+    private static final Map<Integer, LottoNumber> cacheLottoNumber = new HashMap<>();
 
-    private final int number;
+    private final int value;
 
-    static {
-        IntStream.range(MIN, MAX + 1)
-                .forEach(i -> cacheLottoNumber[i] = new LottoNumber(i));
-    }
-
-    private LottoNumber(int number) {
-        this.number = number;
+    private LottoNumber(int value) {
+        this.value = value;
     }
 
     public static LottoNumber of(int number) {
         validateNumber(number);
-        return cacheLottoNumber[number];
+        return generateLottoNumber(number);
     }
 
     private static void validateNumber(int number) {
@@ -32,14 +28,42 @@ public class LottoNumber {
         }
     }
 
-    public int toInt() {
-        return number;
+    private static LottoNumber generateLottoNumber(int number) {
+        LottoNumber lottoNumber = cacheLottoNumber.get(number);
+        if (lottoNumber == null) {
+            lottoNumber = new LottoNumber(number);
+            cacheLottoNumber.put(number, lottoNumber);
+        }
+        return lottoNumber;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LottoNumber)) {
+            return false;
+        }
+
+        LottoNumber that = (LottoNumber) o;
+
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return value;
     }
 
     @Override
     public String toString() {
         return "LottoNumber{" +
-                "number=" + number +
+                "number=" + value +
                 '}';
     }
 }

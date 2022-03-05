@@ -1,9 +1,12 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import lotto.domain.LottoAmount;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
+import lotto.domain.ManualLottoCount;
 import lotto.domain.WinningNumbers;
 import lotto.domain.WinningResult;
 import lotto.view.InputView;
@@ -13,7 +16,8 @@ public class LottoController {
     public void start() {
         LottoAmount amount = inputAmount();
 
-        LottoTicket lottoTicket = buyTickets(amount);
+        ManualLottoCount manualLottoCount = inputManualLottoCount(amount);
+        LottoTicket lottoTicket = buyTicket(amount, manualLottoCount);
 
         WinningNumbers winningNumbers = createWinningNumbers();
 
@@ -31,37 +35,68 @@ public class LottoController {
         }
     }
 
-    private LottoTicket buyTickets(LottoAmount amount) {
-        int ticketCount = amount.calculateLottoCount();
-        OutputView.printTicketCount(ticketCount);
+    private ManualLottoCount inputManualLottoCount(LottoAmount amount) {
+        try {
+            return new ManualLottoCount(InputView.inputTryCount(), amount.calculateLottoCount());
+        } catch (IllegalArgumentException e) {
+            OutputView.printException(e);
+            return inputManualLottoCount(amount);
+        }
+    }
 
-        LottoTicket lottoTicket = new LottoTicket(ticketCount);
-        OutputView.printTicket(lottoTicket);
+    private LottoTicket buyTicket(LottoAmount amount, ManualLottoCount manualLottoCount) {
+        int manualTicketCount = manualLottoCount.getValue();
+        int autoTicketCount = amount.calculateLottoCount() - manualTicketCount;
+
+        LottoTicket lottoTicket = LottoTicket.createAutoLottoTicket(autoTicketCount);
+
+        if (manualTicketCount != 0) {
+            lottoTicket.addLottoTicket(buyManualTicket(manualLottoCount));
+        }
+
+        printTickets(manualTicketCount, autoTicketCount, lottoTicket);
         return lottoTicket;
     }
 
+    private LottoTicket buyManualTicket(ManualLottoCount manualLottoCount) {
+        List<LottoNumbers> manualTickets = new ArrayList<>();
+        int tryCount = manualLottoCount.getValue();
+
+        for (int i = tryCount; i > 0; i--) {
+            OutputView.printInputManualTicketSentence(i);
+            manualTickets.add(inputLottoNumbers());
+        }
+        return LottoTicket.createManualLottoTicket(manualTickets);
+    }
+
+    private void printTickets(int manualTryCount, int autoTryCount, LottoTicket lottoTicket) {
+        OutputView.printTicketCount(manualTryCount, autoTryCount);
+        OutputView.printTicket(lottoTicket);
+    }
+
     private WinningNumbers createWinningNumbers() {
-        LottoNumbers inputLottoNumbers = getInputLottoNumbers();
-        LottoNumber bonusNumber = getBonusNumber();
+        OutputView.printInputWinningTicketSentence();
+        LottoNumbers inputLottoNumbers = inputLottoNumbers();
+        LottoNumber bonusNumber = inputBonusNumber();
 
         return getWinningNumbers(inputLottoNumbers, bonusNumber);
     }
 
-    private LottoNumbers getInputLottoNumbers() {
+    private LottoNumbers inputLottoNumbers() {
         try {
-            return new LottoNumbers(InputView.inputWinningNumbers());
+            return new LottoNumbers(InputView.inputLottoNumbers());
         } catch (IllegalArgumentException e) {
             OutputView.printException(e);
-            return getInputLottoNumbers();
+            return inputLottoNumbers();
         }
     }
 
-    private LottoNumber getBonusNumber() {
+    private LottoNumber inputBonusNumber() {
         try {
             return LottoNumber.of(InputView.inputBonusBall());
         } catch (IllegalArgumentException e) {
             OutputView.printException(e);
-            return getBonusNumber();
+            return inputBonusNumber();
         }
     }
 
@@ -70,7 +105,7 @@ public class LottoController {
             return new WinningNumbers(lottoNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {
             OutputView.printException(e);
-            return getWinningNumbers(lottoNumbers, getBonusNumber());
+            return getWinningNumbers(lottoNumbers, inputBonusNumber());
         }
     }
 
