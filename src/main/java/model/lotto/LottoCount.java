@@ -21,7 +21,7 @@ public class LottoCount {
 		}
 	}
 
-	public void useCountForPassive(int count) {
+	public void useCountForManual(int count) {
 		checkCanMake(count);
 		this.count -= count;
 	}

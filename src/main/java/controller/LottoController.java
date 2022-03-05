@@ -29,7 +29,7 @@ public class LottoController {
 
 	private Money insertedMoney;
 	private LottoCount automaticLottoCount;
-	private LottoCount passiveLottoCount;
+	private LottoCount manualLottoCount;
 	private Lottos lottos;
 	private WinningLottoNumber winningLottoNumber;
 	private RateOfReturn rateOfReturn;
@@ -38,7 +38,7 @@ public class LottoController {
 		insertedMoney = insertMoney();
 		automaticLottoCount = new LottoCount(insertedMoney.makeMoneyToCount());
 		rateOfReturn = new RateOfReturn();
-		passiveLottoCount = inputPassiveLottoCount();
+		manualLottoCount = inputManualLottoCount();
 		lottos = makeLottos();
 		printLottos();
 		winningLottoNumber = storeWinningNumber();
@@ -58,30 +58,30 @@ public class LottoController {
 		}
 	}
 
-	private LottoCount inputPassiveLottoCount() {
+	private LottoCount inputManualLottoCount() {
 		try {
 			String count = inputView.inputPassiveLottoCount();
 			InputValidateUtils.inputBlankAndNumber(count, COUNT_BLANK_ERROR_MESSAGE, COUNT_NUMBER_ERROR_MESSAGE);
-			automaticLottoCount.useCountForPassive(Integer.parseInt(count));
+			automaticLottoCount.useCountForManual(Integer.parseInt(count));
 			return new LottoCount(Integer.parseInt(count));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
-			return inputPassiveLottoCount();
+			return inputManualLottoCount();
 		}
 	}
 
 	private Lottos makeLottos() {
 		Lottos lottos = new Lottos(automaticLottoCount);
-		lottos.add(makePassiveLottos());
+		lottos.add(makeManuaalLottos());
 		return lottos;
 	}
 
-	private List<LottoNumbers> makePassiveLottos() {
+	private List<LottoNumbers> makeManuaalLottos() {
 		List<LottoNumbers> passiveLottos = new ArrayList<>();
 		inputView.inputPassiveLottoMessage();
 
-		while (passiveLottoCount.haveRemainToMake()) {
-			passiveLottoCount.countMadeLotto();
+		while (manualLottoCount.haveRemainToMake()) {
+			manualLottoCount.countMadeLotto();
 			passiveLottos.add(makeOnePassiveLotto());
 		}
 		return passiveLottos;
@@ -98,7 +98,7 @@ public class LottoController {
 	}
 
 	private void printLottos() {
-		outputView.printLottos(passiveLottoCount.getCount(), automaticLottoCount.getCount(), lottos.getLottosDTO());
+		outputView.printLottos(manualLottoCount.getCount(), automaticLottoCount.getCount(), lottos.getLottosDTO());
 	}
 
 	private WinningLottoNumber storeWinningNumber() {
