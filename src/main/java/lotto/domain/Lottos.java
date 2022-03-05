@@ -17,10 +17,6 @@ public class Lottos {
         this.lottos = newLottos;
     }
 
-    public int getSize() {
-        return lottos.size();
-    }
-
     public List<Rank> matchRanks(LottoWinningNumbers winningLotto) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
@@ -32,8 +28,11 @@ public class Lottos {
         return ranks;
     }
 
+    public int getSize() {
+        return lottos.size();
+    }
+
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
-
 }
