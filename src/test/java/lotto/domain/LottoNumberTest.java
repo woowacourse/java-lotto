@@ -20,10 +20,10 @@ public class LottoNumberTest {
 
     @Test
     @DisplayName("조건에 부합할 때 정상적으로 보너스번호가 생성되는지 확인")
-    void Bonus_Number_Generation_Test() {
+    void Lotto_Number_Generation_Test() {
         int inputValue = 5;
-        LottoNumber bonusNumber = new LottoNumber(inputValue);
-        int number = bonusNumber.getNumber();
+        LottoNumber lottoNumber = new LottoNumber(inputValue);
+        int number = lottoNumber.getNumber();
         Assertions.assertThat(number).isEqualTo(inputValue);
 
     }
