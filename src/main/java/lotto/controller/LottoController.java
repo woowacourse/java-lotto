@@ -33,7 +33,7 @@ public class LottoController {
         WinningNumbers winningNumbers = new WinningNumbers(getWinningNumbers(lottoNumbers),
                 getBonusNumber(lottoNumber));
         LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets.getRanksWithWinningNumbers(winningNumbers));
-        return LottoResultDto.from(lottoStatistics, lottoOrder.getYield(lottoStatistics.getLottoTotalReward()));
+        return LottoResultDto.from(lottoStatistics, lottoOrder.getYield(lottoStatistics));
     }
 
     private LottoTickets getManualLottoTickets(List<List<Integer>> numbers) {

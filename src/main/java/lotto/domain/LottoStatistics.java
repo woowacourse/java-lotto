@@ -9,16 +9,16 @@ public class LottoStatistics {
     public static final int COUNT = 1;
 
     private final EnumMap<Rank, Integer> statistics;
+    private final Money reward;
 
     public LottoStatistics(List<Rank> ranks) {
         this.statistics = initializeState();
         calculateStatistics(ranks);
+        this.reward = createReward();
     }
 
-    public double getLottoTotalReward() {
-        return statistics.keySet().stream()
-                .mapToDouble(rank -> rank.calculateTotalReward(statistics.get(rank)))
-                .sum();
+    public double calculateYield(Money inputMoney) {
+        return reward.divideBy(inputMoney);
     }
 
     private EnumMap<Rank, Integer> initializeState() {
@@ -33,6 +33,13 @@ public class LottoStatistics {
         for (Rank rank : ranks) {
             statistics.merge(rank, COUNT, Integer::sum);
         }
+    }
+
+    private Money createReward() {
+        int totalReward = statistics.keySet().stream()
+                .mapToInt(rank -> rank.calculateTotalReward(statistics.get(rank)))
+                .sum();
+        return new Money(totalReward);
     }
 
     public EnumMap<Rank, Integer> getStatistics() {

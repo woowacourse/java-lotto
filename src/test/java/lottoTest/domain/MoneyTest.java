@@ -3,10 +3,7 @@ package lottoTest.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.List;
-import lotto.domain.LottoStatistics;
 import lotto.domain.Money;
-import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -41,11 +38,9 @@ class MoneyTest {
     }
 
     @Test
-    void 당첨_수익률_계산_기능_테스트() {
-        List<Rank> result = List.of(Rank.FIFTH, Rank.FOURTH);
-        LottoStatistics lottoStatistics = new LottoStatistics(result);
-        Money money = new Money(14000, LOTTO_PRICE);
-        assertThat(money.calculateYield(lottoStatistics.getLottoTotalReward())).isEqualTo(
+    void 나눗셈_계산_기능_테스트() {
+        Money money = new Money(55000);
+        assertThat(money.divideBy(new Money(14000))).isEqualTo(
                 55000 / (double) 14000);
     }
 
@@ -60,6 +55,6 @@ class MoneyTest {
         Money money = new Money(1000, LOTTO_PRICE);
         assertThatThrownBy(() -> money.decrease(LOTTO_PRICE, 2))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("구입하기에 돈이 충분하지 않습니다.");
+                .hasMessageContaining("금액은 음수일 수 없습니다.");
     }
 }

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import java.util.EnumMap;
 import java.util.List;
 import lotto.domain.LottoStatistics;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
 
@@ -25,5 +26,13 @@ class LottoStatisticsTest {
                 () -> assertThat(statistics.get(Rank.FIFTH)).isEqualTo(0),
                 () -> assertThat(statistics.get(Rank.MISS)).isEqualTo(0)
         );
+    }
+
+    @Test
+    void 당첨_수익률_계산_기능_테스트() {
+        List<Rank> result = List.of(Rank.FIFTH, Rank.FOURTH);
+        LottoStatistics lottoStatistics = new LottoStatistics(result);
+        Money money = new Money(14000);
+        assertThat(lottoStatistics.calculateYield(money)).isEqualTo(55000 / (double) 14000);
     }
 }

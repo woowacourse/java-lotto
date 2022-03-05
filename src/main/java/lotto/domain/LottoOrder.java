@@ -25,8 +25,8 @@ public class LottoOrder {
         return money.getMaximumPurchase(LOTTO_PRICE);
     }
 
-    public double getYield(double total) {
-        return money.calculateYield(total);
+    public double getYield(LottoStatistics lottoStatistics) {
+        return lottoStatistics.calculateYield(money);
     }
 
     private void validateOrderNumber() {

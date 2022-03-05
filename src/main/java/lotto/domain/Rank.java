@@ -31,7 +31,7 @@ public enum Rank {
         return getRank(matchCount);
     }
 
-    public double calculateTotalReward(Integer count) {
+    public int calculateTotalReward(Integer count) {
         return reward * count;
     }
 
