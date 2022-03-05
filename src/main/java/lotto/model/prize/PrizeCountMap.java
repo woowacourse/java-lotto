@@ -1,19 +1,11 @@
 package lotto.model.prize;
 
-import static java.util.stream.Collectors.summingInt;
-
-import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import lotto.model.Money;
 
-/*
- * 모든 등수에 대한 당첨 정보를 가지는 일급 컬렉션 Class
- */
 public class PrizeCountMap {
     private final EnumMap<Prize, Long> prizeMap;
 
@@ -23,14 +15,14 @@ public class PrizeCountMap {
 
     public static PrizeCountMap from(List<MatchResult> matchResults) {
         EnumMap<Prize, Long> prizeMap = matchResults.stream()
-                .collect(getMatchResultEnumMapCollector());
+                .collect(groupToEnumMapCollector());
         return new PrizeCountMap(prizeMap);
     }
 
-    private static Collector<MatchResult, ?, EnumMap<Prize, Long>> getMatchResultEnumMapCollector() {
+    private static Collector<MatchResult, ?, EnumMap<Prize, Long>> groupToEnumMapCollector() {
         return Collectors.groupingBy(Prize::getPrize,
-                () -> new EnumMap<>(Prize.class),
-                Collectors.counting());
+                        () -> new EnumMap<>(Prize.class),
+                        Collectors.counting());
     }
 
     public double calculateEarningRate(Money money) {
