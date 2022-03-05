@@ -2,12 +2,13 @@ package view;
 
 import java.util.List;
 import java.util.StringJoiner;
+
 import dto.RankResultDto;
 import dto.LottoDto;
 import model.rank.Rank;
 
 public class OutputView {
-    private static final String PURCHASE_LOTTO_COUNT_PRINT_FORMAT = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
+    private static final String LOTTO_COUNT_PRINT_FORMAT = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String RIGHT_COVER = "[";
     private static final String LEFT_COVER = "]";
     private static final String JOINING_DELIMITER = ", ";
@@ -17,17 +18,17 @@ public class OutputView {
     private static final String NO_PRINT_FORMAT = "";
     private static final String RATE_OF_RETURN_PRINT_FORMAT = "총 수익률은 %.2f입니다.\n";
 
-    public void printTotalPurchaseLottoCount(int manualLottoCount, int autoLottoCount) {
-        System.out.printf(PURCHASE_LOTTO_COUNT_PRINT_FORMAT, manualLottoCount, autoLottoCount);
+    public void printTotalLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.printf(LOTTO_COUNT_PRINT_FORMAT, manualLottoCount, autoLottoCount);
     }
 
-    public void printTotalLottos(final List<LottoDto> lottoDtos) {
-        lottoDtos.forEach(this::printLotto);
+    public void printTotalLottoGroupNumbers(final List<LottoDto> lottoNumberGroups) {
+        lottoNumberGroups.forEach(this::printLotto);
     }
 
-    private void printLotto(final LottoDto lottoDto) {
+    private void printLotto(final LottoDto lottoNumberGroup) {
         System.out.print(RIGHT_COVER);
-        printNumbers(lottoDto.getLottoNumbers());
+        printNumbers(lottoNumberGroup.getLottoNumbers());
         System.out.println(LEFT_COVER);
     }
 

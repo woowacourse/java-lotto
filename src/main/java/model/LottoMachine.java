@@ -30,7 +30,7 @@ public class LottoMachine {
         return totalLottoCount.getManualCount();
     }
 
-    public int sendAutoLottoCount() {
+    public int bringAutoLottoCountForPurchase() {
         return totalLottoCount.getAutoCount();
     }
 
@@ -38,7 +38,7 @@ public class LottoMachine {
         return totalLottoCount.getTotalCount();
     }
 
-    public List<Lotto> sendLottosInMachine() {
+    public List<Lotto> bringLottosForShowNumbers() {
         return lottos.getLottos();
     }
 

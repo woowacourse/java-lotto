@@ -2,6 +2,7 @@ package controller;
 
 import dto.LottoDto;
 import dto.RankResultDto;
+import java.util.ArrayList;
 import model.LottoMachine;
 import model.lottonumber.Lotto;
 import model.rank.Rank;
@@ -32,14 +33,17 @@ public class LottoController {
     private void showLottoPurchaseProcess() {
         lottoMachine = new LottoMachineInitializer(inputView).initLottoMachine();
 
-        outputView.printTotalPurchaseLottoCount(lottoMachine.bringManualLottoCountForPurchase(), lottoMachine.sendAutoLottoCount());
-        outputView.printTotalLottos(convertLottosToDtos(lottoMachine.sendLottosInMachine()));
+        outputView.printTotalLottoCount(lottoMachine.bringManualLottoCountForPurchase(),
+                lottoMachine.bringAutoLottoCountForPurchase());
+        outputView.printTotalLottoGroupNumbers(convertLottosToDtos(lottoMachine.bringLottosForShowNumbers()));
     }
 
     private List<LottoDto> convertLottosToDtos(final List<Lotto> lottos) {
-        return lottos.stream()
-                .map(lotto -> new LottoDto(lotto.getNumbers()))
-                .collect(Collectors.toUnmodifiableList());
+        List<LottoDto> lottoDtos = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            lottoDtos.add(LottoDto.of(lotto));
+        }
+        return lottoDtos;
     }
 
     private void showLottoWinningResult() {

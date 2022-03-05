@@ -2,12 +2,6 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import model.lottonumber.Lotto;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +14,7 @@ class LottoMachineTest {
         lottoMachine.makeTotalLottoCountForPurchase(30000, 3);
 
         assertThat(lottoMachine.sendTotalPurchaseLottoCount()).isEqualTo(30);
-        assertThat(lottoMachine.sendAutoLottoCount()).isEqualTo(27);
+        assertThat(lottoMachine.bringAutoLottoCountForPurchase()).isEqualTo(27);
         assertThat(lottoMachine.bringManualLottoCountForPurchase()).isEqualTo(3);
     }
 /*
