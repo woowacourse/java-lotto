@@ -12,14 +12,14 @@ public class Lottos {
 	private List<Lotto> lottoStorage;
 
 	public Lottos(LottoCount lottoCount) {
-		this.lottoStorage = store(lottoCount);
+		this.lottoStorage = makeLottos(lottoCount);
 	}
 
-	private List<Lotto> store(LottoCount lottoCount) {
+	private List<Lotto> makeLottos(LottoCount lottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
 
 		while (lottoCount.haveRemainToMake()) {
-			lottoCount.countMadeLotto();
+			lottoCount.increaseMadeLottoCount();
 			lottos.add(new Lotto(LottoNumbers.from(new RandomLottoNumbersGenerationStrategy())));
 		}
 

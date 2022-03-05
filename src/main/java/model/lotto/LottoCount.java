@@ -18,13 +18,13 @@ public class LottoCount {
 		return count > madeCount;
 	}
 
-	public void countMadeLotto() {
+	public void increaseMadeLottoCount() {
 		if (haveRemainToMake()) {
 			madeCount++;
 		}
 	}
 
-	public void useCountForManual(int count) {
+	public void deductCountForManual(int count) {
 		checkCanMake(count);
 		this.count -= count;
 	}

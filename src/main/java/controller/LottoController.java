@@ -62,7 +62,7 @@ public class LottoController {
 		try {
 			String count = inputView.inputPassiveLottoCount();
 			InputValidateUtils.inputBlankAndNumber(count, COUNT_BLANK_ERROR_MESSAGE, COUNT_NUMBER_ERROR_MESSAGE);
-			automaticLottoCount.useCountForManual(Integer.parseInt(count));
+			automaticLottoCount.deductCountForManual(Integer.parseInt(count));
 			return new LottoCount(Integer.parseInt(count));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
@@ -81,7 +81,7 @@ public class LottoController {
 		inputView.inputPassiveLottoMessage();
 
 		while (manualLottoCount.haveRemainToMake()) {
-			manualLottoCount.countMadeLotto();
+			manualLottoCount.increaseMadeLottoCount();
 			passiveLottos.add(makeOnePassiveLotto());
 		}
 		return passiveLottos;
