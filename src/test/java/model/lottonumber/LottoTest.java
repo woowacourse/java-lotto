@@ -5,22 +5,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
-import model.generator.Generator;
 import model.rank.Rank;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
-/*
-    @Test
-    @DisplayName("생성된 난수를 바탕으로 로또 번호를 생성한다.")
-    void generateLottoNumbers_GeneratorTest() {
-        final Generator generator = () -> Arrays.asList(1, 2, 13, 4, 25, 39);
-        final Lotto lotto = new Lotto(generator);
-
-        assertThat(lotto.getNumbers()).isEqualTo(Arrays.asList(1, 2, 13, 4, 25, 39));
-    }
 
     @Test
     @DisplayName("매개변수 List의 숫자를 바탕으로 로또 번호를 생성한다.")
@@ -68,8 +58,8 @@ class LottoTest {
         final int number = 7;
         final WinningNumbers winningNumbers = new WinningNumbers(numbers, number);
 
-        final Generator generator = () -> Arrays.asList(1, 32, 13, 4, 25, 39);
-        final Lotto lotto = new Lotto(generator);
+        final List<Integer> lottoNumbers = Arrays.asList(1, 2, 45, 23, 15, 19);
+        final Lotto lotto = new Lotto(lottoNumbers);
 
         assertThat(lotto.findRank(winningNumbers)).isEqualTo(Rank.NONE);
     }
@@ -81,8 +71,8 @@ class LottoTest {
         final int number = 7;
         final WinningNumbers winningNumbers = new WinningNumbers(numbers, number);
 
-        final Generator generator = () -> Arrays.asList(1, 2, 13, 4, 25, 39);
-        final Lotto lotto = new Lotto(generator);
+        final List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 23, 15, 19);
+        final Lotto lotto = new Lotto(lottoNumbers);
 
         assertThat(lotto.findRank(winningNumbers)).isEqualTo(Rank.FIFTH);
     }
@@ -94,8 +84,8 @@ class LottoTest {
         final int number = 7;
         final WinningNumbers winningNumbers = new WinningNumbers(numbers, number);
 
-        final Generator generator = () -> Arrays.asList(1, 2, 3, 4, 25, 39);
-        final Lotto lotto = new Lotto(generator);
+        final List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 15, 19);
+        final Lotto lotto = new Lotto(lottoNumbers);
 
         assertThat(lotto.findRank(winningNumbers)).isEqualTo(Rank.FOURTH);
     }
@@ -107,8 +97,8 @@ class LottoTest {
         final int number = 7;
         final WinningNumbers winningNumbers = new WinningNumbers(numbers, number);
 
-        final Generator generator = () -> Arrays.asList(1, 2, 3, 4, 39, 6);
-        final Lotto lotto = new Lotto(generator);
+        final List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 23, 4, 5);
+        final Lotto lotto = new Lotto(lottoNumbers);
 
         assertThat(lotto.findRank(winningNumbers)).isEqualTo(Rank.THIRD);
     }
@@ -120,8 +110,8 @@ class LottoTest {
         final int number = 7;
         final WinningNumbers winningNumbers = new WinningNumbers(numbers, number);
 
-        final Generator generator = () -> Arrays.asList(1, 2, 3, 4, 7, 6);
-        final Lotto lotto = new Lotto(generator);
+        final List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 5, 6, 7);
+        final Lotto lotto = new Lotto(lottoNumbers);
 
         assertThat(lotto.findRank(winningNumbers)).isEqualTo(Rank.SECOND);
     }
@@ -133,10 +123,9 @@ class LottoTest {
         final int number = 7;
         final WinningNumbers winningNumbers = new WinningNumbers(numbers, number);
 
-        final Generator generator = () -> Arrays.asList(1, 2, 4, 3, 6, 5);
-        final Lotto lotto = new Lotto(generator);
+        final List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 6, 4, 5);
+        final Lotto lotto = new Lotto(lottoNumbers);
 
         assertThat(lotto.findRank(winningNumbers)).isEqualTo(Rank.FIRST);
     }
-    */
 }

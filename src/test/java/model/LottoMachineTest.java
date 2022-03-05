@@ -13,24 +13,7 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
         lottoMachine.makeTotalLottoCountForPurchase(30000, 3);
 
-        assertThat(lottoMachine.sendTotalPurchaseLottoCount()).isEqualTo(30);
         assertThat(lottoMachine.bringAutoLottoCountForPurchase()).isEqualTo(27);
         assertThat(lottoMachine.bringManualLottoCountForPurchase()).isEqualTo(3);
     }
-/*
-    @Test
-    @DisplayName("로또를 생성하는지 확인한다.")
-    void purchaseLottos() {
-        final LottoMachine lottoMachine = new LottoMachine();
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(Arrays.asList(1, 7, 3, 4, 32, 6)));
-        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-
-        lottoMachine.makeTotalLottoCountForPurchase(30000, 0);
-        lottoMachine.purchaseLottos(lottos);
-
-        assertThat(lottoMachine.sendLottosInMachine().size()).isEqualTo(32);
-    }
-
- */
 }
