@@ -20,6 +20,12 @@ public class LottoSize {
         }
     }
 
+    public void validateLottoSizeWithMoney(Money money) {
+        if (money.getBuyableLottoSize() < size) {
+            throw new IllegalArgumentException("수동 로또의 수가 구입 금액을 넘을 수 없습니다.");
+        }
+    }
+
     public int getSize() {
         return size;
     }
