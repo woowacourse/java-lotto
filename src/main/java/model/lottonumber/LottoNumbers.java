@@ -23,19 +23,6 @@ public class LottoNumbers {
 		return new LottoNumbers(generatedLottoNumbers);
 	}
 
-	public static LottoNumbers changeFrom(List<LottoNumber> numbers) {
-		long count = numbers.stream().distinct().count();
-
-		if (numbers.size() != LOTTO_SIZE) {
-			throw new IllegalArgumentException(String.format(NUMBER_SIZE_ERROR_MESSAGE, LOTTO_SIZE));
-		}
-
-		if (count != numbers.size()) {
-			throw new IllegalArgumentException(LOTTO_NUMBER_REDUPLICATION_ERROR_MESSAGE);
-		}
-		return new LottoNumbers(numbers);
-	}
-
 	public static LottoNumbers valueOf(LottoNumbers numbers) {
 		return new LottoNumbers(numbers.getNumbers());
 	}
