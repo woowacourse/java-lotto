@@ -1,12 +1,14 @@
 package lotto.domain;
 
+import static lotto.domain.LottoOrder.LOTTO_PRICE;
+
 import java.util.EnumMap;
 import java.util.List;
 
 public class LottoStatistics {
 
-    public static final int NON_COUNT = 0;
-    public static final int COUNT = 1;
+    private static final int NON_COUNT = 0;
+    private static final int COUNT = 1;
 
     private final EnumMap<Rank, Integer> statistics;
     private final Money reward;
@@ -17,8 +19,11 @@ public class LottoStatistics {
         this.reward = createReward();
     }
 
-    public double calculateYield(Money inputMoney) {
-        return reward.divideBy(inputMoney);
+    public double getYield() {
+        int investMoney = statistics.values().stream()
+                .reduce(0, Integer::sum)
+                * LOTTO_PRICE;
+        return reward.divideBy(investMoney);
     }
 
     private EnumMap<Rank, Integer> initializeState() {

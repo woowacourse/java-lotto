@@ -29,8 +29,8 @@ public class Money {
         return inputMoney / price;
     }
 
-    public double divideBy(Money divider) {
-        return (double) inputMoney / (double) divider.inputMoney;
+    public double divideBy(int divider) {
+        return (double) inputMoney / (double) divider;
     }
 
     private void validateIsNegativeOrZero() {

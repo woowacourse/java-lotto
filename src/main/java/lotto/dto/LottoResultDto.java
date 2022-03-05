@@ -16,8 +16,8 @@ public class LottoResultDto {
         this.yield = yield;
     }
 
-    public static LottoResultDto from(LottoStatistics lottoStatistics, double yield) {
-        return new LottoResultDto(createStatistics(lottoStatistics), yield);
+    public static LottoResultDto from(LottoStatistics lottoStatistics) {
+        return new LottoResultDto(createStatistics(lottoStatistics), lottoStatistics.getYield());
     }
 
     private static Map<RankDto, Integer> createStatistics(LottoStatistics lottoStatistics) {

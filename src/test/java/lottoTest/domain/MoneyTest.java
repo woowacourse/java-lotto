@@ -1,5 +1,6 @@
 package lottoTest.domain;
 
+import static lotto.domain.LottoOrder.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -10,8 +11,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 @SuppressWarnings("NonAsciiCharacters")
 class MoneyTest {
-
-    private static final int LOTTO_PRICE = 1000;
 
     @Test
     void 최대로_구입_가능한_개수_테스트() {
@@ -40,7 +39,7 @@ class MoneyTest {
     @Test
     void 나눗셈_계산_기능_테스트() {
         Money money = new Money(55000);
-        assertThat(money.divideBy(new Money(14000))).isEqualTo(
+        assertThat(money.divideBy(14000)).isEqualTo(
                 55000 / (double) 14000);
     }
 
