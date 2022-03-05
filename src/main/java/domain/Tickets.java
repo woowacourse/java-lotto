@@ -9,7 +9,7 @@ public class Tickets {
 	private final List<Ticket> tickets;
 
 	public Tickets(final List<Ticket> tickets) {
-		this.tickets = tickets;
+		this.tickets = List.copyOf(tickets);
 	}
 
 	public List<Rank> getRanks(final WinningNumber winningNumber) {
@@ -20,7 +20,7 @@ public class Tickets {
 	}
 
 	public List<Ticket> getTickets() {
-		return Collections.unmodifiableList(tickets);
+		return tickets;
 	}
 
 	public int size() {

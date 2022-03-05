@@ -14,7 +14,7 @@ public class WinningNumber {
 	public WinningNumber(final List<Integer> winningBalls, final int bonusBall) {
 		validateWinningNumber(winningBalls, bonusBall);
 
-		this.winningBalls = winningBalls.stream()
+		this.winningBalls = List.copyOf(winningBalls).stream()
 			.map(Ball::from)
 			.collect(Collectors.toUnmodifiableList());
 

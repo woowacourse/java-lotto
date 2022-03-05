@@ -14,7 +14,7 @@ public class Ticket {
 
 	public Ticket(final List<Integer> numbers) {
 		validateBalls(numbers);
-		this.balls = makeNumbersToBalls(numbers);
+		this.balls = makeNumbersToBalls(List.copyOf(numbers));
 	}
 
 	public static void validateBalls(final List<Integer> numbers) {
