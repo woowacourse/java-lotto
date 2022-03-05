@@ -72,11 +72,11 @@ public class LottoController {
 
 	private Lottos makeLottos() {
 		Lottos lottos = new Lottos(automaticLottoCount);
-		lottos.add(makeManuaalLottos());
+		lottos.add(makeManualLottos());
 		return lottos;
 	}
 
-	private List<LottoNumbers> makeManuaalLottos() {
+	private List<LottoNumbers> makeManualLottos() {
 		List<LottoNumbers> passiveLottos = new ArrayList<>();
 		inputView.inputPassiveLottoMessage();
 
