@@ -10,6 +10,7 @@ import domain.PurchaseAmount;
 import domain.PurchaseInformation;
 import domain.Rank;
 import domain.factory.LotteryNumberFactory;
+import domain.generatestrategy.ManualLotteryGeneratorStrategy;
 import domain.generatestrategy.RandomLotteryGeneratorStrategy;
 
 public class LotteryGameController {
@@ -17,12 +18,12 @@ public class LotteryGameController {
 	private LotteryGame lotteryGame;
 
 	public LotteriesDto purchaseLotteries(final int money, final int theNumberOfManualLottery,
-			final List<List<Integer>> manalLotteries) {
+			final List<List<Integer>> manualLotteries) {
 		final PurchaseAmount purchaseAmount = new PurchaseAmount(money);
-		final PurchaseInformation purchaseInformation = new PurchaseInformation(purchaseAmount,
-			manalLotteries, theNumberOfManualLottery);
+		final PurchaseInformation purchaseInformation =
+			new PurchaseInformation(purchaseAmount, theNumberOfManualLottery);
 		lotteryGame = new LotteryGame(purchaseInformation, new RandomLotteryGeneratorStrategy(),
-			new LotteryNumberFactory());
+			new ManualLotteryGeneratorStrategy(manualLotteries, new LotteryNumberFactory()), new LotteryNumberFactory());
 		return LotteriesDto.fromEntity(lotteryGame.getLotteries());
 	}
 

@@ -7,21 +7,22 @@ import java.util.stream.Collectors;
 
 import domain.factory.LotteryNumberFactory;
 import domain.generatestrategy.LotteryGenerateStrategy;
-import domain.generatestrategy.ManualLotteryGeneratorStrategy;
 
 public class LotteryGame {
 
 	private final PurchaseInformation purchaseInformation;
-	private final LotteryGenerateStrategy lotteryGenerator;
+	private final LotteryGenerateStrategy autoLotteryGenerator;
+	private final LotteryGenerateStrategy manualLotteryGenerator;
 	private final LotteryNumberFactory lotteryNumberFactory;
 
 	private Lotteries lotteries;
 	private WinningLottery winningLottery;
 
-	public LotteryGame(final PurchaseInformation purchaseInformation, final LotteryGenerateStrategy lotteryGenerator,
-			final LotteryNumberFactory lotteryNumberFactory) {
+	public LotteryGame(final PurchaseInformation purchaseInformation, final LotteryGenerateStrategy autoLotteryGenerator,
+			final LotteryGenerateStrategy manualLotteryGenerator, final LotteryNumberFactory lotteryNumberFactory) {
 		this.purchaseInformation = purchaseInformation;
-		this.lotteryGenerator = lotteryGenerator;
+		this.autoLotteryGenerator = autoLotteryGenerator;
+		this.manualLotteryGenerator = manualLotteryGenerator;
 		this.lotteryNumberFactory = lotteryNumberFactory;
 		createLottery();
 	}
@@ -33,11 +34,10 @@ public class LotteryGame {
 	}
 
 	private void createManualLottery() {
-		final List<List<Integer>> rawManualLotteries = purchaseInformation.getManualLotteries();
+		final int theNumberOfManualLottery = purchaseInformation.getTheNumberOfManualLotteries();
 		final List<Lottery> manualLottery = new ArrayList<>();
-		for (List<Integer> rawLottery : rawManualLotteries) {
-			manualLottery.add((new ManualLotteryGeneratorStrategy(rawLottery, new LotteryNumberFactory()))
-				.getLottery());
+		for (int i = 0; i < theNumberOfManualLottery; i++) {
+			manualLottery.add(manualLotteryGenerator.getLottery());
 		}
 		lotteries.addLotteries(manualLottery);
 	}
@@ -45,7 +45,7 @@ public class LotteryGame {
 	private void createAutoLottery() {
 		final List<Lottery> createdLotteries = new ArrayList<>();
 		for (int i = 0; i < purchaseInformation.getTheNumberOfAutoPurchasedLotteries(); i++) {
-			createdLotteries.add(lotteryGenerator.getLottery());
+			createdLotteries.add(autoLotteryGenerator.getLottery());
 		}
 		lotteries.addLotteries(createdLotteries);
 	}

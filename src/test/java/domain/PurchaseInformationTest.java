@@ -22,10 +22,10 @@ public class PurchaseInformationTest {
 		@DisplayName("크면 실패")
 		void lackOfPurchaseAmount() {
 			final PurchaseAmount purchaseAmount = new PurchaseAmount(1000);
-			final List<List<Integer>> inputtedManualLotteries = new ArrayList<>();
-			inputtedManualLotteries.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+			// final List<List<Integer>> inputtedManualLotteries = new ArrayList<>();
+			// inputtedManualLotteries.add(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-			assertThatThrownBy(() -> new PurchaseInformation(purchaseAmount, inputtedManualLotteries, 2))
+			assertThatThrownBy(() -> new PurchaseInformation(purchaseAmount, 2))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("수동 구입 갯수가 구입 금액보다 많습니다");
 		}
@@ -34,12 +34,12 @@ public class PurchaseInformationTest {
 		@DisplayName("작거나 같으면 성공")
 		void enoughPurchaseAmount() {
 			final PurchaseAmount purchaseAmount = new PurchaseAmount(2000);
-			final List<List<Integer>> inputtedManualLotteries = new ArrayList<>();
-			inputtedManualLotteries.add(Arrays.asList(1, 2, 3, 4, 5, 6));
-			inputtedManualLotteries.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+			// final List<List<Integer>> inputtedManualLotteries = new ArrayList<>();
+			// inputtedManualLotteries.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+			// inputtedManualLotteries.add(Arrays.asList(1, 2, 3, 4, 5, 6));
 
 			assertThatNoException()
-				.isThrownBy(() -> new PurchaseInformation(purchaseAmount, inputtedManualLotteries, 2));
+				.isThrownBy(() -> new PurchaseInformation(purchaseAmount, 2));
 		}
 	}
 
@@ -48,13 +48,13 @@ public class PurchaseInformationTest {
 	@CsvSource(value = {"2000, 2", "2000, 0"})
 	void sumOfAutoAndManualLotteries(final int money, final int theNumberOfManualLotteries) {
 		final PurchaseAmount purchaseAmount = new PurchaseAmount(money);
-		final List<List<Integer>> inputtedManualLotteries = new ArrayList<>();
-		for (int i = 0; i < theNumberOfManualLotteries; i++) {
-			inputtedManualLotteries.add(Arrays.asList(1, 2, 3, 4, 5, 6));
-		}
+		// final List<List<Integer>> inputtedManualLotteries = new ArrayList<>();
+		// for (int i = 0; i < theNumberOfManualLotteries; i++) {
+		// 	inputtedManualLotteries.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+		// }
 
 		final PurchaseInformation purchaseInformation =
-			new PurchaseInformation(purchaseAmount, inputtedManualLotteries, theNumberOfManualLotteries);
+			new PurchaseInformation(purchaseAmount, theNumberOfManualLotteries);
 		final int actualNumber = purchaseInformation.getTheNumberOfAutoPurchasedLotteries()
 			+ theNumberOfManualLotteries;
 		final int expectedNumber = purchaseAmount.getTheNumberOfPurchasedLotteries();
@@ -62,17 +62,17 @@ public class PurchaseInformationTest {
 		assertThat(actualNumber).isEqualTo(expectedNumber);
 	}
 
-	@Test
-	@DisplayName("수동 구매한 로또가 제대로 저장되는지 확인")
-	void purchaseManualLotteries() {
-		final PurchaseAmount purchaseAmount = new PurchaseAmount(2000);
-		final List<List<Integer>> inputtedManualLotteries = new ArrayList<>();
-		inputtedManualLotteries.add(Arrays.asList(1, 2, 3, 4, 5, 6));
-		inputtedManualLotteries.add(Arrays.asList(7, 8, 9, 10, 11, 12));
-
-		final PurchaseInformation purchaseInformation = new PurchaseInformation(purchaseAmount, inputtedManualLotteries, 2);
-
-		final List<List<Integer>> actualManualLotteries = purchaseInformation.getManualLotteries();
-		assertThat(actualManualLotteries).isEqualTo(inputtedManualLotteries);
-	}
+	// @Test
+	// @DisplayName("수동 구매한 로또가 제대로 저장되는지 확인")
+	// void purchaseManualLotteries() {
+	// 	final PurchaseAmount purchaseAmount = new PurchaseAmount(2000);
+	// 	final List<List<Integer>> inputtedManualLotteries = new ArrayList<>();
+	// 	inputtedManualLotteries.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+	// 	inputtedManualLotteries.add(Arrays.asList(7, 8, 9, 10, 11, 12));
+	//
+	// 	final PurchaseInformation purchaseInformation = new PurchaseInformation(purchaseAmount, inputtedManualLotteries, 2);
+	//
+	// 	final List<List<Integer>> actualManualLotteries = purchaseInformation.getManualLotteries();
+	// 	assertThat(actualManualLotteries).isEqualTo(inputtedManualLotteries);
+	// }
 }

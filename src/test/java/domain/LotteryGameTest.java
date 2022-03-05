@@ -12,9 +12,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import domain.factory.LotteryGenerateMockFactory;
 import domain.factory.LotteryNumberFactory;
 import domain.generateStrategy.LotteryGenerateMock;
-import domain.generatestrategy.RandomLotteryGeneratorStrategy;
+import domain.generatestrategy.ManualLotteryGeneratorStrategy;
 import utils.Parser;
 
 @DisplayName("LotteryGame 테스트")
@@ -24,11 +25,7 @@ public class LotteryGameTest {
 	@ParameterizedTest(name = "{index} {displayName} lotteriesToCreate={0}")
 	@ValueSource(ints = {1, 100, 50})
 	void createLotteries(final int lotteriesToCreate) {
-		final int theNumberOfManualLotteries = lotteriesToCreate - 1;
-		final PurchaseInformation purchaseInformation = createPurchaseInformation(lotteriesToCreate,
-			theNumberOfManualLotteries);
-		final LotteryGame lotteryGame = new LotteryGame(purchaseInformation, new RandomLotteryGeneratorStrategy(),
-			new LotteryNumberFactory());
+		final LotteryGame lotteryGame = initRankingTest(lotteriesToCreate * 1000, 1);
 
 		assertThat(lotteryGame.getLotteries().size()).isEqualTo(lotteriesToCreate);
 	}
@@ -60,7 +57,11 @@ public class LotteryGameTest {
 	private LotteryGame initRankingTest(final int purchaseAmount, final int expectedRank) {
 		final PurchaseInformation purchaseInformation =
 			createPurchaseInformation(purchaseAmount / 1000, 0);
-		final LotteryGame lotteryGame = new LotteryGame(purchaseInformation,
+		final List<List<Integer>> rawManualLotteries =
+			createRawManualLotteries(purchaseAmount / 1000, expectedRank);
+		final ManualLotteryGeneratorStrategy manualLotteryGenerator =
+			new ManualLotteryGeneratorStrategy(rawManualLotteries, new LotteryNumberFactory());
+		final LotteryGame lotteryGame = new LotteryGame(purchaseInformation, manualLotteryGenerator,
 			new LotteryGenerateMock(expectedRank, purchaseAmount / 1000), new LotteryNumberFactory());
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		return lotteryGame;
@@ -68,14 +69,18 @@ public class LotteryGameTest {
 
 	private PurchaseInformation createPurchaseInformation(final int lotteriesToCreate,
 			final int theNumberOfManualLotteries) {
-		final LotteryGenerateMock lotteryGenerator = new LotteryGenerateMock(1, theNumberOfManualLotteries);
 		final PurchaseAmount purchaseAmount = new PurchaseAmount(lotteriesToCreate * 1000);
+		return new PurchaseInformation(purchaseAmount, theNumberOfManualLotteries);
+	}
+
+	private List<List<Integer>> createRawManualLotteries(final int theNumberOfManualLotteries, final int rank) {
+		final LotteryGenerateMockFactory lotteryGenerator = new LotteryGenerateMockFactory();
 		final List<List<Integer>> lotteries = new ArrayList<>();
 		for (int i = 0; i < theNumberOfManualLotteries; i++) {
-			Lottery lottery = lotteryGenerator.getLottery();
+			Lottery lottery = lotteryGenerator.of(rank);
 			lotteries.add(Parser.toIntegerList(lottery.getNumbers()));
 		}
-		return new PurchaseInformation(purchaseAmount, lotteries, theNumberOfManualLotteries);
+		return lotteries;
 	}
   
 }
