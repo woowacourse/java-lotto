@@ -21,7 +21,7 @@ public class LotteryGameTest {
 	@ValueSource(ints = {1000, 100000, 50000})
 	void create_lotteries_test(final int inputMoney) {
 		//given
-		final LotteryGame lotteryGame = LotteryGame.of(inputMoney, new LotteryGenerator(),
+		final LotteryGame lotteryGame = LotteryGame.of(inputMoney, 0, new LotteryGenerator(),
 			new LotteryNumberGenerator());
 		final int lotteriesToCreate = inputMoney / 1000;
 		//when
@@ -35,10 +35,9 @@ public class LotteryGameTest {
 	@ValueSource(ints = {3000, 100000, 50000})
 	void manual_and_auto_lotteries_test(final int inputMoney) {
 	    //given
-	    LotteryGame lotteryGame = LotteryGame.of(inputMoney, new LotteryGenerator(), new LotteryNumberGenerator());
+	    LotteryGame lotteryGame = LotteryGame.of(inputMoney, 3, new LotteryGenerator(), new LotteryNumberGenerator());
 		final int lotteriesToCreate = inputMoney / 1000;
 	    //when
-		lotteryGame = lotteryGame.putNumOfManualLottery(3);
 		Lotteries lotteries = lotteryGame.createLottery(Arrays.asList(
 			Arrays.asList(1, 2, 3, 4, 5, 6),
 			Arrays.asList(2, 3, 4, 5, 6, 7),

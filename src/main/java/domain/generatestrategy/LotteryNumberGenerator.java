@@ -26,6 +26,5 @@ public class LotteryNumberGenerator implements LotteryNumberGeneratorStrategy{
 			.limit(LOTTERY_SIZE)
 			.sorted()
 			.collect(Collectors.toList());
-
 	}
 }

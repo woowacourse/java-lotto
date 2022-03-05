@@ -32,7 +32,9 @@ public class LotteryGameController {
 
 	private void initLotteryGame() {
 		try {
-			lotteryGame = LotteryGame.of(inputMoney(), new LotteryGenerator(), new LotteryNumberGenerator());
+			final int inputMoney = inputMoney();
+			final int numOfManualLottery = inputNumOfManualLottery();
+			lotteryGame = LotteryGame.of(inputMoney, numOfManualLottery, new LotteryGenerator(), new LotteryNumberGenerator());
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
 			initLotteryGame();
@@ -40,25 +42,11 @@ public class LotteryGameController {
 	}
 
 	private Lotteries purchaseLottery() {
-		putNumOfManualLottery();
-		return createLotteries();
-	}
-
-	private void putNumOfManualLottery() {
-		try {
-			lotteryGame = lotteryGame.putNumOfManualLottery(inputNumOfManualLottery());
-		} catch (IllegalArgumentException exception) {
-			outputView.printException(exception.getMessage());
-			putNumOfManualLottery();
-		}
-	}
-
-	private Lotteries createLotteries() {
 		try {
 			return lotteryGame.createLottery(inputManualLotteryNumbers());
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
-			return createLotteries();
+			return purchaseLottery();
 		}
 	}
 

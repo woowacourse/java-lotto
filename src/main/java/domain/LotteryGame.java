@@ -17,32 +17,31 @@ public final class LotteryGame {
 	public static final int LOTTERY_PRICE = 1000;
 
 	private final NumOfLottery numOfLottery;
-	private final Money money;
 	private final LotteryGenerator lotteryGenerator;
 	private final LotteryNumberGeneratorStrategy lotteryNumberGenerator;
 
-	private LotteryGame(final Money money, final NumOfLottery numOfLottery, final LotteryGenerator lotteryGenerator,
+	private LotteryGame(final NumOfLottery numOfLottery, final LotteryGenerator lotteryGenerator,
 		final LotteryNumberGeneratorStrategy lotteryNumberGenerator) {
-		this.money = money;
 		this.numOfLottery = numOfLottery;
 		this.lotteryGenerator = lotteryGenerator;
 		this.lotteryNumberGenerator = lotteryNumberGenerator;
 	}
 
-	public static LotteryGame of(final int inputMoney, final LotteryGenerator lotteryGenerator,
+	public static LotteryGame of(final int inputMoney, final int numOfManualLottery, final LotteryGenerator lotteryGenerator,
 		LotteryNumberGeneratorStrategy lotteryNumberGenerator) {
-		Money money = new Money(inputMoney);
-		return new LotteryGame(money, NumOfLottery.from(money.divideBy(LOTTERY_PRICE)),
-			lotteryGenerator, lotteryNumberGenerator);
+		final NumOfLottery numOfLottery = getNumOfLottery(inputMoney, numOfManualLottery);
+		return new LotteryGame(numOfLottery, lotteryGenerator, lotteryNumberGenerator);
+	}
+
+	private static NumOfLottery getNumOfLottery(int inputMoney, int numOfManualLottery) {
+		final Money money = new Money(inputMoney);
+		final int numOfTotalLottery = money.divideBy(LOTTERY_PRICE);
+		final NumOfLottery numOfLottery = NumOfLottery.of(numOfTotalLottery, numOfManualLottery);
+		return numOfLottery;
 	}
 
 	public NumOfLottery getTheNumberOfLottery() {
 		return this.numOfLottery;
-	}
-
-	public LotteryGame putNumOfManualLottery(final int numOfManualLottery) {
-		final NumOfLottery tempNumOfLottery = this.numOfLottery.putNumOfManualLottery(numOfManualLottery);
-		return new LotteryGame(this.money, tempNumOfLottery, this.lotteryGenerator, this.lotteryNumberGenerator);
 	}
 
 	public Lotteries createLottery(final List<List<Integer>> manualLotteryNumber) {

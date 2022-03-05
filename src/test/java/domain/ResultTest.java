@@ -21,7 +21,7 @@ public class ResultTest {
 
 	@BeforeEach
 	void lotteryGameInit() {
-		lotteryGame = LotteryGame.of(6000, new LotteryGenerator(), new LotteryNumberMockGenerator());
+		lotteryGame = LotteryGame.of(6000, 0, new LotteryGenerator(), new LotteryNumberMockGenerator());
 	}
 
 	@Test

@@ -7,28 +7,19 @@ public final class NumOfLottery {
 	private final int numOfAutoLottery;
 	private final int numOfManualLottery;
 
-	private NumOfLottery(final int numOfAutoLottery) {
-		this.numOfAutoLottery = numOfAutoLottery;
-		this.numOfManualLottery = 0;
-	}
-
 	private NumOfLottery(final int numOfAutoLottery, final int numOfManualLottery) {
 		this.numOfAutoLottery = numOfAutoLottery;
 		this.numOfManualLottery = numOfManualLottery;
 	}
 
-	public static NumOfLottery from(final int numOfAutoLottery) {
-		return new NumOfLottery(numOfAutoLottery);
-	}
-
-	public NumOfLottery putNumOfManualLottery(final int numOfManualLottery) {
-		validateBound(numOfManualLottery);
-		final int numOfAutoLottery = this.numOfAutoLottery - numOfManualLottery;
+	public static NumOfLottery of(final int numOfTotalLottery, final int numOfManualLottery) {
+		validateBound(numOfTotalLottery, numOfManualLottery);
+		final int numOfAutoLottery = numOfTotalLottery - numOfManualLottery;
 		return new NumOfLottery(numOfAutoLottery, numOfManualLottery);
 	}
 
-	private void validateBound(final int numOfManualLottery) {
-		if (numOfManualLottery > this.numOfAutoLottery) {
+	private static void validateBound(int numOfTotalLottery, int numOfManualLottery) {
+		if (numOfManualLottery > numOfTotalLottery) {
 			throw new IllegalArgumentException(NUM_OF_MANUAL_LOTTERY_EXCEPTION.getMessage());
 		}
 	}
