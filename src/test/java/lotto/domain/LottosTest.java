@@ -69,10 +69,10 @@ class LottosTest {
 
     private WinningLotto getWinningNumbers() {
         List<LottoNumber> lottoNumbers;
-        LottoNumber bonusNumber = new LottoNumber(30);
+        LottoNumber bonusNumber = LottoNumber.valueOf(30);
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.valueOf(i));
         }
         return new WinningLotto(new Lotto(lottoNumbers), bonusNumber);
     }

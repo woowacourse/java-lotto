@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -9,12 +11,22 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int LOTTO_MINIMUM = 1;
     public static final int LOTTO_MAXIMUM = 45;
 
+    private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
+
     private final int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validateRange(number);
-
         this.number = number;
+    }
+
+    public static LottoNumber valueOf(int number) {
+        if (lottoNumberCache.containsKey(number)) {
+            return lottoNumberCache.get(number);
+        }
+        LottoNumber newLottoNumber = new LottoNumber(number);
+        lottoNumberCache.put(number, newLottoNumber);
+        return newLottoNumber;
     }
 
     private void validateRange(int number) {

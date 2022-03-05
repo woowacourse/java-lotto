@@ -40,10 +40,10 @@ class LottoGameTest {
 
         List<Lotto> lottos = lottoGame.getLottos();
 
-        List<LottoNumber> lottoNumbers = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        List<LottoNumber> lottoNumbers2 = List.of(new LottoNumber(10), new LottoNumber(20), new LottoNumber(30),
-                new LottoNumber(33), new LottoNumber(43), new LottoNumber(45));
+        List<LottoNumber> lottoNumbers = List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
+        List<LottoNumber> lottoNumbers2 = List.of(LottoNumber.valueOf(10), LottoNumber.valueOf(20),
+                LottoNumber.valueOf(30), LottoNumber.valueOf(33), LottoNumber.valueOf(36), LottoNumber.valueOf(45));
 
         List<Lotto> result = new ArrayList<>(
                 List.of(new Lotto(lottoNumbers), new Lotto(lottoNumbers2)));
@@ -55,10 +55,10 @@ class LottoGameTest {
     @Test
     void confirmWinnings() {
         List<LottoNumber> lottoNumbers;
-        LottoNumber bonusNumber = new LottoNumber(30);
+        LottoNumber bonusNumber = LottoNumber.valueOf(30);
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.valueOf(i));
         }
 
         LottoGame lottoGame = new LottoGame(new Money(10000));

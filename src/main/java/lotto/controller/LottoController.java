@@ -25,9 +25,9 @@ public class LottoController {
     private WinningLotto requestWinningNumbers(List<Integer> winningNumbers, int rawBonusNumber) {
         List<LottoNumber> winningLottoNumbers = new ArrayList<>();
         for (Integer number : winningNumbers) {
-            winningLottoNumbers.add(new LottoNumber(number));
+            winningLottoNumbers.add(LottoNumber.valueOf(number));
         }
-        LottoNumber bonusLottoNumber = new LottoNumber(rawBonusNumber);
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf(rawBonusNumber);
 
         return new WinningLotto(new Lotto(winningLottoNumbers), bonusLottoNumber);
     }

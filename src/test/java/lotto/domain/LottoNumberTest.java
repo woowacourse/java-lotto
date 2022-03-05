@@ -16,7 +16,7 @@ class LottoNumberTest {
     @Test
     void constructor() {
         assertThatNoException()
-                .isThrownBy(() -> new LottoNumber(30));
+                .isThrownBy(() -> LottoNumber.valueOf(30));
     }
 
     @DisplayName("Number 생성자는 1 ~ 45가 아닌 정수가 들어올 경우 예외가 발생한다.")
@@ -24,7 +24,7 @@ class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void constructor_errorOnRange(int input) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoNumber(input))
+                .isThrownBy(() -> LottoNumber.valueOf(input))
                 .withMessage("로또 숫자 범위는 1 ~ 45입니다.");
     }
 }

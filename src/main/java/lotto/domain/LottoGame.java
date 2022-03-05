@@ -41,7 +41,7 @@ public class LottoGame {
 
     private Lotto generateManualLotto(List<Integer> manualNumber) {
         return new Lotto(manualNumber.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .sorted()
                 .collect(Collectors.toList()));
     }
