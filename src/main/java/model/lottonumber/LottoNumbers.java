@@ -1,5 +1,6 @@
 package model.lottonumber;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.lottonumber.generationstrategy.LottoNumbersGenerationStrategy;
@@ -54,6 +55,6 @@ public class LottoNumbers {
 	}
 
 	public List<LottoNumber> getNumbers() {
-		return this.numbers;
+		return new ArrayList<>(numbers);
 	}
 }

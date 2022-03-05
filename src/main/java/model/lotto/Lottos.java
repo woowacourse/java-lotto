@@ -45,6 +45,6 @@ public class Lottos {
 	}
 
 	public List<Lotto> getLottoStorage() {
-		return lottoStorage;
+		return new ArrayList<>(lottoStorage);
 	}
 }
