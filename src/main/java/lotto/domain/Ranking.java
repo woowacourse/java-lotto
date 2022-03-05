@@ -28,10 +28,13 @@ public enum Ranking {
     }
 
     private static boolean checkCountAndBonusNumber(Ranking ranking, int count, boolean hasBonusNumber) {
-        if (count == 5) {
+        if (ranking.count != count) {
+            return false;
+        }
+        if (count == SECOND.getCount()) {
             return ranking.hasBonusNumber == hasBonusNumber;
         }
-        return ranking.count == count;
+        return true;
     }
 
     public long multiple(Integer count) {
