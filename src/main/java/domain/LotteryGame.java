@@ -51,10 +51,9 @@ public final class LotteryGame {
 	}
 
 	private List<Lottery> createManualLottery(List<List<Integer>> manualLotteryNumber) {
-		final List<Lottery> manualLotteries = manualLotteryNumber.stream()
-			.map((numbers) -> lotteryGenerator.generateLottery(numbers))
+		return manualLotteryNumber.stream()
+			.map(lotteryGenerator::generateLottery)
 			.collect(Collectors.toList());
-		return manualLotteries;
 	}
 
 	private Lotteries addAutoLottery(Lotteries lotteries) {
