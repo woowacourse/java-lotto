@@ -32,7 +32,7 @@ public enum Rank {
 
 		return Arrays.stream(Rank.values())
 			.filter(rank -> rank.getMatchNumber() == matchNumber)
-			.findAny()
+			.findFirst()
 			.orElse(FAIL);
 	}
 
