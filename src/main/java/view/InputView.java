@@ -82,13 +82,13 @@ public class InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    public static List<String> inputManualLottoNumbers() {
+    public static List<String> inputLottos() {
         return splitAndTrim(SCANNER.nextLine());
     }
 
-    public static List<String> inputLottoNumbers() {
+    public static List<String> inputWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
-        return splitAndTrim(SCANNER.nextLine());
+        return inputLottos();
     }
 
     public static String inputBonusNumber() {
