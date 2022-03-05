@@ -20,7 +20,7 @@ class LottosTest {
         Lottos auto = Lottos.generateAuto(3);
         Lottos manual = Lottos.generateAuto(2);
 
-        Lottos lottos = Lottos.generate(auto, manual);
+        Lottos lottos = Lottos.concat(auto, manual);
 
         assertThat(lottos.getLottos().size()).isEqualTo(5);
     }

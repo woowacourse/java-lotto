@@ -14,10 +14,9 @@ public class LottoGame {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public static Lottos buyLottos(Money money, List<Lotto> manualLottos, LottoSize manualLottoSize) {
-        Lottos manual = Lottos.generateManual(manualLottos);
-        Lottos auto = Lottos.generateAuto(manualLottoSize.getRestOfLottoSize(money.getBuyableLottoSize()));
-        return Lottos.generate(auto, manual);
+    public static Lottos buyLottos(Money money, List<Lotto> generatedLottos, LottoSize generatedLottosSize) {
+        int lottoSizeToGenerate = generatedLottosSize.getRestOfLottoSize(money.getBuyableLottoSize());
+        return Lottos.generate(generatedLottos, lottoSizeToGenerate);
     }
 
     private void validateDuplicateBonusNumber(List<Integer> winningNumbers, Integer bonusNumber) {
