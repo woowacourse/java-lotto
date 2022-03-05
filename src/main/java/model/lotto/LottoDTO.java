@@ -3,6 +3,7 @@ package model.lotto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbers;
 import model.lottonumber.LottoNumbersDTO;
 
@@ -17,7 +18,7 @@ public class LottoDTO {
 		LottoNumbersDTO lottoNumbersDTO = numbers.getLottoNumbersDTO();
 		return lottoNumbersDTO.getLottoNumbers()
 			.stream()
-			.map(lottoNumber -> lottoNumber.getNumber())
+			.map(LottoNumber::getNumber)
 			.collect(Collectors.toList());
 	}
 }
