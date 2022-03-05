@@ -37,7 +37,7 @@ public class LottoController {
     private List<Lotto> inputManualLottos(ManualLottoCount manualLottoCount) {
         InputView.printManualLottoMessage();
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; !manualLottoCount.hasCountAs(i); i++) {
+        for (int i = 0; !manualLottoCount.isSameCount(i); i++) {
             lottos.add(parseManualLotto());
         }
         return lottos;

@@ -31,7 +31,7 @@ public class ManualLottoCountTest {
     @Test
     @DisplayName("전달된 값이 저장된 값과 동일한지 비교")
     void hasCountATest() {
-        assertThat(new ManualLottoCount(3, budgetForThree).hasCountAs(3)).isTrue();
-        assertThat(new ManualLottoCount(3, budgetForThree).hasCountAs(4)).isFalse();
+        assertThat(new ManualLottoCount(3, budgetForThree).isSameCount(3)).isTrue();
+        assertThat(new ManualLottoCount(3, budgetForThree).isSameCount(4)).isFalse();
     }
 }

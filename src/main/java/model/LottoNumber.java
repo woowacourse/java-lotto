@@ -1,42 +1,43 @@
 package model;
 
 import exception.InvalidRangeLottoNumberException;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoNumber {
-    private static final int INDEX_OFFSET = 1;
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
-    private static final List<LottoNumber> LOTTO_NUMBERS;
+    private static final LottoNumber[] LOTTO_NUMBERS = new LottoNumber[MAXIMUM_LOTTO_NUMBER + 1];
 
     private final int lottoNumber;
 
     static {
-        LOTTO_NUMBERS = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+        for (int i = MINIMUM_LOTTO_NUMBER; i < LOTTO_NUMBERS.length; i++) {
+            LOTTO_NUMBERS[i] = new LottoNumber(i);
+        }
     }
 
     private LottoNumber(int number) {
+        checkRange(number);
         this.lottoNumber = number;
     }
 
-    public static LottoNumber of(int number) {
+    private static void checkRange(int number) {
         if (isInvalidRange(number)) {
             throw new InvalidRangeLottoNumberException();
         }
-        return LOTTO_NUMBERS.get(number - INDEX_OFFSET);
     }
 
     private static boolean isInvalidRange(int number) {
         return MINIMUM_LOTTO_NUMBER > number || number > MAXIMUM_LOTTO_NUMBER;
     }
 
+    public static LottoNumber of(int number) {
+        checkRange(number);
+        return LOTTO_NUMBERS[number];
+    }
+
     public static LottoNumber parse(String text) {
-        return new LottoNumber(Integer.parseInt(text));
+        return LottoNumber.of(Integer.parseInt(text));
     }
 
     public int intValue() {
