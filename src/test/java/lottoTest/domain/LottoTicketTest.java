@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
-import lotto.domain.WinningNumbers;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -36,12 +36,12 @@ class LottoTicketTest {
 
     @ParameterizedTest(name = "[{index}] 로또 등수: {3}")
     @MethodSource("provideLottoData")
-    void 로또의_당첨_여부를_판단하는_기능_테스트(List<LottoNumber> winningNumber, LottoNumber bonusNumber, List<LottoNumber> lottoNumber,
+    void 로또의_당첨_여부를_판단하는_기능_테스트(List<Integer> winningNumber, int bonusNumber, List<LottoNumber> lottoNumber,
                                 Rank rank) {
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumber, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
         LottoTicket lottoTicket = new LottoTicket(lottoNumber);
-        Rank lottoRank = lottoTicket.getRankBy(winningNumbers.getWinningNumbers(),
-                winningNumbers.getBonusNumber());
+        Rank lottoRank = lottoTicket.getRankBy(winningLotto.getWinningNumbers(),
+                winningLotto.getBonusNumber());
         assertThat(lottoRank).isEqualTo(rank);
     }
 
@@ -53,13 +53,13 @@ class LottoTicketTest {
 
     private static Stream<Arguments> provideLottoData() {
         return Stream.of(
-                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.valueOf(7),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7,
                         toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
                         Rank.FIRST),
-                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.valueOf(7),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7,
                         toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)),
                         Rank.THIRD),
-                Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.valueOf(8),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 8,
                         toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)),
                         Rank.SECOND)
         );

@@ -23,10 +23,10 @@ public class LottoTickets {
         return new LottoTickets(combined);
     }
 
-    public List<Rank> getRanksWithWinningNumbers(WinningNumbers winningNumbers) {
+    public List<Rank> getRanksWithWinningNumbers(WinningLotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTickets) {
-            ranks.add(lottoTicket.getRankBy(winningNumbers.getWinningNumbers(), winningNumbers.getBonusNumber()));
+            ranks.add(lottoTicket.getRankBy(winningLotto.getWinningNumbers(), winningLotto.getBonusNumber()));
         }
         return ranks;
     }
