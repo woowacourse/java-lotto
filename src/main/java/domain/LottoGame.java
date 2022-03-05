@@ -92,7 +92,7 @@ public class LottoGame {
 
     private List<Rewards> convertLottoResultsToRanks() {
         List<Integer> matchCounts = lottos.compareAllLottosWithWinningLotto(winningLotto);
-        List<Boolean> bonusNumberContains = lottos.compareAllLottosWithBonusNumber(bonusNumber);
+        List<Boolean> bonusNumberContains = lottos.checkAllLottosContainNumber(bonusNumber);
         return IntStream.range(START_INDEX, matchCounts.size())
                 .boxed()
                 .map(index -> LottoRewardLogic.convertToRank(matchCounts.get(index), bonusNumberContains.get(index)))

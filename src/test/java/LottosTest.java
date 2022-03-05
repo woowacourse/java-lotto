@@ -38,6 +38,6 @@ public class LottosTest {
         Lottos lottos = makeLottos();
         LottoNumber bonusNumber = new LottoNumber(3);
 
-        assertThat(lottos.compareAllLottosWithBonusNumber(bonusNumber).size()).isEqualTo(3);
+        assertThat(lottos.checkAllLottosContainNumber(bonusNumber).size()).isEqualTo(3);
     }
 }

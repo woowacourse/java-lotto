@@ -36,10 +36,10 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public List<Boolean> compareAllLottosWithBonusNumber(LottoNumber bonusNumber) {
-        Validator.checkArgumentIsNull(bonusNumber);
+    public List<Boolean> checkAllLottosContainNumber(LottoNumber number) {
+        Validator.checkArgumentIsNull(number);
         return members.stream()
-                .map(lotto -> lotto.contains(bonusNumber))
+                .map(lotto -> lotto.contains(number))
                 .collect(Collectors.toList());
     }
 
