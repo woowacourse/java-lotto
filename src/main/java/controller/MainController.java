@@ -1,6 +1,5 @@
 package controller;
 
-import domain.LottoTicket;
 import domain.LottoTickets;
 import domain.Purchase;
 import domain.Result;
@@ -76,9 +75,9 @@ public class MainController {
 
     private Result makeResult(LottoTickets lottoTickets, WinLottoNumbers winLottoNumbers) {
         Result result = new Result();
-        for (LottoTicket lottoTicket : lottoTickets.get()) {
-            result.add(winLottoNumbers.match(lottoTicket));
-        }
+        lottoTickets.get().stream()
+            .map(winLottoNumbers::match)
+            .forEach(result::add);
         return result;
     }
 
