@@ -50,7 +50,7 @@ public class WinningResult {
     }
 
     private LottoQuantity generateLottoQuantityByLottos(Lottos lottos) {
-        return new LottoQuantity(lottos.getLottos().size());
+        return LottoQuantity.from(lottos.getLottos().size());
     }
 
     public double getProfitRatio() {

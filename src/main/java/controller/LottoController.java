@@ -40,13 +40,13 @@ public class LottoController {
     }
 
     private LottoQuantity generateLottoQuantityByInputMoney(InputMoney inputMoney) {
-        return new LottoQuantity(inputMoney);
+        return LottoQuantity.from(inputMoney);
     }
 
     private LottoQuantity generateManualLottoQuantity(InputMoney inputMoney) {
         try {
             int quantity = InputView.scanManualLottoQuantity();
-            return LottoQuantity.createManual(quantity, inputMoney);
+            return LottoQuantity.of(quantity, inputMoney);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
             return generateManualLottoQuantity(inputMoney);

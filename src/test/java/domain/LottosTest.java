@@ -30,7 +30,7 @@ public class LottosTest {
     @DisplayName("LottoQuantity 와 LottoNumberGenerateStrategy 를 전달받으면 Lottos 가 생성된다.")
     void createLottosByLottoQuantity() {
         // given
-        LottoQuantity lottoQuantity = new LottoQuantity(10);
+        LottoQuantity lottoQuantity = LottoQuantity.from(10);
 
         // when
         Lottos createLottos = new Lottos(lottoQuantity, lottoNumberGenerateStrategy);
@@ -56,8 +56,8 @@ public class LottosTest {
     @DisplayName("concat 메소드를 사용하여 두개의 Lottos 를 합쳐 새로운 Lottos 를 만들 수 있다.")
     void concat() {
         // given
-        Lottos lottos1 = new Lottos(new LottoQuantity(3), lottoNumberGenerateStrategy);
-        Lottos lottos2 = new Lottos(new LottoQuantity(3), lottoNumberGenerateStrategy);
+        Lottos lottos1 = new Lottos(LottoQuantity.from(3), lottoNumberGenerateStrategy);
+        Lottos lottos2 = new Lottos(LottoQuantity.from(3), lottoNumberGenerateStrategy);
 
         // when
         Lottos joinedLottos = Lottos.concat(lottos1, lottos2);

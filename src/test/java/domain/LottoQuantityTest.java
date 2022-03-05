@@ -16,7 +16,7 @@ public class LottoQuantityTest {
     @ValueSource(ints = {0, 1, 5, 7})
     void lottoQuantityCreationTest(int quantity) {
         // given
-        LottoQuantity lottoQuantity = new LottoQuantity(quantity);
+        LottoQuantity lottoQuantity = LottoQuantity.from(quantity);
 
         // when
         int extractedLottoQuantityNumber = lottoQuantity.getLottoQuantity();
@@ -32,7 +32,7 @@ public class LottoQuantityTest {
         InputMoney inputMoney = new InputMoney(5000);
 
         // when
-        LottoQuantity lottoQuantity = new LottoQuantity(inputMoney);
+        LottoQuantity lottoQuantity = LottoQuantity.from(inputMoney);
 
         // then
         assertThat(lottoQuantity).isNotNull();
@@ -46,7 +46,7 @@ public class LottoQuantityTest {
         InputMoney inputMoney = new InputMoney(input);
 
         // when
-        LottoQuantity lottoQuantity = new LottoQuantity(inputMoney);
+        LottoQuantity lottoQuantity = LottoQuantity.from(inputMoney);
 
         // then
         assertThat(lottoQuantity.getLottoQuantity()).isEqualTo(expected);
@@ -56,7 +56,7 @@ public class LottoQuantityTest {
     @ParameterizedTest(name = "{0} 전달")
     @ValueSource(ints = {-10, -1})
     void createLottoQuantityWithNegativeShouldFail(int lottoQuantity) {
-        assertThatThrownBy(() -> new LottoQuantity(lottoQuantity))
+        assertThatThrownBy(() -> LottoQuantity.from(lottoQuantity))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LottoQuantity.ERROR_MESSAGE_FOR_INVALID_LOTTO_QUANTITY);
     }
@@ -65,9 +65,9 @@ public class LottoQuantityTest {
     @Test
     void subtract() {
         // given
-        LottoQuantity lottoQuantity1 = new LottoQuantity(10);
-        LottoQuantity lottoQuantity2 = new LottoQuantity(6);
-        LottoQuantity expected = new LottoQuantity(4);
+        LottoQuantity lottoQuantity1 = LottoQuantity.from(10);
+        LottoQuantity lottoQuantity2 = LottoQuantity.from(6);
+        LottoQuantity expected = LottoQuantity.from(4);
 
         // when
         LottoQuantity actual = lottoQuantity1.subtract(lottoQuantity2);
@@ -84,7 +84,7 @@ public class LottoQuantityTest {
         InputMoney inputMoney = new InputMoney(15000);
 
         // when
-        LottoQuantity lottoQuantity = LottoQuantity.createManual(manualLottoQuantity, inputMoney);
+        LottoQuantity lottoQuantity = LottoQuantity.of(manualLottoQuantity, inputMoney);
 
         // then
         assertThat(lottoQuantity).isNotNull();
@@ -98,7 +98,7 @@ public class LottoQuantityTest {
         InputMoney inputMoney = new InputMoney(5000);
 
         // when & then
-        assertThatThrownBy(() -> LottoQuantity.createManual(manualLottoQuantity, inputMoney))
+        assertThatThrownBy(() -> LottoQuantity.of(manualLottoQuantity, inputMoney))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LottoQuantity.ERROR_MESSAGE_FOR_INVALID_MANUAL_LOTTO_QUANTITY);
     }
