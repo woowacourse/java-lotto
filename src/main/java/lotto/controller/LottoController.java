@@ -38,15 +38,20 @@ public class LottoController {
 
     private LottoTickets createLottoTickets(Money money, ManualCount manualCount) {
         List<String> manualLottoTickets = inputView.inputManualLottoTickets(manualCount.getCount());
-        LottoTickets lottoTickets = LottoTickets.buyRandomTicket(
-            new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX),
-            money.changes(manualCount.getCount())
-        );
+        Money changes = money.changes(manualCount.getCount());
+        LottoTickets lottoTickets = getLottoTickets(changes);
         lottoTickets.generatorManualTickets(manualLottoTickets);
         List<LottoTicketResponse> lottoTicketsResponse = LottoTicketResponse.from(lottoTickets);
-        outputView.outputLottoCount(manualCount.getCount(), money.count());
+        outputView.outputLottoCount(manualCount.getCount(), changes.count());
         outputView.outputTickets(lottoTicketsResponse);
         return lottoTickets;
+    }
+
+    private LottoTickets getLottoTickets(Money changes) {
+        return LottoTickets.buyRandomTicket(
+            new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX),
+            changes
+        );
     }
 
     private WinningTicket getWinningTicket() {
