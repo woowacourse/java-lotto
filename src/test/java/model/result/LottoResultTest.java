@@ -7,23 +7,23 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-public class RateOfReturnTest {
+public class LottoResultTest {
 	@ParameterizedTest
 	@EnumSource(Rank.class)
 	@DisplayName("결과가 저장이 잘 되는지 테스트")
 	void saveResultTest(Rank rank) {
-		RateOfReturn rateOfReturn = new RateOfReturn();
-		rateOfReturn.increaseCountOfRank(rank);
-		assertThat(rateOfReturn.getCountOfResult(rank)).isEqualTo(1);
+		LottoResult lottoResult = new LottoResult();
+		lottoResult.increaseCountOfRank(rank);
+		assertThat(lottoResult.getCountOfResult(rank)).isEqualTo(1);
 	}
 
 	@Test
 	@DisplayName("수익률이 정상적으로 출력되는지 테스트")
 	void getRateOfReturn() {
-		RateOfReturn rateOfReturn = new RateOfReturn();
-		rateOfReturn.increaseCountOfRank(Rank.FIFTH);
-		rateOfReturn.increaseCountOfRank(Rank.SECOND);
-		assertThat(rateOfReturn.getRateOfReturn()).isEqualTo(
+		LottoResult lottoResult = new LottoResult();
+		lottoResult.increaseCountOfRank(Rank.FIFTH);
+		lottoResult.increaseCountOfRank(Rank.SECOND);
+		assertThat(lottoResult.getSumOfRewards()).isEqualTo(
 			(Rank.FIFTH.getValue() + Rank.SECOND.getValue()));
 	}
 }

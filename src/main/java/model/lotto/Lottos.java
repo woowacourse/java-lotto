@@ -5,7 +5,7 @@ import java.util.List;
 
 import model.lottonumber.LottoNumbers;
 import model.lottonumber.generationstrategy.RandomLottoNumbersGenerationStrategy;
-import model.result.RateOfReturn;
+import model.result.LottoResult;
 import model.winningnumber.WinningLottoNumberDTO;
 
 public class Lottos {
@@ -33,9 +33,9 @@ public class Lottos {
 	}
 
 	public void checkWithWinningNumberAndBonus(WinningLottoNumberDTO winningLottoNumbersDTO,
-		RateOfReturn rateOfReturn) {
+		LottoResult lottoResult) {
 		lottoStorage.forEach(
-			lotto -> rateOfReturn.increaseCountOfRank(lotto.match(winningLottoNumbersDTO)));
+			lotto -> lottoResult.increaseCountOfRank(lotto.match(winningLottoNumbersDTO)));
 	}
 
 	public void add(List<LottoNumbers> passiveLottos) {

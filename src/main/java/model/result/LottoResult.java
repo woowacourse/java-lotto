@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RateOfReturn {
+public class LottoResult {
 	private long sumMoneyOfReturns;
 	private Map<Rank, Integer> countOfResult;
 
-	public RateOfReturn() {
+	public LottoResult() {
 		this.sumMoneyOfReturns = 0;
 		countOfResult = new HashMap<>();
 		for (final Rank rank : Rank.values()) {
@@ -24,7 +24,7 @@ public class RateOfReturn {
 		return countOfResult.getOrDefault(rank, 0);
 	}
 
-	public long getRateOfReturn() {
+	public long getSumOfRewards() {
 		Arrays.stream(Rank.values())
 			.filter(rank -> rank.checkNumberToReward())
 			.forEach(

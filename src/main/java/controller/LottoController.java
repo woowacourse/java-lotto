@@ -9,8 +9,8 @@ import model.lotto.LottoCount;
 import model.lotto.Lottos;
 import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbers;
+import model.result.LottoResult;
 import model.result.Rank;
-import model.result.RateOfReturn;
 import model.winningnumber.WinningLottoNumber;
 import utils.InputLottoNumbersUtils;
 import utils.InputValidateUtils;
@@ -32,12 +32,12 @@ public class LottoController {
 	private LottoCount manualLottoCount;
 	private Lottos lottos;
 	private WinningLottoNumber winningLottoNumber;
-	private RateOfReturn rateOfReturn;
+	private LottoResult lottoResult;
 
 	public void playGame() {
 		insertedMoney = insertMoney();
 		automaticLottoCount = new LottoCount(insertedMoney.makeMoneyToCount());
-		rateOfReturn = new RateOfReturn();
+		lottoResult = new LottoResult();
 		manualLottoCount = inputManualLottoCount();
 		lottos = makeLottos();
 		printLottos();
@@ -118,7 +118,7 @@ public class LottoController {
 	}
 
 	private void compareLottoWithWinningNumber() {
-		lottos.checkWithWinningNumberAndBonus(winningLottoNumber.getWinningLottoNumbersDTO(), rateOfReturn);
+		lottos.checkWithWinningNumberAndBonus(winningLottoNumber.getWinningLottoNumbersDTO(), lottoResult);
 	}
 
 	private void showResult() {
@@ -126,9 +126,9 @@ public class LottoController {
 		Arrays.stream(Rank.values())
 			.filter(rank -> rank.getMatchNumber() >= 3)
 			.forEach(statistics -> outputView.printResult(statistics.getMatchNumber(), statistics.getValue(),
-				rateOfReturn.getCountOfResult(statistics),
+				lottoResult.getCountOfResult(statistics),
 				Rank.SECOND.getValue()));
-		outputView.printRateOfReturn(rateOfReturn.getRateOfReturn() / insertedMoney.getMoney());
+		outputView.printRateOfReturn(lottoResult.getSumOfRewards() / insertedMoney.getMoney());
 	}
 
 }
