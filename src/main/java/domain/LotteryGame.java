@@ -34,11 +34,10 @@ public final class LotteryGame {
 		return new LotteryGame(numOfLottery, lotteryGenerator, lotteryNumberGenerator);
 	}
 
-	private static NumOfLottery getNumOfLottery(int inputMoney, int numOfManualLottery) {
+	private static NumOfLottery getNumOfLottery(final int inputMoney, final int numOfManualLottery) {
 		final Money money = new Money(inputMoney);
 		final int numOfTotalLottery = money.divideBy(LOTTERY_PRICE);
-		final NumOfLottery numOfLottery = NumOfLottery.of(numOfTotalLottery, numOfManualLottery);
-		return numOfLottery;
+		return NumOfLottery.of(numOfTotalLottery, numOfManualLottery);
 	}
 
 	public NumOfLottery getTheNumberOfLottery() {
