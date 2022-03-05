@@ -66,7 +66,7 @@ public class InputView {
         validateNumbersInputFormat(input);
 
         try {
-            return generateLottoNumbersFromInput(input);
+            return splitInputWithCommas(input);
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_NUMBER);
         }
@@ -91,7 +91,7 @@ public class InputView {
         }
     }
 
-    private static Set<Integer> generateLottoNumbersFromInput(String input) {
+    private static Set<Integer> splitInputWithCommas(String input) {
         return Arrays.stream(input.split(SPLIT_DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
