@@ -10,12 +10,11 @@ import java.util.stream.Collectors;
 import model.Budget;
 import model.IssuedLottos;
 import model.Lotto;
+import model.LottoMachine;
 import model.LottoNumber;
 import model.LottoResult;
 import model.ManualLottoCount;
 import model.WinningLottoNumbers;
-import model.generator.ManualGenerator;
-import model.generator.RandomGenerator;
 import view.InputView;
 
 public class LottoController {
@@ -24,14 +23,12 @@ public class LottoController {
         Budget budget = InputView.getUntilValid(() -> Budget.parse(InputView.inputMoney()));
         ManualLottoCount manualCount = InputView.getUntilValid(
                 () -> ManualLottoCount.parse(InputView.inputManualCount(), budget));
-        IssuedLottos manualLottos = InputView.getUntilValid(
-                () -> new IssuedLottos(new ManualGenerator(getManualLottos(manualCount))));
-        IssuedLottos autoLottos = InputView.getUntilValid(
-                () -> new IssuedLottos(new RandomGenerator(manualCount.getAutoCount(budget))));
-        IssuedLottos allLottos = IssuedLottos.merge(manualLottos, autoLottos);
-        printIssuedLottoNumbers(manualLottos.getLottosCount(), autoLottos.getLottosCount(), getNumbersOf(allLottos));
+        LottoMachine lottoMachine = new LottoMachine(getManualLottos(manualCount), budget);
+        IssuedLottos issueAllLottos = lottoMachine.IssueAllLottos();
+        printIssuedLottoNumbers(lottoMachine.manualLottoCount(), lottoMachine.autoLottoCount(), getNumbersOf(issueAllLottos));
+
         WinningLottoNumbers winningLottoNumbers = InputView.getUntilValid(() -> getWinningLottoNumbers());
-        LottoResult totalResult = allLottos.summary(winningLottoNumbers);
+        LottoResult totalResult = issueAllLottos.summary(winningLottoNumbers);
         printResult(totalResult.getResultMap(), totalResult.getProfitRate(budget));
     }
 
