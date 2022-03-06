@@ -21,8 +21,8 @@ public class LottoController {
 
     public void start() {
         Money money = getMoney();
-        buyPassiveLotto(money);
-        lottos.purchaseActiveLotto(money);
+        buyManualLotto(money);
+        lottos.purchaseAutoLotto(money);
         outputView.printPurchasedLotto(lottos);
         outputView.printResult(lottos.getResult(getWinningLotto()));
         outputView.printYield(lottos.getYield(money));
@@ -39,25 +39,27 @@ public class LottoController {
         }
     }
 
-    private void buyPassiveLotto(Money money) {
-        int passiveLottoCount = getPassivePurchase();
-        purchasePassiveLotto(passiveLottoCount);
+    private void buyManualLotto(Money money) {
+        int passiveLottoCount = getManualPurchase(money);
+        purchaseManualLotto(passiveLottoCount);
         money.buyLotto(passiveLottoCount);
     }
 
-    private int getPassivePurchase() {
+    private int getManualPurchase(Money money) {
         try {
-            outputView.printAskPassivePurchaseCountInputMessage();
-            return Integer.parseInt(inputView.getInput());
+            outputView.printAskManualPurchaseCountInputMessage();
+            int manualPurchaseNumberInput = Integer.parseInt(inputView.getInput());
+            money.validatePurchasableNumberInput(manualPurchaseNumberInput);
+            return manualPurchaseNumberInput;
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
-            return getPassivePurchase();
+            return getManualPurchase(money);
         }
     }
 
-    private void purchasePassiveLotto(int passiveLottoCount) {
+    private void purchaseManualLotto(int passiveLottoCount) {
         for (int i = 0; i < passiveLottoCount; i++) {
-            lottos.purchaseLotto(getPassivePickedNumber());
+            lottos.purchaseLotto(getManualPickedNumber());
         }
     }
 
@@ -67,13 +69,13 @@ public class LottoController {
         return new WinningLotto(pickedNumbers, bonusNumber);
     }
 
-    private PickedNumbers getPassivePickedNumber() {
+    private PickedNumbers getManualPickedNumber() {
         try {
-            outputView.printPassivePurchaseInputMessage();
+            outputView.printManualPurchaseInputMessage();
             return new PickedNumbers(inputView.getInput());
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
-            return getPassivePickedNumber();
+            return getManualPickedNumber();
         }
     }
 
