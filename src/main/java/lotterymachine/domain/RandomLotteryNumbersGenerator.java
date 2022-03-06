@@ -10,7 +10,7 @@ public class RandomLotteryNumbersGenerator implements LotteryNumbersGenerator {
     private static final List<Integer> NUMBERS;
 
     static {
-        NUMBERS = IntStream.range(LotteryNumber.MIN_VALUE, LotteryNumber.MAX_VALUE + 1)
+        NUMBERS = IntStream.rangeClosed(LotteryNumber.MIN_VALUE, LotteryNumber.MAX_VALUE)
                 .boxed()
                 .collect(Collectors.toList());
     }
