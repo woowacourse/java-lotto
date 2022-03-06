@@ -21,13 +21,18 @@ public enum WinningKind {
     }
 
     public static WinningKind from(final int matchCount, final boolean bonusNumberHit) {
-        if (matchCount == 5 && bonusNumberHit) {
+        if (isFiveBonus(matchCount, bonusNumberHit)) {
             return FIVE_BONUS;
         }
         return Arrays.stream(values())
                 .filter(matchKind -> matchKind.matchCount == matchCount)
-                .findFirst()
+                .filter(matchKind -> !matchKind.bonusNumberHit)
+                .findAny()
                 .orElse(LOWER_THAN_THREE);
+    }
+
+    private static boolean isFiveBonus(int matchCount, boolean bonusNumberHit) {
+        return bonusNumberHit && matchCount == 5;
     }
 
     public long getProfit(final int winningCount) {
