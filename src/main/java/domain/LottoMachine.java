@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoMachine {
-	Money money;
-	List<LottoTicket> lottoTickets;
+	private Money money;
+	private List<LottoTicket> lottoTickets;
 
 	public LottoMachine(int money) {
 		this.money = new Money(money);

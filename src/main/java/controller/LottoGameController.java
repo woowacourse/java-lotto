@@ -10,8 +10,7 @@ import static view.InputView.*;
 import static view.OutputView.*;
 
 public class LottoGameController {
-
-	LottoMachine lottoMachine;
+	private LottoMachine lottoMachine;
 
 	public void run() {
 		try {
