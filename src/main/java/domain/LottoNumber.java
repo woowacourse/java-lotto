@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -35,8 +38,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public int getValue() {
+    public int value() {
         return value;
+    }
+
+    public static List<LottoNumber> values() {
+        return new ArrayList<>(LOTTO_NUMBERS.values());
     }
 
     @Override

@@ -25,7 +25,7 @@ public class OutputView {
 
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getLottoNumbers().stream()
-                .map(LottoNumber::getValue)
+                .map(LottoNumber::value)
                 .collect(Collectors.toList()));
         }
     }
