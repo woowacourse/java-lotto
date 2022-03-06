@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
@@ -14,10 +15,10 @@ class RankTest {
     @Test
     @DisplayName("맞은 볼 개수와 보너스 볼 포함 여부에 맞는 등수를 반환한다.")
     void matchTest() {
-        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45));
+        Lotto winningNumbers = new Lotto(Set.of(1, 2, 3, 4, 5, 45));
         LottoNumber bonusNumber = new LottoNumber(6);
-        List<Lotto> lottoList = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 44)));
+        List<Lotto> lottoList = List.of(new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
+            new Lotto(Set.of(1, 2, 3, 4, 5, 44)));
 
         List<Rank> actual = lottoList.stream()
             .map(lotto -> lotto.match(winningNumbers, bonusNumber))

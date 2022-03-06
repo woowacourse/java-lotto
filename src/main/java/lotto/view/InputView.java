@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 public class InputView {
@@ -24,12 +25,12 @@ public class InputView {
         return numberOfManualLottos;
     }
 
-    public static List<List<Integer>> inputManualLottos(int numberOfManualLottos) {
+    public static List<Set<Integer>> inputManualLottos(int numberOfManualLottos) {
         if (numberOfManualLottos == 0) {
             return List.of();
         }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<List<Integer>> manualLottos = IntStream.range(0, numberOfManualLottos)
+        List<Set<Integer>> manualLottos = IntStream.range(0, numberOfManualLottos)
             .mapToObj(i -> scanner.nextLine())
             .map(manualLotto -> convertStringsToIntegers(splitAndTrim(manualLotto)))
             .collect(toList());
@@ -37,16 +38,16 @@ public class InputView {
         return List.copyOf(manualLottos);
     }
 
-    public static List<Integer> inputWinningNumbers() {
+    public static Set<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningNumbers = scanner.nextLine();
         return convertStringsToIntegers(splitAndTrim(winningNumbers));
     }
 
-    private static List<Integer> convertStringsToIntegers(List<String> strings) {
+    private static Set<Integer> convertStringsToIntegers(List<String> strings) {
         return strings.stream()
             .map(Integer::parseInt)
-            .collect(toUnmodifiableList());
+            .collect(toUnmodifiableSet());
     }
 
     private static List<String> splitAndTrim(String winningNumbers) {

@@ -2,9 +2,9 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.DisplayName;
@@ -19,10 +19,10 @@ class LottoGameTest {
     @DisplayName("수동 구매 검증 테스트")
     void buyManualLottosTest() {
         LottoGame lottoGame = new LottoGame(1000, 1, new TestNumberGenerator());
-        List<List<Integer>> rawManualLottos = List.of(List.of(1, 2, 3, 11, 12, 13));
+        List<Set<Integer>> rawManualLottos = List.of(Set.of(1, 2, 3, 11, 12, 13));
 
         Lottos manualLottos = lottoGame.buyManualLottos(rawManualLottos);
-        List<Lotto> expected = List.of(new Lotto(List.of(1, 2, 3, 11, 12, 13)));
+        List<Lotto> expected = List.of(new Lotto(Set.of(1, 2, 3, 11, 12, 13)));
 
         assertThat(manualLottos.getLottos().toString()).isEqualTo(expected.toString());
     }
@@ -33,7 +33,7 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame(1000, 0, new TestNumberGenerator());
 
         List<Lotto> autoLottos = lottoGame.getAutoLottos();
-        List<Lotto> expected = List.of(new Lotto(List.of(1, 2, 3, 11, 12, 13)));
+        List<Lotto> expected = List.of(new Lotto(Set.of(1, 2, 3, 11, 12, 13)));
 
         assertThat(autoLottos.toString()).isEqualTo(expected.toString());
     }
@@ -44,7 +44,7 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame(1000, 0, new TestNumberGenerator());
         assertThatThrownBy(() ->
             lottoGame.generateLottoResult(new Lottos(new ManualGenerator(Collections.emptyList()), 0),
-                Arrays.asList(1, 2, 3, 4, 5, 6), 6))
+                Set.of(1, 2, 3, 4, 5, 6), 6))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("보너스 볼 번호가 당첨 번호와 중복입니다.");
     }
@@ -55,7 +55,7 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame(1000, 0, new TestNumberGenerator());
         LottoResult lottoResult = lottoGame.generateLottoResult(
             new Lottos(new ManualGenerator(Collections.emptyList()), 0),
-            Arrays.asList(1, 2, 3, 4, 5, 6),
+            Set.of(1, 2, 3, 4, 5, 6),
             7);
         Yield yield = lottoGame.calculateYield(lottoResult);
 
@@ -65,8 +65,8 @@ class LottoGameTest {
     static class TestNumberGenerator implements LottoNumberGenerator {
 
         @Override
-        public List<Integer> generate() {
-            return Arrays.asList(1, 2, 3, 11, 12, 13);
+        public Set<Integer> generate() {
+            return Set.of(1, 2, 3, 11, 12, 13);
         }
     }
 }

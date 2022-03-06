@@ -1,7 +1,7 @@
 package lotto.model.numbergenerator;
 
-import java.util.List;
+import java.util.Set;
 
 public interface LottoNumberGenerator {
-    List<Integer> generate();
+    Set<Integer> generate();
 }

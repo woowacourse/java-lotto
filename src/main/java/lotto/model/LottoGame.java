@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.List;
+import java.util.Set;
 
 import lotto.model.numbergenerator.LottoNumberGenerator;
 import lotto.model.numbergenerator.ManualGenerator;
@@ -18,11 +19,11 @@ public class LottoGame {
         return new Lottos(lottoNumberGenerator, lottoMoney.getAutoLottoSize());
     }
 
-    public Lottos buyManualLottos(List<List<Integer>> inputManualLottos) {
+    public Lottos buyManualLottos(List<Set<Integer>> inputManualLottos) {
         return new Lottos(new ManualGenerator(inputManualLottos), inputManualLottos.size());
     }
 
-    public LottoResult generateLottoResult(Lottos manualLottos, List<Integer> winningNumbers, int bonusNumber) {
+    public LottoResult generateLottoResult(Lottos manualLottos, Set<Integer> winningNumbers, int bonusNumber) {
         return new LottoResult(manualLottos, autoLottos, winningNumbers, bonusNumber);
     }
 

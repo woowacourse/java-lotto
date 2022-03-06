@@ -2,9 +2,8 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,7 +22,7 @@ class LottoResultTest {
         Lottos manualLottos = new Lottos(new ManualGenerator(Collections.emptyList()), 0);
 
         LottoResult lottoResult = new LottoResult(manualLottos, autoLottos,
-            Arrays.asList(1, 2, 3, 4, 5, 45),
+            Set.of(1, 2, 3, 4, 5, 45),
             bonusNumberInt);
 
         assertThat(lottoResult.getRankCount(winningRank)).isEqualTo(1);
@@ -32,8 +31,8 @@ class LottoResultTest {
     static class TestNumberGenerator implements LottoNumberGenerator {
 
         @Override
-        public List<Integer> generate() {
-            return Arrays.asList(1, 2, 3, 4, 5, 6);
+        public Set<Integer> generate() {
+            return Set.of(1, 2, 3, 4, 5, 6);
         }
     }
 }

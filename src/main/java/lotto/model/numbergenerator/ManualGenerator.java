@@ -2,32 +2,26 @@ package lotto.model.numbergenerator;
 
 import static java.util.stream.Collectors.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class ManualGenerator implements LottoNumberGenerator {
-    private final Iterator<List<Integer>> manualLottos;
+    private final Iterator<Set<Integer>> manualLottos;
 
-    public ManualGenerator(List<List<Integer>> manualLottos) {
-        List<List<Integer>> copyOfManualLottos = List.copyOf(manualLottos);
-        this.manualLottos = List.copyOf(copyOfManualLottos.stream()
-                .map(this::sorted)
-                .collect(toList()))
+    public ManualGenerator(List<Set<Integer>> manualLottos) {
+        List<Set<Integer>> copyOfManualLottos = List.copyOf(manualLottos);
+        this.manualLottos = List.copyOf(copyOfManualLottos)
             .iterator();
     }
 
-    private List<Integer> sorted(List<Integer> integers) {
-        return integers.stream()
-            .sorted()
-            .collect(toList());
-    }
-
     @Override
-    public List<Integer> generate() {
+    public Set<Integer> generate() {
         if (manualLottos.hasNext()) {
             return manualLottos.next();
         }
-        return Collections.emptyList();
+        return Collections.emptySet();
     }
 }
