@@ -4,7 +4,7 @@ import java.util.Arrays;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCounter;
 import lotto.domain.Lottos;
-import lotto.domain.Money;
+import lotto.domain.LottoPurchaseMoney;
 import lotto.domain.Rank;
 import lotto.domain.RankCounter;
 
@@ -30,7 +30,7 @@ public class OutputView {
                 .forEach(System.out::println);
     }
 
-    public static void printWinningStatistic(Money money, RankCounter rankCounter) {
+    public static void printWinningStatistic(LottoPurchaseMoney lottoPurchaseMoney, RankCounter rankCounter) {
         printNewLine();
         System.out.println(WINNING_STATISTIC_TITLE);
         Arrays.stream(Rank.values())
@@ -38,7 +38,7 @@ public class OutputView {
                 .forEach(rank -> System.out.printf((RANK_MESSAGE_FORMAT),
                         rank.toStringWinningNumberCount(), getBonusNumberMessage(rank),
                         rank.toStringPrize(), rankCounter.getCountOfRank(rank)));
-        System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), money.calculateProfitRate(rankCounter.getTotalPrize()));
+        System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), lottoPurchaseMoney.calculateProfitRate(rankCounter.getTotalPrize()));
     }
 
     private static String getBonusNumberMessage(Rank rank) {

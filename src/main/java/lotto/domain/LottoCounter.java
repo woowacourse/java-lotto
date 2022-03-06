@@ -9,11 +9,11 @@ public class LottoCounter {
     private final int manualLottoCount;
     private final int autoLottoCount;
 
-    public LottoCounter(Money money, int manualLottoCount) {
+    public LottoCounter(LottoPurchaseMoney lottoPurchaseMoney, int manualLottoCount) {
         checkNegative(manualLottoCount);
-        checkLottoCountOverMoney(money, manualLottoCount);
+        checkLottoCountOverMoney(lottoPurchaseMoney, manualLottoCount);
         this.manualLottoCount = manualLottoCount;
-        this.autoLottoCount = getTotalLottoCount(money) - manualLottoCount;
+        this.autoLottoCount = getTotalLottoCount(lottoPurchaseMoney) - manualLottoCount;
     }
 
     private void checkNegative(int manualLottoCount) {
@@ -26,18 +26,18 @@ public class LottoCounter {
         return manualLottoCount < 0;
     }
 
-    private void checkLottoCountOverMoney(Money money, int lottoCount) {
+    private void checkLottoCountOverMoney(LottoPurchaseMoney money, int lottoCount) {
         if (isLottoCountOverMoney(money, lottoCount)) {
             throw new LottoCounterException(LottoCounterException.LOTTO_COUNT_OVER_MONEY_ERROR);
         }
     }
 
-    private boolean isLottoCountOverMoney(Money money, int lottoCount) {
-        return getTotalLottoCount(money) < lottoCount;
+    private boolean isLottoCountOverMoney(LottoPurchaseMoney lottoPurchaseMoney, int lottoCount) {
+        return getTotalLottoCount(lottoPurchaseMoney) < lottoCount;
     }
 
-    public static int getTotalLottoCount(Money money) {
-        return money.calculateTotalLottoCount(LOTTO_TICKET_PRICE);
+    public static int getTotalLottoCount(LottoPurchaseMoney lottoPurchaseMoney) {
+        return lottoPurchaseMoney.calculateTotalLottoCount(LOTTO_TICKET_PRICE);
     }
 
     public int getManualLottoCount() {

@@ -1,21 +1,21 @@
 package lotto.domain;
 
-import lotto.exception.MoneyException;
+import lotto.exception.LottoPurchaseMoneyException;
 
-public class Money {
+public class LottoPurchaseMoney {
 
     private static final int UNIT_SIZE = 1000;
 
-    private final int money;
+    private final int lottoPurchaseMoney;
 
-    public Money(int input) {
+    public LottoPurchaseMoney(int input) {
         checkUnit(input);
-        this.money = input;
+        this.lottoPurchaseMoney = input;
     }
 
     private void checkUnit(int input) {
         if (!isCorrectUnit(input)) {
-            throw new MoneyException(MoneyException.MONEY_UNIT_ERROR_MESSAGE);
+            throw new LottoPurchaseMoneyException(LottoPurchaseMoneyException.MONEY_UNIT_ERROR_MESSAGE);
         }
     }
 
@@ -24,11 +24,11 @@ public class Money {
     }
 
     public int calculateTotalLottoCount(int lottoTicketPrice) {
-        return money / lottoTicketPrice;
+        return lottoPurchaseMoney / lottoTicketPrice;
     }
 
     public double calculateProfitRate(long totalPrize) {
-        double profitRate = (double) totalPrize / (double) money;
+        double profitRate = (double) totalPrize / (double) lottoPurchaseMoney;
         return Math.floor(profitRate * 100) / 100.0;
     }
 }
