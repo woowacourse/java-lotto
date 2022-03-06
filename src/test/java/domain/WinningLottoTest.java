@@ -47,7 +47,7 @@ class WinningLottoTest {
 
     @ParameterizedTest
     @MethodSource("parameterProvider")
-    @DisplayName("당청번호와 구매의 로또 번호의 일치 여부를 계산하는 경우 1")
+    @DisplayName("당청번호와 구매의 로또 번호의 일치 여부를 계산하는 경우")
     void matchLotto(List<Integer> buyNumbers, List<Integer> winningNumbers, int bonusNumber,
         LottoReward exceptedReward) {
         Lotto bueLotto = LottoFactory.createLotto(buyNumbers);

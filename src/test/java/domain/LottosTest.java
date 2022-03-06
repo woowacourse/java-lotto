@@ -6,9 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottosTest {
 
@@ -37,20 +41,24 @@ public class LottosTest {
             .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    @DisplayName("보유하고 있는 로또들과 당첨 로또의 매칭 결과를 계산 1")
-    void calculateLottoMatchResult_01() {
+    @ParameterizedTest
+    @MethodSource("parameterProvider")
+    @DisplayName("보유하고 있는 로또들과 당첨 로또의 매칭 결과를 계산")
+    void calculateLottoMatchResult(LottoReward reward, int rewardCount) {
         Map<LottoReward, Integer> winningStatistics = getLottoWinningStatistics().values();
 
-        assertThat(winningStatistics.get(LottoReward.FIRST)).isEqualTo(1);
+        assertThat(winningStatistics.get(reward)).isEqualTo(rewardCount);
     }
 
-    @Test
-    @DisplayName("보유하고 있는 로또들과 당첨 로또의 매칭 결과를 계산 2")
-    void calculateLottoMatchResult_02() {
-        Map<LottoReward, Integer> winningStatistics = getLottoWinningStatistics().values();
-
-        assertThat(winningStatistics.get(LottoReward.FIFTH)).isEqualTo(1);
+    private static Stream<Arguments> parameterProvider() {
+        return Stream.of(
+            Arguments.of(LottoReward.FIRST, 1),
+            Arguments.of(LottoReward.SECOND, 0),
+            Arguments.of(LottoReward.THIRD, 0),
+            Arguments.of(LottoReward.FOURTH, 0),
+            Arguments.of(LottoReward.FIFTH, 1),
+            Arguments.of(LottoReward.NONE, 1)
+        );
     }
 
     private WinningStatistics getLottoWinningStatistics() {
