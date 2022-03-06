@@ -1,5 +1,7 @@
 import controller.LottoController;
 import controller.dto.LottoGeneratorDto;
+import controller.dto.LottosDto;
+import controller.dto.StatisticDto;
 import domain.Lottos;
 import domain.Money;
 import domain.Statistic;
@@ -17,15 +19,14 @@ public class Application {
         LottoGeneratorDto lottoGeneratorDto = lottoMachine.purchase(inputMoney, manualLottoCount, manualLottoNumbers);
         OutputView.printCountOfLotto(lottoGeneratorDto.getAutoLottoCount(), manualLottoCount);
 
-
         Lottos lottos = Lottos.generateLottos(lottoGeneratorDto.getLottoGenerators());
-
-        OutputView.printLottos(lottos);
+        OutputView.printLottos(LottosDto.from(lottos));
         String[] inputWinningNumber = InputView.askInputWinningNumber();
         int inputBonusBall = InputView.askInputBonusBall();
+
         Statistic statistic = lottoMachine.winningResult(inputWinningNumber, inputBonusBall, lottos);
-        OutputView.printStatistics(statistic);
-        OutputView.printProfitRate(statistic, new Money(inputMoney));
+        OutputView.printStatistics(StatisticDto.from(statistic));
+        OutputView.printProfitRate(statistic.getProfitRate(new Money(inputMoney)));
 
     }
 }

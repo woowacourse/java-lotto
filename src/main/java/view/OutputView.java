@@ -1,6 +1,8 @@
 package view;
 
-import domain.*;
+import controller.dto.LottoDto;
+import controller.dto.LottosDto;
+import controller.dto.StatisticDto;
 
 import java.util.stream.Collectors;
 
@@ -16,23 +18,23 @@ public class OutputView {
     private static final String OPEN_BRACKETS = "[";
     private static final String CLOSE_BRACKETS = "]";
 
-    private OutputView() { }
+    private OutputView() {
+    }
 
     public static void printCountOfLotto(int autoLottoCount, int manualLottoCount) {
         System.out.printf(COUNT_MESSAGE, manualLottoCount, autoLottoCount);
     }
 
-    public static void printLottos(Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
-            printLotto(lotto);
+    public static void printLottos(LottosDto lottosDto) {
+        for (LottoDto lottoDto : lottosDto.getLottos()) {
+            printLotto(lottoDto);
         }
         System.out.println();
     }
 
-    private static void printLotto(Lotto lotto) {
-        String LottoNumbers = lotto.getNumbers()
+    private static void printLotto(LottoDto lottoDto) {
+        String LottoNumbers = lottoDto.getNumbers()
                 .stream()
-                .map(LottoNumber::getLottoNumber)
                 .sorted()
                 .map(String::valueOf)
                 .collect(Collectors.joining(DELIMITER));
@@ -40,24 +42,22 @@ public class OutputView {
         System.out.println(OPEN_BRACKETS + LottoNumbers + CLOSE_BRACKETS);
     }
 
-    public static void printStatistics(Statistic statistic) {
+    public static void printStatistics(StatisticDto statistics) {
         System.out.println(STATISTIC_RESULT_MESSAGE);
-
-        statistic.getStatistics()
+        statistics.getStatistic()
                 .entrySet()
                 .stream()
-                .filter(statistics -> statistics.getKey().getCount() != ZERO)
-                .forEach(statistics -> {
-                    if (statistics.getKey().hasBonusBall()) {
-                        System.out.printf(SECOND_MESSAGE, Rank.SECOND.getCount(), Rank.SECOND.getWinningPrice(), statistics.getValue());
+                .filter(statistic -> statistic.getKey().getCount() != ZERO)
+                .forEach(statistic -> {
+                    if (statistic.getKey().hasBonusBall()) {
+                        System.out.printf(SECOND_MESSAGE, statistic.getKey().getCount(), statistic.getKey().getWinningPrice(), statistic.getValue());
                         return;
                     }
-                    System.out.printf(WINNING_MESSAGE, statistics.getKey().getCount(), statistics.getKey().getWinningPrice(), statistics.getValue());
+                    System.out.printf(WINNING_MESSAGE, statistic.getKey().getCount(), statistic.getKey().getWinningPrice(), statistic.getValue());
                 });
     }
 
-    public static void printProfitRate(Statistic statistic, Money money) {
-        double profitRate = statistic.getProfitRate(money);
+    public static void printProfitRate(double profitRate) {
         System.out.printf(PROFIT_RATE_MESSAGE, profitRate);
     }
 }
