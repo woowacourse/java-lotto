@@ -2,7 +2,6 @@ package controller;
 
 import domain.Lotto;
 import domain.LottoNumber;
-import domain.LottoNumberRepository;
 import domain.LottoResult;
 import domain.Lottos;
 import domain.Wallet;
@@ -109,7 +108,7 @@ public class LottoController {
     private LottoNumber getLottoNumberForBonusNumber() {
         try {
             int bonusNumberValue = InputView.scanBonusNumber();
-            return LottoNumberRepository.getLottoNumberByInt(bonusNumberValue);
+            return LottoNumber.getInstance(bonusNumberValue);
         } catch (IllegalArgumentException exception) {
             InputView.printException(exception);
             return getLottoNumberForBonusNumber();

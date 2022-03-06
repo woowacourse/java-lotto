@@ -19,14 +19,14 @@ public class LottoResultTest {
     void setup() {
         List<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, 7)
                 .filter(number -> number != 6)
-                .mapToObj(LottoNumberRepository::getLottoNumberByInt)
+                .mapToObj(LottoNumber::getInstance)
                 .collect(toList());
         lottos = new Lottos(List.of(new Lotto(lottoNumbers), new Lotto(lottoNumbers)));
 
         List<LottoNumber> winningNumbers = IntStream.rangeClosed(1, 6)
-                .mapToObj(LottoNumberRepository::getLottoNumberByInt)
+                .mapToObj(LottoNumber::getInstance)
                 .collect(toList());
-        LottoNumber bonusNumber = LottoNumberRepository.getLottoNumberByInt(7);
+        LottoNumber bonusNumber = LottoNumber.getInstance(7);
         winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusNumber);
     }
 

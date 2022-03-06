@@ -1,27 +1,42 @@
 package domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
-    private static final String ERROR_MESSAGE_FOR_OUT_OF_RANGE_NUMBER = "1에서 45 사이의 값을 입력해주세요";
+    private static final String ERROR_MESSAGE_FOR_OUT_OF_RANGE_NUMBER =
+            String.format("%d에서 %d사이의 값을 입력해주세요", MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER);
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
     private final int number;
 
-    public LottoNumber(int number) {
-        validateRange(number);
-        this.number = number;
+    private LottoNumber(int lottoNumber) {
+        this.number = lottoNumber;
     }
 
-    private void validateRange(int number) {
+    public static LottoNumber getInstance(int lottoNumber) {
+        validateRange(lottoNumber);
+
+        if (CACHE.containsKey(lottoNumber)) {
+            return CACHE.get(lottoNumber);
+        }
+
+        LottoNumber newInstance = new LottoNumber(lottoNumber);
+        CACHE.put(lottoNumber, newInstance);
+        return newInstance;
+    }
+
+    private static void validateRange(int number) {
         if (isOutOfRange(number)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_OUT_OF_RANGE_NUMBER);
         }
     }
 
-    private boolean isOutOfRange(int number) {
-        return MAXIMUM_LOTTO_NUMBER < number || number < MINIMUM_LOTTO_NUMBER;
+    private static boolean isOutOfRange(int number) {
+        return number < MINIMUM_LOTTO_NUMBER || MAXIMUM_LOTTO_NUMBER < number;
     }
 
     public int getNumber() {

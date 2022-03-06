@@ -3,7 +3,6 @@ package domain.service.impl;
 import static java.util.stream.Collectors.toList;
 
 import domain.LottoNumber;
-import domain.LottoNumberRepository;
 import domain.service.LottoService;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +17,7 @@ public class AutoLottoServiceImpl implements LottoService {
         return lottoNumbersForNewLotto.stream()
                 .limit(LOTTO_NUMBERS_SIZE)
                 .sorted()
-                .map(LottoNumberRepository::getLottoNumberByInt)
+                .map(LottoNumber::getInstance)
                 .collect(toList());
     }
 }
