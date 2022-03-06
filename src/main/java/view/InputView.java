@@ -3,8 +3,8 @@ package view;
 import java.util.Scanner;
 
 import static java.lang.System.lineSeparator;
-import static util.InputUtil.splitAndChangeToInt;
-import static util.InputUtil.checkAndChangeToInt;
+import static view.util.InputUtil.splitAndChangeToInt;
+import static view.util.InputUtil.checkAndChangeToInt;
 
 public class InputView {
 
@@ -16,6 +16,7 @@ public class InputView {
     private static final String ERROR_BALL_NON_INTEGER = "로또 번호는 숫자만 입력해줘야 합니다.";
     private static final String ERROR_MONEY_NON_INTEGER = "가격은 정수만 가능합니다.";
     private static final String ERROR_COUNT_NON_INTEGER = "구매 개수는 정수만 가능합니다.";
+    private static final String LOTTO_NUMBER_DELIMITER = ", |,";
 
     private final static Scanner scanner = new Scanner(System.in);
 
@@ -39,7 +40,7 @@ public class InputView {
 
     public static int[] inputWinningLottoNumbers() {
         System.out.println(lineSeparator() + INPUT_WINNING_LOTTO_NUMBERS);
-        return splitAndChangeToInt(scanner.nextLine(), ERROR_BALL_NON_INTEGER);
+        return splitAndChangeToInt(scanner.nextLine(), LOTTO_NUMBER_DELIMITER, ERROR_BALL_NON_INTEGER);
     }
 
     public static int inputBonus() {
@@ -56,7 +57,7 @@ public class InputView {
         System.out.println(lineSeparator() + INPUT_MANUAL_LOTTO_NUMBERS);
         int[][] inputLottoNumbers = new int[numOfManualLotto][6];
         for (int i = 0; i < numOfManualLotto; i++) {
-            inputLottoNumbers[i] = splitAndChangeToInt(scanner.nextLine(), ERROR_BALL_NON_INTEGER);
+            inputLottoNumbers[i] = splitAndChangeToInt(scanner.nextLine(), LOTTO_NUMBER_DELIMITER, ERROR_BALL_NON_INTEGER);
         }
         return inputLottoNumbers;
     }
