@@ -37,9 +37,7 @@ public class LottoMachine {
         private List<Lotto> manualLottos;
 
         public Builder setTotalPurchaseAmount(final int totalPurchaseAmount) {
-            this.totalPurchaseAmount = new TotalPurchaseAmount.Builder()
-                    .setTotalAmount(totalPurchaseAmount)
-                    .build();
+            this.totalPurchaseAmount = new TotalPurchaseAmount(totalPurchaseAmount);
             return this;
         }
 

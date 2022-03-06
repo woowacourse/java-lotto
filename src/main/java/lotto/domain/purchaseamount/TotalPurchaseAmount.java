@@ -7,34 +7,21 @@ public class TotalPurchaseAmount {
 
     private final int value;
 
-    public TotalPurchaseAmount(final Builder builder) {
-        this.value = builder.totalAmount;
+    public TotalPurchaseAmount(final int value) {
+        validateRange(value);
+        validateMultipleOfPrice(value);
+        this.value = value;
     }
 
-    public static class Builder {
-        private int totalAmount;
-
-        public Builder setTotalAmount(final int value) {
-            validateRange(value);
-            validateMultipleOfPrice(value);
-            this.totalAmount = value;
-            return this;
+    private void validateRange(final int value) {
+        if (value < LOTTO_NUMBER) {
+            throw new IllegalArgumentException(PURCHASE_AMOUNT_RANGE_EXCEPTION_MESSAGE + LOTTO_NUMBER);
         }
+    }
 
-        private void validateRange(final int value) {
-            if (value < LOTTO_NUMBER) {
-                throw new IllegalArgumentException(PURCHASE_AMOUNT_RANGE_EXCEPTION_MESSAGE + LOTTO_NUMBER);
-            }
-        }
-
-        private void validateMultipleOfPrice(final int value) {
-            if (value % LOTTO_NUMBER != 0) {
-                throw new IllegalArgumentException(INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE);
-            }
-        }
-
-        public TotalPurchaseAmount build() {
-            return new TotalPurchaseAmount(this);
+    private void validateMultipleOfPrice(final int value) {
+        if (value % LOTTO_NUMBER != 0) {
+            throw new IllegalArgumentException(INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE);
         }
     }
 
