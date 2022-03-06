@@ -21,10 +21,10 @@ public class Result {
     }
 
     public float getProfit(int money) {
-        return (float) getPrice() / (float) money;
+        return (float) getReward() / (float) money;
     }
 
-    private long getPrice() {
+    private long getReward() {
         return results.entrySet()
             .stream()
             .mapToLong(entry -> (long) entry.getKey().getPrizeMoney() * entry.getValue())
