@@ -4,6 +4,7 @@ import lotto.domain.lottonumber.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +17,7 @@ class LottoRandomGeneratorTest {
         //given
         final Lotto firstDefaultLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         final Lotto secondDefaultLotto = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
-        final List<Lotto> defaultLottos = Arrays.asList(firstDefaultLotto, secondDefaultLotto);
+        final List<Lotto> defaultLottos = new ArrayList<>(Arrays.asList(firstDefaultLotto, secondDefaultLotto));
         final int numberOfGenerating = 6;
         final LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
         //when

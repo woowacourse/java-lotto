@@ -3,7 +3,9 @@ package lotto.domain.generator;
 import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.vo.LottoNumber;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -20,16 +22,11 @@ public class LottoRandomGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> generateLottosExceptDefaultLottos(final int numberOfGenerating, final List<Lotto> defaultLotts) {
-        final Set<Lotto> generatedNumbersGroup = new LinkedHashSet<>(defaultLotts);
-        return generateLottos(generatedNumbersGroup, numberOfGenerating);
-    }
-
-    private List<Lotto> generateLottos(final Set<Lotto> generatedNumbersGroup, final int numberOfGenerating) {
-        while (generatedNumbersGroup.size() < numberOfGenerating) {
-            generatedNumbersGroup.add(generateLotto());
+    public List<Lotto> generateLottosExceptDefaultLottos(final int numberOfGenerating, final List<Lotto> generated) {
+        while (generated.size() < numberOfGenerating) {
+            generated.add(generateLotto());
         }
-        return new ArrayList<>(generatedNumbersGroup);
+        return Collections.unmodifiableList(generated);
     }
 
     private Lotto generateLotto() {
