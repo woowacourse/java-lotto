@@ -2,22 +2,21 @@ package domain.Lotto;
 
 import utils.ExceptionMessage;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class LottoNumber {
 
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
-    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
+    private static final Map<Integer, LottoNumber> CACHE;
 
     static {
+        Map<Integer, LottoNumber> cacheMap = new HashMap<>();
         for (int number = MINIMUM_LOTTO_NUMBER; number <= MAXIMUM_LOTTO_NUMBER; number++) {
-            CACHE.put(number, new LottoNumber(number));
+            cacheMap.put(number, new LottoNumber(number));
         }
+        CACHE = Collections.unmodifiableMap(cacheMap);
     }
 
     private final int number;
@@ -37,8 +36,7 @@ public class LottoNumber {
         LottoNumber lottoNumber = CACHE.get(number);
 
         if (lottoNumber == null) {
-            CACHE.put(number, new LottoNumber(number));
-            lottoNumber = CACHE.get(number);
+            return new LottoNumber(number);
         }
         return lottoNumber;
     }
