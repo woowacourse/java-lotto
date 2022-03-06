@@ -32,7 +32,7 @@ public enum Rank {
                 .orElse(NOT_THING);
     }
 
-    private boolean isFilterRankNotSecondOrHasBonusNumber(boolean hasBonusNumber) {
+    private boolean isFilterRankNotSecondOrHasBonusNumber(final boolean hasBonusNumber) {
         return !this.equals(SECOND) || hasBonusNumber;
     }
 
