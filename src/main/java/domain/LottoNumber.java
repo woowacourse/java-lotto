@@ -35,8 +35,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
         return lottoNumber;
     }
-    
-    public int getNumber() {
+
+    public int unboxed() {
         return number;
     }
 

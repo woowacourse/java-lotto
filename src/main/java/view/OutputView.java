@@ -40,7 +40,7 @@ public class OutputView {
         for (Lotto lotto : lottos.getMembers()) {
             String str = lotto.getNumbers()
                     .stream()
-                    .map(LottoNumber::getNumber)
+                    .map(LottoNumber::unboxed)
                     .map(String::valueOf)
                     .collect(Collectors.joining(NUMBER_DELIMITER));
             System.out.printf(LOTTO_NUMBER_FORMAT, str);

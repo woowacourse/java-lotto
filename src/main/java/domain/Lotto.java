@@ -40,9 +40,12 @@ public class Lotto {
                 .count();
     }
 
-    public boolean contains(LottoNumber number) {
-        Validator.checkArgumentIsNull(number);
-        return unboxNumbers().contains(number.getNumber());
+    public boolean contains(LottoNumber targetNumber) {
+        boolean isContain = false;
+        for (LottoNumber number : numbers) {
+            isContain |= number.equals(targetNumber);
+        }
+        return isContain;
     }
 
     public boolean isPickedLotto() {
@@ -59,11 +62,5 @@ public class Lotto {
         return lottoNumbers.stream()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toCollection(TreeSet::new));
-    }
-
-    private Set<Integer> unboxNumbers() {
-        return numbers.stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toSet());
     }
 }
