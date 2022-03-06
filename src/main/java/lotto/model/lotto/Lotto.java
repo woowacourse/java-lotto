@@ -6,6 +6,7 @@ import lotto.dto.WinningLottoResponse;
 import lotto.model.message.LottoNumberExceptionMessage;
 import lotto.model.lotto.result.Rank;
 import lotto.model.lotto.result.WinningResult;
+import lotto.utils.InputValidateUtils;
 
 import static lotto.model.lotto.LottoNumbers.MAX;
 import static lotto.model.lotto.LottoNumbers.MIN;
@@ -28,13 +29,8 @@ public class Lotto {
     }
 
     private void validateNumberOutOfRange(List<Integer> numbers) {
-        numbers.forEach(this::inputOutOfRange);
-    }
-
-    private void inputOutOfRange(int number) {
-        if (number < MIN || number > MAX) {
-            throw new IllegalArgumentException(LottoNumberExceptionMessage.RANGE_ERROR.getMassage());
-        }
+        numbers.forEach(number -> InputValidateUtils.inputOutOfRange(number,
+                LottoNumberExceptionMessage.RANGE_ERROR.getMassage()));
     }
 
     private void validateNumberSize(List<Integer> numbers) {

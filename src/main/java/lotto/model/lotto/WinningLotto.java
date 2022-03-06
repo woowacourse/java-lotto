@@ -7,6 +7,7 @@ import java.util.Set;
 
 import lotto.model.message.BonusBallExceptionMessage;
 import lotto.model.message.LottoNumberExceptionMessage;
+import lotto.utils.InputValidateUtils;
 
 import static lotto.model.lotto.LottoNumbers.MAX;
 import static lotto.model.lotto.LottoNumbers.MIN;
@@ -22,14 +23,8 @@ public class WinningLotto {
     }
 
     private void validateBonusBall(int bonusBall) {
-        inputOutOfRange(bonusBall);
+        InputValidateUtils.inputOutOfRange(bonusBall, BonusBallExceptionMessage.RANGE_ERROR.getMessage());
         validateReduplicationWithBonusBall(bonusBall);
-    }
-
-    private void inputOutOfRange(int number) {
-        if (number < MIN || number > MAX) {
-            throw new IllegalArgumentException(BonusBallExceptionMessage.RANGE_ERROR.getMessage());
-        }
     }
 
     void validateReduplicationWithBonusBall(int number) {
