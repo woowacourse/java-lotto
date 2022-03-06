@@ -18,16 +18,10 @@ public class LottoController {
     private static final String NUMBER_DELIMITER = ",";
 
     private LottoMachine lottoMachine;
-    private final LottoMachine.Builder lottoMachineBuilder = new LottoMachine.Builder();
 
-    public void setPurchaseAmount(final int purchaseAmount) {
-        lottoMachineBuilder.setTotalPurchaseAmount(purchaseAmount);
-    }
-
-    public void setManualLottoNumbers(final List<String> manualLottoNumbers) {
-        final List<InputLottoDto> lottos = splitLottos(manualLottoNumbers);
-        lottoMachineBuilder.setManualLottos(lottos);
-        lottoMachine = lottoMachineBuilder.build();
+    public LottoController(final int totalPurchaseAmount, final List<String> manualLottoNumbers) {
+        final List<InputLottoDto> manualLottoInfos = splitLottos(manualLottoNumbers);
+        this.lottoMachine = new LottoMachine(totalPurchaseAmount, manualLottoInfos);
     }
 
     private List<InputLottoDto> splitLottos(final List<String> lottoNumbers) {

@@ -21,38 +21,23 @@ public class LottoMachine {
     private final TotalPurchaseAmount totalPurchaseAmount;
     private final ManualPurchaseCount manualPurchaseCount;
 
-    private LottoMachine(final LottoMachine.Builder builder) {
-        this.totalPurchaseAmount = builder.totalPurchaseAmount;
-        lottos = new Lottos(generateLottos(builder.manualLottos));
-        manualPurchaseCount = new ManualPurchaseCount(
-                builder.manualLottos.size(), builder.totalPurchaseAmount.getTotalPurchaseCount(LOTTO_PRICE));
+    public LottoMachine(final int totalPurchaseAmount, final List<InputLottoDto> manualLottos) {
+        this.totalPurchaseAmount = new TotalPurchaseAmount(totalPurchaseAmount, LOTTO_PRICE);
+        final int totalPurchaseCount = totalPurchaseAmount / LOTTO_PRICE;
+        this.lottos = new Lottos(initializeLottos(totalPurchaseCount, convertToLotto(manualLottos)));
+        this.manualPurchaseCount = new ManualPurchaseCount(manualLottos.size(), totalPurchaseCount);
     }
 
-    private List<Lotto> generateLottos(final List<Lotto> manualLottos) {
+    private List<Lotto> convertToLotto(final List<InputLottoDto> manualLottos) {
+        return manualLottos.stream()
+                .map(InputLottoDto::getNumbers)
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+    }
+
+    private List<Lotto> initializeLottos(final int totalPurchaseAmount, final List<Lotto> manualLottos) {
         final LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
-        return lottoRandomGenerator.generateLottosExceptDefaultLottos(
-                this.totalPurchaseAmount.getTotalPurchaseCount(LOTTO_PRICE), manualLottos);
-    }
-
-    public static class Builder {
-        private TotalPurchaseAmount totalPurchaseAmount;
-        private List<Lotto> manualLottos;
-
-        public Builder setTotalPurchaseAmount(final int totalPurchaseAmount) {
-            this.totalPurchaseAmount = new TotalPurchaseAmount(totalPurchaseAmount, LOTTO_PRICE);
-            return this;
-        }
-
-        public Builder setManualLottos(final List<InputLottoDto> manualLottos) {
-            this.manualLottos = manualLottos.stream()
-                    .map(manualLotto -> new Lotto(manualLotto.getNumbers()))
-                    .collect(Collectors.toUnmodifiableList());
-            return this;
-        }
-
-        public LottoMachine build() {
-            return new LottoMachine(this);
-        }
+        return lottoRandomGenerator.generateLottosExceptDefaultLottos(totalPurchaseAmount, manualLottos);
     }
 
     public int getCountOfAutoLottoNumbers() {

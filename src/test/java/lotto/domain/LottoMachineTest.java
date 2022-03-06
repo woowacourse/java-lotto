@@ -26,10 +26,7 @@ class LottoMachineTest {
             new InputLottoDto(firstLottoNumbers), new InputLottoDto(secondLottoNumbers),
             new InputLottoDto(thirdLottoNumbers), new InputLottoDto(fourthLottoNumbers),
             new InputLottoDto(fifthLottoNumbers), new InputLottoDto(sixthLottoNumbers));
-    private final LottoMachine lottoMachine = new LottoMachine.Builder()
-            .setTotalPurchaseAmount(6000)
-            .setManualLottos(lottos)
-            .build();
+    private final LottoMachine lottoMachine = new LottoMachine(6000, lottos);
 
     private final List<Integer> winningLotto = Arrays.asList(2, 3, 4, 5, 6, 7);
     private final int bonusNumber = 1;
