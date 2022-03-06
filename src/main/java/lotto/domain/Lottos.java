@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.Constant;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +11,7 @@ public class Lottos {
     public Lottos() {
         this.lottos = new ArrayList<>();
         this.result = new LottoResult();
+        this.passiveLottoCount = 0;
     }
 
     public List<Lotto> getLottos() {
@@ -34,7 +33,7 @@ public class Lottos {
         return result;
     }
 
-    public void purchaseActiveLotto(Money money) {
+    public void purchaseAutoLotto(Money money) {
         for (int i = 0; i < money.getLottoCount(); i++) {
             lottos.add(new Lotto(new PickedNumbers()));
         }
@@ -42,6 +41,7 @@ public class Lottos {
 
     public void purchaseLotto(PickedNumbers pickedNumbers) {
         lottos.add(new Lotto(pickedNumbers));
+        passiveLottoCount++;
     }
 
     private void checkLottoResult(WinningLotto winningLotto, PickedNumbers pickedNumbers) {

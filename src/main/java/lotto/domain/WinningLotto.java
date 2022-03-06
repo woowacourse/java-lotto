@@ -2,6 +2,7 @@ package lotto.domain;
 
 public class WinningLotto {
     private static final int SECOND_OR_THIRD_COUNT = 5;
+
     private final PickedNumbers winningNumbers;
     private final BonusNumber bonusNumber;
 
