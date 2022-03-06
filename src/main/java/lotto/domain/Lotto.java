@@ -9,20 +9,20 @@ public class Lotto {
     private static final String PURCHASE_INSUFFICIENT_MESSAGE = "구입금액이 부족합니다. 구매 개수를 낮춰주세요.";
     private static final String REQUEST_UNIT_OF_1000_MESSAGE = LOTTO_PRICE + "원 단위로 입력해주세요.";
 
-    private final Amount presentAmount;
-    private final Amount originalAmount;
+    private final Amount nowAmount;
+    private final Amount originalInputAmount;
     private Tickets tickets = new Tickets();
 
     public Lotto(int amount) {
         validateAmount(amount);
-        this.originalAmount = new Amount(amount);
-        this.presentAmount = new Amount(amount);
+        this.originalInputAmount = new Amount(amount);
+        this.nowAmount = new Amount(amount);
     }
 
     public Lotto(int amount, LottoNumbersGenerator lottoNumbersGenerator) {
         validateAmount(amount);
-        this.originalAmount = new Amount(amount);
-        this.presentAmount = new Amount(amount);
+        this.originalInputAmount = new Amount(amount);
+        this.nowAmount = new Amount(amount);
         this.tickets = Tickets.of(findCountOfPurchasable(), lottoNumbersGenerator);
     }
 
@@ -37,13 +37,13 @@ public class Lotto {
     }
 
     public int findCountOfPurchasable() {
-        return presentAmount.getAmountDividedBy(LOTTO_PRICE);
+        return nowAmount.getAmountDividedBy(LOTTO_PRICE);
     }
 
     public void addTicket(Ticket ticket) {
-        if (presentAmount.isPurchasableBy(LOTTO_PRICE)) {
+        if (nowAmount.isPurchasableBy(LOTTO_PRICE)) {
             tickets.add(ticket);
-            presentAmount.decrease(LOTTO_PRICE);
+            nowAmount.decrease(LOTTO_PRICE);
         }
     }
 
@@ -56,7 +56,7 @@ public class Lotto {
     }
 
     public double getYield(WinTicket winTicket) {
-        return tickets.getYield(originalAmount, winTicket);
+        return tickets.getYield(originalInputAmount, winTicket);
     }
 
     public Tickets getTickets() {
@@ -78,6 +78,6 @@ public class Lotto {
     }
 
     private boolean isPurchasable(int ticketCount) {
-        return ticketCount <= presentAmount.getAmountDividedBy(LOTTO_PRICE);
+        return ticketCount <= nowAmount.getAmountDividedBy(LOTTO_PRICE);
     }
 }
