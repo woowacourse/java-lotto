@@ -14,8 +14,8 @@ public class LottosTest {
     @Test
     @DisplayName("구입 금액에 따른 개수만큼 로또 생성")
     public void generateLottosTest() {
-        int count = 14;
-        Lottos lottos = Lottos.generateAutoLottos(count);
+        int count = 1;
+        Lottos lottos = Lottos.generateLottos(List.of(new AutoLottoGenerator()));
         assertThat(lottos.size()).isEqualTo(count);
     }
 
@@ -41,10 +41,9 @@ public class LottosTest {
     @Test
     @DisplayName("수동 로또와 자동 로또가 합쳐서 하나의 로또로 되는지 테스트")
     void addManualAndAutoLottosTest() {
-        Lottos autoLottos = Lottos.generateAutoLottos(6);
-        Lotto lotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 6));
-        Lottos manualLottos = new Lottos(List.of(lotto));
-        Lottos totalLottos = manualLottos.concat(autoLottos);
-        assertThat(totalLottos.size()).isEqualTo(autoLottos.size() + manualLottos.size());
+        String[] numbers = new String[]{"1", "3", "5", "7", "9", "11"};
+        Lottos lottos = Lottos.generateLottos(List.of(new ManualLottoGenerator(numbers), new AutoLottoGenerator()));
+
+        assertThat(lottos.size()).isEqualTo(2);
     }
 }

@@ -11,6 +11,7 @@ public class InputView {
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String INPUT_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String DELIMITER = ", ";
     private static final Scanner scanner = new Scanner(System.in);
 
     private InputView() {
@@ -36,9 +37,10 @@ public class InputView {
         }
     }
 
-    public static String askInputWinningNumber() {
+    public static String[] askInputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
-        return scanner.nextLine();
+        String input = scanner.nextLine();
+        return input.split(DELIMITER);
     }
 
     public static int askManualLottoCount() {
@@ -46,10 +48,12 @@ public class InputView {
         return convertToInt(scanner.nextLine());
     }
 
-    public static List<String> askManualLottoNumbers(int manualLottoCount) {
+    public static List<String[]> askManualLottoNumbers(int manualLottoCount) {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
         return IntStream.range(0, manualLottoCount)
-                .mapToObj(input -> scanner.nextLine())
+                .mapToObj(i -> scanner.nextLine())
+                .map(input -> input.split(DELIMITER))
                 .collect(Collectors.toList());
+
     }
 }

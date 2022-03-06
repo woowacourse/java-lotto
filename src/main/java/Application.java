@@ -1,5 +1,6 @@
 import controller.LottoController;
-import controller.dto.LottosDto;
+import controller.dto.LottoGeneratorDto;
+import domain.Lottos;
 import domain.Money;
 import domain.Statistic;
 import view.InputView;
@@ -12,13 +13,15 @@ public class Application {
         LottoController lottoMachine = new LottoController();
         int inputMoney = InputView.askInputMoney();
         int manualLottoCount = InputView.askManualLottoCount();
-        List<String> manualLottoNumbers = InputView.askManualLottoNumbers(manualLottoCount);
-        LottosDto lottosDto = lottoMachine.purchase(inputMoney, manualLottoCount, manualLottoNumbers);
-        OutputView.printCountOfLotto(lottosDto.getAutoLottoCount(), manualLottoCount);
+        List<String[]> manualLottoNumbers = InputView.askManualLottoNumbers(manualLottoCount);
+        LottoGeneratorDto lottoGeneratorDto = lottoMachine.purchase(inputMoney, manualLottoCount, manualLottoNumbers);
+        OutputView.printCountOfLotto(lottoGeneratorDto.getAutoLottoCount(), manualLottoCount);
 
-        LottosDto lottos = lottoMachine.createLottos(lottosDto);
-        OutputView.printLottos(lottos.getLottos());
-        String inputWinningNumber = InputView.askInputWinningNumber();
+
+        Lottos lottos = Lottos.generateLottos(lottoGeneratorDto.getLottoGenerators());
+
+        OutputView.printLottos(lottos);
+        String[] inputWinningNumber = InputView.askInputWinningNumber();
         int inputBonusBall = InputView.askInputBonusBall();
         Statistic statistic = lottoMachine.winningResult(inputWinningNumber, inputBonusBall, lottos);
         OutputView.printStatistics(statistic);

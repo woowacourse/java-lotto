@@ -15,12 +15,10 @@ public class Lottos {
         return lottos.size();
     }
 
-    public static Lottos generateAutoLottos(int count) {
-        List<Lotto> lottos = new ArrayList<>();
-        LottoGenerator autoLottoGenerator = new AutoLottoGenerator();
-        for (int i = 0; i < count; i++) {
-            lottos.add(autoLottoGenerator.generateLotto());
-        }
+    public static Lottos generateLottos(List<LottoGenerator> lottoGenerators) {
+        List<Lotto> lottos = lottoGenerators.stream()
+                .map(LottoGenerator::generateLotto)
+                .collect(Collectors.toList());
         return new Lottos(lottos);
     }
 
@@ -29,11 +27,6 @@ public class Lottos {
                 .map(winningNumber::match)
                 .collect(Collectors.toList());
         return Statistic.valueOf(ranks);
-    }
-
-    public Lottos concat(Lottos lottos) {
-        this.lottos.addAll(lottos.getLottos());
-        return this;
     }
 
     public List<Lotto> getLottos() {
