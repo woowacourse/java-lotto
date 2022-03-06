@@ -36,7 +36,7 @@ public class LottoMachine {
 
 	private void purchaseByManual(List<List<Integer>> totalManualNumbers) {
 		for (List<Integer> lottoNumbers : totalManualNumbers) {
-			lottoTickets.add(LottoTicket.byManual(new LottoNumbers(lottoNumbers)));
+			lottoTickets.add(LottoTicket.byManual(lottoNumbers));
 		}
 	}
 

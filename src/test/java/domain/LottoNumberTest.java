@@ -11,7 +11,7 @@ public class LottoNumberTest {
 	@ValueSource(ints = {0, 46, 100})
 	@DisplayName("허용범위 내에 존재하지 않는 숫자를 압력 한 경우 예외 발생")
 	void numberInRange(int input) {
-		assertThatThrownBy(() -> new LottoNumber(input))
+		assertThatThrownBy(() -> LottoNumber.of(input))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("이상")
 			.hasMessageContaining("이하의 숫자만 허용됩니다.");
