@@ -1,5 +1,6 @@
 package lotto.model.lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lotto.dto.WinningLottoResponse;
@@ -8,8 +9,12 @@ import lotto.model.lotto.result.WinningResult;
 
 public class LottoGame {
 
-    public void makeManualLottos(List<Lotto> lottos, Lotto lotto) {
-        lottos.add(lotto);
+    public List<Lotto> makeManualLottos(List<List<Integer>> receivedLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (List<Integer> lotto : receivedLottos) {
+            lottos.add(new Lotto(lotto));
+        }
+        return lottos;
     }
 
     public LottoStorage makeLottos(LottoCount lottoCount, List<Lotto> lottos) {

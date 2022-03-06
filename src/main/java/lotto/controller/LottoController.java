@@ -19,7 +19,7 @@ public class LottoController {
         LottoGame lottoGame = new LottoGame();
         Money money = makeMoney();
         ManualCount manual = receiveManualCount();
-        List<Lotto> manualLottos = receiveManualLottos(lottoGame, manual);
+        List<Lotto> manualLottos = sendManualLottos(lottoGame, manual);
 
         LottoStorage lottos = lottoGame.makeLottos(new LottoCount(money.getNumber(), manual.getNumber()), manualLottos);
         OutputView.printLottos(manual.getNumber(), lottos.getLottoStorage());
@@ -47,31 +47,31 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> receiveManualLottos(LottoGame lottoGame, ManualCount manualCount) {
+    private List<Lotto> sendManualLottos(LottoGame lottoGame, ManualCount manualCount) {
         InputView.inputManualLottoMessage();
-        List<Lotto> lottos = new ArrayList<>();
-        for (int idx = 0; idx < manualCount.getNumber(); idx++) {
-            lottoGame.makeManualLottos(lottos, receiveManualLotto());
-        }
-        return lottos;
-    }
-
-    private Lotto receiveManualLotto() {
         try {
-            List<Integer> receivedManualLottos = InputView.inputManualLottos();
-            return new Lotto(receivedManualLottos);
+            List<List<Integer>> lottos = receiveManualLottos(manualCount);
+            return lottoGame.makeManualLottos(lottos);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return receiveManualLotto();
+            return sendManualLottos(lottoGame, manualCount);
         }
+    }
+
+    private List<List<Integer>> receiveManualLottos(ManualCount manualCount) {
+        List<List<Integer>> lottos = new ArrayList<>();
+        for (int idx = 0; idx < manualCount.getNumber(); idx++) {
+            List<Integer> receivedManualLottos = InputView.inputManualLottos();
+            lottos.add(receivedManualLottos);
+        }
+        return lottos;
     }
 
     private WinningLotto receiveWinningLotto() {
         try {
             List<Integer> receivedWinningLotto = InputView.inputWinningLotto();
             String receivedBonusBall = InputView.inputBonusBall();
-            return new WinningLotto(receivedWinningLotto,
-                    ConverterUtils.convertStringToInt(receivedBonusBall));
+            return new WinningLotto(receivedWinningLotto, ConverterUtils.convertStringToInt(receivedBonusBall));
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return receiveWinningLotto();
