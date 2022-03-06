@@ -1,7 +1,6 @@
 package domain.generator;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,7 +14,7 @@ public class ManualLottoGenerator implements LottoGenerator {
 
     @Override
     public Set<Integer> generateNumbers() {
-        return new HashSet<>(Arrays.stream(inputNumbers)
-                .boxed().collect(Collectors.toList()));
+        return Arrays.stream(inputNumbers)
+                .boxed().collect(Collectors.toSet());
     }
 }

@@ -8,7 +8,7 @@ public class InputUtil {
 
     public static int[] splitAndChangeToInt(final String inputNumbers, final String message) {
         String[] splitNumbers = inputNumbers.split(LOTTO_NUMBER_DELIMITER);
-        return Arrays.asList(splitNumbers).stream()
+        return Arrays.stream(splitNumbers)
                 .mapToInt(number -> validateAndChangeToInt(number, message))
                 .toArray();
     }
