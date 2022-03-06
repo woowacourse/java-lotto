@@ -13,7 +13,7 @@ public class LottoPrizeTest {
 
     public static final String DISPLAY_NAME_ARGUMENTS = "{displayName} : {arguments}";
 
-    @DisplayName("LottoPrize 객체의 values()를 확인한다")
+    @DisplayName("LottoPrize Enum의 values()를 확인한다")
     @Test
     void LottoPrize_constructor_test() {
         assertThat(LottoPrize.values()).contains(
@@ -23,11 +23,15 @@ public class LottoPrizeTest {
 
     }
 
-    @DisplayName("match 당첨 번호와 보너스 번호에 맞는 등수를 반환한다")
+    @DisplayName("당첨 번호와 보너스 번호에 맞는 등수를 반환한다")
     @ParameterizedTest(name = DISPLAY_NAME_ARGUMENTS)
     @MethodSource("matchTestSet")
     void match_test(int lottoNumberMatchCount, boolean bonusNumberMatch, LottoPrize result) {
+        // given
+        // when
         LottoPrize lottoPrize = LottoPrize.match(lottoNumberMatchCount, bonusNumberMatch);
+
+        // then
         assertThat(lottoPrize).isEqualTo(result);
     }
 

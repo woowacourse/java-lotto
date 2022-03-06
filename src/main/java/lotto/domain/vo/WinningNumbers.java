@@ -16,10 +16,7 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateBonusNumbersDuplication(
-            Lotto lottoNumbers,
-            LottoNumber bonusNumber
-    ) {
+    private void validateBonusNumbersDuplication(Lotto lottoNumbers, LottoNumber bonusNumber) {
         if (lottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(ERROR_DUPLICATION_BONUS_MESSAGE);
         }

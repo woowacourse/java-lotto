@@ -13,6 +13,7 @@ public class Lotto {
     private static final String ERROR_NUMBER_SIX_MESSAGE = "로또 숫자는 6개여야 합니다.";
     private static final String ERROR_DUPLICATION_MESSAGE = "로또 숫자는 중복되면 안됩니다.";
 
+    public static final Money LOTTO_PRICE = new Money(1000);
     public static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> numbers;
@@ -23,10 +24,6 @@ public class Lotto {
         validateDuplication(numbers);
 
         this.numbers = numbers;
-    }
-
-    public List<LottoNumber> getNumbers() {
-        return Collections.unmodifiableList(numbers);
     }
 
     private void validateNull(List<LottoNumber> numbers) {
@@ -46,6 +43,10 @@ public class Lotto {
         if (set.size() != numbers.size()) {
             throw new IllegalArgumentException(ERROR_DUPLICATION_MESSAGE);
         }
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 
     public boolean contains(LottoNumber number) {

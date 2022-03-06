@@ -1,7 +1,7 @@
 package lotto.domain.vo;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -25,12 +25,12 @@ public class Lottos {
         }
     }
 
-    public List<Lotto> getLottos() {
+    public List<Lotto> get() {
         return Collections.unmodifiableList(lottos);
     }
 
     public Map<LottoPrize, Integer> confirmWinnings(WinningNumbers winningNumbers) {
-        Map<LottoPrize, Integer> result = new HashMap<>();
+        Map<LottoPrize, Integer> result = new EnumMap<>(LottoPrize.class);
         for (LottoPrize prize : LottoPrize.values()) {
             result.put(prize, 0);
         }

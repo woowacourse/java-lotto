@@ -21,22 +21,19 @@ public enum LottoPrize {
     }
 
     public static LottoPrize match(int lottoNumberMatchCount, boolean bonusNumberMatch) {
+        if (isTwice(lottoNumberMatchCount, bonusNumberMatch)) {
+            return TWICE;
+        }
+
         return Arrays.stream(LottoPrize.values())
                 .filter(prize -> prize.lottoNumberMatchCount == lottoNumberMatchCount)
-                .filter(prize -> !matchTwiceOrThird(prize) || judgeTwiceAndThird(prize, bonusNumberMatch))
+                .filter(prize -> !prize.equals(TWICE))
                 .findFirst()
                 .orElse(MISS);
     }
 
-    private static boolean matchTwiceOrThird(LottoPrize prize) {
-        return prize.equals(TWICE) || prize.equals(THIRD);
-    }
-
-    private static boolean judgeTwiceAndThird(LottoPrize prize, boolean bonusNumberMatch) {
-        if (prize.equals(TWICE) && bonusNumberMatch) {
-            return true;
-        }
-        return prize.equals(THIRD) && !bonusNumberMatch;
+    private static boolean isTwice(int lottoNumberMatchCount, boolean bonusNumberMatch) {
+        return lottoNumberMatchCount == TWICE.lottoNumberMatchCount && bonusNumberMatch;
     }
 
     public int getLottoNumberMatchCount() {

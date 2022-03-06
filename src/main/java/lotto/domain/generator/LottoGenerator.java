@@ -12,7 +12,7 @@ public class LottoGenerator implements Generator {
 
     private static final List<LottoNumber> INIT_LOTTO_NUMBERS = IntStream
             .rangeClosed(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
-            .mapToObj(LottoNumber::new)
+            .mapToObj(LottoNumber::valueOf)
             .collect(Collectors.toUnmodifiableList());
 
     public LottoGenerator() {

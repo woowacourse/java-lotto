@@ -19,12 +19,16 @@ public class Money {
         }
     }
 
-    public int canBuyNumber(Money amount) {
-        return money / amount.money;
-    }
-
     public int get() {
         return money;
+    }
+
+    public int divide(Money money) {
+        return this.money / money.money;
+    }
+
+    public Money subtract(Money money) {
+        return new Money(this.money - money.money);
     }
 
     @Override
