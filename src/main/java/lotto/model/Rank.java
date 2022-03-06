@@ -26,10 +26,11 @@ public enum Rank {
         }
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.correctedBall == matchWinningNumbers && rank != Rank.SECOND)
-                .findFirst().orElse(FAIL);
+                .findFirst()
+                .orElse(FAIL);
     }
 
-    public static List<Rank> getRanksToPrint() {
+    public static List<Rank> getWinningRanks() {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.FAIL)
                 .collect(Collectors.toList());

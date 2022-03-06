@@ -12,16 +12,12 @@ public class LottoResult {
     public static LottoResult create(Lottos lottos, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         LottoResult lottoResult = new LottoResult();
 
-        for (Lotto lotto: lottos.getLottos()) {
-            Rank currentRank = lottoResult.match(lotto, winningNumbers, bonusNumber);
+        for (Lotto lotto : lottos.getLottos()) {
+            Rank currentRank = Rank.find(lotto.matchWinningNumbers(winningNumbers), lotto.isNumberMatch(bonusNumber));
             lottoResult.result.put(currentRank, lottoResult.getRankCount(currentRank) + 1);
         }
 
         return lottoResult;
-    }
-
-    private Rank match(Lotto lotto, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
-        return Rank.find(lotto.matchWinningNumbers(winningNumbers), lotto.isNumberMatch(bonusNumber));
     }
 
     public Integer getRankCount(Rank rank) {

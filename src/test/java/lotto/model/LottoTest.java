@@ -12,7 +12,7 @@ class LottoTest {
     @Test
     @DisplayName("6개의 랜덤한 로또 번호를 생성하는지 확인")
     void shuffleTest() {
-        assertThatCode(Lotto::generate)
+        assertThatCode(Lotto::generateAuto)
                 .doesNotThrowAnyException();
     }
 
@@ -33,7 +33,7 @@ class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(6);
 
-        boolean actual = lotto.isBonusNumberMatch(bonusNumber);
+        boolean actual = lotto.isNumberMatch(bonusNumber);
 
         assertThat(actual).isTrue();
     }

@@ -17,7 +17,7 @@ public class ResultViewTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
     private final Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 33, 41, 5, 7));
-    private final Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
+    private final Lottos lottos = Lottos.generateManual(Arrays.asList(lotto1, lotto2));
 
     @BeforeEach
     public void setUp() {
@@ -27,10 +27,11 @@ public class ResultViewTest {
     @Test
     @DisplayName("생성된 로또 출력 확인")
     void printGeneratedLottosTest() {
-        ResultView.printBuyingLotto(lottos.getLottos());
+        ResultView.printBuyingLotto(lottos.getLottos(), 1);
 
         assertThat(outputStreamCaptor.toString())
-                .contains("2개를 ")
+                .contains("수동으로 1장, ")
+                .contains("자동으로 1개를 ")
                 .contains("[1, 2, 5, 7, 33, 41]");
     }
 

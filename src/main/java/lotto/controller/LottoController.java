@@ -1,17 +1,19 @@
 package lotto.controller;
 
-import lotto.model.LottoGame;
-import lotto.model.LottoResult;
-import lotto.model.Lottos;
-import lotto.model.Money;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoController {
     public static void runGame() {
         Money money = new Money(InputView.insertMoney());
-        Lottos lottos = LottoGame.buyLottos(money);
-        ResultView.printBuyingLotto(lottos.getLottos());
+        LottoSize numberOfManualLotto = new LottoSize(InputView.insertNumberOfManualLotto());
+        numberOfManualLotto.validateLottoSizeWithMoney(money);
+        List<Lotto> manualLottos = InputView.insertManualLottos(numberOfManualLotto);
+        Lottos lottos = LottoGame.buyLottos(money, manualLottos, numberOfManualLotto);
+        ResultView.printBuyingLotto(lottos.getLottos(), numberOfManualLotto.getSize());
 
         LottoGame lottoGame = new LottoGame(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 

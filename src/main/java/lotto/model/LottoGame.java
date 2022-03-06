@@ -14,8 +14,9 @@ public class LottoGame {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public static Lottos buyLottos(Money money) {
-        return Lottos.generate(money.getLottoSize());
+    public static Lottos buyLottos(Money money, List<Lotto> generatedLottos, LottoSize generatedLottosSize) {
+        int lottoSizeToGenerate = generatedLottosSize.getRestOfLottoSize(money.getBuyableLottoSize());
+        return Lottos.generate(generatedLottos, lottoSizeToGenerate);
     }
 
     private void validateDuplicateBonusNumber(List<Integer> winningNumbers, Integer bonusNumber) {

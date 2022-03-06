@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class LottoNumber {
     private static final String ERROR_OUT_OF_RANGE_BONUS_NUMBER = "볼 번호가 1~45 범위 내에 해당하지 않습니다.";
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
 
     private final Integer number;
 
@@ -15,7 +15,7 @@ public class LottoNumber {
     }
 
     private void validateRangeLottoNumber(Integer number) {
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+        if (number < MIN || number > MAX) {
             throw new IllegalArgumentException(ERROR_OUT_OF_RANGE_BONUS_NUMBER);
         }
     }
