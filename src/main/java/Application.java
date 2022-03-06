@@ -3,7 +3,6 @@ import java.util.List;
 import domain.Lotto;
 import domain.LottoCount;
 import domain.LottoFactory;
-import domain.LottoGame;
 import domain.LottoNumber;
 import domain.LottoGameMoney;
 import domain.Lottos;
@@ -17,17 +16,12 @@ public class Application {
 
     public static void main(String[] args) {
         final LottoGameMoney purchaseMoney = new LottoGameMoney(InputView.getPurchaseAmount());
-        final LottoGame lottoGame = createLottoGame(purchaseMoney);
-
+        Lottos lottos = createLottos(purchaseMoney);
         final WinningLotto winningLotto = createWinningLotto();
-        final WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics(winningLotto);
+
+        final WinningStatistics winningStatistics = lottos.match(purchaseMoney, winningLotto);
         OutputView.showWinningStatistics(winningStatistics.getWinningStatistics());
         OutputView.showProfitRate(winningStatistics.calculateProfitRate());
-    }
-
-    private static LottoGame createLottoGame(LottoGameMoney purchaseMoney) {
-        Lottos lottos = createLottos(purchaseMoney);
-        return new LottoGame(purchaseMoney, lottos);
     }
 
     private static Lottos createLottos(LottoGameMoney purchaseMoney) {

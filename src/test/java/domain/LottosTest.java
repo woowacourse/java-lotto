@@ -39,20 +39,21 @@ public class LottosTest {
     @Test
     @DisplayName("보유하고 있는 로또들과 당첨 로또의 매칭 결과를 계산 1")
     void calculateLottoMatchResult_01() {
-        List<LottoReward> lottoRewards = getLottoRewards();
+        WinningStatistics lottoRewards = getLottoWinningStatistics();
 
-        assertThat(lottoRewards).containsSequence(LottoReward.FIRST);
+        assertThat(lottoRewards.getWinningStatistics().get(LottoReward.FIRST)).isEqualTo(1);
     }
 
     @Test
     @DisplayName("보유하고 있는 로또들과 당첨 로또의 매칭 결과를 계산 2")
     void calculateLottoMatchResult_02() {
-        List<LottoReward> lottoRewards = getLottoRewards();
+        WinningStatistics lottoRewards = getLottoWinningStatistics();
 
-        assertThat(lottoRewards).containsSequence(LottoReward.FIFTH);
+        assertThat(lottoRewards.getWinningStatistics().get(LottoReward.FIFTH)).isEqualTo(1);
     }
 
-    private List<LottoReward> getLottoRewards() {
+    private WinningStatistics getLottoWinningStatistics() {
+        LottoGameMoney money = new LottoGameMoney(3000);
         Lotto lotto = LottoFactory.createLotto(Arrays.asList(12, 23, 6, 44, 17, 16));
 
         Lotto lotto1 = LottoFactory.createLotto(List.of(12, 23, 6, 44, 17, 16));
@@ -62,7 +63,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
         WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.valueOf(2));
 
-        return lottos.match(winningLotto);
+        return lottos.match(money, winningLotto);
     }
 }
 

@@ -26,9 +26,10 @@ public class Lottos {
         }
     }
 
-    public List<LottoReward> match(WinningLotto winningLotto) {
-        return lottos.stream()
+    public WinningStatistics match(LottoGameMoney purchaseMoney, WinningLotto winningLotto) {
+        List<LottoReward> lottoRewards = lottos.stream()
             .map(winningLotto::match)
             .collect(Collectors.toList());
+        return new WinningStatistics(purchaseMoney, lottoRewards);
     }
 }
