@@ -3,11 +3,8 @@ package lotterymachine.domain;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static java.lang.Math.floor;
-
 public class WinningResult {
     private static final Map<WinningLotteryRank, Integer> result = new EnumMap<>(WinningLotteryRank.class);
-    private static final double DECIMAL_PLACE_SAVER = 100.0;
 
     private WinningResult() {
     }
@@ -31,20 +28,9 @@ public class WinningResult {
         return result;
     }
 
-    public double getTotalProfitRate(int number) {
-        int totalProfit = totalProfit();
-        return calculateProfitRate(totalProfit, number);
-    }
-
-    private double calculateProfitRate(double winningLotteryAmount, int amount) {
-        return floor(winningLotteryAmount / amount * DECIMAL_PLACE_SAVER) / DECIMAL_PLACE_SAVER;
-    }
-
-    private int totalProfit() {
-        int sum = 0;
-        for (WinningLotteryRank winningLotteryRank : result.keySet()) {
-            sum += winningLotteryRank.getPrice() * result.get(winningLotteryRank);
-        }
-        return sum;
+    public int findTotalProfit() {
+        return result.keySet().stream()
+                .mapToInt(i -> i.getPrice() * result.get(i))
+                .sum();
     }
 }
