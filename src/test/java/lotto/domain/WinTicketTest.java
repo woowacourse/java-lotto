@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -20,13 +19,13 @@ public class WinTicketTest {
 
     @BeforeEach
     void initialize() {
-        ticket = Ticket.createByAuto(new BasicLottoNumberGenerator());
+        ticket = Ticket.createByImplementation(new BasicLottoNumberGenerator(), true);
     }
     
     @Test
     @DisplayName("당첨번호와 보너스번호가 중복일때 예외가 발생해야 합니다.")
     void winTicketInvalidTest() {
-        assertThatThrownBy(() -> new WinTicket(Ticket.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(6)))
+        assertThatThrownBy(() -> new WinTicket(Ticket.createByIntegers(Arrays.asList(1, 2, 3, 4, 5, 6), false), new LottoNumber(6)))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -51,7 +50,7 @@ public class WinTicketTest {
     }
 
     private Ticket getTicket(int n1, int n2, int n3, int n4, int n5, int n6) {
-        return Ticket.createByManual(Arrays.asList(n1, n2, n3, n4, n5, n6));
+        return Ticket.createByIntegers(Arrays.asList(n1, n2, n3, n4, n5, n6), false);
     }
 
     private static Stream<Arguments> parameters() {

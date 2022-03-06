@@ -20,21 +20,21 @@ public class TicketTest {
     @Test
     @DisplayName("티켓생성시 LottoNumber의 숫자와 개수가 정상이면 예외를 던지지 말아야 합니다.")
     void ticketCreateValidTest() {
-        assertThatCode(() -> Ticket.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6)))
+        assertThatCode(() -> Ticket.createByIntegers(Arrays.asList(1, 2, 3, 4, 5, 6), false))
             .doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("티켓생성시 LottoNumber의 개수가 5개면 예외를 던져야 합니다.")
     void ticketCreateInvalidTest() {
-        assertThatThrownBy(() -> Ticket.createByManual(Arrays.asList(1, 2, 3, 4, 5)))
+        assertThatThrownBy(() -> Ticket.createByIntegers(Arrays.asList(1, 2, 3, 4, 5), false))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("티켓 끼리의 비교는 LottoNumber의 숫자가 같으면 같은 티켓으로 판단합니다.")
     void ticketCompareTest() {
-        Ticket ticket = Ticket.createByAuto(new BasicLottoNumberGenerator());
+        Ticket ticket = Ticket.createByImplementation(new BasicLottoNumberGenerator(), true);
         Set<LottoNumber> lottoNumbers = Set.of(new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(3),
@@ -48,7 +48,7 @@ public class TicketTest {
     @MethodSource("parameters")
     @DisplayName("로또 번호 입력 실패 테스트")
     void invalidTest(List<Integer> input, String testName) {
-        assertThatThrownBy(() -> Ticket.createByManual(input))
+        assertThatThrownBy(() -> Ticket.createByIntegers(input, false))
             .isInstanceOf(IllegalArgumentException.class);
     }
 

@@ -118,28 +118,28 @@ public class TicketsTest {
 
 
     private WinTicket getWinTicket() {
-        Ticket winTicket = Ticket.createByManual(Arrays.asList(1, 2, 3, 4, 5, 16));
+        Ticket winTicket = Ticket.createByIntegers(Arrays.asList(1, 2, 3, 4, 5, 16), false);
         LottoNumber bonusNumber = new LottoNumber(6);
         return new WinTicket(winTicket, bonusNumber);
     }
 
     private Ticket getFifthTicket() {
-        return Ticket.createByManual(Arrays.asList(1, 2, 3, 14, 15, 43));
+        return Ticket.createByIntegers(Arrays.asList(1, 2, 3, 14, 15, 43), false);
     }
 
     private Ticket getOtherTicket() {
-        return Ticket.createByManual(Arrays.asList(11, 12, 13, 14, 15, 43));
+        return Ticket.createByIntegers(Arrays.asList(11, 12, 13, 14, 15, 43), false);
     }
 
     private Ticket getThirdTicket() {
-        return Ticket.createByManual(Arrays.asList(40, 2, 3, 4, 5, 16));
+        return Ticket.createByIntegers(Arrays.asList(40, 2, 3, 4, 5, 16), false);
     }
 
     private Ticket getSecondTicket() {
-        return Ticket.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        return Ticket.createByIntegers(Arrays.asList(1, 2, 3, 4, 5, 6), false);
     }
 
     private Ticket getFirstTicket() {
-        return Ticket.createByManual(Arrays.asList(1, 2, 3, 4, 5, 16));
+        return Ticket.createByIntegers(Arrays.asList(1, 2, 3, 4, 5, 16), false);
     }
 }

@@ -22,7 +22,7 @@ public class Tickets {
     public static Tickets of(int count, LottoNumbersGenerator lottoNumbersGenerator) {
         List<Ticket> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            tickets.add(Ticket.createByAuto(lottoNumbersGenerator));
+            tickets.add(Ticket.createByImplementation(lottoNumbersGenerator, true));
         }
         return new Tickets(tickets);
     }

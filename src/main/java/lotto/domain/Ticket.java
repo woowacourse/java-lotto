@@ -21,16 +21,16 @@ public class Ticket {
         this.isAuto = isAuto;
     }
 
-    public static Ticket createByAuto(LottoNumbersGenerator lottoNumbersGenerator) {
+    public static Ticket createByImplementation(LottoNumbersGenerator lottoNumbersGenerator, boolean isAuto) {
         Set<LottoNumber> lottoNumbers = lottoNumbersGenerator.generate(TICKET_SIZE);
-        return new Ticket(lottoNumbers, true);
+        return new Ticket(lottoNumbers, isAuto);
     }
 
-    public static Ticket createByManual(List<Integer> numbers) {
+    public static Ticket createByIntegers(List<Integer> numbers, boolean isAuto) {
         checkTicketSize(numbers.size());
         checkDuplicate(numbers);
         Set<LottoNumber> lottoNumbers = convertToLottoNumbers(numbers);
-        return new Ticket(lottoNumbers, false);
+        return new Ticket(lottoNumbers, isAuto);
     }
 
     private static void checkTicketSize(int size) {

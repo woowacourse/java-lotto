@@ -60,7 +60,7 @@ public class Controller {
     private void createManualTicket(Lotto lotto) {
         try {
             List<Integer> integers = StringUtil.splitToIntegers(InputView.requestNumbers(), SPLIT_DELIMITER);
-            lotto.addTicket(Ticket.createByManual(integers));
+            lotto.addTicket(Ticket.createByIntegers(integers, false));
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             createManualTicket(lotto);
@@ -70,7 +70,7 @@ public class Controller {
     private void createAutoTickets(Lotto lotto) {
         int numberOfPurchasableCount = lotto.findCountOfPurchasable();
         for (int i = 0; i < numberOfPurchasableCount; i++) {
-            lotto.addTicket(Ticket.createByAuto(new RandomLottoNumbersGenerator()));
+            lotto.addTicket(Ticket.createByImplementation(new RandomLottoNumbersGenerator(), true));
         }
     }
 
@@ -88,7 +88,7 @@ public class Controller {
     private Ticket requestWinNumbers() {
         try {
             List<Integer> integers = StringUtil.splitToIntegers(InputView.requestWinNumbers(), SPLIT_DELIMITER);
-            return Ticket.createByManual(integers);
+            return Ticket.createByIntegers(integers, false);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return requestWinNumbers();
