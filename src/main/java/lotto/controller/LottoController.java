@@ -29,20 +29,18 @@ public class LottoController {
 
     private Money makeMoney() {
         try {
-            return new Money(ConverterUtils.convertStringToInt(receiveMoney()));
+            String receivedMoney = InputView.inputMoney();
+            return new Money(ConverterUtils.convertStringToInt(receivedMoney));
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return makeMoney();
         }
     }
 
-    private String receiveMoney() {
-        return InputView.inputMoney();
-    }
-
     private ManualCount receiveManualCount() {
         try {
-            return new ManualCount(ConverterUtils.convertStringToInt(InputView.inputManualLottoCount()));
+            String receivedManualCount= InputView.inputManualLottoCount();
+            return new ManualCount(ConverterUtils.convertStringToInt(receivedManualCount));
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return receiveManualCount();
@@ -60,7 +58,8 @@ public class LottoController {
 
     private Lotto receiveManualLotto() {
         try {
-            return new Lotto(InputView.inputManualLottos());
+            List<Integer> receivedManualLottos = InputView.inputManualLottos();
+            return new Lotto(receivedManualLottos);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return receiveManualLotto();
@@ -69,8 +68,10 @@ public class LottoController {
 
     private WinningLotto receiveWinningLotto() {
         try {
-            return new WinningLotto(InputView.inputWinningLotto(),
-                    ConverterUtils.convertStringToInt(InputView.inputBonusBall()));
+            List<Integer> receivedWinningLotto = InputView.inputWinningLotto();
+            String receivedBonusBall = InputView.inputBonusBall();
+            return new WinningLotto(receivedWinningLotto,
+                    ConverterUtils.convertStringToInt(receivedBonusBall));
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return receiveWinningLotto();
