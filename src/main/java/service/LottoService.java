@@ -24,13 +24,13 @@ public class LottoService implements LottoStrategy {
 		return new Lottos(lottos);
 	}
 
-	private Lottos createManualLottos(Lottos manualLottos, Lottos autoLottos) {
-		List<Lotto> lottos = new ArrayList<>(manualLottos.getLottos());
-		lottos.addAll(autoLottos.getLottos());
-		return new Lottos(lottos);
-	}
+		private Lottos createManualLottos(Lottos manualLottos, Lottos autoLottos) {
+			List<Lotto> lottos = new ArrayList<>(manualLottos.getLottos());
+			lottos.addAll(autoLottos.getLottos());
+			return new Lottos(lottos);
+		}
 
-	public LottoResult createLottoResult(Lottos lottos, WinningLotto winningLotto) {
+		public LottoResult createLottoResult(Lottos lottos, WinningLotto winningLotto) {
 		return LottoResult.from(lottos.countRank(winningLotto));
 	}
 }

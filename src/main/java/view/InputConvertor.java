@@ -1,80 +1,71 @@
 package view;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
 
+import controller.LottoController;
 import domain.Lotto;
-import domain.LottoNumber;
-import domain.Lottos;
-import domain.OrderForm;
-import domain.Payment;
-import domain.WinningLotto;
 
 public class InputConvertor {
-
-	public static final String DELIMITER_COMMA = ",";
 
 	private InputConvertor() {
 	}
 
-	public static Payment createPayment() {
+	public static String createPayment(LottoController controller) {
 		try {
-			return new Payment(InputView.insertPayment());
+			String payment = InputView.insertPayment();
+			controller.createPayment(payment);
+			return payment;
 		} catch (Exception e) {
 			OutputView.printErrorMessage(e.getMessage());
-			return createPayment();
+			return createPayment(controller);
 		}
 	}
 
-	public static OrderForm createOrderForm(Payment payment) {
+	public static int createOrderForm(LottoController controller, String payment) {
 		try {
-			return new OrderForm(payment, InputView.insertManualLottoCount());
+			int count = InputView.insertManualLottoCount();
+			controller.createOrderForm(controller.createPayment(payment), count);
+			return count;
 		} catch (Exception e) {
 			OutputView.printErrorMessage(e.getMessage());
-			return createOrderForm(payment);
+			return createOrderForm(controller, payment);
 		}
 	}
 
-	public static Lottos createManualLottos(OrderForm orderForm) {
+	public static ArrayList<String[]> createManualLottos(LottoController controller, int count) {
+		OutputView.printGuideMessage("수동으로 구매할 번호를 입력해 주세요.");
+		ArrayList<String[]> lottos = new ArrayList<>();
+		for (int i = 0; i < count; i++) {
+			lottos.add(InputView.insertManualLottos());
+		}
 		try {
-			List<Lotto> lottos = InputView.insertManualLottos(orderForm)
-				.stream()
-				.map(lotto -> Lotto.of(lotto.split(DELIMITER_COMMA)))
-				.collect(Collectors.toUnmodifiableList());
-
-			return new Lottos(lottos);
+			controller.createManualLottos(lottos);
+			return lottos;
 		} catch (Exception e) {
 			OutputView.printErrorMessage(e.getMessage());
-			return createManualLottos(orderForm);
+			return createManualLottos(controller, count);
 		}
 	}
 
-	public static WinningLotto createWinningLotto() {
-		Lotto winningLotto = createLotto();
+	public static String[] createLotto() {
 		try {
-			return new WinningLotto(winningLotto, createBonusNumber(winningLotto));
-		} catch (Exception e) {
-			return createWinningLotto();
-		}
-	}
-
-	private static Lotto createLotto() {
-		try {
-			return Lotto.of(InputView.insertLotto());
+			String[] winLotto = InputView.insertLotto();
+			Lotto.of(winLotto);
+			return winLotto;
 		} catch (Exception e) {
 			OutputView.printErrorMessage(e.getMessage());
 			return createLotto();
 		}
 	}
 
-	private static LottoNumber createBonusNumber(Lotto winningLotto) {
+	public static int createBonusNumber(LottoController controller, String[] winningLotto) {
 		try {
-			LottoNumber bonus = LottoNumber.of(InputView.insertBonus());
-			new WinningLotto(winningLotto, bonus);
+			int bonus = InputView.insertBonus();
+			controller.createWinningLotto(winningLotto, bonus);
 			return bonus;
 		} catch (Exception e) {
 			OutputView.printErrorMessage(e.getMessage());
-			return createBonusNumber(winningLotto);
+			return createBonusNumber(controller, winningLotto);
 		}
 	}
 }

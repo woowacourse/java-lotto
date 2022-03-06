@@ -1,13 +1,10 @@
 package view;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
-import domain.OrderForm;
 
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
+	public static final String DELIMITER_COMMA = ",";
 
 	private InputView() {
 	}
@@ -27,21 +24,21 @@ public class InputView {
 		}
 	}
 
-	public static List<String> insertManualLottos(OrderForm orderForm) {
-		List<String> manualLottos = new ArrayList<>();
-		OutputView.printGuideMessage("수동으로 구매할 번호를 입력해 주세요.");
-
-		while (!orderForm.isEqualQuantity(manualLottos.size())) {
-			manualLottos.add(scanner.nextLine());
+	public static String[] insertManualLottos() {
+		try {
+			String inputValue = scanner.nextLine();
+			return inputValue.split(DELIMITER_COMMA);
+		} catch (Exception e) {
+			OutputView.printErrorMessage(e.getMessage());
+			return insertLotto();
 		}
-		return manualLottos;
 	}
 
 	public static String[] insertLotto() {
 		try {
 			OutputView.printGuideMessage("지난 주 당첨 번호를 입력해 주세요.");
 			String inputValue = scanner.nextLine();
-			return inputValue.split(",");
+			return inputValue.split(DELIMITER_COMMA);
 		} catch (Exception e) {
 			OutputView.printErrorMessage(e.getMessage());
 			return insertLotto();

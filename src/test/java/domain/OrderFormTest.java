@@ -6,8 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import service.LottoService;
-
 /**
  * - **수동으로 구매할 갯수를 입력받는다.** (추가)
  *    - [ 예외 ] 음수가 아니어야한다.
@@ -50,17 +48,5 @@ public class OrderFormTest {
 		int autoCount = orderForm.calculateAutoLottoCount();
 		//then
 		assertThat(autoCount).isEqualTo(3);
-	}
-
-	@DisplayName("수동 갯수만큼 로또 번호가 들어왔는지 확인")
-	@Test
-	void check_input_manual_quantity() {
-		//given
-		Payment payment = new Payment(10_000);
-		OrderForm orderForm = new OrderForm(payment, 3);
-		Lottos manualLottos = new LottoService().createLottos(3, Lotto.SIZE);
-		//when, then
-
-		assertThat(orderForm.isEqualQuantity(manualLottos.getSize())).isEqualTo(true);
 	}
 }
