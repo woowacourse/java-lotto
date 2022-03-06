@@ -9,10 +9,10 @@ public class LottoDto {
     private final List<Integer> lottoNumbers;
 
     public LottoDto(Lotto lotto) {
-        lottoNumbers = getLottoNumbersByLotto(lotto);
+        lottoNumbers = toIntegers(lotto);
     }
 
-    private List<Integer> getLottoNumbersByLotto(Lotto lotto) {
+    private List<Integer> toIntegers(Lotto lotto) {
         return lotto.getSortedLottoNumbers()
                 .stream()
                 .map(LottoNumber::getNumber)
