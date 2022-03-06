@@ -11,7 +11,7 @@ public enum LottoExceptionStatus {
     MONEY_MUST_BE_DIVISIBLE(String.format("구입 금액은 %d원으로 나누어 떨어져야 합니다.", MoneyUnit.DEFAULT_UNIT.getUnit())),
 
     TICKET_COUNT_MUST_BE_NUMERIC("로또 개수는 숫자여야 합니다."),
-    MANUAL_TICKET_COUNT_MUST_BE_POSITIVE("수동으로 구매할 로또의 개수는 양수여야 합니다."),
+    MANUAL_TICKET_COUNT_CANNOT_BE_NEGATIVE("수동으로 구매할 로또의 개수는 음수가 될 수 없습니다."),
     MANUAL_TICKET_COUNT_CANNOT_BE_TOO_MANY(
             "수동으로 구매할 로또의 개수는 구매 가능한 전체 로또의 개수보다 많을 수 없습니다."),
 
