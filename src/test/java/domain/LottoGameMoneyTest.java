@@ -30,7 +30,7 @@ public class LottoGameMoneyTest {
     @DisplayName("구매하려는 수동 로또 갯수가 유효한 경우")
     void checkPurchasableLottoCount(int lottoCount) {
         LottoGameMoney money = new LottoGameMoney(5000);
-        money.getPurchaseLottoCount(lottoCount);
+        money.createLottoCount(lottoCount);
     }
 
     @ParameterizedTest
@@ -38,7 +38,7 @@ public class LottoGameMoneyTest {
     @DisplayName("구매하려는 수동 로또 갯수가 유효하지 않은 경우")
     void checkNotPurchasableLottoCount(int lottoCount) {
         LottoGameMoney money = new LottoGameMoney(5000);
-        assertThatThrownBy(() -> money.getPurchaseLottoCount(lottoCount))
+        assertThatThrownBy(() -> money.createLottoCount(lottoCount))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }

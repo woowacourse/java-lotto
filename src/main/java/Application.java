@@ -21,12 +21,12 @@ public class Application {
 
         final WinningStatistics winningStatistics = lottos.match(purchaseMoney, winningLotto);
         OutputView.showWinningStatistics(winningStatistics.values());
-        OutputView.showProfitRate(winningStatistics.calculateProfitRate());
+        OutputView.showProfitRate(winningStatistics.profitRate());
     }
 
     private static Lottos createLottos(LottoGameMoney purchaseMoney) {
         final int manualLottoCount = InputView.getManualLottoCount();
-        final LottoCount lottoCount = purchaseMoney.getPurchaseLottoCount(manualLottoCount);
+        final LottoCount lottoCount = purchaseMoney.createLottoCount(manualLottoCount);
         List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(manualLottoCount);
 
         final List<Lotto> lottos = LottoFactory.createLottos(lottoCount, manualLottoNumbers,

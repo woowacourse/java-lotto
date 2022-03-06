@@ -82,7 +82,7 @@ class WinningStatisticsTest {
         List<LottoReward> lottoRewards = List.of(LottoReward.FIFTH, LottoReward.NONE, LottoReward.NONE);
         WinningStatistics winningStatistics = new WinningStatistics(purchaseMoney, lottoRewards);
 
-        double profitRate = winningStatistics.calculateProfitRate();
+        double profitRate = winningStatistics.profitRate();
         double expectedAnswer = (double)LottoReward.FIFTH.price() / purchaseMoney.amount();
 
         assertThat(profitRate).isEqualTo(expectedAnswer);

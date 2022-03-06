@@ -19,11 +19,6 @@ public class WinningStatistics {
         initializeStatistics(lottoRewards);
     }
 
-    private void initializeStatistics(List<LottoReward> lottoRewards) {
-        Arrays.stream(LottoReward.values()).forEach(lottoReward -> statistics.put(lottoReward, DEFAULT_VALUE));
-        lottoRewards.forEach(lottoReward -> statistics.replace(lottoReward, statistics.get(lottoReward) + 1));
-    }
-
     private void validateNull(LottoGameMoney purchaseMoney, List<LottoReward> lottoRewards) {
         if (purchaseMoney == null) {
             throw new NullPointerException("WinningStatistics 생성시 구매 금액이 null 일 수 없습니다.");
@@ -33,7 +28,12 @@ public class WinningStatistics {
         }
     }
 
-    public double calculateProfitRate() {
+    private void initializeStatistics(List<LottoReward> lottoRewards) {
+        Arrays.stream(LottoReward.values()).forEach(lottoReward -> statistics.put(lottoReward, DEFAULT_VALUE));
+        lottoRewards.forEach(lottoReward -> statistics.replace(lottoReward, statistics.get(lottoReward) + 1));
+    }
+
+    public double profitRate() {
         int winningAmount = calculateWinningAmount();
         int purchasedLottoAmount = purchaseMoney.amount();
         return (double)winningAmount / purchasedLottoAmount;

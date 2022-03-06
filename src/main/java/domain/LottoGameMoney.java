@@ -9,11 +9,11 @@ public class LottoGameMoney {
     private final int amount;
 
     public LottoGameMoney(int amount) {
-        validateRange(amount);
+        validateAmount(amount);
         this.amount = amount;
     }
 
-    private void validateRange(int amount) {
+    private void validateAmount(int amount) {
         if (amount <= MINIMUM_AMOUNT) {
             throw new IllegalArgumentException("금액은 " + MINIMUM_AMOUNT + "이하일 수 없습니다.");
         }
@@ -22,18 +22,18 @@ public class LottoGameMoney {
         }
     }
 
-    public LottoCount getPurchaseLottoCount(int manualLottoCount) {
-        checkPurchasableLottoCount(manualLottoCount);
+    public LottoCount createLottoCount(int manualLottoCount) {
+        validateLottoCount(manualLottoCount);
         return new LottoCount(manualLottoCount, purchasableLottoCount() - manualLottoCount);
     }
 
-    private void checkPurchasableLottoCount(int lottoCount) {
+    private void validateLottoCount(int lottoCount) {
         if (lottoCount < 0 || lottoCount > purchasableLottoCount()) {
             throw new IllegalArgumentException("구매할 수 있는 로또 갯수는 0~" + purchasableLottoCount() + "개 입니다.");
         }
     }
 
-    public int purchasableLottoCount() {
+    private int purchasableLottoCount() {
         return amount / LottoConstant.LOTTO_PRICE;
     }
 

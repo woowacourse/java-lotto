@@ -28,12 +28,8 @@ public class WinningLotto {
     }
 
     public LottoReward match(Lotto lotto) {
-        int matchCount = calculateMatchCount(lotto);
+        int matchCount = winningLotto.calculateSameNumber(lotto);
         boolean hasBonus = lotto.containsNumber(bonusNumber);
         return LottoReward.find(matchCount, hasBonus);
-    }
-
-    private int calculateMatchCount(Lotto otherLotto) {
-        return winningLotto.calculateSameNumber(otherLotto);
     }
 }
