@@ -25,8 +25,8 @@ public enum Rank {
         this(prize, winningLottoMatchCount, false);
     }
 
-    public static Rank getRank(int winningNumbersMatchCount, boolean bonusNumberMatch) {
-        if (winningNumbersMatchCount == 5 && bonusNumberMatch == true) {
+    public static Rank of(int winningNumbersMatchCount, boolean bonusNumberMatch) {
+        if (winningNumbersMatchCount == 5 && bonusNumberMatch) {
             return RANK_2;
         }
         return Arrays.stream(Rank.values())

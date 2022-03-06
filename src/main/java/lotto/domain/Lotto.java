@@ -41,7 +41,7 @@ public class Lotto {
     public Rank getRank(WinningNumbers winningNumbers) {
         int winningNumberMatchCount = winningNumbers.getWinningLottoMatchCount(lotto);
         boolean bonusNumberMatch = winningNumbers.isBonusNumberContainedAt(lotto);
-        return Rank.getRank(winningNumberMatchCount, bonusNumberMatch);
+        return Rank.of(winningNumberMatchCount, bonusNumberMatch);
     }
 
     public int getMatchCount(List<LottoNumber> lottoToCompare) {

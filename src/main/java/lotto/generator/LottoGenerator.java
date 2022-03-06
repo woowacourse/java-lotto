@@ -22,7 +22,7 @@ public class LottoGenerator {
 
     private static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::getByNumber)
+                .map(LottoNumber::from)
                 .sorted()
                 .collect(Collectors.toList());
     }

@@ -11,7 +11,7 @@ public class WinningNumbers {
 
     public WinningNumbers(List<Integer> winningNumbersInput, int bonusNumberInput) {
         this.winningLotto = LottoGenerator.generateLottoByManual(winningNumbersInput);
-        LottoNumber bonusNumber = LottoNumber.getByNumber(bonusNumberInput);
+        LottoNumber bonusNumber = LottoNumber.from(bonusNumberInput);
         checkDuplication(winningLotto, bonusNumber);
         this.bonusNumber = bonusNumber;
     }

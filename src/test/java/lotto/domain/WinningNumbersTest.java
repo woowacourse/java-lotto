@@ -20,7 +20,7 @@ public class WinningNumbersTest {
     @BeforeEach
     void setUp() {
         lotto = Stream.of(11, 12, 13, 14, 15, 16)
-                .map(LottoNumber::getByNumber)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 
