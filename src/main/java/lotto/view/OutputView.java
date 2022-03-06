@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
@@ -51,10 +53,16 @@ public class OutputView {
     }
 
     private static void printRankResults(final LottoResult lottoResult) {
-        Rank.toReverseList().stream()
+        toReverseList().stream()
                 .filter(rank -> !rank.isNothing())
                 .forEach(rank -> printRankResult(rank,
                         lottoResult.getRankResults().getOrDefault(rank, 0)));
+    }
+
+    private static List<Rank> toReverseList() {
+        List<Rank> ranks = Arrays.asList(Rank.values());
+        Collections.reverse(ranks);
+        return ranks;
     }
 
     private static void printRankResult(final Rank rank, final int count) {

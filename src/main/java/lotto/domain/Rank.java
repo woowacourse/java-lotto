@@ -38,12 +38,6 @@ public enum Rank {
         return !rank.equals(SECOND) || hasBonusNumber;
     }
 
-    public static List<Rank> toReverseList() {
-        List<Rank> ranks = Arrays.asList(values());
-        Collections.reverse(ranks);
-        return ranks;
-    }
-
     private boolean isSameHitCount(final int hitCounts) {
         return this.hitCounts == hitCounts;
     }
