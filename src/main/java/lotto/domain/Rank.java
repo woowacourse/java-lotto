@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static lotto.constant.ErrorMessage.ERROR_RANK_NOT_EXIST;
-
 import java.util.Arrays;
 
 public enum Rank {
