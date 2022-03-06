@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ public class RankBoard {
     private static final int ROUNDING_DIGITS = 100;
     private static final double ROUNDING_DIGITS_DOUBLE = 100.0;
 
-    private final Map<Rank, Integer> board = new HashMap<>();
+    private final Map<Rank, Integer> board = new EnumMap<>(Rank.class);
 
     public RankBoard(final WinningLotto winningLotto, final List<Lotto> tickets) {
         initBoard();
