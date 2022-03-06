@@ -1,16 +1,18 @@
 package lotto.view;
 
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 public class OutputView {
     private static final String ERROR_PREFIX = "[ERROR] ";
-    private static final String PURCHASE_AMOUNT_REQUEST_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String PAYMENT_REQUEST_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String MANUAL_LOTTO_COUNT_REQUEST_MESSAGE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_NUMBERS_REQUEST_MESSAGE = "\n수동으로 구매할 번호를 입력해 주세요.";
+    private static final String LOTTO_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String LOTTO_DELIMITER = ", ";
     private static final String LOTTO_FORMAT = "[%s]\n";
     private static final String WINNING_NUMBER_REQUEST_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
@@ -28,22 +30,30 @@ public class OutputView {
         System.out.println(ERROR_PREFIX + errorMessage);
     }
 
-    public static void printPurchaseAmountRequest() {
-        System.out.println(PURCHASE_AMOUNT_REQUEST_MESSAGE);
+    public static void printPaymentRequest() {
+        System.out.println(PAYMENT_REQUEST_MESSAGE);
     }
 
-    public static void printLottoCount(int lottoCount) {
-        System.out.printf(LOTTO_COUNT_MESSAGE, lottoCount);
+    public static void printManualLottoCountRequest() {
+        System.out.println(MANUAL_LOTTO_COUNT_REQUEST_MESSAGE);
     }
 
-    public static void printLottos(Lottos lottos) {
-        printLottoCount(lottos.getLottos().size());
-        for (Lotto lotto : lottos.getLottos()) {
+    public static void printManualLottoNumbersRequest() {
+        System.out.println(MANUAL_LOTTO_NUMBERS_REQUEST_MESSAGE);
+    }
+
+    public static void printLottos(int manualCount, List<Lotto> lottoList) {
+        printLottoCount(manualCount, lottoList.size() - manualCount);
+        for (Lotto lotto : lottoList) {
             String numbers = lotto.getLottoNumbers().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_DELIMITER));
             System.out.printf(LOTTO_FORMAT, numbers);
         }
+    }
+
+    public static void printLottoCount(int handCount, int autoCount) {
+        System.out.printf(LOTTO_COUNT_MESSAGE, handCount, autoCount);
     }
 
     public static void printWinningNumberRequest() {
@@ -58,15 +68,15 @@ public class OutputView {
         System.out.println(STATISTICS_TITLE + TITLE_DIVIDING_LINE.repeat(LINE_COUNT));
     }
 
-    public static void printLottosResult(LottoResult lottoResult) {
+    public static void printLottosResult(Map<Rank, Integer> lottoResult) {
         for (Rank rank : Rank.getSortedRanks()) {
-            printLottoResult(lottoResult.getLottoResult().get(rank), rank);
+            printLottoResult(lottoResult.get(rank), rank);
         }
     }
 
     private static void printLottoResult(int lottoCount, Rank rank) {
         String bonusText = " ";
-        if (rank.isBonus()) {
+        if (rank == Rank.SECOND) {
             bonusText = BONUS_FORMAT;
         }
         System.out.printf(RESULT_FORMAT, rank.getCount(), bonusText, rank.getPrizeMoney().getMoney(), lottoCount);

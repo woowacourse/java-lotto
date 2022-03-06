@@ -3,24 +3,47 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import lotto.validator.NumberValidator;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String DELIMITER = ",";
 
-    public static String inputPurchaseAmount() {
-        return input();
+    public static int inputPayment() {
+        String value = scanner.nextLine();
+        NumberValidator.validateNumber(value);
+        return Integer.parseInt(value);
     }
 
-    public static List<String> inputWinningNumber() {
-        return Arrays.asList(input().trim().split(DELIMITER));
+    public static int inputManualLottoCount() {
+        String value = scanner.nextLine();
+        NumberValidator.validateNumber(value);
+        return Integer.parseInt(value);
     }
 
-    public static String inputBonusBall() {
-        return input();
+    public static List<Integer> inputLottoNumbers() {
+        List<String> numbers = Arrays.stream(scanner.nextLine().split(DELIMITER))
+            .map(String::trim)
+            .collect(Collectors.toList());
+
+        validateNumbers(numbers);
+
+        return numbers.stream()
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 
-    private static String input() {
-        return scanner.nextLine();
+    public static void validateNumbers(List<String> numbers) {
+        for (String number : numbers) {
+            NumberValidator.validateNumber(number);
+        }
+    }
+
+    public static int inputBonusBall() {
+        String value = scanner.nextLine();
+        NumberValidator.validateNumber(value);
+        return Integer.parseInt(value);
     }
 }

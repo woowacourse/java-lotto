@@ -4,36 +4,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private static final int DEFAULT_COUNT = 0;
 
-    private final Map<Rank, Integer> lottoResult = new HashMap<>();
+    private final Map<Rank, Integer> lottoResult;
 
-    public LottoResult() {
+    public LottoResult(final Map<Rank, Integer> lottoResult) {
+        this.lottoResult = new HashMap<>(lottoResult);
+    }
+
+    public Money calculateTotalWinningPrize() {
+        Money totalWinningPrize = new Money();
         for (Rank rank : Rank.values()) {
-            lottoResult.put(rank, DEFAULT_COUNT);
+            totalWinningPrize.add(calculateWinningPrize(rank));
         }
+        return totalWinningPrize;
+    }
+
+    private Money calculateWinningPrize(Rank rank) {
+        Money winningPrize = new Money();
+        winningPrize.add(rank.getPrizeMoney());
+        winningPrize.multiply(lottoResult.get(rank));
+        return winningPrize;
     }
 
     public Map<Rank, Integer> getLottoResult() {
-        return new HashMap<>(lottoResult);
-    }
-
-    public void addMatchingCount(Lottos lottos, WinningLotto winningLotto) {
-        for (Lotto lotto : lottos.getLottos()) {
-            Rank rank = lotto.getRank(winningLotto);
-            lottoResult.put(rank, lottoResult.get(rank) + 1);
-        }
-    }
-
-    public Profit getProfit() {
-        Money totalMoney = new Money(0);
-
-        for (Rank rank : Rank.values()) {
-            Money prizeMoney = rank.getPrizeMoney();
-            prizeMoney.multiply(lottoResult.get(rank));
-            totalMoney.add(prizeMoney.getMoney());
-        }
-
-        return new Profit(totalMoney);
+        return Map.copyOf(lottoResult);
     }
 }

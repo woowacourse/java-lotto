@@ -1,16 +1,14 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
-import lotto.domain.Profit;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
-import lotto.validator.NumberValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -18,62 +16,74 @@ public class LottoController {
     private static final int LOTTO_PRICE = 1000;
 
     public void run() {
-        Money purchaseAmount = payForLotto();
-        Lottos lottos = buyLotto(purchaseAmount);
+        Lottos lottos = buyLotto();
         WinningLotto winningLotto = pickLastWeekWinningNumbers();
-        calculateLottoResult(purchaseAmount, lottos, winningLotto);
+        calculateLottoResult(lottos, winningLotto);
+    }
+
+    private Lottos buyLotto() {
+        Money payment = payForLotto();
+        int count = inputManualLottoCount(payment);
+        List<Lotto> manualLottos = inputManualLottos(count);
+        Lottos lottos = Lottos.of(manualLottos, payment);
+        OutputView.printLottos(count, lottos.getLottos());
+        return lottos;
     }
 
     private Money payForLotto() {
-        OutputView.printPurchaseAmountRequest();
+        OutputView.printPaymentRequest();
         try {
-            return new Money(convertPurchaseAmount(InputView.inputPurchaseAmount()));
+            return new Money(InputView.inputPayment() / LOTTO_PRICE * LOTTO_PRICE);
         } catch (IllegalArgumentException error) {
             OutputView.printErrorMessage(error.getMessage());
             return payForLotto();
         }
     }
 
-    private int convertPurchaseAmount(String purchaseAmount) {
-        NumberValidator.validateNumber(purchaseAmount);
-        return Integer.parseInt(purchaseAmount) / LOTTO_PRICE * LOTTO_PRICE;
+    private int inputManualLottoCount(Money payment) {
+        OutputView.printManualLottoCountRequest();
+        try {
+            int count = InputView.inputManualLottoCount();
+            payment.subtract(new Money(count * LOTTO_PRICE));
+            return count;
+        } catch (IllegalArgumentException error) {
+            OutputView.printErrorMessage(error.getMessage());
+            return inputManualLottoCount(payment);
+        }
     }
 
-    private Lottos buyLotto(Money purchaseAmount) {
-        Lottos lottos = new Lottos(purchaseAmount);
-        OutputView.printLottos(lottos);
-        return lottos;
-    }
-
-    private WinningLotto pickLastWeekWinningNumbers() {
-        Lotto lotto = pickLotto();
-        return combineBonusBall(lotto);
+    private List<Lotto> inputManualLottos(int count) {
+        List<Lotto> lottoList = new ArrayList<>();
+        if (count == 0) {
+            return lottoList;
+        }
+        OutputView.printManualLottoNumbersRequest();
+        for (int i = 0; i < count; i++) {
+            lottoList.add(pickLotto());
+        }
+        return lottoList;
     }
 
     private Lotto pickLotto() {
-        OutputView.printWinningNumberRequest();
         try {
-            return new Lotto(convertLottoNumbers(InputView.inputWinningNumber()));
+            List<Integer> lottoNumbers = InputView.inputLottoNumbers();
+            return new Lotto(lottoNumbers);
         } catch (IllegalArgumentException error) {
             OutputView.printErrorMessage(error.getMessage());
             return pickLotto();
         }
     }
 
-    private List<Integer> convertLottoNumbers(final List<String> lottoNumbers) {
-        for (String lottoNumber : lottoNumbers) {
-            NumberValidator.validateNumber(lottoNumber);
-        }
-
-        return lottoNumbers.stream()
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
+    private WinningLotto pickLastWeekWinningNumbers() {
+        OutputView.printWinningNumberRequest();
+        Lotto winningLotto = pickLotto();
+        return combineBonusBall(winningLotto);
     }
 
     private WinningLotto combineBonusBall(Lotto lotto) {
         OutputView.printBonusBallRequest();
         try {
-            LottoNumber bonusBall = new LottoNumber(convertBonusBall(InputView.inputBonusBall()));
+            LottoNumber bonusBall = new LottoNumber(InputView.inputBonusBall());
             return new WinningLotto(lotto, bonusBall);
         } catch (IllegalArgumentException error) {
             OutputView.printErrorMessage(error.getMessage());
@@ -81,20 +91,13 @@ public class LottoController {
         }
     }
 
-    private int convertBonusBall(String bonusBallNumber) {
-        NumberValidator.validateNumber(bonusBallNumber);
-        return Integer.parseInt(bonusBallNumber);
-    }
-
-    private void calculateLottoResult(Money purchaseAmount, Lottos lottos, WinningLotto winningLotto) {
+    private void calculateLottoResult(Lottos lottos, WinningLotto winningLotto) {
         OutputView.printStatisticsTitle();
+        LottoResult lottoResult = new LottoResult(lottos.countLottoRank(winningLotto));
+        OutputView.printLottosResult(lottoResult.getLottoResult());
 
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.addMatchingCount(lottos, winningLotto);
-        OutputView.printLottosResult(lottoResult);
-
-        Profit profit = lottoResult.getProfit();
-        double profitRate = profit.calculateProfitRate(purchaseAmount);
+        Money payment = new Money(lottos.getLottos().size() * LOTTO_PRICE);
+        double profitRate = lottoResult.calculateTotalWinningPrize().calculateProfitRate(payment);
         OutputView.printProfitRate(profitRate);
     }
 }

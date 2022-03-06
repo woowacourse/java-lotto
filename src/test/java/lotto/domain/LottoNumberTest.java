@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,7 +24,7 @@ public class LottoNumberTest {
     void equals_same(int value) {
         LottoNumber lottoNumber1 = new LottoNumber(value);
         LottoNumber lottoNumber2 = new LottoNumber(value);
-        assertTrue(lottoNumber1.equals(lottoNumber2));
+        assertThat(lottoNumber1).isEqualTo(lottoNumber2);
     }
 
     @Test
@@ -33,6 +32,6 @@ public class LottoNumberTest {
     void equals_null() {
         LottoNumber lottoNumber1 = new LottoNumber(1);
         LottoNumber lottoNumber2 = null;
-        assertFalse(lottoNumber1.equals(lottoNumber2));
+        assertThat(lottoNumber1).isNotEqualTo(lottoNumber2);
     }
 }
