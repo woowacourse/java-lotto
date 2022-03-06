@@ -14,7 +14,7 @@ class LottoNumberTest {
     @DisplayName("로또 번호가 1보다 작거나 45보다 크면 예외 발생")
     void generateLottoNumberWhenNumberLessThanOneOrMoreThan45FailureTest(int number) {
         assertThatThrownBy(
-                () -> LottoNumber.values(number)
+                () -> LottoNumber.of(number)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -23,7 +23,7 @@ class LottoNumberTest {
     @DisplayName("로또 번호가 1부터 45일때 테스트 - 성공")
     void generateLottoNumberTest(int number) {
 
-        LottoNumber lottoNumber = LottoNumber.values(number);
+        LottoNumber lottoNumber = LottoNumber.of(number);
         assertThat(lottoNumber.getLottoNumber()).isEqualTo(number);
 
     }

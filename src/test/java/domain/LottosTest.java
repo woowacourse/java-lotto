@@ -25,7 +25,7 @@ public class LottosTest {
         Lotto firstLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 6));
         Lotto fifthLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 10, 11, 12));
         Lotto missLotto = new Lotto(LottoNumberGenerator.of(13, 14, 15, 16, 17, 18));
-        LottoNumber bonusBall = LottoNumber.values(7);
+        LottoNumber bonusBall = LottoNumber.of(7);
 
         WinningLotto winningNumber = new WinningLotto(firstLotto, bonusBall);
 

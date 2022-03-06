@@ -1,6 +1,8 @@
 package domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -22,7 +24,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber values(final int number) {
+    public static List<LottoNumber> values(){
+        return IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList());
+    }
+
+    public static LottoNumber of(final int number) {
         LottoNumber lottoNumber = CACHE.get(number);
         if (Objects.isNull(lottoNumber)) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE);
