@@ -1,68 +1,47 @@
 package lotto.controller;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
-import java.util.ArrayList;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.SequenceInputStream;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import lotto.model.Lotto;
-import lotto.model.LottoCount;
-import lotto.model.LottoMachine;
-import lotto.model.Lottos;
-import lotto.model.Money;
-import lotto.model.WinningLotto;
+import java.util.stream.Stream;
 import lotto.model.generator.CustomLottoGenerator;
-import lotto.model.number.LottoNumber;
-import lotto.model.number.LottoNumbers;
-import lotto.view.ResultView;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoControllerTest {
 
-    @DisplayName("실행 테스트")
-    @Test
-    void runLottoControllerTest() {
-        assertThatCode(() -> run()).doesNotThrowAnyException();
+    private LottoController lottoController = new LottoController(new CustomLottoGenerator());
+
+    @ParameterizedTest
+    @MethodSource("provideNormalInput")
+    void test1(String money, String count, String manualLotto, String winningNumbers, String bonusNumber) {
+
+        InputStream in = createInputStream(money, count, manualLotto, winningNumbers, bonusNumber);
+        System.setIn(in);
+
+        assertThatCode(() -> lottoController.run())
+                .doesNotThrowAnyException();
     }
 
-    public void run() {
-        Money money = new Money(3000);
-
-        LottoCount lottoCount = new LottoCount(2, money);
-
-        LottoMachine lottoMachine = new LottoMachine(new CustomLottoGenerator());
-
-        Lottos boughtLottos = lottoMachine.buy(money, lottoCount, makeLottos());
-
-        ResultView.printBuyingLottosResult(lottoCount, boughtLottos);
-
-        WinningLotto winningLotto = makeWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7);
-
-        lottoMachine.calculateResult(winningLotto);
-
-        ResultView.printTotalRankResult(lottoMachine);
+    private static Stream<Arguments> provideNormalInput() {
+        return Stream.of(
+                Arguments.of("3000\n", "1\n", "1,2,3,4,5,6\n", "1,2,3,4,5,6\n", "7")
+        );
     }
 
-    private List<Lotto> makeLottos() {
-        Lotto first = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
-        Lotto second = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
-        return new ArrayList<>(Arrays.asList(first, second));
-    }
-
-    private Lotto makeLotto(int[] numbers) {
-        return new Lotto(makeLottoNumbers(numbers));
-    }
-
-    private WinningLotto makeWinningLotto(int[] numbers, int bonusNumber) {
-        return new WinningLotto(makeLottoNumbers(numbers), new LottoNumber(bonusNumber));
-    }
-
-    private LottoNumbers makeLottoNumbers(int[] numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int num : numbers) {
-            lottoNumbers.add(new LottoNumber(num));
-        }
-        return new LottoNumbers(lottoNumbers);
+    private InputStream createInputStream(String money, String count, String manualLotto, String winningNumbers, String bonusNumber) {
+        List<InputStream> streams = Arrays.asList(
+                new ByteArrayInputStream(money.getBytes()),
+                new ByteArrayInputStream(count.getBytes()),
+                new ByteArrayInputStream(manualLotto.getBytes()),
+                new ByteArrayInputStream(winningNumbers.getBytes()),
+                new ByteArrayInputStream(bonusNumber.getBytes()));
+        return new SequenceInputStream(Collections.enumeration(streams));
     }
 }

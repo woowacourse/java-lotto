@@ -75,4 +75,8 @@ public class ResultView {
         }
         return BONUS_BALL_NOT_CORRESPOND_MESSAGE;
     }
+
+    public static void printErrorMessage(Exception e) {
+        System.out.println(e.getMessage());
+    }
 }

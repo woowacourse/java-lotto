@@ -24,19 +24,14 @@ public class LottoController {
 
     public void run() {
         Money money = inputMoney();
-
         LottoCount lottoCount = inputLottoCount(money);
 
         LottoMachine lottoMachine = new LottoMachine(lottoGenerator);
-
         Lottos boughtLottos = lottoMachine.buy(money, lottoCount, inputManualLottos(lottoCount.getManualLottoCount()));
-
         ResultView.printBuyingLottosResult(lottoCount, boughtLottos);
 
         WinningLotto winningLotto = makeWinningLotto();
-
         lottoMachine.calculateResult(winningLotto);
-
         ResultView.printTotalRankResult(lottoMachine);
     }
 
@@ -44,7 +39,7 @@ public class LottoController {
         try {
             return new Money(InputView.inputMoney());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            ResultView.printErrorMessage(e);
             return inputMoney();
         }
     }
@@ -53,7 +48,7 @@ public class LottoController {
         try {
             return new LottoCount(InputView.inputManualLottoCount(), money);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            ResultView.printErrorMessage(e);
             return inputLottoCount(money);
         }
     }
@@ -66,7 +61,7 @@ public class LottoController {
                     .map(Lotto::new)
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            ResultView.printErrorMessage(e);
             return inputManualLottos(count);
         }
     }
@@ -83,8 +78,7 @@ public class LottoController {
             LottoNumber lottoBonusNumber = new LottoNumber(InputView.inputBonusNumber());
             return new WinningLotto(lottoNumbers, lottoBonusNumber);
         } catch (Exception e) {
-            System.out.println();
-            System.out.println(e.getMessage());
+            ResultView.printErrorMessage(e);
             return makeWinningLotto();
         }
     }
