@@ -32,9 +32,9 @@ class MoneyTest {
         Money aMoney = new Money(1000);
         Money bMoney = new Money(100);
         // when
-        Money dividedMoney = aMoney.divide(bMoney);
+        int divided = aMoney.divide(bMoney);
         // then
-        Assertions.assertThat(dividedMoney.getAmount()).isEqualTo(10);
+        Assertions.assertThat(divided).isEqualTo(10);
     }
 
     @Test

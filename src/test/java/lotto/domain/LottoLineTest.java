@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoTicketTest {
+class LottoLineTest {
 
     @Test
     @DisplayName("로또 티켓이 정상적으로 생성되는지 확인")
@@ -19,9 +19,9 @@ class LottoTicketTest {
                 LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))
         );
         // when
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoLine lottoLine = new LottoLine(numbers);
         // then
-        assertThat(lottoTicket).isNotNull();
+        assertThat(lottoLine).isNotNull();
     }
 
     @Test
@@ -34,7 +34,7 @@ class LottoTicketTest {
         );
         // then
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new LottoTicket(numbers));
+            .isThrownBy(() -> new LottoLine(numbers));
     }
 
     @Test
@@ -47,6 +47,6 @@ class LottoTicketTest {
         );
         // then
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new LottoTicket(numbers));
+            .isThrownBy(() -> new LottoLine(numbers));
     }
 }

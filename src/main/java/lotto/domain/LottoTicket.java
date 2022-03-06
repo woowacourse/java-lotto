@@ -1,72 +1,48 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import lotto.domain.generator.NumberGenerator;
 
 public class LottoTicket {
 
-    public static final int PRICE = 1000;
-    private static final int NUMBER_COUNT = 6;
+    private final List<LottoLine> lines;
+    private final Money money;
 
-    private final List<LottoNumber> numbers;
-
-    public LottoTicket(List<LottoNumber> numbers) {
-        validate(numbers);
-        this.numbers = new ArrayList<>(numbers);
+    public LottoTicket(List<LottoLine> lines, Money money) {
+        this.lines = lines;
+        this.money = money;
     }
 
-    public static LottoTicket createTicket(NumberGenerator generator) {
-        return new LottoTicket(
-            generator.generate(NUMBER_COUNT)
-                .stream()
-                .map(LottoNumber::from)
-                .collect(Collectors.toList())
-        );
+    public static LottoTicket createLottoTicket(NumberGenerator generator, Money money) {
+        validatePurchasable(money);
+        List<LottoLine> lines = createLines(generator, calculatePurchasableCount(money));
+        return new LottoTicket(lines, money);
     }
 
-    private void validate(List<LottoNumber> numbers) {
-        validateLength(numbers);
-        validateDistinct(numbers);
-    }
-
-    private void validateDistinct(List<LottoNumber> numbers) {
-        if (!isDistinct(numbers)) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+    private static void validatePurchasable(Money money) {
+        if (!money.isGreatThanOrEqualTo(Money.from(LottoLine.PRICE))) {
+            throw new IllegalArgumentException("로또 구매에 필요한 금액이 부족합니다.");
         }
     }
 
-    private boolean isDistinct(List<LottoNumber> numbers) {
-        return new HashSet<>(numbers).size() == NUMBER_COUNT;
+    private static int calculatePurchasableCount(Money money) {
+        return money.divide(Money.from(LottoLine.PRICE));
     }
 
-    private void validateLength(List<LottoNumber> numbers) {
-        if (numbers.size() != NUMBER_COUNT) {
-            throw new IllegalArgumentException(String.format("로또 번호의 개수는 %d 이어야 합니다.", NUMBER_COUNT));
-        }
+    private static List<LottoLine> createLines(NumberGenerator generator, int count) {
+        return IntStream.range(0, count)
+            .mapToObj(i -> LottoLine.createTicket(generator))
+            .collect(Collectors.toList());
     }
 
-    public int countMatch(LottoTicket other) {
-        return Math.toIntExact(
-            this.numbers.stream()
-            .filter(other::isMatch)
-            .count()
-        );
+    public List<LottoLine> getLines() {
+        return lines;
     }
 
-    public boolean isMatch(LottoNumber number) {
-        return this.numbers.contains(number);
-    }
-
-    public boolean contains(LottoNumber bonusBall) {
-        return numbers.contains(bonusBall);
-    }
-
-    public List<LottoNumber> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public Money getMoney() {
+        return money;
     }
 }

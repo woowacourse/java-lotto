@@ -38,7 +38,7 @@ public class InputView {
         return input("구입금액을 입력해 주세요.\n");
     }
 
-    public List<String> inputLottoNumbers() {
+    public List<String> inputLottoLines() {
         int lottoCount = IntegerUtils.parse(input("수동으로 구매할 로또 수를 입력해 주세요.\n"));
         return input("수동으로 구매할 번호를 입력해 주세요.\n", lottoCount);
     }

@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 
 public class WinningTicketTest {
 
-    private LottoTicket baseLottoTicket;
+    private LottoLine baseLottoLine;
 
     @BeforeEach
     public void setUp() {
-        baseLottoTicket = new LottoTicket(new ArrayList<>(
+        baseLottoLine = new LottoLine(new ArrayList<>(
             List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
                 LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))
         ));
@@ -26,7 +26,7 @@ public class WinningTicketTest {
         // given
         LottoNumber bonusball = LottoNumber.from(7);
         // then
-        Assertions.assertThatCode(() -> new WinningTicket(baseLottoTicket, bonusball))
+        Assertions.assertThatCode(() -> new WinningTicket(baseLottoLine, bonusball))
             .doesNotThrowAnyException();
     }
 
@@ -38,7 +38,7 @@ public class WinningTicketTest {
 
         // then
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new WinningTicket(baseLottoTicket, bonusBall));
+            .isThrownBy(() -> new WinningTicket(baseLottoLine, bonusBall));
     }
 
     @Test
@@ -46,9 +46,9 @@ public class WinningTicketTest {
     public void compareWinningTicketWithLottoTicket() {
         // given
         LottoNumber bonusball = LottoNumber.from(7);
-        WinningTicket winningTicket = new WinningTicket(baseLottoTicket, bonusball);
+        WinningTicket winningTicket = new WinningTicket(baseLottoLine, bonusball);
         // when
-        LottoTicket purchaseTicket = new LottoTicket(List.of(
+        LottoLine purchaseTicket = new LottoLine(List.of(
             LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
             LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)
         ));
