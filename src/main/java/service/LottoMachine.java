@@ -28,8 +28,8 @@ public class LottoMachine {
 
 	private static Lotto createAutoLotto() {
 		Collections.shuffle(LOTTO_BUCKET);
-		return new Lotto(LOTTO_BUCKET.stream()
-			.limit(Lotto.LOTTO_SIZE)
+		return Lotto.from(LOTTO_BUCKET.stream()
+			.limit(Lotto.SIZE)
 			.collect(Collectors.toUnmodifiableList()));
 	}
 }
