@@ -6,18 +6,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import domain.generator.AutoLottoGenerator;
-import domain.generator.LottoGenerator;
 import domain.generator.ManualLottoGenerator;
-import service.LottoService;
 
 public class LottoServiceTest {
-
-	private final AutoLottoGenerator lottoGenerator = new AutoLottoGenerator();
 
 	@DisplayName("로또를 발행한다")
 	@Test
 	void createLotto() {
-		assertThat(lottoGenerator.createLottos(5, Lotto.SIZE))
+		assertThat(new AutoLottoGenerator(5, Lotto.SIZE).creatLottos())
 			.isInstanceOf(Lottos.class);
 	}
 
@@ -25,11 +21,12 @@ public class LottoServiceTest {
 	@Test
 	void createManualAndAutoLottos() {
 		//given
-		Lottos manualLottos = lottoGenerator.createLottos(4, Lotto.SIZE);
+		Lottos manualLottos = new AutoLottoGenerator(4, Lotto.SIZE).creatLottos();
 		//when
 		OrderForm orderForm = new OrderForm(new Payment(5000), 2);
-		Lottos autoLottos = new AutoLottoGenerator().createLottos(orderForm.calculateAutoLottoCount(), Lotto.SIZE);
-		Lottos manualAndAutoMixLottos =  new ManualLottoGenerator().createManualLottos(manualLottos, autoLottos);
+		Lottos manualAndAutoMixLottos = new ManualLottoGenerator(
+			new AutoLottoGenerator(orderForm.calculateAutoLottoCount(), Lotto.SIZE), manualLottos)
+			.creatLottos();
 		//then
 		assertThat(manualAndAutoMixLottos.getSize()).isEqualTo(7);
 	}

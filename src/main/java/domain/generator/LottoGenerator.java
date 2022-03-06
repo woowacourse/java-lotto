@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import domain.Lotto;
 import domain.LottoNumber;
+import domain.Lottos;
 
 public interface LottoGenerator {
 	List<LottoNumber> LOTTO_BUCKET = LottoNumber.ofList();
@@ -16,4 +17,6 @@ public interface LottoGenerator {
 			.limit(count)
 			.collect(Collectors.toUnmodifiableList()));
 	}
+
+	Lottos creatLottos();
 }

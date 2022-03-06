@@ -53,7 +53,7 @@ public class LottosTest {
 	@CsvSource(value = {"5:true", "6:false"}, delimiter = ':')
 	void check_Lottos_size(int size, boolean expected) {
 		//given, when
-		Lottos lottos = new AutoLottoGenerator().createLottos(5, Lotto.SIZE);
+		Lottos lottos = new AutoLottoGenerator(5, Lotto.SIZE).creatLottos();
 		//then
 		assertThat(lottos.getSize() == size).isEqualTo(expected);
 	}

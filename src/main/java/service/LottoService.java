@@ -12,8 +12,7 @@ import domain.generator.ManualLottoGenerator;
 public class LottoService {
 
 	public Lottos createLottos(Lottos manualLottos, OrderForm orderForm) {
-		Lottos autoLottos = new AutoLottoGenerator().createLottos(orderForm.calculateAutoLottoCount(), Lotto.SIZE);
-		return new ManualLottoGenerator().createManualLottos(manualLottos, autoLottos);
+		return new ManualLottoGenerator(new AutoLottoGenerator(orderForm.calculateAutoLottoCount(), Lotto.SIZE), manualLottos).creatLottos();
 	}
 
 	public LottoResult createLottoResult(Lottos lottos, WinningLotto winningLotto) {
