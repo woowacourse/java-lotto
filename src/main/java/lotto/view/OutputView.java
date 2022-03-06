@@ -51,7 +51,7 @@ public class OutputView {
         System.out.printf("총 수익률은 %.2f입니다.\n", yield);
 
     }
-
+  
     public void printAskManualPurchaseCountInputMessage() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
     }
