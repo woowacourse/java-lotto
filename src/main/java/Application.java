@@ -1,8 +1,8 @@
-import controller.Controller;
+import controller.ManualLottoController;
 
 public class Application {
     public static void main(String[] args) {
-        Controller controller = new Controller();
+        ManualLottoController controller = new ManualLottoController();
         controller.run();
     }
 }

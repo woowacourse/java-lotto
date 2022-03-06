@@ -38,12 +38,7 @@ public enum Rank {
     public static List<Rank> getRanks() {
         return Arrays.stream(Rank.values())
                 .sorted(Comparator.comparingLong(Rank::getAmount))
-                .filter(Rank::isNotOther)
                 .collect(Collectors.toList());
-    }
-
-    private static boolean isNotOther(Rank rank) {
-        return rank != OTHER;
     }
 
     public long getAmount() {

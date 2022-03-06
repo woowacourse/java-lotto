@@ -19,35 +19,43 @@ public class WinningNumbersTest {
 
     @BeforeEach
     void initialize() {
-        ticket = new Ticket(() -> Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
+        ticket = new Ticket(() -> Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)));
     }
 
     @Test
     void 당첨번호_보너스번호_중복검사_실패테스트() {
-        Set<LottoNumber> winNumbers = Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6));
-        assertThatThrownBy(() -> new WinningNumbers(new Ticket(winNumbers), new LottoNumber(6)))
+        /* given */
+        Set<LottoNumber> winNumbers = Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6));
+
+        /* when */
+        assertThatThrownBy(() -> new WinningNumbers(new Ticket(winNumbers), LottoNumber.valueOf(6)))
+                /* then */
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 당첨번호_보너스번호_중복검사_성공테스트() {
-        Ticket winTicket = new Ticket(Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
-        assertThatCode(() -> new WinningNumbers(winTicket, new LottoNumber(7)))
+        /* given */
+        Ticket winTicket = new Ticket(Set.of(LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)));
+
+        /* when */
+        assertThatCode(() -> new WinningNumbers(winTicket, LottoNumber.valueOf(7)))
+                /* then */
                 .doesNotThrowAnyException();
     }
 
@@ -55,15 +63,20 @@ public class WinningNumbersTest {
     @MethodSource("parameters")
     @DisplayName("로또 등수 확인 테스트")
     void 로또등수확인(int n1, int n2, int n3, int n4, int n5, int n6, int bonus, Rank rank, String testName) {
-        Ticket winTicket = new Ticket(Set.of(new LottoNumber(n1),
-                new LottoNumber(n2),
-                new LottoNumber(n3),
-                new LottoNumber(n4),
-                new LottoNumber(n5),
-                new LottoNumber(n6)));
-        LottoNumber bonusNumber = new LottoNumber(bonus);
+        /* given */
+        Ticket winTicket = new Ticket(Set.of(LottoNumber.valueOf(n1),
+                LottoNumber.valueOf(n2),
+                LottoNumber.valueOf(n3),
+                LottoNumber.valueOf(n4),
+                LottoNumber.valueOf(n5),
+                LottoNumber.valueOf(n6)));
+        LottoNumber bonusNumber = LottoNumber.valueOf(bonus);
         WinningNumbers winningNumbers = new WinningNumbers(winTicket, bonusNumber);
-        assertThat(winningNumbers.getTicketRank(ticket)).isEqualTo(rank);
+
+        /* when */
+        assertThat(winningNumbers.getTicketRank(ticket))
+                /* then */
+                .isEqualTo(rank);
     }
 
     static Stream<Arguments> parameters() {

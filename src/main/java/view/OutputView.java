@@ -2,6 +2,7 @@ package view;
 
 import domain.LottoNumber;
 import domain.LottoResults;
+import domain.PurchaseLottoCounts;
 import domain.Rank;
 import domain.Ticket;
 import domain.Tickets;
@@ -13,10 +14,6 @@ import java.util.stream.Collectors;
 public class OutputView {
 
     private static final String DELIMITER = ", ";
-
-    public static void printTicketCount(int ticketCount) {
-        System.out.println(ticketCount + "개를 구매했습니다.");
-    }
 
     public static void printTickets(Tickets tickets) {
         List<Ticket> purchasedTickets = tickets.getTickets();
@@ -43,18 +40,18 @@ public class OutputView {
         Map<Rank, Integer> LottoResults = results.getLottoResults();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (Rank rank : Rank.getRanks()) {
-            System.out.println(rank.getCount()
-                    + "개 일치"
-                    + getBonus(rank)
-                    + "(" + rank.getAmount()
-                    + "원) - "
-                    + getCount(LottoResults, rank)
-                    + "개");
-        }
+        Rank.getRanks().stream()
+                .filter(OutputView::isNotOther)
+                .forEach(rank -> System.out.println(rank.getCount() + "개 일치"
+                        + getBonus(rank)
+                        + "(" + rank.getAmount() + "원) - " + getRankCount(LottoResults, rank) + "개"));
     }
 
-    private static int getCount(Map<Rank, Integer> result, Rank rank) {
+    private static boolean isNotOther(Rank rank) {
+        return rank != Rank.OTHER;
+    }
+
+    private static int getRankCount(Map<Rank, Integer> result, Rank rank) {
         if (result.containsKey(rank)) {
             return result.get(rank);
         }
@@ -74,5 +71,11 @@ public class OutputView {
             System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
         System.out.println();
+    }
+
+    public static void printTicketCount(PurchaseLottoCounts purchaseLottoCounts) {
+        int manualTicketCount = purchaseLottoCounts.getManualCount();
+        int autoTicketCount = purchaseLottoCounts.getAutoCount();
+        System.out.println("수동으로 " + manualTicketCount + "장, 자동으로 " + autoTicketCount + "개를 구매했습니다.");
     }
 }

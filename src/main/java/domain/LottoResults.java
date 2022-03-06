@@ -8,7 +8,7 @@ import java.util.TreeMap;
 public class LottoResults {
     private final Map<Rank, Integer> results;
 
-    private LottoResults(Map<Rank, Integer> results) {
+    public LottoResults(Map<Rank, Integer> results) {
         this.results = results;
     }
 

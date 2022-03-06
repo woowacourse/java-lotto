@@ -1,106 +1,66 @@
 package domain;
 
+import static java.util.Map.entry;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Map;
 import java.util.Set;
-import java.util.stream.Stream;
-import org.junit.jupiter.api.DisplayName;
+import java.util.TreeMap;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 @SuppressWarnings("NonAsciiCharacters")
 public class LottoResultsTest {
+
     @Test
-    void 로또당첨_등수_개수() {
-        WinningNumbers winningNumbers = getWinningNumbers();
+    void 등수_계산() {
+        /*given*/
+        Ticket ticket1 = createTicket(1, 2, 3, 4, 5, 6);
+        Ticket ticket2 = createTicket(2, 3, 4, 5, 6, 7);
+        Ticket ticket3 = createTicket(3, 4, 5, 6, 7, 8);
+        Ticket ticket4 = createTicket(4, 5, 6, 7, 8, 9);
 
-        Ticket ticketFirst = getFirstTicket();
-        Ticket ticketFirst2 = getFirstTicket();
-        Ticket ticketSecond = getSecondTicket();
-        Ticket ticketThird = getThirdTicket();
+        Tickets tickets = new Tickets(Arrays.asList(ticket1, ticket2, ticket3, ticket4));
 
-        Tickets tickets = new Tickets(Arrays.asList(ticketFirst, ticketSecond, ticketFirst2, ticketThird));
-        LottoResults result = LottoResults.of(winningNumbers, tickets);
+        WinningNumbers winningNumbers = createWinningTicket(1, 2, 3, 4, 5, 6, 7);
 
-        assertThat(result.getLottoResults()).hasSize(3)
-                .contains(entry(Rank.FIRST, 2), entry(Rank.SECOND, 1), entry(Rank.THIRD, 1));
+        LottoResults lottoResults = LottoResults.of(winningNumbers, tickets);
+        /* when */
+        assertThat(lottoResults.getLottoResults())
+                /*then*/
+                .hasSize(4)
+                .contains(entry(Rank.FIRST, 1), entry(Rank.SECOND, 1), entry(Rank.FOURTH, 1), entry(Rank.FIFTH, 1));
     }
 
-    @ParameterizedTest(name = "{index}: {4}")
-    @MethodSource("validParameters")
-    @DisplayName("수익률 검사")
-    void validCreate(Ticket ticket1, Ticket ticket2, Ticket ticket3, int amount, double yield, String testName) {
-        WinningNumbers winningNumbers = getWinningNumbers();
-        Tickets tickets = new Tickets(Arrays.asList(ticket1, ticket2, ticket3));
-        LottoResults results = LottoResults.of(winningNumbers, tickets);
-        assertThat(new Amount(amount).getYield(results.getProfit())).isEqualTo(yield);
+    private WinningNumbers createWinningTicket(int num1, int num2, int num3, int num4, int num5, int num6,
+                                               int bonusNum) {
+        Ticket ticket = createTicket(num1, num2, num3, num4, num5, num6);
+        LottoNumber bonusNumber = LottoNumber.valueOf(bonusNum);
+        return new WinningNumbers(ticket, bonusNumber);
     }
 
-    static Stream<Arguments> validParameters() {
-        return Stream.of(
-                Arguments.of(getOtherTicket(), getOtherTicket(), getOtherTicket(), 3000, 0, "수익률 0"),
-                Arguments.of(getOtherTicket(), getThirdTicket(), getThirdTicket(), 3000, 1000, "수익률 1000"),
-                Arguments.of(getFifthTicket(), getSecondTicket(), getFirstTicket(), 3000, 676668.33, "수익률 676668"),
-                Arguments.of(getFirstTicket(), getFirstTicket(), getFirstTicket(), 3000, 2000000, "수익률 2000000"));
+    private Ticket createTicket(int num1, int num2, int num3, int num4, int num5, int num6) {
+        return new Ticket(Set.of(LottoNumber.valueOf(num1),
+                LottoNumber.valueOf(num2),
+                LottoNumber.valueOf(num3),
+                LottoNumber.valueOf(num4),
+                LottoNumber.valueOf(num5),
+                LottoNumber.valueOf(num6)));
     }
 
-    private WinningNumbers getWinningNumbers() {
-        Ticket winTicket = new Ticket(Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(16)));
-        LottoNumber bonusNumber = new LottoNumber(6);
-        return new WinningNumbers(winTicket, bonusNumber);
-    }
+    @Test
+    void 수익률_계산() {
+        /* given */
+        Map<Rank, Integer> results = new TreeMap<>(Comparator.comparingLong(Rank::getAmount));
+        results.put(Rank.FIFTH, 2);
+        results.put(Rank.SECOND, 2);
+        results.put(Rank.FIRST, 1);
+        LottoResults lottoResults = new LottoResults(results);
 
-    private static Ticket getFifthTicket() {
-        return new Ticket(Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(14),
-                new LottoNumber(15),
-                new LottoNumber(43)));
-    }
-
-    private static Ticket getOtherTicket() {
-        return new Ticket(Set.of(new LottoNumber(11),
-                new LottoNumber(12),
-                new LottoNumber(13),
-                new LottoNumber(14),
-                new LottoNumber(15),
-                new LottoNumber(43)));
-    }
-
-    private static Ticket getThirdTicket() {
-        return new Ticket(Set.of(new LottoNumber(40),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(16)));
-    }
-
-    private static Ticket getSecondTicket() {
-        return new Ticket(Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
-    }
-
-    private static Ticket getFirstTicket() {
-        return new Ticket(Set.of(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(16)));
+        /* when */
+        assertThat(lottoResults.getProfit())
+                /* then */
+                .isEqualTo(5000 * 2 + 30_000_000 * 2 + 2_000_000_000);
     }
 }
