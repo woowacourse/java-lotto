@@ -13,7 +13,7 @@ import lotto.view.OutputView;
 
 public class Controller {
     public void run() {
-        Lotto lotto = requestAmountForLotto();
+        Lotto lotto = createLotto();
 
         int manualTicketCount = requestManualTicketCount(lotto);
         createManualTickets(lotto, manualTicketCount);
@@ -24,13 +24,17 @@ public class Controller {
         OutputView.printResult(lotto.getResult(winTicket), lotto.getYield(winTicket));
     }
 
-    private Lotto requestAmountForLotto() {
+    private Lotto createLotto() {
         try {
-            return new Lotto(InputView.requestAmount());
+            return new Lotto(requestAmount());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return requestAmountForLotto();
+            return createLotto();
         }
+    }
+
+    private int requestAmount() {
+        return InputView.requestAmount();
     }
 
     private int requestManualTicketCount(Lotto lotto) {
