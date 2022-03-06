@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class LottoStatistics {
 
-    private static final int DECIMAL_POINT_MULTIPLE = 100;
+    private static final int DECIMAL_POINT_CHANGE_NUMBER = 100;
 
     private final Map<LottoRank, Long> statisticsByRank = new EnumMap<>(LottoRank.class);
 
@@ -33,12 +33,12 @@ public class LottoStatistics {
         long sum = statisticsByRank.entrySet().stream()
             .mapToLong(singleLotto -> singleLotto.getKey().getPrize() * singleLotto.getValue())
             .sum();
-        return getFormat(money, sum);
+        return convertFormat(money, sum);
     }
 
-    private String getFormat(Money money, long sum) {
-        return String.format("%s", Math.floor(money.divideByAmount(sum) * DECIMAL_POINT_MULTIPLE)
-            / DECIMAL_POINT_MULTIPLE);
+    private String convertFormat(Money money, long sum) {
+        return String.format("%s", Math.floor(money.divideByAmount(sum)
+            * DECIMAL_POINT_CHANGE_NUMBER) / DECIMAL_POINT_CHANGE_NUMBER);
     }
 
     public Map<LottoRank, Long> getStatisticsByRank() {
