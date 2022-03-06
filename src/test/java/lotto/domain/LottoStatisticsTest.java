@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 
 class LottoStatisticsTest {
 
-    private static final int DECIMAL_POINT_MULTIPLE = 100;
-
     @Test
     @DisplayName("로또 순위로 통계를 정상적으로 만드는지 확인.")
     void createStatisticsWithLottoRanks() {
