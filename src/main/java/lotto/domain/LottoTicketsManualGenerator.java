@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ManualLottoTicketsGenerator {
+public class LottoTicketsManualGenerator {
 
     public static List<LottoTicket> createLottoNumbers(List<List<Integer>> inputLottoNumbers) {
         return inputLottoNumbers.stream()
