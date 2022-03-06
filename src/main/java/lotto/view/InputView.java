@@ -21,6 +21,7 @@ public class InputView {
     private static final String DELIMITER = ", ";
 
     private static final Scanner scanner = new Scanner(System.in);
+    public static final String ERROR_NOT_POSITIVE = "음수는 입력할 수 없습니다.";
 
     public static int requestMoney() throws RuntimeException {
         System.out.println(REQUEST_MONEY);
@@ -43,11 +44,19 @@ public class InputView {
         }
     }
 
-    public static int requestManualLottoCount() {
+    public static int requestManualLottoCount() throws RuntimeException {
         System.out.println(REQUEST_MANUAL_COUNT);
         String inputManualLottoCount = scanner.nextLine();
         validateIsNullOrEmpty(inputManualLottoCount);
-        return toInteger(inputManualLottoCount);
+        int intCount = toInteger(inputManualLottoCount);
+        validateRange(intCount);
+        return intCount;
+    }
+
+    private static void validateRange(int inputManualLottoCount) {
+        if (inputManualLottoCount < 0) {
+            throw new RuntimeException(ERROR_NOT_POSITIVE);
+        }
     }
 
     public static List<List<Integer>> requestManualLottoNumbers(int count) {
