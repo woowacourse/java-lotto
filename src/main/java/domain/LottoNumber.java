@@ -28,7 +28,7 @@ public class LottoNumber {
         return lottoNumberCache.get(number);
     }
 
-    public static void validate(int number) {
+    private static void validate(int number) {
         if (isNotInRangeNumber(number)) {
             throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR_MESSAGE);
         }
