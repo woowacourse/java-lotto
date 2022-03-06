@@ -35,6 +35,10 @@ public class Lottos {
         return lottos;
     }
 
+    public int getSize() {
+        return lottos.size();
+    }
+
     @Override
     public String toString() {
         return "Lottos{" +
