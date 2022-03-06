@@ -10,7 +10,7 @@ public enum Rank {
 	SECOND(5, 30_000_000),
 	FIRST(6, 2_000_000_000);
 
-	private static final int REWARD_NUMBER = 3;
+	private static final int STANDARD_VALUE_OF_REWARD = 0;
 	private static final int BONUS_NUMBER = 5;
 
 	private final int matchNumber;
@@ -21,8 +21,8 @@ public enum Rank {
 		this.value = value;
 	}
 
-	public boolean checkNumberToReward() {
-		return this.matchNumber >= REWARD_NUMBER;
+	public boolean hasReward() {
+		return this.value > STANDARD_VALUE_OF_REWARD;
 	}
 
 	public static Rank getRank(long matchNumber, boolean matchBonus) {
