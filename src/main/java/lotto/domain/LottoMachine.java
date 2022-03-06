@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.constant.ErrorMessage.ERROR_LOTTO_MACHINE_NON_PURCHASABLE;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
@@ -22,21 +23,21 @@ public class LottoMachine {
         }
     }
 
-    public Lottos makeManualAndAutoLottos(final List<List<Integer>> manualLottos) {
-        final Lottos lottos = new Lottos();
+    public List<Lotto> makeManualAndAutoLottos(final List<List<Integer>> manualLottos) {
+        final List<Lotto> lottos = new ArrayList<>();
         makeManualLottos(lottos, manualLottos);
         makeAutoLottos(lottos);
         return lottos;
     }
 
-    private void makeManualLottos(final Lottos lottos, final List<List<Integer>> manualLottos) {
+    private void makeManualLottos(final List<Lotto> lottos, final List<List<Integer>> manualLottos) {
         for (List<Integer> manualLotto : manualLottos) {
             final LottoGenerator lottoGenerator = new FixedLottoGenerator(manualLotto);
             lottos.add(new Lotto(lottoGenerator));
         }
     }
 
-    private void makeAutoLottos(final Lottos lottos) {
+    private void makeAutoLottos(final List<Lotto> lottos) {
         final LottoGenerator lottoGenerator = new RandomLottoGenerator();
         for (int i = 0; i < autoLottoCount; i++) {
             lottos.add(new Lotto(lottoGenerator));

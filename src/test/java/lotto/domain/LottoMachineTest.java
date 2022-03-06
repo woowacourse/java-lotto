@@ -41,7 +41,7 @@ public class LottoMachineTest {
         inputLottos.add(List.of(3, 5, 11, 16, 32, 38));
         inputLottos.add(List.of(7, 11, 16, 35, 36, 44));
 
-        final Lottos lottos = lottoGame.makeManualAndAutoLottos(inputLottos);
+        final List<Lotto> lottos = lottoGame.makeManualAndAutoLottos(inputLottos);
 
         assertThat(lottos.size()).isEqualTo(14);
     }
