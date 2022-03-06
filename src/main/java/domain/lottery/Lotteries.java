@@ -1,5 +1,6 @@
 package domain.lottery;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -18,13 +19,16 @@ public final class Lotteries {
 		this.lotteries = lotteriesNumber;
 	}
 
-	public static Lotteries from(final List<Lottery> lotteriesNumber) {
-		return new Lotteries(deepCopyOf(lotteriesNumber));
+	public static Lotteries from(final List<Lottery>... lotteriesNumber) {
+		return new Lotteries(concatLotteries(lotteriesNumber));
 	}
 
-	private static List<Lottery> deepCopyOf(final List<Lottery> lotteriesNumber) {
-		return lotteriesNumber.stream()
-			.collect(Collectors.toList());
+	private static List<Lottery> concatLotteries(final List<Lottery>... lotteriesNumber) {
+		final List<Lottery> concatLottery = new ArrayList<>();
+		for (List<Lottery> lotteries : lotteriesNumber) {
+			concatLottery.addAll(lotteries);
+		}
+		return concatLottery;
 	}
 
 	public List<Lottery> getLotteries() {

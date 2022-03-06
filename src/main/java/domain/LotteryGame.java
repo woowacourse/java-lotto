@@ -41,15 +41,9 @@ public final class LotteryGame {
 	}
 
 	public Lotteries createLottery(final List<List<Integer>> manualLotteryNumber) {
-		final List<Lottery> totalLotteries = generateTotalLotteries(manualLotteryNumber);
-		return Lotteries.from(totalLotteries);
-	}
-
-	private List<Lottery> generateTotalLotteries(final List<List<Integer>> manualLotteryNumber) {
 		final List<Lottery> manualLotteries = createManualLottery(manualLotteryNumber);
 		final List<Lottery> autoLotteries = createAutoLotteriesNumber();
-		return Stream.concat(manualLotteries.stream(), autoLotteries.stream())
-			.collect(Collectors.toList());
+		return Lotteries.from(manualLotteries, autoLotteries);
 	}
 
 	private List<Lottery> createManualLottery(final List<List<Integer>> manualLotteryNumber) {
