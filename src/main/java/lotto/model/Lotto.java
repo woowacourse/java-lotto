@@ -3,33 +3,25 @@ package lotto.model;
 import static java.util.stream.Collectors.*;
 import static lotto.ValidationUtils.*;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
     private static final String ERROR_NOT_MATCH_LOTTO_NUMBER_SIZE = "로또 번호 개수는 6개로 입력해주세요.";
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<Integer> integers) {
-        Set<Integer> lottoNumbers = Set.copyOf(integers);
+    public Lotto(Set<LottoNumber> inputLottoNumbers) {
+        Set<LottoNumber> lottoNumbers = Set.copyOf(inputLottoNumbers);
         validateEmptyCollection(lottoNumbers);
         validateNumberOfLottoNumbers(lottoNumbers);
-        this.lottoNumbers = convertIntegersToLottoNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateNumberOfLottoNumbers(Set<Integer> lottoNumbers) {
+    private void validateNumberOfLottoNumbers(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_NOT_MATCH_LOTTO_NUMBER_SIZE);
         }
-    }
-
-    private List<LottoNumber> convertIntegersToLottoNumbers(Set<Integer> integers) {
-        return List.copyOf(integers.stream()
-            .map(LottoNumber::new)
-            .collect(toList()));
     }
 
     Rank match(Lotto winningNumbers, LottoNumber bonusNumber) {

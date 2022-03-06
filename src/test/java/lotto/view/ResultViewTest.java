@@ -6,13 +6,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Collections;
 import java.util.EnumMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,21 +17,23 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import lotto.model.Lotto;
+import lotto.model.LottoFactory;
 import lotto.model.LottoMoney;
 import lotto.model.LottoResult;
 import lotto.model.Lottos;
+import lotto.model.ManualLottoFactory;
 import lotto.model.Rank;
 import lotto.model.Yield;
-import lotto.model.numbergenerator.LottoNumberGenerator;
 
 class ResultViewTest {
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     Constructor<Lottos> lottosConstructor = Lottos.class
-        .getDeclaredConstructor(LottoNumberGenerator.class, int.class);
+        .getDeclaredConstructor(LottoFactory.class, int.class);
     Constructor<LottoResult> lottoResultConstructor = LottoResult.class.
-        getDeclaredConstructor(Lottos.class, Lottos.class, Set.class, int.class);
+        getDeclaredConstructor(Lottos.class, Lottos.class, List.class, int.class);
     Constructor<LottoMoney> lottoMoneyConstructor = LottoMoney.class.getDeclaredConstructor(long.class, int.class);
     Constructor<Yield> yieldConstructor = Yield.class.getDeclaredConstructor(LottoMoney.class, Map.class);
 
@@ -53,8 +51,8 @@ class ResultViewTest {
     void printGeneratedLottosTest() throws InvocationTargetException, InstantiationException, IllegalAccessException {
         lottosConstructor.setAccessible(true);
 
-        Lottos manualLottos = lottosConstructor.newInstance(new ManualTestNumberGenerator(), 1);
-        Lottos autoLottos = lottosConstructor.newInstance(new TestNumberGenerator(), 2);
+        Lottos manualLottos = lottosConstructor.newInstance(new TestManualLottoFactory(), 1);
+        Lottos autoLottos = lottosConstructor.newInstance(new TestAutoLottoFactory(), 2);
 
         ResultView.printGeneratedLottos(manualLottos.getLottos(), autoLottos.getLottos());
 
@@ -73,11 +71,11 @@ class ResultViewTest {
         lottoResultConstructor.setAccessible(true);
         lottosConstructor.setAccessible(true);
 
-        Lottos manualLottos = lottosConstructor.newInstance(new ManualTestNumberGenerator(), 1);
-        Lottos autoLottos = lottosConstructor.newInstance(new TestNumberGenerator(), 2);
+        Lottos manualLottos = lottosConstructor.newInstance(new TestManualLottoFactory(), 1);
+        Lottos autoLottos = lottosConstructor.newInstance(new TestAutoLottoFactory(), 2);
 
         LottoResult lottoResult = lottoResultConstructor
-            .newInstance(manualLottos, autoLottos, Set.of(1, 2, 3, 4, 5, 6), 7);
+            .newInstance(manualLottos, autoLottos, List.of(1, 2, 3, 4, 5, 6), 7);
 
         ResultView.printResultStatistics(lottoResult);
 
@@ -116,38 +114,25 @@ class ResultViewTest {
         System.setOut(new PrintStream(System.out));
     }
 
-    static class TestNumberGenerator implements LottoNumberGenerator {
-        private final Iterator<Set<Integer>> lottoList = generateLotto();
+    static class TestAutoLottoFactory implements LottoFactory {
+        private final LottoFactory factory;
 
-        @Override
-        public Set<Integer> generate() {
-            if (lottoList.hasNext()) {
-                return lottoList.next();
-            }
-            return Collections.emptySet();
+        public TestAutoLottoFactory() {
+            this.factory = new ManualLottoFactory(List.of(List.of(1, 2, 3, 4, 5, 7),
+                List.of(1, 2, 5, 7, 33, 41)));
         }
 
-        private Iterator<Set<Integer>> generateLotto() {
-            List<Set<Integer>> LottoNumberList = List.of(new TreeSet<>(List.of(1, 2, 3, 4, 5, 7)),
-                new TreeSet<>(List.of(1, 2, 5, 7, 33, 41)));
-            return LottoNumberList.iterator();
+        @Override
+        public Lotto generate() {
+            return factory.generate();
         }
     }
 
-    static class ManualTestNumberGenerator implements LottoNumberGenerator {
-        private final Iterator<Set<Integer>> lottoList = generateLotto();
-
+    static class TestManualLottoFactory implements LottoFactory {
         @Override
-        public Set<Integer> generate() {
-            if (lottoList.hasNext()) {
-                return lottoList.next();
-            }
-            return Collections.emptySet();
-        }
-
-        private Iterator<Set<Integer>> generateLotto() {
-            List<Set<Integer>> LottoNumberList = List.of(new TreeSet<>(List.of(8, 21, 23, 41, 42, 43)));
-            return LottoNumberList.iterator();
+        public Lotto generate() {
+            ManualLottoFactory factory = new ManualLottoFactory(List.of(List.of(8, 21, 23, 41, 42, 43)));
+            return factory.generate();
         }
     }
 }

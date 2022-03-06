@@ -7,20 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import lotto.model.numbergenerator.LottoNumberGenerator;
-
 public class Lottos {
     private final List<Lotto> lottos;
 
-    Lottos(LottoNumberGenerator lottoNumberGenerator, int count) {
-        this.lottos = generateLottos(lottoNumberGenerator, count);
+    Lottos(LottoFactory factory, int count) {
+        this.lottos = generateLottos(factory, count);
         validateNullCollection(this.lottos);
     }
 
-    private List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int count) {
+    private List<Lotto> generateLottos(LottoFactory factory, int count) {
         return List.copyOf(IntStream.range(0, count)
-            .mapToObj(i -> lottoNumberGenerator.generate())
-            .map(Lotto::new)
+            .mapToObj(i -> factory.generate())
             .collect(toList()));
     }
 

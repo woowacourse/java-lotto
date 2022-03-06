@@ -1,29 +1,25 @@
 package lotto.model;
 
 import java.util.List;
-import java.util.Set;
-
-import lotto.model.numbergenerator.LottoNumberGenerator;
-import lotto.model.numbergenerator.ManualGenerator;
 
 public class LottoGame {
     private final Lottos autoLottos;
     private final LottoMoney lottoMoney;
 
-    public LottoGame(long lottoMoney, int numberOfManualLottos, LottoNumberGenerator lottoNumberGenerator) {
+    public LottoGame(long lottoMoney, int numberOfManualLottos, LottoFactory autoLottoFactory) {
         this.lottoMoney = new LottoMoney(lottoMoney, numberOfManualLottos);
-        this.autoLottos = buyAutoLottos(lottoNumberGenerator);
+        this.autoLottos = buyAutoLottos(autoLottoFactory);
     }
 
-    private Lottos buyAutoLottos(LottoNumberGenerator lottoNumberGenerator) {
-        return new Lottos(lottoNumberGenerator, lottoMoney.getAutoLottoSize());
+    private Lottos buyAutoLottos(LottoFactory autoLottoFactory) {
+        return new Lottos(autoLottoFactory, lottoMoney.getAutoLottoSize());
     }
 
-    public Lottos buyManualLottos(List<Set<Integer>> inputManualLottos) {
-        return new Lottos(new ManualGenerator(inputManualLottos), inputManualLottos.size());
+    public Lottos buyManualLottos(List<List<Integer>> inputManualLottos) {
+        return new Lottos(new ManualLottoFactory(inputManualLottos), inputManualLottos.size());
     }
 
-    public LottoResult generateLottoResult(Lottos manualLottos, Set<Integer> winningNumbers, int bonusNumber) {
+    public LottoResult generateLottoResult(Lottos manualLottos, List<Integer> winningNumbers, int bonusNumber) {
         return new LottoResult(manualLottos, autoLottos, winningNumbers, bonusNumber);
     }
 
