@@ -27,18 +27,18 @@ public class LottoGameMoneyTest {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 4, 5})
-    @DisplayName("구매할 수 있는 로또 갯수인지 검증하는 기능")
+    @DisplayName("구매하려는 수동 로또 갯수가 유효한 경우")
     void checkPurchasableLottoCount(int lottoCount) {
         LottoGameMoney money = new LottoGameMoney(5000);
-        money.checkPurchasableLottoCount(lottoCount);
+        money.getPurchaseLottoCount(lottoCount);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 6, 7})
-    @DisplayName("구매할 수 있는 로또 갯수인지 검증하는 기능")
+    @DisplayName("구매하려는 수동 로또 갯수가 유효하지 않은 경우")
     void checkNotPurchasableLottoCount(int lottoCount) {
         LottoGameMoney money = new LottoGameMoney(5000);
-        assertThatThrownBy(() -> money.checkPurchasableLottoCount(lottoCount))
+        assertThatThrownBy(() -> money.getPurchaseLottoCount(lottoCount))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -28,7 +28,7 @@ public class LottoGameMoney {
         return new LottoCount(manualLottoCount, purchasableLottoCount() - manualLottoCount);
     }
 
-    public void checkPurchasableLottoCount(int lottoCount) {
+    private void checkPurchasableLottoCount(int lottoCount) {
         if (lottoCount < 0 || lottoCount > purchasableLottoCount()) {
             throw new IllegalArgumentException("구매할 수 있는 로또 갯수는 0~" + purchasableLottoCount() + "개 입니다.");
         }
