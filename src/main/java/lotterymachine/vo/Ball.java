@@ -23,11 +23,8 @@ public class Ball {
     }
 
     public static List<Ball> getBalls(List<Integer> numbers) {
-        for (int number: numbers) {
-            validateRange(number);
-        }
         return numbers.stream()
-                .map(preparedNumbers::get)
+                .map(Ball::from)
                 .collect(Collectors.toUnmodifiableList());
     }
 
