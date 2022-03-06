@@ -2,7 +2,7 @@ package controller;
 
 import java.util.List;
 
-import domain.LotteryGame;
+import domain.LotteryMachine;
 import domain.Result;
 import domain.generatestrategy.LotteryNumberGenerator;
 import domain.lottery.Lotteries;
@@ -14,7 +14,7 @@ public class LotteryGameController {
 
 	private final InputView inputView;
 	private final OutputView outputView;
-	private LotteryGame lotteryGame;
+	private LotteryMachine lotteryMachine;
 
 	public LotteryGameController(InputView inputView, OutputView outputView) {
 		this.inputView = inputView;
@@ -33,7 +33,7 @@ public class LotteryGameController {
 		try {
 			final int inputMoney = inputMoney();
 			final int numOfManualLottery = inputNumOfManualLottery();
-			lotteryGame = LotteryGame.of(inputMoney, numOfManualLottery, new LotteryNumberGenerator());
+			lotteryMachine = LotteryMachine.of(inputMoney, numOfManualLottery, new LotteryNumberGenerator());
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
 			initLotteryGame();
@@ -42,7 +42,7 @@ public class LotteryGameController {
 
 	private Lotteries purchaseLottery() {
 		try {
-			return lotteryGame.createLottery(inputManualLotteryNumbers());
+			return lotteryMachine.createLottery(inputManualLotteryNumbers());
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
 			return purchaseLottery();
@@ -51,7 +51,7 @@ public class LotteryGameController {
 
 	private WinningLottery createWinningLottery() {
 		try {
-			return lotteryGame.createWinningLottery(inputWinningNumber(), inputBonusBall());
+			return lotteryMachine.createWinningLottery(inputWinningNumber(), inputBonusBall());
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
 			return createWinningLottery();
@@ -59,7 +59,7 @@ public class LotteryGameController {
 	}
 
 	private void printLotteries(Lotteries lotteries) {
-		outputView.printLotteries(lotteries.getLotteries(), lotteryGame.getTheNumberOfLottery());
+		outputView.printLotteries(lotteries.getLotteries(), lotteryMachine.getTheNumberOfLottery());
 	}
 
 	private void makeResult(final Lotteries lotteries, final WinningLottery winningLottery) {
@@ -72,7 +72,7 @@ public class LotteryGameController {
 	}
 
 	private List<List<Integer>> inputManualLotteryNumbers() {
-		return inputView.inputManualLotteryNumber(lotteryGame.getNumOfManualLottery());
+		return inputView.inputManualLotteryNumber(lotteryMachine.getNumOfManualLottery());
 	}
 
 	private int inputNumOfManualLottery() {

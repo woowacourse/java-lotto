@@ -46,6 +46,6 @@ public final class Result {
 	}
 
 	private double calculateReturnRate(final double totalReturn, final int theNumberOfLottery) {
-		return totalReturn / (theNumberOfLottery * LotteryGame.LOTTERY_PRICE);
+		return totalReturn / (theNumberOfLottery * LotteryMachine.LOTTERY_PRICE);
 	}
 }

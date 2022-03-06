@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import domain.generatestrategy.LotteryNumberGeneratorStrategy;
 import domain.lottery.LotteryGenerator;
@@ -13,21 +12,21 @@ import domain.lottery.Lottery;
 import domain.lottery.LotteryNumber;
 import domain.lottery.WinningLottery;
 
-public final class LotteryGame {
+public final class LotteryMachine {
 
 	public static final int LOTTERY_PRICE = 1000;
 
 	private final NumOfLottery numOfLottery;
 	private final LotteryNumberGeneratorStrategy lotteryNumberGenerator;
 
-	private LotteryGame(final NumOfLottery numOfLottery, final LotteryNumberGeneratorStrategy lotteryNumberGenerator) {
+	private LotteryMachine(final NumOfLottery numOfLottery, final LotteryNumberGeneratorStrategy lotteryNumberGenerator) {
 		this.numOfLottery = numOfLottery;
 		this.lotteryNumberGenerator = lotteryNumberGenerator;
 	}
 
-	public static LotteryGame of(final int inputMoney, final int numOfManualLottery, LotteryNumberGeneratorStrategy lotteryNumberGenerator) {
+	public static LotteryMachine of(final int inputMoney, final int numOfManualLottery, LotteryNumberGeneratorStrategy lotteryNumberGenerator) {
 		final NumOfLottery numOfLottery = getNumOfLottery(inputMoney, numOfManualLottery);
-		return new LotteryGame(numOfLottery, lotteryNumberGenerator);
+		return new LotteryMachine(numOfLottery, lotteryNumberGenerator);
 	}
 
 	private static NumOfLottery getNumOfLottery(final int inputMoney, final int numOfManualLottery) {

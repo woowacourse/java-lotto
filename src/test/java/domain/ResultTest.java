@@ -16,19 +16,19 @@ import domain.lottery.WinningLottery;
 
 public class ResultTest {
 
-	private LotteryGame lotteryGame;
+	private LotteryMachine lotteryMachine;
 
 	@BeforeEach
 	void lotteryGameInit() {
-		lotteryGame = LotteryGame.of(6000, 0, new LotteryNumberMockGenerator());
+		lotteryMachine = LotteryMachine.of(6000, 0, new LotteryNumberMockGenerator());
 	}
 
 	@Test
 	@DisplayName("등수가 제대로 집계되는지 확인")
 	void testRankingCount() {
 		//given
-		Lotteries lotteries = lotteryGame.createLottery(Collections.emptyList());
-		WinningLottery winningLottery = lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+		Lotteries lotteries = lotteryMachine.createLottery(Collections.emptyList());
+		WinningLottery winningLottery = lotteryMachine.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
 		Result result = Result.makeResult(lotteries, winningLottery);
 		//then
@@ -43,8 +43,8 @@ public class ResultTest {
 	@DisplayName("수익률이 제대로 집계되는지 확인")
 	void testRankingPercent() {
 		//given
-		Lotteries lotteries = lotteryGame.createLottery(Collections.emptyList());
-		WinningLottery winningLottery = lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+		Lotteries lotteries = lotteryMachine.createLottery(Collections.emptyList());
+		WinningLottery winningLottery = lotteryMachine.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
 		Result result = Result.makeResult(lotteries, winningLottery);
 		//then
