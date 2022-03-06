@@ -1,24 +1,26 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import util.Validator;
 
 public class Lottos {
 
-    private static final int START_INDEX = 0;
+    private List<Lotto> members;
 
-    private final List<Lotto> members;
-
-    public Lottos(LottoNumberGenerator lottoNumberGenerator, int lottoAmount) {
-        this.members = generateLottos(lottoNumberGenerator, lottoAmount);
+    public Lottos() {
+        this.members = new ArrayList<>();
     }
 
-    public static Lottos buyLottos(LottoNumberGenerator lottoNumberGenerator, int lottoAmount) {
-        Validator.checkArgumentIsNull(lottoNumberGenerator);
-        return new Lottos(lottoNumberGenerator, lottoAmount);
+    public static Lottos init() {
+        return new Lottos();
+    }
+
+    public void add(Lotto lotto) {
+        members.add(lotto);
     }
 
     public int numberOfLottery() {
@@ -29,10 +31,10 @@ public class Lottos {
         return Collections.unmodifiableList(members);
     }
 
-    public List<Integer> compareAllLottosWithWinningLotto(Lotto winningLotto) {
-        Validator.checkArgumentIsNull(winningLotto);
+    public List<Integer> compareAllLottosWithWinningLotto(Set<LottoNumber> winningNumbers) {
+        Validator.checkArgumentIsNull(winningNumbers);
         return members.stream()
-                .map(lotto -> lotto.countDuplicatedNumber(winningLotto))
+                .map(lotto -> lotto.countDuplicatedNumber(winningNumbers))
                 .collect(Collectors.toList());
     }
 
@@ -40,13 +42,6 @@ public class Lottos {
         Validator.checkArgumentIsNull(number);
         return members.stream()
                 .map(lotto -> lotto.contains(number))
-                .collect(Collectors.toList());
-    }
-
-    private List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int lottoAmount) {
-        return IntStream.range(START_INDEX, lottoAmount)
-                .boxed()
-                .map(i -> Lotto.generateLotto(lottoNumberGenerator))
                 .collect(Collectors.toList());
     }
 }

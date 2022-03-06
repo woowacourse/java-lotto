@@ -11,7 +11,7 @@ import util.Validator;
 
 public class LottoGame {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private static final int EMPTY = 0;
     private static final int NO_YIELD = 0;
     private static final int INCREASE_COUNT = 1;
@@ -22,29 +22,29 @@ public class LottoGame {
     private static final String LOTTO_NUMBER_DUPLICATED_EXCEPTION = "[ERROR] 로또번호와 보너스번호는 중복일 수 없습니다.";
     private static final String LOTTO_NUMBER_DIGIT_EXCEPTION = "[ERROR] 로또는 6자리의 숫자로 이루어져 있습니다.";
 
-    private Lotto winningLotto;
+    private Set<LottoNumber> winningLotto;
     private LottoNumber bonusNumber;
     private final Lottos lottos;
 
-    public LottoGame(Money money, List<List<Integer>> quickPickLottoNumbers) {
-        int totalLottoNumber = money.money() / LOTTO_PRICE;
-        quickPickLottoNumbers.forEach(this::validateLength);
-        lottos = Lottos.buyLottos(LottoNumberGenerator.build(totalLottoNumber, quickPickLottoNumbers), totalLottoNumber);
+    public LottoGame() {
+        lottos = Lottos.init();
     }
 
-    public static LottoGame startLottoGame(Money money, List<List<Integer>> quickPickLottoNumbers) {
-        Validator.checkArgumentIsNull(money, quickPickLottoNumbers);
-        return new LottoGame(money, quickPickLottoNumbers);
+    public static LottoGame startLottoGame() {
+        return new LottoGame();
+    }
+
+    public void add(Lotto lotto) {
+        lottos.add(lotto);
     }
 
     public void enterWinningLottoNumbersAndBonusNumber(List<Integer> notVerifiedWinningLottoNumbers
             , int notVerifiedBonusNumber) {
         Validator.checkArgumentIsNull(notVerifiedWinningLottoNumbers);
         validateLottoInput(notVerifiedWinningLottoNumbers, notVerifiedBonusNumber);
-        Set<LottoNumber> winningLottoNumbers = notVerifiedWinningLottoNumbers.stream()
+        this.winningLotto = notVerifiedWinningLottoNumbers.stream()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
-        this.winningLotto = new Lotto(winningLottoNumbers);
         this.bonusNumber = LottoNumber.valueOf(notVerifiedBonusNumber);
     }
 

@@ -30,13 +30,9 @@ public class OutputView {
     private static final int BENEFIT_INDEX = 1;
     private static final int LOSS_INDEX = 0;
     private static final double breakEvenPoint = 1L;
-    private static final int PICK_NUMBER_INDEX = 0;
-    private static final int QUICK_NUMBER_INDEX = 1;
 
-    public static void printLottosInformations(Lottos lottos) {
-        List<Integer> pickAndQuickPickNumbers = getPickAndQuickPickNumbers(lottos);
-        System.out.printf(MESSAGE_LOTTOS_NUMBER, pickAndQuickPickNumbers.get(PICK_NUMBER_INDEX),
-                pickAndQuickPickNumbers.get(QUICK_NUMBER_INDEX));
+    public static void printLottosInformations(Lottos lottos, int manualNum, int autoNum) {
+        System.out.printf(MESSAGE_LOTTOS_NUMBER, manualNum, autoNum);
         for (Lotto lotto : lottos.getMembers()) {
             String str = lotto.getNumbers()
                     .stream()
@@ -45,14 +41,6 @@ public class OutputView {
                     .collect(Collectors.joining(NUMBER_DELIMITER));
             System.out.printf(LOTTO_NUMBER_FORMAT, str);
         }
-    }
-
-    private static List<Integer> getPickAndQuickPickNumbers(Lottos lottos) {
-        int pickedNum = (int) lottos.getMembers()
-                .stream()
-                .filter(Lotto::isPickedLotto)
-                .count();
-        return List.of(pickedNum, lottos.numberOfLottery() - pickedNum);
     }
 
     public static void printWinningStatistic(Map<Rewards, Integer> results) {

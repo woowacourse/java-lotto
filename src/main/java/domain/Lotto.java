@@ -4,27 +4,23 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 import util.Validator;
 
 public class Lotto {
 
-    private final boolean isPicked;
     private final Set<LottoNumber> numbers;
 
-    public Lotto(LottoNumberGenerator lottoNumberGenerator) {
-        this.isPicked = lottoNumberGenerator.isPicked();
-        this.numbers = generateNumber(lottoNumberGenerator);
+    public Lotto(LottoGenerator lottoGenerator) {
+        this.numbers = generateNumber(lottoGenerator);
     }
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
         Validator.checkArgumentIsNull(lottoNumbers);
         this.numbers = lottoNumbers;
-        this.isPicked = true;
     }
 
-    public static Lotto generateLotto(LottoNumberGenerator lottoNumberGenerator) {
-        return new Lotto(lottoNumberGenerator);
+    public static Lotto generateLotto(LottoGenerator lottoGenerator) {
+        return new Lotto(lottoGenerator);
 
     }
 
@@ -32,9 +28,9 @@ public class Lotto {
         return Collections.unmodifiableSet(this.numbers);
     }
 
-    public int countDuplicatedNumber(Lotto winningLotto) {
-        Validator.checkArgumentIsNull(winningLotto);
-        return (int) winningLotto.numbers
+    public int countDuplicatedNumber(Set<LottoNumber> winningNumbers) {
+        Validator.checkArgumentIsNull(winningNumbers);
+        return (int) winningNumbers
                 .stream()
                 .filter(this::contains)
                 .count();
@@ -48,19 +44,8 @@ public class Lotto {
         return isContain;
     }
 
-    public boolean isPickedLotto() {
-        return isPicked;
-    }
-
-    private Set<LottoNumber> generateNumber(LottoNumberGenerator lottoNumberGenerator) {
-        List<Integer> pickedLottoNumbers = lottoNumberGenerator.generateNumbers();
-
-        return sortAndConvertToLottoNumberSet(pickedLottoNumbers);
-    }
-
-    private Set<LottoNumber> sortAndConvertToLottoNumberSet(List<Integer> lottoNumbers) {
-        return lottoNumbers.stream()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toCollection(TreeSet::new));
+    private Set<LottoNumber> generateNumber(LottoGenerator lottoGenerator) {
+        List<LottoNumber> lottoNumbers = lottoGenerator.generateLottoNumber();
+        return new TreeSet<>(lottoNumbers);
     }
 }

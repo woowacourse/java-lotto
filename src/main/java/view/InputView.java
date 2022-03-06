@@ -1,5 +1,10 @@
 package view;
 
+import domain.AutoLottoGenerator;
+import domain.Lotto;
+import domain.LottoGenerator;
+import domain.LottoNumber;
+import domain.ManualLottoGenerator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,8 +23,6 @@ public class InputView {
     private static final String QUESTION_NUMBER_OF_PICK_LOTTO = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String NUMBER_DELIMITER = ", ";
     private static final Scanner scanner = new Scanner(System.in);
-    private static final int NONE = 0;
-    private static final int START_INDEX = 0;
 
     public static int askMoneyInput() {
         System.out.println(QUESTION_MONEY_INPUT);
@@ -27,9 +30,18 @@ public class InputView {
         return StringUtil.convertToInteger(moneyInput);
     }
 
+    public static int askNumberOfManualLotto() {
+        System.out.println(QUESTION_PICK_LOTTO);
+        return StringUtil.convertToInteger(scanner.nextLine());
+    }
+
+    public static void askManualLottoNumbers() {
+        System.out.println(QUESTION_NUMBER_OF_PICK_LOTTO);
+    }
+
     public static List<Integer> askWinningNumbers() {
         System.out.println(QUESTION_WINNING_NUMBERS);
-        return validateAndCovertNumbersToInteger(askLottoNumberCandidate());
+        return askLottoNumbers();
     }
 
     public static int askBonusNumber() {
@@ -43,29 +55,8 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    public static List<List<Integer>> askPickLotto() {
-        int numberOfPickLotto = StringUtil.convertToInteger(askNumberOfPickLotto());
-        if (numberOfPickLotto == NONE) {
-            return Collections.emptyList();
-        }
-        System.out.println(QUESTION_NUMBER_OF_PICK_LOTTO);
-        return makePickLotto(numberOfPickLotto);
-    }
-
-    private static List<List<Integer>> makePickLotto(int numberOfPickLotto) {
-        List<List<Integer>> pickLottos = new ArrayList<>();
-        for (int i = 0; i<numberOfPickLotto; ++i) {
-            pickLottos.add(validateAndCovertNumbersToInteger(askLottoNumberCandidate()));
-        }
-        return pickLottos;
-    }
-
-    private static List<String> askLottoNumberCandidate() {
-        return Arrays.asList(scanner.nextLine().split(NUMBER_DELIMITER));
-    }
-
-    private static String askNumberOfPickLotto() {
-        System.out.println(QUESTION_PICK_LOTTO);
-        return scanner.nextLine();
+    public static List<Integer> askLottoNumbers() {
+        List<String> lottoNumbers = List.of(scanner.nextLine().split(NUMBER_DELIMITER));
+        return validateAndCovertNumbersToInteger(lottoNumbers);
     }
 }
