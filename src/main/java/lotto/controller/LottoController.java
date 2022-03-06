@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoController {
+    private static final String NUMBER_DELIMITER = ",";
+
     private LottoMachine lottoMachine;
     private final LottoMachine.Builder lottoMachineBuilder = new LottoMachine.Builder();
 
@@ -30,7 +32,7 @@ public class LottoController {
 
     private List<InputLottoDto> splitLottos(final List<String> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(lottoInfo -> lottoInfo.split(","))
+                .map(lottoInfo -> lottoInfo.split(NUMBER_DELIMITER))
                 .map(this::convertToInputLottoDtos)
                 .map(InputLottoDto::new)
                 .collect(Collectors.toUnmodifiableList());
