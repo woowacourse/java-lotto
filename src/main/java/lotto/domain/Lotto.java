@@ -42,8 +42,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::toString)
-                .collect(Collectors.joining(", "));
+        return lottoNumbers.toString();
     }
 }

@@ -13,7 +13,6 @@ public class OutputView {
 
     private static final String INPUT_LOTTO_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String TOTAL_LOTTO_COUNT_MESSAGE_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
-    private static final String EACH_LOTTO_MESSAGE_FORMAT = "[%s]\n";
     private static final String WINNING_STATISTIC_TITLE = "당첨 통계\n" + "---------";
     private static final String RANK_MESSAGE_FORMAT = "%d개 일치%s(%d원) - %d개\n";
     private static final String BONUS_NUMBER_MATCH_MESSAGE = ", 보너스 볼 일치";
@@ -31,7 +30,7 @@ public class OutputView {
         System.out.printf(TOTAL_LOTTO_COUNT_MESSAGE_FORMAT,
                 countOfLotto.getCountOfManualLotto(),
                 countOfLotto.getCountOfAutoLotto());
-        lottos.forEach(lotto -> System.out.printf(EACH_LOTTO_MESSAGE_FORMAT, lotto.toString()));
+        lottos.forEach(System.out::println);
     }
 
     public static void printLottoResult(RankStatistic rankStatistic, Money money) {
