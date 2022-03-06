@@ -2,6 +2,7 @@ package controller.dto;
 
 import domain.LottoGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGeneratorDto {
@@ -10,7 +11,7 @@ public class LottoGeneratorDto {
 
     public LottoGeneratorDto(int autoLottoCount, List<LottoGenerator> lottoGenerators) {
         this.autoLottoCount = autoLottoCount;
-        this.lottoGenerators = lottoGenerators;
+        this.lottoGenerators = new ArrayList<>(lottoGenerators);
     }
 
     public int getAutoLottoCount() {
@@ -18,6 +19,6 @@ public class LottoGeneratorDto {
     }
 
     public List<LottoGenerator> getLottoGenerators() {
-        return lottoGenerators;
+        return new ArrayList<>(lottoGenerators);
     }
 }
