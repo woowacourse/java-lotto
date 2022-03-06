@@ -91,11 +91,12 @@ public class LottoGame {
     }
 
     private List<Rewards> convertLottoResultsToRanks() {
-        List<Integer> matchCounts = lottos.compareAllLottosWithWinningLotto(winningLotto);
-        List<Boolean> bonusNumberContains = lottos.checkAllLottosContainNumber(bonusNumber);
-        return IntStream.range(START_INDEX, matchCounts.size())
+        List<Integer> matchNumbers = lottos.compareAllLottosWithWinningLotto(winningLotto);
+        List<Boolean> isBonusMatchs = lottos.checkAllLottosContainNumber(bonusNumber);
+        return IntStream.range(START_INDEX, matchNumbers.size())
                 .boxed()
-                .map(index -> LottoRewardLogic.convertToRank(matchCounts.get(index), bonusNumberContains.get(index)))
+                .map(index -> Ranks.of(matchNumbers.get(index), isBonusMatchs.get(index)))
+                .map(Ranks::getReward)
                 .collect(Collectors.toList());
     }
 }

@@ -1,6 +1,7 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.LottoRewardLogic;
+import domain.Ranks;
 import domain.Rewards;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ public class LottoRewardLogicTest {
     void convertToRankTest() {
         LottoRewardLogic lottoRewardLogic = new LottoRewardLogic();
 
-        assertThat(lottoRewardLogic.convertToRank(6, false)).isEqualTo(Rewards.FIRST_REWARD);
+        assertThat(Ranks.of(6, false).getReward()).isEqualTo(Rewards.FIRST_REWARD);
     }
 
     @Test
@@ -20,7 +21,7 @@ public class LottoRewardLogicTest {
     void convertToRankTest2() {
         LottoRewardLogic lottoRewardLogic = new LottoRewardLogic();
 
-        assertThat(lottoRewardLogic.convertToRank(5, true)).isEqualTo(Rewards.SECOND_REWARD);
+        assertThat(Ranks.of(5, true).getReward()).isEqualTo(Rewards.SECOND_REWARD);
     }
 
     @Test
@@ -28,7 +29,7 @@ public class LottoRewardLogicTest {
     void convertToRankTest3() {
         LottoRewardLogic lottoRewardLogic = new LottoRewardLogic();
 
-        assertThat(lottoRewardLogic.convertToRank(5, false)).isEqualTo(Rewards.THIRD_REWARD);
+        assertThat(Ranks.of(5, false).getReward()).isEqualTo(Rewards.THIRD_REWARD);
     }
 
     @Test
@@ -36,7 +37,7 @@ public class LottoRewardLogicTest {
     void convertToRankTest4() {
         LottoRewardLogic lottoRewardLogic = new LottoRewardLogic();
 
-        assertThat(lottoRewardLogic.convertToRank(4, false)).isEqualTo(Rewards.FORTH_REWARD);
+        assertThat(Ranks.of(4, false).getReward()).isEqualTo(Rewards.FORTH_REWARD);
     }
 
     @Test
@@ -44,7 +45,7 @@ public class LottoRewardLogicTest {
     void convertToRankTest5() {
         LottoRewardLogic lottoRewardLogic = new LottoRewardLogic();
 
-        assertThat(lottoRewardLogic.convertToRank(3, false)).isEqualTo(Rewards.FIFTH_REWARD);
+        assertThat(Ranks.of(3, false).getReward()).isEqualTo(Rewards.FIFTH_REWARD);
     }
 
     @Test
@@ -52,6 +53,6 @@ public class LottoRewardLogicTest {
     void convertToRankTest6() {
         LottoRewardLogic lottoRewardLogic = new LottoRewardLogic();
 
-        assertThat(lottoRewardLogic.convertToRank(2, true)).isEqualTo(Rewards.NO_REWARD);
+        assertThat(Ranks.of(2, true).getReward()).isEqualTo(Rewards.NO_REWARD);
     }
 }
