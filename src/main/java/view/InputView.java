@@ -4,11 +4,12 @@ import static utils.Messages.*;
 
 import domain.Purchase;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 import java.util.regex.Pattern;
-import utils.Separator;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -98,7 +99,10 @@ public class InputView {
     private static List<Integer> inputSingleLottoNumbers() {
         String lottoNumbers = scanner.nextLine();
         validatePattern(lottoNumbers);
-        return Separator.splitStringToListInt(lottoNumbers, LOTTO_NUMBERS_SEPARATE_REGEX);
+
+        return Arrays.stream(lottoNumbers.split(LOTTO_NUMBERS_SEPARATE_REGEX))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 
     private static void validatePattern(String lottoNumbers) {
