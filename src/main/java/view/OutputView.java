@@ -41,7 +41,7 @@ public class OutputView {
         System.out.println(lineSeparator() + WINNING_STATISTIC);
         System.out.println(OUTLINE);
         Map<Rank, Integer> prizeResult = result.getPrizeResult();
-        for (Rank winnerPrice : Rank.getValidPrizes()) {
+        for (Rank winnerPrice : Rank.getValidRanks()) {
             printEachStatistic(winnerPrice, prizeResult);
         }
     }

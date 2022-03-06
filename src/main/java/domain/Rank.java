@@ -41,7 +41,7 @@ public enum Rank {
                 .filter(lotto.getLottoNumbers()::contains).count();
     }
 
-    public static Rank getWinnerPrizeByMatched(final int matched, final boolean bonus) {
+    private static Rank getWinnerPrizeByMatched(final int matched, final boolean bonus) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matched == matched)
                 .filter(rank -> rank.bonus == bonus)
@@ -55,7 +55,7 @@ public enum Rank {
                 .collect(Collectors.toList());
     }
 
-    public static List<Rank> getValidPrizes() {
+    public static List<Rank> getValidRanks() {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.FAIL)
                 .sorted(Comparator.comparing(Rank::getPrize))
