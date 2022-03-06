@@ -24,21 +24,11 @@ public class MoneyTest {
                 .hasMessageContaining("[ERROR]");
     }
 
-    @DisplayName("0원 생성 테스트")
+    @DisplayName("돈 더하기 테스트")
     @Test
-    void zeroMoneyTest() {
-        assertThatThrownBy(() ->
-                new Money(0))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR]");
-    }
-
-    @DisplayName("1000원 미만 돈 생성 테스트")
-    @Test
-    void thousandMoneyTest() {
-        assertThatThrownBy(() ->
-                new Money(999))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR]");
+    void plusMoneyTest() {
+        Money money = new Money(0);
+        money.plus(new Money(1000));
+        assertThat(money.getMoney()).isEqualTo(1000);
     }
 }

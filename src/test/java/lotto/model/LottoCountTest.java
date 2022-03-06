@@ -29,4 +29,13 @@ public class LottoCountTest {
         LottoCount lottoCount = new LottoCount(2, new Money(3000));
         assertThat(lottoCount.getAutoLottoCount()).isEqualTo(1);
     }
+
+    @DisplayName("로또 갯수 더하기 테스트")
+    @Test
+    void plusLottoCountTest() {
+        LottoCount lottoCount = new LottoCount(3, new Money(4000));
+        LottoCount newLottoCount = new LottoCount(1,new Money(3000));
+        lottoCount.plus(newLottoCount);
+        assertThat(lottoCount.getAutoLottoCount()).isEqualTo(3);
+    }
 }

@@ -18,7 +18,7 @@ public class LottoController {
 
     private LottoGenerator lottoGenerator;
 
-    public LottoController(LottoGenerator lottoGenerator) {
+    public LottoController(final LottoGenerator lottoGenerator) {
         this.lottoGenerator = lottoGenerator;
     }
 
@@ -27,9 +27,9 @@ public class LottoController {
 
         LottoCount lottoCount = inputLottoCount(money);
 
-        LottoMachine lottoMachine = new LottoMachine(lottoGenerator, money);
+        LottoMachine lottoMachine = new LottoMachine(lottoGenerator);
 
-        Lottos boughtLottos = lottoMachine.buy(lottoCount, inputManualLottos(lottoCount.getManualLottoCount()));
+        Lottos boughtLottos = lottoMachine.buy(money, lottoCount, inputManualLottos(lottoCount.getManualLottoCount()));
 
         ResultView.printBuyingLottosResult(lottoCount, boughtLottos);
 

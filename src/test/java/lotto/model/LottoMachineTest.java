@@ -2,6 +2,7 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,8 +54,17 @@ public class LottoMachineTest {
     @DisplayName("로또 머신 정상 생성 테스트")
     @Test
     void generateLottoMachineTest() {
-        assertThatCode(() -> new LottoMachine(lottoGenerator, money))
+        assertThatCode(() -> new LottoMachine(lottoGenerator))
                 .doesNotThrowAnyException();
+    }
+
+    @DisplayName("money 와 lottoCount가 적절한지 테스트")
+    @Test
+    void validationTest() {
+        LottoMachine lottoMachine = new LottoMachine(new CustomLottoGenerator());
+        assertThatThrownBy(() ->
+                lottoMachine.buy(new Money(1000), new LottoCount(2, new Money(3000)), lottos))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("1,2,4등 개수 테스트")
@@ -73,8 +83,8 @@ public class LottoMachineTest {
     }
 
     private void calculateLottoMachine() {
-        lottoMachine = new LottoMachine(lottoGenerator, money);
-        lottoMachine.buy(lottoCount, lottos);
+        lottoMachine = new LottoMachine(lottoGenerator);
+        lottoMachine.buy(money, lottoCount, lottos);
         WinningLotto winningLotto = makeWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7);
         lottoMachine.calculateResult(winningLotto);
     }

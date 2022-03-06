@@ -2,9 +2,11 @@ package lotto.model;
 
 public class LottoCount {
 
-    private final int lottoCount;
-    private final int manualLottoCount;
-    private final int autoLottoCount;
+    private static final String BUYING_LOTTO_COUNT_EXCESS_ERROR_MESSAGE = "[ERROR] 구매할 수 있는 수량을 넘었습니다.";
+
+    private int lottoCount;
+    private int manualLottoCount;
+    private int autoLottoCount;
 
     public LottoCount(final int manualLottoCount, final Money money) {
         validateLottoCount(manualLottoCount, money);
@@ -15,7 +17,7 @@ public class LottoCount {
 
     private void validateLottoCount(final int manualLottoCount, final Money money) {
         if (manualLottoCount < 0 || manualLottoCount > money.lottoCount()) {
-            throw new IllegalArgumentException(LottoMachine.BUYING_LOTTO_COUNT_EXCESS_ERROR_MESSAGE);
+            throw new IllegalArgumentException(BUYING_LOTTO_COUNT_EXCESS_ERROR_MESSAGE);
         }
     }
 
@@ -25,5 +27,11 @@ public class LottoCount {
 
     public int getAutoLottoCount() {
         return autoLottoCount;
+    }
+
+    public void plus(LottoCount lottoCount) {
+        this.lottoCount += lottoCount.lottoCount;
+        this.manualLottoCount += lottoCount.manualLottoCount;
+        this.autoLottoCount += lottoCount.autoLottoCount;
     }
 }

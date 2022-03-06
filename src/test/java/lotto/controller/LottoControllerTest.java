@@ -31,9 +31,9 @@ public class LottoControllerTest {
 
         LottoCount lottoCount = new LottoCount(2, money);
 
-        LottoMachine lottoMachine = new LottoMachine(new CustomLottoGenerator(), money);
+        LottoMachine lottoMachine = new LottoMachine(new CustomLottoGenerator());
 
-        Lottos boughtLottos = lottoMachine.buy(lottoCount, makeLottos());
+        Lottos boughtLottos = lottoMachine.buy(money, lottoCount, makeLottos());
 
         ResultView.printBuyingLottosResult(lottoCount, boughtLottos);
 
