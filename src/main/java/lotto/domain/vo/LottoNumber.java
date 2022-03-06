@@ -1,10 +1,12 @@
 package lotto.domain.vo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
 
@@ -14,11 +16,9 @@ public class LottoNumber {
     private static final Map<Integer, LottoNumber> LOTTO_NUMBERS;
 
     static {
-        LOTTO_NUMBERS = new HashMap<>();
-
-        for (int number = MINIMUM_NUMBER; number <= MAXIMUM_NUMBER; number++) {
-            LOTTO_NUMBERS.put(number, new LottoNumber(number));
-        }
+        LOTTO_NUMBERS = IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
+            .boxed()
+            .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
     }
 
     private final int number;

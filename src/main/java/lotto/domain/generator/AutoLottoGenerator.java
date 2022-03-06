@@ -10,7 +10,6 @@ import lotto.domain.vo.LottoNumber;
 
 public class AutoLottoGenerator implements LottoGenerator {
 
-    private static final int START_INCLUSIVE = 0;
     private static final int END_EXCLUSIVE = 6;
 
     private static final int MIN_AMOUNT = 0;
@@ -25,7 +24,13 @@ public class AutoLottoGenerator implements LottoGenerator {
     @Override
     public List<Lotto> generateLottos() {
         return  IntStream.range(0, amount)
-            .mapToObj(list -> Lotto.of(shuffleNumbers().subList(START_INCLUSIVE, END_EXCLUSIVE)))
+            .mapToObj(list -> Lotto.of(limitLottoNumbers()))
+            .collect(Collectors.toList());
+    }
+
+    private List<LottoNumber> limitLottoNumbers() {
+        return shuffleNumbers().stream()
+            .limit(END_EXCLUSIVE)
             .collect(Collectors.toList());
     }
 

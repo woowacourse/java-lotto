@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 
 public class InputView {
 
-    private static final String DELIMITER = ",";
-    private static final int MIN = 0;
+    private static final String LOTTO_NUMBER_DELIMITER = ",";
+    private static final int MINIMUM_AMOUNT = 0;
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -26,7 +26,7 @@ public class InputView {
     }
 
     public static List<List<Integer>> inputManualLottoNumbers(int amount) {
-        if (amount > MIN) {
+        if (amount > MINIMUM_AMOUNT) {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
             return IntStream.range(0, amount)
@@ -47,7 +47,7 @@ public class InputView {
     }
 
     private static List<Integer> convertToNumbers(String input) {
-        return Arrays.stream(input.split(DELIMITER))
+        return Arrays.stream(input.split(LOTTO_NUMBER_DELIMITER))
             .map(number -> stringToInt(number.trim()))
             .collect(Collectors.toList());
     }

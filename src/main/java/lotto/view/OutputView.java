@@ -13,7 +13,7 @@ import lotto.domain.vo.LottoNumber;
 
 public class OutputView {
 
-    private static final String DELIMITER = ", ";
+    private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
     public static void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
@@ -47,7 +47,7 @@ public class OutputView {
     private static String joinWithDelimiter(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
             .map(number -> String.valueOf(number.getNumber()))
-            .collect(Collectors.joining(DELIMITER));
+            .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
     }
 
     private static void printSecondRank(int matchCount, long reward, int rewardCount) {

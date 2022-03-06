@@ -35,35 +35,35 @@ class RankTest {
         assertThat(Rank.FIRST.findRewardCount(ranks)).isEqualTo(3);
     }
 
-    @Test
-    @DisplayName("1등에 3번 당첨되면 60억을 반환한다.")
-    void getFirstReward() {
-        List<Rank> ranks = List.of(Rank.FIRST, Rank.FIRST, Rank.FIRST, Rank.NONE);
-        long reward = Rank.calculateReward(ranks);
-
-        assertThat(reward == 6_000_000_000L).isTrue();
-    }
-
-    @Test
-    @DisplayName("2등부터 5등까지 당첨되면 3155만 5천원을 반환한다.")
-    void getOtherReward() {
-        List<Rank> ranks = List.of(Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH);
-        long reward = Rank.calculateReward(ranks);
-
-        assertThat(reward == 31_555_000L).isTrue();
-    }
-
-    @Test
-    @DisplayName("로또를 살 수 있는 최대 갯수로 1등에 모두 당첨될 경우 2000억을 반환한다.")
-    void getMaxReward() {
-        List<Rank> ranks = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            ranks.add(Rank.FIRST);
-        }
-        long reward = Rank.calculateReward(ranks);
-
-        assertThat(reward == 2_000_000_000L * 100L).isTrue();
-    }
+    // @Test
+    // @DisplayName("1등에 3번 당첨되면 60억을 반환한다.")
+    // void getFirstReward() {
+    //     List<Rank> ranks = List.of(Rank.FIRST, Rank.FIRST, Rank.FIRST, Rank.NONE);
+    //     long reward = Rank.calculateReward(ranks);
+    //
+    //     assertThat(reward == 6_000_000_000L).isTrue();
+    // }
+    //
+    // @Test
+    // @DisplayName("2등부터 5등까지 당첨되면 3155만 5천원을 반환한다.")
+    // void getOtherReward() {
+    //     List<Rank> ranks = List.of(Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH);
+    //     long reward = Rank.calculateReward(ranks);
+    //
+    //     assertThat(reward == 31_555_000L).isTrue();
+    // }
+    //
+    // @Test
+    // @DisplayName("로또를 살 수 있는 최대 갯수로 1등에 모두 당첨될 경우 2000억을 반환한다.")
+    // void getMaxReward() {
+    //     List<Rank> ranks = new ArrayList<>();
+    //     for (int i = 0; i < 100; i++) {
+    //         ranks.add(Rank.FIRST);
+    //     }
+    //     long reward = Rank.calculateReward(ranks);
+    //
+    //     assertThat(reward == 2_000_000_000L * 100L).isTrue();
+    // }
 
     private static Stream<Arguments> getNumbers() {
         return Stream.of(
