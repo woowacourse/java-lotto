@@ -28,18 +28,6 @@ public class Application {
         inputWinningInfoAndPrintResult();
     }
 
-    private static void inputWinningInfoAndPrintResult() {
-        try {
-            final List<Integer> winningLotto = getWinningLotto2();
-            final int bonusBall = inputBonusBall2();
-            outputView.printCountOfWinningByMatchKind(lottoController.getWinningResult(winningLotto, bonusBall));
-            outputView.printProfitRate(lottoController.getProfitRate(winningLotto, bonusBall));
-        } catch (final Exception e) {
-            inputView.printErrorMessage(e.getMessage());
-            inputWinningInfoAndPrintResult();
-        }
-    }
-
     private static void inputPurchaseAmount() {
         try {
             final int purchaseAmount = convertStringToInt(inputView.inputPurchaseAmount());
@@ -70,14 +58,26 @@ public class Application {
         }
     }
 
-    private static List<Integer> getWinningLotto2() {
+    private static void inputWinningInfoAndPrintResult() {
+        try {
+            final List<Integer> winningLotto = getWinningLotto();
+            final int bonusBall = inputBonusBall();
+            outputView.printCountOfWinningByMatchKind(lottoController.getWinningResult(winningLotto, bonusBall));
+            outputView.printProfitRate(lottoController.getProfitRate(winningLotto, bonusBall));
+        } catch (final Exception e) {
+            inputView.printErrorMessage(e.getMessage());
+            inputWinningInfoAndPrintResult();
+        }
+    }
+
+    private static List<Integer> getWinningLotto() {
         final List<String> winningLotto = inputView.inputLastWeekWinningNumbers();
         return winningLotto.stream()
                 .map(NumberConverter::convertStringToInt)
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private static int inputBonusBall2() {
+    private static int inputBonusBall() {
         return convertStringToInt(inputView.inputBonusNumber());
     }
 }
