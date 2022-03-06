@@ -31,7 +31,7 @@ class LottoMachineTest {
 
     @DisplayName("로또는 1개에 1000원이다.")
     @ParameterizedTest(name = "{index} {displayName} {0}원으로 구매한 로또 수 : {1}")
-    @CsvSource(value = {"20000, 20", "18500, 18", "1500, 1"})
+    @CsvSource(value = {"20000, 20", "18000, 18", "1000, 1"})
     void purchaseLottos(final int inputMoney, final int expected) {
         Money money = new Money(inputMoney);
         lottoMachine.purchaseAutomaticLottos(lottos, money);
