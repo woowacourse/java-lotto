@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.model.ticket.buy.ManualBuyCount;
+import lotto.model.utils.NumberGenerator;
 import lotto.view.utils.IntegerUtils;
 
 public class InputView {
@@ -49,7 +50,8 @@ public class InputView {
         return IntegerUtils.parse(scanner.nextLine());
     }
 
-    public static List<List<Integer>> requestManualTickets(ManualBuyCount manualBuyCount) {
+    public static List<List<Integer>> requestManualTickets(
+            ManualBuyCount manualBuyCount) {
         System.out.println(REQUEST_MANUAL_NUMBERS);
         List<List<Integer>> lottoNumbers = new ArrayList<>();
         while (manualBuyCount.isNotZero()) {

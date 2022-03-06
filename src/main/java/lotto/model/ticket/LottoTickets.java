@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.model.money.Money;
 import lotto.model.result.LottoRanks;
-import lotto.model.ticket.number.LottoNumber;
 import lotto.model.utils.NumberGenerator;
 
 public class LottoTickets {
@@ -27,9 +26,7 @@ public class LottoTickets {
 
     public static LottoTickets buyManualTickets(List<List<Integer>> numberTickets) {
         return new LottoTickets(numberTickets.stream().
-                map(numberTicket -> new LottoTicket(numberTicket.stream()
-                        .map(LottoNumber::from)
-                        .collect(Collectors.toList())))
+                map(LottoTicket::convertIntegersToLottoTicket)
                 .collect(Collectors.toList()));
     }
 
