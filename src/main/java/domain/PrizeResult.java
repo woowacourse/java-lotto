@@ -17,13 +17,13 @@ public class PrizeResult {
 
     private void initFinalResult() {
         Rank.getWinnerRanks()
-                .forEach(winnerPrice -> prizeResult.put(winnerPrice, 0));
+                .forEach(winnerRank -> prizeResult.put(winnerRank, 0));
     }
 
     private void calculatePrizeResult(List<Lotto> lottos, WinningNumbers winningNumber) {
         for (Lotto lotto : lottos) {
-            final Rank winnerPrice = Rank.calculateRank(lotto, winningNumber);
-            updatePrizeResult(winnerPrice);
+            final Rank rank = Rank.calculateRank(lotto, winningNumber);
+            updatePrizeResult(rank);
         }
     }
 
@@ -37,11 +37,11 @@ public class PrizeResult {
     }
 
     private int totalPrize() {
-        int totalPrice = 0;
-        for (Rank winnerPrice : prizeResult.keySet()) {
-            totalPrice += winnerPrice.getPrize() * prizeResult.get(winnerPrice);
+        int totalPrize = 0;
+        for (Rank winnerRank : prizeResult.keySet()) {
+            totalPrize += winnerRank.getPrize() * prizeResult.get(winnerRank);
         }
-        return totalPrice;
+        return totalPrize;
     }
 
     public Map<Rank, Integer> getPrizeResult() {
