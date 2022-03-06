@@ -32,7 +32,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public static LottoNumber valueOf(LottoNumber lottoNumber) {
-		return new LottoNumber(lottoNumber.getNumber());
+		return new LottoNumber(lottoNumber.number);
 	}
 
 	public static LottoNumber parseLottoNumber(String number) {
