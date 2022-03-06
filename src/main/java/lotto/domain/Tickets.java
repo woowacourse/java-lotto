@@ -47,12 +47,12 @@ public class Tickets {
             .collect(Collectors.toUnmodifiableList());
     }
 
-    public double getYield(Amount amount, WinTicket winTicket) {
+    public double getYield(int amount, WinTicket winTicket) {
         List<Rank> ranks = getRanks(winTicket);
         long totalAmount = ranks.stream()
             .mapToLong(Rank::getAmount)
             .sum();
-        return Math.floor((amount.getYield(totalAmount) * 100))/ 100.0;
+        return Math.floor(((double)totalAmount / amount * 100))/ 100.0;
     }
 
     public int getTicketCount() {

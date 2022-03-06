@@ -51,7 +51,7 @@ public class TicketsTest {
 
         Tickets tickets = new Tickets(testTickets);
 
-        double yield = tickets.getYield(new Amount(3000), winTicket);
+        double yield = tickets.getYield(3000, winTicket);
         assertThat(yield).isEqualTo(0);
     }
 
@@ -67,7 +67,7 @@ public class TicketsTest {
 
         Tickets tickets = new Tickets(testTickets);
 
-        double yield = tickets.getYield(new Amount(3000), winTicket);
+        double yield = tickets.getYield(3000, winTicket);
         assertThat(yield).isEqualTo(1000);
     }
 
@@ -83,7 +83,7 @@ public class TicketsTest {
         }
         Tickets tickets = new Tickets(testTickets);
 
-        double yield = tickets.getYield(new Amount(14000), winTicket);
+        double yield = tickets.getYield(14000, winTicket);
         assertThat(yield).isEqualTo(0.35);
     }
 
@@ -98,7 +98,7 @@ public class TicketsTest {
         }
         Tickets tickets = new Tickets(testTickets);
 
-        double yield = tickets.getYield(new Amount(8000), winTicket);
+        double yield = tickets.getYield(8000, winTicket);
         assertThat(yield).isEqualTo(1_000_000);
     }
 
@@ -112,7 +112,7 @@ public class TicketsTest {
         }
         Tickets tickets = new Tickets(testTickets);
 
-        double yield = tickets.getYield(new Amount(14000), winTicket);
+        double yield = tickets.getYield(14000, winTicket);
         assertThat(yield).isEqualTo(2000000);
     }
 

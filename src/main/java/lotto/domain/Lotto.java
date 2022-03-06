@@ -10,20 +10,17 @@ public class Lotto {
     private static final String PURCHASE_INSUFFICIENT_MESSAGE = "구입금액이 부족합니다. 구매 개수를 낮춰주세요.";
     private static final String REQUEST_UNIT_OF_1000_MESSAGE = LOTTO_PRICE + "원 단위로 입력해주세요.";
 
-    private final Amount nowAmount;
-    private final Amount originalInputAmount;
+    private final Amount inputAmount;
     private Tickets tickets = new Tickets(new ArrayList<>());
 
     public Lotto(int amount) {
         validateAmount(amount);
-        this.originalInputAmount = new Amount(amount);
-        this.nowAmount = new Amount(amount);
+        this.inputAmount = new Amount(amount);
     }
 
     public Lotto(int amount, LottoNumbersGenerator lottoNumbersGenerator) {
         validateAmount(amount);
-        this.originalInputAmount = new Amount(amount);
-        this.nowAmount = new Amount(amount);
+        this.inputAmount = new Amount(amount);
         this.tickets = Tickets.of(findCountOfPurchasable(), lottoNumbersGenerator);
     }
 
@@ -38,13 +35,13 @@ public class Lotto {
     }
 
     public int findCountOfPurchasable() {
-        return nowAmount.getAmountDividedBy(LOTTO_PRICE);
+        return inputAmount.getAmountDividedBy(LOTTO_PRICE);
     }
 
     public void addTicket(Ticket ticket) {
-        if (nowAmount.isPurchasableBy(LOTTO_PRICE)) {
+        if (inputAmount.isPurchasableBy(LOTTO_PRICE)) {
             tickets.add(ticket);
-            nowAmount.decrease(LOTTO_PRICE);
+            inputAmount.decrease(LOTTO_PRICE);
         }
     }
 
@@ -57,7 +54,7 @@ public class Lotto {
     }
 
     public double getYield(WinTicket winTicket) {
-        return tickets.getYield(originalInputAmount, winTicket);
+        return tickets.getYield(inputAmount.getOriginalAmount(), winTicket);
     }
 
     public Tickets getTickets() {
@@ -79,6 +76,6 @@ public class Lotto {
     }
 
     private boolean isPurchasable(int ticketCount) {
-        return ticketCount <= nowAmount.getAmountDividedBy(LOTTO_PRICE);
+        return ticketCount <= inputAmount.getAmountDividedBy(LOTTO_PRICE);
     }
 }
