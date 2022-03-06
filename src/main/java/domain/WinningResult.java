@@ -1,6 +1,7 @@
 package domain;
 
 import domain.strategy.WinningPrizeStrategy;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -67,6 +68,6 @@ public class WinningResult {
     }
 
     public Map<WinningPrize, Integer> getCountOfWinning() {
-        return Map.copyOf(countOfWinning);
+        return Collections.unmodifiableMap(countOfWinning);
     }
 }

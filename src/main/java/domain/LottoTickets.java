@@ -2,6 +2,7 @@ package domain;
 
 import domain.strategy.NumberGenerateStrategy;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -49,7 +50,7 @@ public class LottoTickets {
     }
 
     public List<LottoTicket> getTickets() {
-        return List.copyOf(lottoTickets);
+        return Collections.unmodifiableList(lottoTickets);
     }
 
     public int getSelfPurchaseCount() {
