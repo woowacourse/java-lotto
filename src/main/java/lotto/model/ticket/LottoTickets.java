@@ -1,10 +1,12 @@
 package lotto.model.ticket;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import lotto.model.money.Money;
 import lotto.model.result.LottoRanks;
 import lotto.model.utils.NumberGenerator;
@@ -18,10 +20,13 @@ public class LottoTickets {
     }
 
     public LottoTickets buyAutoTickets(NumberGenerator generator, Money money) {
-        this.tickets.addAll(IntStream.range(0, money.countBuyable())
-                .mapToObj(x -> LottoTicket.createSortedTicket(generator))
+        List<LottoTicket> newTickets = IntStream.range(0, money.countBuyable())
+                .mapToObj(number -> LottoTicket.createSortedTicket(generator))
+                .collect(Collectors.toList());
+
+        return new LottoTickets(Stream.of(tickets, newTickets)
+                .flatMap(Collection::stream)
                 .collect(Collectors.toList()));
-        return this;
     }
 
     public static LottoTickets buyManualTickets(List<List<Integer>> numberTickets) {
