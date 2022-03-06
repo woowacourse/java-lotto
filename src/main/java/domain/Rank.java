@@ -31,7 +31,21 @@ public enum Rank {
     }
 
     private boolean isMatch(int matchCount, boolean isBonus) {
-        return this.matchCount == matchCount && this.mustHaveBonus == isBonus;
+        if (isSameMatchCount(matchCount)) {
+            return checkBonus(isBonus);
+        }
+        return false;
+    }
+
+    private boolean isSameMatchCount(int matchCount) {
+        return this.matchCount == matchCount;
+    }
+
+    private boolean checkBonus(boolean isBonus) {
+        if (mustHaveBonus) {
+            return isBonus;
+        }
+        return true;
     }
 
     public static List<Rank> getWithoutDefault() {
