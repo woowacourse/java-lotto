@@ -8,7 +8,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
-import lotto.dto.Result;
+import lotto.domain.Result;
 
 public class OutputView {
 

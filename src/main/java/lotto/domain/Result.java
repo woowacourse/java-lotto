@@ -1,10 +1,7 @@
-package lotto.dto;
+package lotto.domain;
 
 import java.util.EnumMap;
 import java.util.List;
-import lotto.domain.LottoWinningNumbers;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
 
 public class Result {
 

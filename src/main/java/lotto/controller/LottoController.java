@@ -9,7 +9,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.ManualLottoCount;
-import lotto.dto.Result;
+import lotto.domain.Result;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

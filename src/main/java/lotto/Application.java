@@ -7,7 +7,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.dto.Result;
+import lotto.domain.Result;
 
 public class Application {
 
