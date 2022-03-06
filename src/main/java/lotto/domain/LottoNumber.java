@@ -1,32 +1,32 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lotto.exception.LottoNumberException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MINIMUM_RANGE = 1;
     private static final int MAXIMUM_RANGE = 45;
-    private static final List<LottoNumber> LOTTO_NUMBER_CACHE = new ArrayList<>();
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
     static {
         for (int i = MINIMUM_RANGE; i <= MAXIMUM_RANGE; i++) {
-            LOTTO_NUMBER_CACHE.add(new LottoNumber(i));
+            CACHE.put(i, new LottoNumber(i));
         }
     }
 
     private final int lottoNumber;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         checkRange(number);
         this.lottoNumber = number;
     }
 
     public static LottoNumber from(int number) {
         checkRange(number);
-        return LOTTO_NUMBER_CACHE.get(number - 1);
+        return CACHE.get(number);
     }
 
     private static void checkRange(int number) {
@@ -40,7 +40,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(LOTTO_NUMBER_CACHE);
+        return List.copyOf(CACHE.values());
     }
 
     public int getLottoNumber() {
