@@ -15,14 +15,14 @@ public class WinningNumbers {
     private final Set<Number> winningNumbers;
     private final Number bonus;
 
-    public WinningNumbers(final int[] inputNumbers, final int bonusNumber) {
+    public WinningNumbers(final int[] inputNumbers, final int bonus) {
         Set<Integer> numbers = new ManualLottoGenerator(inputNumbers).generateNumbers();
         checkRightSize(numbers);
         winningNumbers = new HashSet<>();
         for (Integer number : numbers) {
             winningNumbers.add(new Number(number));
         }
-        bonus = validateBonusNumber(bonusNumber);
+        this.bonus = validateBonus(bonus);
     }
 
     private void checkRightSize(Set<Integer> numbers) {
@@ -31,12 +31,12 @@ public class WinningNumbers {
         }
     }
 
-    private Number validateBonusNumber(final int number) {
-        final Number bonusNumber = new Number(number);
-        if (winningNumbers.contains(bonusNumber)) {
+    private Number validateBonus(final int number) {
+        final Number bonus = new Number(number);
+        if (winningNumbers.contains(bonus)) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_BONUS);
         }
-        return bonusNumber;
+        return bonus;
     }
 
     public Set<Number> getWinningNumbers() {

@@ -16,7 +16,7 @@ public class PrizeResult {
     }
 
     private void initFinalResult() {
-        Rank.getWinnerPrices()
+        Rank.getWinnerRanks()
                 .forEach(winnerPrice -> prizeResult.put(winnerPrice, 0));
     }
 

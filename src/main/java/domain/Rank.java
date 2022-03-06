@@ -26,19 +26,19 @@ public enum Rank {
 
     public static Rank getWinnerPrizeByMatched(final int matched, final boolean bonus) {
         return Arrays.stream(Rank.values())
-                .filter(prize -> prize.matched == matched)
-                .filter(prize -> prize.bonus == bonus)
+                .filter(rank -> rank.matched == matched)
+                .filter(rank -> rank.bonus == bonus)
                 .findAny()
                 .orElse(FAIL);
     }
 
-    public static List<Rank> getWinnerPrices() {
+    public static List<Rank> getWinnerRanks() {
         return Arrays.stream(Rank.values())
                 .sequential()
                 .collect(Collectors.toList());
     }
 
-    public static List<Rank> ranks() {
+    public static List<Rank> getValidPrizes() {
         return Arrays.stream(Rank.values())
                 .filter(winnerPrice -> winnerPrice != Rank.FAIL)
                 .sorted(Comparator.comparing(Rank::getPrize))
