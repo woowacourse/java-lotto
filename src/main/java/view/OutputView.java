@@ -12,7 +12,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    
+
+    private static final int STANDARD = 1;
     private static final String ERROR_MESSAGE = "[ERROR] ";
 
     private OutputView() {
@@ -56,7 +57,16 @@ public class OutputView {
     }
 
     public static void printProfitRate(double profitRate) {
-        String format = "총 수익률은 %.2f입니다.";
-        System.out.println(String.format(format, profitRate));
+        String format = "총 수익률은 %.2f입니다.(%s)";
+        System.out.println(String.format(format, profitRate, judgeResult(profitRate)));
+    }
+
+    private static String judgeResult(double profitRate) {
+        if (profitRate < STANDARD) {
+            return "기준이 1이기 때문에 결과적으로 손해라는 의미임";
+        } else if (profitRate == STANDARD) {
+            return "기준이 1이기 때문에 결과적으로 본전이라는 의미임";
+        }
+        return "기준이 1이기 때문에 결과적으로 이득이라는 의미임";
     }
 }

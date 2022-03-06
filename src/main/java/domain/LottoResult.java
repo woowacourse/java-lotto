@@ -22,12 +22,12 @@ public class LottoResult {
     }
 
     public double calculateProfitRate(Payment payment) {
-        return (double) calculateTotalProfit() / payment.calculateTicketPayment();
+        return calculateTotalProfit() / payment.calculateTicketPayment();
     }
 
-    private int calculateTotalProfit() {
+    private double calculateTotalProfit() {
         return ranks.stream()
-                .mapToInt(Rank::getMoney)
+                .mapToDouble(Rank::getMoney)
                 .sum();
     }
 }
