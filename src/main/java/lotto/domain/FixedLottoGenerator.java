@@ -15,7 +15,7 @@ public class FixedLottoGenerator implements LottoGenerator {
     @Override
     public List<LottoNumber> makeLottos() {
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(toList());
     }
 }

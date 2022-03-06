@@ -15,8 +15,8 @@ class LottoNumberTest {
     @DisplayName("같은 숫자인 로또 번호는 동일하다")
     void testLottoNumberEqual() {
         int number = 5;
-        LottoNumber lottoNumber1 = new LottoNumber(number);
-        LottoNumber lottoNumber2 = new LottoNumber(number);
+        LottoNumber lottoNumber1 = LottoNumber.valueOf(number);
+        LottoNumber lottoNumber2 = LottoNumber.valueOf(number);
 
         assertThat(lottoNumber1).isEqualTo(lottoNumber2);
     }
@@ -25,7 +25,7 @@ class LottoNumberTest {
     @ValueSource(ints = {-1, 0, 46})
     @DisplayName("로또 번호가 1 ~ 45 사이의 숫자가 아닌 경우 예외를 발생시킨다")
     void throwExceptionWhenInvalidRange(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.valueOf(number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ERROR_LOTTO_NUMBER_WRONG_RANGE.message());
     }

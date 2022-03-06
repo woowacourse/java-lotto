@@ -13,7 +13,7 @@ public class WinningLotto {
     public WinningLotto(final List<Integer> winningNumbers, final int bonusNumber) {
         final LottoGenerator lottoGenerator = new FixedLottoGenerator(winningNumbers);
         this.winningNumbers = new Lotto(lottoGenerator);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
 
         validateDuplication(this.winningNumbers, this.bonusNumber);
     }
@@ -31,6 +31,6 @@ public class WinningLotto {
     }
 
     public LottoNumber getBonusNumber() {
-        return new LottoNumber(bonusNumber.getNumber());
+        return bonusNumber;
     }
 }

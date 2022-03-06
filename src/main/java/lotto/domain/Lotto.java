@@ -27,7 +27,7 @@ public class Lotto {
 
     public List<Integer> getIntValues() {
         return numbers.stream()
-                .map(LottoNumber::getNumber)
+                .map(LottoNumber::getValue)
                 .sorted()
                 .collect(Collectors.toUnmodifiableList());
     }
