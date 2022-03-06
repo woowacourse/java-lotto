@@ -16,13 +16,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
     @ParameterizedTest
-    @DisplayName("1부터 45까지의 자연수가 아닌 값으로 객체를 생성할 경우 예외를 발생시킨다.")
-    @ValueSource(strings = {"0", "-1", "1.2", "a", "46"})
-    void create_exceptionByInvalidValue_Test(final String value) {
+    @DisplayName("1보다 작거나 45보다 큰 값으로 객체를 생성하려고 하면 예외를 발생시킨다.")
+    @ValueSource(ints = {0, 46})
+    void create_exceptionByInvalidValue_Test(final int invalidValue) {
         // given
         final String expectedExceptionMessage = "로또 번호는 1 ~ 45 사이의 자연수여야합니다.";
         // when then
-        assertThatThrownBy(() -> LottoNumber.from(value))
+        assertThatThrownBy(() -> LottoNumber.from(invalidValue))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
     }
@@ -30,9 +30,9 @@ class LottoNumberTest {
     @ParameterizedTest
     @DisplayName("로또 숫자들을 받아 같은 값이 있는지 확인한다.")
     @MethodSource("provideOtherNumbersAndExpected")
-    void hasSameNumberWith_Test(final List<String> otherNumbers, final boolean expected) {
+    void hasSameNumberWith_Test(final List<Integer> otherNumbers, final boolean expected) {
         //when
-        final LottoNumber one = LottoNumber.from("1");
+        final LottoNumber one = LottoNumber.from(1);
         final List<LottoNumber> others = otherNumbers.stream()
                 .map(LottoNumber::from)
                 .collect(Collectors.toUnmodifiableList());
@@ -43,8 +43,8 @@ class LottoNumberTest {
 
     private static Stream<Arguments> provideOtherNumbersAndExpected() {
         return Stream.of(
-                Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6"), true),
-                Arguments.of(Arrays.asList("2", "3", "4", "5", "6", "7"), false)
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), true),
+                Arguments.of(Arrays.asList(2, 3, 4, 5, 6, 7), false)
         );
     }
 }

@@ -4,9 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ConsoleInputView implements InputView {
     private static final String INPUT_PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String INPUT_MANUAL_PURCHASE_AMOUNT_MESSAGE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE = "\n수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String INPUT_RETRY_MESSAGE = " 다시 입력해주세요.";
@@ -18,6 +21,20 @@ public class ConsoleInputView implements InputView {
     public String inputPurchaseAmount() {
         System.out.println(INPUT_PURCHASE_AMOUNT_MESSAGE);
         return scanner.nextLine();
+    }
+
+    @Override
+    public String inputManualPurchaseAmount() {
+        System.out.println(INPUT_MANUAL_PURCHASE_AMOUNT_MESSAGE);
+        return scanner.nextLine();
+    }
+
+    @Override
+    public List<String> inputManualLottoNumbers(final int manualPurchaseAmount) {
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
+        return IntStream.range(0, manualPurchaseAmount)
+                .mapToObj(index -> scanner.nextLine())
+                .collect(Collectors.toUnmodifiableList());
     }
 
     @Override

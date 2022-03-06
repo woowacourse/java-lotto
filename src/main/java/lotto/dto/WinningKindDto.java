@@ -1,17 +1,17 @@
 package lotto.dto;
 
-import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.matchkind.WinningKind;
 
-public class LottoMatchKindDto {
+public class WinningKindDto {
     private final int matchedCount;
     private final boolean matchedBonus;
     private final long winningAmount;
     private final int winningCount;
 
-    public LottoMatchKindDto(final LottoMatchKind lottoMatchKind, final int winningCount) {
-        this.matchedCount = lottoMatchKind.getMatchCount();
-        this.matchedBonus = lottoMatchKind.hasSameNumberWithBonus();
-        this.winningAmount = lottoMatchKind.getWinningAmount();
+    public WinningKindDto(final WinningKind winningKind, final int winningCount) {
+        this.matchedCount = winningKind.getMatchCount();
+        this.matchedBonus = winningKind.hasSameNumberWithBonus();
+        this.winningAmount = winningKind.getWinningAmount();
         this.winningCount = winningCount;
     }
 

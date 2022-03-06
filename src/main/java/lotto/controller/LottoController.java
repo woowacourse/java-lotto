@@ -1,84 +1,74 @@
 package lotto.controller;
 
-import lotto.domain.winningresult.WinningResult;
-import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.LottoMachine;
 import lotto.domain.lottonumber.Lotto;
-import lotto.domain.lottonumber.WinningNumbers;
-import lotto.domain.generator.LottoGenerator;
-import lotto.domain.lottonumber.vo.LottoNumber;
-import lotto.dto.LottoMatchKindDto;
+import lotto.domain.matchkind.WinningKind;
+import lotto.domain.winningresult.WinningResult;
+import lotto.dto.InputLottoDto;
 import lotto.dto.LottoNumbersDto;
-import lotto.service.LottoService;
-import lotto.view.input.InputView;
-import lotto.view.output.OutputView;
+import lotto.dto.WinningKindDto;
+import lotto.util.converter.NumberConverter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoController {
-    private final LottoService lottoService;
-    private final InputView inputView;
-    private final OutputView outputView;
+    private static final String NUMBER_DELIMITER = ",";
 
-    public LottoController(final LottoGenerator lottoGenerator, final InputView inputView, final OutputView outputView) {
-        this.inputView = inputView;
-        this.outputView = outputView;
-        lottoService = initializeLottoService(lottoGenerator);
+    private LottoMachine lottoMachine;
+
+    public LottoController(final int totalPurchaseAmount, final List<String> manualLottoNumbers) {
+        final List<InputLottoDto> manualLottoInfos = splitLottos(manualLottoNumbers);
+        this.lottoMachine = new LottoMachine(totalPurchaseAmount, manualLottoInfos);
     }
 
-    private LottoService initializeLottoService(final LottoGenerator lottoGenerator) {
-        try {
-            final String purchaseAmountInput = inputView.inputPurchaseAmount();
-            return new LottoService(lottoGenerator, purchaseAmountInput);
-        } catch (final Exception e) {
-            inputView.printErrorMessage(e.getMessage());
-            return initializeLottoService(lottoGenerator);
-        }
+    private List<InputLottoDto> splitLottos(final List<String> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(lottoInfo -> lottoInfo.split(NUMBER_DELIMITER))
+                .map(this::convertToInputLottoDtos)
+                .map(InputLottoDto::new)
+                .collect(Collectors.toUnmodifiableList());
     }
 
-    public void run() {
-        outputView.printPurchaseCount(lottoService.getCountOfLottoNumbers());
-        printLottoNumbersGroup();
-        final WinningNumbers winningNumbers = generateWinningNumbers();
-        printResult(winningNumbers);
+    private List<Integer> convertToInputLottoDtos(final String[] lottoInfo) {
+        return Arrays.stream(lottoInfo)
+                .map(String::trim)
+                .map(NumberConverter::convertStringToInt)
+                .collect(Collectors.toUnmodifiableList());
     }
 
-    private void printLottoNumbersGroup() {
-        final List<LottoNumbersDto> numbersGroup =
-                convertLottoNumbersGroupToDtos(lottoService.getLottos());
-        outputView.printLottoNumbersGroup(numbersGroup);
+    public int getAutoPurchaseCount() {
+        return lottoMachine.getCountOfAutoLottoNumbers();
     }
 
-    private List<LottoNumbersDto> convertLottoNumbersGroupToDtos(
-            final List<Lotto> numbersGroup) {
-        return numbersGroup.stream()
+    public int getManualPurchaseCount() {
+        return lottoMachine.getCountOfManualLottoNumbers();
+    }
+
+    public List<LottoNumbersDto> getLottos() {
+        final List<Lotto> lottos = lottoMachine.getLottos();
+        return lottos.stream()
                 .map(Lotto::getValues)
                 .map(LottoNumbersDto::new)
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private WinningNumbers generateWinningNumbers() {
-        try {
-            final Lotto lastWinningNumbers = new Lotto(inputView.inputLastWeekWinningNumbers());
-            final LottoNumber bonusNumber = LottoNumber.from(inputView.inputBonusNumber());
-            return new WinningNumbers(lastWinningNumbers, bonusNumber);
-        } catch (final Exception e) {
-            inputView.printErrorMessage(e.getMessage());
-            return generateWinningNumbers();
-        }
+    public List<WinningKindDto> getWinningResult(final List<Integer> winningLotto, final int bonusNumber) {
+        final WinningResult winningResult = lottoMachine.getMatchResult(winningLotto, bonusNumber);
+        final Map<WinningKind, Integer> winningNumberByKind = winningResult.getWinningNumberByWinningKind();
+        return convertToDto(winningNumberByKind);
     }
 
-    private void printResult(WinningNumbers winningNumbers) {
-        final WinningResult winningResult = lottoService.getMatchResult(winningNumbers);
-        final List<LottoMatchKindDto> winningLogs = convertWinningResultsToDtos(winningResult.getWinningNumberByKind());
-        outputView.printCountOfWinningByMatchKind(winningLogs);
-        outputView.printProfitRate(winningResult.getProfitRate());
-    }
-
-    private List<LottoMatchKindDto> convertWinningResultsToDtos(final Map<LottoMatchKind, Integer> results) {
-        return results.keySet().stream()
-                .map(lottoMatchKind -> new LottoMatchKindDto(lottoMatchKind, results.get(lottoMatchKind)))
+    private List<WinningKindDto> convertToDto(final Map<WinningKind, Integer> winningNumberByKind) {
+        return winningNumberByKind.keySet().stream()
+                .map(winningKind -> new WinningKindDto(winningKind, winningNumberByKind.get(winningKind)))
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    public double getProfitRate(final List<Integer> winningLotto, final int bonusNumber) {
+        final WinningResult winningResult = lottoMachine.getMatchResult(winningLotto, bonusNumber);
+        return winningResult.getProfitRate();
     }
 }

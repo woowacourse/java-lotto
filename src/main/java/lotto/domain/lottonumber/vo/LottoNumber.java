@@ -6,16 +6,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static lotto.util.constants.Lotto.LAST_LOTTO_NUMBER;
-import static lotto.util.regex.NumberRegex.isNaturalNumber;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final String INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE = "로또 번호는 1 ~ 45 사이의 자연수여야합니다.";
-    private static final List<Integer> basicNumbers;
+    private static final List<LottoNumber> LOTTO_NUMBERS;
 
     static {
-        basicNumbers = IntStream.range(0, LAST_LOTTO_NUMBER)
+        LOTTO_NUMBERS = IntStream.range(0, LAST_LOTTO_NUMBER)
                 .map(index -> index + 1)
-                .boxed()
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableList());
     }
 
@@ -25,19 +24,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = value;
     }
 
-    public static LottoNumber from(final String value) {
-        validateNotNegativeInteger(value);
-        return basicNumbers.stream()
-                .filter(number -> number == Integer.parseInt(value))
+    public static LottoNumber from(final int value) {
+        return LOTTO_NUMBERS.stream()
+                .filter(lottoNumber -> lottoNumber.number == value)
                 .findAny()
-                .map(LottoNumber::new)
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE));
-    }
-
-    private static void validateNotNegativeInteger(final String value) {
-        if (!isNaturalNumber(value)) {
-            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE);
-        }
     }
 
     public boolean hasSameNumberWith(final List<LottoNumber> others) {

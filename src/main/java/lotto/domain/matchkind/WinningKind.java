@@ -2,7 +2,7 @@ package lotto.domain.matchkind;
 
 import java.util.Arrays;
 
-public enum LottoMatchKind {
+public enum WinningKind {
     LOWER_THAN_THREE(0, false, 0),
     THREE(3, false, 5000),
     FOUR(4, false, 50000),
@@ -14,31 +14,29 @@ public enum LottoMatchKind {
     private final boolean bonusNumberHit;
     private final long winningAmount;
 
-    LottoMatchKind(final int matchCount, final boolean bonus, final long winningAmount) {
+    WinningKind(final int matchCount, final boolean bonus, final long winningAmount) {
         this.matchCount = matchCount;
         this.bonusNumberHit = bonus;
         this.winningAmount = winningAmount;
     }
 
-    public static LottoMatchKind from(final int matchCount, final boolean bonusNumberHit) {
-        if (bonusNumberHit) {
-            return getInstanceIncludingBonus(matchCount);
+    public static WinningKind of(final int matchCount, final boolean bonusNumberHit) {
+        if (isFiveBonus(matchCount, bonusNumberHit)) {
+            return FIVE_BONUS;
         }
         return Arrays.stream(values())
                 .filter(matchKind -> matchKind.matchCount == matchCount)
-                .findFirst()
+                .filter(matchKind -> !matchKind.bonusNumberHit)
+                .findAny()
                 .orElse(LOWER_THAN_THREE);
     }
 
-    private static LottoMatchKind getInstanceIncludingBonus(final int matchCount) {
-        if (matchCount == 5) {
-            return FIVE_BONUS;
-        }
-        return from(matchCount + 1, false);
+    private static boolean isFiveBonus(int matchCount, boolean bonusNumberHit) {
+        return bonusNumberHit && matchCount == 5;
     }
 
-    public long getProfit(final int countOfMatchedLottoNumbers) {
-        return winningAmount * countOfMatchedLottoNumbers;
+    public long getProfit(final int winningCount) {
+        return winningAmount * winningCount;
     }
 
     public int getMatchCount() {

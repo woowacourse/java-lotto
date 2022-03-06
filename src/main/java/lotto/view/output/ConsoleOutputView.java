@@ -1,13 +1,13 @@
 package lotto.view.output;
 
-import lotto.dto.LottoMatchKindDto;
+import lotto.dto.WinningKindDto;
 import lotto.dto.LottoNumbersDto;
 
 import java.util.List;
 import java.util.StringJoiner;
 
 public class ConsoleOutputView implements OutputView {
-    private static final String OUTPUT_PURCHASE_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String OUTPUT_PURCHASE_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String LOTTO_NUMBER_SEPARATOR = ", ";
     private static final String LOTTO_NUMBERS_PREFIX = "[";
     private static final String LOTTO_NUMBERS_SUFFIX = "]";
@@ -17,8 +17,8 @@ public class ConsoleOutputView implements OutputView {
     private static final String PROFIT_RATE_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
 
     @Override
-    public void printPurchaseCount(final int purchaseCount) {
-        System.out.println(purchaseCount + OUTPUT_PURCHASE_COUNT_MESSAGE);
+    public void printPurchaseCount(final int manualPurchaseCount, final int autoPurchaseCount) {
+        System.out.printf(OUTPUT_PURCHASE_COUNT_MESSAGE, manualPurchaseCount, autoPurchaseCount);
     }
 
     @Override
@@ -36,17 +36,17 @@ public class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void printCountOfWinningByMatchKind(final List<LottoMatchKindDto> winningResults) {
+    public void printCountOfWinningByMatchKind(final List<WinningKindDto> winningResults) {
         System.out.println(WINNING_STATISTICS_MESSAGE);
         winningResults.forEach(this::printEachCountOfWinningByMatchKind);
     }
 
-    private void printEachCountOfWinningByMatchKind(final LottoMatchKindDto winningResult) {
+    private void printEachCountOfWinningByMatchKind(final WinningKindDto winningResult) {
         System.out.printf(findMessageFormatByBonus(winningResult),
                 winningResult.getMatchedCount(), winningResult.getWinningAmount(), winningResult.getWinningCount());
     }
 
-    private String findMessageFormatByBonus(LottoMatchKindDto winningResult) {
+    private String findMessageFormatByBonus(final WinningKindDto winningResult) {
         if (winningResult.hasMatchedBonus()) {
             return WINNING_STATISTICS_MESSAGE_BONUS_FORMAT;
         }
