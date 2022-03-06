@@ -1,31 +1,32 @@
 package lotto.model.lotto;
 
-import lotto.model.bonusball.BonusBallResponse;
-import lotto.model.result.RateOfReturn;
-import lotto.model.bonusball.BonusBall;
-import lotto.model.result.WinningResult;
-import lotto.model.winningnumber.WinningNumber;
-import lotto.model.winningnumber.WinningNumberResponse;
+import java.util.ArrayList;
+import java.util.List;
+
+import lotto.dto.WinningLottoResponse;
+import lotto.model.lotto.result.RateOfReturn;
+import lotto.model.lotto.result.WinningResult;
 
 public class LottoGame {
 
-    public LottoStorage makeLottos(LottoCount lottoCount) {
-        return new LottoStorage(lottoCount);
+    public List<Lotto> makeManualLottos(List<List<Integer>> receivedLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (List<Integer> lotto : receivedLottos) {
+            lottos.add(new Lotto(lotto));
+        }
+        return lottos;
     }
 
-    public RateOfReturn storeMoneyInRateOfReturn(String money) {
+    public LottoStorage makeLottos(LottoCount lottoCount, List<Lotto> lottos) {
+        return new LottoStorage(lottoCount, lottos);
+    }
+
+    public RateOfReturn storeMoneyInRateOfReturn(long money) {
         return new RateOfReturn(money);
     }
 
-    public BonusBall storeBonusBall(WinningNumber WinningNumber, String input) {
-        BonusBall bonusBall = new BonusBall(input);
-        WinningNumber.validateReduplicationWithBonusBall(input);
-        return bonusBall;
-    }
-
-    public WinningResult calcWinningNumber(LottoStorage lottoStorage, BonusBallResponse bonusBallResponse,
-                                                    WinningNumberResponse WinningNumberResponse) {
-        return lottoStorage.calcWinningNumber(bonusBallResponse, WinningNumberResponse);
+    public WinningResult calcWinningNumber(LottoStorage lottoStorage, WinningLottoResponse winningLottoResponse) {
+        return lottoStorage.calcWinningNumber(winningLottoResponse);
     }
 
     public double sendRateOfReturn(RateOfReturn rateOfReturn, WinningResult winningResult) {

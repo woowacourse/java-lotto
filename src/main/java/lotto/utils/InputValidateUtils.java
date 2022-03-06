@@ -1,9 +1,10 @@
 package lotto.utils;
 
+import static lotto.model.lotto.LottoNumbers.MAX;
+import static lotto.model.lotto.LottoNumbers.MIN;
+
 public class InputValidateUtils {
     private static final String REGEX_NUMBER = "[0-9]+";
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
 
     private InputValidateUtils() {
     }
@@ -20,9 +21,8 @@ public class InputValidateUtils {
         }
     }
 
-    public static void inputOutOfRange(String number, String message) {
-        if (ConverterUtils.convertStringToInt(number) < LOTTO_MIN_NUMBER ||
-                ConverterUtils.convertStringToInt(number) > LOTTO_MAX_NUMBER) {
+    public static void inputOutOfRange(int number, String message) {
+        if (number < MIN || number > MAX) {
             throw new IllegalArgumentException(message);
         }
     }

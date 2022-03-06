@@ -2,31 +2,29 @@ package lotto.model.lotto;
 
 import java.util.Objects;
 
-import lotto.utils.ConverterUtils;
-
 public class LottoCount {
     private static final int END = 0;
     private static final int UNIT = 1000;
 
-    private int count;
+    private long count;
 
-    public LottoCount(String money) {
-        this.count = makeLottoCount(money);
+    public LottoCount(long money, int count) {
+        this.count = makeLottoCount(money, count);
     }
 
-    private int makeLottoCount(String money) {
-        return ConverterUtils.convertStringToInt(money) / UNIT;
+    private long makeLottoCount(long money, int count) {
+        return (money / UNIT) - count;
     }
 
-    public boolean isZero() {
+    boolean isZero() {
         return count == END;
     }
 
-    public void makeLotto() {
-        count--;
+    void makeLotto() {
+        this.count--;
     }
 
-    public int getCount() {
+    long getCount() {
         return count;
     }
 

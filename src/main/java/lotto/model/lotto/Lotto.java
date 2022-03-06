@@ -1,31 +1,60 @@
 package lotto.model.lotto;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
-import lotto.model.result.Rank;
-import lotto.model.result.WinningResult;
-import lotto.model.winningnumber.WinningNumberResponse;
-import lotto.model.bonusball.BonusBallResponse;
+import lotto.dto.WinningLottoResponse;
+import lotto.model.message.LottoNumberExceptionMessage;
+import lotto.model.lotto.result.Rank;
+import lotto.model.lotto.result.WinningResult;
+import lotto.utils.InputValidateUtils;
+
+import static lotto.model.lotto.LottoNumbers.MAX;
+import static lotto.model.lotto.LottoNumbers.MIN;
 
 public class Lotto {
     private static final int CHECKING_BONUS_NUMBER = 5;
+    private static final int WINNING_NUMBER_SIZE = 6;
 
     private final Set<Integer> numbers;
 
-    public Lotto(Set<Integer> numbers) {
-        this.numbers = numbers;
+    public Lotto(List<Integer> numbers) {
+        validateNumbers(numbers);
+        this.numbers = new HashSet<>(numbers);
     }
 
-    public void calcWinningNumber(WinningResult winningResult, BonusBallResponse bonusBallResponse,
-                                  WinningNumberResponse winningResponse) {
-        Set<Integer> winningNumbers = winningResponse.getWinningNumbers();
+    private void validateNumbers(List<Integer> numbers) {
+        validateNumberOutOfRange(numbers);
+        validateNumberSize(numbers);
+        validateNumberReduplication(numbers);
+    }
+
+    private void validateNumberOutOfRange(List<Integer> numbers) {
+        numbers.forEach(number -> InputValidateUtils.inputOutOfRange(number,
+                LottoNumberExceptionMessage.RANGE_ERROR.getMassage()));
+    }
+
+    private void validateNumberSize(List<Integer> numbers) {
+        if (numbers.size() != WINNING_NUMBER_SIZE) {
+            throw new IllegalArgumentException(LottoNumberExceptionMessage.SIZE_ERROR.getMassage());
+        }
+    }
+
+    private void validateNumberReduplication(List<Integer> numbers) {
+        long count = numbers.stream()
+                .distinct()
+                .count();
+
+        if (count != numbers.size()) {
+            throw new IllegalArgumentException(LottoNumberExceptionMessage.REDUPLICATION_ERROR.getMassage());
+        }
+    }
+
+    void calcWinningNumber(WinningResult winningResult, WinningLottoResponse winningLottoResponse) {
+        Set<Integer> winningNumbers = winningLottoResponse.getWinningNumbers();
         long count = countWinningNumber(winningNumbers);
 
         if (count == CHECKING_BONUS_NUMBER) {
-            compareWithBonusAndStore(winningResult, bonusBallResponse);
+            compareWithBonusAndStore(winningResult, winningLottoResponse);
             return;
         }
         storeResult(winningResult, count);
@@ -37,8 +66,8 @@ public class Lotto {
                 .count();
     }
 
-    private void compareWithBonusAndStore(WinningResult winningResult, BonusBallResponse bonusBallResponse) {
-        if (numbers.contains(bonusBallResponse.getNumber())) {
+    private void compareWithBonusAndStore(WinningResult winningResult, WinningLottoResponse winningLottoResponse) {
+        if (numbers.contains(winningLottoResponse.getBonusBall())) {
             winningResult.addCount(Rank.BONUS);
             return;
         }
@@ -53,18 +82,5 @@ public class Lotto {
 
     public Set<Integer> getNumbers() {
         return Collections.unmodifiableSet(numbers);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numbers);
     }
 }

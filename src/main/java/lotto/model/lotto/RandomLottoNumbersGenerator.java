@@ -9,11 +9,12 @@ import java.util.stream.Collectors;
 public class RandomLottoNumbersGenerator {
     private static final int LOTTO_SIZE = 6;
 
-    public static Set<Integer> pickSixNumbers() {
-        List<Integer> shuffledNumbers = shuffleLottoNumbers(LottoNumbers.getLottoNumbers());
-        return shuffledNumbers.stream()
+    static List<Integer> pickSixNumbers() {
+        List<Integer> shuffledNumbers = shuffleLottoNumbers(LottoNumbers.getNumbers());
+        return Collections.unmodifiableList(shuffledNumbers
+                .stream()
                 .limit(LOTTO_SIZE)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList()));
     }
 
     private static List<Integer> shuffleLottoNumbers(Set<Integer> numbers) {

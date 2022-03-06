@@ -1,91 +1,86 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import lotto.model.bonusball.BonusBall;
-import lotto.model.bonusball.BonusBallResponse;
-import lotto.model.lotto.LottoCount;
-import lotto.model.lotto.LottoGame;
-import lotto.model.lotto.LottoResponse;
-import lotto.model.lotto.LottoStorage;
-import lotto.model.result.Money;
-import lotto.model.result.Rank;
-import lotto.model.result.RateOfReturn;
-import lotto.model.result.WinningResult;
-import lotto.model.winningnumber.WinningNumber;
-import lotto.model.winningnumber.WinningNumberResponse;
+import lotto.model.lotto.*;
+import lotto.model.lotto.result.Money;
+import lotto.model.lotto.result.RateOfReturn;
+import lotto.model.lotto.result.WinningResult;
+import lotto.model.lotto.WinningLotto;
+import lotto.dto.WinningLottoResponse;
+import lotto.utils.ConverterUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
 
     public void playGame() {
-        Money money = receiveMoney();
         LottoGame lottoGame = new LottoGame();
-        LottoStorage lottoStorage = lottoGame.makeLottos(new LottoCount(money.getNumber()));
-        sendMakeLottoResult(lottoStorage.getLottoStorage());
+        Money money = makeMoney();
+        ManualCount manual = receiveManualCount();
+        List<Lotto> manualLottos = sendManualLottos(lottoGame, manual);
 
-        WinningNumber winningNumber = receiveWinningNumbers();
-        BonusBall bonusBall = receiveBonusBall(lottoGame, winningNumber);
-        WinningResult winningResult = lottoGame.calcWinningNumber(lottoStorage, new BonusBallResponse(bonusBall.getNumber()),
-                new WinningNumberResponse(winningNumber.getWinningNumbers()));
-        sendResult(lottoGame, money.getNumber(), winningResult);
+        LottoStorage lottos = lottoGame.makeLottos(new LottoCount(money.getNumber(), manual.getNumber()), manualLottos);
+        OutputView.printLottos(manual.getNumber(), lottos.getLottoStorage());
+        WinningResult winnings = lottoGame.calcWinningNumber(lottos, new WinningLottoResponse(receiveWinningLotto()));
+        sendResult(lottoGame, money.getNumber(), winnings);
     }
 
-    private Money receiveMoney() {
+    private Money makeMoney() {
         try {
-            return new Money(inputView.inputMoney());
+            String receivedMoney = InputView.inputMoney();
+            return new Money(ConverterUtils.convertStringToInt(receivedMoney));
         } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
-            return receiveMoney();
+            OutputView.printErrorMessage(e.getMessage());
+            return makeMoney();
         }
     }
 
-    private void sendMakeLottoResult(List<LottoResponse> lottoStorage) {
-        outputView.printLottosSize(lottoStorage.size());
-        lottoStorage.forEach(lottoResponse -> outputView.printLottos(lottoResponse.getNumbers()));
-    }
-
-    private WinningNumber receiveWinningNumbers() {
+    private ManualCount receiveManualCount() {
         try {
-            return new WinningNumber(inputView.inputWinningNumbers());
+            String receivedManualCount= InputView.inputManualLottoCount();
+            return new ManualCount(ConverterUtils.convertStringToInt(receivedManualCount));
         } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
-            return receiveWinningNumbers();
+            OutputView.printErrorMessage(e.getMessage());
+            return receiveManualCount();
         }
     }
 
-    private BonusBall receiveBonusBall(LottoGame lottoGame, WinningNumber winningNumber) {
+    private List<Lotto> sendManualLottos(LottoGame lottoGame, ManualCount manualCount) {
+        InputView.inputManualLottoMessage();
         try {
-            return lottoGame.storeBonusBall(winningNumber, inputView.inputBonusBall());
+            List<List<Integer>> lottos = receiveManualLottos(manualCount);
+            return lottoGame.makeManualLottos(lottos);
         } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
-            return receiveBonusBall(lottoGame, winningNumber);
+            OutputView.printErrorMessage(e.getMessage());
+            return sendManualLottos(lottoGame, manualCount);
         }
     }
 
-    private void sendResult(LottoGame lottoGame, String money, WinningResult winningResult) {
-        sendWinningResult(winningResult);
-        RateOfReturn rateOfReturn = receiveRateOfReturn(lottoGame, money);
-        sendRateOfReturn(lottoGame, rateOfReturn, winningResult);
+    private List<List<Integer>> receiveManualLottos(ManualCount manualCount) {
+        List<List<Integer>> lottos = new ArrayList<>();
+        for (int idx = 0; idx < manualCount.getNumber(); idx++) {
+            List<Integer> receivedManualLottos = InputView.inputManualLottos();
+            lottos.add(receivedManualLottos);
+        }
+        return lottos;
     }
 
-    private void sendWinningResult(WinningResult winningResult) {
-        outputView.printResultMessage();
-        for (Rank rank : winningResult.getWinningCount().keySet()) {
-            outputView.printWinningResult(rank.getMatchNumber(), rank.getValue(),
-                    winningResult.getWinningCount().get(rank), Rank.BONUS.getValue());
+    private WinningLotto receiveWinningLotto() {
+        try {
+            List<Integer> receivedWinningLotto = InputView.inputWinningLotto();
+            String receivedBonusBall = InputView.inputBonusBall();
+            return new WinningLotto(receivedWinningLotto, ConverterUtils.convertStringToInt(receivedBonusBall));
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return receiveWinningLotto();
         }
     }
 
-    private void sendRateOfReturn(LottoGame lottoGame, RateOfReturn rateOfReturn, WinningResult winningResult) {
-        double result = lottoGame.sendRateOfReturn(rateOfReturn, winningResult);
-        outputView.printRateOfReturn(result);
-    }
-
-    private RateOfReturn receiveRateOfReturn(LottoGame lottoGame, String money) {
-        return lottoGame.storeMoneyInRateOfReturn(money);
+    private void sendResult(LottoGame lottoGame, long money, WinningResult winningResult) {
+        OutputView.printWinningResult(winningResult);
+        RateOfReturn rateOfReturn = lottoGame.storeMoneyInRateOfReturn(money);
+        OutputView.printRateOfReturn(lottoGame.sendRateOfReturn(rateOfReturn, winningResult));
     }
 }

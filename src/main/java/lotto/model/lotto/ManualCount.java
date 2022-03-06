@@ -1,9 +1,9 @@
-package lotto.model.bonusball;
+package lotto.model.lotto;
 
-public class BonusBallResponse {
+public class ManualCount {
     private final int number;
 
-    public BonusBallResponse(int number) {
+    public ManualCount(int number) {
         this.number = number;
     }
 

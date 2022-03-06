@@ -1,4 +1,4 @@
-package lotto.model.result;
+package lotto.model.lotto.result;
 
 public enum Rank {
     THREE(3, 5000),
@@ -8,7 +8,7 @@ public enum Rank {
     SIX(6, 2000000000);
 
     private final int matchNumber;
-    private final int value;
+    private final long value;
 
     Rank(int matchNumber, int value) {
         this.matchNumber = matchNumber;
@@ -23,7 +23,7 @@ public enum Rank {
         return matchNumber;
     }
 
-    public int getValue() {
+    public long getValue() {
         return value;
     }
 }
