@@ -19,8 +19,8 @@ public class LottoNumbers {
 		return new LottoNumbers(generatedLottoNumbers);
 	}
 
-	public static LottoNumbers valueOf(LottoNumbers numbers) {
-		return new LottoNumbers(numbers.getNumbers());
+	public static LottoNumbers valueOf(LottoNumbers otherNumbers) {
+		return new LottoNumbers(otherNumbers.getNumbers());
 	}
 
 	public long countMatchedNumbers(List<LottoNumber> winningNumbers) {
