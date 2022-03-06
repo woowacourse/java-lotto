@@ -3,8 +3,8 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lotto.domain.LottoTicket;
 import lotto.domain.ManualLottoCount;
-import lotto.domain.lottoticket.LottoTicket;
 
 public class InputView {
     private static final String INPUT_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
