@@ -20,8 +20,6 @@ public class ResultView {
     private static final String BONUS_BALL_NOT_CORRESPOND_MESSAGE = "";
     private static final String START_REVENUE_MESSAGE = "총 수익률은 ";
     private static final String END_REVENUE_MESSAGE = "입니다.";
-    private static final String PRICE_SIGN = "원";
-    private static final String CHANGE_MESSAGE = "거스름돈 - ";
 
     public static void printBuyingLottosResult(final LottoCount lottoCount, final Lottos lottos) {
         printLottoCount(lottoCount);
@@ -54,15 +52,10 @@ public class ResultView {
             printRank(rank, lottoMachine.getEachRankCount(rank));
         }
         printRevenue(lottoMachine);
-        printMoney(lottoMachine);
     }
 
     private static void printRevenue(LottoMachine lottoMachine) {
         System.out.println(START_REVENUE_MESSAGE + lottoMachine.getRevenue() + END_REVENUE_MESSAGE);
-    }
-
-    private static void printMoney(LottoMachine lottoMachine) {
-        System.out.println(CHANGE_MESSAGE + lottoMachine.getChange() + PRICE_SIGN);
     }
 
     private static void printRank(final Rank rank, final Integer integer) {

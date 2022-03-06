@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import lotto.model.generator.LottoGenerator;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
@@ -8,49 +10,47 @@ public class LottoMachine {
 
     public static final String BUYING_LOTTO_COUNT_EXCESS_ERROR_MESSAGE = "[ERROR] 구매할 수 있는 수량을 넘었습니다.";
     private static final String LOTTO_MACHINE_ERROR_MESSAGE = "[ERROR] 오류가 발생했습니다.";
-    public static final Integer WORKING_NUMBER = 1;
-    public static final Integer STOP_NUMBER = 0;
 
-    private Boolean working;
+    private final LottoGenerator lottoGenerator;
     private final Money money;
-    private final Lottos lottos;
-    private RankCount rankCout;
+    private Lottos lottos;
+    private RankCount rankCount;
 
-    public LottoMachine(final LottoGenerator lottoGenerator, final Money money, final LottoCount lottoCount,
-                        final Lottos manualLottos) {
-        this.working = true;
+    public LottoMachine(final LottoGenerator lottoGenerator, final Money money) {
+        this.lottoGenerator = lottoGenerator;
         this.money = money;
-        validateLottoMachine(lottoCount, manualLottos);
-        this.lottos = generateLottos(lottoGenerator, lottoCount.getAutoLottoCount(), manualLottos);
+        this.lottos = new Lottos(new ArrayList<>());
     }
 
-    private void validateLottoMachine(final LottoCount lottoCount, final Lottos manualLottos) {
-        if (manualLottos.size() != lottoCount.getManualLottoCount()) {
+    public Lottos buy(final LottoCount lottoCount, final List<Lotto> lottos) {
+        Lottos manualLottos = generateManualLottos(lottoCount, lottos);
+        Lottos autoLottos = generateAutoLottos(lottoCount);
+        this.lottos = this.lottos.plusLottos(manualLottos);
+        this.lottos = this.lottos.plusLottos(autoLottos);
+        return this.lottos;
+    }
+
+    private Lottos generateManualLottos(final LottoCount lottoCount, final List<Lotto> lottos) {
+        validateManualLottos(lottoCount, lottos);
+        return new Lottos(lottos);
+    }
+
+    private void validateManualLottos(final LottoCount lottoCount, final List<Lotto> lottos) {
+        if (lottos.size() != lottoCount.getManualLottoCount()) {
             throw new IllegalArgumentException(LOTTO_MACHINE_ERROR_MESSAGE);
         }
     }
 
-    private Lottos generateLottos(final LottoGenerator lottoGenerator, final int autoLottoCount,
-                                  final Lottos manualLottos) {
-        Lottos autoLottos = lottoGenerator.generateLottos(autoLottoCount, LottoNumber.LOTTO_NUMBER_MINIMUM_RANGE,
+    private Lottos generateAutoLottos(final LottoCount lottoCount) {
+        Lottos autoLottos = lottoGenerator.generateLottos(lottoCount.getAutoLottoCount(),
+                LottoNumber.LOTTO_NUMBER_MINIMUM_RANGE,
                 LottoNumber.LOTTO_NUMBER_MAXIMUM_RANGE,
                 LottoNumbers.LOTTO_LENGTH);
-        return manualLottos.plusLottos(autoLottos);
+        return autoLottos;
     }
 
     public void calculateResult(final WinningLotto winningLotto) {
-        this.rankCout = new RankCount(winningLotto.checkRank(lottos));
-    }
-
-    public boolean isWorking() {
-        return working;
-    }
-
-    public boolean isEnd(final int number) {
-        if (number == STOP_NUMBER) {
-            return working = false;
-        }
-        return true;
+        this.rankCount = new RankCount(winningLotto.checkRank(lottos));
     }
 
     public Lottos getLottos() {
@@ -58,14 +58,10 @@ public class LottoMachine {
     }
 
     public double getRevenue() {
-        return ((double) rankCout.calculateTotalMoney() / money.getMoney());
+        return ((double) rankCount.calculateTotalMoney() / money.getMoney());
     }
 
     public Integer getEachRankCount(Rank rank) {
-        return rankCout.getEachRankCount(rank);
-    }
-
-    public int getChange() {
-        return money.calculateChange();
+        return rankCount.getEachRankCount(rank);
     }
 }

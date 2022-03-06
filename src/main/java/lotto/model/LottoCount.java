@@ -14,7 +14,7 @@ public class LottoCount {
     }
 
     private void validateLottoCount(final int manualLottoCount, final Money money) {
-        if (manualLottoCount > money.lottoCount()) {
+        if (manualLottoCount < 0 || manualLottoCount > money.lottoCount()) {
             throw new IllegalArgumentException(LottoMachine.BUYING_LOTTO_COUNT_EXCESS_ERROR_MESSAGE);
         }
     }

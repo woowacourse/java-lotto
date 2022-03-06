@@ -41,12 +41,4 @@ public class MoneyTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
-
-    @DisplayName("잔돈 반환 테스트")
-    @Test
-    void calculateChangeTest() {
-        Money money = new Money(3900);
-        int actual = money.calculateChange();
-        assertThat(actual).isEqualTo(900);
-    }
 }

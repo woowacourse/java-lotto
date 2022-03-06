@@ -33,8 +33,4 @@ public class Money {
     public int lottoCount() {
         return money / PRICE_PER_LOTTO;
     }
-
-    public int calculateChange() {
-        return money - (lottoCount() * PRICE_PER_LOTTO);
-    }
 }

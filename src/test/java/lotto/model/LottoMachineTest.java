@@ -2,7 +2,6 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,21 +19,23 @@ import org.junit.jupiter.params.provider.EnumSource;
 public class LottoMachineTest {
 
     private Money money;
-    private Lottos lottos;
     private LottoGenerator lottoGenerator;
+    private LottoCount lottoCount;
+    private List<Lotto> lottos;
     private LottoMachine lottoMachine;
 
     @BeforeEach
     void init() {
         money = new Money(3000);
         lottoGenerator = new CustomLottoGenerator();
+        lottoCount = new LottoCount(2, money);
         lottos = makeLottos();
     }
 
-    private Lottos makeLottos() {
+    private List<Lotto> makeLottos() {
         Lotto second = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
         Lotto fourth = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
-        return new Lottos(new ArrayList<>(Arrays.asList(second, fourth)));
+        return new ArrayList<>(Arrays.asList(second, fourth));
     }
 
     private Lotto makeLotto(int[] numbers) {
@@ -52,25 +53,8 @@ public class LottoMachineTest {
     @DisplayName("로또 머신 정상 생성 테스트")
     @Test
     void generateLottoMachineTest() {
-        assertThatCode(() -> new LottoMachine(lottoGenerator, money, new LottoCount(2, money), lottos))
+        assertThatCode(() -> new LottoMachine(lottoGenerator, money))
                 .doesNotThrowAnyException();
-    }
-
-    @DisplayName("로또 머신 생성 시 수동 로또 갯수와 Lottos의 크기 불일치하여 예외 발생")
-    @Test
-    void generateLottoMachineInconsistencyTest() {
-        assertThatThrownBy(() -> new LottoMachine(lottoGenerator, money, new LottoCount(1, money), lottos))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR]");
-    }
-
-    @DisplayName("로또 머신 생성 시 구매 가능 로또 수 초과하여 예외 발생")
-    @Test
-    void generateLottoMachineExcessTest() {
-        money = new Money(1000);
-        assertThatThrownBy(() -> new LottoMachine(lottoGenerator, money, new LottoCount(2, money), lottos))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR]");
     }
 
     @DisplayName("1,2,4등 개수 테스트")
@@ -88,25 +72,9 @@ public class LottoMachineTest {
         assertThat(lottoMachine.getRevenue()).isEqualTo((double) (2000000000 + 30000000 + 50000) / 3000);
     }
 
-    @DisplayName("머신 작동 테스트")
-    @Test
-    void isEndTest() {
-        calculateLottoMachine();
-        boolean actual = lottoMachine.isEnd(0);
-        assertThat(actual).isEqualTo(false);
-    }
-
-    @DisplayName("거스름돈 테스트")
-    @Test
-    void getChangeTest() {
-        money = new Money(3900);
-        calculateLottoMachine();
-        int actual = lottoMachine.getChange();
-        assertThat(actual).isEqualTo(900);
-    }
-
     private void calculateLottoMachine() {
-        lottoMachine = new LottoMachine(lottoGenerator, money, new LottoCount(2, money), lottos);
+        lottoMachine = new LottoMachine(lottoGenerator, money);
+        lottoMachine.buy(lottoCount, lottos);
         WinningLotto winningLotto = makeWinningLotto(new int[]{1, 2, 3, 4, 5, 6}, 7);
         lottoMachine.calculateResult(winningLotto);
     }
