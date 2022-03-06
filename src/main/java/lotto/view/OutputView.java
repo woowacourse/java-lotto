@@ -1,14 +1,17 @@
 package lotto.view;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
 public class OutputView {
 
-    private static final String OUTPUT_BUY_LOTTO_COUNTS = "%d개를 구매했습니다.\n";
+    private static final String OUTPUT_BUY_LOTTO_COUNTS = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String OUTPUT_LOTTO_INFO_PREFIX = "[";
     private static final String OUTPUT_LOTTO_INFO_SUFFIX = "]\n";
     private static final String OUTPUT_LOTTO_INFO_DELIMITER = ", ";
@@ -21,8 +24,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void outputBuyLottoCounts(final int lottoCounts) {
-        System.out.printf(OUTPUT_BUY_LOTTO_COUNTS, lottoCounts);
+    public static void outputBuyLottoCounts(final int manualCounts, final int autoCounts) {
+        System.out.printf(OUTPUT_BUY_LOTTO_COUNTS, manualCounts, autoCounts);
     }
 
     public static void outputLottos(final List<Lotto> lottos) {
@@ -36,8 +39,8 @@ public class OutputView {
     }
 
     private static String getLottoInfos(final Lotto lotto) {
-        return lotto.getLottoNumbers().stream()
-                .map(String::valueOf)
+        return lotto.toList().stream()
+                .map(LottoNumber::toString)
                 .collect(Collectors.joining(OUTPUT_LOTTO_INFO_DELIMITER));
     }
 
@@ -50,9 +53,16 @@ public class OutputView {
     }
 
     private static void printRankResults(final LottoResult lottoResult) {
-        lottoResult.getRankResults().entrySet().stream()
-                .filter(rank -> !rank.getKey().isNothing())
-                .forEach(rank -> printRankResult(rank.getKey(), rank.getValue()));
+        toReverseList().stream()
+                .filter(rank -> !rank.isNothing())
+                .forEach(rank -> printRankResult(rank,
+                        lottoResult.getRankResults().getOrDefault(rank, 0)));
+    }
+
+    private static List<Rank> toReverseList() {
+        List<Rank> ranks = Arrays.asList(Rank.values());
+        Collections.reverse(ranks);
+        return ranks;
     }
 
     private static void printRankResult(final Rank rank, final int count) {

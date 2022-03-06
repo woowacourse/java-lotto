@@ -4,12 +4,12 @@ import static lotto.view.ErrorView.printErrorMessage;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.RandomLottoMachine;
 import lotto.domain.WinLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -17,15 +17,14 @@ import lotto.view.OutputView;
 public class LottoApplication {
 
     public static void main(final String[] args) {
-        final Money money = payMoney();
-        final int buyCounts = money.calculateLottoCount();
-        OutputView.outputBuyLottoCounts(buyCounts);
+        final LottoGenerator lottoGenerator = createLottoGenerator(payMoney());
+        final Lottos lottos = lottoGenerator.generateLottos(inputManualLottoNumbers(lottoGenerator));
 
-        final Lottos lottos = buyLottos(buyCounts);
+        OutputView.outputBuyLottoCounts(lottoGenerator.getManualCount(), lottoGenerator.getAutoCount());
         OutputView.outputLottos(lottos.getLottos());
 
         final WinLotto winLotto = revealWinLotto();
-        OutputView.outputResult(lottos.createResult(winLotto));
+        OutputView.outputResult(LottoResult.createLottoResult(lottos, winLotto));
     }
 
     private static Money payMoney() {
@@ -37,19 +36,22 @@ public class LottoApplication {
         }
     }
 
-    private static Lottos buyLottos(final int buyCounts) {
+    private static LottoGenerator createLottoGenerator(final Money money) {
         try {
-            return new Lottos(buyRandomLottos(buyCounts));
+            return LottoGenerator.createLottoGeneratorByMoneyAndManualCount(money, InputView.inputManualCount());
         } catch (IllegalArgumentException e) {
             printErrorMessage(e);
-            return buyLottos(buyCounts);
+            return createLottoGenerator(money);
         }
     }
 
-    private static List<Lotto> buyRandomLottos(final int buyCounts) {
-        return IntStream.range(0, buyCounts)
-                .mapToObj(index -> new Lotto(RandomLottoMachine.createRandomLottoNumbers()))
-                .collect(Collectors.toList());
+    private static List<List<Integer>> inputManualLottoNumbers(final LottoGenerator lottoGenerator) {
+        try {
+            return InputView.inputManualLottos(lottoGenerator.getManualCount());
+        } catch (IllegalArgumentException e) {
+            printErrorMessage(e);
+            return inputManualLottoNumbers(lottoGenerator);
+        }
     }
 
     private static WinLotto revealWinLotto() {

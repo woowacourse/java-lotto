@@ -1,55 +1,43 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.function.BiPredicate;
 
 public enum Rank {
 
-    FIRST(2000000000, 6, (hitCounts, bonus) -> hitCounts == 6),
-    SECOND(30000000, 5, (hitCounts, bonus) -> hitCounts == 5 && bonus),
-    THIRD(1500000, 5, (hitCounts, bonus) -> hitCounts == 5 && !bonus),
-    FOURTH(50000, 4, (hitCounts, bonus) -> hitCounts == 4),
-    FIFTH(5000, 3, (hitCounts, bonus) -> hitCounts == 3),
-    NOT_THING(0, 0, (hitCounts, bonus) -> hitCounts < 3 && hitCounts >= 0),
+    FIRST(2_000_000_000, 6),
+    SECOND(30_000_000, 5),
+    THIRD(1_500_000, 5),
+    FOURTH(50_000, 4),
+    FIFTH(5_000, 3),
+    NOT_THING(0, 0),
     ;
 
     private final long reward;
     private final int hitCounts;
-    private final BiPredicate<Integer, Boolean> expression;
 
-    Rank(final long reward, final int hitCounts, final BiPredicate<Integer, Boolean> expression) {
+    Rank(final long reward, final int hitCounts) {
         this.reward = reward;
         this.hitCounts = hitCounts;
-        this.expression = expression;
     }
 
     public static long calculateMoney(final Rank currentRank, final long count) {
         return currentRank.reward * count;
     }
 
-    public static Rank calculateCurrentRank(final int hitCounts, final boolean bonus) {
-        return Arrays.stream(values())
-                .filter(rank -> rank.expression.test(hitCounts, bonus))
+    public static Rank calculateCurrentRank(final int hitCounts, final boolean hasBonusNumber) {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.isSameHitCount(hitCounts))
+                .filter(rank -> rank.isFilterRankNotSecondOrHasBonusNumber(hasBonusNumber))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 해당하는 랭크가 없습니다."));
+                .orElse(NOT_THING);
     }
 
-    public static Map<Rank, Integer> initResultMap() {
-        final Map<Rank, Integer> rankMap = new TreeMap<>(rankRewardDescendingComparator());
-        Arrays.stream(values())
-                .forEach(rank -> rankMap.put(rank, defaultCount()));
-        return rankMap;
+    private boolean isFilterRankNotSecondOrHasBonusNumber(final boolean hasBonusNumber) {
+        return !this.equals(SECOND) || hasBonusNumber;
     }
 
-    private static Comparator<Rank> rankRewardDescendingComparator() {
-        return (o1, o2) -> Long.compare(o1.reward, o2.reward);
-    }
-
-    private static int defaultCount() {
-        return 0;
+    private boolean isSameHitCount(final int hitCounts) {
+        return this.hitCounts == hitCounts;
     }
 
     public boolean isNothing() {
