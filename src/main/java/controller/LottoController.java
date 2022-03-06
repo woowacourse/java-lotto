@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import controller.strategy.InputLottoNumbersGenerationStrategy;
 import controller.strategy.RandomLottoNumbersGenerationStrategy;
+import controller.strategy.StringInputLottoNumbersGenerationStrategy;
 import model.Money;
 import model.lotto.Lotto;
 import model.lotto.LottoCount;
@@ -28,7 +28,7 @@ public class LottoController {
 
 	private final LottoControllerInputView inputView = new LottoControllerInputView();
 	private final LottoControllerOutputView outputView = new LottoControllerOutputView();
-	private final InputLottoNumbersGenerationStrategy manualStrategy = new InputLottoNumbersGenerationStrategy();
+	private final StringInputLottoNumbersGenerationStrategy manualStrategy = new StringInputLottoNumbersGenerationStrategy();
 	private final RandomLottoNumbersGenerationStrategy automaticStrategy = new RandomLottoNumbersGenerationStrategy();
 
 	public void playGame() {

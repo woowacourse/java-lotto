@@ -9,7 +9,7 @@ import model.lottonumber.LottoNumbersGenerationStrategy;
 import utils.InputValidateUtils;
 import view.StrategyView;
 
-public class InputLottoNumbersGenerationStrategy implements LottoNumbersGenerationStrategy {
+public class StringInputLottoNumbersGenerationStrategy implements LottoNumbersGenerationStrategy {
 	private static final String NUMBER_SIZE_ERROR_MESSAGE = "[Error]: 로또는 %d개의 숫자여야 합니다.";
 	private static final String LOTTO_NUMBER_REDUPLICATION_ERROR_MESSAGE = "[Error]: 로또 번호는 중복이 있으면 안됩니다";
 	private static final String LOTTO_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 번호를 입력하세요.";
@@ -28,7 +28,7 @@ public class InputLottoNumbersGenerationStrategy implements LottoNumbersGenerati
 	}
 
 	public String inputNumbers() {
-		return StrategyView.inputLottoNumbers();
+		return StrategyView.inputLottoNumbersAsString();
 	}
 
 	private void validateSize(List<LottoNumber> numbers, int size) {
