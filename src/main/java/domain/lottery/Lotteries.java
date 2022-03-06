@@ -19,10 +19,12 @@ public final class Lotteries {
 		this.lotteries = lotteriesNumber;
 	}
 
+	@SafeVarargs
 	public static Lotteries from(final List<Lottery>... lotteriesNumber) {
 		return new Lotteries(concatLotteries(lotteriesNumber));
 	}
 
+	@SafeVarargs
 	private static List<Lottery> concatLotteries(final List<Lottery>... lotteriesNumber) {
 		final List<Lottery> concatLottery = new ArrayList<>();
 		for (List<Lottery> lotteries : lotteriesNumber) {
