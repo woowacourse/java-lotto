@@ -2,17 +2,24 @@ package lotto.domain;
 
 import java.util.Objects;
 
-final public class LottoNumber {
+public final class LottoNumber {
     public static final int MIN = 1;
     public static final int MAX = 45;
-
-    private static final String NUMBER_RANGE_ERROR = "로또 숫자는 " + MIN + " 이상 " + MAX + " 이하의 숫자만 가능합니다.";
+    private static final String NUMBER_RANGE_ERROR = String.format("로또 숫자는 %s 이상 %s 이하의 숫자만 가능합니다.", MIN, MAX);
 
     private final int value;
 
-    public LottoNumber(int lottoNumber) {
+    LottoNumber(int lottoNumber) {
         validateNumber(lottoNumber);
         this.value = lottoNumber;
+    }
+
+    public static LottoNumber valueOf(int lottoNumber) {
+        return LottoNumberGenerator.getLottoNumber(lottoNumber);
+    }
+
+    boolean isSameNumber(int lottoNumber) {
+        return value == lottoNumber;
     }
 
     private void validateNumber(int number) {

@@ -1,11 +1,13 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.AmountToBuyLotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.lottoticket.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.ManualLottoCount;
 import lotto.domain.WinningNumbers;
 import lotto.domain.WinningResult;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -13,7 +15,9 @@ public class LottoController {
     public void start() {
         AmountToBuyLotto amount = inputAmount();
 
-        LottoTickets lottoTickets = buyTickets(amount);
+        ManualLottoCount manualLottoCount = inputManualLottoCount(amount);
+
+        LottoTickets lottoTickets = buyTickets(amount, manualLottoCount);
 
         WinningNumbers winningNumbers = createWinningNumbers();
 
@@ -31,34 +35,38 @@ public class LottoController {
         }
     }
 
-    private LottoTickets buyTickets(AmountToBuyLotto amount) {
-        int ticketCount = amount.calculateLottoCount();
-        OutputView.printTicketCount(ticketCount);
+    private ManualLottoCount inputManualLottoCount(AmountToBuyLotto amount) {
+        try {
+            return ManualLottoCount.of(InputView.inputManualLottoCount(),
+                    amount.calculateLottoCount());
+        } catch (IllegalArgumentException e) {
+            OutputView.printException(e);
+            return inputManualLottoCount(amount);
+        }
+    }
 
-        LottoTickets lottoTickets = LottoTickets.generateRandomByCount(ticketCount);
+    private LottoTickets buyTickets(AmountToBuyLotto amount, ManualLottoCount manualLottoCount) {
+        int automaticLottoCount = amount.calculateAutomaticLottoCount(manualLottoCount);
+        OutputView.printTicketCount(amount, manualLottoCount);
+
+        List<LottoTicket> manualLottoTickets = InputView.inputManualLottoNumbers(manualLottoCount);
+
+        LottoTickets lottoTickets = LottoTickets.generateRandomWithManualTickets(manualLottoTickets,
+                automaticLottoCount);
         OutputView.printTicket(lottoTickets);
         return lottoTickets;
     }
 
     private WinningNumbers createWinningNumbers() {
-        LottoTicket inputLottoNumbers = getInputLottoNumbers();
+        LottoTicket inputLottoNumbers = InputView.inputWinningNumbers();
         LottoNumber bonusNumber = getBonusNumber();
 
         return getWinningNumbers(inputLottoNumbers, bonusNumber);
     }
 
-    private LottoTicket getInputLottoNumbers() {
-        try {
-            return new LottoTicket(InputView.inputWinningNumbers());
-        } catch (IllegalArgumentException e) {
-            OutputView.printException(e);
-            return getInputLottoNumbers();
-        }
-    }
-
     private LottoNumber getBonusNumber() {
         try {
-            return new LottoNumber(InputView.inputBonusBall());
+            return LottoNumber.valueOf(InputView.inputBonusBall());
         } catch (IllegalArgumentException e) {
             OutputView.printException(e);
             return getBonusNumber();

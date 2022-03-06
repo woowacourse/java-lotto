@@ -4,15 +4,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
-final public class WinningResult {
+public final class WinningResult {
     private static final int INITIAL_COUNT = 0;
 
     private final Map<Ranking, Integer> value;
 
     public WinningResult(List<Ranking> rankings) {
-        value = initialMap(rankings);
+        List<Ranking> copiedRankings = List.copyOf(rankings);
+        value = initialMap(copiedRankings);
     }
 
     private Map<Ranking, Integer> initialMap(List<Ranking> rankings) {
@@ -40,23 +40,6 @@ final public class WinningResult {
 
     public Map<Ranking, Integer> getValue() {
         return value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        WinningResult that = (WinningResult) o;
-        return Objects.equals(value, that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
     }
 
     @Override

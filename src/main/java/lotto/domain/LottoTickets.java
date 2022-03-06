@@ -3,57 +3,36 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import lotto.domain.lottoticket.LottoTicket;
 
-final public class LottoTickets {
+public class LottoTickets {
     private final List<LottoTicket> value;
 
-    private LottoTickets(int count) {
-        value = generateTickets(count);
+    private LottoTickets(List<LottoTicket> manualLottoTickets, int count) {
+        value = generateTickets(manualLottoTickets, count);
     }
 
-    private List<LottoTicket> generateTickets(int count) {
-        final List<LottoTicket> tickets = new ArrayList<>();
+    private List<LottoTicket> generateTickets(List<LottoTicket> manualLottoTickets, int count) {
         for (int i = 0; i < count; i++) {
-            tickets.add(LottoTicket.generateRandom());
+            manualLottoTickets.add(LottoTicket.generateRandom());
         }
-        return Collections.unmodifiableList(tickets);
+        return Collections.unmodifiableList(manualLottoTickets);
     }
 
-    public static LottoTickets generateRandomByCount(int count) {
-        return new LottoTickets(count);
+    public static LottoTickets generateRandomWithManualTickets(List<LottoTicket> manualLottoTickets, int count) {
+        List<LottoTicket> copiedManualLottoTickets = new ArrayList<>(manualLottoTickets);
+        return new LottoTickets(copiedManualLottoTickets, count);
     }
 
     public WinningResult calculateWinningStatistic(WinningNumbers winningNumbers) {
         List<Ranking> rankings = value.stream()
                 .map(winningNumbers::calculateRanking)
-                .flatMap(Optional::stream)
                 .collect(Collectors.toList());
         return new WinningResult(rankings);
     }
 
     public List<LottoTicket> getValue() {
         return value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LottoTickets that = (LottoTickets) o;
-        return Objects.equals(value, that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
     }
 
     @Override

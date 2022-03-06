@@ -12,9 +12,9 @@ public class WinningResultTest {
     @DisplayName("상금합 구하기")
     public void calculate() {
         List<Ranking> lottoNumbersList = new ArrayList<>();
-        lottoNumbersList.add(Ranking.FIFTH);
-        lottoNumbersList.add(Ranking.FOURTH);
-        lottoNumbersList.add(Ranking.THIRD);
+        lottoNumbersList.add(Ranking.FIFTH_PLACE);
+        lottoNumbersList.add(Ranking.FOURTH_PLACE);
+        lottoNumbersList.add(Ranking.THIRD_PLACE);
 
         WinningResult winningResult = new WinningResult(lottoNumbersList);
 

@@ -1,19 +1,14 @@
-package lotto.domain.lottoticket;
+package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
-import lotto.domain.LottoNumber;
 
-final public class LottoTicket {
+public final class LottoTicket {
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final int FROM_INDEX = 0;
     private static final String DELIMITER = ",";
     private static final String DUPLICATE_ERROR = "로또 번호는 중복이 불가능합니다.";
-    private static final String COUNT_ERROR = "로또 개수는 " + LOTTO_NUMBER_COUNT + "여야 합니다.";
+    private static final String COUNT_ERROR = String.format("로또 개수는 %s여야 합니다.", LOTTO_NUMBER_COUNT);
 
     private final List<LottoNumber> value;
 
@@ -22,9 +17,7 @@ final public class LottoTicket {
     }
 
     private List<LottoNumber> generateRandomLottoNumbers() {
-        final List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumbersCache.cache);
-        Collections.shuffle(lottoNumbers);
-        return Collections.unmodifiableList(lottoNumbers.subList(FROM_INDEX, LOTTO_NUMBER_COUNT));
+        return LottoNumberGenerator.getShuffledNumbers(LOTTO_NUMBER_COUNT);
     }
 
     public static LottoTicket generateRandom() {
@@ -39,14 +32,14 @@ final public class LottoTicket {
     }
 
     private void validateDuplicateCount(String[] parsedLottoNumbers) {
-        int distinctCount = calDistinctCount(parsedLottoNumbers);
+        int distinctCount = calculateDistinctCount(parsedLottoNumbers);
 
         if (parsedLottoNumbers.length != distinctCount) {
             throw new IllegalArgumentException(DUPLICATE_ERROR);
         }
     }
 
-    private int calDistinctCount(String[] parsedLottoNumbers) {
+    private int calculateDistinctCount(String[] parsedLottoNumbers) {
         return (int) Arrays.stream(parsedLottoNumbers).distinct().count();
     }
 
@@ -59,7 +52,7 @@ final public class LottoTicket {
     private List<LottoNumber> generateLottoNumbers(String[] parsedLottoNumbers) {
         return Arrays.stream(parsedLottoNumbers)
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toUnmodifiableList());
     }
 
@@ -80,23 +73,6 @@ final public class LottoTicket {
 
     public List<LottoNumber> getValue() {
         return value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LottoTicket that = (LottoTicket) o;
-        return Objects.equals(value, that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
     }
 
     @Override
