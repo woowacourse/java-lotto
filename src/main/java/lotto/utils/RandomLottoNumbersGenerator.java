@@ -11,7 +11,7 @@ public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     public Set<LottoNumber> generate(int size) {
         Set<LottoNumber> lottoNumbers = new TreeSet<>();
         while (lottoNumbers.size() != size) {
-            lottoNumbers.add(RandomNumberGenerator.generate());
+            lottoNumbers.add(RandomLottoNumberGenerator.generate());
         }
         return lottoNumbers;
     }
