@@ -42,15 +42,9 @@ class LottoStatisticsTest {
         // given
         Money money = new Money(3000);
         List<LottoRank> ranks = List.of(LottoRank.FIFTH, LottoRank.SIXTH, LottoRank.SIXTH);
-        int fifthPrize = LottoRank.FIFTH.getPrize();
-        int sixthPrize = LottoRank.SIXTH.getPrize();
-        long totalPrize = fifthPrize + sixthPrize + sixthPrize;
-        double earningRate = (double) totalPrize / 3000;
-        String expected = String.format("%s",
-            Math.floor(earningRate * DECIMAL_POINT_MULTIPLE) / DECIMAL_POINT_MULTIPLE);
         // when
         LottoStatistics statistics = new LottoStatistics(ranks);
         // then
-        assertThat(statistics.calculateEarningRates(money)).isEqualTo(expected);
+        assertThat(statistics.calculateEarningRates(money)).isEqualTo("1.66");
     }
 }
