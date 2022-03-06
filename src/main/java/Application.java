@@ -19,7 +19,7 @@ public class Application {
         LottoGeneratorDto lottoGeneratorDto = lottoController.purchase(inputMoney, manualLottoCount, manualLottoNumbers);
         OutputView.printCountOfLotto(lottoGeneratorDto.getAutoLottoCount(), manualLottoCount);
 
-        Lottos lottos = Lottos.generateLottos(lottoGeneratorDto.getLottoGenerators());
+        Lottos lottos = lottoController.createLottos(lottoGeneratorDto);
         OutputView.printLottos(LottosDto.from(lottos));
         String[] inputWinningNumber = InputView.askInputWinningNumber();
         int inputBonusBall = InputView.askInputBonusBall();

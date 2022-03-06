@@ -1,6 +1,7 @@
 package controller;
 
 import controller.dto.LottoGeneratorDto;
+import controller.dto.LottosDto;
 import domain.*;
 
 import java.util.List;
@@ -24,6 +25,10 @@ public class LottoController {
                 .mapToObj(i -> new AutoLottoGenerator())
                 .forEach(lottoGenerators::add);
         return lottoGenerators;
+    }
+
+    public Lottos createLottos(LottoGeneratorDto lottoGeneratorDto) {
+        return Lottos.generateLottos(lottoGeneratorDto.getLottoGenerators());
     }
 
     public Statistic winningResult(String[] inputWinningNumber, int inputBonusBall, Lottos lottos) {
