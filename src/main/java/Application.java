@@ -58,7 +58,12 @@ public class Application {
     }
 
     private static WinningLotto createWinningLotto() {
-        return new WinningLotto(createWinningLottoBall(), createBonusBall());
+        try {
+            return new WinningLotto(createWinningLottoBall(), createBonusBall());
+        } catch (IllegalArgumentException e) {
+            OutputView.showErrorMessage(e);
+            return createWinningLotto();
+        }
     }
 
     private static Lotto createWinningLottoBall() {
