@@ -1,5 +1,7 @@
 package domain;
 
+import exception.ExceptionMessage;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -17,7 +19,7 @@ public class Lotto {
 
     private void checkLottoSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또는 6개의 중복되지 않은 숫자로 이루어져 있어야 합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_LOTTO_SIZE.getMessage());
         }
     }
 
@@ -50,10 +52,5 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lotto);
-    }
-
-    @Override
-    public String toString() {
-        return "추첨된 번호는 " + lotto + " 입니다.";
     }
 }

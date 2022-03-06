@@ -1,5 +1,7 @@
 package domain;
 
+import exception.ExceptionMessage;
+
 public class Payment {
     private static final int LOTTO_PRICE = 1000;
     private static final int PAYMENT_LIMIT_PRICE = 100000;
@@ -14,13 +16,13 @@ public class Payment {
 
     private void checkGreaterThanLottoPrice(int payment) {
         if (payment < LOTTO_PRICE) {
-            throw new IllegalArgumentException("금액이 로또 가격보다 작습니다.");
+            throw new IllegalArgumentException(ExceptionMessage.BELOW_RANGE_PAYMENT.getMessage());
         }
     }
 
     private void checkPaymentLimit(int payment) {
         if (payment > PAYMENT_LIMIT_PRICE) {
-            throw new IllegalArgumentException("로또는 한사람 당 10만원씩만 살 수 있습니다.");
+            throw new IllegalArgumentException(ExceptionMessage.OVER_RANGE_PAYMENT.getMessage());
         }
     }
 

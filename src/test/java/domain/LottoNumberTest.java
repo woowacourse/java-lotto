@@ -1,5 +1,6 @@
 package domain;
 
+import exception.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +23,7 @@ public class LottoNumberTest {
     void range_fail(int lottoNumber) {
         assertThatThrownBy(() -> LottoNumber.valueOf(lottoNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 범위를 벗어난 숫자입니다.");
+                .hasMessageContaining(ExceptionMessage.INVALID_LOTTO_NUMBER_RANGE.getMessage());
     }
 
     @DisplayName("LottoNumber는 오름차순 정렬")

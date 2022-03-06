@@ -20,7 +20,7 @@ public class LottoResultTest {
         List<Rank> lottoRanks = Arrays.asList(Rank.values());
         LottoResult lottoResult = new LottoResult(lottoRanks);
         Map<Rank, Integer> rankCounts = lottoResult.countRank();
-        assertThat(rankCounts.get(rank)).isEqualTo(1);
+        assertThat(rankCounts).containsEntry(rank, 1);
     }
 
     @DisplayName("수익률 계산")

@@ -1,5 +1,6 @@
 package domain;
 
+import exception.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ public class WinningLottoTest {
         LottoNumber bonusNumber = LottoNumber.valueOf(6);
         assertThatThrownBy(() -> new WinningLotto(lotto, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("보너스 숫자가 로또 번호에 포함되었습니다.");
+                .hasMessageContaining(ExceptionMessage.DUPLICATE_BONUS_NUMBER.getMessage());
     }
 
     @DisplayName("등수 계산")

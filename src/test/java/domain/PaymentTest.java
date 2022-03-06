@@ -1,5 +1,6 @@
 package domain;
 
+import exception.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ public class PaymentTest {
     void input_less_than_lotto_price() {
         assertThatThrownBy(() -> new Payment(500))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("금액이 로또 가격보다 작습니다.");
+                .hasMessageContaining(ExceptionMessage.BELOW_RANGE_PAYMENT.getMessage());
     }
 
     @DisplayName("구입금액 10만원 초과 실패")
@@ -27,7 +28,7 @@ public class PaymentTest {
     void range_max() {
         assertThatThrownBy(() -> new Payment(110000))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또는 한사람 당 10만원씩만 살 수 있습니다.");
+                .hasMessageContaining(ExceptionMessage.OVER_RANGE_PAYMENT.getMessage());
     }
 
     @DisplayName("로또 생성 횟수 계산")
