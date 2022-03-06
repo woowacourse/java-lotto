@@ -4,6 +4,7 @@ import domain.LottoTickets;
 import domain.Purchase;
 import domain.Result;
 import domain.WinLottoNumbers;
+import java.util.ArrayList;
 import java.util.List;
 import view.InputView;
 import view.OutputView;
@@ -23,7 +24,7 @@ public class MainController {
 
     private Purchase getPurchase() {
         int money = getMoney();
-        int manualCount = getManualCount();
+        int manualCount = getManualCount(money);
         try {
             return new Purchase(money, manualCount);
         } catch (IllegalArgumentException e) {
@@ -41,23 +42,29 @@ public class MainController {
         }
     }
 
-    private int getManualCount() {
+    private int getManualCount(int money) {
         try {
-            return InputView.inputLottoAmount();
+            return InputView.inputLottoAmount(money);
         } catch (IllegalArgumentException e) {
             OutputView.printError(e.getMessage());
-            return getManualCount();
+            return getManualCount(money);
         }
     }
 
     private LottoTickets getLottoTickets(Purchase purchase) {
+        List<List<Integer>> manualLottoNumberInput = getManualLottoNumberInput(purchase);
+        return new LottoTickets(manualLottoNumberInput, purchase.getAutoCount());
+    }
+
+    private List<List<Integer>> getManualLottoNumberInput(Purchase purchase) {
+        if (purchase.getManualCount() == 0) {
+            return new ArrayList<>();
+        }
         try {
-            List<List<Integer>> manualLottoNumberInput = InputView.inputManualLottoNumbers(
-                purchase);
-            return new LottoTickets(manualLottoNumberInput, purchase.getAutoCount());
+            return InputView.inputManualLottoNumbers(purchase);
         } catch (IllegalArgumentException e) {
             OutputView.printError(e.getMessage());
-            return getLottoTickets(purchase);
+            return getManualLottoNumberInput(purchase);
         }
     }
 
