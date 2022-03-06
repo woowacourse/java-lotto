@@ -28,7 +28,7 @@ public class LottoController {
         return lottoService.match(lottos, winnerNumbers, bonusNumber);
     }
 
-    public double rate(Map<Rank, Integer> result, double inputMoney) {
-        return lottoService.caluateRate(result, inputMoney);
+    public double getProfitRate(Map<Rank, Integer> result, double inputMoney) {
+        return lottoService.calculateProfitRate(result, inputMoney);
     }
 }

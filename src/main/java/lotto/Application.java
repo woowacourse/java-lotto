@@ -14,19 +14,20 @@ public class Application {
     public static void main(String[] args) {
         LottoController lottoController = new LottoController(new LottoService());
 
+        // 로또 구입
         int inputMoney = InputView.inputMoney();
-        int manualCount = InputView.inputManualLottoAmount();
-        List<List<Integer>> manualLottos = InputView.inputManualLottoNumbers(manualCount);
-
-        Lottos lottos = lottoController.buyLotto(inputMoney, manualCount, manualLottos);
+        int manualAmount = InputView.inputManualLottoAmount();
+        List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualAmount);
+        Lottos lottos = lottoController.buyLotto(inputMoney, manualAmount, manualLottoNumbers);
         OutputView.printLottos(lottos.getLottos());
 
+        // 당첨 확인
         List<Integer> winnerNumbers = InputView.inputWinnerNumbers();
         int bonusNumber = InputView.inputBonusNumber();
-
         Map<Rank, Integer> result = lottoController.match(lottos, winnerNumbers, bonusNumber);
         OutputView.printRanks(result);
-        OutputView.printRate(lottoController.rate(result, inputMoney));
+        double profitRate = lottoController.getProfitRate(result, inputMoney);
+        OutputView.printRate(profitRate);
 
     }
 }

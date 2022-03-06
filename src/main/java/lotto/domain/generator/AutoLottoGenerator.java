@@ -9,6 +9,7 @@ import lotto.domain.Lotto;
 import lotto.domain.vo.LottoNumber;
 
 public class AutoLottoGenerator implements LottoGenerator {
+
     private static final int START_INCLUSIVE = 0;
     private static final int END_EXCLUSIVE = 6;
 

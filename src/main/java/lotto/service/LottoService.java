@@ -15,23 +15,38 @@ import lotto.domain.vo.LottoNumber;
 
 public class LottoService {
 
+    public List<Lotto> createManulLottos(List<List<Integer>> manualNumbers) {
+        LottoGenerator lottoGenerator = new ManualLottoGenerator(collectNumbersToCollectLottoNumbers(manualNumbers));
+        return lottoGenerator.generateLottos();
+    }
+
     public List<Lotto> createAutoLottos(int autoLottosAmount) {
         LottoGenerator lottoGenerator = new AutoLottoGenerator(autoLottosAmount);
         return lottoGenerator.generateLottos();
     }
 
-    public List<Lotto> createManulLottos(List<List<Integer>> manualNumbers) {
-        LottoGenerator lottoGenerator = new ManualLottoGenerator(manualNumbers);
-        return lottoGenerator.generateLottos();
-    }
-
     public Map<Rank, Integer> match(Lottos lottos, List<Integer> winnerNumbers, int bonusNumber) {
-        WinnerLotto winnerLotto = new WinnerLotto(Lotto.of(numbersToLottoNumbers(winnerNumbers)), LottoNumber.of(bonusNumber));
+        WinnerLotto winnerLotto = new WinnerLotto(
+            Lotto.of(numbersToLottoNumbers(winnerNumbers)),
+            LottoNumber.of(bonusNumber)
+        );
         return createRankResults(lottos.match(winnerLotto));
     }
 
-    public double caluateRate(Map<Rank, Integer> result, double inputMoney) {
-        return sumReward(result) / inputMoney;
+    public double calculateProfitRate(Map<Rank, Integer> statistics, double inputMoney) {
+        return sumReward(statistics) / inputMoney;
+    }
+
+    private List<List<LottoNumber>> collectNumbersToCollectLottoNumbers(List<List<Integer>> collectNumbers) {
+        return collectNumbers.stream()
+            .map(this::numbersToLottoNumbers)
+            .collect(Collectors.toList());
+    }
+
+    private List<LottoNumber> numbersToLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+            .map(LottoNumber::of)
+            .collect(Collectors.toList());
     }
 
     private Map<Rank, Integer> createRankResults(List<Rank> ranks) {
@@ -42,15 +57,9 @@ public class LottoService {
         return rankResults;
     }
 
-    private List<LottoNumber> numbersToLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-            .map(LottoNumber::of)
-            .collect(Collectors.toList());
-    }
-
-    private long sumReward(Map<Rank, Integer> result) {
-        return result.keySet().stream()
-            .mapToLong(rank -> rank.getReward() * result.get(rank))
+    private long sumReward(Map<Rank, Integer> statistics) {
+        return statistics.keySet().stream()
+            .mapToLong(rank -> rank.getReward() * statistics.get(rank))
             .sum();
     }
 }

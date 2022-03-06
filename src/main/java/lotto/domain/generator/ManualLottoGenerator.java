@@ -7,23 +7,16 @@ import lotto.domain.vo.LottoNumber;
 
 public class ManualLottoGenerator implements LottoGenerator {
 
-    private final List<List<Integer>> numbers;
+    private final List<List<LottoNumber>> numbers;
 
-    public ManualLottoGenerator(List<List<Integer>> numbers) {
+    public ManualLottoGenerator(List<List<LottoNumber>> numbers) {
         this.numbers = numbers;
     }
 
     @Override
     public List<Lotto> generateLottos() {
         return numbers.stream()
-            .map(this::numbersToLotto)
+            .map(Lotto::of)
             .collect(Collectors.toList());
     }
-
-    private Lotto numbersToLotto(List<Integer> numbers) {
-        return Lotto.of(numbers.stream()
-            .map(LottoNumber::of)
-            .collect(Collectors.toList()));
-    }
-
 }
