@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final String ERROR_MESSAGE_NOT_IN_RANGE = "유효한 로또 번호가 아닙니다.";
+    private static final String ERROR_MESSAGE_NOT_IN_RANGE = "로또 번호는 1 ~ 45 사이의 숫자로 이루어져야 합니다.";
 
     private static final int MINIMUM_VALUE = 1;
     private static final int MAXIMUM_VALUE = 45;
@@ -23,18 +23,22 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int value;
 
     private LottoNumber(int value) {
+        validateInRange(value);
         this.value = value;
     }
 
-    private static void validateInRange(int value) {
+    private void validateInRange(int value) {
         if (value < MINIMUM_VALUE || value > MAXIMUM_VALUE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NOT_IN_RANGE);
         }
     }
 
     public static LottoNumber valueOf(final int number) {
-        validateInRange(number);
-        return LOTTO_NUMBERS.get(number);
+        if (LOTTO_NUMBERS.containsKey(number)) {
+            return LOTTO_NUMBERS.get(number);
+        }
+
+        throw new IllegalArgumentException(ERROR_MESSAGE_NOT_IN_RANGE);
     }
 
     public static List<LottoNumber> getLottoNumbers() {
