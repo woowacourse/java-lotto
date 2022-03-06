@@ -16,8 +16,8 @@ import model.result.LottoResult;
 import model.result.Rank;
 import model.winningnumber.WinningLottoNumber;
 import utils.InputValidateUtils;
-import view.InputView;
-import view.OutputView;
+import view.LottoControllerInputView;
+import view.LottoControllerOutputView;
 
 public class LottoController {
 	private static final String MONEY_BLANK_ERROR_MESSAGE = "[Error]: 금액을 입력해주세요.";
@@ -26,8 +26,8 @@ public class LottoController {
 	private static final String COUNT_NUMBER_ERROR_MESSAGE = "[Error]: 갯수는 숫자를 입력해주세요.";
 	private static final String BONUS_BALL_BLANK_ERROR_MESSAGE = "[Error]: 보너스 볼을 입력해주세요.";
 
-	private final InputView inputView = new InputView();
-	private final OutputView outputView = new OutputView();
+	private final LottoControllerInputView inputView = new LottoControllerInputView();
+	private final LottoControllerOutputView outputView = new LottoControllerOutputView();
 	private final InputLottoNumbersGenerationStrategy manualStrategy = new InputLottoNumbersGenerationStrategy();
 	private final RandomLottoNumbersGenerationStrategy automaticStrategy = new RandomLottoNumbersGenerationStrategy();
 

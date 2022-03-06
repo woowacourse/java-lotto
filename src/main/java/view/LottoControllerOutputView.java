@@ -2,7 +2,7 @@ package view;
 
 import java.util.List;
 
-public class OutputView {
+public class LottoControllerOutputView {
 	private static final String PURCHASE_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 	private static final String RATE_OF_RETURN_MESSAGE = "\n당첨 통계";
 	private static final String LINE = "---------";

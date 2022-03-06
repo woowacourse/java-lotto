@@ -2,20 +2,18 @@ package controller.strategy;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbersGenerationStrategy;
 import utils.InputValidateUtils;
+import view.StrategyView;
 
 public class InputLottoNumbersGenerationStrategy implements LottoNumbersGenerationStrategy {
 	private static final String NUMBER_SIZE_ERROR_MESSAGE = "[Error]: 로또는 %d개의 숫자여야 합니다.";
 	private static final String LOTTO_NUMBER_REDUPLICATION_ERROR_MESSAGE = "[Error]: 로또 번호는 중복이 있으면 안됩니다";
 	private static final String LOTTO_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 번호를 입력하세요.";
 	private static final String DELIMITER_COMMA = ",";
-
-	private Scanner scanner = new Scanner(System.in);
 
 	@Override
 	public List<LottoNumber> generate(int size) {
@@ -30,7 +28,7 @@ public class InputLottoNumbersGenerationStrategy implements LottoNumbersGenerati
 	}
 
 	public String inputNumbers() {
-		return scanner.nextLine();
+		return StrategyView.inputLottoNumbers();
 	}
 
 	private void validateSize(List<LottoNumber> numbers, int size) {
