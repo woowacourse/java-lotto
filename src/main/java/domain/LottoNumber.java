@@ -1,12 +1,13 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    public static final int MIN_BOUND = 1;
-    public static final int MAX_BOUND = 45;
+    private static final int MIN_BOUND = 1;
+    private static final int MAX_BOUND = 45;
     private static final List<LottoNumber> CACHE = new ArrayList<>();
 
     private final int lottoNumber;
@@ -30,6 +31,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (lottoNumber < MIN_BOUND || lottoNumber > MAX_BOUND) {
             throw new IllegalArgumentException("로또 범위를 벗어난 숫자입니다.");
         }
+    }
+
+    public static List<LottoNumber> lottoNumbers() {
+        return Collections.unmodifiableList(CACHE);
     }
 
     public int getLottoNumber() {

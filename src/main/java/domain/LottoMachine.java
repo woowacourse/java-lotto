@@ -6,13 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-    private static final List<LottoNumber> lottoBucket = new ArrayList<>();
-
-    static {
-        for (int i = LottoNumber.MIN_BOUND; i <= LottoNumber.MAX_BOUND; i++) {
-            lottoBucket.add(LottoNumber.valueOf(i));
-        }
-    }
+    private static final List<LottoNumber> lottoBucket = LottoNumber.lottoNumbers();
 
     public Lottos createManualLottos(List<Lotto> lottos) {
         return new Lottos(lottos);
