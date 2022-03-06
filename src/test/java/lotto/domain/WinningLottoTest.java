@@ -3,13 +3,11 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static lotto.constant.ErrorMessage.ERROR_WINNING_LOTTO_DUPLICATE;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class WinningLottoTest {
 
@@ -25,27 +23,20 @@ class WinningLottoTest {
     }
 
     @Test
-    @DisplayName("당첨 번호와 보너스 번호를 가진 set을 반환한다")
-    void makeWinningAndBonusNumbers() {
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 7;
+    @DisplayName("당첨번호와 일치하는 개수를 반환한다.")
+    void countWinningMatched() {
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
+        Lotto lotto = new Lotto(new FixedLottoGenerator(List.of(1, 2, 3, 10, 11, 6)));
 
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        Set<LottoNumber> result = winningLotto.getWinningAndBonusNumber();
-        Set<LottoNumber> expected = initExpected();
-
-        assertThat(result).isEqualTo(expected);
+        assertThat(winningLotto.countWinningMatched(lotto)).isEqualTo(4);
     }
 
-    private HashSet<LottoNumber> initExpected() {
-        return new HashSet<>(List.of(
-                LottoNumber.valueOf(2),
-                LottoNumber.valueOf(3),
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(4),
-                LottoNumber.valueOf(5),
-                LottoNumber.valueOf(6),
-                LottoNumber.valueOf(7)
-        ));
+    @Test
+    @DisplayName("보너스번호와 일치하면 true를 반환한다.")
+    void isBonusMatched() {
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
+        Lotto lotto = new Lotto(new FixedLottoGenerator(List.of(1, 2, 3, 10, 7, 6)));
+
+        assertThat(winningLotto.isBonusMatched(lotto)).isTrue();
     }
 }

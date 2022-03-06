@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.EnumMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ class RankBoardTest {
 
         RankBoard board = new RankBoard(winningLotto, lottos);
 
-        Map<Rank, Integer> expected = new HashMap<>();
+        Map<Rank, Integer> expected = new EnumMap<>(Rank.class);
         expected.put(Rank.FIRST, 1);
         expected.put(Rank.SECOND, 1);
         expected.put(Rank.THIRD, 1);
@@ -40,7 +41,7 @@ class RankBoardTest {
     }
 
     @Test
-    @DisplayName("만약 아무 등수에 해당하지 않는 경우 빈 맵을 반환한다")
+    @DisplayName("만약 아무 등수에 해당하지 않는 경우 MISS를 증가시킨다.")
     void testCalcRankEdgeCase() {
         List<Lotto> lottos = new ArrayList<>();
         LottoGenerator lottoMachine = new FixedLottoGenerator(List.of(1, 2, 8, 9, 10, 11));
@@ -48,12 +49,8 @@ class RankBoardTest {
 
         RankBoard board = new RankBoard(winningLotto, lottos);
 
-        Map<Rank, Integer> expected = new HashMap<>();
-        expected.put(Rank.FIRST, 0);
-        expected.put(Rank.SECOND, 0);
-        expected.put(Rank.THIRD, 0);
-        expected.put(Rank.FOURTH, 0);
-        expected.put(Rank.FIFTH, 0);
+        Map<Rank, Integer> expected = new EnumMap<>(Rank.class);
+        expected.put(Rank.MISS, 1);
 
         assertThat(board.getBoard()).isEqualTo(expected);
     }

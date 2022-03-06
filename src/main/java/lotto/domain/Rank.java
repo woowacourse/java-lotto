@@ -10,9 +10,9 @@ public enum Rank {
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
-    FIFTH(3, 5_000);
-
-    private static final int MATCHED_FOURTH_OR_THIRD = 5;
+    FIFTH(3, 5_000),
+    MISS(0, 0),
+    ;
 
     private final int matched;
     private final long prize;
@@ -22,24 +22,28 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank of(final int size, final boolean isBonusBallMatched) {
-        if (size == MATCHED_FOURTH_OR_THIRD && isBonusBallMatched) {
-            return SECOND;
-        }
-        if (size == MATCHED_FOURTH_OR_THIRD) {
-            return THIRD;
+    public static Rank of(final int matched, final boolean bonusMatched) {
+        if (matched == SECOND.matched()) {
+            return getSecondOrThird(bonusMatched);
         }
         return Arrays.stream(Rank.values())
-                .filter(r -> r.matched == size)
+                .filter(r -> r.matched == matched)
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(ERROR_RANK_NOT_EXIST.message()));
+                .orElse(MISS);
     }
 
-    public int getMatched() {
+    private static Rank getSecondOrThird(final boolean bonusMatched) {
+        if (bonusMatched) {
+            return SECOND;
+        }
+        return THIRD;
+    }
+
+    public int matched() {
         return matched;
     }
 
-    public long getPrize() {
+    public long prize() {
         return prize;
     }
 }

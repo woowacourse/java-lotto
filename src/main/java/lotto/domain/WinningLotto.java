@@ -3,7 +3,6 @@ package lotto.domain;
 import static lotto.constant.ErrorMessage.ERROR_WINNING_LOTTO_DUPLICATE;
 
 import java.util.List;
-import java.util.Set;
 
 public class WinningLotto {
 
@@ -24,13 +23,11 @@ public class WinningLotto {
         }
     }
 
-    public Set<LottoNumber> getWinningAndBonusNumber() {
-        final Set<LottoNumber> totalNumbers = winningNumbers.getLottoNumbers();
-        totalNumbers.add(bonusNumber);
-        return totalNumbers;
+    public int countWinningMatched(final Lotto lotto) {
+        return winningNumbers.countMatchedNumbers(lotto);
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public boolean isBonusMatched(final Lotto lotto) {
+        return lotto.contains(bonusNumber);
     }
 }

@@ -32,10 +32,10 @@ public class Lotto {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public Set<LottoNumber> getMatchedNumbers(final Set<LottoNumber> targetNumbers) {
-        final Set<LottoNumber> copyNumbers = new HashSet<>(numbers);
-        copyNumbers.retainAll(targetNumbers);
-        return copyNumbers;
+    public int countMatchedNumbers(final Lotto targetLotto) {
+        return (int) numbers.stream()
+                .filter(targetLotto::contains)
+                .count();
     }
 
     public boolean contains(LottoNumber number) {

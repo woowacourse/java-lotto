@@ -51,18 +51,20 @@ public class OutputView {
 
     private static void printRankCounter(final RankBoard rankBoard) {
         final List<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
-        ranks.sort(Comparator.comparing(Rank::getPrize));
+        ranks.sort(Comparator.comparing(Rank::prize));
         for (Rank rank : ranks) {
-            System.out.println(makeRankString(rank, rankBoard.getCount(rank)));
+            System.out.print(makeRankString(rank, rankBoard.getCount(rank)));
         }
     }
 
     private static String makeRankString(final Rank rank, final int count) {
-        if (rank == Rank.SECOND) {
-            return String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개", rank.getMatched(), rank.getPrize(), count);
+        if (rank == Rank.MISS) {
+            return "";
         }
-        return String.format("%d개 일치 (%d원) - %d개", rank.getMatched(), rank.getPrize(),
-                count);
+        if (rank == Rank.SECOND) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개\n", rank.matched(), rank.prize(), count);
+        }
+        return String.format("%d개 일치 (%d원) - %d개\n", rank.matched(), rank.prize(), count);
     }
 
     private static void printProfitRatio(final double profitRatio) {
