@@ -35,9 +35,9 @@ public class LottoTicket {
         return new ArrayList<>(numbers);
     }
 
-    public Rank compareNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public Rank compareNumbers(LottoTicket winningNumbers, LottoNumber bonusNumber) {
         int totalMatchNumber = (int) numbers.stream()
-                .filter(winningNumbers::contains)
+                .filter(winningNumbers.getNumbers()::contains)
                 .count();
         return Rank.getMatchResult(totalMatchNumber, numbers.contains(bonusNumber));
     }

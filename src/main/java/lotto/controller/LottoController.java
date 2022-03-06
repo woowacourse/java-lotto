@@ -9,7 +9,7 @@ import lotto.domain.LottoTicketAutoStrategy;
 import lotto.domain.LottoTicketStrategy;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoTicketsDTO;
-import lotto.domain.ManualLottoTicketsGenerator;
+import lotto.domain.LottoTicketsManualGenerator;
 import lotto.domain.MoneyManager;
 import lotto.domain.Ranks;
 import lotto.domain.WinningNumbers;
@@ -63,7 +63,7 @@ public class LottoController {
     private LottoTickets createManualLottoTickets(int manualLottoCount) {
         try {
             return new LottoTickets(
-                    ManualLottoTicketsGenerator.createLottoNumbers(
+                    LottoTicketsManualGenerator.createLottoNumbers(
                             InputView.requestManualLottoNumbers(manualLottoCount)
                     ));
         } catch (RuntimeException exception) {
