@@ -5,10 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import service.LottoService;
 
 public class LottoResultTest {
 
@@ -22,7 +23,8 @@ public class LottoResultTest {
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		LottoResult lottoResult = lottos.createLottoResult(new WinningLotto(winningLotto, bonusNumber));
+		LottoResult lottoResult = new LottoService()
+			.createLottoResult(lottos,new WinningLotto(winningLotto, bonusNumber));
 		Payment payment = new Payment(5000);
 
 		double profitRate = lottoResult.calculateProfitRate(payment);

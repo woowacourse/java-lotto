@@ -26,7 +26,8 @@ public class LottosTest {
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		LottoResult lottoResult = lottos.createLottoResult(new WinningLotto(winningLotto, bonusNumber));
+		LottoResult lottoResult = new LottoService()
+			.createLottoResult(lottos,new WinningLotto(winningLotto, bonusNumber));
 		//then
 		assertThat(lottoResult.getRanks()).containsAnyOf(entry(Rank.FIFTH, 1L), entry(Rank.THIRD, 1L));
 	}
@@ -41,7 +42,8 @@ public class LottosTest {
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		LottoResult lottoResult = lottos.createLottoResult(new WinningLotto(winningLotto, bonusNumber));
+		LottoResult lottoResult = new LottoService()
+			.createLottoResult(lottos,new WinningLotto(winningLotto, bonusNumber));
 		//then
 		assertThat(lottoResult.getRanks()).containsAnyOf(entry(Rank.FIRST, 1L));
 	}

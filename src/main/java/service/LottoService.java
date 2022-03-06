@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.Lotto;
+import domain.LottoResult;
 import domain.Lottos;
 import domain.OrderForm;
+
+import domain.WinningLotto;
 
 public class LottoService implements LottoStrategy {
 
@@ -26,4 +29,9 @@ public class LottoService implements LottoStrategy {
 		lottos.addAll(autoLottos.getLottos());
 		return new Lottos(lottos);
 	}
+
+	public LottoResult createLottoResult(Lottos lottos, WinningLotto winningLotto) {
+		return LottoResult.from(lottos.countRank(winningLotto));
+	}
 }
+

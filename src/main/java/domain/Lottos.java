@@ -17,15 +17,11 @@ public class Lottos {
 		this.lottos = new ArrayList<>(lottos);
 	}
 
-	public LottoResult createLottoResult(WinningLotto winningLotto) {
-		Map<Rank, Long> ranks = LottoResult.getRankMap();
-
-		lottos.stream()
+	public Map<Rank, Long> countRank(WinningLotto winningLotto) {
+		return 	lottos.stream()
 			.map(winningLotto::calculateRank)
 			.filter(rank -> !rank.isNothing())
-			.collect(groupingBy(Function.identity(), counting()))
-			.forEach((key, value) -> ranks.merge(key, value, (v1, v2) -> v2));
-		return new LottoResult(ranks);
+			.collect(groupingBy(Function.identity(), counting()));
 	}
 
 	public List<Lotto> getLottos() {

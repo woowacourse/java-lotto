@@ -14,7 +14,13 @@ public class LottoResult {
 		this.ranks = new EnumMap<Rank, Long>(ranks);
 	}
 
-	public static Map<Rank, Long> getRankMap() {
+	public static LottoResult from(Map<Rank, Long> result) {
+		Map<Rank, Long> ranks = LottoResult.getRankMap();
+		ranks.putAll(result);
+		return new LottoResult(ranks);
+	}
+
+	private static Map<Rank, Long> getRankMap() {
 		Map<Rank, Long> ranks = new EnumMap<Rank, Long>(Rank.class);
 
 		Arrays.stream(Rank.values())

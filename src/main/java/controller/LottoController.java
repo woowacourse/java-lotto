@@ -5,14 +5,15 @@ import domain.OrderForm;
 import domain.Payment;
 import domain.WinningLotto;
 import service.LottoService;
-import service.LottoStrategy;
 import view.InputConvertor;
 import view.OutputView;
 
 public class LottoController {
-	private final LottoStrategy lottoStrategy;
-	public LottoController(LottoStrategy lottoStrategy){
-		this.lottoStrategy = lottoStrategy;
+
+	private final LottoService lottoService;
+
+	public LottoController(LottoService lottoService) {
+		this.lottoService = lottoService;
 	}
 
 	public void run() {
@@ -27,10 +28,10 @@ public class LottoController {
 
 		WinningLotto winningLotto = InputConvertor.createWinningLotto();
 
-		OutputView.printLottoResult(lottos.createLottoResult(winningLotto), payment);
+		OutputView.printLottoResult(lottoService.createLottoResult(lottos, winningLotto), payment);
 	}
 
-	private  Lottos createLottos(Lottos manualLottos, OrderForm orderForm) {
-		return lottoStrategy.createLottos(manualLottos, orderForm);
+	private Lottos createLottos(Lottos manualLottos, OrderForm orderForm) {
+		return lottoService.createLottos(manualLottos, orderForm);
 	}
 }
