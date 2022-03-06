@@ -1,4 +1,4 @@
-package lotto.domain.lottoticket;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -13,7 +13,8 @@ public class LottoNumberTest {
     @ValueSource(strings = {"0", "46", "-1"})
     @DisplayName("숫자가 범위 내에 존재하지 않는 경우 예외 발생 생성자 사용")
     void incorrectCase1(int invalidLottoNumber) {
-        assertThatThrownBy(() -> new LottoNumber(invalidLottoNumber)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoNumber(invalidLottoNumber)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 숫자는 1 이상 45 이하의 숫자만 가능합니다.");
     }
 
     @ParameterizedTest

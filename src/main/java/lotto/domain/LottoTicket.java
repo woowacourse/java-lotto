@@ -1,17 +1,14 @@
-package lotto.domain.lottoticket;
+package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public final class LottoTicket {
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final int FROM_INDEX = 0;
     private static final String DELIMITER = ",";
     private static final String DUPLICATE_ERROR = "로또 번호는 중복이 불가능합니다.";
-    private static final String COUNT_ERROR = "로또 개수는 " + LOTTO_NUMBER_COUNT + "여야 합니다.";
+    private static final String COUNT_ERROR = String.format("로또 개수는 %s여야 합니다.", LOTTO_NUMBER_COUNT);
 
     private final List<LottoNumber> value;
 
@@ -20,9 +17,7 @@ public final class LottoTicket {
     }
 
     private List<LottoNumber> generateRandomLottoNumbers() {
-        final List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumbersCache.cache);
-        Collections.shuffle(lottoNumbers);
-        return Collections.unmodifiableList(lottoNumbers.subList(FROM_INDEX, LOTTO_NUMBER_COUNT));
+        return LottoNumberGenerator.getShuffledNumbers(LOTTO_NUMBER_COUNT);
     }
 
     public static LottoTicket generateRandom() {
