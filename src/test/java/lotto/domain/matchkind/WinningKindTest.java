@@ -14,7 +14,7 @@ class WinningKindTest {
             "3, true, THREE", "4, true, FOUR"})
     void from_Test(final int matchCount, final boolean bonusHit, final WinningKind expected) {
         //when
-        final WinningKind actual = WinningKind.from(matchCount, bonusHit);
+        final WinningKind actual = WinningKind.of(matchCount, bonusHit);
         //then
         assertThat(actual).isEqualTo(expected);
     }

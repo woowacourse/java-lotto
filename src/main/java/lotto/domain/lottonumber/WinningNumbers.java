@@ -26,6 +26,6 @@ public class WinningNumbers {
 
     public WinningKind getLottoMatchResult(final Lotto anotherLotto) {
         final int matchedCount = anotherLotto.getMatchCount(lastWinningLotto);
-        return WinningKind.from(matchedCount, anotherLotto.hasSameNumberWith(bonusNumber));
+        return WinningKind.of(matchedCount, anotherLotto.hasSameNumberWith(bonusNumber));
     }
 }

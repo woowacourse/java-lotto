@@ -20,7 +20,7 @@ public enum WinningKind {
         this.winningAmount = winningAmount;
     }
 
-    public static WinningKind from(final int matchCount, final boolean bonusNumberHit) {
+    public static WinningKind of(final int matchCount, final boolean bonusNumberHit) {
         if (isFiveBonus(matchCount, bonusNumberHit)) {
             return FIVE_BONUS;
         }
