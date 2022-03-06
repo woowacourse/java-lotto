@@ -15,4 +15,13 @@ public class LottoTest {
         int ticketCount = lotto.getTicketCount();
         assertThat(ticketCount).isEqualTo(14);
     }
+
+    @Test
+    @DisplayName("투입금액으로 만들 수 있는 티켓의 개수보다 입력된 티켓의 개수가 더 크면 예외를 반환해야 합니다.")
+    void validateTicketCountTest() {
+        Lotto lotto = new Lotto(1000);
+        int ticketCount = 2;
+        assertThatThrownBy(() -> lotto.validateTicketCount(ticketCount))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
 }

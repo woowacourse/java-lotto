@@ -78,6 +78,6 @@ public class Lotto {
     }
 
     private boolean isPurchasable(int ticketCount) {
-        return presentAmount.getAmountDividedBy(LOTTO_PRICE) < ticketCount;
+        return ticketCount <= presentAmount.getAmountDividedBy(LOTTO_PRICE);
     }
 }
