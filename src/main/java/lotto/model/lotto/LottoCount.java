@@ -6,14 +6,14 @@ public class LottoCount {
     private static final int END = 0;
     private static final int UNIT = 1000;
 
-    private int count;
+    private long count;
 
     public LottoCount(long money, int count) {
         this.count = makeLottoCount(money, count);
     }
 
-    private int makeLottoCount(long money, int count) {
-        return (int) ((money / UNIT) - count);
+    private long makeLottoCount(long money, int count) {
+        return (money / UNIT) - count;
     }
 
     boolean isZero() {
