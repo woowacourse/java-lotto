@@ -1,6 +1,6 @@
 package domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;

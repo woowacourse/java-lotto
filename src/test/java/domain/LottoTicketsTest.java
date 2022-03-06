@@ -1,7 +1,6 @@
 package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import domain.strategy.NumberGenerateStrategy;
 import java.util.Arrays;
@@ -19,7 +18,8 @@ class LottoTicketsTest {
         Set<Integer> dummyLottoNumber = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         NumberGenerateStrategy numberGenerateStrategy = () -> new HashSet<>(dummyLottoNumber);
         int purchaseMoney = 17000;
-        LottoTickets lottoTickets = LottoTickets.generateAutoTickets(new LottoMoney(purchaseMoney), numberGenerateStrategy);
+        LottoTickets lottoTickets = LottoTickets.generateAutoTickets(new LottoMoney(purchaseMoney),
+                numberGenerateStrategy);
         lottoTickets.getTickets()
                 .forEach(lottoTicket -> assertThat(lottoTicket.getLottoNumberValues()).isEqualTo(dummyLottoNumber));
     }
@@ -40,7 +40,8 @@ class LottoTicketsTest {
         Set<Integer> dummyLottoNumber = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         NumberGenerateStrategy numberGenerateStrategy = () -> new HashSet<>(dummyLottoNumber);
         int purchaseMoney = 10000;
-        LottoTickets lottoTickets = LottoTickets.generateAutoTickets(new LottoMoney(purchaseMoney), numberGenerateStrategy);
+        LottoTickets lottoTickets = LottoTickets.generateAutoTickets(new LottoMoney(purchaseMoney),
+                numberGenerateStrategy);
         assertThat(lottoTickets.getTickets().size()).isEqualTo(10);
     }
 

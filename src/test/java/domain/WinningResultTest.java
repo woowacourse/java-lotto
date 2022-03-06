@@ -34,7 +34,7 @@ class WinningResultTest {
         WinningResult winningResult = WinningResult.toExtract(lottoTickets, winningTicket);
 
         assertThat(winningResult.calculateLottoRateOfReturn(purchaseMoney))
-                .isEqualTo(WinningPrize.FIRST.getPrizeMoney() / (double)(lottoTickets.getTickets().size()
+                .isEqualTo(WinningPrize.FIRST.getPrizeMoney() / (double) (lottoTickets.getTickets().size()
                         * LottoMachine.TICKET_PRICE));
     }
 }

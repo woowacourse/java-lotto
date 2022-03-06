@@ -1,6 +1,8 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.Map;
+import java.util.TreeMap;
 
 public enum WinningPrize {
     FIRST(2_000_000_000, 6),
@@ -30,6 +32,14 @@ public enum WinningPrize {
                 .filter(winningPrize -> matchCount == winningPrize.matchCount && winningPrize != SECOND)
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    public static Map<WinningPrize, Integer> initResultMap() {
+        Map<WinningPrize, Integer> result = new TreeMap<>((o1, o2) -> o1.prizeMoney - o2.prizeMoney);
+        Arrays.stream(WinningPrize.values())
+                .filter(winningPrize -> winningPrize != WinningPrize.NONE)
+                .forEach(winningPrize -> result.put(winningPrize, 0));
+        return result;
     }
 
     public boolean isMatchBonus() {
