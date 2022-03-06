@@ -1,11 +1,11 @@
 package view;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import domain.Lotto;
 import domain.LottoResult;
-import domain.Lottos;
 import domain.OrderForm;
 import domain.Payment;
 import domain.Rank;
@@ -30,8 +30,8 @@ public class OutputView {
 				orderForm.getQuantity(), orderForm.calculateAutoLottoCount()));
 	}
 
-	public static void printLottos(Lottos lottos) {
-		lottos.getLottos().stream()
+	public static void printLottos(List<Lotto> lottos) {
+		lottos.stream()
 			.forEach(OutputView::printLotto);
 		System.out.println();
 	}
@@ -43,11 +43,9 @@ public class OutputView {
 			.collect(Collectors.joining(", "))));
 	}
 
-	public static void printLottoResult(LottoResult lottoResult, Payment payment) {
-		Map<Rank, Long> ranks = lottoResult.getRanks();
+	public static void printLottoResult(Map<Rank, Long> ranks) {
 		System.out.println("\n당첨 통계\n---------");
 		ranks.forEach(OutputView::printRankCount);
-		printProfitRate(lottoResult.calculateProfitRate(payment));
 	}
 
 	private static void printRankCount(Rank rank, Long count) {
@@ -58,7 +56,7 @@ public class OutputView {
 		System.out.println(String.format(format, rank.getMatch(), rank.getMoney(), count));
 	}
 
-	private static void printProfitRate(double profitRate) {
+	public static void printProfitRate(double profitRate) {
 		String format = "총 수익률은 %.2f입니다.";
 		System.out.println(String.format(format, profitRate));
 	}

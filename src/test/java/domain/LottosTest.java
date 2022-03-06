@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import controller.dto.LottoResultDto;
 import domain.generator.AutoLottoGenerator;
 import service.LottoService;
 
@@ -26,7 +27,7 @@ public class LottosTest {
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		LottoResult lottoResult = new LottoService()
+		LottoResultDto lottoResult = new LottoService()
 			.createLottoResult(lottos, new WinningLotto(winningLotto, bonusNumber));
 		//then
 		assertThat(lottoResult.getRanks()).containsAnyOf(entry(Rank.FIFTH, 1L), entry(Rank.THIRD, 1L));
@@ -42,7 +43,7 @@ public class LottosTest {
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		LottoResult lottoResult = new LottoService()
+		LottoResultDto lottoResult = new LottoService()
 			.createLottoResult(lottos, new WinningLotto(winningLotto, bonusNumber));
 		//then
 		assertThat(lottoResult.getRanks()).containsAnyOf(entry(Rank.FIRST, 1L));
@@ -53,8 +54,8 @@ public class LottosTest {
 	@CsvSource(value = {"5:true", "6:false"}, delimiter = ':')
 	void check_Lottos_size(int size, boolean expected) {
 		//given, when
-		Lottos lottos = new AutoLottoGenerator(5, Lotto.SIZE).creatLottos();
+		List<Lotto> lottos = new AutoLottoGenerator(5).creatLottos();
 		//then
-		assertThat(lottos.getSize() == size).isEqualTo(expected);
+		assertThat(lottos.size() == size).isEqualTo(expected);
 	}
 }

@@ -1,25 +1,22 @@
 package domain.generator;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import domain.Lotto;
-import domain.Lottos;
 
 public class ManualLottoGenerator implements LottoGenerator {
 
-	private final LottoGenerator lottoGenerator;
-	private final Lottos manualLottos;
+	private final List<String[]> numbers;
 
-	public ManualLottoGenerator(LottoGenerator lottoGenerator, Lottos manualLottos) {
-		this.lottoGenerator = lottoGenerator;
-		this.manualLottos = manualLottos;
+	public ManualLottoGenerator(List<String[]> numbers) {
+		this.numbers = numbers;
 	}
 
 	@Override
-	public Lottos creatLottos() {
-		List<Lotto> lottos = new ArrayList<>(manualLottos.getLottos());
-		lottos.addAll(lottoGenerator.creatLottos().getLottos());
-		return new Lottos(lottos);
+	public List<Lotto> creatLottos() {
+		return numbers.stream()
+			.map(Lotto::of)
+			.collect(Collectors.toUnmodifiableList());
 	}
 }

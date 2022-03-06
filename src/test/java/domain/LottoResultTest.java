@@ -9,6 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import controller.dto.LottoResultDto;
 import service.LottoService;
 
 public class LottoResultTest {
@@ -23,11 +24,11 @@ public class LottoResultTest {
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		LottoResult lottoResult = new LottoService()
-			.createLottoResult(lottos,new WinningLotto(winningLotto, bonusNumber));
-		Payment payment = new Payment(5000);
+		LottoResultDto lottoResult = new LottoService().createLottoResult(lottos,
+			new WinningLotto(winningLotto, bonusNumber));
+		String payment = "5000";
 
-		double profitRate = lottoResult.calculateProfitRate(payment);
+		double profitRate = new LottoService().createProfitRate(lottoResult.getRanks(), payment);
 
 		assertThat(profitRate).isEqualTo(2.0);
 	}

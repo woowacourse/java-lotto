@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
-	public static final String DELIMITER_COMMA = ",";
+	public static final String LOTTO_NUMBER_DELIMITER = ",";
 
 	private InputView() {
 	}
@@ -27,7 +27,7 @@ public class InputView {
 	public static String[] insertManualLottos() {
 		try {
 			String inputValue = scanner.nextLine();
-			return inputValue.split(DELIMITER_COMMA);
+			return inputValue.split(LOTTO_NUMBER_DELIMITER);
 		} catch (Exception e) {
 			OutputView.printErrorMessage(e.getMessage());
 			return insertLotto();
@@ -38,7 +38,7 @@ public class InputView {
 		try {
 			OutputView.printGuideMessage("지난 주 당첨 번호를 입력해 주세요.");
 			String inputValue = scanner.nextLine();
-			return inputValue.split(DELIMITER_COMMA);
+			return inputValue.split(LOTTO_NUMBER_DELIMITER);
 		} catch (Exception e) {
 			OutputView.printErrorMessage(e.getMessage());
 			return insertLotto();

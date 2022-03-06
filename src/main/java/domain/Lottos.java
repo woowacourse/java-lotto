@@ -18,17 +18,9 @@ public class Lottos {
 	}
 
 	public Map<Rank, Long> countRank(WinningLotto winningLotto) {
-		return 	lottos.stream()
+		return lottos.stream()
 			.map(winningLotto::calculateRank)
 			.filter(rank -> !rank.isNothing())
 			.collect(groupingBy(Function.identity(), counting()));
-	}
-
-	public List<Lotto> getLottos() {
-		return new ArrayList<>(lottos);
-	}
-
-	public int getSize() {
-		return lottos.size();
 	}
 }
