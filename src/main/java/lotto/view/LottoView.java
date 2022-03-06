@@ -19,6 +19,7 @@ import lotto.dto.TicketDto;
 import lotto.dto.WinningTicketDto;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
+import lotto.view.validation.InputTicketCountValidator;
 
 public class LottoView {
 

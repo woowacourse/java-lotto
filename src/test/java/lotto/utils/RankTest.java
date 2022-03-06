@@ -9,6 +9,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.domain.rank.Rank;
+
 class RankTest {
 
     @DisplayName("번호 일치 개수와 보너스 볼 일치 여부에 따른 당첨 등수를 반환해야 한다.")

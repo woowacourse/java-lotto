@@ -8,8 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.domain.rank.Rank;
 import lotto.domain.winning.WinningTicket;
-import lotto.utils.Rank;
 
 class TicketsTest {
 

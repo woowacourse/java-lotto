@@ -1,5 +1,7 @@
 package lotto.domain.ball;
 
+import lotto.domain.ball.validation.BallValidator;
+
 public class Ball {
 
     private final int number;

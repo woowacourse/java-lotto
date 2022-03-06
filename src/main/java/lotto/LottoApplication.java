@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import lotto.domain.analysis.Analysis;
 import lotto.domain.money.Money;
+import lotto.domain.rank.Rank;
 import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.TicketBundles;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
@@ -13,7 +14,6 @@ import lotto.dto.AnalysisDto;
 import lotto.dto.TicketBundlesDto;
 import lotto.dto.TicketDto;
 import lotto.dto.WinningTicketDto;
-import lotto.utils.Rank;
 import lotto.view.LottoView;
 
 public class LottoApplication {

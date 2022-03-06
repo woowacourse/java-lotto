@@ -11,10 +11,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.ball.Ball;
 import lotto.domain.ball.BallStorage;
+import lotto.domain.rank.Rank;
 import lotto.domain.winning.WinningTicket;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
-import lotto.utils.Rank;
 
 class TicketTest {
 

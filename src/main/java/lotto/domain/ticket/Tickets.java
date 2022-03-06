@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import lotto.domain.rank.Rank;
 import lotto.domain.winning.WinningTicket;
-import lotto.utils.Rank;
 
 public class Tickets {
 

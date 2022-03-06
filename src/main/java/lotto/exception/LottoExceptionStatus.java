@@ -1,8 +1,8 @@
 package lotto.exception;
 
-import lotto.utils.BallNumberRange;
-import lotto.utils.MoneyUnit;
-import lotto.utils.TicketSize;
+import lotto.domain.ball.condition.BallNumberRange;
+import lotto.domain.money.condition.MoneyUnit;
+import lotto.domain.ticket.condition.TicketSize;
 
 public enum LottoExceptionStatus {
 

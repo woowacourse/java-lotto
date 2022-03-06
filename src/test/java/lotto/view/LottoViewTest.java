@@ -11,9 +11,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.money.condition.MoneyUnit;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
-import lotto.utils.MoneyUnit;
 import lotto.view.input.InputView;
 import lotto.view.input.reader.CustomReader;
 import lotto.view.output.OutputView;
