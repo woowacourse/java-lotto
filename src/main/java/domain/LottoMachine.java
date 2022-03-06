@@ -17,12 +17,4 @@ public class LottoMachine {
         LottoTickets autoPurchaseTickets = LottoTickets.generateAutoTickets(autoPurchaseMoney, numberGenerateStrategy);
         return selfLottoTickets.concat(autoPurchaseTickets);
     }
-
-    /*public LottoTickets purchaseSelfTickets(List<Set<Integer>> ticketNumbers) {
-        return LottoTickets.fromTicketNumbers(ticketNumbers);
-    }
-
-    public LottoTickets purchaseAutoTickets(LottoMoney purchaseMoney) {
-        return LottoTickets.generateAutoTickets(purchaseMoney, numberGenerateStrategy);
-    }*/
 }
