@@ -2,11 +2,11 @@ package domain;
 
 import java.util.Set;
 
-public class FixedNumbersGenerator implements LottoGenerator {
+public class FixedLottoGenerator implements LottoGenerator {
 
     private final Set<LottoNumber> numbers;
 
-    public FixedNumbersGenerator(Set<LottoNumber> numbers) {
+    public FixedLottoGenerator(Set<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 

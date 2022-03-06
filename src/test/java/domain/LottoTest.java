@@ -67,7 +67,7 @@ public class LottoTest {
     @DisplayName("1부터 6사이의 로또 생성시 일치 테스트")
     void generateOneToSixLottoNumberTest() {
         Set<LottoNumber> lottoNumbers = LottoNumberGenerator.of(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new FixedNumbersGenerator(lottoNumbers).generateLotto();
+        Lotto lotto = new FixedLottoGenerator(lottoNumbers).generateLotto();
         Lotto actual = new Lotto(lottoNumbers);
         assertThat(lotto).isEqualTo(actual);
     }
@@ -76,7 +76,7 @@ public class LottoTest {
     @DisplayName("5부터 10사이의 로또 생성시 일치 테스트")
     void generateFiveToTenLottoNumberTest() {
         Set<LottoNumber> lottoNumbers = LottoNumberGenerator.of(5, 6, 7, 8, 9, 10);
-        Lotto lotto = new FixedNumbersGenerator(lottoNumbers).generateLotto();
+        Lotto lotto = new FixedLottoGenerator(lottoNumbers).generateLotto();
         Lotto actual = new Lotto(lottoNumbers);
         assertThat(lotto).isEqualTo(actual);
     }
