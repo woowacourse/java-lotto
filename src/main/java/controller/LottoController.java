@@ -1,3 +1,5 @@
+package controller;
+
 import domain.*;
 import view.InputView;
 import view.OutputView;
@@ -5,7 +7,7 @@ import view.OutputView;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoMachine {
+public class LottoController {
     private static final String DELIMITER = ", ";
 
     public void start() {
@@ -30,7 +32,7 @@ public class LottoMachine {
 
     private Lottos createManualLottos(List<String> manualLottoNumbers) {
         List<Lotto> lottos = manualLottoNumbers.stream()
-                .map(LottoMachine::generateManualLotto)
+                .map(LottoController::generateManualLotto)
                 .collect(Collectors.toList());
         return new Lottos(lottos);
     }

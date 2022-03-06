@@ -1,6 +1,8 @@
+import controller.LottoController;
+
 public class Application {
     public static void main(String[] args) {
-        LottoMachine lottoMachine = new LottoMachine();
+        LottoController lottoMachine = new LottoController();
         lottoMachine.start();
 
     }
