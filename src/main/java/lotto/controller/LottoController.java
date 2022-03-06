@@ -39,15 +39,22 @@ public class LottoController {
     private LottoTickets createLottoTickets(Money money, ManualCount manualCount) {
         List<String> manualLottoTickets = inputView.inputManualLottoTickets(manualCount.getCount());
         Money changes = money.changes(manualCount.getCount());
-        LottoTickets lottoTickets = getLottoTickets(changes);
-        lottoTickets.generatorManualTickets(manualLottoTickets);
+        LottoTickets lottoTickets = getLottoTickets(manualLottoTickets, changes);
         List<LottoTicketResponse> lottoTicketsResponse = LottoTicketResponse.from(lottoTickets);
+
         outputView.outputLottoCount(manualCount.getCount(), changes.count());
         outputView.outputTickets(lottoTicketsResponse);
+
         return lottoTickets;
     }
 
-    private LottoTickets getLottoTickets(Money changes) {
+    private LottoTickets getLottoTickets(List<String> manualLottoTickets, Money changes) {
+        LottoTickets lottoTickets = getRandomLottoTickets(changes);
+        lottoTickets.generatorManualTickets(manualLottoTickets);
+        return lottoTickets;
+    }
+
+    private LottoTickets getRandomLottoTickets(Money changes) {
         return LottoTickets.buyRandomTicket(
             new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX),
             changes
