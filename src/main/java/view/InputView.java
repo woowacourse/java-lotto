@@ -10,8 +10,6 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import domain.NumOfLottery;
-
 public class InputView {
 
 	private static final Scanner scanner = new Scanner(System.in);
@@ -53,21 +51,21 @@ public class InputView {
 		return numOfManualLottery;
 	}
 
-	public List<List<Integer>> inputManualLotteryNumber(final NumOfLottery numOfLottery) {
+	public List<List<Integer>> inputManualLotteryNumber(final int numOfManualLottery) {
 		System.out.println(INPUT_MANUAL_LOTTERY_NUMBER_MESSAGE.getMessage());
 		List<List<Integer>> manualNumbers = new ArrayList<>();
 		try {
-			inputLotteryNumberToManualNumbers(numOfLottery, manualNumbers);
+			inputLotteryNumberToManualNumbers(numOfManualLottery, manualNumbers);
 			return manualNumbers;
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
-			return inputManualLotteryNumber(numOfLottery);
+			return inputManualLotteryNumber(numOfManualLottery);
 		}
 	}
 
-	private void inputLotteryNumberToManualNumbers(final NumOfLottery numOfLottery,
+	private void inputLotteryNumberToManualNumbers(final int numOfManualLottery,
 		final List<List<Integer>> manualNumbers) {
-		for (int i = 0; i < numOfLottery.getNumOfManualLottery(); i++) {
+		for (int i = 0; i < numOfManualLottery; i++) {
 			final String numbers = inputLotteryNumber();
 			manualNumbers.add(splitNumbers(numbers));
 		}

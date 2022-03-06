@@ -72,7 +72,7 @@ public class LotteryGameController {
 	}
 
 	private List<List<Integer>> inputManualLotteryNumbers() {
-		return inputView.inputManualLotteryNumber(lotteryGame.getTheNumberOfLottery());
+		return inputView.inputManualLotteryNumber(lotteryGame.getNumOfManualLottery());
 	}
 
 	private int inputNumOfManualLottery() {

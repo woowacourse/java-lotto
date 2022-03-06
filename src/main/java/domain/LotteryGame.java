@@ -71,4 +71,8 @@ public final class LotteryGame {
 		final LotteryNumber bonusLotteryBall = LotteryNumber.from(bonusBall);
 		return WinningLottery.of(lotteryNumbers, bonusLotteryBall);
 	}
+
+	public int getNumOfManualLottery() {
+		return this.numOfLottery.getNumOfManualLottery();
+	}
 }
