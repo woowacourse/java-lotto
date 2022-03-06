@@ -5,6 +5,7 @@ import domain.LottoTicket;
 import domain.Result;
 import domain.ResultStatics;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -46,15 +47,17 @@ public class OutputView {
 	}
 
 	private static void printResult(Map<ResultStatics, Integer> result) {
-		for (ResultStatics resultStatics : result.keySet()) {
-			if (resultStatics == ResultStatics.NOTHING) {
-				continue;
-			}
-			printEachResult(resultStatics, result.get(resultStatics));
-		}
+		result.keySet()
+			.stream()
+			.sorted(Comparator.comparing(ResultStatics::getPrice))
+			.forEach(eachResult -> printEachResult(eachResult, result.get(eachResult)));
 	}
 
 	private static void printEachResult(ResultStatics result, int count) {
+		if (result == ResultStatics.NOTHING) {
+			return;
+		}
+
 		String bonusDisplay = " ";
 		if (result.isHitBonus()) {
 			bonusDisplay = ", 보너스 볼 일치";

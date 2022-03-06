@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
 	private Money money;
@@ -19,15 +20,12 @@ public class LottoMachine {
 	}
 
 	public Result generateResult(AnswerLotto answerLotto) {
-		Result result = new Result();
+		List<ResultStatics> totalResults =
+			lottoTickets.stream()
+				.map(l -> l.calculate(answerLotto))
+				.collect(Collectors.toList());
 
-		for (LottoTicket lottoTicket : lottoTickets) {
-			result.addResult(lottoTicket.calculate(answerLotto));
-		}
-
-		result.calculateProfitRate(money.getValue());
-
-		return result;
+		return new Result(totalResults,money.getValue());
 	}
 
 	public List<LottoTicket> getLottoTickets() {
