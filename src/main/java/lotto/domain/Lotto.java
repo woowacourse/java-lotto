@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import lotto.utils.LottoNumbersGenerator;
@@ -11,7 +12,7 @@ public class Lotto {
 
     private final Amount nowAmount;
     private final Amount originalInputAmount;
-    private Tickets tickets = new Tickets();
+    private Tickets tickets = new Tickets(new ArrayList<>());
 
     public Lotto(int amount) {
         validateAmount(amount);

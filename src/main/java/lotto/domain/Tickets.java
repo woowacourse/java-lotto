@@ -13,10 +13,7 @@ import java.util.stream.Collectors;
 import lotto.utils.LottoNumbersGenerator;
 
 public class Tickets {
-    private List<Ticket> tickets = new ArrayList<>();
-
-    public Tickets() {
-    }
+    private final List<Ticket> tickets;
 
     public Tickets(List<Ticket> tickets) {
         this.tickets = tickets;
