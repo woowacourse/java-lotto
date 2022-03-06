@@ -15,19 +15,16 @@ public class LottoMachineTest {
 
 	@BeforeAll
 	static void setResult() {
-		LottoMachine lottoMachine = new LottoMachine(1000);
-		AnswerLotto answerLotto = AnswerLotto.of(List.of(1, 2, 3, 4, 5, 6), 7);
-		lottoMachine.purchase(
-			List.of(
-				List.of(1, 2, 3, 4, 5, 6), // FIRST
-				List.of(1, 2, 3, 4, 5, 7), // SECOND
-				List.of(1, 2, 3, 4, 5, 8), // THIRD
-				List.of(1, 2, 3, 4, 8, 9), // FOURTH
-				List.of(1, 2, 3, 8, 9, 10), // FIFTH
-				List.of(8, 9, 10, 11, 12, 13) // NOTHING
-			)
+		LottoMachine lottoMachine = new LottoMachine(1000, List.of(
+			List.of(1, 2, 3, 4, 5, 6), // FIRST
+			List.of(1, 2, 3, 4, 5, 7), // SECOND
+			List.of(1, 2, 3, 4, 5, 8), // THIRD
+			List.of(1, 2, 3, 4, 8, 9), // FOURTH
+			List.of(1, 2, 3, 8, 9, 10), // FIFTH
+			List.of(8, 9, 10, 11, 12, 13) // NOTHING
+		)
 		);
-
+		AnswerLotto answerLotto = AnswerLotto.of(List.of(1, 2, 3, 4, 5, 6), 7);
 		result = lottoMachine.generateResult(answerLotto);
 	}
 

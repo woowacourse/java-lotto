@@ -10,22 +10,19 @@ import static view.InputView.*;
 import static view.OutputView.*;
 
 public class LottoGameController {
-	private LottoMachine lottoMachine;
 
 	public void run() {
 		try {
-			lottoMachine = new LottoMachine(inputMoney());
-			purchase();
+			int money = inputMoney();
+			int manualCount = inputmanualCount();
+
+			LottoMachine lottoMachine = new LottoMachine(money, inputTotalManualNumbers(manualCount));
+			printLottoTickets(manualCount, lottoMachine.getLottoTickets());
+
 			printResult(lottoMachine.generateResult(AnswerLotto.of(inputAnswerNumbers(), inputBonusNumber())));
 		} catch (IllegalArgumentException e) {
 			printErrorMessage(e.getMessage());
 		}
-	}
-
-	private void purchase() {
-		int manualCount = inputmanualCount();
-		lottoMachine.purchase(inputTotalManualNumbers(manualCount));
-		printLottoTickets(manualCount, lottoMachine.getLottoTickets());
 	}
 
 	private List<List<Integer>> inputTotalManualNumbers(int manualCount) {
