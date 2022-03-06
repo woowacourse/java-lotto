@@ -3,8 +3,10 @@ package lotto.domain;
 public final class AmountToBuyLotto {
     private static final int LOWER_BOUND = 1000;
     private static final double DECIMAL = 1.0;
-    private static final String NOT_LOWER_BOUND_ERROR = "금액은 " + LOWER_BOUND + " 이상이어야 합니다.";
-    private static final String NOT_DIVISIBLE_NUMBER_ERROR = "금액은 " + LOWER_BOUND + "단위여야 합니다.";
+    private static final String AMOUNT_PREFIX = "금액은";
+    private static final String NOT_LOWER_BOUND_ERROR = String.format("%s %s 이상이어야 합니다.", AMOUNT_PREFIX, LOWER_BOUND);
+    private static final String NOT_DIVISIBLE_NUMBER_ERROR = String.format("%s %s 단위여야 합니다.", AMOUNT_PREFIX,
+            LOWER_BOUND);
 
     private final int value;
 
