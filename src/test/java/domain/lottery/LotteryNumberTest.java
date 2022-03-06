@@ -15,7 +15,7 @@ public class LotteryNumberTest {
 	@DisplayName("로또 번호가 1~45 범위이면 정상적으로 생성")
 	void testValidLotteryNumber(final int number) {
 		assertThatNoException().isThrownBy(() ->
-			new LotteryNumber(number)
+			LotteryNumber.from(number)
 		);
 	}
 
@@ -24,7 +24,7 @@ public class LotteryNumberTest {
 	@DisplayName("로또 번호가 1~45 범위가 아니면 오류 발생")
 	void testInvalidLotteryNumber(final int number) {
 		assertThatThrownBy(() ->
-			new LotteryNumber(number)
+			LotteryNumber.from(number)
 		).isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining(LotteryExceptionMessages.INVALID_RANGE_EXCEPTION.getMessage());
 	}

@@ -49,7 +49,7 @@ public class LotteriesTest {
 		//when
 		final Map<Rank, Integer> rankResult = lotteries.getTheNumberOfWinners(
 			WinningLottery.of(LotteryGenerator.generateLottery(Arrays.asList(1,2,3,4,5,6)),
-				new LotteryNumber(7)));
+				LotteryNumber.from(7)));
 		//then
 		for (Rank rank : rankResult.keySet()) {
 			rankResult.get(rank);

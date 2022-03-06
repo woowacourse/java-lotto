@@ -68,7 +68,7 @@ public final class LotteryGame {
 
 	public WinningLottery createWinningLottery(final List<Integer> winningNumbers, final int bonusBall) {
 		final Lottery lotteryNumbers = LotteryGenerator.generateLottery(winningNumbers);
-		final LotteryNumber bonusLotteryBall = new LotteryNumber(bonusBall);
+		final LotteryNumber bonusLotteryBall = LotteryNumber.from(bonusBall);
 		return WinningLottery.of(lotteryNumbers, bonusLotteryBall);
 	}
 }

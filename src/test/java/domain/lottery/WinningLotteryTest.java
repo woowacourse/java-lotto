@@ -35,7 +35,7 @@ public class WinningLotteryTest {
 		void theNumberOfBonusBall() {
 			winningNumbers = LotteryGenerator.generateLottery(Arrays.asList(1, 2, 3, 4, 5, 6));
 			assertThatNoException().isThrownBy(() ->
-				WinningLottery.of(winningNumbers, new LotteryNumber(10))
+				WinningLottery.of(winningNumbers, LotteryNumber.from(10))
 			);
 		}
 
@@ -44,7 +44,7 @@ public class WinningLotteryTest {
 		@ValueSource(ints = {0, 46})
 		void invalidBonusBallRange(final int bonusBall) {
 			assertThatThrownBy(() ->
-				WinningLottery.of(winningNumbers, new LotteryNumber(bonusBall))
+				WinningLottery.of(winningNumbers, LotteryNumber.from(bonusBall))
 			).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining(INVALID_RANGE_EXCEPTION.getMessage());
 		}
@@ -53,7 +53,7 @@ public class WinningLotteryTest {
 		@DisplayName("중복이 있으면 실패")
 		void duplicatedBonusBallNumber() {
 			assertThatThrownBy(() ->
-				WinningLottery.of(winningNumbers, new LotteryNumber(1))
+				WinningLottery.of(winningNumbers, LotteryNumber.from(1))
 			).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining(DUPLICATE_NUMBER_EXCEPTION.getMessage());
 		}
@@ -66,7 +66,7 @@ public class WinningLotteryTest {
 		//given
 		final Lottery lottery = LotteryGenerator.generateLottery(lottoNumbers);
 		//when
-		WinningLottery winningLottery = WinningLottery.of(winningNumbers, new LotteryNumber(7));
+		WinningLottery winningLottery = WinningLottery.of(winningNumbers, LotteryNumber.from(7));
 		//then
 		assertThat(winningLottery.getRank(lottery)).isEqualTo(rank);
 	}
