@@ -45,11 +45,7 @@
 - 6개의 LottoNumber 를 저장하고 있다.
 
 #### LottoFactory
-- Lotto 하나를 생성한다.
-
-#### LottoGame
-- 로또를 관리하는 역할을 수행한다.
-- 로또 당첨 결과를 관리한다.
+- Lotto 하나 혹은 여러개를 생성한다.
 
 #### LottoGameMoney
 - 로또 구입 금액을 의미한다.
@@ -65,6 +61,7 @@
 
 #### Lottos
 - 다수의 Lotto 들을 생성하고 관리한다.
+- 소유하고 있는 Lotto 들의 당첨 결과를 계산한다.
 
 #### RandomLottoNumbersGenerator
 - 6개의 로또 번호들을 랜덤으로 생성하는 책임을 가진다.
