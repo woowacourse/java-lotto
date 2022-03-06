@@ -8,13 +8,14 @@ import domain.LottoTickets;
 import domain.Purchase;
 import domain.Rank;
 import domain.Result;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
 
     private static final String LOTTO_PREFIX = "[";
     private static final String LOTTO_ENDFIX = "]";
     private static final String SEPARATOR = ", ";
-    private static final int DELETE_IDX = 2;
 
     public static void printError(String message) {
         System.out.println(ERROR_PREFIX + message);
@@ -28,11 +29,11 @@ public class OutputView {
     }
 
     private static void printLottoTicket(LottoTicket lottoTicket) {
-        StringBuilder result = new StringBuilder(LOTTO_PREFIX);
-        for (LottoNumber lottoNumber : lottoTicket.get()) {
-            result.append(lottoNumber.get()).append(SEPARATOR);
-        }
-        result.delete(result.length() - DELETE_IDX, result.length()).append(LOTTO_ENDFIX);
+        List<String> LottoNumbers = lottoTicket.get().stream()
+            .map(lottoNumber -> Integer.toString(lottoNumber.get()))
+            .collect(Collectors.toList());
+
+        String result = LOTTO_PREFIX + String.join(SEPARATOR, LottoNumbers) + LOTTO_ENDFIX;
         System.out.println(result);
     }
 
