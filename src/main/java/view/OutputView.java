@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    private static final int ZERO = 0;
     private static final String COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String STATISTIC_RESULT_MESSAGE = "당첨 통계\n---------";
     private static final String WINNING_MESSAGE = "%d개 일치 (%d원)- %d개\n";
@@ -47,7 +46,7 @@ public class OutputView {
         statistics.getStatistic()
                 .entrySet()
                 .stream()
-                .filter(statistic -> statistic.getKey().getCount() != ZERO)
+                .filter(statistic -> statistic.getKey().getCount() != 0)
                 .forEach(statistic -> {
                     if (statistic.getKey().hasBonusBall()) {
                         System.out.printf(SECOND_MESSAGE, statistic.getKey().getCount(), statistic.getKey().getWinningPrice(), statistic.getValue());

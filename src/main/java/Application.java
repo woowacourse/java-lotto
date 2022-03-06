@@ -12,11 +12,11 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        LottoController lottoMachine = new LottoController();
+        LottoController lottoController = new LottoController();
         int inputMoney = InputView.askInputMoney();
         int manualLottoCount = InputView.askManualLottoCount();
         List<String[]> manualLottoNumbers = InputView.askManualLottoNumbers(manualLottoCount);
-        LottoGeneratorDto lottoGeneratorDto = lottoMachine.purchase(inputMoney, manualLottoCount, manualLottoNumbers);
+        LottoGeneratorDto lottoGeneratorDto = lottoController.purchase(inputMoney, manualLottoCount, manualLottoNumbers);
         OutputView.printCountOfLotto(lottoGeneratorDto.getAutoLottoCount(), manualLottoCount);
 
         Lottos lottos = Lottos.generateLottos(lottoGeneratorDto.getLottoGenerators());
@@ -24,7 +24,7 @@ public class Application {
         String[] inputWinningNumber = InputView.askInputWinningNumber();
         int inputBonusBall = InputView.askInputBonusBall();
 
-        Statistic statistic = lottoMachine.winningResult(inputWinningNumber, inputBonusBall, lottos);
+        Statistic statistic = lottoController.winningResult(inputWinningNumber, inputBonusBall, lottos);
         OutputView.printStatistics(StatisticDto.from(statistic));
         OutputView.printProfitRate(statistic.getProfitRate(new Money(inputMoney)));
 

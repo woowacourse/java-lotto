@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -9,12 +10,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
     private static final String INVALID_LOTTO_NUMBER_RANGE = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.";
-    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
+    private static final Map<Integer, LottoNumber> CACHE;
 
     static {
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            CACHE.put(i, new LottoNumber(i));
-        }
+        CACHE = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .boxed()
+                .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
     }
 
     private final int number;
