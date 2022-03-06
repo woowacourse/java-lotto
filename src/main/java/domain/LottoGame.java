@@ -42,10 +42,10 @@ public class LottoGame {
         Validator.checkArgumentIsNull(notVerifiedWinningLottoNumbers);
         validateLottoInput(notVerifiedWinningLottoNumbers, notVerifiedBonusNumber);
         Set<LottoNumber> winningLottoNumbers = notVerifiedWinningLottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet());
         this.winningLotto = new Lotto(winningLottoNumbers);
-        this.bonusNumber = new LottoNumber(notVerifiedBonusNumber);
+        this.bonusNumber = LottoNumber.valueOf(notVerifiedBonusNumber);
     }
 
     public Map<Rewards, Integer> produceResults() {

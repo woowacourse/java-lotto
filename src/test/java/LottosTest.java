@@ -26,7 +26,7 @@ public class LottosTest {
     void compareAllLottosWithWinningLottoTest() {
         Lottos lottos = makeLottos();
         Lotto winningLotto = new Lotto(Stream.of(3, 4, 5, 6, 8, 9)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet()));
 
         assertThat(lottos.compareAllLottosWithWinningLotto(winningLotto).size()).isEqualTo(3);
@@ -36,7 +36,7 @@ public class LottosTest {
     @DisplayName("모든 로또 보너스넘버 포함 확인 기능 로또 수만큼 카운트 세는지 확인하는 테스트")
     void compareAllLottosWithBonusNumberTest() {
         Lottos lottos = makeLottos();
-        LottoNumber bonusNumber = new LottoNumber(3);
+        LottoNumber bonusNumber = LottoNumber.valueOf(3);
 
         assertThat(lottos.checkAllLottosContainNumber(bonusNumber).size()).isEqualTo(3);
     }

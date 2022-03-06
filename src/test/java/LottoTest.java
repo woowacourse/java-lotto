@@ -15,7 +15,7 @@ public class LottoTest {
     @BeforeEach
     void init() {
         lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet()));
     }
 
@@ -23,7 +23,7 @@ public class LottoTest {
     @DisplayName("당첨 로또와 비교 기능 테스트_6개")
     void countDuplicatedNumberTest() {
         Lotto winningLotto = new Lotto(Stream.of(1,2,3,4,5,6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toSet()));
 
         assertThat(lotto.countDuplicatedNumber(winningLotto)).isEqualTo(6);
@@ -32,7 +32,7 @@ public class LottoTest {
     @Test
     @DisplayName("보너스 넘버 포함 확인 기능 테스트_포함")
     void isBonusNumberContainTest() {
-        LottoNumber bonusNumber = new LottoNumber(3);
+        LottoNumber bonusNumber = LottoNumber.valueOf(3);
 
         assertThat(lotto.contains(bonusNumber)).isEqualTo(true);
     }

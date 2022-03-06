@@ -57,7 +57,7 @@ public class Lotto {
 
     private Set<LottoNumber> sortAndConvertToLottoNumberSet(List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
