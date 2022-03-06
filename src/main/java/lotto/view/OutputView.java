@@ -1,8 +1,10 @@
 package lotto.view;
 
 import java.util.Arrays;
+import java.util.List;
 import lotto.domain.CountOfLotto;
-import lotto.domain.Lottos;
+import lotto.domain.Lotto;
+import lotto.domain.LottosFactory;
 import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.RankStatistic;
@@ -24,12 +26,12 @@ public class OutputView {
         System.out.println(INPUT_LOTTO_NUMBERS_MESSAGE);
     }
 
-    public static void printLottos(Lottos lottos, CountOfLotto countOfLotto) {
+    public static void printLottos(List<Lotto> lottos, CountOfLotto countOfLotto) {
         printNewLine();
         System.out.printf(TOTAL_LOTTO_COUNT_MESSAGE_FORMAT,
                 countOfLotto.getCountOfManualLotto(),
                 countOfLotto.getCountOfAutoLotto());
-        lottos.getLottos().forEach(lotto -> System.out.printf(EACH_LOTTO_MESSAGE_FORMAT, lotto.toString()));
+        lottos.forEach(lotto -> System.out.printf(EACH_LOTTO_MESSAGE_FORMAT, lotto.toString()));
     }
 
     public static void printLottoResult(RankStatistic rankStatistic, Money money) {

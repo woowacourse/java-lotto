@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 
 class RankStatisticTest {
 
-    private Lottos lottos;
+    private LottosFactory lottosFactory;
     private WinningNumbers winningNumbers;
     private RankStatistic rankStatistic;
 
     @BeforeEach
     void setUp() {
-        lottos = Lottos.generate(List.of(Lotto.generateByManual(List.of(1,2,3,4,5,6)), Lotto.generateByManual(List.of(1,2,3,14,15,16))), 0);
+        List<Lotto> lottos = LottosFactory.generate(List.of(Lotto.generateByManual(List.of(1,2,3,4,5,6)), Lotto.generateByManual(List.of(1,2,3,14,15,16))), 0);
         winningNumbers = WinningNumbers.generate(List.of(1,2,3,4,5,7), 6);
         rankStatistic = new RankStatistic(lottos, winningNumbers);
     }

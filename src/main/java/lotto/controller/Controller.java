@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.CountOfLotto;
 import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.LottosFactory;
 import lotto.domain.Money;
 import lotto.domain.RankStatistic;
 import lotto.domain.WinningNumbers;
@@ -18,7 +18,7 @@ public class Controller {
     public void run() {
         Money money = inputMoney();
         CountOfLotto countOfLotto = inputCountOfLotto(money);
-        Lottos lottos = Lottos.generate(
+        List<Lotto> lottos = LottosFactory.generate(
                 inputManualLottos(countOfLotto.getCountOfManualLotto()),
                 countOfLotto.getCountOfAutoLotto()
         );
