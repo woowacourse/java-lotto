@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -40,11 +39,9 @@ public class LotteryGame {
 	}
 
 	private List<Lottery> generateLotteries(final LotteryGenerateStrategy lotteryGenerator, final int theNumberOfLottery) {
-		final List<Lottery> lotteries = new ArrayList<>();
-		for (int i = 0; i < theNumberOfLottery; i++) {
-			lotteries.add(lotteryGenerator.getLottery());
-		}
-		return lotteries;
+		return Stream.generate(lotteryGenerator::getLottery)
+			.limit(theNumberOfLottery)
+			.collect(Collectors.toList());
 	}
 
 	public void createWinningLottery(final List<Integer> winningNumbers, final Integer bonusBall) {
