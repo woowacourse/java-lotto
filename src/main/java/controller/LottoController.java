@@ -1,7 +1,5 @@
 package controller;
 
-import controller.dto.LottoGeneratorDto;
-import controller.dto.LottosDto;
 import domain.*;
 
 import java.util.List;
@@ -10,11 +8,12 @@ import java.util.stream.IntStream;
 
 public class LottoController {
 
-    public LottoGeneratorDto purchase(int inputMoney, int manualLottoCount, List<String[]> manualLottoNumbers) {
+    public Lottos purchase(int inputMoney, int manualLottoCount, List<String[]> manualLottoNumbers) {
         Money money = new Money(inputMoney);
         int autoLottoCount = money.getAutoLottoCount(manualLottoCount);
         List<LottoGenerator> lottoGenerators = getLottoGenerators(manualLottoNumbers, autoLottoCount);
-        return new LottoGeneratorDto(autoLottoCount, lottoGenerators);
+        return Lottos.generateLottos(lottoGenerators);
+
     }
 
     private List<LottoGenerator> getLottoGenerators(List<String[]> manualLottoNumbers, int autoLottoCount) {
@@ -25,10 +24,6 @@ public class LottoController {
                 .mapToObj(i -> new AutoLottoGenerator())
                 .forEach(lottoGenerators::add);
         return lottoGenerators;
-    }
-
-    public Lottos createLottos(LottoGeneratorDto lottoGeneratorDto) {
-        return Lottos.generateLottos(lottoGeneratorDto.getLottoGenerators());
     }
 
     public Statistic winningResult(String[] inputWinningNumber, int inputBonusBall, Lottos lottos) {

@@ -20,8 +20,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printCountOfLotto(int autoLottoCount, int manualLottoCount) {
-        System.out.printf(COUNT_MESSAGE, manualLottoCount, autoLottoCount);
+    public static void printCountOfLotto(int totalLottoCount, int manualLottoCount) {
+        System.out.printf(COUNT_MESSAGE, manualLottoCount, totalLottoCount-manualLottoCount);
     }
 
     public static void printLottos(LottosDto lottosDto) {
