@@ -26,8 +26,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber valueOf(final int number) {
-        isInCache(number);
-        return CACHE.get(number);
+        if (CACHE.containsKey(number)) {
+            return CACHE.get(number);
+        }
+        throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR_MESSAGE);
     }
 
     public static Collection<LottoNumber> values() {
@@ -36,12 +38,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public int get() {
         return number;
-    }
-
-    private static void isInCache(int number) {
-        if (!CACHE.containsKey(number)) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR_MESSAGE);
-        }
     }
 
     @Override
