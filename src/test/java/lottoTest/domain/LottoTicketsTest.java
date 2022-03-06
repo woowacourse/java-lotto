@@ -8,11 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketAutoStrategy;
 import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 
 @SuppressWarnings("NonAsciiCharacters")
 class LottoTicketsTest {

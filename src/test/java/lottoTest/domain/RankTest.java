@@ -12,12 +12,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 @SuppressWarnings("NonAsciiCharacters")
 class RankTest {
 
-    @ParameterizedTest(name = "[{index}] 매치 결과 : {0}, 반환 결과 : {2}")
-    @MethodSource("provideLottoData")
-    void 매치_결과_반환_테스트(int inputTotal, boolean inputBonusNumber, Rank inputRank) {
-        assertThat(Rank.getMatchResult(inputTotal, inputBonusNumber)).isEqualTo(inputRank);
-    }
-
     private static Stream<Arguments> provideLottoData() {
         return Stream.of(
                 Arguments.of(2, true, Rank.MATCH_MISS),
@@ -29,6 +23,12 @@ class RankTest {
                 Arguments.of(6, false, Rank.MATCH_SIX_NUMBERS),
                 Arguments.of(6, false, Rank.MATCH_SIX_NUMBERS)
         );
+    }
+
+    @ParameterizedTest(name = "[{index}] 매치 결과 : {0}, 반환 결과 : {2}")
+    @MethodSource("provideLottoData")
+    void 매치_결과_반환_테스트(int inputTotal, boolean inputBonusNumber, Rank inputRank) {
+        assertThat(Rank.getMatchResult(inputTotal, inputBonusNumber)).isEqualTo(inputRank);
     }
 
     @Test

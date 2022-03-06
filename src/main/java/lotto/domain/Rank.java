@@ -21,6 +21,18 @@ public enum Rank {
         this.matchStatus = matchStatus;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getReward() {
+        return reward;
+    }
+
+    public String getMatchStatus() {
+        return matchStatus;
+    }
+
     public static Rank getMatchResult(int total, boolean isMatchWithBonusNumber) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount == total)
@@ -31,18 +43,6 @@ public enum Rank {
 
     public double calculateTotalReward(Integer count) {
         return reward * count;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public int getReward() {
-        return reward;
-    }
-
-    public String getMatchStatus () {
-        return matchStatus;
     }
 }
 

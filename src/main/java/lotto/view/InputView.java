@@ -8,20 +8,17 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
+    public static final String ERROR_NOT_POSITIVE = "음수는 입력할 수 없습니다.";
     private static final String REQUEST_MONEY = "구입금액을 입력해 주세요.";
     private static final String REQUEST_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String REQUEST_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String REQUEST_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-
     private static final String ERROR_NON_INTEGER_FORMAT = "숫자 형태로 입력해야 합니다.";
     private static final String ERROR_INVALID_INPUT_NUMBER_FORMAT = "구입 금액은 구분자(', ')로 구분된 숫자 형태로 입력해야 합니다.";
     private static final String ERROR_NULL_OR_EMPTY = "입력은 null 혹은 빈 문자열일 수 없습니다.";
-
     private static final String DELIMITER = ", ";
-
     private static final Scanner scanner = new Scanner(System.in);
-    public static final String ERROR_NOT_POSITIVE = "음수는 입력할 수 없습니다.";
 
     public static int requestMoney() throws RuntimeException {
         System.out.println(REQUEST_MONEY);
