@@ -1,14 +1,16 @@
 package domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import static constant.LottoConstant.*;
-
 public class LottoTicket {
+	private static final int NUMBER_OF_NUMBERS = 6;
+	private static final int NUMBER_FOR_BONUS_CHECK = 5;
 	private static final String NUMBER_OF_NUMBERS_IS_NOT_CORRECT = NUMBER_OF_NUMBERS + "개의 숫자만 허용됩니다.";
 	private static final String NUMBERS_MUST_NOT_DUPLICATED = "숫자들은 중복일 수 없습니다.";
-	private static final int NUMBER_FOR_BONUS_CHECK = 5;
 
 	private final Set<LottoNumber> numbers;
 
