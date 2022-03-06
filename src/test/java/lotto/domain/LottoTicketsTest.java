@@ -21,7 +21,7 @@ class LottoTicketsTest {
         money = new Money(3000);
          generator = new RandomNumberGenerator(LottoNumber.MIN,
             LottoNumber.MAX);
-        lottoTickets = LottoTickets.buyRandomTicket(generator, money);
+        lottoTickets = LottoTickets.buyAutoTicket(generator, money);
     }
 
     @Test

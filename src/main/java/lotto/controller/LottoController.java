@@ -49,13 +49,13 @@ public class LottoController {
     }
 
     private LottoTickets getLottoTickets(List<String> manualLottoTickets, Money changes) {
-        LottoTickets lottoTickets = getRandomLottoTickets(changes);
+        LottoTickets lottoTickets = getAutoLottoTickets(changes);
         lottoTickets.generatorManualTickets(manualLottoTickets);
         return lottoTickets;
     }
 
-    private LottoTickets getRandomLottoTickets(Money changes) {
-        return LottoTickets.buyRandomTicket(
+    private LottoTickets getAutoLottoTickets(Money changes) {
+        return LottoTickets.buyAutoTicket(
             new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX),
             changes
         );

@@ -15,7 +15,7 @@ public class LottoTickets {
         this.tickets = tickets;
     }
 
-    public static LottoTickets buyRandomTicket(NumberGenerator generator, Money money) {
+    public static LottoTickets buyAutoTicket(NumberGenerator generator, Money money) {
         List<LottoTicket> tickets = IntStream.range(0, money.count())
             .mapToObj(x -> LottoTicket.createRandomTicket(generator))
             .collect(Collectors.toList());
