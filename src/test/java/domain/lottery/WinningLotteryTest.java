@@ -60,15 +60,16 @@ public class WinningLotteryTest {
 	}
 
 	@DisplayName("당첨번호, 보너스와 입력된 로또 번호를 비교해 올바른 등수를 확인")
-	@ParameterizedTest(name = "{index} {displayName} rank={0}")
+	@ParameterizedTest(name = "{index} {displayName} expectedRank={0}")
 	@MethodSource("generateParameter")
-	void checkRank(final List<Integer> lottoNumbers, final Rank rank) {
+	void checkRank(final List<Integer> lottoNumbers, final Rank expectedRank) {
 		//given
 		final Lottery lottery = LotteryGenerator.generateLottery(lottoNumbers);
-		//when
 		WinningLottery winningLottery = WinningLottery.of(winningNumbers, LotteryNumber.from(7));
+		//when
+		Rank resultRank = winningLottery.getRank(lottery);
 		//then
-		assertThat(winningLottery.getRank(lottery)).isEqualTo(rank);
+		assertThat(resultRank).isEqualTo(expectedRank);
 	}
 
 	static Stream<Arguments> generateParameter() {

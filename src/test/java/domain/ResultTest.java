@@ -31,8 +31,8 @@ public class ResultTest {
 		WinningLottery winningLottery = lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
 		Result result = Result.makeResult(lotteries, winningLottery);
-		final Map<Rank, Integer> rankResult = result.getRankResult();
 		//then
+		final Map<Rank, Integer> rankResult = result.getRankResult();
 		for (Rank rank : rankResult.keySet()) {
 			rankResult.get(rank);
 			assertThat(rankResult.get(rank)).isEqualTo(1);
