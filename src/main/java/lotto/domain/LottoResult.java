@@ -38,8 +38,9 @@ public class LottoResult {
     }
 
     private int calculatePurchaseMoney() {
-        return rankResults.entrySet().stream().map(Entry::getValue).reduce(0, Integer::sum)
-                * Lotto.LOTTO_PURCHASE_MONEY;
+        return rankResults.entrySet().stream()
+                .mapToInt(Entry::getValue)
+                .sum() * Lotto.LOTTO_PURCHASE_MONEY;
     }
 
     public Map<Rank, Integer> getRankResults() {
