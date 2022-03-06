@@ -24,6 +24,6 @@ public class LottoNumbersTest {
 	void checkLottoNumbersMatchingBonus() {
 		LottoNumbers lottoNumbers = LottoNumbers.from(new TestLottoNumberGenerationStrategy());
 		LottoNumber bonus = LottoNumber.valueOf(1);
-		assertThat(lottoNumbers.checkMatchWithBonus(bonus)).isTrue();
+		assertThat(lottoNumbers.containLottoNumber(bonus)).isTrue();
 	}
 }

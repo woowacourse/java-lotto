@@ -30,7 +30,7 @@ public class InputView {
 		return scanner.nextLine();
 	}
 
-	public void inputManualLottoMessage() {
+	public void requireManualLottoMessage() {
 		System.out.println(INPUT_MANUAL_LOTTOS_MESSAGE);
 	}
 }

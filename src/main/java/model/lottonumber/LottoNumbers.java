@@ -29,7 +29,7 @@ public class LottoNumbers {
 			.count();
 	}
 
-	public boolean checkMatchWithBonus(LottoNumber number) {
+	public boolean containLottoNumber(LottoNumber number) {
 		return numbers.contains(number);
 	}
 

@@ -10,10 +10,10 @@ public class Lotto {
 	public Lotto(LottoNumbers numbers) {
 		this.numbers = numbers;
 	}
-	
+
 	public Rank match(WinningLottoNumberDTO winningLottoNumbersDTO) {
 		long matchCount = numbers.countMatchedNumbers(winningLottoNumbersDTO.getWinningNumbers());
-		boolean matchBonus = numbers.checkMatchWithBonus(winningLottoNumbersDTO.getBonusBall());
+		boolean matchBonus = numbers.containLottoNumber(winningLottoNumbersDTO.getBonusBall());
 		return Rank.getRank(matchCount, matchBonus);
 	}
 

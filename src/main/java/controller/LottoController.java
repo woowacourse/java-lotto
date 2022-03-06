@@ -69,7 +69,7 @@ public class LottoController {
 
 	private Lottos makeLottos(LottoCount manualLottoCount, LottoCount automaticLottoCount) {
 		try {
-			inputView.inputManualLottoMessage();
+			inputView.requireManualLottoMessage();
 			return new Lottos(manualLottoCount, manualStrategy, automaticLottoCount, automaticStrategy);
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());

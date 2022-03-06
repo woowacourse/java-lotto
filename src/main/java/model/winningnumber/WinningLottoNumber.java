@@ -14,9 +14,9 @@ public class WinningLottoNumber {
 		this.winningNumbers = winningNumbers;
 		this.bonusBall = bonusBall;
 	}
-	
+
 	private void validateReduplicationWithBonusBall(LottoNumbers numbers, LottoNumber number) {
-		if (numbers.checkMatchWithBonus(number)) {
+		if (numbers.containLottoNumber(number)) {
 			throw new IllegalArgumentException(REDUPLICATION_WITH_BONUS_BALL_ERROR_MESSAGE);
 		}
 	}
