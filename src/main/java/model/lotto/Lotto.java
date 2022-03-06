@@ -17,6 +17,10 @@ public class Lotto {
 		return Rank.getRank(matchCount, matchBonus);
 	}
 
+	public LottoNumbers getNumbers() {
+		return numbers;
+	}
+
 	@Override
 	public String toString() {
 		return numbers.toString();

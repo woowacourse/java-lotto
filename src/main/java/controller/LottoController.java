@@ -78,11 +78,22 @@ public class LottoController {
 	}
 
 	private void printLottos(LottoCount manualLottoCount, LottoCount automaticLottoCount, Lottos lottos) {
-		List<String> lottoPrint = lottos.getLottoStorage()
+		outputView.printLottos(manualLottoCount.getCount(), automaticLottoCount.getCount(),
+			translateLottosForPrint(lottos));
+	}
+
+	private List<List<Integer>> translateLottosForPrint(Lottos lottos) {
+		List<LottoNumbers> amountOfLottoNumbers = lottos.getLottoStorage()
 			.stream()
-			.map(Lotto::toString)
+			.map(Lotto::getNumbers)
 			.collect(Collectors.toList());
-		outputView.printLottos(manualLottoCount.getCount(), automaticLottoCount.getCount(), lottoPrint);
+		List<List<LottoNumber>> amountOfLottoNumber = amountOfLottoNumbers.stream()
+			.map(LottoNumbers::getNumbers)
+			.collect(Collectors.toList());
+		return amountOfLottoNumber.stream()
+			.map(lottoNumberList -> lottoNumberList.stream().map(LottoNumber::getNumber).collect(
+				Collectors.toList()))
+			.collect(Collectors.toList());
 	}
 
 	private WinningLottoNumber storeWinningNumber() {

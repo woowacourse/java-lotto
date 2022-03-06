@@ -16,7 +16,7 @@ public class OutputView {
 		System.out.println(message);
 	}
 
-	public void printLottos(int passiveSize, int autoSize, List<String> lottoPrints) {
+	public void printLottos(int passiveSize, int autoSize, List<List<Integer>> lottoPrints) {
 		System.out.println(String.format(PURCHASE_MESSAGE, passiveSize, autoSize));
 		lottoPrints.stream()
 			.forEach(lottoPrint -> System.out.println(lottoPrint));
