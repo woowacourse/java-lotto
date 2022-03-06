@@ -3,7 +3,7 @@ package controller;
 import domain.LottoMoney;
 import domain.LottoCount;
 import domain.WinningTicket;
-import domain.LottoResult;
+import domain.WinningResult;
 import domain.strategy.RandomNumberGenerateStrategy;
 import java.util.List;
 import java.util.Map;
@@ -30,8 +30,8 @@ public class LottoController {
         LottoTickets lottoTickets = purchaseTickets(selfPurchaseCount, autoPurchaseMoney);
         showGeneratedLottoTickets(lottoTickets);
         WinningTicket winningTicket = inputWinningNumbers();
-        LottoResult lottoResult = lottoGame.createWinningResult(lottoTickets, winningTicket);
-        showLottoResult(lottoResult);
+        WinningResult winningResult = lottoGame.createWinningResult(lottoTickets, winningTicket);
+        showLottoResult(winningResult, winningResult.calculateLottoRateOfReturn(purchaseMoney));
     }
 
     private LottoMoney inputPurchaseMoney() {
@@ -90,9 +90,9 @@ public class LottoController {
         }
     }
 
-    private void showLottoResult(LottoResult lottoResult) {
-        List<WinningResultDto> winningResultDtos = toWinningResultDtos(lottoResult.getCountOfWinning());
-        OutputView.showLottoResult(winningResultDtos, lottoResult.calculateLottoRateOfReturn());
+    private void showLottoResult(WinningResult winningResult, double rateOfReturn) {
+        List<WinningResultDto> winningResultDtos = toWinningResultDtos(winningResult.getCountOfWinning());
+        OutputView.showLottoResult(winningResultDtos, rateOfReturn);
     }
 
     private List<WinningResultDto> toWinningResultDtos(Map<WinningPrize, Integer> countOfWinning) {

@@ -1,27 +1,24 @@
 package domain;
 
 import domain.strategy.WinningPrizeStrategy;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class LottoResult {
+public class WinningResult {
     private static final int INIT_COUNT = 0;
     private static final int COUNT_UNIT = 1;
 
     private final Map<WinningPrize, Integer> countOfWinning;
-    private final int purchaseTicketCount;
 
-    private LottoResult(Map<WinningPrize, Integer> countOfWinning, int purchaseTicketCount) {
+    private WinningResult(Map<WinningPrize, Integer> countOfWinning) {
         this.countOfWinning = countOfWinning;
-        this.purchaseTicketCount = purchaseTicketCount;
     }
 
-    public static LottoResult toExtract(LottoTickets lottoTickets,
-                                        WinningTicket winningTicket,
-                                        WinningPrizeStrategy winningPrizeStrategy) {
+    public static WinningResult toExtract(LottoTickets lottoTickets,
+                                          WinningTicket winningTicket,
+                                          WinningPrizeStrategy winningPrizeStrategy) {
         Map<WinningPrize, Integer> countOfWinning = countWinning(lottoTickets, winningTicket, winningPrizeStrategy);
-        return new LottoResult(countOfWinning, lottoTickets.getTickets().size());
+        return new WinningResult(countOfWinning);
     }
 
     private static Map<WinningPrize, Integer> countWinning(LottoTickets lottoTickets,
@@ -57,9 +54,9 @@ public class LottoResult {
         }
     }
 
-    public double calculateLottoRateOfReturn() {
+    public double calculateLottoRateOfReturn(LottoMoney purchaseMoney) {
         int totalReturn = sumTotalReturn();
-        return totalReturn / (double) (purchaseTicketCount * LottoGame.TICKET_PRICE);
+        return totalReturn / (double) (purchaseMoney.getValue());
     }
 
     private int sumTotalReturn() {

@@ -18,8 +18,8 @@ public class LottoGame {
         return LottoTickets.generateAutoTickets(purchaseMoney, numberGenerateStrategy);
     }
 
-    public LottoResult createWinningResult(LottoTickets lottoTickets, WinningTicket winningTicket) {
-        return LottoResult.toExtract(lottoTickets, winningTicket, winningPrizeStrategy);
+    public WinningResult createWinningResult(LottoTickets lottoTickets, WinningTicket winningTicket) {
+        return WinningResult.toExtract(lottoTickets, winningTicket, winningPrizeStrategy);
     }
 
     public int findMatchCount(WinningPrize winningPrize) {
