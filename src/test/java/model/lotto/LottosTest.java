@@ -2,20 +2,16 @@ package model.lotto;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import strategy.InputLottoNumbersGenerationStrategy;
 import strategy.RandomLottoNumbersGenerationStrategy;
+import strategy.TestLottoNumberGenerationStrategy;
 
 public class LottosTest {
-	class Strategy extends InputLottoNumbersGenerationStrategy {
-		@Override
-		public String inputNumbers() {
-			return "1,2,3,4,5,6";
-		}
-	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {3, 2, 1})
@@ -23,7 +19,8 @@ public class LottosTest {
 	void checkLottos(int number) {
 		LottoCount lottoCount = new LottoCount(number);
 		LottoCount lottoCount2 = new LottoCount(number);
-		Lottos lottos = new Lottos(lottoCount, new Strategy(), lottoCount2, new RandomLottoNumbersGenerationStrategy());
+		Lottos lottos = new Lottos(lottoCount, new TestLottoNumberGenerationStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)),
+			lottoCount2, new RandomLottoNumbersGenerationStrategy());
 		System.out.println(lottos.getLottoStorage().size());
 		assertThat(lottos.getLottoStorage().size()).isEqualTo(number * 2);
 	}

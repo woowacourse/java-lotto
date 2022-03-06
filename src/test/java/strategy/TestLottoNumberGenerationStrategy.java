@@ -1,6 +1,5 @@
 package strategy;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,10 +7,15 @@ import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbersGenerationStrategy;
 
 public class TestLottoNumberGenerationStrategy implements LottoNumbersGenerationStrategy {
+	public final List<Integer> numbers;
+
+	public TestLottoNumberGenerationStrategy(List<Integer> numbers) {
+		this.numbers = numbers;
+	}
 
 	@Override
 	public List<LottoNumber> generate(int size) {
-		return Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+		return numbers.stream()
 			.map(number -> LottoNumber.valueOf(number))
 			.collect(Collectors.toList());
 	}
