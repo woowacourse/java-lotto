@@ -6,7 +6,7 @@ import static lotterymachine.model.ErrorMessage.NOT_PURCHASABLE_COUNT;
 import java.util.Objects;
 
 public class Count {
-    private int number;
+    private final int number;
 
     private Count(int number) {
         validateInteger(number);
@@ -22,8 +22,8 @@ public class Count {
         return new Count(number);
     }
 
-    public void increase() {
-        this.number++;
+    public Count increase() {
+        return new Count(this.number + 1);
     }
 
     public Count subtract(Count manualTickets) {

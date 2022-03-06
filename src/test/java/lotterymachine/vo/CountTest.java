@@ -9,8 +9,7 @@ class CountTest {
     @Test
     @DisplayName("개수를 1만큼 증가시킨다.")
     void increase() {
-        Count count = Count.from(1);
-        count.increase();
+        Count count = Count.from(1).increase();
         Count expected = Count.from(2);
         assertThat(count).isEqualTo(expected);
     }
