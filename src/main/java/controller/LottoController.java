@@ -4,13 +4,16 @@ import domain.*;
 import view.InputConvertor;
 import view.OutputView;
 
+import java.util.List;
+
 public class LottoController {
 
     public void run() {
         Payment payment = InputConvertor.createPayment();
         LottoOrder lottoOrder = InputConvertor.createManualTicketCount(payment);
-        LottoGame lottoGame = new LottoGame(new LottoMachine(), lottoOrder);
+        List<Lotto> manualLottos = InputConvertor.createManualLottos(lottoOrder.getManualTicketCount());
 
+        LottoGame lottoGame = new LottoGame(new LottoMachine(), lottoOrder, manualLottos);
         Lottos lottos = createLottos(lottoGame);
         WinningLotto winningLotto = InputConvertor.createWinningLotto();
 

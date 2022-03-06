@@ -1,22 +1,21 @@
 package domain;
 
-import view.InputConvertor;
-
 import java.util.List;
 
 public class LottoGame {
     private final LottoMachine lottoMachine;
     private final LottoOrder lottoOrder;
+    private final List<Lotto> manualLottos;
 
-    public LottoGame(LottoMachine lottoMachine, LottoOrder lottoOrder) {
+    public LottoGame(LottoMachine lottoMachine, LottoOrder lottoOrder, List<Lotto> manualLottos) {
         this.lottoMachine = lottoMachine;
         this.lottoOrder = lottoOrder;
+        this.manualLottos = manualLottos;
     }
 
     public Lottos createLottos() {
-        List<Lotto> lottos = InputConvertor.createManualLottos(getManualTicketCount());
-        Lottos manualLottos = lottoMachine.createManualLottos(lottos);
-        Lottos autoLottos = lottoMachine.createAutoLottos(getAutoTicketCount());
+        Lottos manualLottos = lottoMachine.createManualLottos(this.manualLottos);
+        Lottos autoLottos = lottoMachine.createAutoLottos(lottoOrder.getAutoTicketCount());
         return autoLottos.joinLottos(manualLottos);
     }
 
