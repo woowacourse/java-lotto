@@ -15,11 +15,11 @@ public class LottoController {
         final LottoMachine lottoMachine = getlottoMachine(purchaseAmount);
 
         InputView.printGetManualLottosMessage();
-        final Lottos lottos = lottoMachine.makeManualAndAutoLottos(getInputManualLottos(lottoMachine.getManualLottoCount()));
-        OutputView.printLottos(lottoMachine.getManualLottoCount(), lottoMachine.getAutoLottoCount(), lottos.getLottos());
+        final List<Lotto> lottos = lottoMachine.makeManualAndAutoLottos(getInputManualLottos(lottoMachine.getManualLottoCount()));
+        OutputView.printLottos(lottoMachine.getManualLottoCount(), lottoMachine.getAutoLottoCount(), lottos);
 
         final WinningLotto winningLotto = getWinningLotto();
-        final RankBoard rankBoard = new RankBoard(winningLotto, lottos.getLottos());
+        final RankBoard rankBoard = new RankBoard(winningLotto, lottos);
         OutputView.printResult(rankBoard, rankBoard.calculateProfitRatio(purchaseAmount.getAmount()));
     }
 
