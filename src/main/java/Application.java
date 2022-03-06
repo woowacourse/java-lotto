@@ -27,21 +27,13 @@ public class Application {
     private static Lottos createLottos(LottoGameMoney purchaseMoney) {
         final int manualLottoCount = InputView.getManualLottoCount();
         final LottoCount lottoCount = purchaseMoney.getPurchaseLottoCount(manualLottoCount);
+        List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(manualLottoCount);
 
-        final List<Lotto> lottos = createManualLottos(manualLottoCount);
-        lottos.addAll(createAutoLottos(lottoCount));
+        final List<Lotto> lottos = LottoFactory.createLottos(lottoCount, manualLottoNumbers,
+            new RandomLottoNumbersGenerator());
         OutputView.showPurchasedLottos(lottoCount, lottos);
 
         return new Lottos(lottos);
-    }
-
-    private static List<Lotto> createManualLottos(int lottoCount) {
-        List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(lottoCount);
-        return LottoFactory.createLottos(manualLottoNumbers);
-    }
-
-    private static List<Lotto> createAutoLottos(LottoCount lottoCount) {
-        return LottoFactory.createAutoLottos(lottoCount, new RandomLottoNumbersGenerator());
     }
 
     private static WinningLotto createWinningLotto() {

@@ -9,21 +9,19 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static List<Lotto> createAutoLottos(LottoCount LottoCount, LottoNumbersGenerator lottoNumbersGenerator) {
-        return IntStream.range(0, LottoCount.autoLottoCount()).boxed()
-            .map(i -> createAutoLotto(lottoNumbersGenerator))
-            .collect(Collectors.toList());
-    }
-
-    public static Lotto createAutoLotto(LottoNumbersGenerator lottoNumbersGenerator) {
-        List<LottoNumber> lottoNumbers = lottoNumbersGenerator.generate();
-        return new Lotto(lottoNumbers);
-    }
-
-    public static List<Lotto> createLottos(List<List<Integer>> numberLists) {
-        return numberLists.stream()
+    public static List<Lotto> createLottos(LottoCount LottoCount, List<List<Integer>> manualLottoNumbers,
+        LottoNumbersGenerator autoLottoNumbersGenerator) {
+        List<Lotto> lottos = manualLottoNumbers.stream()
             .map(LottoFactory::createLotto)
             .collect(Collectors.toList());
+        lottos.addAll(IntStream.range(0, LottoCount.autoLottoCount()).boxed()
+            .map(i -> createLotto(autoLottoNumbersGenerator))
+            .collect(Collectors.toList()));
+        return lottos;
+    }
+
+    public static Lotto createLotto(LottoNumbersGenerator lottoNumbersGenerator) {
+        return new Lotto(lottoNumbersGenerator.generate());
     }
 
     public static Lotto createLotto(List<Integer> numbers) {
