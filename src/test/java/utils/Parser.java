@@ -12,4 +12,10 @@ public class Parser {
 			.map(LotteryNumber::new)
 			.collect(Collectors.toList());
 	}
+
+	public static List<Integer> toIntegerList(final List<LotteryNumber> numbers) {
+		return numbers.stream()
+			.map(LotteryNumber::getLotteryNumber)
+			.collect(Collectors.toList());
+	}
 }

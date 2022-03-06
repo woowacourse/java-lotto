@@ -1,38 +1,54 @@
 package domain;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import domain.factory.LotteryNumberFactory;
 import domain.generatestrategy.LotteryGenerateStrategy;
 
 public class LotteryGame {
 
-	private final PurchaseAmount purchaseAmount;
-	private final LotteryGenerateStrategy lotteryGenerator;
+	private final PurchaseInformation purchaseInformation;
+	private final LotteryGenerateStrategy autoLotteryGenerator;
+	private final LotteryGenerateStrategy manualLotteryGenerator;
+	private final LotteryNumberFactory lotteryNumberFactory;
+
 	private Lotteries lotteries;
 	private WinningLottery winningLottery;
 
-	public LotteryGame(final PurchaseAmount purchaseAmount, final LotteryGenerateStrategy lotteryGenerator) {
-		this.purchaseAmount = purchaseAmount;
-		this.lotteryGenerator = lotteryGenerator;
-		createAutoLottery();
+	public LotteryGame(final PurchaseInformation purchaseInformation, final LotteryGenerateStrategy autoLotteryGenerator,
+			final LotteryGenerateStrategy manualLotteryGenerator, final LotteryNumberFactory lotteryNumberFactory) {
+		this.purchaseInformation = purchaseInformation;
+		this.autoLotteryGenerator = autoLotteryGenerator;
+		this.manualLotteryGenerator = manualLotteryGenerator;
+		this.lotteryNumberFactory = lotteryNumberFactory;
+		createLottery();
 	}
 
-	private void createAutoLottery() {
-		final List<Lottery> createdLotteries = new ArrayList<>();
-		for (int i = 0; i < purchaseAmount.getTheNumberOfPurchasedLotteries(); i++) {
-			createdLotteries.add(lotteryGenerator.getNumbers());
-		}
-		lotteries = new Lotteries(createdLotteries);
+	private void createLottery() {
+		final List<Lottery> lotteryNumbers = Stream.of(
+				 generateLotteries(autoLotteryGenerator, purchaseInformation.getTheNumberOfAutoPurchasedLotteries()),
+				generateLotteries(manualLotteryGenerator, purchaseInformation.getTheNumberOfManualLotteries())
+			)
+			.flatMap(Collection::stream)
+			.collect(Collectors.toList());
+		lotteries = new Lotteries(lotteryNumbers);
+	}
+
+	private List<Lottery> generateLotteries(final LotteryGenerateStrategy lotteryGenerator, final int theNumberOfLottery) {
+		return Stream.generate(lotteryGenerator::getLottery)
+			.limit(theNumberOfLottery)
+			.collect(Collectors.toList());
 	}
 
 	public void createWinningLottery(final List<Integer> winningNumbers, final Integer bonusBall) {
 		final List<LotteryNumber> winningLotteryNumbers = winningNumbers.stream()
-			.map(LotteryNumber::new)
+			.map(lotteryNumberFactory::of)
 			.collect(Collectors.toList());
-		winningLottery = new WinningLottery(winningLotteryNumbers, new LotteryNumber(bonusBall));
+		winningLottery = new WinningLottery(winningLotteryNumbers, lotteryNumberFactory.of(bonusBall));
 	}
 
 	public Map<Rank, Integer> makeWinner() {
@@ -40,11 +56,11 @@ public class LotteryGame {
 	}
 
 	public double makeRankingPercent(final Map<Rank, Integer> rankResult) {
-		int earningAmount = 0;
+		long earningAmount = 0;
 		for (Rank rank : rankResult.keySet()) {
 			earningAmount += rankResult.get(rank) * rank.getPrize();
 		}
-		return purchaseAmount.calculateEarningRate(earningAmount);
+		return purchaseInformation.calculateEarningRate(earningAmount);
 	}
 
 	public List<Lottery> getLotteries() {

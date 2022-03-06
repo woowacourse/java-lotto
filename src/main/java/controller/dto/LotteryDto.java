@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import domain.LotteryNumber;
 
 public class LotteryDto {
+
 	private final List<Integer> numbers;
 
 	private LotteryDto(final List<LotteryNumber> lotteryNumbers) {

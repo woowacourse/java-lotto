@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import domain.generatestrategy.LotteryRandomGeneratorStrategy;
+import domain.generatestrategy.RandomLotteryGeneratorStrategy;
 
 public class LotteriesTest {
 
@@ -18,10 +18,10 @@ public class LotteriesTest {
 	@ValueSource(ints = {1, 100, 50})
 	void lotteries_number(final int lotteryNumber){
 		final List<Lottery> lotteriesNumber = new ArrayList<>();
-		final LotteryRandomGeneratorStrategy lotteryGenerator = new LotteryRandomGeneratorStrategy();
+		final RandomLotteryGeneratorStrategy lotteryGenerator = new RandomLotteryGeneratorStrategy();
 
-		for (int i = 0 ; i < lotteryNumber; i++) {
-			lotteriesNumber.add(lotteryGenerator.getNumbers());
+		for (int i = 0; i < lotteryNumber; i++) {
+			lotteriesNumber.add(lotteryGenerator.getLottery());
 		}
 		final Lotteries lotteries = new Lotteries(lotteriesNumber);
 

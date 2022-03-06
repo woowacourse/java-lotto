@@ -15,7 +15,7 @@ public enum Rank {
 	private static final int SECOND_THIRD_CORRECTED_BALLS = 5;
 
 	private final int correctedBalls;
-	private final int prize;
+	private final long prize;
 
 	Rank(final int correctedBalls, final int prize) {
 		this.correctedBalls = correctedBalls;
@@ -26,20 +26,23 @@ public enum Rank {
 		return correctedBalls;
 	}
 
-	public int getPrize() {
+	public long getPrize() {
 		return prize;
 	}
 
 	public static Rank getRank(final int winningCount, boolean hasBonusBall) {
-		Rank properRank = Arrays.stream(values())
+		if (isThirdRank(winningCount, hasBonusBall)) {
+			return Rank.THIRD;
+		}
+
+		return Arrays.stream(values())
 			.filter(rank -> rank.getCorrectedBalls() == winningCount)
 			.findFirst()
 			.orElse(Rank.NONE);
+	}
 
-		if (properRank.getCorrectedBalls() == SECOND_THIRD_CORRECTED_BALLS && !hasBonusBall) {
-			return Rank.THIRD;
-		}
-		return properRank;
+	private static boolean isThirdRank(final int winningCount, final boolean hasBonusBall) {
+		return winningCount == SECOND_THIRD_CORRECTED_BALLS && !hasBonusBall;
 	}
 
 	public static List<Rank> getValuesExceptNoneRank() {

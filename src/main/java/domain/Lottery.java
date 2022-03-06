@@ -2,11 +2,13 @@ package domain;
 
 import java.util.List;
 
-import utils.LotteryMessage;
-
 public class Lottery {
 
 	public static final int LOTTERY_SIZE = 6;
+
+	private static final String LOTTERY_SIZE_ERROR = LotteryNumber.LOTTERY_NUMBER + "는 "
+		+ LOTTERY_SIZE + "개여야 합니다.";
+
 	private final List<LotteryNumber> numbers;
 
 	public Lottery(final List<LotteryNumber> numbers) {
@@ -14,10 +16,9 @@ public class Lottery {
 		this.numbers = numbers;
 	}
 
-
 	private void validateSize(final int size) {
 		if (size != LOTTERY_SIZE) {
-			throw new IllegalArgumentException(LotteryMessage.LOTTERY_SIZE_ERROR);
+			throw new IllegalArgumentException(LOTTERY_SIZE_ERROR);
 		}
 	}
 

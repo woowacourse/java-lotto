@@ -14,10 +14,12 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import domain.factory.LotteryNumberFactory;
 import utils.Parser;
 
 public class WinningLotteryTest {
 
+	final LotteryNumberFactory lotteryNumberFactory = new LotteryNumberFactory();
 	final List<LotteryNumber> winningNumbers = Parser.toLotteryNumberList(Arrays.asList(1, 2, 3, 4, 5, 6));
 
 	@Nested
@@ -28,7 +30,7 @@ public class WinningLotteryTest {
 		@DisplayName("범위가 1~45 이면서 당첨번호와 중복이 없으면 통과")
 		void theNumberOfBonusBall() {
 			assertThatNoException().isThrownBy(() -> {
-				new WinningLottery(winningNumbers, new LotteryNumber(10));
+				new WinningLottery(winningNumbers, lotteryNumberFactory.of(10));
 			});
 		}
 
@@ -37,7 +39,7 @@ public class WinningLotteryTest {
 		@ValueSource(ints = {0, 46})
 		void invalidBonusBallRange(final int bonusBall) {
 			assertThatThrownBy(() -> {
-				new WinningLottery(winningNumbers, new LotteryNumber(bonusBall));
+				new WinningLottery(winningNumbers, lotteryNumberFactory.of(bonusBall));
 			}).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("각 로또번호는 1~45 사이여야 합니다");
 		}
@@ -46,7 +48,7 @@ public class WinningLotteryTest {
 		@DisplayName("중복이 있으면 실패")
 		void duplicatedBonusBallNumber() {
 			assertThatThrownBy(() -> {
-				new WinningLottery(winningNumbers, new LotteryNumber(1));
+				new WinningLottery(winningNumbers, lotteryNumberFactory.of(1));
 			}).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("당첨번호와 보너스볼에 중복된 번호가 있으면 안됩니다.");
 		}
@@ -56,7 +58,7 @@ public class WinningLotteryTest {
 	@ParameterizedTest(name = "{index} {displayName} rank={0}")
 	@MethodSource("generateParameter")
 	void checkRank(List<LotteryNumber> lottoNumbers, Rank rank) {
-		WinningLottery winningLottery = new WinningLottery(winningNumbers, new LotteryNumber(7));
+		WinningLottery winningLottery = new WinningLottery(winningNumbers, lotteryNumberFactory.of(7));
 		Lottery lottery = new Lottery(lottoNumbers);
 		assertThat(winningLottery.getRank(lottery)).isEqualTo(rank);
 	}

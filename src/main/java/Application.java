@@ -7,6 +7,7 @@ import view.InputView;
 import view.OutputView;
 
 public class Application {
+
 	public static void main(String[] args) {
 		final LotteryGameController lotteryGameController = new LotteryGameController();
 		purchaseLotteries(lotteryGameController);
@@ -16,7 +17,10 @@ public class Application {
 
 	private static void purchaseLotteries(final LotteryGameController controller) {
 		final int purchaseAmount = InputView.inputValidMoney();
-		final LotteriesDto lotteries = controller.purchaseLotteries(purchaseAmount);
+		final int theNumberOfManualLottery = InputView.inputTheNumberOfValidManualLottery();
+		final List<List<Integer>> manualLotteries = InputView.inputValidManualLotteries(theNumberOfManualLottery);
+		final LotteriesDto lotteries =
+			controller.purchaseLotteries(purchaseAmount, theNumberOfManualLottery, manualLotteries);
 		OutputView.printLotteries(lotteries);
 	}
 
