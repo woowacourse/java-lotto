@@ -1,6 +1,5 @@
 package lotto.generator;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +8,6 @@ import lotto.domain.LottoNumber;
 
 public class LottoGenerator {
 
-    private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>(LottoNumber.getLottoNumbers());
     private static final int LOTTO_SIZE = 6;
 
     public static Lotto generateLottoByManual(List<Integer> numbers) {
@@ -28,8 +26,9 @@ public class LottoGenerator {
     }
 
     private static List<LottoNumber> getRandomLottoNumbers() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        return LOTTO_NUMBERS.stream()
+        List<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbers();
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers.stream()
                 .limit(LOTTO_SIZE)
                 .sorted()
                 .collect(Collectors.toList());

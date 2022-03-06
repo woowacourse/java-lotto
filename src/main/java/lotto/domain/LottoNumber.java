@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static List<LottoNumber> getLottoNumbers() {
-        return List.copyOf(CACHE.values());
+        return new ArrayList<>(CACHE.values());
     }
 
     public int getLottoNumber() {
