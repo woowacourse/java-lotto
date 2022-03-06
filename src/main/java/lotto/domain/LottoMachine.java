@@ -18,35 +18,26 @@ public class LottoMachine {
     private final Lottos lottos;
     private final TotalPurchaseAmount totalPurchaseAmount;
     private final ManualPurchaseCount manualPurchaseCount;
-    private final int lottoPrice;
 
     private LottoMachine(final LottoMachine.Builder builder) {
         this.totalPurchaseAmount = builder.totalPurchaseAmount;
-        lottos = new Lottos(generateLottos(builder.manualLottos, builder.lottoPrice));
+        lottos = new Lottos(generateLottos(builder.manualLottos));
         manualPurchaseCount = new ManualPurchaseCount(
-                builder.manualLottos.size(), builder.totalPurchaseAmount.getTotalPurchaseCount(builder.lottoPrice));
-        this.lottoPrice = builder.lottoPrice;
+                builder.manualLottos.size(), builder.totalPurchaseAmount.getTotalPurchaseCount());
     }
 
-    private List<Lotto> generateLottos(final List<Lotto> manualLottos, final int lottoPrice) {
+    private List<Lotto> generateLottos(final List<Lotto> manualLottos) {
         final LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
         return lottoRandomGenerator.generateLottosExceptDefaultLottos(
-                this.totalPurchaseAmount.getTotalPurchaseCount(lottoPrice), manualLottos);
+                this.totalPurchaseAmount.getTotalPurchaseCount(), manualLottos);
     }
 
     public static class Builder {
-        private int lottoPrice = 1000;
         private TotalPurchaseAmount totalPurchaseAmount;
         private List<Lotto> manualLottos;
 
-        public Builder setLottoPrice(final int lottoPrice) {
-            this.lottoPrice = lottoPrice;
-            return this;
-        }
-
         public Builder setTotalPurchaseAmount(final int totalPurchaseAmount) {
             this.totalPurchaseAmount = new TotalPurchaseAmount.Builder()
-                    .setLottoPrice(lottoPrice)
                     .setTotalAmount(totalPurchaseAmount)
                     .build();
             return this;
@@ -65,7 +56,7 @@ public class LottoMachine {
     }
 
     public int getCountOfAutoLottoNumbers() {
-        return totalPurchaseAmount.getTotalPurchaseCount(lottoPrice) - manualPurchaseCount.getValue();
+        return totalPurchaseAmount.getTotalPurchaseCount() - manualPurchaseCount.getValue();
     }
 
     public int getCountOfManualLottoNumbers() {
