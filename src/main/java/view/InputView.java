@@ -33,7 +33,7 @@ public class InputView {
     }
 
     public static int inputMoney() {
-        System.out.println(INPUT_MONEY);
+        System.out.println(lineSeparator() + INPUT_MONEY);
         return checkAndChangeToInt(scanner.nextLine(), ERROR_MONEY_NON_INTEGER);
     }
 
