@@ -30,4 +30,26 @@ class MoneyTest {
         // then
         assertThat(myMoney.canBuyNumber(itemMoney)).isEqualTo(10);
     }
+
+    @DisplayName("minus 메서드는 money를 입력받아 원본 money의 amount에 뺀다.")
+    @Test
+    void minus() {
+        // given
+        Money money = new Money(10000);
+        money.minus(new Money(3000));
+        // then
+        assertThat(money).isEqualTo(new Money(7000));
+    }
+
+    @DisplayName("minus 메서드는 들어온 money가 더 클 경우 예외를 발생한다.")
+    @Test
+    void minus_errorOnOverMoney() {
+        // given
+        Money money = new Money(10000);
+        Money itemMoney = new Money(20000);
+        // then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> money.minus(itemMoney))
+                .withMessage("가지고 있는 돈을 초과해서 지불할 수 없습니다.");
+    }
 }

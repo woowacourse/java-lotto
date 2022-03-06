@@ -1,30 +1,57 @@
 package lotto.domain;
 
-import static lotto.utils.LottoNumbersGenerator.generateLottoNumbers;
+import static lotto.constants.ErrorConstants.ERROR_NULL_MESSAGE;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import lotto.utils.LottoGenerateStrategy;
 
 public class LottoGame {
 
-    private static final Money LOTTO_PRICE = new Money(1000);
+    public static final int LOTTO_PRICE = 1000;
 
     private Lottos lottos;
+    private final Money money;
 
-    public void purchase(Money money) {
-        this.lottos = new Lottos(purchaseLottos(money));
+    public LottoGame(Money money) {
+        Objects.requireNonNull(money, ERROR_NULL_MESSAGE);
+        this.money = money;
     }
 
-    private List<Lotto> purchaseLottos(Money money) {
-        List<Lotto> lottoPurchased = new ArrayList<>();
-        int purchaseNumber = money.canBuyNumber(LOTTO_PRICE);
-        for (int i = 0; i < purchaseNumber; i++) {
-            lottoPurchased.add(new Lotto(generateLottoNumbers()));
+    public void purchase(List<List<Integer>> manualNumbers, LottoGenerateStrategy lottoGenerateStrategy) {
+        Objects.requireNonNull(manualNumbers, ERROR_NULL_MESSAGE);
+        List<Lotto> purchasedLottos = new ArrayList<>();
+        purchaseManualLottos(purchasedLottos, manualNumbers);
+        purchaseRandomLottos(purchasedLottos, lottoGenerateStrategy);
+        this.lottos = new Lottos(purchasedLottos);
+    }
+
+    private void purchaseManualLottos(List<Lotto> origin, List<List<Integer>> manualNumbers) {
+        if (manualNumbers.isEmpty()) {
+            return;
         }
 
-        return lottoPurchased;
+        for (List<Integer> manualNumber : manualNumbers) {
+            origin.add(generateManualLotto(manualNumber));
+        }
+        money.minus(new Money(manualNumbers.size() * LOTTO_PRICE));
     }
 
+    private Lotto generateManualLotto(List<Integer> manualNumber) {
+        return new Lotto(manualNumber.stream()
+                .map(LottoNumber::valueOf)
+                .sorted()
+                .collect(Collectors.toList()));
+    }
+
+    private void purchaseRandomLottos(List<Lotto> origin, LottoGenerateStrategy lottoGenerateStrategy) {
+        int purchaseNumber = money.canBuyNumber(new Money(LOTTO_PRICE));
+        for (int i = 0; i < purchaseNumber; i++) {
+            origin.add(lottoGenerateStrategy.generate());
+        }
+    }
 
     public LottoResults confirmWinnings(WinningLotto winningLotto) {
         return new LottoResults(lottos.confirmWinnings(winningLotto));

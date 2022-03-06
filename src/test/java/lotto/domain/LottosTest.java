@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.utils.LottoNumbersGenerator.generateLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import lotto.utils.RandomLottoGenerateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -47,7 +47,7 @@ class LottosTest {
     private List<Lotto> getTestLottos() {
         List<Lotto> lottoPurchased = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            lottoPurchased.add(new Lotto(generateLottoNumbers()));
+            lottoPurchased.add(new RandomLottoGenerateStrategy().generate());
         }
         return lottoPurchased;
     }
@@ -69,10 +69,10 @@ class LottosTest {
 
     private WinningLotto getWinningNumbers() {
         List<LottoNumber> lottoNumbers;
-        LottoNumber bonusNumber = new LottoNumber(30);
+        LottoNumber bonusNumber = LottoNumber.valueOf(30);
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.valueOf(i));
         }
         return new WinningLotto(new Lotto(lottoNumbers), bonusNumber);
     }

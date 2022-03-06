@@ -18,10 +18,10 @@ class WinningLottoTest {
     void setup() {
         List<LottoNumber> winningNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            winningNumbers.add(new LottoNumber(i));
+            winningNumbers.add(LottoNumber.valueOf(i));
         }
 
-        bonusNumber = new LottoNumber(30);
+        bonusNumber = LottoNumber.valueOf(30);
         winningLotto = new Lotto(winningNumbers);
     }
 
@@ -35,7 +35,7 @@ class WinningLottoTest {
     @DisplayName("WinningNumbers 생성자는 보너스 번호가 당첨 번호와 중복될 경우 예외가 발생한다.")
     @Test
     void constructor_errorOnBonusNumberDuplication() {
-        bonusNumber = new LottoNumber(1);
+        bonusNumber = LottoNumber.valueOf(1);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new WinningLotto(winningLotto, bonusNumber))

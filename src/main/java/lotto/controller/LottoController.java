@@ -6,31 +6,30 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResults;
-import lotto.domain.Money;
 import lotto.domain.WinningLotto;
-import lotto.view.InputView;
-import lotto.view.ResultView;
+import lotto.utils.LottoGenerateStrategy;
 
 public class LottoController {
 
-    public void run() {
-        Money purchaseMoney = new Money(InputView.requestPurchaseMoney());
-        LottoGame lottoGame = new LottoGame();
-        lottoGame.purchase(purchaseMoney);
-        ResultView.printLottos(lottoGame.getLottos());
-
-        WinningLotto winningLotto = requestWinningNumbers();
-        LottoResults lottoResults = lottoGame.confirmWinnings(winningLotto);
-        ResultView.printResults(lottoResults);
+    public List<Lotto> purchase(LottoGame lottoGame, List<List<Integer>> manualNumbers,
+                                LottoGenerateStrategy lottoGenerateStrategy) {
+        lottoGame.purchase(manualNumbers, lottoGenerateStrategy);
+        return lottoGame.getLottos();
     }
 
-    private WinningLotto requestWinningNumbers() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (Integer number : InputView.requestWinningNumber()) {
-            lottoNumbers.add(new LottoNumber(number));
+    public LottoResults requestLottoResults(LottoGame lottoGame, List<Integer> winningNumbers, int bonusNumber) {
+        WinningLotto winningLotto = requestWinningNumbers(winningNumbers, bonusNumber);
+        return lottoGame.confirmWinnings(winningLotto);
+    }
+
+    private WinningLotto requestWinningNumbers(List<Integer> winningNumbers, int rawBonusNumber) {
+        List<LottoNumber> winningLottoNumbers = new ArrayList<>();
+        for (Integer number : winningNumbers) {
+            winningLottoNumbers.add(LottoNumber.valueOf(number));
         }
-        LottoNumber bonusNumber = new LottoNumber(InputView.requestBonusNumber());
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf(rawBonusNumber);
 
-        return new WinningLotto(new Lotto(lottoNumbers), bonusNumber);
+        return new WinningLotto(new Lotto(winningLottoNumbers), bonusLottoNumber);
     }
+
 }

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.constants.ErrorConstants.ERROR_NULL_MESSAGE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -11,7 +13,6 @@ public class Lotto {
 
     private static final String ERROR_NUMBER_SIX_MESSAGE = "로또 숫자는 6개여야 합니다.";
     private static final String ERROR_DUPLICATION_MESSAGE = "로또 숫자는 중복되면 안됩니다.";
-    private static final String ERROR_NULL_MESSAGE = "입력된 값이 null이면 안됩니다.";
 
     public static final int LOTTO_SIZE = 6;
 
@@ -39,11 +40,12 @@ public class Lotto {
     }
 
     public LottoPrize confirmWinning(WinningLotto winningLotto) {
+        Objects.requireNonNull(winningLotto, ERROR_NULL_MESSAGE);
         int lottoNumberMatches = (int) numbers.stream()
                 .filter(winningLotto::containsLottoNumber)
                 .count();
 
-        return LottoPrize.match(lottoNumberMatches, winningLotto.containsBonusNumber(this));
+        return LottoPrize.match(lottoNumberMatches, numbers.contains(winningLotto.getBonusNumber()));
     }
 
     public boolean contains(LottoNumber target) {
@@ -54,5 +56,22 @@ public class Lotto {
 
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
