@@ -34,7 +34,7 @@ public class Lotto {
         List<LottoNumber> deDuplicatedNumbers = lottoNumbers.stream()
             .distinct()
             .collect(Collectors.toList());
-        if (deDuplicatedNumbers.size() != LottoConstant.LOTTO_NUMBER_SIZE) {
+        if (deDuplicatedNumbers.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 숫자는 중복일 수 없습니다.");
         }
     }
