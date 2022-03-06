@@ -1,7 +1,7 @@
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 
-import domain.Lotto;
 import domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,6 +30,24 @@ public class LottoNumberTest {
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("[ERROR] 로또 번호는 1~45 사이 정수만 가능합니다.");
 
+    }
+
+    @Test
+    @DisplayName("로또 번호가 같으면 두 LottoNumber는 같다.")
+    void check_equals() {
+        LottoNumber lottoNumber1 = new LottoNumber(1);
+        LottoNumber lottoNumber2 = new LottoNumber(1);
+
+        assertThat(lottoNumber1.equals(lottoNumber2)).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("로또 번호가 다르면 두 LottoNumber는 같다.")
+    void check_equals_fail() {
+        LottoNumber lottoNumber1 = new LottoNumber(1);
+        LottoNumber lottoNumber2 = new LottoNumber(2);
+
+        assertThat(lottoNumber1.equals(lottoNumber2)).isEqualTo(false);
     }
 
 }

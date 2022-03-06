@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LottoNumber {
 
@@ -9,13 +10,30 @@ public class LottoNumber {
 
     private static final String LOTTO_NUMBER_RANGE_ERROR = "[ERROR] 로또 번호는 1~45 사이 정수만 가능합니다.";
 
-    private int lottoNumber;
+    private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
         checkRange(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
+    }
 
     private void checkRange(int number) {
 
