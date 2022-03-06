@@ -12,11 +12,11 @@ public class LottoMachine {
     private static final String LOTTO_MACHINE_ERROR_MESSAGE = "[ERROR] 오류가 발생했습니다.";
 
     private final LottoGenerator lottoGenerator;
-    private final Money money;
+    private Money money;
     private Lottos lottos;
     private RankCount rankCount;
 
-    public LottoMachine(final LottoGenerator lottoGenerator, final Money money) {
+    public LottoMachine(final LottoGenerator lottoGenerator, Money money) {
         this.lottoGenerator = lottoGenerator;
         this.money = money;
         this.lottos = new Lottos(new ArrayList<>());

@@ -49,13 +49,32 @@ public class LottoController {
         }
     }
 
-    private LottoCount inputLottoCount(Money money) {
+    private LottoCount inputLottoCount(final Money money) {
         try {
             return new LottoCount(InputView.inputManualLottoCount(), money);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return inputLottoCount(money);
         }
+    }
+
+    private List<Lotto> inputManualLottos(final int count) {
+        try {
+            List<List<Integer>> lottos = InputView.inputManualNumbers(count);
+            return lottos.stream()
+                    .map(this::makeLottoNumbers)
+                    .map(Lotto::new)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return inputManualLottos(count);
+        }
+    }
+
+    private LottoNumbers makeLottoNumbers(final List<Integer> numbers) {
+        return new LottoNumbers(numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 
     private WinningLotto makeWinningLotto() {
@@ -67,25 +86,6 @@ public class LottoController {
             System.out.println();
             System.out.println(e.getMessage());
             return makeWinningLotto();
-        }
-    }
-
-    private LottoNumbers makeLottoNumbers(List<Integer> numbers) {
-        return new LottoNumbers(numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList()));
-    }
-
-    private List<Lotto> inputManualLottos(int count) {
-        try {
-            List<List<Integer>> lottos = InputView.inputManualNumbers(count);
-            return lottos.stream()
-                    .map(this::makeLottoNumbers)
-                    .map(Lotto::new)
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return inputManualLottos(count);
         }
     }
 }
