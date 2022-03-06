@@ -8,9 +8,9 @@ public enum Rank {
     SIX(6, 2000000000);
 
     private final int matchNumber;
-    private final long value;
+    private final int value;
 
-    Rank(int matchNumber, long value) {
+    Rank(int matchNumber, int value) {
         this.matchNumber = matchNumber;
         this.value = value;
    }

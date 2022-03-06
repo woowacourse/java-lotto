@@ -53,7 +53,6 @@ public class LottoController {
         InputView.inputManualLottoMessage();
         List<Lotto> lottos = new ArrayList<>();
         for (int idx = 0; idx < manualCount.getNumber(); idx++) {
-            lottos.add(new Lotto(InputView.inputManualLottos()));
             lottoGame.makeManualLottos(lottos, receiveManualLotto());
         }
         return lottos;

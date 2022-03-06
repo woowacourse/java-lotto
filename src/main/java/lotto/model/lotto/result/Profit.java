@@ -8,7 +8,7 @@ public class Profit {
     long sumProfitMoney(WinningResult winningResult) {
         init();
         for (Rank rank : winningResult.getWinningCount().keySet()) {
-            number += winningResult.getWinningCount().get(rank) * rank.getValue();
+            number += (long) winningResult.getWinningCount().get(rank) * rank.getValue();
         }
         return number;
     }
