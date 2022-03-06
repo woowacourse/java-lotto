@@ -4,6 +4,7 @@ import java.util.List;
 import lotto.domain.LottoBuyMoney;
 import lotto.domain.Lottos;
 import lotto.domain.Statistics;
+import lotto.dto.LottosResult;
 import lotto.service.LottoService;
 
 public class LottoController {
@@ -14,11 +15,12 @@ public class LottoController {
         this.lottoService = lottoService;
     }
 
-    public Lottos buyLotto(int inputMoney, int manualAmount, List<List<Integer>> manualNumbers) {
-        return lottoService.createLottos(new LottoBuyMoney(inputMoney), manualAmount, manualNumbers);
+    public LottosResult buyLotto(int inputMoney, int manualAmount, List<List<Integer>> manualNumbers) {
+        Lottos lottos = lottoService.createLottos(new LottoBuyMoney(inputMoney), manualAmount, manualNumbers);
+        return new LottosResult(lottos.getLottos());
     }
 
-    public Statistics match(Lottos lottos, List<Integer> winnerNumbers, int bonusNumber) {
+    public Statistics match(List<List<Integer>> lottos, List<Integer> winnerNumbers, int bonusNumber) {
         return lottoService.match(lottos, winnerNumbers, bonusNumber);
     }
 

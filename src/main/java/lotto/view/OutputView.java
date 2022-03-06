@@ -2,24 +2,20 @@ package lotto.view;
 
 import java.io.PrintStream;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
 import lotto.domain.Rank;
-import lotto.domain.vo.LottoNumber;
 
 public class OutputView {
 
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    public static void printLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.getNumbers());
-            lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
-            System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(lottoNumbers)));
+    public static void printLottos(List<List<Integer>> lottos) {
+        for (List<Integer> lotto : lottos) {
+            Collections.sort(lotto);
+            System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(lotto)));
         }
     }
 
@@ -44,9 +40,9 @@ public class OutputView {
         printOtherRank(rank.getMatchCount(), rank.getReward(), result.get(rank));
     }
 
-    private static String joinWithDelimiter(List<LottoNumber> lottoNumbers) {
+    private static String joinWithDelimiter(List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
-            .map(number -> String.valueOf(number.getNumber()))
+            .map(String::valueOf)
             .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
     }
 

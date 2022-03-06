@@ -21,7 +21,9 @@ public class LottoService {
         return new Lottos(lottos);
     }
 
-    public Statistics match(Lottos lottos, List<Integer> winnerNumbers, int bonusNumber) {
+    public Statistics match(List<List<Integer>> lottoNumbers, List<Integer> winnerNumbers, int bonusNumber) {
+        List<List<LottoNumber>> lists = collectNumbersToCollectLottoNumbers(lottoNumbers);
+        Lottos lottos = new Lottos(numbersToLottos(lists));
         return Statistics.of(lottos.match(createWinningLotto(winnerNumbers, bonusNumber)));
     }
 
@@ -52,6 +54,12 @@ public class LottoService {
     private List<LottoNumber> numbersToLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
             .map(LottoNumber::of)
+            .collect(Collectors.toList());
+    }
+
+    private List<Lotto> numbersToLottos(List<List<LottoNumber>> lists) {
+        return lists.stream()
+            .map(Lotto::of)
             .collect(Collectors.toList());
     }
 }
