@@ -28,7 +28,7 @@ public class LottoController {
 
     public Statistic winningResult(String[] inputWinningNumber, int inputBonusBall, Lottos lottos) {
         Lotto winningNumber = new ManualLottoGenerator(inputWinningNumber).generateLotto();
-        LottoNumber bonusBall = LottoNumber.of(inputBonusBall);
+        LottoNumber bonusBall = LottoNumber.values(inputBonusBall);
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusBall);
         return lottos.getWinningStatistics(winningLotto);
     }

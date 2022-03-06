@@ -22,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber of(final int number) {
+    public static LottoNumber values(final int number) {
         LottoNumber lottoNumber = CACHE.get(number);
         if (Objects.isNull(lottoNumber)) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE);

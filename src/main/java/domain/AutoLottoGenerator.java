@@ -14,7 +14,7 @@ public class AutoLottoGenerator implements LottoGenerator {
     @Override
     public Lotto generateLotto() {
         List<LottoNumber> numbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .mapToObj(LottoNumber::of)
+                .mapToObj(LottoNumber::values)
                 .collect(Collectors.toList());
         Collections.shuffle(numbers);
         return new Lotto(numbers.stream()

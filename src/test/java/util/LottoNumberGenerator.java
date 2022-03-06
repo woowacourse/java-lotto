@@ -10,7 +10,7 @@ public class LottoNumberGenerator {
 
     public static Set<LottoNumber> of(Integer... numbers) {
         return Arrays.stream(numbers)
-                .map(domain.LottoNumber::of)
+                .map(domain.LottoNumber::values)
                 .collect(Collectors.toSet());
     }
 

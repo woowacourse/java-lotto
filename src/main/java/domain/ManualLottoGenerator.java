@@ -15,7 +15,7 @@ public class ManualLottoGenerator implements LottoGenerator {
     public Lotto generateLotto() {
         Set<LottoNumber> collect = Arrays.stream(numbers)
                 .map(Integer::parseInt)
-                .map(LottoNumber::of)
+                .map(LottoNumber::values)
                 .collect(Collectors.toSet());
         return new Lotto(collect);
     }

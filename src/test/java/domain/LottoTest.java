@@ -22,7 +22,7 @@ public class LottoTest {
     @BeforeEach
     public void setUp() {
         Lotto lotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusBall = LottoNumber.of(7);
+        LottoNumber bonusBall = LottoNumber.values(7);
         winningLotto = new WinningLotto(lotto, bonusBall);
     }
 
