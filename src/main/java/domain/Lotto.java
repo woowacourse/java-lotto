@@ -4,8 +4,8 @@ import java.util.*;
 
 
 public class Lotto {
-    private static final String LOTTO_SIZE_MESSAGE = "[ERROR] 로또의 숫자는 중복 없이 6개여야 합니다.";
     public static final int LOTTO_LENGTH = 6;
+    private static final String LOTTO_SIZE_MESSAGE = "[ERROR] 로또의 숫자는 중복 없이 6개여야 합니다.";
 
     private final Set<LottoNumber> numbers;
 
