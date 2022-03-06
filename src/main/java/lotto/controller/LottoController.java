@@ -1,10 +1,9 @@
 package lotto.controller;
 
 import java.util.List;
-import java.util.Map;
 import lotto.domain.LottoBuyMoney;
 import lotto.domain.Lottos;
-import lotto.domain.Rank;
+import lotto.domain.Statistics;
 import lotto.service.LottoService;
 
 public class LottoController {
@@ -19,11 +18,11 @@ public class LottoController {
         return lottoService.createLottos(new LottoBuyMoney(inputMoney), manualAmount, manualNumbers);
     }
 
-    public Map<Rank, Integer> match(Lottos lottos, List<Integer> winnerNumbers, int bonusNumber) {
+    public Statistics match(Lottos lottos, List<Integer> winnerNumbers, int bonusNumber) {
         return lottoService.match(lottos, winnerNumbers, bonusNumber);
     }
 
-    public double getProfitRate(Map<Rank, Integer> result, double inputMoney) {
-        return lottoService.calculateProfitRate(result, inputMoney);
+    public double getProfitRate(Statistics statistics, int inputMoney) {
+        return lottoService.getProfitRate(statistics, inputMoney);
     }
 }

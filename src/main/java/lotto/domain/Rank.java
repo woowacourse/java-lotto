@@ -26,12 +26,6 @@ public enum Rank {
         return findOtherRanks(matchCount);
     }
 
-    public static long calculateReward(List<Rank> ranks) {
-        return ranks.stream()
-            .mapToLong(rank -> rank.reward)
-            .sum();
-    }
-
     public int findRewardCount(List<Rank> ranks) {
         return (int)ranks.stream()
             .filter(rank -> rank == this)
