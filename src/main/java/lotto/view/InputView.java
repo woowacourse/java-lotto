@@ -29,7 +29,7 @@ public class InputView {
         try {
             Long.parseLong(input);
             return false;
-        } catch (IllegalArgumentException exception) {
+        } catch (NumberFormatException exception) {
             OutputView.printErrorMessage(exception);
             return true;
         }
@@ -51,7 +51,7 @@ public class InputView {
         try {
             Integer.parseInt(input);
             return false;
-        } catch (IllegalArgumentException exception) {
+        } catch (NumberFormatException exception) {
             OutputView.printErrorMessage(exception);
             return true;
         }
@@ -71,7 +71,7 @@ public class InputView {
         try {
             splitAndParseInteger(input);
             return false;
-        } catch (IllegalArgumentException exception) {
+        } catch (NumberFormatException exception) {
             OutputView.printErrorMessage(exception);
             return true;
         }
@@ -100,7 +100,7 @@ public class InputView {
         try {
             splitAndParseInteger(input);
             return false;
-        } catch (IllegalArgumentException exception) {
+        } catch (NumberFormatException exception) {
             OutputView.printErrorMessage(exception);
             return true;
         }
@@ -121,7 +121,7 @@ public class InputView {
         try {
             Integer.parseInt(input);
             return false;
-        } catch (IllegalArgumentException exception) {
+        } catch (NumberFormatException exception) {
             OutputView.printErrorMessage(exception);
             return true;
         }
