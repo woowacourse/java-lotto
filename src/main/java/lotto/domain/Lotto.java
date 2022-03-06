@@ -18,23 +18,23 @@ public class Lotto {
         this.lotto = new ArrayList<>(lotto);
     }
 
-    private static void checkSize(List<LottoNumber> lotto) {
+    private void checkSize(List<LottoNumber> lotto) {
         if (!isCorrectSize(lotto)) {
             throw new LottoException(LottoException.WINNING_NUMBERS_SIZE_ERROR_MESSAGE);
         }
     }
 
-    private static boolean isCorrectSize(List<LottoNumber> lotto) {
+    private boolean isCorrectSize(List<LottoNumber> lotto) {
         return lotto.size() == LOTTO_SIZE;
     }
 
-    private static void checkDuplication(List<LottoNumber> lotto) {
+    private void checkDuplication(List<LottoNumber> lotto) {
         if (isDuplication(lotto)) {
             throw new LottoException(LottoException.WINNING_NUMBERS_DUPLICATION_ERROR_MESSAGE);
         }
     }
 
-    private static boolean isDuplication(List<LottoNumber> lotto) {
+    private boolean isDuplication(List<LottoNumber> lotto) {
         return new HashSet<>(lotto).size() != lotto.size();
     }
 

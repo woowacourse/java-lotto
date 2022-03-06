@@ -13,13 +13,13 @@ public class Money {
         this.money = input;
     }
 
-    private static void checkUnit(int input) {
+    private void checkUnit(int input) {
         if (!isCorrectUnit(input)) {
             throw new MoneyException(MoneyException.MONEY_UNIT_ERROR_MESSAGE);
         }
     }
 
-    private static boolean isCorrectUnit(int input) {
+    private boolean isCorrectUnit(int input) {
         return input % UNIT_SIZE == 0;
     }
 
