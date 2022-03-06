@@ -3,8 +3,8 @@ package view;
 import java.util.Scanner;
 
 import static java.lang.System.lineSeparator;
-import static view.util.InputUtil.splitAndChangeToInt;
 import static view.util.InputUtil.checkAndChangeToInt;
+import static view.util.InputUtil.splitAndChangeToInt;
 
 public class InputView {
 

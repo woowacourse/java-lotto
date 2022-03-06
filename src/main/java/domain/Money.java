@@ -23,7 +23,7 @@ public class Money {
     }
 
     private static void checkDividedByLottoPrice(final int money) {
-        if (money% LOTTO_PRICE != 0) {
+        if (money % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ERROR_NOT_DIVIDED_LOTTO_PRICE);
         }
     }
