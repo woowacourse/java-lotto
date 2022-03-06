@@ -13,10 +13,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 import lotto.utils.StringUtil;
 
 public class StringUtilTest {
+    private static final String DELIMITER = ", ";
+
     @Test
     @DisplayName("로또번호 입력이 올바른 문자열이면 예외를 반환하지 않아야 합니다.")
     void winTicketGeneratorValidTest() {
-        assertThatCode(() -> StringUtil.splitToIntegers("1, 2, 3, 4, 5, 6"))
+        assertThatCode(() -> StringUtil.splitToIntegers("1, 2, 3, 4, 5, 6", DELIMITER))
             .doesNotThrowAnyException();
     }
 
@@ -24,7 +26,7 @@ public class StringUtilTest {
     @MethodSource("parameters")
     @DisplayName("로또 번호 입력 실패 테스트")
     void winTicketGeneratorInvalidTest(String input, String testName) {
-        assertThatThrownBy(() -> StringUtil.splitToIntegers(input))
+        assertThatThrownBy(() -> StringUtil.splitToIntegers(input, DELIMITER))
             .isInstanceOf(IllegalArgumentException.class);
     }
 

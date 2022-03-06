@@ -12,6 +12,8 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class Controller {
+    private static final String SPLIT_DELIMITER = ", ";
+
     public void run() {
         Lotto lotto = createLotto();
 
@@ -55,20 +57,20 @@ public class Controller {
         }
     }
 
-    private void createAutoTickets(Lotto lotto) {
-        int numberOfPurchasableCount = lotto.findCountOfPurchasable();
-        for (int i = 0; i < numberOfPurchasableCount; i++) {
-            lotto.addTicket(Ticket.createByAuto(new RandomLottoNumbersGenerator()));
-        }
-    }
-
     private void createManualTicket(Lotto lotto) {
         try {
-            List<Integer> integers = StringUtil.splitToIntegers(InputView.requestNumbers());
+            List<Integer> integers = StringUtil.splitToIntegers(InputView.requestNumbers(), SPLIT_DELIMITER);
             lotto.addTicket(Ticket.createByManual(integers));
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             createManualTicket(lotto);
+        }
+    }
+
+    private void createAutoTickets(Lotto lotto) {
+        int numberOfPurchasableCount = lotto.findCountOfPurchasable();
+        for (int i = 0; i < numberOfPurchasableCount; i++) {
+            lotto.addTicket(Ticket.createByAuto(new RandomLottoNumbersGenerator()));
         }
     }
 
@@ -85,7 +87,7 @@ public class Controller {
 
     private Ticket requestWinNumbers() {
         try {
-            List<Integer> integers = StringUtil.splitToIntegers(InputView.requestWinNumbers());
+            List<Integer> integers = StringUtil.splitToIntegers(InputView.requestWinNumbers(), SPLIT_DELIMITER);
             return Ticket.createByManual(integers);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());

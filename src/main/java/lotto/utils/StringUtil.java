@@ -5,21 +5,20 @@ import java.util.stream.Collectors;
 
 public class StringUtil {
     private static final String EMPTY_ERROR_MESSAGE = "빈 문자를 입력할 수 없습니다.";
-    private static final String REQUEST_DELIMITER_MESSAGE = ",(콤마)와 공백으로 구분된 숫자를 입력해주세요. ex) 1, 2, 3, 4, 5, 6";
-    private static final String DELIMITER = ", ";
+    private static final String REQUEST_DELIMITER_MESSAGE = "로 구분된 숫자를 입력해주세요.";
 
     private StringUtil() {
     }
 
-    public static List<Integer> splitToIntegers(String input) {
+    public static List<Integer> splitToIntegers(String input, String delimiter) {
         checkEmpty(input);
-        List<String> splitInputs = List.of(input.split(DELIMITER, -1));
+        List<String> splitInputs = List.of(input.split(delimiter, -1));
         try {
             return splitInputs.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(REQUEST_DELIMITER_MESSAGE);
+            throw new IllegalArgumentException("\"" + delimiter + "\"" + REQUEST_DELIMITER_MESSAGE);
         }
     }
 
