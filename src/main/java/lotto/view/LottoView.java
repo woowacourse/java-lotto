@@ -43,7 +43,7 @@ public class LottoView {
 
     private int requestTicketCount(final int totalTicketCount) {
         final int manualTicketCount = inputView.requestTicketCount();
-        InputTicketCountValidator.verifyTicketCount(totalTicketCount, manualTicketCount);
+        InputTicketCountValidator.validateTicketCount(totalTicketCount, manualTicketCount);
         return manualTicketCount;
     }
 

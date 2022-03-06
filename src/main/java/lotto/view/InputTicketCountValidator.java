@@ -8,7 +8,7 @@ public class InputTicketCountValidator {
     private InputTicketCountValidator() {
     }
 
-    public static void verifyTicketCount(final int totalTicketCount, final int ticketCount) {
+    public static void validateTicketCount(final int totalTicketCount, final int ticketCount) {
         verifyTicketCountPositive(ticketCount);
         verifyTotalTicketCountIsMoreThanTicketCount(totalTicketCount, ticketCount);
     }
