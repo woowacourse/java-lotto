@@ -20,7 +20,7 @@ public class LottoNumbers {
 	}
 
 	public static LottoNumbers valueOf(LottoNumbers otherNumbers) {
-		return new LottoNumbers(otherNumbers.getNumbers());
+		return new LottoNumbers(otherNumbers.numbers);
 	}
 
 	public long countMatchedNumbers(List<LottoNumber> winningNumbers) {
