@@ -1,11 +1,11 @@
 package lotterymachine.vo;
 
-import static lotterymachine.model.ErrorMessage.IS_NOT_INTEGER;
-import static lotterymachine.model.ErrorMessage.NOT_PURCHASABLE_COUNT;
-
 import java.util.Objects;
 
 public class Count {
+    private static final String IS_NOT_INTEGER_EXCEPTION = "음수가 아닌 정수를 입력해야합니다.";
+    private static final String NOT_PURCHASABLE_COUNT_EXCEPTION = "구매가능한 로또 개수를 초과하였습니다.";
+
     private final int number;
 
     private Count(int number) {
@@ -40,13 +40,13 @@ public class Count {
 
     private void validateInteger(int number) {
         if (number < 0) {
-            throw new IllegalArgumentException(IS_NOT_INTEGER.getMessage());
+            throw new IllegalArgumentException(IS_NOT_INTEGER_EXCEPTION);
         }
     }
 
     private static void validateRange(int total, int number) {
         if (total < number) {
-            throw new IllegalArgumentException(NOT_PURCHASABLE_COUNT.getMessage());
+            throw new IllegalArgumentException(NOT_PURCHASABLE_COUNT_EXCEPTION);
         }
     }
 

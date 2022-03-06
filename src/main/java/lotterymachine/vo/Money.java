@@ -1,11 +1,10 @@
 package lotterymachine.vo;
 
-import static lotterymachine.model.ErrorMessage.NOT_PURCHASABLE;
-
 import java.util.Objects;
 
 public class Money {
     private static final int TICKET_PRICE = 1000;
+    private static final String NOT_PURCHASABLE_EXCEPTION = "1000보다 큰 금액을 입력해야합니다.";
 
     private final int amount;
 
@@ -24,7 +23,7 @@ public class Money {
 
     private static void validate(int amount) {
         if (amount < TICKET_PRICE) {
-            throw new IllegalArgumentException(NOT_PURCHASABLE.getMessage());
+            throw new IllegalArgumentException(NOT_PURCHASABLE_EXCEPTION);
         }
     }
 

@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static lotterymachine.model.ErrorMessage.*;
-
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
+
     private static final String NUMBER_DELIMITER = ",";
+    private static final String IS_NOT_NUMBER_EXCEPTION = "숫자만 입력할 수 있습니다.";
+    private static final String DUPLICATE_BONUS_NUMBER_EXCEPTION = "보너스 볼이 당첨 번호와 중복됩니다.";
 
     public static int getAmount() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -46,7 +47,7 @@ public class InputView {
 
     private static void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
         if (numbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER.getMessage());
+            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER_EXCEPTION);
         }
     }
 
@@ -54,7 +55,7 @@ public class InputView {
         try {
             return Integer.parseInt(input);
         } catch (RuntimeException runtimeException) {
-            throw new IllegalArgumentException(IS_NOT_NUMBER.getMessage());
+            throw new IllegalArgumentException(IS_NOT_NUMBER_EXCEPTION);
         }
     }
 
