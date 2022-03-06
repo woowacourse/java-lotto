@@ -17,7 +17,7 @@ class MoneyManagerTest {
     @Test
     void 구입한_로또_개수_테스트() {
         MoneyManager moneyManager = new MoneyManager(14000);
-        int result = moneyManager.getPossibleLottoCount();
+        int result = moneyManager.getPossibleLottoCount(0);
         assertThat(result).isEqualTo(14);
     }
 
@@ -48,7 +48,6 @@ class MoneyManagerTest {
     @Test
     void 수동_로또_개수만큼_구입_가능한_자동_로또_개수_감소_테스트() {
         MoneyManager moneyManager = new MoneyManager(14000);
-        moneyManager.decreaseMoney(10);
-        assertThat(moneyManager.getPossibleLottoCount()).isEqualTo(4);
+        assertThat(moneyManager.getPossibleLottoCount(10)).isEqualTo(4);
     }
 }

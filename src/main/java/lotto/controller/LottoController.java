@@ -21,7 +21,7 @@ public class LottoController {
     public void executeManualAndAutoLotto() {
         MoneyManager moneyManager = getMoney();
         int manualLottoCount = getManualLottoCount(moneyManager);
-        int autoLottoCount = moneyManager.getPossibleLottoCount();
+        int autoLottoCount = moneyManager.getPossibleLottoCount(manualLottoCount);
 
         LottoTickets lottoTickets = createLottoTickets(manualLottoCount, autoLottoCount);
         displayLottoStatus(manualLottoCount, autoLottoCount, lottoTickets);
@@ -47,7 +47,7 @@ public class LottoController {
     private int getManualLottoCount(MoneyManager moneyManager) {
         try {
             int manualLottoCount = InputView.requestManualLottoCount();
-            moneyManager.decreaseMoney(manualLottoCount);
+            moneyManager.checkManualCountWithInputMoney(manualLottoCount);
             return manualLottoCount;
         } catch (RuntimeException exception) {
             System.out.println("[ERROR] " + exception.getMessage() + "\n");
@@ -95,17 +95,5 @@ public class LottoController {
 
     private LottoNumber getBonusNumber() throws RuntimeException {
         return LottoNumber.valueOf(InputView.requestBonusNumber());
-    }
-
-    public void executeAutoLotto() {
-        MoneyManager moneyManager = getMoney();
-        LottoTickets lottoTickets =
-                createAutoLottoTickets(moneyManager.getPossibleLottoCount(), new LottoTicketAutoStrategy());
-
-        OutputView.displaySingleLottoCount(moneyManager.getPossibleLottoCount());
-        OutputView.displayLottoTickets(new LottoTicketsDTO(lottoTickets));
-
-        Ranks ranks = Ranks.getRanksFrom(lottoTickets.getRanksWithWinningNumbers(getWinningNumbersAndBonusNumber()));
-        OutputView.displayResult(ranks.getStatistics(), moneyManager.calculateYield(ranks.getLottoTotalReward()));
     }
 }
