@@ -1,4 +1,4 @@
-package strategy;
+package controller.strategy;
 
 import java.util.Collections;
 import java.util.List;

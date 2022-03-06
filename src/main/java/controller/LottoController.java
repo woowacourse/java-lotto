@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import controller.strategy.InputLottoNumbersGenerationStrategy;
+import controller.strategy.RandomLottoNumbersGenerationStrategy;
 import model.Money;
 import model.lotto.Lotto;
 import model.lotto.LottoCount;
@@ -13,8 +15,6 @@ import model.lottonumber.LottoNumbers;
 import model.result.LottoResult;
 import model.result.Rank;
 import model.winningnumber.WinningLottoNumber;
-import strategy.InputLottoNumbersGenerationStrategy;
-import strategy.RandomLottoNumbersGenerationStrategy;
 import utils.InputValidateUtils;
 import view.InputView;
 import view.OutputView;

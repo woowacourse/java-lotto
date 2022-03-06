@@ -7,9 +7,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import controller.strategy.TestLottoNumberGenerationStrategy;
 import model.lottonumber.LottoNumber;
 import model.lottonumber.LottoNumbers;
-import strategy.TestLottoNumberGenerationStrategy;
 
 public class WinningLottoNumberTest {
 	@Test

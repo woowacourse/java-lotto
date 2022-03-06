@@ -1,4 +1,4 @@
-package strategy;
+package controller.strategy;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
