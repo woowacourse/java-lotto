@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import lotto.utils.IntegerUtils;
+
 public class Money {
 
     private final int amount;
@@ -13,6 +15,10 @@ public class Money {
 
     public static Money from(int amount) {
         return new Money(amount);
+    }
+
+    public static Money from(String input) {
+        return from(IntegerUtils.parse(input));
     }
 
     private void validatePositive(int amount) {

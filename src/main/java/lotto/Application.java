@@ -46,7 +46,7 @@ public class Application {
     }
 
     private PurchaseResult tryPurchase() {
-        Money money = Money.from(IntegerUtils.parse(inputView.inputMoney()));
+        Money money = Money.from(inputView.inputMoney());
         LottoMachine lottoMachine = new LottoMachine(money);
         List<LottoTicket> tickets = purchaseLottos(lottoMachine);
         return new PurchaseResult(money, tickets);
