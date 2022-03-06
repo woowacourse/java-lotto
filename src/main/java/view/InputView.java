@@ -1,7 +1,5 @@
 package view;
 
-import domain.*;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

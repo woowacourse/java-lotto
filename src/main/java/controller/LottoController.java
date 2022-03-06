@@ -1,8 +1,7 @@
 package controller;
 
+import controller.dto.LottosDto;
 import domain.*;
-import view.InputView;
-import view.OutputView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,25 +9,26 @@ import java.util.stream.Collectors;
 public class LottoController {
     private static final String DELIMITER = ", ";
 
-    public void start() {
-        Money money = new Money(InputView.askInputMoney());
-        int manualLottoCount = InputView.askManualLottoCount();
+    public LottosDto purchase(int inputMoney, int manualLottoCount, List<String> manualLottoNumbers) {
+        Money money = new Money(inputMoney);
         int autoLottoCount = money.getAutoLottoCount(manualLottoCount);
-        List<String> manualLottoNumbers = InputView.askManualLottoNumbers(manualLottoCount);
         Lottos manualLottos = createManualLottos(manualLottoNumbers);
-
-        OutputView.printCountOfLotto(autoLottoCount, manualLottoCount);
-        Lottos totalLottos = getLottos(autoLottoCount, manualLottos);
-        WinningLotto winningNumber = inputWinningNumber();
-        getStatistics(totalLottos, winningNumber, money);
+        return new LottosDto(autoLottoCount, manualLottos);
     }
 
-    private Lottos getLottos(int autoLottoCount, Lottos manualLottos) {
-        Lottos autoLottos = Lottos.generateAutoLottos(autoLottoCount);
-        Lottos totalLottos = manualLottos.concat(autoLottos);
-        OutputView.printLottos(totalLottos);
-        return totalLottos;
+    public LottosDto createLottos(LottosDto lottosDto) {
+        Lottos autoLottos = Lottos.generateAutoLottos(lottosDto.getAutoLottoCount());
+        Lottos totalLottos = lottosDto.getLottos().concat(autoLottos);
+        return new LottosDto(lottosDto.getAutoLottoCount(), totalLottos);
     }
+
+    public Statistic winningResult(String inputWinningNumber, int inputBonusBall, LottosDto lottosDto) {
+        Lotto winningNumber = generateManualLotto(inputWinningNumber);
+        LottoNumber bonusBall = LottoNumber.of(inputBonusBall);
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusBall);
+        return lottosDto.getLottos().getWinningStatistics(winningLotto);
+    }
+
 
     private Lottos createManualLottos(List<String> manualLottoNumbers) {
         List<Lotto> lottos = manualLottoNumbers.stream()
@@ -37,22 +37,9 @@ public class LottoController {
         return new Lottos(lottos);
     }
 
-    private WinningLotto inputWinningNumber() {
-        String inputWinningNumber = InputView.askInputWinningNumber();
-        Lotto winningNumber = generateManualLotto(inputWinningNumber);
-        LottoNumber bonusBall = LottoNumber.of(InputView.askInputBonusBall());
-        return new WinningLotto(winningNumber, bonusBall);
-    }
-
     private static Lotto generateManualLotto(String input) {
         String[] numbers = input.split(DELIMITER);
         LottoGenerator lottoGenerator = new ManualLottoGenerator(numbers);
         return lottoGenerator.generateLotto();
-    }
-
-    private void getStatistics(Lottos lottos, WinningLotto winningNumber, Money money) {
-        Statistic winningStatistics = lottos.getWinningStatistics(winningNumber);
-        OutputView.printStatistics(winningStatistics);
-        OutputView.printProfitRate(winningStatistics, money);
     }
 }
