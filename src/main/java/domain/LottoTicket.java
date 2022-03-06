@@ -16,7 +16,7 @@ public class LottoTicket {
     public static LottoTicket fromNumberValues(Set<Integer> lottoNumberValues) {
         validateTicketSize(lottoNumberValues);
         Set<LottoNumber> lottoNumbers = new LinkedHashSet<>();
-        lottoNumberValues.forEach(number -> lottoNumbers.add(new LottoNumber(number)));
+        lottoNumberValues.forEach(number -> lottoNumbers.add(LottoNumber.valueOf(number)));
         return new LottoTicket(lottoNumbers);
     }
 

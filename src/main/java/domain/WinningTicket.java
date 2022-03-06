@@ -13,7 +13,7 @@ public class WinningTicket {
 
     public static WinningTicket create(Set<Integer> winningNumberValues, int bonusNumber) {
         validateSize(winningNumberValues);
-        return new WinningTicket(LottoTicket.fromNumberValues(winningNumberValues), new LottoNumber(bonusNumber));
+        return new WinningTicket(LottoTicket.fromNumberValues(winningNumberValues), LottoNumber.valueOf(bonusNumber));
     }
 
     private static void validateSize(Set<Integer> winningNumbers) {
