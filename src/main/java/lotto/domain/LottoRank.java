@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public enum LottoRank {
     RANK_FIFTH(3, false, 5_000),
@@ -31,17 +32,14 @@ public enum LottoRank {
         return prizeAmount;
     }
 
-    public static LottoRank findLottoRank(long targetCorrectCount, boolean targetBonused) {
-        return Arrays.stream(LottoRank.values())
-                .filter(rank -> rank.isSameCorrectCount(targetCorrectCount) && rank.isSameBonus(targetBonused))
-                .findFirst()
-                .orElse(null);
-    }
-
     public static void addLottoResult(LottoResult lottoResult, long targetCorrectCount, boolean targetBonused) {
-        LottoRank lottoRank = findLottoRank(targetCorrectCount, targetBonused);
-        if (lottoRank != null) {
-            lottoResult.addWinningLotto(lottoRank);
+        try {
+            lottoResult.addWinningLotto(
+                    Arrays.stream(LottoRank.values())
+                    .filter(rank -> rank.isSameCorrectCount(targetCorrectCount) && rank.isSameBonus(targetBonused))
+                    .findFirst()
+                    .orElseThrow());
+        } catch (NoSuchElementException e) {
         }
     }
 
