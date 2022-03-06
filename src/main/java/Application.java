@@ -3,6 +3,7 @@ import domain.LottoFactory;
 import domain.LottoNumber;
 import domain.LottoMoney;
 import domain.LottoPurchaseCount;
+import domain.LottoPurchaseInfo;
 import domain.Lottos;
 import domain.WinningLotto;
 import domain.WinningStatistics;
@@ -47,8 +48,9 @@ public class Application {
     private static Lottos createLottos(LottoPurchaseCount lottoPurchaseCount) {
         try {
             return lottoFactory.generateLottos(
-                InputView.getManualLottoNumbers(lottoPurchaseCount.getManualCount()),
-                lottoPurchaseCount);
+                new LottoPurchaseInfo(
+                    InputView.getManualLottoNumbers(lottoPurchaseCount.getManualCount()),
+                    lottoPurchaseCount));
         } catch (Exception e) {
             OutputView.showErrorMessage(e);
             return createLottos(lottoPurchaseCount);

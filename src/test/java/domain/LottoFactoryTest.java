@@ -40,6 +40,6 @@ class LottoFactoryTest {
             List.of(1, 2, 3, 4, 5, 6), List.of(2, 3, 4, 5, 6, 7), List.of(3, 4, 5, 6, 7, 8));
         LottoPurchaseCount purchaseCount = new LottoPurchaseCount(2, 1);
 
-        assertThat(lottoFactory.generateLottos(lottoNumbers, purchaseCount)).isNotNull();
+        assertThat(lottoFactory.generateLottos(new LottoPurchaseInfo(lottoNumbers, purchaseCount))).isNotNull();
     }
 }

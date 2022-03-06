@@ -18,12 +18,11 @@ public class LottoFactory {
             Arrays.asList(new ManualLottoGeneratorStrategy(), new AutomaticLottoGeneratorStrategy()));
     }
 
-    public Lottos generateLottos(List<List<Integer>> lottosNumbers, LottoPurchaseCount lottoPurchaseCount) {
-        final LottoPurchaseInfo purchaseInfo = new LottoPurchaseInfo(lottosNumbers, lottoPurchaseCount);
+    public Lottos generateLottos(LottoPurchaseInfo lottoPurchaseInfo) {
         final List<Lotto> lottos = new ArrayList<>();
 
         for (LottoGeneratorStrategy lottoGeneratorStrategy : lottoGeneratorStrategies) {
-            lottos.addAll(lottoGeneratorStrategy.generate(purchaseInfo));
+            lottos.addAll(lottoGeneratorStrategy.generate(lottoPurchaseInfo));
         }
 
         return new Lottos(lottos);
