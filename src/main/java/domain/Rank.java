@@ -14,14 +14,31 @@ public enum Rank {
     FIFTH(5_000, 3, false),
     FAIL(0, 0, false);
 
+    private static final int BONUS_CONFIRMATION_CRITERIA = 5;
+
     private final int prize;
     private final int matched;
     private final boolean bonus;
+
 
     Rank(final int prize, final int matched, final boolean bonus) {
         this.prize = prize;
         this.matched = matched;
         this.bonus = bonus;
+    }
+
+    public static Rank calculateRank(Lotto lotto, WinningNumbers winningNumber) {
+        final int matched = matchedRegularNumbers(lotto, winningNumber);
+        boolean hasBonus = false;
+        if (matched == BONUS_CONFIRMATION_CRITERIA) {
+            hasBonus = lotto.hasMatchedNumber(winningNumber.getBonus());
+        }
+        return Rank.getWinnerPrizeByMatched(matched, hasBonus);
+    }
+
+    private static int matchedRegularNumbers(Lotto lotto, WinningNumbers winningNumber) {
+        return (int) winningNumber.getWinningNumbers().stream()
+                .filter(lotto.getLottoNumbers()::contains).count();
     }
 
     public static Rank getWinnerPrizeByMatched(final int matched, final boolean bonus) {

@@ -22,7 +22,7 @@ public class PrizeResult {
 
     private void calculatePrizeResult(List<Lotto> lottos, WinningNumbers winningNumber) {
         for (Lotto lotto : lottos) {
-            final Rank winnerPrice = lotto.calculateRank(winningNumber);
+            final Rank winnerPrice = Rank.calculateRank(lotto, winningNumber);
             updatePrizeResult(winnerPrice);
         }
     }

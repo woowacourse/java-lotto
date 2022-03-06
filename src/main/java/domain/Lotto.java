@@ -7,7 +7,6 @@ import java.util.Set;
 public class Lotto {
 
     public static final int LOTTO_SIZE = 6;
-    private static final int BONUS_CONFIRMATION_CRITERIA = 5;
     private static final String ERROR_DUPLICATE_NUMBER = "로또 번호는 중복되지 않은 6자리 숫자여야 합니다.";
 
     private final Set<Number> lottoNumbers;
@@ -26,21 +25,7 @@ public class Lotto {
         }
     }
 
-    public Rank calculateRank(WinningNumbers winningNumber) {
-        final int matched = matchedRegularNumbers(winningNumber);
-        boolean hasBonus = false;
-        if (matched == BONUS_CONFIRMATION_CRITERIA) {
-            hasBonus = hasMatchedNumber(winningNumber.getBonus());
-        }
-        return Rank.getWinnerPrizeByMatched(matched, hasBonus);
-    }
-
-    private int matchedRegularNumbers(WinningNumbers winningNumber) {
-        return (int) winningNumber.getWinningNumbers().stream()
-                .filter(lottoNumbers::contains).count();
-    }
-
-    private boolean hasMatchedNumber(Number number) {
+    public boolean hasMatchedNumber(Number number) {
         return lottoNumbers.contains(number);
     }
 
