@@ -30,7 +30,8 @@ public class OutputView {
             .append(manualTicketCount)
             .append("장, 자동으로 ")
             .append(autoTicketCount)
-            .append("개를 구매했습니다.").append("\n");
+            .append("개를 구매했습니다.")
+            .append(System.lineSeparator());
     }
 
     private static void appendTicketsToStringBuilder(StringBuilder stringBuilder, Tickets tickets) {
@@ -38,7 +39,8 @@ public class OutputView {
             Set<LottoNumber> lottoNumbers = ticket.getLottoNumbers();
             stringBuilder.append("[")
                 .append(String.join(DELIMITER, getLottoNumbers(lottoNumbers)))
-                .append("]\n");
+                .append("]")
+                .append(System.lineSeparator());
         }
     }
 
@@ -59,9 +61,9 @@ public class OutputView {
 
     private static void appendResultHeaderToStringBuilder(StringBuilder stringBuilder) {
         stringBuilder.append(RESULT_HEADER_MESSAGE)
-            .append("\n")
+            .append(System.lineSeparator())
             .append(DIVIDER)
-            .append("\n");
+            .append(System.lineSeparator());
     }
 
     private static void appendResultToStringBuilder(StringBuilder stringBuilder, Map<Rank, Integer> result) {
@@ -72,7 +74,8 @@ public class OutputView {
             stringBuilder.append("(")
                 .append(rank.getAmount()).append("원) - ")
                 .append(getCount(result, rank))
-                .append("개\n");
+                .append("개")
+                .append(System.lineSeparator());
         }
     }
 
