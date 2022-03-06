@@ -8,12 +8,12 @@ import java.util.stream.IntStream;
 
 public class LotteryNumber implements Comparable<LotteryNumber> {
     public static final Map<Integer, LotteryNumber> NUMBERS;
-    private static final int MINIMUM_LOTTERY_NUMBER = 1;
-    private static final int MAXIMUM_LOTTERY_NUMBER = 45;
+    public static final int MIN_VALUE = 1;
+    public static final int MAX_VALUE = 45;
     private static final String OUT_OF_RANGE = "로또 번호는 1~45 사이의 값이어야 합니다.";
 
     static {
-        NUMBERS = IntStream.rangeClosed(MINIMUM_LOTTERY_NUMBER, MAXIMUM_LOTTERY_NUMBER)
+        NUMBERS = IntStream.rangeClosed(MIN_VALUE, MAX_VALUE)
                 .mapToObj(LotteryNumber::new)
                 .collect(Collectors.toMap(LotteryNumber::getNumber, i -> i));
     }
@@ -36,7 +36,7 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     }
 
     private static void validateNumber(int number) {
-        if (number < MINIMUM_LOTTERY_NUMBER || number > MAXIMUM_LOTTERY_NUMBER) {
+        if (number < MIN_VALUE || number > MAX_VALUE) {
             throw new IllegalArgumentException(OUT_OF_RANGE);
         }
     }

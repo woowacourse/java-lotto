@@ -7,23 +7,19 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomLotteryNumbersGenerator implements LotteryNumbersGenerator {
-    private static final int MINIMUM_LOTTERY_NUMBER = 1;
-    private static final int MAXIMUM_LOTTERY_NUMBER = 45;
-    private static final int SIZE_OF_LOTTERY_TICKETS = 6;
-
-    private static final List<Integer> numbers;
+    private static final List<Integer> NUMBERS;
 
     static {
-        numbers = IntStream.range(MINIMUM_LOTTERY_NUMBER, MAXIMUM_LOTTERY_NUMBER + 1)
+        NUMBERS = IntStream.range(LotteryNumber.MIN_VALUE, LotteryNumber.MAX_VALUE + 1)
                 .boxed()
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<LotteryNumber> generate() {
-        Collections.shuffle(numbers);
-        return numbers.stream()
-                .limit(SIZE_OF_LOTTERY_TICKETS)
+        Collections.shuffle(NUMBERS);
+        return NUMBERS.stream()
+                .limit(LotteryTicket.TICKET_SIZE)
                 .map(LotteryNumber::from)
                 .collect(Collectors.toList());
     }
