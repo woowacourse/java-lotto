@@ -1,10 +1,11 @@
 package domain;
 
-public class SelfPurchaseCount {
+public class LottoCount {
     public static final String MIN_COUNT_ERROR_MESSAGE = "0이상의 값을 횟수로 입력해야 합니다.";
+
     private final int count;
 
-    public SelfPurchaseCount(int count) {
+    public LottoCount(int count) {
         validateCount(count);
         this.count = count;
     }

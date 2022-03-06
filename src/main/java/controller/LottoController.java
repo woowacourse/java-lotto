@@ -1,7 +1,7 @@
 package controller;
 
 import domain.LottoMoney;
-import domain.SelfPurchaseCount;
+import domain.LottoCount;
 import domain.WinningTicket;
 import domain.LottoResult;
 import domain.strategy.RandomNumberGenerateStrategy;
@@ -25,7 +25,7 @@ public class LottoController {
 
     public void run() {
         LottoMoney purchaseMoney = inputPurchaseMoney();
-        SelfPurchaseCount selfPurchaseCount = inputSelfTicketCount();
+        LottoCount selfPurchaseCount = inputSelfTicketCount();
         LottoMoney autoPurchaseMoney = purchaseMoney.purchaseSelfTicket(selfPurchaseCount.getValue());
         LottoTickets lottoTickets = purchaseTickets(selfPurchaseCount, autoPurchaseMoney);
         showGeneratedLottoTickets(lottoTickets);
@@ -43,22 +43,22 @@ public class LottoController {
         }
     }
 
-    private SelfPurchaseCount inputSelfTicketCount() {
+    private LottoCount inputSelfTicketCount() {
         try {
-            return new SelfPurchaseCount(InputView.inputSelfTicketCount());
+            return new LottoCount(InputView.inputSelfTicketCount());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputSelfTicketCount();
         }
     }
 
-    private LottoTickets purchaseTickets(SelfPurchaseCount selfPurchaseCount, LottoMoney autoPurchaseMoney) {
+    private LottoTickets purchaseTickets(LottoCount selfPurchaseCount, LottoMoney autoPurchaseMoney) {
         LottoTickets selfPurchaseTickets = inputSelfLottoTicket(selfPurchaseCount);
         LottoTickets autoPurchaseTickets = lottoGame.purchaseAutoTickets(autoPurchaseMoney);
         return selfPurchaseTickets.concat(autoPurchaseTickets);
     }
 
-    private LottoTickets inputSelfLottoTicket(SelfPurchaseCount selfPurchaseCount) {
+    private LottoTickets inputSelfLottoTicket(LottoCount selfPurchaseCount) {
         try {
             return LottoTickets.fromTicketNumbers(InputView.inputSelfTicketNumbers(selfPurchaseCount.getValue()));
         } catch (IllegalArgumentException e) {
