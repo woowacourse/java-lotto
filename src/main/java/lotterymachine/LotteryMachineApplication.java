@@ -17,8 +17,7 @@ public class LotteryMachineApplication {
         OutputView.printLotteryPurchaseCount(count);
         OutputView.printLotteryTickets(lotteryTickets);
 
-        LotteryTicket winningLotteryNumbers = LotteryTicket.from(InputView.getWinningLotteryNumbers());
-        WinningLottery winningLottery = new WinningLottery(winningLotteryNumbers
+        WinningLottery winningLottery = new WinningLottery(LotteryTicket.from(InputView.getWinningLotteryNumbers())
                 , LotteryNumber.from(InputView.getBonusNumber()));
         WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
         OutputView.printWinningLotteryResults(winningResult.getResult());
