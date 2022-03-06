@@ -3,20 +3,20 @@ package lotto.domain.lottonumber;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 
 public class LottoTicket {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
-    static final String INVALID_LOTTO_NUMBER_COUNT = "[ERROR] 로또 숫자는 6개만 입력해야 합니다";
+    static final String INVALID_LOTTO_NUMBER_COUNT = "[ERROR] 로또 숫자의 입력이 올바르지 않습니다.";
 
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(String lottoNumbersString) {
-        this.lottoNumbers = Arrays.stream(lottoNumbersString.split(","))
-                .map(String::trim)
-                .map(LottoNumber::new).collect(Collectors.toUnmodifiableSet());
+        this.lottoNumbers = createLottoNumbersFromString(lottoNumbersString);
         isCorrectLottoNumbers();
     }
 
@@ -25,8 +25,13 @@ public class LottoTicket {
         isCorrectLottoNumbers();
     }
 
+    private Set<LottoNumber> createLottoNumbersFromString(String lottoNumbersString) {
+        return Arrays.stream(lottoNumbersString.split(","))
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
     public Set<LottoNumber> lottoNumbers() {
-//        lottoNumbers = Set.copyOf(lottoNumbers);
         return Collections.unmodifiableSet(lottoNumbers);
     }
 
@@ -38,5 +43,11 @@ public class LottoTicket {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public int getMatchCount(LottoTicket lottoTicket) {
+        return (int) this.lottoNumbers.stream()
+                .filter(lottoTicket::contains)
+                .count();
     }
 }

@@ -5,8 +5,10 @@ import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map.Entry;
 import lotto.domain.lottonumber.LottoTicket;
 import lotto.domain.lottonumber.WinningNumbers;
+import lotto.domain.vo.PurchaseAmount;
 
 public class WinningStats {
 
@@ -25,31 +27,41 @@ public class WinningStats {
 
     private void fulfillCorrectAnswerNumbers(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
         for (LottoTicket lottoTicket : lottoTickets) {
-            int matchCount = winningNumbers.getMatchCount(lottoTicket);
-            boolean containsBonusBall = winningNumbers.doesMatchBonusBall(lottoTicket);
-            LottoRank lottoRank = LottoRank.getRank(matchCount, containsBonusBall);
+            LottoRank lottoRank = getLottoRank(winningNumbers, lottoTicket);
             plusOneCorrectAnswerNumbers(lottoRank);
         }
     }
 
-    public int getCorrectAnswerNumbers(LottoRank lottoRank) {
-        return lottoRankMap.get(lottoRank);
+    private LottoRank getLottoRank(WinningNumbers winningNumbers, LottoTicket lottoTicket) {
+        int matchCount = winningNumbers.getMatchCount(lottoTicket);
+        boolean containsBonusBall = winningNumbers.doesMatchBonusBall(lottoTicket);
+        return LottoRank.getRank(matchCount, containsBonusBall);
     }
 
     private void plusOneCorrectAnswerNumbers(LottoRank lottoRank) {
         lottoRankMap.put(lottoRank, lottoRankMap.get(lottoRank) + 1);
     }
 
+    public int getCorrectAnswerNumbers(LottoRank lottoRank) {
+        return lottoRankMap.get(lottoRank);
+    }
+
     public long getTotalPrize() {
-        return lottoRankMap.keySet().stream()
-                .mapToLong((LottoRank lottoRank) ->
-                        lottoRank.prizeMoney() * lottoRankMap.get(lottoRank))
+        return lottoRankMap.entrySet().stream()
+                .mapToLong(this::subTotal)
                 .sum();
     }
 
-    public double getEarningsRate(PurchaseAmount money) {
+    private long subTotal(Entry<LottoRank, Integer> entry) {
+        long prizeMoney = entry.getKey().prizeMoney();
+        Integer hitCount = entry.getValue();
+        return prizeMoney * hitCount;
+    }
+
+
+    public BigDecimal getEarningsRate(PurchaseAmount money) {
         BigDecimal totalPrize = new BigDecimal(getTotalPrize());
         BigDecimal amount = new BigDecimal(money.amount());
-        return totalPrize.divide(amount, EARNING_RATE_PRECISIONS, RoundingMode.HALF_EVEN).doubleValue();
+        return totalPrize.divide(amount, EARNING_RATE_PRECISIONS, RoundingMode.HALF_EVEN);
     }
 }

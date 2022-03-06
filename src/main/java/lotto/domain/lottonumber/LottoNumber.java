@@ -13,23 +13,23 @@ public class LottoNumber {
 
     public LottoNumber(int number) {
         this.number = number;
-        validateRange();
+        validateLottoNumberRange();
     }
 
     public LottoNumber(String number) {
         this.number = convertStringToInt(number);
-        validateRange();
+        validateLottoNumberRange();
     }
 
     private int convertStringToInt(String numberString) {
         try {
-            return Integer.parseInt(numberString);
+            return Integer.parseInt(numberString.trim());
         } catch (NumberFormatException e) {
             throw new NumberFormatException(NOT_NUMBER_OF_LOTTO);
         }
     }
 
-    private void validateRange() {
+    private void validateLottoNumberRange() {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE);
         }

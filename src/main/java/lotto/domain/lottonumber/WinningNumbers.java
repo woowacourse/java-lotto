@@ -7,23 +7,20 @@ public class WinningNumbers {
     private final LottoTicket lottoTicket;
     private final LottoNumber bonusBall;
 
-    public WinningNumbers(String lottoNumberStrings, String bonusBallString) {
-        lottoTicket = new LottoTicket(lottoNumberStrings);
-        bonusBall = new LottoNumber(bonusBallString);
-
+    public WinningNumbers(LottoTicket lottoTicket, LottoNumber bonusBall) {
         if (isDuplicated(lottoTicket, bonusBall)) {
             throw new IllegalArgumentException(DUPLICATED_LOTTO_TICKET_AND_BONUS_BALL);
         }
+        this.lottoTicket = lottoTicket;
+        this.bonusBall = bonusBall;
     }
 
     private boolean isDuplicated(LottoTicket lottoTicket, LottoNumber bonusBall) {
-        return lottoTicket.lottoNumbers().contains(bonusBall);
+        return lottoTicket.contains(bonusBall);
     }
 
     public int getMatchCount(LottoTicket lottoTicket) {
-        return (int) this.lottoTicket.lottoNumbers().stream()
-                .filter(lottoTicket::contains)
-                .count();
+        return this.lottoTicket.getMatchCount(lottoTicket);
     }
 
     public boolean doesMatchBonusBall(LottoTicket lottoTicket) {

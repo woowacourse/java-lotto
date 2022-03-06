@@ -3,8 +3,10 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lottonumber.LottoTicket;
 import lotto.domain.lottonumber.WinningNumbers;
+import lotto.domain.vo.PurchaseAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +17,9 @@ class WinningStatsTest {
     void getCorrectAnswerNumbers() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 10, 11, 12", "13");
+        WinningNumbers winningNumbers = new WinningNumbers(
+                new LottoTicket("1, 2, 3, 20, 21, 22"),
+                new LottoNumber("30"));
         WinningStats winningStats = new WinningStats(List.of(lottoTicket), winningNumbers);
 
         // when
@@ -31,7 +35,9 @@ class WinningStatsTest {
     void getTotalPrize() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 10", "6");
+        WinningNumbers winningNumbers = new WinningNumbers(
+                new LottoTicket("1, 2, 3, 4, 5, 20"),
+                new LottoNumber("6"));
         WinningStats winningStats = new WinningStats(List.of(lottoTicket), winningNumbers);
 
         // when
@@ -46,12 +52,14 @@ class WinningStatsTest {
     void getEarningsRate() {
         // given
         LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
-        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 10, 11, 12", "13");
+        WinningNumbers winningNumbers = new WinningNumbers(
+                new LottoTicket("1, 2, 3, 10, 11, 12"),
+                new LottoNumber("13"));
         WinningStats winningStats = new WinningStats(List.of(lottoTicket), winningNumbers);
         PurchaseAmount money = new PurchaseAmount("10000");
 
         // when
-        double earningsRate = winningStats.getEarningsRate(money);
+        double earningsRate = winningStats.getEarningsRate(money).doubleValue();
 
         // then
         assertThat(earningsRate).isEqualTo(0.5);
