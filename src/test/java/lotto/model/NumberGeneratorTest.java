@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import lotto.model.utils.NumberGenerator;
-import lotto.model.utils.RandomNumberGenerator;
+import lotto.model.utils.AutoRandomNumberGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ class NumberGeneratorTest {
     @DisplayName("랜덤으로 여러 번호를 생성한다.")
     void createRandomNumber() {
         // given
-        NumberGenerator numberGenerator = new RandomNumberGenerator(1, 10);
+        NumberGenerator numberGenerator = new AutoRandomNumberGenerator(1, 10);
         // when
         List<Integer> numbers = numberGenerator.generate(6);
         // then
@@ -27,7 +27,7 @@ class NumberGeneratorTest {
     @DisplayName("임의의 범위의 값을 생성한다.")
     void testRandomNumberRange() {
         // given
-        NumberGenerator numberGenerator = new RandomNumberGenerator(1, 10);
+        NumberGenerator numberGenerator = new AutoRandomNumberGenerator(1, 10);
         // when
         List<Integer> numbers = numberGenerator.generate(6);
         // then
