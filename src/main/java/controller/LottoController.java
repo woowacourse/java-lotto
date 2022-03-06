@@ -83,16 +83,16 @@ public class LottoController {
 	}
 
 	private List<List<Integer>> translateLottosForPrint(Lottos lottos) {
-		List<LottoNumbers> amountOfLottoNumbers = lottos.getLottoStorage()
-			.stream()
+		return lottos.getLottoStorage().stream()
 			.map(Lotto::getNumbers)
-			.collect(Collectors.toList());
-		List<List<LottoNumber>> amountOfLottoNumber = amountOfLottoNumbers.stream()
 			.map(LottoNumbers::getNumbers)
+			.map(this::mapLottoNumbersToInts)
 			.collect(Collectors.toList());
-		return amountOfLottoNumber.stream()
-			.map(lottoNumberList -> lottoNumberList.stream().map(LottoNumber::getNumber).collect(
-				Collectors.toList()))
+	}
+
+	private List<Integer> mapLottoNumbersToInts(List<LottoNumber> lottoNumbers) {
+		return lottoNumbers.stream()
+			.map(LottoNumber::getNumber)
 			.collect(Collectors.toList());
 	}
 
