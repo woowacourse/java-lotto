@@ -1,40 +1,26 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class LottoResult {
-    private static final int INIT_VALUE = 0;
-    private final HashMap<LottoRank, Integer> result;
+    private final Map<LottoRank, Integer> result;
 
-
-    public LottoResult() {
-        this.result = new LinkedHashMap<>();
-        for (LottoRank lottoRank : LottoRank.values()) {
-            result.put(lottoRank, INIT_VALUE);
-        }
+    public LottoResult(Map<LottoRank, Integer> rankMap) {
+        this.result = new LinkedHashMap<>(rankMap);
     }
 
-    public void add(LottoRank lottoRank) {
-        result.put(lottoRank, result.get(lottoRank) + 1);
+    private int sumOfPrize() {
+        return result.keySet().stream()
+                .mapToInt(lottoRank -> result.get(lottoRank) * lottoRank.getPrizeAmount())
+                .sum();
     }
 
-    public int sumOfPrize() {
-        int sum = 0;
-        for (LottoRank lottoRank : result.keySet()) {
-            sum += result.get(lottoRank) * lottoRank.getPrizeAmount();
-        }
-        return sum;
+    public double calculateYield(Money money) {
+        return sumOfPrize() / (double) money.getAmount();
     }
 
-    public HashMap<LottoRank, Integer> getResult() {
+    public Map<LottoRank, Integer> getResult() {
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "LottoResult{" +
-                "result=" + result +
-                '}';
     }
 }
