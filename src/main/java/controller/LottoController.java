@@ -1,31 +1,28 @@
 package controller;
 
-import domain.LottoMoney;
 import domain.LottoCount;
-import domain.WinningTicket;
+import domain.LottoMachine;
+import domain.LottoMoney;
+import domain.LottoTickets;
+import domain.WinningPrize;
 import domain.WinningResult;
+import domain.WinningTicket;
+import domain.dto.LottoTicketDto;
+import domain.dto.WinningResultDto;
 import domain.strategy.RandomNumberGenerateStrategy;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import domain.LottoMachine;
-import domain.dto.LottoTicketDto;
-import domain.LottoTickets;
-import domain.WinningPrize;
-import domain.dto.WinningResultDto;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-    private final LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerateStrategy());
 
     public void run() {
+        LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerateStrategy());
         LottoMoney purchaseMoney = inputPurchaseMoney();
-        LottoCount selfPurchaseCount = inputSelfTicketCount();
-        LottoTickets selfPurchaseTickets = inputSelfLottoTicket(selfPurchaseCount);
-        LottoTickets lottoTickets = lottoMachine.purchaseTickets(purchaseMoney, selfPurchaseCount, selfPurchaseTickets);
+        LottoTickets lottoTickets = purchaseTickets(lottoMachine, purchaseMoney);
         showGeneratedLottoTickets(lottoTickets);
         WinningTicket winningTicket = inputWinningNumbers();
         WinningResult winningResult = WinningResult.toExtract(lottoTickets, winningTicket);
@@ -39,6 +36,12 @@ public class LottoController {
             System.out.println(e.getMessage());
             return inputPurchaseMoney();
         }
+    }
+
+    private LottoTickets purchaseTickets(LottoMachine lottoMachine, LottoMoney purchaseMoney) {
+        LottoCount selfPurchaseCount = inputSelfTicketCount();
+        LottoTickets selfPurchaseTickets = inputSelfLottoTicket(selfPurchaseCount);
+        return lottoMachine.purchaseTickets(purchaseMoney, selfPurchaseCount, selfPurchaseTickets);
     }
 
     private LottoCount inputSelfTicketCount() {
