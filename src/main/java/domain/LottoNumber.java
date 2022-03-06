@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class LottoNumber {
     public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 45;
-    public static final String LOTTO_NUMBER_RANGE_ERROR_MESSAGE = String.format("로또 번호는 %d~%d 사이로 입력해주세요.",
+    private static final String LOTTO_NUMBER_RANGE_ERROR_MESSAGE = String.format("로또 번호는 %d~%d 사이로 입력해주세요.",
             MIN_VALUE, MAX_VALUE);
 
     private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>(){{

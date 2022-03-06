@@ -12,14 +12,7 @@ public class WinningTicket {
     }
 
     public static WinningTicket create(Set<Integer> winningNumberValues, int bonusNumber) {
-        validateSize(winningNumberValues);
         return new WinningTicket(LottoTicket.fromNumberValues(winningNumberValues), LottoNumber.valueOf(bonusNumber));
-    }
-
-    private static void validateSize(Set<Integer> winningNumbers) {
-        if (winningNumbers.size() != LottoTicket.SIZE) {
-            throw new IllegalArgumentException(LottoTicket.SIZE_ERROR_MESSAGE);
-        }
     }
 
     public int compareMatchCount(LottoTicket lottoTicket) {

@@ -12,7 +12,7 @@ class LottoMoneyTest {
     void checkNegativeMoney() {
         assertThatThrownBy(() -> new LottoMoney(-1))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoMoney.NOT_POSITIVE_ERROR_MESSAGE);
+                .hasMessage("금액은 양수로 입력해야 합니다.");
     }
 
     @Test
@@ -20,7 +20,7 @@ class LottoMoneyTest {
     void checkNotMultiplesOfPrice() {
         assertThatThrownBy(() -> new LottoMoney(1700))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoMoney.NOT_MULTIPLES_OF_PRICE_ERROR_MESSAGE);
+                .hasMessage("금액을 1000의 배수로 입력해주세요.");
     }
 
     @Test

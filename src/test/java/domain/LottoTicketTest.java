@@ -13,6 +13,6 @@ class LottoTicketTest {
     void checkTicketSizeError() {
         assertThatThrownBy(() -> LottoTicket.fromNumberValues(Set.of(1, 2, 3, 4, 5, 6, 7)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoTicket.SIZE_ERROR_MESSAGE);
+                .hasMessage("한 티켓의 로또 번호는 6개여야 합니다.");
     }
 }

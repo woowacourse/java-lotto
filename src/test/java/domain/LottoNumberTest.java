@@ -12,6 +12,6 @@ public class LottoNumberTest {
     void checkLottoNumberRange() {
         assertThatThrownBy(
                 () -> LottoNumber.valueOf(46)
-        ).isInstanceOf(IllegalArgumentException.class).hasMessage(LottoNumber.LOTTO_NUMBER_RANGE_ERROR_MESSAGE);
+        ).isInstanceOf(IllegalArgumentException.class).hasMessage("로또 번호는 1~45 사이로 입력해주세요.");
     }
 }
