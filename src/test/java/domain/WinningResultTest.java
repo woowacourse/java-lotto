@@ -3,8 +3,6 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.strategy.NumberGenerateStrategy;
-import domain.strategy.DefaultWinningPrizeStrategy;
-import domain.strategy.WinningPrizeStrategy;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,8 +19,7 @@ class WinningResultTest {
         NumberGenerateStrategy numberGenerateStrategy = () -> new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTickets lottoTickets = LottoTickets.generateAutoTickets(new LottoMoney(1000),
                 numberGenerateStrategy);
-        WinningPrizeStrategy winningPrizeStrategy = new DefaultWinningPrizeStrategy();
-        WinningResult winningResult = WinningResult.toExtract(lottoTickets, winningTicket, winningPrizeStrategy);
+        WinningResult winningResult = WinningResult.toExtract(lottoTickets, winningTicket);
         assertThat(winningResult.getCountOfWinning().get(WinningPrize.FIRST)).isEqualTo(1);
     }
 
@@ -34,11 +31,24 @@ class WinningResultTest {
         WinningTicket winningTicket = WinningTicket.create(winningNumbers, 7);
         NumberGenerateStrategy numberGenerateStrategy = () -> new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTickets lottoTickets = LottoTickets.generateAutoTickets(purchaseMoney, numberGenerateStrategy);
-        WinningPrizeStrategy winningPrizeStrategy = new DefaultWinningPrizeStrategy();
-        WinningResult winningResult = WinningResult.toExtract(lottoTickets, winningTicket, winningPrizeStrategy);
+        WinningResult winningResult = WinningResult.toExtract(lottoTickets, winningTicket);
 
         assertThat(winningResult.calculateLottoRateOfReturn(purchaseMoney))
                 .isEqualTo(WinningPrize.FIRST.getPrizeMoney() / (double)(lottoTickets.getTickets().size()
-                        * LottoGame.TICKET_PRICE));
+                        * LottoMachine.TICKET_PRICE));
+    }
+
+    @Test
+    @DisplayName("WinningPrize가 맞은 숫자 갯수랑 보너스 여부로 2등을 잘 판단하는지 확인한다.")
+    void checkPrizeResultSecond() {
+        assertThat(WinningPrize.findWinningPrize(5, true))
+                .isEqualTo(WinningPrize.SECOND);
+    }
+
+    @Test
+    @DisplayName("WinningPrize가 맞은 숫자 갯수랑 보너스 여부로 2등을 제외한 상금 결과를 잘 판단하는지 확인한다.")
+    void checkPrizeResult() {
+        assertThat(WinningPrize.findWinningPrize(5, false))
+                .isEqualTo(WinningPrize.THIRD);
     }
 }

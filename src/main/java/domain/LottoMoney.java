@@ -3,7 +3,7 @@ package domain;
 public class LottoMoney {
     private static final String NOT_POSITIVE_ERROR_MESSAGE = "금액은 양수로 입력해야 합니다.";
     private static final String NOT_MULTIPLES_OF_PRICE_ERROR_MESSAGE
-            = String.format("금액을 %d의 배수로 입력해주세요.", LottoGame.TICKET_PRICE);
+            = String.format("금액을 %d의 배수로 입력해주세요.", LottoMachine.TICKET_PRICE);
     private static final String PURCHASE_OVER_ERROR_MESSAGE = "금액보다 많은 수동 티켓을 구매할 수 없습니다.";
 
     private final int value;
@@ -28,19 +28,19 @@ public class LottoMoney {
     }
 
     private boolean isMultiplesOfTicketPrice(int purchaseMoney) {
-        return purchaseMoney % LottoGame.TICKET_PRICE != 0;
+        return purchaseMoney % LottoMachine.TICKET_PRICE != 0;
     }
 
     public LottoMoney purchaseSelfTicket(int count) {
-        int changeMoneyValue = this.value - count * LottoGame.TICKET_PRICE;
+        int changeMoneyValue = this.value - count * LottoMachine.TICKET_PRICE;
         if (changeMoneyValue < 0) {
             throw new IllegalArgumentException(PURCHASE_OVER_ERROR_MESSAGE);
         }
-        return new LottoMoney(this.value - count * LottoGame.TICKET_PRICE);
+        return new LottoMoney(this.value - count * LottoMachine.TICKET_PRICE);
     }
 
     public int getCanPurchaseTicketCount() {
-        return value / LottoGame.TICKET_PRICE;
+        return value / LottoMachine.TICKET_PRICE;
     }
 
     public int getValue() {

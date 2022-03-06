@@ -10,8 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import domain.strategy.DefaultWinningPrizeStrategy;
-import domain.LottoGame;
+import domain.LottoMachine;
 import domain.dto.LottoTicketDto;
 import domain.LottoTickets;
 import domain.WinningPrize;
@@ -20,17 +19,16 @@ import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-    private final LottoGame lottoGame = new LottoGame(new RandomNumberGenerateStrategy(),
-            new DefaultWinningPrizeStrategy());
+    private final LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerateStrategy());
 
     public void run() {
         LottoMoney purchaseMoney = inputPurchaseMoney();
         LottoCount selfPurchaseCount = inputSelfTicketCount();
-        LottoMoney autoPurchaseMoney = purchaseMoney.purchaseSelfTicket(selfPurchaseCount.getValue());
-        LottoTickets lottoTickets = purchaseTickets(selfPurchaseCount, autoPurchaseMoney);
+        LottoTickets selfPurchaseTickets = inputSelfLottoTicket(selfPurchaseCount);
+        LottoTickets lottoTickets = lottoMachine.purchaseTickets(purchaseMoney, selfPurchaseCount, selfPurchaseTickets);
         showGeneratedLottoTickets(lottoTickets);
         WinningTicket winningTicket = inputWinningNumbers();
-        WinningResult winningResult = lottoGame.createWinningResult(lottoTickets, winningTicket);
+        WinningResult winningResult = WinningResult.toExtract(lottoTickets, winningTicket);
         showLottoResult(winningResult, winningResult.calculateLottoRateOfReturn(purchaseMoney));
     }
 
@@ -52,15 +50,10 @@ public class LottoController {
         }
     }
 
-    private LottoTickets purchaseTickets(LottoCount selfPurchaseCount, LottoMoney autoPurchaseMoney) {
-        LottoTickets selfPurchaseTickets = inputSelfLottoTicket(selfPurchaseCount);
-        LottoTickets autoPurchaseTickets = lottoGame.purchaseAutoTickets(autoPurchaseMoney);
-        return selfPurchaseTickets.concat(autoPurchaseTickets);
-    }
-
     private LottoTickets inputSelfLottoTicket(LottoCount selfPurchaseCount) {
         try {
-            return LottoTickets.fromTicketNumbers(InputView.inputSelfTicketNumbers(selfPurchaseCount.getValue()));
+            List<Set<Integer>> ticketNumbers = InputView.inputSelfTicketNumbers(selfPurchaseCount.getValue());
+            return LottoTickets.fromTicketNumbers(ticketNumbers);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputSelfLottoTicket(selfPurchaseCount);
@@ -103,7 +96,7 @@ public class LottoController {
     }
 
     private WinningResultDto toWinningResultDto(WinningPrize winningPrize, int count) {
-        return new WinningResultDto(lottoGame.findMatchCount(winningPrize), lottoGame.findMatchBonus(winningPrize),
+        return new WinningResultDto(winningPrize.getMatchCount(), winningPrize.isMatchBonus(),
                 winningPrize.getPrizeMoney(), count);
     }
 }
