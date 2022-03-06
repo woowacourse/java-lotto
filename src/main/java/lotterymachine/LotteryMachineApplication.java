@@ -21,7 +21,7 @@ public class LotteryMachineApplication {
                 , LotteryNumber.from(InputView.getBonusNumber()));
         WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
         OutputView.printWinningLotteryResults(winningResult.getResult());
-        OutputView.printProfitRate(winningResult.getTotalProfitRate(money.getValue()));
+        OutputView.printProfitRate(Yield.of(winningResult.findTotalProfit(), money.getValue()).getProfitRate());
     }
 
     private static LotteryTickets createLotteryTickets(Count count) {
