@@ -9,12 +9,10 @@ public class Money {
     private static final int UNIT = 1000;
 
     private final int money;
-    private final int lottoCount;
 
     public Money(int money) {
         validateUnit(money);
         this.money = money;
-        this.lottoCount = money / UNIT;
     }
 
     private void validateUnit(int money) {
@@ -28,12 +26,12 @@ public class Money {
     }
 
     public int getLottoCount() {
-        return lottoCount;
+        return money / UNIT;
     }
 
     public int getAutoLottoCount(int manualLottoCount) {
-        validateCountRange(lottoCount, manualLottoCount);
-        return lottoCount - manualLottoCount;
+        validateCountRange(money / UNIT, manualLottoCount);
+        return money / UNIT - manualLottoCount;
     }
 
     private void validateCountRange(int maxLottoCount, int inputCount) {
