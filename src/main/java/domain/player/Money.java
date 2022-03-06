@@ -4,7 +4,7 @@ import utils.ExceptionMessage;
 
 public class Money {
 
-    static final int MINIMUM_PURCHASE_AMOUNT = 1000;
+    static final int LOTTO_PRICE = 1000;
 
     private int amount;
 
@@ -15,27 +15,27 @@ public class Money {
     }
 
     private void validateAmount(int amount) {
-        if (amount < MINIMUM_PURCHASE_AMOUNT) {
+        if (amount < LOTTO_PRICE) {
             throw new IllegalArgumentException(ExceptionMessage.NOT_ENOUGH_MONEY);
         }
     }
 
     private void validateUnit(int amount) {
-        if (amount % MINIMUM_PURCHASE_AMOUNT != 0) {
+        if (amount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ExceptionMessage.NOT_1000_UNIT);
         }
     }
 
     public void deductMoney() {
-        amount -= MINIMUM_PURCHASE_AMOUNT;
+        amount -= LOTTO_PRICE;
     }
 
     public boolean isBiggerThanLottoPrice() {
-        return amount >= MINIMUM_PURCHASE_AMOUNT;
+        return amount >= LOTTO_PRICE;
     }
 
     public int calculateTotalLottoCount() {
-        return amount / MINIMUM_PURCHASE_AMOUNT;
+        return amount / LOTTO_PRICE;
     }
 
     public int getAmount() {

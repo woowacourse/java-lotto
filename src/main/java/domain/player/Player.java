@@ -48,7 +48,7 @@ public class Player {
     }
 
     public double calculateIncomeRate(double totalIncome) {
-        return totalIncome / (lottos.size() * Money.MINIMUM_PURCHASE_AMOUNT);
+        return totalIncome / (lottos.size() * Money.LOTTO_PRICE);
     }
 
     public List<Lotto> getLottos() {
