@@ -2,11 +2,10 @@ package domain;
 
 import java.util.*;
 
-import static domain.AutoLottoGenerator.MAX_LOTTO_NUMBER;
-import static domain.AutoLottoGenerator.MIN_LOTTO_NUMBER;
-
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
     private static final String INVALID_LOTTO_NUMBER_RANGE = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.";
     private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
