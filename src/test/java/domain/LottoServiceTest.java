@@ -5,14 +5,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import service.LottoMachine;
+import service.LottoService;
 
-public class LottoMachineTest {
+public class LottoServiceTest {
+
+	private final LottoService lottoService = new LottoService();
 
 	@DisplayName("로또를 발행한다")
 	@Test
 	void createLotto() {
-		assertThat(new LottoMachine().createLottos(2))
+		assertThat(lottoService.createLottos(5, Lotto.SIZE))
 			.isInstanceOf(Lottos.class);
 	}
 
@@ -20,10 +22,10 @@ public class LottoMachineTest {
 	@Test
 	void createManualAndAutoLottos() {
 		//given
-		Lottos manualLottos = LottoMachine.createLottos(4);
+		Lottos manualLottos = lottoService.createLottos(4, Lotto.SIZE);
 		//when
-		int autoCount = 3;
-		Lottos manualAndAutoMixLottos = LottoMachine.createManualAndAutoMixLottos(manualLottos, autoCount);
+		OrderForm orderForm = new OrderForm(new Payment(5000), 2);
+		Lottos manualAndAutoMixLottos = lottoService.createLottos(manualLottos, orderForm);
 		//then
 		assertThat(manualAndAutoMixLottos.getSize()).isEqualTo(7);
 	}

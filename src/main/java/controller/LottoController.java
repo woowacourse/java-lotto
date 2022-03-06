@@ -1,15 +1,19 @@
 package controller;
 
-import domain.LottoResult;
 import domain.Lottos;
 import domain.OrderForm;
 import domain.Payment;
 import domain.WinningLotto;
-import service.LottoMachine;
+import service.LottoService;
+import service.LottoStrategy;
 import view.InputConvertor;
 import view.OutputView;
 
 public class LottoController {
+	private final LottoStrategy lottoStrategy;
+	public LottoController(LottoStrategy lottoStrategy){
+		this.lottoStrategy = lottoStrategy;
+	}
 
 	public void run() {
 		Payment payment = InputConvertor.createPayment();
@@ -26,8 +30,7 @@ public class LottoController {
 		OutputView.printLottoResult(lottos.createLottoResult(winningLotto), payment);
 	}
 
-	private static Lottos createLottos(Lottos manualLottos, OrderForm orderForm) {
-		return LottoMachine
-			.createManualAndAutoMixLottos(manualLottos, orderForm.calculateAutoLottoCount());
+	private  Lottos createLottos(Lottos manualLottos, OrderForm orderForm) {
+		return lottoStrategy.createLottos(manualLottos, orderForm);
 	}
 }

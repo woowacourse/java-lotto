@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import service.LottoMachine;
+import service.LottoService;
 
 /**
  * - **수동으로 구매할 갯수를 입력받는다.** (추가)
@@ -58,7 +58,7 @@ public class OrderFormTest {
 		//given
 		Payment payment = new Payment(10_000);
 		OrderForm orderForm = new OrderForm(payment, 3);
-		Lottos manualLottos = LottoMachine.createLottos(3);
+		Lottos manualLottos = new LottoService().createLottos(3, Lotto.SIZE);
 		//when, then
 
 		assertThat(orderForm.isEqualQuantity(manualLottos.getSize())).isEqualTo(true);

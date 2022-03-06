@@ -5,14 +5,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import service.LottoMachine;
+import service.LottoService;
 
 public class LottosTest {
 
@@ -51,7 +51,7 @@ public class LottosTest {
 	@CsvSource(value = {"5:true", "6:false"}, delimiter = ':')
 	void check_Lottos_size(int size, boolean expected) {
 		//given, when
-		Lottos lottos = LottoMachine.createLottos(5);
+		Lottos lottos = new LottoService().createLottos(5,Lotto.SIZE);
 		//then
 		assertThat(lottos.getSize() == size).isEqualTo(expected);
 	}
