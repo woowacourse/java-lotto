@@ -49,7 +49,7 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 }

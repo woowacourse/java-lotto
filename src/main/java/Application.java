@@ -20,7 +20,7 @@ public class Application {
         final WinningLotto winningLotto = createWinningLotto();
 
         final WinningStatistics winningStatistics = lottos.match(purchaseMoney, winningLotto);
-        OutputView.showWinningStatistics(winningStatistics.getWinningStatistics());
+        OutputView.showWinningStatistics(winningStatistics.values());
         OutputView.showProfitRate(winningStatistics.calculateProfitRate());
     }
 

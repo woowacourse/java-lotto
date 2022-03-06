@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,17 +40,17 @@ public class LottosTest {
     @Test
     @DisplayName("보유하고 있는 로또들과 당첨 로또의 매칭 결과를 계산 1")
     void calculateLottoMatchResult_01() {
-        WinningStatistics lottoRewards = getLottoWinningStatistics();
+        Map<LottoReward, Integer> winningStatistics = getLottoWinningStatistics().values();
 
-        assertThat(lottoRewards.getWinningStatistics().get(LottoReward.FIRST)).isEqualTo(1);
+        assertThat(winningStatistics.get(LottoReward.FIRST)).isEqualTo(1);
     }
 
     @Test
     @DisplayName("보유하고 있는 로또들과 당첨 로또의 매칭 결과를 계산 2")
     void calculateLottoMatchResult_02() {
-        WinningStatistics lottoRewards = getLottoWinningStatistics();
+        Map<LottoReward, Integer> winningStatistics = getLottoWinningStatistics().values();
 
-        assertThat(lottoRewards.getWinningStatistics().get(LottoReward.FIFTH)).isEqualTo(1);
+        assertThat(winningStatistics.get(LottoReward.FIFTH)).isEqualTo(1);
     }
 
     private WinningStatistics getLottoWinningStatistics() {

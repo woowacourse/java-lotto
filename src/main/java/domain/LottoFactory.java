@@ -10,7 +10,7 @@ public class LottoFactory {
     }
 
     public static List<Lotto> createAutoLottos(LottoCount LottoCount, LottoNumbersGenerator lottoNumbersGenerator) {
-        return IntStream.range(0, LottoCount.getAutoLottoCount()).boxed()
+        return IntStream.range(0, LottoCount.autoLottoCount()).boxed()
             .map(i -> createAutoLotto(lottoNumbersGenerator))
             .collect(Collectors.toList());
     }

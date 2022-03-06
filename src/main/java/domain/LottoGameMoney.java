@@ -38,7 +38,7 @@ public class LottoGameMoney {
         return amount / LottoConstant.LOTTO_PRICE;
     }
 
-    public int getAmount() {
+    public int amount() {
         return amount;
     }
 }

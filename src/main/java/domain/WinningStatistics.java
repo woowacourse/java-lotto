@@ -35,17 +35,17 @@ public class WinningStatistics {
 
     public double calculateProfitRate() {
         int winningAmount = calculateWinningAmount();
-        int purchasedLottoAmount = purchaseMoney.getAmount();
+        int purchasedLottoAmount = purchaseMoney.amount();
         return (double)winningAmount / purchasedLottoAmount;
     }
 
     private int calculateWinningAmount() {
         return Arrays.stream(LottoReward.values())
-            .mapToInt(reward -> reward.getPrice() * statistics.get(reward))
+            .mapToInt(reward -> reward.price() * statistics.get(reward))
             .sum();
     }
 
-    public Map<LottoReward, Integer> getWinningStatistics() {
+    public Map<LottoReward, Integer> values() {
         return Collections.unmodifiableMap(statistics);
     }
 }

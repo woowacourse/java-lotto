@@ -20,11 +20,11 @@ public class OutputView {
     }
 
     public static void showPurchasedLottos(LottoCount lottoCount, List<Lotto> lottos) {
-        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottoCount.getManualLottoCount(),
-            lottoCount.getAutoLottoCount());
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottoCount.manualLottoCount(),
+            lottoCount.autoLottoCount());
 
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.getLottoNumbers().stream()
+            System.out.println(lotto.lottoNumbers().stream()
                 .map(LottoNumber::value)
                 .collect(Collectors.toList()));
         }
@@ -46,10 +46,10 @@ public class OutputView {
             return;
         }
         if (reward.hasBonus()) {
-            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", reward.getMatchCount(), reward.getPrice(), rewardCount);
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", reward.matchCount(), reward.price(), rewardCount);
             return;
         }
-        System.out.printf("%d개 일치 (%d원)- %d개\n", reward.getMatchCount(), reward.getPrice(), rewardCount);
+        System.out.printf("%d개 일치 (%d원)- %d개\n", reward.matchCount(), reward.price(), rewardCount);
     }
 
     public static void showProfitRate(double profitRate) {

@@ -19,11 +19,11 @@ public class LottoCount {
         }
     }
 
-    public int getAutoLottoCount() {
+    public int autoLottoCount() {
         return autoLottoCount;
     }
 
-    public int getManualLottoCount() {
+    public int manualLottoCount() {
         return manualLottoCount;
     }
 

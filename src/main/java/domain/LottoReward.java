@@ -28,15 +28,15 @@ public enum LottoReward {
             .orElse(NONE);
     }
 
-    public int getPrice() {
-        return price;
+    public int matchCount() {
+        return matchCount;
     }
 
     public boolean hasBonus() {
         return hasBonus;
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public int price() {
+        return price;
     }
 }

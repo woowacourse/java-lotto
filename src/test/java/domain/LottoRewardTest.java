@@ -14,6 +14,6 @@ class LottoRewardTest {
     void returnLottoReward(int matchCount, int price, boolean hasBonus) {
         LottoReward lottoReward = LottoReward.find(matchCount, hasBonus);
 
-        assertThat(lottoReward.getPrice()).isEqualTo(price);
+        assertThat(lottoReward.price()).isEqualTo(price);
     }
 }

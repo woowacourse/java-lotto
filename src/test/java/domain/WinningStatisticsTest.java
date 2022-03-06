@@ -28,7 +28,7 @@ class WinningStatisticsTest {
         lottoRewards.add(LottoReward.FIFTH);
 
         WinningStatistics winningStatistics = new WinningStatistics(purchaseMoney, lottoRewards);
-        Map<LottoReward, Integer> statistics = winningStatistics.getWinningStatistics();
+        Map<LottoReward, Integer> statistics = winningStatistics.values();
 
         assertThat(statistics.get(reward)).isEqualTo(rewardCount);
     }
@@ -70,7 +70,7 @@ class WinningStatisticsTest {
         LottoGameMoney purchaseMoney = new LottoGameMoney(5000);
         WinningStatistics winningStatistics = new WinningStatistics(purchaseMoney, new ArrayList<>());
 
-        Map<LottoReward, Integer> statistics = winningStatistics.getWinningStatistics();
+        Map<LottoReward, Integer> statistics = winningStatistics.values();
 
         assertThat(statistics.size()).isEqualTo(6);
     }
@@ -83,7 +83,7 @@ class WinningStatisticsTest {
         WinningStatistics winningStatistics = new WinningStatistics(purchaseMoney, lottoRewards);
 
         double profitRate = winningStatistics.calculateProfitRate();
-        double expectedAnswer = (double)LottoReward.FIFTH.getPrice() / purchaseMoney.getAmount();
+        double expectedAnswer = (double)LottoReward.FIFTH.price() / purchaseMoney.amount();
 
         assertThat(profitRate).isEqualTo(expectedAnswer);
     }
