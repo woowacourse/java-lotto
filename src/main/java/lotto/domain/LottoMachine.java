@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
+    private static final int LOTTO_PRICE = 1000;
+
     private final Lottos lottos;
     private final TotalPurchaseAmount totalPurchaseAmount;
     private final ManualPurchaseCount manualPurchaseCount;
@@ -23,13 +25,13 @@ public class LottoMachine {
         this.totalPurchaseAmount = builder.totalPurchaseAmount;
         lottos = new Lottos(generateLottos(builder.manualLottos));
         manualPurchaseCount = new ManualPurchaseCount(
-                builder.manualLottos.size(), builder.totalPurchaseAmount.getTotalPurchaseCount());
+                builder.manualLottos.size(), builder.totalPurchaseAmount.getTotalPurchaseCount(LOTTO_PRICE));
     }
 
     private List<Lotto> generateLottos(final List<Lotto> manualLottos) {
         final LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
         return lottoRandomGenerator.generateLottosExceptDefaultLottos(
-                this.totalPurchaseAmount.getTotalPurchaseCount(), manualLottos);
+                this.totalPurchaseAmount.getTotalPurchaseCount(LOTTO_PRICE), manualLottos);
     }
 
     public static class Builder {
@@ -37,7 +39,7 @@ public class LottoMachine {
         private List<Lotto> manualLottos;
 
         public Builder setTotalPurchaseAmount(final int totalPurchaseAmount) {
-            this.totalPurchaseAmount = new TotalPurchaseAmount(totalPurchaseAmount);
+            this.totalPurchaseAmount = new TotalPurchaseAmount(totalPurchaseAmount, LOTTO_PRICE);
             return this;
         }
 
@@ -54,7 +56,7 @@ public class LottoMachine {
     }
 
     public int getCountOfAutoLottoNumbers() {
-        return totalPurchaseAmount.getTotalPurchaseCount() - manualPurchaseCount.getValue();
+        return totalPurchaseAmount.getTotalPurchaseCount(LOTTO_PRICE) - manualPurchaseCount.getValue();
     }
 
     public int getCountOfManualLottoNumbers() {

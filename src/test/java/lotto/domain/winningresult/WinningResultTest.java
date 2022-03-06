@@ -21,7 +21,8 @@ class WinningResultTest {
                 WinningKind.FIVE, 1,
                 WinningKind.FIVE_BONUS, 1,
                 WinningKind.SIX, 1);
-        final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount(5000);
+        final int lottoPrice = 1000;
+        final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount(5000, lottoPrice);
         final WinningResult winningResult = new WinningResult(winningNumberByMatchKind, totalPurchaseAmount);
         final double expected = 2031555000 / (double) 5000;
         //when

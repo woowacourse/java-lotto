@@ -7,7 +7,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class TotalPurchaseAmountTest {
-    private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount(8000);
+    private final int lottoPrice = 1000;
+    private final TotalPurchaseAmount totalPurchaseAmount = new TotalPurchaseAmount(8000, lottoPrice);
 
     @Test
     @DisplayName("로또 총 구매 개수를 반환한다.")
@@ -15,7 +16,7 @@ class TotalPurchaseAmountTest {
         //given
         final int expected = 8;
         //when
-        final int actual = totalPurchaseAmount.getTotalPurchaseCount();
+        final int actual = totalPurchaseAmount.getTotalPurchaseCount(lottoPrice);
         //then
         assertThat(actual).isEqualTo(expected);
     }
@@ -40,7 +41,7 @@ class TotalPurchaseAmountTest {
         final String expectedExceptionMessage = "구매 금액은 로또 가격의 양의 배수여야 합니다.";
         //when then
         assertThatThrownBy(
-                () -> new TotalPurchaseAmount(invalidValue))
+                () -> new TotalPurchaseAmount(invalidValue, lottoPrice))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
     }
