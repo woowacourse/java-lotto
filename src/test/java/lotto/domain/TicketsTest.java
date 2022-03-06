@@ -3,9 +3,9 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -118,58 +118,28 @@ public class TicketsTest {
 
 
     private WinTicket getWinTicket() {
-        Ticket winTicket = new Ticket(Set.of(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(16)), false);
+        Ticket winTicket = Ticket.createByManual(Arrays.asList(1, 2, 3, 4, 5, 16));
         LottoNumber bonusNumber = new LottoNumber(6);
         return new WinTicket(winTicket, bonusNumber);
     }
 
     private Ticket getFifthTicket() {
-        return new Ticket(Set.of(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(14),
-            new LottoNumber(15),
-            new LottoNumber(43)), false);
+        return Ticket.createByManual(Arrays.asList(1, 2, 3, 14, 15, 43));
     }
 
     private Ticket getOtherTicket() {
-        return new Ticket(Set.of(new LottoNumber(11),
-            new LottoNumber(12),
-            new LottoNumber(13),
-            new LottoNumber(14),
-            new LottoNumber(15),
-            new LottoNumber(43)), false);
+        return Ticket.createByManual(Arrays.asList(11, 12, 13, 14, 15, 43));
     }
 
     private Ticket getThirdTicket() {
-        return new Ticket(Set.of(new LottoNumber(40),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(16)), false);
+        return Ticket.createByManual(Arrays.asList(40, 2, 3, 4, 5, 16));
     }
 
     private Ticket getSecondTicket() {
-        return new Ticket(Set.of(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)), false);
+        return Ticket.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     private Ticket getFirstTicket() {
-        return new Ticket(Set.of(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(16)), false);
+        return Ticket.createByManual(Arrays.asList(1, 2, 3, 4, 5, 16));
     }
 }

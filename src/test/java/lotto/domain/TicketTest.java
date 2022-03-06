@@ -20,23 +20,14 @@ public class TicketTest {
     @Test
     @DisplayName("티켓생성시 LottoNumber의 숫자와 개수가 정상이면 예외를 던지지 말아야 합니다.")
     void ticketCreateValidTest() {
-        assertThatCode(() -> new Ticket(Set.of(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)), false))
+        assertThatCode(() -> Ticket.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6)))
             .doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("티켓생성시 LottoNumber의 개수가 5개면 예외를 던져야 합니다.")
     void ticketCreateInvalidTest() {
-        assertThatThrownBy(() -> new Ticket(Set.of(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5)), false))
+        assertThatThrownBy(() -> Ticket.createByManual(Arrays.asList(1, 2, 3, 4, 5)))
             .isInstanceOf(IllegalArgumentException.class);
     }
 

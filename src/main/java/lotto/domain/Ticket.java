@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -9,14 +10,13 @@ import lotto.utils.LottoNumbersGenerator;
 
 public class Ticket {
     private static final String REQUEST_NON_DUPLICATED_NUMBER = "중복되지 않은 숫자 6개를 입력해주세요.";
-    private static final String REQUEST_DELIMITER_MESSAGE = ",(콤마)와 공백으로 구분된 숫자 6자리를 입력해주세요. ex) 1, 2, 3, 4, 5, 6";
+    private static final String REQUEST_RIGHT_SIZE_MESSAGE = "숫자 6자리를 입력해주세요. ex) 1, 2, 3, 4, 5, 6";
     private static final int TICKET_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
     private final boolean isAuto;
 
-    public Ticket(Set<LottoNumber> lottoNumbers, boolean isAuto) {
-        checkTicketSize(lottoNumbers.size());
+    private Ticket(Set<LottoNumber> lottoNumbers, boolean isAuto) {
         this.lottoNumbers = lottoNumbers;
         this.isAuto = isAuto;
     }
@@ -27,42 +27,37 @@ public class Ticket {
     }
 
     public static Ticket createByManual(List<Integer> numbers) {
-        checkDelimiter(numbers.size());
-        Set<LottoNumber> lottoNumbers = createWinNumbers(numbers);
-        checkDuplicate(numbers.size(), lottoNumbers.size());
+        checkTicketSize(numbers.size());
+        checkDuplicate(numbers);
+        Set<LottoNumber> lottoNumbers = convertToLottoNumbers(numbers);
         return new Ticket(lottoNumbers, false);
     }
 
-    private static void checkDelimiter(int size) {
+    private static void checkTicketSize(int size) {
         if (size != TICKET_SIZE) {
-            throw new IllegalArgumentException(REQUEST_DELIMITER_MESSAGE);
+            throw new IllegalArgumentException(REQUEST_RIGHT_SIZE_MESSAGE);
         }
     }
 
-    private static Set<LottoNumber> createWinNumbers(List<Integer> numbers) {
-        Set<LottoNumber> winNumbers = new TreeSet<>();
+    private static Set<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+        Set<LottoNumber> lottoNumbers = new TreeSet<>();
         for (Integer number : numbers) {
-            addWinLottoNumbers(winNumbers, number);
+            addLottoNumbers(lottoNumbers, number);
         }
-        return winNumbers;
+        return lottoNumbers;
     }
 
-    private static void addWinLottoNumbers(Set<LottoNumber> winLottoNumbers, Integer number) {
+    private static void addLottoNumbers(Set<LottoNumber> lottoNumbers, Integer number) {
         try {
-            winLottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(new LottoNumber(number));
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(REQUEST_NON_DUPLICATED_NUMBER);
         }
     }
 
-    private static void checkDuplicate(int originalSize, int newSize) {
-        if (originalSize != newSize) {
-            throw new IllegalArgumentException(REQUEST_NON_DUPLICATED_NUMBER);
-        }
-    }
-
-    private void checkTicketSize(int size) {
-        if (size != TICKET_SIZE) {
+    private static void checkDuplicate(List<Integer> rawNumbers) {
+        Set<Integer> numbers = new HashSet<>(rawNumbers);
+        if (rawNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException(REQUEST_NON_DUPLICATED_NUMBER);
         }
     }
