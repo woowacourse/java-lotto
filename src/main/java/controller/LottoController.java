@@ -98,7 +98,7 @@ public class LottoController {
 
 	private WinningLottoNumber storeWinningNumber() {
 		try {
-			inputView.inputWinningNumbersMessage();
+			inputView.requireWinningNumbersMessage();
 			LottoNumbers lottoNumbers = LottoNumbers.from(manualStrategy);
 			return new WinningLottoNumber(lottoNumbers, makeBonusBall());
 		} catch (IllegalArgumentException e) {
