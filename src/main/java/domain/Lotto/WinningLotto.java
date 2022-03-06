@@ -16,13 +16,13 @@ public class WinningLotto {
     }
 
     private void validateDuplicate(Lotto winningLotto, LottoNumber bonusBallNumber) {
-        if (winningLotto.isContainLottoNumber(bonusBallNumber)) {
+        if (winningLotto.hasLottoNumber(bonusBallNumber)) {
             throw new IllegalArgumentException(ExceptionMessage.LOTTO_AND_BONUS_BALL_DUPLICATION);
         }
     }
 
     public boolean isContainLottoNumber(LottoNumber lottoNumber) {
-        return winningLotto.isContainLottoNumber(lottoNumber);
+        return winningLotto.hasLottoNumber(lottoNumber);
     }
 
     public boolean isContainBonusBall(List<LottoNumber> lottoNumbers) {

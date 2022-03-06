@@ -33,7 +33,7 @@ public class Lotto {
         return new Result(hitCount, isHitBonusBall);
     }
 
-    public boolean isContainLottoNumber(LottoNumber lottoNumber) {
+    public boolean hasLottoNumber(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
     }
 
