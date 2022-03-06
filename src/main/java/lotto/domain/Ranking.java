@@ -1,20 +1,22 @@
 package lotto.domain;
 
+import static lotto.domain.Ranking.Constants.FIFTH_PLACE_HIT_COUNT;
+import static lotto.domain.Ranking.Constants.FIRST_PLACE_HIT_COUNT;
+import static lotto.domain.Ranking.Constants.FOURTH_PLACE_HIT_COUNT;
+import static lotto.domain.Ranking.Constants.SECOND_THIRD_PLACE_HIT_COUNT;
+
 import java.util.Arrays;
 import java.util.function.BiPredicate;
 
 public enum Ranking {
-    FIRST_PLACE(2000000000, Constants.FIRST_PLACE_HIT_COUNT,
-            (hitCount, hasBonusNumber) -> hitCount == Constants.FIRST_PLACE_HIT_COUNT),
-    SECOND_PLACE(30000000, Constants.SECOND_THIRD_PLACE_HIT_COUNT,
-            (hitCount, hasBonusNumber) -> hitCount == Constants.SECOND_THIRD_PLACE_HIT_COUNT && hasBonusNumber),
-    THIRD_PLACE(1500000, Constants.SECOND_THIRD_PLACE_HIT_COUNT,
-            (hitCount, hasBonusNumber) -> hitCount == Constants.SECOND_THIRD_PLACE_HIT_COUNT && !hasBonusNumber),
-    FOURTH_PLACE(50000, Constants.FOURTH_PLACE_HIT_COUNT,
-            (hitCount, hasBonusNumber) -> hitCount == Constants.FOURTH_PLACE_HIT_COUNT),
-    FIFTH_PLACE(5000, Constants.FIFTH_PLACE_HIT_COUNT,
-            (hitCount, hasBonusNumber) -> hitCount == Constants.FIFTH_PLACE_HIT_COUNT),
-    NONE_PLACE(0, 0, (hitCount, hasBonusNumber) -> hitCount < Constants.FIFTH_PLACE_HIT_COUNT);
+    FIRST_PLACE(2000000000, FIRST_PLACE_HIT_COUNT, (hitCount1, hasBonusNumber) -> hitCount1 == FIRST_PLACE_HIT_COUNT),
+    SECOND_PLACE(30000000, SECOND_THIRD_PLACE_HIT_COUNT,
+            (hitCount, hasBonusNumber) -> hitCount == SECOND_THIRD_PLACE_HIT_COUNT && hasBonusNumber),
+    THIRD_PLACE(1500000, SECOND_THIRD_PLACE_HIT_COUNT,
+            (hitCount, hasBonusNumber) -> hitCount == SECOND_THIRD_PLACE_HIT_COUNT && !hasBonusNumber),
+    FOURTH_PLACE(50000, FOURTH_PLACE_HIT_COUNT, (hitCount, hasBonusNumber) -> hitCount == FOURTH_PLACE_HIT_COUNT),
+    FIFTH_PLACE(5000, FIFTH_PLACE_HIT_COUNT, (hitCount, hasBonusNumber) -> hitCount == FIFTH_PLACE_HIT_COUNT),
+    NONE_PLACE(0, 0, (hitCount, hasBonusNumber) -> hitCount < FIFTH_PLACE_HIT_COUNT);
 
     private final int prize;
     private final int hitCount;
@@ -49,10 +51,10 @@ public enum Ranking {
         return prize;
     }
 
-    private static class Constants {
-        private static final int FIRST_PLACE_HIT_COUNT = 6;
-        private static final int SECOND_THIRD_PLACE_HIT_COUNT = 5;
-        private static final int FOURTH_PLACE_HIT_COUNT = 4;
-        private static final int FIFTH_PLACE_HIT_COUNT = 3;
+    static class Constants {
+        static final int FIRST_PLACE_HIT_COUNT = 6;
+        static final int SECOND_THIRD_PLACE_HIT_COUNT = 5;
+        static final int FOURTH_PLACE_HIT_COUNT = 4;
+        static final int FIFTH_PLACE_HIT_COUNT = 3;
     }
 }
