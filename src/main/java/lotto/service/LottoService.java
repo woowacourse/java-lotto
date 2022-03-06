@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.LottoBuyMoney;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.domain.WinnerLotto;
@@ -15,14 +16,11 @@ import lotto.domain.vo.LottoNumber;
 
 public class LottoService {
 
-    public List<Lotto> createManulLottos(List<List<Integer>> manualNumbers) {
-        LottoGenerator lottoGenerator = new ManualLottoGenerator(collectNumbersToCollectLottoNumbers(manualNumbers));
-        return lottoGenerator.generateLottos();
-    }
-
-    public List<Lotto> createAutoLottos(int autoLottosAmount) {
-        LottoGenerator lottoGenerator = new AutoLottoGenerator(autoLottosAmount);
-        return lottoGenerator.generateLottos();
+    public Lottos createLottos(LottoBuyMoney lottoBuyMoney, int manualAmount, List<List<Integer>> manualNumbers) {
+        int autoLottoAmount = lottoBuyMoney.countAutoAmountByManualAmount(manualAmount);
+        List<Lotto> lottos = createManulLottos(manualNumbers);
+        lottos.addAll(createAutoLottos(autoLottoAmount));
+        return new Lottos(lottos);
     }
 
     public Map<Rank, Integer> match(Lottos lottos, List<Integer> winnerNumbers, int bonusNumber) {
@@ -35,6 +33,16 @@ public class LottoService {
 
     public double calculateProfitRate(Map<Rank, Integer> statistics, double inputMoney) {
         return sumReward(statistics) / inputMoney;
+    }
+
+    private List<Lotto> createManulLottos(List<List<Integer>> manualNumbers) {
+        LottoGenerator lottoGenerator = new ManualLottoGenerator(collectNumbersToCollectLottoNumbers(manualNumbers));
+        return lottoGenerator.generateLottos();
+    }
+
+    private List<Lotto> createAutoLottos(int autoLottosAmount) {
+        LottoGenerator lottoGenerator = new AutoLottoGenerator(autoLottosAmount);
+        return lottoGenerator.generateLottos();
     }
 
     private List<List<LottoNumber>> collectNumbersToCollectLottoNumbers(List<List<Integer>> collectNumbers) {
