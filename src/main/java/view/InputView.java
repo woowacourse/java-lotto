@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import static java.lang.System.lineSeparator;
 import static util.InputUtil.splitAndChangeToInt;
-import static util.InputUtil.validateAndChangeToInt;
+import static util.InputUtil.checkAndChangeToInt;
 
 public class InputView {
 
@@ -34,7 +34,7 @@ public class InputView {
 
     public static int inputMoney() {
         System.out.println(INPUT_MONEY);
-        return validateAndChangeToInt(scanner.nextLine(), ERROR_MONEY_NON_INTEGER);
+        return checkAndChangeToInt(scanner.nextLine(), ERROR_MONEY_NON_INTEGER);
     }
 
     public static int[] inputWinningLottoNumbers() {
@@ -44,12 +44,12 @@ public class InputView {
 
     public static int inputBonus() {
         System.out.println(INPUT_BONUS_NUMBER);
-        return validateAndChangeToInt(scanner.nextLine(), ERROR_BALL_NON_INTEGER);
+        return checkAndChangeToInt(scanner.nextLine(), ERROR_BALL_NON_INTEGER);
     }
 
     public static int inputNumOfManualLotto() {
         System.out.println(lineSeparator() + INPUT_NUM_OF_MANUAL_LOTTO);
-        return validateAndChangeToInt(scanner.nextLine(), ERROR_COUNT_NON_INTEGER);
+        return checkAndChangeToInt(scanner.nextLine(), ERROR_COUNT_NON_INTEGER);
     }
 
     public static int[][] inputManualLottoNumbers(final int numOfManualLotto) {

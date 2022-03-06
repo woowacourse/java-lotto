@@ -22,7 +22,7 @@ public class WinningNumbers {
         for (Integer number : numbers) {
             winningNumbers.add(new Number(number));
         }
-        this.bonus = validateBonus(bonus);
+        this.bonus = checkRangeAndDuplicate(bonus);
     }
 
     private void checkRightSize(Set<Integer> numbers) {
@@ -31,7 +31,7 @@ public class WinningNumbers {
         }
     }
 
-    private Number validateBonus(final int number) {
+    private Number checkRangeAndDuplicate(final int number) {
         final Number bonus = new Number(number);
         if (winningNumbers.contains(bonus)) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_BONUS);

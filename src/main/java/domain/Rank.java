@@ -40,7 +40,7 @@ public enum Rank {
 
     public static List<Rank> getValidPrizes() {
         return Arrays.stream(Rank.values())
-                .filter(winnerPrice -> winnerPrice != Rank.FAIL)
+                .filter(rank -> rank != Rank.FAIL)
                 .sorted(Comparator.comparing(Rank::getPrize))
                 .collect(Collectors.toList());
     }

@@ -24,9 +24,9 @@ public class LottoMachine {
         }
     }
 
-    public Lottos purchaseManualLottos(Money money, final int numOfLotto, final int[][] inputNumbers) {
+    public Lottos purchaseManualLottos(Money money, final int numOfLotto, final int[][] numbers) {
         final Lottos lottos = new Lottos();
-        for (int[] inputNumber : inputNumbers) {
+        for (int[] inputNumber : numbers) {
             purchase(lottos, new ManualLottoGenerator(inputNumber));
         }
         money.purchaseLotto(numOfLotto);

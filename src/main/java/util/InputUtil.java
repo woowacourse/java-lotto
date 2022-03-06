@@ -9,11 +9,11 @@ public class InputUtil {
     public static int[] splitAndChangeToInt(final String inputNumbers, final String message) {
         String[] splitNumbers = inputNumbers.split(LOTTO_NUMBER_DELIMITER);
         return Arrays.stream(splitNumbers)
-                .mapToInt(number -> validateAndChangeToInt(number, message))
+                .mapToInt(number -> checkAndChangeToInt(number, message))
                 .toArray();
     }
 
-    public static int validateAndChangeToInt(final String number, final String message) {
+    public static int checkAndChangeToInt(final String number, final String message) {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
