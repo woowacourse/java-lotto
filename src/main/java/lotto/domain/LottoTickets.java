@@ -1,9 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.lottoticket.LottoTicket;
 
 public class LottoTickets {
     private final List<LottoTicket> value;
@@ -20,7 +20,7 @@ public class LottoTickets {
     }
 
     public static LottoTickets generateRandomWithManualTickets(List<LottoTicket> manualLottoTickets, int count) {
-        List<LottoTicket> copiedManualLottoTickets = List.copyOf(manualLottoTickets);
+        List<LottoTicket> copiedManualLottoTickets = new ArrayList<>(manualLottoTickets);
         return new LottoTickets(copiedManualLottoTickets, count);
     }
 
