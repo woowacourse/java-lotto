@@ -60,7 +60,7 @@ public class InputView {
     }
 
     public static List<List<Integer>> requestManualLottoNumbers(int count) {
-        System.out.println(REQUEST_MANUAL_LOTTO_NUMBERS);
+        displayManualLottoNumbersGuideMsg(count);
         List<List<Integer>> manualNumbers = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             String inputManualNumbers = scanner.nextLine();
@@ -68,6 +68,12 @@ public class InputView {
             manualNumbers.add(splitAndGetIntegerNumbers(inputManualNumbers));
         }
         return manualNumbers;
+    }
+
+    private static void displayManualLottoNumbersGuideMsg(int count) {
+        if (count > 0) {
+            System.out.println(REQUEST_MANUAL_LOTTO_NUMBERS);
+        }
     }
 
     public static List<Integer> requestWinningNumbers() throws RuntimeException {
