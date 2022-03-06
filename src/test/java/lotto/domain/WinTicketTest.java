@@ -12,7 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.utils.BasicLottoNumberGenerator;
+import lotto.domain.utils.BasicLottoNumberGenerator;
 
 public class WinTicketTest {
     private Ticket ticket;
@@ -25,25 +25,24 @@ public class WinTicketTest {
     @Test
     @DisplayName("당첨번호와 보너스번호가 중복일때 예외가 발생해야 합니다.")
     void winTicketInvalidTest() {
-        Set<LottoNumber> winNumbers = Set.of(new LottoNumber(1),
+        Set<LottoNumber> winNumbers = getWinNumbers();
+        assertThatThrownBy(() -> new WinTicket(new Ticket(winNumbers, false), new LottoNumber(6)))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private Set<LottoNumber> getWinNumbers() {
+        return Set.of(new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(3),
             new LottoNumber(4),
             new LottoNumber(5),
             new LottoNumber(6));
-        assertThatThrownBy(() -> new WinTicket(new Ticket(winNumbers, false), new LottoNumber(6)))
-            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("당첨번호와 보너스번호 정상 입력일때 예외를 반환하지 않아야 합니다.")
     void winTicketValidTest() {
-        Ticket winTicket = new Ticket(Set.of(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)), false);
+        Ticket winTicket = getTicket(1, 2, 3, 4, 5, 6);
         assertThatCode(() -> new WinTicket(winTicket, new LottoNumber(7)))
             .doesNotThrowAnyException();
     }
@@ -52,16 +51,21 @@ public class WinTicketTest {
     @MethodSource("parameters")
     @DisplayName("로또 등수 확인 테스트")
     void lottoRankTest(int n1, int n2, int n3, int n4, int n5, int n6, int bonus, Rank rank, String testName) {
-        Ticket winTicket = new Ticket(Set.of(new LottoNumber(n1),
+        Ticket winTicket = getTicket(n1, n2, n3, n4, n5, n6);
+        LottoNumber bonusNumber = new LottoNumber(bonus);
+        WinTicket winningTicket = new WinTicket(winTicket, bonusNumber);
+
+        Rank ticketRank = winningTicket.getTicketRank(ticket);
+        assertThat(ticketRank).isEqualTo(rank);
+    }
+
+    private Ticket getTicket(int n1, int n2, int n3, int n4, int n5, int n6) {
+        return new Ticket(Set.of(new LottoNumber(n1),
             new LottoNumber(n2),
             new LottoNumber(n3),
             new LottoNumber(n4),
             new LottoNumber(n5),
             new LottoNumber(n6)), false);
-        LottoNumber bonusNumber = new LottoNumber(bonus);
-        WinTicket winningTicket = new WinTicket(winTicket, bonusNumber);
-        Rank ticketRank = winningTicket.getTicketRank(ticket);
-        assertThat(ticketRank).isEqualTo(rank);
     }
 
     private static Stream<Arguments> parameters() {

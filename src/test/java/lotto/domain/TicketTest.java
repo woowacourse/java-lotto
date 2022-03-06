@@ -13,7 +13,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.utils.BasicLottoNumberGenerator;
+import lotto.domain.utils.BasicLottoNumberGenerator;
 
 public class TicketTest {
 
@@ -44,13 +44,13 @@ public class TicketTest {
     @DisplayName("티켓 끼리의 비교는 LottoNumber의 숫자가 같으면 같은 티켓으로 판단합니다.")
     void ticketCompareTest() {
         Ticket ticket = Ticket.createByAuto(new BasicLottoNumberGenerator());
-        assertThat(ticket.getLottoNumbers()).isEqualTo(Set.of(new LottoNumber(1),
+        Set<LottoNumber> lottoNumbers = Set.of(new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(3),
             new LottoNumber(4),
             new LottoNumber(5),
-            new LottoNumber(6))
-        );
+            new LottoNumber(6));
+        assertThat(ticket.getLottoNumbers()).isEqualTo(lottoNumbers);
     }
 
     @ParameterizedTest(name = "{index}: {1}")

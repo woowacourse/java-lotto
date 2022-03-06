@@ -1,9 +1,10 @@
-package lotto.utils;
+package lotto.domain.utils;
 
 import java.util.Set;
 import java.util.TreeSet;
 
 import lotto.domain.LottoNumber;
+import lotto.utils.LottoNumbersGenerator;
 
 public class BasicLottoNumberGenerator implements LottoNumbersGenerator {
     @Override

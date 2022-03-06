@@ -14,7 +14,7 @@ import lotto.utils.StringUtil;
 
 public class StringUtilTest {
     @Test
-    @DisplayName("올바른 문자열이면 예외를 반환하지 않아야 합니다.")
+    @DisplayName("로또번호 입력이 올바른 문자열이면 예외를 반환하지 않아야 합니다.")
     void winTicketGeneratorValidTest() {
         assertThatCode(() -> StringUtil.splitToIntegers("1, 2, 3, 4, 5, 6"))
             .doesNotThrowAnyException();
