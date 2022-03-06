@@ -4,6 +4,7 @@ public class LottoMoney {
     public static final String NOT_POSITIVE_ERROR_MESSAGE = "금액은 양수로 입력해야 합니다.";
     public static final String NOT_MULTIPLES_OF_PRICE_ERROR_MESSAGE
             = String.format("금액을 %d의 배수로 입력해주세요.", LottoGame.TICKET_PRICE);
+    public static final String PURCHASE_OVER_ERROR_MESSAGE = "금액보다 많은 수동 티켓을 구매할 수 없습니다.";
 
     private final int value;
 
@@ -31,6 +32,10 @@ public class LottoMoney {
     }
 
     public LottoMoney purchaseSelfTicket(int count) {
+        int changeMoneyValue = this.value - count * LottoGame.TICKET_PRICE;
+        if (changeMoneyValue < 0) {
+            throw new IllegalArgumentException(PURCHASE_OVER_ERROR_MESSAGE);
+        }
         return new LottoMoney(this.value - count * LottoGame.TICKET_PRICE);
     }
 

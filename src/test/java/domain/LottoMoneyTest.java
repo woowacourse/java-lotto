@@ -22,4 +22,21 @@ class LottoMoneyTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LottoMoney.NOT_MULTIPLES_OF_PRICE_ERROR_MESSAGE);
     }
+
+    @Test
+    @DisplayName("수동 구매 갯수를 입력받아서 금액을 차감할 때 잘 차감된 결과를 내는지 확인한다.")
+    void checkPurchaseSelfTicket() {
+        LottoMoney money = new LottoMoney(17000);
+        LottoMoney change = money.purchaseSelfTicket(3);
+        assertThat(change.getValue()).isEqualTo(14000);
+    }
+
+    @Test
+    @DisplayName("수동 구매 갯수를 입력받아서 금액을 차감할 때 금액을 초과하는 구매 갯수를 입력하면 에러를 던지는지 확인한다.")
+    void checkPurchaseSelfTicketError() {
+        LottoMoney money = new LottoMoney(17000);
+        assertThatThrownBy(() -> money.purchaseSelfTicket(18))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("금액보다 많은 수동 티켓을 구매할 수 없습니다.");
+    }
 }
