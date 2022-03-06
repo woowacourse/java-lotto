@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public enum Rank {
 
@@ -29,13 +27,13 @@ public enum Rank {
     public static Rank calculateCurrentRank(final int hitCounts, final boolean hasBonusNumber) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isSameHitCount(hitCounts))
-                .filter(rank -> isSecond(hasBonusNumber, rank))
+                .filter(rank -> rank.isFilterRankNotSecondOrHasBonusNumber(hasBonusNumber))
                 .findFirst()
                 .orElse(NOT_THING);
     }
 
-    private static boolean isSecond(boolean hasBonusNumber, Rank rank) {
-        return !rank.equals(SECOND) || hasBonusNumber;
+    private boolean isFilterRankNotSecondOrHasBonusNumber(boolean hasBonusNumber) {
+        return !this.equals(SECOND) || hasBonusNumber;
     }
 
     private boolean isSameHitCount(final int hitCounts) {
