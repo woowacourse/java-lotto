@@ -3,19 +3,24 @@ package controller.dto;
 import java.util.List;
 
 import domain.Lotto;
-import domain.OrderForm;
 
 public class BuyingInfoDto {
-	private final OrderForm orderForm;
+	private final int autoLottoCount;
+	private final int manualLottoCount;
 	private final List<Lotto> totalLottos;
 
-	public BuyingInfoDto(OrderForm orderForm, List<Lotto> totalLottos) {
-		this.orderForm = orderForm;
+	public BuyingInfoDto(int autoLottoCount, int manualLottoCount, List<Lotto> totalLottos) {
+		this.autoLottoCount = autoLottoCount;
+		this.manualLottoCount = manualLottoCount;
 		this.totalLottos = totalLottos;
 	}
 
-	public OrderForm getOrderForm() {
-		return orderForm;
+	public int getAutoLottoCount() {
+		return autoLottoCount;
+	}
+
+	public int getManualLottoCount() {
+		return manualLottoCount;
 	}
 
 	public List<Lotto> getTotalLottos() {

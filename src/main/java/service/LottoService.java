@@ -24,7 +24,7 @@ public class LottoService {
 		OrderForm orderForm = new OrderForm(payment, countValue);
 		List<Lotto> totalLottos = createLottos(manualLottosValue, orderForm.calculateAutoLottoCount());
 
-		return new BuyingInfoDto(orderForm, totalLottos);
+		return new BuyingInfoDto(orderForm.calculateAutoLottoCount(), orderForm.getQuantity(), totalLottos);
 	}
 
 	private List<Lotto> createLottos(List<String[]> manualnumbers, int count) {

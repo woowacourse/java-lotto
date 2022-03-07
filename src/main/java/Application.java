@@ -19,7 +19,7 @@ public class Application {
 		String payment = InputView.insertPayment();
 
 		BuyingInfoDto buyingInfoDto = createBuyInfoDto(controller, payment);
-		OutputView.printLottoCount(buyingInfoDto.getOrderForm());
+		OutputView.printLottoCount(buyingInfoDto);
 		OutputView.printLottos(buyingInfoDto.getTotalLottos());
 
 		showLottoResult(controller, buyingInfoDto, payment);

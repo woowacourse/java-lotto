@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import controller.dto.BuyingInfoDto;
 import domain.Lotto;
-import domain.LottoResult;
-import domain.OrderForm;
-import domain.Payment;
 import domain.Rank;
 
 public class OutputView {
@@ -24,10 +22,10 @@ public class OutputView {
 		System.out.println(ERROR_MESSAGE + errorMessage);
 	}
 
-	public static void printLottoCount(OrderForm orderForm) {
+	public static void printLottoCount(BuyingInfoDto infoDto) {
 		System.out.println(
 			String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
-				orderForm.getQuantity(), orderForm.calculateAutoLottoCount()));
+				infoDto.getManualLottoCount(), infoDto.getAutoLottoCount()));
 	}
 
 	public static void printLottos(List<Lotto> lottos) {
