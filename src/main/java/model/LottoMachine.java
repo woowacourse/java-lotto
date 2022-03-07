@@ -26,15 +26,15 @@ public class LottoMachine {
         lottos = new Lottos(manualLottoGroup, autoLottoGroup);
     }
 
-    public int bringManualLottoCountForPurchase() {
+    public int getManualLottoCount() {
         return totalLottoCount.getManualCount();
     }
 
-    public int bringAutoLottoCountForPurchase() {
+    public int getAutoLottoCount() {
         return totalLottoCount.getAutoCount();
     }
     
-    public List<Lotto> bringLottosForShowNumbers() {
+    public List<Lotto> getLottos() {
         return lottos.getLottos();
     }
 

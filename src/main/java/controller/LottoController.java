@@ -33,9 +33,9 @@ public class LottoController {
     private void showLottoPurchaseProcess() {
         lottoMachine = new LottoMachineInitializer(inputView).initLottoMachine();
 
-        outputView.printTotalLottoCount(lottoMachine.bringManualLottoCountForPurchase(),
-                lottoMachine.bringAutoLottoCountForPurchase());
-        outputView.printTotalLottoGroupNumbers(convertLottosToDtos(lottoMachine.bringLottosForShowNumbers()));
+        outputView.printTotalLottoCount(lottoMachine.getManualLottoCount(),
+                lottoMachine.getAutoLottoCount());
+        outputView.printTotalLottoGroupNumbers(convertLottosToDtos(lottoMachine.getLottos()));
     }
 
     private List<LottoDto> convertLottosToDtos(final List<Lotto> lottos) {
@@ -52,7 +52,7 @@ public class LottoController {
 
         WinningResult winningResult = lottoMachine.makeLottoWinningResult(winningNumbers, bonusNumber);
         int totalLottoCount =
-                lottoMachine.bringManualLottoCountForPurchase() + lottoMachine.bringAutoLottoCountForPurchase();
+                lottoMachine.getManualLottoCount() + lottoMachine.getAutoLottoCount();
         printWinningResult(winningResult, totalLottoCount);
     }
 
@@ -60,7 +60,7 @@ public class LottoController {
         final List<RankResultDto> rankResultDtos = convertWinningResultToDtos(winningResult.getValue());
 
         outputView.printWinningResult(rankResultDtos);
-        outputView.printRateOfReturn(winningResult.sendRateOfReturn(totalPurchaseLottoCount));
+        outputView.printRateOfReturn(winningResult.getRateOfReturn(totalPurchaseLottoCount));
     }
 
     private List<RankResultDto> convertWinningResultToDtos(final Map<Rank, Integer> results) {

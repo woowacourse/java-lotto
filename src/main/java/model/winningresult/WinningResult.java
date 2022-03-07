@@ -17,7 +17,7 @@ public class WinningResult {
         return value;
     }
 
-    public Double sendRateOfReturn(final int totalLottoCount) {
+    public Double getRateOfReturn(final int totalLottoCount) {
         int totalInsertMoney = totalLottoCount * LOTTO_PRICE;
         int totalReturn = calculateTotalReturn();
         return totalReturn / (double) totalInsertMoney;

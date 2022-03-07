@@ -38,6 +38,6 @@ class WinningResultTest {
 
         final WinningResult winningResult = new WinningResult(result);
         final int totalPurchaseLottoCount = 100;
-        assertThat(winningResult.sendRateOfReturn(totalPurchaseLottoCount)).isEqualTo(65000 / (double) 100000);
+        assertThat(winningResult.getRateOfReturn(totalPurchaseLottoCount)).isEqualTo(65000 / (double) 100000);
     }
 }

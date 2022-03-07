@@ -28,7 +28,7 @@ public class LottoMachineInitializer {
     }
 
     private void insertManualLottoNumberGroupsInLottoMachine(final LottoMachine lottoMachine) {
-        int manualLottoCount = lottoMachine.bringManualLottoCountForPurchase();
+        int manualLottoCount = lottoMachine.getManualLottoCount();
         List<List<Integer>> manualLottoNumberGroups = inputLottoNumberGroups(manualLottoCount);
 
         lottoMachine.purchaseLottos(manualLottoNumberGroups);

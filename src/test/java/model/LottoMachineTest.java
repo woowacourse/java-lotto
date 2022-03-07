@@ -13,7 +13,7 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
         lottoMachine.makeTotalLottoCountForPurchase(30000, 3);
 
-        assertThat(lottoMachine.bringAutoLottoCountForPurchase()).isEqualTo(27);
-        assertThat(lottoMachine.bringManualLottoCountForPurchase()).isEqualTo(3);
+        assertThat(lottoMachine.getAutoLottoCount()).isEqualTo(27);
+        assertThat(lottoMachine.getManualLottoCount()).isEqualTo(3);
     }
 }
