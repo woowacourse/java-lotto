@@ -69,4 +69,28 @@ public class WinningNumbersTest {
 
     }
 
+    @Test
+    @DisplayName("로또 당첨 번호에 1~45가 아닌 값이 들어올 경우 예외 발생")
+    void check_winning_number_range_fail() {
+
+        assertThatThrownBy(
+            () -> new WinningNumbers(Stream.of(1, 2, 3, 4, 5, 46).map(LottoNumber::new).collect(
+                Collectors.toList()), new LottoNumber(6))
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("[ERROR] 로또 번호는 1~45 사이 정수만 가능합니다.");
+
+    }
+
+    @Test
+    @DisplayName("로또 보너스 번호에 1~45가 아닌 값이 들어올 경우 예외 발생")
+    void check_bonus_number_range_fail() {
+
+        assertThatThrownBy(
+            () -> new WinningNumbers(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(
+                Collectors.toList()), new LottoNumber(46))
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("[ERROR] 로또 번호는 1~45 사이 정수만 가능합니다.");
+
+    }
+
 }
