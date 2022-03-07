@@ -1,25 +1,23 @@
 package lotto.dto;
 
-import java.util.List;
-
 import lotto.domain.LottoTicket;
-import lotto.domain.Money;
 
 public class PurchaseResult {
 
-    private final Money money;
-    private final List<LottoTicket> tickets;
+    private final LottoTicket manualTicket;
+    private final LottoTicket autoTicket;
 
-    public PurchaseResult(Money money, List<LottoTicket> tickets) {
-        this.money = money;
-        this.tickets = tickets;
+    public PurchaseResult(LottoTicket manualTicket, LottoTicket autoTicket) {
+        this.manualTicket = manualTicket;
+        this.autoTicket = autoTicket;
     }
 
-    public Money getMoney() {
-        return money;
+    public LottoTicket getManualTicket() {
+        return manualTicket;
     }
 
-    public List<LottoTicket> getTickets() {
-        return tickets;
+    public LottoTicket getAutoTicket() {
+        return autoTicket;
     }
+
 }

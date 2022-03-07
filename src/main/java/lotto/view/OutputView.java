@@ -3,9 +3,12 @@ package lotto.view;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.domain.LottoLine;
+import lotto.domain.LottoNumber;
 import lotto.dto.LottoStatisticsResponse;
 import lotto.dto.LottoTicketResponse;
 import lotto.dto.LottoWinningResponse;
+import lotto.dto.PurchaseResult;
 
 public class OutputView {
 
@@ -24,20 +27,43 @@ public class OutputView {
         System.out.println(exception.getMessage());
     }
 
-    public void outputTickets(List<LottoTicketResponse> manualResponses, List<LottoTicketResponse> autoResponses) {
+    public void outputPurchaseResult(PurchaseResult purchaseResult) {
+        int manualSize = purchaseResult.getManualTicket()
+            .getLines()
+            .size();
+        int autoSize = purchaseResult.getAutoTicket()
+            .getLines()
+            .size();
+        outputPurchaseSize(manualSize, autoSize);
+        purchaseResult.getManualTicket()
+            .getLines()
+            .forEach(this::outputLine);
+        purchaseResult.getAutoTicket()
+            .getLines()
+            .forEach(this::outputLine);
+    }
+
+    private void outputPurchaseSize(int manualSize, int autoSize) {
         System.out.printf(
-            "수동으로 %d개, 자동으로 %d개를 구매했습니다.\n", manualResponses.size(), autoResponses.size()
+            "수동으로 %d개, 자동으로 %d개를 구매했습니다.\n", manualSize, autoSize
         );
-        manualResponses.forEach(this::outputTicket);
-        autoResponses.forEach(this::outputTicket);
     }
 
-    private void outputTicket(LottoTicketResponse response) {
-        System.out.print(sortTicket(response).toString() + "\n");
+    private void outputLine(LottoLine lottoLine) {
+        System.out.println(
+            sortLine(toInts(lottoLine))
+        );
     }
 
-    private List<Integer> sortTicket(LottoTicketResponse response) {
-        return response.getNumbers().stream()
+    private List<Integer> toInts(LottoLine lottoLine) {
+        return lottoLine.getNumbers()
+            .stream()
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList());
+    }
+
+    private List<Integer> sortLine(List<Integer> ints) {
+        return ints.stream()
             .sorted()
             .collect(Collectors.toList());
     }
