@@ -22,7 +22,7 @@ public class LottoFactory {
         return new Lotto(completedLottoNumbers);
     }
 
-    private static Lotto generateManualLotto(List<Integer> numbers){
+    public static Lotto generateManualLotto(List<Integer> numbers){
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .sorted()
                 .map(LottoNumber::valueOf)
