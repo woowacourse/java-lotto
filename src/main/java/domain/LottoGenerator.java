@@ -26,7 +26,7 @@ public class LottoGenerator {
     private static final Comparator<LottoNumber> LOTTO_NUMBER_COMPARATOR = new Comparator<LottoNumber>() {
         @Override
         public int compare(LottoNumber a, LottoNumber b) {
-            return b.getLottoNumber() - a.getLottoNumber();
+            return a.getLottoNumber() - b.getLottoNumber();
         }
     };
 
