@@ -21,12 +21,8 @@ public class IssuedLotto {
         Count count = new Count(money.getCount() - issuedLotto.size());
         while (!count.isEnd()) {
             count = count.decrease();
-            issuedLotto.add(issueOneAutoLotto());
+            issueLotto(issueOneAutoLotto());
         }
-    }
-
-    public void issueManualLotto(Lotto issueOneManualLotto) {
-        issuedLotto.add(issueOneManualLotto);
     }
 
     private Lotto issueOneAutoLotto() {
@@ -41,5 +37,9 @@ public class IssuedLotto {
         while (lotto.size() < LOTTO_SIZE) {
             lotto.add(LottoNumber.getNumber(Random.lottoNumber()));
         }
+    }
+
+    public void issueLotto(Lotto lotto) {
+        issuedLotto.add(lotto);
     }
 }
