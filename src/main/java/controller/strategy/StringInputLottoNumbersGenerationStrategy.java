@@ -10,7 +10,6 @@ import utils.InputValidateUtils;
 import view.StrategyView;
 
 public class StringInputLottoNumbersGenerationStrategy implements LottoNumbersGenerationStrategy {
-	private static final String LOTTO_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 번호를 입력하세요.";
 	private static final String DELIMITER_COMMA = ",";
 
 	@Override
@@ -26,7 +25,7 @@ public class StringInputLottoNumbersGenerationStrategy implements LottoNumbersGe
 	}
 
 	private List<LottoNumber> makeLottoNumber(String input) {
-		InputValidateUtils.checkInputIsBlank(input, LOTTO_NUMBER_BLANK_ERROR_MESSAGE);
+		InputValidateUtils.checkInputIsBlank(input);
 		List<String> numbers = splitLottoNumber(input);
 		return makeInputNumbersToLottoNumbers(numbers);
 	}

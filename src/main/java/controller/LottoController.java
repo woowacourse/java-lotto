@@ -20,11 +20,8 @@ import view.LottoControllerInputView;
 import view.LottoControllerOutputView;
 
 public class LottoController {
-	private static final String MONEY_BLANK_ERROR_MESSAGE = "[Error]: 금액을 입력해주세요.";
-	private static final String MONEY_NUMBER_ERROR_MESSAGE = "[Error]: 금액은 숫자를 입력해주세요.";
-	private static final String COUNT_BLANK_ERROR_MESSAGE = "[Error]: 갯수을 입력해주세요.";
-	private static final String COUNT_NUMBER_ERROR_MESSAGE = "[Error]: 갯수는 숫자를 입력해주세요.";
-	private static final String BONUS_BALL_BLANK_ERROR_MESSAGE = "[Error]: 보너스 볼을 입력해주세요.";
+	private static final String NUMBER_ERROR_MESSAGE = "[Error]: 입력은 숫자여야 합니다.";
+	private static final String REGEX_NUMBER = "[0-9]+";
 
 	private final LottoControllerInputView inputView = new LottoControllerInputView();
 	private final LottoControllerOutputView outputView = new LottoControllerOutputView();
@@ -45,8 +42,8 @@ public class LottoController {
 	private Money insertMoney() {
 		try {
 			String money = inputView.inputMoney();
-			InputValidateUtils.checkInputIsBlankAndNumber(money, MONEY_BLANK_ERROR_MESSAGE,
-				MONEY_NUMBER_ERROR_MESSAGE);
+			InputValidateUtils.checkInputIsBlank(money);
+			checkInputIsNumber(money);
 			return new Money(Integer.parseInt(money));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
@@ -57,7 +54,8 @@ public class LottoController {
 	private LottoCount inputManualLottoCount(LottoCount automaticLottoCount) {
 		try {
 			String count = inputView.inputManualLottoCount();
-			InputValidateUtils.checkInputIsBlankAndNumber(count, COUNT_BLANK_ERROR_MESSAGE, COUNT_NUMBER_ERROR_MESSAGE);
+			InputValidateUtils.checkInputIsBlank(count);
+			checkInputIsNumber(count);
 			int manualCount = Integer.parseInt(count);
 			automaticLottoCount.decreaseCount(manualCount);
 			return new LottoCount(manualCount);
@@ -109,7 +107,7 @@ public class LottoController {
 
 	private LottoNumber makeBonusBall() {
 		String input = inputView.inputBonusBall();
-		InputValidateUtils.checkInputIsBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
+		InputValidateUtils.checkInputIsBlank(input);
 		return LottoNumber.parseLottoNumber(input);
 	}
 
@@ -127,4 +125,9 @@ public class LottoController {
 		outputView.printRateOfReturn(lottoResult.calculateSumOfRewards() / insertedMoney.getMoney());
 	}
 
+	private static void checkInputIsNumber(String number) {
+		if (!number.matches(REGEX_NUMBER)) {
+			throw new IllegalArgumentException(NUMBER_ERROR_MESSAGE);
+		}
+	}
 }
