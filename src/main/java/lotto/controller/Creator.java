@@ -31,7 +31,7 @@ public class Creator {
         }
     }
 
-    public static LottoCount createLottoCount(Payment payment) {
+    public static LottoCount createLottoCount(final Payment payment) {
         try {
             int manualCount = inputManualCount(entering);
             return new LottoCount(payment, manualCount);
@@ -42,11 +42,16 @@ public class Creator {
     }
 
     public static Lottos createManualLottos(final LottoCount lottoCount) {
-        List<Lotto> manualLottos = new ArrayList<>();
+        List<List<Ball>> manualLottos = new ArrayList<>();
         for (int i = 0; i < lottoCount.getManualCount(); i++) {
-            manualLottos.add(createLottoNumbers());
+            selectManualLottoNumbers(manualLottos);
         }
-        return LottoGenerator.pickManualLottos(manualLottos);
+        try {
+            return LottoGenerator.pickManualLottos(manualLottos);
+        } catch (IllegalArgumentException exception) {
+            printErrorMessage(exception.getMessage());
+            return createManualLottos(lottoCount);
+        }
     }
 
     public static Lottos createAutoLottos(final LottoCount lottoCount) {
@@ -74,5 +79,14 @@ public class Creator {
 
     public static LottoResult createLottoResult(final Lottos lottos, final WinningLotto winningLotto) {
         return lottos.compareWinningLotto(winningLotto);
+    }
+
+    private static void selectManualLottoNumbers(final List<List<Ball>> manualLottos) {
+        try {
+            manualLottos.add(inputLottoNumbers(entering));
+        } catch (IllegalArgumentException exception) {
+            printErrorMessage(exception.getMessage());
+            selectManualLottoNumbers(manualLottos);
+        }
     }
 }

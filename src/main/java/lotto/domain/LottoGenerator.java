@@ -19,8 +19,12 @@ public class LottoGenerator {
         return new Lottos(lottos);
     }
 
-    public static Lottos pickManualLottos(final List<Lotto> manualLottos) {
-        return new Lottos(manualLottos);
+    public static Lottos pickManualLottos(final List<List<Ball>> manualLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (List<Ball> lotto : manualLottos) {
+            lottos.add(Lotto.from(lotto));
+        }
+        return new Lottos(lottos);
     }
 
     private static List<Ball> selectRandomBalls() {
