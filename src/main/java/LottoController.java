@@ -1,8 +1,10 @@
 import domain.LottoGame;
-import domain.LottoGenerators;
-import domain.ManualLottoGenerator;
+import domain.LottoGenerator;
+
+import domain.Lottos;
+
 import domain.Money;
-import domain.AutoLottoGenerator;
+
 import domain.WinningChecker;
 import view.InputView;
 import view.OutputView;
@@ -13,12 +15,14 @@ public class LottoController {
 
         Money money = new Money(InputView.askMoneyInput(), InputView.askManualAmount());
 
-        LottoGame lottoGame = new LottoGame(
-            new LottoGenerators(
-                new ManualLottoGenerator(InputView.askManualLottoNumbers(money.getManualAmount())),
-                new AutoLottoGenerator(money.getAutoAmount())));
+        LottoGenerator lottoGenerator = new LottoGenerator(
+            InputView.askManualLottoNumbers(money.getManualAmount()), money.getAutoAmount());
 
-        OutputView.printLottosInformation(money, lottoGame.getLottos());
+        Lottos lottos = new Lottos(lottoGenerator.generate());
+
+        LottoGame lottoGame = new LottoGame(lottoGenerator);
+
+        OutputView.printLottosInformation(money, lottos);
 
         WinningChecker winningChecker = lottoGame.makeResult(InputView.askWinningNumbers());
 
