@@ -23,7 +23,7 @@ public class Lotto {
     public static Lotto createAutoLotto() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = LOTTO_MIN_RANGE; i <= LOTTO_MAX_RANGE; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.from(i));
         }
         Collections.shuffle(lottoNumbers);
 

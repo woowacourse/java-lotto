@@ -34,7 +34,7 @@ class LottosTest {
         void create_lottos() {
             List<LottoNumber> manualLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6)
                     .stream()
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::from)
                     .collect(Collectors.toList());
             List<Lotto> manualLottos = new ArrayList<>();
             manualLottos.add(Lotto.createManualLotto(manualLottoNumbers));

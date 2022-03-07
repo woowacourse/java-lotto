@@ -57,7 +57,7 @@ public class LottoController {
         try {
             final String numbers = inputLottoWinningNumbers();
             final Lotto lotto = changeNumbersToLotto(numbers);
-            final LottoNumber bonusNumber = new LottoNumber(inputBonusNumber());
+            final LottoNumber bonusNumber = LottoNumber.from(inputBonusNumber());
             return new LottoWinningNumbers(lotto, bonusNumber);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -76,7 +76,7 @@ public class LottoController {
     private Lotto changeNumbersToLotto(String numbers) {
         List<LottoNumber> lottoNumbers = Arrays.stream(numbers.split(LOTTO_DELIMITER))
                 .map((s) -> removeBlank(s))
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
         return Lotto.createManualLotto(lottoNumbers);
     }

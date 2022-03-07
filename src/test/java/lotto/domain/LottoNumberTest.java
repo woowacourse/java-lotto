@@ -23,7 +23,7 @@ class LottoNumberTest {
         @ValueSource(ints = {1, 2, 45})
         @DisplayName("정상적으로 생성된다.")
         void create(final int number) {
-            assertThatCode(() -> new LottoNumber(number)).doesNotThrowAnyException();
+            assertThatCode(() -> LottoNumber.from(number)).doesNotThrowAnyException();
         }
     }
 
@@ -34,7 +34,7 @@ class LottoNumberTest {
         @ValueSource(ints = {-1, 0, 46})
         @DisplayName("에러를 출력한다.")
         void returns_error(final int number) {
-            assertThatThrownBy(() -> new LottoNumber(number))
+            assertThatThrownBy(() -> LottoNumber.from(number))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ERROR_WRONG_LOTTO_NUMBER);
         }
@@ -46,9 +46,22 @@ class LottoNumberTest {
         @Test
         @DisplayName("에러를 출력한다.")
         void returns_error() {
-            assertThatThrownBy(() -> new LottoNumber("aki"))
+            assertThatThrownBy(() -> LottoNumber.from("aki"))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ERROR_WRONG_LOTTO_NUMBER);
+        }
+    }
+
+    @Nested
+    @DisplayName("서로 같은 번호라면")
+    class if_input_same_number {
+        @ParameterizedTest
+        @ValueSource(ints = {1, 2, 45})
+        @DisplayName("동일하다.")
+        void same_number_is_true(final int number) {
+            LottoNumber number1 = LottoNumber.from(number);
+            LottoNumber number2 = LottoNumber.from(number);
+            assertThat(number1 == number2).isTrue();
         }
     }
 }

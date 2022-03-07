@@ -27,7 +27,7 @@ public class LottoTest {
         void returns_error() {
             List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4)
                     .stream()
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::from)
                     .collect(Collectors.toList());
             assertThatThrownBy(() -> Lotto.createManualLotto(lottoNumbers))
                     .isInstanceOf(IllegalArgumentException.class)
@@ -43,7 +43,7 @@ public class LottoTest {
         void returns_error() {
             List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 5)
                     .stream()
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::from)
                     .collect(Collectors.toList());
             assertThatThrownBy(() -> Lotto.createManualLotto(lottoNumbers))
                     .isInstanceOf(IllegalArgumentException.class)
@@ -59,7 +59,7 @@ public class LottoTest {
         void create_lotto() {
             List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6)
                     .stream()
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::from)
                     .collect(Collectors.toList());
             assertThatCode(() -> Lotto.createManualLotto(lottoNumbers)).doesNotThrowAnyException();
         }
@@ -70,9 +70,9 @@ public class LottoTest {
         void contains_lotto_number(int value) {
             List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6)
                     .stream()
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::from)
                     .collect(Collectors.toList());
-            assertThat(lottoNumbers.contains(new LottoNumber(value))).isTrue();
+            assertThat(lottoNumbers.contains(LottoNumber.from(value))).isTrue();
         }
     }
     @Nested
