@@ -1,6 +1,7 @@
 package view;
 
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.Lottos;
 import domain.Money;
 import domain.Rewards;
@@ -24,6 +25,7 @@ public class OutputView {
         for (Lotto lotto : lottos.getLottos()) {
             String str = lotto.getLottoNumbers()
                 .stream()
+                .map(LottoNumber::getLottoNumber)
                 .map(String::valueOf)
                 .collect(Collectors.joining(NUMBER_DELIMITER));
             System.out.printf(LOTTO_NUMBER_FORMAT, str);

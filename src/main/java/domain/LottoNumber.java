@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -17,6 +16,9 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
+    public int getLottoNumber() {
+        return lottoNumber;
+    }
 
     @Override
     public boolean equals(Object o) {
