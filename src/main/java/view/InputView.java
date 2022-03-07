@@ -60,10 +60,10 @@ public class InputView {
         return input();
     }
 
-    public int inputManualLottoCount() {
+    public String inputManualLottoCount() {
         System.out.print(System.lineSeparator());
         System.out.println(MANUAL_LOTTO_COUNT_MESSAGE);
-        return Integer.parseInt(input());
+        return input();
     }
 
     public List<String> inputManualLottoNumber(int manualLottoCount) {

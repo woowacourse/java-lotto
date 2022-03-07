@@ -17,9 +17,9 @@ public class LottoController {
         return Money.of(purchaseAmount);
     }
 
-    public LottoCount selectLottoCount(Money money, int manualLottoCount) {
+    public LottoCount selectLottoCount(Money money, String manualLottoCount) {
         int purchasableLottoCount = money.calculatePurchasableLottoCount();
-        return new LottoCount(manualLottoCount, purchasableLottoCount - manualLottoCount);
+        return LottoCount.of(manualLottoCount, purchasableLottoCount);
     }
 
     public Lottos purchaseLotto(LottoCount lottoCount,  List<String> manualNumber) {
