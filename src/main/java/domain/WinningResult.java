@@ -31,8 +31,7 @@ public class WinningResult {
         boolean matchBonus = winningTicket.isMatchBonusNumber(lottoTicket);
         WinningPrize winningPrize = WinningPrize.findWinningPrize(matchCount, matchBonus);
         if (!winningPrize.equals(WinningPrize.NONE)) {
-            Integer winningPrizeCount = result.get(winningPrize) + COUNT_UNIT;
-            result.put(winningPrize, winningPrizeCount);
+            result.merge(winningPrize, COUNT_UNIT, Integer::sum);
         }
     }
 
