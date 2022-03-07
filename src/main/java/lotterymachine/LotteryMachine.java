@@ -1,19 +1,16 @@
 package lotterymachine;
 
-import static lotterymachine.utils.LotteryCalculator.calculateProfitRate;
-
 import java.util.Collections;
 
 import java.util.Map;
 import lotterymachine.dto.ManualTicketDto;
+import lotterymachine.model.LotteryResult;
 import lotterymachine.model.TicketMachine;
 import lotterymachine.model.WinningLottery;
 import lotterymachine.model.WinningType;
-import lotterymachine.vo.Ball;
 import lotterymachine.vo.Count;
 import lotterymachine.vo.Money;
 import lotterymachine.dto.LotteryResultDto;
-import lotterymachine.model.LotteryTicket;
 import lotterymachine.model.LotteryTickets;
 import lotterymachine.utils.LotteryCalculator;
 import lotterymachine.view.InputView;
@@ -80,15 +77,12 @@ public class LotteryMachine {
     }
 
     private static void showResult(LotteryTickets lotteryTickets, WinningLottery winningLottery) {
-        LotteryTicket winningTicket = winningLottery.getWinningTicket();
-        Ball bonusBall = winningLottery.getBonusBall();
-        Map<WinningType, Count> ticketsResult = lotteryTickets.getLotteriesResult(winningTicket, bonusBall);
-        List<LotteryResultDto> lotteryResult = LotteryResultDto.createLotteryResults(ticketsResult);
-        Collections.sort(lotteryResult);
-        OutputView.printStatistics(lotteryResult);
+        LotteryResult lotteryResult = new LotteryResult(lotteryTickets, winningLottery);
+        Map<WinningType, Count> ticketsResult = lotteryResult.compute();
 
-        Money totalTicketsAmount = LotteryCalculator.getTotalTicketAmount(lotteryTickets.getLotteryTickets().size());
-        Money winningLotteryAmount = LotteryCalculator.getWinningAmount(lotteryResult);
-        OutputView.printProfitRate(calculateProfitRate(winningLotteryAmount, totalTicketsAmount));
+        List<LotteryResultDto> lotteryResultDto = LotteryResultDto.createLotteryResults(ticketsResult);
+        Collections.sort(lotteryResultDto);
+        OutputView.printStatistics(lotteryResultDto);
+        OutputView.printProfitRate(lotteryResult.getProfitRate(ticketsResult));
     }
 }
