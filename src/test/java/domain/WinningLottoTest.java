@@ -15,8 +15,8 @@ public class WinningLottoTest {
 
     @BeforeEach
     void setup() {
-        lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-        bonusNumber = new LottoNumber(7);
+        lotto = Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6));
+        bonusNumber = LottoNumber.from(7);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("생성자에 전달된 bonusNumber 가 lotto 에 포함되어 있을 경우 IAE 발생")
     void createWinningLottoWithDuplicateBonusNumberShouldFail() {
-        assertThatThrownBy(() -> new WinningLotto(lotto, new LottoNumber(1)))
+        assertThatThrownBy(() -> new WinningLotto(lotto, LottoNumber.from(1)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(WinningLotto.ERROR_MESSAGE_FOR_DUPLICATE_BONUS_NUMBER);
     }

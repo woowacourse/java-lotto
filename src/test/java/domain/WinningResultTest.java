@@ -24,9 +24,9 @@ public class WinningResultTest {
     @BeforeEach
     void setUpPurchasedLottos() {
         List<Lotto> lottoList = List.of(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
-                new Lotto(Set.of(13, 14, 15, 16, 17, 18))
+                Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)),
+                Lotto.fromRawValues(Set.of(7, 8, 9, 10, 11, 12)),
+                Lotto.fromRawValues(Set.of(13, 14, 15, 16, 17, 18))
         );
         purchasedLottos = new Lottos(lottoList);
     }
@@ -34,8 +34,8 @@ public class WinningResultTest {
     @BeforeEach
     void setUpWinningLotto() {
         winningLotto = new WinningLotto(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 7)),
-                new LottoNumber(6)
+                Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 7)),
+                LottoNumber.from(6)
         );
     }
 

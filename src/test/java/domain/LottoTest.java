@@ -29,7 +29,7 @@ public class LottoTest {
     @DisplayName("생성자에 6개 LottoNumber 를 전달 받으면 Lotto 객체가 생성된다.")
     void createLotto() {
         // given
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.fromRawValues(lottoNumbers);
 
         // when & then
         assertThat(lotto).isNotNull();
@@ -42,7 +42,7 @@ public class LottoTest {
         lottoNumbers.add(8);
 
         // then
-        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+        assertThatThrownBy(() -> Lotto.fromRawValues(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(Lotto.ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS);
     }
@@ -51,13 +51,13 @@ public class LottoTest {
     @DisplayName("Lotto 는 다른 Lotto 객체를 전달 받아 같은 숫자의 수를 반환할 수 있다.")
     void lottoReturnsNumberOfSameNumberCount() {
         // given
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.fromRawValues(lottoNumbers);
 
         // when
         Set<Integer> newLottoNumbers = new HashSet<>(lottoNumbers);
         newLottoNumbers.remove(6);
         newLottoNumbers.add(7);
-        Lotto anotherLotto = new Lotto(newLottoNumbers);
+        Lotto anotherLotto = Lotto.fromRawValues(newLottoNumbers);
 
         // then
         assertThat(lotto.getSameNumberCount(anotherLotto)).isEqualTo(5);
@@ -68,10 +68,10 @@ public class LottoTest {
     @CsvSource(value = {"1,true", "6,true", "7,false"})
     void lottoContainsLottoNumberTest(int lottoNumber, boolean expected) {
         // given
-        LottoNumber lottoNumber1 = new LottoNumber(lottoNumber);
+        LottoNumber lottoNumber1 = LottoNumber.from(lottoNumber);
 
         // when
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.fromRawValues(lottoNumbers);
 
         // then
         assertThat(lotto.containsLottoNumber(lottoNumber1)).isEqualTo(expected);
@@ -81,12 +81,12 @@ public class LottoTest {
     @DisplayName("getSortedLottoNumbers 는 오름차순 정렬된 List<LottoNumber> 를 반환한다.")
     void elementsOfGetLottosShouldSortedInAscendingOrder() {
         // given
-        Lotto lotto = new Lotto(Set.of(5, 10, 42, 25, 3, 7));
+        Lotto lotto = Lotto.fromRawValues(Set.of(5, 10, 42, 25, 3, 7));
 
         // when
         List<LottoNumber> actual = lotto.getSortedLottoNumbers();
-        List<LottoNumber> expected = List.of(new LottoNumber(3), new LottoNumber(5), new LottoNumber(7),
-                new LottoNumber(10), new LottoNumber(25), new LottoNumber(42));
+        List<LottoNumber> expected = List.of(LottoNumber.from(3), LottoNumber.from(5), LottoNumber.from(7),
+                LottoNumber.from(10), LottoNumber.from(25), LottoNumber.from(42));
 
         // then
         assertThat(actual).isEqualTo(expected);

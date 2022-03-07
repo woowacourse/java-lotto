@@ -20,8 +20,8 @@ public class LottoGameTest {
         LottoQuantity manualLottoQuantity = LottoQuantity.from(2);
         Lottos lottos = new Lottos(
                 List.of(
-                        new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                        new Lotto(Set.of(7, 8, 9, 10, 11, 12))
+                        Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)),
+                        Lotto.fromRawValues(Set.of(7, 8, 9, 10, 11, 12))
                 )
         );
 
@@ -30,7 +30,7 @@ public class LottoGameTest {
 
     @BeforeEach
     void setUpStrategy() {
-        lottoNumberGenerateStrategy = new StubRandomLottoNumberGenerator(
+        lottoNumberGenerateStrategy = StubRandomLottoNumberGenerator.fromRawValues(
                 List.of(
                         Set.of(1, 2, 3, 4, 5, 6),
                         Set.of(7, 8, 9, 10, 11, 12),
@@ -47,8 +47,8 @@ public class LottoGameTest {
         LottoQuantity manualLottoQuantity = LottoQuantity.from(5);
         Lottos lottos = new Lottos(
                 List.of(
-                        new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                        new Lotto(Set.of(7, 8, 9, 10, 11, 12))
+                        Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)),
+                        Lotto.fromRawValues(Set.of(7, 8, 9, 10, 11, 12))
                 )
         );
 
@@ -64,11 +64,11 @@ public class LottoGameTest {
     void createAutoLottos() {
         // given & when
         Lottos expected = new Lottos(List.of(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
-                new Lotto(Set.of(13, 14, 15, 16, 17, 18))
+                Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)),
+                Lotto.fromRawValues(Set.of(7, 8, 9, 10, 11, 12)),
+                Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)),
+                Lotto.fromRawValues(Set.of(7, 8, 9, 10, 11, 12)),
+                Lotto.fromRawValues(Set.of(13, 14, 15, 16, 17, 18))
         ));
         Lottos actual = lottoGame.createAutoLottos(lottoNumberGenerateStrategy);
 
@@ -81,15 +81,15 @@ public class LottoGameTest {
     void createWinningResult() {
         // given
         Lottos totalLottos = new Lottos(List.of(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
-                new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
-                new Lotto(Set.of(13, 14, 15, 16, 17, 18))
+                Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)),
+                Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)),
+                Lotto.fromRawValues(Set.of(7, 8, 9, 10, 11, 12)),
+                Lotto.fromRawValues(Set.of(7, 8, 9, 10, 11, 12)),
+                Lotto.fromRawValues(Set.of(13, 14, 15, 16, 17, 18))
         ));
         WinningLotto winningLotto = new WinningLotto(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 7)),
-                new LottoNumber(6)
+                Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 7)),
+                LottoNumber.from(6)
         );
 
         // when

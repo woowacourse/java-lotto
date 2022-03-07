@@ -29,10 +29,11 @@ public class RankTest {
             String rankText
     ) {
         // given
-        Lotto lotto = new Lotto(Set.of(firstNumber, secondNumber, thirdNumber, fourthNumber, fifthNumber, sixthNumber));
+        Lotto lotto = Lotto.fromRawValues(
+                Set.of(firstNumber, secondNumber, thirdNumber, fourthNumber, fifthNumber, sixthNumber));
         WinningLotto winningLotto = new WinningLotto(
-                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                new LottoNumber(7)
+                Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)),
+                LottoNumber.from(7)
         );
 
         // when

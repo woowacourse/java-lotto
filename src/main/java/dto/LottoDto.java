@@ -15,7 +15,7 @@ public class LottoDto {
     private List<Integer> toIntegers(Lotto lotto) {
         return lotto.getSortedLottoNumbers()
                 .stream()
-                .map(LottoNumber::getNumber)
+                .map(LottoNumber::toInt)
                 .collect(Collectors.toList());
     }
 

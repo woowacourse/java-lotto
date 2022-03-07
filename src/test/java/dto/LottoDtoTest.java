@@ -15,8 +15,8 @@ public class LottoDtoTest {
 
     @BeforeEach
     void setUp() {
-        Set<Integer> lottoNumberValues = Set.of(7, 10, 3, 42, 5, 25);
-        lotto = new Lotto(lottoNumberValues);
+        Set<Integer> rawValues = Set.of(7, 10, 3, 42, 5, 25);
+        lotto = Lotto.fromRawValues(rawValues);
     }
 
     @Test

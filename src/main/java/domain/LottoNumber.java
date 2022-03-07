@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    public static final List<Integer> LOTTO_NUMBERS;
+    public static final List<LottoNumber> LOTTO_NUMBERS;
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAXIMUM_LOTTO_NUMBER = 45;
 
@@ -15,28 +15,31 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     static {
         LOTTO_NUMBERS = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
-                .boxed()
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableList());
     }
 
     private final int number;
 
-    public LottoNumber(int number) {
-        validateRange(number);
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void validateRange(int number) {
-        if (isOutOfRange(number)) {
+    public static LottoNumber from(int number) {
+        validateRange(number);
+
+        int lottoNumberIndex = number - 1;
+        return LOTTO_NUMBERS.get(lottoNumberIndex);
+    }
+
+    private static void validateRange(int number) {
+        boolean isOutOfRange = MAXIMUM_LOTTO_NUMBER < number || number < MINIMUM_LOTTO_NUMBER;
+        if (isOutOfRange) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_OUT_OF_RANGE_NUMBER);
         }
     }
 
-    private boolean isOutOfRange(int number) {
-        return MAXIMUM_LOTTO_NUMBER < number || number < MINIMUM_LOTTO_NUMBER;
-    }
-
-    public int getNumber() {
+    public int toInt() {
         return number;
     }
 

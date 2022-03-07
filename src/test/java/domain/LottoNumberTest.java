@@ -15,17 +15,17 @@ public class LottoNumberTest {
     @ValueSource(ints = {1, 45})
     void createLottoNumber(int number) {
         // given & when
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.from(number);
 
         // then
-        assertThat(lottoNumber.getNumber()).isEqualTo(number);
+        assertThat(lottoNumber.toInt()).isEqualTo(number);
     }
 
     @DisplayName("1 ~ 45 범위 외 숫자가 전달되면, IAE 가 발생한다.")
     @ParameterizedTest(name = "{0} 전달")
     @ValueSource(ints = {-1, 0, 46})
     void createLottoNumberOutOfRangeShouldFail(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.from(number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LottoNumber.ERROR_MESSAGE_FOR_OUT_OF_RANGE_NUMBER);
     }
@@ -34,8 +34,8 @@ public class LottoNumberTest {
     @DisplayName("같은 숫자가 전달된 LottoNumber 끼리는 동등성을 가져야한다.")
     void lottoNumberEqualityTest() {
         // given & when
-        LottoNumber lottoNumber1 = new LottoNumber(1);
-        LottoNumber lottoNumber2 = new LottoNumber(1);
+        LottoNumber lottoNumber1 = LottoNumber.from(1);
+        LottoNumber lottoNumber2 = LottoNumber.from(1);
 
         // then
         assertThat(lottoNumber1).isEqualTo(lottoNumber2);

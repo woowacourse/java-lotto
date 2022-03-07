@@ -53,7 +53,7 @@ public class LottoController {
         try {
             List<Set<Integer>> lottoValues = InputView.scanManualLottoNumbers(manualLottoQuantity.getLottoQuantity());
             List<Lotto> manualLottoValues = lottoValues.stream()
-                    .map(Lotto::new)
+                    .map(Lotto::fromRawValues)
                     .collect(Collectors.toList());
             return new Lottos(manualLottoValues);
         } catch (IllegalArgumentException exception) {
@@ -96,7 +96,7 @@ public class LottoController {
     private Lotto generateLottoOfWinningLotto() {
         try {
             Set<Integer> numbers = InputView.scanWinningLottoNumbers();
-            return new Lotto(numbers);
+            return Lotto.fromRawValues(numbers);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
             return generateLottoOfWinningLotto();
@@ -105,7 +105,7 @@ public class LottoController {
 
     private LottoNumber generateBonusNumberOfWinningLotto() {
         try {
-            return new LottoNumber(InputView.scanBonusNumber());
+            return LottoNumber.from(InputView.scanBonusNumber());
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
             return generateBonusNumberOfWinningLotto();

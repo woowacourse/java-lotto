@@ -17,7 +17,7 @@ public class LottosTest {
 
     @BeforeEach
     void setupLottos() {
-        lottoNumberGenerateStrategy = new StubRandomLottoNumberGenerator(
+        lottoNumberGenerateStrategy = StubRandomLottoNumberGenerator.fromRawValues(
                 List.of(
                         Set.of(1, 2, 3, 4, 5, 6),
                         Set.of(7, 8, 9, 10, 11, 12),
@@ -43,7 +43,7 @@ public class LottosTest {
     @DisplayName("생성자에 List<Lotto> 를 전달받아 Lottos 를 생성할 수 있다.")
     void createLottosWithLottoList() {
         // given
-        List<Lotto> lottoValues = List.of(new Lotto(Set.of(1, 2, 3, 4, 5, 6)));
+        List<Lotto> lottoValues = List.of(Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)));
 
         // when
         Lottos lottos = new Lottos(lottoValues);
@@ -65,12 +65,12 @@ public class LottosTest {
         // then
         assertThat(joinedLottos.getLottos())
                 .containsExactly(
-                        new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                        new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
-                        new Lotto(Set.of(13, 14, 15, 16, 17, 18)),
-                        new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
-                        new Lotto(Set.of(7, 8, 9, 10, 11, 12)),
-                        new Lotto(Set.of(13, 14, 15, 16, 17, 18))
+                        Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)),
+                        Lotto.fromRawValues(Set.of(7, 8, 9, 10, 11, 12)),
+                        Lotto.fromRawValues(Set.of(13, 14, 15, 16, 17, 18)),
+                        Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)),
+                        Lotto.fromRawValues(Set.of(7, 8, 9, 10, 11, 12)),
+                        Lotto.fromRawValues(Set.of(13, 14, 15, 16, 17, 18))
                 );
 
     }

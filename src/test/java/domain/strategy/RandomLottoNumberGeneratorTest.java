@@ -17,7 +17,7 @@ public class RandomLottoNumberGeneratorTest {
 
         IntStream.range(0, 100000)
                 .forEach(i -> {
-                    Set<Integer> generatedWinningNumbers = randomLottoNumberGenerator.generateNumbers();
+                    Set<LottoNumber> generatedWinningNumbers = randomLottoNumberGenerator.generateNumbers();
                     assertThat(LottoNumber.LOTTO_NUMBERS.containsAll(generatedWinningNumbers)).isTrue();
                 });
     }
