@@ -21,9 +21,9 @@ public class LottoController {
         int inputMoney = lottoRequest.getInputMoney();
         List<List<Integer>> manualLottoNumbers = lottoRequest.getManualLottoNumbers();
 
-        int lottoAmount = lottoService.countAutoLottos(inputMoney, manualLottoNumbers.size());
-        Lottos lottos = lottoService.createLottos(lottoAmount, manualLottoNumbers);
-        return new LottosResult(lottos.getLottos(), lottoAmount, lottoAmount);
+        int autoLottoAmount = lottoService.countAutoLottos(inputMoney, manualLottoNumbers.size());
+        Lottos lottos = lottoService.createLottos(autoLottoAmount, manualLottoNumbers);
+        return new LottosResult(lottos.getLottos(), autoLottoAmount, manualLottoNumbers.size());
     }
 
     public StatisticsResult match(StatisticsRequest statisticsRequest) {

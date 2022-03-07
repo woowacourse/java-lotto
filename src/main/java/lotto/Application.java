@@ -20,7 +20,7 @@ public class Application {
         List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualAmount);
         LottoRequest lottoRequest = new LottoRequest(inputMoney, manualLottoNumbers);
         LottosResult lottosResult = lottoController.buyLotto(lottoRequest);
-        OutputView.printLottos(lottoController.buyLotto(lottoRequest));
+        OutputView.printLottos(lottosResult);
 
         // 당첨 확인
         List<Integer> winnerNumbers = InputView.inputWinnerNumbers();
