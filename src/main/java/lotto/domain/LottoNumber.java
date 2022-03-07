@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,10 +14,11 @@ public class LottoNumber {
     public static final int MIN = 1;
     public static final int MAX = 45;
 
-    private static final List<LottoNumber> NUMBER_CACHE =
+    private static final Map<Integer, LottoNumber> NUMBER_CACHE =
         IntStream.rangeClosed(MIN, MAX)
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
+            .boxed()
+            .collect(Collectors.toUnmodifiableMap(Function.identity(), LottoNumber::new));
+
 
     private final int number;
 
@@ -25,10 +28,7 @@ public class LottoNumber {
 
     public static LottoNumber from(int number) {
         validate(number);
-        return NUMBER_CACHE.stream()
-            .filter(lottoNumber -> lottoNumber.number == number)
-            .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("입력받은 숫자에 해당하는 로또 번호가 없습니다."));
+        return NUMBER_CACHE.get(number);
     }
 
     public static LottoNumber from(String input) {
