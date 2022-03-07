@@ -20,7 +20,7 @@ public class Result {
     }
 
     private void add(final Rank rank) {
-        value.put(rank, value.getOrDefault(rank, 0) + 1);
+        value.merge(rank, 1, Integer::sum);
     }
 
     public long getPrize() {
