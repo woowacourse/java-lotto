@@ -9,17 +9,15 @@ import lotto.domain.generator.NumberGenerator;
 public class LottoTicket {
 
     private final List<LottoLine> lines;
-    private final Money money;
 
-    public LottoTicket(List<LottoLine> lines, Money money) {
+    public LottoTicket(List<LottoLine> lines) {
         this.lines = lines;
-        this.money = money;
     }
 
     public static LottoTicket createLottoTicket(NumberGenerator generator, Money money) {
         validatePurchasable(money);
         List<LottoLine> lines = createLines(generator, calculatePurchasableCount(money));
-        return new LottoTicket(lines, money);
+        return new LottoTicket(lines);
     }
 
     private static void validatePurchasable(Money money) {
@@ -40,9 +38,5 @@ public class LottoTicket {
 
     public List<LottoLine> getLines() {
         return lines;
-    }
-
-    public Money getMoney() {
-        return money;
     }
 }

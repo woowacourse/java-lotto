@@ -1,6 +1,15 @@
 package lotto.dto;
 
+import static java.util.stream.Collectors.*;
+
+import java.util.List;
+import java.util.stream.Stream;
+
+import lotto.domain.LottoLine;
+import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
+import lotto.domain.Money;
+import lotto.domain.WinningTicket;
 
 public class PurchaseResult {
 
@@ -20,4 +29,16 @@ public class PurchaseResult {
         return autoTicket;
     }
 
+    public Money sumMoney() {
+        int manualSize = manualTicket.getLines().size();
+        int autoSize = autoTicket.getLines().size();
+        return Money.from((manualSize + autoSize) * LottoLine.PRICE);
+    }
+
+    public List<LottoRank> compareWinningTicket(WinningTicket winningTicket) {
+        return Stream.concat(
+            winningTicket.compareTicket(manualTicket).stream(),
+            winningTicket.compareTicket(autoTicket).stream()
+        ).collect(toList());
+    }
 }

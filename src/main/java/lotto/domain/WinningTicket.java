@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import lotto.domain.generator.StringInputNumberGenerator;
-import old.utils.IntegerUtils;
 
 public class WinningTicket {
 
@@ -26,7 +28,14 @@ public class WinningTicket {
         }
     }
 
-    public LottoRank compare(LottoLine lottoLine) {
+    public List<LottoRank> compareTicket(LottoTicket ticket) {
+        return ticket.getLines()
+            .stream()
+            .map(this::compareLine)
+            .collect(Collectors.toList());
+    }
+
+    public LottoRank compareLine(LottoLine lottoLine) {
         int matchCount = lottoLine.countMatch(winningLine);
         boolean isBonusMatch = lottoLine.isMatch(bonusBall);
         return LottoRank.find(matchCount, isBonusMatch);

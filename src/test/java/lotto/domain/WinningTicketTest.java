@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.dto.PurchaseResult;
+
 public class WinningTicketTest {
 
     private LottoLine baseLottoLine;
@@ -48,11 +50,11 @@ public class WinningTicketTest {
         LottoNumber bonusball = LottoNumber.from(7);
         WinningTicket winningTicket = new WinningTicket(baseLottoLine, bonusball);
         // when
-        LottoLine purchaseTicket = new LottoLine(List.of(
+        LottoLine lottoLine = new LottoLine(List.of(
             LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
             LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)
         ));
-        LottoRank result = winningTicket.compare(purchaseTicket);
+        LottoRank result = winningTicket.compareLine(lottoLine);
         // then
         Assertions.assertThat(result).isEqualTo(LottoRank.FIRST);
     }
