@@ -33,10 +33,10 @@ public class LottoStatistics {
         long sum = statisticsByRank.entrySet().stream()
             .mapToLong(singleLotto -> singleLotto.getKey().getPrize() * singleLotto.getValue())
             .sum();
-        return convertFormat(money, sum);
+        return convertEarningRatesResult(money, sum);
     }
 
-    private String convertFormat(Money money, long sum) {
+    private String convertEarningRatesResult(Money money, long sum) {
         return String.format("%s", Math.floor(money.divideByAmount(sum)
             * DECIMAL_POINT_CHANGE_NUMBER) / DECIMAL_POINT_CHANGE_NUMBER);
     }
