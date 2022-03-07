@@ -18,7 +18,8 @@ public class WinningResultTest {
                 .boxed()
                 .collect(Collectors.toList());
         List<LotteryTicket> tickets = List.of(LotteryTicket.from(lotteryNumbers));
-        LotteryTickets lotteryTickets = new LotteryTickets(tickets);
+        LotteryPurchaseCount lotteryPurchaseCount = new LotteryPurchaseCount(1, 0, 1);
+        LotteryTickets lotteryTickets = new LotteryTickets(tickets, lotteryPurchaseCount);
         LotteryNumber bonusNumber = LotteryNumber.from(7);
         WinningLottery winningLottery = new WinningLottery(LotteryTicket.from(lotteryNumbers), bonusNumber);
         WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
@@ -33,7 +34,8 @@ public class WinningResultTest {
                 .boxed()
                 .collect(Collectors.toList());
         List<LotteryTicket> tickets = List.of(LotteryTicket.from(lotteryNumbers));
-        LotteryTickets lotteryTickets = new LotteryTickets(tickets);
+        LotteryPurchaseCount lotteryPurchaseCount = new LotteryPurchaseCount(1, 0, 1);
+        LotteryTickets lotteryTickets = new LotteryTickets(tickets, lotteryPurchaseCount);
         LotteryNumber bonusNumber = LotteryNumber.from(7);
         WinningLottery winningLottery = new WinningLottery(LotteryTicket.from(lotteryNumbers), bonusNumber);
         WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);

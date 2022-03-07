@@ -1,5 +1,6 @@
 package lotterymachine.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,8 @@ public class LotteryTicketsTest {
                 .collect(Collectors.toList());
         LotteryTicket lotteryTicket = LotteryTicket.from(input);
         List<LotteryTicket> lotteryTicketList = List.of(lotteryTicket);
-        LotteryTickets lotteryTickets = new LotteryTickets(lotteryTicketList);
+        LotteryPurchaseCount lotteryPurchaseCount = new LotteryPurchaseCount(1, 0, 1);
+        LotteryTickets lotteryTickets = new LotteryTickets(lotteryTicketList, lotteryPurchaseCount);
         assertThat(lotteryTickets.getLotteryTickets().size()).isEqualTo(1);
     }
 
@@ -32,17 +34,23 @@ public class LotteryTicketsTest {
                 .collect(Collectors.toList());
         assertThatThrownBy(() -> {
             List<LotteryTicket> tickets = List.of(LotteryTicket.from(input));
-            LotteryTickets lotteryTickets = new LotteryTickets(tickets);
+            LotteryPurchaseCount lotteryPurchaseCount = new LotteryPurchaseCount(1, 1, 1);
+            LotteryTickets lotteryTickets = new LotteryTickets(tickets, lotteryPurchaseCount);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 숫자는 여섯개를 입력해야합니다.");
     }
 
     @Test
-    @DisplayName("두개의 로또 리스트를 입력 받아, LotteryTickets를 생성한다.")
-    void create() {
+    @DisplayName("총 구매 개수와 입력 받은 로또 티켓 개수가 일치하지 않으면, 에러를 발생시킨다.")
+    void validateCorrectSize() {
+        LotteryPurchaseCount count = new LotteryPurchaseCount(3, 5, 8);
         List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<LotteryTicket> lotteryTicket = LotteryTicket.createLotteryTickets(List.of(input));
-        LotteryTickets value = LotteryTickets.of(lotteryTicket, lotteryTicket);
-        assertThat(value.getLotteryTickets().size()).isEqualTo(2);
+        assertThatThrownBy(() -> {
+            LotteryTickets value = new LotteryTickets(lotteryTicket, count);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("");
+
+
     }
 }

@@ -6,6 +6,7 @@ import lotterymachine.domain.LotteryPurchaseMoney;
 import lotterymachine.view.InputView;
 import lotterymachine.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,6 +35,11 @@ public class LotteryMachineApplication {
         List<LotteryTicket> passivityTickets = LotteryTicket.createLotteryTickets(passivityLotteryNumbers);
         List<LotteryTicket> autoTickets = LotteryTicket.createAutoLotteryTickets(lotteryPurchaseCount.getAutoValue()
                 , new RandomLotteryNumbersGenerator());
-        return LotteryTickets.of(autoTickets, passivityTickets);
+
+        List<LotteryTicket> lotteryTickets = new ArrayList<>();
+        lotteryTickets.addAll(passivityTickets);
+        lotteryTickets.addAll(autoTickets);
+
+        return new LotteryTickets(lotteryTickets, lotteryPurchaseCount);
     }
 }

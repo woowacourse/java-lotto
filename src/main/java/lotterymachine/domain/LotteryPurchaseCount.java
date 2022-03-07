@@ -28,6 +28,10 @@ public class LotteryPurchaseCount {
         return this.passivityValue;
     }
 
+    public int getTotalValue() {
+        return autoValue + passivityValue;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
