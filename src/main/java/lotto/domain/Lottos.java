@@ -18,6 +18,13 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
+    public LottoResult compareWinningLotto(final WinningLotto winningLotto) {
+        LottoResult lottoResult = new LottoResult();
+
+        winningLotto.match(this, lottoResult);
+        return lottoResult;
+    }
+
     private void validateLottos(final List<Lotto> lottos) {
         if (lottos == null) {
             throw new IllegalArgumentException(ERROR_NULL);

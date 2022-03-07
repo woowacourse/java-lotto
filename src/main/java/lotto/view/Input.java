@@ -19,15 +19,21 @@ public class Input {
         return Integer.parseInt(payment);
     }
 
-    public static List<Ball> inputWinningNumbers(final Entering entering) {
-        String[] winningNumbers = getWinningNumbers(entering);
-        for (String number : winningNumbers) {
+    public static int inputManualCount(final Entering entering) {
+        String manualCount = entering.enter();
+        validateNumber(manualCount);
+        return Integer.parseInt(manualCount);
+    }
+
+    public static List<Ball> inputLottoNumbers(final Entering entering) {
+        String[] lottoNumbers = getLottoNumbers(entering);
+        for (String number : lottoNumbers) {
             validateNumber(number);
         }
-        return Arrays.stream(winningNumbers)
+        return Arrays.stream(lottoNumbers)
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .map(Ball::new)
+                .map(Ball::of)
                 .collect(Collectors.toList());
     }
 
@@ -37,7 +43,7 @@ public class Input {
         return Integer.parseInt(bonusBall);
     }
 
-    private static String[] getWinningNumbers(final Entering entering) {
+    private static String[] getLottoNumbers(final Entering entering) {
         String winningNumbers = entering.enter();
         if (isBlank(winningNumbers)) {
             throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
