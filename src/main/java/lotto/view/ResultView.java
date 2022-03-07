@@ -3,9 +3,9 @@ package lotto.view;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.model.dto.LottoBallDTO;
 import lotto.model.dto.LottoDTO;
 import lotto.model.dto.PrizeInformationDTO;
-import lotto.model.lotto.LottoBall;
 
 public class ResultView {
 	private static final String MESSAGE_PURCHASE_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
@@ -30,7 +30,7 @@ public class ResultView {
 
 	private static void showLotto(LottoDTO lotto) {
 		String joinedNumbers = lotto.getLottoBalls().stream()
-			.map(LottoBall::getNumber)
+			.map(LottoBallDTO::from)
 			.map(String::valueOf)
 			.collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
 
