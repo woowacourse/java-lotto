@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.dto.result;
 
 import java.util.List;
 import java.util.stream.Collectors;

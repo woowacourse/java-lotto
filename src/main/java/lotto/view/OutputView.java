@@ -5,8 +5,8 @@ import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.dto.RankResult;
-import lotto.dto.StatisticsResult;
+import lotto.dto.result.RankResult;
+import lotto.dto.result.StatisticsResult;
 
 public class OutputView {
 

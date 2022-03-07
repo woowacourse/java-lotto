@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.dto.result;
 
 public class RankResult {
 
