@@ -7,7 +7,10 @@ import java.util.List;
 
 public class OutputView {
 
-    public static void printInputManualPurchase() {
+    public static void printInputManualPurchase(boolean isPurchasable) {
+        if (isPurchasable) {
+            return;
+        }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 

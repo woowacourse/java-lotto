@@ -30,8 +30,8 @@ public class Count {
         return new Count(this.number - manualTickets.getNumber());
     }
 
-    public boolean isInteger() {
-        return this.number > 0;
+    public boolean isZero() {
+        return this.number == 0;
     }
 
     public int getNumber() {

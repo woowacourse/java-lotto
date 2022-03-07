@@ -68,11 +68,8 @@ public class LotteryMachine {
     }
 
     private static List<LotteryTicket> purchaseManualLotteryTickets(Count manualTickets) {
+        OutputView.printInputManualPurchase(manualTickets.isZero());
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
-        if (!manualTickets.isInteger()) {
-            return lotteryTickets;
-        }
-        OutputView.printInputManualPurchase();
         for (int i = 0; i < manualTickets.getNumber(); i++) {
             lotteryTickets.add(getManualLotteryTicket());
         }
