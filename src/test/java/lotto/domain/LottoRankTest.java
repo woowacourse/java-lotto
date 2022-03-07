@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Map;
+
 public class LottoRankTest {
 
     @ParameterizedTest
@@ -12,6 +14,18 @@ public class LottoRankTest {
     @CsvSource(value = {"6:false:RANK_FIRST", "5:true:RANK_SECOND", "5:false:RANK_THIRD",
             "4:false:RANK_FOURTH", "3:false:RANK_FIFTH"}, delimiter = ':')
     void Decide_Rank(long targetCorrectCount, boolean isTargetBonused, LottoRank inputRank) {
-        Assertions.assertThat(LottoRank.findLottoRank(targetCorrectCount, isTargetBonused)).isEqualTo(inputRank);
+        LottoResult lottoResult = new LottoResult();
+        LottoRank.addLottoResult(lottoResult, targetCorrectCount, isTargetBonused);
+
+        Assertions.assertThat(getAddedRank(lottoResult.getResult(), 1)).isEqualTo(inputRank);
+    }
+
+    public static LottoRank getAddedRank(Map<LottoRank, Integer> map, Integer value) {
+        for (LottoRank lottoRank : map.keySet()) {
+            if (value.equals(map.get(lottoRank))) {
+                return lottoRank;
+            }
+        }
+        return null;
     }
 }

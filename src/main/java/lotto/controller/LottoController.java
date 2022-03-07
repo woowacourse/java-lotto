@@ -9,53 +9,80 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-    private static final int UNIT_PRICE = 1000;
     private final InputView inputView;
     private final OutputView outputView;
-    private Lottos lottos;
+    private final Lottos lottos;
 
     public LottoController() {
         this.inputView = new InputView();
         this.outputView = new OutputView();
+        this.lottos = new Lottos();
     }
 
     public void start() {
         Money money = getMoney();
-        purchaseLotto(money);
-        WinningLotto winningLotto = getWinningLotto();
-        outputView.printResult(lottos.getResult(winningLotto));
+        buyManualLotto(money);
+        lottos.purchaseAutoLotto(money);
+        outputView.printPurchasedLotto(lottos);
+        outputView.printResult(lottos.getResult(getWinningLotto()));
         outputView.printYield(lottos.getYield(money));
         inputView.terminate();
-    }
-
-    private WinningLotto getWinningLotto() {
-        PickedNumbers pickedNumbers = getPickedNumber();
-        BonusNumber bonusNumber = getBonusNumber(pickedNumbers);
-        WinningLotto winningLotto = new WinningLotto(pickedNumbers, bonusNumber);
-        return winningLotto;
-    }
-
-    private void purchaseLotto(Money money) {
-        lottos = new Lottos(money, UNIT_PRICE);
-        outputView.printPurchasedLotto(lottos);
     }
 
     private Money getMoney() {
         try {
             outputView.printAskMoneyInputMessage();
-            Money money = new Money(inputView.getInput(), UNIT_PRICE);
-            return money;
+            return new Money(inputView.getInput());
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
             return getMoney();
         }
     }
 
+    private void buyManualLotto(Money money) {
+        int passiveLottoCount = getManualPurchase(money);
+        purchaseManualLotto(passiveLottoCount);
+        money.buyLotto(passiveLottoCount);
+    }
+
+    private int getManualPurchase(Money money) {
+        try {
+            outputView.printAskManualPurchaseCountInputMessage();
+            int manualPurchaseNumberInput = Integer.parseInt(inputView.getInput());
+            money.validatePurchasableNumberInput(manualPurchaseNumberInput);
+            return manualPurchaseNumberInput;
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return getManualPurchase(money);
+        }
+    }
+
+    private void purchaseManualLotto(int passiveLottoCount) {
+        for (int i = 0; i < passiveLottoCount; i++) {
+            lottos.purchaseLotto(getManualPickedNumber());
+        }
+    }
+
+    private WinningLotto getWinningLotto() {
+        PickedNumbers pickedNumbers = getPickedNumber();
+        BonusNumber bonusNumber = getBonusNumber(pickedNumbers);
+        return new WinningLotto(pickedNumbers, bonusNumber);
+    }
+
+    private PickedNumbers getManualPickedNumber() {
+        try {
+            outputView.printManualPurchaseInputMessage();
+            return new PickedNumbers(inputView.getInput());
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return getManualPickedNumber();
+        }
+    }
+
     private PickedNumbers getPickedNumber() {
         try {
             outputView.printLastWeekWinningMessage();
-            PickedNumbers pickedNumbers = new PickedNumbers(inputView.getInput());
-            return pickedNumbers;
+            return new PickedNumbers(inputView.getInput());
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
             return getPickedNumber();
@@ -65,8 +92,7 @@ public class LottoController {
     private BonusNumber getBonusNumber(PickedNumbers pickedNumbers) {
         try {
             outputView.printLastWeekBonusMessage();
-            BonusNumber bonusNumber = new BonusNumber(inputView.getInput(), pickedNumbers);
-            return bonusNumber;
+            return new BonusNumber(inputView.getInput(), pickedNumbers);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
             return getBonusNumber(pickedNumbers);
