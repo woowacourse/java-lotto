@@ -32,8 +32,8 @@ class LottoGeneratorTest {
     @DisplayName("수동 로또를 생성")
     @Test
     void generate_manual_lottos() {
-        Lotto lotto1 = new Lotto(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
-        Lotto lotto2 = new Lotto(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
+        Lotto lotto1 = Lotto.from(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
+        Lotto lotto2 = Lotto.from(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
         Lottos manualLottos = LottoGenerator.pickManualLottos(List.of(lotto1, lotto2));
 
         assertEquals(manualLottos.getLottos().size(), 2);

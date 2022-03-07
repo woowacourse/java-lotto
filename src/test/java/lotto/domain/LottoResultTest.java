@@ -23,7 +23,7 @@ class LottoResultTest {
         ball7 = Ball.of(7);
         ball8 = Ball.of(8);
 
-        Lotto winningNumbers = new Lotto(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
+        Lotto winningNumbers = Lotto.from(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
         Ball bonusBall = ball7;
         winningLotto = new WinningLotto(winningNumbers, bonusBall);
     }
@@ -31,12 +31,12 @@ class LottoResultTest {
     @Test
     @DisplayName("수익률 계산")
     void calculate_profit() {
-        Lotto lotto1 = new Lotto(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
-        Lotto lotto2 = new Lotto(List.of(ball2, ball3, ball4, ball5, ball6, ball7));
-        Lotto lotto3 = new Lotto(List.of(ball3, ball4, ball5, ball6, ball7, ball8));
+        Lotto lotto1 = Lotto.from(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
+        Lotto lotto2 = Lotto.from(List.of(ball2, ball3, ball4, ball5, ball6, ball7));
+        Lotto lotto3 = Lotto.from(List.of(ball3, ball4, ball5, ball6, ball7, ball8));
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
 
-        Lotto winLotto = new Lotto(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
+        Lotto winLotto = Lotto.from(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
         Ball bonusBall = ball7;
         WinningLotto winningLotto = new WinningLotto(winLotto, bonusBall);
 

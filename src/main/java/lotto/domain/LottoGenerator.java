@@ -14,7 +14,7 @@ public class LottoGenerator {
         int autoCount = lottoCount.getAutoCount();
         List<Lotto> lottos = new ArrayList<>(autoCount);
         for (int i = 0; i < autoCount; i++) {
-            lottos.add(new Lotto(selectRandomBalls()));
+            lottos.add(Lotto.from(selectRandomBalls()));
         }
         return new Lottos(lottos);
     }

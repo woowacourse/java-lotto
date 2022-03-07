@@ -27,7 +27,7 @@ public class LottoTest {
     @DisplayName("로또 생성 시 Ball 객체 6개 생성")
     void ball_count() {
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(List.of(ball1, ball2, ball3));
+            Lotto lotto = Lotto.from(List.of(ball1, ball2, ball3));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -35,14 +35,14 @@ public class LottoTest {
     @DisplayName("로또 생성 시 Ball 숫자 중복")
     void ball_duplicated() {
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(List.of(ball1, ball2, ball2, ball4, ball5, ball6));
+            Lotto lotto = Lotto.from(List.of(ball1, ball2, ball2, ball4, ball5, ball6));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("보너스볼 중복")
     void bonus_ball_duplicated() {
-        Lotto lotto = new Lotto(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
+        Lotto lotto = Lotto.from(List.of(ball1, ball2, ball3, ball4, ball5, ball6));
         Ball bonusBall = ball1;
 
         assertTrue(lotto.contains(bonusBall));

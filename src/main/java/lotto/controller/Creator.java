@@ -55,7 +55,7 @@ public class Creator {
 
     public static Lotto createLottoNumbers() {
         try {
-            return new Lotto(inputLottoNumbers(entering));
+            return Lotto.from(inputLottoNumbers(entering));
         } catch (IllegalArgumentException error) {
             printErrorMessage(error.getMessage());
             return createLottoNumbers();
