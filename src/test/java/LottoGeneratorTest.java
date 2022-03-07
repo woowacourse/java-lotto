@@ -38,7 +38,7 @@ public class LottoGeneratorTest {
     @DisplayName("수동 0장, 자동 1장 생성 성공")
     void generate_auto_lottos() {
 
-        LottoGenerator lottoGenerator = new LottoGenerator(List.of(List.of()), 1);
+        LottoGenerator lottoGenerator = new LottoGenerator(List.of(), 1);
 
         assertThat(lottoGenerator.generate().size()).isEqualTo(1);
 
