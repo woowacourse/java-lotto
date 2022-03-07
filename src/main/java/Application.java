@@ -21,7 +21,8 @@ public class Application {
         String[] inputWinningNumber = InputView.askInputWinningNumber();
         int inputBonusBall = InputView.askInputBonusBall();
 
-        StatisticDto statisticDto = lottoController.winningResult(inputWinningNumber, inputBonusBall, manualLottoNumbers, new Money(inputMoney));
+        StatisticDto statisticDto = lottoController.winningResult(inputWinningNumber, inputBonusBall,
+                manualLottoNumbers, inputMoney);
         OutputView.printStatistics(statisticDto);
         OutputView.printProfitRate(statisticDto.getProfitRate());
 
