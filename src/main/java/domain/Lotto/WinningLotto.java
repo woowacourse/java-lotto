@@ -10,31 +10,23 @@ public class WinningLotto {
     private final LottoNumber bonusBall;
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusBallNumber) {
-        validateDuplicate(winningLotto.getLotto(), bonusBallNumber);
+        validateDuplicate(winningLotto, bonusBallNumber);
         this.winningLotto = winningLotto;
         bonusBall = bonusBallNumber;
     }
 
+    private void validateDuplicate(Lotto winningLotto, LottoNumber bonusBallNumber) {
+        if (winningLotto.hasLottoNumber(bonusBallNumber)) {
+            throw new IllegalArgumentException(ExceptionMessage.LOTTO_AND_BONUS_BALL_DUPLICATION);
+        }
+    }
+
     public boolean isContainLottoNumber(LottoNumber lottoNumber) {
-        List<LottoNumber> winningLottoNumbers = winningLotto.getLotto();
-        return winningLottoNumbers.contains(lottoNumber);
+        return winningLotto.hasLottoNumber(lottoNumber);
     }
 
     public boolean isContainBonusBall(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.contains(bonusBall);
     }
-
-    public void validateDuplicate(List<LottoNumber> numbers, LottoNumber bonusBallNumber) {
-        if (numbers.contains(bonusBallNumber)) {
-            throw new IllegalArgumentException(ExceptionMessage.LOTTO_AND_BONUS_BALL_DUPLICATION);
-        }
-    }
-
-    public List<LottoNumber> getWinningLotto() {
-        return winningLotto.getLotto();
-    }
-
-    public LottoNumber getBonusBall() {
-        return bonusBall;
-    }
 }
+

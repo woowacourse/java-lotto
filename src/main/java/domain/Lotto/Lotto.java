@@ -1,6 +1,6 @@
 package domain.Lotto;
 
-import domain.Result;
+import domain.Rank;
 import utils.ExceptionMessage;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Lotto {
 
-    public static final int CORRECT_LOTTO_SIZE = 6;
+    private static final int CORRECT_LOTTO_SIZE = 6;
 
     private final List<LottoNumber> lotto;
 
@@ -24,16 +24,21 @@ public class Lotto {
         }
     }
 
-    public Result judge(WinningLotto winningLotto) {
+    public Rank compare(WinningLotto winningLotto) {
         int hitCount = (int) lotto.stream()
                 .filter(winningLotto::isContainLottoNumber)
                 .count();
 
         boolean isHitBonusBall = winningLotto.isContainBonusBall(lotto);
-        return new Result(hitCount, isHitBonusBall);
+        return Rank.judgeResult(hitCount, isHitBonusBall);
+    }
+
+    public boolean hasLottoNumber(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
     }
 
     public List<LottoNumber> getLotto() {
         return Collections.unmodifiableList(lotto);
     }
 }
+

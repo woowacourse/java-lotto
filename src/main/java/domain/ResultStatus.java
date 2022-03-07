@@ -16,9 +16,8 @@ public class ResultStatus {
         resultStatistics.remove(Rank.NONE);
     }
 
-    public void judgeResult(List<Result> results) {
-        for (Result result : results) {
-            Rank rank = Rank.judgeResult(result);
+    public void judgeResult(List<Rank> results) {
+        for (Rank rank : results) {
             updateRecord(rank);
         }
     }
@@ -35,6 +34,10 @@ public class ResultStatus {
             totalIncome += rank.getReward() * resultStatistics.get(rank);
         }
         return totalIncome;
+    }
+
+    public double calculateIncomeRate(int purchaseAmount) {
+        return calculateTotalIncome() / purchaseAmount;
     }
 
     public Map<Rank, Integer> getResultStatistics() {

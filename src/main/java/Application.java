@@ -1,10 +1,11 @@
 import controller.LottoController;
-import domain.Result;
-import dto.LottosDto;
+import domain.Lotto.Lottos;
+import domain.Lotto.WinningLotto;
+import domain.LottoCount;
+import domain.Money;
+import domain.ResultStatus;
 import view.InputView;
 import view.OutputView;
-
-import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
@@ -12,11 +13,14 @@ public class Application {
         OutputView outputView = OutputView.getInstance();
         LottoController lottoController = new LottoController();
 
-        LottosDto lottosDto = lottoController.purchase(inputView.inputPurchaseAmount());
-        outputView.printPurchasedLotto(lottosDto);
+        Money money = lottoController.chargeMoney(inputView.inputPurchaseAmount());
+        LottoCount lottoCount = lottoController.selectLottoCount(money, inputView.inputManualLottoCount());
+        Lottos lottos = lottoController.purchaseLotto(lottoCount, inputView.inputManualLottoNumber(lottoCount.getManualLottoCount()));
+        outputView.printPurchasedLotto(lottoCount.getManualLottoCount(), lottoCount.getAutoLottoCount(), lottos);
 
-        lottoController.determineWinningNumber(inputView.inputWinningNumber(), inputView.inputBonusBall());
-
-        outputView.printResult(lottoController.makeResult());
+        WinningLotto winningLotto = lottoController.determineWinningNumber(inputView.inputWinningNumber(), inputView.inputBonusBall());
+        ResultStatus resultStatus = lottoController.makeResult(lottos, winningLotto);
+        outputView.printResult(resultStatus.getResultStatistics());
+        outputView.printIncomeRate(lottoController.calculateImcomeRate(resultStatus, money));
     }
 }

@@ -1,45 +1,51 @@
 package controller;
 
-import domain.Lotto.Lotto;
-import domain.Lotto.LottoNumber;
-import domain.Lotto.WinningLotto;
-import domain.LottoGenerator.AutoLottoGenerator;
-import domain.LottoGenerator.LottoGenerator;
-import domain.LottoGenerator.ManualLottoGenerator;
-import domain.Result;
+import domain.Lotto.*;
+import domain.LottoCount;
+import domain.Money;
+import domain.Rank;
 import domain.ResultStatus;
-import domain.player.Player;
-import dto.LottosDto;
-import dto.RanksDto;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoController {
 
-    private Player player;
-    private WinningLotto winningLotto;
-
-    public LottosDto purchase(int purchaseAmount) {
-        player = new Player(purchaseAmount);
-        LottoGenerator lottoGenerator = new AutoLottoGenerator();
-        while (player.canBuyLotto()) {
-            player.purchaseLotto(lottoGenerator.generateLotto());
-        }
-        return LottosDto.from(player.getLottos());
+    public Money chargeMoney(String purchaseAmount) {
+        return Money.of(purchaseAmount);
     }
 
-    public void determineWinningNumber(List<Integer> winningNumbers, int bonusBall) {
-        LottoGenerator lottoGenerator = new ManualLottoGenerator();
-        Lotto winningLotto = lottoGenerator.generateLotto(winningNumbers);
-        this.winningLotto = new WinningLotto(winningLotto, LottoNumber.valueOf(bonusBall));
+    public LottoCount selectLottoCount(Money money, String manualLottoCount) {
+        int purchasableLottoCount = money.calculatePurchasableLottoCount();
+        return LottoCount.of(manualLottoCount, purchasableLottoCount);
     }
 
-    public RanksDto makeResult() {
-        List<Result> results = player.judgeAll(winningLotto);
+    public Lottos purchaseLotto(LottoCount lottoCount, List<String> manualNumber) {
+        List<Lotto> manualLottos = LottoFactory.generateManualLottos(manualNumber);
+        List<Lotto> autoLottos = LottoFactory.generateAutoLottos(lottoCount.getAutoLottoCount());
+
+        List<Lotto> purchasableLottos = Stream.of(manualLottos, autoLottos)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+        return new Lottos(purchasableLottos);
+    }
+
+    public WinningLotto determineWinningNumber(String winningNumbers, String bonusBall) {
+        Lotto winningLotto = LottoFactory.generateManualLotto(winningNumbers);
+        return new WinningLotto(winningLotto, LottoNumber.valueOf(bonusBall));
+    }
+
+    public ResultStatus makeResult(Lottos lottos, WinningLotto winningLotto) {
+        List<Rank> ranks = lottos.judgeAll(winningLotto);
         ResultStatus resultStatus = new ResultStatus();
-        resultStatus.judgeResult(results);
-        double totalIncome = resultStatus.calculateTotalIncome();
-        double incomeRate = player.calculateIncomeRate(totalIncome);
-        return RanksDto.from(resultStatus, incomeRate);
+        resultStatus.judgeResult(ranks);
+        return resultStatus;
+    }
+
+    public double calculateImcomeRate(ResultStatus resultStatus, Money money) {
+        return resultStatus.calculateIncomeRate(money.getAmount());
     }
 }
+

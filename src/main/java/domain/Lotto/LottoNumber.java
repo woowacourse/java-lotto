@@ -2,20 +2,21 @@ package domain.Lotto;
 
 import utils.ExceptionMessage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+
 
 public class LottoNumber {
 
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
-    private static final List<LottoNumber> CACHE = new ArrayList<>();
+    private static final Map<Integer, LottoNumber> CACHE;
 
     static {
-        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
-            CACHE.add(new LottoNumber(i));
+        Map<Integer, LottoNumber> cacheMap = new HashMap<>();
+        for (int number = MINIMUM_LOTTO_NUMBER; number <= MAXIMUM_LOTTO_NUMBER; number++) {
+            cacheMap.put(number, new LottoNumber(number));
         }
+        CACHE = Collections.unmodifiableMap(cacheMap);
     }
 
     private final int number;
@@ -25,26 +26,36 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber valueOf(int number) {
-        LottoNumber lottoNumber = CACHE.get(number - 1);
-
-        if (lottoNumber == null) {
-            lottoNumber = new LottoNumber(number);
-        }
-        return lottoNumber;
-    }
-
-    public static List<LottoNumber> values() {
-        return CACHE;
-    }
-
     private void validateLottoNumberBound(int number) {
         if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
             throw new IllegalArgumentException(ExceptionMessage.LOTTO_NUMBER_OUT_OF_BOUND);
         }
     }
 
+    public static LottoNumber valueOf(int number) {
+        LottoNumber lottoNumber = CACHE.get(number);
+
+        if (lottoNumber == null) {
+            return new LottoNumber(number);
+        }
+        return lottoNumber;
+    }
+
+    public static LottoNumber valueOf(String numberValue) {
+        int number = Integer.parseInt(numberValue);
+        return valueOf(number);
+    }
+
+    public static List<LottoNumber> values() {
+        return new ArrayList<>(CACHE.values());
+    }
+
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return "" + number;
     }
 }
