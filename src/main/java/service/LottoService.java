@@ -27,7 +27,7 @@ public class LottoService {
 		return new BuyingInfoDto(orderForm, totalLottos);
 	}
 
-	public List<Lotto> createLottos(List<String[]> manualnumbers, int count) {
+	private List<Lotto> createLottos(List<String[]> manualnumbers, int count) {
 		List<Lotto> totalLottos = new ArrayList<>(createManualLottos(manualnumbers));
 		totalLottos.addAll(createAutoLottos(count));
 		return new ArrayList<>(totalLottos);
