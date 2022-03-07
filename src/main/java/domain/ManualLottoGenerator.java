@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ManualLottoGenerator implements LottoGenerator {
 
@@ -16,7 +17,8 @@ public class ManualLottoGenerator implements LottoGenerator {
         List<Lotto> lottos = new ArrayList<>();
 
         for (List<Integer> lottoNumber : lottoNumbers) {
-            lottos.add(new Lotto(lottoNumber));
+            lottos.add(
+                new Lotto(lottoNumber.stream().map(LottoNumber::new).collect(Collectors.toList())));
         }
 
         return new ArrayList<>(lottos);

@@ -42,7 +42,7 @@ public class AutoLottoGenerator implements LottoGenerator {
         Collections.shuffle(numbers);
         List<Integer> lottoNumbers = new ArrayList<>(numbers.subList(MIN_RANGE, MAX_RANGE));
         Collections.sort(lottoNumbers);
-        return new Lotto(lottoNumbers);
+        return new Lotto(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
     }
 
 }

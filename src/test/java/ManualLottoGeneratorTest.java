@@ -2,9 +2,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import domain.LottoGenerator;
+import domain.LottoNumber;
 import domain.ManualLottoGenerator;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,8 +31,8 @@ public class ManualLottoGeneratorTest {
 
         assertThat(manualLottoGenerator.generate()
             .get(0)
-            .getLottoNumbers())
-            .containsExactly(1, 2, 3, 4, 5, 6);
+            .getLottoNumbers().size())
+            .isEqualTo(6);
     }
 
     @Test
@@ -41,7 +44,7 @@ public class ManualLottoGeneratorTest {
                 List.of(1, 2, 3, 4, 5, 6)));
 
         assertThatThrownBy(
-            () -> manualLottoGenerator.generate()
+            manualLottoGenerator::generate
         ).isInstanceOf(IllegalArgumentException.class);
 
     }
@@ -49,7 +52,7 @@ public class ManualLottoGeneratorTest {
     @Test
     @DisplayName("입력받은 로또 개수가 0인 경우 빈 로또 리스트 반환")
     void no_maualLotto() {
-        LottoGenerator manualLottoGenerator = new ManualLottoGenerator( new ArrayList<>());
+        LottoGenerator manualLottoGenerator = new ManualLottoGenerator(new ArrayList<>());
 
         assertThat(manualLottoGenerator.generate().size())
             .isEqualTo(0);

@@ -13,14 +13,14 @@ public class Lotto {
     private static final String LOTTO_SIZE_ERROR = "[ERROR] 로또 번호는 6개만 입력 가능합니다.";
     private static final String LOTTO_NUMBER_NOT_UNIQUE_ERROR = "[ERROR] 로또 번호는 중복될 수 없습니다.";
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         checkValidation(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
     }
 
@@ -36,27 +36,27 @@ public class Lotto {
             .count();
     }
 
-    private void checkValidation(List<Integer> numbers) {
+    private void checkValidation(List<LottoNumber> numbers) {
         checkNull(numbers);
         //checkRange(numbers);
         checkSize(numbers);
         checkUnique(numbers);
     }
 
-    private void checkNull(List<Integer> numbers) {
+    private void checkNull(List<LottoNumber> numbers) {
         if (numbers == null) {
             throw new IllegalArgumentException(LOTTO_NUMBER_NULL_ERROR);
         }
     }
 
-    private void checkSize(List<Integer> numbers) {
+    private void checkSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_SIZE_ERROR);
         }
     }
 
-    private void checkUnique(List<Integer> numbers) {
-        Set<Integer> numberSet = new HashSet<>(numbers);
+    private void checkUnique(List<LottoNumber> numbers) {
+        Set<LottoNumber> numberSet = new HashSet<>(numbers);
         if (numbers.size() != numberSet.size()) {
             throw new IllegalArgumentException(LOTTO_NUMBER_NOT_UNIQUE_ERROR);
         }

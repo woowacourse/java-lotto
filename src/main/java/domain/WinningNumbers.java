@@ -13,44 +13,27 @@ public class WinningNumbers {
     private static final String OUT_OF_RANGE_ERROR = "[ERROR] 1이상 45이하 값을 입력해주세요.";
     private static final String DUPLICATED_NUMBER_ERROR = "[ERROR] 당첨번호와 보너스볼은 중복될 수 없습니다.";
 
-    private final List<Integer> winningNumbers;
-    private final int bonusNumber;
+    private final List<LottoNumber> winningNumbers;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
-        checkWinningAndBonusNumberValidation(winningNumbers, bonusNumber);
+    public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        checkDuplicate(winningNumbers, bonusNumber);
         this.winningNumbers = new ArrayList<>(winningNumbers);
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean isContain(int number) {
-        return winningNumbers.contains(number);
+    public boolean isContain(LottoNumber lottoNumber) {
+        return winningNumbers.contains(lottoNumber);
     }
 
-    public boolean isEqualToBonusNumber(int number) {
-        return number == bonusNumber;
+    public boolean isEqualToBonusNumber(LottoNumber lottoNumber) {
+        return bonusNumber.equals(lottoNumber);
     }
 
-    private void checkWinningAndBonusNumberValidation(List<Integer> winningNumbers, int bonusNumber) {
-        List<Integer> numbers = new ArrayList<>(winningNumbers);
+    private void checkDuplicate(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        List<LottoNumber> numbers = new ArrayList<>(winningNumbers);
         numbers.add(bonusNumber);
-        checkNumbersRange(numbers);
-        checkDuplicate(numbers);
-    }
-
-    private static void checkNumbersRange(List<Integer> numbers) {
-        for (int number : numbers) {
-            checkBoundary(number);
-        }
-    }
-
-    private static void checkBoundary(int number) {
-        if (number < NUMBER_RANGE_MINIMUM || number > NUMBER_RANGE_MAXIMUM) {
-            throw new IllegalArgumentException(OUT_OF_RANGE_ERROR);
-        }
-    }
-
-    private static void checkDuplicate(List<Integer> numbers) {
-        Set<Integer> noDuplicatedNumbers = new HashSet<>(numbers);
+        Set<LottoNumber> noDuplicatedNumbers = new HashSet<>(numbers);
         if (numbers.size() != noDuplicatedNumbers.size()) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
         }
