@@ -1,5 +1,6 @@
 package controller;
 
+import controller.dto.LottosDto;
 import controller.dto.StatisticDto;
 import domain.*;
 
@@ -9,11 +10,11 @@ import java.util.stream.IntStream;
 
 public class LottoController {
 
-    public Lottos purchase(int inputMoney, int manualLottoCount, List<String[]> manualLottoNumbers) {
+    public LottosDto purchase(int inputMoney, int manualLottoCount, List<String[]> manualLottoNumbers) {
         Money money = new Money(inputMoney);
         int autoLottoCount = money.getAutoLottoCount(manualLottoCount);
         List<LottoGenerator> lottoGenerators = getLottoGenerators(manualLottoNumbers, autoLottoCount);
-        return Lottos.generateLottos(lottoGenerators);
+        return LottosDto.from(Lottos.generateLottos(lottoGenerators));
 
     }
 

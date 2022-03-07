@@ -14,14 +14,14 @@ public class Application {
         int inputMoney = InputView.askInputMoney();
         int manualLottoCount = InputView.askManualLottoCount();
         List<String[]> manualLottoNumbers = InputView.askManualLottoNumbers(manualLottoCount);
-        Lottos lottos = lottoController.purchase(inputMoney, manualLottoCount, manualLottoNumbers);
-        OutputView.printCountOfLotto(lottos.size(), manualLottoCount);
+        LottosDto lottosDto = lottoController.purchase(inputMoney, manualLottoCount, manualLottoNumbers);
+        OutputView.printCountOfLotto(lottosDto.size(), manualLottoCount);
 
-        OutputView.printLottos(LottosDto.from(lottos));
+        OutputView.printLottos(lottosDto);
         String[] inputWinningNumber = InputView.askInputWinningNumber();
         int inputBonusBall = InputView.askInputBonusBall();
 
-        StatisticDto statisticDto = lottoController.winningResult(inputWinningNumber, inputBonusBall, lottos);
+        StatisticDto statisticDto = lottoController.winningResult(inputWinningNumber, inputBonusBall, lottosDto.getLottos());
         OutputView.printStatistics(statisticDto);
         OutputView.printProfitRate(statisticDto.getStatistic().getProfitRate(new Money(inputMoney)));
 

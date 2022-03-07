@@ -25,7 +25,7 @@ public class OutputView {
     }
 
     public static void printLottos(LottosDto lottosDto) {
-        lottosDto.getLottos().forEach(OutputView::printLotto);
+        lottosDto.getLottoDtos().forEach(OutputView::printLotto);
         System.out.println();
     }
 
