@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static domain.LottoMachine.LOTTO_PRICE;
+
 public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            this.lottos.add(lotto);
-        }
+    public void addLotto(Lotto lotto) {
+        this.lottos.add(lotto);
     }
 
     public PrizeResult prizeResult(WinningNumbers winningNumber) {
@@ -22,4 +22,7 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
+    public int totalPurchasePrice() {
+        return lottos.size() * LOTTO_PRICE;
+    }
 }

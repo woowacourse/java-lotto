@@ -1,44 +1,32 @@
 package controller;
 
-import domain.Lottos;
-import domain.PrizeResult;
-import domain.Store;
-import domain.WinningNumbers;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 
 public class LottoGameController {
 
     public void run() {
-        final int inputMoney = InputView.inputPrice();
-        final Lottos purchasedLotto = Store.purchaseLottos(inputMoney);
-        OutputView.printPurchasedLotto(purchasedLotto.getLottos());
+        Lottos purchasedLotto = purchaseLotto();
 
-        final WinningNumbers winningNumber = initWinningNumber();
+        final WinningNumbers winningNumber = InputView.commonInputProcess(
+                () -> new WinningNumbers(InputView.inputWinningLottoNumbers(), InputView.inputBonus()));
         final PrizeResult prizeResult = purchasedLotto.prizeResult(winningNumber);
 
         OutputView.printFinalStatistic(prizeResult);
-        OutputView.printEarningRate(prizeResult.earningRate(inputMoney));
+        OutputView.printEarningRate(prizeResult.earningRate(purchasedLotto.totalPurchasePrice()));
     }
 
-    private WinningNumbers initWinningNumber() {
-        try {
-            final WinningNumbers winningNumber = new WinningNumbers(InputView.inputWinningLottoNumbers());
-            initBonusNumber(winningNumber);
-            return winningNumber;
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return initWinningNumber();
-        }
-    }
+    private Lottos purchaseLotto() {
+        LottoMachine lottoMachine = new LottoMachine();
+        final Money money = InputView.commonInputProcess(() -> new Money(InputView.inputMoney()));
+        final int numOfManualLotto = InputView.commonInputProcess(
+                () -> lottoMachine.checkAvailableBuy(money, InputView.inputNumOfManualLotto()));
+        final Lottos purchasedLotto = InputView.commonInputProcess(
+                () -> lottoMachine.purchaseManualLottos(money, numOfManualLotto, InputView.inputManualLottoNumbers(numOfManualLotto)));
+        lottoMachine.purchaseAutomaticLottos(purchasedLotto, money);
+        OutputView.printPurchasedLotto(purchasedLotto.getLottos(), numOfManualLotto);
 
-    private void initBonusNumber(WinningNumbers winningNumber) {
-        try {
-            winningNumber.addBonusNumber(InputView.inputBonus());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            initBonusNumber(winningNumber);
-        }
+        return purchasedLotto;
     }
-
 }
