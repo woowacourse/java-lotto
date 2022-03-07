@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Money {
 
+    private static final int LOTTO_PRICE = 1000;
     private static final int MAX_PRICE = 2_000_000_000;
     private static final int REMAINDER = 0;
     private static final double ROUND_OFF_NUMBER = 1e3;
@@ -16,12 +17,12 @@ public class Money {
     }
 
     public Count countToBuyLotto() {
-        return new Count(value / Lotto.PRICE);
+        return new Count(value / LOTTO_PRICE);
     }
 
     public void validateBuyableLottoCount(Count count) {
-        int buyableCount = value / Lotto.PRICE;
-        if (value < count.value() * Lotto.PRICE) {
+        int buyableCount = value / LOTTO_PRICE;
+        if (value < count.value() * LOTTO_PRICE) {
             throw new IllegalArgumentException(String.format("%d장 까지 살 수 있습니다.", buyableCount));
         }
     }
@@ -40,14 +41,14 @@ public class Money {
     }
 
     private void validateValueRange(int number) {
-        if (Lotto.PRICE > number || number > MAX_PRICE) {
-            throw new IllegalArgumentException(String.format("%d부터 20억의 숫자여야 합니다.", Lotto.PRICE));
+        if (LOTTO_PRICE > number || number > MAX_PRICE) {
+            throw new IllegalArgumentException(String.format("%d부터 20억의 숫자여야 합니다.", LOTTO_PRICE));
         }
     }
 
     private void validateDividedByLottoPrice(int number) {
-        if (number % Lotto.PRICE != REMAINDER) {
-            throw new IllegalArgumentException(String.format("%d으로 나누어 떨어져야 합니다.", Lotto.PRICE));
+        if (number % LOTTO_PRICE != REMAINDER) {
+            throw new IllegalArgumentException(String.format("%d으로 나누어 떨어져야 합니다.", LOTTO_PRICE));
         }
     }
 

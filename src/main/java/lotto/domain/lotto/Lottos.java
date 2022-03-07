@@ -15,10 +15,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Money totalPrice() {
-        return new Money(lottos.size() * Lotto.PRICE);
-    }
-
     public Result getResult(WinningLotto winningLotto) {
         Map<LottoRanking, Integer> result = new EnumMap<LottoRanking, Integer>(LottoRanking.class);
         initResult(result);

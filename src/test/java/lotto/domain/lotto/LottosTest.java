@@ -38,20 +38,4 @@ public class LottosTest {
             }
         }
     }
-
-    @Nested
-    @DisplayName("구매한 가격의 총합을 알려주는 기능은")
-    class totalPrice {
-        @Test
-        @DisplayName("구매한 로또의 총합 가격을 알려준다.")
-        void it_returns_total_price() {
-            Count count = new Count(3);
-            List<Lotto> lottoList = new ArrayList<>();
-            count.play(lottoList, lottos -> lottos.add(LottoFactory.auto()));
-            Lottos lottos = new Lottos(lottoList);
-
-            assertThat(lottos.totalPrice()).isEqualTo(new Money(3000));
-        }
-
-    }
 }

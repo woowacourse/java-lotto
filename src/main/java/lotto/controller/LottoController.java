@@ -19,16 +19,21 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void play() {
+        // 구매 금액 입력
         Money money = requestMoney();
+        // 수동, 자동 로또 개수 설정
         Count totalLottoCount = money.countToBuyLotto();
         Count manualLottoCount = requestManualLottoCount(money);
         Count autoLottoCount = totalLottoCount.subtract(manualLottoCount);
         OutputView.printLottoCount(manualLottoCount, autoLottoCount);
+        // 개수에 맞게 로또 구매
         OutputView.printRequestManualLottoNumberUI();
         Lottos lottos = requestBuyLottos(manualLottoCount, autoLottoCount);
         OutputView.printLottos(lottos);
-        WinningLotto winningLotto = requestWinningLotto();
-        printResult(lottos, winningLotto);
+        // 당첨 번호와 비교하여 결과 출력
+        Result result = lottos.getResult(requestWinningLotto());
+        OutputView.printResult(result);
+        OutputView.printRateOfProfit(money.getRateOfProfit(result.getTotalProfit()));
     }
 
     private Money requestMoney() {
@@ -80,14 +85,6 @@ public class LottoController {
             OutputView.printException(exception);
             return requestManualLottoNumber();
         }
-    }
-
-
-    private void printResult(Lottos lottos, WinningLotto winningLotto) {
-        Money totalMoney = lottos.totalPrice();
-        Result result = lottos.getResult(winningLotto);
-        OutputView.printResult(result);
-        OutputView.printRateOfProfit(totalMoney.getRateOfProfit(result.getTotalProfit()));
     }
 
     private WinningLotto requestWinningLotto() {

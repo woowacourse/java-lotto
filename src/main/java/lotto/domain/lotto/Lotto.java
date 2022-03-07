@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int PRICE = 1000;
-
     public static final int SIZE = 6;
 
     private final Set<Number> numbers;
