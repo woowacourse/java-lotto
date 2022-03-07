@@ -11,14 +11,14 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(final int number) {
-        this.number = checkValidNumber(number);
+        checkValidNumber(number);
+        this.number = number;
     }
 
-    private int checkValidNumber(final int number) {
+    private void checkValidNumber(final int number) {
         if (isNotInLottoNumberRange(number)) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR_MESSAGE);
         }
-        return number;
     }
 
     private boolean isNotInLottoNumberRange(final int number) {
