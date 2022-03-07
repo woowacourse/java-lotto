@@ -13,7 +13,7 @@ public class Statistic {
 
     private final Map<Rank, Integer> ranks;
 
-    public Statistic(Collection<Rank> ranks) {
+    private Statistic(Collection<Rank> ranks) {
         this.ranks = Collections.unmodifiableMap(collectRanks(ranks));
     }
 
@@ -66,5 +66,9 @@ public class Statistic {
 
     private Money eachRankTotalPrize(Rank rank) {
         return rank.getPrize().multiply(getCountByRank(rank));
+    }
+
+    public static Statistic summarizeBy(Collection<Rank> ranks) {
+        return new Statistic(ranks);
     }
 }

@@ -17,10 +17,10 @@ public class WinnerLotto {
     }
 
     public Statistic summarize(Lottoes lottoes) {
-        return new Statistic(ranks(lottoes));
+        return Statistic.summarizeBy(ranksBy(lottoes));
     }
 
-    private Collection<Rank> ranks(Lottoes lottoes) {
+    private Collection<Rank> ranksBy(Lottoes lottoes) {
         return lottoes.mapAndCollect(this::rankBy);
     }
 
