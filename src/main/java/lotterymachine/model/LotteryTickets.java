@@ -21,14 +21,14 @@ public class LotteryTickets {
                         .collect(Collectors.toUnmodifiableList()));
     }
 
-    public Map<WinningLottery, Count> getLotteriesResult(LotteryTicket ticket, Ball bonus) {
-        final Map<WinningLottery, Count> lotteriesResult = WinningLottery.getWinningLotteries();
+    public Map<WinningType, Count> getLotteriesResult(LotteryTicket ticket, Ball bonus) {
+        final Map<WinningType, Count> lotteriesResult = WinningType.getWinningLotteries();
         for (LotteryTicket lotteryTicket : tickets) {
             int numberOfMatchingBalls = lotteryTicket.countMatchingBalls(ticket);
             boolean containsBonus = lotteryTicket.contains(bonus);
-            WinningLottery winningLottery = WinningLottery.find(containsBonus, numberOfMatchingBalls);
-            Count increasedCount = lotteriesResult.get(winningLottery).increase();
-            lotteriesResult.put(winningLottery, increasedCount);
+            WinningType winningType = WinningType.find(containsBonus, numberOfMatchingBalls);
+            Count increasedCount = lotteriesResult.get(winningType).increase();
+            lotteriesResult.put(winningType, increasedCount);
         }
         return Collections.unmodifiableMap(lotteriesResult);
     }

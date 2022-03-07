@@ -5,7 +5,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import lotterymachine.vo.Count;
 
-public enum WinningLottery {
+public enum WinningType {
     INVALID(0, 0),
     THREE(3, 5_000),
     FOUR(4, 50_000),
@@ -17,20 +17,20 @@ public enum WinningLottery {
     private final int number;
     private final int price;
 
-    WinningLottery(int number, int price) {
+    WinningType(int number, int price) {
         this.number = number;
         this.price = price;
     }
 
-    public static Map<WinningLottery, Count> getWinningLotteries() {
-        Map<WinningLottery, Count> winningLotteries = new EnumMap<>(WinningLottery.class);
-        for (WinningLottery winningLottery: values()) {
-            winningLotteries.put(winningLottery, Count.from(INITIAL_NUMBER_OF_MATCHING_TICKET));
+    public static Map<WinningType, Count> getWinningLotteries() {
+        Map<WinningType, Count> winningLotteries = new EnumMap<>(WinningType.class);
+        for (WinningType winningType : values()) {
+            winningLotteries.put(winningType, Count.from(INITIAL_NUMBER_OF_MATCHING_TICKET));
         }
         return winningLotteries;
     }
 
-    public static WinningLottery find(boolean bonus, int number) {
+    public static WinningType find(boolean bonus, int number) {
         if (number == BONUS_FIVE.number && bonus) {
             return BONUS_FIVE;
         }

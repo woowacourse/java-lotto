@@ -20,7 +20,7 @@ class LotteryTicketsTest {
         LotteryTickets lotteryTickets = new LotteryTickets(List.of(lotteryTicket));
         LotteryTicket winningTicket = new LotteryTicket(Ball.getBalls(Arrays.asList(7, 8, 9, 13, 20, 21)));
         Ball bonus = Ball.from(30);
-        Map<WinningLottery, Count> result = lotteryTickets.getLotteriesResult(winningTicket, bonus);
-        assertThat(result.get(WinningLottery.THREE).getNumber()).isEqualTo(1);
+        Map<WinningType, Count> result = lotteryTickets.getLotteriesResult(winningTicket, bonus);
+        assertThat(result.get(WinningType.THREE).getNumber()).isEqualTo(1);
     }
 }

@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Map;
 import lotterymachine.dto.ManualTicketDto;
 import lotterymachine.model.TicketMachine;
-import lotterymachine.model.WinningLottery;
+import lotterymachine.model.WinningType;
 import lotterymachine.vo.Ball;
 import lotterymachine.vo.Count;
 import lotterymachine.vo.Money;
@@ -81,7 +81,7 @@ public class LotteryMachine {
     }
 
     private static void showResult(LotteryTickets lotteryTickets, LotteryTicket winningTicket, int bonusNumber) {
-        Map<WinningLottery, Count> ticketsResult = lotteryTickets.getLotteriesResult(winningTicket,
+        Map<WinningType, Count> ticketsResult = lotteryTickets.getLotteriesResult(winningTicket,
                 Ball.from(bonusNumber));
         List<LotteryResultDto> lotteryResult = LotteryResultDto.createLotteryResults(ticketsResult);
         Collections.sort(lotteryResult);

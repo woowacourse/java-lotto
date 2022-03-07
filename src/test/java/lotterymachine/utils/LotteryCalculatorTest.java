@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import lotterymachine.dto.LotteryResultDto;
 import lotterymachine.model.LotteryTicket;
 import lotterymachine.model.LotteryTickets;
-import lotterymachine.model.WinningLottery;
+import lotterymachine.model.WinningType;
 import lotterymachine.vo.Ball;
 import lotterymachine.vo.Count;
 import lotterymachine.vo.Money;
@@ -48,7 +48,7 @@ class LotteryCalculatorTest {
         LotteryTickets lotteryTickets = new LotteryTickets(List.of(lotteryTicket));
         LotteryTicket winningTicket = new LotteryTicket(Ball.getBalls(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Ball bonus = Ball.from(7);
-        Map<WinningLottery, Count> ticketsResult = lotteryTickets.getLotteriesResult(winningTicket, bonus);
+        Map<WinningType, Count> ticketsResult = lotteryTickets.getLotteriesResult(winningTicket, bonus);
         List<LotteryResultDto> lotteryResults = LotteryResultDto.createLotteryResults(ticketsResult);
         Money winningAmount = LotteryCalculator.getWinningAmount(lotteryResults);
 

@@ -2,7 +2,7 @@ package lotterymachine.dto;
 
 import java.util.Map.Entry;
 import lotterymachine.vo.Count;
-import lotterymachine.model.WinningLottery;
+import lotterymachine.model.WinningType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,17 +21,17 @@ public class LotteryResultDto implements Comparable<LotteryResultDto> {
         this.bonus = bonus;
     }
 
-    public static List<LotteryResultDto> createLotteryResults(Map<WinningLottery, Count> lotteryTickets) {
+    public static List<LotteryResultDto> createLotteryResults(Map<WinningType, Count> lotteryTickets) {
         List<LotteryResultDto> lotteryResults = new ArrayList<>();
-        for (Entry<WinningLottery, Count> ticket : lotteryTickets.entrySet()) {
+        for (Entry<WinningType, Count> ticket : lotteryTickets.entrySet()) {
             addWinningLottery(lotteryResults, ticket);
         }
         return lotteryResults;
     }
 
-    private static void addWinningLottery(List<LotteryResultDto> lotteryResults, Entry<WinningLottery, Count> ticket) {
-        WinningLottery winningType = ticket.getKey();
-        if (winningType.equals(WinningLottery.INVALID)) {
+    private static void addWinningLottery(List<LotteryResultDto> lotteryResults, Entry<WinningType, Count> ticket) {
+        WinningType winningType = ticket.getKey();
+        if (winningType.equals(WinningType.INVALID)) {
             return;
         }
         int matchingBalls = winningType.getNumber();
