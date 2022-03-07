@@ -39,4 +39,18 @@ public class LottoNumberTest {
         // then
         assertThat(lottoNumber1).isEqualTo(lottoNumber2);
     }
+
+    @Test
+    @DisplayName("반환값이 캐싱된 값인지 확인")
+    void lottoNumberWithSaneValueShouldBeIdentical() {
+        // given
+        LottoNumber lottoNumber = LottoNumber.getInstance(1);
+        LottoNumber lottoNumber2 = LottoNumber.getInstance(1);
+
+        // when
+        boolean actual = lottoNumber == lottoNumber2;
+
+        // then
+        assertThat(actual).isTrue();
+    }
 }
