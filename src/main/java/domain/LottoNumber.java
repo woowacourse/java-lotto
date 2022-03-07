@@ -21,7 +21,6 @@ public class LottoNumber {
         }
     }
 
-
     private final int lottoNumber;
 
 
@@ -39,16 +38,16 @@ public class LottoNumber {
         return new ArrayList<>(LOTTO_NUMBER_CACHE.values());
     }
 
-    public int getLottoNumber() {
-        return lottoNumber;
-    }
-
     private static void checkRange(int number) {
 
         if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR);
         }
 
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override
