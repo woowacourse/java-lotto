@@ -7,6 +7,7 @@ import domain.Money;
 import domain.Rewards;
 import domain.WinningChecker;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -32,12 +33,11 @@ public class OutputView {
         }
     }
 
-    public static void printWinningStatistic(WinningChecker winningChecker) {
+    public static void printWinningStatistic(Map<String, Integer> statisticMap) {
         System.out.println(MESSAGE_WINNING_STATISTIC);
         System.out.println(SEPERATOR_LINE);
 
-        winningChecker.getStatisticMap()
-            .forEach(System.out::printf);
+        statisticMap.forEach(System.out::printf);
     }
 
     public static void printYield(double yield) {

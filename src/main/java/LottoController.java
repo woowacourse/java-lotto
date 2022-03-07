@@ -1,4 +1,3 @@
-import domain.LottoGame;
 import domain.LottoGenerator;
 
 import domain.Lottos;
@@ -20,13 +19,11 @@ public class LottoController {
 
         Lottos lottos = new Lottos(lottoGenerator.generate());
 
-        LottoGame lottoGame = new LottoGame(lottoGenerator);
-
         OutputView.printLottosInformation(money, lottos);
 
-        WinningChecker winningChecker = lottoGame.makeResult(InputView.askWinningNumbers());
+        WinningChecker winningChecker = new WinningChecker(lottos, InputView.askWinningNumbers());
 
-        OutputView.printWinningStatistic(winningChecker);
-        OutputView.printYield(lottoGame.getYield(winningChecker));
+        OutputView.printWinningStatistic(winningChecker.getStatisticMap());
+        OutputView.printYield(winningChecker.getYield());
     }
 }

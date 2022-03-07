@@ -16,6 +16,8 @@ public class WinningChecker {
     private static final int SECOND_PRIZE_CONDITION = 5;
     private static final int NO_MEANING_COUNT = 0;
 
+    private static final int LOTTO_PRICE = 1000;
+
     private final Lottos lottos;
     private final WinningNumbers winningNumbers;
     private final Map<Rewards, Integer> rewardsCountMap = new EnumMap<>(Rewards.class);
@@ -30,6 +32,10 @@ public class WinningChecker {
             Rewards rewards = checkWinning(lotto);
             rewardsCountMap.put(rewards, rewardsCountMap.getOrDefault(rewards, 0) + 1);
         }
+    }
+
+    public double getYield() {
+        return sumRewards() / (LOTTO_PRICE * lottos.getSize());
     }
 
     public double sumRewards() {
