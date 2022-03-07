@@ -60,6 +60,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
+    public String toString() {
+        return value + "" ;
+    }
+
+    @Override
     public int compareTo(LottoNumber o) {
         return java.lang.Integer.compare(value, o.get());
     }
