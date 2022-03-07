@@ -16,9 +16,9 @@ public class LottoGenerator {
     private static final int MAX_RANGE = 6;
 
     private static final int START_INDEX = 0;
-    private static final int FIRST_INDEX = 0;
 
-    private static final List<LottoNumber> LOTTO_NUMBER_POOL = IntStream.rangeClosed(MIN_LOTTO_NUMBER,
+    private static final List<LottoNumber> LOTTO_NUMBER_POOL = IntStream.rangeClosed(
+            MIN_LOTTO_NUMBER,
             MAX_LOTTO_NUMBER)
         .mapToObj(LottoNumber::new)
         .collect(Collectors.toList());
@@ -83,7 +83,7 @@ public class LottoGenerator {
 
 
     private boolean isEmptyManualLottoNumbers() {
-        return manualLottoNumbers.get(FIRST_INDEX).isEmpty();
+        return manualLottoNumbers.isEmpty();
     }
 
 
