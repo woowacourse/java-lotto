@@ -31,4 +31,22 @@ public class LottoNumbersTest {
 		LottoNumber bonus = LottoNumber.valueOf(1);
 		assertThat(lottoNumbers.containLottoNumber(bonus)).isTrue();
 	}
+
+	@Test
+	@DisplayName("로또 번호 숫자 사이즈가 6개가 아닌 경우")
+	void validateInputLottoWinningNumberSize() {
+		assertThatThrownBy(
+			() -> LottoNumbers.from(new TestLottoNumberGenerationStrategy(Arrays.asList(1, 2, 3, 4, 5))))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("[Error]: 로또는 6개의 숫자여야 합니다.");
+	}
+
+	@Test
+	@DisplayName("로또 번호에 중복이 있는지 검증")
+	void validateWinningNumberReduplication() {
+		assertThatThrownBy(
+			() -> LottoNumbers.from(new TestLottoNumberGenerationStrategy(Arrays.asList(1, 2, 3, 4, 5, 5))))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("[Error]: 로또 번호는 중복이 있으면 안됩니다");
+	}
 }
