@@ -1,15 +1,12 @@
 package lotterymachine;
 
 import static lotterymachine.utils.LotteryCalculator.calculateProfitRate;
-import static lotterymachine.utils.LotteryGenerator.generate;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import lotterymachine.model.TicketMachine;
 import lotterymachine.model.WinningLottery;
 import lotterymachine.vo.Ball;
 import lotterymachine.vo.Count;
@@ -62,18 +59,12 @@ public class LotteryMachine {
     private static LotteryTickets purchaseLotteryTickets(Count numberOfTickets, Count manualTickets) {
         List<LotteryTicket> manualLotteryTickets = purchaseManualLotteryTickets(manualTickets);
         Count autoTickets = numberOfTickets.subtract(manualTickets);
-        List<LotteryTicket> autoLotteryTickets = generate(autoTickets);
-        LotteryTickets lotteryTickets = collectTickets(manualLotteryTickets, autoLotteryTickets);
+        TicketMachine ticketMachine = new TicketMachine();
+        LotteryTickets lotteryTickets = ticketMachine.purchase(autoTickets, manualLotteryTickets);
 
         OutputView.printPurchaseDetails(manualTickets.getNumber(), autoTickets.getNumber());
         OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
         return lotteryTickets;
-    }
-
-    private static LotteryTickets collectTickets(List<LotteryTicket> manualTickets, List<LotteryTicket> autoTickets) {
-        return new LotteryTickets(Stream.of(manualTickets, autoTickets)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toUnmodifiableList()));
     }
 
     private static List<LotteryTicket> purchaseManualLotteryTickets(Count manualTickets) {
