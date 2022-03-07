@@ -1,21 +1,21 @@
-package lotterymachine.domain.vo;
+package lotterymachine.domain;
 
 import java.util.Objects;
 
 public class Count {
-    private static final String INVALID_PASSIVITY_VALUE = "수동 로또 개수가 총 구매 개수 보다 높습니다.";
+    private static final String INVALID_PASSIVITY_VALUE = "로또 구매 개수가 총 구매 개수 보다 높습니다.";
 
     private final int autoValue;
     private final int passivityValue;
 
-    public Count(int passivityValue, int totalValue) {
-        validatePassivityValue(passivityValue, totalValue);
+    public Count(int passivityValue, int autoValue, int totalValue) {
+        validatePassivityValue(passivityValue, autoValue, totalValue);
         this.passivityValue = passivityValue;
-        this.autoValue = totalValue - passivityValue;
+        this.autoValue = autoValue;
     }
 
-    public void validatePassivityValue(int passivityValue, int totalValue) {
-        if (totalValue < passivityValue) {
+    public void validatePassivityValue(int passivityValue, int autoValue, int totalValue) {
+        if (totalValue < passivityValue + autoValue) {
             throw new IllegalArgumentException(INVALID_PASSIVITY_VALUE);
         }
     }

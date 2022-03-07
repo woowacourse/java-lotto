@@ -1,6 +1,4 @@
-package lotterymachine.domain.vo;
-
-import lotterymachine.domain.LotteryTicket;
+package lotterymachine.domain;
 
 import java.util.Objects;
 

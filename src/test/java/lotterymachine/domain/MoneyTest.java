@@ -1,5 +1,6 @@
-package lotterymachine.domain.vo;
+package lotterymachine.domain;
 
+import lotterymachine.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
