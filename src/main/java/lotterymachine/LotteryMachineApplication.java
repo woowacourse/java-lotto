@@ -1,8 +1,8 @@
 package lotterymachine;
 
 import lotterymachine.domain.*;
-import lotterymachine.domain.Count;
-import lotterymachine.domain.Money;
+import lotterymachine.domain.LotteryPurchaseCount;
+import lotterymachine.domain.LotteryPurchaseMoney;
 import lotterymachine.view.InputView;
 import lotterymachine.view.OutputView;
 
@@ -11,28 +11,28 @@ import java.util.List;
 
 public class LotteryMachineApplication {
     public static void main(String[] args) {
-        Money money = new Money(InputView.getAmount());
-        Count count = createCount(money);
-        LotteryTickets lotteryTickets = createLotteryTickets(count);
-        OutputView.printLotteryPurchaseCount(count);
+        LotteryPurchaseMoney lotteryPurchaseMoney = new LotteryPurchaseMoney(InputView.getAmount());
+        LotteryPurchaseCount lotteryPurchaseCount = createCount(lotteryPurchaseMoney);
+        LotteryTickets lotteryTickets = createLotteryTickets(lotteryPurchaseCount);
+        OutputView.printLotteryPurchaseCount(lotteryPurchaseCount);
         OutputView.printLotteryTickets(lotteryTickets);
 
         WinningLottery winningLottery = new WinningLottery(LotteryTicket.from(InputView.getWinningLotteryNumbers())
                 , LotteryNumber.from(InputView.getBonusNumber()));
         WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
         OutputView.printWinningLotteryResults(winningResult.getResult());
-        OutputView.printProfitRate(Yield.of(winningResult.findTotalProfit(), money.getValue()).getProfitRate());
+        OutputView.printProfitRate(Yield.of(winningResult.findTotalProfit(), lotteryPurchaseMoney.getValue()).getProfitRate());
     }
 
-    private static Count createCount(Money money) {
+    private static LotteryPurchaseCount createCount(LotteryPurchaseMoney lotteryPurchaseMoney) {
         int passivityPurchaseCount = InputView.getPassivityPurchaseCount();
-        return new Count(passivityPurchaseCount, money.getPurchasePossibleCount() - passivityPurchaseCount, money.getPurchasePossibleCount());
+        return new LotteryPurchaseCount(passivityPurchaseCount, lotteryPurchaseMoney.getPurchasePossibleCount() - passivityPurchaseCount, lotteryPurchaseMoney.getPurchasePossibleCount());
     }
 
-    private static LotteryTickets createLotteryTickets(Count count) {
-        List<List<Integer>> passivityLotteryNumbers = InputView.getPassivityLotteryNumbers(count.getPassivityValue());
+    private static LotteryTickets createLotteryTickets(LotteryPurchaseCount lotteryPurchaseCount) {
+        List<List<Integer>> passivityLotteryNumbers = InputView.getPassivityLotteryNumbers(lotteryPurchaseCount.getPassivityValue());
         List<LotteryTicket> passivityTickets = LotteryTicket.createLotteryTickets(passivityLotteryNumbers);
-        List<LotteryTicket> autoTickets = LotteryTicket.createAutoLotteryTickets(count.getAutoValue()
+        List<LotteryTicket> autoTickets = LotteryTicket.createAutoLotteryTickets(lotteryPurchaseCount.getAutoValue()
                 , new RandomLotteryNumbersGenerator());
         return LotteryTickets.of(autoTickets, passivityTickets);
     }

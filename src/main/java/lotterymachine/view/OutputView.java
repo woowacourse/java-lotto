@@ -3,7 +3,7 @@ package lotterymachine.view;
 import lotterymachine.domain.LotteryTicket;
 import lotterymachine.domain.LotteryTickets;
 import lotterymachine.domain.WinningLotteryRank;
-import lotterymachine.domain.Count;
+import lotterymachine.domain.LotteryPurchaseCount;
 
 import java.util.Map;
 
@@ -18,8 +18,8 @@ public class OutputView {
         System.out.println(stringBuilder);
     }
 
-    public static void printLotteryPurchaseCount(Count count) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", count.getPassivityValue(), count.getAutoValue());
+    public static void printLotteryPurchaseCount(LotteryPurchaseCount lotteryPurchaseCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lotteryPurchaseCount.getPassivityValue(), lotteryPurchaseCount.getAutoValue());
     }
 
     public static void printWinningLotteryResults(Map<WinningLotteryRank, Integer> lotteryTicketResults) {
