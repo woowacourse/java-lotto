@@ -10,10 +10,8 @@ public class Lotto {
 
     private static final String INPUT_NUMBER_DELIMITER = ",";
     private static final int INPUT_NUMBER_SPLIT_OPTION = -1;
-    private static final int INIT_COUNT = 0;
-    private static final int COUNT_INCREASE_UNIT = 1;
-    public static final String ERROR_LOTTO_SIZE_MESSAGE = "입력받은 로또 개수가 6개가 아닙니다.";
-    public static final int LOTTO_SIZE = 6;
+    private static final String ERROR_LOTTO_SIZE_MESSAGE = "입력받은 로또 개수가 6개가 아닙니다.";
+    private static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> lotto;
 
@@ -23,7 +21,7 @@ public class Lotto {
         validateLottoSize(splitNumbers);
         Validator.checkDuplication(splitNumbers);
         this.lotto = splitNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::getLottoNumber)
                 .collect(Collectors.toList());
     }
 
@@ -48,18 +46,9 @@ public class Lotto {
     }
 
     public int compare(final Lotto lotto) {
-        int count = INIT_COUNT;
-        for (LottoNumber lottoNumber : this.lotto) {
-            count = countIncrease(lotto, count, lottoNumber);
-        }
-        return count;
-    }
-
-    private int countIncrease(Lotto lotto, int count, LottoNumber lottoNumber) {
-        if (lotto.isContainNumber(lottoNumber)) {
-            count += COUNT_INCREASE_UNIT;
-        }
-        return count;
+        return (int) this.lotto.stream()
+                .filter(lotto::isContainNumber)
+                .count();
     }
 
     public List<LottoNumber> getLotto() {

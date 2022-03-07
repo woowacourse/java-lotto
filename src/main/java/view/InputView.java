@@ -23,4 +23,13 @@ public class InputView {
         OutputView.printBonusInstruction();
         return getInput();
     }
+
+    public static String getManualCount() {
+        OutputView.printManualCountInstruction();
+        return getInput();
+    }
+
+    public static String getManualLotto() {
+        return getInput();
+    }
 }

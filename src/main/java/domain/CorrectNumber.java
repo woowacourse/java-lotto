@@ -3,26 +3,22 @@ package domain;
 public class CorrectNumber {
 
     private final int count;
-    private boolean bonus;
+    private final boolean secondRank;
 
-    public CorrectNumber(final int count, final boolean bonus) {
+    private CorrectNumber(final int count, final boolean secondRank) {
         this.count = count;
-        this.bonus = bonus;
+        this.secondRank = secondRank;
     }
 
-    public boolean isThirdRankCount() {
-        return this.count == RankPrize.THIRD.getCount();
-    }
-
-    public CorrectNumber convertToSecondRankCount() {
-        return new CorrectNumber(this.count, true);
+    public static CorrectNumber getCorrectNumber(final int count, final boolean bonus) {
+        return new CorrectNumber(count, RankPrize.isSecondRank(count, bonus));
     }
 
     public boolean isInRank() {
-        return this.count >= RankPrize.FIFTH.getCount();
+        return RankPrize.isInRank(count);
     }
 
     public RankPrize findRankPrize() {
-        return RankPrize.findByCount(this.count, this.bonus);
+        return RankPrize.findByCount(this.count, this.secondRank);
     }
 }

@@ -1,10 +1,6 @@
 package controller;
 
-import domain.Lotto;
-import domain.LottoFactory;
-import domain.LottoNumber;
-import domain.Money;
-import domain.RankPrize;
+import domain.*;
 
 import java.util.SortedMap;
 
@@ -17,17 +13,27 @@ public class LottoController {
     private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "지난주 당첨번호와 보너스가 중복일 수 없습니다.";
 
     public void start() {
-        final LottoFactory lottoFactory = new LottoFactory(getMoney());
-        OutputView.printLotto(lottoFactory.issueLotto());
+        final Money money = getMoney();
+        final Count manualCount = getManualCount(money);
+        final IssuedLotto issuedLotto = new IssuedLotto();
 
-        Lotto lastWinLotto = getWinLotto();
-        LottoNumber bonusNumber = getBonusNumber(lastWinLotto);
+        OutputView.printManualLottoInstruction();
+        issueManualLotto(issuedLotto, manualCount);
+        issuedLotto.generateLotto(money);
 
-        SortedMap<RankPrize, Integer> rankCounts = lottoFactory.run(lastWinLotto, bonusNumber);
-        int totalPrize = lottoFactory.calculatePrize(rankCounts);
+        OutputView.printLotto(issuedLotto.getIssuedLotto(), manualCount.getCount());
+
+        SortedMap<RankPrize, Integer> rankCounts = pickLotto(issuedLotto);
 
         OutputView.printWinStatistics(rankCounts);
-        OutputView.printWinProfit(lottoFactory.calculateProfit(totalPrize));
+        OutputView.printWinProfit(money.calculateProfit(Prize.calculatePrize(rankCounts)));
+    }
+
+    private SortedMap<RankPrize, Integer> pickLotto(IssuedLotto issuedLotto) {
+        final Lotto lastWinLotto = getWinLotto();
+        final LottoNumber bonusNumber = getBonusNumber(lastWinLotto);
+        final CorrectNumbers correctNumbers = new CorrectNumbers(issuedLotto, lastWinLotto, bonusNumber);
+        return correctNumbers.getRankCounts();
     }
 
     private Money getMoney() {
@@ -36,6 +42,31 @@ public class LottoController {
         } catch (IllegalArgumentException e) {
             System.out.println(ERROR_MESSAGE + e.getMessage());
             return getMoney();
+        }
+    }
+
+    private Count getManualCount(Money money) {
+        try {
+            return Count.getManualCount(InputView.getManualCount(), money);
+        } catch (IllegalArgumentException e) {
+            System.out.println(ERROR_MESSAGE + e.getMessage());
+            return getManualCount(money);
+        }
+    }
+
+    private void issueManualLotto(IssuedLotto issuedLotto, Count count) {
+        while (!count.isEnd()) {
+            issuedLotto.issueLotto(inputLotto());
+            count = count.decrease();
+        }
+    }
+
+    private Lotto inputLotto() {
+        try {
+            return new Lotto(InputView.getManualLotto());
+        } catch (IllegalArgumentException e) {
+            System.out.println(ERROR_MESSAGE + e.getMessage());
+            return inputLotto();
         }
     }
 
@@ -50,10 +81,8 @@ public class LottoController {
 
     private LottoNumber getBonusNumber(final Lotto lotto) {
         try {
-            LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
-            if (isBonusNumberContain(lotto, bonusNumber)) {
-                throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
-            }
+            LottoNumber bonusNumber = LottoNumber.getLottoNumber(InputView.getBonusNumber());
+            checkDuplication(lotto, bonusNumber);
             return bonusNumber;
         } catch (IllegalArgumentException e) {
             System.out.println(ERROR_MESSAGE + e.getMessage());
@@ -61,7 +90,9 @@ public class LottoController {
         }
     }
 
-    private boolean isBonusNumberContain(final Lotto lotto, final LottoNumber bonusNumber) {
-        return lotto.isContainNumber(bonusNumber);
+    private void checkDuplication(Lotto lotto, LottoNumber bonusNumber) {
+        if (lotto.isContainNumber(bonusNumber)) {
+            throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
+        }
     }
 }

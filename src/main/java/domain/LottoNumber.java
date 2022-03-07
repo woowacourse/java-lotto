@@ -6,27 +6,32 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
-    public static final String LOTTO_NUMBER_RANGE_MESSAGE =
+    private static final String LOTTO_NUMBER_RANGE_MESSAGE =
             "로또 번호가 유효한 범위(" + LOTTO_NUMBER_MIN + "-" + LOTTO_NUMBER_MAX + ")가 아닙니다.";
 
     private final int number;
 
-    public LottoNumber(final String inputNumber) {
-        validateInputLottoNumber(inputNumber);
-        this.number = Integer.parseInt(inputNumber);
-        validateLottoNumberRange(this.number);
+    private LottoNumber(final int number) {
+        this.number = number;
     }
 
-    private void validateInputLottoNumber(final String inputNumber) {
+    public static LottoNumber getLottoNumber(final String inputNumber) {
+        validateInputLottoNumber(inputNumber);
+        int number = Integer.parseInt(inputNumber);
+        validateLottoNumberRange(number);
+        return new LottoNumber(number);
+    }
+
+    public static LottoNumber getNumber(final int number) {
+        return new LottoNumber(number);
+    }
+
+    private static void validateInputLottoNumber(final String inputNumber) {
         Validator.checkNullOrEmpty(inputNumber);
         Validator.checkFormat(inputNumber);
     }
 
-    public LottoNumber(final int inputNumber) {
-        this.number = inputNumber;
-    }
-
-    private void validateLottoNumberRange(final int number) {
+    private static void validateLottoNumberRange(final int number) {
         if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
             throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_MESSAGE);
         }
