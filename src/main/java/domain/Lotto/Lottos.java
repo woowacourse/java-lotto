@@ -1,7 +1,7 @@
 package domain.Lotto;
 
 import domain.Rank;
-import domain.player.Money;
+import domain.Money;
 
 import java.util.ArrayList;
 import java.util.Collections;

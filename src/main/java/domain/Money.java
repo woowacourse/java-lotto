@@ -1,4 +1,4 @@
-package domain.player;
+package domain;
 
 import utils.ExceptionMessage;
 
