@@ -24,7 +24,7 @@ public class OutputView {
     }
 
     public void outputError(Exception exception) {
-        System.out.println(exception.getMessage());
+        System.out.println("[ERROR] " + exception.getMessage());
     }
 
     public void outputPurchaseResult(PurchaseResult purchaseResult) {
