@@ -23,7 +23,7 @@ public class LottoResultTest {
 		LottoResult lottoResult = new LottoResult();
 		lottoResult.increaseCountOfRank(Rank.FIFTH);
 		lottoResult.increaseCountOfRank(Rank.SECOND);
-		assertThat(lottoResult.getSumOfRewards()).isEqualTo(
+		assertThat(lottoResult.calculateSumOfRewards()).isEqualTo(
 			(Rank.FIFTH.getValue() + Rank.SECOND.getValue()));
 	}
 }

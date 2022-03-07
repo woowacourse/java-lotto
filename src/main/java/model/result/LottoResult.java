@@ -23,7 +23,7 @@ public class LottoResult {
 		return countOfResult.getOrDefault(rank, 0);
 	}
 
-	public long getSumOfRewards() {
+	public long calculateSumOfRewards() {
 		return Arrays.stream(Rank.values())
 			.filter(Rank::hasReward)
 			.mapToLong(rank -> (countOfResult.getOrDefault(rank, 0) * (long)rank.getValue()))

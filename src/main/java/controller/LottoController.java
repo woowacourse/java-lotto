@@ -124,7 +124,7 @@ public class LottoController {
 			.forEach(rank -> outputView.printResult(rank.getMatchNumber(), rank.getValue(),
 				lottoResult.getCountOfResult(rank),
 				Rank.SECOND.getValue()));
-		outputView.printRateOfReturn(lottoResult.getSumOfRewards() / insertedMoney.getMoney());
+		outputView.printRateOfReturn(lottoResult.calculateSumOfRewards() / insertedMoney.getMoney());
 	}
 
 }
