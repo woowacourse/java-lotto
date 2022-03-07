@@ -2,13 +2,13 @@ package domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.generator.NumsGenerator;
 import domain.result.TicketCount;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import utils.NumsGenerator;
 
 @SuppressWarnings("NonAsciiCharacters")
 class LottoFactoryTest {

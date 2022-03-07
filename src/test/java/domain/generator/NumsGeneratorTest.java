@@ -1,4 +1,4 @@
-package utils;
+package domain.generator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

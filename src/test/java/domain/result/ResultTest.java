@@ -2,6 +2,7 @@ package domain.result;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.generator.NumsGenerator;
 import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
 import domain.lotto.LottoGroup;
@@ -10,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import utils.NumsGenerator;
 
 @SuppressWarnings("NonAsciiCharacters")
 class ResultTest {

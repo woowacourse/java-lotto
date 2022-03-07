@@ -3,12 +3,12 @@ package domain.lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import domain.generator.NumsGenerator;
 import exception.lotto.LottoNumDuplicatedException;
 import exception.lotto.LottoNumWrongSizeException;
 import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import utils.NumsGenerator;
 
 @SuppressWarnings("NonAsciiCharacters")
 class LottoTest {

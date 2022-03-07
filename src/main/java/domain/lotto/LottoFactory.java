@@ -1,9 +1,9 @@
 package domain.lotto;
 
+import domain.generator.NumsGenerator;
 import domain.result.TicketCount;
 import java.util.ArrayList;
 import java.util.List;
-import utils.NumsGenerator;
 
 public class LottoFactory {
     public static WinningLotto createWinNums(final List<Integer> rawLottoNumbers, final int bonusNumber) {

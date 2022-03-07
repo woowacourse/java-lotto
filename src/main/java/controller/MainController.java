@@ -17,6 +17,10 @@ public class MainController {
         return new MainController();
     }
 
+    private static float getProfit(final float nowMoney, final float pastMoney) {
+        return nowMoney / pastMoney;
+    }
+
     public void run() {
         final LottoMoney lottoMoney = makeLottoMoney();
         final TicketCount count = makeLottoTicketCount(lottoMoney);
@@ -51,9 +55,5 @@ public class MainController {
     private void end(final Result result, final LottoMoney lottoMoney) {
         ResultView.printLottosResult(result);
         ResultView.printProfit(getProfit((float) result.getPrize(), (float) lottoMoney.get()));
-    }
-
-    private static float getProfit(final float nowMoney, final float pastMoney) {
-        return nowMoney / pastMoney;
     }
 }
