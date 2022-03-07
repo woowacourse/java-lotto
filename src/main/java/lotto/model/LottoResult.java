@@ -19,6 +19,7 @@ public class LottoResult {
         List<Integer> copyOfRawWinningNumbers = List.copyOf(rawWinningNumbers);
         validateEmptyCollection(copyOfRawWinningNumbers);
         validateDuplicateBonusNumber(copyOfRawWinningNumbers, bonusNumber);
+
         Lotto winningNumbers = new ManualLottoFactory(List.of(copyOfRawWinningNumbers)).generate();
         this.result = generateLottoResult(manualLottos, autoLottos, winningNumbers,
             new LottoNumber(bonusNumber));

@@ -19,9 +19,9 @@ public class Lottos {
     }
 
     private List<Lotto> generateLottos(LottoFactory factory, int count) {
-        return List.copyOf(IntStream.range(0, count)
+        return IntStream.range(0, count)
             .mapToObj(i -> factory.generate())
-            .collect(toList()));
+            .collect(toUnmodifiableList());
     }
 
     public List<Lotto> getLottos() {
