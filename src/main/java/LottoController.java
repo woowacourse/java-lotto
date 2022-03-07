@@ -10,7 +10,6 @@ import domain.Money;
 
 import domain.WinningChecker;
 import domain.WinningNumbers;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import view.InputView;
@@ -37,7 +36,7 @@ public class LottoController {
         OutputView.printYield(winningChecker.getYield());
     }
 
-    public static WinningNumbers askWinningNumbers() {
+    private static WinningNumbers askWinningNumbers() {
 
         return new WinningNumbers(new Lotto(InputView.askWinningNumber()
             .stream()
@@ -47,7 +46,7 @@ public class LottoController {
 
     }
 
-    public static List<List<LottoNumber>> askManualLottoNumbers(Money money) {
+    private static List<List<LottoNumber>> askManualLottoNumbers(Money money) {
 
         return InputView.askManualLottoNumbers(money.getManualAmount())
             .stream()
