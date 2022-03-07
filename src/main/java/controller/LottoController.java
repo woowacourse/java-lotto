@@ -60,7 +60,7 @@ public class LottoController {
         final List<RankResultDto> rankResultDtos = convertWinningResultToDtos(winningResult.getValue());
 
         outputView.printWinningResult(rankResultDtos);
-        outputView.printRateOfReturn(winningResult.getRateOfReturn(totalPurchaseLottoCount));
+        outputView.printRateOfReturn(winningResult.calculateRateOfReturn(totalPurchaseLottoCount));
     }
 
     private List<RankResultDto> convertWinningResultToDtos(final Map<Rank, Integer> results) {
