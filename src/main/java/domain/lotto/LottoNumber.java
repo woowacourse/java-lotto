@@ -30,7 +30,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static void validate(final int value) {
         if (value < MIN || value > MAX) {
-            throw new LottoNumRangeException();
+            throw new LottoNumRangeException(value);
         }
     }
 

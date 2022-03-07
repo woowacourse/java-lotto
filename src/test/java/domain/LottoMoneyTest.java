@@ -25,7 +25,7 @@ class LottoMoneyTest {
     void 천_미만_값일_경우_예외처리(int input) {
         assertThatThrownBy(() -> LottoMoney.from(input))
                 .isInstanceOf(LottoMoneyLessException.class)
-                .hasMessage("로또 구입 금액은 1000원 이상이어야 합니다.");
+                .hasMessage("로또 구입 금액은 1000원 이상이어야 합니다. : " + input);
     }
 
     @ParameterizedTest
@@ -33,6 +33,6 @@ class LottoMoneyTest {
     void 천으로_나누어_떨어지지_않는_경우_예외처리(int input) {
         assertThatThrownBy(() -> LottoMoney.from(input))
                 .isInstanceOf(LottoMoneyDivideException.class)
-                .hasMessage("로또 구입 금액은 1000 단위여야 합니다.");
+                .hasMessage("로또 구입 금액은 1000 단위여야 합니다. : " + input);
     }
 }

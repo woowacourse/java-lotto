@@ -6,27 +6,29 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
     private static final int SIZE = 6;
     private final List<LottoNumber> value;
 
-    private Lotto(List<LottoNumber> value) {
+    private Lotto(final List<LottoNumber> value) {
         validate(value);
         Collections.sort(value);
         this.value = List.copyOf(value);
     }
 
-    public static Lotto from(List<LottoNumber> value) {
+    public static Lotto from(final List<LottoNumber> value) {
         return new Lotto(value);
     }
 
-    private static void validate(List<LottoNumber> value) {
-        if (new HashSet<>(value).size() != value.size()) {
-            throw new LottoNumDuplicatedException();
+    private static void validate(final List<LottoNumber> value) {
+        Set<LottoNumber> setValue = new HashSet<>(value);
+        if (setValue.size() != value.size()) {
+            throw new LottoNumDuplicatedException(value);
         }
         if (value.size() != SIZE) {
-            throw new LottoNumWrongSizeException();
+            throw new LottoNumWrongSizeException(value.size());
         }
     }
 

@@ -31,7 +31,7 @@ public enum Rank {
 
     public static Rank of(final int matchCount, final boolean isBonus) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.condition.test(matchCount,isBonus))
+                .filter(rank -> rank.condition.test(matchCount, isBonus))
                 .findAny()
                 .orElse(NONE);
     }

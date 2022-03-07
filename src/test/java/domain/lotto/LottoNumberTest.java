@@ -23,6 +23,6 @@ class LottoNumberTest {
     void 로또_범위_범위_에러_처리(int input) {
         assertThatThrownBy(() -> LottoNumber.getInstance(input))
                 .isInstanceOf(LottoNumRangeException.class)
-                .hasMessage("로또 번호는 1에서 45사이의 수여야 합니다.");
+                .hasMessage("로또 번호는 1에서 45사이의 수여야 합니다. : " + input);
     }
 }

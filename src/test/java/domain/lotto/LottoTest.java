@@ -44,15 +44,15 @@ class LottoTest {
 
     @Test
     void 로또_중복_예외() {
-        assertThatThrownBy(() -> Lotto.from(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 1))))
+        assertThatThrownBy(() -> Lotto.from(NumsGenerator.generate(Arrays.asList(1, 2, 2, 4, 5, 1))))
                 .isInstanceOf(LottoNumDuplicatedException.class)
-                .hasMessage("로또 번호는 중복될 수 없습니다.");
+                .hasMessage("로또 번호는 중복될 수 없습니다. : [1, 1, 2, 2, 4, 5]");
     }
 
     @Test
     void 로또_숫자6개아님_예외() {
         assertThatThrownBy(() -> Lotto.from(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6, 7))))
                 .isInstanceOf(LottoNumWrongSizeException.class)
-                .hasMessage("로또 번호는 6개로 이루어져야 합니다.");
+                .hasMessage("로또 번호는 6개로 이루어져야 합니다. : 7개");
     }
 }

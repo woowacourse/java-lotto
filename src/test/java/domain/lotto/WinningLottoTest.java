@@ -37,6 +37,6 @@ class WinningLottoTest {
     void 로또_번호와_보너스_중복_확인() {
         assertThatThrownBy(() -> LottoFactory.createWinNums(Arrays.asList(1, 2, 3, 4, 5, 6), 5))
                 .isInstanceOf(BonusNumDuplicatedException.class)
-                .hasMessage("보너스 번호는 로또 번호와 중복될 수 없습니다.");
+                .hasMessage("보너스 번호는 로또 번호와 중복될 수 없습니다. : 5");
     }
 }

@@ -1,7 +1,6 @@
 package view;
 
 import exception.lotto.LottoNumWrongPatternException;
-import exception.lotto.NotNumException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -48,13 +47,9 @@ public class InputView {
     }
 
     private static int inputNum() {
-        try {
-            int number = SCANNER.nextInt();
-            SCANNER.nextLine();
-            return number;
-        } catch (Exception e) {
-            throw new NotNumException();
-        }
+        int number = SCANNER.nextInt();
+        SCANNER.nextLine();
+        return number;
     }
 
     private static List<Integer> inputLottoNums() {
@@ -65,7 +60,7 @@ public class InputView {
 
     private static void validateLottoNums(final String rawLottoNumbers) {
         if (!PATTERN.matcher(rawLottoNumbers).matches()) {
-            throw new LottoNumWrongPatternException();
+            throw new LottoNumWrongPatternException(rawLottoNumbers);
         }
     }
 }

@@ -11,12 +11,6 @@ public class LottoFactory {
         return WinningLotto.of(Lotto.from(NumsGenerator.generate(rawLottoNumbers)), bonus);
     }
 
-    public static List<Lotto> createLotto2(final TicketCount count, final List<List<Integer>> rawLottoNumsGroup) {
-        final List<Lotto> lottos = new ArrayList<>(List.copyOf(createManualLottos(rawLottoNumsGroup)));
-        lottos.addAll(createAutoLottos(count.ofAuto()));
-        return lottos;
-    }
-
     public static LottoGroup createLottos(final TicketCount count, final List<List<Integer>> rawLottoNumsGroup) {
         final List<Lotto> lottos = new ArrayList<>(List.copyOf(createManualLottos(rawLottoNumsGroup)));
         lottos.addAll(createAutoLottos(count.ofAuto()));

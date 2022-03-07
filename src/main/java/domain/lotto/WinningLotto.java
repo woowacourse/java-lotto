@@ -18,7 +18,7 @@ public class WinningLotto {
 
     private static void validate(final Lotto lotto, final LottoNumber number) {
         if (lotto.contains(number)) {
-            throw new BonusNumDuplicatedException();
+            throw new BonusNumDuplicatedException(number.get());
         }
     }
 

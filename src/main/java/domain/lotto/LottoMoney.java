@@ -19,10 +19,10 @@ public class LottoMoney {
 
     private static void validate(final int value) {
         if (value < DIVIDE_UNIT) {
-            throw new LottoMoneyLessException();
+            throw new LottoMoneyLessException(value);
         }
         if (value % DIVIDE_UNIT != 0) {
-            throw new LottoMoneyDivideException();
+            throw new LottoMoneyDivideException(value);
         }
     }
 

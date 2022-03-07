@@ -19,10 +19,10 @@ public class TicketCount {
 
     private static void validate(final int manualValue, final int autoValue) {
         if (autoValue < 0) {
-            throw new CountMoreMaxException();
+            throw new CountMoreMaxException(autoValue);
         }
         if (manualValue < 0 || manualValue + autoValue <= 0) {
-            throw new CountLessZeroException();
+            throw new CountLessZeroException(manualValue, autoValue);
         }
     }
 

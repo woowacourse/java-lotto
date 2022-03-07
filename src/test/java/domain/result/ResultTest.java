@@ -1,14 +1,11 @@
 package domain.result;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
 import domain.lotto.LottoGroup;
 import domain.lotto.WinningLotto;
-import exception.NullException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;

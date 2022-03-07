@@ -15,14 +15,14 @@ class LottoTicketCountTest {
     void 정적팩토리_생성_테스트_0이하의_수동티켓_음수() {
         assertThatThrownBy(() -> TicketCount.of(2, -1))
                 .isInstanceOf(CountLessZeroException.class)
-                .hasMessage("로또티켓 수는 1 이상이어야 합니다.");
+                .hasMessage("로또티켓 수는 1 이상이어야 합니다. : 자동티켓 -1개, 수동티켓 3개");
     }
 
     @Test
     void 정적팩토리_생성_테스트_총티켓_수_이상의_수동티켓() {
         assertThatThrownBy(() -> TicketCount.of(10, 11))
                 .isInstanceOf(CountMoreMaxException.class)
-                .hasMessage("수동로또 수가 구매한 로또 수를 초과할 수 없습니다.");
+                .hasMessage("수동로또 수가 구매한 로또 수를 초과할 수 없습니다. : -1개");
     }
 
     @Test

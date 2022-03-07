@@ -3,9 +3,9 @@ package view;
 import domain.lotto.Lotto;
 import domain.lotto.LottoGroup;
 import domain.lotto.LottoNumber;
-import domain.result.TicketCount;
 import domain.result.Rank;
 import domain.result.Result;
+import domain.result.TicketCount;
 
 public class ResultView {
     private static final String BUY_MESSAGE =
