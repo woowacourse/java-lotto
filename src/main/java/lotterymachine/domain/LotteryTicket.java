@@ -25,7 +25,7 @@ public class LotteryTicket {
         return new LotteryTicket(numbers);
     }
 
-    public static List<LotteryTicket> getLotteryTickets(List<List<Integer>> value) {
+    public static List<LotteryTicket> createLotteryTickets(List<List<Integer>> value) {
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
         for (List<Integer> numbers : value) {
             List<LotteryNumber> lotteryNumbers = LotteryNumber.from(numbers);

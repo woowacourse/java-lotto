@@ -41,7 +41,7 @@ public class LotteryTicketsTest {
     @DisplayName("두개의 로또 리스트를 입력 받아, LotteryTickets를 생성한다.")
     void create() {
         List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6);
-        List<LotteryTicket> lotteryTicket = LotteryTicket.getLotteryTickets(List.of(input));
+        List<LotteryTicket> lotteryTicket = LotteryTicket.createLotteryTickets(List.of(input));
         LotteryTickets value = LotteryTickets.of(lotteryTicket, lotteryTicket);
         assertThat(value.getLotteryTickets().size()).isEqualTo(2);
     }
