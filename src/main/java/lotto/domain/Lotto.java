@@ -11,8 +11,8 @@ public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
-        validateSize(lottoNumbers);
         this.lottoNumbers = Set.copyOf(lottoNumbers);
+        validateSize(lottoNumbers);
     }
 
     public static Lotto of(List<LottoNumber> lottoNumbers) {
