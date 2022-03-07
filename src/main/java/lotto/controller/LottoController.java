@@ -5,7 +5,6 @@ import static lotto.view.ResultView.*;
 
 import lotto.model.LottoGame;
 import lotto.model.LottoResult;
-import lotto.model.Lottos;
 import lotto.model.lottofactory.AutoLottoFactory;
 
 public class LottoController {
@@ -14,10 +13,10 @@ public class LottoController {
         int numberOfManualLottos = inputNumberOfManualLottos();
         LottoGame lottoGame = new LottoGame(lottoMoney, numberOfManualLottos, new AutoLottoFactory());
 
-        Lottos manualLottos = lottoGame.buyManualLottos(inputManualLottos(numberOfManualLottos));
-        printGeneratedLottos(manualLottos.getLottos(), lottoGame.getAutoLottos());
+        lottoGame.buyManualLottos(inputManualLottos(numberOfManualLottos));
+        printGeneratedLottos(lottoGame.getLottos());
 
-        LottoResult lottoResult = lottoGame.generateLottoResult(manualLottos, inputWinningNumbers(),
+        LottoResult lottoResult = lottoGame.generateLottoResult(inputWinningNumbers(),
             inputBonusNumber());
         printResultStatistics(lottoResult);
         printYield(lottoGame.calculateYield(lottoResult));

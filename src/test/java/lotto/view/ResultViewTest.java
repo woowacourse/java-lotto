@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,8 +54,11 @@ class ResultViewTest {
 
         Lottos manualLottos = lottosConstructor.newInstance(new TestManualLottoFactory(), 1);
         Lottos autoLottos = lottosConstructor.newInstance(new TestAutoLottoFactory(), 2);
+        Map<String, List<Lotto>> lottosMap = new HashMap<>();
+        lottosMap.put("Manual", manualLottos.getLottos());
+        lottosMap.put("Auto", autoLottos.getLottos());
 
-        ResultView.printGeneratedLottos(manualLottos.getLottos(), autoLottos.getLottos());
+        ResultView.printGeneratedLottos(lottosMap);
 
         assertThat(outputStreamCaptor.toString())
             .contains("수동으로 1장")

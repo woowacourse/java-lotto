@@ -2,8 +2,8 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.DisplayName;
@@ -21,10 +21,11 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame(1000, 1, new TestAutoLottoFactory());
         List<List<Integer>> rawManualLottos = List.of(List.of(1, 2, 3, 11, 12, 13));
 
-        Lottos manualLottos = lottoGame.buyManualLottos(rawManualLottos);
+        lottoGame.buyManualLottos(rawManualLottos);
+        Map<String, List<Lotto>> lottosMap = lottoGame.getLottos();
         List<Lotto> expected = new Lottos(new TestAutoLottoFactory(), 1).getLottos();
 
-        assertThat(manualLottos.getLottos().toString()).isEqualTo(expected.toString());
+        assertThat(lottosMap.get("Manual").toString()).isEqualTo(expected.toString());
     }
 
     @Test
@@ -43,8 +44,7 @@ class LottoGameTest {
     void validateDuplicateBonusBallNumberTest() {
         LottoGame lottoGame = new LottoGame(1000, 0, new TestAutoLottoFactory());
         assertThatThrownBy(() ->
-            lottoGame.generateLottoResult(new Lottos(new ManualLottoFactory(Collections.emptyList()), 0),
-                List.of(1, 2, 3, 4, 5, 6), 6))
+            lottoGame.generateLottoResult(List.of(1, 2, 3, 4, 5, 6), 6))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("보너스 볼 번호가 당첨 번호와 중복입니다.");
     }
@@ -53,10 +53,7 @@ class LottoGameTest {
     @DisplayName("수익률 계산 확인")
     void calculateYieldTest() {
         LottoGame lottoGame = new LottoGame(1000, 0, new TestAutoLottoFactory());
-        LottoResult lottoResult = lottoGame.generateLottoResult(
-            new Lottos(new ManualLottoFactory(Collections.emptyList()), 0),
-            List.of(1, 2, 3, 4, 5, 6),
-            7);
+        LottoResult lottoResult = lottoGame.generateLottoResult(List.of(1, 2, 3, 4, 5, 6), 7);
         Yield yield = lottoGame.calculateYield(lottoResult);
 
         assertThat(yield.getYield()).isCloseTo(5.00f, Percentage.withPercentage(99));

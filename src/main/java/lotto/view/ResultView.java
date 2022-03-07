@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import lotto.model.LottoResult;
 import lotto.model.Rank;
@@ -9,7 +10,9 @@ import lotto.model.Yield;
 import lotto.model.lottofactory.Lotto;
 
 public class ResultView {
-    public static void printGeneratedLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+    public static void printGeneratedLottos(Map<String, List<Lotto>> lottosMap) {
+        List<Lotto> manualLottos = lottosMap.get("Manual");
+        List<Lotto> autoLottos = lottosMap.get("Auto");
         System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + autoLottos.size() + "개를 구매했습니다.");
         printEachLottos(manualLottos);
         printEachLottos(autoLottos);
