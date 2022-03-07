@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Ball {
-    private static final List<Ball> preparedNumbers = IntStream.rangeClosed(0, 45).boxed().map(Ball::new).collect(Collectors.toList());
     private static final int MINIMUM = 1;
     private static final int MAXIMUM = 45;
     private static final String OUT_OF_RANGE_EXCEPTION = "로또 숫자는 1이상 45이하여야 합니다.";
@@ -17,9 +16,18 @@ public class Ball {
         this.number = number;
     }
 
+    private static class LazyHolder {
+        private static final List<Ball> preparedNumbers = IntStream.rangeClosed(MINIMUM - 1, MAXIMUM).boxed()
+                .map(Ball::new).collect(Collectors.toList());
+    }
+
+    private static List<Ball> getPreparedBalls() {
+        return LazyHolder.preparedNumbers;
+    }
+
     public static Ball from(int number) {
         validateRange(number);
-        return preparedNumbers.get(number);
+        return getPreparedBalls().get(number);
     }
 
     public static List<Ball> getBalls(List<Integer> numbers) {
