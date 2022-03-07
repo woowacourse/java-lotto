@@ -3,8 +3,9 @@ package lotto.model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
+import lotto.model.exception.NotEnoughMoneyException;
 
-public class Money {
+public class Money implements Comparable<Money> {
 
     static final Money ZERO = new Money(BigDecimal.ZERO);
 
@@ -20,6 +21,17 @@ public class Money {
 
     public Money plus(Money money) {
         return new Money(this.amount.add(money.amount));
+    }
+
+    public Money subtract(Money money) {
+        if (isLessThan(money)) {
+            throw new NotEnoughMoneyException();
+        }
+        return new Money(this.amount.subtract(money.amount));
+    }
+
+    private boolean isLessThan(Money money) {
+        return this.compareTo(money) < 0;
     }
 
     public Money multiply(int factor) {
@@ -40,6 +52,11 @@ public class Money {
         }
         Money money = (Money) o;
         return Objects.equals(amount, money.amount);
+    }
+
+    @Override
+    public int compareTo(Money o) {
+        return amount.compareTo(o.amount);
     }
 
     @Override

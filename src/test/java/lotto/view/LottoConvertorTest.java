@@ -13,13 +13,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class LottoParserTest {
+public class LottoConvertorTest {
 
-    private LottoParser parser;
+    private LottoConvertor parser;
 
     @BeforeEach
     void setUp() {
-        parser = new LottoParser();
+        parser = new LottoConvertor();
     }
 
     @Test
