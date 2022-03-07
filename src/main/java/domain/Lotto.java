@@ -60,4 +60,8 @@ public class Lotto {
             throw new IllegalArgumentException(LOTTO_NUMBER_NOT_UNIQUE_ERROR);
         }
     }
+
+    public boolean isContain(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }

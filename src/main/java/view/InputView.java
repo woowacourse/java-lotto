@@ -1,5 +1,6 @@
 package view;
 
+import domain.Lotto;
 import domain.LottoNumber;
 import domain.WinningNumbers;
 import java.util.ArrayList;
@@ -45,9 +46,9 @@ public class InputView {
     }
 
     public static WinningNumbers askWinningNumbers() {
-        return new WinningNumbers(askWinningNumber().stream()
+        return new WinningNumbers(new Lotto(askWinningNumber().stream()
             .map(LottoNumber::new)
-            .collect(Collectors.toList())
+            .collect(Collectors.toList()))
             , new LottoNumber(askBonusNumber()));
     }
 
