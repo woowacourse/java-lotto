@@ -29,16 +29,16 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
         return NUMBERS.get(number);
     }
 
-    public static List<LotteryNumber> from(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LotteryNumber::from)
-                .collect(Collectors.toList());
-    }
-
     private static void validateNumber(int number) {
         if (number < MIN_VALUE || number > MAX_VALUE) {
             throw new IllegalArgumentException(OUT_OF_RANGE);
         }
+    }
+
+    public static List<LotteryNumber> from(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LotteryNumber::from)
+                .collect(Collectors.toList());
     }
 
     public int getNumber() {
@@ -48,18 +48,5 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     @Override
     public int compareTo(LotteryNumber o) {
         return this.number - o.number;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LotteryNumber that = (LotteryNumber) o;
-        return number == that.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
     }
 }
