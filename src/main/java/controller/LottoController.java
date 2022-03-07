@@ -1,86 +1,116 @@
 package controller;
 
-import constants.LottoConstants;
 import domain.InputMoney;
 import domain.Lotto;
+import domain.LottoGame;
 import domain.LottoNumber;
 import domain.LottoQuantity;
 import domain.Lottos;
 import domain.WinningLotto;
 import domain.WinningResult;
-import domain.strategy.LottoNumberGenerateStrategy;
+import domain.strategy.RandomLottoNumberGenerator;
+import dto.LottoDto;
 import dto.WinningResultDto;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import view.InputView;
+import view.OutputView;
 import view.ResultView;
 
 public class LottoController {
-    private final LottoNumberGenerateStrategy lottoNumberGenerator;
-
-    public LottoController(LottoNumberGenerateStrategy lottoNumberGenerator) {
-        this.lottoNumberGenerator = lottoNumberGenerator;
-    }
-
     public void start() {
-        InputMoney inputMoney = getInputMoney();
-        LottoQuantity lottoQuantity = getLottoQuantityByInputMoney(inputMoney);
-        InputView.printLottoQuantity(lottoQuantity.getLottoQuantity());
+        InputMoney inputMoney = generateInputMoney();
+        LottoQuantity manualLottoQuantity = generateManualLottoQuantity(inputMoney);
 
-        Lottos autoLottos = new Lottos(lottoQuantity, lottoNumberGenerator);
-        InputView.printLottos(autoLottos);
+        LottoGame lottoGame = new LottoGame(LottoQuantity.from(inputMoney), manualLottoQuantity);
+        lottoGame.createManualLottos(generateManualLottos(manualLottoQuantity));
 
-        WinningLotto winningLotto = setupWinningLotto();
-        WinningResult winningResult = autoLottos.getWinningResultByWinningLotto(winningLotto);
-        ResultView.printResult(WinningResultDto.of(winningResult, lottoQuantity));
+        printLottoQuantity(lottoGame.getManualLottoQuantity(), lottoGame.getAutoLottoQuantity());
+        printLottos(lottoGame.createAutoLottos(new RandomLottoNumberGenerator()));
+        printWinningResult(lottoGame.createWinningResult(generateWinningLotto()));
     }
 
-    private LottoQuantity getLottoQuantityByInputMoney(InputMoney inputMoney) {
-        return new LottoQuantity(inputMoney.getMoney() / LottoConstants.SINGLE_LOTTO_PRICE);
+    private InputMoney generateInputMoney() {
+        try {
+            return new InputMoney(InputView.scanInputMoney());
+        } catch (IllegalArgumentException exception) {
+            OutputView.printException(exception);
+            return generateInputMoney();
+        }
     }
 
-    private WinningLotto setupWinningLotto() {
-        Lotto lotto = generateLotto();
-        LottoNumber bonusNumber = generateBonusNumber();
+    private LottoQuantity generateManualLottoQuantity(InputMoney inputMoney) {
+        try {
+            int quantity = InputView.scanManualLottoQuantity();
+            return LottoQuantity.of(quantity, inputMoney);
+        } catch (IllegalArgumentException exception) {
+            OutputView.printException(exception);
+            return generateManualLottoQuantity(inputMoney);
+        }
+    }
+
+    private List<Set<Integer>> generateManualLottos(LottoQuantity manualLottoQuantity) {
+        try {
+            return InputView.scanManualLottoNumbers(manualLottoQuantity.getLottoQuantity());
+        } catch (IllegalArgumentException exception) {
+            OutputView.printException(exception);
+            return generateManualLottos(manualLottoQuantity);
+        }
+    }
+
+    private void printLottoQuantity(LottoQuantity manualLottoQuantity, LottoQuantity autoLottoQuantity) {
+        OutputView.printLottoQuantity(
+                manualLottoQuantity.getLottoQuantity(),
+                autoLottoQuantity.getLottoQuantity()
+        );
+    }
+
+    private void printLottos(Lottos lottos) {
+        List<LottoDto> lottoDtos = getLottoDtosByLottos(lottos);
+        OutputView.printLottos(lottoDtos);
+    }
+
+    private WinningLotto generateWinningLotto() {
+        Lotto lotto = generateLottoOfWinningLotto();
+        LottoNumber bonusNumber = generateBonusNumberOfWinningLotto();
 
         try {
             return new WinningLotto(lotto, bonusNumber);
         } catch (IllegalArgumentException exception) {
-            InputView.printException(exception);
-            return setupWinningLotto();
+            OutputView.printException(exception);
+            return generateWinningLotto();
         }
     }
 
-    private Lotto generateLotto() {
-        try {
-            List<Integer> winningNumberValues = InputView.scanWinningNumbers();
+    private List<LottoDto> getLottoDtosByLottos(Lottos lottos) {
+        return lottos.getLottos()
+                .stream()
+                .map(LottoDto::new)
+                .collect(Collectors.toList());
+    }
 
-            Set<LottoNumber> lottoNumbers = winningNumberValues.stream()
-                    .map(LottoNumber::new)
-                    .collect(Collectors.toSet());
-            return new Lotto(lottoNumbers);
+    private Lotto generateLottoOfWinningLotto() {
+        try {
+            Set<Integer> numbers = InputView.scanWinningLottoNumbers();
+            return Lotto.fromRawValues(numbers);
         } catch (IllegalArgumentException exception) {
-            InputView.printException(exception);
-            return generateLotto();
+            OutputView.printException(exception);
+            return generateLottoOfWinningLotto();
         }
     }
 
-    private LottoNumber generateBonusNumber() {
+    private LottoNumber generateBonusNumberOfWinningLotto() {
         try {
-            return new LottoNumber(InputView.scanBonusNumber());
+            return LottoNumber.from(InputView.scanBonusNumber());
         } catch (IllegalArgumentException exception) {
-            InputView.printException(exception);
-            return generateBonusNumber();
+            OutputView.printException(exception);
+            return generateBonusNumberOfWinningLotto();
         }
     }
 
-    private InputMoney getInputMoney() {
-        try {
-            return new InputMoney(InputView.scanInputMoney());
-        } catch (IllegalArgumentException exception) {
-            InputView.printException(exception);
-            return getInputMoney();
-        }
+    private void printWinningResult(WinningResult winningResult) {
+        WinningResultDto winningResultDto = WinningResultDto.from(winningResult);
+        ResultView.printResult(winningResultDto);
     }
 }

@@ -11,59 +11,83 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Lottos 테스트")
 public class LottosTest {
     private LottoNumberGenerateStrategy lottoNumberGenerateStrategy;
-    private WinningLotto winningLotto;
 
     @BeforeEach
     void setupLottos() {
-        lottoNumberGenerateStrategy = new StubRandomLottoNumberGenerator(
+        lottoNumberGenerateStrategy = StubRandomLottoNumberGenerator.fromRawValues(
                 List.of(
-                        List.of(1, 2, 3, 4, 5, 6),
-                        List.of(7, 8, 9, 10, 11, 12),
-                        List.of(13, 14, 15, 16, 17, 18)
+                        Set.of(1, 2, 3, 4, 5, 6),
+                        Set.of(7, 8, 9, 10, 11, 12),
+                        Set.of(13, 14, 15, 16, 17, 18)
                 )
-        );
-
-        winningLotto = new WinningLotto(
-                new Lotto(
-                        Set.of(
-                                new LottoNumber(1),
-                                new LottoNumber(2),
-                                new LottoNumber(3),
-                                new LottoNumber(4),
-                                new LottoNumber(5),
-                                new LottoNumber(6)
-                        )
-                ),
-                new LottoNumber(7)
         );
     }
 
     @Test
-    @DisplayName("LottoQuantity 와 LottoNumberGenerateStrategy 를 전달받아 Lottos 생성")
+    @DisplayName("of 메소드가 LottoQuantity 와 LottoNumberGenerateStrategy 를 전달받으면 Lottos 가 생성된다.")
     void createLottosByLottoQuantity() {
         // given
-        LottoQuantity lottoQuantity = new LottoQuantity(10);
+        LottoQuantity lottoQuantity = LottoQuantity.from(10);
 
         // when
-        Lottos createLottos = new Lottos(lottoQuantity, lottoNumberGenerateStrategy);
+        Lottos createLottos = Lottos.of(lottoQuantity, lottoNumberGenerateStrategy);
 
         // then
         assertThat(createLottos).isNotNull();
     }
 
     @Test
-    @DisplayName("Winning Lotto 를 전달 받아 당첨 결과 반환")
-    void getWinningResultByWinningLotto() {
+    @DisplayName("from 메소드에 List<Lotto> 를 전달받아 Lottos 를 생성할 수 있다.")
+    void createLottosWithLottoList() {
         // given
-        Lottos lottos = new Lottos(new LottoQuantity(3), lottoNumberGenerateStrategy);
-        WinningResult winningResult = lottos.getWinningResultByWinningLotto(winningLotto);
+        List<Lotto> lottoValues = List.of(Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)));
 
         // when
-        WinningCount winningCount = winningResult.getWinningCountByRank(Rank.FIRST);
+        Lottos lottos = Lottos.from(lottoValues);
 
         // then
-        assertThat(winningCount).isEqualTo(new WinningCount(1));
+        assertThat(lottos).isNotNull();
+    }
+
+    @Test
+    @DisplayName("fromRawValues 메소드에 List<Set<Integer>> 를 전달해 Lottos 를 생성할 수 있다.")
+    void createLottosWithSetOfIntegerList() {
+        // given
+        List<Set<Integer>> setOfIntegerList = List.of(
+                Set.of(1, 2, 3, 4, 5, 6),
+                Set.of(7, 8, 9, 10, 11, 12)
+        );
+
+        // when
+        Lottos actual = Lottos.fromRawValues(setOfIntegerList);
+
+        // then
+        assertThat(actual).isNotNull();
+    }
+
+    @Test
+    @DisplayName("concat 메소드를 사용하여 두개의 Lottos 를 합쳐 새로운 Lottos 를 만들 수 있다.")
+    void concat() {
+        // given
+        Lottos lottos1 = Lottos.of(LottoQuantity.from(3), lottoNumberGenerateStrategy);
+        Lottos lottos2 = Lottos.of(LottoQuantity.from(3), lottoNumberGenerateStrategy);
+
+        // when
+        Lottos joinedLottos = Lottos.concat(lottos1, lottos2);
+
+        // then
+        assertThat(joinedLottos.getLottos())
+                .containsExactly(
+                        Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)),
+                        Lotto.fromRawValues(Set.of(7, 8, 9, 10, 11, 12)),
+                        Lotto.fromRawValues(Set.of(13, 14, 15, 16, 17, 18)),
+                        Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)),
+                        Lotto.fromRawValues(Set.of(7, 8, 9, 10, 11, 12)),
+                        Lotto.fromRawValues(Set.of(13, 14, 15, 16, 17, 18))
+                );
+
     }
 }

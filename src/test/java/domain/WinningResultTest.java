@@ -3,74 +3,80 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("WinningResult 테스트")
 public class WinningResultTest {
+    private Lottos purchasedLottos;
+    private WinningLotto winningLotto;
     private WinningResult winningResult;
 
     @BeforeEach
-    void setUp() {
-        LottoQuantity purchasedLottoQuantity = new LottoQuantity(10);
-        winningResult = new WinningResult.Builder(purchasedLottoQuantity)
-                .first(new WinningCount(0))
-                .second(new WinningCount(0))
-                .third(new WinningCount(0))
-                .fourth(new WinningCount(0))
-                .fifth(new WinningCount(10))
-                .noMatch(new WinningCount(0))
-                .build();
+    void setUpWinningResult() {
+        winningResult = new WinningResult(purchasedLottos, winningLotto);
+    }
+
+    @BeforeEach
+    void setUpPurchasedLottos() {
+        List<Set<Integer>> lottoList = List.of(
+                Set.of(1, 2, 3, 4, 5, 6),
+                Set.of(7, 8, 9, 10, 11, 12),
+                Set.of(13, 14, 15, 16, 17, 18)
+        );
+        purchasedLottos = Lottos.fromRawValues(lottoList);
+    }
+
+    @BeforeEach
+    void setUpWinningLotto() {
+        winningLotto = new WinningLotto(
+                Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 7)),
+                LottoNumber.from(6)
+        );
     }
 
     @Test
-    @DisplayName("WinningResult 생성 테스트")
-    void createWinningResult() {
-        // given
-        LottoQuantity purchasedLottoQuantity = new LottoQuantity(100);
-
-        // when
-        WinningResult winningResult = new WinningResult.Builder(purchasedLottoQuantity)
-                .first(new WinningCount(1))
-                .second(new WinningCount(2))
-                .third(new WinningCount(3))
-                .fourth(new WinningCount(4))
-                .fifth(new WinningCount(5))
-                .noMatch(new WinningCount(6))
-                .build();
+    @DisplayName("WinningResult 는 Lottos, WinningLotto 로 생성될 수 있다.")
+    void createWinningResultWithLottosAndWinningLotto() {
+        // given & when
+        WinningResult winningResult = new WinningResult(purchasedLottos, winningLotto);
 
         // then
         assertThat(winningResult).isNotNull();
     }
 
     @Test
-    @DisplayName("수익률 계산")
-    void getProfitRatio() {
-        // given & when
-        double actual = winningResult.getProfitRatio();
+    @DisplayName("WinningResult 는 생성자로 전달받은 Lottos 와 WinningLotto 로 당첨 통계 Map<Rank, WinningCount> 를 반환한다.")
+    void winningResultWithLottosAndWinningLottoCanReturnMapOfRankAndWinningCount() {
+        // given
+        WinningResult winningResult = new WinningResult(purchasedLottos, winningLotto);
 
         // when
-        double expected = 5.0;
+        Map<Rank, WinningCount> actual = winningResult.getWinningResult();
+        Map<Rank, WinningCount> expected = new HashMap<>();
+        expected.put(Rank.FIRST, new WinningCount(0));
+        expected.put(Rank.SECOND, new WinningCount(1));
+        expected.put(Rank.THIRD, new WinningCount(0));
+        expected.put(Rank.FOURTH, new WinningCount(0));
+        expected.put(Rank.FIFTH, new WinningCount(0));
+        expected.put(Rank.NO_MATCH, new WinningCount(2));
 
         // then
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("winningResult getter")
-    void getWinningResult() {
-        // given
-        Map<Rank, WinningCount> actual = winningResult.getWinningResult();
+    @DisplayName("calculateProfitRatio 는 수익률을 계산할 수 있다.")
+    void getProfitRatio() {
+        // given & when
+        double actual = winningResult.getProfitRatio();
 
         // when
-        Map<Rank, WinningCount> expected = new HashMap<>();
-        expected.put(Rank.FIRST, new WinningCount(0));
-        expected.put(Rank.SECOND, new WinningCount(0));
-        expected.put(Rank.THIRD, new WinningCount(0));
-        expected.put(Rank.FOURTH, new WinningCount(0));
-        expected.put(Rank.FIFTH, new WinningCount(10));
-        expected.put(Rank.NO_MATCH, new WinningCount(0));
+        double expected = 10000.0;
 
         // then
         assertThat(actual).isEqualTo(expected);

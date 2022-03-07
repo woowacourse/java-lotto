@@ -1,23 +1,53 @@
 package domain;
 
-import constants.LottoConstants;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class WinningResult {
-    public static final double ROUND_UNIT = 100.0;
+    private static final double ROUND_UNIT = 100.0;
 
     private final Map<Rank, WinningCount> winningResult;
     private final LottoQuantity purchasedLottoQuantity;
 
-    private WinningResult(Builder builder) {
-        this.winningResult = builder.winningResult;
-        this.purchasedLottoQuantity = builder.purchasedLottoQuantity;
+    public WinningResult(Lottos lottos, WinningLotto winningLotto) {
+        winningResult = generateWinningResult(lottos, winningLotto);
+        purchasedLottoQuantity = generateLottoQuantityByLottos(lottos);
+    }
+
+    private Map<Rank, WinningCount> generateWinningResult(Lottos lottos, WinningLotto winningLotto) {
+        Map<Rank, WinningCount> winningResult = groupRankByCount(lottos, winningLotto);
+        return putDefaultWinningCount(winningResult);
+    }
+
+    private Map<Rank, WinningCount> groupRankByCount(Lottos lottos, WinningLotto winningLotto) {
+        return lottos.getLottos()
+                .stream()
+                .collect(Collectors.groupingBy(
+                        lotto -> Rank.createByLottoAndWinningLotto(lotto, winningLotto),
+                        Collectors.collectingAndThen(Collectors.counting(), count -> new WinningCount(count.intValue()))
+                ));
+    }
+
+
+    private Map<Rank, WinningCount> putDefaultWinningCount(Map<Rank, WinningCount> winningResultWithoutDefault) {
+        Map<Rank, WinningCount> winningResult = new HashMap<>(winningResultWithoutDefault);
+        for (Rank rank : Rank.values()) {
+            winningResult.putIfAbsent(rank, new WinningCount(0));
+        }
+
+        return winningResult;
+    }
+
+    private LottoQuantity generateLottoQuantityByLottos(Lottos lottos) {
+        return LottoQuantity.from(lottos.getLottos().size());
     }
 
     public double getProfitRatio() {
-        double purchaseMoney = purchasedLottoQuantity.getLottoQuantity() * LottoConstants.SINGLE_LOTTO_PRICE;
-        return roundToSecondDigit(calculateTotalPrize() / purchaseMoney);
+        long totalPrice = calculateTotalPrize();
+        double purchaseMoney = purchasedLottoQuantity.getLottoQuantity() * Lotto.SINGLE_LOTTO_PRICE;
+
+        return roundToSecondDigit(totalPrice / purchaseMoney);
     }
 
     private long calculateTotalPrize() {
@@ -33,56 +63,6 @@ public class WinningResult {
 
     public Map<Rank, WinningCount> getWinningResult() {
         return winningResult;
-    }
-
-    public WinningCount getWinningCountByRank(Rank rank) {
-        return winningResult.get(rank);
-    }
-
-    public static class Builder {
-        private final Map<Rank, WinningCount> winningResult = new HashMap<>();
-        private final LottoQuantity purchasedLottoQuantity;
-
-        public Builder(LottoQuantity purchasedLottoQuantity) {
-            for (Rank rank : Rank.values()) {
-                winningResult.put(rank, new WinningCount(0));
-            }
-            this.purchasedLottoQuantity = purchasedLottoQuantity;
-        }
-
-        public Builder first(WinningCount winningCount) {
-            winningResult.put(Rank.FIRST, winningCount);
-            return this;
-        }
-
-        public Builder second(WinningCount winningCount) {
-            winningResult.put(Rank.SECOND, winningCount);
-            return this;
-        }
-
-        public Builder third(WinningCount winningCount) {
-            winningResult.put(Rank.THIRD, winningCount);
-            return this;
-        }
-
-        public Builder fourth(WinningCount winningCount) {
-            winningResult.put(Rank.FOURTH, winningCount);
-            return this;
-        }
-
-        public Builder fifth(WinningCount winningCount) {
-            winningResult.put(Rank.FIFTH, winningCount);
-            return this;
-        }
-
-        public Builder noMatch(WinningCount winningCount) {
-            winningResult.put(Rank.NO_MATCH, winningCount);
-            return this;
-        }
-
-        public WinningResult build() {
-            return new WinningResult(this);
-        }
     }
 
     @Override

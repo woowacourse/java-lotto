@@ -1,32 +1,51 @@
 package domain;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class LottoNumber {
-    private static final int MINIMUM_LOTTO_NUMBER = 1;
-    private static final int MAXIMUM_LOTTO_NUMBER = 45;
-    private static final String ERROR_MESSAGE_FOR_OUT_OF_RANGE_NUMBER =
-            MINIMUM_LOTTO_NUMBER + "에서 " + MAXIMUM_LOTTO_NUMBER + " 사이의 값을 입력해주세요";
+public class LottoNumber implements Comparable<LottoNumber> {
+    public static final List<LottoNumber> LOTTO_NUMBERS;
+    public static final int MINIMUM_LOTTO_NUMBER = 1;
+    public static final int MAXIMUM_LOTTO_NUMBER = 45;
+
+    static final String ERROR_MESSAGE_FOR_OUT_OF_RANGE_NUMBER =
+            String.format("%d에서 %d 사이의 값을 입력해주세요.", MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER);
+
+    static {
+        LOTTO_NUMBERS = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toUnmodifiableList());
+    }
 
     private final int number;
 
-    public LottoNumber(int number) {
-        validateRange(number);
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void validateRange(int number) {
-        if (isOutOfRange(number)) {
+    public static LottoNumber from(int number) {
+        validateRange(number);
+
+        int lottoNumberIndex = number - 1;
+        return LOTTO_NUMBERS.get(lottoNumberIndex);
+    }
+
+    private static void validateRange(int number) {
+        boolean isOutOfRange = MAXIMUM_LOTTO_NUMBER < number || number < MINIMUM_LOTTO_NUMBER;
+        if (isOutOfRange) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_OUT_OF_RANGE_NUMBER);
         }
     }
 
-    private boolean isOutOfRange(int number) {
-        return MAXIMUM_LOTTO_NUMBER < number || number < MINIMUM_LOTTO_NUMBER;
+    public int toInt() {
+        return number;
     }
 
-    public int getNumber() {
-        return number;
+    @Override
+    public int compareTo(LottoNumber otherLottoNumber) {
+        return this.number - otherLottoNumber.number;
     }
 
     @Override

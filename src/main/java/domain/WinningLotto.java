@@ -1,7 +1,7 @@
 package domain;
 
 public class WinningLotto {
-    private static final String ERROR_MESSAGE_FOR_DUPLICATE_BONUS_NUMBER = "보너스 번호는 로또 번호와 중복될 수 없습니다.";
+    static final String ERROR_MESSAGE_FOR_DUPLICATE_BONUS_NUMBER = "보너스 번호는 로또 번호와 중복될 수 없습니다.";
 
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
@@ -19,18 +19,12 @@ public class WinningLotto {
         }
     }
 
-    public Rank getRankByLotto(Lotto otherLotto) {
-        int sameNumberCount = lotto.getSameNumberCount(otherLotto);
+    public Lotto getLotto() {
+        return lotto;
+    }
 
-        if (sameNumberCount == 5 && otherLotto.containsLottoNumber(bonusNumber)) {
-            return Rank.SECOND;
-        }
-
-        if (sameNumberCount == 5 && !otherLotto.containsLottoNumber(bonusNumber)) {
-            return Rank.THIRD;
-        }
-
-        return Rank.of(sameNumberCount);
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 
     @Override

@@ -9,46 +9,47 @@ import java.util.stream.Collectors;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(LottoQuantity lottoQuantity, LottoNumberGenerateStrategy lottoNumberGenerator) {
-        this.lottos = generateLottos(lottoQuantity, lottoNumberGenerator);
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    private List<Lotto> generateLottos(LottoQuantity lottoQuantity, LottoNumberGenerateStrategy lottoNumberGenerator) {
+    public static Lottos of(LottoQuantity lottoQuantity, LottoNumberGenerateStrategy lottoNumberGenerator) {
+        return new Lottos(generateLottos(lottoQuantity, lottoNumberGenerator));
+    }
+
+    public static Lottos from(List<Lotto> lottos) {
+        return new Lottos(lottos);
+    }
+
+    public static Lottos fromRawValues(List<Set<Integer>> values) {
+        return new Lottos(values.stream()
+                .map(Lotto::fromRawValues)
+                .collect(Collectors.toList()));
+    }
+
+    private static List<Lotto> generateLottos(LottoQuantity lottoQuantity,
+                                              LottoNumberGenerateStrategy lottoNumberGenerator) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoQuantity.getLottoQuantity(); i++) {
-            lottos.add(new Lotto(generateLottoNumbers(lottoNumberGenerator)));
+            lottos.add(Lotto.from(lottoNumberGenerator.generateNumbers()));
         }
+
         return lottos;
     }
 
-    private Set<LottoNumber> generateLottoNumbers(LottoNumberGenerateStrategy lottoNumberGenerator) {
-        return lottoNumberGenerator.generateLottoNumbers()
-                .stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
-    }
+    public static Lottos concat(Lottos lottos1, Lottos lottos2) {
+        List<Lotto> newLottoValues = new ArrayList<>(lottos1.lottos);
+        newLottoValues.addAll(lottos2.lottos);
 
-    public WinningResult getWinningResultByWinningLotto(WinningLotto winningLotto) {
-        return new WinningResult.Builder(new LottoQuantity(lottos.size()))
-                .first(getWinningCountByRank(winningLotto, Rank.FIRST))
-                .second(getWinningCountByRank(winningLotto, Rank.SECOND))
-                .third(getWinningCountByRank(winningLotto, Rank.THIRD))
-                .fourth(getWinningCountByRank(winningLotto, Rank.FOURTH))
-                .fifth(getWinningCountByRank(winningLotto, Rank.FIFTH))
-                .noMatch(getWinningCountByRank(winningLotto, Rank.NO_MATCH))
-                .build();
-    }
-
-    private WinningCount getWinningCountByRank(WinningLotto winningLotto, Rank rank) {
-        int winningCount = (int) lottos.stream()
-                .filter(lotto -> winningLotto.getRankByLotto(lotto).equals(rank))
-                .count();
-
-        return new WinningCount(winningCount);
+        return new Lottos(newLottoValues);
     }
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public int getSize() {
+        return lottos.size();
     }
 
     @Override

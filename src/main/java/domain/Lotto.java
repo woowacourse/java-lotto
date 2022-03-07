@@ -1,53 +1,74 @@
 package domain;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
+    public static final int SINGLE_LOTTO_PRICE = 1000;
+
     private static final int LOTTO_SIZE = 6;
-    private static final String ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS = "%d개의 숫자를 골라주세요.";
-    private static final String ERROR_MESSAGE_FOR_DUPLICATE_LOTTO_NUMBERS = "숫자는 중복될 수 없습니다.";
+
+    static final String ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS = String.format("%d개의 숫자를 골라주세요.", LOTTO_SIZE);
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<LottoNumber> lottoNumbers) {
-        validateSize(lottoNumbers);
-        validateDuplicate(lottoNumbers);
-
-        this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
+    private Lotto(Set<LottoNumber> numbers) {
+        this.lottoNumbers = numbers;
     }
 
-    private void validateSize(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(
-                    String.format(ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS, LOTTO_SIZE));
+    public static Lotto from(Set<LottoNumber> numbers) {
+        validateSize(numbers);
+        return new Lotto(numbers.stream().collect(Collectors.toUnmodifiableSet()));
+    }
+
+    public static Lotto fromRawValues(Set<Integer> numbers) {
+        validateSize(numbers);
+        return new Lotto(numbers.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toUnmodifiableSet()));
+    }
+
+    private static void validateSize(Set<?> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_SIZE_OF_LOTTO_NUMBERS);
         }
     }
 
-    private void validateDuplicate(Set<LottoNumber> lottoNumbers) {
-        if (isDuplicate(lottoNumbers)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_DUPLICATE_LOTTO_NUMBERS);
-        }
-    }
+    public int getSameNumberCount(Lotto otherLotto) {
+        List<LottoNumber> intersections = new ArrayList<>(lottoNumbers);
+        intersections.retainAll(otherLotto.lottoNumbers);
 
-    private boolean isDuplicate(Set<LottoNumber> lottoNumbers) {
-        return lottoNumbers.size() != lottoNumbers.stream()
-                .distinct()
-                .count();
-    }
-
-    public int getSameNumberCount(Lotto anotherLotto) {
-        return (int) lottoNumbers.stream()
-                .filter(anotherLotto::containsLottoNumber)
-                .count();
+        return intersections.size();
     }
 
     public boolean containsLottoNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public List<LottoNumber> getSortedLottoNumbers() {
+        return lottoNumbers.stream()
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) object;
+        return lottoNumbers.equals(lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 
     @Override

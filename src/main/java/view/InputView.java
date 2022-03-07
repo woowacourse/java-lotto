@@ -1,75 +1,99 @@
 package view;
 
-import domain.Lotto;
-import domain.Lottos;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";
-    public static final String ERROR_MESSAGE_FOR_INVALID_NUMBER = "숫자만 입력해주세요";
+
+    private static final String NUMBERS_INPUT_FORMAT_REGEX = ".(.)?, .(.)?, .(.)?, .(.)?, .(.)?, .(.)?";
+    private static final String SPLIT_DELIMITER = ", ";
+
+    private static final String ERROR_MESSAGE_FOR_INVALID_NUMBER = "숫자만 입력해주세요.";
+    private static final String ERROR_MESSAGE_FOR_INVALID_NUMBERS_INPUT_FORMAT = "잘못된 숫자 입력 형식입니다. '1, 2, 3, 4, 5, 6' 의 형태로 입력해주세요.";
+    private static final String ERROR_MESSAGE_FOR_EMPTY_INPUT = "빈 문자열을 입력할 수 없습니다.";
+
     private static final String MESSAGE_TO_GET_INPUT_MONEY = "구입금액을 입력해 주세요.";
-    private static final String MESSAGE_FOR_LOTTO_COUNT = "%d개를 구매했습니다.%n";
+    private static final String MESSAGE_FOR_MANUAL_LOTTO_QUANTITY = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MESSAGE_FOR_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String MESSAGE_FOR_WINNING_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String MESSAGE_FOR_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-    private static final String SPLIT_DELIMITER = ", ";
 
     public static int scanInputMoney() {
         System.out.println(MESSAGE_TO_GET_INPUT_MONEY);
-
-        try {
-            return Integer.parseInt(SCANNER.nextLine());
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_NUMBER);
-        }
+        return scanNumber();
     }
 
-    public static void printException(Exception exception) {
-        System.out.println(ERROR_MESSAGE_PREFIX + exception.getMessage());
+    public static int scanManualLottoQuantity() {
+        System.out.println(System.lineSeparator() + MESSAGE_FOR_MANUAL_LOTTO_QUANTITY);
+        return scanNumber();
     }
 
-    public static void printLottoQuantity(int count) {
-        System.out.printf(MESSAGE_FOR_LOTTO_COUNT, count);
+    public static List<Set<Integer>> scanManualLottoNumbers(int quantity) {
+        System.out.println(System.lineSeparator() + MESSAGE_FOR_MANUAL_LOTTO_NUMBERS);
+
+        return IntStream.range(0, quantity)
+                .mapToObj(i -> scanLottoNumbers())
+                .collect(Collectors.toList());
     }
 
-    public static List<Integer> scanWinningNumbers() {
-        System.out.print(System.lineSeparator());
-        System.out.println(MESSAGE_FOR_WINNING_LOTTO_NUMBERS);
-        String userInput = SCANNER.nextLine();
-
-        try {
-            return Arrays.stream(userInput.split(SPLIT_DELIMITER))
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_NUMBER);
-        }
+    public static Set<Integer> scanWinningLottoNumbers() {
+        System.out.println(System.lineSeparator() + MESSAGE_FOR_WINNING_LOTTO_NUMBERS);
+        return scanLottoNumbers();
     }
 
     public static int scanBonusNumber() {
         System.out.println(MESSAGE_FOR_BONUS_NUMBER);
+        return scanNumber();
+    }
+
+    private static int scanNumber() {
+        String input = scanInput();
 
         try {
-            return Integer.parseInt(SCANNER.nextLine());
+            return Integer.parseInt(input);
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_NUMBER);
         }
     }
 
-    public static void printLottos(Lottos lottos) {
-        lottos.getLottos()
-                .forEach(InputView::printSingleLotto);
+    private static Set<Integer> scanLottoNumbers() {
+        String input = scanInput();
+        validateNumbersInputFormat(input);
+
+        try {
+            return splitInputWithCommas(input);
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_NUMBER);
+        }
     }
 
-    public static void printSingleLotto(Lotto lotto) {
-        String joinedLottoNumbers = lotto.getLottoNumbers()
-                .stream()
-                .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
-                .collect(Collectors.joining(SPLIT_DELIMITER));
+    private static void validateNumbersInputFormat(String input) {
+        if (!input.matches(NUMBERS_INPUT_FORMAT_REGEX)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_NUMBERS_INPUT_FORMAT);
+        }
+    }
 
-        System.out.println("[" + joinedLottoNumbers + "]");
+    private static String scanInput() {
+        String input = SCANNER.nextLine();
+        validateEmpty(input);
+
+        return input;
+    }
+
+    private static void validateEmpty(String input) {
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_EMPTY_INPUT);
+        }
+    }
+
+    private static Set<Integer> splitInputWithCommas(String input) {
+        return Arrays.stream(input.split(SPLIT_DELIMITER))
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
     }
 }
