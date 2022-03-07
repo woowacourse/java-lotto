@@ -43,7 +43,7 @@ public class PrizeInformation {
 	}
 
 	private static void addCount(EnumMap<Prize, Integer> prizeInformation, Prize prize) {
-		prizeInformation.replace(prize, prizeInformation.get(prize) + 1);
+		prizeInformation.merge(prize, 1, Integer::sum);
 	}
 
 	public double calculateEarningRate(Money money) {
