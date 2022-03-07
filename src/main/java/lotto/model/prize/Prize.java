@@ -1,46 +1,46 @@
 package lotto.model.prize;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
-/*
- * 등수별 상금과 매칭 정보를 가지는 Enum Class
- */
 public enum Prize {
-    FIRST(6, 2_000_000_000, false),
-    SECOND(5, 30_000_000, true),
-    THIRD(5, 1_500_000, false),
-    FOURTH(4, 50_000, false),
-    FIFTH(3, 5_000, false),
-    NONE(0, 0, false);
+    FIRST(6, false, 2_000_000_000),
+    SECOND(5, true, 30_000_000),
+    THIRD(5, false, 1_500_000),
+    FOURTH(4, false, 50_000),
+    FIFTH(3, false, 5_000),
+    NONE(0, false, 0);
 
     private final int matchCount;
-    private final int amount;
     private final boolean bonus;
+    private final long amount;
+    private Predicate<MatchResult> winningCondition;
 
-    Prize(int matchCount, int amount, boolean bonus) {
+    Prize(int matchCount, boolean bonus, long amount) {
         this.matchCount = matchCount;
-        this.amount = amount;
         this.bonus = bonus;
+        this.amount = amount;
+        instanceWinningCondition(matchCount, bonus);
+    }
+
+    private void instanceWinningCondition(int matchCount, boolean bonus) {
+        if (bonus) {
+            this.winningCondition =
+                    (matchResult) -> matchResult.isCount(matchCount) && matchResult.isBonus();
+            return;
+        }
+        this.winningCondition = (matchResult) -> matchResult.isCount(matchCount);
     }
 
     public static Prize getPrize(MatchResult matchResult) {
-        if (!matchResult.isCount(SECOND.matchCount)) {
-            return getPrizeByCount(matchResult);
-        }
-        if (matchResult.isBonus()) {
-            return SECOND;
-        }
-        return THIRD;
-    }
-
-    private static Prize getPrizeByCount(MatchResult matchResult) {
         return Arrays.stream(values())
-                .filter(prize -> matchResult.isCount(prize.matchCount))
+                .filter(prize -> prize.winningCondition.test(matchResult))
                 .findFirst()
                 .orElse(NONE);
+
     }
 
-    public int pickAmount(int count) {
+    public long pickAmount(Long count) {
         return this.amount * count;
     }
 
@@ -48,7 +48,7 @@ public enum Prize {
         return matchCount;
     }
 
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
 

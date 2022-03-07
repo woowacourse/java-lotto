@@ -1,41 +1,72 @@
 package lotto.model;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 import lotto.model.number.LottoNumber;
-import lotto.model.number.LottoNumbers;
+import lotto.model.number.LottoNumberFactory;
 
-/*
- * 로또 한 장을 의미하는 Class
- */
 public class Lotto {
-    private static final String ERROR_UNIT = "[ERROR] 구매 금액은 1000원 단위로 입력하세요";
-    private static final int PRICE = 1000;
+    private static final String ERROR_SIZE = "[ERROR] 로또 번호는 6개여야 합니다";
+    private static final String ERROR_DUPLICATE = "[ERROR] 로또 번호는 중복되면 안됩니다";
+    private static final int NUMBERS_SIZE = 6;
 
-    private final LottoNumbers numbers;
+    private final List<LottoNumber> numbers;
 
-    public Lotto(LottoNumbers numbers) {
-        this.numbers = numbers;
+    public Lotto(List<LottoNumber> numbers) {
+        validate(numbers);
+        Collections.sort(numbers);
+        this.numbers = List.copyOf(numbers);
     }
 
-    public static int countAvailableTickets(Money money) {
-        checkUnit(money);
-        return money.countAvailable(PRICE);
+    private void validate(List<LottoNumber> numbers) {
+        checkSize(numbers);
+        checkDuplicate(numbers);
     }
 
-    private static void checkUnit(Money money) {
-        if (!money.isUnit(PRICE)) {
-            throw new IllegalArgumentException(ERROR_UNIT);
+    private void checkSize(List<LottoNumber> numbers) {
+        if (numbers.size() != NUMBERS_SIZE) {
+            throw new IllegalArgumentException(ERROR_SIZE);
         }
     }
 
+    private void checkDuplicate(List<LottoNumber> numbers) {
+        if (getDistinctCount(numbers) != numbers.size()) {
+            throw new IllegalArgumentException(ERROR_DUPLICATE);
+        }
+    }
+
+    private int getDistinctCount(List<LottoNumber> numbers) {
+        return (int) numbers.stream()
+                .distinct()
+                .count();
+    }
+
+    public static Lotto ofRandom() {
+        return new Lotto(LottoNumberFactory.getRandomNumbers(NUMBERS_SIZE));
+    }
+
+    public static Lotto from(List<String> rawNumbers) {
+        List<LottoNumber> numbers = rawNumbers.stream()
+                .map(LottoNumberFactory::getNumber)
+                .collect(Collectors.toList());
+        return new Lotto(numbers);
+    }
+
     public boolean contains(LottoNumber number) {
-        return this.numbers.contains(number);
+        return this.numbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(number));
     }
 
-    public int match(LottoNumbers comparingNumbers) {
-        return this.numbers.match(comparingNumbers);
+    public int match(Lotto comparingLotto) {
+        return (int) this.numbers.stream()
+                .filter(comparingLotto::contains)
+                .count();
     }
 
-    public LottoNumbers getNumbers() {
-        return this.numbers;
+    public List<Integer> getValues() {
+        return this.numbers.stream()
+                .map(LottoNumber::getValue)
+                .collect(Collectors.toList());
     }
 }
