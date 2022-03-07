@@ -19,23 +19,23 @@ public class Application {
     }
 
     public static void run() {
-        LottoController lottoController2 = new LottoController();
+        LottoController controller = new LottoController();
 
-        Budget budget = lottoController2.getBudget(InputView.inputBudget());
-        IssuedLottos allLottos = issueLottos(lottoController2, budget);
+        Budget budget = controller.getBudget(InputView.inputBudget());
+        IssuedLottos allLottos = issueLottos(controller, budget);
 
-        WinningLottoNumbers winningLottoNumbers = lottoController2.getWinningLottoNumbers(InputView.inputWinningLotto(),
+        WinningLottoNumbers winningLottoNumbers = controller.getWinningLottoNumbers(InputView.inputWinningLotto(),
                 InputView.inputBonusNumber());
-        LottoResult result = lottoController2.getResultOf(allLottos, winningLottoNumbers);
+        LottoResult result = controller.getResultOf(allLottos, winningLottoNumbers);
         OutputView.printResult(result.getResultMap(), result.getProfitRate(budget));
     }
 
-    private static IssuedLottos issueLottos(LottoController lottoController2, Budget budget) {
-        ManualLottoCount manualCount = lottoController2.getManualCount(InputView.inputManualCount(), budget);
+    private static IssuedLottos issueLottos(LottoController controller, Budget budget) {
+        ManualLottoCount manualCount = controller.getManualCount(InputView.inputManualCount(), budget);
         InputView.printManualLottoMessage();
-        IssuedLottos manualLottos = lottoController2.getManualLottos(inputManualLottos(manualCount));
-        IssuedLottos autoLottos = lottoController2.getAutoLottos(budget, manualLottos);
-        IssuedLottos allLottos = lottoController2.getAllLottos(manualLottos, autoLottos);
+        IssuedLottos manualLottos = controller.getManualLottos(inputManualLottos(manualCount));
+        IssuedLottos autoLottos = controller.getAutoLottos(budget, manualLottos);
+        IssuedLottos allLottos = controller.getAllLottos(manualLottos, autoLottos);
         OutputView.printIssuedLottos(manualLottos.getLottosCount(), autoLottos.getLottosCount(),
                 getNumbersOf(allLottos));
         return allLottos;
