@@ -24,12 +24,12 @@ public class Statistics {
         return result;
     }
 
-    public Map<Rank, Integer> getResult() {
-        return new EnumMap<>(result);
-    }
-
     public double calculateProfitRate(double inputMoney) {
         return sumTotal() / inputMoney;
+    }
+
+    public Map<Rank, Integer> getResult() {
+        return new EnumMap<>(result);
     }
 
     private long sumTotal() {
