@@ -4,7 +4,6 @@ import domain.LottoNumber;
 import domain.WinningNumbers;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -35,7 +34,7 @@ public class InputView {
         return checkAndConvertInteger(scanner.nextLine());
     }
 
-    public static List<List<Integer>> askManualLottoNumbers(int amount) {
+    public static List<List<LottoNumber>> askManualLottoNumbers(int amount) {
         if (amount == NO_AMOUNT) {
             return new ArrayList<>();
         }
@@ -45,7 +44,6 @@ public class InputView {
         return new ArrayList<>(askLottoNumbers(amount));
     }
 
-    //TO-DO
     public static WinningNumbers askWinningNumbers() {
         return new WinningNumbers(askWinningNumber().stream()
             .map(LottoNumber::new)
@@ -64,11 +62,12 @@ public class InputView {
         return checkAndConvertInteger(scanner.nextLine());
     }
 
-    private static List<List<Integer>> askLottoNumbers(int amount) {
-        List<List<Integer>> lottoNumbers = new ArrayList<>();
+    private static List<List<LottoNumber>> askLottoNumbers(int amount) {
+        List<List<LottoNumber>> lottoNumbers = new ArrayList<>();
         for (int i = START_INDEX; i < amount; i++) {
             List<String> numbers = Arrays.asList(scanner.nextLine().split(NUMBER_DELIMITER));
-            lottoNumbers.add(covertNumbersToInteger(numbers));
+            lottoNumbers.add(covertNumbersToInteger(numbers).stream().map(LottoNumber::new).collect(
+                Collectors.toList()));
         }
 
         return new ArrayList<>(lottoNumbers);

@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,17 +18,24 @@ public class LottoGenerator {
     private static final int START_INDEX = 0;
     private static final int FIRST_INDEX = 0;
 
-    private static final List<Integer> LOTTO_NUMBER_POOL = IntStream.rangeClosed(MIN_LOTTO_NUMBER,
+    private static final List<LottoNumber> LOTTO_NUMBER_POOL = IntStream.rangeClosed(MIN_LOTTO_NUMBER,
             MAX_LOTTO_NUMBER)
-        .boxed()
+        .mapToObj(LottoNumber::new)
         .collect(Collectors.toList());
 
+    private static final Comparator<LottoNumber> LOTTO_NUMBER_COMPARATOR = new Comparator<LottoNumber>() {
+        @Override
+        public int compare(LottoNumber a, LottoNumber b) {
+            return b.getLottoNumber() - a.getLottoNumber();
+        }
+    };
 
-    private final List<List<Integer>> manualLottoNumbers;
+
+    private final List<List<LottoNumber>> manualLottoNumbers;
     private final int autoAmount;
 
 
-    public LottoGenerator(List<List<Integer>> manualLottoNumbers, int autoAmount) {
+    public LottoGenerator(List<List<LottoNumber>> manualLottoNumbers, int autoAmount) {
         this.manualLottoNumbers = new ArrayList<>(manualLottoNumbers);
         this.autoAmount = autoAmount;
     }
@@ -41,13 +49,13 @@ public class LottoGenerator {
         return new ArrayList<>(lottos);
     }
 
-    private List<Lotto> generateManualLottos(List<List<Integer>> lottoNumbers) {
+    private List<Lotto> generateManualLottos(List<List<LottoNumber>> lottoNumbers) {
 
         List<Lotto> lottos = new ArrayList<>();
 
-        for (List<Integer> lottoNumber : lottoNumbers) {
+        for (List<LottoNumber> lottoNumber : lottoNumbers) {
             lottos.add(
-                new Lotto(lottoNumber.stream().map(LottoNumber::new).collect(Collectors.toList())));
+                new Lotto(new ArrayList<>(lottoNumber)));
         }
 
         return new ArrayList<>(lottos);
@@ -64,11 +72,15 @@ public class LottoGenerator {
 
     private Lotto generateAutoLotto() {
         Collections.shuffle(LOTTO_NUMBER_POOL);
-        List<Integer> lottoNumbers = new ArrayList<>(
+
+        List<LottoNumber> lottoNumbers = new ArrayList<>(
             LOTTO_NUMBER_POOL.subList(MIN_RANGE, MAX_RANGE));
-        Collections.sort(lottoNumbers);
-        return new Lotto(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
+
+        lottoNumbers.sort(LOTTO_NUMBER_COMPARATOR);
+
+        return new Lotto(lottoNumbers);
     }
+
 
     private boolean isEmptyManualLottoNumbers() {
         return manualLottoNumbers.get(FIRST_INDEX).isEmpty();
