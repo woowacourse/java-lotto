@@ -33,10 +33,10 @@ class LottoGameTest {
     void buyAutoLottosTest() {
         LottoGame lottoGame = new LottoGame(1000, 0, new TestAutoLottoFactory());
 
-        List<Lotto> autoLottos = lottoGame.getAutoLottos();
+        Map<String, List<Lotto>> lottosMap = lottoGame.getLottos();
         List<Lotto> expected = new Lottos(new TestAutoLottoFactory(), 1).getLottos();
 
-        assertThat(autoLottos.toString()).isEqualTo(expected.toString());
+        assertThat(lottosMap.get("Auto").toString()).isEqualTo(expected.toString());
     }
 
     @Test
