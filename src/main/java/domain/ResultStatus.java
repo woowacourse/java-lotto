@@ -36,6 +36,10 @@ public class ResultStatus {
         return totalIncome;
     }
 
+    public double calculateIncomeRate(int purchaseAmount) {
+        return calculateTotalIncome() / purchaseAmount;
+    }
+
     public Map<Rank, Integer> getResultStatistics() {
         return Collections.unmodifiableMap(resultStatistics);
     }

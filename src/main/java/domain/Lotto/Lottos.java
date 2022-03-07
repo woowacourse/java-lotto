@@ -1,6 +1,5 @@
 package domain.Lotto;
 
-import domain.Money;
 import domain.Rank;
 
 import java.util.ArrayList;
@@ -21,10 +20,6 @@ public class Lottos {
             results.add(lotto.compare(winningLotto));
         }
         return results;
-    }
-
-    public double calculateIncomeRate(double totalIncome) {
-        return totalIncome / (lottos.size() * Money.LOTTO_PRICE);
     }
 
     public List<Lotto> getLottos() {

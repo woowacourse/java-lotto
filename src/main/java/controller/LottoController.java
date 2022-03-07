@@ -44,9 +44,8 @@ public class LottoController {
         return resultStatus;
     }
 
-    public double calculateImcomeRate(ResultStatus resultStatus, Lottos lottos) {
-        double totalIncome = resultStatus.calculateTotalIncome();
-        return lottos.calculateIncomeRate(totalIncome);
+    public double calculateImcomeRate(ResultStatus resultStatus, Money money) {
+        return resultStatus.calculateIncomeRate(money.getAmount());
     }
 }
 

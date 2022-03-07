@@ -21,6 +21,6 @@ public class Application {
         WinningLotto winningLotto = lottoController.determineWinningNumber(inputView.inputWinningNumber(), inputView.inputBonusBall());
         ResultStatus resultStatus = lottoController.makeResult(lottos, winningLotto);
         outputView.printResult(resultStatus.getResultStatistics());
-        outputView.printIncomeRate(lottoController.calculateImcomeRate(resultStatus, lottos));
+        outputView.printIncomeRate(lottoController.calculateImcomeRate(resultStatus, money));
     }
 }
