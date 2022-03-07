@@ -28,14 +28,6 @@ class MoneyTest {
     }
 
     @Test
-    @DisplayName("로또 금액보다 Money의 상태가 크면 True를 반환한다.")
-    void isBiggerThanLottoPriceTest() {
-        int amount = 2000;
-        Money money = new Money(amount);
-        assertThat(money.isBiggerThanLottoPrice()).isTrue();
-    }
-
-    @Test
     @DisplayName("금액으로 구매할 수 있는 총 로또 갯수를 잘 반환하는지 확인한다.")
     void calculateTotalLottoCountTest() {
         int amount = 15000;

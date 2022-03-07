@@ -30,10 +30,6 @@ public class Money {
         }
     }
 
-    public boolean isBiggerThanLottoPrice() {
-        return amount >= LOTTO_PRICE;
-    }
-
     public int calculatePurchasableLottoCount() {
         return amount / LOTTO_PRICE;
     }
