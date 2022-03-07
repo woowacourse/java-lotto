@@ -23,6 +23,8 @@ public class LottoController {
 
         WinningChecker winningChecker = new WinningChecker(lottos, InputView.askWinningNumbers());
 
+        winningChecker.check();
+
         OutputView.printWinningStatistic(winningChecker.getStatisticMap());
         OutputView.printYield(winningChecker.getYield());
     }
