@@ -17,7 +17,7 @@ class MoneyManagerTest {
     @Test
     void 구입한_로또_개수_테스트() {
         MoneyManager moneyManager = new MoneyManager(14000);
-        int result = moneyManager.getLottoCount();
+        int result = moneyManager.getPossibleLottoCount(0);
         assertThat(result).isEqualTo(14);
     }
 
@@ -40,8 +40,14 @@ class MoneyManagerTest {
     @Test
     void 당첨_수익률_계산_기능_테스트() {
         List<Rank> result = List.of(Rank.MATCH_THREE_NUMBERS, Rank.MATCH_FOUR_NUMBERS);
-        Ranks ranks = new Ranks(result);
+        Ranks ranks = Ranks.getRanksFrom(result);
         MoneyManager moneyManager = new MoneyManager(14000);
         assertThat(moneyManager.calculateYield(ranks.getLottoTotalReward())).isEqualTo(55000 / (double) 14000);
+    }
+
+    @Test
+    void 수동_로또_개수만큼_구입_가능한_자동_로또_개수_감소_테스트() {
+        MoneyManager moneyManager = new MoneyManager(14000);
+        assertThat(moneyManager.getPossibleLottoCount(10)).isEqualTo(4);
     }
 }
