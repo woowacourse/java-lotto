@@ -4,7 +4,7 @@ import utils.ExceptionMessage;
 
 public class Money {
 
-    static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private int amount;
 
