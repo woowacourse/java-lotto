@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Map;
 import lotterymachine.dto.ManualTicketDto;
 import lotterymachine.model.TicketMachine;
+import lotterymachine.model.WinningLottery;
 import lotterymachine.model.WinningType;
 import lotterymachine.vo.Ball;
 import lotterymachine.vo.Count;
@@ -27,10 +28,9 @@ public class LotteryMachine {
         Count numberOfManualTickets = getNumberOfManualTickets(numberOfTickets);
         LotteryTickets purchasedLotteryTickets = purchaseLotteryTickets(numberOfTickets, numberOfManualTickets);
 
-        LotteryTicket winningTicket = getWinningTicket();
-        int bonusNumber = InputView.getBonusNumber(winningTicket.getBalls());
+        WinningLottery winningLottery = getWinningLottery();
 
-        showResult(purchasedLotteryTickets, winningTicket, bonusNumber);
+        showResult(purchasedLotteryTickets, winningLottery);
     }
 
     private static Money getInputAmount() {
@@ -70,19 +70,19 @@ public class LotteryMachine {
         return lotteryTickets;
     }
 
-    private static LotteryTicket getWinningTicket() {
+    private static WinningLottery getWinningLottery() {
         try {
-            List<Integer> winningNumbers = InputView.getWinningNumbers();
-            return new LotteryTicket(Ball.getBalls(winningNumbers));
+            return new WinningLottery(InputView.getWinningNumbers(), InputView.getBonusNumber());
         } catch (RuntimeException exception) {
             OutputView.printException(exception.getMessage());
-            return getWinningTicket();
+            return getWinningLottery();
         }
     }
 
-    private static void showResult(LotteryTickets lotteryTickets, LotteryTicket winningTicket, int bonusNumber) {
-        Map<WinningType, Count> ticketsResult = lotteryTickets.getLotteriesResult(winningTicket,
-                Ball.from(bonusNumber));
+    private static void showResult(LotteryTickets lotteryTickets, WinningLottery winningLottery) {
+        LotteryTicket winningTicket = winningLottery.getWinningTicket();
+        Ball bonusBall = winningLottery.getBonusBall();
+        Map<WinningType, Count> ticketsResult = lotteryTickets.getLotteriesResult(winningTicket, bonusBall);
         List<LotteryResultDto> lotteryResult = LotteryResultDto.createLotteryResults(ticketsResult);
         Collections.sort(lotteryResult);
         OutputView.printStatistics(lotteryResult);

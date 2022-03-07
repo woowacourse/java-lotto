@@ -16,7 +16,6 @@ public class InputView {
     private static final String IS_NOT_NUMBER_EXCEPTION = "숫자만 입력할 수 있습니다.";
     private static final String MANUAL_TICKET_SIZE_EXCEPTION = "6개의 숫자를 입력해야합니다.";
     private static final String MANUAL_TICKET_DUPLICATE_NUMBER_EXCEPTION = "숫자가 중복될 수 없습니다.";
-    private static final String DUPLICATE_BONUS_NUMBER_EXCEPTION = "보너스 볼이 당첨 번호와 중복됩니다.";
 
     public static int getAmount() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -68,22 +67,9 @@ public class InputView {
         return toIntegers(input);
     }
 
-    public static int getBonusNumber(List<Integer> numbers) {
+    public static int getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        try {
-            int bonusNumber = toInt(scanner.nextLine());
-            validateBonusNumber(numbers, bonusNumber);
-            return bonusNumber;
-        } catch (RuntimeException runtimeException) {
-            OutputView.printException(runtimeException.getMessage());
-            return getBonusNumber(numbers);
-        }
-    }
-
-    private static void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
-        if (numbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER_EXCEPTION);
-        }
+        return toInt(scanner.nextLine());
     }
 
     private static int toInt(String input) {
