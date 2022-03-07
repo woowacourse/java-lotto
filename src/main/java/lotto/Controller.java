@@ -1,79 +1,87 @@
 package lotto;
 
-import java.util.Arrays;
-import java.util.List;
-
-import lotto.model.Lotto;
-import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.dto.LottoDTO;
 import lotto.model.dto.PrizeInformationDTO;
-import lotto.model.number.BonusNumber;
-import lotto.model.number.Number;
-import lotto.model.number.WinningNumbers;
-import lotto.model.prize.MatchResult;
-import lotto.model.prize.PrizeInformations;
+import lotto.model.lotto.Lotto;
+import lotto.model.lotto.Lottos;
+import lotto.model.lotto.WinningBalls;
+import lotto.model.prize.PrizeInformation;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class Controller {
 
 	public void run() {
-		Money money = Money.from(InputView.askMoneyAmount());
+		Money money = getMoney();
+		int totalCount = getTotalCount(money);
+		int manualCount = getManualCount(totalCount);
+		Lottos lottos = purchase(totalCount, manualCount);
 
-		Lottos lottos = purchaseLottos(money);
+		showPurchase(totalCount, manualCount, lottos);
 
-		WinningNumbers winningNumbers = getWinningNumbers();
-		PrizeInformations prizeInformations =
-				getPrize(lottos, winningNumbers, getBonusNumber(winningNumbers));
+		WinningBalls winningBalls = getWinningNumbers();
+		PrizeInformation prizeInformation =
+			getPrize(lottos, winningBalls);
 
-		ResultView.showEarningRate(prizeInformations.calculateEarningRate(money));
+		ResultView.showEarningRate(prizeInformation.calculateEarningRate(money));
 	}
 
-	private PrizeInformations getPrize(
-			Lottos lottos, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-		List<MatchResult> matchResults = lottos.match(winningNumbers, bonusNumber);
-
-		return getPrizeInformations(matchResults);
+	private Money getMoney() {
+		try {
+			return Money.from(InputView.askMoneyAmount());
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return getMoney();
+		}
 	}
 
-	private PrizeInformations getPrizeInformations(List<MatchResult> matchResults) {
-		PrizeInformations prizeInformations = PrizeInformations.from(matchResults);
-		ResultView.showPrizeInformation(PrizeInformationDTO.from(prizeInformations));
-
-		return prizeInformations;
+	private int getTotalCount(Money money) {
+		try {
+			return Lotto.countTickets(money);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return getTotalCount(money);
+		}
 	}
 
-	private Lottos purchaseLottos(Money money) {
-		int purchaseCount = getPurchaseCount(money);
-
-		return purchaseLottos(purchaseCount);
+	private int getManualCount(int totalCount) {
+		try {
+			return InputView.askManualLottoCount(totalCount);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return getManualCount(totalCount);
+		}
 	}
 
-	private int getPurchaseCount(Money money) {
-		int purchaseCount = Lotto.countAvailableTickets(money);
-		ResultView.showPurchaseCount(purchaseCount);
-
-		return purchaseCount;
+	private Lottos purchase(int totalCount, int manualCount) {
+		try {
+			return Lottos.purchase(totalCount, manualCount, InputView.askManualLottoNumbers(manualCount));
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return purchase(totalCount, manualCount);
+		}
 	}
 
-	private Lottos purchaseLottos(int purchaseCount) {
-		Lottos lottos = Lottos.purchase(purchaseCount);
+	private void showPurchase(int totalCount, int manualCount, Lottos lottos) {
+		ResultView.showPurchaseCount(totalCount, manualCount);
 		ResultView.showLottos(LottoDTO.from(lottos));
-
-		return lottos;
 	}
 
-	private WinningNumbers getWinningNumbers() {
-		List<String> winningNumbersInput = Arrays.asList(InputView.askWinningNumbers());
+	private PrizeInformation getPrize(Lottos lottos, WinningBalls winningBalls) {
+		PrizeInformation prizeInformation = PrizeInformation.from(lottos, winningBalls);
+		ResultView.showPrizeInformation(PrizeInformationDTO.from(prizeInformation));
 
-		return WinningNumbers.from(winningNumbersInput);
+		return prizeInformation;
 	}
 
-	private BonusNumber getBonusNumber(WinningNumbers winningNumbers) {
-		String bonusNumberInput = InputView.askBonusNumber();
-
-		return BonusNumber.from(Number.from(bonusNumberInput), winningNumbers);
+	private WinningBalls getWinningNumbers() {
+		try {
+			return WinningBalls.from(InputView.askWinningNumbers(), InputView.askBonusNumber());
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return getWinningNumbers();
+		}
 	}
 
 }

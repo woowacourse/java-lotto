@@ -2,75 +2,68 @@ package lotto.model.prize;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
-
-import lotto.model.Lotto;
-import lotto.model.number.BonusNumber;
-import lotto.model.number.Number;
-import lotto.model.number.WinningNumbers;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PrizeTest {
-	WinningNumbers winningNumbers;
-	BonusNumber bonusNumber;
 
-	@BeforeEach
-	void initializePrizeInformation() {
-		winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "4", "5", "6"));
-		bonusNumber = BonusNumber.from(Number.from("10"), winningNumbers);
-	}
-
-	@DisplayName("3개가 일치하면 5등을 반환한다")
+	@DisplayName("1개가 일치하고 보너스가 false면 NONE 을 반환한다")
 	@Test
-	void match_3_fifth() {
-		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
-
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
-
-		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.FIFTH);
+	void none_1_false() {
+		assertThat(Prize.getPrize(1, false)).isEqualTo(Prize.NONE);
 	}
 
-	@DisplayName("4개가 일치하면 4등을 반환한다")
+	@DisplayName("1개가 일치하고 보너스가 true면 NONE 을 반환한다")
 	@Test
-	void match_4_fourth() {
-		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 8, 9));
-
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
-
-		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.FOURTH);
+	void none_1_true() {
+		assertThat(Prize.getPrize(1, true)).isEqualTo(Prize.NONE);
 	}
 
-	@DisplayName("5개가 일치하면 3등을 반환한다")
+	@DisplayName("3개가 일치하고 보너스가 false면 FIFTH 을 반환한다")
 	@Test
-	void match_5_third() {
-		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 9));
-
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
-
-		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.THIRD);
+	void fifth_3_false() {
+		assertThat(Prize.getPrize(3, false)).isEqualTo(Prize.FIFTH);
 	}
 
-	@DisplayName("6개가 일치하면 1등을 반환한다")
+	@DisplayName("3개가 일치하고 보너스가 true면 FIFTH 을 반환한다")
 	@Test
-	void match_6_first() {
-		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
-
-		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.FIRST);
+	void fifth_3_true() {
+		assertThat(Prize.getPrize(3, true)).isEqualTo(Prize.FIFTH);
 	}
 
-	@DisplayName("5개가 일치하고 보너스가 일치하면 2등을 반환한다")
+	@DisplayName("4개가 일치하고 보너스가 false면 FOURTH 을 반환한다")
 	@Test
-	void match_5_bonus_second() {
-		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10));
-
-		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
-
-		assertThat(Prize.getPrize(matchResult)).isEqualTo(Prize.SECOND);
+	void fourth_4_false() {
+		assertThat(Prize.getPrize(4, false)).isEqualTo(Prize.FOURTH);
 	}
 
+	@DisplayName("4개가 일치하고 보너스가 true면 FOURTH 을 반환한다")
+	@Test
+	void fourth_4_true() {
+		assertThat(Prize.getPrize(4, true)).isEqualTo(Prize.FOURTH);
+	}
+
+	@DisplayName("5개가 일치하고 보너스가 false면 THIRD 을 반환한다")
+	@Test
+	void third_5_false() {
+		assertThat(Prize.getPrize(5, false)).isEqualTo(Prize.THIRD);
+	}
+
+	@DisplayName("5개가 일치하고 보너스가 true면 SECOND 을 반환한다")
+	@Test
+	void second_5__true() {
+		assertThat(Prize.getPrize(5, true)).isEqualTo(Prize.SECOND);
+	}
+
+	@DisplayName("6개가 일치하고 보너스가 false면 FIRST 을 반환한다")
+	@Test
+	void first_6_false() {
+		assertThat(Prize.getPrize(6, false)).isEqualTo(Prize.FIRST);
+	}
+
+	@DisplayName("6개가 일치하고 보너스가 true면 FIRST 을 반환한다")
+	@Test
+	void first_6_true() {
+		assertThat(Prize.getPrize(6, true)).isEqualTo(Prize.FIRST);
+	}
 }

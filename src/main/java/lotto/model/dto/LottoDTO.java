@@ -3,23 +3,24 @@ package lotto.model.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.model.Lottos;
+import lotto.model.lotto.LottoBall;
+import lotto.model.lotto.Lottos;
 
 public class LottoDTO {
 
-	private final List<Integer> numbers;
+	private final List<LottoBall> lottoBalls;
 
-	private LottoDTO(List<Integer> numbers) {
-		this.numbers = numbers;
+	private LottoDTO(List<LottoBall> lottoBalls) {
+		this.lottoBalls = lottoBalls;
 	}
 
 	public static List<LottoDTO> from(Lottos lottos) {
 		return lottos.getLottos().stream()
-				.map(lotto -> new LottoDTO(lotto.getNumbers()))
-				.collect(Collectors.toList());
+			.map(lotto -> new LottoDTO(lotto.getLotto()))
+			.collect(Collectors.toList());
 	}
 
-	public List<Integer> getNumbers() {
-		return numbers;
+	public List<LottoBall> getLottoBalls() {
+		return lottoBalls;
 	}
 }

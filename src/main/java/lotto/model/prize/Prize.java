@@ -3,12 +3,12 @@ package lotto.model.prize;
 import java.util.Arrays;
 
 public enum Prize {
-	FIRST(6, 2_000_000_000, false),
-	SECOND(5, 30_000_000, true),
-	THIRD(5, 1_500_000, false),
-	FOURTH(4, 50_000, false),
+	NONE(0, 0, false),
 	FIFTH(3, 5_000, false),
-	NONE(0, 0, false);
+	FOURTH(4, 50_000, false),
+	THIRD(5, 1_500_000, false),
+	SECOND(5, 30_000_000, true),
+	FIRST(6, 2_000_000_000, false);
 
 	private final int matchCount;
 	private final int amount;
@@ -20,21 +20,14 @@ public enum Prize {
 		this.bonus = bonus;
 	}
 
-	public static Prize getPrize(MatchResult matchResult) {
-		if (!matchResult.isCount(SECOND.matchCount)) {
-			return getPrizeByCount(matchResult);
-		}
-		if (matchResult.isBonus()) {
+	public static Prize getPrize(int matchCount, boolean bonus) {
+		if (matchCount == THIRD.matchCount && bonus) {
 			return SECOND;
 		}
-		return THIRD;
-	}
-
-	private static Prize getPrizeByCount(MatchResult matchResult) {
 		return Arrays.stream(values())
-				.filter(prize -> matchResult.isCount(prize.matchCount))
-				.findFirst()
-				.orElse(NONE);
+			.filter(prize -> prize.matchCount == matchCount)
+			.findFirst()
+			.orElse(NONE);
 	}
 
 	public int pickAmount(int count) {

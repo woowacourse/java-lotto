@@ -3,8 +3,7 @@ package lotto.model.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.model.prize.Prize;
-import lotto.model.prize.PrizeInformations;
+import lotto.model.prize.PrizeInformation;
 
 public class PrizeInformationDTO {
 	private final int matchingCount;
@@ -19,15 +18,11 @@ public class PrizeInformationDTO {
 		this.prizeCount = prizeCount;
 	}
 
-	public static List<PrizeInformationDTO> from(PrizeInformations prizeInformations) {
-		return prizeInformations.getPrizeInformations().stream()
-				.map(prizeInformation -> {
-					Prize prize = prizeInformation.getPrize();
-					return new PrizeInformationDTO(
-							prize.getMatchCount(), prize.isBonus(), prize.getAmount(), prizeInformation.getCount());
-
-				})
-				.collect(Collectors.toList());
+	public static List<PrizeInformationDTO> from(PrizeInformation prizeInformation) {
+		return prizeInformation.getKeys().stream()
+			.map(prize -> new PrizeInformationDTO(
+				prize.getMatchCount(), prize.isBonus(), prize.getAmount(), prizeInformation.getCount(prize)))
+			.collect(Collectors.toList());
 	}
 
 	public int getMatchingCount() {
