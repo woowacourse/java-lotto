@@ -1,15 +1,18 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAXIMUM_LOTTO_NUMBER = 45;
-    private static final LottoNumber[] LOTTO_NUMBERS = new LottoNumber[MAXIMUM_LOTTO_NUMBER + 1];
+
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBERS = new HashMap<>();
 
     static {
-        for (int i = MINIMUM_LOTTO_NUMBER; i < LOTTO_NUMBERS.length; i++) {
-            LOTTO_NUMBERS[i] = new LottoNumber(i);
+        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
+            LOTTO_NUMBERS.put(i, new LottoNumber(i));
         }
     }
 
@@ -32,7 +35,7 @@ public class LottoNumber {
 
     public static LottoNumber of(int number) {
         checkRange(number);
-        return LOTTO_NUMBERS[number];
+        return LOTTO_NUMBERS.get(number);
     }
 
     public static LottoNumber parse(String text) {
