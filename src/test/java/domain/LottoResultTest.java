@@ -34,10 +34,7 @@ public class LottoResultTest {
     @DisplayName("2등 로또 당첨 결과 2개 생성")
     void createLottoResult() {
         // given
-        LottoResult lottoResult = LottoResult.builder()
-                .winningLotto(winningLotto)
-                .lottos(lottos)
-                .build();
+        LottoResult lottoResult = LottoResult.of(winningLotto, lottos);
 
         // when
         LongSummaryStatistics secondPlaceSummary = lottoResult.getLottoResultByRank(Rank.SECOND);
