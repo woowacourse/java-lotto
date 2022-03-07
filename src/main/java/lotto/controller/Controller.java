@@ -94,7 +94,7 @@ public class Controller {
     }
 
     private static void summarize(Lottoes issuedLottoes, WinnerLotto winnerLotto) {
-        Statistic statistic = winnerLotto.summarize(issuedLottoes);
+        Statistic statistic = Statistic.summarizeBy(winnerLotto.summarize(issuedLottoes));
         OutputView.printStatistic(statistic.getCountByRank(FIRST), statistic.getCountByRank(SECOND),
             statistic.getCountByRank(THIRD), statistic.getCountByRank(FOURTH),
             statistic.getCountByRank(FIFTH), statistic.getProfitRate().getDoubleValue());
