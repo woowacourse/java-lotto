@@ -23,7 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	public static List<LottoNumber> makeLottoNumbers() {
 		return IntStream.range(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
-			.mapToObj(number -> LottoNumber.valueOf(number))
+			.mapToObj(LottoNumber::valueOf)
 			.collect(Collectors.toList());
 	}
 
