@@ -1,8 +1,9 @@
 import controller.LottoController;
-import domain.LottoGenerator.AutoLottoGenerator;
-import domain.LottoGenerator.ManualLottoGenerator;
-import dto.LottoCountDto;
-import dto.LottosDto;
+import domain.Lotto.Lottos;
+import domain.Lotto.WinningLotto;
+import domain.ResultStatus;
+import domain.LottoCount;
+import domain.Money;
 import view.InputView;
 import view.OutputView;
 
@@ -12,15 +13,14 @@ public class Application {
         OutputView outputView = OutputView.getInstance();
         LottoController lottoController = new LottoController();
 
-        LottoCountDto lottoCountDto = lottoController.selectLottoCount(inputView.inputPurchaseAmount(), inputView.inputManualLottoCount());
+        Money money = lottoController.chargeMoney(inputView.inputPurchaseAmount());
+        LottoCount lottoCount = lottoController.selectLottoCount(money, inputView.inputManualLottoCount());
+        Lottos lottos = lottoController.purchaseLotto(lottoCount, inputView.inputManualLottoNumber(lottoCount.getManualLottoCount()));
+        outputView.printPurchasedLotto(lottoCount.getManualLottoCount(), lottoCount.getAutoLottoCount(), lottos);
 
-        lottoController.purchaseLotto(new ManualLottoGenerator(), inputView.inputManualLottoNumber(lottoCountDto.getManualLottoCount()));
-        LottosDto lottosDto = lottoController.purchaseLotto(new AutoLottoGenerator(), null);
-
-        outputView.printPurchasedLotto(lottoCountDto, lottosDto);
-
-        lottoController.determineWinningNumber(inputView.inputWinningNumber(), inputView.inputBonusBall());
-
-        outputView.printResult(lottoController.makeResult());
+        WinningLotto winningLotto = lottoController.determineWinningNumber(inputView.inputWinningNumber(), inputView.inputBonusBall());
+        ResultStatus resultStatus = lottoController.makeResult(lottos, winningLotto);
+        outputView.printResult(resultStatus.getResultStatistics());
+        outputView.printIncomeRate(lottoController.calculateImcomeRate(resultStatus, lottos));
     }
 }
