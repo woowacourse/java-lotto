@@ -16,7 +16,7 @@ public class Controller {
         Lottos lottos = getLottos(lottoCounter);
         OutputView.printLottos(lottoCounter, lottos);
 
-        RankCounter rankCounter = new RankCounter(lottos, getWinningNumbers());
+        RankCounter rankCounter = RankCounter.newInstance(lottos, getWinningNumbers());
         OutputView.printWinningStatistic(lottoPurchaseMoney, rankCounter);
     }
 

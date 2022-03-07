@@ -8,24 +8,29 @@ public class RankCounter {
 
     private final Map<Rank, Integer> rankCount;
 
-    public RankCounter(Lottos lottos, WinningNumbers winningNumbers) {
-        this.rankCount = new EnumMap<>(Rank.class);
-        initRankCount();
-        calculateRank(lottos, winningNumbers);
+    private RankCounter(Map<Rank, Integer> rankCount) {
+        this.rankCount = rankCount;
     }
 
-    private void initRankCount() {
+    public static RankCounter newInstance(Lottos lottos, WinningNumbers winningNumbers){
+        Map<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
+        initRankCount(rankCount);
+        calculateRank(rankCount, lottos, winningNumbers);
+        return new RankCounter(rankCount);
+    }
+
+    private static void initRankCount(Map<Rank, Integer> rankCount) {
         Arrays.stream(Rank.values())
                 .forEach(rank -> rankCount.put(rank, 0));
     }
 
-    private void calculateRank(Lottos lottos, WinningNumbers winningNumbers) {
+    private static void calculateRank(Map<Rank, Integer> rankCount, Lottos lottos, WinningNumbers winningNumbers) {
         lottos.getLottos().stream()
                 .map(lotto -> lotto.getRank(winningNumbers))
-                .forEach(this::increaseCount);
+                .forEach(rank -> increaseCount(rankCount, rank));
     }
 
-    private void increaseCount(Rank rank) {
+    private static void increaseCount(Map<Rank, Integer> rankCount, Rank rank) {
         rankCount.computeIfPresent(rank, (keyRank, count) -> count + 1);
     }
 
