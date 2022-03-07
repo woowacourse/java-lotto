@@ -34,7 +34,7 @@ public class LottoMachine {
         return totalLottoCount.getAutoCount();
     }
     
-    public List<Lotto> getLottos() {
+    public List<Lotto> getLottoGroupForPrint() {
         return lottos.getLottos();
     }
 

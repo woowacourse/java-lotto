@@ -35,7 +35,7 @@ public class LottoController {
 
         outputView.printTotalLottoCount(lottoMachine.getManualLottoCount(),
                 lottoMachine.getAutoLottoCount());
-        outputView.printTotalLottoGroupNumbers(convertLottosToDtos(lottoMachine.getLottos()));
+        outputView.printTotalLottoGroupNumbers(convertLottosToDtos(lottoMachine.getLottoGroupForPrint()));
     }
 
     private List<LottoDto> convertLottosToDtos(final List<Lotto> lottos) {
