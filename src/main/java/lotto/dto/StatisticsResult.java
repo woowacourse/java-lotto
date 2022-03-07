@@ -7,9 +7,9 @@ import lotto.domain.LottoRank;
 public class StatisticsResult {
 
     private final Map<LottoRank, Long> statisticsByRank;
-    private final double earningRate;
+    private final String earningRate;
 
-    public StatisticsResult(Map<LottoRank, Long> statisticsByRank, double earningRate) {
+    public StatisticsResult(Map<LottoRank, Long> statisticsByRank, String earningRate) {
         this.statisticsByRank = statisticsByRank;
         this.earningRate = earningRate;
     }
@@ -18,7 +18,7 @@ public class StatisticsResult {
         return Collections.unmodifiableMap(statisticsByRank);
     }
 
-    public double getEarningRate() {
+    public String getEarningRate() {
         return earningRate;
     }
 }

@@ -5,11 +5,14 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.ManualCount;
 import lotto.domain.Money;
-import lotto.domain.RandomNumberGenerator;
+import lotto.domain.LottoTicketGroup;
+import lotto.utils.RandomNumberGenerator;
 import lotto.domain.WinningTicket;
 import lotto.dto.LottoTicketResponse;
 import lotto.dto.StatisticsResult;
+import lotto.utils.StringNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -25,7 +28,9 @@ public class LottoController {
 
     public void run() {
         Money money = new Money(inputView.inputMoney());
-        LottoTickets lottoTickets = createLottoTickets(money);
+        ManualCount manualCount = ManualCount.of(money, inputView.inputManualLottoCount());
+
+        LottoTicketGroup lottoTickets = createLottoTickets(money, manualCount);
         WinningTicket winningTicket = getWinningTicket();
 
         StatisticsResult result = getStatisticsResult(money, lottoTickets, winningTicket);
@@ -33,25 +38,50 @@ public class LottoController {
         outputView.outputEarningRate(result.getEarningRate());
     }
 
-    private LottoTickets createLottoTickets(Money money) {
-        LottoTickets lottoTickets = LottoTickets.buy(new RandomNumberGenerator(LottoNumber.MIN,
-            LottoNumber.MAX), money);
-        List<LottoTicketResponse> lottoTicketsResponse = LottoTicketResponse.from(
-            lottoTickets);
+    private LottoTicketGroup createLottoTickets(Money money, ManualCount manualCount) {
+        List<String> inputManualLottoTickets = inputView.inputManualLottoTickets(
+            manualCount.getCount());
+        Money changes = money.changes(manualCount.getCount());
+        LottoTicketGroup lottoTickets = getLottoTickets(inputManualLottoTickets, changes, manualCount);
+        List<LottoTicketResponse> lottoTicketsResponse = LottoTicketResponse.from(lottoTickets);
+
+        outputView.outputLottoCount(manualCount.getCount(), changes.count());
         outputView.outputTickets(lottoTicketsResponse);
+
         return lottoTickets;
+    }
+
+    private LottoTicketGroup getLottoTickets(List<String> inputManualLottoTickets, Money changes,
+        ManualCount manualCount) {
+        LottoTickets manualTickets = getManualTickets(inputManualLottoTickets, manualCount);
+        LottoTickets autoTickets = getAutoLottoTickets(changes);
+        return new LottoTicketGroup(manualTickets, autoTickets);
+    }
+
+    private LottoTickets getManualTickets(List<String> inputManualLottoTickets,
+        ManualCount manualCount) {
+        return LottoTickets.buyTicket(
+            new StringNumberGenerator(inputManualLottoTickets),
+            manualCount.getCount());
+    }
+
+    private LottoTickets getAutoLottoTickets(Money changes) {
+        return LottoTickets.buyTicket(
+            new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX),
+            changes.count()
+        );
     }
 
     private WinningTicket getWinningTicket() {
         return new WinningTicket(
-            LottoTicket.createWinningTicket(inputView.inputWinningNumber()),
+            LottoTicket.createTicket(new StringNumberGenerator(inputView.inputWinningNumber())),
             new LottoNumber(inputView.inputBonusBall()));
     }
 
-    private StatisticsResult getStatisticsResult(Money money, LottoTickets lottoTickets,
+    private StatisticsResult getStatisticsResult(Money money, LottoTicketGroup lottoTickets,
         WinningTicket winningTicket) {
         LottoStatistics lottoStatistics = lottoTickets.findLottoWinners(winningTicket);
-        double earningRate = lottoStatistics.calculateEarningRates(money);
+        String earningRate = lottoStatistics.calculateEarningRates(money);
         return new StatisticsResult(lottoStatistics.getStatisticsByRank(),
             earningRate);
     }

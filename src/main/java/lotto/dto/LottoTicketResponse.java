@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.LottoTicketGroup;
 
 public class LottoTicketResponse {
 
@@ -15,8 +15,8 @@ public class LottoTicketResponse {
         this.lottoTicketResponse = lottoTicketResponse;
     }
 
-    public static List<LottoTicketResponse> from(LottoTickets lottoTickets) {
-        List<LottoTicket> tickets = lottoTickets.getTickets();
+    public static List<LottoTicketResponse> from(LottoTicketGroup lottoTickets) {
+        List<LottoTicket> tickets = lottoTickets.getTotalTickets();
         return tickets.stream().map(
             ticket -> new LottoTicketResponse(getLottoNumbers(ticket))
         ).collect(Collectors.toList());

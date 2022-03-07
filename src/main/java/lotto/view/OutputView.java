@@ -9,10 +9,14 @@ import lotto.dto.StatisticsResult;
 
 public class OutputView {
 
-    private static final String NEW_LINE = System.getProperty("line.separator");
+    public static final String NEW_LINE = System.getProperty("line.separator");
+    public static final String LOTTO_COUNT_FORMAT = NEW_LINE + "수동으로 %d장, 자동으로 %d개를 구매했습니다." + NEW_LINE;
+
+    public void outputLottoCount(final int manualCount, final int randomCount) {
+        System.out.printf(LOTTO_COUNT_FORMAT, manualCount, randomCount);
+    }
 
     public void outputTickets(final List<LottoTicketResponse> responses) {
-        System.out.printf("%d개를 구매했습니다." + NEW_LINE, responses.size());
         for (LottoTicketResponse response : responses) {
             outputTicket(response);
         }
@@ -31,7 +35,7 @@ public class OutputView {
     }
 
     public void displayStatisticsPrompt() {
-        System.out.println(NEW_LINE + "당첨 통계" + NEW_LINE + "---------");
+        System.out.print(NEW_LINE + "당첨 통계" + NEW_LINE + "---------");
     }
 
     public void displayStatisticsByRank(final LottoRank rank, final long count) {
@@ -43,12 +47,12 @@ public class OutputView {
 
     private String findMessage(final LottoRank rank) {
         if (rank == LottoRank.SECOND) {
-            return "%d개 일치, 보너스 볼 일치 (%d)원- %d개" + NEW_LINE;
+            return NEW_LINE + "%d개 일치, 보너스 볼 일치 (%d)원- %d개";
         }
-        return "%d개 일치 (%d원)- %d개" + NEW_LINE;
+        return NEW_LINE + "%d개 일치 (%d원)- %d개";
     }
 
-    public void outputEarningRate(final double earningRate) {
-        System.out.printf("총 수익률은 %.2f입니다.", earningRate);
+    public void outputEarningRate(final String earningRate) {
+        System.out.printf("총 수익률은 %s입니다.", earningRate);
     }
 }

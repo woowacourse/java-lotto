@@ -1,16 +1,16 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
-import lotto.utils.IntegerUtils;
+import lotto.utils.NumberGenerator;
 
 public class LottoTicket {
 
-    private static final int COUNT = 6;
+    private static final int NUMBER_COUNT = 6;
 
     private final List<LottoNumber> numbers;
 
@@ -21,17 +21,11 @@ public class LottoTicket {
 
     public static LottoTicket createTicket(NumberGenerator generator) {
         return new LottoTicket(
-            generator.generate(COUNT)
+            generator.generate(NUMBER_COUNT)
                 .stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList())
         );
-    }
-
-    public static LottoTicket createWinningTicket(String[] numbers) {
-        return new LottoTicket(Arrays.stream(numbers)
-            .map(number -> new LottoNumber(IntegerUtils.parse(number.trim())))
-            .collect(Collectors.toList()));
     }
 
     private void validate(List<LottoNumber> numbers) {
@@ -53,12 +47,12 @@ public class LottoTicket {
     }
 
     private boolean isDistinct(List<LottoNumber> numbers) {
-        return new HashSet<>(numbers).size() == COUNT;
+        return new HashSet<>(numbers).size() == NUMBER_COUNT;
     }
 
     private void validateLength(List<LottoNumber> numbers) {
-        if (numbers.size() != COUNT) {
-            throw new IllegalArgumentException(String.format("로또 번호의 개수는 %d 이어야 합니다.", COUNT));
+        if (numbers.size() != NUMBER_COUNT) {
+            throw new IllegalArgumentException(String.format("로또 번호의 개수는 %d 이어야 합니다.", NUMBER_COUNT));
         }
     }
 
@@ -76,5 +70,22 @@ public class LottoTicket {
 
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(getNumbers(), that.getNumbers());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNumbers());
     }
 }

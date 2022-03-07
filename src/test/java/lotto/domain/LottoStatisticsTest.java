@@ -43,6 +43,6 @@ class LottoStatisticsTest {
         // when
         LottoStatistics statistics = new LottoStatistics(ranks);
         // then
-        assertThat(statistics.calculateEarningRates(money)).isEqualTo(money.divideByAmount(5000L));
+        assertThat(statistics.calculateEarningRates(money)).isEqualTo("1.66");
     }
 }
