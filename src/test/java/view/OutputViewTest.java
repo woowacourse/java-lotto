@@ -2,8 +2,9 @@ package view;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.LottoNumber;
 import domain.LottoTicket;
+import domain.LottoTickets;
+import domain.Purchase;
 import domain.Rank;
 import domain.Result;
 
@@ -24,22 +25,14 @@ class OutputViewTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        lottoTickets.add(new LottoTicket(
-            Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6))));
+        LottoTickets lottoTickets = new LottoTickets(List.of(List.of(1, 2, 3, 4, 5, 6)), 0);
+        Purchase purchase = new Purchase(1000, 1);
 
-        lottoTickets.add(new LottoTicket(
-            Arrays.asList(LottoNumber.valueOf(7), LottoNumber.valueOf(8), LottoNumber.valueOf(9),
-                LottoNumber.valueOf(10), LottoNumber.valueOf(11), LottoNumber.valueOf(12))));
+        OutputView.printLottoTickets(purchase, lottoTickets);
 
-        OutputView.printLottoTickets(lottoTickets);
-
-        assertThat(out.toString()).isEqualTo("2개를 구매했습니다."
+        assertThat(out.toString()).isEqualTo("수동으로 1장, 자동으로 0장을 구매했습니다."
             + System.lineSeparator()
             + "[1, 2, 3, 4, 5, 6]"
-            + System.lineSeparator()
-            + "[7, 8, 9, 10, 11, 12]"
             + System.lineSeparator()
         );
     }

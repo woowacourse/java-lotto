@@ -31,25 +31,32 @@ class ResultTest {
         result.add(Rank.of(1, false));
         result.add(Rank.of(0, false));
 
-        assertThat(result.get().get(Rank.DEFAULT)).isEqualTo(3);
+        assertThat(result.get().get(Rank.NO_PRIZE)).isEqualTo(3);
     }
 
     @Test
-    void 일등_2명_상금_일치_검사() {
+    void 수익률_1_검사() {
         Result result = new Result();
         result.add(Rank.of(6, false));
-        result.add(Rank.of(6, false));
 
-        assertThat(result.getPrice()).isEqualTo(4000000000L);
+        assertThat(result.getProfit(2000000000)).isEqualTo(1.0f);
     }
 
     @Test
-    void 꼴등_셋_상금_일치_검사() {
+    void 수익률_0_5_검사() {
+        Result result = new Result();
+        result.add(Rank.of(4, false));
+
+        assertThat(result.getProfit(100000)).isEqualTo(0.5f);
+    }
+
+    @Test
+    void 수익률_0_검사() {
         Result result = new Result();
         result.add(Rank.of(0, false));
         result.add(Rank.of(1, false));
         result.add(Rank.of(2, false));
 
-        assertThat(result.getPrice()).isEqualTo(0);
+        assertThat(result.getProfit(10000)).isEqualTo(0);
     }
 }

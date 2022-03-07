@@ -1,49 +1,77 @@
 package controller;
 
-import domain.LottoTicket;
-import domain.Money;
-import domain.Rank;
+import domain.LottoTickets;
+import domain.Purchase;
 import domain.Result;
 import domain.WinLottoNumbers;
 import java.util.ArrayList;
 import java.util.List;
-import utils.LottoNumberGenerator;
 import view.InputView;
 import view.OutputView;
 
 public class MainController {
 
     public void run() {
-        Money money = getMoney();
-        List<LottoTicket> lottoTickets = createLottoTickets(money.toLottoCount());
-        OutputView.printLottoTickets(lottoTickets);
+        Purchase purchase = getPurchase();
+
+        LottoTickets lottoTickets = getLottoTickets(purchase);
+        OutputView.printLottoTickets(purchase, lottoTickets);
 
         WinLottoNumbers winLottoNumbers = getWinNumbers();
-
         Result result = makeResult(lottoTickets, winLottoNumbers);
-        printResult(result, money);
+        printResult(result, purchase);
     }
 
-    private Money getMoney() {
+    private Purchase getPurchase() {
+        int money = getMoney();
+        int manualCount = getManualCount(money);
         try {
-            return new Money(InputView.inputMoney());
+            return new Purchase(money, manualCount);
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e.getMessage());
+            return getPurchase();
+        }
+    }
+
+    private int getMoney() {
+        try {
+            return InputView.inputMoney();
         } catch (IllegalArgumentException e) {
             OutputView.printError(e.getMessage());
             return getMoney();
         }
     }
 
-    private List<LottoTicket> createLottoTickets(int count) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottoTickets.add(new LottoTicket(LottoNumberGenerator.generate()));
+    private int getManualCount(int money) {
+        try {
+            return InputView.inputLottoAmount(money);
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e.getMessage());
+            return getManualCount(money);
         }
-        return lottoTickets;
     }
+
+    private LottoTickets getLottoTickets(Purchase purchase) {
+        List<List<Integer>> manualLottoNumberInput = getManualLottoNumberInput(purchase);
+        return new LottoTickets(manualLottoNumberInput, purchase.getAutoCount());
+    }
+
+    private List<List<Integer>> getManualLottoNumberInput(Purchase purchase) {
+        if (purchase.getManualCount() == 0) {
+            return new ArrayList<>();
+        }
+        try {
+            return InputView.inputManualLottoNumbers(purchase);
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e.getMessage());
+            return getManualLottoNumberInput(purchase);
+        }
+    }
+
 
     private WinLottoNumbers getWinNumbers() {
         try {
-            String winLottoNumber = InputView.inputWinLottoNumbers();
+            List<Integer> winLottoNumber = InputView.inputWinLottoNumbers();
             int bonus = InputView.inputBonusNumber();
             return WinLottoNumbers.of(winLottoNumber, bonus);
         } catch (IllegalArgumentException e) {
@@ -52,18 +80,16 @@ public class MainController {
         }
     }
 
-    private Result makeResult(List<LottoTicket> lottoTickets, WinLottoNumbers winLottoNumbers) {
+    private Result makeResult(LottoTickets lottoTickets, WinLottoNumbers winLottoNumbers) {
         Result result = new Result();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            int matchCount = winLottoNumbers.countSameNumber(lottoTicket);
-            boolean isBonus = winLottoNumbers.isContainsBonus(lottoTicket);
-            result.add(Rank.of(matchCount, isBonus));
-        }
+        lottoTickets.get().stream()
+            .map(winLottoNumbers::match)
+            .forEach(result::add);
         return result;
     }
 
-    private void printResult(Result result, Money money) {
+    private void printResult(Result result, Purchase purchase) {
         OutputView.printResult(result);
-        OutputView.printProfit(money.getProfit(result.getPrice()));
+        OutputView.printProfit(result.getProfit(purchase.getMoney()));
     }
 }

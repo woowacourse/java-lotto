@@ -15,6 +15,12 @@ class RankTest {
     }
 
     @Test
+    void of_테스트_1등2() {
+        Rank rank = Rank.of(6, true);
+        assertThat(rank).isEqualTo(Rank.FIRST);
+    }
+
+    @Test
     void of_테스트_2등() {
         Rank rank = Rank.of(5, true);
         assertThat(rank).isEqualTo(Rank.SECOND);
@@ -26,15 +32,22 @@ class RankTest {
         assertThat(rank).isEqualTo(Rank.THIRD);
     }
 
+
+    @Test
+    void of_테스트_4등() {
+        Rank rank = Rank.of(4, true);
+        assertThat(rank).isEqualTo(Rank.FOURTH);
+    }
+
     @Test
     void of_테스트_꼴등() {
         Rank rank = Rank.of(1, true);
-        assertThat(rank).isEqualTo(Rank.DEFAULT);
+        assertThat(rank).isEqualTo(Rank.NO_PRIZE);
     }
 
     @Test
     void Default_제외_값_받아옴() {
         List<Rank> ranks = Rank.getWithoutDefault();
-        assertThat(ranks).doesNotContain(Rank.DEFAULT);
+        assertThat(ranks).doesNotContain(Rank.NO_PRIZE);
     }
 }
