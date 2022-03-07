@@ -29,21 +29,21 @@ public class LottoController {
                 .collect(collectingAndThen(toList(), IssuedLottos::new));
     }
 
-    public IssuedLottos getAutoLottos(Budget budget, IssuedLottos manualLottos) {
-        return IssuedLottos.generatedBy(new RandomGenerator(getAutoCount(budget, manualLottos)));
+    public IssuedLottos getAutoLottos(Budget budget, IssuedLottos issuedLottos) {
+        return IssuedLottos.generatedBy(new RandomGenerator(getAffordableLottoCount(budget, issuedLottos)));
     }
 
-    private int getAutoCount(Budget budget, IssuedLottos manualLottos) {
-        return budget.getMaxCountForLottoIssue() - manualLottos.getLottosCount();
+    private int getAffordableLottoCount(Budget budget, IssuedLottos issuedLottos) {
+        return budget.getMaxCountForLottoIssue() - issuedLottos.getLottosCount();
     }
 
     public IssuedLottos getAllLottos(IssuedLottos manualLottos, IssuedLottos autoLottos) {
         return IssuedLottos.merge(manualLottos, autoLottos);
     }
 
-    public WinningLottoNumbers getWinningLottoNumbers(List<String> strings, String s) {
-        Lotto winningLotto = Lotto.parse(strings);
-        LottoNumber bonusLottoNumber = LottoNumber.parse(s);
+    public WinningLottoNumbers getWinningLottoNumbers(List<String> lottoNumberTokens, String bonusNumberToken) {
+        Lotto winningLotto = Lotto.parse(lottoNumberTokens);
+        LottoNumber bonusLottoNumber = LottoNumber.parse(bonusNumberToken);
         return new WinningLottoNumbers(winningLotto, bonusLottoNumber);
     }
 
