@@ -16,11 +16,9 @@ public class LottoDto {
 
     public static LottoDto from(Lotto lotto) {
         Set<LottoNumber> lottoNumbers = lotto.getNumbers();
-        Set<Integer> collect = lottoNumbers.stream()
+        return lottoNumbers.stream()
                 .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
-
-        return new LottoDto(collect);
+                .collect(Collectors.collectingAndThen(Collectors.toUnmodifiableSet(), LottoDto::new));
     }
 
     public Set<Integer> getNumbers() {

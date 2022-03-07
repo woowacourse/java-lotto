@@ -25,9 +25,7 @@ public class OutputView {
     }
 
     public static void printLottos(LottosDto lottosDto) {
-        for (LottoDto lottoDto : lottosDto.getLottos()) {
-            printLotto(lottoDto);
-        }
+        lottosDto.getLottos().forEach(OutputView::printLotto);
         System.out.println();
     }
 
@@ -43,7 +41,7 @@ public class OutputView {
 
     public static void printStatistics(StatisticDto statistics) {
         System.out.println(STATISTIC_RESULT_MESSAGE);
-        statistics.getStatistic()
+        statistics.getStatisticDto()
                 .entrySet()
                 .stream()
                 .filter(statistic -> statistic.getKey().getCount() != 0)

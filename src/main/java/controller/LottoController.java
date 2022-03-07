@@ -1,5 +1,6 @@
 package controller;
 
+import controller.dto.StatisticDto;
 import domain.*;
 
 import java.util.List;
@@ -26,10 +27,10 @@ public class LottoController {
         return lottoGenerators;
     }
 
-    public Statistic winningResult(String[] inputWinningNumber, int inputBonusBall, Lottos lottos) {
+    public StatisticDto winningResult(String[] inputWinningNumber, int inputBonusBall, Lottos lottos) {
         Lotto winningNumber = new ManualLottoGenerator(inputWinningNumber).generateLotto();
         LottoNumber bonusBall = LottoNumber.of(inputBonusBall);
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusBall);
-        return lottos.getWinningStatistics(winningLotto);
+        return StatisticDto.from(lottos.getWinningStatistics(winningLotto));
     }
 }

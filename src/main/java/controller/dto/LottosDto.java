@@ -18,10 +18,13 @@ public class LottosDto {
     }
 
     public static LottosDto from(Lottos lottos) {
-        List<LottoDto> collect = lottos.getLottos()
+
+        return lottos.getLottos()
                 .stream()
                 .map(LottoDto::from)
-                .collect(Collectors.toList());
-        return new LottosDto(collect);
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toUnmodifiableList(),
+                        LottosDto::new
+                ));
     }
 }

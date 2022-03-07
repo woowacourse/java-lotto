@@ -7,25 +7,31 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class StatisticDto {
-    private final Map<RankDto, Integer> statistic;
+    private final Map<RankDto, Integer> statisticDto;
+    private final Statistic statistic;
 
-    public StatisticDto(Map<RankDto, Integer> statistic) {
-        this.statistic = new LinkedHashMap<>(statistic);
+    public StatisticDto(Map<RankDto, Integer> statisticDto, Statistic statistic) {
+        this.statisticDto = new LinkedHashMap<>(statisticDto);
+        this.statistic = statistic;
     }
 
     public static StatisticDto from(Statistic statistics) {
-        Map<RankDto, Integer> collect = statistics.getStatistics().entrySet()
+        return statistics.getStatistics().entrySet()
                 .stream()
-                .collect(Collectors.toMap(
-                        statistic -> RankDto.from(statistic.getKey()),
-                        Map.Entry::getValue,
-                        (key, value) -> key,
-                        LinkedHashMap::new));
-        return new StatisticDto(collect);
+                .collect(Collectors.collectingAndThen(Collectors.toMap(
+                                statistic -> RankDto.from(statistic.getKey()),
+                                Map.Entry::getValue,
+                                (key, value) -> key,
+                                LinkedHashMap::new
+                        ), o -> new StatisticDto(o, statistics))
+                );
     }
 
-    public Map<RankDto, Integer> getStatistic() {
-        return new LinkedHashMap<>(statistic);
+    public Map<RankDto, Integer> getStatisticDto() {
+        return new LinkedHashMap<>(statisticDto);
     }
 
+    public Statistic getStatistic() {
+        return statistic;
+    }
 }
