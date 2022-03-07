@@ -1,14 +1,23 @@
 package lotto.domain;
 
+import lotto.domain.generator.StringInputNumberGenerator;
+import old.utils.IntegerUtils;
+
 public class WinningTicket {
 
-    private LottoLine winningTicket;
+    private LottoLine winningLine;
     private LottoNumber bonusBall;
 
-    public WinningTicket(LottoLine winningTicket, LottoNumber bonusBall) {
-        validateBonusDistinct(winningTicket, bonusBall);
-        this.winningTicket = winningTicket;
+    public WinningTicket(LottoLine winningLine, LottoNumber bonusBall) {
+        validateBonusDistinct(winningLine, bonusBall);
+        this.winningLine = winningLine;
         this.bonusBall = bonusBall;
+    }
+
+    public static WinningTicket from(String inputWinningNumber, String inputBonusBall) {
+        LottoLine winningLine = LottoLine.createLine(new StringInputNumberGenerator(inputWinningNumber));
+        LottoNumber bonusBall = LottoNumber.from(inputBonusBall);
+        return new WinningTicket(winningLine, bonusBall);
     }
 
     private void validateBonusDistinct(LottoLine winningTicket, LottoNumber bonusBall) {
@@ -18,7 +27,7 @@ public class WinningTicket {
     }
 
     public LottoRank compare(LottoLine lottoLine) {
-        int matchCount = lottoLine.countMatch(winningTicket);
+        int matchCount = lottoLine.countMatch(winningLine);
         boolean isBonusMatch = lottoLine.isMatch(bonusBall);
         return LottoRank.find(matchCount, isBonusMatch);
     }

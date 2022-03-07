@@ -20,7 +20,7 @@ public class LottoLine {
         this.numbers = new ArrayList<>(numbers);
     }
 
-    public static LottoLine createTicket(NumberGenerator generator) {
+    public static LottoLine createLine(NumberGenerator generator) {
         return new LottoLine(
             generator.generate(NUMBER_COUNT)
                 .stream()

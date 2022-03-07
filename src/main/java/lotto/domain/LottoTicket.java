@@ -34,7 +34,7 @@ public class LottoTicket {
 
     private static List<LottoLine> createLines(NumberGenerator generator, int count) {
         return IntStream.range(0, count)
-            .mapToObj(i -> LottoLine.createTicket(generator))
+            .mapToObj(i -> LottoLine.createLine(generator))
             .collect(Collectors.toList());
     }
 

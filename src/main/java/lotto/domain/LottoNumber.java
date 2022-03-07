@@ -5,6 +5,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.utils.IntegerUtils;
+
 public class LottoNumber {
 
     public static final int MIN = 1;
@@ -27,6 +29,10 @@ public class LottoNumber {
             .filter(lottoNumber -> lottoNumber.number == number)
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("입력받은 숫자에 해당하는 로또 번호가 없습니다."));
+    }
+
+    public static LottoNumber from(String input) {
+        return from(IntegerUtils.parse(input));
     }
 
     private static void validate(int number) {
