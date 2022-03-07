@@ -45,9 +45,9 @@ public class LottosTest {
     @MethodSource("parameterProvider")
     @DisplayName("보유하고 있는 로또들과 당첨 로또의 매칭 결과를 계산")
     void calculateLottoMatchResult(LottoReward reward, int rewardCount) {
-        Map<LottoReward, Integer> winningStatistics = getLottoWinningStatistics().values();
+        Map<LottoReward, Integer> winningResults = getLottoWinningResult().values();
 
-        assertThat(winningStatistics.get(reward)).isEqualTo(rewardCount);
+        assertThat(winningResults.get(reward)).isEqualTo(rewardCount);
     }
 
     private static Stream<Arguments> parameterProvider() {
@@ -61,7 +61,7 @@ public class LottosTest {
         );
     }
 
-    private WinningStatistics getLottoWinningStatistics() {
+    private WinningResult getLottoWinningResult() {
         LottoGameMoney money = new LottoGameMoney(3000);
         Lotto lotto = LottoFactory.createLotto(Arrays.asList(12, 23, 6, 44, 17, 16));
 

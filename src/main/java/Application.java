@@ -8,7 +8,7 @@ import domain.LottoGameMoney;
 import domain.Lottos;
 import domain.RandomLottoNumbersGenerator;
 import domain.WinningLotto;
-import domain.WinningStatistics;
+import domain.WinningResult;
 import view.InputView;
 import view.OutputView;
 
@@ -19,9 +19,9 @@ public class Application {
         Lottos lottos = createLottos(purchaseMoney);
         final WinningLotto winningLotto = createWinningLotto();
 
-        final WinningStatistics winningStatistics = lottos.match(purchaseMoney, winningLotto);
-        OutputView.showWinningStatistics(winningStatistics.values());
-        OutputView.showProfitRate(winningStatistics.profitRate());
+        final WinningResult winningResult = lottos.match(purchaseMoney, winningLotto);
+        OutputView.showWinningResult(winningResult.values());
+        OutputView.showProfitRate(winningResult.profitRate());
     }
 
     private static Lottos createLottos(LottoGameMoney purchaseMoney) {

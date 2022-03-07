@@ -6,31 +6,31 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class WinningStatistics {
+public class WinningResult {
 
     private static final int DEFAULT_VALUE = 0;
 
     private final LottoGameMoney purchaseMoney;
-    private final Map<LottoReward, Integer> statistics = new EnumMap<>(LottoReward.class);
+    private final Map<LottoReward, Integer> results = new EnumMap<>(LottoReward.class);
 
-    public WinningStatistics(LottoGameMoney purchaseMoney, List<LottoReward> lottoRewards) {
+    public WinningResult(LottoGameMoney purchaseMoney, List<LottoReward> lottoRewards) {
         validateNull(purchaseMoney, lottoRewards);
         this.purchaseMoney = purchaseMoney;
-        initializeStatistics(lottoRewards);
+        initializeResults(lottoRewards);
     }
 
     private void validateNull(LottoGameMoney purchaseMoney, List<LottoReward> lottoRewards) {
         if (purchaseMoney == null) {
-            throw new NullPointerException("WinningStatistics 생성시 구매 금액이 null 일 수 없습니다.");
+            throw new NullPointerException("WinningResult 생성시 구매 금액이 null 일 수 없습니다.");
         }
         if (lottoRewards == null) {
-            throw new NullPointerException("WinningStatistics 생성시 로또 리워드 결과가 null 일 수 없습니다.");
+            throw new NullPointerException("WinningResult 생성시 로또 리워드 결과가 null 일 수 없습니다.");
         }
     }
 
-    private void initializeStatistics(List<LottoReward> lottoRewards) {
-        Arrays.stream(LottoReward.values()).forEach(lottoReward -> statistics.put(lottoReward, DEFAULT_VALUE));
-        lottoRewards.forEach(lottoReward -> statistics.replace(lottoReward, statistics.get(lottoReward) + 1));
+    private void initializeResults(List<LottoReward> lottoRewards) {
+        Arrays.stream(LottoReward.values()).forEach(lottoReward -> results.put(lottoReward, DEFAULT_VALUE));
+        lottoRewards.forEach(lottoReward -> results.replace(lottoReward, results.get(lottoReward) + 1));
     }
 
     public double profitRate() {
@@ -41,11 +41,11 @@ public class WinningStatistics {
 
     private int calculateWinningAmount() {
         return Arrays.stream(LottoReward.values())
-            .mapToInt(reward -> reward.price() * statistics.get(reward))
+            .mapToInt(reward -> reward.price() * results.get(reward))
             .sum();
     }
 
     public Map<LottoReward, Integer> values() {
-        return Collections.unmodifiableMap(statistics);
+        return Collections.unmodifiableMap(results);
     }
 }

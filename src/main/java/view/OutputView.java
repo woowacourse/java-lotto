@@ -30,14 +30,14 @@ public class OutputView {
         }
     }
 
-    public static void showWinningStatistics(Map<LottoReward, Integer> winningStatistics) {
+    public static void showWinningResult(Map<LottoReward, Integer> results) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
         List<LottoReward> rewards = Arrays.asList(LottoReward.values());
         Collections.reverse(rewards);
         for (LottoReward reward : rewards) {
-            printLottoReward(reward, winningStatistics.get(reward));
+            printLottoReward(reward, results.get(reward));
         }
     }
 
