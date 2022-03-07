@@ -1,13 +1,13 @@
 package lotto.view;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoLine;
 import lotto.domain.LottoNumber;
-import lotto.dto.LottoStatisticsResponse;
-import lotto.dto.LottoTicketResponse;
-import lotto.dto.LottoWinningResponse;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoStatistics;
 import lotto.dto.PurchaseResult;
 
 public class OutputView {
@@ -68,7 +68,7 @@ public class OutputView {
             .collect(Collectors.toList());
     }
 
-    public void outputStatistics(LottoStatisticsResponse statistics) {
+    public void outputStatistics(LottoStatistics statistics) {
         outputPrompt();
         outputMatches(statistics);
         outputProfit(statistics);
@@ -79,22 +79,25 @@ public class OutputView {
         System.out.print("---------\n");
     }
 
-    private void outputMatches(LottoStatisticsResponse statistics) {
-        List<LottoWinningResponse> responses = statistics.getWinningResponses();
-        responses.stream()
-            .sorted()
-            .forEach(response -> System.out.print(formatWinningResponse(response) + "\n"));
+    private void outputMatches(LottoStatistics statistics) {
+        statistics.getRankCounts()
+            .entrySet()
+            .stream()
+            .forEach(entry -> System.out.println(formatRank(entry)));
     }
 
-    private String formatWinningResponse(LottoWinningResponse response) {
+    private String formatRank(Map.Entry<LottoRank, Integer> entry) {
+        LottoRank rank = entry.getKey();
+        int ticketCount = entry.getValue();
+
         String format = "%d개 일치 (%d원)- %d개";
-        if (response.isSecondPlace()) {
+        if (rank == LottoRank.SECOND) {
             format = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
         }
-        return String.format(format, response.getMatchCount(), response.getPrize(), response.getTicketCount());
+        return String.format(format, rank.getMatchCount(), rank.getPrize(), ticketCount);
     }
 
-    private void outputProfit(LottoStatisticsResponse statistics) {
+    private void outputProfit(LottoStatistics statistics) {
         System.out.printf("총 수익률은 %.2f입니다.\n", statistics.getProfitRate());
     }
 }
