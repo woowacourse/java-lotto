@@ -51,15 +51,6 @@ class LotteryTicketTest {
         assertThat(value.size()).isEqualTo(2);
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3})
-    @DisplayName("입력 받은 개수 만큼 자동 로또 번호를 생성하여 LotteryTicket 리스트를 만든다.")
-    void createAutoLotteryTickets(int input) {
-        List<LotteryNumber> lotteryNumbers = LotteryNumber.from(List.of(1, 2, 3, 4, 5, 6));
-        List<LotteryTicket> value = LotteryTicket.createAutoLotteryTickets(input, () -> lotteryNumbers);
-        assertThat(value.size()).isEqualTo(input);
-    }
-
     @Test
     @DisplayName("로또 넘버 숫자가 6개 미만일 때, 에러가 발생한다.")
     void validateSize() {

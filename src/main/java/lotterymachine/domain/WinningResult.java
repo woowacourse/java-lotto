@@ -10,7 +10,7 @@ public class WinningResult {
         create(lotteryTickets, winningLottery);
     }
 
-    public void create(LotteryTickets lotteryTickets, WinningLottery winningLottery) {
+    private void create(LotteryTickets lotteryTickets, WinningLottery winningLottery) {
         initResult();
         for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
             WinningLotteryRank winningLotteryRank = winningLottery.getWinningLotteryRank(lotteryTicket);

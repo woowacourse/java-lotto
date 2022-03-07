@@ -5,11 +5,11 @@ import java.util.Objects;
 public class LotteryPurchaseMoney {
     private static final String TERMS_OF_PURCHASE = "로또 구매는 기본 1000원 이상부터 할 수 있습니다.";
 
-    private final int value;
+    private final int amount;
 
-    public LotteryPurchaseMoney(int value) {
-        validateValue(value);
-        this.value = value;
+    public LotteryPurchaseMoney(int amount) {
+        validateValue(amount);
+        this.amount = amount;
     }
 
     private void validateValue(int value) {
@@ -18,12 +18,12 @@ public class LotteryPurchaseMoney {
         }
     }
 
-    public int getValue() {
-        return value;
+    public int getAmount() {
+        return amount;
     }
 
     public int getPurchasePossibleCount() {
-        return this.value / LotteryTicket.PER_PRICE;
+        return this.amount / LotteryTicket.PER_PRICE;
     }
 
     @Override
@@ -31,11 +31,11 @@ public class LotteryPurchaseMoney {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LotteryPurchaseMoney lotteryPurchaseMoney = (LotteryPurchaseMoney) o;
-        return value == lotteryPurchaseMoney.value;
+        return amount == lotteryPurchaseMoney.amount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(amount);
     }
 }

@@ -20,14 +20,14 @@ public class LotteryMachineApplication {
                 , LotteryNumber.from(InputView.getBonusNumber()));
         WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);
         OutputView.printWinningLotteryResults(winningResult.getResult());
-        OutputView.printProfitRate(Yield.of(winningResult.findTotalProfit(), lotteryPurchaseMoney.getValue()).getProfitRate());
+        OutputView.printProfitRate(Yield.of(winningResult.findTotalProfit(), lotteryPurchaseMoney.getAmount()).getProfitRate());
     }
 
     private static LotteryPurchaseCount createCount(LotteryPurchaseMoney lotteryPurchaseMoney) {
         int manualPurchaseCount = InputView.getManualPurchaseCount();
         return new LotteryPurchaseCount(manualPurchaseCount,
-                lotteryPurchaseMoney.getPurchasePossibleCount() - manualPurchaseCount
-                , lotteryPurchaseMoney.getPurchasePossibleCount());
+                lotteryPurchaseMoney.getPurchasePossibleCount() - manualPurchaseCount,
+                lotteryPurchaseMoney.getPurchasePossibleCount());
     }
 
     private static LotteryTickets createLotteryTickets(LotteryPurchaseCount lotteryPurchaseCount) {
