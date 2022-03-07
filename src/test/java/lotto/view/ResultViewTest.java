@@ -35,7 +35,7 @@ class ResultViewTest {
     Constructor<Lottos> lottosConstructor = Lottos.class
         .getDeclaredConstructor(LottoFactory.class, int.class);
     Constructor<LottoResult> lottoResultConstructor = LottoResult.class.
-        getDeclaredConstructor(Lottos.class, Lottos.class, List.class, int.class);
+        getDeclaredConstructor(Map.class, List.class, int.class);
     Constructor<LottoMoney> lottoMoneyConstructor = LottoMoney.class.getDeclaredConstructor(long.class, int.class);
     Constructor<Yield> yieldConstructor = Yield.class.getDeclaredConstructor(LottoMoney.class, Map.class);
 
@@ -78,9 +78,12 @@ class ResultViewTest {
 
         Lottos manualLottos = lottosConstructor.newInstance(new TestManualLottoFactory(), 1);
         Lottos autoLottos = lottosConstructor.newInstance(new TestAutoLottoFactory(), 2);
+        Map<LottoType, Lottos> lottosMap = new EnumMap<>(LottoType.class);
+        lottosMap.put(LottoType.MANUAL, manualLottos);
+        lottosMap.put(LottoType.AUTO, autoLottos);
 
         LottoResult lottoResult = lottoResultConstructor
-            .newInstance(manualLottos, autoLottos, List.of(1, 2, 3, 4, 5, 6), 7);
+            .newInstance(lottosMap, List.of(1, 2, 3, 4, 5, 6), 7);
 
         ResultView.printResultStatistics(lottoResult);
 

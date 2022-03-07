@@ -11,9 +11,9 @@ public class LottoController {
     public void runGame() {
         long lottoMoney = insertMoney();
         int numberOfManualLottos = inputNumberOfManualLottos();
-        LottoGame lottoGame = new LottoGame(lottoMoney, numberOfManualLottos, new AutoLottoFactory());
+        LottoGame lottoGame = new LottoGame(lottoMoney, numberOfManualLottos);
 
-        lottoGame.buyManualLottos(inputManualLottos(numberOfManualLottos));
+        lottoGame.buyLottos(inputManualLottos(numberOfManualLottos), new AutoLottoFactory());
         printGeneratedLottos(lottoGame.getLottos());
 
         LottoResult lottoResult = lottoGame.generateLottoResult(inputWinningNumbers(),

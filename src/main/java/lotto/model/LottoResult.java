@@ -15,13 +15,13 @@ public class LottoResult {
 
     private final Map<Rank, Long> result;
 
-    LottoResult(Lottos manualLottos, Lottos autoLottos, List<Integer> rawWinningNumbers, int bonusNumber) {
+    LottoResult(Map<LottoType, Lottos> lottosMap, List<Integer> rawWinningNumbers, int bonusNumber) {
         List<Integer> copyOfRawWinningNumbers = List.copyOf(rawWinningNumbers);
         validateEmptyCollection(copyOfRawWinningNumbers);
         validateDuplicateBonusNumber(copyOfRawWinningNumbers, bonusNumber);
 
         Lotto winningNumbers = new ManualLottoFactory(List.of(copyOfRawWinningNumbers)).generate();
-        this.result = generateLottoResult(manualLottos, autoLottos, winningNumbers,
+        this.result = generateLottoResult(Map.copyOf(lottosMap), winningNumbers,
             new LottoNumber(bonusNumber));
     }
 
@@ -31,11 +31,18 @@ public class LottoResult {
         }
     }
 
-    private Map<Rank, Long> generateLottoResult(Lottos manualLottos, Lottos autoLottos, Lotto winningNumbers,
+    private Map<Rank, Long> generateLottoResult(Map<LottoType, Lottos> lottosMap, Lotto winningNumbers,
         LottoNumber bonusNumber) {
-        return Map.copyOf(manualLottos.getTotalLottos(autoLottos).stream()
+        return createTotalLottos(lottosMap).stream()
             .map(lotto -> lotto.match(winningNumbers, bonusNumber))
-            .collect(groupingBy(rank -> rank, () -> new EnumMap<>(Rank.class), counting())));
+            .collect(groupingBy(rank -> rank, () -> new EnumMap<>(Rank.class), counting()));
+    }
+
+    private List<Lotto> createTotalLottos(Map<LottoType, Lottos> lottosMap) {
+        return lottosMap.keySet()
+            .stream()
+            .flatMap(lottoType -> lottosMap.get(lottoType).getLottos().stream())
+            .collect(toList());
     }
 
     public long getRankCount(Rank rank) {

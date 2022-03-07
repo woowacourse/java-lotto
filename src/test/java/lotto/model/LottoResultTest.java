@@ -3,7 +3,9 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,8 +25,11 @@ class LottoResultTest {
 
         Lottos autoLottos = new Lottos(testAutoFactory, 1);
         Lottos manualLottos = new Lottos(new ManualLottoFactory(Collections.emptyList()), 0);
+        Map<LottoType, Lottos> lottosMap = new EnumMap<>(LottoType.class);
+        lottosMap.put(LottoType.MANUAL, manualLottos);
+        lottosMap.put(LottoType.AUTO, autoLottos);
 
-        LottoResult lottoResult = new LottoResult(manualLottos, autoLottos,
+        LottoResult lottoResult = new LottoResult(lottosMap,
             List.of(1, 2, 3, 4, 5, 45),
             bonusNumberInt);
 

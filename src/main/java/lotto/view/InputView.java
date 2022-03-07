@@ -3,6 +3,7 @@ package lotto.view;
 import static java.util.stream.Collectors.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -26,7 +27,7 @@ public class InputView {
 
     public static List<List<Integer>> inputManualLottos(int numberOfManualLottos) {
         if (numberOfManualLottos == 0) {
-            return List.of();
+            return Collections.emptyList();
         }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<List<Integer>> manualLottos = IntStream.range(0, numberOfManualLottos)

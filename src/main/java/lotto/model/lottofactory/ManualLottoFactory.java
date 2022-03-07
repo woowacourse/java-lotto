@@ -1,9 +1,10 @@
 package lotto.model.lottofactory;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import lotto.model.LottoNumber;
 
@@ -14,7 +15,7 @@ public class ManualLottoFactory implements LottoFactory {
         List<List<Integer>> copyOfManualLottos = List.copyOf(rawManualLottoNumbers);
         this.manualLottos = copyOfManualLottos.stream()
             .map(this::toLottoNumbers)
-            .collect(Collectors.toUnmodifiableList()).iterator();
+            .collect(toUnmodifiableList()).iterator();
     }
 
     @Override
@@ -28,6 +29,6 @@ public class ManualLottoFactory implements LottoFactory {
     private Set<LottoNumber> toLottoNumbers(List<Integer> integers) {
         return integers.stream()
             .map(LottoNumber::new)
-            .collect(Collectors.toUnmodifiableSet());
+            .collect(toUnmodifiableSet());
     }
 }
