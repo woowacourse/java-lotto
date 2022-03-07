@@ -1,21 +1,21 @@
 package lotto.model.lottofactory;
 
-import static java.util.stream.Collectors.*;
 import static lotto.ValidationUtils.*;
 
 import java.util.Set;
+import java.util.TreeSet;
 
 import lotto.model.LottoNumber;
 import lotto.model.Rank;
 
 public class Lotto {
-    public static final int LOTTO_SIZE = 6;
+    static final int LOTTO_SIZE = 6;
     private static final String ERROR_NOT_MATCH_LOTTO_NUMBER_SIZE = "로또 번호 개수는 6개로 입력해주세요.";
 
     private final Set<LottoNumber> lottoNumbers;
 
     Lotto(Set<LottoNumber> inputLottoNumbers) {
-        Set<LottoNumber> lottoNumbers = Set.copyOf(inputLottoNumbers);
+        Set<LottoNumber> lottoNumbers = new TreeSet<>(inputLottoNumbers);
         validateEmptyCollection(lottoNumbers);
         validateNumberOfLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
@@ -43,6 +43,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumbers.stream().sorted().collect(toList()).toString();
+        return lottoNumbers.toString();
     }
 }
