@@ -16,7 +16,7 @@ public class TestLottoNumberGenerationStrategy implements LottoNumbersGeneration
 	@Override
 	public List<LottoNumber> generate(int size) {
 		return numbers.stream()
-			.map(number -> LottoNumber.valueOf(number))
+			.map(LottoNumber::valueOf)
 			.collect(Collectors.toList());
 	}
 }

@@ -38,7 +38,7 @@ public class StringInputLottoNumbersGenerationStrategy implements LottoNumbersGe
 
 	private List<LottoNumber> makeInputNumbersToLottoNumbers(List<String> numbers) {
 		return numbers.stream()
-			.map(number -> LottoNumber.parseLottoNumber(number))
+			.map(LottoNumber::parseLottoNumber)
 			.collect(Collectors.toList());
 	}
 }
