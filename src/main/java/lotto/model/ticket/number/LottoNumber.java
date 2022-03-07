@@ -23,10 +23,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber from(int number) {
         validate(number);
-        return LOTTO_NUMBER_CACHE.get(number);
+        return LOTTO_NUMBER_CACHE.get(number - 1);
     }
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validate(number);
         this.number = number;
     }
@@ -56,7 +56,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
             return false;
         }
         LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        return getNumber() == that.getNumber();
     }
 
     @Override

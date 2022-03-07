@@ -14,7 +14,7 @@ class LottoNumberTest {
         // given
         int value = 10;
         // when
-        LottoNumber number = new LottoNumber(value);
+        LottoNumber number = LottoNumber.from(value);
         // then
         assertThat(number).isNotNull();
     }

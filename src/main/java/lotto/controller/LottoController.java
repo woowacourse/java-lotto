@@ -1,7 +1,6 @@
 package lotto.controller;
 
-import java.util.Arrays;
-import java.util.Collections;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.money.Money;
@@ -10,8 +9,10 @@ import lotto.model.result.LottoStatistics;
 import lotto.model.ticket.LottoTicket;
 import lotto.model.ticket.LottoTickets;
 import lotto.model.ticket.WinningTicket;
+import lotto.model.ticket.buy.ManualBuyCount;
 import lotto.model.ticket.number.LottoNumber;
-import lotto.model.utils.RandomNumberGenerator;
+import lotto.model.utils.AutoRandomNumberGenerator;
+import lotto.model.utils.ManualRandomNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -19,14 +20,24 @@ public class LottoController {
 
     public void run() {
         Money money = Money.of(InputView.requestMoney());
-        LottoTickets lottoTickets = LottoTickets
-                .buy(new RandomNumberGenerator(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER), money);
+        ManualBuyCount manualBuyCount = ManualBuyCount.of(InputView.requestManualBuyCount());
+        LottoTickets lottoTickets = createLottoTickets(money, manualBuyCount);
         OutputView.outputTickets(lottoTickets);
-        WinningTicket winningTicket = makeWinningTicket();
 
+        WinningTicket winningTicket = makeWinningTicket();
         LottoRanks lottoRanks = lottoTickets.compareResult(winningTicket);
+
         LottoStatistics lottoStatistics = new LottoStatistics(lottoRanks);
         OutputView.outputStatistics(lottoStatistics, money);
+    }
+
+    private LottoTickets createLottoTickets(Money money, ManualBuyCount manualBuyCount) {
+        LottoTickets manualLottoTickets = LottoTickets.buyManualTickets(InputView.requestManualTickets(
+                new ManualRandomNumberGenerator(), manualBuyCount));
+        Money leftMoney = money.decreaseByCount(manualBuyCount);
+
+         return manualLottoTickets.buyAutoTickets(
+                new AutoRandomNumberGenerator(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER), leftMoney);
     }
 
     private WinningTicket makeWinningTicket() {
@@ -38,6 +49,6 @@ public class LottoController {
                         .stream()
                         .map(LottoNumber::from)
                         .collect(Collectors.toList())),
-                new LottoNumber(bonusBall));
+                LottoNumber.from(bonusBall));
     }
 }

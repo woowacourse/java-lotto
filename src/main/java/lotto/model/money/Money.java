@@ -1,5 +1,7 @@
 package lotto.model.money;
 
+import lotto.model.ticket.buy.ManualBuyCount;
+
 public class Money {
 
     private static final int UNIT = 1000;
@@ -34,11 +36,15 @@ public class Money {
         }
     }
 
-    public int count() {
+    public int countBuyable() {
         return this.amount / UNIT;
     }
 
     public int getAmount() {
         return this.amount;
+    }
+
+    public Money decreaseByCount(ManualBuyCount manualBuyCount) {
+        return Money.of(amount - manualBuyCount.getValue() * UNIT);
     }
 }

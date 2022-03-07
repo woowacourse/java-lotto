@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomNumberGenerator implements NumberGenerator {
+public class AutoRandomNumberGenerator implements NumberGenerator {
 
     private final int min;
     private final int max;
 
-    public RandomNumberGenerator(int min, int max) {
+    public AutoRandomNumberGenerator(int min, int max) {
         this.min = min;
         this.max = max;
     }

@@ -25,10 +25,16 @@ public class LottoTicket {
         return new LottoTicket(
                 generator.generate(COUNT)
                         .stream()
-                        .map(LottoNumber::new)
+                        .map(LottoNumber::from)
                         .sorted()
                         .collect(Collectors.toList())
         );
+    }
+
+    public static LottoTicket convertIntegersToLottoTicket(List<Integer> integers) {
+        return new LottoTicket(integers.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList()));
     }
 
     private void validate(List<LottoNumber> numbers) {
