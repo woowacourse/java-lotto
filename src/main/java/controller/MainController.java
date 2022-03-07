@@ -1,49 +1,59 @@
 package controller;
 
-import domain.Money;
-import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
-import domain.lotto.LottoNumber;
-import domain.lotto.WinNumbers;
+import domain.lotto.LottoGroup;
+import domain.lotto.LottoMoney;
+import domain.lotto.WinningLotto;
 import domain.result.Result;
-import java.util.ArrayList;
-import java.util.List;
-import utils.NumsGenerator;
-import utils.Util;
+import domain.result.TicketCount;
 import view.InputView;
-import view.OutputView;
+import view.ResultView;
 
 public class MainController {
+    private MainController() {
+    }
+
+    public static MainController create() {
+        return new MainController();
+    }
+
+    private static float getProfit(final float nowMoney, final float pastMoney) {
+        return nowMoney / pastMoney;
+    }
+
     public void run() {
-        final Money money = makeMoney();
-        final List<Lotto> lottoTickets = makeLottos(money.toLottoCount());
-        final WinNumbers winNumbers = makeWinNums();
+        final LottoMoney lottoMoney = makeLottoMoney();
+        final TicketCount count = makeLottoTicketCount(lottoMoney);
+        final LottoGroup lottoTickets = makeLottos(count);
+        ResultView.printLottoTickets(count, lottoTickets);
 
-        final Result result = new Result(lottoTickets, winNumbers);
-        end(result, money);
+        final WinningLotto winningLotto = makeWinNums();
+
+        final Result result = Result.of(lottoTickets, winningLotto);
+        end(result, lottoMoney);
     }
 
-    private Money makeMoney() {
-        return new Money(InputView.inputMoney());
+    private LottoMoney makeLottoMoney() {
+        return LottoMoney.from(
+                InputView.inputMoney());
     }
 
-    private List<Lotto> makeLottos(final int count) {
-        final List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(LottoFactory.createLotto(NumsGenerator.generateByRandom()));
-        }
-        OutputView.printLottoTickets(lottos);
-        return lottos;
+    private TicketCount makeLottoTicketCount(final LottoMoney money) {
+        return TicketCount.of(money.toLottoCount(),
+                InputView.inputManualTicketCount());
     }
 
-    private WinNumbers makeWinNums() {
-        List<Integer> winLottoRawNums = InputView.inputWinLottoNums();
-        LottoNumber bonus = LottoNumber.from(InputView.inputBonusNumber());
-        return LottoFactory.createWinNums(NumsGenerator.generate(winLottoRawNums), bonus);
+    private LottoGroup makeLottos(final TicketCount count) {
+        return LottoFactory.createLottos(count,
+                InputView.inputManualNums(count.ofManual()));
     }
 
-    private void end(final Result result, final Money money) {
-        OutputView.printLottosResult(result);
-        OutputView.printProfit(Util.getProfit((float) result.getPrize(), (float) money.get()));
+    private WinningLotto makeWinNums() {
+        return LottoFactory.createWinNums(InputView.inputWinLottoNums(), InputView.inputBonusNumber());
+    }
+
+    private void end(final Result result, final LottoMoney lottoMoney) {
+        ResultView.printLottosResult(result);
+        ResultView.printProfit(getProfit((float) result.getPrize(), (float) lottoMoney.get()));
     }
 }

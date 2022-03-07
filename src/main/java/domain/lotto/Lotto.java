@@ -1,40 +1,49 @@
 package domain.lotto;
 
+import exception.lotto.LottoNumDuplicatedException;
+import exception.lotto.LottoNumWrongSizeException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
-    private static final String LOTTO_NUMS_DUPLICATED_ERROR_MESSAGE = "로또 번호는 중복될 수 없습니다.";
+    private static final int SIZE = 6;
+    private final List<LottoNumber> value;
 
-    final List<LottoNumber> lotto;
-
-    Lotto(List<LottoNumber> balls) {
-        validate(balls);
-        Collections.sort(balls);
-        this.lotto = balls;
+    private Lotto(final List<LottoNumber> value) {
+        validate(value);
+        Collections.sort(value);
+        this.value = List.copyOf(value);
     }
 
-    private static void validate(List<LottoNumber> lottoNumbers) {
-        HashSet<LottoNumber> compareNums = new HashSet<>(lottoNumbers);
-        if (compareNums.size() != lottoNumbers.size()) {
-            throw new IllegalArgumentException(LOTTO_NUMS_DUPLICATED_ERROR_MESSAGE);
+    public static Lotto from(final List<LottoNumber> value) {
+        return new Lotto(value);
+    }
+
+    private static void validate(final List<LottoNumber> value) {
+        Set<LottoNumber> setValue = new HashSet<>(value);
+        if (setValue.size() != value.size()) {
+            throw new LottoNumDuplicatedException(value);
+        }
+        if (value.size() != SIZE) {
+            throw new LottoNumWrongSizeException(value.size());
         }
     }
 
-    public int countSameNum(final WinNumbers winNumbers) {
-        return (int) lotto.stream()
-                .filter(winNumbers::contains)
+    public int countSameNum(final WinningLotto winningLotto) {
+        return (int) value.stream()
+                .filter(winningLotto::contains)
                 .count();
     }
 
-    public boolean contains(final LottoNumber ball) {
-        return lotto.contains(ball);
+    public boolean contains(final LottoNumber lottoNumber) {
+        return value.contains(lottoNumber);
     }
 
     public List<LottoNumber> get() {
-        return lotto;
+        return List.copyOf(value);
     }
 
     @Override
@@ -46,18 +55,18 @@ public class Lotto {
             return false;
         }
         Lotto lotto1 = (Lotto) o;
-        return Objects.equals(lotto, lotto1.lotto);
+        return Objects.equals(value, lotto1.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lotto);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
         return "Lotto{" +
-                "lotto=" + lotto +
+                "lotto=" + value +
                 '}';
     }
 }

@@ -1,41 +1,45 @@
 package domain.lotto;
 
+import exception.lotto.LottoNumRangeException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    public static final int MIN_LOTTO_NUM = 1;
-    public static final int MAX_LOTTO_NUM = 45;
-    public static final String LOTTO_NUM_RANGE_ERROR_MESSAGE = "로또 번호는 1에서 45사이의 수여야 합니다.";
-    public static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
-
+    private static final int MIN = 1;
+    private static final int MAX = 45;
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
     static {
-        for (int i = MIN_LOTTO_NUM; i <= MAX_LOTTO_NUM; i++) {
-            LOTTO_NUMBER_CACHE.put(i, new LottoNumber(i));
+        for (int i = MIN; i <= MAX; i++) {
+            CACHE.put(i, new LottoNumber(i));
         }
     }
 
-    private final int number;
+    private final int value;
 
-    private LottoNumber(final int number) {
-        this.number = number;
+    private LottoNumber(final int value) {
+        validate(value);
+        this.value = value;
     }
 
-    public static LottoNumber from(final int num) {
-        validate(num);
-        return LOTTO_NUMBER_CACHE.get(num);
+    public static LottoNumber getInstance(final int value) {
+        validate(value);
+        return CACHE.get(value);
     }
 
-    private static void validate(final int number) {
-        if (number < MIN_LOTTO_NUM || number > MAX_LOTTO_NUM) {
-            throw new IllegalArgumentException(LOTTO_NUM_RANGE_ERROR_MESSAGE);
+    private static void validate(final int value) {
+        if (value < MIN || value > MAX) {
+            throw new LottoNumRangeException(value);
         }
+    }
+
+    public static Map<Integer, LottoNumber> getCache() {
+        return Map.copyOf(CACHE);
     }
 
     public int get() {
-        return this.number;
+        return this.value;
     }
 
     @Override
@@ -47,23 +51,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
             return false;
         }
         LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        return value == that.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
-        return "LottoNumber{" +
-                "number=" + number +
-                '}';
+        return value + "";
     }
 
     @Override
     public int compareTo(LottoNumber o) {
-        return java.lang.Integer.compare(number, o.get());
+        return java.lang.Integer.compare(value, o.get());
     }
 }

@@ -1,28 +1,30 @@
 package view;
 
 import domain.lotto.Lotto;
+import domain.lotto.LottoGroup;
 import domain.lotto.LottoNumber;
 import domain.result.Rank;
 import domain.result.Result;
-import java.util.List;
+import domain.result.TicketCount;
 
-public class OutputView {
-    public static final String BUY_MESSAGE = "개를 구매했습니다.";
-    public static final String LOTTO_PREFIX = "[";
-    public static final String LOTTO_ENDFIX = "]";
-    public static final String SEPARATOR = ", ";
-    public static final int DELETE_IDX = 2;
-    public static final String RESULT_START_MESSAGE =
+public class ResultView {
+    private static final String BUY_MESSAGE =
+            System.lineSeparator() + "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
+    private static final String LOTTO_PREFIX = "[";
+    private static final String LOTTO_ENDFIX = "]";
+    private static final String SEPARATOR = ", ";
+    private static final int DELETE_IDX = 2;
+    private static final String RESULT_START_MESSAGE =
             System.lineSeparator() + "당첨 통계" + System.lineSeparator() + "---------";
-    public static final String RESULT_RANK_MESSAGE = "%d개 일치%s(%d원)- %d개" + System.lineSeparator();
-    public static final String SAME_BONUS_MESSAGE = ", 보너스 볼 일치";
-    public static final String PROFIT_MESSAGE =
+    private static final String RESULT_RANK_MESSAGE = "%d개 일치%s(%d원)- %d개" + System.lineSeparator();
+    private static final String SAME_BONUS_MESSAGE = ", 보너스 볼 일치";
+    private static final String PROFIT_MESSAGE =
             "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해%s라는 의미임)" + System.lineSeparator();
-    public static final String NO_MESSAGE = " 아니";
+    private static final String NO_MESSAGE = " 아니";
 
-    public static void printLottoTickets(final List<Lotto> lottoTickets) {
-        System.out.println(lottoTickets.size() + BUY_MESSAGE);
-        for (Lotto lotto : lottoTickets) {
+    public static void printLottoTickets(final TicketCount count, final LottoGroup lottoTickets) {
+        System.out.printf(BUY_MESSAGE, count.ofManual(), count.ofAuto());
+        for (Lotto lotto : lottoTickets.get()) {
             printLottoNumbers(lotto);
         }
     }

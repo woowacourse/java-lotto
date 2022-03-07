@@ -1,4 +1,4 @@
-package utils;
+package domain.generator;
 
 import domain.lotto.LottoNumber;
 import java.util.ArrayList;
@@ -11,14 +11,14 @@ public class NumsGenerator {
     private static final int FROM_INDEX = 0;
 
     public static List<LottoNumber> generateByRandom() {
-        final List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.LOTTO_NUMBER_CACHE.values());
+        final List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.getCache().values());
         Collections.shuffle(lottoNumbers);
         return lottoNumbers.subList(FROM_INDEX, END_INDEX);
     }
 
     public static List<LottoNumber> generate(final List<Integer> lottoNums) {
         return lottoNums.stream()
-                .map(LottoNumber::from)
+                .map(LottoNumber::getInstance)
                 .sorted()
                 .collect(Collectors.toList());
     }
