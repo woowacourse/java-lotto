@@ -2,10 +2,11 @@ package view;
 
 import exception.lotto.LottoNumWrongPatternException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-import utils.Util;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final String MONEY_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
@@ -14,6 +15,7 @@ public class InputView {
     private static final String MANUAL_TICKET_COUNT_MESSAGE = System.lineSeparator() + "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String MANUAL_TICKET_NUMBS_GROUP_MESSAGE = System.lineSeparator() + "수동으로 구매할 번호를 입력해 주세요.";
 
+    private static final String REGEX = ", ";
     private static final Pattern PATTERN = Pattern.compile("^[\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+$");
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -55,7 +57,13 @@ public class InputView {
     private static List<Integer> inputLottoNums() {
         final String lottoNumbers = SCANNER.nextLine();
         validateLottoNums(lottoNumbers);
-        return Util.separateNumbers(lottoNumbers);
+        return separateNumbers(lottoNumbers);
+    }
+
+    private static List<Integer> separateNumbers(final String numbersText) {
+        return Arrays.stream(numbersText.split(REGEX))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     private static void validateLottoNums(final String rawLottoNumbers) {

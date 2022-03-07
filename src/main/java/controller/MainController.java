@@ -6,7 +6,6 @@ import domain.lotto.LottoMoney;
 import domain.lotto.WinningLotto;
 import domain.result.Result;
 import domain.result.TicketCount;
-import utils.Util;
 import view.InputView;
 import view.ResultView;
 
@@ -51,6 +50,10 @@ public class MainController {
 
     private void end(final Result result, final LottoMoney lottoMoney) {
         ResultView.printLottosResult(result);
-        ResultView.printProfit(Util.getProfit((float) result.getPrize(), (float) lottoMoney.get()));
+        ResultView.printProfit(getProfit((float) result.getPrize(), (float) lottoMoney.get()));
+    }
+
+    private static float getProfit(final float nowMoney, final float pastMoney) {
+        return nowMoney / pastMoney;
     }
 }
