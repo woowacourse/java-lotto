@@ -1,5 +1,6 @@
 package model.generator;
 
+import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 import static model.Lotto.LOTTO_NUMBER_SIZE;
 import static model.LottoNumber.MAXIMUM_LOTTO_NUMBER;
@@ -39,13 +40,8 @@ public class RandomGenerator implements LottosGenerator {
 
     private Lotto createLotto() {
         Collections.shuffle(numberPool);
-        return Lotto.of(getNumbers(new LinkedList<>(numberPool)));
-    }
-
-    private List<Integer> getNumbers(Queue<Integer> queue) {
-        return IntStream.range(0, LOTTO_NUMBER_SIZE)
-                .map(i -> queue.remove())
-                .boxed()
-                .collect(Collectors.toList());
+        return numberPool.stream()
+                .limit(LOTTO_NUMBER_SIZE)
+                .collect(collectingAndThen(toList(), Lotto::of));
     }
 }
