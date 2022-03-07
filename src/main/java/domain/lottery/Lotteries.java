@@ -1,29 +1,38 @@
 package domain.lottery;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import domain.Rank;
 
-public class Lotteries {
+public final class Lotteries {
+
+	private static final int INITIAL_RANK_COUNT = 0;
 
 	private final List<Lottery> lotteries;
 
-	private Lotteries(final List<Set<LotteryNumber>> lotteriesNumber) {
-		lotteries = new ArrayList<>();
-		lotteriesNumber.forEach(lotteryNumber ->
-			lotteries.add(Lottery.from(lotteryNumber)));
+	private Lotteries(final List<Lottery> lotteriesNumber) {
+		this.lotteries = lotteriesNumber;
 	}
 
-	public static Lotteries from(final List<Set<LotteryNumber>> lotteriesNumber) {
-		return new Lotteries(lotteriesNumber);
+	public static Lotteries from(final List<List<Lottery>> lotteriesNumber) {
+		return new Lotteries(concatLotteries(lotteriesNumber));
+	}
+
+	private static List<Lottery> concatLotteries(final List<List<Lottery>> lotteriesNumber) {
+		final List<Lottery> concatLottery = new ArrayList<>();
+		for (List<Lottery> lotteries : lotteriesNumber) {
+			concatLottery.addAll(lotteries);
+		}
+		return concatLottery;
 	}
 
 	public List<Lottery> getLotteries() {
-		return lotteries;
+		return Collections.unmodifiableList(lotteries);
 	}
 
 	public Map<Rank, Integer> getTheNumberOfWinners(final WinningLottery winningLottery) {
@@ -32,7 +41,12 @@ public class Lotteries {
 			Rank rank = winningLottery.getRank(lottery);
 			putCountToWinner(winners, rank);
 		});
-		return winners;
+		return Collections.unmodifiableMap(winners);
+	}
+
+	private Map<Rank, Integer> initRankResult() {
+		return Rank.valuesWithoutNone().stream()
+			.collect(Collectors.toMap(Function.identity(), value -> INITIAL_RANK_COUNT));
 	}
 
 	private void putCountToWinner(final Map<Rank, Integer> winners, final Rank rank) {
@@ -41,10 +55,7 @@ public class Lotteries {
 		}
 	}
 
-	private Map<Rank, Integer> initRankResult() {
-		final Map<Rank, Integer> rankResult = new HashMap<>();
-		Rank.valuesWithoutNone()
-			.forEach((rank) -> rankResult.put(rank, 0));
-		return rankResult;
+	public int size() {
+		return lotteries.size();
 	}
 }

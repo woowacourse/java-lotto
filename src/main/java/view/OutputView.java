@@ -8,16 +8,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import domain.NumOfLottery;
+import domain.Result;
 import domain.lottery.Lottery;
 import domain.Rank;
 import domain.lottery.LotteryNumber;
 
 public class OutputView {
 
-	public void printStatistics(final Map<Rank, Integer> ranking, final double incomePercent) {
+	public void printStatistics(final Result result) {
 		System.out.println(RESULT_STATISTICS.getMessage());
-		printRanking(ranking);
-		printIncomePercent(incomePercent);
+		printRanking(result.getRankResult());
+		printIncomePercent(result.getReturnRate());
 	}
 
 	private void printRanking(final Map<Rank, Integer> ranking) {
@@ -44,10 +46,16 @@ public class OutputView {
 		System.out.printf(RETURN_RATE.getMessage(), incomePercent);
 	}
 
-	public void printLotteries(final List<Lottery> lotteries) {
+	public void printLotteries(final List<Lottery> lotteries, final NumOfLottery numOfLottery) {
+		System.out.println(makePurchasedLotteryMessage(numOfLottery));
 		lotteries.forEach((lottery ->
 			System.out.println(convertToLotteryNumbers(lottery.getNumbers()))
 		));
+	}
+
+	private String makePurchasedLotteryMessage(NumOfLottery numOfLottery) {
+		return String.format(PURCHASED_LOTTERY_MESSAGE.getMessage(), numOfLottery.getNumOfManualLottery(),
+			numOfLottery.getNumOfAutoLottery());
 	}
 
 	private String convertToLotteryNumbers(final Set<LotteryNumber> lotteryNumbers) {

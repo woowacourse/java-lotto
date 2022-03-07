@@ -2,18 +2,24 @@ package domain.lottery;
 
 import static domain.exception.LotteryExceptionMessages.*;
 
+import java.util.Collections;
 import java.util.Set;
+import java.util.TreeSet;
 
-public class Lottery {
+public final class Lottery {
 
-	private static final int LOTTERY_SIZE = 6;
+	public static final int LOTTERY_SIZE = 6;
 
 	private final Set<LotteryNumber> numbers;
 
 	private Lottery(final Set<LotteryNumber> numbers) {
-		validateNumbers(numbers);
-		this.numbers = numbers;
+		final Set<LotteryNumber> tempNumbers = deepCopyOf(numbers);
+		validateNumbers(tempNumbers);
+		this.numbers = tempNumbers;
+	}
 
+	private Set<LotteryNumber> deepCopyOf(final Set<LotteryNumber> numbers) {
+		return new TreeSet<>(numbers);
 	}
 
 	public static Lottery from(final Set<LotteryNumber> numbers) {
@@ -41,6 +47,11 @@ public class Lottery {
 	}
 
 	public Set<LotteryNumber> getNumbers() {
-		return numbers;
+		return Collections.unmodifiableSet(numbers);
+	}
+
+	public boolean isDuplicated(LotteryNumber number) {
+		return this.numbers.stream()
+			.anyMatch(lotteryNumber -> lotteryNumber.equals(number));
 	}
 }

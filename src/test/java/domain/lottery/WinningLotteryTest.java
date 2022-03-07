@@ -5,10 +5,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -21,8 +20,12 @@ import domain.Rank;
 
 public class WinningLotteryTest {
 
-	private final Set<LotteryNumber> winningNumbers = LotteryNumberGenerator.generateLotteryNumbers(
-		Arrays.asList(1, 2, 3, 4, 5, 6));
+	private Lottery winningNumbers;
+
+	@BeforeEach
+	void init() {
+		winningNumbers = LotteryGenerator.generateLottery(Arrays.asList(1, 2, 3, 4, 5, 6));
+	}
 
 	@Nested
 	@DisplayName("보너스 볼의")
@@ -30,8 +33,9 @@ public class WinningLotteryTest {
 		@Test
 		@DisplayName("범위가 1~45 이면서 당첨번호와 중복이 없으면 통과")
 		void theNumberOfBonusBall() {
+			winningNumbers = LotteryGenerator.generateLottery(Arrays.asList(1, 2, 3, 4, 5, 6));
 			assertThatNoException().isThrownBy(() ->
-				WinningLottery.of(winningNumbers, new LotteryNumber(10))
+				WinningLottery.of(winningNumbers, LotteryNumber.from(10))
 			);
 		}
 
@@ -40,7 +44,7 @@ public class WinningLotteryTest {
 		@ValueSource(ints = {0, 46})
 		void invalidBonusBallRange(final int bonusBall) {
 			assertThatThrownBy(() ->
-				WinningLottery.of(winningNumbers, new LotteryNumber(bonusBall))
+				WinningLottery.of(winningNumbers, LotteryNumber.from(bonusBall))
 			).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining(INVALID_RANGE_EXCEPTION.getMessage());
 		}
@@ -49,22 +53,23 @@ public class WinningLotteryTest {
 		@DisplayName("중복이 있으면 실패")
 		void duplicatedBonusBallNumber() {
 			assertThatThrownBy(() ->
-				WinningLottery.of(winningNumbers, new LotteryNumber(1))
+				WinningLottery.of(winningNumbers, LotteryNumber.from(1))
 			).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining(DUPLICATE_NUMBER_EXCEPTION.getMessage());
 		}
 	}
 
 	@DisplayName("당첨번호, 보너스와 입력된 로또 번호를 비교해 올바른 등수를 확인")
-	@ParameterizedTest(name = "{index} {displayName} rank={0}")
+	@ParameterizedTest(name = "{index} {displayName} expectedRank={0}")
 	@MethodSource("generateParameter")
-	void checkRank(final List<Integer> lottoNumbers, final Rank rank) {
+	void checkRank(final List<Integer> lottoNumbers, final Rank expectedRank) {
 		//given
-		WinningLottery winningLottery = WinningLottery.of(winningNumbers, new LotteryNumber(7));
-		Lottery lottery = Lottery.from(LotteryNumberGenerator.generateLotteryNumbers(lottoNumbers));
+		final Lottery lottery = LotteryGenerator.generateLottery(lottoNumbers);
+		WinningLottery winningLottery = WinningLottery.of(winningNumbers, LotteryNumber.from(7));
 		//when
+		Rank resultRank = winningLottery.getRank(lottery);
 		//then
-		assertThat(winningLottery.getRank(lottery)).isEqualTo(rank);
+		assertThat(resultRank).isEqualTo(expectedRank);
 	}
 
 	static Stream<Arguments> generateParameter() {

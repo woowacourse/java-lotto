@@ -3,6 +3,7 @@ package view;
 import static view.messages.InputExceptionMessages.*;
 import static view.messages.InputViewMessages.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -13,79 +14,113 @@ public class InputView {
 
 	private static final Scanner scanner = new Scanner(System.in);
 	private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
-	private static final Pattern WINNING_NUMBER_PATTERN = Pattern.compile("^([1-9]{1,2}[,][\\s]?){5}[1-9]{1,2}$");
-	private static final String WINNING_NUMBER_DELIMITER = ",";
+	private static final Pattern LOTTERY_NUMBER_PATTERN = Pattern.compile("^([1-9]{1,2}[,][\\s]?){5}[1-9]{1,2}$");
+	private static final String LOTTERY_NUMBER_DELIMITER = ",";
 
 	public int inputValidMoney() {
-		final String money = inputMoney();
-		return Integer.parseInt(money);
-	}
-
-	private String inputMoney() {
 		System.out.println(INPUT_MONEY_MESSAGE.getMessage());
-		final String money = scanner.nextLine();
 		try {
-			validateMoney(money);
-			return money;
+			final String money = inputMoney();
+			return Integer.parseInt(money);
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
-			return inputMoney();
+			return inputValidMoney();
 		}
 	}
 
-	private void validateMoney(final String money) {
+	private String inputMoney() {
+		final String money = scanner.nextLine();
 		validateNumber(money);
+		return money;
 	}
 
-	private void validateNumber(String money) {
-		if (!NUMBER_PATTERN.matcher(money).matches()) {
-			throw new IllegalArgumentException(INVALID_INPUT_NUMBER_EXCEPTION.getMessage());
+	public int inputValidNumOfManualLottery() {
+		System.out.println(INPUT_NUM_OF_MANUAL_LOTTERY_MESSAGE.getMessage());
+		try {
+			String numOfManualLottery = inputNumOfManualLottery();
+			return Integer.parseInt(numOfManualLottery);
+		} catch (IllegalArgumentException exception) {
+			System.out.println(exception.getMessage());
+			return inputValidNumOfManualLottery();
+		}
+	}
+
+	private String inputNumOfManualLottery() {
+		final String numOfManualLottery = scanner.nextLine();
+		validateNumber(numOfManualLottery);
+		return numOfManualLottery;
+	}
+
+	public List<List<Integer>> inputManualLotteryNumber(final int numOfManualLottery) {
+		System.out.println(INPUT_MANUAL_LOTTERY_NUMBER_MESSAGE.getMessage());
+		List<List<Integer>> manualNumbers = new ArrayList<>();
+		try {
+			inputLotteryNumberToManualNumbers(numOfManualLottery, manualNumbers);
+			return manualNumbers;
+		} catch (IllegalArgumentException exception) {
+			System.out.println(exception.getMessage());
+			return inputManualLotteryNumber(numOfManualLottery);
+		}
+	}
+
+	private void inputLotteryNumberToManualNumbers(final int numOfManualLottery,
+		final List<List<Integer>> manualNumbers) {
+		for (int i = 0; i < numOfManualLottery; i++) {
+			final String numbers = inputLotteryNumber();
+			manualNumbers.add(splitNumbers(numbers));
 		}
 	}
 
 	public List<Integer> inputValidLotteryNumber() {
-		final String numbers = inputLotteryNumber();
-		return splitNumbers(numbers);
-	}
-
-	private String inputLotteryNumber() {
 		System.out.println(INPUT_WINNING_NUMBER_MESSAGE.getMessage());
-		final String winningNumber = scanner.nextLine();
 		try {
-			validateWinningNumber(winningNumber);
-			return winningNumber;
+			final String numbers = inputLotteryNumber();
+			return splitNumbers(numbers);
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
-			return inputLotteryNumber();
+			return inputValidLotteryNumber();
 		}
 	}
 
+	private String inputLotteryNumber() {
+		final String lotteryNumber = scanner.nextLine();
+		validateLotteryNumber(lotteryNumber);
+		return lotteryNumber;
+	}
+
 	private List<Integer> splitNumbers(String numbers) {
-		return Arrays.stream(numbers.split(WINNING_NUMBER_DELIMITER))
+		return Arrays.stream(numbers.split(LOTTERY_NUMBER_DELIMITER))
 			.map(String::trim)
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
 	}
 
-	private void validateWinningNumber(String winningNumber) {
-		if (!WINNING_NUMBER_PATTERN.matcher(winningNumber).matches()) {
+	private void validateNumber(String number) {
+		if (!NUMBER_PATTERN.matcher(number).matches()) {
+			throw new IllegalArgumentException(INVALID_INPUT_NUMBER_EXCEPTION.getMessage());
+		}
+	}
+
+	private void validateLotteryNumber(String lotteryNumber) {
+		if (!LOTTERY_NUMBER_PATTERN.matcher(lotteryNumber).matches()) {
 			throw new IllegalArgumentException(INVALID_WINNING_NUMBER_EXCEPTION.getMessage());
 		}
 	}
 
 	public int inputValidBonusNumber() {
-		return Integer.parseInt(inputBonusNumber());
+		System.out.println(INPUT_BONUS_BALL_MESSAGE.getMessage());
+		try {
+			String bonusNumber = inputBonusNumber();
+			return Integer.parseInt(bonusNumber);
+		} catch (IllegalArgumentException exception) {
+			System.out.println(exception.getMessage());
+			return inputValidBonusNumber();
+		}
 	}
 
 	private String inputBonusNumber() {
-		System.out.println(INPUT_BONUS_BALL_MESSAGE.getMessage());
 		final String bonusNumber = scanner.nextLine();
-		try {
-			validateNumber(bonusNumber);
-			return bonusNumber;
-		} catch (IllegalArgumentException exception) {
-			System.out.println(exception.getMessage());
-			return inputBonusNumber();
-		}
+		validateNumber(bonusNumber);
+		return bonusNumber;
 	}
 }
