@@ -1,17 +1,20 @@
 package domain;
 
+import java.util.Arrays;
+
 public enum ResultStatics {
-
 	NOTHING(0, 0, false),
-	THREE(3, 5000, false),
-	FOUR(4, 50000, false),
-	FIVE(5, 1500000, false),
-	FIVE_AND_BONUS(5, 30000000, true),
-	SIX(6, 2000000000, false);
+	FIFTH(3, 5000, false),
+	FOURTH(4, 50000, false),
+	THIRD(5, 1500000, false),
+	SECOND(5, 30000000, true),
+	FIRST(6, 2000000000, false);
 
-	private int numberMatches;
-	private int price;
-	private boolean hitBonus;
+	private static final int MIN_NUMBER_TO_WIN = 3;
+
+	private final int numberMatches;
+	private final int price;
+	private final boolean hitBonus;
 
 	ResultStatics(int numberMatches, int price, boolean hitBonus) {
 		this.numberMatches = numberMatches;
@@ -20,33 +23,26 @@ public enum ResultStatics {
 	}
 
 	public static ResultStatics of(int numberMatches, boolean hitBonus) {
-		if (numberMatches == 3) {
-			return THREE;
+		if (numberMatches < MIN_NUMBER_TO_WIN) {
+			return NOTHING;
 		}
-		if (numberMatches == 4) {
-			return FOUR;
-		}
-		if (numberMatches == 5 && !hitBonus) {
-			return FIVE;
-		}
-		if (numberMatches == 5 && hitBonus) {
-			return FIVE_AND_BONUS;
-		}
-		if (numberMatches == 6) {
-			return SIX;
-		}
-		return NOTHING;
+
+		return Arrays.stream(ResultStatics.values())
+			.filter(r -> ((r.numberMatches == numberMatches) && (r.hitBonus == hitBonus)))
+			.findFirst()
+			.orElse(NOTHING);
 	}
 
 	public int getNumberMatches() {
-		return this.numberMatches;
+		return numberMatches;
 	}
 
 	public int getPrice() {
-		return this.price;
+		return price;
 	}
 
 	public boolean isHitBonus() {
-		return this.hitBonus;
+		return hitBonus;
 	}
+
 }

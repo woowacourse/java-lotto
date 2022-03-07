@@ -1,33 +1,36 @@
 package domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
+import static java.util.stream.Collectors.toMap;
 
 public class Result {
-	private Map<ResultStatics, Integer> results;
-	private float profitRate = 0;
+	private final Map<ResultStatics, Integer> results
+		= Arrays.stream(ResultStatics.values())
+		.collect(toMap(resultStatics -> resultStatics, count -> 0));
+	private final float profitRate;
 
-	public Result() {
-		results = new HashMap<>();
-		for (ResultStatics resultStatics : ResultStatics.values()) {
-			results.put(resultStatics, 0);
+	public Result(List<ResultStatics> totalResult, int money) {
+		for (ResultStatics resultStatics : totalResult) {
+			addResult(resultStatics);
 		}
+		profitRate = calculateProfitRate(money);
 	}
 
-	public void addResult(ResultStatics resultStatics) {
+	private void addResult(ResultStatics resultStatics) {
 		results.put(resultStatics, results.get(resultStatics) + 1);
 	}
 
-	public void setProfitRate(int money) {
+	private float calculateProfitRate(int money) {
 		int profit = 0;
 		for (ResultStatics resultStatics : results.keySet()) {
 			profit += (resultStatics.getPrice() * results.get(resultStatics));
 		}
-		this.profitRate = (float) profit / money;
+		return (float) profit / money;
 	}
 
 	public Map<ResultStatics, Integer> getResults() {
-		return results;
+		return Collections.unmodifiableMap(results);
 	}
 
 	public float getProfitRate() {

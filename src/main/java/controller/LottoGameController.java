@@ -1,38 +1,35 @@
 package controller;
 
 import domain.AnswerLotto;
-import domain.BonusNumber;
-import domain.AnswerLottoNumbers;
-import domain.Lottos;
-import util.RandomLottoNumberGenerator;
+import domain.LottoMachine;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static view.InputView.*;
 import static view.OutputView.*;
 
 public class LottoGameController {
 
-	public static void run() {
+	public void run() {
 		try {
-			Lottos lottos = initLottos();
-			AnswerLotto answerLotto = initAnswerLotto();
-			printResults(lottos.generateResult(answerLotto));
+			int money = inputMoney();
+			int manualCount = inputmanualCount();
+
+			LottoMachine lottoMachine = new LottoMachine(money, inputTotalManualNumbers(manualCount));
+			printLottoTickets(manualCount, lottoMachine.getLottoTickets());
+
+			printResult(lottoMachine.generateResult(AnswerLotto.of(inputAnswerNumbers(), inputBonusNumber())));
 		} catch (IllegalArgumentException e) {
 			printErrorMessage(e.getMessage());
 		}
 	}
 
-	private static Lottos initLottos() {
-		Lottos lottos = Lottos.of(inputMoney(), new RandomLottoNumberGenerator());
-		printLottos(lottos);
-
-		return lottos;
-	}
-
-	private static AnswerLotto initAnswerLotto() {
-		AnswerLottoNumbers lottoNumbers = new AnswerLottoNumbers(inputAnsNumbers());
-		BonusNumber bonusNumber = new BonusNumber(inputBonusNumber());
-
-		return new AnswerLotto(lottoNumbers, bonusNumber);
+	private List<List<Integer>> inputTotalManualNumbers(int manualCount) {
+		if (manualCount == 0) {
+			return new ArrayList<>();
+		}
+		return inputManualNumbers(manualCount);
 	}
 
 }

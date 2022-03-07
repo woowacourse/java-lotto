@@ -4,25 +4,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static constant.ErrorConstant.START_ERROR;
-
 public class InputView {
 	private static final String NUMBER_REGEX = "^[0-9]+$";
 	private static final String STANDARD_OF_ANSWER_NUMBERS = ", ";
-	private static final String WRONG_STANDARD_INPUT = START_ERROR + "입력 형식에 맞춰 입력해주세요.";
-	private static final String MUST_BE_POSITIVE_INTEGER = START_ERROR + "입력은 양의 정수만 허용됩니다.";
-	private static final String MUST_NOT_EMPTY = START_ERROR + "입력은 빈 입력일 수 없습니다.";
+	private static final String WRONG_STANDARD_INPUT = "입력 형식에 맞춰 입력해주세요.";
+	private static final String MUST_BE_POSITIVE_INTEGER = "입력은 양의 정수만 허용됩니다.";
+	private static final String MUST_NOT_EMPTY = "입력은 빈 입력일 수 없습니다.";
+
+	private InputView() {
+	}
 
 	public static int inputMoney() {
 		System.out.println("구입금액을 입력해 주세요.");
 		return inputSingleNumber();
 	}
 
-	public static List<Integer> inputAnsNumbers() {
+	public static int inputmanualCount() {
+		System.out.println("\n수동으로 구매할 로또 수를 입력해주세요.");
+		return inputSingleNumber();
+	}
+
+	public static List<List<Integer>> inputManualNumbers(int count) {
+		System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+
+		List<List<Integer>> totalManualNumbers = new ArrayList<>();
+		while (count-- > 0) {
+			totalManualNumbers.add(inputMultipleNumber());
+		}
+
+		return totalManualNumbers;
+	}
+
+	public static List<Integer> inputAnswerNumbers() {
 		System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-		String input = inputLine();
-		validateMultipleNumber(input);
-		return parseMultipleNumber(input);
+		return inputMultipleNumber();
 	}
 
 	public static int inputBonusNumber() {
@@ -34,6 +49,12 @@ public class InputView {
 		String input = inputLine();
 		validateNumber(input);
 		return Integer.parseInt(input);
+	}
+
+	private static List<Integer> inputMultipleNumber() {
+		String input = inputLine();
+		validateMultipleNumber(input);
+		return parseMultipleNumber(input);
 	}
 
 	private static String inputLine() {
@@ -51,8 +72,8 @@ public class InputView {
 		validateStandard(input);
 	}
 
-	private static void validateEmpty(String Input) {
-		if (Input.isEmpty()) {
+	private static void validateEmpty(String input) {
+		if (input == null || input.isEmpty()) {
 			throw new IllegalArgumentException(MUST_NOT_EMPTY);
 		}
 	}
@@ -70,15 +91,15 @@ public class InputView {
 	}
 
 	private static List<Integer> parseMultipleNumber(String input) {
-		List<Integer> answers = new ArrayList<>();
+		List<Integer> parsedMultipleNumbers = new ArrayList<>();
 		String[] parsedInput = input.split(STANDARD_OF_ANSWER_NUMBERS);
 
 		for (String eachInput : parsedInput) {
 			validateNumber(eachInput);
-			answers.add(Integer.parseInt(eachInput));
+			parsedMultipleNumbers.add(Integer.parseInt(eachInput));
 		}
 
-		return answers;
+		return parsedMultipleNumbers;
 	}
 
 }
