@@ -25,12 +25,4 @@ class TotalLottoCountTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 투입 금액은 천원 단위의 금액으로 입력하세요.");
     }
-
-    @Test
-    @DisplayName("투입 금액이 수동 구매 로또 개수의 합보다 작으면 오류를 발생한다.")
-    void generateMoney_LessThanManualLottoPriceSum() {
-        assertThatThrownBy(() -> new TotalLottoCount(2000, 3))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 투입 금액이 수동 구매 로또 가격합 보다 적습니다.");
-    }
 }

@@ -1,11 +1,11 @@
 package model.LottoCount;
 
-public class ManualLottoCount {
-    private static final String NEGATIVE_COUNT_MESSAGE = "[ERROR] 입력한 수동 구매 로또 개수가 음수입니다.";
+public class AutoLottoCount {
+    private static final String NEGATIVE_COUNT_MESSAGE = "[ERROR] 자동 구매 로또 개수가 음수입니다.";
 
     private final int count;
 
-    public ManualLottoCount(final int count) {
+    public AutoLottoCount(final int count) {
         checkValidCount(count);
         this.count = count;
     }
