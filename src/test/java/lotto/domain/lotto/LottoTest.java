@@ -12,7 +12,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.domain.factory.LottoFactory;
-import lotto.domain.factory.NumberFactory;
 
 public class LottoTest {
 
@@ -60,7 +59,7 @@ public class LottoTest {
                 Lotto lotto = LottoFactory.auto();
                 int actual = 0;
                 for (int i = 1; i < 46; i++) {
-                    if (lotto.contains(NumberFactory.valueOf(String.valueOf(i)))) {
+                    if (lotto.contains(new Number(i))) {
                         actual++;
                     }
                 }
@@ -96,7 +95,7 @@ public class LottoTest {
             @DisplayName("true를 반환한다.")
             void it_returns_true() {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-                assertThat(lotto.contains(NumberFactory.valueOf("1"))).isTrue();
+                assertThat(lotto.contains(new Number(1))).isTrue();
             }
         }
 
@@ -108,7 +107,7 @@ public class LottoTest {
             @DisplayName("false를 반환한다.")
             void it_returns_true() {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-                assertThat(lotto.contains(NumberFactory.valueOf("7"))).isFalse();
+                assertThat(lotto.contains(new Number(7))).isFalse();
             }
         }
     }

@@ -1,8 +1,5 @@
 package lotto.domain.lotto;
 
-import java.util.List;
-import java.util.function.Consumer;
-
 public class Count {
 
     private final int value;
@@ -10,13 +7,6 @@ public class Count {
     public Count(int value) {
         validateCount(value);
         this.value = value;
-    }
-
-    public void play(List<Lotto> lottos, Consumer<List<Lotto>> action) {
-        int count = value;
-        while (count-- > 0) {
-            action.accept(lottos);
-        }
     }
 
     public Count subtract(Count count) {

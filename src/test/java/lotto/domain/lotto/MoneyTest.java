@@ -9,8 +9,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.domain.factory.MoneyFactory;
-
 public class MoneyTest {
 
     @Nested
@@ -24,8 +22,8 @@ public class MoneyTest {
             @ParameterizedTest
             @CsvSource(value = {"1000|1000", "2000000000|2000000000"}, delimiter = '|')
             @DisplayName("객체를 생성한다.")
-            void it_create_ok(String value, int expected) {
-                Money money = MoneyFactory.valueOf(value);
+            void it_create_ok(int value, int expected) {
+                Money money = new Money(value);
 
                 assertThat(money.getValue()).isEqualTo(expected);
             }
@@ -38,24 +36,10 @@ public class MoneyTest {
             @ParameterizedTest
             @ValueSource(strings = {"999", "2000000001"})
             @DisplayName("예외를 발생시킨다.")
-            void it_throw_exception(String value) {
-                assertThatThrownBy(() -> MoneyFactory.valueOf(value))
+            void it_throw_exception(int value) {
+                assertThatThrownBy(() -> new Money(value))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("1000부터 20억의 숫자여야 합니다.");
-            }
-        }
-
-        @Nested
-        @DisplayName("숫자가 아닌 값이 주어지면")
-        class Context_with_not_a_number {
-
-            @ParameterizedTest
-            @ValueSource(strings = {"a", "%%", "", " "})
-            @DisplayName("예외를 발생시킨다.")
-            void it_throw_exception(String value) {
-                assertThatThrownBy(() -> MoneyFactory.valueOf(value))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("숫자여야 합니다.");
             }
         }
 
@@ -66,8 +50,8 @@ public class MoneyTest {
             @ParameterizedTest
             @CsvSource(value = {"1000|1000", "2000|2000"}, delimiter = '|')
             @DisplayName("객체를 생성한다.")
-            void it_create_ok(String value, int expected) {
-                Money money = MoneyFactory.valueOf(value);
+            void it_create_ok(int value, int expected) {
+                Money money = new Money(value);
 
                 assertThat(money.getValue()).isEqualTo(expected);
             }
@@ -80,8 +64,8 @@ public class MoneyTest {
             @ParameterizedTest
             @ValueSource(strings = {"1001", "2100"})
             @DisplayName("예외를 발생시킨다.")
-            void it_throw_exception(String value) {
-                assertThatThrownBy(() -> MoneyFactory.valueOf(value))
+            void it_throw_exception(int value) {
+                assertThatThrownBy(() -> new Money(value))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("1000으로 나누어 떨어져야 합니다.");
             }

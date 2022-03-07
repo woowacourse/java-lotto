@@ -3,11 +3,10 @@ package lotto.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import lotto.domain.factory.MoneyFactory;
 import lotto.domain.lotto.Count;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.factory.LottoFactory;
-import lotto.domain.factory.NumberFactory;
+import lotto.domain.lotto.LottoCountToBuy;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.Money;
@@ -22,13 +21,11 @@ public class LottoController {
         // 구매 금액 입력
         Money money = requestMoney();
         // 수동, 자동 로또 개수 설정
-        Count totalLottoCount = money.countToBuyLotto();
-        Count manualLottoCount = requestManualLottoCount(money);
-        Count autoLottoCount = totalLottoCount.subtract(manualLottoCount);
-        OutputView.printLottoCount(manualLottoCount, autoLottoCount);
+        LottoCountToBuy lottoCountToBuy = LottoCountToBuy.of(money, requestManualLottoCount(money));
+        OutputView.printLottoCount(lottoCountToBuy);
         // 개수에 맞게 로또 구매
         OutputView.printRequestManualLottoNumberUI();
-        Lottos lottos = requestBuyLottos(manualLottoCount, autoLottoCount);
+        Lottos lottos = requestBuyLottos(lottoCountToBuy);
         OutputView.printLottos(lottos);
         // 당첨 번호와 비교하여 결과 출력
         Result result = lottos.getResult(requestWinningLotto());
@@ -38,25 +35,23 @@ public class LottoController {
 
     private Money requestMoney() {
         try {
-            String input = InputView.inputMoney();
-            return MoneyFactory.valueOf(input);
+            return new Money(InputView.inputMoney());
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
             return requestMoney();
         }
     }
 
-    private Lottos requestBuyLottos(Count manualLottoCount, Count autoLottoCount) {
+    private Lottos requestBuyLottos(LottoCountToBuy lottoCountToBuy) {
         List<Lotto> lottos = new ArrayList<>();
-        requestBuyManualLottos(lottos, manualLottoCount);
-        requestBuyAutoLottos(lottos, autoLottoCount);
+        requestBuyManualLottos(lottos, lottoCountToBuy.getManualCount());
+        requestBuyAutoLottos(lottos, lottoCountToBuy.getAutoCount());
         return new Lottos(lottos);
     }
 
     private Count requestManualLottoCount(Money money) {
         try {
-            String input = InputView.inputCountManualLotto();
-            Count count = new Count(Integer.parseInt(input));
+            Count count = new Count(InputView.inputCountManualLotto());
             money.validateBuyableLottoCount(count);
             return count;
         } catch (IllegalArgumentException exception) {
@@ -65,16 +60,16 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> requestBuyManualLottos(List<Lotto> lottos, Count manualLottoCount) {
-        manualLottoCount.play(lottos, item ->
-            item.add(requestManualLottoNumber()));
-        return lottos;
+    private void requestBuyManualLottos(List<Lotto> lottos, int manualLottoCount) {
+        while (manualLottoCount-- > 0) {
+            lottos.add(requestManualLottoNumber());
+        }
     }
 
-    private List<Lotto> requestBuyAutoLottos(List<Lotto> lottos, Count autoLottoCount) {
-        autoLottoCount.play(lottos, item ->
-            item.add(LottoFactory.auto()));
-        return lottos;
+    private void requestBuyAutoLottos(List<Lotto> lottos, int autoLottoCount) {
+        while (autoLottoCount-- > 0) {
+            lottos.add(LottoFactory.auto());
+        }
     }
 
     private Lotto requestManualLottoNumber() {
@@ -104,9 +99,7 @@ public class LottoController {
 
     private WinningLotto requestWinningLottoContainingBonusNumber(Lotto lotto) {
         try {
-            String input = InputView.inputBonusNumber();
-            Number bonusNumber = NumberFactory.valueOf(input);
-            return new WinningLotto(lotto, bonusNumber);
+            return new WinningLotto(lotto, new Number(InputView.inputBonusNumber()));
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
             return requestWinningLottoContainingBonusNumber(lotto);

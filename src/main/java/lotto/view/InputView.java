@@ -11,14 +11,14 @@ public class InputView {
     private InputView() {
     }
 
-    public static String inputMoney() {
+    public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.(1000원 ~ 20억원)");
-        return scanner.nextLine();
+        return toInteger(scanner.nextLine());
     }
 
-    public static String inputCountManualLotto() {
+    public static int inputCountManualLotto() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextLine();
+        return toInteger(scanner.nextLine());
     }
 
     public static String inputManualLottoNumber() {
@@ -30,8 +30,16 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String inputBonusNumber() {
+    public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextLine();
+        return toInteger(scanner.nextLine());
+    }
+
+    private static int toInteger(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException("숫자를 입력하셔야 합니다.");
+        }
     }
 }
