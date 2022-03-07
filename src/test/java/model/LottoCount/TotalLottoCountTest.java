@@ -1,20 +1,19 @@
-package model.money;
+package model.LottoCount;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
-class MoneyTest {
+class TotalLottoCountTest {
 
     @ParameterizedTest
     @DisplayName("투입 금액이 천원보다 작으면 오류를 발생한다.")
-    @ValueSource(ints = {-1, 0, 900})
-    void generateMoney_UnderThanThousand(int money) {
-        assertThatThrownBy(() -> new Money(money))
+    @CsvSource(value = {"-1 : 2", "0 : 4", "900 : 4"}, delimiter = ':')
+    void generateMoney_UnderThanThousand(int money, int manualLottoCount) {
+        assertThatThrownBy(() -> new TotalLottoCount(money, manualLottoCount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 투입 금액은 천원 단위의 금액으로 입력하세요.");
     }
@@ -22,16 +21,8 @@ class MoneyTest {
     @Test
     @DisplayName("투입 금액이 천원 단위가 아니면 오류를 발생한다.")
     void generateMoney_NotThousandUnit() {
-        assertThatThrownBy(() -> new Money(14500))
+        assertThatThrownBy(() -> new TotalLottoCount(14500, 3))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 투입 금액은 천원 단위의 금액으로 입력하세요.");
-    }
-
-    @Test
-    @DisplayName("투입 금액만큼의 로또 구매개수를 반환한다.")
-    void getPurchaseCount() {
-        final Money money = new Money(100000);
-
-        assertThat(money.getPurchaseCount()).isEqualTo(100);
     }
 }

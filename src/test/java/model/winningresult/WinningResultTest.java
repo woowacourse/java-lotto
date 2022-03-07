@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import model.money.Money;
 import model.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,9 +21,9 @@ class WinningResultTest {
         result.put(Rank.FIFTH, 3);
 
         final WinningResult winningResult = new WinningResult(result);
-        winningResult.getWinningResult()
+        winningResult.getValue()
                 .forEach((rank, count) -> assertThat(count)
-                .isEqualTo(result.get(rank)));
+                        .isEqualTo(result.get(rank)));
     }
 
     @Test
@@ -38,7 +37,7 @@ class WinningResultTest {
         result.put(Rank.FIFTH, 3);
 
         final WinningResult winningResult = new WinningResult(result);
-        final Money money = new Money(100000);
-        assertThat(winningResult.getRateOfReturn(money)).isEqualTo(65000 / (double) 100000);
+        final int totalPurchaseLottoCount = 100;
+        assertThat(winningResult.calculateRateOfReturn(totalPurchaseLottoCount)).isEqualTo(65000 / (double) 100000);
     }
 }
