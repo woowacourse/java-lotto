@@ -39,8 +39,8 @@ public class BudgetTest {
     @Test
     @DisplayName("수익률 계산 테스트")
     void getProfitRate() {
-        assertThat(new Budget(1000).getProfitRateFrom(BigDecimal.valueOf(4000)))
-                .isEqualTo(BigDecimal.valueOf(4));
+        assertThat(new Budget(3000).getProfitRateFrom(BigDecimal.valueOf(4000)))
+                .isEqualTo(BigDecimal.valueOf(1.33));
     }
 
     @Test

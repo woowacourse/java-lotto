@@ -1,10 +1,12 @@
 package model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Budget {
     private static final BigDecimal PRICE_AMOUNT_PER_LOTTO = BigDecimal.valueOf(1000);
+    private static final int PROFIT_RATE_SCALE = 2;
 
     private final BigDecimal amount;
 
@@ -35,11 +37,11 @@ public class Budget {
     }
 
     public BigDecimal getProfitRateFrom(BigDecimal totalPrize) {
-        return totalPrize.divide(amount);
+        return totalPrize.divide(amount, PROFIT_RATE_SCALE, RoundingMode.HALF_DOWN);
     }
 
     public int getMaxCountForLottoIssue() {
-        return amount.divide(PRICE_AMOUNT_PER_LOTTO).intValue();
+        return amount.divide(PRICE_AMOUNT_PER_LOTTO, RoundingMode.DOWN).intValue();
     }
 
     @Override

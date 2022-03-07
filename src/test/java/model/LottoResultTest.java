@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +21,8 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(
                 List.of(LottoRank.FIRST, LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD));
         BigDecimal expected = FIRST_PRIZE.multiply(BigDecimal.valueOf(2)).add(SECOND_PRIZE).add(THIRD_PRIZE);
-        assertThat(lottoResult.getProfitRate(new Budget(4000))).isEqualTo(expected.divide(BigDecimal.valueOf(4000)));
+        assertThat(lottoResult.getProfitRate(new Budget(4000)))
+                .isEqualTo(expected.divide(BigDecimal.valueOf(4000), 2, RoundingMode.HALF_DOWN));
     }
 
     @Test
