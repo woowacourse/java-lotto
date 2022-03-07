@@ -38,7 +38,6 @@ public class Lotto {
 
     private void checkValidation(List<LottoNumber> numbers) {
         checkNull(numbers);
-        //checkRange(numbers);
         checkSize(numbers);
         checkUnique(numbers);
     }

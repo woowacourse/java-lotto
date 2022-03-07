@@ -5,7 +5,6 @@ import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
