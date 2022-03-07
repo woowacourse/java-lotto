@@ -3,9 +3,9 @@ package lotto.model;
 public class Money {
 
     private static final int PRICE_PER_LOTTO = 1000;
-    public static final String MONEY_ERROR_MESSAGE = "[ERROR] 유효한 구매 금액이 아닙니다.";
+    private static final String MONEY_ERROR_MESSAGE = "[ERROR] 유효한 구매 금액이 아닙니다.";
 
-    private final int money;
+    private int money;
 
     public Money(final int money) {
         validateMoney(money);
@@ -24,5 +24,9 @@ public class Money {
 
     public int lottoCount() {
         return money / PRICE_PER_LOTTO;
+    }
+
+    public void plus(Money money) {
+        this.money += money.money;
     }
 }

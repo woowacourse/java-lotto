@@ -1,9 +1,11 @@
 package lotto.controller;
 
-import java.util.Arrays;
-import java.util.regex.Pattern;
+import java.util.List;
 import java.util.stream.Collectors;
+import lotto.model.Lotto;
+import lotto.model.LottoCount;
 import lotto.model.LottoMachine;
+import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
 import lotto.model.generator.LottoGenerator;
@@ -14,72 +16,70 @@ import lotto.view.ResultView;
 
 public class LottoController {
 
-    private static final String NOT_NUMBER_ERROR_MESSAGE = "[ERROR] 문자가 입력되었습니다.";
-    private static final String NUMBER_REGEX = "\\d+";
-
     private LottoGenerator lottoGenerator;
 
-    public LottoController(LottoGenerator lottoGenerator) {
+    public LottoController(final LottoGenerator lottoGenerator) {
         this.lottoGenerator = lottoGenerator;
     }
 
     public void run() {
-        LottoMachine lottoMachine = new LottoMachine(lottoGenerator, validateMoney(InputView.inputMoney()));
-        ResultView.printBuyingLottosResult(lottoMachine.getLottos());
-        WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
-                InputView.inputBonusNumber());
+        Money money = inputMoney();
+        LottoCount lottoCount = inputLottoCount(money);
+
+        LottoMachine lottoMachine = new LottoMachine(lottoGenerator);
+        Lottos boughtLottos = lottoMachine.buy(money, lottoCount, inputManualLottos(lottoCount.getManualLottoCount()));
+        ResultView.printBuyingLottosResult(lottoCount, boughtLottos);
+
+        WinningLotto winningLotto = makeWinningLotto();
         lottoMachine.calculateResult(winningLotto);
         ResultView.printTotalRankResult(lottoMachine);
     }
 
-    private Money validateMoney(String money) {
-        if (!Pattern.matches(NUMBER_REGEX, money)) {
-            throw new IllegalArgumentException(Money.MONEY_ERROR_MESSAGE);
+    private Money inputMoney() {
+        try {
+            return new Money(InputView.inputMoney());
+        } catch (Exception e) {
+            ResultView.printErrorMessage(e);
+            return inputMoney();
         }
-        return new Money(Integer.parseInt(money));
     }
 
-    private WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) {
-        LottoNumbers lottoNumbers = splitWinningNumbers(winningNumbers);
-        LottoNumber lottoBonusNumber = new LottoNumber(toIntBonusNumber(bonusNumber));
-        return new WinningLotto(lottoNumbers, lottoBonusNumber);
+    private LottoCount inputLottoCount(final Money money) {
+        try {
+            return new LottoCount(InputView.inputManualLottoCount(), money);
+        } catch (Exception e) {
+            ResultView.printErrorMessage(e);
+            return inputLottoCount(money);
+        }
     }
 
-    private LottoNumbers splitWinningNumbers(String winningNumbers) {
-        String[] splitNumbers = validateLottoNumbers(winningNumbers);
-        return new LottoNumbers(Arrays.stream(splitNumbers)
-                .map(String::trim)
-                .mapToInt(Integer::parseInt)
-                .boxed()
+    private List<Lotto> inputManualLottos(final int count) {
+        try {
+            List<List<Integer>> lottos = InputView.inputManualNumbers(count);
+            return lottos.stream()
+                    .map(this::makeLottoNumbers)
+                    .map(Lotto::new)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            ResultView.printErrorMessage(e);
+            return inputManualLottos(count);
+        }
+    }
+
+    private LottoNumbers makeLottoNumbers(final List<Integer> numbers) {
+        return new LottoNumbers(numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
     }
 
-    private String[] validateLottoNumbers(String numbers) {
-        String[] splitNumbers = numbers.split(",");
-        for (String number : splitNumbers) {
-            validateNumber(number);
-        }
-        return trimLottoNumbers(splitNumbers);
-    }
-
-    private int validateNumber(String number) {
+    private WinningLotto makeWinningLotto() {
         try {
-            String trimNumber = number.trim();
-            return Integer.parseInt(trimNumber);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_NUMBER_ERROR_MESSAGE);
+            LottoNumbers lottoNumbers = makeLottoNumbers(InputView.inputWinningNumbers());
+            LottoNumber lottoBonusNumber = new LottoNumber(InputView.inputBonusNumber());
+            return new WinningLotto(lottoNumbers, lottoBonusNumber);
+        } catch (Exception e) {
+            ResultView.printErrorMessage(e);
+            return makeWinningLotto();
         }
-    }
-
-    private String[] trimLottoNumbers(String[] numbers) {
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = numbers[i].trim();
-        }
-        return numbers;
-    }
-
-    private int toIntBonusNumber(String bonusNumber) {
-        return validateNumber(bonusNumber);
     }
 }

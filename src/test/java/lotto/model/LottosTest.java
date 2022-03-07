@@ -19,10 +19,23 @@ public class LottosTest {
 
     @BeforeEach
     void init() {
-        Lotto lotto = makeLotto(new int[]{1, 2, 3, 4, 5, 6}); //1등
-        Lotto lotto1 = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
-        Lotto lotto2 = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
-        lottos = new Lottos(Arrays.asList(lotto, lotto1, lotto2));
+        Lotto first = makeLotto(new int[]{1, 2, 3, 4, 5, 6}); //1등
+        Lotto second = makeLotto(new int[]{2, 3, 4, 5, 6, 7}); //2등
+        Lotto fourth = makeLotto(new int[]{3, 4, 5, 6, 7, 8}); //4등
+        lottos = new Lottos(new ArrayList<>(Arrays.asList(first, second, fourth)));
+    }
+
+    private Lotto makeLotto(int[] numbers) {
+        LottoNumbers lottoNumbers = makeLottoNumbers(numbers);
+        return new Lotto(lottoNumbers);
+    }
+
+    private LottoNumbers makeLottoNumbers(int[] numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int num : numbers) {
+            lottoNumbers.add(new LottoNumber(num));
+        }
+        return new LottoNumbers(lottoNumbers);
     }
 
     @DisplayName("Lottos 생성 테스트")
@@ -49,16 +62,12 @@ public class LottosTest {
         assertThat(lottos.size()).isEqualTo(3);
     }
 
-    private Lotto makeLotto(int[] numbers) {
-        LottoNumbers lottoNumbers = makeLottoNumbers(numbers);
-        return new Lotto(lottoNumbers);
-    }
-
-    private LottoNumbers makeLottoNumbers(int[] numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int num : numbers) {
-            lottoNumbers.add(new LottoNumber(num));
-        }
-        return new LottoNumbers(lottoNumbers);
+    @DisplayName("Lottos 합치기 테스트")
+    @Test
+    void combineLottosTest() {
+        Lotto newLotto = makeLotto(new int[]{40, 41, 42, 43, 44, 45});
+        Lottos newLottos = new Lottos(new ArrayList<>(Arrays.asList(newLotto)));
+        Lottos combineLottos = lottos.plusLottos(newLottos);
+        assertThat(combineLottos.size()).isEqualTo(4);
     }
 }

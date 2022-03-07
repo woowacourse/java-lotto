@@ -20,6 +20,15 @@ public class MoneyTest {
     void minusMoneyTest() {
         assertThatThrownBy(() ->
                 new Money(-2))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @DisplayName("돈 더하기 테스트")
+    @Test
+    void plusMoneyTest() {
+        Money money = new Money(0);
+        money.plus(new Money(1000));
+        assertThat(money.getMoney()).isEqualTo(1000);
     }
 }
