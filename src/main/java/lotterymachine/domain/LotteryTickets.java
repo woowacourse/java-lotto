@@ -4,8 +4,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class LotteryTickets {
-    private final List<LotteryTicket> tickets;
     private static final String NOT_CORRECT_SIZE = "로또 구매 개수와 생성하려는 로또 개수가 일치하지 않습니다.";
+
+    private final List<LotteryTicket> tickets;
+
     public LotteryTickets(List<LotteryTicket> tickets, LotteryPurchaseCount lotteryPurchaseCount) {
         validateCorrectSize(tickets, lotteryPurchaseCount);
         this.tickets = tickets;

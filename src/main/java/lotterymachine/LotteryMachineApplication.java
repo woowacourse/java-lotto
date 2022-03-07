@@ -1,8 +1,6 @@
 package lotterymachine;
 
 import lotterymachine.domain.*;
-import lotterymachine.domain.LotteryPurchaseCount;
-import lotterymachine.domain.LotteryPurchaseMoney;
 import lotterymachine.view.InputView;
 import lotterymachine.view.OutputView;
 
@@ -26,20 +24,32 @@ public class LotteryMachineApplication {
     }
 
     private static LotteryPurchaseCount createCount(LotteryPurchaseMoney lotteryPurchaseMoney) {
-        int passivityPurchaseCount = InputView.getPassivityPurchaseCount();
-        return new LotteryPurchaseCount(passivityPurchaseCount, lotteryPurchaseMoney.getPurchasePossibleCount() - passivityPurchaseCount, lotteryPurchaseMoney.getPurchasePossibleCount());
+        int manualPurchaseCount = InputView.getManualPurchaseCount();
+        return new LotteryPurchaseCount(manualPurchaseCount,
+                lotteryPurchaseMoney.getPurchasePossibleCount() - manualPurchaseCount
+                , lotteryPurchaseMoney.getPurchasePossibleCount());
     }
 
     private static LotteryTickets createLotteryTickets(LotteryPurchaseCount lotteryPurchaseCount) {
-        List<List<Integer>> passivityLotteryNumbers = InputView.getPassivityLotteryNumbers(lotteryPurchaseCount.getPassivityValue());
-        List<LotteryTicket> passivityTickets = LotteryTicket.createLotteryTickets(passivityLotteryNumbers);
-        List<LotteryTicket> autoTickets = LotteryTicket.createAutoLotteryTickets(lotteryPurchaseCount.getAutoValue()
-                , new RandomLotteryNumbersGenerator());
+        List<LotteryTicket> manualLotteryTickets = createManualLotteryTickets(lotteryPurchaseCount);
+        List<LotteryTicket> autoLotteryTickets = createAutoLotteryTickets(lotteryPurchaseCount);
 
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
-        lotteryTickets.addAll(passivityTickets);
-        lotteryTickets.addAll(autoTickets);
+        lotteryTickets.addAll(manualLotteryTickets);
+        lotteryTickets.addAll(autoLotteryTickets);
 
         return new LotteryTickets(lotteryTickets, lotteryPurchaseCount);
+    }
+
+    private static List<LotteryTicket> createManualLotteryTickets(LotteryPurchaseCount lotteryPurchaseCount) {
+        List<List<Integer>> manualLotteryNumbers = InputView.getManualLotteryNumbers(lotteryPurchaseCount.getManualValue());
+        return LotteryTicket.createLotteryTickets(manualLotteryNumbers);
+    }
+
+    private static List<LotteryTicket> createAutoLotteryTickets(LotteryPurchaseCount lotteryPurchaseCount) {
+        AutoLotteryTicketGenerator autoLotteryTicketGenerator = new AutoLotteryTicketGenerator(
+                lotteryPurchaseCount.getAutoValue()
+                , new RandomLotteryNumbersGenerator());
+        return autoLotteryTicketGenerator.createLotteryTickets();
     }
 }

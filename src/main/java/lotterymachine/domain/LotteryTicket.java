@@ -13,7 +13,7 @@ public class LotteryTicket {
 
     private final List<LotteryNumber> numbers;
 
-    private LotteryTicket(final List<LotteryNumber> numbers) {
+    public LotteryTicket(final List<LotteryNumber> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
     }
@@ -30,14 +30,6 @@ public class LotteryTicket {
         for (List<Integer> numbers : value) {
             List<LotteryNumber> lotteryNumbers = LotteryNumber.from(numbers);
             lotteryTickets.add(new LotteryTicket(lotteryNumbers));
-        }
-        return lotteryTickets;
-    }
-
-    public static List<LotteryTicket> createAutoLotteryTickets(int count, LotteryNumbersGenerator lotteryNumbersGenerator) {
-        List<LotteryTicket> lotteryTickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lotteryTickets.add(new LotteryTicket(lotteryNumbersGenerator.generate()));
         }
         return lotteryTickets;
     }

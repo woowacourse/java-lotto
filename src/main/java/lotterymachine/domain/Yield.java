@@ -4,6 +4,7 @@ import static java.lang.Math.floor;
 
 public class Yield {
     private static final double DECIMAL_PLACE_SAVER = 100.0;
+
     private final double profitRate;
 
     private Yield(double profitRate) {

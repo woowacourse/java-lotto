@@ -4,7 +4,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class WinningResult {
-    private static final Map<WinningLotteryRank, Integer> result = new EnumMap<>(WinningLotteryRank.class);
+    private static final Map<WinningLotteryRank, Integer> RESULT = new EnumMap<>(WinningLotteryRank.class);
 
     private WinningResult() {
     }
@@ -13,24 +13,24 @@ public class WinningResult {
         initResult();
         for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
             WinningLotteryRank winningLotteryRank = winningLottery.getWinningLotteryRank(lotteryTicket);
-            result.put(winningLotteryRank, result.get(winningLotteryRank) + 1);
+            RESULT.put(winningLotteryRank, RESULT.get(winningLotteryRank) + 1);
         }
         return new WinningResult();
     }
 
     private static void initResult() {
         for (WinningLotteryRank winningLotteryRank : WinningLotteryRank.values()) {
-            result.put(winningLotteryRank, 0);
+            RESULT.put(winningLotteryRank, 0);
         }
     }
 
     public Map<WinningLotteryRank, Integer> getResult() {
-        return result;
+        return RESULT;
     }
 
     public int findTotalProfit() {
-        return result.keySet().stream()
-                .mapToInt(i -> i.getPrice() * result.get(i))
+        return RESULT.keySet().stream()
+                .mapToInt(i -> i.getPrice() * RESULT.get(i))
                 .sum();
     }
 }

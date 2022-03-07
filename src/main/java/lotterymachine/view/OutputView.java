@@ -19,7 +19,7 @@ public class OutputView {
     }
 
     public static void printLotteryPurchaseCount(LotteryPurchaseCount lotteryPurchaseCount) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lotteryPurchaseCount.getPassivityValue(), lotteryPurchaseCount.getAutoValue());
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lotteryPurchaseCount.getManualValue(), lotteryPurchaseCount.getAutoValue());
     }
 
     public static void printWinningLotteryResults(Map<WinningLotteryRank, Integer> lotteryTicketResults) {

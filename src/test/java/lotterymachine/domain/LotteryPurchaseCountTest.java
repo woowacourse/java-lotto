@@ -13,12 +13,12 @@ public class LotteryPurchaseCountTest {
     void create() {
         LotteryPurchaseCount lotteryPurchaseCount = new LotteryPurchaseCount(3, 11, 14);
         assertThat(lotteryPurchaseCount.getAutoValue()).isEqualTo(11);
-        assertThat(lotteryPurchaseCount.getPassivityValue()).isEqualTo(3);
+        assertThat(lotteryPurchaseCount.getManualValue()).isEqualTo(3);
     }
 
     @Test
     @DisplayName("수동 구매 개수가 총 로또 구매 개수 보다 높을 시, 에러가 발생한다.")
-    void validatePassivityValue() {
+    void validateManualValue() {
         assertThatThrownBy(() -> {
             LotteryPurchaseCount lotteryPurchaseCount = new LotteryPurchaseCount(3, 3, 5);
         }).isInstanceOf(IllegalArgumentException.class)
