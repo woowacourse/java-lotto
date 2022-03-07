@@ -54,8 +54,8 @@ public class OutputView {
 	}
 
 	private String makePurchasedLotteryMessage(NumOfLottery numOfLottery) {
-		return String.format(PURCHASED_LOTTERY_MESSAGE.getMessage(), numOfLottery.getNumOfAutoLottery(),
-			numOfLottery.getNumOfManualLottery());
+		return String.format(PURCHASED_LOTTERY_MESSAGE.getMessage(), numOfLottery.getNumOfManualLottery(),
+			numOfLottery.getNumOfAutoLottery());
 	}
 
 	private String convertToLotteryNumbers(final Set<LotteryNumber> lotteryNumbers) {
