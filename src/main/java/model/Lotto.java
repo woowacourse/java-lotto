@@ -15,7 +15,7 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호 갯수는 6개여야 합니다.");
         }
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
     }
 
     public static Lotto of(List<Integer> numbers) {
@@ -49,12 +49,12 @@ public class Lotto {
 
     public int getMatchedNumberCountWith(Lotto otherLotto) {
         return (int) this.lottoNumbers.stream()
-                .filter(number -> otherLotto.contains(number))
+                .filter(otherLotto::contains)
                 .count();
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableSet(lottoNumbers);
+        return lottoNumbers;
     }
 
     @Override
