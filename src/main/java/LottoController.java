@@ -41,9 +41,9 @@ public class LottoController {
 
         return new WinningNumbers(new Lotto(InputView.askWinningNumber()
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList())),
-            new LottoNumber(InputView.askBonusNumber()));
+            LottoNumber.from(InputView.askBonusNumber()));
 
     }
 
@@ -52,7 +52,7 @@ public class LottoController {
         return InputView.askManualLottoNumbers(money.getManualAmount())
             .stream()
             .map(number -> number.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList()))
             .collect(Collectors.toList());
 

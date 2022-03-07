@@ -16,7 +16,7 @@ public class WinningNumbersTest {
     void check_winning_null_fail() {
 
         assertThatThrownBy(
-            () -> new WinningNumbers(null, new LottoNumber(6))
+            () -> new WinningNumbers(null, LottoNumber.from(6))
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("[ERROR] 로또 당첨번호에 null 값이 올 수 없습니다.");
 
@@ -28,7 +28,7 @@ public class WinningNumbersTest {
 
         assertThatThrownBy(
             () -> new WinningNumbers(new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList())), null)
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("[ERROR] 로또 보너스볼에 null 값이 올 수 없습니다.");
@@ -40,7 +40,7 @@ public class WinningNumbersTest {
     void check_bonus_empty_fail() {
 
         assertThatThrownBy(
-            () -> new WinningNumbers(new Lotto(new ArrayList<>()), new LottoNumber(6))
+            () -> new WinningNumbers(new Lotto(new ArrayList<>()), LottoNumber.from(6))
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("[ERROR] 로또 번호는 6개만 입력 가능합니다.");
 
@@ -53,8 +53,8 @@ public class WinningNumbersTest {
 
         assertThatThrownBy(
             () -> new WinningNumbers(new Lotto(Stream.of(1, 2, 3, 4, 5, 5)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(6))
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())), LottoNumber.from(6))
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("[ERROR] 로또 번호는 중복될 수 없습니다.");
 
@@ -66,8 +66,8 @@ public class WinningNumbersTest {
 
         assertThatThrownBy(
             () -> new WinningNumbers(new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(6))
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())), LottoNumber.from(6))
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("[ERROR] 당첨번호와 보너스볼은 중복될 수 없습니다.");
 
@@ -79,8 +79,8 @@ public class WinningNumbersTest {
 
         assertThatThrownBy(
             () -> new WinningNumbers(new Lotto(Stream.of(1, 2, 3, 4, 5, 46)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(6))
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())), LottoNumber.from(6))
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("[ERROR] 로또 번호는 1~45 사이 정수만 가능합니다.");
 
@@ -92,8 +92,8 @@ public class WinningNumbersTest {
 
         assertThatThrownBy(
             () -> new WinningNumbers(new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(46))
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())), LottoNumber.from(46))
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("[ERROR] 로또 번호는 1~45 사이 정수만 가능합니다.");
 

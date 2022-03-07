@@ -15,7 +15,7 @@ public class LottoGeneratorTest {
     void generate_lottos() {
 
         LottoGenerator lottoGenerator = new LottoGenerator(List.of(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList())), 1);
 
         lottoGenerator.generate();
@@ -28,7 +28,7 @@ public class LottoGeneratorTest {
     void generate_manual_lottos() {
 
         LottoGenerator lottoGenerator = new LottoGenerator(List.of(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList())), 0);
 
         assertThat(lottoGenerator.generate().size()).isEqualTo(1);

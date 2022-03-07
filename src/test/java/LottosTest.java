@@ -17,11 +17,11 @@ public class LottosTest {
     @DisplayName("로또 장수 확인")
     void check_lottos_size() {
 
-        Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(
+        Lotto lotto1 = new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::from).collect(
             Collectors.toList()));
-        Lotto lotto2 = new Lotto(Stream.of(4, 5, 6, 7, 8, 9).map(LottoNumber::new).collect(
+        Lotto lotto2 = new Lotto(Stream.of(4, 5, 6, 7, 8, 9).map(LottoNumber::from).collect(
             Collectors.toList()));
-        Lotto lotto3 = new Lotto(Stream.of(11, 12, 13, 14, 15, 16).map(LottoNumber::new).collect(
+        Lotto lotto3 = new Lotto(Stream.of(11, 12, 13, 14, 15, 16).map(LottoNumber::from).collect(
             Collectors.toList()));
 
         Lottos lottos = new Lottos(List.of(lotto1, lotto2, lotto3));

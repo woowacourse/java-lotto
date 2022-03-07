@@ -20,14 +20,14 @@ public class WinningCheckerTest {
 
         //given
         Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
         Lotto winningNumber = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
-        LottoNumber bonusNumber = new LottoNumber(11);
+        LottoNumber bonusNumber = LottoNumber.from(11);
 
         WinningChecker winningChecker = new WinningChecker(new Lottos(List.of(lotto)),
             new WinningNumbers(winningNumber, bonusNumber));
@@ -46,14 +46,14 @@ public class WinningCheckerTest {
 
         //given
         Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 7)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
         Lotto winningNumber = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.from(7);
 
         WinningChecker winningChecker = new WinningChecker(new Lottos(List.of(lotto)),
             new WinningNumbers(winningNumber, bonusNumber));
@@ -72,14 +72,14 @@ public class WinningCheckerTest {
 
         //given
         Lotto lotto = new Lotto(Stream.of(3, 5, 6, 7, 8, 9)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
         Lotto winningNumber = new Lotto(Stream.of(3, 5, 6, 7, 8, 10)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
-        LottoNumber bonusNumber = new LottoNumber(12);
+        LottoNumber bonusNumber = LottoNumber.from(12);
 
         WinningChecker winningChecker = new WinningChecker(new Lottos(List.of(lotto)),
             new WinningNumbers(winningNumber, bonusNumber));
@@ -98,14 +98,14 @@ public class WinningCheckerTest {
 
         //given
         Lotto lotto = new Lotto(Stream.of(11, 12, 13, 14, 8, 9)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
         Lotto winningNumber = new Lotto(Stream.of(3, 5, 6, 7, 8, 10)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
-        LottoNumber bonusNumber = new LottoNumber(15);
+        LottoNumber bonusNumber = LottoNumber.from(15);
 
         WinningChecker winningChecker = new WinningChecker(new Lottos(List.of(lotto)),
             new WinningNumbers(winningNumber, bonusNumber));
@@ -123,13 +123,13 @@ public class WinningCheckerTest {
 
         //given
         Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(
             Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(11));
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())), LottoNumber.from(11));
 
         WinningChecker winningChecker = new WinningChecker(new Lottos(List.of(lotto)),
             winningNumbers);
@@ -148,13 +148,13 @@ public class WinningCheckerTest {
 
         //given
         Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(
             Stream.of(1, 2, 3, 4, 5, 7)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(6));
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())), LottoNumber.from(6));
 
         WinningChecker winningChecker = new WinningChecker(new Lottos(List.of(lotto)),
             winningNumbers);
@@ -173,13 +173,13 @@ public class WinningCheckerTest {
 
         //given
         Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(
             Stream.of(1, 2, 3, 4, 5, 7)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(11));
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())), LottoNumber.from(11));
 
         WinningChecker winningChecker = new WinningChecker(new Lottos(List.of(lotto)),
             winningNumbers);
@@ -198,13 +198,13 @@ public class WinningCheckerTest {
 
         //given
         Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(
             Stream.of(1, 2, 3, 4, 7, 8)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(11));
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())), LottoNumber.from(11));
 
         WinningChecker winningChecker = new WinningChecker(new Lottos(List.of(lotto)),
             winningNumbers);
@@ -223,13 +223,13 @@ public class WinningCheckerTest {
 
         //given
         Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(
             Stream.of(1, 2, 3, 4, 8, 9)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(5));
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())), LottoNumber.from(5));
 
         WinningChecker winningChecker = new WinningChecker(new Lottos(List.of(lotto)),
             winningNumbers);
@@ -248,13 +248,13 @@ public class WinningCheckerTest {
 
         //given
         Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(
             Stream.of(1, 2, 3, 7, 8, 9)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(10));
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())), LottoNumber.from(10));
 
         WinningChecker winningChecker = new WinningChecker(new Lottos(List.of(lotto)),
             winningNumbers);
@@ -273,13 +273,13 @@ public class WinningCheckerTest {
 
         //given
         Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(
             Stream.of(1, 2, 3, 7, 8, 9)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(4));
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())), LottoNumber.from(4));
 
         WinningChecker winningChecker = new WinningChecker(new Lottos(List.of(lotto)),
             winningNumbers);
@@ -298,13 +298,13 @@ public class WinningCheckerTest {
 
         //given
         Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(
             Stream.of(1, 2, 10, 11, 12, 13)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())), new LottoNumber(4));
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())), LottoNumber.from(4));
 
         WinningChecker winningChecker = new WinningChecker(new Lottos(List.of(lotto)),
             winningNumbers);

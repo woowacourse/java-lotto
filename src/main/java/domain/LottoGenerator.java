@@ -4,24 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoGenerator {
-
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
 
     private static final int MIN_RANGE = 0;
     private static final int MAX_RANGE = 6;
 
     private static final int START_INDEX = 0;
 
-    private static final List<LottoNumber> LOTTO_NUMBER_POOL = IntStream.rangeClosed(
-            MIN_LOTTO_NUMBER,
-            MAX_LOTTO_NUMBER)
-        .mapToObj(LottoNumber::new)
-        .collect(Collectors.toList());
+    private static final List<LottoNumber> LOTTO_NUMBER_POOL = LottoNumber.valueOf();
 
     private static final Comparator<LottoNumber> LOTTO_NUMBER_COMPARATOR = new Comparator<LottoNumber>() {
         @Override

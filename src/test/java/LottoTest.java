@@ -14,7 +14,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 생성 성공")
     void lotto_generate_success() {
-        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(
+        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::from).collect(
             Collectors.toList()));
 
         assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
@@ -45,7 +45,7 @@ public class LottoTest {
     void check_size_fail() {
         assertThatThrownBy(
             () -> new Lotto(Stream.of(1, 2, 3, 4, 5, 6, 7)
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList()))
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("[ERROR] 로또 번호는 6개만 입력 가능합니다.");
@@ -56,7 +56,7 @@ public class LottoTest {
     void check_unique_fail() {
         assertThatThrownBy(
             () -> new Lotto(Stream.of(1, 2, 3, 4, 5, 5)
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList()))
         ).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("[ERROR] 로또 번호는 중복될 수 없습니다.");
