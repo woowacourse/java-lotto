@@ -24,7 +24,7 @@ public class LottoController {
         InputView.printLottos(wallet, lottos);
 
         WinningLotto winningLotto = setupWinningLotto();
-        ResultView.printResult(getLottoResult(winningLotto, lottos));
+        ResultView.printResult(LottoResult.of(winningLotto, lottos));
     }
 
     private Wallet setupWallet() {
@@ -111,12 +111,5 @@ public class LottoController {
             InputView.printException(exception);
             return getLottoNumberForBonusNumber();
         }
-    }
-
-    private LottoResult getLottoResult(WinningLotto winningLotto, Lottos lottos) {
-        return LottoResult.builder()
-                .winningLotto(winningLotto)
-                .lottos(lottos)
-                .build();
     }
 }
