@@ -3,7 +3,6 @@ package view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -12,24 +11,21 @@ public class InputView {
     private static final int INCLUDE_EMPTY = -1;
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static <T> T getUntilValid(Supplier<T> supplier) {
-        T t;
+    public static void runUntilValid(Runnable runner) throws RuntimeException {
         do {
-            t = getFrom(supplier);
-        } while (t == null && isRepeatable());
-        return t;
+            tryRunning(runner);
+        } while (isRepeatable());
     }
 
-    private static <T> T getFrom(Supplier<T> supplier) {
+    private static void tryRunning(Runnable runner) throws RuntimeException {
         try {
-            return supplier.get();
+            runner.run();
         } catch (Exception e) {
             OutputView.printErrorMessage(e);
-            return null;
         }
     }
 
-    private static boolean isRepeatable() {
+    private static boolean isRepeatable() throws RuntimeException {
         String value = inputRepeatOptionFrom("Y", "N", "y", "n");
         if (value.equals("y") || value.equals("Y")) {
             return true;
