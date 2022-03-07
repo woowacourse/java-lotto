@@ -53,17 +53,25 @@ public class LotteryMachine {
     }
 
     private static LotteryTickets purchaseLotteryTickets(Count numberOfTickets, Count numberOfManualTickets) {
-        List<ManualTicketDto> manualTickets = InputView.getManualTickets(numberOfManualTickets);
-        Count numberOfAutoTickets = numberOfTickets.subtract(numberOfManualTickets);
+        try {
+            List<ManualTicketDto> manualTickets = InputView.getManualTickets(numberOfManualTickets);
+            Count numberOfAutoTickets = numberOfTickets.subtract(numberOfManualTickets);
+            LotteryTickets lotteryTickets = getLotteryTickets(manualTickets, numberOfAutoTickets);
 
+            OutputView.printPurchaseDetails(numberOfManualTickets.getNumber(), numberOfAutoTickets.getNumber());
+            OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
+            return lotteryTickets;
+        } catch (RuntimeException exception) {
+            OutputView.printException(exception.getMessage());
+            return purchaseLotteryTickets(numberOfTickets, numberOfManualTickets);
+        }
+    }
+
+    private static LotteryTickets getLotteryTickets(List<ManualTicketDto> manualTickets, Count numberOfAutoTickets) {
         TicketMachine ticketMachine = new TicketMachine();
         LotteryTickets manualLotteryTickets = ticketMachine.purchaseManualTickets(manualTickets);
         LotteryTickets autoLotteryTickets = ticketMachine.purchaseAutoTickets(numberOfAutoTickets);
-        LotteryTickets lotteryTickets = LotteryTickets.merge(manualLotteryTickets, autoLotteryTickets);
-
-        OutputView.printPurchaseDetails(numberOfManualTickets.getNumber(), numberOfAutoTickets.getNumber());
-        OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
-        return lotteryTickets;
+        return LotteryTickets.merge(manualLotteryTickets, autoLotteryTickets);
     }
 
     private static WinningLottery getWinningLottery() {
