@@ -29,7 +29,7 @@ public enum Rank {
     }
 
     private static Rank matchCountFive(final boolean hasBonusNumber) {
-        if (hasBonusNumber){
+        if (hasBonusNumber) {
             return Rank.SECOND;
         }
         return Rank.THIRD;

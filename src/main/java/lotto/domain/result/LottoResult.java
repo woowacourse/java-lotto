@@ -6,25 +6,24 @@ import lotto.domain.lotto.Lotto;
 
 public class LottoResult {
 
-    private HashMap<Rank, Integer> result;
+    private HashMap<Rank, Integer> result = new HashMap<>();
 
     public LottoResult() {
         initResult();
     }
 
     private void initResult() {
-        result = new HashMap<>();
         for (Rank rank : Rank.values()) {
             result.put(rank, 0);
         }
     }
 
-    public void calculateWinning(final Lotto winninglotto, final int bonusNumber, final Lotto comparisonLotto) {
-        int matchCount = (int) winninglotto.getNumbers()
+    public void calculateWinning(final Lotto lotto, final Lotto winninglotto, final int bonusNumber) {
+        int matchCount = (int) winninglotto.getLottoNumbers()
                 .stream()
-                .filter(number -> comparisonLotto.getNumbers().contains(number))
+                .filter(lottoNumber -> lotto.contains(lottoNumber.getLottoNumber()))
                 .count();
-        boolean hasBonusNumber = comparisonLotto.getNumbers().contains(bonusNumber);
+        boolean hasBonusNumber = lotto.contains(bonusNumber);
         Rank rank = Rank.matchRank(matchCount, hasBonusNumber);
 
         result.put(rank, result.get(rank) + 1);

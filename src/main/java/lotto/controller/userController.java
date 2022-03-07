@@ -2,17 +2,27 @@ package lotto.controller;
 
 import lotto.domain.result.LottoResult;
 import lotto.domain.user.Money;
+import lotto.domain.user.PurchaseLottoCount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class MoneyController {
+public class userController {
 
-    public Money createMoney() {
+    public Money inputMoney() {
         try {
             return new Money(InputView.inputMoney());
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return createMoney();
+            return inputMoney();
+        }
+    }
+
+    public PurchaseLottoCount calculatePurchaseLottoCountInfo(final Money money) {
+        try {
+            return new PurchaseLottoCount(InputView.inputPurchaseLottoCount(), money.getCount());
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return calculatePurchaseLottoCountInfo(money);
         }
     }
 

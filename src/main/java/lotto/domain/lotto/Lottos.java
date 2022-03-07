@@ -2,25 +2,39 @@ package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.exception.InvalidException;
 
 public class Lottos {
 
+    private static final String ERROR_WRONG_INPUT_MONEY = "[ERROR] 올바른 구매 값을 입력해주세요";
+
     private List<Lotto> lottos = new ArrayList<>();
+
+    public Lottos() {
+    }
 
     public Lottos(final int count) {
         checkCount(count);
-        LottoNumber numbers = new LottoNumber();
 
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(numbers.createLottoNumbers()));
+            Lotto lotto = new Lotto();
+            lotto.generateRandomNumbers();
+            lottos.add(lotto);
         }
     }
 
     private static void checkCount(final int count) {
-        if (count < 1) {
-            throw new IllegalArgumentException(InvalidException.ERROR_WRONG_INPUT_MONEY);
+        if (count < 0) {
+            throw new IllegalArgumentException(ERROR_WRONG_INPUT_MONEY);
         }
+    }
+
+    public Lottos addLottos(List<Lotto> addLottos) {
+        this.lottos.addAll(addLottos);
+        return this;
+    }
+
+    public void addLotto(final Lotto lotto) {
+        lottos.add(lotto);
     }
 
     public List<Lotto> getLottos() {

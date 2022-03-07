@@ -1,27 +1,32 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.controller.MoneyController;
+import lotto.controller.userController;
 import lotto.domain.lotto.LottoWinningNumbers;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.result.LottoResult;
 import lotto.domain.user.Money;
+import lotto.domain.user.PurchaseLottoCount;
 
 public class Application {
 
     public static void main(final String... args) {
-        MoneyController moneyController = new MoneyController();
+        userController userController = new userController();
         LottoController lottoController = new LottoController();
 
-        Money money = moneyController.createMoney();
-        Lottos lottos = lottoController.inputLottoMoney(money.getMoney());
-        lottoController.printLottos(lottos);
+        Money money = userController.inputMoney();
+        PurchaseLottoCount purchaseLottoCount = userController.calculatePurchaseLottoCountInfo(money);
+
+        Lottos manualLottos = lottoController.createManualLottos(purchaseLottoCount);
+        Lottos autoLottos = lottoController.createAutoLottos(purchaseLottoCount);
+
+        Lottos totalLottos = lottoController.combineLottos(autoLottos, manualLottos);
+        lottoController.printLottos(totalLottos, purchaseLottoCount);
+
         LottoWinningNumbers lottoWinningNumbers = lottoController.createLottoWinningNumbers();
+        LottoResult lottoResult = lottoController.calculateRanks(totalLottos, lottoWinningNumbers);
 
-        LottoResult lottoResult = lottoController.calculateRanks(lottos, lottoWinningNumbers);
         lottoController.printWinningResult(lottoResult);
-
-        double profit = moneyController.calculateProfit(money, lottoResult);
-        moneyController.printProfit(profit);
+        userController.printProfit(userController.calculateProfit(money, lottoResult));
     }
 }

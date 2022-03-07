@@ -1,6 +1,5 @@
-package lotto.domain;
+package lotto.domain.result;
 
-import lotto.domain.result.Rank;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

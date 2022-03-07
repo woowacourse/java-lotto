@@ -1,43 +1,65 @@
 package lotto.domain.lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import lotto.exception.InvalidException;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
-    private final List<Integer> lottoNumbers;
+    private static final String ERROR_CREATE_LOTTO = "[ERROR] 잘못된 숫자 입력입니다.";
+    private static final String ERROR_NULL_BLANK = "[ERROR] NULL 또는 공백이 입력되었습니다.";
+
+    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+    public Lotto() {
+    }
 
     public Lotto(final List<Integer> lottoNumbers) {
         checkNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
-        Collections.sort(lottoNumbers);
+        this.lottoNumbers = convertLottoNumbers(lottoNumbers);
+    }
+
+    private List<LottoNumber> convertLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .sorted()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 
     private void checkNumbers(final List<Integer> lottoNumbers) {
         checkNull(lottoNumbers);
-        checkDuplicateNumber(lottoNumbers);
+        checkLottoSize(lottoNumbers);
     }
 
     private void checkNull(final List<Integer> lottoNumbers) {
-        if (lottoNumbers == null) {
-            throw new IllegalArgumentException(InvalidException.ERROR_NULL_BLANK);
+        if (lottoNumbers == null || lottoNumbers.isEmpty()) {
+            throw new IllegalArgumentException(ERROR_NULL_BLANK);
         }
     }
 
-    private static void checkDuplicateNumber(final List<Integer> numbers) {
+    private static void checkLottoSize(final List<Integer> numbers) {
         if (LOTTO_SIZE != Set.copyOf(numbers).size()) {
-            throw new IllegalArgumentException(InvalidException.ERROR_CREATE_LOTTO);
+            throw new IllegalArgumentException(ERROR_CREATE_LOTTO);
         }
+    }
+
+    public void generateRandomNumbers() {
+        List<Integer> numbers = LottoNumber.getcandidateLottoNumbers();
+        Collections.shuffle(numbers);
+        List<Integer> randomNumbers = numbers.subList(0, LOTTO_SIZE);
+
+        this.lottoNumbers = convertLottoNumbers(randomNumbers);
     }
 
     public boolean contains(final int number) {
-        return lottoNumbers.contains(number);
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(number));
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 }
