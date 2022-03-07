@@ -4,7 +4,7 @@ import lotto.exception.LottoPurchaseMoneyException;
 
 public class LottoPurchaseMoney {
 
-    private static final int UNIT_SIZE = 1000;
+    private static final int LOTTO_TICKET_PRICE = 1000;
 
     private final int lottoPurchaseMoney;
 
@@ -20,11 +20,11 @@ public class LottoPurchaseMoney {
     }
 
     private boolean isCorrectUnit(int input) {
-        return input % UNIT_SIZE == 0;
+        return input % LOTTO_TICKET_PRICE == 0;
     }
 
-    public int calculateTotalLottoCount(int lottoTicketPrice) {
-        return lottoPurchaseMoney / lottoTicketPrice;
+    public int calculateTotalLottoCount() {
+        return lottoPurchaseMoney / LOTTO_TICKET_PRICE;
     }
 
     public double calculateProfitRate(long totalPrize) {

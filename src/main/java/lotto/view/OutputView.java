@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.Arrays;
 import lotto.domain.Lotto;
-import lotto.domain.LottoCounter;
+import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.LottoPurchaseMoney;
 import lotto.domain.Rank;
@@ -21,7 +21,7 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printLottos(LottoCounter lottoCounter, Lottos lottos) {
+    public static void printLottos(LottoCount lottoCounter, Lottos lottos) {
         printNewLine();
         System.out.printf(TOTAL_LOTTO_COUNT_MESSAGE,
                 lottoCounter.getManualLottoCount(), lottoCounter.getAutoLottoCount());

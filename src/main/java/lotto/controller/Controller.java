@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoCounter;
+import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.LottoPurchaseMoney;
 import lotto.domain.RankCounter;
@@ -12,7 +12,7 @@ public class Controller {
 
     public void run() {
         LottoPurchaseMoney lottoPurchaseMoney = getLottoPurchaseMoney();
-        LottoCounter lottoCounter = getLottoCounter(lottoPurchaseMoney);
+        LottoCount lottoCounter = getLottoCounter(lottoPurchaseMoney);
         Lottos lottos = getLottos(lottoCounter);
         OutputView.printLottos(lottoCounter, lottos);
 
@@ -30,16 +30,16 @@ public class Controller {
         }
     }
 
-    private LottoCounter getLottoCounter(LottoPurchaseMoney lottoPurchaseMoney) {
+    private LottoCount getLottoCounter(LottoPurchaseMoney lottoPurchaseMoney) {
         try {
-            return new LottoCounter(lottoPurchaseMoney, InputView.inputManualLottoCount());
+            return new LottoCount(lottoPurchaseMoney.calculateTotalLottoCount(), InputView.inputManualLottoCount());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return getLottoCounter(lottoPurchaseMoney);
         }
     }
 
-    private Lottos getLottos(LottoCounter lottoCounter) {
+    private Lottos getLottos(LottoCount lottoCounter) {
         try {
             Lottos manualLottos = Lottos.newInstanceByManual(InputView.inputManualLottos(lottoCounter.getManualLottoCount()));
             Lottos autoLottos = Lottos.newInstanceByAuto(lottoCounter.getAutoLottoCount());
