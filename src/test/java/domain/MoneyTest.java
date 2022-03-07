@@ -60,7 +60,7 @@ class MoneyTest {
     void calculateCounts() {
         final Money money = new Money("3500");
 
-        final int actual = money.calculateCounts();
+        final int actual = money.getCount();
 
         assertThat(actual).isEqualTo(3);
     }

@@ -10,8 +10,6 @@ public class Lotto {
 
     private static final String INPUT_NUMBER_DELIMITER = ",";
     private static final int INPUT_NUMBER_SPLIT_OPTION = -1;
-    private static final int INIT_COUNT = 0;
-    private static final int COUNT_INCREASE_UNIT = 1;
     private static final String ERROR_LOTTO_SIZE_MESSAGE = "입력받은 로또 개수가 6개가 아닙니다.";
     private static final int LOTTO_SIZE = 6;
 
@@ -48,11 +46,9 @@ public class Lotto {
     }
 
     public int compare(final Lotto lotto) {
-        int count = INIT_COUNT;
-        count += this.lotto.stream()
+        return (int) this.lotto.stream()
                 .filter(lotto::isContainNumber)
                 .count();
-        return count;
     }
 
     public List<LottoNumber> getLotto() {

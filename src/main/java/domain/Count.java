@@ -14,6 +14,10 @@ public class Count {
         this.count = count;
     }
 
+    public Count decrease() {
+        return new Count(this.count - COUNT_DECREASE_UNIT);
+    }
+
     public int getCount() {
         return count;
     }
@@ -38,10 +42,6 @@ public class Count {
 
     public boolean isEnd() {
         return this.count <= COUNT_END_NUMBER;
-    }
-
-    public Count decrease() {
-        return new Count(this.count - COUNT_DECREASE_UNIT);
     }
 
     @Override

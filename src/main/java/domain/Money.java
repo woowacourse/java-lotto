@@ -9,11 +9,17 @@ public class Money {
     private static final String ERROR_UPPER_THAN_MONEY_MESSAGE = "수동으로 구매하려는 로또 수가 구입금액보다 많습니다.";
 
     private final int money;
+    private final int count;
 
     public Money(final String input) {
         validateInputMoney(input);
         this.money = Integer.parseInt(input);
+        this.count = this.money / LOTTO_PRICE;
         validateMoneyRange(this.money);
+    }
+
+    public int getCount() {
+        return count;
     }
 
     private void validateInputMoney(final String input) {
@@ -28,17 +34,13 @@ public class Money {
     }
 
     public void checkOverPrice(final int count) {
-        if (count > calculateCounts()) {
+        if (count > this.count) {
             throw new IllegalArgumentException(ERROR_UPPER_THAN_MONEY_MESSAGE);
         }
     }
 
-    public int calculateCounts() {
-        return this.money / LOTTO_PRICE;
-    }
-
     public double calculateProfit(final Prize totalWinPrize) {
-        return totalWinPrize.calculateProfit(calculateCounts() * LOTTO_PRICE);
+        return totalWinPrize.calculateProfit(this.count * LOTTO_PRICE);
     }
 
     @Override

@@ -16,9 +16,10 @@ public class LottoController {
         final Money money = getMoney();
         final Count manualCount = getManualCount(money);
         final IssuedLotto issuedLotto = new IssuedLotto();
+        issue(issuedLotto, money, manualCount);
 
         OutputView.printManualLottoInstruction();
-        OutputView.printLotto(issuedLotto.issue(money, manualCount), manualCount.getCount());
+        OutputView.printLotto(issuedLotto.getIssuedLotto(), manualCount.getCount());
 
         SortedMap<RankPrize, Integer> rankCounts = pickLotto(issuedLotto);
 
@@ -51,8 +52,25 @@ public class LottoController {
         }
     }
 
-    public static String getManualLotto() {
-        return InputView.getManualLotto();
+    private void issue(IssuedLotto issuedLotto, Money money, Count manualCount) {
+        issueManualLotto(issuedLotto, manualCount);
+        issuedLotto.generateLotto(money);
+    }
+
+    private void issueManualLotto(IssuedLotto issuedLotto, Count count) {
+        while (!count.isEnd()) {
+            issuedLotto.issueManualLotto(issueOneManualLotto());
+            count = count.decrease();
+        }
+    }
+
+    private Lotto issueOneManualLotto() {
+        try {
+            return new Lotto(InputView.getManualLotto());
+        } catch (IllegalArgumentException e) {
+            System.out.println(ERROR_MESSAGE + e.getMessage());
+            return issueOneManualLotto();
+        }
     }
 
     private Lotto getWinLotto() {

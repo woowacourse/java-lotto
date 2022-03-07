@@ -1,17 +1,14 @@
 package domain;
 
-import controller.LottoController;
 import utils.Random;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class IssuedLotto {
 
-    private static final String ERROR_MESSAGE = "[ERROR] ";
     private static final int LOTTO_SIZE = 6;
 
     private final List<Lotto> issuedLotto = new ArrayList<>();
@@ -20,35 +17,16 @@ public class IssuedLotto {
         return new ArrayList<>(issuedLotto);
     }
 
-    public List<Lotto> issue(Money money, Count manualCount) {
-        issueManualLotto(manualCount);
-        generateLotto(money.calculateCounts() - issuedLotto.size());
-        return Collections.unmodifiableList(issuedLotto);
-    }
-
-    private void issueManualLotto(Count count) {
-        issuedLotto.clear();
-        while (!count.isEnd()) {
-            issuedLotto.add(issueOneManualLotto());
-            count = count.decrease();
-        }
-    }
-
-    private Lotto issueOneManualLotto() {
-        try {
-            return new Lotto(LottoController.getManualLotto());
-        } catch (IllegalArgumentException e) {
-            System.out.println(ERROR_MESSAGE + e.getMessage());
-            return issueOneManualLotto();
-        }
-    }
-
-    private void generateLotto(int number) {
-        Count count = new Count(number);
+    public void generateLotto(Money money) {
+        Count count = new Count(money.getCount() - issuedLotto.size());
         while (!count.isEnd()) {
             count = count.decrease();
             issuedLotto.add(issueOneAutoLotto());
         }
+    }
+
+    public void issueManualLotto(Lotto issueOneManualLotto) {
+        issuedLotto.add(issueOneManualLotto);
     }
 
     private Lotto issueOneAutoLotto() {
