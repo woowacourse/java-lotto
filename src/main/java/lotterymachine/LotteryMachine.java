@@ -23,9 +23,9 @@ import java.util.List;
 public class LotteryMachine {
     public static void main(String[] args) {
         Money amount = getInputAmount();
-        Count totalTickets = getNumberOfTickets(amount);
-        Count manualTickets = getNumberOfManualTickets(totalTickets);
-        LotteryTickets purchasedLotteryTickets = purchaseLotteryTickets(totalTickets, manualTickets);
+        Count numberOfTickets = getNumberOfTickets(amount);
+        Count numberOfManualTickets = getNumberOfManualTickets(numberOfTickets);
+        LotteryTickets purchasedLotteryTickets = purchaseLotteryTickets(numberOfTickets, numberOfManualTickets);
 
         LotteryTicket winningTicket = getWinningTicket();
         int bonusNumber = InputView.getBonusNumber(winningTicket.getBalls());
@@ -46,31 +46,31 @@ public class LotteryMachine {
         return LotteryCalculator.divideByLotteryPrice(money);
     }
 
-    private static Count getNumberOfManualTickets(Count totalTickets) {
+    private static Count getNumberOfManualTickets(Count numberOfTickets) {
         try {
             int numberOfManualTickets = InputView.getNumberOfManualTickets();
-            return Count.of(totalTickets, numberOfManualTickets);
+            return Count.of(numberOfTickets, numberOfManualTickets);
         } catch (RuntimeException exception) {
             OutputView.printException(exception.getMessage());
-            return getNumberOfManualTickets(totalTickets);
+            return getNumberOfManualTickets(numberOfTickets);
         }
     }
 
-    private static LotteryTickets purchaseLotteryTickets(Count numberOfTickets, Count manualTickets) {
-        List<LotteryTicket> manualLotteryTickets = purchaseManualLotteryTickets(manualTickets);
-        Count autoTickets = numberOfTickets.subtract(manualTickets);
+    private static LotteryTickets purchaseLotteryTickets(Count numberOfTickets, Count numberOfManualTickets) {
+        List<LotteryTicket> manualLotteryTickets = purchaseManualLotteryTickets(numberOfManualTickets);
+        Count numberOfAutoTickets = numberOfTickets.subtract(numberOfManualTickets);
         TicketMachine ticketMachine = new TicketMachine();
-        LotteryTickets lotteryTickets = ticketMachine.purchase(autoTickets, manualLotteryTickets);
+        LotteryTickets lotteryTickets = ticketMachine.purchase(numberOfAutoTickets, manualLotteryTickets);
 
-        OutputView.printPurchaseDetails(manualTickets.getNumber(), autoTickets.getNumber());
+        OutputView.printPurchaseDetails(numberOfManualTickets.getNumber(), numberOfAutoTickets.getNumber());
         OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
         return lotteryTickets;
     }
 
-    private static List<LotteryTicket> purchaseManualLotteryTickets(Count manualTickets) {
-        OutputView.printInputManualPurchase(manualTickets.isZero());
+    private static List<LotteryTicket> purchaseManualLotteryTickets(Count numberOfManualTickets) {
+        OutputView.printInputManualPurchase(numberOfManualTickets.isZero());
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
-        for (int i = 0; i < manualTickets.getNumber(); i++) {
+        for (int i = 0; i < numberOfManualTickets.getNumber(); i++) {
             lotteryTickets.add(getManualLotteryTicket());
         }
         return lotteryTickets;
