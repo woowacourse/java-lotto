@@ -9,7 +9,6 @@ import lotto.utils.IntegerUtils;
 
 public class StringInputNumberGenerator implements NumberGenerator {
 
-    private static final String LINE_DELIMITER = System.lineSeparator();
     private static final String NUMBER_DELIMITER = ",";
 
     private Iterator<String> inputIterator;
