@@ -38,7 +38,7 @@ public class Controller {
     private Lottos makeLottos(Money money) {
         LottoCart lottoCart = new LottoCart(PurchaseCount.of(money, inputView.askManualCount()));
         Lottos lottos = purchaseLottos(lottoCart);
-        resultView.showPurchaseCount(PurchaseCountDTO.of(lottoCart.getPurchaseCount()));
+        resultView.showPurchaseCount(PurchaseCountDTO.from(lottoCart.getPurchaseCount()));
         resultView.showLottos(LottoDTO.from(lottos));
         return lottos;
     }

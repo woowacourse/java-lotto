@@ -19,7 +19,7 @@ public class PurchaseCountDTO {
         return manualCount;
     }
 
-    public static PurchaseCountDTO of(PurchaseCount purchaseCount) {
+    public static PurchaseCountDTO from(PurchaseCount purchaseCount) {
         return new PurchaseCountDTO(purchaseCount.getAuto(), purchaseCount.getManual());
     }
 }
