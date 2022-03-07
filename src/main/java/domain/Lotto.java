@@ -34,7 +34,7 @@ public class Lotto {
         List<LottoNumber> deDuplicatedNumbers = lottoNumbers.stream()
             .distinct()
             .collect(Collectors.toList());
-        if (deDuplicatedNumbers.size() != LottoConstant.LOTTO_NUMBER_SIZE) {
+        if (deDuplicatedNumbers.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 숫자는 중복일 수 없습니다.");
         }
     }
@@ -42,7 +42,6 @@ public class Lotto {
     public int calculateSameNumber(Lotto otherLotto) {
         List<LottoNumber> copiedNumbers = new ArrayList<>(List.copyOf(lottoNumbers));
         copiedNumbers.retainAll(otherLotto.lottoNumbers);
-
         return copiedNumbers.size();
     }
 
@@ -50,7 +49,7 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 }

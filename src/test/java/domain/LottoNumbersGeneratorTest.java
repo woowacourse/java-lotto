@@ -7,15 +7,17 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import constant.LottoConstant;
+
 class LottoNumbersGeneratorTest {
 
     @Test
-    @DisplayName("1 ~ 45 사이의 LottoNumber 6개를 생성하는 기능")
-    void createNumbers() {
-        RandomLottoNumberGenerator lottoNumberGenerator = new RandomLottoNumberGenerator();
+    @DisplayName("랜덤 방식의 로또 숫자를 생성하는 기능")
+    void createRandomLottoNumbers() {
+        LottoNumbersGenerator lottoNumbersGenerator = new RandomLottoNumbersGenerator();
 
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
+        List<LottoNumber> lottoNumbers = lottoNumbersGenerator.generate();
 
-        assertThat(lottoNumbers.size()).isEqualTo(6);
+        assertThat(lottoNumbers.size()).isEqualTo(LottoConstant.LOTTO_NUMBER_SIZE);
     }
 }

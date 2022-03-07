@@ -1,15 +1,14 @@
-import java.util.ArrayList;
 import java.util.List;
 
 import domain.Lotto;
+import domain.LottoCount;
 import domain.LottoFactory;
-import domain.LottoGame;
 import domain.LottoNumber;
 import domain.LottoGameMoney;
 import domain.Lottos;
-import domain.RandomLottoNumberGenerator;
+import domain.RandomLottoNumbersGenerator;
 import domain.WinningLotto;
-import domain.WinningStatistics;
+import domain.WinningResult;
 import view.InputView;
 import view.OutputView;
 
@@ -17,28 +16,22 @@ public class Application {
 
     public static void main(String[] args) {
         final LottoGameMoney purchaseMoney = new LottoGameMoney(InputView.getPurchaseAmount());
-        final LottoGame lottoGame = createLottoGame(purchaseMoney);
-        OutputView.showPurchasedLottos(lottoGame.getLottos());
-
+        Lottos lottos = createLottos(purchaseMoney);
         final WinningLotto winningLotto = createWinningLotto();
-        final WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics(winningLotto);
-        OutputView.showWinningStatistics(winningStatistics.getWinningStatistics());
-        OutputView.showProfitRate(winningStatistics.calculateProfitRate());
+
+        final WinningResult winningResult = lottos.match(purchaseMoney, winningLotto);
+        OutputView.showWinningResult(winningResult.values());
+        OutputView.showProfitRate(winningResult.profitRate());
     }
 
-    private static LottoGame createLottoGame(LottoGameMoney purchaseMoney) {
-        int lottoCount = purchaseMoney.purchasableLottoCount();
-        Lottos lottos = createLottos(lottoCount);
+    private static Lottos createLottos(LottoGameMoney purchaseMoney) {
+        final int manualLottoCount = InputView.getManualLottoCount();
+        final LottoCount lottoCount = purchaseMoney.createLottoCount(manualLottoCount);
+        List<List<Integer>> manualLottoNumbers = InputView.getManualLottoNumbers(manualLottoCount);
 
-        return new LottoGame(lottos);
-    }
-
-    private static Lottos createLottos(int lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = LottoFactory.createLotto(new RandomLottoNumberGenerator());
-            lottos.add(lotto);
-        }
+        final List<Lotto> lottos = LottoFactory.createLottos(lottoCount, manualLottoNumbers,
+            new RandomLottoNumbersGenerator());
+        OutputView.showPurchasedLottos(lottoCount, lottos);
 
         return new Lottos(lottos);
     }

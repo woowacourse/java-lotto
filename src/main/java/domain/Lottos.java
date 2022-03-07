@@ -1,8 +1,8 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -26,17 +26,10 @@ public class Lottos {
         }
     }
 
-    public List<LottoReward> match(WinningLotto winningLotto) {
-        List<LottoReward> lottoRewards = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            LottoReward reward = winningLotto.match(lotto);
-            lottoRewards.add(reward);
-        }
-
-        return lottoRewards;
-    }
-
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+    public WinningResult match(LottoGameMoney purchaseMoney, WinningLotto winningLotto) {
+        List<LottoReward> lottoRewards = lottos.stream()
+            .map(winningLotto::match)
+            .collect(Collectors.toList());
+        return new WinningResult(purchaseMoney, lottoRewards);
     }
 }
