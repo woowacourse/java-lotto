@@ -1,10 +1,9 @@
 package domain;
 
 import domain.Lotto.Lotto;
+import domain.Lotto.LottoFactory;
 import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
-import domain.LottoGenerator.LottoGenerator;
-import domain.LottoGenerator.ManualLottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,12 +21,9 @@ public class LottoTest {
     private List<LottoNumber> lottoNumbers;
     private Lotto lotto;
     private List<Integer> winningNumbers;
-    private LottoGenerator lottoGenerator;
 
     @BeforeEach
     void setUp() {
-        lottoGenerator = new ManualLottoGenerator();
-
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(LottoNumber.valueOf(i));
@@ -56,7 +52,7 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다. - 3등인 경우")
     void judge_보너스볼_불일치() {
-        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), LottoNumber.valueOf(10));
+        WinningLotto winningLotto = new WinningLotto(LottoFactory.generateManualLotto(winningNumbers), LottoNumber.valueOf(10));
         Rank actual = lotto.compare(winningLotto);
         assertThat(actual).isEqualTo(Rank.THIRD);
     }
@@ -64,7 +60,7 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다. - 2등인 경우")
     void judge_보너스볼_일치() {
-        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), LottoNumber.valueOf(1));
+        WinningLotto winningLotto = new WinningLotto(LottoFactory.generateManualLotto(winningNumbers), LottoNumber.valueOf(1));
         Rank actual = lotto.compare(winningLotto);
         assertThat(actual).isEqualTo(Rank.SECOND);
     }
