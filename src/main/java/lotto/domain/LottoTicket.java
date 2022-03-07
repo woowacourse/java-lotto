@@ -22,7 +22,7 @@ public class LottoTicket {
 
     private static void validatePurchasable(Money money) {
         if (!money.isGreatThanOrEqualTo(Money.from(LottoLine.PRICE))) {
-            throw new IllegalArgumentException("로또 구매에 필요한 금액이 부족합니다.");
+            throw new IllegalStateException("로또 구매에 필요한 금액이 부족합니다.");
         }
     }
 
