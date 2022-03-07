@@ -1,43 +1,60 @@
 package lotto.controller;
 
-import java.util.Scanner;
+import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.ProfitRate;
-import lotto.domain.RankCount;
+import lotto.domain.LottoPurchaseMoney;
+import lotto.domain.RankCounter;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class Controller {
 
-    public void run(Scanner scanner) {
-        Money money = getMoney(scanner);
-        Lottos lottos = Lottos.buyLottosByAuto(money);
-        OutputView.printLottos(lottos);
+    public void run() {
+        LottoPurchaseMoney lottoPurchaseMoney = getLottoPurchaseMoney();
+        LottoCount lottoCounter = getLottoCounter(lottoPurchaseMoney);
+        Lottos lottos = getLottos(lottoCounter);
+        OutputView.printLottos(lottoCounter, lottos);
 
-        WinningNumbers winningNumbers = getWinningNumbers(scanner);
-        RankCount rankCount = new RankCount(lottos, winningNumbers);
-        ProfitRate profitRate = new ProfitRate(rankCount.getTotalPrize(), money);
-        OutputView.printWinningStatistic(rankCount, profitRate);
+        RankCounter rankCounter = RankCounter.newInstance(lottos, getWinningNumbers());
+        OutputView.printWinningStatistic(lottoPurchaseMoney, rankCounter);
     }
 
-    private Money getMoney(Scanner scanner) {
+    private LottoPurchaseMoney getLottoPurchaseMoney() {
         try {
-            int inputMoney = InputView.inputMoney(scanner);
-            return new Money(inputMoney);
+            return LottoPurchaseMoney.of(InputView.inputLottoPurchaseMoney());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return getMoney(scanner);
+            return getLottoPurchaseMoney();
         }
     }
 
-    private WinningNumbers getWinningNumbers(Scanner scanner) {
+    private LottoCount getLottoCounter(LottoPurchaseMoney lottoPurchaseMoney) {
         try {
-            return new WinningNumbers(InputView.inputWinningLotto(scanner), InputView.inputBonusNumber(scanner));
+            return new LottoCount(lottoPurchaseMoney.calculateTotalLottoCount(), InputView.inputManualLottoCount());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return getWinningNumbers(scanner);
+            return getLottoCounter(lottoPurchaseMoney);
+        }
+    }
+
+    private Lottos getLottos(LottoCount lottoCounter) {
+        try {
+            Lottos manualLottos = Lottos.newInstanceByManual(InputView.inputManualLottos(lottoCounter.getManualLottoCount()));
+            Lottos autoLottos = Lottos.newInstanceByAuto(lottoCounter.getAutoLottoCount());
+            return manualLottos.getCombinedLottos(autoLottos);
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception.getMessage());
+            return getLottos(lottoCounter);
+        }
+    }
+
+    private WinningNumbers getWinningNumbers() {
+        try {
+            return new WinningNumbers(InputView.inputWinningLotto(), InputView.inputBonusNumber());
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception.getMessage());
+            return getWinningNumbers();
         }
     }
 }

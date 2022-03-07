@@ -11,10 +11,4 @@ public class InputValidator {
             throw new InputTypeException(InputTypeException.INPUT_ONLY_INTEGER_ERROR_MESSAGE);
         }
     }
-
-    public static void checkNaturalNumber(int number) {
-        if (number <= 0) {
-            throw new InputTypeException(InputTypeException.INPUT_ONLY_NATURAL_NUMBER_ERROR_MESSAGE);
-        }
-    }
 }

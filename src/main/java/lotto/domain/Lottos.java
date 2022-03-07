@@ -3,34 +3,39 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import lotto.generator.LottoGenerator;
 
 public class Lottos {
 
-    private static final int LOTTO_TICKET_PRICE = 1000;
-
     private final List<Lotto> lottos;
 
-    private Lottos(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public static Lottos buyLottosByAuto(Money money) {
+    public static Lottos newInstanceByManual(List<List<Integer>> manualLottos) {
+        List<Lotto> lottos = manualLottos.stream()
+                .map(LottoGenerator::generateLottoByManual)
+                .collect(Collectors.toList());
+        return new Lottos(lottos);
+    }
+
+    public static Lottos newInstanceByAuto(int autoLottoCount) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < getTotalLottoCount(money); i++) {
-            lottos.add(Lotto.generateLottoByAuto());
+        for (int i = 0; i < autoLottoCount; i++) {
+            lottos.add(LottoGenerator.generateLottoByAuto());
         }
         return new Lottos(lottos);
     }
 
-    private static int getTotalLottoCount(Money money) {
-        return money.calculateTotalLottoCount(LOTTO_TICKET_PRICE);
+    public Lottos getCombinedLottos(Lottos combinedLottos) {
+        return new Lottos(Stream.concat(lottos.stream(), combinedLottos.getLottos().stream())
+                .collect(Collectors.toList()));
     }
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
-    }
-
-    public int getTotalLottoCount() {
-        return lottos.size();
     }
 }

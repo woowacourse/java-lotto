@@ -17,12 +17,6 @@ public class InputConvertor {
                 .collect(Collectors.toList());
     }
 
-    public static int toNaturalNumber(String input) {
-        int inputInt = toInt(input);
-        InputValidator.checkNaturalNumber(inputInt);
-        return inputInt;
-    }
-
     public static List<String> splitInput(String input, String delimiter) {
         return Arrays.stream(input.split(delimiter))
                 .map(String::trim)

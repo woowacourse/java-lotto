@@ -8,54 +8,40 @@ import lotto.exception.LottoException;
 
 public class Lotto {
 
-    public static final int LOTTO_SIZE = 6;
+    private static final int LOTTO_SIZE = 6;
+
     private final List<LottoNumber> lotto;
 
-    private Lotto(List<LottoNumber> lotto) {
+    public Lotto(List<LottoNumber> lotto) {
+        checkSize(lotto);
+        checkDuplication(lotto);
         this.lotto = new ArrayList<>(lotto);
     }
 
-    public static Lotto generateLottoByAuto() {
-        return new Lotto(LottoNumber.getRandomLottoNumbers(LOTTO_SIZE));
-    }
-
-    public static Lotto generateLottoByManual(List<Integer> numbers) {
-        checkSize(numbers);
-        checkDuplication(numbers);
-        return new Lotto(convertToLottoNumbers(numbers));
-    }
-
-    private static void checkSize(List<Integer> numbers) {
-        if (!isCorrectSize(numbers)) {
+    private void checkSize(List<LottoNumber> lotto) {
+        if (!isCorrectSize(lotto)) {
             throw new LottoException(LottoException.WINNING_NUMBERS_SIZE_ERROR_MESSAGE);
         }
     }
 
-    private static boolean isCorrectSize(List<Integer> numbers) {
-        return numbers.size() == LOTTO_SIZE;
+    private boolean isCorrectSize(List<LottoNumber> lotto) {
+        return lotto.size() == LOTTO_SIZE;
     }
 
-    private static void checkDuplication(List<Integer> numbers) {
-        if (isDuplication(numbers)) {
+    private void checkDuplication(List<LottoNumber> lotto) {
+        if (isDuplication(lotto)) {
             throw new LottoException(LottoException.WINNING_NUMBERS_DUPLICATION_ERROR_MESSAGE);
         }
     }
 
-    private static boolean isDuplication(List<Integer> numbers) {
-        return new HashSet<>(numbers).size() != numbers.size();
-    }
-
-    private static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::getByNumber)
-                .sorted()
-                .collect(Collectors.toList());
+    private boolean isDuplication(List<LottoNumber> lotto) {
+        return new HashSet<>(lotto).size() != lotto.size();
     }
 
     public Rank getRank(WinningNumbers winningNumbers) {
         int winningNumberMatchCount = winningNumbers.getWinningLottoMatchCount(lotto);
         boolean bonusNumberMatch = winningNumbers.isBonusNumberContainedAt(lotto);
-        return Rank.getRank(winningNumberMatchCount, bonusNumberMatch);
+        return Rank.of(winningNumberMatchCount, bonusNumberMatch);
     }
 
     public int getMatchCount(List<LottoNumber> lottoToCompare) {
@@ -70,7 +56,7 @@ public class Lotto {
 
     public List<Integer> getLottoToInteger() {
         return lotto.stream()
-                .map(LottoNumber::getNumber)
+                .map(LottoNumber::getLottoNumber)
                 .collect(Collectors.toList());
     }
 }
