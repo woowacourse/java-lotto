@@ -33,6 +33,6 @@ public class ResultStatusTest {
         resultStatus.updateRecord(Rank.FIRST);
 
         double actual = resultStatus.calculateTotalIncome();
-        assertThat(actual).isEqualTo((double)Rank.FIRST.getReward());
+        assertThat(actual).isEqualTo((double) Rank.FIRST.getReward());
     }
 }

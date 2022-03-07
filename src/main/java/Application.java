@@ -1,9 +1,9 @@
 import controller.LottoController;
 import domain.Lotto.Lottos;
 import domain.Lotto.WinningLotto;
-import domain.ResultStatus;
 import domain.LottoCount;
 import domain.Money;
+import domain.ResultStatus;
 import view.InputView;
 import view.OutputView;
 

@@ -24,7 +24,7 @@ public class LottoFactory {
         return new Lotto(completedLottoNumbers);
     }
 
-    public static Lotto generateManualLotto(List<Integer> numbers){
+    public static Lotto generateManualLotto(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .sorted()
                 .map(LottoNumber::valueOf)
@@ -47,7 +47,7 @@ public class LottoFactory {
         return autoLottos;
     }
 
-    public static List<Lotto> generateManualLottos(List<String> manualLottoValues){
+    public static List<Lotto> generateManualLottos(List<String> manualLottoValues) {
         List<Lotto> manualLottos = new ArrayList<>();
         for (String manualLottoValue : manualLottoValues) {
             manualLottos.add(generateManualLotto(manualLottoValue));

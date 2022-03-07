@@ -1,10 +1,10 @@
 package controller;
 
 import domain.Lotto.*;
-import domain.Rank;
-import domain.ResultStatus;
 import domain.LottoCount;
 import domain.Money;
+import domain.Rank;
+import domain.ResultStatus;
 
 import java.util.Collection;
 import java.util.List;
@@ -22,7 +22,7 @@ public class LottoController {
         return LottoCount.of(manualLottoCount, purchasableLottoCount);
     }
 
-    public Lottos purchaseLotto(LottoCount lottoCount,  List<String> manualNumber) {
+    public Lottos purchaseLotto(LottoCount lottoCount, List<String> manualNumber) {
         List<Lotto> manualLottos = LottoFactory.generateManualLottos(manualNumber);
         List<Lotto> autoLottos = LottoFactory.generateAutoLottos(lottoCount.getAutoLottoCount());
 
