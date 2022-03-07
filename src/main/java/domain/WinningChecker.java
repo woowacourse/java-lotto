@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,19 @@ public class WinningChecker {
             .map(entry -> entry.getKey().getReward() * entry.getValue())
             .mapToDouble(d -> d)
             .sum();
+    }
+
+    public LinkedHashMap<String, Integer> getStatisticMap() {
+
+        return new LinkedHashMap<>() {
+            {
+                put("3개 일치 (5000원)- %d개\n", getRewardsCount(Rewards.FIFTH_REWARD));
+                put("4개 일치 (50000원)- %d개\n", getRewardsCount(Rewards.FOURTH_REWARD));
+                put("5개 일치 (1500000원)- %d개\n", getRewardsCount(Rewards.THIRD_REWARD));
+                put("5개 일치, 보너스 볼 일치(30000000원)- %d개\n", getRewardsCount(Rewards.SECOND_REWARD));
+                put("6개 일치 (2000000000원)- %d개\n", getRewardsCount(Rewards.FIRST_REWARD));
+            }
+        };
     }
 
     public int getRewardsCount(Rewards rewards) {
