@@ -6,7 +6,7 @@ public class Money {
 
     private static final String MIN_UNIT_MESSAGE = "[ERROR] 구입 금액은 1000원 단위이어야 합니다.";
     private static final String LOTTO_COUNT_ERROR = "[ERROR] 구매할 로또 수를 다시 입력해주세요.";
-    private static final int UNIT = 1000;
+    private static final int LOTTO_MIN_UNIT = 1000;
 
     private final int money;
 
@@ -16,7 +16,7 @@ public class Money {
     }
 
     private void validateUnit(int money) {
-        if (money < UNIT) {
+        if (money < LOTTO_MIN_UNIT) {
             throw new IllegalArgumentException(MIN_UNIT_MESSAGE);
         }
     }
@@ -26,12 +26,12 @@ public class Money {
     }
 
     public int getLottoCount() {
-        return money / UNIT;
+        return money / LOTTO_MIN_UNIT;
     }
 
     public int getAutoLottoCount(int manualLottoCount) {
-        validateCountRange(money / UNIT, manualLottoCount);
-        return money / UNIT - manualLottoCount;
+        validateCountRange(money / LOTTO_MIN_UNIT, manualLottoCount);
+        return money / LOTTO_MIN_UNIT - manualLottoCount;
     }
 
     private void validateCountRange(int maxLottoCount, int inputCount) {
