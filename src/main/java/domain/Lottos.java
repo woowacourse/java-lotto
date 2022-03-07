@@ -27,7 +27,6 @@ public class Lottos {
     private void checkValidation(List<Lotto> lottos) {
         checkNull(lottos);
         checkEmpty(lottos);
-
     }
 
     private void checkNull(List<Lotto> lottos) {
