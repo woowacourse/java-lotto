@@ -28,10 +28,11 @@ public class LottoController {
         return lottoGenerators;
     }
 
-    public StatisticDto winningResult(String[] inputWinningNumber, int inputBonusBall, Lottos lottos) {
+    public StatisticDto winningResult(String[] inputWinningNumber, int inputBonusBall, LottosDto lottosDto, Money money) {
         Lotto winningNumber = new ManualLottoGenerator(inputWinningNumber).generateLotto();
         LottoNumber bonusBall = LottoNumber.of(inputBonusBall);
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusBall);
-        return StatisticDto.from(lottos.getWinningStatistics(winningLotto));
+        Statistic winningStatistics = lottosDto.getLottos().getWinningStatistics(winningLotto);
+        return StatisticDto.from(winningStatistics, winningStatistics.getProfitRate(money));
     }
 }

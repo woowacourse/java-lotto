@@ -1,7 +1,6 @@
 import controller.LottoController;
 import controller.dto.LottosDto;
 import controller.dto.StatisticDto;
-import domain.Lottos;
 import domain.Money;
 import view.InputView;
 import view.OutputView;
@@ -21,9 +20,9 @@ public class Application {
         String[] inputWinningNumber = InputView.askInputWinningNumber();
         int inputBonusBall = InputView.askInputBonusBall();
 
-        StatisticDto statisticDto = lottoController.winningResult(inputWinningNumber, inputBonusBall, lottosDto.getLottos());
+        StatisticDto statisticDto = lottoController.winningResult(inputWinningNumber, inputBonusBall, lottosDto, new Money(inputMoney));
         OutputView.printStatistics(statisticDto);
-        OutputView.printProfitRate(statisticDto.getStatistic().getProfitRate(new Money(inputMoney)));
+        OutputView.printProfitRate(statisticDto.getProfitRate());
 
     }
 }

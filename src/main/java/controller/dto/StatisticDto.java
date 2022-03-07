@@ -8,14 +8,14 @@ import java.util.stream.Collectors;
 
 public class StatisticDto {
     private final Map<RankDto, Integer> statisticDto;
-    private final Statistic statistic;
+    private final double profitRate;
 
-    public StatisticDto(Map<RankDto, Integer> statisticDto, Statistic statistic) {
+    public StatisticDto(Map<RankDto, Integer> statisticDto, double profitRate) {
         this.statisticDto = new LinkedHashMap<>(statisticDto);
-        this.statistic = statistic;
+        this.profitRate = profitRate;
     }
 
-    public static StatisticDto from(Statistic statistics) {
+    public static StatisticDto from(Statistic statistics, double profitRate) {
         return statistics.getStatistics().entrySet()
                 .stream()
                 .collect(Collectors.collectingAndThen(Collectors.toMap(
@@ -23,7 +23,7 @@ public class StatisticDto {
                                 Map.Entry::getValue,
                                 (key, value) -> key,
                                 LinkedHashMap::new
-                        ), o -> new StatisticDto(o, statistics))
+                        ), statisticDto1 -> new StatisticDto(statisticDto1, profitRate))
                 );
     }
 
@@ -31,7 +31,7 @@ public class StatisticDto {
         return new LinkedHashMap<>(statisticDto);
     }
 
-    public Statistic getStatistic() {
-        return statistic;
+    public double getProfitRate() {
+        return profitRate;
     }
 }
