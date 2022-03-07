@@ -4,6 +4,7 @@ import static java.lang.Math.floor;
 
 import java.util.List;
 import lotterymachine.dto.LotteryResultDto;
+import lotterymachine.vo.Count;
 import lotterymachine.vo.Money;
 
 public class LotteryCalculator {
@@ -28,5 +29,9 @@ public class LotteryCalculator {
 
     private static Money sumIncome(LotteryResultDto lotteryResult) {
         return Money.from(lotteryResult.getWinningPrice() * lotteryResult.getNumberOfMatchingTicket());
+    }
+
+    public static Count divideByLotteryPrice(Money money) {
+         return Count.from(money.getAmount() / LOTTERY_PRICE);
     }
 }

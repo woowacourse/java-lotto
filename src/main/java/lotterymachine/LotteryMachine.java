@@ -43,7 +43,7 @@ public class LotteryMachine {
     }
 
     private static Count getNumberOfTickets(Money money) {
-        return Count.from(money.divideByTicketPrice());
+        return LotteryCalculator.divideByLotteryPrice(money);
     }
 
     private static Count getNumberOfManualTickets(Count totalTickets) {
