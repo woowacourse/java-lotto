@@ -1,6 +1,10 @@
 package view;
 
-import dto.*;
+import domain.Lotto.Lotto;
+import domain.Lotto.Lottos;
+import domain.Rank;
+
+import java.util.Map;
 
 public class OutputView {
 
@@ -23,38 +27,37 @@ public class OutputView {
         return OUTPUT_VIEW;
     }
 
-    public void printPurchasedLotto(LottoCountDto lottoCountDto, LottosDto lottosDto) {
+    public void printPurchasedLotto(int manualLottoCount, int autoLottoCount, Lottos lottos) {
         System.out.print(System.lineSeparator());
-        System.out.printf(LOTTO_COUNT_FORMAT, lottoCountDto.getManualLottoCount(), lottoCountDto.getAutoLottoCount());
-        for (LottoDto lottoDto : lottosDto.getLottoDtos()) {
-            printLottoNumbers(lottoDto);
+        System.out.printf(LOTTO_COUNT_FORMAT, manualLottoCount, autoLottoCount);
+        for (Lotto lotto : lottos.getLottos()) {
+            printLottoNumbers(lotto);
         }
         System.out.print(System.lineSeparator());
     }
 
-    public void printLottoNumbers(LottoDto lottoDto) {
-        System.out.println(lottoDto.getLottoNumber());
+    public void printLottoNumbers(Lotto lotto) {
+        System.out.println(lotto.getLotto());
     }
 
-    public void printResult(RanksDto ranksDto) {
+    public void printResult(Map<Rank, Integer> resultStatistics) {
         System.out.print(System.lineSeparator());
         System.out.println(RESULT_MESSAGE);
         System.out.println(DELIMITER);
-        for (RankDto rankDto : ranksDto.getRankDtos()) {
-            printByRank(rankDto, rankDto.getCriteria(), rankDto.getReward(), rankDto.getHitCount());
+        for (Rank rank : resultStatistics.keySet()) {
+            printByRank(rank.getRankNumber(), rank.getCriteria(), rank.getReward(), resultStatistics.get(rank));
         }
-        printIncomeRate(ranksDto);
     }
 
-    private void printByRank(RankDto rankDto, int criteria, int reward, int hitCount) {
-        if (rankDto.getRankNumber() == SECOND_RANK) {
+    private void printByRank(int rankNumber, int criteria, int reward, int hitCount) {
+        if (rankNumber == SECOND_RANK) {
             System.out.printf((RESULT_FORMAT), criteria, BONUS_FORMAT, reward, hitCount);
             return;
         }
         System.out.printf((RESULT_FORMAT), criteria, EMPTY_FORMAT, reward, hitCount);
     }
 
-    private void printIncomeRate(RanksDto ranksdto) {
-        System.out.printf((INCOME_RATE_FORMAT), ranksdto.getIncomeRate());
+    public void printIncomeRate(double incomeRate) {
+        System.out.printf((INCOME_RATE_FORMAT), incomeRate);
     }
 }
