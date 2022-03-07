@@ -32,7 +32,6 @@ public class RankTest {
         int hitCount = 2;
         boolean bonusBall = false;
 
-        Result result = new Result(hitCount, bonusBall);
         Rank actual = Rank.judgeResult(hitCount, bonusBall);
 
         assertThat(actual).isEqualTo(Rank.NONE);
