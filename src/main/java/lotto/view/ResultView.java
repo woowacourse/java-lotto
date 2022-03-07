@@ -3,10 +3,10 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.List;
 
-import lotto.model.Lotto;
 import lotto.model.LottoResult;
 import lotto.model.Rank;
 import lotto.model.Yield;
+import lotto.model.lottofactory.Lotto;
 
 public class ResultView {
     public static void printGeneratedLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {

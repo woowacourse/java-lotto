@@ -3,10 +3,10 @@ package lotto.controller;
 import static lotto.view.InputView.*;
 import static lotto.view.ResultView.*;
 
-import lotto.model.AutoLottoFactory;
 import lotto.model.LottoGame;
 import lotto.model.LottoResult;
 import lotto.model.Lottos;
+import lotto.model.lottofactory.AutoLottoFactory;
 
 public class LottoController {
     public void runGame() {

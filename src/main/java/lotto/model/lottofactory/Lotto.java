@@ -1,9 +1,12 @@
-package lotto.model;
+package lotto.model.lottofactory;
 
 import static java.util.stream.Collectors.*;
 import static lotto.ValidationUtils.*;
 
 import java.util.Set;
+
+import lotto.model.LottoNumber;
+import lotto.model.Rank;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
@@ -11,7 +14,7 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<LottoNumber> inputLottoNumbers) {
+    Lotto(Set<LottoNumber> inputLottoNumbers) {
         Set<LottoNumber> lottoNumbers = Set.copyOf(inputLottoNumbers);
         validateEmptyCollection(lottoNumbers);
         validateNumberOfLottoNumbers(lottoNumbers);
@@ -24,7 +27,7 @@ public class Lotto {
         }
     }
 
-    Rank match(Lotto winningNumbers, LottoNumber bonusNumber) {
+    public Rank match(Lotto winningNumbers, LottoNumber bonusNumber) {
         return Rank.find(getMatchScore(winningNumbers), isMatchNumber(bonusNumber));
     }
 

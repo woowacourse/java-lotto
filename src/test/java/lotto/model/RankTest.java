@@ -9,6 +9,10 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.model.lottofactory.Lotto;
+import lotto.model.lottofactory.LottoFactory;
+import lotto.model.lottofactory.ManualLottoFactory;
+
 class RankTest {
 
     @Test
