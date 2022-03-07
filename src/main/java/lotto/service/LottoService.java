@@ -3,6 +3,7 @@ package lotto.service;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.LottoBuyMoney;
 import lotto.domain.Lottos;
 import lotto.domain.Statistics;
 import lotto.domain.WinnerLotto;
@@ -10,8 +11,15 @@ import lotto.domain.generator.AutoLottoGenerator;
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.generator.ManualLottoGenerator;
 import lotto.domain.vo.LottoNumber;
+import lotto.dto.result.LottoAmount;
 
 public class LottoService {
+
+    public LottoAmount countLottos(int inputMoney, int manualLottoAmount) {
+        LottoBuyMoney lottoBuyMoney = new LottoBuyMoney(inputMoney);
+        int autoLottoAmount = lottoBuyMoney.countAutoAmountByManualAmount(manualLottoAmount);
+        return new LottoAmount(manualLottoAmount, autoLottoAmount);
+    }
 
     public Lottos createLottos(int autoLottoAmount, List<List<Integer>> manualNumbers) {
         List<Lotto> lottos = createManualLottos(manualNumbers);
@@ -20,8 +28,7 @@ public class LottoService {
     }
 
     public Statistics match(List<List<Integer>> lottoNumbers, List<Integer> winnerNumbers, int bonusNumber) {
-        List<List<LottoNumber>> lists = collectNumbersToCollectLottoNumbers(lottoNumbers);
-        Lottos lottos = new Lottos(numbersToLottos(lists));
+        Lottos lottos = new Lottos(toLottos(toLottoNumbers(lottoNumbers)));
         return Statistics.of(lottos.match(createWinningLotto(winnerNumbers, bonusNumber)));
     }
 
@@ -30,7 +37,7 @@ public class LottoService {
     }
 
     private List<Lotto> createManualLottos(List<List<Integer>> manualNumbers) {
-        LottoGenerator lottoGenerator = new ManualLottoGenerator(collectNumbersToCollectLottoNumbers(manualNumbers));
+        LottoGenerator lottoGenerator = new ManualLottoGenerator(toLottoNumbers(manualNumbers));
         return lottoGenerator.generateLottos();
     }
 
@@ -43,7 +50,7 @@ public class LottoService {
         return new WinnerLotto(Lotto.of(numbersToLottoNumbers(winnerNumbers)), LottoNumber.of(bonusNumber));
     }
 
-    private List<List<LottoNumber>> collectNumbersToCollectLottoNumbers(List<List<Integer>> collectNumbers) {
+    private List<List<LottoNumber>> toLottoNumbers(List<List<Integer>> collectNumbers) {
         return collectNumbers.stream()
             .map(this::numbersToLottoNumbers)
             .collect(Collectors.toList());
@@ -55,7 +62,7 @@ public class LottoService {
             .collect(Collectors.toList());
     }
 
-    private List<Lotto> numbersToLottos(List<List<LottoNumber>> lists) {
+    private List<Lotto> toLottos(List<List<LottoNumber>> lists) {
         return lists.stream()
             .map(Lotto::of)
             .collect(Collectors.toList());

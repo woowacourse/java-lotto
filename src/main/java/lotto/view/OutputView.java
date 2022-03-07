@@ -5,6 +5,7 @@ import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.dto.result.LottosResult;
 import lotto.dto.result.RankResult;
 import lotto.dto.result.StatisticsResult;
 
@@ -15,16 +16,12 @@ public class OutputView {
 
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    public static void printLottos(List<List<Integer>> lottos) {
-        for (List<Integer> lotto : lottos) {
+    public static void printLottos(LottosResult lottos) {
+        printLottosSize(lottos.getManualAmount(), lottos.getAutoLottoAmount());
+        for (List<Integer> lotto : lottos.getLottos()) {
             Collections.sort(lotto);
             System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(lotto)));
         }
-    }
-
-    public static void printLottosSize(int manualLottoAmount, int autoLottoAmount) {
-        System.out.println(MessageFormat.format(
-            "수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", manualLottoAmount, autoLottoAmount));
     }
 
     public static void printRanks(StatisticsResult statisticsResult) {
@@ -34,6 +31,11 @@ public class OutputView {
             printRank(rank, statisticsResult.getStatistics().get(rank));
         }
         System.out.printf("총 수익률은 %.2f 입니다.", statisticsResult.getProfitRate());
+    }
+
+    private static void printLottosSize(int manualLottoAmount, int autoLottoAmount) {
+        System.out.println(MessageFormat.format(
+            "수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", manualLottoAmount, autoLottoAmount));
     }
 
     private static void printRank(String rank, RankResult statistics) {

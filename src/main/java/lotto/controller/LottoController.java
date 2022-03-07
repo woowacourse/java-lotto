@@ -1,11 +1,11 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.LottoBuyMoney;
 import lotto.domain.Lottos;
 import lotto.domain.Statistics;
 import lotto.dto.request.LottoRequest;
 import lotto.dto.request.StatisticsRequest;
+import lotto.dto.result.LottoAmount;
 import lotto.dto.result.LottosResult;
 import lotto.dto.result.StatisticsResult;
 import lotto.service.LottoService;
@@ -19,18 +19,21 @@ public class LottoController {
     }
 
     public LottosResult buyLotto(LottoRequest lottoRequest) {
-        LottoBuyMoney lottoBuyMoney = new LottoBuyMoney(lottoRequest.getInputMoney());
-        int autoLottoAmount = lottoBuyMoney.countAutoAmountByManualAmount(lottoRequest.getManualAmount());
-        Lottos lottos = lottoService.createLottos(autoLottoAmount, lottoRequest.getManualLottoNumbers());
-        return new LottosResult(lottos.getLottos(), autoLottoAmount, lottoRequest.getManualAmount());
+        int inputMoney = lottoRequest.getInputMoney();
+        List<List<Integer>> manualLottoNumbers = lottoRequest.getManualLottoNumbers();
+
+        LottoAmount lottoAmount = lottoService.countLottos(inputMoney, manualLottoNumbers.size());
+        Lottos lottos = lottoService.createLottos(lottoAmount.getAutoLotto(), manualLottoNumbers);
+        return new LottosResult(lottos.getLottos(), lottoAmount.getAutoLotto(), lottoAmount.getManualLotto());
     }
 
     public StatisticsResult match(StatisticsRequest statisticsRequest) {
-        List<List<Integer>> lottos = statisticsRequest.getLottos();
+        List<List<Integer>> lottoNumbers = statisticsRequest.getLottoNumbers();
         List<Integer> winnerNumbers = statisticsRequest.getWinnerNumbers();
         int bonusNumber = statisticsRequest.getBonusNumber();
         int inputMoney = statisticsRequest.getInputMoney();
-        Statistics statistics = lottoService.match(lottos, winnerNumbers, bonusNumber);
+
+        Statistics statistics = lottoService.match(lottoNumbers, winnerNumbers, bonusNumber);
         double profitRate = lottoService.getProfitRate(statistics, inputMoney);
         return new StatisticsResult(statistics.getResult(), profitRate);
     }
