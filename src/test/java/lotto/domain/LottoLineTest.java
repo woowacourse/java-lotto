@@ -5,13 +5,17 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.domain.generator.NumberGenerator;
+import lotto.domain.generator.RandomNumberGenerator;
 
 class LottoLineTest {
 
     @Test
-    @DisplayName("로또 티켓이 정상적으로 생성되는지 확인")
+    @DisplayName("로또 라인이 정상적으로 생성되는지 확인")
     void createLottoTicket() {
         // given
         List<LottoNumber> numbers = new ArrayList<>(
@@ -22,6 +26,17 @@ class LottoLineTest {
         LottoLine lottoLine = new LottoLine(numbers);
         // then
         assertThat(lottoLine).isNotNull();
+    }
+
+    @Test
+    @DisplayName("숫자 생성기로 로또를 한 줄 생성할 수 있다.")
+    public void createLineWithNumberGenerator() {
+        // given
+        NumberGenerator generator = new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX);
+        // when
+        LottoLine line = LottoLine.createLine(generator);
+        // then
+        Assertions.assertThat(line).isNotNull();
     }
 
     @Test

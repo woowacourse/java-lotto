@@ -38,6 +38,18 @@ class MoneyTest {
     }
 
     @Test
+    @DisplayName("0으로 나눌 수 없다.")
+    public void throwsExceptionWithZeroDivision() {
+        // when
+        Money aMoney = new Money(1000);
+        Money bMoney = new Money(0);
+
+        // then
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> aMoney.divide(bMoney));
+    }
+
+    @Test
     @DisplayName("대소를 비교할 수 있다.")
     public void compareGreaterThanOrEqualToMoney() {
         // given

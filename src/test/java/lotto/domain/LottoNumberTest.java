@@ -19,6 +19,17 @@ class LottoNumberTest {
     }
 
     @Test
+    @DisplayName("문자값으로 로또 번호를 생성한다.")
+    public void createLottoNumberWithString() {
+        // given
+        String input = "10";
+        // when
+        LottoNumber number = LottoNumber.from(input);
+        // then
+        assertThat(number).isNotNull();
+    }
+
+    @Test
     @DisplayName("최대값 초과로 생성할 시 예외를 발생시킨다.")
     void throwsExceptionWhenBiggerThanMaxNumber() {
         // given

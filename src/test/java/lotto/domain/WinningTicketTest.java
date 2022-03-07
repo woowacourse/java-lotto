@@ -31,6 +31,18 @@ public class WinningTicketTest {
     }
 
     @Test
+    @DisplayName("문자열로 당첨번호를 생성한다.")
+    public void createWinningTicketFromString() {
+        // given
+        String inputLottoLine = "1,2,3,4,5,6";
+        String inputBonusBall = "7";
+        // when
+        WinningTicket winningTicket = WinningTicket.from(inputLottoLine, inputBonusBall);
+        // then
+        Assertions.assertThat(winningTicket).isNotNull();
+    }
+
+    @Test
     @DisplayName("보너스볼과 로또번호는 중복될 수 없다.")
     public void throwsExceptionWithDuplicatedLottoNumberAndBonusBall() {
         // when
