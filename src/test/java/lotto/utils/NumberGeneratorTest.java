@@ -1,14 +1,15 @@
-package lotto.domain;
+package lotto.utils;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import lotto.utils.NumberGenerator;
-import lotto.utils.RandomNumberGenerator;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class NumberGeneratorTest {
 
@@ -20,7 +21,7 @@ class NumberGeneratorTest {
         // when
         List<Integer> numbers = numberGenerator.generate(6);
         // then
-        Assertions.assertThat(numbers.size()).isEqualTo(6);
+        assertThat(numbers.size()).isEqualTo(6);
     }
 
     @Test
@@ -31,9 +32,21 @@ class NumberGeneratorTest {
         // when
         List<Integer> numbers = numberGenerator.generate(6);
         // then
-        Assertions.assertThat(IntStream.rangeClosed(1, 10)
+        assertThat(IntStream.rangeClosed(1, 10)
                 .boxed()
                 .collect(Collectors.toList()))
             .contains(numbers.toArray(Integer[]::new));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    @DisplayName("문자열을 입력받아 정상적으로 생성되는지 확인")
+    public void createStringNumber(int size) {
+        // given
+        NumberGenerator generator = new StringNumberGenerator("1,2,3,4,5,6");
+        // when
+        List<Integer> numbers = generator.generate(size);
+        // then
+        assertThat(numbers.size()).isEqualTo(size);
     }
 }
