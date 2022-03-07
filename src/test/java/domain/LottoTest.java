@@ -18,7 +18,7 @@ public class LottoTest {
     void setup() {
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.getInstance(i));
         }
     }
 
@@ -44,7 +44,7 @@ public class LottoTest {
     @DisplayName("Lotto 생성시 전달된 List 길이가 6이 아니면 IAE 발생")
     void createLottoWithInvalidSizeOfLottoNumbersShouldFail() {
         // given
-        lottoNumbers.add(new LottoNumber(8));
+        lottoNumbers.add(LottoNumber.getInstance(8));
 
         // then
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
@@ -56,7 +56,7 @@ public class LottoTest {
     @DisplayName("Lotto 생성시 전달된 List에 중복이 있을 경우 IAE 발생")
     void createLottoWithDuplicateLottoNumbersShouldFail() {
         // given
-        lottoNumbers.set(1, new LottoNumber(1));
+        lottoNumbers.set(1, LottoNumber.getInstance(1));
 
         // then
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
@@ -72,7 +72,7 @@ public class LottoTest {
 
         // when
         List<LottoNumber> newLottoNumbers = new ArrayList<>(lottoNumbers);
-        newLottoNumbers.set(0, new LottoNumber(7));
+        newLottoNumbers.set(0, LottoNumber.getInstance(7));
         Lotto anotherLotto = new Lotto(newLottoNumbers);
 
         // then
@@ -84,7 +84,7 @@ public class LottoTest {
     @DisplayName("Lotto에 LottoNumber를 전달하여 포함 여부 확인")
     void lottoContainsLottoNumberTest(int lottoNumber, boolean expected) {
         // given
-        LottoNumber lottoNumber1 = new LottoNumber(lottoNumber);
+        LottoNumber lottoNumber1 = LottoNumber.getInstance(lottoNumber);
 
         // when
         Lotto lotto = new Lotto(lottoNumbers);
@@ -103,7 +103,7 @@ public class LottoTest {
         List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 
         // then
-        assertThatThrownBy(() -> lottoNumbers.add(LottoNumberRepository.getLottoNumberByInt(22)))
+        assertThatThrownBy(() -> lottoNumbers.add(LottoNumber.getInstance(22)))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 }

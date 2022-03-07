@@ -51,8 +51,8 @@ public class WalletTest {
     }
 
     @ParameterizedTest(name = "구매 시도 수량 : {0}")
-    @ValueSource(ints = {-1, 0})
-    @DisplayName("수동 로또 구매수량이 1장 미만일 경우, IAE 발생")
+    @ValueSource(ints = {-1, -10, -100})
+    @DisplayName("수동 로또 구매수량이 0장 미만일 경우, IAE 발생")
     void buyingManualLottoWithInvalidQuantityShouldFail(int invalidQuantity) {
         // given & when
         Wallet wallet = new Wallet(1_000);
@@ -60,7 +60,7 @@ public class WalletTest {
         // then
         assertThatThrownBy(() -> wallet.buyManualLottoByQuantity(invalidQuantity))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구매 수량은 1장 이상이어야 합니다");
+                .hasMessageMatching("구매 수량은 \\d+ 이상이어야 합니다");
     }
 
     @ParameterizedTest(name = "구매 시도 수량 : {0}")

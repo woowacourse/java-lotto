@@ -1,12 +1,14 @@
 package domain;
 
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,12 +18,15 @@ public class LottosTest {
 
     @BeforeEach
     void setupLottos() {
-        Lotto lottoNumbers1 = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
-        Lotto lottoNumbers2 = new Lotto(List.of(new LottoNumber(13), new LottoNumber(14), new LottoNumber(15),
-                new LottoNumber(10), new LottoNumber(11), new LottoNumber(12)));
-        Lotto lottoNumbers3 = new Lotto(List.of(new LottoNumber(21), new LottoNumber(22), new LottoNumber(23),
-                new LottoNumber(28), new LottoNumber(25), new LottoNumber(45)));
+        Lotto lottoNumbers1 = new Lotto(IntStream.rangeClosed(1, 6)
+                .mapToObj(LottoNumber::getInstance)
+                .collect(toList()));
+        Lotto lottoNumbers2 = new Lotto(IntStream.rangeClosed(10, 15)
+                .mapToObj(LottoNumber::getInstance)
+                .collect(toList()));
+        Lotto lottoNumbers3 = new Lotto(IntStream.rangeClosed(20, 25)
+                .mapToObj(LottoNumber::getInstance)
+                .collect(toList()));
 
         lottos = List.of(lottoNumbers1, lottoNumbers2, lottoNumbers3);
     }

@@ -1,9 +1,10 @@
 package domain;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.List;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,10 +15,11 @@ public class WinningLottoTest {
 
     @BeforeEach
     void setup() {
-        lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+        lotto = new Lotto(IntStream.rangeClosed(1, 6)
+                .mapToObj(LottoNumber::getInstance)
+                .collect(toList()));
 
-        bonusNumber = new LottoNumber(7);
+        bonusNumber = LottoNumber.getInstance(7);
     }
 
     @Test
@@ -33,7 +35,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("생성자에 전달된 bonusNumber 가 lotto 에 포함되어 있을 경우 IAE 발생")
     void createWinningLottoWithDuplicateBonusNumberShouldFail() {
-        assertThatThrownBy(() -> new WinningLotto(lotto, new LottoNumber(1)))
+        assertThatThrownBy(() -> new WinningLotto(lotto, LottoNumber.getInstance(1)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("보너스 번호는 로또 번호와 중복될 수 없습니다 : \\d+");
     }
