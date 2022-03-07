@@ -23,12 +23,12 @@ public class WinningResultTest {
 
     @BeforeEach
     void setUpPurchasedLottos() {
-        List<Lotto> lottoList = List.of(
-                Lotto.fromRawValues(Set.of(1, 2, 3, 4, 5, 6)),
-                Lotto.fromRawValues(Set.of(7, 8, 9, 10, 11, 12)),
-                Lotto.fromRawValues(Set.of(13, 14, 15, 16, 17, 18))
+        List<Set<Integer>> lottoList = List.of(
+                Set.of(1, 2, 3, 4, 5, 6),
+                Set.of(7, 8, 9, 10, 11, 12),
+                Set.of(13, 14, 15, 16, 17, 18)
         );
-        purchasedLottos = new Lottos(lottoList);
+        purchasedLottos = Lottos.fromRawValues(lottoList);
     }
 
     @BeforeEach

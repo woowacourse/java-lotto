@@ -1,21 +1,29 @@
 package domain;
 
 import domain.strategy.LottoNumberGenerateStrategy;
+import java.util.List;
+import java.util.Set;
 
 public class LottoGame {
     private final LottoQuantity totalLottoQuantity;
     private final LottoQuantity manualLottoQuantity;
-    private Lottos totalLottos;
+    private Lottos totalLottos = Lottos.from(List.of());
 
-    public LottoGame(LottoQuantity totalLottoQuantity, LottoQuantity manualLottoQuantity, Lottos manualLottos) {
+    public LottoGame(LottoQuantity totalLottoQuantity, LottoQuantity manualLottoQuantity) {
         this.totalLottoQuantity = totalLottoQuantity;
         this.manualLottoQuantity = manualLottoQuantity;
-        this.totalLottos = manualLottos;
+    }
+
+    public Lottos createManualLottos(List<Set<Integer>> rawLottosValue) {
+        Lottos manualLottos = Lottos.fromRawValues(rawLottosValue);
+        totalLottos = Lottos.concat(totalLottos, manualLottos);
+
+        return totalLottos;
     }
 
     public Lottos createAutoLottos(LottoNumberGenerateStrategy lottoNumberGenerator) {
         LottoQuantity autoLottoQuantity = getAutoLottoQuantity();
-        Lottos generated = new Lottos(autoLottoQuantity, lottoNumberGenerator);
+        Lottos generated = Lottos.of(autoLottoQuantity, lottoNumberGenerator);
         totalLottos = Lottos.concat(totalLottos, generated);
 
         return totalLottos;

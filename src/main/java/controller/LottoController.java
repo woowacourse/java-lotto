@@ -22,9 +22,10 @@ public class LottoController {
     public void start() {
         InputMoney inputMoney = generateInputMoney();
         LottoQuantity manualLottoQuantity = generateManualLottoQuantity(inputMoney);
-        Lottos manualLottos = generateManualLottos(manualLottoQuantity);
 
-        LottoGame lottoGame = new LottoGame(LottoQuantity.from(inputMoney), manualLottoQuantity, manualLottos);
+        LottoGame lottoGame = new LottoGame(LottoQuantity.from(inputMoney), manualLottoQuantity);
+        lottoGame.createManualLottos(generateManualLottos(manualLottoQuantity));
+
         printLottoQuantity(lottoGame.getManualLottoQuantity(), lottoGame.getAutoLottoQuantity());
         printLottos(lottoGame.createAutoLottos(new RandomLottoNumberGenerator()));
         printWinningResult(lottoGame.createWinningResult(generateWinningLotto()));
@@ -49,13 +50,9 @@ public class LottoController {
         }
     }
 
-    private Lottos generateManualLottos(LottoQuantity manualLottoQuantity) {
+    private List<Set<Integer>> generateManualLottos(LottoQuantity manualLottoQuantity) {
         try {
-            List<Set<Integer>> lottoValues = InputView.scanManualLottoNumbers(manualLottoQuantity.getLottoQuantity());
-            List<Lotto> manualLottoValues = lottoValues.stream()
-                    .map(Lotto::fromRawValues)
-                    .collect(Collectors.toList());
-            return new Lottos(manualLottoValues);
+            return InputView.scanManualLottoNumbers(manualLottoQuantity.getLottoQuantity());
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
             return generateManualLottos(manualLottoQuantity);
