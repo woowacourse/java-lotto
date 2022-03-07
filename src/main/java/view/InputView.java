@@ -13,7 +13,6 @@ public class InputView {
     private static final String PURCHASE_AMOUNT_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String WINNING_NUMBER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
-    private static final String DELIMITER = ",";
     private static final String MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String MANUAL_LOTTO_NUMBER_INPUT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
@@ -51,26 +50,9 @@ public class InputView {
         return Integer.parseInt(input());
     }
 
-    public List<Integer> inputWinningNumber() {
+    public String inputWinningNumber() {
         System.out.println(WINNING_NUMBER_INPUT_MESSAGE);
-        return inputLottoNumbres();
-    }
-
-    private List<Integer> inputLottoNumbres() {
-        List<String> numberValues = toStrings(input());
-        return toNumbers(numberValues);
-    }
-
-    private List<String> toStrings(String stringArray) {
-        return Arrays.stream(stringArray.split(DELIMITER))
-                .map(String::trim)
-                .collect(Collectors.toList());
-    }
-
-    private List<Integer> toNumbers(List<String> numberValues) {
-        return numberValues.stream()
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        return input();
     }
 
     public int inputBonusBall() {
@@ -84,14 +66,14 @@ public class InputView {
         return Integer.parseInt(input());
     }
 
-    public List<List<Integer>> inputManualLottoNumber(int manualLottoCount) {
+    public List<String> inputManualLottoNumber(int manualLottoCount) {
         System.out.print(System.lineSeparator());
         System.out.println(MANUAL_LOTTO_NUMBER_INPUT_MESSAGE);
 
-        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
+        List<String> manualLottoValues = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
-            manualLottoNumbers.add(inputLottoNumbres());
+            manualLottoValues.add(input());
         }
-        return manualLottoNumbers;
+        return manualLottoValues;
     }
 }

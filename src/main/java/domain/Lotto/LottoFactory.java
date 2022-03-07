@@ -1,5 +1,7 @@
 package domain.Lotto;
 
+import utils.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,6 +33,12 @@ public class LottoFactory {
         return new Lotto(lottoNumbers);
     }
 
+    public static Lotto generateManualLotto(String numbers) {
+        List<String> numberValues = StringUtils.toStrings(numbers);
+        List<Integer> lottoNumbers = StringUtils.toNumbers(numberValues);
+        return generateManualLotto(lottoNumbers);
+    }
+
     public static List<Lotto> generateAutoLottos(int autoLottoCount) {
         List<Lotto> autoLottos = new ArrayList<>();
         for (int i = 0; i < autoLottoCount; i++) {
@@ -39,10 +47,10 @@ public class LottoFactory {
         return autoLottos;
     }
 
-    public static List<Lotto> generateManualLottos(List<List<Integer>> manualLottoNumbers) {
+    public static List<Lotto> generateManualLottos(List<String> manualLottoValues){
         List<Lotto> manualLottos = new ArrayList<>();
-        for (List<Integer> manualLottoNumber : manualLottoNumbers) {
-            manualLottos.add(generateManualLotto(manualLottoNumber));
+        for (String manualLottoValue : manualLottoValues) {
+            manualLottos.add(generateManualLotto(manualLottoValue));
         }
         return manualLottos;
     }

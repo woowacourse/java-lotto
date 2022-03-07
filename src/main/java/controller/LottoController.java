@@ -22,7 +22,7 @@ public class LottoController {
         return new LottoCount(manualLottoCount, purchasableLottoCount - manualLottoCount);
     }
 
-    public Lottos purchaseLotto(LottoCount lottoCount,  List<List<Integer>> manualNumber) {
+    public Lottos purchaseLotto(LottoCount lottoCount,  List<String> manualNumber) {
         List<Lotto> manualLottos = LottoFactory.generateManualLottos(manualNumber);
         List<Lotto> autoLottos = LottoFactory.generateAutoLottos(lottoCount.getAutoLottoCount());
 
@@ -32,7 +32,7 @@ public class LottoController {
         return new Lottos(purchasableLottos);
     }
 
-    public WinningLotto determineWinningNumber(List<Integer> winningNumbers, int bonusBall) {
+    public WinningLotto determineWinningNumber(String winningNumbers, int bonusBall) {
         Lotto winningLotto = LottoFactory.generateManualLotto(winningNumbers);
         return new WinningLotto(winningLotto, LottoNumber.valueOf(bonusBall));
     }

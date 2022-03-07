@@ -43,9 +43,9 @@ class LottoFactoryTest {
     @Test
     @DisplayName("LottoFactory의 generateManualLottos를 이용해 수동 생성된 로또 갯수가 일치하는지 확인한다.")
     void generateManualLottos() {
-        List<List<Integer>> manualNumbers = new ArrayList<>();
+        List<String> manualNumbers = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            manualNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+            manualNumbers.add("1,2,3,4,5,6");
         }
         List<Lotto> autoLottos = LottoFactory.generateManualLottos(manualNumbers);
         int expected = 3;
