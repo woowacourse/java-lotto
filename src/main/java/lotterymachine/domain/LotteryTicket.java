@@ -51,29 +51,29 @@ public class LotteryTicket {
         validateDuplication(numbers);
     }
 
-    private void validateSize(List<LotteryNumber> numbers) {
-        if (!isLotteryTicketSize(numbers.size())) {
+    private void validateSize(List<LotteryNumber> lotteryNumbers) {
+        if (!isLotteryTicketSize(lotteryNumbers.size())) {
             throw new IllegalArgumentException(NOT_CORRECT_TICKET_SIZE);
         }
     }
 
-    private void validateDuplication(List<LotteryNumber> numbers) {
-        int count = (int) numbers.stream()
+    private void validateDuplication(List<LotteryNumber> lotteryNumbers) {
+        int count = (int) lotteryNumbers.stream()
                 .distinct()
                 .count();
-        if (count != numbers.size()) {
+        if (count != lotteryNumbers.size()) {
             throw new IllegalArgumentException(DUPLICATION_INPUT_NUMBERS);
         }
     }
 
-    public int countMatchingNumbers(LotteryTicket numbers) {
+    public int countMatchingNumbers(LotteryTicket lotteryTicket) {
         return (int) this.numbers.stream()
-                .filter(numbers::containsNumber)
+                .filter(lotteryTicket::containsNumber)
                 .count();
     }
 
-    public boolean containsNumber(LotteryNumber number) {
-        return this.numbers.contains(number);
+    public boolean containsNumber(LotteryNumber lotteryNumber) {
+        return this.numbers.contains(lotteryNumber);
     }
 
     public List<Integer> getNumbers() {
