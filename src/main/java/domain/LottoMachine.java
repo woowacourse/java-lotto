@@ -6,23 +6,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-    private static final List<LottoNumber> lottoBucket = new ArrayList<>();
+    private static final List<LottoNumber> lottoBucket = LottoNumber.lottoNumbers();
 
-    private final Payment payment;
-
-    static {
-        for (int i = LottoNumber.MIN_BOUND; i <= LottoNumber.MAX_BOUND; i++) {
-            lottoBucket.add(LottoNumber.valueOf(i));
-        }
+    public Lottos createManualLottos(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
-    public LottoMachine(Payment payment) {
-        this.payment = payment;
-    }
-
-    public Lottos createAutoLottos() {
+    public Lottos createAutoLottos(int autoTicketCount) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int count = 0; count < payment.calculateLottoCount(); count++) {
+        for (int count = 0; count < autoTicketCount; count++) {
             lottos.add(createAutoLotto());
         }
         return new Lottos(lottos);

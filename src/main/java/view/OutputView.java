@@ -12,6 +12,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
+
+    private static final int STANDARD = 1;
     private static final String ERROR_MESSAGE = "[ERROR] ";
 
     private OutputView() {
@@ -25,8 +27,8 @@ public class OutputView {
         System.out.println(ERROR_MESSAGE + errorMessage);
     }
 
-    public static void printLottos(Lottos lottos) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottos.getLottos().size()));
+    public static void printLottos(Lottos lottos, int manualTicketCount, int autoTicketCount) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualTicketCount, autoTicketCount));
         lottos.getLottos().stream()
                 .forEach(OutputView::printLotto);
         System.out.println();
@@ -55,7 +57,16 @@ public class OutputView {
     }
 
     public static void printProfitRate(double profitRate) {
-        String format = "총 수익률은 %.2f입니다.";
-        System.out.println(String.format(format, profitRate));
+        String format = "총 수익률은 %.2f입니다.(%s)";
+        System.out.println(String.format(format, profitRate, judgeResult(profitRate)));
+    }
+
+    private static String judgeResult(double profitRate) {
+        if (profitRate < STANDARD) {
+            return "기준이 1이기 때문에 결과적으로 손해라는 의미임";
+        } else if (profitRate == STANDARD) {
+            return "기준이 1이기 때문에 결과적으로 본전이라는 의미임";
+        }
+        return "기준이 1이기 때문에 결과적으로 이득이라는 의미임";
     }
 }

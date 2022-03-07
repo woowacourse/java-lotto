@@ -1,5 +1,6 @@
 package domain;
 
+import exception.ExceptionMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ public class LottoTest {
     void lotto_size_fail() {
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또는 6개의 중복되지 않은 숫자로 이루어져 있어야 합니다.");
+                .hasMessageContaining(ExceptionMessage.INVALID_LOTTO_SIZE.getMessage());
     }
 
     @DisplayName("로또 생성시 번호가 중복될 경우 실패")
@@ -48,7 +49,7 @@ public class LottoTest {
         lottoNumbers.add(LottoNumber.valueOf(5));
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또는 6개의 중복되지 않은 숫자로 이루어져 있어야 합니다.");
+                .hasMessageContaining(ExceptionMessage.INVALID_LOTTO_SIZE.getMessage());
     }
 
     @DisplayName("다른 로또와 비교해 매칭되는 번호 개수 계산")
@@ -72,6 +73,6 @@ public class LottoTest {
         lottoNumbers.add(LottoNumber.valueOf(6));
         Lotto lotto = new Lotto(lottoNumbers);
 
-        assertThat(lotto.isContain(LottoNumber.valueOf(6))).isEqualTo(true);
+        assertThat(lotto.isContain(LottoNumber.valueOf(6))).isTrue();
     }
 }

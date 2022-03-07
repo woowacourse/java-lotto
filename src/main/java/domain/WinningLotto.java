@@ -1,12 +1,14 @@
 package domain;
 
+import exception.ExceptionMessage;
+
 public class WinningLotto {
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
     public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
         if (lotto.isContain(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 숫자가 로또 번호에 포함되었습니다.");
+            throw new IllegalArgumentException(ExceptionMessage.DUPLICATE_BONUS_NUMBER.getMessage());
         }
         this.lotto = lotto;
         this.bonusNumber = bonusNumber;

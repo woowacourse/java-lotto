@@ -18,14 +18,18 @@ public class Lottos {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+    public Lottos joinLottos(Lottos otherLottos) {
+        return otherLottos.addLottos(this.lottos);
     }
 
-    @Override
-    public String toString() {
-        return "Lottos{" +
-                lottos +
-                '}';
+    private Lottos addLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            this.lottos.add(lotto);
+        }
+        return new Lottos(this.lottos);
+    }
+
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }
