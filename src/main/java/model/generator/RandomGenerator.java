@@ -7,10 +7,7 @@ import static model.LottoNumber.MAXIMUM_LOTTO_NUMBER;
 import static model.LottoNumber.MINIMUM_LOTTO_NUMBER;
 
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import model.Lotto;
 
