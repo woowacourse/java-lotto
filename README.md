@@ -7,8 +7,8 @@
 ---
 
 ![Generic badge](https://img.shields.io/badge/Level1-lotto-green.svg)
-![Generic badge](https://img.shields.io/badge/test-48_passed-blue.svg)
-![Generic badge](https://img.shields.io/badge/version-2.0.0-brightgreen.svg)
+![Generic badge](https://img.shields.io/badge/test-54_passed-blue.svg)
+![Generic badge](https://img.shields.io/badge/version-3.0.0-brightgreen.svg)
 
 > 우아한테크코스 웹 백엔드 4기, 로또 - OOP 저장소입니다.
 
