@@ -2,18 +2,22 @@ package lotterymachine.model;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import lotterymachine.dto.ManualTicketDto;
 import lotterymachine.utils.LotteryGenerator;
+import lotterymachine.vo.Ball;
 import lotterymachine.vo.Count;
 
 public class TicketMachine {
-    public LotteryTickets purchase(Count autoTickets, List<LotteryTicket> manualLotteryTickets) {
-        List<LotteryTicket> autoLotteryTickets = LotteryGenerator.generate(autoTickets);
-        return collectTickets(manualLotteryTickets, autoLotteryTickets);
+    public LotteryTickets purchaseManualTickets(List<ManualTicketDto> manualTickets) {
+        List<LotteryTicket> lotteryTickets = manualTickets.stream()
+                .map(ManualTicketDto::getTickets)
+                .map(Ball::getBalls)
+                .map(LotteryTicket::new)
+                .collect(Collectors.toUnmodifiableList());
+        return new LotteryTickets(lotteryTickets);
     }
 
-    private static LotteryTickets collectTickets(List<LotteryTicket> manualTickets, List<LotteryTicket> autoTickets) {
-        return new LotteryTickets(Stream.concat(manualTickets.stream(), autoTickets.stream())
-                .collect(Collectors.toUnmodifiableList()));
+    public LotteryTickets purchaseAutoTickets(Count numberOfTickets) {
+        return new LotteryTickets(LotteryGenerator.generate(numberOfTickets));
     }
 }

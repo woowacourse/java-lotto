@@ -2,10 +2,10 @@ package lotterymachine;
 
 import static lotterymachine.utils.LotteryCalculator.calculateProfitRate;
 
-import java.util.ArrayList;
 import java.util.Collections;
 
 import java.util.Map;
+import lotterymachine.dto.ManualTicketDto;
 import lotterymachine.model.TicketMachine;
 import lotterymachine.model.WinningLottery;
 import lotterymachine.vo.Ball;
@@ -57,33 +57,17 @@ public class LotteryMachine {
     }
 
     private static LotteryTickets purchaseLotteryTickets(Count numberOfTickets, Count numberOfManualTickets) {
-        List<LotteryTicket> manualLotteryTickets = purchaseManualLotteryTickets(numberOfManualTickets);
+        List<ManualTicketDto> manualTickets = InputView.getManualTickets(numberOfManualTickets);
         Count numberOfAutoTickets = numberOfTickets.subtract(numberOfManualTickets);
+
         TicketMachine ticketMachine = new TicketMachine();
-        LotteryTickets lotteryTickets = ticketMachine.purchase(numberOfAutoTickets, manualLotteryTickets);
+        LotteryTickets manualLotteryTickets = ticketMachine.purchaseManualTickets(manualTickets);
+        LotteryTickets autoLotteryTickets = ticketMachine.purchaseAutoTickets(numberOfAutoTickets);
+        LotteryTickets lotteryTickets = LotteryTickets.merge(manualLotteryTickets, autoLotteryTickets);
 
         OutputView.printPurchaseDetails(numberOfManualTickets.getNumber(), numberOfAutoTickets.getNumber());
         OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
         return lotteryTickets;
-    }
-
-    private static List<LotteryTicket> purchaseManualLotteryTickets(Count numberOfManualTickets) {
-        OutputView.printInputManualPurchase(numberOfManualTickets.isZero());
-        List<LotteryTicket> lotteryTickets = new ArrayList<>();
-        for (int i = 0; i < numberOfManualTickets.getNumber(); i++) {
-            lotteryTickets.add(getManualLotteryTicket());
-        }
-        return lotteryTickets;
-    }
-
-    private static LotteryTicket getManualLotteryTicket() {
-        try {
-            List<Ball> selectedBalls = Ball.getBalls(InputView.getManualTicket());
-            return new LotteryTicket(selectedBalls);
-        } catch (Exception exception) {
-            OutputView.printException(exception.getMessage());
-            return getManualLotteryTicket();
-        }
     }
 
     private static LotteryTicket getWinningTicket() {
