@@ -8,25 +8,28 @@ import java.util.stream.Collectors;
 
 import domain.Lotto;
 import domain.LottoNumber;
+import domain.LottoPurchaseCount;
 import domain.LottoReward;
-import domain.Lottos;
 
 public class OutputView {
 
-    private static final String RESPONSE_MESSAGE_PURCHASED_LOTTO = "개를 구매했습니다.";
     private static final String REWARD_SECOND_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
     private static final String REWARD_DEFAULT_FORMAT = "%d개 일치 (%d원)- %d개\n";
     private static final String PROFIT_RATE_BENEFIT_FORMAT = "총 수익률은 (%.2f)입니다.";
     private static final String PROFIT_RATE_LOSS_FORMAT = "총 수익률은 (%.2f)입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String PURCHASE_LOTTO_PRESENT_FORMAT = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String WINNING_STATISTICS = "\n당첨 통계";
     private static final String PRINT_DECISION = "---------";
     private static final int SECOND_DECIMAL_POINT = 100;
     private static final int BENEFIT_STANDARD = 1;
+    private static final String ERROR_KEYWORD = "[ERROR] ";
 
-    public static void showPurchasedLottos(Lottos lottos) {
-        System.out.println(lottos.getLottos().size() + RESPONSE_MESSAGE_PURCHASED_LOTTO);
+    public static void showPurchasedLottos(LottoPurchaseCount lottoPurchaseCount, List<Lotto> lottos) {
+        System.out.printf(PURCHASE_LOTTO_PRESENT_FORMAT,
+            lottoPurchaseCount.getManualCount(),
+            lottoPurchaseCount.getAutomaticCount());
 
-        for (Lotto lotto : lottos.getLottos()) {
+        for (Lotto lotto : lottos) {
             System.out.println(lotto.getLottoNumbers().stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList()));
@@ -65,5 +68,10 @@ public class OutputView {
         if (profitRate >= BENEFIT_STANDARD) {
             System.out.printf(PROFIT_RATE_BENEFIT_FORMAT, test);
         }
+    }
+
+    public static void showErrorMessage(Exception e) {
+        System.out.println(ERROR_KEYWORD + e.getMessage());
+        ;
     }
 }

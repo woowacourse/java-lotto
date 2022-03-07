@@ -3,17 +3,17 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Lottos {
 
+    private static final String ERROR_MESSAGE_NULL = "값이 null 입니다.";
+
     private final List<Lotto> lottos;
 
-    public Lottos(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
-        lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
-            lottos.add(new Lotto(lottoNumbers));
-        }
+    public Lottos(List<Lotto> lottos) {
+        Objects.requireNonNull(lottos, ERROR_MESSAGE_NULL);
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public List<LottoReward> calculateLottoReward(WinningLotto winningLotto) {
