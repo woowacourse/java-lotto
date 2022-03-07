@@ -36,7 +36,7 @@ public class LottoController {
                 new ManualRandomNumberGenerator(), manualBuyCount));
         Money leftMoney = money.decreaseByCount(manualBuyCount);
 
-        return manualLottoTickets.buyAutoTickets(
+         return manualLottoTickets.buyAutoTickets(
                 new AutoRandomNumberGenerator(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER), leftMoney);
     }
 

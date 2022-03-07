@@ -16,7 +16,7 @@ public class AutoRandomNumberGenerator implements NumberGenerator {
     }
 
     @Override
-    public List<Integer> generate(int size, String... integers) {
+    public List<Integer> generate(int size) {
         List<Integer> numbers = IntStream.range(min, max + 1)
             .boxed()
             .collect(Collectors.toList());

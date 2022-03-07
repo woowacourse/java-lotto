@@ -56,7 +56,7 @@ public class InputView {
         System.out.println(REQUEST_MANUAL_NUMBERS);
         List<List<Integer>> lottoNumbers = new ArrayList<>();
         while (manualBuyCount.isNotZero()) {
-            lottoNumbers.add(numberGenerator.generate(manualBuyCount.getValue(), scanner.nextLine().split(", ")));
+            lottoNumbers.add(numberGenerator.generate(manualBuyCount.getValue()));
             manualBuyCount.decrease();
         }
         return lottoNumbers;
