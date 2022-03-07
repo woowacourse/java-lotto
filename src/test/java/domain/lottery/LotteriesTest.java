@@ -31,7 +31,7 @@ public class LotteriesTest {
 			lotteriesNumber.add(LotteryGenerator.generateLottery(lotteryNumberGeneratorStrategy.generateNumbers()));
 		}
 		//when
-		final Lotteries lotteries = Lotteries.from(lotteriesNumber);
+		final Lotteries lotteries = Lotteries.from(List.of(lotteriesNumber));
 		//then
 		assertThat(lotteries.getLotteries().size()).isEqualTo(lotteryNumber);
 	}
@@ -45,7 +45,7 @@ public class LotteriesTest {
 		for (int i = 0; i < 6; i++) {
 			lotteriesNumbers.add(LotteryGenerator.generateLottery(lotteryNumberGeneratorStrategy.generateNumbers()));
 		}
-		final Lotteries lotteries = Lotteries.from(lotteriesNumbers);
+		final Lotteries lotteries = Lotteries.from(List.of(lotteriesNumbers));
 		//when
 		final Map<Rank, Integer> rankResult = lotteries.getTheNumberOfWinners(
 			WinningLottery.of(LotteryGenerator.generateLottery(Arrays.asList(1,2,3,4,5,6)),

@@ -42,7 +42,7 @@ public final class LotteryMachine {
 	public Lotteries createLottery(final List<List<Integer>> manualLotteryNumber) {
 		final List<Lottery> manualLotteries = createManualLottery(manualLotteryNumber);
 		final List<Lottery> autoLotteries = createAutoLotteriesNumber();
-		return Lotteries.from(manualLotteries, autoLotteries);
+		return Lotteries.from(List.of(manualLotteries, autoLotteries));
 	}
 
 	private List<Lottery> createManualLottery(final List<List<Integer>> manualLotteryNumber) {
