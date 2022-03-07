@@ -1,18 +1,15 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import lotto.utils.IntegerUtils;
 import lotto.utils.NumberGenerator;
 
 public class LottoTicket {
 
-    public static final String DELIMITER = ",";
     private static final int NUMBER_COUNT = 6;
 
     private final List<LottoNumber> numbers;
@@ -22,19 +19,13 @@ public class LottoTicket {
         this.numbers = new ArrayList<>(numbers);
     }
 
-    public static LottoTicket createRandomTicket(NumberGenerator generator) {
+    public static LottoTicket createTicket(NumberGenerator generator) {
         return new LottoTicket(
             generator.generate(NUMBER_COUNT)
                 .stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList())
         );
-    }
-
-    public static LottoTicket createTicket(String numbers) {
-        return new LottoTicket(Arrays.stream(numbers.split(DELIMITER))
-            .map(number -> new LottoNumber(IntegerUtils.parse(number.trim())))
-            .collect(Collectors.toList()));
     }
 
     private void validate(List<LottoNumber> numbers) {

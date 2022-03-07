@@ -14,23 +14,11 @@ public class LottoTickets {
         this.tickets = tickets;
     }
 
-    public static LottoTickets buyAutoTicket(NumberGenerator generator, Money money) {
-        List<LottoTicket> tickets = IntStream.range(0, money.count())
-            .mapToObj(x -> LottoTicket.createRandomTicket(generator))
+    public static LottoTickets buyTicket(NumberGenerator generator, int count) {
+        List<LottoTicket> tickets = IntStream.range(0, count)
+            .mapToObj(x -> LottoTicket.createTicket(generator))
             .collect(Collectors.toList());
         return new LottoTickets(tickets);
-    }
-
-    public LottoStatistics findLottoWinners(WinningTicket winningTicket) {
-        return new LottoStatistics(tickets.stream()
-            .map(winningTicket::compare)
-            .collect(Collectors.toList()));
-    }
-
-    public void generatorManualTickets(List<String> manualLottoTickets) {
-        for (String manualLottoTicket : manualLottoTickets) {
-            tickets.add(LottoTicket.createTicket(manualLottoTicket));
-        }
     }
 
     public List<LottoTicket> getTickets() {
