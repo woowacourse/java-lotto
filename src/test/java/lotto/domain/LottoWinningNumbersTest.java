@@ -12,6 +12,9 @@ import static org.assertj.core.api.Assertions.*;
 @Nested
 @DisplayName("당첨번호가")
 class LottoWinningNumbersTest {
+
+    private static final String ERROR_DUPLICATE_BONUS_NUMBER = "[ERROR] 보너스번호는 로또번호와 중복되지 않아야 합니다.";
+
     @Nested
     @DisplayName("보너스볼과 중복된다면")
     class duplicate_bonus_ball {
@@ -20,11 +23,11 @@ class LottoWinningNumbersTest {
         void returns_error() {
             List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6)
                     .stream()
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::from)
                     .collect(Collectors.toList());
-            assertThatThrownBy(
-                    () -> new LottoWinningNumbers(new Lotto(lottoNumbers), new LottoNumber(6)))
-                    .isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> new LottoWinningNumbers(Lotto.createManualLotto(lottoNumbers), LottoNumber.from(6)))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ERROR_DUPLICATE_BONUS_NUMBER);
         }
     }
 
@@ -36,10 +39,10 @@ class LottoWinningNumbersTest {
         void create() {
             List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6)
                     .stream()
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::from)
                     .collect(Collectors.toList());
-            assertThatCode(() -> new LottoWinningNumbers(new Lotto(lottoNumbers),
-                    new LottoNumber(7))).doesNotThrowAnyException();
+            assertThatCode(() -> new LottoWinningNumbers(Lotto.createManualLotto(lottoNumbers),
+                    LottoNumber.from(7))).doesNotThrowAnyException();
         }
     }
 }

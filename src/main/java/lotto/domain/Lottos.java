@@ -1,19 +1,38 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public Lottos(final int count) {
+    public Lottos(final List<Lotto> lottos, final int totalCount) {
+        List<Lotto> newLottos = new ArrayList<>(lottos);
+        int count = totalCount - lottos.size();
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
+            newLottos.add(Lotto.createAutoLotto());
         }
+        this.lottos = newLottos;
+    }
+
+    public List<Rank> matchRanks(LottoWinningNumbers winningLotto) {
+        List<Rank> ranks = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            int matchCount = winningLotto.matchCount(lotto);
+            boolean hasBonusNumber = lotto.contains(winningLotto.getBonusNumber());
+            Rank rank = Rank.matchRank(matchCount, hasBonusNumber);
+            ranks.add(rank);
+        }
+        return ranks;
+    }
+
+    public int getSize() {
+        return lottos.size();
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 }

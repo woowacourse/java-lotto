@@ -1,11 +1,13 @@
 package lotto;
 
+import java.util.List;
 import lotto.controller.LottoController;
 import lotto.controller.MoneyController;
+import lotto.domain.Lotto;
 import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.dto.Result;
+import lotto.domain.Result;
 
 public class Application {
 
@@ -14,14 +16,12 @@ public class Application {
         LottoController lottoController = new LottoController();
 
         Money money = moneyController.inputMoney();
-        Lottos lottos = lottoController.createLottos(money.purchasedLottoAmount());
-        lottoController.printLottos(lottos);
+        List<Lotto> manualLottos = lottoController.inputManualLottos(money.purchasedLottoCount());
+
+        Lottos lottos = lottoController.createLottos(manualLottos, money.purchasedLottoCount());
         LottoWinningNumbers winningNumbers = lottoController.createLottoWinningNumbers();
 
-        Result result = lottoController.calculateResult(winningNumbers, lottos);
-        lottoController.printWinningResult(result);
-
-        double profit = moneyController.calculateProfit(result, money);
-        moneyController.printProfit(profit);
+        Result result = lottoController.createResult(winningNumbers, lottos);
+        moneyController.printProfit(result, money);
     }
 }
