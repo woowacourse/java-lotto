@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.LottoPurchaseMoneyException;
+import lotto.util.InputConvertor;
 
 public class LottoPurchaseMoney {
 
@@ -9,8 +10,19 @@ public class LottoPurchaseMoney {
     private final int lottoPurchaseMoney;
 
     public LottoPurchaseMoney(int input) {
+        checkNotPositive(input);
         checkUnit(input);
         this.lottoPurchaseMoney = input;
+    }
+
+    public static LottoPurchaseMoney of(String input) {
+        return new LottoPurchaseMoney(InputConvertor.toInt(input));
+    }
+
+    private void checkNotPositive(int input) {
+        if (input <= 0) {
+            throw new LottoPurchaseMoneyException(LottoPurchaseMoneyException.INPUT_NOT_POSITIVE_NUMBER_ERROR_MESSAGE);
+        }
     }
 
     private void checkUnit(int input) {

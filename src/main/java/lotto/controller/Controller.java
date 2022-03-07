@@ -22,8 +22,7 @@ public class Controller {
 
     private LottoPurchaseMoney getLottoPurchaseMoney() {
         try {
-            int inputLottoPurchaseMoney = InputView.inputLottoPurchaseMoney();
-            return new LottoPurchaseMoney(inputLottoPurchaseMoney);
+            return LottoPurchaseMoney.of(InputView.inputLottoPurchaseMoney());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return getLottoPurchaseMoney();

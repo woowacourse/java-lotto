@@ -16,9 +16,9 @@ public class InputView {
     private static final String INPUT_NUMBERS_DELIMITER = ",";
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int inputLottoPurchaseMoney() {
+    public static String inputLottoPurchaseMoney() {
         System.out.println(INPUT_LOTTO_PURCHASE_MONEY_MESSAGE);
-        return InputConvertor.toNaturalNumber(scanner.nextLine());
+        return scanner.nextLine();
     }
 
     public static int inputManualLottoCount() {
