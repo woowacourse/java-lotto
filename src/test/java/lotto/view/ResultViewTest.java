@@ -17,14 +17,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.model.Lotto;
-import lotto.model.LottoFactory;
 import lotto.model.LottoMoney;
 import lotto.model.LottoResult;
 import lotto.model.Lottos;
-import lotto.model.ManualLottoFactory;
 import lotto.model.Rank;
 import lotto.model.Yield;
+import lotto.model.lottofactory.Lotto;
+import lotto.model.lottofactory.LottoFactory;
+import lotto.model.lottofactory.ManualLottoFactory;
 
 class ResultViewTest {
 

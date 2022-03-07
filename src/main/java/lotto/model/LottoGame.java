@@ -2,6 +2,10 @@ package lotto.model;
 
 import java.util.List;
 
+import lotto.model.lottofactory.Lotto;
+import lotto.model.lottofactory.LottoFactory;
+import lotto.model.lottofactory.ManualLottoFactory;
+
 public class LottoGame {
     private final Lottos autoLottos;
     private final LottoMoney lottoMoney;

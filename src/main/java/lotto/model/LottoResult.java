@@ -7,6 +7,9 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import lotto.model.lottofactory.Lotto;
+import lotto.model.lottofactory.ManualLottoFactory;
+
 public class LottoResult {
     private static final String ERROR_DUPLICATION_BONUS_NUMBER = "보너스 볼 번호가 당첨 번호와 중복입니다.";
 

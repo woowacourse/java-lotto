@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.lottofactory;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.model.LottoNumber;
+import lotto.model.Rank;
 
 class LottoTest {
 

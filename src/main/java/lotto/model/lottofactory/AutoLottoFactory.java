@@ -1,13 +1,15 @@
-package lotto.model;
+package lotto.model.lottofactory;
 
 import static java.util.Collections.*;
-import static lotto.model.Lotto.*;
 import static lotto.model.LottoNumber.*;
+import static lotto.model.lottofactory.Lotto.*;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import lotto.model.LottoNumber;
 
 public class AutoLottoFactory implements LottoFactory {
 

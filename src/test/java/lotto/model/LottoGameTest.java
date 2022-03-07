@@ -1,15 +1,17 @@
 package lotto.model;
 
-import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.model.lottofactory.Lotto;
+import lotto.model.lottofactory.LottoFactory;
+import lotto.model.lottofactory.ManualLottoFactory;
 
 class LottoGameTest {
 
@@ -20,9 +22,7 @@ class LottoGameTest {
         List<List<Integer>> rawManualLottos = List.of(List.of(1, 2, 3, 11, 12, 13));
 
         Lottos manualLottos = lottoGame.buyManualLottos(rawManualLottos);
-        List<Lotto> expected = List.of(new Lotto(Stream.of(1, 2, 3, 11, 12, 13)
-            .map(LottoNumber::new)
-            .collect(toUnmodifiableSet())));
+        List<Lotto> expected = new Lottos(new TestAutoLottoFactory(), 1).getLottos();
 
         assertThat(manualLottos.getLottos().toString()).isEqualTo(expected.toString());
     }
@@ -33,9 +33,7 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame(1000, 0, new TestAutoLottoFactory());
 
         List<Lotto> autoLottos = lottoGame.getAutoLottos();
-        List<Lotto> expected = List.of(new Lotto(Stream.of(1, 2, 3, 11, 12, 13)
-            .map(LottoNumber::new)
-            .collect(toUnmodifiableSet())));
+        List<Lotto> expected = new Lottos(new TestAutoLottoFactory(), 1).getLottos();
 
         assertThat(autoLottos.toString()).isEqualTo(expected.toString());
     }
@@ -65,12 +63,15 @@ class LottoGameTest {
     }
 
     static class TestAutoLottoFactory implements LottoFactory {
+        private final LottoFactory factory;
+
+        public TestAutoLottoFactory() {
+            this.factory = new ManualLottoFactory(List.of(List.of(1, 2, 3, 11, 12, 13)));
+        }
 
         @Override
         public Lotto generate() {
-            return new Lotto(Stream.of(1, 2, 3, 11, 12, 13)
-                .map(LottoNumber::new)
-                .collect(toUnmodifiableSet()));
+            return factory.generate();
         }
     }
 }

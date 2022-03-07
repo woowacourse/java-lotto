@@ -1,9 +1,11 @@
-package lotto.model;
+package lotto.model.lottofactory;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import lotto.model.LottoNumber;
 
 public class ManualLottoFactory implements LottoFactory {
     private final Iterator<Set<LottoNumber>> manualLottos;

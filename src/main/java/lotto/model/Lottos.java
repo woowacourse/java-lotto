@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import lotto.model.lottofactory.Lotto;
+import lotto.model.lottofactory.LottoFactory;
+
 public class Lottos {
     private final List<Lotto> lottos;
 
