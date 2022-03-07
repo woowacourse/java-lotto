@@ -54,35 +54,35 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("1등 판독 테스트")
     void firstPrize() {
-        Collection<Rank> ranks = winnerLotto.summarize(new Lottoes(List.of(FIRST_RANK_LOTTO)));
+        Collection<Rank> ranks = winnerLotto.classify(new Lottoes(List.of(FIRST_RANK_LOTTO)));
         assertThat(ranks).contains(Rank.FIRST);
     }
 
     @Test
     @DisplayName("2등 판독 테스트")
     void secondPrize() {
-        Collection<Rank> ranks = winnerLotto.summarize(new Lottoes(List.of(SECOND_RANK_LOTTO)));
+        Collection<Rank> ranks = winnerLotto.classify(new Lottoes(List.of(SECOND_RANK_LOTTO)));
         assertThat(ranks).contains(Rank.SECOND);
     }
 
     @Test
     @DisplayName("3등 판독 테스트")
     void thirdPrize() {
-        Collection<Rank> ranks = winnerLotto.summarize(new Lottoes(List.of(THIRD_RANK_LOTTO)));
+        Collection<Rank> ranks = winnerLotto.classify(new Lottoes(List.of(THIRD_RANK_LOTTO)));
         assertThat(ranks).contains(Rank.THIRD);
     }
 
     @Test
     @DisplayName("4등 판독 테스트")
     void fourthPrize() {
-        Collection<Rank> ranks = winnerLotto.summarize(new Lottoes(List.of(FOURTH_RANK_LOTTO)));
+        Collection<Rank> ranks = winnerLotto.classify(new Lottoes(List.of(FOURTH_RANK_LOTTO)));
         assertThat(ranks).contains(Rank.FOURTH);
     }
 
     @Test
     @DisplayName("5등 판독 테스트")
     void fifthPrize() {
-        Collection<Rank> ranks = winnerLotto.summarize(new Lottoes(List.of(FIFTH_RANK_LOTTO)));
+        Collection<Rank> ranks = winnerLotto.classify(new Lottoes(List.of(FIFTH_RANK_LOTTO)));
         assertThat(ranks).contains(Rank.FIFTH);
     }
 
@@ -90,7 +90,7 @@ public class WinnerLottoTest {
     @MethodSource("provideLottoNumbersList")
     @DisplayName("꽝 판독 테스트")
     void nothingPrize(Lotto lottoNumbers) {
-        Collection<Rank> ranks = winnerLotto.summarize(new Lottoes(List.of(lottoNumbers)));
+        Collection<Rank> ranks = winnerLotto.classify(new Lottoes(List.of(lottoNumbers)));
         assertThat(ranks).contains(Rank.NOTHING);
     }
 
@@ -104,7 +104,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("다양한 로또 순위 구하기")
     void summarize() {
-        Collection<Rank> ranks = winnerLotto.summarize(
+        Collection<Rank> ranks = winnerLotto.classify(
             new Lottoes(List.of(FIRST_RANK_LOTTO, FIRST_RANK_LOTTO,
                 SECOND_RANK_LOTTO, THIRD_RANK_LOTTO,
                 THIRD_RANK_LOTTO, NOTHING_RANK_LOTTO)));

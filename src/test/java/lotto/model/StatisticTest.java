@@ -17,7 +17,7 @@ public class StatisticTest {
     @Test
     @DisplayName("당첨결과 통계 테스트")
     void summarizeLottoPrize() {
-        Statistic statistic = Statistic.summarizeBy(List.of(Rank.FIRST, Rank.FIRST, Rank.SECOND, Rank.THIRD));
+        Statistic statistic = new Statistic(List.of(Rank.FIRST, Rank.FIRST, Rank.SECOND, Rank.THIRD));
 
         Money expected = FIRST_PRIZE.multiply(2).plus(SECOND_PRIZE).plus(THIRD_PRIZE);
         BigDecimal actualProfitRate = expected.divide(new Money(4000));
@@ -33,7 +33,7 @@ public class StatisticTest {
     @Test
     @DisplayName("빈 로또 리스트 통계 테스트")
     void summarizeEmptyLottoList() {
-        Statistic statistic = Statistic.summarizeBy(Collections.emptyList());
+        Statistic statistic = new Statistic(Collections.emptyList());
 
         assertThat(statistic.getProfitRate()).isEqualTo(new ProfitRate(BigDecimal.ONE));
         assertThat(statistic.getCountByRank(Rank.FIRST)).isEqualTo(0);

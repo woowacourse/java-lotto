@@ -12,6 +12,7 @@ import static lotto.view.InputView.inputManualLottoesText;
 import static lotto.view.InputView.inputMoneyText;
 import static lotto.view.InputView.inputWinnerLottoText;
 
+import java.util.Collection;
 import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.LottoGenerator;
@@ -19,6 +20,7 @@ import lotto.model.LottoMachine;
 import lotto.model.LottoNumber;
 import lotto.model.Lottoes;
 import lotto.model.Money;
+import lotto.model.Rank;
 import lotto.model.Statistic;
 import lotto.model.WinnerLotto;
 import lotto.view.LottoConvertor;
@@ -94,7 +96,8 @@ public class Controller {
     }
 
     private static void summarize(Lottoes issuedLottoes, WinnerLotto winnerLotto) {
-        Statistic statistic = Statistic.summarizeBy(winnerLotto.summarize(issuedLottoes));
+        Collection<Rank> ranks = winnerLotto.classify(issuedLottoes);
+        Statistic statistic = new Statistic(ranks);
         OutputView.printStatistic(statistic.getCountByRank(FIRST), statistic.getCountByRank(SECOND),
             statistic.getCountByRank(THIRD), statistic.getCountByRank(FOURTH),
             statistic.getCountByRank(FIFTH), statistic.getProfitRate().getDoubleValue());
