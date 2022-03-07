@@ -35,7 +35,7 @@ public class InputView {
         return checkAndConvertInteger(scanner.nextLine());
     }
 
-    public static List<List<LottoNumber>> askManualLottoNumbers(int amount) {
+    public static List<List<Integer>> askManualLottoNumbers(int amount) {
         if (amount == NO_AMOUNT) {
             return new ArrayList<>();
         }
@@ -43,13 +43,6 @@ public class InputView {
         System.out.println(QUESTION_MANUAL_LOTTO_NUMBERS);
 
         return new ArrayList<>(askLottoNumbers(amount));
-    }
-
-    public static WinningNumbers askWinningNumbers() {
-        return new WinningNumbers(new Lotto(askWinningNumber().stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList()))
-            , new LottoNumber(askBonusNumber()));
     }
 
     public static List<Integer> askWinningNumber() {
@@ -63,12 +56,11 @@ public class InputView {
         return checkAndConvertInteger(scanner.nextLine());
     }
 
-    private static List<List<LottoNumber>> askLottoNumbers(int amount) {
-        List<List<LottoNumber>> lottoNumbers = new ArrayList<>();
+    private static List<List<Integer>> askLottoNumbers(int amount) {
+        List<List<Integer>> lottoNumbers = new ArrayList<>();
         for (int i = START_INDEX; i < amount; i++) {
             List<String> numbers = Arrays.asList(scanner.nextLine().split(NUMBER_DELIMITER));
-            lottoNumbers.add(covertNumbersToInteger(numbers).stream().map(LottoNumber::new).collect(
-                Collectors.toList()));
+            lottoNumbers.add(covertNumbersToInteger(numbers));
         }
 
         return new ArrayList<>(lottoNumbers);
