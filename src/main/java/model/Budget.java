@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Budget {
     private static final BigDecimal PRICE_AMOUNT_PER_LOTTO = BigDecimal.valueOf(1000);
 
-    private BigDecimal amount;
+    private final BigDecimal amount;
 
     public Budget(int amount) {
         this(BigDecimal.valueOf(amount));

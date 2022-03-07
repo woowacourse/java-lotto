@@ -2,6 +2,8 @@ package model.generator;
 
 import static java.util.stream.Collectors.toList;
 import static model.Lotto.LOTTO_NUMBER_SIZE;
+import static model.LottoNumber.MAXIMUM_LOTTO_NUMBER;
+import static model.LottoNumber.MINIMUM_LOTTO_NUMBER;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -12,8 +14,6 @@ import java.util.stream.IntStream;
 import model.Lotto;
 
 public class RandomGenerator implements LottosGenerator {
-    public static final int MAX_LOTTO_NUMBER = 45;
-    public static final int MIN_LOTTO_NUMBER = 1;
 
     private final List<Integer> numberPool;
     private final int lottoCount;
@@ -25,7 +25,7 @@ public class RandomGenerator implements LottosGenerator {
 
     private List<Integer> createNumberPool() {
         return IntStream
-                .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
                 .boxed()
                 .collect(toList());
     }

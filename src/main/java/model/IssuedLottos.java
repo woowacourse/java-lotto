@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import model.generator.LottosGenerator;
 
 public class IssuedLottos {
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public IssuedLottos(LottosGenerator generator) {
         this.lottos = Collections.unmodifiableList(generator.createLottos());
