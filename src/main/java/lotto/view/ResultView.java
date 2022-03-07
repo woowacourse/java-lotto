@@ -5,14 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.model.LottoResult;
+import lotto.model.LottoType;
 import lotto.model.Rank;
 import lotto.model.Yield;
 import lotto.model.lottofactory.Lotto;
 
 public class ResultView {
-    public static void printGeneratedLottos(Map<String, List<Lotto>> lottosMap) {
-        List<Lotto> manualLottos = lottosMap.get("Manual");
-        List<Lotto> autoLottos = lottosMap.get("Auto");
+    public static void printGeneratedLottos(Map<LottoType, List<Lotto>> lottosMap) {
+        List<Lotto> manualLottos = lottosMap.get(LottoType.MANUAL);
+        List<Lotto> autoLottos = lottosMap.get(LottoType.AUTO);
         System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + autoLottos.size() + "개를 구매했습니다.");
         printEachLottos(manualLottos);
         printEachLottos(autoLottos);

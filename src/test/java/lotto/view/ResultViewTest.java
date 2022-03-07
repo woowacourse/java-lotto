@@ -20,6 +20,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.model.LottoMoney;
 import lotto.model.LottoResult;
+import lotto.model.LottoType;
 import lotto.model.Lottos;
 import lotto.model.Rank;
 import lotto.model.Yield;
@@ -54,9 +55,9 @@ class ResultViewTest {
 
         Lottos manualLottos = lottosConstructor.newInstance(new TestManualLottoFactory(), 1);
         Lottos autoLottos = lottosConstructor.newInstance(new TestAutoLottoFactory(), 2);
-        Map<String, List<Lotto>> lottosMap = new HashMap<>();
-        lottosMap.put("Manual", manualLottos.getLottos());
-        lottosMap.put("Auto", autoLottos.getLottos());
+        Map<LottoType, List<Lotto>> lottosMap = new HashMap<>();
+        lottosMap.put(LottoType.MANUAL, manualLottos.getLottos());
+        lottosMap.put(LottoType.AUTO, autoLottos.getLottos());
 
         ResultView.printGeneratedLottos(lottosMap);
 

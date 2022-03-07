@@ -22,10 +22,10 @@ class LottoGameTest {
         List<List<Integer>> rawManualLottos = List.of(List.of(1, 2, 3, 11, 12, 13));
 
         lottoGame.buyManualLottos(rawManualLottos);
-        Map<String, List<Lotto>> lottosMap = lottoGame.getLottos();
+        Map<LottoType, List<Lotto>> lottosMap = lottoGame.getLottos();
         List<Lotto> expected = new Lottos(new TestAutoLottoFactory(), 1).getLottos();
 
-        assertThat(lottosMap.get("Manual").toString()).isEqualTo(expected.toString());
+        assertThat(lottosMap.get(LottoType.MANUAL).toString()).isEqualTo(expected.toString());
     }
 
     @Test
@@ -33,10 +33,10 @@ class LottoGameTest {
     void buyAutoLottosTest() {
         LottoGame lottoGame = new LottoGame(1000, 0, new TestAutoLottoFactory());
 
-        Map<String, List<Lotto>> lottosMap = lottoGame.getLottos();
+        Map<LottoType, List<Lotto>> lottosMap = lottoGame.getLottos();
         List<Lotto> expected = new Lottos(new TestAutoLottoFactory(), 1).getLottos();
 
-        assertThat(lottosMap.get("Auto").toString()).isEqualTo(expected.toString());
+        assertThat(lottosMap.get(LottoType.AUTO).toString()).isEqualTo(expected.toString());
     }
 
     @Test
