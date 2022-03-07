@@ -2,7 +2,7 @@ package domain.player;
 
 import domain.Lotto.Lotto;
 import domain.Lotto.WinningLotto;
-import domain.Result;
+import domain.Rank;
 import dto.LottoCountDto;
 
 import java.util.ArrayList;
@@ -39,12 +39,12 @@ public class Player {
         lottos.add(lotto);
     }
 
-    public List<Result> judgeAll(WinningLotto winningLotto) {
-        List<Result> result = new ArrayList<>();
+    public List<Rank> judgeAll(WinningLotto winningLotto) {
+        List<Rank> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            result.add(lotto.judge(winningLotto));
+            results.add(lotto.compare(winningLotto));
         }
-        return result;
+        return results;
     }
 
     public double calculateIncomeRate(double totalIncome) {

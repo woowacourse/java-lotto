@@ -50,7 +50,7 @@ class PlayerTest {
         }
         LottoGenerator lottoGenerator = new ManualLottoGenerator();
         WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(lottoNumbers), new LottoNumber(BONUS_BALL_NUMBER));
-        List<Result> actual = player.judgeAll(winningLotto);
+        List<Rank> actual = player.judgeAll(winningLotto);
         int expected = 15;
 
         assertThat(actual.size()).isEqualTo(expected);

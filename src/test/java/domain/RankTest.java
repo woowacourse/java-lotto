@@ -21,8 +21,7 @@ public class RankTest {
         int hitCount = 6;
         boolean bonusBall = false;
 
-        Result result = new Result(hitCount, bonusBall);
-        Rank actual = Rank.judgeResult(result);
+        Rank actual = Rank.judgeResult(hitCount, bonusBall);
 
         assertThat(actual).isEqualTo(Rank.FIRST);
     }
@@ -34,7 +33,7 @@ public class RankTest {
         boolean bonusBall = false;
 
         Result result = new Result(hitCount, bonusBall);
-        Rank actual = Rank.judgeResult(result);
+        Rank actual = Rank.judgeResult(hitCount, bonusBall);
 
         assertThat(actual).isEqualTo(Rank.NONE);
     }

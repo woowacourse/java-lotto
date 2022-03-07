@@ -20,12 +20,12 @@ public enum Rank {
         this.reward = reward;
     }
 
-    public static Rank judgeResult(Result result) {
-        if (result.isSecondRank()) {
+    public static Rank judgeResult(int hitCount, boolean isHitBonusBall) {
+        if (isSecondRank(hitCount, isHitBonusBall)) {
             return SECOND;
         }
         return Arrays.stream(Rank.values())
-                .filter(result::isWhatRank)
+                .filter(rank -> rank.criteria == hitCount)
                 .findFirst()
                 .orElse(NONE);
     }

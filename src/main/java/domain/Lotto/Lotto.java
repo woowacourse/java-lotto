@@ -1,6 +1,6 @@
 package domain.Lotto;
 
-import domain.Result;
+import domain.Rank;
 import utils.ExceptionMessage;
 
 import java.util.ArrayList;
@@ -24,13 +24,13 @@ public class Lotto {
         }
     }
 
-    public Result judge(WinningLotto winningLotto) {
+    public Rank compare(WinningLotto winningLotto) {
         int hitCount = (int) lotto.stream()
                 .filter(winningLotto::isContainLottoNumber)
                 .count();
 
         boolean isHitBonusBall = winningLotto.isContainBonusBall(lotto);
-        return new Result(hitCount, isHitBonusBall);
+        return Rank.judgeResult(hitCount, isHitBonusBall);
     }
 
     public boolean hasLottoNumber(LottoNumber lottoNumber) {

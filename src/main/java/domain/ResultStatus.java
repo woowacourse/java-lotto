@@ -16,9 +16,8 @@ public class ResultStatus {
         resultStatistics.remove(Rank.NONE);
     }
 
-    public void judgeResult(List<Result> results) {
-        for (Result result : results) {
-            Rank rank = Rank.judgeResult(result);
+    public void judgeResult(List<Rank> results) {
+        for (Rank rank : results) {
             updateRecord(rank);
         }
     }

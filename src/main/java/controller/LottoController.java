@@ -5,7 +5,7 @@ import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.LottoGenerator;
 import domain.LottoGenerator.ManualLottoGenerator;
-import domain.Result;
+import domain.Rank;
 import domain.ResultStatus;
 import domain.player.Player;
 import dto.LottoCountDto;
@@ -49,9 +49,9 @@ public class LottoController {
     }
 
     public RanksDto makeResult() {
-        List<Result> results = player.judgeAll(winningLotto);
+        List<Rank> ranks = player.judgeAll(winningLotto);
         ResultStatus resultStatus = new ResultStatus();
-        resultStatus.judgeResult(results);
+        resultStatus.judgeResult(ranks);
         double totalIncome = resultStatus.calculateTotalIncome();
         double incomeRate = player.calculateIncomeRate(totalIncome);
         return RanksDto.from(resultStatus, incomeRate);

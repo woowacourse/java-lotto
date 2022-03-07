@@ -30,7 +30,7 @@ public class LottoTest {
 
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.valueOf(i));
         }
         lotto = new Lotto(lottoNumbers);
 
@@ -54,21 +54,19 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다.")
+    @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다. - 3등인 경우")
     void judge_보너스볼_불일치() {
-        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), new LottoNumber(10));
-        Result actual = lotto.judge(winningLotto);
-        Result expected = new Result(5, false);
-        assertThat(actual).isEqualTo(expected);
+        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), LottoNumber.valueOf(10));
+        Rank actual = lotto.compare(winningLotto);
+        assertThat(actual).isEqualTo(Rank.THIRD);
     }
 
     @Test
-    @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다.")
+    @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다. - 2등인 경우")
     void judge_보너스볼_일치() {
-        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), new LottoNumber(1));
-        Result actual = lotto.judge(winningLotto);
-        Result expected = new Result(5, true);
-        assertThat(actual).isEqualTo(expected);
+        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), LottoNumber.valueOf(1));
+        Rank actual = lotto.compare(winningLotto);
+        assertThat(actual).isEqualTo(Rank.SECOND);
     }
 }
 
