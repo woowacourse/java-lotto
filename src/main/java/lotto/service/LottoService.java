@@ -11,14 +11,12 @@ import lotto.domain.generator.AutoLottoGenerator;
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.generator.ManualLottoGenerator;
 import lotto.domain.vo.LottoNumber;
-import lotto.dto.result.LottoAmount;
 
 public class LottoService {
 
-    public LottoAmount countLottos(int inputMoney, int manualLottoAmount) {
+    public int countAutoLottos(int inputMoney, int manualLottoAmount) {
         LottoBuyMoney lottoBuyMoney = new LottoBuyMoney(inputMoney);
-        int autoLottoAmount = lottoBuyMoney.countAutoAmountByManualAmount(manualLottoAmount);
-        return new LottoAmount(manualLottoAmount, autoLottoAmount);
+        return lottoBuyMoney.countAutoAmountByManualAmount(manualLottoAmount);
     }
 
     public Lottos createLottos(int autoLottoAmount, List<List<Integer>> manualNumbers) {

@@ -5,7 +5,6 @@ import lotto.domain.Lottos;
 import lotto.domain.Statistics;
 import lotto.dto.request.LottoRequest;
 import lotto.dto.request.StatisticsRequest;
-import lotto.dto.result.LottoAmount;
 import lotto.dto.result.LottosResult;
 import lotto.dto.result.StatisticsResult;
 import lotto.service.LottoService;
@@ -22,9 +21,9 @@ public class LottoController {
         int inputMoney = lottoRequest.getInputMoney();
         List<List<Integer>> manualLottoNumbers = lottoRequest.getManualLottoNumbers();
 
-        LottoAmount lottoAmount = lottoService.countLottos(inputMoney, manualLottoNumbers.size());
-        Lottos lottos = lottoService.createLottos(lottoAmount.getAutoLotto(), manualLottoNumbers);
-        return new LottosResult(lottos.getLottos(), lottoAmount.getAutoLotto(), lottoAmount.getManualLotto());
+        int lottoAmount = lottoService.countAutoLottos(inputMoney, manualLottoNumbers.size());
+        Lottos lottos = lottoService.createLottos(lottoAmount, manualLottoNumbers);
+        return new LottosResult(lottos.getLottos(), lottoAmount, lottoAmount);
     }
 
     public StatisticsResult match(StatisticsRequest statisticsRequest) {
