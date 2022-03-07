@@ -1,15 +1,9 @@
-package lotto.dto;
+package lotto.domain;
 
 import static java.util.stream.Collectors.*;
 
 import java.util.List;
 import java.util.stream.Stream;
-
-import lotto.domain.LottoLine;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoTicket;
-import lotto.domain.Money;
-import lotto.domain.WinningTicket;
 
 public class PurchaseResult {
 

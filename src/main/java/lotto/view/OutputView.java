@@ -8,7 +8,7 @@ import lotto.domain.LottoLine;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistics;
-import lotto.dto.PurchaseResult;
+import lotto.domain.PurchaseResult;
 
 public class OutputView {
 

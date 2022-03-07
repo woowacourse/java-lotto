@@ -10,7 +10,7 @@ import lotto.domain.Money;
 import lotto.domain.WinningTicket;
 import lotto.domain.generator.RandomNumberGenerator;
 import lotto.domain.generator.StringInputNumberGenerator;
-import lotto.dto.PurchaseResult;
+import lotto.domain.PurchaseResult;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
