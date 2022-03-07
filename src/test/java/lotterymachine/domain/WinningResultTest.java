@@ -22,7 +22,7 @@ public class WinningResultTest {
         LotteryTickets lotteryTickets = new LotteryTickets(tickets, lotteryPurchaseCount);
         LotteryNumber bonusNumber = LotteryNumber.from(7);
         WinningLottery winningLottery = new WinningLottery(LotteryTicket.from(lotteryNumbers), bonusNumber);
-        WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
+        WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);
         Map<WinningLotteryRank, Integer> value = winningResult.getResult();
         assertThat(value.get(WinningLotteryRank.SIX)).isEqualTo(1);
     }
@@ -38,7 +38,7 @@ public class WinningResultTest {
         LotteryTickets lotteryTickets = new LotteryTickets(tickets, lotteryPurchaseCount);
         LotteryNumber bonusNumber = LotteryNumber.from(7);
         WinningLottery winningLottery = new WinningLottery(LotteryTicket.from(lotteryNumbers), bonusNumber);
-        WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
+        WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);
         assertThat(winningResult.findTotalProfit()).isEqualTo(2000000000);
     }
 }

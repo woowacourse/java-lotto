@@ -18,7 +18,7 @@ public class LotteryMachineApplication {
 
         WinningLottery winningLottery = new WinningLottery(LotteryTicket.from(InputView.getWinningLotteryNumbers())
                 , LotteryNumber.from(InputView.getBonusNumber()));
-        WinningResult winningResult = WinningResult.create(lotteryTickets, winningLottery);
+        WinningResult winningResult = new WinningResult(lotteryTickets, winningLottery);
         OutputView.printWinningLotteryResults(winningResult.getResult());
         OutputView.printProfitRate(Yield.of(winningResult.findTotalProfit(), lotteryPurchaseMoney.getValue()).getProfitRate());
     }

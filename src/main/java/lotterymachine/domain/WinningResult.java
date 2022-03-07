@@ -4,33 +4,33 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class WinningResult {
-    private static final Map<WinningLotteryRank, Integer> RESULT = new EnumMap<>(WinningLotteryRank.class);
+    private final Map<WinningLotteryRank, Integer> result = new EnumMap<>(WinningLotteryRank.class);
 
-    private WinningResult() {
+    public WinningResult(LotteryTickets lotteryTickets, WinningLottery winningLottery) {
+        create(lotteryTickets, winningLottery);
     }
 
-    public static WinningResult create(LotteryTickets lotteryTickets, WinningLottery winningLottery) {
+    public void create(LotteryTickets lotteryTickets, WinningLottery winningLottery) {
         initResult();
         for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
             WinningLotteryRank winningLotteryRank = winningLottery.getWinningLotteryRank(lotteryTicket);
-            RESULT.put(winningLotteryRank, RESULT.get(winningLotteryRank) + 1);
+            this.result.put(winningLotteryRank, this.result.get(winningLotteryRank) + 1);
         }
-        return new WinningResult();
     }
 
-    private static void initResult() {
+    private void initResult() {
         for (WinningLotteryRank winningLotteryRank : WinningLotteryRank.values()) {
-            RESULT.put(winningLotteryRank, 0);
+            this.result.put(winningLotteryRank, 0);
         }
     }
 
     public Map<WinningLotteryRank, Integer> getResult() {
-        return RESULT;
+        return this.result;
     }
 
     public int findTotalProfit() {
-        return RESULT.keySet().stream()
-                .mapToInt(i -> i.getPrice() * RESULT.get(i))
+        return this.result.keySet().stream()
+                .mapToInt(i -> i.getPrice() * result.get(i))
                 .sum();
     }
 }
