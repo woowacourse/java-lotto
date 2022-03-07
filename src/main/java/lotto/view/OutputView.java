@@ -4,11 +4,14 @@ import java.io.PrintStream;
 import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.domain.Rank;
+import lotto.dto.RankResult;
+import lotto.dto.StatisticsResult;
 
 public class OutputView {
+
+    private static final List<String> RANKS = List.of("FIFTH", "FOURTH", "THIRD", "SECOND", "FIRST");
+    private static final String SECOND_RANK = "SECOND";
 
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
@@ -24,25 +27,21 @@ public class OutputView {
             "수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", manualLottoAmount, autoLottoAmount));
     }
 
-    public static void printRanks(Map<Rank, Integer> result) {
+    public static void printRanks(StatisticsResult statisticsResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-
-        for (Rank rank : List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST)) {
-            printRank(result, rank);
+        for (String rank : RANKS) {
+            printRank(rank, statisticsResult.getStatistics().get(rank));
         }
+        System.out.printf("총 수익률은 %.2f 입니다.", statisticsResult.getProfitRate());
     }
 
-    public static void printRate(double rate) {
-        System.out.printf("총 수익률은 %.2f 입니다.", rate);
-    }
-
-    private static void printRank(Map<Rank, Integer> result, Rank rank) {
-        if (rank == Rank.SECOND) {
-            printSecondRank(rank.getMatchCount(), rank.getReward(), result.get(rank));
+    private static void printRank(String rank, RankResult statistics) {
+        if (rank.equals(SECOND_RANK)) {
+            printSecondRank(statistics.getMatchCount(), statistics.getReward(), statistics.getRewardCount());
             return;
         }
-        printOtherRank(rank.getMatchCount(), rank.getReward(), result.get(rank));
+        printOtherRank(statistics.getMatchCount(), statistics.getReward(), statistics.getRewardCount());
     }
 
     private static String joinWithDelimiter(List<Integer> lottoNumbers) {

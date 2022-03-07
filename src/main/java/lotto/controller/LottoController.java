@@ -5,6 +5,7 @@ import lotto.domain.LottoBuyMoney;
 import lotto.domain.Lottos;
 import lotto.domain.Statistics;
 import lotto.dto.LottosResult;
+import lotto.dto.StatisticsResult;
 import lotto.service.LottoService;
 
 public class LottoController {
@@ -22,11 +23,9 @@ public class LottoController {
         return new LottosResult(lottos.getLottos(), autoLottoAmount, manualAmount);
     }
 
-    public Statistics match(List<List<Integer>> lottos, List<Integer> winnerNumbers, int bonusNumber) {
-        return lottoService.match(lottos, winnerNumbers, bonusNumber);
-    }
-
-    public double getProfitRate(Statistics statistics, int inputMoney) {
-        return lottoService.getProfitRate(statistics, inputMoney);
+    public StatisticsResult match(List<List<Integer>> lottos, List<Integer> winnerNumbers, int bonusNumber, int inputMoney) {
+        Statistics statistics = lottoService.match(lottos, winnerNumbers, bonusNumber);
+        double profitRate = lottoService.getProfitRate(statistics, inputMoney);
+        return new StatisticsResult(statistics.getResult(), profitRate);
     }
 }

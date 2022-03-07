@@ -2,8 +2,8 @@ package lotto;
 
 import java.util.List;
 import lotto.controller.LottoController;
-import lotto.domain.Statistics;
 import lotto.dto.LottosResult;
+import lotto.dto.StatisticsResult;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -24,10 +24,7 @@ public class Application {
         // 당첨 확인
         List<Integer> winnerNumbers = InputView.inputWinnerNumbers();
         int bonusNumber = InputView.inputBonusNumber();
-        Statistics statistics = lottoController.match(lottosResult.getLottos(), winnerNumbers, bonusNumber);
-        OutputView.printRanks(statistics.getResult());
-        double profitRate = lottoController.getProfitRate(statistics, inputMoney);
-        OutputView.printRate(profitRate);
-
+        StatisticsResult result = lottoController.match(lottosResult.getLottos(), winnerNumbers, bonusNumber, inputMoney);
+        OutputView.printRanks(result);
     }
 }
