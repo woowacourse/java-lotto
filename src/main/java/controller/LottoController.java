@@ -13,8 +13,8 @@ import java.util.stream.Stream;
 
 public class LottoController {
 
-    public Money chargeMoney(int purchaseAmount) {
-        return new Money(purchaseAmount);
+    public Money chargeMoney(String purchaseAmount) {
+        return Money.of(purchaseAmount);
     }
 
     public LottoCount selectLottoCount(Money money, int manualLottoCount) {

@@ -14,6 +14,10 @@ public class Money {
         this.amount = amount;
     }
 
+    public static Money of(String amount) {
+        return new Money(Integer.parseInt(amount));
+    }
+
     private void validateAmount(int amount) {
         if (amount < LOTTO_PRICE) {
             throw new IllegalArgumentException(ExceptionMessage.NOT_ENOUGH_MONEY);

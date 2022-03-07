@@ -45,9 +45,9 @@ public class InputView {
         }
     }
 
-    public int inputPurchaseAmount() {
+    public String inputPurchaseAmount() {
         System.out.println(PURCHASE_AMOUNT_INPUT_MESSAGE);
-        return Integer.parseInt(input());
+        return input();
     }
 
     public String inputWinningNumber() {
