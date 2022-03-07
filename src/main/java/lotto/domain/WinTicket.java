@@ -20,17 +20,12 @@ public class WinTicket {
 
     public Rank getTicketRank(Ticket ticket) {
         int count = winTicket.getSameNumberCount(ticket);
-        return getRank(ticket, count);
-    }
+        boolean isBonus = false;
 
-    private Rank getRank(Ticket ticket, int count) {
-        if (isSecondRank(ticket, count)) {
-            return Rank.SECOND;
+        if (Rank.isThirdCount(count)) {
+            isBonus = ticket.contains(bonusNumber);
         }
-        return Rank.value(count, false);
-    }
 
-    private boolean isSecondRank(Ticket ticket, int count) {
-        return count == Rank.SECOND.getCount() && ticket.contains(bonusNumber);
+        return Rank.value(count, isBonus);
     }
 }

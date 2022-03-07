@@ -1,16 +1,15 @@
 package lotto.domain;
 
 public class Amount {
-    private static final String REQUEST_UNIT_OF_1000 = "1000원 단위로 입력해주세요.";
     private static final String REQUEST_POSITIVE_NUMBER_MESSAGE = "양수를 입력해주세요.";
-    private static final int LOTTO_PRICE = 1000;
 
-    private final int amount;
+    private final int originalAmount;
+    private int amount;
 
     public Amount(int amount) {
         checkAmountPositive(amount);
-        checkAmountDivisible(amount);
         this.amount = amount;
+        this.originalAmount = amount;
     }
 
     private void checkAmountPositive(int amount) {
@@ -19,21 +18,19 @@ public class Amount {
         }
     }
 
-    private void checkAmountDivisible(int amount) {
-        if (isNotDivisibleLottoPrice(amount)) {
-            throw new IllegalArgumentException(REQUEST_UNIT_OF_1000);
-        }
+    public int getAmountDividedBy(int amount) {
+        return this.amount / amount;
     }
 
-    private boolean isNotDivisibleLottoPrice(int amount) {
-        return amount % LOTTO_PRICE != 0;
+    public void decrease(int amount) {
+        this.amount -= amount;
     }
 
-    public int getAmountDividedByLottoPrice() {
-        return amount / LOTTO_PRICE;
+    public boolean isPurchasableBy(int amount) {
+        return amount <= this.amount;
     }
 
-    public double getYield(long totalAmount) {
-        return (double)totalAmount / amount;
+    public int getOriginalAmount() {
+        return originalAmount;
     }
 }

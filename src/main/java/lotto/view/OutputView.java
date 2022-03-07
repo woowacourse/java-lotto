@@ -11,32 +11,36 @@ import lotto.domain.Ticket;
 import lotto.domain.Tickets;
 
 public class OutputView {
-    private static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
     private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String DELIMITER = ", ";
-    public static final String RESULT_HEADER_MESSAGE = "당첨 통계\n---------\n";
-    public static final int STANDARD = 1;
-    private static final StringBuilder stringBuilder = new StringBuilder();
+    private static final String RESULT_HEADER_MESSAGE = "당첨 통계";
+    private static final String DIVIDER = "---------";
+    private static final int PROFIT_BASIS = 1;
 
-    public static void printTickets(int ticketCount, Tickets tickets) {
-        initializeStringBuilder();
-        appendTicketCountToStringBuilder(ticketCount);
-        appendTicketsToStringBuilder(tickets);
+    public static void printTickets(int manualTicketCount, int autoTicketCount, Tickets tickets) {
+        StringBuilder stringBuilder = new StringBuilder();
+        appendPrintTicketHeaderToStringBuilder(manualTicketCount, autoTicketCount, stringBuilder);
+        appendTicketsToStringBuilder(stringBuilder, tickets);
         System.out.println(stringBuilder);
     }
 
-    private static void appendTicketCountToStringBuilder(int ticketCount) {
-        stringBuilder.append(ticketCount)
-            .append(PURCHASE_MESSAGE)
-            .append("\n");
+    private static void appendPrintTicketHeaderToStringBuilder(int manualTicketCount, int autoTicketCount,
+        StringBuilder stringBuilder) {
+        stringBuilder.append("수동으로 ")
+            .append(manualTicketCount)
+            .append("장, 자동으로 ")
+            .append(autoTicketCount)
+            .append("개를 구매했습니다.")
+            .append(System.lineSeparator());
     }
 
-    private static void appendTicketsToStringBuilder(Tickets tickets) {
+    private static void appendTicketsToStringBuilder(StringBuilder stringBuilder, Tickets tickets) {
         for (Ticket ticket : tickets.getTickets()) {
             Set<LottoNumber> lottoNumbers = ticket.getLottoNumbers();
             stringBuilder.append("[")
                 .append(String.join(DELIMITER, getLottoNumbers(lottoNumbers)))
-                .append("]\n");
+                .append("]")
+                .append(System.lineSeparator());
         }
     }
 
@@ -48,14 +52,21 @@ public class OutputView {
     }
 
     public static void printResult(Map<Rank, Integer> result, double yield) {
-        initializeStringBuilder();
-        stringBuilder.append(RESULT_HEADER_MESSAGE);
-        appendResultToStringBuilder(result);
+        StringBuilder stringBuilder = new StringBuilder();
+        appendResultHeaderToStringBuilder(stringBuilder);
+        appendResultToStringBuilder(stringBuilder, result);
         System.out.print(stringBuilder);
         printYield(yield);
     }
 
-    private static void appendResultToStringBuilder(Map<Rank, Integer> result) {
+    private static void appendResultHeaderToStringBuilder(StringBuilder stringBuilder) {
+        stringBuilder.append(RESULT_HEADER_MESSAGE)
+            .append(System.lineSeparator())
+            .append(DIVIDER)
+            .append(System.lineSeparator());
+    }
+
+    private static void appendResultToStringBuilder(StringBuilder stringBuilder, Map<Rank, Integer> result) {
         for (Rank rank : Rank.getRanks()) {
             stringBuilder.append(rank.getCount())
                 .append("개 일치")
@@ -63,7 +74,8 @@ public class OutputView {
             stringBuilder.append("(")
                 .append(rank.getAmount()).append("원) - ")
                 .append(getCount(result, rank))
-                .append("개\n");
+                .append("개")
+                .append(System.lineSeparator());
         }
     }
 
@@ -82,18 +94,14 @@ public class OutputView {
     }
 
     private static void printYield(double yield) {
-        initializeStringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("총 수익률은 ")
                 .append(yield)
                 .append("입니다.");
-        if (yield < STANDARD) {
+        if (yield < PROFIT_BASIS) {
             stringBuilder.append(LOSS_MESSAGE);
         }
         System.out.println(stringBuilder);
-    }
-
-    private static void initializeStringBuilder() {
-        stringBuilder.setLength(0);
     }
 
     public static void printErrorMessage(String message) {

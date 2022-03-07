@@ -1,17 +1,17 @@
-package lotto.utils;
+package lotto.domain.utils;
 
 import java.util.Set;
 import java.util.TreeSet;
 
 import lotto.domain.LottoNumber;
+import lotto.utils.LottoNumbersGenerator;
 
-public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
-
+public class BasicLottoNumberGenerator implements LottoNumbersGenerator {
     @Override
     public Set<LottoNumber> generate(int size) {
         Set<LottoNumber> lottoNumbers = new TreeSet<>();
-        while (lottoNumbers.size() != size) {
-            lottoNumbers.add(RandomLottoNumberGenerator.generate());
+        for (int i = 1; i < size + 1; i++) {
+            lottoNumbers.add(new LottoNumber(i));
         }
         return lottoNumbers;
     }
