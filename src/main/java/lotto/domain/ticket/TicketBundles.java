@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import lotto.domain.rank.Rank;
 import lotto.domain.ticket.generator.TicketGenerator;
 import lotto.domain.winning.WinningTicket;
-import lotto.utils.Rank;
 
 public class TicketBundles {
 

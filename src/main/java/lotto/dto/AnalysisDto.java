@@ -3,7 +3,7 @@ package lotto.dto;
 import java.util.Map;
 
 import lotto.domain.analysis.Analysis;
-import lotto.utils.Rank;
+import lotto.domain.rank.Rank;
 
 public class AnalysisDto {
 

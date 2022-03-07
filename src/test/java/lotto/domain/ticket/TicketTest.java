@@ -10,11 +10,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.ball.Ball;
-import lotto.domain.ball.BallStorage;
+import lotto.domain.rank.Rank;
 import lotto.domain.winning.WinningTicket;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
-import lotto.utils.Rank;
 
 class TicketTest {
 
@@ -43,7 +42,7 @@ class TicketTest {
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForContainsTrueTest")
     void containsTrueTest(final List<Integer> ticketNumbers, final int targetNumber) {
         final Ticket ticket = new Ticket(ticketNumbers);
-        final Ball targetBall = BallStorage.getBall(targetNumber);
+        final Ball targetBall = Ball.from(targetNumber);
 
         assertThat(ticket.contains(targetBall)).isTrue();
     }
@@ -53,7 +52,7 @@ class TicketTest {
     @MethodSource("lotto.domain.ticket.provider.TicketTestProvider#provideForContainsFalseTest")
     void containsFalseTest(final List<Integer> ticketNumbers, final int targetNumber) {
         final Ticket ticket = new Ticket(ticketNumbers);
-        final Ball targetBall = BallStorage.getBall(targetNumber);
+        final Ball targetBall = Ball.from(targetNumber);
 
         assertThat(ticket.contains(targetBall)).isFalse();
     }

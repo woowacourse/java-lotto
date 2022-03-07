@@ -16,7 +16,7 @@ class BallTest {
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}")
     @ValueSource(ints = {-2, -1, 0, 46, 47, 48})
     void rangeOutExceptionTest(final int ballNumber) {
-        assertThatThrownBy(() -> new Ball(ballNumber))
+        assertThatThrownBy(() -> Ball.from(ballNumber))
                 .isInstanceOf(LottoException.class)
                 .hasMessageContaining(LottoExceptionStatus.BALL_NUMBER_CANNOT_BE_OUT_OF_RANGE.getMessage());
     }
@@ -25,8 +25,17 @@ class BallTest {
     @ParameterizedTest(name = "[{index}] 로또 번호 : {0}")
     @ValueSource(ints = {1, 2, 3, 43, 44, 45})
     void initTest(final int ballNumber) {
-        final Ball ball = new Ball(ballNumber);
+        final Ball ball = Ball.from(ballNumber);
         assertThat(ball.getBallNumber()).isEqualTo(ballNumber);
+    }
+
+    @DisplayName("Ball 객체는 캐싱되어야 한다.")
+    @ParameterizedTest(name = "[{index}] 번호 : {0}")
+    @ValueSource(ints = {1, 2, 44, 45})
+    void ballsCachingTest(final int ballNumber) {
+        final Ball actualBall = Ball.from(ballNumber);
+        final Ball expectedBall = Ball.from(ballNumber);
+        assertThat(actualBall).isSameAs(expectedBall);
     }
 
 }

@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.params.provider.Arguments;
 
-import lotto.utils.Rank;
+import lotto.domain.rank.Rank;
 
 public class TicketTestProvider {
 

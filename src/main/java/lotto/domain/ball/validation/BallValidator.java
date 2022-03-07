@@ -1,8 +1,8 @@
-package lotto.domain.ball;
+package lotto.domain.ball.validation;
 
+import lotto.domain.ball.condition.BallNumberRange;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
-import lotto.utils.BallNumberRange;
 
 public class BallValidator {
 

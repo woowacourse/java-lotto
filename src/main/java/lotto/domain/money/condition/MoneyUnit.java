@@ -1,4 +1,4 @@
-package lotto.utils;
+package lotto.domain.money.condition;
 
 public enum MoneyUnit {
 

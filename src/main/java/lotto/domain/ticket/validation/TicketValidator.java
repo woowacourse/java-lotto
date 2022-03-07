@@ -1,11 +1,11 @@
-package lotto.domain.ticket;
+package lotto.domain.ticket.validation;
 
 import java.util.Collections;
 import java.util.List;
 
+import lotto.domain.ticket.condition.TicketSize;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
-import lotto.utils.TicketSize;
 
 public class TicketValidator {
 

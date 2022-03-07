@@ -1,8 +1,8 @@
-package lotto.domain.money;
+package lotto.domain.money.validation;
 
+import lotto.domain.money.condition.MoneyUnit;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
-import lotto.utils.MoneyUnit;
 
 public class MoneyValidator {
 

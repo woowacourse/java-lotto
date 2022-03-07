@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.view.validation;
 
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
@@ -8,14 +8,14 @@ public class InputTicketCountValidator {
     private InputTicketCountValidator() {
     }
 
-    public static void verifyTicketCount(final int totalTicketCount, final int ticketCount) {
-        verifyTicketCountPositive(ticketCount);
+    public static void validateTicketCount(final int totalTicketCount, final int ticketCount) {
+        verifyTicketCountNotNegative(ticketCount);
         verifyTotalTicketCountIsMoreThanTicketCount(totalTicketCount, ticketCount);
     }
 
-    private static void verifyTicketCountPositive(final int ticketCount) {
-        if (ticketCount <= 0) {
-            throw new LottoException(LottoExceptionStatus.MANUAL_TICKET_COUNT_MUST_BE_POSITIVE);
+    private static void verifyTicketCountNotNegative(final int ticketCount) {
+        if (ticketCount < 0) {
+            throw new LottoException(LottoExceptionStatus.MANUAL_TICKET_COUNT_CANNOT_BE_NEGATIVE);
         }
     }
 
