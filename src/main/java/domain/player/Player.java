@@ -26,7 +26,7 @@ public class Player {
     }
 
     public LottoCountDto selectLottoCount(int manualLottoCount) {
-        int totalLottoCount = money.calculateTotalLottoCount();
+        int totalLottoCount = money.calculatePurchasableLottoCount();
         LottoCount lottoCount = new LottoCount(manualLottoCount, totalLottoCount - manualLottoCount);
         return LottoCountDto.of(lottoCount);
     }

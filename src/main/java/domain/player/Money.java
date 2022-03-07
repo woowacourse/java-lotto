@@ -34,7 +34,7 @@ public class Money {
         return amount >= LOTTO_PRICE;
     }
 
-    public int calculateTotalLottoCount() {
+    public int calculatePurchasableLottoCount() {
         return amount / LOTTO_PRICE;
     }
 

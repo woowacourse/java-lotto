@@ -62,7 +62,7 @@ class MoneyTest {
     void calculateTotalLottoCountTest() {
         int amount = 15000;
         Money money = new Money(amount);
-        int actual = money.calculateTotalLottoCount();
+        int actual = money.calculatePurchasableLottoCount();
         assertThat(actual).isEqualTo(15);
     }
 }
