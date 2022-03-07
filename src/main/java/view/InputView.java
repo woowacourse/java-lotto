@@ -74,10 +74,9 @@ public class InputView {
     }
 
     private static List<Integer> covertNumbersToInteger(List<String> numbers) {
-        return new ArrayList<>(numbers.stream()
+        return numbers.stream()
             .map(InputView::checkAndConvertInteger)
-            .sorted()
-            .collect(Collectors.toList()));
+            .sorted().collect(Collectors.toList());
     }
 
     private static int checkAndConvertInteger(String input) {
