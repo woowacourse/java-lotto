@@ -15,13 +15,6 @@ class RankTest {
         assertThat(Rank.of(5, false)).isEqualTo(Rank.THIRD);
         assertThat(Rank.of(4, false)).isEqualTo(Rank.FOURTH);
         assertThat(Rank.of(3, false)).isEqualTo(Rank.FIFTH);
-    }
-
-    @Test
-    @DisplayName("존재하지 않는 순위일 경우 예외를 발생시킨다.")
-    void throwExceptionNotExist() {
-        assertThatThrownBy(() -> Rank.of(1, false))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 존재하지 않는 순위에 접근했습니다.");
+        assertThat(Rank.of(2, false)).isEqualTo(Rank.MISS);
     }
 }

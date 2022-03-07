@@ -11,16 +11,15 @@ import java.util.List;
 public class LottoController {
 
     public void run() {
-        PurchaseAmount purchaseAmount = getPurchaseAmount();
-        int ticketCount = purchaseAmount.calculateTheNumberOfTicket();
-        OutputView.printTicketCount(ticketCount);
+        final PurchaseAmount purchaseAmount = getPurchaseAmount();
+        final LottoMachine lottoMachine = getlottoMachine(purchaseAmount);
 
-        List<Lotto> lottoTickets = getLottoTickets(ticketCount);
-        OutputView.printTickets(lottoTickets);
+        InputView.printGetManualLottosMessage();
+        final List<Lotto> lottos = lottoMachine.makeManualAndAutoLottos(getInputManualLottos(lottoMachine.getManualLottoCount()));
+        OutputView.printLottos(lottoMachine.getManualLottoCount(), lottoMachine.getAutoLottoCount(), lottos);
 
-        WinningLotto winningLotto = getWinningLotto();
-        RankBoard rankBoard = new RankBoard(winningLotto, lottoTickets);
-
+        final WinningLotto winningLotto = getWinningLotto();
+        final RankBoard rankBoard = new RankBoard(winningLotto, lottos);
         OutputView.printResult(rankBoard, rankBoard.calculateProfitRatio(purchaseAmount.getAmount()));
     }
 
@@ -33,47 +32,37 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> getLottoTickets(int count) {
-        List<Lotto> lottoTickets = new ArrayList<>();
-        LottoMachine lottoMachine = new RandomLottoMachine();
-        for (int i = 0; i < count; i++) {
-            lottoTickets.add(lottoMachine.makeLottoTicket());
+    private LottoMachine getlottoMachine(final PurchaseAmount purchaseAmount) {
+        try {
+            final int manualLottoCount = StringConverter.toInt(InputView.getManualLottoCount());
+            return new LottoMachine(purchaseAmount, manualLottoCount);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getlottoMachine(purchaseAmount);
         }
-        return lottoTickets;
+    }
+
+    private List<List<Integer>> getInputManualLottos(final int manualLottoCount) {
+        try {
+            final List<List<Integer>> inputLottos = new ArrayList<>();
+            for (int i = 0; i < manualLottoCount; i++) {
+                inputLottos.add(StringConverter.toInts(InputView.getManualLotto()));
+            }
+            return inputLottos;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getInputManualLottos(manualLottoCount);
+        }
     }
 
     private WinningLotto getWinningLotto() {
-        Lotto winningNumber = getWinningNumber();
-        return makeWinningLotto(winningNumber);
-    }
-
-    private Lotto getWinningNumber() {
         try {
-            List<Integer> input = StringConverter.toInts(InputView.getWinningNumber());
-            LottoMachine lottoMachine = new FixedLottoMachine(input);
-            return lottoMachine.makeLottoTicket();
+            final List<Integer> winningNumbers = StringConverter.toInts(InputView.getWinningNumbers());
+            int bonusNumber = StringConverter.toInt(InputView.getBonusNumber());
+            return new WinningLotto(winningNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getWinningNumber();
-        }
-    }
-
-    private WinningLotto makeWinningLotto(Lotto winningNumber) {
-        LottoNumber bonusNumber = getBonusNumber();
-        try {
-            return new WinningLotto(winningNumber, bonusNumber);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return makeWinningLotto(winningNumber);
-        }
-    }
-
-    private LottoNumber getBonusNumber() {
-        try {
-            return new LottoNumber(StringConverter.toInt(InputView.getBonusNumber()));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return getBonusNumber();
+            return getWinningLotto();
         }
     }
 }

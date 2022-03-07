@@ -1,32 +1,34 @@
 package lotto.domain;
 
+import static lotto.constant.ErrorMessage.ERROR_PURCHASE_AMOUNT_WRONG_UNIT;
+
 public class PurchaseAmount {
 
-    private static final int TICKET_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
+    private static final int REMAIN_ZERO = 0;
 
     private final int amount;
 
-    public PurchaseAmount(int amount) {
-        validateMinimumAmount(amount);
-        this.amount = calculateActualAmount(amount);
+    public PurchaseAmount(final int amount) {
+        validateUnit(amount);
+        this.amount = amount;
     }
 
-    public int calculateTheNumberOfTicket() {
-        return amount / TICKET_PRICE;
+    public boolean canPurchase(final int count) {
+        return amount >= LOTTO_PRICE * count;
     }
 
-    private void validateMinimumAmount(final int amount) {
-        if (amount < TICKET_PRICE) {
-            throw new IllegalArgumentException("[ERROR] 구입금액은 " + TICKET_PRICE + "원 이상이어야 합니다");
+    public int calculateAutoLottoCount(final int count) {
+        return (amount - LOTTO_PRICE * count) / LOTTO_PRICE;
+    }
+
+    private void validateUnit(final int amount) {
+        if (amount % LOTTO_PRICE != REMAIN_ZERO) {
+            throw new IllegalArgumentException(ERROR_PURCHASE_AMOUNT_WRONG_UNIT.message());
         }
-    }
-
-    private int calculateActualAmount(final int amount) {
-        return amount - (amount % TICKET_PRICE);
     }
 
     public int getAmount() {
         return amount;
     }
-
 }

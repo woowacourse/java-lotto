@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static lotto.constant.ErrorMessage.ERROR_STRING_CONVERTER_NOT_NUMBER;
+import static lotto.constant.ErrorMessage.ERROR_STRING_CONVERTER_NULL_OR_BLANK;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringToIntConverterTest {
@@ -15,7 +17,7 @@ class StringToIntConverterTest {
         String input = "notNumber";
         assertThatThrownBy(() -> StringConverter.toInt(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("입력값은 숫자여야합니다");
+                .hasMessage(ERROR_STRING_CONVERTER_NOT_NUMBER.message());
     }
 
     @ParameterizedTest
@@ -24,6 +26,6 @@ class StringToIntConverterTest {
     void throwExceptionWhenInputIsEmptyOrBlank(String input) {
         assertThatThrownBy(() -> StringConverter.toInt(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("입력값은 공백일 수 없습니다");
+                .hasMessage(ERROR_STRING_CONVERTER_NULL_OR_BLANK.message());
     }
 }

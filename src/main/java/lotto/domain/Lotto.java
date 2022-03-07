@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.constant.ErrorMessage.ERROR_LOTTO_DUPLICATE_OR_WRONG_SIZE;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,28 +13,29 @@ public class Lotto {
 
     private final Set<LottoNumber> numbers;
 
-    public Lotto(List<LottoNumber> numbers) {
-        Set<LottoNumber> lottoNumbers = new HashSet<>(numbers);
+    public Lotto(final LottoGenerator lottoGenerator) {
+        final Set<LottoNumber> lottoNumbers = new HashSet<>(lottoGenerator.makeLottos());
         validateDuplicationAndSize(lottoNumbers);
         this.numbers = lottoNumbers;
     }
 
-    private void validateDuplicationAndSize(Set<LottoNumber> lottoNumbers) {
+    private void validateDuplicationAndSize(final Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복되지 않은 " + LOTTO_NUMBERS_SIZE + "개의 숫자여야합니다.");
+            throw new IllegalArgumentException(ERROR_LOTTO_DUPLICATE_OR_WRONG_SIZE.message());
         }
     }
 
     public List<Integer> getIntValues() {
         return numbers.stream()
-                .map(LottoNumber::getNumber)
+                .map(LottoNumber::getValue)
+                .sorted()
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public Set<LottoNumber> getMatchedNumbers(Set<LottoNumber> targetNumbers) {
-        Set<LottoNumber> copyNumbers = new HashSet<>(numbers);
-        copyNumbers.retainAll(targetNumbers);
-        return copyNumbers;
+    public int countMatchedNumbers(final Lotto targetLotto) {
+        return (int) numbers.stream()
+                .filter(targetLotto::contains)
+                .count();
     }
 
     public boolean contains(LottoNumber number) {
@@ -40,6 +43,6 @@ public class Lotto {
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return numbers;
+        return new HashSet<>(numbers);
     }
 }

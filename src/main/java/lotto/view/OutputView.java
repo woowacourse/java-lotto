@@ -12,28 +12,32 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
+    private static final String LOTTO_JOIN_DELIMITER = ", ";
+
     private OutputView() {
     }
 
-    public static void printTicketCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
-    }
+    public static void printLottos(final int manualLottoCount, final int autoLottoCount, final List<Lotto> lottos) {
+        printLottoCount(manualLottoCount, autoLottoCount);
 
-    public static void printTickets(List<Lotto> tickets) {
-        for (Lotto ticket : tickets) {
-            System.out.println(makeTicketString(ticket));
+        for (Lotto lotto : lottos) {
+            System.out.println(makeLottoString(lotto));
         }
         System.out.println();
     }
 
-    private static String makeTicketString(Lotto ticket) {
-        String result = ticket.getIntValues().stream()
+    private static void printLottoCount(final int manualLottoCount, final int autoLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "개, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
+    }
+
+    private static String makeLottoString(final Lotto lotto) {
+        final String result = lotto.getIntValues().stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(LOTTO_JOIN_DELIMITER));
         return "[" + result + "]";
     }
 
-    public static void printResult(RankBoard rankBoard, double profitRatio) {
+    public static void printResult(final RankBoard rankBoard, final double profitRatio) {
         printResultTitle();
         printRankCounter(rankBoard);
         printProfitRatio(profitRatio);
@@ -45,27 +49,25 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    private static void printRankCounter(RankBoard rankBoard) {
-        ArrayList<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
-        ranks.sort(Comparator.comparing(Rank::getPrize));
+    private static void printRankCounter(final RankBoard rankBoard) {
+        final List<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
+        ranks.sort(Comparator.comparing(Rank::prize));
         for (Rank rank : ranks) {
-            printRank(rank, rankBoard);
+            System.out.print(makeRankString(rank, rankBoard.getCount(rank)));
         }
     }
 
-    private static void printRank(Rank rank, RankBoard rankBoard) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append(rank.getMatched()).append("개 일치");
+    private static String makeRankString(final Rank rank, final int count) {
+        if (rank == Rank.MISS) {
+            return "";
+        }
         if (rank == Rank.SECOND) {
-            stringBuilder.append(", 보너스 볼 일치");
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개\n", rank.matched(), rank.prize(), count);
         }
-        stringBuilder.append(" (").append(rank.getPrize()).append("원) - ").append(rankBoard.getCount(rank)).append("개");
-
-        System.out.println(stringBuilder);
+        return String.format("%d개 일치 (%d원) - %d개\n", rank.matched(), rank.prize(), count);
     }
 
-    private static void printProfitRatio(double profitRatio) {
-        System.out.println("총 수익률은 " + profitRatio + "입니다.");
+    private static void printProfitRatio(final double profitRatio) {
+        System.out.println("총 수익률은 " + profitRatio + "입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }

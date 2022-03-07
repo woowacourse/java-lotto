@@ -1,31 +1,33 @@
 package lotto.domain;
 
-import java.util.Set;
+import static lotto.constant.ErrorMessage.ERROR_WINNING_LOTTO_DUPLICATE;
+
+import java.util.List;
 
 public class WinningLotto {
 
     private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto winningNumbers, LottoNumber bonusNumber) {
-        validateDuplication(winningNumbers, bonusNumber);
-        this.winningNumbers = winningNumbers;
-        this.bonusNumber = bonusNumber;
+    public WinningLotto(final List<Integer> winningNumbers, final int bonusNumber) {
+        final LottoGenerator lottoGenerator = new FixedLottoGenerator(winningNumbers);
+        this.winningNumbers = new Lotto(lottoGenerator);
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
+
+        validateDuplication(this.winningNumbers, this.bonusNumber);
     }
 
-    private void validateDuplication(Lotto winningNumber, LottoNumber bonusNumber) {
+    private void validateDuplication(final Lotto winningNumber, final LottoNumber bonusNumber) {
         if (winningNumber.contains(bonusNumber)) {
-            throw new IllegalArgumentException("[ERROR] 보너스 볼은 당첨 번호와 중복될 수 없습니다.");
+            throw new IllegalArgumentException(ERROR_WINNING_LOTTO_DUPLICATE.message());
         }
     }
 
-    public Set<LottoNumber> getWinningAndBonusNumber() {
-        Set<LottoNumber> totalNumbers = winningNumbers.getLottoNumbers();
-        totalNumbers.add(bonusNumber);
-        return totalNumbers;
+    public int countWinningMatched(final Lotto lotto) {
+        return winningNumbers.countMatchedNumbers(lotto);
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public boolean isBonusMatched(final Lotto lotto) {
+        return lotto.contains(bonusNumber);
     }
 }
