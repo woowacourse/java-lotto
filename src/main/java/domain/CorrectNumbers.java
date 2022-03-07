@@ -9,15 +9,13 @@ public class CorrectNumbers {
 
     private final List<CorrectNumber> correctNumbers = new ArrayList<>();
 
-    public SortedMap<RankPrize, Integer> run(IssuedLotto issuedLotto, Lotto lastWinLotto, LottoNumber bonusNumber) {
-        correctNumbers.clear();
+    public CorrectNumbers(IssuedLotto issuedLotto, Lotto lastWinLotto, LottoNumber bonusNumber) {
         for (final Lotto lotto : issuedLotto.getIssuedLotto()) {
             correctNumbers.add(CorrectNumber.getCorrectNumber(lotto.compare(lastWinLotto), lotto.isContainNumber(bonusNumber)));
         }
-        return processRankCount();
     }
 
-    private SortedMap<RankPrize, Integer> processRankCount() {
+    public SortedMap<RankPrize, Integer> getRankCounts() {
         SortedMap<RankPrize, Integer> rankCount = new TreeMap<>(Collections.reverseOrder());
         initRank(rankCount);
         countRank(rankCount);

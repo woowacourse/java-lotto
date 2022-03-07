@@ -32,8 +32,8 @@ public class LottoController {
     private SortedMap<RankPrize, Integer> pickLotto(IssuedLotto issuedLotto) {
         final Lotto lastWinLotto = getWinLotto();
         final LottoNumber bonusNumber = getBonusNumber(lastWinLotto);
-        final CorrectNumbers correctNumbers = new CorrectNumbers();
-        return correctNumbers.run(issuedLotto, lastWinLotto, bonusNumber);
+        final CorrectNumbers correctNumbers = new CorrectNumbers(issuedLotto, lastWinLotto, bonusNumber);
+        return correctNumbers.getRankCounts();
     }
 
     private Money getMoney() {
