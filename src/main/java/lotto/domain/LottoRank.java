@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public enum LottoRank {
+    RANK_NOTHING(0, false, 0),
     RANK_FIFTH(3, false, 5_000),
     RANK_FOURTH(4, false, 50_000),
     RANK_THIRD(5, false, 1_500_000),
@@ -33,14 +34,11 @@ public enum LottoRank {
     }
 
     public static void addLottoResult(LottoResult lottoResult, long targetCorrectCount, boolean targetBonused) {
-        try {
-            lottoResult.addWinningLotto(
-                    Arrays.stream(LottoRank.values())
-                    .filter(rank -> rank.isSameCorrectCount(targetCorrectCount) && rank.isSameBonus(targetBonused))
-                    .findFirst()
-                    .orElseThrow());
-        } catch (NoSuchElementException e) {
-        }
+        LottoRank lottoRank = Arrays.stream(LottoRank.values())
+                .filter(rank -> rank.isSameCorrectCount(targetCorrectCount) && rank.isSameBonus(targetBonused))
+                .findFirst()
+                .orElse(RANK_NOTHING);
+        lottoResult.addWinningLotto(lottoRank);
     }
 
     private boolean isSameCorrectCount(long targetCorrectCount) {

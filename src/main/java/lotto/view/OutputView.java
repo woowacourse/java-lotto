@@ -33,6 +33,7 @@ public class OutputView {
     public void printResult(LottoResult result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
+        result.getResult().remove(LottoRank.RANK_NOTHING);
         for (LottoRank lottoRank : result.getResult().keySet()) {
             System.out.printf("%d개 일치%s(%d원) - %d개\n", lottoRank.getCorrectNumber(),
                     getBonusMessage(lottoRank.isBonused()), lottoRank.getPrizeAmount(),
