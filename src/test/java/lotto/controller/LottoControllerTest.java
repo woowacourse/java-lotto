@@ -20,7 +20,7 @@ public class LottoControllerTest {
 
     @ParameterizedTest
     @MethodSource("provideNormalInput")
-    void test1(String money, String count, String manualLotto, String winningNumbers, String bonusNumber) {
+    void runTest(String money, String count, String manualLotto, String winningNumbers, String bonusNumber) {
 
         InputStream in = createInputStream(money, count, manualLotto, winningNumbers, bonusNumber);
         System.setIn(in);
