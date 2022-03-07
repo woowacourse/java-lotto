@@ -57,11 +57,11 @@ class LottoNumberTest {
     class if_input_same_number {
         @ParameterizedTest
         @ValueSource(ints = {1, 2, 45})
-        @DisplayName("동일하다.")
+        @DisplayName("동일한 인스턴스이다.")
         void same_number_is_true(final int number) {
             LottoNumber number1 = LottoNumber.from(number);
             LottoNumber number2 = LottoNumber.from(number);
-            assertThat(number1 == number2).isTrue();
+            assertThat(number1).isSameAs(number2);
         }
     }
 }
