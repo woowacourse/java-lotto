@@ -15,12 +15,13 @@ import org.junit.jupiter.api.Test;
 public class WinningCheckerTest {
 
     @Test
-    @DisplayName("only 1등 당첨일 때 수익은 20억이어야 한다.")
+    @DisplayName("only 1등 당첨일 때 수익률은 2000000이어야 한다.")
     void checkWinning() {
 
         //given
-        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(
-            Collectors.toList()));
+        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
 
         List<LottoNumber> winningNumber = Stream.of(1, 2, 3, 4, 5, 6)
             .map(LottoNumber::new)
@@ -35,17 +36,18 @@ public class WinningCheckerTest {
         winningChecker.check();
 
         //then
-        assertThat(winningChecker.sumRewards()).isEqualTo(2000000000);
+        assertThat(winningChecker.getYield()).isEqualTo(2000000);
 
     }
 
     @Test
-    @DisplayName("only 2등 당첨일 때 수익은 3000만이어야 한다.")
+    @DisplayName("only 2등 당첨일 때 수익률은 30000이어야 한다.")
     void checkWinning2() {
 
         //given
-        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 7).map(LottoNumber::new).collect(
-            Collectors.toList()));
+        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 7)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
 
         List<LottoNumber> winningNumber = Stream.of(1, 2, 3, 4, 5, 6)
             .map(LottoNumber::new)
@@ -60,17 +62,18 @@ public class WinningCheckerTest {
         winningChecker.check();
 
         //then
-        assertThat(winningChecker.sumRewards()).isEqualTo(30000000);
+        assertThat(winningChecker.getYield()).isEqualTo(30000);
 
     }
 
     @Test
-    @DisplayName("only 3등 당첨일 때 수익은 150만이어야 한다.")
+    @DisplayName("only 3등 당첨일 때 수익률은 1500이어야 한다.")
     void checkWinning3() {
 
         //given
-        Lotto lotto = new Lotto(Stream.of(3, 5, 6, 7, 8, 9).map(LottoNumber::new).collect(
-            Collectors.toList()));
+        Lotto lotto = new Lotto(Stream.of(3, 5, 6, 7, 8, 9)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
 
         List<LottoNumber> winningNumber = Stream.of(3, 5, 6, 7, 8, 10)
             .map(LottoNumber::new)
@@ -85,27 +88,34 @@ public class WinningCheckerTest {
         winningChecker.check();
 
         //then
-        assertThat(winningChecker.sumRewards()).isEqualTo(1500000);
+        assertThat(winningChecker.getYield()).isEqualTo(1500);
 
     }
 
     @Test
     @DisplayName("당첨 안됐을때 수익은 0원이어야 한다.")
     void checkWinning4() {
-        Lotto lotto = new Lotto(Stream.of(11, 12, 13, 14, 8, 9).map(LottoNumber::new).collect(
-            Collectors.toList()));
-        List<LottoNumber> winningNumber = Stream.of(3, 5, 6, 7, 8, 10).map(LottoNumber::new)
-            .collect(
-                Collectors.toList());
+
+        //given
+        Lotto lotto = new Lotto(Stream.of(11, 12, 13, 14, 8, 9)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
+
+        List<LottoNumber> winningNumber = Stream.of(3, 5, 6, 7, 8, 10)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
 
         LottoNumber bonusNumber = new LottoNumber(15);
 
         WinningChecker winningChecker = new WinningChecker(new Lottos(List.of(lotto)),
             new WinningNumbers(winningNumber, bonusNumber));
 
+        //when
         winningChecker.check();
 
-        assertThat(winningChecker.sumRewards()).isEqualTo(0);
+
+        //then
+        assertThat(winningChecker.getYield()).isEqualTo(0);
     }
 
     @Test
@@ -113,8 +123,9 @@ public class WinningCheckerTest {
     void winning_checker_check_FIRST_REWARD() {
 
         //given
-        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(
-            Collectors.toList()));
+        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(
             Stream.of(1, 2, 3, 4, 5, 6)
@@ -137,8 +148,9 @@ public class WinningCheckerTest {
     void winning_checker_check_SECOND_REWARD() {
 
         //given
-        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(
-            Collectors.toList()));
+        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(
             Stream.of(1, 2, 3, 4, 5, 7)
@@ -161,8 +173,9 @@ public class WinningCheckerTest {
     void winning_checker_check_THIRD_REWARD() {
 
         //given
-        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(
-            Collectors.toList()));
+        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(
             Stream.of(1, 2, 3, 4, 5, 7)
@@ -185,8 +198,9 @@ public class WinningCheckerTest {
     void winning_checker_check_FOURTH_REWARD_1() {
 
         //given
-        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(
-            Collectors.toList()));
+        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(
             Stream.of(1, 2, 3, 4, 7, 8)
@@ -209,8 +223,10 @@ public class WinningCheckerTest {
     void winning_checker_check_FOURTH_REWARD_2() {
 
         //given
-        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(
-            Collectors.toList()));
+        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
+
         WinningNumbers winningNumbers = new WinningNumbers(
             Stream.of(1, 2, 3, 4, 8, 9)
                 .map(LottoNumber::new)
@@ -232,8 +248,10 @@ public class WinningCheckerTest {
     void winning_checker_check_FIFTH_REWARD_1() {
 
         //given
-        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(
-            Collectors.toList()));
+        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
+
         WinningNumbers winningNumbers = new WinningNumbers(
             Stream.of(1, 2, 3, 7, 8, 9)
                 .map(LottoNumber::new)
@@ -255,8 +273,9 @@ public class WinningCheckerTest {
     void winning_checker_check_FIFTH_REWARD_2() {
 
         //given
-        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(
-            Collectors.toList()));
+        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(
             Stream.of(1, 2, 3, 7, 8, 9)
@@ -279,8 +298,9 @@ public class WinningCheckerTest {
     void winning_checker_check_NO_REWARD() {
 
         //given
-        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(
-            Collectors.toList()));
+        Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
 
         WinningNumbers winningNumbers = new WinningNumbers(
             Stream.of(1, 2, 10, 11, 12, 13)

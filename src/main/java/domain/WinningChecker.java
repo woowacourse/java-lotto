@@ -38,14 +38,6 @@ public class WinningChecker {
         return sumRewards() / (LOTTO_PRICE * lottos.getSize());
     }
 
-    public double sumRewards() {
-        return rewardsCountMap.entrySet()
-            .stream()
-            .map(entry -> entry.getKey().getReward() * entry.getValue())
-            .mapToDouble(d -> d)
-            .sum();
-    }
-
     public LinkedHashMap<String, Integer> getStatisticMap() {
 
         return new LinkedHashMap<>() {
@@ -61,6 +53,14 @@ public class WinningChecker {
 
     public int getRewardsCount(Rewards rewards) {
         return rewardsCountMap.getOrDefault(rewards, NO_COUNT);
+    }
+
+    private double sumRewards() {
+        return rewardsCountMap.entrySet()
+            .stream()
+            .map(entry -> entry.getKey().getReward() * entry.getValue())
+            .mapToDouble(d -> d)
+            .sum();
     }
 
     private Rewards checkWinning(Lotto lotto) {
