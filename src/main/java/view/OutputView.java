@@ -4,9 +4,6 @@ import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
 import domain.Money;
-import domain.Rewards;
-import domain.WinningChecker;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 

@@ -1,10 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class WinningNumbers {
 
     private static final String NULL_WINNING_NUMBER_ERROR = "[ERROR] 로또 당첨번호에 null 값이 올 수 없습니다.";

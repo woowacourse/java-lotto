@@ -1,8 +1,5 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.WinningNumbers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
