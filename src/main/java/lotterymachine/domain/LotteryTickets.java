@@ -1,33 +1,25 @@
 package lotterymachine.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 public class LotteryTickets {
-    private final List<LotteryTicket> tickets;
-    private final TicketCount ticketCount;
+    private static final String NOT_CORRECT_SIZE = "로또 구매 개수와 생성하려는 로또 개수가 일치하지 않습니다.";
 
-    public LotteryTickets(int count) {
-        tickets = new ArrayList<>();
-        ticketCount = new TicketCount(count);
+    private final List<LotteryTicket> tickets;
+
+    public LotteryTickets(List<LotteryTicket> tickets, LotteryPurchaseCount lotteryPurchaseCount) {
+        validateCorrectSize(tickets, lotteryPurchaseCount);
+        this.tickets = tickets;
     }
 
-    public void add(List<LotteryNumber> numbers) {
-        if (ticketCount.isExist()) {
-            tickets.add(new LotteryTicket(numbers));
-            ticketCount.subtract();
+    private void validateCorrectSize(List<LotteryTicket> tickets, LotteryPurchaseCount lotteryPurchaseCount) {
+        if (tickets.size() != lotteryPurchaseCount.getTotalValue()) {
+            throw new IllegalArgumentException(NOT_CORRECT_SIZE);
         }
     }
 
     public List<LotteryTicket> getLotteryTickets() {
         return Collections.unmodifiableList(tickets);
-    }
-
-    public Map<WinningLotteryRank, Integer> getLotteriesResult(WinningLottery winningLottery) {
-        final Map<WinningLotteryRank, Integer> lotteriesResult = WinningLotteryRank.getWinningLotteries();
-        for (LotteryTicket lotteryTicket : tickets) {
-            WinningLotteryRank winningLotteryRank = winningLottery.getWinningLotteryRank(lotteryTicket);
-            lotteriesResult.put(winningLotteryRank, lotteriesResult.getOrDefault(winningLotteryRank, 0) + 1);
-        }
-        return Collections.unmodifiableMap(lotteriesResult);
     }
 }

@@ -1,8 +1,6 @@
 package lotterymachine.view;
 
-
-import lotterymachine.domain.LotteryNumber;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -23,11 +21,16 @@ public class InputView {
         }
     }
 
-    public static List<LotteryNumber> getWinningLotteryNumbers() {
+    public static int getManualPurchaseCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return toInt(SCANNER.nextLine());
+    }
+
+    public static List<Integer> getWinningLotteryNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         try {
             return Arrays.stream(SCANNER.nextLine().split(NUMBER_DELIMITER))
-                    .map(i -> new LotteryNumber(toInt(i)))
+                    .map(i -> toInt(i.trim()))
                     .collect(Collectors.toList());
         } catch (RuntimeException runtimeException) {
             System.out.println(runtimeException.getMessage());
@@ -35,10 +38,12 @@ public class InputView {
         }
     }
 
-    public static LotteryNumber getBonusNumber() {
+    public static int getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
-            return new LotteryNumber(toInt(SCANNER.nextLine()));
+            int number = toInt(SCANNER.nextLine());
+            printEmptyLine();
+            return number;
         } catch (NumberFormatException numberFormatException) {
             System.out.println(numberFormatException.getMessage());
             return getBonusNumber();
@@ -51,5 +56,20 @@ public class InputView {
         } catch (NumberFormatException numberFormatException) {
             throw new NumberFormatException(IS_NOT_NUMBER);
         }
+    }
+
+    public static List<List<Integer>> getManualLotteryNumbers(int count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> value = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            value.add(Arrays.stream(SCANNER.nextLine().split(","))
+                    .map(input -> toInt(input.trim()))
+                    .collect(Collectors.toList()));
+        }
+        return value;
+    }
+
+    private static void printEmptyLine() {
+        System.out.println();
     }
 }

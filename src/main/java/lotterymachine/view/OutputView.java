@@ -1,24 +1,25 @@
 package lotterymachine.view;
 
 import lotterymachine.domain.LotteryTicket;
+import lotterymachine.domain.LotteryTickets;
 import lotterymachine.domain.WinningLotteryRank;
+import lotterymachine.domain.LotteryPurchaseCount;
 
-import java.util.List;
 import java.util.Map;
 
 public class OutputView {
     private static final int PROFIT_STANDARD = 1;
 
-    public static void printNumberOfTicket(int number) {
-        System.out.printf("%d개를 구매했습니다.%n", number);
-    }
-
-    public static void printLotteryTickets(List<LotteryTicket> lotteryTickets) {
+    public static void printLotteryTickets(LotteryTickets lotteryTickets) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (LotteryTicket lotteryTicket : lotteryTickets) {
-            stringBuilder.append(lotteryTicket.getNumbers()).append("\n");
+        for (LotteryTicket lotteryTicket : lotteryTickets.getLotteryTickets()) {
+            stringBuilder.append(lotteryTicket.getNumbers() + "\n");
         }
         System.out.println(stringBuilder);
+    }
+
+    public static void printLotteryPurchaseCount(LotteryPurchaseCount lotteryPurchaseCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lotteryPurchaseCount.getManualValue(), lotteryPurchaseCount.getAutoValue());
     }
 
     public static void printWinningLotteryResults(Map<WinningLotteryRank, Integer> lotteryTicketResults) {
@@ -32,6 +33,7 @@ public class OutputView {
     private static void printWinningLotteryResult(WinningLotteryRank winningLotteryRank, int number) {
         if (winningLotteryRank == WinningLotteryRank.BONUS_FIVE) {
             System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개%n", winningLotteryRank.getNumber(), winningLotteryRank.getPrice(), number);
+            return;
         }
         if (winningLotteryRank != WinningLotteryRank.ZERO) {
             System.out.printf("%d개 일치 (%d원)- %d개%n", winningLotteryRank.getNumber(), winningLotteryRank.getPrice(), number);
