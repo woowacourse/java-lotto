@@ -8,32 +8,28 @@ import java.util.stream.Collectors;
 
 public class LottosDto {
     private final List<LottoDto> lottoDtos;
-    private final Lottos lottos;
+    private final int size;
 
-    public LottosDto(List<LottoDto> lottoDtos, Lottos lottos) {
+    public LottosDto(List<LottoDto> lottoDtos, int size) {
         this.lottoDtos = new ArrayList<>(lottoDtos);
-        this.lottos = lottos;
+        this.size = size;
     }
 
     public List<LottoDto> getLottoDtos() {
         return lottoDtos;
     }
 
-    public Lottos getLottos() {
-        return lottos;
+    public int getSize() {
+        return size;
     }
 
-    public static LottosDto from(Lottos lottos) {
+    public static LottosDto from(Lottos lottos, int size) {
         return lottos.getLottos()
                 .stream()
                 .map(LottoDto::from)
                 .collect(Collectors.collectingAndThen(
                         Collectors.toUnmodifiableList(),
-                        lotto -> new LottosDto(lotto, lottos)
+                        lottoDtos -> new LottosDto(lottoDtos, size)
                 ));
-    }
-
-    public int size(){
-        return lottos.size();
     }
 }
