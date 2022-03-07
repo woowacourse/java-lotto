@@ -16,10 +16,11 @@ public class Lottos {
     }
 
     public static Lottos generateLottos(List<LottoGenerator> lottoGenerators) {
-        List<Lotto> lottos = lottoGenerators.stream()
+        return lottoGenerators.stream()
                 .map(LottoGenerator::generateLotto)
-                .collect(Collectors.toList());
-        return new Lottos(lottos);
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        Lottos::new));
     }
 
     public Statistic getWinningStatistics(WinningLotto winningNumber) {
