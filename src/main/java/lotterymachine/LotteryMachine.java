@@ -9,10 +9,9 @@ import lotterymachine.model.TicketMachine;
 import lotterymachine.model.WinningLottery;
 import lotterymachine.model.WinningType;
 import lotterymachine.vo.Count;
-import lotterymachine.vo.Money;
+import lotterymachine.vo.LotteryMoney;
 import lotterymachine.dto.LotteryResultDto;
 import lotterymachine.model.LotteryTickets;
-import lotterymachine.utils.LotteryCalculator;
 import lotterymachine.view.InputView;
 import lotterymachine.view.OutputView;
 
@@ -20,7 +19,7 @@ import java.util.List;
 
 public class LotteryMachine {
     public static void main(String[] args) {
-        Money amount = getInputAmount();
+        LotteryMoney amount = getInputAmount();
         Count numberOfTickets = getNumberOfTickets(amount);
         Count numberOfManualTickets = getNumberOfManualTickets(numberOfTickets);
         LotteryTickets purchasedLotteryTickets = purchaseLotteryTickets(numberOfTickets, numberOfManualTickets);
@@ -30,17 +29,17 @@ public class LotteryMachine {
         showResult(purchasedLotteryTickets, winningLottery);
     }
 
-    private static Money getInputAmount() {
+    private static LotteryMoney getInputAmount() {
         try {
-            return Money.fromInputAmount(InputView.getAmount());
+            return LotteryMoney.fromInputAmount(InputView.getAmount());
         } catch (RuntimeException exception) {
             OutputView.printException(exception.getMessage());
             return getInputAmount();
         }
     }
 
-    private static Count getNumberOfTickets(Money money) {
-        return LotteryCalculator.divideByLotteryPrice(money);
+    private static Count getNumberOfTickets(LotteryMoney money) {
+        return money.divideByLotteryPrice();
     }
 
     private static Count getNumberOfManualTickets(Count numberOfTickets) {

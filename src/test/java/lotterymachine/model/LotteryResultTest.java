@@ -1,19 +1,14 @@
 package lotterymachine.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lotterymachine.dto.LotteryResultDto;
-import lotterymachine.utils.LotteryCalculator;
 import lotterymachine.vo.Ball;
 import lotterymachine.vo.Count;
-import lotterymachine.vo.Money;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
