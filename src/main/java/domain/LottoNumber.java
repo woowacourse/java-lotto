@@ -20,6 +20,14 @@ public class LottoNumber {
         return lottoNumber;
     }
 
+    private void checkRange(int number) {
+
+        if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR);
+        }
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -35,14 +43,6 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
-    }
-
-    private void checkRange(int number) {
-
-        if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR);
-        }
-
     }
 
 
