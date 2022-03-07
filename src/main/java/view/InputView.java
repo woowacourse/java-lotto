@@ -55,9 +55,9 @@ public class InputView {
         return input();
     }
 
-    public int inputBonusBall() {
+    public String inputBonusBall() {
         System.out.println(BONUS_BALL_INPUT_MESSAGE);
-        return Integer.parseInt(input());
+        return input();
     }
 
     public int inputManualLottoCount() {

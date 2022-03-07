@@ -32,7 +32,7 @@ public class LottoController {
         return new Lottos(purchasableLottos);
     }
 
-    public WinningLotto determineWinningNumber(String winningNumbers, int bonusBall) {
+    public WinningLotto determineWinningNumber(String winningNumbers, String bonusBall) {
         Lotto winningLotto = LottoFactory.generateManualLotto(winningNumbers);
         return new WinningLotto(winningLotto, LottoNumber.valueOf(bonusBall));
     }

@@ -41,6 +41,11 @@ public class LottoNumber {
         return lottoNumber;
     }
 
+    public static LottoNumber valueOf(String numberValue) {
+        int number = Integer.parseInt(numberValue);
+        return valueOf(number);
+    }
+
     public static List<LottoNumber> values() {
         return new ArrayList<>(CACHE.values());
     }
