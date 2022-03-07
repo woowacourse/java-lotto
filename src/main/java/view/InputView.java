@@ -1,17 +1,8 @@
 package view;
 
-import domain.AutoLottoGenerator;
-import domain.Lotto;
-import domain.LottoGenerator;
-import domain.LottoNumber;
-import domain.ManualLottoGenerator;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import util.StringUtil;
 
 public class InputView {
