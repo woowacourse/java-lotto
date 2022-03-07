@@ -26,19 +26,11 @@ public class Money {
         }
     }
 
-    public void deductMoney() {
-        amount -= LOTTO_PRICE;
-    }
-
     public boolean isBiggerThanLottoPrice() {
         return amount >= LOTTO_PRICE;
     }
 
     public int calculatePurchasableLottoCount() {
         return amount / LOTTO_PRICE;
-    }
-
-    public int getAmount() {
-        return amount;
     }
 }

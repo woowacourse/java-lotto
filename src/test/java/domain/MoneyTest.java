@@ -28,32 +28,11 @@ class MoneyTest {
     }
 
     @Test
-    @DisplayName("돈이 잘 차감되는지 확인한다.")
-    void duductMoneyTest() {
-        int amount = 2000;
-        Money money = new Money(amount);
-
-        money.deductMoney();
-        int actual = money.getAmount();
-
-        assertThat(actual).isEqualTo(1000);
-    }
-
-    @Test
     @DisplayName("로또 금액보다 Money의 상태가 크면 True를 반환한다.")
     void isBiggerThanLottoPriceTest() {
         int amount = 2000;
         Money money = new Money(amount);
         assertThat(money.isBiggerThanLottoPrice()).isTrue();
-    }
-
-    @Test
-    @DisplayName("로또 금액보다 Money의 상태가 작으면 False를 반환한다.")
-    void isBiggerThanLottoPriceTest_false() {
-        int amount = 1000;
-        Money money = new Money(amount);
-        money.deductMoney();
-        assertThat(money.isBiggerThanLottoPrice()).isFalse();
     }
 
     @Test
