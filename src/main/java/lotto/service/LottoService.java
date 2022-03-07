@@ -3,7 +3,6 @@ package lotto.service;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
-import lotto.domain.LottoBuyMoney;
 import lotto.domain.Lottos;
 import lotto.domain.Statistics;
 import lotto.domain.WinnerLotto;
@@ -14,8 +13,7 @@ import lotto.domain.vo.LottoNumber;
 
 public class LottoService {
 
-    public Lottos createLottos(LottoBuyMoney lottoBuyMoney, int manualAmount, List<List<Integer>> manualNumbers) {
-        int autoLottoAmount = lottoBuyMoney.countAutoAmountByManualAmount(manualAmount);
+    public Lottos createLottos(int autoLottoAmount, List<List<Integer>> manualNumbers) {
         List<Lotto> lottos = createManualLottos(manualNumbers);
         lottos.addAll(createAutoLottos(autoLottoAmount));
         return new Lottos(lottos);

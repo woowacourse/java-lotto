@@ -7,10 +7,14 @@ import lotto.domain.vo.LottoNumber;
 
 public class LottosResult {
 
-    private List<List<Integer>> lottos;
+    private final List<List<Integer>> lottos;
+    private final int autoLottoAmount;
+    private final int manualAmount;
 
-    public LottosResult(List<Lotto> lottos) {
+    public LottosResult(List<Lotto> lottos, int autoLottoAmount, int manualAmount) {
         this.lottos = lottosToCollectNumbers(lottos);
+        this.autoLottoAmount = autoLottoAmount;
+        this.manualAmount = manualAmount;
     }
 
     private List<List<Integer>> lottosToCollectNumbers(List<Lotto> lottos) {
@@ -27,5 +31,13 @@ public class LottosResult {
 
     public List<List<Integer>> getLottos() {
         return lottos;
+    }
+
+    public int getAutoLottoAmount() {
+        return autoLottoAmount;
+    }
+
+    public int getManualAmount() {
+        return manualAmount;
     }
 }

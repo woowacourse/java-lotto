@@ -16,8 +16,10 @@ public class LottoController {
     }
 
     public LottosResult buyLotto(int inputMoney, int manualAmount, List<List<Integer>> manualNumbers) {
-        Lottos lottos = lottoService.createLottos(new LottoBuyMoney(inputMoney), manualAmount, manualNumbers);
-        return new LottosResult(lottos.getLottos());
+        LottoBuyMoney lottoBuyMoney = new LottoBuyMoney(inputMoney);
+        int autoLottoAmount = lottoBuyMoney.countAutoAmountByManualAmount(manualAmount);
+        Lottos lottos = lottoService.createLottos(autoLottoAmount, manualNumbers);
+        return new LottosResult(lottos.getLottos(), autoLottoAmount, manualAmount);
     }
 
     public Statistics match(List<List<Integer>> lottos, List<Integer> winnerNumbers, int bonusNumber) {

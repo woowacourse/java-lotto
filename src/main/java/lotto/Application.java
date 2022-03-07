@@ -17,13 +17,14 @@ public class Application {
         int inputMoney = InputView.inputMoney();
         int manualAmount = InputView.inputManualLottoAmount();
         List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualAmount);
-        LottosResult lottos = lottoController.buyLotto(inputMoney, manualAmount, manualLottoNumbers);
-        OutputView.printLottos(lottos.getLottos());
+        LottosResult lottosResult = lottoController.buyLotto(inputMoney, manualAmount, manualLottoNumbers);
+        OutputView.printLottosSize(lottosResult.getManualAmount(), lottosResult.getAutoLottoAmount());
+        OutputView.printLottos(lottosResult.getLottos());
 
         // 당첨 확인
         List<Integer> winnerNumbers = InputView.inputWinnerNumbers();
         int bonusNumber = InputView.inputBonusNumber();
-        Statistics statistics = lottoController.match(lottos.getLottos(), winnerNumbers, bonusNumber);
+        Statistics statistics = lottoController.match(lottosResult.getLottos(), winnerNumbers, bonusNumber);
         OutputView.printRanks(statistics.getResult());
         double profitRate = lottoController.getProfitRate(statistics, inputMoney);
         OutputView.printRate(profitRate);

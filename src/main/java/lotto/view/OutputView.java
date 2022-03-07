@@ -19,6 +19,11 @@ public class OutputView {
         }
     }
 
+    public static void printLottosSize(int manualLottoAmount, int autoLottoAmount) {
+        System.out.println(MessageFormat.format(
+            "수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", manualLottoAmount, autoLottoAmount));
+    }
+
     public static void printRanks(Map<Rank, Integer> result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
