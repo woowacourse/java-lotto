@@ -34,6 +34,12 @@ public class LottoLine {
         validateDistinct(numbers);
     }
 
+    private void validateLength(List<LottoNumber> numbers) {
+        if (numbers.size() != NUMBER_COUNT) {
+            throw new IllegalArgumentException(String.format("로또 번호의 개수는 %d 이어야 합니다.", NUMBER_COUNT));
+        }
+    }
+
     private void validateDistinct(List<LottoNumber> numbers) {
         if (!isDistinct(numbers)) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
@@ -44,22 +50,12 @@ public class LottoLine {
         return new HashSet<>(numbers).size() == NUMBER_COUNT;
     }
 
-    private void validateLength(List<LottoNumber> numbers) {
-        if (numbers.size() != NUMBER_COUNT) {
-            throw new IllegalArgumentException(String.format("로또 번호의 개수는 %d 이어야 합니다.", NUMBER_COUNT));
-        }
-    }
-
-    public int countMatch(LottoLine other) {
+    public int countMatchingNumbers(LottoLine other) {
         return Math.toIntExact(
             this.numbers.stream()
-            .filter(other::isMatch)
+            .filter(other::contains)
             .count()
         );
-    }
-
-    public boolean isMatch(LottoNumber number) {
-        return this.numbers.contains(number);
     }
 
     public boolean contains(LottoNumber bonusBall) {

@@ -36,8 +36,8 @@ public class WinningTicket {
     }
 
     public LottoRank compareLine(LottoLine lottoLine) {
-        int matchCount = lottoLine.countMatch(winningLine);
-        boolean isBonusMatch = lottoLine.isMatch(bonusBall);
+        int matchCount = lottoLine.countMatchingNumbers(winningLine);
+        boolean isBonusMatch = lottoLine.contains(bonusBall);
         return LottoRank.find(matchCount, isBonusMatch);
     }
 }
