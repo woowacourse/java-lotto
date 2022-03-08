@@ -6,13 +6,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.vo.Number;
+import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottosTest {
 
-    private static final Lotto LOTTO = new Lotto(givenNumbers(1, 2, 3, 4, 5, 6));
+    private static final Lotto LOTTO = Lotto.of(givenNumbers(1, 2, 3, 4, 5, 6));
 
     @Test
     @DisplayName("로또 개수는 1개 이상이어야 한다.")
@@ -23,7 +23,7 @@ public class LottosTest {
     }
 
     @Test
-    @DisplayName("로또 개수는 1개 이상이어야 한다.")
+    @DisplayName("로또가 한개라도 없다면 Lottos를 생성시 예외가 발생한다.")
     void throwExceptionWhenEmptyLottos() {
         assertThatIllegalArgumentException()
             .isThrownBy(() -> new Lottos(Collections.emptyList()))
@@ -34,15 +34,15 @@ public class LottosTest {
     @DisplayName("로또들의 등수들을 반환한다.")
     void findRanks() {
         Lottos lottos = new Lottos(List.of(
-            new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)),
-            new Lotto(givenNumbers(1, 2, 3, 4, 5, 7)),
-            new Lotto(givenNumbers(1, 2, 3, 4, 5, 8)),
-            new Lotto(givenNumbers(1, 2, 3, 4, 9, 10)),
-            new Lotto(givenNumbers(1, 2, 3, 9, 10, 11)),
-            new Lotto(givenNumbers(11, 12, 13, 14, 15, 16)))
+            Lotto.of(givenNumbers(1, 2, 3, 4, 5, 6)),
+            Lotto.of(givenNumbers(1, 2, 3, 4, 5, 7)),
+            Lotto.of(givenNumbers(1, 2, 3, 4, 5, 8)),
+            Lotto.of(givenNumbers(1, 2, 3, 4, 9, 10)),
+            Lotto.of(givenNumbers(1, 2, 3, 9, 10, 11)),
+            Lotto.of(givenNumbers(11, 12, 13, 14, 15, 16)))
         );
 
-        List<Rank> ranks = lottos.match(new WinnerLotto(LOTTO, new Number(7)));
+        List<Rank> ranks = lottos.match(new WinnerLotto(LOTTO, LottoNumber.of(7)));
 
         assertThat(ranks).containsExactly(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH, Rank.NONE);
     }
@@ -67,9 +67,9 @@ public class LottosTest {
         assertThat(lottos.getLottos().size()).isEqualTo(1);
     }
 
-    private static List<Number> givenNumbers(int... numbers) {
+    private static List<LottoNumber> givenNumbers(int... numbers) {
         return Arrays.stream(numbers)
-            .mapToObj(Number::new)
+            .mapToObj(LottoNumber::of)
             .collect(Collectors.toList());
     }
 }

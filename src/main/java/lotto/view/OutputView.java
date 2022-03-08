@@ -1,72 +1,55 @@
 package lotto.view;
 
 import java.io.PrintStream;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.MessageFormat;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
-import lotto.domain.vo.Money;
-import lotto.domain.vo.Number;
-import lotto.domain.Rank;
+import lotto.dto.result.LottosResult;
+import lotto.dto.result.RankResult;
+import lotto.dto.result.StatisticsResult;
 
 public class OutputView {
 
-    private static final String DELIMITER = ",";
-    private static final int DECIMAL_PLACE = 2;
+    private static final List<String> RANKS = List.of("FIFTH", "FOURTH", "THIRD", "SECOND", "FIRST");
+    private static final String SECOND_RANK = "SECOND";
 
-    public static void printLottos(List<Lotto> lottos) {
-        printLottosSize(lottos);
-        printLottoNumbers(lottos);
+    private static final String LOTTO_NUMBER_DELIMITER = ", ";
+
+    public static void printLottos(LottosResult lottos) {
+        printLottosSize(lottos.getManualAmount(), lottos.getAutoLottoAmount());
+        for (List<Integer> lotto : lottos.getLottos()) {
+            Collections.sort(lotto);
+            System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(lotto)));
+        }
     }
 
-    public static void printRanks(List<Rank> ranks) {
+    public static void printRanks(StatisticsResult statisticsResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-
-        for (Rank rank : List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST)) {
-            printRank(ranks, rank);
+        for (String rank : RANKS) {
+            printRank(rank, statisticsResult.getStatistics().get(rank));
         }
+        System.out.printf("총 수익률은 %.2f 입니다.", statisticsResult.getProfitRate());
     }
 
-    public static void printRate(Money totalReward, Money inputMoney) {
-        System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", measureRatio(totalReward, inputMoney)));
+    private static void printLottosSize(int manualLottoAmount, int autoLottoAmount) {
+        System.out.println(MessageFormat.format(
+            "수동으로 {0}장, 자동으로 {1}개를 구매했습니다.", manualLottoAmount, autoLottoAmount));
     }
 
-    private static BigDecimal measureRatio(Money totalReward, Money inputMoney) {
-        return totalReward.divide(inputMoney, DECIMAL_PLACE, RoundingMode.DOWN);
-    }
-
-    private static void printLottosSize(List<Lotto> lottos) {
-        System.out.println(MessageFormat.format("{0}개를 구매했습니다.", lottos.size()));
-    }
-
-    private static void printLottoNumbers(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            List<Number> numbers = lotto.getNumbers();
-            numbers.sort(Comparator.comparingInt(Number::getNumber));
-            System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(numbers)));
-        }
-    }
-
-    private static void printRank(List<Rank> ranks, Rank rank) {
-        int matchCount = rank.getMatchCount();
-        long reward = rank.getReward().getAmount();
-        int rewardCount = rank.findRewardCount(ranks);
-
-        if (rank == Rank.SECOND) {
-            printSecondRank(matchCount, reward, rewardCount);
+    private static void printRank(String rank, RankResult statistics) {
+        if (rank.equals(SECOND_RANK)) {
+            printSecondRank(statistics.getMatchCount(), statistics.getReward(), statistics.getRewardCount());
             return;
         }
-        printOtherRank(matchCount, reward, rewardCount);
+        printOtherRank(statistics.getMatchCount(), statistics.getReward(), statistics.getRewardCount());
     }
 
-    private static String joinWithDelimiter(List<Number> numbers) {
-        return numbers.stream()
-            .map(number -> String.valueOf(number.getNumber()))
-            .collect(Collectors.joining(DELIMITER));
+    private static String joinWithDelimiter(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+            .map(String::valueOf)
+            .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
     }
 
     private static void printSecondRank(int matchCount, long reward, int rewardCount) {

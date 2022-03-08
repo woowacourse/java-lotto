@@ -2,37 +2,31 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.vo.Money;
+import java.util.function.BiPredicate;
 
 public enum Rank {
-    FIRST(6, new Money(2_000_000_000L)),
-    SECOND(5, new Money(30_000_000L)),
-    THIRD(5, new Money(1_500_000L)),
-    FOURTH(4, new Money(50_000L)),
-    FIFTH(3, new Money(5_000L)),
-    NONE(0, Money.ZERO);
+    FIRST(6, 2_000_000_000L, (matchCount, matchBonus) -> matchCount == 6),
+    SECOND(5, 30_000_000L, (matchCount, matchBonus) -> matchCount == 5 && matchBonus),
+    THIRD(5, 1_500_000L, (matchCount, matchBonus) -> matchCount == 5 && !matchBonus),
+    FOURTH(4, 50_000L, (matchCount, matchBonus) -> matchCount == 4),
+    FIFTH(3, 5_000L, (matchCount, matchBonus) -> matchCount == 3),
+    NONE(0, 0, (matchCount, matchBonus) -> matchCount < 3);
 
     private final int matchCount;
-    private final Money reward;
+    private final long reward;
+    private final BiPredicate<Integer, Boolean> match;
 
-    Rank(int matchCount, Money reward) {
+    Rank(int matchCount, long reward, BiPredicate<Integer, Boolean> match) {
         this.matchCount = matchCount;
+        this.match = match;
         this.reward = reward;
     }
 
     public static Rank find(int matchCount, boolean matchBonus) {
-        if (isSecond(matchCount, matchBonus)) {
-            return SECOND;
-        }
-        return findOtherRanks(matchCount);
-    }
-
-    public static Money calculateReward(List<Rank> ranks) {
-        Money reward = Money.ZERO;
-        for (Rank rank : ranks) {
-            reward = reward.plus(rank.reward);
-        }
-        return reward;
+        return Arrays.stream(Rank.values())
+            .filter(rank -> rank.match.test(matchCount, matchBonus))
+            .findAny()
+            .orElse(NONE);
     }
 
     public int findRewardCount(List<Rank> ranks) {
@@ -45,19 +39,7 @@ public enum Rank {
         return this.matchCount;
     }
 
-    public Money getReward() {
+    public long getReward() {
         return this.reward;
-    }
-
-    private static boolean isSecond(int matchCount, boolean matchBonus) {
-        return SECOND.matchCount == matchCount && matchBonus;
-    }
-
-    private static Rank findOtherRanks(int matchCount) {
-        return Arrays.stream(Rank.values())
-            .filter(rank -> matchCount == rank.matchCount)
-            .filter(rank -> rank != SECOND)
-            .findAny()
-            .orElse(NONE);
     }
 }
