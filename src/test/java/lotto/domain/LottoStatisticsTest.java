@@ -14,8 +14,9 @@ public class LottoStatisticsTest {
         // given
         List<LottoRank> ranks = List.of(LottoRank.values());
         // when
-        LottoStatistics statistics =
-            new LottoStatistics(ranks, new Money(LottoRank.values().length * LottoLine.PRICE));
+        LottoStatistics statistics = LottoStatistics.fromComparedInformation(
+            ranks, new Money(LottoRank.values().length * LottoLine.PRICE)
+        );
         // then
         Assertions.assertThat(statistics).isNotNull();
     }

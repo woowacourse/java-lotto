@@ -69,8 +69,8 @@ public class Application {
             String inputWinningNumber = inputView.inputWinningNumber();
             String inputBonusBall = inputView.inputBonusBall();
             WinningTicket winningTicket = WinningTicket.from(inputWinningNumber, inputBonusBall);
-            LottoStatistics statistics =
-                new LottoStatistics(purchasedLottoTickets.compareWinningTicket(winningTicket), purchasedLottoTickets.sumMoney());
+            LottoStatistics statistics = LottoStatistics.fromComparedInformation(
+                purchasedLottoTickets.compareWinningTicket(winningTicket), purchasedLottoTickets.sumMoney());
             outputView.outputStatistics(statistics);
         } catch (IllegalArgumentException e) {
             outputView.outputError(e);

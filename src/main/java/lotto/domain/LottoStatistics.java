@@ -18,8 +18,8 @@ public class LottoStatistics {
         this.profitRate = profitRate;
     }
 
-    public LottoStatistics(List<LottoRank> ranks, Money purchasedMoney) {
-        this(countFrequency(ranks),
+    public static LottoStatistics fromComparedInformation(List<LottoRank> ranks, Money purchasedMoney) {
+        return new LottoStatistics(countFrequency(ranks),
             calculateProfit(ranks, purchasedMoney));
     }
 
