@@ -36,6 +36,13 @@ public class LottoTicket {
             .collect(Collectors.toList());
     }
 
+    public List<LottoRank> compareWinningTicket(WinningTicket winningTicket) {
+        return this.lines
+            .stream()
+            .map(winningTicket::compareLine)
+            .collect(Collectors.toList());
+    }
+
     public List<LottoLine> getLines() {
         return lines;
     }

@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import lotto.domain.generator.StringInputNumberGenerator;
 
 public class WinningTicket {
@@ -26,13 +23,6 @@ public class WinningTicket {
         if (winningTicket.contains(bonusBall)) {
             throw new IllegalArgumentException("보너스볼은 당첨 번호와 중복될 수 없습니다.");
         }
-    }
-
-    public List<LottoRank> compareTicket(LottoTicket ticket) {
-        return ticket.getLines()
-            .stream()
-            .map(this::compareLine)
-            .collect(Collectors.toList());
     }
 
     public LottoRank compareLine(LottoLine lottoLine) {

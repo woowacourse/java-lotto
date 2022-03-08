@@ -31,8 +31,8 @@ public class PurchasedLottoTickets {
 
     public List<LottoRank> compareWinningTicket(WinningTicket winningTicket) {
         return Stream.concat(
-            winningTicket.compareTicket(manualTicket).stream(),
-            winningTicket.compareTicket(autoTicket).stream()
+            manualTicket.compareWinningTicket(winningTicket).stream(),
+            autoTicket.compareWinningTicket(winningTicket).stream()
         ).collect(toList());
     }
 
