@@ -48,6 +48,10 @@ public enum WinningType {
         return this.number == number;
     }
 
+    public double multiply(Count count) {
+        return (double) this.price * count.getNumber();
+    }
+
     public int getNumber() {
         return number;
     }

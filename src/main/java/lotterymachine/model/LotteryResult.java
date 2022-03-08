@@ -31,7 +31,7 @@ public class LotteryResult {
     private double getWinningAmount(Map<WinningType, Count> ticketsResult) {
         return ticketsResult.entrySet()
                 .stream()
-                .mapToDouble(ticketResult -> ticketResult.getKey().getPrice() * ticketResult.getValue().getNumber())
+                .mapToDouble(ticketResult -> ticketResult.getKey().multiply(ticketResult.getValue()))
                 .sum();
     }
 }
