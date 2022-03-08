@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public enum Rank {
 	NOTHING(0, 0, false),
-	FIFTH(5000, 3, false),
-	FOURTH(50000, 4, false),
-	THIRD(150000, 5, false),
-	SECOND(30000000, 5, true),
-	FIRST(2000000000, 6, false);
+	FIFTH(5_000, 3, false),
+	FOURTH(50_000, 4, false),
+	THIRD(150_000, 5, false),
+	SECOND(30_000_000, 5, true),
+	FIRST(2_000_000_000, 6, false);
 
 	private final int money;
 	private final int match;
@@ -20,16 +20,12 @@ public enum Rank {
 		this.bonus = bonus;
 	}
 
-	public static Rank of(int target, boolean bonus) {
+	public static Rank of(int targetMatch, boolean bonus) {
 		return Arrays.stream(Rank.values())
-			.filter(rank -> rank.isSameRank(target))
+			.filter(rank -> rank.match == targetMatch)
 			.filter(rank -> rank != Rank.THIRD || !bonus)
 			.findFirst()
 			.orElse(NOTHING);
-	}
-
-	private boolean isSameRank(int matchCount) {
-		return this.match == matchCount;
 	}
 
 	public boolean isNothing() {
@@ -52,7 +48,7 @@ public enum Rank {
 		return match;
 	}
 
-	public Rank getRank() {
-		return this;
+	public boolean getBonus() {
+		return bonus;
 	}
 }

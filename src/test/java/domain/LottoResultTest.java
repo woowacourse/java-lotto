@@ -2,8 +2,6 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +9,8 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import service.LottoService;
 
 public class LottoResultTest {
 
@@ -21,11 +21,12 @@ public class LottoResultTest {
 		List<Lotto> lotto = Arrays.asList(Lotto.of(new String[] {"8", "9", "11", "3", "2", "1"}),
 			Lotto.of(new String[] {"8", "9", "11", "3", "2", "1"}));
 		Lotto winningLotto = Lotto.of(new String[] {"6", "5", "4", "3", "2", "1"});
-		LottoNumber bonusNumber = new LottoNumber("7");
+		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		Map<Rank, Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
-		LottoResult lottoResult = new LottoResult(ranks);
+		Map<Rank,Long> result = new LottoService().createLottoResult(lottos,
+			new WinningLotto(winningLotto, bonusNumber)).toRank();
+		LottoResult lottoResult = new LottoResult(result);
 		Payment payment = new Payment("5000");
 
 		double profitRate = lottoResult.calculateProfitRate(payment);

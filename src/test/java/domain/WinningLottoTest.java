@@ -12,7 +12,7 @@ public class WinningLottoTest {
 	@DisplayName("보너스 숫자가 로또 번호랑 중북되지 않는다")
 	@Test
 	void duplicate_success() {
-		LottoNumber bonusNumber = new LottoNumber("7");
+		LottoNumber bonusNumber = LottoNumber.of(7);
 		assertThatCode(() -> new WinningLotto(lotto, bonusNumber))
 			.doesNotThrowAnyException();
 	}
@@ -20,7 +20,7 @@ public class WinningLottoTest {
 	@DisplayName("보너스 숫자가 로또 번호랑 중북된다")
 	@Test
 	void duplicate_fail() {
-		LottoNumber bonusNumber = new LottoNumber("6");
+		LottoNumber bonusNumber = LottoNumber.of(6);
 		assertThatThrownBy(() -> new WinningLotto(lotto, bonusNumber))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
@@ -30,7 +30,7 @@ public class WinningLottoTest {
 	void calculate_rank() {
 		//given
 		WinningLotto winningLotto = new WinningLotto(Lotto.of(new String[] {"9", "5", "4", "3", "2", "1"}),
-			new LottoNumber("6"));
+			LottoNumber.of(6));
 		//when
 		Rank rank = winningLotto.calculateRank(lotto);
 		//then

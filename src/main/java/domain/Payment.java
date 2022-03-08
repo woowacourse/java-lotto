@@ -3,6 +3,7 @@ package domain;
 public class Payment {
 	private static final int LOTTO_PRICE = 1000;
 	private static final int PAYMENT_LIMIT_PRICE = 100000;
+
 	private final int payment;
 
 	public Payment(int payment) {
@@ -44,5 +45,9 @@ public class Payment {
 
 	public double calculateDivision(int divisionValue) {
 		return (double)divisionValue / payment;
+	}
+
+	public boolean canBuy(int quantity) {
+		return calculateLottoCount() >= quantity;
 	}
 }

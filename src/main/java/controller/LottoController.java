@@ -1,24 +1,35 @@
 package controller;
 
-import domain.LottoResult;
+import java.util.List;
+import java.util.Map;
+
+import controller.dto.BuyingInfoDto;
+import controller.dto.LottoResultDto;
+import domain.Lotto;
+import domain.LottoNumber;
 import domain.Lottos;
-import domain.Payment;
+import domain.Rank;
 import domain.WinningLotto;
-import view.InputConvertor;
-import view.OutputView;
+import service.LottoService;
 
 public class LottoController {
 
-	public void run() {
-		Payment payment = InputConvertor.createPayment();
-		int lottoCount = payment.calculateLottoCount();
-		OutputView.printLottoCount(lottoCount);
+	private final LottoService lottoService;
 
-		Lottos lottos = InputConvertor.createLottos(lottoCount);
-		OutputView.printLottos(lottos);
+	public LottoController(LottoService lottoService) {
+		this.lottoService = lottoService;
+	}
 
-		WinningLotto winningLotto = InputConvertor.createWinningLotto();
+	public BuyingInfoDto buy(String paymentValue, int countValue, List<String[]> manualLottosValue) {
+		return lottoService.buy(paymentValue, countValue, manualLottosValue);
+	}
 
-		OutputView.printLottoResult(new LottoResult(lottos.countRank(winningLotto)), payment);
+	public LottoResultDto showLottoResult(List<Lotto> totalLotto, String[] lotto, int bonus) {
+		WinningLotto winningLotto = lottoService.createWinningLotto(lotto, bonus);
+		return lottoService.createLottoResult(lottoService.toLottos(totalLotto), winningLotto);
+	}
+
+	public double showProfitRate(Map<Rank, Long> ranks, String payment) {
+		return lottoService.createProfitRate(ranks, payment);
 	}
 }

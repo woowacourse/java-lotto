@@ -1,13 +1,11 @@
 package view;
 
-import java.util.Map;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import domain.Lotto;
-import domain.LottoResult;
-import domain.Lottos;
-import domain.Payment;
-import domain.Rank;
+import controller.dto.BuyingInfoDto;
+import controller.dto.LottoDto;
+import controller.dto.RankDto;
 
 public class OutputView {
 	private static final String ERROR_MESSAGE = "[ERROR] ";
@@ -23,39 +21,39 @@ public class OutputView {
 		System.out.println(ERROR_MESSAGE + errorMessage);
 	}
 
-	public static void printLottoCount(int lottoCount) {
-		System.out.println(String.format("%d개를 구매했습니다.", lottoCount));
+	public static void printLottoCount(BuyingInfoDto infoDto) {
+		System.out.println(
+			String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
+				infoDto.getManualLottoCount(), infoDto.getAutoLottoCount()));
 	}
 
-	public static void printLottos(Lottos lottos) {
-		lottos.getLottos().stream()
+	public static void printLottos(List<LottoDto> lottos) {
+		lottos.stream()
 			.forEach(OutputView::printLotto);
 		System.out.println();
 	}
 
-	private static void printLotto(Lotto lotto) {
+	private static void printLotto(LottoDto lotto) {
 		String format = "[%s]";
 		System.out.println(String.format(format, lotto.getLotto().stream()
-			.map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
+			.map(String::valueOf)
 			.collect(Collectors.joining(", "))));
 	}
 
-	public static void printLottoResult(LottoResult lottoResult, Payment payment) {
-		Map<Rank, Long> ranks = lottoResult.getRanks();
+	public static void printLottoResult(List<RankDto> ranks) {
 		System.out.println("\n당첨 통계\n---------");
 		ranks.forEach(OutputView::printRankCount);
-		printProfitRate(lottoResult.calculateProfitRate(payment));
 	}
 
-	private static void printRankCount(Rank rank, Long count) {
+	private static void printRankCount(RankDto rankDto) {
 		String format = "%d개 일치 (%d원)- %d개";
-		if (rank.isBonus()) {
+		if (rankDto.isBonus()) {
 			format = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
 		}
-		System.out.println(String.format(format, rank.getMatch(), rank.getMoney(), count));
+		System.out.println(String.format(format, rankDto.getMatch(), rankDto.getMoney(), rankDto.getAmount()));
 	}
 
-	private static void printProfitRate(double profitRate) {
+	public static void printProfitRate(double profitRate) {
 		String format = "총 수익률은 %.2f입니다.";
 		System.out.println(String.format(format, profitRate));
 	}

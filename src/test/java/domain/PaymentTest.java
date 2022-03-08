@@ -6,13 +6,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class PaymentTest {
 
 	@DisplayName("구입 금액이 1000원 미만")
 	@Test
 	void range_fail() {
-		assertThatThrownBy(() -> new Payment("999"))
+		assertThatThrownBy(() -> new Payment(999))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("1000원 이상 입력해주세요!");
 	}
@@ -20,14 +22,14 @@ public class PaymentTest {
 	@DisplayName("구입 금액이 1000원 이상 성공")
 	@Test
 	void range_success() {
-		assertThatCode(() -> new Payment("1001"))
+		assertThatCode(() -> new Payment(1001))
 			.doesNotThrowAnyException();
 	}
 
 	@DisplayName("음수인 경우 실패")
 	@Test
 	void input_negative() {
-		assertThatThrownBy(() -> new Payment("-1000"))
+		assertThatThrownBy(() -> new Payment(-1000))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("음수는 불가능합니다.");
 	}
@@ -35,7 +37,7 @@ public class PaymentTest {
 	@DisplayName("숫자인 경우 성공")
 	@Test
 	void input_success() {
-		assertThatCode(() -> new Payment("1000"))
+		assertThatCode(() -> new Payment(1000))
 			.doesNotThrowAnyException();
 	}
 
@@ -57,7 +59,7 @@ public class PaymentTest {
 	@DisplayName("구입금액 10만원 초과 실패")
 	@Test
 	void range_max() {
-		assertThatThrownBy(() -> new Payment("100001"))
+		assertThatThrownBy(() -> new Payment(100001))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("로또는 한사람 당 10만원씩만 살 수 있습니다.");
 	}
@@ -65,16 +67,26 @@ public class PaymentTest {
 	@DisplayName("로또 생성 횟수")
 	@Test
 	void calculate_lotto_count() {
-		assertThat(new Payment("14000").calculateLottoCount()).isEqualTo(14);
+		assertThat(new Payment(14000).calculateLottoCount()).isEqualTo(14);
 	}
 
 	@DisplayName("수익률 계산")
 	@Test
 	void calculate_profit_rate() {
-		Payment payment = new Payment("5000");
+		Payment payment = new Payment(5000);
 
 		double profitRate = payment.calculateDivision(10000);
 
 		assertThat(profitRate).isEqualTo(2.0);
+	}
+
+	@DisplayName("현재 금액에서 구입 가능한지 확인")
+	@ParameterizedTest
+	@CsvSource(value = {"4:true", "6:false"}, delimiter = ':')
+	void can_buy(int quantity, boolean expected) {
+		//given, when
+		Payment payment = new Payment(5000);
+		//then
+		assertThat(payment.canBuy(quantity)).isEqualTo(expected);
 	}
 }
