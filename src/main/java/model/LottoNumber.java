@@ -1,36 +1,41 @@
 package model;
 
-import exception.InvalidRangeLottoNumberException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import util.NumberFormatStringParser;
 
 public class LottoNumber {
-    private static final int MINIMUM_LOTTO_NUMBER = 1;
-    private static final int MAXIMUM_LOTTO_NUMBER = 45;
+    public static final int MINIMUM_LOTTO_NUMBER = 1;
+    public static final int MAXIMUM_LOTTO_NUMBER = 45;
+
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBERS = new HashMap<>();
+
+    static {
+        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
+            LOTTO_NUMBERS.put(i, new LottoNumber(i));
+        }
+    }
+
     private final int lottoNumber;
 
-    public LottoNumber(int number) {
-        if (isInvalidRange(number)) {
-            throw new InvalidRangeLottoNumberException();
-        }
+    private LottoNumber(int number) {
+        checkRange(number);
         this.lottoNumber = number;
     }
 
-    public static LottoNumber parse(String text) {
-        int number = NumberFormatStringParser.parse(text);
-        return new LottoNumber(number);
+    private static void checkRange(int number) {
+        if (isInvalidRange(number)) {
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이여야 합니다.");
+        }
     }
 
-    public static List<LottoNumber> convertAll(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
-
-    private boolean isInvalidRange(int number) {
+    private static boolean isInvalidRange(int number) {
         return MINIMUM_LOTTO_NUMBER > number || number > MAXIMUM_LOTTO_NUMBER;
+    }
+
+    public static LottoNumber of(int number) {
+        checkRange(number);
+        return LOTTO_NUMBERS.get(number);
     }
 
     public int intValue() {

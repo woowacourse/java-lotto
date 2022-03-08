@@ -1,10 +1,11 @@
 package model;
 
-import exception.DuplicatedLottoNumbersException;
-import exception.InvalidLottoNumbersSizeException;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_SIZE = 6;
@@ -12,40 +13,42 @@ public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
     private Lotto(Set<LottoNumber> lottoNumbers) {
-        checkLottoNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    public static Lotto of(List<LottoNumber> numbers) {
-        if (isDuplicated(numbers)) {
-            throw new DuplicatedLottoNumbersException();
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException("로또 번호 갯수는 6개여야 합니다.");
         }
-        return new Lotto(Set.copyOf(numbers));
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
-    private static boolean isDuplicated(List<LottoNumber> numbers) {
+    public static Lotto of(List<Integer> numbers) {
+        if (isDuplicated(numbers)) {
+            throw new IllegalArgumentException("중복된 로또 번호는 입력할 수 없습니다.");
+        }
+        Set<LottoNumber> lottoNumbers = convertAll(numbers);
+        return new Lotto(lottoNumbers);
+    }
+
+    private static boolean isDuplicated(List<Integer> numbers) {
         return numbers.size() != Set.copyOf(numbers).size();
     }
 
-    private void checkLottoNumbers(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new InvalidLottoNumbersSizeException();
-        }
+    private static Set<LottoNumber> convertAll(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
     }
 
     public boolean contains(LottoNumber number) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.equals(number));
+        return lottoNumbers.contains(number);
     }
 
     public int getMatchedNumberCountWith(Lotto otherLotto) {
         return (int) this.lottoNumbers.stream()
-                .filter(number -> otherLotto.contains(number))
+                .filter(otherLotto::contains)
                 .count();
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return new HashSet<>(lottoNumbers);
     }
 
     @Override
