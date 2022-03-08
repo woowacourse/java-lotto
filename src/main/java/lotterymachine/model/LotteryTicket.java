@@ -19,6 +19,10 @@ public class LotteryTicket {
         validateDuplication(balls);
     }
 
+    public static LotteryTicket from(List<Integer> numbers) {
+        return new LotteryTicket(Ball.getBalls(numbers));
+    }
+
     public int countMatchingBalls(LotteryTicket ticket) {
         return (int) this.balls.stream()
                 .filter(ticket.balls::contains)

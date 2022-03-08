@@ -11,7 +11,7 @@ public class WinningLottery {
 
     public WinningLottery(List<Integer> numbers, int bonusBall) {
         validateBonusNumber(numbers, bonusBall);
-        this.winningTicket = new LotteryTicket(Ball.getBalls(numbers));
+        this.winningTicket = LotteryTicket.from(numbers);
         this.bonusBall = Ball.from(bonusBall);
     }
 
