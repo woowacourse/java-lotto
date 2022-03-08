@@ -1,63 +1,46 @@
 import controller.LottoController;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
-import model.Budget;
-import model.IssuedLottos;
-import model.LottoNumber;
-import model.LottoResult;
-import model.ManualLottoCount;
-import model.WinningLottoNumbers;
+import java.util.stream.IntStream;
+import service.LottoService;
+import service.dto.BudgetDto;
+import service.dto.LottoDto;
+import service.dto.LottoResultDto;
+import service.dto.ManualLottoCountDto;
+import service.dto.ManualLottosRequest;
+import service.dto.PurchasedLottosDto;
+import service.dto.WinningLottoNumbersDto;
 import view.InputView;
 import view.OutputView;
 
 public class Application {
 
     public static void main(String[] args) {
-        InputView.runUntilValid(Application::run);
+        LottoController lottoController = new LottoController(new LottoService());
+        InputView.runUntilValid(() -> requestPurchase(lottoController));
+        InputView.runUntilValid(() -> requestMatch(lottoController));
     }
 
-    public static void run() {
-        LottoController controller = new LottoController();
-
-        Budget budget = controller.getBudget(InputView.inputBudget());
-        IssuedLottos allLottos = issueLottos(controller, budget);
-
-        WinningLottoNumbers winningLottoNumbers = controller.getWinningLottoNumbers(InputView.inputWinningLotto(),
-                InputView.inputBonusNumber());
-        LottoResult result = controller.getResultOf(allLottos, winningLottoNumbers);
-        OutputView.printResult(result.getResultMap(), result.getProfitRate(budget));
+    private static void requestPurchase(LottoController lottoController) {
+        BudgetDto budgetDto = new BudgetDto(InputView.inputBudget());
+        ManualLottoCountDto manualLottoCountDto = new ManualLottoCountDto(InputView.inputManualCount());
+        ManualLottosRequest manualLottosRequest = new ManualLottosRequest(getManualLottoNumbers(manualLottoCountDto));
+        PurchasedLottosDto purchasedLottosDto = lottoController.issueLottos(budgetDto, manualLottoCountDto,
+                manualLottosRequest);
+        OutputView.printIssuedLottos(purchasedLottosDto);
     }
 
-    private static IssuedLottos issueLottos(LottoController controller, Budget budget) {
-        ManualLottoCount manualCount = controller.getManualCount(InputView.inputManualCount(), budget);
+    private static List<List<Integer>> getManualLottoNumbers(ManualLottoCountDto manualCount) {
         InputView.printManualLottoMessage();
-        IssuedLottos manualLottos = controller.getManualLottos(inputManualLottos(manualCount));
-        IssuedLottos autoLottos = controller.getAutoLottos(budget, manualLottos);
-        IssuedLottos allLottos = controller.getAllLottos(manualLottos, autoLottos);
-        OutputView.printIssuedLottos(manualLottos.getLottosCount(), autoLottos.getLottosCount(),
-                getNumbersOf(allLottos));
-        return allLottos;
-    }
-
-    private static List<List<String>> inputManualLottos(ManualLottoCount manualCount) {
-        List<List<String>> manualLottosTokens = new ArrayList<>();
-        for (int i = 0; !manualCount.isSameCount(i); i++) {
-            manualLottosTokens.add(InputView.inputLottos());
-        }
-        return manualLottosTokens;
-    }
-
-    private static List<Set<Integer>> getNumbersOf(IssuedLottos issuedLottos) {
-        return issuedLottos.getLottos().stream()
-                .map(lotto -> toInts(lotto.getLottoNumbers()))
+        return IntStream.range(0, manualCount.getCount())
+                .mapToObj(i -> InputView.inputLottos())
                 .collect(Collectors.toList());
     }
 
-    private static Set<Integer> toInts(Set<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
-                .map(LottoNumber::intValue)
-                .collect(Collectors.toSet());
+    private static void requestMatch(LottoController lottoController) {
+        WinningLottoNumbersDto winningLottoNumbersDto = new WinningLottoNumbersDto(
+                new LottoDto(InputView.inputWinningLotto()), InputView.inputBonusNumber());
+        LottoResultDto lottoResultDto = lottoController.matchLottos(winningLottoNumbersDto);
+        OutputView.printResult(lottoResultDto);
     }
 }

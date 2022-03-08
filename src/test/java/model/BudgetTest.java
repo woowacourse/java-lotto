@@ -29,13 +29,6 @@ public class BudgetTest {
                 .hasMessage("입력금은 반드시 양수여야 합니다.");
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"1000", "10000"})
-    @DisplayName("입력금 문자열 파싱 테스트")
-    void parseString(String text) {
-        assertThat(Budget.parse(text)).isEqualTo(new Budget(Integer.parseInt(text)));
-    }
-
     @Test
     @DisplayName("수익률 계산 테스트")
     void getProfitRate() {

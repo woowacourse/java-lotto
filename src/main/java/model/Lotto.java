@@ -36,13 +36,6 @@ public class Lotto {
                 .collect(Collectors.toSet());
     }
 
-    public static Lotto parse(List<String> tokens) {
-        List<Integer> numbers = tokens.stream()
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-        return Lotto.of(numbers);
-    }
-
     public boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }

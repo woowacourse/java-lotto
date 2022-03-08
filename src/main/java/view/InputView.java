@@ -50,9 +50,9 @@ public class InputView {
         return Stream.of(options).anyMatch(option -> option.equals(value));
     }
 
-    public static String inputBudget() {
+    public static int inputBudget() {
         System.out.println("구입금액을 입력해 주세요.");
-        return SCANNER.nextLine();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
     private static List<String> splitAndTrim(String text) {
@@ -69,26 +69,28 @@ public class InputView {
         return Arrays.asList(text.split(DELIMITER, INCLUDE_EMPTY));
     }
 
-    public static String inputManualCount() {
+    public static Integer inputManualCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return SCANNER.nextLine();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
     public static void printManualLottoMessage() {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    public static List<String> inputLottos() {
-        return splitAndTrim(SCANNER.nextLine());
+    public static List<Integer> inputLottos() {
+        return splitAndTrim(SCANNER.nextLine()).stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
-    public static List<String> inputWinningLotto() {
+    public static List<Integer> inputWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
         return inputLottos();
     }
 
-    public static String inputBonusNumber() {
+    public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return SCANNER.nextLine();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 }

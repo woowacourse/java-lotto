@@ -38,10 +38,6 @@ public class LottoNumber {
         return LOTTO_NUMBERS.get(number);
     }
 
-    public static LottoNumber parse(String text) {
-        return LottoNumber.of(Integer.parseInt(text));
-    }
-
     public int intValue() {
         return lottoNumber;
     }

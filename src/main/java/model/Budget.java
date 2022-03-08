@@ -24,10 +24,6 @@ public class Budget {
         this.amount = amount;
     }
 
-    public static Budget parse(String text) {
-        return new Budget(Integer.parseInt(text));
-    }
-
     private boolean isPositive(BigDecimal amount) {
         return amount.compareTo(BigDecimal.ZERO) > 0;
     }

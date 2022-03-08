@@ -15,12 +15,8 @@ public class ManualLottoCount {
         this.count = count;
     }
 
-    public static ManualLottoCount parse(String text, Budget budget) {
-        return new ManualLottoCount(Integer.parseInt(text), budget);
-    }
-
-    public boolean isSameCount(int count) {
-        return this.count == count;
+    public int getAutoLottoCountFrom(Budget budget) {
+        return budget.getMaxCountForLottoIssue() - count;
     }
 
     @Override
