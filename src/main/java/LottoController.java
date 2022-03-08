@@ -1,8 +1,17 @@
-import domain.LottoGame;
+
+
+import domain.Lotto;
+import domain.LottoGenerator;
+
+import domain.LottoNumber;
+import domain.Lottos;
+
 import domain.Money;
-import domain.RandomLottoGenerator;
+
 import domain.WinningChecker;
 import domain.WinningNumbers;
+import java.util.List;
+import java.util.stream.Collectors;
 import view.InputView;
 import view.OutputView;
 
@@ -10,16 +19,41 @@ public class LottoController {
 
     public static void main(String[] args) {
 
-        LottoGame lottoGame = new LottoGame(new Money(InputView.askMoneyInput()),
-            new RandomLottoGenerator());
+        Money money = new Money(InputView.askMoneyInput(), InputView.askManualAmount());
 
-        OutputView.printLottosInformations(lottoGame.getLottos());
+        LottoGenerator lottoGenerator = new LottoGenerator(
+            askManualLottoNumbers(money), money.getAutoAmount());
 
-        WinningNumbers winningNumbers = InputView.askWinningNumbers();
+        Lottos lottos = new Lottos(lottoGenerator.generate());
 
-        WinningChecker winningChecker = lottoGame.makeResult(winningNumbers);
+        OutputView.printLottosInformation(money, lottos);
 
-        OutputView.printWinningStatistic(winningChecker);
-        OutputView.printYield(lottoGame.getYield());
+        WinningChecker winningChecker = new WinningChecker(lottos, askWinningNumbers());
+
+        winningChecker.check();
+
+        OutputView.printWinningStatistic(winningChecker.getStatisticMap());
+        OutputView.printYield(winningChecker.getYield());
+    }
+
+    private static WinningNumbers askWinningNumbers() {
+
+        return new WinningNumbers(new Lotto(InputView.askWinningNumber()
+            .stream()
+            .map(LottoNumber::from)
+            .collect(Collectors.toList())),
+            LottoNumber.from(InputView.askBonusNumber()));
+
+    }
+
+    private static List<List<LottoNumber>> askManualLottoNumbers(Money money) {
+
+        return InputView.askManualLottoNumbers(money.getManualAmount())
+            .stream()
+            .map(number -> number.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList()))
+            .collect(Collectors.toList());
+
     }
 }
