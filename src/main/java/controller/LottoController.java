@@ -4,112 +4,130 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import model.bonusball.BonusBall;
+import controller.strategy.RandomLottoNumbersGenerationStrategy;
+import controller.strategy.StringInputLottoNumbersGenerationStrategy;
+import model.Money;
+import model.lotto.Lotto;
 import model.lotto.LottoCount;
-import model.lotto.LottoStorage;
+import model.lotto.Lottos;
 import model.lottonumber.LottoNumber;
+import model.lottonumber.LottoNumbers;
+import model.result.LottoResult;
 import model.result.Rank;
-import model.result.RateOfReturn;
-import model.winningnumber.LottoWinningNumber;
+import model.winningnumber.WinningLottoNumber;
 import utils.InputValidateUtils;
-import view.InputView;
-import view.OutputView;
+import view.LottoControllerInputView;
+import view.LottoControllerOutputView;
 
 public class LottoController {
-	private static final String LOTTO_COUNT_BLANK_ERROR_MESSAGE = "[Error]: 금액을 입력해주세요.";
-	private static final String LOTTO_COUNT_NUMBER_ERROR_MESSAGE = "[Error]: 금액은 숫자를 입력해주세요.";
-	private static final String WINNING_NUMBER_ERROR_MESSAGE = "[Error]: 당첨 번호는 숫자여야 합니다.";
-	private static final String WINNING_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 당첨 번호를 입력하세요.";
-	private static final String BONUS_BALL_BLANK_ERROR_MESSAGE = "[Error]: 보너스 볼을 입력해주세요.";
-	private static final String BONUS_BALL_NUMBER_ERROR_MESSAGE = "[Error]: 보너스 볼은 숫자여야 합니다.";
-	private static final String DELIMITER_COMMA = ",";
+	private static final String NUMBER_ERROR_MESSAGE = "[Error]: 입력은 숫자여야 합니다.";
+	private static final String REGEX_NUMBER = "[0-9]+";
 
-	private final InputView inputView = new InputView();
-	private final OutputView outputView = new OutputView();
-
-	private LottoStorage lottoStorage;
-	private LottoWinningNumber lottoWinningNumber;
-	private BonusBall bonusBall;
-	private RateOfReturn rateOfReturn;
+	private final LottoControllerInputView inputView = new LottoControllerInputView();
+	private final LottoControllerOutputView outputView = new LottoControllerOutputView();
+	private final StringInputLottoNumbersGenerationStrategy manualStrategy = new StringInputLottoNumbersGenerationStrategy();
+	private final RandomLottoNumbersGenerationStrategy automaticStrategy = new RandomLottoNumbersGenerationStrategy();
 
 	public void playGame() {
-		makeLottos();
-		storeWinningNumber();
-		storeBonusBall();
-		compareLottoWithWinningNumber();
-		showResult();
+		Money insertedMoney = insertMoney();
+		LottoCount automaticLottoCount = new LottoCount(insertedMoney.makeMoneyToCount());
+		LottoCount manualLottoCount = inputManualLottoCount(automaticLottoCount);
+		Lottos lottos = makeLottos(manualLottoCount, automaticLottoCount);
+		printLottos(manualLottoCount, automaticLottoCount, lottos);
+		WinningLottoNumber winningLottoNumber = storeWinningNumber();
+		LottoResult lottoResult = compareLottoWithWinningNumber(lottos, winningLottoNumber);
+		showResult(insertedMoney, lottoResult);
 	}
 
-	private void makeLottos() {
+	private Money insertMoney() {
 		try {
 			String money = inputView.inputMoney();
-			InputValidateUtils.inputBlankAndNumber(money, LOTTO_COUNT_BLANK_ERROR_MESSAGE,
-				LOTTO_COUNT_NUMBER_ERROR_MESSAGE);
-			storeMoneyInRateOfReturn(Integer.parseInt(money));
-			lottoStorage = new LottoStorage(new LottoCount(Integer.parseInt(money)));
-			outputView.printLottos(lottoStorage.getLottoStorageDTO());
-		} catch (Exception e) {
-			outputView.printErrorMessage(e.getMessage());
-			makeLottos();
-		}
-	}
-
-	private void storeMoneyInRateOfReturn(int money) {
-		rateOfReturn = new RateOfReturn(money);
-	}
-
-	//WinningNumber
-	private void storeWinningNumber() {
-		try {
-			String input = inputView.inputWinningNumbers();
-			InputValidateUtils.inputBlank(input, WINNING_NUMBER_BLANK_ERROR_MESSAGE);
-			List<String> numbers = splitWinningNumber(input);
-			//InputValidateUtils.inputNumber(String.join("", numbers), WINNING_NUMBER_ERROR_MESSAGE);
-			lottoWinningNumber = new LottoWinningNumber(makeInputWinningNumbersToLottoNumbers(numbers));
+			InputValidateUtils.checkInputIsBlank(money);
+			checkInputIsNumber(money);
+			return new Money(Integer.parseInt(money));
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
-			storeWinningNumber();
+			return insertMoney();
 		}
 	}
 
-	private List<String> splitWinningNumber(String input) {
-		return Arrays.stream(input.split(DELIMITER_COMMA))
-			.map(String::trim)
+	private LottoCount inputManualLottoCount(LottoCount automaticLottoCount) {
+		try {
+			String count = inputView.inputManualLottoCount();
+			InputValidateUtils.checkInputIsBlank(count);
+			checkInputIsNumber(count);
+			int manualCount = Integer.parseInt(count);
+			automaticLottoCount.decreaseCount(manualCount);
+			return new LottoCount(manualCount);
+		} catch (IllegalArgumentException e) {
+			outputView.printErrorMessage(e.getMessage());
+			return inputManualLottoCount(automaticLottoCount);
+		}
+	}
+
+	private Lottos makeLottos(LottoCount manualLottoCount, LottoCount automaticLottoCount) {
+		try {
+			inputView.requireManualLottoMessage();
+			return new Lottos(manualLottoCount, manualStrategy, automaticLottoCount, automaticStrategy);
+		} catch (IllegalArgumentException e) {
+			outputView.printErrorMessage(e.getMessage());
+			return makeLottos(manualLottoCount, automaticLottoCount);
+		}
+	}
+
+	private void printLottos(LottoCount manualLottoCount, LottoCount automaticLottoCount, Lottos lottos) {
+		outputView.printLottos(manualLottoCount.getCount(), automaticLottoCount.getCount(),
+			translateLottosForPrint(lottos));
+	}
+
+	private List<List<Integer>> translateLottosForPrint(Lottos lottos) {
+		return lottos.getLottoStorage().stream()
+			.map(Lotto::getNumbers)
+			.map(LottoNumbers::getNumbers)
+			.map(this::mapLottoNumbersToInts)
 			.collect(Collectors.toList());
 	}
 
-	private List<LottoNumber> makeInputWinningNumbersToLottoNumbers(List<String> numbers) {
-		return numbers.stream()
-			.map(number -> LottoNumber.parseLottoNumber(number))
+	private List<Integer> mapLottoNumbersToInts(List<LottoNumber> lottoNumbers) {
+		return lottoNumbers.stream()
+			.map(LottoNumber::getNumber)
 			.collect(Collectors.toList());
 	}
 
-	//BonusBall
-	private void storeBonusBall() {
+	private WinningLottoNumber storeWinningNumber() {
 		try {
-			String input = inputView.inputBonusBall();
-			InputValidateUtils.inputBlank(input, BONUS_BALL_BLANK_ERROR_MESSAGE);
-			bonusBall = new BonusBall(LottoNumber.parseLottoNumber(input));
-			lottoWinningNumber.validateReduplicationWithBonusBall(LottoNumber.valueOf(Integer.parseInt(input)));
+			inputView.requireWinningNumbersMessage();
+			LottoNumbers lottoNumbers = LottoNumbers.from(manualStrategy);
+			return new WinningLottoNumber(lottoNumbers, makeBonusBall());
 		} catch (IllegalArgumentException e) {
 			outputView.printErrorMessage(e.getMessage());
-			storeBonusBall();
+			return storeWinningNumber();
 		}
 	}
 
-	private void compareLottoWithWinningNumber() {
-		lottoStorage.checkWithWinningNumberAndBonus(bonusBall.getBonusBallDTO(),
-			lottoWinningNumber.getWinningNumbersDTO(), rateOfReturn);
+	private LottoNumber makeBonusBall() {
+		String input = inputView.inputBonusBall();
+		InputValidateUtils.checkInputIsBlank(input);
+		return LottoNumber.parseLottoNumber(input);
 	}
 
-	private void showResult() {
+	private LottoResult compareLottoWithWinningNumber(Lottos lottos, WinningLottoNumber winningLottoNumber) {
+		return lottos.getResultOfLottos(winningLottoNumber.getWinningLottoNumbersDTO());
+	}
+
+	private void showResult(Money insertedMoney, LottoResult lottoResult) {
 		outputView.printResultMessage();
 		Arrays.stream(Rank.values())
-			.filter(rank -> rank.getMatchNumber() >= 3)
-			.forEach(statistics -> outputView.printResult(statistics.getMatchNumber(), statistics.getValue(),
-				rateOfReturn.countStatistics(statistics),
-				Rank.BONUS.getValue()));
-		outputView.printRateOfReturn(rateOfReturn.getRateOfReturn());
+			.filter(Rank::hasReward)
+			.forEach(rank -> outputView.printResult(rank.getMatchNumber(), rank.getValue(),
+				lottoResult.getCountOfResult(rank),
+				Rank.SECOND.getValue()));
+		outputView.printRateOfReturn(lottoResult.calculateSumOfRewards() / insertedMoney.getMoney());
 	}
 
+	private static void checkInputIsNumber(String number) {
+		if (!number.matches(REGEX_NUMBER)) {
+			throw new IllegalArgumentException(NUMBER_ERROR_MESSAGE);
+		}
+	}
 }

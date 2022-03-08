@@ -1,16 +1,17 @@
 package model.result;
 
-public enum Rank {
-	ZERO(0, 0),
-	ONE(1, 0),
-	TWO(2, 0),
-	THREE(3, 5000),
-	FOUR(4, 50000),
-	FIVE(5, 1500000),
-	BONUS(5, 30000000),
-	SIX(6, 2000000000);
+import java.util.Arrays;
 
-	private static final int REWARD_NUMBER = 3;
+public enum Rank {
+	FAIL(0, 0),
+	FIFTH(3, 5_000),
+	FOURTH(4, 50_000),
+	THIRD(5, 1_500_000),
+	SECOND(5, 30_000_000),
+	FIRST(6, 2_000_000_000);
+
+	private static final int STANDARD_VALUE_OF_REWARD = 0;
+	private static final int BONUS_NUMBER = 5;
 
 	private final int matchNumber;
 	private final int value;
@@ -20,8 +21,26 @@ public enum Rank {
 		this.value = value;
 	}
 
-	public boolean checkNumberToReward() {
-		return this.matchNumber >= REWARD_NUMBER;
+	public boolean hasReward() {
+		return this.value > STANDARD_VALUE_OF_REWARD;
+	}
+
+	public static Rank getRank(long matchNumber, boolean matchBonus) {
+		if (matchNumber == BONUS_NUMBER) {
+			return getRankWithCheckingBonus(matchBonus);
+		}
+
+		return Arrays.stream(Rank.values())
+			.filter(rank -> rank.getMatchNumber() == matchNumber)
+			.findFirst()
+			.orElse(FAIL);
+	}
+
+	private static Rank getRankWithCheckingBonus(boolean matchBonus) {
+		if (matchBonus) {
+			return SECOND;
+		}
+		return THIRD;
 	}
 
 	public int getMatchNumber() {
