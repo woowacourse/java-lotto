@@ -1,7 +1,5 @@
 package lotterymachine;
 
-import java.util.Collections;
-
 import java.util.Map;
 import lotterymachine.dto.ManualTicketDto;
 import lotterymachine.model.LotteryResult;
@@ -87,7 +85,6 @@ public class LotteryMachine {
         Map<WinningType, Count> ticketsResult = lotteryResult.compute();
 
         List<LotteryResultDto> lotteryResultDto = LotteryResultDto.createLotteryResults(ticketsResult);
-        Collections.sort(lotteryResultDto);
         OutputView.printStatistics(lotteryResultDto);
         OutputView.printProfitRate(lotteryResult.getProfitRate(ticketsResult));
     }

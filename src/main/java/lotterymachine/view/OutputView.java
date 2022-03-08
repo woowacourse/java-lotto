@@ -1,5 +1,6 @@
 package lotterymachine.view;
 
+import java.util.Collections;
 import lotterymachine.dto.LotteryResultDto;
 import lotterymachine.model.LotteryTicket;
 
@@ -27,6 +28,7 @@ public class OutputView {
     }
 
     public static void printStatistics(List<LotteryResultDto> winningLotteries) {
+        Collections.sort(winningLotteries);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("당첨 통계").append("\n").append("---------").append("\n");
         winningLotteries.forEach(lottery -> stringBuilder.append(getLotteryStatistic(lottery)));
