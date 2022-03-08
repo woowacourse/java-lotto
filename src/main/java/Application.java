@@ -11,21 +11,21 @@ import service.LottoService;
 import view.InputView;
 import view.OutputView;
 
-public class Application {
+	public class Application {
 
-	public static void main(String[] args) {
-		LottoController controller = new LottoController(new LottoService());
+		public static void main(String[] args) {
+			LottoController controller = new LottoController(new LottoService());
 
-		String payment = InputView.insertPayment();
+			String payment = InputView.insertPayment();
 
-		BuyingInfoDto buyingInfoDto = createBuyInfoDto(controller, payment);
-		OutputView.printLottoCount(buyingInfoDto);
-		OutputView.printLottos(buyingInfoDto.getTotalLottos());
+			BuyingInfoDto buyingInfoDto = createBuyInfoDto(controller, payment);
+			OutputView.printLottoCount(buyingInfoDto);
+			OutputView.printLottos(buyingInfoDto.getTotalLottos());
 
-		showLottoResult(controller, buyingInfoDto, payment);
-	}
+			showLottoResult(controller, buyingInfoDto, payment);
+		}
 
-	private static BuyingInfoDto createBuyInfoDto(LottoController controller, String payment) {
+		private static BuyingInfoDto createBuyInfoDto(LottoController controller, String payment) {
 		int manualCount = InputView.insertManualLottoCount();
 		List<String[]> manualLottos = createManualLottos(manualCount);
 		return controller.buy(payment, manualCount, manualLottos);
@@ -35,9 +35,9 @@ public class Application {
 		String[] winningLotto = InputView.insertLotto();
 		int bonus = InputView.insertBonus();
 
-		LottoResultDto lottoResultDto = controller.showLottoResult(buyingInfoDto.getTotalLottos(), winningLotto, bonus);
+		LottoResultDto lottoResultDto = controller.showLottoResult(buyingInfoDto.toLotto(), winningLotto, bonus);
 		OutputView.printLottoResult(lottoResultDto.getRanks());
-		OutputView.printProfitRate(controller.showProfitRate(lottoResultDto.getRanks(), payment));
+		OutputView.printProfitRate(controller.showProfitRate(lottoResultDto.toRank(), payment));
 	}
 
 	private static ArrayList<String[]> createManualLottos(int count) {

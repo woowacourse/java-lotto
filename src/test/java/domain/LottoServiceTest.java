@@ -43,13 +43,13 @@ public class LottoServiceTest {
 		//given
 		LottoResultDto resultDto = getLottoResultDto();
 		//then
-		assertThat(resultDto.getRanks()).containsKey(Rank.FIRST);
+		assertThat(resultDto.toRank()).containsKey(Rank.FIRST);
 	}
 
 	@DisplayName("이율 계산 ")
 	@Test
 	void profitRate() {
-		double rate = lottoService.createProfitRate(getLottoResultDto().getRanks(), "2000");
+		double rate = lottoService.createProfitRate(getLottoResultDto().toRank(), "2000");
 		assertThat(rate).isEqualTo(1000000);
 	}
 

@@ -5,7 +5,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import controller.dto.BuyingInfoDto;
-import domain.Lotto;
+import controller.dto.LottoDto;
+import controller.dto.LottoResultDto;
+import controller.dto.RankDto;
 import domain.Rank;
 
 public class OutputView {
@@ -28,30 +30,30 @@ public class OutputView {
 				infoDto.getManualLottoCount(), infoDto.getAutoLottoCount()));
 	}
 
-	public static void printLottos(List<Lotto> lottos) {
+	public static void printLottos(List<LottoDto> lottos) {
 		lottos.stream()
 			.forEach(OutputView::printLotto);
 		System.out.println();
 	}
 
-	private static void printLotto(Lotto lotto) {
+	private static void printLotto(LottoDto lotto) {
 		String format = "[%s]";
 		System.out.println(String.format(format, lotto.getLotto().stream()
-			.map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
+			.map(String::valueOf)
 			.collect(Collectors.joining(", "))));
 	}
 
-	public static void printLottoResult(Map<Rank, Long> ranks) {
+	public static void printLottoResult(List<RankDto> ranks) {
 		System.out.println("\n당첨 통계\n---------");
 		ranks.forEach(OutputView::printRankCount);
 	}
 
-	private static void printRankCount(Rank rank, Long count) {
+	private static void printRankCount(RankDto rankDto) {
 		String format = "%d개 일치 (%d원)- %d개";
-		if (rank.isBonus()) {
+		if (rankDto.isBonus()) {
 			format = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
 		}
-		System.out.println(String.format(format, rank.getMatch(), rank.getMoney(), count));
+		System.out.println(String.format(format, rankDto.getMatch(), rankDto.getMoney(), rankDto.getAmount()));
 	}
 
 	public static void printProfitRate(double profitRate) {

@@ -28,7 +28,7 @@ public class LottoResultTest {
 			new WinningLotto(winningLotto, bonusNumber));
 		String payment = "5000";
 
-		double profitRate = new LottoService().createProfitRate(lottoResult.getRanks(), payment);
+		double profitRate = new LottoService().createProfitRate(lottoResult.toRank(), payment);
 
 		assertThat(profitRate).isEqualTo(2.0);
 	}

@@ -30,7 +30,7 @@ public class LottosTest {
 		LottoResultDto lottoResult = new LottoService()
 			.createLottoResult(lottos, new WinningLotto(winningLotto, bonusNumber));
 		//then
-		assertThat(lottoResult.getRanks()).containsAnyOf(entry(Rank.FIFTH, 1L), entry(Rank.THIRD, 1L));
+		assertThat(lottoResult.toRank()).containsAnyOf(entry(Rank.FIFTH, 1L), entry(Rank.THIRD, 1L));
 	}
 
 	@DisplayName("아무것도 맞지 않을 경우를 미포함 한 결과가 출력 되는지")
@@ -46,7 +46,7 @@ public class LottosTest {
 		LottoResultDto lottoResult = new LottoService()
 			.createLottoResult(lottos, new WinningLotto(winningLotto, bonusNumber));
 		//then
-		assertThat(lottoResult.getRanks()).containsAnyOf(entry(Rank.FIRST, 1L));
+		assertThat(lottoResult.toRank()).containsAnyOf(entry(Rank.FIRST, 1L));
 	}
 
 	@DisplayName("사이즈 체크")
