@@ -7,6 +7,7 @@ import java.util.Map;
 import controller.dto.BuyingInfoDto;
 import controller.dto.LottoResultDto;
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.LottoResult;
 import domain.Lottos;
 import domain.OrderForm;
@@ -50,6 +51,14 @@ public class LottoService {
 		Payment payment = new Payment(paymentValue);
 		LottoResult lottoResult = new LottoResult(ranks);
 		return lottoResult.calculateProfitRate(payment);
+	}
+
+	public WinningLotto createWinningLotto(String[] lotto, int bonus) {
+		return new WinningLotto(Lotto.of(lotto), LottoNumber.of(bonus));
+	}
+
+	public Lottos toLottos(List<Lotto> lottos) {
+		return new Lottos(lottos);
 	}
 }
 

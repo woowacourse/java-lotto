@@ -25,15 +25,11 @@ public class LottoController {
 	}
 
 	public LottoResultDto showLottoResult(List<Lotto> totalLotto, String[] lotto, int bonus) {
-		WinningLotto winningLotto = createWinningLotto(lotto, bonus);
-		return lottoService.createLottoResult(new Lottos(totalLotto), winningLotto);
+		WinningLotto winningLotto = lottoService.createWinningLotto(lotto, bonus);
+		return lottoService.createLottoResult(lottoService.toLottos(totalLotto), winningLotto);
 	}
 
 	public double showProfitRate(Map<Rank, Long> ranks, String payment) {
 		return lottoService.createProfitRate(ranks, payment);
-	}
-
-	public WinningLotto createWinningLotto(String[] lotto, int bonus) {
-		return new WinningLotto(Lotto.of(lotto), LottoNumber.of(bonus));
 	}
 }
