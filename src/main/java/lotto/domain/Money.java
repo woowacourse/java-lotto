@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import lotto.utils.IntegerUtils;
+
 public class Money {
 
     private final int amount;
@@ -15,17 +17,25 @@ public class Money {
         return new Money(amount);
     }
 
+    public static Money from(String input) {
+        return from(IntegerUtils.parse(input));
+    }
+
     private void validatePositive(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("금액은 0 이상이어야 합니다.");
         }
     }
 
-    public Money divide(Money other) {
+    public Money minus(Money other) {
+        return Money.from(this.amount - other.amount);
+    }
+
+    public int divide(Money other) {
         if (other.amount == 0) {
             throw new IllegalArgumentException("나누는 금액은 0이 될 수 없습니다.");
         }
-        return Money.from(this.amount / other.amount);
+        return this.amount / other.amount;
     }
 
     public boolean isGreatThanOrEqualTo(Money other) {

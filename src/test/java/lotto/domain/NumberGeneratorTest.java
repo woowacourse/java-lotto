@@ -54,4 +54,46 @@ class NumberGeneratorTest {
             () -> assertThat(numbers).contains(1, 2, 3)
         );
     }
+
+    @Test
+    @DisplayName("줄바꿈을 기준으로 여러 줄의 숫자를 생성할 수 있다.")
+    public void createMultipleLinesByNewLineDelimiter() {
+        // given
+        NumberGenerator generator =
+            new StringInputNumberGenerator(List.of("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"));
+
+        // when
+        List<Integer> firstLine = generator.generate(3);
+        List<Integer> secondLine = generator.generate(4);
+        // then
+        Assertions.assertAll(
+            () -> assertThat(firstLine).containsSequence(1, 2, 3),
+            () -> assertThat(secondLine).containsSequence(7, 8, 9, 10)
+        );
+    }
+
+    @Test
+    @DisplayName("문자열 라인 소진시 예외를 던진다.")
+    public void throwsExceptionAfterConsumptionOfLine() {
+        // given
+        NumberGenerator generator = new StringInputNumberGenerator("1, 2, 3, 4, 5, 6");
+
+        // when
+        generator.generate(3);
+
+        // then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> generator.generate(3));
+    }
+
+    @Test
+    @DisplayName("저장된 숫자 개수보다 더 큰 길이를 요구하면 예외를 던진다.")
+    public void throwsExceptionWhenSizeTooBig() {
+        // when
+        NumberGenerator generator = new StringInputNumberGenerator("1, 2, 3, 4, 5, 6");
+
+        // then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> generator.generate(7));
+    }
 }

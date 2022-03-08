@@ -6,8 +6,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.dto.LottoStatisticsResponse;
-
 public class LottoStatisticsTest {
 
     @Test
@@ -16,7 +14,9 @@ public class LottoStatisticsTest {
         // given
         List<LottoRank> ranks = List.of(LottoRank.values());
         // when
-        LottoStatisticsResponse statistics = new LottoStatisticsResponse(ranks, new Money(LottoRank.values().length * 1000));
+        LottoStatistics statistics = LottoStatistics.fromComparedInformation(
+            ranks, new Money(LottoRank.values().length * LottoLine.PRICE)
+        );
         // then
         Assertions.assertThat(statistics).isNotNull();
     }

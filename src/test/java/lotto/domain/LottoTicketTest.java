@@ -1,52 +1,37 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.domain.generator.NumberGenerator;
+import lotto.domain.generator.RandomNumberGenerator;
 
 class LottoTicketTest {
 
     @Test
-    @DisplayName("로또 티켓이 정상적으로 생성되는지 확인")
-    void createLottoTicket() {
+    @DisplayName("숫자생성기와 금액으로 로또를 생성한다.")
+    public void createLottoTicket() {
         // given
-        List<LottoNumber> numbers = new ArrayList<>(
-            List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
-                LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))
-        );
+        NumberGenerator generator = new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX);
+        Money money = Money.from(2000);
         // when
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoTicket lottoTicket = LottoTicket.createLottoTicket(generator, money);
         // then
-        assertThat(lottoTicket).isNotNull();
+        Assertions.assertThat(lottoTicket.getLines().size()).isEqualTo(2);
     }
 
     @Test
-    @DisplayName("길이가 정상이 아니면 예외처리")
-    void validateLength() {
+    @DisplayName("금액이 부족하면 로또를 구매할 수 없다.")
+    public void throwsExceptionWhenMoneyLacks() {
         // given
-        List<LottoNumber> numbers = new ArrayList<>(
-            List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
-                LottoNumber.from(4), LottoNumber.from(5))
-        );
+        NumberGenerator generator = new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX);
+        Money money = Money.from(999);
+        // when
+        Assertions.assertThatExceptionOfType(IllegalStateException.class)
+            .isThrownBy(() -> LottoTicket.createLottoTicket(generator, money));
         // then
-        assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new LottoTicket(numbers));
-    }
-
-    @Test
-    @DisplayName("로또 번호는 중복될 수 없다.")
-    void validateDistinct() {
-        // given
-        List<LottoNumber> numbers = new ArrayList<>(
-            List.of(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
-                LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(5))
-        );
-        // then
-        assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new LottoTicket(numbers));
     }
 }

@@ -32,9 +32,21 @@ class MoneyTest {
         Money aMoney = new Money(1000);
         Money bMoney = new Money(100);
         // when
-        Money dividedMoney = aMoney.divide(bMoney);
+        int divided = aMoney.divide(bMoney);
         // then
-        Assertions.assertThat(dividedMoney.getAmount()).isEqualTo(10);
+        Assertions.assertThat(divided).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("0으로 나눌 수 없다.")
+    public void throwsExceptionWithZeroDivision() {
+        // when
+        Money aMoney = new Money(1000);
+        Money bMoney = new Money(0);
+
+        // then
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> aMoney.divide(bMoney));
     }
 
     @Test
@@ -47,5 +59,17 @@ class MoneyTest {
         boolean compare = bMoney.isGreatThanOrEqualTo(aMoney);
         // then
         Assertions.assertThat(compare).isTrue();
+    }
+
+    @Test
+    @DisplayName("빼기 연산을 할 수 있다.")
+    public void minusMoneyWithOtherMoney() {
+        // given
+        Money aMoney = Money.from(1000);
+        Money bMoney = Money.from(500);
+        // when
+        Money minusMoney = aMoney.minus(bMoney);
+        // then
+        Assertions.assertThat(minusMoney.getAmount()).isEqualTo(500);
     }
 }

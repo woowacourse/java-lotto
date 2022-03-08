@@ -1,25 +1,33 @@
 package lotto.domain;
 
+import lotto.domain.generator.StringInputNumberGenerator;
+
 public class WinningTicket {
 
-    private LottoTicket winningTicket;
+    private LottoLine winningLine;
     private LottoNumber bonusBall;
 
-    public WinningTicket(LottoTicket winningTicket, LottoNumber bonusBall) {
-        validateBonusDistinct(winningTicket, bonusBall);
-        this.winningTicket = winningTicket;
+    public WinningTicket(LottoLine winningLine, LottoNumber bonusBall) {
+        validateBonusDistinct(winningLine, bonusBall);
+        this.winningLine = winningLine;
         this.bonusBall = bonusBall;
     }
 
-    private void validateBonusDistinct(LottoTicket winningTicket, LottoNumber bonusBall) {
+    public static WinningTicket from(String inputWinningNumber, String inputBonusBall) {
+        LottoLine winningLine = LottoLine.createLine(new StringInputNumberGenerator(inputWinningNumber));
+        LottoNumber bonusBall = LottoNumber.from(inputBonusBall);
+        return new WinningTicket(winningLine, bonusBall);
+    }
+
+    private void validateBonusDistinct(LottoLine winningTicket, LottoNumber bonusBall) {
         if (winningTicket.contains(bonusBall)) {
             throw new IllegalArgumentException("보너스볼은 당첨 번호와 중복될 수 없습니다.");
         }
     }
 
-    public LottoRank compare(LottoTicket lottoTicket) {
-        int matchCount = lottoTicket.countMatch(winningTicket);
-        boolean isBonusMatch = lottoTicket.isMatch(bonusBall);
+    public LottoRank compareLine(LottoLine lottoLine) {
+        int matchCount = lottoLine.countMatchingNumbers(winningLine);
+        boolean isBonusMatch = lottoLine.contains(bonusBall);
         return LottoRank.find(matchCount, isBonusMatch);
     }
 }
