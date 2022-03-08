@@ -1,57 +1,47 @@
 package domain;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import util.Validator;
 
 public class Lottos {
 
-    private static final int START_INDEX = 0;
+    private List<Lotto> members;
 
-    private final List<Lotto> lottos;
-
-    public Lottos(int lottoAmount) {
-        this.lottos = generateLottos(lottoAmount);
+    public Lottos() {
+        this.members = new ArrayList<>();
     }
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public static Lottos init() {
+        return new Lottos();
     }
 
-    public static Lottos buyLottos(int lottoAmount) {
-        return new Lottos(lottoAmount);
+    public void add(Lotto lotto) {
+        members.add(lotto);
     }
 
     public int numberOfLottery() {
-        return lottos.size();
+        return members.size();
     }
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+    public List<Lotto> getMembers() {
+        return Collections.unmodifiableList(members);
     }
 
-    public List<Integer> compareAllLottosWithWinningLotto(Lotto winningLotto) {
-        Validator.checkArgumentIsNull(winningLotto);
-        return lottos.stream()
-                .map(lotto -> lotto.countDuplicatedNumber(winningLotto))
+    public List<Integer> compareAllLottosWithWinningLotto(Set<LottoNumber> winningNumbers) {
+        Validator.checkArgumentIsNull(winningNumbers);
+        return members.stream()
+                .map(lotto -> lotto.countDuplicatedNumber(winningNumbers))
                 .collect(Collectors.toList());
     }
 
-    public List<Boolean> compareAllLottosWithBonusNumber(LottoNumber bonusNumber) {
-        Validator.checkArgumentIsNull(bonusNumber);
-        return lottos.stream()
-                .map(lotto -> lotto.isBonusNumberContain(bonusNumber))
-                .collect(Collectors.toList());
-    }
-
-    private List<Lotto> generateLottos(int lottoAmount) {
-        return IntStream.range(START_INDEX, lottoAmount)
-                .boxed()
-                .map(i -> Lotto.generateLotto())
+    public List<Boolean> checkAllLottosContainNumber(LottoNumber number) {
+        Validator.checkArgumentIsNull(number);
+        return members.stream()
+                .map(lotto -> lotto.contains(number))
                 .collect(Collectors.toList());
     }
 }
