@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
@@ -11,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import lotto.domain.generator.RandomNumberGenerator;
 import lotto.domain.generator.StringInputNumberGenerator;
 
-class PurchaseResultTest {
+class PurchasedLottoTicketsTest {
 
     @Test
     @DisplayName("수동과 자동 로또 티켓을 저장한다.")
@@ -24,9 +22,9 @@ class PurchaseResultTest {
             new StringInputNumberGenerator("1,2,3,4,5,6"), Money.from(1000)
         );
         // when
-        PurchaseResult purchaseResult = new PurchaseResult(autoTicket, manualTicket);
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(autoTicket, manualTicket);
         // then
-        Assertions.assertThat(purchaseResult).isNotNull();
+        Assertions.assertThat(purchasedLottoTickets).isNotNull();
     }
 
     @Test
@@ -40,9 +38,9 @@ class PurchaseResultTest {
             new StringInputNumberGenerator("1,2,3,4,5,6"), Money.from(1000)
         );
         // when
-        PurchaseResult purchaseResult = new PurchaseResult(autoTicket, manualTicket);
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(autoTicket, manualTicket);
         // then
-        Assertions.assertThat(purchaseResult.sumMoney()).isEqualTo(Money.from(3000));
+        Assertions.assertThat(purchasedLottoTickets.sumMoney()).isEqualTo(Money.from(3000));
     }
     
     @Test
@@ -61,8 +59,8 @@ class PurchaseResultTest {
         );
 
         // when
-        PurchaseResult purchaseResult = new PurchaseResult(autoTicket, manualTicket);
-        List<LottoRank> lottoRanks = purchaseResult.compareWinningTicket(winningTicket);
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(autoTicket, manualTicket);
+        List<LottoRank> lottoRanks = purchasedLottoTickets.compareWinningTicket(winningTicket);
 
         // then
         Assertions.assertThat(lottoRanks).contains(LottoRank.FIRST);

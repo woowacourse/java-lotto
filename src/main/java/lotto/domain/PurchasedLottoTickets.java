@@ -5,12 +5,12 @@ import static java.util.stream.Collectors.*;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class PurchaseResult {
+public class PurchasedLottoTickets {
 
     private final LottoTicket manualTicket;
     private final LottoTicket autoTicket;
 
-    public PurchaseResult(LottoTicket manualTicket, LottoTicket autoTicket) {
+    public PurchasedLottoTickets(LottoTicket manualTicket, LottoTicket autoTicket) {
         this.manualTicket = manualTicket;
         this.autoTicket = autoTicket;
     }
@@ -34,5 +34,17 @@ public class PurchaseResult {
             winningTicket.compareTicket(manualTicket).stream(),
             winningTicket.compareTicket(autoTicket).stream()
         ).collect(toList());
+    }
+
+    public int getManualTicketSize() {
+        return getTicketSize(manualTicket);
+    }
+
+    public int getAutoTicketSize() {
+        return getTicketSize(autoTicket);
+    }
+
+    private int getTicketSize(LottoTicket ticket) {
+        return ticket.getLines().size();
     }
 }

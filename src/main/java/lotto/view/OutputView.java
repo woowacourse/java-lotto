@@ -8,7 +8,7 @@ import lotto.domain.LottoLine;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistics;
-import lotto.domain.PurchaseResult;
+import lotto.domain.PurchasedLottoTickets;
 
 public class OutputView {
 
@@ -27,18 +27,15 @@ public class OutputView {
         System.out.println("[ERROR] " + exception.getMessage());
     }
 
-    public void outputPurchaseResult(PurchaseResult purchaseResult) {
-        int manualSize = purchaseResult.getManualTicket()
-            .getLines()
-            .size();
-        int autoSize = purchaseResult.getAutoTicket()
-            .getLines()
-            .size();
+    public void outputPurchaseResult(PurchasedLottoTickets purchasedLottoTickets) {
+        int manualSize = purchasedLottoTickets.getManualTicketSize();
+        int autoSize = purchasedLottoTickets.getAutoTicketSize();
+
         outputPurchaseSize(manualSize, autoSize);
-        purchaseResult.getManualTicket()
+        purchasedLottoTickets.getManualTicket()
             .getLines()
             .forEach(this::outputLine);
-        purchaseResult.getAutoTicket()
+        purchasedLottoTickets.getAutoTicket()
             .getLines()
             .forEach(this::outputLine);
     }
@@ -82,7 +79,6 @@ public class OutputView {
     private void outputMatches(LottoStatistics statistics) {
         statistics.getRankCounts()
             .entrySet()
-            .stream()
             .forEach(entry -> System.out.println(formatRank(entry)));
     }
 
