@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -15,7 +16,7 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호 갯수는 6개여야 합니다.");
         }
-        this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
     public static Lotto of(List<Integer> numbers) {
@@ -47,7 +48,7 @@ public class Lotto {
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return new HashSet<>(lottoNumbers);
     }
 
     @Override

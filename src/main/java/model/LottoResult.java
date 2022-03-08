@@ -2,6 +2,7 @@ package model;
 
 import java.math.BigDecimal;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +50,6 @@ public class LottoResult {
     }
 
     public Map<LottoRank, Integer> getResultMap() {
-        return resultMap;
+        return new HashMap<>(resultMap);
     }
 }

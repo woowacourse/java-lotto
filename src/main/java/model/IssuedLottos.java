@@ -3,6 +3,7 @@ package model;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import model.generator.LottosGenerator;
@@ -11,11 +12,11 @@ public class IssuedLottos {
     private final List<Lotto> lottos;
 
     private IssuedLottos(List<Lotto> lottos) {
-        this.lottos = Collections.unmodifiableList(lottos);
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public static IssuedLottos generatedBy(LottosGenerator generator) {
-        return new IssuedLottos(Collections.unmodifiableList(generator.createLottos()));
+        return new IssuedLottos(generator.createLottos());
     }
 
     public LottoResult summarize(WinningLottoNumbers winningLottoNumbers) {
@@ -29,6 +30,6 @@ public class IssuedLottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return new ArrayList<>(lottos);
     }
 }
