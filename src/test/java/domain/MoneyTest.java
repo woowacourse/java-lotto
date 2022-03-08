@@ -12,20 +12,20 @@ public class MoneyTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1000, 1001, 1500, 1999})
-    @DisplayName("로또 1개 생성되는지 테스트")
+    @DisplayName("구매할수 있는 로또 개수가 1개인지 테스트")
     public void generateLottoOneTest(int inputMoney) {
         Money money = new Money(inputMoney);
-        int count = money.generateCount();
+        int count = money.getLottoCount();
 
         assertThat(count).isEqualTo(1);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {2000, 2001, 2500, 2999})
-    @DisplayName("로또 2개 생성되는지 테스트")
+    @DisplayName("구매할수 있는 로또 개수가 2개인지 테스트")
     public void generateLottoTwoTest(int inputMoney) {
         Money money = new Money(inputMoney);
-        int count = money.generateCount();
+        int count = money.getLottoCount();
 
         assertThat(count).isEqualTo(2);
     }

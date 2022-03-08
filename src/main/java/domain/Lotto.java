@@ -1,65 +1,32 @@
 package domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
 
 public class Lotto {
-    private static final String LOTTO_DUPLICATED_MESSAGE = "[ERROR] 로또 번호에 중복된 숫자가 들어가면 안됩니다.";
-    private static final String LOTTO_SIZE_MESSAGE = "[ERROR] 로또의 숫자는 6개여야 합니다.";
-    private static final int LOTTO_START = 0;
-    private static final int LOTTO_END = 6;
-    private static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_LENGTH = 6;
+    private static final String LOTTO_SIZE_MESSAGE = "[ERROR] 로또의 숫자는 중복 없이 6개여야 합니다.";
 
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public Lotto(List<LottoNumber> numbers) {
+    public Lotto(Set<LottoNumber> numbers) {
         validateSize(numbers);
-        validateDuplicate(numbers);
-        Collections.sort(numbers);
-        this.numbers = new ArrayList<>(numbers);
+        this.numbers = new HashSet<>(numbers);
     }
 
-    private void validateSize(List<LottoNumber> lotto) {
-        if (lotto.size() != LOTTO_SIZE) {
+    private void validateSize(Set<LottoNumber> lotto) {
+        if (lotto.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException(LOTTO_SIZE_MESSAGE);
         }
     }
 
-    private void validateDuplicate(List<LottoNumber> numbers) {
-        if (isDuplicated(numbers)) {
-            throw new IllegalArgumentException(LOTTO_DUPLICATED_MESSAGE);
-        }
+    public Set<LottoNumber> getNumbers() {
+        return new HashSet<>(numbers);
     }
 
-    private boolean isDuplicated(List<LottoNumber> numbers) {
-        return numbers.size() != numbers.stream()
-                .distinct()
-                .count();
-    }
-
-    public List<LottoNumber> getLotto() {
-        return new ArrayList<>(numbers);
-    }
-
-    public static Lotto generateLottoNumber(int minNumber, int maxNumber) {
-        List<LottoNumber> lottoRange = IntStream.rangeClosed(minNumber, maxNumber)
-                .mapToObj(LottoNumber::generateLottoNumber)
-                .collect(Collectors.toList());
-        Collections.shuffle(lottoRange);
-        List<LottoNumber> numbers = lottoRange.subList(LOTTO_START, LOTTO_END);
-        return new Lotto(numbers);
-    }
-
-    public Rank match(WinningLotto winningNumber) {
-        int matchCount = getMatchCount(winningNumber);
-        boolean hasBonusBall = winningNumber.isBonusBallMatch(this);
-        return Rank.valueOf(matchCount, hasBonusBall);
-    }
-
-    private int getMatchCount(WinningLotto winningNumber) {
+    public int getMatchCount(Lotto lotto) {
         return (int) numbers.stream()
-                .filter(winningNumber::contains)
+                .filter(lotto::contains)
                 .count();
     }
 

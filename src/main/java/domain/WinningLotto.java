@@ -18,12 +18,14 @@ public class WinningLotto {
         }
     }
 
-    public boolean contains(LottoNumber number) {
-        return winningNumbers.contains(number);
-    }
-
-
     public boolean isBonusBallMatch(Lotto lotto) {
         return lotto.contains(bonusBall);
     }
+
+    public Rank match(Lotto lotto) {
+        int matchCount = winningNumbers.getMatchCount(lotto);
+        boolean hasBonusBall = lotto.contains(bonusBall);
+        return Rank.valueOf(matchCount, hasBonusBall);
+    }
+
 }
