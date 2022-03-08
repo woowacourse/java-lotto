@@ -18,7 +18,7 @@ public class Count {
     }
 
     public static Count of(Count total, int number) {
-        validateRange(total.getNumber(), number);
+        validateRange(total.number, number);
         return new Count(number);
     }
 
@@ -26,8 +26,8 @@ public class Count {
         return new Count(this.number + 1);
     }
 
-    public Count subtract(Count manualTickets) {
-        return new Count(this.number - manualTickets.getNumber());
+    public Count subtract(Count count) {
+        return new Count(this.number - count.number);
     }
 
     public boolean isZero() {
