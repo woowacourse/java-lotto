@@ -5,15 +5,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import controller.dto.LottoResultDto;
 import domain.generator.AutoLottoGenerator;
-import service.LottoService;
 
 public class LottosTest {
 
@@ -27,10 +26,9 @@ public class LottosTest {
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		LottoResultDto lottoResult = new LottoService()
-			.createLottoResult(lottos, new WinningLotto(winningLotto, bonusNumber));
+		Map<Rank,Long> result = lottos.countRank(new WinningLotto(winningLotto,bonusNumber));
 		//then
-		assertThat(lottoResult.toRank()).containsAnyOf(entry(Rank.FIFTH, 1L), entry(Rank.THIRD, 1L));
+		assertThat(result).containsAnyOf(entry(Rank.FIFTH, 1L), entry(Rank.THIRD, 1L));
 	}
 
 	@DisplayName("아무것도 맞지 않을 경우를 미포함 한 결과가 출력 되는지")
@@ -43,19 +41,8 @@ public class LottosTest {
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		Lottos lottos = new Lottos(lotto);
 		//when
-		LottoResultDto lottoResult = new LottoService()
-			.createLottoResult(lottos, new WinningLotto(winningLotto, bonusNumber));
+		Map<Rank,Long> result = lottos.countRank(new WinningLotto(winningLotto,bonusNumber));
 		//then
-		assertThat(lottoResult.toRank()).containsAnyOf(entry(Rank.FIRST, 1L));
-	}
-
-	@DisplayName("사이즈 체크")
-	@ParameterizedTest
-	@CsvSource(value = {"5:true", "6:false"}, delimiter = ':')
-	void check_Lottos_size(int size, boolean expected) {
-		//given, when
-		List<Lotto> lottos = new AutoLottoGenerator(5).creatLottos();
-		//then
-		assertThat(lottos.size() == size).isEqualTo(expected);
+		assertThat(result).containsAnyOf(entry(Rank.FIRST, 1L));
 	}
 }

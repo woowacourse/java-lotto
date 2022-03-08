@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 import controller.LottoController;
@@ -36,7 +35,7 @@ public class Application {
 		int bonus = InputView.insertBonus();
 
 		LottoResultDto lottoResultDto = controller.showLottoResult(buyingInfoDto.toLotto(), winningLotto, bonus);
-		OutputView.printLottoResult(lottoResultDto.getRanks());
+		OutputView.printLottoResult(lottoResultDto.getRankDtos());
 		OutputView.printProfitRate(controller.showProfitRate(lottoResultDto.toRank(), payment));
 	}
 }

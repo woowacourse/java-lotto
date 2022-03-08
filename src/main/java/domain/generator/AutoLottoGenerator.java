@@ -21,7 +21,7 @@ public class AutoLottoGenerator implements LottoGenerator {
 		for (int i = 0; i < count; i++) {
 			lottos.add(createAutoLotto());
 		}
-		return new ArrayList<>(lottos);
+		return lottos;
 	}
 
 	private Lotto createAutoLotto() {

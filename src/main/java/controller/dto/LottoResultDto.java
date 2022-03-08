@@ -28,7 +28,7 @@ public class LottoResultDto {
 		return result;
 	}
 
-	public List<RankDto> getRanks() {
+	public List<RankDto> getRankDtos() {
 		return ranks;
 	}
 }

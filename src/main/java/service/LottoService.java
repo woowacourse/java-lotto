@@ -31,7 +31,7 @@ public class LottoService {
 	private List<Lotto> createLottos(List<String[]> manualnumbers, int count) {
 		List<Lotto> totalLottos = new ArrayList<>(createManualLottos(manualnumbers));
 		totalLottos.addAll(createAutoLottos(count));
-		return new ArrayList<>(totalLottos);
+		return totalLottos;
 	}
 
 	private List<Lotto> createManualLottos(List<String[]> manualnumbers) {
