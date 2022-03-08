@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputView {
@@ -53,5 +54,14 @@ public class InputView {
 			OutputView.printErrorMessage(e.getMessage());
 			return insertBonus();
 		}
+	}
+
+	public static ArrayList<String[]> createManualLottos(int count) {
+		OutputView.printGuideMessage("수동으로 구매할 번호를 입력해 주세요.");
+		ArrayList<String[]> lottos = new ArrayList<>();
+		for (int i = 0; i < count; i++) {
+			lottos.add(InputView.insertManualLottos());
+		}
+		return lottos;
 	}
 }
