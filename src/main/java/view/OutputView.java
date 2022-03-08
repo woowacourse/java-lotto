@@ -1,14 +1,11 @@
 package view;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import controller.dto.BuyingInfoDto;
 import controller.dto.LottoDto;
-import controller.dto.LottoResultDto;
 import controller.dto.RankDto;
-import domain.Rank;
 
 public class OutputView {
 	private static final String ERROR_MESSAGE = "[ERROR] ";
