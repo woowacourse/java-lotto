@@ -2,23 +2,29 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-import lotto.model.Lotto;
 import lotto.model.LottoResult;
+import lotto.model.LottoType;
 import lotto.model.Rank;
 import lotto.model.Yield;
+import lotto.model.lottofactory.Lotto;
 
 public class ResultView {
-    public static void printGeneratedLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-        lottos.stream()
-            .map(Lotto::toIntegers)
-            .forEach(System.out::println);
+    public static void printGeneratedLottos(Map<LottoType, List<Lotto>> lottosMap) {
+        List<Lotto> manualLottos = lottosMap.get(LottoType.MANUAL);
+        List<Lotto> autoLottos = lottosMap.get(LottoType.AUTO);
+        System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + autoLottos.size() + "개를 구매했습니다.");
+        printEachLottos(manualLottos);
+        printEachLottos(autoLottos);
         printEmptyLine();
     }
 
+    private static void printEachLottos(List<Lotto> lottos) {
+        lottos.forEach(System.out::println);
+    }
+
     public static void printResultStatistics(LottoResult lottoResult) {
-        printEmptyLine();
         System.out.println("당첨 통계");
         System.out.println("---------");
         Arrays.stream(Rank.values())
@@ -27,7 +33,7 @@ public class ResultView {
             .forEach(System.out::println);
     }
 
-    private static String getOneRankStatus(Rank rank, Long winningCount) {
+    private static String getOneRankStatus(Rank rank, long winningCount) {
         if (rank == Rank.SECOND) {
             return String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개", rank.getMatchScore(), rank.getMoney(), winningCount);
         }

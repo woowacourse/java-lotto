@@ -1,39 +1,51 @@
 package lotto.model;
 
-import static lotto.ValidationUtils.*;
+import static java.util.stream.Collectors.*;
+import static lotto.model.LottoType.*;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+
+import lotto.model.lottofactory.Lotto;
+import lotto.model.lottofactory.LottoFactory;
+import lotto.model.lottofactory.ManualLottoFactory;
 
 public class LottoGame {
-    private static final String ERROR_DUPLICATION_BONUS_NUMBER = "보너스 볼 번호가 당첨 번호와 중복입니다.";
+    private final LottoMoney lottoMoney;
+    private final Map<LottoType, Lottos> lottosMap = new EnumMap<>(LottoType.class);
 
-    private final Lotto winningNumbers;
-    private final LottoNumber bonusNumber;
-
-    public LottoGame(List<Integer> integers, int bonusNumber) {
-        ArrayList<Integer> winningNumbers = new ArrayList<>(integers);
-        validateEmptyCollection(winningNumbers);
-        validateDuplicateBonusNumber(winningNumbers, bonusNumber);
-        this.winningNumbers = new Lotto(winningNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+    public LottoGame(long lottoMoney, int numberOfManualLottos) {
+        this.lottoMoney = new LottoMoney(lottoMoney, numberOfManualLottos);
     }
 
-    public static Lottos buyLottos(LottoMoney lottoMoney) {
-        return new Lottos(new LottoNumberGenerator(), lottoMoney.getLottoSize());
+    public void buyLottos(List<List<Integer>> inputManualLottos, LottoFactory autoLottoFactory) {
+        buyManualLottos(inputManualLottos);
+        buyAutoLottos(autoLottoFactory);
     }
 
-    private void validateDuplicateBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
-        if (winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException(ERROR_DUPLICATION_BONUS_NUMBER);
-        }
+    private void buyManualLottos(List<List<Integer>> inputManualLottos) {
+        lottosMap.putIfAbsent(MANUAL, new Lottos(new ManualLottoFactory(Collections.emptyList()), 0));
+        lottosMap.put(MANUAL, new Lottos(new ManualLottoFactory(inputManualLottos), inputManualLottos.size()));
     }
 
-    public LottoResult generateLottoResult(Lottos lottos) {
-        return new LottoResult(lottos, winningNumbers, bonusNumber);
+    private void buyAutoLottos(LottoFactory autoLottoFactory) {
+        lottosMap.put(AUTO, new Lottos(autoLottoFactory, lottoMoney.getAutoLottoSize()));
     }
 
-    public Yield calculateYield(LottoMoney lottoMoney, LottoResult lottoResult) {
-        return new Yield(lottoMoney, lottoResult.getTotalWinningMoney());
+    public LottoResult generateLottoResult(List<Integer> winningNumbers, int bonusNumber) {
+        return new LottoResult(lottosMap, winningNumbers, bonusNumber);
+    }
+
+    public Yield calculateYield(LottoResult lottoResult) {
+        return lottoResult.calculateYield(lottoMoney);
+    }
+
+    public Map<LottoType, List<Lotto>> getLottos() {
+        return lottosMap.entrySet()
+            .stream()
+            .collect(toUnmodifiableMap(Map.Entry::getKey,
+                entry -> entry.getValue().getLottos(), (a, b) -> b));
     }
 }

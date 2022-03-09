@@ -6,7 +6,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,19 +18,30 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.model.Lotto;
 import lotto.model.LottoMoney;
-import lotto.model.LottoNumber;
 import lotto.model.LottoResult;
+import lotto.model.LottoType;
 import lotto.model.Lottos;
+import lotto.model.Rank;
 import lotto.model.Yield;
+import lotto.model.lottofactory.Lotto;
+import lotto.model.lottofactory.LottoFactory;
+import lotto.model.lottofactory.ManualLottoFactory;
 
 class ResultViewTest {
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private final Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
-    private final Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 5, 7, 33, 41));
-    private final Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
+
+    Constructor<Lottos> lottosConstructor = Lottos.class
+        .getDeclaredConstructor(LottoFactory.class, int.class);
+    Constructor<LottoResult> lottoResultConstructor = LottoResult.class.
+        getDeclaredConstructor(Map.class, List.class, int.class);
+    Constructor<LottoMoney> lottoMoneyConstructor = LottoMoney.class.getDeclaredConstructor(long.class, int.class);
+    Constructor<Yield> yieldConstructor = Yield.class.getDeclaredConstructor(LottoMoney.class, Map.class);
+
+    ResultViewTest() throws
+        NoSuchMethodException {
+    }
 
     @BeforeEach
     public void setUp() {
@@ -36,26 +50,42 @@ class ResultViewTest {
 
     @Test
     @DisplayName("생성된 로또 출력 확인")
-    void printGeneratedLottosTest() {
-        ResultView.printGeneratedLottos(lottos.getLottos());
+    void printGeneratedLottosTest() throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        lottosConstructor.setAccessible(true);
+
+        Lottos manualLottos = lottosConstructor.newInstance(new TestManualLottoFactory(), 1);
+        Lottos autoLottos = lottosConstructor.newInstance(new TestAutoLottoFactory(), 2);
+        Map<LottoType, List<Lotto>> lottosMap = new HashMap<>();
+        lottosMap.put(LottoType.MANUAL, manualLottos.getLottos());
+        lottosMap.put(LottoType.AUTO, autoLottos.getLottos());
+
+        ResultView.printGeneratedLottos(lottosMap);
 
         assertThat(outputStreamCaptor.toString())
-            .contains("2개를 ")
-            .contains("[1, 2, 5, 7, 33, 41]");
+            .contains("수동으로 1장")
+            .contains("[8, 21, 23, 41, 42, 43]")
+            .contains("자동으로 2개")
+            .contains("[1, 2, 3, 4, 5, 7]");
     }
 
     @Test
     @DisplayName("당첨 통계 출력 확인")
     void printResultStatisticsTest() throws
-        NoSuchMethodException,
-        InvocationTargetException,
-        InstantiationException,
-        IllegalAccessException {
-        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Constructor<LottoNumber> lottoNumberConstructor = LottoNumber.class.getDeclaredConstructor(int.class);
-        lottoNumberConstructor.setAccessible(true);
-        LottoNumber bonusNumber = lottoNumberConstructor.newInstance(7);
-        ResultView.printResultStatistics(new LottoResult(lottos, winningNumbers, bonusNumber));
+        InvocationTargetException, InstantiationException, IllegalAccessException {
+        lottosConstructor.setAccessible(true);
+        lottoResultConstructor.setAccessible(true);
+        lottosConstructor.setAccessible(true);
+
+        Lottos manualLottos = lottosConstructor.newInstance(new TestManualLottoFactory(), 1);
+        Lottos autoLottos = lottosConstructor.newInstance(new TestAutoLottoFactory(), 2);
+        Map<LottoType, Lottos> lottosMap = new EnumMap<>(LottoType.class);
+        lottosMap.put(LottoType.MANUAL, manualLottos);
+        lottosMap.put(LottoType.AUTO, autoLottos);
+
+        LottoResult lottoResult = lottoResultConstructor
+            .newInstance(lottosMap, List.of(1, 2, 3, 4, 5, 6), 7);
+
+        ResultView.printResultStatistics(lottoResult);
 
         assertThat(outputStreamCaptor.toString())
             .contains("5개 일치, 보너스 볼 일치(30000000원)- 1개")
@@ -64,19 +94,22 @@ class ResultViewTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5000:총 수익률은 0.36입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)",
-        "14000:총 수익률은 1.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)"}, delimiter = ':')
+    @CsvSource(value = {"14000:총 수익률은 0.36입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)",
+        "5000:총 수익률은 1.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)"}, delimiter = ':')
     @DisplayName("손해인 경우 수익률을 출력한다.")
-    void printMinusYieldTest(Long totalWinningMoney, String expectedMessage) throws
-        NoSuchMethodException,
+    void printMinusYieldTest(long rawlottoMoney, String expectedMessage) throws
         InvocationTargetException,
         InstantiationException,
         IllegalAccessException {
-        LottoMoney lottoMoney = new LottoMoney(14000);
-
-        Constructor<Yield> yieldConstructor = Yield.class.getDeclaredConstructor(LottoMoney.class, Long.class);
+        lottoMoneyConstructor.setAccessible(true);
         yieldConstructor.setAccessible(true);
-        Yield yield = yieldConstructor.newInstance(lottoMoney, totalWinningMoney);
+
+        LottoMoney lottoMoney = lottoMoneyConstructor.newInstance(rawlottoMoney, 0);
+
+        Map<Rank, Long> result = new EnumMap<>(Rank.class);
+        result.put(Rank.FIFTH, 1L);
+
+        Yield yield = yieldConstructor.newInstance(lottoMoney, result);
 
         ResultView.printYield(yield);
 
@@ -87,5 +120,27 @@ class ResultViewTest {
     @AfterEach
     void afterAll() {
         System.setOut(new PrintStream(System.out));
+    }
+
+    static class TestAutoLottoFactory implements LottoFactory {
+        private final LottoFactory factory;
+
+        public TestAutoLottoFactory() {
+            this.factory = new ManualLottoFactory(List.of(List.of(1, 2, 3, 4, 5, 7),
+                List.of(1, 2, 5, 7, 33, 41)));
+        }
+
+        @Override
+        public Lotto generate() {
+            return factory.generate();
+        }
+    }
+
+    static class TestManualLottoFactory implements LottoFactory {
+        @Override
+        public Lotto generate() {
+            ManualLottoFactory factory = new ManualLottoFactory(List.of(List.of(8, 21, 23, 41, 42, 43)));
+            return factory.generate();
+        }
     }
 }

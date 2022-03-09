@@ -1,32 +1,29 @@
 package lotto.model;
 
+import static java.util.stream.Collectors.*;
 import static lotto.ValidationUtils.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import lotto.model.lottofactory.Lotto;
+import lotto.model.lottofactory.LottoFactory;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
-        validateEmptyCollection(this.lottos);
+    Lottos(LottoFactory factory, int count) {
+        this.lottos = generateLottos(factory, count);
+        validateNullCollection(this.lottos);
     }
 
-    public Lottos(LottoNumberGenerator lottoNumberGenerator, int count) {
-        this.lottos = generateLottos(lottoNumberGenerator, count);
-    }
-
-    private List<Lotto> generateLottos(LottoNumberGenerator lottoNumberGenerator, int count) {
+    private List<Lotto> generateLottos(LottoFactory factory, int count) {
         return IntStream.range(0, count)
-            .mapToObj(i -> lottoNumberGenerator.generate())
-            .map(Lotto::new)
-            .collect(Collectors.toUnmodifiableList());
+            .mapToObj(i -> factory.generate())
+            .collect(toUnmodifiableList());
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return List.copyOf(lottos);
     }
 }
