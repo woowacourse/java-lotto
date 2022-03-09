@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotterymachine.model.LotteryTicket;
-import lotterymachine.vo.Ball;
 import lotterymachine.vo.Count;
 
 public class LotteryGenerator {
@@ -24,7 +23,7 @@ public class LotteryGenerator {
 
     private static LotteryTicket generateTicket() {
         Collections.shuffle(preparedNumbers);
-        List<Ball> selectedBalls = Ball.createBalls(preparedNumbers.subList(FIRST_NUMBER_INDEX, LAST_NUMBER_INDEX));
-        return new LotteryTicket(selectedBalls);
+        List<Integer> selectedNumbers = preparedNumbers.subList(FIRST_NUMBER_INDEX, LAST_NUMBER_INDEX);
+        return LotteryTicket.from(selectedNumbers);
     }
 }

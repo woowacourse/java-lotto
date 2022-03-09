@@ -1,21 +1,26 @@
 package lotterymachine.model;
 
-import static lotterymachine.model.ErrorMessage.DUPLICATE_NUMBER;
-import static lotterymachine.model.ErrorMessage.INVALID_SIZE;
-
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotterymachine.vo.Ball;
 
 public class LotteryTicket {
     private static final int TICKET_SIZE = 6;
+    private static final String INVALID_SIZE_EXCEPTION = "로또 숫자는 여섯개를 입력해야합니다.";
+    private static final String DUPLICATE_NUMBER_EXCEPTION = "중복된 숫자가 입력되었습니다.";
 
-    private final List<Ball> balls;
+    private final Set<Ball> balls;
 
     public LotteryTicket(final List<Ball> balls) {
         validateSize(balls);
+        this.balls = new HashSet<>(balls);
         validateDuplication(balls);
-        this.balls = balls;
+    }
+
+    public static LotteryTicket from(List<Integer> numbers) {
+        return new LotteryTicket(Ball.getBalls(numbers));
     }
 
     public int countMatchingBalls(LotteryTicket ticket) {
@@ -36,13 +41,13 @@ public class LotteryTicket {
 
     private void validateSize(List<Ball> balls) {
         if (balls.size() != TICKET_SIZE) {
-            throw new IllegalArgumentException(INVALID_SIZE.getMessage());
+            throw new IllegalArgumentException(INVALID_SIZE_EXCEPTION);
         }
     }
 
     private void validateDuplication(List<Ball> balls) {
-        if (balls.stream().distinct().count() != balls.size()) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER.getMessage());
+        if (this.balls.size() != balls.size()) {
+            throw new IllegalArgumentException(DUPLICATE_NUMBER_EXCEPTION);
         }
     }
 }

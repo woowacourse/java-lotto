@@ -1,5 +1,6 @@
 package lotterymachine.view;
 
+import java.util.Collections;
 import lotterymachine.dto.LotteryResultDto;
 import lotterymachine.model.LotteryTicket;
 
@@ -7,8 +8,15 @@ import java.util.List;
 
 public class OutputView {
 
-    public static void printNumberOfTicket(int number) {
-        System.out.printf("%d개를 구매했습니다.%n", number);
+    public static void printInputManualPurchase(boolean isPurchasable) {
+        if (isPurchasable) {
+            return;
+        }
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printPurchaseDetails(int manualTickets, int totalTickets) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualTickets, totalTickets - manualTickets);
     }
 
     public static void printLotteryTickets(List<LotteryTicket> lotteryTickets) {
@@ -20,6 +28,7 @@ public class OutputView {
     }
 
     public static void printStatistics(List<LotteryResultDto> winningLotteries) {
+        Collections.sort(winningLotteries);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("당첨 통계").append("\n").append("---------").append("\n");
         winningLotteries.forEach(lottery -> stringBuilder.append(getLotteryStatistic(lottery)));
