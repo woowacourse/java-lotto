@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int PRICE = 1000;
-
     public static final int SIZE = 6;
 
     private final Set<Number> numbers;
@@ -25,7 +23,7 @@ public class Lotto {
     }
 
     public Set<Number> getNumbers() {
-        return numbers;
+        return Set.copyOf(numbers);
     }
 
     private static void validateNumbers(List<Integer> numbers) {

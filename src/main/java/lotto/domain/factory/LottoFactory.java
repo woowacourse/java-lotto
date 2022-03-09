@@ -1,10 +1,13 @@
-package lotto.domain.lotto;
+package lotto.domain.factory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Number;
 
 public class LottoFactory {
 
@@ -24,7 +27,7 @@ public class LottoFactory {
         return new Lotto(LOTTO_NUMBERS.subList(SUB_LIST_FROM_INDEX, Lotto.SIZE));
     }
 
-    public static Lotto valueOf(String text) {
+    public static Lotto manual(String text) {
         String[] splitText = text.split(TEXT_DELIMITER);
         return new Lotto(toNumberList(splitText));
     }

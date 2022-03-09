@@ -1,9 +1,10 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -21,7 +22,7 @@ public class MoneyTest {
             @ParameterizedTest
             @CsvSource(value = {"1000|1000", "2000000000|2000000000"}, delimiter = '|')
             @DisplayName("객체를 생성한다.")
-            void it_create_ok(String value, int expected) {
+            void it_create_ok(int value, int expected) {
                 Money money = new Money(value);
 
                 assertThat(money.getValue()).isEqualTo(expected);
@@ -35,24 +36,10 @@ public class MoneyTest {
             @ParameterizedTest
             @ValueSource(strings = {"999", "2000000001"})
             @DisplayName("예외를 발생시킨다.")
-            void it_throw_exception(String value) {
+            void it_throw_exception(int value) {
                 assertThatThrownBy(() -> new Money(value))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("1000부터 20억의 숫자여야 합니다.");
-            }
-        }
-
-        @Nested
-        @DisplayName("숫자가 아닌 값이 주어지면")
-        class Context_with_not_a_number {
-
-            @ParameterizedTest
-            @ValueSource(strings = {"a", "%%", "", " "})
-            @DisplayName("예외를 발생시킨다.")
-            void it_throw_exception(String value) {
-                assertThatThrownBy(() -> new Money(value))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("숫자여야 합니다.");
             }
         }
 
@@ -63,7 +50,7 @@ public class MoneyTest {
             @ParameterizedTest
             @CsvSource(value = {"1000|1000", "2000|2000"}, delimiter = '|')
             @DisplayName("객체를 생성한다.")
-            void it_create_ok(String value, int expected) {
+            void it_create_ok(int value, int expected) {
                 Money money = new Money(value);
 
                 assertThat(money.getValue()).isEqualTo(expected);
@@ -77,10 +64,38 @@ public class MoneyTest {
             @ParameterizedTest
             @ValueSource(strings = {"1001", "2100"})
             @DisplayName("예외를 발생시킨다.")
-            void it_throw_exception(String value) {
+            void it_throw_exception(int value) {
                 assertThatThrownBy(() -> new Money(value))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("1000으로 나누어 떨어져야 합니다.");
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("살 수 있는 로또 개수를 알려주는 기능은")
+    class countToBuyLotto {
+        @Test
+        @DisplayName("살 수 있는 로또 개수를 알려준다.")
+        void it_returns_count_to_buy_lotto() {
+            Money money = new Money(5000);
+            assertThat(money.countToBuyLotto().value()).isEqualTo(5);
+        }
+    }
+
+    @Nested
+    @DisplayName("입력한 수 만큼 로또를 살 수 있는지 알려주는 기능은")
+    class validateBuyableLottoCount {
+        @Nested
+        @DisplayName("살 수 없는 개수가 주어지면")
+        class Context_with_Count_to_cant_buy {
+            @Test
+            @DisplayName("예외를 발생시킨다.")
+            void it_throw_exception() {
+                Money money = new Money(5000);
+                assertThatThrownBy(() -> money.validateBuyableLottoCount(new Count(6)))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("5장 까지 살 수 있습니다.");
             }
         }
     }

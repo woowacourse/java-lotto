@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.domain.factory.LottoFactory;
+
 public class LottoTest {
 
     @Nested
@@ -57,7 +59,7 @@ public class LottoTest {
                 Lotto lotto = LottoFactory.auto();
                 int actual = 0;
                 for (int i = 1; i < 46; i++) {
-                    if (lotto.contains(new Number(String.valueOf(i)))) {
+                    if (lotto.contains(new Number(i))) {
                         actual++;
                     }
                 }
@@ -76,7 +78,7 @@ public class LottoTest {
             @ValueSource(strings = {"1, 2, 3, 4, 5, 6"})
             @DisplayName("구분된 숫자 6개로 객체를 반환한다.")
             void it_returns_lotto(String input) {
-                assertDoesNotThrow(() -> LottoFactory.valueOf(input));
+                assertDoesNotThrow(() -> LottoFactory.manual(input));
             }
         }
     }
@@ -93,7 +95,7 @@ public class LottoTest {
             @DisplayName("true를 반환한다.")
             void it_returns_true() {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-                assertThat(lotto.contains(new Number("1"))).isTrue();
+                assertThat(lotto.contains(new Number(1))).isTrue();
             }
         }
 
@@ -105,7 +107,7 @@ public class LottoTest {
             @DisplayName("false를 반환한다.")
             void it_returns_true() {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-                assertThat(lotto.contains(new Number("7"))).isFalse();
+                assertThat(lotto.contains(new Number(7))).isFalse();
             }
         }
     }

@@ -9,10 +9,6 @@ public class Number {
 
     private final int value;
 
-    public Number(final String text) {
-        this(toInt(text));
-    }
-
     public Number(int number) {
         validateValueRange(number);
         this.value = number;
@@ -20,14 +16,6 @@ public class Number {
 
     public int getValue() {
         return value;
-    }
-
-    private static int toInt(final String text) {
-        try {
-            return Integer.parseInt(text);
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("숫자여야 합니다.");
-        }
     }
 
     private void validateValueRange(final int number) {

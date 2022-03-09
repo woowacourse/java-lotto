@@ -2,7 +2,9 @@ package lotto.view;
 
 import java.util.stream.Collectors;
 
+import lotto.domain.lotto.Count;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoCountToBuy;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.Number;
 import lotto.domain.Result;
@@ -17,8 +19,13 @@ public class OutputView {
         System.out.println(exception.getMessage());
     }
 
-    public static void printLottoCount(int amount) {
-        System.out.printf("%d개를 구매했습니다.%n", amount);
+    public static void printRequestManualLottoNumberUI() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.(\", \"를 기준으로 6개 입력해주세요.)");
+    }
+
+    public static void printLottoCount(LottoCountToBuy lottoCountToBuy) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n",
+            lottoCountToBuy.getManualCount(), lottoCountToBuy.getAutoCount());
     }
 
     public static void printLottos(Lottos lottos) {
@@ -36,11 +43,11 @@ public class OutputView {
     public static void printResult(Result result) {
         System.out.printf("%n당첨 통계%n---------%n");
         for (LottoRanking value : LottoRanking.values()) {
-            if (value == LottoRanking.Fail) {
+            if (value == LottoRanking.FAIL) {
                 continue;
             }
             String bonusBallMessage = " ";
-            if (value.isContainBonus()) {
+            if (value.isContainsBonus()) {
                 bonusBallMessage = ", 보너스 볼 일치";
             }
             System.out.printf("%d개 일치%s(%d원) - %d개%n", value.getCount(), bonusBallMessage, value.getPrice(),
