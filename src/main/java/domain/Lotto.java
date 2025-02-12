@@ -26,6 +26,20 @@ public class Lotto {
         }
     }
 
+    public int validateBonus(String input) {
+        int bonus = validateIsInteger(input);
+        validateRange(bonus);
+        validateIsDuplicate(bonus);
+        return bonus;
+    }
+
+    private void validateIsDuplicate(int input) {
+        Integer bonus = Integer.valueOf(input);
+        numbers.stream().filter(number -> number.equals(bonus)).forEach(number -> {
+            throw new IllegalArgumentException(ExceptionMessage.DUPLICATED_NUMBER.getMessage());
+        });
+    }
+
     private void validateRange(int num) {
         if(num < LOTTO_MIN || num > LOTTO_MAX){
             throw new IllegalArgumentException(ExceptionMessage.INVALID_RANGE.getMessage());

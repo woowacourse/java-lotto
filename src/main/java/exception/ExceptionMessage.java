@@ -6,6 +6,7 @@ public enum ExceptionMessage {
     INVALID_UNIT_PRICE("구매 금액 단위로 입력해 주세요."),
     INVALID_RANGE("범위에 맞는 로또 번호를 입력하세요."),
     INVALID_FORMAT("쉼표로 구분하여 정수로 입력해 주세요."),
+    DUPLICATED_NUMBER("보너스 번호는 로또 번호와 중복될 수 없습니다."),
 
     PREFIX("[ERROR] ");
 
