@@ -2,10 +2,10 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class LottoManager {
     private static final int LOTTO_UNIT_PRICE = 1000;
+    private static final int MAX_PURCHASE_AMOUNT = 100000;
 
     public List<Lotto> purchase(final int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
@@ -26,6 +26,10 @@ public class LottoManager {
 
         if (purchaseAmount <= 0) {
             throw new IllegalArgumentException("구입금액은 양수여야 합니다.");
+        }
+
+        if (purchaseAmount > MAX_PURCHASE_AMOUNT) {
+            throw  new IllegalArgumentException("구입금액은 최대 10만원까지입니다.");
         }
     }
 }
