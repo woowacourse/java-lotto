@@ -34,4 +34,16 @@ public enum Rank {
 
         return found;
     }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isMatchBonus() {
+        return matchBonus;
+    }
+
+    public long getPrice() {
+        return price;
+    }
 }
