@@ -2,6 +2,7 @@ package domain;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Optional;
 
 public class LottoStatisticsCalculator {
     
@@ -22,9 +23,8 @@ public class LottoStatisticsCalculator {
             int matchCount = lotto.getMatchCount(matchNumbers);
             boolean bonusMatch = lotto.isBonusMatch(bonusNumber);
             
-            LottoPrize matchPrize = LottoPrize.match(matchCount, bonusMatch);
-            
-            enumMap.put(matchPrize, enumMap.get(matchPrize) + 1);
+            Optional<LottoPrize> matchPrize = LottoPrize.match(matchCount, bonusMatch);
+            matchPrize.ifPresent(lottoPrize -> enumMap.put(lottoPrize, enumMap.get(lottoPrize) + 1));
         }
         
         return enumMap;

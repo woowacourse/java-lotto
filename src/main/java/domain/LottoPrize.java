@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 /*
 1등 : 6개 일치 (2,000,000,000원)
 2등 : 5개 일치, 보너스 볼 일치(30000000원)
@@ -9,54 +12,33 @@ package domain;
  */
 public enum LottoPrize {
     
-    FIRST(
-            (matchCount, isBonusMatch) -> matchCount == 6,
-            2_000_000_000
-    ),
-    SECOND(
-            (matchCount, isBonusMatch) -> matchCount == 5 && isBonusMatch,
-            30_000_000
-    ),
-    THIRD(
-            (matchCount, isBonusMatch) -> matchCount == 5 && !isBonusMatch,
-            1_500_000
-    ),
-    FOURTH(
-            (matchCount, isBonusMatch) -> matchCount == 4,
-            50_000
-    ),
-    FIFTH(
-            (matchCount, isBonusMatch) -> matchCount == 3,
-            5_000
-    ),
-    NONE(
-            (matchCount, isBonusMatch) -> matchCount < 3,
-            0
-    ),
+    FIRST(6, null, 2_000_000_000),
+    SECOND(5, true, 30_000_000),
+    THIRD(5, false, 1_500_000),
+    FOURTH(4, null, 50_000),
+    FIFTH(3, null, 5_000),
     ;
     
-    private final PrizeMatcher prizeMatcher;
+    private final int minMatchCount;
+    private final Boolean isBonusMatch;
     private final long prizeMoney;
     
-    LottoPrize(PrizeMatcher prizeMatcher, long prizeMoney) {
-        this.prizeMatcher = prizeMatcher;
+    LottoPrize(int minMatchCount, Boolean isBonusMatch, long prizeMoney) {
+        this.minMatchCount = minMatchCount;
+        this.isBonusMatch = isBonusMatch;
         this.prizeMoney = prizeMoney;
     }
     
-    public static LottoPrize match(int matchCount, boolean isBonusMatch) {
-        for (LottoPrize lottoPrize : LottoPrize.values()) {
-            boolean matches = lottoPrize.prizeMatcher.matches(matchCount, isBonusMatch);
-            if (matches) {
-                return lottoPrize;
-            }
-        }
-        
-        throw new IllegalStateException("해당하는 당첨 정보가 존재하지 않습니다.");
+    public static Optional<LottoPrize> match(int matchCount, boolean isBonusMatch) {
+        return Arrays.stream(LottoPrize.values())
+                .filter(prize -> prize.minMatchCount == matchCount)
+                .filter(prize -> {
+                    if (prize.isBonusMatch != null) {
+                        return prize.isBonusMatch == isBonusMatch;
+                    }
+                    return true;
+                }).sorted()
+                .findFirst();
     }
     
-    @FunctionalInterface
-    private interface PrizeMatcher {
-        
-        boolean matches(int matchCount, boolean isBonusMatch);
-    }
 }

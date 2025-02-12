@@ -33,7 +33,6 @@ class LottoStatisticsCalculatorTest {
         assertThat(result).containsEntry(LottoPrize.THIRD, 2);
         assertThat(result).containsEntry(LottoPrize.FOURTH, 1);
         assertThat(result).containsEntry(LottoPrize.FIFTH, 1);
-        assertThat(result).containsEntry(LottoPrize.NONE, 0);
     }
     
 }
