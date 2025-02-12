@@ -26,5 +26,8 @@ public class LottoController {
         
         outputView.printPurchase(lottos.size());
         outputView.printLottos(lottos);
+        
+        outputView.printMatchLotto();
+        List<Integer> nubmers = inputView.inputMatchLotto();
     }
 }
