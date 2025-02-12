@@ -12,3 +12,9 @@
 - 보너스볼 입력받기
 - 당첨통계 게산하기
 
+## 예외처리
+- [x] 로또 번호 예외처리
+  - 개수가 6개가 아닌 경우 `IllegalArgumentException`을 발생시킨다.
+  - 범위가 1이상 45이하가 아닌 경우 `IllegalArgumentException`을 발생시킨다.
+  - 중복된 숫자가 존재하는 경우 `IllegalArgumentException`을 발생시킨다.
+
