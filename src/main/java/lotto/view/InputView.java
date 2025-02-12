@@ -12,7 +12,7 @@ public class InputView {
     }
 
     public static String readWinningNumbers() {
-        String message = "지난 주 당첨 번호를 입력해 주세요.";
+        String message = "\n지난 주 당첨 번호를 입력해 주세요.";
         return readMessage(message);
     }
 
