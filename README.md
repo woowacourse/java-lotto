@@ -19,7 +19,7 @@
 - [ ] 당첨 통계를 출력한다
 
 ## 예외
-- [ ] 구입 금액이 숫자가 아니면 IllegalArgumentException을 던진다.
+- [x] 구입 금액이 숫자가 아니면 IllegalArgumentException을 던진다.
 - [x] 구입 금액이 1000원으로 나누어지지 않으면 IllegalArgumentException을 던진다.
 - [x] 구입 금액이 양수가 아니라면 IllegalArgumentException을 던진다.
 - [ ] 당첨 번호와 보너스 번호가 중복되면 IllegalArgumentException을 던진다.
