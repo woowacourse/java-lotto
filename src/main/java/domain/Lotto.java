@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -7,10 +10,10 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
         validateLottoRange(numbers);
         validateLottoDuplicate(numbers);
         validateLottoNumberSize(numbers);
+        this.numbers=numbers;
     }
 
     private void validateLottoRange(List<Integer> numbers) {
@@ -34,4 +37,9 @@ public class Lotto {
         }
     }
 
+    public List<Integer> getSortedNumbers(){
+        List<Integer> numbers = new ArrayList<>(this.numbers);
+        Collections.sort(numbers);
+        return numbers;
+    }
 }
