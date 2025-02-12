@@ -58,6 +58,4 @@ public class LottoTest {
                 Arguments.arguments(List.of(6,5,4,3,2,1))
         );
     }
-
-
 }
