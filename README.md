@@ -24,4 +24,7 @@
 - [x] 구입 금액이 1000원으로 나누어지지 않으면 IllegalArgumentException을 발생시키고, 재입력 받는다.
 - [x] 구입 금액이 양수가 아니라면 IllegalArgumentException을 발생시키고, 재입력 받는다.
 - [x] 구입 금액이 10만원을 넘으면 IllegalArgumentException을 발생시키고, 재입력 받는다.
-- TODO : 당첨 번호, 보너스 번호 검증 (1~45 사이, 6개, 중복)
+- [ ] 입력한 당첨 번호가 1 ~ 45 사이가 아니면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+- [ ] 입력한 보너스 번호가 1 ~ 45 사이가 아니면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+- [ ] 입력한 당첨 번호가 고유한 6개의 번호가 아니라면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+- [ ] 입력한 보너스 번호가 당첨 번호와 중복된다면 IllegalArgumentException을 발생시키고, 재입력 받는다.
