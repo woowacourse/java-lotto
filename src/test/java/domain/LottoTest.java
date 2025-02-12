@@ -3,6 +3,7 @@ package domain;
 import static org.junit.jupiter.api.Assertions.*;
 
 import domain.numbergenerator.RandomNumberGenerator;
+import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,5 +20,17 @@ class LottoTest {
 
         // then
         Assertions.assertThat(lotto).isInstanceOf(Lotto.class);
+    }
+
+    @DisplayName("로또 validation test")
+    @Test
+    void test() {
+        // given
+        Lotto correctLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+        Assertions.assertThat(correctLotto).isInstanceOf(Lotto.class);
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 5)));
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(0,1,2,3,4,5)));
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1,2,3,4,5,6,7)));
     }
 }
