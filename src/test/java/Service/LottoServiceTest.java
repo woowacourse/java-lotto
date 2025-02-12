@@ -11,9 +11,7 @@ class LottoServiceTest {
 
     @Test
     void 로또_갯수(){
-        LottoService lottoService = new LottoService();
         int price = 14000;
-
         Assertions.assertThat(lottoService.lottoCount(price)).isEqualTo(14);
 
     }
