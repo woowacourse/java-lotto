@@ -15,5 +15,6 @@ public class LottoController {
 
     public void start() {
         inputView.amountInputMessage();
+        String amountInput = inputView.getAmountInput();
     }
 }
