@@ -1,11 +1,11 @@
 import controller.LottoController;
-import view.Output;
+import view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        Output output = new Output();
+        OutputView outputView = new OutputView();
 
-        LottoController lottoController = new LottoController(output);
+        LottoController lottoController = new LottoController(outputView);
         lottoController.run();
     }
 }
