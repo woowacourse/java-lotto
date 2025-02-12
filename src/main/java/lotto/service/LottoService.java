@@ -7,9 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoService {
-    private Bank bank = new Bank();
+    private final Bank bank;
     private Lottos lottos;
-    private WinningNumbers winningNumbers = new WinningNumbers();
+    private WinningNumbers winningNumbers;
+
+    public LottoService() {
+        this.bank = new Bank();
+    }
 
     public List<Lotto> buyLottos(int payment) {
         bank.use(payment);
