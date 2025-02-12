@@ -26,4 +26,8 @@ public class InputView {
                 .map(Integer::parseInt)
                 .toList();
     }
+    
+    public int inputBonusNumber() {
+        return SC.nextInt();
+    }
 }

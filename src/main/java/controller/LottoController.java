@@ -29,5 +29,8 @@ public class LottoController {
         
         outputView.printMatchLotto();
         List<Integer> nubmers = inputView.inputMatchLotto();
+        
+        outputView.printBonusNumber();
+        int bonusNumber = inputView.inputBonusNumber();
     }
 }
