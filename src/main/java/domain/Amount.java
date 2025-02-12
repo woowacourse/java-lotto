@@ -11,7 +11,7 @@ public class Amount {
         int price = validateIsInteger(inputPrice);
         validateIsPositive(price);
         validatePerPrice(price);
-        this.amount = price;
+        this.amount = price/LOTTO_PRICE;
     }
 
     public boolean compareAmount(int amount) {

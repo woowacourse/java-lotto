@@ -25,10 +25,11 @@ public class LottoController {
         LottosFactory lottosFactory = new LottosFactory();
         Lottos lottos = lottosFactory.from(amount);
 
+        outputView.printLottos(lottos.getLottosDto());
+
         String winningNumber = inputView.inputWinningLotto();
         String bonusNumber = inputView.inputBonusLotto();
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
-
     }
 
 

@@ -1,5 +1,7 @@
 package domain;
 
+import domain.dto.GetLottoDto;
+import domain.dto.GetLottosDto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,4 +17,12 @@ public class Lottos {
         lottos.add(lotto);
     }
 
+
+    public GetLottosDto getLottosDto() {
+        List<GetLottoDto> getLottoDtos = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            getLottoDtos.add(lotto.getLottoDto());
+        }
+        return new GetLottosDto(getLottoDtos);
+    }
 }

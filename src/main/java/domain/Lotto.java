@@ -1,5 +1,6 @@
 package domain;
 
+import domain.dto.GetLottoDto;
 import exception.ExceptionMessage;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,5 +53,9 @@ public class Lotto {
         }catch(NumberFormatException e){
             throw new IllegalArgumentException(ExceptionMessage.INVALID_FORMAT.getMessage());
         }
+    }
+
+    public GetLottoDto getLottoDto() {
+        return new GetLottoDto(numbers);
     }
 }
