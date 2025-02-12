@@ -18,7 +18,7 @@ class InputConverterTest {
         assertThat(winningNumbers).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }
 
-    @ValueSource(strings = {"a", "-1", "1,,2", "1,a"})
+    @ValueSource(strings = {"a", "-1", "1,,2", "1,a", "1,46", "0,45"})
     @ParameterizedTest
     void 당첨_번호_입력_값이_올바르지_않다면_예외를_던진다(String input) {
 
@@ -34,7 +34,7 @@ class InputConverterTest {
         assertThat(bonusNumber).isEqualTo(1);
     }
 
-    @ValueSource(strings = {"a", "-1", "1,,2", "1,a", "1,2"})
+    @ValueSource(strings = {"a", "-1", "1,,2", "1,a", "1,2", "0", "46"})
     @ParameterizedTest
     void 보너스_번호_입력_값이_올바르지_않다면_예외를_던진다(String input) {
 

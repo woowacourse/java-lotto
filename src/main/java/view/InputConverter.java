@@ -20,6 +20,7 @@ public class InputConverter {
 
         return Arrays.stream(input.split(WINNING_NUMBER_DELIMITER))
                 .map(Integer::parseInt)
+                .peek(InputConverter::validateNumberRange)
                 .toList();
     }
 
@@ -30,6 +31,15 @@ public class InputConverter {
             throw new IllegalArgumentException("당첨 번호 입력 양식이 올바르지 않습니다.");
         }
 
-        return Integer.parseInt(input);
+        int bonusNumber = Integer.parseInt(input);
+        validateNumberRange(bonusNumber);
+
+        return bonusNumber;
+    }
+
+    private static void validateNumberRange(int value) {
+        if (value < 1 || value > 45) {
+            throw new IllegalArgumentException("당첨 번호는 1 ~ 45만 가능합니다.");
+        }
     }
 }
