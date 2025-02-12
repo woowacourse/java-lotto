@@ -13,9 +13,9 @@ public class InputValidator {
         }
     }
 
-    private void validateNotStringNumber(String money) {
+    public void validateNotStringNumber(String value) {
         try {
-            Integer.parseInt(money);
+            Integer.parseInt(value);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("허용되지 않는 입력입니다.", e);
         }

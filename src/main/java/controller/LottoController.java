@@ -41,6 +41,7 @@ public class LottoController {
                 .toList();
         Lotto winningNumbers = new Lotto(numbers);
         String rawBonusNumber = inputView.inputBonusNumber();
+        inputValidator.validateNotStringNumber(rawBonusNumber);
         Number bonusNumber = new Number(Integer.parseInt(rawBonusNumber));
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
     }
