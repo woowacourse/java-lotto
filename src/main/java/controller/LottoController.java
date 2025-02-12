@@ -1,16 +1,16 @@
 package controller;
 
-import view.Output;
+import view.OutputView;
 
 public class LottoController {
 
-    private final Output output;
+    private final OutputView outputView;
 
-    public LottoController(Output output) {
-        this.output = output;
+    public LottoController(OutputView outputView) {
+        this.outputView = outputView;
     }
 
     public void run() {
-        output.printStartMessage();
+        outputView.printStartMessage();
     }
 }
