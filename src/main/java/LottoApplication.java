@@ -1,8 +1,10 @@
 import controller.LottoController;
+import service.LottoService;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController();
+        LottoService lottoService = new LottoService();
+        LottoController lottoController = new LottoController(lottoService);
         lottoController.run();
     }
 }
