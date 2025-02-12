@@ -1,5 +1,4 @@
 import config.AppConfig;
-import config.Appconfig;
 import controller.LottoController;
 
 public class Application {

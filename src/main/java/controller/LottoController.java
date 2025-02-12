@@ -16,6 +16,7 @@ public class LottoController {
     }
 
     public void run() {
+        String inputMoney = inputView.inputLottoMoney();
 
     }
 }
