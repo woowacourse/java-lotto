@@ -10,7 +10,7 @@
 - 구입 금액이 숫자가 아니면 IllegalArgumentException 을 발생시킨 후, 애플리케이션을 종료한다.
 - int 오버플로우 발생 시 IllegalArgumentException 을 발생시킨 후, 애플리케이션을 종료한다.
 
-### 2. 구입 금액에 따라 로또를 발행한다.
+### 2. 구입 금액에 따라 로또를 발행한다. (완료)
 
 - 구입 금액이 1000 단위가 아니면 IllegalArgumentException 을 발생시킨 후, 애플리케이션을 종료한다.
 - 구입 금액이 음수이면 IllegalArgumentException 을 발생시킨 후, 애플리케이션을 종료한다.
