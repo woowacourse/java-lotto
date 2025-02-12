@@ -10,7 +10,7 @@ public class LottoController {
 
     public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
-        this.outputView=outputView;
+        this.outputView = outputView;
     }
 
     public void start() {
@@ -18,8 +18,5 @@ public class LottoController {
         String winningNumbers = inputView.winningNumbersInput();
         String bonusNumber = inputView.bonusNumberInput();
 
-        System.out.println(purchaseAmount);
-        System.out.println(winningNumbers);
-        System.out.println(bonusNumber);
     }
 }
