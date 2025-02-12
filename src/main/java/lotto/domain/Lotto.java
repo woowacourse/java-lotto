@@ -29,4 +29,10 @@ public class Lotto {
     public int hashCode() {
         return Objects.hashCode(numbers);
     }
+
+    public List<Integer> getNumbers() {
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .toList();
+    }
 }
