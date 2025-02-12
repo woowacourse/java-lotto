@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class Lotto {
 
-    private List<Integer> numbers;
+    private LottoNumber numbers;
 
-
+    public Lotto(LottoNumber numbers) {
+        this.numbers = numbers;
+    }
 }
