@@ -6,4 +6,5 @@ public class ErrorMessage {
     public static final String NUMBER_COUNT_EXCEPTION = "6개의 숫자를 입력해주세요.";
     public static final String NUMBER_BOUND_EXCEPTION = "1~45 사이의 숫자를 입력해주세요.";
     public static final String NUMBER_DUPLICATE_EXCEPTION = "중복이 아닌 숫자를 입력해주세요";
+    public static final String BONUS_NUMBER_DUPLICATE_EXCEPTION = "당첨 번호와 중복이 아닌 숫자를 입력해주세요";
 }

@@ -13,6 +13,10 @@ public class LottoNumbers {
         this.numbers = generateLottoNumbers();
     }
 
+    public LottoNumbers(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
     private List<Integer> generateLottoNumbers() {
         Set<Integer> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < Constants.LOTTO_NUMBER_COUNT) {

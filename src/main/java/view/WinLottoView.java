@@ -14,28 +14,30 @@ public class WinLottoView {
         System.out.println(OutputMessage.WIN_NUMBERS);
     }
 
-    public void readWinNumbers() {
+    public List<Integer> readWinNumbers() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        List<String> winNumbers = Arrays.stream(input.split(Constants.DELIMITER))
+        List<String> splitInput = Arrays.stream(input.split(Constants.DELIMITER))
                 .map(String::trim)
                 .toList();
-        validateNumberCount(winNumbers);
-        winNumbers.forEach(this::validatePositiveNumber);
-        List<Integer> numbers = winNumbers.stream().mapToInt(this::validatePositiveNumber).boxed().toList();
-        numbers.forEach(this::validateBound);
-        validateDuplicate(numbers);
+        validateNumberCount(splitInput);
+        splitInput.forEach(this::validatePositiveNumber);
+        List<Integer> winNumbers = splitInput.stream().mapToInt(this::validatePositiveNumber).boxed().toList();
+        winNumbers.forEach(this::validateBound);
+        validateDuplicate(winNumbers);
+        return winNumbers;
     }
 
     public void printBonusNumberGuide() {
         System.out.println(OutputMessage.BONUS_NUMBER);
     }
 
-    public void readBonusNumber() {
+    public Integer readBonusNumber() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         Integer bonusNumber = validatePositiveNumber(input);
         validateBound(bonusNumber);
+        return bonusNumber;
     }
 
 

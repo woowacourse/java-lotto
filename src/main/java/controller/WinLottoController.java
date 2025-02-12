@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.List;
 import model.WinLotto;
 import view.WinLottoView;
 
@@ -8,10 +9,11 @@ public class WinLottoController {
 
     public WinLotto winLotto() {
         winLottoView.printWinNumberGuide();
-        winLottoView.readWinNumbers();
+        List<Integer> winNumbers = winLottoView.readWinNumbers();
         winLottoView.printBonusNumberGuide();
-        winLottoView.readBonusNumber();
-        return null;
+        Integer bonusNumber = winLottoView.readBonusNumber();
+
+        return new WinLotto(winNumbers, bonusNumber);
 
     }
 }
