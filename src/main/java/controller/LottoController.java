@@ -2,6 +2,7 @@ package controller;
 
 import domain.Lotto;
 import domain.LottoFactory;
+import domain.LottoStats;
 import view.InputView;
 import view.OutputView;
 
@@ -15,5 +16,10 @@ public class LottoController {
             lottos.add(LottoFactory.makeLotto());
         }
         OutputView.printLottos(lottos);
+
     }
+
+//    private static LottoStats getWinningStats(List<Lotto> lottos){
+//
+//    }
 }
