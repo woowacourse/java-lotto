@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoStore {
@@ -10,7 +9,6 @@ public class LottoStore {
     public LottoStore(LottoNumberGenerator lottoNumberGenerator) {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
-
 
     public List<LottoTicket> buy(final int purchaseAmount) {
         validateAmountUnit(purchaseAmount);
