@@ -14,7 +14,12 @@ public class LottoController {
     }
 
     public void start() {
-        inputView.amountInputMessage();
-        String amountInput = inputView.getAmountInput();
+        String purchaseAmount = inputView.purchaseAmountInput();
+        String winningNumbers = inputView.winningNumbersInput();
+        String bonusNumber = inputView.bonusNumberInput();
+
+        System.out.println(purchaseAmount);
+        System.out.println(winningNumbers);
+        System.out.println(bonusNumber);
     }
 }
