@@ -12,7 +12,7 @@ public class NumberGenerator {
 
         SortedSet<Integer> lottoSet = new TreeSet<>();
         while (true) {
-            int ranNum = random.nextInt(maxValue - minValue) + minValue;
+            int ranNum = random.nextInt(maxValue - minValue + 1) + minValue;
             lottoSet.add(ranNum);
             if (lottoSet.size() == numberQuantity) {
                 break;
