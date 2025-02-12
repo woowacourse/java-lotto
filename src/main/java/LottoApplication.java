@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class LottoApplication {
     public static void main(String[] args) {
-
         int purchaseAmount = readPurchaseAmount();
         int count = purchaseAmount / 1000;
         System.out.println(count + "개를 구매했습니다.");
@@ -17,7 +16,26 @@ public class LottoApplication {
         for(Lotto lotto : lottos) {
             System.out.println(lotto.getNumbers());
         }
+
+        readWinningNumbers();
+
     }
+
+    private static void readWinningNumbers() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        while(true) {
+            try {
+                String inputWinningNumbers = sc.nextLine();
+                WinningNumber winningNumber = new WinningNumber(inputWinningNumbers);
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+     }
 
 
     private static int readPurchaseAmount() {
