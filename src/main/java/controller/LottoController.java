@@ -4,6 +4,7 @@ import domain.Lotto;
 import domain.LottoMachine;
 import domain.LottoStore;
 import domain.Money;
+import java.util.Arrays;
 import java.util.List;
 import view.InputValidator;
 import view.InputView;
@@ -28,5 +29,11 @@ public class LottoController {
         LottoStore lottoStore = new LottoStore(new LottoMachine());
         List<Lotto> lottos = lottoStore.buy(money);
         outputView.printPurchaseLottos(lottos);
+
+        String rawWinningNumbers = inputView.inputWinningNumbers();
+        List<Integer> numbers = Arrays.stream(rawWinningNumbers.split(","))
+                .map(Integer::valueOf)
+                .toList();
+        Lotto winningNumbers = new Lotto(numbers);
     }
 }
