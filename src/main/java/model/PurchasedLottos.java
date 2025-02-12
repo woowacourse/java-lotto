@@ -17,4 +17,8 @@ public class PurchasedLottos {
     public Integer size() {
         return lottos.size();
     }
+
+    public List<LottoNumbers> getLottos() {
+        return lottos;
+    }
 }

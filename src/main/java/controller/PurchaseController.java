@@ -11,6 +11,7 @@ public class PurchaseController {
         Integer purchaseAmount = purchaseView.readPurchaseAmount();
         PurchasedLottos purchasedLottos = new PurchasedLottos(purchaseAmount);
         purchaseView.printPurchaseResult(purchasedLottos.size());
+        purchaseView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;
     }
 }

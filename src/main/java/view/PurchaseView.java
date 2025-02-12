@@ -3,6 +3,8 @@ package view;
 import constant.ErrorMessage;
 import constant.OutputMessage;
 import java.util.Scanner;
+import model.LottoNumbers;
+import model.PurchasedLottos;
 
 public class PurchaseView {
     public void printPurchaseGuide() {
@@ -19,6 +21,14 @@ public class PurchaseView {
 
     public void printPurchaseResult(Integer purchaseCount) {
         System.out.printf(OutputMessage.PURCHASE_RESULT, purchaseCount);
+    }
+
+    public void printPurchasedLottos(PurchasedLottos purchasedLottos) {
+        purchasedLottos.getLottos().forEach(this::printLottoNumbers);
+    }
+
+    private void printLottoNumbers(LottoNumbers lottoNumbers) {
+        System.out.println(lottoNumbers.getNumbers());
     }
 
     private Integer validatePositiveNumber(String input) {

@@ -22,4 +22,8 @@ public class LottoNumbers {
         }
         return lottoNumbers.stream().toList();
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }
