@@ -36,6 +36,11 @@ public class LottoApplication {
             int winningCount = winningResult.getWinningResults().get(winningStatus);
             System.out.printf("%s - %d개\n", winningStatus.getExpression(), winningCount);
         }
+
+        // 당첨 금액 / 구입 금액
+        int totalPrice = winningResult.calculateTotalPrice();
+        double earningRate = ((double) totalPrice)/purchaseAmount;
+        System.out.printf("총 수익률은 %.2f입니다.", earningRate);
     }
 
     private static BonusNumber readBonusNumbers(WinningNumber winningNumber) {

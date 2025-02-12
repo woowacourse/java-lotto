@@ -39,4 +39,8 @@ public enum WinningStatus {
     public String getExpression() {
         return expression;
     }
+
+    public int getPrice() {
+        return price;
+    }
 }

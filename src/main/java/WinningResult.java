@@ -19,4 +19,12 @@ public class WinningResult {
     public Map<WinningStatus, Integer> getWinningResults() {
         return Collections.unmodifiableMap(winningResults);
     }
+
+    public int calculateTotalPrice() {
+        int totalPrice = 0;
+        for(WinningStatus winningStatus : winningResults.keySet()) {
+            totalPrice += winningStatus.getPrice() * winningResults.get(winningStatus);
+        }
+        return totalPrice;
+    }
 }
