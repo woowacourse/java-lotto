@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class RandomNumberPicker {
+public class RandomNumberPicker implements NumberPicker {
     
     private final Random random;
     
@@ -13,6 +13,7 @@ public class RandomNumberPicker {
         this.random = random;
     }
     
+    @Override
     public List<Integer> pickUnique(int start, int end, int count) {
         List<Integer> result = new ArrayList<>();
         

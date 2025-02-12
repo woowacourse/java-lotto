@@ -1,6 +1,7 @@
 package controller;
 
 import domain.Lotto;
+import util.NumberPicker;
 import util.RandomNumberPicker;
 
 import java.util.List;
@@ -20,8 +21,8 @@ public class LottoController {
         outputView.printInputMoney();
         int money = inputView.inputMoney();
         
-        RandomNumberPicker randomNumberPicker = new RandomNumberPicker(new Random());
-        List<Lotto> lottos = Lotto.purchase(money, randomNumberPicker);
+        NumberPicker numberPicker = new RandomNumberPicker(new Random());
+        List<Lotto> lottos = Lotto.purchase(money, numberPicker);
         
         outputView.printPurchase(lottos.size());
         outputView.printLottos(lottos);

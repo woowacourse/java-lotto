@@ -1,6 +1,6 @@
 package domain;
 
-import util.RandomNumberPicker;
+import util.NumberPicker;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,11 +20,11 @@ public class Lotto {
         this.numbers = numbers;
     }
     
-    public static List<Lotto> purchase(int money, RandomNumberPicker randomNumberPicker) {
+    public static List<Lotto> purchase(int money, NumberPicker numberPicker) {
         List<Lotto> lottos = new ArrayList<>();
         int lottoCount = money / PRICE;
         for (int i = 0; i < lottoCount; i++) {
-            List<Integer> numbers = randomNumberPicker.pickUnique(START_NUMBER, END_NUMBER, NUMBER_COUNT);
+            List<Integer> numbers = numberPicker.pickUnique(START_NUMBER, END_NUMBER, NUMBER_COUNT);
             Lotto lotto = new Lotto(numbers);
             lottos.add(lotto);
         }
