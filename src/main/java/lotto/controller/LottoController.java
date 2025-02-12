@@ -10,14 +10,16 @@ import lotto.view.OutputView;
 public class LottoController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
+    private List<List<Integer>> lottos = new ArrayList<>();
 
     public void run() {
         int money = inputView.inputMoney();
         int lottoCounts = money / 1000;
         outputView.printCount(lottoCounts);
+        generateLottos(lottoCounts);
+        outputView.printLottos(lottos);
     }
     private List<List<Integer>> generateLottos(int lottoCounts) {
-        List<List<Integer>> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCounts; i ++) {
             lottos.add(generateLotto());
         }
