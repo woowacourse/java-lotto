@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum LottoPrize {
 
     MISS(0, false, 0),
@@ -19,15 +21,24 @@ public enum LottoPrize {
         this.prize = prize;
     }
 
-    public int getHitNumbers() {
-        return hitNumbers;
-    }
-
-    public boolean getHitBonus() {
-        return hitBonus;
-    }
-
     public int getPrize() {
         return prize;
+    }
+
+    public static LottoPrize findLottoPrize(int winningNumbersHit, boolean isBonusHit) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.hitNumbers == winningNumbersHit)
+                .filter(rank -> {
+                    if (rank.hitNumbers == 5) {
+                        return rank.hitBonus == isBonusHit;
+                    }
+                    return true;
+                })
+                .findFirst()
+                .orElse(MISS);
+    }
+
+    public int getHitNumbers() {
+        return hitNumbers;
     }
 }
