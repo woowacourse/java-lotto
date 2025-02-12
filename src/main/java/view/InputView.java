@@ -1,4 +1,4 @@
-package util;
+package view;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +16,5 @@ public class InputView {
             throw new NumberFormatException("구입 금액 타입 오류");
         }
     }
-
 
 }
