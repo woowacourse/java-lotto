@@ -23,25 +23,30 @@ public class LottoController {
 
     public void start() {
         int purchaseAmount = inputView.requestPurchaseAmount();
+        List<Lotto> lottos = purchaseLotto(purchaseAmount);
+        Lotto winningLotto = getWinningLotto();
+        int bonusNumber = inputView.requestBonusNumber();
+        validateBonusNumber(winningLotto, bonusNumber);
+        DashBoard dashBoard = judgeLottoResult(lottos, winningLotto, bonusNumber);
+        printResult(dashBoard, purchaseAmount);
+        end();
+    }
+
+    private List<Lotto> purchaseLotto(int purchaseAmount) {
         Cashier cashier = new Cashier();
         List<Lotto> lottos = cashier.payForLotto(purchaseAmount);
         outputView.printLottos(convertLottoDtos(lottos));
-        Lotto winningLotto = new Lotto(Set.copyOf(inputView.requestWinningNumbers()));
-        int bonusNumber = inputView.requestBonusNumber();
-        validateBonusNumber(winningLotto, bonusNumber);
+        return lottos;
+    }
 
-        Map<Rank, Integer> ranks = initRanks();
-        for (Lotto lotto : lottos) {
-            int matchCount = lotto.getMatchCount(winningLotto);
-            boolean isBonusMatch = lotto.contains(bonusNumber);
+    private List<LottoDto> convertLottoDtos(List<Lotto> lottos) {
+        return lottos.stream()
+                .map(LottoDto::of)
+                .toList();
+    }
 
-            Rank rank = Rank.calculate(matchCount, isBonusMatch);
-            ranks.put(rank, ranks.getOrDefault(rank, 0) + 1);
-        }
-
-        outputView.printResult(ranks);
-        outputView.printWinningRatio(calculateRatio(ranks, purchaseAmount));
-        close();
+    private Lotto getWinningLotto() {
+        return new Lotto(Set.copyOf(inputView.requestWinningNumbers()));
     }
 
     private void validateBonusNumber(Lotto winningLotto, int bonusNumber) {
@@ -51,20 +56,6 @@ public class LottoController {
         if (bonusNumber < LOTTO_NUMBER_MIN.value() || bonusNumber > LOTTO_NUMBER_MAX.value()) {
             throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 수여야 합니다.");
         }
-    }
-
-    private List<LottoDto> convertLottoDtos(List<Lotto> lottos) {
-        return lottos.stream()
-                .map(LottoDto::of)
-                .toList();
-    }
-
-    private Map<Rank, Integer> initRanks() {
-        Map<Rank, Integer> ranks = new LinkedHashMap<>();
-        for (Rank rank : Rank.values()) {
-            ranks.put(rank, 0);
-        }
-        return ranks;
     }
 
     private float calculateRatio(Map<Rank, Integer> ranks, int purchaseAmount) {
@@ -79,7 +70,20 @@ public class LottoController {
         return totalAmount;
     }
 
-    private void close() {
+    private DashBoard judgeLottoResult(List<Lotto> lottos, Lotto winningLotto, int bonusNumber) {
+        DashBoard dashBoard = new DashBoard();
+        for (Lotto lotto : lottos) {
+            dashBoard.update(lotto, winningLotto, bonusNumber);
+        }
+        return dashBoard;
+    }
+
+    private void printResult(DashBoard dashBoard, int purchaseAmount) {
+        outputView.printResult(dashBoard.getRanks());
+        outputView.printWinningRatio(calculateRatio(dashBoard.getRanks(), purchaseAmount));
+    }
+
+    private void end() {
         Console.close();
     }
 }
