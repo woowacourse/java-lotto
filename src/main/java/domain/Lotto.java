@@ -16,8 +16,11 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
+    public boolean hasDuplicateNumber(final int bonusNumber) {
+        return numbers.stream().anyMatch(number -> number == bonusNumber);
+    }
+
     private void validate(List<Integer> numbers) {
-        // 1~45 체크, 중복체크, 6개 체크
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("");
         }
@@ -28,8 +31,6 @@ public class Lotto {
             throw new IllegalArgumentException("");
         }
     }
-
-
 
     private boolean isValidNumber(int number) {
         return number > 0 && number <= 45;
