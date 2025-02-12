@@ -10,5 +10,6 @@ public class LottoApplication {
 
     private void run() {
         purchaseController.printPurchaseGuide();
+        purchaseController.readPurchaseAmount();
     }
 }

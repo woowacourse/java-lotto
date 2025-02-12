@@ -8,5 +8,9 @@ public class PurchaseController {
     public void printPurchaseGuide(){
         purchaseView.printPurchaseGuide();
     }
+
+    public Integer readPurchaseAmount() {
+        return purchaseView.readPurchaseAmount();
+    }
 }
 
