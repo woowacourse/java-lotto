@@ -16,6 +16,7 @@ public class OutputView {
     private static final String WINNING_WITH_BONUS_RESULT_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개%n";
     private static final String RATE_OF_RETURN_FORMAT = "총 수익률은 %.2f입니다.";
     private static final String DAMAGE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String ERROR_MESSAGE_FORMAT = "[ERROR] %s%n";
 
     public void printPurchaseLottos(List<Lotto> lottos) {
         System.out.printf(PURCHASE_LOTTO_SIZE_FORMAT, lottos.size());
@@ -52,5 +53,9 @@ public class OutputView {
         if (rateOfReturn < 1) {
             System.out.print(DAMAGE_MESSAGE);
         }
+    }
+
+    public void printErrorMessage(RuntimeException e) {
+        System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
     }
 }
