@@ -1,5 +1,6 @@
 package model;
 
+import dto.LottoDto;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,6 +22,10 @@ public class Lotto {
 
     public boolean isBonusMatched(int bonusNumber) {
         return numbers.contains(bonusNumber);
+    }
+
+    public LottoDto toDto() {
+        return new LottoDto(numbers);
     }
 
     private void validateNumbers(List<Integer> numbers) {
