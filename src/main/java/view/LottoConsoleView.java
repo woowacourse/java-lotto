@@ -1,6 +1,8 @@
 package view;
 
 import common.NumberValidator;
+import controller.dto.LottoTicketResponse;
+import java.util.List;
 
 public class LottoConsoleView {
 
@@ -24,4 +26,7 @@ public class LottoConsoleView {
         outputView.printPurchaseCount(purchaseCount);
     }
 
+    public void printPurchasedLotto(List<LottoTicketResponse> lottoTicketResponses) {
+        outputView.printPurchasedLottos(lottoTicketResponses);
+    }
 }

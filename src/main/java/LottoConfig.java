@@ -1,4 +1,5 @@
 import controller.LottoController;
+import controller.dto.LottoDtoMapper;
 import model.LottoCustomerHistory;
 import model.LottoNumberGenerator;
 import model.LottoStore;
@@ -10,7 +11,7 @@ public class LottoConfig {
 
 
     public LottoController lottoController() {
-        return new LottoController(lottoConsoleView(), lottoStore(), lottoCustomerHistory());
+        return new LottoController(lottoConsoleView(), lottoStore(), lottoCustomerHistory(), new LottoDtoMapper());
     }
 
     private LottoConsoleView lottoConsoleView() {
