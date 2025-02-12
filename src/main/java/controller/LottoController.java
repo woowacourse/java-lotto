@@ -1,6 +1,7 @@
 package controller;
 
 import domain.Lottos;
+import java.util.List;
 import view.InputView;
 import view.OutputView;
 
@@ -20,5 +21,8 @@ public class LottoController {
 
         int quantity = lottos.getQuantity();
         outputView.printLottoQuantity(quantity);
+
+        List<String> lottoNumbers = lottos.getLottoNumbers();
+        outputView.printLottos(lottoNumbers);
     }
 }
