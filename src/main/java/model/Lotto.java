@@ -8,15 +8,14 @@ import view.util.LottoGenerator;
 public class Lotto {
     private List<Integer> randomNumbers;
 
-    public Lotto(ArrayList<Integer> randomNumbers) {
-
-        if (!isDuplicate(randomNumbers)) {
+    public Lotto(List<Integer> randomNumbers) {
+        if (isDuplicate(randomNumbers)) {
             throw new IllegalArgumentException("숫자가 중복되어서는 안됩니다.");
         }
         this.randomNumbers = randomNumbers;
     }
 
-    private boolean isDuplicate(ArrayList<Integer> randomNumbers) {
+    private boolean isDuplicate(List<Integer> randomNumbers) {
         if (new HashSet<>(randomNumbers).size() != randomNumbers.size()) {
             return true;
         }
