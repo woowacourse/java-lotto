@@ -16,4 +16,8 @@ public class Lotto {
                 .map(Number::new)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
+
+    public Set<Number> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }
