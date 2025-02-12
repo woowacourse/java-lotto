@@ -1,3 +1,5 @@
+package view;
+
 public class OutputView {
 
     public void printPurchaseCount(int purchaseCount) {

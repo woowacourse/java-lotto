@@ -1,4 +1,11 @@
+package controller;
+
 import java.util.List;
+import model.LottoCustomer;
+import model.LottoCustomerHistory;
+import model.LottoStore;
+import model.LottoTicket;
+import view.LottoConsoleView;
 
 public class LottoController {
 

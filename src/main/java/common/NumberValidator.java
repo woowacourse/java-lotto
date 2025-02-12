@@ -1,3 +1,5 @@
+package common;
+
 public class NumberValidator {
 
     public static void validateInteger(String number) {

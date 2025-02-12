@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package common;
+
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;

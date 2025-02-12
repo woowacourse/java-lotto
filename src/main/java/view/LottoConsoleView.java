@@ -1,3 +1,7 @@
+package view;
+
+import common.NumberValidator;
+
 public class LottoConsoleView {
 
     private final InputView inputView;

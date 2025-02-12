@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package model;
+
 import java.util.List;
 
 public class LottoTicket {

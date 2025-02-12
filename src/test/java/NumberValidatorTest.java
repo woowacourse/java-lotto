@@ -1,5 +1,6 @@
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import common.NumberValidator;
 import org.junit.jupiter.api.Test;
 
 class NumberValidatorTest {
