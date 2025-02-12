@@ -8,6 +8,8 @@ public class WinLottoController {
 
     public WinLotto winLotto() {
         winLottoView.printWinNumberGuide();
+        winLottoView.readWinNumbers();
+        winLottoView.printBonusNumberGuide();
         return null;
 
     }

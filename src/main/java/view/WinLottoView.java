@@ -27,6 +27,16 @@ public class WinLottoView {
         validateDuplicate(numbers);
     }
 
+    public void printBonusNumberGuide() {
+        System.out.println(OutputMessage.BONUS_NUMBER);
+    }
+
+    public void readBonusNumber() {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+    }
+
+
     private void validateNumberCount(List<String> winNumbers) {
         if (winNumbers.size() != Constants.LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT_EXCEPTION);
