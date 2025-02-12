@@ -34,6 +34,8 @@ public class WinLottoView {
     public void readBonusNumber() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+        Integer bonusNumber = validatePositiveNumber(input);
+        validateBound(bonusNumber);
     }
 
 

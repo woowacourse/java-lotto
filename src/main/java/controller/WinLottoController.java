@@ -10,6 +10,7 @@ public class WinLottoController {
         winLottoView.printWinNumberGuide();
         winLottoView.readWinNumbers();
         winLottoView.printBonusNumberGuide();
+        winLottoView.readBonusNumber();
         return null;
 
     }
