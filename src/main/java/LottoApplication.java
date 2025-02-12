@@ -1,10 +1,24 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoApplication {
     public static void main(String[] args) {
 
         int purchaseAmount = readPurchaseAmount();
+        int count = purchaseAmount / 1000;
+        System.out.println(count + "개를 구매했습니다.");
+
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottos.add(new Lotto());
+        }
+
+        for(Lotto lotto : lottos) {
+            System.out.println(lotto.getNumbers());
+        }
     }
+
 
     private static int readPurchaseAmount() {
         while (true) {
