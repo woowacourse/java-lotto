@@ -13,4 +13,8 @@ public class Lotto {
     public boolean containBonusNumber(BonusNumber bonusNumber) {
         return bonusNumber.isMatch(numbers);
     }
+
+    public int countWinningNumber(WinningNumber winningNumber) {
+        return winningNumber.countMatchingNumber(numbers);
+    }
 }

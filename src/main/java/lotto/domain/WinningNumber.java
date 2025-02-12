@@ -14,6 +14,16 @@ public class WinningNumber {
         this.winningNumbers = numbers;
     }
 
+    public int countMatchingNumber(List<Integer> numbers) {
+        int count = 0;
+        for (Integer number : numbers) {
+            if (winningNumbers.contains(number)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
