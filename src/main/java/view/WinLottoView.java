@@ -19,11 +19,20 @@ public class WinLottoView {
                 .map(String::trim)
                 .toList();
         validateNumberCount(winNumbers);
+        winNumbers.forEach(this::validatePositiveNumber);
     }
 
     private void validateNumberCount(List<String> winNumbers) {
         if (winNumbers.size() != Constants.LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT_EXCEPTION);
         }
+    }
+
+    private Integer validatePositiveNumber(String input) {
+        String POSITIVE_INTEGER_REGEX = "[1-9]\\d*";
+        if (!input.matches(POSITIVE_INTEGER_REGEX)) {
+            throw new IllegalArgumentException(ErrorMessage.POSITIVE_NUMBER_EXCEPTION);
+        }
+        return Integer.parseInt(input);
     }
 }
