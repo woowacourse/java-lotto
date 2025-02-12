@@ -1,5 +1,6 @@
 package controller;
 
+import domain.Lottos;
 import view.InputView;
 import view.OutputView;
 
@@ -11,5 +12,10 @@ public class LottoController {
     public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
+    }
+
+    public void run() {
+        String purchaseAmount = inputView.askPurchaseAmount();
+        Lottos lottos = Lottos.of(purchaseAmount);
     }
 }
