@@ -27,4 +27,13 @@ public class Lottos {
         return result;
     }
 
+    public double computeProfit(WinningLotto winningLotto) {
+        Map<Prize, Integer> result = getResult(winningLotto);
+        int sum = 0;
+        for (var entry : result.entrySet()) {
+            sum += entry.getKey().price * entry.getValue();
+        }
+        return sum / (lottos.size() * 1000.0);
+    }
+
 }
