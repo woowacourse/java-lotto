@@ -20,7 +20,7 @@ public class LottoMachine {
         while (uniqueNumbers.size() < LOTTO_NUMBER_COUNT) {
             uniqueNumbers.add(getRandomNumberInRange(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX));
         }
-        return Collections.unmodifiableSet(uniqueNumbers);
+        return new TreeSet<>(uniqueNumbers);
     }
 
     private static int getRandomNumberInRange(int start, int end) {
