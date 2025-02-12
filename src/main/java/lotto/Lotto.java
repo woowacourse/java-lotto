@@ -30,6 +30,10 @@ public class Lotto {
         }
     }
 
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
     public Set<Integer> getNumbers() {
         return Set.copyOf(numbers);
     }

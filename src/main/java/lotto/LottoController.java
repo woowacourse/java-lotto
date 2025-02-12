@@ -1,5 +1,8 @@
 package lotto;
 
+import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
+import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
+
 import java.util.List;
 import java.util.Set;
 
@@ -19,6 +22,17 @@ public class LottoController {
         List<Lotto> lottos = cashier.payForLotto(purchaseAmount);
         outputView.printLottos(convertLottoDtos(lottos));
         Lotto winningLotto = new Lotto(Set.copyOf(inputView.requestWinningNumbers()));
+        int bonusNumber = inputView.requestBonusNumber();
+        validateBonusNumber(winningLotto, bonusNumber);
+    }
+
+    private void validateBonusNumber(Lotto winningLotto, int bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨번호와 중복될 수 없습니다.");
+        }
+        if (bonusNumber < LOTTO_NUMBER_MIN.value() || bonusNumber > LOTTO_NUMBER_MAX.value()) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 수여야 합니다.");
+        }
     }
 
     private List<LottoDto> convertLottoDtos(List<Lotto> lottos) {

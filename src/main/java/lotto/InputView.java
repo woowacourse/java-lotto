@@ -31,6 +31,13 @@ public class InputView {
         return List.copyOf(numbers);
     }
 
+    public int requestBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = in.nextInt();
+        validatePositive(bonusNumber);
+        return bonusNumber;
+    }
+
     private void validatePositive(int number) {
         if (number < 0) {
             throw new IllegalArgumentException("음수일 수 없습니다.");
