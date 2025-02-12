@@ -39,4 +39,8 @@ public class LottoMoney {
             throw INVALID_UNIT.getException();
         }
     }
+
+    public int getLottoMoney() {
+        return lottoMoney;
+    }
 }
