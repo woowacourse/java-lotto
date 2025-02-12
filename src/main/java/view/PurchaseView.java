@@ -1,11 +1,12 @@
 package view;
 
+import constant.ErrorMessage;
 import constant.OutputMessage;
 import java.util.Scanner;
 
 public class PurchaseView {
     public void printPurchaseGuide() {
-        System.out.println(OutputMessage.purchaseGuide);
+        System.out.println(OutputMessage.PURCHASE_GUIDE);
     }
 
     public Integer readPurchaseAmount() {
@@ -19,14 +20,14 @@ public class PurchaseView {
     private Integer validatePositiveNumber(String input) {
         String POSITIVE_INTEGER_REGEX = "[1-9]\\d*";
         if (!input.matches(POSITIVE_INTEGER_REGEX)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.POSITIVE_NUMBER_EXCEPTION);
         }
         return Integer.parseInt(input);
     }
 
     private void validateDividable(Integer input) {
         if (input % 1000 != 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.DIVIDABLE_EXCEPTION);
         }
     }
 
