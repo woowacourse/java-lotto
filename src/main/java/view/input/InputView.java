@@ -1,2 +1,12 @@
-package view.input;public class InputView {
+package view.input;
+
+import java.util.List;
+
+public interface InputView {
+    
+    int readPurchaseAmount();
+
+    List<Integer> readWinningNumber();
+
+    int readBonusNumber();
 }

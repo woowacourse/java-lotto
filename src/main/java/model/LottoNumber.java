@@ -1,6 +1,6 @@
 package model;
 
-import model.error.ErrorType;
+import constans.ErrorType;
 
 public class LottoNumber {
 
@@ -16,7 +16,7 @@ public class LottoNumber {
             throw new IllegalArgumentException(ErrorType.로또숫자범위오류.getMessage());
         }
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

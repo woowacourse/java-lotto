@@ -1,9 +1,9 @@
 package model;
 
+import constans.ErrorType;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import model.error.ErrorType;
 
 public class Lotto {
 
