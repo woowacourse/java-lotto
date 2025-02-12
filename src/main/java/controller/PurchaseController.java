@@ -1,16 +1,15 @@
 package controller;
 
+import model.PurchasedLottos;
 import view.PurchaseView;
 
 public class PurchaseController {
     PurchaseView purchaseView = new PurchaseView();
 
-    public void printPurchaseGuide(){
+    public PurchasedLottos purchase() {
         purchaseView.printPurchaseGuide();
-    }
-
-    public Integer readPurchaseAmount() {
-        return purchaseView.readPurchaseAmount();
+        Integer purchaseAmount = purchaseView.readPurchaseAmount();
+        return new PurchasedLottos(purchaseAmount);
     }
 }
 

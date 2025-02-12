@@ -1,15 +1,14 @@
 import controller.PurchaseController;
+import model.PurchasedLottos;
 
 public class LottoApplication {
     PurchaseController purchaseController = new PurchaseController();
 
     public static void main(String[] args) {
-        LottoApplication lottoApplication = new LottoApplication();
-        lottoApplication.run();
+        new LottoApplication().run();
     }
 
     private void run() {
-        purchaseController.printPurchaseGuide();
-        purchaseController.readPurchaseAmount();
+        PurchasedLottos purchase = purchaseController.purchase();
     }
 }
