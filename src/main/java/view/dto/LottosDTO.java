@@ -1,16 +1,15 @@
 package view.dto;
 
 import java.util.List;
-import java.util.Set;
 import model.Lotto;
 import model.Lottos;
 import model.Number;
 
 public record LottosDTO(List<LottoDTO> lottoDTOs) {
 
-    public record LottoDTO(Set<Number> numbers){
+    public record LottoDTO(List<Integer> numbers){
         public static LottoDTO from(Lotto lotto){
-            return new LottoDTO(lotto.getLottoNumbers());
+            return new LottoDTO(lotto.getLottoNumbers().stream().map(Number::value).toList());
         }
     }
 
