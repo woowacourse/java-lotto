@@ -1,5 +1,7 @@
 package model;
 
+import dto.LottosResponse;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,4 +16,11 @@ public class Lottos {
         }
     }
 
+    public LottosResponse createResponse() {
+        return new LottosResponse(
+                lottos.stream()
+                        .map(Lotto::createResponse)
+                        .toList()
+        );
+    }
 }
