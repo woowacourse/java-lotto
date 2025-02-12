@@ -31,4 +31,20 @@ public enum Prize {
                 .filter(prize -> prize.count == count)
                 .findFirst();
     }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public boolean isBonus() {
+        return bonus;
+    }
 }
