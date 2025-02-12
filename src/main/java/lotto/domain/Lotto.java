@@ -6,9 +6,21 @@ import java.util.List;
 
 public class Lotto {
     private List<Integer> lottoNumber;
+
     public Lotto() {
         this.lottoNumber = generateLotto();
     }
+
+    public Lotto(List<Integer> lottoNumber) {
+        this.lottoNumber = lottoNumber;
+    }
+
+    public void checkDuplicate(int bonusNumber) {
+        if (lottoNumber.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 숫자는 당첨 번호와 중복될 수 없습니다.");
+        }
+    }
+
     private List<Integer> generateLotto() {
         List<Integer> lotto = new ArrayList<>();
         while(lotto.size() < 6) {

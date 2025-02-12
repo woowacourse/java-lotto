@@ -27,6 +27,14 @@ public class InputView {
         return parsedLotto;
     }
 
+    public int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String bonusNumberInput = scanner.nextLine();
+        int parsedBonusNumber = validateNumber(bonusNumberInput, "보너스 숫자는 숫자여야 합니다.");
+        checkRange(parsedBonusNumber);
+        return parsedBonusNumber;
+    }
+
     private void validateDuplicate(List<Integer> parsedLotto) {
         Set<Integer> unDuplicatedLotto = new HashSet<>(parsedLotto);
         if (unDuplicatedLotto.size() != 6) {
