@@ -1,5 +1,6 @@
 package controller;
 
+import model.Ticket;
 import utils.Validator;
 import view.InputView;
 import view.OutputView;
@@ -16,10 +17,17 @@ public class LottoController {
 
     public void run() {
         outputView.printStartMessage();
+        Ticket ticket = createTicket();
+    }
+
+    private Ticket createTicket() {
+        int purchaseAmount = enterPrice();
+        return new Ticket(purchaseAmount);
+    }
+
+    private int enterPrice() {
         String input = inputView.enterPrice();
         Validator.validateNumeric(input);
-        int purchaseMoney = Integer.parseInt(input);
-        Validator.validateRange(purchaseMoney, Integer.MAX_VALUE, 1000);
-        Validator.validateDivide(purchaseMoney, 1000);
+        return Integer.parseInt(input);
     }
 }
