@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoManagerTest {
@@ -30,5 +31,11 @@ class LottoManagerTest {
                 lottoManager.purchase(-1000)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구입금액은 양수여야 합니다.");
+    }
+
+    @DisplayName("구입금액에 해당하는 개수의 로또를 발행한다")
+    @Test
+    void 구입금액에_해당하는_개수의_로또를_발행한다() {
+        assertThat(lottoManager.purchase(5000).size()).isEqualTo(5);
     }
 }
