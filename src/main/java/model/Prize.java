@@ -24,8 +24,11 @@ public enum Prize {
     }
 
     public static Optional<Prize> findPrize(int count, boolean bonus) {
+        if (bonus && count == 5){
+            return Optional.of(_2ND);
+        }
         return Arrays.stream(Prize.values())
-                .filter(prize -> prize.count == count && prize.bonus == bonus)
+                .filter(prize -> prize.count == count)
                 .findFirst();
     }
 }
