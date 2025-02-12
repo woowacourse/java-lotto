@@ -1,4 +1,4 @@
-import java.util.List;
+package model;
 
 public enum WinningStatus {
     FIRST(2_000_000_000, 6, false, "6개 일치 (2000000000원)"),
