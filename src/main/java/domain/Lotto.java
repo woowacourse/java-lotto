@@ -31,6 +31,21 @@ public class Lotto {
         return Collections.unmodifiableList(lottos);
     }
     
+    public int getMatchCount(List<Integer> matchNumbers) {
+        int matchCount = 0;
+        
+        for (Integer matchNumber : matchNumbers) {
+            if (numbers.contains(matchNumber)) {
+                matchCount++;
+            }
+        }
+        return matchCount;
+    }
+    
+    public boolean isBonusMatch(int bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+    
     private List<Integer> getSorted() {
         return numbers.stream()
                 .sorted()
