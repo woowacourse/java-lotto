@@ -1,5 +1,7 @@
 package domain;
 
+import static java.util.Collections.unmodifiableSet;
+
 import java.util.Set;
 
 public class Lotto {
@@ -11,6 +13,10 @@ public class Lotto {
     public Lotto(Set<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
+    }
+
+    public Set<Integer> getNumbers() {
+        return unmodifiableSet(numbers);
     }
 
     private void validate(Set<Integer> numbers) {
