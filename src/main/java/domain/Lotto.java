@@ -44,4 +44,14 @@ public class Lotto {
     public Set<Number> getNumbers() {
         return unmodifiableSet(numbers);
     }
+
+    public int calculateMatchCount(Lotto purchaseLotto) {
+        int matchCount = 0;
+        for (Number purchaseNumber : purchaseLotto.numbers) {
+            if (numbers.contains(purchaseNumber)) {
+                matchCount++;
+            }
+        }
+        return matchCount;
+    }
 }
