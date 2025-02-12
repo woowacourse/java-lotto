@@ -14,11 +14,13 @@ public class LottoGenerator {
     private static final int START_INDEX = 0;
     private static final int END_INDEX = 6;
 
-    public List<LottoNumber> generate() {
-        List<Integer> numbers = makeRandomNumbers();
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .toList();
+    public List<Lotto> generateLotto(final int count) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            List<Integer> numbers = makeRandomNumbers();
+            lottos.add(new Lotto(numbers));
+        }
+        return lottos;
     }
 
     private List<Integer> makeRandomNumbers() {
