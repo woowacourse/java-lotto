@@ -1,16 +1,15 @@
 package lotto.vaildator;
 
+import java.util.List;
 import lotto.costant.ExceptionMessage;
 import lotto.domain.Lotto;
-
-import java.util.List;
 
 public class InputValidator {
 
     private static int LOTTO_PRICE = 1000;
 
     public static void validateBlank(String content) {
-        if (content.isBlank()) {
+        if (content == null || content.isBlank()) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getContent());
         }
     }
