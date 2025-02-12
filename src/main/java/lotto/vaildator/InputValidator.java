@@ -32,7 +32,7 @@ public class InputValidator {
 
     public static void validateWinningNumbers(List<String> content) {
         try {
-            content.stream().map(Integer::parseInt);
+            List<Integer> numbers = content.stream().map(Integer::parseInt).toList();
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getContent());
         }
