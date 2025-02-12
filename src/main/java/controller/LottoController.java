@@ -5,11 +5,10 @@ import domain.LottoMachine;
 import domain.LottoStore;
 import domain.Money;
 import domain.Number;
-import domain.Winning;
 import domain.WinningLotto;
+import domain.WinningResult;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import view.InputValidator;
 import view.InputView;
 import view.OutputView;
@@ -29,9 +28,9 @@ public class LottoController {
     public void start() {
         String rawMoney = inputView.inputMoney();
         inputValidator.validateInputMoney(rawMoney);
-        Money money = new Money(rawMoney);
+        Money purchaseLottoMoney = new Money(rawMoney);
         LottoStore lottoStore = new LottoStore(new LottoMachine());
-        List<Lotto> purchaseLottos = lottoStore.buy(money);
+        List<Lotto> purchaseLottos = lottoStore.buy(purchaseLottoMoney);
         outputView.printPurchaseLottos(purchaseLottos);
 
         String rawWinningNumbers = inputView.inputWinningNumbers();
@@ -46,7 +45,7 @@ public class LottoController {
         inputValidator.validateNotStringNumber(rawBonusNumber);
         Number bonusNumber = new Number(Integer.parseInt(rawBonusNumber));
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        Map<Winning, Integer> winningResult = winningLotto.calculateWinning(purchaseLottos);
-
+        WinningResult winningResult = winningLotto.calculateWinning(purchaseLottos);
+        outputView.printWinningResult(winningResult);
     }
 }

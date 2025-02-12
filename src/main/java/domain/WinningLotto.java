@@ -21,7 +21,7 @@ public class WinningLotto {
         }
     }
 
-    public Map<Winning, Integer> calculateWinning(List<Lotto> purchaseLottos) {
+    public WinningResult calculateWinning(List<Lotto> purchaseLottos) {
         Map<Winning, Integer> winningResult = new HashMap<>();
         for (Lotto purchaseLotto : purchaseLottos) {
             int matchCount = lotto.calculateMatchCount(purchaseLotto);
@@ -29,7 +29,7 @@ public class WinningLotto {
             Winning winning = Winning.findWinning(matchCount, isMatchBonusNumber);
             winningResult.put(winning, winningResult.getOrDefault(winning, 0) + 1);
         }
-
-        return winningResult;
+        Money purchaseLottoMoney = LottoStore.LOTTO_PRICE.multiply(purchaseLottos.size());
+        return new WinningResult(purchaseLottoMoney, winningResult);
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
-    private static final Money LOTTO_PRICE = new Money(1000);
+    public static final Money LOTTO_PRICE = new Money(1000);
 
     private final LottoMachine lottoMachine;
 

@@ -23,7 +23,27 @@ public enum Winning {
     public static Winning findWinning(int matchCount, boolean isRequireBonus) {
         return Arrays.stream(Winning.values())
                 .filter(winning -> winning.matchCount == matchCount)
-                .filter(winning -> !winning.isRequireBonus || winning.isRequireBonus == isRequireBonus)
-                .findFirst().orElse(MISS);
+                .filter(winning -> {
+                    if (winning.matchCount == 5) {
+                        return winning.isRequireBonus == isRequireBonus;
+                    }
+                    return true;
+                }).findFirst().orElse(MISS);
+    }
+
+    public Money calculateWinningMoney(int count) {
+        return winningMoney.multiply(count);
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public Money getWinningMoney() {
+        return winningMoney;
+    }
+
+    public boolean isRequireBonus() {
+        return isRequireBonus;
     }
 }

@@ -15,7 +15,7 @@ public class Money {
     }
 
     public void validateNegative(int amount) {
-        if(amount < 0) {
+        if (amount < 0) {
             throw new IllegalArgumentException("돈은 음수가 될 수 없습니다.");
         }
     }
@@ -27,5 +27,21 @@ public class Money {
     //TODO: 불변객체의 장점
     public Money minus(Money lottoPrice) {
         return new Money(this.amount - lottoPrice.amount);
+    }
+
+    public Money multiply(int count) {
+        return new Money(this.amount * count);
+    }
+
+    public Money sum(Money money) {
+        return new Money(this.amount + money.amount);
+    }
+
+    public double divide(Money purchaseLottoMoney) {
+        return (double) purchaseLottoMoney.amount / this.amount;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }
