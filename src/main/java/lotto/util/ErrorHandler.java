@@ -12,6 +12,7 @@ public enum ErrorHandler {
     INVALID_NUMBER("로또 구입 금액은 숫자여야 합니다."),
     INVALID_AMOUNT(String.format("로또 구입 금액이 %d원 이상이어야 합니다.", LOTTO_MONEY_UNIT)),
     INVALID_UNIT(String.format("로또 구입 금액이 %d원 단위여야 합니다.", LOTTO_MONEY_UNIT)),
+    INVALID_BONUS_NUMBER("보너스 번호는 숫자여야 합니다."),
     INVALID_BONUS_DISTINCT(String.format("보너스 번호가 당첨 번호 %d개와 중복되지 않아야 합니다.", LOTTO_NUMBER_SIZE));
 
     private static final String ERROR_PREFIX = "[ERROR] ";
