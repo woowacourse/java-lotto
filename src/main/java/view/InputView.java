@@ -2,6 +2,8 @@ package view;
 
 import static domain.LottoTicket.LOTTO_PRICE;
 
+import java.util.Arrays;
+import java.util.List;
 import util.Console;
 import util.RetryHandler;
 
@@ -39,6 +41,43 @@ public class InputView {
     private static void validatePositiveInteger(int purchaseAmount) {
         if (purchaseAmount <= 0) {
             throw new IllegalArgumentException("양수가 아닙니다.");
+        }
+    }
+
+    public static List<Integer> inputWinningLottoTicket() {
+        return RetryHandler.retryOnInvalidInput(() -> {
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+            String winningLottoTicket = Console.readLine();
+            validateLottoTicket(winningLottoTicket);
+            return Arrays.stream(winningLottoTicket.split(","))
+                    .mapToInt(Integer::parseInt)
+                    .boxed()
+                    .toList();
+        });
+    }
+
+    private static void validateLottoTicket(String winningLottoTicket) {
+        List<String> winningLottoTickets = Arrays.stream(winningLottoTicket.split(",")).toList();
+        validateLottoSize(winningLottoTickets);
+        List<Integer> numbers = winningLottoTickets.stream()
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .toList();
+        numbers.forEach(InputView::validateLottoNumberRange);
+        if (numbers.stream().distinct().count() != numbers.size()) {
+            throw new IllegalArgumentException("중복된 번호가 존재합니다.");
+        }
+    }
+
+    private static void validateLottoSize(List<String> winningLottoTickets) {
+        if (winningLottoTickets.size() != 6) {
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        }
+    }
+
+    private static void validateLottoNumberRange(Integer number) {
+        if (number < 1 || number > 45) {
+            throw new IllegalArgumentException("로또 번호는 1 이상 45 이하이다.");
         }
     }
 }
