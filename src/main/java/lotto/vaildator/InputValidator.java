@@ -23,9 +23,9 @@ public class InputValidator {
     }
 
     public static void validatePurchaseAmount(int purchaseAmount) {
-        if (purchaseAmount % LOTTO_PRICE != 0) {
+        if (purchaseAmount % Lotto.LOTTO_PRICE != 0) {
             String messageTemplate = ExceptionMessage.INVALID_PURCHASE_AMOUNT.getContent();
-            String exceptionMessage = String.format(messageTemplate, LOTTO_PRICE);
+            String exceptionMessage = String.format(messageTemplate, Lotto.LOTTO_PRICE);
             throw new IllegalArgumentException(exceptionMessage);
         }
     }
