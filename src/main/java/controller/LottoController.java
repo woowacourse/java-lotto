@@ -1,11 +1,13 @@
 package controller;
 
 import controller.dto.LottoDtoMapper;
+import controller.dto.WinningLottoRequest;
 import java.util.List;
 import model.LottoCustomer;
 import model.LottoCustomerHistory;
 import model.LottoStore;
 import model.LottoTicket;
+import model.WinningLotto;
 import view.LottoConsoleView;
 
 public class LottoController {
@@ -25,6 +27,8 @@ public class LottoController {
 
     public void run() {
         purchase();
+
+        requestWinningLotto();
     }
 
     private void purchase() {
@@ -36,4 +40,8 @@ public class LottoController {
         lottoConsoleView.printPurchasedLotto(lottoDtoMapper.toLottoTicketResponse(tickets));
     }
 
+    private void requestWinningLotto() {
+        WinningLottoRequest winningLottoRequest = lottoConsoleView.requestWinningLotto();
+        WinningLotto winningLotto = lottoDtoMapper.toWinningLotto(winningLottoRequest);
+    }
 }

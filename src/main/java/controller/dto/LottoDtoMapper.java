@@ -2,6 +2,7 @@ package controller.dto;
 
 import java.util.List;
 import model.LottoTicket;
+import model.WinningLotto;
 
 public class LottoDtoMapper {
 
@@ -9,5 +10,9 @@ public class LottoDtoMapper {
         return lottoTickets.stream()
                 .map(ticket -> LottoTicketResponse.from(ticket.getNumbers()))
                 .toList();
+    }
+
+    public WinningLotto toWinningLotto(WinningLottoRequest winningLottoRequest) {
+        return new WinningLotto(winningLottoRequest.numbers(), winningLottoRequest.bonusNumber());
     }
 }
