@@ -1,5 +1,9 @@
 package controller;
 
+import domain.Lotto;
+
+import java.util.List;
+
 public class OutputView {
     
     public void printInputMoney() {
@@ -8,6 +12,13 @@ public class OutputView {
     
     public void printPurchase(int purchaseCount) {
         System.out.printf("%d개를 구매했습니다.\n", purchaseCount);
-        
+    }
+    
+    public void printLottos(List<Lotto> lottos) {
+        StringBuilder sb = new StringBuilder();
+        for (Lotto lotto : lottos) {
+            sb.append(lotto).append("\n");
+        }
+        System.out.print(sb);
     }
 }

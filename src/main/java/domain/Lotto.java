@@ -30,4 +30,15 @@ public class Lotto {
         }
         return Collections.unmodifiableList(lottos);
     }
+    
+    private List<Integer> getSorted() {
+        return numbers.stream()
+                .sorted()
+                .toList();
+    }
+    
+    @Override
+    public String toString() {
+        return getSorted().toString();
+    }
 }

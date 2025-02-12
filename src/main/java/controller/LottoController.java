@@ -24,5 +24,6 @@ public class LottoController {
         List<Lotto> lottos = Lotto.purchase(money, randomNumberPicker);
         
         outputView.printPurchase(lottos.size());
+        outputView.printLottos(lottos);
     }
 }
