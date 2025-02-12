@@ -14,14 +14,14 @@ public class Lottos {
         }
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
     public void printLottoNumbers(){
         for (Lotto l : this.lottos){
             System.out.println(l.printLottoNumber());
         }
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
 }
