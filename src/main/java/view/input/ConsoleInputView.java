@@ -24,7 +24,11 @@ public class ConsoleInputView implements InputView {
 
     @Override
     public List<Integer> readWinningNumber() {
-        return null;
+        String input = scanner.nextLine();
+        inputValidator.validateWinningNumbersText(input);
+        List<Integer> winningNumbers = inputParser.parseWinningNumbers(input);
+        inputValidator.validateWinningNumbers(winningNumbers);
+        return winningNumbers;
     }
 
     @Override
