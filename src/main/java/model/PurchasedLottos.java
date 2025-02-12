@@ -13,4 +13,8 @@ public class PurchasedLottos {
             lottos.add(new LottoNumbers());
         }
     }
+
+    public Integer size() {
+        return lottos.size();
+    }
 }

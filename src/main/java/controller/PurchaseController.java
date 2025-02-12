@@ -9,7 +9,9 @@ public class PurchaseController {
     public PurchasedLottos purchase() {
         purchaseView.printPurchaseGuide();
         Integer purchaseAmount = purchaseView.readPurchaseAmount();
-        return new PurchasedLottos(purchaseAmount);
+        PurchasedLottos purchasedLottos = new PurchasedLottos(purchaseAmount);
+        purchaseView.printPurchaseResult(purchasedLottos.size());
+        return purchasedLottos;
     }
 }
 

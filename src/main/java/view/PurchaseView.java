@@ -17,6 +17,10 @@ public class PurchaseView {
         return purchaseAmount;
     }
 
+    public void printPurchaseResult(Integer purchaseCount) {
+        System.out.printf(OutputMessage.PURCHASE_RESULT, purchaseCount);
+    }
+
     private Integer validatePositiveNumber(String input) {
         String POSITIVE_INTEGER_REGEX = "[1-9]\\d*";
         if (!input.matches(POSITIVE_INTEGER_REGEX)) {
@@ -30,6 +34,4 @@ public class PurchaseView {
             throw new IllegalArgumentException(ErrorMessage.DIVIDABLE_EXCEPTION);
         }
     }
-
-
 }
