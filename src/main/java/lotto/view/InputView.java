@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.dto.WinningBallsDto;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +24,11 @@ public class InputView {
         }
     }
 
-    public List<Integer> readWinningNumbers() {
+    public WinningBallsDto readWinningBalls() {
+        return new WinningBallsDto(readWinningNumbers(), readBonusNumber());
+    }
+
+    private List<Integer> readWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
         if (input.isBlank()) {
@@ -42,7 +48,7 @@ public class InputView {
         return numbers;
     }
 
-    public int readBonusNumber() {
+    private int readBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         String input = scanner.nextLine();
         if (input.isBlank()) {

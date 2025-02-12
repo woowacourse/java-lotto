@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.*;
+import lotto.dto.WinningBallsDto;
 
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,7 @@ import java.util.Map;
 public class LottoService {
     private Bank bank = new Bank();
     private Lottos lottos;
-    private WinningNumbers winningNumbers;
+    private WinningNumbers winningNumbers = new WinningNumbers();
 
     public List<Lotto> buyLottos(int payment) {
         bank.use(payment);
@@ -16,8 +17,11 @@ public class LottoService {
         return lottos.getLottos();
     }
 
-    public Map<Rank, Integer> getResult(List<Integer> numbers, int bonusNumber) {
-        winningNumbers = new WinningNumbers(new Lotto(numbers), bonusNumber);
+    public void setWinningBalls(WinningBallsDto winningBallsDto) {
+        winningNumbers = new WinningNumbers(new Lotto(winningBallsDto.winningNumbers()), winningBallsDto.bonusNumber());
+    }
+
+    public Map<Rank, Integer> getResult() {
         return lottos.getRankCount(winningNumbers);
     }
 
