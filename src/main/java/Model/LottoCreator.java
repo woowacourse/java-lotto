@@ -8,20 +8,28 @@ import java.util.Random;
 public class LottoCreator {
 
     private static final int LOTTO_COUNT = 6;
+    private static final int LOTTO_MAX_NUMBER = 45;
+
 
     public static List<Integer> createLotto() {
-        Random random = new Random();
         List<Integer> lottoNumber = new ArrayList<>();
+
+        addRandomNumber(lottoNumber);
+        lottoNumber.sort(Comparator.naturalOrder());
+        return lottoNumber;
+    }
+
+    private static void addRandomNumber(List<Integer> lottoNumber) {
         int count = LOTTO_COUNT;
+        Random random = new Random();
+
         while (count > 0) {
-            int randomNumber = random.nextInt(45) + 1;
+            int randomNumber = random.nextInt(LOTTO_MAX_NUMBER) + 1;
             if (lottoNumber.contains(randomNumber)) {
                 continue;
             }
             lottoNumber.add(randomNumber);
             count--;
         }
-        lottoNumber.sort(Comparator.naturalOrder());
-        return lottoNumber;
     }
 }

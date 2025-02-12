@@ -3,42 +3,44 @@ package View;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 
 public class InputView {
 
-    private static Scanner sc = new Scanner(System.in);
+    private static final String DELIMITER = ",";
 
-    public static int inputPrice() {
-        String input = sc.nextLine();
-        int price = validateInteger(input);
+
+    public static int inputPrice(String inputPrice) {
+        int price = validateInteger(inputPrice);
         validatePrice(price);
         return price;
     }
 
-    public static List<Integer> inputWinnerNumbers(){
-        String input = sc.nextLine();
-        validateEmptyInput(input);
+    public static List<Integer> inputWinnerNumbers(String inputWinnerNumbers){
+        validateEmptyInput(inputWinnerNumbers);
 
-        String [] splitInput = input.split(",");
+        String [] splitInput = inputWinnerNumbers.split(DELIMITER);
 
+        List<Integer> winnerNumbers = getWinnerNumbers(splitInput);
+        validateDuplicateValue(winnerNumbers);
+        return winnerNumbers;
+    }
+
+    private static List<Integer> getWinnerNumbers(String[] splitInput) {
         List<Integer> winnerNumbers = new ArrayList<>();
         for (String s : splitInput){
             int number = validateInteger(s);
             validateNumberRange(number);
             winnerNumbers.add(number);
         }
-        validateDuplicateValue(winnerNumbers);
         return winnerNumbers;
     }
 
-    public static int inputBonusBall(List<Integer> winnerNumbers){
-        String input =sc.nextLine();
+    public static int inputBonusBall(String inputBonusBall, List<Integer> winnerNumbers){
 
-        validateEmptyInput(input);
+        validateEmptyInput(inputBonusBall);
 
-        int bonusBall = validateInteger(input);
+        int bonusBall = validateInteger(inputBonusBall);
 
         validateNumberRange(bonusBall);
         validateDuplicateBonusBall(winnerNumbers, bonusBall);
@@ -85,9 +87,5 @@ public class InputView {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자만 입력 가능합니다.", e);
         }
-    }
-
-    public static void close() {
-        sc.close();
     }
 }
