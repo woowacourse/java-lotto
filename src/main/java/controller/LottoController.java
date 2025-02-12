@@ -19,9 +19,6 @@ public class LottoController {
         LottoStats lottoStats = new LottoStats(InputView.inputWinningNumbers(), InputView.inputBonusBall());
         lottoStats.calculateResult(lottos);
         OutputView.printLottoStats(lottoStats);
+        OutputView.printEarningRate(lottoStats,count * 1000);
     }
-
-//    private static LottoStats getWinningStats(List<Lotto> lottos){
-//
-//    }
 }
