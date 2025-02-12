@@ -4,6 +4,7 @@ import domain.Lotto;
 import domain.LottoMachine;
 import domain.LottoStore;
 import domain.Money;
+import domain.Number;
 import domain.WinningLotto;
 import java.util.Arrays;
 import java.util.List;
@@ -33,13 +34,14 @@ public class LottoController {
 
         String rawWinningNumbers = inputView.inputWinningNumbers();
         inputValidator.validateWinningNumber(rawWinningNumbers);
-        List<Integer> numbers = Arrays.stream(rawWinningNumbers.split(","))
+        List<Number> numbers = Arrays.stream(rawWinningNumbers.split(","))
                 .map(String::trim)
                 .map(Integer::valueOf)
+                .map(Number::new)
                 .toList();
         Lotto winningNumbers = new Lotto(numbers);
         String rawBonusNumber = inputView.inputBonusNumber();
-        int bonusNumber = Integer.parseInt(rawBonusNumber);
+        Number bonusNumber = new Number(Integer.parseInt(rawBonusNumber));
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
     }
 }

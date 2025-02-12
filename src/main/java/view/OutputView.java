@@ -1,6 +1,7 @@
 package view;
 
 import domain.Lotto;
+import domain.Number;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,8 +12,8 @@ public class OutputView {
     public void printPurchaseLottos(List<Lotto> lottos) {
         System.out.printf(PURCHASE_LOTTO_SIZE_FORMAT, lottos.size());
         for (Lotto lotto : lottos) {
-            Set<Integer> numbers = lotto.getNumbers();
-            String purchaseLottos = numbers.stream().map(String::valueOf)
+            Set<Number> numbers = lotto.getNumbers();
+            String purchaseLottos = numbers.stream().map(Number::getValue).map(String::valueOf)
                     .collect(Collectors.joining(", "));
             System.out.println("[" + purchaseLottos + "]");
         }
