@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoRepository {
-    private final List<List<Lotto>> lottos = new ArrayList<>();
+    private final List<Lotto> lottos = new ArrayList<>();
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 
     public LottoRepository() {
     }
 
-    public void addLotto(ArrayList<Lotto> lotto) {
+    public void addLotto(Lotto lotto) {
         lottos.add(lotto);
     }
 
