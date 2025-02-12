@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
 
@@ -14,5 +15,18 @@ public class Lotto {
         return values.stream()
                 .map(LottoNumber::new)
                 .toList();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (!(o instanceof Lotto lotto)) {
+            return false;
+        }
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(numbers);
     }
 }

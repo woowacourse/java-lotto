@@ -7,14 +7,15 @@ import org.junit.jupiter.api.Test;
 class LottoGeneratorTest {
 
     @Test
-    void 랜덤_번호를_가진_로또를_생성한다() {
+    void 로또_개수만큼_로또를_생성한다() {
         // Given
         LottoGenerator lottoGenerator = new LottoGenerator();
+        int count = 3;
 
         // When
-        List<LottoNumber> numbers = lottoGenerator.generate();
+        List<Lotto> lottos = lottoGenerator.generateLotto(count);
 
         // Then
-        Assertions.assertThat(numbers.stream().distinct().count()).isEqualTo(6);
+        Assertions.assertThat(lottos.stream().distinct().count()).isEqualTo(3);
     }
 }
