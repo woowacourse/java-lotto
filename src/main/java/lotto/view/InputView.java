@@ -11,4 +11,8 @@ public class InputView {
     public static long inputPurchaseAmount() {
         return scanner.nextLong();
     }
+
+    public static List<Integer> inputWinningNumbers() {
+        return Converter.convertToIntegerList(scanner.nextLine());
+    }
 }
