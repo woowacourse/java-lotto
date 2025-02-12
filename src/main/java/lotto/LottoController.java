@@ -7,6 +7,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import lotto.view.Console;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoController {
 
@@ -38,6 +41,7 @@ public class LottoController {
 
         outputView.printResult(ranks);
         outputView.printWinningRatio(calculateRatio(ranks, purchaseAmount));
+        close();
     }
 
     private void validateBonusNumber(Lotto winningLotto, int bonusNumber) {
@@ -73,5 +77,9 @@ public class LottoController {
             totalAmount += rank.getWinningAmount() * ranks.get(rank);
         }
         return totalAmount;
+    }
+
+    private void close() {
+        Console.close();
     }
 }

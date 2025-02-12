@@ -1,8 +1,9 @@
-package lotto;
+package lotto.view;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import lotto.LottoDto;
+import lotto.Rank;
 
 public class OutputView {
     public void printLottos(List<LottoDto> lottos) {
