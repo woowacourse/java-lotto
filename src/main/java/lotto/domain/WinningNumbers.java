@@ -4,10 +4,10 @@ import java.util.List;
 
 public class WinningNumbers {
 
-    private final List<LottoNumber> winningNumbers;
-    private final LottoNumber bonusNumber;
+    private final List<Integer> winningNumbers;
+    private final int bonusNumber;
 
-    public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
