@@ -8,19 +8,17 @@ import java.util.Set;
 
 public class InputView {
 
+    private static Scanner sc = new Scanner(System.in);
+
     public static int inputPrice() {
-        Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         int price = validateInteger(input);
         validatePrice(price);
-        sc.close();
         return price;
     }
 
     public static List<Integer> inputWinnerNumbers(){
-        Scanner sc = new Scanner(System.in);
-        String input =sc.nextLine();
-        sc.close();
+        String input = sc.nextLine();
         validateEmptyInput(input);
 
         String [] splitInput = input.split(",");
@@ -36,9 +34,7 @@ public class InputView {
     }
 
     public static int inputBonusBall(List<Integer> winnerNumbers){
-        Scanner sc = new Scanner(System.in);
         String input =sc.nextLine();
-        sc.close();
 
         validateEmptyInput(input);
 
@@ -89,5 +85,9 @@ public class InputView {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자만 입력 가능합니다.", e);
         }
+    }
+
+    public static void close() {
+        sc.close();
     }
 }
