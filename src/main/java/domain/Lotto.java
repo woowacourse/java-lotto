@@ -36,4 +36,8 @@ public class Lotto {
             }
         }
     }
+
+    public boolean contains(final int number) {
+        return numbers.contains(number);
+    }
 }
