@@ -1,7 +1,9 @@
 package view;
 
+import java.util.List;
 import view.dto.LottosDTO;
 import view.dto.LottosDTO.LottoDTO;
+import view.dto.ResultDTO;
 
 public class OutputView {
 
@@ -11,6 +13,23 @@ public class OutputView {
         stringBuilder.append('\n');
         lottosDTO.lottoDTOs().forEach(lottoDTO -> appendStringBuilder(lottoDTO, stringBuilder));
         System.out.println(stringBuilder);
+    }
+
+    public void printResult(ResultDTO resultDTO) {
+        StringBuilder stringBuilder = new StringBuilder();
+        List<Integer>
+        stringBuilder.append(String.format("""
+                당첨 통계
+                ---------
+                %d개 일치 (%d원)- %d개
+                %d개 일치 (%d원)- %d개
+                %d개 일치 (%d원)- %d개
+                %d개 일치, 보너스 볼 일치(%d원) - %d개
+                %d개 일치 (%d원)- %d개
+                총 수익률은 0.f2입니다.
+                """, resultDTO.));
+
+
     }
 
     public void appendStringBuilder(LottoDTO lottoDTO, StringBuilder stringBuilder) {
