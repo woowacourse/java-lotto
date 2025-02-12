@@ -4,12 +4,17 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import exception.LottoException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.ValueSources;
 
 public class LottoDispenserTest {
 
@@ -37,14 +42,24 @@ public class LottoDispenserTest {
     public void 구입_금액이_숫자가_아니면_예외가_발생한다(String buyMoney){
         assertThatThrownBy(() -> {
             new LottoDispenser(buyMoney);
-            new LottoDispenserTest({1,2,3,4,5})
+        }).isInstanceOf(LottoException.class);
+    }
+
+
+    @ParameterizedTest
+    @MethodSource("duplicateLottoRandomNumbers")
+    @DisplayName("로또_번호가_중복되는_경우_예외_발생")
+    public void 로또_번호가_중복되는_경우_예외_발생(List<Integer> duplicateNumbers){
+        assertThatThrownBy(() -> {
+            new LottoNumbers(duplicateNumbers);
         }).isInstanceOf(LottoException.class);
     }
 
 
 
-
-
-
-
+    private static Stream<Arguments> duplicateLottoRandomNumbers(){
+        return Stream.of(
+                Arguments.arguments(List.of(1, 2, 3, 4, 5, 5))
+        );
+    }
 }

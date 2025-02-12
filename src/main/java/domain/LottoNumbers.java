@@ -1,0 +1,23 @@
+package domain;
+
+import exception.LottoException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class LottoNumbers {
+    private final List<LottoNumber> lottoNumbers;
+    private final String DUPLICATE_LOTTO_NUMBERS = "로또 번호는 중복될 수 없습니다!";
+
+    public LottoNumbers(List<Integer> lottoNumbers) {
+        validateLottoNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers.stream().map(LottoNumber::new).toList();
+    }
+
+    private void validateLottoNumbers(List<Integer> lottoNumbers) {
+        Set<Integer> duplicationSet = new HashSet<>(lottoNumbers);
+        if(lottoNumbers.size() != duplicationSet.size()) {
+            throw new LottoException(DUPLICATE_LOTTO_NUMBERS);
+        }
+    }
+}
