@@ -11,6 +11,7 @@
 - [x] 로또 개수에 맞게 발급하기
 - 당첨 번호 입력받기
 - 보너스볼 입력받기
+- [x] 당첨 로또 생성하기
 - 당첨통계 게산하기
 
 ## 예외처리
@@ -18,4 +19,7 @@
   - 개수가 6개가 아닌 경우 `IllegalArgumentException`을 발생시킨다.
   - 범위가 1이상 45이하가 아닌 경우 `IllegalArgumentException`을 발생시킨다.
   - 중복된 숫자가 존재하는 경우 `IllegalArgumentException`을 발생시킨다.
+- [x] 당첨 로또 예외처리
+  - 로또 번호와 보너스번호에 중복이 존재하는 경우 `IllegalArgumentException`을 발생시킨다.
+  - 보너스번호 범위가 1이상 45이하가 아닌 경우 `IllegalArgumentException`을 발생시킨다.
 

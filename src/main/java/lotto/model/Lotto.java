@@ -43,4 +43,8 @@ public class Lotto {
     }
 
 
+    public boolean hasNumber(final int bonusNumber) {
+        return true;
+    }
+
 }
