@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class LottoStoreTest {
 
-    private LottoStore lottoStore = new LottoStore();
+    private LottoStore lottoStore = new LottoStore(new LottoNumberGenerator());
 
     @DisplayName("구입 금액이 1000원 단위가 아나라면 예외를 발생시킨다.")
     @Test
