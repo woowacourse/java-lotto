@@ -1,22 +1,22 @@
 package lotto.util;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Converter {
-    public static List<Integer> convertToIntegerList(String input) {
-        String[] split = input.split(",");
 
-        List<Integer> numbers = new ArrayList<>();
+    public static int convertToInt(String input) {
         try {
-            for (String s : split) {
-                numbers.add(Integer.parseInt(s.trim()));
-            }
+            return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("당첨번호는 숫자만 입력해야합니다.", e);
+            throw new IllegalArgumentException("입력값은 숫자여야 합니다.");
         }
+    }
 
-        return numbers;
+    public static List<Integer> convertToIntegerList(String input) {
+        return Arrays.stream(input.split(","))
+                .map(s -> Integer.parseInt(s.trim()))
+                .toList();
     }
 
 }
