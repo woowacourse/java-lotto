@@ -67,4 +67,16 @@ public class InputView {
 
         return  winningNumbers;
     }
+
+    public int isNumericBonusNumber() {
+        String bonusNumberString = read();
+        try {
+            isNumeric(bonusNumberString);
+            return Integer.parseInt(bonusNumberString);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return isNumericBonusNumber();
+        }
+
+    }
 }
