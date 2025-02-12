@@ -24,4 +24,13 @@ class WinningLottoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("당첨 번호는 중복되지 않는 1 이상 45 이하의 정수여야합니다.");
     }
+
+    @DisplayName("당첨 번호에 중복이 존재하면 예외가 발생한다")
+    @Test
+    void 당첨_번호에_중복이_존재하면_예외가_발생한다() {
+        String rawWinningNumbers = "1, 1, 3, 4, 15, 45";
+        org.assertj.core.api.Assertions.assertThatThrownBy(() -> {new WinningLotto(rawWinningNumbers);})
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("당첨 번호는 중복되지 않는 1 이상 45 이하의 정수여야합니다.");
+    }
 }
