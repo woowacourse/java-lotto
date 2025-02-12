@@ -4,8 +4,10 @@ import constant.Constants;
 import constant.ErrorMessage;
 import constant.OutputMessage;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class WinLottoView {
     public void printWinNumberGuide() {
@@ -22,6 +24,7 @@ public class WinLottoView {
         winNumbers.forEach(this::validatePositiveNumber);
         List<Integer> numbers = winNumbers.stream().mapToInt(this::validatePositiveNumber).boxed().toList();
         numbers.forEach(this::validateBound);
+        validateDuplicate(numbers);
     }
 
     private void validateNumberCount(List<String> winNumbers) {
@@ -41,6 +44,13 @@ public class WinLottoView {
     private void validateBound(Integer input) {
         if (input < Constants.MINIMUM_LOTTO_NUMBER || input > Constants.MAXIMUM_LOTTO_NUMBER) {
             throw new IllegalArgumentException(ErrorMessage.NUMBER_BOUND_EXCEPTION);
+        }
+    }
+
+    private void validateDuplicate(List<Integer> numbers) {
+        Set<Integer> numberSet = new HashSet<>(numbers);
+        if (numbers.size() != numberSet.size()) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_DUPLICATE_EXCEPTION);
         }
     }
 }

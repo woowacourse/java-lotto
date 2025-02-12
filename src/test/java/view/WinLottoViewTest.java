@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class WinLottoViewTest {
     @Test
-    public void 숫자개수_판별_테스트() {
+    public void 숫자_개수_판별_테스트() {
         // given
         String input = "1, 2, 3, 4, 5";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
@@ -46,5 +46,18 @@ class WinLottoViewTest {
         assertThatThrownBy(() -> winLottoView.readWinNumbers())
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.NUMBER_BOUND_EXCEPTION);
+    }
+
+    @Test
+    public void 숫자_중복_판별_테스트() {
+        // given
+        String input = "1, 2, 3, 4, 5, 5";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        WinLottoView winLottoView = new WinLottoView();
+
+        // when & then
+        assertThatThrownBy(() -> winLottoView.readWinNumbers())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.NUMBER_DUPLICATE_EXCEPTION);
     }
 }
