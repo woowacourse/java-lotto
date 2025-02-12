@@ -29,5 +29,14 @@ public class LottoPriceTest {
                 .hasMessageContaining("로또 구입 금액은 1000원 이상이어야 합니다.");
     }
 
+    @Test
+    void 구입_금액에_해당하는_로또_개수를_출력한다() {
+        // Given
+        LottoPrice lottoPrice = new LottoPrice(5300);
+
+        // When & Then
+        Assertions.assertThat(lottoPrice.calculateLottoCount()).isEqualTo(5);
+    }
+
 }
 
