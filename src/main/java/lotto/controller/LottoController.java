@@ -18,6 +18,7 @@ public class LottoController {
         outputView.printCount(lottoCounts);
         generateLottos(lottoCounts);
         outputView.printLottos(lottos);
+        List<Integer> test = inputView.inputWinningLotto();
     }
     private List<List<Integer>> generateLottos(int lottoCounts) {
         for (int i = 0; i < lottoCounts; i ++) {
