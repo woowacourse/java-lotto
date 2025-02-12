@@ -15,8 +15,8 @@ public class LottoController {
     }
 
     public void start() {
-        String money = inputView.inputMoney();
-        inputValidator.validateInputMoney(money);
-        //new Money(money);
+        String rawMoney = inputView.inputMoney();
+        inputValidator.validateInputMoney(rawMoney);
+        Money money = new Money(rawMoney);
     }
 }
