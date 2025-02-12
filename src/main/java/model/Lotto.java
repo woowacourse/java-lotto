@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Optional;
 import java.util.Set;
 
 public class Lotto {
@@ -14,5 +15,16 @@ public class Lotto {
 
     public Set<Number> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public Optional<Prize> calculatePrize(WinningLotto winningLotto) {
+        boolean bonus = false;
+        if (lottoNumbers.contains(winningLotto.getBonus())) {
+            bonus = true;
+        }
+        Set<Number> winningNumbers = winningLotto.getLotto().getLottoNumbers();
+        lottoNumbers.retainAll(winningNumbers);
+        int matchCount = lottoNumbers.size();
+        return Prize.findPrize(matchCount, bonus);
     }
 }
