@@ -21,6 +21,12 @@ public class LogicValidator {
         }
     }
 
+    public static void validateRange(int number, int min, int max) {
+        if (number < min || number > max) {
+            throw new IllegalArgumentException(ExceptionMessage.OUT_OF_RANGE.getContent());
+        }
+    }
+
     public static void validateSize(List<Integer> numbers, int size) {
         if (numbers.size() != size) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_NUMBER_COUNT.getContent());
