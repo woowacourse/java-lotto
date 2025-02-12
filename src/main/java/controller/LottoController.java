@@ -3,6 +3,8 @@ package controller;
 import domain.Buyer;
 import domain.Lotto;
 import domain.Money;
+import domain.WinningLotto;
+import util.InputParser;
 import util.Validator;
 import view.InputView;
 import view.OutputView;
@@ -21,9 +23,8 @@ public class LottoController {
     public void run() {
         String inputMoney = inputView.inputLottoMoney();
         Validator.inputValidatorIsNull(inputMoney);
-        Validator.inputValidatorParseInt(inputMoney);
 
-        Money money = new Money(Integer.parseInt(inputMoney));
+        Money money = new Money(InputParser.parseStringToInteger(inputMoney));
         Buyer buyer = new Buyer(money);
         buyer.createLottos();
         String result = buyer.createResult();
@@ -32,6 +33,10 @@ public class LottoController {
         String inputWinningNumber = inputView.inputWinningNumbers();
         Validator.inputValidatorIsNull(inputWinningNumber);
 
+        String inputBonusNumber = inputView.inputBonusNumber();
+        Validator.inputValidatorIsNull(inputBonusNumber);
 
+        new WinningLotto(InputParser.parseStringToList(inputWinningNumber),
+                InputParser.parseStringToInteger(inputBonusNumber));
     }
 }

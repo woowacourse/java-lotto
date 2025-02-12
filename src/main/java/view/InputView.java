@@ -15,7 +15,13 @@ public class InputView {
 
     public String inputWinningNumbers(){
         Scanner sc = new Scanner(System.in);
-        System.out.println(inputWinningNumbers());
+        System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
+        return sc.nextLine();
+    }
+
+    public String inputBonusNumber(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println(INPUT_BONUS_BALL_MESSAGE);
         return sc.nextLine();
     }
 
