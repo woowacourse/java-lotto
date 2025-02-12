@@ -28,5 +28,10 @@ public class LottoController {
         buyer.createLottos();
         String result = buyer.createResult();
         outputView.displayLottos(money.calculateTotalLotto(), result);
+
+        String inputWinningNumber = inputView.inputWinningNumbers();
+        Validator.inputValidatorIsNull(inputWinningNumber);
+
+
     }
 }
