@@ -7,11 +7,11 @@ import java.util.Scanner;
 public class InputView {
     static Scanner sc = new Scanner(System.in);
 
-    public static int inputCount(){
+    public static int inputPurchaseAmount(){
         System.out.println("구입금액을 입력해 주세요.");
-        int count = Integer.parseInt(sc.nextLine())/1000;
-        System.out.println(count + "개를 구매했습니다.");
-        return count;
+        int purchaseAmount = Integer.parseInt(sc.nextLine());
+        System.out.println(purchaseAmount + "개를 구매했습니다.");
+        return purchaseAmount;
     }
 
     public static List<Integer> inputWinningNumbers() {

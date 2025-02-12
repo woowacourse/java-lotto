@@ -13,9 +13,20 @@ public class LottoFactory {
                     .toList()
     );
 
+    private final static int LOTTO_PRICE = 1000;
+
     public static Lotto makeLotto() {
         Collections.shuffle(randomNumbers);
         List<Integer> numbers = randomNumbers.stream().limit(6).sorted().collect(Collectors.toList());
         return new Lotto(numbers);
+    }
+
+    public static List<Lotto> makeLotto(int purchaseAmount) {
+        int lottoCount = purchaseAmount /LOTTO_PRICE;
+        List<Lotto> lottos = new ArrayList<>();
+        for(int i = 0; i < lottoCount; i ++) {
+            lottos.add(LottoFactory.makeLotto());
+        }
+        return lottos;
     }
 }
