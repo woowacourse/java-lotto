@@ -1,5 +1,6 @@
 package model;
 
+import controller.LottoController;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,14 +10,14 @@ public class WinningNumber {
     public WinningNumber(String inputWinningNumbers) {
 
         String[] winningNumbers = inputWinningNumbers.split(", ");
-        if(winningNumbers.length != 6) {
+        if(winningNumbers.length != LottoConstants.NUMBER_COUNT) {
             throw new IllegalArgumentException("당첨 번호의 개수를 6개로 입력해주세요.");
         }
 
         for(String winningNumber : winningNumbers) {
             try {
                 int number = Integer.parseInt(winningNumber);
-                if(number < 1 || number > 45) {
+                if(number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
                     throw new IllegalArgumentException("당첨 번호는 1~45 사이의 정수로 입력해주세요.");
                 }
                 if(numbers.contains(number)) {

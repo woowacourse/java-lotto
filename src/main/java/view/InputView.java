@@ -2,18 +2,18 @@ package view;
 
 import java.util.Scanner;
 import model.BonusNumber;
-import model.Purchasement;
+import model.Purchase;
 import model.WinningNumber;
 
 public class InputView {
     private static Scanner sc = new Scanner(System.in);
 
-    public Purchasement readPurchaseAmount() {
+    public Purchase readPurchaseAmount() {
         while (true) {
             try {
                 System.out.println("구입금액을 입력해 주세요.");
                 String purchaseAmountInput = sc.nextLine();
-                return new Purchasement(purchaseAmountInput);
+                return new Purchase(purchaseAmountInput);
             }
             catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());

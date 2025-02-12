@@ -1,12 +1,17 @@
 package model;
 
-public class Purchasement {
+public class Purchase {
+    private static final int LOTTO_PRICE = 1000;
+    private static final int MIN_PURCHASE_AMOUNT = 1000;
+    private static final int MAX_PURCHASE_AMOUNT = 100000;
+
     private final int amount;
 
-    public Purchasement(String purchaseAmountInput) {
+    public Purchase(String purchaseAmountInput) {
         try {
             int purchaseAmount = Integer.parseInt(purchaseAmountInput);
-            if (purchaseAmount < 1000 || purchaseAmount > 100000 || purchaseAmount % 1000 != 0) {
+            if (purchaseAmount < MIN_PURCHASE_AMOUNT
+                    || purchaseAmount > MAX_PURCHASE_AMOUNT || purchaseAmount % LOTTO_PRICE != 0) {
                 throw new IllegalArgumentException("1000 이상 100000 이하의 1000으로 나누어 떨어지는 정수를 입력해주세요.");
             }
             this.amount = purchaseAmount;
@@ -17,7 +22,7 @@ public class Purchasement {
     }
 
     public int calculateLottoCount() {
-        return amount / 1000;
+        return amount / LOTTO_PRICE;
     }
 
     public int getAmount() {

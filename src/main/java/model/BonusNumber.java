@@ -9,7 +9,7 @@ public class BonusNumber {
     public BonusNumber(String bonusNumberInput, WinningNumber winningNumber) {
         try {
             int bonusNumber = Integer.parseInt(bonusNumberInput);
-            if (bonusNumber < 1 || bonusNumber > 45) {
+            if (bonusNumber < LottoConstants.MIN_NUMBER || bonusNumber > LottoConstants.MAX_NUMBER) {
                 throw new IllegalArgumentException("보너스 볼은 1~45 사이의 정수로 입력해주세요.");
             }
             if (winningNumber.contains(bonusNumber)) {

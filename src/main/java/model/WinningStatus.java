@@ -20,13 +20,10 @@ public enum WinningStatus {
         this.expression = expression;
     }
 
-    // 당첨 번호 개수, 보너스 볼 일치 여부 매개변수
-    // 만약 번호 개수 5개 -> 보너스 볼 일치 여부 확인!
-
     public static WinningStatus findBy(int matchingCount, boolean matchesBonusNumber) {
         for(WinningStatus winningStatus : WinningStatus.values()) {
             if(winningStatus.matchingCount == matchingCount) {
-                if(matchingCount == 5) {
+                if(matchingCount == THIRD.matchingCount) {
                     if(matchesBonusNumber) return SECOND;
                     return THIRD;
                 }

@@ -14,8 +14,8 @@ public class Lotto {
         Random random = new Random();
         Set<Integer> set = new HashSet<>();
         while(true) {
-            set.add(random.nextInt(45) + 1);
-            if(set.size() == 6) {
+            set.add(random.nextInt(LottoConstants.MAX_NUMBER) + LottoConstants.MIN_NUMBER);
+            if(set.size() == LottoConstants.NUMBER_COUNT) {
                 break;
             }
         }

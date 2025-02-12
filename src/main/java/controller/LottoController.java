@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.BonusNumber;
 import model.Lotto;
-import model.Purchasement;
+import model.Purchase;
 import model.WinningNumber;
 import model.WinningResult;
 import model.WinningStatus;
@@ -21,25 +21,25 @@ public class LottoController {
     }
 
     public void run() {
-        Purchasement purchasement = readPurchaseAmount();
-        int lottoCount = findLottoCount(purchasement);
+        Purchase purchase = readPurchaseAmount();
+        int lottoCount = findLottoCount(purchase);
         List<Lotto> issuedLottos = issueLotto(lottoCount);
 
         WinningNumber winningNumber = readWinningNumber();
         BonusNumber bonusNumber = readBonusNumber(winningNumber);
 
         WinningResult winningResult = checkWinningResult(issuedLottos, winningNumber, bonusNumber);
-        double earningRate = calculateEarningRate(winningResult, purchasement);
+        double earningRate = calculateEarningRate(winningResult, purchase);
 
         printResult(winningResult, earningRate);
     }
 
-    public Purchasement readPurchaseAmount() {
+    public Purchase readPurchaseAmount() {
        return inputView.readPurchaseAmount();
     }
 
-    public int findLottoCount(Purchasement purchasement) {
-        int lottoCount = purchasement.calculateLottoCount();
+    public int findLottoCount(Purchase purchase) {
+        int lottoCount = purchase.calculateLottoCount();
         outputView.printLottoCount(lottoCount);
         return lottoCount;
     }
@@ -72,9 +72,9 @@ public class LottoController {
         return winningResult;
     }
 
-    public double calculateEarningRate(WinningResult winningResult, Purchasement purchasement) {
+    public double calculateEarningRate(WinningResult winningResult, Purchase purchase) {
         int totalPrice = winningResult.calculateTotalPrice();
-        return ((double) totalPrice)/purchasement.getAmount();
+        return ((double) totalPrice)/ purchase.getAmount();
     }
 
     public void printResult(WinningResult winningResult, double earningRate) {
