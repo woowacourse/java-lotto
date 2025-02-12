@@ -1,9 +1,11 @@
 package domain;
 
 import exception.LottoException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class LottoNumbers {
     private static final int LOTTO_VALID_SIZE = 6;
@@ -13,7 +15,10 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers.stream().map(LottoNumber::new).toList();
+        this.lottoNumbers = lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .sorted()
+                .toList();
     }
 
     private void validateLottoNumbers(List<Integer> lottoNumbers) {
@@ -25,4 +30,5 @@ public class LottoNumbers {
             throw new LottoException(INVALID_LOTTO_SIZE);
         }
     }
+
 }
