@@ -2,9 +2,9 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import model.BonusNumber;
 import model.Lotto;
+import model.Purchasement;
 import model.WinningNumber;
 import model.WinningResult;
 import model.WinningStatus;
@@ -21,18 +21,16 @@ public class LottoController {
     }
 
     public void run() {
-        int purchaseAmount = inputView.readPurchaseAmount();
-        int count = purchaseAmount / 1000;
-        System.out.println(count + "개를 구매했습니다.");
+        Purchasement purchasement = inputView.readPurchaseAmount();
+        int lottoCount = purchasement.calculateLottoCount();
+        outputView.printLottoCount(lottoCount);
 
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto());
         }
 
-        for(Lotto lotto : lottos) {
-            System.out.println(lotto.getNumbers());
-        }
+        outputView.printLottos(lottos);
 
         WinningNumber winningNumber = inputView.readWinningNumbers();
         BonusNumber bonusNumber = inputView.readBonusNumbers(winningNumber);
@@ -46,16 +44,13 @@ public class LottoController {
             winningResult.update(winningStatus);
         }
 
-        for (WinningStatus winningStatus : winningResult.getWinningResults().keySet()) {
-            if(winningStatus == WinningStatus.NONE) continue;
-            int winningCount = winningResult.getWinningResults().get(winningStatus);
-            System.out.printf("%s - %d개\n", winningStatus.getExpression(), winningCount);
-        }
+        outputView.printWinningResult(winningResult);
 
         // 당첨 금액 / 구입 금액
         int totalPrice = winningResult.calculateTotalPrice();
-        double earningRate = ((double) totalPrice)/purchaseAmount;
-        System.out.printf("총 수익률은 %.2f입니다.", earningRate);
+        //TODO : 수익률 구하는 로직 purchasement객체로 넘길지 생각해보기.
+        double earningRate = ((double) totalPrice)/purchasement.getAmount();
+        outputView.printEarningRate(earningRate);
     }
 
 

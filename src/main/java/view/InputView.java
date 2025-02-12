@@ -2,24 +2,18 @@ package view;
 
 import java.util.Scanner;
 import model.BonusNumber;
+import model.Purchasement;
 import model.WinningNumber;
 
 public class InputView {
     private static Scanner sc = new Scanner(System.in);
 
-    public int readPurchaseAmount() {
+    public Purchasement readPurchaseAmount() {
         while (true) {
             try {
                 System.out.println("구입금액을 입력해 주세요.");
                 String purchaseAmountInput = sc.nextLine();
-                int purchaseAmount = Integer.parseInt(purchaseAmountInput);
-                if (purchaseAmount < 1000 || purchaseAmount > 100000 || purchaseAmount % 1000 != 0) {
-                    throw new IllegalArgumentException("1000 이상 100000 이하의 1000으로 나누어 떨어지는 정수를 입력해주세요.");
-                }
-                return purchaseAmount;
-            }
-            catch (NumberFormatException e) {
-                throw new IllegalArgumentException("구입 금액은 정수로 입력해주세요.");
+                return new Purchasement(purchaseAmountInput);
             }
             catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
