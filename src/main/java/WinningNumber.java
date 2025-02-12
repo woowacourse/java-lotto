@@ -28,4 +28,8 @@ public class WinningNumber {
             }
         }
     }
+
+    public boolean contains(int bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
 }

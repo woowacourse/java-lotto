@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LottoApplication {
+    private static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
         int purchaseAmount = readPurchaseAmount();
         int count = purchaseAmount / 1000;
@@ -17,31 +19,48 @@ public class LottoApplication {
             System.out.println(lotto.getNumbers());
         }
 
-        readWinningNumbers();
+        WinningNumber winningNumber = readWinningNumbers();
+        int bonusNumber = readBonusNumbers(winningNumber);
+        System.out.println(bonusNumber);
 
     }
 
-    private static void readWinningNumbers() {
-        Scanner sc = new Scanner(System.in);
+    private static int readBonusNumbers(WinningNumber winningNumber) {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        while (true) {
+            try {
+                int bonusNumber = sc.nextInt();
+                if (bonusNumber < 1 || bonusNumber > 45) {
+                    throw new IllegalArgumentException("보너스 볼은 1~45 사이의 정수로 입력해주세요.");
+                }
+                if (winningNumber.contains(bonusNumber)) {
+                    throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복되지 않게 입력해주세요.");
+                }
+                return bonusNumber;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
+    private static WinningNumber readWinningNumbers() {
+        sc.nextLine();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         while(true) {
             try {
                 String inputWinningNumbers = sc.nextLine();
-                WinningNumber winningNumber = new WinningNumber(inputWinningNumbers);
+                return new WinningNumber(inputWinningNumbers);
             }
             catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-
      }
 
 
     private static int readPurchaseAmount() {
         while (true) {
             try {
-                Scanner sc = new Scanner(System.in);
                 System.out.println("구입금액을 입력해 주세요.");
                 int purchaseAmount = sc.nextInt();
                 if (purchaseAmount < 1000 || purchaseAmount > 100000 || purchaseAmount % 1000 != 0) {
