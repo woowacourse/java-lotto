@@ -3,8 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import view.util.LottoGenerator;
-
 public class Lotto {
     private List<Integer> randomNumbers;
 
