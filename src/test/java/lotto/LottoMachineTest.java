@@ -2,8 +2,7 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Set;
-import org.assertj.core.api.Assertions;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,7 @@ class LottoMachineTest {
     @DisplayName("로또는 6개의 번호를 가진다")
     @Test
     void 로또는_6개의_번호를_가진다() {
-        Set<Integer> result = lottoMachine.createLotto();
+        List<Integer> result = lottoMachine.createLotto();
         assertThat(result.size()).isEqualTo(6);
     }
 
