@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,16 +19,13 @@ public class LottoController {
         for (int i = 0; i < lottoCount; ++i) {
             lottos.add(new Lotto(RandomNumbersGenerator.generateUniqueNumbers(1, 45, 6)));
         }
-
         printLottos(lottos);
 
         inputWinningNumbers();
     }
 
-    private void inputWinningNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-
-
+    private WinningLotto inputWinningNumbers() throws IOException {
+        return inputView.inputWinningLotto();
     }
 
     private Money inputMoney() throws IOException {
