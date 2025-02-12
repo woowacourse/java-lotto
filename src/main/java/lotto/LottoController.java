@@ -3,7 +3,9 @@ package lotto;
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class LottoController {
@@ -24,6 +26,18 @@ public class LottoController {
         Lotto winningLotto = new Lotto(Set.copyOf(inputView.requestWinningNumbers()));
         int bonusNumber = inputView.requestBonusNumber();
         validateBonusNumber(winningLotto, bonusNumber);
+
+        Map<Rank, Integer> ranks = initRanks();
+        for (Lotto lotto : lottos) {
+            int matchCount = lotto.getMatchCount(winningLotto);
+            boolean isBonusMatch = lotto.contains(bonusNumber);
+
+            Rank rank = Rank.calculate(matchCount, isBonusMatch);
+            ranks.put(rank, ranks.getOrDefault(rank, 0) + 1);
+        }
+
+        outputView.printResult(ranks);
+        outputView.printWinningRatio(calculateRatio(ranks, purchaseAmount));
     }
 
     private void validateBonusNumber(Lotto winningLotto, int bonusNumber) {
@@ -36,6 +50,28 @@ public class LottoController {
     }
 
     private List<LottoDto> convertLottoDtos(List<Lotto> lottos) {
-        return lottos.stream().map(LottoDto::of).toList();
+        return lottos.stream()
+                .map(LottoDto::of)
+                .toList();
+    }
+
+    private Map<Rank, Integer> initRanks() {
+        Map<Rank, Integer> ranks = new LinkedHashMap<>();
+        for (Rank rank : Rank.values()) {
+            ranks.put(rank, 0);
+        }
+        return ranks;
+    }
+
+    private float calculateRatio(Map<Rank, Integer> ranks, int purchaseAmount) {
+        return (float) calculateTotalWinningAmount(ranks) / purchaseAmount;
+    }
+
+    private int calculateTotalWinningAmount(Map<Rank, Integer> ranks) {
+        int totalAmount = 0;
+        for (Rank rank : ranks.keySet()) {
+            totalAmount += rank.getWinningAmount() * ranks.get(rank);
+        }
+        return totalAmount;
     }
 }

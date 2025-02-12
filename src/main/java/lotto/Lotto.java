@@ -4,6 +4,7 @@ import static lotto.LottoNumberConstants.LOTTO_NUMBER_COUNT;
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Lotto {
@@ -28,6 +29,12 @@ public class Lotto {
                 throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 수여야 합니다.");
             }
         }
+    }
+
+    public int getMatchCount(Lotto lotto) {
+        Set<Integer> me = new HashSet<>(Set.copyOf(this.numbers));
+        me.retainAll(lotto.getNumbers());
+        return me.size();
     }
 
     public boolean contains(int number) {
