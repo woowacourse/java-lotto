@@ -1,6 +1,9 @@
 package lotto;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,10 +28,7 @@ class LottoTest {
     void shouldThrowException_WhenNumberCountIsNot6(int count) {
         Set<Integer> numbers = createNumbers(count);
 
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> new Lotto(numbers)
-        );
+        assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
     }
 
     private Set<Integer> createNumbers(int count) {
