@@ -2,7 +2,6 @@ package common;
 
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class NumberGenerator {
 
@@ -12,6 +11,6 @@ public class NumberGenerator {
                 .distinct()
                 .limit(size)
                 .boxed()
-                .collect(Collectors.toList());
+                .toList();
     }
 }
