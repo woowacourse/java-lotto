@@ -3,6 +3,7 @@ package lotto.domain;
 import static lotto.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
 import static lotto.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +26,8 @@ public class LottoGenerator {
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(numberRange);
-        return numberRange.subList(START_INDEX, END_INDEX);
+        List<Integer> partialNumbers = numberRange.subList(START_INDEX, END_INDEX);
+        Collections.sort(partialNumbers);
+        return partialNumbers;
     }
 }
