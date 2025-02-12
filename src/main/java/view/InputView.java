@@ -80,4 +80,24 @@ public class InputView {
             throw new IllegalArgumentException("로또 번호는 1 이상 45 이하이다.");
         }
     }
+
+    public static int inputBonusNumber(List<Integer> winningNumbers) {
+        return RetryHandler.retryOnInvalidInput(() -> {
+            System.out.println("보너스 볼을 입력해 주세요.");
+            int bonusNumber = Integer.parseInt(Console.readLine());
+            validateBonusNumber(bonusNumber, winningNumbers);
+            return bonusNumber;
+        });
+    }
+
+    private static void validateBonusNumber(Integer bonusNumber, List<Integer> winningNumbers) {
+        validateLottoNumberRange(bonusNumber);
+        validateDuplicateNumber(bonusNumber, winningNumbers);
+    }
+
+    private static void validateDuplicateNumber(Integer bonusNumber, List<Integer> winningNumbers) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("중복된 번호가 존재합니다.");
+        }
+    }
 }
