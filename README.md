@@ -6,6 +6,7 @@
 
 ## 커스텀 요구사항
 - 1인당 구매 가능한 금액은 최대 10만원이다.
+- 입력값이 올바르지 않으면 안내 메시지를 출력하고 재입력 받는다.
 
 ## 기능 목록
 - [x] 구입 금액을 입력할 수 있다.
@@ -19,8 +20,8 @@
 - [ ] 당첨 통계를 출력한다
 
 ## 예외
-- [x] 구입 금액이 숫자가 아니면 IllegalArgumentException을 던진다.
-- [x] 구입 금액이 1000원으로 나누어지지 않으면 IllegalArgumentException을 던진다.
-- [x] 구입 금액이 양수가 아니라면 IllegalArgumentException을 던진다.
-- [x] 구입 금액이 10만원을 넘으면 IllegalArgumentException을 던진다.
-- [ ] 당첨 번호와 보너스 번호가 중복되면 IllegalArgumentException을 던진다.
+- [x] 구입 금액이 숫자가 아니면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+- [x] 구입 금액이 1000원으로 나누어지지 않으면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+- [x] 구입 금액이 양수가 아니라면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+- [x] 구입 금액이 10만원을 넘으면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+- TODO : 당첨 번호, 보너스 번호 검증 (1~45 사이, 6개, 중복)

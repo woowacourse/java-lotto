@@ -7,9 +7,7 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("구입금액을 입력해 주세요.");
-        int purchaseAmount = getPurchaseAmount();
-        List<Lotto> lottos = new LottoManager().purchase(purchaseAmount);
+        List<Lotto> lottos = purchaseLottos();
         System.out.println("%d개를 구매했습니다.".formatted(lottos.size()));
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getNumbers());
@@ -22,12 +20,24 @@ public class Application {
         int bonusNumber = getBonusNumber();
     }
 
+    private static List<Lotto> purchaseLottos() {
+        try {
+            int purchaseAmount = getPurchaseAmount();
+            return new LottoManager().purchase(purchaseAmount);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return purchaseLottos();
+        }
+    }
+
     private static int getPurchaseAmount() {
         try {
+            System.out.println("구입금액을 입력해 주세요.");
             Scanner scanner = new Scanner(System.in);
             return scanner.nextInt();
         } catch (InputMismatchException e) {
-            throw new IllegalArgumentException("구입금액은 숫자여야 합니다.");
+            System.out.println("구입금액은 숫자여야 합니다.");
+            return getPurchaseAmount();
         }
     }
 
