@@ -37,6 +37,10 @@ public class Lotto {
                 .toList();
     }
     
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+    
     @Override
     public String toString() {
         return getSorted().toString();
