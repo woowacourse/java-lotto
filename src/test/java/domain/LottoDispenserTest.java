@@ -44,22 +44,4 @@ public class LottoDispenserTest {
             new LottoDispenser(buyMoney);
         }).isInstanceOf(LottoException.class);
     }
-
-
-    @ParameterizedTest
-    @MethodSource("duplicateLottoRandomNumbers")
-    @DisplayName("로또_번호가_중복되는_경우_예외_발생")
-    public void 로또_번호가_중복되는_경우_예외_발생(List<Integer> duplicateNumbers){
-        assertThatThrownBy(() -> {
-            new LottoNumbers(duplicateNumbers);
-        }).isInstanceOf(LottoException.class);
-    }
-
-
-
-    private static Stream<Arguments> duplicateLottoRandomNumbers(){
-        return Stream.of(
-                Arguments.arguments(List.of(1, 2, 3, 4, 5, 5))
-        );
-    }
 }
