@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
+import lotto.dto.WinningBallsDto;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -23,14 +24,24 @@ public class LottoController {
     }
 
     public void run() {
+        buyLottoTicket();
+        setWinningBalls();
+        getResult();
+    }
+
+    private void buyLottoTicket() {
         int payment = inputView.readPayment();
         List<Lotto> lottos = lottoService.buyLottos(payment);
         outputView.printTicket(lottos);
+    }
 
-        List<Integer> winningNumbers = inputView.readWinningNumbers();
-        int bonusNumber = inputView.readBonusNumber();
+    private void setWinningBalls() {
+        WinningBallsDto winningBallsDto = inputView.readWinningBalls();
+        lottoService.setWinningBalls(winningBallsDto);
+    }
 
-        Map<Rank, Integer> rankCount = lottoService.getResult(winningNumbers, bonusNumber);
+    private void getResult() {
+        Map<Rank, Integer> rankCount = lottoService.getResult();
         double rateOfReturn = lottoService.getRateOfReturn(rankCount);
         outputView.printResult(rankCount, rateOfReturn);
     }
