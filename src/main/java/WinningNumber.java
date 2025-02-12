@@ -32,4 +32,10 @@ public class WinningNumber {
     public boolean contains(int bonusNumber) {
         return numbers.contains(bonusNumber);
     }
+
+    public int findMatchingCountWith(List<Integer> lottoNumbers) {
+        return (int) numbers.stream()
+                .filter(n -> lottoNumbers.contains(n))
+                .count();
+    }
 }

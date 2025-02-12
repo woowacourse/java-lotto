@@ -20,14 +20,27 @@ public class LottoApplication {
         }
 
         WinningNumber winningNumber = readWinningNumbers();
-        int bonusNumber = readBonusNumbers(winningNumber);
-        System.out.println(bonusNumber);
+        BonusNumber bonusNumber = readBonusNumbers(winningNumber);
 
+        WinningResult winningResult = new WinningResult();
+        for (Lotto lotto : lottos) {
+            // 당첨 번호와의 일치 개수 구하기
+            int matchingCount = winningNumber.findMatchingCountWith(lotto.getNumbers());
+            boolean matchesBonusNumber = bonusNumber.matchesWith(lotto.getNumbers());
+            WinningStatus winningStatus = WinningStatus.findBy(matchingCount, matchesBonusNumber);
+            winningResult.update(winningStatus);
+        }
+
+        for (WinningStatus winningStatus : winningResult.getWinningResults().keySet()) {
+            int winningCount = winningResult.getWinningResults().get(winningStatus);
+            System.out.printf("%s - %d개\n", winningStatus.getExpression(), winningCount);
+        }
     }
 
-    private static int readBonusNumbers(WinningNumber winningNumber) {
+    private static BonusNumber readBonusNumbers(WinningNumber winningNumber) {
         System.out.println("보너스 볼을 입력해 주세요.");
         while (true) {
+            //TODO : BonusNumber 객체로 검증 로직 분리하기
             try {
                 int bonusNumber = sc.nextInt();
                 if (bonusNumber < 1 || bonusNumber > 45) {
@@ -36,7 +49,7 @@ public class LottoApplication {
                 if (winningNumber.contains(bonusNumber)) {
                     throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복되지 않게 입력해주세요.");
                 }
-                return bonusNumber;
+                return new BonusNumber(bonusNumber);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
