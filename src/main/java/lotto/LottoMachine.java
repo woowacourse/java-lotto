@@ -1,15 +1,14 @@
 package lotto;
 
-import java.util.Collections;
+import static lotto.LottoNumberConstants.LOTTO_NUMBER_COUNT;
+import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
+import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
+
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class LottoMachine {
-
-    private static final int LOTTO_NUMBER_MIN = 1;
-    private static final int LOTTO_NUMBER_MAX = 45;
-    private static final int LOTTO_NUMBER_COUNT = 6;
 
     public static Lotto issue() {
         return new Lotto(generateNumbers());
@@ -17,10 +16,10 @@ public class LottoMachine {
 
     private static Set<Integer> generateNumbers() {
         Set<Integer> uniqueNumbers = new TreeSet<>();
-        while (uniqueNumbers.size() < LOTTO_NUMBER_COUNT) {
-            uniqueNumbers.add(getRandomNumberInRange(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX));
+        while (uniqueNumbers.size() < LOTTO_NUMBER_COUNT.value()) {
+            uniqueNumbers.add(getRandomNumberInRange(LOTTO_NUMBER_MIN.value(), LOTTO_NUMBER_MAX.value()));
         }
-        return new TreeSet<>(uniqueNumbers);
+        return Set.copyOf(uniqueNumbers);
     }
 
     private static int getRandomNumberInRange(int start, int end) {

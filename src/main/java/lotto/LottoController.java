@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import java.util.Set;
 
 public class LottoController {
 
@@ -17,6 +18,7 @@ public class LottoController {
         Cashier cashier = new Cashier();
         List<Lotto> lottos = cashier.payForLotto(purchaseAmount);
         outputView.printLottos(convertLottoDtos(lottos));
+        Lotto winningLotto = new Lotto(Set.copyOf(inputView.requestWinningNumbers()));
     }
 
     private List<LottoDto> convertLottoDtos(List<Lotto> lottos) {
