@@ -1,9 +1,12 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
     private static final String INPUT_MONEY_PROMPT = "구입금액을 입력해 주세요.";
+    private static final String INPUT_WINNING_NUMBER_PROMPT = "지난 주 당첨 번호를 입력해 주세요.";
     private static Scanner scanner = new Scanner(System.in);
 
     private static void isDivideByThousand(int inputMoney) {
@@ -36,4 +39,32 @@ public class InputView {
         return scanner.next();
     }
 
+    public List<Integer> inputWinningNumbers(){
+        System.out.println(INPUT_WINNING_NUMBER_PROMPT);
+        try {
+            String input = read();
+            isValidDelimiter(input);
+            return splitWinningNumbers(input);
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return inputWinningNumbers();
+        }
+    }
+
+    private static void isValidDelimiter(String input){
+        String regex = "([0-9])(, [0-9])+";
+        if(!input.matches(regex)){
+            throw new IllegalArgumentException("당첨번호 형식이 올바르지 않습니다.");
+        }
+    }
+
+    private static List<Integer> splitWinningNumbers(String input){
+        List<Integer> winningNumbers = new ArrayList<>();
+
+        for (String value : input.split(",")) {
+            winningNumbers.add(Integer.parseInt(value));
+        }
+
+        return  winningNumbers;
+    }
 }
