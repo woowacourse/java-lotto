@@ -1,5 +1,6 @@
 package view;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -14,5 +15,15 @@ public class InputView {
         sc.close();
 
         return purchaseAmount;
+    }
+
+    public List<String> askWinningNumbers() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        String winningNumbers = sc.nextLine();
+        sc.close();
+
+        return InputConverter.convertWinningNumbers(winningNumbers);
     }
 }
