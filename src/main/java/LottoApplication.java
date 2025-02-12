@@ -1,6 +1,7 @@
 import controller.PurchaseController;
 import controller.WinLottoController;
 import model.PurchasedLottos;
+import model.WinLotto;
 
 public class LottoApplication {
     private final PurchaseController purchaseController = new PurchaseController();
@@ -12,6 +13,6 @@ public class LottoApplication {
 
     private void run() {
         PurchasedLottos purchase = purchaseController.purchase();
-        winLottoController.winLotto();
+        WinLotto winLotto = winLottoController.winLotto();
     }
 }

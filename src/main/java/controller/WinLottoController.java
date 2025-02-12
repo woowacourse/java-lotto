@@ -12,9 +12,7 @@ public class WinLottoController {
         List<Integer> winNumbers = winLottoView.readWinNumbers();
         winLottoView.printBonusNumberGuide();
         Integer bonusNumber = winLottoView.readBonusNumber();
-
         return new WinLotto(winNumbers, bonusNumber);
-
     }
 }
 
