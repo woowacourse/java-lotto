@@ -2,6 +2,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 // 구매한 로또 번호
 public class Lotto {
@@ -14,6 +15,15 @@ public class Lotto {
 
     public List<Integer> getNumbers() {
         return Collections.unmodifiableList(numbers);
+    }
+
+    public String getInfo() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        String joined = numbers.stream().map(String::valueOf).collect(Collectors.joining(", "));
+        stringBuilder.append(joined);
+        stringBuilder.append("]");
+        return stringBuilder.toString();
     }
 
     private void validate(List<Integer> numbers) {
