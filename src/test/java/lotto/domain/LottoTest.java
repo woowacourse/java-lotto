@@ -10,4 +10,10 @@ public class LottoTest {
         Lottos lottos = new Lottos(3000);
         assertThat(lottos.getTicketCount()).isEqualTo(3);
     }
+
+    @Test
+    void 로또_티켓을_랜덤으로_생성한다() {
+        Lottos lottos = new Lottos(3000);
+        assertThat(lottos.getLottos().get(0).numbers.size()).isEqualTo(6);
+    }
 }
