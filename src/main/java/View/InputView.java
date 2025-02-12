@@ -33,6 +33,7 @@ public class InputView {
             validateNumberRange(number);
             winnerNumbers.add(number);
         }
+        validateDuplicateValue(winnerNumbers);
         return winnerNumbers;
     }
 
