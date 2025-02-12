@@ -21,37 +21,64 @@ public class LottoController {
     }
 
     public void run() {
-        Purchasement purchasement = inputView.readPurchaseAmount();
+        Purchasement purchasement = readPurchaseAmount();
+        int lottoCount = findLottoCount(purchasement);
+        List<Lotto> issuedLottos = issueLotto(lottoCount);
+
+        WinningNumber winningNumber = readWinningNumber();
+        BonusNumber bonusNumber = readBonusNumber(winningNumber);
+
+        WinningResult winningResult = checkWinningResult(issuedLottos, winningNumber, bonusNumber);
+        double earningRate = calculateEarningRate(winningResult, purchasement);
+
+        printResult(winningResult, earningRate);
+    }
+
+    public Purchasement readPurchaseAmount() {
+       return inputView.readPurchaseAmount();
+    }
+
+    public int findLottoCount(Purchasement purchasement) {
         int lottoCount = purchasement.calculateLottoCount();
         outputView.printLottoCount(lottoCount);
+        return lottoCount;
+    }
 
+    public List<Lotto> issueLotto(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto());
         }
-
         outputView.printLottos(lottos);
+        return lottos;
+    }
 
-        WinningNumber winningNumber = inputView.readWinningNumbers();
-        BonusNumber bonusNumber = inputView.readBonusNumbers(winningNumber);
+    public WinningNumber readWinningNumber() {
+        return inputView.readWinningNumbers();
+    }
 
+    public BonusNumber readBonusNumber(WinningNumber winningNumber) {
+        return inputView.readBonusNumbers(winningNumber);
+    }
+
+    public WinningResult checkWinningResult(List<Lotto> issuedLottos, WinningNumber winningNumber, BonusNumber bonusNumber) {
         WinningResult winningResult = new WinningResult();
-        for (Lotto lotto : lottos) {
-            // 당첨 번호와의 일치 개수 구하기
+        for (Lotto lotto : issuedLottos) {
             int matchingCount = winningNumber.findMatchingCountWith(lotto.getNumbers());
             boolean matchesBonusNumber = bonusNumber.matchesWith(lotto.getNumbers());
             WinningStatus winningStatus = WinningStatus.findBy(matchingCount, matchesBonusNumber);
             winningResult.update(winningStatus);
         }
-
-        outputView.printWinningResult(winningResult);
-
-        // 당첨 금액 / 구입 금액
-        int totalPrice = winningResult.calculateTotalPrice();
-        //TODO : 수익률 구하는 로직 purchasement객체로 넘길지 생각해보기.
-        double earningRate = ((double) totalPrice)/purchasement.getAmount();
-        outputView.printEarningRate(earningRate);
+        return winningResult;
     }
 
+    public double calculateEarningRate(WinningResult winningResult, Purchasement purchasement) {
+        int totalPrice = winningResult.calculateTotalPrice();
+        return ((double) totalPrice)/purchasement.getAmount();
+    }
 
+    public void printResult(WinningResult winningResult, double earningRate) {
+        outputView.printWinningResult(winningResult);
+        outputView.printEarningRate(earningRate);
+    }
 }
