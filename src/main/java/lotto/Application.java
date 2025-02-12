@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +14,6 @@ public class Application {
             System.out.println(lotto.getNumbers());
         }
 
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         List<Integer> winningNumbers = getWinningNumbers();
 
         System.out.println("보너스 볼을 입력해 주세요.");
@@ -42,13 +42,36 @@ public class Application {
     }
 
     private static List<Integer> getWinningNumbers() {
-        Scanner scanner = new Scanner(System.in);
-        String[] inputWinningNumbers = scanner.next().split(",");
-        List<Integer> winningNumbers = new ArrayList<>();
-        for (String inputWinningNumber : inputWinningNumbers) {
-            winningNumbers.add(Integer.parseInt(inputWinningNumber));
+        try {
+            System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+            Scanner scanner = new Scanner(System.in);
+            String[] inputWinningNumbers = scanner.next().split(",");
+            List<Integer> winningNumbers = new ArrayList<>();
+            for (String inputWinningNumber : inputWinningNumbers) {
+                winningNumbers.add(Integer.parseInt(inputWinningNumber));
+            }
+            validateWinningNumbers(winningNumbers);
+            return winningNumbers;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getWinningNumbers();
         }
-        return winningNumbers;
+    }
+
+    private static void validateWinningNumbers(List<Integer> winningNumbers) {
+        if (new HashSet<>(winningNumbers).size() != 6) {
+            throw new IllegalArgumentException("6개의 고유한 번호를 입력해야 합니다.");
+        }
+
+        for (int winningNumber : winningNumbers) {
+            validateLottoNumber(winningNumber);
+        }
+    }
+
+    private static void validateLottoNumber(int lottoNumber) {
+        if (lottoNumber < 1 || lottoNumber > 45) {
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이여야 합니다.");
+        }
     }
 
     private static int getBonusNumber() {
