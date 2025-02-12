@@ -15,13 +15,9 @@ public class WinningNumber {
     }
 
     public int countMatchingNumber(List<Integer> numbers) {
-        int count = 0;
-        for (Integer number : numbers) {
-            if (winningNumbers.contains(number)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
     }
 
     private void validateSize(List<Integer> numbers) {
