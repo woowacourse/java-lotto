@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -15,21 +14,29 @@ public class LottoCreator {
         List<Integer> lottoNumber = new ArrayList<>();
 
         addRandomNumber(lottoNumber);
-        lottoNumber.sort(Comparator.naturalOrder());
         return lottoNumber;
     }
 
     private static void addRandomNumber(List<Integer> lottoNumber) {
-        int count = LOTTO_COUNT;
-        Random random = new Random();
 
-        while (count > 0) {
-            int randomNumber = random.nextInt(LOTTO_MAX_NUMBER) + 1;
-            if (lottoNumber.contains(randomNumber)) {
-                continue;
-            }
+        for (int i = 0; i < LOTTO_COUNT; i++) {
+            int randomNumber = createRandomNumber();
+            randomNumber = createNonDuplicateNumber(lottoNumber, randomNumber);
             lottoNumber.add(randomNumber);
-            count--;
         }
     }
+
+    private static int createNonDuplicateNumber(List<Integer> lottoNumber, int randomNumber) {
+        if (lottoNumber.contains(randomNumber)) {
+            randomNumber = createRandomNumber();
+            createNonDuplicateNumber(lottoNumber, randomNumber);
+        }
+        return randomNumber;
+    }
+
+    private static int createRandomNumber() {
+        Random random = new Random();
+        return random.nextInt(LOTTO_MAX_NUMBER) + 1;
+    }
+
 }

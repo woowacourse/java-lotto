@@ -19,4 +19,23 @@ class LottoResultTest {
         }
     }
 
+    @Test
+    void 당첨이_되지_않았을_경우() {
+
+        LottoResult.addCount(2, false);
+
+        for (LottoResult result : LottoResult.values()) {
+            Assertions.assertThat(result.getCount()).isEqualTo(0);
+        }
+    }
+
+    @Test
+    void 로또_결과() {
+        int price = 14000;
+        LottoResult.addCount(3, false);
+        Assertions.assertThat(LottoResult.FIFTH.getCount()).isEqualTo(1);
+        double result = LottoResult.lottoRateOfReturn(price);
+        Assertions.assertThat(result).isEqualTo(0.35);
+    }
+
 }
