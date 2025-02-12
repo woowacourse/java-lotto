@@ -11,15 +11,40 @@ public class WinningLotto {
 
     public static final String NUMBER_REGEX = "^[0-9]*[0-9]$";
     public static final String WINNING_NUMBERS_INPUT_ERROR_MESSAGE = "당첨 번호는 중복되지 않는 1 이상 45 이하의 정수여야합니다.";
+    public static final String BONUS_INPUT_ERROR_MESSAGE = "보너스볼은 당첨 번호와 중복되지 않는 1 이상 45 이하의 정수여야합니다.";
 
     private final List<Integer> winningNumbers = new ArrayList<>();
-    //private final int bonus;
+    private int bonus;
 
     public WinningLotto(String rawWinningNumbers) {
         Arrays.stream(rawWinningNumbers.split(","))
                 .map(this::getWinningNumber)
                 .forEach(winningNumbers::add);
         validateDuplicateWinningNumbers();
+    }
+
+    public void setBonus(String rawBonus) {
+        rawBonus = rawBonus.trim();
+        validateBonus(rawBonus);
+        bonus = Integer.parseInt(rawBonus);
+    }
+
+    private void validateBonus(String rawBonus) {
+        if(!isNumber(rawBonus)) {
+            throw new IllegalArgumentException(BONUS_INPUT_ERROR_MESSAGE);
+        }
+        int bonus = Integer.parseInt(rawBonus);
+        if(!isValidateNumberRange(bonus)) {
+            throw new IllegalArgumentException(BONUS_INPUT_ERROR_MESSAGE);
+        }
+
+        if(isDuplicateWithWinningNumbers(bonus)) {
+            throw new IllegalArgumentException(BONUS_INPUT_ERROR_MESSAGE);
+        }
+    }
+
+    private boolean isDuplicateWithWinningNumbers(int bonus) {
+        return winningNumbers.contains(bonus);
     }
 
     private int getWinningNumber(String rawNumber) {
@@ -29,12 +54,12 @@ public class WinningLotto {
     }
 
     private void validateWinningNumber(String rawNumber) {
-        if (!rawNumber.matches(NUMBER_REGEX)) {
+        if (!isNumber(rawNumber)) {
             throw new IllegalArgumentException(WINNING_NUMBERS_INPUT_ERROR_MESSAGE);
         }
 
         int number = Integer.parseInt(rawNumber);
-        if (number < 1 || number > 45) {
+        if (!isValidateNumberRange(number)) {
             throw new IllegalArgumentException(WINNING_NUMBERS_INPUT_ERROR_MESSAGE);
         }
     }
@@ -44,6 +69,13 @@ public class WinningLotto {
         if (set.size() != 6) {
             throw new IllegalArgumentException(WINNING_NUMBERS_INPUT_ERROR_MESSAGE);
         }
+    }
 
+    private boolean isNumber(String rawNumber) {
+        return rawNumber.matches(NUMBER_REGEX);
+    }
+
+    private boolean isValidateNumberRange(int number) {
+        return number >= 1 && number <= 45;
     }
 }
