@@ -7,12 +7,13 @@ import java.util.Set;
 public class LottoManager {
     private static final int LOTTO_UNIT_PRICE = 1000;
 
-    public List<List<Integer>> purchase(final int purchaseAmount) {
+    public List<Lotto> purchase(final int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
         int lottoAmount = purchaseAmount / LOTTO_UNIT_PRICE;
-        List<List<Integer>> lottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
+        LottoMachine lottoMachine = new LottoMachine();
         for (int i = 0; i < lottoAmount; i++) {
-            List<Integer> lotto = new LottoMachine().createLotto();
+            Lotto lotto = lottoMachine.createLotto();
             lottos.add(lotto);
         }
         return lottos;
