@@ -21,4 +21,22 @@ public class Number {
     public int getValue() {
         return value;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Number number = (Number) o;
+        return getValue() == number.getValue();
+    }
+
+    @Override
+    public int hashCode() {
+        return getValue();
+    }
 }

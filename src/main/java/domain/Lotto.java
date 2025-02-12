@@ -23,6 +23,10 @@ public class Lotto {
         validateNonDuplicatedNumbers(numbers);
     }
 
+    public boolean contains(Number number) {
+        return numbers.contains(number);
+    }
+
 
     private void validateNumberSize(Collection<Number> numbers) {
         if (numbers.size() != NUMBERS_SIZE) {
