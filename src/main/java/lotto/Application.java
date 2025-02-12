@@ -15,8 +15,11 @@ public class Application {
             System.out.println(lotto.getNumbers());
         }
 
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         List<Integer> winningNumbers = getWinningNumbers();
+
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = getBonusNumber();
     }
 
     private static int getPurchaseAmount() {
@@ -36,5 +39,10 @@ public class Application {
             winningNumbers.add(Integer.parseInt(inputWinningNumber));
         }
         return winningNumbers;
+    }
+
+    private static int getBonusNumber() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 }
