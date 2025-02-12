@@ -32,6 +32,7 @@ public class LottoApplication {
         }
 
         for (WinningStatus winningStatus : winningResult.getWinningResults().keySet()) {
+            if(winningStatus == WinningStatus.NONE) continue;
             int winningCount = winningResult.getWinningResults().get(winningStatus);
             System.out.printf("%s - %d개\n", winningStatus.getExpression(), winningCount);
         }
