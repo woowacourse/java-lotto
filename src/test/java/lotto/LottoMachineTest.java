@@ -27,6 +27,7 @@ class LottoMachineTest {
     /**
      * 테스트의 멱등성을 고려하여 리팩토링 TODO
      */
+    @DisplayName("로또는 1과 45 사이의 번호를 가진다")
     @Test
     void 로또는_1과_45_사이의_번호를_가진다() {
         for (int number : lottoMachine.createLotto()) {

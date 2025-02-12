@@ -9,7 +9,6 @@
 
 ## 기능 목록
 - [x] 구입 금액을 입력할 수 있다.
-- [ ] 로또를 구매할 수 있다.
 - [ ] 구입 금액에 해당하는 개수의 로또를 발행할 수 있다.
 - [x] 로또는 1 ~ 45 사이 6개 숫자를 랜덤으로 생성하여 발행한다.
 - [ ] 발행된 로또를 출력한다.
@@ -21,6 +20,6 @@
 
 ## 예외
 - [ ] 구입 금액이 숫자가 아니면 IllegalArgumentException을 던진다.
-- [ ] 구입 금액이 1000원으로 나누어지지 않으면 IllegalArgumentException을 던진다.
-- [ ] 구입 금액이 양수가 아니라면 IllegalArgumentException을 던진다.
+- [x] 구입 금액이 1000원으로 나누어지지 않으면 IllegalArgumentException을 던진다.
+- [x] 구입 금액이 양수가 아니라면 IllegalArgumentException을 던진다.
 - [ ] 당첨 번호와 보너스 번호가 중복되면 IllegalArgumentException을 던진다.
