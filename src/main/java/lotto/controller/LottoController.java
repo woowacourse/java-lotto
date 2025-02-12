@@ -1,4 +1,4 @@
-package lotto;
+package lotto.controller;
 
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
@@ -6,6 +6,10 @@ import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import lotto.Rank;
+import lotto.model.Cashier;
+import lotto.model.DashBoard;
+import lotto.model.Lotto;
 import lotto.view.Console;
 import lotto.view.InputView;
 import lotto.view.OutputView;

@@ -1,12 +1,12 @@
-package lotto;
+package lotto.model;
 
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_COUNT;
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
 
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class LottoMachine {
 
@@ -15,7 +15,7 @@ public class LottoMachine {
     }
 
     private static Set<Integer> generateNumbers() {
-        Set<Integer> uniqueNumbers = new TreeSet<>();
+        Set<Integer> uniqueNumbers = new HashSet<>();
         while (uniqueNumbers.size() < LOTTO_NUMBER_COUNT.value()) {
             uniqueNumbers.add(getRandomNumberInRange(LOTTO_NUMBER_MIN.value(), LOTTO_NUMBER_MAX.value()));
         }

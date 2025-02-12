@@ -1,8 +1,9 @@
-package lotto;
+package lotto.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Set;
+import lotto.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.LottoDto;
+import lotto.controller.LottoDto;
 import lotto.Rank;
 
 public class OutputView {
