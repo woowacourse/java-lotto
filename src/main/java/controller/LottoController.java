@@ -16,7 +16,9 @@ public class LottoController {
             lottos.add(LottoFactory.makeLotto());
         }
         OutputView.printLottos(lottos);
-
+        LottoStats lottoStats = new LottoStats(InputView.inputWinningNumbers(), InputView.inputBonusBall());
+        lottoStats.calculateResult(lottos);
+        OutputView.printLottoStats(lottoStats);
     }
 
 //    private static LottoStats getWinningStats(List<Lotto> lottos){

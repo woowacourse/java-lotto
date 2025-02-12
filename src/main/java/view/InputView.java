@@ -18,6 +18,7 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         List<Integer> winningNumbers = Arrays.stream(sc.nextLine()
                         .split(","))
+                .map(String::trim)
                         .map(Integer::parseInt)
                         .toList();
         return winningNumbers;

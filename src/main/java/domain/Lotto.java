@@ -18,25 +18,25 @@ public class Lotto {
         return numbers.toString();
     }
 
-    public int getRank(List<Integer> winningNumbers, int bonusBall){
+    public Rank getRank(List<Integer> winningNumbers, int bonusBall){
          int count = (int)numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
          if(count == 6){
-             return 1;
+             return Rank.FIRST;
          }
          if(count == 5 && numbers.contains(bonusBall)){
-             return 2;
+             return Rank.SECOND;
          }
          if(count == 5){
-             return 3;
+             return Rank.THIRD;
          }
          if(count == 4){
-             return 4;
+             return Rank.FOURTH;
          }
          if(count == 3){
-             return 5;
+             return Rank.FIFTH;
          }
-         return 6;
+         return Rank.NONE;
     }
 }
