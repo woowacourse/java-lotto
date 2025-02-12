@@ -11,13 +11,21 @@ public class PurchaseView {
     public Integer readPurchaseAmount() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        validate(input);
+        Integer purchaseAmount = validatePositiveNumber(input);
+        validateDividable(purchaseAmount);
+        return purchaseAmount;
+    }
+
+    private Integer validatePositiveNumber(String input) {
+        String POSITIVE_INTEGER_REGEX = "[1-9]\\d*";
+        if (!input.matches(POSITIVE_INTEGER_REGEX)) {
+            throw new IllegalArgumentException();
+        }
         return Integer.parseInt(input);
     }
 
-    private void validate(String input) {
-        String POSITIVE_INTEGER_REGEX = "[1-9]\\d*";
-        if (!input.matches(POSITIVE_INTEGER_REGEX)) {
+    private void validateDividable(Integer input) {
+        if (input % 1000 != 0) {
             throw new IllegalArgumentException();
         }
     }
