@@ -14,4 +14,10 @@ public class Validator {
             throw new IllegalArgumentException();
         }
     }
+
+    public static void validateDivide(int input, int division) {
+        if (input % division != 0) {
+            throw new IllegalArgumentException();
+        }
+    }
 }

@@ -20,6 +20,6 @@ public class LottoController {
         Validator.validateNumeric(input);
         int purchaseMoney = Integer.parseInt(input);
         Validator.validateRange(purchaseMoney, Integer.MAX_VALUE, 1000);
-
+        Validator.validateDivide(purchaseMoney, 1000);
     }
 }
