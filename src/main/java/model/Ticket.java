@@ -17,8 +17,11 @@ public class Ticket {
         this.purchaseMoney = purchaseMoney;
     }
 
+    public int getTicketAmount() {
+        return purchaseMoney / TICKET_PRICE;
+    }
 
-    public TicketAmountResponse getTicketAmount() {
-        return new TicketAmountResponse(purchaseMoney / TICKET_PRICE);
+    public TicketAmountResponse createResponse() {
+        return new TicketAmountResponse(getTicketAmount());
     }
 }
