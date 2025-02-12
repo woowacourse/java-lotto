@@ -29,7 +29,7 @@ public class LottoController {
 
     private void purchase() {
         int purchaseAmount = lottoConsoleView.requestPurchaseAmount();
-        List<LottoTicket> tickets = lottoStore.buy(purchaseAmount);
+        List<LottoTicket> tickets = lottoStore.purchase(purchaseAmount);
         lottoCustomerHistory.add(new LottoCustomer(tickets, purchaseAmount));
 
         lottoConsoleView.printPurchaseCount(tickets.size());

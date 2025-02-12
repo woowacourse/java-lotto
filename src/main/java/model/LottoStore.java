@@ -12,7 +12,7 @@ public class LottoStore {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public List<LottoTicket> buy(final int purchaseAmount) {
+    public List<LottoTicket> purchase(final int purchaseAmount) {
         validateAmountUnit(purchaseAmount);
         int purchaseCount = purchaseAmount / LOTTO_PRICE;
         return IntStream.range(0, purchaseCount)
