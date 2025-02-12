@@ -7,12 +7,12 @@ import java.util.Set;
 public class LottoManager {
     private static final int LOTTO_UNIT_PRICE = 1000;
 
-    public List<Set<Integer>> purchase(final int purchaseAmount) {
+    public List<List<Integer>> purchase(final int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
         int lottoAmount = purchaseAmount / LOTTO_UNIT_PRICE;
-        List<Set<Integer>> lottos = new ArrayList<>();
+        List<List<Integer>> lottos = new ArrayList<>();
         for (int i = 0; i < lottoAmount; i++) {
-            Set<Integer> lotto = new LottoMachine().createLotto();
+            List<Integer> lotto = new LottoMachine().createLotto();
             lottos.add(lotto);
         }
         return lottos;
