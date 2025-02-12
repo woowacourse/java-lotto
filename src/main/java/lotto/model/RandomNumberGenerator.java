@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class RandomNumberGenerator {
 
-    public List<Integer> generate() {
+    public static List<Integer> generate() {
         Random random = new Random();
         ArrayList<Integer> randomNumbers = new ArrayList<>();
         for (int count = 0; count < Lotto.LOTTO_SIZE; count++) {

@@ -2,17 +2,18 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 class LottosTest {
-
-    @DisplayName("천원 단위가 아니면 예외가 발생한다.")
+    @DisplayName("발행된 로또를 저장한다.")
     @Test
-    void 천원_단위가_아니면_예외가_발생한다() {
-        assertThatThrownBy(() -> Lottos.issue(1500))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("천원 단위로 입력해 주세요.");
+    void 발행된_로또를_저장한다() {
+        Lottos lottos = new Lottos();
+        lottos.add(new Lotto(List.of(1,2,3,4,5,6)));
+        Assertions.assertThat(lottos.getLottos()).hasSize(1);
     }
-
 }

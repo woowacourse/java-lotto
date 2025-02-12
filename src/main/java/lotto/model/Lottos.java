@@ -1,21 +1,18 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
+    public static final int UNIT_PRICE = 1_000;
+    private final List<Lotto> lottos = new ArrayList<>();
 
-    private static final int UNIT_PRICE = 1_000;
-    private final List<Lotto> lottos;
-
-    public Lottos(final List<Lotto> lottos) {
-        this.lottos = lottos;
+    public void add(Lotto lotto) {
+        lottos.add(lotto);
     }
 
-    public static void issue(final int money) {
-        if (money % UNIT_PRICE != 0) {
-            throw new IllegalArgumentException("천원 단위로 입력해 주세요.");
-        }
-        int count = money / UNIT_PRICE;
+    public List<Lotto> getLottos() {
+        return lottos.stream()
+                .toList();
     }
-
 }
