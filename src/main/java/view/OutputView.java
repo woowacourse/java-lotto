@@ -18,8 +18,4 @@ public class OutputView {
         String joined = String.join(", ", response.numbers());
         System.out.println("[" + joined + "]");
     }
-
-    public void printWinningNumbersMessage() {
-
-    }
 }
