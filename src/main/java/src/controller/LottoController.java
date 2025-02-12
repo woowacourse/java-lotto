@@ -11,5 +11,7 @@ public class LottoController {
     private final OutputView outputView = new ConsoleOutputView();
 
     public void run() {
+        outputView.printInputPurchaseMoneyMessage();
+        inputView.inputPurchaseMoney();
     }
 }
