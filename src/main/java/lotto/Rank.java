@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum Rank {
 
     NO_PRIZE(0, false, 0) {
@@ -67,11 +69,9 @@ public enum Rank {
     }
 
     public static Rank calculate(int matchCount, boolean isBonusMatch) {
-        for (Rank rank : Rank.values()) {
-            if (rank.isMatch(matchCount, isBonusMatch)) {
-                return rank;
-            }
-        }
-        return NO_PRIZE;
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.isMatch(matchCount,isBonusMatch))
+                .findFirst()
+                .orElse(NO_PRIZE);
     }
 }
