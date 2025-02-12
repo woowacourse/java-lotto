@@ -16,5 +16,6 @@ public class OutputView {
                     .collect(Collectors.joining(", "));
             System.out.println("[" + purchaseLottos + "]");
         }
+        System.out.println();
     }
 }
