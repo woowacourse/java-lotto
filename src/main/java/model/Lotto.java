@@ -42,6 +42,10 @@ public class Lotto {
         );
     }
 
+    public boolean isContained(int number) {
+        return numbers.contains(number);
+    }
+
     private void validateUniqueNumber(List<Integer> numbers) {
         Set<Integer> set = new HashSet<>(numbers);
         if (set.size() != numbers.size()) {
