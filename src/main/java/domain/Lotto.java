@@ -10,11 +10,14 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    //TODO: getter 지우기
     public List<Integer> getNumbers() {
         return numbers;
     }
 
-
+    public String toString() {
+        return numbers.toString();
+    }
 
 
 }
