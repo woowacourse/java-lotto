@@ -40,7 +40,7 @@ public class LottoController {
 
     private List<LottoDto> convertLottoDtos(List<Lotto> lottos) {
         return lottos.stream()
-                .map(LottoDto::of)
+                .map(LottoDto::from)
                 .toList();
     }
 

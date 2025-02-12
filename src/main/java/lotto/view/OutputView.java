@@ -1,35 +1,48 @@
 package lotto.view;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.LottoDto;
 import lotto.Rank;
 
 public class OutputView {
+
     public void printLottos(List<LottoDto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
-        for (LottoDto lotto : lottos) {
-            System.out.println(lotto);
-        }
+        lottos.forEach(lotto ->
+                System.out.println("[" + formatLottoNumbers(lotto) + "]\n")
+        );
+    }
+
+    private String formatLottoNumbers(LottoDto lotto) {
+        return lotto.numbers().stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", "));
     }
 
     public void printResult(Map<Rank, Integer> ranks) {
         System.out.println("당첨 통계 \n---------");
-        for (Rank rank : Rank.values()) {
-            if (rank == Rank.NO_PRIZE) {
-                continue;
-            }
+        Arrays.stream(Rank.values())
+                .filter(rank -> rank != Rank.NO_PRIZE)
+                .forEach(rank -> printRankResult(rank, ranks.getOrDefault(rank, 0)));
+    }
 
-            int winningCount = ranks.get(rank);
-            int winningAmount = rank.getWinningAmount();
-            int matchCount = rank.getMatchCount();
-            boolean isBonusMatch = rank.requiresBonusMatch();
-            if (isBonusMatch) {
-                System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개\n", matchCount, winningAmount, winningCount);
-                continue;
-            }
-            System.out.printf("%d개 일치 (%d원) - %d개\n", matchCount, winningAmount, winningCount);
+    private void printRankResult(Rank rank, int count) {
+        String bonusText = getBonusText(rank);
+        System.out.println(getRankResultMessage(rank, count, bonusText));
+    }
+
+    private String getBonusText(Rank rank) {
+        if (rank == Rank.SECOND) {
+            return ", 보너스 볼 일치";
         }
+        return "";
+    }
+
+    private String getRankResultMessage(Rank rank, int count, String bonusText) {
+        return "%d개 일치%s (%d원) - %d개".formatted(rank.getMatchCount(), bonusText, rank.getWinningAmount(), count);
     }
 
     public void printWinningRatio(float ratio) {
