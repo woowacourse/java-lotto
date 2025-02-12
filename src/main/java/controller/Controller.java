@@ -1,0 +1,31 @@
+package controller;
+
+import java.util.EnumMap;
+import model.Bonus;
+import model.Lotto;
+import model.LottoPurchase;
+import model.Prize;
+import service.LottoFactory;
+import service.Service;
+import view.InputView;
+import view.OutputView;
+
+public class Controller {
+
+    public final Service service;
+
+    public Controller(Service service) {
+        this.service = service;
+    }
+
+    public void run() {
+        LottoPurchase purchaseLotto = InputView.getPurchaseLotto();
+        LottoFactory lottoFactory = LottoFactory.of(purchaseLotto.getAmount());
+        OutputView.printLottoCount(lottoFactory);
+        OutputView.printLottoTickets(lottoFactory);
+        Lotto winningLotto = InputView.getWinningLotto();
+        Bonus winningBonus = InputView.getWinningBonus(winningLotto);
+        EnumMap<Prize, Integer> statistic = lottoFactory.getStatistic(winningLotto, winningBonus);
+        OutputView.printStatistics(statistic);
+    }
+}
