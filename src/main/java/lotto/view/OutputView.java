@@ -11,9 +11,7 @@ public class OutputView {
 
     public void printLottos(List<LottoDto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
-        lottos.forEach(lotto ->
-                System.out.println("[" + formatLottoNumbers(lotto) + "]\n")
-        );
+        lottos.forEach(lotto -> System.out.println("[" + formatLottoNumbers(lotto) + "]\n"));
     }
 
     private String formatLottoNumbers(LottoDto lotto) {
@@ -35,7 +33,7 @@ public class OutputView {
     }
 
     private String getBonusText(Rank rank) {
-        if (rank == Rank.SECOND) {
+        if (rank.requiresBonusMatch()) {
             return ", 보너스 볼 일치";
         }
         return "";

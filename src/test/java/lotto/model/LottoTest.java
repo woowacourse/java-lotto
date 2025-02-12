@@ -52,7 +52,7 @@ class LottoTest {
 
     @DisplayName("특정 번호를 가지고 있는지 확인할 수 있다.")
     @ParameterizedTest
-    @ValueSource(ints = {1, 2,3,4,5,6})
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void containsTest(int number) {
         Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(numbers);

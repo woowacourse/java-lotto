@@ -9,6 +9,10 @@ public class Cashier {
 
     public List<Lotto> payForLotto(int amount) {
         int count = calculateLottoCount(amount);
+        return issueLottoByCount(count);
+    }
+
+    private List<Lotto> issueLottoByCount(int count) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(LottoMachine.issue());
@@ -21,6 +25,6 @@ public class Cashier {
             String message = String.format("로또는 %,d원 단위로 구매할 수 있습니다.", LOTTO_PURCHASE_AMOUNT_UNIT);
             throw new IllegalArgumentException(message);
         }
-        return amount/LOTTO_PURCHASE_AMOUNT_UNIT;
+        return amount / LOTTO_PURCHASE_AMOUNT_UNIT;
     }
 }
