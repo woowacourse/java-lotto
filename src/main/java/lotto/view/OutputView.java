@@ -23,7 +23,7 @@ public class OutputView {
             int winningCount = ranks.get(rank);
             int winningAmount = rank.getWinningAmount();
             int matchCount = rank.getMatchCount();
-            boolean isBonusMatch = rank.isBonusMatch();
+            boolean isBonusMatch = rank.requiresBonusMatch();
             if (isBonusMatch) {
                 System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개\n", matchCount, winningAmount, winningCount);
                 continue;

@@ -3,7 +3,6 @@ package lotto;
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -73,7 +72,7 @@ public class LottoController {
     private DashBoard judgeLottoResult(List<Lotto> lottos, Lotto winningLotto, int bonusNumber) {
         DashBoard dashBoard = new DashBoard();
         for (Lotto lotto : lottos) {
-            dashBoard.update(lotto, winningLotto, bonusNumber);
+            dashBoard.recordResult(lotto, winningLotto, bonusNumber);
         }
         return dashBoard;
     }

@@ -4,73 +4,53 @@ import java.util.Arrays;
 
 public enum Rank {
 
-    NO_PRIZE(0, false, 0) {
-        @Override
-        boolean isMatch(int matchCount, boolean isBonusMatch) {
-            return matchCount == this.getMatchCount();
-        }
-    },
-    FIFTH(3, false, 5_000) {
-        @Override
-        boolean isMatch(int matchCount, boolean isBonusMatch) {
-            return matchCount == this.getMatchCount();
-        }
-    },
-    FOURTH(4, false, 50_000) {
-        @Override
-        boolean isMatch(int matchCount, boolean isBonusMatch) {
-            return matchCount == this.getMatchCount();
-        }
-    },
-    THIRD(5, false, 1_500_000) {
-        @Override
-        boolean isMatch(int matchCount, boolean isBonusMatch) {
-            return matchCount == this.getMatchCount()
-                    && isBonusMatch != this.isBonusMatch();
-        }
-    },
-    SECOND(5, true, 30_000_000) {
-        @Override
-        boolean isMatch(int matchCount, boolean isBonusMatch) {
-            return matchCount == this.getMatchCount()
-                    && isBonusMatch == this.isBonusMatch();
-        }
-    },
-    FIRST(6, false, 2_000_000_000) {
-        @Override
-        boolean isMatch(int matchCount, boolean isBonusMatch) {
-            return matchCount == this.getMatchCount();
-        }
-    },
+    NO_PRIZE(0, false, 0),
+    FIFTH(3, false, 5_000),
+    FOURTH(4, false, 50_000),
+    THIRD(5, false, 1_500_000),
+    SECOND(5, true, 30_000_000),
+    FIRST(6, false, 2_000_000_000),
     ;
 
     private final int matchCount;
-    private final boolean isBonusMatch;
+    private final boolean requiresBonusMatch;
     private final int winningAmount;
 
-    Rank(int matchCount, boolean isBonusMatch, int winningAmount) {
+    Rank(int matchCount, boolean requiresBonusMatch, int winningAmount) {
         this.matchCount = matchCount;
-        this.isBonusMatch = isBonusMatch;
+        this.requiresBonusMatch = requiresBonusMatch;
         this.winningAmount = winningAmount;
     }
-
-    abstract boolean isMatch(int matchCount, boolean isBonusMatch);
 
     public int getMatchCount() {
         return matchCount;
     }
 
-    public boolean isBonusMatch() {
-        return isBonusMatch;
+    public boolean requiresBonusMatch() {
+        return requiresBonusMatch;
     }
 
     public int getWinningAmount() {
         return winningAmount;
     }
 
-    public static Rank calculate(int matchCount, boolean isBonusMatch) {
-        return Arrays.stream(Rank.values())
-                .filter(rank -> rank.isMatch(matchCount,isBonusMatch))
+    public static Rank classifyRank(int matchCount, boolean isBonusMatch) {
+        if (matchCount == THIRD.matchCount) {
+            return getRankWithBonus(isBonusMatch);
+        }
+        return getRankWithoutBonus(matchCount);
+    }
+
+    private static Rank getRankWithBonus(boolean isBonusMatch) {
+        if (isBonusMatch) {
+            return SECOND;
+        }
+        return THIRD;
+    }
+
+    private static Rank getRankWithoutBonus(int matchCount) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.matchCount == matchCount && !rank.requiresBonusMatch)
                 .findFirst()
                 .orElse(NO_PRIZE);
     }
