@@ -1,5 +1,6 @@
 package domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import exception.LottoException;
@@ -42,4 +43,21 @@ public class LottoNumbersTest {
                 Arguments.arguments(List.of(1, 2, 3, 4))
         );
     }
+
+
+    @ParameterizedTest
+    @MethodSource("lottoNumbers")
+    @DisplayName("사용자가_구매한_로또_내역을_정렬하여_출력한다")
+    public void 사용자가_구매한_로또_내역을_정렬하여_출력한다(List<Integer> lottoNumbers){
+        assertThat(new LottoNumbers(lottoNumbers).formatNumbers())
+                .isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
+
+    private static Stream<Arguments> lottoNumbers(){
+        return Stream.of(
+                Arguments.arguments(List.of(6,5,4,3,2,1))
+        );
+    }
+
+
 }

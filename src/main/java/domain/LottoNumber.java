@@ -30,4 +30,9 @@ import java.util.Objects;
     public int compareTo(LottoNumber o) {
         return lottoNumber - o.lottoNumber;
     }
+
+    @Override
+    public String toString(){
+        return lottoNumber + "";
+    }
 }
