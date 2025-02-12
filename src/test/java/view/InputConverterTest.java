@@ -14,8 +14,8 @@ class InputConverterTest {
     void 당첨_번호를_리스트로_반환한다() {
         String input = "1,2,3,4,5,6";
 
-        List<String> winningNumbers = InputConverter.convertWinningNumbers(input);
-        assertThat(winningNumbers).isEqualTo(List.of("1", "2", "3", "4", "5", "6"));
+        List<Integer> winningNumbers = InputConverter.convertWinningNumbers(input);
+        assertThat(winningNumbers).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }
 
     @ValueSource(strings = {"a", "-1", "1,,2", "1,a"})
@@ -23,6 +23,22 @@ class InputConverterTest {
     void 당첨_번호_입력_값이_올바르지_않다면_예외를_던진다(String input) {
 
         assertThatThrownBy(() -> InputConverter.convertWinningNumbers(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 보너스_번호를_정수로_반환한다() {
+        String input = "1";
+
+        int bonusNumber = InputConverter.convertBonusNumber(input);
+        assertThat(bonusNumber).isEqualTo(1);
+    }
+
+    @ValueSource(strings = {"a", "-1", "1,,2", "1,a", "1,2"})
+    @ParameterizedTest
+    void 보너스_번호_입력_값이_올바르지_않다면_예외를_던진다(String input) {
+
+        assertThatThrownBy(() -> InputConverter.convertBonusNumber(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
