@@ -52,4 +52,8 @@ public class Lotto {
             throw new IllegalArgumentException("로또 번호는 숫자여야 합니다");
         }
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }
