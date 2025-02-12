@@ -46,8 +46,8 @@ public class WinningLotto {
         }
     }
 
-    public Lotto getWinningNumbers() {
-        return winningNumbers;
+    public List<Integer> getWinningNumbers() {
+        return winningNumbers.getLotto();
     }
 
     public int getBonusBall() {
