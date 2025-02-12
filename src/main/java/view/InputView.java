@@ -9,6 +9,7 @@ public class InputView {
     private static Scanner sc = new Scanner(System.in);
 
     public Purchase readPurchaseAmount() {
+        // TODO: while 공통 구조 분리
         while (true) {
             try {
                 System.out.println("구입금액을 입력해 주세요.");

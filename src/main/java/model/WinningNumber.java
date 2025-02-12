@@ -1,6 +1,5 @@
 package model;
 
-import controller.LottoController;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +7,6 @@ public class WinningNumber {
     private final List<Integer> numbers = new ArrayList<>();
 
     public WinningNumber(String inputWinningNumbers) {
-
         String[] winningNumbers = inputWinningNumbers.split(", ");
         if(winningNumbers.length != LottoConstants.NUMBER_COUNT) {
             throw new IllegalArgumentException("당첨 번호의 개수를 6개로 입력해주세요.");

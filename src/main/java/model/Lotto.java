@@ -11,6 +11,7 @@ public class Lotto {
     private final List<Integer> numbers = new ArrayList<>();
 
     public Lotto() {
+        // TODO: 로직 별도 메서드(클래스)로 분리하기
         Random random = new Random();
         Set<Integer> set = new HashSet<>();
         while(true) {
