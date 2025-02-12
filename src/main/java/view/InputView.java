@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class InputView {
     private static final String INPUT_MONEY_PROMPT = "구입금액을 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBER_PROMPT = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_BONUS_NUMBER_PROMPT = "보너스 번호를 입력해 주세요.";
     private static Scanner scanner = new Scanner(System.in);
 
     private static void isDivideByThousand(int inputMoney) {
@@ -36,10 +37,10 @@ public class InputView {
     }
 
     private static String read() {
-        return scanner.next();
+        return scanner.nextLine();
     }
 
-    public List<Integer> inputWinningNumbers(){
+    public static List<Integer> inputWinningNumbers(){
         System.out.println(INPUT_WINNING_NUMBER_PROMPT);
         try {
             String input = read();
@@ -61,14 +62,15 @@ public class InputView {
     private static List<Integer> splitWinningNumbers(String input){
         List<Integer> winningNumbers = new ArrayList<>();
 
-        for (String value : input.split(",")) {
+        for (String value : input.split(", ")) {
             winningNumbers.add(Integer.parseInt(value));
         }
 
         return  winningNumbers;
     }
 
-    public int isNumericBonusNumber() {
+    public static int isNumericBonusNumber() {
+        System.out.println(INPUT_BONUS_NUMBER_PROMPT);
         String bonusNumberString = read();
         try {
             isNumeric(bonusNumberString);
