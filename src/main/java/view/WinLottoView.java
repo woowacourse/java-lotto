@@ -15,11 +15,13 @@ public class WinLottoView {
     public void readWinNumbers() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        List<String> winNumbers = Arrays.stream(input.split(Constants.DELIMETER))
+        List<String> winNumbers = Arrays.stream(input.split(Constants.DELIMITER))
                 .map(String::trim)
                 .toList();
         validateNumberCount(winNumbers);
         winNumbers.forEach(this::validatePositiveNumber);
+        List<Integer> numbers = winNumbers.stream().mapToInt(this::validatePositiveNumber).boxed().toList();
+        numbers.forEach(this::validateBound);
     }
 
     private void validateNumberCount(List<String> winNumbers) {
@@ -34,5 +36,11 @@ public class WinLottoView {
             throw new IllegalArgumentException(ErrorMessage.POSITIVE_NUMBER_EXCEPTION);
         }
         return Integer.parseInt(input);
+    }
+
+    private void validateBound(Integer input) {
+        if (input < Constants.MINIMUM_LOTTO_NUMBER || input > Constants.MAXIMUM_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_BOUND_EXCEPTION);
+        }
     }
 }

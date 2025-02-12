@@ -24,14 +24,27 @@ class WinLottoViewTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"a, b, c, d, e, f", "1, 2, 3, 4, 5, -1"})
-    public void 양의정수_판별_테스트(String test) {
+    public void 양의정수_판별_테스트(String input) {
         // given
-        System.setIn(new ByteArrayInputStream(test.getBytes()));
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
         WinLottoView winLottoView = new WinLottoView();
 
         // when & then
         assertThatThrownBy(() -> winLottoView.readWinNumbers())
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.POSITIVE_NUMBER_EXCEPTION);
+    }
+
+    @Test
+    public void 숫자_범위_판별_테스트() {
+        // given
+        String input = "46, 47, 48, 49, 50, 51";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        WinLottoView winLottoView = new WinLottoView();
+
+        // when & then
+        assertThatThrownBy(() -> winLottoView.readWinNumbers())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.NUMBER_BOUND_EXCEPTION);
     }
 }
