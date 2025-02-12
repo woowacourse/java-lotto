@@ -4,8 +4,8 @@ import utils.Validator;
 
 public class WinningLotto {
 
-    private Lotto lotto;
-    private int bonusNumber;
+    private final Lotto lotto;
+    private final int bonusNumber;
 
     public WinningLotto(String input, String bonusNumber) {
         lotto = new Lotto(input);
@@ -14,6 +14,14 @@ public class WinningLotto {
         int parsed = Integer.parseInt(bonusNumber);
 
         Validator.validateRange(parsed, 45, 1);
+
+        validateLottoNumberDuplicate(parsed);
         this.bonusNumber = parsed;
+    }
+
+    private void validateLottoNumberDuplicate(int parsed) {
+        if (lotto.isContained(parsed)) {
+            throw new IllegalArgumentException();
+        }
     }
 }
