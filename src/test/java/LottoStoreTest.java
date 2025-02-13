@@ -1,13 +1,14 @@
 import static org.assertj.core.api.Assertions.*;
 
 import model.LottoNumberGenerator;
+import model.LottoRankCalculator;
 import model.LottoStore;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoStoreTest {
 
-    private LottoStore lottoStore = new LottoStore(new LottoNumberGenerator());
+    private LottoStore lottoStore = new LottoStore(new LottoNumberGenerator(), new LottoRankCalculator());
 
     @DisplayName("구입 금액이 1000원 단위가 아나라면 예외를 발생시킨다.")
     @Test
