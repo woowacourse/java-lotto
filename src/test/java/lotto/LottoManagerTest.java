@@ -13,7 +13,7 @@ class LottoManagerTest {
         assertThatThrownBy(() ->
             LottoManager.purchase(500)
         ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구입금액은 1000원으로 나누어져야 합니다.");
+                .hasMessage("구입금액은 %d원으로 나누어져야 합니다.".formatted(LottoManager.LOTTO_UNIT_PRICE));
     }
 
     @DisplayName("구입금액이 양수가 아니라면 예외를 던진다")
@@ -31,7 +31,7 @@ class LottoManagerTest {
         assertThatThrownBy(() ->
                 LottoManager.purchase(200000)
         ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구입금액은 최대 10만원까지입니다.");
+                .hasMessage("구입금액은 최대 100000원까지입니다.");
     }
 
     @DisplayName("구입금액에 해당하는 개수의 로또를 발행한다")

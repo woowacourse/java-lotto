@@ -27,7 +27,7 @@ public class LottoManager {
 
     private static void validatePurchaseAmount(final int purchaseAmount) {
         if (purchaseAmount % LOTTO_UNIT_PRICE != 0) {
-            throw new IllegalArgumentException("구입금액은 1000원으로 나누어져야 합니다.");
+            throw new IllegalArgumentException("구입금액은 %d원으로 나누어져야 합니다.".formatted(LOTTO_UNIT_PRICE));
         }
 
         if (purchaseAmount <= 0) {
@@ -35,7 +35,7 @@ public class LottoManager {
         }
 
         if (purchaseAmount > MAX_PURCHASE_AMOUNT) {
-            throw  new IllegalArgumentException("구입금액은 최대 10만원까지입니다.");
+            throw  new IllegalArgumentException("구입금액은 최대 %d원까지입니다.".formatted(MAX_PURCHASE_AMOUNT));
         }
     }
 }
