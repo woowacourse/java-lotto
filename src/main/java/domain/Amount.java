@@ -45,6 +45,6 @@ public class Amount {
 
 
     public double getProfit(long sum) {
-        return sum / (amount * LOTTO_PRICE);
+        return (double) sum / (amount * LOTTO_PRICE);
     }
 }
