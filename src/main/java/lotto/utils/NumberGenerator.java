@@ -1,10 +1,11 @@
 package lotto.utils;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import javax.swing.BoundedRangeModel;
 
 public class NumberGenerator {
 
@@ -18,6 +19,9 @@ public class NumberGenerator {
 
         } while (set.size() != makeQuantity);
 
-        return List.copyOf(set);
+        List<Integer> lottoNumbers = new ArrayList<>(set);
+        Collections.sort(lottoNumbers);
+        return lottoNumbers;
     }
+
 }
