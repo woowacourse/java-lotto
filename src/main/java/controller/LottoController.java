@@ -35,7 +35,15 @@ public class LottoController {
     }
 
     public Purchase readPurchaseAmount() {
-       return inputView.readPurchaseAmount();
+        while (true) {
+            try {
+                String purchaseAmountInput = inputView.readPurchaseAmount();
+                return new Purchase(purchaseAmountInput);
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public int findLottoCount(Purchase purchase) {
@@ -51,11 +59,27 @@ public class LottoController {
     }
 
     public WinningNumber readWinningNumber() {
-        return inputView.readWinningNumbers();
+        while (true) {
+            try {
+                String winningNumbersInput = inputView.readWinningNumbers();
+                return new WinningNumber(winningNumbersInput);
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public BonusNumber readBonusNumber(WinningNumber winningNumber) {
-        return inputView.readBonusNumbers(winningNumber);
+        while (true) {
+            try {
+                String bonusNumberInput = inputView.readBonusNumbers();
+                return new BonusNumber(bonusNumberInput, winningNumber);
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public WinningResult checkWinningResult(List<Lotto> issuedLottos, WinningNumber winningNumber, BonusNumber bonusNumber) {
