@@ -1,5 +1,7 @@
 package src.model.lotto.vo;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
     protected static final int MIN_NUMBER_RANGE = 1;
@@ -24,6 +26,20 @@ public class LottoNumber {
 
     public int getValue() {
         return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(value);
     }
 
     @Override

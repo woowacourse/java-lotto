@@ -1,6 +1,7 @@
 package src.model.lotto.vo;
 
 import java.util.List;
+import java.util.Objects;
 import src.model.lotto.generator.NumberGenerator;
 
 public class LottoNumbers {
@@ -18,6 +19,20 @@ public class LottoNumbers {
 
     public List<Integer> getValues() {
         return values.stream().map(LottoNumber::getValue).toList();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(values, that.values);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(values);
     }
 
     @Override
