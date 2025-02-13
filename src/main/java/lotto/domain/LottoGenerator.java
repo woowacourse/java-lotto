@@ -11,8 +11,8 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
+    static final int LOTTO_SIZE = 6;
     private static final int START_INDEX = 0;
-    private static final int END_INDEX = 6;
 
     public List<Lotto> generateLotto(final int count) {
         List<Lotto> lottos = new ArrayList<>();
@@ -28,7 +28,7 @@ public class LottoGenerator {
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(numberRange);
-        List<Integer> partialNumbers = numberRange.subList(START_INDEX, END_INDEX);
+        List<Integer> partialNumbers = numberRange.subList(START_INDEX, LOTTO_SIZE);
         Collections.sort(partialNumbers);
         return partialNumbers;
     }
