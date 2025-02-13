@@ -51,14 +51,14 @@ public enum LottoRank {
     final int prizeMoney;
     final BiPredicate<Integer, Boolean> incrementIfMatchCondition;
 
-    LottoRank(int prizeMoney, BiPredicate<Integer, Boolean> incrementIfMatchCondition) {
+    LottoRank(final int prizeMoney, final BiPredicate<Integer, Boolean> incrementIfMatchCondition) {
         this.prizeMoney = prizeMoney;
         this.incrementIfMatchCondition = incrementIfMatchCondition;
     }
 
-    public static LottoRank ofLottoAndWinningLottoAndBonusNumber(final Lotto lotto, final WinningNumbers winningLotto) {
-        int lottoMatchCount = lotto.calculateWinningNumbersMatchCount(winningLotto);
-        boolean bonusNumberMatch = lotto.isContainsBonusNumber(winningLotto);
+    public static LottoRank of(final Lotto lotto, final WinningNumbers winningNumbers) {
+        final int lottoMatchCount = lotto.calculateWinningNumbersMatchCount(winningNumbers);
+        final boolean bonusNumberMatch = lotto.isContainsBonusNumber(winningNumbers);
 
         return Arrays.stream(values())
                 .filter(lottoRank -> lottoRank.incrementIfMatchCondition.test(lottoMatchCount, bonusNumberMatch))
