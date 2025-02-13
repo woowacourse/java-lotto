@@ -42,13 +42,14 @@ class InputValidatorTest {
     }
 
     @DisplayName("입력된 구매 금액이 1000단위가 아닌 경우 예외 발생")
-    @Test
-    void 입력된_구매_금액이_1000단위가_아닌_경우_예외_발생() {
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 1500})
+    void 입력된_구매_금액이_1000단위가_아닌_경우_예외_발생(int purchaseAmount) {
         String messageTemplate = ExceptionMessage.INVALID_PURCHASE_AMOUNT.getContent();
         String expectedMessage = String.format(messageTemplate, Lotto.LOTTO_PRICE);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> InputValidator.validatePurchaseAmount(1500))
+                .isThrownBy(() -> InputValidator.validatePurchaseAmount(purchaseAmount))
                 .withMessage(expectedMessage);
     }
     
