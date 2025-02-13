@@ -10,7 +10,6 @@ import view.OutputView;
 
 public class LottoConfig {
 
-
     public LottoController lottoController() {
         return new LottoController(lottoConsoleView(), lottoStore(), new LottoDtoMapper());
     }

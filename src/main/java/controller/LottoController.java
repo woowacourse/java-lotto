@@ -32,7 +32,7 @@ public class LottoController {
         int paidAmount = lottoConsoleView.requestPaidAmount();
         List<LottoTicket> lottoTickets = lottoStore.purchase(paidAmount);
 
-        lottoConsoleView.printPurchaseCount(lottoTickets.size());
+        lottoConsoleView.printPurchaseTicketAmount(lottoTickets.size());
         lottoConsoleView.printPurchasedLotto(lottoDtoMapper.toLottoTicketResponse(lottoTickets));
 
         return lottoTickets;
