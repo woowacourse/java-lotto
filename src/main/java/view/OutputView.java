@@ -20,13 +20,11 @@ public class OutputView {
 
     public static void printWinningStatistics(WinningStatistics winningStatistics) {
         Map<LottoPrize, Integer> prizeCounter = winningStatistics.getPrizeCounter();
-        for (LottoPrize lottoPrize : Arrays.stream(LottoPrize.values())
+        List<LottoPrize> lottoPrizes = Arrays.stream(LottoPrize.values())
+                .filter(lottoPrize -> lottoPrize != LottoPrize.NOTHING)
                 .sorted(Comparator.reverseOrder())
-                .toList()) {
-            if (lottoPrize.equals(LottoPrize.NOTHING)) {
-                continue;
-            }
-
+                .toList();
+        for (LottoPrize lottoPrize : lottoPrizes) {
             System.out.printf("%d개 일치%s(%d원)- %d개\n", lottoPrize.getCountMatched(),
                     printBonusNumberMatched(lottoPrize.isBonusNumberMatched()),
                     lottoPrize.getMoney(),
@@ -38,7 +36,7 @@ public class OutputView {
         if (isBonusNumberMatched) {
             return ", 보너스 볼 일치";
         }
-        return "";
+        return " ";
     }
 
     public static void printProfit(Profit profit) {
