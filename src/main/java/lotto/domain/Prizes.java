@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class Prizes {
 
-    private List<Prize> prizes;
-    private Map<Rank, Integer> results = new LinkedHashMap<>();
+    private final List<Prize> prizes;
+    private final Map<Rank, Integer> results = new LinkedHashMap<>();
 
     public Prizes(List<Prize> prizes) {
         this.prizes = prizes;

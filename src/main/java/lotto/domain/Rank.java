@@ -16,6 +16,7 @@ public enum Rank {
     private final String message;
     private final int matchCounts;
     private final boolean matchBonus;
+
     Rank(int money, String message, int matchCounts, boolean matchBonus) {
         this.money = money;
         this.message = message;
@@ -37,8 +38,8 @@ public enum Rank {
             return FIFTH;
         }
         return NONE;
-
     }
+
     private static Rank checkEqualFive(boolean matchBonus) {
         if (matchBonus) {
             return SECOND;

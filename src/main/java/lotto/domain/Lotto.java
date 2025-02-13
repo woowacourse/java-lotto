@@ -1,14 +1,17 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.constant.ErrorMessage;
+import lotto.constant.LottoConstants;
 import lotto.util.Parser;
 
 public class Lotto {
+    private static final int INCREASE = 1;
+    private static final int MAINTENANCE = 0;
+    private static final String DELIMITER = ",";
     private List<Integer> lottoNumber;
     private RandomNumber randomNumber;
 
@@ -35,7 +38,7 @@ public class Lotto {
     }
 
     private void checkRange(int number) {
-        if (number <= 0 || number > 45) {
+        if (number <= LottoConstants.ZERO.getNumber() || number > LottoConstants.LOTTO_MAXIMUM_NUMBER.getNumber()) {
             throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR.getMessage());
         }
     }
@@ -49,7 +52,7 @@ public class Lotto {
 
     private void validateDuplicate(List<Integer> parsedLotto) {
         Set<Integer> unDuplicatedLotto = new HashSet<>(parsedLotto);
-        if (unDuplicatedLotto.size() != 6) {
+        if (unDuplicatedLotto.size() != LottoConstants.LENGTH.getNumber()) {
             throw new IllegalArgumentException(ErrorMessage.NUMBER_DUPLICATED_ERROR.getMessage());
         }
     }
@@ -77,9 +80,9 @@ public class Lotto {
     }
     public int contain(int number) {
         if (lottoNumber.contains(number)) {
-            return 1;
+            return INCREASE;
         }
-        return 0;
+        return MAINTENANCE;
     }
 
     public boolean checkBonusNumberMatch(int bonusNumber) {
@@ -89,8 +92,8 @@ public class Lotto {
     private List<String> validateLength(String winningLottoInput) {
         List<String> winningNumbers = List.of(winningLottoInput
                 .replaceAll(" ", "")
-                .split(","));
-        if (winningNumbers.size() != 6) {
+                .split(DELIMITER));
+        if (winningNumbers.size() != LottoConstants.LENGTH.getNumber()) {
             throw new IllegalArgumentException(ErrorMessage.NUMBER_LENGTH_ERROR.getMessage());
         }
         return winningNumbers;

@@ -6,7 +6,9 @@ import lotto.util.Parser;
 public class Money {
 
     private int money;
+    private static final int ZERO = 0;
     private static final int THOUSAND = 1000;
+    private static final int MAXIMUM = 100000;
 
     public Money(String money) {
         validate(money);
@@ -29,18 +31,19 @@ public class Money {
     }
 
     private void validateUnit(int validatedMoney) {
-        if (validatedMoney % 1000 != 0) {
+        if (validatedMoney % THOUSAND != 0) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_UNIT_ERROR.getMessage());
         }
     }
     private void validateNegative(int validatedMoney) {
-        if (validatedMoney <= 0) {
+        if (validatedMoney <= ZERO) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_MINIMUM_ERROR.getMessage());
         }
     }
     private void validateLimit(int validatedMoney) {
-        if (validatedMoney > 100000) {
+        if (validatedMoney > MAXIMUM) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_MAXIMUM_ERROR.getMessage());
         }
     }
+
 }
