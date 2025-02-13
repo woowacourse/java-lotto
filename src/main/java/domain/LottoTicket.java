@@ -14,7 +14,7 @@ public class LottoTicket {
     public LottoTicket(List<Integer> numbers) {
         this.numbers = numbers;
     }
-
+ 
     public int countMatchedNumbers(List<Integer> winningNumbers) {
         int count = 0;
         for (int number : numbers) {
@@ -27,6 +27,10 @@ public class LottoTicket {
 
     public boolean hasBonusNumber(int bonusNumber) {
         return numbers.contains(bonusNumber);
+    }
+
+    public int getSize() {
+        return numbers.size();
     }
 
     public List<Integer> getNumbers() {
