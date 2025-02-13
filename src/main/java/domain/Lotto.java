@@ -13,6 +13,7 @@ public class Lotto {
     private void validate(List<Integer> numbers) {
         validateRange(numbers);
         validateDuplicate(numbers);
+        validateSize(numbers);
     }
 
     private void validateDuplicate(final List<Integer> numbers) {
@@ -31,9 +32,15 @@ public class Lotto {
         }
     }
 
+    private void validateSize(List<Integer> numbers) {
+        if(numbers.size() != 6) {
+            throw new IllegalArgumentException("당첨번호는 6개여야 합니다.");
+        }
+    }
+
     private boolean isOutOfRange(final List<Integer> numbers) {
         return numbers.stream()
-                .anyMatch(number -> number < 0 || number > 45);
+                .anyMatch(number -> number < 1 || number > 45);
     }
 
     public List<Integer> getNumbers() {
