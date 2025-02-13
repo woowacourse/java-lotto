@@ -1,11 +1,11 @@
 package controller;
 
 import dto.TicketAmountResponse;
+import global.utils.Validator;
 import model.LottoResult;
 import model.Lottos;
 import model.Ticket;
 import model.WinningLotto;
-import utils.Validator;
 import view.InputView;
 import view.OutputView;
 
@@ -26,17 +26,14 @@ public class LottoController {
         Lottos lottos = new Lottos(ticket.getTicketAmount());
         outputView.printLottos(lottos.createResponse());
 
-        String input = inputView.enterWinningNumbers();
-        String bonusNumber = inputView.enterBonusNumber();
-        WinningLotto winningLotto = new WinningLotto(input, bonusNumber);
-
+        WinningLotto winningLotto = enterWinningAndBonusNumber();
         LottoResult lottoResult = new LottoResult(lottos, winningLotto);
 
         printLottoResult(lottoResult, ticket);
     }
 
-    private void printTicketPurchaseAmount(Ticket ticket) {
-        TicketAmountResponse ticketAmount = ticket.createResponse();
+    private void printTicketPurchaseAmount(final Ticket ticket) {
+        TicketAmountResponse ticketAmount = ticket.createTicketResponse();
         outputView.printTicketPurchaseAmount(ticketAmount);
     }
 
