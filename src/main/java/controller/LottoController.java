@@ -24,23 +24,42 @@ public class LottoController {
 
     public void start() {
         int purchaseAmount = inputView.purchaseAmountInput();
+        Ticket ticket = ticketProcess(purchaseAmount);
+        List<Lotto> lottos = lottoProcess(ticket);
+        WinningInfo winningInfo = winningInfoProcess();
+        Map<Rank, Integer> rankResult = calculateRankProcess(winningInfo, lottos);
+        profitProcess(rankResult, purchaseAmount);
+    }
+
+    private Ticket ticketProcess(int purchaseAmount) {
         Ticket ticket = lottoService.createTicket(purchaseAmount);
         outputView.printPurchaseResult(ticket);
-        lottoService.createLottos(ticket);
+        return ticket;
+    }
 
-        List<Lotto> lottos = lottoService.getLottos();
-        outputView.printLottos(lottos);
+    private void profitProcess(Map<Rank, Integer> rankResult, int purchaseAmount) {
+        double calculateRate = lottoService.calculateProfit(rankResult, purchaseAmount);
+        outputView.printProfit(calculateRate);
+    }
 
-        String winningNumbers = inputView.winningNumbersInput();
-        Lotto lotto = lottoService.createLotto(winningNumbers);
-
-        int bonusNumber = inputView.bonusNumberInput();
-        WinningInfo winningInfo = lottoService.createWinningNumber(lotto, bonusNumber);
-
+    private Map<Rank, Integer> calculateRankProcess(WinningInfo winningInfo, List<Lotto> lottos) {
         Map<Rank, Integer> rankResult = lottoService.calculateRank(winningInfo, lottos);
         outputView.printWinningStatistic(rankResult);
+        return rankResult;
+    }
 
-        double calculateRate = lottoService.calculateRate(rankResult,purchaseAmount);
-        outputView.printRate(calculateRate);
+    private WinningInfo winningInfoProcess() {
+        String winningNumbers = inputView.winningNumbersInput();
+        Lotto lotto = lottoService.createLotto(winningNumbers);
+        int bonusNumber = inputView.bonusNumberInput();
+        return lottoService.createWinningNumber(lotto, bonusNumber);
+    }
+
+
+    private List<Lotto> lottoProcess(Ticket ticket) {
+        lottoService.createLottos(ticket);
+        List<Lotto> lottos = lottoService.getLottos();
+        outputView.printLottos(lottos);
+        return lottos;
     }
 }

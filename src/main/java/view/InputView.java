@@ -1,6 +1,7 @@
 package view;
 
 import static error.ErrorMessage.BLANK_INPUT;
+import static error.ErrorMessage.ONLY_POSITIVE_NUMBER;
 
 import java.util.Scanner;
 
@@ -30,7 +31,7 @@ public class InputView {
 
     private void validatePositiveNumber(String userInput) {
         if (!userInput.matches(REGEX)) {
-            throw new IllegalArgumentException("양수만 입력 가능합니다.");
+            throw new IllegalArgumentException(ONLY_POSITIVE_NUMBER.getMessage());
         }
     }
 

@@ -14,7 +14,8 @@ public class OutputView {
     private static final String WINNING_RESULT = "%s개";
     private static final String RATE_MESSAGE = "총 수익률은 %,.2f입니다.";
 
-    private OutputView(){}
+    private OutputView() {
+    }
 
     public static OutputView create() {
         return new OutputView();
@@ -25,7 +26,7 @@ public class OutputView {
         changeLine();
     }
 
-    public void printLottos(List<Lotto> lottos){
+    public void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getNumbers());
         }
@@ -37,15 +38,15 @@ public class OutputView {
 
         for (Rank rank : result.keySet()) {
             if (!rank.getDescription().isBlank()) {
-                System.out.print(rank.getDescription() + " " + HYPHEN +" ");
+                System.out.print(rank.getDescription() + " " + HYPHEN + " ");
                 System.out.printf(WINNING_RESULT, result.get(rank));
                 changeLine();
             }
         }
     }
 
-    public void printRate(double calculateRate){
-        System.out.printf(RATE_MESSAGE,calculateRate);
+    public void printProfit(double profit) {
+        System.out.printf(RATE_MESSAGE, profit);
         changeLine();
     }
 

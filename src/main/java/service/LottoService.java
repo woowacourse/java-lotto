@@ -6,7 +6,6 @@ import domain.Lotto;
 import domain.Rank;
 import domain.Ticket;
 import domain.WinningInfo;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +55,7 @@ public class LottoService {
 
         List<Integer> winningNumbers = winningInfo.getWinningLotto().getNumbers();
 
+
         for (Lotto lotto:lottos){
             int count = 0;
             boolean isMatchBonusNumber = false;
@@ -75,9 +75,7 @@ public class LottoService {
         return calculateResult;
     }
 
-    public double calculateRate(Map<Rank,Integer> calculateResult, int purchaseAmount){
-        // 수익률 계산 식 = 당첨금액/구입금액
-
+    public double calculateProfit(Map<Rank,Integer> calculateResult, int purchaseAmount){
         double totalPrize=0;
 
         for (Rank rank : calculateResult.keySet()) {
