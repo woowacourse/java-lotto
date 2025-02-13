@@ -26,4 +26,14 @@ public class Lotto {
     public boolean hasNumber(int target) {
         return this.numbers.stream().anyMatch(number -> number == target);
     }
+
+    public int findMatches(Lotto lotto) {
+        int matches = 0;
+        for (int number : numbers) {
+            if (lotto.hasNumber(number)) {
+                matches++;
+            }
+        }
+        return matches;
+    }
 }
