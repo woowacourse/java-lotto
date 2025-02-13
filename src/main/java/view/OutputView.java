@@ -1,7 +1,10 @@
 package view;
 
+import domain.enums.Prize;
 import dto.OutputLottosDto;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class OutputView {
     public static void printBuyQuantity(final int buyQuantity) {
@@ -16,5 +19,28 @@ public class OutputView {
 
     public static void printChangeMoney(final int changeMoney) {
         System.out.println("거스름돈은 " + changeMoney + "원 입니다.");
+    }
+
+    public static void printPrizeResult(final Map<Prize, Integer> prizeResult) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        for (Map.Entry<Prize, Integer> entry : prizeResult.entrySet()) {
+            printSinglePrizeResult(entry);
+        }
+        System.out.println("수익률 어쩌고");
+    }
+
+    private static void printSinglePrizeResult(Entry<Prize, Integer> entry) {
+        if (entry.getKey().equals(Prize.EMPTY)) {
+            return;
+        }
+        Prize currentPrize = entry.getKey();
+        int prizeCount = entry.getValue();
+        System.out.printf("%s (%d원)- %d개%n", currentPrize.getMatchedMessage(), currentPrize.getPrizeMoney(),
+                prizeCount);
+    }
+
+    public static void printRateOfReturn(double rateOfReturn) {
+        System.out.println("총 수익률을 " + rateOfReturn + "입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }
