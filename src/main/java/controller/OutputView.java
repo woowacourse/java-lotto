@@ -12,6 +12,9 @@ import java.util.StringJoiner;
 
 public class OutputView {
     
+    private static final String INCOME_RATE_FORMAT = "#.##";
+    private static final float LOSS_THRESHOLD = 1.0f;
+    
     public void printInputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
     }
@@ -72,7 +75,7 @@ public class OutputView {
         StringBuilder sb = new StringBuilder();
         
         sb.append("총 수익률은 %s입니다.");
-        if (incomeRate < 1.0f) {
+        if (incomeRate < LOSS_THRESHOLD) {
             sb.append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
         
@@ -80,7 +83,7 @@ public class OutputView {
     }
     
     private String getFormattedIncomeRate(double incomeRate) {
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        DecimalFormat decimalFormat = new DecimalFormat(INCOME_RATE_FORMAT);
         decimalFormat.setRoundingMode(RoundingMode.DOWN);
         return decimalFormat.format(incomeRate);
     }
