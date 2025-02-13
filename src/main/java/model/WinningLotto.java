@@ -1,13 +1,13 @@
 package model;
 
+import static global.constant.LottoConstant.MAX_LOTTO_NUMBER;
+import static global.constant.LottoConstant.MIN_LOTTO_NUMBER;
+
 import global.utils.Validator;
 
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-
-import static global.constant.LottoConstant.MAX_LOTTO_NUMBER;
-import static global.constant.LottoConstant.MIN_LOTTO_NUMBER;
 
 public class WinningLotto {
 
@@ -17,13 +17,35 @@ public class WinningLotto {
     public WinningLotto(final String winningNumbers, final String bonusNumber) {
         winningLotto = new Lotto(winningNumbers);
 
+        int parsedBonusNumber = parseBonusNumber(bonusNumber);
+        validateBonusNumber(parsedBonusNumber);
+        this.bonusNumber = parsedBonusNumber;
+    }
+
+    public Map<RankType, Integer> evaluateRank(final List<Lotto> lottos) {
+        Map<RankType, Integer> rankResult = initializeRankResult();
+
+        for (Lotto lotto : lottos) {
+            RankType rank = evaluateLottoRank(lotto);
+            rankResult.put(rank, rankResult.get(rank) + 1);
+        }
+        return rankResult;
+    }
+
+    private static int parseBonusNumber(final String bonusNumber) {
         Validator.validateNumeric(bonusNumber);
-        int parsed = Integer.parseInt(bonusNumber);
+        return Integer.parseInt(bonusNumber);
+    }
 
-        Validator.validateRange(parsed, 1, 45);
+    private void validateBonusNumber(final int bonusNumber) {
+        Validator.validateRange(bonusNumber, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+        validateLottoNumberDuplicate(bonusNumber);
+    }
 
-        validateLottoNumberDuplicate(parsed);
-        this.bonusNumber = parsed;
+    private void validateLottoNumberDuplicate(final int bonusNumber) {
+        if (winningLotto.isContained(bonusNumber)) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private Map<RankType, Integer> initializeRankResult() {
