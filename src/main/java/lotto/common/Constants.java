@@ -1,4 +1,4 @@
-package common;
+package lotto.common;
 
 public final class Constants {
 
