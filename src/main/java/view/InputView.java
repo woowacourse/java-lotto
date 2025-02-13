@@ -47,11 +47,11 @@ public class InputView {
     private static int validatePurchaseAmount(String purchaseAmount) {
         try {
             int amount = Integer.parseInt(purchaseAmount);
-            if (amount % LottoFactory.LOTTO_PRICE != 0) {
-                throw new IllegalArgumentException(String.format("구입 금액은 %d원 단위로 가능합니다.", LottoFactory.LOTTO_PRICE));
-            }
             if (amount < LottoFactory.LOTTO_PRICE) {
                 throw new IllegalArgumentException(String.format("구입 금액은 %d원 이상부터 가능합니다.", LottoFactory.LOTTO_PRICE));
+            }
+            if (amount % LottoFactory.LOTTO_PRICE != 0) {
+                throw new IllegalArgumentException(String.format("구입 금액은 %d원 단위로 가능합니다.", LottoFactory.LOTTO_PRICE));
             }
             return amount;
         } catch (NumberFormatException e) {
@@ -60,6 +60,9 @@ public class InputView {
     }
 
     private static void validateWinningNumbers(List<Integer> winningNumbers) {
+        if(winningNumbers.size() != 6) {
+            throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
+        }
         for (int num : winningNumbers) {
             validateNumber(num);
         }
