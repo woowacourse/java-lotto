@@ -23,6 +23,10 @@ public class LottoController {
     public void run() {
         String money = inputView.readLine();
         issueLottoTickets(money);
+        List<List<Integer>> issuedLottoNumbers = lottos.getLottos().stream()
+                .map(Lotto::getNumbers)
+                .toList();
+        outputView.printIssuedLottos(issuedLottoNumbers);
 
         String winningLottoNumber = inputView.readWinningLotto();
         String bonusNumber = inputView.readBonusNumber();

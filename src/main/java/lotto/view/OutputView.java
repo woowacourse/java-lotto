@@ -1,9 +1,22 @@
 package lotto.view;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import lotto.model.WinningResultResponse;
 import lotto.model.WinningResultResponses;
 
 public class OutputView {
+
+    public void printIssuedLottos(final List<List<Integer>> issuedLottoNumbers) {
+        for (List<Integer> issuedLottoNumber : issuedLottoNumbers) {
+            System.out.println(issuedLottoNumber.stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", ", "[", "]")));
+        }
+    }
+
     public void printWinningResult(WinningResultResponses responses) {
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -13,10 +26,13 @@ public class OutputView {
 
         for (WinningResultResponse response : responses.getResponses()) {
             if (response.isHasBonus() && response.getMatchingCount() == 5) {
-                System.out.println(winningSecondResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(), response.getWinningCount()));
+                System.out.println(
+                        winningSecondResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(),
+                                response.getWinningCount()));
                 continue;
             }
-            System.out.println(winningResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(), response.getWinningCount()));
+            System.out.println(winningResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(),
+                    response.getWinningCount()));
         }
     }
 
@@ -25,4 +41,5 @@ public class OutputView {
 
         System.out.println(winningRatioFormat.formatted(returnRatio));
     }
+
 }

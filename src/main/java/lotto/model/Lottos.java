@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
+
     public static final int UNIT_PRICE = 1_000;
     private final List<Lotto> lottos = new ArrayList<>();
 
@@ -15,4 +16,5 @@ public class Lottos {
         return lottos.stream()
                 .toList();
     }
+
 }
