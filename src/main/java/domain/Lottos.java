@@ -29,8 +29,7 @@ public class Lottos {
         return lottoNumbers;
     }
 
-    public static Lottos of(String input) {
-        int money = Integer.parseInt(input);
+    public static Lottos of(int money) {
         return new Lottos(money);
     }
 

@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class InputConverter {
 
     private static final String WINNING_NUMBER_REGEX = "([0-9]+)(,[0-9]+)*";
-    private static final String BONUS_NUMBER_REGEX = "[0-9]+";
+    private static final String NUMBER_REGEX = "[0-9]+";
     private static final String WINNING_NUMBER_DELIMITER = ",";
 
     public static List<Integer> convertWinningNumbers(String input) {
@@ -25,7 +25,7 @@ public class InputConverter {
     }
 
     public static int convertBonusNumber(String input) {
-        Matcher matcher = Pattern.compile(BONUS_NUMBER_REGEX).matcher(input);
+        Matcher matcher = Pattern.compile(NUMBER_REGEX).matcher(input);
 
         if (!matcher.matches()) {
             throw new IllegalArgumentException("당첨 번호 입력 양식이 올바르지 않습니다.");
@@ -35,6 +35,25 @@ public class InputConverter {
         validateNumberRange(bonusNumber);
 
         return bonusNumber;
+    }
+
+    public static int convertPurchaseAmount(String input) {
+        Matcher matcher = Pattern.compile(NUMBER_REGEX).matcher(input);
+
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("구입 금액 입력 양식이 올바르지 않습니다.");
+        }
+
+        int purchaseAmount = Integer.parseInt(input);
+        validatePurchaseAmountRange(purchaseAmount);
+
+        return purchaseAmount;
+    }
+
+    private static void validatePurchaseAmountRange(int value) {
+        if (value < 1000) {
+            throw new IllegalArgumentException("구입 금액은 1,000원 이상부터 가능합니다.");
+        }
     }
 
     private static void validateNumberRange(int value) {

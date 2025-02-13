@@ -16,7 +16,7 @@ public class LottoController {
     }
 
     public void run() {
-        String purchaseAmount = inputView.askPurchaseAmount();
+        int purchaseAmount = inputView.askPurchaseAmount();
         Lottos lottos = Lottos.of(purchaseAmount);
 
         int quantity = lottos.getQuantity();
