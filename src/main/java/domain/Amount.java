@@ -11,7 +11,7 @@ public class Amount {
         int price = validateIsInteger(inputPrice);
         validateIsPositive(price);
         validatePerPrice(price);
-        this.amount = price/LOTTO_PRICE;
+        this.amount = price / LOTTO_PRICE;
     }
 
     public boolean compareAmount(int amount) {
@@ -29,7 +29,7 @@ public class Amount {
     }
 
     private int validateIsInteger(String inputPrice) {
-        try{
+        try {
             return Integer.parseInt(inputPrice);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_INTEGER.getMessage());
@@ -38,7 +38,7 @@ public class Amount {
     }
 
     private void validatePerPrice(int price) {
-        if(price % LOTTO_PRICE != 0) {
+        if (price % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_UNIT_PRICE.getMessage());
         }
     }

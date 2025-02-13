@@ -1,7 +1,6 @@
 package controller;
 
 import domain.Amount;
-import domain.LottoFactory;
 import domain.Lottos;
 import domain.LottosFactory;
 import domain.WinningLotto;

@@ -13,7 +13,7 @@ public enum Rank {
     private int prize;
     private boolean bonusFlag;
 
-    Rank(int count, int prize, boolean bonusFlag){
+    Rank(int count, int prize, boolean bonusFlag) {
         this.count = count;
         this.prize = prize;
         this.bonusFlag = bonusFlag;
@@ -21,14 +21,14 @@ public enum Rank {
 
     public static Rank matchRank(int matchCount, boolean bonusFlag) {
         for (Rank rank : Rank.values()) {
-            if(rank.count == matchCount && rank.bonusFlag == bonusFlag) {
+            if (rank.count == matchCount && rank.bonusFlag == bonusFlag) {
                 return rank;
             }
         }
         return NONE;
     }
 
-    public static long getTotalPrize(Rank rank, Integer count){
+    public static long getTotalPrize(Rank rank, Integer count) {
         return (long) rank.prize * count;
     }
 }

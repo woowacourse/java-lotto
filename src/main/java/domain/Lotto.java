@@ -3,7 +3,6 @@ package domain;
 import domain.dto.GetLottoDto;
 import exception.ExceptionMessage;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Lotto {
@@ -42,15 +41,15 @@ public class Lotto {
     }
 
     private void validateRange(int num) {
-        if(num < LOTTO_MIN || num > LOTTO_MAX){
+        if (num < LOTTO_MIN || num > LOTTO_MAX) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_RANGE.getMessage());
         }
     }
 
     private int validateIsInteger(String s) {
-        try{
+        try {
             return Integer.parseInt(s);
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_FORMAT.getMessage());
         }
     }
@@ -64,7 +63,7 @@ public class Lotto {
                 .filter(winningLotto::contains)
                 .count();
         boolean bonusFlag = false;
-        if(count == 5) {
+        if (count == 5) {
             bonusFlag = winningLotto.matchBonus(numbers);
         }
         return Rank.matchRank(count, bonusFlag);
@@ -73,7 +72,6 @@ public class Lotto {
     protected boolean contains(int number) {
         return numbers.contains(number);
     }
-
 
 
 }

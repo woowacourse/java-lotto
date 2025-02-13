@@ -1,6 +1,14 @@
 package view;
 
-import static view.Output.*;
+import static view.Output.FIFTH_MESSAGE;
+import static view.Output.FIRST_MESSAGE;
+import static view.Output.FOURTH_MESSAGE;
+import static view.Output.PROFIT_MESSAGE;
+import static view.Output.PURCHASE_MESSAGE;
+import static view.Output.RESULT_TITLE_MESSAGE;
+import static view.Output.SECOND_MESSAGE;
+import static view.Output.SEPARATE_LINE;
+import static view.Output.THIRD_MESSAGE;
 
 import domain.Amount;
 import domain.Rank;
@@ -33,7 +41,6 @@ public class OutputView {
     private void printLotto(final GetLottoDto getLottoDto) {
         System.out.println(getLottoDto.numbers());
     }
-
 
 
 }

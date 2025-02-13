@@ -3,12 +3,12 @@ package domain.generator;
 import java.util.List;
 import java.util.Random;
 
-public class RandomGenerator implements Generator{
+public class RandomGenerator implements Generator {
 
     @Override
-    public List<Integer> generate(){
+    public List<Integer> generate() {
         return new Random()
-                .ints(1,45+1)
+                .ints(1, 45 + 1)
                 .distinct()
                 .limit(6)
                 .boxed()
