@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.EnumMap;
+
 public enum Rank {
 
     FIRST_PRIDE(2000000000),
@@ -32,5 +34,19 @@ public enum Rank {
             return FIFTH_PRIDE;
         }
         return BOOM;
+    }
+
+    public static EnumMap<Rank, Integer> makeDefaultMap() {
+
+        EnumMap<Rank, Integer> rankIntegerEnumMap = new EnumMap<>(Rank.class);
+
+        rankIntegerEnumMap.put(FIRST_PRIDE, 0);
+        rankIntegerEnumMap.put(SECOND_PRIDE, 0);
+        rankIntegerEnumMap.put(THIRD_PRIDE, 0);
+        rankIntegerEnumMap.put(FOURTH_PRIDE, 0);
+        rankIntegerEnumMap.put(FIFTH_PRIDE, 0);
+        rankIntegerEnumMap.put(BOOM, 0);
+
+        return rankIntegerEnumMap;
     }
 }
