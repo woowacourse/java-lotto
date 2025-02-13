@@ -11,18 +11,21 @@ import view.OutputView;
 
 public class Controller {
 
-
     public Controller() {
     }
 
     public void run() {
         LottoPurchase purchaseLotto = InputView.getPurchaseLotto();
         LottoFactory lottoFactory = LottoFactory.of(purchaseLotto.getAmount());
+
         OutputView.printLottoCount(lottoFactory);
         OutputView.printLottoTickets(lottoFactory);
+
         Lotto winningLotto = InputView.getWinningLotto();
         Bonus winningBonus = InputView.getWinningBonus(winningLotto);
+
         EnumMap<Prize, Integer> statistic = lottoFactory.getStatistic(winningLotto, winningBonus);
+
         OutputView.printStatistics(statistic);
         OutputView.printBenefit(lottoFactory.getBenefit(statistic));
     }

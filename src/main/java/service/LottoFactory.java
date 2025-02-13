@@ -73,7 +73,7 @@ public class LottoFactory {
         return (double) benefit / principalMoney;
     }
 
-    private static Integer calculateBenefit(EnumMap<Prize, Integer> enumMap) {
+    private Integer calculateBenefit(EnumMap<Prize, Integer> enumMap) {
         Integer benefit = 0;
         for (Prize prize : enumMap.keySet()) {
             benefit += enumMap.get(prize) * prize.getPrizeAmount();
