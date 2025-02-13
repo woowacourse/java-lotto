@@ -48,14 +48,29 @@ public class Controller {
     }
 
     private int inputResponseForBudget() {
-        return BudgetParser.parseLottoCount(inputView.askForBudget());
+        try {
+            return BudgetParser.parseLottoCount(inputView.askForBudget());
+        } catch (IllegalArgumentException e) {
+            outputView.displayErrorMessage(e.getMessage());
+            throw e;
+        }
     }
 
     private List<Integer> inputResponseForWinningNumber() {
-        return WinningNumberParser.parseWinningNumbers(inputView.askForWinningNumber());
+        try {
+            return WinningNumberParser.parseWinningNumbers(inputView.askForWinningNumber());
+        } catch (IllegalArgumentException e) {
+            outputView.displayErrorMessage(e.getMessage());
+            throw e;
+        }
     }
 
     private int inputResponseForBonusNumber(List<Integer> winningNumbers) {
-        return BonusNumberParser.parseBonusNumber(winningNumbers, inputView.askForBonusNumber());
+        try {
+            return BonusNumberParser.parseBonusNumber(winningNumbers, inputView.askForBonusNumber());
+        } catch (IllegalArgumentException e) {
+            outputView.displayErrorMessage(e.getMessage());
+            throw e;
+        }
     }
 }
