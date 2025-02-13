@@ -3,6 +3,7 @@ package model;
 import static model.ExceptionMessage.BONUS_DUPLICATE;
 import static model.ExceptionMessage.INVALID_BONUS_RANGE;
 import static model.ExceptionMessage.INVALID_BONUS_TYPE;
+import static model.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
 
 public class Bonus {
 
@@ -12,6 +13,7 @@ public class Bonus {
     private final Integer number;
 
     public static Bonus of(final String input, final Lotto lotto) {
+        validateNullOrBlank(input);
         validateInteger(input);
         return new Bonus(Integer.parseInt(input), lotto);
     }
@@ -20,6 +22,12 @@ public class Bonus {
         validateRange(number);
         validateDuplicateWithLotto(number, lotto);
         this.number = number;
+    }
+
+    private static void validateNullOrBlank(final String input) {
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException(INVALID_INPUT_NULL_OR_BLANK.getMessage());
+        }
     }
 
     private static void validateInteger(final String input) {
