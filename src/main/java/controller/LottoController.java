@@ -18,7 +18,7 @@ public class LottoController {
         this.inputView = inputView;
     }
 
-    public void run() {
+    public void run() { // todo : 메서드 분리 작업
         Ticket ticket = createTicket();
         printTicketPurchaseAmount(ticket);
 

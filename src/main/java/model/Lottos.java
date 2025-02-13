@@ -9,7 +9,7 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int ticketAmount) {
+    public Lottos(int ticketAmount) { // todo : 메서드 분리
         lottos = new ArrayList<>();
         for (int i = 0; i < ticketAmount; i++) {
             lottos.add(new Lotto());

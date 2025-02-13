@@ -12,7 +12,7 @@ public class Ticket {
     private final int purchaseMoney;
 
     public Ticket(final int purchaseMoney) {
-        validateRange(purchaseMoney, Integer.MAX_VALUE, TICKET_PRICE);
+        validateRange(purchaseMoney, TICKET_PRICE, Integer.MAX_VALUE);
         validateDivide(purchaseMoney, TICKET_PRICE);
         this.purchaseMoney = purchaseMoney;
     }
