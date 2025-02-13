@@ -15,7 +15,7 @@ public abstract class NumberGenerator {
     }
 
     private void validateStartLessThanEnd(final int startInclusive, final int endInclusive) {
-        if (startInclusive < endInclusive) {
+        if (startInclusive > endInclusive) {
             throw new IllegalArgumentException(ErrorType.NUMBER_GENERATOR_RANGE.getMessage());
         }
     }
