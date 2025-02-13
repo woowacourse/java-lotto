@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 public class WinningCalculateFormatter {
 
-    private static final String WINNING_CALCULATE_START = "\n당첨 통계\n--------";
+    private static final String WINNING_CALCULATE_START = "\n당첨 통계\n--------\n";
     private static final String EARN_MONEY_RATIO = "총 수익률은 %f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public static String winningResultFormatting(Map<WinningCase, Integer> winningResult, double earnMoneyRatio) {
