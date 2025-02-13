@@ -48,15 +48,11 @@ public class Lotto {
         return count;
     }
 
-    public boolean isMatchBonus(LottoNumber bonusNumber) {
-        return numbers.contains(bonusNumber);
+    public boolean containsNumber(LottoNumber number) {
+        return numbers.contains(number);
     }
 
     public List<LottoNumber> getNumbers() {
         return numbers;
-    }
-
-    public boolean containsNumber(LottoNumber bonusNumber) {
-        return numbers.contains(bonusNumber);
     }
 }
