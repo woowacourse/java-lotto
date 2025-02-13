@@ -1,5 +1,14 @@
 # java-lotto
 
+## 단어장
+
+- 로또 티켓(LottoTicket) : 구매자가 구매한 로또
+- 당첨 로또 (WinningLotto) : WinningNumbers + BonusNumber 즉, 당첨 번호와 보너스 번호를 합쳐서 이르는 말
+- 구입 금액 (paidAmount) : 구매자가 지불하고자 하는 금액
+- 로또 순위 (LottoRank) : 로또 티켓의 당첨 결과
+- overlappedCount : 일치한 숫자의 개수
+- 당첨 금액 (prizeMoney) : LottoRank 에 따라 얻는 금액
+
 ## 💵 구입 금액
 
 ### 기능
@@ -89,4 +98,3 @@
 **리팩토링**
 
 - [x] 당첨 결과 일급 컬렉션으로 수정
-- [ ] 로또 번호 일급 컬렉션으로 수정
