@@ -4,7 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Prizes;
-import lotto.domain.RandomNumber;
+import lotto.domain.LottoGenerator;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -45,7 +45,7 @@ public class LottoController {
     private void purchaseLotto(Money money) {
         int lottoCounts = money.countsLotto();
         outputView.printCount(lottoCounts);
-        lottos = new Lottos(lottoCounts, new RandomNumber());
+        lottos = new Lottos(lottoCounts, new LottoGenerator());
         outputView.printLottos(lottos);
     }
 

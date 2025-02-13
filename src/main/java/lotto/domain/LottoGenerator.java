@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import lotto.constant.LottoConstants;
 
-public class RandomNumber {
+public class LottoGenerator {
 
     public int generateRandomNumber(int start, int end) {
         return (int) ((Math.random() * end) + start);

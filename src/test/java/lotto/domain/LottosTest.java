@@ -1,9 +1,5 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
-import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +15,7 @@ class LottosTest {
         WinningLotto prizeLotto = new WinningLotto(winningLotto, bonusNumber);
 
         //when
-        Lottos lottos = new Lottos(1, new FixedNumber());
+        Lottos lottos = new Lottos(1, new FixedLottoGenerator());
 
         //then
         Assertions.assertThat(lottos.calculatePrize(prizeLotto).calculateProfit(new Money("10000")))

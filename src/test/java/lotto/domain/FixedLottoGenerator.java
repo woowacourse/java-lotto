@@ -1,10 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class FixedNumber extends RandomNumber {
+public class FixedLottoGenerator extends LottoGenerator {
 
     @Override
     public List<Integer> generateLotto() {

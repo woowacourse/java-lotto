@@ -13,10 +13,10 @@ public class Lotto {
     private static final int MAINTENANCE = 0;
     private static final String DELIMITER = ",";
     private List<Integer> lottoNumber;
-    private RandomNumber randomNumber;
+    private LottoGenerator lottoGenerator;
 
-    public Lotto(RandomNumber randomNumber) {
-        this.randomNumber = randomNumber;
+    public Lotto(LottoGenerator lottoGenerator) {
+        this.lottoGenerator = lottoGenerator;
         this.lottoNumber = generateLotto();
     }
 
@@ -63,7 +63,7 @@ public class Lotto {
     }
 
     private List<Integer> generateLotto() {
-        return randomNumber.generateLotto();
+        return lottoGenerator.generateLotto();
     }
 
     @Override
