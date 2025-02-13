@@ -35,10 +35,10 @@ public class LottoConsoleView {
     }
 
     public WinningLottoRequest requestWinningLotto() {
-        String rawWinningNumbers = inputView.inputWinningNumbers();
+        String rawWinningNumbers = inputView.readWinningNumbers();
         List<Integer> parsedWinningNumbers = inputParser.parseWinningNumbers(rawWinningNumbers);
 
-        String rawBonusNumber = inputView.inputBonusNumber();
+        String rawBonusNumber = inputView.readBonusNumber();
         int parsedBonusNumber = inputParser.parseBonusNumber(rawBonusNumber);
 
         return new WinningLottoRequest(parsedWinningNumbers, parsedBonusNumber);
