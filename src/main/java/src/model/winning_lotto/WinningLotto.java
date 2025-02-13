@@ -26,14 +26,6 @@ public class WinningLotto {
         }
     }
 
-    public List<Integer> getNumbers() {
-        return numbers.getValues();
-    }
-
-    public int getBonusNumber() {
-        return bonusNumber.getValue();
-    }
-
     public int getMatchCount(Lotto lotto) {
 
         return (int) lotto.getNumbers().stream()
