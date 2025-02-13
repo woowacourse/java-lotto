@@ -29,8 +29,8 @@ public class LottoController {
     }
 
     private List<LottoTicket> createLottoTicket() {
-        int purchaseAmount = lottoConsoleView.requestPurchaseAmount();
-        List<LottoTicket> lottoTickets = lottoStore.purchase(purchaseAmount);
+        int paidAmount = lottoConsoleView.requestPaidAmount();
+        List<LottoTicket> lottoTickets = lottoStore.purchase(paidAmount);
 
         lottoConsoleView.printPurchaseCount(lottoTickets.size());
         lottoConsoleView.printPurchasedLotto(lottoDtoMapper.toLottoTicketResponse(lottoTickets));
@@ -49,7 +49,7 @@ public class LottoController {
         return lottoRankResult;
     }
 
-    private void calculateProfitRate(int lottoTicketCount,LottoRankResult lottoRankResult) {
+    private void calculateProfitRate(int lottoTicketCount, LottoRankResult lottoRankResult) {
         double profitRate = lottoStore.calculateProfitRate(lottoTicketCount, lottoRankResult);
         lottoConsoleView.printProfitRate(profitRate);
     }

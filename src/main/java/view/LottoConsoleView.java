@@ -18,12 +18,12 @@ public class LottoConsoleView {
         this.inputParser = inputParser;
     }
 
-    public int requestPurchaseAmount() {
-        String rawPurchaseAmount = inputView.inputPurchaseAmount();
-        NumberValidator.validateInteger(rawPurchaseAmount);
-        int purchaseAmount = Integer.parseInt(rawPurchaseAmount);
-        NumberValidator.validatePositive(purchaseAmount);
-        return purchaseAmount;
+    public int requestPaidAmount() {
+        String rawPaidAmount = inputView.readPaidAmount();
+        NumberValidator.validateInteger(rawPaidAmount);
+        int paidAmount = Integer.parseInt(rawPaidAmount);
+        NumberValidator.validatePositive(paidAmount);
+        return paidAmount;
     }
 
     public void printPurchaseCount(int purchaseCount) {

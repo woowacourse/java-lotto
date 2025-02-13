@@ -16,10 +16,12 @@ public class LottoStore {
         this.lottoRankCalculator = lottoRankCalculator;
     }
 
-    public List<LottoTicket> purchase(final int purchaseAmount) {
-        validateAmountUnit(purchaseAmount);
-        int purchaseCount = purchaseAmount / LOTTO_PRICE;
-        return IntStream.range(0, purchaseCount).mapToObj(count -> new LottoTicket(lottoNumberGenerator.generate()))
+    public List<LottoTicket> purchase(final int paidAmount) {
+        validateAmountUnit(paidAmount);
+
+        int purchaseCount = paidAmount / LOTTO_PRICE;
+        return IntStream.range(0, purchaseCount)
+                .mapToObj(count -> new LottoTicket(lottoNumberGenerator.generate()))
                 .toList();
     }
 
@@ -33,10 +35,10 @@ public class LottoStore {
     }
 
     public double calculateProfitRate(int lottoTicketCount, LottoRankResult lottoRankResult) {
-        int purchasedAmount = lottoTicketCount * LOTTO_PRICE;
+        int paidAmount = lottoTicketCount * LOTTO_PRICE;
         int profit = lottoRankResult.getKeys().stream()
                 .mapToInt(rank -> rank.getWinningAmount() * lottoRankResult.getValue(rank)).sum();
-        return (double) profit / purchasedAmount;
+        return (double) profit / paidAmount;
     }
 
     private List<LottoRank> calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
@@ -44,8 +46,8 @@ public class LottoStore {
                 .filter(Objects::nonNull).toList();
     }
 
-    private void validateAmountUnit(int purchaseAmount) {
-        if (purchaseAmount % LOTTO_PRICE != 0) {
+    private void validateAmountUnit(int paidAmount) {
+        if (paidAmount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 1000원 단위여야 합니다.");
         }
     }
