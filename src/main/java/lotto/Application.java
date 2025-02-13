@@ -33,8 +33,8 @@ public class Application {
     private static int getPurchaseAmount() {
         try {
             return InputView.inputPurchaseAmount();
-        } catch (final NumberFormatException e) {
-            OutputView.printErrorMessage("구입금액은 숫자여야 합니다.");
+        } catch (final IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
             return getPurchaseAmount();
         }
     }

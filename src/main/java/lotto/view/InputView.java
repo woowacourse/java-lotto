@@ -10,7 +10,7 @@ public class InputView {
 
     public static int inputPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return Integer.parseInt(input());
+        return parseInt(input());
     }
 
     public static List<Integer> inputWinningNumbers() {
@@ -22,14 +22,22 @@ public class InputView {
         String[] inputWinningNumbers = input.split(",");
         List<Integer> winningNumbers = new ArrayList<>();
         for (final String inputWinningNumber : inputWinningNumbers) {
-            winningNumbers.add(Integer.parseInt(inputWinningNumber.trim()));
+            winningNumbers.add(parseInt(inputWinningNumber.trim()));
         }
         return winningNumbers;
     }
 
+    private static int parseInt(final String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (final NumberFormatException e) {
+            throw new IllegalArgumentException("숫자를 입력해 주세요.");
+        }
+    }
+
     public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return Integer.parseInt(input());
+        return parseInt(input());
     }
 
     private static String input() {
