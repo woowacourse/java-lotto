@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
+import lotto.constant.ErrorMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +42,7 @@ class MoneyTest {
         //when & then
         assertThatThrownBy(() -> new Money(invalidMoney))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구입금액은 천원 단위여야 합니다.");
+                .hasMessage(ErrorMessage.PURCHASE_UNIT_ERROR.getMessage());
     }
     @Test
     void 구입_금액_숫자_검증() {
@@ -51,7 +52,7 @@ class MoneyTest {
         //when & then
         assertThatThrownBy(() -> new Money(invalidMoney))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구입금액은 숫자여야 합니다.");
+                .hasMessage(ErrorMessage.PURCHASE_FORMAT_ERROR.getMessage());
     }
     @Test
     void 구입_금액_음수_검증() {
@@ -61,7 +62,7 @@ class MoneyTest {
         //when & then
         assertThatThrownBy(() -> new Money(invalidMoney))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구입금액은 천원부터입니다.");
+                .hasMessage(ErrorMessage.PURCHASE_MINIMUM_ERROR.getMessage());
     }
     @Test
     void 구입_금액_최대_검증() {
@@ -71,6 +72,6 @@ class MoneyTest {
         //when & then
         assertThatThrownBy(() -> new Money(invalidMoney))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("10만원까지 구매 가능합니다.");
+                .hasMessage(ErrorMessage.PURCHASE_MAXIMUM_ERROR.getMessage());
     }
 }

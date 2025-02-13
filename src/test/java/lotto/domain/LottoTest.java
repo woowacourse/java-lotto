@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.constant.ErrorMessage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +26,7 @@ class LottoTest {
         //when & then
         assertThatThrownBy(() -> new Lotto(invalidLotto))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("6자리를 입력하세요.");
+                .hasMessage(ErrorMessage.NUMBER_LENGTH_ERROR.getMessage());
     }
 
     @Test
@@ -36,7 +37,7 @@ class LottoTest {
         //when & then
         assertThatThrownBy(() -> new Lotto(invalidLotto))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("당첨 번호는 숫자를 입력해야 합니다.");
+                .hasMessage(ErrorMessage.NUMBER_FORMAT_ERROR.getMessage());
     }
 
     @Test
@@ -47,7 +48,7 @@ class LottoTest {
         //when & then
         assertThatThrownBy(() -> new Lotto(invalidLotto))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("1과 45 사이의 수를 입력하세요.");
+                .hasMessage(ErrorMessage.RANGE_ERROR.getMessage());
     }
 
     @Test
@@ -58,7 +59,7 @@ class LottoTest {
         //when & then
         assertThatThrownBy(() -> new Lotto(invalidLotto))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 숫자는 중복될 수 없습니다.");
+                .hasMessage(ErrorMessage.NUMBER_DUPLICATED_ERROR.getMessage());
     }
 
     @Test

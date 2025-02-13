@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import lotto.constant.ErrorMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ class WinningLottoTest {
         Assertions.assertThatThrownBy(() -> {
                     new WinningLotto(new Lotto(winningLottoNumber), bonusNumber);})
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("보너스 숫자는 숫자여야 합니다.");
+                .hasMessage(ErrorMessage.BONUS_NUMBER_FORMAT_ERROR.getMessage());
 
     }
 
@@ -31,7 +32,7 @@ class WinningLottoTest {
         Assertions.assertThatThrownBy(() -> {
             new WinningLotto(new Lotto(winningLottoNumber), bonusNumber);})
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("1과 45 사이의 수를 입력하세요.");
+                .hasMessage(ErrorMessage.RANGE_ERROR.getMessage());
 
     }
 
@@ -45,7 +46,7 @@ class WinningLottoTest {
         Assertions.assertThatThrownBy(() -> {
                     new WinningLotto(new Lotto(winningLottoNumber), bonusNumber);})
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("보너스 숫자는 당첨 번호와 중복될 수 없습니다.");
+                .hasMessage(ErrorMessage.BONUS_NUMBER_DUPLICATED_ERROR.getMessage());
 
     }
 }
