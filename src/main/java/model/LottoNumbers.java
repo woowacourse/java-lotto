@@ -24,7 +24,7 @@ public class LottoNumbers {
             int randomNumber = random.nextInt(Constants.MAXIMUM_LOTTO_NUMBER) + 1;
             lottoNumbers.add(randomNumber);
         }
-        return lottoNumbers.stream().toList();
+        return lottoNumbers.stream().sorted().toList();
     }
 
     public List<Integer> getNumbers() {

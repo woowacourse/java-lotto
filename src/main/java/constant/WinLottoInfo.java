@@ -51,4 +51,12 @@ public enum WinLottoInfo {
                 .toList();
         return filteredWinLottoInfo.getFirst();
     }
+
+    public Integer getMatchNumberCount() {
+        return matchNumberCount;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
 }
