@@ -16,8 +16,8 @@ public class WinningResult {
 
 
     private void validateRankSize(final Map<LottoRank, Integer> lottoRanks) {
-        lottoRanks.forEach((lottoRank, integer) -> {
-            if (integer < 0) {
+        lottoRanks.forEach((lottoRank, count) -> {
+            if (count < 0) {
                 throw new IllegalArgumentException(ErrorType.WINNING_RESULT_POSITIVE.getMessage());
             }
         });
@@ -40,11 +40,6 @@ public class WinningResult {
         }
         return revenue;
     }
-
-    public int calculateLottoRankCount(final LottoRank lottoRank) {
-        return this.lottoRanks.getOrDefault(lottoRank, 0);
-    }
-
 
     private int calculateTotalLottoCount() {
         int totalLottoCount = 0;

@@ -27,23 +27,27 @@ public class LottoController {
     }
 
     public void run() {
-        final PurchaseAmount purchaseAmount = executeWithRetry(
-                () -> new PurchaseAmount(inputView.readPurchaseAmount()));
+        final PurchaseAmount purchaseAmount = executeWithRetry(this::inputPurchaseAmount);
         outputView.printPurchaseQuantity(purchaseAmount.calculateLottoCount());
-        
+
         final LottoMachine lottoMachine = new LottoMachine(numberGenerator);
         final List<Lotto> lottos = lottoMachine.issueLottos(purchaseAmount);
         outputView.printLottoNumbers(convertLottos(lottos));
 
-        final WinningNumbers winningNumbers = executeWithRetry(() -> {
-            List<Integer> winningNumber = inputView.readWinningNumber();
-            int bonusBall = inputView.readBonusBall();
-            return WinningNumbers.of(winningNumber, bonusBall);
-        });
-
+        final WinningNumbers winningNumbers = executeWithRetry(this::inputWinningNumbers);
         final WinningResult winningResult = WinningResult.of(lottos, winningNumbers);
         outputView.printLottoStatistics(winningResult.calculateRateOfRevenue(), winningResult.getLottoRanks(),
                 winningResult.isDamage());
+    }
+
+    private PurchaseAmount inputPurchaseAmount() {
+        return new PurchaseAmount(inputView.readPurchaseAmount());
+    }
+
+    private WinningNumbers inputWinningNumbers() {
+        final List<Integer> winningNumber = inputView.readWinningNumber();
+        final int bonusBall = inputView.readBonusBall();
+        return WinningNumbers.of(winningNumber, bonusBall);
     }
 
     private List<List<Integer>> convertLottos(final List<Lotto> lottos) {

@@ -12,7 +12,7 @@ public class LottoNumber implements Comparable {
     }
 
     private void validateRange(final int number) {
-        if (number < 1 || number > 45) {
+        if (number < Lotto.LOTTO_NUMBER_START_INCLUSIVE || number > Lotto.LOTTO_NUMBER_END_INCLUSIVE) {
             throw new IllegalArgumentException(ErrorType.LOTTO_NUMBER_RANGE.getMessage());
         }
     }
