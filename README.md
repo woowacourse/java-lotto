@@ -2,9 +2,10 @@
 
 로또 미션 저장소
 
-## 📝 기능 구현 목록
+### 👥 Pair
+#### 조로(김건우), 윌슨(박형균)
 
-### ✅ 진행 과정
+## 📝 진행 과정
 
 #### 1. 사용자가 구입 금액을 입력 한다.
 ##### - 구입 금액은 1,000원 단위여야 한다.
@@ -25,55 +26,57 @@
 ###### - 숫자가 아닌 경우
 #### 5. 당첨 통계를 출력 한다.
 
-### ✅ 클래스 
+## 📝 클래스 및 기능 구현 목록 
 
-#### domain
-##### Lotto
-- [] 로또 번호를 저장 한다
-- [] 특정 숫자가 로또 번호에 포함 되어 있는지 확인 한다
+### domain
+#### Lotto
+- [X] 로또 번호를 저장 한다
+- [X] 특정 숫자가 로또 번호에 포함 되어 있는지 확인 한다
 
-##### BonusNumber
-- [] 보너스 번호를 저장 한다
+#### BonusNumber
+- [X] 보너스 번호를 저장 한다
 
-##### WinningNumber
-- [] 당첨 번호와 보너스 번호를 저장 한다
+#### WinningNumber
+- [X] 당첨 번호와 보너스 번호를 저장 한다
 
-##### WinningResult
-- [] 당첨 번호와 로또들을 이용하여 당첨 결과를 계산 한다.
+#### WinningResult
+- [X] 당첨 번호와 로또들을 이용하여 당첨 결과를 계산 한다.
 
-##### WinningBenefit
-- [] 당첨 결과를 이용하여 총 당첨 긍액과 수익률을 계산 한다.
+#### WinningProfit
+- [X] 당첨 결과를 이용하여 총 당첨 긍액과 수익률을 계산 한다.
 
-##### LottoRank(enum)
-- [] 로또 당첨 정보를 정의 한다
+#### LottoRank(enum)
+- [X] 로또 당첨 정보를 정의 한다
 
-#### error
-##### AppException
-- [] `IllegalArgumentException` 의 하위 클래스
+#### Money
+- [X] 구입 금액을 저장
 
-##### ErrorMessage(enum)
-- [] 에러 메세지 정의
+### error
+#### AppException
+- [X] `IllegalArgumentException` 의 하위 클래스
 
-#### util
-##### ListValidator
-- [] 리스트 중복 검증
+#### ErrorMessage(enum)
+- [X] 에러 메세지 정의
 
-##### NumberValidator
-- [] 숫자 범위 검증
+### util
 
-##### StringParser
-- [] 문자를 숫자로 변경
-- [] 문자를 구분자 기준으로 리스트로 변경
+#### RandomNumbersGenerator
+- [X] NumberGenerator의 구현체
+- [X] 1 ~ 45 사이의 난수 6개 생성
 
-#### controller
+#### StringParser
+- [X] 문자를 숫자로 변경
+- [X] 문자를 구분자 기준으로 리스트로 변경
 
-##### LottoController
-- [] 애플리케이샨을 제어 하는 클래스
+### controller
 
-#### view
+#### LottoController
+- [X] 애플리케이샨을 제어 하는 클래스
 
-##### InputView
-- [] 사용자가 입력한 숫자를 읽음
+### view
 
-##### OutputView
-- [] 사용자에게 로또 관련 데이터를 출력
+#### InputView
+- [X] 사용자가 입력한 숫자를 읽음
+
+#### OutputView
+- [X] 사용자에게 로또 관련 데이터를 출력
