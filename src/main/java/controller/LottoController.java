@@ -27,29 +27,50 @@ public class LottoController {
 
     public void start() {
         try {
-            String rawMoney = inputView.inputMoney();
-            inputValidator.validateInputMoney(rawMoney);
-            Money purchaseLottoMoney = new Money(rawMoney);
-            LottoStore lottoStore = new LottoStore(new LottoMachine());
-            List<Lotto> purchaseLottos = lottoStore.buy(purchaseLottoMoney);
-            outputView.printPurchaseLottos(purchaseLottos);
+            Money purchaseLottoMoney = inputMoney();
+            List<Lotto> purchasedLottos = purchaseLottos(purchaseLottoMoney);
+            outputView.printPurchaseLottos(purchasedLottos);
 
-            String rawWinningNumbers = inputView.inputWinningNumbers();
-            inputValidator.validateWinningNumber(rawWinningNumbers);
-            List<Number> numbers = Arrays.stream(rawWinningNumbers.split(","))
-                    .map(String::trim)
-                    .map(Integer::valueOf)
-                    .map(Number::new)
-                    .toList();
-            Lotto winningNumbers = new Lotto(numbers);
-            String rawBonusNumber = inputView.inputBonusNumber();
-            inputValidator.validateNotStringNumber(rawBonusNumber);
-            Number bonusNumber = new Number(Integer.parseInt(rawBonusNumber));
-            WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-            WinningResult winningResult = winningLotto.calculateWinning(purchaseLottos);
+            WinningLotto winningLotto = inputWinningLotto();
+            WinningResult winningResult = winningLotto.calculateWinning(purchasedLottos);
             outputView.printWinningResult(winningResult);
         } catch (RuntimeException e) {
             outputView.printErrorMessage(e);
         }
+    }
+
+    private Money inputMoney() {
+        String rawMoney = inputView.inputMoney();
+        inputValidator.validateInputMoney(rawMoney);
+        return new Money(rawMoney);
+    }
+
+    private List<Lotto> purchaseLottos(Money purchaseLottoMoney) {
+        LottoStore lottoStore = new LottoStore(new LottoMachine());
+        return lottoStore.buy(purchaseLottoMoney);
+    }
+
+    private WinningLotto inputWinningLotto() {
+        Lotto winningNumbers = inputWinningNumbers();
+
+        Number bonusNumber = inputBonusNumber();
+        return new WinningLotto(winningNumbers, bonusNumber);
+    }
+
+    private Lotto inputWinningNumbers() {
+        String rawWinningNumbers = inputView.inputWinningNumbers();
+        inputValidator.validateWinningNumber(rawWinningNumbers);
+        List<Number> numbers = Arrays.stream(rawWinningNumbers.split(","))
+                .map(String::trim)
+                .map(Integer::valueOf)
+                .map(Number::new)
+                .toList();
+        return new Lotto(numbers);
+    }
+
+    private Number inputBonusNumber() {
+        String rawBonusNumber = inputView.inputBonusNumber();
+        inputValidator.validateNotStringNumber(rawBonusNumber);
+        return new Number(Integer.parseInt(rawBonusNumber));
     }
 }
