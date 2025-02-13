@@ -23,6 +23,6 @@ public enum ErrorType {
     }
 
     public String getMessage() {
-        return "[ERROR]" + this.message;
+        return "[ERROR] " + this.message;
     }
 }
