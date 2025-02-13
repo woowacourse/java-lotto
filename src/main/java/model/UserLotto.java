@@ -41,4 +41,14 @@ public class UserLotto {
         }
     }
 
+    public int calculateRank(Lotto lotto) {
+        int count = 0;
+        for (Integer winningNumber : winningNumbers) {
+            if (lotto.getRandomNumbers().contains(winningNumber)) {
+                count ++;
+            }
+        }
+        return count;
+    }
+
 }
