@@ -47,4 +47,9 @@ public class Lottos {
                 .toList();
     }
 
+    public List<MatchDto> getMatchDtos(List<Integer> winningNumbers, int bonusNumber) {
+        return lottos.stream()
+                .map(lotto -> lotto.getMatchDto(winningNumbers, bonusNumber))
+                .toList();
+    }
 }

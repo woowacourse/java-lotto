@@ -1,6 +1,7 @@
 package controller;
 
 import domain.Lottos;
+import domain.MatchDto;
 import java.util.List;
 import view.InputView;
 import view.OutputView;
@@ -24,5 +25,11 @@ public class LottoController {
 
         List<String> lottoNumbers = lottos.getLottoNumbers();
         outputView.printLottos(lottoNumbers);
+
+        List<Integer> winningNumbers = inputView.askWinningNumbers();
+        int bonusNumber = inputView.askBonusNumber();
+
+        List<MatchDto> matchDtos = lottos.getMatchDtos(winningNumbers, bonusNumber);
+
     }
 }
