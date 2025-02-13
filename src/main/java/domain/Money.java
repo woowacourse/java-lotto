@@ -21,10 +21,6 @@ public class Money {
         return originMoney / 1000;
     }
 
-    public int getSpentMoney() {
-        return (originMoney / 1000) * 1000;
-    }
-
     public int getChange() {
         return originMoney % 1000;
     }
