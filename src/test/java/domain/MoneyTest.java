@@ -14,7 +14,7 @@ public class MoneyTest {
 
   @Test
   @DisplayName("구입 금액이 양수인 경우 정상통과")
-  public void success_1(){
+  public void success_1() {
     int input = 14000;
     Money money = new Money(input);
     Assertions.assertThat(money).isInstanceOf(Money.class);
@@ -22,7 +22,7 @@ public class MoneyTest {
 
   @Test
   @DisplayName("구입 금액이 0인 경우 정상통과")
-  public void success_2(){
+  public void success_2() {
     int input = 0;
     Money money = new Money(input);
     Assertions.assertThat(money).isInstanceOf(Money.class);
@@ -30,7 +30,7 @@ public class MoneyTest {
 
   @Test
   @DisplayName("구입 금액이 음수인 경우 예외발생")
-  public void fail_1(){
+  public void fail_1() {
     int input = -1;
 
     Assertions.assertThatThrownBy(() -> new Money(input))
@@ -40,7 +40,7 @@ public class MoneyTest {
 
   @Test
   @DisplayName("로또 구매 개수 테스트")
-  public void success_3(){
+  public void success_3() {
     int input = 14323;
     Money money = new Money(input);
 
@@ -49,20 +49,19 @@ public class MoneyTest {
 
   @Test
   @DisplayName("수익률 계산 테스트")
-  public void success_4(){
+  public void success_4() {
     int input = 10000;
     Money money = new Money(input);
-    Map<LottoMatch, Integer> result = Stream.of(new Object[][] {
+    Map<LottoMatch, Integer> result = Stream.of(new Object[][]{
         {DEFUALT_MATCH, 7},
         {THREE_MATCH, 1},
         {FOUR_MATCH, 2},
         {FIVE_MATCH, 0},
         {FIVE_BONUS_MATCH, 0},
         {SIX_MATCH, 0}
-    }).collect(Collectors.toMap(item -> (LottoMatch)item[0], item -> (Integer)item[1]));
+    }).collect(Collectors.toMap(item -> (LottoMatch) item[0], item -> (Integer) item[1]));
 
     double profit = money.calculateProfit((HashMap<LottoMatch, Integer>) result);
     Assertions.assertThat(profit).isEqualTo(10.50);
   }
-
 }

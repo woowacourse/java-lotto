@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Lotto {
+
   private List<Integer> numbers = new ArrayList<>();
 
   public Lotto() {
@@ -38,8 +39,8 @@ public class Lotto {
     for (int number : numbers) {
       winningCounter += checkWinningCounter(winningNumbers, number);
     }
-    if(numbers.contains(bonusNumber)){
-        bonusChecker = true;
+    if (numbers.contains(bonusNumber)) {
+      bonusChecker = true;
     }
     return LottoMatch.calculateLotto(winningCounter, bonusChecker);
   }
@@ -55,5 +56,4 @@ public class Lotto {
   public String toString() {
     return numbers.toString();
   }
-
 }

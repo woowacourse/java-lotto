@@ -3,7 +3,7 @@ package domain;
 import java.util.Arrays;
 
 public enum LottoMatch {
-  DEFUALT_MATCH(0,false,0),
+  DEFUALT_MATCH(0, false, 0),
   THREE_MATCH(3, false, 5000),
   FOUR_MATCH(4, false, 50000),
   FIVE_MATCH(5, false, 1500000),
@@ -20,7 +20,7 @@ public enum LottoMatch {
     this.prize = prize;
   }
 
-  public static LottoMatch calculateLotto(int winningCounter, boolean bonusChecker ){
+  public static LottoMatch calculateLotto(int winningCounter, boolean bonusChecker) {
     return Arrays.stream(values()).filter(lottoMatch -> lottoMatch.winningCounter == winningCounter
         && lottoMatch.bonusChecker == bonusChecker).findFirst().orElse(DEFUALT_MATCH);
   }
@@ -30,7 +30,7 @@ public enum LottoMatch {
     String result = "";
     result += String.valueOf(winningCounter) + "개 일치 ";
 
-    if(bonusChecker) {
+    if (bonusChecker) {
       result += ", 보너스 볼 일치 ";
     }
 
