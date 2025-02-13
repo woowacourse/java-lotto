@@ -8,8 +8,8 @@ public class Lotto {
 
     private List<Integer> numbers;
 
-    public static Lotto of(final String input) {
-        String[] split = input.split(",");
+    public static Lotto of(final String input) { // "1, 2, 3, 4, 5, 6"
+        String[] split = input.split(", ");
         List<String> splitList = List.of(split);
 
         List<Integer> parsedInput = new ArrayList<>();
