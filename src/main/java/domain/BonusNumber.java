@@ -27,4 +27,8 @@ public class BonusNumber {
             throw new LottoException(INVALID_BONUS_NUMBER);
         }
     }
+
+    public boolean isContain(LottoNumber lottoNumber) {
+        return this.lottoNumber.equals(lottoNumber);
+    }
 }

@@ -9,4 +9,8 @@ public class WinningNumberRepository {
     public void saveWinningNumber(WinningNumber winningNumber) {
         this.winningNumber = winningNumber;
     }
+
+    public WinningNumber getWinningNumber() {
+        return winningNumber;
+    }
 }

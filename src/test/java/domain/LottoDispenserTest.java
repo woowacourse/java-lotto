@@ -7,6 +7,7 @@ import exception.LottoException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+import net.bytebuddy.build.ToStringPlugin.Enhance;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,4 +45,7 @@ public class LottoDispenserTest {
             new LottoDispenser(buyMoney);
         }).isInstanceOf(LottoException.class);
     }
+
+    //통합테스트
+
 }

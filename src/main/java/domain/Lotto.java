@@ -37,4 +37,15 @@ public class Lotto {
                 .collect(Collectors.joining(", "));
         return String.format(BUY_LOTTO_NUMBERS_FORMAT,formattedLottoNumbers);
     }
+
+    public int compare(WinningNumber winningNumber, BonusNumber bonusNumber) {
+         return (int) lottoNumbers.stream().filter(lottoNumber ->
+            winningNumber.isContain(lottoNumber)
+        ).count();
+    }
+
+    public boolean compareBonusNumber(BonusNumber bonusNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> bonusNumber.isContain(lottoNumber));
+    }
 }

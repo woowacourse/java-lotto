@@ -26,6 +26,11 @@ public class WinningNumber {
         lottoNumbers = parsedWinningNumbers.stream().map(LottoNumber::new).toList();
     }
 
+    public boolean isContain(LottoNumber lottoNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(num -> lottoNumber.equals(num));
+    }
+
     private void validateWinningNumber(String inputWinningNumber) {
         validateIsEmpty(inputWinningNumber);
         String[] winningNumbers = inputWinningNumber.split(",");
