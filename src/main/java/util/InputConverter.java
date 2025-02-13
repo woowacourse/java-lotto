@@ -5,8 +5,8 @@ import java.util.List;
 
 public class InputConverter {
     public static Integer convertNumber(String input){
-        Validator.validateNumberFormat(input);
-        return Integer.parseInt(input);
+        Validator.validateNumberFormat(input.trim());
+        return Integer.parseInt(input.trim());
     }
 
     public static List<Integer> convertWinningLotto(String originalInput){
@@ -25,7 +25,7 @@ public class InputConverter {
 
         private static void validateNumberFormat(String input){
             if(!input.matches("\\d+")){
-                throw new NumberFormatException("구입 금액 타입 오류");
+                throw new IllegalArgumentException("숫자 타입 오류");
             }
         }
     }
