@@ -1,8 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AnswerLotto {
     private final Lotto lotto;
     private final int bonusNumber;
