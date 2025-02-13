@@ -13,7 +13,6 @@ public class Main {
 
         LottoMachine lottoMachine = new LottoMachine(inputView, outputView, lottoService);
 
-
         lottoMachine.run();
     }
 }

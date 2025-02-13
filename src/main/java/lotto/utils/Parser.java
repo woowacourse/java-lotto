@@ -17,6 +17,7 @@ public class Parser {
     }
 
     public static List<Integer> parseToIntegers(List<String> input) {
+
         try {
             return input.stream().map(Parser::parseToInteger).toList();
         } catch (NumberFormatException e) {

@@ -40,12 +40,9 @@ public enum Rank {
 
         EnumMap<Rank, Integer> rankIntegerEnumMap = new EnumMap<>(Rank.class);
 
-        rankIntegerEnumMap.put(FIRST_PRIDE, 0);
-        rankIntegerEnumMap.put(SECOND_PRIDE, 0);
-        rankIntegerEnumMap.put(THIRD_PRIDE, 0);
-        rankIntegerEnumMap.put(FOURTH_PRIDE, 0);
-        rankIntegerEnumMap.put(FIFTH_PRIDE, 0);
-        rankIntegerEnumMap.put(BOOM, 0);
+        for (Rank rank : Rank.values()) {
+            rankIntegerEnumMap.put(rank, 0);
+        }
 
         return rankIntegerEnumMap;
     }

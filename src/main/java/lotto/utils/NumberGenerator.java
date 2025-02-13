@@ -14,9 +14,7 @@ public class NumberGenerator {
         Set<Integer> set = new HashSet<>();
         do {
             int randomNum = random.nextInt(maxValue - minValue + 1) + minValue;
-
             set.add(randomNum);
-
         } while (set.size() != makeQuantity);
 
         List<Integer> lottoNumbers = new ArrayList<>(set);

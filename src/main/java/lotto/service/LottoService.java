@@ -16,11 +16,11 @@ import lotto.utils.Splitter;
 public class LottoService {
 
     public LottoBundle makeLottoBundle(AmountPaid amount) {
-        List<Lotto> lottos = new ArrayList<>();
+        List<Lotto> lottoBundle = new ArrayList<>();
         for (int i = 0; i < amount.getLottoQuantity(); i++) {
-            lottos.add(makeLotto());
+            lottoBundle.add(makeLotto());
         }
-        return new LottoBundle(lottos);
+        return new LottoBundle(lottoBundle);
     }
 
 

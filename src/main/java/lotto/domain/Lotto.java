@@ -23,6 +23,21 @@ public class Lotto {
         validateDuplicateNumber();
     }
 
+    public int checkMatchCount(List<Integer> winningNumbers) {
+
+        int count = 0;
+        for (int lottoNumber : lottoNumbers) {
+            if (winningNumbers.contains(lottoNumber)) {
+                count += 1;
+            }
+        }
+
+        return count;
+    }
+
+    public boolean checkBonus(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 
     private void validateNumberRange() {
         for (Integer number : lottoNumbers) {
@@ -45,27 +60,13 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
     public int getSize() {
         return lottoNumbers.size();
     }
 
-    public int checkMatchCount(List<Integer> winningNumbers) {
-
-        int count = 0;
-        for (int lottoNumber : lottoNumbers) {
-            if (winningNumbers.contains(lottoNumber)) {
-                count += 1;
-            }
-        }
-
-        return count;
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
     }
 
-    public boolean checkBonus(int bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
-    }
+
 }
