@@ -1,9 +1,7 @@
 package service;
 
-import java.awt.print.Pageable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
+import factory.LottoFactory;
+import factory.LottosFactory;
 import java.util.List;
 import model.Lotto;
 import model.Lottos;
@@ -16,12 +14,11 @@ public class LottoGenerateService {
         validatePurchaseAmount(purchaseAmount);
         int count = purchaseAmount / PRICE;
 
-        Lottos lottos = new Lottos();
+        Lottos lottos = LottosFactory.createLottos();
 
-        for(int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             List<Integer> numbers = RandomGenerator.generateNumbers(1, 45, 6);
-            Collections.sort(numbers);
-            Lotto lotto = new Lotto(numbers);
+            Lotto lotto = LottoFactory.createLotto(numbers);
             lottos.addLotto(lotto);
         }
 
