@@ -20,6 +20,10 @@ public class InputView {
         return input;
     }
 
+    public String getBonusInput() {
+        return getInput();
+    }
+
     private String getInput() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();

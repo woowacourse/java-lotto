@@ -24,7 +24,21 @@ public class LottoController {
         outputView.printPurchaseLottos(userLotto.getLottosDto());
         //4. 당첨 번호, 보너스 볼 입력
         WinningLotto winningLotto = getWinningLotto();
+        setBonus(winningLotto);
         //5. 당첨 통계, 수익률 출력
+    }
+
+    private void setBonus(WinningLotto winningLotto) {
+        while(true) {
+            try {
+                outputView.printBonusGuide();
+                String bonusInput = inputView.getBonusInput();
+                winningLotto.setBonus(bonusInput);
+                return;
+            } catch (IllegalArgumentException ex) {
+                outputView.printError(ex.getMessage());
+            }
+        }
     }
 
     private UserLotto getUserLotto() {
