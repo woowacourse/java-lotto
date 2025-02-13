@@ -12,8 +12,15 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
+        validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
         this.lottoNumbers = List.copyOf(lottoNumbers);
+    }
+
+    private void validateSize(final List<LottoNumber> winningNumbers) {
+        if (winningNumbers.size() != 6) {
+            throw new IllegalArgumentException(ErrorType.LOTTO_NUMBER__IS_INVALID_SIZE.getMessage());
+        }
     }
 
     private void validateDuplicate(final List<LottoNumber> lottoNumbers) {
