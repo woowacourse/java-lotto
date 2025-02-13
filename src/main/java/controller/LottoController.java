@@ -13,4 +13,8 @@ public class LottoController {
     public void inputBuyLottoMoney(String inputBuyLottoMoney) {
         lottoService.inputBuyLottoMoney(inputBuyLottoMoney);
     }
+
+    public void inputWinningNumber(String inputWinningNumber) {
+        lottoService.inputWinningNumber(inputWinningNumber);
+    }
 }
