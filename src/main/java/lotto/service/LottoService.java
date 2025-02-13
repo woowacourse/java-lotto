@@ -46,4 +46,9 @@ public class LottoService {
 
         return rankIntegerEnumMap;
     }
+
+    public String calculateTotalResult(EnumMap<Rank, Integer> lottoResult, AmountPaid amountPaid) {
+        int totalPrize = Rank.calculateTotalPrize(lottoResult);
+        return amountPaid.calculateProfitRate(totalPrize);
+    }
 }
