@@ -2,8 +2,12 @@ package controller;
 
 import domain.Lotto;
 import domain.Lottos;
+import domain.Rank;
 import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import service.LottoMaker;
 import service.parser.BonusNumberParer;
 import service.parser.MoneyParser;
@@ -30,6 +34,29 @@ public class Controller {
 
         List<Integer> winningNumbers = WinningNumberParser.parseWinningNumbers(inputView.askWinningNumber());
         int bonusNumber = BonusNumberParer.parseBonusNumber(winningNumbers, inputView.askBonusNumber());
+
+        EnumMap<Rank, Integer> map = new EnumMap<>(Rank.class);
+        for (int idx = 0; idx < lottos.size(); idx++) {
+            Set<Integer> set = new HashSet<>(lottos.getLottoByIndex(idx).getNumbers());
+            set.addAll(winningNumbers);
+
+            int judge = 12 - set.size();
+            if (judge == 3) {
+                map.put(Rank.RANK5, map.getOrDefault(Rank.RANK5, 0) + 1);
+            } else if (judge == 4) {
+                map.put(Rank.RANK4, map.getOrDefault(Rank.RANK4, 0) + 1);
+            } else if (judge == 5) {
+                if (winningNumbers.contains(bonusNumber)) {
+                    map.put(Rank.RANK2, map.getOrDefault(Rank.RANK2, 0) + 1);
+                    continue;
+                }
+                map.put(Rank.RANK3, map.getOrDefault(Rank.RANK3, 0) + 1);
+            } else if (judge == 6) {
+                map.put(Rank.RANK1, map.getOrDefault(Rank.RANK1, 0) + 1);
+            }
+        }
+
+        // TODO: 통계 결과 출력
     }
 
     private Lottos buyLotto(int count) {
