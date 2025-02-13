@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
-
     private InputView inputView;
     private OutputView outputView;
     private LottoManager lottoManager;
@@ -30,6 +29,7 @@ public class LottoController {
 
         WinningResult winningResult = lottoManager.getWinningResult(lottos, winningLotto);
         outputView.printWinningResult(winningResult);
+        outputView.printRevenue(lottoManager.getRevenue(winningResult, money));
     }
 
     private WinningLotto inputWinningNumbers() throws IOException {

@@ -15,4 +15,12 @@ public class OutputView {
         System.out.println(stringBuilder);
     }
 
+    public void printRevenue(float revenue) {
+        StringBuilder stringBuilder = new StringBuilder(String.format("총 수익률은 %.2f입니다.", revenue));
+        if (revenue < 1) {
+            stringBuilder.append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+        stringBuilder.append('\n');
+        System.out.println(stringBuilder);
+    }
 }
