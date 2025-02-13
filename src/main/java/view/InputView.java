@@ -14,6 +14,8 @@ public class InputView {
             try {
                 System.out.println("구입금액을 입력해 주세요.");
                 String purchaseAmountInput = sc.nextLine();
+                InputValidator.validateBlank(purchaseAmountInput);
+                InputValidator.validateIntegerOverflow(purchaseAmountInput);
                 return new Purchase(purchaseAmountInput);
             }
             catch (IllegalArgumentException e) {
@@ -27,6 +29,7 @@ public class InputView {
         while(true) {
             try {
                 String inputWinningNumbers = sc.nextLine();
+                InputValidator.validateBlank(inputWinningNumbers);
                 return new WinningNumber(inputWinningNumbers);
             }
             catch (IllegalArgumentException e) {
@@ -40,6 +43,8 @@ public class InputView {
         while (true) {
             try {
                 String bonusNumber = sc.nextLine();
+                InputValidator.validateBlank(bonusNumber);
+                InputValidator.validateIntegerOverflow(bonusNumber);
                 return new BonusNumber(bonusNumber, winningNumber);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
