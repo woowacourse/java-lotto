@@ -2,11 +2,13 @@ package lotto.service;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumberGenerator;
+import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoService {
 
@@ -25,5 +27,19 @@ public class LottoService {
 
     public int countNumberOfPurchases(long purchaseAmount) {
         return (int) purchaseAmount / LOTTO_PRICE;
+    }
+
+    public double calculateProfitRate(Map<LottoRank, Integer> winningInfo, long purchaseAmount) {
+        long totalProfit = sumTotalProfit(winningInfo);
+        return (double) totalProfit / purchaseAmount * 100;
+    }
+
+    private long sumTotalProfit(Map<LottoRank, Integer> winningInfo) {
+        long sum = 0;
+        for (LottoRank lottoRank : winningInfo.keySet()) {
+            sum += lottoRank.calculateWinningAmount(winningInfo.get(lottoRank));
+        }
+
+        return sum;
     }
 }
