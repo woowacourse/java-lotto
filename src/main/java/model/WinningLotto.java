@@ -1,5 +1,6 @@
 package model;
 
+import error.ErrorMessage;
 import java.util.List;
 
 public class WinningLotto {
@@ -18,12 +19,12 @@ public class WinningLotto {
             INSTANCE = new WinningLotto(basicLotto, bonusNumber);
             return;
         }
-        throw new IllegalStateException("이미 당첨번호가 추첨되었습니다.");
+        throw new IllegalStateException(ErrorMessage.WINNING_NUMBERS_ALREADY_DRAWN.getMessage());
     }
 
     public static WinningLotto getInstance() {
         if (INSTANCE == null) {
-            throw new IllegalStateException("아직 당첨번호가 추첨되지 않았습니다.");
+            throw new IllegalStateException(ErrorMessage.WINNING_NUMBERS_NOT_DRAWN_YET.getMessage());
         }
         return INSTANCE;
     }
@@ -35,13 +36,13 @@ public class WinningLotto {
 
     private static void validateDuplicatedBonusNumber(Lotto basicLotto, int bonusNumber) {
         if (basicLotto.isBonusMatched(bonusNumber)) {
-            throw new IllegalArgumentException("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.WINNING_AND_BONUS_NUMBER_DUPLICATE.getMessage());
         }
     }
 
     private static void validateBonusNumberRange(int bonusNumber) {
         if (bonusNumber < 1 || bonusNumber > 45) {
-            throw new IllegalArgumentException("숫자 범위가 벗어났습니다.");
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_OUT_OF_RANGE.getMessage());
         }
     }
 

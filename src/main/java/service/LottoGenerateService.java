@@ -1,5 +1,6 @@
 package service;
 
+import error.ErrorMessage;
 import factory.LottoFactory;
 import factory.LottosFactory;
 import java.util.List;
@@ -31,7 +32,7 @@ public class LottoGenerateService {
 
     private void validatePurchaseAmount(int purchaseAmount) {
         if (purchaseAmount % PRICE != 0) {
-            throw new IllegalArgumentException("구입 금액은 1000원 단위로만 가능합니다.");
+            throw new IllegalArgumentException(ErrorMessage.PURCHASE_AMOUNT_INVALID.getMessage());
         }
     }
 }

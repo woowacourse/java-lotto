@@ -1,5 +1,6 @@
 package util;
 
+import error.ErrorMessage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class InputConverter {
             validateNegativeValue(value);
             return value;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
+            throw new IllegalArgumentException(ErrorMessage.INPUT_MUST_BE_NUMERIC.getMessage());
         }
     }
 
@@ -27,7 +28,7 @@ public class InputConverter {
 
     private static void validateNegativeValue(int value) {
         if (value < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED.getMessage());
         }
     }
 }
