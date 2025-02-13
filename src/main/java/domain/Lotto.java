@@ -9,6 +9,7 @@ public class Lotto {
     public static final int LOTTO_MIN = 1;
     public static final int LOTTO_MAX = 45;
     public static final String DELIMITER = ",";
+    public static final int LOTTO_LENGTH = 6;
 
     private List<Integer> numbers;
 
@@ -18,11 +19,18 @@ public class Lotto {
 
     public Lotto(String lotto) {
         numbers = new ArrayList<>();
-        String[] split = lotto.split(DELIMITER);
-        for (String s : split) {
-            int num = validateIsInteger(s.trim());
+        String[] splitNumbers = lotto.split(DELIMITER);
+        validateLength(splitNumbers);
+        for (String number : splitNumbers) {
+            int num = validateIsInteger(number.trim());
             validateRange(num);
             numbers.add(num);
+        }
+    }
+
+    private void validateLength(String[] splitNumbers) {
+        if(splitNumbers.length != LOTTO_LENGTH) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_LENGTH.getMessage());
         }
     }
 
