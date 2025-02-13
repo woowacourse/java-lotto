@@ -29,10 +29,9 @@ public class InputView {
 
     public static int inputAndValidateUserMoney() {
         System.out.println(INPUT_MONEY_PROMPT);
-        String input = read();
+        String userInputMoney = read();
         try {
-            isNumeric(input);
-            int inputMoney = Integer.parseInt(input);
+            int inputMoney = parseInt(userInputMoney);
             isDivideByThousand(inputMoney);
             return inputMoney;
         } catch (IllegalArgumentException e) {
@@ -40,6 +39,7 @@ public class InputView {
             return inputAndValidateUserMoney();
         }
     }
+
 
     private static String read() {
         return scanner.nextLine();
@@ -55,6 +55,11 @@ public class InputView {
             System.out.println(e.getMessage());
             return inputWinningNumbers();
         }
+    }
+
+    private static int parseInt(String input){
+        isNumeric(input);
+        return Integer.parseInt(input);
     }
 
     private static void isValidDelimiter(String input){
@@ -78,12 +83,10 @@ public class InputView {
         System.out.println(INPUT_BONUS_NUMBER_PROMPT);
         String bonusNumberString = read();
         try {
-            isNumeric(bonusNumberString);
-            return Integer.parseInt(bonusNumberString);
+            return parseInt(bonusNumberString);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return isNumericBonusNumber();
         }
-
     }
 }
