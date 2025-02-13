@@ -1,5 +1,9 @@
 package lotto;
 
+import static lotto.Lotto.MAX_LOTTO_NUMBER;
+import static lotto.Lotto.MIN_LOTTO_NUMBER;
+import static lotto.Lotto.LOTTO_SIZE;
+
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -48,8 +52,8 @@ public class Application {
     }
 
     private static void validateWinningNumbers(final List<Integer> winningNumbers) {
-        if (new HashSet<>(winningNumbers).size() != 6) {
-            throw new IllegalArgumentException("6개의 고유한 번호를 입력해야 합니다.");
+        if (new HashSet<>(winningNumbers).size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(LOTTO_SIZE + "개의 고유한 번호를 입력해야 합니다.");
         }
 
         for (final int winningNumber : winningNumbers) {
@@ -70,8 +74,9 @@ public class Application {
     }
 
     private static void validateLottoNumber(final int lottoNumber) {
-        if (lottoNumber < 1 || lottoNumber > 45) {
-            throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이여야 합니다.");
+        if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(
+                    "로또 번호는 %d ~ %d 사이여야 합니다.".formatted(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
         }
     }
 }

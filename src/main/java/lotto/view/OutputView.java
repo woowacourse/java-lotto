@@ -7,6 +7,7 @@ import lotto.WinningStatistics;
 import java.util.List;
 
 public class OutputView {
+    private static final int STANDARD_RATE = 1;
     private OutputView() {
     }
 
@@ -30,8 +31,8 @@ public class OutputView {
 
     private static void printReturnRate(final double returnRate) {
         System.out.print(String.format("총 수익률은 %.2f입니다.", returnRate));
-        if (returnRate < 1) {
-            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        if (returnRate < STANDARD_RATE) {
+            System.out.println("(기준이 %d이기 때문에 결과적으로 손해라는 의미임)".formatted(STANDARD_RATE));
         }
     }
 
