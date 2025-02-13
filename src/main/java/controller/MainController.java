@@ -21,14 +21,12 @@ public class MainController {
 
     public void run() {
         int purchaseAmount = InputView.inputPurchaseAmount();
-
         int lottoTicketNumber = purchaseAmount / LOTTO_PRICE;
-
         LottoMachine lottoMachine = new LottoMachine();
         List<LottoTicket> lottoTickets =
                 lottoMachine.generateLottoTickets(lottoTicketNumber, new RandomIntegerGenerator());
-
         OutputView.printLottoTickets(lottoTickets);
+
         List<Integer> winningNumbers = InputView.inputWinningLottoTicket();
         int bonusNumber = InputView.inputBonusNumber(winningNumbers);
 
@@ -37,6 +35,5 @@ public class MainController {
         OutputView.printWinningStatistics(winningStatistics);
         Profit profit = statisticsService.calculateProfit(winningStatistics, lottoTicketNumber);
         OutputView.printProfit(profit);
-
     }
 }
