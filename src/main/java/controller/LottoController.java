@@ -25,6 +25,15 @@ public class LottoController {
 
         OutputView.printLottos(lottos.getOutputLottosDtos());
         AnswerLotto answerLotto = lottoService.getAnswerLotto(selectedNumbers, bonus);
+        printPrizeResult(answerLotto, lottos);
+
+        double rateOfReturn = lottoService.calculateRateOfReturn();
+        OutputView.printRateOfReturn(rateOfReturn);
+    }
+
+    private void printPrizeResult(AnswerLotto answerLotto, Lottos lottos) {
+        lottoService.calculatePrize(answerLotto, lottos);
+        OutputView.printPrizeResult(lottoService.getPrizeResult());
     }
 
     private Lottos getLottos(int buyableLottoCount) {
