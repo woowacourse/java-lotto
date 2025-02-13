@@ -13,7 +13,7 @@ public class LottoFactory {
                     .toList()
     );
 
-    private final static int LOTTO_PRICE = 1000;
+    public final static int LOTTO_PRICE = 1000;
 
     public static Lotto makeLotto() {
         Collections.shuffle(randomNumbers);

@@ -34,11 +34,14 @@ public class LottoStats {
     public String toString() {
         StringBuilder stats = new StringBuilder();
         for(Rank lottoRank : Rank.values()) {
-            stats.append(lottoRank.getMessage())
-                    .append(rank.getOrDefault(lottoRank, 0))
-                    .append("개\n");
+            stats.append(getStatus(lottoRank));
         }
         return stats.toString();
     }
 
+    private String getStatus(Rank lottoRank){
+        if(lottoRank == Rank.NONE) return "";
+        return lottoRank.getMessage() +
+                rank.getOrDefault(lottoRank, 0) + "개\n";
+    }
 }
