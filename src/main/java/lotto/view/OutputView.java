@@ -7,6 +7,8 @@ import lotto.model.WinningResultResponse;
 import lotto.model.WinningResultResponses;
 
 public class OutputView {
+    private static final String winningResultFormat = "%d개 일치 (%d원)- %d개";
+    private static final String winningSecondResultFormat = "%d개, 보너스 볼 일치(%d원)- %d개";
 
     public void printIssuedLottos(final List<List<Integer>> issuedLottoNumbers) {
         for (List<Integer> issuedLottoNumber : issuedLottoNumbers) {
@@ -16,26 +18,26 @@ public class OutputView {
         }
     }
 
-    public void printWinningResult(WinningResultResponses responses) {
+    public void printWinningResult(final WinningResultResponses responses) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-
-        String winningResultFormat = "%d개 일치 (%d원)- %d개";
-        String winningSecondResultFormat = "%d개, 보너스 볼 일치(%d원)- %d개";
-
         for (WinningResultResponse response : responses.getResponses()) {
-            if (response.isHasBonus() && response.getMatchingCount() == 5) {
-                System.out.println(
-                        winningSecondResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(),
-                                response.getWinningCount()));
-                continue;
-            }
-            System.out.println(winningResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(),
-                    response.getWinningCount()));
+            printStatistics(response);
         }
     }
 
-    public void printWinningRatio(double returnRatio) {
+    private static void printStatistics(final WinningResultResponse response) {
+        if (response.isHasBonus() && response.getMatchingCount() == 5) {
+            System.out.println(
+                    winningSecondResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(),
+                            response.getWinningCount()));
+            return;
+        }
+        System.out.println(winningResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(),
+                response.getWinningCount()));
+    }
+
+    public void printWinningRatio(final double returnRatio) {
         String winningRatioFormat = "총 수익률은 %.2f입니다.";
         System.out.println(winningRatioFormat.formatted(returnRatio));
     }
