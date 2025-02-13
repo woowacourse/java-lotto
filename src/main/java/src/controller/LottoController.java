@@ -19,15 +19,24 @@ public class LottoController {
     private final LottoMachine lottoMachine = new LottoMachine(numberGenerator);
 
     public void run() {
+        List<Lotto> lottos = issueLottos();
+        printPurchasedLottos(lottos);
+        List<Integer> winningLottoNumbers = getWinningLottoNumbers();
+    }
+
+    private List<Lotto> issueLottos() {
         outputView.printInputPurchaseMoneyMessage();
         int purchaseMoney = inputView.inputPurchaseMoney();
-        List<Lotto> lottos = lottoMachine.issueLottos(purchaseMoney);
+        return lottoMachine.issueLottos(purchaseMoney);
+    }
 
+    private void printPurchasedLottos(List<Lotto> lottos) {
         List<LottoResponse> lottoResponses = lottos.stream().map(LottoResponse::new).toList();
-
         outputView.printPurchasedLottos(lottoResponses);
+    }
 
-        outputView.printInputWinningLotto();
-        List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumbers();
+    private List<Integer> getWinningLottoNumbers() {
+        outputView.printInputWinningLottoNumbers();
+        return inputView.inputWinningLottoNumbers();
     }
 }
