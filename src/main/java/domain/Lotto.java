@@ -28,7 +28,6 @@ public class Lotto {
         return numbers.contains(bonusNumber);
     }
 
-
     public List<Integer> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
@@ -60,6 +59,8 @@ public class Lotto {
             }
         }
     }
+
+
 
 
 }

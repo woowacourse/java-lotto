@@ -1,9 +1,11 @@
 package controller;
 
 import domain.Lotto;
+import domain.Rank;
 import domain.Ticket;
-import domain.WinningNumber;
+import domain.WinningInfo;
 import java.util.List;
+import java.util.Map;
 import service.LottoService;
 import view.InputView;
 import view.OutputView;
@@ -33,10 +35,19 @@ public class LottoController {
         Lotto lotto = lottoService.createLotto(winningNumbers);
 
         int bonusNumber = inputView.bonusNumberInput();
-        WinningNumber winningNumber = lottoService.createWinningNumber(lotto, bonusNumber);
+        WinningInfo winningInfo = lottoService.createWinningNumber(lotto, bonusNumber);
+        Map<Rank, Integer> rankResult = lottoService.calculateRank(winningInfo, lottos);
+        outputView.printWinningStatistic(rankResult);
+       /*
+        System.out.println("당첨 통계");
+        System.out.println("-".repeat(9));
+        for (Rank rank : rankResult.keySet()) {
+            if(!rank.getDescription().isBlank()){
+                System.out.println(rank.getDescription() + " - " + rankResult.get(rank));
+            }
+        }
 
-        System.out.println(winningNumber.getNumbers());
-        System.out.println(winningNumber.getBonusNumber());
+        */
 
     }
 }

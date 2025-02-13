@@ -3,9 +3,13 @@ package service;
 import static domain.LottoRules.WINNING_NUMBERS_REQUIRED;
 
 import domain.Lotto;
+import domain.Rank;
 import domain.Ticket;
-import domain.WinningNumber;
+import domain.WinningInfo;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import repository.LottoRepository;
 import utils.InputParser;
 import utils.RandomNumber;
@@ -39,7 +43,37 @@ public class LottoService {
         return Lotto.from(parsedNumbers);
     }
 
-    public WinningNumber createWinningNumber(Lotto winningNumbers, int bonusNumber) {
-        return WinningNumber.of(winningNumbers, bonusNumber);
+    public WinningInfo createWinningNumber(Lotto winningNumbers, int bonusNumber) {
+        return WinningInfo.of(winningNumbers, bonusNumber);
+    }
+
+    public Map<Rank, Integer> calculateRank(WinningInfo winningInfo, List<Lotto> lottos){
+        Map<Rank,Integer> calculateResult = new LinkedHashMap<>();
+
+        Rank[] values = Rank.values();
+        for (Rank value : values) {
+            calculateResult.put(value, 0);
+
+        }
+
+        List<Integer> winningNumbers = winningInfo.getWinningLotto().getNumbers();
+
+        for (Lotto lotto:lottos){
+            int count = 0;
+            boolean isMatchBonusNumber = false;
+            List<Integer> lottoNumbers = lotto.getNumbers();
+            for (Integer lottoNumber : lottoNumbers) {
+                if (winningNumbers.contains(lottoNumber)) {
+                    count++;
+                }
+                if(winningInfo.getBonusNumber()== lottoNumber){
+                    isMatchBonusNumber=true;
+                }
+
+            }
+            Rank foundRank = Rank.findRank(count, isMatchBonusNumber);
+            calculateResult.put(foundRank,calculateResult.get(foundRank)+1);
+        }
+        return calculateResult;
     }
 }

@@ -5,24 +5,26 @@ import static domain.LottoRules.MIN_NUMBER;
 import static error.ErrorMessage.BONUS_NUMBER_ALREADY_EXIST;
 import static error.ErrorMessage.INVALID_NUMBER_RANGE;
 
+import java.util.List;
 
-public class WinningNumber {
 
-    private final Lotto numbers;
+public class WinningInfo {
+
+    private final Lotto winningLotto;
     private final int bonusNumber;
 
-    private WinningNumber(Lotto numbers, int bonusNumber) {
-        validate(numbers, bonusNumber);
-        this.numbers = numbers;
+    private WinningInfo(Lotto winningLotto, int bonusNumber) {
+        validate(winningLotto, bonusNumber);
+        this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningNumber of(Lotto numbers, int bonusNumber) {
-        return new WinningNumber(numbers, bonusNumber);
+    public static WinningInfo of(Lotto numbers, int bonusNumber) {
+        return new WinningInfo(numbers, bonusNumber);
     }
 
-    public Lotto getNumbers() {
-        return numbers;
+    public Lotto getWinningLotto() {
+        return winningLotto;
     }
 
     public int getBonusNumber() {
@@ -45,4 +47,6 @@ public class WinningNumber {
             throw new IllegalArgumentException(BONUS_NUMBER_ALREADY_EXIST.getMessage());
         }
     }
+
+
 }

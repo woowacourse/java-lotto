@@ -1,12 +1,17 @@
 package view;
 
 import domain.Lotto;
+import domain.Rank;
 import domain.Ticket;
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
 
     private static final String PURCHASE_RESULT = "%s개를 구매헀습니다.";
+    private static final String WINNING_STATISTIC_MESSAGE = "당첨 통계";
+    private static final String HYPHEN = "-";
+    private static final String WINNING_RESULT = "%s개";
 
     private OutputView(){}
 
@@ -23,6 +28,25 @@ public class OutputView {
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getNumbers());
         }
+    }
+
+    public void printWinningStatistic(Map<Rank, Integer> result) {
+        printMessage(WINNING_STATISTIC_MESSAGE);
+        printMessage(HYPHEN.repeat(9));
+
+        for (Rank rank : result.keySet()) {
+            if (!rank.getDescription().isBlank()) {
+                System.out.print(rank.getDescription() + " " + HYPHEN +" ");
+                System.out.printf(WINNING_RESULT, result.get(rank));
+                changeLine();
+            }
+
+        }
+
+    }
+
+    private void printMessage(String message) {
+        System.out.println(message);
     }
 
     private void changeLine() {

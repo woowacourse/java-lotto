@@ -25,7 +25,7 @@ public class InputView {
         printMessage(AMOUNT_INPUT_MESSAGE);
         String userInput = basicInput();
         validatePositiveNumber(userInput);
-        return Integer.parseInt(basicInput());
+        return Integer.parseInt(userInput);
     }
 
     private void validatePositiveNumber(String userInput) {

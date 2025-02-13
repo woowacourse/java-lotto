@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,10 +12,11 @@ public class InputParser {
     }
 
     public static List<Integer> parseAndCreateWinningNumbers(String inputWinningNumbers) {
-        List<String> parsedNumbers = List.of(inputWinningNumbers.split(DELIMITER));
-        return parsedNumbers.stream()
-                .mapToInt(Integer::parseInt)
-                .boxed()
+
+
+        return Arrays.stream(inputWinningNumbers.split(DELIMITER))
+                .map(String::trim)
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
