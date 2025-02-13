@@ -3,13 +3,13 @@ package model;
 import dto.ROIResultResponse;
 import dto.TicketAmountResponse;
 
-import static utils.Validator.validateDivisibility;
-import static utils.Validator.validateRange;
+import static global.utils.Validator.validateDivisibility;
+import static global.utils.Validator.validateRange;
 
 public class Ticket {
 
     private static final int TICKET_PRICE = 1_000;
-    
+
     private final int purchaseMoney;
 
     public Ticket(final int purchaseMoney) {
