@@ -2,6 +2,7 @@ package controller;
 
 import domain.Lotto;
 import domain.Lottos;
+import domain.Prize;
 import domain.WinningLotto;
 import java.io.IOException;
 import java.util.Arrays;
@@ -39,5 +40,10 @@ public class LottoController {
 
         //5. WinningLotto 객체 생성하기
         final WinningLotto winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonusNumber);
+
+        // 6. 계산하기
+        List<Prize> prizes = winningLotto.calculatePrizes(lottos);
+
+
     }
 }

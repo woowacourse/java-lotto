@@ -3,6 +3,8 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -27,5 +29,16 @@ class PrizeTest {
         Prize prizePlace = Prize.getPrizePlace(matchCount, isBonusMatch);
 
         assertThat(prizePlace).isEqualTo(Prize.SIXTH_PLACE);
+    }
+
+    @Test
+    void earningRateTest() {
+        List<Prize> prizes = List.of(Prize.FIFTH_PLACE, Prize.SIXTH_PLACE);
+        int purchasedAmount = 14000;
+
+        double earningRate = Prize.calculateEarningRate(prizes, purchasedAmount);
+        double formattedRate = (long) (earningRate * 100) / 100.0;
+
+        assertThat(formattedRate).isEqualTo(0.35);
     }
 }

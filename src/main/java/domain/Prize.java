@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Prize {
     FIRST_PLACE(6, false, 2000000000),
@@ -28,5 +29,15 @@ public enum Prize {
                     }
                     return true;
                 }).findFirst().orElse(SIXTH_PLACE);
+    }
+
+    public static double calculateEarningRate(List<Prize> prizes, int purchasedAmount) {
+        return (double) calculateTotalPrize(prizes) / purchasedAmount;
+    }
+
+    private static long calculateTotalPrize(List<Prize> prizes) {
+        return prizes.stream()
+                .mapToLong(p -> p.prizeAmount)
+                .sum();
     }
 }
