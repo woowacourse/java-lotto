@@ -25,6 +25,9 @@ public class OutputView {
         for (LottoRank lottoRank : rankInfo.keySet()) {
             System.out.println(rankInfo.get(lottoRank) + "- " + winningInfo.getOrDefault(lottoRank, 0) + "개");
         }
+    }
 
+    public static void printProfitRate(double profitRate) {
+        System.out.printf("총 수익률은 %.2f입니다.", profitRate);
     }
 }
