@@ -1,7 +1,8 @@
 package lotto.costant;
 
-import java.util.List;
 import lotto.domain.WinningCondition;
+
+import java.util.List;
 
 public enum WinningTier {
     FIRST(new WinningCondition(6, false), 2000000000),
@@ -21,6 +22,10 @@ public enum WinningTier {
 
     public WinningCondition getCondition() {
         return condition;
+    }
+
+    public int getPrize() {
+        return prize;
     }
 
     public static WinningTier find(int matchedCount, boolean isBonusNumberMatched) {
