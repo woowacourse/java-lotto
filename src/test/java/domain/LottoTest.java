@@ -87,6 +87,18 @@ class LottoTest {
         assertThat(result).isEqualTo(expected);
     }
     
+    @Test
+    void 로또_당첨_번호에_중복이_있으면_예외를_발생한다() {
+        // given
+        Lotto sut = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        List<Integer> duplicatedMatchNumbers = List.of(1, 2, 3, 4, 5, 5);
+        
+        // expected
+        assertThatThrownBy(() -> sut.getMatchCount(duplicatedMatchNumbers))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 당첨 번호는 중복되면 안됩니다.");
+    }
+    
     @ParameterizedTest
     @MethodSource("provideMatchBonusNumbers")
     void 보너스번호_당첨_여부를_판단한다(int bonusNumber, boolean expected) {

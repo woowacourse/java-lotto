@@ -54,6 +54,7 @@ public class Lotto {
     }
     
     public int getMatchCount(List<Integer> matchNumbers) {
+        validateMatchNumbersNotDuplicated(matchNumbers);
         int matchCount = 0;
         
         for (Integer matchNumber : matchNumbers) {
@@ -62,6 +63,12 @@ public class Lotto {
             }
         }
         return matchCount;
+    }
+    
+    private void validateMatchNumbersNotDuplicated(List<Integer> matchNumbers) {
+        if (matchNumbers.size() != new HashSet<>(matchNumbers).size()) {
+            throw new IllegalArgumentException("로또 당첨 번호는 중복되면 안됩니다.");
+        }
     }
     
     public boolean isBonusMatch(int bonusNumber) {
