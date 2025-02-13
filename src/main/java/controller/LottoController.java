@@ -1,9 +1,9 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import model.BonusNumber;
 import model.Lotto;
+import util.LottoGenerator;
 import model.Purchase;
 import model.WinningNumber;
 import model.WinningResult;
@@ -45,10 +45,7 @@ public class LottoController {
     }
 
     public List<Lotto> issueLotto(int lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto());
-        }
+        List<Lotto> lottos = LottoGenerator.generate(lottoCount);
         outputView.printLottos(lottos);
         return lottos;
     }
