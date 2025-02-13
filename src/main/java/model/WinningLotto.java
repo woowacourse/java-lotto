@@ -4,18 +4,18 @@ import java.util.List;
 
 public class WinningLotto {
     private static WinningLotto INSTANCE;
-    private Lotto lotto;
+    private Lotto basicLotto;
     private int bonusNumber;
 
-    private WinningLotto(Lotto lotto, int bonusNumber) {
-        validateBonusNumber(lotto, bonusNumber);
-        this.lotto = lotto;
+    private WinningLotto(Lotto basicLotto, int bonusNumber) {
+        validateBonusNumber(basicLotto, bonusNumber);
+        this.basicLotto = basicLotto;
         this.bonusNumber = bonusNumber;
     }
 
-    public static void initialize(Lotto lotto, int bonusNumber) {
+    public static void initialize(Lotto basicLotto, int bonusNumber) {
         if (INSTANCE == null) {
-            INSTANCE = new WinningLotto(lotto, bonusNumber);
+            INSTANCE = new WinningLotto(basicLotto, bonusNumber);
             return;
         }
         throw new IllegalStateException("이미 당첨번호가 추첨되었습니다.");
@@ -28,13 +28,13 @@ public class WinningLotto {
         return INSTANCE;
     }
 
-    private static void validateBonusNumber(Lotto lotto, int bonusNumber) {
-        validateDuplicatedBonusNumber(lotto, bonusNumber);
+    private static void validateBonusNumber(Lotto basicLotto, int bonusNumber) {
+        validateDuplicatedBonusNumber(basicLotto, bonusNumber);
         validateBonusNumberRange(bonusNumber);
     }
 
-    private static void validateDuplicatedBonusNumber(Lotto lotto, int bonusNumber) {
-        if (lotto.isBonusMatched(bonusNumber)) {
+    private static void validateDuplicatedBonusNumber(Lotto basicLotto, int bonusNumber) {
+        if (basicLotto.isBonusMatched(bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
         }
     }
@@ -46,7 +46,7 @@ public class WinningLotto {
     }
 
     public int getMatchCount(List<Integer> numbers) {
-        return lotto.countMatches(numbers);
+        return basicLotto.countMatches(numbers);
     }
 
     public boolean isBonusMatched(List<Integer> numbers) {
