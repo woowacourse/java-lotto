@@ -23,15 +23,23 @@ public class WinningLotto {
 
     private Map<Rank, Integer> findRanks(final Lottos lottos) {
         Map<Rank, Integer> ranks = new LinkedHashMap<>();
-        for (Rank rank : Rank.values()) {
-            ranks.put(rank, 0);
-        }
+        initRanks(ranks);
+        saveRanks(lottos, ranks);
+        return ranks;
+    }
+
+    private void saveRanks(Lottos lottos, Map<Rank, Integer> ranks) {
         for (Lotto lotto : lottos.getLottos()) {
             int matchingCount = lotto.calculateMatchingCount(winningLotto);
             Rank findRank = Rank.findBy(matchingCount, lotto.has(bonusNumber));
             ranks.put(findRank, ranks.getOrDefault(findRank, 0) + 1);
         }
-        return ranks;
+    }
+
+    private static void initRanks(Map<Rank, Integer> ranks) {
+        for (Rank rank : Rank.values()) {
+            ranks.put(rank, 0);
+        }
     }
 
     private List<WinningResultResponse> toResponses(final Map<Rank, Integer> ranks) {
@@ -48,13 +56,16 @@ public class WinningLotto {
             return;
         }
         if (rank.isSecond()) {
-            WinningResultResponse winningResultResponse = new WinningResultResponse(rank.getMatchingCount(),
-                    rank.getWinningAmount(), true, ranks.get(rank));
-            responses.add(winningResultResponse);
+            saveResponses(rank, true, ranks, responses);
             return;
         }
+        saveResponses(rank, false, ranks, responses);
+    }
+
+    private static void saveResponses(final Rank rank, final boolean hasBonus, final Map<Rank, Integer> ranks,
+                                      final List<WinningResultResponse> responses) {
         WinningResultResponse winningResultResponse = new WinningResultResponse(rank.getMatchingCount(),
-                rank.getWinningAmount(), false, ranks.get(rank));
+                rank.getWinningAmount(), hasBonus, ranks.get(rank));
         responses.add(winningResultResponse);
     }
 
