@@ -36,12 +36,22 @@ public class InputView {
     public List<Integer> inputMatchLotto() {
         String numbersString = SC.nextLine();
         
+        validateMatchLottoDelimiter(numbersString);
+        
         String[] numbers = numbersString.split(",");
         
         return Arrays.stream(numbers)
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .toList();
+    }
+    
+    private void validateMatchLottoDelimiter(String input) {
+        for (char ch : input.toCharArray()) {
+            if (!Character.isDigit(ch) && ch != ',') {
+                throw new IllegalArgumentException("당첨 로또 번호는 쉼표(,)로 구분되어야 합니다.");
+            }
+        }
     }
     
     public int inputBonusNumber() {
