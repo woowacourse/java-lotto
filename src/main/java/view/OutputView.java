@@ -4,8 +4,18 @@ import dto.*;
 
 public class OutputView {
 
-    public void printTicketPurchaseAmount(TicketAmountResponse response) { // TODO : 상수 분리
-        System.out.println(response.amount() + "개를 구매했습니다.");
+    private static final String PURCHASE_DONE = "개를 구매했습니다.";
+    private static final String LOTTO_RESULT_HEADER = "\n당첨 통계\n---------";
+    private static final String ROI_RESULT = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)";
+    private static final String COLLECT_COUNT = "%d개 일치";
+    private static final String COLLECT_BONUS_BALL = ", 보너스 볼 일치";
+    private static final String LOTTO_RESULT_DETAIL = " (%d원)- %d개 \n";
+    private static final String DELIMITER = ", ";
+    private static final String NUMBER_OPEN_BRACE = "[";
+    private static final String NUMBER_CLOSE_BRACE = "]";
+
+    public void printTicketPurchaseAmount(TicketAmountResponse response) {
+        System.out.println(response.amount() + PURCHASE_DONE);
     }
 
     public void printLottos(LottosResponse response) {
@@ -13,31 +23,26 @@ public class OutputView {
     }
 
     public void printLottoResult(LottoResultsResponse response) {
-        System.out.println("\n당첨 통계");
-        System.out.println("---------");
+        System.out.println(LOTTO_RESULT_HEADER);
         response.detailResponses().forEach(this::printLottoResultDetail);
     }
 
-    /*
-        총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
-     */
-
     public void printROIResult(ROIResultResponse response) {
-        System.out.printf("총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)", response.ROI(), response.benefitType());
+        System.out.printf(ROI_RESULT, response.ROI(), response.benefitType());
     }
 
     private void printLottoResultDetail(LottoResultDetailResponse response) {
         LottoRankDetailResponse rankDetail = response.rankDetailResponse();
-        System.out.printf("%d개 일치", rankDetail.matchNumber());
+        System.out.printf(COLLECT_COUNT, rankDetail.matchNumber());
 
         if (rankDetail.isBonusNumber()) {
-            System.out.print(", 보너스 볼 일치");
+            System.out.print(COLLECT_BONUS_BALL);
         }
-        System.out.printf(" (%d원)- %d개 \n", rankDetail.price(), response.count());
+        System.out.printf(LOTTO_RESULT_DETAIL, rankDetail.price(), response.count());
     }
 
-    private void printLottoNumbers(LottoNumbersResponse response) { // TODO : 상수 분리
-        String joined = String.join(", ", response.numbers());
-        System.out.println("[" + joined + "]");
+    private void printLottoNumbers(LottoNumbersResponse response) {
+        String numbers = String.join(DELIMITER, response.numbers());
+        System.out.println(NUMBER_OPEN_BRACE + numbers + NUMBER_CLOSE_BRACE);
     }
 }
