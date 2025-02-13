@@ -10,6 +10,7 @@ import src.model.winning_lotto.WinningLotto;
 import src.view.input.ConsoleInputView;
 import src.view.input.InputView;
 import src.view.output.ConsoleOutputView;
+import src.view.output.LottoPrizeResponse;
 import src.view.output.LottoResponse;
 import src.view.output.OutputView;
 
@@ -21,16 +22,18 @@ public class LottoController {
     private final LottoMachine lottoMachine = new LottoMachine(numberGenerator);
 
     public void run() {
-        List<Lotto> lottos = issueLottos();
+        int purchaseMoney = getPurchaseMoney();
+        List<Lotto> lottos = lottoMachine.issueLottos(purchaseMoney);
         printPurchasedLottos(lottos);
         WinningLotto winningLotto = getWinningLotto();
         List<LottoPrize> lottoPrizes = lottoMachine.getLottoResults(lottos, winningLotto);
+        List<LottoPrizeResponse> lottoPrizeResponses = lottoPrizes.stream().map(LottoPrizeResponse::from).toList();
+        outputView.printLottoResults(lottoPrizeResponses, purchaseMoney);
     }
 
-    private List<Lotto> issueLottos() {
+    private int getPurchaseMoney() {
         outputView.printInputPurchaseMoneyMessage();
-        int purchaseMoney = inputView.inputPurchaseMoney();
-        return lottoMachine.issueLottos(purchaseMoney);
+        return inputView.inputPurchaseMoney();
     }
 
     private void printPurchasedLottos(List<Lotto> lottos) {
