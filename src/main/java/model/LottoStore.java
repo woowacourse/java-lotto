@@ -1,6 +1,8 @@
 package model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 public class LottoStore {
@@ -23,7 +25,20 @@ public class LottoStore {
                 .toList();
     }
 
-    public List<LottoRank> calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
+    public Map<LottoRank, Integer> calculateRankMatchCount(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
+        List<LottoRank> lottoRanks = calculateRank(lottoTickets, winningLotto);
+        Map<LottoRank, Integer> rankCount = new HashMap<>();
+        for (LottoRank rank : LottoRank.values()) {
+            rankCount.put(rank, 0);
+        }
+
+        for (LottoRank lottoRank : lottoRanks) {
+            rankCount.merge(lottoRank, 1, Integer::sum);
+        }
+        return rankCount;
+    }
+
+    private List<LottoRank> calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
         return lottoTickets.stream()
                 .map(lottoTicket -> lottoRankCalculator.calculate(lottoTicket, winningLotto))
                 .toList();

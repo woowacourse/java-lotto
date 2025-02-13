@@ -3,7 +3,6 @@ package controller;
 import controller.dto.LottoDtoMapper;
 import controller.dto.LottoRankResponse;
 import controller.dto.WinningLottoRequest;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.LottoRank;
@@ -46,17 +45,8 @@ public class LottoController {
     }
 
     private void calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
-        List<LottoRank> lottoRanks = lottoStore.calculateRank(lottoTickets, winningLotto);
-        Map<LottoRank, Integer> rankCount = new HashMap<>();
-        for (LottoRank rank : LottoRank.values()) {
-            rankCount.put(rank, 0);
-        }
-
-        for (LottoRank lottoRank : lottoRanks) {
-            rankCount.merge(lottoRank, 1, Integer::sum);
-        }
-        List<LottoRankResponse> lottoRankResponses = lottoDtoMapper.toLottoRankResponses(rankCount);
-
+        Map<LottoRank, Integer> rankMatchCounts = lottoStore.calculateRankMatchCount(lottoTickets, winningLotto);
+        List<LottoRankResponse> lottoRankResponses = lottoDtoMapper.toLottoRankResponses(rankMatchCounts);
         lottoConsoleView.printLottoRankResults(lottoRankResponses);
     }
 }
