@@ -36,26 +36,36 @@ public class OutputService {
 
     private void printWinningStatistics(List<WinningTier> winningTiers) {
         List<WinningTier> tiers = Arrays.stream(WinningTier.values()).toList().reversed();
-
         for (WinningTier tier : tiers) {
-            if (tier == WinningTier.EMPTY) {
-                continue;
-            }
-
-            long count = winningTiers.stream().filter(winningTier -> winningTier == tier).count();
-            WinningCondition winningCondition = tier.getCondition();
-
-            if (winningCondition.isBonusMatchNeeded()) {
-                String template = OutputMessage.BONUS_TIER.getContent();
-                String content = String.format(template, winningCondition.getMatchedCount(), tier.getPrize(), count);
-                outputView.printLine(content);
-                continue;
-            }
-
-            String template = OutputMessage.REGULAR_TIER.getContent();
-            String content = String.format(template, winningCondition.getMatchedCount(), tier.getPrize(), count);
-            outputView.printLine(content);
+            printTier(winningTiers, tier);
         }
+    }
+
+    private void printTier(List<WinningTier> targets, WinningTier tier) {
+        if (tier == WinningTier.EMPTY) {
+            return;
+        }
+
+        long count = targets.stream().filter(winningTier -> winningTier == tier).count();
+        if (tier.getCondition().isBonusMatchNeeded()) {
+            printBonusTier(tier, count);
+            return;
+        }
+        printRegularTier(tier, count);
+    }
+
+    private void printBonusTier(WinningTier tier, long count) {
+        WinningCondition winningCondition = tier.getCondition();
+        String template = OutputMessage.BONUS_TIER.getContent();
+        String content = String.format(template, winningCondition.getMatchedCount(), tier.getPrize(), count);
+        outputView.printLine(content);
+    }
+
+    private void printRegularTier(WinningTier tier, long count) {
+        WinningCondition winningCondition = tier.getCondition();
+        String template = OutputMessage.REGULAR_TIER.getContent();
+        String content = String.format(template, winningCondition.getMatchedCount(), tier.getPrize(), count);
+        outputView.printLine(content);
     }
 
     private void printProfit(double profit) {

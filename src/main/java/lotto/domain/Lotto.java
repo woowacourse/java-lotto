@@ -28,12 +28,6 @@ public class Lotto {
     }
 
     public int findMatches(Lotto lotto) {
-        int matches = 0;
-        for (int number : numbers) {
-            if (lotto.hasNumber(number)) {
-                matches++;
-            }
-        }
-        return matches;
+        return (int) numbers.stream().filter(lotto::hasNumber).count();
     }
 }
