@@ -48,4 +48,8 @@ public class LottoStats {
     public Integer getRankCount(Rank lottoRank) {
         return rank.getOrDefault(lottoRank, 0);
     }
+
+    public String getEarningRate(int purchaseAmount){
+        return String.format("%.2f", Math.floor(1. * getTotalPrize()  / purchaseAmount * 100) / 100);
+    }
 }
