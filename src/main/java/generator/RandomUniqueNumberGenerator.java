@@ -6,7 +6,10 @@ import java.util.List;
 
 public class RandomUniqueNumberGenerator extends NumberGenerator {
 
-    public RandomUniqueNumberGenerator(final int startInclusive, final int endInclusive) {
+    public RandomUniqueNumberGenerator(
+        final int startInclusive,
+        final int endInclusive
+    ) {
         super(startInclusive, endInclusive);
     }
 

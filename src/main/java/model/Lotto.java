@@ -20,13 +20,15 @@ public class Lotto {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
         Collections.sort(lottoNumbers);
-        this.lottoNumbers = lottoNumbers.stream().sorted().toList();
+        this.lottoNumbers = lottoNumbers.stream()
+            .sorted()
+            .toList();
     }
 
     public static Lotto from(final List<Integer> lottoNumbers) {
         return new Lotto(lottoNumbers.stream()
-                .map(num -> new LottoNumber(num))
-                .collect(Collectors.toList()));
+            .map(num -> new LottoNumber(num))
+            .collect(Collectors.toList()));
     }
 
     private void validateSize(final List<LottoNumber> winningNumbers) {

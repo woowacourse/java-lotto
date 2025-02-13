@@ -10,8 +10,11 @@ public interface OutputView {
 
     void printLottoNumbers(final List<List<Integer>> lottoNumbers);
 
-    void printLottoStatistics(final double revenueRate, final Map<LottoRank, Integer> lottoRanks,
-                              final boolean isDamage);
+    void printLottoStatistics(
+        final double revenueRate,
+        final Map<LottoRank, Integer> lottoRanks,
+        final boolean isDamage
+    );
 
     void printErrorMessage(final String errorMessage);
 }

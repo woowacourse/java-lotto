@@ -10,7 +10,10 @@ public class WinningNumbers {
     private final List<LottoNumber> winningNumbers;
     private final LottoNumber bonusBall;
 
-    public WinningNumbers(final List<LottoNumber> winningNumbers, final LottoNumber bonusBall) {
+    public WinningNumbers(
+        final List<LottoNumber> winningNumbers,
+        final LottoNumber bonusBall
+    ) {
         validateSize(winningNumbers);
         validateDuplicate(winningNumbers);
         validateBonusNumberDuplicate(winningNumbers, bonusBall);
@@ -18,10 +21,13 @@ public class WinningNumbers {
         this.bonusBall = bonusBall;
     }
 
-    public static WinningNumbers of(final List<Integer> numbers, final int number) {
+    public static WinningNumbers of(
+        final List<Integer> numbers,
+        final int number
+    ) {
         final List<LottoNumber> winningNumbers = numbers.stream()
-                .map(LottoNumber::new)
-                .toList();
+            .map(LottoNumber::new)
+            .toList();
         final LottoNumber bonusBall = new LottoNumber(number);
         return new WinningNumbers(winningNumbers, bonusBall);
     }
@@ -39,12 +45,15 @@ public class WinningNumbers {
         }
     }
 
-    private void validateBonusNumberDuplicate(final List<LottoNumber> winningNumbers, final LottoNumber bonusBall) {
+    private void validateBonusNumberDuplicate(
+        final List<LottoNumber> winningNumbers,
+        final LottoNumber bonusBall
+    ) {
         if (winningNumbers.contains(bonusBall)) {
             throw new IllegalArgumentException(ErrorType.BONUS_BALL_IS_DUPLICATION.getMessage());
         }
     }
-    
+
     public int calculateLottoMatchCount(final List<LottoNumber> lottoNumbers) {
         int count = 0;
         for (final LottoNumber lottoNumber : lottoNumbers) {

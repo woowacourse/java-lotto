@@ -16,8 +16,8 @@ public class BasicInputParser implements InputParser {
     @Override
     public List<Integer> parseWinningNumbers(final String winningNumbersText) {
         return Arrays.stream(winningNumbersText.split(WINNING_NUMBERS_DELIMITER))
-                .map(text -> parseInt(ErrorType.WINNING_NUMBERS_INVALID_INPUT, text))
-                .toList();
+            .map(text -> parseInt(ErrorType.WINNING_NUMBERS_INVALID_INPUT, text))
+            .toList();
     }
 
     @Override
@@ -26,7 +26,10 @@ public class BasicInputParser implements InputParser {
     }
 
 
-    private int parseInt(final ErrorType errorType, final String text) {
+    private int parseInt(
+        final ErrorType errorType,
+        final String text
+    ) {
         try {
             return Integer.parseInt(text.strip());
         } catch (final NumberFormatException e) {

@@ -19,8 +19,11 @@ public class LottoController {
     private final OutputView outputView;
     private final NumberGenerator numberGenerator;
 
-    public LottoController(final InputView inputView, final OutputView outputView,
-                           final NumberGenerator numberGenerator) {
+    public LottoController(
+        final InputView inputView,
+        final OutputView outputView,
+        final NumberGenerator numberGenerator
+    ) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.numberGenerator = numberGenerator;
@@ -37,7 +40,7 @@ public class LottoController {
         final WinningNumbers winningNumbers = executeWithRetry(this::inputWinningNumbers);
         final WinningResult winningResult = WinningResult.of(lottos, winningNumbers);
         outputView.printLottoStatistics(winningResult.calculateRateOfRevenue(), winningResult.getLottoRanks(),
-                winningResult.isDamage());
+            winningResult.isDamage());
     }
 
     private PurchaseAmount inputPurchaseAmount() {
@@ -52,15 +55,15 @@ public class LottoController {
 
     private List<List<Integer>> convertLottos(final List<Lotto> lottos) {
         return lottos.stream()
-                .map(Lotto::getLottoNumbers)
-                .map(this::convertLottoNumbers)
-                .collect(Collectors.toList());
+            .map(Lotto::getLottoNumbers)
+            .map(this::convertLottoNumbers)
+            .collect(Collectors.toList());
     }
 
     private List<Integer> convertLottoNumbers(final List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList());
     }
 
     private <T> T executeWithRetry(final Supplier<T> supplier) {

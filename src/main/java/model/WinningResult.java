@@ -13,7 +13,7 @@ public class WinningResult {
         validateRankSize(lottoRanks);
         this.lottoRanks = Map.copyOf(lottoRanks);
     }
-    
+
     private void validateRankSize(final Map<LottoRank, Integer> lottoRanks) {
         lottoRanks.forEach((lottoRank, count) -> {
             if (count < 0) {
@@ -22,7 +22,10 @@ public class WinningResult {
         });
     }
 
-    public static WinningResult of(final List<Lotto> lottos, final WinningNumbers winningNumbers) {
+    public static WinningResult of(
+        final List<Lotto> lottos,
+        final WinningNumbers winningNumbers
+    ) {
         final Map<LottoRank, Integer> lottoRanks = new HashMap<>();
 
         for (final Lotto lotto : lottos) {
@@ -35,7 +38,8 @@ public class WinningResult {
     private long calculateRevenue() {
         long revenue = 0;
         for (final Map.Entry<LottoRank, Integer> entry : lottoRanks.entrySet()) {
-            revenue += entry.getKey().getPrizeMoney() * entry.getValue();
+            revenue += entry.getKey()
+                .getPrizeMoney() * entry.getValue();
         }
         return revenue;
     }
