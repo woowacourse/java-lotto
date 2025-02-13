@@ -39,7 +39,7 @@ public class WinningLotto {
                 rankResult.put(rank, 0);
             }
 
-            rankResult.put(rank, rankResult.get(rank));
+            rankResult.put(rank, rankResult.get(rank) + 1);
         }
 
         return rankResult;
