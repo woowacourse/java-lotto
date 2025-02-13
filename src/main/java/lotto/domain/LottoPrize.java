@@ -21,10 +21,6 @@ public enum LottoPrize {
         this.prize = prize;
     }
 
-    public int getPrize() {
-        return prize;
-    }
-
     public static LottoPrize findLottoPrize(int winningNumbersHit, boolean isBonusHit) {
         return Arrays.stream(values())
                 .filter(rank -> rank.hitNumbers == winningNumbersHit)
@@ -40,5 +36,9 @@ public enum LottoPrize {
 
     public int getHitNumbers() {
         return hitNumbers;
+    }
+
+    public int getPrize() {
+        return prize;
     }
 }
