@@ -8,8 +8,6 @@ public class Lottos {
         lottos = new ArrayList<>();
     }
 
-    ;
-
     public void addLotto(Lotto lotto) {
         lottos.add(lotto);
     }

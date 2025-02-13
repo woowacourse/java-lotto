@@ -9,10 +9,7 @@ public class LottoWinningChecker {
         LottoResult lottoResult = LottoResult.initialize();
 
         lottos.getLottos().forEach(
-                lotto -> {
-                    lottoResult.add(check(lotto, winningNumberWithBonusNumber));
-                }
-        );
+                lotto -> lottoResult.add(check(lotto, winningNumberWithBonusNumber)));
 
         return lottoResult;
     }
@@ -22,8 +19,8 @@ public class LottoWinningChecker {
         List<Integer> numbers = new ArrayList<>(lotto.getNumbers());
         numbers.retainAll(winningNumberWithBonusNumber.winningNumber().getNumbers());
 
-        int collectCount = numbers.size();
+        int correctCount = numbers.size();
         boolean isBonusCollect = lotto.getNumbers().contains(winningNumberWithBonusNumber.bonusNumber());
-        return LottoRanking.from(collectCount, isBonusCollect);
+        return LottoRanking.from(correctCount, isBonusCollect);
     }
 }

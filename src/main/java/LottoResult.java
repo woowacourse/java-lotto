@@ -20,7 +20,6 @@ public record LottoResult(
         long totalPrize = 0;
         for (LottoRanking ranking : result.keySet()) {
             totalPrize += (long) ranking.getPrize() * result.get(ranking);
-            ;
         }
         return totalPrize;
     }

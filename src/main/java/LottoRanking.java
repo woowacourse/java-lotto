@@ -10,9 +10,9 @@ public enum LottoRanking {
     LOSING(0, false, 0),
     ;
 
-    private int correctCount;
-    private boolean isNeedBonus;
-    private int prize;
+    private final int correctCount;
+    private final boolean isNeedBonus;
+    private final int prize;
 
     LottoRanking(int correctCount, boolean isNeedBonus, int prize) {
         this.correctCount = correctCount;
