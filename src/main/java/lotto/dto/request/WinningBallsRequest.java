@@ -6,8 +6,8 @@ import java.util.List;
 import static lotto.dto.ConvertUtil.convertToNumber;
 
 public record WinningBallsRequest(
-        List<Integer> winningNumbers,
-        int bonusNumber
+    List<Integer> winningNumbers,
+    int bonusNumber
 ) {
     public static final String DELIMITER = ",";
 
