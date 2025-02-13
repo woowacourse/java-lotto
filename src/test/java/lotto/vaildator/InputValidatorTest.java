@@ -20,7 +20,6 @@ class InputValidatorTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> InputValidator.validateBlank(input))
                 .withMessage(ExceptionMessage.INVALID_INPUT.getContent());
-
     }
 
     @DisplayName("입력값이 빈 값인 경우 예외 발생")
@@ -52,7 +51,7 @@ class InputValidatorTest {
                 .isThrownBy(() -> InputValidator.validatePurchaseAmount(purchaseAmount))
                 .withMessage(expectedMessage);
     }
-    
+
     @DisplayName("당첨 번호가 숫자가 아닌 경우 예외 발생")
     @Test
     void 당첨_번호가_숫자가_아닌_경우_예외_발생() {
