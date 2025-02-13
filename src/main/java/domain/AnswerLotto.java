@@ -10,6 +10,14 @@ public class AnswerLotto {
         this.bonusNumber = bonusNumber;
     }
 
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber;
+    }
+
     private void validate(Lotto lotto, final int bonusNumber) {
         if (lotto.hasDuplicateNumber(bonusNumber)) {
             throw new IllegalArgumentException("");
