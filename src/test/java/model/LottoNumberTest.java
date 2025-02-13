@@ -16,7 +16,7 @@ class LottoNumberTest {
     @DisplayName("유효한 경우의 테스트")
     class ValidCases {
 
-        @DisplayName("정수형을 제공하면 로또 번호가 생성된다.")
+        @DisplayName("로또 번호가 올바르게 생성된다.")
         @Test
         void createLottoNumber() {
             // given
