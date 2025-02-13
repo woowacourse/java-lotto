@@ -27,10 +27,12 @@ public class LottoStore {
 
     public LottoRankResult calculateRankMatchCount(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
         List<LottoRank> lottoRanks = calculateRank(lottoTickets, winningLotto);
+
         LottoRankResult lottoRankResult = new LottoRankResult();
         for (LottoRank lottoRank : lottoRanks) {
             lottoRankResult.updateRankCount(lottoRank);
         }
+
         return lottoRankResult;
     }
 
@@ -38,6 +40,7 @@ public class LottoStore {
         int paidAmount = lottoTicketCount * LOTTO_PRICE;
         int profit = lottoRankResult.getRanks().stream()
                 .mapToInt(rank -> rank.getPrizeMoney() * lottoRankResult.getCountByRank(rank)).sum();
+
         return (double) profit / paidAmount;
     }
 

@@ -21,7 +21,9 @@ public class OutputView {
 
     public void printLottoRankResults(List<LottoRankResponse> lottoRankResponses) {
         System.out.println("당첨 통계\n" + "---------");
+
         lottoRankResponses.sort(Comparator.comparing(LottoRankResponse::rankOrder).reversed());
+
         lottoRankResponses.forEach(lottoRankResponse -> {
                     if (lottoRankResponse.isBonusMatched()) {
                         System.out.printf(
@@ -32,6 +34,7 @@ public class OutputView {
                         );
                         return;
                     }
+
                     System.out.printf(
                             "%d개 일치 (%d원)- %d개\n",
                             lottoRankResponse.overlappedCount(),
