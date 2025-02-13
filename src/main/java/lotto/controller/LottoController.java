@@ -1,9 +1,8 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.Lotto;
-import lotto.domain.LottoGenerator;
-import lotto.domain.LottoPrice;
+
+import lotto.domain.*;
 import lotto.util.StringParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -28,13 +27,28 @@ public class LottoController {
         List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
         printPurchaseLottos(lottos);
 
+        WinningResult winningResult = getWinningResult();
+    }
 
+    private WinningResult getWinningResult() {
+        Lotto winningLotto = getWinningLotto();
+        LottoNumber bonusNumber = getBonusNumber();
+        return new WinningResult(winningLotto, bonusNumber);
+    }
+
+    private Lotto getWinningLotto() {
         String winningLottoNumbers = inputView.readWinningLottoNumbers();
         String[] splittedWinningLottoNumbers = winningLottoNumbers.split(DELIMITER);
         List<Integer> parsedWinningLottoNumbers = StringParser.parseTokens(splittedWinningLottoNumbers);
         Lotto winningLotto = new Lotto(parsedWinningLottoNumbers);
+        return winningLotto;
+    }
 
-
+    private LottoNumber getBonusNumber() {
+        String bonusNumberInput = inputView.readBonusNumber();
+        int parsedBonusNumber = StringParser.parseInt(bonusNumberInput);
+        LottoNumber bonusNumber = new LottoNumber(parsedBonusNumber);
+        return bonusNumber;
     }
 
     private LottoPrice getLottoPrice() {
