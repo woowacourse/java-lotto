@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class WinningLotto {
@@ -11,22 +13,13 @@ public class WinningLotto {
     }
 
     public int getMatchedCount(Lotto lotto) {
-        int matchCount = 0;
-        for (Integer number : lotto.getNumbers()) {
-            if (isExistWinningNumber(number)) {
-                matchCount++;
-            }
-        }
-        return matchCount;
+        List<Integer> lottoNumbers = new ArrayList<>(lotto.getNumbers());
+        lottoNumbers.retainAll(winningNumbers.getNumbers());
+        return lottoNumbers.size();
     }
 
     public boolean isMatchBonus(Lotto lotto) {
-        for (Integer number : lotto.getNumbers()) {
-            if (number == bonusNumber.getValue()) {
-                return true;
-            }
-        }
-        return false;
+        return lotto.getNumbers().stream().anyMatch(number -> number == bonusNumber.getValue());
     }
 
     private void validate(Lotto winningNumbers, Number bonusNumber) {
