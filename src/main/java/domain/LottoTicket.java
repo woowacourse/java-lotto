@@ -12,7 +12,28 @@ public class LottoTicket {
     private final List<Integer> numbers;
 
     public LottoTicket(List<Integer> numbers) {
+        validateLottoSize(numbers);
+        numbers.forEach(this::validateLottoNumberRange);
+        validateDuplicateNumber(numbers);
         this.numbers = numbers;
+    }
+
+    private void validateLottoSize(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        }
+    }
+
+    private void validateLottoNumberRange(Integer number) {
+        if (number < 1 || number > 45) {
+            throw new IllegalArgumentException("로또 번호는 1 이상 45 이하이다.");
+        }
+    }
+    
+    private void validateDuplicateNumber(List<Integer> numbers) {
+        if (numbers.stream().distinct().count() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("중봉된 번호가 존재합니다.");
+        }
     }
 
     public int countMatchedNumbers(List<Integer> winningNumbers) {
