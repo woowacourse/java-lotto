@@ -1,7 +1,8 @@
 package domain;
 
+import static global.exception.ExceptionMessage.*;
+
 import domain.dto.GetLottoDto;
-import global.exception.ExceptionMessage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,31 +27,39 @@ public class Lotto {
             validateRange(num);
             numbers.add(num);
         }
+
+        validateLottoDuplicate();
+    }
+
+    private void validateLottoDuplicate() {
+        if(numbers.stream().distinct().count() != LOTTO_LENGTH){
+            throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
+        }
     }
 
     private void validateLength(String[] splitNumbers) {
         if(splitNumbers.length != LOTTO_LENGTH) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_LENGTH.getMessage());
+            throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }
     }
 
     public int validateBonus(String input) {
         int bonus = validateIsInteger(input);
         validateRange(bonus);
-        validateIsDuplicate(bonus);
+        validateBonusDuplicate(bonus);
         return bonus;
     }
 
-    private void validateIsDuplicate(int input) {
+    private void validateBonusDuplicate(int input) {
         Integer bonus = Integer.valueOf(input);
         numbers.stream().filter(number -> number.equals(bonus)).forEach(number -> {
-            throw new IllegalArgumentException(ExceptionMessage.DUPLICATED_NUMBER.getMessage());
+            throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
         });
     }
 
     private void validateRange(int num) {
         if (num < LOTTO_MIN || num > LOTTO_MAX) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_RANGE.getMessage());
+            throw new IllegalArgumentException(INVALID_RANGE.getMessage());
         }
     }
 
@@ -58,7 +67,7 @@ public class Lotto {
         try {
             return Integer.parseInt(s);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_FORMAT.getMessage());
+            throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }
     }
 
