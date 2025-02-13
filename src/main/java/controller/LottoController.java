@@ -1,5 +1,6 @@
 package controller;
 
+import converter.StringToNumbersConverter;
 import domain.Lotto;
 import domain.LottoMachine;
 import domain.LottoStore;
@@ -8,7 +9,8 @@ import domain.Money;
 import domain.Number;
 import domain.WinningLotto;
 import domain.WinningResult;
-import java.util.Arrays;
+import domain.numberstrategy.NumberStrategy;
+import domain.numberstrategy.RandomNumberStrategy;
 import java.util.List;
 import view.InputValidator;
 import view.InputView;
@@ -47,13 +49,13 @@ public class LottoController {
     }
 
     private Lottos purchaseLottos(Money purchaseLottoMoney) {
-        LottoStore lottoStore = new LottoStore(new LottoMachine());
+        NumberStrategy numberStrategy = new RandomNumberStrategy();
+        LottoStore lottoStore = new LottoStore(new LottoMachine(numberStrategy));
         return lottoStore.buy(purchaseLottoMoney);
     }
 
     private WinningLotto inputWinningLotto() {
         Lotto winningNumbers = inputWinningNumbers();
-
         Number bonusNumber = inputBonusNumber();
         return new WinningLotto(winningNumbers, bonusNumber);
     }
@@ -61,11 +63,7 @@ public class LottoController {
     private Lotto inputWinningNumbers() {
         String rawWinningNumbers = inputView.inputWinningNumbers();
         inputValidator.validateWinningNumber(rawWinningNumbers);
-        List<Number> numbers = Arrays.stream(rawWinningNumbers.split(","))
-                .map(String::trim)
-                .map(Integer::valueOf)
-                .map(Number::new)
-                .toList();
+        List<Number> numbers = new StringToNumbersConverter().convert(rawWinningNumbers, ",");
         return new Lotto(numbers);
     }
 

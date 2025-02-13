@@ -24,7 +24,7 @@ public enum Rank {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .filter(rank -> {
-                    if (rank.matchCount == 5) {
+                    if (rank == SECOND || rank == THIRD) {
                         return rank.isRequireBonus == isRequireBonus;
                     }
                     return true;
