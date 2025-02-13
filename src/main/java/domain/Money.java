@@ -1,13 +1,12 @@
 package domain;
 
-public class Money {
-
-    private final int amount;
+public record Money(
+        int amount
+) {
 
     // TODO: 생성자 위치 컨벤션 확인
-    public Money(int amount) {
+    public Money {
         validateNegative(amount);
-        this.amount = amount;
     }
 
     public Money(String rawAmount) {
@@ -38,7 +37,7 @@ public class Money {
     }
 
     public double divide(Money purchaseLottoMoney) {
-        return (double) purchaseLottoMoney.amount / this.amount;
+        return (double) this.amount / purchaseLottoMoney.amount;
     }
 
     public int getAmount() {

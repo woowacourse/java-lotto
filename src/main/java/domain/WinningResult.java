@@ -21,7 +21,7 @@ public class WinningResult {
             Money winningMoney = rank.calculateWinningMoney(count);
             totalWinningMoney = totalWinningMoney.sum(winningMoney);
         }
-        return purchaseLottoMoney.divide(totalWinningMoney);
+        return totalWinningMoney.divide(purchaseLottoMoney);
     }
 
     public Map<Rank, Integer> getWinningResult() {
