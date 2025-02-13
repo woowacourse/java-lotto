@@ -13,7 +13,7 @@ public class WinningLotto {
         Validator.validateNumeric(bonusNumber);
         int parsed = Integer.parseInt(bonusNumber);
 
-        Validator.validateRange(parsed, 45, 1);
+        Validator.validateRange(parsed, 1, 45);
 
         validateLottoNumberDuplicate(parsed);
         this.bonusNumber = parsed;

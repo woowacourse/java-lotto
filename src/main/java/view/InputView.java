@@ -16,7 +16,7 @@ public class InputView {
         return enter(ENTER_BONUS_NUMBER_MESSAGE);
     }
 
-    public String enterBonusNumber() {
+    public String enterBonusNumber() { // TODO : 상수 분리
         return enter("보너스 볼을 입력해 주세요.");
     }
 

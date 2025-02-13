@@ -15,7 +15,7 @@ public class Lotto {
 
     private final List<Integer> numbers;
 
-    public Lotto() {
+    public Lotto() { // todo : 메서드 분리 작업
         numbers = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < NUMBER_COUNT; i++) {
@@ -23,7 +23,7 @@ public class Lotto {
         }
     }
 
-    public Lotto(String input) {
+    public Lotto(String input) { // todo : 메서드 분리 작업, Stream 적용 작업
         numbers = new ArrayList<>();
         String[] token = input.split(", ");
         Validator.validateRange(token.length, NUMBER_COUNT, NUMBER_COUNT);
@@ -34,6 +34,10 @@ public class Lotto {
         validateUniqueNumber(numbers);
     }
 
+    public boolean isContained(int number) {
+        return numbers.contains(number);
+    }
+
     public LottoNumbersResponse createResponse() {
         return new LottoNumbersResponse(
                 numbers.stream()
@@ -42,11 +46,7 @@ public class Lotto {
         );
     }
 
-    public boolean isContained(int number) {
-        return numbers.contains(number);
-    }
-
-    private void validateUniqueNumber(List<Integer> numbers) {
+    private void validateUniqueNumber(List<Integer> numbers) { // todo : 에러 메시지 추가
         Set<Integer> set = new HashSet<>(numbers);
         if (set.size() != numbers.size()) {
             throw new IllegalArgumentException();
