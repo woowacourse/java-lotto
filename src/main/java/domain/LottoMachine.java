@@ -11,10 +11,18 @@ public class LottoMachine {
     public LottoTicket generateLottoTicket(IntegerGenerator generator) {
         List<Integer> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_SIZE; i++) {
-            int number = generator.generateIntegerInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER);
+            int number = extractUniqueLottoNumber(generator, lottoNumbers);
             lottoNumbers.add(number);
         }
         return new LottoTicket(lottoNumbers);
+    }
+
+    private static int extractUniqueLottoNumber(IntegerGenerator generator, List<Integer> lottoNumbers) {
+        int number = -1;
+        do {
+            number = generator.generateIntegerInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER);
+        } while (lottoNumbers.contains(number));
+        return number;
     }
 
     public List<LottoTicket> generateLottoTickets(int lottoTicketNumber, IntegerGenerator generator) {
