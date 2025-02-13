@@ -5,8 +5,8 @@ import exception.LottoException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-import javax.print.DocFlavor.STRING;
 import utility.StringUtility;
 
 public class LottoDispenser {
@@ -22,6 +22,12 @@ public class LottoDispenser {
         this.buyMoney = Integer.parseInt(buyMoneyInput);
         int lottoCount = Integer.parseInt(buyMoneyInput) / LOTTO_MONEY_UNIT;
         lottos = generateLottos(lottoCount);
+
+    }
+
+    public LottoDispenser(List<Lotto> lottos) {
+        this.lottos = lottos;
+        this.buyMoney = lottos.size() * LOTTO_MONEY_UNIT;
     }
 
     private void validateLottoDispenser(String buyMoney) {
@@ -46,19 +52,21 @@ public class LottoDispenser {
     }
 
 
-    public HashMap<WinningCase,Integer> winningCalculate(WinningNumber winningNumber, BonusNumber bonusNumber) {
-        HashMap<WinningCase,Integer> winningResult = new HashMap<>();
+    public Map<WinningCase,Integer> winningCalculate(WinningNumber winningNumber, BonusNumber bonusNumber) {
+        Map<WinningCase,Integer> winningResult = WinningCase.toMap();
         for(Lotto lotto : lottos){
             int sameCount = lotto.compare(winningNumber, bonusNumber);
             boolean isBonus = lotto.compareBonusNumber(bonusNumber);
             WinningCase winningCase = WinningCase.getWinningCase(sameCount, isBonus);
+            if(winningCase == WinningCase.ELSE){
+                continue;
+            }
             winningResult.put(winningCase,winningResult.getOrDefault(winningCase,0)+1);
         }
-
         return winningResult;
     }
 
-    public long calculateEarnMoney(HashMap<WinningCase, Integer> winningCalculateResult) {
+    public long calculateEarnMoney(Map<WinningCase, Integer> winningCalculateResult) {
         long earnMoneySum = 0;
         for (Entry<WinningCase, Integer> winningCaseIntegerEntry : winningCalculateResult.entrySet()) {
             long earnMoney = winningCaseIntegerEntry.getKey()

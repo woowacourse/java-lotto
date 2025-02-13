@@ -4,6 +4,7 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import exception.LottoException;
+import java.security.SignedObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -16,6 +17,10 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.params.provider.ValueSources;
+import repository.BonusNumberRepository;
+import repository.LottoRepository;
+import repository.WinningNumberRepository;
+import service.SimpleLottoService;
 
 public class LottoDispenserTest {
 
@@ -46,6 +51,24 @@ public class LottoDispenserTest {
         }).isInstanceOf(LottoException.class);
     }
 
-    //통합테스트
 
+    private static Stream<Arguments> calculateWinningResult(){
+        return Stream.of(
+                Arguments.arguments(
+                        List.of(1,2,3,4,5,6)
+                        )
+        );
+    }
+
+    @ParameterizedTest
+    @DisplayName("당첨_통계_계산_및_출력_테스트")
+    @MethodSource("calculateWinningResult")
+    public void 당첨_통계_계산_및_출력_테스트(List<Integer> testLottoNumbers){
+        String winningNumber = "1, 2, 3, 4, 5, 6";
+        String bonusNumber = "7";
+        SimpleLottoService simpleLottoService = new SimpleLottoService(new LottoRepository(),new WinningNumberRepository(),new BonusNumberRepository());
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto(testLottoNumbers));
+        System.out.println(simpleLottoService.winningCalculate(lottos,winningNumber,bonusNumber));
+    }
 }

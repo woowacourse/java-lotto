@@ -8,6 +8,7 @@ public class BonusNumber {
     private final LottoNumber lottoNumber;
 
     public BonusNumber(String bonusNumber) {
+        bonusNumber = bonusNumber.trim();
         validateBonusNumber(bonusNumber);
         lottoNumber = new LottoNumber(Integer.parseInt(bonusNumber));
     }
@@ -23,7 +24,7 @@ public class BonusNumber {
         }
     }
     private void validateIsNumber(String bonusNumber) {
-        if(StringUtility.isNumber(bonusNumber)){
+        if(!StringUtility.isNumber(bonusNumber)){
             throw new LottoException(INVALID_BONUS_NUMBER);
         }
     }

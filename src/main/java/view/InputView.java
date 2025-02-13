@@ -13,4 +13,14 @@ public class InputView {
     private static String input() {
         return scanner.nextLine();
     }
+
+    public static String inputWinningNumber() {
+        OutputView.printInputWinningNumber();
+        return input();
+    }
+
+    public static String inputBonusNumber() {
+        OutputView.printInputBonusNumber();
+        return input();
+    }
 }

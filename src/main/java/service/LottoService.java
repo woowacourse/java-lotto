@@ -6,6 +6,7 @@ import domain.WinningNumber;
 import domain.enums.WinningCase;
 import domain.formatter.WinningCalculateFormatter;
 import java.util.HashMap;
+import java.util.Map;
 import repository.BonusNumberRepository;
 import repository.LottoRepository;
 import repository.WinningNumberRepository;
@@ -38,7 +39,7 @@ public class LottoService {
         LottoDispenser lottoDispenser = lottoRepository.getLottoDispenser();
         WinningNumber winningNumber = winningNumberRepository.getWinningNumber();
         BonusNumber bonusNumber = bonusNumberRepository.getBonusNumber();
-        HashMap<WinningCase, Integer> winningCalculateResult = lottoDispenser.winningCalculate(winningNumber, bonusNumber);
+        Map<WinningCase, Integer> winningCalculateResult = lottoDispenser.winningCalculate(winningNumber, bonusNumber);
         long earnMoney = lottoDispenser.calculateEarnMoney(winningCalculateResult);
         double earnMoneyRatio = lottoDispenser.calculateEarnMoneyRatio(earnMoney);
         return WinningCalculateFormatter.winningResultFormatting(winningCalculateResult,earnMoneyRatio);

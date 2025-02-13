@@ -27,8 +27,6 @@ public class LottoTest {
         );
     }
 
-
-
     @ParameterizedTest
     @MethodSource("invalidLottoNumbers")
     @DisplayName("로또_번호는_6개여야합니다")

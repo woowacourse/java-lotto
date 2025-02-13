@@ -9,8 +9,7 @@ import java.util.Set;
 import utility.StringUtility;
 
 public class WinningNumber {
-    private static final String INVALID_LOTTO_SIZE = "로또 번호는 6개여야 합니다.";
-    private static final String DUPLICATE_LOTTO_NUMBERS = "로또 번호는 중복될 수 없습니다!";
+    private static final String DUPLICATE_LOTTO_NUMBERS = "당첨번호는 중복될 수 없습니다!";
     private static final String INVALID_WINNING_NUMBER = "유효하지 않은 당첨 번호입니다.";
     private static final int LOTTO_LENGTH = 6;
 
@@ -21,7 +20,7 @@ public class WinningNumber {
         validateWinningNumber(inputWinningNumber);
         String[] winningNumbers = inputWinningNumber.split(",");
         List<Integer> parsedWinningNumbers = Arrays.stream(winningNumbers)
-                .map(((winningNumber) -> Integer.parseInt(winningNumber)))
+                .map(((winningNumber) -> Integer.parseInt(winningNumber.trim())))
                 .toList();
         lottoNumbers = parsedWinningNumbers.stream().map(LottoNumber::new).toList();
     }
@@ -35,8 +34,9 @@ public class WinningNumber {
         validateIsEmpty(inputWinningNumber);
         String[] winningNumbers = inputWinningNumber.split(",");
         validateSizeCheck(winningNumbers);
-        for(String winningNumber : winningNumbers){
-            validateIsNumber(winningNumber);
+        for (int i = 0; i < winningNumbers.length; i++) {
+            winningNumbers[i] = winningNumbers[i].trim();
+            validateIsNumber(winningNumbers[i]);
         }
         List<Integer> parsedWinningNumbers = Arrays.stream(winningNumbers)
                 .map(((winningNumber) -> Integer.parseInt(winningNumber)))
@@ -64,7 +64,7 @@ public class WinningNumber {
     }
 
     private void validateIsNumber(String winningNumber) {
-        if(StringUtility.isNumber(winningNumber)){
+        if(!StringUtility.isNumber(winningNumber)){
             throw new LottoException(INVALID_WINNING_NUMBER);
         }
     }

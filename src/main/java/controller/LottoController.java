@@ -14,7 +14,19 @@ public class LottoController {
         lottoService.inputBuyLottoMoney(inputBuyLottoMoney);
     }
 
+    public String formattingBuyLottoResult() {
+        return lottoService.formattingBuyLottoResult();
+    }
+
+    public String formattingWinningResult() {
+        return lottoService.winningCalculate();
+    }
+
     public void inputWinningNumber(String inputWinningNumber) {
         lottoService.inputWinningNumber(inputWinningNumber);
+    }
+
+    public void inputBonusNumber(String inputBonusNumber){
+        lottoService.inputBonusNumber(inputBonusNumber);
     }
 }
