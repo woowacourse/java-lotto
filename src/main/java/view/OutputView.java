@@ -32,6 +32,10 @@ public class OutputView {
         System.out.printf(ROI_RESULT, response.ROI(), response.benefitType());
     }
 
+    public void printErrorMessage(Exception e) {
+        System.out.println(e.getMessage());
+    }
+
     private void printLottoResultDetail(LottoResultDetailResponse response) {
         LottoRankDetailResponse rankDetail = response.rankDetailResponse();
         System.out.printf(COLLECT_COUNT, rankDetail.matchNumber());
