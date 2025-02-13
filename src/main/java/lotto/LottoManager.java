@@ -2,10 +2,9 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class LottoManager {
-    private static final int LOTTO_UNIT_PRICE = 1000;
+    public static final int LOTTO_UNIT_PRICE = 1000;
     private static final int MAX_PURCHASE_AMOUNT = 100000;
 
     private LottoManager() {}
@@ -21,7 +20,7 @@ public class LottoManager {
         return lottos;
     }
 
-    public static Map<Prize, Integer> calculatePrize(final List<Lotto> lottos, final WinningNumbers winningNumbers,
+    public static WinningStatistics calculateStatistics(final List<Lotto> lottos, final WinningNumbers winningNumbers,
                                               final int bonusNumber) {
         return LottoMachine.calculateStatistics(lottos, winningNumbers, bonusNumber);
     }

@@ -20,6 +20,10 @@ public enum Prize {
         return matchCount;
     }
 
+    public int getWinningAmount() {
+        return winningAmount;
+    }
+
     public static Prize getPrize(final int matchCount, final boolean hasBonusNumber) {
         if (matchCount == SECOND.matchCount && hasBonusNumber) {
             return SECOND;
