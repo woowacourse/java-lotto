@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RandomGenerator {
+
     private void addNumberToList(List<Integer> list, int number) {
         if (!list.contains(number)) {
             list.add(number);
