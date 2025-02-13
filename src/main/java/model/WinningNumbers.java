@@ -37,4 +37,18 @@ public class WinningNumbers {
             throw new IllegalArgumentException(ErrorType.WINNING_NUMBERS_IS_DUPLICATION.getMessage());
         }
     }
+
+    public int calculateLottoMatchCount(final List<LottoNumber> lottoNumbers) {
+        int count = 0;
+        for (final LottoNumber lottoNumber : lottoNumbers) {
+            if (winningNumbers.contains(lottoNumber)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public boolean matchBonusNumber(final List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.contains(bonusBall);
+    }
 }

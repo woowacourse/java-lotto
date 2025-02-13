@@ -36,4 +36,12 @@ public class Lotto {
             throw new IllegalArgumentException(ErrorType.LOTTO_NUMBER_DUPLICATE.getMessage());
         }
     }
+
+    public int calculateWinningNumbersMatchCount(final WinningNumbers winningNumbers) {
+        return winningNumbers.calculateLottoMatchCount(lottoNumbers);
+    }
+
+    public boolean isContainsBonusNumber(final WinningNumbers winningNumbers) {
+        return winningNumbers.matchBonusNumber(lottoNumbers);
+    }
 }

@@ -25,6 +25,7 @@ public class LottoMachine {
                 randoms.add(randomNumber);
             }
         }
+        return randoms;
     }
 
     private int generateRandomNumber() {
