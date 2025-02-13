@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Arrays;
+
 public enum LottoMatch {
   DEFUALT_MATCH(0,false,0),
   THREE_MATCH(3, false, 5000),
@@ -19,12 +21,8 @@ public enum LottoMatch {
   }
 
   public static LottoMatch calculateLotto(int winningCounter, boolean bonusChecker ){
-    for(LottoMatch lottoMatch : values()) {
-      if(lottoMatch.winningCounter == winningCounter && lottoMatch.bonusChecker == bonusChecker){
-        return lottoMatch;
-      }
-    }
-    return DEFUALT_MATCH;
+    return Arrays.stream(values()).filter(lottoMatch -> lottoMatch.winningCounter == winningCounter
+        && lottoMatch.bonusChecker == bonusChecker).findFirst().orElse(DEFUALT_MATCH);
   }
 
   @Override
