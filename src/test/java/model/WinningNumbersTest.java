@@ -2,6 +2,7 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import constans.ErrorType;
 import java.util.ArrayList;
@@ -29,8 +30,11 @@ class WinningNumbersTest {
             WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
 
             // then
-            assertThat(winningNumbers.getWinningNumbers()).isEqualTo(numbers);
-            assertThat(winningNumbers.getBonusBall()).isEqualTo(bonusNumber);
+
+            assertSoftly(softly -> {
+                softly.assertThat(winningNumbers.getWinningNumbers()).isEqualTo(numbers);
+                softly.assertThat(winningNumbers.getBonusBall()).isEqualTo(bonusNumber);
+            });
         }
 
         @DisplayName("로또 매치 수를 올바르게 계산한다.")

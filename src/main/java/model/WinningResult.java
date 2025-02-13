@@ -13,8 +13,7 @@ public class WinningResult {
         validateRankSize(lottoRanks);
         this.lottoRanks = Map.copyOf(lottoRanks);
     }
-
-
+    
     private void validateRankSize(final Map<LottoRank, Integer> lottoRanks) {
         lottoRanks.forEach((lottoRank, count) -> {
             if (count < 0) {
