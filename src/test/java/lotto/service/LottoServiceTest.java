@@ -1,16 +1,15 @@
 package lotto.service;
 
-import lotto.costant.WinningTier;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+import java.util.List;
+import lotto.constant.WinningTier;
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoServiceTest {
 

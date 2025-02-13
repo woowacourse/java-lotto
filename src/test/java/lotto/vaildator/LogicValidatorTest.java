@@ -1,16 +1,16 @@
 package lotto.vaildator;
 
-import lotto.costant.ExceptionMessage;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+
+import java.util.List;
+import lotto.constant.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-
 public class LogicValidatorTest {
+
     @DisplayName("리스트 내에 중복되는 번호가 있으면 예외 발생")
     @Test
     void 리스트_내에_중복되는_번호가_있으면_예외_발생() {

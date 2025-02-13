@@ -2,7 +2,7 @@ package lotto.service;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.costant.Prompt;
+import lotto.constant.Prompt;
 import lotto.domain.Lotto;
 import lotto.vaildator.InputValidator;
 import lotto.vaildator.LogicValidator;

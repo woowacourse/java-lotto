@@ -1,12 +1,11 @@
 package lotto.service;
 
-import lotto.costant.WinningTier;
+import java.util.ArrayList;
+import java.util.List;
+import lotto.constant.WinningTier;
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 import lotto.utility.RandomGenerator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LottoService {
 

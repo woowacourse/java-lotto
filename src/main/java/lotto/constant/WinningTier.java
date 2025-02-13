@@ -1,4 +1,4 @@
-package lotto.costant;
+package lotto.constant;
 
 import java.util.List;
 import lotto.domain.WinningCondition;

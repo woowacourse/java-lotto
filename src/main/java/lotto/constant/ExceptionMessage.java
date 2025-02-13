@@ -1,4 +1,4 @@
-package lotto.costant;
+package lotto.constant;
 
 public enum ExceptionMessage {
     DUPLICATED_NUMBERS("중복되는 번호가 있습니다."),

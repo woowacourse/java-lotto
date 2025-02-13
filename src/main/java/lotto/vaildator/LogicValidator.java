@@ -1,12 +1,12 @@
 package lotto.vaildator;
 
-import lotto.costant.ExceptionMessage;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.constant.ExceptionMessage;
 
 public class LogicValidator {
+
     public static void validateDuplication(List<Integer> numbers) {
         Set<Integer> notDuplicatedNumbers = new HashSet<>(numbers);
         if (notDuplicatedNumbers.size() != numbers.size()) {
