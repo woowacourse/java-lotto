@@ -40,5 +40,9 @@ public class LottoController {
         HashMap<LottoMatch,Integer> lottoResult = buyer.countLottos(winningLotto);
 
         outputView.displayResult(lottoResult);
+
+        double profit = money.calculateProfit(lottoResult);
+
+        outputView.displayProfit(profit);
     }
 }
