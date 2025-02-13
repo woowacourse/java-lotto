@@ -1,7 +1,5 @@
 package domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import domain.numbergenerator.RandomNumberGenerator;
 import java.util.List;
 import org.assertj.core.api.Assertions;
