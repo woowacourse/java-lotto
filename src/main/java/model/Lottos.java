@@ -19,13 +19,9 @@ public class Lottos {
     }
 
     public int countTiers(PrizeTier prizeTier) {
-        int count = 0;
-        for (Lotto lotto : lottos) {
-            if (lotto.isTierMatched(prizeTier)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) lottos.stream()
+                .filter(lotto -> lotto.isTierMatched(prizeTier))
+                .count();
     }
 
     public long calculateTotalPrize() {
