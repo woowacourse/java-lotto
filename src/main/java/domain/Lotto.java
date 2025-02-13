@@ -1,12 +1,13 @@
 package domain;
 
+import static util.constant.Values.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class Lotto {
-
   private List<Integer> numbers = new ArrayList<>();
 
   public Lotto() {
@@ -16,9 +17,9 @@ public class Lotto {
   private void createNumbers() {
     Random random = new Random();
     do {
-      int randomNumber = random.nextInt(1, 51);
+      int randomNumber = random.nextInt(LOTTO_MIN_NUM, LOTTO_MAX_NUM + 1);
       addNumber(randomNumber);
-    } while (numbers.size() < 6);
+    } while (numbers.size() < LOTTO_SIZE);
     Collections.sort(numbers);
   }
 

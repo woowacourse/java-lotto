@@ -1,5 +1,8 @@
 package domain;
 
+import static util.constant.Message.PRICE_NEGATIVE_ERROR;
+import static util.constant.Values.LOTTO_UNIT;
+
 import java.util.HashMap;
 
 public class Money {
@@ -11,12 +14,12 @@ public class Money {
     }
 
     public int calculateTotalLotto() {
-        return money / 1000;
+        return money / LOTTO_UNIT;
     }
 
     private void validateRange(int money) {
         if(money < 0) {
-            throw new IllegalArgumentException("금액은 음수가 불가능 합니다.");
+            throw new IllegalArgumentException(PRICE_NEGATIVE_ERROR);
         }
     }
 

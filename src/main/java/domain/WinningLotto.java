@@ -1,6 +1,7 @@
 package domain;
 
-import util.Validator;
+import static util.constant.Message.*;
+import static util.constant.Values.*;
 
 import java.util.*;
 
@@ -20,8 +21,8 @@ public class WinningLotto {
     }
 
     private void validateSize(List<Integer> winningNumbers) {
-        if(winningNumbers.size() != 6){
-            throw new IllegalArgumentException("당첨번호는 6자리만 가능합니다.");
+        if(winningNumbers.size() != LOTTO_SIZE){
+            throw new IllegalArgumentException(WINNING_NUMBER_SIZE_ERROR);
         }
     }
 
@@ -35,18 +36,18 @@ public class WinningLotto {
 
     private void validateDuplicate(List<Integer> winningNumbers, int bonusNumber) {
         Set<Integer> set = new HashSet<>(winningNumbers);
-        if(set.size() != 6) {
-            throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
+        if(set.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(WINNING_NUMBER_DUPLICATE_ERROR);
         }
 
         if(winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 숫자는 당첨 번호와 중복될 수 없습니다.");
+            throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATE_ERROR);
         }
     }
 
     private void checkNumberRange(int number) {
-        if(number < 1 || number > 50){
-            throw new IllegalArgumentException("당첨 번호는 1~50 사이의 값만 가능합니다.");
+        if(number < LOTTO_MIN_NUM || number > LOTTO_MAX_NUM){
+            throw new IllegalArgumentException(WINNING_NUMBER_RANGE_ERROR);
         }
     }
 
