@@ -14,15 +14,11 @@ public class LottoTicket {
     public LottoTicket(List<Integer> numbers) {
         this.numbers = numbers;
     }
- 
+
     public int countMatchedNumbers(List<Integer> winningNumbers) {
-        int count = 0;
-        for (int number : numbers) {
-            if (winningNumbers.contains(number)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
     }
 
     public boolean hasBonusNumber(int bonusNumber) {
