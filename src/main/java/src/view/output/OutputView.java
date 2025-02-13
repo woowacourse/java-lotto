@@ -8,5 +8,8 @@ public interface OutputView {
 
     void printPurchasedLottos(List<LottoResponse> responses);
 
-    void printInputWinningLotto();
+    void printInputWinningLottoNumbers();
+
+    void printInputBonusNumber();
+
 }
