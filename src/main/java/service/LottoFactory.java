@@ -15,32 +15,74 @@ import model.Prize;
 
 public class LottoFactory {
 
-    private Integer ticketNumber;
-    private List<Lotto> issuedTickets;
+    private static final Integer LOTTO_PURCHASE_UNIT = 1_000;
+    private static final Integer LOTTO_SIZE = 6;
+    private static final Integer LOTTO_MAX_RANGE = 45;
 
-    Random random = new Random();
+    private final Integer ticketNumber;
+    private final List<Lotto> issuedTickets;
+
+    private final Random random;
 
     public static LottoFactory of(final Integer purchase) {
-        return new LottoFactory(purchase / 1000);
+        return new LottoFactory(purchase / LOTTO_PURCHASE_UNIT);
     }
 
     private LottoFactory(final Integer ticketNumber) {
         this.ticketNumber = ticketNumber;
-        List<Lotto> issuedTickets = IntStream.range(0, ticketNumber).mapToObj(i -> getIssueTicket())
+        this.issuedTickets = IntStream.range(0, ticketNumber)
+                .mapToObj(i -> getIssueTicket())
                 .collect(Collectors.toList());
-        this.issuedTickets = issuedTickets;
+        this.random = new Random();
     }
 
     private Lotto getIssueTicket() {
         HashSet<Integer> issuedTicket = new HashSet<>();
-        while (issuedTicket.size() < 6) {
+        while (issuedTicket.size() < LOTTO_SIZE) {
             issuedTicket.add(getRandomNumber());
         }
         return new Lotto(new ArrayList<>(issuedTicket));
     }
 
+    public EnumMap<Prize, Integer> getStatistic(Lotto lotto, Bonus bonus) {
+        EnumMap<Prize, Integer> prizeMap = initializeMap();
+        for (Lotto issuedTicket : issuedTickets) {
+            int matchCount = checkLottoNumber(lotto, issuedTicket);
+            boolean matchesBonus = checkBonus(bonus.getNumber(), issuedTicket.getNumbers());
+            Prize foundPrize = Prize.find(matchCount, matchesBonus);
+            prizeMap.put(foundPrize, prizeMap.get(foundPrize) + 1);
+        }
+        prizeMap.remove(Prize.match_none);
+        return prizeMap;
+    }
+
+    private int checkLottoNumber(Lotto lotto, Lotto issuedTicket) {
+        return (int) issuedTicket.getNumbers().stream()
+                .filter(issuedNumber -> lotto.getNumbers().contains(issuedNumber))
+                .count();
+    }
+
+    private boolean checkBonus(Integer bonusNumber, List<Integer> issuedTicketNumbers) {
+        return issuedTicketNumbers.contains(bonusNumber);
+    }
+
+    public double getBenefit(EnumMap<Prize, Integer> enumMap) {
+        Integer principalMoney = ticketNumber * LOTTO_PURCHASE_UNIT;
+        Integer benefit = calculateBenefit(enumMap);
+
+        return (double) benefit / principalMoney;
+    }
+
+    private static Integer calculateBenefit(EnumMap<Prize, Integer> enumMap) {
+        Integer benefit = 0;
+        for (Prize prize : enumMap.keySet()) {
+            benefit += enumMap.get(prize) * prize.getPrizeAmount();
+        }
+        return benefit;
+    }
+
     private Integer getRandomNumber() {
-        return random.nextInt(45) + 1;
+        return random.nextInt(LOTTO_MAX_RANGE) + 1;
     }
 
     public Integer getTicketNumber() {
@@ -49,36 +91,5 @@ public class LottoFactory {
 
     public List<Lotto> getIssuedTickets() {
         return issuedTickets;
-    }
-
-    public EnumMap<Prize, Integer> getStatistic(Lotto lotto, Bonus bonus) {
-        EnumMap<Prize, Integer> prizeMap = initializeMap();
-        for (int i = 0; i < issuedTickets.size(); i++) {
-            int matchCount = 0;
-            boolean matchesBonusNumber = false;
-            Lotto issuedTicket = issuedTickets.get(i);
-            if (issuedTicket.getNumbers().contains(bonus.getNumber())) {
-                matchesBonusNumber = true;
-            }
-            for (int j = 0; j < issuedTicket.getNumbers().size(); j++) {
-                if (lotto.getNumbers().contains(issuedTicket.getNumbers().get(j))) {
-                    matchCount++;
-                }
-            }
-            Prize foundPrize = Prize.find(matchCount, matchesBonusNumber);
-            prizeMap.put(foundPrize, prizeMap.get(foundPrize) + 1);
-        }
-        prizeMap.remove(Prize.match_none);
-        return prizeMap;
-    }
-
-    public double getBenefit(EnumMap<Prize, Integer> enumMap) {
-        Integer principalMoney = ticketNumber * 1000;
-        Integer benefit = 0;
-        for (Prize prize : enumMap.keySet()) {
-            benefit += enumMap.get(prize) * prize.getPrizeAmount();
-        }
-
-        return (double) benefit / principalMoney;
     }
 }
