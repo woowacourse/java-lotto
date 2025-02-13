@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
 
@@ -51,7 +53,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또 번호 중복 검증")
-    void 로또_번호_중복_검증(){
+    void 로또_번호_중복_검증() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
         assertThatThrownBy(() -> new Lotto(numbers)).isInstanceOf(IllegalArgumentException.class);
     }

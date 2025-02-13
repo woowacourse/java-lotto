@@ -1,4 +1,3 @@
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -20,7 +19,8 @@ public record LottoResult(
     public long getTotalPrize() {
         long totalPrize = 0;
         for (LottoRanking ranking : result.keySet()) {
-            totalPrize+=(long)ranking.getPrize()*result.get(ranking);;
+            totalPrize += (long) ranking.getPrize() * result.get(ranking);
+            ;
         }
         return totalPrize;
     }

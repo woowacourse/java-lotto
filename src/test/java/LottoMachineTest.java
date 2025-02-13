@@ -14,7 +14,7 @@ class LottoMachineTest {
 
     @Test
     @DisplayName("로또머신은 로또를 티켓 개수만큼 생성할 수 있다")
-    void 로또머신은_로또를_티켓_개수만큼_생성할_수_있다(){
+    void 로또머신은_로또를_티켓_개수만큼_생성할_수_있다() {
         LottoMachine lottoMachine = new LottoMachine(new Price("10000"));
         assertThat(lottoMachine.generateLottos().getLottos().size()).isEqualTo(lottoMachine.getTicket());
     }

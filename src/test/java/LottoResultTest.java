@@ -22,7 +22,7 @@ class LottoResultTest {
 
     @Test
     @DisplayName("결과에 로또 순위 개수를 추가할 수 있다")
-    void 결과에_로또_순위_개수를_추가할_수_있다(){
+    void 결과에_로또_순위_개수를_추가할_수_있다() {
         LottoResult lottoResult = LottoResult.initialize();
         lottoResult.add(LottoRanking.FIRST);
         assertThat(lottoResult.result().get(LottoRanking.FIRST)).isEqualTo(1);

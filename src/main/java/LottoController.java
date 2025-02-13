@@ -30,7 +30,7 @@ public class LottoController {
 
         printLottoResults(lottoResult);
 
-        printRateOfReturn(lottoResult,price);
+        printRateOfReturn(lottoResult, price);
 
     }
 
