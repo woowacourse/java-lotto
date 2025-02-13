@@ -2,6 +2,8 @@ package view;
 
 import dto.*;
 
+import static global.constant.LottoConstant.NUMBER_DELIMITER;
+
 public class OutputView {
 
     private static final String PURCHASE_DONE = "개를 구매했습니다.";
@@ -10,7 +12,6 @@ public class OutputView {
     private static final String COLLECT_COUNT = "%d개 일치";
     private static final String COLLECT_BONUS_BALL = ", 보너스 볼 일치";
     private static final String LOTTO_RESULT_DETAIL = " (%d원)- %d개 \n";
-    private static final String DELIMITER = ", ";
     private static final String NUMBER_OPEN_BRACE = "[";
     private static final String NUMBER_CLOSE_BRACE = "]";
 
@@ -42,7 +43,7 @@ public class OutputView {
     }
 
     private void printLottoNumbers(LottoNumbersResponse response) {
-        String numbers = String.join(DELIMITER, response.numbers());
+        String numbers = String.join(NUMBER_DELIMITER, response.numbers());
         System.out.println(NUMBER_OPEN_BRACE + numbers + NUMBER_CLOSE_BRACE);
     }
 }
