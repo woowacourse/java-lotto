@@ -23,7 +23,7 @@ public class Amount {
     }
 
     private void validateIsPositive(int price) {
-        if (price < 0) {
+        if (price <= 0) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_POSITIVE.getMessage());
         }
     }
