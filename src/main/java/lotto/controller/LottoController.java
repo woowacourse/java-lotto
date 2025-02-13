@@ -9,6 +9,8 @@ import lotto.domain.Money;
 import lotto.domain.Profit;
 import lotto.domain.Rank;
 import lotto.domain.WinnerLotto;
+import lotto.dto.LottoGroupDto;
+import lotto.dto.ProfitDto;
 import lotto.utils.RecoveryUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -25,7 +27,7 @@ public class LottoController {
         Profit profit = calculateProfit(winnerLotto);
         String profitRate = profit.calculateAverageProfitRate(money);
 
-        OutputView.printResult(profit, profitRate);
+        OutputView.printResult(ProfitDto.from(profit), profitRate);
     }
 
     private Money getMoney() {
@@ -34,7 +36,7 @@ public class LottoController {
 
     private void generateLotto(Money money) {
         lottoGroup.generate(money);
-        OutputView.printLottoGroup(lottoGroup);
+        OutputView.printLottoGroup(LottoGroupDto.from(lottoGroup));
     }
 
     private Profit calculateProfit(WinnerLotto winnerLotto) {

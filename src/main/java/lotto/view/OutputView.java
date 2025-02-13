@@ -26,7 +26,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printResult(Profit profit, String profitRate) {
+    public static void printResult(ProfitDto profitDto, String profitRate) {
         printNoticeResultMessage();
         printMatchCounts(profit);
         printProfitRate(profitRate);
@@ -37,8 +37,8 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    private static void printMatchCounts(Profit profit) {
-        profit.getRankMap()
+    private static void printMatchCounts(ProfitDto profitDto) {
+        profitDto.rankCounts()
                 .forEach((rank, matchCount) -> {
                     if (rank.equals(Rank.NO_REWARD)) {
                         return;
