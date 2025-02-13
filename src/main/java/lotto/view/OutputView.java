@@ -1,7 +1,10 @@
 package lotto.view;
 
+import lotto.domain.LottoRank;
+
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
 
@@ -14,4 +17,14 @@ public class OutputView {
         System.out.println(lottos);
     }
 
+    public static void printWinningStatics(Map<LottoRank, Integer> winningInfo) {
+        System.out.println("\n당첨 통계");
+        System.out.println("---------");
+        Map<LottoRank, String> rankInfo = LottoRank.getRankInfo();
+
+        for (LottoRank lottoRank : rankInfo.keySet()) {
+            System.out.println(rankInfo.get(lottoRank) + "- " + winningInfo.getOrDefault(lottoRank, 0) + "개");
+        }
+
+    }
 }

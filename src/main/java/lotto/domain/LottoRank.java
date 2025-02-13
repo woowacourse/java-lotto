@@ -59,7 +59,7 @@ public enum LottoRank {
 
     private String generateRankMessage() {
         if (this == LottoRank.SECOND_PLACE) {
-            return String.format("%d개 일치, 보너스 볼 일치 (%d원)", getMatchCount(), getWinningAmount());
+            return String.format("%d개 일치, 보너스 볼 일치(%d원)", getMatchCount(), getWinningAmount());
         }
 
         return String.format("%d개 일치 (%d원)", getMatchCount(), getWinningAmount());
