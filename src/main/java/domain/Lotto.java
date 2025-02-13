@@ -1,5 +1,6 @@
 package domain;
 
+import dto.LottoMatchResult;
 import util.NumberPicker;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class Lotto {
         }
     }
     
-    public int getMatchCount(List<Integer> matchNumbers) {
+    public LottoMatchResult getMatchResult(List<Integer> matchNumbers, int bonusNumber) {
         validateMatchNumbersNotDuplicated(matchNumbers);
         int matchCount = 0;
         
@@ -62,17 +63,14 @@ public class Lotto {
                 matchCount++;
             }
         }
-        return matchCount;
+        
+        return new LottoMatchResult(matchCount, numbers.contains(bonusNumber));
     }
     
     private void validateMatchNumbersNotDuplicated(List<Integer> matchNumbers) {
         if (matchNumbers.size() != new HashSet<>(matchNumbers).size()) {
             throw new IllegalArgumentException("로또 당첨 번호는 중복되면 안됩니다.");
         }
-    }
-    
-    public boolean isBonusMatch(int bonusNumber) {
-        return numbers.contains(bonusNumber);
     }
     
     private List<Integer> getSorted() {

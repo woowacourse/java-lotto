@@ -1,5 +1,7 @@
 package domain;
 
+import dto.LottoMatchResult;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Optional;
@@ -30,12 +32,12 @@ public enum LottoPrize {
         this.prizeMoney = prizeMoney;
     }
     
-    public static Optional<LottoPrize> match(int matchCount, boolean isBonusMatch) {
+    public static Optional<LottoPrize> match(LottoMatchResult matchResult) {
         return Arrays.stream(LottoPrize.values())
-                .filter(prize -> prize.minMatchCount == matchCount)
+                .filter(prize -> prize.minMatchCount == matchResult.matchCount())
                 .filter(prize -> {
                     if (prize.isBonusMatch != null) {
-                        return prize.isBonusMatch == isBonusMatch;
+                        return prize.isBonusMatch == matchResult.isBonusMatch();
                     }
                     return true;
                 }).sorted(Comparator.comparingInt(prize -> (int) prize.prizeMoney))

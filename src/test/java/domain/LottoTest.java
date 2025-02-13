@@ -1,5 +1,6 @@
 package domain;
 
+import dto.LottoMatchResult;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -75,16 +76,17 @@ class LottoTest {
     }
     
     @ParameterizedTest
-    @MethodSource("provideMatchNumbers")
-    void 당첨된_로또번호_개수를_계산한다(List<Integer> matchNumbers, int expected) {
+    @MethodSource("provideMatchNumbersAndBonusNumber")
+    void 당첨된_로또번호_개수를_계산한다(List<Integer> matchNumbers, int bonusNumber, int expectedMatchCount, boolean expectedBonusMatch) {
         //given
         Lotto sut = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         
         //when
-        int result = sut.getMatchCount(matchNumbers);
+        LottoMatchResult result = sut.getMatchResult(matchNumbers, bonusNumber);
         
         //than
-        assertThat(result).isEqualTo(expected);
+        assertThat(result.matchCount()).isEqualTo(expectedMatchCount);
+        assertThat(result.isBonusMatch()).isEqualTo(expectedBonusMatch);
     }
     
     @Test
@@ -92,41 +94,20 @@ class LottoTest {
         // given
         Lotto sut = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         List<Integer> duplicatedMatchNumbers = List.of(1, 2, 3, 4, 5, 5);
+        int bonusNumber = 6;
         
         // expected
-        assertThatThrownBy(() -> sut.getMatchCount(duplicatedMatchNumbers))
+        assertThatThrownBy(() -> sut.getMatchResult(duplicatedMatchNumbers, bonusNumber))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 당첨 번호는 중복되면 안됩니다.");
     }
     
-    @ParameterizedTest
-    @MethodSource("provideMatchBonusNumbers")
-    void 보너스번호_당첨_여부를_판단한다(int bonusNumber, boolean expected) {
-        //given
-        Lotto sut = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        
-        //when
-        boolean result = sut.isBonusMatch(bonusNumber);
-        
-        //than
-        assertThat(result).isEqualTo(expected);
-    }
-    
-    public static Stream<Arguments> provideMatchNumbers() {
+    public static Stream<Arguments> provideMatchNumbersAndBonusNumber() {
         return Stream.of(
-                Arguments.of(List.of(1, 2, 3, 4, 5, 6), 6),
-                Arguments.of(List.of(1, 2, 3, 4, 5, 7), 5),
-                Arguments.of(List.of(1, 2, 3, 4, 8, 9), 4),
-                Arguments.of(List.of(21, 23, 13, 11, 19, 20), 0)
-        );
-    }
-    
-    public static Stream<Arguments> provideMatchBonusNumbers() {
-        return Stream.of(
-                Arguments.of(6, true),
-                Arguments.of(5, true),
-                Arguments.of(7, false),
-                Arguments.of(8, false)
+                Arguments.of(List.of(1, 2, 3, 4, 5, 6), 7, 6, false),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 7), 8, 5, false),
+                Arguments.of(List.of(1, 2, 3, 4, 8, 9), 10, 4, false),
+                Arguments.of(List.of(21, 23, 13, 11, 19, 20), 25, 0, false)
         );
     }
 }
