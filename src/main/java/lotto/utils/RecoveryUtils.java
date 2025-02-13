@@ -4,7 +4,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import lotto.view.OutputView;
 
-public class RecoveryUtils {
+public final class RecoveryUtils {
 
     private RecoveryUtils() {
     }

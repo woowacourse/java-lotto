@@ -6,10 +6,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class RandomNumberUtils {
-    // 1~45 숫자 랜덤
+public final class RandomNumberUtils {
+
+    private static final Random random = new Random();
+
+    private RandomNumberUtils() {
+    }
+
     private static int generateRandomNumber(int maxNumber) {
-        Random random = new Random();
         return random.nextInt(maxNumber) + 1;
     }
 
