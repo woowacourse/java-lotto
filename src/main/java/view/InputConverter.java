@@ -1,6 +1,7 @@
 package view;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,10 +19,14 @@ public class InputConverter {
             throw new IllegalArgumentException("당첨 번호 입력 양식이 올바르지 않습니다.");
         }
 
-        return Arrays.stream(input.split(WINNING_NUMBER_DELIMITER))
+        List<Integer> winningNumbers = Arrays.stream(input.split(WINNING_NUMBER_DELIMITER))
                 .map(Integer::parseInt)
                 .peek(InputConverter::validateNumberRange)
                 .toList();
+
+        validateUniqueNumber(winningNumbers);
+
+        return winningNumbers;
     }
 
     public static int convertBonusNumber(String input) {
@@ -60,5 +65,13 @@ public class InputConverter {
         if (value < 1 || value > 45) {
             throw new IllegalArgumentException("당첨 번호는 1 ~ 45만 가능합니다.");
         }
+    }
+
+    private static void validateUniqueNumber(List<Integer> values) {
+        values.forEach(value -> {
+            if (Collections.frequency(values, value) >= 2) {
+                throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
+            }
+        });
     }
 }
