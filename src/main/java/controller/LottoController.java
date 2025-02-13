@@ -13,7 +13,8 @@ public class LottoController {
         int purchaseAmount = InputView.inputPurchaseAmount();
         List<Lotto> lottos = LottoFactory.makeLotto(purchaseAmount);
         OutputView.printLottos(lottos);
-        LottoStats lottoStats = new LottoStats(InputView.inputWinningNumbers(), InputView.inputBonusBall());
+        List<Integer> winningNumbers = InputView.inputWinningNumbers();
+        LottoStats lottoStats = new LottoStats(winningNumbers, InputView.inputBonusBall(winningNumbers));
         lottoStats.calculateResult(lottos);
         OutputView.printLottoStats(lottoStats);
         OutputView.printEarningRate(lottoStats, purchaseAmount);
