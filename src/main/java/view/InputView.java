@@ -12,17 +12,17 @@ public class InputView {
 
     public String getPurchaseInput() {
         System.out.println(PURCHASE_INPUT_MESSAGE);
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     public String getWinningNumbers() {
         System.out.println(WINNING_NUMBER_INPUT_MESSAGE);
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     public String getBonusNumber() {
         System.out.println(BONUS_NUMBER_INPUT_MESSAGE);
-        return scanner.next();
+        return scanner.nextLine();
     }
 
 }
