@@ -6,16 +6,13 @@ import model.Lotto;
 import model.LottoPurchase;
 import model.Prize;
 import service.LottoFactory;
-import service.Service;
 import view.InputView;
 import view.OutputView;
 
 public class Controller {
 
-    public final Service service;
 
-    public Controller(Service service) {
-        this.service = service;
+    public Controller() {
     }
 
     public void run() {
@@ -27,5 +24,6 @@ public class Controller {
         Bonus winningBonus = InputView.getWinningBonus(winningLotto);
         EnumMap<Prize, Integer> statistic = lottoFactory.getStatistic(winningLotto, winningBonus);
         OutputView.printStatistics(statistic);
+        OutputView.printBenefit(lottoFactory.getBenefit(statistic));
     }
 }
