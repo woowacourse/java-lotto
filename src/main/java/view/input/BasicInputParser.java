@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BasicInputParser implements InputParser {
+    
     private static final String WINNING_NUMBERS_DELIMITER = ",";
 
     @Override

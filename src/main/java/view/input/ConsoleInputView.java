@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleInputView implements InputView {
+
     private final Scanner scanner;
     private final InputParser inputParser;
     private final InputValidator inputValidator;

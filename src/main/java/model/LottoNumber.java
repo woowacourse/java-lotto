@@ -13,7 +13,7 @@ public class LottoNumber {
 
     private void validateRange(final int number) {
         if (number < 1 || number > 45) {
-            throw new IllegalArgumentException(ErrorType.로또숫자범위오류.getMessage());
+            throw new IllegalArgumentException(ErrorType.LOTTO_NUMBER_RANGE.getMessage());
         }
     }
 
