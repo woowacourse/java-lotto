@@ -1,7 +1,7 @@
-package domain;
+package lotto.domain;
 
 import java.util.Objects;
-import utils.NumberUtils;
+import lotto.utils.NumberUtils;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
@@ -17,6 +17,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
+    public static LottoNumber create(final String number) {
+        return new LottoNumber(number);
+    }
 
     private void validateNumber(int number) {
         if (number < 1 || number > 45) {

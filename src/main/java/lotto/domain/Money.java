@@ -1,6 +1,6 @@
 package domain;
 
-import utils.NumberUtils;
+import lotto.utils.NumberUtils;
 
 public class Money {
     private static final int LOTTO_PRICE = 1000;

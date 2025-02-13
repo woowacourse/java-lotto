@@ -1,12 +1,14 @@
-package domain;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-import utils.RandomNumberUtils;
+import lotto.utils.RandomNumberUtils;
 
 public class LottoGroup {
     private final List<Lotto> lottoGroup = new ArrayList<>();
+
+
 
     public void generate(Money money) {
         // TODO 통합 테스트 불가능
@@ -20,5 +22,7 @@ public class LottoGroup {
                 });
     }
 
-
+    public List<Lotto> getLottoGroup() {
+        return lottoGroup;
+    }
 }

@@ -1,6 +1,6 @@
-package domain;
+package lotto.domain;
 
-import static common.Constants.LOTTO_NUM_SIZE;
+import static lotto.common.Constants.LOTTO_NUM_SIZE;
 
 import java.util.HashSet;
 import java.util.List;

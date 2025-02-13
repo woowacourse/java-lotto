@@ -1,6 +1,6 @@
-package domain;
+package lotto.domain;
 
-import static common.Constants.LOTTO_NUM_SIZE;
+import static lotto.common.Constants.LOTTO_NUM_SIZE;
 
 import java.util.HashSet;
 import java.util.List;
@@ -26,14 +26,15 @@ public class WinnerLotto {
         return lotto.getLottoNumbers().contains(bonusNumber);
     }
 
-    public static void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
+    public static void validateWinnerNumbers(List<LottoNumber> lottoNumbers) {
         if (new HashSet<>(lottoNumbers).size() != LOTTO_NUM_SIZE) {
             throw new IllegalStateException("중복은 불가능합니다.");
         }
     }
 
-    public static void validateBonusNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
-        if (lottoNumbers.contains(bonusNumber)) {
+
+    public static void validateBonusNumbers(List<LottoNumber> winnerNumbers, LottoNumber bonusNumber) {
+        if (winnerNumbers.contains(bonusNumber)) {
             throw new IllegalStateException("보너스 넘버가 당첨 번호에 중복됩니다.");
         }
     }

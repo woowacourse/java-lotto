@@ -1,4 +1,4 @@
-package utils;
+package lotto.utils;
 
 public final class NumberUtils {
 
