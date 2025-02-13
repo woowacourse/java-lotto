@@ -4,13 +4,12 @@ public record Money(
         int amount
 ) {
 
-    // TODO: 생성자 위치 컨벤션 확인
-    public Money {
-        validateNegative(amount);
-    }
-
     public Money(String rawAmount) {
         this(Integer.parseInt(rawAmount));
+    }
+
+    public Money {
+        validateNegative(amount);
     }
 
     public void validateNegative(int amount) {
@@ -23,7 +22,6 @@ public record Money(
         return this.amount >= money.amount;
     }
 
-    //TODO: 불변객체의 장점
     public Money minus(Money lottoPrice) {
         return new Money(this.amount - lottoPrice.amount);
     }

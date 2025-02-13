@@ -43,13 +43,9 @@ public class Lotto {
     }
 
     public int calculateMatchCount(Lotto lotto) {
-        int matchCount = 0;
-        for (Number number : lotto.numbers) {
-            if (numbers.contains(number)) {
-                matchCount++;
-            }
-        }
-        return matchCount;
+        return (int) lotto.numbers.stream()
+                .filter(numbers::contains)
+                .count();
     }
 
     public Set<Number> getNumbers() {

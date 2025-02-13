@@ -12,17 +12,7 @@ public class InputView {
 
     public String inputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
-        //TODO: Scanner, BufferedReader 차이
         return readLine();
-    }
-
-    private String readLine() {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            return bufferedReader.readLine();
-        } catch (IOException e) {
-            throw new IllegalArgumentException("입력중 예외가 발생했습니다.", e);
-        }
     }
 
     public String inputWinningNumbers() {
@@ -33,5 +23,14 @@ public class InputView {
     public String inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER);
         return readLine();
+    }
+
+    private String readLine() {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            return bufferedReader.readLine();
+        } catch (IOException e) {
+            throw new IllegalArgumentException("입력중 예외가 발생했습니다.", e);
+        }
     }
 }

@@ -3,7 +3,7 @@ package domain.numberstrategy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomNumberStrategy implements NumberStrategy {
+public class RandomNumberPickStrategy implements NumberPickStrategy {
 
     @Override
     public List<Integer> pickNumbers(int maxNumber, int size) {

@@ -2,7 +2,7 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.numberstrategy.NumberStrategy;
+import domain.numberstrategy.NumberPickStrategy;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ class LottoMachineTest {
     @Test
     void 로또를_생성할_수_있다() {
         //given
-        NumberStrategy fixNumberStrategy = (int maxNumber, int size) -> List.of(1, 2, 3, 4, 5, 6);
+        NumberPickStrategy fixNumberStrategy = (int maxNumber, int size) -> List.of(1, 2, 3, 4, 5, 6);
         LottoMachine lottoMachine = new LottoMachine(fixNumberStrategy);
 
         //when
