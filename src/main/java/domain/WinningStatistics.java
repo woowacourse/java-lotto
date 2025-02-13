@@ -13,6 +13,8 @@ public enum WinningStatistics {
     FIVE_WITH_BONUS(5, 30_000_000, true),
     SIX(6, 2_000_000_000, false);
 
+    private static final int SIZE_WITH_BONUS = 2;
+
     private final int matchCount;
     private final int prizeMoney;
     private final boolean isBonusMatched;
@@ -23,21 +25,23 @@ public enum WinningStatistics {
         this.isBonusMatched = isBonusMatched;
     }
 
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public static List<WinningCountDto> calculateWinningCountDtos(List<MatchDto> matchDtos) {
         List<WinningStatistics> winningStatisticsList = matchDtos.stream()
-                .map(WinningStatistics::findByMatchDto) // [THREE, THREE, FIVE]
+                .map(WinningStatistics::findByMatchDto)
                 .toList();
 
         List<WinningCountDto> winningCountDtos = new ArrayList<>();
 
         for (WinningStatistics winningStatistics : WinningStatistics.values()) {
-
-            if (winningStatistics == WinningStatistics.NONE) {
-                continue;
-            }
-
-            int count = Collections.frequency(winningStatisticsList, winningStatistics);
-            winningCountDtos.add(new WinningCountDto(winningStatistics, count));
+            addWinningCountDtoIfExists(winningStatistics, winningStatisticsList, winningCountDtos);
         }
 
         return winningCountDtos;
@@ -45,11 +49,20 @@ public enum WinningStatistics {
 
     public static double calculateYield(int purchaseAmount, List<WinningCountDto> winningCountDtos) {
         int totalPrizeMoney = winningCountDtos.stream()
-                .mapToInt(winningCountDto -> winningCountDto.winningStatistics().getPrizeMoney()
-                        * winningCountDto.count())
+                .mapToInt(winningCountDto ->
+                        winningCountDto.winningStatistics().getPrizeMoney() * winningCountDto.count())
                 .sum();
 
         return (double) totalPrizeMoney / purchaseAmount;
+    }
+
+    private static void addWinningCountDtoIfExists(WinningStatistics winningStatistics,
+                                                   List<WinningStatistics> winningStatisticsList,
+                                                   List<WinningCountDto> winningCountDtos) {
+        if (winningStatistics != WinningStatistics.NONE) {
+            int count = Collections.frequency(winningStatisticsList, winningStatistics);
+            winningCountDtos.add(new WinningCountDto(winningStatistics, count));
+        }
     }
 
     private static WinningStatistics findByMatchDto(MatchDto matchDto) {
@@ -57,7 +70,7 @@ public enum WinningStatistics {
                 .filter(winningStatistics -> winningStatistics.isMatchCount(matchDto.winningNumberCount()))
                 .toList();
 
-        if (winningStatisticsFilteredByMatchCount.size() == 2) {
+        if (hasBonusCondition(winningStatisticsFilteredByMatchCount)) {
             return winningStatisticsFilteredByMatchCount.stream()
                     .filter(winningStatistics -> winningStatistics.isBonusMatched(matchDto.hasBonusNumber()))
                     .findFirst()
@@ -67,12 +80,8 @@ public enum WinningStatistics {
         return winningStatisticsFilteredByMatchCount.getFirst();
     }
 
-    public int getPrizeMoney() {
-        return prizeMoney;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
+    private static boolean hasBonusCondition(List<WinningStatistics> winningStatisticsFilteredByMatchCount) {
+        return winningStatisticsFilteredByMatchCount.size() == SIZE_WITH_BONUS;
     }
 
     private boolean isMatchCount(int value) {

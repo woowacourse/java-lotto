@@ -1,6 +1,11 @@
 package domain;
 
 
+import static domain.Lotto.LOTTO_PRICE;
+import static domain.Lotto.MAX_LOTTO_NUMBER;
+import static domain.Lotto.MAX_LOTTO_SIZE;
+import static domain.Lotto.MIN_LOTTO_NUMBER;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -14,26 +19,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    private static List<Integer> generateRandomNumbers() {
-        List<Integer> lottoNumbers = new ArrayList<>();
-        Random random = new Random();
-
-        while (lottoNumbers.size() < 6) {
-            int number = random.nextInt(1, 46);
-
-            if (lottoNumbers.contains(number)) {
-                continue;
-            }
-            lottoNumbers.add(number);
-        }
-
-        lottoNumbers.sort(Comparator.naturalOrder());
-
-        return lottoNumbers;
-    }
-
     public static Lottos of(int money) {
-        int quantity = money / 1000;
+        int quantity = money / LOTTO_PRICE;
 
         List<Lotto> generatedLottos = new ArrayList<>();
 
@@ -43,6 +30,27 @@ public class Lottos {
         }
 
         return new Lottos(generatedLottos);
+    }
+
+    private static List<Integer> generateRandomNumbers() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        Random random = new Random();
+
+        while (lottoNumbers.size() < MAX_LOTTO_SIZE) {
+            int number = random.nextInt(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1);
+
+            addNumberIfUnique(lottoNumbers, number);
+        }
+
+        lottoNumbers.sort(Comparator.naturalOrder());
+
+        return lottoNumbers;
+    }
+
+    private static void addNumberIfUnique(List<Integer> lottoNumbers, int number) {
+        if (!lottoNumbers.contains(number)) {
+            lottoNumbers.add(number);
+        }
     }
 
     public int getQuantity() {

@@ -18,7 +18,7 @@ class InputConverterTest {
         assertThat(winningNumbers).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }
 
-    @ValueSource(strings = {"a", "-1", "1,,2", "1,a", "1,46", "0,45"})
+    @ValueSource(strings = {"a", "-1", "1,,2", "1,a", "1,46", "0,45", "1,1,2,3,4,5"})
     @ParameterizedTest
     void 당첨_번호_입력_값이_올바르지_않다면_예외를_던진다(String input) {
 
@@ -39,6 +39,23 @@ class InputConverterTest {
     void 보너스_번호_입력_값이_올바르지_않다면_예외를_던진다(String input) {
 
         assertThatThrownBy(() -> InputConverter.convertBonusNumber(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 구입_금액을_정수로_반환한다() {
+        String input = "1000";
+
+        int purchaseAmount = InputConverter.convertPurchaseAmount(input);
+        assertThat(purchaseAmount).isEqualTo(1000);
+    }
+
+
+    @ValueSource(strings = {"999", "a", "1001"})
+    @ParameterizedTest
+    void 구입_금액_입력_값이_올바르지_않다면_예외를_던진다(String input) {
+
+        assertThatThrownBy(() -> InputConverter.convertPurchaseAmount(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
