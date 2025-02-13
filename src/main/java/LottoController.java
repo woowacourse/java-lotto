@@ -1,10 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
-import model.Lotto;
 import model.LottoResult;
 import model.UserLotto;
 import model.WinningLotto;
-import view.InputValidator;
 import view.InputView;
 import view.OutputView;
 
@@ -33,7 +29,7 @@ public class LottoController {
     }
 
     private void setBonus(WinningLotto winningLotto) {
-        while(true) {
+        while (true) {
             try {
                 outputView.printBonusGuide();
                 String bonusInput = inputView.getBonusInput();

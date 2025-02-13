@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
 
@@ -24,12 +23,6 @@ public class WinningLotto {
         validateDuplicateWinningNumbers();
     }
 
-    public void setBonus(String rawBonus) {
-        rawBonus = rawBonus.trim();
-        validateBonus(rawBonus);
-        bonus = Integer.parseInt(rawBonus);
-    }
-
     public List<Integer> getWinningNumbers() {
         return Collections.unmodifiableList(winningNumbers);
     }
@@ -38,16 +31,22 @@ public class WinningLotto {
         return bonus;
     }
 
+    public void setBonus(String rawBonus) {
+        rawBonus = rawBonus.trim();
+        validateBonus(rawBonus);
+        bonus = Integer.parseInt(rawBonus);
+    }
+
     private void validateBonus(String rawBonus) {
-        if(!isNumber(rawBonus)) {
+        if (!isNumber(rawBonus)) {
             throw new IllegalArgumentException(BONUS_INPUT_ERROR_MESSAGE);
         }
         int bonus = Integer.parseInt(rawBonus);
-        if(!isValidateNumberRange(bonus)) {
+        if (!isValidateNumberRange(bonus)) {
             throw new IllegalArgumentException(BONUS_INPUT_ERROR_MESSAGE);
         }
 
-        if(isDuplicateWithWinningNumbers(bonus)) {
+        if (isDuplicateWithWinningNumbers(bonus)) {
             throw new IllegalArgumentException(BONUS_INPUT_ERROR_MESSAGE);
         }
     }

@@ -22,7 +22,7 @@ public record LottoDto(
     @Override
     public String toString() {
         List<String> lottoStrings = new ArrayList<>(lotto.size());
-        for(int lottoNumber : lotto) {
+        for (int lottoNumber : lotto) {
             lottoStrings.add(String.valueOf(lottoNumber));
         }
         String lottoString = String.join(", ", lottoStrings);
