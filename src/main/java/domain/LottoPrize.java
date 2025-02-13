@@ -42,4 +42,15 @@ public enum LottoPrize {
                 .findFirst();
     }
     
+    public int getMinMatchCount() {
+        return minMatchCount;
+    }
+    
+    public Boolean getBonusMatch() {
+        return isBonusMatch;
+    }
+    
+    public long getPrizeMoney() {
+        return prizeMoney;
+    }
 }

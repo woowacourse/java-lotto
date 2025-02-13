@@ -39,6 +39,6 @@ public class LottoController {
         LottoStatisticsCalculator lottoStatisticsCalculator = new LottoStatisticsCalculator(lottos);
         EnumMap<LottoPrize, Integer> staticsLottos = lottoStatisticsCalculator.statisticsCalculate(matchNumbers, bonusNumber);
         
-        
+        outputView.printStaticsLotto(staticsLottos);
     }
 }
