@@ -9,8 +9,9 @@ public enum ErrorType {
     WINNING_NUMBERS_IS_DUPLICATION("당첨 번호의 숫자들 중 중복되는 수가 있습니다."),
     PURCHASE_AMOUNT_RANGE_INVALID("구입 금액의 범위가 유효하지 않습니다."),
     // input view
-    PURCHASE_AMOUNT_IS_NOT_NUMBER("구입 금액의 입력값이 올바르지 않습니다."),
-    WINNING_NUMBERS_IS_NOT_NUMBER("당첨 번호의 입력값이 올바르지 않습니다.");
+    PURCHASE_AMOUNT_INVALID_INPUT("구입 금액의 입력값이 올바르지 않습니다."),
+    WINNING_NUMBERS_INVALID_INPUT("당첨 번호의 입력값이 올바르지 않습니다."),
+    BONUS_BALL_INVALID_INPUT("보너스 볼의 입력값이 올바르지 않습니다.");
 
     private final String message;
 
