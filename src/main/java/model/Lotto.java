@@ -30,7 +30,10 @@ public class Lotto {
     }
 
     public LottoNumbersResponse createResponse() {
-        return new LottoNumbersResponse(numbers.stream().map(String::valueOf).toArray(String[]::new));
+        return new LottoNumbersResponse(numbers.stream()
+                .map(String::valueOf)
+                .toArray(String[]::new)
+        );
     }
 
     private void generateLotto() {
