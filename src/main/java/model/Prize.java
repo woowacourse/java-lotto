@@ -12,19 +12,21 @@ public enum Prize {
     match_five_and_bonus("5개 일치, 보너스 볼 일치(30000000원)", 5, 30_000_000, true),
     match_six("6개 일치 (2000000000원)", 6, 2_000_000_000, false);
 
-    private String comment;
-    private Integer matchCount;
-    private Integer prizeAmount;
-    private boolean matchesBonus;
+    private final String comment;
+    private final Integer matchCount;
+    private final Integer prizeAmount;
+    private final boolean matchesBonus;
 
-    Prize(String comment, Integer matchCount, Integer prizeAmount, boolean matchesBonus) {
+    //TODO : matchesBonus
+
+    Prize(final String comment, final Integer matchCount, final Integer prizeAmount, final boolean matchesBonus) {
         this.comment = comment;
         this.matchCount = matchCount;
         this.prizeAmount = prizeAmount;
         this.matchesBonus = matchesBonus;
     }
 
-    public static EnumMap<Prize, Integer> prizeIntegerEnumMap() {
+    public static EnumMap<Prize, Integer> initializeMap() {
         EnumMap<Prize, Integer> enumMap = new EnumMap<>(Prize.class);
         for (Prize prize : Prize.values()) {
             enumMap.put(prize, 0);
@@ -32,30 +34,21 @@ public enum Prize {
         return enumMap;
     }
 
-    public static Prize find(int matchCount, boolean matchesBonusNumber) { // 5
-        if (matchCount == 5 && matchesBonusNumber) {
+    public static Prize find(int matchCount, boolean matchesBonusNumber) {
+        if (matchCount == Prize.match_five_and_bonus.matchCount && matchesBonusNumber) {
             return Prize.match_five_and_bonus;
-        } else {
-            return Arrays.stream(Prize.values())
-                    .filter(o -> o.matchCount == matchCount)
-                    .findFirst()
-                    .orElse(Prize.match_none);
         }
+        return Arrays.stream(Prize.values())
+                .filter(o -> o.matchCount == matchCount)
+                .findFirst()
+                .orElse(Prize.match_none);
     }
 
     public String getComment() {
         return comment;
     }
 
-    public Integer getMatchCount() {
-        return matchCount;
-    }
-
     public Integer getPrizeAmount() {
         return prizeAmount;
-    }
-
-    public boolean isMatchesBonus() {
-        return matchesBonus;
     }
 }

@@ -1,6 +1,6 @@
 package service;
 
-import static model.Prize.prizeIntegerEnumMap;
+import static model.Prize.initializeMap;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -52,7 +52,7 @@ public class LottoFactory {
     }
 
     public EnumMap<Prize, Integer> getStatistic(Lotto lotto, Bonus bonus) {
-        EnumMap<Prize, Integer> prizeMap = prizeIntegerEnumMap();
+        EnumMap<Prize, Integer> prizeMap = initializeMap();
         for (int i = 0; i < issuedTickets.size(); i++) {
             int matchCount = 0;
             boolean matchesBonusNumber = false;
