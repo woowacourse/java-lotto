@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    private InputView() {}
+    private InputView() {
+    }
 
     public static int inputPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -17,10 +18,10 @@ public class InputView {
         return parseWinningNumbers(input());
     }
 
-    private static List<Integer> parseWinningNumbers(String input) {
+    private static List<Integer> parseWinningNumbers(final String input) {
         String[] inputWinningNumbers = input.split(",");
         List<Integer> winningNumbers = new ArrayList<>();
-        for (String inputWinningNumber : inputWinningNumbers) {
+        for (final String inputWinningNumber : inputWinningNumbers) {
             winningNumbers.add(Integer.parseInt(inputWinningNumber.trim()));
         }
         return winningNumbers;

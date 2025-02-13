@@ -31,7 +31,7 @@ public enum Prize {
         if (matchCount == THIRD.matchCount) {
             return THIRD;
         }
-        for (Prize prize : Prize.values()) {
+        for (final Prize prize : Prize.values()) {
             if (prize.getMatchCount() == matchCount) {
                 return prize;
             }

@@ -19,20 +19,21 @@ public class LottoMachine {
     }
 
     public static WinningStatistics calculateStatistics(final List<Lotto> lottos, final WinningNumbers winningNumbers,
-                                                          final int bonusNumber) {
+                                                        final int bonusNumber) {
         Map<Prize, Integer> statistics = new HashMap<>();
-        for (Prize prize : Prize.values()) {
+        for (final Prize prize : Prize.values()) {
             statistics.put(prize, 0);
         }
 
-        for (Lotto lotto : lottos) {
+        for (final Lotto lotto : lottos) {
             Prize prize = calculate(lotto.getNumbers(), winningNumbers.getWinningNumbers(), bonusNumber);
             statistics.put(prize, statistics.get(prize) + 1);
         }
         return new WinningStatistics(statistics);
     }
 
-    private static Prize calculate(List<Integer> lottoNumbers, List<Integer> winningNumbers, int bonusNumber) {
+    private static Prize calculate(final List<Integer> lottoNumbers, final List<Integer> winningNumbers,
+                                   final int bonusNumber) {
         List<Integer> matchNumbers = new ArrayList<>(winningNumbers);
         matchNumbers.retainAll(lottoNumbers);
         int matchCount = matchNumbers.size();

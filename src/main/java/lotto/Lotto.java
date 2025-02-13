@@ -8,7 +8,7 @@ import java.util.Set;
 public class Lotto {
     private final List<Integer> numbers;
 
-    public Lotto(Set<Integer> numbers) {
+    public Lotto(final Set<Integer> numbers) {
         List<Integer> sortedNumbers = new ArrayList<>(numbers);
         Collections.sort(sortedNumbers);
         this.numbers = sortedNumbers;
