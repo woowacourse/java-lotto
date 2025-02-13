@@ -18,7 +18,7 @@ public class Lotto {
         this.numbers = getSortedNumbers(numbers);
     }
 
-    private static List<Integer> getSortedNumbers(final Set<Integer> numbers) {
+    private List<Integer> getSortedNumbers(final Set<Integer> numbers) {
         List<Integer> sortedNumbers = new ArrayList<>(numbers);
         Collections.sort(sortedNumbers);
         return sortedNumbers;
@@ -29,10 +29,6 @@ public class Lotto {
             throw new IllegalArgumentException(
                     "로또 번호는 %d ~ %d 사이여야 합니다.".formatted(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
         }
-    }
-
-    public int getNumbersSize() {
-        return numbers.size();
     }
 
     public List<Integer> getNumbers() {
