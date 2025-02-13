@@ -1,5 +1,6 @@
 package controller;
 
+import generator.NumberGenerator;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -16,18 +17,21 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
+    private final NumberGenerator numberGenerator;
 
-    public LottoController(final InputView inputView, final OutputView outputView) {
+    public LottoController(final InputView inputView, final OutputView outputView,
+                           final NumberGenerator numberGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.numberGenerator = numberGenerator;
     }
 
     public void run() {
         final PurchaseAmount purchaseAmount = executeWithRetry(
                 () -> new PurchaseAmount(inputView.readPurchaseAmount()));
         outputView.printPurchaseQuantity(purchaseAmount.calculateLottoCount());
-
-        final LottoMachine lottoMachine = new LottoMachine();
+        
+        final LottoMachine lottoMachine = new LottoMachine(numberGenerator);
         final List<Lotto> lottos = lottoMachine.issueLottos(purchaseAmount);
         outputView.printLottoNumbers(convertLottos(lottos));
 

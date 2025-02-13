@@ -2,6 +2,8 @@ package constans;
 
 public enum ErrorType {
 
+    NUMBER_GENERATOR_RANGE("시작값은 끝값을 초과할 수 없습니다."),
+    RANDOM_NUMBER_GENERATOR_COUNT("뽑으려는 수의 개수가 유효하지 않습니다."),
     PURCHASE_AMOUNT_POSITIVE("구입 금액은 양수여야합니다."),
     PURCHASE_AMOUNT_NOT_DIVIDE_LOTTO_PRICE("구입 금액은 로또 가격으로 나누어 떨어져야합니다."),
     WINNING_NUMBERS_IS_INVALID_SIZE("당첨 번호는 6개여야합니다."),

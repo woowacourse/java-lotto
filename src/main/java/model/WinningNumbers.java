@@ -34,14 +34,14 @@ public class WinningNumbers {
 
 
     private void validateSize(final List<LottoNumber> winningNumbers) {
-        if (winningNumbers.size() != 6) {
+        if (winningNumbers.size() != Lotto.LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorType.WINNING_NUMBERS_IS_INVALID_SIZE.getMessage());
         }
     }
 
     private void validateDuplicate(final List<LottoNumber> winningNumbers) {
         final Set<LottoNumber> set = new HashSet<>(winningNumbers);
-        if (set.size() != 6) {
+        if (set.size() != winningNumbers.size()) {
             throw new IllegalArgumentException(ErrorType.WINNING_NUMBERS_IS_DUPLICATION.getMessage());
         }
     }

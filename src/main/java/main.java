@@ -4,7 +4,8 @@ import factory.LottoFactory;
 public class main {
 
     public static void main(String[] args) {
-        LottoController controller = LottoFactory.create();
+        final LottoController controller = new LottoController(LottoFactory.inputView(), LottoFactory.outputView(),
+                LottoFactory.numberGenerator());
         controller.run();
     }
 }

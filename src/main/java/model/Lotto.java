@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     public static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_NUMBER_COUNT = 6;
+    public static final int LOTTO_NUMBER_START_INCLUSIVE = 1;
+    public static final int LOTTO_NUMBER_END_INCLUSIVE = 45;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -33,14 +36,14 @@ public class Lotto {
     }
 
     private void validateSize(final List<LottoNumber> winningNumbers) {
-        if (winningNumbers.size() != 6) {
+        if (winningNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorType.LOTTO_NUMBER_IS_INVALID_SIZE.getMessage());
         }
     }
 
     private void validateDuplicate(final List<LottoNumber> lottoNumbers) {
         final Set<LottoNumber> set = new HashSet<>(lottoNumbers);
-        if (set.size() != 6) {
+        if (set.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException(ErrorType.LOTTO_NUMBER_DUPLICATE.getMessage());
         }
     }
