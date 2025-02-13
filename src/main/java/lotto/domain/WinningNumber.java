@@ -6,6 +6,8 @@ import java.util.Set;
 
 public class WinningNumber {
 
+    private static final int WINNING_NUMBER_COUNT = 6;
+
     private final List<Integer> winningNumbers;
 
     public WinningNumber(List<Integer> numbers) {
@@ -21,15 +23,23 @@ public class WinningNumber {
     }
 
     private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
+        if (numbers.size() != WINNING_NUMBER_COUNT) {
+            throw new IllegalArgumentException("당첨 번호는 " + WINNING_NUMBER_COUNT + "개여야 합니다.");
         }
     }
 
     private void validateDuplicate(List<Integer> numbers) {
         Set<Integer> set = new HashSet<>(numbers);
-        if (set.size() != 6) {
+        if (set.size() != WINNING_NUMBER_COUNT) {
             throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
+        }
+    }
+
+    private void validateRange(List<Integer> numbers) {
+        for (Integer number : numbers) {
+            if (number < 1 || number > 45) {
+                throw new IllegalArgumentException("당첨 번호는 1~45 사이의 수여야 합니다.");
+            }
         }
     }
 
