@@ -13,6 +13,10 @@ public record LottoNumber(
     public static final int MAXIMUM = 45;
 
     public LottoNumber {
+        validate(number);
+    }
+
+    private void validate(int number) {
         if (number < MINIMUM || number > MAXIMUM) {
             throw new IllegalArgumentException(OUT_OF_RANGE_LOTTO_NUMBER.getMessage());
         }
