@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoTicket;
+import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,9 @@ public class LottoService {
         int count = countNumberOfPurchases(purchaseAmount);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(LottoNumberGenerator.generate()));
+            List<Integer> lottoNumbers = LottoNumberGenerator.generate();
+            OutputView.printLottos(lottoNumbers);
+            lottos.add(new Lotto(lottoNumbers));
         }
         return new LottoTicket(lottos);
     }
