@@ -1,14 +1,16 @@
 package domain;
 
 import domain.numbergenerator.NumberGenerator;
+import dto.OutputLottosDto;
 import java.util.List;
+import validator.LottoValidator;
 
 public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        validate(numbers);
         this.numbers = numbers.stream().sorted().toList();
+        LottoValidator.validate(this.numbers);
     }
 
     public static Lotto from(NumberGenerator numberGenerator) {
@@ -20,28 +22,7 @@ public class Lotto {
         return numbers.stream().anyMatch(number -> number == bonusNumber);
     }
 
-    private void validate(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("");
-        }
-        if (hasDistinctNumber(numbers)) {
-            throw new IllegalArgumentException("");
-        }
-        if (numbers.stream().anyMatch(number -> !isValidNumber(number))) {
-            throw new IllegalArgumentException("");
-        }
-    }
-
-    private boolean isValidNumber(int number) {
-        return number > 0 && number <= 45;
-    }
-
-    private boolean hasDistinctNumber(List<Integer> numbers) {
-        int distinctedSize = numbers.stream()
-                .distinct()
-                .toList()
-                .size();
-
-        return numbers.size() != distinctedSize;
+    public OutputLottosDto getOutputLottoDto() {
+        return new OutputLottosDto(numbers);
     }
 }

@@ -1,6 +1,7 @@
 package domain;
 
 import domain.numbergenerator.NumberGenerator;
+import dto.OutputLottosDto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,5 +19,9 @@ public class Lottos {
         }
 
         return new Lottos(generatedLottos);
+    }
+
+    public List<OutputLottosDto> getOutputLottosDtos() {
+        return lottos.stream().map(Lotto::getOutputLottoDto).toList();
     }
 }
