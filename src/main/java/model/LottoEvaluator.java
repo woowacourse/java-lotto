@@ -2,7 +2,6 @@ package model;
 
 import static constant.LottoConstant.LOTTO_PRICE;
 
-import constant.LottoConstant;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
@@ -43,10 +42,7 @@ public class LottoEvaluator {
         }
         Set<Number> winningNumbers = winningLotto.getLotto().getLottoNumbers();
         Set<Number> matchedLottoNumbers = lotto.getLottoNumbers();
-        System.out.println(winningNumbers);
-        System.out.println(matchedLottoNumbers);
         matchedLottoNumbers.retainAll(winningNumbers);
-        System.out.println(matchedLottoNumbers.size());
         int matchCount = matchedLottoNumbers.size();
         return Prize.findPrize(matchCount, bonus);
     }

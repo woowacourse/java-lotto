@@ -16,7 +16,7 @@ class NumberTest {
     @Test
     void 로또_번호가_1부터_45사이가_아니면_예외가_발생한다() {
         assertThatThrownBy(() -> {
-            Number number = new Number(46);
+            new Number(46);
         }).isInstanceOf(RuntimeException.class);
     }
 }

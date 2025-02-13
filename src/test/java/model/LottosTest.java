@@ -1,15 +1,12 @@
 package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static util.LottoUtil.*;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import util.LottoUtil;
 
 class LottosTest {
 
@@ -46,14 +43,5 @@ class LottosTest {
         LottoEvaluator lottoEvaluator = new LottoEvaluator(new WinningLotto(winningLotto, bonus));
         assertThat(lottoEvaluator.computeProfit(lottos)).isEqualTo(7526.25);
 
-    }
-
-    public Lotto generateTestLotto(int ... values){
-        Set<Number> numbers = new TreeSet<>();
-        for (int value : values){
-            numbers.add(new Number(value));
-        }
-
-        return new Lotto(numbers);
     }
 }

@@ -2,7 +2,7 @@ package model;
 
 import static constant.LottoConstant.LOTTO_NUMBER_COUNT;
 
-import constant.LottoConstant;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -27,5 +27,21 @@ public class Lotto {
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return new Lotto(this.lottoNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Lotto lotto)) {
+            return false;
+        }
+        return Objects.equals(getLottoNumbers(), lotto.getLottoNumbers());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getLottoNumbers());
     }
 }
