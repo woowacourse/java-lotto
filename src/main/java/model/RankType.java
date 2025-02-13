@@ -1,8 +1,6 @@
 package model;
 
 public enum RankType {
-
-
     FIRST(6,2000000000,0),
     SECOND(5,30000000,0),
     THIRD(5,1500000,0),
@@ -30,19 +28,21 @@ public enum RankType {
     }
 
     public static void increaseCount(RankType rankType, boolean bonusBall) {
-        if (rankType.winningCount == 5 && RankType.SECOND == rankType) {
-            if (bonusBall) {
-                rankType.count ++;
-                return;
-            }
-        }
-        if (rankType.winningCount == 5 && RankType.THIRD == rankType) {
-            if (!bonusBall) {
-                rankType.count ++;
-                return;
-            }
+        if (rankType.winningCount == 5) {
+            calculateCountForSecondAndThird(rankType,bonusBall);
+            return;
         }
         rankType.count ++;
+    }
+
+    private static void calculateCountForSecondAndThird(RankType rankType, boolean bonusBall) {
+        if (bonusBall && rankType == RankType.SECOND) {
+            rankType.count ++ ;
+            return ;
+        }
+        if (!bonusBall && rankType == RankType.THIRD) {
+            rankType.count ++ ;
+        }
     }
 
     public static String makeLottoResult(){
