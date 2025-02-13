@@ -17,12 +17,16 @@ public class LottoGenerateService {
         Lottos lottos = LottosFactory.createLottos();
 
         for (int i = 0; i < count; i++) {
-            List<Integer> numbers = RandomGenerator.generateNumbers(1, 45, 6);
-            Lotto lotto = LottoFactory.createLotto(numbers);
-            lottos.addLotto(lotto);
+            insertLotto(lottos);
         }
 
         return lottos;
+    }
+
+    private void insertLotto(Lottos lottos) {
+        List<Integer> numbers = RandomGenerator.generateNumbers(1, 45, 6);
+        Lotto lotto = LottoFactory.createLotto(numbers);
+        lottos.addLotto(lotto);
     }
 
     private void validatePurchaseAmount(int purchaseAmount) {

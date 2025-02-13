@@ -8,9 +8,7 @@ public class InputConverter {
     public static int convertToInteger(String input) {
         try {
             int value = Integer.parseInt(input.trim());
-            if (value < 0) {
-                throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-            }
+            validateNegativeValue(value);
             return value;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
@@ -25,5 +23,11 @@ public class InputConverter {
             numbers.add(number);
         }
         return numbers;
+    }
+
+    private static void validateNegativeValue(int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
     }
 }

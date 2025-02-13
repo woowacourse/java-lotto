@@ -19,11 +19,15 @@ public class OutputView {
     public void printLottos(LottosDto lottosDto) {
         List<LottoDto> lottoDtos = lottosDto.getLottoDtos();
         System.out.printf("%d%s\n", lottoDtos.size(), PURCHASE_COUNT_MESSAGE);
+        printLottoNumbers(lottoDtos);
+        System.out.println();
+    }
+
+    private void printLottoNumbers(List<LottoDto> lottoDtos) {
         for (LottoDto lottoDto : lottoDtos) {
             List<Integer> numbers = lottoDto.getNumbers();
             System.out.println(numbers.toString());
         }
-        System.out.println();
     }
 
     public void printStatistics(StatisticsDto statisticsDto) {
@@ -31,19 +35,27 @@ public class OutputView {
         Map<PrizeTier, Integer> prizeCounts = statisticsDto.getPrizeCounts();
         PrizeTier[] prizeTiers = PrizeTier.values();
         Arrays.sort(prizeTiers, Collections.reverseOrder());
+        printPrizeTiers(prizeTiers, prizeCounts);
+        System.out.printf(PROFIT_RATE_FORMAT, statisticsDto.getProfitRate());
+    }
+
+    private void printPrizeTiers(PrizeTier[] prizeTiers, Map<PrizeTier, Integer> prizeCounts) {
         for (PrizeTier prizeTier : prizeTiers) {
-            int matchedCount = prizeTier.getMatchedCount();
-            int prize = prizeTier.getPrize();
-            int prizeTierCount = prizeCounts.get(prizeTier);
-            if (prizeTier == PrizeTier.NONE) {
-                continue;
-            }
-            if (prizeTier == PrizeTier.SECOND) {
-                System.out.printf(STATISTICS_FORMAT, matchedCount, BONUS_MATCHED_MESSAGE, prize, prizeTierCount);
-                continue;
-            }
+            printPrizeTier(prizeCounts, prizeTier);
+        }
+    }
+
+    private void printPrizeTier(Map<PrizeTier, Integer> prizeCounts, PrizeTier prizeTier) {
+        int matchedCount = prizeTier.getMatchedCount();
+        int prize = prizeTier.getPrize();
+        int prizeTierCount = prizeCounts.get(prizeTier);
+
+        if (prizeTier == PrizeTier.SECOND) {
+            System.out.printf(STATISTICS_FORMAT, matchedCount, BONUS_MATCHED_MESSAGE, prize, prizeTierCount);
+            return;
+        }
+        if (prizeTier != PrizeTier.NONE) {
             System.out.printf(STATISTICS_FORMAT, matchedCount, "", prize, prizeTierCount);
         }
-        System.out.printf(PROFIT_RATE_FORMAT, statisticsDto.getProfitRate());
     }
 }
