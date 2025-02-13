@@ -1,6 +1,5 @@
 package lotto;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,18 +7,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoManagerTest {
-    private LottoManager lottoManager;
-
-    @BeforeEach
-    void init() {
-        lottoManager = new LottoManager();
-    }
-
     @DisplayName("구입금액이 1000원으로 나누어 떨어지지 않으면 예외를 던진다")
     @Test
     void 구입금액이_1000원으로_나누어_떨어지지_않으면_예외를_던진다() {
         assertThatThrownBy(() ->
-            lottoManager.purchase(500)
+            LottoManager.purchase(500)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구입금액은 1000원으로 나누어져야 합니다.");
     }
@@ -28,7 +20,7 @@ class LottoManagerTest {
     @Test
     void 구입금액이_양수가_아니라면_예외를_던진다() {
         assertThatThrownBy(() ->
-                lottoManager.purchase(-1000)
+                LottoManager.purchase(-1000)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구입금액은 양수여야 합니다.");
     }
@@ -37,7 +29,7 @@ class LottoManagerTest {
     @Test
     void 구입금액이_10만원을_초과하면_예외를_던진다() {
         assertThatThrownBy(() ->
-                lottoManager.purchase(200000)
+                LottoManager.purchase(200000)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구입금액은 최대 10만원까지입니다.");
     }
@@ -45,6 +37,6 @@ class LottoManagerTest {
     @DisplayName("구입금액에 해당하는 개수의 로또를 발행한다")
     @Test
     void 구입금액에_해당하는_개수의_로또를_발행한다() {
-        assertThat(lottoManager.purchase(5000).size()).isEqualTo(5);
+        assertThat(LottoManager.purchase(5000).size()).isEqualTo(5);
     }
 }

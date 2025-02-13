@@ -2,24 +2,31 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoManager {
     private static final int LOTTO_UNIT_PRICE = 1000;
     private static final int MAX_PURCHASE_AMOUNT = 100000;
 
-    public List<Lotto> purchase(final int purchaseAmount) {
+    private LottoManager() {}
+
+    public static List<Lotto> purchase(final int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
         int lottoAmount = purchaseAmount / LOTTO_UNIT_PRICE;
         List<Lotto> lottos = new ArrayList<>();
-        LottoMachine lottoMachine = new LottoMachine();
         for (int i = 0; i < lottoAmount; i++) {
-            Lotto lotto = lottoMachine.createLotto();
+            Lotto lotto = LottoMachine.createLotto();
             lottos.add(lotto);
         }
         return lottos;
     }
 
-    private void validatePurchaseAmount(final int purchaseAmount) {
+    public static Map<Prize, Integer> calculatePrize(final List<Lotto> lottos, final WinningNumbers winningNumbers,
+                                              final int bonusNumber) {
+        return LottoMachine.calculateStatistics(lottos, winningNumbers, bonusNumber);
+    }
+
+    private static void validatePurchaseAmount(final int purchaseAmount) {
         if (purchaseAmount % LOTTO_UNIT_PRICE != 0) {
             throw new IllegalArgumentException("구입금액은 1000원으로 나누어져야 합니다.");
         }
