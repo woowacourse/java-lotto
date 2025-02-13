@@ -21,10 +21,12 @@ public class LottoController {
 
     public void start() {
         IssuedLottosDto issuedLottosDto = issueLotto();
-        OutputView.printLottoResult(issuedLottosDto);
-        Map<WinningCount, Integer> winningCountIntegerMap = openLottoService.openResult(makeWinningLotto(),
+        OutputView.printLottoReceipt(issuedLottosDto);
+        Map<WinningCount, Integer> result = openLottoService.openResult(makeWinningLotto(),
                 issuedLottosDto);
-        openLottoService.calculateEarningRate(winningCountIntegerMap, issuedLottosDto.lottos().size() * 1000);
+        Double earningRate = openLottoService.calculateEarningRate(result,
+                issuedLottosDto.lottos().size() * 1000);
+        OutputView.printLottoResult(result,earningRate);
     }
 
     private IssuedLottosDto issueLotto(){
