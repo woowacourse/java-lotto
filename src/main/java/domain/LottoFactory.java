@@ -22,9 +22,9 @@ public class LottoFactory {
     }
 
     public static List<Lotto> makeLotto(int purchaseAmount) {
-        int lottoCount = purchaseAmount /LOTTO_PRICE;
+        int lottoCount = purchaseAmount / LOTTO_PRICE;
         List<Lotto> lottos = new ArrayList<>();
-        for(int i = 0; i < lottoCount; i ++) {
+        for (int i = 0; i < lottoCount; i++) {
             lottos.add(LottoFactory.makeLotto());
         }
         return lottos;

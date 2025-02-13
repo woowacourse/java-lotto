@@ -7,7 +7,7 @@ import java.util.List;
 
 public class OutputView {
     public static void printLottos(List<Lotto> lottos) {
-        for(Lotto lotto : lottos) {
+        for (Lotto lotto : lottos) {
             System.out.println(lotto);
         }
     }
@@ -18,7 +18,7 @@ public class OutputView {
         System.out.println(lottoStats);
     }
 
-    public static void printEarningRate(LottoStats lottoStats, int purchaseAmount){
+    public static void printEarningRate(LottoStats lottoStats, int purchaseAmount) {
         System.out.printf("총 수익률은 %s입니다.", lottoStats.getEarningRate(purchaseAmount));
     }
 }

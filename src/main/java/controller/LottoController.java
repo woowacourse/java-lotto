@@ -7,6 +7,7 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.List;
+
 public class LottoController {
     public static void run() {
         int purchaseAmount = InputView.inputPurchaseAmount();
@@ -15,6 +16,6 @@ public class LottoController {
         LottoStats lottoStats = new LottoStats(InputView.inputWinningNumbers(), InputView.inputBonusBall());
         lottoStats.calculateResult(lottos);
         OutputView.printLottoStats(lottoStats);
-        OutputView.printEarningRate(lottoStats,purchaseAmount);
+        OutputView.printEarningRate(lottoStats, purchaseAmount);
     }
 }

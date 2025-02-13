@@ -9,13 +9,15 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public String toString() {return numbers.toString();}
+    public String toString() {
+        return numbers.toString();
+    }
 
     public Rank getRank(List<Integer> winningNumbers, int bonusBall) {
         int matchCount = (int) numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
 
-        return Rank.fromResult(matchCount,numbers.contains(bonusBall));
+        return Rank.fromResult(matchCount, numbers.contains(bonusBall));
     }
 }

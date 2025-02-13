@@ -25,6 +25,5 @@ class RankTest {
         Assertions.assertThat(Rank.fromResult(2, false)).isEqualTo(Rank.NONE);
 
 
-
     }
 }

@@ -17,7 +17,7 @@ public class LottoStats {
     }
 
     public void calculateResult(List<Lotto> lottos) {
-        for(Lotto lotto : lottos) {
+        for (Lotto lotto : lottos) {
             Rank lottoRank = lotto.getRank(winningNumbers, bonusBall);
             rank.put(lottoRank, rank.getOrDefault(lottoRank, 0) + 1);
         }
@@ -25,7 +25,7 @@ public class LottoStats {
 
     public Long getTotalPrize() {
         Long totalPrize = 0L;
-        for(Rank lottoRank : rank.keySet()) {
+        for (Rank lottoRank : rank.keySet()) {
             totalPrize += lottoRank.getPrize() * rank.get(lottoRank);
         }
         return totalPrize;
@@ -33,14 +33,14 @@ public class LottoStats {
 
     public String toString() {
         StringBuilder stats = new StringBuilder();
-        for(Rank lottoRank : Rank.values()) {
+        for (Rank lottoRank : Rank.values()) {
             stats.append(getStatus(lottoRank));
         }
         return stats.toString();
     }
 
-    private String getStatus(Rank lottoRank){
-        if(lottoRank == Rank.NONE) return "";
+    private String getStatus(Rank lottoRank) {
+        if (lottoRank == Rank.NONE) return "";
         return lottoRank.getMessage() +
                 getRankCount(lottoRank) + "개\n";
     }
@@ -49,7 +49,7 @@ public class LottoStats {
         return rank.getOrDefault(lottoRank, 0);
     }
 
-    public String getEarningRate(int purchaseAmount){
-        return String.format("%.2f", Math.floor(1. * getTotalPrize()  / purchaseAmount * 100) / 100);
+    public String getEarningRate(int purchaseAmount) {
+        return String.format("%.2f", Math.floor(1. * getTotalPrize() / purchaseAmount * 100) / 100);
     }
 }

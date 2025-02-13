@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum Rank {
     NONE("", 0L, 0, false),
     FIFTH("3개 일치 (5000원)- ", 5000L, 3, false),
@@ -26,13 +29,11 @@ public enum Rank {
     }
 
     public static Rank fromResult(int matchCount, boolean contains) {
-        Rank[] ranks = Rank.values();
-        for(int i = ranks.length - 1; i >= 0; i --){
-            if(ranks[i].getCount() == matchCount && (!ranks[i].isBonusMatch() || contains)) {
-                return ranks[i];
-            }
-        }
-        return NONE;
+        List<Rank> ranks = Arrays.stream(Rank.values()).toList().reversed();
+        return ranks.stream()
+                .filter(rank -> rank.getCount() == matchCount && (!rank.isBonusMatch() || contains))
+                .findFirst()
+                .orElse(NONE);
     }
 
     public String getMessage() {
