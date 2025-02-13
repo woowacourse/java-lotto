@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 public class WinningLotto {
 
     public static final String NUMBER_REGEX = "^[0-9]*[0-9]$";
-    public static final String WINNING_NUMBERS_INPUT_ERROR_MESSAGE = "당첨 번호는 중복되지 않는 1 이상 45 이하의 정수여야합니다.";
-    public static final String BONUS_INPUT_ERROR_MESSAGE = "보너스볼은 당첨 번호와 중복되지 않는 1 이상 45 이하의 정수여야합니다.";
+    public static final String WINNING_NUMBERS_INPUT_ERROR_MESSAGE = "당첨 번호는 중복되지 않는 1 이상 45 이하의 정수여야합니다.\n";
+    public static final String BONUS_INPUT_ERROR_MESSAGE = "보너스볼은 당첨 번호와 중복되지 않는 1 이상 45 이하의 정수여야합니다.\n";
 
     private final List<Integer> winningNumbers = new ArrayList<>();
     private int bonus;
