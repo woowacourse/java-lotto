@@ -1,4 +1,4 @@
-package utils;
+package global.utils;
 
 public class Validator {
 
