@@ -10,13 +10,6 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    // 중복 확인
-    private void validate(Lotto winningNumbers, Number bonusNumber) {
-        if (winningNumbers.getNumbers().stream().anyMatch(number -> number == bonusNumber.getValue())) {
-            throw new IllegalArgumentException("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
-        }
-    }
-
     public int getMatchedCount(Lotto lotto) {
         int matchCount = 0;
         for (Integer number : lotto.getNumbers()) {
@@ -34,6 +27,12 @@ public class WinningLotto {
             }
         }
         return false;
+    }
+
+    private void validate(Lotto winningNumbers, Number bonusNumber) {
+        if (winningNumbers.getNumbers().stream().anyMatch(number -> number == bonusNumber.getValue())) {
+            throw new IllegalArgumentException("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
+        }
     }
 
     private boolean isExistWinningNumber(final int value) {

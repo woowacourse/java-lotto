@@ -1,5 +1,7 @@
 public class Number {
     private int value;
+    public static int MIN = 1;
+    public static int MAX = 45;
 
     public Number(int value) {
         validate(value);
@@ -19,9 +21,8 @@ public class Number {
     }
 
     private void validate(int value) {
-        if (value < 1 || value > 45) {
+        if (value < MIN || value > MAX) {
             throw new IllegalArgumentException();
         }
     }
-
 }

@@ -1,20 +1,18 @@
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-// 구매한 로또 번호
 public class Lotto {
-    List<Integer> numbers;
+    List<Number> numbers;
 
     public Lotto(List<Integer> lottoNumbers) {
         validate(lottoNumbers);
-        numbers = lottoNumbers;
+        numbers = lottoNumbers.stream().map(Number::new).toList();
     }
 
     public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+        return numbers.stream().map(Number::getValue).toList();
     }
 
     public String getInfo() {
@@ -29,7 +27,6 @@ public class Lotto {
     private void validate(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
-        validateRange(numbers);
     }
 
     private void validateSize(List<Integer> numbers) {
@@ -42,14 +39,6 @@ public class Lotto {
         Set<Integer> distinctNumbers = new HashSet<>(numbers);
         if (distinctNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException("로또는 서로 다른 숫자로 구성돼야 합니다.");
-        }
-    }
-
-    private void validateRange(List<Integer> numbers) {
-        for (int number : numbers) {
-            if (number < 1 || number > 45) {
-                throw new IllegalArgumentException("로또 번호는 1부터 45 사이 정수만 가능합니다.");
-            }
         }
     }
 }

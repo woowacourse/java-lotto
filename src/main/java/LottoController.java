@@ -15,13 +15,15 @@ public class LottoController {
         int lottoCount = getLottoCount(money);
         printLottoCount(lottoCount);
 
+        // TODO: 로또 발급 책임 분리
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; ++i) {
-            lottos.add(new Lotto(RandomNumbersGenerator.generateUniqueNumbers(1, 45, 6)));
+            lottos.add(new Lotto(RandomNumbersGenerator.generateUniqueNumbers(Number.MIN, Number.MAX, 6)));
         }
         printLottos(lottos);
 
-        inputWinningNumbers();
+        WinningLotto winningLotto = inputWinningNumbers();
+
     }
 
     private WinningLotto inputWinningNumbers() throws IOException {
