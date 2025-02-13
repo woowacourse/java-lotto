@@ -1,5 +1,6 @@
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.within;
 
 import java.util.List;
 import java.util.Map;
@@ -42,5 +43,17 @@ class LottoStoreTest {
         assertThat(rankMatchCount.get(LottoRank.SECOND)).isEqualTo(1);
     }
 
+    @Test
+    void 수익률을_계산한다() {
+        // given
+        int ticketCount = 14;
+        Map<LottoRank, Integer> rankMatchCounts = Map.of(LottoRank.FIFTH, 1);
+
+        // when
+        double profitRate = lottoStore.calculateProfitRate(ticketCount, rankMatchCounts);
+
+        // then
+        assertThat(profitRate).isCloseTo(0.36, within(0.01));
+    }
 
 }
