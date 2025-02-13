@@ -6,14 +6,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTicketTest {
-    @DisplayName("로또 번호가 정상적으로 발행되는지 테스트")
+    @DisplayName("로또머신이 로또 번호를 정상적으로 발행하는지 테스트")
     @Test
     void 로또_발행_테스트() {
         // given
         LottoMachine lottoMachine = new LottoMachine();
 
         // when
-        LottoTicket lottoTicket = lottoMachine.generateLottoTicket(new RandomIntegerGenerator());
+        LottoTicket lottoTicket = lottoMachine.generateLottoTicket(new FixedLottoTicketGenerator());
 
         // than
         Assertions.assertThat(lottoTicket.getSize()).isEqualTo(LottoTicket.LOTTO_SIZE);
@@ -62,6 +62,4 @@ class LottoTicketTest {
                 }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복된 번호가 존재합니다.");
     }
-
-
 }
