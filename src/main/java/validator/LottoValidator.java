@@ -1,7 +1,6 @@
 package validator;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 public class LottoValidator {
     public static void validate(List<Integer> numbers) {
