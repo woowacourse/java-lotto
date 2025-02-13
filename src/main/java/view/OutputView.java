@@ -4,6 +4,8 @@ import domain.LottoPrize;
 import domain.LottoTicket;
 import domain.Profit;
 import domain.WinningStatistics;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -40,6 +42,8 @@ public class OutputView {
     }
 
     public static void printProfit(Profit profit) {
-        System.out.printf("총 수익률은 %.2f입니다.", Math.floor(profit.getProfit() * 100.0) / 100.0);
+        DecimalFormat df = new DecimalFormat("0.##");
+        df.setRoundingMode(RoundingMode.DOWN);
+        System.out.printf("총 수익률은 %s입니다.", df.format(profit.getProfit()));
     }
 }
