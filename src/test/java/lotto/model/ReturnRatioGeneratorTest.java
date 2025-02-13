@@ -11,7 +11,7 @@ class ReturnRatioGeneratorTest {
 
     @DisplayName("구매금액과 당첨 결과를 알려주면 수익률을 계산해준다.")
     @Test
-    void 구매금액과_당첨_결과를_알려주면_수익률을_계산해준다() {
+    void calculateReturnRatio() {
         int money = 14000;
         WinningResultResponses responses = new WinningResultResponses(
                 List.of(new WinningResultResponse(3, 5000, false, 1)));

@@ -18,7 +18,7 @@ class LottoTest {
     @ParameterizedTest
     @DisplayName("숫자가 6개가 아니면 예외가 발생한다.")
     @MethodSource("makeNotSixNumbers")
-    void 숫자가_6개가_아니면_예외가_발생한다(List<Integer> numbers) {
+    void createLottoWithWrongSizeNumbers(List<Integer> numbers) {
         assertThatThrownBy(() ->
                 new Lotto(numbers)
         ).isInstanceOf(IllegalArgumentException.class)
@@ -35,7 +35,7 @@ class LottoTest {
     @ParameterizedTest
     @DisplayName("숫자가 범위를 벗어나면 예외가 발생한다.")
     @MethodSource("makeWrongRangeNumbers")
-    void 숫자가_범위를_벗어나면_예외가_발생한다(List<Integer> numbers) {
+    void createLottoWithOutOfRangeNumber(List<Integer> numbers) {
         assertThatThrownBy(() ->
                 new Lotto(numbers)
         ).isInstanceOf(IllegalArgumentException.class)
@@ -53,7 +53,7 @@ class LottoTest {
     @ParameterizedTest
     @DisplayName("중복된 숫자가 있으면 예외가 발생한다.")
     @MethodSource("makeDuplicateNumbers")
-    void 중복된_숫자가_있으면_예외가_발생한다(List<Integer> numbers) {
+    void createLottoWithDuplication(List<Integer> numbers) {
         assertThatThrownBy(() ->
                 new Lotto(numbers)
         ).isInstanceOf(IllegalArgumentException.class)

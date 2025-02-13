@@ -13,7 +13,7 @@ class WinningLottoTest {
 
     @DisplayName("보너스 번호가 범위를 벗어나면 예외가 발생한다.")
     @Test
-    void 보너스_번호가_범위를_벗어나면_예외가_발생한다() {
+    void createWinningLottoWithOutOfRangeNumber() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 46;
 
@@ -24,7 +24,7 @@ class WinningLottoTest {
 
     @DisplayName("당첨 번호와 보너스 번호가 중복되면 예외가 발생한다.")
     @Test
-    void 당첨_번호와_보너스_번호가_중복되면_예외가_발생한다() {
+    void createWinningLottoWithDuplication() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 1;
 
@@ -35,7 +35,7 @@ class WinningLottoTest {
 
     @DisplayName("로또 번호를 알려주면 당첨 등수를 계산해준다.")
     @Test
-    void 로또_번호를_알려주면_당첨_등수를_계산해준다() {
+    void calculateWinningInfo() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);

@@ -9,7 +9,7 @@ class RandomNumberGeneratorTest {
 
     @DisplayName("랜덤하게 6개의 숫자를 반환한다.")
     @Test
-    void 랜덤하게_6개의_숫자를_반환한다() {
+    void generateWithValidNumberSize() {
         assertThat(RandomNumberGenerator.generate()).hasSize(6);
     }
 
