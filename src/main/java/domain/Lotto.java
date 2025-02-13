@@ -41,6 +41,13 @@ public class Lotto {
         return numbers.contains(number);
     }
 
+    public int match(Lotto compared) {
+        Set<Integer> distinctNumbers =new HashSet<>();
+        distinctNumbers.addAll(compared.numbers);
+        distinctNumbers.addAll(numbers);
+        return (12 - distinctNumbers.size());
+    }
+
     @Override
     public String toString() {
         return numbers.toString();

@@ -1,12 +1,12 @@
 package domain;
 
 public class WinningLotto {
-    private final Lotto lotto;
+    private final Lotto winningLotto;
     private final int bonusNumber;
 
     private WinningLotto(final Lotto lotto, final int bonusNumber) {
         validate(lotto, bonusNumber);
-        this.lotto = lotto;
+        this.winningLotto = lotto;
         this.bonusNumber = bonusNumber;
     }
 
@@ -18,5 +18,14 @@ public class WinningLotto {
 
     public static WinningLotto of(final Lotto lotto, final int bonusNumber) {
         return new WinningLotto(lotto, bonusNumber);
+    }
+
+    // 당첨번호 몇개 일치하는 지 확인
+    private int countMatchedNumbers(Lotto lotto) {
+        return winningLotto.match(lotto);
+    }
+
+    private boolean isBounusMatched(Lotto lotto) {
+        return lotto.contains(bonusNumber);
     }
 }
