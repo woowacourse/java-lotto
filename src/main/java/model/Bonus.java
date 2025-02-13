@@ -1,8 +1,15 @@
 package model;
 
+import static model.ExceptionMessage.BONUS_DUPLICATE;
+import static model.ExceptionMessage.INVALID_BONUS_RANGE;
+import static model.ExceptionMessage.INVALID_BONUS_TYPE;
+
 public class Bonus {
 
-    private Integer number;
+    private static final Integer BONUS_MIN_RANGE = 1;
+    private static final Integer BONUS_MAX_RANGE = 45;
+
+    private final Integer number;
 
     public static Bonus of(final String input, final Lotto lotto) {
         validateInteger(input);
@@ -15,23 +22,23 @@ public class Bonus {
         this.number = number;
     }
 
-    private static void validateInteger(String input) {
+    private static void validateInteger(final String input) {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("보너스 번호는 숫자여야 합니다.");
+            throw new IllegalArgumentException(INVALID_BONUS_TYPE.getMessage());
         }
     }
 
-    private void validateRange(Integer number) {
-        if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("보너스 번호는 1부터 45사이여야 합니다.");
+    private void validateRange(final Integer number) {
+        if ( BONUS_MIN_RANGE > number || number > BONUS_MAX_RANGE) {
+            throw new IllegalArgumentException(INVALID_BONUS_RANGE.getMessage(BONUS_MIN_RANGE, BONUS_MAX_RANGE));
         }
     }
 
-    private void validateDuplicateWithLotto(Integer number, Lotto lotto) {
+    private void validateDuplicateWithLotto(final Integer number, final Lotto lotto) {
         if (lotto.getNumbers().contains(number)) {
-            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복되지 말아야 합니다.");
+            throw new IllegalArgumentException(BONUS_DUPLICATE.getMessage());
         }
     }
 
