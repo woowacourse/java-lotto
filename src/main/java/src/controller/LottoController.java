@@ -8,6 +8,7 @@ import src.model.generator.NumberGenerator;
 import src.view.input.ConsoleInputView;
 import src.view.input.InputView;
 import src.view.output.ConsoleOutputView;
+import src.view.output.LottoResponse;
 import src.view.output.OutputView;
 
 public class LottoController {
@@ -21,5 +22,9 @@ public class LottoController {
         outputView.printInputPurchaseMoneyMessage();
         int purchaseMoney = inputView.inputPurchaseMoney();
         List<Lotto> lottos = lottoMachine.issueLottos(purchaseMoney);
+
+        List<LottoResponse> lottoResponses = lottos.stream().map(LottoResponse::new).toList();
+
+        outputView.printPurchasedLottos(lottoResponses);
     }
 }
