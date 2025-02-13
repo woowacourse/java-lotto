@@ -10,15 +10,19 @@ public class Money {
 
     private void validate(int originMoney) {
         if (originMoney < 0) {
-            throw new IllegalArgumentException("돈은 양의 정수여야 합니다.");
+            throw new IllegalArgumentException("");
         }
         if (originMoney < 1000) {
-            throw new IllegalArgumentException("돈은 1,000원 이상이어야 합니다.");
+            throw new IllegalArgumentException("");
         }
     }
 
     public int getBuyableLottoCount() {
         return originMoney / 1000;
+    }
+
+    public int getSpentMoney() {
+        return (originMoney / 1000) * 1000;
     }
 
     public int getChange() {
