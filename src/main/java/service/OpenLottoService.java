@@ -30,7 +30,6 @@ public class OpenLottoService {
         for (WinningCount winningCount : result.keySet()) {
             sum += result.getOrDefault(winningCount, 0) * winningCount.getAmount();
         }
-        return sum / cost;
+        return Math.round((sum * 100) / cost) / 100.0;
     }
-
 }
