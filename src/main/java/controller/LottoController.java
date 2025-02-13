@@ -1,29 +1,37 @@
 package controller;
 
-import dto.IssuedLottoDto;
 import dto.IssuedLottosDto;
+import dto.WinningLottoDto;
 import java.util.List;
-import java.util.stream.Collectors;
-import service.LottoIssue;
+import service.IssueLottoService;
+import service.OpenLottoService;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-    private final LottoIssue lottoIssue;
+    private final IssueLottoService issueLottoService;
+    private final OpenLottoService openLottoService;
 
-    public LottoController(LottoIssue lottoIssue) {
-        this.lottoIssue = lottoIssue;
+    public LottoController(IssueLottoService issueLottoService, OpenLottoService openLottoService) {
+        this.issueLottoService = issueLottoService;
+        this.openLottoService = openLottoService;
     }
 
     public void start() {
         OutputView.printLottoResult(issueLotto());
+        makeWinningLotto();
     }
 
-    public IssuedLottosDto issueLotto(){
+    private IssuedLottosDto issueLotto(){
         int money = InputView.askMoney();
-        return lottoIssue.issueLottos(money);
+        return issueLottoService.issueLottos(money);
     }
 
+    private WinningLottoDto makeWinningLotto(){
+        List<Integer> numbers = InputView.askWinningLotto();
+        Integer bonusNumber = InputView.askBonusNumber();
+        return openLottoService.makeWinningLotto(numbers, bonusNumber);
+    }
 
 
 }
