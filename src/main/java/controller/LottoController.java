@@ -43,16 +43,25 @@ public class LottoController {
     }
 
     private int enterPrice() {
-        String input = inputView.enterPurchasePrice();
-        Validator.validateNumeric(input);
-        return Integer.parseInt(input);
+        try {
+            String input = inputView.enterPurchasePrice();
+            Validator.validateNumeric(input);
+            return Integer.parseInt(input);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e);
+            return enterPrice();
+        }
     }
 
     private WinningLotto enterWinningAndBonusNumber() {
-        String winningNumbers = inputView.enterWinningNumbers();
-        String bonusNumber = inputView.enterBonusNumber();
-
-        return new WinningLotto(winningNumbers, bonusNumber);
+        try {
+            String winningNumbers = inputView.enterWinningNumbers();
+            String bonusNumber = inputView.enterBonusNumber();
+            return new WinningLotto(winningNumbers, bonusNumber);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e);
+            return enterWinningAndBonusNumber();
+        }
     }
 
     private void printLottoResult(final LottoResult lottoResult, final Ticket ticket) {
@@ -60,5 +69,4 @@ public class LottoController {
         int totalPrice = lottoResult.calculateTotalPrice();
         outputView.printROIResult(ticket.createROIResponse(totalPrice));
     }
-
 }
