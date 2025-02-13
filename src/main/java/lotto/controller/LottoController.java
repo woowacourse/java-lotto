@@ -1,8 +1,13 @@
 package lotto.controller;
 
 import java.util.List;
-
-import lotto.domain.*;
+import java.util.Map;
+import lotto.domain.Lotto;
+import lotto.domain.LottoAward;
+import lotto.domain.LottoGenerator;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoPrice;
+import lotto.domain.WinningResultCalculator;
 import lotto.util.StringParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -28,6 +33,8 @@ public class LottoController {
         printPurchaseLottos(lottos);
 
         WinningResultCalculator winningResultCalculator = getWinningResult();
+        Map<LottoAward, Integer> winningResult = winningResultCalculator.countLottoPrizes(lottos);
+        outputView.printWinningResult(winningResult);
     }
 
     private WinningResultCalculator getWinningResult() {
