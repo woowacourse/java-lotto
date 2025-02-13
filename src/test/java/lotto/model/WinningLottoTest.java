@@ -1,5 +1,6 @@
 package lotto.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
@@ -29,6 +30,16 @@ class WinningLottoTest {
         assertThatThrownBy(() -> new WinningLotto(lotto, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호와 보너스 번호는 중복될 수 없습니다.");
+    }
+
+    @DisplayName("로또 번호를 알려주면 당첨 등수를 계산해준다.")
+    @Test
+    void 로또_번호를_알려주면_당첨_등수를_계산해준다() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 7;
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
+
+        assertThat(winningLotto.calculateWinning(new Lotto(List.of(1, 2, 3, 4, 5, 7)))).isEqualTo(Rank.SECOND);
     }
 
 }

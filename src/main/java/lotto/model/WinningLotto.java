@@ -2,13 +2,18 @@ package lotto.model;
 
 public class WinningLotto {
 
-    private final Lotto lotto;
+    private final Lotto winningLotto;
     private final int bonusNumber;
 
-    public WinningLotto(final Lotto lotto, final int bonusNumber) {
-        validate(lotto, bonusNumber);
-        this.lotto = lotto;
+    public WinningLotto(final Lotto winningLotto, final int bonusNumber) {
+        validate(winningLotto, bonusNumber);
+        this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
+    }
+
+    public Rank calculateWinning(final Lotto lotto) {
+        int matchingCount = lotto.calculateMatchingCount(winningLotto);
+        return Rank.findBy(matchingCount, lotto.has(bonusNumber));
     }
 
     private void validate(final Lotto lotto, final int bonusNumber) {
@@ -23,7 +28,7 @@ public class WinningLotto {
     }
 
     private void validateDuplication(final Lotto lotto, final int bonusNumber) {
-        if (lotto.hasNumber(bonusNumber)) {
+        if (lotto.has(bonusNumber)) {
             throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복될 수 없습니다.");
         }
     }
