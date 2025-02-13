@@ -27,7 +27,7 @@ public class OutputView {
                         System.out.printf(
                                 "%d개 일치, 보너스 볼 일치(%d원)- %d개\n",
                                 lottoRankResponse.overlappedCount(),
-                                lottoRankResponse.winningAmount(),
+                                lottoRankResponse.prizeMoney(),
                                 lottoRankResponse.rankMatchCount()
                         );
                         return;
@@ -35,7 +35,7 @@ public class OutputView {
                     System.out.printf(
                             "%d개 일치 (%d원)- %d개\n",
                             lottoRankResponse.overlappedCount(),
-                            lottoRankResponse.winningAmount(),
+                            lottoRankResponse.prizeMoney(),
                             lottoRankResponse.rankMatchCount()
                     );
                 }

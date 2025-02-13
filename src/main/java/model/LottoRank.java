@@ -14,21 +14,21 @@ public enum LottoRank {
     private final int rankOrder;
     private final int overlappedCount;
     private final boolean requiredBonusNumber;
-    private final int winningAmount;
+    private final int prizeMoney;
 
-    LottoRank(int rankOrder, int overlappedCount, boolean requiredBonusNumber, int winningAmount) {
+    LottoRank(int rankOrder, int overlappedCount, boolean requiredBonusNumber, int prizeMoney) {
         this.rankOrder = rankOrder;
         this.overlappedCount = overlappedCount;
         this.requiredBonusNumber = requiredBonusNumber;
-        this.winningAmount = winningAmount;
+        this.prizeMoney = prizeMoney;
     }
 
     public int getOverlappedCount() {
         return overlappedCount;
     }
 
-    public int getWinningAmount() {
-        return winningAmount;
+    public int getPrizeMoney() {
+        return prizeMoney;
     }
 
     public int getRankOrder() {

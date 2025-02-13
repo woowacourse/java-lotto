@@ -5,7 +5,7 @@ import model.LottoRank;
 public record LottoRankResponse(
         int rankOrder,
         int overlappedCount,
-        int winningAmount,
+        int prizeMoney,
         boolean isBonusMatched,
         int rankMatchCount
 ) {
@@ -14,7 +14,7 @@ public record LottoRankResponse(
         return new LottoRankResponse(
                 lottoRank.getRankOrder(),
                 lottoRank.getOverlappedCount(),
-                lottoRank.getWinningAmount(),
+                lottoRank.getPrizeMoney(),
                 lottoRank.isRequiredBonusNumber(),
                 rankMatchCount
         );
