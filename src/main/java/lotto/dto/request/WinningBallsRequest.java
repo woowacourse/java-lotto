@@ -11,7 +11,7 @@ public record WinningBallsRequest(
 ) {
     public static final String DELIMITER = ",";
 
-    public static WinningBallsRequest of (String winningNumbers, String bonusNumber) {
+    public static WinningBallsRequest of(String winningNumbers, String bonusNumber) {
         convertToList(winningNumbers);
         return new WinningBallsRequest(convertToList(winningNumbers), convertToNumber(bonusNumber));
     }
