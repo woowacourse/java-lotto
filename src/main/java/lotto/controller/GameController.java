@@ -15,23 +15,26 @@ public class GameController {
 
     public void run() {
         LottoMachine lottoMachine = buyLottoTickets();
+
         List<List<Integer>> lottoTickets = lottoMachine.getLottoTickets();
         OutputView.writeLottoTickets(lottoTickets);
 
         WinningLotto winningLotto = storeWinningLotto();
 
-        LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
-        lottoResult.matchLottoTicketsResult();
-        lottoResult.calculateLottoProfitRate(lottoMoney);
-
+        LottoResult lottoResult = checkLottoResult(winningLotto, lottoTickets);
         OutputView.writeLottoResult(lottoResult);
     }
 
     private LottoMachine buyLottoTickets() {
-        while(true) {
-            String response = InputView.readLottoMoney();
-            lottoMoney = new LottoMoney(response);
-            return new LottoMachine(lottoMoney);
+        while (true) {
+            try {
+                String response = InputView.readLottoMoney();
+                lottoMoney = new LottoMoney(response);
+                return new LottoMachine(lottoMoney);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                System.out.println();
+            }
         }
     }
 
@@ -41,16 +44,35 @@ public class GameController {
     }
 
     private Lotto storeWinningLottoNumbers() {
-        while(true) {
-            String response = InputView.readWinningNumbers();
-            return new Lotto(response);
+        while (true) {
+            try {
+                String response = InputView.readWinningNumbers();
+                return new Lotto(response);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                System.out.println();
+            }
         }
     }
 
     private WinningLotto storeWinningLottoBonus(Lotto winningNumbers) {
-        while(true){
-            String response = InputView.readBonusBall();
-            return new WinningLotto(winningNumbers, response);
+        while (true) {
+            try {
+                String response = InputView.readBonusBall();
+                return new WinningLotto(winningNumbers, response);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                System.out.println();
+            }
         }
+    }
+
+    private LottoResult checkLottoResult(WinningLotto winningLotto, List<List<Integer>> lottoTickets) {
+        LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
+
+        lottoResult.matchLottoTicketsResult();
+        lottoResult.calculateLottoProfitRate(lottoMoney);
+
+        return lottoResult;
     }
 }
