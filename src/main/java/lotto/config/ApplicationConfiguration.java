@@ -12,7 +12,7 @@ public class ApplicationConfiguration {
     private final Scanner scanner = new Scanner(System.in);
     private final InputView inputView = new InputView(scanner);
     private final OutputView outputView = new OutputView();
-    private final InputService inputService = new InputService(inputView);
+    private final InputService inputService = new InputService(inputView, outputView);
     private final OutputService outputService = new OutputService(outputView);
     private final LottoService lottoService = new LottoService();
 

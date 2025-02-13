@@ -6,4 +6,8 @@ public class OutputView {
         System.out.println(content);
     }
 
+    public void printBlankLine() {
+        System.out.println();
+    }
+
 }
