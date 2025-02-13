@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Arrays;
 
-public enum Winning {
+public enum Rank {
 
     FIFTH(3, new Money(5000), false),
     FOURTH(4, new Money(50000), false),
@@ -14,18 +14,18 @@ public enum Winning {
     private final Money winningMoney;
     private final boolean isRequireBonus;
 
-    Winning(int matchCount, Money winningMoney, boolean isRequireBonus) {
+    Rank(int matchCount, Money winningMoney, boolean isRequireBonus) {
         this.matchCount = matchCount;
         this.winningMoney = winningMoney;
         this.isRequireBonus = isRequireBonus;
     }
 
-    public static Winning findWinning(int matchCount, boolean isRequireBonus) {
-        return Arrays.stream(Winning.values())
-                .filter(winning -> winning.matchCount == matchCount)
-                .filter(winning -> {
-                    if (winning.matchCount == 5) {
-                        return winning.isRequireBonus == isRequireBonus;
+    public static Rank findRank(int matchCount, boolean isRequireBonus) {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.matchCount == matchCount)
+                .filter(rank -> {
+                    if (rank.matchCount == 5) {
+                        return rank.isRequireBonus == isRequireBonus;
                     }
                     return true;
                 }).findFirst().orElse(MISS);

@@ -18,12 +18,12 @@ public class Lottos {
     }
 
     public WinningResult calculateWinning(WinningLotto winningLotto) {
-        Map<Winning, Integer> winningResult = new HashMap<>();
+        Map<Rank, Integer> winningResult = new HashMap<>();
         for (Lotto purchaseLotto : lottos) {
             int matchCount = winningLotto.calculateMatchCount(purchaseLotto);
             boolean isMatchBonusNumber = winningLotto.containsBonusNumber(purchaseLotto);
-            Winning winning = Winning.findWinning(matchCount, isMatchBonusNumber);
-            winningResult.put(winning, winningResult.getOrDefault(winning, 0) + 1);
+            Rank rank = Rank.findRank(matchCount, isMatchBonusNumber);
+            winningResult.put(rank, winningResult.getOrDefault(rank, 0) + 1);
         }
         Money purchaseLottoMoney = LottoStore.LOTTO_PRICE.multiply(lottos.size());
         return new WinningResult(purchaseLottoMoney, winningResult);

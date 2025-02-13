@@ -3,7 +3,7 @@ package view;
 import domain.Lotto;
 import domain.Lottos;
 import domain.Number;
-import domain.Winning;
+import domain.Rank;
 import domain.WinningResult;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +25,7 @@ public class OutputView {
         for (Lotto lotto : lottos) {
             Set<Number> numbers = lotto.getNumbers();
             String purchaseLottos = numbers.stream()
-                    .map(Number::getValue)
+                    .map(Number::value)
                     .map(String::valueOf)
                     .collect(Collectors.joining(", "));
             System.out.println("[" + purchaseLottos + "]");
@@ -35,9 +35,14 @@ public class OutputView {
 
     public void printWinningResult(WinningResult winningResult) {
         System.out.printf(WINNING_RESULT_HEADER);
-        Map<Winning, Integer> result = winningResult.getWinningResult();
-        for (Winning winning : Winning.values()) {
-            if (winning == Winning.MISS) {
+        printWinningRank(winningResult);
+        printRateOfReturn(winningResult);
+    }
+
+    private void printWinningRank(WinningResult winningResult) {
+        Map<Rank, Integer> result = winningResult.getWinningResult();
+        for (Rank winning : Rank.values()) {
+            if (winning == Rank.MISS) {
                 continue;
             }
             int matchCount = result.getOrDefault(winning, 0);
@@ -50,6 +55,9 @@ public class OutputView {
             System.out.printf(WINNING_RESULT_FORMAT, winning.getMatchCount(), winning.getWinningMoney().getAmount(),
                     matchCount);
         }
+    }
+
+    private void printRateOfReturn(WinningResult winningResult) {
         double rateOfReturn = winningResult.calculateRateOfReturn();
         System.out.printf(RATE_OF_RETURN_FORMAT, rateOfReturn);
         if (rateOfReturn < 1) {
