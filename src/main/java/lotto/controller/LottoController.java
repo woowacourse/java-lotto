@@ -77,7 +77,7 @@ public class LottoController {
 
     private List<LottoNumber> toLottoNumberList(String input) {
         if (input == null || input.isBlank() || input.endsWith(", ")) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
+            throw new IllegalArgumentException("잘못된 입력입니다. 이와 같은 형태로 작성해주세요.(ex. 1, 2, 3, 4, 5, 6)");
         }
 
         return Arrays.stream(input.split(", "))
