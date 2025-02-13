@@ -3,6 +3,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Lottos {
 
@@ -12,8 +13,20 @@ public class Lottos {
         int quantity = money / 1000;
 
         for (int i = 0; i < quantity; i++) {
-            lottos.add(new Lotto());
+            List<Integer> lottoNumbers = generateRandomNumbers();
+            lottos.add(new Lotto(lottoNumbers));
         }
+    }
+
+    private List<Integer> generateRandomNumbers() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        Random random = new Random();
+
+        for (int i = 0; i < 6; i++) {
+            int number = random.nextInt(1, 46);
+            lottoNumbers.add(number);
+        }
+        return lottoNumbers;
     }
 
     public static Lottos of(String input) {
@@ -30,4 +43,6 @@ public class Lottos {
                 .map(Lotto::getNumbers)
                 .toList();
     }
+
+
 }
