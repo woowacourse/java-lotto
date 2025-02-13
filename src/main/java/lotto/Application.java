@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Application {
@@ -13,15 +14,15 @@ public class Application {
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getNumbers());
         }
-
         WinningNumbers winningNumbers = getWinningNumbers();
         int bonusNumber = getBonusNumber(winningNumbers);
+        Map<Prize, Integer> statistics = LottoManager.calculatePrize(lottos, winningNumbers, bonusNumber);
     }
 
     private static List<Lotto> purchaseLottos() {
         try {
             int purchaseAmount = getPurchaseAmount();
-            return new LottoManager().purchase(purchaseAmount);
+            return LottoManager.purchase(purchaseAmount);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return purchaseLottos();
