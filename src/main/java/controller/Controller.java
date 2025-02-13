@@ -3,8 +3,11 @@ package controller;
 import domain.Lotto;
 import domain.Lottos;
 import java.util.ArrayList;
+import java.util.List;
 import service.LottoMaker;
+import service.parser.BonusNumberParer;
 import service.parser.MoneyParser;
+import service.parser.WinningNumberParser;
 import view.InputView;
 import view.OutputView;
 
@@ -24,6 +27,9 @@ public class Controller {
 
         Lottos lottos = buyLotto(money / 1000);
         outputView.displayLottoNumbers(lottos);
+
+        List<Integer> winningNumbers = WinningNumberParser.parseWinningNumbers(inputView.askWinningNumber());
+        int bonusNumber = BonusNumberParer.parseBonusNumber(winningNumbers, inputView.askBonusNumber());
     }
 
     private Lottos buyLotto(int count) {
