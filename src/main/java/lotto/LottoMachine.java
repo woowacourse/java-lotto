@@ -18,7 +18,7 @@ public class LottoMachine {
         return new Lotto(numbers);
     }
 
-    public static Map<Prize, Integer> calculateStatistics(final List<Lotto> lottos, final WinningNumbers winningNumbers,
+    public static WinningStatistics calculateStatistics(final List<Lotto> lottos, final WinningNumbers winningNumbers,
                                                           final int bonusNumber) {
         Map<Prize, Integer> statistics = new HashMap<>();
         for (Prize prize : Prize.values()) {
@@ -29,7 +29,7 @@ public class LottoMachine {
             Prize prize = calculate(lotto.getNumbers(), winningNumbers.getWinningNumbers(), bonusNumber);
             statistics.put(prize, statistics.get(prize) + 1);
         }
-        return statistics;
+        return new WinningStatistics(statistics);
     }
 
     private static Prize calculate(List<Integer> lottoNumbers, List<Integer> winningNumbers, int bonusNumber) {

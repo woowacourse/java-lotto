@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Application {
@@ -16,7 +15,8 @@ public class Application {
         }
         WinningNumbers winningNumbers = getWinningNumbers();
         int bonusNumber = getBonusNumber(winningNumbers);
-        Map<Prize, Integer> statistics = LottoManager.calculatePrize(lottos, winningNumbers, bonusNumber);
+        WinningStatistics winningStatistics = LottoManager.calculateStatistics(lottos, winningNumbers, bonusNumber);
+        double returnRate = winningStatistics.calculateReturnRate(lottos.size() * LottoManager.LOTTO_UNIT_PRICE);
     }
 
     private static List<Lotto> purchaseLottos() {
