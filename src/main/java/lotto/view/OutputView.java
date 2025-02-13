@@ -14,6 +14,7 @@ public class OutputView {
         for (WinningResultResponse response : responses.getResponses()) {
             if (response.isHasBonus() && response.getMatchingCount() == 5) {
                 System.out.println(winningSecondResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(), response.getWinningCount()));
+                continue;
             }
             System.out.println(winningResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(), response.getWinningCount()));
         }

@@ -1,25 +1,42 @@
 package lotto.controller;
 
-import lotto.model.Lotto;
-import lotto.model.Lottos;
-import lotto.model.RandomNumberGenerator;
-import lotto.view.InputView;
-
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-public class LottoMachine {
+import lotto.model.Lotto;
+import lotto.model.Lottos;
+import lotto.model.RandomNumberGenerator;
+import lotto.model.WinningLotto;
+import lotto.model.WinningResultResponses;
+import lotto.view.InputView;
+import lotto.view.OutputView;
+
+public class LottoController {
+
     private final Lottos lottos;
     private final InputView inputView;
+    private final OutputView outputView;
 
-    public LottoMachine(final InputView inputView) {
+    public LottoController(final InputView inputView, final OutputView outputView) {
         this.lottos = new Lottos();
         this.inputView = inputView;
+        this.outputView = outputView;
     }
 
     public void run() {
         String money = inputView.readLine();
         issueLottoTickets(money);
+
+        String winningLottoNumber = inputView.readWinningLotto();
+        String bonusNumber = inputView.readBonusNumber();
+        List<Integer> numbers = Arrays.stream(winningLottoNumber.split(","))
+                .map(String::strip)
+                .map(Integer::parseInt)
+                .toList();
+        WinningLotto winningLotto = new WinningLotto(new Lotto(numbers), Integer.parseInt(bonusNumber));
+        WinningResultResponses winningResultResponses = winningLotto.calculateWinning(lottos);
+        outputView.printWinningResult(winningResultResponses);
     }
 
     private void issueLottoTickets(final String money) {
@@ -37,7 +54,7 @@ public class LottoMachine {
 
     private void addLotto() {
         List<Integer> randomNumbers = RandomNumberGenerator.generate();
-        while(hasDuplication(randomNumbers)) {
+        while (hasDuplication(randomNumbers)) {
             randomNumbers = RandomNumberGenerator.generate();
         }
         lottos.add(new Lotto(randomNumbers));
@@ -58,4 +75,5 @@ public class LottoMachine {
             throw new IllegalArgumentException("잘못된 금액 형식입니다.");
         }
     }
+
 }

@@ -38,8 +38,10 @@ class WinningLottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
+        Lottos lottos = new Lottos();
+        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 7)));
 
-        assertThat(winningLotto.calculateWinning(new Lotto(List.of(1, 2, 3, 4, 5, 7)))).isEqualTo(Rank.SECOND);
+        assertThat(winningLotto.calculateWinning(lottos)).isEqualTo(Rank.SECOND);
     }
 
 }
