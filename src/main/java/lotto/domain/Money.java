@@ -23,7 +23,7 @@ public class Money {
     }
 
     public int getLottoTicketCount() {
-        return amount / 1000;
+        return amount / LOTTO_PRICE;
     }
 
     public int getAmount() {
