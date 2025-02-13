@@ -8,16 +8,16 @@ import java.util.Set;
 
 public class RandomNumberUtils {
     // 1~45 숫자 랜덤
-    private static int generateRandomNumber() {
+    private static int generateRandomNumber(int maxNumber) {
         Random random = new Random();
-        return random.nextInt(45) + 1;
+        return random.nextInt(maxNumber) + 1;
     }
 
-    public static List<Integer> generateRandomNumbers() {
+    public static List<Integer> generateRandomNumbers(int maxSize, int maxNumber) {
         final Set<Integer> numberSet = new HashSet<>();
 
-        while (numberSet.size() < 6) {
-            final int randomNumber = generateRandomNumber();
+        while (numberSet.size() < maxSize) {
+            final int randomNumber = generateRandomNumber(maxNumber);
             numberSet.add(randomNumber);
         }
         return new ArrayList<>(numberSet).stream().sorted().toList();

@@ -15,7 +15,7 @@ public class LottoGroup {
         // TODO 통합 테스트 불가능
         IntStream.range(0, money.getLottoTicketCount())
                 .forEach(index -> {
-                    lottoGroup.add(Lotto.create(RandomNumberUtils.generateRandomNumbers()
+                    lottoGroup.add(Lotto.create(RandomNumberUtils.generateRandomNumbers(LOTTO_NUM_SIZE, MAX_LOTTO_NUMBER )
                             .stream()
                             .map(LottoNumber::new)
                             .toList()));
