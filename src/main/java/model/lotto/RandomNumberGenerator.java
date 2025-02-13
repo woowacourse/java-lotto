@@ -2,6 +2,7 @@ package model.lotto;
 
 import static common.constant.NumberConstants.LOTTO_NUMBER_END;
 import static common.constant.NumberConstants.LOTTO_NUMBER_START;
+import static common.constant.NumberConstants.WINNING_NUMBER_COUNT;
 
 import common.constant.NumberConstants;
 import java.util.ArrayList;
@@ -18,6 +19,6 @@ public class RandomNumberGenerator {
     public List<Integer> generateLottoNumbers() {
         List<Integer> shuffledNumbers = new ArrayList<>(numbers);
         Collections.shuffle(shuffledNumbers);
-        return shuffledNumbers.subList(0, NumberConstants.LOTTO_COUNT);
+        return shuffledNumbers.subList(0, WINNING_NUMBER_COUNT);
     }
 }

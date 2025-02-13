@@ -9,5 +9,5 @@ public class NumberConstants {
 
     public static final int LOTTO_NUMBER_END = 45;
 
-    public static final int LOTTO_COUNT = 6;
+    public static final int WINNING_NUMBER_COUNT = 6;
 }
