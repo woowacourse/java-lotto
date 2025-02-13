@@ -1,6 +1,5 @@
 package controller;
 
-import constant.LottoConstants;
 import domain.Lotto;
 import domain.Lottos;
 import domain.PrizeResult;
@@ -34,8 +33,8 @@ public class Controller {
         Lottos lottos = buyLotto(lottoCount);
         outputView.displayLottoNumbers(lottos);
 
-        List<Integer> winningNumbers = WinningNumberParser.parseWinningNumbers(inputView.askWinningNumber());
-        int bonusNumber = BonusNumberParser.parseBonusNumber(winningNumbers, inputView.askBonusNumber());
+        List<Integer> winningNumbers = inputWinningNumber();
+        int bonusNumber = inputBonusNumber(winningNumbers);
 
         EnumMap<Rank, Integer> map = new EnumMap<>(Rank.class);
         for (int idx = 0; idx < lottos.size(); idx++) {
@@ -72,13 +71,29 @@ public class Controller {
     }
 
     private int inputLottoMoney() {
-        while (true) {
-            try {
-                String response = inputView.askForNormal();
-                return MoneyParser.parseLottoCount(response);
-            } catch (IllegalArgumentException e) {
-                outputView.displayErrorMessage(e.getMessage());
-            }
+        try {
+            return MoneyParser.parseLottoCount(inputView.askForNormal());
+        } catch (IllegalArgumentException e) {
+            outputView.displayErrorMessage(e.getMessage());
+            throw e;
+        }
+    }
+
+    private List<Integer> inputWinningNumber() {
+        try {
+            return WinningNumberParser.parseWinningNumbers(inputView.askWinningNumber());
+        } catch (IllegalArgumentException e) {
+            outputView.displayErrorMessage(e.getMessage());
+            throw e;
+        }
+    }
+
+    private int inputBonusNumber(List<Integer> winningNumbers) {
+        try {
+            return BonusNumberParser.parseBonusNumber(winningNumbers, inputView.askBonusNumber());
+        } catch (IllegalArgumentException e) {
+            outputView.displayErrorMessage(e.getMessage());
+            throw e;
         }
     }
 }
