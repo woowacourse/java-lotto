@@ -9,4 +9,12 @@ public class LottoBundle {
     public LottoBundle(List<Lotto> lottoBundle) {
         this.lottoBundle = lottoBundle;
     }
+
+    public int getLottoQuantity() {
+        return lottoBundle.size();
+    }
+
+    public List<Lotto> getLottoBundle() {
+        return lottoBundle;
+    }
 }

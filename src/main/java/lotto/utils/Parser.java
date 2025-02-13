@@ -1,7 +1,5 @@
 package lotto.utils;
 
-import java.text.ParseException;
-
 public class Parser {
 
     public static int parseToInteger(String input) {

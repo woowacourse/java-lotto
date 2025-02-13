@@ -3,6 +3,8 @@ package lotto.view;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.LottoBundle;
 import lotto.domain.Rank;
 
 public class OutputView {
@@ -11,13 +13,17 @@ public class OutputView {
         System.out.println(lottoQuantity + "개를 구매했습니다.");
     }
 
-    public void lottoStatusPrint(List<Integer> lottoNumbers) {
+    public void lottoStatusPrint22(LottoBundle lottoBundle) {
 
-        System.out.print("[");
-        System.out.print(lottoNumbers.stream().map(String::valueOf).collect(Collectors.joining(",")));
-        System.out.print("]");
-
+        for (Lotto lotto : lottoBundle.getLottoBundle()) {
+            List<Integer> lottoNumber = lotto.getLottoNumbers();
+            System.out.print("[");
+            System.out.print(lottoNumber.stream().map(String::valueOf).collect(Collectors.joining(", ")));
+            System.out.print("]");
+            System.out.println();
+        }
         System.out.println();
+
     }
 
     public void lottoStatisticsPrint(EnumMap<Rank, Integer> statistics, double profitRate) {

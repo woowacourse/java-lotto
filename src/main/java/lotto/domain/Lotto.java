@@ -15,6 +15,7 @@ public class Lotto {
         validateDuplicateNumber();
     }
 
+
     private void validateNumberRange() {
         for(Integer number : lottoNumbers) {
             if(number < 1 || number >45) {
@@ -36,8 +37,11 @@ public class Lotto {
         }
     }
 
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     public int getSize() {
         return lottoNumbers.size();
     }
-
 }

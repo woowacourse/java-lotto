@@ -22,20 +22,22 @@ public class LottoMachine {
     }
 
     public void run() {
-        LottoBundle lottoBundle = lottoService.makeLottoBundle(new AmountPaid(Parser.parseToInteger(getUserPriceInput())));
-
+        LottoBundle lottoBundle = makeLottoBundle();
+        outputView.lottoQuantityPrint(lottoBundle.getLottoQuantity());
+        outputView.lottoStatusPrint22(lottoBundle);
     }
 
-    private String getUserPriceInput() {
-
+    private LottoBundle makeLottoBundle() {
         return retryUntilValidInput(() -> {
             try {
-                return inputView.purchasePriceInput();
+                return lottoService.makeLottoBundle(
+                        new AmountPaid(Parser.parseToInteger(inputView.purchasePriceInput())));
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new IllegalArgumentException(e);
             }
         });
     }
+
 
     private <T> T retryUntilValidInput(final Supplier<T> supplier) {
         while (true) {
