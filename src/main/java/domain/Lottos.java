@@ -23,8 +23,8 @@ public class Lottos {
     }
 
     private static void validateQuantity(final int quantity) {
-        if (quantity < 0 || quantity > MAX_QUANTITY) {
-            throw new IllegalArgumentException("로또는 최대 " + MAX_QUANTITY + "장까지 구매 가능합니다.");
+        if (quantity <= 0 || quantity > MAX_QUANTITY) {
+            throw new IllegalArgumentException("로또는 1장부터 최대 " + MAX_QUANTITY + "장까지 구매 가능합니다.");
         }
     }
 
