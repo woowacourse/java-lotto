@@ -21,6 +21,10 @@ public class LottoNumbers {
         return values.stream().map(LottoNumber::getValue).toList();
     }
 
+    public boolean contains(int value) {
+        return values.contains(LottoNumber.from(value));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) {
