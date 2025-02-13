@@ -1,8 +1,10 @@
 package controller;
 
+import constant.WinningCount;
 import dto.IssuedLottosDto;
 import dto.WinningLottoDto;
 import java.util.List;
+import java.util.Map;
 import service.IssueLottoService;
 import service.OpenLottoService;
 import view.InputView;
@@ -18,8 +20,11 @@ public class LottoController {
     }
 
     public void start() {
-        OutputView.printLottoResult(issueLotto());
-        makeWinningLotto();
+        IssuedLottosDto issuedLottosDto = issueLotto();
+        OutputView.printLottoResult(issuedLottosDto);
+        Map<WinningCount, Integer> winningCountIntegerMap = openLottoService.openResult(makeWinningLotto(),
+                issuedLottosDto);
+        openLottoService.calculateEarningRate(winningCountIntegerMap, issuedLottosDto.lottos().size() * 1000);
     }
 
     private IssuedLottosDto issueLotto(){
