@@ -10,6 +10,10 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public MatchResultDto deriveMatchResult(WinningNumber winningNumber, BonusNumber bonusNumber) {
+        return new MatchResultDto(countWinningNumber(winningNumber), containBonusNumber(bonusNumber));
+    }
+
     public boolean containBonusNumber(BonusNumber bonusNumber) {
         return bonusNumber.isMatch(numbers);
     }
