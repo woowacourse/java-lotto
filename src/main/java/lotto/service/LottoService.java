@@ -21,6 +21,7 @@ public class LottoService {
             MatchStatistics statistic = getMatchStatistics(dto.matchCount(), dto.bonus());
             map.put(statistic, map.getOrDefault(statistic, 0) + 1);
         }
+
         return map;
     }
 
@@ -32,6 +33,7 @@ public class LottoService {
             int count = map.get(statistics);
             sum += matchMoney * count;
         }
+
         double result = (double)sum / amount.getMoney();
         return new Profit(result, isProfit(result));
     }

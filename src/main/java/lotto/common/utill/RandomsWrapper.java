@@ -7,6 +7,7 @@ public final class RandomsWrapper {
 
     public static List<Integer> getRandomNumbers() {
         List<Integer> list = new ArrayList<>();
+
         while (list.size() < 6) {
             int randomInt = (int)(Math.random() * 45) + 1;
             if (!list.contains(randomInt)) {

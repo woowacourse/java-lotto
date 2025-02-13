@@ -28,7 +28,6 @@ public class Controller {
     }
 
     public void run() {
-
         Amount amount = requestAmount();
         Wallet wallet = new Wallet(amount);
         outputView.print(amount.getAmount() + "개를 구매했습니다.\n");

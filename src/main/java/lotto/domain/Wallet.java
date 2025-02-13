@@ -24,6 +24,7 @@ public class Wallet {
             MatchCountDto dto = lotto.matchCount(matchLotto, bonus);
             matchCountDtos.add(dto);
         }
+
         return matchCountDtos;
     }
 

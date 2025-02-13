@@ -26,6 +26,7 @@ public final class InputParser {
     public static List<Integer> parseToList(String str) {
         List<Integer> list = new ArrayList<>();
         String[] split = str.split(SEPARATOR);
+        
         for (String s : split) {
             list.add(parseToInt(s.trim()));
         }
