@@ -1,5 +1,7 @@
 package model;
 
+import dto.LottoDto;
+import dto.LottosDto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,12 @@ public class Lottos {
 
     public void addLotto(Lotto lotto) {
         lottos.add(lotto);
+    }
+
+    public void rankAll() {
+        for (Lotto lotto : lottos) {
+            lotto.rankTier();
+        }
     }
 
     public int countTiers(PrizeTier prizeTier) {
@@ -28,5 +36,11 @@ public class Lottos {
         return totalPrize;
     }
 
-
+    public LottosDto toDto() {
+        List<LottoDto> lottoDtos = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            lottoDtos.add(lotto.toDto());
+        }
+        return new LottosDto(lottoDtos);
+    }
 }
