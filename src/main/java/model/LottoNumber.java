@@ -36,13 +36,13 @@ public class LottoNumber implements Comparable {
         return number;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     @Override
     public int compareTo(final Object o) {
         int target = ((LottoNumber) o).number;
         return this.number - target;
+    }
+
+    public int getNumber() {
+        return number;
     }
 }
