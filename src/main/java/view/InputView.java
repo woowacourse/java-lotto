@@ -1,5 +1,7 @@
 package view;
 
+import static error.ErrorMessage.BLANK_INPUT;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -7,6 +9,7 @@ public class InputView {
     private static final String AMOUNT_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String WINNING_NUMBERS_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String REGEX = "\\d+";
 
     private final Scanner sc;
 
@@ -20,7 +23,15 @@ public class InputView {
 
     public int purchaseAmountInput() {
         printMessage(AMOUNT_INPUT_MESSAGE);
+        String userInput = basicInput();
+        validatePositiveNumber(userInput);
         return Integer.parseInt(basicInput());
+    }
+
+    private void validatePositiveNumber(String userInput) {
+        if (!userInput.matches(REGEX)) {
+            throw new IllegalArgumentException("양수만 입력 가능합니다.");
+        }
     }
 
     public String winningNumbersInput() {
@@ -34,7 +45,15 @@ public class InputView {
     }
 
     private String basicInput() {
-        return sc.next();
+        String userInput = sc.nextLine();
+        commonValidation(userInput);
+        return userInput;
+    }
+
+    private void commonValidation(String userInput) {
+        if (userInput.isBlank()) {
+            throw new IllegalArgumentException(BLANK_INPUT.getMessage());
+        }
     }
 
     private void printMessage(final String message) {
