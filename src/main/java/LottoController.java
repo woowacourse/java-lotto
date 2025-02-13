@@ -5,9 +5,13 @@ import java.util.List;
 public class LottoController {
 
     private InputView inputView;
+    private OutputView outputView;
+    private LottoManager lottoManager;
 
-    public LottoController(InputView inputView) {
+    public LottoController(InputView inputView, OutputView outputView, LottoManager lottoManager) {
         this.inputView = inputView;
+        this.outputView = outputView;
+        this.lottoManager = lottoManager;
     }
 
     public void run() throws IOException {
@@ -24,6 +28,8 @@ public class LottoController {
 
         WinningLotto winningLotto = inputWinningNumbers();
 
+        WinningResult winningResult = lottoManager.getWinningInfo(lottos, winningLotto);
+        outputView.printWinningResult(winningResult);
     }
 
     private WinningLotto inputWinningNumbers() throws IOException {
