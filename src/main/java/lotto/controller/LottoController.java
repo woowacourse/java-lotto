@@ -26,24 +26,26 @@ public class LottoController {
     }
 
     public void run() {
-        String money = inputView.readLine();
-        issueLottoTickets(money);
-        List<List<Integer>> issuedLottoNumbers = lottos.getLottos().stream()
-                .map(Lotto::getNumbers)
-                .toList();
-        outputView.printIssuedLottos(issuedLottoNumbers);
+        try {
+            String money = inputView.readLine();
+            issueLottoTickets(money);
+            printIssuedLottoTickets();
 
+            WinningLotto winningLotto = createWinningLotto();
+            WinningResultResponses winningResultResponses = winningLotto.calculateWinning(lottos);
+            outputView.printWinningResult(winningResultResponses);
+            double returnRatio = ReturnRatioGenerator.calculateReturnRatio(Integer.parseInt(money),
+                    winningResultResponses);
+            outputView.printWinningRatio(returnRatio);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+        }
+    }
+
+    private WinningLotto createWinningLotto() {
         String winningLottoNumber = inputView.readWinningLotto();
         String bonusNumber = inputView.readBonusNumber();
-        List<Integer> numbers = Arrays.stream(winningLottoNumber.split(","))
-                .map(String::strip)
-                .map(Integer::parseInt)
-                .toList();
-        WinningLotto winningLotto = new WinningLotto(new Lotto(numbers), Integer.parseInt(bonusNumber));
-        WinningResultResponses winningResultResponses = winningLotto.calculateWinning(lottos);
-        outputView.printWinningResult(winningResultResponses);
-        double returnRatio = ReturnRatioGenerator.calculateReturnRatio(Integer.parseInt(money), winningResultResponses);
-        outputView.printWinningRatio(returnRatio);
+        return new WinningLotto(new Lotto(toNumbers(winningLottoNumber)), Integer.parseInt(bonusNumber));
     }
 
     private void issueLottoTickets(final String money) {
@@ -52,11 +54,24 @@ public class LottoController {
             throw new IllegalArgumentException("천원 단위로 입력해 주세요.");
         }
         int count = buyingAmount / Lottos.UNIT_PRICE;
-
-        // count만큼 로또 발행하고 lottos에 추가하기
         for (int i = 0; i < count; i++) {
             addLotto();
         }
+    }
+
+    private void printIssuedLottoTickets() {
+        List<List<Integer>> issuedLottoNumbers = lottos.getLottos()
+                .stream()
+                .map(Lotto::getNumbers)
+                .toList();
+        outputView.printIssuedLottos(issuedLottoNumbers);
+    }
+
+    private List<Integer> toNumbers(final String winningLottoNumber) {
+        return Arrays.stream(winningLottoNumber.split(","))
+                .map(String::strip)
+                .map(Integer::parseInt)
+                .toList();
     }
 
     private void addLotto() {
@@ -67,12 +82,12 @@ public class LottoController {
         lottos.add(new Lotto(randomNumbers));
     }
 
-    private boolean hasDuplication(List<Integer> randomNumbers) {
+    private boolean hasDuplication(final List<Integer> randomNumbers) {
         HashSet<Integer> uniqueNumbers = new HashSet<>(randomNumbers);
         return uniqueNumbers.size() != randomNumbers.size();
     }
 
-    private int parseInt(String money) {
+    private int parseInt(final String money) {
         try {
             return Integer.parseInt(money);
         } catch (NumberFormatException e) {

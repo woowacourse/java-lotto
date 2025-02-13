@@ -40,4 +40,8 @@ public class OutputView {
         System.out.println(winningRatioFormat.formatted(returnRatio));
     }
 
+    public void printErrorMessage(final String message) {
+        System.out.println(String.join(" : ", "[ERROR]", message));
+    }
+
 }
