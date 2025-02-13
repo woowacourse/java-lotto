@@ -10,7 +10,10 @@ public class Lotto {
 
     public Lotto(List<Integer> lottoNumbers) {
         validate(lottoNumbers);
-        numbers = lottoNumbers.stream().map(Number::new).toList();
+        numbers = lottoNumbers.stream()
+                .sorted()
+                .map(Number::new)
+                .toList();
     }
 
     public static int getLottoCount(Money money) {
