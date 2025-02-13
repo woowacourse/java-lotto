@@ -1,6 +1,7 @@
 package lotto.model;
 
 public class ReturnRatioGenerator {
+
     private ReturnRatioGenerator() {
     }
 
@@ -10,6 +11,7 @@ public class ReturnRatioGenerator {
             totalReturnMoney += response.getWinningAmount() * response.getWinningCount();
         }
         double ratio = (double) totalReturnMoney / money;
-        return Math.floor(ratio * 100) / 100 ;
+        return Math.floor(ratio * 100) / 100;
     }
+
 }

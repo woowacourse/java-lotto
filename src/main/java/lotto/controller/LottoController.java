@@ -4,7 +4,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import lotto.model.*;
+import lotto.model.Lotto;
+import lotto.model.Lottos;
+import lotto.model.RandomNumberGenerator;
+import lotto.model.ReturnRatioGenerator;
+import lotto.model.WinningLotto;
+import lotto.model.WinningResultResponses;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -64,10 +69,7 @@ public class LottoController {
 
     private boolean hasDuplication(List<Integer> randomNumbers) {
         HashSet<Integer> uniqueNumbers = new HashSet<>(randomNumbers);
-        if (uniqueNumbers.size() != randomNumbers.size()) {
-            return true;
-        }
-        return false;
+        return uniqueNumbers.size() != randomNumbers.size();
     }
 
     private int parseInt(String money) {

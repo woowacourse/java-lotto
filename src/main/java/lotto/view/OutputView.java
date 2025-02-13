@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,7 +37,6 @@ public class OutputView {
 
     public void printWinningRatio(double returnRatio) {
         String winningRatioFormat = "총 수익률은 %.2f입니다.";
-
         System.out.println(winningRatioFormat.formatted(returnRatio));
     }
 

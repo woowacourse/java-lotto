@@ -1,8 +1,7 @@
 package lotto.model;
 
-import java.util.List;
-
 public class WinningResultResponse {
+
     private final int matchingCount;
     private final long winningAmount;
     private final boolean hasBonus;
@@ -30,4 +29,5 @@ public class WinningResultResponse {
     public int getWinningCount() {
         return winningCount;
     }
+
 }

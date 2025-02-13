@@ -45,4 +45,5 @@ public enum Rank {
     public boolean isNone() {
         return this.equals(NONE);
     }
+
 }
