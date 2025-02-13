@@ -45,7 +45,7 @@ class LottoManagerTest {
         LottoManager lottoManager = new LottoManager();
         WinningResult winningResult = lottoManager.getWinningResult(lottos, winningLotto);
 
-        Money money = new Money("6000");
+        Money money = new Money(6000);
         long totalPrices = Arrays.stream(WinningInfo.values()).mapToInt(WinningInfo::getPrice).sum();
         float expected = (float) totalPrices / 6000;
 

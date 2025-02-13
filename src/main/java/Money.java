@@ -1,14 +1,18 @@
 public class Money {
     private int value;
 
-    public Money(String input) {
+    public static Money of(String input) {
         try {
-            int parsed = Integer.parseInt(input.trim());
-            validateIsPositive(parsed);
-            value = parsed;
+            final int parsed = Integer.parseInt(input.trim());
+            return new Money(parsed);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("구입 금액은 숫자여야 합니다.", e);
         }
+    }
+
+    public Money(int input) {
+        validateIsPositive(input);
+        this.value = input;
     }
 
     public int getValue() {

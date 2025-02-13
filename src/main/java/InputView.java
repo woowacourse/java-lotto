@@ -13,7 +13,7 @@ public class InputView {
 
     public Money inputMoney() throws IOException {
         System.out.println("구입금액을 입력해 주세요.");
-        return new Money(bufferedReader.readLine());
+        return Money.of(bufferedReader.readLine());
     }
 
     public WinningLotto inputWinningLotto() throws IOException {

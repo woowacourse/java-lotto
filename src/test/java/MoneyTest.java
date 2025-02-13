@@ -1,14 +1,15 @@
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class MoneyTest {
-
+    @DisplayName("음수이면 예외")
     @Test
-    void 음수이면_예외(){
+    void test1() {
         // given
-        String input = "-1000";
+        final int input = -1000;
 
         // when & then
         assertThatThrownBy(()-> {
@@ -16,10 +17,11 @@ class MoneyTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("0이면 예외")
     @Test
-    void _0이면_예외(){
+    void test2() {
         // given
-        String input = "0";
+        final int input = 0;
 
         // when & then
         assertThatThrownBy(()-> {
@@ -27,15 +29,28 @@ class MoneyTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-
+    @DisplayName("숫자로 구성된 문자열일 때")
     @Test
-    void 숫자가_아니면_예외(){
+    void test3() {
+        // given
+        String input = "1";
+
+        // when
+        Money money = Money.of(input);
+
+        // then
+        assertThat(money.getValue()).isEqualTo(1);
+    }
+
+    @DisplayName("숫자가 아닌 문자열일 때 예외")
+    @Test
+    void test4() {
         // given
         String input = "woowa";
 
         // when & then
         assertThatThrownBy(()-> {
-            new Money(input);
+            Money.of(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

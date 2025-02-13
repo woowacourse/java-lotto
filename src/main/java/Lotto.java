@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final Money PRICE = new Money("1000");
+    private static final Money PRICE = new Money(1000);
 
     private List<Number> numbers;
 
