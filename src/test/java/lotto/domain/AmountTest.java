@@ -10,7 +10,7 @@ class AmountTest {
     @DisplayName("정상적인 값을 입력헀을 때 정상적으로 생성된다.")
     void testAmount() {
         Amount amount = new Amount(1000);
-        assertThat(amount.getAmount()==1).isTrue();
+        assertThat(amount.getAmount() == 1).isTrue();
     }
 
     @Test

@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +13,7 @@ class WalletTest {
         // matchCount(Lotto matchLotto, int bonus)
         Amount amount = new Amount(5000);
 
-        Lotto matchLotto = new Lotto(List.of(1,2,3,4,5,6));
+        Lotto matchLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         int bonus = 45;
 
         Wallet wallet = new Wallet(amount);

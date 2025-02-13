@@ -12,13 +12,13 @@ public class Amount {
     }
 
     private void validateZero(int money) {
-        if(money < 1000) {
+        if (money < 1000) {
             throw new IllegalArgumentException(ERROR_MONEY_ZERO);
         }
     }
 
     private void validateDivided1000(int money) {
-        if(money % 1000 !=0) {
+        if (money % 1000 != 0) {
             throw new IllegalArgumentException(ERROR_MONEY_NOT_DIVIDED);
         }
     }
