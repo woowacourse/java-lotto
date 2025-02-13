@@ -32,12 +32,9 @@ public class WinnerLotto {
         }
     }
 
-
     public static void validateBonusNumbers(List<LottoNumber> winnerNumbers, LottoNumber bonusNumber) {
         if (winnerNumbers.contains(bonusNumber)) {
             throw new IllegalStateException("보너스 넘버가 당첨 번호에 중복됩니다.");
         }
     }
-
-
 }
