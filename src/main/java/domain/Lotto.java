@@ -4,6 +4,7 @@ import static error.ErrorMessage.INVALID_DUPLICATE_NUMBER;
 import static error.ErrorMessage.INVALID_NUMBERS_SIZE;
 import static error.ErrorMessage.INVALID_NUMBER_RANGE;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,7 +13,7 @@ public class Lotto {
     private static final int NUMBER_SIZE = 6;
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     private Lotto(List<Integer> numbers) {
         validate(numbers);
@@ -24,7 +25,7 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 
     private void validate(List<Integer> numbers) {
