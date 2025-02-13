@@ -48,4 +48,5 @@ public class WinningNumberTest {
             new WinningNumber(numbers);
         }).isInstanceOf(LottoException.class);
     }
+
 }
