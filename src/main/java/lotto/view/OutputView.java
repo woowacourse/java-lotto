@@ -6,6 +6,8 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
 import lotto.domain.Profit;
 import lotto.domain.Rank;
+import lotto.dto.LottoGroupDto;
+import lotto.dto.ProfitDto;
 
 public class OutputView {
 
@@ -16,10 +18,10 @@ public class OutputView {
         System.out.println("[ERROR] " + e.getMessage());
     }
 
-    public static void printLottoGroup(LottoGroup lottoGroup) {
-        System.out.printf("%d개를 구매했습니다." + ENTER, lottoGroup.getSize());
+    public static void printLottoGroup(LottoGroupDto lottoGroupDto) {
+        System.out.printf("%d개를 구매했습니다." + ENTER, lottoGroupDto.lottoGroup().size());
 
-        for (Lotto lotto : lottoGroup.getLottoGroup()) {
+        for (Lotto lotto : lottoGroupDto.lottoGroup()) {
             System.out.println(lotto.toString());
         }
 
@@ -28,7 +30,7 @@ public class OutputView {
 
     public static void printResult(ProfitDto profitDto, String profitRate) {
         printNoticeResultMessage();
-        printMatchCounts(profit);
+        printMatchCounts(profitDto);
         printProfitRate(profitRate);
     }
 
