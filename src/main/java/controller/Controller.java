@@ -1,7 +1,6 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.IntStream;
 import model.Lotto;
 import model.LottoEvaluator;
 import model.LottoGenerater;
@@ -26,29 +25,34 @@ public class Controller {
     }
 
     public void run() {
+        Lottos lottos = buyLottos();
+        LottoEvaluator lottoEvaluator = new LottoEvaluator(inputWinningLotto());
+        ResultDTO resultDTO = ResultDTO.from(lottoEvaluator.getResult(lottos), lottoEvaluator.computeProfit(lottos));
+        outputView.printResult(resultDTO);
+    }
+
+    private Lottos buyLottos() {
         Money money = Parser.parseMoney(inputView.inputMoney());
+        Lottos lottos = generateLottos(money);
+        outputView.printLottos(LottosDTO.from(lottos));
+        return lottos;
+    }
+
+    private Lottos generateLottos(Money money) {
         LottoNumberPicker lottoNumberPicker = new LottoNumberPicker();
         LottoGenerater lottoGenerater = new LottoGenerater(lottoNumberPicker);
-        List<Lotto> generatedLottos = new ArrayList<>();
-        for (int i = 0; i < money.computeTicketCount(); i++) {
-            Lotto lotto = lottoGenerater.generateLotto();
-            generatedLottos.add(lotto);
-        }
-        Lottos lottos = new Lottos(generatedLottos);
-        outputView.printLottos(LottosDTO.from(lottos));
+        return new Lottos(
+                IntStream.range(0, money.computeTicketCount())
+                .mapToObj(i -> lottoGenerater.generateLotto())
+                .toList()
+        );
+    }
 
+    private WinningLotto inputWinningLotto() {
         String rawWinningLotto = inputView.inputWinningLotto();
         Lotto lotto = Parser.parseLotto(rawWinningLotto);
-
         String rawBonusNumber = inputView.inputBonus();
         Number bonusNumber = Parser.parseNumber(rawBonusNumber);
-
-        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
-
-        LottoEvaluator lottoEvaluator = new LottoEvaluator(winningLotto);
-
-        ResultDTO resultDTO = ResultDTO.from(lottoEvaluator.getResult(lottos), lottoEvaluator.computeProfit(lottos));
-
-        outputView.printResult(resultDTO);
+        return new WinningLotto(lotto, bonusNumber);
     }
 }

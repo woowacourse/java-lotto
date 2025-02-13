@@ -44,6 +44,4 @@ public class OutputView {
         String format = "[%d, %d, %d, %d, %d, %d]";
         stringBuilder.appendLine(String.format(format, lottoDTO.numbers().toArray()));
     }
-
-
 }
