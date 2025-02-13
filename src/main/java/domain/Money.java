@@ -1,5 +1,8 @@
 package domain;
 
+import error.AppException;
+import error.ErrorMessage;
+
 public class Money {
 
     private final int amount;
@@ -16,13 +19,13 @@ public class Money {
 
     private void validateAmount(final int amount) {
         if (amount % 1_000 != 0) {
-            throw new IllegalArgumentException("[ERROR] 구입 금액은 1000 단위 숫자로 입력해야 합니다.");
+            throw new AppException(ErrorMessage.INVALID_MONEY_UNIT);
         }
     }
 
     private void validateRange(final int amount) {
         if (amount < 1_000) {
-            throw new IllegalArgumentException("[ERROR] 구입 금액은 1000원 이상이어야 합니다.");
+            throw new AppException(ErrorMessage.INVALID_MONEY_RANGE);
         }
     }
 

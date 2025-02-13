@@ -1,5 +1,8 @@
 package domain;
 
+import error.AppException;
+import error.ErrorMessage;
+
 public class BonusNumber {
 
     private final int value;
@@ -11,7 +14,7 @@ public class BonusNumber {
 
     private void validateRange(final int number) {
         if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("보너스 번호는 1부터 45 사이 숫자여야 합니다.");
+            throw new AppException(ErrorMessage.INVALID_BONUS_NUMBER_RANGE);
         }
     }
 

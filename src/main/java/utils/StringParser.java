@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StringParser {
-    private StringParser(){}
+    private StringParser() {
+    }
+
     public static int parseToNumber(String input, ErrorMessage errorMessage) {
         try {
             return Integer.parseInt(input);

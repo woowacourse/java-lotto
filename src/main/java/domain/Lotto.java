@@ -1,5 +1,7 @@
 package domain;
 
+import error.AppException;
+import error.ErrorMessage;
 import java.util.List;
 
 public class Lotto {
@@ -18,7 +20,7 @@ public class Lotto {
 
     private void validateDuplicate(final List<Integer> numbers) {
         if (isDistinctNumber(numbers)) {
-            throw new IllegalArgumentException("중복된 숫자가 없어야 합니다.");
+            throw new AppException(ErrorMessage.INVALID_LOTTO_NUMBER_DUPLICATE);
         }
     }
 
@@ -28,13 +30,13 @@ public class Lotto {
 
     private void validateRange(List<Integer> numbers) {
         if (isOutOfRange(numbers)) {
-            throw new IllegalArgumentException("숫자는 1부터 45 사이여야 합니다.");
+            throw new AppException(ErrorMessage.INVALID_LOTTO_NUMBER_RANGE);
         }
     }
 
     private void validateSize(List<Integer> numbers) {
         if(numbers.size() != 6) {
-            throw new IllegalArgumentException("당첨번호는 6개여야 합니다.");
+            throw new AppException(ErrorMessage.INVALID_LOTTO_NUMBER_SIZE);
         }
     }
 
