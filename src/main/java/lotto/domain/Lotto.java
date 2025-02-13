@@ -1,8 +1,9 @@
 package lotto.domain;
 
+import lotto.validator.LogicValidator;
+
 import java.util.Collections;
 import java.util.List;
-import lotto.vaildator.LogicValidator;
 
 public class Lotto {
 

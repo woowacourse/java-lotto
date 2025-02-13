@@ -1,13 +1,14 @@
 package lotto.service;
 
-import java.util.Arrays;
-import java.util.List;
 import lotto.constant.Prompt;
 import lotto.domain.Lotto;
-import lotto.vaildator.InputValidator;
-import lotto.vaildator.LogicValidator;
+import lotto.validator.InputValidator;
+import lotto.validator.LogicValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class InputService {
 
