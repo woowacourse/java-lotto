@@ -20,7 +20,7 @@ public class LottoValidator {
     }
 
     private static boolean isSorted(List<Integer> numbers) {
-        Stream<Integer> sortedNumbers = numbers.stream().sorted();
+        List<Integer> sortedNumbers = numbers.stream().sorted().toList();
         return sortedNumbers.equals(numbers);
     }
 
