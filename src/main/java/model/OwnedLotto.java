@@ -4,7 +4,6 @@ import java.util.List;
 import model.lotto.Lotto;
 
 public class OwnedLotto {
-
     private final List<Lotto> lottos;
 
     public OwnedLotto(List<Lotto> lottos) {
