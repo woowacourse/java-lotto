@@ -1,11 +1,11 @@
+import configure.Configure;
 import controller.LottoController;
 import service.IssueLottoService;
 import service.OpenLottoService;
 
 public class Main {
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController(new IssueLottoService(), new OpenLottoService());
-        lottoController.start();
+        Configure configure = new Configure();
+        configure.lottoController().start();
     }
-
 }
