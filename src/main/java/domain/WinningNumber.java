@@ -9,12 +9,12 @@ import java.util.Set;
 import utility.StringUtility;
 
 public class WinningNumber {
+
     private static final String DUPLICATE_LOTTO_NUMBERS = "당첨번호는 중복될 수 없습니다!";
     private static final String INVALID_WINNING_NUMBER = "유효하지 않은 당첨 번호입니다.";
     private static final int LOTTO_LENGTH = 6;
 
     private final List<LottoNumber> lottoNumbers;
-
 
     public WinningNumber(String inputWinningNumber){
         validateWinningNumber(inputWinningNumber);
@@ -68,4 +68,5 @@ public class WinningNumber {
             throw new LottoException(INVALID_WINNING_NUMBER);
         }
     }
+
 }

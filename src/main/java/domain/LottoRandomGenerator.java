@@ -22,4 +22,5 @@ public class LottoRandomGenerator {
 
         return numbers.stream().toList();
     }
+
 }

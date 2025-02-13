@@ -3,6 +3,7 @@ package repository;
 import domain.BonusNumber;
 
 public class BonusNumberRepository {
+
     private BonusNumber bonusNumber;
 
     public void saveBonusNumber(BonusNumber bonusNumber) {
@@ -11,4 +12,5 @@ public class BonusNumberRepository {
     public BonusNumber getBonusNumber() {
         return bonusNumber;
     }
+
 }

@@ -8,6 +8,7 @@ import view.InputView;
 import view.OutputView;
 
 public class Application {
+
     private static final LottoController lottoController = new LottoController(new LottoService(new LottoRepository(), new WinningNumberRepository(), new BonusNumberRepository()));
 
     public static void main(String[] args) {
@@ -58,7 +59,6 @@ public class Application {
         return false;
     }
 
-
     private static void settingBonusNumbers() {
         boolean retry = true;
         while(retry) {
@@ -80,4 +80,5 @@ public class Application {
     private static void printWinningResult() {
         System.out.println(lottoController.formattingWinningResult());
     }
+
 }

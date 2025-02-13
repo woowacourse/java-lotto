@@ -48,4 +48,5 @@ public class Lotto {
         return lottoNumbers.stream()
                 .anyMatch(lottoNumber -> bonusNumber.isContain(lottoNumber));
     }
+
 }

@@ -6,16 +6,15 @@ import domain.LottoDispenser;
 import domain.WinningNumber;
 import domain.enums.WinningCase;
 import domain.formatter.WinningCalculateFormatter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import repository.BonusNumberRepository;
 import repository.LottoRepository;
 import repository.WinningNumberRepository;
 
-public class SimpleLottoService extends LottoService{
+public class MockingLottoService extends LottoService{
 
-    public SimpleLottoService(LottoRepository lottoRepository, WinningNumberRepository winningNumberRepository, BonusNumberRepository bonusNumberRepository) {
+    public MockingLottoService(LottoRepository lottoRepository, WinningNumberRepository winningNumberRepository, BonusNumberRepository bonusNumberRepository) {
         super(lottoRepository, winningNumberRepository, bonusNumberRepository);
     }
 
@@ -28,4 +27,5 @@ public class SimpleLottoService extends LottoService{
         double earnMoneyRatio = lottoDispenser.calculateEarnMoneyRatio(earnMoney);
         return WinningCalculateFormatter.winningResultFormatting(winningCalculateResult,earnMoneyRatio);
     }
+
 }

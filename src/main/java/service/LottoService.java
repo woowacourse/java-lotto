@@ -5,13 +5,13 @@ import domain.LottoDispenser;
 import domain.WinningNumber;
 import domain.enums.WinningCase;
 import domain.formatter.WinningCalculateFormatter;
-import java.util.HashMap;
 import java.util.Map;
 import repository.BonusNumberRepository;
 import repository.LottoRepository;
 import repository.WinningNumberRepository;
 
 public class LottoService {
+
     private final LottoRepository lottoRepository;
     private final WinningNumberRepository winningNumberRepository;
     private final BonusNumberRepository bonusNumberRepository;
@@ -49,4 +49,5 @@ public class LottoService {
         return lottoRepository.getLottoDispenser()
                 .formattingBuyLottoResult();
     }
+
 }

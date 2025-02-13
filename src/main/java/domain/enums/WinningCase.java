@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public enum WinningCase {
+
     ELSE("",0,0,false),
     THREE_SAME("3개 일치 (%d원)- %d개",5000,3,false),
     FOUR_SAME("4개 일치 (%d원)- %d개",50000,4,false),
@@ -46,4 +47,5 @@ public enum WinningCase {
         }
         return winningCaseIntegerMap;
     }
+
 }

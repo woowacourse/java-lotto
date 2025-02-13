@@ -51,16 +51,12 @@ public class LottoDispenser {
         return lottos;
     }
 
-
     public Map<WinningCase,Integer> winningCalculate(WinningNumber winningNumber, BonusNumber bonusNumber) {
         Map<WinningCase,Integer> winningResult = WinningCase.toMap();
         for(Lotto lotto : lottos){
             int sameCount = lotto.compare(winningNumber, bonusNumber);
             boolean isBonus = lotto.compareBonusNumber(bonusNumber);
             WinningCase winningCase = WinningCase.getWinningCase(sameCount, isBonus);
-            if(winningCase == WinningCase.ELSE){
-                continue;
-            }
             winningResult.put(winningCase,winningResult.getOrDefault(winningCase,0)+1);
         }
         return winningResult;
@@ -88,4 +84,5 @@ public class LottoDispenser {
         }
         return stringBuilder.toString();
     }
+
 }
