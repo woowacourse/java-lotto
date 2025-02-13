@@ -7,6 +7,7 @@ import domain.WinningLotto;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import util.InputValidator;
 import view.InputView;
 import view.OutputView;
 
@@ -23,6 +24,7 @@ public class LottoController {
 
         // 1. 구매 금액 입력받기
         String rawPurchaseAmount = inputView.readPurchaseAmount();
+        InputValidator.validateInteger(rawPurchaseAmount);
         final int purchaseAmount = Integer.parseInt(rawPurchaseAmount);
 
         // 2. Lottos 객체 생성하기

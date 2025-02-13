@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
+    private static final int MAX_QUANTITY = 100;
     private final List<Lotto> lottos;
 
     private Lottos(final List<Lotto> lottos) {
@@ -12,12 +13,19 @@ public class Lottos {
     }
 
     public static Lottos ofSize(final int quantity) {
+        validateQuantity(quantity);
         List<Lotto> lottos = new ArrayList<>(quantity);
         for (int i = 0; i < quantity; i++) {
             Lotto generatedLotto = Lotto.of(LottoGenerator.generate());
             lottos.add(generatedLotto);
         }
         return new Lottos(lottos);
+    }
+
+    private static void validateQuantity(final int quantity) {
+        if (quantity < 0 || quantity > MAX_QUANTITY) {
+            throw new IllegalArgumentException("로또는 최대 " + MAX_QUANTITY + "장까지 구매 가능합니다.");
+        }
     }
 
     public static Lottos of(List<Lotto> lottos) {
