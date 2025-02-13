@@ -7,4 +7,6 @@ public interface InputView {
     int inputPurchaseMoney();
 
     List<Integer> inputWinningLottoNumbers();
+
+    int inputBonusNumber();
 }
