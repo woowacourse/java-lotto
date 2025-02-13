@@ -45,6 +45,6 @@ public class Amount {
 
 
     public double getProfit(long sum) {
-        return (double) sum / (amount * LOTTO_PRICE);
+        return Math.floor((double) sum / (amount * LOTTO_PRICE) * 100) / 100;
     }
 }
