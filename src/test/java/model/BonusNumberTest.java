@@ -1,13 +1,12 @@
 package model;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.in;
-import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -52,5 +51,21 @@ class BonusNumberTest {
     void duplicateBonusNumberWithWinningNumber() {
         assertThatThrownBy(() -> new BonusNumber("2", winningNumber))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("보너스 번호가 로또 당첨 번호와 일치하면 true를 반환한다")
+    @Test
+    void trueIfBonusNumberMatchesLottoNumber() {
+        BonusNumber bonusNumber = new BonusNumber("1", winningNumber);
+        List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 11, 12, 13, 14, 15));
+        assertThat(bonusNumber.matchesWith(lottoNumbers)).isTrue();
+    }
+
+    @DisplayName("보너스 번호가 로또 당첨 번호와 불일치하면 false를 반환한다")
+    @Test
+    void falseIfBonusNumberNotMatchesLottoNumber() {
+        BonusNumber bonusNumber = new BonusNumber("1", winningNumber);
+        List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(10, 11, 12, 13, 14, 15));
+        assertThat(bonusNumber.matchesWith(lottoNumbers)).isFalse();
     }
 }

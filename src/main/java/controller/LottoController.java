@@ -29,7 +29,7 @@ public class LottoController {
         BonusNumber bonusNumber = readBonusNumber(winningNumber);
 
         WinningResult winningResult = checkWinningResult(issuedLottos, winningNumber, bonusNumber);
-        double earningRate = calculateEarningRate(winningResult, purchase);
+        double earningRate = winningResult.calculateEarningRate(purchase);
 
         printResult(winningResult, earningRate);
     }
@@ -70,11 +70,6 @@ public class LottoController {
             winningResult.update(winningStatus);
         }
         return winningResult;
-    }
-
-    public double calculateEarningRate(WinningResult winningResult, Purchase purchase) {
-        int totalPrice = winningResult.calculateTotalPrice();
-        return ((double) totalPrice)/ purchase.getAmount();
     }
 
     public void printResult(WinningResult winningResult, double earningRate) {

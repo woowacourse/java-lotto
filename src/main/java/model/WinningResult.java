@@ -21,7 +21,12 @@ public class WinningResult {
         return Collections.unmodifiableMap(winningResults);
     }
 
-    public int calculateTotalPrice() {
+    public double calculateEarningRate(Purchase purchase) {
+        int totalPrice = calculateTotalPrice();
+        return ((double) totalPrice)/ purchase.getAmount();
+    }
+
+    private int calculateTotalPrice() {
         int totalPrice = 0;
         for(WinningStatus winningStatus : winningResults.keySet()) {
             totalPrice += winningStatus.getPrice() * winningResults.get(winningStatus);

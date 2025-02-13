@@ -3,10 +3,13 @@ package model;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class WinningNumberTest {
@@ -50,6 +53,16 @@ class WinningNumberTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("당첨 번호와 겹치는 로또 번호의 개수를 구한다")
+    @ParameterizedTest
+    @CsvSource(value = {"1, 7, 8, 9, 10, 11:1", "1, 2, 7, 8, 9, 10:2", "1, 2, 3, 4, 5, 6:6"}, delimiter = ':')
+    void findMatchingCountWithLottoNumber(String lottoNumberInput, int expectedCount) {
+        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
+        int matchingCount = winningNumber.findMatchingCountWith(
+                                    Arrays.stream(lottoNumberInput.split(", "))
+                                    .map(Integer::parseInt).toList());
+        assertThat(matchingCount).isEqualTo(expectedCount);
+    }
 
 
 }
