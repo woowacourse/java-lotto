@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import model.Lotto;
 import model.LottoMachine;
 import model.LottoNumber;
@@ -45,13 +46,13 @@ public class LottoController {
         return lottos.stream()
                 .map(Lotto::getLottoNumbers)
                 .map(this::convertLottoNumbers)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private List<Integer> convertLottoNumbers(final List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private <T> T executeWithRetry(final Supplier<T> supplier) {
