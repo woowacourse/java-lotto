@@ -18,7 +18,11 @@ public class OutputView {
             }
             System.out.println(winningResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(), response.getWinningCount()));
         }
+    }
 
-        // TODO: 수익률 계산해서 보여주기
+    public void printWinningRatio(double returnRatio) {
+        String winningRatioFormat = "총 수익률은 %.2f입니다.";
+
+        System.out.println(winningRatioFormat.formatted(returnRatio));
     }
 }
