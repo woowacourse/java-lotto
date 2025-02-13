@@ -5,18 +5,18 @@ import model.Lotto;
 import model.Lottos;
 import model.Number;
 
-public record LottosDTO(List<LottoDTO> lottoDTOs) {
+public record LottosDTO(List<InnerLottoDetail> lottoDTOs) {
 
-    public record LottoDTO(List<Integer> numbers){
-        public static LottoDTO from(Lotto lotto){
-            return new LottoDTO(lotto.getLottoNumbers().stream().map(Number::value).toList());
+    public record InnerLottoDetail(List<Integer> numbers){
+        public static InnerLottoDetail from(Lotto lotto){
+            return new InnerLottoDetail(lotto.getLottoNumbers().stream().map(Number::value).toList());
         }
     }
 
     public static LottosDTO from(Lottos lottos){
         return new LottosDTO(lottos.getLottos()
                 .stream()
-                .map(LottoDTO::from)
+                .map(InnerLottoDetail::from)
                 .toList());
     }
 }
