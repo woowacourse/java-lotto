@@ -18,14 +18,14 @@ public enum RankType {
     private final boolean isBonusNumber;
     private final int price;
 
-    RankType(int rank, int matchNumber, boolean isBonusNumber, int price) {
+    RankType(final int rank, final int matchNumber, final boolean isBonusNumber, final int price) {
         this.rank = rank;
         this.matchNumber = matchNumber;
         this.isBonusNumber = isBonusNumber;
         this.price = price;
     }
 
-    public static RankType evaluateRank(int matchNumber, boolean isBonusNumber) {
+    public static RankType evaluateRank(final int matchNumber, final boolean isBonusNumber) {
         return Arrays.stream(values())
                 .filter(rankType -> rankType.matchNumber == matchNumber && rankType.isBonusNumber == isBonusNumber)
                 .findFirst()
