@@ -1,5 +1,7 @@
 package model;
 
+import dto.LottoRankDetailResponse;
+
 import java.util.Arrays;
 
 public enum RankType {
@@ -28,6 +30,14 @@ public enum RankType {
                 .filter(rankType -> rankType.matchNumber == matchNumber && rankType.isBonusNumber == isBonusNumber)
                 .findFirst()
                 .orElse(NONE);
+    }
+    
+    public LottoRankDetailResponse createResponse() {
+        return new LottoRankDetailResponse(
+                matchNumber,
+                isBonusNumber,
+                price
+        );
     }
 
     public int getRank() {

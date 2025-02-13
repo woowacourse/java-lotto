@@ -1,6 +1,7 @@
 package controller;
 
 import dto.TicketAmountResponse;
+import model.LottoResult;
 import model.Lottos;
 import model.Ticket;
 import model.WinningLotto;
@@ -28,6 +29,10 @@ public class LottoController {
         String input = inputView.enterWinningNumbers();
         String bonusNumber = inputView.enterBonusNumber();
         WinningLotto winningLotto = new WinningLotto(input, bonusNumber);
+
+        LottoResult lottoResult = new LottoResult(lottos, winningLotto);
+
+        outputView.printLottoResult(lottoResult.createResponse());
     }
 
     private void printTicketPurchaseAmount(Ticket ticket) {

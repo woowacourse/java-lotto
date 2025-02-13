@@ -26,6 +26,12 @@ public class WinningLotto {
     public Map<RankType, Integer> evaluateRank(List<Lotto> lottos) {
         Map<RankType, Integer> rankResult = new HashMap<>();
 
+        rankResult.put(RankType.FIFTH, 0);
+        rankResult.put(RankType.FOURTH, 0);
+        rankResult.put(RankType.THIRD, 0);
+        rankResult.put(RankType.SECOND, 0);
+        rankResult.put(RankType.FIRST, 0);
+
         for (Lotto lotto1 : lottos) {
             boolean isBonusNumber = false;
             int matchNumber = lotto1.calculateMatchNumber(lotto);
@@ -35,11 +41,9 @@ public class WinningLotto {
             }
             RankType rank = RankType.evaluateRank(matchNumber, isBonusNumber);
 
-            if (!rankResult.containsKey(rank)) {
-                rankResult.put(rank, 0);
+            if (rank != RankType.NONE) {
+                rankResult.put(rank, rankResult.get(rank) + 1);
             }
-
-            rankResult.put(rank, rankResult.get(rank) + 1);
         }
 
         return rankResult;
