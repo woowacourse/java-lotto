@@ -1,6 +1,6 @@
 package utils;
 
-public class Validator { // todo : 네이밍 고민 체크, 에러 메시지 추가
+public class Validator {
 
     public static void validateNumeric(String input) {
         try {
@@ -10,14 +10,14 @@ public class Validator { // todo : 네이밍 고민 체크, 에러 메시지 추
         }
     }
 
-    public static void validateRange(int input, int min, int max) {
-        if (input > max || input < min) {
+    public static void validateRange(int number, int min, int max) {
+        if (number > max || number < min) {
             throw new IllegalArgumentException();
         }
     }
 
-    public static void validateDivide(int input, int division) { // todo : 네이밍 고민 체크
-        if (input % division != 0) {
+    public static void validateDivisibility(int number, int division) {
+        if (number % division != 0) {
             throw new IllegalArgumentException();
         }
     }
