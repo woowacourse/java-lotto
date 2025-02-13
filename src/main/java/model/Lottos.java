@@ -9,11 +9,9 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int ticketAmount) { // todo : 메서드 분리
+    public Lottos(final int ticketAmount) {
         lottos = new ArrayList<>();
-        for (int i = 0; i < ticketAmount; i++) {
-            lottos.add(new Lotto());
-        }
+        addLottos(ticketAmount);
     }
 
     public LottosResponse createResponse() {
@@ -26,5 +24,11 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    private void addLottos(final int ticketAmount) {
+        for (int i = 0; i < ticketAmount; i++) {
+            lottos.add(new Lotto());
+        }
     }
 }
