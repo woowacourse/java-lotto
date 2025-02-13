@@ -30,4 +30,15 @@ public class LottoNumbers {
     public List<Integer> getNumbers() {
         return numbers;
     }
+
+    public Integer countMatchNumber(LottoNumbers lottoNumbers) {
+        List<Integer> matchList = lottoNumbers.getNumbers().stream()
+                .filter(lottoNumber -> numbers.stream().anyMatch((number) -> number == lottoNumber))
+                .toList();
+        return matchList.size();
+    }
+
+    public Boolean bonusMatch(Integer bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
 }

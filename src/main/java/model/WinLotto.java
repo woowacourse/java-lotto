@@ -18,4 +18,12 @@ public class WinLotto {
             throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_DUPLICATE_EXCEPTION);
         }
     }
+
+    public Integer countMatchNumber(LottoNumbers lottoNumbers) {
+        return this.lottoNumbers.countMatchNumber(lottoNumbers);
+    }
+
+    public Boolean bonusMatch(LottoNumbers lottoNumbers) {
+        return lottoNumbers.bonusMatch(this.bonusNumber);
+    }
 }
