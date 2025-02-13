@@ -1,9 +1,11 @@
 package lotto;
 
 import java.io.IOException;
+import java.util.EnumMap;
 import java.util.function.Supplier;
 import lotto.domain.AmountPaid;
 import lotto.domain.LottoBundle;
+import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
 import lotto.service.LottoService;
 import lotto.utils.Parser;
@@ -27,7 +29,9 @@ public class LottoMachine {
         outputView.lottoQuantityPrint(lottoBundle.getLottoQuantity());
         outputView.lottoStatusPrint(lottoBundle);
         WinningNumbers winningNumbers = makeWinningNumber();
+        EnumMap<Rank, Integer> rankIntegerEnumMap = lottoService.makeStatistics(lottoBundle, winningNumbers);
 
+        outputView.lottoStatisticsPrint(rankIntegerEnumMap, 0.1);
     }
 
     private LottoBundle makeLottoBundle() {
