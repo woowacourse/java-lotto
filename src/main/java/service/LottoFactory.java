@@ -52,7 +52,7 @@ public class LottoFactory {
             Prize foundPrize = Prize.find(matchCount, matchesBonus);
             prizeMap.put(foundPrize, prizeMap.get(foundPrize) + 1);
         }
-        prizeMap.remove(Prize.match_none);
+        prizeMap.remove(Prize.MATCH_NONE);
         return prizeMap;
     }
 

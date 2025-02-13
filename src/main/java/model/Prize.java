@@ -5,12 +5,12 @@ import java.util.EnumMap;
 
 public enum Prize {
 
-    match_none("", 0, 0),
-    match_three("3개 일치 (5000원)", 3, 5_000),
-    match_four("4개 일치 (50000원)", 4, 50_000),
-    match_five("5개 일치 (1500000원)", 5, 1_500_000),
-    match_five_and_bonus("5개 일치, 보너스 볼 일치 (30000000원)", 5, 30_000_000),
-    match_six("6개 일치 (2000000000원)", 6, 2_000_000_000);
+    MATCH_NONE("", 0, 0),
+    MATCH_THREE("3개 일치 (5000원)", 3, 5_000),
+    MATCH_FOUR("4개 일치 (50000원)", 4, 50_000),
+    MATCH_FIVE("5개 일치 (1500000원)", 5, 1_500_000),
+    MATCH_FIVE_AND_BONUS("5개 일치, 보너스 볼 일치 (30000000원)", 5, 30_000_000),
+    MATCH_SIX("6개 일치 (2000000000원)", 6, 2_000_000_000);
 
     private final String comment;
     private final Integer matchCount;
@@ -31,13 +31,13 @@ public enum Prize {
     }
 
     public static Prize find(int matchCount, boolean matchesBonusNumber) {
-        if (matchCount == Prize.match_five_and_bonus.matchCount && matchesBonusNumber) {
-            return Prize.match_five_and_bonus;
+        if (matchCount == Prize.MATCH_FIVE_AND_BONUS.matchCount && matchesBonusNumber) {
+            return Prize.MATCH_FIVE_AND_BONUS;
         }
         return Arrays.stream(Prize.values())
                 .filter(o -> o.matchCount == matchCount)
                 .findFirst()
-                .orElse(Prize.match_none);
+                .orElse(Prize.MATCH_NONE);
     }
 
     public String getComment() {
