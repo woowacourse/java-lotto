@@ -1,23 +1,46 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum LottoRank {
-    FIRST_PLACE(6,2_000_000_000L, false),
-    SECOND_PLACE(5,30_000_000L, true),
-    THIRD_PLACE(5,1_500_000L, false),
-    FORTH_PLACE(4,50_000L, false),
-    FIFTH_PLACE(3,5_000L, false);
+    NO_REWARD(0, 0L, false),
+    FIFTH_PLACE(3, 5_000L, false),
+    FORTH_PLACE(4, 50_000L, false),
+    THIRD_PLACE(5, 1_500_000L, false),
+    SECOND_PLACE(5, 30_000_000L, true),
+    FIRST_PLACE(6, 2_000_000_000L, false);
 
     private final int matchCount;
     private final long winningAmount;
-    private final boolean isBonus;
+    private final boolean containsBonus;
 
-    LottoRank(int matchCount, long winningAmount, boolean isBonus) {
+    LottoRank(int matchCount, long winningAmount, boolean containsBonus) {
         this.matchCount = matchCount;
         this.winningAmount = winningAmount;
-        this.isBonus = isBonus;
+        this.containsBonus = containsBonus;
     }
 
-    public String formatResult(int count) {
-        return String.format("%d개 일치 (%d원)- %d개", matchCount, winningAmount, count);
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public long getWinningAmount() {
+        return winningAmount;
+    }
+
+    public boolean isContainsBonus() {
+        return containsBonus;
+    }
+
+    public static LottoRank findRankWithMatchResult(MatchResultDto matchResultDto) {
+        if (matchResultDto.getMatchCount() == SECOND_PLACE.matchCount && matchResultDto.isContainsBonusNumber()) {
+            return SECOND_PLACE;
+        }
+
+        return Arrays.stream(values())
+                .filter(rank -> rank.matchCount == matchResultDto.getMatchCount())
+                .filter(rank -> rank.containsBonus == matchResultDto.isContainsBonusNumber())
+                .findAny()
+                .orElse(NO_REWARD);
     }
 }
