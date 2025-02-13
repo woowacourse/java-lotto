@@ -2,6 +2,7 @@ package controller;
 
 import static view.util.LottoConstants.LOTTO_PRICE_PER_ONE;
 
+import java.util.Map;
 import model.BonusNumber;
 import model.Lotto;
 import model.LottoRepository;
@@ -24,8 +25,8 @@ public class LottoController {
         UserLotto userLotto = new UserLotto(InputView.inputWinningNumbers());
         BonusNumber bonusNumber = isDuplicateBonusNumber(userLotto);
 
-        calculateResultAndPrintResult(lottoRepository, userLotto, bonusNumber);
-        OutputView.printWinningRate(calculateWinningRate(userMoney));
+        calculateResultAndPrintResult(userMoney, lottoRepository, userLotto, bonusNumber);
+
     }
 
     private static void buyLottoForUserMoney(LottoRepository lottoRepository, int userMoney) {
@@ -55,15 +56,20 @@ public class LottoController {
         }
     }
 
-    public static void calculateResultAndPrintResult(LottoRepository lottoRepository, UserLotto userLotto, BonusNumber bonusNumber) {
+    public static void calculateResultAndPrintResult(int userMoney, LottoRepository lottoRepository, UserLotto userLotto, BonusNumber bonusNumber) {
+        Map<RankType, Integer> rankTypeMap = RankType.makeMap();
+
         for (Lotto lotto : lottoRepository.getLottos()) {
-            RankType.saveGameResult(userLotto.calculateRank(lotto), bonusNumber.isBonusNumber(lotto));
+            RankType.updateMapByWinningCount(rankTypeMap, userLotto.calculateMatchCount(lotto), bonusNumber.isBonusNumber(lotto));
         }
-        OutputView.printResult(RankType.makeLottoResult());
+
+        OutputView.printResult(RankType.makeLottoResult(rankTypeMap));
+
+        OutputView.printWinningRate(calculateWinningRate(userMoney,rankTypeMap));
     }
 
-    private static double calculateWinningRate(int userMoney){
-        int totalPrice = RankType.calculateTotalPrice();
+    private static double calculateWinningRate(int userMoney, Map<RankType, Integer> map){
+        int totalPrice = RankType.calculateTotalPrice(map);
         return (double)totalPrice / userMoney;
     }
 
