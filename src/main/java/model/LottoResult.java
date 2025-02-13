@@ -1,20 +1,34 @@
 package model;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import dto.LottoResultDetailResponse;
+import dto.LottoResultsResponse;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private Map<RankType, Integer> result;
+    private Map<RankType, Integer> results;
 
     public LottoResult(Lottos lottos, WinningLotto winningLotto) {
-        result = winningLotto.evaluateRank(lottos.getLottos());
+        results = winningLotto.evaluateRank(lottos.getLottos());
         sort();
     }
 
+    public LottoResultsResponse createResponse() {
+        List<LottoResultDetailResponse> detailResponses = results.entrySet().stream()
+                .map(result -> new LottoResultDetailResponse(
+                        result.getKey().createResponse(),
+                        result.getValue()
+                )).toList();
+
+        return new LottoResultsResponse(
+            detailResponses
+        );
+    }
+
     public void sort() { // TODO: 리팩토링 필요
-        result = result.entrySet().stream()
+        results = results.entrySet().stream()
                 .sorted((r1, r2) -> Integer.compare(r2.getKey().getRank(), r1.getKey().getRank()))
                 .collect(Collectors.toMap(
                                 Map.Entry::getKey,
