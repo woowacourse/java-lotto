@@ -1,6 +1,7 @@
 package domain;
 
 import constant.LottoConstants;
+import java.util.Arrays;
 import java.util.EnumMap;
 
 public class PrizeResult {
@@ -28,10 +29,17 @@ public class PrizeResult {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Rank rank : Rank.values()) {
-            sb.append(rank.getMsg()).append(result.getOrDefault(rank, 0));
-            sb.append("개\n");
-        }
+        Arrays.stream(Rank.values())
+                .filter(rank -> !isMiss(rank))
+                .forEach(rank -> sb.append(rank.getMsg()).append(result.getOrDefault(rank, 0)).append("개\n"));
         return sb.toString();
+    }
+
+    private boolean isMiss(Rank rank) {
+        if (rank == Rank.MISS) {
+            return true;
+        }
+
+        return false;
     }
 }

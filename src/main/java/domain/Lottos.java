@@ -17,6 +17,14 @@ public class Lottos {
         return lottos.get(index);
     }
 
+    public boolean containByIndex(int idx, int number) {
+        if (lottos.get(idx).getNumbers().contains(number)) {
+            return true;
+        }
+
+        return false;
+    }
+
     public int size() {
         return lottos.size();
     }
