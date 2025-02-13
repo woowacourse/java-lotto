@@ -102,6 +102,19 @@ class LottoTest {
                 .hasMessage("로또 당첨 번호는 중복되면 안됩니다.");
     }
     
+    @Test
+    void 보너스_번호에_중복이_있으면_예외를_발생한다() {
+        // given
+        Lotto sut = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        List<Integer> duplicatedMatchNumbers = List.of(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 6;
+        
+        // expected
+        assertThatThrownBy(() -> sut.getMatchResult(duplicatedMatchNumbers, bonusNumber))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage("보너스 번호는 중복되면 안됩니다.");
+    }
+    
     public static Stream<Arguments> provideMatchNumbersAndBonusNumber() {
         return Stream.of(
                 Arguments.of(List.of(1, 2, 3, 4, 5, 6), 7, 6, false),

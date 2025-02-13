@@ -56,6 +56,7 @@ public class Lotto {
     
     public LottoMatchResult getMatchResult(List<Integer> matchNumbers, int bonusNumber) {
         validateMatchNumbersNotDuplicated(matchNumbers);
+        validateBonusNumberNotDuplicated(matchNumbers, bonusNumber);
         int matchCount = 0;
         
         for (Integer matchNumber : matchNumbers) {
@@ -65,6 +66,12 @@ public class Lotto {
         }
         
         return new LottoMatchResult(matchCount, numbers.contains(bonusNumber));
+    }
+    
+    private void validateBonusNumberNotDuplicated(List<Integer> matchNumbers, int bonusNumber) {
+        if (matchNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 중복되면 안됩니다.");
+        }
     }
     
     private void validateMatchNumbersNotDuplicated(List<Integer> matchNumbers) {
