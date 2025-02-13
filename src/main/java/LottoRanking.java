@@ -27,4 +27,12 @@ public enum LottoRanking {
                 .findFirst()
                 .orElse(LOSING);
     }
+
+    public int getPrize() {
+        return prize;
+    }
+
+    public int getCorrectCount() {
+        return correctCount;
+    }
 }

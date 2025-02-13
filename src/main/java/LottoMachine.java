@@ -8,7 +8,7 @@ public class LottoMachine {
         this.ticket = price.getValue() / LOTTO_PRICE;
     }
 
-    public Lottos generateLotto() {
+    public Lottos generateLottos() {
         Lottos lottos = new Lottos();
         for (int i = 0; i < ticket; i++) {
             Lotto lotto = new Lotto(RandomGenerator.generateUniqueRandomNumbers(6, 1, 45));
