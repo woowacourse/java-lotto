@@ -27,4 +27,18 @@ class LottoResultTest {
         lottoResult.add(LottoRanking.FIRST);
         assertThat(lottoResult.result().get(LottoRanking.FIRST)).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("총 상금을 계산할 수 있다")
+    void 총_상금을_계산할_수_있다() {
+        LottoResult lottoResult = LottoResult.initialize();
+        lottoResult.add(LottoRanking.FIRST);
+        lottoResult.add(LottoRanking.SECOND);
+        lottoResult.add(LottoRanking.THIRD);
+
+        assertThat(lottoResult.getTotalPrize())
+                .isEqualTo(LottoRanking.FIRST.getPrize()
+                        + LottoRanking.SECOND.getPrize()
+                        + LottoRanking.THIRD.getPrize());
+    }
 }
