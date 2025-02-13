@@ -1,11 +1,16 @@
 package domain;
 
+import domain.generator.Generator;
+
 public class LottosFactory {
 
-    private LottoFactory lottoFactory;
+    private final LottoFactory lottoFactory;
+
+    public LottosFactory(Generator generator) {
+        this.lottoFactory = new LottoFactory(generator);
+    }
 
     public Lottos from(final Amount amount) {
-        lottoFactory = new LottoFactory();
         Lottos lottos = new Lottos();
         for (int i = 0; amount.compareAmount(i); i++) {
             Lotto lotto = lottoFactory.from();

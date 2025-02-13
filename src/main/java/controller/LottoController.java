@@ -1,9 +1,11 @@
 package controller;
 
 import domain.Amount;
+import domain.LottoFactory;
 import domain.Lottos;
 import domain.LottosFactory;
 import domain.WinningLotto;
+import domain.generator.RandomGenerator;
 import view.InputView;
 import view.OutputView;
 
@@ -22,7 +24,7 @@ public class LottoController {
         Amount amount = new Amount(price);
         outputView.printAmount(amount);
 
-        LottosFactory lottosFactory = new LottosFactory();
+        LottosFactory lottosFactory = new LottosFactory(new RandomGenerator());
         Lottos lottos = lottosFactory.from(amount);
 
         outputView.printLottos(lottos.getLottosDto());
@@ -32,7 +34,8 @@ public class LottoController {
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
 
         outputView.printWinningStatistic();
-        lottos.getResult(winningLotto);
+        lottos.getResult(winningLotto, amount);
+
     }
 
 
