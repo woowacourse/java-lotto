@@ -1,58 +1,34 @@
 package lotto.view;
 
-import lotto.constant.ErrorMessage;
-import lotto.dto.WinningBallsDto;
+import lotto.dto.request.PaymentRequest;
+import lotto.dto.request.WinningBallsRequest;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
-import static lotto.constant.ErrorMessage.*;
 
 public class InputView {
 
     public static final String PAYMENT_MESSAGE = "구입금액을 입력해 주세요.";
     public static final String WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
-    public static final String DELIMITER = ",";
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public int readPayment() {
+    public PaymentRequest readPayment() {
         System.out.println(PAYMENT_MESSAGE);
-        String input = scanner.nextLine();
-
-        return convertToNumber(input);
+        return PaymentRequest.from(scanner.nextLine());
     }
 
-    public WinningBallsDto readWinningBalls() {
-        return new WinningBallsDto(readWinningNumbers(), readBonusNumber());
+    public WinningBallsRequest readWinningBalls() {
+        return WinningBallsRequest.of(readWinningNumbers(), readBonusNumber());
     }
 
-    private List<Integer> readWinningNumbers() {
+    private String readWinningNumbers() {
         System.out.println(WINNING_NUMBER_MESSAGE);
-        String input = scanner.nextLine();
-
-        String[] split = input.split(DELIMITER);
-        List<Integer> numbers = new ArrayList<>();
-        for (String data : split) {
-            numbers.add(convertToNumber(data));
-        }
-        return numbers;
+        return scanner.nextLine();
     }
 
-    private int readBonusNumber() {
+    private String readBonusNumber() {
         System.out.println(BONUS_NUMBER_MESSAGE);
-        String input = scanner.nextLine();
-
-        return convertToNumber(input);
-    }
-
-    private static int convertToNumber(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_NUMBER.getMessage());
-        }
+        return scanner.nextLine();
     }
 }
