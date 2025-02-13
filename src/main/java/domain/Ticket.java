@@ -19,9 +19,8 @@ public class Ticket {
         return price / TICKET_PRICE;
     }
 
-    /***
-     * ticket이라는 빈 껍데기가 만들어지고,
-     * 이후에 buy() 를 호출했을 때, quantity 설정 및 return?
-     */
+    public int getQuantity() {
+        return quantity;
+    }
 
 }

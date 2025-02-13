@@ -18,9 +18,9 @@ public class InputView {
         return new InputView();
     }
 
-    public String purchaseAmountInput() {
+    public int purchaseAmountInput() {
         printMessage(AMOUNT_INPUT_MESSAGE);
-        return basicInput();
+        return Integer.parseInt(basicInput());
     }
 
     public String winningNumbersInput() {
