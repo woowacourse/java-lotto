@@ -29,6 +29,7 @@ public class Controller {
         LottoEvaluator lottoEvaluator = new LottoEvaluator(inputWinningLotto());
         ResultDTO resultDTO = ResultDTO.from(lottoEvaluator.getResult(lottos), lottoEvaluator.computeProfit(lottos));
         outputView.printResult(resultDTO);
+        inputView.closeScanner();
     }
 
     private Lottos buyLottos() {
