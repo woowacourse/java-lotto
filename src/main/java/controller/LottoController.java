@@ -7,12 +7,15 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import view.InputView;
+import view.OutputView;
 
 public class LottoController {
     private final InputView inputView;
+    private final OutputView outputView;
 
-    public LottoController(final InputView inputView) {
+    public LottoController(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
+        this.outputView = outputView;
     }
 
     public void run() throws IOException {
@@ -23,6 +26,7 @@ public class LottoController {
 
         // 2. Lottos 객체 생성하기
         Lottos lottos = Lottos.ofSize(purchaseAmount / 1000);
+        outputView.printPurchasedLottos(lottos);
 
         //3. 당첨 번호 입력받기
         String rawWinningNumber = inputView.readWinningNumber();

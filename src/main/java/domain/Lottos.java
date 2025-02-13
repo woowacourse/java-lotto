@@ -19,5 +19,11 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public List<String> getPurchasedLottos() {
+        return lottos.stream().map(Lotto::toString).toList();
+    }
 
+    public int getQuantity() {
+        return lottos.size();
+    }
 }
