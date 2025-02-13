@@ -1,8 +1,9 @@
 package model;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class HeuristicTest {
 
@@ -13,7 +14,7 @@ class HeuristicTest {
             "0.5, 손해"
     })
     void 수익률에_따라_이익여부_판별한다(double ROI, String expected) {
-        Assertions.assertThat(Heuristic.determine(ROI))
+        assertThat(Heuristic.determine(ROI))
                 .isEqualTo(expected);
     }
 }
