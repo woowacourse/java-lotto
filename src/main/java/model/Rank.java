@@ -6,21 +6,27 @@ import java.util.List;
 import java.util.Set;
 
 public enum Rank {
-    FIFTH(3, 5_000, false),
-    FOURTH(4, 50_000, false),
-    THIRD(5, 1_500_000, false),
-    SECOND(5, 30_000_000, true),
-    FIRST(6, 2_000_000_000, false),
-    FAIL(0, 0, false);
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000),
+    FAIL(0, 0);
 
     private int matchNumber;
     private int winningAmount;
-    private boolean isBonus;
 
-    Rank(int matchNumber, int winningAmount, boolean isBonus) {
+    Rank(int matchNumber, int winningAmount) {
         this.matchNumber = matchNumber;
         this.winningAmount = winningAmount;
-        this.isBonus = isBonus;
+    }
+
+    public int getMatchNumber() {
+        return matchNumber;
+    }
+
+    public int getWinningAmount() {
+        return winningAmount;
     }
 
     public static Rank getRank(WinningLotto winningLotto, LottoDto lottoDto) {

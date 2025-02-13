@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import model.Lotto;
+import model.LottoResult;
 import model.UserLotto;
 import model.WinningLotto;
 import view.InputValidator;
@@ -21,11 +22,14 @@ public class LottoController {
         //1. 구입 금액 입력 + 로또 생성
         UserLotto userLotto = getUserLotto();
         //3. 로또들 출력
-        outputView.printPurchaseLottos(userLotto.getLottosDto());
+        outputView.printPurchaseLottos(userLotto.getSortedLottosDto());
         //4. 당첨 번호, 보너스 볼 입력
         WinningLotto winningLotto = getWinningLotto();
         setBonus(winningLotto);
         //5. 당첨 통계, 수익률 출력
+        LottoResult lottoResult = new LottoResult(userLotto, winningLotto);
+        outputView.printResultRanks(lottoResult.getRanks());
+        outputView.printProfitRate(lottoResult.getProfitRate());
     }
 
     private void setBonus(WinningLotto winningLotto) {

@@ -15,7 +15,19 @@ public class UserLotto {
         }
     }
 
+    public int getPurchaseAmount() {
+        return purchaseNumber * 1000;
+    }
+
     public List<LottoDto> getLottosDto() {
+        List<LottoDto> lottosDto = new ArrayList<>();
+        for(Lotto lotto : lottos) {
+            lottosDto.add(LottoDto.from(lotto));
+        }
+        return lottosDto;
+    }
+
+    public List<LottoDto> getSortedLottosDto() {
         List<LottoDto> lottosDto = new ArrayList<>();
         for(Lotto lotto : lottos) {
             lottosDto.add(LottoDto.getSortedLottoDto(lotto));
