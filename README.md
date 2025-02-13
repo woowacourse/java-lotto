@@ -1,4 +1,4 @@
-# java-convenience-store-7-rework
+# java-lotto
 
 ## :sparkling_heart: 프로젝트 소개
 
