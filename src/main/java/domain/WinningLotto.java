@@ -1,5 +1,6 @@
 package domain;
 
+import constant.WinningCount;
 import dto.WinningLottoDto;
 import java.util.List;
 
@@ -33,5 +34,30 @@ public class WinningLotto {
 
     public WinningLottoDto getWinningLottoDto(){
         return new WinningLottoDto(lotto.getSortedNumbers(),bonusNumber);
+    }
+
+    public WinningCount getLottoResult(List<Integer> issuedLotto) {
+        int matchedCount = (int) issuedLotto.stream().filter(lotto.getSortedNumbers()::contains).count();
+        boolean isBonusContained = issuedLotto.contains(bonusNumber);
+        return getWinningCount(matchedCount, isBonusContained);
+    }
+
+    private WinningCount getWinningCount(int matchedCount, boolean isBonusContained) {
+        if (matchedCount < WinningCount.THREE.getMatchedCount()) {
+            return WinningCount.NONE;
+        }
+        if (matchedCount == WinningCount.THREE.getMatchedCount()) {
+            return WinningCount.THREE;
+        }
+        if (matchedCount == WinningCount.FOUR.getMatchedCount()) {
+            return WinningCount.FOUR;
+        }
+        if (matchedCount == WinningCount.FIVE.getMatchedCount()&& isBonusContained) {
+            return WinningCount.FIVE_BONUS;
+        }
+        if (matchedCount == WinningCount.FIVE.getMatchedCount()) {
+            return WinningCount.FIVE;
+        }
+        return WinningCount.SIX;
     }
 }
