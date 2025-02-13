@@ -1,5 +1,6 @@
 package model;
 
+import static model.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
 import static model.ExceptionMessage.INVALID_LOTTO_RANGE;
 import static model.ExceptionMessage.INVALID_LOTTO_SIZE;
 import static model.ExceptionMessage.INVALID_LOTTO_TYPE;
@@ -19,6 +20,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public static Lotto of(final String input) { // "1, 2, 3, 4, 5, 6"
+        validateNullOrBlank(input);
         String[] splitInputs = input.split(SEPARATOR);
         List<String> parsedInputs = List.of(splitInputs);
 
@@ -36,6 +38,12 @@ public class Lotto {
         validateRange(numbers);
         validateDuplicate(numbers);
         this.numbers = numbers;
+    }
+
+    private static void validateNullOrBlank(String input) {
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException(INVALID_INPUT_NULL_OR_BLANK.getMessage());
+        }
     }
 
     private static void validateSize(final List<Integer> numbers) {
