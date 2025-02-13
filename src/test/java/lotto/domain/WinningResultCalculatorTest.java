@@ -48,14 +48,10 @@ public class WinningResultCalculatorTest {
         WinningResultCalculator winningResultCalculator = new WinningResultCalculator(winningLotto, bonusNumber);
 
         // When
-        Map<LottoAward, Integer> winningResult = winningResultCalculator.countLottoPrizes(lottos);
+        WinningResult winningResult = winningResultCalculator.countLottoPrizes(lottos);
+        Map<LottoAward, Integer> expectedResult = Map.of(LottoAward.FIRST_RANK, 1, LottoAward.SECOND_RANK, 1, LottoAward.THIRD_RANK, 1, LottoAward.FOURTH_RANK, 1, LottoAward.FIFTH_RANK, 0);
 
         // Then
-        assertAll(
-                () -> Assertions.assertThat(winningResult.get(LottoAward.FIRST_RANK)).isEqualTo(1),
-                () -> Assertions.assertThat(winningResult.get(LottoAward.SECOND_RANK)).isEqualTo(1),
-                () -> Assertions.assertThat(winningResult.get(LottoAward.THIRD_RANK)).isEqualTo(1),
-                () -> Assertions.assertThat(winningResult.get(LottoAward.FOURTH_RANK)).isEqualTo(1)
-        );
+        Assertions.assertThat(winningResult.getWinningResult()).isEqualTo(expectedResult);
     }
 }

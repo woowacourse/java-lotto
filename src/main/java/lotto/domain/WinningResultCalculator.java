@@ -16,7 +16,7 @@ public class WinningResultCalculator {
         this.bonusNumber = bonusNumber;
     }
 
-    public Map<LottoAward, Integer> countLottoPrizes(final List<Lotto> lottos) {
+    public WinningResult countLottoPrizes(final List<Lotto> lottos) {
         Map<LottoAward, Integer> winningResult = initializeWinningResult();
         for (Lotto lotto : lottos) {
             int matchingCount = winningLotto.countMatchingLottoNumber(lotto);
@@ -24,7 +24,7 @@ public class WinningResultCalculator {
             LottoAward lottoAward = LottoAward.from(matchingCount, isBonusNumberMatched);
             winningResult.merge(lottoAward, 1, Integer::sum);
         }
-        return Collections.unmodifiableMap(winningResult);
+        return new WinningResult(winningResult);
     }
 
     private Map<LottoAward, Integer> initializeWinningResult() {
