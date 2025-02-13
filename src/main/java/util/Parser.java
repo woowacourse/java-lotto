@@ -3,9 +3,15 @@ package util;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import model.Lotto;
+import model.Money;
 import model.Number;
 
 public class Parser {
+
+    public static Money parseMoney(String rawMoney) {
+        return new Money(parseInt(rawMoney));
+    }
+
     public static Lotto parseLotto(String rawInputLotto){
         String[] splittedInput = rawInputLotto.split(", ");
         return new Lotto(Arrays.stream(splittedInput)
@@ -17,7 +23,7 @@ public class Parser {
         return new Number(parseInt(rawNumber));
     }
 
-    private static Integer parseInt(String value){
+    public static Integer parseInt(String value){
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e){

@@ -6,6 +6,7 @@ import model.Lotto;
 import model.LottoGenerater;
 import model.LottoNumberPicker;
 import model.Lottos;
+import model.Money;
 import model.Number;
 import model.WinningLotto;
 import util.Parser;
@@ -24,13 +25,11 @@ public class Controller {
     }
 
     public void run() {
-        int price = Integer.parseInt(inputView.inputPrice());
-        int ticketCount = price / 1000;
-
+        Money money = Parser.parseMoney(inputView.inputMoney());
         LottoNumberPicker lottoNumberPicker = new LottoNumberPicker();
         LottoGenerater lottoGenerater = new LottoGenerater(lottoNumberPicker);
         List<Lotto> generatedLottos = new ArrayList<>();
-        for (int i = 0; i < ticketCount; i++) {
+        for (int i = 0; i < money.computeTicketCount(); i++) {
             Lotto lotto = lottoGenerater.generateLotto();
             generatedLottos.add(lotto);
         }
