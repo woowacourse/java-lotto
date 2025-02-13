@@ -5,14 +5,16 @@ import java.util.List;
 
 public class Lottos {
     private List<Lotto> lottos = new ArrayList<>();
+    private RandomNumber randomNumber;
 
-    public Lottos(int lottoCounts) {
+    public Lottos(int lottoCounts, RandomNumber randomNumber) {
+        this.randomNumber = randomNumber;
         generateLottos(lottoCounts);
     }
 
     private void generateLottos(int lottoCounts) {
         for (int i = 0; i < lottoCounts; i ++) {
-            lottos.add(new Lotto(new RandomNumber()));
+            lottos.add(new Lotto(randomNumber));
         }
     }
 

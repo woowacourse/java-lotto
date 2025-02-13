@@ -34,7 +34,7 @@ public class Money {
     }
     private void validateNegative(int validatedMoney) {
         if (validatedMoney <= 0) {
-            throw new IllegalArgumentException("구입금액은 천원부터입니다");
+            throw new IllegalArgumentException("구입금액은 천원부터입니다.");
         }
     }
     private void validateLimit(int validatedMoney) {

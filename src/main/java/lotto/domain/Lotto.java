@@ -49,7 +49,7 @@ public class Lotto {
     private void validateDuplicate(List<Integer> parsedLotto) {
         Set<Integer> unDuplicatedLotto = new HashSet<>(parsedLotto);
         if (unDuplicatedLotto.size() != 6) {
-            throw new IllegalArgumentException("로또 6개의 숫자를 입력하셔야 합니다.");
+            throw new IllegalArgumentException("로또 숫자는 중복될 수 없습니다.");
         }
     }
     public void checkDuplicate(int bonusNumber) {
@@ -59,19 +59,7 @@ public class Lotto {
     }
 
     private List<Integer> generateLotto() {
-        List<Integer> lotto = new ArrayList<>();
-        while(lotto.size() < 6) {
-            int number = randomNumber.generateRandomNumber();
-            checkDuplicate(lotto, number);
-        }
-        Collections.sort(lotto);
-        return lotto;
-    }
-
-    private void checkDuplicate(List<Integer> lotto, int number) {
-        if (!lotto.contains(number)) {
-            lotto.add(number);
-        }
+        return randomNumber.generateLotto();
     }
 
     @Override

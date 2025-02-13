@@ -45,7 +45,7 @@ public class LottoController {
     private void purchaseLotto(Money money) {
         int lottoCounts = money.countsLotto();
         outputView.printCount(lottoCounts);
-        lottos = new Lottos(lottoCounts);
+        lottos = new Lottos(lottoCounts, new RandomNumber());
         outputView.printLottos(lottos);
     }
 
