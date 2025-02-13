@@ -1,20 +1,41 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
+
 import java.util.*;
+
+import static lotto.constant.ErrorMessage.*;
 
 public class Lotto {
     public static final int PRICE = 1000;
-    public List<Integer> numbers = new ArrayList<>();
+    public static final int LOTTO_NUMBER_COUNT = 6;
+    public static final int MINIMUM_NUMBER = 1;
+    public static final int MAXIMUM_NUMBER = 45;
+
+    public final List<Integer> numbers;
 
     public Lotto() {
         Set<Integer> set = new TreeSet();
-        while (set.size() < 6) {
-            set.add((int)(Math.random() * 45) + 1);
+        while (set.size() < LOTTO_NUMBER_COUNT) {
+            set.add((int)(Math.random() * MAXIMUM_NUMBER) + MINIMUM_NUMBER);
         }
-        numbers.addAll(set);
+        this.numbers = new ArrayList<>(set);
     }
 
     public Lotto(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_COUNT.getMessage());
+        }
+
+        if (numbers.stream().distinct().count() != numbers.size()) {
+            throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBER.getMessage());
+        }
+
+        numbers.forEach(number ->{
+            if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
+                throw new IllegalArgumentException(OUT_OF_RANGE_LOTTO_NUMBER.getMessage());
+            }
+        });
         this.numbers = numbers;
     }
 
@@ -34,5 +55,9 @@ public class Lotto {
 
     public List<Integer> getNumbers() {
         return numbers;
+    }
+
+    public boolean containsNumber(int bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 }
