@@ -8,14 +8,27 @@ public enum MatchStatistics {
     MATCH_SIX(6, 2000000000),
     NO_MATCH(0, 0);;
 
-    private int number;
-    private int money;
+    private final int number;
+    private final int money;
 
     MatchStatistics(int number, int money) {
+        this.number = number;
+        this.money = money;
     }
 
-    public MatchStatistics getMatchStatistics(int matchNumber, boolean bonus) {
-        if (matchNumber == 5 && bonus) {
+    public int getMoney() {
+        return money;
+    }
+
+    public String getMatchData() {
+        if (this == MATCH_BONUS) {
+            return number + "개 일치, 보너스 볼 일치 (" + money + "원)- ";
+        }
+        return number + "개 일치 (" + money + "원)- ";
+    }
+
+    public static MatchStatistics getMatchStatistics(int matchNumber, boolean bonus) {
+        if (isMatchBonus(matchNumber, bonus)) {
             return MATCH_BONUS;
         }
         //당첨 번호 개수  보너스 번호
@@ -25,5 +38,9 @@ public enum MatchStatistics {
             }
         }
         return NO_MATCH;
+    }
+
+    private static boolean isMatchBonus(int matchNumber, boolean bonus) {
+        return matchNumber == 5 && bonus;
     }
 }
