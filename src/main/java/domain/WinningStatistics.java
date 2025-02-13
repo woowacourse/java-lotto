@@ -43,12 +43,28 @@ public enum WinningStatistics {
         return winningCountDtos;
     }
 
+    public static double calculateYield(int purchaseAmount, List<WinningCountDto> winningCountDtos) {
+        int totalPrizeMoney = winningCountDtos.stream()
+                .mapToInt(winningCountDto -> winningCountDto.winningStatistics().getPrizeMoney()
+                        * winningCountDto.count())
+                .sum();
+
+        return (double) totalPrizeMoney / purchaseAmount;
+    }
+
     private static WinningStatistics findByMatchDto(MatchDto matchDto) {
-        return Arrays.stream(WinningStatistics.values())
+        List<WinningStatistics> winningStatisticsFilteredByMatchCount = Arrays.stream(WinningStatistics.values())
                 .filter(winningStatistics -> winningStatistics.isMatchCount(matchDto.winningNumberCount()))
-                .filter(winningStatistics -> winningStatistics.isBonusMatched(matchDto.hasBonusNumber()))
-                .findFirst()
-                .orElse(NONE);
+                .toList();
+
+        if (winningStatisticsFilteredByMatchCount.size() == 2) {
+            return winningStatisticsFilteredByMatchCount.stream()
+                    .filter(winningStatistics -> winningStatistics.isBonusMatched(matchDto.hasBonusNumber()))
+                    .findFirst()
+                    .orElse(NONE);
+        }
+
+        return winningStatisticsFilteredByMatchCount.getFirst();
     }
 
     public int getPrizeMoney() {

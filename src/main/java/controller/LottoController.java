@@ -34,5 +34,8 @@ public class LottoController {
         List<MatchDto> matchDtos = lottos.getMatchDtos(winningNumbers, bonusNumber);
         List<WinningCountDto> winningCountDtos = WinningStatistics.calculateWinningCountDtos(matchDtos);
         outputView.printWinningStatistics(winningCountDtos);
+
+        double yield = WinningStatistics.calculateYield(purchaseAmount, winningCountDtos);
+        outputView.printYield(yield);
     }
 }
