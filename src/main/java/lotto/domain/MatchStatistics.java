@@ -25,7 +25,6 @@ public enum MatchStatistics {
 
     public String getMatchData() {
         if (this == MATCH_BONUS) {
-
             return String.format(BONUS_OUTPUT, number, money);
         }
         return String.format(BASIC_OUTPUT, number, money);
