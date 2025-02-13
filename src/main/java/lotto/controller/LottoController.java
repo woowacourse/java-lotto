@@ -19,19 +19,29 @@ public class LottoController {
 
     public void run() {
         int money = inputView.inputMoney();
-        int lottoCounts = money / 1000;
-        outputView.printCount(lottoCounts);
-        lottos = new Lottos(lottoCounts);
-        outputView.printLottos(lottos);
+        purchaseLotto(money);
+        operateWinningLotto();
+        operateStatistics(money);
+    }
 
+    private void operateWinningLotto() {
         Lotto winningLottoNumber = new Lotto(inputView.inputWinningLotto());
         int bonusNumber = inputView.inputBonusNumber();
         winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
+    }
 
+    private void operateStatistics(int money) {
         Prizes prizes = lottos.calculatePrize(winningLotto);
         double totalProfit = prizes.calculateProfit(money);
 
         outputView.printResult(prizes.toString().trim());
         outputView.printProfitRate(totalProfit);
+    }
+
+    private void purchaseLotto(int money) {
+        int lottoCounts = money / 1000;
+        outputView.printCount(lottoCounts);
+        lottos = new Lottos(lottoCounts);
+        outputView.printLottos(lottos);
     }
 }
