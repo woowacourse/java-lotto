@@ -28,7 +28,6 @@ class LottoTest {
         assertThat(lotto.getNumbers()).containsExactlyElementsOf(List.of(1, 2, 3, 4, 5, 6));
     }
 
-
     @DisplayName("중복되는 번호가 있는지 검증한다.")
     @Test
     void 중복되는_번호가_있는지_검증한다() {
@@ -55,5 +54,4 @@ class LottoTest {
                 .isThrownBy(() -> new Lotto(numbers))
                 .withMessage(ExceptionMessage.INVALID_NUMBER_COUNT.getContent());
     }
-
 }

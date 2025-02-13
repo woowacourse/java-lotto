@@ -51,8 +51,7 @@ class InputValidatorTest {
                 .isThrownBy(() -> InputValidator.validatePurchaseAmount(1500))
                 .withMessage(expectedMessage);
     }
-
-
+    
     @DisplayName("당첨 번호가 숫자가 아닌 경우 예외 발생")
     @Test
     void 당첨_번호가_숫자가_아닌_경우_예외_발생() {
