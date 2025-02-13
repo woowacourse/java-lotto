@@ -25,7 +25,7 @@ public enum LottoRank {
     }
 
     // 일치하는 번호 갯수와 보너스 번호 일치 여부로 랭크 반환
-    public static LottoRank findByMatchedCountAndIsBonus(int matchedCount, boolean isBonus){
+    public static LottoRank findByMatchedCountAndIsBonus(int matchedCount, boolean isBonus) {
         return Arrays.stream(LottoRank.values())
                 .filter(rank -> rank.matchedCount == matchedCount)
                 .filter(rank -> Objects.equals(isBonus, rank.isBonus))
@@ -34,9 +34,8 @@ public enum LottoRank {
     }
 
     // 당첨 내역 리스트 반환
-    public static List<LottoRank> findByAllWithoutNone(){
+    public static List<LottoRank> findByAllWithoutNone() {
         return Arrays.stream(LottoRank.values())
-                .filter(rank -> !Objects.equals(rank, LottoRank.NONE))
                 .sorted((r1, r2) -> r2.rank - r1.rank)
                 .toList();
     }
@@ -45,7 +44,7 @@ public enum LottoRank {
         return price;
     }
 
-    public int getRank() {
-        return rank;
+    public int getMatchedCount() {
+        return matchedCount;
     }
 }
