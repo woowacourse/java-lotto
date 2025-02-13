@@ -3,8 +3,6 @@ package lotto.view;
 import static lotto.common.Constants.ENTER;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoGroup;
-import lotto.domain.Profit;
 import lotto.domain.Rank;
 import lotto.dto.LottoGroupDto;
 import lotto.dto.ProfitDto;
