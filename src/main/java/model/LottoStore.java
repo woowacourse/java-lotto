@@ -3,6 +3,7 @@ package model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class LottoStore {
@@ -41,6 +42,7 @@ public class LottoStore {
     private List<LottoRank> calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
         return lottoTickets.stream()
                 .map(lottoTicket -> lottoRankCalculator.calculate(lottoTicket, winningLotto))
+                .filter(Objects::nonNull)
                 .toList();
     }
 

@@ -48,8 +48,12 @@ public enum LottoRank {
             boolean isBonusNUmberOverlapped
     ) {
         return Arrays.stream(LottoRank.values())
-                .filter(rank -> rank.overlappedCount == overlappedCount)
-                .filter(rank -> rank.requiredBonusNumber == isBonusNUmberOverlapped)
+                .filter(rank -> {
+                    if (overlappedCount == REQUIRED_BONUS_OVERLAPPED_COUNT) {
+                        return rank.isRequiredBonusNumber() && rank.overlappedCount == overlappedCount;
+                    }
+                    return rank.overlappedCount == overlappedCount;
+                })
                 .findFirst()
                 .orElse(null);
     }

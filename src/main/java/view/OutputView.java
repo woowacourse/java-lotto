@@ -23,21 +23,21 @@ public class OutputView {
         System.out.println("당첨 통계\n" + "---------");
         lottoRankResponses.sort(Comparator.comparing(LottoRankResponse::rankOrder).reversed());
         lottoRankResponses.forEach(lottoRankResponse -> {
-            if(lottoRankResponse.isBonusMatched()) {
-                System.out.printf(
-                        "%d개 일치, 보너스 볼 일치(%d원)- %d개\n",
-                        lottoRankResponse.overlappedCount(),
-                        lottoRankResponse.winningAmount(),
-                        lottoRankResponse.rankMatchCount()
-                );
-                return;
-            }
+                    if (lottoRankResponse.isBonusMatched()) {
+                        System.out.printf(
+                                "%d개 일치, 보너스 볼 일치(%d원)- %d개\n",
+                                lottoRankResponse.overlappedCount(),
+                                lottoRankResponse.winningAmount(),
+                                lottoRankResponse.rankMatchCount()
+                        );
+                        return;
+                    }
                     System.out.printf(
                             "%d개 일치 (%d원)- %d개\n",
                             lottoRankResponse.overlappedCount(),
                             lottoRankResponse.winningAmount(),
                             lottoRankResponse.rankMatchCount()
-                            );
+                    );
                 }
         );
     }

@@ -19,11 +19,12 @@ public class LottoDtoMapper {
     }
 
     public List<LottoRankResponse> toLottoRankResponses(Map<LottoRank, Integer> rankCount) {
-        return rankCount.keySet().stream()
+        return new java.util.ArrayList<>(rankCount.keySet().stream()
                 .map(rank -> {
                     int rankMatchCount = rankCount.get(rank);
                     return LottoRankResponse.of(rank, rankMatchCount);
                 })
-                .toList();
+                .toList());
     }
+
 }
