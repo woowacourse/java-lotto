@@ -20,6 +20,7 @@ public class WinningResult {
             final LottoRank lottoRank = winningNumber.calculateRankByLotto(lotto);
             winningResult.merge(lottoRank, 1, Integer::sum);
         }
+        winningResult.remove(LottoRank.NONE);
         return winningResult;
     }
 
