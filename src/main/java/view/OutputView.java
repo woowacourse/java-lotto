@@ -1,6 +1,8 @@
 package view;
 
+import domain.Lotto;
 import domain.Ticket;
+import java.util.List;
 
 public class OutputView {
 
@@ -15,6 +17,12 @@ public class OutputView {
     public void printPurchaseResult(Ticket ticket) {
         System.out.printf(PURCHASE_RESULT, ticket.getQuantity());
         changeLine();
+    }
+
+    public void printLottos(List<Lotto> lottos){
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto.getNumbers());
+        }
     }
 
     private void changeLine() {

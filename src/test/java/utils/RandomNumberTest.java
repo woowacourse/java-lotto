@@ -1,5 +1,7 @@
 package utils;
 
+import static domain.LottoRules.MAX_NUMBER;
+import static domain.LottoRules.MIN_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -13,7 +15,7 @@ public class RandomNumberTest {
     @RepeatedTest(100)
     void 랜덤_번호_생성_테스트() {
         List<Integer> randomNumbers = RandomNumber.generateNumbers(1);
-        assertThat(randomNumbers.get(0)).isBetween(1, 45);
+        assertThat(randomNumbers.get(0)).isBetween(MIN_NUMBER, MAX_NUMBER);
     }
 
     @DisplayName("로또 번호는 입력한 size만큼 생성되어야 한다.")
