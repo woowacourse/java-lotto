@@ -8,12 +8,14 @@ import model.Number;
 
 public class Parser {
 
+    private static final String DELIMITER = ", ";
+
     public static Money parseMoney(String rawMoney) {
         return new Money(parseInt(rawMoney));
     }
 
     public static Lotto parseLotto(String rawInputLotto){
-        String[] splittedInput = rawInputLotto.split(", ");
+        String[] splittedInput = rawInputLotto.split(DELIMITER);
         return new Lotto(Arrays.stream(splittedInput)
                 .map(Parser::parseNumber)
                 .collect(Collectors.toSet()));

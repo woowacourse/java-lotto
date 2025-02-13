@@ -12,15 +12,16 @@ class LottoTest {
     @Test
     void 로또의_로또_번호는_6개이다() {
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(Set.of(
+            new Lotto(Set.of(
                     new Number(1),
                     new Number(2),
                     new Number(3),
                     new Number(4),
                     new Number(5),
+                    new Number(6),
                     new Number(6)
             ));
-        });
+        }).isInstanceOf(RuntimeException.class);
     }
 
     @Test
@@ -44,7 +45,8 @@ class LottoTest {
         Lotto lotto = new Lotto(numbers2);
 
         WinningLotto winningLotto1 = new WinningLotto(winningLotto, new Number(19));
-        Prize prize = lotto.calculatePrize(winningLotto1).get();
+        LottoEvaluator lottoEvaluator = new LottoEvaluator(winningLotto1);
+        Prize prize = lottoEvaluator.calculatePrize(lotto).get();
         assertThat(prize).isEqualTo(Prize._4TH);
     }
 
@@ -69,7 +71,8 @@ class LottoTest {
         Lotto lotto = new Lotto(numbers2);
 
         WinningLotto winningLotto1 = new WinningLotto(winningLotto, new Number(7));
-        Prize prize = lotto.calculatePrize(winningLotto1).get();
+        LottoEvaluator lottoEvaluator = new LottoEvaluator(winningLotto1);
+        Prize prize = lottoEvaluator.calculatePrize(lotto).get();
         assertThat(prize).isEqualTo(Prize._2ND);
     }
 }

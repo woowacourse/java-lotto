@@ -15,6 +15,7 @@ public enum Prize {
     final int price;
     final int count;
     final boolean bonus;
+    final static int FIVE_MATCH = 5;
 
     Prize(int rank, int count, boolean bonus, int price) {
         this.rank = rank;
@@ -24,7 +25,7 @@ public enum Prize {
     }
 
     public static Optional<Prize> findPrize(int count, boolean bonus) {
-        if (bonus && count == 5){
+        if (bonus && count == FIVE_MATCH){
             return Optional.of(_2ND);
         }
         return Arrays.stream(Prize.values())
@@ -34,10 +35,6 @@ public enum Prize {
 
     public int getPrice() {
         return price;
-    }
-
-    public int getRank() {
-        return rank;
     }
 
     public int getCount() {

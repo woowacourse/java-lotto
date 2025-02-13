@@ -1,18 +1,24 @@
 package model;
 
+import static constant.LottoConstant.LOTTO_PRICE;
+
 public record Money(
         int value
 ) {
+
+    private static final int REMAIN_PRICE = 0;
+    private static final int MIN_PRICE = 1_000;
+
     public Money {
-        if (value % 1000 != 0) {
-            throw new IllegalArgumentException("금액은 1000원 단위로 입력해 주세요.");
+        if (value % LOTTO_PRICE != REMAIN_PRICE) {
+            throw new IllegalArgumentException("금액은 1,000원 단위로 입력해 주세요.");
         }
-        if (value <= 0) {
-            throw new IllegalArgumentException("금액은 0원 이상이여야 합니다.");
+        if (value <= MIN_PRICE) {
+            throw new IllegalArgumentException("금액은 1,000원 이상이여야 합니다.");
         }
     }
 
     public int computeTicketCount() {
-        return value / 1000;
+        return value / LOTTO_PRICE;
     }
 }

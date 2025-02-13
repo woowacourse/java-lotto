@@ -18,7 +18,6 @@ public class Lottos {
         return lottos.size();
     }
 
-    // 스트림을 반환하는 메서드 추가
     public Stream<Lotto> stream() {
         return lottos.stream();
     }

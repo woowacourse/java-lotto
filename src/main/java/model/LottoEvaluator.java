@@ -1,5 +1,8 @@
 package model;
 
+import static constant.LottoConstant.LOTTO_PRICE;
+
+import constant.LottoConstant;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
@@ -7,6 +10,8 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class LottoEvaluator {
+    private static final int COUNTER_STEP = 1;
+    private static final int DEFAULT_COUNT = 0;
     private final WinningLotto winningLotto;
 
     public LottoEvaluator(WinningLotto winningLotto) {
@@ -15,12 +20,10 @@ public class LottoEvaluator {
 
     public Map<Prize, Integer> getResult(Lottos lottos) {
         Map<Prize, Integer> result = new TreeMap<>();
-        Arrays.stream(Prize.values()).forEach(prize -> result.put(prize, 0));
+        Arrays.stream(Prize.values()).forEach(prize -> result.put(prize, DEFAULT_COUNT));
         lottos.stream()
-                .forEach(lotto ->
-                calculatePrize(lotto)
-                        .ifPresent(prize -> result.put(prize, result.get(prize) + 1))
-        );
+                .forEach(lotto -> calculatePrize(lotto)
+                        .ifPresent(prize -> result.merge(prize, COUNTER_STEP, Integer::sum)));
         return result;
     }
 
@@ -30,7 +33,7 @@ public class LottoEvaluator {
         for (var entry : result.entrySet()) {
             sum += entry.getKey().price * entry.getValue();
         }
-        return sum / (lottos.computeTicketCount() * 1000.0);
+        return sum / (lottos.computeTicketCount() * (double) LOTTO_PRICE);
     }
 
     public Optional<Prize> calculatePrize(Lotto lotto) {
@@ -40,7 +43,10 @@ public class LottoEvaluator {
         }
         Set<Number> winningNumbers = winningLotto.getLotto().getLottoNumbers();
         Set<Number> matchedLottoNumbers = lotto.getLottoNumbers();
+        System.out.println(winningNumbers);
+        System.out.println(matchedLottoNumbers);
         matchedLottoNumbers.retainAll(winningNumbers);
+        System.out.println(matchedLottoNumbers.size());
         int matchCount = matchedLottoNumbers.size();
         return Prize.findPrize(matchCount, bonus);
     }

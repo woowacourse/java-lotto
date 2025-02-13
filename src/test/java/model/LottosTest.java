@@ -17,9 +17,6 @@ class LottosTest {
     void 내가_구매한_모든_로또에_대해서_통계_확인한다() {
         Lotto winningLotto = generateTestLotto(1,2,3,4,5,6);
         Number bonus = new Number(10);
-
-
-
         Lottos lottos = new Lottos(Arrays.asList(
                 generateTestLotto(1,2,3,6,7,8),
                 generateTestLotto(10,11,12,4,5,6),
@@ -27,7 +24,8 @@ class LottosTest {
                 generateTestLotto(1,2,3,4,5,10)
         ));
 
-        Map<Prize, Integer> result = lottos.getResult(new WinningLotto(winningLotto, bonus));
+        LottoEvaluator lottoEvaluator = new LottoEvaluator(new WinningLotto(winningLotto, bonus));
+        Map<Prize, Integer> result = lottoEvaluator.getResult(lottos);
 
         assertThat(result.get(Prize._5TH)).isEqualTo(1);
         assertThat(result.get(Prize._4TH)).isEqualTo(2);
@@ -45,8 +43,8 @@ class LottosTest {
                 generateTestLotto(1,2,3,4,10,11),
                 generateTestLotto(1,2,3,4,5,10)
         ));
-
-        assertThat(lottos.computeProfit(new WinningLotto(winningLotto, bonus))).isEqualTo(7526.25);
+        LottoEvaluator lottoEvaluator = new LottoEvaluator(new WinningLotto(winningLotto, bonus));
+        assertThat(lottoEvaluator.computeProfit(lottos)).isEqualTo(7526.25);
 
     }
 

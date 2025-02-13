@@ -1,5 +1,7 @@
 package model;
 
+import static constant.LottoConstant.LOTTO_NUMBER_COUNT;
+
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -12,7 +14,7 @@ public class LottoGenerater {
 
     public Lotto generateLotto() {
         Set<Number> numbers = new TreeSet<>();
-        while(numbers.size() != 6) {
+        while(numbers.size() != LOTTO_NUMBER_COUNT) {
             numbers.add(lottoNumberPicker.pickRandomNumber());
         }
         return new Lotto(numbers);
