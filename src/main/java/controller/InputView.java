@@ -13,11 +13,12 @@ public class InputView {
     }
     
     public int inputMoney() {
-        return SC.nextInt();
+        String moneyString = SC.nextLine();
+        return Integer.parseInt(moneyString);
     }
     
     public List<Integer> inputMatchLotto() {
-        String numbersString = SC.next();
+        String numbersString = SC.nextLine();
         
         String[] numbers = numbersString.split(",");
         
@@ -28,6 +29,7 @@ public class InputView {
     }
     
     public int inputBonusNumber() {
-        return SC.nextInt();
+        String bonusString = SC.nextLine();
+        return Integer.parseInt(bonusString);
     }
 }
