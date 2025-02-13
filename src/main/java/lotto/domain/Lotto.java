@@ -37,5 +37,13 @@ public class Lotto {
                 .toList();
     }
 
-    //TODO WinnerLotto와 Lotto를 비교하는 메서드
+    @Override
+    public String toString() {
+        StringJoiner joiner = new StringJoiner(", ", "[", "]");
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            joiner.add(lottoNumber.toString());
+        }
+        return joiner.toString();
+    }
 }
