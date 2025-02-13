@@ -23,8 +23,10 @@ public class LottoStore {
                 .toList();
     }
 
-    public void calculateRank(LottoTicket lottoTicket, WinningLotto winningLotto) {
-        lottoRankCalculator.calculate(lottoTicket, winningLotto);
+    public List<LottoRank> calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
+        return lottoTickets.stream()
+                .map(lottoTicket -> lottoRankCalculator.calculate(lottoTicket, winningLotto))
+                .toList();
     }
 
     private void validateAmountUnit(int purchaseAmount) {

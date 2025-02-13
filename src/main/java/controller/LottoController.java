@@ -41,8 +41,6 @@ public class LottoController {
     }
 
     private void calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
-        lottoTickets.forEach(lottoTicket -> {
-            lottoStore.calculateRank(lottoTicket, winningLotto);
-        });
+        lottoStore.calculateRank(lottoTickets, winningLotto);
     }
 }
