@@ -14,9 +14,8 @@ public class Application {
             System.out.println(lotto.getNumbers());
         }
 
-        List<Integer> winningNumbers = getWinningNumbers();
-
-        int bonusNumber = getBonusNumber();
+        WinningNumbers winningNumbers = getWinningNumbers();
+        int bonusNumber = getBonusNumber(winningNumbers);
     }
 
     private static List<Lotto> purchaseLottos() {
@@ -40,17 +39,18 @@ public class Application {
         }
     }
 
-    private static List<Integer> getWinningNumbers() {
+    private static WinningNumbers getWinningNumbers() {
         try {
             System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
             Scanner scanner = new Scanner(System.in);
-            String[] inputWinningNumbers = scanner.next().split(",");
+            String input = scanner.nextLine();
+            String[] inputWinningNumbers = input.split(",");
             List<Integer> winningNumbers = new ArrayList<>();
             for (String inputWinningNumber : inputWinningNumbers) {
-                winningNumbers.add(Integer.parseInt(inputWinningNumber));
+                winningNumbers.add(Integer.parseInt(inputWinningNumber.trim()));
             }
             validateWinningNumbers(winningNumbers);
-            return winningNumbers;
+            return new WinningNumbers(winningNumbers);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getWinningNumbers();
@@ -67,16 +67,17 @@ public class Application {
         }
     }
 
-    private static int getBonusNumber() {
+    private static int getBonusNumber(final WinningNumbers winningNumbers) {
         try {
             System.out.println("보너스 볼을 입력해 주세요.");
             Scanner scanner = new Scanner(System.in);
             int bonusNumber = scanner.nextInt();
             validateLottoNumber(bonusNumber);
+            winningNumbers.validateBonusNumberDuplicated(bonusNumber);
             return bonusNumber;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getBonusNumber();
+            return getBonusNumber(winningNumbers);
         }
     }
 
