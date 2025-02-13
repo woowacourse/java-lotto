@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
     
@@ -64,7 +65,21 @@ class LottoTest {
         
         //than
         assertThat(result).isEqualTo(expected);
+    }
+    
+    @Test
+    void 금액이_1000원_미만이면_예외를_발생한다() {
+        int money = 999;
         
+        NumberPicker numberPicker = new StaticNumberPicker(List.of(
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(14, 15, 16, 13, 12, 9),
+                List.of(43, 41, 40, 23, 35, 22),
+                List.of(9, 7, 13, 14, 16, 2)
+        ));
+        assertThatThrownBy(() -> Lotto.purchase(money, numberPicker))
+                .isExactlyInstanceOf(IllegalStateException.class)
+                .hasMessage("금액은 1000원 이상이여아 합니다.");
     }
     
     public static Stream<Arguments> provideMatchNumbers() {

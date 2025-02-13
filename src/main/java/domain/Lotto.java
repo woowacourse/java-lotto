@@ -21,6 +21,8 @@ public class Lotto {
     }
     
     public static List<Lotto> purchase(int money, NumberPicker numberPicker) {
+        validateMinPrice(money);
+        
         List<Lotto> lottos = new ArrayList<>();
         int lottoCount = money / PRICE;
         for (int i = 0; i < lottoCount; i++) {
@@ -29,6 +31,12 @@ public class Lotto {
             lottos.add(lotto);
         }
         return Collections.unmodifiableList(lottos);
+    }
+    
+    private static void validateMinPrice(int money) {
+        if (money < PRICE) {
+            throw new IllegalStateException("금액은 1000원 이상이여아 합니다.");
+        }
     }
     
     public int getMatchCount(List<Integer> matchNumbers) {
