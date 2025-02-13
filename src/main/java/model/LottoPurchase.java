@@ -1,8 +1,14 @@
 package model;
 
+import static model.ExceptionMessage.INVALID_LOTTO_MIN_PURCHASE;
+import static model.ExceptionMessage.INVALID_LOTTO_PURCHASE_TYPE;
+import static model.ExceptionMessage.INVALID_LOTTO_PURCHASE_UNIT;
+
 public class LottoPurchase {
 
-    private Integer amount;
+    private static final Integer MIN_AMOUNT = 1_000;
+
+    private final Integer amount;
 
     public static LottoPurchase of(final String input) {
         validateInteger(input);
@@ -15,23 +21,23 @@ public class LottoPurchase {
         this.amount = amount;
     }
 
-    private static void validateInteger(String input) {
+    private static void validateInteger(final String input) {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("로또 구입금액은 숫자여야 합니다.");
+            throw new IllegalArgumentException(INVALID_LOTTO_PURCHASE_TYPE.getMessage());
         }
     }
 
     private void validateMinAmount(Integer amount) {
-        if (amount < 1000) {
-            throw new IllegalArgumentException("로또 구입 최소 금액은 1000원 입니다.");
+        if (amount < MIN_AMOUNT) {
+            throw new IllegalArgumentException(INVALID_LOTTO_MIN_PURCHASE.getMessage(MIN_AMOUNT));
         }
     }
 
     private void validateAmountUnit(Integer amount) {
-        if (amount % 1000 != 0) {
-            throw new IllegalArgumentException("로또 구입금액은 1000원 단위여야 합니다.");
+        if (amount % MIN_AMOUNT != 0) {
+            throw new IllegalArgumentException(INVALID_LOTTO_PURCHASE_UNIT.getMessage(MIN_AMOUNT));
         }
     }
 
