@@ -1,7 +1,7 @@
 package src.view.output;
 
 import java.util.List;
-import src.model.Lotto;
+import src.model.lotto.Lotto;
 
 public class LottoResponse {
 

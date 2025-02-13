@@ -1,4 +1,4 @@
-package src.model.vo;
+package src.model.lotto.vo;
 
 public class LottoNumber {
 

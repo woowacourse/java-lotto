@@ -2,7 +2,8 @@ package src.model;
 
 import java.util.List;
 import java.util.stream.IntStream;
-import src.model.generator.NumberGenerator;
+import src.model.lotto.Lotto;
+import src.model.lotto.generator.NumberGenerator;
 
 public class LottoMachine {
 

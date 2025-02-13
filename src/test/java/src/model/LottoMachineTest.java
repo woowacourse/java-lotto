@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import src.model.generator.MockedNumberGenerator;
+import src.model.lotto.generator.MockedNumberGenerator;
 
 class LottoMachineTest {
 

@@ -1,8 +1,8 @@
-package src.model.vo;
+package src.model.lotto.vo;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static src.model.vo.LottoNumber.MAX_NUMBER_RANGE;
-import static src.model.vo.LottoNumber.MIN_NUMBER_RANGE;
+import static src.model.lotto.vo.LottoNumber.MAX_NUMBER_RANGE;
+import static src.model.lotto.vo.LottoNumber.MIN_NUMBER_RANGE;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,8 @@
-package src.model;
+package src.model.lotto;
 
 import java.util.List;
-import src.model.generator.NumberGenerator;
-import src.model.vo.LottoNumbers;
+import src.model.lotto.generator.NumberGenerator;
+import src.model.lotto.vo.LottoNumbers;
 
 public class Lotto {
 

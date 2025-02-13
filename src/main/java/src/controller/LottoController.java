@@ -1,10 +1,10 @@
 package src.controller;
 
 import java.util.List;
-import src.model.Lotto;
 import src.model.LottoMachine;
-import src.model.generator.DefaultNumberGenerator;
-import src.model.generator.NumberGenerator;
+import src.model.lotto.Lotto;
+import src.model.lotto.generator.DefaultNumberGenerator;
+import src.model.lotto.generator.NumberGenerator;
 import src.view.input.ConsoleInputView;
 import src.view.input.InputView;
 import src.view.output.ConsoleOutputView;

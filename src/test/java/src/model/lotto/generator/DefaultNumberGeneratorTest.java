@@ -1,4 +1,4 @@
-package src.model.generator;
+package src.model.lotto.generator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
