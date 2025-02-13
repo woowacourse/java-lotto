@@ -16,6 +16,10 @@ public class LottoNumbers {
                 numberGenerator.generate(LottoNumber.MIN_NUMBER_RANGE, LottoNumber.MAX_NUMBER_RANGE, size));
     }
 
+    public List<Integer> getValues() {
+        return values.stream().map(LottoNumber::getValue).toList();
+    }
+
     @Override
     public String toString() {
         return "LottoNumbers{" +
