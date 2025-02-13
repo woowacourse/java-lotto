@@ -34,10 +34,12 @@ public class LottoController {
         //3. 당첨 번호 입력받기
         String rawWinningNumber = inputView.readWinningNumber();
         final List<String> rawWinningNumbers = Arrays.stream(rawWinningNumber.split(",")).map(String::trim).toList();
+        InputValidator.validateElements(rawWinningNumbers);
         final List<Integer> winningNumbers = rawWinningNumbers.stream().map(Integer::parseInt).toList();
 
         //4. 보너스 번호 입력받기
         final String rawBonusNumber = inputView.readBonusNumber();
+        InputValidator.validateInteger(rawBonusNumber);
         final int bonusNumber = Integer.parseInt(rawBonusNumber);
 
         //5. WinningLotto 객체 생성하기
@@ -47,6 +49,5 @@ public class LottoController {
         List<Prize> prizes = winningLotto.calculatePrizes(lottos);
 
         outputView.printLottoResult(prizes, Prize.calculateEarningRate(prizes, lottos.getQuantity() * 1000));
-
     }
 }

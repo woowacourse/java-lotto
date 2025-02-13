@@ -1,7 +1,19 @@
 package util;
 
+import java.util.List;
+
 public class InputValidator {
     private InputValidator() {
+    }
+
+    public static void validateElements(List<String> input) {
+        for (String element : input) {
+            try {
+                validateInteger(element);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException(",로 구분된 숫자를 입력해주세요.");
+            }
+        }
     }
 
     public static void validateInteger(String input) {
