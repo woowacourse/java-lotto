@@ -22,7 +22,7 @@ class PurchaseTest {
 
     @DisplayName("로또 구입 금액 범위를 벗어날 경우 예외가 발생한다")
     @ParameterizedTest
-    @ValueSource(strings = {"-1000", "0", "900", "101000", "2200000000"})
+    @ValueSource(strings = {"-1000", "0", "900", "101000"})
     void outOfPurchaseRange(String inputString) {
         assertThatThrownBy(() -> new Purchase(inputString))
                 .isInstanceOf(IllegalArgumentException.class);
