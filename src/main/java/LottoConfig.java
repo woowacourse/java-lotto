@@ -1,6 +1,5 @@
 import controller.LottoController;
 import controller.dto.LottoDtoMapper;
-import model.LottoCustomerHistory;
 import model.LottoNumberGenerator;
 import model.LottoRankCalculator;
 import model.LottoStore;
@@ -18,10 +17,6 @@ public class LottoConfig {
 
     private LottoConsoleView lottoConsoleView() {
         return new LottoConsoleView(new InputView(), new OutputView(), new InputParser());
-    }
-
-    private LottoCustomerHistory lottoCustomerHistory() {
-        return LottoCustomerHistory.getInstance();
     }
 
     private LottoStore lottoStore() {
