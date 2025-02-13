@@ -1,9 +1,12 @@
 package lotto.domain;
 
+import static lotto.common.constant.Constant.*;
 import static lotto.common.exception.ErrorMessage.*;
 
 import java.util.Comparator;
 import java.util.List;
+
+import lotto.dto.MatchCountDto;
 
 public record Lotto(List<Integer> numbers) {
     public Lotto {
@@ -30,23 +33,41 @@ public record Lotto(List<Integer> numbers) {
     }
 
     private static boolean isCorrectedSize(List<Integer> numbers) {
-        return numbers.size() != 6;
+        return numbers.size() != LOTTO_SIZE;
     }
 
     private void validateRange(List<Integer> numbers) {
         for (int number : numbers) {
-            if (number < 0 || number > 45) {
-                throw new IllegalArgumentException(ERROR_NUMBER_RANGE);
-            }
+            checkLottoRange(number);
         }
     }
 
-    public boolean isContainsBonus(int bonus) {
-        return numbers.contains(bonus);
+    private void checkLottoRange(int number) {
+        if (isNumberInRage(number)) {
+            throw new IllegalArgumentException(ERROR_NUMBER_RANGE);
+        }
+    }
+
+    private boolean isNumberInRage(int number) {
+        return number < LOTTO_MINIMUM || number > LOTTO_MAXIMUM;
     }
 
     private void sortNumbers(List<Integer> numbers) {
         numbers.sort(Comparator.naturalOrder());
+    }
+
+    public MatchCountDto matchCount(Lotto matchLotto, int bonus) {
+        int count = 0;
+        for (int i : matchLotto.numbers()) {
+            if (isContainsBonus(i)) {
+                count++;
+            }
+        }
+        return new MatchCountDto(count, isContainsBonus(bonus));
+    }
+
+    private boolean isContainsBonus(int bonus) {
+        return numbers.contains(bonus);
     }
 
     @Override

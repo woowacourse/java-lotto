@@ -8,7 +8,7 @@ import java.util.List;
 import lotto.dto.MatchCountDto;
 
 public class Wallet {
-    private List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos = new ArrayList<>();
 
     public Wallet(Amount amount) {
         int lottoAmount = amount.getAmount();
@@ -21,17 +21,9 @@ public class Wallet {
         List<MatchCountDto> matchCountDtos = new ArrayList<>();
 
         for (Lotto lotto : lottos) {
-            int count = 0;
-            for (int i : matchLotto.numbers()) {
-
-                if (lotto.numbers().contains(i)) {
-                    count++;
-                }
-            }
-
-            matchCountDtos.add(new MatchCountDto(count, lotto.numbers().contains(bonus)));
+            MatchCountDto dto = lotto.matchCount(matchLotto, bonus);
+            matchCountDtos.add(dto);
         }
-
         return matchCountDtos;
     }
 
