@@ -19,14 +19,14 @@ public class Lotto {
     }
 
     public Lotto(List<Number> numbers) {
-        this(new HashSet<>(numbers));
+        validateNumberSize(numbers);
         validateNonDuplicatedNumbers(numbers);
+        this.numbers = new HashSet<>(numbers);
     }
 
     public boolean contains(Number number) {
         return numbers.contains(number);
     }
-
 
     private void validateNumberSize(Collection<Number> numbers) {
         if (numbers.size() != NUMBERS_SIZE) {
@@ -41,17 +41,17 @@ public class Lotto {
         }
     }
 
-    public Set<Number> getNumbers() {
-        return unmodifiableSet(numbers);
-    }
-
-    public int calculateMatchCount(Lotto purchaseLotto) {
+    public int calculateMatchCount(Lotto lotto) {
         int matchCount = 0;
-        for (Number purchaseNumber : purchaseLotto.numbers) {
-            if (numbers.contains(purchaseNumber)) {
+        for (Number number : lotto.numbers) {
+            if (numbers.contains(number)) {
                 matchCount++;
             }
         }
         return matchCount;
+    }
+
+    public Set<Number> getNumbers() {
+        return unmodifiableSet(numbers);
     }
 }
