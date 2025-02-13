@@ -64,4 +64,8 @@ public enum LottoRank {
 
         return String.format("%d개 일치 (%d원)", getMatchCount(), getWinningAmount());
     }
+
+    public long calculateWinningAmount(int count) {
+        return winningAmount * count;
+    }
 }
