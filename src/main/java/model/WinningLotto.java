@@ -1,18 +1,21 @@
 package model;
 
-import utils.Validator;
+import global.utils.Validator;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import static global.constant.LottoConstant.MAX_LOTTO_NUMBER;
+import static global.constant.LottoConstant.MIN_LOTTO_NUMBER;
+
 public class WinningLotto {
 
-    private final Lotto lotto;
+    private final Lotto winningLotto;
     private final int bonusNumber;
 
-    public WinningLotto(String input, String bonusNumber) {
-        lotto = new Lotto(input);
+    public WinningLotto(final String winningNumbers, final String bonusNumber) {
+        winningLotto = new Lotto(winningNumbers);
 
         Validator.validateNumeric(bonusNumber);
         int parsed = Integer.parseInt(bonusNumber);
@@ -23,35 +26,21 @@ public class WinningLotto {
         this.bonusNumber = parsed;
     }
 
-    public Map<RankType, Integer> evaluateRank(List<Lotto> lottos) {
-        Map<RankType, Integer> rankResult = new HashMap<>();
-
-        rankResult.put(RankType.FIFTH, 0);
-        rankResult.put(RankType.FOURTH, 0);
-        rankResult.put(RankType.THIRD, 0);
-        rankResult.put(RankType.SECOND, 0);
-        rankResult.put(RankType.FIRST, 0);
-
-        for (Lotto lotto1 : lottos) {
-            boolean isBonusNumber = false;
-            int matchNumber = lotto1.calculateMatchNumber(lotto);
-
-            if (matchNumber == 5) {
-                isBonusNumber = lotto1.isContained(this.bonusNumber);
-            }
-            RankType rank = RankType.evaluateRank(matchNumber, isBonusNumber);
-
-            if (rank != RankType.NONE) {
-                rankResult.put(rank, rankResult.get(rank) + 1);
-            }
+    private Map<RankType, Integer> initializeRankResult() {
+        Map<RankType, Integer> rankResult = new EnumMap<>(RankType.class);
+        for (RankType rank : RankType.values()) {
+            rankResult.put(rank, 0);
         }
-
         return rankResult;
     }
 
-    private void validateLottoNumberDuplicate(int parsed) {
-        if (lotto.isContained(parsed)) {
-            throw new IllegalArgumentException();
-        }
+    private RankType evaluateLottoRank(final Lotto lotto) {
+        int matchNumber = lotto.calculateMatchNumber(winningLotto);
+        boolean isBonusNumber = isBonusNumber(matchNumber, lotto);
+        return RankType.evaluateRank(matchNumber, isBonusNumber);
+    }
+
+    private boolean isBonusNumber(final int matchNumber, final Lotto lotto) {
+        return matchNumber == 5 && lotto.isContained(this.bonusNumber);
     }
 }
