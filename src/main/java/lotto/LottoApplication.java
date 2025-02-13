@@ -8,9 +8,7 @@ import lotto.view.OutputView;
 public class LottoApplication {
     public static void main(String[] args) {
         LottoController lottoController = new LottoController(
-                new InputView(), new OutputView(), new LottoService()
-        );
-        
+            new InputView(), new OutputView(), new LottoService());
         lottoController.run();
     }
 }
