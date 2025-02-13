@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import org.assertj.core.api.Assertions;
+import java.util.EnumMap;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,6 +23,14 @@ class RankTest {
 
         Rank currentRank = Rank.checkPrize(matchCount, matchBonus);
 
-        Assertions.assertThat(currentRank).isEqualTo(rank);
+        assertThat(currentRank).isEqualTo(rank);
+    }
+
+    @DisplayName("기본 맵을 생성한다.")
+    @Test
+    void 기본_맵을_생성한다() {
+        EnumMap<Rank, Integer> defaultMap = Rank.makeDefaultMap();
+        assertThat(defaultMap.size()).isEqualTo(6);
+        assertThat(defaultMap.get(Rank.FIRST_PRIDE)).isEqualTo(0);
     }
 }
