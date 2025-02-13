@@ -16,9 +16,8 @@ public class LottoController {
         LottoRepository lottoRepository = new LottoRepository();
         int userMoney = InputView.inputAndValidateUserMoney();
 
-        for (int i = 0; i < userMoney / LOTTO_PRICE_PER_ONE; i++) {
-            lottoRepository.addLotto(makeLotto());
-        }
+        buyLottoForUserMoney(lottoRepository, userMoney);
+
         OutputView.printBuyQuantity(userMoney / LOTTO_PRICE_PER_ONE);
         OutputView.printRandomLotto(lottoRepository);
 
@@ -27,6 +26,12 @@ public class LottoController {
 
         calculateResultAndPrintResult(lottoRepository, userLotto, bonusNumber);
         OutputView.printWinningRate(calculateWinningRate(userMoney));
+    }
+
+    private static void buyLottoForUserMoney(LottoRepository lottoRepository, int userMoney) {
+        for (int i = 0; i < userMoney / LOTTO_PRICE_PER_ONE; i++) {
+            lottoRepository.addLotto(makeLotto());
+        }
     }
 
 
@@ -54,7 +59,7 @@ public class LottoController {
         for (Lotto lotto : lottoRepository.getLottos()) {
             RankType.saveGameResult(userLotto.calculateRank(lotto), bonusNumber.isBonusNumber(lotto));
         }
-        OutputView.printResult(RankType.printResult());
+        OutputView.printResult(RankType.makeLottoResult());
     }
 
     private static double calculateWinningRate(int userMoney){
