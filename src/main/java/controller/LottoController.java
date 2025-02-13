@@ -3,8 +3,6 @@ package controller;
 import controller.dto.LottoDtoMapper;
 import controller.dto.WinningLottoRequest;
 import java.util.List;
-import model.LottoCustomer;
-import model.LottoCustomerHistory;
 import model.LottoStore;
 import model.LottoTicket;
 import model.WinningLotto;
@@ -14,34 +12,33 @@ public class LottoController {
 
     private final LottoConsoleView lottoConsoleView;
     private final LottoStore lottoStore;
-    private final LottoCustomerHistory lottoCustomerHistory;
     private final LottoDtoMapper lottoDtoMapper;
 
-    public LottoController(LottoConsoleView lottoConsoleView, LottoStore lottoStore,
-            LottoCustomerHistory lottoCustomerHistory, LottoDtoMapper lottoDtoMapper) {
+    public LottoController(LottoConsoleView lottoConsoleView, LottoStore lottoStore, LottoDtoMapper lottoDtoMapper) {
         this.lottoConsoleView = lottoConsoleView;
         this.lottoStore = lottoStore;
-        this.lottoCustomerHistory = lottoCustomerHistory;
         this.lottoDtoMapper = lottoDtoMapper;
     }
 
     public void run() {
-        purchase();
+        List<LottoTicket> tickets = createLottoTicket();
+        WinningLotto winningLotto = createWinningLotto();
 
-        requestWinningLotto();
+
     }
 
-    private void purchase() {
+    private List<LottoTicket> createLottoTicket() {
         int purchaseAmount = lottoConsoleView.requestPurchaseAmount();
         List<LottoTicket> tickets = lottoStore.purchase(purchaseAmount);
-        lottoCustomerHistory.add(new LottoCustomer(tickets, purchaseAmount));
 
         lottoConsoleView.printPurchaseCount(tickets.size());
         lottoConsoleView.printPurchasedLotto(lottoDtoMapper.toLottoTicketResponse(tickets));
+
+        return tickets;
     }
 
-    private void requestWinningLotto() {
+    private WinningLotto createWinningLotto() {
         WinningLottoRequest winningLottoRequest = lottoConsoleView.requestWinningLotto();
-        WinningLotto winningLotto = lottoDtoMapper.toWinningLotto(winningLottoRequest);
+        return lottoDtoMapper.toWinningLotto(winningLottoRequest);
     }
 }

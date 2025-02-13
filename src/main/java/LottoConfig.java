@@ -12,7 +12,7 @@ public class LottoConfig {
 
 
     public LottoController lottoController() {
-        return new LottoController(lottoConsoleView(), lottoStore(), lottoCustomerHistory(), new LottoDtoMapper());
+        return new LottoController(lottoConsoleView(), lottoStore(), new LottoDtoMapper());
     }
 
     private LottoConsoleView lottoConsoleView() {
