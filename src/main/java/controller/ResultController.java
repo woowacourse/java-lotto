@@ -9,6 +9,8 @@ public class ResultController {
     public ResultView resultView = new ResultView();
 
     public void lottoResult(Purchase purchase, WinLotto winLotto) {
-        resultView.printResult(new Result(purchase, winLotto));
+        Result result = new Result(purchase.getLottos(), winLotto);
+        resultView.printResult(result);
+        resultView.printTotalReturn(result, purchase);
     }
 }

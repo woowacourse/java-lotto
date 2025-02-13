@@ -2,18 +2,17 @@ package model;
 
 import constant.WinLottoInfo;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 public class Result {
     private final EnumMap<WinLottoInfo, Integer> result = new EnumMap<>(WinLottoInfo.class);
-    private final Integer totalPrize;
 
-    public Result(Purchase purchase, WinLotto winLotto) {
-        for (LottoNumbers purchasedLotto : purchase.getLottos()) {
+    public Result(List<LottoNumbers> lottoNumbers, WinLotto winLotto) {
+        for (LottoNumbers purchasedLotto : lottoNumbers) {
             WinLottoInfo winResult = WinLottoInfo.result(purchasedLotto, winLotto);
             result.put(winResult, result.getOrDefault(winResult, 0) + 1);
         }
-        totalPrize = calculateTotalPrize();
     }
 
     private Integer calculateTotalPrize() {
@@ -28,5 +27,9 @@ public class Result {
 
     public Integer getCount(WinLottoInfo winLottoInfo) {
         return result.get(winLottoInfo);
+    }
+
+    public Double totalReturn(Integer purchaseAmount) {
+        return (double) calculateTotalPrize() / purchaseAmount;
     }
 }

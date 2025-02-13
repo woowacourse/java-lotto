@@ -7,6 +7,7 @@ import static constant.WinLottoInfo.SECOND;
 import static constant.WinLottoInfo.THIRD;
 
 import constant.OutputMessage;
+import model.Purchase;
 import model.Result;
 
 public class ResultView {
@@ -21,6 +22,10 @@ public class ResultView {
                 nullToZero(result.getCount(SECOND)));
         System.out.printf(OutputMessage.FIRST_RESULT, FIRST.getMatchNumberCount(), FIRST.getPrice(),
                 nullToZero(result.getCount(FIRST)));
+    }
+
+    public void printTotalReturn(Result result, Purchase purchase) {
+        System.out.printf(OutputMessage.TOTAL_RETURN, result.totalReturn(purchase.getPurchaseAmount()));
     }
 
     private Integer nullToZero(Integer number) {

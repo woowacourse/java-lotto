@@ -16,11 +16,16 @@ public class Purchase {
         this.purchaseAmount = purchaseAmount;
     }
 
+
     public Integer size() {
         return lottos.size();
     }
 
     public List<LottoNumbers> getLottos() {
         return lottos;
+    }
+
+    public Integer getPurchaseAmount() {
+        return purchaseAmount;
     }
 }
