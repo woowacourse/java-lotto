@@ -7,18 +7,13 @@ import java.util.Random;
 
 public class Lottos {
 
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    private Lottos(int money) {
-        int quantity = money / 1000;
-
-        for (int i = 0; i < quantity; i++) {
-            List<Integer> lottoNumbers = generateRandomNumbers();
-            lottos.add(new Lotto(lottoNumbers));
-        }
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    private List<Integer> generateRandomNumbers() {
+    private static List<Integer> generateRandomNumbers() {
         List<Integer> lottoNumbers = new ArrayList<>();
         Random random = new Random();
 
@@ -30,7 +25,16 @@ public class Lottos {
     }
 
     public static Lottos of(int money) {
-        return new Lottos(money);
+        int quantity = money / 1000;
+
+        List<Lotto> generatedLottos = new ArrayList<>();
+
+        for (int i = 0; i < quantity; i++) {
+            List<Integer> lottoNumbers = generateRandomNumbers();
+            generatedLottos.add(new Lotto(lottoNumbers));
+        }
+
+        return new Lottos(generatedLottos);
     }
 
     public int getQuantity() {
@@ -42,6 +46,5 @@ public class Lottos {
                 .map(Lotto::getNumbers)
                 .toList();
     }
-
 
 }
