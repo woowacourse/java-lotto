@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Arrays;
+
 public enum LottoPrize {
     FIRST(2000000000, 6, false, 1),
     SECOND(30000000, 5, true, 2),
@@ -33,11 +35,9 @@ public enum LottoPrize {
     }
 
     public static LottoPrize value(int countMatched, boolean isBonusNumberMatched) {
-        for (LottoPrize prize : LottoPrize.values()) {
-            if (prize.countMatched == countMatched && prize.isBonusNumberMatched == isBonusNumberMatched) {
-                return prize;
-            }
-        }
-        return NOTHING;
+        return Arrays.stream(LottoPrize.values()).filter(lottoPrize ->
+                        lottoPrize.countMatched == countMatched && lottoPrize.isBonusNumberMatched == isBonusNumberMatched
+                ).findFirst()
+                .orElse(LottoPrize.NOTHING);
     }
 }
