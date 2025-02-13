@@ -13,7 +13,7 @@ public class OutputView {
         System.out.println(lottoQuantity + "개를 구매했습니다.");
     }
 
-    public void lottoStatusPrint22(LottoBundle lottoBundle) {
+    public void lottoStatusPrint(LottoBundle lottoBundle) {
 
         for (Lotto lotto : lottoBundle.getLottoBundle()) {
             List<Integer> lottoNumber = lotto.getLottoNumbers();

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.function.Supplier;
 import lotto.domain.AmountPaid;
 import lotto.domain.LottoBundle;
+import lotto.domain.WinningNumbers;
 import lotto.service.LottoService;
 import lotto.utils.Parser;
 import lotto.view.InputView;
@@ -24,7 +25,9 @@ public class LottoMachine {
     public void run() {
         LottoBundle lottoBundle = makeLottoBundle();
         outputView.lottoQuantityPrint(lottoBundle.getLottoQuantity());
-        outputView.lottoStatusPrint22(lottoBundle);
+        outputView.lottoStatusPrint(lottoBundle);
+        WinningNumbers winningNumbers = makeWinningNumber();
+
     }
 
     private LottoBundle makeLottoBundle() {
@@ -32,6 +35,16 @@ public class LottoMachine {
             try {
                 return lottoService.makeLottoBundle(
                         new AmountPaid(Parser.parseToInteger(inputView.purchasePriceInput())));
+            } catch (IOException e) {
+                throw new IllegalArgumentException(e);
+            }
+        });
+    }
+
+    private WinningNumbers makeWinningNumber() {
+        return retryUntilValidInput(() -> {
+            try {
+                return lottoService.makeWinningNumbers(inputView.winningNumberInput(), inputView.bonusNumberInput());
             } catch (IOException e) {
                 throw new IllegalArgumentException(e);
             }
