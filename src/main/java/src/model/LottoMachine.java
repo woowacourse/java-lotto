@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 import src.model.lotto.Lotto;
 import src.model.lotto.generator.NumberGenerator;
+import src.model.winning_lotto.WinningLotto;
 
 public class LottoMachine {
 
@@ -21,6 +22,10 @@ public class LottoMachine {
         return IntStream.range(0, amount)
                 .mapToObj(i -> Lotto.generateFrom(numberGenerator))
                 .toList();
+    }
+
+    public List<LottoPrize> getLottoResults(List<Lotto> lottos, WinningLotto winningLotto) {
+        return lottos.stream().map(lotto -> LottoPrize.determine(lotto, winningLotto)).toList();
     }
 
     private void validatePurchaseMoney(final int purchaseMoney) {
