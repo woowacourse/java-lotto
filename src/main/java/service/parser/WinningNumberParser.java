@@ -1,5 +1,6 @@
 package service.parser;
 
+import constant.LottoConstants;
 import constant.RegexConstants;
 import java.util.Arrays;
 import java.util.List;
@@ -10,9 +11,6 @@ public class WinningNumberParser {
     private static final String MULTIPLE_TEMPLATE = "%s{2,}"; // 연속된 구분자
     private static final String EDGE_TEMPLATE = "^%s|%s$"; // 앞뒤 구분자
     private static final String EMPTY_STRING = ""; // 빈문자열
-    private static final int RANGE_START = 1;
-    private static final int RANGE_END = 45;
-    public static final int LOTTO_COUNT = 6;
 
     public static List<Integer> parseWinningNumbers(String input) {
         Validator.validateEmptyInput(input); // 공백 검사
@@ -29,7 +27,7 @@ public class WinningNumberParser {
 
     private static void validateOutOfRange(List<String> rawNumbers, List<Integer> numbers) {
         for (int idx = 0; idx < rawNumbers.size(); idx++)
-            Validator.checkOutOfRange(numbers.get(idx), RANGE_START, RANGE_END, ErrorMessages.LOTTO_NUMBER_OUT_OF_RANGE.getMessage());
+            Validator.checkOutOfRange(numbers.get(idx), LottoConstants.LOTTO_NUMBER_START, LottoConstants.LOTTO_NUMBER_END, ErrorMessages.LOTTO_NUMBER_OUT_OF_RANGE.getMessage());
     }
 
     private static void validateDuplicate(List<Integer> numbers) {
@@ -39,7 +37,7 @@ public class WinningNumberParser {
     }
 
     private static void validateLottoNumberCount(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_COUNT){
+        if (numbers.size() != LottoConstants.LOTTO_COUNT){
             throw new IllegalArgumentException(ErrorMessages.LOTTO_NUMBER_COUNT.getMessage());
         }
     }
