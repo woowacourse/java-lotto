@@ -12,7 +12,7 @@ public enum ErrorMessages {
     LOTTO_NUMBER_OUT_OF_RANGE("로또의 숫자가 1~45의 유효 범위를 벗어납니다."),
     DUPLICATE_EXIST("중복된 내용이 존재합니다."),
     LOTTO_NUMBER_COUNT("로또의 구성 숫자는 6개여야합니다."),
-    
+
     SAME_NUMBER("보너스 번호가 당첨 번호와 같습니다.");
 
     private static final String ERROR_SIGN = "[ERROR] ";

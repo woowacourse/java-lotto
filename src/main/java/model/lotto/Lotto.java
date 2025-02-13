@@ -4,11 +4,11 @@ import java.util.List;
 import validator.Validator;
 
 public class Lotto {
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        for (int idx = 0; idx < numbers.size(); idx++) {
-            Validator.validateLottoNumberRange(numbers.get(idx));
+        for (Integer number : numbers) {
+            Validator.validateLottoNumberRange(number);
         }
 
         this.numbers = numbers;

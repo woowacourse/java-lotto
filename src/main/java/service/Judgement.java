@@ -14,7 +14,7 @@ public class Judgement {
         EnumMap<Rank, Integer> prizeCounts = new EnumMap<>(Rank.class);
         for (int idx = 0; idx < ownedLotto.size(); idx++) {
             Set<Integer> lottoNumbers = new HashSet<>(ownedLotto.getLottoByIndex(idx).getNumbers());
-            Set<Integer> WinningLottoNumbers = new HashSet<>(lottoWinningNumbers.getNumbers());
+            Set<Integer> WinningLottoNumbers = new HashSet<>(lottoWinningNumbers.getWinningNumber());
             lottoNumbers.retainAll(WinningLottoNumbers);
 
             boolean bonus = ownedLotto.containByIndex(idx, lottoWinningNumbers.getBonusNumber());

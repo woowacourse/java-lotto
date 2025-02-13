@@ -9,10 +9,6 @@ import static common.utils.ValidationUtils.checkNullInput;
 import static common.utils.ValidationUtils.checkOutOfRange;
 import static common.utils.ValidationUtils.checkWhitespaceOnlyInput;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class Validator {
     // 입력이 빈 입력인 경우
     public static void validateEmptyInput(String input) {
@@ -30,15 +26,5 @@ public class Validator {
     public static void validateLottoNumberRange(int number) {
         checkOutOfRange(number, LOTTO_NUMBER_START, LOTTO_NUMBER_END,
                 ErrorMessages.LOTTO_NUMBER_OUT_OF_RANGE.getMessage());
-    }
-
-    // set의 특성을 활용한 리스트 내의 중복된 요소 판별
-    public static <T> boolean isDuplicates(List<T> list) {
-        if (list == null || list.isEmpty()) {
-            return false; // null 또는 빈 리스트는 중복이 없다고 간주
-        }
-
-        Set<T> set = new HashSet<>(list);
-        return set.size() != list.size();
     }
 }

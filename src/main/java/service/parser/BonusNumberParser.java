@@ -7,9 +7,10 @@ import validator.Validator;
 public class BonusNumberParser {
 
     public static int parseBonusNumber(List<Integer> winningNumbers, String input) {
-        Validator.validateEmptyInput(input); // 공백 검사
-        Validator.validateNumber(input); // 숫자 구성 여부 검사
+        Validator.validateEmptyInput(input);
+        Validator.validateNumber(input);
         int bonusNumber = Integer.parseInt(input);
+
         Validator.validateLottoNumberRange(bonusNumber);
         validateDuplicateWithBonusNumber(winningNumbers, bonusNumber);
 

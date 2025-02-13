@@ -2,7 +2,9 @@ package service.parser;
 
 import common.constant.NumberConstants;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import validator.ErrorMessages;
 import validator.Validator;
 
@@ -28,9 +30,18 @@ public class WinningNumberParser {
     }
 
     private static void validateDuplicate(List<Integer> numbers) {
-        if (Validator.isDuplicates(numbers)) {
+        if (isDuplicates(numbers)) {
             throw new IllegalArgumentException(ErrorMessages.DUPLICATE_EXIST.getMessage());
         }
+    }
+
+    public static <T> boolean isDuplicates(List<T> list) {
+        if (list == null || list.isEmpty()) {
+            return false; // null 또는 빈 리스트는 중복이 없다고 간주
+        }
+
+        Set<T> set = new HashSet<>(list);
+        return set.size() != list.size();
     }
 
     private static void validateLottoNumberCount(List<Integer> numbers) {
