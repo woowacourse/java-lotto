@@ -1,7 +1,9 @@
 package controller;
 
+import constant.LottoConstants;
 import domain.Lotto;
 import domain.Lottos;
+import domain.PrizeResult;
 import domain.Rank;
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -9,7 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import service.LottoMaker;
-import service.parser.BonusNumberParer;
+import service.parser.BonusNumberParser;
 import service.parser.MoneyParser;
 import service.parser.WinningNumberParser;
 import view.InputView;
@@ -27,13 +29,13 @@ public class Controller {
     }
 
     public void start() {
-         int money = inputLottoMoney();
+        int lottoCount = inputLottoMoney();
 
-        Lottos lottos = buyLotto(money / 1000);
+        Lottos lottos = buyLotto(lottoCount);
         outputView.displayLottoNumbers(lottos);
 
         List<Integer> winningNumbers = WinningNumberParser.parseWinningNumbers(inputView.askWinningNumber());
-        int bonusNumber = BonusNumberParer.parseBonusNumber(winningNumbers, inputView.askBonusNumber());
+        int bonusNumber = BonusNumberParser.parseBonusNumber(winningNumbers, inputView.askBonusNumber());
 
         EnumMap<Rank, Integer> map = new EnumMap<>(Rank.class);
         for (int idx = 0; idx < lottos.size(); idx++) {
@@ -46,11 +48,11 @@ public class Controller {
             } else if (judge == 4) {
                 map.put(Rank.RANK4, map.getOrDefault(Rank.RANK4, 0) + 1);
             } else if (judge == 5) {
-                if (winningNumbers.contains(bonusNumber)) {
+                if (lottos.getLottoByIndex(idx).getNumbers().contains(bonusNumber)) {
                     map.put(Rank.RANK2, map.getOrDefault(Rank.RANK2, 0) + 1);
-                    continue;
+                } else {
+                    map.put(Rank.RANK3, map.getOrDefault(Rank.RANK3, 0) + 1);
                 }
-                map.put(Rank.RANK3, map.getOrDefault(Rank.RANK3, 0) + 1);
             } else if (judge == 6) {
                 map.put(Rank.RANK1, map.getOrDefault(Rank.RANK1, 0) + 1);
             }
@@ -72,7 +74,7 @@ public class Controller {
         while (true) {
             try {
                 String response = inputView.askForNormal();
-                return MoneyParser.parseMoney(response);
+                return MoneyParser.parseLottoCount(response);
             } catch (IllegalArgumentException e) {
                 outputView.displayErrorMessage(e.getMessage());
             }
