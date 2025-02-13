@@ -1,6 +1,7 @@
 package view;
 
 import common.NumberValidator;
+import controller.dto.LottoRankResponse;
 import controller.dto.LottoTicketResponse;
 import controller.dto.WinningLottoRequest;
 import java.util.List;
@@ -41,5 +42,9 @@ public class LottoConsoleView {
         int parsedBonusNumber = inputParser.parseBonusNumber(rawBonusNumber);
 
         return new WinningLottoRequest(parsedWinningNumbers, parsedBonusNumber);
+    }
+
+    public void printLottoRankResults(List<LottoRankResponse> lottoRankResponses) {
+        outputView.printLottoRankResults(lottoRankResponses);
     }
 }

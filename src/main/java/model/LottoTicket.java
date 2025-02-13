@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
@@ -11,6 +12,6 @@ public class LottoTicket {
     }
 
     public List<Integer> getNumbers() {
-        return List.copyOf(numbers);
+        return new ArrayList<>(numbers);
     }
 }

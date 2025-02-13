@@ -9,5 +9,4 @@ public record LottoTicketResponse(
     public static LottoTicketResponse from(List<Integer> numbers) {
         return new LottoTicketResponse(numbers);
     }
-
 }
