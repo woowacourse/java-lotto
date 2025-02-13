@@ -10,6 +10,7 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
+    public static final String DELIMITER = ",";
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoGenerator lottoGenerator;
@@ -26,6 +27,14 @@ public class LottoController {
         int lottoCount = getLottoCount(lottoPrice);
         List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
         printPurchaseLottos(lottos);
+
+
+        String winningLottoNumbers = inputView.readWinningLottoNumbers();
+        String[] splittedWinningLottoNumbers = winningLottoNumbers.split(DELIMITER);
+        List<Integer> parsedWinningLottoNumbers = StringParser.parseTokens(splittedWinningLottoNumbers);
+        Lotto winningLotto = new Lotto(parsedWinningLottoNumbers);
+
+
     }
 
     private LottoPrice getLottoPrice() {
