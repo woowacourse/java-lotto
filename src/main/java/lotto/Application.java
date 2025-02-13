@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Application {
@@ -17,6 +18,7 @@ public class Application {
         int bonusNumber = getBonusNumber(winningNumbers);
         WinningStatistics winningStatistics = LottoManager.calculateStatistics(lottos, winningNumbers, bonusNumber);
         double returnRate = winningStatistics.calculateReturnRate(lottos.size() * LottoManager.LOTTO_UNIT_PRICE);
+        printWinningStatistics(winningStatistics, returnRate);
     }
 
     private static List<Lotto> purchaseLottos() {
@@ -86,5 +88,38 @@ public class Application {
         if (lottoNumber < 1 || lottoNumber > 45) {
             throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이여야 합니다.");
         }
+    }
+
+    private static void printWinningStatistics(WinningStatistics winningStatistics, double returnRate) {
+        System.out.println("\n당첨 통계");
+        System.out.println("---------");
+
+        for (Prize prize : Prize.values()) {
+            printDetail(prize, winningStatistics.getPrizeCount(prize));
+        }
+
+        printReturnRate(returnRate);
+    }
+
+    private static void printReturnRate(double returnRate) {
+        System.out.print(String.format("총 수익률은 %.2f입니다.", returnRate));
+        if (returnRate < 1) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+    }
+
+    private static void printDetail(Prize prize, int getPrizeCount) {
+        if (prize == Prize.NONE) {
+            return;
+        }
+
+        if (prize == Prize.SECOND) {
+            System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개",
+                    prize.getMatchCount(), prize.getWinningAmount(), getPrizeCount));
+            return;
+        }
+
+        System.out.println(String.format("%d개 일치 (%d원) - %d개",
+                prize.getMatchCount(), prize.getWinningAmount(), getPrizeCount));
     }
 }
