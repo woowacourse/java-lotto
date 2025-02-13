@@ -28,9 +28,9 @@ public class InputView {
         return basicInput();
     }
 
-    public String bonusNumberInput() {
+    public int bonusNumberInput() {
         printMessage(BONUS_NUMBER_INPUT_MESSAGE);
-        return basicInput();
+        return Integer.parseInt(basicInput());
     }
 
     private String basicInput() {

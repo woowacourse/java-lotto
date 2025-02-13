@@ -19,7 +19,7 @@ public class LottoTest {
 
         List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5);
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            Lotto lotto = Lotto.create(expectedNumbers);
+            Lotto lotto = Lotto.from(expectedNumbers);
         });
         assertThat(exception.getMessage()).isEqualTo(INVALID_NUMBERS_SIZE.getMessage());
     }
@@ -28,7 +28,7 @@ public class LottoTest {
     @Test
     void 성공적으로_생성_되었을_경우() {
         List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5, 6);
-        Lotto lotto = Lotto.create(expectedNumbers);
+        Lotto lotto = Lotto.from(expectedNumbers);
         List<Integer> lottoNumbers = lotto.getNumbers();
         assertEquals(expectedNumbers, lottoNumbers);
     }
@@ -38,7 +38,7 @@ public class LottoTest {
     void 숫자가_중복되는_경우() {
         List<Integer> expectedNumbers = List.of(1, 1, 2, 3, 4, 5);
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            Lotto lotto = Lotto.create(expectedNumbers);
+            Lotto lotto = Lotto.from(expectedNumbers);
         });
         assertThat(exception.getMessage()).isEqualTo(INVALID_DUPLICATE_NUMBER.getMessage());
     }
@@ -47,7 +47,7 @@ public class LottoTest {
     @Test
     void 숫자_범위가_유효한_경우() {
         List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5, 45);
-        Lotto lotto = Lotto.create(expectedNumbers);
+        Lotto lotto = Lotto.from(expectedNumbers);
         List<Integer> numbers = lotto.getNumbers();
         assertEquals(expectedNumbers, numbers);
     }
@@ -57,7 +57,7 @@ public class LottoTest {
     void 숫자_범위가_유효하지_않은_경우() {
         List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5, 46);
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            Lotto lotto = Lotto.create(expectedNumbers);
+            Lotto lotto = Lotto.from(expectedNumbers);
         });
         assertThat(exception.getMessage()).isEqualTo(INVALID_NUMBER_RANGE.getMessage());
     }

@@ -20,9 +20,14 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto create(List<Integer> numbers) {
+    public static Lotto from(List<Integer> numbers) {
         return new Lotto(numbers);
     }
+
+    public boolean hasBonusNumber(int bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
 
     public List<Integer> getNumbers() {
         return Collections.unmodifiableList(numbers);

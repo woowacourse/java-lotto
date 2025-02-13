@@ -2,6 +2,7 @@ package controller;
 
 import domain.Lotto;
 import domain.Ticket;
+import domain.WinningNumber;
 import java.util.List;
 import service.LottoService;
 import view.InputView;
@@ -24,12 +25,18 @@ public class LottoController {
         Ticket ticket = lottoService.createTicket(purchaseAmount);
         outputView.printPurchaseResult(ticket);
         lottoService.createLottos(ticket);
+
         List<Lotto> lottos = lottoService.getLottos();
         outputView.printLottos(lottos);
 
-
         String winningNumbers = inputView.winningNumbersInput();
-        String bonusNumber = inputView.bonusNumberInput();
+        Lotto lotto = lottoService.createLotto(winningNumbers);
+
+        int bonusNumber = inputView.bonusNumberInput();
+        WinningNumber winningNumber = lottoService.createWinningNumber(lotto, bonusNumber);
+
+        System.out.println(winningNumber.getNumbers());
+        System.out.println(winningNumber.getBonusNumber());
 
     }
 }
