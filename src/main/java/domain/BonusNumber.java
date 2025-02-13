@@ -13,7 +13,7 @@ public class BonusNumber {
     }
 
     private void validateRange(final int number) {
-        if (number < 1 || number > 45) {
+        if (number < Lotto.MIN_NUMBER || number > Lotto.MAX_NUMBER) {
             throw new AppException(ErrorMessage.INVALID_BONUS_NUMBER_RANGE);
         }
     }

@@ -5,6 +5,10 @@ import error.ErrorMessage;
 import java.util.List;
 
 public class Lotto {
+
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
+    public static final int SIZE = 6;
     private final List<Integer> numbers;
 
     public Lotto(final List<Integer> numbers) {
@@ -35,14 +39,14 @@ public class Lotto {
     }
 
     private void validateSize(List<Integer> numbers) {
-        if(numbers.size() != 6) {
+        if(numbers.size() != SIZE) {
             throw new AppException(ErrorMessage.INVALID_LOTTO_NUMBER_SIZE);
         }
     }
 
     private boolean isOutOfRange(final List<Integer> numbers) {
         return numbers.stream()
-                .anyMatch(number -> number < 1 || number > 45);
+                .anyMatch(number -> number < MIN_NUMBER || number > MAX_NUMBER);
     }
 
     public List<Integer> getNumbers() {
