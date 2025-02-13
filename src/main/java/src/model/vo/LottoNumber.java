@@ -22,6 +22,10 @@ public class LottoNumber {
         }
     }
 
+    public int getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return "LottoNumber{" +
