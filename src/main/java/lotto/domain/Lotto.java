@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.constant.ErrorMessage;
 import lotto.util.Parser;
 
 public class Lotto {
@@ -35,13 +36,13 @@ public class Lotto {
 
     private void checkRange(int number) {
         if (number <= 0 || number > 45) {
-            throw new IllegalArgumentException("1과 45 사이의 수를 입력하세요.");
+            throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR.getMessage());
         }
     }
     private List<Integer> validateIsNumber(List<String> splitedLotto) {
         List<Integer> parsedLotto = new ArrayList<>();
         for (String lottoNumber : splitedLotto) {
-            parsedLotto.add(Parser.validateNumber(lottoNumber, "당첨 번호는 숫자를 입력해야 합니다."));
+            parsedLotto.add(Parser.validateNumber(lottoNumber, ErrorMessage.NUMBER_FORMAT_ERROR.getMessage()));
         }
         return parsedLotto;
     }
@@ -49,12 +50,12 @@ public class Lotto {
     private void validateDuplicate(List<Integer> parsedLotto) {
         Set<Integer> unDuplicatedLotto = new HashSet<>(parsedLotto);
         if (unDuplicatedLotto.size() != 6) {
-            throw new IllegalArgumentException("로또 숫자는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_DUPLICATED_ERROR.getMessage());
         }
     }
     public void checkDuplicate(int bonusNumber) {
         if (lottoNumber.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 숫자는 당첨 번호와 중복될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_DUPLICATED_ERROR.getMessage());
         }
     }
 
@@ -90,7 +91,7 @@ public class Lotto {
                 .replaceAll(" ", "")
                 .split(","));
         if (winningNumbers.size() != 6) {
-            throw new IllegalArgumentException("6자리를 입력하세요.");
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_LENGTH_ERROR.getMessage());
         }
         return winningNumbers;
     }

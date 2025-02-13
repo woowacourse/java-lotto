@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
 import lotto.util.Parser;
 
 public class WinningLotto {
@@ -13,7 +14,7 @@ public class WinningLotto {
     }
 
     private void validate(String bonusNumber) {
-        int parsedBonusNumber = Parser.validateNumber(bonusNumber, "보너스 숫자는 숫자여야 합니다.");
+        int parsedBonusNumber = Parser.validateNumber(bonusNumber, ErrorMessage.BONUS_NUMBER_FORMAT_ERROR.getMessage());
         checkRange(parsedBonusNumber);
         validateBonusNumber(lotto, parsedBonusNumber);
         this.bonusNumber = parsedBonusNumber;
@@ -25,7 +26,7 @@ public class WinningLotto {
 
     private void checkRange(int number) {
         if (number <= 0 || number > 45) {
-            throw new IllegalArgumentException("1과 45 사이의 수를 입력하세요.");
+            throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR.getMessage());
         }
     }
     public Lotto getLotto() {
