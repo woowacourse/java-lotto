@@ -25,4 +25,20 @@ public class Lottos {
         }
         return new GetLottosDto(getLottoDtos);
     }
+
+    public void getResult(WinningLotto winningLotto) {
+        List<Integer> matchCount = countMatchNumbers(winningLotto);
+
+    }
+
+    private List<Integer> countMatchNumbers(WinningLotto winningLotto) {
+        List<Integer> matchCounts = new ArrayList<>();
+
+        for (Lotto lotto : lottos) {
+            int matchCount = lotto.countMatchNumbers(winningLotto);
+            matchCounts.add(matchCount);
+        }
+
+        return matchCounts;
+    }
 }

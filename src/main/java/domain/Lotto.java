@@ -58,4 +58,15 @@ public class Lotto {
     public GetLottoDto getLottoDto() {
         return new GetLottoDto(numbers);
     }
+
+    public int countMatchNumbers(Lotto other) {
+        return (int) numbers.stream()
+                .filter(other::contains)
+                .count();
+    }
+
+    private boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
 }
