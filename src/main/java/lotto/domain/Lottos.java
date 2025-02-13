@@ -12,7 +12,7 @@ public class Lottos {
 
     private void generateLottos(int lottoCounts) {
         for (int i = 0; i < lottoCounts; i ++) {
-            lottos.add(new Lotto());
+            lottos.add(new Lotto(new RandomNumber()));
         }
     }
 

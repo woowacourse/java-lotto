@@ -24,12 +24,12 @@ public class Prizes {
         }
     }
 
-    public double calculateProfit(int money) {
+    public double calculateProfit(Money money) {
         int sum = 0;
         for (Rank rank : results.keySet()) {
             sum += rank.calculateTotalProfit(results.get(rank));
         }
-        return Math.floor((double) sum /(money) * 100.0) / 100.0;
+        return money.calculateProfit(sum);
     }
 
     @Override

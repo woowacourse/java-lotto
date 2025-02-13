@@ -2,19 +2,26 @@ package lotto.controller;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.Prizes;
+import lotto.domain.RandomNumber;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
+    private final InputView inputView;
+    private final OutputView outputView;
     private Lottos lottos;
     private WinningLotto winningLotto;
 
+    public LottoController(final InputView inputView, final OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
+
     public void run() {
-        int money = inputView.inputMoney();
+        Money money = inputView.inputMoney();
         purchaseLotto(money);
         operateWinningLotto();
         operateStatistics(money);
@@ -23,11 +30,11 @@ public class LottoController {
 
     private void operateWinningLotto() {
         Lotto winningLottoNumber = new Lotto(inputView.inputWinningLotto());
-        int bonusNumber = inputView.inputBonusNumber();
+        String bonusNumber = inputView.inputBonusNumber();
         winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
     }
 
-    private void operateStatistics(int money) {
+    private void operateStatistics(Money money) {
         Prizes prizes = lottos.calculatePrize(winningLotto);
         double totalProfit = prizes.calculateProfit(money);
 
@@ -35,8 +42,8 @@ public class LottoController {
         outputView.printProfitRate(totalProfit);
     }
 
-    private void purchaseLotto(int money) {
-        int lottoCounts = money / 1000;
+    private void purchaseLotto(Money money) {
+        int lottoCounts = money.countsLotto();
         outputView.printCount(lottoCounts);
         lottos = new Lottos(lottoCounts);
         outputView.printLottos(lottos);
