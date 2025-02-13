@@ -2,12 +2,14 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class PurchaseTest {
 
     @Test
-    public void 로또_구매_개수_테스트() {
+    @DisplayName("로또 구매 개수 테스트")
+    public void lottoPurchaseCountTest() {
         // given - 금액이 주어지면
         Integer purchaseAmount = 15000;
         // when

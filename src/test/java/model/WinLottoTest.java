@@ -30,6 +30,4 @@ class WinLottoTest {
         //then
         assertThat(bonusMatch).isTrue();
     }
-
-
 }

@@ -4,6 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import constant.ErrorMessage;
 import java.io.ByteArrayInputStream;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -11,7 +12,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 class PurchaseViewTest {
     @ParameterizedTest
     @ValueSource(strings = {"abc", "-1000", "0"})
-    public void 양의정수_판별_테스트(String test) {
+    @DisplayName("양의정수 판별 테스트")
+    public void positiveIntegerTest(String test) {
         // given
         System.setIn(new ByteArrayInputStream(test.getBytes()));
         PurchaseView purchaseView = new PurchaseView();
@@ -23,7 +25,8 @@ class PurchaseViewTest {
     }
 
     @Test
-    public void _1000의_배수_판별_테스트() {
+    @DisplayName("1000의 배수 판별 테스트")
+    public void dividableTest() {
         //given
         String test = "1501";
         System.setIn(new ByteArrayInputStream(test.getBytes()));

@@ -4,11 +4,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import constant.Constants;
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoConstantsTest {
     @Test
-    public void 로또_번호_개수_테스트() {
+    @DisplayName("로또 번호 개수 테스트")
+    public void lottoNumbersCountTest() {
         // given & when
         LottoNumbers lottoNumbers = new LottoNumbers();
         List<Integer> numbers = lottoNumbers.getNumbers();
@@ -17,7 +19,8 @@ class LottoConstantsTest {
     }
 
     @Test
-    public void 로또_번호_범위_테스트() {
+    @DisplayName("로또 번호 범위 테스트")
+    public void lottoNumberBoundTest() {
         // given & when
         LottoNumbers lottoNumbers = new LottoNumbers();
         List<Integer> numbers = lottoNumbers.getNumbers();
@@ -25,7 +28,5 @@ class LottoConstantsTest {
         for (Integer number : numbers) {
             assertThat(number).isBetween(1, 45);
         }
-
     }
-
 }
