@@ -25,17 +25,25 @@ public enum Prize {
     }
 
     public static Prize getPrize(final int matchCount, final boolean hasBonusNumber) {
-        if (matchCount == SECOND.matchCount && hasBonusNumber) {
-            return SECOND;
+        if (matchCount == FIRST.matchCount) {
+            return FIRST;
         }
-        if (matchCount == THIRD.matchCount) {
-            return THIRD;
+        if (matchCount == SECOND.matchCount) {
+            return getSecondOrThird(hasBonusNumber);
         }
-        for (final Prize prize : Prize.values()) {
-            if (prize.getMatchCount() == matchCount) {
-                return prize;
-            }
+        if (matchCount == FOURTH.matchCount) {
+            return FOURTH;
+        }
+        if (matchCount == FIFTH.matchCount) {
+            return FIFTH;
         }
         return NONE;
+    }
+
+    private static Prize getSecondOrThird(final boolean hasNumber) {
+        if (hasNumber) {
+            return SECOND;
+        }
+        return THIRD;
     }
 }
