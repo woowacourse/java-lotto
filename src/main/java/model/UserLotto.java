@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import view.util.LottoConstants;
 
 public class UserLotto {
     private List<Integer> winningNumbers;
@@ -16,7 +17,7 @@ public class UserLotto {
     }
 
     private void validateSize(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != 6) {
+        if (winningNumbers.size() != LottoConstants.BALL_NUMBER_OF_ONE_LOTTO) {
             throw new IllegalArgumentException("6개의 숫자만 입력해주세요.");
         }
     }
@@ -29,7 +30,7 @@ public class UserLotto {
 
     private void validateNumberRange(List<Integer> winningNumbers) {
         for (Integer winningNumber : winningNumbers) {
-            if (winningNumber < 1 || winningNumber > 45) {
+            if (winningNumber < LottoConstants.START_NUMBER_OF_LOTTO_RANGE || winningNumber > LottoConstants.END_NUMBER_OF_LOTTO_RANGE) {
                 throw new IllegalArgumentException("숫자는 1~45 사이여야 합니다.");
             }
         }

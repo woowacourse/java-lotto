@@ -1,5 +1,7 @@
 package controller;
 
+import static view.util.LottoConstants.LOTTO_PRICE_PER_ONE;
+
 import model.BonusNumber;
 import model.Lotto;
 import model.LottoRepository;
@@ -10,6 +12,24 @@ import view.OutputView;
 import view.util.RandomNumberGenerator;
 
 public class LottoController {
+    public static void lottoStart() {
+        LottoRepository lottoRepository = new LottoRepository();
+        int userMoney = InputView.inputAndValidateUserMoney();
+
+        for (int i = 0; i < userMoney / LOTTO_PRICE_PER_ONE; i++) {
+            lottoRepository.addLotto(makeLotto());
+        }
+        OutputView.printBuyQuantity(userMoney / LOTTO_PRICE_PER_ONE);
+        OutputView.printRandomLotto(lottoRepository);
+
+        UserLotto userLotto = new UserLotto(InputView.inputWinningNumbers());
+        BonusNumber bonusNumber = isDuplicateBonusNumber(userLotto);
+
+        calculateResultAndPrintResult(lottoRepository, userLotto, bonusNumber);
+        OutputView.printWinningRate(calculateWinningRate(userMoney));
+    }
+
+
     public static BonusNumber isDuplicateBonusNumber(UserLotto userLotto) {
         try {
             BonusNumber bonusNumber = new BonusNumber(InputView.isNumericBonusNumber());
@@ -21,21 +41,6 @@ public class LottoController {
         }
     }
 
-    public static void lottoStart() {
-        LottoRepository lottoRepository = new LottoRepository();
-        int userMoney = InputView.inputAndValidateUserMoney();
-        for (int i = 0; i < userMoney / 1000; i++) {
-            lottoRepository.addLotto(makeLotto());
-        }
-        OutputView.printBuyQuantity(userMoney / 1000);
-        OutputView.printRandomLotto(lottoRepository);
-
-        UserLotto userLotto = new UserLotto(InputView.inputWinningNumbers());
-        BonusNumber bonusNumber = isDuplicateBonusNumber(userLotto);
-
-        calculateResultAndPrintResult(lottoRepository, userLotto, bonusNumber);
-        OutputView.printWinningRate(calculateWinningRate(userMoney));
-    }
 
     private static Lotto makeLotto() {
         try {

@@ -1,8 +1,13 @@
 package view;
 
+import static view.util.LottoConstants.COMMA_REGEX;
+import static view.util.LottoConstants.DELIMITER_VALIDATE_REGEX;
+import static view.util.LottoConstants.NUMERIC_VALIDATE_REGEX;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import view.util.LottoConstants;
 
 public class InputView {
     private static final String INPUT_MONEY_PROMPT = "구입금액을 입력해 주세요.";
@@ -11,13 +16,13 @@ public class InputView {
     private static Scanner scanner = new Scanner(System.in);
 
     private static void isDivideByThousand(int inputMoney) {
-        if (inputMoney % 1000 != 0) {
+        if (inputMoney % LottoConstants.LOTTO_PRICE_PER_ONE != 0) {
             throw new IllegalArgumentException("천원단위로 입력해주세요.");
         }
     }
 
     private static void isNumeric(String inputMoneyString) {
-        if (!inputMoneyString.matches("[+-]?\\d*(\\.\\d+)?")) {
+        if (!inputMoneyString.matches(NUMERIC_VALIDATE_REGEX)) {
             throw new IllegalArgumentException("구입 금액은 숫자여야 합니다.");
         }
     }
@@ -53,7 +58,7 @@ public class InputView {
     }
 
     private static void isValidDelimiter(String input){
-        String regex = "([0-9]+)(, [0-9]+)+";
+        String regex = DELIMITER_VALIDATE_REGEX;
         if(!input.matches(regex)){
             throw new IllegalArgumentException("당첨번호 형식이 올바르지 않습니다.");
         }
@@ -62,7 +67,7 @@ public class InputView {
     private static List<Integer> splitWinningNumbers(String input){
         List<Integer> winningNumbers = new ArrayList<>();
 
-        for (String value : input.split(", ")) {
+        for (String value : input.split(COMMA_REGEX)) {
             winningNumbers.add(Integer.parseInt(value));
         }
 

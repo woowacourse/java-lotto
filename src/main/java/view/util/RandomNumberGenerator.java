@@ -9,8 +9,8 @@ public class RandomNumberGenerator {
 
     public static List<Integer> makeRandomNumber() {
         List<Integer> randomNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            randomNumbers.add(random.nextInt(45) + 1);
+        for (int i = 0; i < LottoConstants.BALL_NUMBER_OF_ONE_LOTTO; i++) {
+            randomNumbers.add(random.nextInt(LottoConstants.END_NUMBER_OF_LOTTO_RANGE) + 1);
         }
         return randomNumbers;
     }

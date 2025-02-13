@@ -1,6 +1,6 @@
 package model;
 
-import java.util.List;
+import view.util.LottoConstants;
 
 public class BonusNumber {
     private int bonusNumber;
@@ -15,7 +15,7 @@ public class BonusNumber {
     }
 
     private void validateNumberRange(int bonusNumber) {
-        if (bonusNumber < 1 || bonusNumber > 45) {
+        if (bonusNumber < LottoConstants.START_NUMBER_OF_LOTTO_RANGE || bonusNumber > LottoConstants.END_NUMBER_OF_LOTTO_RANGE) {
             throw new IllegalArgumentException("숫자는 1~45 사이여야 합니다.");
         }
     }
