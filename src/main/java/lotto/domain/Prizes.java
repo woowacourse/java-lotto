@@ -42,5 +42,4 @@ public class Prizes {
         }
         return sb.toString();
     }
-
 }

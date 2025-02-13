@@ -13,5 +13,4 @@ public class Prize {
     public Rank matchRank() {
         return Rank.matchRank(matchCount, matchBonus);
     }
-
 }

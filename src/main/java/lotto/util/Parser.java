@@ -9,5 +9,4 @@ public class Parser {
             throw new IllegalArgumentException(message);
         }
     }
-
 }

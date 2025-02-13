@@ -28,6 +28,13 @@ public class LottoController {
         inputView.closeScanner();
     }
 
+    private void purchaseLotto(Money money) {
+        int lottoCounts = money.countsLotto();
+        outputView.printCount(lottoCounts);
+        lottos = new Lottos(lottoCounts, new LottoGenerator());
+        outputView.printLottos(lottos);
+    }
+
     private void operateWinningLotto() {
         Lotto winningLottoNumber = new Lotto(inputView.inputWinningLotto());
         String bonusNumber = inputView.inputBonusNumber();
@@ -40,13 +47,6 @@ public class LottoController {
 
         outputView.printResult(prizes.toString().trim());
         outputView.printProfitRate(totalProfit);
-    }
-
-    private void purchaseLotto(Money money) {
-        int lottoCounts = money.countsLotto();
-        outputView.printCount(lottoCounts);
-        lottos = new Lottos(lottoCounts, new LottoGenerator());
-        outputView.printLottos(lottos);
     }
 
 }

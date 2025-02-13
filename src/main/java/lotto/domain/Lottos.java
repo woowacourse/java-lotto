@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
+
     private List<Lotto> lottos = new ArrayList<>();
     private LottoGenerator lottoGenerator;
 
@@ -12,19 +13,18 @@ public class Lottos {
         generateLottos(lottoCounts);
     }
 
+    public Prizes calculatePrize(WinningLotto winningLotto) {
+        Lotto winningLottoNumber = winningLotto.getLotto();
+        int bonusNumber = winningLotto.getBonusNumber();
+        return matchNumber(winningLottoNumber, bonusNumber);
+    }
+
     private void generateLottos(int lottoCounts) {
         for (int i = 0; i < lottoCounts; i ++) {
             lottos.add(new Lotto(lottoGenerator));
         }
     }
 
-    public Prizes calculatePrize(WinningLotto winningLotto) {
-        Lotto winningLottoNumber = winningLotto.getLotto();
-        int bonusNumber = winningLotto.getBonusNumber();
-
-        return matchNumber(winningLottoNumber, bonusNumber);
-
-    }
     private Prizes matchNumber(Lotto winningLottoNumber, int bonusNumber) {
         List<Prize> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
@@ -42,5 +42,4 @@ public class Lottos {
         }
         return stringBuilder.toString();
     }
-
 }

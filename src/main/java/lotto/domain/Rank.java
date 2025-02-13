@@ -40,23 +40,23 @@ public enum Rank {
         return NONE;
     }
 
-    private static Rank checkEqualFive(boolean matchBonus) {
-        if (matchBonus) {
-            return SECOND;
-        }
-        return THIRD;
-    }
-
     public int calculateTotalProfit(int winningCounts) {
         return winningCounts * this.money;
+    }
+
+    public static List<Rank> validRank() {
+        return new ArrayList<>(Arrays.asList(Rank.values()).subList(0, 5));
     }
 
     public String getMessage() {
         return message;
     }
 
-    public static List<Rank> validRank() {
-        return new ArrayList<>(Arrays.asList(Rank.values()).subList(0, 5));
+    private static Rank checkEqualFive(boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
 }

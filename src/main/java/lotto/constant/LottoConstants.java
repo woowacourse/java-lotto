@@ -1,6 +1,7 @@
 package lotto.constant;
 
 public enum LottoConstants {
+
     LENGTH(6),
     LOTTO_MINIMUM_NUMBER(1),
     LOTTO_MAXIMUM_NUMBER(45),
@@ -15,5 +16,4 @@ public enum LottoConstants {
     public int getNumber() {
         return number;
     }
-
 }

@@ -26,5 +26,4 @@ public class OutputView {
     public void printProfitRate(double profitRate) {
         System.out.println(String.format(PROFIT_MESSAGE, profitRate));
     }
-
 }

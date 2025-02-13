@@ -21,14 +21,14 @@ public class WinningLotto {
         return parsedBonusNumber;
     }
 
-    private void validateBonusNumber(Lotto lotto, int bonusNumber) {
-        lotto.checkDuplicate(bonusNumber);
-    }
-
     private void checkRange(int number) {
         if (number < LottoConstants.LOTTO_MINIMUM_NUMBER.getNumber() || number > LottoConstants.LOTTO_MAXIMUM_NUMBER.getNumber()) {
             throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR.getMessage());
         }
+    }
+
+    private void validateBonusNumber(Lotto lotto, int bonusNumber) {
+        lotto.checkDuplicate(bonusNumber);
     }
 
     public Lotto getLotto() {
@@ -38,5 +38,4 @@ public class WinningLotto {
     public int getBonusNumber() {
         return bonusNumber;
     }
-
 }

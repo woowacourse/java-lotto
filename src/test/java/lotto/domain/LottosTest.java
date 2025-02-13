@@ -20,6 +20,5 @@ class LottosTest {
         //then
         Assertions.assertThat(lottos.calculatePrize(prizeLotto).calculateProfit(new Money("10000")))
                 .isEqualTo(0.50);
-
     }
 }

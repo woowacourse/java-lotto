@@ -45,5 +45,4 @@ public class Money {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_MAXIMUM_ERROR.getMessage());
         }
     }
-
 }

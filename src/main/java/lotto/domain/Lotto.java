@@ -9,6 +9,7 @@ import lotto.constant.LottoConstants;
 import lotto.util.Parser;
 
 public class Lotto {
+
     private static final int INCREASE = 1;
     private static final int MAINTENANCE = 0;
     private static final String DELIMITER = ",";
@@ -24,51 +25,10 @@ public class Lotto {
         validate(winningLottoInput);
     }
 
-    private void validate(String winningLottoInput) {
-        List<String> splittedLotto = validateLength(winningLottoInput);
-        List<Integer> parsedLotto = validateIsNumber(splittedLotto);
-        validateRange(parsedLotto);
-        validateDuplicate(parsedLotto);
-        this.lottoNumber = parsedLotto;
-    }
-    private void validateRange(List<Integer> parsedLotto) {
-        for (Integer number : parsedLotto) {
-            checkRange(number);
-        }
-    }
-
-    private void checkRange(int number) {
-        if (number <= LottoConstants.ZERO.getNumber() || number > LottoConstants.LOTTO_MAXIMUM_NUMBER.getNumber()) {
-            throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR.getMessage());
-        }
-    }
-    private List<Integer> validateIsNumber(List<String> splitedLotto) {
-        List<Integer> parsedLotto = new ArrayList<>();
-        for (String lottoNumber : splitedLotto) {
-            parsedLotto.add(Parser.validateNumber(lottoNumber, ErrorMessage.NUMBER_FORMAT_ERROR.getMessage()));
-        }
-        return parsedLotto;
-    }
-
-    private void validateDuplicate(List<Integer> parsedLotto) {
-        Set<Integer> unDuplicatedLotto = new HashSet<>(parsedLotto);
-        if (unDuplicatedLotto.size() != LottoConstants.LENGTH.getNumber()) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_DUPLICATED_ERROR.getMessage());
-        }
-    }
     public void checkDuplicate(int bonusNumber) {
         if (lottoNumber.contains(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_DUPLICATED_ERROR.getMessage());
         }
-    }
-
-    private List<Integer> generateLotto() {
-        return lottoGenerator.generateLotto();
-    }
-
-    @Override
-    public String toString() {
-        return lottoNumber.toString() + System.lineSeparator();
     }
 
     public int match(Lotto winningLottoNumber) {
@@ -78,6 +38,7 @@ public class Lotto {
         }
         return count;
     }
+
     public int contain(int number) {
         if (lottoNumber.contains(number)) {
             return INCREASE;
@@ -87,6 +48,14 @@ public class Lotto {
 
     public boolean checkBonusNumberMatch(int bonusNumber) {
         return lottoNumber.contains(bonusNumber);
+    }
+
+    private void validate(String winningLottoInput) {
+        List<String> splittedLotto = validateLength(winningLottoInput);
+        List<Integer> parsedLotto = validateIsNumber(splittedLotto);
+        validateRange(parsedLotto);
+        validateDuplicate(parsedLotto);
+        this.lottoNumber = parsedLotto;
     }
 
     private List<String> validateLength(String winningLottoInput) {
@@ -99,4 +68,39 @@ public class Lotto {
         return winningNumbers;
     }
 
+    private List<Integer> validateIsNumber(List<String> splitedLotto) {
+        List<Integer> parsedLotto = new ArrayList<>();
+        for (String lottoNumber : splitedLotto) {
+            parsedLotto.add(Parser.validateNumber(lottoNumber, ErrorMessage.NUMBER_FORMAT_ERROR.getMessage()));
+        }
+        return parsedLotto;
+    }
+
+    private void validateRange(List<Integer> parsedLotto) {
+        for (Integer number : parsedLotto) {
+            checkRange(number);
+        }
+    }
+
+    private void checkRange(int number) {
+        if (number <= LottoConstants.ZERO.getNumber() || number > LottoConstants.LOTTO_MAXIMUM_NUMBER.getNumber()) {
+            throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR.getMessage());
+        }
+    }
+
+    private List<Integer> generateLotto() {
+        return lottoGenerator.generateLotto();
+    }
+
+    private void validateDuplicate(List<Integer> parsedLotto) {
+        Set<Integer> unDuplicatedLotto = new HashSet<>(parsedLotto);
+        if (unDuplicatedLotto.size() != LottoConstants.LENGTH.getNumber()) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_DUPLICATED_ERROR.getMessage());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumber.toString() + System.lineSeparator();
+    }
 }
