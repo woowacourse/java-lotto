@@ -7,6 +7,9 @@ import java.util.TreeMap;
 
 public class ConsoleOutputView implements OutputView {
 
+    private final Comparator<LottoPrizeResponse> lottoPrizeResponseComparator =
+            Comparator.comparingInt(LottoPrizeResponse::getMatchCount);
+
     @Override
     public void printInputPurchaseMoneyMessage() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -54,7 +57,7 @@ public class ConsoleOutputView implements OutputView {
 
     private Map<LottoPrizeResponse, Integer> getLottoPrizeStatistic(List<LottoPrizeResponse> lottoPrizeResponses) {
 
-        Map<LottoPrizeResponse, Integer> statistic = new TreeMap<>(LottoPrizeResponseComparator.getInstance());
+        Map<LottoPrizeResponse, Integer> statistic = new TreeMap<>(lottoPrizeResponseComparator);
 
         lottoPrizeResponses.stream()
                 .filter(LottoPrizeResponse::isWin)
@@ -84,22 +87,5 @@ public class ConsoleOutputView implements OutputView {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
         System.out.println();
-    }
-
-    static class LottoPrizeResponseComparator implements Comparator<LottoPrizeResponse> {
-
-        private static final LottoPrizeResponseComparator instance = new LottoPrizeResponseComparator();
-
-        private LottoPrizeResponseComparator() {
-        }
-
-        private static LottoPrizeResponseComparator getInstance() {
-            return instance;
-        }
-
-        @Override
-        public int compare(LottoPrizeResponse o1, LottoPrizeResponse o2) {
-            return o1.getMatchCount() - o2.getMatchCount();
-        }
     }
 }
