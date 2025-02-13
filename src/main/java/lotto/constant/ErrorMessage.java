@@ -13,7 +13,7 @@ public enum ErrorMessage {
     PURCHASE_MINIMUM_ERROR("구입금액은 천원부터 입니다."),
     PURCHASE_MAXIMUM_ERROR("10만원까지 구매 가능 합니다.");
 
-    private String message;
+    private final String message;
 
     ErrorMessage(String message) {
         this.message = message;
