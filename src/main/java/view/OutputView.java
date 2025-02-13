@@ -2,6 +2,7 @@ package view;
 
 import domain.LottoPrize;
 import domain.LottoTicket;
+import domain.Profit;
 import domain.WinningStatistics;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -26,7 +27,7 @@ public class OutputView {
                 continue;
             }
 
-            System.out.printf("%d개 일치%s(%d원) - %d개\n", lottoPrize.getCountMatched(),
+            System.out.printf("%d개 일치%s(%d원)- %d개\n", lottoPrize.getCountMatched(),
                     printBonusNumberMatched(lottoPrize.isBonusNumberMatched()),
                     lottoPrize.getMoney(),
                     prizeCounter.get(lottoPrize));
@@ -38,5 +39,9 @@ public class OutputView {
             return ", 보너스 볼 일치";
         }
         return "";
+    }
+
+    public static void printProfit(Profit profit) {
+        System.out.printf("총 수익률은 %.2f입니다.", Math.floor(profit.getProfit() * 100.0) / 100.0);
     }
 }

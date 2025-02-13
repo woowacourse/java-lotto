@@ -4,6 +4,7 @@ import static domain.LottoTicket.LOTTO_PRICE;
 
 import domain.LottoMachine;
 import domain.LottoTicket;
+import domain.Profit;
 import domain.RandomIntegerGenerator;
 import domain.StatisticsService;
 import domain.WinningStatistics;
@@ -21,11 +22,11 @@ public class MainController {
     public void run() {
         int purchaseAmount = InputView.inputPurchaseAmount();
 
-        int LottoTicketNumber = purchaseAmount / LOTTO_PRICE;
+        int lottoTicketNumber = purchaseAmount / LOTTO_PRICE;
 
         LottoMachine lottoMachine = new LottoMachine();
         List<LottoTicket> lottoTickets =
-                lottoMachine.generateLottoTickets(LottoTicketNumber, new RandomIntegerGenerator());
+                lottoMachine.generateLottoTickets(lottoTicketNumber, new RandomIntegerGenerator());
 
         OutputView.printLottoTickets(lottoTickets);
         List<Integer> winningNumbers = InputView.inputWinningLottoTicket();
@@ -34,5 +35,8 @@ public class MainController {
         WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, winningNumbers,
                 bonusNumber);
         OutputView.printWinningStatistics(winningStatistics);
+        Profit profit = statisticsService.calculateProfit(winningStatistics, lottoTicketNumber);
+        OutputView.printProfit(profit);
+
     }
 }
