@@ -43,11 +43,11 @@ public class Lotto {
     }
 
     public int calculateWinningNumbersMatchCount(final WinningNumbers winningNumbers) {
-        return winningNumbers.calculateLottoMatchCount(lottoNumbers);
+        return winningNumbers.calculateLottoMatchCount(getLottoNumbers());
     }
 
     public boolean isContainsBonusNumber(final WinningNumbers winningNumbers) {
-        return winningNumbers.matchBonusNumber(lottoNumbers);
+        return winningNumbers.matchBonusNumber(getLottoNumbers());
     }
 
     public List<LottoNumber> getLottoNumbers() {
