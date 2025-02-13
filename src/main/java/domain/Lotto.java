@@ -14,4 +14,19 @@ public class Lotto {
     public String getNumbers() {
         return numbers.toString();
     }
+
+    public MatchDto getMatchDto(List<Integer> winningNumbers, int bonusNumber) {
+        int winningNumberCount = numbers.stream()
+                .filter(winningNumbers::contains)
+                .mapToInt(e -> 1)
+                .sum();
+
+        boolean hasBonusNumber = numbers.contains(bonusNumber);
+
+        return new MatchDto(
+                winningNumberCount,
+                hasBonusNumber
+        );
+    }
+
 }
