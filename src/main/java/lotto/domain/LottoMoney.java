@@ -7,12 +7,12 @@ import static lotto.util.ErrorHandler.INVALID_UNIT;
 
 public class LottoMoney {
 
-    private int lottoMoney;
+    private final int lottoMoney;
 
     public LottoMoney(String input) {
-       int amount = parse(input);
-       validate(amount);
-       lottoMoney = amount;
+        int amount = parse(input);
+        validate(amount);
+        this.lottoMoney = amount;
     }
 
     private int parse(String input) {
