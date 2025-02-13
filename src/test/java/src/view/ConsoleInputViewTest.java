@@ -70,4 +70,20 @@ public class ConsoleInputViewTest {
 
         assertThatIllegalArgumentException().isThrownBy(consoleInputView::inputWinningLottoNumbers);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "-", "=", "?"})
+    void 보너스_번호_입력_시_숫자가_아니면_예외_발생(final String input) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        assertThatIllegalArgumentException().isThrownBy(consoleInputView::inputBonusNumber);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1", "+2"})
+    void 보너스_번호_입력_시_숫자_부호가_포함되면_예외_발생(final String input) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        assertThatIllegalArgumentException().isThrownBy(consoleInputView::inputBonusNumber);
+    }
 }
