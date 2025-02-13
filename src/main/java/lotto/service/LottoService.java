@@ -31,7 +31,7 @@ public class LottoService {
 
     public double calculateProfitRate(Map<LottoRank, Integer> winningInfo, long purchaseAmount) {
         long totalProfit = sumTotalProfit(winningInfo);
-        return (double) totalProfit / purchaseAmount * 100;
+        return (double) totalProfit / purchaseAmount;
     }
 
     private long sumTotalProfit(Map<LottoRank, Integer> winningInfo) {
