@@ -26,7 +26,7 @@ public class ConsoleOutputView implements OutputView {
         Arrays.stream(LottoRank.values())
                 .filter(rank -> rank != LottoRank.FAIL)
                 .forEach(rank -> {
-                    String bonusBallMessage = "";
+                    String bonusBallMessage = " ";
                     if (rank.isBonusBallMatch()) {
                         bonusBallMessage = OutputMessage.LOTTO_WINNING_RESULT_BONUS_BALL.toString();
                     }
