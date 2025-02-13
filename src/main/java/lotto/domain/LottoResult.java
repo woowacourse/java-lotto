@@ -8,8 +8,8 @@ import java.util.TreeMap;
 
 public class LottoResult {
 
-    private WinningLotto winningLotto;
-    private  List<List<Integer>> lottoTickets;
+    private final WinningLotto winningLotto;
+    private final List<List<Integer>> lottoTickets;
 
     private Map<LottoPrize, Integer> lottoResult;
     private Double lottoProfitRate;
@@ -29,35 +29,42 @@ public class LottoResult {
     }
 
     public void matchLottoTicketsResult() {
-        for (List<Integer> lottoTicket: lottoTickets) {
-            matchLottoTicketResult(lottoTicket);
+        for (List<Integer> lottoTicket : lottoTickets) {
+            matchEachLottoTicketResult(lottoTicket);
         }
     }
 
-    private void matchLottoTicketResult(List<Integer> lottoTicket) {
+    private void matchEachLottoTicketResult(List<Integer> lottoTicket) {
         int bonusBall = winningLotto.getBonusBall();
-        boolean isBonusHit = false;
-        if (lottoTicket.contains(bonusBall)) {
-            isBonusHit = true;
-        }
 
-        Set<Integer> winningLottoSet = new HashSet<>(winningLotto.getWinningNumbers());
-        Set<Integer> lottoTicketSet = new HashSet<>(lottoTicket);
-
-        lottoTicketSet.retainAll(winningLottoSet);
-        int winningNumbersHit = lottoTicketSet.size();
+        boolean isBonusHit = matchBonusBall(bonusBall, lottoTicket);
+        int winningNumbersHit = matchWinningNumbers(winningLotto, lottoTicket);
 
         LottoPrize lottoPrize = LottoPrize.findLottoPrize(winningNumbersHit, isBonusHit);
         lottoResult.put(lottoPrize, lottoResult.getOrDefault(lottoPrize, 0) + 1);
     }
 
+    private boolean matchBonusBall(int bonusBall, List<Integer> lottoTicket) {
+        return lottoTicket.contains(bonusBall);
+    }
+
+    private int matchWinningNumbers(WinningLotto winningLotto, List<Integer> lottoTicket) {
+        Set<Integer> winningLottoSet = new HashSet<>(winningLotto.getWinningNumbers());
+        Set<Integer> lottoTicketSet = new HashSet<>(lottoTicket);
+
+        lottoTicketSet.retainAll(winningLottoSet);
+        return lottoTicketSet.size();
+    }
+
     public void calculateLottoProfitRate(LottoMoney lottoMoney) {
         int money = lottoMoney.getLottoMoney();
         int totalProfit = 0;
-        for (Map.Entry<LottoPrize, Integer>  entry: lottoResult.entrySet()) {
+
+        for (Map.Entry<LottoPrize, Integer> entry : lottoResult.entrySet()) {
             LottoPrize lottoPrize = entry.getKey();
             int count = entry.getValue();
             int prize = lottoPrize.getPrize();
+
             totalProfit += count * prize;
         }
         this.lottoProfitRate = (double) totalProfit / money;
