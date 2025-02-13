@@ -1,11 +1,11 @@
 package lotto.domain;
 
-public class WinningResult {
+public class WinningResultCalculator {
 
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    public WinningResult(Lotto winningLotto, LottoNumber bonusNumber) {
+    public WinningResultCalculator(Lotto winningLotto, LottoNumber bonusNumber) {
         validate(winningLotto, bonusNumber);
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;

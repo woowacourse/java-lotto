@@ -27,13 +27,13 @@ public class LottoController {
         List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
         printPurchaseLottos(lottos);
 
-        WinningResult winningResult = getWinningResult();
+        WinningResultCalculator winningResultCalculator = getWinningResult();
     }
 
-    private WinningResult getWinningResult() {
+    private WinningResultCalculator getWinningResult() {
         Lotto winningLotto = getWinningLotto();
         LottoNumber bonusNumber = getBonusNumber();
-        return new WinningResult(winningLotto, bonusNumber);
+        return new WinningResultCalculator(winningLotto, bonusNumber);
     }
 
     private Lotto getWinningLotto() {
