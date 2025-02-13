@@ -19,7 +19,7 @@ public class Lotto {
 
     private void validateSize(final List<LottoNumber> winningNumbers) {
         if (winningNumbers.size() != 6) {
-            throw new IllegalArgumentException(ErrorType.LOTTO_NUMBER__IS_INVALID_SIZE.getMessage());
+            throw new IllegalArgumentException(ErrorType.LOTTO_NUMBER_IS_INVALID_SIZE.getMessage());
         }
     }
 

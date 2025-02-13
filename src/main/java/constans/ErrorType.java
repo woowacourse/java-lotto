@@ -7,8 +7,9 @@ public enum ErrorType {
     WINNING_NUMBERS_IS_INVALID_SIZE("당첨 번호는 6개여야합니다."),
     WINNING_NUMBERS_IS_DUPLICATION("당첨 번호의 숫자들 중 중복되는 수가 있습니다."),
     LOTTO_NUMBER_RANGE("로또 번호 범위는 1에서 45까지의 숫자여야합니다."),
-    LOTTO_NUMBER__IS_INVALID_SIZE("당첨 번호는 6개여야합니다."),
+    LOTTO_NUMBER_IS_INVALID_SIZE("당첨 번호는 6개여야합니다."),
     LOTTO_NUMBER_DUPLICATE("로또 번호들은 중복될 수 없습니다."),
+    BONUS_BALL_IS_DUPLICATION("보너스 번호는 당첨 번호와 중복될 수 없습니다."),
     // input view
     PURCHASE_AMOUNT_INVALID_INPUT("구입 금액의 입력값이 올바르지 않습니다."),
     WINNING_NUMBERS_INVALID_INPUT("당첨 번호의 입력값이 올바르지 않습니다."),

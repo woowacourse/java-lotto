@@ -8,12 +8,22 @@ import java.util.Set;
 public class WinningNumbers {
 
     private final List<LottoNumber> winningNumbers;
+    private final LottoNumber bonusBall;
 
-    public WinningNumbers(final List<LottoNumber> winningNumbers) {
+    public WinningNumbers(final List<LottoNumber> winningNumbers, final LottoNumber bonusBall) {
         validateSize(winningNumbers);
         validateDuplicate(winningNumbers);
+        validateBonusNumberDuplicate(winningNumbers, bonusBall);
         this.winningNumbers = winningNumbers;
+        this.bonusBall = bonusBall;
     }
+
+    private void validateBonusNumberDuplicate(final List<LottoNumber> winningNumbers, final LottoNumber bonusBall) {
+        if (winningNumbers.contains(bonusBall)) {
+            throw new IllegalArgumentException(ErrorType.BONUS_BALL_IS_DUPLICATION.getMessage());
+        }
+    }
+
 
     private void validateSize(final List<LottoNumber> winningNumbers) {
         if (winningNumbers.size() != 6) {
