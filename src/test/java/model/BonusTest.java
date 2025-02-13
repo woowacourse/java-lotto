@@ -36,9 +36,17 @@ class BonusTest {
     }
 
     @Test
-    @DisplayName("빈 문자열이 들어왔을 때 예외 처리된다.")
+    @DisplayName("null이 들어왔을 때 예외 처리된다.")
     void inputWithNull() {
         assertThatThrownBy(() -> Bonus.of(null, lotto))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(INVALID_INPUT_NULL_OR_BLANK.getMessage());
+    }
+
+    @Test
+    @DisplayName("빈 문자열이 들어왔을 때 예외 처리된다.")
+    void inputWithBlank() {
+        assertThatThrownBy(() -> Bonus.of(" ", lotto))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(INVALID_INPUT_NULL_OR_BLANK.getMessage());
     }
