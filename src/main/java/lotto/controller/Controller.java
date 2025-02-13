@@ -5,7 +5,7 @@ import java.util.List;
 
 import lotto.common.utill.InputParser;
 import lotto.domain.Amount;
-import lotto.domain.Calculator;
+import lotto.service.LottoService;
 import lotto.domain.Lotto;
 import lotto.domain.MatchStatistics;
 import lotto.domain.Wallet;
@@ -15,14 +15,14 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class Controller {
-    private final Calculator calculator;
+    private final LottoService lottoService;
     private final InputView inputView;
     private final OutputView outputView;
 
-    public Controller(InputView inputView, OutputView outputView, Calculator calculator) {
+    public Controller(InputView inputView, OutputView outputView, LottoService lottoService) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.calculator = calculator;
+        this.lottoService = lottoService;
     }
 
     public void run() {
@@ -46,10 +46,10 @@ public class Controller {
         int bonus = InputParser.parseToInt(bonusInput);
 
         List<MatchCountDto> matchCount = wallet.matchCount(matchLotto, bonus);
-        HashMap<MatchStatistics, Integer> map = calculator.calculate(matchCount);
+        HashMap<MatchStatistics, Integer> map = lottoService.convertToMap(matchCount);
         outputView.printStatics(map);
 
-        Profit profit = calculator.calculate(map, amount);
+        Profit profit = lottoService.calculateProfit(map, amount);
         outputView.printProfit(profit);
     }
 

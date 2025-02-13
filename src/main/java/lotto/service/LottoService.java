@@ -1,16 +1,18 @@
-package lotto.domain;
+package lotto.service;
 
 import static lotto.domain.MatchStatistics.*;
 
 import java.util.HashMap;
 import java.util.List;
 
+import lotto.domain.Amount;
+import lotto.domain.MatchStatistics;
 import lotto.dto.MatchCountDto;
 import lotto.dto.Profit;
 
-public class Calculator {
+public class LottoService {
 
-    public HashMap<MatchStatistics, Integer> calculate(List<MatchCountDto> matchCount) {
+    public HashMap<MatchStatistics, Integer> convertToMap(List<MatchCountDto> matchCount) {
         HashMap<MatchStatistics, Integer> map = new HashMap<>();
 
         for (MatchCountDto dto : matchCount) {
@@ -20,7 +22,7 @@ public class Calculator {
         return map;
     }
 
-    public Profit calculate(HashMap<MatchStatistics, Integer> map, Amount amount) {
+    public Profit calculateProfit(HashMap<MatchStatistics, Integer> map, Amount amount) {
         int sum = 0;
 
         for (MatchStatistics statistics : map.keySet()) {
