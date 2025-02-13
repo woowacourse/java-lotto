@@ -17,8 +17,8 @@ public class Lotto {
 
 
     private void validateNumberRange() {
-        for(Integer number : lottoNumbers) {
-            if(number < 1 || number >45) {
+        for (Integer number : lottoNumbers) {
+            if (number < 1 || number > 45) {
                 throw new IllegalArgumentException("[ERROR] 범위를 벗어나는 숫자입니다.");
             }
         }
@@ -26,7 +26,7 @@ public class Lotto {
 
     private void validateDuplicateNumber() {
         Set<Integer> set = new HashSet<>(lottoNumbers);
-        if(set.size() != 6) {
+        if (set.size() != 6) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 중복될 수 없습니다.");
         }
     }
@@ -43,5 +43,21 @@ public class Lotto {
 
     public int getSize() {
         return lottoNumbers.size();
+    }
+
+    public int checkMatchCount(List<Integer> winningNumbers) {
+
+        int count = 0;
+        for (int lottoNumber : lottoNumbers) {
+            if (winningNumbers.contains(lottoNumber)) {
+                count += 1;
+            }
+        }
+
+        return count;
+    }
+
+    public boolean checkBonus(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }
