@@ -3,22 +3,24 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoTest {
     @Test
-    void 주어진_가격으로_정확한_매수를_구한다() {
-        Lottos lottos = new Lottos(3000);
-        assertThat(lottos.getTicketCount()).isEqualTo(3);
+    void 일치하는_숫자_갯수를_구한다() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
+
+        assertThat(lotto.findMatchCount(winningLotto)).isEqualTo(5);
     }
 
     @Test
-    void 로또_티켓을_랜덤으로_생성한다() {
-        Lottos lottos = new Lottos(3000);
-        assertThat(lottos.getLottos().get(0).numbers.size()).isEqualTo(6);
+    void 번호_포함_여부를_확인한다() {
+        Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
+        assertThat(lotto.containsNumber(new LottoNumber(3)))
+            .isTrue();
     }
 
     @Test
@@ -30,10 +32,16 @@ public class LottoTest {
     }
 
     @Test
-    void 총_수익률을_계산한다() {
-        Bank bank = new Bank();
-        bank.use(14000);
-        double result = bank.calculateRateOfReturn(Map.of(Rank.FIFTH, 1));
-        assertThat(Math.floor(result * 100) / 100).isEqualTo(0.35);
+    void 로또_번호_개수가_6개가_아닐_경우_예외를_반환한다() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)))
+            .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7)))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 로또_번호가_중복될_경우_예외를_반환한다() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 5)))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 }

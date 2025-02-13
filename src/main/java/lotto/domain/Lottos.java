@@ -23,18 +23,8 @@ public class Lottos {
         }
     }
 
-    public Lottos(NumberGenerator generator, int payment) {
-        if (payment % Lotto.PRICE != 0) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_PRICE.getMessage());
-        }
-
-        for (int i = 0; i < payment / Lotto.PRICE; i++) {
-            lottos.add(new Lotto(generator));
-        }
-    }
-
-    public int getTicketCount() {
-        return lottos.size();
+    public Lottos(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
     }
 
     public Map<Rank, Integer> getRankCount(WinningNumbers winningNumbers) {
@@ -44,6 +34,10 @@ public class Lottos {
                 winningNumbers.getRank(lotto),
                 rankCount.getOrDefault(winningNumbers.getRank(lotto), 0) + 1));
         return rankCount;
+    }
+
+    public int getTicketCount() {
+        return lottos.size();
     }
 
     public List<Lotto> getLottos() {
