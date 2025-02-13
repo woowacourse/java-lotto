@@ -103,6 +103,19 @@ class LottoTest {
     }
     
     @Test
+    void 로또_당첨_번호가_6개가_아니면_예외를_발생한다() {
+        // given
+        Lotto sut = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        List<Integer> illegalCountMatchNumber = List.of(1, 2, 3, 4, 5);
+        int bonusNumber = 6;
+        
+        // expected
+        assertThatThrownBy(() -> sut.getMatchResult(illegalCountMatchNumber, bonusNumber))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 당첨 번호는 6개여야 합니다.");
+    }
+    
+    @Test
     void 보너스_번호에_중복이_있으면_예외를_발생한다() {
         // given
         Lotto sut = new Lotto(List.of(1, 2, 3, 4, 5, 6));
