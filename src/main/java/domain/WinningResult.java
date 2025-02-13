@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class WinningResult {
@@ -25,6 +26,6 @@ public class WinningResult {
     }
 
     public Map<Rank, Integer> getWinningResult() {
-        return winningResult;
+        return Collections.unmodifiableMap(winningResult);
     }
 }
