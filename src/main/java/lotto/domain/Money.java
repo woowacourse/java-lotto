@@ -1,11 +1,10 @@
-package domain;
+package lotto.domain;
 
 import lotto.utils.NumberUtils;
 
 public class Money {
     private static final int LOTTO_PRICE = 1000;
     private final int amount;
-    private int tryCount;
 
     public Money(final String amount) {
         int parseAmount = NumberUtils.parseInt(amount);

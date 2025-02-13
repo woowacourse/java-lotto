@@ -28,13 +28,13 @@ public class WinnerLotto {
 
     public static void validateWinnerNumbers(List<LottoNumber> lottoNumbers) {
         if (new HashSet<>(lottoNumbers).size() != LOTTO_NUM_SIZE) {
-            throw new IllegalStateException("중복은 불가능합니다.");
+            throw new IllegalArgumentException("중복은 불가능합니다.");
         }
     }
 
     public static void validateBonusNumbers(List<LottoNumber> winnerNumbers, LottoNumber bonusNumber) {
         if (winnerNumbers.contains(bonusNumber)) {
-            throw new IllegalStateException("보너스 넘버가 당첨 번호에 중복됩니다.");
+            throw new IllegalArgumentException("보너스 넘버가 당첨 번호에 중복됩니다.");
         }
     }
 }

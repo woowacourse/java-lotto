@@ -8,11 +8,8 @@ import lotto.utils.RandomNumberUtils;
 public class LottoGroup {
     private final List<Lotto> lottoGroup = new ArrayList<>();
 
-
-
     public void generate(Money money) {
         // TODO 통합 테스트 불가능
-
         IntStream.range(0, money.getLottoTicketCount())
                 .forEach(index -> {
                     lottoGroup.add(Lotto.create(RandomNumberUtils.generateRandomNumbers()
@@ -20,6 +17,10 @@ public class LottoGroup {
                             .map(LottoNumber::new)
                             .toList()));
                 });
+    }
+
+    public int getSize() {
+        return lottoGroup.size();
     }
 
     public List<Lotto> getLottoGroup() {

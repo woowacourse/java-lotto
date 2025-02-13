@@ -4,6 +4,7 @@ import static lotto.common.Constants.LOTTO_NUM_SIZE;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class Lotto {
     private final List<LottoNumber> lottoNumbers;
