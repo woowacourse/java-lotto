@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
@@ -23,7 +24,7 @@ public class Lotto {
     }
 
     private void validateDuplication(final List<Integer> numbers) {
-        HashSet<Integer> uniqueNumbers = new HashSet<>(numbers);
+        Set<Integer> uniqueNumbers = new HashSet<>(numbers);
         if (numbers.size() != uniqueNumbers.size()) {
             throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
         }
