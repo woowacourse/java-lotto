@@ -12,4 +12,9 @@ public record Number(int value) implements Comparable<Number> {
     public int compareTo(Number o) {
         return this.value - o.value;
     }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

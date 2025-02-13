@@ -1,7 +1,7 @@
 package model;
 
-import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
     private final Set<Number> lottoNumbers;
@@ -10,21 +10,19 @@ public class Lotto {
         if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new TreeSet<>(lottoNumbers);
+    }
+
+    public boolean containsNumber(Number number) {
+        return lottoNumbers.contains(number);
     }
 
     public Set<Number> getLottoNumbers() {
-        return lottoNumbers;
+        return new TreeSet<>(lottoNumbers);
     }
 
-    public Optional<Prize> calculatePrize(WinningLotto winningLotto) {
-        boolean bonus = false;
-        if (lottoNumbers.contains(winningLotto.getBonus())) {
-            bonus = true;
-        }
-        Set<Number> winningNumbers = winningLotto.getLotto().getLottoNumbers();
-        lottoNumbers.retainAll(winningNumbers);
-        int matchCount = lottoNumbers.size();
-        return Prize.findPrize(matchCount, bonus);
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new Lotto(this.lottoNumbers);
     }
 }
