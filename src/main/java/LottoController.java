@@ -28,7 +28,7 @@ public class LottoController {
 
         WinningLotto winningLotto = inputWinningNumbers();
 
-        WinningResult winningResult = lottoManager.getWinningInfo(lottos, winningLotto);
+        WinningResult winningResult = lottoManager.getWinningResult(lottos, winningLotto);
         outputView.printWinningResult(winningResult);
     }
 

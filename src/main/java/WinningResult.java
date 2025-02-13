@@ -16,4 +16,13 @@ public class WinningResult {
     public int getCount(WinningInfo winningInfo) {
         return result.get(winningInfo);
     }
+
+    public long getTotalPrices() {
+        long totalPrices = 0;
+        for (WinningInfo winningInfo : WinningInfo.values()) {
+            totalPrices += (long) result.get(winningInfo) * winningInfo.getPrice();
+        }
+        return totalPrices;
+    }
+
 }
