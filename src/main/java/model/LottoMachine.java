@@ -9,7 +9,7 @@ public class LottoMachine {
         final int lottoCount = purchaseAmount.calculateLottoCount();
         final List<Lotto> lottos = new ArrayList<>();
 
-        while (lottos.size() == lottoCount) {
+        while (lottos.size() < lottoCount) {
             lottos.add(Lotto.from(generateUniqueRandomNumbers()));
         }
 

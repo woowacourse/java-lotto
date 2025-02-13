@@ -12,4 +12,6 @@ public interface OutputView {
 
     void printLottoStatistics(final double revenueRate, final Map<LottoRank, Integer> lottoRanks,
                               final boolean isDamage);
+
+    void printErrorMessage(final String errorMessage);
 }

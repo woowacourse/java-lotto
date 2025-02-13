@@ -44,4 +44,8 @@ public class Lotto {
     public boolean isContainsBonusNumber(final WinningNumbers winningNumbers) {
         return winningNumbers.matchBonusNumber(lottoNumbers);
     }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return List.copyOf(lottoNumbers);
+    }
 }

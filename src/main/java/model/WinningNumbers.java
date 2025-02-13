@@ -18,6 +18,14 @@ public class WinningNumbers {
         this.bonusBall = bonusBall;
     }
 
+    public static WinningNumbers of(final List<Integer> numbers, final int number) {
+        final List<LottoNumber> winningNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .toList();
+        final LottoNumber bonusBall = new LottoNumber(number);
+        return new WinningNumbers(winningNumbers, bonusBall);
+    }
+
     private void validateBonusNumberDuplicate(final List<LottoNumber> winningNumbers, final LottoNumber bonusBall) {
         if (winningNumbers.contains(bonusBall)) {
             throw new IllegalArgumentException(ErrorType.BONUS_BALL_IS_DUPLICATION.getMessage());

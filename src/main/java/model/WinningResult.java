@@ -67,4 +67,8 @@ public class WinningResult {
         final long totalLottoPrice = calculateTotalLottoPrice();
         return (double) revenue / totalLottoPrice;
     }
+
+    public Map<LottoRank, Integer> getLottoRanks() {
+        return Map.copyOf(lottoRanks);
+    }
 }

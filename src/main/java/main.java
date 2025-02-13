@@ -1,5 +1,10 @@
+import controller.LottoController;
+import factory.LottoFactory;
+
 public class main {
+
     public static void main(String[] args) {
-        System.out.println("asdad");
+        LottoController controller = LottoFactory.create();
+        controller.run();
     }
 }

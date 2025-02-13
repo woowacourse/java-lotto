@@ -14,7 +14,7 @@ public class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void printLottoNumbers(List<List<Integer>> lottoNumbers) {
+    public void printLottoNumbers(final List<List<Integer>> lottoNumbers) {
         lottoNumbers.forEach(System.out::println);
     }
 
@@ -31,7 +31,7 @@ public class ConsoleOutputView implements OutputView {
                         bonusBallMessage = OutputMessage.LOTTO_WINNING_RESULT_BONUS_BALL.toString();
                     }
                     System.out.printf(OutputMessage.LOTTO_WINNING_RESULT_MATCH.toString(), rank.getMatchCount(),
-                            rank.getPrizeMoney(), bonusBallMessage, lottoRanks.getOrDefault(rank, 0));
+                            bonusBallMessage, rank.getPrizeMoney(), lottoRanks.getOrDefault(rank, 0));
                 });
 
         String revenueDescription = OutputMessage.LOTTO_REVENUE_PROFIT.toString();
@@ -39,5 +39,10 @@ public class ConsoleOutputView implements OutputView {
             revenueDescription = OutputMessage.LOTTO_REVENUE_DAMAGE.toString();
         }
         System.out.printf(OutputMessage.LOTTO_REVENUE.toString(), revenueRate, revenueDescription);
+    }
+
+    @Override
+    public void printErrorMessage(final String errorMessage) {
+        System.out.println(errorMessage);
     }
 }

@@ -28,7 +28,7 @@ public class BasicInputParser implements InputParser {
 
     private int parseInt(final ErrorType errorType, final String text) {
         try {
-            return Integer.parseInt(text);
+            return Integer.parseInt(text.strip());
         } catch (final NumberFormatException e) {
             throw new IllegalArgumentException(errorType.getMessage());
         }
