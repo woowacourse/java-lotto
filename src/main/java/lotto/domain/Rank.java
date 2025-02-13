@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Rank {
-    FIRST(2000000000, "6개 일치 (2000000000원)- ", 6, false),
-    SECOND(30000000, "5개 일치, 보너스 볼 일치(30000000원) - ", 5, true),
-    THIRD(1500000, "5개 일치 (1500000원)- ", 5, false),
-    FOURTH(50000, "4개 일치 (50000원)- ", 4, false),
     FIFTH(5000, "3개 일치 (5000원)- ", 3, false),
+    FOURTH(50000, "4개 일치 (50000원)- ", 4, false),
+    THIRD(1500000, "5개 일치 (1500000원)- ", 5, false),
+    SECOND(30000000, "5개 일치, 보너스 볼 일치(30000000원) - ", 5, true),
+    FIRST(2000000000, "6개 일치 (2000000000원)- ", 6, false),
     NONE(0,"", 0, false);
 
     private final int money;

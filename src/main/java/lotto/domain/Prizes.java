@@ -31,7 +31,7 @@ public class Prizes {
         for (Rank rank : results.keySet()) {
             sum += rank.calculateTotalProfit(results.get(rank));
         }
-        return Math.floor((((double) sum /money) * 100) / 100.0);
+        return Math.floor((double) sum /(money) * 100.0) / 100.0;
     }
 
     @Override
