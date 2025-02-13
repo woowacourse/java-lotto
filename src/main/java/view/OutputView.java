@@ -18,16 +18,18 @@ public class OutputView {
     }
 
     public static void printChangeMoney(final int changeMoney) {
+        if (changeMoney == 0) {
+            return;
+        }
         System.out.println("거스름돈은 " + changeMoney + "원 입니다.");
     }
 
     public static void printPrizeResult(final Map<Prize, Integer> prizeResult) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
         for (Map.Entry<Prize, Integer> entry : prizeResult.entrySet()) {
             printSinglePrizeResult(entry);
         }
-        System.out.println("수익률 어쩌고");
     }
 
     private static void printSinglePrizeResult(Entry<Prize, Integer> entry) {
