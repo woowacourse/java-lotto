@@ -40,7 +40,7 @@ class LottoStoreTest {
         LottoRankResult lottoRankResult = lottoStore.calculateRankMatchCount(lottoTickets, winningLotto);
 
         // then
-        assertThat(lottoRankResult.getValue(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(lottoRankResult.getCountByRank(LottoRank.SECOND)).isEqualTo(1);
     }
 
     @Test

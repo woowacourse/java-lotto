@@ -18,7 +18,7 @@ public class LottoConsoleView {
         this.inputParser = inputParser;
     }
 
-    public int requestPaidAmount() {
+    public int readPaidAmount() {
         String rawPaidAmount = inputView.readPaidAmount();
         NumberValidator.validateInteger(rawPaidAmount);
         int paidAmount = Integer.parseInt(rawPaidAmount);
@@ -26,15 +26,15 @@ public class LottoConsoleView {
         return paidAmount;
     }
 
-    public void printPurchaseTicketAmount(int purchaseTicketAmount) {
-        outputView.printPurchaseTicketAmount(purchaseTicketAmount);
+    public void printPurchasedTicketAmount(int purchaseTicketAmount) {
+        outputView.printPurchasedTicketAmount(purchaseTicketAmount);
     }
 
     public void printPurchasedLotto(List<LottoTicketResponse> lottoTicketResponses) {
         outputView.printPurchasedLottos(lottoTicketResponses);
     }
 
-    public WinningLottoRequest requestWinningLotto() {
+    public WinningLottoRequest readWinningLotto() {
         String rawWinningNumbers = inputView.readWinningNumbers();
         List<Integer> parsedWinningNumbers = inputParser.parseWinningNumbers(rawWinningNumbers);
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class OutputView {
 
-    public void printPurchaseTicketAmount(int purchaseTicketAmount) {
+    public void printPurchasedTicketAmount(int purchaseTicketAmount) {
         System.out.printf("%d개를 구매했습니다.\n", purchaseTicketAmount);
     }
 

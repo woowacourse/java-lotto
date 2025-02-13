@@ -36,8 +36,8 @@ public class LottoStore {
 
     public double calculateProfitRate(int lottoTicketCount, LottoRankResult lottoRankResult) {
         int paidAmount = lottoTicketCount * LOTTO_PRICE;
-        int profit = lottoRankResult.getKeys().stream()
-                .mapToInt(rank -> rank.getWinningAmount() * lottoRankResult.getValue(rank)).sum();
+        int profit = lottoRankResult.getRanks().stream()
+                .mapToInt(rank -> rank.getWinningAmount() * lottoRankResult.getCountByRank(rank)).sum();
         return (double) profit / paidAmount;
     }
 

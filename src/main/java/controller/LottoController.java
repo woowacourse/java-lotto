@@ -22,24 +22,25 @@ public class LottoController {
     }
 
     public void run() {
-        List<LottoTicket> lottoTickets = createLottoTicket();
+        List<LottoTicket> lottoTickets = createLottoTickets();
         WinningLotto winningLotto = createWinningLotto();
+
         LottoRankResult lottoRankResult = calculateRank(lottoTickets, winningLotto);
         calculateProfitRate(lottoTickets.size(), lottoRankResult);
     }
 
-    private List<LottoTicket> createLottoTicket() {
-        int paidAmount = lottoConsoleView.requestPaidAmount();
+    private List<LottoTicket> createLottoTickets() {
+        int paidAmount = lottoConsoleView.readPaidAmount();
         List<LottoTicket> lottoTickets = lottoStore.purchase(paidAmount);
 
-        lottoConsoleView.printPurchaseTicketAmount(lottoTickets.size());
+        lottoConsoleView.printPurchasedTicketAmount(lottoTickets.size());
         lottoConsoleView.printPurchasedLotto(lottoDtoMapper.toLottoTicketResponse(lottoTickets));
 
         return lottoTickets;
     }
 
     private WinningLotto createWinningLotto() {
-        WinningLottoRequest winningLottoRequest = lottoConsoleView.requestWinningLotto();
+        WinningLottoRequest winningLottoRequest = lottoConsoleView.readWinningLotto();
         return lottoDtoMapper.toWinningLotto(winningLottoRequest);
     }
 

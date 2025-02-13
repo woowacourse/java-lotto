@@ -19,11 +19,11 @@ public class LottoRankResult {
         rankCount.merge(lottoRank, 1, Integer::sum);
     }
 
-    public Set<LottoRank> getKeys() {
+    public Set<LottoRank> getRanks() {
         return rankCount.keySet();
     }
 
-    public int getValue(LottoRank rank) {
+    public int getCountByRank(LottoRank rank) {
         return rankCount.get(rank);
     }
 }

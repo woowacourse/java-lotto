@@ -19,9 +19,9 @@ public class LottoDtoMapper {
     }
 
     public List<LottoRankResponse> toLottoRankResponses(LottoRankResult lottoRankResult) {
-        return new ArrayList<>(lottoRankResult.getKeys().stream()
+        return new ArrayList<>(lottoRankResult.getRanks().stream()
                 .map(rank -> {
-                    int rankMatchCount = lottoRankResult.getValue(rank);
+                    int rankMatchCount = lottoRankResult.getCountByRank(rank);
                     return LottoRankResponse.of(rank, rankMatchCount);
                 })
                 .toList());
