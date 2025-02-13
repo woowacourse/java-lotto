@@ -18,4 +18,8 @@ public class OutputView {
                 .map(WinningCountDto::toString)
                 .forEach(System.out::println);
     }
+
+    public void printYield(double yield) {
+        System.out.println(String.format("총 수익률은 %.2f입니다.", yield));
+    }
 }
