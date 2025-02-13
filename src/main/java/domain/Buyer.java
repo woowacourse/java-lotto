@@ -11,14 +11,14 @@ public class Buyer {
 
     public Buyer(Money money){
         this.money = money;
+        createLottos();
     }
 
-    public List<Lotto> createLottos(){
+    public void createLottos(){
         int totalLotto = money.calculateTotalLotto();
         for(int i=0; i< totalLotto; i++){
             lottos.add(new Lotto());
         }
-        return lottos;
     }
 
     public String createResult() {

@@ -20,29 +20,34 @@ public class LottoController {
     }
 
     public void run() {
+        Money money = creaeteMoney();
+
+        Buyer buyer = new Buyer(money);
+        outputView.displayLottos(money.calculateTotalLotto(), buyer.createResult());
+
+        WinningLotto winningLotto = createWinningLotto();
+        HashMap<LottoMatch,Integer> lottoResult = buyer.countLottos(winningLotto);
+        outputView.displayResult(lottoResult);
+
+        double profit = money.calculateProfit(lottoResult);
+        outputView.displayProfit(profit);
+    }
+
+    private Money creaeteMoney() {
         String inputMoney = inputView.inputLottoMoney();
         Validator.inputValidatorIsNull(inputMoney);
 
-        Money money = new Money(InputParser.parseStringToInteger(inputMoney));
-        Buyer buyer = new Buyer(money);
-        buyer.createLottos();
-        String result = buyer.createResult();
-        outputView.displayLottos(money.calculateTotalLotto(), result);
+        return new Money(InputParser.parseStringToInteger(inputMoney));
+    }
 
+    private WinningLotto createWinningLotto() {
         String inputWinningNumber = inputView.inputWinningNumbers();
         Validator.inputValidatorIsNull(inputWinningNumber);
 
         String inputBonusNumber = inputView.inputBonusNumber();
         Validator.inputValidatorIsNull(inputBonusNumber);
 
-        WinningLotto winningLotto = new WinningLotto(InputParser.parseStringToList(inputWinningNumber),
-                InputParser.parseStringToInteger(inputBonusNumber));
-        HashMap<LottoMatch,Integer> lottoResult = buyer.countLottos(winningLotto);
-
-        outputView.displayResult(lottoResult);
-
-        double profit = money.calculateProfit(lottoResult);
-
-        outputView.displayProfit(profit);
+        return new WinningLotto(InputParser.parseStringToList(inputWinningNumber),
+            InputParser.parseStringToInteger(inputBonusNumber));
     }
 }
