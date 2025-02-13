@@ -11,7 +11,7 @@ public enum Rank {
     FIFTH_PRIDE(5000),
     BOOM(0);
 
-    public final int prize;
+    private final int prize;
 
     Rank(int prize) {
         this.prize = prize;
@@ -49,4 +49,18 @@ public enum Rank {
 
         return rankIntegerEnumMap;
     }
+
+    public static int calculateTotalPrize(EnumMap<Rank, Integer> lottoResult) {
+
+        int totalPrize = 0;
+        for (Rank rank : lottoResult.keySet()) {
+            totalPrize += rank.prize * lottoResult.get(rank);
+        }
+        return totalPrize;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
+
 }
