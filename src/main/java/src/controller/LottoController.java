@@ -26,5 +26,8 @@ public class LottoController {
         List<LottoResponse> lottoResponses = lottos.stream().map(LottoResponse::new).toList();
 
         outputView.printPurchasedLottos(lottoResponses);
+
+        outputView.printInputWinningLotto();
+        List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumbers();
     }
 }
