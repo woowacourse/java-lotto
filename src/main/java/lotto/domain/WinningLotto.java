@@ -15,6 +15,6 @@ public class WinningLotto {
     public WinningTier findWinningTier(Lotto lotto) {
         int matches = this.lotto.findMatches(lotto);
         boolean isBonusMatched = lotto.hasNumber(bonusNumber);
-        return WinningTier.find(new WinningCondition(matches, isBonusMatched));
+        return WinningTier.find(matches, isBonusMatched);
     }
 }

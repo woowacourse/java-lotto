@@ -23,10 +23,10 @@ public enum WinningTier {
         return condition;
     }
 
-    public static WinningTier find(WinningCondition condition) {
+    public static WinningTier find(int matchedCount, boolean isBonusNumberMatched) {
         List<WinningTier> allTiers = List.of(WinningTier.values());
         return allTiers.stream()
-                .filter(tier -> tier.getCondition().equals(condition))
+                .filter(tier -> tier.getCondition().isWinningCondition(matchedCount, isBonusNumberMatched))
                 .findFirst()
                 .orElse(WinningTier.EMPTY);
     }
