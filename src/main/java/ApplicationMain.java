@@ -1,7 +1,10 @@
 import controller.InputView;
 import controller.LottoController;
 import controller.OutputView;
+import util.NumberPicker;
+import util.RandomNumberPicker;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class ApplicationMain {
@@ -9,7 +12,8 @@ public class ApplicationMain {
         
         InputView inputView = new InputView(new Scanner(System.in));
         OutputView outputView = new OutputView();
-        LottoController lottoController = new LottoController(inputView, outputView);
+        NumberPicker numberPicker = new RandomNumberPicker(new Random());
+        LottoController lottoController = new LottoController(inputView, outputView, numberPicker);
         
         lottoController.run();
     }

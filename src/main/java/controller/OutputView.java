@@ -16,15 +16,12 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
     
-    public void printPurchase(int purchaseCount) {
-        System.out.printf("%d개를 구매했습니다.\n", purchaseCount);
-    }
-    
     public void printLottos(List<Lotto> lottos) {
         StringBuilder sb = new StringBuilder();
         for (Lotto lotto : lottos) {
             sb.append(lotto).append("\n");
         }
+        sb.append(String.format("%d개를 구매했습니다.", lottos.size())).append("\n");
         System.out.println(sb);
     }
     
@@ -40,11 +37,15 @@ public class OutputView {
         StringBuilder sb = new StringBuilder();
         sb.append("\n").append("당첨 통계").append("\n");
         sb.append("---------").append("\n");
-        
+        sb.append(formatStaticsLottos(staticsLottos));
+        System.out.println(sb);
+    }
+    
+    private String formatStaticsLottos(EnumMap<LottoPrize, Integer> staticsLottos) {
         StringJoiner sj = new StringJoiner("\n");
         for (Map.Entry<LottoPrize, Integer> lottoPrize : staticsLottos.entrySet()) {
-            
             LottoPrize prizeKey = lottoPrize.getKey();
+            
             String format = getLottoPrizeFormat(prizeKey);
             String result = String.format(format,
                     prizeKey.getMinMatchCount(),
@@ -52,12 +53,10 @@ public class OutputView {
                     lottoPrize.getValue());
             sj.add(result);
         }
-        sb.append(sj);
-        
-        System.out.println(sb);
+        return sj.toString();
     }
     
-    private static String getLottoPrizeFormat(LottoPrize lottoPrize) {
+    private String getLottoPrizeFormat(LottoPrize lottoPrize) {
         StringBuilder prizeFormat = new StringBuilder();
         prizeFormat.append("%d개 일치");
         
@@ -80,7 +79,7 @@ public class OutputView {
         System.out.printf(sb + "\n", getFormattedIncomeRate(incomeRate));
     }
     
-    private static String getFormattedIncomeRate(double incomeRate) {
+    private String getFormattedIncomeRate(double incomeRate) {
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         decimalFormat.setRoundingMode(RoundingMode.DOWN);
         return decimalFormat.format(incomeRate);

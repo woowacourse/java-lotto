@@ -3,39 +3,46 @@ package controller;
 import domain.Lotto;
 import domain.Lottos;
 import util.NumberPicker;
-import util.RandomNumberPicker;
 
 import java.util.List;
-import java.util.Random;
 
 public class LottoController {
     
     private final InputView inputView;
     private final OutputView outputView;
+    private final NumberPicker numberPicker;
     
-    public LottoController(InputView inputView, OutputView outputView) {
+    public LottoController(InputView inputView, OutputView outputView, NumberPicker numberPicker) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.numberPicker = numberPicker;
     }
     
     public void run() {
-        outputView.printInputMoney();
-        int money = inputView.inputMoney();
-        
-        NumberPicker numberPicker = new RandomNumberPicker(new Random());
-        List<Lotto> purchasedLottos = Lotto.purchase(money, numberPicker);
-        
-        outputView.printPurchase(purchasedLottos.size());
+        int purchaseMoney = inputPurchaseMoney();
+        List<Lotto> purchasedLottos = Lotto.purchase(purchaseMoney, numberPicker);
         outputView.printLottos(purchasedLottos);
         
-        outputView.printMatchLotto();
-        List<Integer> matchNumbers = inputView.inputMatchLotto();
-        
-        outputView.printBonusNumber();
-        int bonusNumber = inputView.inputBonusNumber();
+        List<Integer> matchNumbers = inputMatchLottoNumbers();
+        int bonusNumber = inputBonusNumber();
         
         Lottos lottos = new Lottos(purchasedLottos);
         outputView.printStaticsLotto(lottos.getStatistics(matchNumbers, bonusNumber));
-        outputView.printIncomeRate(lottos.getIncomeRate(matchNumbers, bonusNumber, money));
+        outputView.printIncomeRate(lottos.getIncomeRate(matchNumbers, bonusNumber, purchaseMoney));
+    }
+    
+    private int inputPurchaseMoney() {
+        outputView.printInputMoney();
+        return inputView.inputMoney();
+    }
+    
+    private List<Integer> inputMatchLottoNumbers() {
+        outputView.printMatchLotto();
+        return inputView.inputMatchLotto();
+    }
+    
+    private int inputBonusNumber() {
+        outputView.printBonusNumber();
+        return inputView.inputBonusNumber();
     }
 }

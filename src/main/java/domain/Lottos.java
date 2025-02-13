@@ -34,18 +34,16 @@ public class Lottos {
     }
     
     private EnumMap<LottoPrize, Integer> calculateStatistics(List<Integer> matchNumbers, int bonusNumber) {
-        EnumMap<LottoPrize, Integer> enumMap = new EnumMap<>(LottoPrize.class);
-        
-        for (LottoPrize value : LottoPrize.values()) {
-            enumMap.put(value, 0);
-        }
-        
+        EnumMap<LottoPrize, Integer> lottoPrizeMap = LottoPrize.getInitailizedEnumMap();
+        insertLottoPrizeResult(matchNumbers, bonusNumber, lottoPrizeMap);
+        return lottoPrizeMap;
+    }
+    
+    private void insertLottoPrizeResult(List<Integer> matchNumbers, int bonusNumber, EnumMap<LottoPrize, Integer> enumMap) {
         for (Lotto lotto : lottos) {
             LottoMatchResult matchResult = lotto.getMatchResult(matchNumbers, bonusNumber);
             Optional<LottoPrize> matchPrize = LottoPrize.match(matchResult);
             matchPrize.ifPresent(lottoPrize -> enumMap.put(lottoPrize, enumMap.get(lottoPrize) + 1));
         }
-        
-        return enumMap;
     }
 }

@@ -4,6 +4,7 @@ import dto.LottoMatchResult;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.EnumMap;
 import java.util.Optional;
 
 /*
@@ -42,6 +43,14 @@ public enum LottoPrize {
                     return true;
                 }).sorted(Comparator.comparingInt(prize -> (int) prize.prizeMoney))
                 .findFirst();
+    }
+    
+    public static EnumMap<LottoPrize, Integer> getInitailizedEnumMap() {
+        EnumMap<LottoPrize, Integer> enumMap = new EnumMap<>(LottoPrize.class);
+        for (LottoPrize value : LottoPrize.values()) {
+            enumMap.put(value, 0);
+        }
+        return enumMap;
     }
     
     public int getMinMatchCount() {
