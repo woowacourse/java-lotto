@@ -1,3 +1,4 @@
+import controller.LottoController;
 import view.InputView;
 import view.OutputView;
 
