@@ -25,11 +25,6 @@ public class Lotto {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return new Lotto(this.lottoNumbers);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

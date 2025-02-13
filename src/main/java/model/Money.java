@@ -1,13 +1,13 @@
 package model;
 
 import static constant.LottoConstant.LOTTO_PRICE;
+import static constant.LottoConstant.MIN_PRICE;
 
 public record Money(
         int value
 ) {
-
     private static final int REMAIN_PRICE = 0;
-    private static final int MIN_PRICE = 1_000;
+
 
     public Money {
         if (value % LOTTO_PRICE != REMAIN_PRICE) {

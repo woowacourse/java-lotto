@@ -7,7 +7,6 @@ import model.Number;
 
 public class LottoUtil {
 
-
     public static Lotto generateTestLotto(int ... values){
         Set<Number> numbers = new TreeSet<>();
         for (int value : values){
