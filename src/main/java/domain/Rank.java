@@ -26,9 +26,10 @@ public enum Rank {
     }
 
     public static Rank fromResult(int matchCount, boolean contains) {
-        for(Rank rank : Rank.values()){
-            if(rank.getCount() == matchCount && (rank.isBonusMatch() == contains)) {
-                return rank;
+        Rank[] ranks = Rank.values();
+        for(int i = ranks.length - 1; i >= 0; i --){
+            if(ranks[i].getCount() == matchCount && (!ranks[i].isBonusMatch() || contains)) {
+                return ranks[i];
             }
         }
         return NONE;

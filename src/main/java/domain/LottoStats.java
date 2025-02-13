@@ -42,6 +42,10 @@ public class LottoStats {
     private String getStatus(Rank lottoRank){
         if(lottoRank == Rank.NONE) return "";
         return lottoRank.getMessage() +
-                rank.getOrDefault(lottoRank, 0) + "개\n";
+                getRankCount(lottoRank) + "개\n";
+    }
+
+    public Integer getRankCount(Rank lottoRank) {
+        return rank.getOrDefault(lottoRank, 0);
     }
 }
