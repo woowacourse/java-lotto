@@ -14,8 +14,8 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
         validateWinningNumberRange();
         validateBonusNumberRange();
-        validateDuplicateWinningNumber();
         validateWinningNumberSize();
+        validateDuplicateWinningNumber();
         validateExistBonusNumber();
     }
 
@@ -42,7 +42,7 @@ public class WinningNumbers {
 
     private void validateWinningNumberSize() {
         if (winningNumbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 올바른 당첨 번호 갯수를 입력해 주세요");
+            throw new IllegalArgumentException("[ERROR] 올바른 당첨 번호 갯수를 입력해 주세요.");
         }
     }
 
