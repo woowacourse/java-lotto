@@ -1,5 +1,4 @@
 import controller.Controller;
-import service.LottoFactory;
 
 public class Application {
 
