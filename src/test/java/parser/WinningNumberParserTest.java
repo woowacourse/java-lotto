@@ -10,7 +10,7 @@ public class WinningNumberParserTest {
     @DisplayName("당첨번호_중복예외_테스트")
     @Test
     void 당첨번호_중복예외_테스트() {
-        assertThatThrownBy(() -> WinningNumberParser.parseWinningNumbers("1, 2, 3, 4, 6, 6"))
+        assertThatThrownBy(() -> WinningNumberParser.parseWinningNumbers("1,2,3,4,6,6"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(validator.ErrorMessages.DUPLICATE_EXIST.getMessage());
     }
@@ -18,7 +18,7 @@ public class WinningNumberParserTest {
     @DisplayName("당첨넘버_범위예외_테스트")
     @Test
     void 당첨넘버_범위예외_테스트() {
-        assertThatThrownBy(() -> WinningNumberParser.parseWinningNumbers("1, 2, 3, 4, 6, 46"))
+        assertThatThrownBy(() -> WinningNumberParser.parseWinningNumbers("1,2,3,4,6,46"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(validator.ErrorMessages.LOTTO_NUMBER_OUT_OF_RANGE.getMessage());
     }
@@ -26,7 +26,7 @@ public class WinningNumberParserTest {
     @DisplayName("당첨넘버_갯수예외_테스트")
     @Test
     void 당첨넘버_갯수예외_테스트() {
-        assertThatThrownBy(() -> WinningNumberParser.parseWinningNumbers("1, 2, 3, 4, 5"))
+        assertThatThrownBy(() -> WinningNumberParser.parseWinningNumbers("1,2,3,4,5"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(validator.ErrorMessages.LOTTO_NUMBER_COUNT.getMessage());
     }

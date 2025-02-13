@@ -10,7 +10,7 @@ public class MoneyParserTest {
     @DisplayName("금액입력_문자예외_테스트")
     @Test
     void 금액입력_문자예외_테스트() {
-        assertThatThrownBy(() -> MoneyParser.parseLottoCount("14000"))
+        assertThatThrownBy(() -> MoneyParser.parseLottoCount("14000a"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(validator.ErrorMessages.NOT_NUMBER.getMessage());
     }
