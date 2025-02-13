@@ -1,5 +1,6 @@
 package view;
 
+import domain.WinningCountDto;
 import java.util.List;
 
 public class OutputView {
@@ -10,5 +11,11 @@ public class OutputView {
 
     public void printLottos(List<String> lottoNumbers) {
         lottoNumbers.forEach(System.out::println);
+    }
+
+    public void printWinningStatistics(List<WinningCountDto> winningCountDtos) {
+        winningCountDtos.stream()
+                .map(WinningCountDto::toString)
+                .forEach(System.out::println);
     }
 }

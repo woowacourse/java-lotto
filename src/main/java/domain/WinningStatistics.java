@@ -30,7 +30,12 @@ public enum WinningStatistics {
 
         List<WinningCountDto> winningCountDtos = new ArrayList<>();
 
-        for (WinningStatistics winningStatistics : winningStatisticsList) {
+        for (WinningStatistics winningStatistics : WinningStatistics.values()) {
+
+            if (winningStatistics == WinningStatistics.NONE) {
+                continue;
+            }
+
             int count = Collections.frequency(winningStatisticsList, winningStatistics);
             winningCountDtos.add(new WinningCountDto(winningStatistics, count));
         }
@@ -44,6 +49,14 @@ public enum WinningStatistics {
                 .filter(winningStatistics -> winningStatistics.isBonusMatched(matchDto.hasBonusNumber()))
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 
     private boolean isMatchCount(int value) {
