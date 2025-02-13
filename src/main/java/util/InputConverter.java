@@ -7,8 +7,8 @@ public class InputConverter {
 
     public static int convertToInteger(String input) {
         try {
-            int value = Integer.parseInt(input);
-            if(value < 0) {
+            int value = Integer.parseInt(input.trim());
+            if (value < 0) {
                 throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
             }
             return value;
@@ -20,7 +20,7 @@ public class InputConverter {
     public static List<Integer> convertToList(String input) {
         String[] rawNumbers = input.split(",");
         List<Integer> numbers = new ArrayList<>();
-        for(String rawNumber : rawNumbers) {
+        for (String rawNumber : rawNumbers) {
             int number = convertToInteger(rawNumber);
             numbers.add(number);
         }
