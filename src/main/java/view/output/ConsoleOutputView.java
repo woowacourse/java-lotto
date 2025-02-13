@@ -2,7 +2,6 @@ package view.output;
 
 import constans.OutputMessage;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import model.LottoRank;
@@ -16,18 +15,14 @@ public class ConsoleOutputView implements OutputView {
 
     @Override
     public void printLottoNumbers(final List<List<Integer>> lottoNumbers) {
-        lottoNumbers.forEach(numbers -> {
-            Collections.sort(numbers);
-            System.out.println(numbers);
-        });
+        lottoNumbers.forEach(System.out::println);
     }
 
     @Override
     public void printLottoStatistics(final double revenueRate, final Map<LottoRank, Integer> lottoRanks,
                                      final boolean isDamage) {
         System.out.println(OutputMessage.LOTTO_WINNING_RESULT_TITLE);
-        Arrays.stream(LottoRank.values())
-                .filter(rank -> rank != LottoRank.FAIL)
+        Arrays.stream(LottoRank.values()).filter(rank -> rank != LottoRank.FAIL)
                 .forEach(rank -> printLottoResult(rank, lottoRanks));
         printLottoRevenue(revenueRate, isDamage);
     }
@@ -37,8 +32,8 @@ public class ConsoleOutputView implements OutputView {
         if (rank.isBonusBallMatch()) {
             bonusBallMessage = OutputMessage.LOTTO_WINNING_RESULT_BONUS_BALL.toString();
         }
-        System.out.printf(OutputMessage.LOTTO_WINNING_RESULT_MATCH.toString(), rank.getMatchCount(),
-                bonusBallMessage, rank.getPrizeMoney(), resultRanks.getOrDefault(rank, 0));
+        System.out.printf(OutputMessage.LOTTO_WINNING_RESULT_MATCH.toString(), rank.getMatchCount(), bonusBallMessage,
+                rank.getPrizeMoney(), resultRanks.getOrDefault(rank, 0));
     }
 
     private void printLottoRevenue(final double revenueRate, final boolean isDamage) {

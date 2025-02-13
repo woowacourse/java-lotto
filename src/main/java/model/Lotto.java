@@ -1,6 +1,7 @@
 package model;
 
 import constans.ErrorType;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,7 +16,14 @@ public class Lotto {
     public Lotto(final List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
-        this.lottoNumbers = List.copyOf(lottoNumbers);
+        Collections.sort(lottoNumbers);
+        this.lottoNumbers = lottoNumbers.stream().sorted().toList();
+    }
+
+    private List<LottoNumber> sortNumbers(final List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .sorted()
+                .toList();
     }
 
     public static Lotto from(final List<Integer> lottoNumbers) {
