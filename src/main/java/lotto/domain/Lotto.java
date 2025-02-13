@@ -8,7 +8,28 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(final List<Integer> values) {
+        validate(values);
         this.numbers = makeNumber(values);
+    }
+
+    private void validate(final List<Integer> values) {
+        validateDuplicated(values);
+        validateSize(values);
+    }
+
+    private void validateSize(final List<Integer> values) {
+        if (values.size() != LottoGenerator.LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
+        }
+    }
+
+    private void validateDuplicated(final List<Integer> values) {
+        boolean isDuplicated = values.stream()
+                .distinct()
+                .count() != values.size();
+        if (isDuplicated) {
+            throw new IllegalArgumentException("중복되지 않은 로또 번호를 입력해 주세요.");
+        }
     }
 
     public int countMatchingLottoNumber(final Lotto lotto) {
