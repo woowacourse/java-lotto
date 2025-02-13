@@ -1,7 +1,11 @@
 package domain;
 
+import static exception.ErrorMessage.LOTTO_NUMBER_DUPLICATED_ERROR;
+import static exception.ErrorMessage.LOTTO_RANGE_ERROR;
+
 import constant.WinningCount;
 import dto.WinningLottoDto;
+import exception.LottoException;
 import java.util.List;
 
 public class WinningLotto {
@@ -21,14 +25,14 @@ public class WinningLotto {
 
     private void validateBonusNumberRange(Integer bonusNumber) {
         if (bonusNumber < 1 || bonusNumber > 45) {
-            throw new IllegalArgumentException("로또 번호 범위 오류");
+            throw LottoException.from(LOTTO_RANGE_ERROR);
         }
     }
 
     private void validateDuplicate(Integer bonusNumber) {
         List<Integer> lottos = this.lotto.getSortedNumbers();
         if (lottos.contains(bonusNumber)) {
-            throw new IllegalArgumentException("로또 번호 중복 오류");
+            throw LottoException.from(LOTTO_NUMBER_DUPLICATED_ERROR);
         }
     }
 

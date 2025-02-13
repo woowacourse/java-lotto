@@ -1,5 +1,9 @@
 package view;
 
+import static exception.ErrorMessage.INPUT_FORMAT_ERROR;
+import static exception.ErrorMessage.SYSTEM_ERROR;
+
+import exception.LottoException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,7 +17,7 @@ public class InputView {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             return InputConverter.convertNumber(br.readLine());
         }catch (IOException IOE) {
-            throw new IllegalArgumentException("구입 금액 입력 오류");
+            throw LottoException.from(SYSTEM_ERROR);
         }
     }
 
@@ -23,7 +27,7 @@ public class InputView {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             return InputConverter.convertWinningLotto(br.readLine());
         }catch (IOException IOE) {
-            throw new IllegalArgumentException("구입 금액 입력 오류");
+            throw LottoException.from(SYSTEM_ERROR);
         }
     }
 
@@ -33,7 +37,7 @@ public class InputView {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             return InputConverter.convertNumber(br.readLine());
         }catch (IOException IOE) {
-            throw new IllegalArgumentException("구입 금액 입력 오류");
+            throw LottoException.from(SYSTEM_ERROR);
         }
     }
 

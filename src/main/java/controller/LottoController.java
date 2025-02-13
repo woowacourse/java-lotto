@@ -1,5 +1,6 @@
 package controller;
 
+import constant.LottoConstants;
 import constant.WinningCount;
 import dto.IssuedLottosDto;
 import dto.WinningLottoDto;
@@ -25,7 +26,7 @@ public class LottoController {
         Map<WinningCount, Integer> result = openLottoService.openResult(makeWinningLotto(),
                 issuedLottosDto);
         Double earningRate = openLottoService.calculateEarningRate(result,
-                issuedLottosDto.lottos().size() * 1000);
+                issuedLottosDto.lottos().size() * LottoConstants.LOTTO_PRICE.getValue());
         OutputView.printLottoResult(result,earningRate);
     }
 

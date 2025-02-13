@@ -1,5 +1,8 @@
 package util;
 
+import static constant.LottoConstants.*;
+
+import constant.LottoConstants;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +14,7 @@ public class RandomNumberGenerator {
     public static List<Integer> getRandomNumbers(int minNumber, int maxNumber) {
         Set<Integer> numbers = new HashSet<>();
         Random random = new Random();
-        while (numbers.size() != 6) {
+        while (numbers.size() != LOTTO_SIZE.getValue()) {
             int number = random.nextInt(maxNumber - minNumber + 1) + minNumber;
             numbers.add(number);
         }

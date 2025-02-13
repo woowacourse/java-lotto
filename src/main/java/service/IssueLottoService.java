@@ -1,20 +1,27 @@
 package service;
 
+import static constant.LottoConstants.*;
+import static exception.ErrorMessage.*;
+
+import constant.LottoConstants;
 import domain.Lotto;
 import dto.IssuedLottoDto;
 import dto.IssuedLottosDto;
+import exception.ErrorMessage;
+import exception.LottoException;
 import java.util.ArrayList;
 import java.util.List;
 import util.RandomNumberGenerator;
+
 
 public class IssueLottoService {
 
     public IssuedLottosDto issueLottos(int money) {
         validateMoney(money);
-        int count = money / 1000;
+        int count = money / LOTTO_PRICE.getValue();
         List<IssuedLottoDto> issuedLottos = new ArrayList<>();
         while (issuedLottos.size() != count) {
-            Lotto lotto = new Lotto(RandomNumberGenerator.getRandomNumbers(1, 45));
+            Lotto lotto = new Lotto(RandomNumberGenerator.getRandomNumbers(LOTTO_RANGE_MIN.getValue(), LOTTO_RANGE_MAX.getValue()));
             if (!isDuplicate(issuedLottos, lotto.getSortedNumbers())) {
                 issuedLottos.add(new IssuedLottoDto(lotto.getSortedNumbers()));
             }
@@ -24,10 +31,10 @@ public class IssueLottoService {
 
     private void validateMoney(int money) {
         if (money <= 0) {
-            throw new IllegalArgumentException("금액 범위 오류");
+            throw LottoException.from(PRICE_RANGE_ERROR);
         }
-        if (money % 1000 != 0) {
-            throw new IllegalArgumentException("금액 단위 오류");
+        if (money % LOTTO_PRICE.getValue() != 0) {
+            throw LottoException.from(PRICE_UNIT_ERROR);
         }
     }
 

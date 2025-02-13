@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import constant.WinningCount;
+import exception.ErrorMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -26,7 +27,7 @@ class WinningLottoTest {
         // when & then
         assertThatThrownBy(()-> new WinningLotto(numbers,bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호 범위 오류");
+                .hasMessage(ErrorMessage.LOTTO_RANGE_ERROR.getMessage());
     }
 
     @DisplayName("보너스 번호 중복 검증")
@@ -38,7 +39,7 @@ class WinningLottoTest {
         // when & then
         assertThatThrownBy(()-> new WinningLotto(numbers,bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호 중복 오류");
+                .hasMessage(ErrorMessage.LOTTO_NUMBER_DUPLICATED_ERROR.getMessage());
     }
 
     @DisplayName("로또 결과 반환 검증")

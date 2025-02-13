@@ -1,5 +1,11 @@
 package domain;
 
+import static constant.LottoConstants.*;
+import static exception.ErrorMessage.*;
+
+import constant.LottoConstants;
+import exception.ErrorMessage;
+import exception.LottoException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,8 +24,8 @@ public class Lotto {
 
     private void validateLottoRange(List<Integer> numbers) {
         for (Integer number : numbers) {
-            if (number < 1 || number > 45) {
-                throw new IllegalArgumentException("로또 번호 범위 오류");
+            if (number < LOTTO_RANGE_MIN.getValue() || number > LOTTO_RANGE_MAX.getValue()) {
+                throw LottoException.from(LOTTO_RANGE_ERROR);
             }
         }
     }
@@ -27,12 +33,12 @@ public class Lotto {
     private void validateLottoDuplicate(List<Integer> numbers) {
         HashSet<Integer> set = new HashSet<>(numbers);
         if (set.size() != numbers.size()) {
-            throw new IllegalArgumentException("로또 번호 중복 오류");
+            throw LottoException.from(LOTTO_NUMBER_DUPLICATED_ERROR);
         }
     }
 
     private void validateLottoNumberSize(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_SIZE.getValue()) {
             throw new IllegalArgumentException("로또 번호 갯수 오류");
         }
     }

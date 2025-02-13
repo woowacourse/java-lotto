@@ -5,6 +5,7 @@ package domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import exception.ErrorMessage;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -15,21 +16,21 @@ class LottoTest {
     @Test
     void rangeTest() {
         assertThatThrownBy(() -> new Lotto(List.of(0,1,2,3,4,5)))
-                .isInstanceOf(IllegalArgumentException.class).hasMessage("로또 번호 범위 오류");
+                .isInstanceOf(IllegalArgumentException.class).hasMessage(ErrorMessage.LOTTO_RANGE_ERROR.getMessage());
     }
 
     @DisplayName("로또 번호 중복 테스트")
     @Test
     void duplicateTest() {
         assertThatThrownBy(() -> new Lotto(List.of(1,1,2,3,4,5)))
-                .isInstanceOf(IllegalArgumentException.class).hasMessage("로또 번호 중복 오류");
+                .isInstanceOf(IllegalArgumentException.class).hasMessage(ErrorMessage.LOTTO_NUMBER_DUPLICATED_ERROR.getMessage());
     }
 
     @DisplayName("로또 번호 갯수 테스트")
     @Test
     void sizeTest() {
         assertThatThrownBy(() -> new Lotto(List.of(1,2,3,4,5,6,7)))
-                .isInstanceOf(IllegalArgumentException.class).hasMessage("로또 번호 갯수 오류");
+                .isInstanceOf(IllegalArgumentException.class).hasMessage(ErrorMessage.LOTTO_SIZE_ERROR.getMessage());
     }
 
     @DisplayName("로또 번호 정렬 테스트")
