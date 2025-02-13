@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class LottoStats {
-    private Map<Rank, Integer> rank;
+    private final Map<Rank, Integer> rank;
     private final List<Integer> winningNumbers;
     private final int bonusBall;
 

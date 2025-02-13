@@ -17,7 +17,11 @@ public class LottoFactory {
 
     public static Lotto makeLotto() {
         Collections.shuffle(randomNumbers);
-        List<Integer> numbers = randomNumbers.stream().limit(6).sorted().collect(Collectors.toList());
+        List<Integer> numbers = randomNumbers
+                .stream()
+                .limit(6)
+                .sorted()
+                .collect(Collectors.toList());
         return new Lotto(numbers);
     }
 
