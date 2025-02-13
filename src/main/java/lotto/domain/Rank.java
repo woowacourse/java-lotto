@@ -15,7 +15,7 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public Rank checkPrize(int matchCount, boolean matchBonus) {
+    public static Rank checkPrize(int matchCount, boolean matchBonus) {
         if (matchCount == 6) {
             return FIRST_PRIDE;
         }
