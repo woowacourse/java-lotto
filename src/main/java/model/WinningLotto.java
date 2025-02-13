@@ -9,15 +9,25 @@ public class WinningLotto {
     private static final int MAX_NUMBER = 45;
     private static final int NUMBER_SIZE = 6;
 
-    private final List<Integer> numbers;
+    private final List<Integer> winningNumbers;
     private final int bonusNumber;
 
-    public WinningLotto(List<Integer> numbers, int bonusNumber) {
-        validateNumbers(numbers);
-        validateBonusNumber(numbers, bonusNumber);
+    public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
+        validateNumbers(winningNumbers);
+        validateBonusNumber(winningNumbers, bonusNumber);
 
-        this.numbers = numbers;
+        this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
+    }
+
+    public int countOverlappedNumbers(List<Integer> numbers) {
+        return (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
+    public boolean isOverlappedBonusNumber(List<Integer> numbers) {
+        return numbers.contains(bonusNumber);
     }
 
     private void validateNumbers(List<Integer> numbers) {

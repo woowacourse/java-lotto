@@ -21,24 +21,28 @@ public class LottoController {
     }
 
     public void run() {
-        List<LottoTicket> tickets = createLottoTicket();
+        List<LottoTicket> lottoTickets = createLottoTicket();
         WinningLotto winningLotto = createWinningLotto();
-
-
     }
 
     private List<LottoTicket> createLottoTicket() {
         int purchaseAmount = lottoConsoleView.requestPurchaseAmount();
-        List<LottoTicket> tickets = lottoStore.purchase(purchaseAmount);
+        List<LottoTicket> lottoTickets = lottoStore.purchase(purchaseAmount);
 
-        lottoConsoleView.printPurchaseCount(tickets.size());
-        lottoConsoleView.printPurchasedLotto(lottoDtoMapper.toLottoTicketResponse(tickets));
+        lottoConsoleView.printPurchaseCount(lottoTickets.size());
+        lottoConsoleView.printPurchasedLotto(lottoDtoMapper.toLottoTicketResponse(lottoTickets));
 
-        return tickets;
+        return lottoTickets;
     }
 
     private WinningLotto createWinningLotto() {
         WinningLottoRequest winningLottoRequest = lottoConsoleView.requestWinningLotto();
         return lottoDtoMapper.toWinningLotto(winningLottoRequest);
+    }
+
+    private void calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
+        lottoTickets.forEach(lottoTicket -> {
+            lottoStore.calculateRank(lottoTicket, winningLotto);
+        });
     }
 }

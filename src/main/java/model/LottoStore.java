@@ -6,10 +6,13 @@ import java.util.stream.IntStream;
 public class LottoStore {
 
     private static final int LOTTO_PRICE = 1_000;
-    private final LottoNumberGenerator lottoNumberGenerator;
 
-    public LottoStore(LottoNumberGenerator lottoNumberGenerator) {
+    private final LottoNumberGenerator lottoNumberGenerator;
+    private final LottoRankCalculator lottoRankCalculator;
+
+    public LottoStore(LottoNumberGenerator lottoNumberGenerator, LottoRankCalculator lottoRankCalculator) {
         this.lottoNumberGenerator = lottoNumberGenerator;
+        this.lottoRankCalculator = lottoRankCalculator;
     }
 
     public List<LottoTicket> purchase(final int purchaseAmount) {
@@ -18,6 +21,10 @@ public class LottoStore {
         return IntStream.range(0, purchaseCount)
                 .mapToObj(count -> new LottoTicket(lottoNumberGenerator.generate()))
                 .toList();
+    }
+
+    public void calculateRank(LottoTicket lottoTicket, WinningLotto winningLotto) {
+        lottoRankCalculator.calculate(lottoTicket, winningLotto);
     }
 
     private void validateAmountUnit(int purchaseAmount) {
