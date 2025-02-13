@@ -1,16 +1,20 @@
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.List;
+import java.util.Map;
 import model.LottoNumberGenerator;
+import model.LottoRank;
 import model.LottoRankCalculator;
 import model.LottoStore;
-import org.junit.jupiter.api.DisplayName;
+import model.LottoTicket;
+import model.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 class LottoStoreTest {
 
     private LottoStore lottoStore = new LottoStore(new LottoNumberGenerator(), new LottoRankCalculator());
 
-    @DisplayName("구입 금액이 1000원 단위가 아나라면 예외를 발생시킨다.")
     @Test
     void 구입_금액이_1000원_단위가_아나라면_예외를_발생시킨다() {
         int purchasePrice = 1001;
@@ -19,10 +23,24 @@ class LottoStoreTest {
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("구입 금액에 해당하는 개수만큼 로또 티켓이 생성된다.")
     @Test
     void 구입_금액에_해당하는_개수만큼_로또_티켓이_생성된다() {
         int purchasePrice = 14000;
         assertThat(lottoStore.purchase(purchasePrice).size()).isEqualTo(14);
     }
+
+    @Test
+    void 당첨결과_개수를_센다() {
+        // given
+        List<LottoTicket> lottoTickets = List.of(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)));
+        WinningLotto winningLotto = new WinningLotto(List.of(1,2,3,4,5,7), 6);
+
+        // when
+        Map<LottoRank, Integer> rankMatchCount = lottoStore.calculateRankMatchCount(lottoTickets, winningLotto);
+
+        // then
+        assertThat(rankMatchCount.get(LottoRank.SECOND)).isEqualTo(1);
+    }
+
+
 }
