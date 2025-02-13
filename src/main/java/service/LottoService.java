@@ -12,4 +12,11 @@ public class LottoService {
     public void inputBuyLottoMoney(String inputBuyLottoMoney) {
         lottoRepository.saveBuyLottoMoney(inputBuyLottoMoney);
     }
+
+    public void inputWinningNumber(String inputWinningNumber) {
+
+
+
+
+    }
 }

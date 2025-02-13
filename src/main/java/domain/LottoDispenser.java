@@ -18,7 +18,7 @@ public class LottoDispenser {
     }
 
     private void validateLottoDispenser(String buyMoney) {
-        if(!StringUtility.isNumber(buyMoney)){
+        if(buyMoney == null || !StringUtility.isNumber(buyMoney)){
             throw new LottoException(INVALID_BUY_MONEY);
         }
         int buyMoneyNumber = Integer.parseInt(buyMoney);
@@ -36,7 +36,6 @@ public class LottoDispenser {
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(LottoRandomGenerator.generateNumbers()));
         }
-
         return lottos;
     }
 }
