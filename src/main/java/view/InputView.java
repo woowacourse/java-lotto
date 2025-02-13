@@ -53,7 +53,7 @@ public class InputView {
     }
 
     private static void isValidDelimiter(String input){
-        String regex = "([0-9])(, [0-9])+";
+        String regex = "([0-9]+)(, [0-9]+)+";
         if(!input.matches(regex)){
             throw new IllegalArgumentException("당첨번호 형식이 올바르지 않습니다.");
         }
