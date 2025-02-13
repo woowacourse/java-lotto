@@ -44,6 +44,7 @@ public class LottoController {
         // 6. 계산하기
         List<Prize> prizes = winningLotto.calculatePrizes(lottos);
 
+        outputView.printLottoResult(prizes, Prize.calculateEarningRate(prizes, lottos.getQuantity() * 1000));
 
     }
 }

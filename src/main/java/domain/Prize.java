@@ -9,11 +9,12 @@ public enum Prize {
     THIRD_PLACE(5, false, 1500000),
     FOURTH_PLACE(4, false, 50000),
     FIFTH_PLACE(3, false, 5000),
-    SIXTH_PLACE(0, false, 0),;
+    SIXTH_PLACE(0, false, 0),
+    ;
 
-    private final int matchCount;
-    private final boolean isBonusMatch;
-    private final int prizeAmount;
+    public final int matchCount;
+    public final boolean isBonusMatch;
+    public final int prizeAmount;
 
     Prize(final int matchCount, final boolean isBonusMatch, final int prizeAmount) {
         this.matchCount = matchCount;
