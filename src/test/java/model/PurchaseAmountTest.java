@@ -41,8 +41,8 @@ class PurchaseAmountTest {
         void validateNotPositive(final int money) {
             // given & when & then
             assertThatThrownBy(() -> new PurchaseAmount(money))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(ErrorType.PURCHASE_AMOUNT_POSITIVE.getMessage());
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorType.PURCHASE_AMOUNT_POSITIVE.getMessage());
         }
 
         @DisplayName("구매 금액이 양수가 아니라면 예외가 발생한다.")
@@ -50,8 +50,8 @@ class PurchaseAmountTest {
         void validateNotDivideLottoPrice() {
             // given & when & then
             assertThatThrownBy(() -> new PurchaseAmount(Lotto.LOTTO_PRICE + 1))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(ErrorType.PURCHASE_AMOUNT_NOT_DIVIDE_LOTTO_PRICE.getMessage());
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorType.PURCHASE_AMOUNT_NOT_DIVIDE_LOTTO_PRICE.getMessage());
         }
     }
 }

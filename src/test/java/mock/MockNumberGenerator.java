@@ -14,7 +14,7 @@ public class MockNumberGenerator extends NumberGenerator {
     @Override
     public List<Integer> pickNumbersInRange(final int count) {
         return IntStream.rangeClosed(1, count)
-                .boxed()
-                .toList();
+            .boxed()
+            .toList();
     }
 }

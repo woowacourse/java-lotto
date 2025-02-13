@@ -22,8 +22,8 @@ class WinningNumbersTest {
         void createWinningNumbers() {
             // given
             List<LottoNumber> numbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9), new LottoNumber(8),
-                            new LottoNumber(45), new LottoNumber(21)));
+                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9), new LottoNumber(8),
+                    new LottoNumber(45), new LottoNumber(21)));
             LottoNumber bonusNumber = new LottoNumber(4);
 
             // when
@@ -32,8 +32,10 @@ class WinningNumbersTest {
             // then
 
             assertSoftly(softly -> {
-                softly.assertThat(winningNumbers.getWinningNumbers()).isEqualTo(numbers);
-                softly.assertThat(winningNumbers.getBonusBall()).isEqualTo(bonusNumber);
+                softly.assertThat(winningNumbers.getWinningNumbers())
+                    .isEqualTo(numbers);
+                softly.assertThat(winningNumbers.getBonusBall())
+                    .isEqualTo(bonusNumber);
             });
         }
 
@@ -42,8 +44,8 @@ class WinningNumbersTest {
         void calculateLottoMatchCount() {
             // given
             List<LottoNumber> numbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                            new LottoNumber(5), new LottoNumber(6)));
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                    new LottoNumber(5), new LottoNumber(6)));
             LottoNumber bonusNumber = new LottoNumber(7);
             WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
 
@@ -59,14 +61,14 @@ class WinningNumbersTest {
         void matchBonusNumber() {
             // given
             List<LottoNumber> numbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                            new LottoNumber(5), new LottoNumber(6)));
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                    new LottoNumber(5), new LottoNumber(6)));
             LottoNumber bonusNumber = new LottoNumber(7);
             WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
 
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(7), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                            new LottoNumber(5), new LottoNumber(6)));
+                List.of(new LottoNumber(7), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                    new LottoNumber(5), new LottoNumber(6)));
 
             // when
             boolean matchBonusNumber = winningNumbers.matchBonusNumber(lottoNumbers);
@@ -85,14 +87,14 @@ class WinningNumbersTest {
         void validateSize() {
             // given
             List<LottoNumber> numbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9), new LottoNumber(8),
-                            new LottoNumber(45), new LottoNumber(21), new LottoNumber(30)));
+                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9), new LottoNumber(8),
+                    new LottoNumber(45), new LottoNumber(21), new LottoNumber(30)));
             LottoNumber bonusNumber = new LottoNumber(4);
 
             // when & then
             assertThatThrownBy(() -> new WinningNumbers(numbers, bonusNumber)).isInstanceOf(
-                            IllegalArgumentException.class)
-                    .hasMessageContaining(ErrorType.WINNING_NUMBERS_IS_INVALID_SIZE.getMessage());
+                    IllegalArgumentException.class)
+                .hasMessageContaining(ErrorType.WINNING_NUMBERS_IS_INVALID_SIZE.getMessage());
         }
 
         @DisplayName("당첨 번호에 중복이 존재한다면 예외가 발생한다.")
@@ -100,14 +102,14 @@ class WinningNumbersTest {
         void validateDuplicate() {
             // given
             List<LottoNumber> numbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(1), new LottoNumber(9), new LottoNumber(8),
-                            new LottoNumber(45), new LottoNumber(21)));
+                List.of(new LottoNumber(1), new LottoNumber(1), new LottoNumber(9), new LottoNumber(8),
+                    new LottoNumber(45), new LottoNumber(21)));
             LottoNumber bonusNumber = new LottoNumber(4);
 
             // when & then
             assertThatThrownBy(() -> new WinningNumbers(numbers, bonusNumber)).isInstanceOf(
-                            IllegalArgumentException.class)
-                    .hasMessageContaining(ErrorType.WINNING_NUMBERS_IS_DUPLICATION.getMessage());
+                    IllegalArgumentException.class)
+                .hasMessageContaining(ErrorType.WINNING_NUMBERS_IS_DUPLICATION.getMessage());
         }
 
         @DisplayName("보너스 볼이 당첨 번호에 존재한다면 예외가 발생한다.")
@@ -115,14 +117,14 @@ class WinningNumbersTest {
         void validateBonusNumberDuplicate() {
             // given
             List<LottoNumber> numbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(9), new LottoNumber(8),
-                            new LottoNumber(45), new LottoNumber(21)));
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(9), new LottoNumber(8),
+                    new LottoNumber(45), new LottoNumber(21)));
             LottoNumber bonusNumber = new LottoNumber(1);
 
             // when & then
             assertThatThrownBy(() -> new WinningNumbers(numbers, bonusNumber)).isInstanceOf(
-                            IllegalArgumentException.class)
-                    .hasMessageContaining(ErrorType.BONUS_BALL_IS_DUPLICATION.getMessage());
+                    IllegalArgumentException.class)
+                .hasMessageContaining(ErrorType.BONUS_BALL_IS_DUPLICATION.getMessage());
         }
 
     }

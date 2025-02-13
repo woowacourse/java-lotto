@@ -21,8 +21,8 @@ class LottoTest {
         void createLottoNumbers() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
+                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
+                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
 
             // when
             Lotto actual = new Lotto(lottoNumbers);
@@ -36,13 +36,13 @@ class LottoTest {
         void calculateWinningNumbersMatchCount() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
+                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
+                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
             Lotto lotto = new Lotto(lottoNumbers);
 
             WinningNumbers winningNumbers = new WinningNumbers(new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(8), new LottoNumber(45), new LottoNumber(21))), new LottoNumber(30));
+                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
+                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21))), new LottoNumber(30));
             // when
             int matchCount = lotto.calculateWinningNumbersMatchCount(winningNumbers);
 
@@ -55,13 +55,13 @@ class LottoTest {
         void isContainsBonusNumber() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(30), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
+                List.of(new LottoNumber(30), new LottoNumber(3), new LottoNumber(9),
+                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
             Lotto lotto = new Lotto(lottoNumbers);
 
             WinningNumbers winningNumbers = new WinningNumbers(new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(8), new LottoNumber(45), new LottoNumber(21))), new LottoNumber(30));
+                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
+                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21))), new LottoNumber(30));
             // when
             boolean containsBonusNumber = lotto.isContainsBonusNumber(winningNumbers);
 
@@ -79,13 +79,13 @@ class LottoTest {
         void validateSize() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(8), new LottoNumber(45), new LottoNumber(21), new LottoNumber(30)));
+                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
+                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21), new LottoNumber(30)));
 
             // when & then
             assertThatThrownBy(() -> new Lotto(lottoNumbers))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(ErrorType.LOTTO_NUMBER_IS_INVALID_SIZE.getMessage());
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorType.LOTTO_NUMBER_IS_INVALID_SIZE.getMessage());
         }
 
         @DisplayName("로또 번호에 중복이 존재한다면 예외가 발생한다.")
@@ -93,13 +93,13 @@ class LottoTest {
         void validateDuplicate() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(1), new LottoNumber(45), new LottoNumber(21)));
+                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
+                    new LottoNumber(1), new LottoNumber(45), new LottoNumber(21)));
 
             // when & then
             assertThatThrownBy(() -> new Lotto(lottoNumbers))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(ErrorType.LOTTO_NUMBER_DUPLICATE.getMessage());
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorType.LOTTO_NUMBER_DUPLICATE.getMessage());
         }
     }
 }

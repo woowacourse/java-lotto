@@ -18,8 +18,8 @@ class LottoRankTest {
 
         public ValidCases() {
             this.winningNumbers = new WinningNumbers(new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                            new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))), new LottoNumber(7));
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                    new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))), new LottoNumber(7));
         }
 
         @Test
@@ -27,8 +27,8 @@ class LottoRankTest {
         void createLottoRankFirst() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                            new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                    new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
             Lotto lotto = new Lotto(lottoNumbers);
 
             // when
@@ -43,8 +43,8 @@ class LottoRankTest {
         void createLottoRankSecond() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                            new LottoNumber(4), new LottoNumber(5), new LottoNumber(7)));
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                    new LottoNumber(4), new LottoNumber(5), new LottoNumber(7)));
             Lotto lotto = new Lotto(lottoNumbers);
 
             // when
@@ -58,8 +58,8 @@ class LottoRankTest {
         void createLottoRankThird() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                            new LottoNumber(4), new LottoNumber(5), new LottoNumber(8)));
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                    new LottoNumber(4), new LottoNumber(5), new LottoNumber(8)));
             Lotto lotto = new Lotto(lottoNumbers);
 
             // when
@@ -73,8 +73,8 @@ class LottoRankTest {
         void createLottoRankFourth() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                            new LottoNumber(4), new LottoNumber(15), new LottoNumber(16)));
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                    new LottoNumber(4), new LottoNumber(15), new LottoNumber(16)));
             Lotto lotto = new Lotto(lottoNumbers);
 
             // when
@@ -88,8 +88,8 @@ class LottoRankTest {
         void createLottoRankFifth() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                            new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)));
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                    new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)));
             Lotto lotto = new Lotto(lottoNumbers);
 
             // when
@@ -103,8 +103,8 @@ class LottoRankTest {
         void createLottoRankFail() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(13),
-                            new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)));
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(13),
+                    new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)));
             Lotto lotto = new Lotto(lottoNumbers);
 
             // when

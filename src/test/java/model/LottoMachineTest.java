@@ -23,16 +23,19 @@ class LottoMachineTest {
             PurchaseAmount purchaseAmount = new PurchaseAmount(1000);
 
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                            new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                    new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
             Lotto expectedLotto = new Lotto(lottoNumbers);
             // when
             List<Lotto> lottos = lottoMachine.issueLottos(purchaseAmount);
 
             // then
             assertSoftly(softly -> {
-                softly.assertThat(lottos.size()).isEqualTo(1);
-                softly.assertThat(lottos.getFirst()).usingRecursiveComparison().isEqualTo(expectedLotto);
+                softly.assertThat(lottos.size())
+                    .isEqualTo(1);
+                softly.assertThat(lottos.getFirst())
+                    .usingRecursiveComparison()
+                    .isEqualTo(expectedLotto);
             });
         }
 

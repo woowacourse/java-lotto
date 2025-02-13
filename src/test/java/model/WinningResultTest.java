@@ -20,13 +20,14 @@ class WinningResultTest {
         void createWinningResult() {
             // given
             Map<LottoRank, Integer> lottoRanks = Map.of(LottoRank.FAIL, 3, LottoRank.FIFTH_PLACE, 1,
-                    LottoRank.FIRST_PLACE, 1);
+                LottoRank.FIRST_PLACE, 1);
 
             // when
             WinningResult winningResult = new WinningResult(lottoRanks);
 
             // then
-            assertThat(winningResult.getLottoRanks()).usingRecursiveComparison().isEqualTo(lottoRanks);
+            assertThat(winningResult.getLottoRanks()).usingRecursiveComparison()
+                .isEqualTo(lottoRanks);
         }
 
         @DisplayName("손해 여부를 올바르게 계산한다.")
@@ -71,7 +72,7 @@ class WinningResultTest {
 
             // when & then
             assertThatThrownBy(() -> new WinningResult(lottoRanks)).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(ErrorType.WINNING_RESULT_POSITIVE.getMessage());
+                .hasMessageContaining(ErrorType.WINNING_RESULT_POSITIVE.getMessage());
         }
     }
 }

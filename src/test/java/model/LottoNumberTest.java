@@ -41,8 +41,8 @@ class LottoNumberTest {
         void validateRange(final int inclusive) {
             // given & when & then
             assertThatThrownBy(() -> new LottoNumber(inclusive))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(ErrorType.LOTTO_NUMBER_RANGE.getMessage());
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorType.LOTTO_NUMBER_RANGE.getMessage());
         }
     }
 }
