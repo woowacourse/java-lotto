@@ -21,7 +21,7 @@ public class Application {
         try {
             int purchaseAmount = getPurchaseAmount();
             return LottoManager.purchase(purchaseAmount);
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return purchaseLottos();
         }
@@ -30,7 +30,7 @@ public class Application {
     private static int getPurchaseAmount() {
         try {
             return InputView.inputPurchaseAmount();
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             OutputView.printErrorMessage("구입금액은 숫자여야 합니다.");
             return getPurchaseAmount();
         }
@@ -41,18 +41,18 @@ public class Application {
             List<Integer> winningNumbers = InputView.inputWinningNumbers();
             validateWinningNumbers(winningNumbers);
             return new WinningNumbers(winningNumbers);
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getWinningNumbers();
         }
     }
 
-    private static void validateWinningNumbers(List<Integer> winningNumbers) {
+    private static void validateWinningNumbers(final List<Integer> winningNumbers) {
         if (new HashSet<>(winningNumbers).size() != 6) {
             throw new IllegalArgumentException("6개의 고유한 번호를 입력해야 합니다.");
         }
 
-        for (int winningNumber : winningNumbers) {
+        for (final int winningNumber : winningNumbers) {
             validateLottoNumber(winningNumber);
         }
     }
@@ -63,13 +63,13 @@ public class Application {
             validateLottoNumber(bonusNumber);
             winningNumbers.validateBonusNumberDuplicated(bonusNumber);
             return bonusNumber;
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getBonusNumber(winningNumbers);
         }
     }
 
-    private static void validateLottoNumber(int lottoNumber) {
+    private static void validateLottoNumber(final int lottoNumber) {
         if (lottoNumber < 1 || lottoNumber > 45) {
             throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이여야 합니다.");
         }
