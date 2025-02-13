@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import util.RandomNumberGenerator;
 
-public class LottoIssue {
+public class IssueLottoService {
 
     public IssuedLottosDto issueLottos(int money){
         validateMoney(money);
