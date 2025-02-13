@@ -1,11 +1,8 @@
 package model;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -17,6 +14,7 @@ class PurchaseTest {
     @CsvSource(value = {"1000:1000", "100000:100000", "15000:15000", "+1000:1000"}, delimiter = ':')
     void savePurchase(String inputString, int expectedOutput) {
         Purchase purchase = new Purchase(inputString);
+
         assertThat(purchase.getAmount()).isEqualTo(expectedOutput);
     }
 
@@ -49,6 +47,7 @@ class PurchaseTest {
     @CsvSource(value = {"1000:1", "15000:15", "100000:100"}, delimiter = ':')
     void issueLotto(String inputString, int expectedCount) {
         Purchase purchase = new Purchase(inputString);
+
         assertThat(purchase.calculateLottoCount()).isEqualTo(expectedCount);
     }
 

@@ -12,6 +12,7 @@ class LottoGeneratorTest {
     @Test
     void containsSixNumbersInlotto() {
         Lotto generatedLotto = LottoGenerator.generate(1).get(0);
+
         assertThat(generatedLotto.getNumbers().size()).isEqualTo(6);
     }
 
@@ -30,6 +31,7 @@ class LottoGeneratorTest {
     void verifyNoDuplicationInOneLotto() {
         Lotto generatedLotto = LottoGenerator.generate(1).get(0);
         Set<Integer> uniqueLotto = new HashSet<>(generatedLotto.getNumbers());
+
         assertThat(uniqueLotto.size()).isEqualTo(generatedLotto.getNumbers().size());
     }
 }

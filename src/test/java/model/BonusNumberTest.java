@@ -15,18 +15,19 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class BonusNumberTest {
 
-    static WinningNumber winningNumber;
+    static WinningNumber winningNumberFromTwoToSeven;
 
     @BeforeAll
     static void setWinningNumber() {
-         winningNumber = new WinningNumber("2, 3, 4, 5, 6, 7");
+         winningNumberFromTwoToSeven = new WinningNumber("2, 3, 4, 5, 6, 7");
     }
 
     @DisplayName("보너스 번호를 정상적으로 저장한다")
     @ParameterizedTest
     @CsvSource(value = {"1:1", "15:15", "45:45"}, delimiter = ':')
     void savePurchase(String inputString, int expectedOutput) {
-        BonusNumber bonusNumber = new BonusNumber(inputString, winningNumber);
+        BonusNumber bonusNumber = new BonusNumber(inputString, winningNumberFromTwoToSeven);
+
         assertThat(bonusNumber.getNumber()).isEqualTo(expectedOutput);
     }
 
@@ -34,7 +35,7 @@ class BonusNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"0", "-1", "46"})
     void outOfNumberRangeInWinningNumber(String bonusNumberInput) {
-        assertThatThrownBy(() -> new BonusNumber(bonusNumberInput, winningNumber))
+        assertThatThrownBy(() -> new BonusNumber(bonusNumberInput, winningNumberFromTwoToSeven))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -42,30 +43,32 @@ class BonusNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"a", "@", "6.0", " ", ""})
     void notIntegerLottoNumber(String bonusNumberInput) {
-        assertThatThrownBy(() -> new BonusNumber(bonusNumberInput, winningNumber))
+        assertThatThrownBy(() -> new BonusNumber(bonusNumberInput, winningNumberFromTwoToSeven))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("보너스 번호가 당첨 번호와 중복될 경우 예외가 발생한다")
     @Test
     void duplicateBonusNumberWithWinningNumber() {
-        assertThatThrownBy(() -> new BonusNumber("2", winningNumber))
+        assertThatThrownBy(() -> new BonusNumber("2", winningNumberFromTwoToSeven))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("보너스 번호가 로또 당첨 번호와 일치하면 true를 반환한다")
     @Test
     void trueIfBonusNumberMatchesLottoNumber() {
-        BonusNumber bonusNumber = new BonusNumber("1", winningNumber);
+        BonusNumber bonusNumber = new BonusNumber("1", winningNumberFromTwoToSeven);
         List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 11, 12, 13, 14, 15));
+
         assertThat(bonusNumber.matchesWith(lottoNumbers)).isTrue();
     }
 
     @DisplayName("보너스 번호가 로또 당첨 번호와 불일치하면 false를 반환한다")
     @Test
     void falseIfBonusNumberNotMatchesLottoNumber() {
-        BonusNumber bonusNumber = new BonusNumber("1", winningNumber);
+        BonusNumber bonusNumber = new BonusNumber("1", winningNumberFromTwoToSeven);
         List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(10, 11, 12, 13, 14, 15));
+
         assertThat(bonusNumber.matchesWith(lottoNumbers)).isFalse();
     }
 }

@@ -3,9 +3,7 @@ package model;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,7 +16,7 @@ class WinningNumberTest {
     @Test
     void parseWinningNumberInput() {
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
-        for(int i=1; i<=6; i++) {
+        for(int i = 1; i <= 6; i++) {
             assertThat(winningNumber.contains(i)).isTrue();
         }
     }
@@ -61,6 +59,7 @@ class WinningNumberTest {
         int matchingCount = winningNumber.findMatchingCountWith(
                                     Arrays.stream(lottoNumberInput.split(", "))
                                     .map(Integer::parseInt).toList());
+
         assertThat(matchingCount).isEqualTo(expectedCount);
     }
 

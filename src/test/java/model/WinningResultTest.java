@@ -24,6 +24,7 @@ class WinningResultTest {
     void calculateEarningRate(WinningStatus winningStatus, String purchaseInput, double expectedEarningRate) {
         WinningResult winningResult = new WinningResult();
         winningResult.update(winningStatus);
+
         assertThat(winningResult.calculateEarningRate(new Purchase(purchaseInput))).isEqualTo(expectedEarningRate);
     }
 }
