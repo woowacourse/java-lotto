@@ -10,8 +10,10 @@ public class WinningLotto {
 
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         validateSize(winningNumbers);
-        validateNumberRange(winningNumbers);
-        validateDuplicate(winningNumbers);
+        validateNumberRange(winningNumbers, bonusNumber);
+        validateDuplicate(winningNumbers, bonusNumber);
+
+
 
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
@@ -24,16 +26,21 @@ public class WinningLotto {
     }
 
 
-    private void validateNumberRange(List<Integer> winningNumbers) {
+    private void validateNumberRange(List<Integer> winningNumbers, int bonusNumber) {
         for(int number : winningNumbers){
             checkNumberRange(number);
         }
+        checkNumberRange(bonusNumber);
     }
 
-    private void validateDuplicate(List<Integer> winningNumbers) {
+    private void validateDuplicate(List<Integer> winningNumbers, int bonusNumber) {
         Set<Integer> set = new HashSet<>(winningNumbers);
         if(set.size() != 6) {
             throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
+        }
+
+        if(winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 숫자는 당첨 번호와 중복될 수 없습니다.");
         }
     }
 
@@ -42,5 +49,4 @@ public class WinningLotto {
             throw new IllegalArgumentException("당첨 번호는 1~50 사이의 값만 가능합니다.");
         }
     }
-
 }
