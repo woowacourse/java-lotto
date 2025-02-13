@@ -5,6 +5,7 @@ import domain.LottoFactory;
 import domain.Lottos;
 import domain.LottosFactory;
 import domain.WinningLotto;
+import domain.dto.GetResultDto;
 import domain.generator.RandomGenerator;
 import view.InputView;
 import view.OutputView;
@@ -33,8 +34,8 @@ public class LottoController {
         String bonusNumber = inputView.inputBonusLotto();
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
 
-        outputView.printWinningStatistic();
-        lottos.getResult(winningLotto, amount);
+        GetResultDto lottosResult = lottos.getResult(winningLotto, amount);
+        outputView.printWinningStatistic(lottosResult);
 
     }
 

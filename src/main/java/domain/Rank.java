@@ -1,8 +1,5 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.List;
-
 public enum Rank {
     FIRST(6, 2_000_000_000, false),
     SECOND(5, 30_000_000, true),
@@ -13,12 +10,12 @@ public enum Rank {
     NONE(0, 0, false);
 
     private int count;
-    private int price;
+    private int prize;
     private boolean bonusFlag;
 
-    Rank(int count, int price, boolean bonusFlag){
+    Rank(int count, int prize, boolean bonusFlag){
         this.count = count;
-        this.price = price;
+        this.prize = prize;
         this.bonusFlag = bonusFlag;
     }
 
@@ -29,5 +26,9 @@ public enum Rank {
             }
         }
         return NONE;
+    }
+
+    public static long getTotalPrize(Rank rank, Integer count){
+        return (long) rank.prize * count;
     }
 }
