@@ -20,5 +20,4 @@ public class Money {
             throw new IllegalArgumentException("구입 금액은 양수만 가능합니다.");
         }
     }
-
 }

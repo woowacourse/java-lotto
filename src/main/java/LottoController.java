@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -15,14 +14,10 @@ public class LottoController {
 
     public void run() throws IOException {
         Money money = inputView.inputMoney();
-        int lottoCount = getLottoCount(money);
+        final int lottoCount = Lotto.getLottoCount(money);
         outputView.printLottoCount(lottoCount);
 
-        // TODO: 로또 발급 책임 분리
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; ++i) {
-            lottos.add(new Lotto(RandomNumbersGenerator.generateUniqueNumbers(Number.MIN, Number.MAX, 6)));
-        }
+        List<Lotto> lottos = lottoManager.generateLottos(lottoCount);
         outputView.printLottos(lottos);
 
         WinningLotto winningLotto = inputView.inputWinningLotto();
@@ -30,10 +25,5 @@ public class LottoController {
         WinningResult winningResult = lottoManager.getWinningResult(lottos, winningLotto);
         outputView.printWinningResult(winningResult);
         outputView.printRevenue(lottoManager.getRevenue(winningResult, money));
-    }
-
-    // TODO: 책임 분리
-    private int getLottoCount(Money money) {
-        return money.getValue() / 1000;
     }
 }
