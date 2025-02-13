@@ -3,11 +3,13 @@ package domain;
 import java.util.List;
 import java.util.Map;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class StatisticsServiceTest {
     private StatisticsService statisticsService = new StatisticsService();
 
+    @DisplayName("매칭된 번호 개수 계산 테스트")
     @Test
     void 당첨번호_매칭_개수_계산_테스트() {
         // given
@@ -21,6 +23,7 @@ class StatisticsServiceTest {
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
+    @DisplayName("보너스 번호가 포함되지 않았을 때 매칭 테스트")
     @Test
     void 보너스_번호가_포함되지_않았을_때_매칭_테스트() {
         // given
@@ -33,6 +36,7 @@ class StatisticsServiceTest {
         Assertions.assertThat(actual).isFalse();
     }
 
+    @DisplayName("2등 로또일 때 매칭 테스트")
     @Test
     void 로또_2등_테스트() {
         // given
@@ -51,6 +55,7 @@ class StatisticsServiceTest {
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
+    @DisplayName("당첨된 로또로 통계 계산 테스트")
     @Test
     void 당첨_통계_계산_테스트() {
         //given
@@ -74,6 +79,7 @@ class StatisticsServiceTest {
         Assertions.assertThat(prizeCounter.get(LottoPrize.NOTHING)).isEqualTo(1);
     }
 
+    @DisplayName("당첨된 로또에 대한 수익률 계산 테스트")
     @Test
     void 수익률_계산_테스트() {
         //given

@@ -1,13 +1,16 @@
 package domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTicketTest {
+    @DisplayName("로또 번호가 정상적으로 발행되는지 테스트")
     @Test
     void 로또_발행_테스트() {
         // given
         LottoMachine lottoMachine = new LottoMachine();
+
         // when
         LottoTicket lottoTicket = lottoMachine.generateLottoTicket(new RandomIntegerGenerator());
 
