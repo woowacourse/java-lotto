@@ -27,8 +27,25 @@ public class Lotto {
         }
     }
 
+    public LottoMatch compareLotto(WinningLotto winningLotto) {
+        List<Integer>winningNumbers = winningLotto.getWinningNumbers();
+        int bonusNumber = winningLotto.getBonusNumber();
+        int winningCounter = 0;
+        boolean bonusChecker = false;
+        for(int number : numbers){
+            if(winningNumbers.contains(number)){
+                winningCounter++;
+            }
+            if(bonusNumber == number){
+                bonusChecker = true;
+            }
+        }
+        return LottoMatch.calculateLotto(winningCounter,bonusChecker);
+    }
+
     @Override
     public String toString() {
         return numbers.toString();
     }
+
 }

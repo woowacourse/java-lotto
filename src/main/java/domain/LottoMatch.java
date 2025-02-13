@@ -1,20 +1,30 @@
 package domain;
 
 public enum LottoMatch {
+  DEFUALT_MATCH(0,false,0),
   THREE_MATCH(3, false, 5000),
   FOUR_MATCH(4, false, 50000),
   FIVE_MATCH(5, false, 1500000),
   FIVE_BONUS_MATCH(5, true, 30000000),
   SIX_MATCH(6, false, 2000000000);
 
-  private int winningCounter;
-  private boolean bonusChecker;
-  private int prize;
+  public int winningCounter;
+  public boolean bonusChecker;
+  public int prize;
 
   private LottoMatch(int winningCounter, boolean bonusChecker, int prize) {
     this.winningCounter = winningCounter;
     this.bonusChecker = bonusChecker;
     this.prize = prize;
+  }
+
+  public static LottoMatch calculateLotto(int winningCounter, boolean bonusChecker ){
+    for(LottoMatch lottoMatch : values()) {
+      if(lottoMatch.winningCounter == winningCounter && lottoMatch.bonusChecker == bonusChecker){
+        return lottoMatch;
+      }
+    }
+    return DEFUALT_MATCH;
   }
 
   @Override

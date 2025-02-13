@@ -1,7 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class Buyer {
@@ -27,4 +27,19 @@ public class Buyer {
         }
         return result;
     }
+
+    public HashMap<LottoMatch, Integer> countLottos(WinningLotto winningLotto) {
+        HashMap<LottoMatch, Integer> result = new HashMap<>();
+        for(LottoMatch lottoMatch : LottoMatch.values()) {
+            result.put(lottoMatch, 0);
+        }
+
+        for(Lotto lotto : lottos){
+            LottoMatch matchedLotto = lotto.compareLotto(winningLotto);
+            result.put(matchedLotto, result.get(matchedLotto) + 1);
+        }
+        return result;
+    }
+
+
 }

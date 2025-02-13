@@ -49,4 +49,12 @@ public class WinningLotto {
             throw new IllegalArgumentException("당첨 번호는 1~50 사이의 값만 가능합니다.");
         }
     }
+
+    public List<Integer> getWinningNumbers() {
+        return winningNumbers;
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber;
+    }
 }

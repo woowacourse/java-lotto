@@ -1,15 +1,14 @@
 package controller;
 
 import domain.Buyer;
-import domain.Lotto;
+import domain.LottoMatch;
 import domain.Money;
 import domain.WinningLotto;
+import java.util.HashMap;
 import util.InputParser;
 import util.Validator;
 import view.InputView;
 import view.OutputView;
-
-import java.util.List;
 
 public class LottoController {
     private InputView inputView;
@@ -36,7 +35,10 @@ public class LottoController {
         String inputBonusNumber = inputView.inputBonusNumber();
         Validator.inputValidatorIsNull(inputBonusNumber);
 
-        new WinningLotto(InputParser.parseStringToList(inputWinningNumber),
+        WinningLotto winningLotto = new WinningLotto(InputParser.parseStringToList(inputWinningNumber),
                 InputParser.parseStringToInteger(inputBonusNumber));
+        HashMap<LottoMatch,Integer> lottoResult = buyer.countLottos(winningLotto);
+
+
     }
 }
