@@ -12,6 +12,7 @@ public class OutputView {
     private static final String WINNING_STATISTIC_MESSAGE = "당첨 통계";
     private static final String HYPHEN = "-";
     private static final String WINNING_RESULT = "%s개";
+    private static final String RATE_MESSAGE = "총 수익률은 %,.2f입니다.";
 
     private OutputView(){}
 
@@ -40,9 +41,12 @@ public class OutputView {
                 System.out.printf(WINNING_RESULT, result.get(rank));
                 changeLine();
             }
-
         }
+    }
 
+    public void printRate(double calculateRate){
+        System.out.printf(RATE_MESSAGE,calculateRate);
+        changeLine();
     }
 
     private void printMessage(String message) {

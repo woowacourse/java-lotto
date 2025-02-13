@@ -36,18 +36,11 @@ public class LottoController {
 
         int bonusNumber = inputView.bonusNumberInput();
         WinningInfo winningInfo = lottoService.createWinningNumber(lotto, bonusNumber);
+
         Map<Rank, Integer> rankResult = lottoService.calculateRank(winningInfo, lottos);
         outputView.printWinningStatistic(rankResult);
-       /*
-        System.out.println("당첨 통계");
-        System.out.println("-".repeat(9));
-        for (Rank rank : rankResult.keySet()) {
-            if(!rank.getDescription().isBlank()){
-                System.out.println(rank.getDescription() + " - " + rankResult.get(rank));
-            }
-        }
 
-        */
-
+        double calculateRate = lottoService.calculateRate(rankResult,purchaseAmount);
+        outputView.printRate(calculateRate);
     }
 }

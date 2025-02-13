@@ -50,10 +50,8 @@ public class LottoService {
     public Map<Rank, Integer> calculateRank(WinningInfo winningInfo, List<Lotto> lottos){
         Map<Rank,Integer> calculateResult = new LinkedHashMap<>();
 
-        Rank[] values = Rank.values();
-        for (Rank value : values) {
+        for (Rank value : Rank.values()) {
             calculateResult.put(value, 0);
-
         }
 
         List<Integer> winningNumbers = winningInfo.getWinningLotto().getNumbers();
@@ -75,5 +73,17 @@ public class LottoService {
             calculateResult.put(foundRank,calculateResult.get(foundRank)+1);
         }
         return calculateResult;
+    }
+
+    public double calculateRate(Map<Rank,Integer> calculateResult, int purchaseAmount){
+        // 수익률 계산 식 = 당첨금액/구입금액
+
+        double totalPrize=0;
+
+        for (Rank rank : calculateResult.keySet()) {
+            totalPrize+=rank.getPrize()*calculateResult.get(rank);
+        }
+
+        return  Math.floor((totalPrize/purchaseAmount)*100)/100 ;
     }
 }
