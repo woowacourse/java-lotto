@@ -1,23 +1,25 @@
 package lotto.domain;
 
-import lotto.constant.ErrorMessage;
+import lotto.util.NumberGenerator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
-import static lotto.constant.ErrorMessage.*;
+import static lotto.constant.ErrorMessage.DUPLICATE_LOTTO_NUMBER;
+import static lotto.constant.ErrorMessage.INVALID_LOTTO_NUMBER_COUNT;
 
 public class Lotto {
     public static final int PRICE = 1000;
     public static final int LOTTO_NUMBER_COUNT = 6;
-    public static final int MINIMUM_NUMBER = 1;
-    public static final int MAXIMUM_NUMBER = 45;
 
-    public final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public Lotto() {
-        Set<Integer> set = new TreeSet();
+    public Lotto(NumberGenerator generator) {
+        Set<LottoNumber> set = new TreeSet<>();
         while (set.size() < LOTTO_NUMBER_COUNT) {
-            set.add((int)(Math.random() * MAXIMUM_NUMBER) + MINIMUM_NUMBER);
+            set.add(LottoNumber.random(generator));
         }
         this.numbers = new ArrayList<>(set);
     }
@@ -31,12 +33,9 @@ public class Lotto {
             throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBER.getMessage());
         }
 
-        numbers.forEach(number ->{
-            if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
-                throw new IllegalArgumentException(OUT_OF_RANGE_LOTTO_NUMBER.getMessage());
-            }
-        });
-        this.numbers = numbers;
+        this.numbers = numbers.stream()
+            .map(LottoNumber::new)
+            .toList();
     }
 
     public int findMatchCount(Lotto lotto) {
@@ -49,15 +48,15 @@ public class Lotto {
         return count;
     }
 
-    public boolean isMatchBonus(int bonusNumber) {
+    public boolean isMatchBonus(LottoNumber bonusNumber) {
         return numbers.contains(bonusNumber);
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 
-    public boolean containsNumber(int bonusNumber) {
+    public boolean containsNumber(LottoNumber bonusNumber) {
         return numbers.contains(bonusNumber);
     }
 }
