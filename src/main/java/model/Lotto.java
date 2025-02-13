@@ -21,7 +21,8 @@ public class Lotto {
         return numberSet.size();
     }
 
-    public void rankTier(WinningLotto winningLotto) {
+    public void rankTier() {
+        WinningLotto winningLotto = WinningLotto.getInstance();
         int count = winningLotto.getMatchCount(numbers);
         boolean isBonusMatched = winningLotto.isBonusMatched(numbers);
         this.prizeTier = PrizeTier.getTier(count, isBonusMatched);
@@ -40,7 +41,7 @@ public class Lotto {
     }
 
     public LottoDto toDto() {
-        return new LottoDto(numbers, prizeTier);
+        return new LottoDto(numbers);
     }
 
     private void validateNumbers(List<Integer> numbers) {
