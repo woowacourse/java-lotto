@@ -44,7 +44,7 @@ public class LottoApplicationTest {
         });
     }
 
-    public static void assertException(Executable executable) {
+    private static void assertException(Executable executable) {
         assertTimeoutPreemptively(TIMEOUT_SECONDS, executable);
     }
 
