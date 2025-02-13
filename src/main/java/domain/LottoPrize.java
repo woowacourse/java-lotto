@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Optional;
 
 /*
@@ -12,11 +13,11 @@ import java.util.Optional;
  */
 public enum LottoPrize {
     
-    FIRST(6, null, 2_000_000_000),
-    SECOND(5, true, 30_000_000),
-    THIRD(5, false, 1_500_000),
-    FOURTH(4, null, 50_000),
     FIFTH(3, null, 5_000),
+    FOURTH(4, null, 50_000),
+    THIRD(5, false, 1_500_000),
+    SECOND(5, true, 30_000_000),
+    FIRST(6, null, 2_000_000_000),
     ;
     
     private final int minMatchCount;
@@ -37,7 +38,7 @@ public enum LottoPrize {
                         return prize.isBonusMatch == isBonusMatch;
                     }
                     return true;
-                }).sorted()
+                }).sorted(Comparator.comparingInt(prize -> (int) prize.prizeMoney))
                 .findFirst();
     }
     
