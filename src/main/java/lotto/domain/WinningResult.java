@@ -16,7 +16,7 @@ public class WinningResult {
     }
 
     public double calculateProfitRate(final LottoPrice lottoPrice) {
-        return lottoPrice.divideFrom(calculateTotalAmount()) ;
+        return lottoPrice.divideFrom(calculateTotalAmount());
     }
 
     private int calculateTotalAmount() {

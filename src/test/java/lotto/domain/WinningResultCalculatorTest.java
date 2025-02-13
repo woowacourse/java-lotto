@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +47,8 @@ public class WinningResultCalculatorTest {
 
         // When
         WinningResult winningResult = winningResultCalculator.countLottoPrizes(lottos);
-        Map<LottoAward, Integer> expectedResult = Map.of(LottoAward.FIRST_RANK, 1, LottoAward.SECOND_RANK, 1, LottoAward.THIRD_RANK, 1, LottoAward.FOURTH_RANK, 1, LottoAward.FIFTH_RANK, 0);
+        Map<LottoAward, Integer> expectedResult = Map.of(LottoAward.FIRST_RANK, 1, LottoAward.SECOND_RANK, 1,
+                LottoAward.THIRD_RANK, 1, LottoAward.FOURTH_RANK, 1, LottoAward.FIFTH_RANK, 0);
 
         // Then
         Assertions.assertThat(winningResult.getWinningResult()).isEqualTo(expectedResult);
