@@ -13,7 +13,6 @@ public enum ErrorMessages {
     SAME_NUMBER("보너스 번호가 당첨 번호와 같습니다..");
 
     private static final String ERROR_SIGN = "[ERROR] ";
-    private static final String RETYPE_PROMPT = " 다시 입력해 주세요.";
 
     private final String message;
 
@@ -22,6 +21,6 @@ public enum ErrorMessages {
     }
 
     public String getMessage() {
-        return ERROR_SIGN + message + RETYPE_PROMPT;
+        return ERROR_SIGN + message;
     }
 }
