@@ -1,9 +1,5 @@
 package lotto.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Prizes;
@@ -22,6 +18,7 @@ public class LottoController {
         purchaseLotto(money);
         operateWinningLotto();
         operateStatistics(money);
+        inputView.closeScanner();
     }
 
     private void operateWinningLotto() {
@@ -44,4 +41,5 @@ public class LottoController {
         lottos = new Lottos(lottoCounts);
         outputView.printLottos(lottos);
     }
+
 }

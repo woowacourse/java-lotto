@@ -94,4 +94,9 @@ public class InputView {
             throw new IllegalArgumentException("10만원까지 구매 가능합니다.");
         }
     }
+
+    public void closeScanner() {
+        scanner.close();
+    }
+
 }

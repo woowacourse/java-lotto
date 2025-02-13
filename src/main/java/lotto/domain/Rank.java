@@ -57,4 +57,5 @@ public enum Rank {
     public static List<Rank> validRank() {
         return new ArrayList<>(Arrays.asList(Rank.values()).subList(0, 5));
     }
+
 }

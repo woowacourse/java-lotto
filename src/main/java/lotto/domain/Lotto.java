@@ -63,4 +63,5 @@ public class Lotto {
     public boolean checkBonusNumberMatch(int bonusNumber) {
         return lottoNumber.contains(bonusNumber);
     }
+
 }
