@@ -31,10 +31,12 @@ public class Lotto {
     }
 
     private void validateRange(final List<Integer> numbers) {
-        for (final int number : numbers) {
-            if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-                throw new IllegalArgumentException("로또는 1 이상 45 이하만 가능합니다.");
-            }
+        numbers.forEach(this::validateNumberRange);
+    }
+
+    private void validateNumberRange(final Integer number) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또는 1 이상 45 이하만 가능합니다.");
         }
     }
 
