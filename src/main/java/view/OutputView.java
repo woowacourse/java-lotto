@@ -8,27 +8,20 @@ import view.dto.ResultDTO.PrizeDTO;
 public class OutputView {
 
     public void printLottos(LottosDTO lottosDTO) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("%d개를 구매했습니다.", lottosDTO.lottoDTOs().size()));
-        stringBuilder.append('\n');
+        CustomStringBuilder stringBuilder = new CustomStringBuilder();
+        stringBuilder.appendLine(String.format("%d개를 구매했습니다.", lottosDTO.lottoDTOs().size()));
         lottosDTO.lottoDTOs().forEach(lottoDTO -> appendStringBuilder(lottoDTO, stringBuilder));
-        System.out.println(stringBuilder);
+        stringBuilder.print();
     }
 
     public void printResult(ResultDTO resultDTO) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("당첨 통계\n");
-        stringBuilder.append("---------\n");
-
+        CustomStringBuilder stringBuilder = new CustomStringBuilder();
+        stringBuilder.appendLine("당첨 통계");
+        stringBuilder.appendLine("---------");
         resultDTO.prizeDTOs().stream().sorted()
-                .forEach(prizeDTO -> stringBuilder
-                        .append(generatePrizeDetail(prizeDTO))
-                        .append("\n")
-                );
-
-        stringBuilder.append(generateProfit(resultDTO.profit()));
-
-        System.out.println(stringBuilder);
+                .forEach(prizeDTO -> stringBuilder.appendLine(generatePrizeDetail(prizeDTO)));
+        stringBuilder.appendLine(generateProfit(resultDTO.profit()));
+        stringBuilder.print();
     }
 
     public String generateProfit(double profit){
@@ -47,9 +40,9 @@ public class OutputView {
                 prizeDTO.match());
     }
 
-    public void appendStringBuilder(LottoDTO lottoDTO, StringBuilder stringBuilder) {
+    public void appendStringBuilder(LottoDTO lottoDTO, CustomStringBuilder stringBuilder) {
         String format = "[%d, %d, %d, %d, %d, %d]";
-        stringBuilder.append(String.format(format, lottoDTO.numbers().toArray())).append('\n');
+        stringBuilder.appendLine(String.format(format, lottoDTO.numbers().toArray()));
     }
 
 
