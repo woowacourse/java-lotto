@@ -45,10 +45,8 @@ public enum RankType {
         rankType.count ++;
     }
 
-    public static String printResult(){
+    public static String makeLottoResult(){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("당첨 통계\n")
-                .append("---------\n");
 
         for(RankType rankType : RankType.values()){
             if(rankType == RankType.SECOND){
