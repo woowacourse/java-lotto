@@ -6,6 +6,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
+        validateNumbers(numbers);
         this.numbers = numbers;
     }
 
@@ -19,5 +20,11 @@ public class Lotto {
                 .count();
 
         return Rank.fromResult(matchCount, numbers.contains(bonusBall));
+    }
+
+    private void validateNumbers(List<Integer> numbers){
+        if(numbers.stream().anyMatch(num -> num < 1 || num > 45)){
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이의 번호입니다.");
+        }
     }
 }
