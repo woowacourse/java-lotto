@@ -1,61 +1,64 @@
 package model;
 
 import dto.LottoNumbersResponse;
+import global.utils.Validator;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import utils.Validator;
+import java.util.*;
+
+import static global.constant.LottoConstant.*;
 
 public class Lotto {
 
-    private static final int NUMBER_COUNT = 6;
-
     private final List<Integer> numbers;
 
-    public Lotto() { // todo : 메서드 분리 작업
+    public Lotto() {
         numbers = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < NUMBER_COUNT; i++) {
-            numbers.add(random.nextInt(45) + 1);
-        }
+        generateLotto();
     }
 
-    public Lotto(String input) { // todo : 메서드 분리 작업, Stream 적용 작업, 각 번호 범위 내 존재하는지 체킹 추가
+    public Lotto(final String input) {
         numbers = new ArrayList<>();
-        String[] token = input.split(", ");
-        Validator.validateRange(token.length, NUMBER_COUNT, NUMBER_COUNT);
-        for (int i = 0; i < token.length; i++) {
-            Validator.validateNumeric(token[i]);
-            numbers.add(Integer.parseInt(token[i]));
-        }
-        validateUniqueNumber(numbers);
+        generateCustomLotto(input);
     }
 
-    public int calculateMatchNumber(Lotto otherLotto) {
-        return (int) numbers.stream()
-                .filter(otherLotto::isContained)
-                .count();
+    public int calculateMatchNumber(final Lotto otherLotto) {
+        return (int) numbers.stream().filter(otherLotto::isContained).count();
     }
 
-    public boolean isContained(int number) {
+    public boolean isContained(final int number) {
         return numbers.contains(number);
     }
 
     public LottoNumbersResponse createResponse() {
-        return new LottoNumbersResponse(
-                numbers.stream()
-                        .map(String::valueOf)
-                        .toArray(String[]::new)
-        );
+        return new LottoNumbersResponse(numbers.stream().map(String::valueOf).toArray(String[]::new));
     }
 
-    private void validateUniqueNumber(List<Integer> numbers) { // todo : 에러 메시지 추가, set 변수 선언 X 조건 내부로 이동
-        Set<Integer> set = new HashSet<>(numbers);
-        if (set.size() != numbers.size()) {
-            throw new IllegalArgumentException();
+    private void generateLotto() {
+        Random random = new Random();
+        for (int i = 0; i < NUMBER_COUNT; i++) {
+            numbers.add(random.nextInt(MAX_LOTTO_NUMBER) + 1);
+        }
+    }
+
+    private void generateCustomLotto(final String input) {
+        String[] tokens = input.split(NUMBER_DELIMITER);
+        Validator.validateRange(tokens.length, NUMBER_COUNT, NUMBER_COUNT);
+
+        Arrays.stream(tokens).forEach(this::addNumber);
+
+        validateUniqueNumber(numbers);
+    }
+
+    private void addNumber(String token) {
+        Validator.validateNumeric(token);
+        int number = Integer.parseInt(token);
+        Validator.validateRange(number, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+        numbers.add(number);
+    }
+
+    private void validateUniqueNumber(final List<Integer> numbers) {
+        if (new HashSet<>(numbers).size() != numbers.size()) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
     }
 }
