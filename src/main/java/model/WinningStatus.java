@@ -31,13 +31,12 @@ public enum WinningStatus {
     }
 
     public static WinningStatus findBy(int matchingCount, boolean matchesBonusNumber) {
-        // TODO: 로직 분리
+        if(matchingCount == THIRD.matchingCount) {
+            if(matchesBonusNumber) return SECOND;
+            return THIRD;
+        }
         for(WinningStatus winningStatus : WinningStatus.values()) {
             if(winningStatus.matchingCount == matchingCount) {
-                if(matchingCount == THIRD.matchingCount) {
-                    if(matchesBonusNumber) return SECOND;
-                    return THIRD;
-                }
                 return winningStatus;
             }
         }

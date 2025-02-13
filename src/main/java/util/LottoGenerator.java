@@ -10,18 +10,16 @@ public class LottoGenerator {
 
     public static List<Lotto> generate(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
-        while (true) {
+        while (lottos.size() < lottoCount) {
             try {
                 List<Integer> randomNumbers = NumberGenerator.pickUniqueRandomNumbers(MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT);
                 validateDuplication(randomNumbers, lottos);
                 lottos.add(new Lotto(randomNumbers));
-                if (lottos.size() == lottoCount) {
-                    return lottos;
-                }
             }
             catch (IllegalStateException e) {
             }
         }
+        return lottos;
     }
 
     private static void validateDuplication(List<Integer> randomNumbers, List<Lotto> lottos) {

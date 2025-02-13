@@ -8,18 +8,11 @@ import java.util.Set;
 
 public class NumberGenerator {
     public static List<Integer> pickUniqueRandomNumbers(int min, int max, int count) {
-        List<Integer> numbers = new ArrayList<>();
         Random random = new Random();
-        Set<Integer> set = new HashSet<>();
-        while(true) {
-            set.add(random.nextInt(max) + min);
-            if(set.size() == count) {
-                break;
-            }
+        Set<Integer> uniqueNumbers = new HashSet<>();
+        while(uniqueNumbers.size() < count) {
+            uniqueNumbers.add(random.nextInt(max) + min);
         }
-        for(int number : set) {
-            numbers.add(number);
-        }
-        return numbers;
+        return new ArrayList<>(uniqueNumbers);
     }
 }
