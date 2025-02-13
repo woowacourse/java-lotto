@@ -15,7 +15,6 @@ public record ResultDTO(
         @Override
         public int compareTo(PrizeDTO o) {
             int comp = count - o.count;
-            System.out.println(comp);
             if (comp == 0) {
                 if (isBonus) {
                     return 1;

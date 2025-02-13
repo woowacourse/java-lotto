@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 import model.Lotto;
+import model.LottoEvaluator;
 import model.LottoGenerater;
 import model.LottoNumberPicker;
 import model.Lottos;
@@ -44,7 +45,9 @@ public class Controller {
 
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
 
-        ResultDTO resultDTO = ResultDTO.from(lottos.getResult(winningLotto), lottos.computeProfit(winningLotto));
+        LottoEvaluator lottoEvaluator = new LottoEvaluator(winningLotto);
+
+        ResultDTO resultDTO = ResultDTO.from(lottoEvaluator.getResult(lottos), lottoEvaluator.computeProfit(lottos));
 
         outputView.printResult(resultDTO);
     }

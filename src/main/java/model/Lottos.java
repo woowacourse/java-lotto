@@ -1,9 +1,7 @@
 package model;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -16,24 +14,12 @@ public class Lottos {
         return lottos;
     }
 
-    public Map<Prize, Integer> getResult(WinningLotto winningLotto) {
-        Map<Prize, Integer> result = new TreeMap<>();
-        Arrays.stream(Prize.values()).forEach(prize -> result.put(prize, 0));
-        lottos.forEach(
-                lotto -> lotto
-                        .calculatePrize(winningLotto)
-                        .ifPresent(prize -> result.put(prize, result.get(prize) + 1))
-        );
-        return result;
+    public int computeTicketCount() {
+        return lottos.size();
     }
 
-    public double computeProfit(WinningLotto winningLotto) {
-        Map<Prize, Integer> result = getResult(winningLotto);
-        int sum = 0;
-        for (var entry : result.entrySet()) {
-            sum += entry.getKey().price * entry.getValue();
-        }
-        return sum / (lottos.size() * 1000.0);
+    // 스트림을 반환하는 메서드 추가
+    public Stream<Lotto> stream() {
+        return lottos.stream();
     }
-
 }
