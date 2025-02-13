@@ -7,11 +7,12 @@ import validator.Validator;
 
 public class Lotto {
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        for (int idx = 0; idx < numbers.size(); idx++)
-            Validator.checkOutOfRange(numbers.get(idx), LottoConstants.LOTTO_NUMBER_START, LottoConstants.LOTTO_NUMBER_END, ErrorMessages.LOTTO_NUMBER_OUT_OF_RANGE.getMessage());
+        for (Integer number : numbers)
+            Validator.checkOutOfRange(number, LottoConstants.LOTTO_NUMBER_START, LottoConstants.LOTTO_NUMBER_END,
+                    ErrorMessages.LOTTO_NUMBER_OUT_OF_RANGE.getMessage());
 
         this.numbers = numbers;
     }
