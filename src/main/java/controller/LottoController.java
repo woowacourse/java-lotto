@@ -21,33 +21,43 @@ public class LottoController {
     }
 
     public void run() throws IOException {
+        final int purchaseAmount = readPurchaseAmount();
+        Lottos lottos = createLottos(purchaseAmount);
 
-        // 1. 구매 금액 입력받기
-        String rawPurchaseAmount = inputView.readPurchaseAmount();
-        InputValidator.validateInteger(rawPurchaseAmount);
-        final int purchaseAmount = Integer.parseInt(rawPurchaseAmount);
+        final List<Integer> winningNumbers = readWinningNumbers();
+        final int bonusNumber = readBonusNumber();
 
-        // 2. Lottos 객체 생성하기
-        Lottos lottos = Lottos.ofSize(purchaseAmount / 1000);
-        outputView.printPurchasedLottos(lottos);
+        final WinningLotto winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonusNumber);
+        List<Prize> prizes = winningLotto.calculatePrizes(lottos);
 
-        //3. 당첨 번호 입력받기
+        outputView.printLottoResult(prizes, Prize.calculateEarningRate(prizes, lottos.getQuantity() * 1000));
+    }
+
+    private int readBonusNumber() throws IOException {
+        final String rawBonusNumber = inputView.readBonusNumber();
+        InputValidator.validateInteger(rawBonusNumber);
+        final int bonusNumber = Integer.parseInt(rawBonusNumber);
+        return bonusNumber;
+    }
+
+    private List<Integer> readWinningNumbers() throws IOException {
         String rawWinningNumber = inputView.readWinningNumber();
         final List<String> rawWinningNumbers = Arrays.stream(rawWinningNumber.split(",")).map(String::trim).toList();
         InputValidator.validateElements(rawWinningNumbers);
         final List<Integer> winningNumbers = rawWinningNumbers.stream().map(Integer::parseInt).toList();
+        return winningNumbers;
+    }
 
-        //4. 보너스 번호 입력받기
-        final String rawBonusNumber = inputView.readBonusNumber();
-        InputValidator.validateInteger(rawBonusNumber);
-        final int bonusNumber = Integer.parseInt(rawBonusNumber);
+    private Lottos createLottos(final int purchaseAmount) {
+        Lottos lottos = Lottos.ofSize(purchaseAmount / 1000);
+        outputView.printPurchasedLottos(lottos);
+        return lottos;
+    }
 
-        //5. WinningLotto 객체 생성하기
-        final WinningLotto winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonusNumber);
-
-        // 6. 계산하기
-        List<Prize> prizes = winningLotto.calculatePrizes(lottos);
-
-        outputView.printLottoResult(prizes, Prize.calculateEarningRate(prizes, lottos.getQuantity() * 1000));
+    private int readPurchaseAmount() throws IOException {
+        String rawPurchaseAmount = inputView.readPurchaseAmount();
+        InputValidator.validateInteger(rawPurchaseAmount);
+        final int purchaseAmount = Integer.parseInt(rawPurchaseAmount);
+        return purchaseAmount;
     }
 }
