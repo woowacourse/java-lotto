@@ -2,6 +2,7 @@ package domain;
 
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -17,10 +18,17 @@ public class Lottos {
         List<Integer> lottoNumbers = new ArrayList<>();
         Random random = new Random();
 
-        for (int i = 0; i < 6; i++) {
+        while (lottoNumbers.size() < 6) {
             int number = random.nextInt(1, 46);
+
+            if (lottoNumbers.contains(number)) {
+                continue;
+            }
             lottoNumbers.add(number);
         }
+
+        lottoNumbers.sort(Comparator.naturalOrder());
+
         return lottoNumbers;
     }
 
