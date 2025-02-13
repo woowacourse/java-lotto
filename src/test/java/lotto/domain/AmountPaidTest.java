@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
@@ -23,5 +24,13 @@ class AmountPaidTest {
         assertThatThrownBy(() -> new AmountPaid(-15000))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 음수는 입력할 수 없습니다.");
+    }
+
+    @DisplayName("이익률을 계산한다")
+    @Test
+    void 이익률을_계산한다() {
+        AmountPaid amountPaid = new AmountPaid(14000);
+
+        assertThat(amountPaid.calculateProfitRate(5000)).isEqualTo("0.35");
     }
 }
