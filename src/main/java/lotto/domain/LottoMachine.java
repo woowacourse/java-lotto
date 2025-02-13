@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 public class LottoMachine {
+
     private List<List<Integer>> lottoTickets = new ArrayList<>();
 
     public LottoMachine(LottoMoney lottoMoney) {
@@ -18,10 +19,12 @@ public class LottoMachine {
 
     private List<List<Integer>> generateLottoTickets(int ticketNumber) {
         List<List<Integer>> lottoTickets = new ArrayList<>();
+
         for (int i = 0; i < ticketNumber; i++) {
             List<Integer> lottoTicket = generateLottoTicket();
             lottoTickets.add(lottoTicket);
         }
+
         return lottoTickets;
     }
 
@@ -31,6 +34,7 @@ public class LottoMachine {
 
         while (lottoTicket.size() < LOTTO_NUMBER_SIZE) {
             int number = random.nextInt(LOTTO_NUMBER_MAX_RANGE) + 1;
+
             if (!lottoTicket.contains(number)) {
                 lottoTicket.add(number);
             }
