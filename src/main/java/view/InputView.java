@@ -25,17 +25,19 @@ public class InputView {
                     .map(Integer::parseInt)
                     .toList();
             validateWinningNumbers(winningNumbers);
+            validateWinningNumbersUnique(winningNumbers);
             return winningNumbers;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("당첨 번호는 숫자만 가능합니다.");
         }
     }
 
-    public static int inputBonusBall() {
+    public static int inputBonusBall(List<Integer> winningNumbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
             int bonusBall = Integer.parseInt(sc.nextLine());
             validateNumber(bonusBall);
+            validateBonusBallUnique(winningNumbers, bonusBall);
             return bonusBall;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("보너스 볼을 형식에 맞게 입력해주세요.");
@@ -50,7 +52,7 @@ public class InputView {
             }
             if (amount < LottoFactory.LOTTO_PRICE) {
                 throw new IllegalArgumentException(String.format("구입 금액은 %d원 이상부터 가능합니다.", LottoFactory.LOTTO_PRICE));
-                }
+            }
             return amount;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("구입 금액은 숫자만 입력 가능합니다.");
@@ -66,6 +68,18 @@ public class InputView {
     private static void validateNumber(int number) {
         if (number < 1 || number > 45) {
             throw new IllegalArgumentException("번호는 1 ~ 45만 입력 가능합니다.");
+        }
+    }
+
+    private static void validateWinningNumbersUnique(List<Integer> winningNumbers) {
+        if (winningNumbers.size() != winningNumbers.stream().distinct().count()) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+        }
+    }
+
+    private static void validateBonusBallUnique(List<Integer> winningNumbers, int bonusBall) {
+        if (winningNumbers.contains(bonusBall)) {
+            throw new IllegalArgumentException("보너스 볼은 로또 번호와 중복될 수 없습니다.");
         }
     }
 }
