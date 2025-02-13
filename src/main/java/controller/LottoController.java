@@ -35,6 +35,7 @@ public class LottoController {
     }
 
     public Purchase readPurchaseAmount() {
+        outputView.printPurchaseAmountInstruction();
         while (true) {
             try {
                 String purchaseAmountInput = inputView.readPurchaseAmount();
@@ -59,6 +60,7 @@ public class LottoController {
     }
 
     public WinningNumber readWinningNumber() {
+        outputView.printWinningNumbersInstruction();
         while (true) {
             try {
                 String winningNumbersInput = inputView.readWinningNumbers();
@@ -71,6 +73,7 @@ public class LottoController {
     }
 
     public BonusNumber readBonusNumber(WinningNumber winningNumber) {
+        outputView.printBonusNumbersInstruction();
         while (true) {
             try {
                 String bonusNumberInput = inputView.readBonusNumbers();
