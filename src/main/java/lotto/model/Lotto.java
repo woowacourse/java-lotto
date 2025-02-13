@@ -52,18 +52,9 @@ public class Lotto {
     }
 
     public int calculateMatchingCount(final Lotto otherLotto) {
-        int count = 0;
-        for (int number : otherLotto.numbers) {
-            count = getSameCount(number, count);
-        }
-        return count;
-    }
-
-    private int getSameCount(final int number, int count) {
-        if (this.has(number)) {
-            count++;
-        }
-        return count;
+        return (int) otherLotto.numbers.stream()
+                .filter(this::has)
+                .count();
     }
 
     public List<Integer> getNumbers() {
