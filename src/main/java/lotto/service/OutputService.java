@@ -20,5 +20,6 @@ public class OutputService {
             String lottoNumbers = lotto.getNumbers().toString();
             outputView.printLine(lottoNumbers);
         }
+        outputView.printBlankLine();
     }
 }
