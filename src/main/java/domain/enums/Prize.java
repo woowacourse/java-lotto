@@ -1,5 +1,7 @@
 package domain.enums;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public enum Prize {
@@ -30,22 +32,25 @@ public enum Prize {
     }
 
     public static Prize getPrizeOf(int matchedCount, boolean isBonusMatched) {
+        List<Optional<Prize>> foundPrizes = new ArrayList<>();
         for (Prize prize : Prize.values()) {
-            Optional<Prize> foundPrize = findPrize(matchedCount, isBonusMatched, prize);
-            if (foundPrize.isPresent()) {
-                return foundPrize.get();
-            }
+            foundPrizes.add(findPrize(matchedCount, isBonusMatched, prize));
         }
-        return Prize.EMPTY;
+
+        if (foundPrizes.stream().noneMatch(Optional::isPresent)) {
+            return Prize.EMPTY;
+        }
+
+        return foundPrizes.stream().filter(Optional::isPresent).findFirst().get().get();
     }
 
     private static Optional<Prize> findPrize(int matchedCount, boolean isBonusMatched, Prize prize) {
-        if (prize.matchedCount == matchedCount) {
-            if (prize.equals(Prize.THIRD) && isBonusMatched) {
-                return Optional.of(Prize.SECOND);
-            }
-            return Optional.of(prize);
+        if (prize.matchedCount != matchedCount) {
+            return Optional.empty();
         }
-        return Optional.empty();
+        if (isBonusMatched && prize.equals(Prize.THIRD)) {
+            return Optional.of(Prize.SECOND);
+        }
+        return Optional.of(prize);
     }
 }
