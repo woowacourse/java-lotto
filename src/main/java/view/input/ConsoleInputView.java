@@ -18,6 +18,7 @@ public class ConsoleInputView implements InputView {
     public int readPurchaseAmount() {
         System.out.println(OutputMessage.INPUT_PURCHASE_AMOUNT);
         final String input = scanner.nextLine();
+
         return inputParser.parsePurchaseAmount(input);
     }
 
@@ -25,6 +26,7 @@ public class ConsoleInputView implements InputView {
     public List<Integer> readWinningNumber() {
         System.out.println(OutputMessage.INPUT_WINNING_NUMBERS);
         final String input = scanner.nextLine();
+
         return inputParser.parseWinningNumbers(input);
     }
 
@@ -32,6 +34,7 @@ public class ConsoleInputView implements InputView {
     public int readBonusBall() {
         System.out.println(OutputMessage.INPUT_BONUS_NUMBER);
         final String input = scanner.nextLine();
+        
         return inputParser.parseBonusBall(input);
     }
 }

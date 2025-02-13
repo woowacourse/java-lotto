@@ -50,6 +50,7 @@ public class LottoController {
     private WinningNumbers inputWinningNumbers() {
         final List<Integer> winningNumber = inputView.readWinningNumber();
         final int bonusBall = inputView.readBonusBall();
+        
         return WinningNumbers.of(winningNumber, bonusBall);
     }
 

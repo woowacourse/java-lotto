@@ -29,6 +29,7 @@ public class WinningNumbers {
             .map(LottoNumber::new)
             .toList();
         final LottoNumber bonusBall = new LottoNumber(number);
+
         return new WinningNumbers(winningNumbers, bonusBall);
     }
 
@@ -61,6 +62,7 @@ public class WinningNumbers {
                 count++;
             }
         }
+        
         return count;
     }
 

@@ -32,15 +32,17 @@ public class WinningResult {
             final LottoRank lottoRank = LottoRank.of(lotto, winningNumbers);
             lottoRanks.put(lottoRank, lottoRanks.getOrDefault(lottoRank, 0) + 1);
         }
+
         return new WinningResult(lottoRanks);
     }
 
     private long calculateRevenue() {
         long revenue = 0;
         for (final Map.Entry<LottoRank, Integer> entry : lottoRanks.entrySet()) {
-            revenue += entry.getKey()
+            revenue += (long) entry.getKey()
                 .getPrizeMoney() * entry.getValue();
         }
+
         return revenue;
     }
 
@@ -49,6 +51,7 @@ public class WinningResult {
         for (final Map.Entry<LottoRank, Integer> entry : lottoRanks.entrySet()) {
             totalLottoCount += entry.getValue();
         }
+
         return totalLottoCount;
     }
 
@@ -63,6 +66,7 @@ public class WinningResult {
     public double calculateRateOfRevenue() {
         final long revenue = calculateRevenue();
         final long totalLottoPrice = calculateTotalLottoPrice();
+        
         return (double) revenue / totalLottoPrice;
     }
 
