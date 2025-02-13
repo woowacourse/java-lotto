@@ -1,5 +1,6 @@
 package domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -59,5 +60,16 @@ class LottoTest {
         assertThatThrownBy(() -> Lotto.of(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 1부터 45사이여야 합니다.");
+    }
+
+    @DisplayName("로또 객체 생성 시 숫자들을 정렬한다")
+    @Test
+    void createOrderedLotto() {
+        List<Integer> unorderedNumbers = Arrays.asList(43, 26, 1, 3, 5, 2);
+        Lotto lotto = Lotto.of(unorderedNumbers);
+
+        List<Integer> orderedNumbers = unorderedNumbers.stream().sorted().toList();
+        Lotto orderedLotto = Lotto.of(orderedNumbers);
+        assertThat(lotto.toString()).isEqualTo(orderedLotto.toString());
     }
 }

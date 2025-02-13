@@ -11,9 +11,9 @@ import java.util.Set;
 public class Lotto {
     private final List<Integer> numbers;
 
-    private Lotto(final List<Integer> numbers) {
+    private Lotto(List<Integer> numbers) {
         validate(numbers);
-        this.numbers = numbers;
+        this.numbers = numbers.stream().sorted().toList();
     }
 
     public static Lotto of(final List<Integer> numbers) {
@@ -39,5 +39,10 @@ public class Lotto {
 
     public boolean contains(final int number) {
         return numbers.contains(number);
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }
