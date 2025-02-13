@@ -3,6 +3,8 @@ package lotto.domain;
 import static lotto.common.exception.ErrorMessage.*;
 
 public class Amount {
+    private static final int LOTTO_PRIZE = 1000;
+
     private final int money;
 
     public Amount(int money) {
@@ -24,15 +26,15 @@ public class Amount {
     }
 
     private boolean isLessThousand(int money) {
-        return money < 1000;
+        return money < LOTTO_PRIZE;
     }
 
     private boolean isDivided(int money) {
-        return money % 1000 != 0;
+        return money % LOTTO_PRIZE != 0;
     }
 
     public int getAmount() {
-        return money / 1000;
+        return money / LOTTO_PRIZE;
     }
 
     public int getMoney() {

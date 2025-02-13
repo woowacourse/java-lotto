@@ -4,6 +4,7 @@ import static lotto.domain.MatchStatistics.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lotto.domain.Amount;
 import lotto.domain.MatchStatistics;
@@ -11,9 +12,10 @@ import lotto.dto.MatchCountDto;
 import lotto.dto.Profit;
 
 public class LottoService {
+    private final static double PROFIT_BENCHMARK = 1.0;
 
-    public HashMap<MatchStatistics, Integer> convertToMap(List<MatchCountDto> matchCount) {
-        HashMap<MatchStatistics, Integer> map = new HashMap<>();
+    public Map<MatchStatistics, Integer> convertToMap(List<MatchCountDto> matchCount) {
+        Map<MatchStatistics, Integer> map = new HashMap<>();
 
         for (MatchCountDto dto : matchCount) {
             MatchStatistics statistic = getMatchStatistics(dto.matchCount(), dto.bonus());
@@ -22,7 +24,7 @@ public class LottoService {
         return map;
     }
 
-    public Profit calculateProfit(HashMap<MatchStatistics, Integer> map, Amount amount) {
+    public Profit calculateProfit(Map<MatchStatistics, Integer> map, Amount amount) {
         int sum = 0;
 
         for (MatchStatistics statistics : map.keySet()) {
@@ -35,6 +37,6 @@ public class LottoService {
     }
 
     private boolean isProfit(double result) {
-        return result >= 1.0;
+        return result >= PROFIT_BENCHMARK;
     }
 }

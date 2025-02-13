@@ -8,6 +8,9 @@ public enum MatchStatistics {
     MATCH_SIX(6, 2000000000),
     NO_MATCH(0, 0);;
 
+    private final static String BONUS_OUTPUT = "%d개 일치, 보너스 볼 일치 (%d원)- ";
+    private final static String BASIC_OUTPUT = "%d개 일치 (%d원)- ";
+
     private final int number;
     private final int money;
 
@@ -22,16 +25,17 @@ public enum MatchStatistics {
 
     public String getMatchData() {
         if (this == MATCH_BONUS) {
-            return number + "개 일치, 보너스 볼 일치 (" + money + "원)- ";
+
+            return String.format(BONUS_OUTPUT, number, money);
         }
-        return number + "개 일치 (" + money + "원)- ";
+        return String.format(BASIC_OUTPUT, number, money);
     }
 
     public static MatchStatistics getMatchStatistics(int matchNumber, boolean bonus) {
         if (isMatchBonus(matchNumber, bonus)) {
             return MATCH_BONUS;
         }
-        //당첨 번호 개수  보너스 번호
+
         for (MatchStatistics statistics : values()) {
             if (statistics.number == matchNumber) {
                 return statistics;

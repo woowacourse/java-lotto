@@ -2,7 +2,7 @@ package lotto.view;
 
 import static lotto.domain.MatchStatistics.*;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import lotto.domain.MatchStatistics;
 import lotto.dto.Profit;
@@ -13,7 +13,7 @@ public class OutputView {
         System.out.println(output);
     }
 
-    public void printStatics(HashMap<MatchStatistics, Integer> map) {
+    public void printStatics(Map<MatchStatistics, Integer> map) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 

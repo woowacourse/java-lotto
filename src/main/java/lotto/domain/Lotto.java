@@ -66,7 +66,7 @@ public record Lotto(List<Integer> numbers) {
         return new MatchCountDto(count, isContainsBonus(bonus));
     }
 
-    private boolean isContainsBonus(int bonus) {
+    public boolean isContainsBonus(int bonus) {
         return numbers.contains(bonus);
     }
 

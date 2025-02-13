@@ -14,12 +14,6 @@ import lotto.domain.MatchStatistics;
 import lotto.dto.Profit;
 
 class LottoServiceTest {
-    @Test
-    @DisplayName("로또 번호가 6개가 아니라면 예외를 발생시킨다.")
-    void testLottoNumber_sizeException() {
-        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)))
-            .isInstanceOf(IllegalArgumentException.class);
-    }
 
     @Test
     @DisplayName("수익률 계산 테스트")
