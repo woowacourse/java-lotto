@@ -2,6 +2,7 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.tuple;
 
 import java.util.List;
 
@@ -41,7 +42,10 @@ class WinningLottoTest {
         Lottos lottos = new Lottos();
         lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 7)));
 
-        assertThat(winningLotto.calculateWinning(lottos)).isEqualTo(Rank.SECOND);
+        assertThat(winningLotto.calculateWinning(lottos)
+                .getResponses())
+                .extracting("matchingCount, hasBonus, winningCount")
+                .contains(tuple(5, true, 1));
     }
 
 }
