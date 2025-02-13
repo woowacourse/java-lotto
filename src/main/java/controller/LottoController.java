@@ -33,6 +33,8 @@ public class LottoController {
         LottoResult lottoResult = new LottoResult(lottos, winningLotto);
 
         outputView.printLottoResult(lottoResult.createResponse());
+        int totalPrice = lottoResult.calculateTotalPrice();
+        outputView.printROIResult(ticket.createROIResponse(totalPrice));
     }
 
     private void printTicketPurchaseAmount(Ticket ticket) {

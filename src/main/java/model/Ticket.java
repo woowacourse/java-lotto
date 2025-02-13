@@ -1,5 +1,6 @@
 package model;
 
+import dto.ROIResultResponse;
 import dto.TicketAmountResponse;
 
 import static utils.Validator.validateDivide;
@@ -23,5 +24,14 @@ public class Ticket {
 
     public TicketAmountResponse createResponse() {
         return new TicketAmountResponse(getTicketAmount());
+    }
+
+    public ROIResultResponse createROIResponse(int totalPrice) {
+        double ROI = calculateROI(totalPrice);
+        return new ROIResultResponse(ROI, Heuristic.determine(ROI));
+    }
+
+    private double calculateROI(int totalPrice) {
+        return Math.round(((double) totalPrice / purchaseMoney) * 100) / 100.0;
     }
 }

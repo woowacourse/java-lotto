@@ -2,6 +2,7 @@ package model;
 
 import dto.LottoResultDetailResponse;
 import dto.LottoResultsResponse;
+import dto.ROIResultResponse;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -36,5 +37,11 @@ public class LottoResult {
                                 (e1, e2) -> e1,
                                 LinkedHashMap::new
                 ));
+    }
+
+    public int calculateTotalPrice() {
+        return results.entrySet().stream()
+                .mapToInt(result -> result.getKey().getPrice() * result.getValue())
+                .sum();
     }
 }
