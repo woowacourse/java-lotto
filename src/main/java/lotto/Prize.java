@@ -1,12 +1,12 @@
 package lotto;
 
 public enum Prize {
-    FIRST(2000000000, 6),
-    SECOND(30000000, 5),
-    THIRD(1500000, 5),
-    FOURTH(50000, 4),
+    NONE(0, 0),
     FIFTH(5000, 3),
-    NONE(0, 0);
+    FOURTH(50000, 4),
+    THIRD(1500000, 5),
+    SECOND(30000000, 5),
+    FIRST(2000000000, 6);
 
     private final int winningAmount;
     private final int matchCount;
@@ -16,7 +16,7 @@ public enum Prize {
         this.matchCount = matchCount;
     }
 
-    private int getMatchCount() {
+    public int getMatchCount() {
         return matchCount;
     }
 

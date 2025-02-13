@@ -21,4 +21,8 @@ public class WinningStatistics {
         }
         return total;
     }
+
+    public int getPrizeCount(Prize prize) {
+        return winningStatistics.get(prize);
+    }
 }
