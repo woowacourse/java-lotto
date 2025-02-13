@@ -11,9 +11,19 @@ public class Lotto {
         this.numbers = makeNumber(values);
     }
 
+    public int countMatchingLottoNumber(final Lotto lotto) {
+        return (int) numbers.stream()
+                .filter(lotto::contains)
+                .count();
+    }
+
     boolean isDuplicateNumber(final LottoNumber inputNumber) {
         return numbers.stream()
                 .anyMatch(number -> number.equals(inputNumber));
+    }
+
+    boolean contains(final LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     private List<LottoNumber> makeNumber(final List<Integer> values) {
