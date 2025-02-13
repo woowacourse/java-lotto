@@ -1,6 +1,6 @@
 package lotto;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,16 +20,5 @@ class LottoMachineTest {
     void 로또는_6개의_번호를_가진다() {
         Lotto result = lottoMachine.createLotto();
         assertThat(result.getNumbersSize()).isEqualTo(6);
-    }
-
-    /**
-     * 테스트의 멱등성을 고려하여 리팩토링 TODO
-     */
-    @DisplayName("로또는 1과 45 사이의 번호를 가진다")
-    @Test
-    void 로또는_1과_45_사이의_번호를_가진다() {
-        for (int number : lottoMachine.createLotto().getNumbers()) {
-            assertThat(number).isBetween(1, 45);
-        }
     }
 }

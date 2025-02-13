@@ -1,8 +1,7 @@
 package lotto;
 
-import static lotto.Lotto.MAX_LOTTO_NUMBER;
-import static lotto.Lotto.MIN_LOTTO_NUMBER;
 import static lotto.Lotto.LOTTO_SIZE;
+import static lotto.Lotto.validateLottoNumber;
 
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -70,13 +69,6 @@ public class Application {
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getBonusNumber(winningNumbers);
-        }
-    }
-
-    private static void validateLottoNumber(final int lottoNumber) {
-        if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(
-                    "로또 번호는 %d ~ %d 사이여야 합니다.".formatted(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
         }
     }
 }
