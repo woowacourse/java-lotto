@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.IntStream;
 
 import static lotto.constant.ErrorMessage.DUPLICATE_LOTTO_NUMBER;
 import static lotto.constant.ErrorMessage.INVALID_LOTTO_NUMBER_COUNT;
@@ -25,6 +26,13 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
+        validate(numbers);
+        this.numbers = numbers.stream()
+            .map(LottoNumber::new)
+            .toList();
+    }
+
+    private void validate(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_COUNT.getMessage());
         }
@@ -32,20 +40,12 @@ public class Lotto {
         if (numbers.stream().distinct().count() != numbers.size()) {
             throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBER.getMessage());
         }
-
-        this.numbers = numbers.stream()
-            .map(LottoNumber::new)
-            .toList();
     }
 
     public int findMatchCount(Lotto lotto) {
-        int count = 0;
-        for (int i = 0; i < numbers.size(); i++) {
-            if (lotto.numbers.contains(numbers.get(i))) {
-                count++;
-            }
-        }
-        return count;
+        return (int) IntStream.range(0, numbers.size())
+            .filter(i -> lotto.numbers.contains(numbers.get(i)))
+            .count();
     }
 
     public boolean containsNumber(LottoNumber number) {

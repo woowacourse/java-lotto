@@ -1,6 +1,8 @@
 package lotto.dto.request;
 
-import java.util.ArrayList;
+import lotto.dto.ConvertUtil;
+
+import java.util.Arrays;
 import java.util.List;
 
 import static lotto.dto.ConvertUtil.convertToNumber;
@@ -18,10 +20,8 @@ public record WinningBallsRequest(
 
     private static List<Integer> convertToList(String winningNumbers) {
         String[] split = winningNumbers.split(DELIMITER);
-        List<Integer> numbers = new ArrayList<>();
-        for (String data : split) {
-            numbers.add(convertToNumber(data));
-        }
-        return numbers;
+        return Arrays.stream(split)
+            .map(ConvertUtil::convertToNumber)
+            .toList();
     }
 }
