@@ -1,18 +1,15 @@
-package config;
-
 import controller.Controller;
+import model.lotto.RandomNumberGenerator;
 import service.LottoMaker;
-import service.LottoNumberGenerator;
 import view.InputView;
 import view.OutputView;
 
-public class LottoConfig {
-
+public class AppConfig {
     private Controller controller;
     private InputView inputView;
     private OutputView outputView;
     private LottoMaker lottoMaker;
-    private LottoNumberGenerator lottoNumberGenerator;
+    private RandomNumberGenerator randomNumberGenerator;
 
     public Controller controller() {
         if (this.controller == null) {
@@ -42,10 +39,10 @@ public class LottoConfig {
         return this.lottoMaker;
     }
 
-    private LottoNumberGenerator lottoNumberGenerator() {
-        if (this.lottoNumberGenerator == null) {
-            this.lottoNumberGenerator = new LottoNumberGenerator();
+    private RandomNumberGenerator lottoNumberGenerator() {
+        if (this.randomNumberGenerator == null) {
+            this.randomNumberGenerator = new RandomNumberGenerator();
         }
-        return this.lottoNumberGenerator;
+        return this.randomNumberGenerator;
     }
 }

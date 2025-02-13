@@ -1,6 +1,6 @@
-package domain;
+package model;
 
-import constant.LottoConstants;
+import constant.NumberConstants;
 import java.util.Arrays;
 import java.util.EnumMap;
 
@@ -22,7 +22,7 @@ public class PrizeResult {
     }
 
     public double calculateProfit() {
-        int money = lottoCount * LottoConstants.LOTTO_PRICE;
+        int money = lottoCount * NumberConstants.LOTTO_PRICE;
         return (double) calculatePrizeSum() / money;
     }
 
@@ -31,7 +31,7 @@ public class PrizeResult {
         StringBuilder sb = new StringBuilder();
         Arrays.stream(Rank.values())
                 .filter(rank -> !isMiss(rank))
-                .forEach(rank -> sb.append(rank.getMsg()).append(result.getOrDefault(rank, 0)).append("개\n"));
+                .forEach(rank -> sb.append(rank.getMessages()).append(result.getOrDefault(rank, 0)).append("개\n"));
         return sb.toString();
     }
 

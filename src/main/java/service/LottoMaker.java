@@ -1,20 +1,20 @@
 package service;
 
-import domain.Lotto;
 import java.util.Collections;
 import java.util.List;
+import model.lotto.Lotto;
+import model.lotto.RandomNumberGenerator;
 
 public class LottoMaker {
+    private final RandomNumberGenerator randomNumberGenerator;
 
-    private final LottoNumberGenerator lottoNumberGenerator;
-
-    public LottoMaker(LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoNumberGenerator = lottoNumberGenerator;
+    public LottoMaker(RandomNumberGenerator randomNumberGenerator) {
+        this.randomNumberGenerator = randomNumberGenerator;
     }
 
-    public Lotto createLotto() {
-        List<Integer> generate = lottoNumberGenerator.generateLottoNumbers();
-        Collections.sort(generate);
-        return new Lotto(generate);
+    public Lotto generateLotto() {
+        List<Integer> generateNumber = randomNumberGenerator.generateLottoNumbers();
+        Collections.sort(generateNumber);
+        return new Lotto(generateNumber);
     }
 }

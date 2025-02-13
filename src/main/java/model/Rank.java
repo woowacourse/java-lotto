@@ -1,4 +1,4 @@
-package domain;
+package model;
 
 import java.util.Arrays;
 
@@ -10,20 +10,20 @@ public enum Rank {
     RANK2(5, true, 30000000, "5개 일치, 보너스 볼 일치(30000000원)- "),
     RANK1(6, false, 2000000000, "6개 일치 (2000000000원)- ");
 
-    private int rank;
+    private int matchCount;
     private boolean bonus;
     private int price;
-    private String msg;
+    private String messages;
 
-    Rank(int rank, boolean bonus, int price, String msg) {
-        this.rank = rank;
+    Rank(int matchCount, boolean bonus, int price, String messages) {
+        this.matchCount = matchCount;
         this.bonus = bonus;
         this.price = price;
-        this.msg = msg;
+        this.messages = messages;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessages() {
+        return messages;
     }
 
     public int getPrice() {
@@ -32,10 +32,10 @@ public enum Rank {
 
     public boolean match(int match, boolean bonus) {
         if (this == RANK2 || this == RANK3) {
-            return this.rank == match && this.bonus == bonus;
+            return this.matchCount == match && this.bonus == bonus;
         }
 
-        return this.rank == match;
+        return this.matchCount == match;
     }
 
     public static Rank judge(int matchRank, boolean bonus) {

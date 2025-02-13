@@ -1,29 +1,29 @@
 package service;
 
-import domain.Lottos;
-import domain.PrizeResult;
-import domain.Rank;
-import domain.WinningLotto;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Set;
+import model.LottoWinningNumbers;
+import model.OwnedLotto;
+import model.PrizeResult;
+import model.Rank;
 
 public class Judgement {
 
-    public static PrizeResult judge(Lottos lottos, WinningLotto winningLotto) {
+    public static PrizeResult judge(OwnedLotto ownedLotto, LottoWinningNumbers lottoWinningNumbers) {
         EnumMap<Rank, Integer> prizeCounts = new EnumMap<>(Rank.class);
-        for (int idx = 0; idx < lottos.size(); idx++) {
-            Set<Integer> lottoNumbers = new HashSet<>(lottos.getLottoByIndex(idx).getNumbers());
-            Set<Integer> WinningLottoNumbers = new HashSet<>(winningLotto.getNumbers());
+        for (int idx = 0; idx < ownedLotto.size(); idx++) {
+            Set<Integer> lottoNumbers = new HashSet<>(ownedLotto.getLottoByIndex(idx).getNumbers());
+            Set<Integer> WinningLottoNumbers = new HashSet<>(lottoWinningNumbers.getNumbers());
             lottoNumbers.retainAll(WinningLottoNumbers);
 
-            boolean bonus = lottos.containByIndex(idx, winningLotto.getBonusNumber());
+            boolean bonus = ownedLotto.containByIndex(idx, lottoWinningNumbers.getBonusNumber());
             int match = lottoNumbers.size();
 
             Rank result = Rank.judge(match, bonus);
             prizeCounts.put(result, prizeCounts.getOrDefault(result, 0) + 1);
         }
 
-        return new PrizeResult(prizeCounts, lottos.size());
+        return new PrizeResult(prizeCounts, ownedLotto.size());
     }
 }

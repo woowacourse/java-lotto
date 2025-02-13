@@ -1,7 +1,7 @@
 package view;
 
-import domain.Lottos;
-import domain.PrizeResult;
+import model.OwnedLotto;
+import model.PrizeResult;
 
 public class OutputView {
     public static final String SHOW_BUY_COUNT = "%d개를 구매했습니다.\n";
@@ -21,9 +21,9 @@ public class OutputView {
         System.out.println(SHOW_DELIMITER);
     }
 
-    public void displayLottoNumbers(Lottos lottos) {
-        System.out.printf(SHOW_BUY_COUNT, lottos.size());
-        System.out.printf("%s", lottos.toString());
+    public void displayLottoNumbers(OwnedLotto ownedLotto) {
+        System.out.printf(SHOW_BUY_COUNT, ownedLotto.size());
+        System.out.printf("%s", ownedLotto.toString());
         displaySpacing();
     }
 

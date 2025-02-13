@@ -1,13 +1,12 @@
-package domain;
+package model;
 
 import java.util.List;
 
-public class WinningLotto {
-
+public class LottoWinningNumbers {
     private final List<Integer> numbers;
     private final int bonusNumber;
 
-    public WinningLotto(List<Integer> numbers, int bonusNumber) {
+    public LottoWinningNumbers(List<Integer> numbers, int bonusNumber) {
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
     }

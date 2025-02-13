@@ -1,15 +1,15 @@
 package controller;
 
-import domain.Lotto;
-import domain.Lottos;
-import domain.PrizeResult;
-import domain.WinningLotto;
 import java.util.ArrayList;
 import java.util.List;
+import model.LottoWinningNumbers;
+import model.OwnedLotto;
+import model.PrizeResult;
+import model.lotto.Lotto;
 import service.Judgement;
 import service.LottoMaker;
 import service.parser.BonusNumberParser;
-import service.parser.MoneyParser;
+import service.parser.BudgetParser;
 import service.parser.WinningNumberParser;
 import view.InputView;
 import view.OutputView;
@@ -26,36 +26,36 @@ public class Controller {
     }
 
     public void start() {
-        int lottoCount = inputLottoMoney();
+        int lottoCount = inputResponseForBudget();
 
-        Lottos lottos = buyLotto(lottoCount);
-        outputView.displayLottoNumbers(lottos);
+        OwnedLotto ownedLotto = buyLotto(lottoCount);
+        outputView.displayLottoNumbers(ownedLotto);
 
-        List<Integer> winningNumbers = inputWinningNumber();
-        int bonusNumber = inputBonusNumber(winningNumbers);
+        List<Integer> winningNumbers = inputResponseForWinningNumber();
+        int bonusNumber = inputResponseForBonusNumber(winningNumbers);
 
-        PrizeResult prizeResult = Judgement.judge(lottos, new WinningLotto(winningNumbers, bonusNumber));
+        PrizeResult prizeResult = Judgement.judge(ownedLotto, new LottoWinningNumbers(winningNumbers, bonusNumber));
         outputView.displayPrizeSummary(prizeResult);
     }
 
-    private Lottos buyLotto(int count) {
+    private OwnedLotto buyLotto(int count) {
         ArrayList<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(lottoMaker.createLotto());
+            lottos.add(lottoMaker.generateLotto());
         }
 
-        return new Lottos(lottos);
+        return new OwnedLotto(lottos);
     }
 
-    private int inputLottoMoney() {
-        return MoneyParser.parseLottoCount(inputView.askForNormal());
+    private int inputResponseForBudget() {
+        return BudgetParser.parseLottoCount(inputView.askForBudget());
     }
 
-    private List<Integer> inputWinningNumber() {
-        return WinningNumberParser.parseWinningNumbers(inputView.askWinningNumber());
+    private List<Integer> inputResponseForWinningNumber() {
+        return WinningNumberParser.parseWinningNumbers(inputView.askForWinningNumber());
     }
 
-    private int inputBonusNumber(List<Integer> winningNumbers) {
-        return BonusNumberParser.parseBonusNumber(winningNumbers, inputView.askBonusNumber());
+    private int inputResponseForBonusNumber(List<Integer> winningNumbers) {
+        return BonusNumberParser.parseBonusNumber(winningNumbers, inputView.askForBonusNumber());
     }
 }
