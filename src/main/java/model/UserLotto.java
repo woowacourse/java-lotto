@@ -18,7 +18,7 @@ public class UserLotto {
     public List<LottoDto> getLottosDto() {
         List<LottoDto> lottosDto = new ArrayList<>();
         for(Lotto lotto : lottos) {
-            lottosDto.add(LottoDto.from(lotto));
+            lottosDto.add(LottoDto.getSortedLottoDto(lotto));
         }
         return lottosDto;
     }

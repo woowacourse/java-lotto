@@ -10,6 +10,10 @@ public record LottoDto(
 ) {
 
     public static LottoDto from(Lotto lotto) {
+        return new LottoDto(lotto.getLotto());
+    }
+
+    public static LottoDto getSortedLottoDto(Lotto lotto) {
         List<Integer> lottoNumbers = new ArrayList<>(lotto.getLotto());
         Collections.sort(lottoNumbers);
         return new LottoDto(lottoNumbers);
