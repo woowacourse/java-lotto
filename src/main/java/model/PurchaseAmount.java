@@ -23,4 +23,8 @@ public class PurchaseAmount {
             throw new IllegalArgumentException(ErrorType.PURCHASE_AMOUNT_NOT_DIVIDE_LOTTO_PRICE.getMessage());
         }
     }
+
+    public int calculateLottoCount() {
+        return money / Lotto.LOTTO_PRICE;
+    }
 }

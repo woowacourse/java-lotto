@@ -4,6 +4,7 @@ import constans.ErrorType;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -15,6 +16,12 @@ public class Lotto {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
         this.lottoNumbers = List.copyOf(lottoNumbers);
+    }
+
+    public static Lotto from(final List<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers.stream()
+                .map(num -> new LottoNumber(num))
+                .collect(Collectors.toList()));
     }
 
     private void validateSize(final List<LottoNumber> winningNumbers) {
