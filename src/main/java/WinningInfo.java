@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 public enum WinningInfo {
 
@@ -8,7 +10,6 @@ public enum WinningInfo {
     FOURTH_PRIZE(4, false, 50_000),
     FIFTH_PRIZE(3, false, 5_000),
     NONE(0, false, 0);
-
 
     private final int matchedNumberCount;
     private final boolean isBonusMatched;
@@ -26,6 +27,20 @@ public enum WinningInfo {
                         && value.isBonusMatched() == isBonusMatched)
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    public static List<WinningInfo> getSortedValues() {
+        return Arrays.stream(values())
+                .filter(v -> v != WinningInfo.NONE)
+                .sorted(Comparator.comparing(WinningInfo::getPrice))
+                .toList();
+    }
+
+    public String getInfo() {
+        if (this == WinningInfo.SECOND_PRIZE) {
+            return String.format("%d개 일치, 보너스 볼 일치 - (%d원)", matchedNumberCount, price);
+        }
+        return String.format("%d개 일치 - (%d원)", matchedNumberCount, price);
     }
 
     public int getMatchedNumberCount() {
