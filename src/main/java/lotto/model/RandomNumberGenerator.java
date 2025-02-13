@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomNumberGenerator {
+    private RandomNumberGenerator() {
+    }
 
     public static List<Integer> generate() {
         Random random = new Random();
