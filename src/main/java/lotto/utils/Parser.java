@@ -1,6 +1,9 @@
 package lotto.utils;
 
+import static lotto.exception.ErrorMessage.INVALID_INPUT;
+
 import java.util.List;
+import lotto.exception.LottoException;
 
 public class Parser {
 
@@ -9,7 +12,7 @@ public class Parser {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력값 입니다.");
+            throw new LottoException(INVALID_INPUT);
         }
     }
 
@@ -17,7 +20,7 @@ public class Parser {
         try {
             return input.stream().map(Parser::parseToInteger).toList();
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력값 입니다.");
+            throw new LottoException(INVALID_INPUT);
         }
     }
 }

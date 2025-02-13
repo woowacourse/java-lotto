@@ -1,7 +1,13 @@
 package lotto.domain;
 
+import static lotto.exception.ErrorMessage.MUST_BE_DIVIDE_BY_THOUSAND;
+import static lotto.exception.ErrorMessage.NOT_ALLOW_NEGATIVE;
+
+import lotto.exception.LottoException;
+
 public class AmountPaid {
 
+    private final int LOTTO_PRICE = 1000;
     private final int amount;
 
     public AmountPaid(int amount) {
@@ -15,19 +21,19 @@ public class AmountPaid {
     }
 
     private void validateDivideByLottoPrice() {
-        if (amount % 1000 != 0) {
-            throw new IllegalArgumentException("[ERROR] 금액은 1000으로 나누어 떨어져야 합니다.");
+        if (amount % LOTTO_PRICE != 0) {
+            throw new LottoException(MUST_BE_DIVIDE_BY_THOUSAND);
         }
     }
 
     private void validateNegativeValue() {
         if (amount < 0) {
-            throw new IllegalArgumentException("[ERROR] 음수는 입력할 수 없습니다.");
+            throw new LottoException(NOT_ALLOW_NEGATIVE);
         }
     }
 
     public int getLottoQuantity() {
-        return amount / 1000;
+        return amount / LOTTO_PRICE;
     }
 
 }

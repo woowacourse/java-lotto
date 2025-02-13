@@ -1,11 +1,19 @@
 package lotto.domain;
 
+import static lotto.exception.ErrorMessage.MUST_NOT_BE_DUPLICATED;
+import static lotto.exception.ErrorMessage.OUT_OF_RANGE;
+import static lotto.exception.ErrorMessage.SIZE_ERROR;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.exception.LottoException;
 
 public class Lotto {
 
+    private final int MIN_NUMBER = 1;
+    private final int MAX_NUMBER = 45;
+    private final int LOTTO_SIZE = 6;
     private final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
@@ -18,22 +26,22 @@ public class Lotto {
 
     private void validateNumberRange() {
         for (Integer number : lottoNumbers) {
-            if (number < 1 || number > 45) {
-                throw new IllegalArgumentException("[ERROR] 범위를 벗어나는 숫자입니다.");
+            if (number < MIN_NUMBER || number > MAX_NUMBER) {
+                throw new LottoException(OUT_OF_RANGE);
             }
         }
     }
 
     private void validateDuplicateNumber() {
         Set<Integer> set = new HashSet<>(lottoNumbers);
-        if (set.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복될 수 없습니다.");
+        if (set.size() != LOTTO_SIZE) {
+            throw new LottoException(MUST_NOT_BE_DUPLICATED);
         }
     }
 
     private void validateLottoSize() {
-        if (lottoNumbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또의 사이즈가 일치하지 않습니다.");
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new LottoException(SIZE_ERROR);
         }
     }
 

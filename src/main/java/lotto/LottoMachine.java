@@ -7,6 +7,7 @@ import lotto.domain.AmountPaid;
 import lotto.domain.LottoBundle;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
+import lotto.exception.LottoException;
 import lotto.service.LottoService;
 import lotto.utils.Parser;
 import lotto.view.InputView;
@@ -65,7 +66,7 @@ public class LottoMachine {
         while (true) {
             try {
                 return supplier.get();
-            } catch (IllegalArgumentException e) {
+            } catch (LottoException e) {
                 outputView.errorMessagePrint(e.getMessage());
             }
         }

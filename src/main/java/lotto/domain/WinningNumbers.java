@@ -1,11 +1,19 @@
 package lotto.domain;
 
+import static lotto.exception.ErrorMessage.MUST_NOT_BE_DUPLICATED;
+import static lotto.exception.ErrorMessage.OUT_OF_RANGE;
+import static lotto.exception.ErrorMessage.SIZE_ERROR;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.exception.LottoException;
 
 public class WinningNumbers {
 
+    private final int MIN_NUMBER = 1;
+    private final int MAX_NUMBER = 45;
+    private final int LOTTO_SIZE = 6;
     private final List<Integer> winningNumbers;
     private final int bonusNumber;
 
@@ -21,34 +29,34 @@ public class WinningNumbers {
 
     private void validateWinningNumberRange() {
         for (Integer winningNumber : winningNumbers) {
-            if (winningNumber < 1 || winningNumber > 45) {
-                throw new IllegalArgumentException("[ERROR] 범위를 벗어나는 숫자입니다.");
+            if (winningNumber < MIN_NUMBER || winningNumber > MAX_NUMBER) {
+                throw new LottoException(OUT_OF_RANGE);
             }
         }
     }
 
     private void validateBonusNumberRange() {
-        if (bonusNumber < 1 || bonusNumber > 45) {
-            throw new IllegalArgumentException("[ERROR] 범위를 벗어나는 숫자입니다.");
+        if (bonusNumber < MIN_NUMBER || bonusNumber > MAX_NUMBER) {
+            throw new LottoException(OUT_OF_RANGE);
         }
     }
 
     private void validateDuplicateWinningNumber() {
         Set<Integer> set = new HashSet<>(winningNumbers);
-        if (set.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 중복될 수 없습니다.");
+        if (set.size() != LOTTO_SIZE) {
+            throw new LottoException(MUST_NOT_BE_DUPLICATED);
         }
     }
 
     private void validateWinningNumberSize() {
-        if (winningNumbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 올바른 당첨 번호 갯수를 입력해 주세요.");
+        if (winningNumbers.size() != LOTTO_SIZE) {
+            throw new LottoException(SIZE_ERROR);
         }
     }
 
     private void validateExistBonusNumber() {
         if (winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+            throw new LottoException(MUST_NOT_BE_DUPLICATED);
         }
     }
 
