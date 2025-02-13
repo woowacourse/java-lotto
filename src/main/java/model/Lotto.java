@@ -1,27 +1,35 @@
 package model;
 
+import static model.ExceptionMessage.INVALID_LOTTO_RANGE;
+import static model.ExceptionMessage.INVALID_LOTTO_SIZE;
+import static model.ExceptionMessage.INVALID_LOTTO_TYPE;
+import static model.ExceptionMessage.LOTTO_DUPLICATE;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 public class Lotto {
 
-    private List<Integer> numbers;
+    private static final String SEPARATOR = ", ";
+    private static final Integer LOTTO_SIZE = 6;
+    private static final Integer LOTTO_MIN_RANGE = 1;
+    private static final Integer LOTTO_MAX_RANGE = 45;
+
+    private final List<Integer> numbers;
 
     public static Lotto of(final String input) { // "1, 2, 3, 4, 5, 6"
-        String[] split = input.split(", ");
-        List<String> splitList = List.of(split);
+        String[] splitInputs = input.split(SEPARATOR);
+        List<String> parsedInputs = List.of(splitInputs);
 
-        List<Integer> parsedInput = new ArrayList<>();
-        for (int i = 0; i < splitList.size(); i++) {
-            validateInteger(splitList.get(i));
-            parsedInput.add(Integer.parseInt(splitList.get(i)));
-        }
+        List<Integer> numbers = new ArrayList<>();
+        parsedInputs.forEach(parsedInput -> {
+            validateInteger(parsedInput);
+            numbers.add(Integer.parseInt(parsedInput));
+        });
 
-        if (parsedInput.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 한다.");
-        }
-        return new Lotto(parsedInput);
+        validateSize(numbers);
+        return new Lotto(numbers);
     }
 
     public Lotto(final List<Integer> numbers) {
@@ -30,18 +38,25 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    private void validateDuplicate(List<Integer> inputs) {
-        HashSet<Integer> set = new HashSet<>(inputs);
-        if (inputs.size() != set.size()) {
-            throw new IllegalArgumentException("로또 번호는 중복되지 않아야 한다.");
+    private static void validateSize(final List<Integer> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(INVALID_LOTTO_SIZE.getMessage(LOTTO_SIZE));
         }
     }
 
-    private void validateRange(List<Integer> inputs) {
-        for (int i = 0; i < inputs.size(); i++) {
-            if (1 > inputs.get(i) || inputs.get(i) > 45) {
-                throw new IllegalArgumentException("로또 번호는 1부터 45사이여야 한다.");
-            }
+    private void validateRange(final List<Integer> inputs) {
+        inputs.stream()
+                .filter(input -> LOTTO_MIN_RANGE > input || input > LOTTO_MAX_RANGE)
+                .forEach(input -> {
+                    throw new IllegalArgumentException(
+                            INVALID_LOTTO_RANGE.getMessage(LOTTO_MIN_RANGE, LOTTO_MAX_RANGE));
+                });
+    }
+
+    private void validateDuplicate(final List<Integer> inputs) {
+        HashSet<Integer> set = new HashSet<>(inputs);
+        if (inputs.size() != set.size()) {
+            throw new IllegalArgumentException(LOTTO_DUPLICATE.getMessage());
         }
     }
 
@@ -49,7 +64,7 @@ public class Lotto {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("로또 번호는 숫자여야 합니다");
+            throw new IllegalArgumentException(INVALID_LOTTO_TYPE.getMessage());
         }
     }
 
