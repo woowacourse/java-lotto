@@ -8,16 +8,18 @@ public class WinningNumbers {
 
     public WinningNumbers(Lotto lotto, int bonusNumber) {
         LottoNumber generatedBonusNumber = new LottoNumber(bonusNumber);
-        if (lotto.containsNumber(generatedBonusNumber)) {
-            throw new IllegalArgumentException(WINNING_NUMBERS_CONTAIN_BONUS_NUMBER.getMessage());
-        }
+        validateWinningNumbersContainBonusNumber(lotto, generatedBonusNumber);
         this.winningLotto = lotto;
         this.bonusNumber = generatedBonusNumber;
     }
 
+    private static void validateWinningNumbersContainBonusNumber(Lotto lotto, LottoNumber generatedBonusNumber) {
+        if (lotto.containsNumber(generatedBonusNumber)) {
+            throw new IllegalArgumentException(WINNING_NUMBERS_CONTAIN_BONUS_NUMBER.getMessage());
+        }
+    }
+
     public Rank getRank(Lotto lotto) {
-        int matchCount = lotto.findMatchCount(winningLotto);
-        boolean matchBonus = lotto.containsNumber(bonusNumber);
-        return Rank.of(matchCount, matchBonus);
+        return Rank.of(lotto.findMatchCount(winningLotto), lotto.containsNumber(bonusNumber));
     }
 }
