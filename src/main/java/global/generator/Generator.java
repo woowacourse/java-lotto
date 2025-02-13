@@ -1,4 +1,4 @@
-package domain.generator;
+package global.generator;
 
 import java.util.List;
 

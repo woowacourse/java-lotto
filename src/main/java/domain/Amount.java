@@ -1,6 +1,6 @@
 package domain;
 
-import exception.ExceptionMessage;
+import global.exception.ExceptionMessage;
 
 public class Amount {
     public static final int LOTTO_PRICE = 1000;

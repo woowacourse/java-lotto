@@ -1,7 +1,7 @@
 package domain;
 
 import domain.dto.GetLottoDto;
-import exception.ExceptionMessage;
+import global.exception.ExceptionMessage;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package exception;
+package global.exception;
 
 public enum ExceptionMessage {
     INVALID_POSITIVE("구매 금액은 양수여야 합니다."),

@@ -5,7 +5,7 @@ import domain.Lottos;
 import domain.LottosFactory;
 import domain.WinningLotto;
 import domain.dto.GetResultDto;
-import domain.generator.RandomGenerator;
+import global.generator.RandomGenerator;
 import view.InputView;
 import view.OutputView;
 

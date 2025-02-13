@@ -1,6 +1,6 @@
 package domain;
 
-import domain.generator.Generator;
+import global.generator.Generator;
 
 public class LottosFactory {
 
