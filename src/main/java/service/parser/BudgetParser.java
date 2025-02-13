@@ -1,8 +1,7 @@
 package service.parser;
 
-import static constant.NumberConstants.LOTTO_MAX_PRICE;
-import static constant.NumberConstants.LOTTO_PRICE;
-import static constant.RegexConstants.NUMBER_ONLY_REGEX;
+import static common.constant.NumberConstants.LOTTO_MAX_PRICE;
+import static common.constant.NumberConstants.LOTTO_PRICE;
 
 import validator.ErrorMessages;
 import validator.Validator;
@@ -11,7 +10,7 @@ public class BudgetParser {
 
     public static int parseLottoCount(String input) {
         Validator.validateEmptyInput(input);
-        Validator.validateInvalidForm(input, NUMBER_ONLY_REGEX, ErrorMessages.NOT_NUMBER.getMessage());
+        Validator.validateNumber(input);
         int money = Integer.parseInt(input);
 
         validateMoneyOutOfRange(money);

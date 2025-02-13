@@ -1,6 +1,6 @@
 package model;
 
-import constant.NumberConstants;
+import common.constant.NumberConstants;
 import java.util.Arrays;
 import java.util.EnumMap;
 

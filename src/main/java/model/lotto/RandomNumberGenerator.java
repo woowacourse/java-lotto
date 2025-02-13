@@ -1,9 +1,9 @@
 package model.lotto;
 
-import static constant.NumberConstants.LOTTO_NUMBER_END;
-import static constant.NumberConstants.LOTTO_NUMBER_START;
+import static common.constant.NumberConstants.LOTTO_NUMBER_END;
+import static common.constant.NumberConstants.LOTTO_NUMBER_START;
 
-import constant.NumberConstants;
+import common.constant.NumberConstants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

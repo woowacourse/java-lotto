@@ -1,4 +1,4 @@
-package constant;
+package common.constant;
 
 public class NumberConstants {
     public static final int LOTTO_PRICE = 1000;
