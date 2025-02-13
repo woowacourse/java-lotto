@@ -13,6 +13,13 @@ public class InputView {
         return input;
     }
 
+    public String getWinningNumberInput() {
+        String input = getInput();
+        inputValidator.validateWinningNumber(input);
+
+        return input;
+    }
+
     private String getInput() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();

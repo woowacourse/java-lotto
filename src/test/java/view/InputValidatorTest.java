@@ -1,0 +1,36 @@
+package view;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+class InputValidatorTest {
+    InputValidator inputValidator;
+
+    @BeforeEach
+    void setUp() {
+        inputValidator = new InputValidator();
+    }
+
+    @DisplayName("구매금액이 1,000원 단위 숫자가 아니라면 예외를 발생시킨다")
+    @ParameterizedTest
+    @ValueSource(strings = {"1100", "900", "1000원"})
+    void purchaseAmountUnitTest(String purchaseAmount) {
+        assertThatThrownBy(() -> inputValidator.validatePurchaseAmount(purchaseAmount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("당첨번호가 콤마로 구분한 6개의 요소가 아니라면 예외를 발생시킨다")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5,6,7", "1,2,3", "1.2.3.4.5.6"})
+    void winningNumberSizeTest(String winningNumber) {
+        assertThatThrownBy(() -> inputValidator.validateWinningNumber(winningNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+}
