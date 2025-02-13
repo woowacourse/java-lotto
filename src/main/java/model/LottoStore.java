@@ -19,8 +19,8 @@ public class LottoStore {
     public List<LottoTicket> purchase(final int paidAmount) {
         validateAmountUnit(paidAmount);
 
-        int purchaseTicketAmount = paidAmount / LOTTO_PRICE;
-        return IntStream.range(0, purchaseTicketAmount)
+        int purchasedTicketAmount = paidAmount / LOTTO_PRICE;
+        return IntStream.range(0, purchasedTicketAmount)
                 .mapToObj(count -> new LottoTicket(lottoNumberGenerator.generate()))
                 .toList();
     }

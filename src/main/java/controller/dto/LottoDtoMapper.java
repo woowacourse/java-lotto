@@ -8,7 +8,7 @@ import model.WinningLotto;
 
 public class LottoDtoMapper {
 
-    public List<LottoTicketResponse> toLottoTicketResponse(List<LottoTicket> lottoTickets) {
+    public List<LottoTicketResponse> toLottoTicketResponses(List<LottoTicket> lottoTickets) {
         return lottoTickets.stream()
                 .map(ticket -> LottoTicketResponse.from(ticket.numbers()))
                 .toList();

@@ -26,8 +26,8 @@ public class LottoConsoleView {
         return paidAmount;
     }
 
-    public void printPurchasedTicketAmount(int purchaseTicketAmount) {
-        outputView.printPurchasedTicketAmount(purchaseTicketAmount);
+    public void printPurchasedTicketAmount(int purchasedTicketAmount) {
+        outputView.printPurchasedTicketAmount(purchasedTicketAmount);
     }
 
     public void printPurchasedLotto(List<LottoTicketResponse> lottoTicketResponses) {

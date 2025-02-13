@@ -8,8 +8,8 @@ import java.util.List;
 
 public class OutputView {
 
-    public void printPurchasedTicketAmount(int purchaseTicketAmount) {
-        System.out.printf("%d개를 구매했습니다.\n", purchaseTicketAmount);
+    public void printPurchasedTicketAmount(int purchasedTicketAmount) {
+        System.out.printf("%d개를 구매했습니다.\n", purchasedTicketAmount);
     }
 
     public void printPurchasedLottos(List<LottoTicketResponse> lottoTicketResponses) {
