@@ -23,7 +23,8 @@ public enum Prize {
     }
 
     public static Prize getPrizePlace(int matchCount, boolean isBonusMatch) {
-        return Arrays.stream(Prize.values()).filter(p -> p.matchCount == matchCount)
+        return Arrays.stream(Prize.values())
+                .filter(p -> p.matchCount == matchCount)
                 .filter(prize -> {
                     if (matchCount == 5) {
                         return prize.isBonusMatch == isBonusMatch;

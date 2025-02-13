@@ -29,7 +29,6 @@ public class WinningLotto {
                 .toList();
     }
 
-    // 당첨번호 몇개 일치하는 지 확인
     private int countMatchedNumbers(Lotto lotto) {
         return winningLotto.match(lotto);
     }
