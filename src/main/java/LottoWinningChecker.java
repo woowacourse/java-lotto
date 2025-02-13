@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoWinningChecker {
+    private LottoWinningChecker() {}
 
     public static LottoResult calculateResult(Lottos lottos, WinningNumberWithBonusNumber winningNumberWithBonusNumber) {
         LottoResult lottoResult = LottoResult.initialize();
