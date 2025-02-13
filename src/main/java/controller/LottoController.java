@@ -19,21 +19,25 @@ public class LottoController {
 
     public void run() {
         Money money = getMoney();
-        List<Integer> selectedNumbers = getSelectedNumbers();
-        int bonus = getBonusNumber();
+        OutputView.printBuyQuantity(money.getBuyableLottoCount());
+        OutputView.printChangeMoney(money.getChange());
+
         Lottos lottos = getLottos(money.getBuyableLottoCount());
-
         OutputView.printLottos(lottos.getOutputLottosDtos());
-        AnswerLotto answerLotto = lottoService.getAnswerLotto(selectedNumbers, bonus);
-        printPrizeResult(answerLotto, lottos);
 
-        double rateOfReturn = lottoService.calculateRateOfReturn();
-        OutputView.printRateOfReturn(rateOfReturn);
+        List<Integer> answerNumbers = getAnswerNumbers();
+        int bonusNumber = getBonusNumber();
+        AnswerLotto answerLotto = lottoService.getAnswerLotto(answerNumbers, bonusNumber);
+
+        printPrizeResult(answerLotto, lottos);
     }
 
     private void printPrizeResult(AnswerLotto answerLotto, Lottos lottos) {
         lottoService.calculatePrize(answerLotto, lottos);
         OutputView.printPrizeResult(lottoService.getPrizeResult());
+
+        double rateOfReturn = lottoService.calculateRateOfReturn();
+        OutputView.printRateOfReturn(rateOfReturn);
     }
 
     private Lottos getLottos(int buyableLottoCount) {
@@ -46,7 +50,7 @@ public class LottoController {
         return InputParser.parseInt(bonusNumber);
     }
 
-    private List<Integer> getSelectedNumbers() {
+    private List<Integer> getAnswerNumbers() {
         String numbers = InputView.inputAnswerNumber();
         return InputParser.parseNumbers(numbers);
     }
