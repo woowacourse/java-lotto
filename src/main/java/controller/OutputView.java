@@ -3,6 +3,8 @@ package controller;
 import domain.Lotto;
 import domain.LottoPrize;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -65,5 +67,22 @@ public class OutputView {
         prizeFormat.append(" (%d원)- %d개");
         
         return prizeFormat.toString();
+    }
+    
+    public void printIncomeRate(double incomeRate) {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("총 수익률은 %s입니다.");
+        if (incomeRate < 1.0f) {
+            sb.append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+        
+        System.out.printf(sb + "\n", getFormattedIncomeRate(incomeRate));
+    }
+    
+    private static String getFormattedIncomeRate(double incomeRate) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
+        return decimalFormat.format(incomeRate);
     }
 }

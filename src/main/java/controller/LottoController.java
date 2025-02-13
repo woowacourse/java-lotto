@@ -1,12 +1,10 @@
 package controller;
 
 import domain.Lotto;
-import domain.LottoPrize;
-import domain.LottoStatisticsCalculator;
+import domain.Lottos;
 import util.NumberPicker;
 import util.RandomNumberPicker;
 
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Random;
 
@@ -25,10 +23,10 @@ public class LottoController {
         int money = inputView.inputMoney();
         
         NumberPicker numberPicker = new RandomNumberPicker(new Random());
-        List<Lotto> lottos = Lotto.purchase(money, numberPicker);
+        List<Lotto> purchasedLottos = Lotto.purchase(money, numberPicker);
         
-        outputView.printPurchase(lottos.size());
-        outputView.printLottos(lottos);
+        outputView.printPurchase(purchasedLottos.size());
+        outputView.printLottos(purchasedLottos);
         
         outputView.printMatchLotto();
         List<Integer> matchNumbers = inputView.inputMatchLotto();
@@ -36,9 +34,8 @@ public class LottoController {
         outputView.printBonusNumber();
         int bonusNumber = inputView.inputBonusNumber();
         
-        LottoStatisticsCalculator lottoStatisticsCalculator = new LottoStatisticsCalculator(lottos);
-        EnumMap<LottoPrize, Integer> staticsLottos = lottoStatisticsCalculator.statisticsCalculate(matchNumbers, bonusNumber);
-        
-        outputView.printStaticsLotto(staticsLottos);
+        Lottos lottos = new Lottos(purchasedLottos);
+        outputView.printStaticsLotto(lottos.getStatistics(matchNumbers, bonusNumber));
+        outputView.printIncomeRate(lottos.getIncomeRate(matchNumbers, bonusNumber, money));
     }
 }
