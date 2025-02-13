@@ -3,10 +3,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.within;
 
 import java.util.List;
-import java.util.Map;
 import model.LottoNumberGenerator;
 import model.LottoRank;
 import model.LottoRankCalculator;
+import model.LottoRankResult;
 import model.LottoStore;
 import model.LottoTicket;
 import model.WinningLotto;
@@ -34,23 +34,24 @@ class LottoStoreTest {
     void 당첨결과_개수를_센다() {
         // given
         List<LottoTicket> lottoTickets = List.of(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)));
-        WinningLotto winningLotto = new WinningLotto(List.of(1,2,3,4,5,7), 6);
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 7), 6);
 
         // when
-        Map<LottoRank, Integer> rankMatchCount = lottoStore.calculateRankMatchCount(lottoTickets, winningLotto);
+        LottoRankResult lottoRankResult = lottoStore.calculateRankMatchCount(lottoTickets, winningLotto);
 
         // then
-        assertThat(rankMatchCount.get(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(lottoRankResult.getValue(LottoRank.SECOND)).isEqualTo(1);
     }
 
     @Test
     void 수익률을_계산한다() {
         // given
         int ticketCount = 14;
-        Map<LottoRank, Integer> rankMatchCounts = Map.of(LottoRank.FIFTH, 1);
+        LottoRankResult lottoRankResult = new LottoRankResult();
+        lottoRankResult.updateRankCount(LottoRank.FIFTH);
 
         // when
-        double profitRate = lottoStore.calculateProfitRate(ticketCount, rankMatchCounts);
+        double profitRate = lottoStore.calculateProfitRate(ticketCount, lottoRankResult);
 
         // then
         assertThat(profitRate).isCloseTo(0.36, within(0.01));

@@ -3,8 +3,7 @@ package controller;
 import controller.dto.LottoDtoMapper;
 import controller.dto.WinningLottoRequest;
 import java.util.List;
-import java.util.Map;
-import model.LottoRank;
+import model.LottoRankResult;
 import model.LottoStore;
 import model.LottoTicket;
 import model.WinningLotto;
@@ -25,8 +24,8 @@ public class LottoController {
     public void run() {
         List<LottoTicket> lottoTickets = createLottoTicket();
         WinningLotto winningLotto = createWinningLotto();
-        Map<LottoRank, Integer> rankMatchCounts = calculateRank(lottoTickets, winningLotto);
-        calculateProfitRate(lottoTickets.size(), rankMatchCounts);
+        LottoRankResult lottoRankResult = calculateRank(lottoTickets, winningLotto);
+        calculateProfitRate(lottoTickets.size(), lottoRankResult);
     }
 
     private List<LottoTicket> createLottoTicket() {
@@ -44,14 +43,14 @@ public class LottoController {
         return lottoDtoMapper.toWinningLotto(winningLottoRequest);
     }
 
-    private Map<LottoRank, Integer> calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
-        Map<LottoRank, Integer> rankMatchCounts = lottoStore.calculateRankMatchCount(lottoTickets, winningLotto);
-        lottoConsoleView.printLottoRankResults(lottoDtoMapper.toLottoRankResponses(rankMatchCounts));
-        return rankMatchCounts;
+    private LottoRankResult calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
+        LottoRankResult lottoRankResult = lottoStore.calculateRankMatchCount(lottoTickets, winningLotto);
+        lottoConsoleView.printLottoRankResults(lottoDtoMapper.toLottoRankResponses(lottoRankResult));
+        return lottoRankResult;
     }
 
-    private void calculateProfitRate(int lottoTicketCount, Map<LottoRank, Integer> rankMatchCounts) {
-        double profitRate = lottoStore.calculateProfitRate(lottoTicketCount, rankMatchCounts);
+    private void calculateProfitRate(int lottoTicketCount,LottoRankResult lottoRankResult) {
+        double profitRate = lottoStore.calculateProfitRate(lottoTicketCount, lottoRankResult);
         lottoConsoleView.printProfitRate(profitRate);
     }
 }
