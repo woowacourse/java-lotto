@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
 import lotto.config.ApplicationConfiguration;
 import lotto.costant.WinningTier;
 import lotto.domain.Lotto;
@@ -8,6 +7,8 @@ import lotto.domain.WinningLotto;
 import lotto.service.InputService;
 import lotto.service.LottoService;
 import lotto.service.OutputService;
+
+import java.util.List;
 
 public class LottoController {
 
@@ -32,5 +33,6 @@ public class LottoController {
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         List<WinningTier> winningTiers = lottoService.findWinningTiers(lottos, winningLotto);
         double profit = lottoService.calculateProfit(winningTiers, purchaseAmount);
+        outputService.printResults(winningTiers, profit);
     }
 }

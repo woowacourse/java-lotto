@@ -5,11 +5,11 @@ import lotto.domain.WinningCondition;
 import java.util.List;
 
 public enum WinningTier {
-    FIRST(new WinningCondition(6, false), 2000000000),
-    SECOND(new WinningCondition(5, true), 3000000),
-    THIRD(new WinningCondition(5, false), 1500000),
-    FOURTH(new WinningCondition(4, false), 5000),
     FIFTH(new WinningCondition(3, false), 5000),
+    FOURTH(new WinningCondition(4, false), 5000),
+    THIRD(new WinningCondition(5, false), 1500000),
+    SECOND(new WinningCondition(5, true), 3000000),
+    FIRST(new WinningCondition(6, false), 2000000000),
     EMPTY(new WinningCondition(0, false), 0);
 
     private final WinningCondition condition;

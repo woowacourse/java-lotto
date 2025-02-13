@@ -21,4 +21,12 @@ public class WinningCondition {
 
         return true;
     }
+
+    public int getMatchedCount() {
+        return matchedCount;
+    }
+
+    public boolean isBonusMatchNeeded() {
+        return isBonusMatchNeeded;
+    }
 }
