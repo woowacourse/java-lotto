@@ -23,7 +23,7 @@ public class Lotto {
         }
     }
 
-    public Lotto(String input) { // todo : 메서드 분리 작업, Stream 적용 작업
+    public Lotto(String input) { // todo : 메서드 분리 작업, Stream 적용 작업, 각 번호 범위 내 존재하는지 체킹 추가
         numbers = new ArrayList<>();
         String[] token = input.split(", ");
         Validator.validateRange(token.length, NUMBER_COUNT, NUMBER_COUNT);
@@ -32,6 +32,12 @@ public class Lotto {
             numbers.add(Integer.parseInt(token[i]));
         }
         validateUniqueNumber(numbers);
+    }
+
+    public int calculateMatchNumber(Lotto otherLotto) {
+        return (int) numbers.stream()
+                .filter(otherLotto::isContained)
+                .count();
     }
 
     public boolean isContained(int number) {
@@ -46,7 +52,7 @@ public class Lotto {
         );
     }
 
-    private void validateUniqueNumber(List<Integer> numbers) { // todo : 에러 메시지 추가
+    private void validateUniqueNumber(List<Integer> numbers) { // todo : 에러 메시지 추가, set 변수 선언 X 조건 내부로 이동
         Set<Integer> set = new HashSet<>(numbers);
         if (set.size() != numbers.size()) {
             throw new IllegalArgumentException();
