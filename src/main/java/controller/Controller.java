@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 import model.LottoWinningNumbers;
 import model.OwnedLotto;
 import model.PrizeResult;
@@ -48,26 +49,25 @@ public class Controller {
     }
 
     private int inputResponseForBudget() {
-        try {
-            return BudgetParser.parseLottoCount(inputView.askForBudget());
-        } catch (IllegalArgumentException e) {
-            outputView.displayErrorMessage(e.getMessage());
-            throw e;
-        }
+        return inputResponse(() -> BudgetParser.parseLottoCount(inputView.askForBudget()));
     }
 
     private List<Integer> inputResponseForWinningNumber() {
-        try {
-            return WinningNumberParser.parseWinningNumbers(inputView.askForWinningNumber());
-        } catch (IllegalArgumentException e) {
-            outputView.displayErrorMessage(e.getMessage());
-            throw e;
-        }
+        return inputResponse(() -> WinningNumberParser.parseWinningNumbers(inputView.askForWinningNumber()));
     }
 
     private int inputResponseForBonusNumber(List<Integer> winningNumbers) {
         try {
             return BonusNumberParser.parseBonusNumber(winningNumbers, inputView.askForBonusNumber());
+        } catch (IllegalArgumentException e) {
+            outputView.displayErrorMessage(e.getMessage());
+            throw e;
+        }
+    }
+
+    private <T> T inputResponse(Supplier<T> parser) {
+        try {
+            return parser.get();
         } catch (IllegalArgumentException e) {
             outputView.displayErrorMessage(e.getMessage());
             throw e;
