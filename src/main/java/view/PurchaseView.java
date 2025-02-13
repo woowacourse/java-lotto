@@ -4,7 +4,7 @@ import constant.ErrorMessage;
 import constant.OutputMessage;
 import java.util.Scanner;
 import model.LottoNumbers;
-import model.PurchasedLottos;
+import model.Purchase;
 
 public class PurchaseView {
     public void printPurchaseGuide() {
@@ -23,8 +23,8 @@ public class PurchaseView {
         System.out.printf(OutputMessage.PURCHASE_RESULT, purchaseCount);
     }
 
-    public void printPurchasedLottos(PurchasedLottos purchasedLottos) {
-        purchasedLottos.getLottos().forEach(this::printLottoNumbers);
+    public void printPurchasedLottos(Purchase purchase) {
+        purchase.getLottos().forEach(this::printLottoNumbers);
     }
 
     private void printLottoNumbers(LottoNumbers lottoNumbers) {
