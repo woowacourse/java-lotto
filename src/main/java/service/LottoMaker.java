@@ -6,7 +6,11 @@ import java.util.List;
 
 public class LottoMaker {
 
-    private LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+    private final LottoNumberGenerator lottoNumberGenerator;
+
+    public LottoMaker(LottoNumberGenerator lottoNumberGenerator) {
+        this.lottoNumberGenerator = lottoNumberGenerator;
+    }
 
     public Lotto createLotto() {
         List<Integer> generate = lottoNumberGenerator.generateLottoNumbers();

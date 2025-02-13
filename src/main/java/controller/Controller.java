@@ -58,7 +58,8 @@ public class Controller {
             }
         }
 
-        // TODO: 통계 결과 출력
+        PrizeResult prizeResult = new PrizeResult(map, lottoCount);
+        outputView.displayPrizeSummary(prizeResult);
     }
 
     private Lottos buyLotto(int count) {
