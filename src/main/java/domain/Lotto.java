@@ -2,7 +2,6 @@ package domain;
 
 import domain.numbergenerator.NumberGenerator;
 import dto.OutputLottosDto;
-import java.util.Arrays;
 import java.util.List;
 import validator.LottoValidator;
 
