@@ -1,5 +1,6 @@
 package model;
 
+import static model.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
 import static model.ExceptionMessage.INVALID_LOTTO_MIN_PURCHASE;
 import static model.ExceptionMessage.INVALID_LOTTO_PURCHASE_TYPE;
 import static model.ExceptionMessage.INVALID_LOTTO_PURCHASE_UNIT;
@@ -11,6 +12,7 @@ public class LottoPurchase {
     private final Integer amount;
 
     public static LottoPurchase of(final String input) {
+        validateNullOrBlank(input);
         validateInteger(input);
         return new LottoPurchase(Integer.parseInt(input));
     }
@@ -19,6 +21,12 @@ public class LottoPurchase {
         validateMinAmount(amount);
         validateAmountUnit(amount);
         this.amount = amount;
+    }
+
+    private static void validateNullOrBlank(final String input) {
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException(INVALID_INPUT_NULL_OR_BLANK.getMessage());
+        }
     }
 
     private static void validateInteger(final String input) {
