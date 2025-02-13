@@ -9,6 +9,15 @@ import org.junit.jupiter.api.Test;
 class LottoManagerTest {
     private LottoManager lottoManager;
 
+    List<Lotto> lottos = List.of(
+            new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+            new Lotto(List.of(1, 2, 3, 4, 5, 7)),
+            new Lotto(List.of(1, 2, 3, 4, 5, 8)),
+            new Lotto(List.of(1, 2, 3, 4, 10, 11)),
+            new Lotto(List.of(1, 2, 3, 10, 11, 12)),
+            new Lotto(List.of(10, 11, 12, 13, 14, 15)));
+    WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Number(7));
+
     @BeforeEach
     void setup() {
         lottoManager = new LottoManager();
@@ -18,14 +27,6 @@ class LottoManagerTest {
     @Test
     void test1() {
         // given
-        List<Lotto> lottos = List.of(
-                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(List.of(1, 2, 3, 4, 5, 7)),
-                new Lotto(List.of(1, 2, 3, 4, 5, 8)),
-                new Lotto(List.of(1, 2, 3, 4, 10, 11)),
-                new Lotto(List.of(1, 2, 3, 10, 11, 12)),
-                new Lotto(List.of(10, 11, 12, 13, 14, 15)));
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Number(7));
         LottoManager lottoManager = new LottoManager();
 
         // when
@@ -41,14 +42,6 @@ class LottoManagerTest {
     @Test
     void test2() {
         // given
-        List<Lotto> lottos = List.of(
-                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(List.of(1, 2, 3, 4, 5, 7)),
-                new Lotto(List.of(1, 2, 3, 4, 5, 8)),
-                new Lotto(List.of(1, 2, 3, 4, 10, 11)),
-                new Lotto(List.of(1, 2, 3, 10, 11, 12)),
-                new Lotto(List.of(10, 11, 12, 13, 14, 15)));
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Number(7));
         LottoManager lottoManager = new LottoManager();
         WinningResult winningResult = lottoManager.getWinningResult(lottos, winningLotto);
 
