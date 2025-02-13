@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class WinningLotto {
     Lotto winningNumbers;
@@ -26,14 +25,5 @@ public class WinningLotto {
         if (winningNumbers.getNumbers().stream().anyMatch(number -> number == bonusNumber.getValue())) {
             throw new IllegalArgumentException("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
         }
-    }
-
-    private boolean isExistWinningNumber(final int value) {
-        for (Integer winningNumber : winningNumbers.getNumbers()) {
-            if (Objects.equals(winningNumber, value)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
