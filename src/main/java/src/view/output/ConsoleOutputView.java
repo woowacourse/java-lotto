@@ -16,8 +16,13 @@ public class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void printInputWinningLotto() {
+    public void printInputWinningLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    }
+
+    @Override
+    public void printInputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
     }
 
     private void printLotto(LottoResponse response) {
