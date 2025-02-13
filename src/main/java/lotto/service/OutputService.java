@@ -1,14 +1,13 @@
 package lotto.service;
 
+import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.List;
 import lotto.costant.OutputMessage;
 import lotto.costant.WinningTier;
 import lotto.domain.Lotto;
 import lotto.domain.WinningCondition;
 import lotto.view.OutputView;
-
-import java.text.DecimalFormat;
-import java.util.Arrays;
-import java.util.List;
 
 public class OutputService {
 
@@ -36,7 +35,7 @@ public class OutputService {
     }
 
     private void printWinningStatistics(List<WinningTier> winningTiers) {
-        List<WinningTier> tiers = Arrays.stream(WinningTier.values()).toList();
+        List<WinningTier> tiers = Arrays.stream(WinningTier.values()).toList().reversed();
 
         for (WinningTier tier : tiers) {
             if (tier == WinningTier.EMPTY) {
