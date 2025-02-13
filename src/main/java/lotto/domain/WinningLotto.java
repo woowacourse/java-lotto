@@ -10,8 +10,8 @@ import java.util.List;
 
 public class WinningLotto {
 
-    private Lotto winningNumbers;
-    private int bonusBall;
+    private final Lotto winningNumbers;
+    private final int bonusBall;
 
     public WinningLotto(Lotto winningNumbers, String bonusBallInput) {
         this.winningNumbers = winningNumbers;
