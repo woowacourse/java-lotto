@@ -12,6 +12,6 @@ public class BuyerTest {
     int input = 14000;
     Money money = new Money(input);
     Buyer buyer = new Buyer(money);
-    Assertions.assertThat(buyer.createLottos().size()).isEqualTo(14);
+    Assertions.assertThat(buyer.getLottoSize()).isEqualTo(14);
   }
 }

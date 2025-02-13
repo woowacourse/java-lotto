@@ -14,6 +14,10 @@ public class Buyer {
         createLottos();
     }
 
+    public int getLottoSize() {
+        return lottos.size();
+    }
+
     public void createLottos(){
         int totalLotto = money.calculateTotalLotto();
         for(int i=0; i< totalLotto; i++){
