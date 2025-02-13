@@ -24,4 +24,8 @@ public class BonusNumber {
     public boolean matchesWith(List<Integer> lottoNumbers) {
         return lottoNumbers.contains(number);
     }
+
+    public int getNumber() {
+        return number;
+    }
 }
