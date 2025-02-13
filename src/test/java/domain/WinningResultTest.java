@@ -19,7 +19,7 @@ class WinningResultTest {
 
         final Map<LottoRank, Integer> lottoRankIntegerMap = winningResult.countWinningResult();
 
-        assertThat(lottoRankIntegerMap.get(LottoRank.RANK_1)).isEqualTo(10);
+        assertThat(lottoRankIntegerMap).containsEntry(LottoRank.RANK_1, 10);
     }
 
     static class FakeRandomNumberGenerator implements NumbersGenerator {
