@@ -8,7 +8,7 @@ public enum LottoPrize {
     THIRD(1500000, 5, false, 3),
     FOURTH(50000, 4, false, 4),
     FIFTH(5000, 3, false, 5),
-    NOTHING(0, 0, false, 999);
+    NOTHING(0, 0, false, Integer.MAX_VALUE);
 
     private final int money;
     private final int countMatched;
