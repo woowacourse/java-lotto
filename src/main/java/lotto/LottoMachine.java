@@ -25,24 +25,29 @@ public class LottoMachine {
     }
 
     public void run() {
-        LottoBundle lottoBundle = makeLottoBundle();
+        AmountPaid amountPaid = makeAmountPaid();
+        LottoBundle lottoBundle = makeLottoBundle(amountPaid);
         outputView.lottoQuantityPrint(lottoBundle.getLottoQuantity());
         outputView.lottoStatusPrint(lottoBundle);
         WinningNumbers winningNumbers = makeWinningNumber();
-        EnumMap<Rank, Integer> rankIntegerEnumMap = lottoService.makeStatistics(lottoBundle, winningNumbers);
+        EnumMap<Rank, Integer> lottoResult = lottoService.makeStatistics(lottoBundle, winningNumbers);
 
-        outputView.lottoStatisticsPrint(rankIntegerEnumMap, 0.1);
+        outputView.lottoStatisticsPrint(lottoResult, lottoService.calculateTotalResult(lottoResult, amountPaid));
     }
 
-    private LottoBundle makeLottoBundle() {
+
+    private AmountPaid makeAmountPaid() {
         return retryUntilValidInput(() -> {
             try {
-                return lottoService.makeLottoBundle(
-                        new AmountPaid(Parser.parseToInteger(inputView.purchasePriceInput())));
+                return new AmountPaid(Parser.parseToInteger(inputView.purchasePriceInput()));
             } catch (IOException e) {
                 throw new IllegalArgumentException(e);
             }
         });
+    }
+
+    private LottoBundle makeLottoBundle(AmountPaid amountPaid) {
+        return retryUntilValidInput(() -> lottoService.makeLottoBundle(amountPaid));
     }
 
     private WinningNumbers makeWinningNumber() {

@@ -26,16 +26,16 @@ public class OutputView {
 
     }
 
-    public void lottoStatisticsPrint(EnumMap<Rank, Integer> statistics, double profitRate) {
+    public void lottoStatisticsPrint(EnumMap<Rank, Integer> statistics, String profitRate) {
 
         System.out.println();
         System.out.println("당첨통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (" + Rank.FIFTH_PRIDE.prize + "원)- " + statistics.get(Rank.FIFTH_PRIDE) + "개");
-        System.out.println("4개 일치 (" + Rank.FOURTH_PRIDE.prize + "원)- " + statistics.get(Rank.FOURTH_PRIDE) + "개");
-        System.out.println("5개 일치 (" + Rank.THIRD_PRIDE.prize + "원)- " + statistics.get(Rank.THIRD_PRIDE) + "개");
-        System.out.println("5개 일치 (" + Rank.SECOND_PRIDE.prize + "원)- " + statistics.get(Rank.SECOND_PRIDE) + "개");
-        System.out.println("6개 일치 (" + Rank.FIRST_PRIDE.prize + "원)- " + statistics.get(Rank.FIRST_PRIDE) + "개");
+        System.out.println("3개 일치 (" + Rank.FIFTH_PRIDE.getPrize() + "원)- " + statistics.get(Rank.FIFTH_PRIDE) + "개");
+        System.out.println("4개 일치 (" + Rank.FOURTH_PRIDE.getPrize() + "원)- " + statistics.get(Rank.FOURTH_PRIDE) + "개");
+        System.out.println("5개 일치 (" + Rank.THIRD_PRIDE.getPrize() + "원)- " + statistics.get(Rank.THIRD_PRIDE) + "개");
+        System.out.println("5개 일치 (" + Rank.SECOND_PRIDE.getPrize() + "원)- " + statistics.get(Rank.SECOND_PRIDE) + "개");
+        System.out.println("6개 일치 (" + Rank.FIRST_PRIDE.getPrize() + "원)- " + statistics.get(Rank.FIRST_PRIDE) + "개");
 
         System.out.println("총 수익률은 " + profitRate + "입니다.");
 
