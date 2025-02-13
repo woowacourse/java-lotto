@@ -2,6 +2,7 @@ package domain;
 
 import domain.numbergenerator.NumberGenerator;
 import dto.OutputLottosDto;
+import java.util.Arrays;
 import java.util.List;
 import validator.LottoValidator;
 
@@ -24,5 +25,24 @@ public class Lotto {
 
     public OutputLottosDto getOutputLottoDto() {
         return new OutputLottosDto(numbers);
+    }
+
+    public boolean has(int number) {
+        return this.numbers.contains(number);
+    }
+
+    public int getHitCountFrom(Lotto lotto) {
+        int hitCount = 0;
+        for (Integer number : this.numbers) {
+            hitCount += isHit(lotto.numbers, number);
+        }
+        return hitCount;
+    }
+
+    private int isHit(List<Integer> numbers, int number) {
+        if (numbers.contains(number)) {
+            return 1;
+        }
+        return 0;
     }
 }
