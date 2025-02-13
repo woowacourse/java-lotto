@@ -25,6 +25,6 @@ public class Money {
         for(LottoMatch lottoMatch : lottoResult.keySet()){
             sum += lottoMatch.prize * lottoResult.get(lottoMatch);
         }
-        return (double) sum / money * 100;
+        return (double) sum / money;
     }
 }

@@ -1,5 +1,11 @@
 package domain;
 
+import static domain.LottoMatch.*;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,6 +45,24 @@ public class MoneyTest {
     Money money = new Money(input);
 
     Assertions.assertThat(money.calculateTotalLotto()).isEqualTo(14);
+  }
+
+  @Test
+  @DisplayName("수익률 계산 테스트")
+  public void success_4(){
+    int input = 10000;
+    Money money = new Money(input);
+    Map<LottoMatch, Integer> result = Stream.of(new Object[][] {
+        {DEFUALT_MATCH, 7},
+        {THREE_MATCH, 1},
+        {FOUR_MATCH, 2},
+        {FIVE_MATCH, 0},
+        {FIVE_BONUS_MATCH, 0},
+        {SIX_MATCH, 0}
+    }).collect(Collectors.toMap(item -> (LottoMatch)item[0], item -> (Integer)item[1]));
+
+    double profit = money.calculateProfit((HashMap<LottoMatch, Integer>) result);
+    Assertions.assertThat(profit).isEqualTo(10.50);
   }
 
 }
