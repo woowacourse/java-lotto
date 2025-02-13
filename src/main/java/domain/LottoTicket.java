@@ -29,10 +29,10 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또 번호는 1 이상 45 이하이다.");
         }
     }
-    
+
     private void validateDuplicateNumber(List<Integer> numbers) {
         if (numbers.stream().distinct().count() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("중봉된 번호가 존재합니다.");
+            throw new IllegalArgumentException("중복된 번호가 존재합니다.");
         }
     }
 
