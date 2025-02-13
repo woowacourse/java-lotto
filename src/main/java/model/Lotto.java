@@ -22,10 +22,7 @@ public class Lotto {
     }
 
     private boolean isDuplicate(List<Integer> randomNumbers) {
-        if (new HashSet<>(randomNumbers).size() != randomNumbers.size()) {
-            return true;
-        }
-        return false;
+        return (new HashSet<>(randomNumbers).size() != randomNumbers.size());
     }
     public String printLotto() {
         return "[" + String.join(", ",
