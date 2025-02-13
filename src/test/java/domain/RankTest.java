@@ -1,6 +1,7 @@
 package domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -26,5 +27,16 @@ class RankTest {
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
+    @Test
+    void 당첨금을_계산할_수_있다() {
+        //given
+        int count = 3;
+
+        //when
+        Money money = Rank.FIFTH.calculateWinningMoney(count);
+
+        //then
+        Assertions.assertThat(money).isEqualTo(new Money(15000));
+    }
 
 }
