@@ -41,6 +41,11 @@ public class WinningResult {
         return revenue;
     }
 
+    public int calculateLottoRankCount(final LottoRank lottoRank) {
+        return this.lottoRanks.getOrDefault(lottoRank, 0);
+    }
+
+
     private int calculateTotalLottoCount() {
         int totalLottoCount = 0;
         for (final Map.Entry<LottoRank, Integer> entry : lottoRanks.entrySet()) {
@@ -51,6 +56,10 @@ public class WinningResult {
 
     private int calculateTotalLottoPrice() {
         return calculateTotalLottoCount() * Lotto.LOTTO_PRICE;
+    }
+
+    public boolean isDamage() {
+        return calculateRateOfRevenue() < 1;
     }
 
     public double calculateRateOfRevenue() {
