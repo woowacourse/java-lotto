@@ -48,4 +48,11 @@ class LottoTest {
         Lotto lotto = new Lotto(numbers);
         assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
+
+    @Test
+    @DisplayName("로또 번호 중복 검증")
+    void 로또_번호_중복_검증(){
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
+        assertThatThrownBy(() -> new Lotto(numbers)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
