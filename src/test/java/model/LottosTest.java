@@ -1,12 +1,11 @@
 package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static util.LottoUtil.*;
+import static util.LottoUtil.generateTestLotto;
 
 import java.util.Arrays;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-import util.LottoUtil;
 
 class LottosTest {
 

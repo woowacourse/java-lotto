@@ -1,14 +1,9 @@
 package model;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static util.LottoUtil.*;
+import static util.LottoUtil.generateTestLotto;
 
-import com.sun.source.tree.UsesTree;
-import java.util.Set;
-import jdk.jshell.execution.Util;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import util.LottoUtil;
 
 class LottoGeneraterTest {
 
