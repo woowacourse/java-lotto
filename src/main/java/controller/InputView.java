@@ -15,12 +15,21 @@ public class InputView {
     public int inputMoney() {
         String moneyString = SC.nextLine();
         validateMoneyNotBlank(moneyString);
+        validateNumberFormat(moneyString);
         return Integer.parseInt(moneyString);
     }
     
     private void validateMoneyNotBlank(String moneyString) {
         if (moneyString.isBlank()) {
             throw new IllegalStateException("금액을 입력해야 합니다.");
+        }
+    }
+    
+    private void validateNumberFormat(String moneyString) {
+        try {
+            Integer.parseInt(moneyString);
+        } catch (NumberFormatException exception) {
+            throw new IllegalStateException("금액은 숫자로만 입력해야 합니다.", exception);
         }
     }
     
