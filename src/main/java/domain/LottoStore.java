@@ -12,13 +12,13 @@ public class LottoStore {
         this.lottoMachine = lottoMachine;
     }
 
-    public List<Lotto> buy(Money money) {
+    public Lottos buy(Money money) {
         List<Lotto> lottos = new ArrayList<>();
         while (money.isGreaterOrEqualThan(LOTTO_PRICE)) {
             money = money.minus(LOTTO_PRICE);
             lottos.add(lottoMachine.createLotto());
         }
 
-        return lottos;
+        return new Lottos(lottos);
     }
 }

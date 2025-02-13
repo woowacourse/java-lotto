@@ -1,9 +1,5 @@
 package domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class WinningLotto {
 
     private final Lotto lotto;
@@ -21,15 +17,11 @@ public class WinningLotto {
         }
     }
 
-    public WinningResult calculateWinning(List<Lotto> purchaseLottos) {
-        Map<Winning, Integer> winningResult = new HashMap<>();
-        for (Lotto purchaseLotto : purchaseLottos) {
-            int matchCount = lotto.calculateMatchCount(purchaseLotto);
-            boolean isMatchBonusNumber = purchaseLotto.contains(bonusNumber);
-            Winning winning = Winning.findWinning(matchCount, isMatchBonusNumber);
-            winningResult.put(winning, winningResult.getOrDefault(winning, 0) + 1);
-        }
-        Money purchaseLottoMoney = LottoStore.LOTTO_PRICE.multiply(purchaseLottos.size());
-        return new WinningResult(purchaseLottoMoney, winningResult);
+    public int calculateMatchCount(Lotto lotto) {
+        return this.lotto.calculateMatchCount(lotto);
+    }
+
+    public boolean containsBonusNumber(Lotto lotto) {
+        return lotto.contains(bonusNumber);
     }
 }

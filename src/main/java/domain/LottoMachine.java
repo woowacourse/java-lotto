@@ -14,8 +14,7 @@ public class LottoMachine {
     }
 
     private Number selectNumber() {
-        int randomValue = (int) (Math.random() * 45) + 1;
+        int randomValue = (int) (Math.random() * Number.MAX_NUMBER) + 1;
         return new Number(randomValue);
-
     }
 }

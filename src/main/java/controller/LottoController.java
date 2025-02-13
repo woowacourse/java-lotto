@@ -3,6 +3,7 @@ package controller;
 import domain.Lotto;
 import domain.LottoMachine;
 import domain.LottoStore;
+import domain.Lottos;
 import domain.Money;
 import domain.Number;
 import domain.WinningLotto;
@@ -28,11 +29,11 @@ public class LottoController {
     public void start() {
         try {
             Money purchaseLottoMoney = inputMoney();
-            List<Lotto> purchasedLottos = purchaseLottos(purchaseLottoMoney);
+            Lottos purchasedLottos = purchaseLottos(purchaseLottoMoney);
             outputView.printPurchaseLottos(purchasedLottos);
 
             WinningLotto winningLotto = inputWinningLotto();
-            WinningResult winningResult = winningLotto.calculateWinning(purchasedLottos);
+            WinningResult winningResult = purchasedLottos.calculateWinning(winningLotto);
             outputView.printWinningResult(winningResult);
         } catch (RuntimeException e) {
             outputView.printErrorMessage(e);
@@ -45,7 +46,7 @@ public class LottoController {
         return new Money(rawMoney);
     }
 
-    private List<Lotto> purchaseLottos(Money purchaseLottoMoney) {
+    private Lottos purchaseLottos(Money purchaseLottoMoney) {
         LottoStore lottoStore = new LottoStore(new LottoMachine());
         return lottoStore.buy(purchaseLottoMoney);
     }

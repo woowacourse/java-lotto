@@ -30,7 +30,7 @@ public class Lotto {
 
     private void validateNumberSize(Collection<Number> numbers) {
         if (numbers.size() != NUMBERS_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 " + NUMBERS_SIZE + "개여야 합니다.");
         }
     }
 

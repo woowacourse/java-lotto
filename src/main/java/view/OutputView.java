@@ -1,6 +1,7 @@
 package view;
 
 import domain.Lotto;
+import domain.Lottos;
 import domain.Number;
 import domain.Winning;
 import domain.WinningResult;
@@ -18,7 +19,8 @@ public class OutputView {
     private static final String DAMAGE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String ERROR_MESSAGE_FORMAT = "[ERROR] %s%n";
 
-    public void printPurchaseLottos(List<Lotto> lottos) {
+    public void printPurchaseLottos(Lottos purchasedlottos) {
+        List<Lotto> lottos = purchasedlottos.getLottos();
         System.out.printf(PURCHASE_LOTTO_SIZE_FORMAT, lottos.size());
         for (Lotto lotto : lottos) {
             Set<Number> numbers = lotto.getNumbers();
