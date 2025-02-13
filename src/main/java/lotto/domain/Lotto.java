@@ -11,6 +11,11 @@ public class Lotto {
         this.numbers = makeNumber(values);
     }
 
+    boolean isDuplicateNumber(final LottoNumber inputNumber) {
+        return numbers.stream()
+                .anyMatch(number -> number.equals(inputNumber));
+    }
+
     private List<LottoNumber> makeNumber(final List<Integer> values) {
         return values.stream()
                 .map(LottoNumber::new)
