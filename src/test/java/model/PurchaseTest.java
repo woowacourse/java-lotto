@@ -44,5 +44,12 @@ class PurchaseTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("구매 금액 천원 당 로또 1개를 발행한다")
+    @ParameterizedTest
+    @CsvSource(value = {"1000:1", "15000:15", "100000:100"}, delimiter = ':')
+    void issueLotto(String inputString, int expectedCount) {
+        Purchase purchase = new Purchase(inputString);
+        assertThat(purchase.calculateLottoCount()).isEqualTo(expectedCount);
+    }
 
 }
