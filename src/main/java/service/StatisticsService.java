@@ -15,6 +15,11 @@ public class StatisticsService {
         }
 
         long totalPrize = lottos.calculateTotalPrize();
+
+        if (purchaseAmount == 0) {
+            return new Statistics(prizeCounts, 0);
+        }
+
         double profitRate = (double) totalPrize / purchaseAmount;
         return new Statistics(prizeCounts, profitRate);
     }
