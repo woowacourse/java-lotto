@@ -6,7 +6,6 @@ import java.util.List;
 
 public class LottoMachine {
 
-
     private final NumberGenerator numberGenerator;
 
     public LottoMachine(final NumberGenerator numberGenerator) {

@@ -49,24 +49,24 @@ public enum LottoRank {
                 return false;
             });
     final int prizeMoney;
-    final BiPredicate<Integer, Boolean> incrementIfMatchCondition;
     final boolean isBonusBallMatch;
     final int matchCount;
+    final BiPredicate<Integer, Boolean> incrementIfMatchCondition;
 
     LottoRank(final int prizeMoney, final boolean isBonusBallMatch, final int matchCount,
               final BiPredicate<Integer, Boolean> incrementIfMatchCondition) {
         this.prizeMoney = prizeMoney;
-        this.incrementIfMatchCondition = incrementIfMatchCondition;
         this.isBonusBallMatch = isBonusBallMatch;
         this.matchCount = matchCount;
+        this.incrementIfMatchCondition = incrementIfMatchCondition;
     }
 
     public static LottoRank of(final Lotto lotto, final WinningNumbers winningNumbers) {
         final int lottoMatchCount = lotto.calculateWinningNumbersMatchCount(winningNumbers);
-        final boolean bonusNumberMatch = lotto.isContainsBonusNumber(winningNumbers);
+        final boolean bonusBallMatch = lotto.isContainsBonusNumber(winningNumbers);
 
         return Arrays.stream(values())
-                .filter(lottoRank -> lottoRank.incrementIfMatchCondition.test(lottoMatchCount, bonusNumberMatch))
+                .filter(lottoRank -> lottoRank.incrementIfMatchCondition.test(lottoMatchCount, bonusBallMatch))
                 .findAny()
                 .orElse(FAIL);
     }

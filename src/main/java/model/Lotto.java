@@ -23,12 +23,6 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers.stream().sorted().toList();
     }
 
-    private List<LottoNumber> sortNumbers(final List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
-                .sorted()
-                .toList();
-    }
-
     public static Lotto from(final List<Integer> lottoNumbers) {
         return new Lotto(lottoNumbers.stream()
                 .map(num -> new LottoNumber(num))
