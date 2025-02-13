@@ -2,9 +2,11 @@ package src.controller;
 
 import java.util.List;
 import src.model.LottoMachine;
+import src.model.LottoPrize;
 import src.model.lotto.Lotto;
 import src.model.lotto.generator.DefaultNumberGenerator;
 import src.model.lotto.generator.NumberGenerator;
+import src.model.winning_lotto.WinningLotto;
 import src.view.input.ConsoleInputView;
 import src.view.input.InputView;
 import src.view.output.ConsoleOutputView;
@@ -21,8 +23,8 @@ public class LottoController {
     public void run() {
         List<Lotto> lottos = issueLottos();
         printPurchasedLottos(lottos);
-        List<Integer> winningLottoNumbers = getWinningLottoNumbers();
-        int bonusNumber = getBonusNumber();
+        WinningLotto winningLotto = getWinningLotto();
+        List<LottoPrize> lottoPrizes = lottoMachine.getLottoResults(lottos, winningLotto);
     }
 
     private List<Lotto> issueLottos() {
@@ -34,6 +36,13 @@ public class LottoController {
     private void printPurchasedLottos(List<Lotto> lottos) {
         List<LottoResponse> lottoResponses = lottos.stream().map(LottoResponse::new).toList();
         outputView.printPurchasedLottos(lottoResponses);
+    }
+
+    private WinningLotto getWinningLotto() {
+        List<Integer> winningLottoNumbers = getWinningLottoNumbers();
+        int bonusNumber = getBonusNumber();
+
+        return WinningLotto.of(winningLottoNumbers, bonusNumber);
     }
 
     private List<Integer> getWinningLottoNumbers() {
