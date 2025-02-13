@@ -14,44 +14,26 @@ public class LottoController {
     }
 
     public void run() throws IOException {
-        Money money = inputMoney();
+        Money money = inputView.inputMoney();
         int lottoCount = getLottoCount(money);
-        printLottoCount(lottoCount);
+        outputView.printLottoCount(lottoCount);
 
         // TODO: 로또 발급 책임 분리
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; ++i) {
             lottos.add(new Lotto(RandomNumbersGenerator.generateUniqueNumbers(Number.MIN, Number.MAX, 6)));
         }
-        printLottos(lottos);
+        outputView.printLottos(lottos);
 
-        WinningLotto winningLotto = inputWinningNumbers();
+        WinningLotto winningLotto = inputView.inputWinningLotto();
 
         WinningResult winningResult = lottoManager.getWinningResult(lottos, winningLotto);
         outputView.printWinningResult(winningResult);
         outputView.printRevenue(lottoManager.getRevenue(winningResult, money));
     }
 
-    private WinningLotto inputWinningNumbers() throws IOException {
-        return inputView.inputWinningLotto();
-    }
-
-    private Money inputMoney() throws IOException {
-        Money money = inputView.inputMoney();
-        return money;
-    }
-
+    // TODO: 책임 분리
     private int getLottoCount(Money money) {
         return money.getValue() / 1000;
-    }
-
-    private void printLottoCount(int count) {
-        System.out.printf("%d개를 구매했습니다.\n", count);
-    }
-
-    private void printLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto.getInfo());
-        }
     }
 }

@@ -1,6 +1,15 @@
 import java.util.List;
 
 public class OutputView {
+    public void printLottoCount(int count) {
+        System.out.printf("%d개를 구매했습니다.\n", count);
+    }
+
+    public void printLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto.getInfo());
+        }
+    }
 
     public void printWinningResult(WinningResult winningResult) {
         List<WinningInfo> sortedWinningInfo = WinningInfo.getSortedValues();
