@@ -3,15 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoTicket {
+public record LottoTicket(
+        List<Integer> numbers
+) {
 
-    private final List<Integer> numbers;
-
-    public LottoTicket(List<Integer> numbers) {
-        this.numbers = numbers;
-    }
-
-    public List<Integer> getNumbers() {
+    @Override
+    public List<Integer> numbers() {
         return new ArrayList<>(numbers);
     }
 }
