@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Converter {
 
+    private Converter() {
+
+    }
+
     public static int convertToInt(String input) {
         try {
             return Integer.parseInt(input);

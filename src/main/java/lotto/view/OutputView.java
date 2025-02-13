@@ -8,6 +8,10 @@ import java.util.Map;
 
 public class OutputView {
 
+    private OutputView() {
+
+    }
+
     public static void printCountMessage(int count) {
         System.out.println(count + "개를 구매했습니다.");
     }
