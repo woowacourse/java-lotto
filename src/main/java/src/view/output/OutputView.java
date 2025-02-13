@@ -7,4 +7,6 @@ public interface OutputView {
     void printInputPurchaseMoneyMessage();
 
     void printPurchasedLottos(List<LottoResponse> responses);
+
+    void printInputWinningLotto();
 }
