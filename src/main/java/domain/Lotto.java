@@ -21,7 +21,7 @@ public class Lotto {
         numbers = new ArrayList<>();
         String[] split = lotto.split(DELIMITER);
         for (String s : split) {
-            int num = validateIsInteger(s);
+            int num = validateIsInteger(s.trim());
             validateRange(num);
             numbers.add(num);
         }
@@ -59,14 +59,21 @@ public class Lotto {
         return new GetLottoDto(numbers);
     }
 
-    public int countMatchNumbers(Lotto other) {
-        return (int) numbers.stream()
-                .filter(other::contains)
+    public Rank countMatchNumbers(WinningLotto winningLotto) {
+        int count = (int) numbers.stream()
+                .filter(winningLotto::contains)
                 .count();
+        boolean bonusFlag = false;
+        if(count == 5) {
+            bonusFlag = winningLotto.matchBonus(numbers);
+        }
+        return Rank.matchRank(count, bonusFlag);
     }
 
-    private boolean contains(int number) {
+    protected boolean contains(int number) {
         return numbers.contains(number);
     }
+
+
 
 }
