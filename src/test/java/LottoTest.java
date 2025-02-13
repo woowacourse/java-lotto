@@ -13,8 +13,8 @@ class LottoTest {
     @Test
     @DisplayName("숫자6개를 갖는다")
     void 숫자6개를갖는다() {
-        List<Integer> validNumbers = List.of(1, 2, 3, 4, 5, 6);
-        List<Integer> invalidNumbers = List.of(1, 2, 3, 4, 5);
+        List<Integer> validNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> invalidNumbers = Arrays.asList(1, 2, 3, 4, 5);
 
         assertThatCode(() -> new Lotto(validNumbers))
                 .doesNotThrowAnyException();
