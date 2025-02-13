@@ -1,5 +1,9 @@
 package model;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 public enum WinningStatus {
     FIRST(2_000_000_000, 6, false, "6개 일치 (2000000000원)"),
     SECOND(30_000_000, 5, true, "5개 일치, 보너스 볼 일치(30000000원)"),
@@ -18,6 +22,12 @@ public enum WinningStatus {
         this.matchingCount = matchingCount;
         this.matchesBonusNumber = matchesBonusNumber;
         this.expression = expression;
+    }
+
+    public static List<WinningStatus> getSorted() {
+        return Arrays.stream(WinningStatus.values())
+                .sorted(Comparator.comparing(WinningStatus::getPrice))
+                .toList();
     }
 
     public static WinningStatus findBy(int matchingCount, boolean matchesBonusNumber) {

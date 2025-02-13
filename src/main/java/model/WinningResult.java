@@ -8,7 +8,7 @@ public class WinningResult {
     private final Map<WinningStatus, Integer> winningResults = new LinkedHashMap<>();
 
     public WinningResult() {
-        for (WinningStatus winningStatus : WinningStatus.values()) {
+        for (WinningStatus winningStatus : WinningStatus.getSorted()) {
             winningResults.put(winningStatus, 0);
         }
     }
