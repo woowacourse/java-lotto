@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public record LottoResult(
@@ -9,10 +10,18 @@ public record LottoResult(
     }
 
     public static LottoResult initialize() {
-        Map<LottoRanking, Integer> initialResult = new HashMap<>();
+        Map<LottoRanking, Integer> initialResult = new LinkedHashMap<>();
         for (LottoRanking ranking : LottoRanking.values()) {
             initialResult.put(ranking, 0);
         }
         return new LottoResult(initialResult);
+    }
+
+    public long getTotalPrize() {
+        long totalPrize = 0;
+        for (LottoRanking ranking : result.keySet()) {
+            totalPrize+=(long)ranking.getPrize()*result.get(ranking);;
+        }
+        return totalPrize;
     }
 }
