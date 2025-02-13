@@ -1,6 +1,6 @@
 package lotto.utill;
 
-import static lotto.utill.RandomsWrapper.*;
+import static lotto.common.utill.RandomsWrapper.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
