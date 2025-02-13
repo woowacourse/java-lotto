@@ -2,7 +2,7 @@ package controller;
 
 import domain.Amount;
 import domain.Lottos;
-import domain.LottosFactory;
+import global.factory.LottosFactory;
 import domain.WinningLotto;
 import domain.dto.GetResultDto;
 import global.generator.RandomGenerator;

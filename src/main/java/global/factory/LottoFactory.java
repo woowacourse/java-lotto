@@ -1,5 +1,6 @@
-package domain;
+package global.factory;
 
+import domain.Lotto;
 import global.generator.Generator;
 
 public class LottoFactory {
