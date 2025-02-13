@@ -27,15 +27,15 @@ public class LottoController {
                 issuedLottosDto);
         Double earningRate = openLottoService.calculateEarningRate(result,
                 issuedLottosDto.lottos().size() * LottoConstants.LOTTO_PRICE.getValue());
-        OutputView.printLottoResult(result,earningRate);
+        OutputView.printLottoResult(result, earningRate);
     }
 
-    private IssuedLottosDto issueLotto(){
+    private IssuedLottosDto issueLotto() {
         int money = InputView.askMoney();
         return issueLottoService.issueLottos(money);
     }
 
-    private WinningLottoDto makeWinningLotto(){
+    private WinningLottoDto makeWinningLotto() {
         List<Integer> numbers = InputView.askWinningLotto();
         Integer bonusNumber = InputView.askBonusNumber();
         return openLottoService.makeWinningLotto(numbers, bonusNumber);

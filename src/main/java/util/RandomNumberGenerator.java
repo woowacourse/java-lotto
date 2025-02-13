@@ -1,8 +1,7 @@
 package util;
 
-import static constant.LottoConstants.*;
+import static constant.LottoConstants.LOTTO_SIZE;
 
-import constant.LottoConstants;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

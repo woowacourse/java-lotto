@@ -36,8 +36,8 @@ public class WinningLotto {
         }
     }
 
-    public WinningLottoDto getWinningLottoDto(){
-        return new WinningLottoDto(lotto.getSortedNumbers(),bonusNumber);
+    public WinningLottoDto getWinningLottoDto() {
+        return new WinningLottoDto(lotto.getSortedNumbers(), bonusNumber);
     }
 
     public WinningCount getLottoResult(List<Integer> issuedLotto) {
@@ -56,7 +56,7 @@ public class WinningLotto {
         if (matchedCount == WinningCount.FOUR.getMatchedCount()) {
             return WinningCount.FOUR;
         }
-        if (matchedCount == WinningCount.FIVE.getMatchedCount()&& isBonusContained) {
+        if (matchedCount == WinningCount.FIVE.getMatchedCount() && isBonusContained) {
             return WinningCount.FIVE_BONUS;
         }
         if (matchedCount == WinningCount.FIVE.getMatchedCount()) {

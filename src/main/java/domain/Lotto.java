@@ -1,14 +1,14 @@
 package domain;
 
-import static constant.LottoConstants.*;
-import static exception.ErrorMessage.*;
+import static constant.LottoConstants.LOTTO_RANGE_MAX;
+import static constant.LottoConstants.LOTTO_RANGE_MIN;
+import static constant.LottoConstants.LOTTO_SIZE;
+import static exception.ErrorMessage.LOTTO_NUMBER_DUPLICATED_ERROR;
+import static exception.ErrorMessage.LOTTO_RANGE_ERROR;
 
-import constant.LottoConstants;
-import exception.ErrorMessage;
 import exception.LottoException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class Lotto {
         validateLottoRange(numbers);
         validateLottoDuplicate(numbers);
         validateLottoNumberSize(numbers);
-        this.numbers=numbers;
+        this.numbers = numbers;
     }
 
     private void validateLottoRange(List<Integer> numbers) {
@@ -43,7 +43,7 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getSortedNumbers(){
+    public List<Integer> getSortedNumbers() {
         List<Integer> numbers = new ArrayList<>(this.numbers);
         Collections.sort(numbers);
         return numbers;

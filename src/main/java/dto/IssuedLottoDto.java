@@ -8,8 +8,12 @@ public record IssuedLottoDto(
 ) {
     @Override
     public boolean equals(Object obj) {
-        if(this == obj) return true;
-        if (!(obj instanceof IssuedLottoDto)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof IssuedLottoDto)) {
+            return false;
+        }
         IssuedLottoDto issuedLottoDto = (IssuedLottoDto) obj;
         return new HashSet<>(this.numbers).containsAll(issuedLottoDto.numbers);
     }

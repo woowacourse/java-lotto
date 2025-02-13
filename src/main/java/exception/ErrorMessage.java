@@ -8,16 +8,15 @@ public enum ErrorMessage {
     PRICE_UNIT_ERROR("금액 단위 오류"),
     INPUT_FORMAT_ERROR("입력 형식 오류"),
     NUMBER_TYPE_ERROR("숫자 타입 오류"),
-    SYSTEM_ERROR("시스템 오류")
-    ;
-
-
+    SYSTEM_ERROR("시스템 오류");
 
 
     private String message;
+
     ErrorMessage(String message) {
         this.message = message;
     }
+
     public String getMessage() {
         return message;
     }
