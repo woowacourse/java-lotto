@@ -7,6 +7,7 @@ public enum ErrorMessages {
 
     NOT_NUMBER("입력된 문자가 숫자가 아닙니다."),
     INVALID_MONEY_INPUT("천원 단위로 입력하세요."),
+    MONEY_OUT_OF_RANGE("돈은 1,000원과 100,000원 사이여야 합니다."),
     LOTTO_NUMBER_OUT_OF_RANGE("로또의 숫자가 1~45의 유효 범위를 벗어납니다."),
     DUPLICATE_EXIST("중복된 내용이 존재합니다."),
     LOTTO_NUMBER_COUNT("로또의 구성 숫자는 6개여야합니다."),
