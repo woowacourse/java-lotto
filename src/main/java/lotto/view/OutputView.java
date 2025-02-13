@@ -1,11 +1,11 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.Rank;
+import lotto.dto.response.LottosResponse;
+import lotto.dto.response.ResultResponse;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 
 public class OutputView {
@@ -18,22 +18,22 @@ public class OutputView {
     public static final String RETURN_OF_RATE_MESSAGE = "총 수익률은 %.2f입니다.%n";
     public static final String EMPTY = "";
 
-    public void printTicket(List<Lotto> lottos) {
-        int size = lottos.size();
+    public void printTicket(LottosResponse response) {
+        int size = response.lottos().size();
         System.out.printf(TICKET_COUNT_MESSAGE, size);
-        lottos.stream()
-                .map(Lotto::getNumbers)
+        response.lottos().stream()
+                .map(LottosResponse.InnerLotto::numbers)
                 .forEach(System.out::println);
     }
 
-    public void printResult(Map<Rank, Integer> rankCount, double rateOfReturn) {
+    public void printResult(ResultResponse response) {
         System.out.println(RESULT_TITLE_MESSAGE);
         System.out.println(DIVIDER);
         Arrays.stream(Rank.values())
                 .sorted(Comparator.reverseOrder())
                 .forEach(rank ->
-                    System.out.print(getRankCountMessage(rank, rankCount)));
-        System.out.printf(RETURN_OF_RATE_MESSAGE, rateOfReturn);
+                    System.out.print(getRankCountMessage(rank, response.rankCount())));
+        System.out.printf(RETURN_OF_RATE_MESSAGE, response.rateOfReturn());
     }
 
     private String getRankCountMessage(Rank rank, Map<Rank, Integer> rankCount) {

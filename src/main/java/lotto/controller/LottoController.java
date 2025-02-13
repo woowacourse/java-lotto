@@ -1,15 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.Rank;
-import lotto.dto.WinningBallsDto;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 public class LottoController {
 
@@ -30,19 +23,14 @@ public class LottoController {
     }
 
     private void buyLottoTicket() {
-        int payment = inputView.readPayment();
-        List<Lotto> lottos = lottoService.buyLottos(payment);
-        outputView.printTicket(lottos);
+        outputView.printTicket(lottoService.buyLottos(inputView.readPayment()));
     }
 
     private void setWinningBalls() {
-        WinningBallsDto winningBallsDto = inputView.readWinningBalls();
-        lottoService.setWinningBalls(winningBallsDto);
+        lottoService.setWinningBalls(inputView.readWinningBalls());
     }
 
     private void getResult() {
-        Map<Rank, Integer> rankCount = lottoService.getResult();
-        double rateOfReturn = lottoService.getRateOfReturn(rankCount);
-        outputView.printResult(rankCount, rateOfReturn);
+        outputView.printResult(lottoService.getResult());
     }
 }
