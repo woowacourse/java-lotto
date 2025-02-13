@@ -4,6 +4,7 @@ import util.NumberPicker;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 public class Lotto {
@@ -16,8 +17,21 @@ public class Lotto {
     private final List<Integer> numbers;
     
     public Lotto(List<Integer> numbers) {
-        // TODO: 6, 중복 검증 필요
+        validateNumberCount(numbers);
+        validateNumberNotDuplicated(numbers);
         this.numbers = numbers;
+    }
+    
+    private void validateNumberCount(List<Integer> numbers) {
+        if (numbers.size() != NUMBER_COUNT) {
+            throw new IllegalArgumentException("로또 번호는 6개가 되어야 합니다.");
+        }
+    }
+    
+    private void validateNumberNotDuplicated(List<Integer> numbers) {
+        if (numbers.size() != new HashSet<>(numbers).size()) {
+            throw new IllegalArgumentException("로또 번호는 중복되면 안됩니다.");
+        }
     }
     
     public static List<Lotto> purchase(int money, NumberPicker numberPicker) {

@@ -16,6 +16,24 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class LottoTest {
     
     @Test
+    void 로또_번호가_6개가_아니면_예외가_발생한다() {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
+        
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 6개가 되어야 합니다.");
+    }
+    
+    @Test
+    void 로또_번호에_중복이_있으면_예외가_발생한다() {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 5);
+        
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 중복되면 안됩니다.");
+    }
+    
+    @Test
     void 구입_금액만큼_로또를_구입한다() {
         // given
         int money = 4000;
@@ -39,6 +57,21 @@ class LottoTest {
                         List.of(43, 41, 40, 23, 35, 22),
                         List.of(9, 7, 13, 14, 16, 2)
                 ));
+    }
+    
+    @Test
+    void 금액이_1000원_미만이면_예외를_발생한다() {
+        int money = 999;
+        
+        NumberPicker numberPicker = new StaticNumberPicker(List.of(
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(14, 15, 16, 13, 12, 9),
+                List.of(43, 41, 40, 23, 35, 22),
+                List.of(9, 7, 13, 14, 16, 2)
+        ));
+        assertThatThrownBy(() -> Lotto.purchase(money, numberPicker))
+                .isExactlyInstanceOf(IllegalStateException.class)
+                .hasMessage("금액은 1000원 이상이여아 합니다.");
     }
     
     @ParameterizedTest
@@ -65,21 +98,6 @@ class LottoTest {
         
         //than
         assertThat(result).isEqualTo(expected);
-    }
-    
-    @Test
-    void 금액이_1000원_미만이면_예외를_발생한다() {
-        int money = 999;
-        
-        NumberPicker numberPicker = new StaticNumberPicker(List.of(
-                List.of(1, 2, 3, 4, 5, 6),
-                List.of(14, 15, 16, 13, 12, 9),
-                List.of(43, 41, 40, 23, 35, 22),
-                List.of(9, 7, 13, 14, 16, 2)
-        ));
-        assertThatThrownBy(() -> Lotto.purchase(money, numberPicker))
-                .isExactlyInstanceOf(IllegalStateException.class)
-                .hasMessage("금액은 1000원 이상이여아 합니다.");
     }
     
     public static Stream<Arguments> provideMatchNumbers() {
