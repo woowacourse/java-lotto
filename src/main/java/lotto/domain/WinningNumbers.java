@@ -53,4 +53,11 @@ public class WinningNumbers {
     }
 
 
+    public int checkMatchCount(Lotto lotto) {
+        return lotto.checkMatchCount(winningNumbers);
+    }
+
+    public boolean checkMatchBonus(Lotto lotto) {
+        return lotto.checkBonus(bonusNumber);
+    }
 }
