@@ -12,11 +12,11 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(numbers);
-    }
-
     public boolean checkDuplication(List<Integer> targetNumbers) {
         return new HashSet<>(numbers).containsAll(targetNumbers);
+    }
+
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 }

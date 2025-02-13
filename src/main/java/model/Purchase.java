@@ -9,7 +9,15 @@ public class Purchase {
 
     public Purchase(String purchaseAmountInput) {
         validate(purchaseAmountInput);
-       this.amount = Integer.parseInt(purchaseAmountInput);
+        this.amount = Integer.parseInt(purchaseAmountInput);
+    }
+
+    public int calculateLottoCount() {
+        return amount / LOTTO_PRICE;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     private void validate(String purchaseAmountInput) {
@@ -24,13 +32,5 @@ public class Purchase {
         catch (NumberFormatException e) {
             throw new IllegalArgumentException("구입 금액은 정수로 입력해주세요.");
         }
-    }
-
-    public int calculateLottoCount() {
-        return amount / LOTTO_PRICE;
-    }
-
-    public int getAmount() {
-        return amount;
     }
 }

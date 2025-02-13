@@ -11,6 +11,14 @@ public class BonusNumber {
         this.number = Integer.parseInt(bonusNumberInput);
     }
 
+    public boolean matchesWith(List<Integer> lottoNumbers) {
+        return lottoNumbers.contains(number);
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
     private void validate(String bonusNumberInput, WinningNumber winningNumber) {
         try {
             int bonusNumber = Integer.parseInt(bonusNumberInput);
@@ -23,13 +31,5 @@ public class BonusNumber {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("보너스 볼은 정수로 입력해주세요.");
         }
-    }
-
-    public boolean matchesWith(List<Integer> lottoNumbers) {
-        return lottoNumbers.contains(number);
-    }
-
-    public int getNumber() {
-        return number;
     }
 }

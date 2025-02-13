@@ -4,16 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumber {
+    private static final String DELIMITER = ", ";
+
     private final List<Integer> numbers = new ArrayList<>();
 
     public WinningNumber(String inputWinningNumbers) {
-        String[] winningNumbers = inputWinningNumbers.split(", ");
+        String[] winningNumbers = inputWinningNumbers.split(DELIMITER);
         validateNumberCount(winningNumbers);
 
         for(String winningNumber : winningNumbers) {
             validateNumber(winningNumber);
             numbers.add(Integer.parseInt(winningNumber));
         }
+    }
+
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
+    public int findMatchingCountWith(List<Integer> lottoNumbers) {
+        return (int) numbers.stream()
+                .filter(n -> lottoNumbers.contains(n))
+                .count();
     }
 
     private void validateNumberCount(String[] winningNumbers) {
@@ -37,15 +49,5 @@ public class WinningNumber {
             }
             throw new IllegalArgumentException("당첨 번호는 정수로 입력해주세요.");
         }
-    }
-
-    public boolean contains(int number) {
-        return numbers.contains(number);
-    }
-
-    public int findMatchingCountWith(List<Integer> lottoNumbers) {
-        return (int) numbers.stream()
-                .filter(n -> lottoNumbers.contains(n))
-                .count();
     }
 }
