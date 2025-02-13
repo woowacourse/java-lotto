@@ -7,6 +7,7 @@ import java.util.Set;
 
 public class Lotto {
     private List<Integer> numbers;
+    private PrizeTier prizeTier = null;
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
@@ -20,12 +21,26 @@ public class Lotto {
         return numberSet.size();
     }
 
+    public void rankTier(WinningLotto winningLotto) {
+        int count = winningLotto.getMatchCount(numbers);
+        boolean isBonusMatched = winningLotto.isBonusMatched(numbers);
+        this.prizeTier = PrizeTier.getTier(count, isBonusMatched);
+    }
+
+    public int extractPrize() {
+        return prizeTier.getPrize();
+    }
+
+    public boolean isTierMatched(PrizeTier tier) {
+        return this.prizeTier == tier;
+    }
+
     public boolean isBonusMatched(int bonusNumber) {
         return numbers.contains(bonusNumber);
     }
 
     public LottoDto toDto() {
-        return new LottoDto(numbers);
+        return new LottoDto(numbers, prizeTier);
     }
 
     private void validateNumbers(List<Integer> numbers) {

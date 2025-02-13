@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class WinningLotto {
     private static WinningLotto INSTANCE;
     private Lotto lotto;
@@ -41,5 +43,13 @@ public class WinningLotto {
         if (bonusNumber < 1 || bonusNumber > 45) {
             throw new IllegalArgumentException("숫자 범위가 벗어났습니다.");
         }
+    }
+
+    public int getMatchCount(List<Integer> numbers) {
+        return lotto.countMatches(numbers);
+    }
+
+    public boolean isBonusMatched(List<Integer> numbers) {
+        return numbers.contains(bonusNumber);
     }
 }
