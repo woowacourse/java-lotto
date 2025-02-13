@@ -48,4 +48,20 @@ public enum LottoPrize {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Prize 를 찾을 수 없습니다."));
     }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isBonusNumberMatches() {
+        return bonusNumberMatches;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
+
+    public boolean isWin() {
+        return isWin;
+    }
 }
