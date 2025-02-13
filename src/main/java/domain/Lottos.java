@@ -3,7 +3,9 @@ package domain;
 import domain.dto.GetLottoDto;
 import domain.dto.GetLottosDto;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 public class Lottos {
 
@@ -27,18 +29,20 @@ public class Lottos {
     }
 
     public void getResult(WinningLotto winningLotto) {
-        List<Integer> matchCount = countMatchNumbers(winningLotto);
-
+        EnumMap<Rank, Integer> countRank = countMatchNumbers(winningLotto);
+        for (Entry<Rank, Integer> rankIntegerEntry : countRank.entrySet()) {
+            System.out.println(rankIntegerEntry.getKey() + " " + rankIntegerEntry.getValue());
+        }
     }
 
-    private List<Integer> countMatchNumbers(WinningLotto winningLotto) {
-        List<Integer> matchCounts = new ArrayList<>();
+    private EnumMap<Rank, Integer> countMatchNumbers(WinningLotto winningLotto) {
+        EnumMap<Rank, Integer> countRank = new EnumMap<>(Rank.class);
 
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.countMatchNumbers(winningLotto);
-            matchCounts.add(matchCount);
+            Rank matchRank = lotto.countMatchNumbers(winningLotto);
+            countRank.put(matchRank, countRank.getOrDefault(matchRank, 0) + 1);
         }
 
-        return matchCounts;
+        return countRank;
     }
 }
