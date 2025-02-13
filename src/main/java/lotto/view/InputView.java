@@ -63,7 +63,9 @@ public class InputView {
     }
 
     private List<String> validateLength(String winningLottoInput) {
-        List<String> winningNumbers = List.of(winningLottoInput.split(","));
+        List<String> winningNumbers = List.of(winningLottoInput
+                .replaceAll(" ", "")
+                .split(","));
         if (winningNumbers.size() != 6) {
             throw new IllegalArgumentException("6자리를 입력하세요.");
         }

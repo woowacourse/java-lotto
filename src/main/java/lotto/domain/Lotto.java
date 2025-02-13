@@ -45,4 +45,22 @@ public class Lotto {
     public String toString() {
         return lottoNumber.toString() + System.lineSeparator();
     }
+
+    public int match(Lotto winningLottoNumber) {
+        int count = 0;
+        for (int number : lottoNumber) {
+            count += winningLottoNumber.contain(number);
+        }
+        return count;
+    }
+    public int contain(int number) {
+        if (lottoNumber.contains(number)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public boolean checkBonusNumberMatch(int bonusNumber) {
+        return lottoNumber.contains(bonusNumber);
+    }
 }

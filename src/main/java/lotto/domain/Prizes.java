@@ -1,0 +1,48 @@
+package lotto.domain;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Prizes {
+
+    private List<Prize> prizes;
+    private Map<Rank, Integer> results = new LinkedHashMap<>();
+
+    public Prizes(List<Prize> prizes) {
+        this.prizes = prizes;
+        for (Rank rank : Rank.values()) {
+            results.put(rank,0);
+        }
+        matchRanks();
+    }
+
+    public void matchRanks() {
+        for (Prize prize : prizes) {
+            Rank rank = prize.matchRank();
+            results.put(rank, results.get(rank) +1);
+        }
+    }
+
+    public double calculateProfit(int money) {
+        int sum = 0;
+        for (Rank rank : results.keySet()) {
+            sum += rank.calculateTotalProfit(results.get(rank));
+        }
+        return Math.floor((((double) sum /money) * 100) / 100.0);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Rank rank : Rank.validRank()) {
+            sb.append(rank.getMessage())
+                    .append(results.get(rank))
+                    .append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
+
+}

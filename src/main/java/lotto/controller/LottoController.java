@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Prizes;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -27,6 +28,10 @@ public class LottoController {
         int bonusNumber = inputView.inputBonusNumber();
         winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
 
+        Prizes prizes = lottos.calculatePrize(winningLotto);
+        double totalProfit = prizes.calculateProfit(money);
 
+        outputView.printResult(prizes.toString().trim());
+        outputView.printProfitRate(totalProfit);
     }
 }

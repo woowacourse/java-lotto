@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class WinningLotto {
 
     private Lotto lotto;
@@ -15,5 +13,13 @@ public class WinningLotto {
 
     private void validateBonusNumber(Lotto lotto, int bonusNumber) {
         lotto.checkDuplicate(bonusNumber);
+    }
+
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber;
     }
 }
