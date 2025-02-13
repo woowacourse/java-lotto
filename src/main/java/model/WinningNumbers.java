@@ -26,13 +26,6 @@ public class WinningNumbers {
         return new WinningNumbers(winningNumbers, bonusBall);
     }
 
-    private void validateBonusNumberDuplicate(final List<LottoNumber> winningNumbers, final LottoNumber bonusBall) {
-        if (winningNumbers.contains(bonusBall)) {
-            throw new IllegalArgumentException(ErrorType.BONUS_BALL_IS_DUPLICATION.getMessage());
-        }
-    }
-
-
     private void validateSize(final List<LottoNumber> winningNumbers) {
         if (winningNumbers.size() != Lotto.LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorType.WINNING_NUMBERS_IS_INVALID_SIZE.getMessage());
@@ -46,6 +39,12 @@ public class WinningNumbers {
         }
     }
 
+    private void validateBonusNumberDuplicate(final List<LottoNumber> winningNumbers, final LottoNumber bonusBall) {
+        if (winningNumbers.contains(bonusBall)) {
+            throw new IllegalArgumentException(ErrorType.BONUS_BALL_IS_DUPLICATION.getMessage());
+        }
+    }
+    
     public int calculateLottoMatchCount(final List<LottoNumber> lottoNumbers) {
         int count = 0;
         for (final LottoNumber lottoNumber : lottoNumbers) {
@@ -58,5 +57,13 @@ public class WinningNumbers {
 
     public boolean matchBonusNumber(final List<LottoNumber> lottoNumbers) {
         return lottoNumbers.contains(bonusBall);
+    }
+
+    public List<LottoNumber> getWinningNumbers() {
+        return List.copyOf(winningNumbers);
+    }
+
+    public LottoNumber getBonusBall() {
+        return bonusBall;
     }
 }
