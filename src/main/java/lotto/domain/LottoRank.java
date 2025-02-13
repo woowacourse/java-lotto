@@ -1,6 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
     NO_REWARD(0, 0L, false),
@@ -42,5 +46,22 @@ public enum LottoRank {
                 .filter(rank -> rank.containsBonus == matchResultDto.isContainsBonusNumber())
                 .findAny()
                 .orElse(NO_REWARD);
+    }
+
+    public static Map<LottoRank, String> getRankInfo() {
+        return Arrays.stream(values())
+                .filter(lottoRank -> lottoRank != NO_REWARD)
+                .collect(Collectors.toMap(Function.identity(), LottoRank::generateRankMessage,
+                        (oldValue, newValue) -> oldValue,
+                        LinkedHashMap::new
+                ));
+    }
+
+    private String generateRankMessage() {
+        if (this == LottoRank.SECOND_PLACE) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원)", getMatchCount(), getWinningAmount());
+        }
+
+        return String.format("%d개 일치 (%d원)", getMatchCount(), getWinningAmount());
     }
 }
