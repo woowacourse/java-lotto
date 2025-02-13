@@ -2,6 +2,7 @@ package domain;
 
 import domain.numberstrategy.NumberStrategy;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class LottoMachine {
@@ -14,15 +15,15 @@ public class LottoMachine {
 
 
     public Lotto createLotto() {
-        Set<Number> numbers = new HashSet<>();
-        while (numbers.size() != Lotto.NUMBERS_SIZE) {
-            numbers.add(selectNumber());
-        }
+        Set<Number> numbers;
+        do {
+            numbers = new HashSet<>(selectNumbers());
+        } while (numbers.size() != Lotto.NUMBERS_SIZE);
         return new Lotto(numbers);
     }
 
-    private Number selectNumber() {
-        int randomValue = numberStrategy.pickNumber(Number.MAX_NUMBER);
-        return new Number(randomValue);
+    private List<Number> selectNumbers() {
+        List<Integer> numbers = numberStrategy.pickNumbers(Number.MAX_NUMBER, Lotto.NUMBERS_SIZE);
+        return numbers.stream().map(Number::new).toList();
     }
 }
