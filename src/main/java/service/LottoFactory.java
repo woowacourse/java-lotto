@@ -65,12 +65,20 @@ public class LottoFactory {
                     matchCount++;
                 }
             }
-
             Prize foundPrize = Prize.find(matchCount, matchesBonusNumber);
             prizeMap.put(foundPrize, prizeMap.get(foundPrize) + 1);
         }
-
         prizeMap.remove(Prize.match_none);
         return prizeMap;
+    }
+
+    public double getBenefit(EnumMap<Prize, Integer> enumMap) {
+        Integer principalMoney = ticketNumber * 1000;
+        Integer benefit = 0;
+        for (Prize prize : enumMap.keySet()) {
+            benefit += enumMap.get(prize) * prize.getPrizeAmount();
+        }
+
+        return (double) benefit / principalMoney;
     }
 }

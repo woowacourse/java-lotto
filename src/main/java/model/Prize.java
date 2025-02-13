@@ -25,7 +25,11 @@ public enum Prize {
     }
 
     public static EnumMap<Prize, Integer> prizeIntegerEnumMap() {
-        return new EnumMap<>(Prize.class);
+        EnumMap<Prize, Integer> enumMap = new EnumMap<>(Prize.class);
+        for (Prize prize : Prize.values()) {
+            enumMap.put(prize, 0);
+        }
+        return enumMap;
     }
 
     public static Prize find(int matchCount, boolean matchesBonusNumber) { // 5
@@ -37,6 +41,21 @@ public enum Prize {
                     .findFirst()
                     .orElse(Prize.match_none);
         }
+    }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public Integer getMatchCount() {
+        return matchCount;
+    }
+
+    public Integer getPrizeAmount() {
+        return prizeAmount;
+    }
+
+    public boolean isMatchesBonus() {
+        return matchesBonus;
     }
 }
