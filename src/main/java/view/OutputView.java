@@ -1,9 +1,9 @@
 package view;
 
 import view.dto.LottosDTO;
-import view.dto.LottosDTO.LottoDTO;
+import view.dto.LottosDTO.InnerLottoDetail;
 import view.dto.ResultDTO;
-import view.dto.ResultDTO.PrizeDTO;
+import view.dto.ResultDTO.InnerResultDetail;
 
 public class OutputView {
 
@@ -28,7 +28,7 @@ public class OutputView {
         return String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", profit);
     }
 
-    public String generatePrizeDetail(PrizeDTO prizeDTO){
+    public String generatePrizeDetail(InnerResultDetail prizeDTO){
         String bonusComment = " ";
         if (prizeDTO.isBonus()){
             bonusComment = ", 보너스 볼 일치";
@@ -40,7 +40,7 @@ public class OutputView {
                 prizeDTO.match());
     }
 
-    public void appendStringBuilder(LottoDTO lottoDTO, CustomStringBuilder stringBuilder) {
+    public void appendStringBuilder(InnerLottoDetail lottoDTO, CustomStringBuilder stringBuilder) {
         String format = "[%d, %d, %d, %d, %d, %d]";
         stringBuilder.appendLine(String.format(format, lottoDTO.numbers().toArray()));
     }
