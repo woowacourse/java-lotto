@@ -14,7 +14,14 @@ public class InputView {
     
     public int inputMoney() {
         String moneyString = SC.nextLine();
+        validateMoneyNotBlank(moneyString);
         return Integer.parseInt(moneyString);
+    }
+    
+    private void validateMoneyNotBlank(String moneyString) {
+        if (moneyString.isBlank()) {
+            throw new IllegalStateException("금액을 입력해야 합니다.");
+        }
     }
     
     public List<Integer> inputMatchLotto() {
