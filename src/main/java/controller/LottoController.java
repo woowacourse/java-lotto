@@ -1,7 +1,6 @@
 package controller;
 
 import controller.dto.LottoDtoMapper;
-import controller.dto.LottoRankResponse;
 import controller.dto.WinningLottoRequest;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +25,8 @@ public class LottoController {
     public void run() {
         List<LottoTicket> lottoTickets = createLottoTicket();
         WinningLotto winningLotto = createWinningLotto();
-        calculateRank(lottoTickets, winningLotto);
+        Map<LottoRank, Integer> rankMatchCounts = calculateRank(lottoTickets, winningLotto);
+        calculateProfitRate(lottoTickets.size(), rankMatchCounts);
     }
 
     private List<LottoTicket> createLottoTicket() {
@@ -44,9 +44,14 @@ public class LottoController {
         return lottoDtoMapper.toWinningLotto(winningLottoRequest);
     }
 
-    private void calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
+    private Map<LottoRank, Integer> calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
         Map<LottoRank, Integer> rankMatchCounts = lottoStore.calculateRankMatchCount(lottoTickets, winningLotto);
-        List<LottoRankResponse> lottoRankResponses = lottoDtoMapper.toLottoRankResponses(rankMatchCounts);
-        lottoConsoleView.printLottoRankResults(lottoRankResponses);
+        lottoConsoleView.printLottoRankResults(lottoDtoMapper.toLottoRankResponses(rankMatchCounts));
+        return rankMatchCounts;
+    }
+
+    private void calculateProfitRate(int lottoTicketCount, Map<LottoRank, Integer> rankMatchCounts) {
+        double profitRate = lottoStore.calculateProfitRate(lottoTicketCount, rankMatchCounts);
+        lottoConsoleView.printProfitRate(profitRate);
     }
 }

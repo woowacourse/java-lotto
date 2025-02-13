@@ -47,4 +47,8 @@ public class LottoConsoleView {
     public void printLottoRankResults(List<LottoRankResponse> lottoRankResponses) {
         outputView.printLottoRankResults(lottoRankResponses);
     }
+
+    public void printProfitRate(double profitRate) {
+        outputView.printProfitRate(profitRate);
+    }
 }

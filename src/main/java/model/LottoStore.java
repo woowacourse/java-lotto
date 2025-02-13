@@ -39,6 +39,14 @@ public class LottoStore {
         return rankCount;
     }
 
+    public double calculateProfitRate(int lottoTicketCount, Map<LottoRank, Integer> rankMatchCounts) {
+        int purchasedAmount = lottoTicketCount * LOTTO_PRICE;
+        int profit = rankMatchCounts.keySet().stream()
+                .mapToInt(rank -> rank.getWinningAmount() * rankMatchCounts.get(rank))
+                .sum();
+        return (double) profit / purchasedAmount;
+    }
+
     private List<LottoRank> calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
         return lottoTickets.stream()
                 .map(lottoTicket -> lottoRankCalculator.calculate(lottoTicket, winningLotto))
