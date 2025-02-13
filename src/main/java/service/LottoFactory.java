@@ -30,10 +30,10 @@ public class LottoFactory {
 
     private LottoFactory(final Integer ticketNumber) {
         this.ticketNumber = ticketNumber;
+        this.random = new Random();
         this.issuedTickets = IntStream.range(0, ticketNumber)
                 .mapToObj(i -> getIssueTicket())
                 .collect(Collectors.toList());
-        this.random = new Random();
     }
 
     private Lotto getIssueTicket() {
