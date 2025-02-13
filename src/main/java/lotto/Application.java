@@ -16,7 +16,6 @@ public class Application {
 
         List<Integer> winningNumbers = getWinningNumbers();
 
-        System.out.println("보너스 볼을 입력해 주세요.");
         int bonusNumber = getBonusNumber();
     }
 
@@ -68,14 +67,22 @@ public class Application {
         }
     }
 
+    private static int getBonusNumber() {
+        try {
+            System.out.println("보너스 볼을 입력해 주세요.");
+            Scanner scanner = new Scanner(System.in);
+            int bonusNumber = scanner.nextInt();
+            validateLottoNumber(bonusNumber);
+            return bonusNumber;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getBonusNumber();
+        }
+    }
+
     private static void validateLottoNumber(int lottoNumber) {
         if (lottoNumber < 1 || lottoNumber > 45) {
             throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이여야 합니다.");
         }
-    }
-
-    private static int getBonusNumber() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
     }
 }
