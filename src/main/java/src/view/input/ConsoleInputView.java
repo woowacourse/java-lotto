@@ -31,6 +31,23 @@ public class ConsoleInputView implements InputView {
         }
     }
 
+    @Override
+    public int inputBonusNumber() {
+        try {
+            String input = scanner.nextLine();
+            validateBonusNumber(input);
+            return Integer.parseInt(input);
+        } catch (RuntimeException e) {
+            throw new IllegalArgumentException("잘못된 입력입니다.", e);
+        }
+    }
+
+    private void validateBonusNumber(String bonusNumber) {
+        if (!bonusNumber.matches("[0-9]+")) {
+            throw new IllegalArgumentException("보너스 번호는 정수형이어야 합니다.");
+        }
+    }
+
     private List<String> parseWinningLottoNumbers(final String input) {
         List<String> parsedWinningLottoNumbers = Arrays.stream(input.split(WINNING_LOTTO_DELIMITER)).toList();
         parsedWinningLottoNumbers.forEach(this::validateWinningLottoInput);
