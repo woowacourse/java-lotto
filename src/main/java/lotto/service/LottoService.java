@@ -42,13 +42,4 @@ public class LottoService {
         int prizeSum = winningTiers.stream().mapToInt(WinningTier::getPrize).sum();
         return (double) prizeSum / purchaseAmount;
     }
-
-    private Lotto issueLotto() {
-        RandomGenerator randomGenerator = new RandomGenerator();
-        List<Integer> randoms = randomGenerator.generateUniqueRandomNumbers(Lotto.MAX_LOTTO_NUMBER)
-                .stream()
-                .sorted()
-                .toList();
-        return new Lotto(randoms);
-    }
 }
