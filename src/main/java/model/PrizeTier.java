@@ -34,4 +34,12 @@ public enum PrizeTier {
     public int getPrize() {
         return prize;
     }
+
+    public int getMatchedCount() {
+        return matchedCount;
+    }
+
+    public boolean isBonusMatched() {
+        return isBonusMatched;
+    }
 }
