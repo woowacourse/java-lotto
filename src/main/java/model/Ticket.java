@@ -3,18 +3,17 @@ package model;
 import dto.ROIResultResponse;
 import dto.TicketAmountResponse;
 
-import static utils.Validator.validateDivide;
+import static utils.Validator.validateDivisibility;
 import static utils.Validator.validateRange;
 
 public class Ticket {
 
-    private static final int TICKET_PRICE = 1000;
+    private static final int TICKET_PRICE = 1_000;
     
     private final int purchaseMoney;
 
     public Ticket(final int purchaseMoney) {
-        validateRange(purchaseMoney, TICKET_PRICE, Integer.MAX_VALUE);
-        validateDivide(purchaseMoney, TICKET_PRICE);
+        validatePurchaseMoney(purchaseMoney);
         this.purchaseMoney = purchaseMoney;
     }
 
@@ -22,16 +21,21 @@ public class Ticket {
         return purchaseMoney / TICKET_PRICE;
     }
 
-    public TicketAmountResponse createResponse() {
+    public TicketAmountResponse createTicketResponse() {
         return new TicketAmountResponse(getTicketAmount());
     }
 
-    public ROIResultResponse createROIResponse(int totalPrice) {
+    public ROIResultResponse createROIResponse(final int totalPrice) {
         double ROI = calculateROI(totalPrice);
         return new ROIResultResponse(ROI, Heuristic.determine(ROI));
     }
 
-    private double calculateROI(int totalPrice) {
+    private static void validatePurchaseMoney(final int purchaseMoney) {
+        validateRange(purchaseMoney, TICKET_PRICE, Integer.MAX_VALUE);
+        validateDivisibility(purchaseMoney, TICKET_PRICE);
+    }
+
+    private double calculateROI(final int totalPrice) {
         return Math.round(((double) totalPrice / purchaseMoney) * 100) / 100.0;
     }
 }
