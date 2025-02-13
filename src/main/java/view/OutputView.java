@@ -1,9 +1,9 @@
 package view;
 
-import java.util.List;
 import view.dto.LottosDTO;
 import view.dto.LottosDTO.LottoDTO;
 import view.dto.ResultDTO;
+import view.dto.ResultDTO.PrizeDTO;
 
 public class OutputView {
 
@@ -17,19 +17,34 @@ public class OutputView {
 
     public void printResult(ResultDTO resultDTO) {
         StringBuilder stringBuilder = new StringBuilder();
-        List<Integer>
-        stringBuilder.append(String.format("""
-                당첨 통계
-                ---------
-                %d개 일치 (%d원)- %d개
-                %d개 일치 (%d원)- %d개
-                %d개 일치 (%d원)- %d개
-                %d개 일치, 보너스 볼 일치(%d원) - %d개
-                %d개 일치 (%d원)- %d개
-                총 수익률은 0.f2입니다.
-                """, resultDTO.));
+        stringBuilder.append("당첨 통계\n");
+        stringBuilder.append("---------\n");
 
+        resultDTO.prizeDTOs().stream().sorted()
+                .forEach(prizeDTO -> stringBuilder
+                        .append(generatePrizeDetail(prizeDTO))
+                        .append("\n")
+                );
 
+        stringBuilder.append(generateProfit(resultDTO.profit()));
+
+        System.out.println(stringBuilder);
+    }
+
+    public String generateProfit(double profit){
+        return String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", profit);
+    }
+
+    public String generatePrizeDetail(PrizeDTO prizeDTO){
+        String bonusComment = " ";
+        if (prizeDTO.isBonus()){
+            bonusComment = ", 보너스 볼 일치";
+        }
+        return String.format("%d개 일치%s(%d원)- %d개",
+                prizeDTO.count(),
+                bonusComment,
+                prizeDTO.price(),
+                prizeDTO.match());
     }
 
     public void appendStringBuilder(LottoDTO lottoDTO, StringBuilder stringBuilder) {
