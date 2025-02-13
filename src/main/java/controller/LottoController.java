@@ -39,6 +39,6 @@ public class LottoController {
                 InputParser.parseStringToInteger(inputBonusNumber));
         HashMap<LottoMatch,Integer> lottoResult = buyer.countLottos(winningLotto);
 
-
+        outputView.displayResult(lottoResult);
     }
 }

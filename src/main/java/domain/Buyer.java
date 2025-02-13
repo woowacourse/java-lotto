@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Buyer {
@@ -29,7 +30,7 @@ public class Buyer {
     }
 
     public HashMap<LottoMatch, Integer> countLottos(WinningLotto winningLotto) {
-        HashMap<LottoMatch, Integer> result = new HashMap<>();
+        HashMap<LottoMatch, Integer> result = new LinkedHashMap<>();
         for(LottoMatch lottoMatch : LottoMatch.values()) {
             result.put(lottoMatch, 0);
         }
