@@ -19,10 +19,6 @@ public class LottoGroup {
                 });
     }
 
-    public int getSize() {
-        return lottoGroup.size();
-    }
-
     public List<Lotto> getLottoGroup() {
         return lottoGroup;
     }
