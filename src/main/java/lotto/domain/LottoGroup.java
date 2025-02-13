@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import static lotto.common.Constants.LOTTO_NUM_SIZE;
+import static lotto.common.Constants.MAX_LOTTO_NUMBER;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
