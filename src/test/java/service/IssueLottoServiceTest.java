@@ -1,13 +1,10 @@
 package service;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import dto.IssuedLottosDto;
-import exception.ErrorMessage;
-import org.assertj.core.api.Assertions;
+import exception.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -29,7 +26,7 @@ class IssueLottoServiceTest {
     void buyLottoRangeExceptionTest(int money){
         assertThatThrownBy(()->issueLottoService.issueLottos(money))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.PRICE_RANGE_ERROR.getMessage());
+                .hasMessage(ExceptionMessage.PRICE_RANGE_ERROR.getMessage());
     }
 
     @DisplayName("금액 단위 테스트")
@@ -38,6 +35,6 @@ class IssueLottoServiceTest {
     void buyLottoUnitExceptionTest(int money){
         assertThatThrownBy(()->issueLottoService.issueLottos(money))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.PRICE_UNIT_ERROR.getMessage());
+                .hasMessage(ExceptionMessage.PRICE_UNIT_ERROR.getMessage());
     }
 }

@@ -22,11 +22,7 @@ public class IssueLottoService {
         int count = money / LOTTO_PRICE.getValue();
         List<IssuedLottoDto> issuedLottos = new ArrayList<>();
         while (issuedLottos.size() != count) {
-            Lotto lotto = new Lotto(
-                    RandomNumberGenerator.getRandomNumbers(LOTTO_RANGE_MIN.getValue(), LOTTO_RANGE_MAX.getValue()));
-            if (!isDuplicate(issuedLottos, lotto.getSortedNumbers())) {
-                issuedLottos.add(new IssuedLottoDto(lotto.getSortedNumbers()));
-            }
+            issuedLottos.add(makeUniqueLotto(issuedLottos));
         }
         return new IssuedLottosDto(issuedLottos);
     }
@@ -40,7 +36,19 @@ public class IssueLottoService {
         }
     }
 
-    private boolean isDuplicate(List<IssuedLottoDto> lottos, List<Integer> numbers) {
+    private IssuedLottoDto makeUniqueLotto(final List<IssuedLottoDto> lottos) {
+        List<Integer> newNumbers;
+        do {
+            Lotto lotto = new Lotto(
+                    RandomNumberGenerator.getRandomNumbers(
+                            LOTTO_RANGE_MIN.getValue(),
+                            LOTTO_RANGE_MAX.getValue()));
+            newNumbers = lotto.getSortedNumbers();
+        } while (isDuplicate(lottos, newNumbers));
+        return new IssuedLottoDto(newNumbers);
+    }
+
+    private boolean isDuplicate(final List<IssuedLottoDto> lottos, List<Integer> numbers) {
         IssuedLottoDto issuedLottoDto = new IssuedLottoDto(numbers);
         return lottos.contains(issuedLottoDto);
     }
