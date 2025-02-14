@@ -15,28 +15,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
     public static Lotto create(final List<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
-    }
-
-    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
-        if (!lottoNumbers.equals(sorted(lottoNumbers))) {
-            throw new IllegalStateException("오름차순이 아닙니다.");
-        }
-
-        if (new HashSet<>(lottoNumbers).size() != LOTTO_NUM_SIZE) {
-            throw new IllegalStateException("중복은 불가능합니다.");
-        }
-    }
-
-    private List<LottoNumber> sorted(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
-                .sorted()
-                .toList();
     }
 
     public static List<LottoNumber> toLottoNumberList(String input) {
@@ -46,6 +26,28 @@ public class Lotto {
 
         return Arrays.stream(input.split(", "))
                 .map(LottoNumber::new)
+                .toList();
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
+        List<LottoNumber> sortedLottoNumbers = sorted(lottoNumbers);
+
+        if (sortedLottoNumbers.size() != LOTTO_NUM_SIZE) {
+            throw new IllegalArgumentException("로또 넘버는 6개입니다.");
+        }
+
+        if (new HashSet<>(sortedLottoNumbers).size() != LOTTO_NUM_SIZE) {
+            throw new IllegalStateException("중복은 불가능합니다.");
+        }
+    }
+
+    private List<LottoNumber> sorted(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .sorted()
                 .toList();
     }
 
