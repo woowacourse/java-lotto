@@ -28,8 +28,8 @@ public class GameController {
     private LottoMachine buyLottoTickets() {
         while (true) {
             try {
-                String response = InputView.readLottoMoney();
-                lottoMoney = new LottoMoney(response);
+                String money = InputView.readLottoMoney();
+                lottoMoney = new LottoMoney(money);
                 return new LottoMachine(lottoMoney);
             } catch (IllegalArgumentException e) {
                 OutputView.writeErrorMessage(e);
@@ -45,8 +45,8 @@ public class GameController {
     private Lotto storeWinningLottoNumbers() {
         while (true) {
             try {
-                String response = InputView.readWinningNumbers();
-                return new Lotto(response);
+                String numbers = InputView.readWinningNumbers();
+                return new Lotto(numbers);
             } catch (IllegalArgumentException e) {
                 OutputView.writeErrorMessage(e);
             }
@@ -56,8 +56,8 @@ public class GameController {
     private WinningLotto storeWinningLottoBonus(Lotto winningNumbers) {
         while (true) {
             try {
-                String response = InputView.readBonusBall();
-                return new WinningLotto(winningNumbers, response);
+                String bonus = InputView.readBonusBall();
+                return new WinningLotto(winningNumbers, bonus);
             } catch (IllegalArgumentException e) {
                 OutputView.writeErrorMessage(e);
             }
