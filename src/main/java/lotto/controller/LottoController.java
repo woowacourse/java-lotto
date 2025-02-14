@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -12,7 +14,6 @@ import lotto.view.OutputView;
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
-    private Lottos lottos;
     private WinningLotto winningLotto;
 
     public LottoController(final InputView inputView, final OutputView outputView) {
@@ -22,17 +23,26 @@ public class LottoController {
 
     public void run() {
         Money money = inputView.inputMoney();
-        purchaseLotto(money);
+        Lottos lottos = purchaseLotto(money);
         operateWinningLotto();
-        operateStatistics(money);
+        operateStatistics(money, lottos);
         inputView.closeScanner();
     }
 
-    private void purchaseLotto(Money money) {
+    private Lottos purchaseLotto(Money money) {
         int lottoCounts = money.countsLotto();
         outputView.printCount(lottoCounts);
-        lottos = new Lottos(lottoCounts, new LottoGenerator());
+        Lottos lottos = publishLottos(lottoCounts);
         outputView.printLottos(lottos);
+        return lottos;
+    }
+
+    private Lottos publishLottos(int lottoCounts) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < lottoCounts; i++) {
+            lottos.add(new Lotto(new LottoGenerator()));
+        }
+        return new Lottos(lottos);
     }
 
     private void operateWinningLotto() {
@@ -41,7 +51,7 @@ public class LottoController {
         winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
     }
 
-    private void operateStatistics(Money money) {
+    private void operateStatistics(Money money, Lottos lottos) {
         Prizes prizes = lottos.calculatePrize(winningLotto);
         double totalProfit = prizes.calculateProfit(money);
 

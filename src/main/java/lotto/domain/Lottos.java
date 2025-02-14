@@ -5,24 +5,16 @@ import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottos = new ArrayList<>();
-    private LottoGenerator lottoGenerator;
+    private final List<Lotto> lottos;
 
-    public Lottos(int lottoCounts, LottoGenerator lottoGenerator) {
-        this.lottoGenerator = lottoGenerator;
-        generateLottos(lottoCounts);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public Prizes calculatePrize(WinningLotto winningLotto) {
         Lotto winningLottoNumber = winningLotto.getLotto();
         int bonusNumber = winningLotto.getBonusNumber();
         return matchNumber(winningLottoNumber, bonusNumber);
-    }
-
-    private void generateLottos(int lottoCounts) {
-        for (int i = 0; i < lottoCounts; i ++) {
-            lottos.add(new Lotto(lottoGenerator));
-        }
     }
 
     private Prizes matchNumber(Lotto winningLottoNumber, int bonusNumber) {

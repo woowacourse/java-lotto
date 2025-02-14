@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 class LottoTest {
 
     @Test
-    void 로또_생성_검증() {
+    void 로또_생성_검증_1() {
         //given
         String inputLotto = "1, 2, 3, 4, 5, 6";
 
