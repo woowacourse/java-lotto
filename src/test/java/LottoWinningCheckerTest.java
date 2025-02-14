@@ -14,6 +14,7 @@ class LottoWinningCheckerTest {
     @ParameterizedTest
     @MethodSource("lottoDataProvider")
     void 로또_결과를_확인할_수_있다(Numbers myNumbers, Numbers winningNumbers, int bonusNumber, LottoRanking ranking, int expectedCount) {
+        //when
         Lotto lotto = new Lotto(myNumbers);
         Lotto winningNumbersLotto = new Lotto(winningNumbers);
 
@@ -23,11 +24,12 @@ class LottoWinningCheckerTest {
         WinningNumberWithBonusNumber winningNumberWithBonusNumber = new WinningNumberWithBonusNumber(winningNumbersLotto, bonusNumber);
 
         LottoResult lottoResult = LottoWinningChecker.calculateResult(lottos, winningNumberWithBonusNumber);
-
+        //then
         assertThat(lottoResult.result().get(ranking)).isEqualTo(expectedCount);
     }
 
     private static Stream<Object[]> lottoDataProvider() {
+        //given
         Numbers winningNumber = new Numbers(Arrays.asList(7, 8, 9, 10, 11, 12));
         int bonusNumber = 20;
         return Stream.of(

@@ -11,9 +11,11 @@ class WinningNumberWithBonusNumberTest {
 
     @Test
     void 당첨_번호와_보너스_번호는_중복되면_예외를_던진다() {
+        //given
         Numbers lottoNumbers = new Numbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto winningNumber = new Lotto(lottoNumbers);
         int bonusNumber = 1;
+        //when & then
         assertThatThrownBy(() -> new WinningNumberWithBonusNumber(winningNumber, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }

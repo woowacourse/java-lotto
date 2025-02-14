@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,6 +10,7 @@ class LottoRankingTest {
 
     @ParameterizedTest
     @CsvSource({
+            //given
             "6, false, FIRST",
             "5, true, SECOND",
             "5, false, THIRD",
@@ -21,6 +21,7 @@ class LottoRankingTest {
             "2, false, LOSING",
     })
     void 올바른_등수를_반환한다(int correctCount, boolean isCorrectBonus, LottoRanking expectedRanking) {
+        //when & then
         assertThat(LottoRanking.from(correctCount, isCorrectBonus)).isEqualTo(expectedRanking);
     }
 
