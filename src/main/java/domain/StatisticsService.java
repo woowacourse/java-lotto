@@ -13,7 +13,7 @@ public class StatisticsService {
         lottoTickets.forEach(lottoTicket -> {
             int countMatched = lottoTicket.countMatchedNumbers(winningNumbers);
             boolean isBonusNumberMatched = lottoTicket.hasBonusNumber(bonusNumber);
-            LottoPrize prize = LottoPrize.value(countMatched, isBonusNumberMatched);
+            LottoPrize prize = LottoPrize.getLottoPrize(countMatched, isBonusNumberMatched);
             int prizeCount = prizeCounter.get(prize);
             prizeCounter.put(prize, prizeCount + 1);
         });

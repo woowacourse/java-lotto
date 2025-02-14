@@ -22,6 +22,13 @@ public enum LottoPrize {
         this.rank = rank;
     }
 
+    public static LottoPrize getLottoPrize(int countMatched, boolean isBonusNumberMatched) {
+        return Arrays.stream(LottoPrize.values()).filter(lottoPrize ->
+                        lottoPrize.countMatched == countMatched && lottoPrize.isBonusNumberMatched == isBonusNumberMatched
+                ).findFirst()
+                .orElse(LottoPrize.NOTHING);
+    }
+
     public int getMoney() {
         return money;
     }
@@ -32,12 +39,5 @@ public enum LottoPrize {
 
     public boolean isBonusNumberMatched() {
         return isBonusNumberMatched;
-    }
-
-    public static LottoPrize value(int countMatched, boolean isBonusNumberMatched) {
-        return Arrays.stream(LottoPrize.values()).filter(lottoPrize ->
-                        lottoPrize.countMatched == countMatched && lottoPrize.isBonusNumberMatched == isBonusNumberMatched
-                ).findFirst()
-                .orElse(LottoPrize.NOTHING);
     }
 }

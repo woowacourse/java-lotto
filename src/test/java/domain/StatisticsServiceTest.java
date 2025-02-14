@@ -48,7 +48,7 @@ class StatisticsServiceTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         int countMatchedNumbers = lottoTicket.countMatchedNumbers(winningNumbers);
         boolean hasBonusNumber = lottoTicket.hasBonusNumber(bonusNumber);
-        LottoPrize actual = LottoPrize.value(countMatchedNumbers, hasBonusNumber);
+        LottoPrize actual = LottoPrize.getLottoPrize(countMatchedNumbers, hasBonusNumber);
         LottoPrize expected = LottoPrize.SECOND;
 
         // then
