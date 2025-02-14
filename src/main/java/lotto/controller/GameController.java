@@ -67,7 +67,7 @@ public class GameController {
     private LottoResult checkLottoResult(WinningLotto winningLotto, List<Lotto> lottoTickets) {
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
 
-        lottoResult.matchLottoTicketsResult();
+        lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
         lottoResult.calculateLottoProfitRate(lottoMoney);
 
         return lottoResult;
