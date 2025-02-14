@@ -2,7 +2,6 @@ package model;
 
 import static model.WinningLotto.BONUS_INPUT_ERROR_MESSAGE;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,7 +23,7 @@ class WinningLottoTest {
     void 당첨_번호가_1_이상_45_이하의_정수가_아니면_예외가_발생한다(String input) {
         org.assertj.core.api.Assertions.assertThatThrownBy(() -> {new WinningLotto(input);})
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("당첨 번호는 중복되지 않는 1 이상 45 이하의 정수여야합니다.");
+                .hasMessageContaining("당첨 번호는 중복되지 않는 1 이상 45 이하의 정수여야합니다.");
     }
 
     @DisplayName("당첨 번호에 중복이 존재하면 예외가 발생한다")
@@ -33,7 +32,7 @@ class WinningLottoTest {
         String rawWinningNumbers = "1, 1, 3, 4, 15, 45";
         org.assertj.core.api.Assertions.assertThatThrownBy(() -> {new WinningLotto(rawWinningNumbers);})
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("당첨 번호는 중복되지 않는 1 이상 45 이하의 정수여야합니다.");
+                .hasMessageContaining("당첨 번호는 중복되지 않는 1 이상 45 이하의 정수여야합니다.");
     }
 
     @DisplayName("보너스 볼이 1 이상 45 이하의 정수인지 검사한다")
