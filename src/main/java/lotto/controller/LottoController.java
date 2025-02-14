@@ -4,6 +4,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 import lotto.domain.Profit;
 import lotto.domain.Rank;
@@ -41,7 +42,7 @@ public class LottoController {
     private Profit calculateProfit(WinnerLotto winnerLotto) {
         Profit profit = new Profit();
 
-        for (Lotto lotto : lottoGroup.getLottoGroup()) {
+        for (Lotto lotto : lottoGroup.getItem()) {
             long matchCount = winnerLotto.getMatchCount(lotto);
             boolean hasBonus = winnerLotto.hasBonus(lotto);
             Rank rank = Rank.find((int) matchCount, hasBonus);
@@ -62,15 +63,16 @@ public class LottoController {
         return readBonusNumber(winnerNumbers);
     }
 
-    private WinnerLotto readBonusNumber(List<LottoNumber> winnerNumbers) {
+    private WinnerLotto readBonusNumber(List<LottoNumber> winnerNumbersInput) {
         LottoNumber bonusNumber = RecoveryUtils.executeWithRetry(InputView::readBonusNumber, LottoNumber::create);
 
         try {
-            WinnerLotto.validateBonusNumbers(winnerNumbers, bonusNumber);
+            WinnerLotto.validateBonusNumbers(winnerNumbersInput, bonusNumber);
+            LottoNumbers winnerNumbers = LottoNumbers.from(winnerNumbersInput);
             return new WinnerLotto(winnerNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {
             OutputView.printError(e);
-            return readBonusNumber(winnerNumbers);
+            return readBonusNumber(winnerNumbersInput);
         }
     }
 }

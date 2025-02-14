@@ -20,7 +20,6 @@ public class Profit {
     }
 
     private long calculateTotalProfit() {
-
         return rankCounts.entrySet().stream()
                 .mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();

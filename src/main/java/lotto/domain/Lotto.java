@@ -1,21 +1,17 @@
 package lotto.domain;
 
-import static lotto.common.Constants.LOTTO_NUM_SIZE;
-
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.StringJoiner;
 
 public class Lotto {
-    private final List<LottoNumber> lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
-    public Lotto(final List<LottoNumber> lottoNumbers) {
-        validateLottoNumbers(lottoNumbers);
+    public Lotto(final LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto create(final List<LottoNumber> lottoNumbers) {
+    public static Lotto from(final LottoNumbers lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 
@@ -29,33 +25,15 @@ public class Lotto {
                 .toList();
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
-        List<LottoNumber> sortedLottoNumbers = sorted(lottoNumbers);
-
-        if (sortedLottoNumbers.size() != LOTTO_NUM_SIZE) {
-            throw new IllegalArgumentException("로또 넘버는 6개입니다.");
-        }
-
-        if (new HashSet<>(sortedLottoNumbers).size() != LOTTO_NUM_SIZE) {
-            throw new IllegalStateException("중복은 불가능합니다.");
-        }
-    }
-
-    private List<LottoNumber> sorted(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
-                .sorted()
-                .toList();
     }
 
     @Override
     public String toString() {
         StringJoiner joiner = new StringJoiner(", ", "[", "]");
 
-        for (LottoNumber lottoNumber : lottoNumbers) {
+        for (LottoNumber lottoNumber : lottoNumbers.getItem()) {
             joiner.add(lottoNumber.toString());
         }
         return joiner.toString();

@@ -7,6 +7,6 @@ import lotto.domain.LottoGroup;
 public record LottoGroupDto(List<Lotto> lottoGroup) {
 
     public static LottoGroupDto from(LottoGroup lottoGroup) {
-        return new LottoGroupDto(lottoGroup.getLottoGroup());
+        return new LottoGroupDto(lottoGroup.getItem());
     }
 }
