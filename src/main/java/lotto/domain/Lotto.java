@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.validator.LogicValidator;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -21,7 +20,7 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(this.numbers);
+        return this.numbers;
     }
 
     public boolean hasNumber(int target) {
