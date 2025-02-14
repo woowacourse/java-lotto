@@ -1,7 +1,7 @@
 package lotto.common.config;
 
 import lotto.controller.Controller;
-import lotto.service.LottoService;
+import lotto.controller.InputController;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -10,9 +10,9 @@ public class DependencyConfig {
 
     public DependencyConfig() {
         InputView inputView = new InputView();
+        InputController inputController = new InputController(inputView);
         OutputView outputView = new OutputView();
-        LottoService lottoService = new LottoService();
-        controller = new Controller(inputView, outputView, lottoService);
+        controller = new Controller(inputController, outputView);
     }
 
     public Controller getController() {
