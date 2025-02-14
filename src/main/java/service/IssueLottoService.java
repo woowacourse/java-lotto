@@ -12,6 +12,7 @@ import dto.IssuedLottosDto;
 import exception.LottoException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import util.RandomNumberGenerator;
 
 
@@ -38,11 +39,12 @@ public class IssueLottoService {
 
     private IssuedLottoDto makeUniqueLotto(final List<IssuedLottoDto> lottos) {
         List<Integer> newNumbers;
+        Random random = new Random();
         do {
             Lotto lotto = new Lotto(
                     RandomNumberGenerator.getRandomNumbers(
-                            LOTTO_RANGE_MIN.getValue(),
-                            LOTTO_RANGE_MAX.getValue()));
+                            () -> random.nextInt(LOTTO_RANGE_MAX.getValue() - LOTTO_RANGE_MIN.getValue() + 1)
+                                    + LOTTO_RANGE_MIN.getValue()));
             newNumbers = lotto.getSortedNumbers();
         } while (isDuplicate(lottos, newNumbers));
         return new IssuedLottoDto(newNumbers);

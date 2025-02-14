@@ -10,11 +10,10 @@ import java.util.Set;
 
 public class RandomNumberGenerator {
 
-    public static List<Integer> getRandomNumbers(int minNumber, int maxNumber) {
+    public static List<Integer> getRandomNumbers(final RandomGenerator numberGenerator) {
         Set<Integer> numbers = new HashSet<>();
-        Random random = new Random();
         while (numbers.size() != LOTTO_SIZE.getValue()) {
-            int number = random.nextInt(maxNumber - minNumber + 1) + minNumber;
+            int number = numberGenerator.generate();
             numbers.add(number);
         }
         return new ArrayList<>(numbers);
