@@ -7,6 +7,7 @@ import static lotto.util.ErrorHandler.INVALID_BONUS_NUMBER;
 import static lotto.util.ErrorHandler.INVALID_RANGE;
 
 import java.util.List;
+import lotto.util.StringConverter;
 
 public class WinningLotto {
 
@@ -15,17 +16,9 @@ public class WinningLotto {
 
     public WinningLotto(Lotto winningNumbers, String bonusBallInput) {
         this.winningNumbers = winningNumbers;
-        int bonusBallNumber = parse(bonusBallInput);
+        int bonusBallNumber = StringConverter.parseToInt(bonusBallInput, INVALID_BONUS_NUMBER);
         validateBonusBall(bonusBallNumber);
         this.bonusBall = bonusBallNumber;
-    }
-
-    private int parse(String bonusBallInput) {
-        try {
-            return Integer.parseInt(bonusBallInput);
-        } catch (NumberFormatException e) {
-            throw INVALID_BONUS_NUMBER.getException();
-        }
     }
 
     private void validateBonusBall(int bonusBallNumber) {
