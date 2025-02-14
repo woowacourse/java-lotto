@@ -31,10 +31,11 @@ public class Controller {
 
     public void run() {
         Money money = requestAmount();
-        LottoShop lottoShop = new LottoShop(new LottoNumberGenerator());
-
-        Wallet wallet = lottoShop.buyLottos(money);
         outputView.print(money.getAmount() + "개를 구매했습니다.\n");
+
+        LottoShop lottoShop = new LottoShop(new LottoNumberGenerator());
+        List<Lotto> lottos = lottoShop.buyLottos(money);
+        Wallet wallet = new Wallet(lottos);
         outputView.print(wallet.toString());
 
         Lotto matchLotto = requestMatchLotto();

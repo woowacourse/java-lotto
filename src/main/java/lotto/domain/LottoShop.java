@@ -11,12 +11,12 @@ public class LottoShop {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public Wallet buyLottos(Money money) {
+    public List<Lotto> buyLottos(Money money) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < money.getAmount(); i++) {
             List<Integer> numbers = lottoNumberGenerator.generate();
             lottos.add(new Lotto(numbers));
         }
-        return new Wallet(lottos);
+        return lottos;
     }
 }
