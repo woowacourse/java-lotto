@@ -41,10 +41,14 @@ public class Lotto {
     }
 
     private void validateRange(List<Integer> numbers) {
-        for (int i = 0; i < LOTTO_NUMBER_SIZE; i++) {
-            if (numbers.get(i) < LOTTO_NUMBER_MIN_RANGE || numbers.get(i) > LOTTO_NUMBER_MAX_RANGE) {
-                throw INVALID_RANGE.getException();
-            }
+        for (int number : numbers) {
+            checkRange(number);
+        }
+    }
+
+    private void checkRange(int number) {
+        if (number < LOTTO_NUMBER_MIN_RANGE || number > LOTTO_NUMBER_MAX_RANGE) {
+            throw INVALID_RANGE.getException();
         }
     }
 
