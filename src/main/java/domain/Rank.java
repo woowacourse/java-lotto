@@ -1,6 +1,7 @@
 package domain;
 
 public enum Rank {
+
     NONE(0, false, 0, ""),
     FIFTH(3, false, 5000, "3개 일치 (5,000원)"),
     FOURTH(4, false, 50000, "4개 일치 (50,000원)"),

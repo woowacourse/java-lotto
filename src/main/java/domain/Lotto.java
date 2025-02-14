@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
+
     private final List<Integer> numbers;
 
     private Lotto(List<Integer> numbers) {
@@ -46,7 +47,6 @@ public class Lotto {
 
     private void validateDuplicateNumbers(List<Integer> numbers) {
         Set<Integer> tmpNumbers = new HashSet<>(numbers);
-
         if (tmpNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException(INVALID_DUPLICATE_NUMBER.getMessage());
         }
@@ -59,8 +59,4 @@ public class Lotto {
             }
         }
     }
-
-
-
-
 }

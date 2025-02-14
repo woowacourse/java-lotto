@@ -14,10 +14,11 @@ import utils.InputParser;
 import utils.RandomNumber;
 
 public class LottoService {
+
     private final LottoRepository lottoRepository;
 
-    public LottoService(LottoRepository lottoRepository){
-        this.lottoRepository=lottoRepository;
+    public LottoService(LottoRepository lottoRepository) {
+        this.lottoRepository = lottoRepository;
     }
 
     public Ticket createTicket(int price) {
@@ -28,12 +29,11 @@ public class LottoService {
         for (int i = 0; i < ticket.getQuantity(); i++) {
             List<Integer> numbers = RandomNumber.generateNumbers(WINNING_NUMBERS_REQUIRED);
             Lotto lotto = Lotto.from(numbers);
-
             lottoRepository.addLotto(lotto);
         }
     }
 
-    public List<Lotto> getLottos(){
+    public List<Lotto> getLottos() {
         return lottoRepository.getLottos();
     }
 
@@ -46,17 +46,13 @@ public class LottoService {
         return WinningInfo.of(winningNumbers, bonusNumber);
     }
 
-    public Map<Rank, Integer> calculateRank(WinningInfo winningInfo, List<Lotto> lottos){
-        Map<Rank,Integer> calculateResult = new LinkedHashMap<>();
-
+    public Map<Rank, Integer> calculateRank(WinningInfo winningInfo, List<Lotto> lottos) {
+        Map<Rank, Integer> calculateResult = new LinkedHashMap<>();
         for (Rank value : Rank.values()) {
             calculateResult.put(value, 0);
         }
-
         List<Integer> winningNumbers = winningInfo.getWinningLotto().getNumbers();
-
-
-        for (Lotto lotto:lottos){
+        for (Lotto lotto : lottos) {
             int count = 0;
             boolean isMatchBonusNumber = false;
             List<Integer> lottoNumbers = lotto.getNumbers();
@@ -64,24 +60,22 @@ public class LottoService {
                 if (winningNumbers.contains(lottoNumber)) {
                     count++;
                 }
-                if(winningInfo.getBonusNumber()== lottoNumber){
-                    isMatchBonusNumber=true;
+                if (winningInfo.getBonusNumber() == lottoNumber) {
+                    isMatchBonusNumber = true;
                 }
 
             }
             Rank foundRank = Rank.findRank(count, isMatchBonusNumber);
-            calculateResult.put(foundRank,calculateResult.get(foundRank)+1);
+            calculateResult.put(foundRank, calculateResult.get(foundRank) + 1);
         }
         return calculateResult;
     }
 
-    public double calculateProfit(Map<Rank,Integer> calculateResult, int purchaseAmount){
-        double totalPrize=0;
-
+    public double calculateProfit(Map<Rank, Integer> calculateResult, int purchaseAmount) {
+        double totalPrize = 0;
         for (Rank rank : calculateResult.keySet()) {
-            totalPrize+=rank.getPrize()*calculateResult.get(rank);
+            totalPrize += rank.getPrize() * calculateResult.get(rank);
         }
-
-        return  Math.floor((totalPrize/purchaseAmount)*100)/100 ;
+        return Math.floor((totalPrize / purchaseAmount) * 100) / 100;
     }
 }

@@ -16,17 +16,13 @@ public class RandomNumber {
 
     public static List<Integer> generateNumbers(int size) {
         List<Integer> numbers = new ArrayList<>();
-
-        while(numbers.size()!=size){
+        while (numbers.size() != size) {
             int generatedNumber = generate();
-
-            if(!numbers.contains(generatedNumber)){
+            if (!numbers.contains(generatedNumber)) {
                 numbers.add(generatedNumber);
             }
         }
-
         Collections.sort(numbers);
-
         return numbers;
     }
 

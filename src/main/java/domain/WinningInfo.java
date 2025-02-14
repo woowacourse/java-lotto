@@ -5,9 +5,6 @@ import static domain.LottoRules.MIN_NUMBER;
 import static error.ErrorMessage.BONUS_NUMBER_ALREADY_EXIST;
 import static error.ErrorMessage.INVALID_NUMBER_RANGE;
 
-import java.util.List;
-
-
 public class WinningInfo {
 
     private final Lotto winningLotto;
@@ -47,6 +44,4 @@ public class WinningInfo {
             throw new IllegalArgumentException(BONUS_NUMBER_ALREADY_EXIST.getMessage());
         }
     }
-
-
 }

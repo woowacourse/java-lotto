@@ -35,7 +35,6 @@ public class OutputView {
     public void printWinningStatistic(Map<Rank, Integer> result) {
         printMessage(WINNING_STATISTIC_MESSAGE);
         printMessage(HYPHEN.repeat(9));
-
         for (Rank rank : result.keySet()) {
             if (!rank.getDescription().isBlank()) {
                 System.out.print(rank.getDescription() + " " + HYPHEN + " ");

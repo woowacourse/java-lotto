@@ -3,6 +3,7 @@ package domain;
 import static error.ErrorMessage.INVALID_TICKET_PRICE;
 
 public class Ticket {
+
     /***
      * ticket 계산을 다른곳에서 진행하는걸 고려해보자?
      *

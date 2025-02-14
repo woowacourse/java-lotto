@@ -12,12 +12,10 @@ public class InputParser {
     }
 
     public static List<Integer> parseAndCreateWinningNumbers(String inputWinningNumbers) {
-
-
         return Arrays.stream(inputWinningNumbers.split(DELIMITER))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+            .map(String::trim)
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 
 }

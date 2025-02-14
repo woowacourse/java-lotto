@@ -55,7 +55,6 @@ public class LottoController {
         return lottoService.createWinningNumber(lotto, bonusNumber);
     }
 
-
     private List<Lotto> lottoProcess(Ticket ticket) {
         lottoService.createLottos(ticket);
         List<Lotto> lottos = lottoService.getLottos();
