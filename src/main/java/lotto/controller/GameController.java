@@ -29,11 +29,14 @@ public class GameController {
     }
 
     private LottoMachine buyLottoTickets() {
-        while(true) {
+        try {
             String response = InputView.readLottoMoney();
             lottoMoney = new LottoMoney(response);
             LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
             return new LottoMachine(lottoNumberGenerator, lottoMoney);
+        } catch (IllegalArgumentException e) {
+            OutputView.writeErrorMessage(e.getMessage());
+            return buyLottoTickets();
         }
     }
 
@@ -43,16 +46,22 @@ public class GameController {
     }
 
     private Lotto storeWinningLottoNumbers() {
-        while(true) {
+        try {
             String response = InputView.readWinningNumbers();
             return new Lotto(response);
+        } catch (IllegalArgumentException e) {
+            OutputView.writeErrorMessage(e.getMessage());
+            return storeWinningLottoNumbers();
         }
     }
 
     private WinningLotto storeWinningLottoBonus(Lotto winningNumbers) {
-        while(true){
+        try {
             String response = InputView.readBonusBall();
             return new WinningLotto(winningNumbers, response);
+        } catch (IllegalArgumentException e) {
+            OutputView.writeErrorMessage(e.getMessage());
+            return storeWinningLottoBonus(winningNumbers);
         }
     }
 }
