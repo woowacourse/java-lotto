@@ -34,19 +34,6 @@ public class LottoService {
         return new Lotto(NumberGenerator.numberGeneratorWithUniqueValues(6, 1, 45));
     }
 
-    public EnumMap<Rank, Integer> makeStatistics(LottoBundle lottoBundle, WinningNumbers winningNumbers) {
-
-        EnumMap<Rank, Integer> rankIntegerEnumMap = Rank.makeDefaultMap();
-
-        for (Lotto lotto : lottoBundle.getLottoBundle()) {
-            Rank currentRank = Rank.checkPrize(winningNumbers.checkMatchCount(lotto),
-                    winningNumbers.checkMatchBonus(lotto));
-            rankIntegerEnumMap.put(currentRank, rankIntegerEnumMap.get(currentRank) + 1);
-        }
-
-        return rankIntegerEnumMap;
-    }
-
     public String calculateTotalResult(EnumMap<Rank, Integer> lottoResult, AmountPaid amountPaid) {
         int totalPrize = Rank.calculateTotalPrize(lottoResult);
         return amountPaid.calculateProfitRate(totalPrize);

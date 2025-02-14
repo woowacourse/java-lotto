@@ -31,7 +31,7 @@ public class LottoMachine {
         outputView.lottoQuantityPrint(lottoBundle.getLottoQuantity());
         outputView.lottoStatusPrint(lottoBundle);
         WinningNumbers winningNumbers = makeWinningNumber();
-        EnumMap<Rank, Integer> lottoResult = lottoService.makeStatistics(lottoBundle, winningNumbers);
+        EnumMap<Rank, Integer> lottoResult = lottoBundle.makeStatistics(winningNumbers);
 
         outputView.lottoStatisticsPrint(lottoResult, lottoService.calculateTotalResult(lottoResult, amountPaid));
     }
