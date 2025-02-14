@@ -18,7 +18,8 @@ public class LottoService {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            List<Integer> randoms = randomGenerator.generateUniqueRandomNumbers(Lotto.MAX_LOTTO_NUMBER)
+            List<Integer> randoms = randomGenerator.generateUniqueRandomNumbers(
+                            Lotto.MAX_LOTTO_NUMBER, Lotto.LOTTO_NUMBER_COUNT)
                     .stream()
                     .sorted()
                     .toList();
