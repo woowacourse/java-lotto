@@ -39,11 +39,16 @@ public class WinningLotto {
         }
     }
 
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers.getLotto();
+    int matchWinningNumbers(Lotto lottoTicket) {
+        return (int) lottoTicket
+                .getLotto()
+                .stream()
+                .filter(winningNumbers.getLotto()::contains)
+                .count();
     }
 
-    public int getBonusBall() {
-        return bonusBall;
+    boolean matchBonusBall(Lotto lottoTicket) {
+        List<Integer> ticketNumbers = lottoTicket.getLotto();
+        return ticketNumbers.contains(bonusBall);
     }
 }
