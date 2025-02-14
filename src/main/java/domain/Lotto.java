@@ -18,8 +18,8 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        validateRange(numbers);
         validateDuplicate(numbers);
+        validateRange(numbers);
         validateSize(numbers);
     }
 
@@ -39,15 +39,16 @@ public class Lotto {
         }
     }
 
+    private boolean isOutOfRange(final List<Integer> numbers) {
+        return numbers.stream()
+                .anyMatch(number -> number < MIN_NUMBER || number > MAX_NUMBER);
+    }
+
+
     private void validateSize(List<Integer> numbers) {
         if(numbers.size() != SIZE) {
             throw new AppException(ErrorMessage.INVALID_LOTTO_NUMBER_SIZE);
         }
-    }
-
-    private boolean isOutOfRange(final List<Integer> numbers) {
-        return numbers.stream()
-                .anyMatch(number -> number < MIN_NUMBER || number > MAX_NUMBER);
     }
 
     public List<Integer> getNumbers() {

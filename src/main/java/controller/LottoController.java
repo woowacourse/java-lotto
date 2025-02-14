@@ -41,6 +41,10 @@ public class LottoController {
         outputView.printWinningProfit(winningProfit.calculateProfitRate(money.getAmount()));
     }
 
+    private Money requestMoney() {
+        outputView.printAskInputMoney();
+        return inputView.readMoney();
+    }
 
     private WinningNumber requestWinningNumber() {
         outputView.printAskInputWiningLotto();
@@ -49,10 +53,5 @@ public class LottoController {
         outputView.printAskInputBonusNumber();
         final BonusNumber bonusNumber = inputView.readBonusNumber();
         return new WinningNumber(winningLotto, bonusNumber);
-    }
-
-    private Money requestMoney() {
-        outputView.printAskInputMoney();
-        return inputView.readMoney();
     }
 }
