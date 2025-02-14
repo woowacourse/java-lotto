@@ -35,9 +35,10 @@ public enum LottoPrize {
     }
 
     public static LottoPrize value(int countMatched, boolean isBonusNumberMatched) {
-        return Arrays.stream(LottoPrize.values()).filter(lottoPrize ->
-                        lottoPrize.countMatched == countMatched && lottoPrize.isBonusNumberMatched == isBonusNumberMatched
-                ).findFirst()
-                .orElse(LottoPrize.NOTHING);
+        return Arrays.stream(LottoPrize.values())
+                .filter(prize -> prize.countMatched == countMatched)
+                .filter(prize -> countMatched != 5 || prize.isBonusNumberMatched == isBonusNumberMatched)
+                .findFirst()
+                .orElse(NOTHING);
     }
 }
