@@ -42,9 +42,13 @@ public class Lotto {
 
     private void validateRange(List<Integer> numbers) {
         for (int i = 0; i < LOTTO_NUMBER_SIZE; i++) {
-            if (numbers.get(i) < LOTTO_NUMBER_MIN_RANGE || numbers.get(i) > LOTTO_NUMBER_MAX_RANGE) {
-                throw INVALID_RANGE.getException();
-            }
+            validateNumberRange(numbers.get(i));
+        }
+    }
+
+    private void validateNumberRange(int number) {
+        if (number < LOTTO_NUMBER_MIN_RANGE || number > LOTTO_NUMBER_MAX_RANGE) {
+            throw INVALID_RANGE.getException();
         }
     }
 
