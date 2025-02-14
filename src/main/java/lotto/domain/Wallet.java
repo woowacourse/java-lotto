@@ -17,7 +17,7 @@ public class Wallet {
         }
     }
 
-    public List<MatchCountDto> matchCount(Lotto matchLotto, int bonus) {
+    public List<MatchCountDto> getMatchResults(Lotto matchLotto, int bonus) {
         List<MatchCountDto> matchCountDtos = new ArrayList<>();
 
         for (Lotto lotto : lottos) {

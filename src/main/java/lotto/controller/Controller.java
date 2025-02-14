@@ -58,7 +58,7 @@ public class Controller {
 
     private Map<MatchStatistics, Integer> getMatchStatisticsMap(Wallet wallet, Lotto matchLotto,
         int bonus) {
-        List<MatchCountDto> matchCount = wallet.matchCount(matchLotto, bonus);
+        List<MatchCountDto> matchCount = wallet.getMatchResults(matchLotto, bonus);
         return lottoService.convertToMap(matchCount);
     }
 
@@ -100,8 +100,8 @@ public class Controller {
     }
 
     private void validateBonus(Lotto mathLotto, int bonus) {
-        if (mathLotto.isContainsBonus(bonus)) {
-            throw new IllegalArgumentException(ERROR_CONTAINS_BONUS);
+        if (mathLotto.containsNumber(bonus)) {
+            throw new IllegalArgumentException(ERROR_DUPLICATE_WINNING_AND_BONUS);
         }
     }
 
