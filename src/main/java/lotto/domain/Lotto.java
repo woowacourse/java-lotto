@@ -37,9 +37,16 @@ public class Lotto {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_COUNT.getMessage());
         }
 
-        if (numbers.stream().distinct().count() != numbers.size()) {
+        if (hasDuplication(numbers)) {
             throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBER.getMessage());
         }
+    }
+
+    private static boolean hasDuplication(List<Integer> numbers) {
+        long count = numbers.stream()
+            .distinct()
+            .count();
+        return count != numbers.size();
     }
 
     public int findMatchCount(Lotto lotto) {
