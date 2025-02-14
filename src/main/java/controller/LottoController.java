@@ -25,7 +25,9 @@ public class LottoController {
         List<Integer> winningNumbers = inputView.askWinningNumbers();
         int bonusNumber = inputView.askBonusNumber();
 
-        printWinningResult(lottos, winningNumbers, bonusNumber, purchaseAmount);
+        List<WinningCountDto> winningCountDtos = matchAndCountWinningLottos(lottos, winningNumbers, bonusNumber);
+
+        calculateYield(purchaseAmount, winningCountDtos);
     }
 
     private Lottos issueLottos(int purchaseAmount) {
@@ -39,11 +41,17 @@ public class LottoController {
         return lottos;
     }
 
-    private void printWinningResult(Lottos lottos, List<Integer> winningNumbers, int bonusNumber, int purchaseAmount) {
+    private List<WinningCountDto> matchAndCountWinningLottos(
+            Lottos lottos, List<Integer> winningNumbers, int bonusNumber
+    ) {
         List<MatchDto> matchDtos = lottos.getMatchDtos(winningNumbers, bonusNumber);
         List<WinningCountDto> winningCountDtos = WinningStatistics.calculateWinningCountDtos(matchDtos);
         outputView.printWinningStatistics(winningCountDtos);
 
+        return winningCountDtos;
+    }
+
+    private void calculateYield(int purchaseAmount, List<WinningCountDto> winningCountDtos) {
         double yield = WinningStatistics.calculateYield(purchaseAmount, winningCountDtos);
         outputView.printYield(yield);
     }
