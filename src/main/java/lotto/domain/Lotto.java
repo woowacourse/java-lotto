@@ -55,7 +55,7 @@ public class Lotto {
     }
 
     private static boolean isCorrectedSize(List<Integer> numbers) {
-        return numbers.size() != LOTTO_SIZE;
+        return numbers.size() != LOTTO_NUMBER_COUNT;
     }
 
     private static void validateRange(List<Integer> numbers) {
