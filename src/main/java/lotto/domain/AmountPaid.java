@@ -35,5 +35,4 @@ public class AmountPaid {
     public int getLottoQuantity() {
         return amount / LOTTO_PRICE;
     }
-
 }
