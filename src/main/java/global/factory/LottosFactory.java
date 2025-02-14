@@ -20,7 +20,7 @@ public class LottosFactory {
         for (int i = 0; amount.compareAmount(i); i++) {
             lottos.add(lottoFactory.from());
         }
-        
+
         return new Lottos(lottos);
     }
 

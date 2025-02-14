@@ -1,7 +1,5 @@
 package domain;
 
-import domain.dto.GetLottoDto;
-import domain.dto.GetLottosDto;
 import domain.dto.GetResultDto;
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -16,24 +14,13 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public GetLottosDto getLottosDto() {
-        List<GetLottoDto> getLottoDtos = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            getLottoDtos.add(lotto.getLottoDto());
-        }
-        return new GetLottosDto(getLottoDtos);
+    public EnumMap<Rank, Integer> calculateResultOfWinning(WinningLotto winningLotto) {
+        EnumMap<Rank, Integer> countRank = countMatchNumbers(winningLotto);
+        return countRank;
     }
 
-    public GetResultDto calculateResultOfWinning(WinningLotto winningLotto, Amount amount) {
-        EnumMap<Rank, Integer> countRank = countMatchNumbers(winningLotto);
-
-        long sum = 0L;
-        for (Entry<Rank, Integer> rankIntegerEntry : countRank.entrySet()) {
-            sum += Rank.calculateTotalPrize(rankIntegerEntry.getKey(), rankIntegerEntry.getValue());
-        }
-
-        double profit = amount.calculateProfit(sum);
-        return new GetResultDto(countRank, profit);
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     private EnumMap<Rank, Integer> countMatchNumbers(WinningLotto winningLotto) {
@@ -50,4 +37,5 @@ public class Lottos {
 
         return countRank;
     }
+
 }

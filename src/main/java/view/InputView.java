@@ -16,7 +16,9 @@ public class InputView {
     public int inputPrice() {
         System.out.println(Input.PRICE.getMessage());
         try {
-            return sc.nextInt();
+            int price = sc.nextInt();
+            sc.nextLine();
+            return price;
         }catch (InputMismatchException e){
             throw new IllegalArgumentException(INVALID_INTEGER.getMessage());
         }

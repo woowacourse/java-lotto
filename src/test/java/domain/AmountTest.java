@@ -5,6 +5,7 @@ import static global.exception.ExceptionMessage.INVALID_UNIT_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.EnumMap;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,8 +38,10 @@ class AmountTest {
     void 수익률_계산_테스트() {
         //given
         Amount amount = new Amount(14000);
+        EnumMap<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
+        rankCount.put(Rank.FIFTH,1);
 
         //when-then
-        assertThat(amount.calculateProfit(5000)).isEqualTo(0.35);
+        assertThat(amount.calculateProfit(rankCount)).isEqualTo(0.35);
     }
 }

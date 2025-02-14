@@ -2,10 +2,13 @@ package controller;
 
 import domain.Amount;
 import domain.Lottos;
+import domain.Rank;
+import domain.dto.GetLottosDto;
 import global.factory.LottosFactory;
 import domain.WinningLotto;
 import domain.dto.GetResultDto;
 import global.generator.RandomGenerator;
+import java.util.EnumMap;
 import view.InputView;
 import view.OutputView;
 
@@ -37,7 +40,7 @@ public class LottoController {
     private Lottos createLottosFromRandomNumber(Amount amount) {
         LottosFactory lottosFactory = new LottosFactory(new RandomGenerator());
         Lottos lottos = lottosFactory.from(amount);
-        outputView.printLottos(lottos.getLottosDto());
+        outputView.printLottos(new GetLottosDto(lottos));
 
         return lottos;
     }
@@ -50,7 +53,9 @@ public class LottoController {
     }
 
     private void calculateResult(Lottos lottos, WinningLotto winningLotto, Amount amount) {
-        GetResultDto lottosResult = lottos.calculateResultOfWinning(winningLotto, amount);
-        outputView.printWinningStatistic(lottosResult);
+        EnumMap<Rank, Integer> countRank = lottos.calculateResultOfWinning(winningLotto);
+        double profit = amount.calculateProfit(countRank);
+
+        outputView.printWinningStatistic(new GetResultDto(countRank, profit));
     }
 }

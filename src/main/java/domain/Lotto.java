@@ -1,8 +1,9 @@
 package domain;
 
-import static global.exception.ExceptionMessage.*;
+import static global.exception.ExceptionMessage.DUPLICATED_NUMBER;
+import static global.exception.ExceptionMessage.INVALID_FORMAT;
+import static global.exception.ExceptionMessage.INVALID_RANGE;
 
-import domain.dto.GetLottoDto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +31,6 @@ public class Lotto {
         validateLottoDuplicate();
     }
 
-    public GetLottoDto getLottoDto() {
-        return new GetLottoDto(numbers);
-    }
-
     public boolean isContains(int num) {
         return numbers.contains(num);
     }
@@ -44,14 +41,18 @@ public class Lotto {
                 .count();
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
     private void validateLottoDuplicate() {
-        if(numbers.stream().distinct().count() != LOTTO_LENGTH){
+        if (numbers.stream().distinct().count() != LOTTO_LENGTH) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
         }
     }
 
     private void validateLength(String[] splitNumbers) {
-        if(splitNumbers.length != LOTTO_LENGTH) {
+        if (splitNumbers.length != LOTTO_LENGTH) {
             throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }
     }
