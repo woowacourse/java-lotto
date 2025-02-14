@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
+
 import java.util.Map;
 
 public class Bank {
@@ -13,6 +15,14 @@ public class Bank {
         long sum = result.entrySet().stream()
             .mapToLong(set -> set.getKey().getPrice() * set.getValue())
             .sum();
+
+        validatePrice();
         return (double) sum / usedMoney;
+    }
+
+    private void validatePrice() {
+        if (usedMoney == 0) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_PRICE.getMessage());
+        }
     }
 }
