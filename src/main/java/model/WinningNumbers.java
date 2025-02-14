@@ -40,8 +40,8 @@ public class WinningNumbers {
     }
 
     private void validateDuplicate(final List<LottoNumber> winningNumbers) {
-        final Set<LottoNumber> set = new HashSet<>(winningNumbers);
-        if (set.size() != winningNumbers.size()) {
+        final Set<LottoNumber> uniqueLottoNumbers = new HashSet<>(winningNumbers);
+        if (uniqueLottoNumbers.size() != winningNumbers.size()) {
             throw new IllegalArgumentException(ErrorType.WINNING_NUMBERS_IS_DUPLICATION.getMessage());
         }
     }
@@ -62,7 +62,7 @@ public class WinningNumbers {
                 count++;
             }
         }
-        
+
         return count;
     }
 

@@ -36,8 +36,8 @@ public class Lotto {
     }
 
     private void validateDuplicate(final List<LottoNumber> lottoNumbers) {
-        final Set<LottoNumber> set = new HashSet<>(lottoNumbers);
-        if (set.size() != lottoNumbers.size()) {
+        final Set<LottoNumber> uniqueLottoNumbers = new HashSet<>(lottoNumbers);
+        if (uniqueLottoNumbers.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException(ErrorType.LOTTO_NUMBER_DUPLICATE.getMessage());
         }
     }
