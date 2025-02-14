@@ -6,10 +6,10 @@ public enum MatchRank {
     MATCH_FIVE(5, 150000),
     MATCH_BONUS(5, 30000000),
     MATCH_SIX(6, 2000000000),
-    NO_MATCH(0, 0);;
+    NO_MATCH(0, 0);
 
-    private final static String BONUS_OUTPUT = "%d개 일치, 보너스 볼 일치 (%d원)- ";
-    private final static String BASIC_OUTPUT = "%d개 일치 (%d원)- ";
+    private final static String BONUS_OUTPUT_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- ";
+    private final static String BASIC_OUTPUT_MESSAGE = "%d개 일치 (%d원)- ";
 
     private final int number;
     private final int money;
@@ -25,9 +25,9 @@ public enum MatchRank {
 
     public String getMatchData() {
         if (this == MATCH_BONUS) {
-            return String.format(BONUS_OUTPUT, number, money);
+            return String.format(BONUS_OUTPUT_MESSAGE, number, money);
         }
-        return String.format(BASIC_OUTPUT, number, money);
+        return String.format(BASIC_OUTPUT_MESSAGE, number, money);
     }
 
     public static MatchRank getMatchRank(int matchNumber, boolean bonus) {
