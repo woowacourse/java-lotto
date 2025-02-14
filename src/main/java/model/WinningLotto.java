@@ -4,29 +4,14 @@ import error.ErrorMessage;
 import java.util.List;
 
 public class WinningLotto {
-    private static WinningLotto INSTANCE;
+
     private Lotto basicLotto;
     private int bonusNumber;
 
-    private WinningLotto(Lotto basicLotto, int bonusNumber) {
+    public WinningLotto(Lotto basicLotto, int bonusNumber) {
         validateBonusNumber(basicLotto, bonusNumber);
         this.basicLotto = basicLotto;
         this.bonusNumber = bonusNumber;
-    }
-
-    public static void initialize(Lotto basicLotto, int bonusNumber) {
-        if (INSTANCE == null) {
-            INSTANCE = new WinningLotto(basicLotto, bonusNumber);
-            return;
-        }
-        throw new IllegalStateException(ErrorMessage.WINNING_NUMBERS_ALREADY_DRAWN.getMessage());
-    }
-
-    public static WinningLotto getInstance() {
-        if (INSTANCE == null) {
-            throw new IllegalStateException(ErrorMessage.WINNING_NUMBERS_NOT_DRAWN_YET.getMessage());
-        }
-        return INSTANCE;
     }
 
     private static void validateBonusNumber(Lotto basicLotto, int bonusNumber) {
@@ -36,7 +21,8 @@ public class WinningLotto {
 
     private static void validateDuplicatedBonusNumber(Lotto basicLotto, int bonusNumber) {
         if (basicLotto.isBonusMatched(bonusNumber)) {
-            throw new IllegalArgumentException(ErrorMessage.WINNING_AND_BONUS_NUMBER_DUPLICATE.getMessage());
+            throw new IllegalArgumentException(
+                ErrorMessage.WINNING_AND_BONUS_NUMBER_DUPLICATE.getMessage());
         }
     }
 

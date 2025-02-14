@@ -12,9 +12,9 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public void rankAll() {
+    public void rankAll(WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
-            lotto.rankTier();
+            lotto.rankTier(winningLotto);
         }
     }
 

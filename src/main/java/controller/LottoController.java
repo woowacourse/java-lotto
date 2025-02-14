@@ -6,6 +6,7 @@ import java.util.List;
 import model.Lotto;
 import model.Lottos;
 import model.Statistics;
+import model.WinningLotto;
 import service.LottoEvaluationService;
 import service.LottoGenerateService;
 import service.StatisticsService;
@@ -42,7 +43,9 @@ public class LottoController {
         List<Integer> basicNumbers = InputConverter.convertToList(viewFacade.getWinningNumbers());
         Lotto basicLotto = LottoFactory.createLotto(basicNumbers);
         int bonusNumber = InputConverter.convertToInteger(viewFacade.getBonusNumber());
-        lottoEvaluationService.evaluateLottos(purchaseHistory.lottos, basicLotto, bonusNumber);
+
+        WinningLotto winningLotto = new WinningLotto(basicLotto, bonusNumber);
+        lottoEvaluationService.evaluateLottos(purchaseHistory.lottos, winningLotto);
     }
 
     private void processStatistics(PurchaseHistory purchaseHistory) {
