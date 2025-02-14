@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.common.utill.InputParser;
+import lotto.domain.LottoNumberGenerator;
 import lotto.domain.Money;
 import lotto.domain.LottoShop;
 import lotto.service.LottoService;
@@ -30,7 +31,9 @@ public class Controller {
 
     public void run() {
         Money money = requestAmount();
-        Wallet wallet = LottoShop.buyLottos(money);
+        LottoShop lottoShop = new LottoShop(new LottoNumberGenerator());
+
+        Wallet wallet = lottoShop.buyLottos(money);
         outputView.print(money.getAmount() + "개를 구매했습니다.\n");
         outputView.print(wallet.toString());
 
