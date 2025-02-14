@@ -78,7 +78,7 @@ public class Lotto {
         }
         return count;
     }
-    //TODO : private로 바꾸게 되면 테스트 코드에서 .contain을 사용하니까 문제가 발생함.
+
     private int contain(int number) {
         if (lottoNumber.contains(number)) {
             return INCREASE;

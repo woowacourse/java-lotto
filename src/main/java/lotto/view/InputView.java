@@ -13,10 +13,6 @@ public class InputView {
         System.out.println(PURCHASE_MONEY_MESSAGE);
         return scanner.nextLine();
     }
-//    public Money inputMoney() {
-//        System.out.println(PURCHASE_MONEY_MESSAGE);
-//        return new Money(scanner.nextLine());
-//    }
 
     public String inputWinningLotto() {
         System.out.println(WINNING_LOTTO_MESSAGE);
