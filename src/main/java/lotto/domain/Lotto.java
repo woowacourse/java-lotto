@@ -10,8 +10,6 @@ import lotto.util.Parser;
 
 public class Lotto {
 
-    private static final int INCREASE = 1;
-    private static final int MAINTENANCE = 0;
     private static final String DELIMITER = ",";
     private List<Integer> lottoNumber;
     private LottoGenerator lottoGenerator;
@@ -32,18 +30,9 @@ public class Lotto {
     }
 
     public int match(Lotto winningLottoNumber) {
-        int count = 0;
-        for (int number : lottoNumber) {
-            count += winningLottoNumber.contain(number);
-        }
-        return count;
-    }
-
-    public int contain(int number) {
-        if (lottoNumber.contains(number)) {
-            return INCREASE;
-        }
-        return MAINTENANCE;
+        List<Integer> copiedLottoNumber = new ArrayList<>(lottoNumber);
+        copiedLottoNumber.retainAll(winningLottoNumber.lottoNumber);
+        return copiedLottoNumber.size();
     }
 
     public boolean checkBonusNumberMatch(int bonusNumber) {
