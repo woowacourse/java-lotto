@@ -20,9 +20,7 @@ public class Lotto {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
         Collections.sort(lottoNumbers);
-        this.lottoNumbers = lottoNumbers.stream()
-            .sorted()
-            .toList();
+        this.lottoNumbers = List.copyOf(lottoNumbers);
     }
 
     public static Lotto from(final List<Integer> lottoNumbers) {
