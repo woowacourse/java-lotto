@@ -2,7 +2,7 @@ package lotto.exception;
 
 public class LottoException extends IllegalArgumentException {
 
-    public LottoException(ErrorMessage message) {
+    public LottoException(ExceptionMessage message) {
         super(message.toString());
     }
 }

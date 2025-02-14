@@ -1,6 +1,6 @@
 package lotto.exception;
 
-public enum ErrorMessage {
+public enum ExceptionMessage {
 
     INVALID_INPUT("올바르지 않은 입력값입니다."),
     MUST_BE_DIVIDE_BY_THOUSAND("금액은 1000으로 나누어 떨어져야 합니다."),
@@ -14,7 +14,7 @@ public enum ErrorMessage {
 
     private static final String PREFIX = "[ERROR] ";
 
-    ErrorMessage(String errorMessage) {
+    ExceptionMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

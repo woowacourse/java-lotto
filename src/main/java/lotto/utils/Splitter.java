@@ -1,6 +1,6 @@
 package lotto.utils;
 
-import static lotto.exception.ErrorMessage.INVALID_INPUT;
+import static lotto.exception.ExceptionMessage.INVALID_INPUT;
 
 import java.util.List;
 import lotto.exception.LottoException;

@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import static lotto.exception.ErrorMessage.INVALID_LOTTO_SIZE;
-import static lotto.exception.ErrorMessage.MUST_NOT_BE_DUPLICATED_BONUS_NUMBER;
-import static lotto.exception.ErrorMessage.MUST_NOT_BE_DUPLICATED_WINNING_NUMBER;
-import static lotto.exception.ErrorMessage.OUT_OF_RANGE;
+import static lotto.exception.ExceptionMessage.INVALID_LOTTO_SIZE;
+import static lotto.exception.ExceptionMessage.MUST_NOT_BE_DUPLICATED_BONUS_NUMBER;
+import static lotto.exception.ExceptionMessage.MUST_NOT_BE_DUPLICATED_WINNING_NUMBER;
+import static lotto.exception.ExceptionMessage.OUT_OF_RANGE;
 
 import java.util.HashSet;
 import java.util.List;

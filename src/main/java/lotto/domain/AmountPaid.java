@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import static lotto.exception.ErrorMessage.MUST_BE_DIVIDE_BY_THOUSAND;
-import static lotto.exception.ErrorMessage.NOT_ALLOW_NEGATIVE;
+import static lotto.exception.ExceptionMessage.MUST_BE_DIVIDE_BY_THOUSAND;
+import static lotto.exception.ExceptionMessage.NOT_ALLOW_NEGATIVE;
 
 import lotto.exception.LottoException;
 
