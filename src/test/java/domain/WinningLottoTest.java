@@ -19,6 +19,7 @@ public class WinningLottoTest {
         //given
         WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", "7");
         Lotto lotto = new Lotto(numbers);
+
         //when-then
         assertThat(winningLotto.countMatchNumbers(lotto)).isEqualTo(rank);
     }

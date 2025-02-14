@@ -22,6 +22,7 @@ public class Lotto {
     public Lotto(String lotto) {
         numbers = new ArrayList<>();
         String[] splitNumbers = lotto.split(DELIMITER);
+
         validateLength(splitNumbers);
         for (String number : splitNumbers) {
             int num = validateIsInteger(number.trim());
