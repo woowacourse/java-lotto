@@ -21,7 +21,7 @@ public enum LottoPrize {
         this.price = price;
     }
 
-    public static LottoPrize of(int matchedNumberCount, boolean isBonusMatched) {
+    public static LottoPrize from(int matchedNumberCount, boolean isBonusMatched) {
         return Arrays.stream(values())
                 .filter(value -> value.getMatchedNumberCount() == matchedNumberCount
                         && value.isBonusMatched() == isBonusMatched)

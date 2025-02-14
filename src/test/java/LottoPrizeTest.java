@@ -19,7 +19,7 @@ class LottoPrizeTest {
         // given
 
         // when
-        LottoPrize lottoPrize = LottoPrize.of(matchedCount, isBonusMatched);
+        LottoPrize lottoPrize = LottoPrize.from(matchedCount, isBonusMatched);
 
         // then
         assertThat(lottoPrize.getPrice()).isEqualTo(expected);
@@ -35,7 +35,7 @@ class LottoPrizeTest {
         // given
 
         // when
-        LottoPrize lottoPrize = LottoPrize.of(matchedCount, isBonusMatched);
+        LottoPrize lottoPrize = LottoPrize.from(matchedCount, isBonusMatched);
 
         // then
         assertThat(lottoPrize.getPrice()).isEqualTo(expected);

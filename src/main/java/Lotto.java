@@ -21,7 +21,7 @@ public class Lotto {
     public LottoPrize getLottoPrize(WinningLotto winningLotto) {
         final int matchedWinningCount = numbers.stream().filter(winningLotto::isMatchWinningNumber).toList().size();
         final boolean isMatchedBonus = numbers.stream().anyMatch(winningLotto::isMatchBonus);
-        return LottoPrize.of(matchedWinningCount, isMatchedBonus);
+        return LottoPrize.from(matchedWinningCount, isMatchedBonus);
     }
 
     public String getInfo() {
