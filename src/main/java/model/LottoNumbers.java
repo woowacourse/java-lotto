@@ -39,7 +39,7 @@ public class LottoNumbers {
 
     public Integer countMatchNumber(LottoNumbers lottoNumbers) {
         List<Integer> matchList = lottoNumbers.getNumbers().stream()
-                .filter(lottoNumber -> numbers.stream().anyMatch((number) -> number == lottoNumber))
+                .filter(lottoNumber -> numbers.stream().anyMatch((number) -> number.equals(lottoNumber)))
                 .toList();
         return matchList.size();
     }

@@ -16,7 +16,7 @@ public class LottoStatistics {
     }
 
     private Integer calculateTotalPrize() {
-        Integer sum = 0;
+        int sum = 0;
         for (Entry<WinLottoInfo, Integer> statisticsEntry : lottoStatistics.entrySet()) {
             WinLottoInfo winLottoInfo = statisticsEntry.getKey();
             Integer count = statisticsEntry.getValue();

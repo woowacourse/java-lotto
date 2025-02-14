@@ -18,7 +18,7 @@ class PurchasedLottosViewTest {
         PurchaseView purchaseView = new PurchaseView();
 
         // when & then
-        assertThatThrownBy(() -> purchaseView.readPurchaseAmount())
+        assertThatThrownBy(purchaseView::readPurchaseAmount)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.POSITIVE_NUMBER_EXCEPTION);
     }

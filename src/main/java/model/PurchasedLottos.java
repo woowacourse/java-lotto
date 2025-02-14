@@ -11,7 +11,7 @@ public class PurchasedLottos {
 
     public PurchasedLottos(Integer purchaseAmount) {
         validateDividable(purchaseAmount);
-        Integer purchaseCount = purchaseAmount / LOTTO_PRICE;
+        int purchaseCount = purchaseAmount / LOTTO_PRICE;
         for (int i = 0; i < purchaseCount; i++) {
             lottos.add(new LottoNumbers());
         }

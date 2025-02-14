@@ -27,7 +27,7 @@ class WinLottoInfoTest {
     @Test
     @DisplayName("1등 당첨 결과 메서드 테스트")
     public void test1() {
-        assertThat(resultList.get(0)).isEqualTo(winLottoInfo.get(0));
+        assertThat(resultList.getFirst()).isEqualTo(winLottoInfo.getFirst());
     }
 
     @Test
