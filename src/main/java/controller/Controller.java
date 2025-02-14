@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.EnumMap;
+import model.BenefitRate;
 import model.Bonus;
 import model.Lotto;
 import model.LottoPurchase;
@@ -12,8 +13,8 @@ import view.OutputView;
 public class Controller {
 
     public void run() {
-        LottoPurchase purchaseLotto = InputView.getPurchaseLotto();
-        LottoFactory lottoFactory = LottoFactory.of(purchaseLotto.getAmount());
+        LottoPurchase lottoPurchase = InputView.getPurchaseLotto();
+        LottoFactory lottoFactory = LottoFactory.of(lottoPurchase.getAmount());
 
         OutputView.printLottoCount(lottoFactory);
         OutputView.printLottoTickets(lottoFactory);
@@ -24,6 +25,7 @@ public class Controller {
         EnumMap<Prize, Integer> statistic = lottoFactory.getStatistic(winningLotto, winningBonus);
 
         OutputView.printStatistics(statistic);
-        OutputView.printBenefit(lottoFactory.getBenefit(statistic));
+        BenefitRate benefitRate = new BenefitRate(lottoPurchase, lottoFactory.calculateBenefit(statistic));
+        OutputView.printBenefit(benefitRate);
     }
 }

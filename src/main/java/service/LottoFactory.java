@@ -66,14 +66,7 @@ public class LottoFactory {
         return issuedTicketNumbers.contains(bonusNumber);
     }
 
-    public double getBenefit(EnumMap<Prize, Integer> enumMap) {
-        Integer principalMoney = ticketNumber * LOTTO_PURCHASE_UNIT;
-        int benefit = calculateBenefit(enumMap);
-
-        return (double) benefit / principalMoney;
-    }
-
-    private int calculateBenefit(EnumMap<Prize, Integer> enumMap) {
+    public int calculateBenefit(EnumMap<Prize, Integer> enumMap) {
         int benefit = 0;
         for (Prize prize : enumMap.keySet()) {
             benefit += enumMap.get(prize) * prize.getPrizeAmount();

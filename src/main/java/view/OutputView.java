@@ -8,6 +8,7 @@ import static view.OutViewConstant.WINNING_STATISTIC_LINE_GUIDANCE;
 
 import java.util.EnumMap;
 import java.util.List;
+import model.BenefitRate;
 import model.Lotto;
 import model.Prize;
 import service.LottoFactory;
@@ -39,8 +40,9 @@ public class OutputView {
                 .forEach(OutputView::print);
     }
 
-    public static void printBenefit(double benefit) {
-        String result = checkBenefit(benefit);
+    public static void printBenefit(BenefitRate benefitRate) {
+        double benefit = benefitRate.getNumber();
+        String result = checkBenefit(benefitRate.getNumber());
         print(BENEFIT_RATE_GUIDANCE.getMessage(benefit, result));
     }
 
