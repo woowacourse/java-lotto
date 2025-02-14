@@ -1,27 +1,22 @@
 package Controller;
 
 import Model.Lotto;
+import Model.LottoResult;
 import Model.Lottos;
 import Model.WinnerNumber;
-import Service.LottoService;
 import View.InputView;
 import View.OutputView;
 import java.util.List;
 import java.util.Scanner;
 
 public class LottoController {
-    private final LottoService lottoService;
-    private static Scanner sc = new Scanner(System.in);
 
+    private static final Scanner SCANNER = new Scanner(System.in);
 
-    public LottoController(LottoService lottoService) {
-        this.lottoService = lottoService;
-    }
-
-    public void run(){
+    public void run() {
         int price = getPrice();
-        int lottoAmount = getLottoAmount(price);
-        Lottos lottos = getLottos(lottoAmount);
+        Lottos lottos = getLottos(price);
+        getLottoAmount(lottos);
 
         List<Integer> winnerNumbers = getWinnerNumbers();
 
@@ -30,10 +25,10 @@ public class LottoController {
         WinnerNumber winnerNumber = new WinnerNumber(winnerNumbers, bonusBall);
 
         compareWinning(lottos, winnerNumber);
-        double result = lottoService.lottoRateOfReturn(price);
+        double result = LottoResult.lottoRateOfReturn(price);
 
         OutputView.winningStatistics(result);
-        sc.close();
+        SCANNER.close();
     }
 
     private void compareWinning(Lottos lottos, WinnerNumber winnerNumber) {
@@ -44,15 +39,14 @@ public class LottoController {
 
     private int getBonusBall(List<Integer> winnerNumbers) {
         OutputView.inputBonusBall();
-        String inputBonusBall = sc.nextLine();
-        return  InputView.inputBonusBall(inputBonusBall ,winnerNumbers);
+        String inputBonusBall = SCANNER.nextLine();
+        return InputView.inputBonusBall(inputBonusBall, winnerNumbers);
     }
 
     private List<Integer> getWinnerNumbers() {
         OutputView.inputWinnerNumbers();
-        String inputWinnerNumbers = sc.nextLine();
+        String inputWinnerNumbers = SCANNER.nextLine();
         return InputView.inputWinnerNumbers(inputWinnerNumbers);
-
     }
 
     private Lottos getLottos(int lottoAmount) {
@@ -61,15 +55,13 @@ public class LottoController {
         return lottos;
     }
 
-    private int getLottoAmount(int price) {
-        int lottoAmount = lottoService.lottoCount(price);
-        OutputView.printPurchaseCount(lottoAmount);
-        return lottoAmount;
+    private void getLottoAmount(Lottos lottos) {
+        OutputView.printPurchaseCount(lottos.lottoSize());
     }
 
-    private int getPrice(){
+    private int getPrice() {
         OutputView.inputPurchaseAmount();
-        String inputPrice = sc.nextLine();
-        return  InputView.inputPrice(inputPrice);
+        String inputPrice = SCANNER.nextLine();
+        return InputView.inputPrice(inputPrice);
     }
 }

@@ -1,12 +1,14 @@
 package Model;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
 
     private List<Integer> lottoNumber;
 
-    public Lotto(List<Integer> lottoNumber){
+    public Lotto(List<Integer> lottoNumber) {
+        lottoNumber.sort(Comparator.naturalOrder());
         this.lottoNumber = lottoNumber;
     }
 
@@ -20,11 +22,11 @@ public class Lotto {
     }
 
     private void combineLottoNumber(StringBuilder sb) {
-        for (int i : lottoNumber){
-           sb.append(i);
-           sb.append(",");
+        for (int i : lottoNumber) {
+            sb.append(i);
+            sb.append(",");
         }
-        sb.deleteCharAt(sb.length()-1);
+        sb.deleteCharAt(sb.length() - 1);
     }
 
     public List<Integer> getLottoNumber() {
