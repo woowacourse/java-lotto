@@ -28,7 +28,7 @@ public enum Rank {
         return NONE;
     }
 
-    public static long getTotalPrize(Rank rank, Integer count) {
+    public static long calculateTotalPrize(Rank rank, Integer count) {
         return (long) rank.prize * count;
     }
 }

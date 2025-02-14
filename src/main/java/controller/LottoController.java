@@ -21,9 +21,9 @@ public class LottoController {
 
     public void run() {
         Amount amount = inputAmount();
-        Lottos lottos = getRandomLottos(amount);
+        Lottos lottos = createLottosFromRandomNumber(amount);
         WinningLotto winningLotto = inputWinningLotto();
-        getResult(lottos, winningLotto, amount);
+        calculateResult(lottos, winningLotto, amount);
     }
 
     private Amount inputAmount() {
@@ -33,7 +33,7 @@ public class LottoController {
         return amount;
     }
 
-    private Lottos getRandomLottos(Amount amount) {
+    private Lottos createLottosFromRandomNumber(Amount amount) {
         LottosFactory lottosFactory = new LottosFactory(new RandomGenerator());
         Lottos lottos = lottosFactory.from(amount);
         outputView.printLottos(lottos.getLottosDto());
@@ -47,8 +47,8 @@ public class LottoController {
         return winningLotto;
     }
 
-    private void getResult(Lottos lottos, WinningLotto winningLotto, Amount amount) {
-        GetResultDto lottosResult = lottos.getResult(winningLotto, amount);
+    private void calculateResult(Lottos lottos, WinningLotto winningLotto, Amount amount) {
+        GetResultDto lottosResult = lottos.calculateResultOfWinning(winningLotto, amount);
         outputView.printWinningStatistic(lottosResult);
     }
 }

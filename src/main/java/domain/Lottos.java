@@ -29,15 +29,15 @@ public class Lottos {
         return new GetLottosDto(getLottoDtos);
     }
 
-    public GetResultDto getResult(WinningLotto winningLotto, Amount amount) {
+    public GetResultDto calculateResultOfWinning(WinningLotto winningLotto, Amount amount) {
         EnumMap<Rank, Integer> countRank = countMatchNumbers(winningLotto);
 
         long sum = 0L;
         for (Entry<Rank, Integer> rankIntegerEntry : countRank.entrySet()) {
-            sum += Rank.getTotalPrize(rankIntegerEntry.getKey(), rankIntegerEntry.getValue());
+            sum += Rank.calculateTotalPrize(rankIntegerEntry.getKey(), rankIntegerEntry.getValue());
         }
 
-        double profit = amount.getProfit(sum);
+        double profit = amount.calculateProfit(sum);
         return new GetResultDto(countRank, profit);
     }
 

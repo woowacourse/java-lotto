@@ -33,7 +33,7 @@ public class Amount {
         }
     }
 
-    public double getProfit(long sum) {
+    public double calculateProfit(long sum) {
         return Math.floor((double) sum / (amount * LOTTO_PRICE) * 100) / 100;
     }
 }
