@@ -4,7 +4,6 @@ import domain.Lotto;
 import domain.Lottos;
 import domain.Prize;
 import domain.WinningLotto;
-import java.io.IOException;
 import java.util.List;
 import util.NumberParser;
 import view.InputView;
@@ -19,7 +18,7 @@ public class LottoController {
         this.outputView = outputView;
     }
 
-    public void run() throws IOException {
+    public void run() {
         final int purchaseAmount = readPurchaseAmount();
         Lottos lottos = createLottos(purchaseAmount);
 
@@ -30,26 +29,27 @@ public class LottoController {
         List<Prize> prizes = winningLotto.calculatePrizes(lottos);
 
         outputView.printLottoResult(prizes, Prize.calculateEarningRate(prizes, lottos.getQuantity() * 1000));
+        inputView.close();
     }
 
-    private int readBonusNumber() throws IOException {
-        final String rawBonusNumber = inputView.readBonusNumber();
-        return NumberParser.parse(rawBonusNumber);
+    private int readPurchaseAmount() {
+        String rawPurchaseAmount = inputView.readPurchaseAmount();
+        return NumberParser.parse(rawPurchaseAmount);
     }
 
-    private List<Integer> readWinningNumbers() throws IOException {
+    private List<Integer> readWinningNumbers() {
         String rawWinningNumber = inputView.readWinningNumber();
         return NumberParser.parseFromCSV(rawWinningNumber);
+    }
+
+    private int readBonusNumber() {
+        final String rawBonusNumber = inputView.readBonusNumber();
+        return NumberParser.parse(rawBonusNumber);
     }
 
     private Lottos createLottos(final int purchaseAmount) {
         Lottos lottos = Lottos.ofSize(purchaseAmount / 1000);
         outputView.printPurchasedLottos(lottos);
         return lottos;
-    }
-
-    private int readPurchaseAmount() throws IOException {
-        String rawPurchaseAmount = inputView.readPurchaseAmount();
-        return NumberParser.parse(rawPurchaseAmount);
     }
 }
