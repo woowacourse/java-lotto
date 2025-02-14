@@ -1,5 +1,6 @@
 package model;
 
+import constant.ErrorMessage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,13 +10,13 @@ public class Purchase {
     private final Integer purchaseAmount;
 
     public Purchase(Integer purchaseAmount) {
+        validateDividable(purchaseAmount);
         Integer purchaseCount = purchaseAmount / LOTTO_PRICE;
         for (int i = 0; i < purchaseCount; i++) {
             lottos.add(new LottoNumbers());
         }
         this.purchaseAmount = purchaseAmount;
     }
-
 
     public Integer size() {
         return lottos.size();
@@ -27,5 +28,11 @@ public class Purchase {
 
     public Integer getPurchaseAmount() {
         return purchaseAmount;
+    }
+
+    private void validateDividable(Integer input) {
+        if (input % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException(ErrorMessage.DIVIDABLE_EXCEPTION);
+        }
     }
 }

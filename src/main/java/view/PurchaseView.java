@@ -14,9 +14,7 @@ public class PurchaseView {
     public Integer readPurchaseAmount() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        Integer purchaseAmount = validatePositiveNumber(input);
-        validateDividable(purchaseAmount);
-        return purchaseAmount;
+        return validatePositiveNumber(input);
     }
 
     public void printPurchaseResult(Integer purchaseCount) {
@@ -37,11 +35,5 @@ public class PurchaseView {
             throw new IllegalArgumentException(ErrorMessage.POSITIVE_NUMBER_EXCEPTION);
         }
         return Integer.parseInt(input);
-    }
-
-    private void validateDividable(Integer input) {
-        if (input % 1000 != 0) {
-            throw new IllegalArgumentException(ErrorMessage.DIVIDABLE_EXCEPTION);
-        }
     }
 }
