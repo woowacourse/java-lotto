@@ -12,9 +12,9 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
+
     private final InputView inputView;
     private final OutputView outputView;
-    private WinningLotto winningLotto;
 
     public LottoController(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
@@ -24,8 +24,8 @@ public class LottoController {
     public void run() {
         Money money = inputView.inputMoney();
         Lottos lottos = purchaseLotto(money);
-        operateWinningLotto();
-        operateStatistics(money, lottos);
+        WinningLotto winningLotto = operateWinningLotto();
+        operateStatistics(money, lottos, winningLotto);
         inputView.closeScanner();
     }
 
@@ -45,18 +45,17 @@ public class LottoController {
         return new Lottos(lottos);
     }
 
-    private void operateWinningLotto() {
+    private WinningLotto operateWinningLotto() {
         Lotto winningLottoNumber = new Lotto(inputView.inputWinningLotto());
         String bonusNumber = inputView.inputBonusNumber();
-        winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
+        return new WinningLotto(winningLottoNumber, bonusNumber);
     }
 
-    private void operateStatistics(Money money, Lottos lottos) {
+    private void operateStatistics(Money money, Lottos lottos, WinningLotto winningLotto) {
         Prizes prizes = lottos.calculatePrize(winningLotto);
         double totalProfit = prizes.calculateProfit(money);
 
         outputView.printResult(prizes.toString().trim());
         outputView.printProfitRate(totalProfit);
     }
-
 }
