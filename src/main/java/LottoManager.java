@@ -2,10 +2,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoManager {
+    private final RandomNumbersGenerator randomNumbersGenerator;
+
+    public LottoManager(RandomNumbersGenerator randomNumbersGenerator) {
+        this.randomNumbersGenerator = randomNumbersGenerator;
+    }
+
     public List<Lotto> generateLottos(final int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; ++i) {
-            lottos.add(new Lotto(RandomNumbersGenerator.generateUniqueNumbers(Number.MIN, Number.MAX, 6)));
+            lottos.add(new Lotto(randomNumbersGenerator.generate()));
         }
         return lottos;
     }

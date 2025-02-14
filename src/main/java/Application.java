@@ -2,7 +2,8 @@ import java.io.IOException;
 
 public class Application {
     public static void main(String[] args) throws IOException {
-        LottoController lottoController = new LottoController(new InputView(), new OutputView(), new LottoManager());
+        AppConfig appConfig = new AppConfig();
+        LottoController lottoController = appConfig.controller();
         lottoController.run();
     }
 }
