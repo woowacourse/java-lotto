@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import lotto.model.Lotto;
@@ -28,7 +27,7 @@ public class LottoController {
 
     public void run() {
         try {
-            String money = inputView.readLine();
+            String money = inputView.readPurchaseMoney();
             issueLottoTickets(money);
             printIssuedLottoTickets();
 
