@@ -4,22 +4,23 @@ import java.util.List;
 import lotto.model.LottoMachine;
 import lotto.model.LottoPrize;
 import lotto.model.lotto.Lotto;
-import lotto.model.lotto.generator.DefaultNumberGenerator;
-import lotto.model.lotto.generator.NumberGenerator;
 import lotto.model.winning_lotto.WinningLotto;
-import lotto.view.input.ConsoleInputView;
 import lotto.view.input.InputView;
-import lotto.view.output.ConsoleOutputView;
 import lotto.view.output.LottoPrizeResponse;
 import lotto.view.output.LottoResponse;
 import lotto.view.output.OutputView;
 
 public class LottoController {
 
-    private final InputView inputView = new ConsoleInputView();
-    private final OutputView outputView = new ConsoleOutputView();
-    private final NumberGenerator numberGenerator = new DefaultNumberGenerator();
-    private final LottoMachine lottoMachine = new LottoMachine(numberGenerator);
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final LottoMachine lottoMachine;
+
+    public LottoController(InputView inputView, OutputView outputView, LottoMachine lottoMachine) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.lottoMachine = lottoMachine;
+    }
 
     public void run() {
         int purchaseMoney = getPurchaseMoney();
