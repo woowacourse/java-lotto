@@ -7,8 +7,9 @@ import lotto.model.winning.WinningResultResponse;
 import lotto.model.winning.WinningResultResponses;
 
 public class OutputView {
-    private static final String winningResultFormat = "%d개 일치 (%d원)- %d개";
-    private static final String winningSecondResultFormat = "%d개, 보너스 볼 일치(%d원)- %d개";
+
+    private static final String WINNING_RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
+    private static final String WINNING_SECOND_RESULT_FORMAT = "%d개, 보너스 볼 일치(%d원)- %d개";
 
     public void printIssuedLottos(final List<List<Integer>> issuedLottoNumbers) {
         for (List<Integer> issuedLottoNumber : issuedLottoNumbers) {
@@ -29,11 +30,11 @@ public class OutputView {
     private static void printStatistics(final WinningResultResponse response) {
         if (response.isHasBonus() && response.getMatchingCount() == 5) {
             System.out.println(
-                    winningSecondResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(),
+                    WINNING_SECOND_RESULT_FORMAT.formatted(response.getMatchingCount(), response.getWinningAmount(),
                             response.getWinningCount()));
             return;
         }
-        System.out.println(winningResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(),
+        System.out.println(WINNING_RESULT_FORMAT.formatted(response.getMatchingCount(), response.getWinningAmount(),
                 response.getWinningCount()));
     }
 
