@@ -5,6 +5,7 @@ import static lotto.util.Constant.LOTTO_PROFIT_STANDARD;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.Lotto;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoResult;
 
@@ -15,11 +16,11 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void writeLottoTickets(List<List<Integer>> lottoTickets) {
-        System.out.printf("%d개를 구매했습니다.", lottoTickets.size());
-        for (List<Integer> lottoTicket : lottoTickets) {
-            Collections.sort(lottoTicket);
-            System.out.println(lottoTicket);
+    public static void writeLottoTickets(List<Lotto> lottoTickets) {
+        System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
+        for (Lotto lottoTicket : lottoTickets) {
+            Collections.sort(lottoTicket.getLotto());
+            System.out.println(lottoTicket.getLotto());
         }
     }
 
