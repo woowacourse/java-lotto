@@ -4,7 +4,7 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class StringParserTest {
+public class StringToIntParserTest {
 
     @Test
     void 소수이면_예외가_발생한다() {
