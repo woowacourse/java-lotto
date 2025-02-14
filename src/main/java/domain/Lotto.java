@@ -1,5 +1,8 @@
 package domain;
 
+import domain.numbergenerator.NumberGenerator;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -12,8 +15,22 @@ public class Lotto {
 
     private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    private Lotto(List<Integer> numbers) {
         this.numbers = numbers;
+    }
+
+    public static Lotto issueByNumberGenerator(NumberGenerator numberGenerator) {
+        List<Integer> lottoNumbers = new ArrayList<>();
+
+        while (lottoNumbers.size() < MAX_LOTTO_SIZE) {
+            int number = numberGenerator.generate();
+
+            addNumberIfUnique(lottoNumbers, number);
+        }
+
+        lottoNumbers.sort(Comparator.naturalOrder());
+
+        return new Lotto(lottoNumbers);
     }
 
     public String getNumbers() {
@@ -32,6 +49,12 @@ public class Lotto {
                 winningNumberCount,
                 hasBonusNumber
         );
+    }
+
+    private static void addNumberIfUnique(List<Integer> lottoNumbers, int number) {
+        if (!lottoNumbers.contains(number)) {
+            lottoNumbers.add(number);
+        }
     }
 
 }
