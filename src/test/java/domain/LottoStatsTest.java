@@ -3,6 +3,7 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import service.LottoService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,19 +15,22 @@ class LottoStatsTest {
     @Test
     void _1등이_3개인_경우() {
         List<Lotto> lottos = new ArrayList<>();
-        LottoStats lottoStats = new LottoStats(List.of(1, 2, 3, 4, 5, 6), 7);
+        LottoService lottoService = new LottoService();
+
+        LottoStats lottoStats = new LottoStats();
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         for (int i = 0; i < 3; i++) {
             lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
         }
 
-        lottoStats.calculateResult(lottos);
-
+        lottoService.calcResult(lottoStats,lottos,winningLotto);
         assertThat(lottoStats.getRankCount(Rank.FIRST)).isEqualTo(3);
     }
 
     @DisplayName("기본 테스트 케이스")
     @Test
     void 기본_테스트_케이스() {
+        LottoService lottoService = new LottoService();
         List<Lotto> lottos = List.of(
                 new Lotto(List.of(8, 21, 23, 41, 42, 43)),
                 new Lotto(List.of(3, 5, 11, 16, 32, 38)),
@@ -43,8 +47,9 @@ class LottoStatsTest {
                 new Lotto(List.of(17, 21, 29, 37, 42, 45)),
                 new Lotto(List.of(3, 8, 27, 30, 35, 44)));
 
-        LottoStats lottoStats = new LottoStats(List.of(1, 2, 3, 4, 5, 6), 7);
-        lottoStats.calculateResult(lottos);
+        LottoStats lottoStats = new LottoStats();
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
+        lottoService.calcResult(lottoStats,lottos,winningLotto);
 
         assertThat(lottoStats.getRankCount(Rank.FIRST)).isEqualTo(0);
         assertThat(lottoStats.getRankCount(Rank.SECOND)).isEqualTo(0);
@@ -57,8 +62,10 @@ class LottoStatsTest {
     @DisplayName("총 상금 계산 테스트")
     @Test
     void 총_상금_계산_테스트() {
+        LottoService lottoService = new LottoService();
         List<Lotto> lottos = new ArrayList<>();
-        LottoStats lottoStats = new LottoStats(List.of(1, 2, 3, 4, 5, 6), 7);
+        LottoStats lottoStats = new LottoStats();
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
 
         lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6))); // 1등
         lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 7))); // 2등
@@ -66,9 +73,7 @@ class LottoStatsTest {
         lottos.add(new Lotto(List.of(1, 2, 3, 4, 7, 8))); // 4등
         lottos.add(new Lotto(List.of(1, 2, 3, 7, 8, 9))); // 5등
 
-        lottoStats.calculateResult(lottos);
-
+        lottoService.calcResult(lottoStats,lottos,winningLotto);
         assertThat(lottoStats.getTotalPrize()).isEqualTo(2031555000L);
     }
-
 }

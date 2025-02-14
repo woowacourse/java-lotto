@@ -1,7 +1,5 @@
 package domain;
 
-
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +8,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class LottoTest {
-
     @DisplayName("로또 당첨결과 테스트")
     @Test
     void 로또_당첨결과_테스트() {

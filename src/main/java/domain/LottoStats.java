@@ -1,32 +1,24 @@
 package domain;
 
 
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class LottoStats {
-    private final Map<Rank, Integer> rank;
-    private final List<Integer> winningNumbers;
-    private final int bonusBall;
+    private final Map<Rank, Integer> ranks;
 
-    public LottoStats(List<Integer> winningNumbers, int bonusBall) {
-        rank = new TreeMap<>();
-        this.winningNumbers = winningNumbers;
-        this.bonusBall = bonusBall;
+    public LottoStats() {
+        ranks = new TreeMap<>();
     }
 
-    public void calculateResult(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            Rank lottoRank = lotto.getRank(winningNumbers, bonusBall);
-            rank.put(lottoRank, rank.getOrDefault(lottoRank, 0) + 1);
-        }
+    public void addLottoRankCount(Rank lottoRank){
+        ranks.put(lottoRank, ranks.getOrDefault(lottoRank, 0) + 1);
     }
 
     public long getTotalPrize() {
         long totalPrize = 0L;
-        for (Rank lottoRank : rank.keySet()) {
-            totalPrize += lottoRank.getPrize() * rank.get(lottoRank);
+        for (Rank lottoRank : ranks.keySet()) {
+            totalPrize += lottoRank.getPrize() * ranks.get(lottoRank);
         }
         return totalPrize;
     }
@@ -46,7 +38,7 @@ public class LottoStats {
     }
 
     public Integer getRankCount(Rank lottoRank) {
-        return rank.getOrDefault(lottoRank, 0);
+        return ranks.getOrDefault(lottoRank, 0);
     }
 
     public String getEarningRate(int purchaseAmount) {

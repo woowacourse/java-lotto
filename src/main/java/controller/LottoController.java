@@ -1,21 +1,28 @@
 package controller;
 
 import domain.Lotto;
-import domain.LottoFactory;
 import domain.LottoStats;
+import domain.WinningLotto;
+import service.LottoService;
 import view.InputView;
 import view.OutputView;
 
 import java.util.List;
 
 public class LottoController {
+    private static final LottoService lottoService = new LottoService();
+
     public static void run() {
         int purchaseAmount = InputView.inputPurchaseAmount();
-        List<Lotto> lottos = LottoFactory.makeLotto(purchaseAmount);
+        List<Lotto> lottos = lottoService.buyLottos(purchaseAmount);
         OutputView.printLottos(lottos);
+
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
-        LottoStats lottoStats = new LottoStats(winningNumbers, InputView.inputBonusBall(winningNumbers));
-        lottoStats.calculateResult(lottos);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers,InputView.inputBonusBall(winningNumbers));
+
+        LottoStats lottoStats = new LottoStats();
+        lottoService.calcResult(lottoStats,lottos,winningLotto);
+
         OutputView.printLottoStats(lottoStats);
         OutputView.printEarningRate(lottoStats, purchaseAmount);
     }
