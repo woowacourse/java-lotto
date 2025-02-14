@@ -26,19 +26,19 @@ public class InputView {
         try {
             Integer.parseInt(purchaseAmount);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("정수를 입력해주세요.");
+            throw new IllegalArgumentException(InputErrorMessage.INTEGER_REQUIRED.getMessage());
         }
     }
 
     private static void validateLottoPriceUnit(int purchaseAmount) {
         if (purchaseAmount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("로또 금액(1000)으로 나누어 떨어지지 않습니다.");
+            throw new IllegalArgumentException(InputErrorMessage.NOT_DIVIDED_BY_1000.getMessage());
         }
     }
 
     private static void validatePositiveInteger(int purchaseAmount) {
         if (purchaseAmount <= 0) {
-            throw new IllegalArgumentException("양수가 아닙니다.");
+            throw new IllegalArgumentException(InputErrorMessage.POSITIVE_INTEGER_REQUIRED.getMessage());
         }
     }
 
@@ -62,7 +62,7 @@ public class InputView {
                 .boxed()
                 .toList();
         if (numbers.stream().distinct().count() != numbers.size()) {
-            throw new IllegalArgumentException("중복된 번호가 존재합니다.");
+            throw new IllegalArgumentException(InputErrorMessage.DUPLICATED.getMessage());
         }
     }
 
@@ -79,7 +79,7 @@ public class InputView {
 
     private static void validateDuplicateNumber(Integer bonusNumber, List<Integer> winningNumbers) {
         if (winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("중복된 번호가 존재합니다.");
+            throw new IllegalArgumentException(InputErrorMessage.DUPLICATED.getMessage());
         }
     }
 }
