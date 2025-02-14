@@ -9,6 +9,16 @@ import org.junit.jupiter.params.provider.ValueSource;
 class InputValidatorTest {
 
     @Test
+    void 정상_입력값이_들어오면_예외가_발생하지_않는다() {
+        // Given
+        String input = "비어있지 않은 입력";
+
+        // When & Then
+        Assertions.assertThatCode(() -> InputValidator.validateNullOrBlank(input))
+                .doesNotThrowAnyException();
+    }
+
+    @Test
     void 입력값이_null이면_예외가_발생한다() {
         // Given
 
