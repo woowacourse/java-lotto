@@ -8,7 +8,10 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class LottoMachine {
+public final class LottoMachine {
+
+    private LottoMachine() {
+    }
 
     public static Lotto issue() {
         return new Lotto(generateNumbers());
