@@ -6,12 +6,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class UserLotto {
+    private static final String PURCHASE_AMOUNT_1000_UNIT_EXCEPTION = "1000원 단위의 금액을 입력해주세요.\n";
     private final int purchaseNumber;
     private final List<Lotto> lottos = new ArrayList<>();
 
     public UserLotto(String rawPurchaseAmount) {
         if(!isPurchaseNumber1000Unit(rawPurchaseAmount)) {
-            throw new IllegalArgumentException("1000원 단위의 금액을 입력해주세요.\n");
+            throw new IllegalArgumentException(PURCHASE_AMOUNT_1000_UNIT_EXCEPTION);
         }
 
         purchaseNumber = Integer.parseInt(rawPurchaseAmount) / 1000;
