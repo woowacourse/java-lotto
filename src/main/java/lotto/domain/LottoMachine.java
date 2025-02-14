@@ -10,21 +10,20 @@ import java.util.Random;
 
 public class LottoMachine {
 
-    private List<List<Integer>> lottoTickets = new ArrayList<>();
+    private List<Lotto> lottoTickets = new ArrayList<>();
 
     public LottoMachine(LottoMoney lottoMoney) {
         int ticketNumber = lottoMoney.getLottoMoney() / LOTTO_MONEY_UNIT;
         this.lottoTickets = generateLottoTickets(ticketNumber);
     }
 
-    private List<List<Integer>> generateLottoTickets(int ticketNumber) {
-        List<List<Integer>> lottoTickets = new ArrayList<>();
+    private List<Lotto> generateLottoTickets(int ticketNumber) {
+        List<Lotto> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < ticketNumber; i++) {
             List<Integer> lottoTicket = generateLottoTicket();
-            lottoTickets.add(lottoTicket);
+            lottoTickets.add(new Lotto(lottoTicket));
         }
-
         return lottoTickets;
     }
 
@@ -42,7 +41,7 @@ public class LottoMachine {
         return lottoTicket;
     }
 
-    public List<List<Integer>> getLottoTickets() {
+    public List<Lotto> getLottoTickets() {
         return lottoTickets;
     }
 }

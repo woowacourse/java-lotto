@@ -21,8 +21,8 @@ public class LottoMachineTest {
         LottoMoney lottoMoney = new LottoMoney("1000");
         LottoMachine lottoMachine = new LottoMachine(lottoMoney);
         lottoMachine.getLottoTickets().forEach(lottoTickets -> {
-            assertThat(lottoTickets).hasSize(6);
-            assertThat(lottoTickets).doesNotHaveDuplicates();
+            assertThat(lottoTickets.getLotto()).hasSize(6);
+            assertThat(lottoTickets.getLotto()).doesNotHaveDuplicates();
         });
     }
 }
