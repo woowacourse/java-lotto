@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import static lotto.exception.ErrorMessage.MUST_NOT_BE_DUPLICATED;
-import static lotto.exception.ErrorMessage.OUT_OF_RANGE;
 import static lotto.exception.ErrorMessage.SIZE_ERROR;
 
 import java.util.HashSet;
@@ -10,45 +9,17 @@ import java.util.Set;
 import lotto.exception.LottoException;
 
 public class Lotto {
-
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-        validateNumberRange();
         validateLottoSize();
         validateDuplicateNumber();
     }
 
-    public int checkMatchCount(List<Integer> winningNumbers) {
-
-        int count = 0;
-        for (int lottoNumber : lottoNumbers) {
-            if (winningNumbers.contains(lottoNumber)) {
-                count += 1;
-            }
-        }
-
-        return count;
-    }
-
-    public boolean checkBonus(int bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
-    }
-
-    private void validateNumberRange() {
-        for (Integer number : lottoNumbers) {
-            if (number < MIN_NUMBER || number > MAX_NUMBER) {
-                throw new LottoException(OUT_OF_RANGE);
-            }
-        }
-    }
-
     private void validateDuplicateNumber() {
-        Set<Integer> set = new HashSet<>(lottoNumbers);
+        Set<LottoNumber> set = new HashSet<>(lottoNumbers);
         if (set.size() != LOTTO_SIZE) {
             throw new LottoException(MUST_NOT_BE_DUPLICATED);
         }
@@ -60,11 +31,35 @@ public class Lotto {
         }
     }
 
+    public int checkMatchCount(Lotto currentLotto) {
+
+        int count = 0;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (currentLotto.hasNumber(lottoNumber)) {
+                count += 1;
+            }
+        }
+        return count;
+    }
+
+    public boolean hasNumber(LottoNumber currentLottoNumber) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (lottoNumber.equals(currentLottoNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     public int getSize() {
         return lottoNumbers.size();
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 

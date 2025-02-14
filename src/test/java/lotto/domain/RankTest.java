@@ -21,15 +21,21 @@ class RankTest {
     }, delimiterString = ":")
     void 당첨번호와_보너스번호로_당첨내용을_확인한다(int matchCount, boolean matchBonus, Rank rank) {
 
+        //given
         Rank currentRank = Rank.checkPrize(matchCount, matchBonus);
 
+        //when & then
         assertThat(currentRank).isEqualTo(rank);
     }
 
     @DisplayName("기본 맵을 생성한다.")
     @Test
     void 기본_맵을_생성한다() {
+
+        //given
         EnumMap<Rank, Integer> defaultMap = Rank.makeDefaultMap();
+
+        //when & then
         assertThat(defaultMap.size()).isEqualTo(6);
         assertThat(defaultMap.get(Rank.FIRST_PRIDE)).isEqualTo(0);
     }

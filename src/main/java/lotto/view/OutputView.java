@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoBundle;
+import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 
 public class OutputView {
@@ -16,7 +17,7 @@ public class OutputView {
     public void lottoStatusPrint(LottoBundle lottoBundle) {
 
         for (Lotto lotto : lottoBundle.getLottoBundle()) {
-            List<Integer> lottoNumber = lotto.getLottoNumbers();
+            List<LottoNumber> lottoNumber = lotto.getLottoNumbers();
             System.out.print("[");
             System.out.print(lottoNumber.stream().map(String::valueOf).collect(Collectors.joining(", ")));
             System.out.print("]");
