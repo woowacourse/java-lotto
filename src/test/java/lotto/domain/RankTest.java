@@ -15,6 +15,7 @@ class RankTest {
         //when & then
         Assertions.assertThat(Rank.matchRank(matchCounts,matchBonus)).isEqualTo(Rank.SECOND);
     }
+
     @Test
     void 세번째_등수_확인() {
         //given

@@ -21,7 +21,7 @@ public class LottoController {
     }
 
     public void run() {
-        Money money = inputView.inputMoney();
+        Money money = new Money(inputView.inputMoney());
         purchaseLotto(money);
         operateWinningLotto();
         operateStatistics(money);

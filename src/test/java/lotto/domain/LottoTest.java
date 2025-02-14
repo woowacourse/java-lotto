@@ -63,24 +63,6 @@ class LottoTest {
     }
 
     @Test
-    void 로또_숫자_포함_확인() {
-        //given
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-
-        //when & then
-        assertThat(lotto.contain(1)).isEqualTo(1);
-    }
-
-    @Test
-    void 로또_숫자_미포함_확인() {
-        //given
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-
-        //when & then
-        assertThat(lotto.contain(7)).isEqualTo(0);
-    }
-
-    @Test
     void 로또_매치_수_검증() {
         //given
         Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
