@@ -13,9 +13,7 @@ public class LottoManager {
     public WinningResult getWinningResult(List<Lotto> lottos, WinningLotto winningLotto) {
         WinningResult winningResult = new WinningResult();
         for (Lotto lotto : lottos) {
-            final int matchedCount = winningLotto.getMatchedCount(lotto);
-            final boolean isBonusMatched = winningLotto.isMatchBonus(lotto);
-            LottoPrize lottoPrize = LottoPrize.of(matchedCount, isBonusMatched);
+            LottoPrize lottoPrize = lotto.getLottoPrize(winningLotto);
             winningResult.increaseCount(lottoPrize, 1);
         }
         return winningResult;

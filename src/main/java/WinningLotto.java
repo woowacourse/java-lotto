@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class WinningLotto {
     private final Lotto winningNumbers;
     private final Number bonusNumber;
@@ -11,18 +8,16 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public int getMatchedCount(Lotto lotto) {
-        List<Integer> lottoNumbers = new ArrayList<>(lotto.getNumbers());
-        lottoNumbers.retainAll(winningNumbers.getNumbers());
-        return lottoNumbers.size();
+    public boolean isMatchWinningNumber(Number number) {
+        return winningNumbers.isExist(number);
     }
 
-    public boolean isMatchBonus(Lotto lotto) {
-        return lotto.getNumbers().stream().anyMatch(number -> number == bonusNumber.getValue());
+    public boolean isMatchBonus(Number number) {
+        return bonusNumber.equals(number);
     }
 
     private void validate(Lotto winningNumbers, Number bonusNumber) {
-        if (winningNumbers.getNumbers().stream().anyMatch(number -> number == bonusNumber.getValue())) {
+        if (winningNumbers.isExist(bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
         }
     }

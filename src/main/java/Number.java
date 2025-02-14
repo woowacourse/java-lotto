@@ -1,12 +1,10 @@
-public class Number {
-    private int value;
+public record Number(int value) {
     public static int MIN = 1;
     public static int MAX = 45;
 
-    public Number(int value) {
+     public Number {
         validate(value);
-        this.value = value;
-    }
+     }
 
     public static Number from(String rawInput) {
         try {
@@ -14,10 +12,6 @@ public class Number {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(e);
         }
-    }
-
-    public int getValue() {
-        return value;
     }
 
     private void validate(int value) {

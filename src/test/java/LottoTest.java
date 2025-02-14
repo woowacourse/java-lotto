@@ -10,23 +10,10 @@ class LottoTest {
     @Test
     void test1() {
         // given
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
 
-        // when
-        Lotto lotto = new Lotto(numbers);
-
-        // then
-        assertThat(lotto.getNumbers()).containsAll(List.of(1, 2, 3, 4, 5, 6));
-    }
-
-    @DisplayName("로또 번호는 오름차순으로 저장된다.")
-    @Test
-    void test2() {
-        // given & when
-        Lotto lotto = new Lotto(List.of(6, 5, 1, 2, 3, 4));
-
-        // then
-        assertThat(lotto.getNumbers()).isSorted();
+        // when & then
+        assertThatThrownBy(() -> new Lotto(numbers)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("로또 번호가 6개가 아니면 예외")

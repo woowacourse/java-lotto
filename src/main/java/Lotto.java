@@ -14,15 +14,21 @@ public class Lotto {
                 .toList();
     }
 
-    public List<Integer> getNumbers() {
-        return numbers.stream().map(Number::getValue).toList();
+    public boolean isExist(Number number) {
+        return numbers.contains(number);
+    }
+
+    public LottoPrize getLottoPrize(WinningLotto winningLotto) {
+        final int matchedWinningCount = numbers.stream().filter(winningLotto::isMatchWinningNumber).toList().size();
+        final boolean isMatchedBonus = numbers.stream().anyMatch(winningLotto::isMatchBonus);
+        return LottoPrize.of(matchedWinningCount, isMatchedBonus);
     }
 
     public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[");
         String joined = numbers.stream()
-                .map(Number::getValue)
+                .map(Number::value)
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
         stringBuilder.append(joined);
