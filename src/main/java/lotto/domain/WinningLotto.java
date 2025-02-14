@@ -15,12 +15,12 @@ public class WinningLotto {
 
     public WinningLotto(Lotto winningNumbers, String bonusBallInput) {
         this.winningNumbers = winningNumbers;
-        int bonusBallNumber = parse(bonusBallInput);
+        int bonusBallNumber = validateAndParse(bonusBallInput);
         validateBonusBall(bonusBallNumber);
         this.bonusBall = bonusBallNumber;
     }
 
-    private int parse(String bonusBallInput) {
+    private int validateAndParse(String bonusBallInput) {
         try {
             return Integer.parseInt(bonusBallInput);
         } catch (NumberFormatException e) {
