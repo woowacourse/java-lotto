@@ -73,7 +73,7 @@ public class LottoDispenser {
     }
 
     public double calculateEarnMoneyRatio(long earnMoney) {
-        return  ((double) (earnMoney / buyMoney) * 100) / 100;
+        return  Math.round((double) earnMoney / buyMoney);
     }
 
     public String formattingBuyLottoResult() {
