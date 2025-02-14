@@ -28,14 +28,14 @@ public class OutputView {
                 .toList();
         for (LottoPrize lottoPrize : lottoPrizes) {
             System.out.printf("%d개 일치%s(%d원)- %d개\n", lottoPrize.getCountMatched(),
-                    printBonusNumberMatched(lottoPrize.isBonusNumberMatched()),
+                    printBonusNumberMatched(lottoPrize.getCountBonusNumberMatched()),
                     lottoPrize.getMoney(),
                     prizeCounter.get(lottoPrize));
         }
     }
 
-    private static String printBonusNumberMatched(boolean isBonusNumberMatched) {
-        if (isBonusNumberMatched) {
+    private static String printBonusNumberMatched(int countBonusNumberMatched) {
+        if (countBonusNumberMatched == 1) {
             return ", 보너스 볼 일치";
         }
         return " ";
