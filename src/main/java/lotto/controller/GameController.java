@@ -72,11 +72,9 @@ public class GameController {
     }
 
     private LottoResult checkLottoResult(WinningLotto winningLotto, List<Lotto> lottoTickets, LottoMoney lottoMoney) {
-        LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
-
+        LottoResult lottoResult = new LottoResult();
         lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
         lottoResult.calculateLottoProfitRate(lottoMoney);
-
         return lottoResult;
     }
 }
