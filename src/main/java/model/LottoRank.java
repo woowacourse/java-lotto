@@ -45,17 +45,29 @@ public enum LottoRank {
 
     public static LottoRank findByMatchCondition(
             int overlappedCount,
-            boolean isBonusNUmberOverlapped
+            boolean isBonusNumberOverlapped
     ) {
         return Arrays.stream(LottoRank.values())
-                .filter(rank -> {
-                    if (overlappedCount == REQUIRED_BONUS_OVERLAPPED_COUNT) {
-                        return rank.requiredBonusNumber == isBonusNUmberOverlapped
-                                && rank.overlappedCount == overlappedCount;
-                    }
-                    return rank.overlappedCount == overlappedCount;
-                })
+                .filter(rank -> isMatchingRank(overlappedCount, isBonusNumberOverlapped, rank))
                 .findFirst()
                 .orElse(null);
+    }
+
+    private static boolean isMatchingRank(
+            int overlappedCount,
+            boolean isBonusNumberOverlapped, LottoRank rank
+    ) {
+        if (overlappedCount == REQUIRED_BONUS_OVERLAPPED_COUNT) {
+            return isMatchingRankIncludingBonus(isBonusNumberOverlapped, overlappedCount, rank);
+        }
+        return rank.overlappedCount == overlappedCount;
+    }
+
+    private static boolean isMatchingRankIncludingBonus(
+            boolean isBonusNumberOverlapped,
+            int overlappedCount,
+            LottoRank rank) {
+        return rank.requiredBonusNumber == isBonusNumberOverlapped
+                && rank.overlappedCount == overlappedCount;
     }
 }
