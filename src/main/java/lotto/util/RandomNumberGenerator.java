@@ -1,6 +1,6 @@
 package lotto.util;
 
-public interface RandomUtil {
+public interface RandomNumberGenerator {
 
     int generate(int min, int max);
 }

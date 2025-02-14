@@ -87,5 +87,5 @@
 ### Constant
 - [x] 로또 관련 상수를 저장한다.
 
-### RandomNumber
+### LottoNumberGenerator
 - [x] 랜덤 숫자를 생성한다.

@@ -7,14 +7,14 @@ import static lotto.util.Constant.LOTTO_NUMBER_SIZE;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.util.RandomUtil;
+import lotto.util.RandomNumberGenerator;
 
 public class LottoMachine {
-    private final RandomUtil randomUtil;
+    private final RandomNumberGenerator randomUNumberGenerator;
     private final List<List<Integer>> lottoTickets;
 
-    public LottoMachine(RandomUtil randomUtil, LottoMoney lottoMoney) {
-        this.randomUtil = randomUtil;
+    public LottoMachine(RandomNumberGenerator randomUNumberGenerator, LottoMoney lottoMoney) {
+        this.randomUNumberGenerator = randomUNumberGenerator;
         this.lottoTickets = generateLottoTickets(lottoMoney);
     }
 
@@ -37,7 +37,7 @@ public class LottoMachine {
     }
 
     private void addLottoTicketNumber(List<Integer> ticket) {
-        int number = randomUtil.generate(LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE);
+        int number = randomUNumberGenerator.generate(LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE);
         if (!ticket.contains(number)) {
             ticket.add(number);
         }
