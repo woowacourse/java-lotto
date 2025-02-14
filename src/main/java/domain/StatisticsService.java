@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 public class StatisticsService {
-    public WinningStatistics calculateWinningStatistics(List<LottoTicket> lottoTickets, List<Integer> winningNumbers,
+    public WinningStatistics calculateWinningStatistics(List<LottoTicket> lottoTickets, LottoTicket winningLottoTicket,
                                                         int bonusNumber) {
         Map<LottoPrize, Integer> prizeCounter = new HashMap<>();
         initializePrizeCounter(prizeCounter);
 
         lottoTickets.forEach(lottoTicket -> {
-            int countMatched = lottoTicket.countMatchedNumbers(winningNumbers);
+            int countMatched = lottoTicket.countMatchedNumbers(winningLottoTicket.getNumbers());
             boolean isBonusNumberMatched = lottoTicket.hasBonusNumber(bonusNumber);
             LottoPrize prize = LottoPrize.getLottoPrize(countMatched, isBonusNumberMatched);
             int prizeCount = prizeCounter.get(prize);

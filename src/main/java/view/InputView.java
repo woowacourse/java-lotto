@@ -1,7 +1,5 @@
 package view;
 
-import static domain.LottoTicket.LOTTO_PRICE;
-
 import java.util.Arrays;
 import java.util.List;
 import util.Console;
@@ -18,7 +16,6 @@ public class InputView {
         validateInteger(purchaseAmount);
         int amount = Integer.parseInt(purchaseAmount);
         validatePositiveInteger(amount);
-        validateLottoPriceUnit(amount);
     }
 
     private static void validateInteger(String purchaseAmount) {
@@ -26,12 +23,6 @@ public class InputView {
             Integer.parseInt(purchaseAmount);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("정수를 입력해주세요.");
-        }
-    }
-
-    private static void validateLottoPriceUnit(int purchaseAmount) {
-        if (purchaseAmount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("로또 금액(1000)으로 나누어 떨어지지 않습니다.");
         }
     }
 

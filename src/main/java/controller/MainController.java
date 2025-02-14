@@ -24,10 +24,11 @@ public class MainController {
                 lottoMachine.generateLottoTickets(purchaseAmount, new RandomIntegerGenerator());
         OutputView.printLottoTickets(lottoTickets);
 
-        List<Integer> winningNumbers = InputView.inputWinningLottoTicket();
-        int bonusNumber = InputView.inputBonusNumber(winningNumbers);
+        LottoTicket winningLottoTicket = new LottoTicket(InputView.inputWinningLottoTicket());
+        int bonusNumber = InputView.inputBonusNumber(winningLottoTicket.getNumbers());
 
-        WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, winningNumbers,
+        WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets,
+                winningLottoTicket,
                 bonusNumber);
         OutputView.printWinningStatistics(winningStatistics);
         Profit profit = statisticsService.calculateProfit(winningStatistics);
