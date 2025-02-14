@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 class LottoTest {
 
-
     @DisplayName("로또_생성을_확인한다")
     @Test
     void 로또_생성을_확인한다() {
@@ -52,7 +51,6 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 로또의 갯수가 일치하지 않습니다.");
     }
-
 
     @DisplayName("로또와 당첨 번호와의 겹친 갯수를 반환한다.")
     @Test

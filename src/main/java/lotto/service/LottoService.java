@@ -23,12 +23,10 @@ public class LottoService {
         return new LottoBundle(lottoBundle);
     }
 
-
     public WinningNumbers makeWinningNumbers(String winningNumber, String bonusNumber) {
         return new WinningNumbers(Parser.parseToIntegers(Splitter.splitByComma(
                 winningNumber)), Parser.parseToInteger(bonusNumber));
     }
-
 
     private Lotto makeLotto() {
         return new Lotto(NumberGenerator.numberGeneratorWithUniqueValues(6, 1, 45));

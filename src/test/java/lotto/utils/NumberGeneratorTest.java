@@ -14,6 +14,7 @@ class NumberGeneratorTest {
         List<Integer> randomNumbers = NumberGenerator.numberGeneratorWithUniqueValues(6, 1, 45);
         assertThat(randomNumbers.size()).isEqualTo(6);
     }
+
     @DisplayName("최대 및 최소 설정값대로 나와야 한다.")
     @Test
     void 최대_및_최소_설정값대로_나와야_한다() {

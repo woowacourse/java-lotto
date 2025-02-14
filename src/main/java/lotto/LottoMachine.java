@@ -36,7 +36,6 @@ public class LottoMachine {
         outputView.lottoStatisticsPrint(lottoResult, lottoService.calculateTotalResult(lottoResult, amountPaid));
     }
 
-
     private AmountPaid makeAmountPaid() {
         return retryUntilValidInput(() -> {
             try {
@@ -60,7 +59,6 @@ public class LottoMachine {
             }
         });
     }
-
 
     private <T> T retryUntilValidInput(final Supplier<T> supplier) {
         while (true) {

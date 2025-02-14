@@ -61,7 +61,6 @@ public class WinningNumbers {
         }
     }
 
-
     public int checkMatchCount(Lotto lotto) {
         return lotto.checkMatchCount(winningNumbers);
     }
