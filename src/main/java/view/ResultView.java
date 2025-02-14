@@ -7,25 +7,25 @@ import static constant.WinLottoInfo.SECOND;
 import static constant.WinLottoInfo.THIRD;
 
 import constant.OutputMessage;
+import model.LottoStatistics;
 import model.PurchasedLottos;
-import model.Result;
 
 public class ResultView {
-    public void printResult(Result result) {
+    public void printResult(LottoStatistics lottoStatistics) {
         System.out.printf(OutputMessage.FIFTH_RESULT, FIFTH.getMatchNumberCount(), FIFTH.getPrice(),
-                nullToZero(result.getCount(FIFTH)));
+                nullToZero(lottoStatistics.getCount(FIFTH)));
         System.out.printf(OutputMessage.FOURTH_RESULT, FOURTH.getMatchNumberCount(), FOURTH.getPrice(),
-                nullToZero(result.getCount(FOURTH)));
+                nullToZero(lottoStatistics.getCount(FOURTH)));
         System.out.printf(OutputMessage.THIRD_RESULT, THIRD.getMatchNumberCount(), THIRD.getPrice(),
-                nullToZero(result.getCount(THIRD)));
+                nullToZero(lottoStatistics.getCount(THIRD)));
         System.out.printf(OutputMessage.SECOND_RESULT, SECOND.getMatchNumberCount(), SECOND.getPrice(),
-                nullToZero(result.getCount(SECOND)));
+                nullToZero(lottoStatistics.getCount(SECOND)));
         System.out.printf(OutputMessage.FIRST_RESULT, FIRST.getMatchNumberCount(), FIRST.getPrice(),
-                nullToZero(result.getCount(FIRST)));
+                nullToZero(lottoStatistics.getCount(FIRST)));
     }
 
-    public void printTotalReturn(Result result, PurchasedLottos purchasedLottos) {
-        System.out.printf(OutputMessage.TOTAL_RETURN, result.totalReturn(purchasedLottos.getPurchaseAmount()));
+    public void printTotalReturn(LottoStatistics lottoStatistics, PurchasedLottos purchasedLottos) {
+        System.out.printf(OutputMessage.TOTAL_RETURN, lottoStatistics.totalReturn(purchasedLottos.getPurchaseAmount()));
     }
 
     private Integer nullToZero(Integer number) {

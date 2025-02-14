@@ -5,10 +5,10 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-public class Result {
+public class LottoStatistics {
     private final EnumMap<WinLottoInfo, Integer> result = new EnumMap<>(WinLottoInfo.class);
 
-    public Result(List<LottoNumbers> lottoNumbers, WinLotto winLotto) {
+    public LottoStatistics(List<LottoNumbers> lottoNumbers, WinLotto winLotto) {
         for (LottoNumbers purchasedLotto : lottoNumbers) {
             WinLottoInfo winResult = WinLottoInfo.result(purchasedLotto, winLotto);
             result.put(winResult, result.getOrDefault(winResult, 0) + 1);

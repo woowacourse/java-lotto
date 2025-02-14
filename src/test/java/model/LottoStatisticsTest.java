@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ResultTest {
+class LottoStatisticsTest {
     @Test
     @DisplayName("로또 당첨 개수 계산 테스트")
     public void getCountTest() {
@@ -16,9 +16,9 @@ class ResultTest {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         lottoNumbers.add(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
         WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 4, 5, 6), 7);
-        Result result = new Result(lottoNumbers, winLotto);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoNumbers, winLotto);
         // when
-        Integer count = result.getCount(WinLottoInfo.FIRST);
+        Integer count = lottoStatistics.getCount(WinLottoInfo.FIRST);
         // then
         assertThat(count).isEqualTo(1);
     }
@@ -30,9 +30,9 @@ class ResultTest {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         lottoNumbers.add(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
         WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 10, 8, 9), 7);
-        Result result = new Result(lottoNumbers, winLotto);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoNumbers, winLotto);
         // when
-        Double totalReturn = result.totalReturn(25000);
+        Double totalReturn = lottoStatistics.totalReturn(25000);
         // then
         assertThat(totalReturn).isEqualTo(0.2);
     }
