@@ -7,30 +7,22 @@ import static lotto.util.Constant.LOTTO_NUMBER_SIZE;
 import static lotto.util.ErrorHandler.INVALID_RANGE;
 import static lotto.util.ErrorHandler.INVALID_SIZE;
 
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import lotto.util.StringConverter;
 
 public class Lotto {
 
     private List<Integer> lotto = new ArrayList<>();
 
     public Lotto(String input) {
-        List<Integer> numbers = parse(input);
+        List<Integer> numbers = StringConverter.parseToIntList(input, LOTTO_NUMBER_DELIMITER);
         validate(numbers);
         this.lotto = numbers;
     }
 
     public Lotto(List<Integer> numbers) {
         this.lotto = numbers;
-    }
-
-    private List<Integer> parse(String input) {
-        List<String> result = Arrays.stream(input.split(LOTTO_NUMBER_DELIMITER)).toList();
-        return result.stream()
-                .map(s -> Integer.parseInt(s.strip()))
-                .toList();
     }
 
     private void validate(List<Integer> numbers) {
