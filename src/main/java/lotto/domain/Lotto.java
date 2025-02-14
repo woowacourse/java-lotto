@@ -17,12 +17,12 @@ public class Lotto {
     private List<Integer> lotto = new ArrayList<>();
 
     public Lotto(String input) {
-        List<Integer> numbers = parse(input);
+        List<Integer> numbers = parseLottoNumbers(input);
         validate(numbers);
         this.lotto = numbers;
     }
 
-    private List<Integer> parse(String input) {
+    private List<Integer> parseLottoNumbers(String input) {
         List<String> result = Arrays.stream(input.split(LOTTO_NUMBER_DELIMITER)).toList();
         return result.stream()
                 .map(s -> Integer.parseInt(s.strip()))
