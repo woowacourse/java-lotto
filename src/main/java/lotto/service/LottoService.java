@@ -12,6 +12,7 @@ import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
 import lotto.utils.NumberGenerator;
 import lotto.utils.Parser;
+import lotto.utils.Splitter;
 
 public class LottoService {
 
@@ -26,7 +27,7 @@ public class LottoService {
 
     public WinningNumbers makeWinningNumbers(String winningNumber, String bonusNumber) {
 
-        List<Integer> lottoNumbers = NumberGenerator.numberGeneratorWithUniqueValues(6, 1, 45);
+        List<Integer> lottoNumbers = Parser.parseToIntegers(Splitter.splitByComma(winningNumber));
         List<LottoNumber> lotto = new ArrayList<>();
         for (int lottoNumber : lottoNumbers) {
             lotto.add(new LottoNumber(lottoNumber));

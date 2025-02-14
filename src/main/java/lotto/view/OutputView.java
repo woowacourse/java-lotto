@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.EnumMap;
-import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoBundle;
@@ -15,16 +14,15 @@ public class OutputView {
     }
 
     public void lottoStatusPrint(LottoBundle lottoBundle) {
-
         for (Lotto lotto : lottoBundle.getLottoBundle()) {
-            List<LottoNumber> lottoNumber = lotto.getLottoNumbers();
-            System.out.print("[");
-            System.out.print(lottoNumber.stream().map(String::valueOf).collect(Collectors.joining(", ")));
-            System.out.print("]");
-            System.out.println();
+            String numbers = lotto.getLottoNumbers().stream()
+                    .map(LottoNumber::getNumber)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", "));
+
+            System.out.println("[" + numbers + "]");
         }
         System.out.println();
-
     }
 
     public void lottoStatisticsPrint(EnumMap<Rank, Integer> statistics, String profitRate) {

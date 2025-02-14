@@ -32,23 +32,13 @@ public class Lotto {
     }
 
     public int checkMatchCount(Lotto currentLotto) {
-
-        int count = 0;
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            if (currentLotto.hasNumber(lottoNumber)) {
-                count += 1;
-            }
-        }
-        return count;
+        return (int) lottoNumbers.stream()
+                .filter(currentLotto::hasNumber)
+                .count();
     }
 
     public boolean hasNumber(LottoNumber currentLottoNumber) {
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            if (lottoNumber.equals(currentLottoNumber)) {
-                return true;
-            }
-        }
-        return false;
+        return lottoNumbers.contains(currentLottoNumber);
     }
 
     public boolean checkBonus(LottoNumber bonusNumber) {
