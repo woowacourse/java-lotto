@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
     public void printLottoCount(int count) {
@@ -7,7 +8,7 @@ public class OutputView {
 
     public void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.getInfo());
+            System.out.println(getFormattedLotto(lotto));
         }
     }
 
@@ -31,6 +32,11 @@ public class OutputView {
         }
         stringBuilder.append('\n');
         System.out.println(stringBuilder);
+    }
+
+    private String getFormattedLotto(Lotto lotto) {
+        String joined = lotto.getNumbers().stream().map(String::valueOf).collect(Collectors.joining(", "));
+        return "[" + joined + "]";
     }
 
     private String getFormattedPrize(LottoPrize lottoPrize) {

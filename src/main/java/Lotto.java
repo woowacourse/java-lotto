@@ -1,7 +1,6 @@
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private List<Number> numbers;
@@ -24,16 +23,8 @@ public class Lotto {
         return LottoPrize.from(matchedWinningCount, isMatchedBonus);
     }
 
-    public String getInfo() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-        String joined = numbers.stream()
-                .map(Number::value)
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "));
-        stringBuilder.append(joined);
-        stringBuilder.append("]");
-        return stringBuilder.toString();
+    public List<Integer> getNumbers() {
+        return numbers.stream().map(Number::value).toList();
     }
 
     private void validate(List<Integer> numbers) {
