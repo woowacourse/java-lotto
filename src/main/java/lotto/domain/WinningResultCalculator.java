@@ -26,17 +26,17 @@ public class WinningResultCalculator {
         return new WinningResult(winningResult);
     }
 
+    private void validate(Lotto winningLotto, LottoNumber bonusNumber) {
+        if (winningLotto.isDuplicateNumber(bonusNumber)) {
+            throw new IllegalArgumentException("로또 번호와 중복되지 않는 보너스 번호를 입력해 주세요.");
+        }
+    }
+
     private Map<LottoAward, Integer> initializeWinningResult() {
         Map<LottoAward, Integer> winningResult = new EnumMap<>(LottoAward.class);
         for (LottoAward lottoAward : LottoAward.ACTUAL_LOTTO_AWARD) {
             winningResult.put(lottoAward, 0);
         }
         return winningResult;
-    }
-
-    private void validate(Lotto winningLotto, LottoNumber bonusNumber) {
-        if (winningLotto.isDuplicateNumber(bonusNumber)) {
-            throw new IllegalArgumentException("로또 번호와 중복되지 않는 보너스 번호를 입력해 주세요.");
-        }
     }
 }
