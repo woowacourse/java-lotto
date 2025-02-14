@@ -15,8 +15,7 @@ public enum OutputMessage {
     LOTTO_REVENUE("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)\n"),
     LOTTO_REVENUE_DAMAGE("손해"),
     LOTTO_REVENUE_PROFIT("이익이");
-
-
+    
     private final String message;
 
     OutputMessage(final String message) {

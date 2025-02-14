@@ -16,15 +16,22 @@ public class RandomUniqueNumberGenerator extends NumberGenerator {
     @Override
     public List<Integer> pickNumbersInRange(final int count) {
         validateCount(count);
+        return generateUniqueRandomNumbers(count);
+    }
+
+    private List<Integer> generateUniqueRandomNumbers(final int count) {
         final List<Integer> randoms = new ArrayList<>();
         while (randoms.size() < count) {
-            int randomNumber = super.generateRandomNumber();
-            if (!randoms.contains(randomNumber)) {
-                randoms.add(randomNumber);
-            }
+            addUniqueRandomNumber(randoms);
         }
-
         return randoms;
+    }
+
+    private void addUniqueRandomNumber(final List<Integer> randoms) {
+        int randomNumber = super.generateRandomNumber();
+        if (!randoms.contains(randomNumber)) {
+            randoms.add(randomNumber);
+        }
     }
 
     private void validateCount(final int count) {

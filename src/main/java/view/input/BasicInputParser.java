@@ -25,7 +25,6 @@ public class BasicInputParser implements InputParser {
         return parseInt(ErrorType.BONUS_BALL_INVALID_INPUT, bonusBallText);
     }
 
-
     private int parseInt(
         final ErrorType errorType,
         final String text

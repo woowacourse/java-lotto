@@ -15,13 +15,13 @@ public class WinningResult {
     }
 
     private void validateRankSize(final Map<LottoRank, Integer> lottoRanks) {
-        lottoRanks.forEach((lottoRank, count) -> {
-            if (count < 0) {
-                throw new IllegalArgumentException(ErrorType.WINNING_RESULT_POSITIVE.getMessage());
-            }
-        });
+        if (lottoRanks.values()
+            .stream()
+            .anyMatch(count -> count < 0)) {
+            throw new IllegalArgumentException(ErrorType.WINNING_RESULT_POSITIVE.getMessage());
+        }
     }
-
+    
     public static WinningResult of(
         final List<Lotto> lottos,
         final WinningNumbers winningNumbers
@@ -66,7 +66,7 @@ public class WinningResult {
     public double calculateRateOfRevenue() {
         final long revenue = calculateRevenue();
         final long totalLottoPrice = calculateTotalLottoPrice();
-        
+
         return (double) revenue / totalLottoPrice;
     }
 

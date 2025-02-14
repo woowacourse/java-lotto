@@ -50,7 +50,7 @@ public class LottoController {
     private WinningNumbers inputWinningNumbers() {
         final List<Integer> winningNumber = inputView.readWinningNumber();
         final int bonusBall = inputView.readBonusBall();
-        
+
         return WinningNumbers.of(winningNumber, bonusBall);
     }
 
@@ -68,12 +68,11 @@ public class LottoController {
     }
 
     private <T> T executeWithRetry(final Supplier<T> supplier) {
-        while (true) {
-            try {
-                return supplier.get();
-            } catch (final IllegalArgumentException e) {
-                outputView.printErrorMessage(e.getMessage());
-            }
+        try {
+            return supplier.get();
+        } catch (final IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return executeWithRetry(supplier);
         }
     }
 }
