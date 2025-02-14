@@ -32,8 +32,7 @@ public class GameController {
                 lottoMoney = new LottoMoney(response);
                 return new LottoMachine(lottoMoney);
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                System.out.println();
+                OutputView.writeErrorMessage(e);
             }
         }
     }
@@ -49,8 +48,7 @@ public class GameController {
                 String response = InputView.readWinningNumbers();
                 return new Lotto(response);
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                System.out.println();
+                OutputView.writeErrorMessage(e);
             }
         }
     }
@@ -61,8 +59,7 @@ public class GameController {
                 String response = InputView.readBonusBall();
                 return new WinningLotto(winningNumbers, response);
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                System.out.println();
+                OutputView.writeErrorMessage(e);
             }
         }
     }
