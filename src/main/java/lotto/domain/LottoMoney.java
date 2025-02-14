@@ -1,9 +1,9 @@
 package lotto.domain;
 
 import static lotto.util.Constant.LOTTO_MONEY_UNIT;
-import static lotto.util.ErrorHandler.INVALID_AMOUNT;
-import static lotto.util.ErrorHandler.INVALID_NUMBER;
-import static lotto.util.ErrorHandler.INVALID_UNIT;
+import static lotto.util.ErrorHandler.INVALID_LOTTO_MONEY_AMOUNT;
+import static lotto.util.ErrorHandler.INVALID_LOTTO_MONEY_NUMBER;
+import static lotto.util.ErrorHandler.INVALID_LOTTO_MONEY_UNIT;
 
 public class LottoMoney {
 
@@ -19,7 +19,7 @@ public class LottoMoney {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw INVALID_NUMBER.getException();
+            throw INVALID_LOTTO_MONEY_NUMBER.getException();
         }
     }
 
@@ -30,13 +30,13 @@ public class LottoMoney {
 
     private void validateAmount(int amount) {
         if (amount < LOTTO_MONEY_UNIT) {
-            throw INVALID_AMOUNT.getException();
+            throw INVALID_LOTTO_MONEY_AMOUNT.getException();
         }
     }
 
     private void validateUnit(int amount) {
         if (amount % LOTTO_MONEY_UNIT != 0) {
-            throw INVALID_UNIT.getException();
+            throw INVALID_LOTTO_MONEY_UNIT.getException();
         }
     }
 

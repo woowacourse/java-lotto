@@ -4,8 +4,8 @@ import static lotto.util.Constant.LOTTO_NUMBER_DELIMITER;
 import static lotto.util.Constant.LOTTO_NUMBER_MAX_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_MIN_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_SIZE;
-import static lotto.util.ErrorHandler.INVALID_RANGE;
-import static lotto.util.ErrorHandler.INVALID_SIZE;
+import static lotto.util.ErrorHandler.INVALID_LOTTO_RANGE;
+import static lotto.util.ErrorHandler.INVALID_LOTTO_SIZE;
 
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class Lotto {
 
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
-            throw INVALID_SIZE.getException();
+            throw INVALID_LOTTO_SIZE.getException();
         }
     }
 
@@ -48,7 +48,7 @@ public class Lotto {
 
     private void validateNumberRange(int number) {
         if (number < LOTTO_NUMBER_MIN_RANGE || number > LOTTO_NUMBER_MAX_RANGE) {
-            throw INVALID_RANGE.getException();
+            throw INVALID_LOTTO_RANGE.getException();
         }
     }
 
