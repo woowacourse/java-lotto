@@ -16,7 +16,7 @@ public class GameController {
     public void run() {
         LottoMachine lottoMachine = buyLottoTickets();
 
-        List<List<Integer>> lottoTickets = lottoMachine.getLottoTickets();
+        List<Lotto> lottoTickets = lottoMachine.getLottoTickets();
         OutputView.writeLottoTickets(lottoTickets);
 
         WinningLotto winningLotto = storeWinningLotto();
@@ -64,7 +64,7 @@ public class GameController {
         }
     }
 
-    private LottoResult checkLottoResult(WinningLotto winningLotto, List<List<Integer>> lottoTickets) {
+    private LottoResult checkLottoResult(WinningLotto winningLotto, List<Lotto> lottoTickets) {
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
 
         lottoResult.matchLottoTicketsResult();
