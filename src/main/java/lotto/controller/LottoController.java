@@ -14,6 +14,7 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public static final String DELIMITER = ",";
+
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoGenerator lottoGenerator;
@@ -47,15 +48,13 @@ public class LottoController {
         String winningLottoNumbers = inputView.readWinningLottoNumbers();
         String[] splittedWinningLottoNumbers = winningLottoNumbers.split(DELIMITER);
         List<Integer> parsedWinningLottoNumbers = StringParser.parseTokens(splittedWinningLottoNumbers);
-        Lotto winningLotto = new Lotto(parsedWinningLottoNumbers);
-        return winningLotto;
+        return new Lotto(parsedWinningLottoNumbers);
     }
 
     private LottoNumber getBonusNumber() {
         String bonusNumberInput = inputView.readBonusNumber();
         int parsedBonusNumber = StringParser.parseInt(bonusNumberInput);
-        LottoNumber bonusNumber = new LottoNumber(parsedBonusNumber);
-        return bonusNumber;
+        return new LottoNumber(parsedBonusNumber);
     }
 
     private LottoPrice getLottoPrice() {
