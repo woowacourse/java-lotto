@@ -36,7 +36,7 @@ public class LottoController {
     }
 
 
-    public static BonusNumber isDuplicateBonusNumber(UserLotto userLotto) {
+    private static BonusNumber isDuplicateBonusNumber(UserLotto userLotto) {
         try {
             BonusNumber bonusNumber = new BonusNumber(InputView.isNumericBonusNumber());
             userLotto.isDuplicateBonusNumber(bonusNumber.getBonusNumber());
