@@ -8,8 +8,8 @@ import java.util.TreeMap;
 
 public class LottoResult {
 
-    private WinningLotto winningLotto;
-    private  List<List<Integer>> lottoTickets;
+    private final WinningLotto winningLotto;
+    private final List<List<Integer>> lottoTickets;
 
     private Map<LottoPrize, Integer> lottoResult;
     private Double lottoProfitRate;
