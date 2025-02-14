@@ -22,13 +22,17 @@ public class IssueLottoService {
         int count = money / LOTTO_PRICE.getValue();
         List<IssuedLottoDto> issuedLottos = new ArrayList<>();
         while (issuedLottos.size() != count) {
-            Lotto lotto = new Lotto(
-                    RandomNumberGenerator.getRandomNumbers(LOTTO_RANGE_MIN.getValue(), LOTTO_RANGE_MAX.getValue()));
-            if (!isDuplicate(issuedLottos, lotto.getSortedNumbers())) {
-                issuedLottos.add(new IssuedLottoDto(lotto.getSortedNumbers()));
-            }
+            addUniqueLotto(issuedLottos);
         }
         return new IssuedLottosDto(issuedLottos);
+    }
+
+    private void addUniqueLotto(List<IssuedLottoDto> issuedLottos) {
+        Lotto lotto = new Lotto(
+                RandomNumberGenerator.getRandomNumbers(LOTTO_RANGE_MIN.getValue(), LOTTO_RANGE_MAX.getValue()));
+        if (!isDuplicate(issuedLottos, lotto.getSortedNumbers())) {
+            issuedLottos.add(new IssuedLottoDto(lotto.getSortedNumbers()));
+        }
     }
 
     private void validateMoney(int money) {
