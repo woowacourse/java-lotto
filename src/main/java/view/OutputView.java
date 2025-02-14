@@ -2,9 +2,10 @@ package view;
 
 import domain.Lottos;
 import domain.PrizeResult;
+import domain.Rank;
+import java.util.Arrays;
 
 public class OutputView {
-
 
     public static final String SHOW_BUY_COUNT = "%d개를 구매했습니다.\n";
     public static final String SHOW_STATISTICS = "당첨 통계";
@@ -14,7 +15,6 @@ public class OutputView {
     private static OutputView instance;
 
     private OutputView() {
-
     }
 
     public static OutputView getInstance() {
@@ -26,7 +26,11 @@ public class OutputView {
 
     public void displayPrizeSummary(PrizeResult result) {
         displayPrizeSummaryIntro();
-        System.out.printf(result.toString());
+        StringBuilder sb = new StringBuilder();
+        Arrays.stream(Rank.values())
+                .filter(rank -> !rank.isMiss())
+                .forEach(rank -> sb.append(rank.getMsg()).append(result.findByRank(rank)).append("개\n"));
+        System.out.print(sb);
         System.out.printf(SHOW_PRIZE_RATE, result.calculateProfit());
     }
 
@@ -39,11 +43,6 @@ public class OutputView {
     public void displayLottoNumbers(Lottos lottos) {
         System.out.printf(SHOW_BUY_COUNT, lottos.size());
         System.out.printf("%s", lottos.toString());
-        displaySpacing();
-    }
-
-    public void displayErrorMessage(String errorMessage) {
-        System.out.println(errorMessage);
         displaySpacing();
     }
 

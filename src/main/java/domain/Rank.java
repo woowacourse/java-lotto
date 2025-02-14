@@ -44,4 +44,8 @@ public enum Rank {
                 .findFirst()
                 .orElse(MISS);
     }
+
+    public boolean isMiss() {
+        return this == Rank.MISS;
+    }
 }
