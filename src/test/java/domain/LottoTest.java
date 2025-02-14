@@ -11,10 +11,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
-    @DisplayName("로또_번호_범위_테스트")
+    @DisplayName("로또_번호_범위_테스트(1 미만의 값)")
     @Test
-    void rangeTest() {
+    void rangeTest1() {
         assertThatThrownBy(() -> new Lotto(List.of(0,1,2,3,4,5)))
+                .isInstanceOf(IllegalArgumentException.class).hasMessage(ExceptionMessage.LOTTO_RANGE_ERROR.getMessage());
+    }
+
+    @DisplayName("로또_번호_범위_테스트(46 이상의 값)")
+    @Test
+    void rangeTest2() {
+        assertThatThrownBy(() -> new Lotto(List.of(46,1,2,3,4,5)))
                 .isInstanceOf(IllegalArgumentException.class).hasMessage(ExceptionMessage.LOTTO_RANGE_ERROR.getMessage());
     }
 
