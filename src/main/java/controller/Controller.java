@@ -11,9 +11,6 @@ import view.OutputView;
 
 public class Controller {
 
-    public Controller() {
-    }
-
     public void run() {
         LottoPurchase purchaseLotto = InputView.getPurchaseLotto();
         LottoFactory lottoFactory = LottoFactory.of(purchaseLotto.getAmount());
