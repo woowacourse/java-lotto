@@ -9,18 +9,18 @@ import lotto.utils.NumberUtils;
 public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
-    public LottoNumber(final String number) {
-        final int parseNum = NumberUtils.parseInt(number);
+    public LottoNumber(String number) {
+        int parseNum = NumberUtils.parseInt(number);
         validateNumber(parseNum);
         this.number = parseNum;
     }
 
-    public LottoNumber(final int number) {
+    public LottoNumber(int number) {
         validateNumber(number);
         this.number = number;
     }
 
-    public static LottoNumber create(final String number) {
+    public static LottoNumber from(String number) {
         return new LottoNumber(number);
     }
 

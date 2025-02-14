@@ -1,21 +1,17 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.StringJoiner;
 
 public class Lotto {
     private final LottoNumbers lottoNumbers;
 
-    public Lotto(final LottoNumbers lottoNumbers) {
+    public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto from(final LottoNumbers lottoNumbers) {
+    public static Lotto from(LottoNumbers lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
-
-
 
     public long getMatchCount(LottoNumbers winnerNumbers) {
         return winnerNumbers.getMatchCount(lottoNumbers);
@@ -32,6 +28,7 @@ public class Lotto {
         for (LottoNumber lottoNumber : lottoNumbers.getItem()) {
             joiner.add(lottoNumber.toString());
         }
+
         return joiner.toString();
     }
 }
