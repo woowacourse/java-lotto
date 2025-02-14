@@ -12,9 +12,9 @@ import static view.Output.THIRD_MESSAGE;
 
 import domain.Amount;
 import domain.Rank;
-import domain.dto.GetLottoDto;
-import domain.dto.GetLottosDto;
-import domain.dto.GetResultDto;
+import domain.dto.LottoDto;
+import domain.dto.LottosDto;
+import domain.dto.ResultDto;
 
 public class OutputView {
 
@@ -23,11 +23,11 @@ public class OutputView {
         System.out.printf(PURCHASE_MESSAGE.getMessage(), amount.getAmount());
     }
 
-    public void printLottos(GetLottosDto lottosDto) {
+    public void printLottos(LottosDto lottosDto) {
         lottosDto.getLottoDtos().forEach(this::printLotto);
     }
 
-    public void printWinningStatistic(GetResultDto lottosResult) {
+    public void printWinningStatistic(ResultDto lottosResult) {
         System.out.print(RESULT_TITLE_MESSAGE.getMessage());
         System.out.print(SEPARATE_LINE.getMessage());
         System.out.printf(FIFTH_MESSAGE.getMessage(), lottosResult.countRank().get(Rank.FIFTH));
@@ -38,7 +38,7 @@ public class OutputView {
         System.out.printf(PROFIT_MESSAGE.getMessage(), lottosResult.profit());
     }
 
-    private void printLotto(final GetLottoDto getLottoDto) {
+    private void printLotto(final LottoDto getLottoDto) {
         System.out.println(getLottoDto.numbers());
     }
 

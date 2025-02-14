@@ -1,10 +1,8 @@
 package domain;
 
-import domain.dto.GetResultDto;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 public class Lottos {
 

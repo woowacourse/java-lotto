@@ -3,12 +3,12 @@ package domain.dto;
 import domain.Lottos;
 import java.util.List;
 
-public record GetLottosDto(
-        List<GetLottoDto> getLottoDtos
+public record LottosDto(
+        List<LottoDto> getLottoDtos
 ) {
-    public GetLottosDto(Lottos lottos) {
+    public LottosDto(Lottos lottos) {
         this(lottos.getLottos().stream()
-                .map(GetLottoDto::new)
+                .map(LottoDto::new)
                 .toList());
     }
 }
