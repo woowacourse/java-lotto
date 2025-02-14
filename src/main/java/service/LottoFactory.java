@@ -19,16 +19,16 @@ public class LottoFactory {
     private static final Integer LOTTO_SIZE = 6;
     private static final Integer LOTTO_MAX_RANGE = 45;
 
-    private final Integer ticketNumber;
+    private final int ticketNumber;
     private final List<Lotto> issuedTickets;
 
     private final Random random;
 
-    public static LottoFactory of(final Integer purchase) {
+    public static LottoFactory of(final int purchase) {
         return new LottoFactory(purchase / LOTTO_PURCHASE_UNIT);
     }
 
-    private LottoFactory(final Integer ticketNumber) {
+    private LottoFactory(final int ticketNumber) {
         this.ticketNumber = ticketNumber;
         this.random = new Random();
         this.issuedTickets = IntStream.range(0, ticketNumber)
@@ -62,30 +62,30 @@ public class LottoFactory {
                 .count();
     }
 
-    private boolean checkBonus(Integer bonusNumber, List<Integer> issuedTicketNumbers) {
+    private boolean checkBonus(int bonusNumber, List<Integer> issuedTicketNumbers) {
         return issuedTicketNumbers.contains(bonusNumber);
     }
 
     public double getBenefit(EnumMap<Prize, Integer> enumMap) {
         Integer principalMoney = ticketNumber * LOTTO_PURCHASE_UNIT;
-        Integer benefit = calculateBenefit(enumMap);
+        int benefit = calculateBenefit(enumMap);
 
         return (double) benefit / principalMoney;
     }
 
-    private Integer calculateBenefit(EnumMap<Prize, Integer> enumMap) {
-        Integer benefit = 0;
+    private int calculateBenefit(EnumMap<Prize, Integer> enumMap) {
+        int benefit = 0;
         for (Prize prize : enumMap.keySet()) {
             benefit += enumMap.get(prize) * prize.getPrizeAmount();
         }
         return benefit;
     }
 
-    private Integer getRandomNumber() {
+    private int getRandomNumber() {
         return random.nextInt(LOTTO_MAX_RANGE) + 1;
     }
 
-    public Integer getTicketNumber() {
+    public int getTicketNumber() {
         return ticketNumber;
     }
 

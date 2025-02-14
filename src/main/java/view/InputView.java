@@ -27,7 +27,7 @@ public class InputView {
         return Bonus.of(getIntegerInput(), lotto);
     }
 
-    private static Integer getIntegerInput() {
+    private static int getIntegerInput() {
         try {
             return Integer.parseInt(getInput());
         } catch (NumberFormatException e) {

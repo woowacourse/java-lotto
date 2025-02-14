@@ -13,10 +13,10 @@ public enum Prize {
     MATCH_SIX("6개 일치 (2000000000원)", 6, 2_000_000_000);
 
     private final String comment;
-    private final Integer matchCount;
-    private final Integer prizeAmount;
+    private final int matchCount;
+    private final int prizeAmount;
 
-    Prize(final String comment, final Integer matchCount, final Integer prizeAmount) {
+    Prize(final String comment, final int matchCount, final int prizeAmount) {
         this.comment = comment;
         this.matchCount = matchCount;
         this.prizeAmount = prizeAmount;
@@ -44,7 +44,7 @@ public enum Prize {
         return comment;
     }
 
-    public Integer getPrizeAmount() {
+    public int getPrizeAmount() {
         return prizeAmount;
     }
 }
