@@ -7,6 +7,16 @@ import org.junit.jupiter.api.Test;
 public class StringToIntParserTest {
 
     @Test
+    void 문자열_형태의_숫자를_int형으로_파싱한다() {
+        // Given
+        String number = "5";
+
+        // When & Then
+        Assertions.assertThat(StringToIntParser.parseInt(number))
+                .isEqualTo(5);
+    }
+
+    @Test
     void 소수이면_예외가_발생한다() {
         // Given
         String decimal = "100.3";
