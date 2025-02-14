@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import lotto.exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ class WinningNumbersTest {
 
         //when & then
         assertThatThrownBy(() -> new WinningNumbers(lotto, new LottoNumber(6)))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(LottoException.class)
                 .hasMessage("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
 
