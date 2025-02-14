@@ -1,12 +1,16 @@
 package lotto.domain;
 
+import static lotto.common.constant.Constant.*;
+
+import java.util.Arrays;
+
 public enum MatchStatistics {
     MATCH_THREE(3, 5000),
     MATCH_FOUR(4, 50000),
     MATCH_FIVE(5, 150000),
     MATCH_BONUS(5, 30000000),
     MATCH_SIX(6, 2000000000),
-    NO_MATCH(0, 0);;
+    NO_MATCH(0, 0);
 
     private final static String BONUS_OUTPUT = "%d개 일치, 보너스 볼 일치 (%d원)- ";
     private final static String BASIC_OUTPUT = "%d개 일치 (%d원)- ";
@@ -35,15 +39,13 @@ public enum MatchStatistics {
             return MATCH_BONUS;
         }
 
-        for (MatchStatistics statistics : values()) {
-            if (statistics.number == matchNumber) {
-                return statistics;
-            }
-        }
-        return NO_MATCH;
+        return Arrays.stream(values())
+            .filter(s -> s.number == matchNumber)
+            .findFirst()
+            .orElse(NO_MATCH);
     }
 
     private static boolean isMatchBonus(int matchNumber, boolean bonus) {
-        return matchNumber == 5 && bonus;
+        return matchNumber == LOTTO_MATCH_COUNT_FOR_BONUS && bonus;
     }
 }
