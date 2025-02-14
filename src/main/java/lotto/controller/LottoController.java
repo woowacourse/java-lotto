@@ -10,6 +10,7 @@ import lotto.model.RandomNumberGenerator;
 import lotto.model.ReturnRatioGenerator;
 import lotto.model.WinningLotto;
 import lotto.model.WinningResultResponses;
+import lotto.model.lotto.LottoNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -45,7 +46,8 @@ public class LottoController {
     private WinningLotto createWinningLotto() {
         String winningLottoNumber = inputView.readWinningLotto();
         String bonusNumber = inputView.readBonusNumber();
-        return new WinningLotto(new Lotto(toNumbers(winningLottoNumber)), Integer.parseInt(bonusNumber));
+        return new WinningLotto(new Lotto(toNumbers(winningLottoNumber)),
+                LottoNumber.draw(Integer.parseInt(bonusNumber)));
     }
 
     private void issueLottoTickets(final String money) {

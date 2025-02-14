@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class RankTest {
+
     @DisplayName("일치개수와 보너스넘버 일치여부에 따라 Rank를 찾아준다.")
     @MethodSource("provideRankCategory")
     @ParameterizedTest

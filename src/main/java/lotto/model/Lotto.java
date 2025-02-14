@@ -3,24 +3,37 @@ package lotto.model;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
+import lotto.model.lotto.LottoNumber;
 
 public class Lotto {
 
     public static final int LOTTO_SIZE = 6;
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 45;
 
-    private final List<Integer> numbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<Integer> numbers) {
-        validate(numbers);
-        this.numbers = numbers;
+    public Lotto(final List<Integer> lottoNumbers) {
+        validate(lottoNumbers);
+        this.lottoNumbers = toSortedLottoNumbers(lottoNumbers);
+    }
+
+    private TreeSet<LottoNumber> toSortedLottoNumbers(final List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::draw)
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     private void validate(final List<Integer> numbers) {
         validateSize(numbers);
-        validateRange(numbers);
         validateDuplication(numbers);
+    }
+
+    private void validateSize(final List<Integer> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 숫자가 6개가 아닙니다.");
+        }
     }
 
     private void validateDuplication(final List<Integer> numbers) {
@@ -30,36 +43,20 @@ public class Lotto {
         }
     }
 
-    private void validateRange(final List<Integer> numbers) {
-        numbers.forEach(this::validateNumberRange);
-    }
-
-    private void validateNumberRange(final Integer number) {
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("로또는 1 이상 45 이하만 가능합니다.");
-        }
-    }
-
-    private void validateSize(final List<Integer> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 숫자가 6개가 아닙니다.");
-        }
-    }
-
-    public boolean has(final int number) {
-        return numbers.stream()
-                .anyMatch((thisNumber) -> thisNumber == number);
+    public boolean has(final LottoNumber lottoNumber) {
+        return lottoNumbers.stream()
+                .anyMatch((thisLottoNumber) -> thisLottoNumber.equals(lottoNumber));
     }
 
     public int calculateMatchingCount(final Lotto otherLotto) {
-        return (int) otherLotto.numbers.stream()
+        return (int) otherLotto.lottoNumbers.stream()
                 .filter(this::has)
                 .count();
     }
 
     public List<Integer> getNumbers() {
-        return numbers.stream()
-                .sorted()
+        return lottoNumbers.stream()
+                .map(LottoNumber::getValue)
                 .toList();
     }
 

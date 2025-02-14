@@ -2,7 +2,7 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ class LottosTest {
     void makeLotto() {
         Lottos lottos = new Lottos();
 
-        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        lottos.add(new Lotto(Set.of(1, 2, 3, 4, 5, 6)));
 
         assertThat(lottos.getLottos()).hasSize(1);
     }
