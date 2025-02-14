@@ -5,7 +5,7 @@ import global.exception.ExceptionMessage;
 public class Amount {
     public static final int LOTTO_PRICE = 1000;
 
-    private int amount;
+    private final int amount;
 
     public Amount(String inputPrice) {
         int price = validateIsInteger(inputPrice);
