@@ -4,6 +4,7 @@ import java.util.List;
 public class Lotto {
 
     private final List<Integer> numbers;
+    private static final int LOTTO_COUNT=6;
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
@@ -22,7 +23,7 @@ public class Lotto {
     }
 
     private void validateDistinct(List<Integer> numbers) {
-        if (numbers.stream().distinct().count() == 6) {
+        if (numbers.stream().distinct().count() == LOTTO_COUNT) {
             return;
         }
         throw new IllegalArgumentException("6자리로 입력해주세요");
