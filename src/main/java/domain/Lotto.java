@@ -1,14 +1,18 @@
 package domain;
 
-import static domain.LottoGenerator.COUNT_OF_NUMBERS;
-import static domain.LottoGenerator.MAX_NUMBER;
-import static domain.LottoGenerator.MIN_NUMBER;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Lotto {
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
+    public static final int COUNT_OF_NUMBERS = 6;
+
+    private static final String ERROR_DUPLICATE_NUMBERS = "로또 번호는 중복될 수 없습니다.";
+    private static final String  ERROR_INVALID_COUNT_OF_NUMBERS = "로또 번호는 " + COUNT_OF_NUMBERS + "개여야 합니다.";
+    private static final String ERROR_OUT_OF_RANGE = "로또 번호는 " + MIN_NUMBER + "부터 " + MAX_NUMBER + "사이여야 합니다.";
+
     private final List<Integer> numbers;
 
     private Lotto(List<Integer> numbers) {
@@ -22,12 +26,12 @@ public class Lotto {
 
     private void validate(List<Integer> numbers) {
         if (numbers == null || numbers.size() != COUNT_OF_NUMBERS) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+            throw new IllegalArgumentException(ERROR_INVALID_COUNT_OF_NUMBERS);
         }
 
         Set<Integer> distinctNumbers = new HashSet<>(numbers);
         if (distinctNumbers.size() != COUNT_OF_NUMBERS) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBERS);
         }
 
         for (Integer number : distinctNumbers) {
@@ -35,9 +39,9 @@ public class Lotto {
         }
     }
 
-    private static void validateRange(final Integer number) {
+    private void validateRange(final Integer number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45사이여야 합니다.");
+            throw new IllegalArgumentException(ERROR_OUT_OF_RANGE);
         }
     }
 

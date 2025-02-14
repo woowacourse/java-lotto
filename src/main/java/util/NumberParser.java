@@ -5,11 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class NumberParser {
+    private static final String ERROR_NUMBER_FORMAT = "숫자만 입력 가능합니다.";
+    private static final String ERROR_DELIMITER_FORMAT = "쉼표(,)로 구분된 숫자를 입력해주세요.";
+
     public static int parse(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자만 입력 가능합니다.");
+            throw new IllegalArgumentException(ERROR_NUMBER_FORMAT);
         }
     }
 
@@ -20,7 +23,7 @@ public class NumberParser {
             try {
                 parsedNumbers.add(parse(element));
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("쉼표(,)로 구분된 숫자를 입력해주세요.");
+                throw new IllegalArgumentException(ERROR_DELIMITER_FORMAT);
             }
         });
         return parsedNumbers;
