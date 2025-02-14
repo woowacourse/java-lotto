@@ -1,13 +1,13 @@
-package lotto.common.utill;
+package lotto.domain;
 
 import static lotto.common.constant.Constant.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class LottoNumberGenerator {
+public class LottoNumberGenerator {
 
-    public static List<Integer> generate() {
+    public List<Integer> generate() {
         List<Integer> list = new ArrayList<>();
 
         while (list.size() < LOTTO_NUMBER_COUNT) {
