@@ -1,5 +1,6 @@
 package model;
 
+import constant.ErrorMessage;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -16,6 +17,9 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<Integer> numbers) {
+        numbers.forEach(this::validateBound);
+        validateNumberCount(numbers);
+        validateDuplicate(numbers);
         this.numbers = numbers;
     }
 
@@ -42,5 +46,24 @@ public class LottoNumbers {
 
     public Boolean bonusMatch(Integer bonusNumber) {
         return numbers.contains(bonusNumber);
+    }
+
+    private void validateBound(Integer input) {
+        if (input < MINIMUM_LOTTO_NUMBER || input > MAXIMUM_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_BOUND_EXCEPTION);
+        }
+    }
+
+    private void validateNumberCount(List<Integer> winNumbers) {
+        if (winNumbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT_EXCEPTION);
+        }
+    }
+
+    private void validateDuplicate(List<Integer> numbers) {
+        Set<Integer> numberSet = new HashSet<>(numbers);
+        if (numbers.size() != numberSet.size()) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_DUPLICATE_EXCEPTION);
+        }
     }
 }

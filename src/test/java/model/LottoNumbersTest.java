@@ -1,7 +1,9 @@
 package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import constant.ErrorMessage;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,5 +30,41 @@ class LottoNumbersTest {
         Boolean bonusMatch = lottoNumbers.bonusMatch(4);
         //then
         assertThat(bonusMatch).isTrue();
+    }
+
+    @Test
+    @DisplayName("숫자 개수 판별 테스트")
+    public void validateNumberCountTest() {
+        // given
+        List<Integer> input = List.of(1, 2, 3, 4, 5);
+
+        // when & then
+        assertThatThrownBy(() -> new LottoNumbers(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.NUMBER_COUNT_EXCEPTION);
+    }
+
+    @Test
+    @DisplayName("숫자 범위 판별 테스트")
+    public void validateBoundTest() {
+        // given
+        List<Integer> input = List.of(1, 2, 3, 4, 5, 46);
+
+        // when & then
+        assertThatThrownBy(() -> new LottoNumbers(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.NUMBER_BOUND_EXCEPTION);
+    }
+
+    @Test
+    @DisplayName("숫자 중복 판별 테스트")
+    public void validateDuplicateTest() {
+        // given
+        List<Integer> input = List.of(1, 2, 3, 4, 5, 5);
+
+        // when & then
+        assertThatThrownBy(() -> new LottoNumbers(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.NUMBER_DUPLICATE_EXCEPTION);
     }
 }
