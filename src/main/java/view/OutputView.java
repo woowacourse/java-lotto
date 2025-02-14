@@ -21,7 +21,7 @@ import domain.dto.GetResultDto;
 public class OutputView {
 
     public void printAmount(Amount amount) {
-        System.out.printf(PURCHASE_MESSAGE, amount.getAmount());
+        System.out.printf(PURCHASE_MESSAGE + NEW_LINE, amount.getAmount());
     }
 
     public void printLottos(GetLottosDto lottosDto) {
