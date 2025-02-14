@@ -45,15 +45,18 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningLottoTicket = Console.readLine();
         validateLottoTicket(winningLottoTicket);
-        return Arrays.stream(winningLottoTicket.split(","))
+        return Arrays.stream(winningLottoTicket.split(",", -1))
+                .map(String::strip)
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .toList();
     }
 
     private static void validateLottoTicket(String winningLottoTicket) {
-        List<String> winningLottoTickets = Arrays.stream(winningLottoTicket.split(",")).toList();
+        List<String> winningLottoTickets = Arrays.stream(winningLottoTicket
+                .split(",", -1)).toList();
         List<Integer> numbers = winningLottoTickets.stream()
+                .map(String::strip)
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .toList();
