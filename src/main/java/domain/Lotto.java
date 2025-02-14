@@ -19,13 +19,19 @@ public class Lotto {
         this.balls = balls;
     }
 
-    public MatchDto getMatchDto(List<Integer> winningNumbers, Ball bonus) {
-        int winningNumberCount = balls.stream()
+    public MatchDto getMatchDto(WinningLotto winningLotto) {
+        List<Integer> winningNumbers = winningLotto.getWinningNumbers();
+
+        List<Integer> ballsNumber = balls.stream()
+                .map(Ball::getNumber)
+                .toList();
+
+        int winningNumberCount = ballsNumber.stream()
                 .filter(winningNumbers::contains)
                 .mapToInt(e -> 1)
                 .sum();
 
-        boolean hasBonusNumber = balls.contains(bonus);
+        boolean hasBonusNumber = ballsNumber.contains(winningLotto.getBonusNumber());
 
         return new MatchDto(
                 winningNumberCount,

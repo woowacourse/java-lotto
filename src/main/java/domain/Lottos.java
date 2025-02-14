@@ -1,6 +1,5 @@
 package domain;
 
-
 import static domain.Lotto.LOTTO_PRICE;
 import static domain.Lotto.MAX_LOTTO_SIZE;
 
@@ -62,9 +61,9 @@ public class Lottos {
                 .toList();
     }
 
-    public List<MatchDto> getMatchDtos(List<Integer> winningNumbers, Ball bonus) {
+    public List<MatchDto> getMatchDtos(WinningLotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> lotto.getMatchDto(winningNumbers, bonus))
+                .map(lotto -> lotto.getMatchDto(winningLotto))
                 .toList();
     }
 }

@@ -1,9 +1,10 @@
 package controller;
 
-import domain.Ball;
 import domain.Lottos;
 import domain.MatchDto;
+import domain.PurchaseAmount;
 import domain.WinningCountDto;
+import domain.WinningLotto;
 import domain.WinningStatistics;
 import java.util.List;
 import view.InputView;
@@ -20,15 +21,16 @@ public class LottoController {
     }
 
     public void run() {
-        int purchaseAmount = inputView.askPurchaseAmount();
-        Lottos lottos = issueLottos(purchaseAmount);
+        int inputPurchaseAmount = inputView.askPurchaseAmount();
+        PurchaseAmount purchaseAmount = new PurchaseAmount(inputPurchaseAmount);
+        Lottos lottos = issueLottos(purchaseAmount.getMoney());
 
         List<Integer> winningNumbers = inputView.askWinningNumbers();
-        Ball bonus = new Ball(inputView.askBonusNumber());
+        int bonusNumber = inputView.askBonusNumber();
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        List<WinningCountDto> winningCountDtos = matchAndCountWinningLottos(lottos, winningNumbers, bonus);
-
-        calculateYield(purchaseAmount, winningCountDtos);
+        List<WinningCountDto> winningCountDtos = matchAndCountWinningLottos(lottos, winningLotto);
+        calculateYield(purchaseAmount.getMoney(), winningCountDtos);
     }
 
     private Lottos issueLottos(int purchaseAmount) {
@@ -42,10 +44,8 @@ public class LottoController {
         return lottos;
     }
 
-    private List<WinningCountDto> matchAndCountWinningLottos(
-            Lottos lottos, List<Integer> winningNumbers, Ball bonus
-    ) {
-        List<MatchDto> matchDtos = lottos.getMatchDtos(winningNumbers, bonus);
+    private List<WinningCountDto> matchAndCountWinningLottos(Lottos lottos, WinningLotto winningLotto) {
+        List<MatchDto> matchDtos = lottos.getMatchDtos(winningLotto);
         List<WinningCountDto> winningCountDtos = WinningStatistics.calculateWinningCountDtos(matchDtos);
         outputView.printWinningStatistics(winningCountDtos);
 

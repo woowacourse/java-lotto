@@ -1,7 +1,5 @@
 package view;
 
-import static domain.Lotto.LOTTO_PRICE;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -42,23 +40,7 @@ public class InputConverter {
             throw new IllegalArgumentException("구입 금액 입력 양식이 올바르지 않습니다.");
         }
 
-        int purchaseAmount = Integer.parseInt(input);
-        validatePurchaseAmountRange(purchaseAmount);
-        validatePurchaseAmountIsDividedByUnit(purchaseAmount);
-
-        return purchaseAmount;
+        return Integer.parseInt(input);
     }
-
-    private void validatePurchaseAmountIsDividedByUnit(int value) {
-        if (value % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("구입 금액은" + LOTTO_PRICE + "원 단위로 가능합니다.");
-        }
-    }
-
-    private void validatePurchaseAmountRange(int value) {
-        if (value < LOTTO_PRICE) {
-            throw new IllegalArgumentException("구입 금액은 " + LOTTO_PRICE + "원 이상부터 가능합니다.");
-        }
-    }
-
+    
 }

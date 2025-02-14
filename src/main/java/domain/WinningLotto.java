@@ -8,10 +8,10 @@ public class WinningLotto {
     private final Lotto lotto;
     private final Ball bonusBall;
 
-    public WinningLotto(Lotto lotto, int bonusNumber) {
-        validateUniqueBall(lotto);
-        this.lotto = lotto;
+    public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
+        this.lotto = new Lotto(winningNumbers);
         this.bonusBall = new Ball(bonusNumber);
+        validateUniqueBall(lotto);
     }
 
     private void validateUniqueBall(Lotto lotto) {
@@ -26,4 +26,13 @@ public class WinningLotto {
         }
     }
 
+    public List<Integer> getWinningNumbers() {
+        return lotto.getBalls().stream()
+                .map(Ball::getNumber)
+                .toList();
+    }
+
+    public Integer getBonusNumber() {
+        return bonusBall.getNumber();
+    }
 }
