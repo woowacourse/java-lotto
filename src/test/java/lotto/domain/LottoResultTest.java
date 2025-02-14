@@ -19,7 +19,7 @@ public class LottoResultTest {
         ));
 
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
-        lottoResult.matchLottoTicketsResult();
+        lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
 
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
 
@@ -41,7 +41,7 @@ public class LottoResultTest {
         ));
 
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
-        lottoResult.matchLottoTicketsResult();
+        lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
 
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
 
@@ -63,7 +63,7 @@ public class LottoResultTest {
         ));
 
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
-        lottoResult.matchLottoTicketsResult();
+        lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
 
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
 
@@ -87,7 +87,7 @@ public class LottoResultTest {
         LottoMoney lottoMoney = new LottoMoney("10000");
 
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
-        lottoResult.matchLottoTicketsResult();
+        lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
         lottoResult.calculateLottoProfitRate(lottoMoney);
 
         assertThat(lottoResult.getLottoProfitRate()).isEqualTo((double) 1_500_000 / 10_000);
