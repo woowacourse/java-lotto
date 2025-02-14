@@ -20,7 +20,7 @@ class AmountTest {
             assertThatThrownBy(() -> {
                 new Amount("우택호");
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_INTEGER.getMessage());
+                    .hasMessage(INVALID_INTEGER);
         }
 
         @ParameterizedTest
@@ -29,7 +29,7 @@ class AmountTest {
             assertThatThrownBy(() -> {
                 new Amount(input);
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_POSITIVE.getMessage());
+                    .hasMessage(INVALID_POSITIVE);
         }
 
         @ParameterizedTest
@@ -38,7 +38,7 @@ class AmountTest {
             assertThatThrownBy(() -> {
                 new Amount(input);
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_UNIT_PRICE.getMessage());
+                    .hasMessage(INVALID_UNIT_PRICE);
         }
     }
 

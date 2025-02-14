@@ -64,26 +64,26 @@ public class Lotto {
 
     private void validateLottoDuplicate() {
         if(numbers.stream().distinct().count() != LOTTO_LENGTH){
-            throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
+            throw new IllegalArgumentException(DUPLICATED_NUMBER);
         }
     }
 
     private void validateLength(String[] splitNumbers) {
         if(splitNumbers.length != LOTTO_LENGTH) {
-            throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
+            throw new IllegalArgumentException(INVALID_FORMAT);
         }
     }
 
     private void validateBonusDuplicate(int inputBonus) {
         Integer bonus = inputBonus;
         numbers.stream().filter(number -> number.equals(bonus)).forEach(number -> {
-            throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
+            throw new IllegalArgumentException(DUPLICATED_NUMBER);
         });
     }
 
     private void validateRange(int lottoNum) {
         if (lottoNum < LOTTO_MIN || lottoNum > LOTTO_MAX) {
-            throw new IllegalArgumentException(INVALID_RANGE.getMessage());
+            throw new IllegalArgumentException(INVALID_RANGE);
         }
     }
 
@@ -91,7 +91,7 @@ public class Lotto {
         try {
             return Integer.parseInt(lottoNum);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
+            throw new IllegalArgumentException(INVALID_FORMAT);
         }
     }
 

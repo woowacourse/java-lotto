@@ -23,7 +23,7 @@ class LottoTest {
             assertThatThrownBy(() -> {
                 new Lotto("1,2,3,4,5,46");
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_RANGE.getMessage());
+                    .hasMessage(INVALID_RANGE);
         }
 
         @Test
@@ -31,7 +31,7 @@ class LottoTest {
             assertThatThrownBy(() -> {
                 new Lotto("1/2/3/4/5/6");
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_FORMAT.getMessage());
+                    .hasMessage(INVALID_FORMAT);
         }
 
         @Test
@@ -39,7 +39,7 @@ class LottoTest {
             assertThatThrownBy(() -> {
                 new Lotto("1,2,3,4,5,5");
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(DUPLICATED_NUMBER.getMessage());
+                    .hasMessage(DUPLICATED_NUMBER);
         }
 
         @Test
@@ -47,7 +47,7 @@ class LottoTest {
             assertThatThrownBy(() -> {
                 new Lotto("1,2,3,4,5");
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_FORMAT.getMessage());
+                    .hasMessage(INVALID_FORMAT);
         }
 
         @Test
@@ -55,7 +55,7 @@ class LottoTest {
             assertThatThrownBy(() -> {
                 new Lotto("1,2,3,4,5,a");
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_FORMAT.getMessage());
+                    .hasMessage(INVALID_FORMAT);
         }
 
     }
@@ -72,7 +72,7 @@ class LottoTest {
             assertThatThrownBy(() -> {
                 lotto.validateBonus("46");
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_RANGE.getMessage());
+                    .hasMessage(INVALID_RANGE);
         }
 
         @Test
@@ -84,7 +84,7 @@ class LottoTest {
             assertThatThrownBy(() -> {
                 lotto.validateBonus("6");
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(DUPLICATED_NUMBER.getMessage());
+                    .hasMessage(DUPLICATED_NUMBER);
         }
     }
 

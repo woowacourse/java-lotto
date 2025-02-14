@@ -25,7 +25,7 @@ public class Amount {
 
     private void validateIsPositive(int price) {
         if (price <= 0) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_POSITIVE.getMessage());
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_POSITIVE);
         }
     }
 
@@ -33,13 +33,13 @@ public class Amount {
         try {
             return Integer.parseInt(inputPrice);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_INTEGER.getMessage());
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_INTEGER);
         }
     }
 
     private void validatePerPrice(int price) {
         if (price % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_UNIT_PRICE.getMessage());
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_UNIT_PRICE);
         }
     }
 
