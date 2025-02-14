@@ -31,13 +31,13 @@ public class LottoController {
         List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
         printPurchaseLottos(lottos);
 
-        WinningResultCalculator winningResultCalculator = getWinningResult();
+        WinningResultCalculator winningResultCalculator = getWinningResultCalculator();
         WinningResult winningResult = winningResultCalculator.countLottoPrizes(lottos);
         outputView.printWinningResult(winningResult.getWinningResult());
         outputView.printProfitRate(winningResult.calculateProfitRate(lottoPrice));
     }
 
-    private WinningResultCalculator getWinningResult() {
+    private WinningResultCalculator getWinningResultCalculator() {
         Lotto winningLotto = getWinningLotto();
         LottoNumber bonusNumber = getBonusNumber();
         return new WinningResultCalculator(winningLotto, bonusNumber);
