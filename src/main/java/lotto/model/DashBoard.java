@@ -35,6 +35,10 @@ public class DashBoard {
         ranks.merge(rank, RANK_COUNT_INCREMENT, Integer::sum);
     }
 
+    public int getRankCount(Rank rank) {
+        return ranks.get(rank);
+    }
+
     public EnumMap<Rank, Integer> getRanks() {
         return new EnumMap<>(ranks);
     }
