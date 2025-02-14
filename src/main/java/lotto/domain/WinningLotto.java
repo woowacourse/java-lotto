@@ -6,7 +6,7 @@ import static lotto.util.ErrorHandler.INVALID_LOTTO_BONUS_DISTINCT;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_NUMBER;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_RANGE;
 
-import java.util.List;
+import java.util.Set;
 
 public class WinningLotto {
 
@@ -40,13 +40,13 @@ public class WinningLotto {
     }
 
     private void validateDistinct(int bonusBallNumber) {
-        List<Integer> winningLottoNumbers = winningNumbers.getLotto();
+        Set<Integer> winningLottoNumbers = winningNumbers.getLotto();
         if (winningLottoNumbers.contains(bonusBallNumber)) {
             throw INVALID_LOTTO_BONUS_DISTINCT.getException();
         }
     }
 
-    public List<Integer> getWinningNumbers() {
+    public Set<Integer> getWinningNumbers() {
         return winningNumbers.getLotto();
     }
 

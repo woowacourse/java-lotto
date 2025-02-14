@@ -6,44 +6,45 @@ import static lotto.util.Constant.LOTTO_NUMBER_MIN_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_SIZE;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lotto.util.RandomNumberGenerator;
 
 public class LottoMachine {
+
     private final RandomNumberGenerator randomUNumberGenerator;
-    private final List<List<Integer>> lottoTickets;
+    private final List<Set<Integer>> lottoTickets;
 
     public LottoMachine(RandomNumberGenerator randomUNumberGenerator, LottoMoney lottoMoney) {
         this.randomUNumberGenerator = randomUNumberGenerator;
         this.lottoTickets = generateLottoTickets(lottoMoney);
     }
 
-    private List<List<Integer>> generateLottoTickets(LottoMoney lottoMoney) {
-        List<List<Integer>> tickets = new ArrayList<>();
+    private List<Set<Integer>> generateLottoTickets(LottoMoney lottoMoney) {
+        List<Set<Integer>> tickets = new ArrayList<>();
         int ticketNumber = lottoMoney.getLottoMoney() / LOTTO_MONEY_UNIT;
         for (int i = 0; i < ticketNumber; i++) {
-            List<Integer> ticket = generateLottoTicket();
+            Set<Integer> ticket = generateLottoTicket();
             tickets.add(ticket);
         }
         return tickets;
     }
 
-    private List<Integer> generateLottoTicket() {
-        List<Integer> lottoTicket = new ArrayList<>();
+    private Set<Integer> generateLottoTicket() {
+        Set<Integer> lottoTicket = new HashSet<>();
         while (lottoTicket.size() < LOTTO_NUMBER_SIZE) {
             addLottoTicketNumber(lottoTicket);
         }
         return lottoTicket;
     }
 
-    private void addLottoTicketNumber(List<Integer> ticket) {
+    private void addLottoTicketNumber(Set<Integer> ticket) {
         int number = randomUNumberGenerator.generate(LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE);
-        if (!ticket.contains(number)) {
-            ticket.add(number);
-        }
+        ticket.add(number);
     }
 
-    public List<List<Integer>> getLottoTickets() {
+    public List<Set<Integer>> getLottoTickets() {
         return lottoTickets;
     }
 }

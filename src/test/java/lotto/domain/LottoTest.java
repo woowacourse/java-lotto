@@ -22,4 +22,12 @@ public class LottoTest {
         assertThatThrownBy(() -> new Lotto(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("로또 번호가 중복되는 예외")
+    @Test
+    public void lottoDistinct() {
+        String input = "1, 1, 3, 4, 5, 6";
+        assertThatThrownBy(() -> new Lotto(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoResult;
 
@@ -11,10 +12,10 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void writeLottoTickets(List<List<Integer>> lottoTickets) {
+    public static void writeLottoTickets(List<Set<Integer>> lottoTickets) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%d개를 구매했습니다.\n", lottoTickets.size()));
-        for (List<Integer> lottoTicket : lottoTickets) {
+        for (Set<Integer> lottoTicket : lottoTickets) {
             sb.append(lottoTicket).append('\n');
         }
         System.out.println(sb);
@@ -23,7 +24,7 @@ public class OutputView {
     public static void writeLottoResult(LottoResult lottoResult) {
         StringBuilder sb = new StringBuilder();
         writeLottoResultHeader(sb);
-        for (Map.Entry<LottoPrize, Integer>  entry: lottoResult.getLottoResult().entrySet()) {
+        for (Map.Entry<LottoPrize, Integer> entry : lottoResult.getLottoResult().entrySet()) {
             writeLottoResultHit(sb, entry);
         }
         writeLottoResultProfitRate(sb, lottoResult.getLottoProfitRate());
@@ -35,12 +36,13 @@ public class OutputView {
         sb.append("---------\n");
     }
 
-    private static void writeLottoResultHit(StringBuilder sb, Map.Entry<LottoPrize, Integer>  entry) {
+    private static void writeLottoResultHit(StringBuilder sb, Map.Entry<LottoPrize, Integer> entry) {
         LottoPrize lottoPrize = entry.getKey();
         if (lottoPrize.equals(LottoPrize.MISS)) {
             return;
         }
-        sb.append(String.format("%d개 일치 (%d원) - %d개\n", lottoPrize.getHitNumbers(), lottoPrize.getPrize(), entry.getValue()));
+        sb.append(String.format("%d개 일치 (%d원) - %d개\n", lottoPrize.getHitNumbers(), lottoPrize.getPrize(),
+                entry.getValue()));
     }
 
     private static void writeLottoResultProfitRate(StringBuilder sb, double profitRate) {

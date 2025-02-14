@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import java.util.Set;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoMoney;
@@ -16,7 +17,7 @@ public class GameController {
 
     public void run() {
         LottoMachine lottoMachine = buyLottoTickets();
-        List<List<Integer>> lottoTickets = lottoMachine.getLottoTickets();
+        List<Set<Integer>> lottoTickets = lottoMachine.getLottoTickets();
         OutputView.writeLottoTickets(lottoTickets);
 
         WinningLotto winningLotto = storeWinningLotto();

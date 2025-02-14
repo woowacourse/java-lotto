@@ -9,12 +9,12 @@ import java.util.TreeMap;
 public class LottoResult {
 
     private final WinningLotto winningLotto;
-    private final List<List<Integer>> lottoTickets;
+    private final List<Set<Integer>> lottoTickets;
 
     private Map<LottoPrize, Integer> lottoResult;
     private Double lottoProfitRate;
 
-    public LottoResult(WinningLotto winningLotto, List<List<Integer>> lottoTickets) {
+    public LottoResult(WinningLotto winningLotto, List<Set<Integer>> lottoTickets) {
         this.winningLotto = winningLotto;
         this.lottoTickets = lottoTickets;
         initialize();
@@ -29,12 +29,12 @@ public class LottoResult {
     }
 
     public void matchLottoTicketsResult() {
-        for (List<Integer> lottoTicket: lottoTickets) {
+        for (Set<Integer> lottoTicket : lottoTickets) {
             matchLottoTicketResult(lottoTicket);
         }
     }
 
-    private void matchLottoTicketResult(List<Integer> lottoTicket) {
+    private void matchLottoTicketResult(Set<Integer> lottoTicket) {
         int bonusBall = winningLotto.getBonusBall();
         boolean isBonusHit = lottoTicket.contains(bonusBall);
 
@@ -51,7 +51,7 @@ public class LottoResult {
     public void calculateLottoProfitRate(LottoMoney lottoMoney) {
         int money = lottoMoney.getLottoMoney();
         int totalProfit = 0;
-        for (Map.Entry<LottoPrize, Integer>  entry: lottoResult.entrySet()) {
+        for (Map.Entry<LottoPrize, Integer> entry : lottoResult.entrySet()) {
             LottoPrize lottoPrize = entry.getKey();
             int count = entry.getValue();
             int prize = lottoPrize.getPrize();

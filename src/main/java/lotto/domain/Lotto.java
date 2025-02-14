@@ -8,26 +8,26 @@ import static lotto.util.ErrorHandler.INVALID_LOTTO_NUMBER;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_RANGE;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_SIZE;
 
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<Integer> lotto = new ArrayList<>();
+    private Set<Integer> lotto = new HashSet<>();
 
     public Lotto(String input) {
-        List<Integer> numbers = parse(input);
+        Set<Integer> numbers = parse(input);
         validate(numbers);
         this.lotto = numbers;
     }
 
-    private List<Integer> parse(String input) {
-        List<String> result = Arrays.stream(input.split(LOTTO_NUMBER_DELIMITER)).toList();
+    private Set<Integer> parse(String input) {
+        Set<String> result = Arrays.stream(input.split(LOTTO_NUMBER_DELIMITER)).collect(Collectors.toSet());
         return result.stream()
                 .map(s -> validateAndParse(s.strip()))
-                .toList();
+                .collect(Collectors.toSet());
     }
 
     private int validateAndParse(String lottoNumberInput) {
@@ -38,20 +38,20 @@ public class Lotto {
         }
     }
 
-    private void validate(List<Integer> numbers) {
+    private void validate(Set<Integer> numbers) {
         validateSize(numbers);
         validateRange(numbers);
     }
 
-    private void validateSize(List<Integer> numbers) {
+    private void validateSize(Set<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw INVALID_LOTTO_SIZE.getException();
         }
     }
 
-    private void validateRange(List<Integer> numbers) {
-        for (int i = 0; i < LOTTO_NUMBER_SIZE; i++) {
-            validateNumberRange(numbers.get(i));
+    private void validateRange(Set<Integer> numbers) {
+        for (Integer number : numbers) {
+            validateNumberRange(number);
         }
     }
 
@@ -61,7 +61,7 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getLotto() {
+    public Set<Integer> getLotto() {
         return lotto;
     }
 }
