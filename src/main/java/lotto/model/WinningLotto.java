@@ -31,7 +31,7 @@ public class WinningLotto {
     private void saveRanks(final Lottos lottos, final Map<Rank, Integer> ranks) {
         for (Lotto lotto : lottos.getLottos()) {
             int matchingCount = lotto.calculateMatchingCount(winningLotto);
-            Rank findRank = Rank.findBy(matchingCount, lotto.has(bonusNumber));
+            Rank findRank = Rank.findBy(matchingCount, lotto.hasNumber(bonusNumber));
             ranks.put(findRank, ranks.getOrDefault(findRank, 0) + 1);
         }
     }
@@ -74,7 +74,7 @@ public class WinningLotto {
     }
 
     private void validateDuplicationWithLottoAndBonusNumber(final Lotto lotto, final LottoNumber bonusNumber) {
-        if (lotto.has(bonusNumber)) {
+        if (lotto.hasNumber(bonusNumber)) {
             throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복될 수 없습니다.");
         }
     }

@@ -37,13 +37,13 @@ public class Lotto {
         }
     }
 
-    public boolean has(final LottoNumber number) {
+    public boolean hasNumber(final LottoNumber number) {
         return numbers.contains(number);
     }
 
     public int calculateMatchingCount(final Lotto otherLotto) {
         return (int) otherLotto.numbers.stream()
-                .filter(this::has)
+                .filter(this::hasNumber)
                 .count();
     }
 

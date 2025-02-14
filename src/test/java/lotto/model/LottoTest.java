@@ -72,7 +72,7 @@ class LottoTest {
                 new LottoNumber(6)
         ));
 
-        assertThat(lotto.has(new LottoNumber(number))).isEqualTo(expected);
+        assertThat(lotto.hasNumber(new LottoNumber(number))).isEqualTo(expected);
     }
 
 }
