@@ -82,15 +82,7 @@ public class LottoController {
 
     private void addLotto() {
         List<LottoNumber> randomNumbers = RandomNumberGenerator.generate();
-//        while (hasDuplication(randomNumbers)) {
-//            randomNumbers = RandomNumberGenerator.generate();
-//        }
         lottos.add(new Lotto(randomNumbers));
-    }
-
-    private boolean hasDuplication(final List<LottoNumber> randomNumbers) {
-        HashSet<LottoNumber> uniqueNumbers = new HashSet<>(randomNumbers);
-        return uniqueNumbers.size() != randomNumbers.size();
     }
 
     private int parseInt(final String money) {

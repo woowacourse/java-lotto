@@ -12,10 +12,6 @@ public class RandomNumberGenerator {
     }
 
     public static List<LottoNumber> generate() {
-//        ArrayList<LottoNumber> randomNumbers = new ArrayList<>();
-//        for (int count = 0; count < Lotto.LOTTO_SIZE; count++) {
-//            randomNumbers.add(new LottoNumber(random.nextInt(Lotto.MIN_LOTTO_NUMBER, Lotto.MAX_LOTTO_NUMBER)));
-//        }
         List<Integer> randomNumbers = generateNotDuplicateSixNumbers();
         return randomNumbers.stream()
                 .map(LottoNumber::new)
