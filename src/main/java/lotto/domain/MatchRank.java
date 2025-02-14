@@ -8,6 +8,8 @@ public enum MatchRank {
     MATCH_SIX(6, 2000000000),
     NO_MATCH(0, 0);
 
+    private static final int MIN_MATCH_NUMBER = 0;
+    private static final int MAX_MATCH_NUMBER = 6;
     private final static String BONUS_OUTPUT_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- ";
     private final static String BASIC_OUTPUT_MESSAGE = "%d개 일치 (%d원)- ";
 
@@ -39,6 +41,9 @@ public enum MatchRank {
             if (statistics.number == matchNumber) {
                 return statistics;
             }
+        }
+        if(matchNumber < MIN_MATCH_NUMBER || matchNumber > MAX_MATCH_NUMBER) {
+            throw new IllegalArgumentException("matchNumber가 범위를 초과했습니다");
         }
         return NO_MATCH;
     }
