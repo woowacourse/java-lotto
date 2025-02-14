@@ -25,8 +25,7 @@ public class LottoGenerateService {
     }
 
     private void insertLotto(Lottos lottos) {
-        List<Integer> numbers = RandomGenerator.generateNumbers(1, 45, 6);
-        Lotto lotto = LottoFactory.createLotto(numbers);
+        Lotto lotto = LottoFactory.createRandomLotto();
         lottos.addLotto(lotto);
     }
 
