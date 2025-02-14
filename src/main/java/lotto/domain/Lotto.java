@@ -30,7 +30,7 @@ public class Lotto {
     }
 
     public boolean hasBonusNumber(LottoNumber bonusNumber) {
-        return lottoNumbers.contain(bonusNumber);
+        return lottoNumbers.contains(bonusNumber);
     }
 
     @Override

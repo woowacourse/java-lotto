@@ -18,12 +18,12 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
-    public boolean contain(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return item.contains(lottoNumber);
     }
 
     public long getMatchCount(LottoNumbers winnerNumbers) {
-        return item.stream().filter(winnerNumbers::contain).count();
+        return item.stream().filter(winnerNumbers::contains).count();
     }
 
 

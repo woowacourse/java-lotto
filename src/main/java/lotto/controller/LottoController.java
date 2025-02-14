@@ -57,22 +57,21 @@ public class LottoController {
     }
 
     private WinnerLotto readWinnerNumber(String input) {
-        List<LottoNumber> winnerNumbers = Lotto.toLottoNumberList(input);
-        WinnerLotto.validateWinnerNumbers(winnerNumbers);
+        List<LottoNumber> winnerNumbersInput = Lotto.toLottoNumberList(input);
+        LottoNumbers winnerNumbers = LottoNumbers.from(winnerNumbersInput);
 
         return readBonusNumber(winnerNumbers);
     }
 
-    private WinnerLotto readBonusNumber(List<LottoNumber> winnerNumbersInput) {
+    private WinnerLotto readBonusNumber(LottoNumbers winnerNumbers) {
         LottoNumber bonusNumber = RecoveryUtils.executeWithRetry(InputView::readBonusNumber, LottoNumber::create);
 
         try {
-            WinnerLotto.validateBonusNumbers(winnerNumbersInput, bonusNumber);
-            LottoNumbers winnerNumbers = LottoNumbers.from(winnerNumbersInput);
+            WinnerLotto.validateBonusNumbers(winnerNumbers, bonusNumber);
             return new WinnerLotto(winnerNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {
             OutputView.printError(e);
-            return readBonusNumber(winnerNumbersInput);
+            return readBonusNumber(winnerNumbers);
         }
     }
 }
