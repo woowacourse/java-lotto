@@ -32,7 +32,7 @@ public class LottoController {
     }
 
     private Lottos issueLottos(int purchaseAmount) {
-        Lottos lottos = Lottos.of(purchaseAmount);
+        Lottos lottos = Lottos.createLottos(purchaseAmount);
 
         int quantity = lottos.getQuantity();
         outputView.printLottoQuantity(quantity);

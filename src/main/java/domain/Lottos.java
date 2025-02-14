@@ -17,7 +17,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos of(int money) {
+    public static Lottos createLottos(int money) {
         int quantity = money / LOTTO_PRICE;
 
         List<Lotto> generatedLottos = new ArrayList<>();
