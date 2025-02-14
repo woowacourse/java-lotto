@@ -49,6 +49,7 @@ class PurchaseTest {
         Purchase purchase = new Purchase(inputString);
 
         assertThat(purchase.calculateLottoCount()).isEqualTo(expectedCount);
+
     }
 
 }

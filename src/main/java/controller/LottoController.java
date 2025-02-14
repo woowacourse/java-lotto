@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.function.Supplier;
 import model.BonusNumber;
 import model.Lotto;
 import util.LottoGenerator;
@@ -36,15 +37,10 @@ public class LottoController {
 
     public Purchase readPurchaseAmount() {
         outputView.printPurchaseAmountInstruction();
-        while (true) {
-            try {
-                String purchaseAmountInput = inputView.readPurchaseAmount();
-                return new Purchase(purchaseAmountInput);
-            }
-            catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        return retryUntilSuccess(() -> {
+            String purchaseAmountInput = inputView.readPurchaseAmount();
+            return new Purchase(purchaseAmountInput);
+        });
     }
 
     public int findLottoCount(Purchase purchase) {
@@ -61,28 +57,18 @@ public class LottoController {
 
     public WinningNumber readWinningNumber() {
         outputView.printWinningNumbersInstruction();
-        while (true) {
-            try {
-                String winningNumbersInput = inputView.readWinningNumbers();
-                return new WinningNumber(winningNumbersInput);
-            }
-            catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        return retryUntilSuccess(() -> {
+            String winningNumbersInput = inputView.readWinningNumbers();
+            return new WinningNumber(winningNumbersInput);
+        });
     }
 
     public BonusNumber readBonusNumber(WinningNumber winningNumber) {
         outputView.printBonusNumbersInstruction();
-        while (true) {
-            try {
-                String bonusNumberInput = inputView.readBonusNumbers();
-                return new BonusNumber(bonusNumberInput, winningNumber);
-            }
-            catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        return retryUntilSuccess(() -> {
+            String bonusNumberInput = inputView.readBonusNumbers();
+            return new BonusNumber(bonusNumberInput, winningNumber);
+        });
     }
 
     public WinningResult checkWinningResult(List<Lotto> issuedLottos, WinningNumber winningNumber, BonusNumber bonusNumber) {
@@ -100,4 +86,16 @@ public class LottoController {
         outputView.printWinningResult(winningResult);
         outputView.printEarningRate(earningRate);
     }
+
+    private <T> T retryUntilSuccess(Supplier<T> task) {
+        while (true) {
+            try {
+                return task.get();
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
 }
