@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.domain.Lotto.LOTTO_SIZE;
 import static lotto.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
 import static lotto.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
 
@@ -11,7 +12,6 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
-    static final int LOTTO_SIZE = 6;
     private static final int START_INDEX = 0;
 
     public List<Lotto> generateLotto(final int count) {
