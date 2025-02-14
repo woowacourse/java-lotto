@@ -28,8 +28,7 @@ public class LottoController {
 
     private Amount inputAmount() {
         int price = inputView.inputPrice();
-        String price2 = "10000";
-        Amount amount = new Amount(price2);
+        Amount amount = new Amount(price);
         outputView.printAmount(amount);
         return amount;
     }

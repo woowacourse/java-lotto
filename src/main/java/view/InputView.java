@@ -1,5 +1,8 @@
 package view;
 
+import static global.exception.ExceptionMessage.INVALID_INTEGER;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputView {
@@ -12,7 +15,11 @@ public class InputView {
 
     public int inputPrice() {
         System.out.println(Input.PRICE.getMessage());
-        return sc.nextInt();
+        try {
+            return sc.nextInt();
+        }catch (InputMismatchException e){
+            throw new IllegalArgumentException(INVALID_INTEGER.getMessage());
+        }
     }
 
     public String inputWinningLotto() {

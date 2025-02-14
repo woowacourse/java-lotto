@@ -1,6 +1,5 @@
 package domain;
 
-import static global.exception.ExceptionMessage.INVALID_INTEGER;
 import static global.exception.ExceptionMessage.INVALID_POSITIVE;
 import static global.exception.ExceptionMessage.INVALID_UNIT_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,28 +14,20 @@ class AmountTest {
 
     @Nested
     class 금액_검증_테스트 {
-        @Test
-        void 금액이_정수가_아니면_예외가_발생한다() {
-            assertThatThrownBy(() -> {
-                new Amount("우택호");
-            }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_INTEGER.getMessage());
-        }
-
         @ParameterizedTest
-        @ValueSource(strings = {"-5", "0"})
-        void 금액이_양수가_아니면_예외가_발생한다(String input) {
+        @ValueSource(ints = {-5, 0})
+        void 금액이_양수가_아니면_예외가_발생한다(int price) {
             assertThatThrownBy(() -> {
-                new Amount(input);
+                new Amount(price);
             }).isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(INVALID_POSITIVE.getMessage());
         }
 
         @ParameterizedTest
-        @ValueSource(strings = {"1500", "1234"})
-        void 금액이_1000원_단위가_아니면_예외가_발생한다(String input) {
+        @ValueSource(ints = {1500, 1234})
+        void 금액이_1000원_단위가_아니면_예외가_발생한다(int price) {
             assertThatThrownBy(() -> {
-                new Amount(input);
+                new Amount(price);
             }).isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(INVALID_UNIT_PRICE.getMessage());
         }
@@ -45,7 +36,7 @@ class AmountTest {
     @Test
     void 수익률_계산_테스트() {
         //given
-        Amount amount = new Amount("14000");
+        Amount amount = new Amount(14000);
 
         //when-then
         assertThat(amount.getProfit(5000)).isEqualTo(0.35);
