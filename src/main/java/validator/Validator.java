@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Set;
 
 public class Validator {
+
+    private static final String NUMBER_ONLY_REGEX = "^[0-9]+$";
+
     public static void validateEmptyInput(String input) {
-        checkNullInput(input, ErrorMessages.NULL_INPUT.getMessage());
-        checkEmptyInput(input, ErrorMessages.EMPTY_STRING_INPUT.getMessage());
-        checkWhitespaceOnlyInput(input, ErrorMessages.WHITESPACE_ONLY_INPUT.getMessage());
+        checkNullInput(input, "입력이 null 입니다.");
+        checkEmptyInput(input, "입력이 빈 문자열입니다.");
+        checkWhitespaceOnlyInput(input, "입력이 공백으로만 구성되어 있습니다.");
     }
 
     private static void checkNullInput(String input, String errorMessage) {
@@ -29,9 +32,9 @@ public class Validator {
         }
     }
 
-    public static void checkInvalidForm(String input, String regexPattern, String errorMessage) {
-        if (!input.matches(regexPattern)) {
-            throw new IllegalArgumentException(errorMessage);
+    public static void checkInvalidNumberForm(String input) {
+        if (!input.matches(NUMBER_ONLY_REGEX)) {
+            throw new IllegalArgumentException("입력된 문자가 숫자가 아닙니다.");
         }
     }
 

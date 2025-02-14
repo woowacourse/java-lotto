@@ -16,7 +16,7 @@ public class BonusNumberParserTest {
         String bonusNumberInput = "6";
         assertThatThrownBy(() -> BonusNumberParser.parseBonusNumber(winningNumber, bonusNumberInput))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(validator.ErrorMessages.SAME_NUMBER.getMessage());
+                .hasMessage("보너스 번호가 당첨 번호와 같습니다.");
     }
 
     @DisplayName("보너스넘버_범위예외_테스트")
@@ -26,6 +26,6 @@ public class BonusNumberParserTest {
         String bonusNumberInput = "46";
         assertThatThrownBy(() -> BonusNumberParser.parseBonusNumber(winningNumber, bonusNumberInput))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(validator.ErrorMessages.LOTTO_NUMBER_OUT_OF_RANGE.getMessage());
+                .hasMessage("로또의 숫자가 1~45의 유효 범위를 벗어납니다.");
     }
 }

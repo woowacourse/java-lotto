@@ -1,15 +1,13 @@
 package service.parser;
 
 import constant.LottoConstants;
-import constant.RegexConstants;
-import validator.ErrorMessages;
 import validator.Validator;
 
 public class MoneyParser {
 
     public static int parseLottoCount(String input) {
         Validator.validateEmptyInput(input);
-        Validator.checkInvalidForm(input, RegexConstants.NUMBER_ONLY_REGEX, ErrorMessages.NOT_NUMBER.getMessage());
+        Validator.checkInvalidNumberForm(input);
         int money = Integer.parseInt(input);
 
         validateMoneyOutOfRange(money);
@@ -19,13 +17,13 @@ public class MoneyParser {
 
     private static void validateMoneyIsDivideLottoPrice(int money) {
         if (money % LottoConstants.LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(ErrorMessages.INVALID_MONEY_INPUT.getMessage());
+            throw new IllegalArgumentException("천원 단위로 입력하세요.");
         }
     }
 
     private static void validateMoneyOutOfRange(int money) {
         if (money < LottoConstants.LOTTO_PRICE || money > LottoConstants.LOTTO_MAX_PRICE) {
-            throw new IllegalArgumentException(ErrorMessages.MONEY_OUT_OF_RANGE.getMessage());
+            throw new IllegalArgumentException(String.format("돈은 %,d원과 %,d원 사이여야 합니다.", LottoConstants.LOTTO_PRICE, LottoConstants.LOTTO_MAX_PRICE));
         }
     }
 }

@@ -2,7 +2,6 @@ package domain;
 
 import constant.LottoConstants;
 import java.util.List;
-import validator.ErrorMessages;
 import validator.Validator;
 
 public class Lotto {
@@ -12,7 +11,7 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         for (Integer number : numbers)
             Validator.checkOutOfRange(number, LottoConstants.LOTTO_NUMBER_START, LottoConstants.LOTTO_NUMBER_END,
-                    ErrorMessages.LOTTO_NUMBER_OUT_OF_RANGE.getMessage());
+                    "로또의 숫자가 1~45의 유효 범위를 벗어납니다.");
 
         this.numbers = numbers;
     }

@@ -10,7 +10,7 @@ public class LottoNumberGeneratorTest {
     @DisplayName("로또번호생성기_셔플_테스트")
     @Test
     void 로또번호생성기_테스트() {
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        LottoNumberGenerator lottoNumberGenerator = LottoNumberGenerator.getInstance();
         List<Integer> numbers = lottoNumberGenerator.generateLottoNumbers();
         assertEquals(numbers.size(), 6);
     }
