@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -8,10 +10,10 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LottoWinningCheckerTest {
 
     @ParameterizedTest
-    @DisplayName("로또 결과를 확인할 수 있다")
     @MethodSource("lottoDataProvider")
     void 로또_결과를_확인할_수_있다(List<Integer> myNumbers, List<Integer> winningNumbers, int bonusNumber, LottoRanking ranking, int expectedCount) {
         Lotto lotto = new Lotto(myNumbers);

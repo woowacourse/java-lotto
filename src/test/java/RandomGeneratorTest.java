@@ -16,7 +16,6 @@ class RandomGeneratorTest {
     }
 
     @Test
-    @DisplayName("값들의 범위는 1에서 45이다")
     void 값들의_범위_테스트() {
         List<Integer> numbers = RandomGenerator.generateUniqueRandomNumbers(6, 1, 45);
 
@@ -26,7 +25,6 @@ class RandomGeneratorTest {
     }
 
     @Test
-    @DisplayName("값들은 중복되지 않아야한다")
     void 값들의_중복되지_않아야한다() {
         List<Integer> numbers = RandomGenerator.generateUniqueRandomNumbers(6, 1, 45);
         assertThat(numbers.size()).isEqualTo(numbers.stream().distinct().count());
