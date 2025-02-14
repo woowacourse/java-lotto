@@ -35,15 +35,20 @@ public class LottoEvaluator {
         return sum / (lottos.computeTicketCount() * (double) LOTTO_PRICE);
     }
 
-    public Optional<Prize> calculatePrize(Lotto lotto) {
-        boolean bonus = false;
-        if (lotto.containsNumber(winningLotto.getBonus())) {
-            bonus = true;
-        }
-        Set<Number> winningNumbers = winningLotto.getLotto().getLottoNumbers();
-        Set<Number> matchedLottoNumbers = lotto.getLottoNumbers();
-        matchedLottoNumbers.retainAll(winningNumbers);
-        int matchCount = matchedLottoNumbers.size();
-        return Prize.findPrize(matchCount, bonus);
+    public Optional<Prize> calculatePrize(Lotto userLotto) {
+        boolean hasBonusNumber = containsBonusNumber(userLotto);
+        return Prize.findPrize(countMatchingNumbers(userLotto), hasBonusNumber);
     }
+
+    private int countMatchingNumbers(Lotto userLotto) {
+        Set<LottoNumber> winningLottoNumbers = winningLotto.getLotto().getLottoNumbers();
+        Set<LottoNumber> userLottoNumbers = userLotto.getLottoNumbers();
+        userLottoNumbers.retainAll(winningLottoNumbers);
+        return userLottoNumbers.size();
+    }
+
+    private boolean containsBonusNumber(Lotto userLotto) {
+        return userLotto.containsNumber(winningLotto.getBonus());
+    }
+
 }

@@ -6,8 +6,8 @@ import model.LottoEvaluator;
 import model.LottoGenerater;
 import model.LottoNumberPicker;
 import model.Lottos;
-import model.Money;
-import model.Number;
+import model.LottoPayment;
+import model.LottoNumber;
 import model.WinningLotto;
 import util.Parser;
 import view.InputView;
@@ -33,19 +33,19 @@ public class Controller {
     }
 
     private Lottos buyLottos() {
-        Money money = Parser.parseMoney(inputView.inputMoney());
-        Lottos lottos = generateLottos(money);
+        LottoPayment lottoPayment = Parser.parseMoney(inputView.inputMoney());
+        Lottos lottos = generateLottos(lottoPayment);
         outputView.printLottos(LottosDTO.from(lottos));
         return lottos;
     }
 
-    private Lottos generateLottos(Money money) {
+    private Lottos generateLottos(LottoPayment lottoPayment) {
         LottoNumberPicker lottoNumberPicker = new LottoNumberPicker();
         LottoGenerater lottoGenerater = new LottoGenerater(lottoNumberPicker);
         return new Lottos(
-                IntStream.range(0, money.computeTicketCount())
-                .mapToObj(i -> lottoGenerater.generateLotto())
-                .toList()
+                IntStream.range(0, lottoPayment.computeTicketCount())
+                        .mapToObj(i -> lottoGenerater.generateLotto())
+                        .toList()
         );
     }
 
@@ -53,7 +53,7 @@ public class Controller {
         String rawWinningLotto = inputView.inputWinningLotto();
         Lotto lotto = Parser.parseLotto(rawWinningLotto);
         String rawBonusNumber = inputView.inputBonus();
-        Number bonusNumber = Parser.parseNumber(rawBonusNumber);
+        LottoNumber bonusNumber = Parser.parseNumber(rawBonusNumber);
         return new WinningLotto(lotto, bonusNumber);
     }
 }

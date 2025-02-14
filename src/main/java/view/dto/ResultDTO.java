@@ -7,8 +7,13 @@ import model.Prize;
 public record ResultDTO(
         List<InnerResultDetail> prizeDTOs, double profit
 ) {
-    public record InnerResultDetail(int count, int price, int match, boolean isBonus) implements Comparable<InnerResultDetail>{
-        public static InnerResultDetail from(Prize prize, int count){
+    public record InnerResultDetail(
+            int count,
+            int price,
+            int match,
+            boolean isBonus
+    ) implements Comparable<InnerResultDetail> {
+        public static InnerResultDetail from(Prize prize, int count) {
             return new InnerResultDetail(prize.getCount(), prize.getPrice(), count, prize.isBonus());
         }
 
@@ -24,7 +29,8 @@ public record ResultDTO(
             return comp;
         }
     }
-    public static ResultDTO from(Map<Prize, Integer> result, double profit){
+
+    public static ResultDTO from(Map<Prize, Integer> result, double profit) {
         return new ResultDTO(result.entrySet()
                 .stream()
                 .map((entry) -> InnerResultDetail.from(entry.getKey(), entry.getValue()))

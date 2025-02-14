@@ -25,7 +25,7 @@ public enum Prize {
     }
 
     public static Optional<Prize> findPrize(int count, boolean bonus) {
-        if (bonus && count == FIVE_MATCH){
+        if (bonus && count == FIVE_MATCH) {
             return Optional.of(_2ND);
         }
         return Arrays.stream(Prize.values())

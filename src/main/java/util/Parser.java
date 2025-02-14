@@ -3,32 +3,31 @@ package util;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import model.Lotto;
-import model.Money;
-import model.Number;
+import model.LottoPayment;
+import model.LottoNumber;
 
 public class Parser {
-
     private static final String DELIMITER = ", ";
 
-    public static Money parseMoney(String rawMoney) {
-        return new Money(parseInt(rawMoney));
+    public static LottoPayment parseMoney(String rawPayment) {
+        return new LottoPayment(parseInt(rawPayment));
     }
 
-    public static Lotto parseLotto(String rawInputLotto){
+    public static Lotto parseLotto(String rawInputLotto) {
         String[] splittedInput = rawInputLotto.split(DELIMITER);
         return new Lotto(Arrays.stream(splittedInput)
                 .map(Parser::parseNumber)
                 .collect(Collectors.toSet()));
     }
 
-    public static Number parseNumber(String rawNumber){
-        return new Number(parseInt(rawNumber));
+    public static LottoNumber parseNumber(String rawNumber) {
+        return new LottoNumber(parseInt(rawNumber));
     }
 
-    public static Integer parseInt(String value){
+    public static Integer parseInt(String value) {
         try {
             return Integer.parseInt(value);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("정수가 아닙니다.");
         }
     }
