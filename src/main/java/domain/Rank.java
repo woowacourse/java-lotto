@@ -23,16 +23,19 @@ public enum Rank {
     public static Rank findRank(int matchCount, boolean isRequireBonus) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount == matchCount)
-                .filter(rank -> {
-                    if (rank == SECOND || rank == THIRD) {
-                        return rank.isRequireBonus == isRequireBonus;
-                    }
-                    return true;
-                }).findFirst().orElse(MISS);
+                .filter(rank -> rank.checkBonusRank(rank, isRequireBonus))
+                .findFirst().orElse(MISS);
     }
 
     public Money calculateWinningMoney(int count) {
         return winningMoney.multiply(count);
+    }
+
+    private boolean checkBonusRank(Rank rank, boolean isRequireBonus) {
+        if (rank == SECOND || rank == THIRD) {
+            return rank.isRequireBonus == isRequireBonus;
+        }
+        return true;
     }
 
     public int getMatchCount() {
