@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class InputParser {
-    private static final String REGULAR_EXPRESSION = "^[0-9]+$";
     private static final String SEPARATOR = ",";
 
     private InputParser() {
@@ -18,7 +17,9 @@ public final class InputParser {
     }
 
     private static void validateNumeric(String str) {
-        if (!str.matches(REGULAR_EXPRESSION)) {
+        try {
+            Integer.parseInt(str);
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_NOT_NUMBER);
         }
     }
