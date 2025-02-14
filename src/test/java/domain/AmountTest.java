@@ -48,6 +48,6 @@ class AmountTest {
         Amount amount = new Amount("14000");
 
         //when-then
-        assertThat(amount.getProfit(5000)).isEqualTo(0.35);
+        assertThat(amount.calculateProfit(5000)).isEqualTo(0.35);
     }
 }

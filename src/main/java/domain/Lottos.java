@@ -37,7 +37,7 @@ public class Lottos {
             sum += Rank.getTotalPrize(rankIntegerEntry.getKey(), rankIntegerEntry.getValue());
         }
 
-        double profit = amount.getProfit(sum);
+        double profit = amount.calculateProfit(sum);
         return new GetResultDto(countRank, profit);
     }
 

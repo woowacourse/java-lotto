@@ -11,7 +11,6 @@ public class WinningLotto extends Lotto {
         this.bonus = validateBonus(bonus);
     }
 
-    // todo : lottos에서 해결할 수 있는 방법 찾아보기
     public boolean matchBonus(List<Integer> numbers) {
         return numbers.contains(bonus);
     }

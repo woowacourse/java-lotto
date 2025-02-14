@@ -3,6 +3,7 @@ package domain;
 import global.exception.ExceptionMessage;
 
 public class Amount {
+
     public static final int LOTTO_PRICE = 1000;
 
     private final int amount;
@@ -18,8 +19,8 @@ public class Amount {
         return this.amount > amount;
     }
 
-    public int getAmount() {
-        return amount;
+    public double calculateProfit(long sum) {
+        return Math.floor((double) sum / (amount * LOTTO_PRICE) * 100) / 100;
     }
 
     private void validateIsPositive(int price) {
@@ -34,7 +35,6 @@ public class Amount {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_INTEGER.getMessage());
         }
-
     }
 
     private void validatePerPrice(int price) {
@@ -43,8 +43,8 @@ public class Amount {
         }
     }
 
-
-    public double getProfit(long sum) {
-        return Math.floor((double) sum / (amount * LOTTO_PRICE) * 100) / 100;
+    public int getAmount() {
+        return amount;
     }
+
 }
