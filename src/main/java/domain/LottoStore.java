@@ -25,7 +25,7 @@ public class LottoStore {
     }
 
     private void validateMoney(Money money) {
-        if (money.divide(LOTTO_MONEY) != 0) {
+        if (money.remainder(LOTTO_MONEY) != 0) {
             throw new IllegalArgumentException("로또를 사기 위해서는 " + LOTTO_PRICE + " 단위여야 합니다.");
         }
     }

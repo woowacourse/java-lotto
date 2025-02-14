@@ -38,6 +38,10 @@ public record Money(
         return (double) this.amount / purchaseLottoMoney.amount;
     }
 
+    public int remainder(Money money) {
+        return this.amount % money.amount;
+    }
+
     public int getAmount() {
         return amount;
     }
