@@ -13,7 +13,7 @@ class LottoTicketTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         // when
-        LottoTicket lottoTicket = lottoMachine.generateLottoTicket(new FixedLottoTicketGenerator());
+        LottoTicket lottoTicket = lottoMachine.generateLottoTicket(new FixedIntegerGenerator());
 
         // than
         Assertions.assertThat(lottoTicket.getSize()).isEqualTo(LottoTicket.LOTTO_SIZE);

@@ -1,5 +1,7 @@
 package domain;
 
+import static domain.LottoTicket.LOTTO_PRICE;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,12 +28,13 @@ public class StatisticsService {
         }
     }
 
-    public Profit calculateProfit(WinningStatistics winningStatistics, int lottoTicketNumber) {
+    public Profit calculateProfit(WinningStatistics winningStatistics, int purchaseAmount) {
+        int lottoTicketNumber = purchaseAmount / LOTTO_PRICE;
         long sum = 0;
         Map<LottoPrize, Integer> prizeCounter = winningStatistics.getPrizeCounter();
         for (LottoPrize lottoPrize : LottoPrize.values()) {
             sum += (long) prizeCounter.get(lottoPrize) * lottoPrize.getMoney();
         }
-        return new Profit((double) sum / (lottoTicketNumber * LottoTicket.LOTTO_PRICE));
+        return new Profit((double) sum / (lottoTicketNumber * LOTTO_PRICE));
     }
 }
