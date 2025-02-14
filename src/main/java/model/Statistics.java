@@ -1,6 +1,7 @@
 package model;
 
 import dto.StatisticsDto;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Statistics {
@@ -13,6 +14,6 @@ public class Statistics {
     }
 
     public StatisticsDto toDto() {
-        return new StatisticsDto(prizeCounts, profitRate);
+        return new StatisticsDto(new HashMap<>(prizeCounts), profitRate);
     }
 }
