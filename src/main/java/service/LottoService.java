@@ -3,7 +3,7 @@ package service;
 import domain.BonusNumber;
 import domain.LottoDispenser;
 import domain.WinningNumber;
-import domain.enums.WinningCase;
+import domain.WinningCase;
 import domain.formatter.WinningCalculateFormatter;
 import java.util.Map;
 import repository.BonusNumberRepository;
@@ -45,9 +45,9 @@ public class LottoService {
         return WinningCalculateFormatter.winningResultFormatting(winningCalculateResult,earnMoneyRatio);
     }
 
-    public String formattingBuyLottoResult() {
+    public String buyLottoResult() {
         return lottoRepository.getLottoDispenser()
-                .formattingBuyLottoResult();
+                .buyLottoResult();
     }
 
 }

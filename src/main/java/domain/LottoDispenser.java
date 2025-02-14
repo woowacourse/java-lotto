@@ -1,9 +1,8 @@
 package domain;
 
-import domain.enums.WinningCase;
+import domain.formatter.LottoBuyResultFormatter;
 import exception.LottoException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -13,7 +12,6 @@ public class LottoDispenser {
 
     private final int LOTTO_MONEY_UNIT = 1000;
     private final String INVALID_BUY_MONEY = "유효하지 않은 구매 금액입니다.";
-    private final String BUY_LOTTO_AMOUNT_FORMAT = "%d개를 구매했습니다.\n";
     private final List<Lotto> lottos;
     private final int buyMoney;
 
@@ -22,7 +20,6 @@ public class LottoDispenser {
         this.buyMoney = Integer.parseInt(buyMoneyInput);
         int lottoCount = Integer.parseInt(buyMoneyInput) / LOTTO_MONEY_UNIT;
         lottos = generateLottos(lottoCount);
-
     }
 
     public LottoDispenser(List<Lotto> lottos) {
@@ -76,13 +73,8 @@ public class LottoDispenser {
         return  ((double) (earnMoney / buyMoney) * 100) / 100;
     }
 
-    public String formattingBuyLottoResult() {
-        StringBuilder stringBuilder = new StringBuilder(String.format(BUY_LOTTO_AMOUNT_FORMAT,lottos.size()));
-        for(Lotto lotto : lottos){
-            stringBuilder.append(lotto.formatNumbers())
-                    .append("\n");
-        }
-        return stringBuilder.toString();
+    public String buyLottoResult() {
+        return LottoBuyResultFormatter.formattingBuyLottoResult(lottos);
     }
 
 }

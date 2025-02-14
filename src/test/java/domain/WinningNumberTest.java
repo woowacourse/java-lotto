@@ -3,26 +3,25 @@ package domain;
 import exception.LottoException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class WinningNumberTest {
 
+    @Test
     @DisplayName("당첨_번호가_중복되는_경우_예외_발생")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,5"})
-    void 당첨_번호가_중복되는_경우_예외_발생(String numbers) {
+    void 당첨_번호가_중복되는_경우_예외_발생() {
         Assertions.assertThatThrownBy(() -> {
-            new WinningNumber(numbers);
+            new WinningNumber("1,2,3,4,5,5");
         }).isInstanceOf(LottoException.class);
     }
 
+    @Test
     @DisplayName("당첨_번호는_6개여야_합니다")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,6,7"})
-    void 당첨_번호는_6개여야_합니다(String numbers) {
+    void 당첨_번호는_6개여야_합니다() {
         Assertions.assertThatThrownBy(() -> {
-            new WinningNumber(numbers);
+            new WinningNumber("1,2,3,4,5,6,7");
         }).isInstanceOf(LottoException.class);
     }
 
@@ -35,12 +34,11 @@ public class WinningNumberTest {
         }).isInstanceOf(LottoException.class);
     }
 
+    @Test
     @DisplayName("당첨_번호는_숫자가_아니면_예외를_발생한다")
-    @ParameterizedTest
-    @ValueSource(strings = {"a,2,3,4,5,5"})
-    void 당첨_번호는_숫자가_아니면_예외를_발생한다(String numbers) {
+    void 당첨_번호는_숫자가_아니면_예외를_발생한다() {
         Assertions.assertThatThrownBy(() -> {
-            new WinningNumber(numbers);
+            new WinningNumber("a,2,3,4,5,5");
         }).isInstanceOf(LottoException.class);
     }
 

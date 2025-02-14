@@ -4,7 +4,7 @@ import domain.BonusNumber;
 import domain.Lotto;
 import domain.LottoDispenser;
 import domain.WinningNumber;
-import domain.enums.WinningCase;
+import domain.WinningCase;
 import domain.formatter.WinningCalculateFormatter;
 import java.util.List;
 import java.util.Map;

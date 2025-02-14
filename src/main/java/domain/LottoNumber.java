@@ -16,7 +16,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateLottoNumber(int lottoNumber) {
-
         if (lottoNumber > LOTTO_NUMBER_END || lottoNumber < LOTTO_NUMBER_START) {
             throw new LottoException(INVALID_NUMBER_RANGE);
         }

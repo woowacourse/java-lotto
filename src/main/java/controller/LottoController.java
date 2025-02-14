@@ -15,7 +15,7 @@ public class LottoController {
     }
 
     public String formattingBuyLottoResult() {
-        return lottoService.formattingBuyLottoResult();
+        return lottoService.buyLottoResult();
     }
 
     public String formattingWinningResult() {

@@ -1,6 +1,6 @@
 package domain.formatter;
 
-import domain.enums.WinningCase;
+import domain.WinningCase;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -14,7 +14,7 @@ public class WinningCalculateFormatter {
         winningResult.remove(WinningCase.ELSE);
         for (Entry<WinningCase, Integer> winningCaseIntegerEntry : winningResult.entrySet()) {
             WinningCase winningCase = winningCaseIntegerEntry.getKey();
-            stringBuilder.append(winningCase.formatting(winningCaseIntegerEntry.getValue()))
+            stringBuilder.append(winningCase.winResult(winningCaseIntegerEntry.getValue()))
                     .append("\n");
         }
         stringBuilder.append(String.format(EARN_MONEY_RATIO,earnMoneyRatio));
