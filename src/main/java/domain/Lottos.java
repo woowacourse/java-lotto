@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos() {
         lottos = new ArrayList<>();

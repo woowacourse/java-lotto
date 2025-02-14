@@ -4,7 +4,7 @@ import java.util.List;
 
 public class WinningLotto extends Lotto {
 
-    private int bonus;
+    private final int bonus;
 
     public WinningLotto(String lotto, String bonus) {
         super(lotto);

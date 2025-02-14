@@ -12,7 +12,7 @@ public class Lotto {
     public static final String DELIMITER = ",";
     public static final int LOTTO_LENGTH = 6;
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
@@ -51,7 +51,7 @@ public class Lotto {
     }
 
     private void validateBonusDuplicate(int input) {
-        Integer bonus = Integer.valueOf(input);
+        Integer bonus = input;
         numbers.stream().filter(number -> number.equals(bonus)).forEach(number -> {
             throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
         });

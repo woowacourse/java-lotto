@@ -9,9 +9,9 @@ public enum Rank {
 
     NONE(0, 0, false);
 
-    private int count;
-    private int prize;
-    private boolean bonusFlag;
+    private final int count;
+    private final int prize;
+    private final boolean bonusFlag;
 
     Rank(int count, int prize, boolean bonusFlag) {
         this.count = count;
