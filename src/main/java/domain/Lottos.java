@@ -23,22 +23,21 @@ public class Lottos {
         int quantity = money / LOTTO_PRICE;
 
         List<Lotto> generatedLottos = new ArrayList<>();
+        Random random = new Random();
 
         for (int i = 0; i < quantity; i++) {
-            List<Integer> lottoNumbers = generateRandomNumbers();
+            List<Integer> lottoNumbers = generateRandomNumbers(random);
             generatedLottos.add(new Lotto(lottoNumbers));
         }
 
         return new Lottos(generatedLottos);
     }
 
-    private static List<Integer> generateRandomNumbers() {
+    private static List<Integer> generateRandomNumbers(Random random) {
         List<Integer> lottoNumbers = new ArrayList<>();
-        Random random = new Random();
 
         while (lottoNumbers.size() < MAX_LOTTO_SIZE) {
             int number = random.nextInt(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1);
-
             addNumberIfUnique(lottoNumbers, number);
         }
 
