@@ -19,5 +19,4 @@ public enum OutViewConstant {
     public String getMessage(Object... args) {
         return String.format(message, args);
     }
-
 }

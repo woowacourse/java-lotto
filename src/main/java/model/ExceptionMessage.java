@@ -28,5 +28,4 @@ public enum ExceptionMessage {
     public String getMessage(Object... args) {
         return PREFIX + String.format(message, args);
     }
-
 }
