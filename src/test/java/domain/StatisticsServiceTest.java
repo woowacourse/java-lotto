@@ -83,15 +83,7 @@ class StatisticsServiceTest {
     @Test
     void 수익률_계산_테스트() {
         //given
-        List<Integer> integers = new java.util.ArrayList<>();
-        integers.add(1);
-        integers.add(2);
-        integers.add(3);
-        integers.add(43);
-        integers.add(44);
-        integers.add(45);
-        LottoTicket fifth = new LottoTicket(
-                integers);
+        LottoTicket fifth = new LottoTicket(List.of(1, 2, 3, 43, 44, 45));
         LottoTicket fourth = new LottoTicket(List.of(1, 2, 3, 4, 44, 45));
         LottoTicket second = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
         LottoTicket nothing = new LottoTicket(List.of(31, 32, 33, 34, 35, 36));
@@ -102,7 +94,7 @@ class StatisticsServiceTest {
         // when
         WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, winningNumbers,
                 bonusNumber);
-        Profit profit = statisticsService.calculateProfit(winningStatistics, lottoTickets.size());
+        Profit profit = statisticsService.calculateProfit(winningStatistics);
 
         // then
         Assertions.assertThat(profit.getProfit()).isEqualTo(7513.75);
