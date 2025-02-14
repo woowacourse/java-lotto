@@ -24,7 +24,8 @@ public class Lotto {
     private boolean isDuplicate(List<Integer> randomNumbers) {
         return (new HashSet<>(randomNumbers).size() != randomNumbers.size());
     }
-    public String printLotto() {
+
+    public String makeResultToStringForPrint() {
         return "[" + String.join(", ",
                 randomNumbers.stream()
                         .map(String::valueOf)
