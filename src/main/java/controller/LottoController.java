@@ -30,6 +30,7 @@ public class LottoController {
         int price = inputView.inputPrice();
         Amount amount = new Amount(price);
         outputView.printAmount(amount);
+
         return amount;
     }
 
@@ -37,14 +38,15 @@ public class LottoController {
         LottosFactory lottosFactory = new LottosFactory(new RandomGenerator());
         Lottos lottos = lottosFactory.from(amount);
         outputView.printLottos(lottos.getLottosDto());
+
         return lottos;
     }
 
     private WinningLotto inputWinningLotto() {
         String winningNumber = inputView.inputWinningLotto();
         String bonusNumber = inputView.inputBonusLotto();
-        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
-        return winningLotto;
+
+        return new WinningLotto(winningNumber, bonusNumber);
     }
 
     private void calculateResult(Lottos lottos, WinningLotto winningLotto, Amount amount) {
