@@ -48,5 +48,14 @@ class UserLottoTest {
                 .hasMessage("숫자는 1~45 사이여야 합니다.");
     }
 
+    @Test
+    @DisplayName("당첨 번호가 1~45 사이가 아니면 예외가 발생한다.(경계값)")
+    void validate_range_test_for_boundary_value(){
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 44, 46);
+        assertThatThrownBy(() -> new UserLotto(winningNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자는 1~45 사이여야 합니다.");
+    }
+
 
 }
