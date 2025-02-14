@@ -18,7 +18,7 @@ public class BonusNumber {
 
     private static void validate(final int value) {
         if (value < MIN || value > MAX) {
-            throw new IllegalArgumentException("보너스 번호는 1부터 45 사이여야 합니다.");
+            throw new IllegalArgumentException("보너스 번호는 " + MIN + "부터 " + MAX + " 사이여야 합니다.");
         }
     }
 
