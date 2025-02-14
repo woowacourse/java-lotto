@@ -15,19 +15,7 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public static List<LottoNumber> toLottoNumberList(String input) {
-        if (input == null || input.isBlank() || input.endsWith(", ")) {
-            throw new IllegalArgumentException("잘못된 입력입니다. 이와 같은 형태로 작성해주세요.(ex. 1, 2, 3, 4, 5, 6)");
-        }
 
-        if (!input.contains(",")) {
-            throw new IllegalArgumentException("구분자(,)를 활용해주세요! (ex. 1, 2, 3, 4, 5, 6)");
-        }
-
-        return Arrays.stream(input.split(","))
-                .map(LottoNumber::new)
-                .toList();
-    }
 
     public long getMatchCount(LottoNumbers winnerNumbers) {
         return winnerNumbers.getMatchCount(lottoNumbers);

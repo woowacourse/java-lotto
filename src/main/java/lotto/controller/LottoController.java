@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
@@ -57,8 +56,7 @@ public class LottoController {
     }
 
     private WinnerLotto readWinnerNumber(String input) {
-        List<LottoNumber> winnerNumbersInput = Lotto.toLottoNumberList(input);
-        LottoNumbers winnerNumbers = LottoNumbers.from(winnerNumbersInput);
+        LottoNumbers winnerNumbers = LottoNumbers.from(input);
 
         return readBonusNumber(winnerNumbers);
     }

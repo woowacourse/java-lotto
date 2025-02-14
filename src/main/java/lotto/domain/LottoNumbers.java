@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.common.Constants.LOTTO_NUM_SIZE;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -16,6 +17,21 @@ public class LottoNumbers {
 
     public static LottoNumbers from(List<LottoNumber> lottoNumbers) {
         return new LottoNumbers(lottoNumbers);
+    }
+
+
+    public static LottoNumbers from(String input) {
+        if (input == null || input.isBlank() || input.endsWith(", ")) {
+            throw new IllegalArgumentException("잘못된 입력입니다. 이와 같은 형태로 작성해주세요.(ex. 1, 2, 3, 4, 5, 6)");
+        }
+
+        if (!input.contains(",")) {
+            throw new IllegalArgumentException("구분자(,)를 활용해주세요! (ex. 1, 2, 3, 4, 5, 6)");
+        }
+
+        return new LottoNumbers(Arrays.stream(input.split(","))
+                .map(LottoNumber::new)
+                .toList());
     }
 
     public boolean contains(LottoNumber lottoNumber) {

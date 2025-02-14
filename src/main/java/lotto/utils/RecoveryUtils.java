@@ -10,13 +10,11 @@ public final class RecoveryUtils {
     }
 
     public static <T, R> R executeWithRetry(Supplier<T> inputSupplier, Function<T, R> processFunction) {
-        while (true) {
-            try {
-                return processFunction.apply(inputSupplier.get());
-            } catch (IllegalArgumentException e) {
-                OutputView.printError(e);
-
-            }
+        try {
+            return processFunction.apply(inputSupplier.get());
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e);
+            return executeWithRetry(inputSupplier, processFunction);
         }
     }
 
