@@ -1,14 +1,12 @@
-package service;
+package model.lotto;
 
 import java.util.Collections;
 import java.util.List;
-import model.lotto.Lotto;
-import model.lotto.RandomNumberGenerator;
 
-public class LottoMaker {
+public class LottoMachine {
     private final RandomNumberGenerator randomNumberGenerator;
 
-    public LottoMaker(RandomNumberGenerator randomNumberGenerator) {
+    public LottoMachine(RandomNumberGenerator randomNumberGenerator) {
         this.randomNumberGenerator = randomNumberGenerator;
     }
 

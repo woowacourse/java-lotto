@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.function.Supplier;
 import model.LottoWinningNumbers;
 import model.OwnedLotto;
-import model.PrizeResult;
 import model.lotto.Lotto;
-import service.Judgement;
-import service.LottoMaker;
+import model.lotto.LottoMachine;
+import model.result.PrizeResult;
+import model.result.discriminator;
 import service.parser.BonusNumberParser;
 import service.parser.BudgetParser;
 import service.parser.WinningNumberParser;
@@ -18,12 +18,12 @@ import view.OutputView;
 public class Controller {
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoMaker lottoMaker;
+    private final LottoMachine lottoMachine;
 
-    public Controller(InputView inputView, OutputView outputView, LottoMaker lottoMaker) {
+    public Controller(InputView inputView, OutputView outputView, LottoMachine lottoMachine) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoMaker = lottoMaker;
+        this.lottoMachine = lottoMachine;
     }
 
     public void start() {
@@ -35,14 +35,14 @@ public class Controller {
         List<Integer> winningNumbers = inputResponseForWinningNumber();
         int bonusNumber = inputResponseForBonusNumber(winningNumbers);
 
-        PrizeResult prizeResult = Judgement.judge(ownedLotto, new LottoWinningNumbers(winningNumbers, bonusNumber));
+        PrizeResult prizeResult = discriminator.judge(ownedLotto, new LottoWinningNumbers(winningNumbers, bonusNumber));
         outputView.displayPrizeSummary(prizeResult);
     }
 
     private OwnedLotto buyLotto(int count) {
         ArrayList<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(lottoMaker.generateLotto());
+            lottos.add(lottoMachine.generateLotto());
         }
 
         return new OwnedLotto(lottos);

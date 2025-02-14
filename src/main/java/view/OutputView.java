@@ -1,7 +1,7 @@
 package view;
 
 import model.OwnedLotto;
-import model.PrizeResult;
+import model.result.PrizeResult;
 
 public class OutputView {
     public static final String SHOW_BUY_COUNT = "%d개를 구매했습니다.\n";

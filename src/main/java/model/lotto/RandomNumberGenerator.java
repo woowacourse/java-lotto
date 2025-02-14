@@ -4,7 +4,6 @@ import static common.constant.NumberConstants.LOTTO_NUMBER_END;
 import static common.constant.NumberConstants.LOTTO_NUMBER_START;
 import static common.constant.NumberConstants.WINNING_NUMBER_COUNT;
 
-import common.constant.NumberConstants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

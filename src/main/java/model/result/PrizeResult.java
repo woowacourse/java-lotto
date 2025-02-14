@@ -1,6 +1,7 @@
-package model;
+package model.result;
 
-import common.constant.NumberConstants;
+import static common.constant.NumberConstants.LOTTO_PRICE;
+
 import java.util.Arrays;
 import java.util.EnumMap;
 
@@ -22,7 +23,7 @@ public class PrizeResult {
     }
 
     public double calculateProfit() {
-        int money = lottoCount * NumberConstants.LOTTO_PRICE;
+        int money = lottoCount * LOTTO_PRICE;
         return (double) calculatePrizeSum() / money;
     }
 

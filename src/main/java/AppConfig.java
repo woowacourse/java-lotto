@@ -1,6 +1,6 @@
 import controller.Controller;
+import model.lotto.LottoMachine;
 import model.lotto.RandomNumberGenerator;
-import service.LottoMaker;
 import view.InputView;
 import view.OutputView;
 
@@ -8,7 +8,7 @@ public class AppConfig {
     private Controller controller;
     private InputView inputView;
     private OutputView outputView;
-    private LottoMaker lottoMaker;
+    private LottoMachine lottoMachine;
     private RandomNumberGenerator randomNumberGenerator;
 
     public Controller controller() {
@@ -32,11 +32,11 @@ public class AppConfig {
         return this.outputView;
     }
 
-    private LottoMaker lottoMaker() {
-        if (this.lottoMaker == null) {
-            this.lottoMaker = new LottoMaker(lottoNumberGenerator());
+    private LottoMachine lottoMaker() {
+        if (this.lottoMachine == null) {
+            this.lottoMachine = new LottoMachine(lottoNumberGenerator());
         }
-        return this.lottoMaker;
+        return this.lottoMachine;
     }
 
     private RandomNumberGenerator lottoNumberGenerator() {

@@ -1,14 +1,12 @@
-package service;
+package model.result;
 
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Set;
 import model.LottoWinningNumbers;
 import model.OwnedLotto;
-import model.PrizeResult;
-import model.Rank;
 
-public class Judgement {
+public class discriminator {
 
     public static PrizeResult judge(OwnedLotto ownedLotto, LottoWinningNumbers lottoWinningNumbers) {
         EnumMap<Rank, Integer> prizeCounts = new EnumMap<>(Rank.class);
@@ -20,7 +18,7 @@ public class Judgement {
             boolean bonus = ownedLotto.containByIndex(idx, lottoWinningNumbers.getBonusNumber());
             int match = lottoNumbers.size();
 
-            Rank result = Rank.judge(match, bonus);
+            Rank result = Rank.judgeRank(match, bonus);
             prizeCounts.put(result, prizeCounts.getOrDefault(result, 0) + 1);
         }
 

@@ -28,11 +28,4 @@ public class OwnedLotto {
     public int size() {
         return lottos.size();
     }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        lottos.forEach(lotto -> sb.append(lotto.getNumbers()).append("\n"));
-        return sb.toString();
-    }
 }
