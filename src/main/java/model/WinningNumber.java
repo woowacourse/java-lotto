@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumber {
-    private static final String DELIMITER = ", ";
+    private static final String DELIMITER = ",";
 
     private final List<Integer> numbers = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public class WinningNumber {
 
     private void validateNumber(String winningNumber) {
         try {
-            int number = Integer.parseInt(winningNumber);
+            int number = Integer.parseInt(winningNumber.trim());
             if(number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
                 throw new IllegalArgumentException("당첨 번호는 1~45 사이의 정수로 입력해주세요.");
             }
