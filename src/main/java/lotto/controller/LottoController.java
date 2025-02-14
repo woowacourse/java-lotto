@@ -36,8 +36,7 @@ public class LottoController {
     }
 
     private List<Lotto> purchaseLotto(int purchaseAmount) {
-        Cashier cashier = new Cashier();
-        List<Lotto> lottos = cashier.payForLotto(purchaseAmount);
+        List<Lotto> lottos = Cashier.payForLotto(purchaseAmount);
         outputView.printLottos(convertLottoDtos(lottos));
         return lottos;
     }
