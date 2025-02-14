@@ -12,14 +12,9 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos() {
-        lottos = new ArrayList<>();
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
     }
-
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
-    }
-
 
     public GetLottosDto getLottosDto() {
         List<GetLottoDto> getLottoDtos = new ArrayList<>();
