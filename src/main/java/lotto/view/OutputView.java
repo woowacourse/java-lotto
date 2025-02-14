@@ -8,8 +8,8 @@ import java.util.List;
 
 public class OutputView {
     private static final int STANDARD_RATE = 1;
-    private OutputView() {
-    }
+
+    private OutputView() {}
 
     public static void printLottos(final List<Lotto> lottos) {
         System.out.println("%d개를 구매했습니다.".formatted(lottos.size()));
