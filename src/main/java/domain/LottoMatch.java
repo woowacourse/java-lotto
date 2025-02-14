@@ -21,8 +21,10 @@ public enum LottoMatch {
   }
 
   public static LottoMatch calculateLotto(int winningCounter, boolean bonusChecker) {
-    return Arrays.stream(values()).filter(lottoMatch -> lottoMatch.winningCounter == winningCounter
-        && lottoMatch.bonusChecker == bonusChecker).findFirst().orElse(DEFUALT_MATCH);
+    return Arrays.stream(values())
+            .filter(lottoMatch -> lottoMatch.winningCounter == winningCounter && lottoMatch.bonusChecker == bonusChecker)
+            .findFirst()
+            .orElse(DEFUALT_MATCH);
   }
 
   @Override
