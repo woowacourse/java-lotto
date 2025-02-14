@@ -26,11 +26,13 @@ public class StatisticsService {
         }
     }
 
-    public Profit calculateProfit(WinningStatistics winningStatistics, int lottoTicketNumber) {
+    public Profit calculateProfit(WinningStatistics winningStatistics) {
         long sum = 0;
+        long lottoTicketNumber = 0;
         Map<LottoPrize, Integer> prizeCounter = winningStatistics.getPrizeCounter();
         for (LottoPrize lottoPrize : LottoPrize.values()) {
             sum += (long) prizeCounter.get(lottoPrize) * lottoPrize.getMoney();
+            lottoTicketNumber += prizeCounter.get(lottoPrize);
         }
         return new Profit((double) sum / (lottoTicketNumber * LottoTicket.LOTTO_PRICE));
     }

@@ -2,6 +2,7 @@ package domain;
 
 import static domain.LottoTicket.LOTTO_MAX_NUMBER;
 import static domain.LottoTicket.LOTTO_MIN_NUMBER;
+import static domain.LottoTicket.LOTTO_PRICE;
 import static domain.LottoTicket.LOTTO_SIZE;
 
 import java.util.ArrayList;
@@ -18,16 +19,16 @@ public class LottoMachine {
     }
 
     private int extractUniqueLottoNumber(IntegerGenerator generator, List<Integer> lottoNumbers) {
-        int number = -1;
+        int number;
         do {
             number = generator.generateInteger(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER);
         } while (lottoNumbers.contains(number));
         return number;
     }
 
-    public List<LottoTicket> generateLottoTickets(int lottoTicketNumber, IntegerGenerator generator) {
+    public List<LottoTicket> generateLottoTickets(int purchaseAmount, IntegerGenerator generator) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < lottoTicketNumber; i++) {
+        for (int i = 0; i < purchaseAmount / LOTTO_PRICE; i++) {
             LottoTicket lottoTicket = generateLottoTicket(generator);
             lottoTickets.add(lottoTicket);
         }
