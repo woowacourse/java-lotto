@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import lotto.util.RandomNumberGenerator;
+import lotto.util.LottoNumberGenerator;
 
 public class LottoMachine {
 
-    private final RandomNumberGenerator randomUNumberGenerator;
+    private final LottoNumberGenerator lottoNumberGenerator;
     private final List<Set<Integer>> lottoTickets;
 
-    public LottoMachine(RandomNumberGenerator randomUNumberGenerator, LottoMoney lottoMoney) {
-        this.randomUNumberGenerator = randomUNumberGenerator;
+    public LottoMachine(LottoNumberGenerator lottoNumberGenerator, LottoMoney lottoMoney) {
+        this.lottoNumberGenerator = lottoNumberGenerator;
         this.lottoTickets = generateLottoTickets(lottoMoney);
     }
 
@@ -40,7 +40,7 @@ public class LottoMachine {
     }
 
     private void addLottoTicketNumber(Set<Integer> ticket) {
-        int number = randomUNumberGenerator.generate(LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE);
+        int number = lottoNumberGenerator.generate(LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE);
         ticket.add(number);
     }
 
