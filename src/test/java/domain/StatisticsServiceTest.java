@@ -2,60 +2,61 @@ package domain;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class StatisticsServiceTest {
-    private StatisticsService statisticsService = new StatisticsService();
+    private final StatisticsService statisticsService = new StatisticsService();
 
-    @DisplayName("매칭된 번호 개수 계산 테스트")
-    @Test
-    void 당첨번호_매칭_개수_계산_테스트() {
-        // given
-        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 8, 9);
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        int expected = 4;
-
-        // when & then
-        int actual = lottoTicket.countMatchedNumbers(winningNumbers);
-        Assertions.assertThat(actual).isEqualTo(expected);
+    public static Stream<Arguments> calculateCountMatchedNumbersTestCases() {
+        return Stream.of(
+                Arguments.arguments(new LottoTicket(List.of(11, 12, 13, 14, 15, 16)), List.of(1, 2, 3, 4, 5, 6), 0),
+                Arguments.arguments(new LottoTicket(List.of(1, 12, 13, 14, 15, 16)), List.of(1, 2, 3, 4, 5, 6), 1),
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 13, 14, 15, 16)), List.of(1, 2, 3, 4, 5, 6), 2),
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 14, 15, 16)), List.of(1, 2, 3, 4, 5, 6), 3),
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 15, 16)), List.of(1, 2, 3, 4, 5, 6), 4),
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 16)), List.of(1, 2, 3, 4, 5, 6), 5),
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), List.of(1, 2, 3, 4, 5, 6), 6)
+        );
     }
 
-    @DisplayName("보너스 번호가 포함되지 않았을 때 매칭 테스트")
-    @Test
-    void 보너스_번호가_포함되지_않았을_때_매칭_테스트() {
-        // given
-        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 7;
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-
-        // when & then
-        boolean actual = lottoTicket.hasBonusNumber(bonusNumber);
-        Assertions.assertThat(actual).isFalse();
+    public static Stream<Arguments> hasBonusNumberTestCases() {
+        return Stream.of(
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 1, true),
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 2, true),
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 3, true),
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 7, false)
+        );
     }
 
-    @DisplayName("2등 로또일 때 매칭 테스트")
-    @Test
-    void 로또_2등_테스트() {
-        // given
-        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 9);
-        int bonusNumber = 6;
-
+    @DisplayName("매칭된 번호 개수 계산이 올바르게 되는지 테스트")
+    @ParameterizedTest
+    @MethodSource("calculateCountMatchedNumbersTestCases")
+    void 당첨번호_매칭_개수_계산_테스트(LottoTicket lottoTicket, List<Integer> winningNumbers, int expected) {
         // when
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        int countMatchedNumbers = lottoTicket.countMatchedNumbers(winningNumbers);
-        boolean hasBonusNumber = lottoTicket.hasBonusNumber(bonusNumber);
-        LottoPrize actual = LottoPrize.getLottoPrize(countMatchedNumbers, hasBonusNumber);
-        LottoPrize expected = LottoPrize.SECOND;
+        int actual = lottoTicket.countMatchedNumbers(winningNumbers);
 
         // then
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
-    @DisplayName("당첨된 로또로 통계 계산 테스트")
+    @DisplayName("보너스 번호 매칭 여부를 제대로 계산하는지 테스트")
+    @ParameterizedTest
+    @MethodSource("hasBonusNumberTestCases")
+    void 보너스_번호_매칭_여부_계산_테스트(LottoTicket lottoTicket, int bonusNumber, boolean expected) {
+        // when
+        boolean actual = lottoTicket.hasBonusNumber(bonusNumber);
+
+        // then
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("당첨된 로또들로 통계 계산 테스트")
     @Test
     void 당첨_통계_계산_테스트() {
         //given
