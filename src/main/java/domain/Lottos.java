@@ -23,7 +23,7 @@ public class Lottos {
             Rank rank = calculateRank(winningLotto, purchaseLotto);
             winningResult.put(rank, winningResult.getOrDefault(rank, 0) + 1);
         }
-        Money purchaseLottoMoney = LottoStore.LOTTO_PRICE.multiply(lottos.size());
+        Money purchaseLottoMoney = new Money(LottoStore.LOTTO_PRICE).multiply(lottos.size());
         return new WinningResult(purchaseLottoMoney, winningResult);
     }
 

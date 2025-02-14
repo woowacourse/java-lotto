@@ -1,6 +1,7 @@
 package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ class MoneyTest {
         Money resultMoney = money1.minus(money2);
 
         //then
-        assertThat(resultMoney).isEqualTo(new Money(100));
+        assertThat(resultMoney).extracting("amount").isEqualTo(100);
     }
 
     @Test
@@ -57,7 +58,7 @@ class MoneyTest {
         Money resultMoney = money1.sum(money2);
 
         //then
-        assertThat(resultMoney).isEqualTo(new Money(1900));
+        assertThat(resultMoney).extracting("amount").isEqualTo(1900);
     }
 
     @Test
@@ -69,7 +70,7 @@ class MoneyTest {
         Money resultMoney = money.multiply(3);
 
         //then
-        assertThat(resultMoney).isEqualTo(new Money(3000));
+        assertThat(resultMoney).extracting("amount").isEqualTo(3000);
     }
 
     @Test
@@ -83,5 +84,18 @@ class MoneyTest {
 
         //then
         assertThat(result).isEqualTo(2.00);
+    }
+
+    @Test
+    void 구매금액이_로또가격보다_적을_경우_예외를_발생시킨다() {
+        assertThatThrownBy(() -> new Money("999"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구매 금액은 로또 가격보다 적을 수 없습니다.");
+    }
+
+    @Test
+    void 구매금액이_로또가격보다_많거나_같은_경우_예외를_발생시키지_않는다() {
+        assertThatCode(() -> new Money("1000"))
+                .doesNotThrowAnyException();
     }
 }

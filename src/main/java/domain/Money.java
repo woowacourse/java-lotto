@@ -1,20 +1,28 @@
 package domain;
 
-public record Money(
-        int amount
-) {
+public class Money {
+
+    private final int amount;
+
+    public Money(int amount) {
+        validateNegative(amount);
+        this.amount = amount;
+    }
 
     public Money(String rawAmount) {
-        this(Integer.parseInt(rawAmount));
+        validatePurchaseAmount(Integer.parseInt(rawAmount));
+        this.amount = Integer.parseInt(rawAmount);
     }
 
-    public Money {
-        validateNegative(amount);
-    }
-
-    public void validateNegative(int amount) {
+    private void validateNegative(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("돈은 음수가 될 수 없습니다.");
+        }
+    }
+
+    private void validatePurchaseAmount(int amount) {
+        if (amount < LottoStore.LOTTO_PRICE) {
+            throw new IllegalArgumentException("구매 금액은 로또 가격보다 적을 수 없습니다.");
         }
     }
 

@@ -35,7 +35,7 @@ class RankTest {
         Money money = Rank.FIFTH.calculateWinningMoney(count);
 
         //then
-        Assertions.assertThat(money).isEqualTo(new Money(15000));
+        Assertions.assertThat(money).extracting("amount").isEqualTo(15000);
     }
 
 }

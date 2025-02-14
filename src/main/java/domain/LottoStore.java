@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
-    public static final Money LOTTO_PRICE = new Money(1000);
+    public static final int LOTTO_PRICE = 1000;
 
     private final LottoMachine lottoMachine;
 
@@ -14,8 +14,9 @@ public class LottoStore {
 
     public Lottos buy(Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        while (money.isGreaterOrEqualThan(LOTTO_PRICE)) {
-            money = money.minus(LOTTO_PRICE);
+        Money lottoPrice = new Money(LOTTO_PRICE);
+        while (money.isGreaterOrEqualThan(lottoPrice)) {
+            money = money.minus(lottoPrice);
             lottos.add(lottoMachine.createLotto());
         }
 
