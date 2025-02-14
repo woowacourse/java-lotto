@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.RandomNumberGenerator;
 import lotto.model.ReturnRatioGenerator;
@@ -45,7 +46,7 @@ public class LottoController {
     private WinningLotto createWinningLotto() {
         String winningLottoNumber = inputView.readWinningLotto();
         String bonusNumber = inputView.readBonusNumber();
-        return new WinningLotto(new Lotto(toNumbers(winningLottoNumber)), Integer.parseInt(bonusNumber));
+        return new WinningLotto(new Lotto(toLottoNumbers(winningLottoNumber)), new LottoNumber(Integer.parseInt(bonusNumber)));
     }
 
     private void issueLottoTickets(final String money) {
@@ -63,27 +64,32 @@ public class LottoController {
         List<List<Integer>> issuedLottoNumbers = lottos.getLottos()
                 .stream()
                 .map(Lotto::getNumbers)
+                .map(lottoNumbers -> lottoNumbers.stream()
+                        .map(LottoNumber::getNumber)
+                        .toList())
                 .toList();
+
         outputView.printIssuedLottos(issuedLottoNumbers);
     }
 
-    private List<Integer> toNumbers(final String winningLottoNumber) {
+    private List<LottoNumber> toLottoNumbers(final String winningLottoNumber) {
         return Arrays.stream(winningLottoNumber.split(","))
                 .map(String::strip)
                 .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .toList();
     }
 
     private void addLotto() {
-        List<Integer> randomNumbers = RandomNumberGenerator.generate();
-        while (hasDuplication(randomNumbers)) {
-            randomNumbers = RandomNumberGenerator.generate();
-        }
+        List<LottoNumber> randomNumbers = RandomNumberGenerator.generate();
+//        while (hasDuplication(randomNumbers)) {
+//            randomNumbers = RandomNumberGenerator.generate();
+//        }
         lottos.add(new Lotto(randomNumbers));
     }
 
-    private boolean hasDuplication(final List<Integer> randomNumbers) {
-        HashSet<Integer> uniqueNumbers = new HashSet<>(randomNumbers);
+    private boolean hasDuplication(final List<LottoNumber> randomNumbers) {
+        HashSet<LottoNumber> uniqueNumbers = new HashSet<>(randomNumbers);
         return uniqueNumbers.size() != randomNumbers.size();
     }
 
