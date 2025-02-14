@@ -17,9 +17,9 @@ class InputValidatorTest {
         inputValidator = new InputValidator();
     }
 
-    @DisplayName("구매금액이 1,000원 단위 숫자가 아니라면 예외를 발생시킨다")
+    @DisplayName("구매금액이 숫자가 아니라면 예외를 발생시킨다")
     @ParameterizedTest
-    @ValueSource(strings = {"1100", "900", "1000원"})
+    @ValueSource(strings = {"abcd", "", "1000원", " "})
     void purchaseAmountUnitTest(String purchaseAmount) {
         assertThatThrownBy(() -> inputValidator.validatePurchaseAmount(purchaseAmount))
                 .isInstanceOf(IllegalArgumentException.class);
