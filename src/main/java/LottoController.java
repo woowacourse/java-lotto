@@ -38,7 +38,9 @@ public class LottoController {
     private Lottos printLottos(LottoMachine lottoMachine) {
         Lottos lottos = lottoMachine.generateLottos();
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(lotto.toString());
+            String formattedNumbers = "[" + String.join(", ",
+                    lotto.getNumbers().stream().map(String::valueOf).toList()) + "]";
+            System.out.println(formattedNumbers);
         }
         System.out.println();
         return lottos;

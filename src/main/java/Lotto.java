@@ -35,9 +35,4 @@ public class Lotto {
         }
         throw new IllegalArgumentException();
     }
-
-    @Override
-    public String toString() {
-        return "[" + String.join(", ", numbers.stream().map(String::valueOf).toList()) + "]";
-    }
 }
