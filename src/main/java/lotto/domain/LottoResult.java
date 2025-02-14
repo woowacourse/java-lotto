@@ -9,7 +9,7 @@ public class LottoResult {
     private Map<LottoPrize, Integer> lottoResult;
     private Double lottoProfitRate;
 
-    public LottoResult(WinningLotto winningLotto, List<Lotto> lottoTickets) {
+    public LottoResult() {
         initialize();
     }
 

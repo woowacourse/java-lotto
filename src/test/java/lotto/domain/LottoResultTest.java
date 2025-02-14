@@ -18,7 +18,7 @@ public class LottoResultTest {
                 new Lotto(List.of(1, 2, 3, 4, 5, 7)
         ));
 
-        LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
+        LottoResult lottoResult = new LottoResult();
         lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
 
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
@@ -40,7 +40,7 @@ public class LottoResultTest {
                 new Lotto(List.of(1, 2, 3, 4, 5, 8)
         ));
 
-        LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
+        LottoResult lottoResult = new LottoResult();
         lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
 
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
@@ -62,7 +62,7 @@ public class LottoResultTest {
                 new Lotto(List.of(1, 2, 8, 9, 10, 11)
         ));
 
-        LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
+        LottoResult lottoResult = new LottoResult();
         lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
 
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
@@ -85,8 +85,8 @@ public class LottoResultTest {
         ));
 
         LottoMoney lottoMoney = new LottoMoney("10000");
+        LottoResult lottoResult = new LottoResult();
 
-        LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
         lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
         lottoResult.calculateLottoProfitRate(lottoMoney);
 
