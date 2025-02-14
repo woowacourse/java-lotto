@@ -24,8 +24,7 @@ public class Lotto {
     }
 
     boolean isDuplicateNumber(final LottoNumber inputNumber) {
-        return numbers.stream()
-                .anyMatch(number -> number.equals(inputNumber));
+        return numbers.contains(inputNumber);
     }
 
     private void validate(final List<Integer> values) {
