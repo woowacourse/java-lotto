@@ -22,11 +22,15 @@ public class LottoController {
     }
 
     public void run() {
-        Money money = inputView.inputMoney();
+        Money money = operateMoney();
         Lottos lottos = purchaseLotto(money);
         WinningLotto winningLotto = operateWinningLotto();
         operateStatistics(money, lottos, winningLotto);
         inputView.closeScanner();
+    }
+
+    private Money operateMoney() {
+        return new Money(inputView.inputMoney());
     }
 
     private Lottos purchaseLotto(Money money) {
