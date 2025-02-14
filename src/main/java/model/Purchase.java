@@ -1,15 +1,15 @@
 package model;
 
-import constant.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Purchase {
+    private static final int LOTTO_PRICE = 1000;
     private final List<LottoNumbers> lottos = new ArrayList<>();
     private final Integer purchaseAmount;
 
     public Purchase(Integer purchaseAmount) {
-        Integer purchaseCount = purchaseAmount / Constants.LOTTO_PRICE;
+        Integer purchaseCount = purchaseAmount / LOTTO_PRICE;
         for (int i = 0; i < purchaseCount; i++) {
             lottos.add(new LottoNumbers());
         }
