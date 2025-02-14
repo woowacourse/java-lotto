@@ -7,7 +7,7 @@ import lotto.exception.LottoException;
 
 public class AmountPaid {
 
-    private final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
     private final int amount;
 
     public AmountPaid(int amount) {
