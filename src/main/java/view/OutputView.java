@@ -12,15 +12,15 @@ import static view.Output.THIRD_MESSAGE;
 
 import domain.Amount;
 import domain.Rank;
+import domain.dto.AmountDto;
 import domain.dto.LottoDto;
 import domain.dto.LottosDto;
 import domain.dto.ResultDto;
 
 public class OutputView {
 
-    // todo : amount dto 변환
-    public void printAmount(Amount amount) {
-        System.out.printf(PURCHASE_MESSAGE.getMessage(), amount.getAmount());
+    public void printAmount(AmountDto amountDto) {
+        System.out.printf(PURCHASE_MESSAGE.getMessage(), amountDto.amount());
     }
 
     public void printLottos(LottosDto lottosDto) {

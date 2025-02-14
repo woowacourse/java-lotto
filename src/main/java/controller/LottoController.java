@@ -3,6 +3,7 @@ package controller;
 import domain.Amount;
 import domain.Lottos;
 import domain.Rank;
+import domain.dto.AmountDto;
 import domain.dto.LottosDto;
 import global.factory.LottosFactory;
 import domain.WinningLotto;
@@ -32,7 +33,7 @@ public class LottoController {
     private Amount inputAmount() {
         int price = inputView.inputPrice();
         Amount amount = new Amount(price);
-        outputView.printAmount(amount);
+        outputView.printAmount(new AmountDto(amount));
 
         return amount;
     }
