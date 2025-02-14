@@ -49,7 +49,7 @@ public class LottoController {
     }
 
     private Lottos buyLotto(int count) {
-        ArrayList<Lotto> lottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(lottoMaker.createLotto());
         }
