@@ -1,7 +1,7 @@
-package global.factory;
+package domain.factory;
 
 import domain.Lotto;
-import global.generator.Generator;
+import domain.generator.Generator;
 
 public class LottoFactory {
     private final Generator generator;
@@ -10,7 +10,7 @@ public class LottoFactory {
         this.generator = generator;
     }
 
-    public Lotto from() {
+    public Lotto generate() {
         return new Lotto(generator.generate());
     }
 

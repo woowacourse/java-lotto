@@ -1,4 +1,4 @@
-import global.generator.Generator;
+import domain.generator.Generator;
 import java.util.List;
 
 public class fakeGenerator implements Generator {
