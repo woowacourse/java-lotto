@@ -6,17 +6,22 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class Profit {
-    Map<Rank, Integer> rankCounts;
+
+    private static final int DEFAULT_INCREMENT = 1;
+    private static final int SCALE_VALUE = 2;
+    private static final int INIT_VALUE = 0;
+
+    private final Map<Rank, Integer> rankCounts;
 
     public Profit() {
         this.rankCounts = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
-            rankCounts.put(rank, 0);
+            rankCounts.put(rank, INIT_VALUE);
         }
     }
 
     public void incrementCount(Rank key) {
-        rankCounts.merge(key, 1, Integer::sum);
+        rankCounts.merge(key, DEFAULT_INCREMENT, Integer::sum);
     }
 
     private long calculateTotalProfit() {
@@ -26,10 +31,10 @@ public class Profit {
     }
 
     public String calculateAverageProfitRate(Money money) {
-        final int amount = money.getAmount();
+        int amount = money.getAmount();
         long totalProfit = calculateTotalProfit();
         return new BigDecimal(totalProfit)
-                .divide(new BigDecimal(amount), 2, RoundingMode.HALF_UP).toString();
+                .divide(new BigDecimal(amount), SCALE_VALUE, RoundingMode.HALF_UP).toString();
     }
 
     public Map<Rank, Integer> getRankCounts() {
