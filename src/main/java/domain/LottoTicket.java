@@ -19,13 +19,13 @@ public class LottoTicket {
     }
 
     private void validateLottoSize(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
     }
 
     private void validateLottoNumberRange(Integer number) {
-        if (number < 1 || number > 45) {
+        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1 이상 45 이하이다.");
         }
     }
