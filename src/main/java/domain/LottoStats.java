@@ -1,6 +1,5 @@
 package domain;
 
-
 import java.util.Map;
 import java.util.TreeMap;
 
