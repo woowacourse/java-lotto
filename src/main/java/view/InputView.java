@@ -1,5 +1,7 @@
 package view;
 
+import static view.InputMessage.*;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -11,17 +13,17 @@ public class InputView {
     }
 
     public String inputPrice() {
-        System.out.println(Input.PRICE.getMessage());
+        System.out.println(PRICE);
         return sc.nextLine();
     }
 
     public String inputWinningLotto() {
-        System.out.println(Input.WINNING_LOTTO.getMessage());
+        System.out.println(WINNING_LOTTO);
         return sc.nextLine();
     }
 
     public String inputBonusLotto() {
-        System.out.println(Input.BONUS.getMessage());
+        System.out.println(BONUS);
         return sc.nextLine();
     }
 }
