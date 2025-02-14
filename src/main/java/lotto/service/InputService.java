@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.constant.Prompt;
 import lotto.domain.Lotto;
+import lotto.vaildator.CommonValidator;
 import lotto.vaildator.InputValidator;
-import lotto.vaildator.LogicValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -44,7 +44,7 @@ public class InputService {
         outputView.printBlankLine();
         InputValidator.validateNumberFormat(content);
         int bonusNumber = Integer.parseInt(content);
-        LogicValidator.validateRange(bonusNumber, Lotto.MIN_LOTTO_NUMBER, Lotto.MAX_LOTTO_NUMBER);
+        CommonValidator.validateRange(bonusNumber, Lotto.MIN_LOTTO_NUMBER, Lotto.MAX_LOTTO_NUMBER);
         InputValidator.validateBonusNumber(winningLotto, bonusNumber);
         return bonusNumber;
     }

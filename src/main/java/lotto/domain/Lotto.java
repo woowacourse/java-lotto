@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import lotto.vaildator.LogicValidator;
+import lotto.vaildator.CommonValidator;
 
 public class Lotto {
 
@@ -13,9 +13,9 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        LogicValidator.validateDuplication(numbers);
-        LogicValidator.validateRange(numbers, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
-        LogicValidator.validateSize(numbers, LOTTO_NUMBER_COUNT);
+        CommonValidator.validateDuplication(numbers);
+        CommonValidator.validateRange(numbers, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+        CommonValidator.validateSize(numbers, LOTTO_NUMBER_COUNT);
         this.numbers = numbers.stream().sorted().toList();
     }
 

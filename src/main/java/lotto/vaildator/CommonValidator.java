@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 import lotto.constant.ExceptionMessage;
 
-public class LogicValidator {
+public class CommonValidator {
 
     public static void validateDuplication(List<Integer> numbers) {
         Set<Integer> notDuplicatedNumbers = new HashSet<>(numbers);
