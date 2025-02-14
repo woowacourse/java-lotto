@@ -10,9 +10,9 @@ public class InputView {
         sc = new Scanner(System.in);
     }
 
-    public String inputPrice() {
+    public int inputPrice() {
         System.out.println(Input.PRICE.getMessage());
-        return sc.nextLine();
+        return sc.nextInt();
     }
 
     public String inputWinningLotto() {

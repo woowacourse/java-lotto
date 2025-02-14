@@ -27,8 +27,9 @@ public class LottoController {
     }
 
     private Amount inputAmount() {
-        String price = inputView.inputPrice();
-        Amount amount = new Amount(price);
+        int price = inputView.inputPrice();
+        String price2 = "10000";
+        Amount amount = new Amount(price2);
         outputView.printAmount(amount);
         return amount;
     }
@@ -51,6 +52,4 @@ public class LottoController {
         GetResultDto lottosResult = lottos.getResult(winningLotto, amount);
         outputView.printWinningStatistic(lottosResult);
     }
-
-
 }

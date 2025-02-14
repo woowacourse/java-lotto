@@ -49,7 +49,7 @@ public class Lottos {
         }
 
         for (Lotto lotto : lottos) {
-            Rank matchRank = lotto.countMatchNumbers(winningLotto);
+            Rank matchRank = winningLotto.countMatchNumbers(lotto);
             countRank.put(matchRank, countRank.get(matchRank) + 1);
         }
 

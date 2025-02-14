@@ -12,7 +12,7 @@ public class Lotto {
     public static final String DELIMITER = ",";
     public static final int LOTTO_LENGTH = 6;
 
-    private List<Integer> numbers;
+    protected List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
@@ -27,8 +27,21 @@ public class Lotto {
             validateRange(num);
             numbers.add(num);
         }
-
         validateLottoDuplicate();
+    }
+
+    public GetLottoDto getLottoDto() {
+        return new GetLottoDto(numbers);
+    }
+
+    public boolean isContains(int num) {
+        return numbers.contains(num);
+    }
+
+    public int matchCount(WinningLotto winningLotto) {
+        return (int) numbers.stream()
+                .filter(winningLotto::isContains)
+                .count();
     }
 
     private void validateLottoDuplicate() {
@@ -41,20 +54,6 @@ public class Lotto {
         if(splitNumbers.length != LOTTO_LENGTH) {
             throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }
-    }
-
-    public int validateBonus(String input) {
-        int bonus = validateIsInteger(input);
-        validateRange(bonus);
-        validateBonusDuplicate(bonus);
-        return bonus;
-    }
-
-    private void validateBonusDuplicate(int input) {
-        Integer bonus = Integer.valueOf(input);
-        numbers.stream().filter(number -> number.equals(bonus)).forEach(number -> {
-            throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
-        });
     }
 
     private void validateRange(int num) {
@@ -70,25 +69,4 @@ public class Lotto {
             throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }
     }
-
-    public GetLottoDto getLottoDto() {
-        return new GetLottoDto(numbers);
-    }
-
-    public Rank countMatchNumbers(WinningLotto winningLotto) {
-        int count = (int) numbers.stream()
-                .filter(winningLotto::contains)
-                .count();
-        boolean bonusFlag = false;
-        if (count == 5) {
-            bonusFlag = winningLotto.matchBonus(numbers);
-        }
-        return Rank.matchRank(count, bonusFlag);
-    }
-
-    protected boolean contains(int number) {
-        return numbers.contains(number);
-    }
-
-
 }
