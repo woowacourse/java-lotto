@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
-    public static final Money LOTTO_PRICE = new Money(1000);
+    private static final int LOTTO_PRICE = 1000;
+    public static final Money LOTTO_MONEY = new Money(LOTTO_PRICE);
 
     private final LottoMachine lottoMachine;
 
@@ -13,12 +14,19 @@ public class LottoStore {
     }
 
     public Lottos buy(Money money) {
+        validateMoney(money);
         List<Lotto> lottos = new ArrayList<>();
-        while (money.isGreaterOrEqualThan(LOTTO_PRICE)) {
-            money = money.minus(LOTTO_PRICE);
+        while (money.isGreaterOrEqualThan(LOTTO_MONEY)) {
+            money = money.minus(LOTTO_MONEY);
             lottos.add(lottoMachine.createLotto());
         }
 
         return new Lottos(lottos);
+    }
+
+    private void validateMoney(Money money) {
+        if (money.divide(LOTTO_MONEY) != 0) {
+            throw new IllegalArgumentException("로또를 사기 위해서는 " + LOTTO_PRICE + " 단위여야 합니다.");
+        }
     }
 }

@@ -25,7 +25,7 @@ public class Lottos {
             Rank rank = Rank.findRank(matchCount, isMatchBonusNumber);
             winningResult.put(rank, winningResult.getOrDefault(rank, 0) + 1);
         }
-        Money purchaseLottoMoney = LottoStore.LOTTO_PRICE.multiply(lottos.size());
+        Money purchaseLottoMoney = LottoStore.LOTTO_MONEY.multiply(lottos.size());
         return new WinningResult(purchaseLottoMoney, winningResult);
     }
 }
