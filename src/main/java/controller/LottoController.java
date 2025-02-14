@@ -4,6 +4,9 @@ import domain.Lotto;
 import domain.Rank;
 import domain.Ticket;
 import domain.WinningNumber;
+import domain.dto.LottoResultViewDto;
+import domain.dto.LottosViewDto;
+import domain.dto.TicketViewDto;
 import java.util.List;
 import java.util.Map;
 import service.LottoService;
@@ -33,7 +36,7 @@ public class LottoController {
 
     private Ticket ticketProcess(int purchaseAmount) {
         Ticket ticket = lottoService.makeTicket(purchaseAmount);
-        outputView.printPurchaseResult(ticket);
+        outputView.printPurchaseResult(TicketViewDto.from(ticket));
         return ticket;
     }
 
@@ -42,10 +45,11 @@ public class LottoController {
         outputView.printProfit(calculateRate);
     }
 
-    private Map<Rank, Integer> calculateRankProcess(WinningNumber winningNumber, List<Lotto> lottos) {
+    private Map<Rank, Integer> calculateRankProcess(
+        WinningNumber winningNumber, List<Lotto> lottos) {
         lottoService.calculateRank(winningNumber, lottos);
         Map<Rank, Integer> rankResult = lottoService.getRankResult();
-        outputView.printWinningStatistic(rankResult);
+        outputView.printWinningStatistic(LottoResultViewDto.from(rankResult));
         return rankResult;
     }
 
@@ -59,7 +63,7 @@ public class LottoController {
     private List<Lotto> lottoProcess(Ticket ticket) {
         lottoService.saveLotto(ticket);
         List<Lotto> lottos = lottoService.getLottos();
-        outputView.printLottos(lottos);
+        outputView.printLottos(LottosViewDto.from(lottos));
         return lottos;
     }
 }

@@ -1,8 +1,9 @@
 package view;
 
-import domain.Lotto;
 import domain.Rank;
-import domain.Ticket;
+import domain.dto.LottoResultViewDto;
+import domain.dto.LottosViewDto;
+import domain.dto.TicketViewDto;
 import java.util.List;
 import java.util.Map;
 
@@ -21,24 +22,26 @@ public class OutputView {
         return new OutputView();
     }
 
-    public void printPurchaseResult(Ticket ticket) {
-        System.out.printf(PURCHASE_RESULT, ticket.getQuantity());
+    public void printPurchaseResult(TicketViewDto ticketViewDto) {
+        System.out.printf(PURCHASE_RESULT, ticketViewDto.getTicket());
         changeLine();
     }
 
-    public void printLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto.getNumbers());
+    public void printLottos(LottosViewDto lottosViewDto) {
+        List<List<Integer>> lottos = lottosViewDto.getLottos();
+        for (List<Integer> lotto : lottos) {
+            System.out.println(lotto);
         }
     }
 
-    public void printWinningStatistic(Map<Rank, Integer> result) {
+    public void printWinningStatistic(LottoResultViewDto lottoResultViewDto) {
         printMessage(WINNING_STATISTIC_MESSAGE);
         printMessage(HYPHEN.repeat(9));
-        for (Rank rank : result.keySet()) {
+        Map<Rank, Integer> viewResult = lottoResultViewDto.getViewResult();
+        for (Rank rank : viewResult.keySet()) {
             if (!rank.getDescription().isBlank()) {
                 System.out.print(rank.getDescription() + " " + HYPHEN + " ");
-                System.out.printf(WINNING_RESULT, result.get(rank));
+                System.out.printf(WINNING_RESULT, viewResult.get(rank));
                 changeLine();
             }
         }
@@ -56,6 +59,4 @@ public class OutputView {
     private void changeLine() {
         System.out.println();
     }
-
-
 }

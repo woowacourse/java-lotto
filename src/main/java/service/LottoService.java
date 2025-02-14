@@ -8,6 +8,7 @@ import domain.Profit;
 import domain.Rank;
 import domain.Ticket;
 import domain.WinningNumber;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import repository.LottoRepository;
@@ -47,7 +48,8 @@ public class LottoService {
     }
 
     public Map<Rank, Integer> getRankResult() {
-        return lottoResultRepository.getCalculateResult();
+        Map<Rank, Integer> calculateResult = lottoResultRepository.getCalculateResult();
+        return Collections.unmodifiableMap(calculateResult);
     }
 
     public void saveLotto(Ticket ticket) {
@@ -59,7 +61,8 @@ public class LottoService {
     }
 
     public List<Lotto> getLottos() {
-        return lottoRepository.getLottos();
+        List<Lotto> lottos = lottoRepository.getLottos();
+        return lottos;
     }
 
 }
