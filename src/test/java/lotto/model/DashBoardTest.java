@@ -2,28 +2,27 @@ package lotto.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Set;
 import lotto.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class DashBoardTest {
 
-    @DisplayName("당첨 내역을 기록할 수 있다.")
+    @DisplayName("당첨 결과를 기록하고 순위별 당첨 횟수를 확인할 수 있다.")
     @Test
-    void ok() {
-        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-        Lotto winningLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+    void recordResult() {
+        Lotto lotto = LottoFixtures.createLottoOneToSix();
+        Lotto winningLotto = LottoFixtures.createLottoOneToSix();
         int bonusNumber = 7;
 
         DashBoard dashBoard = new DashBoard();
         dashBoard.recordResult(lotto, winningLotto, bonusNumber);
 
-        assertEquals(1, dashBoard.getRanks().get(Rank.FIRST));
-        assertEquals(0, dashBoard.getRanks().get(Rank.SECOND));
-        assertEquals(0, dashBoard.getRanks().get(Rank.THIRD));
-        assertEquals(0, dashBoard.getRanks().get(Rank.FOURTH));
-        assertEquals(0, dashBoard.getRanks().get(Rank.FIFTH));
-        assertEquals(0, dashBoard.getRanks().get(Rank.NO_PRIZE));
+        assertEquals(1, dashBoard.getRankCount(Rank.FIRST));
+        assertEquals(0, dashBoard.getRankCount(Rank.SECOND));
+        assertEquals(0, dashBoard.getRankCount(Rank.THIRD));
+        assertEquals(0, dashBoard.getRankCount(Rank.FOURTH));
+        assertEquals(0, dashBoard.getRankCount(Rank.FIFTH));
+        assertEquals(0, dashBoard.getRankCount(Rank.NO_PRIZE));
     }
 }
