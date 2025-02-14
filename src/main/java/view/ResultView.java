@@ -7,7 +7,7 @@ import static constant.WinLottoInfo.SECOND;
 import static constant.WinLottoInfo.THIRD;
 
 import constant.OutputMessage;
-import model.Purchase;
+import model.PurchasedLottos;
 import model.Result;
 
 public class ResultView {
@@ -24,8 +24,8 @@ public class ResultView {
                 nullToZero(result.getCount(FIRST)));
     }
 
-    public void printTotalReturn(Result result, Purchase purchase) {
-        System.out.printf(OutputMessage.TOTAL_RETURN, result.totalReturn(purchase.getPurchaseAmount()));
+    public void printTotalReturn(Result result, PurchasedLottos purchasedLottos) {
+        System.out.printf(OutputMessage.TOTAL_RETURN, result.totalReturn(purchasedLottos.getPurchaseAmount()));
     }
 
     private Integer nullToZero(Integer number) {

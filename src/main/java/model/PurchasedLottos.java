@@ -4,12 +4,12 @@ import constant.ErrorMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Purchase {
+public class PurchasedLottos {
     private static final int LOTTO_PRICE = 1000;
     private final List<LottoNumbers> lottos = new ArrayList<>();
     private final Integer purchaseAmount;
 
-    public Purchase(Integer purchaseAmount) {
+    public PurchasedLottos(Integer purchaseAmount) {
         validateDividable(purchaseAmount);
         Integer purchaseCount = purchaseAmount / LOTTO_PRICE;
         for (int i = 0; i < purchaseCount; i++) {

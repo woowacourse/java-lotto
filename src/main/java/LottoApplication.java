@@ -1,7 +1,7 @@
 import controller.PurchaseController;
 import controller.ResultController;
 import controller.WinLottoController;
-import model.Purchase;
+import model.PurchasedLottos;
 import model.WinLotto;
 
 public class LottoApplication {
@@ -14,8 +14,8 @@ public class LottoApplication {
     }
 
     private void run() {
-        Purchase purchase = purchaseController.purchase();
+        PurchasedLottos purchasedLottos = purchaseController.purchase();
         WinLotto winLotto = winLottoController.winLotto();
-        resultController.lottoResult(purchase, winLotto);
+        resultController.lottoResult(purchasedLottos, winLotto);
     }
 }

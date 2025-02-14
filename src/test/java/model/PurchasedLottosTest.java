@@ -7,16 +7,16 @@ import constant.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class PurchaseTest {
+class PurchasedLottosTest {
     @Test
     @DisplayName("로또 구매 개수 테스트")
     public void lottoPurchaseCountTest() {
         // given - 금액이 주어지면
         Integer purchaseAmount = 15000;
         // when
-        Purchase purchase = new Purchase(purchaseAmount);
+        PurchasedLottos purchasedLottos = new PurchasedLottos(purchaseAmount);
         // then
-        assertThat(purchase.size()).isEqualTo(15);
+        assertThat(purchasedLottos.size()).isEqualTo(15);
     }
 
     @Test
@@ -26,7 +26,7 @@ class PurchaseTest {
         Integer purchaseAmount = 1501;
 
         // when & then
-        assertThatThrownBy(() -> new Purchase(purchaseAmount))
+        assertThatThrownBy(() -> new PurchasedLottos(purchaseAmount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.DIVIDABLE_EXCEPTION);
     }
