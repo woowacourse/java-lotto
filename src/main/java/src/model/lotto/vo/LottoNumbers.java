@@ -14,7 +14,7 @@ public class LottoNumbers {
 
     public static LottoNumbers generateFrom(NumberGenerator numberGenerator, int size) {
         return new LottoNumbers(
-                numberGenerator.generate(LottoNumber.MIN_NUMBER_RANGE, LottoNumber.MAX_NUMBER_RANGE, size));
+                numberGenerator.generate(LottoNumber.MIN, LottoNumber.MAX, size));
     }
 
     public List<Integer> getValues() {

@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class WinningLottoNumber {
 
-    protected static final int MIN_NUMBER_RANGE = 1;
-    protected static final int MAX_NUMBER_RANGE = 45;
+    protected static final int MIN = 1;
+    protected static final int MAX = 45;
 
     private final int value;
 
@@ -19,7 +19,7 @@ public class WinningLottoNumber {
     }
 
     private static void validate(final int value) {
-        if (value < MIN_NUMBER_RANGE || value > MAX_NUMBER_RANGE) {
+        if (value < MIN || value > MAX) {
             throw new IllegalArgumentException("당첨 로또 번호는 1부터 45 사이여야 합니다.");
         }
     }
