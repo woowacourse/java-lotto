@@ -3,7 +3,7 @@ package domain;
 import static util.constant.Message.PRICE_NEGATIVE_ERROR;
 import static util.constant.Values.LOTTO_UNIT;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class Money {
 
@@ -24,7 +24,7 @@ public class Money {
     }
   }
 
-  public double calculateProfit(HashMap<LottoMatch, Integer> lottoResult) {
+  public double calculateProfit(Map<LottoMatch, Integer> lottoResult) {
     int sum = 0;
     for (LottoMatch lottoMatch : lottoResult.keySet()) {
       sum += lottoMatch.prize * lottoResult.get(lottoMatch);
