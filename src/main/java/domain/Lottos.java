@@ -32,12 +32,12 @@ public class Lottos {
     public GetResultDto getResult(WinningLotto winningLotto, Amount amount) {
         EnumMap<Rank, Integer> countRank = countMatchNumbers(winningLotto);
 
-        long sum = 0L;
+        long prizeSum = 0L;
         for (Entry<Rank, Integer> rankIntegerEntry : countRank.entrySet()) {
-            sum += Rank.getTotalPrize(rankIntegerEntry.getKey(), rankIntegerEntry.getValue());
+            prizeSum += Rank.calculateTotalPrize(rankIntegerEntry.getKey(), rankIntegerEntry.getValue());
         }
 
-        double profit = amount.calculateProfit(sum);
+        double profit = amount.calculateProfit(prizeSum);
         return new GetResultDto(countRank, profit);
     }
 

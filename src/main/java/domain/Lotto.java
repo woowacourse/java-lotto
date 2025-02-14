@@ -9,8 +9,9 @@ import java.util.List;
 public class Lotto {
     public static final int LOTTO_MIN = 1;
     public static final int LOTTO_MAX = 45;
-    public static final String DELIMITER = ",";
     public static final int LOTTO_LENGTH = 6;
+    public static final int NEED_MATCH_BONUS_COUNT = 5;
+    public static final String DELIMITER = ",";
 
     private final List<Integer> numbers;
 
@@ -18,17 +19,47 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public Lotto(String lotto) {
+    public Lotto(String inputLotto) {
         numbers = new ArrayList<>();
-        String[] splitNumbers = lotto.split(DELIMITER);
+        String[] splitNumbers = inputLotto.split(DELIMITER);
         validateLength(splitNumbers);
+        
         for (String number : splitNumbers) {
-            int num = validateIsInteger(number.trim());
-            validateRange(num);
-            numbers.add(num);
+            int validatedNum = validateIsInteger(number.trim());
+            validateRange(validatedNum);
+            numbers.add(validatedNum);
         }
 
         validateLottoDuplicate();
+    }
+
+    public int validateBonus(String inputBonus) {
+        int bonus = validateIsInteger(inputBonus);
+        validateRange(bonus);
+        validateBonusDuplicate(bonus);
+
+        return bonus;
+    }
+
+    public GetLottoDto getLottoDto() {
+        return new GetLottoDto(numbers);
+    }
+
+    public Rank countMatchNumbers(WinningLotto winningLotto) {
+        int count = (int) numbers.stream()
+                .filter(winningLotto::contains)
+                .count();
+
+        boolean isBonusMatched = false;
+        if (count == NEED_MATCH_BONUS_COUNT) {
+            isBonusMatched = winningLotto.matchBonus(numbers);
+        }
+
+        return Rank.matchRank(count, isBonusMatched);
+    }
+
+    protected boolean contains(int number) {
+        return numbers.contains(number);
     }
 
     private void validateLottoDuplicate() {
@@ -43,52 +74,25 @@ public class Lotto {
         }
     }
 
-    public int validateBonus(String input) {
-        int bonus = validateIsInteger(input);
-        validateRange(bonus);
-        validateBonusDuplicate(bonus);
-        return bonus;
-    }
-
-    private void validateBonusDuplicate(int input) {
-        Integer bonus = input;
+    private void validateBonusDuplicate(int inputBonus) {
+        Integer bonus = inputBonus;
         numbers.stream().filter(number -> number.equals(bonus)).forEach(number -> {
             throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
         });
     }
 
-    private void validateRange(int num) {
-        if (num < LOTTO_MIN || num > LOTTO_MAX) {
+    private void validateRange(int lottoNum) {
+        if (lottoNum < LOTTO_MIN || lottoNum > LOTTO_MAX) {
             throw new IllegalArgumentException(INVALID_RANGE.getMessage());
         }
     }
 
-    private int validateIsInteger(String s) {
+    private int validateIsInteger(String lottoNum) {
         try {
-            return Integer.parseInt(s);
+            return Integer.parseInt(lottoNum);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }
     }
-
-    public GetLottoDto getLottoDto() {
-        return new GetLottoDto(numbers);
-    }
-
-    public Rank countMatchNumbers(WinningLotto winningLotto) {
-        int count = (int) numbers.stream()
-                .filter(winningLotto::contains)
-                .count();
-        boolean bonusFlag = false;
-        if (count == 5) {
-            bonusFlag = winningLotto.matchBonus(numbers);
-        }
-        return Rank.matchRank(count, bonusFlag);
-    }
-
-    protected boolean contains(int number) {
-        return numbers.contains(number);
-    }
-
 
 }

@@ -11,24 +11,24 @@ public enum Rank {
 
     private final int count;
     private final int prize;
-    private final boolean bonusFlag;
+    private final boolean isBonusMatched;
 
-    Rank(int count, int prize, boolean bonusFlag) {
+    Rank(int count, int prize, boolean isBonusMatched) {
         this.count = count;
         this.prize = prize;
-        this.bonusFlag = bonusFlag;
+        this.isBonusMatched = isBonusMatched;
     }
 
-    public static Rank matchRank(int matchCount, boolean bonusFlag) {
+    public static Rank matchRank(int matchCount, boolean isBonusMatched) {
         for (Rank rank : Rank.values()) {
-            if (rank.count == matchCount && rank.bonusFlag == bonusFlag) {
+            if (rank.count == matchCount && rank.isBonusMatched == isBonusMatched) {
                 return rank;
             }
         }
         return NONE;
     }
 
-    public static long getTotalPrize(Rank rank, Integer count) {
+    public static long calculateTotalPrize(Rank rank, Integer count) {
         return (long) rank.prize * count;
     }
 }
