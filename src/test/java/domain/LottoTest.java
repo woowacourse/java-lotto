@@ -90,7 +90,7 @@ class LottoTest {
 
     @ParameterizedTest
     @MethodSource("testMatchRank")
-    void countMatchNumbers(String numbers, Rank rank) {
+    void 당첨번호_순위_매치_정상진행_테스트(String numbers, Rank rank) {
         //given
         WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", "7");
         Lotto lotto = new Lotto(numbers);

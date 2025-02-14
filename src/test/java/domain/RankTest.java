@@ -12,7 +12,7 @@ class RankTest {
 
     @ParameterizedTest
     @MethodSource("testMatchRank")
-    void matchRank(int matchCount, boolean isBonusMatched, Rank rank) {
+    void 일치개수_보너스일치여부_순위_매치_정상진행_테스트(int matchCount, boolean isBonusMatched, Rank rank) {
         assertThat(Rank.matchRank(matchCount, isBonusMatched)).isEqualTo(rank);
     }
 
