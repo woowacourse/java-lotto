@@ -7,7 +7,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.domain.WinningResult;
 import lotto.domain.WinningResultCalculator;
-import lotto.util.StringParser;
+import lotto.util.StringToIntParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -46,20 +46,20 @@ public class LottoController {
     private Lotto getWinningLotto() {
         String winningLottoNumbers = inputView.readWinningLottoNumbers();
         String[] splittedWinningLottoNumbers = winningLottoNumbers.split(DELIMITER);
-        List<Integer> parsedWinningLottoNumbers = StringParser.parseTokens(splittedWinningLottoNumbers);
+        List<Integer> parsedWinningLottoNumbers = StringToIntParser.parseTokens(splittedWinningLottoNumbers);
         Lotto winningLotto = new Lotto(parsedWinningLottoNumbers);
         return winningLotto;
     }
 
     private LottoNumber getBonusNumber() {
         String bonusNumberInput = inputView.readBonusNumber();
-        int parsedBonusNumber = StringParser.parseInt(bonusNumberInput);
+        int parsedBonusNumber = StringToIntParser.parseInt(bonusNumberInput);
         LottoNumber bonusNumber = new LottoNumber(parsedBonusNumber);
         return bonusNumber;
     }
 
     private LottoPrice getLottoPrice() {
-        int parsedAmount = StringParser.parseInt(inputView.readPurchasePrice());
+        int parsedAmount = StringToIntParser.parseInt(inputView.readPurchasePrice());
         return new LottoPrice(parsedAmount);
     }
 

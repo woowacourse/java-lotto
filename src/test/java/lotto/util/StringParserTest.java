@@ -11,7 +11,7 @@ public class StringParserTest {
         // Given
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> StringParser.parseInt("100.3"))
+        Assertions.assertThatThrownBy(() -> StringToIntParser.parseInt("100.3"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값은 21억 이하의 양수여야 합니다.");
     }
@@ -22,7 +22,7 @@ public class StringParserTest {
         // Given
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> StringParser.parseInt("abc"))
+        Assertions.assertThatThrownBy(() -> StringToIntParser.parseInt("abc"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값은 21억 이하의 양수여야 합니다.");
     }
@@ -32,7 +32,7 @@ public class StringParserTest {
         // Given
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> StringParser.parseInt("2200000000"))
+        Assertions.assertThatThrownBy(() -> StringToIntParser.parseInt("2200000000"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값은 21억 이하의 양수여야 합니다.");
     }
@@ -43,7 +43,7 @@ public class StringParserTest {
         String[] tokens = {" 5", " 10"};
 
         // When
-        List<Integer> parsedTokens = StringParser.parseTokens(tokens);
+        List<Integer> parsedTokens = StringToIntParser.parseTokens(tokens);
 
         // Then
         Assertions.assertThat(parsedTokens).isEqualTo(List.of(5, 10));

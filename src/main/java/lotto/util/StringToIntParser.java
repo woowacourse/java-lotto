@@ -3,7 +3,7 @@ package lotto.util;
 import java.util.Arrays;
 import java.util.List;
 
-public class StringParser {
+public class StringToIntParser {
 
     public static int parseInt(final String input) {
         try {
@@ -16,7 +16,7 @@ public class StringParser {
     public static List<Integer> parseTokens(final String[] tokens) {
         return Arrays.stream(tokens)
                 .map(String::trim)
-                .map(StringParser::parseInt)
+                .map(StringToIntParser::parseInt)
                 .toList();
     }
 }

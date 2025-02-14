@@ -26,7 +26,7 @@ public class InputView {
 
     private String getInput() {
         String input = readLine();
-        InputValidator.validate(input);
+        InputValidator.validateNullOrBlank(input);
         return input;
     }
 

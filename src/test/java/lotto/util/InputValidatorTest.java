@@ -13,7 +13,7 @@ class InputValidatorTest {
         // Given
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> InputValidator.validate(null))
+        Assertions.assertThatThrownBy(() -> InputValidator.validateNullOrBlank(null))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값은 null일 수 없습니다.");
     }
@@ -25,7 +25,7 @@ class InputValidatorTest {
         // Given
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> InputValidator.validate(input))
+        Assertions.assertThatThrownBy(() -> InputValidator.validateNullOrBlank(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값은 빈 값일 수 없습니다.");
     }
