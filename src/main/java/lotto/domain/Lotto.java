@@ -68,7 +68,7 @@ public class Lotto {
 
     public List<Integer> getNumbers() {
         return numbers.stream()
-                .map(LottoNumber::getNumber)
+                .map(LottoNumber::number)
                 .toList();
     }
 }
