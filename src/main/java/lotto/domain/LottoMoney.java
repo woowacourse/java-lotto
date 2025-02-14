@@ -5,22 +5,16 @@ import static lotto.util.ErrorHandler.INVALID_AMOUNT;
 import static lotto.util.ErrorHandler.INVALID_NUMBER;
 import static lotto.util.ErrorHandler.INVALID_UNIT;
 
+import lotto.util.StringConverter;
+
 public class LottoMoney {
 
     private final int lottoMoney;
 
     public LottoMoney(String input) {
-        int amount = parse(input);
+        int amount = StringConverter.parseToInt(input, INVALID_NUMBER);
         validate(amount);
         this.lottoMoney = amount;
-    }
-
-    private int parse(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw INVALID_NUMBER.getException();
-        }
     }
 
     private void validate(int amount) {
