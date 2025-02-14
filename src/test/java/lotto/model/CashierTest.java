@@ -30,6 +30,7 @@ class CashierTest {
         Cashier cashier = new Cashier();
 
         assertThatThrownBy(() -> cashier.payForLotto(invalidAmount))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또는 1000원 단위로 구매할 수 있습니다.");
     }
 }
