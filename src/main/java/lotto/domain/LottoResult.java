@@ -1,22 +1,15 @@
 package lotto.domain;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 public class LottoResult {
-
-    private final WinningLotto winningLotto;
-    private final List<Lotto> lottoTickets;
 
     private Map<LottoPrize, Integer> lottoResult;
     private Double lottoProfitRate;
 
     public LottoResult(WinningLotto winningLotto, List<Lotto> lottoTickets) {
-        this.winningLotto = winningLotto;
-        this.lottoTickets = lottoTickets;
         initialize();
     }
 
@@ -28,33 +21,18 @@ public class LottoResult {
         this.lottoProfitRate = 0.0;
     }
 
-    public void matchLottoTicketsResult() {
+    public void matchLottoTicketsResult(WinningLotto winningLotto, List<Lotto> lottoTickets) {
         for (Lotto lottoTicket : lottoTickets) {
-            matchEachLottoTicketResult(lottoTicket);
+            matchEachLottoTicketResult(winningLotto, lottoTicket);
         }
     }
 
-    private void matchEachLottoTicketResult(Lotto lottoTicket) {
-        int bonusBall = winningLotto.getBonusBall();
-
-        boolean isBonusHit = matchBonusBall(bonusBall, lottoTicket);
-        int winningNumbersHit = matchWinningNumbers(winningLotto, lottoTicket);
+    private void matchEachLottoTicketResult(WinningLotto winningLotto, Lotto lottoTicket) {
+        boolean isBonusHit = winningLotto.matchBonusBall(lottoTicket);
+        int winningNumbersHit = winningLotto.matchWinningNumbers(lottoTicket);
 
         LottoPrize lottoPrize = LottoPrize.findLottoPrize(winningNumbersHit, isBonusHit);
         lottoResult.put(lottoPrize, lottoResult.getOrDefault(lottoPrize, 0) + 1);
-    }
-
-    private boolean matchBonusBall(int bonusBall, Lotto lottoTicket) {
-        List<Integer> ticketNumbers = lottoTicket.getLotto();
-        return ticketNumbers.contains(bonusBall);
-    }
-
-    private int matchWinningNumbers(WinningLotto winningLotto, Lotto lottoTicket) {
-        Set<Integer> winningLottoSet = new HashSet<>(winningLotto.getWinningNumbers());
-        Set<Integer> lottoTicketSet = new HashSet<>(lottoTicket.getLotto());
-
-        lottoTicketSet.retainAll(winningLottoSet);
-        return lottoTicketSet.size();
     }
 
     public void calculateLottoProfitRate(LottoMoney lottoMoney) {
