@@ -23,7 +23,7 @@ class LottoNumberGeneratorTest {
 
 
     @DisplayName("로또 숫자가 항상 1~45 범위 내에서 생성되는지 테스트 (100번 반복)")
-    @RepeatedTest(100) // ✅ JUnit이 알아서 10,000번 반복 실행
+    @RepeatedTest(100)
     void testGeneratedNumbersRange() {
         LottoNumberGenerator numberGenerator = new LottoNumberGenerator();
         List<Integer> lottoNumbers = numberGenerator.generate();
