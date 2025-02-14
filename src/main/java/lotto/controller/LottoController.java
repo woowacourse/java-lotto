@@ -6,7 +6,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Prizes;
-import lotto.domain.LottoGenerator;
+import lotto.domain.RandomLottoGenerator;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -40,7 +40,7 @@ public class LottoController {
     private Lottos publishLottos(int lottoCounts) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCounts; i++) {
-            lottos.add(new Lotto(new LottoGenerator()));
+            lottos.add(new Lotto(new RandomLottoGenerator()));
         }
         return new Lottos(lottos);
     }

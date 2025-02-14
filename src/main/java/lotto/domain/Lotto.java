@@ -12,10 +12,10 @@ public class Lotto {
 
     private static final String DELIMITER = ",";
     private List<Integer> lottoNumber;
-    private LottoGenerator lottoGenerator;
+    private RandomLottoGenerator randomLottoGenerator;
 
-    public Lotto(LottoGenerator lottoGenerator) {
-        this.lottoGenerator = lottoGenerator;
+    public Lotto(RandomLottoGenerator randomLottoGenerator) {
+        this.randomLottoGenerator = randomLottoGenerator;
         this.lottoNumber = generateLotto();
     }
 
@@ -78,7 +78,7 @@ public class Lotto {
     }
 
     private List<Integer> generateLotto() {
-        return lottoGenerator.generateLotto();
+        return randomLottoGenerator.generateLotto();
     }
 
     private void validateDuplicate(List<Integer> parsedLotto) {

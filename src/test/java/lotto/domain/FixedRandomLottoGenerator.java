@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FixedLottoGenerator extends LottoGenerator {
+public class FixedRandomLottoGenerator implements LottoGenerator {
 
     @Override
     public List<Integer> generateLotto() {
