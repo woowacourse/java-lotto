@@ -2,27 +2,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
-    @DisplayName("로또 번호는 6개만 가능")
+    static Stream<Arguments> generateOutOfBoundLottos() {
+        return Stream.of(
+                Arguments.of(List.of(1, 2, 3, 4, 5)),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 6, 7))
+        );
+    }
+
+    @DisplayName("로또 번호는 6개로 생성 가능")
     @Test
     void test1() {
         // given
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
 
         // when & then
-        assertThatThrownBy(() -> new Lotto(numbers)).isInstanceOf(IllegalArgumentException.class);
+        new Lotto(numbers);
     }
 
     @DisplayName("로또 번호가 6개가 아니면 예외")
-    @Test
-    void test3() {
+    @ParameterizedTest
+    @MethodSource("generateOutOfBoundLottos")
+    void test3(List<Integer> numbers) {
         // given
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
 
         // when & then
         assertThatThrownBy(() -> new Lotto(numbers))
@@ -145,6 +156,4 @@ class LottoTest {
         // then
         assertThat(lottoPrize).isSameAs(LottoPrize.FIFTH);
     }
-
-    // TODO: 리뷰 내용 반영 - 당첨 번호에 보너스 볼이 포함되어 있는 경우?
 }
