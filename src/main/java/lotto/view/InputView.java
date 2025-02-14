@@ -6,9 +6,9 @@ public class InputView {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public String readLine() {
+    public int readBuyingAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextLine();
+        return readInteger();
     }
 
     public String readWinningLotto() {
@@ -16,9 +16,17 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public String readBonusNumber() {
+    public int readBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextLine();
+        return readInteger();
+    }
+
+    private int readInteger() {
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자를 입력해 주세요.");
+        }
     }
 
 }
