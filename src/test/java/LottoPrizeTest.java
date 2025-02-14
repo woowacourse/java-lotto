@@ -15,7 +15,23 @@ class LottoPrizeTest {
             , "5,false,1_500_000"
             , "4,false,50_000"
             , "3,false,5_000"})
-    void test1(int matchedCount, boolean isBonusMatched, int expected) {
+    void generateCorrectResult(int matchedCount, boolean isBonusMatched, int expected) {
+        // given
+
+        // when
+        LottoPrize lottoPrize = LottoPrize.of(matchedCount, isBonusMatched);
+
+        // then
+        assertThat(lottoPrize.getPrice()).isEqualTo(expected);
+    }
+
+    @DisplayName("당첨 번호와 보너스 번호 모두 매칭되는 경우 알맞는 결과 객체가 생성된다.")
+    @ParameterizedTest
+    @CsvSource(value = {
+            "4, true, 50_000",
+            "3, true, 5_000"
+    })
+    void returnCorrectResultExceptCase(int matchedCount, boolean isBonusMatched, int expected) {
         // given
 
         // when
@@ -27,7 +43,7 @@ class LottoPrizeTest {
 
     @DisplayName("낮은 등수부터 리턴할 수 있다.")
     @Test
-    void test2() {
+    void returnSortedValues() {
         // given
 
         // when
