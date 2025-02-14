@@ -5,6 +5,7 @@ import static util.LottoUtil.generateTestLotto;
 
 import java.util.Arrays;
 import java.util.Map;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 
 class LottosTest {
@@ -23,9 +24,13 @@ class LottosTest {
         LottoEvaluator lottoEvaluator = new LottoEvaluator(new WinningLotto(winningLotto, bonus));
         Map<Prize, Integer> result = lottoEvaluator.getResult(lottos);
 
-        assertThat(result.get(Prize._5TH)).isEqualTo(1);
-        assertThat(result.get(Prize._4TH)).isEqualTo(2);
-        assertThat(result.get(Prize._2ND)).isEqualTo(1);
+        SoftAssertions softAssertions = new SoftAssertions();
+
+        softAssertions.assertThat(result.get(Prize._5TH)).isEqualTo(1);
+        softAssertions.assertThat(result.get(Prize._4TH)).isEqualTo(2);
+        softAssertions.assertThat(result.get(Prize._2ND)).isEqualTo(1);
+
+        softAssertions.assertAll();
     }
 
     @Test

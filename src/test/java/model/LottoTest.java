@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class LottoTest {
 
     @Test
-    void 로또의_로또_번호는_6개이다() {
+    void 로또의_번호가_6개가_아니면_오류가_발생한다() {
         assertThatThrownBy(() -> generateTestLotto(1,2,3,4,5,6,7))
                 .isInstanceOf(RuntimeException.class);
     }
