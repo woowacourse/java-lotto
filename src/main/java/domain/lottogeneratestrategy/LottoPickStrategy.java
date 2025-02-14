@@ -1,9 +1,9 @@
-package domain.numberstrategy;
+package domain.lottogeneratestrategy;
 
 import java.util.List;
 
 @FunctionalInterface
-public interface NumberPickStrategy {
+public interface LottoPickStrategy {
 
     List<Integer> pickNumbers(int maxNumber, int size);
 }

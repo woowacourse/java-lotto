@@ -1,9 +1,9 @@
-package domain.numberstrategy;
+package domain.lottogeneratestrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomNumberPickStrategy implements NumberPickStrategy {
+public class RandomLottoPickStrategy implements LottoPickStrategy {
 
     @Override
     public List<Integer> pickNumbers(int maxNumber, int size) {

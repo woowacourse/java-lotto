@@ -1,17 +1,17 @@
 package domain;
 
-import domain.numberstrategy.NumberPickStrategy;
+import domain.lottogeneratestrategy.LottoPickStrategy;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class LottoMachine {
 
-    public LottoMachine(NumberPickStrategy numberStrategy) {
+    public LottoMachine(LottoPickStrategy numberStrategy) {
         this.numberStrategy = numberStrategy;
     }
 
-    private final NumberPickStrategy numberStrategy;
+    private final LottoPickStrategy numberStrategy;
 
 
     public Lotto createLotto() {
