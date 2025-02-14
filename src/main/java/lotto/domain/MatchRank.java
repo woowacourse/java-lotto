@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public enum MatchStatistics {
+public enum MatchRank {
     MATCH_THREE(3, 5000),
     MATCH_FOUR(4, 50000),
     MATCH_FIVE(5, 150000),
@@ -14,7 +14,7 @@ public enum MatchStatistics {
     private final int number;
     private final int money;
 
-    MatchStatistics(int number, int money) {
+    MatchRank(int number, int money) {
         this.number = number;
         this.money = money;
     }
@@ -30,12 +30,12 @@ public enum MatchStatistics {
         return String.format(BASIC_OUTPUT, number, money);
     }
 
-    public static MatchStatistics getMatchStatistics(int matchNumber, boolean bonus) {
+    public static MatchRank getMatchRank(int matchNumber, boolean bonus) {
         if (isMatchBonus(matchNumber, bonus)) {
             return MATCH_BONUS;
         }
 
-        for (MatchStatistics statistics : values()) {
+        for (MatchRank statistics : values()) {
             if (statistics.number == matchNumber) {
                 return statistics;
             }
