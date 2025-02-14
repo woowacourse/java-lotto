@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class InputView {
     
-    public static final char MATCH_LOTTO_DELIMITER = ',';
+    private static final char MATCH_LOTTO_DELIMITER = ',';
     
-    public final Scanner SC;
+    private final Scanner SC;
     
     public InputView(Scanner SC) {
         this.SC = SC;
