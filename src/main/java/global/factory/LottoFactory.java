@@ -10,7 +10,7 @@ public class LottoFactory {
         this.generator = generator;
     }
 
-    public Lotto from() {
+    public Lotto create() {
         return new Lotto(generator.generate());
     }
 

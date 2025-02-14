@@ -18,7 +18,7 @@ public class LottosFactory {
     public Lottos from(final Amount amount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; amount.compareAmount(i); i++) {
-            lottos.add(lottoFactory.from());
+            lottos.add(lottoFactory.create());
         }
 
         return new Lottos(lottos);
