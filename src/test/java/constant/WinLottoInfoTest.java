@@ -2,33 +2,27 @@ package constant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import model.LottoNumbers;
 import model.WinLotto;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class WinLottoInfoTest {
-    List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+    List<LottoNumbers> lottoNumbersList = List.of(
+            new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)),
+            new LottoNumbers(List.of(1, 2, 3, 4, 5, 7)),
+            new LottoNumbers(List.of(1, 2, 3, 4, 5, 8)),
+            new LottoNumbers(List.of(1, 2, 3, 4, 7, 8)),
+            new LottoNumbers(List.of(1, 2, 3, 10, 8, 9)),
+            new LottoNumbers(List.of(14, 15, 10, 11, 12, 13))
+    );
     WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 4, 5, 6), 7);
-    List<WinLottoInfo> resultList;
+    List<WinLottoInfo> resultList = lottoNumbersList.stream()
+            .map((purchasedLotto) -> WinLottoInfo.result(purchasedLotto, winLotto))
+            .toList();
     List<WinLottoInfo> winLottoInfo = Arrays.stream(WinLottoInfo.values()).toList();
-
-    @BeforeEach
-    void setUp() {
-        lottoNumbersList.add(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))); // FIRST
-        lottoNumbersList.add(new LottoNumbers(List.of(1, 2, 3, 4, 5, 7))); // SECOND
-        lottoNumbersList.add(new LottoNumbers(List.of(1, 2, 3, 4, 5, 8))); // THIRD
-        lottoNumbersList.add(new LottoNumbers(List.of(1, 2, 3, 4, 7, 8))); // FOURTH
-        lottoNumbersList.add(new LottoNumbers(List.of(1, 2, 3, 10, 8, 9))); // FIFTH
-        lottoNumbersList.add(new LottoNumbers(List.of(14, 15, 10, 11, 12, 13))); // NONE
-        resultList = lottoNumbersList.stream()
-                .map((purchasedLotto) -> WinLottoInfo.result(purchasedLotto, winLotto))
-                .toList();
-    }
 
     @Test
     @DisplayName("1등 당첨 결과 메서드 테스트")
