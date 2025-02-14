@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import static lotto.exception.ErrorMessage.MUST_NOT_BE_DUPLICATED;
+import static lotto.exception.ErrorMessage.INVALID_LOTTO_SIZE;
+import static lotto.exception.ErrorMessage.MUST_NOT_BE_DUPLICATED_BONUS_NUMBER;
+import static lotto.exception.ErrorMessage.MUST_NOT_BE_DUPLICATED_WINNING_NUMBER;
 import static lotto.exception.ErrorMessage.OUT_OF_RANGE;
-import static lotto.exception.ErrorMessage.SIZE_ERROR;
 
 import java.util.HashSet;
 import java.util.List;
@@ -44,19 +45,19 @@ public class WinningNumbers {
     private void validateDuplicateWinningNumber() {
         Set<Integer> set = new HashSet<>(winningNumbers);
         if (set.size() != LOTTO_SIZE) {
-            throw new LottoException(MUST_NOT_BE_DUPLICATED);
+            throw new LottoException(MUST_NOT_BE_DUPLICATED_WINNING_NUMBER);
         }
     }
 
     private void validateWinningNumberSize() {
         if (winningNumbers.size() != LOTTO_SIZE) {
-            throw new LottoException(SIZE_ERROR);
+            throw new LottoException(INVALID_LOTTO_SIZE);
         }
     }
 
     private void validateExistBonusNumber() {
         if (winningNumbers.contains(bonusNumber)) {
-            throw new LottoException(MUST_NOT_BE_DUPLICATED);
+            throw new LottoException(MUST_NOT_BE_DUPLICATED_BONUS_NUMBER);
         }
     }
 

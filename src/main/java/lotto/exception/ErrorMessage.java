@@ -6,8 +6,11 @@ public enum ErrorMessage {
     MUST_BE_DIVIDE_BY_THOUSAND("금액은 1000으로 나누어 떨어져야 합니다."),
     NOT_ALLOW_NEGATIVE("음수는 입력할 수 없습니다."),
     OUT_OF_RANGE("범위를 벗어나는 숫자입니다."),
-    MUST_NOT_BE_DUPLICATED("로또 번호는 중복될 수 없습니다."),
-    SIZE_ERROR("로또의 갯수가 일치하지 않습니다.");
+    MUST_NOT_BE_DUPLICATED_LOTTO_NUMBER("로또 번호는 중복될 수 없습니다."),
+    MUST_NOT_BE_DUPLICATED_WINNING_NUMBER("당첨 번호는 중복될 수 없습니다."),
+    MUST_NOT_BE_DUPLICATED_BONUS_NUMBER("보너스 번호는 당첨 번호와 중복될 수 없습니다."),
+    INVALID_LOTTO_SIZE("로또의 갯수가 일치하지 않습니다."),
+    INVALID_WINNING_NUMBER_SIZE("로또의 갯수가 일치하지 않습니다.");
 
     private static final String PREFIX = "[ERROR] ";
 

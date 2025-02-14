@@ -50,7 +50,7 @@ class LottoTest {
 
         assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 로또의 사이즈가 일치하지 않습니다.");
+                .hasMessage("[ERROR] 로또의 갯수가 일치하지 않습니다.");
     }
 
 

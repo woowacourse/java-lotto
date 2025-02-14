@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import static lotto.exception.ErrorMessage.MUST_NOT_BE_DUPLICATED;
+import static lotto.exception.ErrorMessage.INVALID_LOTTO_SIZE;
+import static lotto.exception.ErrorMessage.MUST_NOT_BE_DUPLICATED_LOTTO_NUMBER;
 import static lotto.exception.ErrorMessage.OUT_OF_RANGE;
-import static lotto.exception.ErrorMessage.SIZE_ERROR;
 
 import java.util.HashSet;
 import java.util.List;
@@ -50,13 +50,13 @@ public class Lotto {
     private void validateDuplicateNumber() {
         Set<Integer> set = new HashSet<>(lottoNumbers);
         if (set.size() != LOTTO_SIZE) {
-            throw new LottoException(MUST_NOT_BE_DUPLICATED);
+            throw new LottoException(MUST_NOT_BE_DUPLICATED_LOTTO_NUMBER);
         }
     }
 
     private void validateLottoSize() {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new LottoException(SIZE_ERROR);
+            throw new LottoException(INVALID_LOTTO_SIZE);
         }
     }
 
