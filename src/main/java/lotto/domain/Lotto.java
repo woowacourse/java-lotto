@@ -22,6 +22,10 @@ public class Lotto {
         this.lotto = numbers;
     }
 
+    public Lotto(List<Integer> numbers) {
+        this.lotto = numbers;
+    }
+
     private List<Integer> parse(String input) {
         List<String> result = Arrays.stream(input.split(LOTTO_NUMBER_DELIMITER)).toList();
         return result.stream()
