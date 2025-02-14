@@ -23,7 +23,6 @@ public class LottoResultTest {
         lottoResult.matchLottoTicketsResult();
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
 
-        assertEquals(0, (int) matchResult.get(LottoPrize.MISS));
         assertEquals(0, (int) matchResult.get(LottoPrize.FIFTH));
         assertEquals(0, (int) matchResult.get(LottoPrize.FOURTH));
         assertEquals(0, (int) matchResult.get(LottoPrize.THIRD));
@@ -44,7 +43,6 @@ public class LottoResultTest {
         lottoResult.matchLottoTicketsResult();
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
 
-        assertEquals(0, (int) matchResult.get(LottoPrize.MISS));
         assertEquals(0, (int) matchResult.get(LottoPrize.FIFTH));
         assertEquals(0, (int) matchResult.get(LottoPrize.FOURTH));
         assertEquals(1, (int) matchResult.get(LottoPrize.THIRD));
@@ -86,6 +84,6 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
         lottoResult.matchLottoTicketsResult();
         lottoResult.calculateLottoProfitRate(lottoMoney);
-        assertEquals((double) 1_500_000 / 10_000, lottoResult.getLottoProfitRate());
+        assertEquals((double) 1_500_000 / 10_000, lottoResult.calculateLottoProfitRate(lottoMoney));
     }
 }

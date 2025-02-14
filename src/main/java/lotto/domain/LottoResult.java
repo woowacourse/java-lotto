@@ -11,21 +11,21 @@ public class LottoResult {
     private final WinningLotto winningLotto;
     private final List<Set<Integer>> lottoTickets;
 
-    private Map<LottoPrize, Integer> lottoResult;
-    private Double lottoProfitRate;
+    private final Map<LottoPrize, Integer> lottoResult;
 
     public LottoResult(WinningLotto winningLotto, List<Set<Integer>> lottoTickets) {
         this.winningLotto = winningLotto;
         this.lottoTickets = lottoTickets;
-        initialize();
-    }
-
-    private void initialize() {
         this.lottoResult = new TreeMap<>();
         for (LottoPrize prize : LottoPrize.values()) {
+            addLottoResultPrize(prize);
+        }
+    }
+
+    private void addLottoResultPrize(LottoPrize prize) {
+        if (prize != LottoPrize.MISS) {
             this.lottoResult.put(prize, 0);
         }
-        this.lottoProfitRate = 0.0;
     }
 
     public void matchLottoTicketsResult() {
@@ -48,7 +48,7 @@ public class LottoResult {
         lottoResult.put(lottoPrize, lottoResult.getOrDefault(lottoPrize, 0) + 1);
     }
 
-    public void calculateLottoProfitRate(LottoMoney lottoMoney) {
+    public Double calculateLottoProfitRate(LottoMoney lottoMoney) {
         int money = lottoMoney.getLottoMoney();
         int totalProfit = 0;
         for (Map.Entry<LottoPrize, Integer> entry : lottoResult.entrySet()) {
@@ -57,14 +57,10 @@ public class LottoResult {
             int prize = lottoPrize.getPrize();
             totalProfit += count * prize;
         }
-        this.lottoProfitRate = (double) totalProfit / money;
+        return (double) totalProfit / money;
     }
 
     public Map<LottoPrize, Integer> getLottoResult() {
         return lottoResult;
-    }
-
-    public Double getLottoProfitRate() {
-        return lottoProfitRate;
     }
 }

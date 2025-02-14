@@ -27,6 +27,7 @@ public class GameController {
         lottoResult.calculateLottoProfitRate(lottoMoney);
 
         OutputView.writeLottoResult(lottoResult);
+        OutputView.writeLottoResultProfitRate(lottoResult.calculateLottoProfitRate(lottoMoney));
     }
 
     private LottoMachine buyLottoTickets() {

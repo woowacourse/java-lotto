@@ -27,7 +27,14 @@ public class OutputView {
         for (Map.Entry<LottoPrize, Integer> entry : lottoResult.getLottoResult().entrySet()) {
             writeLottoResultHit(sb, entry);
         }
-        writeLottoResultProfitRate(sb, lottoResult.getLottoProfitRate());
+        System.out.println(sb);
+    }
+
+    public static void writeLottoResultProfitRate(double profitRate) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("총 수익률은 %.2f입니다.", profitRate));
+        String profitStatus = formatProfitStatus(profitRate);
+        sb.append(String.format("(기준이 1이기 때문에 결과적으로 %s라는 의미임)", profitStatus));
         System.out.println(sb);
     }
 
@@ -43,12 +50,6 @@ public class OutputView {
         }
         sb.append(String.format("%d개 일치 (%d원) - %d개\n", lottoPrize.getHitNumbers(), lottoPrize.getPrize(),
                 entry.getValue()));
-    }
-
-    private static void writeLottoResultProfitRate(StringBuilder sb, double profitRate) {
-        sb.append(String.format("총 수익률은 %.2f입니다.", profitRate));
-        String profitStatus = formatProfitStatus(profitRate);
-        sb.append(String.format("(기준이 1이기 때문에 결과적으로 %s라는 의미임)", profitStatus));
     }
 
     private static String formatProfitStatus(double profitRate) {
