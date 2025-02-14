@@ -1,4 +1,4 @@
 package lotto.dto;
 
-public record MatchCountDto(int matchCount, boolean bonus) {
+public record MatchCountDto(int matchCount, boolean isBonusMatched) {
 }

@@ -42,7 +42,7 @@ class LottoTest {
         MatchCountDto dto = lotto.countMatchingNumbers(matchLotto, bonus);
 
         assertThat(dto.matchCount()).isEqualTo(5);
-        assertThat(dto.bonus()).isTrue();
+        assertThat(dto.isBonusMatched()).isTrue();
     }
 
     @Test
