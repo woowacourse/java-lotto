@@ -2,7 +2,7 @@ package creator;
 
 import domain.Lotto;
 import domain.Ticket;
-import domain.WinningInfo;
+import domain.WinningNumber;
 import java.util.List;
 import utils.InputParser;
 
@@ -20,7 +20,7 @@ public class LottoCreator {
         return Lotto.from(parsedNumbers);
     }
 
-    public static WinningInfo createWinningNumber(Lotto winningNumbers, int bonusNumber) {
-        return WinningInfo.of(winningNumbers, bonusNumber);
+    public static WinningNumber createWinningNumber(Lotto winningNumbers, int bonusNumber) {
+        return WinningNumber.of(winningNumbers, bonusNumber);
     }
 }

@@ -3,7 +3,7 @@ package controller;
 import domain.Lotto;
 import domain.Rank;
 import domain.Ticket;
-import domain.WinningInfo;
+import domain.WinningNumber;
 import java.util.List;
 import java.util.Map;
 import service.LottoService;
@@ -26,13 +26,13 @@ public class LottoController {
         int purchaseAmount = inputView.purchaseAmountInput();
         Ticket ticket = ticketProcess(purchaseAmount);
         List<Lotto> lottos = lottoProcess(ticket);
-        WinningInfo winningInfo = winningInfoProcess();
-        Map<Rank, Integer> rankResult = calculateRankProcess(winningInfo, lottos);
+        WinningNumber winningNumber = winningNumberProcess();
+        Map<Rank, Integer> rankResult = calculateRankProcess(winningNumber, lottos);
         profitProcess(rankResult, purchaseAmount);
     }
 
     private Ticket ticketProcess(int purchaseAmount) {
-        Ticket ticket = lottoService.createTicket(purchaseAmount);
+        Ticket ticket = lottoService.makeTicket(purchaseAmount);
         outputView.printPurchaseResult(ticket);
         return ticket;
     }
@@ -42,21 +42,22 @@ public class LottoController {
         outputView.printProfit(calculateRate);
     }
 
-    private Map<Rank, Integer> calculateRankProcess(WinningInfo winningInfo, List<Lotto> lottos) {
-        Map<Rank, Integer> rankResult = lottoService.calculateRank(winningInfo, lottos);
+    private Map<Rank, Integer> calculateRankProcess(WinningNumber winningNumber, List<Lotto> lottos) {
+        lottoService.calculateRank(winningNumber, lottos);
+        Map<Rank, Integer> rankResult = lottoService.getRankResult();
         outputView.printWinningStatistic(rankResult);
         return rankResult;
     }
 
-    private WinningInfo winningInfoProcess() {
+    private WinningNumber winningNumberProcess() {
         String winningNumbers = inputView.winningNumbersInput();
-        Lotto lotto = lottoService.createLotto(winningNumbers);
+        Lotto lotto = lottoService.makeLotto(winningNumbers);
         int bonusNumber = inputView.bonusNumberInput();
-        return lottoService.createWinningNumber(lotto, bonusNumber);
+        return lottoService.makeWinningNumber(lotto, bonusNumber);
     }
 
     private List<Lotto> lottoProcess(Ticket ticket) {
-        lottoService.createLottos(ticket);
+        lottoService.saveLotto(ticket);
         List<Lotto> lottos = lottoService.getLottos();
         outputView.printLottos(lottos);
         return lottos;

@@ -5,23 +5,38 @@ import static domain.LottoRules.MIN_NUMBER;
 import static error.ErrorMessage.BONUS_NUMBER_ALREADY_EXIST;
 import static error.ErrorMessage.INVALID_NUMBER_RANGE;
 
-public class WinningInfo {
+import java.util.List;
 
-    private final Lotto winningLotto;
+public class WinningNumber {
+
+    private final Lotto numbers;
     private final int bonusNumber;
 
-    private WinningInfo(Lotto winningLotto, int bonusNumber) {
-        validate(winningLotto, bonusNumber);
-        this.winningLotto = winningLotto;
+    private WinningNumber(Lotto numbers, int bonusNumber) {
+        validate(numbers, bonusNumber);
+        this.numbers = numbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningInfo of(Lotto numbers, int bonusNumber) {
-        return new WinningInfo(numbers, bonusNumber);
+    public static WinningNumber of(Lotto numbers, int bonusNumber) {
+        return new WinningNumber(numbers, bonusNumber);
     }
 
-    public Lotto getWinningLotto() {
-        return winningLotto;
+    public boolean hasBonusNumber(Lotto lotto) {
+        List<Integer> numbers = lotto.getNumbers();
+        return numbers.contains(bonusNumber);
+    }
+
+    public int calculateMatchNumber(Lotto lotto) {
+        List<Integer> lottoNumbers = lotto.getNumbers();
+        List<Integer> numbers = this.numbers.getNumbers();
+        return (int) lottoNumbers.stream()
+            .filter(numbers::contains)
+            .count();
+    }
+
+    public Lotto getNumbers() {
+        return numbers;
     }
 
     public int getBonusNumber() {

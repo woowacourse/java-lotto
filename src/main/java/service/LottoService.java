@@ -2,23 +2,48 @@ package service;
 
 import static domain.LottoRules.WINNING_NUMBERS_REQUIRED;
 
+import creator.LottoCreator;
 import domain.Lotto;
 import domain.Rank;
 import domain.Ticket;
-import domain.WinningInfo;
-import java.util.LinkedHashMap;
+import domain.WinningNumber;
 import java.util.List;
 import java.util.Map;
 import repository.LottoRepository;
+import repository.LottoResultRepository;
 import utils.RandomNumber;
 
 public class LottoService {
 
     private final LottoRepository lottoRepository;
+    private final LottoResultRepository lottoResultRepository;
 
-    public LottoService(LottoRepository lottoRepository) {
+    public LottoService(LottoRepository lottoRepository,
+        LottoResultRepository lottoResultRepository) {
         this.lottoRepository = lottoRepository;
+        this.lottoResultRepository = lottoResultRepository;
     }
+
+    public Ticket makeTicket(int purchaseAmount) {
+        return LottoCreator.createTicket(purchaseAmount);
+    }
+
+    public Lotto makeLotto(String winningNumbers) {
+        return LottoCreator.createLotto(winningNumbers);
+    }
+
+    public WinningNumber makeWinningNumber(Lotto lotto, int bonusNumber) {
+        return LottoCreator.createWinningNumber(lotto, bonusNumber);
+    }
+
+    public void calculateRank(WinningNumber winningNumber, List<Lotto> lottos) {
+        lottoResultRepository.add(winningNumber, lottos);
+    }
+
+    public Map<Rank, Integer> getRankResult() {
+        return lottoResultRepository.getCalculateResult();
+    }
+
 
     public void saveLotto(Ticket ticket) {
         for (int i = 0; i < ticket.getQuantity(); i++) {
@@ -30,31 +55,6 @@ public class LottoService {
 
     public List<Lotto> getLottos() {
         return lottoRepository.getLottos();
-    }
-
-    public Map<Rank, Integer> calculateRank(WinningInfo winningInfo, List<Lotto> lottos) {
-        Map<Rank, Integer> calculateResult = new LinkedHashMap<>();
-        for (Rank value : Rank.values()) {
-            calculateResult.put(value, 0);
-        }
-        List<Integer> winningNumbers = winningInfo.getWinningLotto().getNumbers();
-        for (Lotto lotto : lottos) {
-            int count = 0;
-            boolean isMatchBonusNumber = false;
-            List<Integer> lottoNumbers = lotto.getNumbers();
-            for (Integer lottoNumber : lottoNumbers) {
-                if (winningNumbers.contains(lottoNumber)) {
-                    count++;
-                }
-                if (winningInfo.getBonusNumber() == lottoNumber) {
-                    isMatchBonusNumber = true;
-                }
-
-            }
-            Rank foundRank = Rank.findRank(count, isMatchBonusNumber);
-            calculateResult.put(foundRank, calculateResult.get(foundRank) + 1);
-        }
-        return calculateResult;
     }
 
     public double calculateProfit(Map<Rank, Integer> calculateResult, int purchaseAmount) {
