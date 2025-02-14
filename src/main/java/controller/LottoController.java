@@ -14,23 +14,23 @@ import service.parser.WinningNumberParser;
 import view.InputView;
 import view.OutputView;
 
-public class Controller {
+public class LottoController {
 
-    private static Controller instance;
+    private static LottoController instance;
 
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoMaker lottoMaker;
 
-    private Controller(InputView inputView, OutputView outputView, LottoMaker lottoMaker) {
+    private LottoController(InputView inputView, OutputView outputView, LottoMaker lottoMaker) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoMaker = lottoMaker;
     }
 
-    public static Controller getInstance() {
+    public static LottoController getInstance() {
         if (instance == null) {
-            instance = new Controller(InputView.getInstance(), OutputView.getInstance(), LottoMaker.getInstance());
+            instance = new LottoController(InputView.getInstance(), OutputView.getInstance(), LottoMaker.getInstance());
         }
         return instance;
     }
