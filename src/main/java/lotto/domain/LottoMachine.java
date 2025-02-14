@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.util.Constant.LOTTO_MONEY_UNIT;
 import static lotto.util.Constant.LOTTO_NUMBER_MAX_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_SIZE;
 
@@ -13,7 +12,7 @@ public class LottoMachine {
     private List<Lotto> lottoTickets = new ArrayList<>();
 
     public LottoMachine(LottoMoney lottoMoney) {
-        int ticketNumber = lottoMoney.getLottoMoney() / LOTTO_MONEY_UNIT;
+        int ticketNumber = lottoMoney.getTicketBuyAmount();
         this.lottoTickets = generateLottoTickets(ticketNumber);
     }
 
