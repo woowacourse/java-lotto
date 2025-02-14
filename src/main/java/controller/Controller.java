@@ -61,7 +61,8 @@ public class Controller {
             return BonusNumberParser.parseBonusNumber(winningNumbers, inputView.askForBonusNumber());
         } catch (IllegalArgumentException e) {
             outputView.displayErrorMessage(e.getMessage());
-            throw e;
+            System.exit(1);
+            return 0;
         }
     }
 
@@ -70,7 +71,8 @@ public class Controller {
             return parser.get();
         } catch (IllegalArgumentException e) {
             outputView.displayErrorMessage(e.getMessage());
-            throw e;
+            System.exit(1);
+            return null;
         }
     }
 }
