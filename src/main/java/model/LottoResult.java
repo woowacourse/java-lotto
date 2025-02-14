@@ -11,7 +11,7 @@ public class LottoResult {
     public LottoResult(UserLotto userLotto, WinningLotto winningLotto) {
         initRank();
         calculateRanks(userLotto, winningLotto);
-        profitRate = calculateProfitRate(userLotto.getPurchaseAmount(), getProfit());
+        profitRate = calculateProfitRate(userLotto.getPurchaseAmount(), calculateProfit());
     }
 
     public EnumMap<Rank, Integer> getRanks() {
@@ -26,7 +26,7 @@ public class LottoResult {
         return (double) winningLotto / purchaseAmount;
     }
 
-    private long getProfit() {
+    private long calculateProfit() {
         long profit = 0;
         for (Entry<Rank, Integer> entry : ranks.entrySet()) {
             Rank rank = entry.getKey();
