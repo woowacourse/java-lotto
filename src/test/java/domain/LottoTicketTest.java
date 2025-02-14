@@ -1,9 +1,13 @@
 package domain;
 
 import java.util.List;
+import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTicketTest {
     @DisplayName("로또머신이 로또 번호를 정상적으로 발행하는지 테스트")
@@ -37,6 +41,7 @@ class LottoTicketTest {
                 .hasMessage("로또 번호는 6개여야 합니다.");
     }
 
+
     @DisplayName("로또 번호가 1 이상 45 이하가 아닌 경우 예외가 발생한다")
     @Test
     void 로또_번호가_1_이상_45_이하가_아닌_경우_테스트() {
@@ -61,5 +66,20 @@ class LottoTicketTest {
                     new LottoTicket(numbers);
                 }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복된 번호가 존재합니다.");
+    }
+
+    @DisplayName("로또 번호의 개수가 1 이상 45 이하일 때 정상적으로 로또를 발행하는지 테스트")
+    @ParameterizedTest
+    @MethodSource("randomLottoNumbers")
+    void 로또_테스트(List<Integer> numbers) {
+        Assertions.assertThatCode(() -> new LottoTicket(numbers))
+                .doesNotThrowAnyException();
+    }
+
+    static Stream<Arguments> randomLottoNumbers() {
+        return Stream.of(
+                Arguments.of(
+                        List.of(1, 2, 3, 4, 5, 6),
+                        List.of(1, 27, 42, 35, 8, 45)));
     }
 }
