@@ -4,6 +4,7 @@ import static domain.LottoRules.WINNING_NUMBERS_REQUIRED;
 
 import creator.LottoCreator;
 import domain.Lotto;
+import domain.Profit;
 import domain.Rank;
 import domain.Ticket;
 import domain.WinningNumber;
@@ -36,6 +37,11 @@ public class LottoService {
         return LottoCreator.createWinningNumber(lotto, bonusNumber);
     }
 
+    public double calculateProfit(Map<Rank, Integer> rankResult, int purchaseAmount) {
+        Profit profit = LottoCreator.createProfit(rankResult, purchaseAmount);
+        return profit.getResult();
+    }
+
     public void calculateRank(WinningNumber winningNumber, List<Lotto> lottos) {
         lottoResultRepository.add(winningNumber, lottos);
     }
@@ -43,7 +49,6 @@ public class LottoService {
     public Map<Rank, Integer> getRankResult() {
         return lottoResultRepository.getCalculateResult();
     }
-
 
     public void saveLotto(Ticket ticket) {
         for (int i = 0; i < ticket.getQuantity(); i++) {
@@ -57,11 +62,4 @@ public class LottoService {
         return lottoRepository.getLottos();
     }
 
-    public double calculateProfit(Map<Rank, Integer> calculateResult, int purchaseAmount) {
-        double totalPrize = 0;
-        for (Rank rank : calculateResult.keySet()) {
-            totalPrize += rank.getPrize() * calculateResult.get(rank);
-        }
-        return Math.floor((totalPrize / purchaseAmount) * 100) / 100;
-    }
 }
