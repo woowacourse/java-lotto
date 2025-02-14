@@ -22,7 +22,7 @@ public enum Rank {
     }
 
     public static Rank getRank(WinningLotto winningLotto, LottoDto lottoDto) {
-        int duplicateNumber = getDuplicateNumber(winningLotto, lottoDto);
+        int duplicateNumber = winningLotto.getDuplicateNumber(lottoDto);
         for (Rank rank : values()) {
             if (rank.matchNumber == 5 && isBonusMatch(winningLotto.getBonus(), lottoDto)) {
                 return SECOND;
@@ -33,13 +33,6 @@ public enum Rank {
         }
 
         return FAIL;
-    }
-
-    private static int getDuplicateNumber(WinningLotto winningLotto, LottoDto lottoDto) {
-        Set<Integer> union = new HashSet<>();
-        union.addAll(winningLotto.getWinningNumbers());
-        union.addAll(lottoDto.lotto());
-        return 12 - union.size();
     }
 
     private static boolean isBonusMatch(int bonus, LottoDto lottoDto) {

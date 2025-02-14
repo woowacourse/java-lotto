@@ -1,5 +1,6 @@
 package model;
 
+import dto.LottoDto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,10 +24,6 @@ public class WinningLotto {
         validateDuplicateWinningNumbers();
     }
 
-    public List<Integer> getWinningNumbers() {
-        return Collections.unmodifiableList(winningNumbers);
-    }
-
     public int getBonus() {
         return bonus;
     }
@@ -35,6 +32,12 @@ public class WinningLotto {
         rawBonus = rawBonus.trim();
         validateBonus(rawBonus);
         bonus = Integer.parseInt(rawBonus);
+    }
+
+    public int getDuplicateNumber(LottoDto lottoDto) {
+        Set<Integer> union = new HashSet<>(winningNumbers);
+        union.addAll(lottoDto.lotto());
+        return 12 - union.size();
     }
 
     private void validateBonus(String rawBonus) {
@@ -86,4 +89,5 @@ public class WinningLotto {
     private boolean isValidateNumberRange(int number) {
         return number >= 1 && number <= 45;
     }
+
 }
