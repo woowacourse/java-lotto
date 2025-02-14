@@ -25,7 +25,7 @@ public class Lotto {
         if (numbers.stream().distinct().count() == 6) {
             return;
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("6자리로 입력해주세요");
     }
 
     private static void validateSize(List<Integer> numbers) {
