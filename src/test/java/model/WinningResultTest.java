@@ -56,8 +56,6 @@ class WinningResultTest {
             // then
             assertThat(winningResult.calculateRateOfRevenue()).isEqualTo(expected);
         }
-
-
     }
 
     @Nested

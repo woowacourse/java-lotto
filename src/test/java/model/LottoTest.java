@@ -30,44 +30,6 @@ class LottoTest {
             // then
             assertThat(actual.getLottoNumbers()).isEqualTo(lottoNumbers);
         }
-
-        @DisplayName("당첨 번호와 매칭 개수를 적절하게 비교한다.")
-        @Test
-        void calculateWinningNumbersMatchCount() {
-            // given
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
-            Lotto lotto = new Lotto(lottoNumbers);
-
-            WinningNumbers winningNumbers = new WinningNumbers(new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21))), new LottoNumber(30));
-            // when
-            int matchCount = lotto.calculateWinningNumbersMatchCount(winningNumbers);
-
-            // then
-            assertThat(matchCount).isEqualTo(6);
-        }
-
-        @DisplayName("보너스 볼과 매칭을 적절하게 비교한다.")
-        @Test
-        void isContainsBonusNumber() {
-            // given
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(new LottoNumber(30), new LottoNumber(3), new LottoNumber(9),
-                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
-            Lotto lotto = new Lotto(lottoNumbers);
-
-            WinningNumbers winningNumbers = new WinningNumbers(new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21))), new LottoNumber(30));
-            // when
-            boolean containsBonusNumber = lotto.isContainsBonusNumber(winningNumbers);
-
-            // then
-            assertThat(containsBonusNumber).isTrue();
-        }
     }
 
     @Nested

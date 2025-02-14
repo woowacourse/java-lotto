@@ -42,14 +42,6 @@ public class Lotto {
         }
     }
 
-    public int calculateWinningNumbersMatchCount(final WinningNumbers winningNumbers) {
-        return winningNumbers.calculateLottoMatchCount(getLottoNumbers());
-    }
-
-    public boolean isContainsBonusNumber(final WinningNumbers winningNumbers) {
-        return winningNumbers.matchBonusNumber(getLottoNumbers());
-    }
-
     public List<LottoNumber> getLottoNumbers() {
         return List.copyOf(lottoNumbers);
     }

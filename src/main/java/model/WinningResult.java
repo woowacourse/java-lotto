@@ -1,8 +1,6 @@
 package model;
 
 import constans.ErrorType;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class WinningResult {
@@ -20,20 +18,6 @@ public class WinningResult {
             .anyMatch(count -> count < 0)) {
             throw new IllegalArgumentException(ErrorType.WINNING_RESULT_POSITIVE.getMessage());
         }
-    }
-    
-    public static WinningResult of(
-        final List<Lotto> lottos,
-        final WinningNumbers winningNumbers
-    ) {
-        final Map<LottoRank, Integer> lottoRanks = new HashMap<>();
-
-        for (final Lotto lotto : lottos) {
-            final LottoRank lottoRank = LottoRank.of(lotto, winningNumbers);
-            lottoRanks.put(lottoRank, lottoRanks.getOrDefault(lottoRank, 0) + 1);
-        }
-
-        return new WinningResult(lottoRanks);
     }
 
     private long calculateRevenue() {

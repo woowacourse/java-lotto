@@ -12,8 +12,7 @@ public class LottoMachine {
         this.numberGenerator = numberGenerator;
     }
 
-    public List<Lotto> issueLottos(final PurchaseAmount purchaseAmount) {
-        final int lottoCount = purchaseAmount.calculateLottoCount();
+    public List<Lotto> issueLottos(final int lottoCount) {
         final List<Lotto> lottos = new ArrayList<>();
 
         while (lottos.size() < lottoCount) {
@@ -21,5 +20,15 @@ public class LottoMachine {
         }
 
         return lottos;
+    }
+
+    public LottoRank checkWinningRank(
+        final Lotto lotto,
+        final WinningNumbers winningNumbers
+    ) {
+        final int lottoMatchCount = winningNumbers.calculateLottoMatchCount(lotto.getLottoNumbers());
+        final boolean bonusBallMatch = winningNumbers.matchBonusNumber(lotto.getLottoNumbers());
+
+        return LottoRank.of(lottoMatchCount, bonusBallMatch);
     }
 }

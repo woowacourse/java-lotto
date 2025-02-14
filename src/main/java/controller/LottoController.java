@@ -8,6 +8,7 @@ import model.Lotto;
 import model.LottoMachine;
 import model.LottoNumber;
 import model.PurchaseAmount;
+import model.Store;
 import model.WinningNumbers;
 import model.WinningResult;
 import view.input.InputView;
@@ -34,11 +35,12 @@ public class LottoController {
         outputView.printPurchaseQuantity(purchaseAmount.calculateLottoCount());
 
         final LottoMachine lottoMachine = new LottoMachine(numberGenerator);
-        final List<Lotto> lottos = lottoMachine.issueLottos(purchaseAmount);
+        final Store store = new Store(lottoMachine);
+        final List<Lotto> lottos = store.purchaseLottos(purchaseAmount);
         outputView.printLottoNumbers(convertLottos(lottos));
 
         final WinningNumbers winningNumbers = executeWithRetry(this::inputWinningNumbers);
-        final WinningResult winningResult = WinningResult.of(lottos, winningNumbers);
+        final WinningResult winningResult = store.calculateWinningResult(winningNumbers, lottos);
         outputView.printLottoStatistics(winningResult.calculateRateOfRevenue(), winningResult.getLottoRanks(),
             winningResult.isDamage());
     }

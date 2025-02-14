@@ -126,6 +126,5 @@ class WinningNumbersTest {
                     IllegalArgumentException.class)
                 .hasMessageContaining(ErrorType.BONUS_BALL_IS_DUPLICATION.getMessage());
         }
-
     }
 }

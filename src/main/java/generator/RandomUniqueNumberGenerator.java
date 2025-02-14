@@ -39,6 +39,5 @@ public class RandomUniqueNumberGenerator extends NumberGenerator {
         if (rangeCount < count) {
             throw new IllegalArgumentException(ErrorType.RANDOM_NUMBER_GENERATOR_COUNT.getMessage());
         }
-
     }
 }

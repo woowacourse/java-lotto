@@ -28,7 +28,6 @@ class PurchaseAmountTest {
             // then
             assertThat(actual.getMoney()).isEqualTo(money);
         }
-
     }
 
     @Nested

@@ -37,16 +37,13 @@ public enum LottoRank {
     }
 
     public static LottoRank of(
-        final Lotto lotto,
-        final WinningNumbers winningNumbers
+        final int matchCount,
+        final boolean isBonusBallMatch
     ) {
-        final int lottoMatchCount = lotto.calculateWinningNumbersMatchCount(winningNumbers);
-        final boolean bonusBallMatch = lotto.isContainsBonusNumber(winningNumbers);
-
-        return Arrays.stream(values())
-            .filter(lottoRank -> lottoRank.incrementIfMatchCondition.test(lottoMatchCount, bonusBallMatch))
+        return Arrays.stream(LottoRank.values())
+            .filter(lottoRank -> lottoRank.incrementIfMatchCondition.test(matchCount, isBonusBallMatch))
             .findAny()
-            .orElse(FAIL);
+            .orElse(LottoRank.FAIL);
     }
 
     public int getPrizeMoney() {
