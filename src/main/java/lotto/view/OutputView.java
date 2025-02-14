@@ -10,6 +10,11 @@ import lotto.domain.LottoResult;
 
 public class OutputView {
 
+    public static void writeErrorMessage(IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+        System.out.println();
+    }
+
     public static void writeLottoTickets(List<List<Integer>> lottoTickets) {
         System.out.printf("%d개를 구매했습니다.", lottoTickets.size());
         for (List<Integer> lottoTicket : lottoTickets) {
