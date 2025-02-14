@@ -43,15 +43,14 @@ public class ConsoleOutputView implements OutputView {
     private void printLottoResult(LottoPrizeResponse lottoPrizeResponse, int amount) {
         int matchCount = lottoPrizeResponse.getMatchCount();
         int prize = lottoPrizeResponse.getPrize();
+        boolean isBonusNumberMatches = lottoPrizeResponse.isBonusNumberMatches();
 
         StringBuilder message = new StringBuilder(matchCount + "개 일치");
 
-        if (lottoPrizeResponse.isBonusNumberMatches()) {
-            message.append(", 보너스 볼 일치(").append(prize).append("원)").append(" - ").append(amount).append("개");
-            System.out.println(message);
-            return;
+        if (isBonusNumberMatches) {
+            message.append(", 보너스 볼 일치");
         }
-        message.append(" (").append(prize).append("원)").append("- ").append(amount).append("개");
+        message.append(" (").append(prize).append("원)").append(" - ").append(amount).append("개");
 
         System.out.println(message);
     }
