@@ -2,7 +2,9 @@ package lotto.view;
 
 import lotto.dto.request.PaymentRequest;
 import lotto.dto.request.WinningBallsRequest;
+import lotto.util.ConvertUtil;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -14,11 +16,14 @@ public class InputView {
 
     public PaymentRequest readPayment() {
         System.out.println(PAYMENT_MESSAGE);
-        return PaymentRequest.from(scanner.nextLine());
+        int payment = ConvertUtil.convertToNumber(scanner.nextLine());
+        return new PaymentRequest(payment);
     }
 
     public WinningBallsRequest readWinningBalls() {
-        return WinningBallsRequest.of(readWinningNumbers(), readBonusNumber());
+        List<Integer> winningNumbers = ConvertUtil.convertToList(readWinningNumbers());
+        int bonusNumber = ConvertUtil.convertToNumber(readBonusNumber());
+        return new WinningBallsRequest(winningNumbers, bonusNumber);
     }
 
     private String readWinningNumbers() {
