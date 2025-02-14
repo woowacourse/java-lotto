@@ -14,7 +14,6 @@ public class LottoMachine {
 
     public List<Lotto> issueLottos(final int lottoCount) {
         final List<Lotto> lottos = new ArrayList<>();
-
         while (lottos.size() < lottoCount) {
             lottos.add(Lotto.from(numberGenerator.pickNumbersInRange(Lotto.LOTTO_NUMBER_COUNT)));
         }
