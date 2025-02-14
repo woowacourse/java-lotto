@@ -1,6 +1,7 @@
 package model;
 
 import dto.LottoDto;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +14,8 @@ public enum Rank {
     FIRST(6, 2_000_000_000),
     FAIL(0, 0);
 
+    public static final int BONUS_REQUIRED_RANK_NUMBER = 5;
+
     private final int matchNumber;
     private final int winningAmount;
 
@@ -23,16 +26,14 @@ public enum Rank {
 
     public static Rank getRank(WinningLotto winningLotto, LottoDto lottoDto) {
         int duplicateNumber = getDuplicateNumber(winningLotto, lottoDto);
-        for (Rank rank : values()) {
-            if (rank.matchNumber == 5 && isBonusMatch(winningLotto.getBonus(), lottoDto)) {
-                return SECOND;
-            }
-            if (rank.matchNumber == duplicateNumber) {
-                return rank;
-            }
+        if (duplicateNumber == BONUS_REQUIRED_RANK_NUMBER && isBonusMatch(winningLotto.getBonus(), lottoDto)) {
+            return SECOND;
         }
 
-        return FAIL;
+        return Arrays.stream(values())
+                .filter(rank -> rank.matchNumber == duplicateNumber)
+                .findFirst()
+                .orElse(FAIL);
     }
 
     private static int getDuplicateNumber(WinningLotto winningLotto, LottoDto lottoDto) {
