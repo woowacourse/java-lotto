@@ -11,19 +11,19 @@ public class Validator {
         checkWhitespaceOnlyInput(input, ErrorMessages.WHITESPACE_ONLY_INPUT.getMessage());
     }
 
-    public static void checkNullInput(String input, String errorMessage) {
+    private static void checkNullInput(String input, String errorMessage) {
         if (input == null) {
             throw new IllegalArgumentException(errorMessage);
         }
     }
 
-    public static void checkEmptyInput(String input, String errorMessage) {
+    private static void checkEmptyInput(String input, String errorMessage) {
         if (input.isEmpty()) {
             throw new IllegalArgumentException(errorMessage);
         }
     }
 
-    public static void checkWhitespaceOnlyInput(String input, String errorMessage) {
+    private static void checkWhitespaceOnlyInput(String input, String errorMessage) {
         if (input.trim().isEmpty()) {
             throw new IllegalArgumentException(errorMessage);
         }
