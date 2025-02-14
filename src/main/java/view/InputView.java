@@ -1,5 +1,8 @@
 package view;
 
+import static model.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
+import static model.ExceptionMessage.INVALID_INPUT_TYPE;
+
 import java.util.Scanner;
 import model.Bonus;
 import model.Lotto;
@@ -11,7 +14,7 @@ public class InputView {
 
     public static LottoPurchase getPurchaseLotto() {
         System.out.println("구입금액을 입력해 주세요.");
-        return LottoPurchase.of(getInput());
+        return LottoPurchase.of(getIntegerInput());
     }
 
     public static Lotto getWinningLotto() {
@@ -21,10 +24,22 @@ public class InputView {
 
     public static Bonus getWinningBonus(final Lotto lotto) {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return Bonus.of(getInput(), lotto);
+        return Bonus.of(getIntegerInput(), lotto);
+    }
+
+    private static Integer getIntegerInput() {
+        try {
+            return Integer.parseInt(getInput());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_INPUT_TYPE.getMessage());
+        }
     }
 
     private static String getInput() {
-        return sc.nextLine();
+        try {
+            return sc.nextLine().strip();
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException(INVALID_INPUT_NULL_OR_BLANK.getMessage());
+        }
     }
 }
