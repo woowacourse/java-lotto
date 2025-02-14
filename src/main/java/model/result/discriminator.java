@@ -7,7 +7,6 @@ import model.LottoWinningNumbers;
 import model.OwnedLotto;
 
 public class discriminator {
-
     public static PrizeResult judge(OwnedLotto ownedLotto, LottoWinningNumbers lottoWinningNumbers) {
         EnumMap<Rank, Integer> prizeCounts = new EnumMap<>(Rank.class);
         for (int idx = 0; idx < ownedLotto.size(); idx++) {

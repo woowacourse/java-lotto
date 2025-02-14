@@ -2,7 +2,6 @@ package model.result;
 
 import static common.constant.NumberConstants.LOTTO_PRICE;
 
-import java.util.Arrays;
 import java.util.EnumMap;
 
 public class PrizeResult {
@@ -27,20 +26,7 @@ public class PrizeResult {
         return (double) calculatePrizeSum() / money;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        Arrays.stream(Rank.values())
-                .filter(rank -> !isMiss(rank))
-                .forEach(rank -> sb.append(rank.getMessages()).append(result.getOrDefault(rank, 0)).append("개\n"));
-        return sb.toString();
-    }
-
-    private boolean isMiss(Rank rank) {
-        if (rank == Rank.MISS) {
-            return true;
-        }
-
-        return false;
+    public EnumMap<Rank, Integer> getResult() {
+        return result;
     }
 }
