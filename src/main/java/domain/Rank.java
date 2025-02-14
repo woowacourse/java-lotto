@@ -11,17 +11,17 @@ public enum Rank {
 
     private int count;
     private int prize;
-    private boolean bonusFlag;
+    private boolean isMatchBonus;
 
-    Rank(int count, int prize, boolean bonusFlag) {
+    Rank(int count, int prize, boolean isMatchBonus) {
         this.count = count;
         this.prize = prize;
-        this.bonusFlag = bonusFlag;
+        this.isMatchBonus = isMatchBonus;
     }
 
-    public static Rank matchRank(int matchCount, boolean bonusFlag) {
+    public static Rank matchRank(int matchCount, boolean isMatchBonus) {
         for (Rank rank : Rank.values()) {
-            if (rank.count == matchCount && rank.bonusFlag == bonusFlag) {
+            if (rank.count == matchCount && rank.isMatchBonus == isMatchBonus) {
                 return rank;
             }
         }
