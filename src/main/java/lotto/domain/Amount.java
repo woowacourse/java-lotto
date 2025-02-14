@@ -14,7 +14,7 @@ public class Amount {
     }
 
     private void validateZero(int money) {
-        if (isLessThousand(money)) {
+        if (isLessThanLottoPrize(money)) {
             throw new IllegalArgumentException(ERROR_MONEY_ZERO);
         }
     }
@@ -25,7 +25,7 @@ public class Amount {
         }
     }
 
-    private boolean isLessThousand(int money) {
+    private boolean isLessThanLottoPrize(int money) {
         return money < LOTTO_PRIZE;
     }
 
