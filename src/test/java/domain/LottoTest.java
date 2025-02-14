@@ -13,13 +13,14 @@ class LottoTest {
     @MethodSource("getLottoNumbersInputData")
     @ParameterizedTest
     void 당첨_번호와_비교하여_일치_결과를_반환한다(
-            List<Integer> lottoNumbers, int winningNumberCount, boolean hasBonusNumber) {
+            List<Integer> lottoNumbers, int winningNumberCount, boolean hasBonusNumber
+    ) {
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 7;
+        Ball bonus = new Ball(7);
 
         Lotto lotto = new Lotto(lottoNumbers);
 
-        MatchDto matchDto = lotto.getMatchDto(winningNumbers, bonusNumber);
+        MatchDto matchDto = lotto.getMatchDto(winningNumbers, bonus);
 
         assertThat(matchDto.winningNumberCount()).isEqualTo(winningNumberCount);
         assertThat(matchDto.hasBonusNumber()).isEqualTo(hasBonusNumber);

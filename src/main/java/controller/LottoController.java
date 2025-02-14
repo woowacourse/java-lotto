@@ -1,5 +1,6 @@
 package controller;
 
+import domain.Ball;
 import domain.Lottos;
 import domain.MatchDto;
 import domain.WinningCountDto;
@@ -23,9 +24,9 @@ public class LottoController {
         Lottos lottos = issueLottos(purchaseAmount);
 
         List<Integer> winningNumbers = inputView.askWinningNumbers();
-        int bonusNumber = inputView.askBonusNumber();
+        Ball bonus = new Ball(inputView.askBonusNumber());
 
-        List<WinningCountDto> winningCountDtos = matchAndCountWinningLottos(lottos, winningNumbers, bonusNumber);
+        List<WinningCountDto> winningCountDtos = matchAndCountWinningLottos(lottos, winningNumbers, bonus);
 
         calculateYield(purchaseAmount, winningCountDtos);
     }
@@ -42,9 +43,9 @@ public class LottoController {
     }
 
     private List<WinningCountDto> matchAndCountWinningLottos(
-            Lottos lottos, List<Integer> winningNumbers, int bonusNumber
+            Lottos lottos, List<Integer> winningNumbers, Ball bonus
     ) {
-        List<MatchDto> matchDtos = lottos.getMatchDtos(winningNumbers, bonusNumber);
+        List<MatchDto> matchDtos = lottos.getMatchDtos(winningNumbers, bonus);
         List<WinningCountDto> winningCountDtos = WinningStatistics.calculateWinningCountDtos(matchDtos);
         outputView.printWinningStatistics(winningCountDtos);
 

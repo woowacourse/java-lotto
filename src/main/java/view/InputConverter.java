@@ -1,8 +1,6 @@
 package view;
 
 import static domain.Lotto.LOTTO_PRICE;
-import static domain.Lotto.MAX_LOTTO_NUMBER;
-import static domain.Lotto.MIN_LOTTO_NUMBER;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,7 +23,6 @@ public class InputConverter {
 
         List<Integer> winningNumbers = Arrays.stream(input.split(WINNING_NUMBER_DELIMITER))
                 .map(Integer::parseInt)
-                .peek(this::validateNumberRange)
                 .toList();
 
         validateUniqueNumber(winningNumbers);
@@ -40,10 +37,7 @@ public class InputConverter {
             throw new IllegalArgumentException("보너스 번호 입력 양식이 올바르지 않습니다.");
         }
 
-        int bonusNumber = Integer.parseInt(input);
-        validateNumberRange(bonusNumber);
-
-        return bonusNumber;
+        return Integer.parseInt(input);
     }
 
     public int convertPurchaseAmount(String input) {
@@ -69,12 +63,6 @@ public class InputConverter {
     private void validatePurchaseAmountRange(int value) {
         if (value < LOTTO_PRICE) {
             throw new IllegalArgumentException("구입 금액은 " + LOTTO_PRICE + "원 이상부터 가능합니다.");
-        }
-    }
-
-    private void validateNumberRange(int value) {
-        if (value < MIN_LOTTO_NUMBER || value > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("당첨 번호는 " + MIN_LOTTO_NUMBER + " ~ " + MAX_LOTTO_NUMBER + "만 가능합니다.");
         }
     }
 

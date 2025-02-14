@@ -1,37 +1,40 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class Lotto {
 
     public static final int LOTTO_PRICE = 1000;
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 45;
     public static final int MAX_LOTTO_SIZE = 6;
 
-    private final List<Integer> numbers;
+    private List<Ball> balls;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+        List<Ball> balls = new ArrayList<>();
+        numbers.stream()
+                .map(Ball::new)
+                .forEach(balls::add);
+        this.balls = balls;
     }
 
-    public String getNumbers() {
-        return numbers.toString();
-    }
-
-    public MatchDto getMatchDto(List<Integer> winningNumbers, int bonusNumber) {
-        int winningNumberCount = numbers.stream()
+    public MatchDto getMatchDto(List<Integer> winningNumbers, Ball bonus) {
+        int winningNumberCount = balls.stream()
                 .filter(winningNumbers::contains)
                 .mapToInt(e -> 1)
                 .sum();
 
-        boolean hasBonusNumber = numbers.contains(bonusNumber);
+        boolean hasBonusNumber = balls.contains(bonus);
 
         return new MatchDto(
                 winningNumberCount,
                 hasBonusNumber
         );
+    }
+
+    public String getBalls() {
+        return balls.toString();
     }
 
 }
