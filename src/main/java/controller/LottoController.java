@@ -1,7 +1,6 @@
 package controller;
 
 import config.Container;
-import factory.LottoFactory;
 import java.util.List;
 import model.Lotto;
 import model.Lottos;
@@ -14,6 +13,7 @@ import util.InputConverter;
 import view.ViewFacade;
 
 public class LottoController {
+
     private final ViewFacade viewFacade;
     private final LottoGenerateService lottoGenerateService;
     private final StatisticsService statisticsService;
@@ -41,7 +41,7 @@ public class LottoController {
 
     private void processLottoDrawing(PurchaseHistory purchaseHistory) {
         List<Integer> basicNumbers = InputConverter.convertToList(viewFacade.getWinningNumbers());
-        Lotto basicLotto = LottoFactory.createLotto(basicNumbers);
+        Lotto basicLotto = new Lotto(basicNumbers);
         int bonusNumber = InputConverter.convertToInteger(viewFacade.getBonusNumber());
 
         WinningLotto winningLotto = new WinningLotto(basicLotto, bonusNumber);
@@ -49,12 +49,15 @@ public class LottoController {
     }
 
     private void processStatistics(PurchaseHistory purchaseHistory) {
-        Statistics statistics = statisticsService.produceStatistics(purchaseHistory.lottos,
-                purchaseHistory.purchaseAmount);
+        Statistics statistics = statisticsService.produceStatistics(
+            purchaseHistory.lottos,
+            purchaseHistory.purchaseAmount
+        );
         viewFacade.printStatistics(statistics.toDto());
     }
 
     private record PurchaseHistory(Lottos lottos, int purchaseAmount) {
+
     }
 
 }

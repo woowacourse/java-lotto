@@ -1,8 +1,6 @@
 package service;
 
 import error.ErrorMessage;
-import factory.LottoFactory;
-import factory.LottosFactory;
 import java.util.List;
 import model.Lotto;
 import model.Lottos;
@@ -15,7 +13,7 @@ public class LottoGenerateService {
         validatePurchaseAmount(purchaseAmount);
         int count = purchaseAmount / PRICE;
 
-        Lottos lottos = LottosFactory.createLottos();
+        Lottos lottos = new Lottos();
 
         for (int i = 0; i < count; i++) {
             insertLotto(lottos);
@@ -26,7 +24,7 @@ public class LottoGenerateService {
 
     private void insertLotto(Lottos lottos) {
         List<Integer> numbers = RandomGenerator.generateNumbers(1, 45, 6);
-        Lotto lotto = LottoFactory.createLotto(numbers);
+        Lotto lotto = new Lotto(numbers);
         lottos.addLotto(lotto);
     }
 
