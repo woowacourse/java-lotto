@@ -28,15 +28,19 @@ public enum Rank {
             return FOURTH;
         }
         if (matchCount == 5) {
-            if (isMatchBonusNumber) {
-                return SECOND;
-            }
-            return THIRD;
+            return checkRankSecondOrThird(isMatchBonusNumber);
         }
         if (matchCount == 6) {
             return FIRST;
         }
         return NONE;
+    }
+
+    private static Rank checkRankSecondOrThird(boolean isMatchBonusNumber) {
+        if (isMatchBonusNumber) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public int getPrize() {
