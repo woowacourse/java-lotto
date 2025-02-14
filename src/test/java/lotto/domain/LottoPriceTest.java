@@ -10,13 +10,9 @@ public class LottoPriceTest {
         // Given
         int rawPrice = 1000;
 
-        // When
-        LottoPrice lottoPrice = new LottoPrice(rawPrice);
-
-        // Then
-        Assertions.assertThatCode(() -> {
-            Assertions.assertThat(lottoPrice);
-        }).doesNotThrowAnyException();
+        // When & Then
+        Assertions.assertThatCode(() -> new LottoPrice(rawPrice))
+                .doesNotThrowAnyException();
     }
 
     @Test
