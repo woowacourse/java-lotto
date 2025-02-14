@@ -12,10 +12,17 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
-    static Stream<Arguments> generateOutOfBoundLottos() {
+    static Stream<Arguments> generateOutOfSizeLottos() {
         return Stream.of(
                 Arguments.of(List.of(1, 2, 3, 4, 5)),
                 Arguments.of(List.of(1, 2, 3, 4, 5, 6, 7))
+        );
+    }
+
+    static Stream<Arguments> generateOutOfBoundLottos() {
+        return Stream.of(
+                Arguments.of(List.of(0, 2, 3, 4, 5, 6)),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 46))
         );
     }
 
@@ -31,7 +38,7 @@ class LottoTest {
 
     @DisplayName("로또 번호가 6개가 아니면 예외")
     @ParameterizedTest
-    @MethodSource("generateOutOfBoundLottos")
+    @MethodSource("generateOutOfSizeLottos")
     void test3(List<Integer> numbers) {
         // given
 
@@ -41,10 +48,10 @@ class LottoTest {
     }
 
     @DisplayName("로또 범위가 벗어나는 경우 예외")
-    @Test
-    void test4() {
+    @ParameterizedTest
+    @MethodSource("generateOutOfBoundLottos")
+    void test4(List<Integer> numbers) {
         // given
-        List<Integer> numbers = List.of(0, 1, 2, 3, 4, 46);
 
         // when & then
         assertThatThrownBy(() -> new Lotto(numbers))
