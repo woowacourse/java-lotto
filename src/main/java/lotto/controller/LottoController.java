@@ -6,8 +6,8 @@ import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.Lottos;
+import lotto.model.Money;
 import lotto.model.RandomNumberGenerator;
-import lotto.model.ReturnRatioGenerator;
 import lotto.model.WinningLotto;
 import lotto.model.WinningResults;
 import lotto.view.InputView;
@@ -27,15 +27,13 @@ public class LottoController {
 
     public void run() {
         try {
-            String money = inputView.readPurchaseMoney();
+            Money money = new Money(Integer.parseInt(inputView.readPurchaseMoney()));
             issueLottoTickets(money);
             printIssuedLottoTickets();
-
             WinningLotto winningLotto = createWinningLotto();
             WinningResults winningResults = winningLotto.calculateWinning(lottos);
             outputView.printWinningResult(winningResults);
-            double returnRatio = ReturnRatioGenerator.calculateReturnRatio(Integer.parseInt(money),
-                    winningResults);
+            double returnRatio = money.calculateReturnRatio(winningResults.calculateEarnedMoney());
             outputView.printWinningRatio(returnRatio);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
@@ -51,12 +49,8 @@ public class LottoController {
         return new WinningLotto(winningLotto, bonusNumber);
     }
 
-    private void issueLottoTickets(final String money) {
-        int buyingAmount = parseInt(money);
-        if (buyingAmount % Lottos.UNIT_PRICE != 0 || buyingAmount < 0) {
-            throw new IllegalArgumentException("천원 단위로 입력해 주세요.");
-        }
-        int count = buyingAmount / Lottos.UNIT_PRICE;
+    private void issueLottoTickets(final Money money) {
+        int count = (int) money.getBuyingMoney() / Money.UNIT_PRICE;
         for (int i = 0; i < count; i++) {
             addLotto();
         }

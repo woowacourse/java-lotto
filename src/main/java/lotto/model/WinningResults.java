@@ -14,4 +14,12 @@ public class WinningResults {
         return responses;
     }
 
+    public long calculateEarnedMoney() {
+        long totalEarnedMoney = 0L;
+        for (WinningResult response : this.getResponses()) {
+            totalEarnedMoney += response.getWinningAmount() * response.getWinningCount();
+        }
+        return totalEarnedMoney;
+    }
+
 }
