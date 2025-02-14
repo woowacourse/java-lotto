@@ -25,9 +25,12 @@ public class LottoController {
         int purchaseMoney = getPurchaseMoney();
         List<Lotto> lottos = lottoMachine.issueLottos(purchaseMoney);
         printPurchasedLottos(lottos);
+
         WinningLotto winningLotto = getWinningLotto();
+
         List<LottoPrize> lottoPrizes = lottoMachine.calculateLottoResults(lottos, winningLotto);
         List<LottoPrizeResponse> lottoPrizeResponses = lottoPrizes.stream().map(LottoPrizeResponse::from).toList();
+
         outputView.printLottoResults(lottoPrizeResponses, purchaseMoney);
     }
 

@@ -45,6 +45,7 @@ public class ConsoleOutputView implements OutputView {
         int prize = lottoPrizeResponse.getPrize();
 
         StringBuilder message = new StringBuilder(matchCount + "개 일치");
+
         if (lottoPrizeResponse.isBonusNumberMatches()) {
             message.append(", 보너스 볼 일치(").append(prize).append("원)").append(" - ").append(amount).append("개");
             System.out.println(message);
@@ -83,9 +84,11 @@ public class ConsoleOutputView implements OutputView {
 
     private void printProfitRate(double profitRate) {
         System.out.print("총 수익률은 " + profitRate + "입니다.");
+
         if (profitRate < 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
+
         System.out.println();
     }
 }

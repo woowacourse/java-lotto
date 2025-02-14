@@ -25,7 +25,9 @@ public class LottoMachine {
     }
 
     public List<LottoPrize> calculateLottoResults(List<Lotto> lottos, WinningLotto winningLotto) {
-        return lottos.stream().map(lotto -> LottoPrize.determine(lotto, winningLotto)).toList();
+        return lottos.stream()
+                .map(lotto -> LottoPrize.determine(lotto, winningLotto))
+                .toList();
     }
 
     private void validatePurchaseMoney(final int purchaseMoney) {

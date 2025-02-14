@@ -13,12 +13,13 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers generateFrom(NumberGenerator numberGenerator, int size) {
-        return new LottoNumbers(
-                numberGenerator.generate(LottoNumber.MIN, LottoNumber.MAX, size));
+        return new LottoNumbers(numberGenerator.generate(LottoNumber.MIN, LottoNumber.MAX, size));
     }
 
     public List<Integer> getValues() {
-        return values.stream().map(LottoNumber::getValue).toList();
+        return values.stream()
+                .map(LottoNumber::getValue)
+                .toList();
     }
 
     public boolean contains(int value) {
