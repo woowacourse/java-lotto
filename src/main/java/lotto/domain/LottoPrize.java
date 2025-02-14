@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.util.Constant.LOTTO_WINNING_NUMBERS_HIT_STANDARD;
+
 import java.util.Arrays;
 
 public enum LottoPrize {
@@ -24,14 +26,16 @@ public enum LottoPrize {
     public static LottoPrize findLottoPrize(int winningNumbersHit, boolean isBonusHit) {
         return Arrays.stream(values())
                 .filter(rank -> rank.hitNumbers == winningNumbersHit)
-                .filter(rank -> {
-                    if (rank.hitNumbers == 5) {
-                        return rank.hitBonus == isBonusHit;
-                    }
-                    return true;
-                })
+                .filter(rank -> checkBonusHit(rank, isBonusHit))
                 .findFirst()
                 .orElse(MISS);
+    }
+
+    private static boolean checkBonusHit(LottoPrize lottoPrize, boolean isBonusHit) {
+        if (lottoPrize.hitNumbers == LOTTO_WINNING_NUMBERS_HIT_STANDARD) {
+            return lottoPrize.hitBonus == isBonusHit;
+        }
+        return true;
     }
 
     public int getHitNumbers() {
