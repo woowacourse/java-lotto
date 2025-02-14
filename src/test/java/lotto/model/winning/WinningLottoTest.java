@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.winning;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -9,7 +9,9 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.Lottos;
 
 class WinningLottoTest {
 

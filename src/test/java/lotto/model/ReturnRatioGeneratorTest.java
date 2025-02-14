@@ -7,6 +7,9 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.model.winning.WinningResultResponse;
+import lotto.model.winning.WinningResultResponses;
+
 class ReturnRatioGeneratorTest {
 
     @DisplayName("구매금액과 당첨 결과를 알려주면 수익률을 계산해준다.")

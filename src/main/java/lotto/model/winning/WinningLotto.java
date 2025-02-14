@@ -1,11 +1,13 @@
-package lotto.model;
+package lotto.model.winning;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.Lottos;
 
 public class WinningLotto {
 

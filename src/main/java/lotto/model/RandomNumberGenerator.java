@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import lotto.model.lotto.Lotto;
+
 public class RandomNumberGenerator {
 
     private RandomNumberGenerator() {

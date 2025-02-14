@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import lotto.model.Lotto;
-import lotto.model.Lottos;
+import lotto.model.lotto.Lotto;
+import lotto.model.lotto.Lottos;
 import lotto.model.RandomNumberGenerator;
 import lotto.model.ReturnRatioGenerator;
-import lotto.model.WinningLotto;
-import lotto.model.WinningResultResponses;
+import lotto.model.winning.WinningLotto;
+import lotto.model.winning.WinningResultResponses;
 import lotto.model.lotto.LottoNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;

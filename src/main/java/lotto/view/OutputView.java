@@ -3,8 +3,8 @@ package lotto.view;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.model.WinningResultResponse;
-import lotto.model.WinningResultResponses;
+import lotto.model.winning.WinningResultResponse;
+import lotto.model.winning.WinningResultResponses;
 
 public class OutputView {
     private static final String winningResultFormat = "%d개 일치 (%d원)- %d개";

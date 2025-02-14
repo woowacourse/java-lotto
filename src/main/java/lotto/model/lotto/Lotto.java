@@ -1,12 +1,10 @@
-package lotto.model;
+package lotto.model.lotto;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
-
-import lotto.model.lotto.LottoNumber;
 
 public class Lotto {
 

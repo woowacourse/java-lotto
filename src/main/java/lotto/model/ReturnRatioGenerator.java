@@ -1,5 +1,8 @@
 package lotto.model;
 
+import lotto.model.winning.WinningResultResponse;
+import lotto.model.winning.WinningResultResponses;
+
 public class ReturnRatioGenerator {
 
     private ReturnRatioGenerator() {

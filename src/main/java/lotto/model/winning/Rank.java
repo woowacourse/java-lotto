@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.winning;
 
 import java.util.Arrays;
 
