@@ -9,8 +9,8 @@ public class InputView implements AutoCloseable {
         this.scanner = new Scanner(System.in);
     }
 
-    public String read() {
-
+    public String read(String prompt) {
+        System.out.println(prompt);;
         return scanner.nextLine();
     }
 
