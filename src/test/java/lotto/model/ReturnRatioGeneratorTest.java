@@ -13,8 +13,8 @@ class ReturnRatioGeneratorTest {
     @Test
     void calculateReturnRatio() {
         int money = 14_000;
-        WinningResultResponses responses = new WinningResultResponses(
-                List.of(new WinningResultResponse(3, 5_000, false, 1)));
+        WinningResults responses = new WinningResults(
+                List.of(new WinningResult(3, 5_000, false, 1)));
 
         assertThat(ReturnRatioGenerator.calculateReturnRatio(money, responses)).isEqualTo(0.35);
     }

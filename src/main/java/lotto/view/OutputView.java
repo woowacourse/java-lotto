@@ -3,8 +3,8 @@ package lotto.view;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.model.WinningResultResponse;
-import lotto.model.WinningResultResponses;
+import lotto.model.WinningResult;
+import lotto.model.WinningResults;
 
 public class OutputView {
     private static final String winningResultFormat = "%d개 일치 (%d원)- %d개";
@@ -18,15 +18,15 @@ public class OutputView {
         }
     }
 
-    public void printWinningResult(final WinningResultResponses responses) {
+    public void printWinningResult(final WinningResults responses) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (WinningResultResponse response : responses.getResponses()) {
+        for (WinningResult response : responses.getResponses()) {
             printStatistics(response);
         }
     }
 
-    private static void printStatistics(final WinningResultResponse response) {
+    private static void printStatistics(final WinningResult response) {
         if (response.isHasBonus() && response.getMatchingCount() == 5) {
             System.out.println(
                     winningSecondResultFormat.formatted(response.getMatchingCount(), response.getWinningAmount(),

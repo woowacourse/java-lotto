@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +16,9 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public WinningResultResponses calculateWinning(final Lottos lottos) {
+    public WinningResults calculateWinning(final Lottos lottos) {
         Map<Rank, Integer> ranks = findRanks(lottos);
-        return new WinningResultResponses(toResponses(ranks));
+        return new WinningResults(toResponses(ranks));
     }
 
     private Map<Rank, Integer> findRanks(final Lottos lottos) {
@@ -43,8 +42,8 @@ public class WinningLotto {
         }
     }
 
-    private List<WinningResultResponse> toResponses(final Map<Rank, Integer> ranks) {
-        List<WinningResultResponse> responses = new ArrayList<>();
+    private List<WinningResult> toResponses(final Map<Rank, Integer> ranks) {
+        List<WinningResult> responses = new ArrayList<>();
         for (Rank rank : ranks.keySet()) {
             toResponse(ranks, rank, responses);
         }
@@ -52,7 +51,7 @@ public class WinningLotto {
     }
 
     private void toResponse(final Map<Rank, Integer> ranks, final Rank rank,
-                            final List<WinningResultResponse> responses) {
+                            final List<WinningResult> responses) {
         if (rank.isNone()) {
             return;
         }
@@ -64,10 +63,10 @@ public class WinningLotto {
     }
 
     private static void saveResponses(final Rank rank, final boolean hasBonus, final Map<Rank, Integer> ranks,
-                                      final List<WinningResultResponse> responses) {
-        WinningResultResponse winningResultResponse = new WinningResultResponse(rank.getMatchingCount(),
+                                      final List<WinningResult> responses) {
+        WinningResult winningResult = new WinningResult(rank.getMatchingCount(),
                 rank.getWinningAmount(), hasBonus, ranks.get(rank));
-        responses.add(winningResultResponse);
+        responses.add(winningResult);
     }
 
     private void validate(final Lotto lotto, final LottoNumber bonusNumber) {

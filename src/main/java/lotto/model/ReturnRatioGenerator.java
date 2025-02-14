@@ -5,9 +5,9 @@ public class ReturnRatioGenerator {
     private ReturnRatioGenerator() {
     }
 
-    public static double calculateReturnRatio(int money, WinningResultResponses winningResultResponses) {
+    public static double calculateReturnRatio(int money, WinningResults winningResults) {
         long totalReturnMoney = 0L;
-        for (WinningResultResponse response : winningResultResponses.getResponses()) {
+        for (WinningResult response : winningResults.getResponses()) {
             totalReturnMoney += response.getWinningAmount() * response.getWinningCount();
         }
         double ratio = (double) totalReturnMoney / money;

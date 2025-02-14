@@ -9,7 +9,7 @@ import lotto.model.Lottos;
 import lotto.model.RandomNumberGenerator;
 import lotto.model.ReturnRatioGenerator;
 import lotto.model.WinningLotto;
-import lotto.model.WinningResultResponses;
+import lotto.model.WinningResults;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -32,10 +32,10 @@ public class LottoController {
             printIssuedLottoTickets();
 
             WinningLotto winningLotto = createWinningLotto();
-            WinningResultResponses winningResultResponses = winningLotto.calculateWinning(lottos);
-            outputView.printWinningResult(winningResultResponses);
+            WinningResults winningResults = winningLotto.calculateWinning(lottos);
+            outputView.printWinningResult(winningResults);
             double returnRatio = ReturnRatioGenerator.calculateReturnRatio(Integer.parseInt(money),
-                    winningResultResponses);
+                    winningResults);
             outputView.printWinningRatio(returnRatio);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
