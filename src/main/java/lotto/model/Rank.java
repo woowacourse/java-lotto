@@ -5,11 +5,11 @@ import java.util.Arrays;
 public enum Rank {
 
     NONE(0, 0L),
-    FIFTH(3, 5000L),
-    FOURTH(4, 50000L),
-    THIRD(5, 1500000L),
-    SECOND(5, 30000000L),
-    FIRST(6, 2000000000L);
+    FIFTH(3, 5_000L),
+    FOURTH(4, 50_000L),
+    THIRD(5, 1_500_000L),
+    SECOND(5, 30_000_000L),
+    FIRST(6, 2_000_000_000L);
 
     private final int matchingCount;
     private final long winningAmount;
