@@ -6,10 +6,14 @@ import static model.ExceptionMessage.INVALID_BONUS_TYPE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class BonusTest {
 
@@ -38,12 +42,12 @@ class BonusTest {
                 .hasMessageContaining(BONUS_DUPLICATE.getMessage());
     }
 
-    @Test
-    @DisplayName("1 미만이거나 45 초과 숫자가 들어왔을 때 예외 처리된다.")
-    void inputWithInvalidRange() {
+    @ParameterizedTest(name = "{0} 미만이거나 {1}} 초과 숫자가 들어왔을 때 예외 처리된다.")
+    @MethodSource("provideLottoRange")
+    void inputWithInvalidRange(final int lottoMinRange, final int lottoMaxRange) {
         assertThatThrownBy(() -> Bonus.of(46, lotto))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_BONUS_RANGE.getMessage(1, 45));
+                .hasMessageContaining(INVALID_BONUS_RANGE.getMessage(lottoMinRange, lottoMaxRange));
     }
 
     @Test
@@ -53,5 +57,9 @@ class BonusTest {
         assertThatThrownBy(() -> Bonus.of(0, lotto)) // TODO : number 인자 0을 테스트하고 싶은 숫자로 수정
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(INVALID_BONUS_TYPE.getMessage());
+    }
+
+    static Stream<Arguments> provideLottoRange() {
+        return Stream.of(Arguments.of(Lotto.LOTTO_MIN_RANGE, Lotto.LOTTO_MAX_RANGE));
     }
 }

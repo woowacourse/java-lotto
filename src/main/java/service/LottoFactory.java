@@ -15,7 +15,7 @@ import model.Prize;
 
 public class LottoFactory {
 
-    private static final int LOTTO_PURCHASE_UNIT = 1_000;
+    public static final int LOTTO_PURCHASE_UNIT = 1_000;
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_MAX_RANGE = 45;
 

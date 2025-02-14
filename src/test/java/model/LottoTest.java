@@ -9,8 +9,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
 
@@ -54,11 +58,15 @@ class LottoTest {
                 .hasMessageContaining(INVALID_LOTTO_TYPE.getMessage());
     }
 
-    @Test
-    @DisplayName("1 미만이거나 45 초과 숫자가 들어왔을 때 예외 처리된다.")
-    void inputWithInvalidRange() {
+    @ParameterizedTest(name = "{0} 미만이거나 {1} 초과 숫자가 들어왔을 때 예외 처리된다.")
+    @MethodSource("provideLottoRange")
+    void inputWithInvalidRange(final int lottoMinRange, final int lottoMaxRange) {
         assertThatThrownBy(() -> Lotto.of("48, 1, 2, 3, 4, 5"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_LOTTO_RANGE.getMessage(1, 45));
+                .hasMessageContaining(INVALID_LOTTO_RANGE.getMessage(lottoMinRange, lottoMaxRange));
+    }
+
+    static Stream<Arguments> provideLottoRange() {
+        return Stream.of(Arguments.of(Lotto.LOTTO_MIN_RANGE, Lotto.LOTTO_MAX_RANGE));
     }
 }

@@ -5,7 +5,7 @@ import static model.ExceptionMessage.INVALID_LOTTO_PURCHASE_UNIT;
 
 public class LottoPurchase {
 
-    private static final int MIN_AMOUNT = 1_000;
+    public static final int MIN_AMOUNT = 1_000;
 
     private final int amount;
 
