@@ -1,6 +1,7 @@
 package lotto.model.lotto;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,8 +21,7 @@ class LottoNumberTest {
     @ValueSource(ints = {1, 45})
     @ParameterizedTest
     void drawNumberInRange(int number) {
-        assertThatThrownBy(() -> LottoNumber.draw(number))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertDoesNotThrow(() -> LottoNumber.draw(number));
     }
 
 }
