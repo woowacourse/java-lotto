@@ -19,14 +19,14 @@ public class Price {
             return;
         }
 
-        throw new IllegalArgumentException("Invalid lotto price value: " + value);
+        throw new IllegalArgumentException("로또 단위는 1000원 입니다. 1000원 단위로 입력해주세요 입력된 (" + value + ")는 1000원 단위의 수가 아닙니다.");
     }
 
     private int validateNumberFormat(String value) {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid number: " + value);
+            throw new IllegalArgumentException("숫자만 입력해주세요 입력된(" + value + ")는 숫자의 형식이 아닙니다.");
         }
     }
 
