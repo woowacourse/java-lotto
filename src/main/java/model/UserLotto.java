@@ -9,10 +9,18 @@ public class UserLotto {
     private final List<Lotto> lottos = new ArrayList<>();
 
     public UserLotto(String rawPurchaseAmount) {
+        if(!isPurchaseNumber1000Unit(rawPurchaseAmount)) {
+            throw new IllegalArgumentException("1000원 단위의 금액을 입력해주세요.\n");
+        }
+
         purchaseNumber = Integer.parseInt(rawPurchaseAmount) / 1000;
         for (int i = 0; i < purchaseNumber; i++) {
             lottos.add(new Lotto());
         }
+    }
+
+    private boolean isPurchaseNumber1000Unit(String rawPurchaseAmount) {
+        return ((Integer.parseInt(rawPurchaseAmount) % 1000 == 0));
     }
 
     public int getPurchaseAmount() {
