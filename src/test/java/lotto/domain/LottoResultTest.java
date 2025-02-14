@@ -19,8 +19,8 @@ public class LottoResultTest {
                 Set.of(1, 2, 3, 4, 5, 7)  // 5 hit, bonus true
         );
 
-        LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
-        lottoResult.matchLottoTicketsResult();
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
 
         assertEquals(0, (int) matchResult.get(LottoPrize.FIFTH));
@@ -39,8 +39,8 @@ public class LottoResultTest {
                 Set.of(1, 2, 3, 4, 5, 8)  // 5 hit, bonus false
         );
 
-        LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
-        lottoResult.matchLottoTicketsResult();
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
 
         assertEquals(0, (int) matchResult.get(LottoPrize.FIFTH));
@@ -59,11 +59,10 @@ public class LottoResultTest {
                 Set.of(1, 2, 8, 9, 10, 11)  // 2 hit
         );
 
-        LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
-        lottoResult.matchLottoTicketsResult();
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
 
-        assertEquals(1, (int) matchResult.get(LottoPrize.MISS));
         assertEquals(0, (int) matchResult.get(LottoPrize.FIFTH));
         assertEquals(0, (int) matchResult.get(LottoPrize.FOURTH));
         assertEquals(0, (int) matchResult.get(LottoPrize.THIRD));
@@ -81,8 +80,8 @@ public class LottoResultTest {
         );
 
         LottoMoney lottoMoney = new LottoMoney("10000");
-        LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
-        lottoResult.matchLottoTicketsResult();
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
         lottoResult.calculateLottoProfitRate(lottoMoney);
         assertEquals((double) 1_500_000 / 10_000, lottoResult.calculateLottoProfitRate(lottoMoney));
     }

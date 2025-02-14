@@ -22,8 +22,8 @@ public class GameController {
 
         WinningLotto winningLotto = storeWinningLotto();
 
-        LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
-        lottoResult.matchLottoTicketsResult();
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
         lottoResult.calculateLottoProfitRate(lottoMoney);
 
         OutputView.writeLottoResult(lottoResult);

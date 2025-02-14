@@ -8,14 +8,9 @@ import java.util.TreeMap;
 
 public class LottoResult {
 
-    private final WinningLotto winningLotto;
-    private final List<Set<Integer>> lottoTickets;
-
     private final Map<LottoPrize, Integer> lottoResult;
 
-    public LottoResult(WinningLotto winningLotto, List<Set<Integer>> lottoTickets) {
-        this.winningLotto = winningLotto;
-        this.lottoTickets = lottoTickets;
+    public LottoResult() {
         this.lottoResult = new TreeMap<>();
         for (LottoPrize prize : LottoPrize.values()) {
             addLottoResultPrize(prize);
@@ -28,13 +23,13 @@ public class LottoResult {
         }
     }
 
-    public void matchLottoTicketsResult() {
+    public void matchLottoTicketsResult(WinningLotto winningLotto, List<Set<Integer>> lottoTickets) {
         for (Set<Integer> lottoTicket : lottoTickets) {
-            matchLottoTicketResult(lottoTicket);
+            matchLottoTicketResult(winningLotto, lottoTicket);
         }
     }
 
-    private void matchLottoTicketResult(Set<Integer> lottoTicket) {
+    private void matchLottoTicketResult(WinningLotto winningLotto, Set<Integer> lottoTicket) {
         int bonusBall = winningLotto.getBonusBall();
         boolean isBonusHit = lottoTicket.contains(bonusBall);
 
