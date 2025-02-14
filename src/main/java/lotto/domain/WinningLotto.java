@@ -14,9 +14,9 @@ public class WinningLotto {
     private final int bonusBall;
 
     public WinningLotto(Lotto winningNumbers, String bonusBallInput) {
-        this.winningNumbers = winningNumbers;
         int bonusBallNumber = validateAndParse(bonusBallInput);
         validateBonusBall(bonusBallNumber);
+        this.winningNumbers = winningNumbers;
         this.bonusBall = bonusBallNumber;
     }
 
