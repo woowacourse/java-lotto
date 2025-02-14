@@ -16,6 +16,4 @@ public class OutputMessage {
     public static String PROFIT_MESSAGE = "총 수익률은 %.2f입니다.";
 
     public static String NEW_LINE = System.lineSeparator();
-
-    private String message;
 }
