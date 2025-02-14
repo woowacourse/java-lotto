@@ -43,6 +43,4 @@ public class LottoNumbers {
     public Boolean bonusMatch(Integer bonusNumber) {
         return numbers.contains(bonusNumber);
     }
-
-
 }
