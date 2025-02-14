@@ -13,7 +13,7 @@ public class WinningNumbers {
         this.bonusNumber = generatedBonusNumber;
     }
 
-    private static void validateWinningNumbersContainBonusNumber(Lotto lotto, LottoNumber generatedBonusNumber) {
+    private void validateWinningNumbersContainBonusNumber(Lotto lotto, LottoNumber generatedBonusNumber) {
         if (lotto.containsNumber(generatedBonusNumber)) {
             throw new IllegalArgumentException(WINNING_NUMBERS_CONTAIN_BONUS_NUMBER.getMessage());
         }
