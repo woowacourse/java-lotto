@@ -44,6 +44,6 @@ public enum MatchRank {
     }
 
     private static boolean isMatchBonus(int matchNumber, boolean bonus) {
-        return matchNumber == 5 && bonus;
+        return matchNumber == MATCH_BONUS.number && bonus;
     }
 }
