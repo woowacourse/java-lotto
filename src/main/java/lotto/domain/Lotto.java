@@ -25,8 +25,12 @@ public class Lotto {
                 .toList();
     }
 
-    public LottoNumbers getLottoNumbers() {
-        return lottoNumbers;
+    public long getMatchCount(LottoNumbers winnerNumbers) {
+        return winnerNumbers.getMatchCount(lottoNumbers);
+    }
+
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.contain(bonusNumber);
     }
 
     @Override

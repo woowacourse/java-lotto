@@ -27,12 +27,11 @@ public class WinnerLotto {
     }
 
     public long getMatchCount(Lotto lotto) {
-        return lotto.getLottoNumbers()
-                .getMatchCount(winnerNumbers);
+        return lotto.getMatchCount(winnerNumbers);
     }
 
+
     public boolean hasBonus(Lotto lotto) {
-        return lotto.getLottoNumbers()
-                .contain(bonusNumber);
+        return lotto.hasBonusNumber(bonusNumber);
     }
 }
