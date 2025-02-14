@@ -3,14 +3,14 @@ package controller;
 import model.LottoStatistics;
 import model.PurchasedLottos;
 import model.WinLotto;
-import view.ResultView;
+import view.LottoStatisticsView;
 
-public class ResultController {
-    public ResultView resultView = new ResultView();
+public class LottoStatisticsController {
+    public LottoStatisticsView lottoStatisticsView = new LottoStatisticsView();
 
     public void lottoResult(PurchasedLottos purchasedLottos, WinLotto winLotto) {
         LottoStatistics lottoStatistics = new LottoStatistics(purchasedLottos.getLottos(), winLotto);
-        resultView.printResult(lottoStatistics);
-        resultView.printTotalReturn(lottoStatistics, purchasedLottos);
+        lottoStatisticsView.printResult(lottoStatistics);
+        lottoStatisticsView.printTotalReturn(lottoStatistics, purchasedLottos);
     }
 }

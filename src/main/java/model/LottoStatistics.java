@@ -6,27 +6,27 @@ import java.util.List;
 import java.util.Map.Entry;
 
 public class LottoStatistics {
-    private final EnumMap<WinLottoInfo, Integer> result = new EnumMap<>(WinLottoInfo.class);
+    private final EnumMap<WinLottoInfo, Integer> lottoStatistics = new EnumMap<>(WinLottoInfo.class);
 
     public LottoStatistics(List<LottoNumbers> lottoNumbers, WinLotto winLotto) {
         for (LottoNumbers purchasedLotto : lottoNumbers) {
             WinLottoInfo winResult = WinLottoInfo.result(purchasedLotto, winLotto);
-            result.put(winResult, result.getOrDefault(winResult, 0) + 1);
+            lottoStatistics.put(winResult, lottoStatistics.getOrDefault(winResult, 0) + 1);
         }
     }
 
     private Integer calculateTotalPrize() {
         Integer sum = 0;
-        for (Entry<WinLottoInfo, Integer> winLottoInfoIntegerEntry : result.entrySet()) {
-            WinLottoInfo winLottoInfo = winLottoInfoIntegerEntry.getKey();
-            Integer count = winLottoInfoIntegerEntry.getValue();
+        for (Entry<WinLottoInfo, Integer> statisticsEntry : lottoStatistics.entrySet()) {
+            WinLottoInfo winLottoInfo = statisticsEntry.getKey();
+            Integer count = statisticsEntry.getValue();
             sum += winLottoInfo.getPrice() * count;
         }
         return sum;
     }
 
     public Integer getCount(WinLottoInfo winLottoInfo) {
-        return result.get(winLottoInfo);
+        return lottoStatistics.get(winLottoInfo);
     }
 
     public Double totalReturn(Integer purchaseAmount) {

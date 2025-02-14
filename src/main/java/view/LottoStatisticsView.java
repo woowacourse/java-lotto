@@ -10,7 +10,7 @@ import constant.OutputMessage;
 import model.LottoStatistics;
 import model.PurchasedLottos;
 
-public class ResultView {
+public class LottoStatisticsView {
     public void printResult(LottoStatistics lottoStatistics) {
         System.out.printf(OutputMessage.FIFTH_RESULT, FIFTH.getMatchNumberCount(), FIFTH.getPrice(),
                 nullToZero(lottoStatistics.getCount(FIFTH)));

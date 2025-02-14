@@ -1,5 +1,5 @@
+import controller.LottoStatisticsController;
 import controller.PurchaseController;
-import controller.ResultController;
 import controller.WinLottoController;
 import model.PurchasedLottos;
 import model.WinLotto;
@@ -7,7 +7,7 @@ import model.WinLotto;
 public class LottoApplication {
     private final PurchaseController purchaseController = new PurchaseController();
     private final WinLottoController winLottoController = new WinLottoController();
-    private final ResultController resultController = new ResultController();
+    private final LottoStatisticsController lottoStatisticsController = new LottoStatisticsController();
 
     public static void main(String[] args) {
         new LottoApplication().run();
@@ -16,6 +16,6 @@ public class LottoApplication {
     private void run() {
         PurchasedLottos purchasedLottos = purchaseController.purchase();
         WinLotto winLotto = winLottoController.winLotto();
-        resultController.lottoResult(purchasedLottos, winLotto);
+        lottoStatisticsController.lottoResult(purchasedLottos, winLotto);
     }
 }
