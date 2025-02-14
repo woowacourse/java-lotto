@@ -4,8 +4,6 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import lotto.dto.MatchCountDto;
-import lotto.dto.Profit;
 import lotto.dto.WinningInform;
 
 public class LottoStatistics {
@@ -21,15 +19,15 @@ public class LottoStatistics {
             tempCounts.put(rank, 0);
         }
 
-        List<MatchCountDto> matchResults = wallet.getMatchResults(
+        List<MatchResult> matchResults = wallet.getMatchResults(
                 winningInform.matchLotto(),
                 winningInform.bonusNumber()
         );
 
-        for (MatchCountDto matchCountDto : matchResults) {
+        for (MatchResult matchResult : matchResults) {
             MatchRank rank = MatchRank.getMatchRank(
-                    matchCountDto.matchCount(),
-                    matchCountDto.isBonusMatched()
+                    matchResult.matchCount(),
+                    matchResult.isBonusMatched()
             );
             tempCounts.merge(rank, 1, Integer::sum);
         }

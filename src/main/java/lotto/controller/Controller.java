@@ -9,7 +9,7 @@ import lotto.domain.LottoShop;
 import lotto.dto.WinningInform;
 import lotto.domain.Lotto;
 import lotto.domain.Wallet;
-import lotto.dto.Profit;
+import lotto.domain.Profit;
 import lotto.view.OutputView;
 
 public class Controller {

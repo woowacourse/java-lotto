@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.List;
 
 import java.util.Set;
-import lotto.dto.MatchCountDto;
 
 public class Lotto {
 
@@ -22,13 +21,13 @@ public class Lotto {
         sortNumbers(this.numbers);
     }
 
-    public MatchCountDto countMatchingNumbers(Lotto matchLotto, int bonus) {
+    public MatchResult countMatchingNumbers(Lotto matchLotto, int bonus) {
 
         int count = (int) numbers.stream()
                 .filter(matchLotto::containsNumber)
                 .count();
 
-        return new MatchCountDto(count, containsNumber(bonus));
+        return new MatchResult(count, containsNumber(bonus));
     }
 
     public boolean containsNumber(int number) {

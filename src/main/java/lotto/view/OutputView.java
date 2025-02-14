@@ -4,7 +4,7 @@ import static lotto.domain.MatchRank.*;
 
 import lotto.domain.LottoStatistics;
 import lotto.domain.MatchRank;
-import lotto.dto.Profit;
+import lotto.domain.Profit;
 
 public class OutputView {
 

@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import lotto.dto.MatchCountDto;
-
 public class Wallet {
     private final List<Lotto> lottos;
 
@@ -12,15 +10,15 @@ public class Wallet {
         this.lottos = lottos;
     }
 
-    public List<MatchCountDto> getMatchResults(Lotto matchLotto, int bonus) {
-        List<MatchCountDto> matchCountDtos = new ArrayList<>();
+    public List<MatchResult> getMatchResults(Lotto matchLotto, int bonus) {
+        List<MatchResult> matchResults = new ArrayList<>();
 
         for (Lotto lotto : lottos) {
-            MatchCountDto dto = lotto.countMatchingNumbers(matchLotto, bonus);
-            matchCountDtos.add(dto);
+            MatchResult dto = lotto.countMatchingNumbers(matchLotto, bonus);
+            matchResults.add(dto);
         }
 
-        return matchCountDtos;
+        return matchResults;
     }
 
     @Override

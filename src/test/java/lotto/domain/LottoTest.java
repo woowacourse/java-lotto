@@ -8,8 +8,6 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.dto.MatchCountDto;
-
 class LottoTest {
 
     @Test
@@ -39,7 +37,7 @@ class LottoTest {
         Lotto lotto = new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
         Lotto matchLotto = new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 8)));
         int bonus = 6;
-        MatchCountDto dto = lotto.countMatchingNumbers(matchLotto, bonus);
+        MatchResult dto = lotto.countMatchingNumbers(matchLotto, bonus);
 
         assertThat(dto.matchCount()).isEqualTo(5);
         assertThat(dto.isBonusMatched()).isTrue();
