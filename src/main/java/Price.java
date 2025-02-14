@@ -19,14 +19,14 @@ public class Price {
             return;
         }
 
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("Invalid lotto price value: " + value);
     }
 
     private int validateNumberFormat(String value) {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Invalid number: " + value);
         }
     }
 

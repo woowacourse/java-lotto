@@ -28,5 +28,4 @@ class PriceTest {
 
         assertThat(price.getValue()).isEqualTo(10000);
     }
-
 }

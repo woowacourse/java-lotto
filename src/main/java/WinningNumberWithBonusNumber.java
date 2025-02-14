@@ -15,7 +15,7 @@ public record WinningNumberWithBonusNumber(
 
     private void validateDistinct(Lotto winningNumber, int bonusNumber) {
         if (winningNumber.getNumbers().contains(bonusNumber)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Winning number " + winningNumber + " is already in use");
         }
     }
 }

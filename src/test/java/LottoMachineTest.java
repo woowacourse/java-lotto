@@ -1,8 +1,9 @@
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+@DisplayName("로또머신 테스트")
 class LottoMachineTest {
 
     @Test
