@@ -50,7 +50,7 @@ public class LottoController {
 
     private void issueLottoTickets(final String money) {
         int buyingAmount = parseInt(money);
-        if (buyingAmount % Lottos.UNIT_PRICE != 0) {
+        if (buyingAmount % Lottos.UNIT_PRICE != 0 || buyingAmount < 0) {
             throw new IllegalArgumentException("천원 단위로 입력해 주세요.");
         }
         int count = buyingAmount / Lottos.UNIT_PRICE;
