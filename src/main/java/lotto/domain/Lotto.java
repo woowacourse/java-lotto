@@ -4,6 +4,7 @@ import static lotto.util.Constant.LOTTO_NUMBER_DELIMITER;
 import static lotto.util.Constant.LOTTO_NUMBER_MAX_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_MIN_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_SIZE;
+import static lotto.util.ErrorHandler.INVALID_LOTTO_NUMBER;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_RANGE;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_SIZE;
 
@@ -17,16 +18,24 @@ public class Lotto {
     private List<Integer> lotto = new ArrayList<>();
 
     public Lotto(String input) {
-        List<Integer> numbers = parseLottoNumbers(input);
+        List<Integer> numbers = parse(input);
         validate(numbers);
         this.lotto = numbers;
     }
 
-    private List<Integer> parseLottoNumbers(String input) {
+    private List<Integer> parse(String input) {
         List<String> result = Arrays.stream(input.split(LOTTO_NUMBER_DELIMITER)).toList();
         return result.stream()
-                .map(s -> Integer.parseInt(s.strip()))
+                .map(s -> validateAndParse(s.strip()))
                 .toList();
+    }
+
+    private int validateAndParse(String lottoNumberInput) {
+        try {
+            return Integer.parseInt(lottoNumberInput);
+        } catch (NumberFormatException e) {
+            throw INVALID_LOTTO_NUMBER.getException();
+        }
     }
 
     private void validate(List<Integer> numbers) {
