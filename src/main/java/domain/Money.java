@@ -6,6 +6,7 @@ import error.ErrorMessage;
 public class Money {
 
     private static final int UNIT = 1_000;
+
     private final int amount;
 
     public Money(final int amount) {

@@ -13,6 +13,7 @@ public enum ErrorMessage {
     INVALID_WINNING_NUMBER_DUPLICATE("보너스 번호는 로또 번호와 중복될 수 없습니다.");
 
     private static final String PREFIX = "[ERROR] ";
+
     private final String message;
 
     ErrorMessage(String message) {
