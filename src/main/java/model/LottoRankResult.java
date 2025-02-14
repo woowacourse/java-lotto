@@ -10,9 +10,6 @@ public class LottoRankResult {
 
     public LottoRankResult() {
         this.rankCount = new HashMap<>();
-        for (LottoRank lottoRank : LottoRank.values()) {
-            rankCount.put(lottoRank, 0);
-        }
     }
 
     public void updateRankCount(LottoRank lottoRank) {
@@ -24,6 +21,6 @@ public class LottoRankResult {
     }
 
     public int getCountByRank(LottoRank rank) {
-        return rankCount.get(rank);
+        return rankCount.getOrDefault(rank, 0);
     }
 }
