@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class WinningNumber {
     private static final String DELIMITER = ",";
@@ -35,14 +36,28 @@ public class WinningNumber {
     }
 
     private void validateNumber(String winningNumber) {
-        try {
+        validateNumberType(() -> {
             int number = Integer.parseInt(winningNumber.trim());
-            if(number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
-                throw new IllegalArgumentException("당첨 번호는 1~45 사이의 정수로 입력해주세요.");
-            }
-            if(numbers.contains(number)) {
-                throw new IllegalArgumentException("당첨 번호 간 중복 없이 입력해주세요.");
-            }
+            validateNumberRange(number);
+            validateNumberDuplication(number);
+        }, winningNumber);
+    }
+
+    private void validateNumberRange(int number) {
+        if(number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
+            throw new IllegalArgumentException("당첨 번호는 1~45 사이의 정수로 입력해주세요.");
+        }
+    }
+
+    private void validateNumberDuplication(int number) {
+        if(numbers.contains(number)) {
+            throw new IllegalArgumentException("당첨 번호 간 중복 없이 입력해주세요.");
+        }
+    }
+
+    private <T> void validateNumberType(Runnable task, String winningNumber) {
+        try {
+            task.run();
         } catch (NumberFormatException e) {
             if(winningNumber.length() > 10) {
                 throw new IllegalArgumentException("당첨 번호는 10자리 이하의 정수로 입력해주세요.");

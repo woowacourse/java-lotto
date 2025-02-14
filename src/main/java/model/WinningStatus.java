@@ -31,16 +31,26 @@ public enum WinningStatus {
     }
 
     public static WinningStatus findBy(int matchingCount, boolean matchesBonusNumber) {
-        if(matchingCount == THIRD.matchingCount) {
-            if(matchesBonusNumber) return SECOND;
-            return THIRD;
+        if (matchingCount == THIRD.matchingCount) {
+            return decideByBonusNumber(matchesBonusNumber);
         }
-        for(WinningStatus winningStatus : WinningStatus.values()) {
-            if(winningStatus.matchingCount == matchingCount) {
+        return decideByMatchingCount(matchingCount);
+    }
+
+    private static WinningStatus decideByMatchingCount(int matchingCount) {
+        for (WinningStatus winningStatus : WinningStatus.values()) {
+            if (winningStatus.matchingCount == matchingCount) {
                 return winningStatus;
             }
         }
         return NONE;
+    }
+
+    private static WinningStatus decideByBonusNumber(boolean matchesBonusNumber) {
+        if(matchesBonusNumber) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public String getExpression() {
