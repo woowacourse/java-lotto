@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.LottoRank;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +15,9 @@ public class OutputView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void printLottos(List<Integer> lottos) {
-        Collections.sort(lottos);
-        System.out.println(lottos);
+    public static void printLottos(List<Integer> lottoNumbers) {
+        List<Integer> sortedNumbers = lottoNumbers.stream().sorted().toList();
+        System.out.println(sortedNumbers);
     }
 
     public static void printWinningStatics(Map<LottoRank, Integer> winningInfo) {
