@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import lotto.domain.Amount;
+import lotto.domain.Money;
 import lotto.domain.MatchStatistics;
 import lotto.dto.MatchCountDto;
 import lotto.dto.Profit;
@@ -25,7 +25,7 @@ public class LottoService {
         return map;
     }
 
-    public Profit calculateProfit(Map<MatchStatistics, Integer> map, Amount amount) {
+    public Profit calculateProfit(Map<MatchStatistics, Integer> map, Money money) {
         int sum = 0;
 
         for (MatchStatistics statistics : map.keySet()) {
@@ -34,7 +34,7 @@ public class LottoService {
             sum += matchMoney * count;
         }
 
-        double result = (double)sum / amount.getMoney();
+        double result = (double)sum / money.getMoney();
         return new Profit(result, isProfit(result));
     }
 

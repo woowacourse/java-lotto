@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.common.utill.InputParser;
-import lotto.domain.Amount;
+import lotto.domain.Money;
+import lotto.domain.LottoShop;
 import lotto.service.LottoService;
 import lotto.domain.Lotto;
 import lotto.domain.MatchStatistics;
@@ -28,9 +29,9 @@ public class Controller {
     }
 
     public void run() {
-        Amount amount = requestAmount();
-        Wallet wallet = new Wallet(amount);
-        outputView.print(amount.getAmount() + "개를 구매했습니다.\n");
+        Money money = requestAmount();
+        Wallet wallet = LottoShop.buyLottos(money);
+        outputView.print(money.getAmount() + "개를 구매했습니다.\n");
         outputView.print(wallet.toString());
 
         Lotto matchLotto = requestMatchLotto();
@@ -40,7 +41,7 @@ public class Controller {
         Map<MatchStatistics, Integer> map = getMatchStatisticsMap(wallet, matchLotto, bonus);
         outputView.printStatics(map);
 
-        Profit profit = lottoService.calculateProfit(map, amount);
+        Profit profit = lottoService.calculateProfit(map, money);
         outputView.printProfit(profit);
     }
 
@@ -62,11 +63,11 @@ public class Controller {
         return lottoService.convertToMap(matchCount);
     }
 
-    private Amount requestAmount() {
+    private Money requestAmount() {
         while (true) {
             try {
                 int money = requestInt("구입금액을 입력해 주세요.");
-                return new Amount(money);
+                return new Money(money);
             } catch (IllegalArgumentException e) {
                 outputView.print(e.getMessage());
             }

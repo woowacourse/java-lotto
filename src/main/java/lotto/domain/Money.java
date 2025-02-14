@@ -1,19 +1,18 @@
 package lotto.domain;
 
+import static lotto.common.constant.Constant.LOTTO_PRIZE;
 import static lotto.common.exception.ErrorMessage.*;
 
-public class Amount {
-    private static final int LOTTO_PRIZE = 1000;
-
+public class Money {
     private final int money;
 
-    public Amount(int money) {
-        validateZero(money);
+    public Money(int money) {
+        validateEnoughMoney(money);
         validateDivided(money);
         this.money = money;
     }
 
-    private void validateZero(int money) {
+    private void validateEnoughMoney(int money) {
         if (isLessThanLottoPrize(money)) {
             throw new IllegalArgumentException(ERROR_MONEY_ZERO);
         }
