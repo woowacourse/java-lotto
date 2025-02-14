@@ -23,8 +23,8 @@ class BonusTest {
     @Test
     @DisplayName("되는 보너스")
     void validBonus() {
-        Integer bonusNumber = 7;
-        Integer expected = 7;
+        int bonusNumber = 7;
+        int expected = 7;
         Bonus bonus = Bonus.of(bonusNumber, lotto);
 
         assertThat(bonus.getNumber()).isEqualTo(expected);

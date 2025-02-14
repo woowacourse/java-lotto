@@ -13,7 +13,7 @@ class LottoFactoryTest {
 
     @BeforeEach
     void beforeEach() {
-        Integer purchase = 10000;
+        int purchase = 10000;
         lottoFactory = LottoFactory.of(purchase);
     }
 
