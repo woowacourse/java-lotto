@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.common.exception.ErrorMessage.*;
+import static lotto.common.constant.ErrorMessage.*;
 
 public class Amount {
     private static final int LOTTO_PRIZE = 1000;
@@ -15,13 +15,13 @@ public class Amount {
 
     private void validateZero(int money) {
         if (isLessThousand(money)) {
-            throw new IllegalArgumentException(ERROR_MONEY_ZERO);
+            throw new IllegalArgumentException(ERROR_MONEY_LESS_THEN_STANDARD.getMessage());
         }
     }
 
     private void validateDivided(int money) {
         if (isDivided(money)) {
-            throw new IllegalArgumentException(ERROR_MONEY_NOT_DIVIDED);
+            throw new IllegalArgumentException(ERROR_NOT_DIVIDED_MONEY.getMessage());
         }
     }
 

@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import static lotto.common.constant.Constant.*;
-import static lotto.common.exception.ErrorMessage.*;
+import static lotto.common.constant.ErrorMessage.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -22,13 +22,13 @@ public record Lotto(List<Integer> numbers) {
 
     private void validateNull(List<Integer> numbers) {
         if (numbers.isEmpty()) {
-            throw new IllegalArgumentException(ERROR_LOTTO_SIZE);
+            throw new IllegalArgumentException(ERROR_LOTTO_SIZE.getMessage());
         }
     }
 
     private void validateSize(List<Integer> numbers) {
         if (isCorrectedSize(numbers)) {
-            throw new IllegalArgumentException(ERROR_LOTTO_SIZE);
+            throw new IllegalArgumentException(ERROR_LOTTO_SIZE.getMessage());
         }
     }
 
@@ -44,7 +44,7 @@ public record Lotto(List<Integer> numbers) {
 
     private void checkLottoRange(int number) {
         if (isNumberInRage(number)) {
-            throw new IllegalArgumentException(ERROR_NUMBER_RANGE);
+            throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_RANGE.getMessage());
         }
     }
 

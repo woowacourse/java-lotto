@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import static lotto.common.exception.ErrorMessage.*;
+import static lotto.common.constant.ErrorMessage.*;
 
 import java.util.List;
 import java.util.Map;
@@ -101,7 +101,7 @@ public class Controller {
 
     private void validateBonus(Lotto mathLotto, int bonus) {
         if (mathLotto.isContainsBonus(bonus)) {
-            throw new IllegalArgumentException(ERROR_CONTAINS_BONUS);
+            throw new IllegalArgumentException(ERROR_DUPLICATED_BONUS_NUMBER.getMessage());
         }
     }
 
