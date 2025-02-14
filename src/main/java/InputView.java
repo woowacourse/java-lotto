@@ -38,5 +38,4 @@ public class InputView {
         String bonusRawInput = bufferedReader.readLine();
         return Number.from(bonusRawInput);
     }
-
 }
