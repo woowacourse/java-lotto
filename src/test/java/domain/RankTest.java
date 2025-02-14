@@ -20,9 +20,8 @@ class RankTest {
             "MISS, 2, true",
     })
     void 당첨결과에_해당하는_순위를_찾을_수_있다(Rank expected, int matchCount, boolean isRequireBonus) {
-        //given
-        Rank actual = Rank.findRank(matchCount, isRequireBonus);
         //when
+        Rank actual = Rank.findRank(matchCount, isRequireBonus);
         //then
         Assertions.assertThat(actual).isEqualTo(expected);
     }
