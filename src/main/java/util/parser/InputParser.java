@@ -1,7 +1,8 @@
-package util;
+package util.parser;
 
 import java.util.ArrayList;
 import java.util.List;
+import util.validator.Validator;
 
 public class InputParser {
 
