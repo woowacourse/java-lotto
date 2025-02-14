@@ -3,7 +3,8 @@ package lotto.domain;
 import static lotto.common.constant.Constant.*;
 import static lotto.common.exception.ErrorMessage.*;
 
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -16,9 +17,9 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        sortNumbers(numbers);
 
-        this.numbers = numbers;
+        this.numbers = new ArrayList<>(numbers);
+        sortNumbers(this.numbers);
     }
 
     public MatchCountDto countMatchingNumbers(Lotto matchLotto, int bonus) {
@@ -84,7 +85,7 @@ public class Lotto {
     }
 
     private static void sortNumbers(List<Integer> numbers) {
-        numbers.sort(Comparator.naturalOrder());
+        Collections.sort(numbers);
     }
 
     @Override

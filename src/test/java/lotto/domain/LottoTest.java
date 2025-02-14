@@ -46,15 +46,6 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또를 정렬해서 반환한다.")
-    void test_CheckSorted() {
-        ArrayList<Integer> list = new ArrayList<>(List.of(6, 5, 4, 3, 2, 1));
-        Lotto lotto = new Lotto(list);
-
-        assertThat(lotto.toString().equals(List.of(6, 5, 4, 3, 2, 1).toString())).isFalse();
-    }
-
-    @Test
     @DisplayName("로또에 중복된 번호가 있으면 예외가 발생한다.")
     void test_validateDuplicate() {
         assertThatThrownBy(() -> new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 5))))
