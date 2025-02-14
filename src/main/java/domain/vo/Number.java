@@ -1,3 +1,5 @@
+package domain.vo;
+
 public record Number(int value) {
     public static int MIN = 1;
     public static int MAX = 45;

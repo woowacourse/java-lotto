@@ -1,3 +1,7 @@
+package domain;
+
+import domain.vo.Number;
+
 public class WinningLotto {
     private final Lotto winningNumbers;
     private final Number bonusNumber;

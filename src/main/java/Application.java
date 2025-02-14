@@ -1,3 +1,6 @@
+import controller.LottoController;
+import infrastructure.AppConfig;
+
 import java.io.IOException;
 
 public class Application {

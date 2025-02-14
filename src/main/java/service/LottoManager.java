@@ -1,3 +1,11 @@
+package service;
+
+import domain.Lotto;
+import domain.LottoPrize;
+import domain.WinningLotto;
+import domain.WinningResult;
+import domain.vo.Money;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -2,9 +2,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+
+import domain.Lotto;
+import domain.LottoPrize;
+import domain.WinningLotto;
+import domain.WinningResult;
+import domain.vo.Money;
+import domain.vo.Number;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import service.LottoManager;
+import service.RandomNumbersGenerator;
 
 class TestNumbersGenerator implements RandomNumbersGenerator {
     private static int index = 0;

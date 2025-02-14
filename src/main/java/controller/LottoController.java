@@ -1,3 +1,13 @@
+package controller;
+
+import domain.Lotto;
+import domain.WinningLotto;
+import domain.WinningResult;
+import domain.vo.Money;
+import service.LottoManager;
+import view.InputView;
+import view.OutputView;
+
 import java.io.IOException;
 import java.util.List;
 

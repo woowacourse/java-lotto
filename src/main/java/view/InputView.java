@@ -1,3 +1,10 @@
+package view;
+
+import domain.Lotto;
+import domain.WinningLotto;
+import domain.vo.Money;
+import domain.vo.Number;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

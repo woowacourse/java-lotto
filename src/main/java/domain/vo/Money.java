@@ -1,3 +1,5 @@
+package domain.vo;
+
 public class Money {
     private static final int LOTTO = 1_000;
     private int value;
