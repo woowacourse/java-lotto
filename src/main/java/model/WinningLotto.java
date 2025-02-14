@@ -13,24 +13,14 @@ public class WinningLotto {
     private final int bonusNumber;
 
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
-        validateNumbers(winningNumbers);
+        validateWinningNumbers(winningNumbers);
         validateBonusNumber(winningNumbers, bonusNumber);
 
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public int countOverlappedNumbers(List<Integer> numbers) {
-        return (int) numbers.stream()
-                .filter(winningNumbers::contains)
-                .count();
-    }
-
-    public boolean isOverlappedBonusNumber(List<Integer> numbers) {
-        return numbers.contains(bonusNumber);
-    }
-
-    private void validateNumbers(List<Integer> numbers) {
+    private void validateWinningNumbers(List<Integer> numbers) {
         numbers.forEach(this::validateRange);
         validateSize(numbers);
         validateDuplication(numbers);
@@ -63,5 +53,15 @@ public class WinningLotto {
         if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호와 보너스 번호는 중복되어서는 안됩니다.");
         }
+    }
+
+    public int countOverlappedNumbers(List<Integer> numbers) {
+        return (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
+    public boolean isOverlappedBonusNumber(List<Integer> numbers) {
+        return numbers.contains(bonusNumber);
     }
 }
