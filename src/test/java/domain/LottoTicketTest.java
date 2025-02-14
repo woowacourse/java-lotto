@@ -13,9 +13,9 @@ class LottoTicketTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         // when
-        LottoTicket lottoTicket = lottoMachine.generateLottoTicket(new FixedLottoTicketGenerator());
+        LottoTicket lottoTicket = lottoMachine.generateLottoTicket(new FixedIntegerGenerator());
 
-        // than
+        // then
         Assertions.assertThat(lottoTicket.getSize()).isEqualTo(LottoTicket.LOTTO_SIZE);
         for (int number : lottoTicket.getNumbers()) {
             Assertions.assertThat(number).isGreaterThanOrEqualTo(LottoTicket.LOTTO_MIN_NUMBER);
