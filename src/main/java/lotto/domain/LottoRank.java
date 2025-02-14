@@ -32,10 +32,6 @@ public enum LottoRank {
         return winningAmount;
     }
 
-    public boolean isContainsBonus() {
-        return containsBonus;
-    }
-
     public static LottoRank findRankWithMatchResult(MatchResultDto matchResultDto) {
         if (matchResultDto.getMatchCount() == SECOND_PLACE.matchCount && matchResultDto.isContainsBonusNumber()) {
             return SECOND_PLACE;
