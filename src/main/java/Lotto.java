@@ -1,20 +1,17 @@
-import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final Numbers numbers;
     private static final int LOTTO_COUNT=6;
 
-    public Lotto(List<Integer> numbers) {
-        validate(numbers);
-
-        numbers.sort(Comparator.naturalOrder());
+    public Lotto(Numbers numbers) {
+        validate(numbers.getNumbers());
         this.numbers = numbers;
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return numbers.getNumbers();
     }
 
     private void validate(List<Integer> numbers) {

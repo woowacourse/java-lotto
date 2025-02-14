@@ -56,10 +56,10 @@ public class LottoController {
 
     private Lotto getWinningNumber(BufferedReader bufferedReader) throws IOException {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new Lotto(Arrays.stream(bufferedReader.readLine().split(","))
-                .map(String::trim)
+        Numbers numbers = new Numbers(Arrays.stream(bufferedReader.readLine().split(",")).map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList()));
+        return new Lotto(numbers);
     }
 
     private int getBonusNumber(BufferedReader bufferedReader) throws IOException {

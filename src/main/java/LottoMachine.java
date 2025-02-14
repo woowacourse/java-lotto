@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class LottoMachine {
 
     private final int ticket;
@@ -16,7 +14,7 @@ public class LottoMachine {
     public Lottos generateLottos() {
         Lottos lottos = new Lottos();
         for (int i = 0; i < ticket; i++) {
-            List<Integer> randomNumbers = RandomGenerator.generateUniqueRandomNumbers(LOTTO_NUMBER_COUNT, LOTTO_NUMBER_START, LOTTO_NUMBER_END);
+            Numbers randomNumbers = new Numbers(RandomGenerator.generateUniqueRandomNumbers(LOTTO_NUMBER_COUNT, LOTTO_NUMBER_START, LOTTO_NUMBER_END));
             Lotto lotto = new Lotto(randomNumbers);
             lottos.addLotto(lotto);
         }
