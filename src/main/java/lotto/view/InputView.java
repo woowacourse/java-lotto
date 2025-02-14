@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -11,9 +13,11 @@ public class InputView {
         return readInteger();
     }
 
-    public String readWinningLotto() {
+    public List<Integer> readWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        return Arrays.stream(scanner.nextLine().split(","))
+                .map(this::parseInt)
+                .toList();
     }
 
     public int readBonusNumber() {
@@ -22,8 +26,12 @@ public class InputView {
     }
 
     private int readInteger() {
+        return parseInt(scanner.nextLine());
+    }
+
+    private int parseInt(final String input) {
         try {
-            return Integer.parseInt(scanner.nextLine());
+            return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자를 입력해 주세요.");
         }

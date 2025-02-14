@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -43,9 +42,9 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLotto() {
-        String winningLottoNumber = inputView.readWinningLotto();
+        List<Integer> winningLottoNumbers = inputView.readWinningLotto();
         int bonusNumber = inputView.readBonusNumber();
-        return new WinningLotto(new Lotto(toNumbers(winningLottoNumber)), LottoNumber.draw(bonusNumber));
+        return new WinningLotto(new Lotto(winningLottoNumbers), LottoNumber.draw(bonusNumber));
     }
 
     private void issueLottoTickets(final int buyingAmount) {
@@ -64,13 +63,6 @@ public class LottoController {
                 .map(Lotto::getNumbers)
                 .toList();
         outputView.printIssuedLottos(issuedLottoNumbers);
-    }
-
-    private List<Integer> toNumbers(final String winningLottoNumber) {
-        return Arrays.stream(winningLottoNumber.split(","))
-                .map(String::strip)
-                .map(Integer::parseInt)
-                .toList();
     }
 
     private void addLotto() {
