@@ -2,6 +2,7 @@ package model;
 
 import dto.LottoDto;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserLotto {
@@ -15,24 +16,24 @@ public class UserLotto {
 
         purchaseNumber = Integer.parseInt(rawPurchaseAmount) / 1000;
         for (int i = 0; i < purchaseNumber; i++) {
-            lottos.add(new Lotto());
+            lottos.add(new Lotto(System.currentTimeMillis()));
         }
     }
 
     private boolean isPurchaseNumber1000Unit(String rawPurchaseAmount) {
-        return ((Integer.parseInt(rawPurchaseAmount) % 1000 == 0));
+        int purchaseAmount = Integer.parseInt(rawPurchaseAmount);
+        if(purchaseAmount < 1000 || purchaseAmount % 1000 != 0)
+            return false;
+
+        return true;
+    }
+
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     public int getPurchaseAmount() {
         return purchaseNumber * 1000;
-    }
-
-    public List<LottoDto> getLottosDto() {
-        List<LottoDto> lottosDto = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            lottosDto.add(LottoDto.from(lotto));
-        }
-        return lottosDto;
     }
 
     public List<LottoDto> getSortedLottosDto() {

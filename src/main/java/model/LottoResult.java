@@ -1,6 +1,5 @@
 package model;
 
-import dto.LottoDto;
 import java.util.EnumMap;
 import java.util.Map.Entry;
 
@@ -37,8 +36,8 @@ public class LottoResult {
     }
 
     private void calculateRanks(UserLotto userLotto, WinningLotto winningLotto) {
-        for (LottoDto lottoDto : userLotto.getLottosDto()) {
-            Rank rank = Rank.getRank(winningLotto, lottoDto);
+        for (Lotto lotto : userLotto.getLottos()) {
+            Rank rank = lotto.getRank(winningLotto);
             ranks.put(rank, ranks.get(rank) + 1);
         }
     }
