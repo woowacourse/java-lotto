@@ -16,7 +16,7 @@ public class InputConverter {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]+$");
     private static final String WINNING_NUMBER_DELIMITER = ",";
 
-    public static List<Integer> convertWinningNumbers(String input) {
+    public List<Integer> convertWinningNumbers(String input) {
         Matcher matcher = WINNING_NUMBER_PATTERN.matcher(input);
 
         if (!matcher.matches()) {
@@ -25,7 +25,7 @@ public class InputConverter {
 
         List<Integer> winningNumbers = Arrays.stream(input.split(WINNING_NUMBER_DELIMITER))
                 .map(Integer::parseInt)
-                .peek(InputConverter::validateNumberRange)
+                .peek(this::validateNumberRange)
                 .toList();
 
         validateUniqueNumber(winningNumbers);
@@ -33,7 +33,7 @@ public class InputConverter {
         return winningNumbers;
     }
 
-    public static int convertBonusNumber(String input) {
+    public int convertBonusNumber(String input) {
         Matcher matcher = NUMBER_PATTERN.matcher(input);
 
         if (!matcher.matches()) {
@@ -46,7 +46,7 @@ public class InputConverter {
         return bonusNumber;
     }
 
-    public static int convertPurchaseAmount(String input) {
+    public int convertPurchaseAmount(String input) {
         Matcher matcher = NUMBER_PATTERN.matcher(input);
 
         if (!matcher.matches()) {
@@ -60,25 +60,25 @@ public class InputConverter {
         return purchaseAmount;
     }
 
-    private static void validatePurchaseAmountIsDividedByUnit(int value) {
+    private void validatePurchaseAmountIsDividedByUnit(int value) {
         if (value % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("구입 금액은" + LOTTO_PRICE + "원 단위로 가능합니다.");
         }
     }
 
-    private static void validatePurchaseAmountRange(int value) {
+    private void validatePurchaseAmountRange(int value) {
         if (value < LOTTO_PRICE) {
             throw new IllegalArgumentException("구입 금액은 " + LOTTO_PRICE + "원 이상부터 가능합니다.");
         }
     }
 
-    private static void validateNumberRange(int value) {
+    private void validateNumberRange(int value) {
         if (value < MIN_LOTTO_NUMBER || value > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("당첨 번호는 " + MIN_LOTTO_NUMBER + " ~ " + MAX_LOTTO_NUMBER + "만 가능합니다.");
         }
     }
 
-    private static void validateUniqueNumber(List<Integer> values) {
+    private void validateUniqueNumber(List<Integer> values) {
         values.forEach(value -> {
             if (Collections.frequency(values, value) > 1) {
                 throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
