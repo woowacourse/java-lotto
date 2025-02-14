@@ -62,6 +62,4 @@ class WinningNumberTest {
 
         assertThat(matchingCount).isEqualTo(expectedCount);
     }
-
-
 }

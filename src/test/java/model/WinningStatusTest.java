@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class WinningStatusTest {
+
     @DisplayName("로또 번호와 당첨 번호의 일치 개수와 보너스 번호와의 일치 여부를 통해 당첨 결과를 구한다")
     @ParameterizedTest
     @CsvSource(value = {"6:false:FIRST", "5:true:SECOND", "5:false:THIRD", "4:false:FOURTH", "3:false:FIFTH", "2:false:NONE", "1:false:NONE", "0:false:NONE"}, delimiter = ':'

@@ -54,7 +54,7 @@ public class WinningNumber {
         }
     }
 
-    private <T> void validateNumberType(Runnable task, String winningNumber) {
+    private void validateNumberType(Runnable task, String winningNumber) {
         try {
             task.run();
         } catch (NumberFormatException e) {

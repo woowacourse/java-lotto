@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoGeneratorTest {
+
     @DisplayName("로또 한 개는 여섯 개의 숫자로 이루어져 있다")
     @Test
     void containsSixNumbersInlotto() {

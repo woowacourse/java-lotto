@@ -51,5 +51,4 @@ class PurchaseTest {
         assertThat(purchase.calculateLottoCount()).isEqualTo(expectedCount);
 
     }
-
 }

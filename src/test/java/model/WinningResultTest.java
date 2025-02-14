@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class WinningResultTest {
+
     @DisplayName("당첨 상태별 개수를 저장한다")
     @Test
     void saveCountByWinningStatus() {
