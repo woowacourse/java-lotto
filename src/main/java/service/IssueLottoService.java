@@ -3,8 +3,8 @@ package service;
 import static constant.LottoConstants.LOTTO_PRICE;
 import static constant.LottoConstants.LOTTO_RANGE_MAX;
 import static constant.LottoConstants.LOTTO_RANGE_MIN;
-import static exception.ErrorMessage.PRICE_RANGE_ERROR;
-import static exception.ErrorMessage.PRICE_UNIT_ERROR;
+import static exception.ExceptionMessage.PRICE_RANGE_ERROR;
+import static exception.ExceptionMessage.PRICE_UNIT_ERROR;
 
 import domain.Lotto;
 import dto.IssuedLottoDto;

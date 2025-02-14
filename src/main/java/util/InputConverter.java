@@ -1,7 +1,7 @@
 package util;
 
-import static exception.ErrorMessage.INPUT_FORMAT_ERROR;
-import static exception.ErrorMessage.NUMBER_TYPE_ERROR;
+import static exception.ExceptionMessage.INPUT_FORMAT_ERROR;
+import static exception.ExceptionMessage.NUMBER_TYPE_ERROR;
 
 import exception.LottoException;
 import java.util.Arrays;

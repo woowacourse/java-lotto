@@ -3,8 +3,8 @@ package domain;
 import static constant.LottoConstants.LOTTO_RANGE_MAX;
 import static constant.LottoConstants.LOTTO_RANGE_MIN;
 import static constant.LottoConstants.LOTTO_SIZE;
-import static exception.ErrorMessage.LOTTO_NUMBER_DUPLICATED_ERROR;
-import static exception.ErrorMessage.LOTTO_RANGE_ERROR;
+import static exception.ExceptionMessage.LOTTO_NUMBER_DUPLICATED_ERROR;
+import static exception.ExceptionMessage.LOTTO_RANGE_ERROR;
 
 import exception.LottoException;
 import java.util.ArrayList;

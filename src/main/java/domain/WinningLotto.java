@@ -1,7 +1,7 @@
 package domain;
 
-import static exception.ErrorMessage.LOTTO_NUMBER_DUPLICATED_ERROR;
-import static exception.ErrorMessage.LOTTO_RANGE_ERROR;
+import static exception.ExceptionMessage.LOTTO_NUMBER_DUPLICATED_ERROR;
+import static exception.ExceptionMessage.LOTTO_RANGE_ERROR;
 
 import constant.WinningCount;
 import dto.WinningLottoDto;

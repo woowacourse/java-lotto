@@ -1,6 +1,6 @@
 package exception;
 
-public enum ErrorMessage {
+public enum ExceptionMessage {
     LOTTO_RANGE_ERROR("로또 번호 범위 오류"),
     LOTTO_NUMBER_DUPLICATED_ERROR("로또 번호 중복 오류"),
     LOTTO_SIZE_ERROR("로또 번호 갯수 오류"),
@@ -10,10 +10,9 @@ public enum ErrorMessage {
     NUMBER_TYPE_ERROR("숫자 타입 오류"),
     SYSTEM_ERROR("시스템 오류");
 
-
     private String message;
 
-    ErrorMessage(String message) {
+    ExceptionMessage(String message) {
         this.message = message;
     }
 

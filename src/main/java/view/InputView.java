@@ -1,6 +1,6 @@
 package view;
 
-import static exception.ErrorMessage.SYSTEM_ERROR;
+import static exception.ExceptionMessage.SYSTEM_ERROR;
 
 import exception.LottoException;
 import java.io.BufferedReader;

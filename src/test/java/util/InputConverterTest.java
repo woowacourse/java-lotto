@@ -1,8 +1,9 @@
 package util;
 
+import static exception.ExceptionMessage.*;
 import static org.assertj.core.api.Assertions.*;
 
-import exception.ErrorMessage;
+import exception.ExceptionMessage;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +23,7 @@ class InputConverterTest {
     void convertNumberExceptionTest(String input){
         assertThatThrownBy(()->InputConverter.convertNumber(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_TYPE_ERROR.getMessage());
+                .hasMessage(NUMBER_TYPE_ERROR.getMessage());
     }
 
     @DisplayName("정상 숫자 리스트 반환 테스트")
@@ -41,6 +42,6 @@ class InputConverterTest {
     void convertWinningLottoExceptionTest(String input){
         assertThatThrownBy(()->InputConverter.convertWinningLotto(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.INPUT_FORMAT_ERROR.getMessage());
+                .hasMessage(INPUT_FORMAT_ERROR.getMessage());
     }
 }
