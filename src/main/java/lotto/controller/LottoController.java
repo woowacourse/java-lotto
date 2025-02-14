@@ -13,7 +13,7 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    public static final String DELIMITER = ",";
+    private static final String DELIMITER = ",";
 
     private final InputView inputView;
     private final OutputView outputView;
