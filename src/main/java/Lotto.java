@@ -4,8 +4,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final Money PRICE = new Money(1000);
-
     private List<Number> numbers;
 
     public Lotto(List<Integer> lottoNumbers) {
@@ -14,13 +12,6 @@ public class Lotto {
                 .sorted()
                 .map(Number::new)
                 .toList();
-    }
-
-    public static int getLottoCount(Money money) {
-        if (money.getValue() % PRICE.getValue() != 0) {
-            throw new IllegalArgumentException(String.format("구입 금액은 %d원 단위만 가능합니다.", PRICE.getValue()));
-        }
-        return money.getValue() / PRICE.getValue();
     }
 
     public List<Integer> getNumbers() {

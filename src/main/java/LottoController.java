@@ -14,7 +14,7 @@ public class LottoController {
 
     public void run() throws IOException {
         Money money = inputView.inputMoney();
-        final int lottoCount = Lotto.getLottoCount(money);
+        final int lottoCount = money.getLottoCount();
         outputView.printLottoCount(lottoCount);
 
         List<Lotto> lottos = lottoManager.generateLottos(lottoCount);
