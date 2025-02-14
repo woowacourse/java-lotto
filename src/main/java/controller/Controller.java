@@ -15,14 +15,24 @@ import view.InputView;
 import view.OutputView;
 
 public class Controller {
+
+    private static Controller instance;
+
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoMaker lottoMaker;
 
-    public Controller(InputView inputView, OutputView outputView, LottoMaker lottoMaker) {
+    private Controller(InputView inputView, OutputView outputView, LottoMaker lottoMaker) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoMaker = lottoMaker;
+    }
+
+    public static Controller getInstance() {
+        if (instance == null) {
+            instance = new Controller(InputView.getInstance(), OutputView.getInstance(), LottoMaker.getInstance());
+        }
+        return instance;
     }
 
     public void start() {
