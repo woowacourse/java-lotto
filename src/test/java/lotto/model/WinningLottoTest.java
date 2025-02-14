@@ -31,6 +31,7 @@ class WinningLottoTest {
         assertThatThrownBy(() -> new WinningLotto(lotto, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호와 보너스 번호는 중복될 수 없습니다.");
+
     }
 
     @DisplayName("로또 번호를 알려주면 당첨 등수를 계산해준다.")

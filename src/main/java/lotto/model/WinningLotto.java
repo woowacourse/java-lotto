@@ -28,7 +28,7 @@ public class WinningLotto {
         return ranks;
     }
 
-    private void saveRanks(Lottos lottos, Map<Rank, Integer> ranks) {
+    private void saveRanks(final Lottos lottos, final Map<Rank, Integer> ranks) {
         for (Lotto lotto : lottos.getLottos()) {
             int matchingCount = lotto.calculateMatchingCount(winningLotto);
             Rank findRank = Rank.findBy(matchingCount, lotto.has(bonusNumber));
@@ -36,7 +36,7 @@ public class WinningLotto {
         }
     }
 
-    private static void initRanks(Map<Rank, Integer> ranks) {
+    private static void initRanks(final Map<Rank, Integer> ranks) {
         for (Rank rank : Rank.values()) {
             ranks.put(rank, 0);
         }
