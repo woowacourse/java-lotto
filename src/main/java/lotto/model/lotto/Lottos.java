@@ -1,15 +1,13 @@
 package lotto.model.lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
 
-    public static final int UNIT_PRICE = 1_000;
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
+    public Lottos(final List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public List<Lotto> getLottos() {

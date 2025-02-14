@@ -43,8 +43,7 @@ class WinningLottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
         WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.draw(bonusNumber));
-        Lottos lottos = new Lottos();
-        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 7)));
+        Lottos lottos = new Lottos(List.of(new Lotto(List.of(1, 2, 3, 4, 5, 7))));
 
         assertThat(winningLotto.calculateWinning(lottos).getResponses())
                 .extracting("matchingCount", "hasBonus", "winningCount")

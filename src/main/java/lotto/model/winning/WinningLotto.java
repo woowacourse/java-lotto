@@ -40,7 +40,7 @@ public class WinningLotto {
         }
     }
 
-    private static void initRanks(Map<Rank, Integer> ranks) {
+    private void initRanks(Map<Rank, Integer> ranks) {
         for (Rank rank : Rank.values()) {
             ranks.put(rank, 0);
         }
