@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -10,7 +12,7 @@ class BankTest {
     @Test
     void 구입_금액만큼_money가_증가한다() {
         Bank bank = new Bank();
-        bank.use(5000);
+        bank.pay(5000);
 
         assertThat(bank).extracting("usedMoney").isEqualTo(5000);
     }
@@ -18,10 +20,9 @@ class BankTest {
     @Test
     void 수익률을_계산한다() {
         Bank bank = new Bank();
-        bank.use(10000);
-        Map<Rank, Integer> map = Map.of(Rank.FIFTH, 1);
-        double result = bank.calculateRateOfReturn(map);
-
-        assertThat(Math.floor(result * 100) / 100).isEqualTo(0.50);
+        bank.pay(10000);
+        Map<Rank, Long> map = Map.of(Rank.FIFTH, 1L);
+        BigDecimal result = bank.calculateRateOfReturn(map);
+        assertThat(result.setScale(2, RoundingMode.HALF_UP).doubleValue()).isEqualTo(0.50);
     }
 }

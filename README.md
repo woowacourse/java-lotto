@@ -95,15 +95,15 @@ git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 �
 
 ## 피드백 내용
 - [x] README를 체크 리스트로 작성하기
-- [ ] ErrorMessage를 enum으로 작성한 이유
-  - [ ] Lotto와 LottoNumber의 상수에 의존하기 때문에, 추후 유지보수가 어려워지진 않을지?
-- [ ] 상수와 상태 줄바꿈  
-- [ ] use는 bank의 기준에서 어떤 책임을 수행하는가?
-- [ ] rank 객체에게 메시지를 보내보는 건 어떨지? (getter 사용 지양)
-- [ ] 금액 계산에 대해서는 double 대신에 BigDecimal 권장
-- [ ] 세 자리수 마다 _를 명시적으로 선언해 가독성 높이기
-- [ ] TreeSet을 활용한 이유
-- [ ] record 클래스의 특징 확인하기
-- [ ] generator를 Lottos의 상태에 둔 이유는?
-- [ ] for안의 i < payment / Lotto.PRICE 조건에서 payment / Lotto.PRICE 계산 식을 변수 값으로 대체
-- [ ] getter 사용 지양
+- [x] ErrorMessage를 enum으로 작성한 이유
+  - [x] Lotto와 LottoNumber의 상수에 의존하기 때문에, 추후 유지보수가 어려워지진 않을지?
+- [x] 상수와 상태 줄바꿈  
+- [x] use는 bank의 기준에서 어떤 책임을 수행하는가?
+- [x] rank 객체에게 메시지를 보내보는 건 어떨지? (getter 사용 지양)
+- [x] 금액 계산에 대해서는 double 대신에 BigDecimal 권장
+- [x] 세 자리수 마다 _를 명시적으로 선언해 가독성 높이기
+- [x] TreeSet을 활용한 이유
+- [x] record 클래스의 특징 확인하기
+- [x] generator를 Lottos의 상태에 둔 이유는?
+- [x] for안의 i < payment / Lotto.PRICE 조건에서 payment / Lotto.PRICE 계산 식을 변수 값으로 대체
+- [x] getter 사용 지양(메서드명 포함)

@@ -7,6 +7,7 @@ import lotto.dto.response.ResultResponse;
 import lotto.dto.request.WinningBallsRequest;
 
 import java.util.Map;
+import lotto.util.RandomNumberGenerator;
 
 public class LottoService {
     private final Bank bank;
@@ -18,8 +19,8 @@ public class LottoService {
     }
 
     public LottosResponse buyLottos(PaymentRequest request) {
-        bank.use(request.payment());
-        this.lottos = new Lottos(request.payment());
+        bank.pay(request.payment());
+        this.lottos = new Lottos(new RandomNumberGenerator(), request.payment());
         return LottosResponse.from(lottos);
     }
 
@@ -28,7 +29,7 @@ public class LottoService {
     }
 
     public ResultResponse getResult() {
-        Map<Rank, Integer> rankCount = lottos.getRankCount(winningNumbers);
+        Map<Rank, Long> rankCount = lottos.getRankCount(winningNumbers);
         return ResultResponse.of(rankCount, bank.calculateRateOfReturn(rankCount));
     }
 }

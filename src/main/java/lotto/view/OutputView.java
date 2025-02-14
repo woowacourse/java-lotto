@@ -35,15 +35,15 @@ public class OutputView {
         System.out.printf(RETURN_OF_RATE_MESSAGE, response.rateOfReturn());
     }
 
-    private String getRankCountMessage(Rank rank, Map<Rank, Integer> rankCount) {
+    private String getRankCountMessage(Rank rank, Map<Rank, Long> rankCount) {
         if (rank == Rank.NONE) {
             return EMPTY;
         }
         if (rank == Rank.SECOND) {
             return String.format(RANK_COUNT_MESSAGE_WITH_BONUS,
-                rank.getMatchCount(), rank.getPrice(), rankCount.getOrDefault(rank, 0));
+                rank.getMatchCount(), rank.getPrice(), rankCount.getOrDefault(rank, 0L));
         }
         return String.format(RANK_COUNT_MESSAGE,
-            rank.getMatchCount(), rank.getPrice(), rankCount.getOrDefault(rank, 0));
+            rank.getMatchCount(), rank.getPrice(), rankCount.getOrDefault(rank, 0L));
     }
 }

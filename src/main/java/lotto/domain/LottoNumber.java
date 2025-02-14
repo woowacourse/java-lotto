@@ -1,10 +1,8 @@
 package lotto.domain;
 
-import lotto.util.NumberGenerator;
-
-import java.util.Objects;
-
 import static lotto.constant.ErrorMessage.OUT_OF_RANGE_LOTTO_NUMBER;
+
+import lotto.util.NumberGenerator;
 
 public record LottoNumber(
     int number
@@ -24,18 +22,6 @@ public record LottoNumber(
 
     public static LottoNumber random(NumberGenerator generator) {
         return new LottoNumber(generator.generate(MINIMUM, MAXIMUM));
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
-        return number == that.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(number);
     }
 
     @Override

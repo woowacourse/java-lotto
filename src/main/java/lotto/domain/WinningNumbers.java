@@ -3,19 +3,20 @@ package lotto.domain;
 import static lotto.constant.ErrorMessage.WINNING_NUMBERS_CONTAIN_BONUS_NUMBER;
 
 public class WinningNumbers {
-    private Lotto winningLotto;
-    private LottoNumber bonusNumber;
+    private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
     public WinningNumbers(Lotto lotto, int bonusNumber) {
         LottoNumber generatedBonusNumber = new LottoNumber(bonusNumber);
-        validateWinningNumbersContainBonusNumber(lotto, generatedBonusNumber);
+        validateBonusNumber(lotto, generatedBonusNumber);
         this.winningLotto = lotto;
         this.bonusNumber = generatedBonusNumber;
     }
 
-    private static void validateWinningNumbersContainBonusNumber(Lotto lotto, LottoNumber generatedBonusNumber) {
-        if (lotto.containsNumber(generatedBonusNumber)) {
-            throw new IllegalArgumentException(WINNING_NUMBERS_CONTAIN_BONUS_NUMBER.getMessage());
+    private static void validateBonusNumber(Lotto lotto, LottoNumber bonusNumber) {
+        if (lotto.containsNumber(bonusNumber)) {
+            throw new IllegalArgumentException(String.format(WINNING_NUMBERS_CONTAIN_BONUS_NUMBER.getMessage()
+                    , LottoNumber.MINIMUM, LottoNumber.MAXIMUM));
         }
     }
 
