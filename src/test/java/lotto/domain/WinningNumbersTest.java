@@ -26,7 +26,7 @@ class WinningNumbersTest {
     @Test
     void 당첨_번호는_중복될_시_예외를_발생한다() {
         assertThatThrownBy(() -> new WinningNumbers(List.of(1, 2, 3, 4, 5, 5), 7))
-                .isInstanceOf(IllegalArgumentException.class).hasMessage("[ERROR] 당첨 번호는 중복될 수 없습니다.");
+                .isInstanceOf(IllegalArgumentException.class).hasMessage("[ERROR] 로또 번호는 중복될 수 없습니다.");
     }
 
     @DisplayName("보너스 번호는 당첨 번호와 중복될 수 없다.")
@@ -40,6 +40,6 @@ class WinningNumbersTest {
     @Test
     void 당첨_번호의_갯수가_6개가_아니면_예외를_발생한다() {
         assertThatThrownBy(() -> new WinningNumbers(List.of(1, 2, 3, 4, 5), 6))
-                .isInstanceOf(IllegalArgumentException.class).hasMessage("[ERROR] 올바른 당첨 번호 갯수를 입력해 주세요.");
+                .isInstanceOf(IllegalArgumentException.class).hasMessage("[ERROR] 로또의 갯수가 일치하지 않습니다.");
     }
 }

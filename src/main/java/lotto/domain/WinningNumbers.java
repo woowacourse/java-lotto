@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static lotto.exception.ErrorMessage.MUST_NOT_BE_DUPLICATED;
+import static lotto.exception.ErrorMessage.MUST_NOT_BE_DUPLICATED_BONUS;
 import static lotto.exception.ErrorMessage.OUT_OF_RANGE;
 import static lotto.exception.ErrorMessage.SIZE_ERROR;
 
@@ -56,7 +57,7 @@ public class WinningNumbers {
 
     private void validateExistBonusNumber() {
         if (winningNumbers.contains(bonusNumber)) {
-            throw new LottoException(MUST_NOT_BE_DUPLICATED);
+            throw new LottoException(MUST_NOT_BE_DUPLICATED_BONUS);
         }
     }
 
