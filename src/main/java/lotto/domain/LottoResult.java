@@ -9,12 +9,12 @@ import java.util.TreeMap;
 public class LottoResult {
 
     private final WinningLotto winningLotto;
-    private final List<List<Integer>> lottoTickets;
+    private final List<Lotto> lottoTickets;
 
     private Map<LottoPrize, Integer> lottoResult;
     private Double lottoProfitRate;
 
-    public LottoResult(WinningLotto winningLotto, List<List<Integer>> lottoTickets) {
+    public LottoResult(WinningLotto winningLotto, List<Lotto> lottoTickets) {
         this.winningLotto = winningLotto;
         this.lottoTickets = lottoTickets;
         initialize();
@@ -29,12 +29,12 @@ public class LottoResult {
     }
 
     public void matchLottoTicketsResult() {
-        for (List<Integer> lottoTicket : lottoTickets) {
+        for (Lotto lottoTicket : lottoTickets) {
             matchEachLottoTicketResult(lottoTicket);
         }
     }
 
-    private void matchEachLottoTicketResult(List<Integer> lottoTicket) {
+    private void matchEachLottoTicketResult(Lotto lottoTicket) {
         int bonusBall = winningLotto.getBonusBall();
 
         boolean isBonusHit = matchBonusBall(bonusBall, lottoTicket);
@@ -44,13 +44,14 @@ public class LottoResult {
         lottoResult.put(lottoPrize, lottoResult.getOrDefault(lottoPrize, 0) + 1);
     }
 
-    private boolean matchBonusBall(int bonusBall, List<Integer> lottoTicket) {
-        return lottoTicket.contains(bonusBall);
+    private boolean matchBonusBall(int bonusBall, Lotto lottoTicket) {
+        List<Integer> ticketNumbers = lottoTicket.getLotto();
+        return ticketNumbers.contains(bonusBall);
     }
 
-    private int matchWinningNumbers(WinningLotto winningLotto, List<Integer> lottoTicket) {
+    private int matchWinningNumbers(WinningLotto winningLotto, Lotto lottoTicket) {
         Set<Integer> winningLottoSet = new HashSet<>(winningLotto.getWinningNumbers());
-        Set<Integer> lottoTicketSet = new HashSet<>(lottoTicket);
+        Set<Integer> lottoTicketSet = new HashSet<>(lottoTicket.getLotto());
 
         lottoTicketSet.retainAll(winningLottoSet);
         return lottoTicketSet.size();

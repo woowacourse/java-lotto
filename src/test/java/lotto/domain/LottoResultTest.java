@@ -14,9 +14,9 @@ public class LottoResultTest {
     public void lottoMatch_5Hit_BonusTrue() {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         WinningLotto winningLotto = new WinningLotto(lotto, "7");
-        List<List<Integer>> lottoTickets = List.of(
-                List.of(1, 2, 3, 4, 5, 7)  // 5 hit, bonus true
-        );
+        List<Lotto> lottoTickets = List.of(
+                new Lotto(List.of(1, 2, 3, 4, 5, 7)  // 5 hit, bonus true
+        ));
 
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
         lottoResult.matchLottoTicketsResult();
@@ -36,9 +36,9 @@ public class LottoResultTest {
     public void lottoMatch_5Hit_BonusFalse() {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         WinningLotto winningLotto = new WinningLotto(lotto, "7");
-        List<List<Integer>> lottoTickets = List.of(
-                List.of(1, 2, 3, 4, 5, 8)  // 5 hit, bonus false
-        );
+        List<Lotto> lottoTickets = List.of(
+                new Lotto(List.of(1, 2, 3, 4, 5, 8)  // 5 hit, bonus false
+        ));
 
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
         lottoResult.matchLottoTicketsResult();
@@ -58,9 +58,9 @@ public class LottoResultTest {
     public void lottoMatch_Under3Hit() {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         WinningLotto winningLotto = new WinningLotto(lotto, "7");
-        List<List<Integer>> lottoTickets = List.of(
-                List.of(1, 2, 8, 9, 10, 11)  // 2 hit
-        );
+        List<Lotto> lottoTickets = List.of(
+                new Lotto(List.of(1, 2, 8, 9, 10, 11)  // 2 hit
+        ));
 
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
         lottoResult.matchLottoTicketsResult();
@@ -80,9 +80,9 @@ public class LottoResultTest {
     public void lottoProfitRate() {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         WinningLotto winningLotto = new WinningLotto(lotto, "7");
-        List<List<Integer>> lottoTickets = List.of(
-                List.of(1, 2, 3, 4, 5, 8)  // 5 hit, bonus false
-        );
+        List<Lotto> lottoTickets = List.of(
+                new Lotto(List.of(1, 2, 3, 4, 5, 8)  // 5 hit, bonus false
+        ));
 
         LottoMoney lottoMoney = new LottoMoney("10000");
 
