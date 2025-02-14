@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
 import model.Lotto;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,11 +12,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoFactoryTest {
 
-    private LottoFactory lottoFactory;
-    private int purchase;
+    private static LottoFactory lottoFactory;
+    private static int purchase;
 
-    @BeforeEach
-    void beforeEach() {
+    @BeforeAll
+    static void beforeAll() {
         purchase = 10000;
         lottoFactory = LottoFactory.of(purchase);
     }
