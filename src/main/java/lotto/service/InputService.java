@@ -2,12 +2,12 @@ package lotto.service;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.constant.Prompt;
 import lotto.domain.Lotto;
 import lotto.vaildator.CommonValidator;
 import lotto.vaildator.InputValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+import lotto.view.constant.Prompt;
 
 public class InputService {
 

@@ -2,9 +2,9 @@ package lotto.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.constant.WinningTier;
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
+import lotto.domain.constant.WinningTier;
 import lotto.utility.RandomGenerator;
 
 public class LottoService {

@@ -3,11 +3,11 @@ package lotto.service;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
-import lotto.constant.OutputMessage;
-import lotto.constant.WinningTier;
 import lotto.domain.Lotto;
 import lotto.domain.WinningCondition;
+import lotto.domain.constant.WinningTier;
 import lotto.view.OutputView;
+import lotto.view.constant.OutputMessage;
 
 public class OutputService {
 

@@ -1,8 +1,8 @@
 package lotto.vaildator;
 
 import java.util.List;
-import lotto.constant.ExceptionMessage;
 import lotto.domain.Lotto;
+import lotto.view.constant.ExceptionMessage;
 
 public class InputValidator {
 

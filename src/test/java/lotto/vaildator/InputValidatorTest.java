@@ -3,8 +3,8 @@ package lotto.vaildator;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.List;
-import lotto.constant.ExceptionMessage;
 import lotto.domain.Lotto;
+import lotto.view.constant.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

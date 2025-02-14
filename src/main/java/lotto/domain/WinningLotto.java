@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.constant.WinningTier;
+import lotto.domain.constant.WinningTier;
 
 public class WinningLotto {
 
