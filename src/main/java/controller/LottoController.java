@@ -21,7 +21,7 @@ public class LottoController {
         this.lottoService = lottoService;
     }
 
-    public void start() {
+    public void run() {
         int purchaseAmount = inputView.purchaseAmountInput();
         Ticket ticket = ticketProcess(purchaseAmount);
         List<Lotto> lottos = lottoProcess(ticket);
