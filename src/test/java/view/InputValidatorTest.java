@@ -46,6 +46,4 @@ class InputValidatorTest {
                 .hasMessage("허용되지 않는 입력입니다.");
 
     }
-
-
 }

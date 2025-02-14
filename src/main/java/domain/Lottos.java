@@ -32,6 +32,4 @@ public class Lottos {
         boolean isMatchBonusNumber = winningLotto.containsBonusNumber(purchaseLotto);
         return Rank.findRank(matchCount, isMatchBonusNumber);
     }
-
-
 }

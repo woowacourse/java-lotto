@@ -84,5 +84,4 @@ class MoneyTest {
         //then
         assertThat(result).isEqualTo(2.00);
     }
-
 }

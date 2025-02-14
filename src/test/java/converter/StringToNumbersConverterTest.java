@@ -24,5 +24,4 @@ class StringToNumbersConverterTest {
         //then
         Assertions.assertThat(numbers).isEqualTo(expected);
     }
-
 }
