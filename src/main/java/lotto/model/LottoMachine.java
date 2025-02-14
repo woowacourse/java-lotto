@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.stream.IntStream;
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.generator.NumberGenerator;
+import lotto.model.money.Money;
 import lotto.model.winning_lotto.WinningLotto;
 
 public class LottoMachine {
 
-    private static final int LOTTO_PRICE = 1_000;
+    private static final Money LOTTO_PRICE = Money.from(1_000);
     private final NumberGenerator numberGenerator;
 
     public LottoMachine(NumberGenerator numberGenerator) {
@@ -16,8 +17,8 @@ public class LottoMachine {
     }
 
     public List<Lotto> issueLottos(final int purchaseMoney) {
-        validatePurchaseMoney(purchaseMoney);
-        int amount = purchaseMoney / LOTTO_PRICE;
+
+        int amount = Money.from(purchaseMoney).divide(LOTTO_PRICE);
 
         return IntStream.range(0, amount)
                 .mapToObj(i -> Lotto.generateFrom(numberGenerator))
@@ -28,15 +29,5 @@ public class LottoMachine {
         return lottos.stream()
                 .map(lotto -> LottoPrize.determine(lotto, winningLotto))
                 .toList();
-    }
-
-    private void validatePurchaseMoney(final int purchaseMoney) {
-        if (purchaseMoney % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("로또 구매 금액이 나누어떨어지지 않습니다.");
-        }
-
-        if (purchaseMoney < 0) {
-            throw new IllegalArgumentException("로또 구매 금액은 음수가 될 수 없습니다.");
-        }
     }
 }
