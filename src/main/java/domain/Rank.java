@@ -17,11 +17,11 @@ public enum Rank {
 
 
     private final String message;
-    private Long prize;
-    private int count;
-    private boolean bonusMatch;
+    private final long prize;
+    private final int count;
+    private final boolean bonusMatch;
 
-    Rank(String message, Long prize, int count, boolean bonusMatch) {
+    Rank(String message, long prize, int count, boolean bonusMatch) {
         this.message = message;
         this.prize = prize;
         this.count = count;

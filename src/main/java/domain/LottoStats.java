@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class LottoStats {
-    private Map<Rank, Integer> rank;
+    private final Map<Rank, Integer> rank;
     private final List<Integer> winningNumbers;
     private final int bonusBall;
 
@@ -23,8 +23,8 @@ public class LottoStats {
         }
     }
 
-    public Long getTotalPrize() {
-        Long totalPrize = 0L;
+    public long getTotalPrize() {
+        long totalPrize = 0L;
         for (Rank lottoRank : rank.keySet()) {
             totalPrize += lottoRank.getPrize() * rank.get(lottoRank);
         }
