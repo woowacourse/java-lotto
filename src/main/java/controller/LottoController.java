@@ -5,49 +5,35 @@ import domain.LottoMatch;
 import domain.Money;
 import domain.WinningLotto;
 import java.util.Map;
-import util.parser.InputParser;
-import util.validator.Validator;
+import service.LottoService;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
 
-  private InputView inputView;
-  private OutputView outputView;
+  private final InputView inputView;
+  private final OutputView outputView;
+  private final LottoService lottoService;
 
-  public LottoController(InputView inputView, OutputView outputView) {
+  public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
     this.inputView = inputView;
     this.outputView = outputView;
+    this.lottoService = lottoService;
   }
 
   public void run() {
-    Money money = creaeteMoney();
-    Buyer buyer = new Buyer(money);
+    Money money = lottoService.createMoney(inputView.inputLottoMoney());
+    Buyer buyer = lottoService.buyLotto(money);
     outputView.displayLottos(money.calculateTotalLotto(), buyer.createResult());
 
-    WinningLotto winningLotto = createWinningLotto();
-    Map<LottoMatch, Integer> lottoResult = buyer.countLottos(winningLotto);
+    WinningLotto winningLotto = lottoService.createWinningLotto(
+            inputView.inputWinningNumbers(),
+            inputView.inputBonusNumber()
+    );
+    Map<LottoMatch, Integer> lottoResult = lottoService.calculateLottoResults(buyer, winningLotto);
     outputView.displayResult(lottoResult);
 
-    double profit = money.calculateProfit(lottoResult);
+    double profit = lottoService.calculateProfit(money, lottoResult);
     outputView.displayProfit(profit);
-  }
-
-  private Money creaeteMoney() {
-    String inputMoney = inputView.inputLottoMoney();
-    Validator.inputValidatorIsNull(inputMoney);
-
-    return new Money(InputParser.parseStringToInteger(inputMoney));
-  }
-
-  private WinningLotto createWinningLotto() {
-    String inputWinningNumber = inputView.inputWinningNumbers();
-    Validator.inputValidatorIsNull(inputWinningNumber);
-
-    String inputBonusNumber = inputView.inputBonusNumber();
-    Validator.inputValidatorIsNull(inputBonusNumber);
-
-    return new WinningLotto(InputParser.parseStringToList(inputWinningNumber),
-        InputParser.parseStringToInteger(inputBonusNumber));
   }
 }
