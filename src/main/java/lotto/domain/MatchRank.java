@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.common.exception.ErrorMessage.ERROR_MATCH_NUMBER_NOT_VALID;
+
 public enum MatchRank {
     MATCH_THREE(3, 5000),
     MATCH_FOUR(4, 50000),
@@ -33,6 +35,8 @@ public enum MatchRank {
     }
 
     public static MatchRank getMatchRank(int matchNumber, boolean bonus) {
+        validateMatchNumber(matchNumber);
+
         if (isMatchBonus(matchNumber, bonus)) {
             return MATCH_BONUS;
         }
@@ -42,13 +46,17 @@ public enum MatchRank {
                 return statistics;
             }
         }
-        if(matchNumber < MIN_MATCH_NUMBER || matchNumber > MAX_MATCH_NUMBER) {
-            throw new IllegalArgumentException("matchNumber가 범위를 초과했습니다");
-        }
+
         return NO_MATCH;
     }
 
     private static boolean isMatchBonus(int matchNumber, boolean bonus) {
         return matchNumber == MATCH_BONUS.number && bonus;
+    }
+
+    private static void validateMatchNumber(int matchNumber) {
+        if(matchNumber < MIN_MATCH_NUMBER || matchNumber > MAX_MATCH_NUMBER) {
+            throw new IllegalArgumentException(ERROR_MATCH_NUMBER_NOT_VALID);
+        }
     }
 }
