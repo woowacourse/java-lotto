@@ -11,7 +11,6 @@ import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoService lottoService;
@@ -54,7 +53,6 @@ public class LottoController {
         int bonusNumber = inputView.bonusNumberInput();
         return lottoService.createWinningNumber(lotto, bonusNumber);
     }
-
 
     private List<Lotto> lottoProcess(Ticket ticket) {
         lottoService.createLottos(ticket);

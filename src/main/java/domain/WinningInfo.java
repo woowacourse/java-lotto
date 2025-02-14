@@ -9,7 +9,6 @@ import java.util.List;
 
 
 public class WinningInfo {
-
     private final Lotto winningLotto;
     private final int bonusNumber;
 
@@ -47,6 +46,4 @@ public class WinningInfo {
             throw new IllegalArgumentException(BONUS_NUMBER_ALREADY_EXIST.getMessage());
         }
     }
-
-
 }

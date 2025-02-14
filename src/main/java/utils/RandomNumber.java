@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomNumber {
-
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
     private static final Random random = new Random();
@@ -17,10 +16,10 @@ public class RandomNumber {
     public static List<Integer> generateNumbers(int size) {
         List<Integer> numbers = new ArrayList<>();
 
-        while(numbers.size()!=size){
+        while (numbers.size() != size) {
             int generatedNumber = generate();
 
-            if(!numbers.contains(generatedNumber)){
+            if (!numbers.contains(generatedNumber)) {
                 numbers.add(generatedNumber);
             }
         }

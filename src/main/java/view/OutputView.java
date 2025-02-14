@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public class OutputView {
-
     private static final String PURCHASE_RESULT = "%s개를 구매헀습니다.";
     private static final String WINNING_STATISTIC_MESSAGE = "당첨 통계";
     private static final String HYPHEN = "-";
@@ -57,6 +56,4 @@ public class OutputView {
     private void changeLine() {
         System.out.println();
     }
-
-
 }

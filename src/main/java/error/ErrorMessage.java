@@ -10,10 +10,10 @@ public enum ErrorMessage {
     ONLY_POSITIVE_NUMBER("양수만 입력 가능합니다.");
 
     private final String message;
-    private final String prefix="[ERROR] ";
+    private final String prefix = "[ERROR] ";
 
     ErrorMessage(String message) {
-        this.message = prefix+message;
+        this.message = prefix + message;
     }
 
     public String getMessage() {

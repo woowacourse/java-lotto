@@ -3,13 +3,7 @@ package domain;
 import static error.ErrorMessage.INVALID_TICKET_PRICE;
 
 public class Ticket {
-    /***
-     * ticket 계산을 다른곳에서 진행하는걸 고려해보자?
-     *
-     */
-
     private static final int TICKET_PRICE = 1_000;
-
     private final int quantity;
 
     private Ticket(int quantity) {
@@ -36,5 +30,4 @@ public class Ticket {
         }
         throw new IllegalArgumentException(INVALID_TICKET_PRICE.getMessage());
     }
-
 }
