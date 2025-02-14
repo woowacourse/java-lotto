@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
@@ -9,10 +10,6 @@ public class WinningResult {
 
     public WinningResult(Map<LottoAward, Integer> winningResult) {
         this.winningResult = winningResult;
-    }
-
-    public Map<LottoAward, Integer> getWinningResult() {
-        return this.winningResult;
     }
 
     public double calculateProfitRate(final LottoPrice lottoPrice) {
@@ -36,5 +33,9 @@ public class WinningResult {
     @Override
     public int hashCode() {
         return Objects.hashCode(winningResult);
+    }
+
+    public Map<LottoAward, Integer> getWinningResult() {
+        return Collections.unmodifiableMap(this.winningResult);
     }
 }
