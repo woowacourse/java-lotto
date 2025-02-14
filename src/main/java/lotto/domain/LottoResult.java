@@ -36,10 +36,7 @@ public class LottoResult {
 
     private void matchLottoTicketResult(List<Integer> lottoTicket) {
         int bonusBall = winningLotto.getBonusBall();
-        boolean isBonusHit = false;
-        if (lottoTicket.contains(bonusBall)) {
-            isBonusHit = true;
-        }
+        boolean isBonusHit = lottoTicket.contains(bonusBall);
 
         Set<Integer> winningLottoSet = new HashSet<>(winningLotto.getWinningNumbers());
         Set<Integer> lottoTicketSet = new HashSet<>(lottoTicket);
