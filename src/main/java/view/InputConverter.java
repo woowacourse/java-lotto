@@ -3,7 +3,6 @@ package view;
 import static domain.Lotto.LOTTO_PRICE;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,13 +20,9 @@ public class InputConverter {
             throw new IllegalArgumentException("당첨 번호 입력 양식이 올바르지 않습니다.");
         }
 
-        List<Integer> winningNumbers = Arrays.stream(input.split(WINNING_NUMBER_DELIMITER))
+        return Arrays.stream(input.split(WINNING_NUMBER_DELIMITER))
                 .map(Integer::parseInt)
                 .toList();
-
-        validateUniqueNumber(winningNumbers);
-
-        return winningNumbers;
     }
 
     public int convertBonusNumber(String input) {
@@ -66,11 +61,4 @@ public class InputConverter {
         }
     }
 
-    private void validateUniqueNumber(List<Integer> values) {
-        values.forEach(value -> {
-            if (Collections.frequency(values, value) > 1) {
-                throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
-            }
-        });
-    }
 }

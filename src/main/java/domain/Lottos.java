@@ -58,7 +58,7 @@ public class Lottos {
 
     public List<String> getLottoNumbers() {
         return lottos.stream()
-                .map(Lotto::getBalls)
+                .map(Lotto::getBallsString)
                 .toList();
     }
 

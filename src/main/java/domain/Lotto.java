@@ -33,8 +33,11 @@ public class Lotto {
         );
     }
 
-    public String getBalls() {
+    public String getBallsString() {
         return balls.toString();
     }
 
+    public List<Ball> getBalls() {
+        return balls;
+    }
 }
