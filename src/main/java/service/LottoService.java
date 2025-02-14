@@ -56,22 +56,38 @@ public class LottoService {
         List<Integer> winningNumbers = winningInfo.getWinningLotto().getNumbers();
 
         for (Lotto lotto : lottos) {
-            int count = 0;
-            boolean isMatchBonusNumber = false;
-            List<Integer> lottoNumbers = lotto.getNumbers();
-            for (Integer lottoNumber : lottoNumbers) {
-                if (winningNumbers.contains(lottoNumber)) {
-                    count++;
-                }
-                if (winningInfo.getBonusNumber() == lottoNumber) {
-                    isMatchBonusNumber = true;
-                }
-
-            }
-            Rank foundRank = Rank.findRank(count, isMatchBonusNumber);
+            Rank foundRank = findRank(winningInfo, lotto, winningNumbers);
             calculateResult.put(foundRank, calculateResult.get(foundRank) + 1);
         }
+
         return calculateResult;
+    }
+
+    private Rank findRank(WinningInfo winningInfo, Lotto lotto, List<Integer> winningNumbers) {
+        int matchCount = 0;
+        boolean matchBonus = false;
+        List<Integer> lottoNumbers = lotto.getNumbers();
+
+        for (Integer lottoNumber : lottoNumbers) {
+            matchCount = checkMatchCount(winningNumbers, lottoNumber, matchCount);
+            matchBonus = isMatchBonus(winningInfo, lottoNumber);
+        }
+
+        return Rank.findRank(matchCount, matchBonus);
+    }
+
+    private static boolean isMatchBonus(WinningInfo winningInfo, Integer lottoNumber) {
+        int bonusNumber = winningInfo.getBonusNumber();
+
+        return bonusNumber == lottoNumber;
+    }
+
+    private static int checkMatchCount(List<Integer> winningNumbers, Integer lottoNumber, int count) {
+        if (winningNumbers.contains(lottoNumber)) {
+            count++;
+        }
+
+        return count;
     }
 
     public double calculateProfit(Map<Rank, Integer> calculateResult, int purchaseAmount) {
