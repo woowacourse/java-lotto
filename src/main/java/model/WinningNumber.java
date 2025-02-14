@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class WinningNumber {
     private static final String DELIMITER = ",";
@@ -15,7 +14,7 @@ public class WinningNumber {
 
         for(String winningNumber : winningNumbers) {
             validateNumber(winningNumber);
-            numbers.add(Integer.parseInt(winningNumber));
+            numbers.add(Integer.parseInt(winningNumber.trim()));
         }
     }
 
