@@ -9,4 +9,6 @@ public class Constant {
     public static final int LOTTO_NUMBER_MAX_RANGE = 45;
     public static final int LOTTO_MONEY_UNIT = 1000;
     public static final int LOTTO_PROFIT_STANDARD = 1;
+
+    public static final int LOTTO_WINNING_NUMBERS_HIT_STANDARD = 5;
 }
