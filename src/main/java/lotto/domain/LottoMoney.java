@@ -10,11 +10,13 @@ import lotto.util.StringConverter;
 public class LottoMoney {
 
     private final int lottoMoney;
+    private final int ticketBuyAmount;
 
     public LottoMoney(String input) {
         int amount = StringConverter.parseToInt(input, INVALID_NUMBER);
         validate(amount);
         this.lottoMoney = amount;
+        this.ticketBuyAmount = amount / LOTTO_MONEY_UNIT;
     }
 
     private void validate(int amount) {
@@ -36,5 +38,9 @@ public class LottoMoney {
 
     public int getLottoMoney() {
         return lottoMoney;
+    }
+
+    public int getTicketBuyAmount() {
+        return ticketBuyAmount;
     }
 }
