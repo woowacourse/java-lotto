@@ -17,9 +17,9 @@ public class OutputView {
         stringBuilder.append("당첨 통계\n");
         stringBuilder.append("---------\n");
         for (LottoPrize lottoPrize : sortedLottoPrize) {
-            stringBuilder.append(String.format("%s - %d개\n"
-                    , lottoPrize.getInfo()
-                    , winningResult.getCount(lottoPrize)));
+            stringBuilder.append(
+                    String.format("%s - %d개\n", getFormattedPrize(lottoPrize), winningResult.getCount(lottoPrize))
+            );
         }
         System.out.println(stringBuilder);
     }
@@ -31,5 +31,16 @@ public class OutputView {
         }
         stringBuilder.append('\n');
         System.out.println(stringBuilder);
+    }
+
+    private String getFormattedPrize(LottoPrize lottoPrize) {
+        if (lottoPrize == LottoPrize.SECOND) {
+            return String.format(
+                    "%d개 일치, 보너스 볼 일치 (%d원)",
+                    lottoPrize.getMatchedNumberCount(),
+                    lottoPrize.getPrice()
+            );
+        }
+        return String.format("%d개 일치 (%d원)", lottoPrize.getMatchedNumberCount(), lottoPrize.getPrice());
     }
 }
