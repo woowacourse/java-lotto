@@ -9,17 +9,23 @@ class LottoMachineTest {
 
     @DisplayName("6개의 숫자를 갖는 로또를 발급할 수 있다.")
     @Test
-    void ok_LottoNumberCount() {
+    void countOfIssuedLottoNumbers() {
         Lotto lotto = LottoMachine.issue();
+        int countOfIssuedLottoNumbers = lotto.getNumbers().size();
 
-        assertThat(lotto.getNumbers().size()).isEqualTo(6);
+        assertThat(countOfIssuedLottoNumbers).isEqualTo(6);
     }
 
-    @DisplayName("중복되지 않는 숫자들을 갖는 로또를 발급할 수 있다.")
+    @DisplayName("로또 번호는 중복되지 않는다.")
     @Test
-    void ok_DistinctNumbers() {
+    void lottoNumbersAreDistinct() {
         Lotto lotto = LottoMachine.issue();
+        int countOfIssuedLottoNumbers = lotto.getNumbers().size();
+        int distinctLottoNumberCount = (int) lotto.getNumbers()
+                .stream()
+                .distinct()
+                .count();
 
-        assertThat(lotto.getNumbers().stream().distinct().count()).isEqualTo(lotto.getNumbers().size());
+        assertThat(countOfIssuedLottoNumbers).isEqualTo(distinctLottoNumberCount);
     }
 }
