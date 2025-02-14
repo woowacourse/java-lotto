@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +15,7 @@ public class LottoResultTest {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         WinningLotto winningLotto = new WinningLotto(lotto, "7");
         List<Lotto> lottoTickets = List.of(
-                new Lotto(List.of(1, 2, 3, 4, 5, 7)  // 5 hit, bonus true
+                new Lotto(List.of(1, 2, 3, 4, 5, 7)
         ));
 
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
@@ -23,12 +23,12 @@ public class LottoResultTest {
 
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
 
-        assertEquals(0, (int) matchResult.get(LottoPrize.MISS));
-        assertEquals(0, (int) matchResult.get(LottoPrize.FIFTH));
-        assertEquals(0, (int) matchResult.get(LottoPrize.FOURTH));
-        assertEquals(0, (int) matchResult.get(LottoPrize.THIRD));
-        assertEquals(1, (int) matchResult.get(LottoPrize.SECOND));
-        assertEquals(0, (int) matchResult.get(LottoPrize.FIRST));
+        assertThat(matchResult.get(LottoPrize.MISS)).isEqualTo(0);
+        assertThat(matchResult.get(LottoPrize.FIFTH)).isEqualTo(0);
+        assertThat(matchResult.get(LottoPrize.FOURTH)).isEqualTo(0);
+        assertThat(matchResult.get(LottoPrize.THIRD)).isEqualTo(0);
+        assertThat(matchResult.get(LottoPrize.SECOND)).isEqualTo(1);
+        assertThat(matchResult.get(LottoPrize.FIRST)).isEqualTo(0);
     }
 
     @DisplayName("로또 결과 일치 개수 확인 - 5개 Hit, Bonus False")
@@ -37,7 +37,7 @@ public class LottoResultTest {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         WinningLotto winningLotto = new WinningLotto(lotto, "7");
         List<Lotto> lottoTickets = List.of(
-                new Lotto(List.of(1, 2, 3, 4, 5, 8)  // 5 hit, bonus false
+                new Lotto(List.of(1, 2, 3, 4, 5, 8)
         ));
 
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
@@ -45,12 +45,12 @@ public class LottoResultTest {
 
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
 
-        assertEquals(0, (int) matchResult.get(LottoPrize.MISS));
-        assertEquals(0, (int) matchResult.get(LottoPrize.FIFTH));
-        assertEquals(0, (int) matchResult.get(LottoPrize.FOURTH));
-        assertEquals(1, (int) matchResult.get(LottoPrize.THIRD));
-        assertEquals(0, (int) matchResult.get(LottoPrize.SECOND));
-        assertEquals(0, (int) matchResult.get(LottoPrize.FIRST));
+        assertThat(matchResult.get(LottoPrize.MISS)).isEqualTo(0);
+        assertThat(matchResult.get(LottoPrize.FIFTH)).isEqualTo(0);
+        assertThat(matchResult.get(LottoPrize.FOURTH)).isEqualTo(0);
+        assertThat(matchResult.get(LottoPrize.THIRD)).isEqualTo(1);
+        assertThat(matchResult.get(LottoPrize.SECOND)).isEqualTo(0);
+        assertThat(matchResult.get(LottoPrize.FIRST)).isEqualTo(0);
     }
 
     @DisplayName("로또 결과 일치 개수 확인 - 2개 Hit (3개 Hit 미만)")
@@ -59,7 +59,7 @@ public class LottoResultTest {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         WinningLotto winningLotto = new WinningLotto(lotto, "7");
         List<Lotto> lottoTickets = List.of(
-                new Lotto(List.of(1, 2, 8, 9, 10, 11)  // 2 hit
+                new Lotto(List.of(1, 2, 8, 9, 10, 11)
         ));
 
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
@@ -67,13 +67,13 @@ public class LottoResultTest {
 
         Map<LottoPrize, Integer> matchResult = lottoResult.getLottoResult();
 
-        assertEquals(1, (int) matchResult.get(LottoPrize.MISS));
-        assertEquals(0, (int) matchResult.get(LottoPrize.FIFTH));
-        assertEquals(0, (int) matchResult.get(LottoPrize.FOURTH));
-        assertEquals(0, (int) matchResult.get(LottoPrize.THIRD));
-        assertEquals(0, (int) matchResult.get(LottoPrize.SECOND));
-        assertEquals(0, (int) matchResult.get(LottoPrize.FIRST));
-    }
+        assertThat(matchResult.get(LottoPrize.MISS)).isEqualTo(1);
+        assertThat(matchResult.get(LottoPrize.FIFTH)).isEqualTo(0);
+        assertThat(matchResult.get(LottoPrize.FOURTH)).isEqualTo(0);
+        assertThat(matchResult.get(LottoPrize.THIRD)).isEqualTo(0);
+        assertThat(matchResult.get(LottoPrize.SECOND)).isEqualTo(0);
+        assertThat(matchResult.get(LottoPrize.FIRST)).isEqualTo(0);
+}
 
     @DisplayName("로또 결과 수익률 확인")
     @Test
@@ -81,7 +81,7 @@ public class LottoResultTest {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         WinningLotto winningLotto = new WinningLotto(lotto, "7");
         List<Lotto> lottoTickets = List.of(
-                new Lotto(List.of(1, 2, 3, 4, 5, 8)  // 5 hit, bonus false
+                new Lotto(List.of(1, 2, 3, 4, 5, 8)
         ));
 
         LottoMoney lottoMoney = new LottoMoney("10000");
@@ -90,6 +90,6 @@ public class LottoResultTest {
         lottoResult.matchLottoTicketsResult();
         lottoResult.calculateLottoProfitRate(lottoMoney);
 
-        assertEquals((double) 1_500_000 / 10_000, lottoResult.getLottoProfitRate());
+        assertThat(lottoResult.getLottoProfitRate()).isEqualTo((double) 1_500_000 / 10_000);
     }
 }
