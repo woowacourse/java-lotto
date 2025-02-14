@@ -1,6 +1,5 @@
 package service;
 
-import factory.StatisticsFactory;
 import java.util.HashMap;
 import java.util.Map;
 import model.Lottos;
@@ -30,11 +29,11 @@ public class StatisticsService {
     private Statistics createStatistics(int purchaseAmount, Map<PrizeTier, Integer> prizeCounts,
                                         long totalPrize) {
         if (purchaseAmount == 0) {
-            return StatisticsFactory.createStatistics(prizeCounts, 0);
+            return new Statistics(prizeCounts, 0);
         }
 
         double profitRate = (double) totalPrize / purchaseAmount;
-        return StatisticsFactory.createStatistics(prizeCounts, profitRate);
+        return new Statistics(prizeCounts, profitRate);
     }
 
 
