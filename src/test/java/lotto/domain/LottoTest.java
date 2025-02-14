@@ -6,6 +6,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import lotto.constant.ErrorMessage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
 
@@ -18,11 +20,12 @@ class LottoTest {
         Assertions.assertDoesNotThrow(() -> new Lotto(inputLotto));
     }
 
-    @Test
-    void 로또_숫자_개수_오류() {
-        //given
-        String invalidLotto = "1, 2, 3, 4";
-
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "1, 2, 3, 4, 5",
+            "1, 2, 3, 4, 5, 6, 7"
+    })
+    void 로또_숫자_개수_오류(String invalidLotto) {
         //when & then
         assertThatThrownBy(() -> new Lotto(invalidLotto))
                 .isInstanceOf(IllegalArgumentException.class)
