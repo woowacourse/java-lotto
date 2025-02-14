@@ -6,35 +6,42 @@ import lotto.domain.LottoMachine;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
+import lotto.util.ObjectCreator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class GameController {
 
-    private LottoMoney lottoMoney;
-
     public void run() {
-        LottoMachine lottoMachine = buyLottoTickets();
+        LottoMoney lottoMoney = saveLottoMoney();
+        LottoMachine lottoMachine = buyLottoTickets(lottoMoney);
 
         List<Lotto> lottoTickets = lottoMachine.getLottoTickets();
         OutputView.writeLottoTickets(lottoTickets);
 
         WinningLotto winningLotto = storeWinningLotto();
 
-        LottoResult lottoResult = checkLottoResult(winningLotto, lottoTickets);
+        LottoResult lottoResult = checkLottoResult(winningLotto, lottoTickets, lottoMoney);
         OutputView.writeLottoResult(lottoResult);
     }
 
-    private LottoMachine buyLottoTickets() {
-        while (true) {
-            try {
+    private LottoMoney saveLottoMoney() {
+        LottoMoney lottoMoney = null;
+        while (lottoMoney == null) {
+            lottoMoney = ObjectCreator.useInputToCreateObject(() -> {
                 String money = InputView.readLottoMoney();
-                lottoMoney = new LottoMoney(money);
-                return new LottoMachine(lottoMoney);
-            } catch (IllegalArgumentException e) {
-                OutputView.writeErrorMessage(e);
-            }
+                return new LottoMoney(money);
+            });
         }
+        return lottoMoney;
+    }
+
+    private LottoMachine buyLottoTickets(LottoMoney lottoMoney) {
+        LottoMachine lottoMachine = null;
+        while (lottoMachine == null) {
+            lottoMachine = ObjectCreator.useInputToCreateObject(() -> new LottoMachine(lottoMoney));
+        }
+        return lottoMachine;
     }
 
     private WinningLotto storeWinningLotto() {
@@ -43,28 +50,28 @@ public class GameController {
     }
 
     private Lotto storeWinningLottoNumbers() {
-        while (true) {
-            try {
+        Lotto lotto = null;
+        while (lotto == null) {
+            lotto = ObjectCreator.useInputToCreateObject(() -> {
                 String numbers = InputView.readWinningNumbers();
                 return new Lotto(numbers);
-            } catch (IllegalArgumentException e) {
-                OutputView.writeErrorMessage(e);
-            }
+            });
         }
+        return lotto;
     }
 
     private WinningLotto storeWinningLottoBonus(Lotto winningNumbers) {
-        while (true) {
-            try {
+        WinningLotto winningLotto = null;
+        while (winningLotto == null) {
+            winningLotto = ObjectCreator.useInputToCreateObject(() -> {
                 String bonus = InputView.readBonusBall();
                 return new WinningLotto(winningNumbers, bonus);
-            } catch (IllegalArgumentException e) {
-                OutputView.writeErrorMessage(e);
-            }
+            });
         }
+        return winningLotto;
     }
 
-    private LottoResult checkLottoResult(WinningLotto winningLotto, List<Lotto> lottoTickets) {
+    private LottoResult checkLottoResult(WinningLotto winningLotto, List<Lotto> lottoTickets, LottoMoney lottoMoney) {
         LottoResult lottoResult = new LottoResult(winningLotto, lottoTickets);
 
         lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
