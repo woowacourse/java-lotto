@@ -8,6 +8,7 @@ public class ConsoleInputView implements InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
     private static final String WINNING_LOTTO_DELIMITER = ", ";
+    private static final String INTEGER_NUMBER_REGEX = "[0-9]+";
 
     @Override
     public int inputPurchaseMoney() {
@@ -43,7 +44,7 @@ public class ConsoleInputView implements InputView {
     }
 
     private void validateBonusNumber(String bonusNumber) {
-        if (!bonusNumber.matches("[0-9]+")) {
+        if (!bonusNumber.matches(INTEGER_NUMBER_REGEX)) {
             throw new IllegalArgumentException("보너스 번호는 정수형이어야 합니다.");
         }
     }
@@ -56,7 +57,7 @@ public class ConsoleInputView implements InputView {
     }
 
     private void validateWinningLottoInput(final String winningLottoNumber) {
-        if (!winningLottoNumber.matches("[0-9]+")) {
+        if (!winningLottoNumber.matches(INTEGER_NUMBER_REGEX)) {
             throw new IllegalArgumentException("구분자 형식에 맞지 않습니다.");
         }
     }
