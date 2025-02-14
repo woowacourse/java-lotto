@@ -20,6 +20,10 @@ public class LottoNumber {
         }
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (!(o instanceof LottoNumber that)) {
@@ -31,9 +35,5 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hashCode(number);
-    }
-
-    public int getNumber() {
-        return number;
     }
 }
