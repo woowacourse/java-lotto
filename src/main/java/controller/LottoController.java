@@ -22,7 +22,6 @@ public class LottoController {
 
   public void run() {
     Money money = creaeteMoney();
-
     Buyer buyer = new Buyer(money);
     outputView.displayLottos(money.calculateTotalLotto(), buyer.createResult());
 
