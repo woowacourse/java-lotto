@@ -33,9 +33,10 @@ public class LottoTest {
     @Test
     void 로또_번호의_개수가_6개가_아니면_예외가_발생한다() {
         // Given
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5)))
+        Assertions.assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호의 개수는 6개여야 합니다.");
     }
@@ -43,9 +44,10 @@ public class LottoTest {
     @Test
     void 로또_번호가_중복될_경우_예외가_발생한다() {
         // Given
+        List<Integer> numbers = Arrays.asList(1, 1, 2, 3, 4, 5);
 
         /// When & Then
-        Assertions.assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 1, 2, 3, 4, 5)))
+        Assertions.assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복되지 않은 로또 번호를 입력해 주세요.");
     }

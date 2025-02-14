@@ -9,7 +9,11 @@ public class LottoNumberTest {
 
     @Test
     void 로또_번호가_정상적으로_생성된다() {
-        Assertions.assertThatCode(() -> new LottoNumber(45))
+        // Given
+        int rawNumber = 45;
+
+        // When & Then
+        Assertions.assertThatCode(() -> new LottoNumber(rawNumber))
                 .doesNotThrowAnyException();
     }
 

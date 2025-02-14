@@ -9,9 +9,10 @@ public class StringToIntParserTest {
     @Test
     void 소수이면_예외가_발생한다() {
         // Given
+        String decimal = "100.3";
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> StringToIntParser.parseInt("100.3"))
+        Assertions.assertThatThrownBy(() -> StringToIntParser.parseInt(decimal))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값은 21억 이하의 양수여야 합니다.");
     }
@@ -20,9 +21,10 @@ public class StringToIntParserTest {
     @Test
     void 문자열이면_예외가_발생한다() {
         // Given
+        String input = "abc";
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> StringToIntParser.parseInt("abc"))
+        Assertions.assertThatThrownBy(() -> StringToIntParser.parseInt(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값은 21억 이하의 양수여야 합니다.");
     }
@@ -30,9 +32,10 @@ public class StringToIntParserTest {
     @Test
     void Integer_범위가_아니면_예외가_발생한다() {
         // Given
+        String overValue = "2200000000";
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> StringToIntParser.parseInt("2200000000"))
+        Assertions.assertThatThrownBy(() -> StringToIntParser.parseInt(overValue))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값은 21억 이하의 양수여야 합니다.");
     }
