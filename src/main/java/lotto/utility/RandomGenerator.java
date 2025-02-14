@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RandomGenerator {
-    private void addNumberToList(List<Integer> list, int number) {
-        if (!list.contains(number)) {
-            list.add(number);
-        }
-    }
 
     public List<Integer> generateUniqueRandomNumbers(int maxNumber) {
         List<Integer> randoms = new ArrayList<>();
@@ -19,5 +14,11 @@ public class RandomGenerator {
         }
 
         return randoms;
+    }
+
+    private void addNumberToList(List<Integer> list, int number) {
+        if (!list.contains(number)) {
+            list.add(number);
+        }
     }
 }
