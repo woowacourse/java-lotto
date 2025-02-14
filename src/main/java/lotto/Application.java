@@ -46,21 +46,10 @@ public class Application {
     private static WinningNumbers getWinningNumbers() {
         try {
             List<Integer> winningNumbers = InputView.inputWinningNumbers();
-            validateWinningNumbers(winningNumbers);
             return new WinningNumbers(winningNumbers);
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getWinningNumbers();
-        }
-    }
-
-    private static void validateWinningNumbers(final List<Integer> winningNumbers) {
-        if (new HashSet<>(winningNumbers).size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(LOTTO_SIZE + "개의 고유한 번호를 입력해야 합니다.");
-        }
-
-        for (final int winningNumber : winningNumbers) {
-            validateLottoNumber(winningNumber);
         }
     }
 
