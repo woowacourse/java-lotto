@@ -1,6 +1,7 @@
 package view;
 
 import static domain.LottoTicket.LOTTO_PRICE;
+import static domain.LottoTicket.LOTTO_SIZE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,6 +50,7 @@ public class InputView {
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .toList();
+
     }
 
     private static void validateLottoTicket(String winningLottoTicket) {
@@ -57,6 +59,9 @@ public class InputView {
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .toList();
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        }
         if (numbers.stream().distinct().count() != numbers.size()) {
             throw new IllegalArgumentException("중복된 번호가 존재합니다.");
         }
