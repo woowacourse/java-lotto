@@ -12,6 +12,15 @@ import java.util.Random;
 import java.util.Set;
 
 public class LottoMachine {
+    public static List<Lotto> issueLottos(final int lottoAmount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < lottoAmount; i++) {
+            Lotto lotto = createLotto();
+            lottos.add(lotto);
+        }
+        return lottos;
+    }
+
     public static Lotto createLotto() {
         Set<Integer> numbers = new HashSet<>();
         while (numbers.size() < LOTTO_SIZE) {

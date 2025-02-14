@@ -1,42 +1,33 @@
 package lotto;
 
-import static lotto.domain.Lotto.LOTTO_SIZE;
-import static lotto.domain.Lotto.validateLottoNumber;
-
 import lotto.domain.Lotto;
-import lotto.domain.LottoManager;
+import lotto.domain.LottoMachine;
+import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningNumbers;
 import lotto.domain.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.HashSet;
 import java.util.List;
+
+import static lotto.domain.Lotto.validateLottoNumber;
 
 public class Application {
     public static void main(String[] args) {
-        List<Lotto> lottos = purchaseLottos();
+        PurchaseAmount purchaseAmount = getPurchaseAmount();
+        List<Lotto> lottos = LottoMachine.issueLottos(purchaseAmount.calculateLottoAmount());
         OutputView.printLottos(lottos);
         WinningNumbers winningNumbers = getWinningNumbers();
         int bonusNumber = getBonusNumber(winningNumbers);
-        WinningStatistics winningStatistics = LottoManager.calculateStatistics(lottos, winningNumbers, bonusNumber);
-        double returnRate = winningStatistics.calculateReturnRate(lottos.size() * LottoManager.LOTTO_UNIT_PRICE);
+        WinningStatistics winningStatistics = LottoMachine.calculateStatistics(lottos, winningNumbers, bonusNumber);
+        double returnRate = winningStatistics.calculateReturnRate(purchaseAmount.calculateLottoAmount());
         OutputView.printWinningStatistics(winningStatistics, returnRate);
     }
 
-    private static List<Lotto> purchaseLottos() {
+    private static PurchaseAmount getPurchaseAmount() {
         try {
-            int purchaseAmount = getPurchaseAmount();
-            return LottoManager.purchase(purchaseAmount);
-        } catch (final IllegalArgumentException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return purchaseLottos();
-        }
-    }
-
-    private static int getPurchaseAmount() {
-        try {
-            return InputView.inputPurchaseAmount();
+            int inputPurchaseAmount = InputView.inputPurchaseAmount();
+            return new PurchaseAmount(inputPurchaseAmount);
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getPurchaseAmount();
