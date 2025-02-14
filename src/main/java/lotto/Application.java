@@ -1,8 +1,12 @@
 package lotto;
 
-import static lotto.Lotto.LOTTO_SIZE;
-import static lotto.Lotto.validateLottoNumber;
+import static lotto.domain.Lotto.LOTTO_SIZE;
+import static lotto.domain.Lotto.validateLottoNumber;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoManager;
+import lotto.domain.WinningNumbers;
+import lotto.domain.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

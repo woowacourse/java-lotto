@@ -1,7 +1,7 @@
-package lotto;
+package lotto.domain;
 
-import static lotto.Lotto.LOTTO_SIZE;
-import static lotto.Lotto.MAX_LOTTO_NUMBER;
+import static lotto.domain.Lotto.LOTTO_SIZE;
+import static lotto.domain.Lotto.MAX_LOTTO_NUMBER;
 
 import java.util.ArrayList;
 import java.util.HashMap;
