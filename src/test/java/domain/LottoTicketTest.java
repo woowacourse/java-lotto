@@ -33,6 +33,17 @@ class LottoTicketTest {
         );
     }
 
+    public static Stream<Arguments> lottoNumbersInRange() {
+        return Stream.of(
+                Arguments.of(
+                        // 경계값(1, 45) 테스트 케이스
+                        List.of(1, 2, 3, 4, 5, 45),
+                        List.of(1, 12, 13, 14, 16, 45),
+                        List.of(1, 2, 3, 43, 44, 45)
+                )
+        );
+    }
+
     @DisplayName("로또 번호의 개수가 6개가 아닌 경우 예외가 발생한다")
     @ParameterizedTest
     @MethodSource("lottoNumbersWithWrongSize")
@@ -53,6 +64,16 @@ class LottoTicketTest {
                     new LottoTicket(numbers);
                 }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 1 이상 45 이하이다.");
+    }
+
+    @DisplayName("로또 번호가 1 이상 45 이하인 경우 정상적으로 로또가 발행된다.")
+    @ParameterizedTest
+    @MethodSource("lottoNumbersInRange")
+    void 로또_번호가_1_이상_45_이하인_경우(List<Integer> numbers) {
+        // when & then
+        Assertions.assertThatCode(() -> {
+            new LottoTicket(numbers);
+        }).doesNotThrowAnyException();
     }
 
     @DisplayName("로또 번호가 중복된 경우 예외가 발생한다")
