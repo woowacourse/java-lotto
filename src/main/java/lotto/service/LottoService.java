@@ -1,10 +1,14 @@
 package lotto.service;
 
-import lotto.domain.*;
-import lotto.dto.response.LottosResponse;
+import lotto.domain.Bank;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Rank;
+import lotto.domain.WinningNumbers;
 import lotto.dto.request.PaymentRequest;
-import lotto.dto.response.ResultResponse;
 import lotto.dto.request.WinningBallsRequest;
+import lotto.dto.response.LottosResponse;
+import lotto.dto.response.ResultResponse;
 
 import java.util.Map;
 
