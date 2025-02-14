@@ -12,12 +12,12 @@ import java.util.regex.Pattern;
 
 public class InputConverter {
 
-    private static final String WINNING_NUMBER_REGEX = "([0-9]+)(,[0-9]+)*";
-    private static final String NUMBER_REGEX = "[0-9]+";
+    private static final Pattern WINNING_NUMBER_PATTERN = Pattern.compile("^[0-9]+(,[0-9]+)*$");
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]+$");
     private static final String WINNING_NUMBER_DELIMITER = ",";
 
     public static List<Integer> convertWinningNumbers(String input) {
-        Matcher matcher = Pattern.compile(WINNING_NUMBER_REGEX).matcher(input);
+        Matcher matcher = WINNING_NUMBER_PATTERN.matcher(input);
 
         if (!matcher.matches()) {
             throw new IllegalArgumentException("당첨 번호 입력 양식이 올바르지 않습니다.");
@@ -34,7 +34,7 @@ public class InputConverter {
     }
 
     public static int convertBonusNumber(String input) {
-        Matcher matcher = Pattern.compile(NUMBER_REGEX).matcher(input);
+        Matcher matcher = NUMBER_PATTERN.matcher(input);
 
         if (!matcher.matches()) {
             throw new IllegalArgumentException("보너스 번호 입력 양식이 올바르지 않습니다.");
@@ -47,7 +47,7 @@ public class InputConverter {
     }
 
     public static int convertPurchaseAmount(String input) {
-        Matcher matcher = Pattern.compile(NUMBER_REGEX).matcher(input);
+        Matcher matcher = NUMBER_PATTERN.matcher(input);
 
         if (!matcher.matches()) {
             throw new IllegalArgumentException("구입 금액 입력 양식이 올바르지 않습니다.");
