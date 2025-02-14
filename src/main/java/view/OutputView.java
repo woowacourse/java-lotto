@@ -26,21 +26,10 @@ public class OutputView {
 
         lottoRankResponses.forEach(lottoRankResponse -> {
                     if (lottoRankResponse.isBonusMatched()) {
-                        System.out.printf(
-                                "%d개 일치, 보너스 볼 일치(%d원)- %d개\n",
-                                lottoRankResponse.overlappedCount(),
-                                lottoRankResponse.prizeMoney(),
-                                lottoRankResponse.rankMatchCount()
-                        );
+                        printLottoRankResultWithBonusNumber(lottoRankResponse);
                         return;
                     }
-
-                    System.out.printf(
-                            "%d개 일치 (%d원)- %d개\n",
-                            lottoRankResponse.overlappedCount(),
-                            lottoRankResponse.prizeMoney(),
-                            lottoRankResponse.rankMatchCount()
-                    );
+                    printLottoRankResultWithoutBonusNumber(lottoRankResponse);
                 }
         );
     }
@@ -48,4 +37,23 @@ public class OutputView {
     public void printProfitRate(double profitRate) {
         System.out.printf("총 수익률은 %.2f입니다.", Math.floor(profitRate * 100) / 100);
     }
+
+    private void printLottoRankResultWithoutBonusNumber(LottoRankResponse lottoRankResponse) {
+        System.out.printf(
+                "%d개 일치 (%d원)- %d개\n",
+                lottoRankResponse.overlappedCount(),
+                lottoRankResponse.prizeMoney(),
+                lottoRankResponse.rankMatchCount()
+        );
+    }
+
+    private void printLottoRankResultWithBonusNumber(LottoRankResponse lottoRankResponse) {
+        System.out.printf(
+                "%d개 일치, 보너스 볼 일치(%d원)- %d개\n",
+                lottoRankResponse.overlappedCount(),
+                lottoRankResponse.prizeMoney(),
+                lottoRankResponse.rankMatchCount()
+        );
+    }
+
 }
