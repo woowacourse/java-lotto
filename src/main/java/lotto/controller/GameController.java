@@ -6,6 +6,7 @@ import lotto.domain.LottoMachine;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
+import lotto.util.RandomNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -31,7 +32,8 @@ public class GameController {
         while(true) {
             String response = InputView.readLottoMoney();
             lottoMoney = new LottoMoney(response);
-            return new LottoMachine(lottoMoney);
+            RandomNumber randomNumber = new RandomNumber();
+            return new LottoMachine(randomNumber, lottoMoney);
         }
     }
 

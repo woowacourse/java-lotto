@@ -2,40 +2,45 @@ package lotto.domain;
 
 import static lotto.util.Constant.LOTTO_MONEY_UNIT;
 import static lotto.util.Constant.LOTTO_NUMBER_MAX_RANGE;
+import static lotto.util.Constant.LOTTO_NUMBER_MIN_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_SIZE;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import lotto.util.RandomUtil;
 
 public class LottoMachine {
-    private List<List<Integer>> lottoTickets = new ArrayList<>();
+    private final RandomUtil randomUtil;
+    private final List<List<Integer>> lottoTickets;
 
-    public LottoMachine(LottoMoney lottoMoney) {
-        int ticketNumber = lottoMoney.getLottoMoney() / LOTTO_MONEY_UNIT;
-        this.lottoTickets = generateLottoTickets(ticketNumber);
+    public LottoMachine(RandomUtil randomUtil, LottoMoney lottoMoney) {
+        this.randomUtil = randomUtil;
+        this.lottoTickets = generateLottoTickets(lottoMoney);
     }
 
-    private List<List<Integer>> generateLottoTickets(int ticketNumber) {
-        List<List<Integer>> lottoTickets = new ArrayList<>();
+    private List<List<Integer>> generateLottoTickets(LottoMoney lottoMoney) {
+        List<List<Integer>> tickets = new ArrayList<>();
+        int ticketNumber = lottoMoney.getLottoMoney() / LOTTO_MONEY_UNIT;
         for (int i = 0; i < ticketNumber; i++) {
-            List<Integer> lottoTicket = generateLottoTicket();
-            lottoTickets.add(lottoTicket);
+            List<Integer> ticket = generateLottoTicket();
+            tickets.add(ticket);
         }
-        return lottoTickets;
+        return tickets;
     }
 
     private List<Integer> generateLottoTicket() {
-        Random random = new Random();
         List<Integer> lottoTicket = new ArrayList<>();
-
         while (lottoTicket.size() < LOTTO_NUMBER_SIZE) {
-            int number = random.nextInt(LOTTO_NUMBER_MAX_RANGE) + 1;
-            if (!lottoTicket.contains(number)) {
-                lottoTicket.add(number);
-            }
+            addLottoTicketNumber(lottoTicket);
         }
         return lottoTicket;
+    }
+
+    private void addLottoTicketNumber(List<Integer> ticket) {
+        int number = randomUtil.generate(LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE);
+        if (!ticket.contains(number)) {
+            ticket.add(number);
+        }
     }
 
     public List<List<Integer>> getLottoTickets() {
