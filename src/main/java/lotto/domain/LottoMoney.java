@@ -10,12 +10,12 @@ public class LottoMoney {
     private int lottoMoney;
 
     public LottoMoney(String input) {
-       int amount = parse(input);
+       int amount = validateAndParse(input);
        validate(amount);
        lottoMoney = amount;
     }
 
-    private int parse(String input) {
+    private int validateAndParse(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
