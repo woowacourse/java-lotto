@@ -43,9 +43,12 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLotto() {
-        String winningLottoNumber = inputView.readWinningLotto();
-        String bonusNumber = inputView.readBonusNumber();
-        return new WinningLotto(new Lotto(toLottoNumbers(winningLottoNumber)), new LottoNumber(Integer.parseInt(bonusNumber)));
+        String winningLottoNumberInput = inputView.readWinningLotto();
+        Lotto winningLotto = new Lotto(toLottoNumbers(winningLottoNumberInput));
+
+        String bonusNumberInput = inputView.readBonusNumber();
+        LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(bonusNumberInput));
+        return new WinningLotto(winningLotto, bonusNumber);
     }
 
     private void issueLottoTickets(final String money) {

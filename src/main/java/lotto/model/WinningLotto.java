@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,10 +71,10 @@ public class WinningLotto {
     }
 
     private void validate(final Lotto lotto, final LottoNumber bonusNumber) {
-        validateDuplication(lotto, bonusNumber);
+        validateDuplicationWithLottoAndBonusNumber(lotto, bonusNumber);
     }
 
-    private void validateDuplication(final Lotto lotto, final LottoNumber bonusNumber) {
+    private void validateDuplicationWithLottoAndBonusNumber(final Lotto lotto, final LottoNumber bonusNumber) {
         if (lotto.has(bonusNumber)) {
             throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복될 수 없습니다.");
         }

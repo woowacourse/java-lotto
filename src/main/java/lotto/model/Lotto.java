@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -17,11 +18,22 @@ public class Lotto {
 
     private void validate(final List<LottoNumber> numbers) {
         validateSize(numbers);
+        validateDuplication(numbers);
     }
 
     private void validateSize(final List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 숫자가 6개가 아닙니다.");
+        }
+    }
+
+    private void validateDuplication(final List<LottoNumber> numbers) {
+        ArrayList<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (LottoNumber number : numbers) {
+            if (lottoNumbers.contains(number)) {
+                throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
+            }
+            lottoNumbers.add(number);
         }
     }
 
