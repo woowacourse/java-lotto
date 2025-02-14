@@ -12,14 +12,14 @@ public class OutputView {
     }
 
     public void printWinningResult(WinningResult winningResult) {
-        List<WinningInfo> sortedWinningInfo = WinningInfo.getSortedValues();
+        List<LottoPrize> sortedLottoPrize = LottoPrize.getSortedValues();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("당첨 통계\n");
         stringBuilder.append("---------\n");
-        for (WinningInfo winningInfo : sortedWinningInfo) {
+        for (LottoPrize lottoPrize : sortedLottoPrize) {
             stringBuilder.append(String.format("%s - %d개\n"
-                    , winningInfo.getInfo()
-                    , winningResult.getCount(winningInfo)));
+                    , lottoPrize.getInfo()
+                    , winningResult.getCount(lottoPrize)));
         }
         System.out.println(stringBuilder);
     }

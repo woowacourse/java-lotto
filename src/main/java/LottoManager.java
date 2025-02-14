@@ -15,8 +15,8 @@ public class LottoManager {
         for (Lotto lotto : lottos) {
             final int matchedCount = winningLotto.getMatchedCount(lotto);
             final boolean isBonusMatched = winningLotto.isMatchBonus(lotto);
-            WinningInfo winningInfo = WinningInfo.of(matchedCount, isBonusMatched);
-            winningResult.increaseCount(winningInfo, 1);
+            LottoPrize lottoPrize = LottoPrize.of(matchedCount, isBonusMatched);
+            winningResult.increaseCount(lottoPrize, 1);
         }
         return winningResult;
     }

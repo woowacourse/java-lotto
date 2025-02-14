@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class WinningInfoTest {
+class LottoPrizeTest {
 
     @DisplayName("당첨 결과에 맞는 결과 객체가 생성된다.")
     @ParameterizedTest
@@ -19,10 +19,10 @@ class WinningInfoTest {
         // given
 
         // when
-        WinningInfo winningInfo = WinningInfo.of(matchedCount, isBonusMatched);
+        LottoPrize lottoPrize = LottoPrize.of(matchedCount, isBonusMatched);
 
         // then
-        assertThat(winningInfo.getPrice()).isEqualTo(expected);
+        assertThat(lottoPrize.getPrice()).isEqualTo(expected);
     }
 
     @DisplayName("낮은 등수부터 리턴할 수 있다.")
@@ -31,15 +31,15 @@ class WinningInfoTest {
         // given
 
         // when
-        List<WinningInfo> sortedValues = WinningInfo.getSortedValues();
+        List<LottoPrize> sortedValues = LottoPrize.getSortedValues();
 
         // then
         assertThat(sortedValues).containsExactly(
-                WinningInfo.FIFTH_PRIZE,
-                WinningInfo.FOURTH_PRIZE,
-                WinningInfo.THIRD_PRIZE,
-                WinningInfo.SECOND_PRIZE,
-                WinningInfo.FIRST_PRIZE
+                LottoPrize.FIFTH,
+                LottoPrize.FOURTH,
+                LottoPrize.THIRD,
+                LottoPrize.SECOND,
+                LottoPrize.FIRST
         );
     }
 }

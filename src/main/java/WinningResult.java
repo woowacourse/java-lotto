@@ -1,26 +1,26 @@
 import java.util.EnumMap;
 
 public class WinningResult {
-    private final EnumMap<WinningInfo, Integer> result = new EnumMap<>(WinningInfo.class);
+    private final EnumMap<LottoPrize, Integer> result = new EnumMap<>(LottoPrize.class);
 
     public WinningResult() {
-        for (WinningInfo winningInfo : WinningInfo.values()) {
-            result.put(winningInfo, 0);
+        for (LottoPrize lottoPrize : LottoPrize.values()) {
+            result.put(lottoPrize, 0);
         }
     }
 
-    public void increaseCount(WinningInfo winningInfo, final int count) {
-        result.put(winningInfo, result.get(winningInfo) + count);
+    public void increaseCount(LottoPrize lottoPrize, final int count) {
+        result.put(lottoPrize, result.get(lottoPrize) + count);
     }
 
-    public int getCount(WinningInfo winningInfo) {
-        return result.get(winningInfo);
+    public int getCount(LottoPrize lottoPrize) {
+        return result.get(lottoPrize);
     }
 
     public long getTotalPrices() {
         long totalPrices = 0;
-        for (WinningInfo winningInfo : WinningInfo.values()) {
-            totalPrices += (long) result.get(winningInfo) * winningInfo.getPrice();
+        for (LottoPrize lottoPrize : LottoPrize.values()) {
+            totalPrices += (long) result.get(lottoPrize) * lottoPrize.getPrice();
         }
         return totalPrices;
     }

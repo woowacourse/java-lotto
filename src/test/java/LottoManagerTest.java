@@ -33,7 +33,7 @@ class LottoManagerTest {
         WinningResult winningResult = lottoManager.getWinningResult(lottos, winningLotto);
 
         // then
-        for (WinningInfo value : WinningInfo.values()) {
+        for (LottoPrize value : LottoPrize.values()) {
             assertThat(winningResult.getCount(value)).isEqualTo(1);
         }
     }
@@ -46,7 +46,7 @@ class LottoManagerTest {
         WinningResult winningResult = lottoManager.getWinningResult(lottos, winningLotto);
 
         Money money = new Money(6000);
-        long totalPrices = Arrays.stream(WinningInfo.values()).mapToInt(WinningInfo::getPrice).sum();
+        long totalPrices = Arrays.stream(LottoPrize.values()).mapToInt(LottoPrize::getPrice).sum();
         float expected = (float) totalPrices / 6000;
 
         // when
