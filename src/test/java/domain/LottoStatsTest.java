@@ -60,11 +60,11 @@ class LottoStatsTest {
         List<Lotto> lottos = new ArrayList<>();
         LottoStats lottoStats = new LottoStats(List.of(1, 2, 3, 4, 5, 6), 7);
 
-        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6))); // 1
-        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 7))); // 2
-        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 8))); // 3
-        lottos.add(new Lotto(List.of(1, 2, 3, 4, 7, 8))); // 4
-        lottos.add(new Lotto(List.of(1, 2, 3, 7, 8, 9))); // 5
+        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6))); // 1등
+        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 7))); // 2등
+        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 8))); // 3등
+        lottos.add(new Lotto(List.of(1, 2, 3, 4, 7, 8))); // 4등
+        lottos.add(new Lotto(List.of(1, 2, 3, 7, 8, 9))); // 5등
 
         lottoStats.calculateResult(lottos);
 
