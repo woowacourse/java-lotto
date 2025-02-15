@@ -10,7 +10,7 @@ public record LottoNumbers(List<Integer> numbers) {
     public LottoNumbers {
         numbers.forEach(this::validateLottoNumberRange);
         validateDuplicateNumber(numbers);
-        validateLottoSize(lottoNumbers);
+        validateLottoSize(numbers);
     }
 
     private void validateLottoNumberRange(Integer number) {
@@ -25,10 +25,21 @@ public record LottoNumbers(List<Integer> numbers) {
         }
     }
 
-    private void validateLottoSize(LottoNumbers lottoNumbers) {
-        if (lottoNumbers.getSize() != LottoNumbers.LOTTO_SIZE) {
+    private void validateLottoSize(List<Integer> numbers) {
+        if (numbers.size() != LottoNumbers.LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
+    }
+
+    public int countMatchedLottoNumbers(LottoNumbers winningLottoNumbers) {
+        return (int) numbers
+                .stream()
+                .filter(winningLottoNumbers.numbers()::contains)
+                .count();
+    }
+
+    public boolean containsLottoNumber(int lottoNumber) {
+        return numbers().contains(lottoNumber);
     }
 
     public int getSize() {

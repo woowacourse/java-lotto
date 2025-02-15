@@ -16,10 +16,14 @@ class LottoMachineTest {
 
         // then
         Assertions.assertThat(lottoTicket.getSize()).isEqualTo(LottoNumbers.LOTTO_SIZE);
-        for (int number : lottoTicket.getLottoNumbers()) {
+        for (int number : lottoTicket.getLottoNumbers().numbers()) {
             Assertions.assertThat(number).isGreaterThanOrEqualTo(LottoNumbers.LOTTO_MIN_NUMBER);
             Assertions.assertThat(number).isLessThanOrEqualTo(LottoNumbers.LOTTO_MAX_NUMBER);
         }
-        Assertions.assertThat(lottoTicket.getLottoNumbers().stream().distinct()).hasSize(LottoNumbers.LOTTO_SIZE);
+        Assertions.assertThat(lottoTicket.getLottoNumbers()
+                        .numbers()
+                        .stream()
+                        .distinct())
+                .hasSize(LottoNumbers.LOTTO_SIZE);
     }
 }
