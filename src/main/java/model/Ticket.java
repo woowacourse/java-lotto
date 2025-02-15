@@ -27,7 +27,7 @@ public class Ticket {
 
     public ReturnOfInvestmentResultResponse createReturnOfInvestmentResponse(final int totalPrice) {
         double returnOfInvestment = calculateReturnOfInvestment(totalPrice);
-        return new ReturnOfInvestmentResultResponse(returnOfInvestment, Heuristic.determine(returnOfInvestment));
+        return new ReturnOfInvestmentResultResponse(returnOfInvestment, InvestmentOutcome.determine(returnOfInvestment));
     }
 
     private static void validatePurchaseMoney(final int purchaseMoney) {

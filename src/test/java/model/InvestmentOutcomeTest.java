@@ -13,8 +13,8 @@ class InvestmentOutcomeTest {
             "1.0, 본전",
             "0.5, 손해"
     })
-    void 수익률에_따라_이익여부_판별한다(double returnOfInvestmentResult, String expected) {
-        assertThat(InvestmentOutcome.determine(returnOfInvestmentResult))
+    void 수익률에_따라_이익여부_판별한다(double ROI, String expected) {
+        assertThat(InvestmentOutcome.determine(ROI))
                 .isEqualTo(expected);
     }
 }
