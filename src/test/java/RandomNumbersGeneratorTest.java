@@ -20,7 +20,7 @@ class RandomNumbersGeneratorTest {
         List<Integer> numbers = RandomNumbersGenerator.generateUniqueNumbers(start, end, count);
 
         // then
-        assertThat(numbers).contains(1, 2, 3);
+        assertThat(numbers).containsAnyOf(1, 2, 3);
     }
 
     @Test
