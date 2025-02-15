@@ -20,9 +20,12 @@ public enum LottoMatch {
     this.prize = prize;
   }
 
-  public static LottoMatch calculateLotto(int winningCounter, boolean bonusChecker) {
-    return Arrays.stream(values()).filter(lottoMatch -> lottoMatch.winningCounter == winningCounter
-        && lottoMatch.bonusChecker == bonusChecker).findFirst().orElse(BOOM);
+  public static LottoMatch findLottoRank(int winningCounter, boolean bonusChecker) {
+    return Arrays.stream(values())
+        .filter(lottoMatch -> lottoMatch.winningCounter == winningCounter
+        && (winningCounter != 5 || lottoMatch.bonusChecker == bonusChecker))
+        .findFirst()
+        .orElse(BOOM);
   }
 
   @Override

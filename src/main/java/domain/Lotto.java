@@ -42,7 +42,7 @@ public class Lotto {
     if (numbers.contains(bonusNumber)) {
       bonusChecker = true;
     }
-    return LottoMatch.calculateLotto(winningCounter, bonusChecker);
+    return LottoMatch.findLottoRank(winningCounter, bonusChecker);
   }
 
   private int checkWinningCounter(List<Integer> winningNumbers, int number) {
