@@ -92,4 +92,31 @@ class LottoTest {
                                 new Number(7)))
         );
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1, true",
+            "2, true",
+            "3, true",
+            "4, true",
+            "5, true",
+            "6, true",
+            "7, false"
+    })
+    void 로또가_특정_번호를_포함하는지_판단할_수_있다(int value, boolean expected) {
+        //given
+        Lotto lotto = new Lotto(List.of(
+                new Number(1),
+                new Number(2),
+                new Number(3),
+                new Number(4),
+                new Number(5),
+                new Number(6)
+        ));
+        Number number = new Number(value);
+        //when
+        boolean actual = lotto.contains(number);
+        //then
+        assertThat(expected).isEqualTo(actual);
+    }
 }
