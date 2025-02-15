@@ -8,6 +8,7 @@ import java.util.List;
 
 public class OutputView {
     private static final int STANDARD_RATE = 1;
+
     private OutputView() {
     }
 
