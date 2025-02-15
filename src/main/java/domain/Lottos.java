@@ -10,6 +10,10 @@ public class Lottos {
         lottos = new ArrayList<>();
     }
 
+    public int getLottoCount() {
+        return lottos.size();
+    }
+
     public void addLotto(Lotto lotto) {
         lottos.add(lotto);
     }
