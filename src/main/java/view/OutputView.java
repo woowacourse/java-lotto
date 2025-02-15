@@ -17,12 +17,6 @@ public class OutputView {
     private static final String WINNING_RESULT_HEADER = "당첨 통계" + LINE_SEPARATOR + "---------";
     private static final String WINNING_PROFIT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
-    public void main(String[] args) {
-        final Map<LottoRank, Integer> rank5 = Map.of(LottoRank.RANK_5, 2, LottoRank.RANK_4, 5, LottoRank.RANK_2, 4);
-        printWinningResult(rank5);
-        printWinningProfit(1.123);
-    }
-
     public void printAskInputMoney() {
         System.out.println(ASK_INPUT_MONEY);
     }
