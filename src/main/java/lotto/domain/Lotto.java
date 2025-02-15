@@ -18,18 +18,6 @@ public class Lotto {
         this.numbers = numbers.stream().sorted().toList();
     }
 
-    public List<Integer> getNumbers() {
-        return this.numbers;
-    }
-
-    public boolean hasNumber(int target) {
-        return this.numbers.stream().anyMatch(number -> number == target);
-    }
-
-    public int findMatches(Lotto lotto) {
-        return (int) numbers.stream().filter(lotto::hasNumber).count();
-    }
-
     private void validateDuplication(List<Integer> numbers) {
         Set<Integer> notDuplicatedNumbers = new HashSet<>(numbers);
         if (notDuplicatedNumbers.size() != numbers.size()) {
@@ -49,5 +37,17 @@ public class Lotto {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("올바르지 않은 숫자 개수입니다.");
         }
+    }
+
+    public List<Integer> getNumbers() {
+        return this.numbers;
+    }
+
+    public boolean hasNumber(int target) {
+        return this.numbers.stream().anyMatch(number -> number == target);
+    }
+
+    public int findMatches(Lotto lotto) {
+        return (int) numbers.stream().filter(lotto::hasNumber).count();
     }
 }

@@ -15,12 +15,6 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public WinningTier findWinningTier(Lotto lotto) {
-        int matches = this.lotto.findMatches(lotto);
-        boolean hasBonusNumber = lotto.hasNumber(bonusNumber);
-        return WinningTier.find(matches, hasBonusNumber);
-    }
-
     private void validateBonusNumber(int number) {
         if (this.lotto.hasNumber(number)) {
             throw new IllegalArgumentException("보너스 번호가 당첨 번호와 중복됩니다.");
@@ -28,5 +22,11 @@ public class WinningLotto {
         if (number < MIN_BONUS_NUMBER || number > MAX_BONUS_NUMBER) {
             throw new IllegalArgumentException("범위를 벗어난 값입니다.");
         }
+    }
+
+    public WinningTier findWinningTier(Lotto lotto) {
+        int matches = this.lotto.findMatches(lotto);
+        boolean hasBonusNumber = lotto.hasNumber(bonusNumber);
+        return WinningTier.find(matches, hasBonusNumber);
     }
 }
