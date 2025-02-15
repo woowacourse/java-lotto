@@ -4,32 +4,32 @@ import lotto.config.ApplicationConfiguration;
 import lotto.constant.WinningTier;
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
-import lotto.service.InputService;
 import lotto.service.LottoService;
+import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
 
 public class LottoController {
 
-    private final InputService inputService;
+    private final InputView inputView;
     private final LottoService lottoService;
     private final OutputView outputView;
 
     public LottoController(ApplicationConfiguration applicationConfiguration) {
-        this.inputService = applicationConfiguration.getInputService();
+        this.inputView = applicationConfiguration.getInputView();
         this.lottoService = applicationConfiguration.getLottoService();
         this.outputView = applicationConfiguration.getOutputView();
     }
 
     public void run() {
-        int purchaseAmount = inputService.readPurchaseAmount();
+        int purchaseAmount = inputView.readPurchaseAmount();
         int lottoCount = lottoService.purchaseLotto(purchaseAmount);
         List<Lotto> lottos = lottoService.issueLottos(lottoCount);
         outputView.printLottos(lottos);
 
-        Lotto winningNumbers = inputService.readWinningNumbers();
-        int bonusNumber = inputService.readBonusNumber(winningNumbers);
+        Lotto winningNumbers = inputView.readWinningNumbers();
+        int bonusNumber = inputView.readBonusNumber(winningNumbers);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         List<WinningTier> winningTiers = lottoService.findWinningTiers(lottos, winningLotto);
         double profit = lottoService.calculateProfit(winningTiers, purchaseAmount);
