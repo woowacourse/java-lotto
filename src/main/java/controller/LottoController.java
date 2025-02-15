@@ -20,7 +20,7 @@ public class LottoController {
         this.outputView = outputView;
     }
 
-    public void run() {
+    public void startGame() {
         Purchase purchase = readPurchaseAmount();
         int lottoCount = findLottoCount(purchase);
         List<Lotto> issuedLottos = issueLotto(lottoCount);
