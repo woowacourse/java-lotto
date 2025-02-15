@@ -25,7 +25,7 @@ public class WinningResult {
     }
 
     private Map<LottoRank, Integer> initialize() {
-        Map<LottoRank, Integer> result = new LinkedHashMap<>();
+        final Map<LottoRank, Integer> result = new LinkedHashMap<>();
         final List<LottoRank> byAllWithoutNone = LottoRank.findByAllWithoutNone();
         for (LottoRank lottoRank : byAllWithoutNone) {
             result.put(lottoRank, 0);

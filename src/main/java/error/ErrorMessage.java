@@ -15,7 +15,7 @@ public enum ErrorMessage {
     private static final String PREFIX = "[ERROR] ";
     private final String message;
 
-    ErrorMessage(String message) {
+    ErrorMessage(final String message) {
         this.message = PREFIX + message;
     }
 

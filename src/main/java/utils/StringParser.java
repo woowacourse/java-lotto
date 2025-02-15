@@ -10,7 +10,7 @@ public class StringParser {
 
     }
 
-    public static int parseToNumber(String input, ErrorMessage errorMessage) {
+    public static int parseToNumber(final String input, final ErrorMessage errorMessage) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -18,7 +18,8 @@ public class StringParser {
         }
     }
 
-    public static List<Integer> parseToNumbers(String input, String delimiter, ErrorMessage errorMessage) {
+    public static List<Integer> parseToNumbers(final String input, final String delimiter,
+                                               final ErrorMessage errorMessage) {
         return Arrays.stream(input.split(delimiter))
                 .map(token -> parseToNumber(token, errorMessage))
                 .toList();

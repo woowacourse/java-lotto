@@ -16,7 +16,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    private void validate(List<Integer> numbers) {
+    private void validate(final List<Integer> numbers) {
         validateRange(numbers);
         validateDuplicate(numbers);
         validateSize(numbers);

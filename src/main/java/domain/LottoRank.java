@@ -25,7 +25,7 @@ public enum LottoRank {
     }
 
     // 일치하는 번호 갯수와 보너스 번호 일치 여부로 랭크 반환
-    public static LottoRank findByMatchedCountAndIsBonus(int matchedCount, boolean isBonus) {
+    public static LottoRank findByMatchedCountAndIsBonus(final int matchedCount, final boolean isBonus) {
         return Arrays.stream(LottoRank.values())
                 .filter(rank -> rank.matchedCount == matchedCount)
                 .filter(rank -> Objects.equals(isBonus, rank.isBonus))

@@ -19,5 +19,4 @@ public class WinningProfit {
                 .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();
     }
-
 }
