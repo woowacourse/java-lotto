@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoWinningChecker {
-    private LottoWinningChecker() {
-    }
 
-    public static LottoResult calculateResult(Lottos lottos, WinningNumberWithBonusNumber winningNumberWithBonusNumber) {
+    public LottoResult calculateResult(Lottos lottos, WinningNumberWithBonusNumber winningNumberWithBonusNumber) {
         LottoResult lottoResult = LottoResult.initialize();
 
         lottos.getLottos().forEach(
@@ -23,7 +21,7 @@ public class LottoWinningChecker {
     }
 
 
-    private static LottoRanking check(Lotto lotto, WinningNumberWithBonusNumber winningNumberWithBonusNumber) {
+    private LottoRanking check(Lotto lotto, WinningNumberWithBonusNumber winningNumberWithBonusNumber) {
         List<Integer> numbers = new ArrayList<>(lotto.getNumbers());
         numbers.retainAll(winningNumberWithBonusNumber.winningNumber().getNumbers());
 
