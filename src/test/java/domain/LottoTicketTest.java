@@ -63,7 +63,7 @@ class LottoTicketTest {
         Assertions.assertThatThrownBy(() -> {
                     new LottoTicket(new LottoNumbers(numbers));
                 }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 1 이상 45 이하이다.");
+                .hasMessage("로또 번호는 1 이상 45 이하여야 합니다.");
     }
 
     @DisplayName("로또 번호가 1 이상 45 이하인 경우 정상적으로 로또가 발행된다.")

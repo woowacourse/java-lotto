@@ -9,7 +9,6 @@ public class LottoNumbers {
     private final List<Integer> numbers;
 
     public LottoNumbers(List<Integer> numbers) {
-
         numbers.forEach(this::validateLottoNumberRange);
         validateDuplicateNumber(numbers);
         this.numbers = numbers;
@@ -17,7 +16,7 @@ public class LottoNumbers {
 
     private void validateLottoNumberRange(Integer number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 1 이상 45 이하이다.");
+            throw new IllegalArgumentException("로또 번호는 1 이상 45 이하여야 합니다.");
         }
     }
 

@@ -1,22 +1,22 @@
 package domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class StatisticsService {
-    public WinningStatistics calculateWinningStatistics(List<LottoTicket> lottoTickets,
+    public WinningStatistics calculateWinningStatistics(LottoTickets lottoTickets,
                                                         DrawResult drawResult) {
         Map<LottoPrize, Integer> prizeCounter = new HashMap<>();
         initializePrizeCounter(prizeCounter);
 
-        lottoTickets.forEach(lottoTicket -> {
-            int countMatched = lottoTicket.countMatchedNumbers(drawResult.getLottoNumbers());
-            boolean isBonusNumberMatched = lottoTicket.hasBonusNumber(drawResult.getBonusNumber());
-            LottoPrize prize = LottoPrize.getLottoPrize(countMatched, isBonusNumberMatched);
-            int prizeCount = prizeCounter.get(prize);
-            prizeCounter.put(prize, prizeCount + 1);
-        });
+        lottoTickets.getLottoTickets()
+                .forEach(lottoTicket -> {
+                    int countMatched = lottoTicket.countMatchedNumbers(drawResult.getLottoNumbers());
+                    boolean isBonusNumberMatched = lottoTicket.hasBonusNumber(drawResult.getBonusNumber());
+                    LottoPrize prize = LottoPrize.getLottoPrize(countMatched, isBonusNumberMatched);
+                    int prizeCount = prizeCounter.get(prize);
+                    prizeCounter.put(prize, prizeCount + 1);
+                });
         return new WinningStatistics(prizeCounter);
     }
 

@@ -23,12 +23,12 @@ public class LottoMachine {
         return number;
     }
 
-    public List<LottoTicket> generateLottoTickets(int purchaseAmount, IntegerGenerator generator) {
+    public LottoTickets generateLottoTickets(int purchaseAmount, IntegerGenerator generator) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < purchaseAmount / LOTTO_PRICE; i++) {
             LottoTicket lottoTicket = generateLottoTicket(generator);
             lottoTickets.add(lottoTicket);
         }
-        return lottoTickets;
+        return new LottoTickets(lottoTickets);
     }
 }

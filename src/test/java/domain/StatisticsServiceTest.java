@@ -88,7 +88,7 @@ class StatisticsServiceTest {
         LottoTicket fourth = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 44, 45)));
         LottoTicket second = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 7)));
         LottoTicket nothing = new LottoTicket(new LottoNumbers(List.of(31, 32, 33, 34, 35, 36)));
-        List<LottoTicket> lottoTickets = List.of(fifth, fourth, second, nothing);
+        LottoTickets lottoTickets = new LottoTickets(List.of(fifth, fourth, second, nothing));
         LottoNumbers winningLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
         DrawResult drawResult = new DrawResult(winningLottoNumbers, bonusNumber);
@@ -112,7 +112,7 @@ class StatisticsServiceTest {
         LottoTicket fourth = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 44, 45)));
         LottoTicket second = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 7)));
         LottoTicket nothing = new LottoTicket(new LottoNumbers(List.of(31, 32, 33, 34, 35, 36)));
-        List<LottoTicket> lottoTickets = List.of(fifth, fourth, second, nothing);
+        LottoTickets lottoTickets = new LottoTickets(List.of(fifth, fourth, second, nothing));
         LottoNumbers winningLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
         DrawResult drawResult = new DrawResult(winningLottoNumbers, bonusNumber);

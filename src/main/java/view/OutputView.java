@@ -2,6 +2,7 @@ package view;
 
 import domain.LottoPrize;
 import domain.LottoTicket;
+import domain.LottoTickets;
 import domain.Profit;
 import domain.WinningStatistics;
 import java.math.RoundingMode;
@@ -12,10 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 public class OutputView {
-    public static void printLottoTickets(List<LottoTicket> lottoTickets) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
+    public static void printLottoTickets(LottoTickets lottoTickets) {
+        System.out.printf("%d개를 구매했습니다.\n", lottoTickets.getSize());
 
-        for (LottoTicket lottoTicket : lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             System.out.println(lottoTicket.getLottoNumbers());
         }
     }
