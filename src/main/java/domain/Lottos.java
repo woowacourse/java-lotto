@@ -13,10 +13,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
-        return unmodifiableList(lottos);
-    }
-
     public WinningResult calculateWinning(WinningLotto winningLotto, Money purchaseLottoMoney) {
         Map<Rank, Integer> winningResult = new HashMap<>();
         for (Lotto purchaseLotto : lottos) {
@@ -24,5 +20,9 @@ public class Lottos {
             winningResult.put(rank, winningResult.getOrDefault(rank, 0) + 1);
         }
         return new WinningResult(purchaseLottoMoney, winningResult);
+    }
+
+    public List<Lotto> getLottos() {
+        return unmodifiableList(lottos);
     }
 }

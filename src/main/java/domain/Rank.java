@@ -10,6 +10,7 @@ public enum Rank {
     SECOND(5, new Money(30_000_000), true),
     FIRST(6, new Money(2_000_000_000), false),
     MISS(0, new Money(0), false);
+
     private final int matchCount;
     private final Money winningMoney;
     private final boolean isRequireBonus;
