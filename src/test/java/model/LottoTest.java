@@ -2,8 +2,8 @@ package model;
 
 import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
 import static constant.ExceptionMessage.INVALID_LOTTO_RANGE;
-import static constant.ExceptionMessage.INVALID_LOTTO_TYPE;
-import static constant.ExceptionMessage.LOTTO_DUPLICATE;
+import static constant.ExceptionMessage.INVALID_LOTTO_FORMAT;
+import static constant.ExceptionMessage.DUPLICATE_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -43,7 +43,7 @@ class LottoTest {
     void inputWithDuplicate() {
         assertThatThrownBy(() -> Lotto.of("1, 1, 2, 3, 4, 5"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LOTTO_DUPLICATE.getMessage());
+                .hasMessageContaining(DUPLICATE_LOTTO_NUMBER.getMessage());
     }
 
     @Test
@@ -51,7 +51,7 @@ class LottoTest {
     void inputWithCharacter() {
         assertThatThrownBy(() -> Lotto.of("1, ㅁ, 2, 3, 4, 5"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_LOTTO_TYPE.getMessage());
+                .hasMessageContaining(INVALID_LOTTO_FORMAT.getMessage());
     }
 
     @Test

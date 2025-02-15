@@ -2,7 +2,7 @@ package model;
 
 import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
 import static constant.ExceptionMessage.INVALID_LOTTO_MIN_PURCHASE;
-import static constant.ExceptionMessage.INVALID_LOTTO_PURCHASE_TYPE;
+import static constant.ExceptionMessage.INVALID_LOTTO_PURCHASE_FORMAT;
 import static constant.ExceptionMessage.INVALID_LOTTO_PURCHASE_UNIT;
 
 public class LottoPurchase {
@@ -33,7 +33,7 @@ public class LottoPurchase {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_LOTTO_PURCHASE_TYPE.getMessage());
+            throw new IllegalArgumentException(INVALID_LOTTO_PURCHASE_FORMAT.getMessage());
         }
     }
 

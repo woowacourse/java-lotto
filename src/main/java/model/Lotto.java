@@ -3,8 +3,8 @@ package model;
 import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
 import static constant.ExceptionMessage.INVALID_LOTTO_RANGE;
 import static constant.ExceptionMessage.INVALID_LOTTO_SIZE;
-import static constant.ExceptionMessage.INVALID_LOTTO_TYPE;
-import static constant.ExceptionMessage.LOTTO_DUPLICATE;
+import static constant.ExceptionMessage.INVALID_LOTTO_FORMAT;
+import static constant.ExceptionMessage.DUPLICATE_LOTTO_NUMBER;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -64,7 +64,7 @@ public class Lotto {
     private void validateDuplicate(final List<Integer> inputs) {
         HashSet<Integer> set = new HashSet<>(inputs);
         if (inputs.size() != set.size()) {
-            throw new IllegalArgumentException(LOTTO_DUPLICATE.getMessage());
+            throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBER.getMessage());
         }
     }
 
@@ -72,7 +72,7 @@ public class Lotto {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_LOTTO_TYPE.getMessage());
+            throw new IllegalArgumentException(INVALID_LOTTO_FORMAT.getMessage());
         }
     }
 

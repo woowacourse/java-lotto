@@ -2,7 +2,7 @@ package model;
 
 import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
 import static constant.ExceptionMessage.INVALID_LOTTO_MIN_PURCHASE;
-import static constant.ExceptionMessage.INVALID_LOTTO_PURCHASE_TYPE;
+import static constant.ExceptionMessage.INVALID_LOTTO_PURCHASE_FORMAT;
 import static constant.ExceptionMessage.INVALID_LOTTO_PURCHASE_UNIT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -32,7 +32,7 @@ class LottoPurchaseTest {
     void inputWithCharacter() {
         assertThatThrownBy(() -> LottoPurchase.of("ㅁ"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_LOTTO_PURCHASE_TYPE.getMessage());
+                .hasMessageContaining(INVALID_LOTTO_PURCHASE_FORMAT.getMessage());
     }
 
     @Test

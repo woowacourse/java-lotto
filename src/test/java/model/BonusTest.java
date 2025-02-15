@@ -1,8 +1,8 @@
 package model;
 
-import static constant.ExceptionMessage.BONUS_DUPLICATE;
+import static constant.ExceptionMessage.DUPLICATE_BONUS_NUMBER;
 import static constant.ExceptionMessage.INVALID_BONUS_RANGE;
-import static constant.ExceptionMessage.INVALID_BONUS_TYPE;
+import static constant.ExceptionMessage.INVALID_BONUS_FORMAT;
 import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -50,7 +50,7 @@ class BonusTest {
     void inputWithDuplicate() {
         assertThatThrownBy(() -> Bonus.of("1", lotto))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(BONUS_DUPLICATE.getMessage());
+                .hasMessageContaining(DUPLICATE_BONUS_NUMBER.getMessage());
     }
 
     @Test
@@ -58,7 +58,7 @@ class BonusTest {
     void inputWithCharacter() {
         assertThatThrownBy(() -> Bonus.of("ㅁ", lotto))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_BONUS_TYPE.getMessage());
+                .hasMessageContaining(INVALID_BONUS_FORMAT.getMessage());
     }
 
     @Test
@@ -74,6 +74,6 @@ class BonusTest {
     void inputWithInvalidCount() {
         assertThatThrownBy(() -> Bonus.of("7, 8", lotto))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_BONUS_TYPE.getMessage());
+                .hasMessageContaining(INVALID_BONUS_FORMAT.getMessage());
     }
 }

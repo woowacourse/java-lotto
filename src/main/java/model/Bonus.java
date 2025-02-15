@@ -1,8 +1,8 @@
 package model;
 
-import static constant.ExceptionMessage.BONUS_DUPLICATE;
+import static constant.ExceptionMessage.DUPLICATE_BONUS_NUMBER;
 import static constant.ExceptionMessage.INVALID_BONUS_RANGE;
-import static constant.ExceptionMessage.INVALID_BONUS_TYPE;
+import static constant.ExceptionMessage.INVALID_BONUS_FORMAT;
 import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
 
 public class Bonus {
@@ -34,7 +34,7 @@ public class Bonus {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_BONUS_TYPE.getMessage());
+            throw new IllegalArgumentException(INVALID_BONUS_FORMAT.getMessage());
         }
     }
 
@@ -46,7 +46,7 @@ public class Bonus {
 
     private void validateDuplicateWithLotto(final Integer number, final Lotto lotto) {
         if (lotto.getNumbers().contains(number)) {
-            throw new IllegalArgumentException(BONUS_DUPLICATE.getMessage());
+            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER.getMessage());
         }
     }
 
