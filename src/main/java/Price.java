@@ -1,6 +1,5 @@
 public class Price {
 
-    public static final int LOTTO_PRICE = 1000;
     private final int value;
 
     public Price(String value) {
@@ -15,7 +14,7 @@ public class Price {
     private void validateLottoPriceUnit(String value) {
         int price = validateNumberFormat(value);
 
-        if (price >= LOTTO_PRICE && price % LOTTO_PRICE == 0) {
+        if (price >= LottoRule.LOTTO_PRICE.getValue() && price % LottoRule.LOTTO_PRICE.getValue() == 0) {
             return;
         }
 

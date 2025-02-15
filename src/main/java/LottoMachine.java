@@ -4,19 +4,14 @@ public class LottoMachine {
 
     private final int ticket;
 
-    private static final int LOTTO_PRICE = 1000;
-    private static final int LOTTO_NUMBER_START = 1;
-    private static final int LOTTO_NUMBER_END = 45;
-    private static final int LOTTO_NUMBER_COUNT = 6;
-
     public LottoMachine(Price price) {
-        this.ticket = price.getValue() / LOTTO_PRICE;
+        this.ticket = price.getValue() / LottoRule.LOTTO_PRICE.getValue();
     }
 
     public Lottos generateLottos() {
         Lottos lottos = new Lottos();
         for (int i = 0; i < ticket; i++) {
-            List<Integer> randomNumbers = RandomGenerator.generateUniqueRandomNumbers(LOTTO_NUMBER_COUNT, LOTTO_NUMBER_START, LOTTO_NUMBER_END);
+            List<Integer> randomNumbers = RandomGenerator.generateUniqueRandomNumbers(LottoRule.LOTTO_SELECTION_SIZE.getValue(), LottoRule.MIN_LOTTO_NUMBER.getValue(), LottoRule.MAX_LOTTO_NUMBER.getValue());
             Lotto lotto = new Lotto(randomNumbers);
             lottos.addLotto(lotto);
         }

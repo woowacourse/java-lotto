@@ -22,14 +22,18 @@ public class Lotto {
     }
 
     private void validateDistinct(List<Integer> numbers) {
-        if (numbers.stream().distinct().count() == 6) {
+        long distinctCount = numbers.stream()
+                .distinct()
+                .count();
+
+        if (distinctCount == LottoRule.LOTTO_SELECTION_SIZE.getValue()) {
             return;
         }
         throw new IllegalArgumentException();
     }
 
     private static void validateSize(List<Integer> numbers) {
-        if (numbers.size() == 6) {
+        if (numbers.size() == LottoRule.LOTTO_SELECTION_SIZE.getValue()) {
             return;
         }
         throw new IllegalArgumentException();

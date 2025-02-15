@@ -3,10 +3,8 @@ public record WinningNumberWithBonusNumber(
         int bonusNumber
 ) {
 
-    public WinningNumberWithBonusNumber(Lotto winningNumber, int bonusNumber) {
+    public WinningNumberWithBonusNumber {
         validate(winningNumber, bonusNumber);
-        this.winningNumber = winningNumber;
-        this.bonusNumber = bonusNumber;
     }
 
     private void validate(Lotto winningNumber, int bonusNumber) {
