@@ -20,9 +20,8 @@ public class LottoManager {
         return lottos;
     }
 
-    public static WinningStatistics calculateStatistics(final List<Lotto> lottos, final WinningNumbers winningNumbers,
-                                              final int bonusNumber) {
-        return LottoMachine.calculateStatistics(lottos, winningNumbers, bonusNumber);
+    public static WinningStatistics calculateStatistics(final List<Lotto> lottos, final WinningLotto winningLotto) {
+        return LottoMachine.calculateStatistics(lottos, winningLotto);
     }
 
     private static void validatePurchaseAmount(final int purchaseAmount) {

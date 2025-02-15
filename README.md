@@ -33,7 +33,7 @@
 
 - [x] 보너스 번호를 입력받는다.
   - [x] 입력한 보너스 번호가 1 ~ 45 사이가 아니면 IllegalArgumentException을 발생시키고, 재입력 받는다.
-  - [x] 입력한 보너스 번호가 당첨 번호와 중복된다면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+  - [x] 입력한 번호가 당첨 번호와 중복된다면 IllegalArgumentException을 발생시키고, 당첨 번호부터 재입력 받는다.
 
 
 - [x] 당첨 금액 별 당첨 개수를 계산한다.
