@@ -5,21 +5,18 @@ import java.util.EnumMap;
 import java.util.Map.Entry;
 
 public class LottoResult {
-    private final EnumMap<Rank, Integer> ranks = new EnumMap<>(Rank.class);
-    private final double profitRate;
+    private final EnumMap<Rank, Integer> ranks;
 
-    public LottoResult(UserLotto userLotto, WinningLotto winningLotto) {
-        initRank();
-        calculateRanks(userLotto, winningLotto);
-        profitRate = calculateProfitRate(userLotto.getPurchaseAmount(), calculateProfit());
+    public LottoResult(final EnumMap<Rank, Integer> ranks) {
+        this.ranks = ranks;
     }
 
     public EnumMap<Rank, Integer> getRanks() {
         return ranks;
     }
 
-    public double getProfitRate() {
-        return profitRate;
+    public double getProfitRate(UserLotto userLotto) {
+        return calculateProfitRate(userLotto.getPurchaseAmount(), calculateProfit());
     }
 
     private double calculateProfitRate(int purchaseAmount, long winningLotto) {
@@ -36,16 +33,4 @@ public class LottoResult {
         return profit;
     }
 
-    private void calculateRanks(UserLotto userLotto, WinningLotto winningLotto) {
-        for (LottoDto lottoDto : userLotto.getLottosDto()) {
-            Rank rank = Rank.getRank(winningLotto, lottoDto);
-            ranks.put(rank, ranks.get(rank) + 1);
-        }
-    }
-
-    private void initRank() {
-        for (Rank rank : Rank.values()) {
-            ranks.put(rank, 0);
-        }
-    }
 }

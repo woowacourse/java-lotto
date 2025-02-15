@@ -2,6 +2,7 @@ package controller;
 
 import model.LottoResult;
 import model.UserLotto;
+import model.UserLottoRanks;
 import model.WinningLotto;
 import view.InputView;
 import view.OutputView;
@@ -23,9 +24,10 @@ public class LottoController {
         WinningLotto winningLotto = getWinningLotto();
         setBonus(winningLotto);
 
-        LottoResult lottoResult = new LottoResult(userLotto, winningLotto);
+        UserLottoRanks userLottoRanks = new UserLottoRanks(winningLotto, userLotto.getLottosDto());
+        LottoResult lottoResult = new LottoResult(userLottoRanks.getUserLottoRanks());
         outputView.printResultRanks(lottoResult.getRanks());
-        outputView.printProfitRate(lottoResult.getProfitRate());
+        outputView.printProfitRate(lottoResult.getProfitRate(userLotto));
     }
 
     private void setBonus(WinningLotto winningLotto) {
