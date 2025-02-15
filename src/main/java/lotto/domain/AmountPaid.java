@@ -13,7 +13,7 @@ public class AmountPaid {
     public AmountPaid(int amount) {
         this.amount = amount;
         validateDivideByLottoPrice();
-        validateNegativeValue();
+        validatePositiveValue();
     }
 
     public String calculateProfitRate(int totalPrize) {
@@ -26,8 +26,8 @@ public class AmountPaid {
         }
     }
 
-    private void validateNegativeValue() {
-        if (amount < 0) {
+    private void validatePositiveValue() {
+        if (amount <= 0) {
             throw new LottoException(NOT_ALLOW_NEGATIVE);
         }
     }
