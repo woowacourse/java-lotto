@@ -4,6 +4,7 @@ import static lotto.common.Constants.LOTTO_NUM_SIZE;
 import static lotto.common.ErrorMessage.DUPLICATE_LOTTO_NUMBER;
 import static lotto.common.ErrorMessage.INVALID_LOTTO_INPUT;
 import static lotto.common.ErrorMessage.INVALID_LOTTO_NUM_SIZE;
+import static lotto.common.ErrorMessage.USE_SEPARATOR;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -30,13 +31,13 @@ public class Lotto {
         }
 
         if (!input.contains(DELIMITER)) {
-            throw new IllegalArgumentException("구분자(,)를 활용해주세요! (ex. 1, 2, 3, 4, 5, 6)");
+            throw new IllegalArgumentException(USE_SEPARATOR.getMessage());
         }
 
         return new Lotto(Arrays.stream(input.split(DELIMITER))
                 .map(String::trim)
-                .map(Integer::parseInt)
-                .map(LottoNumber::new).toList());
+                .map(LottoNumber::from)
+                .toList());
     }
 
     public boolean contains(LottoNumber lottoNumber) {
@@ -75,7 +76,7 @@ public class Lotto {
 
     @Override
     public String toString() {
-        StringJoiner joiner = new StringJoiner(", ", "[", "]");
+        StringJoiner joiner = new StringJoiner(DELIMITER + " ", "[", "]");
 
         for (LottoNumber lottoNumber : sortedInAscending(lottoNumbers)) {
             joiner.add(lottoNumber.toString());

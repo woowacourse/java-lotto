@@ -2,7 +2,7 @@ package lotto.domain;
 
 import static lotto.common.Constants.MAX_LOTTO_NUMBER;
 import static lotto.common.Constants.MIN_LOTTO_NUMBER;
-import static lotto.common.ErrorMessage.ONLY_NUMBER;
+import static lotto.common.ErrorMessage.ONLY_LOTTO_NUMBER;
 
 import java.util.Objects;
 
@@ -18,9 +18,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumber(number);
     }
 
+    public static LottoNumber from(String input) {
+        return new LottoNumber(parseLottoNumber(input));
+    }
+
+    public static int parseLottoNumber(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ONLY_LOTTO_NUMBER.getMessage());
+        }
+    }
+
     private void validateNumber(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(ONLY_NUMBER.getMessage());
+            throw new IllegalArgumentException(ONLY_LOTTO_NUMBER.getMessage());
         }
     }
 

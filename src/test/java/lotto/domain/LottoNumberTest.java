@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.common.ErrorMessage.ONLY_NUMBER;
+import static lotto.common.ErrorMessage.ONLY_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -33,7 +33,7 @@ class LottoNumberTest {
     void 음수와_경계값은_허용하지_않는다(int value) {
         assertThatThrownBy(() -> new LottoNumber(value))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ONLY_NUMBER.getMessage());
+                .hasMessage(ONLY_LOTTO_NUMBER.getMessage());
     }
 
     @Test
