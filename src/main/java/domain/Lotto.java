@@ -1,33 +1,13 @@
 package domain;
 
-import static util.constant.Values.*;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class Lotto {
 
-  private List<Integer> numbers = new ArrayList<>();
+  private final List<Integer> numbers;
 
-  public Lotto() {
-    createNumbers();
-  }
-
-  private void createNumbers() {
-    Random random = new Random();
-    do {
-      int randomNumber = random.nextInt(LOTTO_MIN_NUM, LOTTO_MAX_NUM + 1);
-      addNumber(randomNumber);
-    } while (numbers.size() < LOTTO_SIZE);
-    Collections.sort(numbers);
-  }
-
-  private void addNumber(int randomNumber) {
-    if (!numbers.contains(randomNumber)) {
-      numbers.add(randomNumber);
-    }
+  public Lotto(List<Integer> numbers) {
+    this.numbers = numbers;
   }
 
   public LottoMatch compareLotto(WinningLotto winningLotto) {
