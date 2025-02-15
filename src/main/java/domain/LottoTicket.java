@@ -12,16 +12,16 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int countMatchedNumbers(LottoNumbers winningNumbers) {
+    public int countMatchedLottoNumbers(LottoNumbers winningLottoNumbers) {
         return (int) lottoNumbers.numbers()
                 .stream()
-                .filter(winningNumbers.numbers()::contains)
+                .filter(winningLottoNumbers.numbers()::contains)
                 .count();
     }
 
-    public boolean hasBonusNumber(int bonusNumber) {
+    public boolean containsLottoNumber(int lottoNumber) {
         return lottoNumbers.numbers()
-                .contains(bonusNumber);
+                .contains(lottoNumber);
     }
 
     public int getSize() {

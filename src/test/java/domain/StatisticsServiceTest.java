@@ -55,7 +55,7 @@ class StatisticsServiceTest {
     @MethodSource("calculateCountMatchedNumbersCases")
     void 당첨번호_매칭_개수_테스트(LottoTicket lottoTicket, List<Integer> winningNumbers, int expected) {
         // when
-        int actual = lottoTicket.countMatchedNumbers(new LottoNumbers(winningNumbers));
+        int actual = lottoTicket.countMatchedLottoNumbers(new LottoNumbers(winningNumbers));
         // then
         Assertions.assertThat(actual).isEqualTo(expected);
     }
@@ -65,7 +65,7 @@ class StatisticsServiceTest {
     @MethodSource("bonusNumberNotMatchedCases")
     void 보너스_번호가_매칭되지_않는_경우(LottoTicket lottoTicket, int bonusNumber, boolean expected) {
         // when
-        boolean actual = lottoTicket.hasBonusNumber(bonusNumber);
+        boolean actual = lottoTicket.containsLottoNumber(bonusNumber);
         // then
         Assertions.assertThat(actual).isEqualTo(expected);
     }
@@ -75,7 +75,7 @@ class StatisticsServiceTest {
     @MethodSource("bonusNumberMatchedCases")
     void 보너스_번호가_매칭되는_경우(LottoTicket lottoTicket, int bonusNumber, boolean expected) {
         // when
-        boolean actual = lottoTicket.hasBonusNumber(bonusNumber);
+        boolean actual = lottoTicket.containsLottoNumber(bonusNumber);
         // then
         Assertions.assertThat(actual).isEqualTo(expected);
     }
