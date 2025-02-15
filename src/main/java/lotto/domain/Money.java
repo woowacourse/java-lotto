@@ -5,7 +5,14 @@ public class Money {
     private final int amount;
 
     public Money(final int amount) {
+        validateAmount(amount);
         this.amount = amount;
+    }
+
+    public void validateAmount(int amount) {
+        if (amount % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("1000원 단위로 입력해주세요!");
+        }
     }
 
     public int getLottoTicketCount() {
