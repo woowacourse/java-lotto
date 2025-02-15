@@ -12,9 +12,9 @@ public enum Prize {
     SIXTH_PLACE(0, false, 0),
     ;
 
-    public final int matchCount;
-    public final boolean isBonusMatch;
-    public final int prizeAmount;
+    private final int matchCount;
+    private final boolean isBonusMatch;
+    private final int prizeAmount;
 
     Prize(final int matchCount, final boolean isBonusMatch, final int prizeAmount) {
         this.matchCount = matchCount;
@@ -41,5 +41,17 @@ public enum Prize {
         return prizes.stream()
                 .mapToLong(p -> p.prizeAmount)
                 .sum();
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isBonusMatch() {
+        return isBonusMatch;
+    }
+
+    public int getPrizeAmount() {
+        return prizeAmount;
     }
 }

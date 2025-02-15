@@ -36,12 +36,12 @@ public class OutputView {
 
     private static void printPrizeResult(final int order, final List<Integer> numberOfPizes) {
         Prize prize = Prize.values()[order];
-        if (prize.isBonusMatch) {
+        if (prize.isBonusMatch()) {
             System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개" + System.lineSeparator(),
-                    prize.matchCount, prize.prizeAmount, numberOfPizes.get(order));
+                    prize.getMatchCount(), prize.getPrizeAmount(), numberOfPizes.get(order));
             return;
         }
         System.out.printf("%d개 일치 (%d원)- %d개" + System.lineSeparator(),
-                prize.matchCount, prize.prizeAmount, numberOfPizes.get(order));
+                prize.getMatchCount(), prize.getPrizeAmount(), numberOfPizes.get(order));
     }
 }
