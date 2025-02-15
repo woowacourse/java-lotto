@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import lotto.common.ErrorMessage;
+
 public class Money {
-    private static final int LOTTO_PRICE = 1000;
+    static final int LOTTO_PRICE = 1000;
     private final int amount;
 
     public Money(final int amount) {
@@ -10,8 +12,8 @@ public class Money {
     }
 
     public void validateAmount(int amount) {
-        if (amount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("1000원 단위로 입력해주세요!");
+        if (amount % LOTTO_PRICE != 0 || amount <= 0) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_INPUT.getMessage());
         }
     }
 
