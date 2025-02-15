@@ -6,10 +6,6 @@ public record WinningNumberWithBonusNumber(
 ) {
 
     public WinningNumberWithBonusNumber {
-        validate(winningNumber, bonusNumber);
-    }
-
-    private void validate(Lotto winningNumber, int bonusNumber) {
         validateDistinct(winningNumber, bonusNumber);
     }
 
