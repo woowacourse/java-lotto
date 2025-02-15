@@ -89,12 +89,12 @@ class StatisticsServiceTest {
         LottoTicket second = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 7)));
         LottoTicket nothing = new LottoTicket(new LottoNumbers(List.of(31, 32, 33, 34, 35, 36)));
         List<LottoTicket> lottoTickets = List.of(fifth, fourth, second, nothing);
-        LottoTicket winningLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+        LottoNumbers winningLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
 
         // when
         WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets,
-                winningLottoTicket,
+                winningLottoNumbers,
                 bonusNumber);
         Map<LottoPrize, Integer> prizeCounter = winningStatistics.getPrizeCounter();
 
@@ -114,12 +114,12 @@ class StatisticsServiceTest {
         LottoTicket second = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 7)));
         LottoTicket nothing = new LottoTicket(new LottoNumbers(List.of(31, 32, 33, 34, 35, 36)));
         List<LottoTicket> lottoTickets = List.of(fifth, fourth, second, nothing);
-        LottoTicket winningLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+        LottoNumbers winningLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
 
         // when
         WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets,
-                winningLottoTicket,
+                winningLottoNumbers,
                 bonusNumber);
         Profit profit = statisticsService.calculateProfit(winningStatistics);
 

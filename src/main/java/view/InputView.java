@@ -36,7 +36,7 @@ public class InputView {
         }
     }
 
-    public static LottoNumbers inputWinningLottoTicket() {
+    public static LottoNumbers inputWinningLottoNumbers() {
         return (LottoNumbers) RetryHandler.retryUntilSuccessWithReturn(() -> {
                     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
                     String winningLottoTicket = Console.readLine();
@@ -49,11 +49,11 @@ public class InputView {
         );
     }
 
-    public static int inputBonusNumber(List<Integer> winningNumbers) {
+    public static int inputBonusNumber(LottoNumbers winningNumbers) {
         return (Integer) RetryHandler.retryUntilSuccessWithReturn(() -> {
             System.out.println("보너스 볼을 입력해 주세요.");
             int bonusNumber = Integer.parseInt(Console.readLine());
-            validateBonusNumber(bonusNumber, winningNumbers);
+            validateBonusNumber(bonusNumber, winningNumbers.getNumbers());
             return bonusNumber;
         });
     }
