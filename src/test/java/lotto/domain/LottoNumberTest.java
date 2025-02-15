@@ -10,8 +10,8 @@ class LottoNumberTest {
 
     @Test
     void 같은_숫자면_True를_반환한다() {
-        LottoNumber number1 = LottoNumber.from("5");
-        LottoNumber number2 = LottoNumber.from("5");
+        LottoNumber number1 = LottoNumber.from(5);
+        LottoNumber number2 = LottoNumber.from(5);
 
         assertThat(number1).isEqualTo(number2);
     }

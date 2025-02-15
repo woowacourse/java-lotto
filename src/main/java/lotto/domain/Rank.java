@@ -10,7 +10,7 @@ public enum Rank {
     SECOND(5, true, 30_000_000, "5개 일치, 보너스 볼 일치(30000000원)- "),
     FIRST(6, false, 2_000_000_000, "6개 일치 (2000000000원)- ");
 
-    private static final int CHECK_BONUS_NUMBER_COUNT = 5;
+    private static final int VALIDATE_CORRECT_COUNT = 5;
     private final int correctCount;
     private final boolean hasBonusNumber;
     private final long prize;
@@ -32,7 +32,7 @@ public enum Rank {
 
 
     private boolean filter(int correctCount, boolean hasBonusNumber) {
-        if (correctCount == CHECK_BONUS_NUMBER_COUNT) {
+        if (correctCount == VALIDATE_CORRECT_COUNT) {
             return correctCount == this.correctCount && hasBonusNumber == this.hasBonusNumber;
         }
 

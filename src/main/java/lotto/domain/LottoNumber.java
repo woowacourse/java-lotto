@@ -4,23 +4,16 @@ import static lotto.common.Constants.MAX_LOTTO_NUMBER;
 import static lotto.common.Constants.MIN_LOTTO_NUMBER;
 
 import java.util.Objects;
-import lotto.utils.NumberUtils;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
-
-    public LottoNumber(String number) {
-        int parseNum = NumberUtils.parseInt(number);
-        validateNumber(parseNum);
-        this.number = parseNum;
-    }
 
     public LottoNumber(int number) {
         validateNumber(number);
         this.number = number;
     }
 
-    public static LottoNumber from(String number) {
+    public static LottoNumber from(int number) {
         return new LottoNumber(number);
     }
 

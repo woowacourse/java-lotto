@@ -30,7 +30,10 @@ public class Lotto {
             throw new IllegalArgumentException("구분자(,)를 활용해주세요! (ex. 1, 2, 3, 4, 5, 6)");
         }
 
-        return new Lotto(Arrays.stream(input.split(DELIMITER)).map(LottoNumber::new).toList());
+        return new Lotto(Arrays.stream(input.split(DELIMITER))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new).toList());
     }
 
     public boolean contains(LottoNumber lottoNumber) {

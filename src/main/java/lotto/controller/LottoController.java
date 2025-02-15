@@ -9,6 +9,7 @@ import lotto.domain.Rank;
 import lotto.domain.WinnerLotto;
 import lotto.dto.LottoGroupDto;
 import lotto.dto.ProfitDto;
+import lotto.utils.NumberUtils;
 import lotto.utils.RecoveryUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -29,7 +30,7 @@ public class LottoController {
     }
 
     private Money getMoney() {
-        return RecoveryUtils.executeWithRetry(InputView::readMoney, Money::new);
+        return RecoveryUtils.executeWithRetry(() -> NumberUtils.parseInt(InputView.readMoney()), Money::new);
     }
 
     private void generateLotto(Money money) {
@@ -61,7 +62,8 @@ public class LottoController {
     }
 
     private WinnerLotto readBonusNumber(Lotto winnerNumbers) {
-        LottoNumber bonusNumber = RecoveryUtils.executeWithRetry(InputView::readBonusNumber, LottoNumber::from);
+        LottoNumber bonusNumber = RecoveryUtils.executeWithRetry(
+                () -> NumberUtils.parseInt(InputView.readBonusNumber()), LottoNumber::from);
 
         try {
             WinnerLotto.validateBonusNumbers(winnerNumbers, bonusNumber);
