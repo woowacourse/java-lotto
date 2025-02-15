@@ -40,15 +40,11 @@ public class Lotto {
                 .toList());
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
-    }
-
     public long getMatchCount(Lotto winnerNumbers) {
         return winnerNumbers.getMatchCount(lottoNumbers);
     }
 
-    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+    public boolean hasNumber(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 

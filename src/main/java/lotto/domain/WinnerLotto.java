@@ -7,12 +7,13 @@ public class WinnerLotto {
     private final LottoNumber bonusNumber;
 
     public WinnerLotto(Lotto winnerNumbers, LottoNumber bonusNumber) {
+        validateBonusNumbers(winnerNumbers, bonusNumber);
         this.winnerNumbers = winnerNumbers;
         this.bonusNumber = bonusNumber;
     }
 
     public static void validateBonusNumbers(Lotto winnerNumbers, LottoNumber bonusNumber) {
-        if (winnerNumbers.contains(bonusNumber)) {
+        if (winnerNumbers.hasNumber(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER.getMessage());
         }
     }
@@ -21,8 +22,7 @@ public class WinnerLotto {
         return lotto.getMatchCount(winnerNumbers);
     }
 
-
-    public boolean hasBonus(Lotto lotto) {
-        return lotto.hasBonusNumber(bonusNumber);
+    public boolean hasBonusNumber(Lotto lotto) {
+        return lotto.hasNumber(bonusNumber);
     }
 }

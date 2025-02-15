@@ -44,7 +44,7 @@ public class LottoService {
 
         for (Lotto lotto : lottoGroup.getItem()) {
             long matchCount = winnerLotto.getMatchCount(lotto);
-            boolean hasBonus = winnerLotto.hasBonus(lotto);
+            boolean hasBonus = winnerLotto.hasBonusNumber(lotto);
             Rank rank = Rank.find((int) matchCount, hasBonus);
             profit.incrementCount(rank);
         }
