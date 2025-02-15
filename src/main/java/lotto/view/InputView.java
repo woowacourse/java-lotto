@@ -8,11 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    private final Scanner scanner;
-
-    public InputView(Scanner scanner) {
-        this.scanner = scanner;
-    }
+    private final Scanner scanner = new Scanner(System.in);
 
     private String readLine() {
         return scanner.nextLine();
