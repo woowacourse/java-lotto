@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.Map;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import org.junit.jupiter.api.Test;
 
 class BankTest {
     @Test
