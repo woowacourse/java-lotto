@@ -1,19 +1,19 @@
 package lotto.domain;
 
-import lotto.util.NumberGenerator;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import lotto.util.NumberGenerator;
 
 class LottoNumberTest {
     @Test
     void 랜덤으로_숫자를_생성한다() {
         NumberGenerator generator = (i, j) -> 3;
-        assertThat(LottoNumber.generate(generator))
-            .isEqualTo(new LottoNumber(3));
+        assertThat(LottoNumber.generate(generator)).isEqualTo(new LottoNumber(3));
     }
 
     @ParameterizedTest

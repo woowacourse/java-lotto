@@ -1,12 +1,14 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.Test;
+import static lotto.TestUtil.parseToList;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class WinningNumbersTest {
     @Test
@@ -16,9 +18,13 @@ class WinningNumbersTest {
         assertThat(winningNumbers.getRank(lotto)).isEqualTo(Rank.SECOND);
     }
 
-    @Test
-    void 당첨_번호와_보너스_번호가_중복될_경우_예외를_반환한다() {
-        assertThatThrownBy(() -> new WinningNumbers(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 5))
+    @ParameterizedTest
+    @CsvSource({
+        "1:2:3:4:5:6, 1",
+        "1:2:3:4:5:6, 6"
+    })
+    void 당첨_번호와_보너스_번호가_중복될_경우_예외를_반환한다(String numbers, int bonusNumber) {
+        assertThatThrownBy(() -> new WinningNumbers(new Lotto(parseToList(numbers)), bonusNumber))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }
