@@ -1,38 +1,36 @@
 package lotto.domain;
 
-import static lotto.common.utill.RandomsWrapper.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import lotto.dto.MatchCountDto;
 
 public class Wallet {
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottoList = new ArrayList<>();
 
     public Wallet(Amount amount) {
         int lottoAmount = amount.getAmount();
         for (int i = 0; i < lottoAmount; i++) {
-            lottos.add(new Lotto(getRandomIntList()));
+            lottoList.add(Lotto.generateLotto());
         }
     }
 
     public List<MatchCountDto> matchCount(Lotto matchLotto, int bonus) {
-        List<MatchCountDto> matchCountDtos = new ArrayList<>();
+        List<MatchCountDto> list = new ArrayList<>();
 
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottoList) {
             MatchCountDto dto = lotto.matchCount(matchLotto, bonus);
-            matchCountDtos.add(dto);
+            list.add(dto);
         }
 
-        return matchCountDtos;
+        return list;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottoList) {
             sb.append(lotto.toString());
             sb.append("\n");
         }

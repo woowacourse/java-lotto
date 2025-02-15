@@ -1,7 +1,5 @@
 package lotto.common.utill;
 
-import static lotto.common.constant.Constant.*;
-
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
@@ -12,10 +10,9 @@ public final class RandomsWrapper {
     private RandomsWrapper() {
     }
 
-    public static List<Integer> getRandomIntList() {
-        return Stream.generate(() -> random.nextInt(LOTTO_MINIMUM, LOTTO_MAXIMUM))
-            .distinct()
-            .limit(LOTTO_SIZE)
+    public static List<Integer> getRandomIntList(int min, int max, int size) {
+        return Stream.generate(() -> random.nextInt(min, max))
+            .limit(size)
             .toList();
     }
 }

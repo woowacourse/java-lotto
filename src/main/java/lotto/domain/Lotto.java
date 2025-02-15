@@ -3,15 +3,26 @@ package lotto.domain;
 import static lotto.common.constant.Constant.*;
 import static lotto.common.constant.ErrorMessage.*;
 
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import lotto.common.utill.RandomsWrapper;
 import lotto.dto.MatchCountDto;
 
 public record Lotto(List<Integer> numbers) {
-    public Lotto {
-        validate(numbers);
-        sortNumbers(numbers);
+    public Lotto(List<Integer> numbers) {
+        List<Integer> lottoNumbers = numbers.stream()
+            .distinct()
+            .sorted()
+            .collect(Collectors.toList());
+        validate(lottoNumbers);
+        this.numbers = Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public static Lotto generateLotto() {
+        List<Integer> numbers = RandomsWrapper.getRandomIntList(LOTTO_MINIMUM, LOTTO_MAXIMUM, LOTTO_SIZE);
+        return new Lotto(numbers);
     }
 
     private void validate(List<Integer> numbers) {
@@ -22,13 +33,13 @@ public record Lotto(List<Integer> numbers) {
 
     private void validateNull(List<Integer> numbers) {
         if (numbers.isEmpty()) {
-            throw new IllegalArgumentException(ERROR_LOTTO_SIZE.getMessage());
+            throw new IllegalArgumentException(ERROR_INCORRECT_LOTTO_SIZE.getMessage());
         }
     }
 
     private void validateSize(List<Integer> numbers) {
         if (isCorrectedSize(numbers)) {
-            throw new IllegalArgumentException(ERROR_LOTTO_SIZE.getMessage());
+            throw new IllegalArgumentException(ERROR_INCORRECT_LOTTO_SIZE.getMessage());
         }
     }
 
@@ -50,10 +61,6 @@ public record Lotto(List<Integer> numbers) {
 
     private boolean isNumberInRage(int number) {
         return number < LOTTO_MINIMUM || number > LOTTO_MAXIMUM;
-    }
-
-    private void sortNumbers(List<Integer> numbers) {
-        numbers.sort(Comparator.naturalOrder());
     }
 
     public MatchCountDto matchCount(Lotto matchLotto, int bonus) {

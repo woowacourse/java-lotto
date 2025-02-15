@@ -23,7 +23,8 @@ public final class InputParser {
     public static List<Integer> parseToList(String str) {
         String[] split = str.split(SEPARATOR);
         return Arrays.stream(split)
-            .map(String::trim).map(Integer::parseInt)
+            .map(String::trim)
+            .map(Integer::parseInt)
             .collect(Collectors.toList());
     }
 
