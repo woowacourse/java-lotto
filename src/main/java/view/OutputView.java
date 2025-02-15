@@ -1,10 +1,10 @@
 package view;
 
-import static constant.OutViewMessage.BENEFIT_RATE_GUIDANCE;
+import static constant.OutViewMessage.TOTAL_PROFIT_RATE_GUIDANCE;
 import static constant.OutViewMessage.LOTTO_PURCHASE_GUIDANCE;
-import static constant.OutViewMessage.WINNING_STATISTIC;
-import static constant.OutViewMessage.WINNING_STATISTIC_GUIDANCE;
-import static constant.OutViewMessage.WINNING_STATISTIC_LINE_GUIDANCE;
+import static constant.OutViewMessage.WINNING_STATISTIC_ENTRY;
+import static constant.OutViewMessage.WINNING_STATISTIC_TITLE;
+import static constant.OutViewMessage.WINNING_STATISTICS_SEPARATOR;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -31,17 +31,17 @@ public class OutputView {
 
     public static void printStatistics(EnumMap<Prize, Integer> prizeMap) {
         printNewLine();
-        print(WINNING_STATISTIC_GUIDANCE.getMessage());
-        print(WINNING_STATISTIC_LINE_GUIDANCE.getMessage());
+        print(WINNING_STATISTIC_TITLE.getMessage());
+        print(WINNING_STATISTICS_SEPARATOR.getMessage());
 
         prizeMap.keySet().stream()
-                .map(prize -> WINNING_STATISTIC.getMessage(prize.getComment(), prizeMap.get(prize)))
+                .map(prize -> WINNING_STATISTIC_ENTRY.getMessage(prize.getComment(), prizeMap.get(prize)))
                 .forEach(OutputView::print);
     }
 
     public static void printBenefit(double benefit) {
         String result = checkBenefit(benefit);
-        print(BENEFIT_RATE_GUIDANCE.getMessage(benefit, result));
+        print(TOTAL_PROFIT_RATE_GUIDANCE.getMessage(benefit, result));
     }
 
     private static String checkBenefit(double benefit) {
