@@ -1,13 +1,14 @@
 package lotto.model;
 
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_COUNT;
+import static lotto.LottoConstants.Number.LOTTO_NUMBER_COUNT;
+import static lotto.LottoConstants.Number.LOTTO_NUMBER_MAX;
+import static lotto.LottoConstants.Number.LOTTO_NUMBER_MIN;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.HashSet;
 import java.util.Set;
-import lotto.LottoNumberConstants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -54,7 +55,7 @@ class LottoTest {
 
         assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 %d개여야 합니다.".formatted(LOTTO_NUMBER_COUNT.value()));
+                .hasMessage("로또 번호는 %d개여야 합니다.".formatted(LOTTO_NUMBER_COUNT));
     }
 
     private Set<Integer> createUniqueNumbersByCount(int count) {
@@ -73,7 +74,6 @@ class LottoTest {
 
         assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 %d부터 %d 사이의 수여야 합니다."
-                        .formatted(LottoNumberConstants.LOTTO_NUMBER_MIN.value(), LottoNumberConstants.LOTTO_NUMBER_MAX.value()));
+                .hasMessage("로또 번호는 %d부터 %d 사이의 수여야 합니다.".formatted(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX));
     }
 }

@@ -1,8 +1,8 @@
 package lotto.model;
 
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_COUNT;
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
+import static lotto.LottoConstants.Number.LOTTO_NUMBER_COUNT;
+import static lotto.LottoConstants.Number.LOTTO_NUMBER_MAX;
+import static lotto.LottoConstants.Number.LOTTO_NUMBER_MIN;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -16,8 +16,8 @@ public class LottoMachine {
 
     private static Set<Integer> generateNumbers() {
         Set<Integer> uniqueNumbers = new HashSet<>();
-        while (uniqueNumbers.size() < LOTTO_NUMBER_COUNT.value()) {
-            uniqueNumbers.add(getRandomNumberInRange(LOTTO_NUMBER_MIN.value(), LOTTO_NUMBER_MAX.value()));
+        while (uniqueNumbers.size() < LOTTO_NUMBER_COUNT) {
+            uniqueNumbers.add(getRandomNumberInRange(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX));
         }
         return Set.copyOf(uniqueNumbers);
     }

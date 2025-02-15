@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
+import static lotto.LottoConstants.Number.LOTTO_NUMBER_MAX;
+import static lotto.LottoConstants.Number.LOTTO_NUMBER_MIN;
 
 import java.util.List;
 import java.util.Map;
@@ -56,8 +56,9 @@ public class LottoController {
         if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨번호와 중복될 수 없습니다.");
         }
-        if (bonusNumber < LOTTO_NUMBER_MIN.value() || bonusNumber > LOTTO_NUMBER_MAX.value()) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 수여야 합니다.");
+        if (bonusNumber < LOTTO_NUMBER_MIN || bonusNumber > LOTTO_NUMBER_MAX) {
+            throw new IllegalArgumentException(
+                    "로또 번호는 %d부터 %d 사이의 수여야 합니다.".formatted(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX));
         }
     }
 

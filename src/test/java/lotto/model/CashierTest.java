@@ -1,7 +1,8 @@
 package lotto.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static lotto.LottoConstants.Price.LOTTO_PRICE_UNIT;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -11,29 +12,33 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class CashierTest {
 
+    private final Cashier cashier = new Cashier();
+
     @DisplayName("구입 금액 단위가 일치할 경우 로또가 정상 발급된다.")
     @Test
     void payForLotto() {
-        Cashier cashier = new Cashier();
-        List<Lotto> lottos = cashier.payForLotto(1_000);
+        int purchaseAmount = 1_000;
+        int expectedCount = purchaseAmount / LOTTO_PRICE_UNIT;
 
-        assertEquals(1, lottos.size());
+        List<Lotto> lottos = cashier.payForLotto(purchaseAmount);
+
+        assertThat(lottos).hasSize(expectedCount);
     }
 
     @DisplayName("구입 금액 단위가 일치하지 않을 경우 예외가 발생한다.")
     @ParameterizedTest
     @ValueSource(ints = {999, 1_001})
     void shouldThrowException_WhenInvalidUnit(int invalidAmount) {
-        Cashier cashier = new Cashier();
-
-        assertThrows(IllegalArgumentException.class, () -> cashier.payForLotto(invalidAmount));
+        assertThatThrownBy(() -> cashier.payForLotto(invalidAmount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또는 %,d원 단위로 구매할 수 있습니다.".formatted(LOTTO_PRICE_UNIT));
     }
 
     @DisplayName("구입 금액이 0원인 경우 예외가 발생한다.")
     @Test
     void shouldThrowException_WhenZeroAmount() {
-        Cashier cashier = new Cashier();
-
-        assertThrows(IllegalArgumentException.class, () -> cashier.payForLotto(0));
+        assertThatThrownBy(() -> cashier.payForLotto(0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또를 구매하려면 최소 %,d원 이상이어야 합니다.".formatted(LOTTO_PRICE_UNIT));
     }
 }
