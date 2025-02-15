@@ -2,22 +2,19 @@ package lotto.model;
 
 import static lotto.LottoConstants.Price.LOTTO_PRICE_UNIT;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Cashier {
 
-    public List<Lotto> payForLotto(int amount) {
-        int count = calculateLottoCount(amount);
-        return issueLottoByCount(count);
+    private final LottoMachine lottoMachine;
+
+    public Cashier(LottoMachine lottoMachine) {
+        this.lottoMachine = lottoMachine;
     }
 
-    private List<Lotto> issueLottoByCount(int count) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(LottoMachine.issue());
-        }
-        return List.copyOf(lottos);
+    public List<Lotto> payForLotto(int amount) {
+        int count = calculateLottoCount(amount);
+        return lottoMachine.issueLottoByCount(count);
     }
 
     private int calculateLottoCount(int amount) {

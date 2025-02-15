@@ -16,10 +16,12 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
+    private final Cashier cashier;
 
-    public LottoController(InputView inputView, OutputView outputView) {
+    public LottoController(InputView inputView, OutputView outputView, Cashier cashier) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.cashier = cashier;
     }
 
     public void start() {
@@ -36,7 +38,6 @@ public class LottoController {
     }
 
     private List<Lotto> purchaseLotto(int purchaseAmount) {
-        Cashier cashier = new Cashier();
         List<Lotto> lottos = cashier.payForLotto(purchaseAmount);
         outputView.printLottos(convertLottoDtos(lottos));
         return lottos;
