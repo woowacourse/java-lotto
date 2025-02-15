@@ -10,7 +10,7 @@ public class RandomGenerator {
     private RandomGenerator() {
     }
 
-    private static SecureRandom random = new SecureRandom();
+    private static final SecureRandom random = new SecureRandom();
 
     public static List<Integer> generateUniqueRandomNumbers(int count, int start, int end) {
         validateParameters(count, start, end);
