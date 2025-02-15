@@ -7,6 +7,7 @@ import exception.BonusExceptionType;
 import exception.CommonExceptionType;
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -17,10 +18,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class BonusTest {
 
-    private Lotto lotto;
+    private static Lotto lotto;
 
-    @BeforeEach
-    void beforeEach() {
+    @BeforeAll
+    static void beforeAll() {
         lotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
     }
 
