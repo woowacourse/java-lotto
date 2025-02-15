@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Vendor {
 
+    private static final int MAX_RANDOM_VALUE = 45;
     private static final int LOTTO_PRICE = 1000;
     private final int purchaseAmount;
 
@@ -32,7 +33,7 @@ public class Vendor {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            List<Integer> randoms = randomGenerator.generateUniqueRandomNumbers(Lotto.MAX_LOTTO_NUMBER)
+            List<Integer> randoms = randomGenerator.generateUniqueRandomNumbers(MAX_RANDOM_VALUE)
                     .stream()
                     .sorted()
                     .toList();
