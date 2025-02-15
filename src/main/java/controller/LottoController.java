@@ -12,18 +12,39 @@ import view.OutputView;
 public class LottoController {
 
     public void run() {
-        LottoPurchase lottoPurchase = InputView.getPurchaseLotto();
-        LottoFactory lottoFactory = LottoFactory.of(lottoPurchase.getAmount());
+        LottoPurchase lottoPurchase = getLottoPurchase();
+        Lotto winningLotto = getWinningLotto();
+        Bonus winningBonus = getWinningBonus(winningLotto);
 
+        LottoFactory lottoFactory = LottoFactory.of(lottoPurchase.getAmount());
+        EnumMap<Prize, Integer> prizes = lottoFactory.getStatistic(winningLotto, winningBonus);
+
+        printLotto(lottoFactory);
+        printStatistics(prizes, lottoFactory);
+    }
+
+    private LottoPurchase getLottoPurchase() {
+        OutputView.printLottoPurchaseGuidance();
+        return InputView.getPurchaseLotto();
+    }
+
+    private Lotto getWinningLotto() {
+        OutputView.printWinningLottoGuidance();
+        return InputView.getWinningLotto();
+    }
+
+    private static Bonus getWinningBonus(Lotto winningLotto) {
+        OutputView.printWinningBonusGuidance();
+        return InputView.getWinningBonus(winningLotto);
+    }
+
+    private void printLotto(LottoFactory lottoFactory) {
         OutputView.printLottoCount(lottoFactory);
         OutputView.printLottoTickets(lottoFactory);
+    }
 
-        Lotto winningLotto = InputView.getWinningLotto();
-        Bonus winningBonus = InputView.getWinningBonus(winningLotto);
-
-        EnumMap<Prize, Integer> statistic = lottoFactory.getStatistic(winningLotto, winningBonus);
-
-        OutputView.printStatistics(statistic);
-        OutputView.printBenefit(lottoFactory.getProfit(statistic));
+    private void printStatistics(EnumMap<Prize, Integer> prizes, LottoFactory lottoFactory) {
+        OutputView.printStatistics(prizes);
+        OutputView.printBenefit(lottoFactory, prizes);
     }
 }
