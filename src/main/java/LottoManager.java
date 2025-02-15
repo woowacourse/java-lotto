@@ -10,7 +10,7 @@ public class LottoManager {
         return lottos;
     }
 
-    public WinningResult getWinningResult(List<Lotto> lottos, WinningLotto winningLotto) {
+    public WinningResult calculateWinningResult(List<Lotto> lottos, WinningLotto winningLotto) {
         WinningResult winningResult = new WinningResult();
         for (Lotto lotto : lottos) {
             final int matchedCount = winningLotto.getMatchedCount(lotto);

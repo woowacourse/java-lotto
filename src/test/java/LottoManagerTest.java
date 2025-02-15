@@ -30,7 +30,7 @@ class LottoManagerTest {
         LottoManager lottoManager = new LottoManager();
 
         // when
-        WinningResult winningResult = lottoManager.getWinningResult(lottos, winningLotto);
+        WinningResult winningResult = lottoManager.calculateWinningResult(lottos, winningLotto);
 
         // then
         for (WinningInfo value : WinningInfo.values()) {
@@ -43,7 +43,7 @@ class LottoManagerTest {
     void check_calculate_revenue_correctly() {
         // given
         LottoManager lottoManager = new LottoManager();
-        WinningResult winningResult = lottoManager.getWinningResult(lottos, winningLotto);
+        WinningResult winningResult = lottoManager.calculateWinningResult(lottos, winningLotto);
 
         Money money = new Money(6000);
         long totalPrices = Arrays.stream(WinningInfo.values())
