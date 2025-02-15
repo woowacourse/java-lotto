@@ -5,13 +5,12 @@ import java.util.List;
 
 public class WinLotto {
     private final LottoNumbers lottoNumbers;
-    private final Integer bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinLotto(List<Integer> winNumbers, Integer bonusNumber) {
         validateDuplicate(winNumbers, bonusNumber);
-        validateBound(bonusNumber);
         this.lottoNumbers = new LottoNumbers(winNumbers);
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public Integer countMatchNumber(LottoNumbers lottoNumbers) {
@@ -25,12 +24,6 @@ public class WinLotto {
     private void validateDuplicate(List<Integer> winNumbers, Integer bonusNumber) {
         if (winNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_DUPLICATE_EXCEPTION);
-        }
-    }
-
-    private void validateBound(Integer input) {
-        if (input < LottoNumbers.MINIMUM_LOTTO_NUMBER || input > LottoNumbers.MAXIMUM_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_BOUND_EXCEPTION);
         }
     }
 }

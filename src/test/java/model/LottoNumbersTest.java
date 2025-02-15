@@ -27,7 +27,7 @@ class LottoNumbersTest {
         // given
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(4, 5, 6, 7, 8, 9));
         // when
-        Boolean bonusMatch = lottoNumbers.bonusMatch(4);
+        Boolean bonusMatch = lottoNumbers.bonusMatch(new LottoNumber(4));
         //then
         assertThat(bonusMatch).isTrue();
     }
@@ -42,18 +42,6 @@ class LottoNumbersTest {
         assertThatThrownBy(() -> new LottoNumbers(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.NUMBER_COUNT_EXCEPTION);
-    }
-
-    @Test
-    @DisplayName("숫자 범위 판별 테스트")
-    public void validateBoundTest() {
-        // given
-        List<Integer> input = List.of(1, 2, 3, 4, 5, 46);
-
-        // when & then
-        assertThatThrownBy(() -> new LottoNumbers(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_BOUND_EXCEPTION);
     }
 
     @Test

@@ -3,6 +3,7 @@ package view;
 import constant.ErrorMessage;
 import constant.OutputMessage;
 import java.util.Scanner;
+import model.LottoNumber;
 import model.LottoNumbers;
 import model.PurchasedLottos;
 
@@ -26,7 +27,7 @@ public class PurchaseView {
     }
 
     private void printLottoNumbers(LottoNumbers lottoNumbers) {
-        System.out.println(lottoNumbers.getNumbers());
+        System.out.println(lottoNumbers.getNumbers().stream().map(LottoNumber::getNumber).toList());
     }
 
     private Integer validatePositiveNumber(String input) {

@@ -12,7 +12,7 @@ class LottoConstantsTest {
     public void lottoNumbersCountTest() {
         // given & when
         LottoNumbers lottoNumbers = new LottoNumbers();
-        List<Integer> numbers = lottoNumbers.getNumbers();
+        List<LottoNumber> numbers = lottoNumbers.getNumbers();
         // then
         assertThat(numbers.size()).isEqualTo(LottoNumbers.LOTTO_NUMBER_COUNT);
     }
@@ -22,10 +22,10 @@ class LottoConstantsTest {
     public void lottoNumberBoundTest() {
         // given & when
         LottoNumbers lottoNumbers = new LottoNumbers();
-        List<Integer> numbers = lottoNumbers.getNumbers();
+        List<LottoNumber> numbers = lottoNumbers.getNumbers();
         // then
-        for (Integer number : numbers) {
-            assertThat(number).isBetween(1, 45);
+        for (LottoNumber number : numbers) {
+            assertThat(number.getNumber()).isBetween(1, 45);
         }
     }
 }
