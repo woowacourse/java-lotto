@@ -1,8 +1,5 @@
 package lotto.controller;
 
-import static lotto.LottoConstants.Number.LOTTO_NUMBER_MAX;
-import static lotto.LottoConstants.Number.LOTTO_NUMBER_MIN;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -10,6 +7,7 @@ import lotto.Rank;
 import lotto.model.Cashier;
 import lotto.model.DashBoard;
 import lotto.model.Lotto;
+import lotto.model.WinningLotto;
 import lotto.view.Console;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -25,14 +23,16 @@ public class LottoController {
     }
 
     public void start() {
-        int purchaseAmount = inputView.requestPurchaseAmount();
+        int purchaseAmount = requestPurchaseAmount();
         List<Lotto> lottos = purchaseLotto(purchaseAmount);
-        Lotto winningLotto = getWinningLotto();
-        int bonusNumber = inputView.requestBonusNumber();
-        validateBonusNumber(winningLotto, bonusNumber);
-        DashBoard dashBoard = judgeLottoResult(lottos, winningLotto, bonusNumber);
+        WinningLotto winningLotto = requestWinningLotto();
+        DashBoard dashBoard = judgeLottoResult(lottos, winningLotto);
         printResult(dashBoard, purchaseAmount);
         end();
+    }
+
+    private int requestPurchaseAmount() {
+        return inputView.requestPurchaseAmount();
     }
 
     private List<Lotto> purchaseLotto(int purchaseAmount) {
@@ -48,18 +48,24 @@ public class LottoController {
                 .toList();
     }
 
-    private Lotto getWinningLotto() {
-        return new Lotto(Set.copyOf(inputView.requestWinningNumbers()));
+    private WinningLotto requestWinningLotto() {
+        Set<Integer> winningNumbers = Set.copyOf(inputView.requestWinningNumbers());
+        int bonusNumber = inputView.requestBonusNumber();
+        return new WinningLotto(new Lotto(winningNumbers), bonusNumber);
     }
 
-    private void validateBonusNumber(Lotto winningLotto, int bonusNumber) {
-        if (winningLotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 번호는 당첨번호와 중복될 수 없습니다.");
+    private DashBoard judgeLottoResult(List<Lotto> lottos, WinningLotto winningLotto) {
+        DashBoard dashBoard = new DashBoard();
+        for (Lotto lotto : lottos) {
+            Rank rank = winningLotto.determineRank(lotto);
+            dashBoard.recordResult(rank);
         }
-        if (bonusNumber < LOTTO_NUMBER_MIN || bonusNumber > LOTTO_NUMBER_MAX) {
-            throw new IllegalArgumentException(
-                    "로또 번호는 %d부터 %d 사이의 수여야 합니다.".formatted(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX));
-        }
+        return dashBoard;
+    }
+
+    private void printResult(DashBoard dashBoard, int purchaseAmount) {
+        outputView.printResult(dashBoard.getRanks());
+        outputView.printWinningRatio(calculateRatio(dashBoard.getRanks(), purchaseAmount));
     }
 
     private float calculateRatio(Map<Rank, Integer> ranks, int purchaseAmount) {
@@ -72,19 +78,6 @@ public class LottoController {
             totalAmount += rank.getWinningAmount() * ranks.get(rank);
         }
         return totalAmount;
-    }
-
-    private DashBoard judgeLottoResult(List<Lotto> lottos, Lotto winningLotto, int bonusNumber) {
-        DashBoard dashBoard = new DashBoard();
-        for (Lotto lotto : lottos) {
-            dashBoard.recordResult(lotto, winningLotto, bonusNumber);
-        }
-        return dashBoard;
-    }
-
-    private void printResult(DashBoard dashBoard, int purchaseAmount) {
-        outputView.printResult(dashBoard.getRanks());
-        outputView.printWinningRatio(calculateRatio(dashBoard.getRanks(), purchaseAmount));
     }
 
     private void end() {

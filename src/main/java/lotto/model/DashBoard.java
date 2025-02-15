@@ -22,8 +22,7 @@ public class DashBoard {
         return ranks;
     }
 
-    public void recordResult(Lotto lotto, Lotto winningLotto, int bonusNumber) {
-        Rank rank = RankDeterminer.determine(lotto, winningLotto, bonusNumber);
+    public void recordResult(Rank rank) {
         increaseRankCount(rank);
     }
 

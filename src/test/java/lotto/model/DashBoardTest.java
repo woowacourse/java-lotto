@@ -11,12 +11,8 @@ class DashBoardTest {
     @DisplayName("당첨 결과를 기록하고 순위별 당첨 횟수를 확인할 수 있다.")
     @Test
     void recordResult() {
-        Lotto lotto = LottoFixtures.createLottoOneToSix();
-        Lotto winningLotto = LottoFixtures.createLottoOneToSix();
-        int bonusNumber = 7;
-
         DashBoard dashBoard = new DashBoard();
-        dashBoard.recordResult(lotto, winningLotto, bonusNumber);
+        dashBoard.recordResult(Rank.FIRST);
 
         assertEquals(1, dashBoard.getRankCount(Rank.FIRST));
         assertEquals(0, dashBoard.getRankCount(Rank.SECOND));
