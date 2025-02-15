@@ -1,7 +1,10 @@
 package model;
 
+import static error.ErrorMessage.DUPLICATE_NUMBERS_FOUND;
+import static error.ErrorMessage.INVALID_LOTTO_COUNT;
+import static error.ErrorMessage.NUMBER_OUT_OF_RANGE;
+
 import dto.LottoDto;
-import error.ErrorMessage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -54,21 +57,22 @@ public class Lotto {
 
     private void validateNumbersCount(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_COUNT.getMessage());
+            throw new IllegalArgumentException(INVALID_LOTTO_COUNT.getMessage());
         }
     }
 
     private void validateDuplicateNumbers(List<Integer> numbers) {
         Set<Integer> numSet = new HashSet<>(numbers);
         if (numSet.size() != numbers.size()) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBERS_FOUND.getMessage());
+            throw new IllegalArgumentException(DUPLICATE_NUMBERS_FOUND.getMessage());
         }
     }
 
     private void validateNumbersRange(List<Integer> numbers) {
-        boolean hasAnyNumberOutOfRange = numbers.stream().anyMatch(number -> number < 1 || number > 45);
+        boolean hasAnyNumberOutOfRange = numbers.stream()
+            .anyMatch(number -> number < 1 || number > 45);
         if (hasAnyNumberOutOfRange) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_OUT_OF_RANGE.getMessage());
+            throw new IllegalArgumentException(NUMBER_OUT_OF_RANGE.getMessage());
         }
     }
 }

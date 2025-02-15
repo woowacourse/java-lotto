@@ -13,5 +13,4 @@ public class LottoDto {
     public List<Integer> getNumbers() {
         return numbers;
     }
-
 }

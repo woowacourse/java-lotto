@@ -4,6 +4,7 @@ import java.util.Map;
 import model.PrizeTier;
 
 public class StatisticsDto {
+
     private Map<PrizeTier, Integer> prizeCounts;
     private double profitRate;
 

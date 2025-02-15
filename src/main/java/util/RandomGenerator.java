@@ -26,7 +26,7 @@ public class RandomGenerator {
 
     private static List<Integer> convertToSortedList(Set<Integer> numbers) {
         return numbers.stream()
-                .sorted()
-                .toList();
+            .sorted()
+            .toList();
     }
 }

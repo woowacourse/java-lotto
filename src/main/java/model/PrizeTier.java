@@ -25,10 +25,10 @@ public enum PrizeTier {
             return SECOND;
         }
         return Arrays.stream(values())
-                .filter(tier -> tier != SECOND)
-                .filter(tier -> tier.matchedCount == matchedCount)
-                .findFirst()
-                .orElse(NONE);
+            .filter(tier -> tier != SECOND)
+            .filter(tier -> tier.matchedCount == matchedCount)
+            .findFirst()
+            .orElse(NONE);
     }
 
     public int getPrize() {

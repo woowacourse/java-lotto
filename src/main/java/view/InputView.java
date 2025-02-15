@@ -24,5 +24,4 @@ public class InputView {
         System.out.println(BONUS_NUMBER_INPUT_MESSAGE);
         return scanner.nextLine();
     }
-
 }

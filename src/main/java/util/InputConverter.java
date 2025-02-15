@@ -1,6 +1,8 @@
 package util;
 
-import error.ErrorMessage;
+import static error.ErrorMessage.INPUT_MUST_BE_NUMERIC;
+import static error.ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class InputConverter {
             validateNegativeValue(value);
             return value;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.INPUT_MUST_BE_NUMERIC.getMessage());
+            throw new IllegalArgumentException(INPUT_MUST_BE_NUMERIC.getMessage());
         }
     }
 
@@ -28,7 +30,7 @@ public class InputConverter {
 
     private static void validateNegativeValue(int value) {
         if (value < 0) {
-            throw new IllegalArgumentException(ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED.getMessage());
+            throw new IllegalArgumentException(NEGATIVE_NUMBER_NOT_ALLOWED.getMessage());
         }
     }
 }

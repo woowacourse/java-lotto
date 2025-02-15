@@ -1,6 +1,7 @@
 package controller;
 
-import static util.InputConverter.*;
+import static util.InputConverter.convertToInteger;
+import static util.InputConverter.convertToList;
 
 import config.Container;
 import java.util.List;
@@ -10,7 +11,6 @@ import model.Statistics;
 import model.WinningLotto;
 import service.LottoGenerateService;
 import service.StatisticsService;
-import util.InputConverter;
 import view.ViewFacade;
 
 public class LottoController {
@@ -58,5 +58,4 @@ public class LottoController {
     private record PurchaseHistory(Lottos lottos, int purchaseAmount) {
 
     }
-
 }

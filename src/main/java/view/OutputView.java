@@ -10,6 +10,7 @@ import java.util.Map;
 import model.PrizeTier;
 
 public class OutputView {
+
     private static final String PURCHASE_COUNT_MESSAGE = "개를 구매하였습니다.";
     private static final String STATISTICS_HEADER_MESSAGE = "\n당첨 통계\n---------";
     private static final String STATISTICS_FORMAT = "%d개 일치%s (%d원)- %d개\n";
@@ -51,7 +52,8 @@ public class OutputView {
         int prizeTierCount = prizeCounts.get(prizeTier);
 
         if (prizeTier == PrizeTier.SECOND) {
-            System.out.printf(STATISTICS_FORMAT, matchedCount, BONUS_MATCHED_MESSAGE, prize, prizeTierCount);
+            System.out.printf(STATISTICS_FORMAT, matchedCount, BONUS_MATCHED_MESSAGE, prize,
+                prizeTierCount);
             return;
         }
         if (prizeTier != PrizeTier.NONE) {

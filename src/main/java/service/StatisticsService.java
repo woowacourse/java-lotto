@@ -29,7 +29,6 @@ public class StatisticsService {
         if (purchaseAmount == 0) {
             return new Statistics(prizeCounts, 0);
         }
-
         return new Statistics(prizeCounts, (double) totalPrize / purchaseAmount);
     }
 }

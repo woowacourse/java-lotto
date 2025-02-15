@@ -4,6 +4,7 @@ import dto.LottosDto;
 import dto.StatisticsDto;
 
 public class ViewFacade {
+
     private final InputView inputView;
     private final OutputView outputView;
 

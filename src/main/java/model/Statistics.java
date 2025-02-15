@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Statistics {
+
     private Map<PrizeTier, Integer> prizeCounts;
     private double profitRate;
 
