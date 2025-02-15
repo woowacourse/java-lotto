@@ -21,6 +21,7 @@ public class Lotto {
     private void validate(List<Integer> numbers) {
         validateDistinct(numbers);
         validateSize(numbers);
+        validateRange(numbers);
     }
 
     private void validateDistinct(List<Integer> numbers) {
@@ -39,6 +40,19 @@ public class Lotto {
                     "로또 번호는 " + LottoRule.LOTTO_SELECTION_SIZE.getValue() + "개여야 합니다. "
                             + "입력된 개수: " + numbers.size());
         }
+    }
+
+    private static void validateRange(List<Integer> numbers) {
+        boolean isValidRange = numbers.stream()
+                .allMatch(LottoRule::isLottoRange);
+
+        if (isValidRange) {
+            return;
+        }
+        throw new IllegalArgumentException("로또 번호는 "
+                + LottoRule.MIN_LOTTO_NUMBER.getValue() + "부터 "
+                + LottoRule.MAX_LOTTO_NUMBER.getValue() + " 사이의 숫자여야 합니다. "
+                + "입력된 번호: " + numbers);
     }
 
     @Override

@@ -15,4 +15,8 @@ public enum LottoRule {
     public int getValue() {
         return value;
     }
+
+    public static boolean isLottoRange(int number) {
+        return number >= MIN_LOTTO_NUMBER.value && number <= MAX_LOTTO_NUMBER.value;
+    }
 }
