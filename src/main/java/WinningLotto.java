@@ -18,7 +18,8 @@ public class WinningLotto {
     }
 
     public boolean isMatchBonus(Lotto lotto) {
-        return lotto.getNumbers().stream()
+        return lotto.getNumbers()
+                .stream()
                 .anyMatch(number -> number == bonusNumber.getValue());
     }
 
