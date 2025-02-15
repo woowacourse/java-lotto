@@ -28,7 +28,7 @@ public class OutputView {
                 .filter(winningTier -> winningTier == tier)
                 .count();
 
-        if (tier.getHasBonusMatch()) {
+        if (tier.getNeedsBonus()) {
             printBonusTier(tier, count);
             return;
         }

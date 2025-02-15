@@ -11,21 +11,28 @@ public enum WinningTier {
     EMPTY(0, false, 0);
 
     private final int matches;
-    private final boolean hasBonusMatch;
+    private final boolean needsBonus;
     private final int prize;
 
-    WinningTier(int matches, boolean hasBonusMatch, int prize) {
+    WinningTier(int matches, boolean needsBonus, int prize) {
         this.matches = matches;
-        this.hasBonusMatch = hasBonusMatch;
+        this.needsBonus = needsBonus;
         this.prize = prize;
+    }
+
+    private static boolean meetsBonusRequirement(WinningTier tier, boolean hasBonusMatch) {
+        if (tier.getNeedsBonus()) {
+            return hasBonusMatch;
+        }
+        return true;
     }
 
     public int getMatches() {
         return matches;
     }
 
-    public boolean getHasBonusMatch() {
-        return hasBonusMatch;
+    public boolean getNeedsBonus() {
+        return needsBonus;
     }
 
     public int getPrize() {
@@ -35,7 +42,7 @@ public enum WinningTier {
     public static WinningTier find(int matches, boolean hasBonusMatch) {
         List<WinningTier> allTiers = List.of(WinningTier.values());
         return allTiers.stream()
-                .filter(tier -> tier.getMatches() == matches && tier.getHasBonusMatch() == hasBonusMatch)
+                .filter(tier -> tier.getMatches() == matches && meetsBonusRequirement(tier, hasBonusMatch))
                 .findFirst()
                 .orElse(WinningTier.EMPTY);
     }
