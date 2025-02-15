@@ -26,6 +26,16 @@ class WinningLottoTest {
         assertThat(winningLotto.findWinningTier(lotto)).isEqualTo(expectedTier);
     }
 
+    @DisplayName("보너스 번호가 1과 45 사이가 아닐 경우 예외가 발생한다.")
+    @Test
+    void 보너스_번호가_1과_45_사이가_아닐_경우_예외가_발생한다() {
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(winningNumbers);
+
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningLotto(lotto, 0));
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningLotto(lotto, 46));
+    }
+
     @DisplayName("보너스 번호가 당첨 번호와 중복될 경우 예외가 발생한다.")
     @Test
     void 보너스_번호가_당첨_번호와_중복될_경우_예외가_발생한다() {
