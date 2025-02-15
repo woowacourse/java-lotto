@@ -35,24 +35,25 @@ public enum RankType {
     }
 
     public static void updateMapByWinningCount(Map<RankType,Integer> map, int matchCount, boolean bonusBall) {
-        for (RankType rankTypeTemp : map.keySet()) {
-            if (rankTypeTemp.winningCount == matchCount) {
-                updateMap(map, bonusBall, rankTypeTemp);
+        for (RankType rankType : map.keySet()) {
+            if (rankType.winningCount == matchCount) {
+                updateMap(map, bonusBall, rankType);
             }
         }
     }
 
-    private static void updateMap(Map<RankType, Integer> map, boolean bonusBall, RankType rankTypeTemp) {
-        if (rankTypeTemp.winningCount == 5) {
-            checkSecondAndThird(rankTypeTemp, map, bonusBall);
+    private static void updateMap(Map<RankType, Integer> map, boolean bonusBall, RankType rankType) {
+        if (rankType.winningCount == 5) {
+            checkSecondAndThird(rankType, map, bonusBall);
             return;
         }
-        map.put(rankTypeTemp, map.get(rankTypeTemp) + 1);
+        map.put(rankType, map.get(rankType) + 1);
     }
 
     private static void checkSecondAndThird(RankType rankTypeTemp, Map<RankType, Integer> map, boolean bonusBall){
         if (rankTypeTemp == RankType.SECOND && bonusBall) {
             map.put(rankTypeTemp, map.get(rankTypeTemp) + 1);
+            return;
         }
         if (rankTypeTemp == RankType.THIRD && !bonusBall) {
             map.put(rankTypeTemp,map.get(rankTypeTemp) + 1);
