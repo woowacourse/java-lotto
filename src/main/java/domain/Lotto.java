@@ -4,7 +4,6 @@ import exception.LottoException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private static final String INVALID_LOTTO_SIZE = "로또 번호는 6개여야 합니다.";
@@ -29,13 +28,6 @@ public class Lotto {
         if(lottoNumbers.size() != LOTTO_LENGTH){
             throw new LottoException(INVALID_LOTTO_SIZE);
         }
-    }
-
-    public String formatNumbers(){
-        String formattedLottoNumbers = lottoNumbers.stream()
-                .map((number) -> number + "")
-                .collect(Collectors.joining(", "));
-        return String.format(BUY_LOTTO_NUMBERS_FORMAT,formattedLottoNumbers);
     }
 
     public int compare(WinningNumber winningNumber, BonusNumber bonusNumber) {

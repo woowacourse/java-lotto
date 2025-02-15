@@ -47,8 +47,8 @@ public class LottoTest {
     @MethodSource("lottoNumbers")
     @DisplayName("사용자가_구매한_로또_내역을_정렬하여_출력한다")
     public void 사용자가_구매한_로또_내역을_정렬하여_출력한다(List<Integer> lottoNumbers){
-        assertThat(new Lotto(lottoNumbers).formatNumbers())
-                .isEqualTo("[1, 2, 3, 4, 5, 6]");
+        assertThat(new Lotto(lottoNumbers).getLottoNumbers())
+                .isEqualTo(List.of(1,2,3,4,5,6));
     }
 
     private static Stream<Arguments> lottoNumbers(){

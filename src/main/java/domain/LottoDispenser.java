@@ -81,21 +81,12 @@ public class LottoDispenser {
     public double calculateEarnMoneyRatio(long earnMoney) {
         return  Math.round((double) earnMoney / buyMoney);
     }
-/*
-    public String formattingBuyLottoResult() {
-        StringBuilder stringBuilder = new StringBuilder(String.format(BUY_LOTTO_AMOUNT_FORMAT,lottos.size()));
-        for(Lotto lotto : lottos){
-            stringBuilder.append(lotto.formatNumbers())
-                    .append("\n");
-        }
-        return stringBuilder.toString();
-    }*/
 
     public BuyLottoResultDto getBuyLottos() {
-         return new BuyLottoResultDto(
-            lottos.stream().map(Lotto::getLottoNumbers).toList(),
-            calculateBuyLottoAmount()
-        );
+        return new BuyLottoResultDto(
+             lottos.stream().map(Lotto::getLottoNumbers).toList(),
+             calculateBuyLottoAmount()
+         );
     }
 
 }
