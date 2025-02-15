@@ -1,11 +1,10 @@
 package lotto.domain;
 
+import lotto.domain.constant.LottoConstants;
+
 import java.util.List;
 
 public class BonusNumber {
-
-    private static final int LOTTO_START_NUMBER = 1;
-    private static final int LOTTO_END_NUMBER = 45;
 
     private final int bonusNumber;
 
@@ -19,9 +18,9 @@ public class BonusNumber {
     }
 
     private void validateRange(int bonusNumber) {
-        if (bonusNumber < LOTTO_START_NUMBER || bonusNumber > LOTTO_END_NUMBER) {
-            throw new IllegalArgumentException("보너스 번호는 " + LOTTO_START_NUMBER + "~" +
-                    LOTTO_END_NUMBER + " 사이의 수를 입력해야 합니다.");
+        if (bonusNumber < LottoConstants.MIN_NUMBER || bonusNumber > LottoConstants.MAX_NUMBER) {
+            throw new IllegalArgumentException("보너스 번호는 " + LottoConstants.MIN_NUMBER + "~" +
+                    LottoConstants.MAX_NUMBER + " 사이의 수를 입력해야 합니다.");
         }
     }
 }
