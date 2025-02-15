@@ -4,7 +4,6 @@ import static lotto.common.constant.Constant.*;
 import static lotto.common.constant.ErrorMessage.*;
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -15,8 +14,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호는 로또가 생성할 때, 정렬된다.")
     void LottoNumberSortedWhenLottoGenerate() {
-        ArrayList<Integer> list = new ArrayList<>(List.of(6, 5, 4, 3, 2, 1));
-        Lotto lotto = new Lotto(list);
+        Lotto lotto = new Lotto(List.of(6, 5, 4, 3, 2, 1));
 
         assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
@@ -24,7 +22,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호의 갯수가 기준(6)과 다를 경우, 예외를 발생시킨다.")
     void LottoNumberErrorWhenUncorrectedSize() {
-        assertThatThrownBy(() -> new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5))))
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_INCORRECT_LOTTO_SIZE.getMessage());
     }
@@ -35,11 +33,11 @@ class LottoTest {
         var overMAX = LOTTO_MAXIMUM + 1;
         var lessMIN = LOTTO_MINIMUM - 1;
 
-        assertThatThrownBy(() -> new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, overMAX))))
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, overMAX)))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_LOTTO_NUMBER_RANGE.getMessage());
 
-        assertThatThrownBy(() -> new Lotto(new ArrayList<>(List.of(lessMIN, 2, 3, 4, 5, 6))))
+        assertThatThrownBy(() -> new Lotto(List.of(lessMIN, 2, 3, 4, 5, 6)))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_LOTTO_NUMBER_RANGE.getMessage());
     }
@@ -51,8 +49,8 @@ class LottoTest {
         var notBonus = bonus + 1;
         var correctCount = 5;
 
-        Lotto lotto = new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, bonus)));
-        Lotto matchLotto = new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, notBonus)));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, bonus));
+        Lotto matchLotto = new Lotto(List.of(1, 2, 3, 4, 5, notBonus));
 
         MatchCount count = lotto.matchCount(matchLotto, bonus);
 
@@ -66,7 +64,7 @@ class LottoTest {
         var bonusOverMAX = LOTTO_MAXIMUM + 1;
         var bonusLessMIN = LOTTO_MINIMUM - 1;
 
-        Lotto lotto = new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         assertThatThrownBy(() -> lotto.validateBonus(bonusOverMAX))
             .isInstanceOf(IllegalArgumentException.class)
@@ -80,7 +78,7 @@ class LottoTest {
     @DisplayName("로또 보너스 번호가 로또의 번호와 중복될 경우, 예외를 발생한다.")
     void LottoBonusErrorWhenDuplicatedWithLotto() {
         var duplicatedNumber = 6;
-        Lotto lotto = new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, duplicatedNumber)));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, duplicatedNumber));
 
         assertThatThrownBy(() -> lotto.validateBonus(duplicatedNumber))
             .isInstanceOf(IllegalArgumentException.class)

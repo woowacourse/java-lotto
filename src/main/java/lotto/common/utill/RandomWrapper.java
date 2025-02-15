@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public final class RandomsWrapper {
+public final class RandomWrapper {
     private static final Random random = new Random();
 
-    private RandomsWrapper() {
+    private RandomWrapper() {
     }
 
     public static List<Integer> getRandomIntList(int min, int max, int size) {

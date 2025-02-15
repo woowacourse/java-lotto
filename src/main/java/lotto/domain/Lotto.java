@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.common.utill.RandomsWrapper;
+import lotto.common.utill.RandomWrapper;
 
 public record Lotto(List<Integer> numbers) {
     public Lotto(List<Integer> numbers) {
@@ -19,7 +19,7 @@ public record Lotto(List<Integer> numbers) {
     }
 
     public static Lotto generateLotto() {
-        List<Integer> numbers = RandomsWrapper.getRandomIntList(LOTTO_MINIMUM, LOTTO_MAXIMUM, LOTTO_SIZE);
+        List<Integer> numbers = RandomWrapper.getRandomIntList(LOTTO_MINIMUM, LOTTO_MAXIMUM, LOTTO_SIZE);
         return new Lotto(numbers);
     }
 
