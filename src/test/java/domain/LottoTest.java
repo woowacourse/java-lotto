@@ -14,10 +14,10 @@ class LottoTest {
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 
         // when
-        Lotto lotto = Lotto.from(randomNumberGenerator);
+        Lottos lottos = Lottos.of(randomNumberGenerator, 1);
 
         // then
-        Assertions.assertThat(lotto).isInstanceOf(Lotto.class);
+        Assertions.assertThat(lottos).isInstanceOf(Lottos.class);
     }
 
     @DisplayName("로또 validation test")
@@ -28,7 +28,7 @@ class LottoTest {
 
         Assertions.assertThat(correctLotto).isInstanceOf(Lotto.class);
         Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 5)));
-        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(0,1,2,3,4,5)));
-        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1,2,3,4,5,6,7)));
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(0, 1, 2, 3, 4, 5)));
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7)));
     }
 }
