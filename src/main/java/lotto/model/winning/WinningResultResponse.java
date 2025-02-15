@@ -7,7 +7,9 @@ public class WinningResultResponse {
     private final boolean hasBonus;
     private final int winningCount;
 
-    public WinningResultResponse(int matchingCount, long winningAmount, boolean hasBonus, int winningCount) {
+    public WinningResultResponse(final int matchingCount, final long winningAmount,
+                                 final boolean hasBonus, final int winningCount
+    ) {
         this.matchingCount = matchingCount;
         this.winningAmount = winningAmount;
         this.hasBonus = hasBonus;

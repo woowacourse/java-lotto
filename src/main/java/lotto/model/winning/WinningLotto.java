@@ -36,13 +36,13 @@ public class WinningLotto {
         }
     }
 
-    private void initRanks(Map<Rank, Integer> ranks) {
+    private void initRanks(final Map<Rank, Integer> ranks) {
         for (Rank rank : Rank.values()) {
             ranks.put(rank, 0);
         }
     }
 
-    private void saveMatchingRanks(Lottos lottos, Map<Rank, Integer> ranks) {
+    private void saveMatchingRanks(final Lottos lottos, final Map<Rank, Integer> ranks) {
         for (Lotto lotto : lottos.getLottos()) {
             int matchingCount = lotto.calculateMatchingCount(winningLotto);
             Rank findRank = Rank.findBy(matchingCount, lotto.hasBonus(bonusNumber));
