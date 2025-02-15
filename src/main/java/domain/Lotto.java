@@ -33,25 +33,21 @@ public class Lotto {
         return Collections.unmodifiableList(lottos);
     }
 
-    private static void validateMinPrice(int money) {
-        if (money < PRICE) {
-            throw new IllegalStateException("금액은 1000원 이상이여아 합니다.");
-        }
-    }
-
     public LottoMatchResult getMatchResult(List<Integer> matchNumbers, int bonusNumber) {
         validateMatchNumbersNotDuplicated(matchNumbers);
         validateMatchNumbersSize(matchNumbers);
         validateBonusNumberNotDuplicated(matchNumbers, bonusNumber);
 
         int matchCount = 0;
-        for (Integer matchNumber : matchNumbers) {
-            if (numbers.isContains(matchNumber)) {
-                matchCount++;
-            }
-        }
+        matchCount = calculateMatchNumberCount(matchNumbers, matchCount);
 
         return new LottoMatchResult(matchCount, numbers.isContains(bonusNumber));
+    }
+
+    private static void validateMinPrice(int money) {
+        if (money < PRICE) {
+            throw new IllegalStateException("금액은 1000원 이상이여아 합니다.");
+        }
     }
 
     private void validateMatchNumbersNotDuplicated(List<Integer> matchNumbers) {
@@ -70,6 +66,20 @@ public class Lotto {
         if (matchNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 중복되면 안됩니다.");
         }
+    }
+
+    private int calculateMatchNumberCount(List<Integer> matchNumbers, int matchCount) {
+        for (Integer matchNumber : matchNumbers) {
+            matchCount = increaseCount(matchCount, matchNumber);
+        }
+        return matchCount;
+    }
+
+    private int increaseCount(int matchCount, Integer matchNumber) {
+        if (numbers.isContains(matchNumber)) {
+            matchCount++;
+        }
+        return matchCount;
     }
 
     public Numbers getNumbers() {
