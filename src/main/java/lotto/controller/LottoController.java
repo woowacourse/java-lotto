@@ -5,7 +5,6 @@ import lotto.domain.Lotto;
 import lotto.domain.Scoreboard;
 import lotto.domain.Vendor;
 import lotto.domain.WinningLotto;
-import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -15,18 +14,16 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoService lottoService;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
+    public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoService = lottoService;
     }
 
     public void run() {
         int purchaseAmount = inputView.readPurchaseAmount();
-        int lottoCount = lottoService.purchaseLotto(purchaseAmount);
-        List<Lotto> lottos = lottoService.issueLottos(lottoCount);
+        Vendor vendor = new Vendor(purchaseAmount);
+        List<Lotto> lottos = vendor.issueLottos();
         outputView.printLottos(lottos);
 
         Lotto winningNumbers = inputView.readWinningNumbers();
@@ -36,7 +33,6 @@ public class LottoController {
         Scoreboard scoreboard = new Scoreboard();
         List<WinningTier> winningTiers = scoreboard.findWinningTiers(lottos, winningLotto);
 
-        Vendor vendor = new Vendor(purchaseAmount);
         double profit = vendor.calculateProfit(winningTiers);
         outputView.printResults(winningTiers, profit);
     }
