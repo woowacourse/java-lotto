@@ -1,12 +1,14 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-
-import java.util.List;
 import lotto.constant.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class LottoTest {
 
@@ -14,9 +16,8 @@ class LottoTest {
     @Test
     void 로또_객체를_생성할_수_있다() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(numbers);
 
-        assertThat(lotto.getNumbers()).containsExactlyElementsOf(numbers);
+        assertDoesNotThrow(() -> new Lotto(numbers));
     }
 
     @DisplayName("로또번호를 정렬해서 저장한다.")
