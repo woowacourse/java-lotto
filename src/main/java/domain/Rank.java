@@ -26,7 +26,8 @@ public enum Rank {
 
     public static Rank fromResult(int matchCount, boolean contains) {
         List<Rank> ranks = Arrays.stream(Rank.values())
-                .sorted(Comparator.comparingLong(Rank::getPrize).reversed())
+                .sorted(Comparator.comparingLong(Rank::getPrize)
+                        .reversed())
                 .toList();
         return ranks.stream()
                 .filter(rank -> matchesRank(matchCount, contains, rank))
