@@ -6,14 +6,13 @@ import java.util.Map;
 
 public class StatisticsService {
     public WinningStatistics calculateWinningStatistics(List<LottoTicket> lottoTickets,
-                                                        LottoNumbers winningLottoNumbers,
-                                                        int bonusNumber) {
+                                                        DrawResult drawResult) {
         Map<LottoPrize, Integer> prizeCounter = new HashMap<>();
         initializePrizeCounter(prizeCounter);
 
         lottoTickets.forEach(lottoTicket -> {
-            int countMatched = lottoTicket.countMatchedNumbers(winningLottoNumbers.getNumbers());
-            boolean isBonusNumberMatched = lottoTicket.hasBonusNumber(bonusNumber);
+            int countMatched = lottoTicket.countMatchedNumbers(drawResult.getLottoNumbers());
+            boolean isBonusNumberMatched = lottoTicket.hasBonusNumber(drawResult.getBonusNumber());
             LottoPrize prize = LottoPrize.getLottoPrize(countMatched, isBonusNumberMatched);
             int prizeCount = prizeCounter.get(prize);
             prizeCounter.put(prize, prizeCount + 1);

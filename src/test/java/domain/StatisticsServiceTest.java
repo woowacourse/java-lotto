@@ -55,7 +55,7 @@ class StatisticsServiceTest {
     @MethodSource("calculateCountMatchedNumbersCases")
     void 당첨번호_매칭_개수_테스트(LottoTicket lottoTicket, List<Integer> winningNumbers, int expected) {
         // when
-        int actual = lottoTicket.countMatchedNumbers(winningNumbers);
+        int actual = lottoTicket.countMatchedNumbers(new LottoNumbers(winningNumbers));
         // then
         Assertions.assertThat(actual).isEqualTo(expected);
     }
@@ -91,11 +91,10 @@ class StatisticsServiceTest {
         List<LottoTicket> lottoTickets = List.of(fifth, fourth, second, nothing);
         LottoNumbers winningLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
+        DrawResult drawResult = new DrawResult(winningLottoNumbers, bonusNumber);
 
         // when
-        WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets,
-                winningLottoNumbers,
-                bonusNumber);
+        WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, drawResult);
         Map<LottoPrize, Integer> prizeCounter = winningStatistics.getPrizeCounter();
 
         // then
@@ -116,11 +115,10 @@ class StatisticsServiceTest {
         List<LottoTicket> lottoTickets = List.of(fifth, fourth, second, nothing);
         LottoNumbers winningLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
+        DrawResult drawResult = new DrawResult(winningLottoNumbers, bonusNumber);
 
         // when
-        WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets,
-                winningLottoNumbers,
-                bonusNumber);
+        WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, drawResult);
         Profit profit = statisticsService.calculateProfit(winningStatistics);
 
         // then

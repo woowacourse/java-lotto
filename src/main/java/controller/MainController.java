@@ -1,5 +1,6 @@
 package controller;
 
+import domain.DrawResult;
 import domain.LottoMachine;
 import domain.LottoNumbers;
 import domain.LottoTicket;
@@ -19,15 +20,14 @@ public class MainController {
     }
 
     public void run() {
-        List<LottoTicket> lottoTickets = getLottoTickets();
+        List<LottoTicket> lottoTickets = purchaseLottoTickets();
 
-        LottoNumbers winningLottoNumbers = InputView.inputWinningLottoNumbers();
-        int bonusNumber = InputView.inputBonusNumber(winningLottoNumbers);
+        DrawResult drawResult = inputDrawResult();
 
-        calculateAndPrintStatistics(lottoTickets, winningLottoNumbers, bonusNumber);
+        calculateAndPrintStatistics(lottoTickets, drawResult);
     }
-
-    private List<LottoTicket> getLottoTickets() {
+    
+    private List<LottoTicket> purchaseLottoTickets() {
         int purchaseAmount = InputView.inputPurchaseAmount();
         LottoMachine lottoMachine = new LottoMachine();
         List<LottoTicket> lottoTickets =
@@ -36,11 +36,14 @@ public class MainController {
         return lottoTickets;
     }
 
-    private void calculateAndPrintStatistics(List<LottoTicket> lottoTickets, LottoNumbers winningLottoNumbers,
-                                             int bonusNumber) {
-        WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets,
-                winningLottoNumbers,
-                bonusNumber);
+    private DrawResult inputDrawResult() {
+        LottoNumbers winningLottoNumbers = InputView.inputWinningLottoNumbers();
+        int bonusNumber = InputView.inputBonusNumber(winningLottoNumbers);
+        return new DrawResult(winningLottoNumbers, bonusNumber);
+    }
+
+    private void calculateAndPrintStatistics(List<LottoTicket> lottoTickets, DrawResult drawResult) {
+        WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, drawResult);
         OutputView.printWinningStatistics(winningStatistics);
         Profit profit = statisticsService.calculateProfit(winningStatistics);
         OutputView.printProfit(profit);
