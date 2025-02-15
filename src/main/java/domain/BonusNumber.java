@@ -34,4 +34,7 @@ public class BonusNumber {
         return this.lottoNumber.equals(lottoNumber);
     }
 
+    public boolean isDuplicate(WinningNumber winningNumber) {
+        return winningNumber.isContain(lottoNumber);
+    }
 }

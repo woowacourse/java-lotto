@@ -1,6 +1,6 @@
 package domain;
 
-import domain.dto.BuyLottoResultDto;
+import dto.BuyLottoResultDto;
 import domain.enums.WinningCase;
 import exception.LottoException;
 import java.util.ArrayList;

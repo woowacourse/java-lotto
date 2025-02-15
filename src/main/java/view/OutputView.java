@@ -1,6 +1,6 @@
 package view;
 
-import domain.dto.BuyLottoResultDto;
+import dto.BuyLottoResultDto;
 import exception.LottoException;
 import java.util.List;
 

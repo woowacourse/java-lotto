@@ -3,9 +3,10 @@ package service;
 import domain.BonusNumber;
 import domain.LottoDispenser;
 import domain.WinningNumber;
-import domain.dto.BuyLottoResultDto;
+import dto.BuyLottoResultDto;
 import domain.enums.WinningCase;
 import domain.formatter.WinningCalculateFormatter;
+import exception.LottoException;
 import java.util.Map;
 import repository.BonusNumberRepository;
 import repository.LottoRepository;
@@ -16,6 +17,7 @@ public class LottoService {
     private final LottoRepository lottoRepository;
     private final WinningNumberRepository winningNumberRepository;
     private final BonusNumberRepository bonusNumberRepository;
+    private final String INVALID_BONUS_NUMBER = "유효하지 않은 보너스번호입니다.";
 
     public LottoService(LottoRepository lottoRepository, WinningNumberRepository winningNumberRepository,
                         BonusNumberRepository bonusNumberRepository) {
@@ -33,7 +35,12 @@ public class LottoService {
     }
 
     public void inputBonusNumber(String inputBonusNumber) {
-        bonusNumberRepository.saveBonusNumber(new BonusNumber(inputBonusNumber));
+        BonusNumber bonusNumber;
+        validateDuplicationBonusNumber(
+            winningNumberRepository.getWinningNumber(),
+            bonusNumber = new BonusNumber(inputBonusNumber)
+        );
+        bonusNumberRepository.saveBonusNumber(bonusNumber);
     }
 
     public String winningCalculate(){
@@ -48,5 +55,11 @@ public class LottoService {
 
     public BuyLottoResultDto getBuyLottos() {
         return lottoRepository.getLottoDispenser().getBuyLottos();
+    }
+
+    private void validateDuplicationBonusNumber(WinningNumber winningNumber, BonusNumber bonusNumber) {
+        if (bonusNumber.isDuplicate(winningNumber)) {
+            throw new LottoException(INVALID_BONUS_NUMBER);
+        }
     }
 }
