@@ -9,10 +9,8 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import util.constant.Values;
 
 public class LottoFactory {
 

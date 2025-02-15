@@ -3,7 +3,6 @@ package domain;
 import static util.constant.Message.PRICE_NEGATIVE_ERROR;
 import static util.constant.Values.LOTTO_UNIT;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Money {

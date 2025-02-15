@@ -4,7 +4,6 @@ import domain.LottoFactory;
 import domain.LottoMatch;
 import domain.Money;
 import domain.WinningLotto;
-import java.util.HashMap;
 import java.util.Map;
 import util.InputParser;
 import util.Validator;
