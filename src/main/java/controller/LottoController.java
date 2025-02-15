@@ -12,8 +12,8 @@ import view.OutputView;
 
 public class LottoController {
 
-  private InputView inputView;
-  private OutputView outputView;
+  private final InputView inputView;
+  private final OutputView outputView;
 
   public LottoController(InputView inputView, OutputView outputView) {
     this.inputView = inputView;
