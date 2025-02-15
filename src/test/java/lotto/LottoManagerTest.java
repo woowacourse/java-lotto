@@ -11,7 +11,7 @@ class LottoManagerTest {
     @Test
     void 구입금액이_1000원으로_나누어_떨어지지_않으면_예외를_던진다() {
         assertThatThrownBy(() ->
-            LottoManager.purchase(500)
+                LottoManager.purchase(500)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구입금액은 %d원으로 나누어져야 합니다.".formatted(LottoManager.LOTTO_UNIT_PRICE));
     }

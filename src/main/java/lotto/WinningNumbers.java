@@ -22,7 +22,7 @@ public class WinningNumbers {
         return winningNumbers.contains(number);
     }
 
-    private static void validateWinningNumbers(final List<Integer> winningNumbers) {
+    private void validateWinningNumbers(final List<Integer> winningNumbers) {
         if (new HashSet<>(winningNumbers).size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_SIZE + "개의 고유한 번호를 입력해야 합니다.");
         }

@@ -11,7 +11,7 @@ public class Application {
         List<Lotto> lottos = purchaseLottos();
         OutputView.printLottos(lottos);
         WinningLotto winningLotto = getWinningLotto();
-        WinningStatistics winningStatistics = LottoManager.calculateStatistics(lottos, winningLotto);
+        WinningStatistics winningStatistics = winningLotto.calculateStatistics(lottos);
         double returnRate = winningStatistics.calculateReturnRate(lottos.size() * LottoManager.LOTTO_UNIT_PRICE);
         OutputView.printWinningStatistics(winningStatistics, returnRate);
     }

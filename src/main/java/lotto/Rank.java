@@ -25,7 +25,7 @@ public enum Rank {
     }
 
     public static Rank checkRank(final int matchCount, final boolean hasBonusNumber) {
-        for (Rank rank : Rank.values()) {
+        for (final Rank rank : Rank.values()) {
             if (matchCount == SECOND.matchCount) {
                 return checkSecondOrThird(hasBonusNumber);
             }

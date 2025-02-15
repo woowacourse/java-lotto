@@ -20,10 +20,6 @@ public class LottoManager {
         return lottos;
     }
 
-    public static WinningStatistics calculateStatistics(final List<Lotto> lottos, final WinningLotto winningLotto) {
-        return LottoMachine.calculateStatistics(lottos, winningLotto);
-    }
-
     private static void validatePurchaseAmount(final int purchaseAmount) {
         if (purchaseAmount % LOTTO_UNIT_PRICE != 0) {
             throw new IllegalArgumentException("구입금액은 %d원으로 나누어져야 합니다.".formatted(LOTTO_UNIT_PRICE));
