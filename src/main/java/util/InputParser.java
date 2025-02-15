@@ -5,6 +5,9 @@ import java.util.List;
 
 public class InputParser {
 
+  private InputParser() {
+  }
+
   public static int parseStringToInteger(String input) {
     Validator.inputValidatorParseInt(input);
     return Integer.parseInt(input);
