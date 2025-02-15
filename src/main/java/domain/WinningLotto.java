@@ -30,18 +30,17 @@ public class WinningLotto {
     }
 
     private void validateDuplicate(Integer bonusNumber) {
-        List<Integer> lottos = this.lotto.getSortedNumbers();
-        if (lottos.contains(bonusNumber)) {
+        if (this.lotto.contains(bonusNumber)) {
             throw LottoException.from(LOTTO_NUMBER_DUPLICATED_ERROR);
         }
     }
 
     public WinningLottoDto getWinningLottoDto() {
-        return new WinningLottoDto(lotto.getSortedNumbers(), bonusNumber);
+        return new WinningLottoDto(lotto.getNumbers(), bonusNumber);
     }
 
     public WinningCount getLottoResult(List<Integer> issuedLotto) {
-        int matchedCount = (int) issuedLotto.stream().filter(lotto.getSortedNumbers()::contains).count();
+        int matchedCount = (int) issuedLotto.stream().filter(lotto.getNumbers()::contains).count();
         boolean isBonusContained = issuedLotto.contains(bonusNumber);
         return getWinningCount(matchedCount, isBonusContained);
     }

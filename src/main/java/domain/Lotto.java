@@ -43,9 +43,12 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getSortedNumbers() {
-        List<Integer> numbers = new ArrayList<>(this.numbers);
-        Collections.sort(numbers);
+    public List<Integer> getNumbers() {
         return numbers;
     }
+
+    public boolean contains(Integer number) {
+        return numbers.contains(number);
+    }
+
 }

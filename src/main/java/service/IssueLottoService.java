@@ -30,8 +30,8 @@ public class IssueLottoService {
     private void addUniqueLotto(List<IssuedLottoDto> issuedLottos) {
         Lotto lotto = new Lotto(
                 RandomNumberGenerator.getRandomNumbers(LOTTO_RANGE_MIN.getValue(), LOTTO_RANGE_MAX.getValue()));
-        if (!isDuplicate(issuedLottos, lotto.getSortedNumbers())) {
-            issuedLottos.add(new IssuedLottoDto(lotto.getSortedNumbers()));
+        if (!isDuplicate(issuedLottos, lotto.getNumbers())) {
+            issuedLottos.add(new IssuedLottoDto(lotto.getNumbers()));
         }
     }
 
