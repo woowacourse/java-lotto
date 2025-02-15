@@ -13,12 +13,12 @@ public class Lotto {
 
     public Lotto(Set<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers;
+        this.numbers = Set.copyOf(numbers);
     }
 
     private void validateNumbers(Set<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT.value()) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 %d개여야 합니다.".formatted(LOTTO_NUMBER_COUNT.value()));
         }
         for (int number : numbers) {
             validateNumberInRange(number);
@@ -27,14 +27,15 @@ public class Lotto {
 
     private void validateNumberInRange(int number) {
         if (number < LOTTO_NUMBER_MIN.value() || number > LOTTO_NUMBER_MAX.value()) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 수여야 합니다.");
+            throw new IllegalArgumentException(
+                    "로또 번호는 %d부터 %d 사이의 수여야 합니다.".formatted(LOTTO_NUMBER_MIN.value(), LOTTO_NUMBER_MAX.value()));
         }
     }
 
-    public int getMatchCount(Lotto lotto) {
-        Set<Integer> me = new HashSet<>(Set.copyOf(this.numbers));
-        me.retainAll(lotto.getNumbers());
-        return me.size();
+    public int countMatchingNumbers(Lotto otherLotto) {
+        Set<Integer> thisNumbers = new HashSet<>(numbers);
+        thisNumbers.retainAll(otherLotto.numbers);
+        return thisNumbers.size();
     }
 
     public boolean contains(int number) {
@@ -42,6 +43,6 @@ public class Lotto {
     }
 
     public Set<Integer> getNumbers() {
-        return Set.copyOf(numbers);
+        return numbers;
     }
 }

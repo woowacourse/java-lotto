@@ -1,12 +1,13 @@
 package lotto.model;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static lotto.LottoNumberConstants.LOTTO_NUMBER_COUNT;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.HashSet;
 import java.util.Set;
+import lotto.LottoNumberConstants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +20,8 @@ class LottoTest {
     void createTest() {
         Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6);
 
-        assertDoesNotThrow(() -> new Lotto(numbers));
+        assertThatCode(() -> new Lotto(numbers))
+                .doesNotThrowAnyException();
     }
 
     @DisplayName("로또가 특정 번호를 가지고 있는지 확인할 수 있다.")
@@ -29,17 +31,19 @@ class LottoTest {
         Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = LottoFixtures.createByNumbers(numbers);
 
-        assertTrue(lotto.contains(checkNumber));
+        assertThat(lotto.contains(checkNumber))
+                .isTrue();
     }
 
     @DisplayName("로또를 서로 비교하여 일치하는 숫자의 개수를 확인할 수 있다.")
     @Test
-    void getMatchCountTest() {
+    void countMatchingNumbersTest() {
         Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6);
-        Lotto lotto1 = LottoFixtures.createByNumbers(numbers);
-        Lotto lotto2 = LottoFixtures.createByNumbers(numbers);
+        Lotto myLotto = LottoFixtures.createByNumbers(numbers);
+        Lotto winningLotto = LottoFixtures.createByNumbers(numbers);
 
-        assertEquals(6, lotto1.getMatchCount(lotto2));
+        assertThat(myLotto.countMatchingNumbers(winningLotto))
+                .isEqualTo(6);
     }
 
     @DisplayName("로또 숫자가 6개가 아닌 경우 예외가 발생한다.")
@@ -48,7 +52,9 @@ class LottoTest {
     void shouldThrowException_WhenNumberCountIsNot6(int countOfNumbers) {
         Set<Integer> numbers = createUniqueNumbersByCount(countOfNumbers);
 
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 %d개여야 합니다.".formatted(LOTTO_NUMBER_COUNT.value()));
     }
 
     private Set<Integer> createUniqueNumbersByCount(int count) {
@@ -65,6 +71,9 @@ class LottoTest {
     void shouldThrowException_WhenNumberNotInRange(int number) {
         Set<Integer> numbers = Set.of(number, 1, 2, 3, 4, 5);
 
-        assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 %d부터 %d 사이의 수여야 합니다."
+                        .formatted(LottoNumberConstants.LOTTO_NUMBER_MIN.value(), LottoNumberConstants.LOTTO_NUMBER_MAX.value()));
     }
 }
