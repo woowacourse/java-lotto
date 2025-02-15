@@ -36,11 +36,17 @@ public class LottoController {
         );
     }
 
-    private int readBonusNumber() throws IOException {
-        final String rawBonusNumber = inputView.readBonusNumber();
-        InputValidator.validateInteger(rawBonusNumber);
-        final int bonusNumber = Integer.parseInt(rawBonusNumber);
-        return bonusNumber;
+    private int readPurchaseAmount() throws IOException {
+        String rawPurchaseAmount = inputView.readPurchaseAmount();
+        InputValidator.validateInteger(rawPurchaseAmount);
+        final int purchaseAmount = Integer.parseInt(rawPurchaseAmount);
+        return purchaseAmount;
+    }
+
+    private Lottos createLottos(final int purchaseAmount) {
+        Lottos lottos = Lottos.ofSize(purchaseAmount / LottoProperties.PRICE);
+        outputView.printPurchasedLottos(lottos);
+        return lottos;
     }
 
     private List<Integer> readWinningNumbers() throws IOException {
@@ -51,16 +57,10 @@ public class LottoController {
         return winningNumbers;
     }
 
-    private Lottos createLottos(final int purchaseAmount) {
-        Lottos lottos = Lottos.ofSize(purchaseAmount / LottoProperties.PRICE);
-        outputView.printPurchasedLottos(lottos);
-        return lottos;
-    }
-
-    private int readPurchaseAmount() throws IOException {
-        String rawPurchaseAmount = inputView.readPurchaseAmount();
-        InputValidator.validateInteger(rawPurchaseAmount);
-        final int purchaseAmount = Integer.parseInt(rawPurchaseAmount);
-        return purchaseAmount;
+    private int readBonusNumber() throws IOException {
+        final String rawBonusNumber = inputView.readBonusNumber();
+        InputValidator.validateInteger(rawBonusNumber);
+        final int bonusNumber = Integer.parseInt(rawBonusNumber);
+        return bonusNumber;
     }
 }
