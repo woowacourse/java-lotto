@@ -28,7 +28,7 @@ public class LottoStatistics {
         }
 
         for (MatchResult result : results) {
-            MatchRank rank = MatchRank.getMatchRank(result.matchCount(), result.isBonusMatched());
+            MatchRank rank = MatchRank.getMatchRank(result);
             counts.put(rank, counts.getOrDefault(rank, 0) + 1);
         }
         return counts;

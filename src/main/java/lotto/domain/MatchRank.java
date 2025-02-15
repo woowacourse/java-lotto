@@ -10,8 +10,6 @@ public enum MatchRank {
     MATCH_SIX(6, 2000000000),
     NO_MATCH(0, 0);
 
-    private static final int MIN_MATCH_NUMBER = 0;
-    private static final int MAX_MATCH_NUMBER = 6;
     private final static String BONUS_OUTPUT_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- ";
     private final static String BASIC_OUTPUT_MESSAGE = "%d개 일치 (%d원)- ";
 
@@ -34,15 +32,15 @@ public enum MatchRank {
         return String.format(BASIC_OUTPUT_MESSAGE, number, money);
     }
 
-    public static MatchRank getMatchRank(int matchNumber, boolean bonus) {
-        validateMatchNumber(matchNumber);
+    public static MatchRank getMatchRank(MatchResult matchResult) {
+        int matchCount = matchResult.matchCount();
 
-        if (isMatchBonus(matchNumber, bonus)) {
+        if (isMatchBonus(matchResult)) {
             return MATCH_BONUS;
         }
 
         for (MatchRank statistics : values()) {
-            if (statistics.number == matchNumber) {
+            if (statistics.number == matchCount) {
                 return statistics;
             }
         }
@@ -50,13 +48,8 @@ public enum MatchRank {
         return NO_MATCH;
     }
 
-    private static boolean isMatchBonus(int matchNumber, boolean bonus) {
-        return matchNumber == MATCH_BONUS.number && bonus;
+    private static boolean isMatchBonus(MatchResult matchResult) {
+        return matchResult.matchCount() == MATCH_BONUS.number && matchResult.isBonusMatched();
     }
 
-    private static void validateMatchNumber(int matchNumber) {
-        if(matchNumber < MIN_MATCH_NUMBER || matchNumber > MAX_MATCH_NUMBER) {
-            throw new IllegalArgumentException(ERROR_MATCH_NUMBER_NOT_VALID);
-        }
-    }
 }
