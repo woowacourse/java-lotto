@@ -12,7 +12,7 @@ class RankTest {
             delimiterString = ":")
     @ParameterizedTest
     void 일치_개수와_보너스_번호_일치_여부에_따라서_Rank를_반환한다(int matchCount, boolean hasBonusNumber, Rank expected) {
-        Rank result = Rank.getRank(matchCount, hasBonusNumber);
+        Rank result = Rank.checkRank(matchCount, hasBonusNumber);
         assertThat(result).isEqualTo(expected);
     }
 }

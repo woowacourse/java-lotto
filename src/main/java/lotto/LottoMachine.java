@@ -44,6 +44,6 @@ public class LottoMachine {
         matchNumbers.retainAll(lottoNumbers);
         int matchCount = matchNumbers.size();
         boolean hasBonusNumber = lottoNumbers.contains(bonusNumber);
-        return Rank.getRank(matchCount, hasBonusNumber);
+        return Rank.checkRank(matchCount, hasBonusNumber);
     }
 }

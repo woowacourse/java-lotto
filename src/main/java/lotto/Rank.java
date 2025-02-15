@@ -24,24 +24,20 @@ public enum Rank {
         return winningAmount;
     }
 
-    public static Rank getRank(final int matchCount, final boolean hasBonusNumber) {
-        if (matchCount == FIRST.matchCount) {
-            return FIRST;
-        }
-        if (matchCount == SECOND.matchCount) {
-            return getSecondOrThird(hasBonusNumber);
-        }
-        if (matchCount == FOURTH.matchCount) {
-            return FOURTH;
-        }
-        if (matchCount == FIFTH.matchCount) {
-            return FIFTH;
+    public static Rank checkRank(final int matchCount, final boolean hasBonusNumber) {
+        for (Rank rank : Rank.values()) {
+            if (matchCount == SECOND.matchCount) {
+                return checkSecondOrThird(hasBonusNumber);
+            }
+            if (rank.matchCount == matchCount) {
+                return rank;
+            }
         }
         return NONE;
     }
 
-    private static Rank getSecondOrThird(final boolean hasNumber) {
-        if (hasNumber) {
+    private static Rank checkSecondOrThird(final boolean hasBonusNumber) {
+        if (hasBonusNumber) {
             return SECOND;
         }
         return THIRD;
