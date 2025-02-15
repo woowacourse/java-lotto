@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
+
 class LottoStatsTest {
     @DisplayName("1등이 3개인 경우")
     @Test
@@ -20,7 +22,7 @@ class LottoStatsTest {
 
         lottoStats.calculateResult(lottos);
 
-        Assertions.assertThat(lottoStats.getRankCount(Rank.FIRST)).isEqualTo(3);
+        assertThat(lottoStats.getRankCount(Rank.FIRST)).isEqualTo(3);
     }
 
     @DisplayName("기본 테스트 케이스")
@@ -45,12 +47,12 @@ class LottoStatsTest {
         LottoStats lottoStats = new LottoStats(List.of(1, 2, 3, 4, 5, 6), 7);
         lottoStats.calculateResult(lottos);
 
-        Assertions.assertThat(lottoStats.getRankCount(Rank.FIRST)).isEqualTo(0);
-        Assertions.assertThat(lottoStats.getRankCount(Rank.SECOND)).isEqualTo(0);
-        Assertions.assertThat(lottoStats.getRankCount(Rank.THIRD)).isEqualTo(0);
-        Assertions.assertThat(lottoStats.getRankCount(Rank.FOURTH)).isEqualTo(0);
-        Assertions.assertThat(lottoStats.getRankCount(Rank.FIFTH)).isEqualTo(1);
-        Assertions.assertThat(lottoStats.getEarningRate(14000)).isEqualTo("0.35");
+        assertThat(lottoStats.getRankCount(Rank.FIRST)).isEqualTo(0);
+        assertThat(lottoStats.getRankCount(Rank.SECOND)).isEqualTo(0);
+        assertThat(lottoStats.getRankCount(Rank.THIRD)).isEqualTo(0);
+        assertThat(lottoStats.getRankCount(Rank.FOURTH)).isEqualTo(0);
+        assertThat(lottoStats.getRankCount(Rank.FIFTH)).isEqualTo(1);
+        assertThat(lottoStats.getEarningRate(14000)).isEqualTo("0.35");
     }
 
     @DisplayName("총 상금 계산 테스트")
@@ -67,7 +69,7 @@ class LottoStatsTest {
 
         lottoStats.calculateResult(lottos);
 
-        Assertions.assertThat(lottoStats.getTotalPrize()).isEqualTo(2031555000L);
+        assertThat(lottoStats.getTotalPrize()).isEqualTo(2031555000L);
     }
 
 }

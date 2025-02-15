@@ -15,7 +15,7 @@ public class LottoFactory {
 
     public final static int LOTTO_PRICE = 1000;
 
-    public static Lotto makeLotto() {
+    private static Lotto makeLotto() {
         Collections.shuffle(randomNumbers);
         List<Integer> numbers = randomNumbers
                 .stream()
