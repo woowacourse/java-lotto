@@ -1,18 +1,18 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class WinningNumber {
-    private final List<Integer> numbers = new ArrayList<>();
+    private final List<Integer> numbers;
 
     public WinningNumber(List<Integer> numbers) {
         validateNumberCount(numbers);
-
+        validateNumberDuplication(numbers);
         for (int number : numbers) {
-            validateNumber(number);
-            this.numbers.add(number);
+            validateNumberRange(number);
         }
+        this.numbers = numbers;
     }
 
     public boolean contains(int number) {
@@ -31,19 +31,14 @@ public class WinningNumber {
         }
     }
 
-    private void validateNumber(int number) {
-        validateNumberRange(number);
-        validateNumberDuplication(number);
-    }
-
     private void validateNumberRange(int number) {
         if (number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
             throw new IllegalArgumentException("당첨 번호는 1~45 사이의 정수로 입력해주세요.");
         }
     }
 
-    private void validateNumberDuplication(int number) {
-        if (this.numbers.contains(number)) {
+    private void validateNumberDuplication(List<Integer> numbers) {
+        if (new HashSet<>(numbers).size() != numbers.size()) {
             throw new IllegalArgumentException("당첨 번호 간 중복 없이 입력해주세요.");
         }
     }

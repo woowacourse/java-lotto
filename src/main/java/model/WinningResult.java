@@ -5,12 +5,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WinningResult {
-    private final Map<WinningStatus, Integer> winningResults = new LinkedHashMap<>();
+    private final Map<WinningStatus, Integer> winningResults;
 
     public WinningResult() {
+        Map<WinningStatus, Integer> defaultWinningResults = new LinkedHashMap<>();
         for (WinningStatus winningStatus : WinningStatus.getSorted()) {
-            winningResults.put(winningStatus, 0);
+            defaultWinningResults.put(winningStatus, 0);
         }
+        this.winningResults = defaultWinningResults;
     }
 
     public void update(WinningStatus winningStatus) {
