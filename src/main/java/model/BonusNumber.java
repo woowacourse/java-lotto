@@ -3,7 +3,6 @@ package model;
 import java.util.List;
 
 public class BonusNumber {
-
     private final int number;
 
     public BonusNumber(String bonusNumberInput, WinningNumber winningNumber) {

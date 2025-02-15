@@ -14,7 +14,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class BonusNumberTest {
-
     static WinningNumber winningNumberFromTwoToSeven;
 
     @BeforeAll

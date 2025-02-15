@@ -7,7 +7,6 @@ import java.util.List;
 import model.Lotto;
 
 public class LottoGenerator {
-
     public static List<Lotto> generate(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         while (lottos.size() < lottoCount) {

@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class WinningNumberTest {
-
     @DisplayName("당첨 번호는 입력값을 구분자로 나누어 숫자로 저장한다")
     @Test
     void parseWinningNumberInput() {
@@ -62,6 +61,4 @@ class WinningNumberTest {
 
         assertThat(matchingCount).isEqualTo(expectedCount);
     }
-
-
 }

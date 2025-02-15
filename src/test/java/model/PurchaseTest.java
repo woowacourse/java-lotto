@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class PurchaseTest {
-
     @DisplayName("로또 구입 금액을 정상적으로 저장한다")
     @ParameterizedTest
     @CsvSource(value = {"1000:1000", "100000:100000", "15000:15000", "+1000:1000"}, delimiter = ':')
@@ -50,5 +49,4 @@ class PurchaseTest {
 
         assertThat(purchase.calculateLottoCount()).isEqualTo(expectedCount);
     }
-
 }
