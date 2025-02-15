@@ -1,33 +1,20 @@
 package lotto.domain;
 
-import static lotto.domain.Lotto.LOTTO_SIZE;
-import static lotto.domain.Lotto.MAX_LOTTO_NUMBER;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.Set;
 
 public class LottoMachine {
+    private LottoMachine() {}
+
     public static List<Lotto> issueLottos(final int lottoAmount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoAmount; i++) {
-            Lotto lotto = createLotto();
+            Lotto lotto = new Lotto(NumbersGenerator.generateLottoNumbers());
             lottos.add(lotto);
         }
         return lottos;
-    }
-
-    public static Lotto createLotto() {
-        Set<Integer> numbers = new HashSet<>();
-        while (numbers.size() < LOTTO_SIZE) {
-            int number = new Random().nextInt(MAX_LOTTO_NUMBER - 1) + 1;
-            numbers.add(number);
-        }
-        return new Lotto(numbers);
     }
 
     public static WinningStatistics calculateStatistics(final List<Lotto> lottos, final WinningNumbers winningNumbers,
