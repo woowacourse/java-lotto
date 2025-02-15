@@ -2,8 +2,8 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -33,7 +33,9 @@ class LottosTest {
         Lottos sut = new Lottos(lottos);
 
         //when
-        EnumMap<LottoPrize, Integer> result = sut.getStatistics(matchNumbers, bonusNumber);
+        Map<LottoPrize, Integer> result = sut.getStatistics(matchNumbers, bonusNumber);
+
+        System.out.println(result);
 
         //then
         assertThat(result).containsEntry(LottoPrize.FIRST, 1);
