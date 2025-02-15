@@ -27,8 +27,11 @@ public class LottoController {
         printPurchasedLottos(lottos);
         WinningLotto winningLotto = getWinningLotto();
         List<LottoPrize> lottoPrizes = lottoMachine.getLottoResults(lottos, winningLotto);
+
+        double profitRate = lottoMachine.calculateProfitRate(lottoPrizes, purchaseMoney);
+
         List<LottoPrizeResponse> lottoPrizeResponses = lottoPrizes.stream().map(LottoPrizeResponse::from).toList();
-        outputView.printLottoResults(lottoPrizeResponses, purchaseMoney);
+        outputView.printLottoResults(lottoPrizeResponses, profitRate);
     }
 
     private int getPurchaseMoney() {
