@@ -60,7 +60,7 @@ public class LottoController {
         Map<RankType, Integer> rankTypeMap = RankType.makeMap();
 
         for (Lotto lotto : lottoRepository.getLottos()) {
-            RankType.updateMapByWinningCount(rankTypeMap, userLotto.calculateRank(lotto), bonusNumber.isBonusNumber(lotto));
+            RankType.updateMapByWinningCount(rankTypeMap, userLotto.calculateMatchCount(lotto), bonusNumber.isBonusNumber(lotto));
         }
 
         OutputView.printResult(rankTypeMap);

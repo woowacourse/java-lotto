@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<Integer> randomNumbers;
@@ -16,5 +15,9 @@ public class Lotto {
 
     public List<Integer> getRandomNumbers() {
         return randomNumbers;
+    }
+
+    public boolean contains(int number){
+        return randomNumbers.contains(number);
     }
 }

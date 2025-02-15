@@ -17,7 +17,7 @@ class UserLottoTest {
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 7);
         UserLotto userLotto = new UserLotto(winningNumbers);
 
-        assertThat(userLotto.calculateRank(lotto)).isEqualTo(5);
+        assertThat(userLotto.calculateMatchCount(lotto)).isEqualTo(5);
     }
 
     @Test

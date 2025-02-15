@@ -5,14 +5,14 @@ import java.util.List;
 import view.util.LottoConstants;
 
 public class UserLotto {
-    private List<Integer> winningNumbers;
+    private Lotto winningNumbers;
 
-    public UserLotto(List<Integer> winningNumbers) {
-        validateSize(winningNumbers);
-        validateDuplicate(winningNumbers);
-        validateNumberRange(winningNumbers);
+    public UserLotto(List<Integer> userInputNumbers) {
+        validateSize(userInputNumbers);
+        validateDuplicate(userInputNumbers);
+        validateNumberRange(userInputNumbers);
 
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = new Lotto(new HashSet<>(userInputNumbers));
     }
 
     private void validateSize(List<Integer> winningNumbers) {
@@ -41,14 +41,11 @@ public class UserLotto {
         }
     }
 
-    public int calculateRank(Lotto lotto) {
-        int count = 0;
-        for (Integer winningNumber : winningNumbers) {
-            if (lotto.getRandomNumbers().contains(winningNumber)) {
-                count ++;
-            }
-        }
-        return count;
+    public int calculateMatchCount(Lotto lotto) {
+        return (int) winningNumbers.getRandomNumbers()
+                .stream()
+                .filter(lotto::contains)
+                .count();
     }
 
 }
