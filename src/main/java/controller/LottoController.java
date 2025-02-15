@@ -3,6 +3,7 @@ package controller;
 import domain.Lotto;
 import domain.LottoFactory;
 import domain.LottoStats;
+import domain.WinningLotto;
 import view.InputView;
 import view.OutputView;
 
@@ -14,7 +15,8 @@ public class LottoController {
         List<Lotto> lottos = LottoFactory.makeLotto(purchaseAmount);
         OutputView.printLottos(lottos);
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
-        LottoStats lottoStats = new LottoStats(winningNumbers, InputView.inputBonusBall(winningNumbers));
+        WinningLotto winnigLotto = new WinningLotto(winningNumbers, InputView.inputBonusBall(winningNumbers));
+        LottoStats lottoStats = new LottoStats(winnigLotto);
         lottoStats.calculateResult(lottos);
         OutputView.printLottoStats(lottoStats);
         OutputView.printEarningRate(lottoStats, purchaseAmount);
