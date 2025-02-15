@@ -13,8 +13,8 @@ public class Money {
     }
 
     private void validateEnoughMoney(int money) {
-        if (isLessThanLottoPrize(money)) {
-            throw new IllegalArgumentException(ERROR_MONEY_ZERO);
+        if (isNotEnough(money)) {
+            throw new IllegalArgumentException(ERROR_MONEY_NOT_ENOUGH);
         }
     }
 
@@ -24,7 +24,7 @@ public class Money {
         }
     }
 
-    private boolean isLessThanLottoPrize(int money) {
+    private boolean isNotEnough(int money) {
         return money < LOTTO_PRIZE;
     }
 
