@@ -1,5 +1,6 @@
 package domain;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
@@ -30,6 +31,17 @@ class MoneyTest {
         assertThatThrownBy(() -> new Money(number)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
 
+    }
+
+    @DisplayName("구입 금액이 1_000원 이상이고 1_000원 단위이면 정상적으로 생성된다")
+    @ParameterizedTest
+    @ValueSource(ints = {1000, 2000, 5000, 10000})
+    void createMoneyTest(final int number) {
+        //given
+        //when
+        Money money = new Money(number);
+        //then
+        assertThat(money.getAmount()).isEqualTo(number);
     }
 
 }
