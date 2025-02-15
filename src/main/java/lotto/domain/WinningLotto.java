@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.constant.ExceptionMessage;
 import lotto.constant.WinningTier;
 
 public class WinningLotto {
@@ -24,10 +23,10 @@ public class WinningLotto {
 
     private void validateBonusNumber(int number) {
         if (this.lotto.hasNumber(number)) {
-            throw new IllegalArgumentException(ExceptionMessage.DUPLICATED_NUMBERS.getContent());
+            throw new IllegalArgumentException("보너스 번호가 당첨 번호와 중복됩니다.");
         }
         if (number < MIN_BONUS_NUMBER || number > MAX_BONUS_NUMBER) {
-            throw new IllegalArgumentException(ExceptionMessage.OUT_OF_RANGE.getContent());
+            throw new IllegalArgumentException("범위를 벗어난 값입니다.");
         }
     }
 }
