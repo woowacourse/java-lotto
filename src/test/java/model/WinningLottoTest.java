@@ -17,7 +17,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 class WinningLottoTest {
     static Stream<Arguments> provideBasicLottoAndInvalidBonusNumber() {
         return Stream.of(
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 1),
                 Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 6),
                 Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 0),
                 Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 46)
@@ -30,17 +29,15 @@ class WinningLottoTest {
         );
     }
 
-    @Order(1)
     @ParameterizedTest
     @MethodSource("provideBasicLottoAndInvalidBonusNumber")
     void 유효하지_않은_보너스번호가_들어오면_예외를_발생시킨다(Lotto basicLotto, int bonusNumber) {
-        assertThrows(IllegalArgumentException.class, () -> WinningLotto.initialize(basicLotto, bonusNumber));
+        assertThrows(IllegalArgumentException.class, () -> new WinningLotto(basicLotto, bonusNumber));
     }
 
-    @Order(2)
     @ParameterizedTest
     @MethodSource("provideBasicLottoAndBonusNumber")
     void 정상적인_보너스번호가_들어오면_예외를_발생시키지않는다(Lotto basicLotto, int bonusNumber) {
-        assertDoesNotThrow(() -> WinningLotto.initialize(basicLotto, bonusNumber));
+        assertDoesNotThrow(() -> new WinningLotto(basicLotto, bonusNumber));
     }
 }
