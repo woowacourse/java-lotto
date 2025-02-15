@@ -43,18 +43,14 @@ public class LottoController {
         displayLottoResult(lottoResult, money);
     }
 
-    private void displayLottoResult(LottoResult lottoResult, Money money) {
-        outputHandler.printLottoResults(lottoResult);
-        outputHandler.printRateOfReturn(lottoResult, money);
-    }
-
-    private void displayLottoInfo(Lottos lottos) {
-        outputHandler.printLottos(lottos);
-    }
-
     private Money getMoney() throws IOException {
         String money = inputHandler.readMoney();
         return new Money(money);
+    }
+
+    private void displayLottoInfo(Lottos lottos) {
+        outputHandler.printLottoCount(lottos.getLottoCount());
+        outputHandler.printLottosInfo(lottos);
     }
 
     private WinningNumberWithBonusNumber getWinningNumberWithBonusNumber() throws IOException {
@@ -76,5 +72,10 @@ public class LottoController {
         String bonusNumber = inputHandler.readBonusNumber();
 
         return Integer.parseInt(bonusNumber);
+    }
+
+    private void displayLottoResult(LottoResult lottoResult, Money money) {
+        outputHandler.printLottoResults(lottoResult);
+        outputHandler.printRateOfReturn(lottoResult, money);
     }
 }
