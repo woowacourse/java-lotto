@@ -31,7 +31,7 @@ public class LottoController {
 
     private static void buyLottoForUserMoney(LottoRepository lottoRepository, int userMoney) {
         for (int i = 0; i < userMoney / LOTTO_PRICE_PER_ONE; i++) {
-            lottoRepository.addLotto(makeLotto());
+            lottoRepository.addLotto(new Lotto(RandomNumberGenerator.makeRandomNumber()));
         }
     }
 
@@ -44,15 +44,6 @@ public class LottoController {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return isDuplicateBonusNumber(userLotto);
-        }
-    }
-
-
-    private static Lotto makeLotto() {
-        try {
-            return new Lotto(RandomNumberGenerator.makeRandomNumber());
-        } catch (IllegalArgumentException e) {
-            return makeLotto();
         }
     }
 
