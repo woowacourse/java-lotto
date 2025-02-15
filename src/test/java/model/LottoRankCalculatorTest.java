@@ -3,6 +3,7 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import model.numbers.LottoNumber;
 import model.numbers.LottoNumbers;
 import model.numbers.WinningLotto;
 import model.rank.LottoRank;
@@ -18,7 +19,7 @@ class LottoRankCalculatorTest {
     @BeforeEach
     void setUp() {
         lottoRankCalculator = new LottoRankCalculator();
-        validWinningLotto = new WinningLotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), 7);
+        validWinningLotto = new WinningLotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
     }
 
     @Test

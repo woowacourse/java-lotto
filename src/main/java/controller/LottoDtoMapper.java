@@ -6,10 +6,11 @@ import controller.dto.WinningLottoRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import model.numbers.LottoNumber;
 import model.numbers.LottoNumbers;
+import model.numbers.WinningLotto;
 import model.rank.LottoRank;
 import model.rank.LottoRankResult;
-import model.numbers.WinningLotto;
 
 public class LottoDtoMapper {
 
@@ -20,7 +21,8 @@ public class LottoDtoMapper {
     }
 
     public WinningLotto toWinningLotto(WinningLottoRequest winningLottoRequest) {
-        return new WinningLotto(new LottoNumbers(winningLottoRequest.numbers()), winningLottoRequest.bonusNumber());
+        return new WinningLotto(new LottoNumbers(winningLottoRequest.numbers()),
+                new LottoNumber(winningLottoRequest.bonusNumber()));
     }
 
     public List<LottoRankResponse> toLottoRankResponses(LottoRankResult lottoRankResult) {

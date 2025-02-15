@@ -1,7 +1,7 @@
 package model.rank;
 
-import model.numbers.WinningLotto;
 import model.numbers.LottoNumbers;
+import model.numbers.WinningLotto;
 
 public class LottoRankCalculator {
 
