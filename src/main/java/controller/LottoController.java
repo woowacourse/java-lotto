@@ -1,6 +1,8 @@
 package controller;
 
 import converter.StringToLottoConverter;
+import converter.StringToMoneyConverter;
+import converter.StringToNumberConverter;
 import domain.Lotto;
 import domain.LottoMachine;
 import domain.LottoStore;
@@ -11,19 +13,16 @@ import domain.WinningLotto;
 import domain.WinningResult;
 import domain.numberstrategy.NumberPickStrategy;
 import domain.numberstrategy.RandomNumberPickStrategy;
-import view.InputValidator;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
 
     private final InputView inputView;
-    private final InputValidator inputValidator;
     private final OutputView outputView;
 
-    public LottoController(InputView inputView, InputValidator inputValidator, OutputView outputView) {
+    public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
-        this.inputValidator = inputValidator;
         this.outputView = outputView;
     }
 
@@ -43,8 +42,7 @@ public class LottoController {
 
     private Money inputMoney() {
         String rawMoney = inputView.inputMoney();
-        inputValidator.validateInputMoney(rawMoney);
-        return new Money(rawMoney);
+        return new StringToMoneyConverter().convert(rawMoney);
     }
 
     private Lottos purchaseLottos(Money purchaseLottoMoney) {
@@ -54,19 +52,18 @@ public class LottoController {
     }
 
     private WinningLotto inputWinningLotto() {
-        Lotto winningNumbers = inputWinningNumbers();
+        Lotto winningNumbers = inputWinningLottoNumbers();
         Number bonusNumber = inputBonusNumber();
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 
-    private Lotto inputWinningNumbers() {
-        String rawWinningNumbers = inputView.inputWinningNumbers();
-        return new StringToLottoConverter().convert(rawWinningNumbers);
+    private Lotto inputWinningLottoNumbers() {
+        String rawWinningLottoNumbers = inputView.inputWinningLottoNumbers();
+        return new StringToLottoConverter().convert(rawWinningLottoNumbers);
     }
 
     private Number inputBonusNumber() {
         String rawBonusNumber = inputView.inputBonusNumber();
-        inputValidator.validateNotStringNumber(rawBonusNumber);
-        return new Number(Integer.parseInt(rawBonusNumber));
+        return new StringToNumberConverter().convert(rawBonusNumber);
     }
 }

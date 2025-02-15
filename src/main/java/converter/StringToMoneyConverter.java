@@ -1,9 +1,12 @@
-package view;
+package converter;
 
-public class InputValidator {
+import domain.Money;
 
-    public void validateInputMoney(String money) {
-        validateNotStringNumber(money);
+public class StringToMoneyConverter implements Converter<String, Money> {
+    @Override
+    public Money convert(String source) {
+        validateNotStringNumber(source);
+        return new Money(source);
     }
 
     public void validateNotStringNumber(String value) {
