@@ -1,4 +1,6 @@
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class OutputView {
     public void printLottoCount(int count) {
@@ -7,7 +9,11 @@ public class OutputView {
 
     public void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.getInfo());
+            String lottoNumbers = lotto.getNumbers()
+                    .stream()
+                    .map(Objects::toString)
+                    .collect(Collectors.joining(", ", "[", "]"));
+            System.out.println(lottoNumbers);
         }
     }
 

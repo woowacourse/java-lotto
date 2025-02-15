@@ -29,18 +29,6 @@ public class Lotto {
                 .toList();
     }
 
-    public String getInfo() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-        String joined = numbers.stream()
-                .map(Number::getValue)
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "));
-        stringBuilder.append(joined);
-        stringBuilder.append("]");
-        return stringBuilder.toString();
-    }
-
     private void validate(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
