@@ -27,7 +27,7 @@ class MoneyTest {
     void getterTest() {
         Money money = new Money("10000");
 
-        assertThat(money.getValue()).isEqualTo(10000);
+        assertThat(money.getAmount()).isEqualTo(10000);
     }
 
 }
