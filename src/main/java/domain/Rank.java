@@ -26,12 +26,12 @@ public enum Rank {
     public static Rank fromResult(int matchCount, boolean contains) {
         List<Rank> ranks = Arrays.stream(Rank.values()).toList().reversed();
         return ranks.stream()
-                .filter(rank -> isaBoolean(matchCount, contains, rank))
+                .filter(rank -> matchesRank(matchCount, contains, rank))
                 .findFirst()
                 .orElse(NONE);
     }
 
-    private static boolean isaBoolean(int matchCount, boolean contains, Rank rank) {
+    private static boolean matchesRank(int matchCount, boolean contains, Rank rank) {
         return rank.hasCountMatch(matchCount) && (rank.hasNoBonusMatch() || contains);
     }
 
@@ -47,11 +47,11 @@ public enum Rank {
         return !this.isBonusMatch();
     }
 
-    public boolean hasCountMatch(int matchCount) {
+    private boolean hasCountMatch(int matchCount) {
         return this.count == matchCount;
     }
 
-    public boolean isBonusMatch() {
+    private boolean isBonusMatch() {
         return bonusMatch;
     }
 }
