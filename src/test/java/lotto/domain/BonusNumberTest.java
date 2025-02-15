@@ -16,14 +16,14 @@ class BonusNumberTest {
 
     @Test
     @DisplayName("보너스번호의 최소값이 입력될 수 있는지 테스트")
-    void vaildateInputMinValue() {
+    void validateInputMinValue() {
         Assertions.assertThatCode(() -> new BonusNumber(1))
                 .doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("보너스번호의 최대값이 입력될 수 있는지 테스트")
-    void vaildateInputMaxValue() {
+    void validateInputMaxValue() {
         Assertions.assertThatCode(() -> new BonusNumber(45))
                 .doesNotThrowAnyException();
     }
