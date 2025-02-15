@@ -15,4 +15,13 @@ class RankTest {
         Rank result = Rank.checkRank(matchCount, hasBonusNumber);
         assertThat(result).isEqualTo(expected);
     }
+
+    @DisplayName("당첨 개수에 따른 해당 등수의 총 당첨금을 반환한다")
+    @CsvSource(value = {"FIRST:0:0", "SECOND:2:60000000", "THIRD:3:4500000", "FOURTH:10:500000", "FIFTH:5:25000"},
+            delimiterString = ":")
+    @ParameterizedTest
+    void 당첨_개수에_따른_해당_등수의_총_당첨금을_반환한다(Rank rank, int winningCount, int expected) {
+        int result = rank.calculateAllWinningAmount(winningCount);
+        assertThat(result).isEqualTo(expected);
+    }
 }

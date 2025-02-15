@@ -10,14 +10,14 @@ public class WinningStatistics {
     }
 
     public double calculateReturnRate(final int purchaseAmount) {
-        int total = calculateTotal();
-        return (double) total / purchaseAmount;
+        int totalWinningAmount = calculateTotalWinningAmount();
+        return (double) totalWinningAmount / purchaseAmount;
     }
 
-    private int calculateTotal() {
+    private int calculateTotalWinningAmount() {
         int total = 0;
         for (final Rank rank : winningStatistics.keySet()) {
-            total += winningStatistics.get(rank) * rank.getWinningAmount();
+            total += rank.calculateAllWinningAmount(winningStatistics.get(rank));
         }
         return total;
     }

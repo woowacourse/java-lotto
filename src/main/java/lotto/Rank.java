@@ -36,6 +36,10 @@ public enum Rank {
         return NONE;
     }
 
+    public int calculateAllWinningAmount(final int winningCount) {
+        return winningCount * getWinningAmount();
+    }
+
     private static Rank checkSecondOrThird(final boolean hasBonusNumber) {
         if (hasBonusNumber) {
             return SECOND;
