@@ -12,13 +12,8 @@ class RankTest {
 
     @DisplayName("당첨번호와 보너스번호로 당첨내용을 확인한다")
     @ParameterizedTest
-    @CsvSource(value = {"6:false:FIRST_PRIDE",
-            "5:true:SECOND_PRIDE",
-            "5:false:THIRD_PRIDE",
-            "4:false:FOURTH_PRIDE",
-            "3:false:FIFTH_PRIDE",
-            "2:false:BOOM"
-    }, delimiterString = ":")
+    @CsvSource(value = {"6:false:FIRST_PRIDE", "5:true:SECOND_PRIDE", "5:false:THIRD_PRIDE", "4:false:FOURTH_PRIDE",
+            "3:false:FIFTH_PRIDE", "2:false:BOOM"}, delimiterString = ":")
     void 당첨번호와_보너스번호로_당첨내용을_확인한다(int matchCount, boolean matchBonus, Rank rank) {
 
         Rank currentRank = Rank.checkPrize(matchCount, matchBonus);
@@ -32,5 +27,16 @@ class RankTest {
         EnumMap<Rank, Integer> defaultMap = Rank.makeDefaultMap();
         assertThat(defaultMap.size()).isEqualTo(6);
         assertThat(defaultMap.get(Rank.FIRST_PRIDE)).isEqualTo(0);
+    }
+
+    @DisplayName("전체 당첨금을 계산한다.")
+    @Test
+    void 전체_당첨금을_계산한다() {
+
+        EnumMap<Rank, Integer> defaultMap = Rank.makeDefaultMap();
+        defaultMap.put(Rank.FOURTH_PRIDE, 1);
+        defaultMap.put(Rank.FIFTH_PRIDE, 2);
+
+        assertThat(Rank.calculateTotalPrize(defaultMap)).isEqualTo(60000);
     }
 }
