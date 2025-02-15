@@ -4,6 +4,7 @@ import domain.Lotto;
 import domain.Lottos;
 import domain.Prize;
 import domain.WinningLotto;
+import domain.properties.LottoProperties;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,9 @@ public class LottoController {
         final WinningLotto winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonusNumber);
         List<Prize> prizes = winningLotto.calculatePrizes(lottos);
 
-        outputView.printLottoResult(prizes, Prize.calculateEarningRate(prizes, lottos.getQuantity() * 1000));
+        outputView.printLottoResult(prizes,
+                Prize.calculateEarningRate(prizes, lottos.getQuantity() * LottoProperties.PRICE)
+        );
     }
 
     private int readBonusNumber() throws IOException {
@@ -49,7 +52,7 @@ public class LottoController {
     }
 
     private Lottos createLottos(final int purchaseAmount) {
-        Lottos lottos = Lottos.ofSize(purchaseAmount / 1000);
+        Lottos lottos = Lottos.ofSize(purchaseAmount / LottoProperties.PRICE);
         outputView.printPurchasedLottos(lottos);
         return lottos;
     }

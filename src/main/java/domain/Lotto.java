@@ -1,8 +1,8 @@
 package domain;
 
-import static domain.LottoGenerator.COUNT_OF_NUMBERS;
-import static domain.LottoGenerator.MAX_NUMBER;
-import static domain.LottoGenerator.MIN_NUMBER;
+import static domain.properties.LottoProperties.COUNT_OF_NUMBERS;
+import static domain.properties.LottoProperties.MAX_NUMBER;
+import static domain.properties.LottoProperties.MIN_NUMBER;
 
 import java.util.HashSet;
 import java.util.List;
@@ -22,7 +22,7 @@ public class Lotto {
 
     private void validate(List<Integer> numbers) {
         if (numbers == null || numbers.size() != COUNT_OF_NUMBERS) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+            throw new IllegalArgumentException(String.format("로또 번호는 %d개여야 합니다.", COUNT_OF_NUMBERS));
         }
 
         Set<Integer> distinctNumbers = new HashSet<>(numbers);
@@ -37,7 +37,7 @@ public class Lotto {
 
     private static void validateRange(final Integer number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45사이여야 합니다.");
+            throw new IllegalArgumentException(String.format("로또 번호는 %d부터 %d사이여야 합니다.", MIN_NUMBER, MAX_NUMBER));
         }
     }
 
@@ -46,10 +46,10 @@ public class Lotto {
     }
 
     public int match(Lotto compared) {
-        Set<Integer> distinctNumbers =new HashSet<>();
+        Set<Integer> distinctNumbers = new HashSet<>();
         distinctNumbers.addAll(compared.numbers);
         distinctNumbers.addAll(numbers);
-        return (12 - distinctNumbers.size());
+        return ((2 * COUNT_OF_NUMBERS) - distinctNumbers.size());
     }
 
     @Override
