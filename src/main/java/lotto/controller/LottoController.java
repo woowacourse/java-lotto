@@ -2,12 +2,12 @@ package lotto.controller;
 
 import java.util.List;
 
-import lotto.model.lotto.generator.LottoNumbersGenerator;
-import lotto.model.ReturnRatioGenerator;
+import lotto.model.Money;
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoMachine;
 import lotto.model.lotto.LottoNumber;
 import lotto.model.lotto.Lottos;
+import lotto.model.lotto.generator.LottoNumbersGenerator;
 import lotto.model.winning.WinningLotto;
 import lotto.model.winning.WinningResultResponses;
 import lotto.view.InputView;
@@ -25,15 +25,15 @@ public class LottoController {
 
     public void run() {
         try {
-            int buyingAmount = inputView.readBuyingAmount();
+            Money buyingAmount = new Money(inputView.readBuyingAmount());
             Lottos lottoTickets = issueRandomLottoTickets(buyingAmount);
             printIssuedLottoTickets(lottoTickets);
 
             WinningLotto winningLotto = createWinningLotto();
             WinningResultResponses winningResultResponses = winningLotto.calculateWinning(lottoTickets);
             outputView.printWinningResult(winningResultResponses);
-            double returnRatio = ReturnRatioGenerator.calculateReturnRatio(buyingAmount, winningResultResponses);
-            outputView.printWinningRatio(returnRatio);
+            outputView.printWinningRatio(
+                    buyingAmount.calculateReturnRatio(winningResultResponses.calculateTotalReturn()));
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
         }
@@ -45,7 +45,7 @@ public class LottoController {
         return new WinningLotto(new Lotto(winningLottoNumbers), LottoNumber.draw(bonusNumber));
     }
 
-    private Lottos issueRandomLottoTickets(final int buyingAmount) {
+    private Lottos issueRandomLottoTickets(final Money buyingAmount) {
         LottoMachine lottoMachine = new LottoMachine();
         return lottoMachine.issueAutomatic(buyingAmount, new LottoNumbersGenerator());
     }

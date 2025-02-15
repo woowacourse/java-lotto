@@ -14,4 +14,12 @@ public class WinningResultResponses {
         return responses;
     }
 
+    public long calculateTotalReturn() {
+        long totalReturnMoney = 0L;
+        for (WinningResultResponse response : responses) {
+            totalReturnMoney += response.getWinningAmount() * response.getWinningCount();
+        }
+        return totalReturnMoney;
+    }
+
 }
