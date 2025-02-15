@@ -1,35 +1,20 @@
 package model;
 
-import static model.ExceptionMessage.INVALID_LOTTO_TYPE;
-
-import exception.CommonExceptionType;
 import exception.LottoExceptionType;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 public class Lotto {
 
-    private static final String SEPARATOR = ", ";
     public static final int LOTTO_SIZE = 6;
     public static final int LOTTO_MIN_RANGE = 1;
     public static final int LOTTO_MAX_RANGE = 45;
 
     private final List<Integer> numbers;
 
-    public static Lotto of(final String input) { // "1, 2, 3, 4, 5, 6"
-        validateNullOrBlank(input);
-        String[] splitInputs = input.split(SEPARATOR);
-        List<String> parsedInputs = List.of(splitInputs);
-
-        List<Integer> numbers = new ArrayList<>();
-        parsedInputs.forEach(parsedInput -> {
-            validateInteger(parsedInput);
-            numbers.add(Integer.parseInt(parsedInput));
-        });
-
-        validateSize(numbers);
-        return new Lotto(numbers);
+    public static Lotto of(final List<Integer> inputs) {
+        validateArgumentsSize(inputs);
+        return new Lotto(inputs);
     }
 
     public Lotto(final List<Integer> numbers) {
@@ -38,13 +23,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    private static void validateNullOrBlank(String input) {
-        if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException(CommonExceptionType.INVALID_INPUT_NULL_OR_BLANK.getMessage());
-        }
-    }
-
-    private static void validateSize(final List<Integer> numbers) {
+    private static void validateArgumentsSize(final List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(LottoExceptionType.INVALID_LOTTO_SIZE.getMessage(LOTTO_SIZE));
         }
@@ -63,14 +42,6 @@ public class Lotto {
         HashSet<Integer> set = new HashSet<>(inputs);
         if (inputs.size() != set.size()) {
             throw new IllegalArgumentException(LottoExceptionType.LOTTO_DUPLICATE.getMessage());
-        }
-    }
-
-    private static void validateInteger(final String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(CommonExceptionType.INVALID_NUMBER_FORMAT.getMessage());
         }
     }
 

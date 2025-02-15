@@ -1,6 +1,7 @@
 package view;
 
 import exception.CommonExceptionType;
+import java.util.List;
 import java.util.Scanner;
 import model.Bonus;
 import model.Lotto;
@@ -17,7 +18,7 @@ public class InputView {
 
     public static Lotto getWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return Lotto.of(getInput());
+        return Lotto.of(getIntegerInputs());
     }
 
     public static Bonus getWinningBonus(final Lotto lotto) {
@@ -25,12 +26,13 @@ public class InputView {
         return Bonus.of(getIntegerInput(), lotto);
     }
 
+
     private static int getIntegerInput() {
-        try {
-            return Integer.parseInt(getInput());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(CommonExceptionType.INVALID_NUMBER_FORMAT.getMessage());
-        }
+        return InputParser.of(getInput()).getInput();
+    }
+
+    private static List<Integer> getIntegerInputs() {
+        return InputParser.of(getInput()).getInputs();
     }
 
     private static String getInput() {

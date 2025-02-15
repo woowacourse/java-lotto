@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import exception.BonusExceptionType;
 import exception.CommonExceptionType;
+import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -20,7 +21,7 @@ class BonusTest {
 
     @BeforeEach
     void beforeEach() {
-        lotto = Lotto.of("1, 2, 3, 4, 5, 6");
+        lotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
     }
 
     @Test
