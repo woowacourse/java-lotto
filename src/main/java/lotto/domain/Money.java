@@ -12,7 +12,7 @@ public class Money {
         this.amount = parseAmount;
     }
 
-    public void validateAmount(final int amount) {
+    private void validateAmount(final int amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("양수여야 합니다.");
         }
