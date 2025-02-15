@@ -1,11 +1,12 @@
 package lotto.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import lotto.constant.WinningTier;
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 import lotto.utility.RandomGenerator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoService {
 
@@ -35,10 +36,5 @@ public class LottoService {
             winningTiers.add(tier);
         }
         return winningTiers;
-    }
-
-    public double calculateProfit(List<WinningTier> winningTiers, int purchaseAmount) {
-        int prizeSum = winningTiers.stream().mapToInt(WinningTier::getPrize).sum();
-        return (double) prizeSum / purchaseAmount;
     }
 }
