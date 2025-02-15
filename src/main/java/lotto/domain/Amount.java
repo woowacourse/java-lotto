@@ -1,9 +1,9 @@
 package lotto.domain;
 
+import static lotto.common.constant.Constant.*;
 import static lotto.common.constant.ErrorMessage.*;
 
 public record Amount(int money) {
-    private static final int LOTTO_PRIZE = 1000;
 
     public Amount {
         validateMinimumAmount(money);
@@ -23,14 +23,14 @@ public record Amount(int money) {
     }
 
     private boolean isLessThanMinimumAmount(int money) {
-        return money < LOTTO_PRIZE;
+        return money < LOTTO_PRICE;
     }
 
     private boolean isNotDivisibleByLottoPrice(int money) {
-        return money % LOTTO_PRIZE != 0;
+        return money % LOTTO_PRICE != 0;
     }
 
     public int getAmount() {
-        return money / LOTTO_PRIZE;
+        return money / LOTTO_PRICE;
     }
 }
