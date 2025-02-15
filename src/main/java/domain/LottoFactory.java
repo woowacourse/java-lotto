@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,14 +35,19 @@ public class LottoFactory {
   }
 
   public Map<LottoMatch, Integer> countLottos(WinningLotto winningLotto) {
-    Map<LottoMatch, Integer> result = new LinkedHashMap<>();
-    for (LottoMatch lottoMatch : LottoMatch.values()) {
-      result.put(lottoMatch, 0);
-    }
+    Map<LottoMatch, Integer> result = createLottoMatchCounter();
 
     for (Lotto lotto : lottos) {
       LottoMatch matchedLotto = lotto.compareLotto(winningLotto);
       result.put(matchedLotto, result.get(matchedLotto) + 1);
+    }
+    return result;
+  }
+
+  private Map<LottoMatch, Integer> createLottoMatchCounter() {
+    Map<LottoMatch, Integer> result = new LinkedHashMap<>();
+    for (LottoMatch lottoMatch : LottoMatch.values()) {
+      result.put(lottoMatch, 0);
     }
     return result;
   }
