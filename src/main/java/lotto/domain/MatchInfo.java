@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import static lotto.common.constant.Constant.*;
+import static lotto.common.constant.BusinessRule.*;
 
 import java.util.Arrays;
 
-public enum MatchStatistics {
+public enum MatchInfo {
     MATCH_THREE(3, 5000),
     MATCH_FOUR(4, 50000),
     MATCH_FIVE(5, 150000),
@@ -18,7 +18,7 @@ public enum MatchStatistics {
     private final int number;
     private final int money;
 
-    MatchStatistics(int number, int money) {
+    MatchInfo(int number, int money) {
         this.number = number;
         this.money = money;
     }
@@ -34,7 +34,7 @@ public enum MatchStatistics {
         return String.format(BASIC_OUTPUT, number, money);
     }
 
-    public static MatchStatistics getMatchStatistics(int matchNumber, boolean bonus) {
+    public static MatchInfo getMatchInfo(int matchNumber, boolean bonus) {
         if (isMatchBonus(matchNumber, bonus)) {
             return MATCH_BONUS;
         }

@@ -7,7 +7,7 @@ import lotto.common.utill.InputParser;
 import lotto.domain.Cashier;
 import lotto.domain.Lotto;
 import lotto.domain.MatchCount;
-import lotto.domain.MatchStatistics;
+import lotto.domain.MatchInfo;
 import lotto.domain.Profit;
 import lotto.domain.Wallet;
 import lotto.service.LottoService;
@@ -35,7 +35,7 @@ public class Controller {
 
         int bonus = requestBonus(matchLotto);
 
-        Map<MatchStatistics, Integer> map = getMatchStatisticsMap(wallet, matchLotto, bonus);
+        Map<MatchInfo, Integer> map = getMatchStatisticsMap(wallet, matchLotto, bonus);
         outputView.printStatics(map);
 
         Profit profit = lottoService.calculateProfit(map, cashier);
@@ -54,7 +54,7 @@ public class Controller {
         }
     }
 
-    private Map<MatchStatistics, Integer> getMatchStatisticsMap(Wallet wallet, Lotto matchLotto,
+    private Map<MatchInfo, Integer> getMatchStatisticsMap(Wallet wallet, Lotto matchLotto,
         int bonus) {
         List<MatchCount> matchCount = wallet.matchCount(matchLotto, bonus);
         return lottoService.convertToMap(matchCount);

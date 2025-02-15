@@ -1,10 +1,10 @@
 package lotto.view;
 
-import static lotto.domain.MatchStatistics.*;
+import static lotto.domain.MatchInfo.*;
 
 import java.util.Map;
 
-import lotto.domain.MatchStatistics;
+import lotto.domain.MatchInfo;
 import lotto.domain.Profit;
 
 public class OutputView {
@@ -13,11 +13,11 @@ public class OutputView {
         System.out.println(output);
     }
 
-    public void printStatics(Map<MatchStatistics, Integer> map) {
+    public void printStatics(Map<MatchInfo, Integer> map) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-        for (MatchStatistics key : MatchStatistics.values()) {
+        for (MatchInfo key : MatchInfo.values()) {
             if (key == NO_MATCH) {
                 break;
             }
