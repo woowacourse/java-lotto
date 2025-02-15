@@ -1,10 +1,10 @@
 package view;
 
-import static constant.OutViewMessage.TOTAL_PROFIT_RATE_GUIDANCE;
-import static constant.OutViewMessage.LOTTO_PURCHASE_GUIDANCE;
-import static constant.OutViewMessage.WINNING_STATISTIC_ENTRY;
-import static constant.OutViewMessage.WINNING_STATISTIC_TITLE;
-import static constant.OutViewMessage.WINNING_STATISTICS_SEPARATOR;
+import static constant.OutputViewMessage.TOTAL_PROFIT_RATE_RESULT;
+import static constant.OutputViewMessage.LOTTO_PURCHASE_RESULT;
+import static constant.OutputViewMessage.WINNING_STATISTIC_ENTRY;
+import static constant.OutputViewMessage.WINNING_STATISTIC_TITLE;
+import static constant.OutputViewMessage.WINNING_STATISTICS_SEPARATOR;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -18,7 +18,7 @@ public class OutputView {
     private static final String DAMAGE = "손해";
 
     public static void printLottoCount(final LottoService lottoService) {
-        print(LOTTO_PURCHASE_GUIDANCE.getMessage(lottoService.getTicketNumber()));
+        print(LOTTO_PURCHASE_RESULT.getMessage(lottoService.getTicketNumber()));
     }
 
     public static void printLottoTickets(final LottoService lottoService) {
@@ -41,7 +41,7 @@ public class OutputView {
 
     public static void printBenefit(double benefit) {
         String result = checkBenefit(benefit);
-        print(TOTAL_PROFIT_RATE_GUIDANCE.getMessage(benefit, result));
+        print(TOTAL_PROFIT_RATE_RESULT.getMessage(benefit, result));
     }
 
     private static String checkBenefit(double benefit) {
