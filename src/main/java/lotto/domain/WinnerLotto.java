@@ -19,7 +19,10 @@ public class WinnerLotto {
      * Lotto lotto - 강력한 타입 제한, Lotto의 객체를 통해 로또의 List<LottoNumbers>의 제약을 걸 수 있음.
      */
     public long getMatchCount(Lotto lotto) {
-        return lotto.getLottoNumbers().stream().filter(winnerNumbers::contains).count();
+        return lotto.getLottoNumbers()
+                .stream()
+                .filter(winnerNumbers::contains)
+                .count();
     }
 
     public boolean hasBonus(Lotto lotto) {
