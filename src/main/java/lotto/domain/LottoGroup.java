@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.common.Constants.ENTER;
+import static lotto.common.Constants.LINE_SEPARATOR;
 import static lotto.common.Constants.LOTTO_NUM_SIZE;
 import static lotto.common.Constants.MAX_LOTTO_NUMBER;
 
@@ -46,7 +46,7 @@ public class LottoGroup {
 
     @Override
     public String toString() {
-        StringJoiner joiner = new StringJoiner(ENTER);
+        StringJoiner joiner = new StringJoiner(LINE_SEPARATOR);
 
         for (Lotto lotto : item) {
             joiner.add(lotto.toString());

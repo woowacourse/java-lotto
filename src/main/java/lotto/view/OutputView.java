@@ -1,6 +1,6 @@
 package lotto.view;
 
-import static lotto.common.Constants.ENTER;
+import static lotto.common.Constants.LINE_SEPARATOR;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -43,7 +43,7 @@ public class OutputView {
 
 
     private static void printProfitRate(String profitRate) {
-        System.out.printf(ENTER + "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", profitRate);
+        System.out.printf(LINE_SEPARATOR + "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", profitRate);
     }
 }
 
