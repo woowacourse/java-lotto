@@ -1,6 +1,6 @@
 package lotto;
 
-public enum Prize {
+public enum Rank {
     NONE(0, 0),
     FIFTH(5000, 3),
     FOURTH(50000, 4),
@@ -11,7 +11,7 @@ public enum Prize {
     private final int winningAmount;
     private final int matchCount;
 
-    Prize(final int winningAmount, final int matchCount) {
+    Rank(final int winningAmount, final int matchCount) {
         this.winningAmount = winningAmount;
         this.matchCount = matchCount;
     }
@@ -24,7 +24,7 @@ public enum Prize {
         return winningAmount;
     }
 
-    public static Prize getPrize(final int matchCount, final boolean hasBonusNumber) {
+    public static Rank getRank(final int matchCount, final boolean hasBonusNumber) {
         if (matchCount == FIRST.matchCount) {
             return FIRST;
         }
@@ -40,7 +40,7 @@ public enum Prize {
         return NONE;
     }
 
-    private static Prize getSecondOrThird(final boolean hasNumber) {
+    private static Rank getSecondOrThird(final boolean hasNumber) {
         if (hasNumber) {
             return SECOND;
         }
