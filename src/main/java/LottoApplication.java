@@ -4,7 +4,7 @@ import view.InputView;
 import view.OutputView;
 
 public class LottoApplication {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         final InputView inputView = new InputView();
         final OutputView outputView = new OutputView();
 
@@ -12,8 +12,10 @@ public class LottoApplication {
 
         try {
             lottoController.run();
-        } catch (IllegalArgumentException e2) {
-            System.out.println(e2.getMessage());
+        } catch (IOException e) {
+            System.out.println("[IO Error] : " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
