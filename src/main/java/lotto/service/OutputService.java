@@ -1,13 +1,13 @@
 package lotto.service;
 
-import java.text.DecimalFormat;
-import java.util.Arrays;
-import java.util.List;
 import lotto.constant.OutputMessage;
 import lotto.constant.WinningTier;
 import lotto.domain.Lotto;
-import lotto.domain.WinningCondition;
 import lotto.view.OutputView;
+
+import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.List;
 
 public class OutputService {
 
@@ -47,7 +47,7 @@ public class OutputService {
         }
 
         long count = targets.stream().filter(winningTier -> winningTier == tier).count();
-        if (tier.getCondition().isBonusMatchNeeded()) {
+        if (tier.getHasBonusMatch()) {
             printBonusTier(tier, count);
             return;
         }
@@ -55,16 +55,14 @@ public class OutputService {
     }
 
     private void printBonusTier(WinningTier tier, long count) {
-        WinningCondition winningCondition = tier.getCondition();
         String template = OutputMessage.BONUS_TIER.getContent();
-        String content = String.format(template, winningCondition.getMatchedCount(), tier.getPrize(), count);
+        String content = String.format(template, tier.getMatches(), tier.getPrize(), count);
         outputView.printLine(content);
     }
 
     private void printRegularTier(WinningTier tier, long count) {
-        WinningCondition winningCondition = tier.getCondition();
         String template = OutputMessage.REGULAR_TIER.getContent();
-        String content = String.format(template, winningCondition.getMatchedCount(), tier.getPrize(), count);
+        String content = String.format(template, tier.getMatches(), tier.getPrize(), count);
         outputView.printLine(content);
     }
 

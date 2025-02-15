@@ -16,15 +16,15 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
+    public WinningTier findWinningTier(Lotto lotto) {
+        int matches = this.lotto.findMatches(lotto);
+        boolean hasBonusNumber = lotto.hasNumber(bonusNumber);
+        return WinningTier.find(matches, hasBonusNumber);
+    }
+
     private void validateBonusNumberRange(int number) {
         if (number < MIN_BONUS_NUMBER || number > MAX_BONUS_NUMBER) {
             throw new IllegalArgumentException(ExceptionMessage.OUT_OF_RANGE.getContent());
         }
-    }
-
-    public WinningTier findWinningTier(Lotto lotto) {
-        int matches = this.lotto.findMatches(lotto);
-        boolean isBonusMatched = lotto.hasNumber(bonusNumber);
-        return WinningTier.find(matches, isBonusMatched);
     }
 }

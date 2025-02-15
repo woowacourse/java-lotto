@@ -1,36 +1,41 @@
 package lotto.constant;
 
 import java.util.List;
-import lotto.domain.WinningCondition;
 
 public enum WinningTier {
-    FIRST(new WinningCondition(6, false), 2000000000),
-    SECOND(new WinningCondition(5, true), 3000000),
-    THIRD(new WinningCondition(5, false), 1500000),
-    FOURTH(new WinningCondition(4, false), 50000),
-    FIFTH(new WinningCondition(3, false), 5000),
-    EMPTY(new WinningCondition(0, false), 0);
+    FIRST(6, false, 2000000000),
+    SECOND(5, true, 3000000),
+    THIRD(5, false, 1500000),
+    FOURTH(4, false, 50000),
+    FIFTH(3, false, 5000),
+    EMPTY(0, false, 0);
 
-    private final WinningCondition condition;
+    private final int matches;
+    private final boolean hasBonusMatch;
     private final int prize;
 
-    WinningTier(WinningCondition condition, int prize) {
-        this.condition = condition;
+    WinningTier(int matches, boolean hasBonusMatch, int prize) {
+        this.matches = matches;
+        this.hasBonusMatch = hasBonusMatch;
         this.prize = prize;
     }
 
-    public WinningCondition getCondition() {
-        return condition;
+    public int getMatches() {
+        return matches;
+    }
+
+    public boolean getHasBonusMatch() {
+        return hasBonusMatch;
     }
 
     public int getPrize() {
         return prize;
     }
 
-    public static WinningTier find(int matchedCount, boolean isBonusNumberMatched) {
+    public static WinningTier find(int matches, boolean hasBonusMatch) {
         List<WinningTier> allTiers = List.of(WinningTier.values());
         return allTiers.stream()
-                .filter(tier -> tier.getCondition().isWinningCondition(matchedCount, isBonusNumberMatched))
+                .filter(tier -> tier.getMatches() == matches && tier.getHasBonusMatch() == hasBonusMatch)
                 .findFirst()
                 .orElse(WinningTier.EMPTY);
     }
