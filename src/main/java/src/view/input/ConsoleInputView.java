@@ -12,7 +12,8 @@ public class ConsoleInputView implements InputView {
     @Override
     public int inputPurchaseMoney() {
         try {
-            return scanner.nextInt();
+            String input = scanner.nextLine();
+            return Integer.parseInt(input);
         } catch (RuntimeException e) {
             throw new IllegalArgumentException("잘못된 입력입니다.", e);
         }
@@ -21,7 +22,6 @@ public class ConsoleInputView implements InputView {
     @Override
     public List<Integer> inputWinningLottoNumbers() {
         try {
-            scanner.nextLine();
             String input = scanner.nextLine();
             List<String> parsedWinningLottoNumbers = parseWinningLottoNumbers(input);
 
