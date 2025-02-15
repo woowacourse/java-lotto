@@ -13,17 +13,28 @@ class LottoTest {
     @Test
     void 로또_생성을_확인한다() {
 
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 45);
         Lotto lotto = new Lotto(numbers);
 
         assertThat(lotto.getSize()).isEqualTo(6);
     }
 
-    @DisplayName("로또번호가 범위내에 없을시 에러를 발생한다")
+    @DisplayName("로또번호가 범위를 초과하면 에러를 발생한다")
     @Test
-    void 로또번호가_범위내에_없을시_에러를_발생한다() {
+    void 로또번호가_범위를_초과하면_에러를_발생한다() {
 
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 46);
+
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 범위를 벗어나는 숫자입니다.");
+    }
+
+    @DisplayName("로또번호가 범위 미만이면 에러를 발생한다")
+    @Test
+    void 로또번호가_범위_미만이면_에러를_발생한다() {
+
+        List<Integer> numbers = List.of(0, 2, 3, 4, 5, 6);
 
         assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -41,11 +52,22 @@ class LottoTest {
                 .hasMessage("[ERROR] 로또 번호는 중복될 수 없습니다.");
     }
 
-    @DisplayName("로또의 사이즈가 다를시 에러를 발생한다")
+    @DisplayName("로또의 사이즈가 작을 시 에러를 발생한다")
     @Test
-    void 로또의_사이즈가_다를시_에러를_발생한다() {
+    void 로또의_사이즈가_작을_시_에러를_발생한다() {
 
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
+        List<Integer> numbers = List.of(1);
+
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 로또의 갯수가 일치하지 않습니다.");
+    }
+
+    @DisplayName("로또의 사이즈가 클 시 에러를 발생한다")
+    @Test
+    void 로또의_사이즈가_클_시_에러를_발생한다() {
+
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
 
         assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -75,7 +97,7 @@ class LottoTest {
 
     @DisplayName("로또에 보너스 번호가 없다면 false를 반환한다.")
     @Test
-    void 로또애_보너스_번호가_없다면_true를_반환한다() {
+    void 로또애_보너스_번호가_없다면_false를_반환한다() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
 
