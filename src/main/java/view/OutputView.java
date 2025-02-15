@@ -10,19 +10,19 @@ import java.util.EnumMap;
 import java.util.List;
 import model.Lotto;
 import model.Prize;
-import service.LottoFactory;
+import service.LottoService;
 
 public class OutputView {
 
     private static final String BENEFIT = "이익";
     private static final String DAMAGE = "손해";
 
-    public static void printLottoCount(final LottoFactory lottoFactory) {
-        print(LOTTO_PURCHASE_GUIDANCE.getMessage(lottoFactory.getTicketNumber()));
+    public static void printLottoCount(final LottoService lottoService) {
+        print(LOTTO_PURCHASE_GUIDANCE.getMessage(lottoService.getTicketNumber()));
     }
 
-    public static void printLottoTickets(final LottoFactory lottoFactory) {
-        List<Lotto> lottoList = lottoFactory.getIssuedTickets();
+    public static void printLottoTickets(final LottoService lottoService) {
+        List<Lotto> lottoList = lottoService.getIssuedTickets();
         lottoList.stream()
                 .map(lotto -> lotto.getNumbers().toString())
                 .forEach(OutputView::print);

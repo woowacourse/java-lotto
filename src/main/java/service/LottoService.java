@@ -13,7 +13,7 @@ import model.Bonus;
 import model.Lotto;
 import model.Prize;
 
-public class LottoFactory {
+public class LottoService {
 
     private static final Integer LOTTO_PURCHASE_UNIT = 1_000;
     private static final Integer LOTTO_SIZE = 6;
@@ -24,11 +24,11 @@ public class LottoFactory {
 
     private final Random random;
 
-    public static LottoFactory of(final Integer purchase) {
-        return new LottoFactory(purchase / LOTTO_PURCHASE_UNIT);
+    public static LottoService of(final Integer purchase) {
+        return new LottoService(purchase / LOTTO_PURCHASE_UNIT);
     }
 
-    private LottoFactory(final Integer ticketNumber) {
+    private LottoService(final Integer ticketNumber) {
         this.ticketNumber = ticketNumber;
         this.random = new Random();
         this.issuedTickets = IntStream.range(0, ticketNumber)
