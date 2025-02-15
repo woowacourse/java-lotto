@@ -3,8 +3,12 @@ package lotto.domain;
 import lotto.constant.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -39,9 +43,9 @@ class LottoTest {
     }
 
     @DisplayName("입력된 번호들이 1부터 45사이인지 검증한다.")
-    @Test
-    void 입력된_번호들이_1부터_45사이인지_검증한다() {
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 46);
+    @ParameterizedTest
+    @MethodSource("rangeTestArgs")
+    void 입력된_번호들이_1부터_45사이인지_검증한다(List<Integer> numbers) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(numbers))
                 .withMessage(ExceptionMessage.OUT_OF_RANGE.getContent());
@@ -54,5 +58,12 @@ class LottoTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(numbers))
                 .withMessage(ExceptionMessage.INVALID_NUMBER_COUNT.getContent());
+    }
+
+    static Stream<Arguments> rangeTestArgs() {
+        return Stream.of(
+                Arguments.of(List.of(0, 2, 3, 4, 5, 6)),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 46))
+        );
     }
 }
