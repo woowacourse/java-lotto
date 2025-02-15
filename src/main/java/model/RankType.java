@@ -59,7 +59,7 @@ public enum RankType {
         }
     }
 
-    public static int calculateTotalPrice(Map<RankType, Integer> map){
+    public static int calculateTotalPrice(final Map<RankType, Integer> map){
         int totalPrice = 0;
 
         for(RankType rankType : map.keySet()){

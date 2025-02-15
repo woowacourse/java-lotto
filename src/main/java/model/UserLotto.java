@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 
 public class UserLotto {
-    private static int START_NUMBER_OF_LOTTO_RANGE = 1;
-    private static int END_NUMBER_OF_LOTTO_RANGE = 45;
-    private static int BALL_NUMBER_OF_ONE_LOTTO = 6;
+    private static final int START_NUMBER_OF_LOTTO_RANGE = 1;
+    private static final int END_NUMBER_OF_LOTTO_RANGE = 45;
+    private static final int BALL_NUMBER_OF_ONE_LOTTO = 6;
     private Lotto winningNumbers;
 
     public UserLotto(List<Integer> userInputNumbers) {
@@ -17,19 +17,19 @@ public class UserLotto {
         this.winningNumbers = new Lotto(new HashSet<>(userInputNumbers));
     }
 
-    private void validateSize(List<Integer> winningNumbers) {
+    private void validateSize(final List<Integer> winningNumbers) {
         if (winningNumbers.size() != BALL_NUMBER_OF_ONE_LOTTO) {
             throw new IllegalArgumentException("6개의 숫자만 입력해주세요.");
         }
     }
 
-    private void validateDuplicate(List<Integer> winningNumbers) {
+    private void validateDuplicate(final List<Integer> winningNumbers) {
         if (new HashSet<>(winningNumbers).size() != winningNumbers.size()) {
             throw new IllegalArgumentException("숫자는 중복될 수 없습니다.");
         }
     }
 
-    private void validateNumberRange(List<Integer> winningNumbers) {
+    private void validateNumberRange(final List<Integer> winningNumbers) {
         for (Integer winningNumber : winningNumbers) {
             if (winningNumber < START_NUMBER_OF_LOTTO_RANGE || winningNumber > END_NUMBER_OF_LOTTO_RANGE) {
                 throw new IllegalArgumentException("숫자는 1~45 사이여야 합니다.");

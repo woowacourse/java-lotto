@@ -76,7 +76,7 @@ public class LottoController {
         OutputView.printWinningRate(calculateWinningRate(userMoney,rankTypeMap));
     }
 
-    private static double calculateWinningRate(int userMoney, Map<RankType, Integer> map){
+    private static double calculateWinningRate(int userMoney, final Map<RankType, Integer> map){
         int totalPrice = RankType.calculateTotalPrice(map);
         return (double)totalPrice / userMoney;
     }

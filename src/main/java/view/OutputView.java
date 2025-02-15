@@ -13,13 +13,13 @@ public class OutputView {
     private static final String WINNING_RATE_INFORMATION_1 = "총 수익률 %.2f입니다. (기준이 1이기 때문에 결과적으로 본전이라는 의미임)";
     private static final String LOTTO_RESULT_PRINT_FORMAT = "%d개 일치, (%d원)- %d개\n";
     private static final String LOTTO_RESULT_BONUS_BALL_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
-    public static void printRandomLotto(LottoRepository lottoRepository) {
+    public static void printRandomLotto(final LottoRepository lottoRepository) {
         for (Lotto lotto : lottoRepository.getLottos()) {
             System.out.println(printLotto(lotto));
         }
     }
 
-    private static String printLotto(Lotto lotto) {
+    private static String printLotto(final Lotto lotto) {
         return "[" + String.join(", ",
                 lotto.getRandomNumbers().stream()
                         .map(String::valueOf)
@@ -43,13 +43,13 @@ public class OutputView {
         System.out.println(String.format(WINNING_RATE_INFORMATION_UNDER_1, winningRate));
     }
 
-    public static void printResult(Map<RankType, Integer> rankTypeMap) {
+    public static void printResult(final Map<RankType, Integer> rankTypeMap) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println(makeLottoResult(rankTypeMap));
     }
 
-    public static String makeLottoResult(Map<RankType, Integer> map){
+    public static String makeLottoResult(final Map<RankType, Integer> map){
         StringBuilder stringBuilder = new StringBuilder();
 
         for(RankType rankType : map.keySet()){
