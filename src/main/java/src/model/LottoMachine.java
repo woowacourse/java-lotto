@@ -28,6 +28,14 @@ public class LottoMachine {
         return lottos.stream().map(lotto -> LottoPrize.determine(lotto, winningLotto)).toList();
     }
 
+    public double calculateProfitRate(List<LottoPrize> lottoPrizes, int purchaseMoney) {
+        double totalPrize = lottoPrizes.stream()
+                .filter(LottoPrize::isWin)
+                .mapToDouble(LottoPrize::getPrize)
+                .sum();
+        return Math.round(totalPrize / purchaseMoney * 100) / 100.0;
+    }
+
     private void validatePurchaseMoney(final int purchaseMoney) {
         if (purchaseMoney % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("로또 구매 금액이 나누어떨어지지 않습니다.");
