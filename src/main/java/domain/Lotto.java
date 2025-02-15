@@ -43,15 +43,15 @@ public class Lotto {
         validateMatchNumbersNotDuplicated(matchNumbers);
         validateMatchNumbersSize(matchNumbers);
         validateBonusNumberNotDuplicated(matchNumbers, bonusNumber);
-        int matchCount = 0;
 
+        int matchCount = 0;
         for (Integer matchNumber : matchNumbers) {
-            if (numbers.contains(matchNumber)) {
+            if (numbers.isContains(matchNumber)) {
                 matchCount++;
             }
         }
 
-        return new LottoMatchResult(matchCount, numbers.contains(bonusNumber));
+        return new LottoMatchResult(matchCount, numbers.isContains(bonusNumber));
     }
 
     private void validateMatchNumbersNotDuplicated(List<Integer> matchNumbers) {

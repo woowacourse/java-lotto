@@ -41,7 +41,7 @@ public class Numbers {
         }
     }
 
-    public boolean contains(Integer matchNumber) {
+    public boolean isContains(Integer matchNumber) {
         return numbers.contains(matchNumber);
     }
 
