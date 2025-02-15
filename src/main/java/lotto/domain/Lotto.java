@@ -38,6 +38,10 @@ public class Lotto {
                 .toList();
     }
 
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
+
     @Override
     public String toString() {
         StringJoiner joiner = new StringJoiner(", ", "[", "]");
