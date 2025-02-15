@@ -16,9 +16,12 @@ public class LottoMachine {
     private final LottoNumberGenerator lottoNumberGenerator;
     private final List<Set<Integer>> lottoTickets;
 
-    public LottoMachine(LottoNumberGenerator lottoNumberGenerator, LottoMoney lottoMoney) {
-        this.lottoNumberGenerator = lottoNumberGenerator;
-        this.lottoTickets = generateLottoTickets(lottoMoney);
+    public LottoMachine() {
+        this.lottoNumberGenerator = new LottoNumberGenerator();
+    }
+
+    public LottoMachine(long seed) {
+        this.lottoNumberGenerator = new LottoNumberGenerator(seed);
     }
 
     private List<Set<Integer>> generateLottoTickets(LottoMoney lottoMoney) {
