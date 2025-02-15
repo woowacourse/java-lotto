@@ -24,17 +24,16 @@ public class LottoController {
 
     public void run() {
         PaidAmount paidAmount = new PaidAmount(lottoConsoleView.readPaidAmount());
-        List<LottoNumbers> lottoNumbers = createLottoTickets(paidAmount);
+        List<LottoNumbers> lottoNumbers = createLottoNumbers(paidAmount);
         WinningLotto winningLotto = createWinningLotto();
 
-        LottoRankResult lottoRankResult = calculateRank(lottoNumbers, winningLotto);
-        calculateProfitRate(paidAmount, lottoRankResult);
+        getResult(lottoNumbers, winningLotto, paidAmount);
     }
 
-    private List<LottoNumbers> createLottoTickets(PaidAmount paidAmount) {
+    private List<LottoNumbers> createLottoNumbers(PaidAmount paidAmount) {
         List<LottoNumbers> lottoNumbers = lottoStore.purchase(paidAmount);
 
-        lottoConsoleView.printPurchasedTicketAmount(lottoNumbers.size());
+        lottoConsoleView.printPurchasedTicketAmount(paidAmount.getUnitCount());
         lottoConsoleView.printPurchasedLotto(lottoDtoMapper.toLottoTicketResponses(lottoNumbers));
 
         return lottoNumbers;
@@ -45,13 +44,10 @@ public class LottoController {
         return lottoDtoMapper.toWinningLotto(winningLottoRequest);
     }
 
-    private LottoRankResult calculateRank(List<LottoNumbers> lottoNumbers, WinningLotto winningLotto) {
+    private void getResult(List<LottoNumbers> lottoNumbers, WinningLotto winningLotto, PaidAmount paidAmount) {
         LottoRankResult lottoRankResult = lottoStore.calculateRankMatchCount(lottoNumbers, winningLotto);
         lottoConsoleView.printLottoRankResults(lottoDtoMapper.toLottoRankResponses(lottoRankResult));
-        return lottoRankResult;
-    }
 
-    private void calculateProfitRate(PaidAmount paidAmount, LottoRankResult lottoRankResult) {
         double profitRate = lottoStore.calculateProfitRate(paidAmount, lottoRankResult);
         lottoConsoleView.printProfitRate(profitRate);
     }

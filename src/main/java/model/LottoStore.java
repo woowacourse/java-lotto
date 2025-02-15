@@ -14,8 +14,8 @@ public class LottoStore {
     }
 
     public List<LottoNumbers> purchase(PaidAmount paidAmount) {
-        int purchasedTicketAmount = paidAmount.getUnitCount();
-        return IntStream.range(0, purchasedTicketAmount)
+        int purchasedAmount = paidAmount.getUnitCount();
+        return IntStream.range(0, purchasedAmount)
                 .mapToObj(count -> new LottoNumbers(lottoNumberGenerator.generate()))
                 .toList();
     }
@@ -33,7 +33,8 @@ public class LottoStore {
 
     public double calculateProfitRate(PaidAmount paidAmount, LottoRankResult lottoRankResult) {
         int profit = lottoRankResult.getRanks().stream()
-                .mapToInt(rank -> rank.getPrizeMoney() * lottoRankResult.getCountByRank(rank)).sum();
+                .mapToInt(rank -> rank.getPrizeMoney() * lottoRankResult.getCountByRank(rank))
+                .sum();
 
         return (double) profit / paidAmount.getAmount();
     }
