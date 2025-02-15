@@ -1,16 +1,14 @@
 package model;
 
-import java.sql.Connection;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class BonusNumber {
 
     private final int number;
 
-    public BonusNumber(String bonusNumberInput, WinningNumber winningNumber) {
-        validate(bonusNumberInput, winningNumber);
-        this.number = Integer.parseInt(bonusNumberInput);
+    public BonusNumber(int number, WinningNumber winningNumber) {
+        validate(number, winningNumber);
+        this.number = number;
     }
 
     public boolean matchesWith(List<Integer> lottoNumbers) {
@@ -21,31 +19,20 @@ public class BonusNumber {
         return number;
     }
 
-    private void validate(String bonusNumberInput, WinningNumber winningNumber) {
-        validateBonusNumberType(() -> {
-            int bonusNumber = Integer.parseInt(bonusNumberInput);
-            validateBonusNumberRange(bonusNumber);
-            validateBonusNumberDuplication(winningNumber, bonusNumber);
-        });
+    private void validate(int number, WinningNumber winningNumber) {
+        validateBonusNumberRange(number);
+        validateBonusNumberDuplication(winningNumber, number);
     }
 
-    private void validateBonusNumberRange(int bonusNumber) {
-        if (bonusNumber < LottoConstants.MIN_NUMBER || bonusNumber > LottoConstants.MAX_NUMBER) {
+    private void validateBonusNumberRange(int number) {
+        if (number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
             throw new IllegalArgumentException("보너스 볼은 1~45 사이의 정수로 입력해주세요.");
         }
     }
 
-    private void validateBonusNumberDuplication(WinningNumber winningNumber, int bonusNumber) {
-        if (winningNumber.contains(bonusNumber)) {
+    private void validateBonusNumberDuplication(WinningNumber winningNumber, int number) {
+        if (winningNumber.contains(number)) {
             throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복되지 않게 입력해주세요.");
-        }
-    }
-
-    private void validateBonusNumberType(Runnable task) {
-        try {
-            task.run();
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("보너스 볼은 정수로 입력해주세요.");
         }
     }
 }

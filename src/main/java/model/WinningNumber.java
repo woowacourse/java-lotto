@@ -4,17 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumber {
-    private static final String DELIMITER = ",";
-
     private final List<Integer> numbers = new ArrayList<>();
 
-    public WinningNumber(String inputWinningNumbers) {
-        String[] winningNumbers = inputWinningNumbers.split(DELIMITER);
-        validateNumberCount(winningNumbers);
+    public WinningNumber(List<Integer> numbers) {
+        validateNumberCount(numbers);
 
-        for(String winningNumber : winningNumbers) {
-            validateNumber(winningNumber);
-            numbers.add(Integer.parseInt(winningNumber.trim()));
+        for (int number : numbers) {
+            validateNumber(number);
+            this.numbers.add(number);
         }
     }
 
@@ -28,40 +25,37 @@ public class WinningNumber {
                 .count();
     }
 
-    private void validateNumberCount(String[] winningNumbers) {
-        if(winningNumbers.length != LottoConstants.NUMBER_COUNT) {
+    private void validateNumberCount(List<Integer> numbers) {
+        if (numbers.size() != LottoConstants.NUMBER_COUNT) {
             throw new IllegalArgumentException("당첨 번호의 개수를 6개로 입력해주세요.");
         }
     }
 
-    private void validateNumber(String winningNumber) {
-        validateNumberType(() -> {
-            int number = Integer.parseInt(winningNumber.trim());
-            validateNumberRange(number);
-            validateNumberDuplication(number);
-        }, winningNumber);
+    private void validateNumber(int number) {
+        validateNumberRange(number);
+        validateNumberDuplication(number);
     }
 
     private void validateNumberRange(int number) {
-        if(number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
+        if (number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
             throw new IllegalArgumentException("당첨 번호는 1~45 사이의 정수로 입력해주세요.");
         }
     }
 
     private void validateNumberDuplication(int number) {
-        if(numbers.contains(number)) {
+        if (this.numbers.contains(number)) {
             throw new IllegalArgumentException("당첨 번호 간 중복 없이 입력해주세요.");
         }
     }
 
-    private void validateNumberType(Runnable task, String winningNumber) {
-        try {
-            task.run();
-        } catch (NumberFormatException e) {
-            if(winningNumber.length() > 10) {
-                throw new IllegalArgumentException("당첨 번호는 10자리 이하의 정수로 입력해주세요.");
-            }
-            throw new IllegalArgumentException("당첨 번호는 정수로 입력해주세요.");
-        }
-    }
+//    private void validateNumberType(Runnable task, String winningNumber) {
+//        try {
+//            task.run();
+//        } catch (NumberFormatException e) {
+//            if (winningNumber.length() > 10) {
+//                throw new IllegalArgumentException("당첨 번호는 10자리 이하의 정수로 입력해주세요.");
+//            }
+//            throw new IllegalArgumentException("당첨 번호는 정수로 입력해주세요.");
+//        }
+//    }
 }

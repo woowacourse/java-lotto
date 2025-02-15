@@ -22,7 +22,7 @@ class WinningResultTest {
     @DisplayName("수익률을 구한다")
     @ParameterizedTest
     @CsvSource(value = {"SECOND:10000:3000", "FOURTH:100000:0.5", "NONE:5000:0", "FIRST:1000:2000000"}, delimiter = ':')
-    void calculateEarningRate(WinningStatus winningStatus, String purchaseInput, double expectedEarningRate) {
+    void calculateEarningRate(WinningStatus winningStatus, int purchaseInput, double expectedEarningRate) {
         WinningResult winningResult = new WinningResult();
         winningResult.update(winningStatus);
 

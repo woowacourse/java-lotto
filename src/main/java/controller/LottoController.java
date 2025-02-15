@@ -9,6 +9,7 @@ import model.Purchase;
 import model.WinningNumber;
 import model.WinningResult;
 import model.WinningStatus;
+import util.Parser;
 import view.InputView;
 import view.OutputView;
 
@@ -39,7 +40,8 @@ public class LottoController {
         outputView.printPurchaseAmountInstruction();
         return retryUntilSuccess(() -> {
             String purchaseAmountInput = inputView.readPurchaseAmount();
-            return new Purchase(purchaseAmountInput);
+            int purchaseAmount = Parser.parseOneNumber(purchaseAmountInput);
+            return new Purchase(purchaseAmount);
         });
     }
 
@@ -58,8 +60,9 @@ public class LottoController {
     public WinningNumber readWinningNumber() {
         outputView.printWinningNumbersInstruction();
         return retryUntilSuccess(() -> {
-            String winningNumbersInput = inputView.readWinningNumbers();
-            return new WinningNumber(winningNumbersInput);
+            List<String> winningNumbersInput = inputView.readWinningNumbers();
+            List<Integer> winningNumbers = Parser.parseNumbers(winningNumbersInput);
+            return new WinningNumber(winningNumbers);
         });
     }
 
@@ -67,7 +70,8 @@ public class LottoController {
         outputView.printBonusNumbersInstruction();
         return retryUntilSuccess(() -> {
             String bonusNumberInput = inputView.readBonusNumbers();
-            return new BonusNumber(bonusNumberInput, winningNumber);
+            int bonusNumber = Parser.parseOneNumber(bonusNumberInput);
+            return new BonusNumber(bonusNumber, winningNumber);
         });
     }
 
