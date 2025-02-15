@@ -20,14 +20,14 @@ public class LottoTicket {
     }
 
     public int countMatchedNumbers(LottoNumbers winningNumbers) {
-        return (int) lottoNumbers.getNumbers()
+        return (int) lottoNumbers.numbers()
                 .stream()
-                .filter(winningNumbers.getNumbers()::contains)
+                .filter(winningNumbers.numbers()::contains)
                 .count();
     }
 
     public boolean hasBonusNumber(int bonusNumber) {
-        return lottoNumbers.getNumbers()
+        return lottoNumbers.numbers()
                 .contains(bonusNumber);
     }
 
@@ -36,6 +36,6 @@ public class LottoTicket {
     }
 
     public List<Integer> getLottoNumbers() {
-        return lottoNumbers.getNumbers();
+        return lottoNumbers.numbers();
     }
 }

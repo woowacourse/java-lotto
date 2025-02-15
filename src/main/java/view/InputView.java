@@ -53,7 +53,7 @@ public class InputView {
         return (Integer) RetryHandler.retryUntilSuccessWithReturn(() -> {
             System.out.println("보너스 볼을 입력해 주세요.");
             int bonusNumber = Integer.parseInt(Console.readLine());
-            validateBonusNumber(bonusNumber, winningNumbers.getNumbers());
+            validateBonusNumber(bonusNumber, winningNumbers.numbers());
             return bonusNumber;
         });
     }
