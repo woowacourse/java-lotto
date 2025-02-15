@@ -20,7 +20,7 @@ public class InputValidator {
 
     public static void validateWinningNumbers(List<String> content) {
         try {
-            List<Integer> numbers = content.stream().map(Integer::parseInt).toList();
+            content.forEach(Integer::parseInt);
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException("유효하지 않은 입력값입니다.");
         }
