@@ -28,6 +28,6 @@ class CashierTest {
     void shouldThrowException_WhenInvalidUnit(int invalidAmount) {
         assertThatThrownBy(() -> Cashier.payForLotto(invalidAmount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또는 1000원 단위로 구매할 수 있습니다.");
+                .hasMessage("로또는 1,000원 단위로 구매할 수 있습니다.");
     }
 }

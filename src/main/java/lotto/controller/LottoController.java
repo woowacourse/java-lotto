@@ -3,6 +3,7 @@ package lotto.controller;
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -10,6 +11,7 @@ import lotto.Rank;
 import lotto.model.Cashier;
 import lotto.model.DashBoard;
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.view.Console;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -28,11 +30,16 @@ public class LottoController {
         int purchaseAmount = inputView.requestPurchaseAmount();
         List<Lotto> lottos = purchaseLotto(purchaseAmount);
         Lotto winningLotto = getWinningLotto();
-        int bonusNumber = inputView.requestBonusNumber();
+        LottoNumber bonusNumber = getBonusNumber();
         validateBonusNumber(winningLotto, bonusNumber);
         DashBoard dashBoard = judgeLottoResult(lottos, winningLotto, bonusNumber);
         printResult(dashBoard, purchaseAmount);
         end();
+    }
+
+    private LottoNumber getBonusNumber() {
+        int bonusNumber = inputView.requestBonusNumber();
+        return new LottoNumber(bonusNumber);
     }
 
     private List<Lotto> purchaseLotto(int purchaseAmount) {
@@ -48,15 +55,15 @@ public class LottoController {
     }
 
     private Lotto getWinningLotto() {
-        return new Lotto(Set.copyOf(inputView.requestWinningNumbers()));
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        List<Integer> numbers = List.copyOf(inputView.requestWinningNumbers());
+        numbers.forEach(number -> lottoNumbers.add(new LottoNumber(number)));
+        return new Lotto(lottoNumbers);
     }
 
-    private void validateBonusNumber(Lotto winningLotto, int bonusNumber) {
+    private void validateBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨번호와 중복될 수 없습니다.");
-        }
-        if (bonusNumber < LOTTO_NUMBER_MIN.value() || bonusNumber > LOTTO_NUMBER_MAX.value()) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 수여야 합니다.");
         }
     }
 
@@ -72,7 +79,7 @@ public class LottoController {
         return totalAmount;
     }
 
-    private DashBoard judgeLottoResult(List<Lotto> lottos, Lotto winningLotto, int bonusNumber) {
+    private DashBoard judgeLottoResult(List<Lotto> lottos, Lotto winningLotto, LottoNumber bonusNumber) {
         DashBoard dashBoard = new DashBoard();
         for (Lotto lotto : lottos) {
             dashBoard.recordResult(lotto, winningLotto, bonusNumber);

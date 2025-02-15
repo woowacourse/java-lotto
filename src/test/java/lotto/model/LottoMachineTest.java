@@ -12,7 +12,7 @@ class LottoMachineTest {
     void ok_LottoNumberCount() {
         Lotto lotto = LottoMachine.issue();
 
-        assertThat(lotto.getNumbers().size()).isEqualTo(6);
+        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
     }
 
     @DisplayName("중복되지 않는 숫자들을 갖는 로또를 발급할 수 있다.")
@@ -20,6 +20,10 @@ class LottoMachineTest {
     void ok_DistinctNumbers() {
         Lotto lotto = LottoMachine.issue();
 
-        assertThat(lotto.getNumbers().stream().distinct().count()).isEqualTo(lotto.getNumbers().size());
+        assertThat(lotto.getLottoNumbers()
+                .stream()
+                .distinct()
+                .count()
+        ).isEqualTo(lotto.getLottoNumbers().size());
     }
 }
