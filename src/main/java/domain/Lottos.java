@@ -20,16 +20,10 @@ public class Lottos {
     public WinningResult calculateWinning(WinningLotto winningLotto) {
         Map<Rank, Integer> winningResult = new HashMap<>();
         for (Lotto purchaseLotto : lottos) {
-            Rank rank = calculateRank(winningLotto, purchaseLotto);
+            Rank rank = winningLotto.calculateRank(purchaseLotto);
             winningResult.put(rank, winningResult.getOrDefault(rank, 0) + 1);
         }
         Money purchaseLottoMoney = new Money(LottoStore.LOTTO_PRICE).multiply(lottos.size());
         return new WinningResult(purchaseLottoMoney, winningResult);
-    }
-
-    private Rank calculateRank(WinningLotto winningLotto, Lotto purchaseLotto) {
-        int matchCount = winningLotto.calculateMatchCount(purchaseLotto);
-        boolean isMatchBonusNumber = winningLotto.containsBonusNumber(purchaseLotto);
-        return Rank.findRank(matchCount, isMatchBonusNumber);
     }
 }

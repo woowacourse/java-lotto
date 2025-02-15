@@ -4,7 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class WinningLottoTest {
 
@@ -93,5 +97,92 @@ class WinningLottoTest {
         boolean actual = winningLotto.containsBonusNumber(lotto2);
         //then
         assertThat(actual).isTrue();
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateLottos")
+    void 당첨순위를_판단할_수_있다(List<Number> numbers, Rank expected) {
+        //given
+        Number bonus = new Number(7);
+        Lotto lotto = new Lotto(
+                List.of(
+                        new Number(1),
+                        new Number(2),
+                        new Number(3),
+                        new Number(4),
+                        new Number(5),
+                        new Number(6))
+        );
+        WinningLotto winningLotto = new WinningLotto(lotto, bonus);
+        Lotto purchasedLotto = new Lotto(numbers);
+        //when
+        Rank actual = winningLotto.calculateRank(purchasedLotto);
+        //then
+        assertThat(expected).isEqualTo(actual);
+    }
+
+    private static Stream<Arguments> generateLottos() {
+        return Stream.of(
+                Arguments.of(
+                        List.of(
+                                new Number(1),
+                                new Number(2),
+                                new Number(3),
+                                new Number(4),
+                                new Number(5),
+                                new Number(6)
+                        ), Rank.FIRST
+                ),
+                Arguments.of(
+                        List.of(
+                                new Number(1),
+                                new Number(2),
+                                new Number(3),
+                                new Number(4),
+                                new Number(5),
+                                new Number(7)
+                        ), Rank.SECOND
+                ),
+                Arguments.of(
+                        List.of(
+                                new Number(1),
+                                new Number(2),
+                                new Number(3),
+                                new Number(4),
+                                new Number(5),
+                                new Number(8)
+                        ), Rank.THIRD
+                ),
+                Arguments.of(
+                        List.of(
+                                new Number(1),
+                                new Number(2),
+                                new Number(3),
+                                new Number(4),
+                                new Number(8),
+                                new Number(9)
+                        ), Rank.FOURTH
+                ),
+                Arguments.of(
+                        List.of(
+                                new Number(1),
+                                new Number(2),
+                                new Number(3),
+                                new Number(8),
+                                new Number(9),
+                                new Number(10)
+                        ), Rank.FIFTH
+                ),
+                Arguments.of(
+                        List.of(
+                                new Number(1),
+                                new Number(2),
+                                new Number(8),
+                                new Number(9),
+                                new Number(10),
+                                new Number(11)
+                        ), Rank.MISS
+                )
+        );
     }
 }

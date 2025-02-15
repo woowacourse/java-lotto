@@ -17,6 +17,12 @@ public class WinningLotto {
         }
     }
 
+    public Rank calculateRank(Lotto purchasedlotto) {
+        int matchCount = lotto.calculateMatchCount(purchasedlotto);
+        boolean isMatchBonusNumber = containsBonusNumber(purchasedlotto);
+        return Rank.findRank(matchCount, isMatchBonusNumber);
+    }
+
     public int calculateMatchCount(Lotto lotto) {
         return this.lotto.calculateMatchCount(lotto);
     }
