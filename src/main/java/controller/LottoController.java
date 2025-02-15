@@ -1,13 +1,13 @@
-package Controller;
+package controller;
 
-import Model.Lotto;
-import Model.Lottos;
-import Model.WinnerNumber;
-import Service.LottoService;
-import View.InputView;
-import View.OutputView;
 import java.util.List;
 import java.util.Scanner;
+import model.Lotto;
+import model.Lottos;
+import model.WinnerNumber;
+import service.LottoService;
+import view.InputView;
+import view.OutputView;
 
 public class LottoController {
     private final LottoService lottoService;
@@ -18,7 +18,7 @@ public class LottoController {
         this.lottoService = lottoService;
     }
 
-    public void run(){
+    public void run() {
         int price = getPrice();
         int lottoAmount = getLottoAmount(price);
         Lottos lottos = getLottos(lottoAmount);
@@ -45,7 +45,7 @@ public class LottoController {
     private int getBonusBall(List<Integer> winnerNumbers) {
         OutputView.inputBonusBall();
         String inputBonusBall = sc.nextLine();
-        return  InputView.inputBonusBall(inputBonusBall ,winnerNumbers);
+        return InputView.inputBonusBall(inputBonusBall, winnerNumbers);
     }
 
     private List<Integer> getWinnerNumbers() {
@@ -67,9 +67,9 @@ public class LottoController {
         return lottoAmount;
     }
 
-    private int getPrice(){
+    private int getPrice() {
         OutputView.inputPurchaseAmount();
         String inputPrice = sc.nextLine();
-        return  InputView.inputPrice(inputPrice);
+        return InputView.inputPrice(inputPrice);
     }
 }

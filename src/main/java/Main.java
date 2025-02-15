@@ -1,5 +1,5 @@
-import Controller.LottoController;
-import Service.LottoService;
+import controller.LottoController;
+import service.LottoService;
 
 public class Main {
 

@@ -1,7 +1,7 @@
-package View;
+package view;
 
-import Model.LottoResult;
-import Model.Lottos;
+import model.LottoResult;
+import model.Lottos;
 
 public class OutputView {
 
@@ -13,19 +13,19 @@ public class OutputView {
         System.out.printf("%d개를 구매했습니다.\n", count);
     }
 
-    public static void printLottoResults(Lottos lottos){
+    public static void printLottoResults(Lottos lottos) {
         lottos.printLottoNumbers();
     }
 
-    public static void inputWinnerNumbers(){
+    public static void inputWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void inputBonusBall(){
+    public static void inputBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void winningStatistics(double result){
+    public static void winningStatistics(double result) {
         System.out.println("당첨 통계\n---------");
         System.out.printf("3개 일치 (5000원)- %d개\n", LottoResult.FIFTH.getCount());
         System.out.printf("4개 일치 (50000원)- %d개\n", LottoResult.FOURTH.getCount());

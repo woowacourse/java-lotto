@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,10 +16,10 @@ public class InputView {
         return price;
     }
 
-    public static List<Integer> inputWinnerNumbers(String inputWinnerNumbers){
+    public static List<Integer> inputWinnerNumbers(String inputWinnerNumbers) {
         validateEmptyInput(inputWinnerNumbers);
 
-        String [] splitInput = inputWinnerNumbers.split(DELIMITER);
+        String[] splitInput = inputWinnerNumbers.split(DELIMITER);
 
         List<Integer> winnerNumbers = getWinnerNumbers(splitInput);
         validateDuplicateValue(winnerNumbers);
@@ -28,7 +28,7 @@ public class InputView {
 
     private static List<Integer> getWinnerNumbers(String[] splitInput) {
         List<Integer> winnerNumbers = new ArrayList<>();
-        for (String s : splitInput){
+        for (String s : splitInput) {
             int number = validateInteger(s);
             validateNumberRange(number);
             winnerNumbers.add(number);
@@ -36,7 +36,7 @@ public class InputView {
         return winnerNumbers;
     }
 
-    public static int inputBonusBall(String inputBonusBall, List<Integer> winnerNumbers){
+    public static int inputBonusBall(String inputBonusBall, List<Integer> winnerNumbers) {
 
         validateEmptyInput(inputBonusBall);
 
@@ -47,27 +47,27 @@ public class InputView {
         return bonusBall;
     }
 
-    private static void validateDuplicateBonusBall(List<Integer> winnerNumbers, int bonusBall){
-        if (winnerNumbers.contains(bonusBall)){
+    private static void validateDuplicateBonusBall(List<Integer> winnerNumbers, int bonusBall) {
+        if (winnerNumbers.contains(bonusBall)) {
             throw new IllegalArgumentException("중복된 값을 입력해서는 안됩니다.");
         }
     }
 
-    private static void validateEmptyInput(String input){
-        if (input == null || input.isBlank()){
+    private static void validateEmptyInput(String input) {
+        if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("유효하지않는 입력입니다.");
         }
     }
 
-    private static void validateNumberRange(int value){
-        if (value < 1 || value > 45){
+    private static void validateNumberRange(int value) {
+        if (value < 1 || value > 45) {
             throw new IllegalArgumentException("1에서 45 사이의 정수를 입력해주세요.");
         }
     }
 
-    private static void validateDuplicateValue(List<Integer> winnerNumbers){
+    private static void validateDuplicateValue(List<Integer> winnerNumbers) {
         Set<Integer> duplicateCheck = new HashSet<>(winnerNumbers);
-        if (duplicateCheck.size() != winnerNumbers.size()){
+        if (duplicateCheck.size() != winnerNumbers.size()) {
             throw new IllegalArgumentException("중복된 값을 입력해서는 안됩니다.");
         }
 

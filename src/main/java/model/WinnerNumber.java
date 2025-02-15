@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.util.HashSet;
 import java.util.List;
@@ -9,9 +9,9 @@ public class WinnerNumber {
     private List<Integer> winnerNumbers;
     private int bonusBall;
 
-    public WinnerNumber(List<Integer> winnerNumbers, int bonusBall){
+    public WinnerNumber(List<Integer> winnerNumbers, int bonusBall) {
         this.winnerNumbers = winnerNumbers;
-        this. bonusBall = bonusBall;
+        this.bonusBall = bonusBall;
     }
 
     public void compareWinning(Lotto lotto) {

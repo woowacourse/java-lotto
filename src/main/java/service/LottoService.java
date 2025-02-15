@@ -1,10 +1,10 @@
-package Service;
+package service;
 
-import Model.LottoResult;
+import model.LottoResult;
 
 public class LottoService {
 
-    public int lottoCount(int price){
+    public int lottoCount(int price) {
         return price / 1000;
     }
 
