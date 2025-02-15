@@ -45,7 +45,7 @@ class LottoPrizeTest {
         return WinningLotto.of(winningNumbers, bonusNumber);
     }
 
-    private static Stream<Arguments> 보너스_볼이_매칭되는_경우의_당첨_결과를_반환한다_테스트_케이스() {
+    private static Stream<Arguments> 로또_번호_5개를_맞추는_경우_보너스볼_포함_미포함_구분_테스트_케이스() {
         return Stream.of(
                 Arguments.of(
                         makeLotto(List.of(1, 2, 3, 4, 5, 6)), makeWinningLotto(List.of(1, 2, 3, 4, 5, 7), 6),
@@ -69,7 +69,7 @@ class LottoPrizeTest {
     }
 
     @ParameterizedTest
-    @MethodSource("보너스_볼이_매칭되는_경우의_당첨_결과를_반환한다_테스트_케이스")
+    @MethodSource("로또_번호_5개를_맞추는_경우_보너스볼_포함_미포함_구분_테스트_케이스")
     void 보너스_볼이_매칭되는_경우의_당첨_결과를_반환한다(Lotto lotto, WinningLotto winningLotto, LottoPrize expected) {
 
         // When & Then
