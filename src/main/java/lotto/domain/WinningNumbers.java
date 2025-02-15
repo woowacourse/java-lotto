@@ -28,6 +28,14 @@ public class WinningNumbers {
         validateExistBonusNumber();
     }
 
+    public int checkMatchCount(Lotto lotto) {
+        return lotto.checkMatchCount(winningNumbers);
+    }
+
+    public boolean checkMatchBonus(Lotto lotto) {
+        return lotto.checkBonus(bonusNumber);
+    }
+
     private void validateWinningNumberRange() {
         for (Integer winningNumber : winningNumbers) {
             if (winningNumber < MIN_NUMBER || winningNumber > MAX_NUMBER) {
@@ -61,11 +69,4 @@ public class WinningNumbers {
         }
     }
 
-    public int checkMatchCount(Lotto lotto) {
-        return lotto.checkMatchCount(winningNumbers);
-    }
-
-    public boolean checkMatchBonus(Lotto lotto) {
-        return lotto.checkBonus(bonusNumber);
-    }
 }
