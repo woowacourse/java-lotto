@@ -33,7 +33,7 @@ public class Controller {
         WinningInform winningInform = inputController.getWinningInform();
 
         LottoStatistics lottoStatistics = LottoStatistics.from(wallet, winningInform);
-        Profit profit = Profit.from(lottoStatistics.getTotalPrize(), money.getMoney());
+        Profit profit = Profit.from(lottoStatistics.getTotalPrize(), money.money());
         outputView.printResult(lottoStatistics, profit);
     }
 
