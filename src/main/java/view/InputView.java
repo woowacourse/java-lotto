@@ -1,5 +1,9 @@
 package view;
 
+import static constant.InputViewMessage.BONUS_GUIDANCE;
+import static constant.InputViewMessage.LOTTO_PURCHASE_GUIDANCE;
+import static constant.InputViewMessage.LOTTO_GUIDANCE;
+
 import java.util.Scanner;
 import model.Bonus;
 import model.Lotto;
@@ -7,24 +11,28 @@ import model.LottoPurchase;
 
 public class InputView {
 
-    static Scanner sc = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
 
     public static LottoPurchase getPurchaseLotto() {
-        System.out.println("구입금액을 입력해 주세요.");
+        print(LOTTO_PURCHASE_GUIDANCE.getMessage());
         return LottoPurchase.of(getInput());
     }
 
     public static Lotto getWinningLotto() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        print(LOTTO_GUIDANCE.getMessage());
         return Lotto.of(getInput());
     }
 
     public static Bonus getWinningBonus(final Lotto lotto) {
-        System.out.println("보너스 볼을 입력해 주세요.");
+        print(BONUS_GUIDANCE.getMessage());
         return Bonus.of(getInput(), lotto);
     }
 
     private static String getInput() {
-        return sc.nextLine();
+        return scanner.nextLine();
+    }
+
+    private static void print(final String output) {
+        System.out.println(output);
     }
 }
