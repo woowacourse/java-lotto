@@ -1,11 +1,12 @@
 package lotto.domain;
 
 import static lotto.util.Constant.LOTTO_NUMBER_MAX_RANGE;
+import static lotto.util.Constant.LOTTO_NUMBER_MIN_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_SIZE;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import lotto.util.RandomGenerator;
 
 public class LottoMachine {
 
@@ -27,17 +28,19 @@ public class LottoMachine {
     }
 
     private List<Integer> generateLottoTicket() {
-        Random random = new Random();
         List<Integer> lottoTicket = new ArrayList<>();
 
         while (lottoTicket.size() < LOTTO_NUMBER_SIZE) {
-            int number = random.nextInt(LOTTO_NUMBER_MAX_RANGE) + 1;
-
-            if (!lottoTicket.contains(number)) {
-                lottoTicket.add(number);
-            }
+            int number = RandomGenerator.generateRandomNumber(LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE);
+            checkDuplicate(lottoTicket, number);
         }
         return lottoTicket;
+    }
+
+    private void checkDuplicate(List<Integer> lottoTicket, int number) {
+        if (!lottoTicket.contains(number)) {
+            lottoTicket.add(number);
+        }
     }
 
     public List<Lotto> getLottoTickets() {
