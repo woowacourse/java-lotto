@@ -12,7 +12,6 @@ import lotto.common.utill.RandomsWrapper;
 public record Lotto(List<Integer> numbers) {
     public Lotto(List<Integer> numbers) {
         List<Integer> lottoNumbers = numbers.stream()
-            .distinct()
             .sorted()
             .collect(Collectors.toList());
         validate(lottoNumbers);

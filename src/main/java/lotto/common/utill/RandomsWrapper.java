@@ -12,6 +12,7 @@ public final class RandomsWrapper {
 
     public static List<Integer> getRandomIntList(int min, int max, int size) {
         return Stream.generate(() -> random.nextInt(min, max))
+            .distinct()
             .limit(size)
             .toList();
     }
