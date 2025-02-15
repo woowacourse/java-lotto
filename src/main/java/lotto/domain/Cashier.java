@@ -3,9 +3,9 @@ package lotto.domain;
 import static lotto.common.constant.Constant.*;
 import static lotto.common.constant.ErrorMessage.*;
 
-public record Amount(int money) {
+public record Cashier(int money) {
 
-    public Amount {
+    public Cashier {
         validateMinimumAmount(money);
         validateDivisibleByLottoPrice(money);
     }
@@ -30,7 +30,7 @@ public record Amount(int money) {
         return money % LOTTO_PRICE != 0;
     }
 
-    public int getAmount() {
+    public int getLottoAmount() {
         return money / LOTTO_PRICE;
     }
 }

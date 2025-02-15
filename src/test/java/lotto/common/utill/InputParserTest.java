@@ -43,4 +43,7 @@ class InputParserTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_NOT_NUMBER_TYPE.getMessage());
     }
+
+    //Todo parseToList 테스트 추가.
+
 }

@@ -6,8 +6,8 @@ import java.util.List;
 public class Wallet {
     private final List<Lotto> lottoList = new ArrayList<>();
 
-    public Wallet(Amount amount) {
-        int lottoAmount = amount.getAmount();
+    public Wallet(Cashier cashier) {
+        int lottoAmount = cashier.getLottoAmount();
         for (int i = 0; i < lottoAmount; i++) {
             lottoList.add(Lotto.generateLotto());
         }
