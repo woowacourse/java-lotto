@@ -4,15 +4,9 @@ import static model.ExceptionMessage.BONUS_DUPLICATE;
 import static model.ExceptionMessage.INVALID_BONUS_RANGE;
 import static model.ExceptionMessage.INVALID_BONUS_TYPE;
 import static model.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
-import static model.ExceptionMessage.INVALID_LOTTO_RANGE;
-import static model.ExceptionMessage.INVALID_LOTTO_TYPE;
-import static model.ExceptionMessage.LOTTO_DUPLICATE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Arrays;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

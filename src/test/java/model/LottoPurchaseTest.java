@@ -1,12 +1,10 @@
 package model;
 
-import static model.ExceptionMessage.INVALID_BONUS_TYPE;
 import static model.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
 import static model.ExceptionMessage.INVALID_LOTTO_MIN_PURCHASE;
 import static model.ExceptionMessage.INVALID_LOTTO_PURCHASE_TYPE;
 import static model.ExceptionMessage.INVALID_LOTTO_PURCHASE_UNIT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
