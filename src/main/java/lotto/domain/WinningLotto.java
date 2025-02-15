@@ -12,7 +12,7 @@ public class WinningLotto {
 
     public WinningLotto(Lotto lotto, int bonusNumber) {
         this.lotto = lotto;
-        this.validateBonusNumberRange(bonusNumber);
+        this.validateBonusNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
@@ -22,7 +22,10 @@ public class WinningLotto {
         return WinningTier.find(matches, hasBonusNumber);
     }
 
-    private void validateBonusNumberRange(int number) {
+    private void validateBonusNumber(int number) {
+        if (this.lotto.hasNumber(number)) {
+            throw new IllegalArgumentException(ExceptionMessage.DUPLICATED_NUMBERS.getContent());
+        }
         if (number < MIN_BONUS_NUMBER || number > MAX_BONUS_NUMBER) {
             throw new IllegalArgumentException(ExceptionMessage.OUT_OF_RANGE.getContent());
         }

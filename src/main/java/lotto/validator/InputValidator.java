@@ -36,10 +36,4 @@ public class InputValidator {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getContent());
         }
     }
-
-    public static void validateBonusNumber(Lotto winningLotto, int bonusNumber) {
-        if (winningLotto.hasNumber(bonusNumber)) {
-            throw new IllegalArgumentException(ExceptionMessage.DUPLICATED_NUMBERS.getContent());
-        }
-    }
 }

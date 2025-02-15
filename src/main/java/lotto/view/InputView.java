@@ -40,13 +40,11 @@ public class InputView {
         return new Lotto(winningNumbers);
     }
 
-    public int readBonusNumber(Lotto winningLotto) {
+    public int readBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         String content = this.readLine();
         System.out.println();
         InputValidator.validateNumberFormat(content);
-        int bonusNumber = Integer.parseInt(content);
-        InputValidator.validateBonusNumber(winningLotto, bonusNumber);
-        return bonusNumber;
+        return Integer.parseInt(content);
     }
 }

@@ -27,7 +27,7 @@ public class LottoController {
         outputView.printLottos(lottos);
 
         Lotto winningNumbers = inputView.readWinningNumbers();
-        int bonusNumber = inputView.readBonusNumber(winningNumbers);
+        int bonusNumber = inputView.readBonusNumber();
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         Scoreboard scoreboard = new Scoreboard();
