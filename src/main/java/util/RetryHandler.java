@@ -4,14 +4,14 @@ import java.util.function.Supplier;
 
 public class RetryHandler {
     public static <T> Object retryUntilSuccessWithReturn(Supplier<T> supplier) {
-        ExecuteResult rr;
+        ExecuteResult er;
         do {
-            rr = tryGivenMethod(supplier);
-        } while (rr.isSuccess());
-        return rr.getResult();
+            er = executeGivenMethod(supplier);
+        } while (er.isSuccess());
+        return er.getResult();
     }
 
-    private static <T> ExecuteResult tryGivenMethod(Supplier<T> supplier) {
+    private static <T> ExecuteResult executeGivenMethod(Supplier<T> supplier) {
         try {
             return new ExecuteResult(supplier.get(), true);
         } catch (IllegalArgumentException e) {
