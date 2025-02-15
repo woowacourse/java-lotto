@@ -6,11 +6,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class WinLottoView {
+public class InputView {
     private static final String DELIMITER = ",";
 
-    public void printWinNumberGuide() {
-        System.out.println(OutputMessage.WIN_NUMBERS);
+    public Integer readPurchaseAmount() {
+        System.out.println(OutputMessage.PURCHASE_GUIDE);
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        return validatePositiveNumber(input);
     }
 
     public List<Integer> readWinNumbers() {
@@ -20,10 +23,6 @@ public class WinLottoView {
                 .map(String::trim)
                 .toList();
         return splitInput.stream().mapToInt(this::validatePositiveNumber).boxed().toList();
-    }
-
-    public void printBonusNumberGuide() {
-        System.out.println(OutputMessage.BONUS_NUMBER);
     }
 
     public Integer readBonusNumber() {

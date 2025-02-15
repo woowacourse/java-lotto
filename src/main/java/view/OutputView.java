@@ -7,10 +7,32 @@ import static constant.WinLottoInfo.SECOND;
 import static constant.WinLottoInfo.THIRD;
 
 import constant.OutputMessage;
+import model.LottoNumber;
+import model.LottoNumbers;
 import model.LottoStatistics;
 import model.PurchasedLottos;
 
-public class LottoStatisticsView {
+public class OutputView {
+    public void printPurchaseResult(Integer purchaseCount) {
+        System.out.printf(OutputMessage.PURCHASE_RESULT, purchaseCount);
+    }
+
+    public void printPurchasedLottos(PurchasedLottos purchasedLottos) {
+        purchasedLottos.getLottos().forEach(this::printLottoNumbers);
+    }
+
+    private void printLottoNumbers(LottoNumbers lottoNumbers) {
+        System.out.println(lottoNumbers.getNumbers().stream().map(LottoNumber::getNumber).toList());
+    }
+
+    public void printWinNumberGuide() {
+        System.out.println(OutputMessage.WIN_NUMBERS);
+    }
+
+    public void printBonusNumberGuide() {
+        System.out.println(OutputMessage.BONUS_NUMBER);
+    }
+
     public void printResult(LottoStatistics lottoStatistics) {
         System.out.printf(OutputMessage.FIFTH_RESULT, FIFTH.getMatchNumberCount(), FIFTH.getPrice(),
                 nullToZero(lottoStatistics.getCount(FIFTH)));
