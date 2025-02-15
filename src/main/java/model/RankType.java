@@ -10,15 +10,21 @@ public enum RankType {
     FOURTH(4, 50_000),
     FIFTH(3, 5_000);
 
+    private int winningCount;
+    private int price;
+
     RankType(int winningCount, int price) {
         this.winningCount = winningCount;
         this.price = price;
     }
 
-    private static final String PRINT_FORMAT = "%d개 일치, (%d원)- %d개\n";
-    private static final String PRINT_FORMAT_SECOND = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
-    private int winningCount;
-    private int price;
+    public int getWinningCount() {
+        return winningCount;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 
     public static Map<RankType, Integer> makeMap() {
         Map<RankType, Integer> map = new LinkedHashMap<>();
@@ -51,20 +57,6 @@ public enum RankType {
         if (rankTypeTemp == RankType.THIRD && !bonusBall) {
             map.put(rankTypeTemp,map.get(rankTypeTemp) + 1);
         }
-    }
-
-    public static String makeLottoResult(Map<RankType, Integer> map){
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for(RankType rankType : map.keySet()){
-            if(rankType == RankType.SECOND){
-                stringBuilder.append(String.format(PRINT_FORMAT_SECOND, rankType.winningCount, rankType.price, map.get(rankType)));
-                continue;
-            }
-            stringBuilder.append(String.format(PRINT_FORMAT, rankType.winningCount, rankType.price, map.get(rankType)));
-        }
-
-        return stringBuilder.toString();
     }
 
     public static int calculateTotalPrice(Map<RankType, Integer> map){
