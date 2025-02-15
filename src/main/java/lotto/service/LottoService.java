@@ -1,8 +1,6 @@
 package lotto.service;
 
-import lotto.constant.WinningTier;
 import lotto.domain.Lotto;
-import lotto.domain.WinningLotto;
 import lotto.utility.RandomGenerator;
 
 import java.util.ArrayList;
@@ -27,14 +25,5 @@ public class LottoService {
         }
 
         return lottos;
-    }
-
-    public List<WinningTier> findWinningTiers(List<Lotto> lottos, WinningLotto winningLotto) {
-        List<WinningTier> winningTiers = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            WinningTier tier = winningLotto.findWinningTier(lotto);
-            winningTiers.add(tier);
-        }
-        return winningTiers;
     }
 }

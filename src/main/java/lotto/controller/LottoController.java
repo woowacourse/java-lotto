@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.constant.WinningTier;
 import lotto.domain.Lotto;
+import lotto.domain.Scoreboard;
 import lotto.domain.Vendor;
 import lotto.domain.WinningLotto;
 import lotto.service.LottoService;
@@ -31,7 +32,9 @@ public class LottoController {
         Lotto winningNumbers = inputView.readWinningNumbers();
         int bonusNumber = inputView.readBonusNumber(winningNumbers);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        List<WinningTier> winningTiers = lottoService.findWinningTiers(lottos, winningLotto);
+
+        Scoreboard scoreboard = new Scoreboard();
+        List<WinningTier> winningTiers = scoreboard.findWinningTiers(lottos, winningLotto);
 
         Vendor vendor = new Vendor(purchaseAmount);
         double profit = vendor.calculateProfit(winningTiers);
