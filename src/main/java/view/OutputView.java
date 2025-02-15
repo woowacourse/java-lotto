@@ -1,7 +1,6 @@
 package view;
 
 import domain.LottoMatch;
-import java.util.HashMap;
 import java.util.Map;
 
 public class OutputView {
@@ -19,7 +18,7 @@ public class OutputView {
     System.out.println("당첨 통계");
     System.out.println("---------");
     for (LottoMatch lottoMatch : lottoResult.keySet()) {
-      if (lottoMatch == lottoMatch.DEFUALT_MATCH) {
+      if (lottoMatch == lottoMatch.BOOM) {
         continue;
       }
       System.out.printf(STATICS_FORMAT, lottoMatch.toString(), lottoResult.get(lottoMatch));

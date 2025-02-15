@@ -3,12 +3,12 @@ package domain;
 import java.util.Arrays;
 
 public enum LottoMatch {
-  DEFUALT_MATCH(0, false, 0),
-  THREE_MATCH(3, false, 5000),
-  FOUR_MATCH(4, false, 50000),
-  FIVE_MATCH(5, false, 1500000),
-  FIVE_BONUS_MATCH(5, true, 30000000),
-  SIX_MATCH(6, false, 2000000000);
+  BOOM(0, false, 0),
+  FIFTH_PLACE(3, false, 5000),
+  FOURTH_PLACE(4, false, 50000),
+  THIRD_PLACE(5, false, 1500000),
+  SECOND_PLACE(5, true, 30000000),
+  FIRST_PLACE(6, false, 2000000000);
 
   public int winningCounter;
   public boolean bonusChecker;
@@ -22,7 +22,7 @@ public enum LottoMatch {
 
   public static LottoMatch calculateLotto(int winningCounter, boolean bonusChecker) {
     return Arrays.stream(values()).filter(lottoMatch -> lottoMatch.winningCounter == winningCounter
-        && lottoMatch.bonusChecker == bonusChecker).findFirst().orElse(DEFUALT_MATCH);
+        && lottoMatch.bonusChecker == bonusChecker).findFirst().orElse(BOOM);
   }
 
   @Override

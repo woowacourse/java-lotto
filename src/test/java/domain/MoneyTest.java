@@ -53,12 +53,12 @@ public class MoneyTest {
     int input = 10000;
     Money money = new Money(input);
     Map<LottoMatch, Integer> result = Stream.of(new Object[][]{
-        {DEFUALT_MATCH, 7},
-        {THREE_MATCH, 1},
-        {FOUR_MATCH, 2},
-        {FIVE_MATCH, 0},
-        {FIVE_BONUS_MATCH, 0},
-        {SIX_MATCH, 0}
+        {BOOM, 7},
+        {FIFTH_PLACE, 1},
+        {FOURTH_PLACE, 2},
+        {THIRD_PLACE, 0},
+        {SECOND_PLACE, 0},
+        {FIRST_PLACE, 0}
     }).collect(Collectors.toMap(item -> (LottoMatch) item[0], item -> (Integer) item[1]));
 
     double profit = money.calculateProfit((HashMap<LottoMatch, Integer>) result);
