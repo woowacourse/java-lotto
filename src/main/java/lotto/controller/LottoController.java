@@ -72,7 +72,7 @@ public class LottoController {
     }
 
     private WinnerLotto readBonusNumber(List<LottoNumber> winnerNumbers) {
-        LottoNumber bonusNumber = RecoveryUtils.executeWithRetry(InputView::readBonusNumber, LottoNumber::create);
+        LottoNumber bonusNumber = RecoveryUtils.executeWithRetry(InputView::readBonusNumber, LottoNumber::new);
 
         try {
             WinnerLotto.validateBonusNumbers(winnerNumbers, bonusNumber);

@@ -20,10 +20,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber create(final String number) {
-        return new LottoNumber(number);
-    }
-
     private void validateNumber(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("1~45사이의 숫자만 입력하세요.");
