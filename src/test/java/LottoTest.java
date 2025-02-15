@@ -72,4 +72,29 @@ class LottoTest {
         assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("로또를 구매할 때 금액이 로또 가격의 배수라면 로또 개수를 반환한다")
+    void should_return_lotto_count_when_money_is_multiple_of_lotto_price() {
+        // given
+        Money money = new Money(1000);
+
+        // when
+        int lottoCount = Lotto.countPurchasableLottosByMoney(money);
+
+        // then
+        assertThat(lottoCount).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("로또를 구매할 때 금액이 로또 가격의 배수가 아니면 예외가 발생한다")
+    void should_throw_exception_when_money_is_not_multiple_of_lotto_price() {
+        // given
+        Money money = new Money(1500);
+
+        // when & then
+        assertThatThrownBy(() -> Lotto.countPurchasableLottosByMoney(money))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
