@@ -60,10 +60,38 @@ class LottoTest {
                 .withMessage(ExceptionMessage.INVALID_NUMBER_COUNT.getContent());
     }
 
+    @DisplayName("특정 숫자가 로또 번호 리스트에 존재하는지 확인한다.")
+    @Test
+    void 특정_숫자가_로또_번호_리스트에_존재하는지_확인한다() {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(numbers);
+
+        assertThat(lotto.hasNumber(4)).isEqualTo(true);
+        assertThat(lotto.hasNumber(7)).isEqualTo(false);
+    }
+
+    @DisplayName("로또 번호와 일치하는 숫자의 개수를 구한다.")
+    @ParameterizedTest
+    @MethodSource("matchTestArgs")
+    void 로또_번호와_일치하는_숫자의_개수를_구한다(Lotto lotto, int expectedValue) {
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto winningLotto = new Lotto(winningNumbers);
+
+        assertThat(winningLotto.findMatches(lotto)).isEqualTo(expectedValue);
+    }
+
     static Stream<Arguments> rangeTestArgs() {
         return Stream.of(
                 Arguments.of(List.of(0, 2, 3, 4, 5, 6)),
                 Arguments.of(List.of(1, 2, 3, 4, 5, 46))
+        );
+    }
+
+    static Stream<Arguments> matchTestArgs() {
+        return Stream.of(
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 7)), 5),
+                Arguments.of(new Lotto(List.of(7, 8, 9, 10, 11, 12)), 0),
+                Arguments.of(new Lotto(List.of(6, 8, 9, 10, 11, 12)), 1)
         );
     }
 }
