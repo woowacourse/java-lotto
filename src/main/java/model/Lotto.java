@@ -17,12 +17,4 @@ public class Lotto {
     public List<Integer> getRandomNumbers() {
         return randomNumbers;
     }
-
-    public String printLotto() {
-        return "[" + String.join(", ",
-                randomNumbers.stream()
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
-        ) + "]";
-    }
 }

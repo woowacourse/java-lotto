@@ -1,5 +1,6 @@
 package view;
 
+import java.util.stream.Collectors;
 import model.Lotto;
 import model.LottoRepository;
 
@@ -10,8 +11,16 @@ public class OutputView {
     private static final String WINNING_RATE_INFORMATION_1 = "총 수익률 %.2f입니다. (기준이 1이기 때문에 결과적으로 본전이라는 의미임)";
     public static void printRandomLotto(LottoRepository lottoRepository) {
         for (Lotto lotto : lottoRepository.getLottos()) {
-            System.out.println(lotto.printLotto());
+            System.out.println(printLotto(lotto));
         }
+    }
+
+    private static String printLotto(Lotto lotto) {
+        return "[" + String.join(", ",
+                lotto.getRandomNumbers().stream()
+                        .map(String::valueOf)
+                        .collect(Collectors.toList())
+        ) + "]";
     }
 
     public static void printBuyQuantity(int quantity) {
