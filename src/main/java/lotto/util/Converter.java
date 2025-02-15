@@ -10,9 +10,13 @@ public class Converter {
     }
 
     public static List<Integer> convertToIntegerList(String input) {
-        return Arrays.stream(input.split(","))
-                .map(s -> Integer.parseInt(s.trim()))
-                .toList();
+        try {
+            return Arrays.stream(input.split(","))
+                    .map(s -> Integer.parseInt(s.trim()))
+                    .toList();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("콤마로 구분된 숫자만 입력 가능합니다.");
+        }
     }
 
 }
