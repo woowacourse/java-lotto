@@ -18,11 +18,14 @@ public class WinningLotto {
     }
 
     public boolean isMatchBonus(Lotto lotto) {
-        return lotto.getNumbers().stream().anyMatch(number -> number == bonusNumber.getValue());
+        return lotto.getNumbers().stream()
+                .anyMatch(number -> number == bonusNumber.getValue());
     }
 
     private void validate(Lotto winningNumbers, Number bonusNumber) {
-        if (winningNumbers.getNumbers().stream().anyMatch(number -> number == bonusNumber.getValue())) {
+        if (winningNumbers.getNumbers()
+                .stream()
+                .anyMatch(number -> number == bonusNumber.getValue())) {
             throw new IllegalArgumentException("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
         }
     }

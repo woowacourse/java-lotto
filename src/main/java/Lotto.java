@@ -24,7 +24,9 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return numbers.stream().map(Number::getValue).toList();
+        return numbers.stream()
+                .map(Number::getValue)
+                .toList();
     }
 
     public String getInfo() {

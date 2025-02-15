@@ -13,7 +13,8 @@ public class RandomNumbersGenerator {
             int number = random.nextInt(end-start+1) + start;
             numbers.add(number);
         }
-        return numbers.stream().toList();
+        return numbers.stream()
+                .toList();
     }
 
     private static void validate(int start, int end, int count) {
