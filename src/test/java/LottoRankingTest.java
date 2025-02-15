@@ -20,7 +20,12 @@ class LottoRankingTest {
             "2, false, LOSING",
     })
     void 올바른_등수를_반환한다(int correctCount, boolean isCorrectBonus, LottoRanking expectedRanking) {
-        assertThat(LottoRanking.from(correctCount, isCorrectBonus)).isEqualTo(expectedRanking);
-    }
+        // given
 
+        // when
+        LottoRanking ranking = LottoRanking.from(correctCount, isCorrectBonus);
+
+        // then
+        assertThat(ranking).isEqualTo(expectedRanking);
+    }
 }

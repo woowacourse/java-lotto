@@ -16,28 +16,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoWinningCheckerTest {
 
+    private final LottoWinningChecker lottoWinningChecker = new LottoWinningChecker();
+
     @ParameterizedTest
     @DisplayName("로또 결과를 확인할 수 있다")
     @MethodSource("lottoDataProvider")
-    void 로또_결과를_확인할_수_있다(List<Integer> myNumbers, List<Integer> winningNumbers, int bonusNumber, LottoRanking ranking, int expectedCount) {
+    void 로또_결과를_확인할_수_있다(List<Integer> myNumbers,
+                         List<Integer> winningNumbers,
+                         int bonusNumber, LottoRanking ranking,
+                         int expectedCount) {
+        // given
         Lotto lotto = new Lotto(myNumbers);
         Lotto winningNumbersLotto = new Lotto(winningNumbers);
 
         Lottos lottos = new Lottos();
         lottos.addLotto(lotto);
 
-        WinningNumberWithBonusNumber winningNumberWithBonusNumber = new WinningNumberWithBonusNumber(winningNumbersLotto, bonusNumber);
+        WinningNumberWithBonusNumber winningNumberWithBonusNumber
+                = new WinningNumberWithBonusNumber(winningNumbersLotto, bonusNumber);
 
-        LottoResult lottoResult = LottoWinningChecker.calculateResult(lottos, winningNumberWithBonusNumber);
+        // when
+        LottoResult lottoResult = lottoWinningChecker.calculateResult(lottos, winningNumberWithBonusNumber);
 
-        assertThat(lottoResult.result().get(ranking)).isEqualTo(expectedCount);
+        // when
+        assertThat(lottoResult.result().get(ranking))
+                .isEqualTo(expectedCount);
     }
 
     private static Stream<Object[]> lottoDataProvider() {
         List<Integer> winningNumber = Arrays.asList(7, 8, 9, 10, 11, 12);
         int bonusNumber = 20;
-        return Stream.of(
 
+        return Stream.of(
                 new Object[]{
                         Arrays.asList(7, 8, 9, 10, 11, 12),
                         winningNumber,
@@ -73,7 +83,6 @@ class LottoWinningCheckerTest {
                         LottoRanking.FIFTH,
                         1
                 }
-
         );
     }
 }
