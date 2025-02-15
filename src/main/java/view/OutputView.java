@@ -27,8 +27,8 @@ public class OutputView {
         response.detailResponses().forEach(this::printLottoResultDetail);
     }
 
-    public void printROIResult(ROIResultResponse response) {
-        System.out.printf(ROI_RESULT, response.ROI(), response.benefitType());
+    public void printReturnOfInvestmentResult(ReturnOfInvestmentResultResponse response) {
+        System.out.printf(ROI_RESULT, response.returnOfInvestment(), response.benefitType());
     }
 
     public void printErrorMessage(Exception e) {

@@ -1,6 +1,6 @@
 package model;
 
-import dto.ROIResultResponse;
+import dto.ReturnOfInvestmentResultResponse;
 import dto.TicketAmountResponse;
 
 import static global.utils.Validator.validateDivisibility;
@@ -25,9 +25,9 @@ public class Ticket {
         return new TicketAmountResponse(getTicketAmount());
     }
 
-    public ROIResultResponse createROIResponse(final int totalPrice) {
-        double ROI = calculateROI(totalPrice);
-        return new ROIResultResponse(ROI, Heuristic.determine(ROI));
+    public ReturnOfInvestmentResultResponse createReturnOfInvestmentResponse(final int totalPrice) {
+        double returnOfInvestment = calculateReturnOfInvestment(totalPrice);
+        return new ReturnOfInvestmentResultResponse(returnOfInvestment, Heuristic.determine(returnOfInvestment));
     }
 
     private static void validatePurchaseMoney(final int purchaseMoney) {
@@ -35,7 +35,7 @@ public class Ticket {
         validateDivisibility(purchaseMoney, TICKET_PRICE);
     }
 
-    private double calculateROI(final int totalPrice) {
+    private double calculateReturnOfInvestment(final int totalPrice) {
         return Math.round(((double) totalPrice / purchaseMoney) * 100) / 100.0;
     }
 }
