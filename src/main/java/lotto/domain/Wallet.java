@@ -13,7 +13,7 @@ public class Wallet {
     public Wallet(Amount amount) {
         int lottoAmount = amount.getAmount();
         for (int i = 0; i < lottoAmount; i++) {
-            lottos.add(new Lotto(getRandomNumbers()));
+            lottos.add(new Lotto(getRandomIntList()));
         }
     }
 

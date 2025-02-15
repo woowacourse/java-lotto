@@ -1,5 +1,6 @@
-package lotto.utill;
+package lotto.common.utill;
 
+import static lotto.common.constant.Constant.*;
 import static lotto.common.utill.RandomsWrapper.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -13,8 +14,8 @@ class RandomsWrapperTest {
     @Test
     @DisplayName(" ")
     void test() {
-        List<Integer> list = getRandomNumbers();
+        List<Integer> list = getRandomIntList();
         assertThat(list).isNotNull();
-        assertThat(list.size() == 6).isTrue();
+        assertThat(list.size()).isEqualTo(LOTTO_SIZE);
     }
 }

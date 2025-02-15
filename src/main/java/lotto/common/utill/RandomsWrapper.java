@@ -1,20 +1,21 @@
 package lotto.common.utill;
 
-import java.util.ArrayList;
+import static lotto.common.constant.Constant.*;
+
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Stream;
 
 public final class RandomsWrapper {
+    private static final Random random = new Random();
 
-    public static List<Integer> getRandomNumbers() {
-        List<Integer> list = new ArrayList<>();
+    private RandomsWrapper() {
+    }
 
-        while (list.size() < 6) {
-            int randomInt = (int)(Math.random() * 45) + 1;
-            if (!list.contains(randomInt)) {
-                list.add(randomInt);
-            }
-        }
-
-        return list;
+    public static List<Integer> getRandomIntList() {
+        return Stream.generate(() -> random.nextInt(LOTTO_MINIMUM, LOTTO_MAXIMUM))
+            .distinct()
+            .limit(LOTTO_SIZE)
+            .toList();
     }
 }
