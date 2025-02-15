@@ -60,6 +60,7 @@ class PrizeTest {
         Prize prizeWithFalse = Prize.find(3, false);
         assertThat(prizeWithFalse).isEqualTo(Prize.MATCH_THREE);
     }
+
     @Test
     @DisplayName("로또 번호 일치 갯수와 보너스 번호 일치 여부를 통해 Prize 를 잘 찾는 지 확인 : 꼴등")
     void findNonePrize() {
