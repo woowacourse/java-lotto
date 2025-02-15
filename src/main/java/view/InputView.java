@@ -40,7 +40,6 @@ public class InputView {
         return (LottoNumbers) RetryHandler.retryUntilSuccessWithReturn(() -> {
                     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
                     String winningLottoTicket = Console.readLine();
-                    validateLottoTicket(winningLottoTicket);
                     return new LottoNumbers(Arrays.stream(winningLottoTicket.split(",", -1))
                             .map(String::strip)
                             .mapToInt(Integer::parseInt)
@@ -48,19 +47,6 @@ public class InputView {
                             .toList());
                 }
         );
-    }
-
-    private static void validateLottoTicket(String winningLottoTicket) {
-        List<String> winningLottoTickets = Arrays.stream(winningLottoTicket
-                .split(",", -1)).toList();
-        List<Integer> numbers = winningLottoTickets.stream()
-                .map(String::strip)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .toList();
-        if (numbers.stream().distinct().count() != numbers.size()) {
-            throw new IllegalArgumentException("중복된 번호가 존재합니다.");
-        }
     }
 
     public static int inputBonusNumber(List<Integer> winningNumbers) {
