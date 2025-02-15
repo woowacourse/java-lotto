@@ -31,4 +31,11 @@ class PurchaseAmountTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구입금액은 최대 100000원까지입니다.");
     }
+
+    @DisplayName("구매한 로또 수량을 계산하여 반환한다")
+    @Test
+    void 구매한_로또_수량을_계산하여_반환한다() {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(14_000);
+        assertThat(purchaseAmount.calculateLottoAmount()).isEqualTo(14);
+    }
 }

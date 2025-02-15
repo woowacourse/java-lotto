@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Set;
+
 import static lotto.domain.Lotto.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -26,5 +28,13 @@ class LottoTest {
     @Test
     void 로또는_중복되지_않는_숫자를_가진다() {
         assertThat(new Lotto(NumbersGenerator.generateLottoNumbers()).getNumbers()).doesNotHaveDuplicates();
+    }
+
+    @DisplayName("로또가 보너스번호를 포함하는지 확인한다")
+    @Test
+    void 로또가_보너스번호를_포함하는지_확인한다() {
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 6;
+        assertThat(lotto.hasNumber(bonusNumber)).isTrue();
     }
 }
