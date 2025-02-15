@@ -41,7 +41,6 @@ public class LottoController {
         outputView.printWinningProfit(winningProfit.calculateProfitRate(money.getAmount()));
     }
 
-
     private WinningNumber requestWinningNumber() {
         outputView.printAskInputWiningLotto();
         final List<Integer> numbers = inputView.readWinningNumbers();

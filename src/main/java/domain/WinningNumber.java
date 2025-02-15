@@ -27,7 +27,6 @@ public class WinningNumber {
         return LottoRank.findByMatchedCountAndIsBonus(countMatchedNumbers(lotto), isBonus);
     }
 
-    // 일치하는 로또 갯수 계산
     private int countMatchedNumbers(final Lotto lotto) {
         final List<Integer> numbers = lotto.getNumbers();
         return (int) numbers.stream()
