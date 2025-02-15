@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public enum Rank {
@@ -24,7 +25,9 @@ public enum Rank {
     }
 
     public static Rank fromResult(int matchCount, boolean contains) {
-        List<Rank> ranks = Arrays.stream(Rank.values()).toList().reversed();
+        List<Rank> ranks = Arrays.stream(Rank.values())
+                .sorted(Comparator.comparingLong(Rank::getPrize).reversed())
+                .toList();
         return ranks.stream()
                 .filter(rank -> matchesRank(matchCount, contains, rank))
                 .findFirst()

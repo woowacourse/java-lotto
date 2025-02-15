@@ -16,10 +16,10 @@ public class Lotto {
         return numbers.toString();
     }
 
-    public Rank getRank(WinningLotto winnigLotto) {
+    public Rank getRank(WinningLotto winningLotto) {
         int matchCount = (int) numbers.stream()
-                .filter(winnigLotto::containsNumber)
+                .filter(winningLotto::containsNumber)
                 .count();
-        return Rank.fromResult(matchCount, winnigLotto.hasBonusBall(numbers));
+        return Rank.fromResult(matchCount, winningLotto.hasBonusBall(numbers));
     }
 }
