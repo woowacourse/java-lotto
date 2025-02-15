@@ -23,8 +23,7 @@ public class Lotto {
         return numberSet.size();
     }
 
-    public void rankTier() {
-        WinningLotto winningLotto = WinningLotto.getInstance();
+    public void rankTier(WinningLotto winningLotto) {
         int count = winningLotto.getMatchCount(numbers);
         boolean isBonusMatched = winningLotto.isBonusMatched(numbers);
         this.prizeTier = PrizeTier.getTier(count, isBonusMatched);
