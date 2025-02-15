@@ -16,7 +16,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public boolean checkDuplication(List<Integer> targetNumbers) {
+    public boolean hasDuplicationWith(List<Integer> targetNumbers) {
         return new HashSet<>(numbers).containsAll(targetNumbers);
     }
 

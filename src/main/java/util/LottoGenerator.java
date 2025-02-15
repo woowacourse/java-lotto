@@ -13,12 +13,12 @@ public class LottoGenerator {
     public static List<Lotto> generate(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         while (lottos.size() < lottoCount) {
-            addNotDuplicatedLotto(lottos);
+            createNotDuplicatedLotto(lottos);
         }
         return lottos;
     }
 
-    private static void addNotDuplicatedLotto(List<Lotto> lottos) {
+    private static void createNotDuplicatedLotto(List<Lotto> lottos) {
         try {
             List<Integer> randomNumbers = NumberGenerator.pickUniqueNumbersInRange(
                     MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT, numberPickStrategy);
@@ -30,7 +30,7 @@ public class LottoGenerator {
 
     private static void validateDuplication(List<Integer> randomNumbers, List<Lotto> lottos) {
         lottos.stream().forEach(lotto -> {
-            if (lotto.checkDuplication(randomNumbers)) {
+            if (lotto.hasDuplicationWith(randomNumbers)) {
                 throw new IllegalStateException();
             }
         });

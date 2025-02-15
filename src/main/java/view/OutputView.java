@@ -36,13 +36,13 @@ public class OutputView {
                 continue;
             }
             int winningCount = winningResult.getWinningResults().get(winningStatus);
-            String winningStatusExpression = decideExpression(winningStatus);
+            String winningStatusExpression = getExpressionOf(winningStatus);
             System.out.printf("%s (%d원) - %d개\n"
                     , winningStatusExpression, winningStatus.getPrice(), winningCount);
         }
     }
 
-    private String decideExpression(WinningStatus winningStatus) {
+    private String getExpressionOf(WinningStatus winningStatus) {
         StringBuilder expression = new StringBuilder(String.format("%d개 일치", winningStatus.getMatchingCount()));
         if (winningStatus.matchesBonusNumber()) {
             expression.append(", 보너스 볼 일치");

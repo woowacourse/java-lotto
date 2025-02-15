@@ -24,13 +24,13 @@ public class LottoController {
 
     public void run() {
         Purchase purchase = readPurchaseAmount();
-        int lottoCount = findLottoCount(purchase);
+        int lottoCount = getLottoCount(purchase);
         List<Lotto> issuedLottos = issueLotto(lottoCount);
 
         WinningNumber winningNumber = readWinningNumber();
         BonusNumber bonusNumber = readBonusNumber(winningNumber);
 
-        WinningResult winningResult = checkWinningResult(issuedLottos, winningNumber, bonusNumber);
+        WinningResult winningResult = getWinningResult(issuedLottos, winningNumber, bonusNumber);
         double earningRate = winningResult.calculateEarningRate(purchase);
 
         printResult(winningResult, earningRate);
@@ -38,14 +38,14 @@ public class LottoController {
 
     public Purchase readPurchaseAmount() {
         outputView.printPurchaseAmountInstruction();
-        return retryUntilSuccess(() -> {
+        return retryUntilNoIllegalException(() -> {
             String purchaseAmountInput = inputView.readPurchaseAmount();
             int purchaseAmount = Parser.parseOneNumber(purchaseAmountInput);
             return new Purchase(purchaseAmount);
         });
     }
 
-    public int findLottoCount(Purchase purchase) {
+    public int getLottoCount(Purchase purchase) {
         int lottoCount = purchase.calculateLottoCount();
         outputView.printLottoCount(lottoCount);
         return lottoCount;
@@ -59,7 +59,7 @@ public class LottoController {
 
     public WinningNumber readWinningNumber() {
         outputView.printWinningNumbersInstruction();
-        return retryUntilSuccess(() -> {
+        return retryUntilNoIllegalException(() -> {
             List<String> winningNumbersInput = inputView.readWinningNumbers();
             List<Integer> winningNumbers = Parser.parseNumbers(winningNumbersInput);
             return new WinningNumber(winningNumbers);
@@ -68,19 +68,20 @@ public class LottoController {
 
     public BonusNumber readBonusNumber(WinningNumber winningNumber) {
         outputView.printBonusNumbersInstruction();
-        return retryUntilSuccess(() -> {
+        return retryUntilNoIllegalException(() -> {
             String bonusNumberInput = inputView.readBonusNumbers();
             int bonusNumber = Parser.parseOneNumber(bonusNumberInput);
             return new BonusNumber(bonusNumber, winningNumber);
         });
     }
 
-    public WinningResult checkWinningResult(List<Lotto> issuedLottos, WinningNumber winningNumber, BonusNumber bonusNumber) {
+    public WinningResult getWinningResult(List<Lotto> issuedLottos, WinningNumber winningNumber,
+                                          BonusNumber bonusNumber) {
         WinningResult winningResult = new WinningResult();
         for (Lotto lotto : issuedLottos) {
             int matchingCount = winningNumber.findMatchingCountWith(lotto.getNumbers());
-            boolean matchesBonusNumber = bonusNumber.matchesWith(lotto.getNumbers());
-            WinningStatus winningStatus = WinningStatus.findBy(matchingCount, matchesBonusNumber);
+            boolean matchesBonusNumber = bonusNumber.hasMatchingNumberIn(lotto.getNumbers());
+            WinningStatus winningStatus = WinningStatus.decideBy(matchingCount, matchesBonusNumber);
             winningResult.update(winningStatus);
         }
         return winningResult;
@@ -91,12 +92,11 @@ public class LottoController {
         outputView.printEarningRate(earningRate);
     }
 
-    private <T> T retryUntilSuccess(Supplier<T> task) {
+    private <T> T retryUntilNoIllegalException(Supplier<T> task) {
         while (true) {
             try {
                 return task.get();
-            }
-            catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }

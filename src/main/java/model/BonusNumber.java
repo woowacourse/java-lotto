@@ -11,7 +11,7 @@ public class BonusNumber {
         this.number = number;
     }
 
-    public boolean matchesWith(List<Integer> lottoNumbers) {
+    public boolean hasMatchingNumberIn(List<Integer> lottoNumbers) {
         return lottoNumbers.contains(number);
     }
 

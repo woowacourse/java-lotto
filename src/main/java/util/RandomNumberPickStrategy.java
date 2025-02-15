@@ -2,7 +2,7 @@ package util;
 
 import java.util.Random;
 
-public class RandomNumberPickStrategy implements NumberPickStrategy{
+public class RandomNumberPickStrategy implements NumberPickStrategy {
     private static final Random random = new Random();
 
     @Override

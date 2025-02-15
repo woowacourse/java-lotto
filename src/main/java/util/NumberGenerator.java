@@ -7,7 +7,8 @@ import java.util.Set;
 
 public class NumberGenerator {
 
-    public static List<Integer> pickUniqueNumbersInRange(int min, int max, int count, NumberPickStrategy numberPickStrategy) {
+    public static List<Integer> pickUniqueNumbersInRange(int min, int max, int count,
+                                                         NumberPickStrategy numberPickStrategy) {
         Set<Integer> uniqueNumbers = new HashSet<>();
         while (uniqueNumbers.size() < count) {
             uniqueNumbers.add(numberPickStrategy.pickInRange(min, max));

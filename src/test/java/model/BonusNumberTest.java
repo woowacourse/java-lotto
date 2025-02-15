@@ -52,7 +52,7 @@ class BonusNumberTest {
         BonusNumber bonusNumber = new BonusNumber(1, winningNumberFromTwoToSeven);
         List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 11, 12, 13, 14, 15));
 
-        assertThat(bonusNumber.matchesWith(lottoNumbers)).isTrue();
+        assertThat(bonusNumber.hasMatchingNumberIn(lottoNumbers)).isTrue();
     }
 
     @DisplayName("보너스 번호가 로또 당첨 번호와 불일치하면 false를 반환한다")
@@ -61,6 +61,6 @@ class BonusNumberTest {
         BonusNumber bonusNumber = new BonusNumber(1, winningNumberFromTwoToSeven);
         List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(10, 11, 12, 13, 14, 15));
 
-        assertThat(bonusNumber.matchesWith(lottoNumbers)).isFalse();
+        assertThat(bonusNumber.hasMatchingNumberIn(lottoNumbers)).isFalse();
     }
 }

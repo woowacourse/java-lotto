@@ -16,19 +16,19 @@ public enum WinningStatus {
     private final int matchingCount;
     private final boolean matchesBonusNumber;
 
-    WinningStatus(int price, int matchingCount, boolean matchesBonusNumber){
+    WinningStatus(int price, int matchingCount, boolean matchesBonusNumber) {
         this.price = price;
         this.matchingCount = matchingCount;
         this.matchesBonusNumber = matchesBonusNumber;
     }
 
-    public static List<WinningStatus> getSorted() {
+    public static List<WinningStatus> getAllSortedByPrice() {
         return Arrays.stream(WinningStatus.values())
                 .sorted(Comparator.comparing(WinningStatus::getPrice))
                 .toList();
     }
 
-    public static WinningStatus findBy(int matchingCount, boolean matchesBonusNumber) {
+    public static WinningStatus decideBy(int matchingCount, boolean matchesBonusNumber) {
         if (matchingCount == THIRD.matchingCount) {
             return decideByBonusNumber(matchesBonusNumber);
         }
@@ -45,7 +45,7 @@ public enum WinningStatus {
     }
 
     private static WinningStatus decideByBonusNumber(boolean matchesBonusNumber) {
-        if(matchesBonusNumber) {
+        if (matchesBonusNumber) {
             return SECOND;
         }
         return THIRD;

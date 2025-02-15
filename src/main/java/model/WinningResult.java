@@ -9,7 +9,7 @@ public class WinningResult {
 
     public WinningResult() {
         Map<WinningStatus, Integer> defaultWinningResults = new LinkedHashMap<>();
-        for (WinningStatus winningStatus : WinningStatus.getSorted()) {
+        for (WinningStatus winningStatus : WinningStatus.getAllSortedByPrice()) {
             defaultWinningResults.put(winningStatus, 0);
         }
         this.winningResults = defaultWinningResults;
@@ -25,12 +25,12 @@ public class WinningResult {
 
     public double calculateEarningRate(Purchase purchase) {
         int totalPrice = calculateTotalPrice();
-        return ((double) totalPrice)/ purchase.getAmount();
+        return ((double) totalPrice) / purchase.getAmount();
     }
 
     private int calculateTotalPrice() {
         int totalPrice = 0;
-        for(WinningStatus winningStatus : winningResults.keySet()) {
+        for (WinningStatus winningStatus : winningResults.keySet()) {
             totalPrice += winningStatus.getPrice() * winningResults.get(winningStatus);
         }
         return totalPrice;
