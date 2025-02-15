@@ -6,7 +6,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class Profit {
-    Map<Rank, Integer> rankCounts;
+    private final Map<Rank, Integer> rankCounts;
 
     public Profit() {
         this.rankCounts = new EnumMap<>(Rank.class);
