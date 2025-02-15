@@ -36,19 +36,23 @@ public class OutputView {
         System.out.println(ASK_INPUT_BONUS_NUMBER);
     }
 
-    public void printWinningResult(Map<LottoRank, Integer> winningResult) {
+    public void printWinningResult(final Map<LottoRank, Integer> winningResult) {
         System.out.println(LINE_SEPARATOR + WINNING_RESULT_HEADER);
         for (Entry<LottoRank, Integer> entry : winningResult.entrySet()) {
             final LottoRank lottoRank = entry.getKey();
             final int count = entry.getValue();
-            if (lottoRank == LottoRank.RANK_2) {
-                System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개" + LINE_SEPARATOR, lottoRank.getMatchedCount(),
-                        lottoRank.getPrice(), count);
-                continue;
-            }
-            System.out.printf("%d개 일치 (%d원)- %d개" + LINE_SEPARATOR
-                    , lottoRank.getMatchedCount(), lottoRank.getPrice(), count);
+            printLottoRankResult(lottoRank, count);
         }
+    }
+
+    private void printLottoRankResult(final LottoRank lottoRank, final int count) {
+        if (lottoRank == LottoRank.RANK_2) {
+            System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개" + LINE_SEPARATOR, lottoRank.getMatchedCount(),
+                    lottoRank.getPrice(), count);
+            return;
+        }
+        System.out.printf("%d개 일치 (%d원)- %d개" + LINE_SEPARATOR
+                , lottoRank.getMatchedCount(), lottoRank.getPrice(), count);
     }
 
     public void printWinningProfit(double profitRate) {

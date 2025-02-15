@@ -11,12 +11,16 @@ public class RandomNumbersGenerator implements NumbersGenerator {
     public List<Integer> generate() {
         final List<Integer> numbers = new ArrayList<>();
         while (numbers.size() < Lotto.SIZE) {
-            final int number = (int) (Math.random() * (Lotto.MAX_NUMBER - 1)) + Lotto.MIN_NUMBER;
-            if (!numbers.contains(number)) {
-                numbers.add(number);
-            }
+            addUniqueRandomNumber(numbers);
         }
         Collections.sort(numbers);
         return numbers;
+    }
+
+    private void addUniqueRandomNumber(final List<Integer> numbers) {
+        final int number = (int) (Math.random() * (Lotto.MAX_NUMBER - 1)) + Lotto.MIN_NUMBER;
+        if (!numbers.contains(number)) {
+            numbers.add(number);
+        }
     }
 }
