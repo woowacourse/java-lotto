@@ -3,7 +3,7 @@ package service;
 import domain.Lotto;
 import domain.LottoRule;
 import domain.Lottos;
-import domain.Price;
+import domain.Money;
 import util.RandomGenerator;
 
 import java.util.List;
@@ -12,8 +12,8 @@ public class LottoMachine {
 
     private final int ticket;
 
-    public LottoMachine(Price price) {
-        this.ticket = price.getValue() / LottoRule.LOTTO_PRICE.getValue();
+    public LottoMachine(Money money) {
+        this.ticket = money.getValue() / LottoRule.LOTTO_PRICE.getValue();
     }
 
     public Lottos generateLottos() {

@@ -1,10 +1,10 @@
 package domain;
 
-public class Price {
+public class Money {
 
     private final int value;
 
-    public Price(String value) {
+    public Money(String value) {
         validate(value);
         this.value = Integer.parseInt(value);
     }

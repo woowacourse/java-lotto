@@ -4,7 +4,7 @@ import domain.Lotto;
 import domain.LottoRanking;
 import domain.LottoResult;
 import domain.Lottos;
-import domain.Price;
+import domain.Money;
 import domain.WinningNumberWithBonusNumber;
 import service.LottoMachine;
 import service.LottoWinningChecker;
@@ -23,24 +23,24 @@ public class LottoController {
     public void start() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         
-        Price price = getPrice(bufferedReader);
+        Money money = getMoney(bufferedReader);
 
-        LottoMachine lottoMachine = buyLottos(price);
+        LottoMachine lottoMachine = buyLottos(money);
         Lottos lottos = printLottos(lottoMachine);
 
         LottoResult lottoResult = calculateLottoResult(bufferedReader, lottos);
 
         printLottoResults(lottoResult);
-        printRateOfReturn(lottoResult, price);
+        printRateOfReturn(lottoResult, money);
     }
 
-    private Price getPrice(BufferedReader bufferedReader) throws IOException {
+    private Money getMoney(BufferedReader bufferedReader) throws IOException {
         System.out.println("구입금액을 입력해 주세요.");
-        return new Price(bufferedReader.readLine());
+        return new Money(bufferedReader.readLine());
     }
 
-    private LottoMachine buyLottos(Price price) {
-        LottoMachine lottoMachine = new LottoMachine(price);
+    private LottoMachine buyLottos(Money money) {
+        LottoMachine lottoMachine = new LottoMachine(money);
         int ticket = lottoMachine.getTicket();
         System.out.println(ticket + "개를 구매했습니다.");
         return lottoMachine;
@@ -125,8 +125,8 @@ public class LottoController {
                 .append("\n");
     }
 
-    private void printRateOfReturn(LottoResult lottoResult, Price price) {
-        double rateOfReturn = (double) lottoResult.getTotalPrize() / price.getValue();
+    private void printRateOfReturn(LottoResult lottoResult, Money money) {
+        double rateOfReturn = (double) lottoResult.getTotalPrize() / money.getValue();
         System.out.printf("총 수익률은 %.2f 입니다.", (int) (rateOfReturn * 100) / 100.0);
         if (rateOfReturn > 1) {
             System.out.print("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
