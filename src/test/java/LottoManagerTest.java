@@ -52,7 +52,7 @@ class LottoManagerTest {
         float expected = (float) totalPrices / 6000;
 
         // when
-        float result = lottoManager.getRevenue(winningResult, money);
+        float result = lottoManager.calculateRevenue(winningResult, money);
 
         // then
         assertThat(result).isEqualTo(expected);

@@ -21,7 +21,7 @@ public class LottoManager {
         return winningResult;
     }
 
-    public float getRevenue(WinningResult winningResult, Money money) {
+    public float calculateRevenue(WinningResult winningResult, Money money) {
         return (float) winningResult.getTotalPrices() / money.getValue();
     }
 }

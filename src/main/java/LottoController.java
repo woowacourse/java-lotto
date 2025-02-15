@@ -24,6 +24,6 @@ public class LottoController {
 
         WinningResult winningResult = lottoManager.getWinningResult(lottos, winningLotto);
         outputView.printWinningResult(winningResult);
-        outputView.printRevenue(lottoManager.getRevenue(winningResult, money));
+        outputView.printRevenue(lottoManager.calculateRevenue(winningResult, money));
     }
 }
