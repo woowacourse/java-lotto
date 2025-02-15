@@ -1,7 +1,11 @@
 package domain;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,15 +18,14 @@ class LottoTest {
             List<Integer> lottoNumbers, int winningNumberCount, boolean hasBonusNumber
     ) {
         Lotto lotto = new Lotto(lottoNumbers);
+        WinningLotto winningLotto = new WinningLotto(
+                List.of(1, 2, 3, 4, 5, 6), 7
+        );
 
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 7;
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        Matcher matcher = Matcher.count(winningLotto, lotto);
 
-//        MatchCounter matchCounter = lotto.getMatchDto(winningLotto);
-//
-//        assertThat(matchCounter.winningNumberCount()).isEqualTo(winningNumberCount);
-//        assertThat(matchCounter.hasBonusNumber()).isEqualTo(hasBonusNumber);
+        assertThat(matcher.getWinningNumberCount()).isEqualTo(winningNumberCount);
+        assertThat(matcher.isHasBonusNumber()).isEqualTo(hasBonusNumber);
     }
 
     public static Stream<Arguments> getLottoNumbersInputData() {
@@ -32,5 +35,12 @@ class LottoTest {
                 Arguments.of(List.of(1, 2, 3, 4, 5, 6), 6, false)
         );
     }
+
+    @Test
+    void 로또_번호가_중복되면_예외를_던진다() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 5)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 
 }

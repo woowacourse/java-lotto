@@ -5,12 +5,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class BallTest {
+public class PurchaseAmountTest {
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 46})
-    void 로또_번호가_범위가_아니면__예외를_던진다(int number) {
-        assertThatThrownBy(() -> new Ball(number))
+    @ValueSource(ints = {-1, 999, 1001})
+    void 로또_구매_금액이_범위에서_벗어나면_예외를_던진다(int money) {
+        assertThatThrownBy(() -> new PurchaseAmount(money))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

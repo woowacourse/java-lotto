@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.Collections;
 import java.util.List;
 
 public class WinningLotto {
@@ -10,18 +9,13 @@ public class WinningLotto {
 
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         this.lotto = new Lotto(winningNumbers);
+        validateUniqueBall(bonusNumber);
         this.bonusBall = new Ball(bonusNumber);
-        validateUniqueBall(lotto);
+
     }
 
-    private void validateUniqueBall(Lotto lotto) {
-        List<Ball> balls = lotto.getBalls();
-        balls.forEach(ball -> {
-            if (Collections.frequency(balls, ball) > 1) {
-                throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
-            }
-        });
-        if (balls.contains(bonusBall)) {
+    private void validateUniqueBall(int bonusNumber) {
+        if (lotto.getBallNumbers().contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
         }
     }

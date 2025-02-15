@@ -18,7 +18,15 @@ public class Lotto {
         numbers.stream()
                 .map(Ball::new)
                 .forEach(balls::add);
+        validateUniqueBall(numbers);
         this.balls = balls;
+    }
+
+    private void validateUniqueBall(List<Integer> numbers) {
+        if (numbers.stream()
+                .distinct().count() != MAX_LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+        }
     }
 
     public String getBallsString() {
