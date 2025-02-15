@@ -14,10 +14,10 @@ public class LottoController {
 
     public void run() throws IOException {
         Money money = inputView.inputMoney();
-        final int lottoCount = Lotto.getLottoCount(money);
-        outputView.printLottoCount(lottoCount);
+        final int purchasableLottoCount = Lotto.countPurchasableLottosByMoney(money);
+        outputView.printLottoCount(purchasableLottoCount);
 
-        List<Lotto> lottos = lottoManager.generateLottos(lottoCount);
+        List<Lotto> lottos = lottoManager.generateLottos(purchasableLottoCount);
         outputView.printLottos(lottos);
 
         WinningLotto winningLotto = inputView.inputWinningLotto();

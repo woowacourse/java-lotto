@@ -16,7 +16,7 @@ public class Lotto {
                 .toList();
     }
 
-    public static int getLottoCount(Money money) {
+    public static int countPurchasableLottosByMoney(Money money) {
         if (money.getValue() % PRICE.getValue() != 0) {
             throw new IllegalArgumentException(String.format("구입 금액은 %d원 단위만 가능합니다.", PRICE.getValue()));
         }
