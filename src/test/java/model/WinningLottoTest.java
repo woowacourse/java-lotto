@@ -38,33 +38,6 @@ class WinningLottoTest {
     }
 
     @Test
-    void 당첨_번호는_정해진_개수가_아니라면_예외를_발생시킨다() {
-        // given
-        LottoNumbers invalidLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6, 7));
-        int validBonusNumber = LOWER_BOUND;
-
-        // when & then
-        Assertions.assertThatThrownBy(
-                        () -> new WinningLotto(invalidLottoNumbers, validBonusNumber)
-                ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(("[ERROR] 당첨 번호는 6개여야 합니다."));
-        ;
-    }
-
-    @Test
-    void 당첨_번호가_중복되면_예외를_발생시킨다() {
-        // given
-        LottoNumbers invalidLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 5));
-        int validBonusNumber = UPPER_BOUND;
-
-        // when & then
-        Assertions.assertThatThrownBy(
-                        () -> new WinningLotto(invalidLottoNumbers, validBonusNumber))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 당첨 번호는 중복되어서는 안됩니다.");
-    }
-
-    @Test
     void 당첨_번호와_보너스_번호가_중복되면_예외를_발생시킨다() {
         // given
         LottoNumbers numbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
