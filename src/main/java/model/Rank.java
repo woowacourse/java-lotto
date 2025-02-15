@@ -27,7 +27,7 @@ public enum Rank {
     public static Rank getRank(WinningLotto winningLotto, LottoDto lottoDto) {
         int duplicateNumber = winningLotto.getDuplicateNumber(lottoDto);
         for (Rank rank : values()) {
-            if (rank.matchNumber == 5 && isBonusMatch(winningLotto.getBonus(), lottoDto)) {
+            if (duplicateNumber == 5 && isBonusMatch(winningLotto.getBonus(), lottoDto)) {
                 return SECOND;
             }
             if (rank.matchNumber == duplicateNumber) {
