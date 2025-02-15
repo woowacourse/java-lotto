@@ -1,7 +1,8 @@
 package domain;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -42,5 +43,14 @@ class LottoTest {
         //then
         assertAll(() -> assertThatThrownBy(() -> new Lotto(numbers1)).isInstanceOf(IllegalArgumentException.class),
                 () -> assertThatThrownBy(() -> new Lotto(numbers2)).isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    @DisplayName("로또 생성을 성공 한다")
+    void generateTest() {
+        //given
+        final List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        //should
+        assertThatCode(() -> new Lotto(numbers)).doesNotThrowAnyException();
     }
 }
