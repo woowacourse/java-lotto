@@ -4,18 +4,18 @@ import static constant.ExceptionMessage.DUPLICATE_BONUS_NUMBER;
 import static constant.ExceptionMessage.INVALID_BONUS_RANGE;
 import static constant.ExceptionMessage.INVALID_BONUS_FORMAT;
 import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
+import static constant.LottoConstant.LOTTO_NUMBER_MAX_RANGE;
+import static constant.LottoConstant.LOTTO_NUMBER_MIN_RANGE;
 
 public class Bonus {
-
-    private static final Integer BONUS_MIN_RANGE = 1;
-    private static final Integer BONUS_MAX_RANGE = 45;
 
     private final Integer number;
 
     public static Bonus of(final String input, final Lotto lotto) {
         validateNullOrBlank(input);
         validateInteger(input);
-        return new Bonus(Integer.parseInt(input), lotto);
+        Integer number = parseInteger(input);
+        return new Bonus(number, lotto);
     }
 
     public Bonus(final Integer number, final Lotto lotto) {
@@ -38,9 +38,14 @@ public class Bonus {
         }
     }
 
+    private static Integer parseInteger(final String input) {
+        return Integer.parseInt(input);
+    }
+
     private void validateRange(final Integer number) {
-        if ( BONUS_MIN_RANGE > number || number > BONUS_MAX_RANGE) {
-            throw new IllegalArgumentException(INVALID_BONUS_RANGE.getMessage(BONUS_MIN_RANGE, BONUS_MAX_RANGE));
+        if (LOTTO_NUMBER_MIN_RANGE > number || number > LOTTO_NUMBER_MAX_RANGE) {
+            throw new IllegalArgumentException(
+                    INVALID_BONUS_RANGE.getMessage(LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE));
         }
     }
 
