@@ -42,8 +42,8 @@ public class Bonus {
         return Integer.parseInt(input);
     }
 
-    private void validateRange(final Integer number) {
-        if (LOTTO_NUMBER_MIN_RANGE > number || number > LOTTO_NUMBER_MAX_RANGE) {
+    private void validateRange(final Integer input) {
+        if (LOTTO_NUMBER_MIN_RANGE > input || input > LOTTO_NUMBER_MAX_RANGE) {
             throw new IllegalArgumentException(
                     INVALID_BONUS_RANGE.getMessage(LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE));
         }
