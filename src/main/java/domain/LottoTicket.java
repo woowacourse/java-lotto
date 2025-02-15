@@ -9,14 +9,7 @@ public class LottoTicket {
     private final LottoNumbers lottoNumbers;
 
     public LottoTicket(LottoNumbers lottoNumbers) {
-        validateLottoSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-    }
-
-    private void validateLottoSize(LottoNumbers lottoNumbers) {
-        if (lottoNumbers.getSize() != LottoNumbers.LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
-        }
     }
 
     public int countMatchedNumbers(LottoNumbers winningNumbers) {

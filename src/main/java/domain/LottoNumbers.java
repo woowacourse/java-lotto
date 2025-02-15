@@ -10,6 +10,7 @@ public record LottoNumbers(List<Integer> numbers) {
     public LottoNumbers {
         numbers.forEach(this::validateLottoNumberRange);
         validateDuplicateNumber(numbers);
+        validateLottoSize(lottoNumbers);
     }
 
     private void validateLottoNumberRange(Integer number) {
@@ -21,6 +22,12 @@ public record LottoNumbers(List<Integer> numbers) {
     private void validateDuplicateNumber(List<Integer> numbers) {
         if (numbers.stream().distinct().count() != numbers.size()) {
             throw new IllegalArgumentException("중복된 번호가 존재합니다.");
+        }
+    }
+
+    private void validateLottoSize(LottoNumbers lottoNumbers) {
+        if (lottoNumbers.getSize() != LottoNumbers.LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
     }
 
