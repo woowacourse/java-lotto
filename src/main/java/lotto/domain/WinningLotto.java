@@ -5,19 +5,19 @@ import lotto.constant.WinningTier;
 
 public class WinningLotto {
 
-    private final int MIN_BONUS_NUMBER = 1;
-    private final int MAX_BONUS_NUMBER = 45;
+    private static final int MIN_BONUS_NUMBER = 1;
+    private static final int MAX_BONUS_NUMBER = 45;
     private final Lotto lotto;
     private final int bonusNumber;
 
     public WinningLotto(Lotto lotto, int bonusNumber) {
         this.lotto = lotto;
-        this.validateBonusNumberRange(bonusNumber, MIN_BONUS_NUMBER, MAX_BONUS_NUMBER);
+        this.validateBonusNumberRange(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateBonusNumberRange(int number, int min, int max) {
-        if (number < min || number > max) {
+    private void validateBonusNumberRange(int number) {
+        if (number < MIN_BONUS_NUMBER || number > MAX_BONUS_NUMBER) {
             throw new IllegalArgumentException(ExceptionMessage.OUT_OF_RANGE.getContent());
         }
     }

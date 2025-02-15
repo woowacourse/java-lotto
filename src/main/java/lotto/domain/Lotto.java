@@ -16,8 +16,8 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         this.validateDuplication(numbers);
-        this.validateRange(numbers, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
-        this.validateSize(numbers, LOTTO_NUMBER_COUNT);
+        this.validateRange(numbers);
+        this.validateSize(numbers);
         this.numbers = numbers.stream().sorted().toList();
     }
 
@@ -40,15 +40,16 @@ public class Lotto {
         }
     }
 
-    private void validateRange(List<Integer> numbers, int min, int max) {
-        boolean isInRange = numbers.stream().allMatch(number -> number >= min && number <= max);
+    private void validateRange(List<Integer> numbers) {
+        boolean isInRange = numbers.stream()
+                .allMatch(number -> number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER);
         if (!isInRange) {
             throw new IllegalArgumentException(ExceptionMessage.OUT_OF_RANGE.getContent());
         }
     }
 
-    private void validateSize(List<Integer> numbers, int size) {
-        if (numbers.size() != size) {
+    private void validateSize(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_NUMBER_COUNT.getContent());
         }
     }
