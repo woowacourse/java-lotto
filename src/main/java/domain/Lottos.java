@@ -25,8 +25,4 @@ public class Lottos {
 
         return new Lottos(generatedLottos);
     }
-
-    public List<OutputLottosDto> getOutputLottosDtos() {
-        return lottos.stream().map(Lotto::getOutputLottoDto).toList();
-    }
 }

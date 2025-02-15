@@ -4,6 +4,7 @@ import domain.AnswerLotto;
 import domain.Lotto;
 import domain.Lottos;
 import domain.enums.Prize;
+import dto.OutputLottosDto;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,6 +22,10 @@ public class LottoService {
     public AnswerLotto getAnswerLotto(List<Integer> selectedNumbers, int bonus) {
         Lotto answerLotto = new Lotto(selectedNumbers);
         return new AnswerLotto(answerLotto, bonus);
+    }
+
+    public List<OutputLottosDto> getOutputLottosDtos(List<Lotto> lottos) {
+        return lottos.stream().map(lotto -> new OutputLottosDto(lotto.getNumbers())).toList();
     }
 
     public Map<Prize, Integer> getPrizeResult() {

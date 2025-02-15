@@ -5,6 +5,7 @@ import domain.Lottos;
 import domain.Money;
 import domain.numbergenerator.NumberGenerator;
 import domain.numbergenerator.RandomNumberGenerator;
+import dto.OutputLottosDto;
 import java.util.List;
 import service.LottoService;
 import view.InputView;
@@ -23,7 +24,8 @@ public class LottoController {
         OutputView.printChangeMoney(money.getChange());
 
         Lottos lottos = getLottos(money.getBuyableLottoCount());
-        OutputView.printLottos(lottos.getOutputLottosDtos());
+        List<OutputLottosDto> outputLottosDtos = lottoService.getOutputLottosDtos(lottos.getLottos());
+        OutputView.printLottos(outputLottosDtos);
 
         List<Integer> answerNumbers = getAnswerNumbers();
         int bonusNumber = getBonusNumber();

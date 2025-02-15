@@ -13,6 +13,10 @@ public class Lotto {
         LottoValidator.validate(this.numbers);
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
     public static Lotto from(List<Integer> randomNumbers) {
         List<Integer> numbers = randomNumbers;
         return new Lotto(numbers);
@@ -20,10 +24,6 @@ public class Lotto {
 
     public boolean hasDuplicateNumber(final int bonusNumber) {
         return numbers.stream().anyMatch(number -> number == bonusNumber);
-    }
-
-    public OutputLottosDto getOutputLottoDto() {
-        return new OutputLottosDto(numbers);
     }
 
     public boolean has(int number) {
