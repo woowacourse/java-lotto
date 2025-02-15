@@ -50,7 +50,7 @@ class LottoFactoryTest {
         EnumMap<Prize, Integer> prizeMap = Prize.initializeMap();
         prizeMap.put(Prize.FIFTH_PLACE, 3);
 
-        double benefit = lottoFactory.getProfit(prizeMap);
+        double benefit = lottoFactory.getWinningAmount(prizeMap);
         double expected = 1.5;
         assertThat(benefit).isEqualTo(expected);
     }

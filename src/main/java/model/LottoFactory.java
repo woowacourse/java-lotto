@@ -1,8 +1,10 @@
 package model;
 
+import static constant.LottoConstant.DAMAGE;
 import static constant.LottoConstant.LOTTO_NUMBER_MAX_RANGE;
 import static constant.LottoConstant.LOTTO_PURCHASE_UNIT;
 import static constant.LottoConstant.LOTTO_TICKET_SIZE;
+import static constant.LottoConstant.PROFIT;
 import static model.Prize.initializeMap;
 
 import java.util.ArrayList;
@@ -39,11 +41,18 @@ public class LottoFactory {
         return prizes;
     }
 
-    public double getProfit(EnumMap<Prize, Integer> enumMap) {
+    public double getWinningAmount(EnumMap<Prize, Integer> prizes) {
         int principalMoney = lottoCount * LOTTO_PURCHASE_UNIT;
-        int profit = calculateProfit(enumMap);
+        int winningAmount = calculateWinningAmount(prizes);
 
-        return (double) profit / principalMoney;
+        return (double) winningAmount / principalMoney;
+    }
+
+    public String lossOrGain(double winningAmount) {
+        if (winningAmount >= 1) {
+            return PROFIT;
+        }
+        return DAMAGE;
     }
 
     private List<Lotto> issueLottoTickets() {
@@ -76,7 +85,7 @@ public class LottoFactory {
         return issuedTicketNumbers.contains(bonusNumber);
     }
 
-    private int calculateProfit(EnumMap<Prize, Integer> prizes) {
+    private int calculateWinningAmount(EnumMap<Prize, Integer> prizes) {
         return prizes.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();
