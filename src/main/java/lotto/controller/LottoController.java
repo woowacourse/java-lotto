@@ -16,14 +16,12 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    LottoGroup lottoGroup = new LottoGroup();
-
     public void run() {
         Money money = getMoney();
-        generateLotto(money);
+        LottoGroup lottoGroup = createLottoGroup(money);
         WinnerLotto winnerLotto = getWinnerLotto();
 
-        Profit profit = calculateProfit(winnerLotto);
+        Profit profit = calculateProfit(winnerLotto, lottoGroup);
         String profitRate = profit.calculateAverageProfitRate(money);
 
         OutputView.printResult(ProfitDto.from(profit), profitRate);
@@ -33,12 +31,15 @@ public class LottoController {
         return RecoveryUtils.executeWithRetry(() -> NumberUtils.parseInt(InputView.readMoney()), Money::new);
     }
 
-    private void generateLotto(Money money) {
+    private LottoGroup createLottoGroup(Money money) {
+        LottoGroup lottoGroup = LottoGroup.create();
         lottoGroup.generate(money);
         OutputView.printLottoGroup(LottoGroupDto.from(lottoGroup));
+
+        return lottoGroup;
     }
 
-    private Profit calculateProfit(WinnerLotto winnerLotto) {
+    private Profit calculateProfit(WinnerLotto winnerLotto, LottoGroup lottoGroup) {
         Profit profit = new Profit();
 
         for (Lotto lotto : lottoGroup.getItem()) {

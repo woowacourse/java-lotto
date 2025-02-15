@@ -11,6 +11,10 @@ import lotto.utils.RandomNumberUtils;
 public class LottoGroup {
     private final List<Lotto> item = new ArrayList<>();
 
+    public static LottoGroup create() {
+        return new LottoGroup();
+    }
+
     public void generate(Money money) {
         IntStream.range(0, money.getLottoTicketCount())
                 .mapToObj(index -> createLotto())
