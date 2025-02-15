@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.config.ApplicationConfiguration;
 import lotto.constant.WinningTier;
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
@@ -13,13 +12,13 @@ import java.util.List;
 public class LottoController {
 
     private final InputView inputView;
-    private final LottoService lottoService;
     private final OutputView outputView;
+    private final LottoService lottoService;
 
-    public LottoController(ApplicationConfiguration applicationConfiguration) {
-        this.inputView = applicationConfiguration.getInputView();
-        this.lottoService = applicationConfiguration.getLottoService();
-        this.outputView = applicationConfiguration.getOutputView();
+    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.lottoService = lottoService;
     }
 
     public void run() {
