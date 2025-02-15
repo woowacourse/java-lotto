@@ -9,15 +9,23 @@ import org.junit.jupiter.api.Test;
 
 class LottoMachineTest {
 
+    static class FixNumberPickStrategy implements NumberPickStrategy {
+        int index = 0;
+        List<Integer> numbers = List.of(1, 2, 2, 3, 3, 3, 4, 5, 6);
+
+        @Override
+        public int pickNumber(int min, int max) {
+            return numbers.get(index++);
+        }
+    }
+
     @Test
     void 로또를_생성할_수_있다() {
         //given
-        NumberPickStrategy fixNumberStrategy = (int maxNumber, int size) -> List.of(1, 2, 3, 4, 5, 6);
-        LottoMachine lottoMachine = new LottoMachine(fixNumberStrategy);
+        LottoMachine lottoMachine = new LottoMachine(new FixNumberPickStrategy());
 
         //when
         Lotto lotto = lottoMachine.createLotto();
-
         //then
         assertThat(lotto)
                 .extracting("numbers")

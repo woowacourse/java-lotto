@@ -10,12 +10,23 @@ import org.junit.jupiter.api.Test;
 
 class LottoStoreTest {
 
+    static class FixNumberPickStrategy implements NumberPickStrategy {
+        int index = 0;
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+
+        @Override
+        public int pickNumber(int min, int max) {
+            int number = numbers.get(index++);
+            index %= numbers.size();
+            return number;
+        }
+    }
+
     @Test
     void 돈을_이용해_로또를_살_수_있다() {
         //given
         Money money = new Money(3000);
-        NumberPickStrategy fixNumberStrategy = (int maxNumber, int size) -> List.of(1, 2, 3, 4, 5, 6);
-        LottoMachine lottoMachine = new LottoMachine(fixNumberStrategy);
+        LottoMachine lottoMachine = new LottoMachine(new FixNumberPickStrategy());
         LottoStore lottoStore = new LottoStore(lottoMachine);
 
         //when
@@ -37,7 +48,7 @@ class LottoStoreTest {
     void 구입금액이_1000원_단위가_아니라면_예외가_발생한다() {
         //given
         Money money = new Money(1500);
-        LottoMachine lottoMachine = new LottoMachine((maxNumber, size) -> List.of(1, 2, 3, 4, 5, 6));
+        LottoMachine lottoMachine = new LottoMachine(new FixNumberPickStrategy());
         LottoStore lottoStore = new LottoStore(lottoMachine);
 
         //when
