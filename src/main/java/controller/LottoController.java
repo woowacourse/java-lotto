@@ -21,12 +21,21 @@ public class LottoController {
 
         OutputView.printBuyQuantity(userMoney / LOTTO_PRICE_PER_ONE);
         OutputView.printRandomLotto(lottoRepository);
-
-        UserLotto userLotto = new UserLotto(InputView.inputWinningNumbers());
+        
+        UserLotto userLotto = createUserLotto();
         BonusNumber bonusNumber = isDuplicateBonusNumber(userLotto);
 
         calculateResultAndPrintResult(userMoney, lottoRepository, userLotto, bonusNumber);
 
+    }
+
+    private static UserLotto createUserLotto(){
+        try{
+            return new UserLotto(InputView.inputWinningNumbers());
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return createUserLotto();
+        }
     }
 
     private static void buyLottoForUserMoney(LottoRepository lottoRepository, int userMoney) {
@@ -54,7 +63,7 @@ public class LottoController {
             RankType.updateMapByWinningCount(rankTypeMap, userLotto.calculateRank(lotto), bonusNumber.isBonusNumber(lotto));
         }
 
-        OutputView.printResult(RankType.makeLottoResult(rankTypeMap));
+        OutputView.printResult(rankTypeMap);
 
         OutputView.printWinningRate(calculateWinningRate(userMoney,rankTypeMap));
     }
