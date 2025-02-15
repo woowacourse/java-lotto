@@ -3,9 +3,10 @@ package controller;
 import controller.dto.LottoDtoMapper;
 import controller.dto.WinningLottoRequest;
 import java.util.List;
+import model.LottoNumbers;
 import model.LottoRankResult;
 import model.LottoStore;
-import model.LottoNumbers;
+import model.PaidAmount;
 import model.WinningLotto;
 import view.LottoConsoleView;
 
@@ -22,15 +23,15 @@ public class LottoController {
     }
 
     public void run() {
-        List<LottoNumbers> lottoNumbers = createLottoTickets();
+        PaidAmount paidAmount = new PaidAmount(lottoConsoleView.readPaidAmount());
+        List<LottoNumbers> lottoNumbers = createLottoTickets(paidAmount);
         WinningLotto winningLotto = createWinningLotto();
 
         LottoRankResult lottoRankResult = calculateRank(lottoNumbers, winningLotto);
-        calculateProfitRate(lottoNumbers.size(), lottoRankResult);
+        calculateProfitRate(paidAmount, lottoRankResult);
     }
 
-    private List<LottoNumbers> createLottoTickets() {
-        int paidAmount = lottoConsoleView.readPaidAmount();
+    private List<LottoNumbers> createLottoTickets(PaidAmount paidAmount) {
         List<LottoNumbers> lottoNumbers = lottoStore.purchase(paidAmount);
 
         lottoConsoleView.printPurchasedTicketAmount(lottoNumbers.size());
@@ -50,8 +51,8 @@ public class LottoController {
         return lottoRankResult;
     }
 
-    private void calculateProfitRate(int lottoTicketCount, LottoRankResult lottoRankResult) {
-        double profitRate = lottoStore.calculateProfitRate(lottoTicketCount, lottoRankResult);
+    private void calculateProfitRate(PaidAmount paidAmount, LottoRankResult lottoRankResult) {
+        double profitRate = lottoStore.calculateProfitRate(paidAmount, lottoRankResult);
         lottoConsoleView.printProfitRate(profitRate);
     }
 }

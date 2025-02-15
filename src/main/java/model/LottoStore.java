@@ -5,9 +5,6 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class LottoStore {
-
-    private static final int LOTTO_PRICE = 1_000;
-
     private final LottoNumberGenerator lottoNumberGenerator;
     private final LottoRankCalculator lottoRankCalculator;
 
@@ -16,10 +13,8 @@ public class LottoStore {
         this.lottoRankCalculator = lottoRankCalculator;
     }
 
-    public List<LottoNumbers> purchase(final int paidAmount) {
-        validateAmountUnit(paidAmount);
-
-        int purchasedTicketAmount = paidAmount / LOTTO_PRICE;
+    public List<LottoNumbers> purchase(PaidAmount paidAmount) {
+        int purchasedTicketAmount = paidAmount.getUnitCount();
         return IntStream.range(0, purchasedTicketAmount)
                 .mapToObj(count -> new LottoNumbers(lottoNumberGenerator.generate()))
                 .toList();
@@ -36,22 +31,15 @@ public class LottoStore {
         return lottoRankResult;
     }
 
-    public double calculateProfitRate(int lottoTicketCount, LottoRankResult lottoRankResult) {
-        int paidAmount = lottoTicketCount * LOTTO_PRICE;
+    public double calculateProfitRate(PaidAmount paidAmount, LottoRankResult lottoRankResult) {
         int profit = lottoRankResult.getRanks().stream()
                 .mapToInt(rank -> rank.getPrizeMoney() * lottoRankResult.getCountByRank(rank)).sum();
 
-        return (double) profit / paidAmount;
+        return (double) profit / paidAmount.getAmount();
     }
 
     private List<LottoRank> calculateRank(List<LottoNumbers> lottoNumbers, WinningLotto winningLotto) {
         return lottoNumbers.stream().map(lottoTicket -> lottoRankCalculator.calculate(lottoTicket, winningLotto))
                 .filter(Objects::nonNull).toList();
-    }
-
-    private void validateAmountUnit(int paidAmount) {
-        if (paidAmount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("[ERROR] 구입 금액은 1000원 단위여야 합니다.");
-        }
     }
 }
