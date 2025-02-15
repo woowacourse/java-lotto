@@ -1,16 +1,21 @@
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class WinningLottoTest {
 
     @Test
-    void 당첨번호와_보너스번호가_중복되는_경우_예외() {
+    @DisplayName("당첨 번호에 보너스 번호가 존재하면 예외가 발생한다")
+    void should_throw_exception_when_bonus_number_is_in_winning_numbers() {
         // given
         Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Number bonusNumber = new Number(1);
@@ -21,36 +26,40 @@ class WinningLottoTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("당첨 번호의 매칭 개수를 확인할 수 있다.")
-    @Test
-    void test1() {
-        // given
-        Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Number bonus = new Number(7);
-        Lotto lotto = new Lotto(List.of(4, 5, 6, 7, 44, 45));
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
+    static Stream<Arguments> correctMatchedCountArguments() {
+        return Stream.of(arguments(new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Number(7)),
+                        new Lotto(List.of(1, 2, 3, 43, 44, 45)), 3),
+                arguments(new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Number(7)),
+                        new Lotto(List.of(1, 2, 3, 7, 44, 45)), 3)
 
+        );
+    }
+
+    @ParameterizedTest
+    @DisplayName("로또 번호가 주어졌을 때 적중 개수를 정확히 반환한다")
+    @MethodSource("correctMatchedCountArguments")
+    void should_return_correct_matched_count(WinningLotto winningLotto, Lotto lotto, int expected) {
         // when
         final int matchedCount = winningLotto.getMatchedCount(lotto);
 
         // then
-        assertThat(matchedCount).isEqualTo(3);
+        assertThat(matchedCount).isEqualTo(expected);
     }
 
-    @DisplayName("보너스 번호의 매칭 여부를 확인할 수 있다.")
     @ParameterizedTest
+    @DisplayName("로또 번호가 주어졌을 때 보너스 번호의 적중 여부를 정확히 반환한다")
     @CsvSource(value = {"6, true", "7, false"})
-    void test2(int bonusNumber, boolean expected) {
+    void should_return_correct_bonus_match(int bonusNumber, boolean expected) {
         // given
         Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 45));
         Number bonus = new Number(bonusNumber);
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         // when
-        final boolean matched = winningLotto.isMatchBonus(lotto);
+        final boolean isBonusMatched = winningLotto.isMatchBonus(lotto);
 
         // then
-        assertThat(matched).isEqualTo(expected);
+        assertThat(isBonusMatched).isEqualTo(expected);
     }
 }
