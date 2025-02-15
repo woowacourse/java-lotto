@@ -8,10 +8,10 @@ import domain.Money;
 import domain.WinningNumberWithBonusNumber;
 import service.LottoMachine;
 import service.LottoWinningChecker;
+import view.InputHandler;
+import view.OutputHandler;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -20,60 +20,66 @@ import java.util.stream.Collectors;
 
 public class LottoController {
 
+    private final InputHandler inputHandler;
+    private final OutputHandler outputHandler;
+    private final LottoMachine lottoMachine;
+    private final LottoWinningChecker lottoWinningChecker;
+
+    public LottoController(InputHandler inputHandler,
+                           OutputHandler outputHandler,
+                           LottoMachine lottoMachine,
+                           LottoWinningChecker lottoWinningChecker) {
+        this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
+        this.lottoMachine = lottoMachine;
+        this.lottoWinningChecker = lottoWinningChecker;
+    }
+
     public void start() throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        
-        Money money = getMoney(bufferedReader);
+        Money money = getMoney();
 
-        LottoMachine lottoMachine = buyLottos(money);
-        Lottos lottos = printLottos(lottoMachine);
+        Lottos lottos = lottoMachine.buyLottos(money);
+        printLottos(lottos);
 
-        LottoResult lottoResult = calculateLottoResult(bufferedReader, lottos);
+        WinningNumberWithBonusNumber winningNumberWithBonusNumber = getWinningNumberWithBonusNumber();
+
+        LottoResult lottoResult = lottoWinningChecker.calculateResult(lottos, winningNumberWithBonusNumber);
 
         printLottoResults(lottoResult);
         printRateOfReturn(lottoResult, money);
     }
 
-    private Money getMoney(BufferedReader bufferedReader) throws IOException {
-        System.out.println("구입금액을 입력해 주세요.");
-        return new Money(bufferedReader.readLine());
+    private Money getMoney() throws IOException {
+        String money = inputHandler.readMoney();
+        return new Money(money);
     }
 
-    private LottoMachine buyLottos(Money money) {
-        LottoMachine lottoMachine = new LottoMachine(money);
-        int ticket = lottoMachine.getTicket();
-        System.out.println(ticket + "개를 구매했습니다.");
-        return lottoMachine;
-    }
-
-    private Lottos printLottos(LottoMachine lottoMachine) {
-        Lottos lottos = lottoMachine.generateLottos();
+    private void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.toString());
         }
         System.out.println();
-        return lottos;
     }
 
-    private LottoResult calculateLottoResult(BufferedReader bufferedReader, Lottos lottos) throws IOException {
-        WinningNumberWithBonusNumber winningNumberWithBonusNumber
-                = new WinningNumberWithBonusNumber(getWinningNumber(bufferedReader), getBonusNumber(bufferedReader));
-
-        LottoResult lottoResult = LottoWinningChecker.calculateResult(lottos, winningNumberWithBonusNumber);
-        return lottoResult;
+    private WinningNumberWithBonusNumber getWinningNumberWithBonusNumber() throws IOException {
+        return new WinningNumberWithBonusNumber(
+                getWinningNumber(),
+                getBonusNumber());
     }
 
-    private Lotto getWinningNumber(BufferedReader bufferedReader) throws IOException {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new Lotto(Arrays.stream(bufferedReader.readLine().split(","))
+    private Lotto getWinningNumber() throws IOException {
+        String winningNumber = inputHandler.readWinningNumber();
+
+        return new Lotto(Arrays.stream(winningNumber.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList()));
     }
 
-    private int getBonusNumber(BufferedReader bufferedReader) throws IOException {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        return Integer.parseInt(bufferedReader.readLine());
+    private int getBonusNumber() throws IOException {
+        String bonusNumber = inputHandler.readBonusNumber();
+
+        return Integer.parseInt(bonusNumber);
     }
 
     private void printLottoResults(LottoResult lottoResult) {
@@ -126,7 +132,7 @@ public class LottoController {
     }
 
     private void printRateOfReturn(LottoResult lottoResult, Money money) {
-        double rateOfReturn = (double) lottoResult.getTotalPrize() / money.getValue();
+        double rateOfReturn = (double) lottoResult.getTotalPrize() / money.getAmount();
         System.out.printf("총 수익률은 %.2f 입니다.", (int) (rateOfReturn * 100) / 100.0);
         if (rateOfReturn > 1) {
             System.out.print("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
