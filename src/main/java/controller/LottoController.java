@@ -11,12 +11,9 @@ import view.OutputView;
 
 public class LottoController {
 
-    public LottoController() {
-    }
-
     public void run() {
-        LottoPurchase purchaseLotto = InputView.getPurchaseLotto();
-        LottoService lottoService = LottoService.of(purchaseLotto.getAmount());
+        LottoPurchase lottoPurchase = InputView.getPurchaseLotto();
+        LottoService lottoService = LottoService.of(lottoPurchase.getAmount());
 
         OutputView.printLottoCount(lottoService);
         OutputView.printLottoTickets(lottoService);
