@@ -58,10 +58,6 @@ public class OutputView {
         System.out.println(content);
     }
 
-    public void printLine(String content) {
-        System.out.println(content);
-    }
-
     public void printBlankLine() {
         System.out.println();
     }
