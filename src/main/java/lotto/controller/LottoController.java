@@ -35,7 +35,7 @@ public class LottoController {
     }
 
     private void processLottoGeneration(Money money) {
-        lottoGroup.generate(money);
+        lottoGroup.processLottoTicketGeneration(money);
         OutputView.printLottoGroup(LottoGroupDto.from(lottoGroup));
     }
 
