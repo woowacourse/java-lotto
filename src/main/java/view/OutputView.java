@@ -18,12 +18,13 @@ public class OutputView {
     public void printBonusNumbersInstruction() {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
+
     public void printLottoCount(int lottoCount) {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
     public void printLottos(List<Lotto> lottos) {
-        for(Lotto lotto : lottos) {
+        for (Lotto lotto : lottos) {
             System.out.println(lotto.getNumbers().stream().sorted().toList());
         }
     }
@@ -31,10 +32,22 @@ public class OutputView {
     public void printWinningResult(WinningResult winningResult) {
         System.out.println("\n당첨 통계\n---------");
         for (WinningStatus winningStatus : winningResult.getWinningResults().keySet()) {
-            if(winningStatus == WinningStatus.NONE) continue;
+            if (winningStatus == WinningStatus.NONE) {
+                continue;
+            }
             int winningCount = winningResult.getWinningResults().get(winningStatus);
-            System.out.printf("%s - %d개\n", winningStatus.getExpression(), winningCount);
+            String winningStatusExpression = decideExpression(winningStatus);
+            System.out.printf("%s (%d원) - %d개\n"
+                    , winningStatusExpression, winningStatus.getPrice(), winningCount);
         }
+    }
+
+    private String decideExpression(WinningStatus winningStatus) {
+        StringBuilder expression = new StringBuilder(String.format("%d개 일치", winningStatus.getMatchingCount()));
+        if (winningStatus.matchesBonusNumber()) {
+            expression.append(", 보너스 볼 일치");
+        }
+        return expression.toString();
     }
 
     public void printEarningRate(double earningRate) {
