@@ -1,7 +1,7 @@
 package domain;
 
 import exception.AppException;
-import exception.ErrorMessage;
+import exception.ExceptionMessage;
 import java.util.List;
 
 public class WinningNumber {
@@ -17,7 +17,7 @@ public class WinningNumber {
 
     private void validateDuplicate(final Lotto winningLotto, final BonusNumber bonusNumber) {
         if (winningLotto.getNumbers().contains(bonusNumber.getValue())) {
-            throw new AppException(ErrorMessage.INVALID_WINNING_NUMBER_DUPLICATE);
+            throw new AppException(ExceptionMessage.INVALID_WINNING_NUMBER_DUPLICATE);
         }
     }
 

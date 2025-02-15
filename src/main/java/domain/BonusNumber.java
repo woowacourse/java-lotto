@@ -1,7 +1,7 @@
 package domain;
 
 import exception.AppException;
-import exception.ErrorMessage;
+import exception.ExceptionMessage;
 
 public class BonusNumber {
 
@@ -14,7 +14,7 @@ public class BonusNumber {
 
     private void validateRange(final int number) {
         if (number < Lotto.MIN_NUMBER || number > Lotto.MAX_NUMBER) {
-            throw new AppException(ErrorMessage.INVALID_BONUS_NUMBER_RANGE);
+            throw new AppException(ExceptionMessage.INVALID_BONUS_NUMBER_RANGE);
         }
     }
 

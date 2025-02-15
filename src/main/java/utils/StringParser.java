@@ -1,6 +1,6 @@
 package utils;
 
-import exception.ErrorMessage;
+import exception.ExceptionMessage;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,18 +10,18 @@ public class StringParser {
 
     }
 
-    public static int parseToNumber(final String input, final ErrorMessage errorMessage) {
+    public static int parseToNumber(final String input, final ExceptionMessage exceptionMessage) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(errorMessage.getMessage());
+            throw new IllegalArgumentException(exceptionMessage.getMessage());
         }
     }
 
     public static List<Integer> parseToNumbers(final String input, final String delimiter,
-                                               final ErrorMessage errorMessage) {
+                                               final ExceptionMessage exceptionMessage) {
         return Arrays.stream(input.split(delimiter))
-                .map(token -> parseToNumber(token, errorMessage))
+                .map(token -> parseToNumber(token, exceptionMessage))
                 .toList();
     }
 }

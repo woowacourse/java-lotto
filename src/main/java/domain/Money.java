@@ -1,7 +1,7 @@
 package domain;
 
 import exception.AppException;
-import exception.ErrorMessage;
+import exception.ExceptionMessage;
 
 public class Money {
 
@@ -20,13 +20,13 @@ public class Money {
 
     private void validateAmount(final int amount) {
         if (amount % UNIT != 0) {
-            throw new AppException(ErrorMessage.INVALID_MONEY_UNIT);
+            throw new AppException(ExceptionMessage.INVALID_MONEY_UNIT);
         }
     }
 
     private void validateRange(final int amount) {
         if (amount < UNIT) {
-            throw new AppException(ErrorMessage.INVALID_MONEY_RANGE);
+            throw new AppException(ExceptionMessage.INVALID_MONEY_RANGE);
         }
     }
 

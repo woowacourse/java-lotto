@@ -1,6 +1,6 @@
 package exception;
 
-public enum ErrorMessage {
+public enum ExceptionMessage {
     INVALID_MONEY_FORMAT("구입 금액은 숫자여야 합니다."),
     INVALID_BONUS_NUMBER_FORMAT("보너스 넘버는 숫자여야 합니다."),
     INVALID_BONUS_NUMBER_RANGE("보너스 번호는 1부터 45 사이 숫자여야 합니다."),
@@ -15,7 +15,7 @@ public enum ErrorMessage {
     private static final String PREFIX = "[ERROR] ";
     private final String message;
 
-    ErrorMessage(final String message) {
+    ExceptionMessage(final String message) {
         this.message = PREFIX + message;
     }
 
