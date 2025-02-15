@@ -1,8 +1,10 @@
 package domain;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -29,7 +31,15 @@ class MoneyTest {
         //then
         assertThatThrownBy(() -> new Money(number)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
+    }
 
+    @Test
+    @DisplayName("구입 금액 생성을 성공 한다")
+    void generateTest() {
+        //given
+        final int number = 14000;
+        //should
+        assertThatCode(() -> new Money(number)).doesNotThrowAnyException();
     }
 
 }
