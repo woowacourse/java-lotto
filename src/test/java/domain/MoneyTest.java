@@ -52,16 +52,17 @@ public class MoneyTest {
   public void success_4() {
     int input = 10000;
     Money money = new Money(input);
-    Map<LottoMatch, Integer> result = Stream.of(new Object[][]{
-        {DEFUALT_MATCH, 7},
-        {THREE_MATCH, 1},
-        {FOUR_MATCH, 2},
-        {FIVE_MATCH, 0},
-        {FIVE_BONUS_MATCH, 0},
-        {SIX_MATCH, 0}
-    }).collect(Collectors.toMap(item -> (LottoMatch) item[0], item -> (Integer) item[1]));
+    Map<LottoMatch, Integer> result = Map.of(
+            DEFUALT_MATCH, 7,
+            THREE_MATCH, 1,
+            FOUR_MATCH, 2,
+            FIVE_MATCH, 0,
+            FIVE_BONUS_MATCH, 0,
+            SIX_MATCH, 0
+    );
 
-    double profit = money.calculateProfit((HashMap<LottoMatch, Integer>) result);
+    double profit = money.calculateProfit(result);
     Assertions.assertThat(profit).isEqualTo(10.50);
   }
+
 }
