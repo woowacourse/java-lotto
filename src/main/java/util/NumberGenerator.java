@@ -7,11 +7,11 @@ import java.util.Random;
 import java.util.Set;
 
 public class NumberGenerator {
-    public static List<Integer> pickUniqueRandomNumbers(int min, int max, int count) {
-        Random random = new Random();
+
+    public static List<Integer> pickUniqueNumbersInRange(int min, int max, int count, NumberPickStrategy numberPickStrategy) {
         Set<Integer> uniqueNumbers = new HashSet<>();
         while (uniqueNumbers.size() < count) {
-            uniqueNumbers.add(random.nextInt(max) + min);
+            uniqueNumbers.add(numberPickStrategy.pickInRange(min, max));
         }
         return new ArrayList<>(uniqueNumbers);
     }

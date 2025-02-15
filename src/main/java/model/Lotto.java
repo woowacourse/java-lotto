@@ -8,7 +8,6 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        // TODO : 로또 번호 검증 로직 추가 (중복)
         this.numbers = numbers;
     }
 

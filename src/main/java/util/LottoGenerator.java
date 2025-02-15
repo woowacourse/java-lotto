@@ -4,6 +4,7 @@ import static model.LottoConstants.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import model.Lotto;
 
 public class LottoGenerator {
@@ -18,8 +19,15 @@ public class LottoGenerator {
 
     private static void addNotDuplicatedLotto(List<Lotto> lottos) {
         try {
-            List<Integer> randomNumbers = NumberGenerator.pickUniqueRandomNumbers(
-                    MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT);
+            List<Integer> randomNumbers = NumberGenerator.pickUniqueNumbersInRange(
+                    MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT, new NumberPickStrategy() {
+                        private final Random random = new Random();
+
+                        @Override
+                        public int pickInRange(int min, int max) {
+                            return random.nextInt(max) + min;
+                        }
+                    });
             validateDuplication(randomNumbers, lottos);
             lottos.add(new Lotto(randomNumbers));
         } catch (IllegalStateException e) {
