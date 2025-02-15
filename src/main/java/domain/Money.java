@@ -13,11 +13,11 @@ public class Money {
         return amount;
     }
 
-    private void validate(String value) {
-        int price = parseAndValidateNumber(value);
+    private void validate(String amount) {
+        int money = parseAndValidateNumber(amount);
 
-        validateZeroAmount(price);
-        validateMultipleOfLottoPrice(price);
+        validateZeroAmount(money);
+        validateMultipleOfLottoPrice(money);
     }
 
     private static void validateMultipleOfLottoPrice(int price) {
