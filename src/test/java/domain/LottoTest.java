@@ -1,5 +1,6 @@
 package domain;
 
+import domain.numbergenerator.FakeNumberGenerator;
 import domain.numbergenerator.RandomNumberGenerator;
 import java.util.List;
 import org.assertj.core.api.Assertions;

@@ -1,7 +1,6 @@
 package domain;
 
 import domain.numbergenerator.NumberGenerator;
-import dto.OutputLottosDto;
 import java.util.ArrayList;
 import java.util.List;
 
