@@ -1,4 +1,4 @@
-package error;
+package exception;
 
 public enum ErrorMessage {
     INVALID_MONEY_FORMAT("구입 금액은 숫자여야 합니다."),

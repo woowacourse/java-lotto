@@ -2,7 +2,7 @@ package view;
 
 import domain.BonusNumber;
 import domain.Money;
-import error.ErrorMessage;
+import exception.ErrorMessage;
 import java.util.List;
 import java.util.Scanner;
 import utils.StringParser;

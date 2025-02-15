@@ -1,7 +1,7 @@
 package domain;
 
-import error.AppException;
-import error.ErrorMessage;
+import exception.AppException;
+import exception.ErrorMessage;
 
 public class Money {
 

@@ -51,7 +51,7 @@
 #### Money
 - [X] 구입 금액을 저장
 
-### error
+### exception
 #### AppException
 - [X] `IllegalArgumentException` 의 하위 클래스
 

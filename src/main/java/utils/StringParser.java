@@ -1,6 +1,6 @@
 package utils;
 
-import error.ErrorMessage;
+import exception.ErrorMessage;
 import java.util.Arrays;
 import java.util.List;
 
