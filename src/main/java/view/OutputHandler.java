@@ -12,26 +12,23 @@ import java.util.Map;
 
 public class OutputHandler {
 
-    public void printLottos(Lottos lottos) {
-        StringBuilder stringBuilder = new StringBuilder();
+    public void printLottoCount(int count) {
+        System.out.printf("%d개를 구매했습니다.%n", count);
+    }
 
-        stringBuilder
-                .append(lottos.getLottoCount())
-                .append("개를 구매했습니다.")
-                .append("\n");
+    public void printLottosInfo(Lottos lottos) {
+        System.out.println(
+                String.join("\n", lottos.getLottos().stream()
+                        .map(Lotto::toString)
+                        .toList()));
 
-        for (Lotto lotto : lottos.getLottos()) {
-            stringBuilder
-                    .append(lotto.toString())
-                    .append("\n");
-        }
-
-        System.out.println(stringBuilder);
+        System.out.println();
     }
 
     public void printLottoResults(LottoResult lottoResult) {
-        StringBuilder stringBuilder = new StringBuilder();
-        printBanner(stringBuilder);
+        printBanner();
+
+        StringBuilder lottoResultMessage = new StringBuilder();
 
         Map<LottoRanking, Integer> result = lottoResult.result();
         result.remove(LottoRanking.LOSING);
@@ -41,51 +38,62 @@ public class OutputHandler {
                 .toList();
 
         for (LottoRanking lottoRanking : lottoRankings) {
-            printCorrectCount(lottoRanking);
-            stringBuilder.append(formatLottoRanking(lottoRanking, result));
+            lottoResultMessage
+                    .append(lottoRanking.getCorrectCount())
+                    .append("개 일치")
+                    .append(buildLottoRanking(lottoRanking, result));
         }
 
-        System.out.println(stringBuilder.toString().trim());
-    }
-
-    private void printBanner(StringBuilder stringBuilder) {
-        stringBuilder.append("\n")
-                .append("당첨 통계")
-                .append("\n")
-                .append("---------")
-                .append("\n");
-    }
-
-    private void printCorrectCount(LottoRanking lottoRanking) {
-        System.out.println(lottoRanking.getCorrectCount() + "개 일치 ");
-    }
-
-    private String formatLottoRanking(LottoRanking lottoRanking, Map<LottoRanking, Integer> result) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("(")
-                .append(lottoRanking.getPrize())
-                .append("원) - ")
-                .append(result.getOrDefault(lottoRanking, 0))
-                .append("개");
-
-        if (lottoRanking == LottoRanking.SECOND) {
-            sb.append(", 보너스 볼 일치");
-        }
-
-        sb.append("\n");
-        return sb.toString();
+        System.out.println(lottoResultMessage.toString().trim());
     }
 
     public void printRateOfReturn(LottoResult lottoResult, Money money) {
         double rateOfReturn = (double) lottoResult.getTotalPrize() / money.getAmount();
-        System.out.printf("총 수익률은 %.2f 입니다.", (int) (rateOfReturn * 100) / 100.0);
+        double formattedRate = (int) (rateOfReturn * 100) / 100.0;
 
-        if (rateOfReturn > 1) {
-            System.out.println("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
-        } else if (rateOfReturn == 1) {
-            System.out.println("(기준이 1이기 때문에 결과적으로 동등이라는 의미임)");
-        } else {
-            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.printf("총 수익률은 %.2f 입니다.", formattedRate);
+
+        printRateMessage(rateOfReturn);
+    }
+
+    private void printBanner() {
+        System.out.printf(String.format("%n당첨 통계%n--------- %n"));
+    }
+
+    private String buildLottoRanking(LottoRanking lottoRanking, Map<LottoRanking, Integer> result) {
+        StringBuilder lottoRankingMessage = new StringBuilder();
+
+        appendBonusBallMessage(lottoRanking, lottoRankingMessage);
+
+        lottoRankingMessage
+                .append(String.format("(%d원)- ", lottoRanking.getPrize()))
+                .append(String.format("%d개", result.get(lottoRanking)));
+
+        lottoRankingMessage.append("\n");
+        return lottoRankingMessage.toString();
+    }
+
+    private void appendBonusBallMessage(LottoRanking lottoRanking, StringBuilder lottoRankingMessage) {
+        if (lottoRanking == LottoRanking.SECOND) {
+            lottoRankingMessage.append(", 보너스 볼 일치");
+            return;
         }
+        lottoRankingMessage.append(" ");
+    }
+
+    private static void printRateMessage(double rateOfReturn) {
+        String resultType = getResultType(rateOfReturn);
+
+        System.out.printf("(기준이 1이기 때문에 결과적으로 %s라는 의미임)%n", resultType);
+    }
+
+    private static String getResultType(double rateOfReturn) {
+        if (rateOfReturn < 1) {
+            return "손해";
+        }
+        if (rateOfReturn > 1) {
+            return "이득이";
+        }
+        return "동등이";
     }
 }
