@@ -5,25 +5,21 @@ import java.util.EnumMap;
 
 public enum Prize {
 
-    match_none("", 0, 0, false),
-    match_three("3개 일치 (5000원)", 3, 5_000, false),
-    match_four("4개 일치 (50000원)", 4, 50_000, false),
-    match_five("5개 일치 (1500000원)", 5, 1_500_000, false),
-    match_five_and_bonus("5개 일치, 보너스 볼 일치 (30000000원)", 5, 30_000_000, true),
-    match_six("6개 일치 (2000000000원)", 6, 2_000_000_000, false);
+    LAST_PLACE(0, 0, false),
+    FIFTH_PLACE(3, 5_000, false),
+    FOUR_PLACE(4, 50_000, false),
+    THIRD_PLACE(5, 1_500_000, false),
+    SECOND_PLACE(5, 30_000_000, true),
+    FIRST_PLACE(6, 2_000_000_000, false);
 
-    private final String comment;
     private final Integer matchCount;
-    private final Integer prizeAmount;
-    private final boolean matchesBonus;
+    private final Integer prizeMoney;
+    private final boolean bonusMatch;
 
-    //TODO : matchesBonus
-
-    Prize(final String comment, final Integer matchCount, final Integer prizeAmount, final boolean matchesBonus) {
-        this.comment = comment;
+    Prize(final Integer matchCount, final Integer prizeMoney, final boolean bonusMatch) {
         this.matchCount = matchCount;
-        this.prizeAmount = prizeAmount;
-        this.matchesBonus = matchesBonus;
+        this.prizeMoney = prizeMoney;
+        this.bonusMatch = bonusMatch;
     }
 
     public static EnumMap<Prize, Integer> initializeMap() {
@@ -35,20 +31,14 @@ public enum Prize {
     }
 
     public static Prize find(int matchCount, boolean matchesBonusNumber) {
-        if (matchCount == Prize.match_five_and_bonus.matchCount && matchesBonusNumber) {
-            return Prize.match_five_and_bonus;
-        }
         return Arrays.stream(Prize.values())
-                .filter(o -> o.matchCount == matchCount)
+                .filter(prize -> prize.matchCount == matchCount &&
+                        (prize.bonusMatch == matchesBonusNumber || !prize.bonusMatch))
                 .findFirst()
-                .orElse(Prize.match_none);
+                .orElse(Prize.LAST_PLACE);
     }
 
-    public String getComment() {
-        return comment;
-    }
-
-    public Integer getPrizeAmount() {
-        return prizeAmount;
+    public Integer getPrizeMoney() {
+        return prizeMoney;
     }
 }

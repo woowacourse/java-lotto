@@ -52,7 +52,7 @@ public class LottoService {
             Prize foundPrize = Prize.find(matchCount, matchesBonus);
             prizeMap.put(foundPrize, prizeMap.get(foundPrize) + 1);
         }
-        prizeMap.remove(Prize.match_none);
+        prizeMap.remove(Prize.LAST_PLACE);
         return prizeMap;
     }
 
@@ -76,7 +76,7 @@ public class LottoService {
     private Integer calculateBenefit(EnumMap<Prize, Integer> enumMap) {
         Integer benefit = 0;
         for (Prize prize : enumMap.keySet()) {
-            benefit += enumMap.get(prize) * prize.getPrizeAmount();
+            benefit += enumMap.get(prize) * prize.getPrizeMoney();
         }
         return benefit;
     }

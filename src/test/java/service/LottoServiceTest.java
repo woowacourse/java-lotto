@@ -47,7 +47,7 @@ class LottoServiceTest {
     @DisplayName("수익률은 당첨합계 / 원금 이어야 한다.")
     void validBenefit() {
         EnumMap<Prize, Integer> prizeMap = Prize.initializeMap();
-        prizeMap.put(Prize.match_three, 3);
+        prizeMap.put(Prize.FIFTH_PLACE, 3);
 
         double benefit = lottoService.getBenefit(prizeMap);
         double expected = 1.5;
