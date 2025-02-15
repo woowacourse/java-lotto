@@ -11,7 +11,7 @@ public class Lotto {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
 
-    private List<Ball> balls;
+    private final List<Ball> balls;
 
     public Lotto(List<Integer> numbers) {
         List<Ball> balls = new ArrayList<>();

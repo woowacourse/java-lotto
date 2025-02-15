@@ -1,6 +1,6 @@
 package view;
 
-import domain.WinningCount;
+import domain.WinningCounter;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -17,17 +17,17 @@ public class OutputView {
         System.out.println(ballNumbers.getLast() + "]");
     }
 
-    public void printWinningStatistics(List<WinningCount> winningCounts) {
-        winningCounts.stream()
+    public void printWinningStatistics(List<WinningCounter> winningCounters) {
+        winningCounters.stream()
                 .map(this::printWinningInfo)
                 .forEach(System.out::println);
     }
 
-    private String printWinningInfo(WinningCount winningCount) {
+    private String printWinningInfo(WinningCounter winningCounter) {
         return String.format("%d개 일치 (%d원)- %d개",
-                winningCount.winningStatistics().getMatchCount(),
-                winningCount.winningStatistics().getPrizeMoney(),
-                winningCount.count());
+                winningCounter.getWinningStatistics().getMatchCount(),
+                winningCounter.getWinningStatistics().getPrizeMoney(),
+                winningCounter.getCount());
     }
 
     public void printYield(double yield) {

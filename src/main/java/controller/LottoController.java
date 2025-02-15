@@ -3,9 +3,9 @@ package controller;
 import domain.Lottos;
 import domain.Matcher;
 import domain.PurchaseAmount;
-import domain.WinningCount;
+import domain.WinningCounter;
 import domain.WinningLotto;
-import domain.WinningStatistics;
+import domain.Yield;
 import java.util.List;
 import view.InputView;
 import view.OutputView;
@@ -29,8 +29,8 @@ public class LottoController {
         int bonusNumber = inputView.askBonusNumber();
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        List<WinningCount> winningCounts = matchAndCountWinningLottos(winningLotto, lottos);
-        calculateYield(purchaseAmount.getMoney(), winningCounts);
+        List<WinningCounter> winningCounters = matchAndCountWinningLottos(winningLotto, lottos);
+        calculateYield(purchaseAmount.getMoney(), winningCounters);
     }
 
     private Lottos issueLottos(int purchaseAmount) {
@@ -45,19 +45,19 @@ public class LottoController {
         return lottos;
     }
 
-    private List<WinningCount> matchAndCountWinningLottos(WinningLotto winningLotto, Lottos lottos) {
+    private List<WinningCounter> matchAndCountWinningLottos(WinningLotto winningLotto, Lottos lottos) {
         List<Matcher> matchers = lottos.getLottos().stream()
                 .map(lotto -> Matcher.count(winningLotto, lotto))
                 .toList();
 
-        List<WinningCount> winningCounts = WinningStatistics.calculateWinningCount(matchers);
-        outputView.printWinningStatistics(winningCounts);
+        List<WinningCounter> winningCounters = WinningCounter.count(matchers);
+        outputView.printWinningStatistics(winningCounters);
 
-        return winningCounts;
+        return winningCounters;
     }
 
-    private void calculateYield(int purchaseAmount, List<WinningCount> winningCounts) {
-        double yield = WinningStatistics.calculateYield(purchaseAmount, winningCounts);
-        outputView.printYield(yield);
+    private void calculateYield(int purchaseAmount, List<WinningCounter> winningCounters) {
+        Yield yield = Yield.calculate(purchaseAmount, winningCounters);
+        outputView.printYield(yield.getYield());
     }
 }
