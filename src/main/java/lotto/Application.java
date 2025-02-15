@@ -1,13 +1,16 @@
 package lotto;
 
-import lotto.common.config.DependencyConfig;
 import lotto.controller.Controller;
+import lotto.service.LottoService;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        DependencyConfig dependencyConfig = new DependencyConfig();
-
-        Controller controller = dependencyConfig.getController();
+        InputView inputView = new InputView();
+        OutputView outputView = new OutputView();
+        LottoService lottoService = new LottoService();
+        Controller controller = new Controller(inputView, outputView, lottoService);
         controller.run();
     }
 }
