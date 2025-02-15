@@ -11,21 +11,35 @@
 
 ## 기능 목록
 - [x] 구입 금액을 입력할 수 있다.
+  - [x] 구입 금액이 숫자가 아니면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+  - [x] 구입 금액이 1000원으로 나누어지지 않으면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+  - [x] 구입 금액이 양수가 아니라면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+  - [x] 구입 금액이 10만원을 넘으면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+  
+ 
 - [x] 구입 금액에 해당하는 개수의 로또를 발행할 수 있다.
-- [x] 로또는 1 ~ 45 사이 6개 숫자를 랜덤으로 생성하여 발행한다.
-- [x] 발행된 로또를 출력한다.
-- [x] 당첨 번호를 입력받는다.
-- [x] 보너스 번호를 입력받는다.
-- [x] 당첨 금액 별 당첨 개수를 계산한다.
-- [x] 당첨 수익률을 계산한다.
-- [x] 당첨 통계를 출력한다
+  
 
-## 예외
-- [x] 구입 금액이 숫자가 아니면 IllegalArgumentException을 발생시키고, 재입력 받는다.
-- [x] 구입 금액이 1000원으로 나누어지지 않으면 IllegalArgumentException을 발생시키고, 재입력 받는다.
-- [x] 구입 금액이 양수가 아니라면 IllegalArgumentException을 발생시키고, 재입력 받는다.
-- [x] 구입 금액이 10만원을 넘으면 IllegalArgumentException을 발생시키고, 재입력 받는다.
-- [x] 입력한 당첨 번호가 1 ~ 45 사이가 아니면 IllegalArgumentException을 발생시키고, 재입력 받는다.
-- [x] 입력한 보너스 번호가 1 ~ 45 사이가 아니면 IllegalArgumentException을 발생시키고, 재입력 받는다.
-- [x] 입력한 당첨 번호가 고유한 6개의 번호가 아니라면 IllegalArgumentException을 발생시키고, 재입력 받는다.
-- [x] 입력한 보너스 번호가 당첨 번호와 중복된다면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+- [x] 로또는 1 ~ 45 사이 6개 숫자를 랜덤으로 생성하여 발행한다.
+  
+
+- [x] 발행된 로또를 출력한다.
+  
+
+- [x] 당첨 번호를 입력받는다.
+  - [x] 입력한 당첨 번호가 1 ~ 45 사이가 아니면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+  - [x] 입력한 당첨 번호가 고유한 6개의 번호가 아니라면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+  
+
+- [x] 보너스 번호를 입력받는다.
+  - [x] 입력한 보너스 번호가 1 ~ 45 사이가 아니면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+  - [x] 입력한 보너스 번호가 당첨 번호와 중복된다면 IllegalArgumentException을 발생시키고, 재입력 받는다.
+
+
+- [x] 당첨 금액 별 당첨 개수를 계산한다.
+  
+
+- [x] 당첨 수익률을 계산한다.
+  
+
+- [x] 당첨 통계를 출력한다
