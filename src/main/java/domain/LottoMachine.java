@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import util.NumberPicker;
 
@@ -25,10 +24,10 @@ public class LottoMachine {
         return new LottoMachine(purchaseMoney, numberPicker);
     }
 
-    public List<Lotto> issueLottos() {
+    public Lottos issueLottos() {
         int lottoCount = calculateTicketCount();
         List<Lotto> lottos = isssueLottoBy(lottoCount);
-        return Collections.unmodifiableList(lottos);
+        return new Lottos(lottos);
     }
 
     private List<Lotto> isssueLottoBy(int lottoCount) {

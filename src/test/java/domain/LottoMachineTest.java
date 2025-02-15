@@ -58,10 +58,10 @@ class LottoMachineTest {
         LottoMachine lottoMachine = LottoMachine.of(purchaseMoney, numberPicker);
 
         // when
-        List<Lotto> result = lottoMachine.issueLottos();
+        Lottos result = lottoMachine.issueLottos();
 
         // then
-        assertThat(result).hasSize(4);
+        assertThat(result.getLottos()).hasSize(4);
     }
 
 }

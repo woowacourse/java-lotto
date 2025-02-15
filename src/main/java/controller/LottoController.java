@@ -1,6 +1,5 @@
 package controller;
 
-import domain.Lotto;
 import domain.LottoMachine;
 import domain.Lottos;
 import java.util.List;
@@ -21,14 +20,13 @@ public class LottoController {
         int purchaseMoney = inputPurchaseMoney();
 
         LottoMachine lottoMachine = LottoMachine.of(purchaseMoney, new RandomNumberPicker(new Random()));
-        List<Lotto> purchasedLottos = lottoMachine.issueLottos();
+        Lottos lottos = lottoMachine.issueLottos();
 
         outputView.printLottos(purchasedLottos);
 
         List<Integer> matchNumbers = inputMatchLottoNumbers();
         int bonusNumber = inputBonusNumber();
 
-        Lottos lottos = new Lottos(purchasedLottos);
         outputView.printStaticsLotto(lottos.getStatistics(matchNumbers, bonusNumber));
         outputView.printIncomeRate(lottos.getIncomeRate(matchNumbers, bonusNumber, purchaseMoney));
     }
