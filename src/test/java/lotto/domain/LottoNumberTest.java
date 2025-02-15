@@ -7,13 +7,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoNumberTest {
     @Test
     void 랜덤으로_숫자를_생성한다() {
         NumberGenerator generator = (i, j) -> 3;
-        assertThat(LottoNumber.random(generator))
+        assertThat(LottoNumber.generate(generator))
             .isEqualTo(new LottoNumber(3));
     }
 

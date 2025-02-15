@@ -20,7 +20,7 @@ public class Lotto {
     public Lotto(NumberGenerator generator) {
         Set<LottoNumber> set = new TreeSet<>();
         while (set.size() < LOTTO_NUMBER_COUNT) {
-            set.add(LottoNumber.random(generator));
+            set.add(LottoNumber.generate(generator));
         }
         numbers = new ArrayList<>(set);
     }

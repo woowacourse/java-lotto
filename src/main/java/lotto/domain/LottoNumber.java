@@ -22,7 +22,7 @@ public record LottoNumber(
         }
     }
 
-    public static LottoNumber random(NumberGenerator generator) {
+    public static LottoNumber generate(NumberGenerator generator) {
         return new LottoNumber(generator.generate(MINIMUM, MAXIMUM));
     }
 
