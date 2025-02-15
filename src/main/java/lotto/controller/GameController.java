@@ -28,12 +28,16 @@ public class GameController {
     private LottoMoney saveLottoMoney() {
         LottoMoney lottoMoney = null;
         while (lottoMoney == null) {
-            lottoMoney = ObjectCreator.useInputToCreateObject(() -> {
-                String money = InputView.readLottoMoney();
-                return new LottoMoney(money);
-            });
+            lottoMoney = createLottoMoney();
         }
         return lottoMoney;
+    }
+
+    private LottoMoney createLottoMoney() {
+        return ObjectCreator.useInputToCreateObject(() -> {
+            String money = InputView.readLottoMoney();
+            return new LottoMoney(money);
+        });
     }
 
     private LottoMachine buyLottoTickets(LottoMoney lottoMoney) {
@@ -52,23 +56,31 @@ public class GameController {
     private Lotto storeWinningLottoNumbers() {
         Lotto lotto = null;
         while (lotto == null) {
-            lotto = ObjectCreator.useInputToCreateObject(() -> {
-                String numbers = InputView.readWinningNumbers();
-                return new Lotto(numbers);
-            });
+            lotto = createWinningLottoNumbers();
         }
         return lotto;
+    }
+
+    private Lotto createWinningLottoNumbers() {
+        return ObjectCreator.useInputToCreateObject(() -> {
+            String numbers = InputView.readWinningNumbers();
+            return new Lotto(numbers);
+        });
     }
 
     private WinningLotto storeWinningLottoBonus(Lotto winningNumbers) {
         WinningLotto winningLotto = null;
         while (winningLotto == null) {
-            winningLotto = ObjectCreator.useInputToCreateObject(() -> {
-                String bonus = InputView.readBonusBall();
-                return new WinningLotto(winningNumbers, bonus);
-            });
+            winningLotto = createWinningLottoWithBonus(winningNumbers);
         }
         return winningLotto;
+    }
+
+    private WinningLotto createWinningLottoWithBonus(Lotto winningNumbers){
+        return ObjectCreator.useInputToCreateObject(() -> {
+            String bonus = InputView.readBonusBall();
+            return new WinningLotto(winningNumbers, bonus);
+        });
     }
 
     private LottoResult checkLottoResult(WinningLotto winningLotto, List<Lotto> lottoTickets, LottoMoney lottoMoney) {
