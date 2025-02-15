@@ -2,6 +2,7 @@ package service;
 
 import error.ErrorMessage;
 import factory.LottoFactory;
+import java.util.ArrayList;
 import java.util.List;
 import model.Lotto;
 import model.Lottos;
@@ -14,18 +15,13 @@ public class LottoGenerateService {
         validatePurchaseAmount(purchaseAmount);
         int count = purchaseAmount / PRICE;
 
-        Lottos lottos = new Lottos();
+        List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            insertLotto(lottos);
+            lottos.add(LottoFactory.createRandomLotto());
         }
 
-        return lottos;
-    }
-
-    private void insertLotto(Lottos lottos) {
-        Lotto lotto = LottoFactory.createRandomLotto();
-        lottos.addLotto(lotto);
+        return new Lottos(lottos);
     }
 
     private void validatePurchaseAmount(int purchaseAmount) {
