@@ -20,7 +20,7 @@ public class LottoController {
 
     public void run() {
         Money money = getMoney();
-        generateLotto(money);
+        processLottoGeneration(money);
         WinnerLotto winnerLotto = getWinnerLotto();
 
         Profit profit = calculateProfit(winnerLotto);
@@ -33,7 +33,7 @@ public class LottoController {
         return RecoveryUtils.executeWithRetry(InputView::readMoney, Money::new);
     }
 
-    private void generateLotto(Money money) {
+    private void processLottoGeneration(Money money) {
         lottoGroup.generate(money);
         OutputView.printLottoGroup(LottoGroupDto.from(lottoGroup));
     }
