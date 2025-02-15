@@ -9,6 +9,7 @@ import static constant.WinningCount.THREE;
 import constant.WinningCount;
 import dto.IssuedLottoDto;
 import dto.IssuedLottosDto;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -18,9 +19,12 @@ public class OutputView {
         List<IssuedLottoDto> lottos = lottosDto.lottos();
         System.out.println(lottos.size() + "개를 구매했습니다.");
         lottos.forEach(lotto ->
-                printLotto(lotto.numbers())
+                printLotto(getSortedNumbers(lotto.numbers()))
         );
+    }
 
+    private static List<Integer> getSortedNumbers(List<Integer> numbers) {
+        return new ArrayList<>(numbers).stream().sorted().collect(Collectors.toList());
     }
 
     private static void printLotto(List<Integer> lotto) {
