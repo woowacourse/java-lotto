@@ -14,6 +14,10 @@ public class Lottos {
         addLottos(ticketAmount);
     }
 
+    public Lottos(final List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
+    }
+
     public LottosResponse createResponse() {
         return new LottosResponse(
                 lottos.stream()
