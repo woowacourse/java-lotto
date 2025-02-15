@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class RankTest {
@@ -16,6 +17,24 @@ class RankTest {
     @ParameterizedTest
     void findMatchingRank(int matchingCount, boolean hasBonus, Rank expected) {
         assertThat(Rank.findBy(matchingCount, hasBonus)).isEqualTo(expected);
+    }
+
+    @DisplayName("해당 랭크가 당첨인지 미당첨인지 알려준다.")
+    @CsvSource(value = {
+            "NONE,true", "FIRST,false"
+    })
+    @ParameterizedTest
+    void isNoneOrNot(Rank rank, boolean expected) {
+        assertThat(rank.isNone()).isEqualTo(expected);
+    }
+
+    @DisplayName("해당 랭크가 보너스 번호가 필요한지 알려준다.")
+    @CsvSource(value = {
+            "SECOND,true", "THIRD,false"
+    })
+    @ParameterizedTest
+    void isNeedBonusNumber(Rank rank, boolean expected) {
+        assertThat(rank.hasBonus()).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideRankCategory() {
