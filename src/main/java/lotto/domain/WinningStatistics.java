@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.Map;
 
 public class WinningStatistics {
-    private final Map<Prize, Integer> winningStatistics;
+    private final Map<Rank, Integer> winningStatistics;
 
-    public WinningStatistics(final Map<Prize, Integer> winningStatistics) {
+    public WinningStatistics(final Map<Rank, Integer> winningStatistics) {
         this.winningStatistics = winningStatistics;
     }
 
@@ -16,13 +16,13 @@ public class WinningStatistics {
 
     private int calculateTotal() {
         int total = 0;
-        for (final Prize prize : winningStatistics.keySet()) {
-            total += winningStatistics.get(prize) * prize.getWinningAmount();
+        for (final Rank rank : winningStatistics.keySet()) {
+            total += winningStatistics.get(rank) * rank.getWinningAmount();
         }
         return total;
     }
 
-    public int getPrizeCount(final Prize prize) {
-        return winningStatistics.get(prize);
+    public int getRankCount(final Rank rank) {
+        return winningStatistics.get(rank);
     }
 }

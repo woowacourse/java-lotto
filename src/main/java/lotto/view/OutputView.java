@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Prize;
+import lotto.domain.Rank;
 import lotto.domain.WinningStatistics;
 
 import java.util.List;
@@ -22,8 +22,8 @@ public class OutputView {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-        for (final Prize prize : Prize.values()) {
-            printDetail(prize, winningStatistics.getPrizeCount(prize));
+        for (final Rank rank : Rank.values()) {
+            printDetail(rank, winningStatistics.getRankCount(rank));
         }
 
         printReturnRate(returnRate);
@@ -36,19 +36,19 @@ public class OutputView {
         }
     }
 
-    private static void printDetail(final Prize prize, final int getPrizeCount) {
-        if (prize == Prize.NONE) {
+    private static void printDetail(final Rank rank, final int getPrizeCount) {
+        if (rank == Rank.NONE) {
             return;
         }
 
-        if (prize == Prize.SECOND) {
+        if (rank == Rank.SECOND) {
             System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개",
-                    prize.getMatchCount(), prize.getWinningAmount(), getPrizeCount));
+                    rank.getMatchCount(), rank.getWinningAmount(), getPrizeCount));
             return;
         }
 
         System.out.println(String.format("%d개 일치 (%d원) - %d개",
-                prize.getMatchCount(), prize.getWinningAmount(), getPrizeCount));
+                rank.getMatchCount(), rank.getWinningAmount(), getPrizeCount));
     }
 
     public static void printErrorMessage(final String errorMessage) {
