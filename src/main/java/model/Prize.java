@@ -5,12 +5,12 @@ import java.util.EnumMap;
 
 public enum Prize {
 
-    LAST_PLACE(0, 0, false),
-    FIFTH_PLACE(3, 5_000, false),
-    FOUR_PLACE(4, 50_000, false),
-    THIRD_PLACE(5, 1_500_000, false),
+    FIRST_PLACE(6, 2_000_000_000, false),
     SECOND_PLACE(5, 30_000_000, true),
-    FIRST_PLACE(6, 2_000_000_000, false);
+    THIRD_PLACE(5, 1_500_000, false),
+    FOUR_PLACE(4, 50_000, false),
+    FIFTH_PLACE(3, 5_000, false),
+    LAST_PLACE(0, 0, false);
 
     private final Integer matchCount;
     private final Integer prizeMoney;
@@ -30,12 +30,12 @@ public enum Prize {
         return enumMap;
     }
 
-    public static Prize find(int matchCount, boolean matchesBonusNumber) {
-        return Arrays.stream(Prize.values())
-                .filter(prize -> prize.matchCount == matchCount &&
-                        (prize.bonusMatch == matchesBonusNumber || !prize.bonusMatch))
+    public static Prize find(int matchCount, boolean bonusMatch) {
+        return Arrays.stream(values())
+                .filter(prize -> prize.matchCount == matchCount)
+                .filter(prize -> !prize.bonusMatch || bonusMatch)
                 .findFirst()
-                .orElse(Prize.LAST_PLACE);
+                .orElse(LAST_PLACE);
     }
 
     public Integer getPrizeMoney() {
