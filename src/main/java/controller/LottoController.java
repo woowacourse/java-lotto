@@ -1,6 +1,6 @@
 package controller;
 
-import domain.Buyer;
+import domain.LottoFactory;
 import domain.LottoMatch;
 import domain.Money;
 import domain.WinningLotto;
@@ -23,11 +23,11 @@ public class LottoController {
   public void run() {
     Money money = creaeteMoney();
 
-    Buyer buyer = new Buyer(money);
-    outputView.displayLottos(money.calculateTotalLotto(), buyer.createResult());
+    LottoFactory lottoFactory = new LottoFactory(money);
+    outputView.displayLottos(money.calculateTotalLotto(), lottoFactory.createResult());
 
     WinningLotto winningLotto = createWinningLotto();
-    HashMap<LottoMatch, Integer> lottoResult = buyer.countLottos(winningLotto);
+    HashMap<LottoMatch, Integer> lottoResult = lottoFactory.countLottos(winningLotto);
     outputView.displayResult(lottoResult);
 
     double profit = money.calculateProfit(lottoResult);

@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class Buyer {
+public class LottoFactory {
 
   private Money money;
   private List<Lotto> lottos = new ArrayList<>();
 
-  public Buyer(Money money) {
+  public LottoFactory(Money money) {
     this.money = money;
     createLottos();
   }
