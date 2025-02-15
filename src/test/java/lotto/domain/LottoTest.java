@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.common.constant.Constant.*;
+import static lotto.common.constant.BusinessRule.*;
 import static lotto.common.constant.ErrorMessage.*;
 import static org.assertj.core.api.Assertions.*;
 

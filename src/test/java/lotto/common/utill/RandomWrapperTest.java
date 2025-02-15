@@ -1,6 +1,6 @@
 package lotto.common.utill;
 
-import static lotto.common.constant.Constant.*;
+import static lotto.common.constant.BusinessRule.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.Field;
