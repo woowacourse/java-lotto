@@ -17,6 +17,7 @@ public class OutputView {
         response.lottos().stream()
             .map(LottosResponse.InnerLotto::numbers)
             .forEach(System.out::println);
+        System.out.println();
     }
 
     public void printResult(ResultResponse response) {
