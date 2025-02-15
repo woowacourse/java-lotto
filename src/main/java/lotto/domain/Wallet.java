@@ -10,12 +10,11 @@ public class Wallet {
         this.lottos = lottos;
     }
 
-    public List<MatchResult> getMatchResults(Lotto matchLotto, int bonus) {
+    public List<MatchResult> getMatchResults(WinningInform winningInform) {
         List<MatchResult> matchResults = new ArrayList<>();
-
         for (Lotto lotto : lottos) {
-            MatchResult dto = lotto.countMatchingNumbers(matchLotto, bonus);
-            matchResults.add(dto);
+            MatchResult matchResult = winningInform.match(lotto);
+            matchResults.add(matchResult);
         }
 
         return matchResults;

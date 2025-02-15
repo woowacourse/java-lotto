@@ -4,53 +4,49 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import lotto.dto.WinningInform;
 
 public class LottoStatistics {
     private final Map<MatchRank, Integer> rankCounts;
+    private final long totalPrize;
 
-    private LottoStatistics(Map<MatchRank, Integer> rankCounts) {
+    private LottoStatistics(Map<MatchRank, Integer> rankCounts, long totalPrize) {
         this.rankCounts = Collections.unmodifiableMap(rankCounts);
+        this.totalPrize = totalPrize;
     }
 
     public static LottoStatistics from(Wallet wallet, WinningInform winningInform) {
-        Map<MatchRank, Integer> tempCounts = new EnumMap<>(MatchRank.class);
+        List<MatchResult> results = wallet.getMatchResults(winningInform);
+        Map<MatchRank, Integer> rankCounts = calculateRankCounts(results);
+        long totalPrize = calculateTotalPrize(rankCounts);
+        return new LottoStatistics(rankCounts, totalPrize);
+    }
+
+    private static Map<MatchRank, Integer> calculateRankCounts(List<MatchResult> results) {
+        Map<MatchRank, Integer> counts = new EnumMap<>(MatchRank.class);
         for (MatchRank rank : MatchRank.values()) {
-            tempCounts.put(rank, 0);
+            counts.put(rank, 0);
         }
 
-        List<MatchResult> matchResults = wallet.getMatchResults(
-                winningInform.matchLotto(),
-                winningInform.bonusNumber()
-        );
-
-        for (MatchResult matchResult : matchResults) {
-            MatchRank rank = MatchRank.getMatchRank(
-                    matchResult.matchCount(),
-                    matchResult.isBonusMatched()
-            );
-            tempCounts.merge(rank, 1, Integer::sum);
+        for (MatchResult result : results) {
+            MatchRank rank = MatchRank.getMatchRank(result.matchCount(), result.isBonusMatched());
+            counts.put(rank, counts.getOrDefault(rank, 0) + 1);
         }
-
-        return new LottoStatistics(tempCounts);
+        return counts;
     }
 
-    public int getCountOf(MatchRank rank) {
-        return rankCounts.getOrDefault(rank, 0);
-    }
-
-    public Profit calculateProfit(Money spentMoney) {
-        long totalPrize = calculateTotalPrize();
-        return Profit.from(totalPrize, spentMoney.getMoney());
-    }
-
-    private long calculateTotalPrize() {
-        long total = 0;
+    private static long calculateTotalPrize(Map<MatchRank, Integer> rankCounts) {
+        long sum = 0;
         for (Map.Entry<MatchRank, Integer> entry : rankCounts.entrySet()) {
-            MatchRank rank = entry.getKey();
-            int count = entry.getValue();
-            total += rank.getMoney() * count;
+            sum += (long) entry.getKey().getMoney() * entry.getValue();
         }
-        return total;
+        return sum;
+    }
+
+    public Map<MatchRank, Integer> getRankCounts() {
+        return rankCounts;
+    }
+
+    public long getTotalPrize() {
+        return totalPrize;
     }
 }

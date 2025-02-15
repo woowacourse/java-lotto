@@ -2,6 +2,7 @@ package lotto.view;
 
 import static lotto.domain.MatchRank.*;
 
+import java.util.Map;
 import lotto.domain.LottoStatistics;
 import lotto.domain.MatchRank;
 import lotto.domain.Profit;
@@ -18,6 +19,7 @@ public class OutputView {
     }
 
     private void printStatics(LottoStatistics statistics) {
+        Map<MatchRank, Integer> rankCounts = statistics.getRankCounts();
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
@@ -26,7 +28,7 @@ public class OutputView {
                 continue;
             }
             String output = rank.getMatchData();
-            int count = statistics.getCountOf(rank);
+            int count = rankCounts.get(rank);
             System.out.println(output + count + "개");
         }
     }
