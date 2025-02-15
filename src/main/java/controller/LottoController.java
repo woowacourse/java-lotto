@@ -2,74 +2,59 @@ package controller;
 
 import java.util.List;
 import java.util.Scanner;
-import model.Lotto;
+import model.LottoResult;
+import model.LottoShop;
 import model.Lottos;
 import model.WinnerNumber;
-import service.LottoService;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-    private final LottoService lottoService;
-    private static Scanner sc = new Scanner(System.in);
-
-
-    public LottoController(LottoService lottoService) {
-        this.lottoService = lottoService;
-    }
+    private static final Scanner scanner = new Scanner(System.in);
 
     public void run() {
-        int price = getPrice();
-        int lottoAmount = getLottoAmount(price);
-        Lottos lottos = getLottos(lottoAmount);
+        LottoShop lottoShop = new LottoShop();
+        int price = inputPrice();
+        printLottoAmount(lottoShop, price);
+        Lottos lottos = lottoShop.buyLottos(price);
+        printPurchasedLotto(lottos);
 
-        List<Integer> winnerNumbers = getWinnerNumbers();
-
-        int bonusBall = getBonusBall(winnerNumbers);
-
+        List<Integer> winnerNumbers = inputWinnerNumbers();
+        int bonusBall = inputBonusBall(winnerNumbers);
         WinnerNumber winnerNumber = new WinnerNumber(winnerNumbers, bonusBall);
 
-        compareWinning(lottos, winnerNumber);
-        double result = lottoService.lottoRateOfReturn(price);
+        winnerNumber.compareLottoToWinning(lottos);
+        double result = LottoResult.lottoRateOfReturn(price);
 
         OutputView.winningStatistics(result);
-        sc.close();
+        scanner.close();
     }
 
-    private void compareWinning(Lottos lottos, WinnerNumber winnerNumber) {
-        for (Lotto lotto : lottos.getLottos()) {
-            winnerNumber.compareWinning(lotto);
-        }
+    private int inputPrice() {
+        OutputView.inputPurchaseAmount();
+        String inputPrice = scanner.nextLine();
+        return InputView.inputPrice(inputPrice);
     }
 
-    private int getBonusBall(List<Integer> winnerNumbers) {
-        OutputView.inputBonusBall();
-        String inputBonusBall = sc.nextLine();
-        return InputView.inputBonusBall(inputBonusBall, winnerNumbers);
+    private void printLottoAmount(LottoShop lottoShop, int price) {
+        int lottoAmount = lottoShop.calculateLottoAmount(price);
+        OutputView.printPurchaseCount(lottoAmount);
     }
 
-    private List<Integer> getWinnerNumbers() {
+    private void printPurchasedLotto(Lottos lottos) {
+        OutputView.printLottoResults(lottos);
+    }
+
+    private List<Integer> inputWinnerNumbers() {
         OutputView.inputWinnerNumbers();
-        String inputWinnerNumbers = sc.nextLine();
+        String inputWinnerNumbers = scanner.nextLine();
         return InputView.inputWinnerNumbers(inputWinnerNumbers);
 
     }
 
-    private Lottos getLottos(int lottoAmount) {
-        Lottos lottos = new Lottos(lottoAmount);
-        OutputView.printLottoResults(lottos);
-        return lottos;
-    }
-
-    private int getLottoAmount(int price) {
-        int lottoAmount = lottoService.lottoCount(price);
-        OutputView.printPurchaseCount(lottoAmount);
-        return lottoAmount;
-    }
-
-    private int getPrice() {
-        OutputView.inputPurchaseAmount();
-        String inputPrice = sc.nextLine();
-        return InputView.inputPrice(inputPrice);
+    private int inputBonusBall(List<Integer> winnerNumbers) {
+        OutputView.inputBonusBall();
+        String inputBonusBall = scanner.nextLine();
+        return InputView.inputBonusBall(inputBonusBall, winnerNumbers);
     }
 }
