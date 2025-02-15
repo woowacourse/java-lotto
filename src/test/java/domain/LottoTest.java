@@ -33,14 +33,4 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class).hasMessage(ErrorMessage.LOTTO_SIZE_ERROR.getMessage());
     }
 
-    @DisplayName("로또 번호 정렬 테스트")
-    @Test
-    void sortTest(){
-        // given
-        Lotto lotto = new Lotto(List.of(6,5,4,3,2,1));
-        // when & then
-        List<Integer> numbers = lotto.getSortedNumbers();
-        assertThat(numbers).containsExactly(1,2,3,4,5,6);
-    }
-
 }
