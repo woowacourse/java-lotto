@@ -36,13 +36,12 @@ public enum RankType {
 
     public static void updateMapByWinningCount(Map<RankType,Integer> map, int matchCount, boolean bonusBall) {
         for (RankType rankType : map.keySet()) {
-            if (rankType.winningCount == matchCount) {
-                updateMap(map, bonusBall, rankType);
-            }
+            updateMap(map, bonusBall, rankType, matchCount);
         }
     }
 
-    private static void updateMap(Map<RankType, Integer> map, boolean bonusBall, RankType rankType) {
+    private static void updateMap(Map<RankType, Integer> map, boolean bonusBall, RankType rankType, int matchCount) {
+        if (rankType.winningCount != matchCount) return;
         if (rankType.winningCount == 5) {
             checkSecondAndThird(rankType, map, bonusBall);
             return;
