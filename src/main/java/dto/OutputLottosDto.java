@@ -8,8 +8,4 @@ public record OutputLottosDto(List<Integer> lottos) {
         LottoValidator.validate(lottos);
         this.lottos = lottos;
     }
-
-    private static void checkSort() {
-
-    }
 }
