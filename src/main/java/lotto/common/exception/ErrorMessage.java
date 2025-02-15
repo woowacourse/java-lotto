@@ -8,7 +8,7 @@ public class ErrorMessage {
     public static final String ERROR_MONEY_NOT_DIVIDED = PREFIX + "돈이 천 원으로 나누어떨어지지 않습니다.";
     public static final String ERROR_DUPLICATE_WINNING_AND_BONUS = PREFIX + "보너스 번호가 중복됩니다.";
     public static final String ERROR_BONUS_OUT_OF_RANGE = PREFIX + "보너스 번호의 범위는 1에서 45 사이여야 합니다.";
-    public static final String ERROR_NOT_NUMBER = PREFIX + "숫자가 아닙니다.";
+    public static final String ERROR_NUMBER_NOT_VALID = PREFIX + "유효한 숫자 입력이 아닙니다.";
     public static final String ERROR_LOTTO_NUMBER_DUPLICATE = PREFIX + "당첨 번호에 중복된 번호가 존재합니다.";
     public static final String ERROR_MATCH_NUMBER_NOT_VALID = PREFIX + "matchNumber가 범위를 초과했습니다";
 
