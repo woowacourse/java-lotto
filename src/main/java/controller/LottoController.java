@@ -67,6 +67,6 @@ public class LottoController {
     private void printLottoResult(final LottoResult lottoResult, final Ticket ticket) {
         outputView.printLottoResult(lottoResult.createResponse());
         int totalPrice = lottoResult.calculateTotalPrice();
-        outputView.printROIResult(ticket.createROIResponse(totalPrice));
+        outputView.printReturnOfInvestmentResult(ticket.createReturnOfInvestmentResponse(totalPrice));
     }
 }
