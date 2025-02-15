@@ -36,13 +36,6 @@ public enum WinningInfo {
                 .toList();
     }
 
-    public String getInfo() {
-        if (this == WinningInfo.SECOND_PRIZE) {
-            return String.format("%d개 일치, 보너스 볼 일치 (%d원)", matchedNumberCount, price);
-        }
-        return String.format("%d개 일치 (%d원)", matchedNumberCount, price);
-    }
-
     public int getMatchedNumberCount() {
         return matchedNumberCount;
     }

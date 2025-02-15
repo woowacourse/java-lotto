@@ -18,16 +18,21 @@ public class OutputView {
     }
 
     public void printWinningResult(WinningResult winningResult) {
-        List<WinningInfo> sortedWinningInfo = WinningInfo.getSortedValues();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("당첨 통계\n");
         stringBuilder.append("---------\n");
-        for (WinningInfo winningInfo : sortedWinningInfo) {
-            stringBuilder.append(String.format("%s - %d개\n"
-                    , winningInfo.getInfo()
-                    , winningResult.getCount(winningInfo)));
+        for (WinningInfo winningInfo : WinningInfo.getSortedValues()) {
+            stringBuilder.append(formatWinningInfoMessage(winningInfo));
+            stringBuilder.append(String.format(" - %d개\n", winningResult.getCount(winningInfo)));
         }
         System.out.println(stringBuilder);
+    }
+
+    private String formatWinningInfoMessage(WinningInfo winningInfo) {
+        if (winningInfo == WinningInfo.SECOND_PRIZE) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원)", winningInfo.getMatchedNumberCount(), winningInfo.getPrice());
+        }
+        return String.format("%d개 일치 (%d원)", winningInfo.getMatchedNumberCount(), winningInfo.getPrice());
     }
 
     public void printRevenue(float revenue) {
