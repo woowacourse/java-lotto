@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import model.Lotto;
+import model.LottoShop;
 
 public class InputView {
 
     private static final String DELIMITER = ",";
 
+    private InputView() {
+
+    }
 
     public static int inputPrice(String inputPrice) {
         int price = validateInteger(inputPrice);
@@ -21,18 +26,8 @@ public class InputView {
 
         String[] splitInput = inputWinnerNumbers.split(DELIMITER);
 
-        List<Integer> winnerNumbers = getWinnerNumbers(splitInput);
+        List<Integer> winnerNumbers = convertWinnerNumbers(splitInput);
         validateDuplicateValue(winnerNumbers);
-        return winnerNumbers;
-    }
-
-    private static List<Integer> getWinnerNumbers(String[] splitInput) {
-        List<Integer> winnerNumbers = new ArrayList<>();
-        for (String s : splitInput) {
-            int number = validateInteger(s);
-            validateNumberRange(number);
-            winnerNumbers.add(number);
-        }
         return winnerNumbers;
     }
 
@@ -45,6 +40,16 @@ public class InputView {
         validateNumberRange(bonusBall);
         validateDuplicateBonusBall(winnerNumbers, bonusBall);
         return bonusBall;
+    }
+
+    private static List<Integer> convertWinnerNumbers(String[] splitInput) {
+        List<Integer> winnerNumbers = new ArrayList<>();
+        for (String s : splitInput) {
+            int number = validateInteger(s);
+            validateNumberRange(number);
+            winnerNumbers.add(number);
+        }
+        return winnerNumbers;
     }
 
     private static void validateDuplicateBonusBall(List<Integer> winnerNumbers, int bonusBall) {
@@ -60,8 +65,9 @@ public class InputView {
     }
 
     private static void validateNumberRange(int value) {
-        if (value < 1 || value > 45) {
-            throw new IllegalArgumentException("1에서 45 사이의 정수를 입력해주세요.");
+        if (value < Lotto.LOTTO_MIN_NUMBER || value > Lotto.LOTTO_MAX_NUMBER) {
+            throw new IllegalArgumentException(
+                    String.format("%d에서 %d 사이의 정수를 입력해주세요.", Lotto.LOTTO_MIN_NUMBER, Lotto.LOTTO_MAX_NUMBER));
         }
     }
 
@@ -73,10 +79,9 @@ public class InputView {
 
     }
 
-
     private static void validatePrice(int price) {
-        if (price % 1000 != 0) {
-            throw new IllegalArgumentException("구매 가격은 1000원 단위로만 입력 가능합니다.");
+        if (price % LottoShop.LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException(String.format("구매 가격은 %d원 단위로만 입력 가능합니다.", LottoShop.LOTTO_PRICE));
         }
     }
 
