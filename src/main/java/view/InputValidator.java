@@ -6,13 +6,6 @@ public class InputValidator {
         validateNotStringNumber(money);
     }
 
-    public void validateWinningNumber(String rawWinningNumbers) {
-        String[] values = rawWinningNumbers.split(",");
-        for (String value : values) {
-            validateNotStringNumber(value);
-        }
-    }
-
     public void validateNotStringNumber(String value) {
         try {
             Integer.parseInt(value.trim());

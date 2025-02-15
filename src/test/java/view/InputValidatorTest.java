@@ -33,19 +33,4 @@ class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("허용되지 않는 입력입니다.");
     }
-
-
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,a"})
-    void 당첨번호가_숫자가_아닌_경우_예외를_반환한다(String input) {
-        //given
-        InputValidator inputValidator = new InputValidator();
-        //when //then
-        assertThatThrownBy(() -> inputValidator.validateWinningNumber(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("허용되지 않는 입력입니다.");
-
-    }
-
-
 }

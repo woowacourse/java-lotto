@@ -1,6 +1,6 @@
 package controller;
 
-import converter.StringToNumbersConverter;
+import converter.StringToLottoConverter;
 import domain.Lotto;
 import domain.LottoMachine;
 import domain.LottoStore;
@@ -11,7 +11,6 @@ import domain.WinningLotto;
 import domain.WinningResult;
 import domain.numberstrategy.NumberPickStrategy;
 import domain.numberstrategy.RandomNumberPickStrategy;
-import java.util.List;
 import view.InputValidator;
 import view.InputView;
 import view.OutputView;
@@ -62,9 +61,7 @@ public class LottoController {
 
     private Lotto inputWinningNumbers() {
         String rawWinningNumbers = inputView.inputWinningNumbers();
-        inputValidator.validateWinningNumber(rawWinningNumbers);
-        List<Number> numbers = new StringToNumbersConverter().convert(rawWinningNumbers, ",");
-        return new Lotto(numbers);
+        return new StringToLottoConverter().convert(rawWinningNumbers);
     }
 
     private Number inputBonusNumber() {
