@@ -3,10 +3,12 @@ package controller;
 import domain.AnswerLotto;
 import domain.Lottos;
 import domain.Money;
+import domain.enums.Prize;
 import domain.numbergenerator.NumberGenerator;
 import domain.numbergenerator.RandomNumberGenerator;
 import dto.OutputLottosDto;
 import java.util.List;
+import java.util.Map;
 import service.LottoService;
 import view.InputView;
 import view.OutputView;
@@ -35,10 +37,10 @@ public class LottoController {
     }
 
     private void printPrizeResult(AnswerLotto answerLotto, Lottos lottos) {
-        lottoService.calculatePrize(answerLotto, lottos);
-        OutputView.printPrizeResult(lottoService.getPrizeResult());
+        Map<Prize, Integer> prizeResult = lottoService.calculatePrize(answerLotto, lottos);
+        OutputView.printPrizeResult(prizeResult);
 
-        double rateOfReturn = lottoService.calculateRateOfReturn();
+        double rateOfReturn = lottoService.calculateRateOfReturn(prizeResult);
         OutputView.printRateOfReturn(rateOfReturn);
     }
 

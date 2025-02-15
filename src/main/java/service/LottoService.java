@@ -11,13 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoService {
-    private final Map<Prize, Integer> prizeResult = new LinkedHashMap<>();
-
-    public LottoService() {
-        for (Prize prize : Prize.values()) {
-            prizeResult.put(prize, 0);
-        }
-    }
 
     public AnswerLotto getAnswerLotto(List<Integer> selectedNumbers, int bonus) {
         Lotto answerLotto = new Lotto(selectedNumbers);
@@ -28,20 +21,24 @@ public class LottoService {
         return lottos.stream().map(lotto -> new OutputLottosDto(lotto.getNumbers())).toList();
     }
 
-    public Map<Prize, Integer> getPrizeResult() {
-        return Collections.unmodifiableMap(prizeResult);
-    }
+    public Map<Prize, Integer> calculatePrize(AnswerLotto answerLotto, Lottos lottos) {
+        final Map<Prize, Integer> prizeResult = new LinkedHashMap<>();
 
-    public void calculatePrize(AnswerLotto answerLotto, Lottos lottos) {
+        for (Prize prize : Prize.values()) {
+            prizeResult.put(prize, 0);
+        }
+
         for (Lotto lotto : lottos.getLottos()) {
             int matchedCount = lotto.getHitCountFrom(answerLotto.getLotto());
             boolean isBonusMatched = lotto.has(answerLotto.getBonusNumber());
             Prize foundPrize = Prize.getPrizeOf(matchedCount, isBonusMatched);
-            updatePrizeResult(foundPrize);
+            updatePrizeResult(prizeResult, foundPrize);
         }
+
+        return prizeResult;
     }
 
-    public double calculateRateOfReturn() {
+    public double calculateRateOfReturn(Map<Prize, Integer> prizeResult) {
         int totalPrizeCount = 0;
         int totalEarnedMoney = 0;
         for (Map.Entry<Prize, Integer> entry : prizeResult.entrySet()) {
@@ -57,7 +54,7 @@ public class LottoService {
         return Math.floor(rateOfReturn * 100) / 100.0;
     }
 
-    private void updatePrizeResult(Prize foundPrize) {
+    private void updatePrizeResult(Map<Prize, Integer> prizeResult, Prize foundPrize) {
         Integer prizeCount = prizeResult.getOrDefault(foundPrize, 0);
         prizeResult.put(foundPrize, prizeCount + 1);
     }

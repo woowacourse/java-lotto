@@ -3,8 +3,10 @@ package service;
 import domain.AnswerLotto;
 import domain.Lotto;
 import domain.Lottos;
+import domain.enums.Prize;
 import domain.numbergenerator.FakeNumberGenerator;
 import java.util.List;
+import java.util.Map;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,10 +20,10 @@ class LottoServiceTest {
         FakeNumberGenerator fakeNumberGenerator = new FakeNumberGenerator(List.of(1, 2, 3, 4, 5, 7));
         Lottos lottos = Lottos.of(fakeNumberGenerator, 1);
         LottoService lottoService = new LottoService();
-        lottoService.calculatePrize(answerLotto, lottos);
+        Map<Prize, Integer> prizeIntegerMap = lottoService.calculatePrize(answerLotto, lottos);
 
         // when
-        double rateOfReturn = lottoService.calculateRateOfReturn();
+        double rateOfReturn = lottoService.calculateRateOfReturn(prizeIntegerMap);
 
         // then
         Assertions.assertThat(rateOfReturn).isEqualTo(30000);
