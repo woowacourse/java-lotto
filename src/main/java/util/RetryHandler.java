@@ -14,7 +14,7 @@ public class RetryHandler {
     private static <T> ExecuteResult executeGivenMethod(Supplier<T> supplier) {
         try {
             return new ExecuteResult(supplier.get(), true);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return new ExecuteResult(null, false);
