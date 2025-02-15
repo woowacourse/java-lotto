@@ -22,7 +22,7 @@ public class Lotto {
         while (set.size() < LOTTO_NUMBER_COUNT) {
             set.add(LottoNumber.random(generator));
         }
-        this.numbers = new ArrayList<>(set);
+        numbers = new ArrayList<>(set);
     }
 
     public Lotto(List<Integer> numbers) {

@@ -14,12 +14,12 @@ public class LottoService {
     private WinningNumbers winningNumbers;
 
     public LottoService() {
-        this.bank = new Bank();
+        bank = new Bank();
     }
 
     public LottosResponse buyLottos(PaymentRequest request) {
         bank.use(request.payment());
-        this.lottos = new Lottos(request.payment());
+        lottos = new Lottos(request.payment());
         return LottosResponse.from(lottos);
     }
 
