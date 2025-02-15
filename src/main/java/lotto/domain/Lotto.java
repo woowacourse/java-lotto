@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static lotto.common.Constants.LOTTO_NUM_SIZE;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.StringJoiner;
@@ -36,16 +35,6 @@ public class Lotto {
     private List<LottoNumber> sorted(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
                 .sorted()
-                .toList();
-    }
-
-    public static List<LottoNumber> toLottoNumberList(String input) {
-        if (input == null || input.isBlank() || input.endsWith(", ")) {
-            throw new IllegalArgumentException("잘못된 입력입니다. 이와 같은 형태로 작성해주세요.(ex. 1, 2, 3, 4, 5, 6)");
-        }
-
-        return Arrays.stream(input.split(", "))
-                .map(LottoNumber::new)
                 .toList();
     }
 

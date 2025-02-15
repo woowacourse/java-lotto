@@ -29,6 +29,12 @@ public class WinnerLotto {
         return lotto.getLottoNumbers().contains(bonusNumber);
     }
 
+    public static void validateInputWinnerNumbers(String input) {
+        if (input == null || input.isBlank() || input.endsWith(", ")) {
+            throw new IllegalArgumentException("잘못된 입력입니다. 이와 같은 형태로 작성해주세요.(ex. 1, 2, 3, 4, 5, 6)");
+        }
+    }
+
     public static void validateWinnerNumbers(List<LottoNumber> lottoNumbers) {
         if (new HashSet<>(lottoNumbers).size() != LOTTO_NUM_SIZE) {
             throw new IllegalArgumentException("중복은 불가능합니다.");
