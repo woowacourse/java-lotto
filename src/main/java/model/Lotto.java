@@ -9,6 +9,8 @@ import static global.constant.LottoConstant.*;
 
 public class Lotto {
 
+    private static final String NUMBER_DELIMITER = ", ";
+
     private final List<Integer> numbers;
 
     public Lotto() {
