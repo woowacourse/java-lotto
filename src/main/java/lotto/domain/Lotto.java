@@ -20,7 +20,7 @@ public class Lotto {
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         if (!lottoNumbers.equals(sorted(lottoNumbers))) {
-            throw new IllegalStateException("오름차순이 아닙니다.");
+            sorted(lottoNumbers);
         }
 
         if (new HashSet<>(lottoNumbers).size() != LOTTO_NUM_SIZE) {
