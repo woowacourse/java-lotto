@@ -50,7 +50,7 @@ public class WinningLotto {
   }
 
   public List<Integer> getWinningNumbers() {
-    return winningNumbers;
+    return new ArrayList<>(winningNumbers);
   }
 
   public int getBonusNumber() {
