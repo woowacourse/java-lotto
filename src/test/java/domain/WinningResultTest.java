@@ -16,7 +16,6 @@ class WinningResultTest {
         final LottoStore lottoStore = new LottoStore(new FakeRandomNumberGenerator(), new Money(10_000));
         final WinningNumber winningNumber = new WinningNumber(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new BonusNumber(7));
         final WinningResult winningResult = new WinningResult(winningNumber, lottoStore.issueLottos());
-
         final Map<LottoRank, Integer> lottoRankIntegerMap = winningResult.countWinningResult();
 
         assertThat(lottoRankIntegerMap).containsEntry(LottoRank.RANK_1, 10);

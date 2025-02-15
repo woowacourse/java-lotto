@@ -22,5 +22,4 @@ public class LottoStore {
         }
         return lottos;
     }
-
 }
