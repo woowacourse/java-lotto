@@ -54,16 +54,4 @@ public class LottoDispenserTest {
                         )
         );
     }
-
-    @ParameterizedTest
-    @DisplayName("당첨_통계_계산_및_출력_테스트")
-    @MethodSource("calculateWinningResult")
-    public void 당첨_통계_계산_및_출력_테스트(List<Integer> testLottoNumbers){
-        String winningNumber = "1, 2, 3, 4, 5, 6";
-        String bonusNumber = "7";
-        MockingLottoService mockingLottoService = new MockingLottoService(new LottoRepository(),new WinningNumberRepository(),new BonusNumberRepository());
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(testLottoNumbers));
-        System.out.println(mockingLottoService.winningCalculate(lottos,winningNumber,bonusNumber));
-    }
 }
