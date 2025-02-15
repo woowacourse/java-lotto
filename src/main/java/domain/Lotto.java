@@ -1,36 +1,17 @@
 package domain;
 
 import dto.LottoMatchResult;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import util.NumberPicker;
 
 public class Lotto {
 
-    private static final int START_NUMBER = 1;
-    private static final int END_NUMBER = 45;
     private static final int NUMBER_COUNT = 6;
-    private static final int PRICE = 1000;
 
     private final Numbers numbers;
 
     public Lotto(Numbers numbers) {
         this.numbers = numbers;
-    }
-
-    public static List<Lotto> purchase(int money, NumberPicker numberPicker) {
-        validateMinPrice(money);
-
-        List<Lotto> lottos = new ArrayList<>();
-        int lottoCount = money / PRICE;
-        for (int i = 0; i < lottoCount; i++) {
-            Numbers numbers = numberPicker.pickUnique(START_NUMBER, END_NUMBER, NUMBER_COUNT);
-            Lotto lotto = new Lotto(numbers);
-            lottos.add(lotto);
-        }
-        return Collections.unmodifiableList(lottos);
     }
 
     public LottoMatchResult getMatchResult(List<Integer> matchNumbers, int bonusNumber) {
@@ -42,12 +23,6 @@ public class Lotto {
         matchCount = calculateMatchNumberCount(matchNumbers, matchCount);
 
         return new LottoMatchResult(matchCount, numbers.isContains(bonusNumber));
-    }
-
-    private static void validateMinPrice(int money) {
-        if (money < PRICE) {
-            throw new IllegalStateException("금액은 1000원 이상이여아 합니다.");
-        }
     }
 
     private void validateMatchNumbersNotDuplicated(List<Integer> matchNumbers) {

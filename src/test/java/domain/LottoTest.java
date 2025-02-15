@@ -10,44 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import testUtil.StaticNumberPicker;
-import util.NumberPicker;
 
 class LottoTest {
-
-    @Test
-    void 구입_금액만큼_로또를_구입한다() {
-        // given
-        int money = 4000;
-        NumberPicker numberPicker = new StaticNumberPicker(List.of(
-            List.of(1, 2, 3, 4, 5, 6),
-            List.of(14, 15, 16, 13, 12, 9),
-            List.of(43, 41, 40, 23, 35, 22),
-            List.of(9, 7, 13, 14, 16, 2)
-        ));
-
-        // when
-        List<Lotto> result = Lotto.purchase(money, numberPicker);
-
-        // then
-        assertThat(result).hasSize(4);
-
-    }
-
-    @Test
-    void 금액이_1000원_미만이면_예외를_발생한다() {
-        int money = 999;
-
-        NumberPicker numberPicker = new StaticNumberPicker(List.of(
-            List.of(1, 2, 3, 4, 5, 6),
-            List.of(14, 15, 16, 13, 12, 9),
-            List.of(43, 41, 40, 23, 35, 22),
-            List.of(9, 7, 13, 14, 16, 2)
-        ));
-        assertThatThrownBy(() -> Lotto.purchase(money, numberPicker))
-            .isExactlyInstanceOf(IllegalStateException.class)
-            .hasMessage("금액은 1000원 이상이여아 합니다.");
-    }
 
     @ParameterizedTest
     @MethodSource("provideMatchNumbersAndBonusNumber")
