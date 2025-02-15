@@ -1,22 +1,16 @@
 package domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utils.NumbersGenerator;
 import utils.RandomNumbersGenerator;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+
 class LottoStoreTest {
 
-    private NumbersGenerator numbersGenerator;
-
-    @BeforeEach
-    void setUp() {
-        numbersGenerator = new RandomNumbersGenerator();
-    }
+    private NumbersGenerator numbersGenerator = new RandomNumbersGenerator();
 
     @DisplayName("구입 금액 만큼 로또 구매를 성공한다")
     @Test
