@@ -9,6 +9,7 @@ public class Money {
         this.amount = amount;
     }
 
+
     public void validateAmount(int amount) {
         if (amount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("1000원 단위로 입력해주세요!");

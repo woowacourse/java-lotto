@@ -3,6 +3,7 @@ package lotto.domain;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class Profit {
@@ -39,5 +40,9 @@ public class Profit {
 
     public Map<Rank, Integer> getRankCounts() {
         return rankCounts;
+    }
+
+    public List<Integer> getValues() {
+        return rankCounts.values().stream().toList();
     }
 }

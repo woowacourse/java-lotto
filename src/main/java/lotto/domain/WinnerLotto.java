@@ -9,7 +9,6 @@ public class WinnerLotto {
         this.bonusNumber = bonusNumber;
     }
 
-
     public static void validateBonusNumbers(Lotto winnerNumbers, LottoNumber bonusNumber) {
         if (winnerNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 넘버가 당첨 번호에 중복됩니다.");

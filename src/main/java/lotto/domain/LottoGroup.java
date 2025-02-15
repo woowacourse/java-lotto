@@ -1,10 +1,12 @@
 package lotto.domain;
 
+import static lotto.common.Constants.ENTER;
 import static lotto.common.Constants.LOTTO_NUM_SIZE;
 import static lotto.common.Constants.MAX_LOTTO_NUMBER;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.stream.IntStream;
 import lotto.utils.RandomNumberUtils;
 
@@ -40,5 +42,16 @@ public class LottoGroup {
         return numbers.stream()
                 .map(LottoNumber::new)
                 .toList();
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner joiner = new StringJoiner(ENTER);
+
+        for (Lotto lotto : item) {
+            joiner.add(lotto.toString());
+        }
+
+        return joiner.toString();
     }
 }
