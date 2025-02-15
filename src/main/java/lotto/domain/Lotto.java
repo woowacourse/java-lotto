@@ -18,10 +18,6 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public static Lotto create(final List<LottoNumber> lottoNumbers) {
-        return new Lotto(lottoNumbers);
-    }
-
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         if (!lottoNumbers.equals(sorted(lottoNumbers))) {
             throw new IllegalStateException("오름차순이 아닙니다.");

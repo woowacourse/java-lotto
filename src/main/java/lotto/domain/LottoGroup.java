@@ -14,12 +14,11 @@ public class LottoGroup {
     public void generate(Money money) {
         // TODO 통합 테스트 불가능
         IntStream.range(0, money.getLottoTicketCount())
-                .forEach(index -> {
-                    lottoGroup.add(Lotto.create(RandomNumberUtils.generateRandomNumbers(LOTTO_NUM_SIZE, MAX_LOTTO_NUMBER )
-                            .stream()
-                            .map(LottoNumber::new)
-                            .toList()));
-                });
+                .forEach(index -> lottoGroup.add(
+                        new Lotto(RandomNumberUtils.generateRandomNumbers(LOTTO_NUM_SIZE, MAX_LOTTO_NUMBER)
+                                .stream()
+                                .map(LottoNumber::new)
+                                .toList())));
     }
 
     public List<Lotto> getLottoGroup() {
