@@ -32,14 +32,14 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호의 범위가 기준에서 벗어났을 경우, 예외를 발생시킨다.")
     void LottoNumberErrorWhenOverRange() {
-        var test_MAX = LOTTO_MAXIMUM + 1;
-        var test_MIN = LOTTO_MAXIMUM + 2;
+        var overMAX = LOTTO_MAXIMUM + 1;
+        var lessMIN = LOTTO_MINIMUM - 1;
 
-        assertThatThrownBy(() -> new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, test_MAX))))
+        assertThatThrownBy(() -> new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, overMAX))))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_LOTTO_NUMBER_RANGE.getMessage());
 
-        assertThatThrownBy(() -> new Lotto(new ArrayList<>(List.of(test_MIN, 2, 3, 4, 5, 6))))
+        assertThatThrownBy(() -> new Lotto(new ArrayList<>(List.of(lessMIN, 2, 3, 4, 5, 6))))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_LOTTO_NUMBER_RANGE.getMessage());
     }
@@ -60,4 +60,30 @@ class LottoTest {
         assertThat(count.bonus()).isTrue();
     }
 
+    @Test
+    @DisplayName("로또 보너스 번호는 지정된 로또 범위를 벗어날 경우, 예외를 발생한다.")
+    void LottoBonusErrorWhenOverRange() {
+        var bonusOverMAX = LOTTO_MAXIMUM + 1;
+        var bonusLessMIN = LOTTO_MINIMUM - 1;
+
+        Lotto lotto = new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+
+        assertThatThrownBy(() -> lotto.validateBonus(bonusOverMAX))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(ERROR_LOTTO_NUMBER_RANGE.getMessage());
+        assertThatThrownBy(() -> lotto.validateBonus(bonusLessMIN))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(ERROR_LOTTO_NUMBER_RANGE.getMessage());
+    }
+
+    @Test
+    @DisplayName("로또 보너스 번호가 로또의 번호와 중복될 경우, 예외를 발생한다.")
+    void LottoBonusErrorWhenDuplicatedWithLotto() {
+        var duplicatedNumber = 6;
+        Lotto lotto = new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, duplicatedNumber)));
+
+        assertThatThrownBy(() -> lotto.validateBonus(duplicatedNumber))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(ERROR_DUPLICATED_BONUS_NUMBER.getMessage());
+    }
 }

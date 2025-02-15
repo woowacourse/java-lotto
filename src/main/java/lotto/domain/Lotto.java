@@ -48,11 +48,11 @@ public record Lotto(List<Integer> numbers) {
 
     private void validateRange(List<Integer> numbers) {
         for (int number : numbers) {
-            checkLottoRange(number);
+            validateLottoNumberRange(number);
         }
     }
 
-    private void checkLottoRange(int number) {
+    private void validateLottoNumberRange(int number) {
         if (isNumberInRage(number)) {
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_RANGE.getMessage());
         }
@@ -72,8 +72,19 @@ public record Lotto(List<Integer> numbers) {
         return new MatchCount(count, isContainsBonus(bonus));
     }
 
+    public void validateBonus(int bonus) {
+        validateLottoNumberRange(bonus);
+        validateDuplicatedBonus(bonus);
+    }
+
     public boolean isContainsBonus(int bonus) {
         return numbers.contains(bonus);
+    }
+
+    private void validateDuplicatedBonus(int bonus) {
+        if (isContainsBonus(bonus)) {
+            throw new IllegalArgumentException(ERROR_DUPLICATED_BONUS_NUMBER.getMessage());
+        }
     }
 
     @Override

@@ -1,18 +1,16 @@
 package lotto.controller;
 
-import static lotto.common.constant.ErrorMessage.*;
-
 import java.util.List;
 import java.util.Map;
 
 import lotto.common.utill.InputParser;
 import lotto.domain.Cashier;
-import lotto.service.LottoService;
 import lotto.domain.Lotto;
-import lotto.domain.MatchStatistics;
-import lotto.domain.Wallet;
 import lotto.domain.MatchCount;
+import lotto.domain.MatchStatistics;
 import lotto.domain.Profit;
+import lotto.domain.Wallet;
+import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -48,7 +46,7 @@ public class Controller {
         while (true) {
             try {
                 int bonus = requestInt("보너스 볼을 입력해주세요.");
-                validateBonus(matchLotto, bonus);
+                matchLotto.validateBonus(bonus);
                 return bonus;
             } catch (IllegalArgumentException e) {
                 outputView.print(e.getMessage());
@@ -96,12 +94,6 @@ public class Controller {
             } catch (IllegalArgumentException e) {
                 outputView.print(e.getMessage());
             }
-        }
-    }
-
-    private void validateBonus(Lotto mathLotto, int bonus) {
-        if (mathLotto.isContainsBonus(bonus)) {
-            throw new IllegalArgumentException(ERROR_DUPLICATED_BONUS_NUMBER.getMessage());
         }
     }
 
