@@ -43,17 +43,17 @@ class StatisticsServiceTest {
         );
     }
 
-    @DisplayName("당첨번호 매칭 개수가 올바르게 되는지 테스트")
+    @DisplayName("당첨번호 매칭 개수가 올바르게 계산되는지 테스트")
     @ParameterizedTest
     @MethodSource("calculateCountMatchedNumbersCases")
-    void 당첨번호_매칭_개수_계산(LottoTicket lottoTicket, List<Integer> winningNumbers, int expected) {
+    void 당첨번호_매칭_개수_테스트(LottoTicket lottoTicket, List<Integer> winningNumbers, int expected) {
         // when
         int actual = lottoTicket.countMatchedNumbers(winningNumbers);
         // then
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
-    @DisplayName("보너스 번호가 매칭되지 않는 경우")
+    @DisplayName("보너스 번호가 매칭되지 않는 경우 false를 반환")
     @ParameterizedTest
     @MethodSource("bonusNumberNotMatchedCases")
     void 보너스_번호가_매칭되지_않는_경우(LottoTicket lottoTicket, int bonusNumber, boolean expected) {
@@ -63,7 +63,7 @@ class StatisticsServiceTest {
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
-    @DisplayName("보너스 번호가 매칭되는 경우")
+    @DisplayName("보너스 번호가 매칭되는 경우 true를 반환")
     @ParameterizedTest
     @MethodSource("bonusNumberMatchedCases")
     void 보너스_번호가_매칭되는_경우(LottoTicket lottoTicket, int bonusNumber, boolean expected) {
@@ -73,7 +73,7 @@ class StatisticsServiceTest {
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
-    @DisplayName("당첨 통계 계산 테스트")
+    @DisplayName("주어진 로또티켓들로 당첨 통계를 올바르게 계산하는지 테스트")
     @Test
     void 당첨_통계_계산() {
         //given
