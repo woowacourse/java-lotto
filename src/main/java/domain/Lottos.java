@@ -1,10 +1,11 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos() {
         lottos = new ArrayList<>();
@@ -19,6 +20,6 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 }
