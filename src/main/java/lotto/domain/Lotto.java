@@ -23,6 +23,11 @@ public class Lotto {
         this.lotto = numbers;
     }
 
+    public Lotto(Set<Integer> numbers) {
+        validate(numbers);
+        this.lotto = numbers;
+    }
+
     private Set<Integer> parse(String input) {
         Set<String> result = Arrays.stream(input.split(LOTTO_NUMBER_DELIMITER)).collect(Collectors.toSet());
         return result.stream()
@@ -61,7 +66,7 @@ public class Lotto {
         }
     }
 
-    public Set<Integer> getLotto() {
+    public Set<Integer> getLottoNumbers() {
         return lotto;
     }
 }

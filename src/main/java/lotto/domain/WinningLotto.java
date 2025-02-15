@@ -15,7 +15,7 @@ public class WinningLotto {
 
     public WinningLotto(Lotto winningNumbers, String bonusBallInput) {
         int bonusBallNumber = validateAndParse(bonusBallInput);
-        validateBonusBall(bonusBallNumber);
+        validateBonusBall(winningNumbers, bonusBallNumber);
         this.winningNumbers = winningNumbers;
         this.bonusBall = bonusBallNumber;
     }
@@ -28,9 +28,9 @@ public class WinningLotto {
         }
     }
 
-    private void validateBonusBall(int bonusBallNumber) {
+    private void validateBonusBall(Lotto winningNumbers, int bonusBallNumber) {
         validateRange(bonusBallNumber);
-        validateDistinct(bonusBallNumber);
+        validateDistinct(winningNumbers, bonusBallNumber);
     }
 
     private void validateRange(int bonusBallNumber) {
@@ -39,15 +39,15 @@ public class WinningLotto {
         }
     }
 
-    private void validateDistinct(int bonusBallNumber) {
-        Set<Integer> winningLottoNumbers = winningNumbers.getLotto();
+    private void validateDistinct(Lotto winningNumbers, int bonusBallNumber) {
+        Set<Integer> winningLottoNumbers = winningNumbers.getLottoNumbers();
         if (winningLottoNumbers.contains(bonusBallNumber)) {
             throw INVALID_LOTTO_BONUS_DISTINCT.getException();
         }
     }
 
     public Set<Integer> getWinningNumbers() {
-        return winningNumbers.getLotto();
+        return winningNumbers.getLottoNumbers();
     }
 
     public int getBonusBall() {
