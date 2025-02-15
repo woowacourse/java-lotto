@@ -12,7 +12,14 @@ public class Vendor {
     private final int purchaseAmount;
 
     public Vendor(int purchaseAmount) {
+        this.validatePurchaseAmount(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
+    }
+
+    private void validatePurchaseAmount(int purchaseAmount) {
+        if (purchaseAmount % LOTTO_PRICE != 0 || purchaseAmount <= 0) {
+            throw new IllegalArgumentException(String.format("구입 금액은 %d단위 입니다.", LOTTO_PRICE));
+        }
     }
 
     public int calculateLottoCount() {

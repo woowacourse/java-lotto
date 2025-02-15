@@ -27,9 +27,7 @@ public class InputView {
         System.out.println();
         InputValidator.validateBlank(content);
         InputValidator.validateNumberFormat(content);
-        int purchaseAmount = Integer.parseInt(content);
-        InputValidator.validatePurchaseAmount(purchaseAmount);
-        return purchaseAmount;
+        return Integer.parseInt(content);
     }
 
     public Lotto readWinningNumbers() {

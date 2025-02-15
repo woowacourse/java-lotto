@@ -1,7 +1,5 @@
 package lotto.validator;
 
-import lotto.domain.Lotto;
-
 import java.util.List;
 
 public class InputValidator {
@@ -17,14 +15,6 @@ public class InputValidator {
             Integer.parseInt(numericContent);
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException("숫자 형식이 아닙니다.");
-        }
-    }
-
-    public static void validatePurchaseAmount(int purchaseAmount) {
-        if (purchaseAmount % Lotto.LOTTO_PRICE != 0 || purchaseAmount <= 0) {
-            String messageTemplate = "구입 금액은 %d단위 입니다.";
-            String exceptionMessage = String.format(messageTemplate, Lotto.LOTTO_PRICE);
-            throw new IllegalArgumentException(exceptionMessage);
         }
     }
 
