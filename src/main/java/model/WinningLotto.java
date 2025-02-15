@@ -1,6 +1,5 @@
 package model;
 
-import java.util.HashSet;
 import java.util.List;
 
 public class WinningLotto {
@@ -9,26 +8,18 @@ public class WinningLotto {
     private static final int MAX_NUMBER = 45;
     private static final int NUMBER_SIZE = 6;
 
-    private final List<Integer> winningNumbers;
+    private final LottoNumbers winningNumbers;
     private final int bonusNumber;
 
-    public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
-        validateWinningNumbers(winningNumbers);
+    public WinningLotto(LottoNumbers winningNumbers, int bonusNumber) {
         validateBonusNumber(winningNumbers, bonusNumber);
-
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateWinningNumbers(List<Integer> numbers) {
-        numbers.forEach(this::validateRange);
-        validateSize(numbers);
-        validateDuplication(numbers);
-    }
-
-    private void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
+    private void validateBonusNumber(LottoNumbers lottoNumbers, int bonusNumber) {
         validateRange(bonusNumber);
-        validateOverlap(numbers, bonusNumber);
+        validateOverlap(lottoNumbers, bonusNumber);
     }
 
     private void validateRange(int number) {
@@ -37,20 +28,9 @@ public class WinningLotto {
         }
     }
 
-    private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != NUMBER_SIZE) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 6개여야 합니다.");
-        }
-    }
 
-    private void validateDuplication(List<Integer> numbers) {
-        if (new HashSet<>(numbers).size() != numbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 중복되어서는 안됩니다.");
-        }
-    }
-
-    private void validateOverlap(List<Integer> numbers, int bonusNumber) {
-        if (numbers.contains(bonusNumber)) {
+    private void validateOverlap(LottoNumbers lottoNumbers, int bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호와 보너스 번호는 중복되어서는 안됩니다.");
         }
     }
