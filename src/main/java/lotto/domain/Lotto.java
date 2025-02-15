@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,6 +9,7 @@ public class Lotto {
     public static final int MAX_LOTTO_NUMBER = 45;
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int LOTTO_SIZE = 6;
+
     private final List<Integer> numbers;
 
     public Lotto(final Set<Integer> numbers) {
@@ -29,6 +30,10 @@ public class Lotto {
             throw new IllegalArgumentException(
                     "로또 번호는 %d ~ %d 사이여야 합니다.".formatted(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
         }
+    }
+
+    public boolean hasNumber(int number) {
+        return numbers.contains(number);
     }
 
     public List<Integer> getNumbers() {
