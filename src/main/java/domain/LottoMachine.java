@@ -6,11 +6,11 @@ import java.util.Set;
 
 public class LottoMachine {
 
+    private final NumberPickStrategy numberStrategy;
+
     public LottoMachine(NumberPickStrategy numberStrategy) {
         this.numberStrategy = numberStrategy;
     }
-
-    private final NumberPickStrategy numberStrategy;
 
     public Lotto createLotto() {
         Set<Number> numbers = new HashSet<>();

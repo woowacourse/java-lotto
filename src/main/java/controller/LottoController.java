@@ -35,7 +35,7 @@ public class LottoController {
             outputView.printPurchaseLottos(purchasedLottos);
 
             WinningLotto winningLotto = inputWinningLotto();
-            WinningResult winningResult = purchasedLottos.calculateWinning(winningLotto);
+            WinningResult winningResult = purchasedLottos.calculateWinning(winningLotto, purchaseLottoMoney);
             outputView.printWinningResult(winningResult);
         } catch (RuntimeException e) {
             outputView.printErrorMessage(e);

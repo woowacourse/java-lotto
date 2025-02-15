@@ -9,7 +9,6 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
-
     public static final int NUMBERS_SIZE = 6;
 
     private final Set<Number> numbers;

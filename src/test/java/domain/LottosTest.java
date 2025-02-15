@@ -52,7 +52,7 @@ class LottosTest {
         );
 
         //when
-        WinningResult winningResult = lottos.calculateWinning(winningLotto);
+        WinningResult winningResult = lottos.calculateWinning(winningLotto, new Money(3000));
 
         //then
         Assertions.assertThat(winningResult)

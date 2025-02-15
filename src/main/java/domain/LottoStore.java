@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LottoStore {
     private static final int LOTTO_PRICE = 1000;
-    public static final Money LOTTO_MONEY = new Money(LOTTO_PRICE);
+    private static final Money LOTTO_MONEY = new Money(LOTTO_PRICE);
 
     private final LottoMachine lottoMachine;
 
@@ -15,6 +15,7 @@ public class LottoStore {
 
     public Lottos buy(Money money) {
         validateMoney(money);
+
         List<Lotto> lottos = new ArrayList<>();
         while (money.isGreaterOrEqualThan(LOTTO_MONEY)) {
             money = money.minus(LOTTO_MONEY);

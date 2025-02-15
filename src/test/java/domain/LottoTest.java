@@ -1,6 +1,5 @@
 package domain;
 
-import static domain.Lotto.NUMBERS_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -20,7 +19,7 @@ class LottoTest {
     void 로또_번호의_개수가_6개가_아닌경우_예외를_반환한다(Set<Number> numbers) {
         assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 " + NUMBERS_SIZE + "개여야 합니다.");
+                .hasMessage("로또 번호는 6개여야 합니다.");
     }
 
     @ParameterizedTest
