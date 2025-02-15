@@ -15,31 +15,38 @@ class StatisticsServiceTest {
 
     public static Stream<Arguments> calculateCountMatchedNumbersCases() {
         return Stream.of(
-                Arguments.arguments(new LottoTicket(List.of(11, 12, 13, 14, 15, 16)), List.of(1, 2, 3, 4, 5, 6), 0),
-                Arguments.arguments(new LottoTicket(List.of(1, 12, 13, 14, 15, 16)), List.of(1, 2, 3, 4, 5, 6), 1),
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 13, 14, 15, 16)), List.of(1, 2, 3, 4, 5, 6), 2),
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 14, 15, 16)), List.of(1, 2, 3, 4, 5, 6), 3),
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 15, 16)), List.of(1, 2, 3, 4, 5, 6), 4),
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 16)), List.of(1, 2, 3, 4, 5, 6), 5),
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), List.of(1, 2, 3, 4, 5, 6), 6)
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(11, 12, 13, 14, 15, 16))),
+                        List.of(1, 2, 3, 4, 5, 6), 0),
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(1, 12, 13, 14, 15, 16))),
+                        List.of(1, 2, 3, 4, 5, 6), 1),
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(1, 2, 13, 14, 15, 16))),
+                        List.of(1, 2, 3, 4, 5, 6), 2),
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 14, 15, 16))),
+                        List.of(1, 2, 3, 4, 5, 6), 3),
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 15, 16))),
+                        List.of(1, 2, 3, 4, 5, 6), 4),
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 16))),
+                        List.of(1, 2, 3, 4, 5, 6), 5),
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))),
+                        List.of(1, 2, 3, 4, 5, 6), 6)
         );
     }
 
     public static Stream<Arguments> bonusNumberNotMatchedCases() {
         return Stream.of(
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 7, false),
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 8, false),
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 9, false),
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 10, false)
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))), 7, false),
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))), 8, false),
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))), 9, false),
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))), 10, false)
 
         );
     }
 
     public static Stream<Arguments> bonusNumberMatchedCases() {
         return Stream.of(
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 1, true),
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 2, true),
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 3, true)
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))), 1, true),
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))), 2, true),
+                Arguments.arguments(new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6))), 3, true)
         );
     }
 
@@ -77,12 +84,12 @@ class StatisticsServiceTest {
     @Test
     void 당첨_통계_계산() {
         //given
-        LottoTicket fifth = new LottoTicket(List.of(1, 2, 3, 43, 44, 45));
-        LottoTicket fourth = new LottoTicket(List.of(1, 2, 3, 4, 44, 45));
-        LottoTicket second = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
-        LottoTicket nothing = new LottoTicket(List.of(31, 32, 33, 34, 35, 36));
+        LottoTicket fifth = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 43, 44, 45)));
+        LottoTicket fourth = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 44, 45)));
+        LottoTicket second = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 7)));
+        LottoTicket nothing = new LottoTicket(new LottoNumbers(List.of(31, 32, 33, 34, 35, 36)));
         List<LottoTicket> lottoTickets = List.of(fifth, fourth, second, nothing);
-        LottoTicket winningLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoTicket winningLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
         int bonusNumber = 7;
 
         // when
@@ -102,12 +109,12 @@ class StatisticsServiceTest {
     @Test
     void 수익률_계산() {
         //given
-        LottoTicket fifth = new LottoTicket(List.of(1, 2, 3, 43, 44, 45));
-        LottoTicket fourth = new LottoTicket(List.of(1, 2, 3, 4, 44, 45));
-        LottoTicket second = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
-        LottoTicket nothing = new LottoTicket(List.of(31, 32, 33, 34, 35, 36));
+        LottoTicket fifth = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 43, 44, 45)));
+        LottoTicket fourth = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 44, 45)));
+        LottoTicket second = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 7)));
+        LottoTicket nothing = new LottoTicket(new LottoNumbers(List.of(31, 32, 33, 34, 35, 36)));
         List<LottoTicket> lottoTickets = List.of(fifth, fourth, second, nothing);
-        LottoTicket winningLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+        LottoTicket winningLottoTicket = new LottoTicket(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
         int bonusNumber = 7;
 
         // when

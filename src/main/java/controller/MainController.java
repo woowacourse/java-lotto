@@ -25,7 +25,7 @@ public class MainController {
         OutputView.printLottoTickets(lottoTickets);
 
         LottoTicket winningLottoTicket = new LottoTicket(InputView.inputWinningLottoTicket());
-        int bonusNumber = InputView.inputBonusNumber(winningLottoTicket.getNumbers());
+        int bonusNumber = InputView.inputBonusNumber(winningLottoTicket.getLottoNumbers());
 
         WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets,
                 winningLottoTicket,

@@ -1,7 +1,5 @@
 package domain;
 
-import static domain.LottoTicket.LOTTO_MAX_NUMBER;
-import static domain.LottoTicket.LOTTO_MIN_NUMBER;
 import static domain.LottoTicket.LOTTO_PRICE;
 import static domain.LottoTicket.LOTTO_SIZE;
 
@@ -15,13 +13,13 @@ public class LottoMachine {
             int number = extractUniqueLottoNumber(generator, numbers);
             numbers.add(number);
         }
-        return new LottoTicket(numbers);
+        return new LottoTicket(new LottoNumbers(numbers));
     }
 
     private int extractUniqueLottoNumber(IntegerGenerator generator, List<Integer> lottoNumbers) {
         int number;
         do {
-            number = generator.generateInteger(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER);
+            number = generator.generateInteger(LottoNumbers.LOTTO_MIN_NUMBER, LottoNumbers.LOTTO_MAX_NUMBER);
         } while (lottoNumbers.contains(number));
         return number;
     }
