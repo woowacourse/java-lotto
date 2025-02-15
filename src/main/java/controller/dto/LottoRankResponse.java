@@ -1,6 +1,6 @@
 package controller.dto;
 
-import model.LottoRank;
+import model.rank.LottoRank;
 
 public record LottoRankResponse(
         int overlappedCount,

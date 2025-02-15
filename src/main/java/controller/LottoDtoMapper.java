@@ -1,12 +1,15 @@
-package controller.dto;
+package controller;
 
+import controller.dto.LottoRankResponse;
+import controller.dto.LottoTicketResponse;
+import controller.dto.WinningLottoRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import model.LottoNumbers;
-import model.LottoRank;
-import model.LottoRankResult;
-import model.WinningLotto;
+import model.numbers.LottoNumbers;
+import model.rank.LottoRank;
+import model.rank.LottoRankResult;
+import model.numbers.WinningLotto;
 
 public class LottoDtoMapper {
 

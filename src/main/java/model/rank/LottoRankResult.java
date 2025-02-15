@@ -1,8 +1,9 @@
-package model;
+package model.rank;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import model.rank.LottoRank;
 
 public class LottoRankResult {
 

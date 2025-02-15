@@ -1,13 +1,13 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import model.LottoNumberGenerator;
-import model.LottoNumbers;
-import model.LottoRank;
-import model.LottoRankCalculator;
-import model.LottoRankResult;
+import model.numbers.LottoNumberGenerator;
+import model.numbers.LottoNumbers;
+import model.rank.LottoRank;
+import model.rank.LottoRankCalculator;
+import model.rank.LottoRankResult;
 import model.LottoStore;
-import model.WinningLotto;
+import model.numbers.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 class LottoStoreTest {

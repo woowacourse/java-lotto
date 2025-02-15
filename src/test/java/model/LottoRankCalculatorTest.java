@@ -3,6 +3,10 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import model.numbers.LottoNumbers;
+import model.numbers.WinningLotto;
+import model.rank.LottoRank;
+import model.rank.LottoRankCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

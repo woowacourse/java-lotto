@@ -3,6 +3,12 @@ package model;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
+import model.numbers.LottoNumberGenerator;
+import model.numbers.LottoNumbers;
+import model.numbers.WinningLotto;
+import model.rank.LottoRank;
+import model.rank.LottoRankCalculator;
+import model.rank.LottoRankResult;
 
 public class LottoStore {
     private final LottoNumberGenerator lottoNumberGenerator;

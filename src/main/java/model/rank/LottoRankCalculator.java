@@ -1,4 +1,7 @@
-package model;
+package model.rank;
+
+import model.numbers.WinningLotto;
+import model.numbers.LottoNumbers;
 
 public class LottoRankCalculator {
 

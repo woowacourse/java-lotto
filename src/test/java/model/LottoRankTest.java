@@ -2,6 +2,7 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import model.rank.LottoRank;
 import org.junit.jupiter.api.Test;
 
 class LottoRankTest {

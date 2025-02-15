@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import java.util.stream.IntStream;
+import model.numbers.LottoNumbers;
 import org.junit.jupiter.api.Test;
 
 class LottoNumbersTest {

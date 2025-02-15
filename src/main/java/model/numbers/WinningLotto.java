@@ -1,6 +1,7 @@
-package model;
+package model.numbers;
 
 import java.util.List;
+import model.numbers.LottoNumbers;
 
 public class WinningLotto {
 

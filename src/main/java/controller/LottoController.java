@@ -1,13 +1,12 @@
 package controller;
 
-import controller.dto.LottoDtoMapper;
 import controller.dto.WinningLottoRequest;
 import java.util.List;
-import model.LottoNumbers;
-import model.LottoRankResult;
+import model.numbers.LottoNumbers;
+import model.rank.LottoRankResult;
 import model.LottoStore;
 import model.PaidAmount;
-import model.WinningLotto;
+import model.numbers.WinningLotto;
 import view.LottoConsoleView;
 
 public class LottoController {

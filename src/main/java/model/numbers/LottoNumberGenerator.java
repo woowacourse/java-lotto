@@ -1,4 +1,4 @@
-package model;
+package model.numbers;
 
 import common.NumberGenerator;
 import java.util.List;
