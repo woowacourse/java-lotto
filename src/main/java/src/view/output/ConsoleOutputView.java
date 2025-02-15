@@ -71,13 +71,6 @@ public class ConsoleOutputView implements OutputView {
         System.out.println(response.getNumbers().stream().sorted().toList());
     }
 
-    private double getProfitRate(Map<LottoPrizeResponse, Integer> lottoPrizeResponseStatistic, int purchaseMoney) {
-
-        return Math.round(lottoPrizeResponseStatistic.entrySet().stream()
-                .mapToDouble(entry -> entry.getKey().getPrize() * entry.getValue())
-                .sum() / purchaseMoney * 100) / 100.0;
-    }
-
     private void printProfitRate(double profitRate) {
         System.out.print("총 수익률은 " + profitRate + "입니다.");
         if (profitRate < 1) {
