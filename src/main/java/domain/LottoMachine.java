@@ -7,11 +7,11 @@ import java.util.Set;
 public class LottoMachine {
 
     private final NumberGenerator numberGenerator;
-    private final int numbersSize;
+    private final int numbersMaxSize;
 
-    public LottoMachine(NumberGenerator numberGenerator, int numbersSize) {
+    public LottoMachine(NumberGenerator numberGenerator, int numbersMaxSize) {
         this.numberGenerator = numberGenerator;
-        this.numbersSize = numbersSize;
+        this.numbersMaxSize = numbersMaxSize;
     }
 
     public Lotto createLotto() {
@@ -19,7 +19,7 @@ public class LottoMachine {
         do {
             Number number = pickNumber();
             numbers.add(number);
-        } while (numbers.size() != numbersSize);
+        } while (numbers.size() != numbersMaxSize);
         return new Lotto(numbers);
     }
 
