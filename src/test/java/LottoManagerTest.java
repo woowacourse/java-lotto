@@ -23,9 +23,9 @@ class LottoManagerTest {
         lottoManager = new LottoManager();
     }
 
-    @DisplayName("로또와 당첨 번호를 토대로 로또 순위별 당첨 횟수를 알 수있다.")
     @Test
-    void test1() {
+    @DisplayName("로또와 당첨 번호가 주어졌을 때 로또 순위별 당첨 횟수를 정확히 계산한다")
+    void check_each_winning_count_correctly() {
         // given
         LottoManager lottoManager = new LottoManager();
 
@@ -38,9 +38,9 @@ class LottoManagerTest {
         }
     }
 
-    @DisplayName("수익률을 올바르게 계산할 수 있다.")
     @Test
-    void test2() {
+    @DisplayName("구매 금액과 로또 결과가 주어졌을 때 수익률을 정확히 계산한다")
+    void check_calculate_revenue_correctly() {
         // given
         LottoManager lottoManager = new LottoManager();
         WinningResult winningResult = lottoManager.getWinningResult(lottos, winningLotto);
