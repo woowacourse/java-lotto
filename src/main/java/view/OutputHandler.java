@@ -29,20 +29,7 @@ public class OutputHandler {
         printBanner();
 
         StringBuilder lottoResultMessage = new StringBuilder();
-
-        Map<LottoRanking, Integer> result = lottoResult.result();
-        result.remove(LottoRanking.LOSING);
-
-        List<LottoRanking> lottoRankings = result.keySet().stream()
-                .sorted(Collections.reverseOrder())
-                .toList();
-
-        for (LottoRanking lottoRanking : lottoRankings) {
-            lottoResultMessage
-                    .append(lottoRanking.getCorrectCount())
-                    .append("개 일치")
-                    .append(buildLottoRanking(lottoRanking, result));
-        }
+        buildCorrectCount(lottoResultMessage, lottoResult);
 
         System.out.println(lottoResultMessage.toString().trim());
     }
@@ -58,6 +45,22 @@ public class OutputHandler {
 
     private void printBanner() {
         System.out.printf(String.format("%n당첨 통계%n--------- %n"));
+    }
+
+    private void buildCorrectCount(StringBuilder lottoResultMessage, LottoResult lottoResult) {
+        Map<LottoRanking, Integer> result = lottoResult.result();
+        result.remove(LottoRanking.LOSING);
+
+        List<LottoRanking> lottoRankings = result.keySet().stream()
+                .sorted(Collections.reverseOrder())
+                .toList();
+
+        for (LottoRanking lottoRanking : lottoRankings) {
+            lottoResultMessage
+                    .append(lottoRanking.getCorrectCount())
+                    .append("개 일치")
+                    .append(buildLottoRanking(lottoRanking, result));
+        }
     }
 
     private String buildLottoRanking(LottoRanking lottoRanking, Map<LottoRanking, Integer> result) {
