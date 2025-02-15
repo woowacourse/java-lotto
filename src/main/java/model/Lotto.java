@@ -39,6 +39,7 @@ public class Lotto {
 
     private static List<Integer> parseLotto(String input) {
         return Arrays.stream(input.split(LOTTO_SEPARATOR))
+                .map(String::trim)
                 .map(Lotto::parseInteger)
                 .toList();
     }
