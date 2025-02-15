@@ -3,9 +3,7 @@ package model;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +20,7 @@ class BonusNumberTest {
     @Test
     @DisplayName("보너스 번호가 로또 번호 내부에 존재하는 경우 true를 반환한다.")
     void is_bonus_number_true(){
-        List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(lottoNumbers);
         BonusNumber bonusNumber = new BonusNumber(5);
 
