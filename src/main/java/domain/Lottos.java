@@ -20,9 +20,7 @@ public class Lottos {
     public WinningResult calculateWinning(WinningLotto winningLotto, Money purchaseLottoMoney) {
         Map<Rank, Integer> winningResult = new HashMap<>();
         for (Lotto purchaseLotto : lottos) {
-            int matchCount = winningLotto.calculateMatchCount(purchaseLotto);
-            boolean isMatchBonusNumber = winningLotto.containsBonusNumber(purchaseLotto);
-            Rank rank = Rank.findRank(matchCount, isMatchBonusNumber);
+            Rank rank = winningLotto.calculateRank(purchaseLotto);
             winningResult.put(rank, winningResult.getOrDefault(rank, 0) + 1);
         }
         return new WinningResult(purchaseLottoMoney, winningResult);
