@@ -33,8 +33,8 @@ public class Lotto {
         this.prizeTier = PrizeTier.getTier(count, isBonusMatched);
     }
 
-    public int extractPrize() {
-        return prizeTier.getPrize();
+    public PrizeTier getPrizeTier() {
+        return prizeTier;
     }
 
     public boolean isTierMatched(PrizeTier tier) {

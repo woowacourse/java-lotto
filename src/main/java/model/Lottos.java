@@ -25,7 +25,8 @@ public class Lottos {
 
     public long calculateTotalPrize() {
         return lottos.stream()
-            .mapToInt(Lotto::extractPrize)
+            .map(Lotto::getPrizeTier)
+            .mapToInt(PrizeTier::getPrize)
             .sum();
     }
 
