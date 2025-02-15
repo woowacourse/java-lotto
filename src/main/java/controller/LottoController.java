@@ -25,7 +25,7 @@ public class LottoController {
         while(retry) {
             retry = buyLottoInput();
         }
-        OutputView.printBuyLotto(formattingBuyLottoResult());
+        displayBuyLottos();
     }
 
     private boolean buyLottoInput() {
@@ -83,8 +83,8 @@ public class LottoController {
         System.out.println(formattingWinningResult());
     }
 
-    public String formattingBuyLottoResult() {
-        return lottoService.formattingBuyLottoResult();
+    public void displayBuyLottos() {
+        OutputView.printBuyLottos(lottoService.getBuyLottos());
     }
 
     public String formattingWinningResult() {
@@ -98,5 +98,4 @@ public class LottoController {
     public void inputBonusNumber(String inputBonusNumber){
         lottoService.inputBonusNumber(inputBonusNumber);
     }
-
 }

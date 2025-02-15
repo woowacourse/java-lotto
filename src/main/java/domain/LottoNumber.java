@@ -15,12 +15,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
-    private void validateLottoNumber(int lottoNumber) {
-
-        if (lottoNumber > LOTTO_NUMBER_END || lottoNumber < LOTTO_NUMBER_START) {
-            throw new LottoException(INVALID_NUMBER_RANGE);
-        }
+    public int getLottoNumber() {
+        return lottoNumber;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -32,7 +30,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         LottoNumber that = (LottoNumber) o;
         return lottoNumber == that.lottoNumber;
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
@@ -46,6 +43,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public String toString(){
         return lottoNumber + "";
+    }
+
+    private void validateLottoNumber(int lottoNumber) {
+
+        if (lottoNumber > LOTTO_NUMBER_END || lottoNumber < LOTTO_NUMBER_START) {
+            throw new LottoException(INVALID_NUMBER_RANGE);
+        }
     }
 
 }

@@ -1,9 +1,9 @@
 package domain;
 
+import domain.dto.BuyLottoResultDto;
 import domain.enums.WinningCase;
 import exception.LottoException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -13,16 +13,22 @@ public class LottoDispenser {
 
     private final int LOTTO_MONEY_UNIT = 1000;
     private final String INVALID_BUY_MONEY = "유효하지 않은 구매 금액입니다.";
-    private final String BUY_LOTTO_AMOUNT_FORMAT = "%d개를 구매했습니다.\n";
     private final List<Lotto> lottos;
     private final int buyMoney;
 
     public LottoDispenser(String buyMoneyInput) {
         validateLottoDispenser(buyMoneyInput);
         this.buyMoney = Integer.parseInt(buyMoneyInput);
-        int lottoCount = Integer.parseInt(buyMoneyInput) / LOTTO_MONEY_UNIT;
-        lottos = generateLottos(lottoCount);
+        lottos = generateLottos(calculateBuyLottoCount());
+    }
 
+    private int calculateBuyLottoCount() {
+        int lottoCount = calculateBuyLottoAmount();
+        return lottoCount;
+    }
+
+    private int calculateBuyLottoAmount() {
+        return buyMoney / LOTTO_MONEY_UNIT;
     }
 
     public LottoDispenser(List<Lotto> lottos) {
@@ -75,7 +81,7 @@ public class LottoDispenser {
     public double calculateEarnMoneyRatio(long earnMoney) {
         return  Math.round((double) earnMoney / buyMoney);
     }
-
+/*
     public String formattingBuyLottoResult() {
         StringBuilder stringBuilder = new StringBuilder(String.format(BUY_LOTTO_AMOUNT_FORMAT,lottos.size()));
         for(Lotto lotto : lottos){
@@ -83,6 +89,13 @@ public class LottoDispenser {
                     .append("\n");
         }
         return stringBuilder.toString();
+    }*/
+
+    public BuyLottoResultDto getBuyLottos() {
+         return new BuyLottoResultDto(
+            lottos.stream().map(Lotto::getLottoNumbers).toList(),
+            calculateBuyLottoAmount()
+        );
     }
 
 }

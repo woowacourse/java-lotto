@@ -49,4 +49,10 @@ public class Lotto {
                 .anyMatch(lottoNumber -> bonusNumber.isContain(lottoNumber));
     }
 
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.stream()
+            .map(LottoNumber::getLottoNumber)
+            .toList();
+    }
+
 }
