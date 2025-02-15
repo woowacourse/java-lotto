@@ -2,6 +2,7 @@ package model;
 
 import dto.LottoDto;
 import error.ErrorMessage;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,7 +42,7 @@ public class Lotto {
     }
 
     public LottoDto toDto() {
-        return new LottoDto(numbers);
+        return new LottoDto(new ArrayList<>(numbers));
     }
 
     private void validateNumbers(List<Integer> numbers) {
