@@ -1,10 +1,10 @@
 package model;
 
-import static model.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
-import static model.ExceptionMessage.INVALID_LOTTO_RANGE;
-import static model.ExceptionMessage.INVALID_LOTTO_SIZE;
-import static model.ExceptionMessage.INVALID_LOTTO_TYPE;
-import static model.ExceptionMessage.LOTTO_DUPLICATE;
+import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
+import static constant.ExceptionMessage.INVALID_LOTTO_RANGE;
+import static constant.ExceptionMessage.INVALID_LOTTO_SIZE;
+import static constant.ExceptionMessage.INVALID_LOTTO_TYPE;
+import static constant.ExceptionMessage.LOTTO_DUPLICATE;
 
 import java.util.ArrayList;
 import java.util.HashSet;

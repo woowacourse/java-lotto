@@ -1,6 +1,6 @@
-package view;
+package constant;
 
-public enum OutViewConstant {
+public enum OutViewMessage {
 
     LOTTO_PURCHASE_GUIDANCE("%d개 구매했습니다."),
     WINNING_STATISTIC_GUIDANCE("당첨 통계"),
@@ -12,7 +12,7 @@ public enum OutViewConstant {
 
     private final String message;
 
-    OutViewConstant(String message) {
+    OutViewMessage(String message) {
         this.message = message;
     }
 

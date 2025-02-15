@@ -1,9 +1,9 @@
 package model;
 
-import static model.ExceptionMessage.BONUS_DUPLICATE;
-import static model.ExceptionMessage.INVALID_BONUS_RANGE;
-import static model.ExceptionMessage.INVALID_BONUS_TYPE;
-import static model.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
+import static constant.ExceptionMessage.BONUS_DUPLICATE;
+import static constant.ExceptionMessage.INVALID_BONUS_RANGE;
+import static constant.ExceptionMessage.INVALID_BONUS_TYPE;
+import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
 
 public class Bonus {
 

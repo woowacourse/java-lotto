@@ -1,9 +1,9 @@
 package model;
 
-import static model.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
-import static model.ExceptionMessage.INVALID_LOTTO_RANGE;
-import static model.ExceptionMessage.INVALID_LOTTO_TYPE;
-import static model.ExceptionMessage.LOTTO_DUPLICATE;
+import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
+import static constant.ExceptionMessage.INVALID_LOTTO_RANGE;
+import static constant.ExceptionMessage.INVALID_LOTTO_TYPE;
+import static constant.ExceptionMessage.LOTTO_DUPLICATE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

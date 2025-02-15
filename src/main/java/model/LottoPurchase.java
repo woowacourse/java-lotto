@@ -1,9 +1,9 @@
 package model;
 
-import static model.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
-import static model.ExceptionMessage.INVALID_LOTTO_MIN_PURCHASE;
-import static model.ExceptionMessage.INVALID_LOTTO_PURCHASE_TYPE;
-import static model.ExceptionMessage.INVALID_LOTTO_PURCHASE_UNIT;
+import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
+import static constant.ExceptionMessage.INVALID_LOTTO_MIN_PURCHASE;
+import static constant.ExceptionMessage.INVALID_LOTTO_PURCHASE_TYPE;
+import static constant.ExceptionMessage.INVALID_LOTTO_PURCHASE_UNIT;
 
 public class LottoPurchase {
 

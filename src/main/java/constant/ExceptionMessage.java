@@ -1,4 +1,4 @@
-package model;
+package constant;
 
 public enum ExceptionMessage {
     INVALID_INPUT_NULL_OR_BLANK("공백이나 NULL은 입력할 수 없습니다."),

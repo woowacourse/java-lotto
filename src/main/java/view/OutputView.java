@@ -1,10 +1,10 @@
 package view;
 
-import static view.OutViewConstant.BENEFIT_RATE_GUIDANCE;
-import static view.OutViewConstant.LOTTO_PURCHASE_GUIDANCE;
-import static view.OutViewConstant.WINNING_STATISTIC;
-import static view.OutViewConstant.WINNING_STATISTIC_GUIDANCE;
-import static view.OutViewConstant.WINNING_STATISTIC_LINE_GUIDANCE;
+import static constant.OutViewMessage.BENEFIT_RATE_GUIDANCE;
+import static constant.OutViewMessage.LOTTO_PURCHASE_GUIDANCE;
+import static constant.OutViewMessage.WINNING_STATISTIC;
+import static constant.OutViewMessage.WINNING_STATISTIC_GUIDANCE;
+import static constant.OutViewMessage.WINNING_STATISTIC_LINE_GUIDANCE;
 
 import java.util.EnumMap;
 import java.util.List;
