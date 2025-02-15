@@ -3,15 +3,13 @@ package lotto.service;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.domain.Amount;
-import lotto.domain.Lotto;
 import lotto.domain.MatchStatistics;
-import lotto.dto.Profit;
+import lotto.domain.Profit;
 
 class LottoServiceTest {
 

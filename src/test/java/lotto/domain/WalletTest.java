@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 class WalletTest {
 
-    @DisplayName("구매한 로또 목록이 요구사항과 동일한 형태로 출력된다.")
+    @DisplayName("구매한 로또 목록이 요구 사항과 동일한 형태로 출력된다.")
     @Test
-    void testWalletToString() {
+    void WalletToStringIsSatisfiedRequest() {
         Amount amount = new Amount(5000);
 
         Wallet wallet = new Wallet(amount);
