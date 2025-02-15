@@ -35,7 +35,6 @@ public class OutputView {
         print(WINNING_STATISTIC_GUIDANCE.getMessage());
         print(WINNING_STATISTIC_LINE_GUIDANCE.getMessage());
 
-        // "%d개 일치%s(%d원) - %d개"
         for (Prize prize : prizeMap.keySet()) {
             String comment = getComment(prize);
             String message = WINNING_STATISTIC.getMessage(prize.getMatchCount(), comment, prize.getPrizeAmount(), prizeMap.get(prize));
