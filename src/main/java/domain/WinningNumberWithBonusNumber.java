@@ -11,7 +11,9 @@ public record WinningNumberWithBonusNumber(
 
     private void validateDistinct(Lotto winningNumber, int bonusNumber) {
         if (winningNumber.getNumbers().contains(bonusNumber)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(
+                    "보너스 번호(" + bonusNumber + ")는 당첨 번호와 중복될 수 없습니다. 당첨 번호: " + winningNumber.getNumbers()
+            );
         }
     }
 }
