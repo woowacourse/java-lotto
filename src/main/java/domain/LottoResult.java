@@ -25,4 +25,8 @@ public record LottoResult(
         }
         return totalPrize;
     }
+
+    public int getCount() {
+        return result.size();
+    }
 }
