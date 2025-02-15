@@ -3,6 +3,11 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.lotto.Lotto;
+import domain.winning.Matcher;
+import domain.winning.WinningCounter;
+import domain.winning.WinningLotto;
+import domain.winning.Yield;
 import java.util.List;
 import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.Test;

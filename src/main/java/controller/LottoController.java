@@ -1,11 +1,11 @@
 package controller;
 
-import domain.Lottos;
-import domain.Matcher;
-import domain.PurchaseAmount;
-import domain.WinningCounter;
-import domain.WinningLotto;
-import domain.Yield;
+import domain.lotto.Lottos;
+import domain.lotto.PurchaseAmount;
+import domain.winning.Matcher;
+import domain.winning.WinningCounter;
+import domain.winning.WinningLotto;
+import domain.winning.Yield;
 import java.util.List;
 import view.InputView;
 import view.OutputView;

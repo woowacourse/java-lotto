@@ -1,6 +1,6 @@
 package view;
 
-import domain.WinningCounter;
+import domain.winning.WinningCounter;
 import java.util.List;
 import java.util.stream.IntStream;
 

@@ -1,6 +1,6 @@
-package domain;
+package domain.lotto;
 
-import static domain.Lotto.LOTTO_PRICE;
+import static domain.lotto.Lotto.LOTTO_PRICE;
 
 public class PurchaseAmount {
 

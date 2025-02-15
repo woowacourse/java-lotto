@@ -1,6 +1,6 @@
-package domain;
+package domain.winning;
 
-import static domain.WinningStatistics.SIZE_WITH_BONUS;
+import static domain.winning.WinningStatistics.SIZE_WITH_BONUS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +54,7 @@ public class WinningCounter {
         return winningStatisticsFilteredByMatchCount.getFirst();
     }
 
-    public static boolean hasBonusCondition(List<WinningStatistics> winningStatisticsFilteredByMatchCount) {
+    private static boolean hasBonusCondition(List<WinningStatistics> winningStatisticsFilteredByMatchCount) {
         return winningStatisticsFilteredByMatchCount.size() == SIZE_WITH_BONUS;
     }
 

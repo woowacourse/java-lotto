@@ -2,6 +2,7 @@ package domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import domain.winning.WinningLotto;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 

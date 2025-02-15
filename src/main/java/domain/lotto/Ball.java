@@ -1,4 +1,4 @@
-package domain;
+package domain.lotto;
 
 public class Ball {
 

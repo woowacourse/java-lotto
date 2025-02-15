@@ -1,5 +1,6 @@
-package domain;
+package domain.winning;
 
+import domain.lotto.Lotto;
 import java.util.List;
 
 public class Matcher {
