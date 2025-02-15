@@ -13,7 +13,6 @@ public class LottoMachine {
 
     private final LottoPickStrategy numberStrategy;
 
-
     public Lotto createLotto() {
         Set<Number> numbers;
         do {
