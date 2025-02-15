@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 class StatisticsServiceTest {
     private final StatisticsService statisticsService = new StatisticsService();
 
-    public static Stream<Arguments> calculateCountMatchedNumbersTestCases() {
+    public static Stream<Arguments> calculateCountMatchedNumbersCases() {
         return Stream.of(
                 Arguments.arguments(new LottoTicket(List.of(11, 12, 13, 14, 15, 16)), List.of(1, 2, 3, 4, 5, 6), 0),
                 Arguments.arguments(new LottoTicket(List.of(1, 12, 13, 14, 15, 16)), List.of(1, 2, 3, 4, 5, 6), 1),
@@ -25,40 +25,57 @@ class StatisticsServiceTest {
         );
     }
 
-    public static Stream<Arguments> hasBonusNumberTestCases() {
+    public static Stream<Arguments> bonusNumberNotMatchedCases() {
         return Stream.of(
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 1, true),
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 2, true),
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 3, true),
-                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 7, false)
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 7, false),
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 8, false),
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 9, false),
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 10, false)
+
         );
     }
 
-    @DisplayName("매칭된 번호 개수 계산이 올바르게 되는지 테스트")
+    public static Stream<Arguments> bonusNumberMatchedCases() {
+        return Stream.of(
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 1, true),
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 2, true),
+                Arguments.arguments(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 3, true)
+        );
+    }
+
+    @DisplayName("당첨번호 매칭 개수가 올바르게 되는지 테스트")
     @ParameterizedTest
-    @MethodSource("calculateCountMatchedNumbersTestCases")
-    void 당첨번호_매칭_개수_계산_테스트(LottoTicket lottoTicket, List<Integer> winningNumbers, int expected) {
+    @MethodSource("calculateCountMatchedNumbersCases")
+    void 당첨번호_매칭_개수_계산(LottoTicket lottoTicket, List<Integer> winningNumbers, int expected) {
         // when
         int actual = lottoTicket.countMatchedNumbers(winningNumbers);
-
         // then
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
-    @DisplayName("보너스 번호 매칭 여부를 제대로 계산하는지 테스트")
+    @DisplayName("보너스 번호가 매칭되지 않는 경우")
     @ParameterizedTest
-    @MethodSource("hasBonusNumberTestCases")
-    void 보너스_번호_매칭_여부_계산_테스트(LottoTicket lottoTicket, int bonusNumber, boolean expected) {
+    @MethodSource("bonusNumberNotMatchedCases")
+    void 보너스_번호가_매칭되지_않는_경우(LottoTicket lottoTicket, int bonusNumber, boolean expected) {
         // when
         boolean actual = lottoTicket.hasBonusNumber(bonusNumber);
-
         // then
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
-    @DisplayName("당첨된 로또들로 통계 계산 테스트")
+    @DisplayName("보너스 번호가 매칭되는 경우")
+    @ParameterizedTest
+    @MethodSource("bonusNumberMatchedCases")
+    void 보너스_번호가_매칭되는_경우(LottoTicket lottoTicket, int bonusNumber, boolean expected) {
+        // when
+        boolean actual = lottoTicket.hasBonusNumber(bonusNumber);
+        // then
+        Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("당첨 통계 계산 테스트")
     @Test
-    void 당첨_통계_계산_테스트() {
+    void 당첨_통계_계산() {
         //given
         LottoTicket fifth = new LottoTicket(List.of(1, 2, 3, 43, 44, 45));
         LottoTicket fourth = new LottoTicket(List.of(1, 2, 3, 4, 44, 45));
@@ -81,9 +98,9 @@ class StatisticsServiceTest {
         Assertions.assertThat(prizeCounter.get(LottoPrize.NOTHING)).isEqualTo(1);
     }
 
-    @DisplayName("당첨된 로또에 대한 수익률 계산 테스트")
+    @DisplayName("수익률 계산 테스트")
     @Test
-    void 수익률_계산_테스트() {
+    void 수익률_계산() {
         //given
         LottoTicket fifth = new LottoTicket(List.of(1, 2, 3, 43, 44, 45));
         LottoTicket fourth = new LottoTicket(List.of(1, 2, 3, 4, 44, 45));
