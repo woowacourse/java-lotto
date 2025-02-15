@@ -8,7 +8,7 @@ import model.LottoRank;
 import model.LottoRankCalculator;
 import model.LottoRankResult;
 import model.LottoStore;
-import model.LottoTicket;
+import model.LottoNumbers;
 import model.WinningLotto;
 import org.junit.jupiter.api.Test;
 
@@ -33,11 +33,11 @@ class LottoStoreTest {
     @Test
     void 당첨결과_개수를_센다() {
         // given
-        List<LottoTicket> lottoTickets = List.of(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)));
+        List<LottoNumbers> lottoNumbers = List.of(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 7), 6);
 
         // when
-        LottoRankResult lottoRankResult = lottoStore.calculateRankMatchCount(lottoTickets, winningLotto);
+        LottoRankResult lottoRankResult = lottoStore.calculateRankMatchCount(lottoNumbers, winningLotto);
 
         // then
         assertThat(lottoRankResult.getCountByRank(LottoRank.SECOND)).isEqualTo(1);

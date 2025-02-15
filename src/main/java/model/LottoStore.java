@@ -16,17 +16,17 @@ public class LottoStore {
         this.lottoRankCalculator = lottoRankCalculator;
     }
 
-    public List<LottoTicket> purchase(final int paidAmount) {
+    public List<LottoNumbers> purchase(final int paidAmount) {
         validateAmountUnit(paidAmount);
 
         int purchasedTicketAmount = paidAmount / LOTTO_PRICE;
         return IntStream.range(0, purchasedTicketAmount)
-                .mapToObj(count -> new LottoTicket(lottoNumberGenerator.generate()))
+                .mapToObj(count -> new LottoNumbers(lottoNumberGenerator.generate()))
                 .toList();
     }
 
-    public LottoRankResult calculateRankMatchCount(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
-        List<LottoRank> lottoRanks = calculateRank(lottoTickets, winningLotto);
+    public LottoRankResult calculateRankMatchCount(List<LottoNumbers> lottoNumbers, WinningLotto winningLotto) {
+        List<LottoRank> lottoRanks = calculateRank(lottoNumbers, winningLotto);
 
         LottoRankResult lottoRankResult = new LottoRankResult();
         for (LottoRank lottoRank : lottoRanks) {
@@ -44,8 +44,8 @@ public class LottoStore {
         return (double) profit / paidAmount;
     }
 
-    private List<LottoRank> calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
-        return lottoTickets.stream().map(lottoTicket -> lottoRankCalculator.calculate(lottoTicket, winningLotto))
+    private List<LottoRank> calculateRank(List<LottoNumbers> lottoNumbers, WinningLotto winningLotto) {
+        return lottoNumbers.stream().map(lottoTicket -> lottoRankCalculator.calculate(lottoTicket, winningLotto))
                 .filter(Objects::nonNull).toList();
     }
 

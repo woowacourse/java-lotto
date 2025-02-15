@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public record LottoTicket(
+public record LottoNumbers(
         List<Integer> numbers
 ) {
 

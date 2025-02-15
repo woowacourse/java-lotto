@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import model.LottoRank;
 import model.LottoRankResult;
-import model.LottoTicket;
+import model.LottoNumbers;
 import model.WinningLotto;
 
 public class LottoDtoMapper {
 
-    public List<LottoTicketResponse> toLottoTicketResponses(List<LottoTicket> lottoTickets) {
-        return lottoTickets.stream()
+    public List<LottoTicketResponse> toLottoTicketResponses(List<LottoNumbers> lottoNumbers) {
+        return lottoNumbers.stream()
                 .map(ticket -> LottoTicketResponse.from(ticket.numbers()))
                 .toList();
     }
