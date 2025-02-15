@@ -1,12 +1,10 @@
 package model;
 
-import static model.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
-import static model.ExceptionMessage.INVALID_LOTTO_RANGE;
-import static model.ExceptionMessage.INVALID_LOTTO_TYPE;
-import static model.ExceptionMessage.LOTTO_DUPLICATE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import exception.CommonExceptionType;
+import exception.LottoExceptionType;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -31,7 +29,7 @@ class LottoTest {
     void inputWithNull() {
         assertThatThrownBy(() -> Lotto.of(null))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_INPUT_NULL_OR_BLANK.getMessage());
+                .hasMessageContaining(CommonExceptionType.INVALID_INPUT_NULL_OR_BLANK.getMessage());
     }
 
     @Test
@@ -39,7 +37,7 @@ class LottoTest {
     void inputWithBlank() {
         assertThatThrownBy(() -> Lotto.of(" "))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_INPUT_NULL_OR_BLANK.getMessage());
+                .hasMessageContaining(CommonExceptionType.INVALID_INPUT_NULL_OR_BLANK.getMessage());
     }
 
     @Test
@@ -47,7 +45,7 @@ class LottoTest {
     void inputWithDuplicate() {
         assertThatThrownBy(() -> Lotto.of("1, 1, 2, 3, 4, 5"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LOTTO_DUPLICATE.getMessage());
+                .hasMessageContaining(LottoExceptionType.LOTTO_DUPLICATE.getMessage());
     }
 
     @Test
@@ -55,7 +53,7 @@ class LottoTest {
     void inputWithCharacter() {
         assertThatThrownBy(() -> Lotto.of("1, ㅁ, 2, 3, 4, 5"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_LOTTO_TYPE.getMessage());
+                .hasMessageContaining(CommonExceptionType.INVALID_NUMBER_FORMAT.getMessage());
     }
 
     @ParameterizedTest(name = "{0} 미만이거나 {1} 초과 숫자가 들어왔을 때 예외 처리된다.")
@@ -63,7 +61,7 @@ class LottoTest {
     void inputWithInvalidRange(final int lottoMinRange, final int lottoMaxRange) {
         assertThatThrownBy(() -> Lotto.of("48, 1, 2, 3, 4, 5"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_LOTTO_RANGE.getMessage(lottoMinRange, lottoMaxRange));
+                .hasMessageContaining(LottoExceptionType.INVALID_LOTTO_RANGE.getMessage(lottoMinRange, lottoMaxRange));
     }
 
     static Stream<Arguments> provideLottoRange() {

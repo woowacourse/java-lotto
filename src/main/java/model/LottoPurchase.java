@@ -1,7 +1,7 @@
 package model;
 
-import static model.ExceptionMessage.INVALID_LOTTO_MIN_PURCHASE;
-import static model.ExceptionMessage.INVALID_LOTTO_PURCHASE_UNIT;
+
+import exception.LottoPurchaseExceptionType;
 
 public class LottoPurchase {
 
@@ -21,13 +21,15 @@ public class LottoPurchase {
 
     private void validateMinAmount(int amount) {
         if (amount < MIN_AMOUNT) {
-            throw new IllegalArgumentException(INVALID_LOTTO_MIN_PURCHASE.getMessage(MIN_AMOUNT));
+            throw new IllegalArgumentException(
+                    LottoPurchaseExceptionType.INVALID_LOTTO_MIN_PURCHASE.getMessage(MIN_AMOUNT));
         }
     }
 
     private void validateAmountUnit(int amount) {
         if (amount % MIN_AMOUNT != 0) {
-            throw new IllegalArgumentException(INVALID_LOTTO_PURCHASE_UNIT.getMessage(MIN_AMOUNT));
+            throw new IllegalArgumentException(
+                    LottoPurchaseExceptionType.INVALID_LOTTO_PURCHASE_UNIT.getMessage(MIN_AMOUNT));
         }
     }
 

@@ -1,11 +1,10 @@
 package model;
 
-import static model.ExceptionMessage.BONUS_DUPLICATE;
-import static model.ExceptionMessage.INVALID_BONUS_RANGE;
-import static model.ExceptionMessage.INVALID_BONUS_TYPE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import exception.BonusExceptionType;
+import exception.CommonExceptionType;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -39,7 +38,7 @@ class BonusTest {
     void inputWithDuplicate() {
         assertThatThrownBy(() -> Bonus.of(1, lotto))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(BONUS_DUPLICATE.getMessage());
+                .hasMessageContaining(BonusExceptionType.BONUS_DUPLICATE.getMessage());
     }
 
     @ParameterizedTest(name = "{0} 미만이거나 {1}} 초과 숫자가 들어왔을 때 예외 처리된다.")
@@ -47,7 +46,7 @@ class BonusTest {
     void inputWithInvalidRange(final int lottoMinRange, final int lottoMaxRange) {
         assertThatThrownBy(() -> Bonus.of(46, lotto))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_BONUS_RANGE.getMessage(lottoMinRange, lottoMaxRange));
+                .hasMessageContaining(BonusExceptionType.INVALID_BONUS_RANGE.getMessage(lottoMinRange, lottoMaxRange));
     }
 
     @Test
@@ -56,7 +55,7 @@ class BonusTest {
     void inputWithInvalidCount() {
         assertThatThrownBy(() -> Bonus.of(0, lotto)) // TODO : number 인자 0을 테스트하고 싶은 숫자로 수정
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_BONUS_TYPE.getMessage());
+                .hasMessageContaining(CommonExceptionType.INVALID_NUMBER_FORMAT.getMessage());
     }
 
     static Stream<Arguments> provideLottoRange() {

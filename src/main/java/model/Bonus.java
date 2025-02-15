@@ -1,7 +1,6 @@
 package model;
 
-import static model.ExceptionMessage.BONUS_DUPLICATE;
-import static model.ExceptionMessage.INVALID_BONUS_RANGE;
+import exception.BonusExceptionType;
 
 public class Bonus {
 
@@ -22,13 +21,14 @@ public class Bonus {
 
     private void validateRange(final int number) {
         if (BONUS_MIN_RANGE > number || number > BONUS_MAX_RANGE) {
-            throw new IllegalArgumentException(INVALID_BONUS_RANGE.getMessage(BONUS_MIN_RANGE, BONUS_MAX_RANGE));
+            throw new IllegalArgumentException(
+                    BonusExceptionType.INVALID_BONUS_RANGE.getMessage(BONUS_MIN_RANGE, BONUS_MAX_RANGE));
         }
     }
 
     private void validateDuplicateWithLotto(final int number, final Lotto lotto) {
         if (lotto.getNumbers().contains(number)) {
-            throw new IllegalArgumentException(BONUS_DUPLICATE.getMessage());
+            throw new IllegalArgumentException(BonusExceptionType.BONUS_DUPLICATE.getMessage());
         }
     }
 

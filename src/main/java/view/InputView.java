@@ -1,8 +1,6 @@
 package view;
 
-import static model.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
-import static model.ExceptionMessage.INVALID_INPUT_TYPE;
-
+import exception.CommonExceptionType;
 import java.util.Scanner;
 import model.Bonus;
 import model.Lotto;
@@ -31,7 +29,7 @@ public class InputView {
         try {
             return Integer.parseInt(getInput());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_INPUT_TYPE.getMessage());
+            throw new IllegalArgumentException(CommonExceptionType.INVALID_NUMBER_FORMAT.getMessage());
         }
     }
 
@@ -39,7 +37,7 @@ public class InputView {
         try {
             return sc.nextLine().strip();
         } catch (NullPointerException e) {
-            throw new IllegalArgumentException(INVALID_INPUT_NULL_OR_BLANK.getMessage());
+            throw new IllegalArgumentException(CommonExceptionType.INVALID_INPUT_NULL_OR_BLANK.getMessage());
         }
     }
 }

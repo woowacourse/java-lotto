@@ -1,11 +1,9 @@
 package model;
 
-import static model.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
-import static model.ExceptionMessage.INVALID_LOTTO_RANGE;
-import static model.ExceptionMessage.INVALID_LOTTO_SIZE;
 import static model.ExceptionMessage.INVALID_LOTTO_TYPE;
-import static model.ExceptionMessage.LOTTO_DUPLICATE;
 
+import exception.CommonExceptionType;
+import exception.LottoExceptionType;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -42,13 +40,13 @@ public class Lotto {
 
     private static void validateNullOrBlank(String input) {
         if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException(INVALID_INPUT_NULL_OR_BLANK.getMessage());
+            throw new IllegalArgumentException(CommonExceptionType.INVALID_INPUT_NULL_OR_BLANK.getMessage());
         }
     }
 
     private static void validateSize(final List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(INVALID_LOTTO_SIZE.getMessage(LOTTO_SIZE));
+            throw new IllegalArgumentException(LottoExceptionType.INVALID_LOTTO_SIZE.getMessage(LOTTO_SIZE));
         }
     }
 
@@ -57,14 +55,14 @@ public class Lotto {
                 .filter(input -> LOTTO_MIN_RANGE > input || input > LOTTO_MAX_RANGE)
                 .forEach(input -> {
                     throw new IllegalArgumentException(
-                            INVALID_LOTTO_RANGE.getMessage(LOTTO_MIN_RANGE, LOTTO_MAX_RANGE));
+                            LottoExceptionType.INVALID_LOTTO_RANGE.getMessage(LOTTO_MIN_RANGE, LOTTO_MAX_RANGE));
                 });
     }
 
     private void validateDuplicate(final List<Integer> inputs) {
         HashSet<Integer> set = new HashSet<>(inputs);
         if (inputs.size() != set.size()) {
-            throw new IllegalArgumentException(LOTTO_DUPLICATE.getMessage());
+            throw new IllegalArgumentException(LottoExceptionType.LOTTO_DUPLICATE.getMessage());
         }
     }
 
@@ -72,7 +70,7 @@ public class Lotto {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_LOTTO_TYPE.getMessage());
+            throw new IllegalArgumentException(CommonExceptionType.INVALID_NUMBER_FORMAT.getMessage());
         }
     }
 
