@@ -93,12 +93,11 @@ public class LottoController {
     }
 
     private <T> T retryUntilNoIllegalException(Supplier<T> task) {
-        while (true) {
-            try {
-                return task.get();
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
+        try {
+            return task.get();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return retryUntilNoIllegalException(task);
         }
     }
 }

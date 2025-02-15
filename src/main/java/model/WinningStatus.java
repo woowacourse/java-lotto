@@ -36,12 +36,10 @@ public enum WinningStatus {
     }
 
     private static WinningStatus decideByMatchingCount(int matchingCount) {
-        for (WinningStatus winningStatus : WinningStatus.values()) {
-            if (winningStatus.matchingCount == matchingCount) {
-                return winningStatus;
-            }
-        }
-        return NONE;
+        return Arrays.stream(WinningStatus.values())
+                .filter(w -> w.matchingCount == matchingCount)
+                .findFirst()
+                .orElse(NONE);
     }
 
     private static WinningStatus decideByBonusNumber(boolean matchesBonusNumber) {
