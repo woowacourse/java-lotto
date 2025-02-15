@@ -5,44 +5,23 @@ import view.InputView;
 import view.OutputView;
 
 public class AppConfig {
-    private Controller controller;
-    private InputView inputView;
-    private OutputView outputView;
-    private LottoMachine lottoMachine;
-    private RandomNumberGenerator randomNumberGenerator;
-
     public Controller controller() {
-        if (this.controller == null) {
-            this.controller = new Controller(inputView(), outputView(), lottoMaker());
-        }
-        return this.controller;
+        return new Controller(inputView(), outputView(), lottoMaker());
     }
 
     private InputView inputView() {
-        if (this.inputView == null) {
-            this.inputView = new InputView();
-        }
-        return this.inputView;
+        return new InputView();
     }
 
     private OutputView outputView() {
-        if (this.outputView == null) {
-            this.outputView = new OutputView();
-        }
-        return this.outputView;
+        return new OutputView();
     }
 
     private LottoMachine lottoMaker() {
-        if (this.lottoMachine == null) {
-            this.lottoMachine = new LottoMachine(lottoNumberGenerator());
-        }
-        return this.lottoMachine;
+        return new LottoMachine(lottoNumberGenerator());
     }
 
     private RandomNumberGenerator lottoNumberGenerator() {
-        if (this.randomNumberGenerator == null) {
-            this.randomNumberGenerator = new RandomNumberGenerator();
-        }
-        return this.randomNumberGenerator;
+        return new RandomNumberGenerator();
     }
 }
