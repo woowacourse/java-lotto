@@ -1,6 +1,7 @@
 package model;
 
 import dto.LottoDto;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
@@ -22,20 +23,16 @@ public enum Rank {
         this.winningAmount = winningAmount;
     }
 
-
-    // TODO : 메소드 인덴트 1로 줄이기
     public static Rank getRank(WinningLotto winningLotto, LottoDto lottoDto) {
         int duplicateNumber = winningLotto.getDuplicateNumber(lottoDto);
-        for (Rank rank : values()) {
-            if (duplicateNumber == 5 && isBonusMatch(winningLotto.getBonus(), lottoDto)) {
-                return SECOND;
-            }
-            if (rank.matchNumber == duplicateNumber) {
-                return rank;
-            }
-        }
 
-        return FAIL;
+        if (duplicateNumber == 5 && isBonusMatch(winningLotto.getBonus(), lottoDto)) {
+            return SECOND;
+        }
+        return Arrays.stream(values())
+                .filter(rank -> rank.matchNumber == duplicateNumber)
+                .findFirst()
+                .orElse(FAIL);
     }
 
     private static boolean isBonusMatch(int bonus, LottoDto lottoDto) {
