@@ -28,11 +28,7 @@ public class MockingLottoServiceTest {
   @ParameterizedTest
   @DisplayName("당첨_통계_계산_및_출력_테스트")
   @MethodSource("calculateWinningResult")
-  public void 당첨_통계_계산_및_출력_테스트(List<List<Integer>> testLottoNumbers) {
-    String winningNumber = "1, 2, 3, 4, 5, 6";
-    String bonusNumber = "7";
-
-    System.out.println(testLottoNumbers);
+  public void 당첨_통계_계산_및_출력_테스트(List<List<Integer>> testLottoNumbers, String winningNumber, String bonusNumber) {
 
     List<Lotto> lottos = testLottoNumbers.stream().map(Lotto::new).toList();
 
@@ -70,7 +66,9 @@ public class MockingLottoServiceTest {
                 List.of(13, 14, 18, 21, 23, 35),
                 List.of(17, 21, 29, 37, 42, 45),
                 List.of(3, 8, 27, 30, 35, 44)
-            )
+            ),
+            "1, 2, 3, 4, 5, 6",
+            "7"
         )
     );
   }
