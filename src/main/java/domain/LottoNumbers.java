@@ -3,6 +3,7 @@ package domain;
 import java.util.List;
 
 public class LottoNumbers {
+    public static int LOTTO_SIZE = 6;
     public static int LOTTO_MIN_NUMBER = 1;
     public static int LOTTO_MAX_NUMBER = 45;
     private final List<Integer> numbers;

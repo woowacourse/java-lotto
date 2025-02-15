@@ -15,11 +15,11 @@ class LottoMachineTest {
         LottoTicket lottoTicket = lottoMachine.generateLottoTicket(new FixedIntegerGenerator());
 
         // then
-        Assertions.assertThat(lottoTicket.getSize()).isEqualTo(LottoTicket.LOTTO_SIZE);
+        Assertions.assertThat(lottoTicket.getSize()).isEqualTo(LottoNumbers.LOTTO_SIZE);
         for (int number : lottoTicket.getLottoNumbers()) {
             Assertions.assertThat(number).isGreaterThanOrEqualTo(LottoNumbers.LOTTO_MIN_NUMBER);
             Assertions.assertThat(number).isLessThanOrEqualTo(LottoNumbers.LOTTO_MAX_NUMBER);
         }
-        Assertions.assertThat(lottoTicket.getLottoNumbers().stream().distinct()).hasSize(LottoTicket.LOTTO_SIZE);
+        Assertions.assertThat(lottoTicket.getLottoNumbers().stream().distinct()).hasSize(LottoNumbers.LOTTO_SIZE);
     }
 }

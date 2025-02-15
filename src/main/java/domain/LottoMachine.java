@@ -1,7 +1,6 @@
 package domain;
 
 import static domain.LottoTicket.LOTTO_PRICE;
-import static domain.LottoTicket.LOTTO_SIZE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 public class LottoMachine {
     public LottoTicket generateLottoTicket(IntegerGenerator generator) {
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_SIZE; i++) {
+        for (int i = 0; i < LottoNumbers.LOTTO_SIZE; i++) {
             int number = extractUniqueLottoNumber(generator, numbers);
             numbers.add(number);
         }

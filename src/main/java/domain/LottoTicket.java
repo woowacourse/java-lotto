@@ -4,7 +4,6 @@ import java.util.List;
 
 
 public class LottoTicket {
-    public static int LOTTO_SIZE = 6;
     public static int LOTTO_PRICE = 1000;
 
     private final LottoNumbers lottoNumbers;
@@ -15,7 +14,7 @@ public class LottoTicket {
     }
 
     private void validateLottoSize(LottoNumbers lottoNumbers) {
-        if (lottoNumbers.getSize() != LOTTO_SIZE) {
+        if (lottoNumbers.getSize() != LottoNumbers.LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
     }
