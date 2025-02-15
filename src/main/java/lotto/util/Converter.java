@@ -9,6 +9,14 @@ public class Converter {
 
     }
 
+    public static int convertToInteger(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자만 입력 가능합니다.");
+        }
+    }
+
     public static List<Integer> convertToIntegerList(String input) {
         try {
             return Arrays.stream(input.split(","))
