@@ -1,7 +1,9 @@
 package controller.dto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import model.LottoRank;
 import model.LottoRankResult;
 import model.LottoTicket;
 import model.WinningLotto;
@@ -19,7 +21,7 @@ public class LottoDtoMapper {
     }
 
     public List<LottoRankResponse> toLottoRankResponses(LottoRankResult lottoRankResult) {
-        return new ArrayList<>(lottoRankResult.getRanks().stream()
+        return new ArrayList<>(Arrays.stream(LottoRank.values())
                 .map(rank -> {
                     int rankMatchCount = lottoRankResult.getCountByRank(rank);
                     return LottoRankResponse.of(rank, rankMatchCount);
