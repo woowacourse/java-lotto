@@ -11,10 +11,13 @@ class LottoMachineTest {
 
     static class FixNumberPickStrategy implements NumberPickStrategy {
         int index = 0;
-        List<Integer> numbers = List.of(1, 2, 2, 3, 3, 3, 4, 5, 6);
+        List<Integer> numbers = List.of(1, 2, -1, 46, 2, 3, 3, 3, 4, 5, 6);
 
         @Override
         public int pickNumber(int min, int max) {
+            while (numbers.get(index) < min || numbers.get(index) > max) {
+                index++;
+            }
             return numbers.get(index++);
         }
     }
