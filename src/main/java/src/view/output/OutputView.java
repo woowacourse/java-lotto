@@ -12,5 +12,5 @@ public interface OutputView {
 
     void printInputBonusNumber();
 
-    void printLottoResults(List<LottoPrizeResponse> lottoPrizeResponses, int purchaseMoney);
+    void printLottoResults(List<LottoPrizeResponse> lottoPrizeResponses, double profitRate);
 }

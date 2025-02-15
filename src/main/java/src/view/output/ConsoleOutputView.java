@@ -29,12 +29,12 @@ public class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void printLottoResults(List<LottoPrizeResponse> lottoPrizeResponses, int purchaseMoney) {
+    public void printLottoResults(List<LottoPrizeResponse> lottoPrizeResponses, double profitRate) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         Map<LottoPrizeResponse, Integer> lottoPrizeStatistic = getLottoPrizeStatistic(lottoPrizeResponses);
         lottoPrizeStatistic.forEach(this::printLottoResult);
-        printProfitRate(getProfitRate(lottoPrizeStatistic, purchaseMoney));
+        printProfitRate(profitRate);
     }
 
     private void printLottoResult(LottoPrizeResponse lottoPrizeResponse, int amount) {
