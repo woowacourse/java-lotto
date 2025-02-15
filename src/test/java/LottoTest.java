@@ -11,9 +11,10 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
-    @DisplayName("로또 번호는 6개만 가능")
+
     @Test
-    void test1() {
+    @DisplayName("로또 번호를 생성할 때 로또 번호는 중복되지 않고, 6개라면 예외가 발생하지 않는다")
+    void not_exception_lotto_number_is_not_duplicated_and_lotto_number_count_is_6_when_ctor() {
         // given
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
 
@@ -24,9 +25,9 @@ class LottoTest {
         assertThat(lotto.getNumbers()).containsAll(List.of(1, 2, 3, 4, 5, 6));
     }
 
-    @DisplayName("로또 번호는 오름차순으로 저장된다.")
     @Test
-    void test2() {
+    @DisplayName("로또는 로또 번호들은 오름차순으로 저장한다")
+    void check_lotto_number_is_sorted() {
         // given & when
         Lotto lotto = new Lotto(List.of(6, 5, 1, 2, 3, 4));
 
@@ -34,9 +35,9 @@ class LottoTest {
         assertThat(lotto.getNumbers()).isSorted();
     }
 
-    @DisplayName("로또 번호가 6개가 아니면 예외")
     @Test
-    void test3() {
+    @DisplayName("로또를 생성할 때 로또 번호가 6개가 아니면 예외가 발생한다")
+    void exception_lotto_number_count_is_not_6_when_ctor() {
         // given
         List<Integer> numbers = List.of(1, 2, 3, 4, 5);
 
@@ -52,18 +53,18 @@ class LottoTest {
         );
     }
 
-    @DisplayName("로또 범위가 벗어나는 경우 예외")
     @ParameterizedTest
+    @DisplayName("로또를 생성할 때 로또 번호가 범위가 벗어날 경우 예외가 발생한다")
     @MethodSource("generateOutboundLottoNumber")
-    void test4(List<Integer> numbers) {
+    void exception_lotto_number_is_outbound_when_ctor(List<Integer> numbers) {
         // when & then
         assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("로또 숫자가 중복되는 경우 예외")
     @Test
-    void test5() {
+    @DisplayName("로또를 생성할 때 로또 번호가 중복되면 예외가 발생한다")
+    void exception_lotto_number_is_duplicated_when_ctor() {
         // given
         List<Integer> numbers = List.of(1, 1, 2, 3, 4, 5);
 
