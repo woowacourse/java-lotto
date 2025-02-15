@@ -21,7 +21,7 @@ public class OutputView {
     public void printLottos(List<Lotto> lottos) {
         StringBuilder sb = new StringBuilder();
         for (Lotto lotto : lottos) {
-            sb.append(lotto).append("\n");
+            sb.append(lotto.getNumbers().toString()).append("\n");
         }
         sb.append(String.format("%d개를 구매했습니다.", lottos.size())).append("\n");
         System.out.println(sb);

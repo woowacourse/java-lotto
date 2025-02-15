@@ -1,6 +1,7 @@
 package domain;
 
 import dto.LottoMatchResult;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,5 +45,9 @@ public class Lottos {
 
             enumMap.put(matchPrize, enumMap.getOrDefault(matchPrize, 0) + 1);
         }
+    }
+
+    public List<Lotto> getLottos() {
+        return new ArrayList<>(lottos);
     }
 }

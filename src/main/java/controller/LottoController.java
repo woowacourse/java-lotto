@@ -22,7 +22,7 @@ public class LottoController {
         LottoMachine lottoMachine = LottoMachine.of(purchaseMoney, new RandomNumberPicker(new Random()));
         Lottos lottos = lottoMachine.issueLottos();
 
-        outputView.printLottos(purchasedLottos);
+        outputView.printLottos(lottos.getLottos());
 
         List<Integer> matchNumbers = inputMatchLottoNumbers();
         int bonusNumber = inputBonusNumber();
