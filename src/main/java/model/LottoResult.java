@@ -29,7 +29,7 @@ public class LottoResult {
         );
     }
 
-    public Map<RankType, Integer> sort(Map<RankType, Integer> rankResult) {
+    public static Map<RankType, Integer> sort(Map<RankType, Integer> rankResult) {
         return rankResult.entrySet()
                 .stream()
                 .sorted((r1, r2) -> Integer.compare(r2.getKey().getRank(), r1.getKey().getRank()))
