@@ -2,7 +2,7 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.numberstrategy.NumberGenerator;
+import domain.numbergenerator.NumberGenerator;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;

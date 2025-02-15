@@ -1,7 +1,7 @@
 package domain;
 
-import domain.numberstrategy.NumberGenerator;
-import domain.numberstrategy.RandomNumberGenerator;
+import domain.numbergenerator.NumberGenerator;
+import domain.numbergenerator.RandomNumberGenerator;
 
 public record Number(int value) {
 

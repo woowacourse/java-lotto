@@ -2,7 +2,7 @@ package domain;
 
 import static java.util.Collections.unmodifiableSet;
 
-import domain.numberstrategy.NumberGenerator;
+import domain.numbergenerator.NumberGenerator;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;

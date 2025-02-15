@@ -1,6 +1,6 @@
 package domain;
 
-import domain.numberstrategy.NumberGenerator;
+import domain.numbergenerator.NumberGenerator;
 import java.util.HashSet;
 import java.util.Set;
 

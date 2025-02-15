@@ -10,7 +10,7 @@ import domain.Money;
 import domain.Number;
 import domain.WinningLotto;
 import domain.WinningResult;
-import domain.numberstrategy.NumberGenerator;
+import domain.numbergenerator.NumberGenerator;
 import view.InputView;
 import view.OutputView;
 

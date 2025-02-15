@@ -1,4 +1,4 @@
-package domain.numberstrategy;
+package domain.numbergenerator;
 
 @FunctionalInterface
 public interface NumberGenerator {
