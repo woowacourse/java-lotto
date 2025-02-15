@@ -1,25 +1,24 @@
 package util;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.Numbers;
+import java.util.HashSet;
+import java.util.Random;
+import org.junit.jupiter.api.Test;
+
 class RandomNumberPickerTest {
-    
+
     @Test
     void 중복_없는_번호를_생성한다() {
         // given
         RandomNumberPicker sut = new RandomNumberPicker(new Random());
-        
+
         // when
-        List<Integer> result = sut.pickUnique(1, 10, 3);
-        
+        Numbers result = sut.pickUnique(1, 10, 6);
+
         // then
-        assertThat(result).hasSize(3);
-        assertThat(result.size()).isEqualTo(new HashSet<>(result).size());
+        assertThat(result.getNumbers()).hasSize(6);
+        assertThat(result.getNumbers().size()).isEqualTo(new HashSet<>(result.getNumbers()).size());
     }
 }

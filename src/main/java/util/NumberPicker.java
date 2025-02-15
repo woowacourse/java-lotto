@@ -1,8 +1,8 @@
 package util;
 
-import java.util.List;
+import domain.Numbers;
 
 public interface NumberPicker {
-    
-    List<Integer> pickUnique(int start, int end, int count);
+
+    Numbers pickUnique(int start, int end, int count);
 }
