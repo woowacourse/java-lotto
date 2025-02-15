@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Lottos {
+
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {

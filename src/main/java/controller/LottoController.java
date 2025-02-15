@@ -4,15 +4,13 @@ import converter.StringToLottoConverter;
 import converter.StringToMoneyConverter;
 import converter.StringToNumberConverter;
 import domain.Lotto;
-import domain.LottoMachine;
 import domain.LottoStore;
 import domain.Lottos;
 import domain.Money;
 import domain.Number;
 import domain.WinningLotto;
 import domain.WinningResult;
-import domain.numberstrategy.NumberPickStrategy;
-import domain.numberstrategy.RandomNumberPickStrategy;
+import domain.numberstrategy.NumberGenerator;
 import view.InputView;
 import view.OutputView;
 
@@ -46,8 +44,8 @@ public class LottoController {
     }
 
     private Lottos purchaseLottos(Money purchaseLottoMoney) {
-        NumberPickStrategy numberStrategy = new RandomNumberPickStrategy();
-        LottoStore lottoStore = new LottoStore(new LottoMachine(numberStrategy));
+        NumberGenerator numberGenerator = Number.createRandomNumberGenerator();
+        LottoStore lottoStore = new LottoStore(Lotto.createLottoMachine(numberGenerator));
         return lottoStore.buy(purchaseLottoMoney);
     }
 

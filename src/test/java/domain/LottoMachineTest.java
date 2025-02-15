@@ -2,22 +2,19 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.numberstrategy.NumberPickStrategy;
+import domain.numberstrategy.NumberGenerator;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class LottoMachineTest {
 
-    static class FixNumberPickStrategy implements NumberPickStrategy {
+    static class FixNumberGenerator implements NumberGenerator {
         int index = 0;
-        List<Integer> numbers = List.of(1, 2, -1, 46, 2, 3, 3, 3, 4, 5, 6);
+        List<Integer> numbers = List.of(1, 2, 2, 3, 3, 3, 4, 5, 6);
 
         @Override
-        public int pickNumber(int min, int max) {
-            while (numbers.get(index) < min || numbers.get(index) > max) {
-                index++;
-            }
+        public int generate() {
             return numbers.get(index++);
         }
     }
@@ -25,7 +22,7 @@ class LottoMachineTest {
     @Test
     void 로또를_생성할_수_있다() {
         //given
-        LottoMachine lottoMachine = new LottoMachine(new FixNumberPickStrategy());
+        LottoMachine lottoMachine = new LottoMachine(new FixNumberGenerator(), 6);
 
         //when
         Lotto lotto = lottoMachine.createLotto();

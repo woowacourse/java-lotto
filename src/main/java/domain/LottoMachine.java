@@ -1,15 +1,17 @@
 package domain;
 
-import domain.numberstrategy.NumberPickStrategy;
+import domain.numberstrategy.NumberGenerator;
 import java.util.HashSet;
 import java.util.Set;
 
 public class LottoMachine {
 
-    private final NumberPickStrategy numberStrategy;
+    private final NumberGenerator numberGenerator;
+    private final int numbersSize;
 
-    public LottoMachine(NumberPickStrategy numberStrategy) {
-        this.numberStrategy = numberStrategy;
+    public LottoMachine(NumberGenerator numberGenerator, int numbersSize) {
+        this.numberGenerator = numberGenerator;
+        this.numbersSize = numbersSize;
     }
 
     public Lotto createLotto() {
@@ -17,12 +19,12 @@ public class LottoMachine {
         do {
             Number number = pickNumber();
             numbers.add(number);
-        } while (numbers.size() != Lotto.NUMBERS_SIZE);
+        } while (numbers.size() != numbersSize);
         return new Lotto(numbers);
     }
 
     private Number pickNumber() {
-        int pickNumber = numberStrategy.pickNumber(Number.MIN_NUMBER, Number.MAX_NUMBER);
+        int pickNumber = numberGenerator.generate();
         return new Number(pickNumber);
     }
 }

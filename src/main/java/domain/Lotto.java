@@ -2,6 +2,7 @@ package domain;
 
 import static java.util.Collections.unmodifiableSet;
 
+import domain.numberstrategy.NumberGenerator;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -9,7 +10,8 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
-    public static final int NUMBERS_SIZE = 6;
+
+    private static final int NUMBERS_SIZE = 6;
 
     private final Set<Number> numbers;
 
@@ -22,6 +24,10 @@ public class Lotto {
         validateNumberSize(numbers);
         validateNonDuplicatedNumbers(numbers);
         this.numbers = new HashSet<>(numbers);
+    }
+
+    public static LottoMachine createLottoMachine(NumberGenerator numberGenerator) {
+        return new LottoMachine(numberGenerator, NUMBERS_SIZE);
     }
 
     public boolean contains(Number number) {

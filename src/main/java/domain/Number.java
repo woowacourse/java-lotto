@@ -1,12 +1,19 @@
 package domain;
 
+import domain.numberstrategy.NumberGenerator;
+import domain.numberstrategy.RandomNumberGenerator;
+
 public record Number(int value) {
 
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
 
     public Number {
         validateNumberRange(value);
+    }
+
+    public static NumberGenerator createRandomNumberGenerator() {
+        return new RandomNumberGenerator(MIN_NUMBER, MAX_NUMBER);
     }
 
     private void validateNumberRange(int value) {

@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class OutputView {
+
     private static final String PURCHASE_LOTTO_SIZE_FORMAT = "%d개를 구매했습니다.%n";
     private static final String WINNING_RESULT_HEADER = "%n당첨 통계%n---------%n";
     private static final String WINNING_RESULT_FORMAT = "%d개 일치 (%d원)- %d개%n";
