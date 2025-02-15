@@ -11,7 +11,6 @@ public enum Rank {
     SECOND("5개 일치, 보너스 볼 일치(30000000원)- ", 30000000L, 5, true),
     FIRST("6개 일치 (2000000000원)- ", 2000000000L, 6, false);
 
-
     private final String message;
     private final Long prize;
     private final int count;
@@ -27,9 +26,13 @@ public enum Rank {
     public static Rank fromResult(int matchCount, boolean contains) {
         List<Rank> ranks = Arrays.stream(Rank.values()).toList().reversed();
         return ranks.stream()
-                .filter(rank -> rank.getCount() == matchCount && (!rank.isBonusMatch() || contains))
+                .filter(rank -> isaBoolean(matchCount, contains, rank))
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    private static boolean isaBoolean(int matchCount, boolean contains, Rank rank) {
+        return rank.hasCountMatch(matchCount) && (rank.hasNoBonusMatch() || contains);
     }
 
     public String getMessage() {
@@ -40,8 +43,12 @@ public enum Rank {
         return prize;
     }
 
-    public int getCount() {
-        return count;
+    private boolean hasNoBonusMatch() {
+        return !this.isBonusMatch();
+    }
+
+    public boolean hasCountMatch(int matchCount) {
+        return this.count == matchCount;
     }
 
     public boolean isBonusMatch() {
