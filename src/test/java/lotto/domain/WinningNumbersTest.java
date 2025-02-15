@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static lotto.domain.Lotto.LOTTO_SIZE;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class WinningNumbersTest {
@@ -36,5 +38,12 @@ class WinningNumbersTest {
         assertThatThrownBy(() -> winningNumbers.validateBonusNumberDuplicated(1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
+    }
+
+    @DisplayName("로또 번호와 당첨 번호를 비교하여 일치하는 개수를 반환한다")
+    @Test
+    void 로또_번호와_당첨_번호를_비교하여_일치하는_개수를_반환한다() {
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6));
+        assertThat(winningNumbers.calculateMatchCount(List.of(1, 2, 3, 4, 5, 7))).isEqualTo(5);
     }
 }

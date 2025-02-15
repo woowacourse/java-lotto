@@ -36,19 +36,19 @@ public class OutputView {
         }
     }
 
-    private static void printDetail(final Rank rank, final int getPrizeCount) {
+    private static void printDetail(final Rank rank, final int rankCount) {
         if (rank == Rank.NONE) {
             return;
         }
 
         if (rank == Rank.SECOND) {
             System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개",
-                    rank.getMatchCount(), rank.getWinningAmount(), getPrizeCount));
+                    rank.getMatchCount(), rank.getWinningAmount(), rankCount));
             return;
         }
 
         System.out.println(String.format("%d개 일치 (%d원) - %d개",
-                rank.getMatchCount(), rank.getWinningAmount(), getPrizeCount));
+                rank.getMatchCount(), rank.getWinningAmount(), rankCount));
     }
 
     public static void printErrorMessage(final String errorMessage) {

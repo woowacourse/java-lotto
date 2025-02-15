@@ -23,6 +23,6 @@ public class WinningStatistics {
     }
 
     public int getRankCount(final Rank rank) {
-        return winningStatistics.get(rank);
+        return winningStatistics.getOrDefault(rank, 0);
     }
 }
