@@ -45,14 +45,18 @@ public class InputHandler {
     }
 
     private BigInteger parseNumberInput(String str) {
-        if (str == null || str.isBlank()) {
-            throw new IllegalArgumentException("입력값이 비어 있을 수 없습니다.");
-        }
+        validateNullAndEmpty(str);
 
         try {
             return new BigInteger(str.trim());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자만을 입력해야 합니다.");
+        }
+    }
+
+    private static void validateNullAndEmpty(String str) {
+        if (str == null || str.isBlank()) {
+            throw new IllegalArgumentException("입력값이 비어 있을 수 없습니다.");
         }
     }
 
