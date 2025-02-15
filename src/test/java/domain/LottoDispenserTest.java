@@ -29,7 +29,7 @@ public class LottoDispenserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1000"} )
+    @ValueSource(strings = {"500"} )
     @DisplayName("구입_금액이_1000원_단위가_아니면_예외가_발생한다")
     public void 구입_금액이_1000원_단위가_아니면_예외가_발생한다(String buyMoney){
         assertThatThrownBy(() -> {
