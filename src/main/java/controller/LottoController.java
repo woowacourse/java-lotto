@@ -1,13 +1,12 @@
 package controller;
 
-import static view.util.LottoConstants.LOTTO_PRICE_PER_ONE;
-
 import java.util.Map;
 import model.BonusNumber;
 import model.Lotto;
 import model.LottoRepository;
 import model.RankType;
 import model.UserLotto;
+import model.Wallet;
 import view.InputView;
 import view.OutputView;
 import view.util.RandomNumberGenerator;
@@ -15,18 +14,27 @@ import view.util.RandomNumberGenerator;
 public class LottoController {
     public static void lottoStart() {
         LottoRepository lottoRepository = new LottoRepository();
-        int userMoney = InputView.inputAndValidateUserMoney();
 
-        buyLottoForUserMoney(lottoRepository, userMoney);
+        Wallet wallet = createWallet();
 
-        OutputView.printBuyQuantity(userMoney / LOTTO_PRICE_PER_ONE);
+        buyLottoForUserMoney(lottoRepository, wallet.getPurchasableQuantity());
+
+        OutputView.printBuyQuantity(wallet.getPurchasableQuantity());
         OutputView.printRandomLotto(lottoRepository);
         
         UserLotto userLotto = createUserLotto();
         BonusNumber bonusNumber = isDuplicateBonusNumber(userLotto);
 
-        calculateResultAndPrintResult(userMoney, lottoRepository, userLotto, bonusNumber);
+        calculateResultAndPrintResult(wallet.getMoney(), lottoRepository, userLotto, bonusNumber);
+    }
 
+    private static Wallet createWallet(){
+        try {
+            return new Wallet(InputView.inputAndValidateUserMoney());
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return createWallet();
+        }
     }
 
     private static UserLotto createUserLotto(){
@@ -38,8 +46,8 @@ public class LottoController {
         }
     }
 
-    private static void buyLottoForUserMoney(LottoRepository lottoRepository, int userMoney) {
-        for (int i = 0; i < userMoney / LOTTO_PRICE_PER_ONE; i++) {
+    private static void buyLottoForUserMoney(LottoRepository lottoRepository, int quantity) {
+        for (int i = 0; i < quantity; i++) {
             lottoRepository.addLotto(new Lotto(RandomNumberGenerator.makeRandomNumber()));
         }
     }

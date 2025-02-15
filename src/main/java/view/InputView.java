@@ -15,12 +15,6 @@ public class InputView {
     private static final String INPUT_BONUS_NUMBER_PROMPT = "보너스 번호를 입력해 주세요.";
     private static Scanner scanner = new Scanner(System.in);
 
-    private static void isDivideByThousand(int inputMoney) {
-        if (inputMoney % LottoConstants.LOTTO_PRICE_PER_ONE != 0) {
-            throw new IllegalArgumentException("천원단위로 입력해주세요.");
-        }
-    }
-
     private static void isNumeric(String inputMoneyString) {
         if (!inputMoneyString.matches(NUMERIC_VALIDATE_REGEX)) {
             throw new IllegalArgumentException("구입 금액은 숫자여야 합니다.");
@@ -32,7 +26,6 @@ public class InputView {
         String userInputMoney = read();
         try {
             int inputMoney = parseInt(userInputMoney);
-            isDivideByThousand(inputMoney);
             return inputMoney;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
