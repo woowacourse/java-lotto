@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.constant.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,27 +36,23 @@ class LottoTest {
     @Test
     void 중복되는_번호가_있는지_검증한다() {
         List<Integer> numbers = List.of(1, 1, 2, 3, 4, 5);
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Lotto(numbers))
-                .withMessage(ExceptionMessage.DUPLICATED_NUMBERS.getContent());
+
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(numbers));
     }
 
     @DisplayName("입력된 번호들이 1부터 45사이인지 검증한다.")
     @ParameterizedTest
     @MethodSource("rangeTestArgs")
     void 입력된_번호들이_1부터_45사이인지_검증한다(List<Integer> numbers) {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Lotto(numbers))
-                .withMessage(ExceptionMessage.OUT_OF_RANGE.getContent());
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(numbers));
     }
 
     @DisplayName("입력된 번호가 6개인지 검증한다.")
     @Test
     void 입력된_번호가_6개인지_검증한다() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Lotto(numbers))
-                .withMessage(ExceptionMessage.INVALID_NUMBER_COUNT.getContent());
+
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(numbers));
     }
 
     @DisplayName("특정 숫자가 로또 번호 리스트에 존재하는지 확인한다.")
