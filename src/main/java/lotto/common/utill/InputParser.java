@@ -21,11 +21,14 @@ public final class InputParser {
     }
 
     public static List<Integer> parseToList(String str) {
-        String[] split = str.split(SEPARATOR);
-        return Arrays.stream(split)
-            .map(String::trim)
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
+        try {
+            String[] split = str.split(SEPARATOR);
+            return Arrays.stream(split)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ERROR_NOT_NUMBER_TYPE.getMessage());
+        }
     }
-
 }
