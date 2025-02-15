@@ -8,16 +8,15 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class WinningInfoTest {
 
-    @DisplayName("당첨 결과에 맞는 결과 객체가 생성된다.")
     @ParameterizedTest
+    @DisplayName("일치한 번호 개수, 보너스 번호 일치 여부가 주어졌을 때 당첨 결과에 맞는 WinningInfo 객체를 가져올 수 있는지 확인한다")
     @CsvSource(value = {"6,false,2_000_000_000"
             , "5,true,30_000_000"
             , "5,false,1_500_000"
             , "4,false,50_000"
             , "3,false,5_000"})
-    void test1(int matchedCount, boolean isBonusMatched, int expected) {
-        // given
-
+    void should_return_correct_WinningInfo_by_matchedCount_and_bonus(int matchedCount, boolean isBonusMatched,
+                                                                     int expected) {
         // when
         WinningInfo winningInfo = WinningInfo.of(matchedCount, isBonusMatched);
 
@@ -25,11 +24,9 @@ class WinningInfoTest {
         assertThat(winningInfo.getPrice()).isEqualTo(expected);
     }
 
-    @DisplayName("낮은 등수부터 리턴할 수 있다.")
     @Test
-    void test2() {
-        // given
-
+    @DisplayName("getSortedValues()가 낙첨을 제외한 낮은 등수부터 정렬된 List를 반환하는지 확인한다")
+    void should_return_sorted_WinningInfo_list_excluding_None() {
         // when
         List<WinningInfo> sortedValues = WinningInfo.getSortedValues();
 
