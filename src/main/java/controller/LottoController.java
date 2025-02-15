@@ -9,9 +9,9 @@ import service.LottoFactory;
 import view.InputView;
 import view.OutputView;
 
-public class Controller {
+public class LottoController {
 
-    public Controller() {
+    public LottoController() {
     }
 
     public void run() {
