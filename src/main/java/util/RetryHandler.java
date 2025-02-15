@@ -7,7 +7,7 @@ public class RetryHandler {
         ExecuteResult er;
         do {
             er = executeGivenMethod(supplier);
-        } while (er.isSuccess());
+        } while (!er.isSuccess());
         return er.getResult();
     }
 
