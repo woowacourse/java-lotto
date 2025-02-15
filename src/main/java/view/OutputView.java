@@ -47,4 +47,8 @@ public class OutputView {
         }
         System.out.printf("총 수익률은 %.2f입니다. %s", earningRate, instruction);
     }
+
+    public void printErrorMessage(String message) {
+        System.out.println(message);
+    }
 }
