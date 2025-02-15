@@ -1,12 +1,10 @@
-package model;
+package model.result;
 
 import static common.constant.NumberConstants.LOTTO_PRICE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.EnumMap;
 import java.util.Map;
-import model.result.PrizeResult;
-import model.result.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

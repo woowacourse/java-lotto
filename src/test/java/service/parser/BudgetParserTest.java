@@ -1,10 +1,9 @@
-package parser;
+package service.parser;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import service.parser.BudgetParser;
 
 public class BudgetParserTest {
     @DisplayName("금액입력_문자예외_테스트")

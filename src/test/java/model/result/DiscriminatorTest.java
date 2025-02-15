@@ -1,14 +1,13 @@
-package model;
+package model.result;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
+import model.LottoWinningNumbers;
+import model.OwnedLotto;
 import model.lotto.Lotto;
-import model.result.PrizeResult;
-import model.result.Rank;
-import model.result.discriminator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
