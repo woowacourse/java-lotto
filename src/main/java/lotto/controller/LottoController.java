@@ -1,42 +1,34 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class LottoController {
 
-    private final LottoService lottoService;
-
-    public LottoController(LottoService lottoService) {
-        this.lottoService = lottoService;
-    }
-
     public void run() {
-        long purchaseAmount = InputView.inputPurchaseAmount();
-        OutputView.printCountMessage(lottoService.countNumberOfPurchases(purchaseAmount));
-        LottoTicket lottoTicket = lottoService.issueTicket(purchaseAmount);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(InputView.inputPurchaseAmount());
+        OutputView.printCountMessage(purchaseAmount.countNumberOfPurchases());
+        LottoTicket lottoTicket = issueTicket(purchaseAmount);
 
-        List<MatchResultDto> matchResults = getMatchResultDtos(lottoTicket);
-        Map<LottoRank, Integer> winningInfo = getLottoRankIntegerMap(matchResults);
+        MatchResults matchResults = new MatchResults(getMatchResultDtos(lottoTicket));
+        WinningResult winningResult = new WinningResult(matchResults.getWinningResult());
 
-        OutputView.printWinningStatics(winningInfo);
-        OutputView.printProfitRate(lottoService.calculateProfitRate(winningInfo, purchaseAmount));
+        OutputView.printWinningStatics(matchResults.getWinningResult());
+        OutputView.printProfitRate(winningResult.calculateProfitRate(purchaseAmount));
     }
 
-    private Map<LottoRank, Integer> getLottoRankIntegerMap(List<MatchResultDto> matchResults) {
-        Map<LottoRank, Integer> winningInfo = new HashMap<>();
-
-        for (MatchResultDto matchResult : matchResults) {
-            LottoRank lottoRank = LottoRank.findRankWithMatchResult(matchResult);
-            winningInfo.put(lottoRank, winningInfo.getOrDefault(lottoRank, 0) + 1);
+    public LottoTicket issueTicket(PurchaseAmount purchaseAmount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < purchaseAmount.countNumberOfPurchases(); i++) {
+            List<Integer> lottoNumbers = LottoNumberGenerator.generate();
+            OutputView.printLottos(lottoNumbers);
+            lottos.add(new Lotto(lottoNumbers));
         }
-        return winningInfo;
+        return new LottoTicket(lottos);
     }
 
     private List<MatchResultDto> getMatchResultDtos(LottoTicket lottoTicket) {
