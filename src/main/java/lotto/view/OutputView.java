@@ -7,6 +7,10 @@ import java.util.Map;
 
 public class OutputView {
 
+    private static final String PROFIT = "이익";
+    private static final String LOSS = "손해";
+    private static final int PROFIT_STANDARD = 1;
+
     private OutputView() {
 
     }
@@ -31,6 +35,10 @@ public class OutputView {
     }
 
     public static void printProfitRate(double profitRate) {
-        System.out.printf("총 수익률은 %.2f입니다.", profitRate);
+        if (profitRate >= PROFIT_STANDARD) {
+            System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s이라는 의미임)", profitRate, PROFIT);
+            return;
+        }
+        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", profitRate, LOSS);
     }
 }
