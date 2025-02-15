@@ -19,23 +19,22 @@ public class RetryHandler {
         }
         return new ExecuteResult(null, false);
     }
-}
 
+    static class ExecuteResult {
+        private final Object result;
+        private final boolean isSuccess;
 
-class ExecuteResult {
-    private final Object result;
-    private final boolean isSuccess;
+        public ExecuteResult(Object result, boolean isSuccess) {
+            this.result = result;
+            this.isSuccess = isSuccess;
+        }
 
-    public ExecuteResult(Object result, boolean isSuccess) {
-        this.result = result;
-        this.isSuccess = isSuccess;
-    }
+        public Object getResult() {
+            return result;
+        }
 
-    public Object getResult() {
-        return result;
-    }
-
-    public boolean isSuccess() {
-        return isSuccess;
+        public boolean isSuccess() {
+            return isSuccess;
+        }
     }
 }
