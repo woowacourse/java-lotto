@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.common.utill.RandomsWrapper;
-import lotto.dto.MatchCountDto;
 
 public record Lotto(List<Integer> numbers) {
     public Lotto(List<Integer> numbers) {
@@ -63,14 +62,14 @@ public record Lotto(List<Integer> numbers) {
         return number < LOTTO_MINIMUM || number > LOTTO_MAXIMUM;
     }
 
-    public MatchCountDto matchCount(Lotto matchLotto, int bonus) {
+    public MatchCount matchCount(Lotto matchLotto, int bonus) {
         int count = 0;
         for (int i : matchLotto.numbers()) {
             if (isContainsBonus(i)) {
                 count++;
             }
         }
-        return new MatchCountDto(count, isContainsBonus(bonus));
+        return new MatchCount(count, isContainsBonus(bonus));
     }
 
     public boolean isContainsBonus(int bonus) {

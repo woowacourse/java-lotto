@@ -5,7 +5,7 @@ import static lotto.domain.MatchStatistics.*;
 import java.util.Map;
 
 import lotto.domain.MatchStatistics;
-import lotto.dto.Profit;
+import lotto.domain.Profit;
 
 public class OutputView {
 

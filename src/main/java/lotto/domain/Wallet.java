@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import lotto.dto.MatchCountDto;
-
 public class Wallet {
     private final List<Lotto> lottoList = new ArrayList<>();
 
@@ -15,11 +13,11 @@ public class Wallet {
         }
     }
 
-    public List<MatchCountDto> matchCount(Lotto matchLotto, int bonus) {
-        List<MatchCountDto> list = new ArrayList<>();
+    public List<MatchCount> matchCount(Lotto matchLotto, int bonus) {
+        List<MatchCount> list = new ArrayList<>();
 
         for (Lotto lotto : lottoList) {
-            MatchCountDto dto = lotto.matchCount(matchLotto, bonus);
+            MatchCount dto = lotto.matchCount(matchLotto, bonus);
             list.add(dto);
         }
 
