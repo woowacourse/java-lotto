@@ -2,8 +2,6 @@ package view;
 
 import dto.*;
 
-import static global.constant.LottoConstant.NUMBER_DELIMITER;
-
 public class OutputView {
 
     private static final String PURCHASE_DONE = "개를 구매했습니다.";
@@ -14,6 +12,7 @@ public class OutputView {
     private static final String LOTTO_RESULT_DETAIL = " (%d원)- %d개 \n";
     private static final String NUMBER_OPEN_BRACE = "[";
     private static final String NUMBER_CLOSE_BRACE = "]";
+    private static final String NUMBER_DELIMITER = ", ";
 
     public void printTicketPurchaseAmount(TicketAmountResponse response) {
         System.out.println(response.amount() + PURCHASE_DONE);
