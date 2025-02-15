@@ -14,13 +14,11 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto() {
-        numbers = new ArrayList<>();
-        generateLotto();
+        numbers = new ArrayList<>(generateLotto());
     }
 
     public Lotto(final String input) {
-        numbers = new ArrayList<>();
-        generateCustomLotto(input);
+        numbers = new ArrayList<>(generateCustomLotto(input));
     }
 
     public int calculateMatchNumber(final Lotto otherLotto) {
@@ -38,27 +36,35 @@ public class Lotto {
         );
     }
 
-    private void generateLotto() {
+    private List<Integer> generateLotto() {
+        List<Integer> numbers = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < NUMBER_COUNT; i++) {
             numbers.add(random.nextInt(MAX_LOTTO_NUMBER) + 1);
         }
+
+        return numbers;
     }
 
-    private void generateCustomLotto(final String input) {
+    private List<Integer> generateCustomLotto(final String input) {
+        List<Integer> numbers = new ArrayList<>();
+
         String[] tokens = input.split(NUMBER_DELIMITER);
         Validator.validateRange(tokens.length, NUMBER_COUNT, NUMBER_COUNT);
 
-        Arrays.stream(tokens).forEach(this::addNumber);
+        Arrays.stream(tokens).
+                forEach(t -> numbers.add(convertNumber(t)));
 
         validateUniqueNumber(numbers);
+
+        return numbers;
     }
 
-    private void addNumber(String token) {
+    private int convertNumber(String token) {
         Validator.validateNumeric(token);
         int number = Integer.parseInt(token);
         Validator.validateRange(number, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
-        numbers.add(number);
+        return number;
     }
 
     private void validateUniqueNumber(final List<Integer> numbers) {
