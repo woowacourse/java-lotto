@@ -80,7 +80,7 @@ class LottoTest {
     void notifyExistsInLotto(int number, boolean expected) {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
-        assertThat(lotto.has(LottoNumber.draw(number))).isEqualTo(expected);
+        assertThat(lotto.hasBonus(LottoNumber.draw(number))).isEqualTo(expected);
     }
 
 }

@@ -41,14 +41,14 @@ public class Lotto {
         }
     }
 
-    public boolean has(final LottoNumber lottoNumber) {
+    public boolean hasBonus(final LottoNumber lottoNumber) {
         return lottoNumbers.stream()
                 .anyMatch((thisLottoNumber) -> thisLottoNumber.equals(lottoNumber));
     }
 
     public int calculateMatchingCount(final Lotto otherLotto) {
         return (int) otherLotto.lottoNumbers.stream()
-                .filter(this::has)
+                .filter(this::hasBonus)
                 .count();
     }
 

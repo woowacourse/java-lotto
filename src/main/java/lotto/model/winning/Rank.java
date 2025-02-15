@@ -4,18 +4,20 @@ import java.util.Arrays;
 
 public enum Rank {
 
-    NONE(0, 0L),
-    FIFTH(3, 5000L),
-    FOURTH(4, 50000L),
-    THIRD(5, 1500000L),
-    SECOND(5, 30000000L),
-    FIRST(6, 2000000000L);
+    NONE(0, false, 0L),
+    FIFTH(3, false, 5_000L),
+    FOURTH(4, false, 50_000L),
+    THIRD(5, false, 1_500_000L),
+    SECOND(5, true, 30_000_000L),
+    FIRST(6, false, 2_000_000_000L);
 
     private final int matchingCount;
+    private final boolean hasBonus;
     private final long winningAmount;
 
-    Rank(final int matchingCount, final long winningAmount) {
+    Rank(final int matchingCount, final boolean hasBonus, final long winningAmount) {
         this.matchingCount = matchingCount;
+        this.hasBonus = hasBonus;
         this.winningAmount = winningAmount;
     }
 
@@ -24,7 +26,7 @@ public enum Rank {
                 .filter(rank -> rank.matchingCount == matchingCount)
                 .findFirst()
                 .orElse(NONE);
-        if (findRank.equals(THIRD) && hasBonusNumber) {
+        if (findRank.equals(THIRD) && SECOND.hasBonus == hasBonusNumber) {
             return SECOND;
         }
         return findRank;
@@ -38,12 +40,11 @@ public enum Rank {
         return winningAmount;
     }
 
-    public boolean isSecond() {
-        return this.equals(SECOND);
-    }
-
     public boolean isNone() {
         return this.equals(NONE);
     }
 
+    public boolean hasBonus() {
+        return this.hasBonus;
+    }
 }
