@@ -2,6 +2,7 @@ package view;
 
 import domain.LottoMatch;
 import java.util.HashMap;
+import java.util.Map;
 
 public class OutputView {
 
@@ -14,7 +15,7 @@ public class OutputView {
     System.out.println(result);
   }
 
-  public void displayResult(HashMap<LottoMatch, Integer> lottoResult) {
+  public void displayResult(Map<LottoMatch, Integer> lottoResult) {
     System.out.println("당첨 통계");
     System.out.println("---------");
     for (LottoMatch lottoMatch : lottoResult.keySet()) {

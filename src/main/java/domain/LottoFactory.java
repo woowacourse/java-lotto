@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoFactory {
 
@@ -34,8 +35,8 @@ public class LottoFactory {
     return result;
   }
 
-  public HashMap<LottoMatch, Integer> countLottos(WinningLotto winningLotto) {
-    HashMap<LottoMatch, Integer> result = new LinkedHashMap<>();
+  public Map<LottoMatch, Integer> countLottos(WinningLotto winningLotto) {
+    LinkedHashMap<LottoMatch, Integer> result = new LinkedHashMap<>();
     for (LottoMatch lottoMatch : LottoMatch.values()) {
       result.put(lottoMatch, 0);
     }

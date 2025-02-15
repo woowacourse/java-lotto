@@ -5,6 +5,7 @@ import domain.LottoMatch;
 import domain.Money;
 import domain.WinningLotto;
 import java.util.HashMap;
+import java.util.Map;
 import util.InputParser;
 import util.Validator;
 import view.InputView;
@@ -27,7 +28,7 @@ public class LottoController {
     outputView.displayLottos(money.calculateTotalLotto(), lottoFactory.createResult());
 
     WinningLotto winningLotto = createWinningLotto();
-    HashMap<LottoMatch, Integer> lottoResult = lottoFactory.countLottos(winningLotto);
+    Map<LottoMatch, Integer> lottoResult = lottoFactory.countLottos(winningLotto);
     outputView.displayResult(lottoResult);
 
     double profit = money.calculateProfit(lottoResult);
