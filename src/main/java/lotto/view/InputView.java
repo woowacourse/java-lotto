@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.constant.Prompt;
 import lotto.domain.Lotto;
 import lotto.validator.InputValidator;
 
@@ -27,7 +26,7 @@ public class InputView {
     }
 
     public int readPurchaseAmount() {
-        System.out.println(Prompt.PURCHASE.getContent());
+        System.out.println("구입금액을 입력해 주세요.");
         String content = this.readLine();
         System.out.println();
         InputValidator.validateBlank(content);
@@ -38,7 +37,7 @@ public class InputView {
     }
 
     public Lotto readWinningNumbers() {
-        System.out.println(Prompt.WINNING_NUMBERS.getContent());
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String content = this.readLine();
         System.out.println();
         List<Integer> winningNumbers = this.parseWinningNumbers(content);
@@ -46,7 +45,7 @@ public class InputView {
     }
 
     public int readBonusNumber(Lotto winningLotto) {
-        System.out.println(Prompt.BONUS_NUMBER.getContent());
+        System.out.println("보너스 볼을 입력해 주세요.");
         String content = this.readLine();
         System.out.println();
         InputValidator.validateNumberFormat(content);

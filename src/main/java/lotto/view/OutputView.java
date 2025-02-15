@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.constant.OutputMessage;
 import lotto.constant.WinningTier;
 import lotto.domain.Lotto;
 
@@ -37,13 +36,13 @@ public class OutputView {
     }
 
     private void printBonusTier(WinningTier tier, long count) {
-        String template = OutputMessage.BONUS_TIER.getContent();
+        String template = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
         String content = String.format(template, tier.getMatches(), tier.getPrize(), count);
         System.out.println(content);
     }
 
     private void printRegularTier(WinningTier tier, long count) {
-        String template = OutputMessage.REGULAR_TIER.getContent();
+        String template = "%d개 일치 (%d원) - %d개";
         String content = String.format(template, tier.getMatches(), tier.getPrize(), count);
         System.out.println(content);
     }
@@ -51,9 +50,9 @@ public class OutputView {
     private void printProfit(double profit) {
         DecimalFormat formatter = new DecimalFormat("0.00");
         String formattedProfit = formatter.format(profit);
-        String content = String.format(OutputMessage.PROFIT.getContent(), formattedProfit);
+        String content = String.format("총 수익률은 %s입니다.", formattedProfit);
         if (profit < 1) {
-            content += OutputMessage.LOSS_DESCRIPTION.getContent();
+            content += "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
         }
         System.out.println(content);
     }
@@ -63,7 +62,7 @@ public class OutputView {
     }
 
     public void printLottos(List<Lotto> lottos) {
-        String content = String.format(OutputMessage.PURCHASE_COMPLETE.getContent(), lottos.size());
+        String content = String.format("%d개를 구매했습니다.", lottos.size());
         System.out.println(content);
         for (Lotto lotto : lottos) {
             String lottoNumbers = lotto.getNumbers().toString();
@@ -73,7 +72,7 @@ public class OutputView {
     }
 
     public void printResults(List<WinningTier> winningTiers, double profit) {
-        System.out.println(OutputMessage.RESULTS_HEADER.getContent());
+        System.out.println("당첨 통계\n---------");
         this.printWinningStatistics(winningTiers);
         this.printProfit(profit);
         this.printBlankLine();
