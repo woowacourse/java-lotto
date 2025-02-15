@@ -3,7 +3,6 @@ package lotto.service;
 import lotto.constant.Prompt;
 import lotto.domain.Lotto;
 import lotto.validator.InputValidator;
-import lotto.validator.LogicValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -45,7 +44,6 @@ public class InputService {
         outputView.printBlankLine();
         InputValidator.validateNumberFormat(content);
         int bonusNumber = Integer.parseInt(content);
-        LogicValidator.validateRange(bonusNumber, Lotto.MIN_LOTTO_NUMBER, Lotto.MAX_LOTTO_NUMBER);
         InputValidator.validateBonusNumber(winningLotto, bonusNumber);
         return bonusNumber;
     }

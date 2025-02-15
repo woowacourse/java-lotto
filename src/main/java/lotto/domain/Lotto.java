@@ -1,8 +1,10 @@
 package lotto.domain;
 
-import lotto.validator.LogicValidator;
+import lotto.constant.ExceptionMessage;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
@@ -13,9 +15,9 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        LogicValidator.validateDuplication(numbers);
-        LogicValidator.validateRange(numbers, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
-        LogicValidator.validateSize(numbers, LOTTO_NUMBER_COUNT);
+        this.validateDuplication(numbers);
+        this.validateRange(numbers, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+        this.validateSize(numbers, LOTTO_NUMBER_COUNT);
         this.numbers = numbers.stream().sorted().toList();
     }
 
@@ -29,5 +31,25 @@ public class Lotto {
 
     public int findMatches(Lotto lotto) {
         return (int) numbers.stream().filter(lotto::hasNumber).count();
+    }
+
+    private void validateDuplication(List<Integer> numbers) {
+        Set<Integer> notDuplicatedNumbers = new HashSet<>(numbers);
+        if (notDuplicatedNumbers.size() != numbers.size()) {
+            throw new IllegalArgumentException(ExceptionMessage.DUPLICATED_NUMBERS.getContent());
+        }
+    }
+
+    private void validateRange(List<Integer> numbers, int min, int max) {
+        boolean isInRange = numbers.stream().allMatch(number -> number >= min && number <= max);
+        if (!isInRange) {
+            throw new IllegalArgumentException(ExceptionMessage.OUT_OF_RANGE.getContent());
+        }
+    }
+
+    private void validateSize(List<Integer> numbers, int size) {
+        if (numbers.size() != size) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_NUMBER_COUNT.getContent());
+        }
     }
 }
