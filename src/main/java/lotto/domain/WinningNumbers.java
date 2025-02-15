@@ -17,7 +17,7 @@ public class WinningNumbers {
 
     private void validateWinningNumbers(final List<Integer> winningNumbers) {
         if (new HashSet<>(winningNumbers).size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(LOTTO_SIZE + "개의 고유한 번호를 입력해야 합니다.");
+            throw new IllegalArgumentException("%d개의 고유한 번호를 입력해야 합니다.".formatted(LOTTO_SIZE));
         }
 
         for (final int winningNumber : winningNumbers) {

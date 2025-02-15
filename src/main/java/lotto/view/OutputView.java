@@ -12,7 +12,7 @@ public class OutputView {
     private OutputView() {}
 
     public static void printLottos(final List<Lotto> lottos) {
-        System.out.println("%d개를 구매했습니다.".formatted(lottos.size()));
+        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
         for (final Lotto lotto : lottos) {
             System.out.println(lotto.getNumbers());
         }
@@ -30,7 +30,7 @@ public class OutputView {
     }
 
     private static void printReturnRate(final double returnRate) {
-        System.out.print(String.format("총 수익률은 %.2f입니다.", returnRate));
+        System.out.printf("총 수익률은 %.2f입니다.", returnRate);
         if (returnRate < STANDARD_RATE) {
             System.out.println("(기준이 %d이기 때문에 결과적으로 손해라는 의미임)".formatted(STANDARD_RATE));
         }
@@ -42,13 +42,13 @@ public class OutputView {
         }
 
         if (rank == Rank.SECOND) {
-            System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개",
-                    rank.getMatchCount(), rank.getWinningAmount(), rankCount));
+            System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n",
+                    rank.getMatchCount(), rank.getWinningAmount(), rankCount);
             return;
         }
 
-        System.out.println(String.format("%d개 일치 (%d원) - %d개",
-                rank.getMatchCount(), rank.getWinningAmount(), rankCount));
+        System.out.printf("%d개 일치 (%d원) - %d개%n",
+                rank.getMatchCount(), rank.getWinningAmount(), rankCount);
     }
 
     public static void printErrorMessage(final String errorMessage) {
