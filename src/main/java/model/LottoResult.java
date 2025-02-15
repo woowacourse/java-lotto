@@ -13,8 +13,7 @@ public class LottoResult {
     private Map<RankType, Integer> results;
 
     public LottoResult(Lottos lottos, WinningLotto winningLotto) {
-        results = winningLotto.evaluateRank(lottos.getLottos());
-        sort();
+        results = sort(winningLotto.evaluateRank(lottos.getLottos()));
     }
 
     public LottoResultsResponse createResponse() {
@@ -30,8 +29,8 @@ public class LottoResult {
         );
     }
 
-    public void sort() {
-        results = results.entrySet()
+    public Map<RankType, Integer> sort(Map<RankType, Integer> rankResult) {
+        return rankResult.entrySet()
                 .stream()
                 .sorted((r1, r2) -> Integer.compare(r2.getKey().getRank(), r1.getKey().getRank()))
                 .collect(Collectors.toMap(
