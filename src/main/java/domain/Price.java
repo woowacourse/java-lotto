@@ -1,3 +1,5 @@
+package domain;
+
 public class Price {
 
     private final int value;

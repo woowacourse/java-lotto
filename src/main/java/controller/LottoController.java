@@ -1,3 +1,14 @@
+package controller;
+
+import domain.Lotto;
+import domain.LottoRanking;
+import domain.LottoResult;
+import domain.Lottos;
+import domain.Price;
+import domain.WinningNumberWithBonusNumber;
+import service.LottoMachine;
+import service.LottoWinningChecker;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

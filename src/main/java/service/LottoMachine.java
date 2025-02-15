@@ -1,3 +1,11 @@
+package service;
+
+import domain.Lotto;
+import domain.LottoRule;
+import domain.Lottos;
+import domain.Price;
+import util.RandomGenerator;
+
 import java.util.List;
 
 public class LottoMachine {

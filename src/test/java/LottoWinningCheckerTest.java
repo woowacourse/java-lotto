@@ -1,6 +1,12 @@
+import domain.Lotto;
+import domain.LottoRanking;
+import domain.LottoResult;
+import domain.Lottos;
+import domain.WinningNumberWithBonusNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import service.LottoWinningChecker;
 
 import java.util.Arrays;
 import java.util.List;
