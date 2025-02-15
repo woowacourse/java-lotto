@@ -36,7 +36,7 @@ public class LottoFactory {
   }
 
   public Map<LottoMatch, Integer> countLottos(WinningLotto winningLotto) {
-    LinkedHashMap<LottoMatch, Integer> result = new LinkedHashMap<>();
+    Map<LottoMatch, Integer> result = new LinkedHashMap<>();
     for (LottoMatch lottoMatch : LottoMatch.values()) {
       result.put(lottoMatch, 0);
     }
