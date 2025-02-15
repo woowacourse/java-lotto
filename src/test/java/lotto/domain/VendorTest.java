@@ -4,10 +4,13 @@ import lotto.constant.WinningTier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class VendorTest {
 
@@ -17,6 +20,13 @@ class VendorTest {
     @BeforeEach
     void beforeEach() {
         vendor = new Vendor(this.PURCHASE_AMOUNT);
+    }
+
+    @DisplayName("입력된 구매 금액이 1000단위가 아닌 경우 예외 발생")
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 1500})
+    void 입력된_구매_금액이_1000단위가_아닌_경우_예외_발생(int purchaseAmount) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Vendor(purchaseAmount));
     }
 
     @DisplayName("구매 금액에 해당하는 로또 개수를 계산할 수 있다.")

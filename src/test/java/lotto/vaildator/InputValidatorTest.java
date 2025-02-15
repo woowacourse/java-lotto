@@ -34,13 +34,6 @@ class InputValidatorTest {
         assertThatIllegalArgumentException().isThrownBy(() -> InputValidator.validateNumberFormat(input));
     }
 
-    @DisplayName("입력된 구매 금액이 1000단위가 아닌 경우 예외 발생")
-    @ParameterizedTest
-    @ValueSource(ints = {-1, 0, 1500})
-    void 입력된_구매_금액이_1000단위가_아닌_경우_예외_발생(int purchaseAmount) {
-        assertThatIllegalArgumentException().isThrownBy(() -> InputValidator.validatePurchaseAmount(purchaseAmount));
-    }
-
     @DisplayName("당첨 번호가 숫자가 아닌 경우 예외 발생")
     @Test
     void 당첨_번호가_숫자가_아닌_경우_예외_발생() {
