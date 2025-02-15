@@ -3,7 +3,6 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import constant.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +27,6 @@ class PurchasedLottosTest {
         // when & then
         assertThatThrownBy(() -> new PurchasedLottos(purchaseAmount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.DIVIDABLE_EXCEPTION);
+                .hasMessage(PurchasedLottos.DIVIDABLE_EXCEPTION);
     }
 }

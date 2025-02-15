@@ -1,11 +1,12 @@
 package model;
 
-import constant.ErrorMessage;
 import java.util.Random;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAXIMUM_LOTTO_NUMBER = 45;
+    public static final String NUMBER_BOUND_EXCEPTION = "1~45 사이의 숫자를 입력해주세요.";
+
     private final int number;
 
     public LottoNumber(int number) {
@@ -20,7 +21,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validateBound(int number) {
         if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_BOUND_EXCEPTION);
+            throw new IllegalArgumentException(NUMBER_BOUND_EXCEPTION);
         }
     }
 

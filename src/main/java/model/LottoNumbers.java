@@ -1,12 +1,13 @@
 package model;
 
-import constant.ErrorMessage;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class LottoNumbers {
     public static final int LOTTO_NUMBER_COUNT = 6;
+    public static final String NUMBER_COUNT_EXCEPTION = "6개의 숫자를 입력해주세요.";
+    public static final String NUMBER_DUPLICATE_EXCEPTION = "중복이 아닌 숫자를 입력해주세요";
 
     private final List<LottoNumber> numbers;
 
@@ -45,14 +46,14 @@ public class LottoNumbers {
 
     private void validateNumberCount(List<Integer> winNumbers) {
         if (winNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT_EXCEPTION);
+            throw new IllegalArgumentException(NUMBER_COUNT_EXCEPTION);
         }
     }
 
     private void validateDuplicate(List<Integer> numbers) {
         Set<Integer> numberSet = new HashSet<>(numbers);
         if (numbers.size() != numberSet.size()) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_DUPLICATE_EXCEPTION);
+            throw new IllegalArgumentException(NUMBER_DUPLICATE_EXCEPTION);
         }
     }
 }

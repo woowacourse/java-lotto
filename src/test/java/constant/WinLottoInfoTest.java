@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import model.LottoNumbers;
 import model.WinLotto;
+import model.WinLottoInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

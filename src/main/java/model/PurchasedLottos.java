@@ -1,11 +1,12 @@
 package model;
 
-import constant.ErrorMessage;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PurchasedLottos {
     private static final int LOTTO_PRICE = 1000;
+    public static final String DIVIDABLE_EXCEPTION = "1000의 배수를 입력해주세요.";
+
     private final List<LottoNumbers> lottos = new ArrayList<>();
     private final Integer purchaseAmount;
 
@@ -32,7 +33,7 @@ public class PurchasedLottos {
 
     private void validateDividable(Integer input) {
         if (input % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(ErrorMessage.DIVIDABLE_EXCEPTION);
+            throw new IllegalArgumentException(DIVIDABLE_EXCEPTION);
         }
     }
 }

@@ -3,7 +3,6 @@ package model;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import constant.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +16,9 @@ class LottoNumberTest {
         // 예외 범위
         assertThatThrownBy(() -> new LottoNumber(0))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_BOUND_EXCEPTION);
+                .hasMessage(LottoNumber.NUMBER_BOUND_EXCEPTION);
         assertThatThrownBy(() -> new LottoNumber(46))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_BOUND_EXCEPTION);
+                .hasMessage(LottoNumber.NUMBER_BOUND_EXCEPTION);
     }
 }

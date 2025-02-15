@@ -1,12 +1,11 @@
 package view;
 
-import static constant.WinLottoInfo.FIFTH;
-import static constant.WinLottoInfo.FIRST;
-import static constant.WinLottoInfo.FOURTH;
-import static constant.WinLottoInfo.SECOND;
-import static constant.WinLottoInfo.THIRD;
+import static model.WinLottoInfo.FIFTH;
+import static model.WinLottoInfo.FIRST;
+import static model.WinLottoInfo.FOURTH;
+import static model.WinLottoInfo.SECOND;
+import static model.WinLottoInfo.THIRD;
 
-import constant.OutputMessage;
 import model.LottoNumber;
 import model.LottoNumbers;
 import model.LottoStatistics;
@@ -14,7 +13,7 @@ import model.PurchasedLottos;
 
 public class OutputView {
     public void printPurchaseResult(Integer purchaseCount) {
-        System.out.printf(OutputMessage.PURCHASE_RESULT, purchaseCount);
+        System.out.printf("%d개를 구매했습니다.%n", purchaseCount);
     }
 
     public void printPurchasedLottos(PurchasedLottos purchasedLottos) {
@@ -26,28 +25,28 @@ public class OutputView {
     }
 
     public void printWinNumberGuide() {
-        System.out.println(OutputMessage.WIN_NUMBERS);
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
     public void printBonusNumberGuide() {
-        System.out.println(OutputMessage.BONUS_NUMBER);
+        System.out.println("보너스 볼을 입력해 주세요.");
     }
 
     public void printResult(LottoStatistics lottoStatistics) {
-        System.out.printf(OutputMessage.FIFTH_RESULT, FIFTH.getMatchNumberCount(), FIFTH.getPrice(),
+        System.out.printf("%d개 일치 (%d원)- %d개%n", FIFTH.getMatchNumberCount(), FIFTH.getPrice(),
                 nullToZero(lottoStatistics.getCount(FIFTH)));
-        System.out.printf(OutputMessage.FOURTH_RESULT, FOURTH.getMatchNumberCount(), FOURTH.getPrice(),
+        System.out.printf("%d개 일치 (%d원)- %d개%n", FOURTH.getMatchNumberCount(), FOURTH.getPrice(),
                 nullToZero(lottoStatistics.getCount(FOURTH)));
-        System.out.printf(OutputMessage.THIRD_RESULT, THIRD.getMatchNumberCount(), THIRD.getPrice(),
+        System.out.printf("%d개 일치 (%d원)- %d개%n", THIRD.getMatchNumberCount(), THIRD.getPrice(),
                 nullToZero(lottoStatistics.getCount(THIRD)));
-        System.out.printf(OutputMessage.SECOND_RESULT, SECOND.getMatchNumberCount(), SECOND.getPrice(),
+        System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", SECOND.getMatchNumberCount(), SECOND.getPrice(),
                 nullToZero(lottoStatistics.getCount(SECOND)));
-        System.out.printf(OutputMessage.FIRST_RESULT, FIRST.getMatchNumberCount(), FIRST.getPrice(),
+        System.out.printf("%d개 일치 (%d원)- %d개%n", FIRST.getMatchNumberCount(), FIRST.getPrice(),
                 nullToZero(lottoStatistics.getCount(FIRST)));
     }
 
     public void printTotalReturn(LottoStatistics lottoStatistics, PurchasedLottos purchasedLottos) {
-        System.out.printf(OutputMessage.TOTAL_RETURN, lottoStatistics.totalReturn(purchasedLottos.getPurchaseAmount()));
+        System.out.printf("총 수익률은 %.2f입니다.%n", lottoStatistics.totalReturn(purchasedLottos.getPurchaseAmount()));
     }
 
     private Integer nullToZero(Integer number) {

@@ -2,7 +2,6 @@ package view;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import constant.ErrorMessage;
 import java.io.ByteArrayInputStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,6 +19,6 @@ public class InputViewTest {
         // when & then
         assertThatThrownBy(inputView::readPurchaseAmount)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.POSITIVE_NUMBER_EXCEPTION);
+                .hasMessage(InputView.POSITIVE_NUMBER_EXCEPTION);
     }
 }

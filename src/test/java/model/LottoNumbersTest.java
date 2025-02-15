@@ -3,7 +3,6 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import constant.ErrorMessage;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,7 +40,7 @@ class LottoNumbersTest {
         // when & then
         assertThatThrownBy(() -> new LottoNumbers(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_COUNT_EXCEPTION);
+                .hasMessage(LottoNumbers.NUMBER_COUNT_EXCEPTION);
     }
 
     @Test
@@ -53,6 +52,6 @@ class LottoNumbersTest {
         // when & then
         assertThatThrownBy(() -> new LottoNumbers(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_DUPLICATE_EXCEPTION);
+                .hasMessage(LottoNumbers.NUMBER_DUPLICATE_EXCEPTION);
     }
 }

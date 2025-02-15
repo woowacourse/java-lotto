@@ -1,9 +1,7 @@
-package constant;
+package model;
 
 import java.util.Arrays;
 import java.util.List;
-import model.LottoNumbers;
-import model.WinLotto;
 
 public enum WinLottoInfo {
     FIRST(6, false, 2000000000),
