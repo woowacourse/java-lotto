@@ -3,7 +3,6 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 import lotto.domain.Profit;
 import lotto.domain.Rank;
@@ -56,12 +55,12 @@ public class LottoController {
     }
 
     private WinnerLotto readWinnerNumber(String input) {
-        LottoNumbers winnerNumbers = LottoNumbers.from(input);
+        Lotto winnerNumbers = Lotto.from(input);
 
         return readBonusNumber(winnerNumbers);
     }
 
-    private WinnerLotto readBonusNumber(LottoNumbers winnerNumbers) {
+    private WinnerLotto readBonusNumber(Lotto winnerNumbers) {
         LottoNumber bonusNumber = RecoveryUtils.executeWithRetry(InputView::readBonusNumber, LottoNumber::from);
 
         try {

@@ -25,7 +25,7 @@ public class LottoGroup {
         List<Integer> randomNumbers = generateRandomNumbers();
         List<LottoNumber> lottoNumbers = convertToLottoNumbers(randomNumbers);
 
-        return Lotto.from(LottoNumbers.from(lottoNumbers));
+        return Lotto.from(lottoNumbers);
     }
 
     private List<Integer> generateRandomNumbers() {
