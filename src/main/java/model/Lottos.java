@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
+
     private final List<Lotto> lottos = new ArrayList<>();
 
     public void addLotto(Lotto lotto) {
@@ -13,30 +14,25 @@ public class Lottos {
     }
 
     public void rankAll(WinningLotto winningLotto) {
-        for (Lotto lotto : lottos) {
-            lotto.rankTier(winningLotto);
-        }
+        lottos.forEach(lotto -> lotto.rankTier(winningLotto));
     }
 
     public int countTiers(PrizeTier prizeTier) {
         return (int) lottos.stream()
-                .filter(lotto -> lotto.isTierMatched(prizeTier))
-                .count();
+            .filter(lotto -> lotto.isTierMatched(prizeTier))
+            .count();
     }
 
     public long calculateTotalPrize() {
-        long totalPrize = 0;
-        for (Lotto lotto : lottos) {
-            totalPrize += lotto.extractPrize();
-        }
-        return totalPrize;
+        return lottos.stream()
+            .mapToInt(Lotto::extractPrize)
+            .sum();
     }
 
     public LottosDto toDto() {
-        List<LottoDto> lottoDtos = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            lottoDtos.add(lotto.toDto());
-        }
+        List<LottoDto> lottoDtos = lottos.stream()
+            .map(Lotto::toDto)
+            .toList();
         return new LottosDto(lottoDtos);
     }
 }

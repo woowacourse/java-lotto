@@ -20,8 +20,8 @@ public enum PrizeTier {
         this.prize = prize;
     }
 
-    public static PrizeTier getTier(int matchedCount, boolean bonusMatched) {
-        if (matchedCount == 5 && bonusMatched) {
+    public static PrizeTier getTier(int matchedCount, boolean isBonusMatched) {
+        if (matchedCount == SECOND.matchedCount && isBonusMatched) {
             return SECOND;
         }
         return Arrays.stream(values())

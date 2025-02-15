@@ -2,11 +2,13 @@ package service;
 
 import error.ErrorMessage;
 import java.util.List;
+import java.util.stream.IntStream;
 import model.Lotto;
 import model.Lottos;
 import util.RandomGenerator;
 
 public class LottoGenerateService {
+
     private static final Integer PRICE = 1000;
 
     public Lottos generateLottos(int purchaseAmount) {
@@ -14,11 +16,8 @@ public class LottoGenerateService {
         int count = purchaseAmount / PRICE;
 
         Lottos lottos = new Lottos();
-
-        for (int i = 0; i < count; i++) {
-            insertLotto(lottos);
-        }
-
+        IntStream.range(0, count)
+            .forEach(repeat -> insertLotto(lottos));
         return lottos;
     }
 

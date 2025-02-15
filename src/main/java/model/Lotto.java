@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
+
     private List<Integer> numbers;
     private PrizeTier prizeTier = null;
 
@@ -17,10 +18,10 @@ public class Lotto {
     }
 
     public int countMatches(List<Integer> winningNumbers) {
-        Set<Integer> numberSet = new HashSet<>(this.numbers);
-        Set<Integer> winningNumberSet = new HashSet<>(winningNumbers);
-        numberSet.retainAll(winningNumberSet);
-        return numberSet.size();
+        Set<Integer> lottoNumbers = new HashSet<>(this.numbers);
+        Set<Integer> winningLottoNumbers = new HashSet<>(winningNumbers);
+        lottoNumbers.retainAll(winningLottoNumbers);
+        return lottoNumbers.size();
     }
 
     public void rankTier(WinningLotto winningLotto) {
@@ -65,10 +66,9 @@ public class Lotto {
     }
 
     private void validateNumbersRange(List<Integer> numbers) {
-        for (Integer number : numbers) {
-            if (number < 1 || number > 45) {
-                throw new IllegalArgumentException(ErrorMessage.NUMBER_OUT_OF_RANGE.getMessage());
-            }
+        boolean hasAnyNumberOutOfRange = numbers.stream().anyMatch(number -> number < 1 || number > 45);
+        if (hasAnyNumberOutOfRange) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_OUT_OF_RANGE.getMessage());
         }
     }
 }
