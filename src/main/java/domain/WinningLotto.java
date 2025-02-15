@@ -7,7 +7,7 @@ import java.util.*;
 
 public class WinningLotto {
 
-  private List<Integer> winningNumbers = new ArrayList<>();
+  private List<Integer> winningNumbers;
   private int bonusNumber;
 
   public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
