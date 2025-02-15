@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static lotto.domain.PurchaseAmount.LOTTO_UNIT_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -12,7 +13,7 @@ class PurchaseAmountTest {
     void 구입금액이_1000원으로_나누어_떨어지지_않으면_예외를_던진다() {
         assertThatThrownBy(() -> new PurchaseAmount(500))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구입금액은 1000원으로 나누어져야 합니다.");
+                .hasMessage("구입금액은 %d원으로 나누어져야 합니다.".formatted(LOTTO_UNIT_PRICE));
     }
 
     @DisplayName("구입금액이 양수가 아니라면 예외를 던진다")

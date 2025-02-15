@@ -28,6 +28,10 @@ public enum Rank {
         return winningAmount;
     }
 
+    public int getWinningAmountByCount(int count) {
+        return winningAmount * count;
+    }
+
     public static Rank getRank(final int matchCount, final boolean hasBonusNumber) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount == matchCount && rank.hasBonusNumber == hasBonusNumber)

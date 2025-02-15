@@ -2,22 +2,27 @@ package lotto.domain;
 
 import java.util.Map;
 
+import static lotto.domain.PurchaseAmount.LOTTO_UNIT_PRICE;
+
 public class WinningStatistics {
+    private static final int TRUNCATION = 100;
+
     private final Map<Rank, Integer> winningStatistics;
 
     public WinningStatistics(final Map<Rank, Integer> winningStatistics) {
         this.winningStatistics = winningStatistics;
     }
 
-    public double calculateReturnRate(final int purchaseAmount) {
+    public double calculateReturnRate(final int amount) {
         int total = calculateTotal();
-        return (double) total / purchaseAmount;
+        double returnRate = (double) total / (amount * LOTTO_UNIT_PRICE);
+        return Math.floor(returnRate * TRUNCATION) / TRUNCATION;
     }
 
     private int calculateTotal() {
         int total = 0;
         for (final Rank rank : winningStatistics.keySet()) {
-            total += winningStatistics.get(rank) * rank.getWinningAmount();
+            total += rank.getWinningAmountByCount(winningStatistics.get(rank));
         }
         return total;
     }
