@@ -35,9 +35,19 @@ public class OutputView {
         print(WINNING_STATISTIC_GUIDANCE.getMessage());
         print(WINNING_STATISTIC_LINE_GUIDANCE.getMessage());
 
-        prizeMap.keySet().stream()
-                .map(prize -> WINNING_STATISTIC.getMessage(prize.getComment(), prizeMap.get(prize)))
-                .forEach(OutputView::print);
+        // "%d개 일치%s(%d원) - %d개"
+        for (Prize prize : prizeMap.keySet()) {
+            String comment = getComment(prize);
+            String message = WINNING_STATISTIC.getMessage(prize.getMatchCount(), comment, prize.getPrizeAmount(), prizeMap.get(prize));
+            print(message);
+        }
+    }
+
+    private static String getComment(Prize prize) {
+        if (prize == Prize.MATCH_FIVE_AND_BONUS) {
+            return ", 보너스 볼 일치";
+        }
+        return " ";
     }
 
     public static void printBenefit(BenefitRate benefitRate) {

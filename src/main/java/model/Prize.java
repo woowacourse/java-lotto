@@ -5,19 +5,17 @@ import java.util.EnumMap;
 
 public enum Prize {
 
-    MATCH_NONE("", 0, 0),
-    MATCH_THREE("3개 일치 (5000원)", 3, 5_000),
-    MATCH_FOUR("4개 일치 (50000원)", 4, 50_000),
-    MATCH_FIVE("5개 일치 (1500000원)", 5, 1_500_000),
-    MATCH_FIVE_AND_BONUS("5개 일치, 보너스 볼 일치 (30000000원)", 5, 30_000_000),
-    MATCH_SIX("6개 일치 (2000000000원)", 6, 2_000_000_000);
+    MATCH_NONE(0, 0),
+    MATCH_THREE(3, 5_000),
+    MATCH_FOUR( 4, 50_000),
+    MATCH_FIVE( 5, 1_500_000),
+    MATCH_FIVE_AND_BONUS( 5, 30_000_000),
+    MATCH_SIX(6, 2_000_000_000);
 
-    private final String comment;
     private final int matchCount;
     private final int prizeAmount;
 
-    Prize(final String comment, final int matchCount, final int prizeAmount) {
-        this.comment = comment;
+    Prize(final int matchCount, final int prizeAmount) {
         this.matchCount = matchCount;
         this.prizeAmount = prizeAmount;
     }
@@ -40,8 +38,8 @@ public enum Prize {
                 .orElse(Prize.MATCH_NONE);
     }
 
-    public String getComment() {
-        return comment;
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public int getPrizeAmount() {
