@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import lotto.Rank;
 import lotto.model.Cashier;
@@ -66,19 +65,7 @@ public class LottoController {
 
     private void printResult(DashBoard dashBoard, int purchaseAmount) {
         outputView.printResult(dashBoard.getRanks());
-        outputView.printWinningRatio(calculateRatio(dashBoard.getRanks(), purchaseAmount));
-    }
-
-    private float calculateRatio(Map<Rank, Integer> ranks, int purchaseAmount) {
-        return (float) calculateTotalWinningAmount(ranks) / purchaseAmount;
-    }
-
-    private int calculateTotalWinningAmount(Map<Rank, Integer> ranks) {
-        int totalAmount = 0;
-        for (Rank rank : ranks.keySet()) {
-            totalAmount += rank.getWinningAmount() * ranks.get(rank);
-        }
-        return totalAmount;
+        outputView.printWinningRatio(dashBoard.calculateWinningRate(purchaseAmount));
     }
 
     private void end() {
