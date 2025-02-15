@@ -32,13 +32,17 @@ public enum LottoPrize {
         boolean isBonusMatch = winningLotto.isBonusMatch(lotto);
 
         if (isBonusMatch) {
-            return Arrays.stream(values())
-                    .filter(value -> value.bonusNumberMatches)
-                    .filter(value -> value.matchCount == matchCount)
-                    .findFirst()
-                    .orElse(fromMatchCount(matchCount));
+            return fromBonusMatch(matchCount);
         }
         return fromMatchCount(matchCount);
+    }
+
+    private static LottoPrize fromBonusMatch(int matchCount) {
+        return Arrays.stream(values())
+                .filter(value -> value.bonusNumberMatches)
+                .filter(value -> value.matchCount == matchCount)
+                .findFirst()
+                .orElse(fromMatchCount(matchCount));
     }
 
     private static LottoPrize fromMatchCount(int matchCount) {
