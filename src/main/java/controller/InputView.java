@@ -5,28 +5,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    
+
     public static final char MATCH_LOTTO_DELIMITER = ',';
-    
-    public final Scanner SC;
-    
-    public InputView(Scanner SC) {
-        this.SC = SC;
+
+    public final Scanner sc;
+
+    public InputView(Scanner sc) {
+        this.sc = sc;
     }
-    
+
     public int inputMoney() {
-        String moneyString = SC.nextLine();
+        String moneyString = sc.nextLine();
         validateMoneyNotBlank(moneyString);
         validateNumberFormat(moneyString);
         return Integer.parseInt(moneyString);
     }
-    
+
     private void validateMoneyNotBlank(String moneyString) {
         if (moneyString.isBlank()) {
             throw new IllegalStateException("금액을 입력해야 합니다.");
         }
     }
-    
+
     private void validateNumberFormat(String moneyString) {
         try {
             Integer.parseInt(moneyString);
@@ -34,20 +34,20 @@ public class InputView {
             throw new IllegalStateException("금액은 숫자로만 입력해야 합니다.", exception);
         }
     }
-    
+
     public List<Integer> inputMatchLotto() {
-        String numbersString = SC.nextLine();
-        
+        String numbersString = sc.nextLine();
+
         validateMatchLottoDelimiter(numbersString);
-        
+
         String[] numbers = numbersString.split(String.valueOf(MATCH_LOTTO_DELIMITER));
-        
+
         return Arrays.stream(numbers)
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .toList();
     }
-    
+
     private void validateMatchLottoDelimiter(String input) {
         for (char ch : input.toCharArray()) {
             if (!Character.isDigit(ch) && ch != MATCH_LOTTO_DELIMITER) {
@@ -55,9 +55,9 @@ public class InputView {
             }
         }
     }
-    
+
     public int inputBonusNumber() {
-        String bonusString = SC.nextLine();
+        String bonusString = sc.nextLine();
         return Integer.parseInt(bonusString);
     }
 }
