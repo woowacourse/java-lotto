@@ -2,6 +2,10 @@ package constant;
 
 public enum OutputViewMessage {
 
+    LOTTO_PURCHASE_GUIDANCE("구입금액을 입력해 주세요."),
+    WINNING_LOTTO_GUIDANCE("지난 주 당첨 번호를 입력해 주세요."),
+    WINNING_BONUS_GUIDANCE("보너스 볼을 입력해 주세요."),
+
     LOTTO_PURCHASE_RESULT("%d개 구매했습니다."),
 
     WINNING_STATISTIC_TITLE("당첨 통계"),
