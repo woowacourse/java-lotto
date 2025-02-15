@@ -9,12 +9,15 @@ public class OutputView {
 
     public void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            String lottoNumbers = lotto.getNumbers()
-                    .stream()
-                    .map(Objects::toString)
-                    .collect(Collectors.joining(", ", "[", "]"));
-            System.out.println(lottoNumbers);
+            System.out.println(formatLottoMessage(lotto));
         }
+    }
+
+    private String formatLottoMessage(Lotto lotto) {
+        return lotto.getNumbers()
+                .stream()
+                .map(Objects::toString)
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 
     public void printWinningResult(WinningResult winningResult) {
