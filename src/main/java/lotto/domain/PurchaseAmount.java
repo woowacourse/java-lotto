@@ -19,8 +19,8 @@ public class PurchaseAmount {
     }
 
     private void validateAmount(long purchaseAmount) {
-        if (amount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("구매 금액은" + LOTTO_PRICE + "단위어야 합니다.");
+        if (purchaseAmount % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("구매 금액은 " + LOTTO_PRICE + "원 단위어야 합니다.");
         }
     }
 }
