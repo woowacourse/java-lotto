@@ -8,6 +8,8 @@ public class Lotto {
 
     public static final int LOTTO_PRICE = 1000;
     public static final int MAX_LOTTO_SIZE = 6;
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
 
     private List<Ball> balls;
 
@@ -19,31 +21,17 @@ public class Lotto {
         this.balls = balls;
     }
 
-    public MatchDto getMatchDto(WinningLotto winningLotto) {
-        List<Integer> winningNumbers = winningLotto.getWinningNumbers();
-
-        List<Integer> ballsNumber = balls.stream()
-                .map(Ball::getNumber)
-                .toList();
-
-        int winningNumberCount = ballsNumber.stream()
-                .filter(winningNumbers::contains)
-                .mapToInt(e -> 1)
-                .sum();
-
-        boolean hasBonusNumber = ballsNumber.contains(winningLotto.getBonusNumber());
-
-        return new MatchDto(
-                winningNumberCount,
-                hasBonusNumber
-        );
-    }
-
     public String getBallsString() {
         return balls.toString();
     }
 
     public List<Ball> getBalls() {
         return balls;
+    }
+
+    public List<Integer> getBallNumbers() {
+        return balls.stream()
+                .map(Ball::getNumber)
+                .toList();
     }
 }

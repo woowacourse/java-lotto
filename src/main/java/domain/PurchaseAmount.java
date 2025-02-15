@@ -8,11 +8,11 @@ public class PurchaseAmount {
 
     public PurchaseAmount(final int money) {
         validatePurchaseAmountRange(money);
-        validatePurchaseAmountIsDividedByUnit(money);
+        validatePurchaseAmountDividedByUnit(money);
         this.money = money;
     }
 
-    private void validatePurchaseAmountIsDividedByUnit(int value) {
+    private void validatePurchaseAmountDividedByUnit(int value) {
         if (value % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("구입 금액은" + LOTTO_PRICE + "원 단위로 가능합니다.");
         }

@@ -1,7 +1,9 @@
 package domain;
 
 import static domain.Lotto.LOTTO_PRICE;
+import static domain.Lotto.MAX_LOTTO_NUMBER;
 import static domain.Lotto.MAX_LOTTO_SIZE;
+import static domain.Lotto.MIN_LOTTO_NUMBER;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,7 +18,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos createLottos(int money) {
+    public static Lottos create(int money) {
         int quantity = money / LOTTO_PRICE;
 
         List<Lotto> generatedLottos = new ArrayList<>();
@@ -36,7 +38,7 @@ public class Lottos {
         List<Integer> lottoNumbers = new ArrayList<>();
 
         while (lottoNumbers.size() < MAX_LOTTO_SIZE) {
-            int number = random.nextInt(MAX_LOTTO_SIZE, MAX_LOTTO_SIZE + 1);
+            int number = random.nextInt(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1);
             addNumberIfUnique(lottoNumbers, number);
         }
 
@@ -61,9 +63,7 @@ public class Lottos {
                 .toList();
     }
 
-    public List<MatchDto> getMatchDtos(WinningLotto winningLotto) {
-        return lottos.stream()
-                .map(lotto -> lotto.getMatchDto(winningLotto))
-                .toList();
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

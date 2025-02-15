@@ -1,9 +1,9 @@
 package controller;
 
 import domain.Lottos;
-import domain.MatchDto;
+import domain.Matcher;
 import domain.PurchaseAmount;
-import domain.WinningCountDto;
+import domain.WinningCount;
 import domain.WinningLotto;
 import domain.WinningStatistics;
 import java.util.List;
@@ -29,31 +29,35 @@ public class LottoController {
         int bonusNumber = inputView.askBonusNumber();
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        List<WinningCountDto> winningCountDtos = matchAndCountWinningLottos(lottos, winningLotto);
-        calculateYield(purchaseAmount.getMoney(), winningCountDtos);
+        List<WinningCount> winningCounts = matchAndCountWinningLottos(winningLotto, lottos);
+        calculateYield(purchaseAmount.getMoney(), winningCounts);
     }
 
     private Lottos issueLottos(int purchaseAmount) {
-        Lottos lottos = Lottos.createLottos(purchaseAmount);
+        Lottos lottos = Lottos.create(purchaseAmount);
 
         int quantity = lottos.getQuantity();
         outputView.printLottoQuantity(quantity);
 
-        List<String> lottoNumbers = lottos.getLottoNumbers();
-        outputView.printLottos(lottoNumbers);
+        lottos.getLottos()
+                .forEach(lotto -> outputView.printLotto(lotto.getBallNumbers()));
+
         return lottos;
     }
 
-    private List<WinningCountDto> matchAndCountWinningLottos(Lottos lottos, WinningLotto winningLotto) {
-        List<MatchDto> matchDtos = lottos.getMatchDtos(winningLotto);
-        List<WinningCountDto> winningCountDtos = WinningStatistics.calculateWinningCountDtos(matchDtos);
-        outputView.printWinningStatistics(winningCountDtos);
+    private List<WinningCount> matchAndCountWinningLottos(WinningLotto winningLotto, Lottos lottos) {
+        List<Matcher> matchers = lottos.getLottos().stream()
+                .map(lotto -> Matcher.count(winningLotto, lotto))
+                .toList();
 
-        return winningCountDtos;
+        List<WinningCount> winningCounts = WinningStatistics.calculateWinningCount(matchers);
+        outputView.printWinningStatistics(winningCounts);
+
+        return winningCounts;
     }
 
-    private void calculateYield(int purchaseAmount, List<WinningCountDto> winningCountDtos) {
-        double yield = WinningStatistics.calculateYield(purchaseAmount, winningCountDtos);
+    private void calculateYield(int purchaseAmount, List<WinningCount> winningCounts) {
+        double yield = WinningStatistics.calculateYield(purchaseAmount, winningCounts);
         outputView.printYield(yield);
     }
 }

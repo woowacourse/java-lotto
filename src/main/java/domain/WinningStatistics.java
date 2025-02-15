@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public enum WinningStatistics {
+
     NONE(0, 0, false),
     THREE(3, 5_000, false),
     FOUR(4, 50_000, false),
@@ -25,32 +26,24 @@ public enum WinningStatistics {
         this.isBonusMatched = isBonusMatched;
     }
 
-    public int getPrizeMoney() {
-        return prizeMoney;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public static List<WinningCountDto> calculateWinningCountDtos(List<MatchDto> matchDtos) {
-        List<WinningStatistics> winningStatisticsList = matchDtos.stream()
-                .map(WinningStatistics::findByMatchDto)
+    public static List<WinningCount> calculateWinningCount(List<Matcher> matchers) {
+        List<WinningStatistics> winningStatisticsList = matchers.stream()
+                .map(WinningStatistics::findMatchInfo)
                 .toList();
 
-        List<WinningCountDto> winningCountDtos = new ArrayList<>();
+        List<WinningCount> winningCounts = new ArrayList<>();
 
         for (WinningStatistics winningStatistics : WinningStatistics.values()) {
-            addWinningCountDtoIfExists(winningStatistics, winningStatisticsList, winningCountDtos);
+            addWinningCountDtoIfExists(winningStatistics, winningStatisticsList, winningCounts);
         }
 
-        return winningCountDtos;
+        return winningCounts;
     }
 
-    public static double calculateYield(int purchaseAmount, List<WinningCountDto> winningCountDtos) {
-        int totalPrizeMoney = winningCountDtos.stream()
-                .mapToInt(winningCountDto ->
-                        winningCountDto.winningStatistics().getPrizeMoney() * winningCountDto.count())
+    public static double calculateYield(int purchaseAmount, List<WinningCount> winningCounts) {
+        int totalPrizeMoney = winningCounts.stream()
+                .mapToInt(winningCount ->
+                        winningCount.winningStatistics().getPrizeMoney() * winningCount.count())
                 .sum();
 
         return (double) totalPrizeMoney / purchaseAmount;
@@ -58,21 +51,22 @@ public enum WinningStatistics {
 
     private static void addWinningCountDtoIfExists(WinningStatistics winningStatistics,
                                                    List<WinningStatistics> winningStatisticsList,
-                                                   List<WinningCountDto> winningCountDtos) {
+                                                   List<WinningCount> winningCounts) {
         if (winningStatistics != WinningStatistics.NONE) {
             int count = Collections.frequency(winningStatisticsList, winningStatistics);
-            winningCountDtos.add(new WinningCountDto(winningStatistics, count));
+            winningCounts.add(new WinningCount(winningStatistics, count));
         }
     }
 
-    private static WinningStatistics findByMatchDto(MatchDto matchDto) {
-        List<WinningStatistics> winningStatisticsFilteredByMatchCount = Arrays.stream(WinningStatistics.values())
-                .filter(winningStatistics -> winningStatistics.isMatchCount(matchDto.winningNumberCount()))
-                .toList();
+    private static WinningStatistics findMatchInfo(Matcher matcher) {
+        List<WinningStatistics> winningStatisticsFilteredByMatchCount =
+                Arrays.stream(WinningStatistics.values())
+                        .filter(winningStatistics -> winningStatistics.isMatchCount(matcher.getWinningNumberCount()))
+                        .toList();
 
         if (hasBonusCondition(winningStatisticsFilteredByMatchCount)) {
             return winningStatisticsFilteredByMatchCount.stream()
-                    .filter(winningStatistics -> winningStatistics.isBonusMatched(matchDto.hasBonusNumber()))
+                    .filter(winningStatistics -> winningStatistics.isBonusMatched(matcher.isHasBonusNumber()))
                     .findFirst()
                     .orElse(NONE);
         }
@@ -90,5 +84,13 @@ public enum WinningStatistics {
 
     private boolean isBonusMatched(boolean value) {
         return isBonusMatched == value;
+    }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 }

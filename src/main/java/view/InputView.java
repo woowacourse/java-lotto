@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private static final String PURCHASE_AMOUNT_PROMPT = "구입금액을 입력해 주세요.";
     private final Scanner sc;
     private final InputConverter inputConverter;
 
@@ -15,7 +14,7 @@ public class InputView {
     }
 
     public int askPurchaseAmount() {
-        System.out.println(PURCHASE_AMOUNT_PROMPT);
+        System.out.println("구입금액을 입력해 주세요.");
         String purchaseAmount = sc.nextLine();
 
         return inputConverter.convertPurchaseAmount(purchaseAmount);
