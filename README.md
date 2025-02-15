@@ -81,8 +81,18 @@
 ---
 ## 🛠 Util
 
+### Constant
+- [x] 로또 관련 상수를 저장한다.
+
 ### ErrorHandler
 - [x] 잘못된 입력 시 예외를 오류 메시지와 함께 발생시킨다.
 
-### Constant
-- [x] 로또 관련 상수를 저장한다.
+### ObjectCreator
+- [x] 입력 값을 바탕으로 객체를 생성한다.
+
+## RandomGenerator
+- [x] 랜덤한 로또 번호를 생성한다.
+
+## StringConverter
+- [x] 문자열을 숫자 리스트로 변환한다.
+- [x] 문자열을 숫자로 변환한다.
