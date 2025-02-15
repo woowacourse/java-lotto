@@ -24,6 +24,10 @@ public class OutputView {
         System.out.println("거스름돈은 " + changeMoney + "원 입니다.");
     }
 
+    public static void printRateOfReturn(double rateOfReturn) {
+        System.out.println("총 수익률을 " + rateOfReturn + "입니다.");
+    }
+
     public static void printPrizeResult(final Map<Prize, Integer> prizeResult) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
@@ -40,9 +44,5 @@ public class OutputView {
         int prizeCount = entry.getValue();
         System.out.printf("%s (%d원)- %d개%n", currentPrize.getMatchedMessage(), currentPrize.getPrizeMoney(),
                 prizeCount);
-    }
-
-    public static void printRateOfReturn(double rateOfReturn) {
-        System.out.println("총 수익률을 " + rateOfReturn + "입니다.");
     }
 }

@@ -48,6 +48,7 @@ public enum Prize {
         if (isBonusMatched && prize.equals(Prize.THIRD)) {
             return Optional.of(Prize.SECOND);
         }
+
         return Optional.of(prize);
     }
 }

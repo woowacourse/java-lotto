@@ -1,5 +1,7 @@
 package domain;
 
+import message.ErrorMessage;
+
 public class AnswerLotto {
     private final Lotto lotto;
     private final int bonusNumber;
@@ -20,10 +22,10 @@ public class AnswerLotto {
 
     private void validate(Lotto lotto, final int bonusNumber) {
         if (lotto.hasDuplicateNumber(bonusNumber)) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_DUPLICATED.getMessage());
         }
         if (!isValidNumber(bonusNumber)) {
-            throw new IllegalArgumentException("1~45 범위 이내여야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_RANGE.getMessage());
         }
     }
 

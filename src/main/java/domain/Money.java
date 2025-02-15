@@ -1,5 +1,7 @@
 package domain;
 
+import message.ErrorMessage;
+
 public class Money {
     private final int originMoney;
 
@@ -10,10 +12,10 @@ public class Money {
 
     private void validate(int originMoney) {
         if (originMoney < 0) {
-            throw new IllegalArgumentException("돈은 양의 정수여야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_FORMAT.getMessage());
         }
         if (originMoney < 1000) {
-            throw new IllegalArgumentException("돈은 1,000원 이상이어야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.MONEY_MINIMUM.getMessage());
         }
     }
 

@@ -3,6 +3,7 @@ package domain;
 import domain.numbergenerator.NumberGenerator;
 import dto.OutputLottosDto;
 import java.util.List;
+import message.ErrorMessage;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -46,16 +47,16 @@ public class Lotto {
 
     public void validate(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_COUNT.getMessage());
         }
         if (hasDistinctNumber(numbers)) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_DUPLICATED.getMessage());
         }
         if (numbers.stream().anyMatch(number -> !isValidNumber(number))) {
-            throw new IllegalArgumentException("1~45 범위 이내여야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_RANGE.getMessage());
         }
         if (!isSorted(numbers)) {
-            throw new IllegalArgumentException("로또 번호는 정렬되어야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NOT_SORTED.getMessage());
         }
     }
 
