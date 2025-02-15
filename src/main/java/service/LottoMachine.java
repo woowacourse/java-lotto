@@ -16,9 +16,9 @@ public class LottoMachine {
         Lottos lottos = new Lottos();
         for (int i = 0; i < ticket; i++) {
             List<Integer> randomNumbers = RandomGenerator.generateUniqueRandomNumbers(
-                            LottoRule.LOTTO_SELECTION_SIZE.getValue(),
-                            LottoRule.MIN_LOTTO_NUMBER.getValue(),
-                            LottoRule.MAX_LOTTO_NUMBER.getValue());
+                    LottoRule.LOTTO_SELECTION_SIZE.getValue(),
+                    LottoRule.MIN_LOTTO_NUMBER.getValue(),
+                    LottoRule.MAX_LOTTO_NUMBER.getValue());
 
             Lotto lotto = new Lotto(randomNumbers);
             lottos.addLotto(lotto);

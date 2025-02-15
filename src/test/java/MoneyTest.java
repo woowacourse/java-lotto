@@ -2,7 +2,6 @@ import domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -28,7 +27,7 @@ class MoneyTest {
 
         // when
         // then
-        assertThatThrownBy(() -> new Money("invalidFormat"))
+        assertThatThrownBy(() -> new Money(invalidFormat))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
