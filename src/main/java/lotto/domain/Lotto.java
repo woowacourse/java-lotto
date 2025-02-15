@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import static lotto.common.Constants.LOTTO_NUM_SIZE;
+import static lotto.common.ErrorMessage.DUPLICATE_LOTTO_NUMBER;
+import static lotto.common.ErrorMessage.INVALID_LOTTO_INPUT;
+import static lotto.common.ErrorMessage.INVALID_LOTTO_NUM_SIZE;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -23,7 +26,7 @@ public class Lotto {
 
     public static Lotto from(String input) {
         if (input == null || input.isBlank() || input.endsWith(DELIMITER)) {
-            throw new IllegalArgumentException("잘못된 입력입니다. 이와 같은 형태로 작성해주세요.(ex. 1, 2, 3, 4, 5, 6)");
+            throw new IllegalArgumentException(INVALID_LOTTO_INPUT.getMessage());
         }
 
         if (!input.contains(DELIMITER)) {
@@ -56,11 +59,11 @@ public class Lotto {
 
     private void validLottoNumbers(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUM_SIZE) {
-            throw new IllegalArgumentException("로또 번호 6개를 입력해주세요.");
+            throw new IllegalArgumentException(INVALID_LOTTO_NUM_SIZE.getMessage());
         }
 
         if (new HashSet<>(lottoNumbers).size() != LOTTO_NUM_SIZE) {
-            throw new IllegalStateException("중복은 불가능합니다.");
+            throw new IllegalStateException(DUPLICATE_LOTTO_NUMBER.getMessage());
         }
     }
 

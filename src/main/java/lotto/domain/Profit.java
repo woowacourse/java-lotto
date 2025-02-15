@@ -38,10 +38,6 @@ public class Profit {
                 .divide(new BigDecimal(amount), SCALE_VALUE, RoundingMode.HALF_UP).toString();
     }
 
-    public Map<Rank, Integer> getRankCounts() {
-        return rankCounts;
-    }
-
     public List<Integer> getValues() {
         return rankCounts.values().stream().toList();
     }
