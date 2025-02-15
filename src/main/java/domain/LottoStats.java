@@ -1,9 +1,9 @@
 package domain;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class LottoStats {
     private final Map<Rank, Integer> rank;
@@ -11,7 +11,7 @@ public class LottoStats {
     private final int bonusBall;
 
     public LottoStats(List<Integer> winningNumbers, int bonusBall) {
-        rank = new TreeMap<>();
+        rank = new HashMap<>();
         this.winningNumbers = winningNumbers;
         this.bonusBall = bonusBall;
     }
