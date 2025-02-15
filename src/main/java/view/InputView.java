@@ -1,15 +1,19 @@
 package view;
 
+import domain.LottoNumbers;
 import java.util.Arrays;
 import java.util.List;
 import util.Console;
+import util.RetryHandler;
 
 public class InputView {
     public static int inputPurchaseAmount() {
-        System.out.println("구매금액을 입력해 주세요.");
-        String purchaseAmount = Console.readLine();
-        validatePurchaseAmount(purchaseAmount);
-        return Integer.parseInt(purchaseAmount);
+        return (Integer) RetryHandler.retryUntilSuccessWithReturn(() -> {
+            System.out.println("구매금액을 입력해 주세요.");
+            String purchaseAmount = Console.readLine();
+            validatePurchaseAmount(purchaseAmount);
+            return Integer.parseInt(purchaseAmount);
+        });
     }
 
     private static void validatePurchaseAmount(String purchaseAmount) {
@@ -32,15 +36,18 @@ public class InputView {
         }
     }
 
-    public static List<Integer> inputWinningLottoTicket() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String winningLottoTicket = Console.readLine();
-        validateLottoTicket(winningLottoTicket);
-        return Arrays.stream(winningLottoTicket.split(",", -1))
-                .map(String::strip)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .toList();
+    public static LottoNumbers inputWinningLottoTicket() {
+        return (LottoNumbers) RetryHandler.retryUntilSuccessWithReturn(() -> {
+                    System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+                    String winningLottoTicket = Console.readLine();
+                    validateLottoTicket(winningLottoTicket);
+                    return new LottoNumbers(Arrays.stream(winningLottoTicket.split(",", -1))
+                            .map(String::strip)
+                            .mapToInt(Integer::parseInt)
+                            .boxed()
+                            .toList());
+                }
+        );
     }
 
     private static void validateLottoTicket(String winningLottoTicket) {
@@ -57,10 +64,12 @@ public class InputView {
     }
 
     public static int inputBonusNumber(List<Integer> winningNumbers) {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        int bonusNumber = Integer.parseInt(Console.readLine());
-        validateBonusNumber(bonusNumber, winningNumbers);
-        return bonusNumber;
+        return (Integer) RetryHandler.retryUntilSuccessWithReturn(() -> {
+            System.out.println("보너스 볼을 입력해 주세요.");
+            int bonusNumber = Integer.parseInt(Console.readLine());
+            validateBonusNumber(bonusNumber, winningNumbers);
+            return bonusNumber;
+        });
     }
 
     private static void validateBonusNumber(Integer bonusNumber, List<Integer> winningNumbers) {
