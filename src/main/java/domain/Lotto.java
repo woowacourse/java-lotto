@@ -28,17 +28,17 @@ public class Lotto {
                 .distinct()
                 .count();
 
-        if (distinctCount == LottoRule.LOTTO_SELECTION_SIZE.getValue()) {
-            return;
+        if (distinctCount != LottoRule.LOTTO_SELECTION_SIZE.getValue()) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다. 입력된 번호: " + numbers);
         }
-        throw new IllegalArgumentException();
     }
 
     private static void validateSize(List<Integer> numbers) {
-        if (numbers.size() == LottoRule.LOTTO_SELECTION_SIZE.getValue()) {
-            return;
+        if (numbers.size() != LottoRule.LOTTO_SELECTION_SIZE.getValue()) {
+            throw new IllegalArgumentException(
+                    "로또 번호는 " + LottoRule.LOTTO_SELECTION_SIZE.getValue() + "개여야 합니다. "
+                            + "입력된 개수: " + numbers.size());
         }
-        throw new IllegalArgumentException();
     }
 
     @Override
