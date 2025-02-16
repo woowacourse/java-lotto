@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static lotto.common.constant.Constant.*;
+import static lotto.domain.LottoNumber.*;
 
 import java.util.ArrayList;
 import java.util.List;

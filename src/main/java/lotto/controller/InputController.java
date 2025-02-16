@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.List;
 import lotto.common.utill.InputParser;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.domain.WinningInform;
 import lotto.view.InputView;
@@ -32,7 +33,7 @@ public class InputController {
                 Lotto winningLotto = getWinningLotto();
                 int bonus = getBonus();
 
-                return new WinningInform(winningLotto, bonus);
+                return new WinningInform(winningLotto, new LottoNumber(bonus));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -46,7 +47,7 @@ public class InputController {
 
                 List<Integer> numbers = InputParser.parseToList(input);
 
-                return new Lotto(numbers);
+                return new Lotto(LottoNumber.from(numbers));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

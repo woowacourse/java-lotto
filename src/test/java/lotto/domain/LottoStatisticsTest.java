@@ -29,15 +29,15 @@ class LottoStatisticsTest {
 
     private static Stream<LottoStatisticsTestData> provideTestData() {
         // 케이스 1: 모든 MatchRank가 한개씩 있는 경우
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        int bonus = 7;
+        Lotto winningLotto = new Lotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 6)));
+        LottoNumber bonus = new LottoNumber(7);
         WinningInform winningInform = new WinningInform(winningLotto, bonus);
 
-        Lotto ticket1 = new Lotto(List.of(1, 2, 3, 7, 8, 9)); //3개 매칭
-        Lotto ticket2 = new Lotto(List.of(1, 2, 3, 4, 7, 8)); // 4개 매칭
-        Lotto ticket3 = new Lotto(List.of(1, 2, 3, 4, 5, 8)); // 5개 매칭
-        Lotto ticket4 = new Lotto(List.of(1, 2, 3, 4, 5, 7)); // 5개 매칭 + 보너스
-        Lotto ticket5 = new Lotto(List.of(1, 2, 3, 4, 5, 6)); // 6개 매칭
+        Lotto ticket1 = new Lotto(LottoNumber.from(List.of(1, 2, 3, 7, 8, 9))); //3개 매칭
+        Lotto ticket2 = new Lotto(LottoNumber.from(List.of(1, 2, 3, 4, 7, 8))); // 4개 매칭
+        Lotto ticket3 = new Lotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 8))); // 5개 매칭
+        Lotto ticket4 = new Lotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 7))); // 5개 매칭 + 보너스
+        Lotto ticket5 = new Lotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 6))); // 6개 매칭
         Wallet wallet = new Wallet(List.of(ticket1, ticket2, ticket3, ticket4, ticket5));
 
         Map<MatchRank, Integer> expectedCounts1 = new EnumMap<>(MatchRank.class);

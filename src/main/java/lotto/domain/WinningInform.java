@@ -1,14 +1,12 @@
 package lotto.domain;
 
 import static lotto.common.exception.ErrorMessage.*;
-import static lotto.domain.LottoNumber.LOTTO_RANGE_MAXIMUM;
-import static lotto.domain.LottoNumber.LOTTO_RANGE_MINIMUM;
 
 public class WinningInform {
     private final Lotto winningLotto;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningInform(Lotto winningLotto, int bonusNumber) {
+    public WinningInform(Lotto winningLotto, LottoNumber bonusNumber) {
         validate(winningLotto, bonusNumber);
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
@@ -18,18 +16,11 @@ public class WinningInform {
         return lotto.countMatchingNumbers(winningLotto, bonusNumber);
     }
 
-    private static void validate(Lotto winningLotto, int bonusNumber) {
-        validateBonusRange(bonusNumber);
+    private static void validate(Lotto winningLotto, LottoNumber bonusNumber) {
         validateBonusDuplicate(winningLotto, bonusNumber);
     }
 
-    private static void validateBonusRange(int bonus) {
-        if (bonus < LOTTO_RANGE_MINIMUM || bonus > LOTTO_RANGE_MAXIMUM) {
-            throw new IllegalArgumentException(ERROR_BONUS_OUT_OF_RANGE);
-        }
-    }
-
-    private static void validateBonusDuplicate(Lotto winningLotto, int bonus) {
+    private static void validateBonusDuplicate(Lotto winningLotto, LottoNumber bonus) {
         if (winningLotto.contains(bonus)) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_WINNING_AND_BONUS);
         }

@@ -15,7 +15,7 @@ public class LottoShop {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < money.getAmount(); i++) {
             List<Integer> numbers = lottoNumberGenerator.generate();
-            lottos.add(new Lotto(numbers));
+            lottos.add(new Lotto(LottoNumber.from(numbers)));
         }
         return lottos;
     }

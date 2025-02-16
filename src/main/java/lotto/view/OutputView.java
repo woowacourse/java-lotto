@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
 import lotto.domain.MatchRank;
 import lotto.domain.Profit;
@@ -28,7 +29,7 @@ public class OutputView {
 
         StringBuilder sb = new StringBuilder();
         for (LottoDto dto : lottoDtos) {
-            List<Integer> numbers = new ArrayList<>(dto.numbers());
+            List<LottoNumber> numbers = new ArrayList<>(dto.numbers());
             Collections.sort(numbers);
             sb.append(numbers);
             sb.append("\n");
