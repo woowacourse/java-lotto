@@ -33,9 +33,6 @@ public enum LottoRank {
     }
 
     public static LottoRank findRankWithMatchResult(final MatchResultDto matchResultDto) {
-        if (matchResultDto.getMatchCount() == SECOND_PLACE.matchCount && matchResultDto.isContainsBonusNumber()) {
-            return SECOND_PLACE;
-        }
 
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchResultDto.getMatchCount())
