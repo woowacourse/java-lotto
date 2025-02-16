@@ -24,7 +24,7 @@ public class LottoController {
         OutputView.printWinningStatistics(winningStatistics, returnRate);
     }
 
-    private static PurchaseAmount getPurchaseAmount() {
+    private PurchaseAmount getPurchaseAmount() {
         try {
             int inputPurchaseAmount = InputView.inputPurchaseAmount();
             return new PurchaseAmount(inputPurchaseAmount);
@@ -34,7 +34,7 @@ public class LottoController {
         }
     }
 
-    private static WinningNumbers getWinningNumbers() {
+    private WinningNumbers getWinningNumbers() {
         try {
             List<Integer> winningNumbers = InputView.inputWinningNumbers();
             return new WinningNumbers(winningNumbers);
@@ -44,7 +44,7 @@ public class LottoController {
         }
     }
 
-    private static int getBonusNumber(final WinningNumbers winningNumbers) {
+    private int getBonusNumber(final WinningNumbers winningNumbers) {
         try {
             int bonusNumber = InputView.inputBonusNumber();
             validateLottoNumber(bonusNumber);
