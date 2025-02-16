@@ -49,11 +49,11 @@ public class WinningLotto {
         }
     }
 
-    public List<Integer> getWinningNumbers() {
-        return new ArrayList<>(winningNumbers);
+    public boolean containsWinningNumber(int number) {
+        return winningNumbers.contains(number);
     }
 
-    public int getBonusNumber() {
-        return bonusNumber;
+    public boolean isBonusNumber(int number) {
+        return bonusNumber == number;
     }
 }

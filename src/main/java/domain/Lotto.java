@@ -11,18 +11,13 @@ public class Lotto {
     }
 
     public LottoMatch compareLotto(WinningLotto winningLotto) {
-        List<Integer> winningNumbers = winningLotto.getWinningNumbers();
-        int bonusNumber = winningLotto.getBonusNumber();
-        int winningCounter = 0;
-        boolean bonusChecker = false;
-
-        winningCounter = (int) numbers.stream()
-            .filter(winningNumbers::contains)
+        int winningCounter = (int) numbers.stream()
+            .filter(winningLotto::containsWinningNumber)
             .count();
 
-        if (numbers.contains(bonusNumber)) {
-            bonusChecker = true;
-        }
+        boolean bonusChecker = numbers.stream()
+            .anyMatch(winningLotto::isBonusNumber);
+
         return LottoMatch.findLottoRank(winningCounter, bonusChecker);
     }
 
