@@ -52,7 +52,7 @@ class InputConverterTest {
         //when
         int actual = converter.convertStringToBonusNumberValue("1");
         //then
-        assertThat(1000).isEqualTo(actual);
+        assertThat(1).isEqualTo(actual);
     }
 
     @Test
