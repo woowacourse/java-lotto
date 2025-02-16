@@ -3,8 +3,8 @@ package model;
 import dto.ReturnOfInvestmentResultResponse;
 import dto.TicketAmountResponse;
 
-import static global.utils.Validator.validateDivisibility;
-import static global.utils.Validator.validateRange;
+import static model.utils.Validator.validateDivisibility;
+import static model.utils.Validator.validateRange;
 
 public class Ticket {
 

@@ -3,7 +3,7 @@ package utils;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import global.utils.Validator;
+import model.utils.Validator;
 import org.junit.jupiter.api.Test;
 
 class ValidatorTest {

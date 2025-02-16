@@ -1,7 +1,7 @@
 package controller;
 
 import dto.TicketAmountResponse;
-import global.utils.Validator;
+import model.utils.Validator;
 import model.LottoResult;
 import model.Lottos;
 import model.Ticket;

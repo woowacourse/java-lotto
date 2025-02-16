@@ -3,7 +3,7 @@ package model;
 import static global.constant.LottoConstant.MAX_LOTTO_NUMBER;
 import static global.constant.LottoConstant.MIN_LOTTO_NUMBER;
 
-import global.utils.Validator;
+import model.utils.Validator;
 
 import java.util.EnumMap;
 import java.util.List;

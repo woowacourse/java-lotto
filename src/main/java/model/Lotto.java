@@ -1,7 +1,7 @@
 package model;
 
 import dto.LottoNumbersResponse;
-import global.utils.Validator;
+import model.utils.Validator;
 
 import java.util.*;
 

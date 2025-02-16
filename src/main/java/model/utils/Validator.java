@@ -1,4 +1,4 @@
-package global.utils;
+package model.utils;
 
 public class Validator {
 
