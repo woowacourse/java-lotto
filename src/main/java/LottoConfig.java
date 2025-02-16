@@ -8,8 +8,16 @@ import view.InputView;
 import view.LottoConsoleView;
 import view.OutputView;
 
-public class LottoConfig {
+public final class LottoConfig {
 
+    private static final LottoConfig INSTANCE = new LottoConfig();
+
+    private LottoConfig() {
+    }
+
+    public static LottoConfig getInstance() {
+        return INSTANCE;
+    }
 
     public LottoController lottoController() {
         return new LottoController(lottoConsoleView(), lottoStore(), new LottoDtoMapper());
