@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.HashSet;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -47,7 +48,7 @@ public class LottoController {
 
     private void printPurchasedLottos(final List<Lotto> lottos) {
         lottos.stream()
-                .map(Lotto::getNumbers)
+                .map(Lotto::getSortedNumbers)
                 .forEach(System.out::println);
     }
 
@@ -68,7 +69,7 @@ public class LottoController {
         final String winningLottoNumbers = inputView.readWinningLottoNumbers();
         final String[] splitWinningLottoNumbers = winningLottoNumbers.split(DELIMITER);
         final List<Integer> parsedWinningLottoNumbers = StringParser.parseTokens(splitWinningLottoNumbers);
-        return new Lotto(parsedWinningLottoNumbers);
+        return new Lotto(new HashSet<>(parsedWinningLottoNumbers));
     }
 
     private LottoNumber makeBonusNumber() {

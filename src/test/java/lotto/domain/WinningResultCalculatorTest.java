@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ public class WinningResultCalculatorTest {
     @Test
     void 당첨_결과_계산기가_정상적으로_생성된다() {
         // Given
-        final Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final Lotto winningLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
         final LottoNumber bonusNumber = LottoNumber.from(7);
 
         // When & Then
@@ -22,7 +22,7 @@ public class WinningResultCalculatorTest {
     @Test
     void 당첨_로또와_보너스_번호에_중복된_번호가_있을_경우_예외가_발생한다() {
         // Given
-        final Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final Lotto winningLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
         final LottoNumber bonusNumber = LottoNumber.from(1);
 
         // When & Then
@@ -34,13 +34,13 @@ public class WinningResultCalculatorTest {
     @Test
     void 당첨된_로또의_개수를_구한다() {
         // Given
-        final Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final Lotto winningLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
         final LottoNumber bonusNumber = LottoNumber.from(7);
         final List<Lotto> lottos = List.of(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(7, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(8, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(8, 9, 3, 4, 5, 6))
+                new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
+                new Lotto(Set.of(7, 2, 3, 4, 5, 6)),
+                new Lotto(Set.of(8, 2, 3, 4, 5, 6)),
+                new Lotto(Set.of(8, 9, 3, 4, 5, 6))
         );
         final WinningResultCalculator winningResultCalculator = new WinningResultCalculator(winningLotto, bonusNumber);
         final Map<LottoAward, Integer> expectedResult = Map.of(

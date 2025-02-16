@@ -2,15 +2,17 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     static final int LOTTO_SIZE = 6;
 
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public Lotto(final List<Integer> values) {
-        validate(values);
+    public Lotto(final Set<Integer> values) {
+        validateSize(values);
         this.numbers = makeNumber(values);
     }
 
@@ -24,33 +26,16 @@ public class Lotto {
         return numbers.contains(lottoNumber);
     }
 
-    private void validate(final List<Integer> values) {
-        validateDuplication(values);
-        validateSize(values);
-    }
-
-    private void validateSize(final List<Integer> values) {
+    private void validateSize(final Set<Integer> values) {
         if (values.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 중복되지 않은 6개의 숫자여야 합니다.");
         }
     }
 
-    private void validateDuplication(final List<Integer> values) {
-        if (hasDuplication(values)) {
-            throw new IllegalArgumentException("중복되지 않은 로또 번호를 입력해 주세요.");
-        }
-    }
-
-    private List<LottoNumber> makeNumber(final List<Integer> values) {
+    private Set<LottoNumber> makeNumber(final Set<Integer> values) {
         return values.stream()
                 .map(LottoNumber::from)
-                .toList();
-    }
-
-    private boolean hasDuplication(final List<Integer> values) {
-        return values.stream()
-                .distinct()
-                .count() != values.size();
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -66,9 +51,10 @@ public class Lotto {
         return Objects.hashCode(numbers);
     }
 
-    public List<Integer> getNumbers() {
+    public List<Integer> getSortedNumbers() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
+                .sorted()
                 .toList();
     }
 }
