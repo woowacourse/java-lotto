@@ -25,7 +25,7 @@ class BonusTest {
     }
 
     @Test
-    @DisplayName("되는 보너스")
+    @DisplayName("유효한 보너스 번호로 보너스 객체를 생성한다.")
     void validBonus() {
         int bonusNumber = 7;
         int expected = 7;
