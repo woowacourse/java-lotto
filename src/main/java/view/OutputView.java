@@ -28,7 +28,7 @@ public class OutputView {
         response.detailResponses().forEach(this::printLottoResultDetail);
     }
 
-    public void printROIResult(ROIResultResponse response) {
+    public void printROIResult(LottoResultResponse response) {
         System.out.printf(ROI_RESULT, response.ROI(), response.benefitType());
     }
 

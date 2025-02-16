@@ -1,6 +1,6 @@
 package dto;
 
-public record ROIResultResponse(
+public record LottoResultResponse(
         double ROI,
         String benefitType
 ) {
