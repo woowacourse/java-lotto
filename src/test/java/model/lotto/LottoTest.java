@@ -67,4 +67,38 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(RANGE_INPUT_ONLY_MESSAGE.getMessage());
     }
+
+    @Test
+    void 매칭된_로또_숫자를_계산해_반환한다() {
+        // given
+        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+        Lotto otherLotto = new Lotto("1, 2, 3, 4, 5, 7");
+
+        // when
+        int result = lotto.calculateMatchNumber(otherLotto);
+
+        // then
+        assertThat(result)
+                .isEqualTo(5);
+    }
+
+    @Test
+    void 포함된_로또_번호인_경우_TRUE를_반환한다() {
+        // given
+        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+
+        // when & then
+        assertThat(lotto.isContained(6))
+                .isTrue();
+    }
+
+    @Test
+    void 포함된_로또_번호가_아닌_경우_FALSE를_반환한다() {
+        // given
+        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+
+        // when & then
+        assertThat(lotto.isContained(7))
+                .isFalse();
+    }
 }
