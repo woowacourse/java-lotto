@@ -22,9 +22,8 @@ public class LottoController {
         OutputView.printRandomLotto(lottoRepository);
 
         UserLotto userLotto = createUserLotto();
-        BonusNumber bonusNumber = isDuplicateBonusNumber(userLotto);
 
-        calculateResultAndPrintResult(wallet, lottoRepository, userLotto, bonusNumber);
+        calculateResultAndPrintResult(wallet, lottoRepository, userLotto);
     }
 
     private static Wallet createWallet() {
@@ -38,7 +37,7 @@ public class LottoController {
 
     private static UserLotto createUserLotto() {
         try {
-            return new UserLotto(InputView.inputWinningNumbers());
+            return new UserLotto(InputView.inputWinningNumbers(), new BonusNumber(InputView.inputBonusNumber()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return createUserLotto();
@@ -51,21 +50,9 @@ public class LottoController {
         }
     }
 
-
-    public static BonusNumber isDuplicateBonusNumber(UserLotto userLotto) {
-        try {
-            BonusNumber bonusNumber = new BonusNumber(InputView.isNumericBonusNumber());
-            userLotto.isDuplicateBonusNumber(bonusNumber.getBonusNumber());
-            return bonusNumber;
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return isDuplicateBonusNumber(userLotto);
-        }
-    }
-
     public static void calculateResultAndPrintResult(Wallet wallet, LottoRepository lottoRepository,
-                                                     UserLotto userLotto, BonusNumber bonusNumber) {
-        WinningStatistics winningStatistics = new WinningStatistics(lottoRepository, userLotto, bonusNumber);
+                                                     UserLotto userLotto) {
+        WinningStatistics winningStatistics = new WinningStatistics(lottoRepository, userLotto);
 
         OutputView.printResult(winningStatistics);
 

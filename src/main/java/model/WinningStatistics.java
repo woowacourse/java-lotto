@@ -9,9 +9,9 @@ import java.util.Map;
 public class WinningStatistics {
     private final Map<RankType, Integer> winningStatistics;
 
-    public WinningStatistics(LottoRepository lottoRepository, UserLotto userLotto, BonusNumber bonusNumber) {
+    public WinningStatistics(LottoRepository lottoRepository, UserLotto userLotto) {
         this.winningStatistics = initStatistics();
-        calculateWinningStatistics(lottoRepository, userLotto, bonusNumber);
+        calculateWinningStatistics(lottoRepository, userLotto);
     }
 
     public Map<RankType, Integer> getWinningStatistics() {
@@ -44,11 +44,10 @@ public class WinningStatistics {
     }
 
 
-    private void calculateWinningStatistics(final LottoRepository lottoRepository, final UserLotto userLotto,
-                                            final BonusNumber bonusNumber) {
+    private void calculateWinningStatistics(final LottoRepository lottoRepository, final UserLotto userLotto) {
         for (Lotto lotto : lottoRepository.getLottos()) {
             int matchCount = userLotto.calculateMatchCount(lotto);
-            boolean bonusMatch = bonusNumber.isBonusMatch(lotto);
+            boolean bonusMatch = userLotto.isBonusMatch(lotto);
 
             updateWinningStatistics(RankType.calculateRankType(bonusMatch, matchCount));
         }
