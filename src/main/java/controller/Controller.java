@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 import model.LottoWinningNumbers;
-import model.OwnedLotto;
+import model.PurchasedLotto;
 import model.lotto.Lotto;
 import model.lotto.LottoMachine;
 import model.result.PrizeResult;
@@ -29,24 +29,24 @@ public class Controller {
     public void start() {
         int lottoCount = inputResponseForBudget();
 
-        OwnedLotto ownedLotto = buyLotto(lottoCount);
-        outputView.displayLottoNumbers(ownedLotto);
+        PurchasedLotto purchasedLotto = buyLotto(lottoCount);
+        outputView.displayLottoNumbers(purchasedLotto);
 
         List<Integer> winningNumbers = inputResponseForWinningNumber();
         int bonusNumber = inputResponseForBonusNumber(winningNumbers);
 
-        PrizeResult prizeResult = WinningDiscriminator.judge(ownedLotto,
+        PrizeResult prizeResult = WinningDiscriminator.judge(purchasedLotto,
                 new LottoWinningNumbers(winningNumbers, bonusNumber));
         outputView.displayPrizeSummary(prizeResult);
     }
 
-    private OwnedLotto buyLotto(int count) {
+    private PurchasedLotto buyLotto(int count) {
         ArrayList<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(lottoMachine.generateLotto());
         }
 
-        return new OwnedLotto(lottos);
+        return new PurchasedLotto(lottos);
     }
 
     private int inputResponseForBudget() {

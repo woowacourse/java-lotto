@@ -12,14 +12,14 @@ import static view.DisplayConstants.SHOW_STATISTICS;
 
 import java.util.Arrays;
 import java.util.Map;
-import model.OwnedLotto;
+import model.PurchasedLotto;
 import model.result.PrizeResult;
 import model.result.Rank;
 
 public class OutputView {
-    public void displayLottoNumbers(OwnedLotto ownedLotto) {
-        System.out.println(SHOW_BUY_COUNT.format(ownedLotto.size()));
-        System.out.printf("%s", ownedLotto.toString());
+    public void displayLottoNumbers(PurchasedLotto purchasedLotto) {
+        System.out.println(SHOW_BUY_COUNT.format(purchasedLotto.size()));
+        System.out.printf("%s", purchasedLotto.toString());
         displaySpacing();
     }
 
