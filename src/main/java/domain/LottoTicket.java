@@ -31,10 +31,10 @@ public class LottoTicket {
         }
     }
 
-    public int countMatchedLottoNumbers(List<LottoNumber> winningLottoNumbers) {
+    public int countMatchedLottoNumbers(LottoTicket winningLottoTicket) {
         return (int) lottoNumbers
                 .stream()
-                .filter(winningLottoNumbers::contains)
+                .filter(winningLottoTicket.getLottoNumbers()::contains)
                 .count();
     }
 

@@ -50,10 +50,10 @@ class StatisticsServiceTest {
     void 당첨번호_매칭_개수_테스트(List<Integer> lottoNumbers, List<Integer> winningNumbers, int expected) {
         // given
         LottoTicket lottoTicket = LottoTicket.createLottoTicket(lottoNumbers);
-        List<LottoNumber> winningLottoNumbers = winningNumbers.stream().map(LottoNumber::new).toList();
+        LottoTicket winningLottoTicket = new LottoTicket(winningNumbers.stream().map(LottoNumber::new).toList());
 
         // when
-        int actual = lottoTicket.countMatchedLottoNumbers(winningLottoNumbers);
+        int actual = lottoTicket.countMatchedLottoNumbers(winningLottoTicket);
         // then
         Assertions.assertThat(actual).isEqualTo(expected);
     }
@@ -95,9 +95,9 @@ class StatisticsServiceTest {
         LottoTicket second = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 7));
         LottoTicket nothing = LottoTicket.createLottoTicket(List.of(31, 32, 33, 34, 35, 36));
         LottoTickets lottoTickets = new LottoTickets(List.of(fifth, fourth, second, nothing));
-        List<LottoNumber> winningLottoNumbers = Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).toList();
+        LottoTicket winningLottoTicket = new LottoTicket(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).toList());
         LottoNumber bonusNumber = new LottoNumber(7);
-        DrawResult drawResult = new DrawResult(winningLottoNumbers, bonusNumber);
+        DrawResult drawResult = new DrawResult(winningLottoTicket, bonusNumber);
 
         // when
         WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, drawResult);
@@ -119,9 +119,9 @@ class StatisticsServiceTest {
         LottoTicket second = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 7));
         LottoTicket nothing = LottoTicket.createLottoTicket(List.of(31, 32, 33, 34, 35, 36));
         LottoTickets lottoTickets = new LottoTickets(List.of(fifth, fourth, second, nothing));
-        List<LottoNumber> winningLottoNumbers = Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).toList();
+        LottoTicket winningLottoTicket = new LottoTicket(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).toList());
         LottoNumber bonusNumber = new LottoNumber(7);
-        DrawResult drawResult = new DrawResult(winningLottoNumbers, bonusNumber);
+        DrawResult drawResult = new DrawResult(winningLottoTicket, bonusNumber);
 
         // when
         WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, drawResult);

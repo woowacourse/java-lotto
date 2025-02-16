@@ -1,14 +1,12 @@
 package domain;
 
-import java.util.List;
-
-public record DrawResult(List<LottoNumber> winningLottoNumbers, LottoNumber bonusNumber) {
+public record DrawResult(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
     public DrawResult {
-        validateDuplicateNumber(winningLottoNumbers, bonusNumber);
+        validateDuplicateNumber(winningLottoTicket, bonusNumber);
     }
 
-    private void validateDuplicateNumber(List<LottoNumber> winningLottoNumbers, LottoNumber bonusNumber) {
-        if (winningLottoNumbers.contains(bonusNumber)) {
+    private void validateDuplicateNumber(LottoTicket winningLottoNumbers, LottoNumber bonusNumber) {
+        if (winningLottoNumbers.getLottoNumbers().contains(bonusNumber)) {
             throw new IllegalArgumentException("중복된 번호가 존재합니다.");
         }
     }

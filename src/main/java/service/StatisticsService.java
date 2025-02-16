@@ -16,7 +16,7 @@ public class StatisticsService {
 
         lottoTickets.getLottoTickets()
                 .forEach(lottoTicket -> {
-                    int countMatched = lottoTicket.countMatchedLottoNumbers(drawResult.winningLottoNumbers());
+                    int countMatched = lottoTicket.countMatchedLottoNumbers(drawResult.winningLottoTicket());
                     boolean isBonusNumberMatched = lottoTicket.containsLottoNumber(drawResult.bonusNumber());
                     LottoPrize prize = LottoPrize.getLottoPrize(countMatched, isBonusNumberMatched);
                     int prizeCount = prizeCounter.get(prize);
