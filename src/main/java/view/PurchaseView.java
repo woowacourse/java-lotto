@@ -12,9 +12,9 @@ public class PurchaseView {
     }
 
     public Integer readPurchaseAmount() {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        Integer purchaseAmount = validatePositiveNumber(input);
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
+        Integer purchaseAmount = validatePositiveNumber(userInput);
         validateDividable(purchaseAmount);
         return purchaseAmount;
     }
