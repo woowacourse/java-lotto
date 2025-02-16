@@ -20,7 +20,7 @@ public class WinningResultCalculator {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validate(Lotto winningLotto, LottoNumber bonusNumber) {
+    private void validate(final Lotto winningLotto, final LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATED_BONUS_NUMBER);
         }

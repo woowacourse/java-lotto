@@ -24,7 +24,7 @@ public class LottoGenerator {
         return lottos;
     }
 
-    private List<Integer> makeRandomNumbers(int size) {
+    private List<Integer> makeRandomNumbers(final int size) {
         List<Integer> numberRange = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());

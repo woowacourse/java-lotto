@@ -16,7 +16,7 @@ public class LottoPrice {
         return amount / UNIT_PRICE_OF_LOTTO;
     }
 
-    public double divideFrom(int inputAmount) {
+    public double divideFrom(final int inputAmount) {
         return (double) inputAmount / amount;
     }
 

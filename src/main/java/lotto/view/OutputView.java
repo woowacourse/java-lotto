@@ -31,7 +31,7 @@ public class OutputView {
         System.out.printf(message, flooredProfitRage);
     }
 
-    private String makeResultMessage(double profitRate) {
+    private String makeResultMessage(final double profitRate) {
         if (profitRate >= 1) {
             return "(기준이 1이기 때문에 결과적으로 이익이라는 의미임)";
         }
