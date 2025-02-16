@@ -25,22 +25,6 @@ class WinningLottoTest {
     }
 
     @Test
-    void 당첨_번호와_몇개가_같은지_계산할_수_있다() {
-        //given
-        Number bonus = new Number(7);
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(lotto, bonus);
-        Lotto purchasedLotto = new Lotto(List.of(1, 2, 10, 11, 12, 13));
-
-        //when
-        int matchCount = winningLotto.calculateMatchCount(purchasedLotto);
-
-        //then
-        assertThat(matchCount).isEqualTo(2);
-    }
-
-
-    @Test
     void 보너스번호와_일치하는지_판단한다() {
         //given
         Number bonus = new Number(7);

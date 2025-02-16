@@ -23,10 +23,6 @@ public class WinningLotto {
         return Rank.findRank(matchCount, isMatchBonusNumber);
     }
 
-    public int calculateMatchCount(Lotto lotto) {
-        return this.lotto.calculateMatchCount(lotto);
-    }
-
     public boolean containsBonusNumber(Lotto lotto) {
         return lotto.contains(bonusNumber);
     }
