@@ -33,8 +33,8 @@ public class WinningNumbers {
     }
 
     private void validateDuplicate(final List<LottoNumber> winningNumbers) {
-        final Set<LottoNumber> removedDuplicate = new HashSet<>(winningNumbers);
-        if (removedDuplicate.size() != winningNumbers.size()) {
+        final Set<LottoNumber> deduplicatedLottoNumber = new HashSet<>(winningNumbers);
+        if (deduplicatedLottoNumber.size() != winningNumbers.size()) {
             throw new IllegalArgumentException(ErrorType.WINNING_NUMBERS_IS_DUPLICATION.getMessage());
         }
     }
