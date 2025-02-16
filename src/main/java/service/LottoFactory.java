@@ -48,7 +48,7 @@ public class LottoFactory {
         EnumMap<Prize, Integer> prizeMap = initializeMap();
         for (Lotto issuedTicket : issuedTickets) {
             int matchCount = checkLottoNumber(lotto, issuedTicket);
-            boolean matchesBonus = checkBonus(bonus.getNumber(), issuedTicket.getNumbers());
+            boolean matchesBonus = checkBonus(bonus.getNumber(), issuedTicket.numbers());
             Prize foundPrize = Prize.find(matchCount, matchesBonus);
             prizeMap.put(foundPrize, prizeMap.get(foundPrize) + 1);
         }
@@ -57,8 +57,8 @@ public class LottoFactory {
     }
 
     private int checkLottoNumber(Lotto lotto, Lotto issuedTicket) {
-        return (int) issuedTicket.getNumbers().stream()
-                .filter(issuedNumber -> lotto.getNumbers().contains(issuedNumber))
+        return (int) issuedTicket.numbers().stream()
+                .filter(issuedNumber -> lotto.numbers().contains(issuedNumber))
                 .count();
     }
 

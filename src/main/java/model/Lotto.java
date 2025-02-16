@@ -4,19 +4,16 @@ import exception.LottoExceptionType;
 import java.util.HashSet;
 import java.util.List;
 
-public class Lotto {
-
-    private final List<Integer> numbers;
+public record Lotto(List<Integer> numbers) {
 
     public static Lotto of(final List<Integer> inputs) {
         validateArgumentsSize(inputs);
         return new Lotto(inputs);
     }
 
-    public Lotto(final List<Integer> numbers) {
+    public Lotto {
         validateRange(numbers);
         validateDuplicate(numbers);
-        this.numbers = numbers;
     }
 
     private static void validateArgumentsSize(final List<Integer> numbers) {
@@ -40,9 +37,5 @@ public class Lotto {
         if (inputs.size() != set.size()) {
             throw new IllegalArgumentException(LottoExceptionType.LOTTO_DUPLICATE.getMessage());
         }
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
     }
 }

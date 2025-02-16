@@ -33,7 +33,7 @@ class LottoFactoryTest {
     @MethodSource("provideLottoRange")
     void validTicketRange(final int lottoMinRange, final int lottoMaxRange) {
         for (Lotto issuedTicket : lottoFactory.getIssuedTickets()) {
-            issuedTicket.getNumbers()
+            issuedTicket.numbers()
                     .forEach(number -> assertThat(number).isBetween(lottoMinRange, lottoMaxRange));
         }
     }
@@ -42,7 +42,7 @@ class LottoFactoryTest {
     @ValueSource(ints = {LottoConstant.SIZE})
     void validTicketSize(final int expectedCount) {
         for (Lotto issuedTicket : lottoFactory.getIssuedTickets()) {
-            assertThat(issuedTicket.getNumbers().size()).isEqualTo(expectedCount);
+            assertThat(issuedTicket.numbers().size()).isEqualTo(expectedCount);
         }
     }
 

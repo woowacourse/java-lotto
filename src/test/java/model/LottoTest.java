@@ -20,7 +20,7 @@ class LottoTest {
     void validLotto() {
         Lotto lotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
         List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
-        assertThat(lotto.getNumbers()).isEqualTo(expected);
+        assertThat(lotto.numbers()).isEqualTo(expected);
     }
 
     @Test

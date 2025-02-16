@@ -3,18 +3,15 @@ package model;
 
 import exception.LottoPurchaseExceptionType;
 
-public class LottoPurchase {
-
-    private final int amount;
+public record LottoPurchase(int amount) {
 
     public static LottoPurchase of(final int input) {
         return new LottoPurchase(input);
     }
 
-    public LottoPurchase(int amount) {
+    public LottoPurchase {
         validateMinAmount(amount);
         validateAmountUnit(amount);
-        this.amount = amount;
     }
 
     private void validateMinAmount(int amount) {
@@ -29,9 +26,5 @@ public class LottoPurchase {
             throw new IllegalArgumentException(
                     LottoPurchaseExceptionType.INVALID_LOTTO_PURCHASE_UNIT.getMessage(LottoConstant.TICKET_PRICE_UNIT));
         }
-    }
-
-    public int getAmount() {
-        return amount;
     }
 }

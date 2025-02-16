@@ -25,7 +25,7 @@ public class Bonus {
     }
 
     private void validateDuplicateWithLotto(final int number, final Lotto lotto) {
-        if (lotto.getNumbers().contains(number)) {
+        if (lotto.numbers().contains(number)) {
             throw new IllegalArgumentException(BonusExceptionType.BONUS_DUPLICATE.getMessage());
         }
     }
