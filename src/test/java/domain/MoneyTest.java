@@ -5,6 +5,7 @@ import static global.exception.ExceptionMessage.INVALID_UNIT_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import generator.FakeGenerator;
 import java.util.EnumMap;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -43,5 +44,16 @@ class MoneyTest {
 
         //when-then
         assertThat(money.calculateProfit(rankCount)).isEqualTo(0.35);
+    }
+
+    @Test
+    void 로또를_구매할_수_있다(){
+        //given
+        Money money = new Money(14000);
+
+        //when-then
+        assertThat(money.buyLottos(new FakeGenerator())
+                .getLottos()
+                .size()).isEqualTo(14);
     }
 }

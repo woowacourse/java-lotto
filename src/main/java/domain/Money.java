@@ -1,6 +1,7 @@
 package domain;
 
 import global.exception.ExceptionMessage;
+import global.generator.Generator;
 import global.generator.RandomGenerator;
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -21,8 +22,8 @@ public class Money {
         return money;
     }
 
-    public Lottos buyLottos() {
-        LottosFactory lottosFactory = new LottosFactory(new RandomGenerator());
+    public Lottos buyLottos(Generator generator) {
+        LottosFactory lottosFactory = new LottosFactory(generator);
         return lottosFactory.from(money / LOTTO_PRICE);
     }
 
