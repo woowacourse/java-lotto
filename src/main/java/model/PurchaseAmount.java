@@ -1,6 +1,6 @@
 package model;
 
-import constans.ErrorType;
+import constants.ErrorType;
 
 public class PurchaseAmount {
 
@@ -26,9 +26,5 @@ public class PurchaseAmount {
 
     public int calculateLottoCount() {
         return money / Lotto.LOTTO_PRICE;
-    }
-
-    public int getMoney() {
-        return money;
     }
 }

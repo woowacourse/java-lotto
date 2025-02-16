@@ -15,11 +15,13 @@ class LottoRankTest {
     class ValidCases {
 
         private WinningNumbers winningNumbers;
+        private BonusBall bonusBall;
 
         public ValidCases() {
             this.winningNumbers = new WinningNumbers(new ArrayList<>(
                     List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                            new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))), new LottoNumber(7));
+                            new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
+            this.bonusBall = BonusBall.of(7, winningNumbers);
         }
 
         @Test
@@ -32,7 +34,7 @@ class LottoRankTest {
             Lotto lotto = new Lotto(lottoNumbers);
 
             // when
-            LottoRank lottoRank = LottoRank.of(lotto, winningNumbers);
+            LottoRank lottoRank = LottoRank.of(lotto, winningNumbers, bonusBall);
 
             // then
             assertThat(lottoRank).isEqualTo(LottoRank.FIRST_PLACE);
@@ -48,7 +50,7 @@ class LottoRankTest {
             Lotto lotto = new Lotto(lottoNumbers);
 
             // when
-            LottoRank lottoRank = LottoRank.of(lotto, winningNumbers);
+            LottoRank lottoRank = LottoRank.of(lotto, winningNumbers, bonusBall);
 
             assertThat(lottoRank).isEqualTo(LottoRank.SECOND_PLACE);
         }
@@ -63,7 +65,7 @@ class LottoRankTest {
             Lotto lotto = new Lotto(lottoNumbers);
 
             // when
-            LottoRank lottoRank = LottoRank.of(lotto, winningNumbers);
+            LottoRank lottoRank = LottoRank.of(lotto, winningNumbers, bonusBall);
 
             assertThat(lottoRank).isEqualTo(LottoRank.THIRD_PLACE);
         }
@@ -78,7 +80,7 @@ class LottoRankTest {
             Lotto lotto = new Lotto(lottoNumbers);
 
             // when
-            LottoRank lottoRank = LottoRank.of(lotto, winningNumbers);
+            LottoRank lottoRank = LottoRank.of(lotto, winningNumbers, bonusBall);
 
             assertThat(lottoRank).isEqualTo(LottoRank.FOURTH_PLACE);
         }
@@ -93,7 +95,7 @@ class LottoRankTest {
             Lotto lotto = new Lotto(lottoNumbers);
 
             // when
-            LottoRank lottoRank = LottoRank.of(lotto, winningNumbers);
+            LottoRank lottoRank = LottoRank.of(lotto, winningNumbers, bonusBall);
 
             assertThat(lottoRank).isEqualTo(LottoRank.FIFTH_PLACE);
         }
@@ -108,7 +110,7 @@ class LottoRankTest {
             Lotto lotto = new Lotto(lottoNumbers);
 
             // when
-            LottoRank lottoRank = LottoRank.of(lotto, winningNumbers);
+            LottoRank lottoRank = LottoRank.of(lotto, winningNumbers, bonusBall);
 
             assertThat(lottoRank).isEqualTo(LottoRank.FAIL);
         }
