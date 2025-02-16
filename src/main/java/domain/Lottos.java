@@ -12,10 +12,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
     public static Lottos of(NumberGenerator numberGenerator, final int quantity) {
         List<Lotto> generatedLottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
@@ -24,6 +20,10 @@ public class Lottos {
         }
 
         return new Lottos(generatedLottos);
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     public List<OutputLottosDto> getOutputLottosDtos() {
