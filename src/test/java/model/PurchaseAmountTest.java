@@ -26,7 +26,7 @@ class PurchaseAmountTest {
             PurchaseAmount actual = new PurchaseAmount(money);
 
             // then
-            assertThat(actual.getMoney()).isEqualTo(money);
+            assertThat(actual).extracting("money").isEqualTo(money);
         }
 
     }
