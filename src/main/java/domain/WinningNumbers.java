@@ -19,6 +19,13 @@ public class WinningNumbers {
         return new WinningNumbers(winningLotto, bonusLottoNumber);
     }
 
+    public static double calculateYield(Map<Rank, Integer> result, int purchaseAmount) {
+        long sum = result.entrySet().stream()
+                .mapToLong(set -> set.getKey().getPrizeMoney() * set.getValue())
+                .sum();
+        return (double) sum / purchaseAmount;
+    }
+
     private static void validateBonusNumberNotInWinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
         if (winningLotto.hasNumber(bonusNumber)) {
             throw new IllegalArgumentException(ErrorCode.WINNING_LOTTO_CONTAINS_BONUS_NUMBER.getMessage());
@@ -27,12 +34,5 @@ public class WinningNumbers {
 
     public Rank getRank(Lotto lotto) {
         return Rank.findByMatchCountAndBonus(lotto.calculateMatchCount(winningLotto), lotto.hasNumber(bonusNumber));
-    }
-
-    public double calculateYield(Map<Rank, Integer> result, int purchaseAmount) {
-        long sum = result.entrySet().stream()
-                .mapToLong(set -> set.getKey().getPrizeMoney() * set.getValue())
-                .sum();
-        return (double) sum / purchaseAmount;
     }
 }
