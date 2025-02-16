@@ -1,10 +1,10 @@
 package lotto.model;
 
-import static lotto.LottoConstants.Number.LOTTO_NUMBER_MAX;
-import static lotto.LottoConstants.Number.LOTTO_NUMBER_MIN;
+import static lotto.rule.LottoConstants.Number.LOTTO_NUMBER_MAX;
+import static lotto.rule.LottoConstants.Number.LOTTO_NUMBER_MIN;
 
 import java.util.Objects;
-import lotto.Rank;
+import lotto.rule.Rank;
 
 public class WinningLotto {
 

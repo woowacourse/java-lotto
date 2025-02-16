@@ -1,11 +1,11 @@
 package lotto.model;
 
-import static lotto.LottoConstants.Price.LOTTO_PRICE_UNIT;
+import static lotto.rule.LottoConstants.Price.LOTTO_PRICE_UNIT;
 
 import java.util.EnumMap;
 import java.util.Map.Entry;
 import java.util.Objects;
-import lotto.Rank;
+import lotto.rule.Rank;
 
 public class DashBoard {
 

@@ -1,8 +1,8 @@
 package lotto.model;
 
-import static lotto.LottoConstants.Number.LOTTO_NUMBER_COUNT;
-import static lotto.LottoConstants.Number.LOTTO_NUMBER_MAX;
-import static lotto.LottoConstants.Number.LOTTO_NUMBER_MIN;
+import static lotto.rule.LottoConstants.Number.LOTTO_NUMBER_COUNT;
+import static lotto.rule.LottoConstants.Number.LOTTO_NUMBER_MAX;
+import static lotto.rule.LottoConstants.Number.LOTTO_NUMBER_MIN;
 
 import java.util.ArrayList;
 import java.util.List;

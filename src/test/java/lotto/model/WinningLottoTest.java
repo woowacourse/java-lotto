@@ -1,12 +1,12 @@
 package lotto.model;
 
-import static lotto.LottoConstants.Number.LOTTO_NUMBER_MAX;
-import static lotto.LottoConstants.Number.LOTTO_NUMBER_MIN;
+import static lotto.rule.LottoConstants.Number.LOTTO_NUMBER_MAX;
+import static lotto.rule.LottoConstants.Number.LOTTO_NUMBER_MIN;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.Rank;
+import lotto.rule.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

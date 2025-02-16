@@ -1,6 +1,6 @@
 package lotto.model;
 
-import static lotto.LottoConstants.Price.LOTTO_PRICE_UNIT;
+import static lotto.rule.LottoConstants.Price.LOTTO_PRICE_UNIT;
 
 import java.util.Objects;
 

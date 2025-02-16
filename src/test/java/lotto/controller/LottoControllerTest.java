@@ -1,9 +1,9 @@
 package lotto.controller;
 
-import static lotto.LottoConstants.Number.LOTTO_NUMBER_COUNT;
-import static lotto.LottoConstants.Number.LOTTO_NUMBER_MAX;
-import static lotto.LottoConstants.Number.LOTTO_NUMBER_MIN;
-import static lotto.LottoConstants.Price.LOTTO_PRICE_UNIT;
+import static lotto.rule.LottoConstants.Number.LOTTO_NUMBER_COUNT;
+import static lotto.rule.LottoConstants.Number.LOTTO_NUMBER_MAX;
+import static lotto.rule.LottoConstants.Number.LOTTO_NUMBER_MIN;
+import static lotto.rule.LottoConstants.Price.LOTTO_PRICE_UNIT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

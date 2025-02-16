@@ -1,4 +1,4 @@
-package lotto;
+package lotto.rule;
 
 public class LottoConstants {
 
