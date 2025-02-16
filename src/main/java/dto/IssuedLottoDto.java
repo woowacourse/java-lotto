@@ -2,6 +2,8 @@ package dto;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.TreeSet;
 
 public record IssuedLottoDto(
         List<Integer> numbers
@@ -20,6 +22,6 @@ public record IssuedLottoDto(
 
     @Override
     public int hashCode() {
-        return 0;
+        return Objects.hash(new TreeSet<>(numbers));
     }
 }
