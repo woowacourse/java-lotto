@@ -1,23 +1,21 @@
-package domain.factory;
+package domain;
 
-import domain.Lotto;
-import domain.Lottos;
 import global.generator.Generator;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottosFactory {
 
-    private final LottoFactory lottoFactory;
+    private final Generator generator;
 
     public LottosFactory(final Generator generator) {
-        this.lottoFactory = new LottoFactory(generator);
+        this.generator = generator;
     }
 
     public Lottos from(final int count) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i<count; i++) {
-            lottos.add(lottoFactory.create());
+            lottos.add(new Lotto(generator.generate()));
         }
 
         return new Lottos(lottos);

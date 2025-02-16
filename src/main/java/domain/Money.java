@@ -1,7 +1,6 @@
 package domain;
 
 import global.exception.ExceptionMessage;
-import domain.factory.LottosFactory;
 import global.generator.RandomGenerator;
 import java.util.EnumMap;
 import java.util.Map.Entry;
