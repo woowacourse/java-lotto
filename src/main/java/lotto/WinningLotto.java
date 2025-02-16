@@ -38,8 +38,7 @@ public class WinningLotto {
     private int calculateMatchCount(final List<Integer> lottoNumbers, final List<Integer> winningNumbers) {
         List<Integer> matchNumbers = new ArrayList<>(winningNumbers);
         matchNumbers.retainAll(lottoNumbers);
-        int matchCount = matchNumbers.size();
-        return matchCount;
+        return matchNumbers.size();
     }
 
     private void validateBonusNumberDuplicated(final Lotto winningNumbers, final int bonusNumber) {
