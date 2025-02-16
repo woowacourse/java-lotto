@@ -3,12 +3,12 @@ package domain;
 import domain.numbergenerator.NumberGenerator;
 import domain.numbergenerator.RandomNumberGenerator;
 
-public record Number(int value) {
+public record LottoNumber(int value) {
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
-    public Number {
+    public LottoNumber {
         validateNumberRange(value);
     }
 

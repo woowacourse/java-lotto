@@ -11,7 +11,7 @@ class StringToNumberConverterTest {
     @ValueSource(strings = {"s", "1s"})
     void 입력값이_숫자가_아닌_경우_예외를_반환한다(String input) {
         // given
-        StringToNumberConverter converter = new StringToNumberConverter();
+        StringToLottoNumberConverter converter = new StringToLottoNumberConverter();
 
         // when & then
         assertThatThrownBy(() -> converter.convert(input))

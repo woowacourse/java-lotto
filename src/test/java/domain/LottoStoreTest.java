@@ -35,12 +35,15 @@ class LottoStoreTest {
         //then
         assertThat(lottos).extracting("lottos")
                 .isEqualTo(List.of(
-                        new Lotto(Set.of(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5),
-                                new Number(6))),
-                        new Lotto(Set.of(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5),
-                                new Number(6))),
-                        new Lotto(Set.of(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5),
-                                new Number(6)))
+                        new Lotto(Set.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                                new LottoNumber(5),
+                                new LottoNumber(6))),
+                        new Lotto(Set.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                                new LottoNumber(5),
+                                new LottoNumber(6))),
+                        new Lotto(Set.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                                new LottoNumber(5),
+                                new LottoNumber(6)))
                 ));
     }
 

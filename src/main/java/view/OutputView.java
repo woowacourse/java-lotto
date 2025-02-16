@@ -1,7 +1,7 @@
 package view;
 
 import domain.Lotto;
-import domain.Number;
+import domain.LottoNumber;
 import domain.Rank;
 import domain.WinningResult;
 import java.util.List;
@@ -22,9 +22,9 @@ public class OutputView {
     public void printPurchaseLottos(List<Lotto> purchasedlottos) {
         System.out.printf(PURCHASE_LOTTO_SIZE_FORMAT, purchasedlottos.size());
         for (Lotto lotto : purchasedlottos) {
-            Set<Number> numbers = lotto.getNumbers();
+            Set<LottoNumber> numbers = lotto.getNumbers();
             String purchaseLottos = numbers.stream()
-                    .map(Number::value)
+                    .map(LottoNumber::value)
                     .map(String::valueOf)
                     .collect(Collectors.joining(", "));
             System.out.println("[" + purchaseLottos + "]");

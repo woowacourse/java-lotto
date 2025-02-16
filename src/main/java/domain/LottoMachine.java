@@ -15,16 +15,16 @@ public class LottoMachine {
     }
 
     public Lotto createLotto() {
-        Set<Number> numbers = new HashSet<>();
+        Set<LottoNumber> numbers = new HashSet<>();
         do {
-            Number number = pickNumber();
+            LottoNumber number = pickNumber();
             numbers.add(number);
         } while (numbers.size() != numbersMaxSize);
         return new Lotto(numbers);
     }
 
-    private Number pickNumber() {
+    private LottoNumber pickNumber() {
         int pickNumber = numberGenerator.generate();
-        return new Number(pickNumber);
+        return new LottoNumber(pickNumber);
     }
 }

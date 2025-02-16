@@ -3,7 +3,7 @@ package converter;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import domain.Lotto;
-import domain.Number;
+import domain.LottoNumber;
 import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,8 +20,9 @@ class StringToLottoConverterTest {
     void 입력문자열을_Number_List로_변환한다(String input) {
         //given
         StringToLottoConverter converter = new StringToLottoConverter();
-        Set<Number> expected = Set.of(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5),
-                new Number(6));
+        Set<LottoNumber> expected = Set.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5),
+                new LottoNumber(6));
         //when
         Lotto lotto = converter.convert(input);
 

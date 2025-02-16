@@ -13,16 +13,16 @@ public class Lotto {
 
     private static final int NUMBERS_SIZE = 6;
 
-    private final Set<Number> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public Lotto(Set<Number> numbers) {
-        validateNumberSize(numbers);
+    public Lotto(Set<LottoNumber> numbers) {
+        validateLottoNumberSize(numbers);
         this.numbers = numbers;
     }
 
-    public Lotto(List<Number> numbers) {
-        validateNumberSize(numbers);
-        validateNonDuplicatedNumbers(numbers);
+    public Lotto(List<LottoNumber> numbers) {
+        validateLottoNumberSize(numbers);
+        validateNonDuplicatedLottoNumbers(numbers);
         this.numbers = new HashSet<>(numbers);
     }
 
@@ -30,7 +30,7 @@ public class Lotto {
         return new LottoMachine(numberGenerator, NUMBERS_SIZE);
     }
 
-    public boolean contains(Number number) {
+    public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }
 
@@ -40,7 +40,7 @@ public class Lotto {
                 .count();
     }
 
-    public Set<Number> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return unmodifiableSet(numbers);
     }
 
@@ -62,14 +62,14 @@ public class Lotto {
         return Objects.hashCode(getNumbers());
     }
 
-    private void validateNumberSize(Collection<Number> numbers) {
+    private void validateLottoNumberSize(Collection<LottoNumber> numbers) {
         if (numbers.size() != NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 번호는 " + NUMBERS_SIZE + "개여야 합니다.");
         }
     }
 
-    private void validateNonDuplicatedNumbers(List<Number> numbers) {
-        Set<Number> nonDuplicatedNumbers = new HashSet<>(numbers);
+    private void validateNonDuplicatedLottoNumbers(List<LottoNumber> numbers) {
+        Set<LottoNumber> nonDuplicatedNumbers = new HashSet<>(numbers);
         if (nonDuplicatedNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
         }

@@ -1,7 +1,7 @@
 package converter;
 
 import domain.Lotto;
-import domain.Number;
+import domain.LottoNumber;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,10 +11,10 @@ public class StringToLottoConverter implements Converter<String, Lotto> {
 
     public Lotto convert(String source) {
         validate(source);
-        List<Number> numbers = Arrays.stream(source.split(DELIMITER))
+        List<LottoNumber> numbers = Arrays.stream(source.split(DELIMITER))
                 .map(String::trim)
                 .map(Integer::valueOf)
-                .map(Number::new)
+                .map(LottoNumber::new)
                 .toList();
         return new Lotto(numbers);
     }

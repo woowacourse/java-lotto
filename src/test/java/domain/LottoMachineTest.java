@@ -30,7 +30,8 @@ class LottoMachineTest {
         assertThat(lotto)
                 .extracting("numbers")
                 .isEqualTo(Set.of(
-                        new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)
+                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                        new LottoNumber(5), new LottoNumber(6)
                 ));
     }
 }

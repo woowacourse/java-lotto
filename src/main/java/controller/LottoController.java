@@ -1,13 +1,13 @@
 package controller;
 
 import converter.StringToLottoConverter;
+import converter.StringToLottoNumberConverter;
 import converter.StringToMoneyConverter;
-import converter.StringToNumberConverter;
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.LottoStore;
 import domain.Lottos;
 import domain.Money;
-import domain.Number;
 import domain.WinningLotto;
 import domain.WinningResult;
 import domain.numbergenerator.NumberGenerator;
@@ -44,14 +44,14 @@ public class LottoController {
     }
 
     private Lottos purchaseLottos(Money purchaseLottoMoney) {
-        NumberGenerator numberGenerator = Number.createRandomNumberGenerator();
+        NumberGenerator numberGenerator = LottoNumber.createRandomNumberGenerator();
         LottoStore lottoStore = new LottoStore(Lotto.createLottoMachine(numberGenerator));
         return lottoStore.buy(purchaseLottoMoney);
     }
 
     private WinningLotto inputWinningLotto() {
         Lotto winningNumbers = inputWinningLottoNumbers();
-        Number bonusNumber = inputBonusNumber();
+        LottoNumber bonusNumber = inputBonusNumber();
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 
@@ -60,8 +60,8 @@ public class LottoController {
         return new StringToLottoConverter().convert(rawWinningLottoNumbers);
     }
 
-    private Number inputBonusNumber() {
+    private LottoNumber inputBonusNumber() {
         String rawBonusNumber = inputView.inputBonusNumber();
-        return new StringToNumberConverter().convert(rawBonusNumber);
+        return new StringToLottoNumberConverter().convert(rawBonusNumber);
     }
 }

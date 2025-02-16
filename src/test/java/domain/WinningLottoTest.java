@@ -10,15 +10,15 @@ class WinningLottoTest {
     @Test
     void 보너스볼과_당첨번호가_중복된_경우_예외를_반환한다() {
         //given
-        Number bonus = new Number(3);
+        LottoNumber bonus = new LottoNumber(3);
         Lotto lotto = new Lotto(
                 List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(6)
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(6)
                 )
         );
 

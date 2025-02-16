@@ -1,12 +1,12 @@
 package converter;
 
-import domain.Number;
+import domain.LottoNumber;
 
-public class StringToNumberConverter implements Converter<String, Number> {
+public class StringToLottoNumberConverter implements Converter<String, LottoNumber> {
     @Override
-    public Number convert(String source) {
+    public LottoNumber convert(String source) {
         validateNotStringNumber(source);
-        return new Number(Integer.parseInt(source));
+        return new LottoNumber(Integer.parseInt(source));
     }
 
     private void validateNotStringNumber(String value) {

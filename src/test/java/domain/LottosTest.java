@@ -15,40 +15,40 @@ class LottosTest {
         //given
         Lottos lottos = new Lottos(List.of(
                 new Lotto(List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(6))
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(6))
                 ),
                 new Lotto(List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(10))
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(10))
                 ),
                 new Lotto(List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(10))
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(10))
                 )
         ));
         WinningLotto winningLotto = new WinningLotto(
                 new Lotto(List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(6))
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(6))
                 ),
-                new Number(10)
+                new LottoNumber(10)
         );
 
         //when
