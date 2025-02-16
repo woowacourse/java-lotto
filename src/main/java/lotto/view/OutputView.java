@@ -1,6 +1,12 @@
 package lotto.view;
 
-import static lotto.view.OutputMessage.*;
+import static lotto.view.OutputMessage.DIVIDER;
+import static lotto.view.OutputMessage.EMPTY;
+import static lotto.view.OutputMessage.RANK_COUNT_MESSAGE;
+import static lotto.view.OutputMessage.RANK_COUNT_MESSAGE_WITH_BONUS;
+import static lotto.view.OutputMessage.RESULT_TITLE_MESSAGE;
+import static lotto.view.OutputMessage.RETURN_OF_RATE_MESSAGE;
+import static lotto.view.OutputMessage.TICKET_COUNT_MESSAGE;
 
 import java.util.Arrays;
 import java.util.Comparator;

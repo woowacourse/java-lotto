@@ -1,6 +1,8 @@
 package lotto.view;
 
-import static lotto.view.OutputMessage.*;
+import static lotto.view.OutputMessage.BONUS_NUMBER_MESSAGE;
+import static lotto.view.OutputMessage.PAYMENT_MESSAGE;
+import static lotto.view.OutputMessage.WINNING_NUMBER_MESSAGE;
 
 import java.util.Scanner;
 
