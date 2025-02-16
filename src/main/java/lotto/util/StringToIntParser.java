@@ -1,5 +1,7 @@
 package lotto.util;
 
+import lotto.constant.ErrorMessage;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class StringToIntParser {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("입력값은 21억 이하의 양수여야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.INPUT_IS_OVER_MAXIMUM_VALUE_OF_INTEGER);
         }
     }
 

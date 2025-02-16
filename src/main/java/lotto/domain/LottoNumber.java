@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.constant.ErrorMessage;
+
 public record LottoNumber(int number) {
 
     static final int MINIMUM_LOTTO_NUMBER = 1;
@@ -9,9 +11,9 @@ public record LottoNumber(int number) {
         validate(number);
     }
 
-    private void validate(int number) {
+    private void validate(final int number) {
         if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 1과 45 사이여야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_IS_UNVALID);
         }
     }
 }

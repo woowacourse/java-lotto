@@ -28,6 +28,7 @@ public class LottoController {
     public void run() {
         LottoPrice lottoPrice = getLottoPrice();
         int lottoCount = getLottoCount(lottoPrice);
+        outputView.printLottoCount(lottoCount);
         List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
         printPurchaseLottos(lottos);
 
@@ -35,6 +36,22 @@ public class LottoController {
         WinningResult winningResult = winningResultCalculator.countLottoPrizes(lottos);
         outputView.printWinningResult(winningResult.getWinningResult());
         outputView.printProfitRate(winningResult.calculateProfitRate(lottoPrice));
+    }
+
+    private LottoPrice getLottoPrice() {
+        int parsedAmount = StringToIntParser.parseInt(inputView.readPurchasePrice());
+        return new LottoPrice(parsedAmount);
+    }
+
+    private int getLottoCount(final LottoPrice lottoPrice) {
+        int lottoCount = lottoPrice.calculateLottoCount();
+        return lottoCount;
+    }
+
+    private void printPurchaseLottos(final List<Lotto> lottos) {
+        lottos.stream()
+                .map(Lotto::getNumbers)
+                .forEach(System.out::println);
     }
 
     private WinningResultCalculator getWinningResultCalculator() {
@@ -56,22 +73,5 @@ public class LottoController {
         int parsedBonusNumber = StringToIntParser.parseInt(bonusNumberInput);
         LottoNumber bonusNumber = new LottoNumber(parsedBonusNumber);
         return bonusNumber;
-    }
-
-    private LottoPrice getLottoPrice() {
-        int parsedAmount = StringToIntParser.parseInt(inputView.readPurchasePrice());
-        return new LottoPrice(parsedAmount);
-    }
-
-    private int getLottoCount(final LottoPrice lottoPrice) {
-        int lottoCount = lottoPrice.calculateLottoCount();
-        outputView.printLottoCount(lottoCount);
-        return lottoCount;
-    }
-
-    private void printPurchaseLottos(final List<Lotto> lottos) {
-        lottos.stream()
-                .map(Lotto::getNumbers)
-                .forEach(System.out::println);
     }
 }
