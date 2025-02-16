@@ -16,11 +16,9 @@ public class Lotto {
     private static final String LOTTO_NUMBER_LENGTH_ERROR = "6자리를 입력하셔야 합니다.";
 
     private List<Integer> lottoNumber;
-    private RandomLottoGenerator randomLottoGenerator;
 
     public Lotto(RandomLottoGenerator randomLottoGenerator) {
-        this.randomLottoGenerator = randomLottoGenerator;
-        this.lottoNumber = generateLotto();
+        this.lottoNumber = randomLottoGenerator.generateLotto();
     }
 
     public Lotto(String winningLottoInput) {
@@ -73,10 +71,6 @@ public class Lotto {
         if (number <= LottoConstants.ZERO.getNumber() || number > LottoConstants.LOTTO_MAXIMUM_NUMBER.getNumber()) {
             throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR);
         }
-    }
-
-    private List<Integer> generateLotto() {
-        return randomLottoGenerator.generateLotto();
     }
 
     private void validateDuplicate(List<Integer> parsedLotto) {
