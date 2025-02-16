@@ -1,6 +1,6 @@
 package domain;
 
-import static domain.LottoMatch.*;
+import static domain.LottoRank.*;
 
 import java.util.Map;
 import org.assertj.core.api.Assertions;
@@ -49,7 +49,7 @@ public class MoneyTest {
     public void success_4() {
         int input = 10000;
         Money money = new Money(input);
-        Map<LottoMatch, Integer> result = Map.of(
+        Map<LottoRank, Integer> result = Map.of(
             BOOM, 7,
             FIFTH_PLACE, 1,
             FOURTH_PLACE, 2,

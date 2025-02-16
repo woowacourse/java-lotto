@@ -1,6 +1,6 @@
 package view;
 
-import domain.LottoMatch;
+import domain.LottoRank;
 import java.util.Map;
 
 public class OutputView {
@@ -14,14 +14,14 @@ public class OutputView {
         System.out.println(result);
     }
 
-    public void displayResult(Map<LottoMatch, Integer> lottoResult) {
+    public void displayResult(Map<LottoRank, Integer> lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (LottoMatch lottoMatch : lottoResult.keySet()) {
-            if (lottoMatch == lottoMatch.BOOM) {
+        for (LottoRank lottoRank : lottoResult.keySet()) {
+            if (lottoRank == lottoRank.BOOM) {
                 continue;
             }
-            System.out.printf(STATICS_FORMAT, lottoMatch.toString(), lottoResult.get(lottoMatch));
+            System.out.printf(STATICS_FORMAT, lottoRank.toString(), lottoResult.get(lottoRank));
         }
     }
 

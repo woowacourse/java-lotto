@@ -10,7 +10,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public LottoMatch compareLotto(WinningLotto winningLotto) {
+    public LottoRank compareLotto(WinningLotto winningLotto) {
         int winningCounter = (int) numbers.stream()
             .filter(winningLotto::containsWinningNumber)
             .count();
@@ -18,7 +18,7 @@ public class Lotto {
         boolean bonusChecker = numbers.stream()
             .anyMatch(winningLotto::isBonusNumber);
 
-        return LottoMatch.findLottoRank(winningCounter, bonusChecker);
+        return LottoRank.findLottoRank(winningCounter, bonusChecker);
     }
 
     @Override

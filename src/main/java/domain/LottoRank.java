@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Arrays;
 
-public enum LottoMatch {
+public enum LottoRank {
     BOOM(0, false, 0),
     FIFTH_PLACE(3, false, 5000),
     FOURTH_PLACE(4, false, 50000),
@@ -14,13 +14,13 @@ public enum LottoMatch {
     public boolean bonusChecker;
     public int prize;
 
-    private LottoMatch(int winningCounter, boolean bonusChecker, int prize) {
+    private LottoRank(int winningCounter, boolean bonusChecker, int prize) {
         this.winningCounter = winningCounter;
         this.bonusChecker = bonusChecker;
         this.prize = prize;
     }
 
-    public static LottoMatch findLottoRank(int winningCounter, boolean bonusChecker) {
+    public static LottoRank findLottoRank(int winningCounter, boolean bonusChecker) {
         return Arrays.stream(values())
             .filter(lottoMatch -> lottoMatch.winningCounter == winningCounter
                 && (winningCounter != 5 || lottoMatch.bonusChecker == bonusChecker))

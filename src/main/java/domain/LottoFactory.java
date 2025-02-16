@@ -46,20 +46,20 @@ public class LottoFactory {
         return result;
     }
 
-    public Map<LottoMatch, Integer> countLottos(WinningLotto winningLotto) {
-        Map<LottoMatch, Integer> result = createLottoMatchCounter();
+    public Map<LottoRank, Integer> countLottos(WinningLotto winningLotto) {
+        Map<LottoRank, Integer> result = createLottoMatchCounter();
 
         for (Lotto lotto : lottos) {
-            LottoMatch matchedLotto = lotto.compareLotto(winningLotto);
+            LottoRank matchedLotto = lotto.compareLotto(winningLotto);
             result.put(matchedLotto, result.get(matchedLotto) + 1);
         }
         return result;
     }
 
-    private Map<LottoMatch, Integer> createLottoMatchCounter() {
-        Map<LottoMatch, Integer> result = new LinkedHashMap<>();
-        for (LottoMatch lottoMatch : LottoMatch.values()) {
-            result.put(lottoMatch, 0);
+    private Map<LottoRank, Integer> createLottoMatchCounter() {
+        Map<LottoRank, Integer> result = new LinkedHashMap<>();
+        for (LottoRank lottoRank : LottoRank.values()) {
+            result.put(lottoRank, 0);
         }
         return result;
     }

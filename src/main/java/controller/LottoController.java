@@ -1,7 +1,7 @@
 package controller;
 
 import domain.LottoFactory;
-import domain.LottoMatch;
+import domain.LottoRank;
 import domain.Money;
 import domain.WinningLotto;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class LottoController {
         outputView.displayLottos(money.calculateTotalLotto(), lottoFactory.createResult());
 
         WinningLotto winningLotto = createWinningLotto();
-        Map<LottoMatch, Integer> lottoResult = lottoFactory.countLottos(winningLotto);
+        Map<LottoRank, Integer> lottoResult = lottoFactory.countLottos(winningLotto);
         outputView.displayResult(lottoResult);
 
         double profit = money.calculateProfit(lottoResult);

@@ -24,10 +24,10 @@ public class Money {
         }
     }
 
-    public double calculateProfit(Map<LottoMatch, Integer> lottoResult) {
+    public double calculateProfit(Map<LottoRank, Integer> lottoResult) {
         int sum = 0;
-        for (LottoMatch lottoMatch : lottoResult.keySet()) {
-            sum += lottoMatch.prize * lottoResult.get(lottoMatch);
+        for (LottoRank lottoRank : lottoResult.keySet()) {
+            sum += lottoRank.prize * lottoResult.get(lottoRank);
         }
         return (double) sum / money;
     }
