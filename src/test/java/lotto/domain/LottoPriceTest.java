@@ -10,9 +10,10 @@ public class LottoPriceTest {
     @Test
     void 로또_구입_금액을_정상적으로_생성한다() {
         // Given
+        final int amount = 1000;
 
         // When
-        final LottoPrice lottoPrice = new LottoPrice(1000);
+        final LottoPrice lottoPrice = new LottoPrice(amount);
 
         // Then
         Assertions.assertThatCode(() -> {
@@ -23,9 +24,10 @@ public class LottoPriceTest {
     @Test
     void 천원_미만이면_예외가_발생한다() {
         // Given
+        final int amount = 999;
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> new LottoPrice(999))
+        Assertions.assertThatThrownBy(() -> new LottoPrice(amount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 구입 금액은 1000원 이상이어야 합니다.");
     }

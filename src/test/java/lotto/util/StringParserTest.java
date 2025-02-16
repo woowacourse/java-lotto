@@ -23,9 +23,10 @@ public class StringParserTest {
     @Test
     void 소수이면_예외가_발생한다() {
         // Given
+        final String input = "100.3";
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> StringParser.parseInt("100.3"))
+        Assertions.assertThatThrownBy(() -> StringParser.parseInt(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값은 21억 이하의 양수여야 합니다.");
     }
@@ -34,9 +35,10 @@ public class StringParserTest {
     @Test
     void 문자열이면_예외가_발생한다() {
         // Given
+        final String input = "abc";
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> StringParser.parseInt("abc"))
+        Assertions.assertThatThrownBy(() -> StringParser.parseInt(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값은 21억 이하의 양수여야 합니다.");
     }
@@ -44,9 +46,10 @@ public class StringParserTest {
     @Test
     void Integer_범위가_아니면_예외가_발생한다() {
         // Given
+        final String input = "2200000000";
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> StringParser.parseInt("2200000000"))
+        Assertions.assertThatThrownBy(() -> StringParser.parseInt(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값은 21억 이하의 양수여야 합니다.");
     }
@@ -54,7 +57,7 @@ public class StringParserTest {
     @Test
     void 문자열_토큰_여러_개를_Integer_리스트로_파싱한다() {
         // Given
-        final String[] tokens = {" 5", " 10"};
+        final String[] tokens = {" 5", " 10 "};
 
         // When
         final List<Integer> parsedTokens = StringParser.parseTokens(tokens);
