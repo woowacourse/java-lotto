@@ -7,6 +7,7 @@ import static error.ErrorMessage.INVALID_DUPLICATE_NUMBER;
 import static error.ErrorMessage.INVALID_NUMBERS_SIZE;
 import static error.ErrorMessage.INVALID_NUMBER_RANGE;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +27,12 @@ public class Lotto {
 
     public boolean hasBonusNumber(int bonusNumber) {
         return numbers.contains(bonusNumber);
+    }
+
+    public int calculateMatchCount(Lotto lotto) {
+        List<Integer> commonNumbers = new ArrayList<>(numbers);
+        commonNumbers.retainAll(lotto.getNumbers());
+        return commonNumbers.size();
     }
 
     public List<Integer> getNumbers() {

@@ -53,42 +53,26 @@ public class LottoService {
             calculateResult.put(value, 0);
         }
 
-        List<Integer> winningNumbers = winningInfo.getWinningLotto().getNumbers();
-
         for (Lotto lotto : lottos) {
-            Rank foundRank = findRank(winningInfo, lotto, winningNumbers);
+            Rank foundRank = findRank(winningInfo, lotto);
             calculateResult.put(foundRank, calculateResult.get(foundRank) + 1);
         }
 
         return calculateResult;
     }
 
-    private Rank findRank(WinningInfo winningInfo, Lotto lotto, List<Integer> winningNumbers) {
+    private Rank findRank(WinningInfo winningInfo, Lotto lotto) {
         int matchCount = 0;
         boolean matchBonus = false;
-        List<Integer> lottoNumbers = lotto.getNumbers();
+        Lotto winningLotto = winningInfo.getWinningLotto();
+        int bonusNumber = winningInfo.getBonusNumber();
 
-        for (Integer lottoNumber : lottoNumbers) {
-            matchCount = checkMatchCount(winningNumbers, lottoNumber, matchCount);
-            matchBonus = isMatchBonus(winningInfo, lottoNumber);
-        }
+        matchCount = lotto.calculateMatchCount(winningLotto);
+        matchBonus = lotto.hasBonusNumber(bonusNumber);
 
         return Rank.findRank(matchCount, matchBonus);
     }
 
-    private static boolean isMatchBonus(WinningInfo winningInfo, Integer lottoNumber) {
-        int bonusNumber = winningInfo.getBonusNumber();
-
-        return bonusNumber == lottoNumber;
-    }
-
-    private static int checkMatchCount(List<Integer> winningNumbers, Integer lottoNumber, int count) {
-        if (winningNumbers.contains(lottoNumber)) {
-            count++;
-        }
-
-        return count;
-    }
 
     public double calculateProfit(Map<Rank, Integer> calculateResult, int purchaseAmount) {
         double totalPrize = 0;
