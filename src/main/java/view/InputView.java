@@ -17,9 +17,12 @@ public class InputView {
         return sc.nextLine();
     }
 
-    public String inputWinningLotto() {
+    public List<Integer> inputWinningLotto() {
         System.out.println(WINNING_LOTTO);
-        return sc.nextLine();
+
+        String inputWinningLotto = sc.nextLine();
+
+        return InputParser.parseWinningLotto(inputWinningLotto);
     }
 
     public String inputBonusLotto() {

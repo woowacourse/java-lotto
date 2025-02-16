@@ -4,7 +4,6 @@ import static global.exception.ExceptionMessage.DUPLICATED_NUMBER;
 import static global.exception.ExceptionMessage.INVALID_FORMAT;
 import static global.exception.ExceptionMessage.INVALID_RANGE;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -12,26 +11,15 @@ public class Lotto {
     public static final int LOTTO_MAX = 45;
     public static final int LOTTO_LENGTH = 6;
     public static final int NEED_MATCH_BONUS_COUNT = 5;
-    public static final String DELIMITER = ",";
 
     private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
-    }
+    public Lotto(List<Integer> inputLotto) {
+        validateLength(inputLotto);
+        validateLottoRange(inputLotto);
+        validateLottoDuplicate(inputLotto);
 
-    public Lotto(String inputLotto) {
-        numbers = new ArrayList<>();
-        String[] splitNumbers = inputLotto.split(DELIMITER);
-        validateLength(splitNumbers);
-        
-        for (String number : splitNumbers) {
-            int validatedNum = validateIsInteger(number.trim());
-            validateRange(validatedNum);
-            numbers.add(validatedNum);
-        }
-
-        validateLottoDuplicate();
+        this.numbers = inputLotto;
     }
 
     public int validateBonus(String inputBonus) {
@@ -59,27 +47,26 @@ public class Lotto {
         return numbers.contains(number);
     }
 
-    private void validateLottoDuplicate() {
-        if(numbers.stream().distinct().count() != LOTTO_LENGTH){
+    private void validateLottoDuplicate(List<Integer> inputLotto) {
+        if(inputLotto.stream().distinct().count() != LOTTO_LENGTH){
             throw new IllegalArgumentException(DUPLICATED_NUMBER);
         }
     }
 
-    private void validateLength(String[] splitNumbers) {
-        if(splitNumbers.length != LOTTO_LENGTH) {
+    private void validateLength(List<Integer> inputLotto) {
+        if(inputLotto.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException(INVALID_FORMAT);
         }
     }
-
-    private void validateBonusDuplicate(int inputBonus) {
-        Integer bonus = inputBonus;
-        numbers.stream().filter(number -> number.equals(bonus)).forEach(number -> {
-            throw new IllegalArgumentException(DUPLICATED_NUMBER);
-        });
+    
+    private void validateLottoRange(List<Integer> inputLotto) {
+        for (Integer lottoNum : inputLotto) {
+            validateRange(lottoNum);
+        }
     }
 
-    private void validateRange(int lottoNum) {
-        if (lottoNum < LOTTO_MIN || lottoNum > LOTTO_MAX) {
+    private static void validateRange(Integer lottoNum) {
+        if(lottoNum < LOTTO_MIN || lottoNum > LOTTO_MAX) {
             throw new IllegalArgumentException(INVALID_RANGE);
         }
     }
@@ -90,6 +77,13 @@ public class Lotto {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INVALID_FORMAT);
         }
+    }
+
+    private void validateBonusDuplicate(int inputBonus) {
+        Integer bonus = inputBonus;
+        numbers.stream().filter(number -> number.equals(bonus)).forEach(number -> {
+            throw new IllegalArgumentException(DUPLICATED_NUMBER);
+        });
     }
 
     public List<Integer> getNumbers() {

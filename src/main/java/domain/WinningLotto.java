@@ -6,8 +6,8 @@ public class WinningLotto extends Lotto {
 
     private final int bonus;
 
-    public WinningLotto(String lotto, String bonus) {
-        super(lotto);
+    public WinningLotto(List<Integer> inputWinningLotto, String bonus) {
+        super(inputWinningLotto);
         this.bonus = validateBonus(bonus);
     }
 

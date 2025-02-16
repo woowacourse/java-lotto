@@ -14,14 +14,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
 
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,6", "1,15,17,25,40,45", "1, 2, 3, 4, 5, 6"})
-    void 로또_번호_생성_성공_테스트(String inputLotto) {
-        assertThatCode(() -> new Lotto(inputLotto)).doesNotThrowAnyException();
+    @Test
+    void 로또_번호_생성_성공_테스트() {
+        assertThatCode(() -> new Lotto(List.of(1, 13, 24, 33, 40, 45))).doesNotThrowAnyException();
     }
 
     @Nested
@@ -29,23 +27,15 @@ class LottoTest {
         @Test
         void 로또_번호_범위_테스트() {
             assertThatThrownBy(() -> {
-                new Lotto("1,2,3,4,5,46");
+                new Lotto(List.of(1,2,3,4,5,46));
             }).isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(INVALID_RANGE);
         }
 
         @Test
-        void 로또_번호_구분자_테스트() {
-            assertThatThrownBy(() -> {
-                new Lotto("1/2/3/4/5/6");
-            }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_FORMAT);
-        }
-
-        @Test
         void 로또_번호_중복_테스트() {
             assertThatThrownBy(() -> {
-                new Lotto("1,2,3,4,5,5");
+                new Lotto(List.of(1,2,3,4,5,5));
             }).isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(DUPLICATED_NUMBER);
         }
@@ -53,15 +43,7 @@ class LottoTest {
         @Test
         void 로또_번호_길이_테스트() {
             assertThatThrownBy(() -> {
-                new Lotto("1,2,3,4,5");
-            }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_FORMAT);
-        }
-
-        @Test
-        void 로또_번호_정수_테스트() {
-            assertThatThrownBy(() -> {
-                new Lotto("1,2,3,4,5,a");
+                new Lotto(List.of(1,2,3,4,5));
             }).isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(INVALID_FORMAT);
         }
@@ -106,23 +88,21 @@ class LottoTest {
 
     @ParameterizedTest
     @MethodSource("testMatchRank")
-    void 당첨번호_순위_매치_정상진행_테스트(String numbers, Rank rank) {
+    void 당첨번호_순위_매치_정상진행_테스트(Lotto lotto, Rank rank) {
         //given
-        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", "7");
-        Lotto lotto = new Lotto(numbers);
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), "7");
         //when-then
         assertThat(lotto.countMatchNumbers(winningLotto)).isEqualTo(rank);
     }
 
     private static Stream<Arguments> testMatchRank() {
         return Stream.of(
-                Arguments.of("1,2,3,4,5,6", Rank.FIRST),
-                Arguments.of("1,2,3,4,5,7", Rank.SECOND),
-                Arguments.of("1,2,3,4,5,8", Rank.THIRD),
-                Arguments.of("1,2,3,4,8,9", Rank.FOURTH),
-                Arguments.of("1,2,3,8,9,10", Rank.FIFTH),
-                Arguments.of("1,2,8,9,10,11", Rank.NONE)
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), Rank.FIRST),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 7)), Rank.SECOND),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 8)), Rank.THIRD),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 8, 9)), Rank.FOURTH),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 8, 9, 10)), Rank.FIFTH),
+                Arguments.of(new Lotto(List.of(1, 2, 8, 9, 10, 11)), Rank.NONE)
         );
     }
-
 }
