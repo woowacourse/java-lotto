@@ -58,12 +58,10 @@ class LottoTest {
                     List.of(new LottoNumber(30), new LottoNumber(3), new LottoNumber(9),
                             new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
             Lotto lotto = new Lotto(lottoNumbers);
-
-            WinningNumbers winningNumbers = new WinningNumbers(new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(8), new LottoNumber(45), new LottoNumber(21))), new LottoNumber(30));
+            LottoNumber bonusBall = new LottoNumber(30);
+            
             // when
-            boolean containsBonusNumber = lotto.isContainsBonusNumber(winningNumbers);
+            boolean containsBonusNumber = lotto.isContainsBonusNumber(bonusBall);
 
             // then
             assertThat(containsBonusNumber).isTrue();

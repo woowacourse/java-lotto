@@ -63,7 +63,7 @@ public enum LottoRank {
 
     public static LottoRank of(final Lotto lotto, final WinningNumbers winningNumbers) {
         final int lottoMatchCount = lotto.calculateWinningNumbersMatchCount(winningNumbers);
-        final boolean bonusBallMatch = lotto.isContainsBonusNumber(winningNumbers);
+        final boolean bonusBallMatch = winningNumbers.matchBonusNumber(lotto);
 
         return Arrays.stream(values())
                 .filter(lottoRank -> lottoRank.incrementIfMatchCondition.test(lottoMatchCount, bonusBallMatch))

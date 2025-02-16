@@ -49,8 +49,8 @@ public class WinningNumbers {
         return winningNumbers.contains(lottoNumber);
     }
 
-    public boolean matchBonusNumber(final List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.contains(bonusBall);
+    public boolean matchBonusNumber(final Lotto lotto) {
+        return lotto.isContainsBonusNumber(bonusBall);
     }
 
     public List<LottoNumber> getWinningNumbers() {
