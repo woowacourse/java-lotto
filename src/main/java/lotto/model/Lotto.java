@@ -4,19 +4,24 @@ import static lotto.LottoConstants.Number.LOTTO_NUMBER_COUNT;
 import static lotto.LottoConstants.Number.LOTTO_NUMBER_MAX;
 import static lotto.LottoConstants.Number.LOTTO_NUMBER_MIN;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class Lotto {
 
-    private final Set<Integer> numbers;
+    private final SortedSet<Integer> numbers;
 
     public Lotto(Set<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = Set.copyOf(numbers);
+        this.numbers = Collections.unmodifiableSortedSet(new TreeSet<>(numbers));
     }
 
     private void validateNumbers(Set<Integer> numbers) {
+        Objects.requireNonNull(numbers, "로또 번호는 null이 될 수 없습니다.");
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 %d개여야 합니다.".formatted(LOTTO_NUMBER_COUNT));
         }

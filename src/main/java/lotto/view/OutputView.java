@@ -10,14 +10,7 @@ public class OutputView {
 
     public void printLottos(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
-        lottos.forEach(lotto -> System.out.println(sortAsc(lotto)));
-    }
-
-    private List<Integer> sortAsc(Lotto lotto) {
-        return lotto.getNumbers()
-                .stream()
-                .sorted()
-                .toList();
+        lottos.forEach(lotto -> System.out.println(lotto.getNumbers()));
     }
 
     public void printWinningStatistics(Map<Rank, Integer> ranks) {
