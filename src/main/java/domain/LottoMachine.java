@@ -8,13 +8,12 @@ import java.util.Set;
 public class LottoMachine {
 
     private final int lottoNumberSize;
+    private final LottoPickStrategy numberStrategy;
 
     public LottoMachine(LottoPickStrategy numberStrategy, int lottoNumberSize) {
         this.numberStrategy = numberStrategy;
         this.lottoNumberSize = lottoNumberSize;
     }
-
-    private final LottoPickStrategy numberStrategy;
 
     public Lotto createLotto() {
         Set<Number> numbers;
