@@ -31,16 +31,26 @@ public class OutputView {
         stringBuilder.append("---------\n");
         for (WinningInfo winningInfo : WinningInfo.getSortedValues()) {
             stringBuilder.append(formatWinningInfoMessage(winningInfo));
-            stringBuilder.append(String.format(" - %d개\n", winningResult.getCount(winningInfo)));
+            stringBuilder.append(formatWinningResultMessage(winningResult, winningInfo));
         }
         System.out.println(stringBuilder);
     }
 
     private String formatWinningInfoMessage(WinningInfo winningInfo) {
+        if (winningInfo == WinningInfo.NONE) {
+            return "";
+        }
         if (winningInfo == WinningInfo.SECOND_PRIZE) {
             return String.format("%d개 일치, 보너스 볼 일치 (%d원)", winningInfo.getMatchedNumberCount(), winningInfo.getPrice());
         }
         return String.format("%d개 일치 (%d원)", winningInfo.getMatchedNumberCount(), winningInfo.getPrice());
+    }
+    
+    private String formatWinningResultMessage(WinningResult winningResult, WinningInfo winningInfo) {
+        if (winningInfo == WinningInfo.NONE) {
+            return "";
+        }
+        return String.format(" - %d개\n", winningResult.getCount(winningInfo));
     }
 
     public void printRevenue(float revenue) {

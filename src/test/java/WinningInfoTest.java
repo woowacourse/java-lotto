@@ -26,13 +26,14 @@ class WinningInfoTest {
     }
 
     @Test
-    @DisplayName("getSortedValues()가 낙첨을 제외한 낮은 등수부터 정렬된 List를 반환하는지 확인한다")
-    void should_return_sorted_WinningInfo_list_excluding_None() {
+    @DisplayName("getSortedValues()가 낮은 등수부터 정렬된 List를 반환하는지 확인한다")
+    void should_return_sorted_WinningInfo_list() {
         // when
         List<WinningInfo> sortedValues = WinningInfo.getSortedValues();
 
         // then
         assertThat(sortedValues).containsExactly(
+                WinningInfo.NONE,
                 WinningInfo.FIFTH_PRIZE,
                 WinningInfo.FOURTH_PRIZE,
                 WinningInfo.THIRD_PRIZE,
