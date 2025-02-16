@@ -8,7 +8,6 @@ import domain.Purchase;
 import domain.WinningNumber;
 import domain.WinningResult;
 import domain.WinningStatus;
-import util.NumberGenerator;
 import view.InputView;
 import view.OutputView;
 
@@ -41,8 +40,7 @@ public class LottoController {
             try {
                 String purchaseAmountInput = inputView.readPurchaseAmount();
                 return new Purchase(purchaseAmountInput);
-            }
-            catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
             }
         }
@@ -67,8 +65,7 @@ public class LottoController {
             try {
                 String winningNumbersInput = inputView.readWinningNumbers();
                 return new WinningNumber(winningNumbersInput);
-            }
-            catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
             }
         }
@@ -80,14 +77,15 @@ public class LottoController {
             try {
                 String bonusNumberInput = inputView.readBonusNumbers();
                 return new BonusNumber(bonusNumberInput, winningNumber);
-            }
-            catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
             }
         }
     }
 
-    public WinningResult checkWinningResult(List<Lotto> issuedLottos, WinningNumber winningNumber, BonusNumber bonusNumber) {
+    public WinningResult checkWinningResult(List<Lotto> issuedLottos,
+                                            WinningNumber winningNumber,
+                                            BonusNumber bonusNumber) {
         WinningResult winningResult = new WinningResult();
         for (Lotto lotto : issuedLottos) {
             int matchingCount = winningNumber.findMatchingCountWith(lotto.getNumbers());

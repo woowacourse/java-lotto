@@ -12,11 +12,11 @@ public class LottoMachine {
         List<Lotto> lottos = new ArrayList<>();
         while (lottos.size() < lottoCount) {
             try {
-                List<Integer> randomNumbers = NumberGenerator.pickUniqueRandomNumbers(MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT);
+                List<Integer> randomNumbers = NumberGenerator.pickUniqueRandomNumbers(
+                        MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT);
                 validateDuplication(randomNumbers, lottos);
                 lottos.add(new Lotto(randomNumbers));
-            }
-            catch (IllegalStateException e) {
+            } catch (IllegalStateException ignored) {
             }
         }
         return lottos;

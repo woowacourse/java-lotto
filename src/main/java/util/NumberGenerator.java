@@ -10,7 +10,7 @@ public class NumberGenerator {
     public static List<Integer> pickUniqueRandomNumbers(int min, int max, int count) {
         Random random = new Random();
         Set<Integer> uniqueNumbers = new HashSet<>();
-        while(uniqueNumbers.size() < count) {
+        while (uniqueNumbers.size() < count) {
             uniqueNumbers.add(random.nextInt(max) + min);
         }
         return new ArrayList<>(uniqueNumbers);
