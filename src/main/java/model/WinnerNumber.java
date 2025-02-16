@@ -14,14 +14,16 @@ public class WinnerNumber {
         this.bonusBall = bonusBall;
     }
 
-    public void compareLottoToWinning(Lottos lottos) {
+    public LottoCalculator compareLottoToWinning(Lottos lottos) {
+        LottoCalculator lottoCalculator = new LottoCalculator();
         List<Lotto> compare = lottos.getLottos();
         for (Lotto lotto : compare) {
-            compareSingleLottoToWinning(lotto);
+            compareSingleLottoToWinning(lottoCalculator, lotto);
         }
+        return lottoCalculator;
     }
 
-    private void compareSingleLottoToWinning(Lotto lotto) {
+    private void compareSingleLottoToWinning(LottoCalculator lottoCalculator, Lotto lotto) {
         List<Integer> lottoNumber = lotto.getLottoNumber();
 
         Set<Integer> winNumber = new HashSet<>(winnerNumbers);
@@ -29,6 +31,6 @@ public class WinnerNumber {
 
         lottoNumbers.retainAll(winNumber);
         boolean isBonus = lottoNumber.contains(bonusBall);
-        LottoResult.addCount(lottoNumbers.size(), isBonus);
+        lottoCalculator.compareWinning(lottoNumbers.size(), isBonus);
     }
 }
