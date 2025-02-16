@@ -88,11 +88,13 @@ public class LottoFactory {
                 .sum();
     }
 
-    public int getLottoCount() {
-        return lottoCount;
+    public String lottoCountToString() {
+        return String.valueOf(lottoCount);
     }
 
-    public List<Lotto> getIssuedLottoTickets() {
-        return issuedLottoTickets;
+    public List<String> issuedLottoTicketsToString() {
+        return issuedLottoTickets.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.toList());
     }
 }

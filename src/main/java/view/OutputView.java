@@ -34,14 +34,11 @@ public class OutputView {
     }
 
     public static void printLottoCount(final LottoFactory lottoFactory) {
-        print(LOTTO_PURCHASE_RESULT.getMessage(lottoFactory.getLottoCount()));
+        print(LOTTO_PURCHASE_RESULT.getMessage(lottoFactory.lottoCountToString()));
     }
 
     public static void printLottoTickets(final LottoFactory lottoFactory) {
-        List<Lotto> issuedLottoTickets = lottoFactory.getIssuedLottoTickets();
-        issuedLottoTickets.stream()
-                .map(Lotto::toString)
-                .forEach(OutputView::print);
+        lottoFactory.issuedLottoTicketsToString().forEach(OutputView::print);
 
         printNewLine();
     }

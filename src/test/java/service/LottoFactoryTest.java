@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 
 class LottoFactoryTest {
 
-    private List<Integer> extractNumbersFromLotto(Lotto lotto) {
-        return Arrays.stream(lotto.toString()
+    private List<Integer> extractNumbersFromLotto(String lotto) {
+        return Arrays.stream(lotto
                         .replaceAll("[\\[\\]]", "") // [ ] 제거
                         .split(", "))
                 .map(Integer::parseInt)
@@ -35,14 +35,14 @@ class LottoFactoryTest {
     @Test
     @DisplayName("구매 티켓 갯수는 구매 금액에 나누기 1000이여야 한다.")
     void validTicketNumber() {
-        int expected = 10;
-        assertThat(lottoFactory.getLottoCount()).isEqualTo(expected);
+        String expected = "10";
+        assertThat(lottoFactory.lottoCountToString()).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("발행된 티켓 내 숫자들은 모두 1 부터 45 사이여야 한다.")
     void validTicketRange() {
-        for (Lotto issuedTicket : lottoFactory.getIssuedLottoTickets()) {
+        for (String issuedTicket : lottoFactory.issuedLottoTicketsToString()) {
             List<Integer> numbers = extractNumbersFromLotto(issuedTicket);
             numbers.forEach(number -> assertThat(number).isBetween(1, 45));
         }
@@ -51,7 +51,7 @@ class LottoFactoryTest {
     @Test
     @DisplayName("발행된 티켓 내 숫자 갯수는 6개여야 한다.")
     void validTicketSize() {
-        for (Lotto issuedTicket : lottoFactory.getIssuedLottoTickets()) {
+        for (String issuedTicket : lottoFactory.issuedLottoTicketsToString()) {
             List<Integer> numbers = extractNumbersFromLotto(issuedTicket);
             assertThat(numbers.size()).isEqualTo(6);
         }

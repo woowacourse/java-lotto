@@ -6,7 +6,7 @@ public enum OutputViewMessage {
     WINNING_LOTTO_GUIDANCE("지난 주 당첨 번호를 입력해 주세요."),
     WINNING_BONUS_GUIDANCE("보너스 볼을 입력해 주세요."),
 
-    LOTTO_PURCHASE_RESULT("%d개 구매했습니다."),
+    LOTTO_PURCHASE_RESULT("%s개 구매했습니다."),
 
     WINNING_STATISTIC_TITLE("당첨 통계"),
     WINNING_STATISTICS_SEPARATOR("---------"),
@@ -30,6 +30,10 @@ public enum OutputViewMessage {
     }
 
     public String getMessage(int arg) {
+        return String.format(message, arg);
+    }
+
+    public String getMessage(String arg) {
         return String.format(message, arg);
     }
 
