@@ -43,7 +43,9 @@ public class Lotto {
     }
 
     public int calculateWinningNumbersMatchCount(final WinningNumbers winningNumbers) {
-        return winningNumbers.calculateLottoMatchCount(getLottoNumbers());
+        return (int) lottoNumbers.stream()
+                .filter(winningNumbers::containsLottoNumber)
+                .count();
     }
 
     public boolean isContainsBonusNumber(final WinningNumbers winningNumbers) {

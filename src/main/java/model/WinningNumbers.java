@@ -45,14 +45,8 @@ public class WinningNumbers {
         }
     }
 
-    public int calculateLottoMatchCount(final List<LottoNumber> lottoNumbers) {
-        int count = 0;
-        for (final LottoNumber lottoNumber : lottoNumbers) {
-            if (winningNumbers.contains(lottoNumber)) {
-                count++;
-            }
-        }
-        return count;
+    public boolean containsLottoNumber(final LottoNumber lottoNumber) {
+        return winningNumbers.contains(lottoNumber);
     }
 
     public boolean matchBonusNumber(final List<LottoNumber> lottoNumbers) {
