@@ -28,12 +28,12 @@ public class LottoController {
     private List<LottoTicketResponse> purchaseLottoTicket() {
         int purchaseAmount = lottoConsoleView.requestPurchaseAmount();
         int purchaseCount = lottoStore.calculatePurchaseCount(purchaseAmount);
-        List<LottoTicketResponse> responses = lottoStore.createLottoTickets(purchaseCount);
+        List<LottoTicketResponse> lottoTicketResponses = lottoStore.createLottoTickets(purchaseCount);
 
         lottoConsoleView.printPurchaseCount(purchaseCount);
-        lottoConsoleView.printPurchasedLotto(responses);
+        lottoConsoleView.printPurchasedLotto(lottoTicketResponses);
 
-        return responses;
+        return lottoTicketResponses;
     }
 
     private WinningLottoRequest createWinningLotto() {
