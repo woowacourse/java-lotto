@@ -21,7 +21,7 @@ public class OutputView {
             if (key == NO_MATCH) {
                 break;
             }
-            String output = key.getMatchData();
+            String output = key.toString();
             int count = map.getOrDefault(key, 0);
             System.out.println(output + count + "개");
         }
