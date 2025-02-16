@@ -2,9 +2,9 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static testfixture.LottoNumberFixture.convertToLottoNumbers;
 
-import constans.ErrorType;
-import java.util.ArrayList;
+import error.ErrorType;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -20,10 +20,7 @@ class LottoTest {
         @Test
         void createLottoNumbers() {
             // given
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
-
+            List<LottoNumber> lottoNumbers = convertToLottoNumbers(1, 2, 3, 4, 5, 6);
             // when
             Lotto actual = new Lotto(lottoNumbers);
 
@@ -40,10 +37,7 @@ class LottoTest {
         @Test
         void validateSize() {
             // given
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21), new LottoNumber(30)));
-
+            List<LottoNumber> lottoNumbers = convertToLottoNumbers(1, 2, 3, 4, 5, 6, 7);
             // when & then
             assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -54,9 +48,7 @@ class LottoTest {
         @Test
         void validateDuplicate() {
             // given
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                    new LottoNumber(1), new LottoNumber(45), new LottoNumber(21)));
+            List<LottoNumber> lottoNumbers = convertToLottoNumbers(1, 2, 3, 4, 5, 5);
 
             // when & then
             assertThatThrownBy(() -> new Lotto(lottoNumbers))

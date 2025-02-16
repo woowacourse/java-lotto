@@ -23,10 +23,18 @@ public class Store {
     ) {
         final Map<LottoRank, Integer> lottoRanks = new HashMap<>();
         lottos.forEach(lotto -> {
-            final LottoRank lottoRank = lottoMachine.checkWinningRank(lotto, winningNumbers);
-            lottoRanks.put(lottoRank, lottoRanks.getOrDefault(lottoRank, 0) + 1);
+            incrementLottoRankCount(winningNumbers, lotto, lottoRanks);
         });
 
         return new WinningResult(lottoRanks);
+    }
+
+    private void incrementLottoRankCount(
+        final WinningNumbers winningNumbers,
+        final Lotto lotto,
+        final Map<LottoRank, Integer> lottoRanks
+    ) {
+        final LottoRank lottoRank = lottoMachine.checkWinningRank(lotto, winningNumbers);
+        lottoRanks.put(lottoRank, lottoRanks.getOrDefault(lottoRank, 0) + 1);
     }
 }

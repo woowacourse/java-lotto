@@ -1,6 +1,6 @@
 package model;
 
-import constans.ErrorType;
+import error.ErrorType;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +25,7 @@ public class Lotto {
 
     public static Lotto from(final List<Integer> lottoNumbers) {
         return new Lotto(lottoNumbers.stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
     }
 

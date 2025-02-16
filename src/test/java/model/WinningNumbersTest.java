@@ -3,9 +3,9 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
+import static testfixture.LottoNumberFixture.convertToLottoNumbers;
 
-import constans.ErrorType;
-import java.util.ArrayList;
+import error.ErrorType;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -21,10 +21,8 @@ class WinningNumbersTest {
         @Test
         void createWinningNumbers() {
             // given
-            List<LottoNumber> numbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9), new LottoNumber(8),
-                    new LottoNumber(45), new LottoNumber(21)));
-            LottoNumber bonusNumber = new LottoNumber(4);
+            List<LottoNumber> numbers = convertToLottoNumbers(1, 2, 3, 4, 5, 6);
+            LottoNumber bonusNumber = LottoNumber.of(7);
 
             // when
             WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
@@ -43,10 +41,8 @@ class WinningNumbersTest {
         @Test
         void calculateLottoMatchCount() {
             // given
-            List<LottoNumber> numbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                    new LottoNumber(5), new LottoNumber(6)));
-            LottoNumber bonusNumber = new LottoNumber(7);
+            List<LottoNumber> numbers = convertToLottoNumbers(1, 2, 3, 4, 5, 6);
+            LottoNumber bonusNumber = LottoNumber.of(7);
             WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
 
             // when
@@ -60,16 +56,11 @@ class WinningNumbersTest {
         @Test
         void matchBonusNumber() {
             // given
-            List<LottoNumber> numbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                    new LottoNumber(5), new LottoNumber(6)));
-            LottoNumber bonusNumber = new LottoNumber(7);
+            List<LottoNumber> numbers = convertToLottoNumbers(1, 2, 3, 4, 5, 6);
+            LottoNumber bonusNumber = LottoNumber.of(7);
             WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
 
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(new LottoNumber(7), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                    new LottoNumber(5), new LottoNumber(6)));
-
+            List<LottoNumber> lottoNumbers = convertToLottoNumbers(1, 2, 3, 4, 5, 7);
             // when
             boolean matchBonusNumber = winningNumbers.matchBonusNumber(lottoNumbers);
 
@@ -86,10 +77,8 @@ class WinningNumbersTest {
         @Test
         void validateSize() {
             // given
-            List<LottoNumber> numbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9), new LottoNumber(8),
-                    new LottoNumber(45), new LottoNumber(21), new LottoNumber(30)));
-            LottoNumber bonusNumber = new LottoNumber(4);
+            List<LottoNumber> numbers = convertToLottoNumbers(1, 2, 3, 4, 5, 6, 7);
+            LottoNumber bonusNumber = LottoNumber.of(8);
 
             // when & then
             assertThatThrownBy(() -> new WinningNumbers(numbers, bonusNumber)).isInstanceOf(
@@ -101,10 +90,8 @@ class WinningNumbersTest {
         @Test
         void validateDuplicate() {
             // given
-            List<LottoNumber> numbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(1), new LottoNumber(9), new LottoNumber(8),
-                    new LottoNumber(45), new LottoNumber(21)));
-            LottoNumber bonusNumber = new LottoNumber(4);
+            List<LottoNumber> numbers = convertToLottoNumbers(1, 2, 3, 4, 5, 5);
+            LottoNumber bonusNumber = LottoNumber.of(4);
 
             // when & then
             assertThatThrownBy(() -> new WinningNumbers(numbers, bonusNumber)).isInstanceOf(
@@ -116,10 +103,8 @@ class WinningNumbersTest {
         @Test
         void validateBonusNumberDuplicate() {
             // given
-            List<LottoNumber> numbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(9), new LottoNumber(8),
-                    new LottoNumber(45), new LottoNumber(21)));
-            LottoNumber bonusNumber = new LottoNumber(1);
+            List<LottoNumber> numbers = convertToLottoNumbers(1, 2, 3, 4, 5, 6);
+            LottoNumber bonusNumber = LottoNumber.of(6);
 
             // when & then
             assertThatThrownBy(() -> new WinningNumbers(numbers, bonusNumber)).isInstanceOf(
