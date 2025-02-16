@@ -1,4 +1,4 @@
-package global.factory;
+package domain.factory;
 
 import domain.Lotto;
 import global.generator.Generator;

@@ -1,6 +1,5 @@
-package global.factory;
+package domain.factory;
 
-import domain.Money;
 import domain.Lotto;
 import domain.Lottos;
 import global.generator.Generator;
