@@ -1,17 +1,18 @@
 package controller;
 
 import model.PurchasedLottos;
-import view.PurchaseView;
+import view.InputView;
+import view.OutputView;
 
 public class PurchaseController {
-    PurchaseView purchaseView = new PurchaseView();
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
 
     public PurchasedLottos purchase() {
-        purchaseView.printPurchaseGuide();
-        Integer purchaseAmount = purchaseView.readPurchaseAmount();
+        Integer purchaseAmount = inputView.readPurchaseAmount();
         PurchasedLottos purchasedLottos = new PurchasedLottos(purchaseAmount);
-        purchaseView.printPurchaseResult(purchasedLottos.size());
-        purchaseView.printPurchasedLottos(purchasedLottos);
+        outputView.printPurchaseResult(purchasedLottos.size());
+        outputView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;
     }
 }

@@ -3,12 +3,33 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import constant.ErrorMessage;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoNumbersTest {
+    @Test
+    @DisplayName("로또 번호 개수 테스트")
+    public void lottoNumbersCountTest() {
+        // given & when
+        LottoNumbers lottoNumbers = new LottoNumbers();
+        List<LottoNumber> numbers = lottoNumbers.getNumbers();
+        // then
+        assertThat(numbers.size()).isEqualTo(LottoNumbers.LOTTO_NUMBER_COUNT);
+    }
+
+    @Test
+    @DisplayName("로또 번호 범위 테스트")
+    public void lottoNumberBoundTest() {
+        // given & when
+        LottoNumbers lottoNumbers = new LottoNumbers();
+        List<LottoNumber> numbers = lottoNumbers.getNumbers();
+        // then
+        for (LottoNumber number : numbers) {
+            assertThat(number.getNumber()).isBetween(1, 45);
+        }
+    }
+
     @Test
     @DisplayName("로또번호 매칭 테스트")
     public void countMatchNumberTest() {
@@ -27,7 +48,7 @@ class LottoNumbersTest {
         // given
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(4, 5, 6, 7, 8, 9));
         // when
-        Boolean bonusMatch = lottoNumbers.bonusMatch(4);
+        Boolean bonusMatch = lottoNumbers.bonusMatch(new LottoNumber(4));
         //then
         assertThat(bonusMatch).isTrue();
     }
@@ -41,19 +62,7 @@ class LottoNumbersTest {
         // when & then
         assertThatThrownBy(() -> new LottoNumbers(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_COUNT_EXCEPTION);
-    }
-
-    @Test
-    @DisplayName("숫자 범위 판별 테스트")
-    public void validateBoundTest() {
-        // given
-        List<Integer> input = List.of(1, 2, 3, 4, 5, 46);
-
-        // when & then
-        assertThatThrownBy(() -> new LottoNumbers(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_BOUND_EXCEPTION);
+                .hasMessage(LottoNumbers.NUMBER_COUNT_EXCEPTION);
     }
 
     @Test
@@ -65,6 +74,6 @@ class LottoNumbersTest {
         // when & then
         assertThatThrownBy(() -> new LottoNumbers(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_DUPLICATE_EXCEPTION);
+                .hasMessage(LottoNumbers.NUMBER_DUPLICATE_EXCEPTION);
     }
 }
