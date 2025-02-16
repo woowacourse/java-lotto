@@ -23,7 +23,7 @@ public class WinningLotto {
         return Rank.findRank(matchCount, isMatchBonusNumber);
     }
 
-    public boolean containsBonusNumber(Lotto lotto) {
+    private boolean containsBonusNumber(Lotto lotto) {
         return lotto.contains(bonusNumber);
     }
 }

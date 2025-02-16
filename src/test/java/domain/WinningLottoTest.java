@@ -24,20 +24,6 @@ class WinningLottoTest {
                 .hasMessage("보너스 볼 번호는 당첨 번호와 중복될 수 없습니다.");
     }
 
-    @Test
-    void 보너스번호와_일치하는지_판단한다() {
-        //given
-        Number bonus = new Number(7);
-        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-
-        Lotto lotto2 = new Lotto(List.of(1, 2, 3, 4, 5, 7));
-        WinningLotto winningLotto = new WinningLotto(lotto1, bonus);
-        //when
-        boolean actual = winningLotto.containsBonusNumber(lotto2);
-        //then
-        assertThat(actual).isTrue();
-    }
-
     @ParameterizedTest
     @MethodSource("generateLottos")
     void 당첨순위를_판단할_수_있다(List<Integer> numbers, Rank expected) {
