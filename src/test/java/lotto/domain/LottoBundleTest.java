@@ -2,9 +2,9 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +28,7 @@ class LottoBundleTest {
         WinningNumbers winningNumbers = new WinningNumbers(lotto1, new LottoNumber(8));
 
         //when
-        EnumMap<Rank, Integer> lottoResult = lottoBundle.makeStatistics(winningNumbers);
+        Map<Rank, Integer> lottoResult = lottoBundle.makeStatistics(winningNumbers);
 
         //then
         assertThat(lottoResult.get(Rank.FIRST_PRIDE)).isEqualTo(1);
