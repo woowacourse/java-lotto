@@ -9,7 +9,7 @@ import java.util.List;
 public class OutputView {
     public void printPurchasedLottos(Lottos lottos) {
         System.out.println(lottos.getQuantity() + "개를 구매했습니다.");
-        for (String lottoNumbers : lottos.getPurchasedLottos()) {
+        for (List<Integer> lottoNumbers : lottos.getPurchasedLottos()) {
             System.out.println(lottoNumbers);
         }
         System.out.println();

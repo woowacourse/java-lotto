@@ -56,8 +56,7 @@ public class Lotto {
         return (COUNT_OF_NUMBERS * 2 - distinctNumbers.size());
     }
 
-    @Override
-    public String toString() {
-        return numbers.toString();
+    public List<Integer> getNumbers() {
+        return List.copyOf(numbers);
     }
 }

@@ -36,8 +36,8 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public List<String> getPurchasedLottos() {
-        return lottos.stream().map(Lotto::toString).toList();
+    public List<List<Integer>> getPurchasedLottos() {
+        return lottos.stream().map(Lotto::getNumbers).toList();
     }
 
     public List<Lotto> getLottos() {
