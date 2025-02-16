@@ -17,13 +17,13 @@ public class LottoStore {
     private static final int LOTTO_PRICE = 1_000;
 
     private final NumbersGenerator numbersGenerator;
-    private final LottoRankCalculator lottoRankCalculator;
+    private final LottoRankFinder lottoRankFinder;
     private final LottoDtoMapper lottoDtoMapper;
 
-    public LottoStore(NumbersGenerator numbersGenerator, LottoRankCalculator lottoRankCalculator,
+    public LottoStore(NumbersGenerator numbersGenerator, LottoRankFinder lottoRankFinder,
             LottoDtoMapper lottoDtoMapper) {
         this.numbersGenerator = numbersGenerator;
-        this.lottoRankCalculator = lottoRankCalculator;
+        this.lottoRankFinder = lottoRankFinder;
         this.lottoDtoMapper = lottoDtoMapper;
     }
 
@@ -46,7 +46,7 @@ public class LottoStore {
         List<LottoTicket> lottoTickets = lottoDtoMapper.toLottoTickets(lottoTicketResponses);
         WinningLotto winningLotto = lottoDtoMapper.toWinningLotto(winningLottoRequest);
 
-        List<LottoRank> lottoRanks = calculateRank(lottoTickets, winningLotto);
+        List<LottoRank> lottoRanks = lottoRankFinder.findAll(lottoTickets, winningLotto);
         Map<LottoRank, Integer> lottoRankCounter = countLottoRank(lottoRanks);
         LottoRankResult lottoRankResult = new LottoRankResult(lottoRankCounter);
 

@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.LottoRank;
-import model.LottoRankCalculator;
+import model.LottoRankFinder;
 import model.LottoStore;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class LottoStoreTest {
 
     private LottoStore lottoStore = new LottoStore(
             () -> List.of(1, 2, 3, 4, 5, 6),
-            new LottoRankCalculator(),
+            new LottoRankFinder(),
             new LottoDtoMapper());
 
     @Test
