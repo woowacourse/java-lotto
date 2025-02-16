@@ -27,8 +27,9 @@ public class LottoController {
         final WinningLotto winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonusNumber);
 
         List<Prize> prizes = lottos.calculatePrizes(winningLotto);
+        double earningRate = lottos.calculateEarningRate(prizes);
 
-        outputView.printLottoResult(prizes, Prize.calculateEarningRate(prizes, lottos.getQuantity() * 1000));
+        outputView.printLottoResult(prizes, earningRate);
         inputView.close();
     }
 

@@ -24,7 +24,7 @@ public enum Prize {
 
     public static Prize getPrizePlace(int matchCount, boolean isBonusMatch) {
         return Arrays.stream(Prize.values())
-                .filter(p -> p.matchCount == matchCount)
+                .filter(prize -> prize.matchCount == matchCount)
                 .filter(prize -> {
                     if (matchCount == SECOND_PLACE.matchCount) {
                         return prize.isBonusMatch == isBonusMatch;
@@ -33,13 +33,9 @@ public enum Prize {
                 }).findFirst().orElse(SIXTH_PLACE);
     }
 
-    public static double calculateEarningRate(List<Prize> prizes, int purchasedAmount) {
-        return (double) calculateTotalPrize(prizes) / purchasedAmount;
-    }
-
-    private static long calculateTotalPrize(List<Prize> prizes) {
+    public static long calculateTotalPrize(List<Prize> prizes) {
         return prizes.stream()
-                .mapToLong(p -> p.prizeAmount)
+                .mapToLong(prize -> prize.prizeAmount)
                 .sum();
     }
 }

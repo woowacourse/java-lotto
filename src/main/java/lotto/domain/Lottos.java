@@ -6,6 +6,7 @@ import java.util.List;
 public class Lottos {
     private static final int MIN_QUANTITY = 1;
     private static final int MAX_QUANTITY = 100;
+    private static final int LOTTO_PRICE = 1000;
     private static final String ERROR_INVALID_QUANTITY =
             "로또는 " + MIN_QUANTITY + "장부터 최대 " + MAX_QUANTITY + "장까지 구매 가능합니다.";
 
@@ -35,6 +36,11 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public double calculateEarningRate(List<Prize> prizes) {
+        long prizeTotal = Prize.calculateTotalPrize(prizes);
+        return (double) prizeTotal / (getQuantity() * LOTTO_PRICE);
+    }
+
     public List<Prize> calculatePrizes(WinningLotto winningLotto) {
         return lottos.stream()
                 .map(lotto -> Prize.getPrizePlace(
@@ -42,11 +48,11 @@ public class Lottos {
                 .toList();
     }
 
-    public List<List<Integer>> getPurchasedLottos() {
-        return lottos.stream().map(Lotto::getNumbers).toList();
-    }
-
     public int getQuantity() {
         return lottos.size();
+    }
+
+    public List<List<Integer>> getPurchasedLottos() {
+        return lottos.stream().map(Lotto::getNumbers).toList();
     }
 }
