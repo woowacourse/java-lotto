@@ -13,10 +13,10 @@ public class LottoGenerater {
     }
 
     public Lotto generateLotto() {
-        Set<Number> numbers = new TreeSet<>();
-        while(numbers.size() != LOTTO_NUMBER_COUNT) {
-            numbers.add(lottoNumberPicker.pickRandomNumber());
+        Set<LottoNumber> lottoNumbers = new TreeSet<>();
+        while (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+            lottoNumbers.add(lottoNumberPicker.pickRandomNumber());
         }
-        return new Lotto(numbers);
+        return new Lotto(lottoNumbers);
     }
 }

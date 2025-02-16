@@ -7,21 +7,21 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Lotto {
-    private final Set<Number> lottoNumbers;
+    private final Set<LottoNumber> lottoLottoNumbers;
 
-    public Lotto(Set<Number> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+    public Lotto(Set<LottoNumber> lottoLottoNumbers) {
+        if (lottoLottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
-        this.lottoNumbers = new TreeSet<>(lottoNumbers);
+        this.lottoLottoNumbers = new TreeSet<>(lottoLottoNumbers);
     }
 
-    public boolean containsNumber(Number number) {
-        return lottoNumbers.contains(number);
+    public boolean containsNumber(LottoNumber lottoNumber) {
+        return lottoLottoNumbers.contains(lottoNumber);
     }
 
-    public Set<Number> getLottoNumbers() {
-        return new TreeSet<>(lottoNumbers);
+    public Set<LottoNumber> getLottoNumbers() {
+        return new TreeSet<>(lottoLottoNumbers);
     }
 
     @Override
