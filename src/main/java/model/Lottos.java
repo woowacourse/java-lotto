@@ -24,10 +24,10 @@ public class Lottos {
         }
     }
 
-    public void printLottoNumbers() {
-        for (Lotto l : this.lottos) {
-            System.out.println(l.printLottoNumber());
-        }
+    public List<String> searchLottoNumbers() {
+        List<String> lottoNumbers = new ArrayList<>();
+        this.lottos.forEach(lotto -> lottoNumbers.add(lotto.searchLottoNumber()));
+        return lottoNumbers;
     }
 
     public List<Lotto> getLottos() {
