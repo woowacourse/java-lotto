@@ -21,4 +21,12 @@ class UserLottoTest {
         assertThat(userLotto.calculateMatchCount(lotto)).isEqualTo(5);
     }
 
+    @Test
+    @DisplayName("보너스 번호와 당첨 번호가 중복되면 예외가 발생한다.")
+    void 보너스_번호와_당첨_번호가_중복되면_예외가_발생한다(){
+        BonusNumber bonusNumber = new BonusNumber(1);
+        assertThatThrownBy(() -> new UserLotto(Set.of(1, 2, 3, 4, 5, 6), bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("보너스 번호와 당첨 번호는 중복되어서는 안됩니다.");
+    }
 }
