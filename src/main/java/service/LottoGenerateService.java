@@ -3,8 +3,8 @@ package service;
 import error.ErrorMessage;
 import java.util.List;
 import java.util.stream.IntStream;
-import model.Lotto;
-import model.Lottos;
+import domain.Lotto;
+import domain.Lottos;
 import util.RandomGenerator;
 
 public class LottoGenerateService {

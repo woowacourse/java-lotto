@@ -1,7 +1,7 @@
 package dto;
 
 import java.util.Map;
-import model.PrizeTier;
+import domain.PrizeTier;
 
 public class StatisticsDto {
 

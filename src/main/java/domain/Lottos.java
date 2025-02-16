@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 import dto.LottoDto;
 import dto.LottosDto;

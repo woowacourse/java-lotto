@@ -5,10 +5,10 @@ import static util.InputConverter.convertToList;
 
 import config.Container;
 import java.util.List;
-import model.Lotto;
-import model.Lottos;
-import model.Statistics;
-import model.WinningLotto;
+import domain.Lotto;
+import domain.Lottos;
+import domain.Statistics;
+import domain.WinningLotto;
 import service.LottoGenerateService;
 import service.StatisticsService;
 import view.ViewFacade;

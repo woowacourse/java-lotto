@@ -5,9 +5,9 @@ import static java.util.stream.Collectors.toMap;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
-import model.Lottos;
-import model.PrizeTier;
-import model.Statistics;
+import domain.Lottos;
+import domain.PrizeTier;
+import domain.Statistics;
 
 public class StatisticsService {
 

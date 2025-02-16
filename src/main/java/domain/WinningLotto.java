@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 import static error.ErrorMessage.NUMBER_OUT_OF_RANGE;
 import static error.ErrorMessage.WINNING_AND_BONUS_NUMBER_DUPLICATE;

@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 import static error.ErrorMessage.DUPLICATE_NUMBERS_FOUND;
 import static error.ErrorMessage.INVALID_LOTTO_COUNT;
