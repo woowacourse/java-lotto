@@ -32,8 +32,6 @@ public class LottoService {
         List<Lotto> lottoList = randomService.generateRandomNumbersList(lottoTicketCount, LOTTO_NUM_SIZE,
                         MAX_LOTTO_NUMBER)
                 .stream()
-                .map(this::toLottoNumbers)
-                .map(Lotto::from)
                 .toList();
 
         return LottoGroup.from(lottoList);
@@ -75,9 +73,5 @@ public class LottoService {
 
     public String getProfitRate(Profit profit, Money money) {
         return profit.calculateAverageProfitRate(money);
-    }
-
-    private List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
-        return numbers.stream().map(LottoNumber::new).toList();
     }
 }

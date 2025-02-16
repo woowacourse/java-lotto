@@ -1,8 +1,9 @@
 package lotto.service;
 
 import java.util.List;
+import lotto.domain.Lotto;
 
 public interface RandomService {
 
-    List<List<Integer>> generateRandomNumbersList(int count, int maxSize, int maxNumber);
+    List<Lotto> generateRandomNumbersList(int count, int maxSize, int maxNumber);
 }
