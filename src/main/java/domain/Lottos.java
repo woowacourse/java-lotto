@@ -10,6 +10,9 @@ import java.util.Map;
 
 public class Lottos {
 
+    private static final int DEFAULT_VALUE = 0;
+    private static final int INCREMENT_UNIT = 1;
+    
     private final List<Lotto> lottos;
 
     private Lottos(List<Lotto> lottos) {
@@ -39,7 +42,8 @@ public class Lottos {
         lottos.forEach(lotto ->
                 rankCount.put(
                         winningNumbers.getRank(lotto),
-                        rankCount.getOrDefault(winningNumbers.getRank(lotto), 0) + 1));
+                        rankCount.getOrDefault(winningNumbers.getRank(lotto), DEFAULT_VALUE) + INCREMENT_UNIT));
+
         return rankCount;
     }
 
