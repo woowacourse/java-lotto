@@ -1,37 +1,45 @@
 package controller;
 
-import domain.LottoMachine;
-import domain.LottoTicket;
-import domain.Profit;
+import domain.DrawResult;
+import domain.LottoTickets;
+import domain.Payment;
 import domain.RandomIntegerGenerator;
-import domain.StatisticsService;
+import domain.WinningResult;
 import domain.WinningStatistics;
-import java.util.List;
+import service.IssuingService;
+import service.StatisticsService;
 import view.InputView;
 import view.OutputView;
 
 public class MainController {
+    private final IssuingService issuingService;
     private final StatisticsService statisticsService;
 
-    public MainController(StatisticsService statisticsService) {
+    public MainController(IssuingService issuingService, StatisticsService statisticsService) {
+        this.issuingService = issuingService;
         this.statisticsService = statisticsService;
     }
 
     public void run() {
-        int purchaseAmount = InputView.inputPurchaseAmount();
-        LottoMachine lottoMachine = new LottoMachine();
-        List<LottoTicket> lottoTickets =
-                lottoMachine.generateLottoTickets(purchaseAmount, new RandomIntegerGenerator());
+        LottoTickets lottoTickets = purchaseLottoTickets();
         OutputView.printLottoTickets(lottoTickets);
 
-        LottoTicket winningLottoTicket = new LottoTicket(InputView.inputWinningLottoTicket());
-        int bonusNumber = InputView.inputBonusNumber(winningLottoTicket.getNumbers());
+        DrawResult drawResult = InputView.inputDrawResult();
 
-        WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets,
-                winningLottoTicket,
-                bonusNumber);
-        OutputView.printWinningStatistics(winningStatistics);
-        Profit profit = statisticsService.calculateProfit(winningStatistics);
-        OutputView.printProfit(profit);
+        WinningResult winningResult = calculateWinningResult(lottoTickets,
+                drawResult);
+        OutputView.printWinningResult(winningResult);
+    }
+
+    private LottoTickets purchaseLottoTickets() {
+        Payment payment = InputView.inputPayment();
+        return issuingService.issueLottoTickets(payment, new RandomIntegerGenerator());
+    }
+
+    private WinningResult calculateWinningResult(LottoTickets lottoTickets,
+                                                 DrawResult drawResult) {
+        WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, drawResult);
+        double profit = statisticsService.calculateProfit(winningStatistics);
+        return new WinningResult(winningStatistics, profit);
     }
 }

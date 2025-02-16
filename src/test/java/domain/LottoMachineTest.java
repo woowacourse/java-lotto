@@ -9,17 +9,20 @@ class LottoMachineTest {
     @Test
     void 로또_머신_로또_발행_테스트() {
         // given
-        LottoMachine lottoMachine = new LottoMachine();
+        LottoMachine lottoMachine = new LottoMachine(new FixedIntegerGenerator());
 
         // when
-        LottoTicket lottoTicket = lottoMachine.generateLottoTicket(new FixedIntegerGenerator());
+        LottoTicket LottoTicket = lottoMachine.generateLottoTicket();
 
         // then
-        Assertions.assertThat(lottoTicket.getSize()).isEqualTo(LottoTicket.LOTTO_SIZE);
-        for (int number : lottoTicket.getNumbers()) {
-            Assertions.assertThat(number).isGreaterThanOrEqualTo(LottoTicket.LOTTO_MIN_NUMBER);
-            Assertions.assertThat(number).isLessThanOrEqualTo(LottoTicket.LOTTO_MAX_NUMBER);
+        Assertions.assertThat(LottoTicket.getSize()).isEqualTo(LottoTicket.LOTTO_SIZE);
+        for (LottoNumber number : LottoTicket.getLottoNumbers()) {
+            Assertions.assertThat(number.number()).isGreaterThanOrEqualTo(LottoNumber.LOTTO_MIN_NUMBER);
+            Assertions.assertThat(number.number()).isLessThanOrEqualTo(LottoNumber.LOTTO_MAX_NUMBER);
         }
-        Assertions.assertThat(lottoTicket.getNumbers().stream().distinct()).hasSize(LottoTicket.LOTTO_SIZE);
+        Assertions.assertThat(LottoTicket.getLottoNumbers()
+                        .stream()
+                        .distinct())
+                .hasSize(LottoTicket.LOTTO_SIZE);
     }
 }

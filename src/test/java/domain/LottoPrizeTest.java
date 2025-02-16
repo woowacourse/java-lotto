@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoPrizeTest {
-
     public static Stream<Arguments> getLottoPrizeTestCases() {
         return Stream.of(
                 Arguments.arguments(2, false, LottoPrize.NOTHING),
