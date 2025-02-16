@@ -24,19 +24,13 @@ public class Cashier {
     }
 
     private void validateAmount(int amount) {
-        if (isZeroAmount(amount)) {
+        boolean isZeroAmount = amount == 0;
+        if (isZeroAmount) {
             throw new IllegalArgumentException("로또를 구매하려면 최소 %,d원 이상이어야 합니다.".formatted(LOTTO_PRICE_UNIT));
         }
-        if (isNonDivisibleByUnit(amount)) {
+        boolean isNonDivisibleByUnit = amount % LOTTO_PRICE_UNIT != 0;
+        if (isNonDivisibleByUnit) {
             throw new IllegalArgumentException("로또는 %,d원 단위로 구매할 수 있습니다.".formatted(LOTTO_PRICE_UNIT));
         }
-    }
-
-    private boolean isZeroAmount(int amount) {
-        return amount == 0;
-    }
-
-    private boolean isNonDivisibleByUnit(int amount) {
-        return amount % LOTTO_PRICE_UNIT != 0;
     }
 }

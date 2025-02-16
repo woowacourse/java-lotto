@@ -19,11 +19,13 @@ public class WinningLotto {
 
     private void validate(Lotto winningLotto, int bonusNumber) {
         Objects.requireNonNull(winningLotto, "당첨 번호는 null이 될 수 없습니다.");
-        if (bonusNumber < LOTTO_NUMBER_MIN || bonusNumber > LOTTO_NUMBER_MAX) {
+        boolean isOutOfRange = bonusNumber < LOTTO_NUMBER_MIN || bonusNumber > LOTTO_NUMBER_MAX;
+        if (isOutOfRange) {
             throw new IllegalArgumentException(
                     "보너스 번호는 %d부터 %d 사이의 수여야 합니다.".formatted(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX));
         }
-        if (winningLotto.contains(bonusNumber)) {
+        boolean isBonusNumberDuplicated = winningLotto.contains(bonusNumber);
+        if (isBonusNumberDuplicated) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
         }
     }

@@ -31,7 +31,8 @@ public class Lotto {
     }
 
     private void validateNumberInRange(int number) {
-        if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
+        boolean isOutOfRange = number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX;
+        if (isOutOfRange) {
             throw new IllegalArgumentException(
                     "로또 번호는 %d부터 %d 사이의 수여야 합니다.".formatted(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX));
         }
