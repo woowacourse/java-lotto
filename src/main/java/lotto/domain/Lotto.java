@@ -1,48 +1,42 @@
 package lotto.domain;
 
-import static lotto.common.Constants.LOTTO_NUM_SIZE;
-
-import java.util.HashSet;
-import java.util.List;
+import java.util.Objects;
 import java.util.StringJoiner;
 
 public class Lotto {
-    private final List<LottoNumber> lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
-    public Lotto(final List<LottoNumber> lottoNumbers) {
-        validateLottoNumbers(lottoNumbers);
+    public Lotto(final LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-    }
-
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
-    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
-        if (!lottoNumbers.equals(sorted(lottoNumbers))) {
-            sorted(lottoNumbers);
-        }
-
-        if (new HashSet<>(lottoNumbers).size() != LOTTO_NUM_SIZE) {
-            throw new IllegalStateException("중복은 불가능합니다.");
-        }
-    }
-
-    private List<LottoNumber> sorted(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
-                .sorted()
-                .toList();
     }
 
     public boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(lottoNumbers);
+    }
+
     @Override
     public String toString() {
         StringJoiner joiner = new StringJoiner(", ", "[", "]");
 
-        for (LottoNumber lottoNumber : lottoNumbers) {
+        for (LottoNumber lottoNumber : lottoNumbers.getLottoNumbers()) {
             joiner.add(lottoNumber.toString());
         }
         return joiner.toString();
