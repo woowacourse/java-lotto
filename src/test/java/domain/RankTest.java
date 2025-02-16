@@ -24,4 +24,20 @@ class RankTest {
                 Arguments.of(3, false, Rank.FIFTH)
         );
     }
+
+    @ParameterizedTest
+    @MethodSource("testCalculatePrize")
+    void 상품_금액_계산_테스트(Rank rank, int count, long expectedTotalPrize) {
+        assertThat(Rank.calculateTotalPrize(rank, count)).isEqualTo(expectedTotalPrize);
+    }
+
+    private static Stream<Arguments> testCalculatePrize() {
+        return Stream.of(
+                Arguments.of(Rank.FIFTH, 2, 5000 * 2),
+                Arguments.of(Rank.FOURTH, 1, 50000),
+                Arguments.of(Rank.THIRD, 0, 0),
+                Arguments.of(Rank.SECOND, 2, 60000000),
+                Arguments.of(Rank.FIRST, 1, 2000000000)
+        );
+    }
 }
