@@ -37,6 +37,10 @@ public class LottoStore {
         return purchaseAmount / LOTTO_PRICE;
     }
 
+    public int calculatePurchaseAmount(int lottoTicketCount) {
+        return lottoTicketCount * LOTTO_PRICE;
+    }
+
     public List<LottoTicketResponse> createLottoTickets(int purchaseCount) {
         return IntStream.range(0, purchaseCount)
                 .mapToObj(count -> new LottoTicket(numbersGenerator.generate()))
@@ -71,12 +75,9 @@ public class LottoStore {
         LottoRankResult lottoRankResult = lottoDtoMapper.toLottoRankResult(lottoRankResultsResponse);
 
         int profit = lottoRankResult.getKeys().stream()
-                .mapToInt(rank -> rank.getWinningAmount() * lottoRankResult.getValue(rank)).sum();
+                .mapToInt(rank -> rank.getWinningAmount() * lottoRankResult.getValue(rank))
+                .sum();
         return (double) profit / purchasedAmount;
-    }
-
-    public int calculatePurchaseAmount(int lottoTicketCount) {
-        return lottoTicketCount * LOTTO_PRICE;
     }
 
     private void validateAmountUnit(int purchaseAmount) {
