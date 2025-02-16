@@ -1,6 +1,5 @@
 package controller.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 import model.LottoRankResult;
 import model.LottoTicket;
@@ -8,23 +7,25 @@ import model.WinningLotto;
 
 public class LottoDtoMapper {
 
-    public List<LottoTicketResponse> toLottoTicketResponse(List<LottoTicket> lottoTickets) {
-        return lottoTickets.stream()
-                .map(ticket -> LottoTicketResponse.from(ticket.getNumbers()))
+    public LottoTicketResponse toLottoTicketResponse(LottoTicket lottoTicket) {
+        return LottoTicketResponse.from(lottoTicket.getNumbers());
+    }
+
+    public WinningLotto toWinningLotto(WinningLottoRequest request) {
+        return new WinningLotto(request.numbers(), request.bonusNumber());
+    }
+
+    public LottoRankResultResponse toLottoRankResultResponse(LottoRankResult lottoRankResult) {
+        return new LottoRankResultResponse(lottoRankResult.getRankCount());
+    }
+
+    public List<LottoTicket> toLottoTickets(List<LottoTicketResponse> responses) {
+        return responses.stream()
+                .map(response -> new LottoTicket(response.numbers()))
                 .toList();
     }
 
-    public WinningLotto toWinningLotto(WinningLottoRequest winningLottoRequest) {
-        return new WinningLotto(winningLottoRequest.numbers(), winningLottoRequest.bonusNumber());
+    public LottoRankResult toLottoRankResult(LottoRankResultResponse response) {
+        return new LottoRankResult(response.rankCount());
     }
-
-    public List<LottoRankResponse> toLottoRankResponses(LottoRankResult lottoRankResult) {
-        return new ArrayList<>(lottoRankResult.getKeys().stream()
-                .map(rank -> {
-                    int rankMatchCount = lottoRankResult.getValue(rank);
-                    return LottoRankResponse.of(rank, rankMatchCount);
-                })
-                .toList());
-    }
-
 }
