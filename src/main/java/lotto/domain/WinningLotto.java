@@ -5,7 +5,7 @@ import lotto.util.Parser;
 
 public class WinningLotto {
 
-    private static final String RANGE_ERROR = "1과 45 사이의 수를 입력하셔야 합니다.";
+    private static final String LOTTO_NUMBER_RANGE_ERROR = "1과 45 사이의 수를 입력하셔야 합니다.";
     private static final String BONUS_NUMBER_FORMAT_ERROR = "보너스 숫자는 숫자여야 합니다.";
     private static final String BONUS_NUMBER_DUPLICATED_ERROR = "보너스 숫자는 당첨 번호와 중복될 수 없습니다.";
 
@@ -26,7 +26,7 @@ public class WinningLotto {
 
     private void checkRange(int number) {
         if (number < LottoConstants.LOTTO_MINIMUM_NUMBER.getNumber() || number > LottoConstants.LOTTO_MAXIMUM_NUMBER.getNumber()) {
-            throw new IllegalArgumentException(RANGE_ERROR);
+            throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR);
         }
     }
 
