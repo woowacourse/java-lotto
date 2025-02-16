@@ -62,12 +62,9 @@ public record Lotto(List<Integer> numbers) {
     }
 
     public MatchCount matchCount(Lotto matchLotto, int bonus) {
-        int count = 0;
-        for (int i : matchLotto.numbers()) {
-            if (isContainsBonus(i)) {
-                count++;
-            }
-        }
+        int count = (int)matchLotto.numbers().stream()
+            .filter(this::isContainsBonus)
+            .count();
         return new MatchCount(count, isContainsBonus(bonus));
     }
 
