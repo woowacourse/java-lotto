@@ -3,37 +3,28 @@ package model;
 
 import exception.LottoPurchaseExceptionType;
 
-public class LottoPurchase {
-
-    public static final int MIN_AMOUNT = 1_000;
-
-    private final int amount;
+public record LottoPurchase(int amount) {
 
     public static LottoPurchase of(final int input) {
         return new LottoPurchase(input);
     }
 
-    public LottoPurchase(int amount) {
+    public LottoPurchase {
         validateMinAmount(amount);
         validateAmountUnit(amount);
-        this.amount = amount;
     }
 
     private void validateMinAmount(int amount) {
-        if (amount < MIN_AMOUNT) {
+        if (amount < LottoConstant.TICKET_PRICE_UNIT) {
             throw new IllegalArgumentException(
-                    LottoPurchaseExceptionType.INVALID_LOTTO_MIN_PURCHASE.getMessage(MIN_AMOUNT));
+                    LottoPurchaseExceptionType.INVALID_LOTTO_MIN_PURCHASE.getMessage(LottoConstant.TICKET_PRICE_UNIT));
         }
     }
 
     private void validateAmountUnit(int amount) {
-        if (amount % MIN_AMOUNT != 0) {
+        if (amount % LottoConstant.TICKET_PRICE_UNIT != 0) {
             throw new IllegalArgumentException(
-                    LottoPurchaseExceptionType.INVALID_LOTTO_PURCHASE_UNIT.getMessage(MIN_AMOUNT));
+                    LottoPurchaseExceptionType.INVALID_LOTTO_PURCHASE_UNIT.getMessage(LottoConstant.TICKET_PRICE_UNIT));
         }
-    }
-
-    public int getAmount() {
-        return amount;
     }
 }

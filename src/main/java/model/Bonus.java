@@ -4,9 +4,6 @@ import exception.BonusExceptionType;
 
 public class Bonus {
 
-    private static final int BONUS_MIN_RANGE = 1;
-    private static final int BONUS_MAX_RANGE = 45;
-
     private final int number;
 
     public static Bonus of(final int number, final Lotto lotto) {
@@ -20,14 +17,15 @@ public class Bonus {
     }
 
     private void validateRange(final int number) {
-        if (BONUS_MIN_RANGE > number || number > BONUS_MAX_RANGE) {
+        if (LottoConstant.MIN_NUMBER > number || number > LottoConstant.MAX_NUMBER) {
             throw new IllegalArgumentException(
-                    BonusExceptionType.INVALID_BONUS_RANGE.getMessage(BONUS_MIN_RANGE, BONUS_MAX_RANGE));
+                    BonusExceptionType.INVALID_BONUS_RANGE.getMessage(LottoConstant.MIN_NUMBER,
+                            LottoConstant.MAX_NUMBER));
         }
     }
 
     private void validateDuplicateWithLotto(final int number, final Lotto lotto) {
-        if (lotto.getNumbers().contains(number)) {
+        if (lotto.numbers().contains(number)) {
             throw new IllegalArgumentException(BonusExceptionType.BONUS_DUPLICATE.getMessage());
         }
     }

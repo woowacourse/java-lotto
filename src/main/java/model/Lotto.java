@@ -1,40 +1,35 @@
 package model;
 
+import exception.CommonExceptionType;
 import exception.LottoExceptionType;
 import java.util.HashSet;
 import java.util.List;
 
-public class Lotto {
-
-    public static final int LOTTO_SIZE = 6;
-    public static final int LOTTO_MIN_RANGE = 1;
-    public static final int LOTTO_MAX_RANGE = 45;
-
-    private final List<Integer> numbers;
+public record Lotto(List<Integer> numbers) {
 
     public static Lotto of(final List<Integer> inputs) {
         validateArgumentsSize(inputs);
         return new Lotto(inputs);
     }
 
-    public Lotto(final List<Integer> numbers) {
+    public Lotto {
         validateRange(numbers);
         validateDuplicate(numbers);
-        this.numbers = numbers;
     }
 
     private static void validateArgumentsSize(final List<Integer> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(LottoExceptionType.INVALID_LOTTO_SIZE.getMessage(LOTTO_SIZE));
+        if (numbers.size() != LottoConstant.SIZE) {
+            throw new IllegalArgumentException(CommonExceptionType.INVALID_ARGUMENTS_SIZE.getMessage(LottoConstant.SIZE));
         }
     }
 
     private void validateRange(final List<Integer> inputs) {
         inputs.stream()
-                .filter(input -> LOTTO_MIN_RANGE > input || input > LOTTO_MAX_RANGE)
+                .filter(input -> LottoConstant.MIN_NUMBER > input || input > LottoConstant.MAX_NUMBER)
                 .forEach(input -> {
                     throw new IllegalArgumentException(
-                            LottoExceptionType.INVALID_LOTTO_RANGE.getMessage(LOTTO_MIN_RANGE, LOTTO_MAX_RANGE));
+                            LottoExceptionType.INVALID_LOTTO_RANGE.getMessage(LottoConstant.MIN_NUMBER,
+                                    LottoConstant.MAX_NUMBER));
                 });
     }
 
@@ -43,9 +38,5 @@ public class Lotto {
         if (inputs.size() != set.size()) {
             throw new IllegalArgumentException(LottoExceptionType.LOTTO_DUPLICATE.getMessage());
         }
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
     }
 }

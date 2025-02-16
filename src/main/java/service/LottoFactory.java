@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import model.Bonus;
 import model.Lotto;
+import model.LottoConstant;
 import model.Prize;
 
 public class LottoFactory {
 
-    public static final int LOTTO_PURCHASE_UNIT = 1_000;
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_MAX_RANGE = 45;
 
@@ -25,7 +25,7 @@ public class LottoFactory {
     private final Random random;
 
     public static LottoFactory of(final int purchase) {
-        return new LottoFactory(purchase / LOTTO_PURCHASE_UNIT);
+        return new LottoFactory(purchase / LottoConstant.TICKET_PRICE_UNIT);
     }
 
     private LottoFactory(final int ticketNumber) {
@@ -48,7 +48,7 @@ public class LottoFactory {
         EnumMap<Prize, Integer> prizeMap = initializeMap();
         for (Lotto issuedTicket : issuedTickets) {
             int matchCount = checkLottoNumber(lotto, issuedTicket);
-            boolean matchesBonus = checkBonus(bonus.getNumber(), issuedTicket.getNumbers());
+            boolean matchesBonus = checkBonus(bonus.getNumber(), issuedTicket.numbers());
             Prize foundPrize = Prize.find(matchCount, matchesBonus);
             prizeMap.put(foundPrize, prizeMap.get(foundPrize) + 1);
         }
@@ -57,8 +57,8 @@ public class LottoFactory {
     }
 
     private int checkLottoNumber(Lotto lotto, Lotto issuedTicket) {
-        return (int) issuedTicket.getNumbers().stream()
-                .filter(issuedNumber -> lotto.getNumbers().contains(issuedNumber))
+        return (int) issuedTicket.numbers().stream()
+                .filter(issuedNumber -> lotto.numbers().contains(issuedNumber))
                 .count();
     }
 

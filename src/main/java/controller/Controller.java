@@ -14,7 +14,7 @@ public class Controller {
 
     public void run() {
         LottoPurchase lottoPurchase = InputView.getPurchaseLotto();
-        LottoFactory lottoFactory = LottoFactory.of(lottoPurchase.getAmount());
+        LottoFactory lottoFactory = LottoFactory.of(lottoPurchase.amount());
 
         OutputView.printLottoCount(lottoFactory);
         OutputView.printLottoTickets(lottoFactory);
