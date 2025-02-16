@@ -11,12 +11,16 @@ public class WinningLotto {
     private int bonusNumber;
 
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
-        validateSize(winningNumbers);
-        validateNumberRange(winningNumbers, bonusNumber);
-        validateDuplicate(winningNumbers, bonusNumber);
+        validateWinningLotto(winningNumbers, bonusNumber);
 
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validateWinningLotto(List<Integer> winningNumbers, int bonusNumber) {
+        validateSize(winningNumbers);
+        validateNumberRange(winningNumbers, bonusNumber);
+        validateDuplicate(winningNumbers, bonusNumber);
     }
 
     private void validateSize(List<Integer> winningNumbers) {
