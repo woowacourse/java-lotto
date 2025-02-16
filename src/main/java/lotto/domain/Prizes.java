@@ -32,14 +32,7 @@ public class Prizes {
         }
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Rank rank : Rank.getValidRanks()) {
-            sb.append(rank.getMessage())
-                    .append(results.get(rank))
-                    .append(System.lineSeparator());
-        }
-        return sb.toString();
+    public Map<Rank, Integer> getResults() {
+        return new LinkedHashMap<>(results);
     }
 }

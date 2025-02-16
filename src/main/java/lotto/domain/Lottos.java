@@ -19,12 +19,7 @@ public class Lottos {
         return new Prizes(result);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            stringBuilder.append(lotto.toString());
-        }
-        return stringBuilder.toString();
+    public List<Lotto> getLottos() {
+        return new ArrayList<>(lottos);
     }
 }

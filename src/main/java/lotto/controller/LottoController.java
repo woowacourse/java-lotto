@@ -2,11 +2,13 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Prizes;
 import lotto.domain.RandomLottoGenerator;
+import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -22,22 +24,23 @@ public class LottoController {
     }
 
     public void run() {
-        Money money = operateMoney();
+        Money money = new Money(inputView.inputMoney());
         Lottos lottos = purchaseLotto(money);
         WinningLotto winningLotto = operateWinningLotto();
         operateStatistics(money, lottos, winningLotto);
         inputView.closeScanner();
     }
 
-    private Money operateMoney() {
-        return new Money(inputView.inputMoney());
-    }
-
     private Lottos purchaseLotto(Money money) {
         int lottoCounts = money.countsLotto();
         outputView.printCount(lottoCounts);
         Lottos lottos = publishLottos(lottoCounts);
-        outputView.printLottos(lottos);
+
+        List<Lotto> purchasedLottos = lottos.getLottos();
+        for (Lotto purchasedLotto : purchasedLottos) {
+            outputView.printLotto(purchasedLotto.getLottoNumber());
+        }
+
         return lottos;
     }
 
@@ -57,9 +60,20 @@ public class LottoController {
 
     private void operateStatistics(Money money, Lottos lottos, WinningLotto winningLotto) {
         Prizes prizes = lottos.calculatePrize(winningLotto);
+        Map<Rank, Integer> results = prizes.getResults();
         double totalProfit = prizes.calculateProfit(money);
 
-        outputView.printResult(prizes.toString().trim());
+        outputView.printResultHeader();
+        for (Rank rank : results.keySet()) {
+            printValidResult(rank, results);
+        }
         outputView.printProfitRate(totalProfit);
+    }
+
+    private void printValidResult(Rank rank, Map<Rank, Integer> results) {
+        if (rank == Rank.NONE) {
+            return;
+        }
+        outputView.printResult(rank.getMatchCounts(), rank.getMoney(), rank.isMatchBonus(), results.get(rank));
     }
 }

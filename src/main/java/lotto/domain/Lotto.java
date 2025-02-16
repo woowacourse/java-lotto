@@ -80,6 +80,10 @@ public class Lotto {
         }
     }
 
+    public List<Integer> getLottoNumber() {
+        return new ArrayList<>(lottoNumber);
+    }
+
     @Override
     public String toString() {
         return lottoNumber.toString() + System.lineSeparator();
