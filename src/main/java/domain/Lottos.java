@@ -12,6 +12,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public static Lottos of(List<Lotto> lottos) {
+        return new Lottos(lottos);
+    }
+
     public static Lottos ofSize(final int quantity) {
         validateQuantity(quantity);
         List<Lotto> lottos = new ArrayList<>(quantity);
@@ -26,10 +30,6 @@ public class Lottos {
         if (quantity <= 0 || quantity > MAX_QUANTITY) {
             throw new IllegalArgumentException("로또는 1장부터 최대 " + MAX_QUANTITY + "장까지 구매 가능합니다.");
         }
-    }
-
-    public static Lottos of(List<Lotto> lottos) {
-        return new Lottos(lottos);
     }
 
     public List<String> getPurchasedLottos() {

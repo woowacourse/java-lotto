@@ -25,7 +25,7 @@ public class WinningLotto {
     public List<Prize> calculatePrizes(Lottos lottos) {
         List<Lotto> purchasedLottos = lottos.getLottos();
         return purchasedLottos.stream()
-                .map(lotto -> Prize.getPrizePlace(countMatchedNumbers(lotto), isBounusMatched(lotto)))
+                .map(lotto -> Prize.getPrizePlace(countMatchedNumbers(lotto), isBonusMatched(lotto)))
                 .toList();
     }
 
@@ -33,7 +33,7 @@ public class WinningLotto {
         return winningLotto.match(lotto);
     }
 
-    private boolean isBounusMatched(Lotto lotto) {
+    private boolean isBonusMatched(Lotto lotto) {
         return lotto.contains(bonusNumber);
     }
 }
