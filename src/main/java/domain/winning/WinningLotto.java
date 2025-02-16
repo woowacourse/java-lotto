@@ -23,9 +23,7 @@ public class WinningLotto {
     }
 
     public List<Integer> getWinningNumbers() {
-        return lotto.getBalls().stream()
-                .map(Ball::getNumber)
-                .toList();
+        return lotto.getBallNumbers();
     }
 
     public Integer getBonusNumber() {

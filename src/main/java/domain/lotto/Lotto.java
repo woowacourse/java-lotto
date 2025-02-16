@@ -29,14 +29,6 @@ public class Lotto {
         }
     }
 
-    public String getBallsString() {
-        return balls.toString();
-    }
-
-    public List<Ball> getBalls() {
-        return balls;
-    }
-
     public List<Integer> getBallNumbers() {
         return balls.stream()
                 .map(Ball::getNumber)

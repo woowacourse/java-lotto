@@ -42,10 +42,10 @@ public class LottoController {
     }
 
     private Lottos issueLottos(PurchaseAmount purchaseAmount) {
-        Lottos lottos = Lottos.create(purchaseAmount.getMoney());
+        int lottoQuantity = purchaseAmount.getLottoQuantity();
+        outputView.printLottoQuantity(lottoQuantity);
 
-        int quantity = lottos.getQuantity();
-        outputView.printLottoQuantity(quantity);
+        Lottos lottos = Lottos.create(purchaseAmount.getMoney());
 
         lottos.getLottos()
                 .forEach(lotto -> outputView.printLotto(lotto.getBallNumbers()));

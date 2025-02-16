@@ -53,16 +53,6 @@ public class Lottos {
         }
     }
 
-    public int getQuantity() {
-        return lottos.size();
-    }
-
-    public List<String> getLottoNumbers() {
-        return lottos.stream()
-                .map(Lotto::getBallsString)
-                .toList();
-    }
-
     public List<Lotto> getLottos() {
         return lottos;
     }
