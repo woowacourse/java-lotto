@@ -46,19 +46,6 @@ public class LottoController {
         OutputView.printLottoGroup(LottoGroupDto.from(lottoGroup));
     }
 
-    private Profit calculateProfit(WinnerLotto winnerLotto) {
-        Profit profit = new Profit();
-
-        for (Lotto lotto : lottoGroup.getLottoGroup()) {
-            long matchCount = winnerLotto.getMatchCount(lotto);
-            boolean hasBonus = winnerLotto.hasBonus(lotto);
-            Rank rank = Rank.find((int) matchCount, hasBonus);
-            profit.incrementCount(rank);
-        }
-
-        return profit;
-    }
-
     private WinnerLotto getWinnerLotto() {
         return RecoveryUtils.executeWithRetry(InputView::readWinnerNumbers, this::readWinnerNumber);
     }
@@ -71,8 +58,7 @@ public class LottoController {
         return readBonusNumber(winnerNumbers);
     }
 
-
-    public List<LottoNumber> parseLottoNumbers(String input) {
+    private List<LottoNumber> parseLottoNumbers(String input) {
         return Arrays.stream(input.split(", "))
                 .map(LottoNumber::new)
                 .toList();
@@ -88,5 +74,18 @@ public class LottoController {
             OutputView.printError(e);
             return readBonusNumber(winnerNumbers);
         }
+    }
+
+    private Profit calculateProfit(WinnerLotto winnerLotto) {
+        Profit profit = new Profit();
+
+        for (Lotto lotto : lottoGroup.getLottoGroup()) {
+            long matchCount = winnerLotto.getMatchCount(lotto);
+            boolean hasBonus = winnerLotto.hasBonus(lotto);
+            Rank rank = Rank.find((int) matchCount, hasBonus);
+            profit.incrementCount(rank);
+        }
+
+        return profit;
     }
 }
