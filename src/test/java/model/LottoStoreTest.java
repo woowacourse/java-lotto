@@ -1,7 +1,8 @@
+package model;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import model.LottoStore;
 import model.numbers.LottoNumber;
 import model.numbers.LottoNumberGenerator;
 import model.numbers.LottoNumbers;
