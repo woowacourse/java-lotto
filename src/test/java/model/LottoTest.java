@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static util.LottoUtil.generateTestLotto;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
 
@@ -34,5 +36,13 @@ class LottoTest {
         LottoEvaluator lottoEvaluator = new LottoEvaluator(winningLotto);
         Prize prize = lottoEvaluator.calculatePrize(lotto).get();
         assertThat(prize).isEqualTo(Prize._2ND);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    void 로또가_특정_숫자를_포함하는지_확인한다(int number) {
+        Lotto lotto = generateTestLotto(1, 2, 3, 4, 5, 6);
+
+        assertThat(lotto.containsNumber(new LottoNumber(number))).isEqualTo(true);
     }
 }
