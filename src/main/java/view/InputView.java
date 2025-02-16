@@ -1,6 +1,6 @@
 package view;
 
-import java.util.List;
+import domain.Lotto;
 import java.util.Scanner;
 
 public class InputView {
@@ -19,17 +19,17 @@ public class InputView {
         return InputConverter.convertPurchaseAmount(purchaseAmount);
     }
 
-    public List<Integer> askWinningNumbers() {
+    public Lotto askWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningNumbers = sc.nextLine();
 
-        return InputConverter.convertWinningNumbers(winningNumbers);
+        return InputConverter.convertToWinningLotto(winningNumbers);
     }
 
     public int askBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusNumber = sc.nextLine();
 
-        return InputConverter.convertBonusNumber(bonusNumber);
+        return InputConverter.convertToBonusNumber(bonusNumber);
     }
 }

@@ -1,9 +1,11 @@
 package view;
 
-import static domain.lotto.Lotto.LOTTO_PRICE;
-import static domain.lotto.Lotto.MAX_LOTTO_NUMBER;
-import static domain.lotto.Lotto.MIN_LOTTO_NUMBER;
+import static domain.Lotto.LOTTO_PRICE;
+import static domain.Lotto.MAX_LOTTO_NUMBER;
+import static domain.Lotto.MIN_LOTTO_NUMBER;
 
+import domain.Lotto;
+import domain.LottoNumber;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -16,24 +18,25 @@ public class InputConverter {
     private static final String NUMBER_REGEX = "[0-9]+";
     private static final String WINNING_NUMBER_DELIMITER = ",";
 
-    public static List<Integer> convertWinningNumbers(String input) {
+    public static Lotto convertToWinningLotto(String input) {
         Matcher matcher = Pattern.compile(WINNING_NUMBER_REGEX).matcher(input);
 
         if (!matcher.matches()) {
             throw new IllegalArgumentException("당첨 번호 입력 양식이 올바르지 않습니다.");
         }
 
-        List<Integer> winningNumbers = Arrays.stream(input.split(WINNING_NUMBER_DELIMITER))
+        List<LottoNumber> winningLottoNumbers = Arrays.stream(input.split(WINNING_NUMBER_DELIMITER))
                 .map(Integer::parseInt)
                 .peek(InputConverter::validateNumberRange)
+                .map(LottoNumber::of)
                 .toList();
 
-        validateUniqueNumber(winningNumbers);
+        validateUniqueNumber(winningLottoNumbers);
 
-        return winningNumbers;
+        return Lotto.issueByNumbers(winningLottoNumbers);
     }
 
-    public static int convertBonusNumber(String input) {
+    public static int convertToBonusNumber(String input) {
         Matcher matcher = Pattern.compile(NUMBER_REGEX).matcher(input);
 
         if (!matcher.matches()) {
@@ -78,7 +81,7 @@ public class InputConverter {
         }
     }
 
-    private static void validateUniqueNumber(List<Integer> values) {
+    private static void validateUniqueNumber(List<LottoNumber> values) {
         values.forEach(value -> {
             if (Collections.frequency(values, value) > 1) {
                 throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
