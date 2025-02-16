@@ -1,20 +1,18 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class LottoMachine {
     private LottoMachine() {}
 
     public static List<Lotto> issueLottos(final int lottoAmount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoAmount; i++) {
-            Lotto lotto = new Lotto(NumbersGenerator.generateLottoNumbers());
-            lottos.add(lotto);
-        }
-        return lottos;
+        return Stream.generate(NumbersGenerator::generateLottoNumbers)
+                .map(Lotto::new)
+                .limit(lottoAmount)
+                .toList();
     }
 
     public static WinningStatistics calculateStatistics(final List<Lotto> lottos, final WinningNumbers winningNumbers,
