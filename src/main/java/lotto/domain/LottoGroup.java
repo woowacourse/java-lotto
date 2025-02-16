@@ -8,15 +8,18 @@ public class LottoGroup {
     private final List<Lotto> lottoGroup = new ArrayList<>();
 
     public void processLottoTicketGeneration(Money money, LottoGenerator lottoGenerator) {
-        // TODO 통합 테스트 불가능
+        final List<Integer> lottoNumbers = lottoGenerator.generateRandomNumbers();
+
         IntStream.range(0, money.getLottoTicketCount())
-                .forEach(index -> lottoGroup.add(
-                        new Lotto(
-                                new LottoNumbers(
-                                        lottoGenerator.generateRandomNumbers()
-                                                .stream()
-                                                .map(LottoNumber::new)
-                                                .toList()))));
+                .forEach(index -> lottoGroup.add(generateLotto(lottoNumbers)));
+    }
+
+    public Lotto generateLotto(List<Integer> lottoNumbers) {
+        return new Lotto(generateLottoNumbers(lottoNumbers));
+    }
+
+    public LottoNumbers generateLottoNumbers(List<Integer> lottoNumbers) {
+        return new LottoNumbers(lottoNumbers.stream().map(LottoNumber::new).toList());
     }
 
     public List<Lotto> getLottoGroup() {
