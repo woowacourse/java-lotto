@@ -2,7 +2,6 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,7 @@ class WinningStatisticsTest {
         Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
         BonusNumber bonusNumber = new BonusNumber(6);
         // 5개 + 보너스 볼 -> 2등
-        UserLotto userLotto = new UserLotto(List.of(1, 2, 3, 4, 5, 45), bonusNumber);
+        UserLotto userLotto = new UserLotto(Set.of(1, 2, 3, 4, 5, 45), bonusNumber);
         Wallet wallet = new Wallet(10000);
 
         LottoRepository lottoRepository = new LottoRepository();

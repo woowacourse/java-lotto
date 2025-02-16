@@ -1,8 +1,8 @@
 package view;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class InputView {
     private static final String INPUT_MONEY_PROMPT = "구입금액을 입력해 주세요.";
@@ -36,7 +36,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static List<Integer> inputWinningNumbers() {
+    public static Set<Integer> inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBER_PROMPT);
         try {
             String input = read();
@@ -60,8 +60,8 @@ public class InputView {
         }
     }
 
-    private static List<Integer> splitWinningNumbers(String input) {
-        List<Integer> winningNumbers = new ArrayList<>();
+    private static Set<Integer> splitWinningNumbers(String input) {
+        Set<Integer> winningNumbers = new HashSet<>();
 
         for (String value : input.split(COMMA_REGEX)) {
             winningNumbers.add(Integer.parseInt(value));
