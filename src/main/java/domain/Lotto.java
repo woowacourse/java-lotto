@@ -47,7 +47,11 @@ public class Lotto {
     }
 
     private void validateLottoDuplicate() {
-        if (numbers.stream().distinct().count() != LOTTO_LENGTH) {
+        int count = (int) numbers.stream()
+                .distinct()
+                .count();
+
+        if (count != LOTTO_LENGTH) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
         }
     }
