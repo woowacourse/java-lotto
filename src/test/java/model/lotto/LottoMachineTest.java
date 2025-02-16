@@ -1,10 +1,7 @@
-package model;
+package model.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import model.lotto.Lotto;
-import model.lotto.LottoMachine;
-import model.lotto.RandomNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

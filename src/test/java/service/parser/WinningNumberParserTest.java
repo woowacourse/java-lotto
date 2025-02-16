@@ -1,10 +1,9 @@
-package parser;
+package service.parser;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import service.parser.WinningNumberParser;
 
 public class WinningNumberParserTest {
     @DisplayName("당첨번호_중복예외_테스트")

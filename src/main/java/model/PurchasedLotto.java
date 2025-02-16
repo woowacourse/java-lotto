@@ -3,14 +3,14 @@ package model;
 import java.util.List;
 import model.lotto.Lotto;
 
-public class OwnedLotto {
+public class PurchasedLotto {
     private final List<Lotto> lottos;
 
-    public OwnedLotto(List<Lotto> lottos) {
+    public PurchasedLotto(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public Lotto getLottoByIndex(int index) {
+    public Lotto findLottoByCreationOrder(int index) {
         if (index < 0 || index >= lottos.size()) {
             throw new IndexOutOfBoundsException(index);
         }

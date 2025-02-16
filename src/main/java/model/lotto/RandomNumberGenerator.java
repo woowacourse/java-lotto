@@ -7,13 +7,12 @@ import static common.constant.NumberConstants.WINNING_NUMBER_COUNT;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomNumberGenerator {
     private static final List<Integer> numbers = IntStream.rangeClosed(LOTTO_NUMBER_START, LOTTO_NUMBER_END)
             .boxed()
-            .collect(Collectors.toList());
+            .toList();
 
     public List<Integer> generateLottoNumbers() {
         List<Integer> shuffledNumbers = new ArrayList<>(numbers);

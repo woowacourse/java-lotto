@@ -1,14 +1,18 @@
 package controller;
 
+import static common.constant.NumberConstants.LOTTO_PRICE;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 import model.LottoWinningNumbers;
-import model.OwnedLotto;
+import model.PurchasedLotto;
 import model.lotto.Lotto;
 import model.lotto.LottoMachine;
 import model.result.PrizeResult;
-import model.result.discriminator;
+import model.result.WinningDiscriminator;
 import service.parser.BonusNumberParser;
 import service.parser.BudgetParser;
 import service.parser.WinningNumberParser;
@@ -27,32 +31,34 @@ public class Controller {
     }
 
     public void start() {
-        int lottoCount = inputResponseForBudget();
+        int budget = inputResponseForBudget().orElse(0);
+        int lottoCount = budget / LOTTO_PRICE;
 
-        OwnedLotto ownedLotto = buyLotto(lottoCount);
-        outputView.displayLottoNumbers(ownedLotto);
+        PurchasedLotto purchasedLotto = buyLotto(lottoCount);
+        outputView.displayLottoNumbers(purchasedLotto);
 
-        List<Integer> winningNumbers = inputResponseForWinningNumber();
+        List<Integer> winningNumbers = inputResponseForWinningNumber().orElse(Collections.emptyList());
         int bonusNumber = inputResponseForBonusNumber(winningNumbers);
 
-        PrizeResult prizeResult = discriminator.judge(ownedLotto, new LottoWinningNumbers(winningNumbers, bonusNumber));
+        PrizeResult prizeResult = WinningDiscriminator.judge(purchasedLotto,
+                new LottoWinningNumbers(winningNumbers, bonusNumber));
         outputView.displayPrizeSummary(prizeResult);
     }
 
-    private OwnedLotto buyLotto(int count) {
+    private PurchasedLotto buyLotto(int count) {
         ArrayList<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(lottoMachine.generateLotto());
         }
 
-        return new OwnedLotto(lottos);
+        return new PurchasedLotto(lottos);
     }
 
-    private int inputResponseForBudget() {
-        return inputResponse(() -> BudgetParser.parseLottoCount(inputView.askForBudget()));
+    private Optional<Integer> inputResponseForBudget() {
+        return inputResponse(() -> BudgetParser.parseBudget(inputView.askForBudget()));
     }
 
-    private List<Integer> inputResponseForWinningNumber() {
+    private Optional<List<Integer>> inputResponseForWinningNumber() {
         return inputResponse(() -> WinningNumberParser.parseWinningNumbers(inputView.askForWinningNumber()));
     }
 
@@ -66,13 +72,13 @@ public class Controller {
         }
     }
 
-    private <T> T inputResponse(Supplier<T> parser) {
+    private <T> Optional<T> inputResponse(Supplier<T> parser) {
         try {
-            return parser.get();
+            return Optional.ofNullable(parser.get());
         } catch (IllegalArgumentException e) {
             outputView.displayErrorMessage(e.getMessage());
             System.exit(1);
-            return null;
+            return Optional.empty();
         }
     }
 }

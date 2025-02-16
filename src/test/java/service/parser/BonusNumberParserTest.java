@@ -1,4 +1,4 @@
-package parser;
+package service.parser;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import service.parser.BonusNumberParser;
 
 public class BonusNumberParserTest {
     @DisplayName("보너스넘버_중복예외_테스트")
