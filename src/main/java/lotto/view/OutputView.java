@@ -14,6 +14,7 @@ public class OutputView {
     public void lottoStatusPrint(List<List<Integer>> lottoBundle) {
         for (List<Integer> lottoNumbers : lottoBundle) {
             String numbers = lottoNumbers.stream()
+                    .sorted()
                     .map(String::valueOf)
                     .collect(Collectors.joining(", "));
 

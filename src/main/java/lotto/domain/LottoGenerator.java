@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,7 +22,7 @@ public class LottoGenerator {
         return new Lotto(
                 NumberGenerator.numberGeneratorWithUniqueValues(6, 1, 45).stream()
                         .map(LottoNumber::new)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toSet())
         );
     }
 
@@ -32,6 +33,6 @@ public class LottoGenerator {
         for (int lottoNumber : lottoNumbers) {
             lotto.add(new LottoNumber(lottoNumber));
         }
-        return new WinningNumbers(new Lotto(lotto), new LottoNumber(Parser.parseToInteger(bonusNumber)));
+        return new WinningNumbers(new Lotto(new HashSet<>(lotto)), new LottoNumber(Parser.parseToInteger(bonusNumber)));
     }
 }
