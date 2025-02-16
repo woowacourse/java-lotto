@@ -1,6 +1,8 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public enum LottoRank {
     BOOM(0, false, 0),
@@ -27,6 +29,14 @@ public enum LottoRank {
                 || lottoMatch.bonusChecker == bonusChecker))
             .findFirst()
             .orElse(BOOM);
+    }
+
+    public static Map<LottoRank, Integer> createLottoRankCounter() {
+        Map<LottoRank, Integer> result = new LinkedHashMap<>();
+        for (LottoRank lottoRank : LottoRank.values()) {
+            result.put(lottoRank, 0);
+        }
+        return result;
     }
 
     public int multiplyPrice(int counter) {

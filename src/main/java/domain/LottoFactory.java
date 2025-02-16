@@ -14,19 +14,22 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
 
-    private Money money;
-    private List<Lotto> lottos = new ArrayList<>();
+    private final Money money;
+    private final List<Lotto> lottos;
 
     public LottoFactory(Money money) {
         this.money = money;
-        createLottos();
+        this.lottos = createLottos(money);
     }
 
-    public void createLottos() {
+    public List<Lotto> createLottos(Money money) {
+        List<Lotto> lottos = new ArrayList<>();
+
         int totalLotto = money.calculateTotalLotto();
         for (int i = 0; i < totalLotto; i++) {
             lottos.add(new Lotto(createNumbers()));
         }
+        return lottos;
     }
 
     private List<Integer> createNumbers() {
@@ -47,19 +50,11 @@ public class LottoFactory {
     }
 
     public Map<LottoRank, Integer> countLottos(WinningLotto winningLotto) {
-        Map<LottoRank, Integer> result = createLottoMatchCounter();
+        Map<LottoRank, Integer> result = LottoRank.createLottoRankCounter();
 
         for (Lotto lotto : lottos) {
             LottoRank matchedLotto = lotto.compareLotto(winningLotto);
             result.put(matchedLotto, result.get(matchedLotto) + 1);
-        }
-        return result;
-    }
-
-    private Map<LottoRank, Integer> createLottoMatchCounter() {
-        Map<LottoRank, Integer> result = new LinkedHashMap<>();
-        for (LottoRank lottoRank : LottoRank.values()) {
-            result.put(lottoRank, 0);
         }
         return result;
     }
