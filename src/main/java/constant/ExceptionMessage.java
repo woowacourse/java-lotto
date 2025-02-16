@@ -25,7 +25,15 @@ public enum ExceptionMessage {
         this.message = message;
     }
 
-    public String getMessage(Object... args) {
-        return PREFIX + String.format(message, args);
+    public String getMessage() {
+        return PREFIX + message;
+    }
+
+    public String getMessage(int arg) {
+        return PREFIX + String.format(message, arg);
+    }
+
+    public String getMessage(int arg1, int arg2) {
+        return PREFIX + String.format(message, arg1, arg2);
     }
 }

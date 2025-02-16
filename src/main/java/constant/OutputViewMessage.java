@@ -25,7 +25,15 @@ public enum OutputViewMessage {
         this.message = message;
     }
 
-    public String getMessage(Object... args) {
-        return String.format(message, args);
+    public String getMessage() {
+        return message;
+    }
+
+    public String getMessage(int arg) {
+        return String.format(message, arg);
+    }
+
+    public String getMessage(double arg1, String arg2) {
+        return String.format(message, arg1, arg2);
     }
 }
