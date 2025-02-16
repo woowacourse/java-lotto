@@ -23,8 +23,13 @@ public class Lotto {
         this.numbers = lottoNumbers;
     }
 
-    public boolean isDuplicateNumber(LottoNumber lottoNumber){
+    public boolean hasNumber(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
+    }
+
+    public int getMatchedCount(Lotto lotto) {
+        List<LottoNumber> lottoNumbers = lotto.numbers;
+        return (int) lottoNumbers.stream().filter(numbers::contains).count();
     }
 
     private void validateLottoDuplicate(List<LottoNumber> numbers) {
