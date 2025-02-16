@@ -19,7 +19,7 @@ class WinningLottoTest {
 
         // when & then
         Assertions.assertThatThrownBy(
-                        () -> new WinningLotto(invalidNumbers, MAX_NUMBER - 1)
+                        () -> new WinningLotto(new LottoTicket(invalidNumbers), MAX_NUMBER - 1)
                 ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(("[ERROR] 번호는 1부터 45 사이여야 합니다."));
     }
@@ -32,7 +32,7 @@ class WinningLottoTest {
 
         // when & then
         Assertions.assertThatThrownBy(
-                        () -> new WinningLotto(validNumbers, invalidBonusNUmber)
+                        () -> new WinningLotto(new LottoTicket(validNumbers), invalidBonusNUmber)
                 ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(("[ERROR] 번호는 1부터 45 사이여야 합니다."));
     }
@@ -45,7 +45,7 @@ class WinningLottoTest {
 
         // when & then
         Assertions.assertThatThrownBy(
-                        () -> new WinningLotto(invalidNumbers, validBonusNumber)
+                        () -> new WinningLotto(new LottoTicket(invalidNumbers), validBonusNumber)
                 ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(("[ERROR] 당첨 번호는 6개여야 합니다."));
         ;
@@ -59,7 +59,7 @@ class WinningLottoTest {
 
         // when & then
         Assertions.assertThatThrownBy(
-                        () -> new WinningLotto(invalidNumbers, validBonusNumber)
+                        () -> new WinningLotto(new LottoTicket(invalidNumbers), validBonusNumber)
                 ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 당첨 번호는 중복되어서는 안됩니다.");
     }
@@ -72,7 +72,7 @@ class WinningLottoTest {
 
         // when & then
         Assertions.assertThatThrownBy(
-                        () -> new WinningLotto(numbers, duplicatedBonusNumber)
+                        () -> new WinningLotto(new LottoTicket(numbers), duplicatedBonusNumber)
                 ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 당첨 번호와 보너스 번호는 중복되어서는 안됩니다.");
     }
@@ -81,7 +81,7 @@ class WinningLottoTest {
     void 당첨번호와_겹치는_숫자의_개수를_센다() {
         // given
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, MAX_NUMBER);
+        WinningLotto winningLotto = new WinningLotto(new LottoTicket(winningNumbers), MAX_NUMBER);
         List<Integer> comparedNumbers = List.of(1, 2, 3, 4, 5, 7);
 
         // when
@@ -95,7 +95,8 @@ class WinningLottoTest {
     void 보너스번호와_겹치는지_확인한다() {
         // given
         int bonusNumber = MAX_NUMBER;
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), bonusNumber);
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        WinningLotto winningLotto = new WinningLotto(new LottoTicket(winningNumbers), bonusNumber);
         List<Integer> comparedNumbers = List.of(1, 2, 3, 4, 5, bonusNumber);
 
         // when

@@ -62,14 +62,14 @@ class LottoStoreTest {
     @Test
     void 수익률을_계산한다() {
         // given
-        int ticketCount = 14;
+        int purchaseAmount = 14000;
 
         Map<LottoRank, Integer> data = new HashMap<>();
         data.put(LottoRank.FIFTH, 1);
         LottoRankResultsResponse lottoRankResultsResponse = new LottoRankResultsResponse(data);
 
         // when
-        double profitRate = lottoStore.calculateProfitRate(ticketCount, lottoRankResultsResponse);
+        double profitRate = lottoStore.calculateProfitRate(purchaseAmount, lottoRankResultsResponse);
 
         // then
         assertThat(profitRate).isCloseTo(0.36, within(0.01));

@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 public class LottoParser {
 
-    private static final String LOTTO_NUMBER_SEPARATOR = "\", \"";
+    private static final String LOTTO_NUMBER_SEPARATOR = ", ";
 
     public int parsePurchaseAmount(String rawPurchaseAmount) {
         return parsePositiveInteger(rawPurchaseAmount);

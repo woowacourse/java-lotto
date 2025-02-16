@@ -12,7 +12,7 @@ public class LottoDtoMapper {
     }
 
     public WinningLotto toWinningLotto(WinningLottoRequest request) {
-        return new WinningLotto(request.numbers(), request.bonusNumber());
+        return new WinningLotto(new LottoTicket(request.numbers()), request.bonusNumber());
     }
 
     public LottoRankResultsResponse toLottoRankResultResponse(LottoRankResult lottoRankResult) {
