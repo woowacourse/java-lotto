@@ -3,30 +3,34 @@ package domain.enums;
 import java.util.Optional;
 
 public enum Prize {
-    MISS("", 0, 0),
-    FIFTH("3개 일치", 5_000, 3),
-    FOURTH("4개 일치", 50_000, 4),
-    THIRD("5개 일치", 150_000, 5),
-    SECOND("5개 일치, 보너스 볼 일치", 30_000_000, 5),
-    FIRST("6개 일치", 2_000_000_000, 6),
+    MISS(0, 0, false),
+    FIFTH( 5_000, 3, false),
+    FOURTH(50_000, 4, false),
+    THIRD( 150_000, 5, false),
+    SECOND( 30_000_000, 5, true),
+    FIRST(2_000_000_000, 6, false),
     ;
 
-    private final String matchedMessage;
     private final int prizeMoney;
     private final int matchedCount;
-
-    public String getMatchedMessage() {
-        return matchedMessage;
-    }
+    private final boolean isBonusRequired;
 
     public int getPrizeMoney() {
         return this.prizeMoney;
     }
 
-    Prize(String matchedMessage, int prizeMoney, int matchedCount) {
-        this.matchedMessage = matchedMessage;
+    public int getMatchedCount() {
+        return matchedCount;
+    }
+
+    public boolean isBonusRequired() {
+        return isBonusRequired;
+    }
+
+    Prize(int prizeMoney, int matchedCount, boolean isBonusRequired) {
         this.prizeMoney = prizeMoney;
         this.matchedCount = matchedCount;
+        this.isBonusRequired = isBonusRequired;
     }
 
     public static Prize getPrizeOf(int matchedCount, boolean isBonusMatched) {
