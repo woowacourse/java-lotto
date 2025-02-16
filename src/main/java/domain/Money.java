@@ -2,12 +2,11 @@ package domain;
 
 import static util.constant.Message.PRICE_NEGATIVE_ERROR;
 import static util.constant.Values.LOTTO_UNIT;
-
-import java.util.Map;
+import static util.constant.Values.MONEY_MIN_NUM;
 
 public class Money {
 
-    private int money;
+    private final int money;
 
     public Money(int money) {
         validateRange(money);
@@ -18,17 +17,13 @@ public class Money {
         return money / LOTTO_UNIT;
     }
 
-    private void validateRange(int money) {
-        if (money < 0) {
-            throw new IllegalArgumentException(PRICE_NEGATIVE_ERROR);
-        }
+    public double calculateProfitRate(int profit) {
+        return (double)profit / money;
     }
 
-    public double calculateProfit(Map<LottoRank, Integer> lottoResult) {
-        int sum = 0;
-        for (LottoRank lottoRank : lottoResult.keySet()) {
-            sum += lottoRank.prize * lottoResult.get(lottoRank);
+    private void validateRange(int money) {
+        if (money < MONEY_MIN_NUM) {
+            throw new IllegalArgumentException(PRICE_NEGATIVE_ERROR);
         }
-        return (double) sum / money;
     }
 }

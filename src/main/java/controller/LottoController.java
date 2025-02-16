@@ -2,6 +2,7 @@ package controller;
 
 import domain.LottoFactory;
 import domain.LottoRank;
+import domain.LottoStatistics;
 import domain.Money;
 import domain.WinningLotto;
 import java.util.Map;
@@ -30,8 +31,10 @@ public class LottoController {
         Map<LottoRank, Integer> lottoResult = lottoFactory.countLottos(winningLotto);
         outputView.displayResult(lottoResult);
 
-        double profit = money.calculateProfit(lottoResult);
-        outputView.displayProfit(profit);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoResult);
+        int profit = lottoStatistics.calculateProfit();
+        double profitRate = money.calculateProfitRate(profit);
+        outputView.displayProfit(profitRate);
     }
 
     private Money creaeteMoney() {

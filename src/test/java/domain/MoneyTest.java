@@ -58,7 +58,9 @@ public class MoneyTest {
             FIRST_PLACE, 0
         );
 
-        double profit = money.calculateProfit(result);
-        Assertions.assertThat(profit).isEqualTo(10.50);
+        LottoStatistics lottoStatistics = new LottoStatistics(result);
+        int profit = lottoStatistics.calculateProfit();
+        double profitRate = money.calculateProfitRate(profit);
+        Assertions.assertThat(profitRate).isEqualTo(10.50);
     }
 }
