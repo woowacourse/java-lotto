@@ -4,7 +4,6 @@ import domain.DrawResult;
 import domain.LottoMachine;
 import domain.LottoTickets;
 import domain.Payment;
-import domain.RandomIntegerGenerator;
 import domain.StatisticsService;
 import domain.WinningResult;
 import domain.WinningStatistics;
@@ -13,9 +12,11 @@ import view.OutputView;
 
 public class MainController {
     private final StatisticsService statisticsService;
+    private final LottoMachine lottoMachine;
 
-    public MainController(StatisticsService statisticsService) {
+    public MainController(StatisticsService statisticsService, LottoMachine lottoMachine) {
         this.statisticsService = statisticsService;
+        this.lottoMachine = lottoMachine;
     }
 
     public void run() {
@@ -31,8 +32,7 @@ public class MainController {
 
     private LottoTickets purchaseLottoTickets() {
         Payment payment = InputView.inputPayment();
-        LottoMachine lottoMachine = new LottoMachine();
-        return lottoMachine.generateLottoTickets(payment, new RandomIntegerGenerator());
+        return lottoMachine.generateLottoTickets(payment);
     }
 
     private WinningResult calculateWinningResult(LottoTickets lottoTickets,

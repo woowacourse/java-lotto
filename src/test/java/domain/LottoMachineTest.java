@@ -9,10 +9,10 @@ class LottoMachineTest {
     @Test
     void 로또_머신_로또_발행_테스트() {
         // given
-        LottoMachine lottoMachine = new LottoMachine();
+        LottoMachine lottoMachine = new LottoMachine(new FixedIntegerGenerator());
 
         // when
-        LottoTicket LottoTicket = lottoMachine.generateLottoTicket(new FixedIntegerGenerator());
+        LottoTicket LottoTicket = lottoMachine.generateLottoTicket();
 
         // then
         Assertions.assertThat(LottoTicket.getSize()).isEqualTo(LottoTicket.LOTTO_SIZE);
