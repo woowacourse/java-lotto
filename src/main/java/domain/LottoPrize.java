@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public enum LottoPrize {
-    FIRST(2000000000, 6, 0),
-    SECOND(30000000, 5, 1),
-    THIRD(1500000, 5, 0),
-    FOURTH(50000, 4, 0),
-    FIFTH(5000, 3, 0),
+    FIRST(2_000_000_000, 6, 0),
+    SECOND(30_000_000, 5, 1),
+    THIRD(1_500_000, 5, 0),
+    FOURTH(50_000, 4, 0),
+    FIFTH(5_000, 3, 0),
     NOTHING(0, 0, 0);
 
     private final int money;
