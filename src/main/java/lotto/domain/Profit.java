@@ -32,7 +32,7 @@ public class Profit {
         return money.calculateAverageProfitRate(calculateTotalProfit());
     }
 
-    public List<Integer> getValues() {
+    public List<Integer> getRankCountList() {
         return rankCounts.values().stream().toList();
     }
 }

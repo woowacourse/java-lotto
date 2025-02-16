@@ -6,25 +6,25 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class LottoGroup {
-    private final List<Lotto> item;
+    private final List<Lotto> lottos;
 
     public LottoGroup(List<Lotto> item) {
-        this.item = item;
+        this.lottos = item;
     }
 
     public static LottoGroup from(List<Lotto> lottoList) {
         return new LottoGroup(lottoList);
     }
 
-    public List<Lotto> getItem() {
-        return item;
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     @Override
     public String toString() {
         StringJoiner joiner = new StringJoiner(LINE_SEPARATOR);
 
-        for (Lotto lotto : item) {
+        for (Lotto lotto : lottos) {
             joiner.add(lotto.toString());
         }
 

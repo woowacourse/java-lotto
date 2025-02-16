@@ -57,7 +57,7 @@ public class LottoService {
     public Profit calculateProfit(WinnerLotto winnerLotto, LottoGroup lottoGroup) {
         Profit profit = new Profit();
 
-        for (Lotto lotto : lottoGroup.getItem()) {
+        for (Lotto lotto : lottoGroup.getLottos()) {
             long matchCount = winnerLotto.getMatchCount(lotto);
             boolean hasBonus = winnerLotto.hasBonusNumber(lotto);
             Rank rank = Rank.find((int) matchCount, hasBonus);
@@ -68,7 +68,7 @@ public class LottoService {
     }
 
     public List<Integer> getStatusValues(Profit profit) {
-        return profit.getValues();
+        return profit.getRankCountList();
     }
 
     public String getProfitRate(Profit profit, Money money) {
