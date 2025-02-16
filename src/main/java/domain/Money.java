@@ -10,6 +10,14 @@ public class Money {
         this.originMoney = originMoney;
     }
 
+    public int getBuyableLottoCount() {
+        return originMoney / 1000;
+    }
+
+    public int getChange() {
+        return originMoney % 1000;
+    }
+
     private void validate(int originMoney) {
         if (originMoney < 0) {
             throw new IllegalArgumentException(ErrorMessage.NUMBER_FORMAT.getMessage());
@@ -17,13 +25,5 @@ public class Money {
         if (originMoney < 1000) {
             throw new IllegalArgumentException(ErrorMessage.MONEY_MINIMUM.getMessage());
         }
-    }
-
-    public int getBuyableLottoCount() {
-        return originMoney / 1000;
-    }
-
-    public int getChange() {
-        return originMoney % 1000;
     }
 }
