@@ -17,9 +17,9 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
         Money buyingAmount = new Money(1_000);
 
-        Lottos issuedLottos = lottoMachine.issueAutomatic(buyingAmount, () -> List.of(1, 2, 3, 4, 5, 6));
+        List<Lotto> issuedLottos = lottoMachine.issueAutomatic(buyingAmount, () -> List.of(1, 2, 3, 4, 5, 6));
 
-        assertThat(issuedLottos.getLottos()).hasSize(1);
+        assertThat(issuedLottos).hasSize(1);
     }
 
     @DisplayName("구매 금액에 맞는 잔돈을 계산해 준다.")

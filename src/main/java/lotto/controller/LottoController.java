@@ -7,7 +7,6 @@ import lotto.model.Money;
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoMachine;
 import lotto.model.lotto.LottoNumber;
-import lotto.model.lotto.Lottos;
 import lotto.model.winning.WinningLotto;
 import lotto.model.winning.WinningResultResponses;
 import lotto.view.InputView;
@@ -26,7 +25,7 @@ public class LottoController {
     public void run() {
         try {
             Money buyingAmount = new Money(inputView.readBuyingAmount());
-            Lottos lottoTickets = issueRandomLottoTickets(buyingAmount);
+            List<Lotto> lottoTickets = issueRandomLottoTickets(buyingAmount);
             printIssuedLottoTickets(lottoTickets);
 
             WinningLotto winningLotto = createWinningLotto();
@@ -43,7 +42,7 @@ public class LottoController {
         return new WinningLotto(winningLotto, bonusNumber);
     }
 
-    private Lottos issueRandomLottoTickets(final Money buyingAmount) {
+    private List<Lotto> issueRandomLottoTickets(final Money buyingAmount) {
         LottoMachine lottoMachine = new LottoMachine();
         LottoNumbersGenerator numbersGenerator = new LottoNumbersGenerator(
                 LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER, Lotto.LOTTO_SIZE
@@ -52,9 +51,8 @@ public class LottoController {
         return lottoMachine.issueAutomatic(buyingAmount, numbersGenerator);
     }
 
-    private void printIssuedLottoTickets(final Lottos lottoTickets) {
-        List<List<Integer>> issuedLottoNumbers = lottoTickets.getLottos()
-                .stream()
+    private void printIssuedLottoTickets(final List<Lotto> lottoTickets) {
+        List<List<Integer>> issuedLottoNumbers = lottoTickets.stream()
                 .map(Lotto::getNumbers)
                 .toList();
         outputView.printIssuedLottos(issuedLottoNumbers);
