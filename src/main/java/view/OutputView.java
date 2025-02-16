@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import model.Lotto;
 import model.LottoRepository;
 import model.RankType;
+import model.Wallet;
 import model.WinningStatistics;
 
 public class OutputView {
@@ -29,8 +30,8 @@ public class OutputView {
         ) + "]";
     }
 
-    public static void printBuyQuantity(int quantity) {
-        System.out.println(String.format(BUY_QUANTITY_PROMPT, quantity));
+    public static void printBuyQuantity(final Wallet wallet) {
+        System.out.println(String.format(BUY_QUANTITY_PROMPT, wallet.getPurchasableQuantity()));
     }
 
     public static void printWinningRate(double winningRate) {
