@@ -23,9 +23,9 @@ public class LottoMachine {
         return number;
     }
 
-    public LottoTickets generateLottoTickets(int purchaseAmount, IntegerGenerator generator) {
+    public LottoTickets generateLottoTickets(Payment payment, IntegerGenerator generator) {
         List<LottoTicket> LottoTickets = new ArrayList<>();
-        for (int i = 0; i < purchaseAmount / LottoTicket.LOTTO_PRICE; i++) {
+        for (int i = 0; i < payment.getMoney() / LottoTicket.LOTTO_PRICE; i++) {
             LottoTicket LottoTicket = generateLottoTicket(generator);
             LottoTickets.add(LottoTicket);
         }

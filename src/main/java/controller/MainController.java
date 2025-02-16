@@ -3,6 +3,7 @@ package controller;
 import domain.DrawResult;
 import domain.LottoMachine;
 import domain.LottoTickets;
+import domain.Payment;
 import domain.Profit;
 import domain.RandomIntegerGenerator;
 import domain.StatisticsService;
@@ -30,9 +31,9 @@ public class MainController {
     }
 
     private LottoTickets purchaseLottoTickets() {
-        int purchaseAmount = InputView.inputPurchaseAmount();
+        Payment payment = InputView.inputPayment();
         LottoMachine lottoMachine = new LottoMachine();
-        return lottoMachine.generateLottoTickets(purchaseAmount, new RandomIntegerGenerator());
+        return lottoMachine.generateLottoTickets(payment, new RandomIntegerGenerator());
     }
 
     private WinningResult calculateWinningResult(LottoTickets lottoTickets,

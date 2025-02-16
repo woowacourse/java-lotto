@@ -2,25 +2,20 @@ package view;
 
 import domain.DrawResult;
 import domain.LottoNumber;
+import domain.Payment;
 import java.util.Arrays;
 import java.util.List;
 import util.Console;
 import util.RetryHandler;
 
 public class InputView {
-    public static int inputPurchaseAmount() {
-        return (Integer) RetryHandler.retryUntilSuccessWithReturn(() -> {
+    public static Payment inputPayment() {
+        return (Payment) RetryHandler.retryUntilSuccessWithReturn(() -> {
             System.out.println("구매금액을 입력해 주세요.");
             String purchaseAmount = Console.readLine();
-            validatePurchaseAmount(purchaseAmount);
-            return Integer.parseInt(purchaseAmount);
+            validateInteger(purchaseAmount);
+            return new Payment(Integer.parseInt(purchaseAmount));
         });
-    }
-
-    private static void validatePurchaseAmount(String purchaseAmount) {
-        validateInteger(purchaseAmount);
-        int amount = Integer.parseInt(purchaseAmount);
-        validatePositiveInteger(amount);
     }
 
     private static void validateInteger(String purchaseAmount) {
@@ -28,12 +23,6 @@ public class InputView {
             Integer.parseInt(purchaseAmount);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("정수를 입력해주세요.");
-        }
-    }
-
-    private static void validatePositiveInteger(int purchaseAmount) {
-        if (purchaseAmount <= 0) {
-            throw new IllegalArgumentException("양수가 아닙니다.");
         }
     }
 
