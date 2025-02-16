@@ -2,9 +2,9 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.RandomLottoGenerator;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
+import lotto.domain.RandomLottoGenerator;
 import lotto.domain.WinningResult;
 import lotto.domain.WinningResultCalculator;
 import lotto.util.StringParser;
@@ -27,45 +27,19 @@ public class LottoController {
     }
 
     public void run() {
-        final LottoPrice lottoPrice = getLottoPrice();
-        final int lottoCount = getLottoCount(lottoPrice);
+        final LottoPrice lottoPrice = makeLottoPrice();
+        final int lottoCount = calculateLottoCount(lottoPrice);
         final List<Lotto> lottos = randomLottoGenerator.generate(lottoCount);
         printPurchasedLottos(lottos);
         printWinningResult(lottos, lottoPrice);
     }
 
-    private void printWinningResult(final List<Lotto> lottos, final LottoPrice lottoPrice) {
-        final WinningResultCalculator winningResultCalculator = getWinningResult();
-        final WinningResult winningResult = winningResultCalculator.makeWinningResult(lottos);
-        outputView.printWinningResult(winningResult.getWinningResult());
-        outputView.printProfitRate(winningResult.calculateProfitRate(lottoPrice));
-    }
-
-    private WinningResultCalculator getWinningResult() {
-        final Lotto winningLotto = getWinningLotto();
-        final LottoNumber bonusNumber = getBonusNumber();
-        return new WinningResultCalculator(winningLotto, bonusNumber);
-    }
-
-    private Lotto getWinningLotto() {
-        final String winningLottoNumbers = inputView.readWinningLottoNumbers();
-        final String[] splitWinningLottoNumbers = winningLottoNumbers.split(DELIMITER);
-        final List<Integer> parsedWinningLottoNumbers = StringParser.parseTokens(splitWinningLottoNumbers);
-        return new Lotto(parsedWinningLottoNumbers);
-    }
-
-    private LottoNumber getBonusNumber() {
-        final String bonusNumber = inputView.readBonusNumber();
-        final int parsedBonusNumber = StringParser.parseInt(bonusNumber);
-        return LottoNumber.from(parsedBonusNumber);
-    }
-
-    private LottoPrice getLottoPrice() {
+    private LottoPrice makeLottoPrice() {
         final int parsedAmount = StringParser.parseInt(inputView.readPurchasePrice());
         return new LottoPrice(parsedAmount);
     }
 
-    private int getLottoCount(final LottoPrice lottoPrice) {
+    private int calculateLottoCount(final LottoPrice lottoPrice) {
         final int lottoCount = lottoPrice.calculateLottoCount();
         outputView.printLottoCount(lottoCount);
         return lottoCount;
@@ -75,5 +49,31 @@ public class LottoController {
         lottos.stream()
                 .map(Lotto::getNumbers)
                 .forEach(System.out::println);
+    }
+
+    private void printWinningResult(final List<Lotto> lottos, final LottoPrice lottoPrice) {
+        final WinningResultCalculator winningResultCalculator = makeWinningResultCalculator();
+        final WinningResult winningResult = winningResultCalculator.makeWinningResult(lottos);
+        outputView.printWinningResult(winningResult.getWinningResult());
+        outputView.printProfitRate(winningResult.calculateProfitRate(lottoPrice));
+    }
+
+    private WinningResultCalculator makeWinningResultCalculator() {
+        final Lotto winningLotto = makeWinningLotto();
+        final LottoNumber bonusNumber = makeBonusNumber();
+        return new WinningResultCalculator(winningLotto, bonusNumber);
+    }
+
+    private Lotto makeWinningLotto() {
+        final String winningLottoNumbers = inputView.readWinningLottoNumbers();
+        final String[] splitWinningLottoNumbers = winningLottoNumbers.split(DELIMITER);
+        final List<Integer> parsedWinningLottoNumbers = StringParser.parseTokens(splitWinningLottoNumbers);
+        return new Lotto(parsedWinningLottoNumbers);
+    }
+
+    private LottoNumber makeBonusNumber() {
+        final String bonusNumber = inputView.readBonusNumber();
+        final int parsedBonusNumber = StringParser.parseInt(bonusNumber);
+        return LottoNumber.from(parsedBonusNumber);
     }
 }
