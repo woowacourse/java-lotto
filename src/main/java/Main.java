@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
-            LottoController lottoController = setLottoProgram(bufferedReader);
+            LottoController lottoController = initializeLottoController(bufferedReader);
             lottoController.start();
         } catch (IOException | IllegalArgumentException e) {
             System.out.println("잘못된 입력이 감지되었습니다: " + e.getMessage());
@@ -23,7 +23,7 @@ public class Main {
         }
     }
 
-    private static LottoController setLottoProgram(BufferedReader bufferedReader) {
+    private static LottoController initializeLottoController(BufferedReader bufferedReader) {
         InputHandler inputHandler = new InputHandler(bufferedReader);
         OutputHandler outputHandler = new OutputHandler();
 
