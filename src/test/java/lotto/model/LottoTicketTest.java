@@ -36,6 +36,18 @@ class LottoTicketTest {
             assertThat(lottoTicket.getLottoCount())
                     .isEqualTo(count);
         }
+
+        @DisplayName("변경 가능한 로또 목록으로 로또 티켓을 생성한 후 원본을 수정해도 로또 티켓에 영향을 주지 않는다.")
+        @Test
+        void shouldNotChangeLottoTicket_WhenChangeOriginalLottos() {
+            List<Lotto> lottos = createLottosByCount(1);
+            LottoTicket lottoTicket = new LottoTicket(lottos);
+
+            lottos.add(LottoFixtures.lottoOneToSix);
+
+            assertThat(lottoTicket.getLottoCount())
+                    .isEqualTo(1);
+        }
     }
 
     @DisplayName("예외가 발생하는 경우")
@@ -58,8 +70,19 @@ class LottoTicketTest {
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("로또 티켓은 최소 1개 이상의 로또가 있어야 합니다.");
         }
+
+        @DisplayName("변경 가능한 로또 목록으로 로또 티켓을 생성하여 수정할 경우 예외가 발생한다.")
+        @Test
+        void shouldThrowException_WhenChangeLottos() {
+            List<Lotto> lottos = createLottosByCount(1);
+            LottoTicket lottoTicket = new LottoTicket(lottos);
+
+            assertThatCode(() -> lottoTicket.lottos().add(LottoFixtures.lottoOneToSix))
+                    .isInstanceOf(UnsupportedOperationException.class);
+        }
     }
 
+    // 변경 가능한 로또 목록을 생성하는 메서드
     private List<Lotto> createLottosByCount(int count) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {

@@ -8,6 +8,7 @@ public record LottoTicket(
 ) {
     public LottoTicket {
         validateLottoCount(lottos);
+        lottos = List.copyOf(lottos);
     }
 
     private void validateLottoCount(List<Lotto> lottos) {
