@@ -13,6 +13,11 @@ public class Lotto {
         validate(this.numbers);
     }
 
+    public static Lotto from(NumberGenerator numberGenerator) {
+        List<Integer> numbers = numberGenerator.generateNumber();
+        return new Lotto(numbers);
+    }
+
     public void validate(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_COUNT.getMessage());
@@ -26,11 +31,6 @@ public class Lotto {
         if (!isSorted(numbers)) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NOT_SORTED.getMessage());
         }
-    }
-
-    public static Lotto from(NumberGenerator numberGenerator) {
-        List<Integer> numbers = numberGenerator.generateNumber();
-        return new Lotto(numbers);
     }
 
     public boolean has(int number) {
