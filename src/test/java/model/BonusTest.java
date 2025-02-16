@@ -50,15 +50,6 @@ class BonusTest {
                 .hasMessageContaining(BonusExceptionType.INVALID_BONUS_RANGE.getMessage(lottoMinRange, lottoMaxRange));
     }
 
-    @Test
-    @Disabled
-    @DisplayName("숫자의 갯수가 여러개 일 때 예외 처리된다.")
-    void inputWithInvalidCount() {
-        assertThatThrownBy(() -> Bonus.of(0, lotto)) // TODO : number 인자 0을 테스트하고 싶은 숫자로 수정
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(CommonExceptionType.INVALID_NUMBER_FORMAT.getMessage());
-    }
-
     static Stream<Arguments> provideLottoRange() {
         return Stream.of(Arguments.of(Lotto.LOTTO_MIN_RANGE, Lotto.LOTTO_MAX_RANGE));
     }
