@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 class LottoTest {
     static final Lotto basicLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
-    @DisplayName("정적 팩토리 메서드로 로또 객체 생성이 정상적으로 작동하는지 확인한다.")
+    @DisplayName("정적 팩토리 메서드로 로또 객체 생성이 정상적으로 동작하는지 확인한다.")
     @Test
     void 로또_객체_생성_테스트() {
         // given
