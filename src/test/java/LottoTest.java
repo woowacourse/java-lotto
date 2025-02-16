@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import domain.Lotto;
 import domain.LottoPrize;
 import domain.WinningLotto;
-import domain.vo.Number;
+import domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -79,7 +79,7 @@ class LottoTest {
     void discoverIsExistNumberOrNot(int number, boolean expected) {
         // given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Number compare = new Number(number);
+        LottoNumber compare = new LottoNumber(number);
 
         // when
         final boolean result = lotto.isExist(compare);
@@ -94,7 +94,7 @@ class LottoTest {
         // given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto winningNumber = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Number bonusNumber = new Number(7);
+        LottoNumber bonusNumber = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
 
         // when
@@ -110,7 +110,7 @@ class LottoTest {
         // given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
         Lotto winningNumber = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Number bonusNumber = new Number(7);
+        LottoNumber bonusNumber = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
 
         // when
@@ -126,7 +126,7 @@ class LottoTest {
         // given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 8));
         Lotto winningNumber = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Number bonusNumber = new Number(7);
+        LottoNumber bonusNumber = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
 
         // when
@@ -142,7 +142,7 @@ class LottoTest {
         // given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 8, 9));
         Lotto winningNumber = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Number bonusNumber = new Number(7);
+        LottoNumber bonusNumber = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
 
         // when
@@ -158,7 +158,7 @@ class LottoTest {
         // given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 8, 9, 10));
         Lotto winningNumber = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Number bonusNumber = new Number(7);
+        LottoNumber bonusNumber = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
 
         // when

@@ -5,7 +5,7 @@ import java.util.List;
 
 import domain.Lotto;
 import domain.WinningLotto;
-import domain.vo.Number;
+import domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,7 +18,7 @@ class WinningLottoTest {
     void duplicateWinningAndBonus() {
         // given
         Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Number bonusNumber = new Number(1);
+        LottoNumber bonusNumber = new LottoNumber(1);
 
         // when & then
         assertThatThrownBy(() -> {
@@ -32,9 +32,9 @@ class WinningLottoTest {
     void checkMatchedWinningNumber(int number, boolean expected) {
         // given
         Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Number bonus = new Number(7);
+        LottoNumber bonus = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
-        Number compare = new Number(number);
+        LottoNumber compare = new LottoNumber(number);
 
         // when
         final boolean isMatchWinningNumber = winningLotto.isMatchWinningNumber(compare);
@@ -49,9 +49,9 @@ class WinningLottoTest {
     void checkMatchedBonusNumber(int number, boolean expected) {
         // given
         Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Number bonus = new Number(7);
+        LottoNumber bonus = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
-        Number compare = new Number(number);
+        LottoNumber compare = new LottoNumber(number);
 
         // when
         final boolean matched = winningLotto.isMatchBonus(compare);

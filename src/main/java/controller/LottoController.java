@@ -8,7 +8,6 @@ import service.LottoManager;
 import view.InputView;
 import view.OutputView;
 
-import java.io.IOException;
 import java.util.List;
 
 public class LottoController {
@@ -22,7 +21,7 @@ public class LottoController {
         this.lottoManager = lottoManager;
     }
 
-    public void run() throws IOException {
+    public void run() {
         Money money = inputView.inputMoney();
         final int lottoCount = money.getLottoCount();
         outputView.printLottoCount(lottoCount);

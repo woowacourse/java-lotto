@@ -6,33 +6,28 @@ import java.util.List;
 
 public enum LottoPrize {
 
-    FIRST(6, false, 2_000_000_000),
-    SECOND(5, true, 30_000_000),
-    THIRD(5, false, 1_500_000),
-    FOURTH(4, false, 50_000),
-    FIFTH(3, false, 5_000),
-    NONE(0, false, 0);
+    FIRST(6, BonusMatch.NOT_MATCH, 2_000_000_000),
+    SECOND(5, BonusMatch.MATCH, 30_000_000),
+    THIRD(5, BonusMatch.NONE, 1_500_000),
+    FOURTH(4, BonusMatch.NONE, 50_000),
+    FIFTH(3, BonusMatch.NONE, 5_000),
+    NONE(0, BonusMatch.NONE, 0)
+    ;
 
     private final int matchedNumberCount;
-    private final boolean isBonusMatched;
+    private final BonusMatch bonusMatch;
     private final int price;
 
-    LottoPrize(int matchedNumberCount, boolean isBonusMatched, int price) {
+    LottoPrize(int matchedNumberCount, BonusMatch bonusMatch, int price) {
         this.matchedNumberCount = matchedNumberCount;
-        this.isBonusMatched = isBonusMatched;
+        this.bonusMatch = bonusMatch;
         this.price = price;
     }
 
-    public static LottoPrize from(int matchedNumberCount, boolean isBonusMatched) {
-        if (matchedNumberCount == 5) {
-            return Arrays.stream(values())
-                    .filter(value -> value.getMatchedNumberCount() == matchedNumberCount
-                            && value.isBonusMatched() == isBonusMatched)
-                    .findFirst()
-                    .orElse(NONE);
-        }
+    public static LottoPrize from(int matchedNumberCount, boolean bonusMatched) {
         return Arrays.stream(values())
-                .filter(value -> value.getMatchedNumberCount() == matchedNumberCount)
+                .filter(value -> value.getMatchedNumberCount() == matchedNumberCount
+                        && value.isBonusMatched(bonusMatched))
                 .findFirst()
                 .orElse(NONE);
     }
@@ -48,8 +43,8 @@ public enum LottoPrize {
         return matchedNumberCount;
     }
 
-    public boolean isBonusMatched() {
-        return isBonusMatched;
+    public boolean isBonusMatched(boolean bonusMatched) {
+        return bonusMatch.isMatch(bonusMatched);
     }
 
     public int getPrice() {

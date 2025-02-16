@@ -8,7 +8,7 @@ import domain.LottoPrize;
 import domain.WinningLotto;
 import domain.WinningResult;
 import domain.vo.Money;
-import domain.vo.Number;
+import domain.vo.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,7 +42,7 @@ class LottoManagerTest {
             new Lotto(List.of(1, 2, 3, 4, 10, 11)),
             new Lotto(List.of(1, 2, 3, 10, 11, 12)),
             new Lotto(List.of(10, 11, 12, 13, 14, 15)));
-    WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Number(7));
+    WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
 
     @BeforeEach
     void setup() {
