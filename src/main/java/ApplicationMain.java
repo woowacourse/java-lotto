@@ -1,7 +1,7 @@
-import controller.InputView;
 import controller.LottoController;
-import controller.OutputView;
 import java.util.Scanner;
+import view.InputView;
+import view.OutputView;
 
 public class ApplicationMain {
     public static void main(String[] args) {

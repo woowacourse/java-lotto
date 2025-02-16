@@ -5,6 +5,8 @@ import domain.Lottos;
 import java.util.List;
 import java.util.Random;
 import util.RandomNumberPicker;
+import view.InputView;
+import view.OutputView;
 
 public class LottoController {
 

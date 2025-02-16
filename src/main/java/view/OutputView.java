@@ -1,4 +1,4 @@
-package controller;
+package view;
 
 import domain.Lotto;
 import domain.LottoPrize;
