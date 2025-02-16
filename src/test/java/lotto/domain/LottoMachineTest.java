@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.List;
+import lotto.exception_message.ExceptionMessage;
 import lotto.utility.RandomGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,6 +27,17 @@ class LottoMachineTest {
         List<Lotto> actualLottos = lottoMachine.purchaseLotto(givenPurchaseAmount);
 
         assertThat(actualLottos).hasSize(givenPurchaseAmount / Lotto.LOTTO_PRICE);
+    }
+
+    @DisplayName("단위에 맞지 않는 구매 금액이 입력될 경우 예외가 발생한다.")
+    @Test
+    void 단위에_맞지_않는_구매_금액이_입력될_경우_예외가_발생한다() {
+        String messageTemplate = ExceptionMessage.INVALID_PURCHASE_AMOUNT.getContent();
+        String expectedMessage = String.format(messageTemplate, Lotto.LOTTO_PRICE);
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoMachine.purchaseLotto(1010))
+                .withMessage(expectedMessage);
     }
 
     @DisplayName("발행된 로또의 당첨 등수를 찾을 수 있다.")
