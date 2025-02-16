@@ -26,18 +26,6 @@ public class Lotto {
         this.numbers = new HashSet<>(numbers);
     }
 
-    public static LottoMachine createLottoMachine(LottoPickStrategy strategy) {
-        return new LottoMachine(strategy, NUMBERS_SIZE);
-    }
-
-    public boolean contains(Number number) {
-        return numbers.contains(number);
-    }
-
-    public boolean hasCorrectSize(Collection<Number> numbers) {
-        return numbers.size() == NUMBERS_SIZE;
-    }
-
     private void validateNumberSize(Collection<Number> numbers) {
         if (!hasCorrectSize(numbers)) {
             throw new IllegalArgumentException("로또 번호는 " + NUMBERS_SIZE + "개여야 합니다.");
@@ -49,6 +37,18 @@ public class Lotto {
         if (nonDuplicatedNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
         }
+    }
+
+    public static LottoMachine createLottoMachine(LottoPickStrategy strategy) {
+        return new LottoMachine(strategy, NUMBERS_SIZE);
+    }
+
+    public boolean contains(Number number) {
+        return numbers.contains(number);
+    }
+
+    public boolean hasCorrectSize(Collection<Number> numbers) {
+        return numbers.size() == NUMBERS_SIZE;
     }
 
     public int calculateMatchCount(Lotto lotto) {

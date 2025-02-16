@@ -4,16 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
+
     private static final int LOTTO_PRICE = 1000;
 
     private final LottoMachine lottoMachine;
 
     public LottoStore(LottoMachine lottoMachine) {
         this.lottoMachine = lottoMachine;
-    }
-
-    public boolean isPurchasable(int amount) {
-        return LOTTO_PRICE <= amount;
     }
 
     public static Money calculatePurchaseAmount(int lottoCount) {
@@ -29,5 +26,9 @@ public class LottoStore {
         }
 
         return new Lottos(lottos);
+    }
+
+    public boolean isPurchasable(int amount) {
+        return LOTTO_PRICE <= amount;
     }
 }
