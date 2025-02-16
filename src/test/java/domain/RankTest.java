@@ -11,7 +11,7 @@ class RankTest {
 
     @ParameterizedTest
     @MethodSource("lottoResult")
-    void matchRank(int matchCount, boolean isMatchBonus, Rank rank) {
+    void 로또_결과에_따른_랭크를_반환한다(int matchCount, boolean isMatchBonus, Rank rank) {
         assertThat(Rank.matchRank(matchCount, isMatchBonus)).isEqualTo(rank);
     }
 

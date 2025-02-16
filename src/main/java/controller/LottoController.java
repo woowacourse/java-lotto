@@ -7,6 +7,7 @@ import domain.dto.AmountDto;
 import domain.dto.LottosDto;
 import domain.WinningLotto;
 import domain.dto.ResultDto;
+import parser.InputParser;
 import java.util.EnumMap;
 import view.InputView;
 import view.OutputView;
@@ -46,7 +47,7 @@ public class LottoController {
         String winningNumber = inputView.inputWinningLotto();
         String bonusNumber = inputView.inputBonusLotto();
 
-        return new WinningLotto(winningNumber, bonusNumber);
+        return new WinningLotto(InputParser.lottoParser(winningNumber), bonusNumber);
     }
 
     private void calculateResult(final Lottos lottos, final WinningLotto winningLotto, final Money money) {

@@ -35,7 +35,7 @@ class MoneyTest {
     }
 
     @Test
-    void 수익률_계산_테스트() {
+    void 수익률을_계산할_수_있다() {
         //given
         Money money = new Money(14000);
         EnumMap<Rank, Integer> rankCount = new EnumMap<>(Rank.class);

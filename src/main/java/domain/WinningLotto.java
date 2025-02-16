@@ -4,6 +4,8 @@ import static global.exception.ExceptionMessage.DUPLICATED_NUMBER;
 import static global.exception.ExceptionMessage.INVALID_FORMAT;
 import static global.exception.ExceptionMessage.INVALID_RANGE;
 
+import java.util.List;
+
 public class WinningLotto{
     private static final int LOTTO_MIN = 1;
     private static final int LOTTO_MAX = 45;
@@ -11,8 +13,8 @@ public class WinningLotto{
     private Lotto lotto;
     private int bonusNumber;
 
-    public WinningLotto(final String numbers, final String bonusNumber) {
-        this.lotto = new Lotto(numbers);
+    public WinningLotto(final List<Integer> numbers, final String bonusNumber) {
+        this.lotto = Lotto.from(numbers);
         this.bonusNumber = validateBonus(bonusNumber);
     }
 
