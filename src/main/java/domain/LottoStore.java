@@ -12,7 +12,7 @@ public class LottoStore {
         this.lottoMachine = lottoMachine;
     }
 
-    public static boolean isPurchasable(int amount) {
+    public boolean isPurchasable(int amount) {
         return LOTTO_PRICE <= amount;
     }
 

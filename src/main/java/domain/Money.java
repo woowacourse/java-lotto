@@ -9,13 +9,13 @@ public class Money {
         this.amount = amount;
     }
 
-    public static Money forPurchaseAmount(int amount) {
-        validatePurchaseAmount(amount);
+    public static Money forPurchaseAmount(int amount, LottoStore lottoStore) {
+        validatePurchaseAmount(amount, lottoStore);
         return new Money(amount);
     }
 
-    private static void validatePurchaseAmount(int amount) {
-        if (!LottoStore.isPurchasable(amount)) {
+    private static void validatePurchaseAmount(int amount, LottoStore lottoStore) {
+        if (!lottoStore.isPurchasable(amount)) {
             throw new IllegalArgumentException("구매 금액은 로또 가격보다 적을 수 없습니다.");
         }
     }

@@ -31,7 +31,8 @@ public class LottoController {
 
     public void start() {
         try {
-            Money purchaseLottoMoney = inputMoney();
+            LottoStore lottoStore = createLottoStore();
+            Money purchaseLottoMoney = inputMoney(lottoStore);
             Lottos purchasedLottos = purchaseLottos(purchaseLottoMoney);
             outputView.printPurchaseLottos(purchasedLottos);
 
@@ -43,10 +44,15 @@ public class LottoController {
         }
     }
 
-    private Money inputMoney() {
+    private Money inputMoney(LottoStore lottoStore) {
         String rawMoney = inputView.inputMoney();
         int purchaseAmount = inputConverter.convertStringToMoneyValue(rawMoney);
-        return Money.forPurchaseAmount(purchaseAmount);
+        return Money.forPurchaseAmount(purchaseAmount, lottoStore);
+    }
+
+    private LottoStore createLottoStore() {
+        LottoPickStrategy lottoPickStrategy = Number.createLottPickStrategy();
+        return new LottoStore(Lotto.createLottoMachine(lottoPickStrategy));
     }
 
     private Lottos purchaseLottos(Money purchaseLottoMoney) {

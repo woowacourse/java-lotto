@@ -10,12 +10,8 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos, Money purchaseAmount) {
+    public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-    }
-
-    public List<Lotto> getLottos() {
-        return unmodifiableList(lottos);
     }
 
     public WinningResult calculateWinning(WinningLotto winningLotto) {
@@ -26,4 +22,9 @@ public class Lottos {
         }
         return new WinningResult(LottoStore.calculatePurchaseAmount(lottos.size()), winningResult);
     }
+
+    public List<Lotto> getLottos() {
+        return unmodifiableList(lottos);
+    }
+
 }
