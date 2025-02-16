@@ -22,12 +22,13 @@ public class Lottos {
         }
         return new Lottos(generatedLottos);
     }
+    
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 
     private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
 }

@@ -21,11 +21,6 @@ public class Matcher {
         return new Matcher(winningNumberCount, hasBonusNumber);
     }
 
-    private Matcher(int winningNumberCount, boolean hasBonusNumber) {
-        this.winningNumberCount = winningNumberCount;
-        this.hasBonusNumber = hasBonusNumber;
-    }
-
     public int getWinningNumberCount() {
         return winningNumberCount;
     }
@@ -33,4 +28,10 @@ public class Matcher {
     public boolean isHasBonusNumber() {
         return hasBonusNumber;
     }
+
+    private Matcher(int winningNumberCount, boolean hasBonusNumber) {
+        this.winningNumberCount = winningNumberCount;
+        this.hasBonusNumber = hasBonusNumber;
+    }
+
 }

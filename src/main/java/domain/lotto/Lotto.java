@@ -22,6 +22,12 @@ public class Lotto {
         this.balls = balls;
     }
 
+    public List<Integer> getBallNumbers() {
+        return balls.stream()
+                .map(Ball::getNumber)
+                .toList();
+    }
+
     private void validateUniqueBall(List<Integer> numbers) {
         if (numbers.stream()
                 .distinct().count() != MAX_LOTTO_SIZE) {
@@ -29,9 +35,4 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getBallNumbers() {
-        return balls.stream()
-                .map(Ball::getNumber)
-                .toList();
-    }
 }
