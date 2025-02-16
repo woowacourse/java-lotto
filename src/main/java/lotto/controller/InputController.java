@@ -1,14 +1,10 @@
 package lotto.controller;
 
-import static lotto.common.constant.Constant.*;
-import static lotto.common.exception.ErrorMessage.ERROR_BONUS_OUT_OF_RANGE;
-import static lotto.common.exception.ErrorMessage.ERROR_DUPLICATE_WINNING_AND_BONUS;
-
 import java.util.List;
 import lotto.common.utill.InputParser;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
-import lotto.dto.WinningInform;
+import lotto.domain.WinningInform;
 import lotto.view.InputView;
 
 public class InputController {
@@ -18,10 +14,10 @@ public class InputController {
         this.inputView = inputView;
     }
 
-    public Money getMoney(String prompt) {
+    public Money getMoney() {
         while (true) {
             try {
-                int number = getInt(prompt);
+                int number = getInt("구입금액을 입력해 주세요.");
 
                 return new Money(number);
             } catch (IllegalArgumentException e) {
@@ -30,25 +26,23 @@ public class InputController {
         }
     }
 
-    public WinningInform getWinningInformation() {
-        Lotto matchLotto = getMatchLotto("지난 주 당첨 번호를 입력해 주세요.");
-
+    public WinningInform getWinningInform() {
         while (true) {
             try {
-                int bonus = getBonus("보너스 번호를 입력해주세요.");
-                validateBonusDuplicate(matchLotto, bonus);
+                Lotto winningLotto = getWinningLotto();
+                int bonus = getBonus();
 
-                return new WinningInform(matchLotto, bonus);
+                return new WinningInform(winningLotto, bonus);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    private Lotto getMatchLotto(String prompt) {
+    private Lotto getWinningLotto() {
         while (true) {
             try {
-                String input = inputView.read(prompt);
+                String input = inputView.read("지난 주 당첨 번호를 입력해 주세요.");
 
                 List<Integer> numbers = InputParser.parseToList(input);
 
@@ -59,11 +53,11 @@ public class InputController {
         }
     }
 
-    private int getBonus(String prompt) {
+    private int getBonus() {
         while (true) {
             try {
-                int bonus = getInt(prompt);
-                validateBonusRange(bonus);
+                int bonus = getInt("보너스 번호를 입력해주세요.");
+
                 return bonus;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -80,18 +74,6 @@ public class InputController {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-        }
-    }
-
-    private void validateBonusRange(int bonus) {
-        if(bonus < LOTTO_RANGE_MINIMUM || bonus > LOTTO_RANGE_MAXIMUM) {
-            throw new IllegalArgumentException(ERROR_BONUS_OUT_OF_RANGE);
-        }
-    }
-
-    private void validateBonusDuplicate(Lotto matchLotto, int bonus) {
-        if(matchLotto.containsNumber(bonus)) {
-            throw new IllegalArgumentException(ERROR_DUPLICATE_WINNING_AND_BONUS);
         }
     }
 

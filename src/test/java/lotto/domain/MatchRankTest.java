@@ -24,7 +24,7 @@ class MatchRankTest {
     void testGetMatchStatistics(int matchCount, boolean isBonusMatched, String expectedRankStr) {
         MatchRank expectedRank = MatchRank.valueOf(expectedRankStr);
 
-        MatchRank matchRank = getMatchRank(matchCount, isBonusMatched);
+        MatchRank matchRank = getMatchRank(new MatchResult(matchCount, isBonusMatched));
         assertThat(matchRank).isEqualTo(expectedRank);
     }
 }

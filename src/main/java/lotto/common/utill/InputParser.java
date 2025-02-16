@@ -20,7 +20,7 @@ public final class InputParser {
         try {
             Integer.parseInt(str);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_NOT_NUMBER);
+            throw new IllegalArgumentException(ERROR_NUMBER_NOT_VALID);
         }
     }
 

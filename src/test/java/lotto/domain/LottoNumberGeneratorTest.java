@@ -1,4 +1,4 @@
-package lotto.utill;
+package lotto.domain;
 
 import static lotto.common.constant.Constant.LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.*;

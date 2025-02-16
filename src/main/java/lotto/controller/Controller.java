@@ -6,10 +6,11 @@ import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Money;
 import lotto.domain.LottoShop;
-import lotto.dto.WinningInform;
+import lotto.domain.WinningInform;
 import lotto.domain.Lotto;
 import lotto.domain.Wallet;
 import lotto.domain.Profit;
+import lotto.dto.WalletDto;
 import lotto.view.OutputView;
 
 public class Controller {
@@ -22,18 +23,18 @@ public class Controller {
     }
 
     public void run() {
-        Money money = inputController.getMoney("구입금액을 입력해 주세요.");
+        Money money = inputController.getMoney();
         outputView.print(money.getAmount() + "개를 구매했습니다.\n");
 
         LottoShop lottoShop = new LottoShop(new LottoNumberGenerator());
         List<Lotto> lottos = lottoShop.buyLottos(money);
         Wallet wallet = new Wallet(lottos);
-        outputView.print(wallet.toString());
+        outputView.printWallet(WalletDto.from(wallet));
 
-        WinningInform winningInform = inputController.getWinningInformation();
+        WinningInform winningInform = inputController.getWinningInform();
 
         LottoStatistics lottoStatistics = LottoStatistics.from(wallet, winningInform);
-        Profit profit = lottoStatistics.calculateProfit(money);
+        Profit profit = Profit.from(lottoStatistics.getTotalPrize(), money.money());
         outputView.printResult(lottoStatistics, profit);
     }
 

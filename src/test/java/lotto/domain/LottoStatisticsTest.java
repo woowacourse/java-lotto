@@ -2,59 +2,84 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.EnumMap;
 import java.util.List;
-import lotto.dto.WinningInform;
+import java.util.Map;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoStatisticsTest {
 
-    @Test
-    @DisplayName("수익률 계산 테스트")
-    void testConvertToMapProfit() {
-        //given
-        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(List.of(1, 2, 3, 7, 8, 9));
-        Wallet wallet = new Wallet(List.of(lotto1, lotto2));
+    static class LottoStatisticsTestData {
+        final Wallet wallet;
+        final WinningInform winningInform;
+        final Map<MatchRank, Integer> expectedRankCounts;
+        final long expectedTotalPrize;
 
-        WinningInform winningInform = new WinningInform(
-                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-                7
-        );
-
-        //when
-        LottoStatistics statistics = LottoStatistics.from(wallet, winningInform);
-
-        //assert
-        assertThat(statistics.getCountOf(MatchRank.MATCH_SIX)).isEqualTo(1);    // lotto1
-        assertThat(statistics.getCountOf(MatchRank.MATCH_THREE)).isEqualTo(1); // lotto2
-        assertThat(statistics.getCountOf(MatchRank.MATCH_FOUR)).isEqualTo(0);
-        assertThat(statistics.getCountOf(MatchRank.MATCH_FIVE)).isEqualTo(0);
-        assertThat(statistics.getCountOf(MatchRank.MATCH_BONUS)).isEqualTo(0);
+        LottoStatisticsTestData(Wallet wallet, WinningInform winningInform,
+                                Map<MatchRank, Integer> expectedRankCounts, long expectedTotalPrize) {
+            this.wallet = wallet;
+            this.winningInform = winningInform;
+            this.expectedRankCounts = expectedRankCounts;
+            this.expectedTotalPrize = expectedTotalPrize;
+        }
     }
 
-    @Test
-    @DisplayName("3개 일치로 5000원 당첨되고 구입금액이 10000원일 때 수익률은 0.5, isProfit=false")
-    void calculateProfit_half() {
-        // given
-        Wallet wallet = new Wallet(List.of(
-                new Lotto(List.of(1, 2, 3, 7, 8, 9))
-        ));
+    private static Stream<LottoStatisticsTestData> provideTestData() {
+        // 케이스 1: 모든 MatchRank가 한개씩 있는 경우
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        int bonus = 7;
+        WinningInform winningInform = new WinningInform(winningLotto, bonus);
 
-        WinningInform winningInform = new WinningInform(
-                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-                7
-        );
+        Lotto ticket1 = new Lotto(List.of(1, 2, 3, 7, 8, 9)); //3개 매칭
+        Lotto ticket2 = new Lotto(List.of(1, 2, 3, 4, 7, 8)); // 4개 매칭
+        Lotto ticket3 = new Lotto(List.of(1, 2, 3, 4, 5, 8)); // 5개 매칭
+        Lotto ticket4 = new Lotto(List.of(1, 2, 3, 4, 5, 7)); // 5개 매칭 + 보너스
+        Lotto ticket5 = new Lotto(List.of(1, 2, 3, 4, 5, 6)); // 6개 매칭
+        Wallet wallet = new Wallet(List.of(ticket1, ticket2, ticket3, ticket4, ticket5));
 
-        Money spentMoney = new Money(10000);
+        Map<MatchRank, Integer> expectedCounts1 = new EnumMap<>(MatchRank.class);
+        expectedCounts1.put(MatchRank.MATCH_THREE, 1);
+        expectedCounts1.put(MatchRank.MATCH_FOUR, 1);
+        expectedCounts1.put(MatchRank.MATCH_FIVE, 1);
+        expectedCounts1.put(MatchRank.MATCH_BONUS, 1);
+        expectedCounts1.put(MatchRank.MATCH_SIX, 1);
+        expectedCounts1.put(MatchRank.NO_MATCH, 0);
 
-        // when
-        LottoStatistics statistics = LottoStatistics.from(wallet, winningInform);
-        Profit profit = statistics.calculateProfit(spentMoney);
+        long expectedTotalPrize = Stream.of(MatchRank.values())
+                .filter(rank -> rank != MatchRank.NO_MATCH)
+                .mapToLong(MatchRank::getMoney)
+                .sum();
 
-        // then
-        assertThat(profit.rate()).isEqualTo(0.5);
-        assertThat(profit.isProfit()).isFalse();
+        LottoStatisticsTestData data1 = new LottoStatisticsTestData(wallet, winningInform, expectedCounts1,
+                expectedTotalPrize);
+
+        // 케이스 2: 빈 Wallet
+        Wallet emptyWallet = new Wallet(List.of());
+        Map<MatchRank, Integer> expectedCounts2 = new EnumMap<>(MatchRank.class);
+        for (MatchRank rank : MatchRank.values()) {
+            expectedCounts2.put(rank, 0);
+        }
+        LottoStatisticsTestData data2 = new LottoStatisticsTestData(emptyWallet, winningInform, expectedCounts2, 0);
+
+        return Stream.of(data1, data2);
     }
 
+    @DisplayName("당첨번호와의 일치 개수 통계를 검증한다.")
+    @ParameterizedTest
+    @MethodSource("provideTestData")
+    void testRankCounts(LottoStatisticsTestData testData) {
+        LottoStatistics statistics = LottoStatistics.from(testData.wallet, testData.winningInform);
+        assertThat(statistics.getRankCounts()).isEqualTo(testData.expectedRankCounts);
+    }
+
+    @DisplayName("통 당첨 금액을 검증한다.")
+    @ParameterizedTest
+    @MethodSource("provideTestData")
+    void testTotalPrize(LottoStatisticsTestData testData) {
+        LottoStatistics statistics = LottoStatistics.from(testData.wallet, testData.winningInform);
+        assertThat(statistics.getTotalPrize()).isEqualTo(testData.expectedTotalPrize);
+    }
 }

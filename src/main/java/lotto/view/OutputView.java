@@ -2,9 +2,13 @@ package lotto.view;
 
 import static lotto.domain.MatchRank.*;
 
+import java.util.List;
+import java.util.Map;
 import lotto.domain.LottoStatistics;
 import lotto.domain.MatchRank;
 import lotto.domain.Profit;
+import lotto.dto.LottoDto;
+import lotto.dto.WalletDto;
 
 public class OutputView {
 
@@ -17,7 +21,20 @@ public class OutputView {
         printProfit(profit);
     }
 
+    public void printWallet(WalletDto walletDto) {
+        List<LottoDto> lottoDtos = walletDto.lottoDtos();
+
+        StringBuilder sb = new StringBuilder();
+        for (LottoDto dto : lottoDtos) {
+            sb.append(dto.numbers());
+            sb.append("\n");
+        }
+
+        System.out.println(sb);
+    }
+
     private void printStatics(LottoStatistics statistics) {
+        Map<MatchRank, Integer> rankCounts = statistics.getRankCounts();
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
@@ -26,7 +43,7 @@ public class OutputView {
                 continue;
             }
             String output = rank.getMatchData();
-            int count = statistics.getCountOf(rank);
+            int count = rankCounts.get(rank);
             System.out.println(output + count + "개");
         }
     }
