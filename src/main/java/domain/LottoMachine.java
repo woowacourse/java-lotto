@@ -26,11 +26,11 @@ public class LottoMachine {
 
     public Lottos issueLottos() {
         final int lottoCount = calculateTicketCount();
-        List<Lotto> lottos = isssueLottoBy(lottoCount);
+        List<Lotto> lottos = issueLottoBy(lottoCount);
         return new Lottos(lottos);
     }
 
-    private List<Lotto> isssueLottoBy(final int lottoCount) {
+    private List<Lotto> issueLottoBy(final int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             insertLottoTo(lottos);
