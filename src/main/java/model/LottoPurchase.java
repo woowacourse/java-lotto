@@ -17,6 +17,7 @@ public class LottoPurchase {
         Validator.validateNullOrBlank(input, INVALID_INPUT_NULL_OR_BLANK.getMessage());
         Validator.validateInteger(input, INVALID_LOTTO_PURCHASE_FORMAT.getMessage());
         int amount = Parser.convertStringToInteger(input);
+
         return new LottoPurchase(amount);
     }
 
@@ -25,6 +26,7 @@ public class LottoPurchase {
                 INVALID_LOTTO_MIN_PURCHASE.getMessage(LOTTO_PURCHASE_MIN_AMOUNT));
         Validator.validateUnit(amount, LOTTO_PURCHASE_MIN_AMOUNT,
                 INVALID_LOTTO_PURCHASE_UNIT.getMessage(LOTTO_PURCHASE_MIN_AMOUNT));
+
         this.amount = amount;
     }
 

@@ -27,6 +27,7 @@ public enum Prize {
         for (Prize prize : Prize.values()) {
             enumMap.put(prize, 0);
         }
+
         return enumMap;
     }
 

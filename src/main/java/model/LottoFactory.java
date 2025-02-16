@@ -39,6 +39,7 @@ public class LottoFactory {
             Prize foundPrize = Prize.find(matchCount, matchesBonus);
             prizes.put(foundPrize, prizes.get(foundPrize) + 1);
         }
+
         return prizes;
     }
 
@@ -53,6 +54,7 @@ public class LottoFactory {
         if (winningAmount >= 1) {
             return PROFIT;
         }
+
         return DAMAGE;
     }
 
