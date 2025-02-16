@@ -67,14 +67,16 @@ public class LottoStore {
                 .toList());
     }
 
-    public double calculateProfitRate(int lottoTicketCount, LottoRankResultsResponse lottoRankResultsResponse) {
-        int purchasedAmount = lottoTicketCount * LOTTO_PRICE;
-
+    public double calculateProfitRate(int purchasedAmount, LottoRankResultsResponse lottoRankResultsResponse) {
         LottoRankResult lottoRankResult = lottoDtoMapper.toLottoRankResult(lottoRankResultsResponse);
 
         int profit = lottoRankResult.getKeys().stream()
                 .mapToInt(rank -> rank.getWinningAmount() * lottoRankResult.getValue(rank)).sum();
         return (double) profit / purchasedAmount;
+    }
+
+    public int calculatePurchaseAmount(int lottoTicketCount) {
+        return lottoTicketCount * LOTTO_PRICE;
     }
 
     private void validateAmountUnit(int purchaseAmount) {

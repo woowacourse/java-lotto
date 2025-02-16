@@ -55,7 +55,8 @@ public class LottoController {
     }
 
     private void calculateProfitRate(int lottoTicketCount, LottoRankResultsResponse lottoRankResultsResponse) {
-        double profitRate = lottoStore.calculateProfitRate(lottoTicketCount, lottoRankResultsResponse);
+        int purchaseAmount = lottoStore.calculatePurchaseAmount(lottoTicketCount);
+        double profitRate = lottoStore.calculateProfitRate(purchaseAmount, lottoRankResultsResponse);
         lottoConsoleView.printProfitRate(profitRate);
     }
 }
