@@ -41,5 +41,4 @@ public class WinningNumberTest {
             new WinningNumber("a,2,3,4,5,5");
         }).isInstanceOf(LottoException.class);
     }
-
 }

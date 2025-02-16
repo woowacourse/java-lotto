@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoTest {
+    
     @ParameterizedTest
     @MethodSource("duplicateLottoRandomNumbers")
     @DisplayName("로또_번호가_중복되는_경우_예외_발생")
@@ -41,7 +42,6 @@ public class LottoTest {
                 Arguments.arguments(List.of(1, 2, 3, 4))
         );
     }
-
 
     @ParameterizedTest
     @MethodSource("lottoNumbers")

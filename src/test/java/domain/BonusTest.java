@@ -25,5 +25,4 @@ public class BonusTest {
             new BonusNumber(numbers);
         }).isInstanceOf(LottoException.class);
     }
-
 }
