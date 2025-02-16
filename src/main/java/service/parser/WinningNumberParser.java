@@ -20,9 +20,12 @@ public class WinningNumberParser {
         return numbers;
     }
 
-    private static void validateOutOfRange(List<String> rawNumbers, List<Integer> numbers) {
-        for (int idx = 0; idx < rawNumbers.size(); idx++)
-            Validator.checkOutOfRange(numbers.get(idx), LottoConstants.LOTTO_NUMBER_START, LottoConstants.LOTTO_NUMBER_END, "로또의 숫자가 1~45의 유효 범위를 벗어납니다.");
+    private static void validateOutOfRange(List<Integer> numbers) {
+        numbers.forEach(
+                number -> Validator.checkOutOfRange(number,
+                        LottoConstants.LOTTO_NUMBER_START, LottoConstants.LOTTO_NUMBER_END,
+                        "로또의 숫자가 1~45의 유효 범위를 벗어납니다.")
+        );
     }
 
     private static void validateDuplicate(List<Integer> numbers) {
@@ -39,13 +42,12 @@ public class WinningNumberParser {
 
     private static List<Integer> rawToIntegers(List<String> rawNumbers) {
         return rawNumbers.stream()
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .toList();
     }
 
     private static void validateNotNumber(List<String> rawNumbers) {
-        for (int i = 0; i < rawNumbers.size(); i++) {
-            Validator.checkInvalidNumberForm(rawNumbers.get(i));
-        }
+        rawNumbers.forEach(Validator::checkInvalidNumberForm);
     }
 }
