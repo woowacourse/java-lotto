@@ -27,13 +27,13 @@ public enum LottoPrize {
     private final boolean isBonusMatch;
     private final long prizeMoney;
 
-    LottoPrize(int minMatchCount, boolean isBonusMatch, long prizeMoney) {
+    LottoPrize(final int minMatchCount, final boolean isBonusMatch, final long prizeMoney) {
         this.minMatchCount = minMatchCount;
         this.isBonusMatch = isBonusMatch;
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoPrize match(LottoMatchResult matchResult) {
+    public static LottoPrize match(final LottoMatchResult matchResult) {
         return Arrays.stream(LottoPrize.values())
             .filter(prize -> prize.minMatchCount == matchResult.matchCount())
             .filter(prize -> isSecondPrize(matchResult, prize))
@@ -62,7 +62,7 @@ public enum LottoPrize {
         return prizeMoney;
     }
 
-    private static boolean isSecondPrize(LottoMatchResult matchResult, LottoPrize prize) {
+    private static boolean isSecondPrize(final LottoMatchResult matchResult, final LottoPrize prize) {
         if (prize == LottoPrize.SECOND) {
             return matchResult.isBonusMatch();
         }

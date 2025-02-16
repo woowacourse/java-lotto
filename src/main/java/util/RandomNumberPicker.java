@@ -51,11 +51,11 @@ public class RandomNumberPicker implements NumberPicker {
         List<Integer> result = new ArrayList<>();
 
         while (result.size() < count) {
-            int random = creatRandomNumber(start, end);
-            insertRandomNumber(result, random);
+            final int randomNumber = creatRandomNumber(start, end);
+            insertRandomNumber(result, randomNumber);
         }
 
-        Numbers numbers = Numbers.from(result);
+        final Numbers numbers = Numbers.from(result);
         return numbers.sortNumbers();
     }
 

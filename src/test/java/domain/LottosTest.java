@@ -15,25 +15,25 @@ class LottosTest {
     @Test
     void 로또_당첨_통계를_계산한다() {
         //given
-        Numbers numbers = Numbers.from(List.of(1, 2, 3, 4, 5, 6));
-        Numbers numbers2 = Numbers.from(List.of(7, 8, 9, 4, 5, 6));
-        Numbers numbers3 = Numbers.from(List.of(1, 9, 3, 4, 5, 6));
-        Numbers numbers4 = Numbers.from(List.of(1, 2, 10, 15, 5, 6));
-        Numbers numbers5 = Numbers.from(List.of(1, 2, 11, 4, 5, 6));
+        final Numbers numbers = Numbers.from(List.of(1, 2, 3, 4, 5, 6));
+        final Numbers numbers2 = Numbers.from(List.of(7, 8, 9, 4, 5, 6));
+        final Numbers numbers3 = Numbers.from(List.of(1, 9, 3, 4, 5, 6));
+        final Numbers numbers4 = Numbers.from(List.of(1, 2, 10, 15, 5, 6));
+        final Numbers numbers5 = Numbers.from(List.of(1, 2, 11, 4, 5, 6));
 
-        List<Lotto> lottos = List.of(
+        final List<Lotto> lottos = List.of(
             new Lotto(numbers),
             new Lotto(numbers2),
             new Lotto(numbers3),
             new Lotto(numbers4),
             new Lotto(numbers5));
 
-        List<Integer> matchNumbers = List.of(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 7;
-        Lottos sut = new Lottos(lottos);
+        final List<Integer> matchNumbers = List.of(1, 2, 3, 4, 5, 6);
+        final int bonusNumber = 7;
+        final Lottos sut = new Lottos(lottos);
 
         //when
-        Map<LottoPrize, Integer> result = sut.getStatistics(matchNumbers, bonusNumber);
+        final Map<LottoPrize, Integer> result = sut.getStatistics(matchNumbers, bonusNumber);
 
         System.out.println(result);
 
@@ -49,17 +49,17 @@ class LottosTest {
     @MethodSource("provideLottoStaticsArguments")
     void 로또_당첨_수익률을_계산한다(List<Integer> matchNumbers, int bonusNumber, double expectedIncomeRate) {
         // given
-        Numbers numbers = Numbers.from(List.of(1, 2, 3, 4, 5, 6));
-        Numbers numbers2 = Numbers.from(List.of(7, 8, 9, 10, 11, 12));
+        final Numbers numbers = Numbers.from(List.of(1, 2, 3, 4, 5, 6));
+        final Numbers numbers2 = Numbers.from(List.of(7, 8, 9, 10, 11, 12));
 
-        List<Lotto> lottos = List.of(
+        final List<Lotto> lottos = List.of(
             new Lotto((numbers)),
             new Lotto((numbers2))
         );
-        Lottos sut = new Lottos(lottos);
+        final Lottos sut = new Lottos(lottos);
 
         // when
-        double result = sut.getIncomeRate(matchNumbers, bonusNumber, 10000);
+        final double result = sut.getIncomeRate(matchNumbers, bonusNumber, 10000);
 
         // then
         assertThat(result).isEqualTo(expectedIncomeRate);

@@ -16,8 +16,8 @@ class LottoMachineTest {
     @Test
     void leesThanPurchaseMoney() {
         //given //when //than
-        int purchaseMoney = 999;
-        NumberPicker numberPicker = new StaticNumberPicker(List.of(
+        final int purchaseMoney = 999;
+        final NumberPicker numberPicker = new StaticNumberPicker(List.of(
             List.of(1, 2, 3, 4, 5, 6),
             List.of(14, 15, 16, 13, 12, 9),
             List.of(43, 41, 40, 23, 35, 22),
@@ -32,8 +32,8 @@ class LottoMachineTest {
     @Test
     void nonLeesThanPurchaseMoney() {
         //given //when //than
-        int purchaseMoney = 1000;
-        NumberPicker numberPicker = new StaticNumberPicker(List.of(
+        final int purchaseMoney = 1000;
+        final NumberPicker numberPicker = new StaticNumberPicker(List.of(
             List.of(1, 2, 3, 4, 5, 6),
             List.of(14, 15, 16, 13, 12, 9),
             List.of(43, 41, 40, 23, 35, 22),
@@ -47,18 +47,18 @@ class LottoMachineTest {
     @Test
     void issuesLotto() {
         //given
-        int purchaseMoney = 4000;
-        NumberPicker numberPicker = new StaticNumberPicker(List.of(
+        final int purchaseMoney = 4000;
+        final NumberPicker numberPicker = new StaticNumberPicker(List.of(
             List.of(1, 2, 3, 4, 5, 6),
             List.of(14, 15, 16, 13, 12, 9),
             List.of(43, 41, 40, 23, 35, 22),
             List.of(9, 7, 13, 14, 16, 2)
         ));
 
-        LottoMachine lottoMachine = LottoMachine.of(purchaseMoney, numberPicker);
+        final LottoMachine lottoMachine = LottoMachine.of(purchaseMoney, numberPicker);
 
         // when
-        Lottos result = lottoMachine.issueLottos();
+        final Lottos result = lottoMachine.issueLottos();
 
         // then
         assertThat(result.getLottos()).hasSize(4);

@@ -15,7 +15,7 @@ public class StaticNumberPicker implements NumberPicker {
     }
 
     @Override
-    public Numbers pickUnique(int start, int end, int count) {
+    public Numbers pickUnique(final int start, final int end, final int count) {
         return Numbers.from(staticNumbers.get(index++));
     }
 }
