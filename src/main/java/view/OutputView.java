@@ -1,8 +1,12 @@
 package view;
 
-import dto.*;
-
-import static global.constant.LottoConstant.NUMBER_DELIMITER;
+import dto.LottoNumbersResponse;
+import dto.LottoRankDetailResponse;
+import dto.LottoResultDetailResponse;
+import dto.LottoResultResponse;
+import dto.LottoResultsResponse;
+import dto.LottosResponse;
+import dto.TicketAmountResponse;
 
 public class OutputView {
 
@@ -45,7 +49,7 @@ public class OutputView {
     }
 
     private void printLottoNumbers(LottoNumbersResponse response) {
-        String numbers = String.join(NUMBER_DELIMITER, response.numbers());
+        String numbers = String.join(", ", response.numbers());
         System.out.println("[" + numbers + "]");
     }
 }
