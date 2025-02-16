@@ -58,7 +58,7 @@ public class LottoController {
     }
 
     private int inputLottoMoney() {
-        return MoneyParser.parseLottoCount(inputView.askForNormal());
+        return MoneyParser.parseLottoCount(inputView.askLottoMoney());
     }
 
     private List<Integer> inputWinningNumber() {

@@ -1,23 +1,18 @@
 package service;
 
-import constant.LottoConstants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class LottoNumberGenerator {
+public class LottoNumberGenerator implements NumberGenerate {
 
     public static final int LOTTO_FROM_INDEX = 0;
 
     private static LottoNumberGenerator instance;
 
-    private final List<Integer> numbers;
-
     private LottoNumberGenerator() {
-        numbers = new ArrayList<>();
-        for (int num = LottoConstants.LOTTO_NUMBER_START; num <= LottoConstants.LOTTO_NUMBER_END; num++) {
-            numbers.add(num);
-        }
     }
 
     public static LottoNumberGenerator getInstance() {
@@ -27,9 +22,13 @@ public class LottoNumberGenerator {
         return instance;
     }
 
-    public List<Integer> generateLottoNumbers() {
-        List<Integer> tmp = new ArrayList<>(numbers);
-        Collections.shuffle(tmp);
-        return tmp.subList(LOTTO_FROM_INDEX, LottoConstants.LOTTO_COUNT);
+    @Override
+    public List<Integer> generateRandomInRange(int start, int end, int size) {
+        ArrayList<Integer> numbersOfRange = IntStream.rangeClosed(start, end)
+                .boxed()
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        Collections.shuffle(numbersOfRange);
+        return numbersOfRange.subList(LOTTO_FROM_INDEX, size);
     }
 }
