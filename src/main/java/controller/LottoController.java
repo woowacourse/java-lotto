@@ -20,7 +20,7 @@ public class LottoController {
         this.outputView = outputView;
     }
 
-    public void startGame() {
+    public void execute() {
         Purchase purchase = readPurchaseAmount();
         int lottoCount = findLottoCount(purchase);
         List<Lotto> issuedLottos = issueLotto(lottoCount);
@@ -52,8 +52,7 @@ public class LottoController {
     }
 
     public List<Lotto> issueLotto(int lottoCount) {
-        LottoMachine lottoMachine = new LottoMachine();
-        List<Lotto> lottos = lottoMachine.generate(lottoCount);
+        List<Lotto> lottos = LottoMachine.generate(lottoCount);
         outputView.printLottos(lottos);
         return lottos;
     }
@@ -86,8 +85,8 @@ public class LottoController {
         WinningResult winningResult = new WinningResult();
         for (Lotto lotto : issuedLottos) {
             int matchingCount = winningNumber.findMatchingCountWith(lotto.getNumbers());
-            boolean matchesBonusNumber = bonusNumber.matchesWith(lotto.getNumbers());
-            WinningStatus winningStatus = WinningStatus.findBy(matchingCount, matchesBonusNumber);
+            boolean isMatchedWithBonusNumber = bonusNumber.matchesWith(lotto.getNumbers());
+            WinningStatus winningStatus = WinningStatus.findBy(matchingCount, isMatchedWithBonusNumber);
             winningResult.update(winningStatus);
         }
         return winningResult;

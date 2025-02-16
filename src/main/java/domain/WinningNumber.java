@@ -8,8 +8,8 @@ public class WinningNumber {
 
     private final List<Integer> numbers = new ArrayList<>();
 
-    public WinningNumber(String inputWinningNumbers) {
-        String[] winningNumbers = inputWinningNumbers.split(DELIMITER);
+    public WinningNumber(String winningNumberInput) {
+        String[] winningNumbers = winningNumberInput.split(DELIMITER);
         validateNumberCount(winningNumbers);
 
         for (String winningNumber : winningNumbers) {
@@ -30,7 +30,7 @@ public class WinningNumber {
 
     private void validateNumberCount(String[] winningNumbers) {
         if (winningNumbers.length != LottoConstants.NUMBER_COUNT) {
-            throw new IllegalArgumentException("당첨 번호의 개수를 6개로 입력해주세요.");
+            throw new IllegalArgumentException("당첨 번호를 \", \"로 구분된 6개의 정수로 입력해주세요.");
         }
     }
 
@@ -41,7 +41,7 @@ public class WinningNumber {
             throwDuplicateException(number);
         } catch (NumberFormatException e) {
             throwDigitException(winningNumber);
-            throw new IllegalArgumentException("당첨 번호는 정수로 입력해주세요.");
+            throw new IllegalArgumentException("당첨 번호는 1~45 사이의 정수로 입력해주세요.");
         }
     }
 

@@ -13,11 +13,11 @@ public class Purchase {
     }
 
     public int calculateLottoCount() {
-        return amount / LOTTO_PRICE;
+        return this.amount / LOTTO_PRICE;
     }
 
     public int getAmount() {
-        return amount;
+        return this.amount;
     }
 
     private void validate(String purchaseAmountInput) {
@@ -26,7 +26,7 @@ public class Purchase {
             throwRangeException(purchaseAmount);
             throwUnitException(purchaseAmount);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구입 금액은 정수로 입력해주세요.");
+            throw new IllegalArgumentException("구입 금액은 1000 이상 100000 이하의 정수를 입력해주세요.");
         }
     }
 
