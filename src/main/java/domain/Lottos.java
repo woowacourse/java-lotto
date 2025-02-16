@@ -1,12 +1,12 @@
-package domain.lotto;
+package domain;
 
 
-import static domain.lotto.Lotto.LOTTO_PRICE;
+import static domain.Lotto.LOTTO_PRICE;
 
-import domain.MatchDto;
-import domain.numbergenerator.RandomNumberGenerator;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
 
@@ -34,15 +34,16 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<String> getLottoNumbers() {
-        return lottos.stream()
-                .map(Lotto::getNumbers)
-                .toList();
+    public Map<Rank, Integer> getRankCount(WinningNumbers winningNumbers) {
+        Map<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
+        lottos.forEach(lotto ->
+                rankCount.put(
+                        winningNumbers.getRank(lotto),
+                        rankCount.getOrDefault(winningNumbers.getRank(lotto), 0) + 1));
+        return rankCount;
     }
 
-    public List<MatchDto> getMatchDtos(List<Integer> winningNumbers, int bonusNumber) {
-        return lottos.stream()
-                .map(lotto -> lotto.getMatchDto(winningNumbers, bonusNumber))
-                .toList();
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

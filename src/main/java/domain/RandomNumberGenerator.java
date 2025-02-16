@@ -1,7 +1,7 @@
-package domain.numbergenerator;
+package domain;
 
-import static domain.lotto.Lotto.MAX_LOTTO_NUMBER;
-import static domain.lotto.Lotto.MIN_LOTTO_NUMBER;
+import static domain.Lotto.MAX_LOTTO_NUMBER;
+import static domain.Lotto.MIN_LOTTO_NUMBER;
 
 import java.util.Random;
 
