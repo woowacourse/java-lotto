@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import java.util.Optional;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoMoney;
@@ -20,9 +21,9 @@ public class GameController {
     private final WinningLottoService winningLottoService = new WinningLottoService();
 
     public void run() {
-        LottoMoney lottoMoney = saveLottoMoney();
-        LottoMachine lottoMachine = buyLottoTickets(lottoMoney);
+        LottoMoney lottoMoney = storeLottoMoney();
 
+        LottoMachine lottoMachine = buyLottoTickets(lottoMoney);
         List<Lotto> lottoTickets = lottoMachine.getLottoTickets();
         OutputView.writeLottoTickets(lottoTickets);
 
@@ -32,68 +33,81 @@ public class GameController {
         OutputView.writeLottoResult(lottoResult);
     }
 
-    private LottoMoney saveLottoMoney() {
-        LottoMoney lottoMoney = null;
-        while (lottoMoney == null) {
+    private LottoMoney storeLottoMoney() {
+        Optional<LottoMoney> lottoMoney = Optional.empty();
+
+        while (lottoMoney.isEmpty()) {
             lottoMoney = createLottoMoney();
         }
-        return lottoMoney;
+        return lottoMoney.get();
     }
 
-    private LottoMoney createLottoMoney() {
+    private Optional<LottoMoney> createLottoMoney() {
         return ObjectCreator.useInputToCreateObject(() -> {
+
             String money = InputView.readLottoMoney();
+
             return lottoMoneyService.createLottoMoney(money);
         });
     }
 
     private LottoMachine buyLottoTickets(LottoMoney lottoMoney) {
-        LottoMachine lottoMachine = null;
-        while (lottoMachine == null) {
+        Optional<LottoMachine> lottoMachine = Optional.empty();
+
+        while (lottoMachine.isEmpty()) {
             lottoMachine = ObjectCreator.useInputToCreateObject(() -> new LottoMachine(lottoMoney));
         }
-        return lottoMachine;
+        return lottoMachine.get();
     }
 
     private WinningLotto storeWinningLotto() {
         Lotto winningNumbers = storeWinningLottoNumbers();
+
         return storeWinningLottoBonus(winningNumbers);
     }
 
     private Lotto storeWinningLottoNumbers() {
-        Lotto lotto = null;
-        while (lotto == null) {
+        Optional<Lotto> lotto = Optional.empty();
+
+        while (lotto.isEmpty()) {
             lotto = createWinningLottoNumbers();
         }
-        return lotto;
+        return lotto.get();
     }
 
-    private Lotto createWinningLottoNumbers() {
+    private Optional<Lotto> createWinningLottoNumbers() {
         return ObjectCreator.useInputToCreateObject(() -> {
+
             String numbers = InputView.readWinningNumbers();
+
             return lottoService.createLotto(numbers);
         });
     }
 
     private WinningLotto storeWinningLottoBonus(Lotto winningNumbers) {
-        WinningLotto winningLotto = null;
-        while (winningLotto == null) {
+        Optional<WinningLotto> winningLotto = Optional.empty();
+
+        while (winningLotto.isEmpty()) {
             winningLotto = createWinningLottoWithBonus(winningNumbers);
         }
-        return winningLotto;
+        return winningLotto.get();
     }
 
-    private WinningLotto createWinningLottoWithBonus(Lotto winningNumbers) {
+    private Optional<WinningLotto> createWinningLottoWithBonus(Lotto winningNumbers) {
         return ObjectCreator.useInputToCreateObject(() -> {
+
             String bonus = InputView.readBonusBall();
+
             return winningLottoService.createWinningLotto(winningNumbers, bonus);
         });
     }
 
     private LottoResult checkLottoResult(WinningLotto winningLotto, List<Lotto> lottoTickets, LottoMoney lottoMoney) {
         LottoResult lottoResult = new LottoResult();
+
         lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
         lottoResult.calculateLottoProfitRate(lottoMoney);
+
         return lottoResult;
     }
 }
