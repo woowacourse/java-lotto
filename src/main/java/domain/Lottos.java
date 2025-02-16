@@ -1,5 +1,7 @@
 package domain;
 
+import global.generator.Generator;
+import global.generator.RandomGenerator;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;

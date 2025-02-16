@@ -10,7 +10,6 @@ import static view.Output.SECOND_MESSAGE;
 import static view.Output.SEPARATE_LINE;
 import static view.Output.THIRD_MESSAGE;
 
-import domain.Amount;
 import domain.Rank;
 import domain.dto.AmountDto;
 import domain.dto.LottoDto;

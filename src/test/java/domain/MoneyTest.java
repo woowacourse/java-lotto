@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class AmountTest {
+class MoneyTest {
 
     @Nested
     class 금액_검증_테스트 {
@@ -19,7 +19,7 @@ class AmountTest {
         @ValueSource(ints = {-5, 0})
         void 금액이_양수가_아니면_예외가_발생한다(int price) {
             assertThatThrownBy(() -> {
-                new Amount(price);
+                new Money(price);
             }).isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(INVALID_POSITIVE.getMessage());
         }
@@ -28,7 +28,7 @@ class AmountTest {
         @ValueSource(ints = {1500, 1234})
         void 금액이_1000원_단위가_아니면_예외가_발생한다(int price) {
             assertThatThrownBy(() -> {
-                new Amount(price);
+                new Money(price);
             }).isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(INVALID_UNIT_PRICE.getMessage());
         }
@@ -37,11 +37,11 @@ class AmountTest {
     @Test
     void 수익률_계산_테스트() {
         //given
-        Amount amount = new Amount(14000);
+        Money money = new Money(14000);
         EnumMap<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
         rankCount.put(Rank.FIFTH,1);
 
         //when-then
-        assertThat(amount.calculateProfit(rankCount)).isEqualTo(0.35);
+        assertThat(money.calculateProfit(rankCount)).isEqualTo(0.35);
     }
 }

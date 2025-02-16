@@ -1,6 +1,6 @@
 package global.factory;
 
-import domain.Amount;
+import domain.Money;
 import domain.Lotto;
 import domain.Lottos;
 import global.generator.Generator;
@@ -15,9 +15,9 @@ public class LottosFactory {
         this.lottoFactory = new LottoFactory(generator);
     }
 
-    public Lottos from(final Amount amount) {
+    public Lottos from(final int count) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; amount.compareAmount(i); i++) {
+        for (int i = 0; i<count; i++) {
             lottos.add(lottoFactory.create());
         }
 

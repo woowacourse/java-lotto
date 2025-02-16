@@ -1,12 +1,12 @@
 package domain.dto;
 
-import domain.Amount;
+import domain.Money;
 
 public record AmountDto(
         int amount
 ) {
 
-    public AmountDto(Amount amount) {
-        this(amount.getAmount());
+    public AmountDto(Money money) {
+        this(money.getMoney());
     }
 }
