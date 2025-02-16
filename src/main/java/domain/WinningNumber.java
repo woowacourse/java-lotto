@@ -19,8 +19,7 @@ public class WinningNumber {
 
     public WinningNumber(String inputWinningNumber) {
         validateIsEmpty(inputWinningNumber);
-        String[] winningNumbers = StringUtility.removeBlank(inputWinningNumber)
-                .split(",");
+        String[] winningNumbers = inputWinningNumber.split(",");
         validateNumbersValid(winningNumbers);
         List<Integer> parsedWinningNumbers = parsingWinningNumbers(winningNumbers);
         validateDuplication(parsedWinningNumbers);

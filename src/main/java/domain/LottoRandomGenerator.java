@@ -7,15 +7,20 @@ import java.util.Set;
 
 public class LottoRandomGenerator {
 
-    private static final int LOTTO_NUMBER_SIZE = 6;
-    private static final int LOTTO_NUMBER_START = 1;
-    private static final int LOTTO_NUMBER_END = 45;
-    private static final Random random = new Random();
+    private final int LOTTO_NUMBER_SIZE = 6;
+    private final int LOTTO_NUMBER_START = 1;
+    private final int LOTTO_NUMBER_END = 45;
 
-    public static List<Integer> generateNumbers() {
+    private final Random random;
+
+    public LottoRandomGenerator() {
+        random = new Random();
+    }
+
+    public List<Integer> generateNumbers() {
         Set<Integer> numbers = new HashSet<>();
         while (numbers.size() != LOTTO_NUMBER_SIZE) {
-            numbers.add(random.nextInt(LOTTO_NUMBER_START, LOTTO_NUMBER_END));
+            numbers.add(random.nextInt(LOTTO_NUMBER_START, LOTTO_NUMBER_END + 1));
         }
         return numbers.stream().toList();
     }

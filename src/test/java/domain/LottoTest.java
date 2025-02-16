@@ -12,13 +12,13 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoTest {
-    
+
     @ParameterizedTest
     @MethodSource("duplicateLottoRandomNumbers")
     @DisplayName("로또_번호가_중복되는_경우_예외_발생")
     public void 로또_번호가_중복되는_경우_예외_발생(List<Integer> duplicateNumbers) {
         assertThatThrownBy(() -> {
-            new Lotto(duplicateNumbers);
+            new Lotto(duplicateNumbers, new LottoBuyResultFormatter());
         }).isInstanceOf(LottoException.class);
     }
 
@@ -33,7 +33,7 @@ public class LottoTest {
     @DisplayName("로또_번호는_6개여야합니다")
     public void 로또_번호는_6개여야합니다(List<Integer> invalidSizeNumbers) {
         assertThatThrownBy(() -> {
-            new Lotto(invalidSizeNumbers);
+            new Lotto(invalidSizeNumbers, new LottoBuyResultFormatter());
         }).isInstanceOf(LottoException.class);
     }
 
@@ -47,7 +47,7 @@ public class LottoTest {
     @MethodSource("lottoNumbers")
     @DisplayName("사용자가_구매한_로또_내역을_정렬하여_출력한다")
     public void 사용자가_구매한_로또_내역을_정렬하여_출력한다(List<Integer> lottoNumbers) {
-        assertThat(new Lotto(lottoNumbers).buyNumber())
+        assertThat(new Lotto(lottoNumbers, new LottoBuyResultFormatter()).buyNumber())
                 .isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
