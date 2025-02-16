@@ -1,6 +1,7 @@
 package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 import java.util.List;
 import model.numbers.LottoNumber;
@@ -57,7 +58,19 @@ class WinningLottoTest {
         assertThat(isBonusNumberOverlapped).isTrue();
     }
 
-    // TODO: 유효한 경우에 대한 테스트
+    @Test
+    void 당첨_번호가_유효한_경우_예외를_던지지_않는다() {
+        // given
+        LottoNumbers lottoNumbers = new LottoNumbers(
+                fromIntegerListToLottoNumberList(List.of(1, 2, 3, 4, 5, 6))
+        );
+        LottoNumber bonusNumber = new LottoNumber(7);
+
+        // when & then
+        assertThatCode(
+                () -> new WinningLotto(lottoNumbers, bonusNumber)
+        ).doesNotThrowAnyException();
+    }
 
     private List<LottoNumber> fromIntegerListToLottoNumberList(List<Integer> numbers) {
         return numbers.stream()

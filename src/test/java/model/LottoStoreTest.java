@@ -20,9 +20,13 @@ class LottoStoreTest {
     void 당첨결과_개수를_센다() {
         // given
         List<LottoNumbers> lottoNumbers = List.of(
-                new LottoNumbers(fromIntegerListToLottoNumberList(List.of(1, 2, 3, 4, 5, 6))));
+                new LottoNumbers(fromIntegerListToLottoNumberList(List.of(1, 2, 3, 4, 5, 6)))
+        );
+
         WinningLotto winningLotto = new WinningLotto(
-                new LottoNumbers(fromIntegerListToLottoNumberList(List.of(1, 2, 3, 4, 5, 7))), new LottoNumber(6));
+                new LottoNumbers(fromIntegerListToLottoNumberList(List.of(1, 2, 3, 4, 5, 7))
+                ), new LottoNumber(6)
+        );
 
         // when
         LottoRankResult lottoRankResult = lottoStore.calculateRankMatchCount(lottoNumbers, winningLotto);

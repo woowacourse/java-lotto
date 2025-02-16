@@ -17,12 +17,13 @@ class LottoNumbersTest {
     @Test
     void 로또_번호의_개수가_유효하지_않은_경우_예외를_던진다() {
         // given
-        List<Integer> numbers = IntStream.rangeClosed(LOWER_BOUND, VALID_SIZE_OF_NUMBERS + 1)
+        List<LottoNumber> lottoNumbers = IntStream.rangeClosed(LOWER_BOUND, VALID_SIZE_OF_NUMBERS + 1)
                 .boxed()
+                .map(LottoNumber::new)
                 .toList();
 
         // when & then
-        assertThatThrownBy(() -> new LottoNumbers(fromIntegerListToLottoNumberList(numbers)))
+        assertThatThrownBy(() -> new LottoNumbers(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 번호는 6개여야 합니다.");
     }
@@ -35,14 +36,9 @@ class LottoNumbersTest {
                 .map(LottoNumber::new)
                 .toList();
 
-        // when * then
+        // when & then
         assertThatCode(() -> new LottoNumbers(lottoNumbers))
                 .doesNotThrowAnyException();
     }
 
-    private List<LottoNumber> fromIntegerListToLottoNumberList(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .toList();
-    }
 }
