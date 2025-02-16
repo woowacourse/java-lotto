@@ -6,6 +6,7 @@ import java.util.List;
 public class LottoManager {
     public static final int LOTTO_UNIT_PRICE = 1000;
     private static final int MAX_PURCHASE_AMOUNT = 100000;
+    private static final LottoMachine lottoMachine = new LottoMachine(new SystemLottoNumberGenerator());
 
     private LottoManager() {
     }
@@ -15,7 +16,7 @@ public class LottoManager {
         int lottoAmount = purchaseAmount / LOTTO_UNIT_PRICE;
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoAmount; i++) {
-            Lotto lotto = LottoMachine.createLotto();
+            Lotto lotto = lottoMachine.createLotto();
             lottos.add(lotto);
         }
         return lottos;
