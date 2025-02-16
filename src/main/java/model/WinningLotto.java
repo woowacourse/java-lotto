@@ -3,6 +3,7 @@ package model;
 import static global.constant.LottoConstant.MAX_LOTTO_NUMBER;
 import static global.constant.LottoConstant.MIN_LOTTO_NUMBER;
 
+import global.utils.Parser;
 import model.utils.Validator;
 
 import java.util.EnumMap;
@@ -17,7 +18,7 @@ public class WinningLotto {
     public WinningLotto(final String winningNumbers, final String bonusNumber) {
         winningLotto = new Lotto(winningNumbers);
 
-        int parsedBonusNumber = parseBonusNumber(bonusNumber);
+        int parsedBonusNumber = Parser.parseInteger(bonusNumber);
         validateBonusNumber(parsedBonusNumber);
         this.bonusNumber = parsedBonusNumber;
     }
@@ -30,11 +31,6 @@ public class WinningLotto {
             rankResult.put(rank, rankResult.get(rank) + 1);
         }
         return rankResult;
-    }
-
-    private static int parseBonusNumber(final String bonusNumber) {
-        Validator.validateNumeric(bonusNumber);
-        return Integer.parseInt(bonusNumber);
     }
 
     private void validateBonusNumber(final int bonusNumber) {

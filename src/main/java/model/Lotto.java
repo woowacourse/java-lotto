@@ -1,6 +1,7 @@
 package model;
 
 import dto.LottoNumbersResponse;
+import global.utils.Parser;
 import model.utils.Validator;
 
 import java.util.*;
@@ -59,8 +60,8 @@ public class Lotto {
         String[] tokens = input.split(NUMBER_DELIMITER);
         Validator.validateRange(tokens.length, NUMBER_COUNT, NUMBER_COUNT);
 
-        Arrays.stream(tokens).
-                forEach(t -> numbers.add(convertNumber(t)));
+        Arrays.stream(tokens)
+                .forEach(t -> numbers.add(convertNumber(t)));
 
         validateUniqueNumber(numbers);
 
@@ -68,8 +69,7 @@ public class Lotto {
     }
 
     private int convertNumber(String token) {
-        Validator.validateNumeric(token);
-        int number = Integer.parseInt(token);
+        int number = Parser.parseInteger(token);
         Validator.validateRange(number, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
         return number;
     }

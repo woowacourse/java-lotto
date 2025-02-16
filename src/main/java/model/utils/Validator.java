@@ -2,14 +2,6 @@ package model.utils;
 
 public class Validator {
 
-    public static void validateNumeric(final String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
-        }
-    }
-
     public static void validateRange(final int number, final int min, final int max) {
         if (number > max || number < min) {
             throw new IllegalArgumentException("범위 내의 값만 입력할 수 있습니다.");

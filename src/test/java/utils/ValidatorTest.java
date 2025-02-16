@@ -9,13 +9,6 @@ import org.junit.jupiter.api.Test;
 class ValidatorTest {
 
     @Test
-    void 숫자가_아닌_경우_예외가_발생한다() {
-        assertThatThrownBy(() -> {
-            Validator.validateNumeric("a");
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     void 범위에_벗어나면_예외가_발생한다() {
         assertThatThrownBy(() -> {
             Validator.validateRange(999, Integer.MAX_VALUE, 1000);

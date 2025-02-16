@@ -1,6 +1,7 @@
 package controller;
 
 import dto.LottoAmountResponse;
+import global.utils.Parser;
 import model.utils.Validator;
 import model.LottoResult;
 import model.Lottos;
@@ -45,8 +46,7 @@ public class LottoController {
     private int enterPrice() {
         try {
             String input = inputView.enterPurchasePrice();
-            Validator.validateNumeric(input);
-            return Integer.parseInt(input);
+            return Parser.parseInteger(input);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e);
             return enterPrice();
