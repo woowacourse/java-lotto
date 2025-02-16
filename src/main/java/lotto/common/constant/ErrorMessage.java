@@ -2,8 +2,6 @@ package lotto.common.constant;
 
 import static lotto.common.constant.BusinessRule.*;
 
-import javax.lang.model.type.ErrorType;
-
 public enum ErrorMessage {
     ERROR_LOTTO_NUMBER_RANGE("로또 번호는 " + LOTTO_MINIMUM + "에서 " + LOTTO_MAXIMUM + "사이여야 합니다."),
     ERROR_INCORRECT_LOTTO_SIZE("로또 번호는 " + LOTTO_SIZE + "개여야 합니다"),
