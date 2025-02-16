@@ -20,7 +20,6 @@ public class LottoFactory {
 
     private final int lottoCount;
     private final List<Lotto> issuedLottoTickets;
-
     private final Random random = new Random();
 
     public static LottoFactory of(final LottoPurchase lottoPurchase) {
@@ -57,6 +56,16 @@ public class LottoFactory {
         return DAMAGE;
     }
 
+    public String lottoCountToString() {
+        return String.valueOf(lottoCount);
+    }
+
+    public List<String> issuedLottoTicketsToString() {
+        return issuedLottoTickets.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.toList());
+    }
+
     private List<Lotto> issueLottoTickets() {
         List<Lotto> issuedLottoTickets = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
@@ -72,7 +81,7 @@ public class LottoFactory {
         }
 
         String issuedTicket = issuedTicketSet.stream()
-                .map(String::valueOf)  // int → String 변환
+                .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_SEPARATOR));
 
         return Lotto.of(issuedTicket);
@@ -86,15 +95,5 @@ public class LottoFactory {
         return prizes.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();
-    }
-
-    public String lottoCountToString() {
-        return String.valueOf(lottoCount);
-    }
-
-    public List<String> issuedLottoTicketsToString() {
-        return issuedLottoTickets.stream()
-                .map(Lotto::toString)
-                .collect(Collectors.toList());
     }
 }
