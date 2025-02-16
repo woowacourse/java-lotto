@@ -1,7 +1,5 @@
 package view;
 
-import static domain.LottoTicket.LOTTO_PRICE;
-
 import domain.LottoTicket;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +17,6 @@ public class InputView {
         validateInteger(purchaseAmount);
         int amount = Integer.parseInt(purchaseAmount);
         validatePositiveInteger(amount);
-        validateLottoPriceUnit(amount);
     }
 
     private static void validateInteger(String purchaseAmount) {
@@ -27,12 +24,6 @@ public class InputView {
             Integer.parseInt(purchaseAmount);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(InputErrorMessage.INTEGER_REQUIRED.getMessage());
-        }
-    }
-
-    private static void validateLottoPriceUnit(int purchaseAmount) {
-        if (purchaseAmount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(InputErrorMessage.NOT_DIVIDED_BY_1000.getMessage());
         }
     }
 
@@ -51,7 +42,7 @@ public class InputView {
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .toList();
-        new LottoTicket(lottoNumbers);
+        LottoTicket.from(lottoNumbers);
         return lottoNumbers;
     }
 
