@@ -27,46 +27,46 @@ public class LottoController {
     }
 
     public void run() {
-        LottoPrice lottoPrice = getLottoPrice();
-        int lottoCount = getLottoCount(lottoPrice);
-        List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
+        final LottoPrice lottoPrice = getLottoPrice();
+        final int lottoCount = getLottoCount(lottoPrice);
+        final List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
         printPurchasedLottos(lottos);
         printWinningResult(lottos, lottoPrice);
     }
 
     private void printWinningResult(final List<Lotto> lottos, final LottoPrice lottoPrice) {
-        WinningResultCalculator winningResultCalculator = getWinningResult();
-        WinningResult winningResult = winningResultCalculator.countLottoPrizes(lottos);
+        final WinningResultCalculator winningResultCalculator = getWinningResult();
+        final WinningResult winningResult = winningResultCalculator.makeWinningResult(lottos);
         outputView.printWinningResult(winningResult.getWinningResult());
         outputView.printProfitRate(winningResult.calculateProfitRate(lottoPrice));
     }
 
     private WinningResultCalculator getWinningResult() {
-        Lotto winningLotto = getWinningLotto();
-        LottoNumber bonusNumber = getBonusNumber();
+        final Lotto winningLotto = getWinningLotto();
+        final LottoNumber bonusNumber = getBonusNumber();
         return new WinningResultCalculator(winningLotto, bonusNumber);
     }
 
     private Lotto getWinningLotto() {
-        String winningLottoNumbers = inputView.readWinningLottoNumbers();
-        String[] splitWinningLottoNumbers = winningLottoNumbers.split(DELIMITER);
-        List<Integer> parsedWinningLottoNumbers = StringParser.parseTokens(splitWinningLottoNumbers);
+        final String winningLottoNumbers = inputView.readWinningLottoNumbers();
+        final String[] splitWinningLottoNumbers = winningLottoNumbers.split(DELIMITER);
+        final List<Integer> parsedWinningLottoNumbers = StringParser.parseTokens(splitWinningLottoNumbers);
         return new Lotto(parsedWinningLottoNumbers);
     }
 
     private LottoNumber getBonusNumber() {
-        String bonusNumber = inputView.readBonusNumber();
-        int parsedBonusNumber = StringParser.parseInt(bonusNumber);
+        final String bonusNumber = inputView.readBonusNumber();
+        final int parsedBonusNumber = StringParser.parseInt(bonusNumber);
         return new LottoNumber(parsedBonusNumber);
     }
 
     private LottoPrice getLottoPrice() {
-        int parsedAmount = StringParser.parseInt(inputView.readPurchasePrice());
+        final int parsedAmount = StringParser.parseInt(inputView.readPurchasePrice());
         return new LottoPrice(parsedAmount);
     }
 
     private int getLottoCount(final LottoPrice lottoPrice) {
-        int lottoCount = lottoPrice.calculateLottoCount();
+        final int lottoCount = lottoPrice.calculateLottoCount();
         outputView.printLottoCount(lottoCount);
         return lottoCount;
     }

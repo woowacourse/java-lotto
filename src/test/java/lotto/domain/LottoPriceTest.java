@@ -10,7 +10,7 @@ public class LottoPriceTest {
         // Given
 
         // When
-        LottoPrice lottoPrice = new LottoPrice(1000);
+        final LottoPrice lottoPrice = new LottoPrice(1000);
 
         // Then
         Assertions.assertThatCode(() -> {
@@ -31,7 +31,7 @@ public class LottoPriceTest {
     @Test
     void 구입_금액에_해당하는_로또_개수를_출력한다() {
         // Given
-        LottoPrice lottoPrice = new LottoPrice(5300);
+        final LottoPrice lottoPrice = new LottoPrice(5300);
 
         // When & Then
         Assertions.assertThat(lottoPrice.calculateLottoCount()).isEqualTo(5);

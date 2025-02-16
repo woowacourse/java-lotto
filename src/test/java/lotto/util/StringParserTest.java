@@ -40,10 +40,10 @@ public class StringParserTest {
     @Test
     void 문자열_토큰_여러_개를_Integer_리스트로_파싱한다() {
         // Given
-        String[] tokens = {" 5", " 10"};
+        final String[] tokens = {" 5", " 10"};
 
         // When
-        List<Integer> parsedTokens = StringParser.parseTokens(tokens);
+        final List<Integer> parsedTokens = StringParser.parseTokens(tokens);
 
         // Then
         Assertions.assertThat(parsedTokens).isEqualTo(List.of(5, 10));

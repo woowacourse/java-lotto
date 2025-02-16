@@ -27,16 +27,15 @@ public class OutputView {
     }
 
     public void printProfitRate(final double profitRate) {
-        double truncatedProfitRate = Math.floor(profitRate * TRUNCATE_SCALE) / TRUNCATE_SCALE;
-        String message = "총 수익률은 %.2f입니다.";
-        message += makeResultMessage(profitRate);
-        System.out.printf(message, truncatedProfitRate);
+        final double truncatedProfitRate = Math.floor(profitRate * TRUNCATE_SCALE) / TRUNCATE_SCALE;
+        System.out.printf(makeResultMessage(profitRate), truncatedProfitRate);
     }
 
-    private String makeResultMessage(double profitRate) {
+    private String makeResultMessage(final double profitRate) {
+        final String message = "총 수익률은 %.2f입니다.";
         if (profitRate >= PROFIT_RATE_STANDARD) {
-            return "(기준이 1이기 때문에 결과적으로 이익이라는 의미임)";
+            return message + "(기준이 1이기 때문에 결과적으로 이익이라는 의미임)";
         }
-        return "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+        return message + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     }
 }

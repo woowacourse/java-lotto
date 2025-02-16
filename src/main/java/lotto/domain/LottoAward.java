@@ -26,7 +26,7 @@ public enum LottoAward {
         this.matchesBonusNumber = matchesBonusNumber;
     }
 
-    public static LottoAward from(int inputMatchingCount, boolean isBonusNumberMatched) {
+    public static LottoAward from(final int inputMatchingCount, final boolean isBonusNumberMatched) {
         return Arrays.stream(LottoAward.values())
                 .filter(lottoAward -> isLottoAwardMatch(inputMatchingCount, isBonusNumberMatched, lottoAward))
                 .findFirst()

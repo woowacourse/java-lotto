@@ -9,12 +9,12 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    public LottoNumber(final int number) {
         validate(number);
         this.number = number;
     }
 
-    private void validate(int number) {
+    private void validate(final int number) {
         if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1과 45 사이여야 합니다.");
         }

@@ -8,7 +8,7 @@ public class WinningResult {
 
     private final Map<LottoAward, Integer> winningResult;
 
-    public WinningResult(Map<LottoAward, Integer> winningResult) {
+    public WinningResult(final Map<LottoAward, Integer> winningResult) {
         this.winningResult = winningResult;
     }
 

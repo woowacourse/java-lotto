@@ -25,13 +25,13 @@ public class InputView {
     }
 
     private String getInput() {
-        String input = readLine();
+        final String input = readLine();
         InputValidator.validate(input);
         return input;
     }
 
     private String readLine() {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         try {
             return bufferedReader.readLine();
         } catch (IOException e) {
