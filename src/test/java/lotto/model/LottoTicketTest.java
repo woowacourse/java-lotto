@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.LottoFixtures;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -62,7 +63,7 @@ class LottoTicketTest {
     private List<Lotto> createLottosByCount(int count) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(LottoFixtures.createLottoOneToSix());
+            lottos.add(LottoFixtures.lottoOneToSix);
         }
         return lottos;
     }

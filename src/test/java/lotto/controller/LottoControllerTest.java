@@ -10,12 +10,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import lotto.model.Cashier;
-import lotto.model.LottoMachine;
-import lotto.model.TestNumberPicker;
+import lotto.LottoFixtures;
 import lotto.view.Console;
-import lotto.view.InputView;
-import lotto.view.OutputView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -33,17 +29,13 @@ class LottoControllerTest {
     @BeforeEach
     void setUp() {
         System.setOut(new PrintStream(outputStream));
-        lottoController = new LottoController(
-                new InputView(),
-                new OutputView(),
-                new Cashier(new LottoMachine(new TestNumberPicker())));
+        lottoController = LottoFixtures.createLottoController(LottoFixtures.testCashier);
     }
 
     @AfterEach
     void cleanStreams() {
         Console.close();
     }
-
 
     @DisplayName("정상적인 경우")
     @Nested

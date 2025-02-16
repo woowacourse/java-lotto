@@ -4,15 +4,17 @@ import static lotto.rule.LottoConstants.Price.LOTTO_PRICE_UNIT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.LottoFixtures;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+@DisplayName("캐셔 테스트")
 class CashierTest {
 
-    private final Cashier cashier = new Cashier(new LottoMachine(new TestNumberPicker()));
+    private final Cashier cashier = LottoFixtures.testCashier;
 
     @DisplayName("정상적인 경우")
     @Nested

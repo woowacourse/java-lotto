@@ -3,7 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.List;
+import lotto.LottoFixtures;
 import lotto.rule.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -55,8 +55,7 @@ class DashBoardTest {
         @DisplayName("결과를 기록할 때, 당첨 번호가 null인 경우 예외가 발생한다.")
         @Test
         void shouldThrowException_WhenWinningLottoIsNull() {
-            assertThatThrownBy(() -> dashBoard.recordWinningResults(null,
-                    new LottoTicket(List.of(LottoFixtures.createLottoOneToSix()))))
+            assertThatThrownBy(() -> dashBoard.recordWinningResults(null, LottoFixtures.lottoTicketOneToSix))
                     .isInstanceOf(NullPointerException.class)
                     .hasMessage("당첨 번호는 null이 될 수 없습니다.");
         }
@@ -64,9 +63,7 @@ class DashBoardTest {
         @DisplayName("결과를 기록할 때, 로또 티켓이 null인 경우 예외가 발생한다.")
         @Test
         void shouldThrowException_WhenLottoTicketIsNull() {
-            assertThatThrownBy(
-                    () -> dashBoard.recordWinningResults(new WinningLotto(LottoFixtures.createLottoOneToSix(), 7),
-                            null))
+            assertThatThrownBy(() -> dashBoard.recordWinningResults(LottoFixtures.winningLottoOneToSix, null))
                     .isInstanceOf(NullPointerException.class)
                     .hasMessage("로또 티켓은 null이 될 수 없습니다.");
         }

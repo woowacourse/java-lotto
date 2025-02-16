@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.LottoFixtures;
 import lotto.rule.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -23,7 +24,7 @@ class WinningLottoTest {
         @DisplayName("당첨 번호와 보너스 번호를 가지고 있는지 우승 로또를 생성할 수 있다.")
         @Test
         void createTest() {
-            Lotto lotto = LottoFixtures.createLottoOneToSix();
+            Lotto lotto = LottoFixtures.lottoOneToSix;
             int bonusNumber = 7;
 
             assertThatCode(() -> new WinningLotto(lotto, bonusNumber))
@@ -33,9 +34,9 @@ class WinningLottoTest {
         @DisplayName("우승 로또에 구매한 로또를 비교하여 순위를 확인할 수 있다.")
         @Test
         void determineRankTest() {
-            Lotto purchasedLotto = LottoFixtures.createLottoOneToSix();
+            Lotto purchasedLotto = LottoFixtures.lottoOneToSix;
             int bonusNumber = 7;
-            WinningLotto winningLotto = new WinningLotto(LottoFixtures.createLottoOneToSix(), bonusNumber);
+            WinningLotto winningLotto = new WinningLotto(LottoFixtures.lottoOneToSix, bonusNumber);
 
             assertThat(winningLotto.determineRank(purchasedLotto))
                     .isEqualTo(Rank.FIRST);
@@ -50,7 +51,7 @@ class WinningLottoTest {
         @ParameterizedTest
         @ValueSource(ints = {1, 2, 3, 4, 5, 6})
         void shouldThrowException_WhenDuplicateBonusNumber(int duplicateNumber) {
-            Lotto lotto = LottoFixtures.createLottoOneToSix();
+            Lotto lotto = LottoFixtures.lottoOneToSix;
 
             assertThatThrownBy(() -> new WinningLotto(lotto, duplicateNumber))
                     .isInstanceOf(IllegalArgumentException.class)
@@ -61,7 +62,7 @@ class WinningLottoTest {
         @ParameterizedTest
         @ValueSource(ints = {0, 46})
         void shouldThrowException_WhenInvalidBonusNumber(int invalidNumber) {
-            Lotto lotto = LottoFixtures.createLottoOneToSix();
+            Lotto lotto = LottoFixtures.lottoOneToSix;
 
             assertThatThrownBy(() -> new WinningLotto(lotto, invalidNumber))
                     .isInstanceOf(IllegalArgumentException.class)

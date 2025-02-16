@@ -9,9 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+@DisplayName("로또 발급기 테스트")
 class LottoMachineTest {
 
-    private final LottoMachine lottoMachine = new LottoMachine(new TestNumberPicker());
+    private final LottoMachine testLottoMachine = new LottoMachine(new TestNumberPicker());
 
     @DisplayName("정상적인 경우")
     @Nested
@@ -21,7 +22,7 @@ class LottoMachineTest {
         @ParameterizedTest
         @ValueSource(ints = {1, 2, 10})
         void countOfIssuedLottoNumbers(int count) {
-            LottoTicket lottoTicket = lottoMachine.issueLottoTicket(count);
+            LottoTicket lottoTicket = testLottoMachine.issueLottoTicket(count);
 
             assertThat(lottoTicket.getLottoCount())
                     .isEqualTo(count);
@@ -44,7 +45,7 @@ class LottoMachineTest {
         @ParameterizedTest
         @ValueSource(ints = {0, -1})
         void shouldThrowException_WhenCountIsLessThanOne(int count) {
-            assertThatThrownBy(() -> lottoMachine.issueLottoTicket(count))
+            assertThatThrownBy(() -> testLottoMachine.issueLottoTicket(count))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("로또는 최소 1개 이상 발급할 수 있습니다.");
         }
