@@ -13,7 +13,7 @@ public class LottoStatistics {
     public int calculateProfit() {
         int sum = 0;
         for (LottoRank lottoRank : lottoCounter.keySet()) {
-            sum += lottoRank.prize * lottoCounter.get(lottoRank);
+            sum += lottoRank.multiplyPrice(lottoCounter.get(lottoRank));
         }
         return sum;
     }

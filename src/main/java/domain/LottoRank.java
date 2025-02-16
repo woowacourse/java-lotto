@@ -29,6 +29,10 @@ public enum LottoRank {
             .orElse(BOOM);
     }
 
+    public int multiplyPrice(int counter) {
+        return prize * counter;
+    }
+
     @Override
     public String toString() {
         String result = "";
