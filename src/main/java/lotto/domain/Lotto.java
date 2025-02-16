@@ -13,7 +13,7 @@ public class Lotto {
     }
 
     private void validate(final List<Integer> values) {
-        validateDuplicated(values);
+        validateDuplication(values);
         validateSize(values);
     }
 
@@ -23,11 +23,11 @@ public class Lotto {
         }
     }
 
-    private void validateDuplicated(final List<Integer> values) {
-        boolean isDuplicated = values.stream()
+    private void validateDuplication(final List<Integer> values) {
+        boolean isDuplicate = values.stream()
                 .distinct()
                 .count() != values.size();
-        if (isDuplicated) {
+        if (isDuplicate) {
             throw new IllegalArgumentException("중복되지 않은 로또 번호를 입력해 주세요.");
         }
     }
@@ -36,11 +36,6 @@ public class Lotto {
         return (int) numbers.stream()
                 .filter(lotto::contains)
                 .count();
-    }
-
-    boolean isDuplicateNumber(final LottoNumber inputNumber) {
-        return numbers.stream()
-                .anyMatch(number -> number.equals(inputNumber));
     }
 
     boolean contains(final LottoNumber lottoNumber) {

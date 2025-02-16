@@ -18,25 +18,25 @@ public enum LottoAward {
 
     private final int matchingCount;
     private final int amount;
-    private final boolean isBonusNumberMatched;
+    private final boolean matchesBonusNumber;
 
-    LottoAward(final int matchingCount, final int amount, final boolean isBonusNumberMatched) {
+    LottoAward(final int matchingCount, final int amount, final boolean matchesBonusNumber) {
         this.matchingCount = matchingCount;
         this.amount = amount;
-        this.isBonusNumberMatched = isBonusNumberMatched;
+        this.matchesBonusNumber = matchesBonusNumber;
     }
 
     public static LottoAward from(int inputMatchingCount, boolean isBonusNumberMatched) {
         return Arrays.stream(LottoAward.values())
-                .filter(lottoAward -> isMatched(inputMatchingCount, isBonusNumberMatched, lottoAward))
+                .filter(lottoAward -> isLottoAwardMatch(inputMatchingCount, isBonusNumberMatched, lottoAward))
                 .findFirst()
                 .orElse(NONE);
     }
 
-    private static boolean isMatched(final int inputMatchingCount, final boolean isBonusNumberMatched,
-                                     final LottoAward lottoAward) {
+    private static boolean isLottoAwardMatch(final int inputMatchingCount, final boolean matchesBonusNumber,
+                                             final LottoAward lottoAward) {
         return lottoAward.matchingCount == inputMatchingCount
-                && lottoAward.isBonusNumberMatched == isBonusNumberMatched;
+                && lottoAward.matchesBonusNumber == matchesBonusNumber;
     }
 
     public int getMatchingCount() {

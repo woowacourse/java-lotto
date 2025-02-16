@@ -10,6 +10,8 @@ public class OutputView {
     private static final String LINE = System.lineSeparator();
     private static final String TITLE_WINNING_RESULT = LINE + "당첨 통계" + LINE + "---------";
     private static final String FORMAT_WINNING_RESULT = "%d개 일치 (%d원)- %d개";
+    private static final int TRUNCATE_SCALE = 100;
+    private static final int PROFIT_RATE_STANDARD = 1;
 
     public void printLottoCount(final int lottoCount) {
         System.out.printf("%d개를 구매했습니다." + LINE, lottoCount);
@@ -25,14 +27,14 @@ public class OutputView {
     }
 
     public void printProfitRate(final double profitRate) {
-        double flooredProfitRage = Math.floor(profitRate * 100) / 100;
+        double truncatedProfitRate = Math.floor(profitRate * TRUNCATE_SCALE) / TRUNCATE_SCALE;
         String message = "총 수익률은 %.2f입니다.";
         message += makeResultMessage(profitRate);
-        System.out.printf(message, flooredProfitRage);
+        System.out.printf(message, truncatedProfitRate);
     }
 
     private String makeResultMessage(double profitRate) {
-        if (profitRate >= 1) {
+        if (profitRate >= PROFIT_RATE_STANDARD) {
             return "(기준이 1이기 때문에 결과적으로 이익이라는 의미임)";
         }
         return "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";

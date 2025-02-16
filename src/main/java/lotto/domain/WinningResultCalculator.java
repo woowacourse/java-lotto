@@ -19,15 +19,15 @@ public class WinningResultCalculator {
         Map<LottoAward, Integer> winningResult = initializeWinningResult();
         for (Lotto lotto : lottos) {
             int matchingCount = winningLotto.countMatchingLottoNumber(lotto);
-            boolean isBonusNumberMatched = lotto.contains(bonusNumber);
-            LottoAward lottoAward = LottoAward.from(matchingCount, isBonusNumberMatched);
+            boolean isBonusNumberMatch = lotto.contains(bonusNumber);
+            LottoAward lottoAward = LottoAward.from(matchingCount, isBonusNumberMatch);
             winningResult.merge(lottoAward, 1, Integer::sum);
         }
         return new WinningResult(winningResult);
     }
 
     private void validate(Lotto winningLotto, LottoNumber bonusNumber) {
-        if (winningLotto.isDuplicateNumber(bonusNumber)) {
+        if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException("로또 번호와 중복되지 않는 보너스 번호를 입력해 주세요.");
         }
     }

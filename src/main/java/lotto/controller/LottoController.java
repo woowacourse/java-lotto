@@ -30,7 +30,7 @@ public class LottoController {
         LottoPrice lottoPrice = getLottoPrice();
         int lottoCount = getLottoCount(lottoPrice);
         List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
-        printPurchaseLottos(lottos);
+        printPurchasedLottos(lottos);
 
         WinningResultCalculator winningResultCalculator = getWinningResult();
         WinningResult winningResult = winningResultCalculator.countLottoPrizes(lottos);
@@ -46,14 +46,14 @@ public class LottoController {
 
     private Lotto getWinningLotto() {
         String winningLottoNumbers = inputView.readWinningLottoNumbers();
-        String[] splittedWinningLottoNumbers = winningLottoNumbers.split(DELIMITER);
-        List<Integer> parsedWinningLottoNumbers = StringParser.parseTokens(splittedWinningLottoNumbers);
+        String[] splitWinningLottoNumbers = winningLottoNumbers.split(DELIMITER);
+        List<Integer> parsedWinningLottoNumbers = StringParser.parseTokens(splitWinningLottoNumbers);
         return new Lotto(parsedWinningLottoNumbers);
     }
 
     private LottoNumber getBonusNumber() {
-        String bonusNumberInput = inputView.readBonusNumber();
-        int parsedBonusNumber = StringParser.parseInt(bonusNumberInput);
+        String bonusNumber = inputView.readBonusNumber();
+        int parsedBonusNumber = StringParser.parseInt(bonusNumber);
         return new LottoNumber(parsedBonusNumber);
     }
 
@@ -68,7 +68,7 @@ public class LottoController {
         return lottoCount;
     }
 
-    private void printPurchaseLottos(final List<Lotto> lottos) {
+    private void printPurchasedLottos(final List<Lotto> lottos) {
         lottos.stream()
                 .map(Lotto::getNumbers)
                 .forEach(System.out::println);
