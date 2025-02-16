@@ -10,7 +10,6 @@ public class BonusNumber {
 
     public BonusNumber(String bonusNumber) {
         validateBonusNumber(bonusNumber);
-        bonusNumber = bonusNumber.trim();
         lottoNumber = new LottoNumber(Integer.parseInt(bonusNumber));
     }
 
