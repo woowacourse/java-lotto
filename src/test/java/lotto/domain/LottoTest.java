@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class LottoTest {
 
@@ -15,19 +17,6 @@ public class LottoTest {
         // When & Then
         Assertions.assertThatCode(() -> new Lotto(numbers))
                 .doesNotThrowAnyException();
-    }
-
-    @Test
-    void 두_로또를_비교하여_일치하는_로또_번호_개수를_반환한다() {
-        // Given
-        final Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final Lotto lotto = new Lotto(Arrays.asList(7, 2, 3, 4, 5, 6));
-
-        // When
-        final int count = winningLotto.countMatchingLottoNumber(lotto);
-
-        // Then
-        Assertions.assertThat(count).isEqualTo(5);
     }
 
     @Test
@@ -48,5 +37,32 @@ public class LottoTest {
         Assertions.assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 1, 2, 3, 4, 5)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복되지 않은 로또 번호를 입력해 주세요.");
+    }
+
+    @Test
+    void 두_로또를_비교하여_일치하는_로또_번호_개수를_반환한다() {
+        // Given
+        final Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final Lotto lotto = new Lotto(Arrays.asList(7, 2, 3, 4, 5, 6));
+
+        // When
+        final int count = winningLotto.countMatchingLottoNumber(lotto);
+
+        // Then
+        Assertions.assertThat(count).isEqualTo(5);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1, true",
+            "7, false"
+    })
+    void 로또가_주어진_로또_번호를_포함하고_있으면_true를_반환한다(final int value, final boolean expected) {
+        // Given
+        final Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoNumber lottoNumber = LottoNumber.from(value);
+
+        // When & Then
+        Assertions.assertThat(winningLotto.contains(lottoNumber)).isEqualTo(expected);
     }
 }
