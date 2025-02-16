@@ -45,8 +45,7 @@ public class OutputView {
     }
 
     public void printWinningRatio(final double returnRatio) {
-        String winningRatioFormat = "총 수익률은 %.2f입니다.";
-        System.out.println(winningRatioFormat.formatted(returnRatio));
+        System.out.println("총 수익률은 %s입니다.".formatted(NumberFormatter.formatReturnRatio(returnRatio)));
     }
 
     public void printErrorMessage(final String message) {
