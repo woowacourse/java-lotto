@@ -46,7 +46,7 @@ public class Lotto {
 
     private void generateCustomLotto(final String input) {
         String[] tokens = input.split(", ");
-        Validator.validateRange(tokens.length, NUMBER_COUNT.getValue(), NUMBER_COUNT.getValue());
+        Validator.validateNumberRange(tokens.length, NUMBER_COUNT.getValue(), NUMBER_COUNT.getValue());
 
         Arrays.stream(tokens).forEach(this::addNumber);
 
@@ -56,7 +56,7 @@ public class Lotto {
     private void addNumber(String token) {
         Validator.validateNumeric(token);
         int number = Integer.parseInt(token);
-        Validator.validateRange(number, MIN_LOTTO_NUMBER.getValue(), MAX_LOTTO_NUMBER.getValue());
+        Validator.validateNumberRange(number, MIN_LOTTO_NUMBER.getValue(), MAX_LOTTO_NUMBER.getValue());
         numbers.add(number);
     }
 

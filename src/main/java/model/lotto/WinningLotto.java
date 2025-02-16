@@ -39,7 +39,7 @@ public class WinningLotto {
     }
 
     private void validateBonusNumber(final int bonusNumber) {
-        Validator.validateRange(bonusNumber, MIN_LOTTO_NUMBER.getValue(), MAX_LOTTO_NUMBER.getValue());
+        Validator.validateNumberRange(bonusNumber, MIN_LOTTO_NUMBER.getValue(), MAX_LOTTO_NUMBER.getValue());
         validateLottoNumberDuplicate(bonusNumber);
     }
 

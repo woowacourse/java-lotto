@@ -30,9 +30,9 @@ public class Ticket {
         return new LottoResultResponse(ROI, Heuristic.determine(ROI));
     }
 
-    private static void validatePurchaseMoney(final int purchaseMoney) {
-        validateRange(purchaseMoney, TICKET_PRICE, Integer.MAX_VALUE);
-        validateDivisibility(purchaseMoney, TICKET_PRICE);
+    private void validatePurchaseMoney(final int purchaseMoney) {
+        validateNumberRange(purchaseMoney, TICKET_PRICE, Integer.MAX_VALUE);
+        validateDivisibility(purchaseMoney);
     }
 
     private double calculateROI(final int totalPrice) {
