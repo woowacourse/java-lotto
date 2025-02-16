@@ -18,8 +18,12 @@ public class InputView {
     }
 
     private List<Integer> parseWinningNumbers(String input) {
-        String[] splitValues = input.split(COMMA);
+        String[] splitValues = trim(input).split(COMMA);
         return parsePositiveIntegers(splitValues);
+    }
+
+    private String trim(String input) {
+        return input.replace(" ", "");
     }
 
     private List<Integer> parsePositiveIntegers(String[] values) {
