@@ -1,12 +1,10 @@
 package controller;
 
 import domain.AnswerLotto;
-import domain.Lotto;
 import domain.Lottos;
 import domain.Money;
 import domain.numbergenerator.NumberGenerator;
 import domain.numbergenerator.RandomNumberGenerator;
-import dto.OutputLottosDto;
 import java.util.List;
 import service.LottoService;
 import view.InputView;
