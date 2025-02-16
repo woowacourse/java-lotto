@@ -4,7 +4,7 @@ import domain.BonusNumber;
 import domain.LottoDispenser;
 import domain.WinningCase;
 import domain.WinningNumber;
-import domain.formatter.WinningCalculateFormatter;
+import domain.WinningCalculateFormatter;
 import java.util.Map;
 import repository.BonusNumberRepository;
 import repository.LottoRepository;

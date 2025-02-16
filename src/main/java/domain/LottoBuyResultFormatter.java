@@ -1,4 +1,4 @@
-package domain.formatter;
+package domain;
 
 import domain.Lotto;
 import domain.LottoNumber;

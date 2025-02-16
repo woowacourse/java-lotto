@@ -1,6 +1,5 @@
 package domain;
 
-import domain.formatter.LottoBuyResultFormatter;
 import exception.LottoException;
 import java.util.HashSet;
 import java.util.List;

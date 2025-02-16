@@ -1,4 +1,4 @@
-package domain.formatter;
+package domain;
 
 import domain.WinningCase;
 import java.util.Map;
