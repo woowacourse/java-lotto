@@ -1,3 +1,7 @@
+package domain;
+
+import enums.LottoRanking;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -22,5 +26,9 @@ public record LottoResult(
             totalPrize += (long) ranking.getPrize() * result.get(ranking);
         }
         return totalPrize;
+    }
+
+    public double getLottoRate(int price){
+        return (double) getTotalPrize() / price;
     }
 }

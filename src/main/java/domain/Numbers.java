@@ -1,8 +1,10 @@
+package domain;
+
 import java.util.Comparator;
 import java.util.List;
 
 public class Numbers {
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public Numbers(List<Integer> numbers) {
         sortingNumbers(numbers);
