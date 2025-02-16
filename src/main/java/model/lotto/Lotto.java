@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static global.constant.ErrorMessage.LOTTO_NUMBER_DUPLICATE_MESSAGE;
 import static global.utils.RandomNumber.generateRandomNumber;
 import static global.utils.Validator.validateNumberRange;
 import static global.utils.Validator.validateNumeric;
@@ -77,7 +78,7 @@ public class Lotto {
 
     private void validateDuplicateNumber(final List<Integer> numbers) {
         if (new HashSet<>(numbers).size() != numbers.size()) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATE_MESSAGE.getMessage());
         }
     }
 }
