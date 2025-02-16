@@ -1,13 +1,8 @@
 package common;
 
-public class NumberValidator {
+public final class NumberValidator {
 
-    public static void validateInteger(String number) {
-        try {
-            Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 해당 입력값은 숫자여야 합니다.");
-        }
+    private NumberValidator() {
     }
 
     public static void validatePositive(int purchaseAmount) {
