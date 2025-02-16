@@ -1,6 +1,6 @@
 package lotto.model.winning;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,17 +23,17 @@ public class WinningLotto {
         return new WinningResultResponses(ranks);
     }
 
-    private Map<Rank, Integer> findRanks(final List<Lotto> lottos) {
-        Map<Rank, Integer> ranks = new LinkedHashMap<>();
-        initRanks(ranks);
-        saveMatchingRanks(lottos, ranks);
-        return ranks;
-    }
-
     private void validateDuplication(final Lotto lotto, final LottoNumber bonusNumber) {
         if (lotto.hasBonus(bonusNumber)) {
             throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복될 수 없습니다.");
         }
+    }
+
+    private Map<Rank, Integer> findRanks(final List<Lotto> lottos) {
+        Map<Rank, Integer> ranks = new HashMap<>();
+        initRanks(ranks);
+        saveMatchingRanks(lottos, ranks);
+        return ranks;
     }
 
     private void initRanks(final Map<Rank, Integer> ranks) {

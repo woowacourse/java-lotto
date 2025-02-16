@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lotto.controller.generator.LottoNumbersGenerator;
@@ -52,10 +53,18 @@ public class LottoController {
     }
 
     private void printIssuedLottoTickets(final List<Lotto> lottoTickets) {
-        List<List<Integer>> issuedLottoNumbers = lottoTickets.stream()
-                .map(Lotto::getNumbers)
-                .toList();
+        List<List<Integer>> issuedLottoNumbers = new ArrayList<>();
+        for (Lotto lottoTicket : lottoTickets) {
+            addSortedLottoNumbers(lottoTicket, issuedLottoNumbers);
+        }
         outputView.printIssuedLottos(issuedLottoNumbers);
+    }
+
+    private void addSortedLottoNumbers(final Lotto lottoTicket, final List<List<Integer>> issuedLottoNumbers) {
+        issuedLottoNumbers.add(new ArrayList<>(lottoTicket.getNumbers())
+                .stream()
+                .sorted()
+                .toList());
     }
 
     private void printWinningResult(final WinningResultResponses winningResultResponses, final Money buyingAmount) {

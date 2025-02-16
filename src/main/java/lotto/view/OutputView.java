@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,9 +25,16 @@ public class OutputView {
     public void printWinningResult(final WinningResultResponses responses) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (WinningResultResponse response : responses.getResponses()) {
+        for (WinningResultResponse response : getAscendingResultsByWinningAmount(responses)) {
             printStatistics(response);
         }
+    }
+
+    private List<WinningResultResponse> getAscendingResultsByWinningAmount(final WinningResultResponses responses) {
+        return responses.getResponses()
+                .stream()
+                .sorted(Comparator.comparingLong(WinningResultResponse::getWinningAmount))
+                .toList();
     }
 
     private void printStatistics(final WinningResultResponse response) {
