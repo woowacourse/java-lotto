@@ -28,9 +28,7 @@ public class LottoTest {
     @ParameterizedTest
     @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
     void findMatchesWithBonusNumber(int targetNumberInput, boolean expected) {
-        //TODO : 세팅이 불편하다.
-        WinningNumber defaultWinningNumber = new WinningNumber(new ArrayList<>(Arrays.asList(11, 12, 13, 14, 15, 16)));
-        BonusNumber targetBonusNumber = new BonusNumber(targetNumberInput, defaultWinningNumber);
+        BonusNumber targetBonusNumber = new BonusNumber(targetNumberInput);
 
         Lotto lotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 

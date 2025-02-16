@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -27,6 +28,15 @@ class WinningNumberTest {
     void outOfNumberRangeInWinningNumber(String winningNumberInput) {
         List<Integer> winningNumbers = splitAndParseNumbersToInteger(winningNumberInput);
         assertThatThrownBy(() -> new WinningNumber(winningNumbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("당첨 번호가 보너스 번호와 중복될 경우 예외가 발생한다")
+    @Test
+    void duplicateBonusNumberWithWinningNumber() {
+        int bonusNumber = 6;
+        WinningNumber winningNumber = new WinningNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        assertThatThrownBy(() -> winningNumber.validateDuplicationWith(bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

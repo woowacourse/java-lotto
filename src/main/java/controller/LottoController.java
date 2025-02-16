@@ -71,7 +71,8 @@ public class LottoController {
         return retryUntilNoIllegalException(() -> {
             String bonusNumberInput = inputView.readBonusNumbers();
             int bonusNumber = Parser.parseOneNumber(bonusNumberInput);
-            return new BonusNumber(bonusNumber, winningNumber);
+            winningNumber.validateDuplicationWith(bonusNumber);
+            return new BonusNumber(bonusNumber);
         });
     }
 
