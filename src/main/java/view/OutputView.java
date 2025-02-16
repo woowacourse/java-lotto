@@ -19,7 +19,7 @@ public class OutputView {
         for (LottoTicket LottoTicket : lottoTickets.getLottoTickets()) {
             System.out.println(LottoTicket.getLottoNumbers()
                     .stream()
-                    .map(LottoNumber::getNumber)
+                    .map(LottoNumber::number)
                     .toList());
         }
     }

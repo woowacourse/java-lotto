@@ -17,8 +17,8 @@ class LottoMachineTest {
         // then
         Assertions.assertThat(LottoTicket.getSize()).isEqualTo(LottoTicket.LOTTO_SIZE);
         for (LottoNumber number : LottoTicket.getLottoNumbers()) {
-            Assertions.assertThat(number.getNumber()).isGreaterThanOrEqualTo(LottoNumber.LOTTO_MIN_NUMBER);
-            Assertions.assertThat(number.getNumber()).isLessThanOrEqualTo(LottoNumber.LOTTO_MAX_NUMBER);
+            Assertions.assertThat(number.number()).isGreaterThanOrEqualTo(LottoNumber.LOTTO_MIN_NUMBER);
+            Assertions.assertThat(number.number()).isLessThanOrEqualTo(LottoNumber.LOTTO_MAX_NUMBER);
         }
         Assertions.assertThat(LottoTicket.getLottoNumbers()
                         .stream()
