@@ -1,13 +1,10 @@
 package model;
 
+import static model.LottoInformation.*;
+
 public class LottoMachine {
 
     private final int ticket;
-
-    private static final int LOTTO_PRICE = 1000;
-    private static final int LOTTO_NUMBER_START = 1;
-    private static final int LOTTO_NUMBER_END = 45;
-    private static final int LOTTO_NUMBER_COUNT = 6;
 
     public LottoMachine(Price price) {
         this.ticket = price.getValue() / LOTTO_PRICE;

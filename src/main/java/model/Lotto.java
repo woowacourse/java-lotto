@@ -1,11 +1,11 @@
 package model;
 
+import static model.LottoInformation.*;
 import java.util.List;
 
 public class Lotto {
 
     private final Numbers numbers;
-    private static final int LOTTO_COUNT=6;
 
     public Lotto(Numbers numbers) {
         validate(numbers.getNumbers());
