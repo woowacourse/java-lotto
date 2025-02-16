@@ -13,11 +13,11 @@ public class WinningResults {
     public WinningResults(WinningLotto winningLotto, Lottos lottos) {
         this.winningLotto = winningLotto;
         this.lottos = lottos;
-        Map<Rank, Integer> ranks = findRanks(lottos);
+        Map<Rank, Integer> ranks = scoreRanks();
         this.results = toResults(ranks);
     }
 
-    private Map<Rank, Integer> findRanks(final Lottos lottos) {
+    private Map<Rank, Integer> scoreRanks() {
         Map<Rank, Integer> ranks = new LinkedHashMap<>();
         initRanks(ranks);
         saveRanks(ranks);
