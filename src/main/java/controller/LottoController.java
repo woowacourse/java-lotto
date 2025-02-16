@@ -39,7 +39,7 @@ public class LottoController {
         final WinningNumbers winningNumbers = executeWithRetry(this::inputWinningNumbers, 0);
         final WinningResult winningResult = WinningResult.of(lottos, winningNumbers);
         outputView.printLottoStatistics(winningResult.calculateRateOfRevenue(), winningResult.getLottoRanks(),
-                winningResult.isDamage());
+                winningResult.isRevenue());
     }
 
     private PurchaseAmount inputPurchaseAmount() {

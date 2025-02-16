@@ -39,7 +39,7 @@ class WinningResultTest {
             WinningResult winningResult = new WinningResult(lottoRanks);
 
             // then
-            assertThat(winningResult.isDamage()).isTrue();
+            assertThat(winningResult.isRevenue()).isFalse();
         }
 
         @DisplayName("수익률을 올바르게 계산한다.")

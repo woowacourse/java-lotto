@@ -19,10 +19,10 @@ public class ConsoleOutputView implements OutputView {
 
     @Override
     public void printLottoStatistics(final double revenueRate, final Map<LottoRank, Integer> lottoRanks,
-                                     final boolean isDamage) {
+                                     final boolean isRevenue) {
         System.out.println("\n당첨 통계\n---------");
         printLottoRanks(lottoRanks);
-        printLottoRevenue(revenueRate, isDamage);
+        printLottoRevenue(revenueRate, isRevenue);
     }
 
     private void printLottoRanks(final Map<LottoRank, Integer> lottoRanks) {
@@ -37,8 +37,8 @@ public class ConsoleOutputView implements OutputView {
                 rank.getPrizeMoney(), resultRanks.getOrDefault(rank, 0));
     }
 
-    private void printLottoRevenue(final double revenueRate, final boolean isDamage) {
-        final String revenueDescription = selectByFlag(isDamage, "손해", "이익이");
+    private void printLottoRevenue(final double revenueRate, final boolean isRevenue) {
+        final String revenueDescription = selectByFlag(isRevenue, "손해", "이익이");
         System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)\n", revenueRate, revenueDescription);
     }
 
