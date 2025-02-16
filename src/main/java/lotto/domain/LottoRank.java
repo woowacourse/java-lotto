@@ -32,7 +32,7 @@ public enum LottoRank {
         return winningAmount;
     }
 
-    public static LottoRank findRankWithMatchResult(MatchResultDto matchResultDto) {
+    public static LottoRank findRankWithMatchResult(final MatchResultDto matchResultDto) {
         if (matchResultDto.getMatchCount() == SECOND_PLACE.matchCount && matchResultDto.isContainsBonusNumber()) {
             return SECOND_PLACE;
         }
@@ -61,7 +61,7 @@ public enum LottoRank {
         return String.format("%d개 일치 (%d원)", getMatchCount(), getWinningAmount());
     }
 
-    public long calculateWinningAmount(int count) {
+    public long calculateWinningAmount(final int count) {
         return winningAmount * count;
     }
 }

@@ -19,12 +19,12 @@ public class OutputView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void printLottos(List<Integer> lottoNumbers) {
+    public static void printLottos(final List<Integer> lottoNumbers) {
         List<Integer> sortedNumbers = lottoNumbers.stream().sorted().toList();
         System.out.println(sortedNumbers);
     }
 
-    public static void printWinningStatics(Map<LottoRank, Integer> winningInfo) {
+    public static void printWinningStatics(final Map<LottoRank, Integer> winningInfo) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
         Map<LottoRank, String> rankInfo = LottoRank.getRankInfo();
@@ -34,7 +34,7 @@ public class OutputView {
         }
     }
 
-    public static void printProfitRate(double profitRate) {
+    public static void printProfitRate(final double profitRate) {
         if (profitRate >= PROFIT_STANDARD) {
             System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s이라는 의미임)", profitRate, PROFIT);
             return;
