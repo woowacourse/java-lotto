@@ -1,6 +1,7 @@
 package controller;
 
 import model.LottoResult;
+import model.RandomNumberGenerator;
 import model.UserLotto;
 import model.WinningLotto;
 import view.InputView;
@@ -10,10 +11,12 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
+    private final RandomNumberGenerator randomNumberGenerator;
 
-    public LottoController(InputView inputView, OutputView outputView) {
+    public LottoController(InputView inputView, OutputView outputView, RandomNumberGenerator randomNumberGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.randomNumberGenerator = randomNumberGenerator;
     }
 
     public void run() {
@@ -46,7 +49,7 @@ public class LottoController {
             try {
                 outputView.printPurchaseAmountGuide();
                 String purchaseAmountInput = inputView.getPurchaseAmountInput();
-                return new UserLotto(purchaseAmountInput);
+                return new UserLotto(randomNumberGenerator, purchaseAmountInput);
             } catch (IllegalArgumentException ex) {
                 outputView.printError(ex.getMessage());
             }
