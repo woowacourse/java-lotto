@@ -1,4 +1,4 @@
-package view;
+package lotto.view;
 
 import java.io.BufferedReader;
 import java.io.IOException;

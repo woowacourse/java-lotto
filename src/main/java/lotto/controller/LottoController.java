@@ -1,13 +1,13 @@
-package controller;
+package lotto.controller;
 
-import domain.Lotto;
-import domain.Lottos;
-import domain.Prize;
-import domain.WinningLotto;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Prize;
+import lotto.domain.WinningLotto;
 import java.util.List;
-import util.NumberParser;
-import view.InputView;
-import view.OutputView;
+import lotto.util.NumberParser;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoController {
     private final InputView inputView;

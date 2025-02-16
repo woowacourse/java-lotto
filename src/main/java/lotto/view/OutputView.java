@@ -1,7 +1,7 @@
-package view;
+package lotto.view;
 
-import domain.Lottos;
-import domain.Prize;
+import lotto.domain.Lottos;
+import lotto.domain.Prize;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
