@@ -9,20 +9,20 @@ public class Money {
         this.amount = amount;
     }
 
-    public Money(String rawAmount) {
-        validatePurchaseAmount(Integer.parseInt(rawAmount));
-        this.amount = Integer.parseInt(rawAmount);
+    public static Money forPurchaseAmount(int amount) {
+        validatePurchaseAmount(amount);
+        return new Money(amount);
+    }
+
+    private static void validatePurchaseAmount(int amount) {
+        if (amount < LottoStore.LOTTO_PRICE) {
+            throw new IllegalArgumentException("구매 금액은 로또 가격보다 적을 수 없습니다.");
+        }
     }
 
     private void validateNegative(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("돈은 음수가 될 수 없습니다.");
-        }
-    }
-
-    private void validatePurchaseAmount(int amount) {
-        if (amount < LottoStore.LOTTO_PRICE) {
-            throw new IllegalArgumentException("구매 금액은 로또 가격보다 적을 수 없습니다.");
         }
     }
 

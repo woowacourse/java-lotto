@@ -88,14 +88,14 @@ class MoneyTest {
 
     @Test
     void 구매금액이_로또가격보다_적을_경우_예외를_발생시킨다() {
-        assertThatThrownBy(() -> new Money("999"))
+        assertThatThrownBy(() -> Money.forPurchaseAmount(999))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구매 금액은 로또 가격보다 적을 수 없습니다.");
     }
 
     @Test
     void 구매금액이_로또가격보다_많거나_같은_경우_예외를_발생시키지_않는다() {
-        assertThatCode(() -> new Money("1000"))
+        assertThatCode(() -> Money.forPurchaseAmount(1000))
                 .doesNotThrowAnyException();
     }
 }

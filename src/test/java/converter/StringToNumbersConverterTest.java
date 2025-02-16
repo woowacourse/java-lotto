@@ -12,15 +12,14 @@ class StringToNumbersConverterTest {
     @CsvSource(value = {
             "1,2,3,4,5,6 : ,",
             "1, 2, 3, 4, 5, 6 : ,",
-            "1! 2! 3! 4! 5! 6 : !"
     }, delimiter = ':')
     void 입력문자열을_Number_List로_변환한다(String input, String delimiter) {
         //given
-        StringToNumbersConverter converter = new StringToNumbersConverter();
+        InputConverter converter = new InputConverter();
         List<Number> expected = List.of(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5),
                 new Number(6));
         //when
-        List<Number> numbers = converter.convert(input, delimiter);
+        List<Number> numbers = converter.convertStringToWinningNumberValue(input);
         //then
         Assertions.assertThat(numbers).isEqualTo(expected);
     }
