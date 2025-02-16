@@ -16,20 +16,14 @@ public class Lotto {
         int winningCounter = 0;
         boolean bonusChecker = false;
 
-        for (int number : numbers) {
-            winningCounter += checkWinningCounter(winningNumbers, number);
-        }
+        winningCounter = (int) numbers.stream()
+            .filter(winningNumbers::contains)
+            .count();
+
         if (numbers.contains(bonusNumber)) {
             bonusChecker = true;
         }
         return LottoMatch.findLottoRank(winningCounter, bonusChecker);
-    }
-
-    private int checkWinningCounter(List<Integer> winningNumbers, int number) {
-        if (winningNumbers.contains(number)) {
-            return 1;
-        }
-        return 0;
     }
 
     @Override
