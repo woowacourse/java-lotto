@@ -6,7 +6,7 @@ import java.util.EnumMap;
 import java.util.Map.Entry;
 
 public class Money {
-    public static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     private final int money;
 

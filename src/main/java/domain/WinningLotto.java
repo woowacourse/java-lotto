@@ -5,8 +5,8 @@ import static global.exception.ExceptionMessage.INVALID_FORMAT;
 import static global.exception.ExceptionMessage.INVALID_RANGE;
 
 public class WinningLotto{
-    public static final int LOTTO_MIN = 1;
-    public static final int LOTTO_MAX = 45;
+    private static final int LOTTO_MIN = 1;
+    private static final int LOTTO_MAX = 45;
 
     private Lotto lotto;
     private int bonusNumber;

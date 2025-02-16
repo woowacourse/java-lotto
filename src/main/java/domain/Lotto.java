@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    public static final int LOTTO_MIN = 1;
-    public static final int LOTTO_MAX = 45;
-    public static final String DELIMITER = ",";
-    public static final int LOTTO_LENGTH = 6;
+    private static final int LOTTO_MIN = 1;
+    private static final int LOTTO_MAX = 45;
+    private static final String DELIMITER = ",";
+    private static final int LOTTO_LENGTH = 6;
 
     protected List<Integer> numbers;
 
