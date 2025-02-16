@@ -16,13 +16,9 @@ import java.util.Set;
 public class Lotto {
     private final List<Integer> numbers;
 
-    private Lotto(List<Integer> numbers) {
+    public Lotto(List<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
-    }
-
-    public static Lotto from(List<Integer> numbers) {
-        return new Lotto(numbers);
     }
 
     public boolean hasBonusNumber(int bonusNumber) {

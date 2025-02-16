@@ -27,7 +27,7 @@ public class LottoGenerator {
 
     public Lotto createWinningLotto(String winningNumbers) {
         List<Integer> parsedNumbers = InputParser.parseAndCreateWinningNumbers(winningNumbers);
-        return Lotto.from(parsedNumbers);
+        return new Lotto(parsedNumbers);
     }
 
     public WinningInfo createWinningInfo(Lotto winningNumbers, int bonusNumber) {
@@ -47,6 +47,6 @@ public class LottoGenerator {
 
     private Lotto createLotto() {
         List<Integer> numbers = RandomNumber.generateNumbers(WINNING_NUMBERS_REQUIRED);
-        return Lotto.from(numbers);
+        return new Lotto(numbers);
     }
 }
