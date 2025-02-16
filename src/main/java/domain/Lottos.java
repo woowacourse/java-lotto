@@ -1,6 +1,5 @@
 package domain;
 
-import dto.LottoMatchResult;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +41,7 @@ public class Lottos {
 
         for (Lotto lotto : lottos) {
             final LottoMatchResult matchResult = lotto.getMatchResult(matchNumbers, bonusNumber);
-            final LottoPrize matchPrize = LottoPrize.match(matchResult);
+            final LottoPrize matchPrize = LottoPrize.match(matchResult.matchCount(), matchResult.isBonusMatch());
 
             enumMap.put(matchPrize, enumMap.getOrDefault(matchPrize, 0) + 1);
         }
