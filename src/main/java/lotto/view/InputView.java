@@ -10,7 +10,6 @@ public class InputView implements AutoCloseable {
     }
 
     public String read() {
-
         return scanner.nextLine();
     }
 

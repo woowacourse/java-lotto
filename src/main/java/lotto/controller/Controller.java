@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import static lotto.view.OutputView.*;
+
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +28,7 @@ public class Controller {
         Cashier cashier = requestCashier();
         int numberOfLotto = cashier.getNumberOfLotto();
         Wallet wallet = new Wallet(numberOfLotto);
-        outputView.print(cashier.getNumberOfLotto() + "개를 구매했습니다.\n");
+        outputView.print(cashier.getNumberOfLotto());
         outputView.print(wallet.toString());
 
         Lotto winningLotto = requestwinningLotto();
@@ -44,7 +46,7 @@ public class Controller {
     private int requestBonus(Lotto winningLotto) {
         while (true) {
             try {
-                int bonus = requestNumber("보너스 볼을 입력해주세요.");
+                int bonus = requestNumber(REQUEST_BONUS);
                 winningLotto.validateBonus(bonus);
                 return bonus;
             } catch (IllegalArgumentException e) {
@@ -56,7 +58,7 @@ public class Controller {
     private Cashier requestCashier() {
         while (true) {
             try {
-                int money = requestNumber("구입금액을 입력해 주세요.");
+                int money = requestNumber(REQUEST_CASHIER);
                 return new Cashier(money);
             } catch (IllegalArgumentException e) {
                 outputView.print(e.getMessage());
@@ -80,7 +82,7 @@ public class Controller {
     private Lotto requestwinningLotto() {
         while (true) {
             try {
-                outputView.print("지난 주 당첨 번호를 입력해 주세요.");
+                outputView.print(REQUEST_WINNING_LOTTO);
                 String winningNumberInput = inputView.read();
                 List<Integer> winningNumbers = InputParser.parseToList(winningNumberInput);
                 return new Lotto(winningNumbers);
