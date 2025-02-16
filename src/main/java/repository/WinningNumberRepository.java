@@ -1,7 +1,6 @@
 package repository;
 
 import domain.WinningNumber;
-import java.util.List;
 
 public class WinningNumberRepository {
 
@@ -14,5 +13,4 @@ public class WinningNumberRepository {
     public WinningNumber getWinningNumber() {
         return winningNumber;
     }
-
 }

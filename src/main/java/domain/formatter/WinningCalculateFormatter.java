@@ -17,8 +17,7 @@ public class WinningCalculateFormatter {
             stringBuilder.append(winningCase.winResult(winningCaseIntegerEntry.getValue()))
                     .append("\n");
         }
-        stringBuilder.append(String.format(EARN_MONEY_RATIO,earnMoneyRatio));
+        stringBuilder.append(String.format(EARN_MONEY_RATIO, earnMoneyRatio));
         return stringBuilder.toString();
     }
-
 }

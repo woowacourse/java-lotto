@@ -2,8 +2,8 @@ package service;
 
 import domain.BonusNumber;
 import domain.LottoDispenser;
-import domain.WinningNumber;
 import domain.WinningCase;
+import domain.WinningNumber;
 import domain.formatter.WinningCalculateFormatter;
 import java.util.Map;
 import repository.BonusNumberRepository;
@@ -35,19 +35,18 @@ public class LottoService {
         bonusNumberRepository.saveBonusNumber(new BonusNumber(inputBonusNumber));
     }
 
-    public String winningCalculate(){
+    public String winningCalculate() {
         LottoDispenser lottoDispenser = lottoRepository.getLottoDispenser();
         WinningNumber winningNumber = winningNumberRepository.getWinningNumber();
         BonusNumber bonusNumber = bonusNumberRepository.getBonusNumber();
         Map<WinningCase, Integer> winningCalculateResult = lottoDispenser.winningCalculate(winningNumber, bonusNumber);
         long earnMoney = lottoDispenser.calculateEarnMoney(winningCalculateResult);
         double earnMoneyRatio = lottoDispenser.calculateEarnMoneyRatio(earnMoney);
-        return WinningCalculateFormatter.winningResultFormatting(winningCalculateResult,earnMoneyRatio);
+        return WinningCalculateFormatter.winningResultFormatting(winningCalculateResult, earnMoneyRatio);
     }
 
     public String buyLottoResult() {
         return lottoRepository.getLottoDispenser()
                 .buyLottoResult();
     }
-
 }

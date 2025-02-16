@@ -13,5 +13,4 @@ public class BonusNumberRepository {
     public void saveBonusNumber(BonusNumber bonusNumber) {
         this.bonusNumber = bonusNumber;
     }
-
 }

@@ -20,13 +20,13 @@ public class BonusNumber {
     }
 
     private void validateIsEmpty(String bonusNumber) {
-        if(bonusNumber == null){
+        if (bonusNumber == null) {
             throw new LottoException(INVALID_BONUS_NUMBER);
         }
     }
 
     private void validateIsNumber(String bonusNumber) {
-        if(!StringUtility.isNumber(bonusNumber)){
+        if (!StringUtility.isNumber(bonusNumber)) {
             throw new LottoException(INVALID_BONUS_NUMBER);
         }
     }
@@ -34,5 +34,4 @@ public class BonusNumber {
     public boolean isContain(LottoNumber lottoNumber) {
         return this.lottoNumber.equals(lottoNumber);
     }
-
 }

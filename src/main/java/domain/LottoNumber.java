@@ -20,6 +20,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
             throw new LottoException(INVALID_NUMBER_RANGE);
         }
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -43,8 +44,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return lottoNumber + "";
     }
-
 }

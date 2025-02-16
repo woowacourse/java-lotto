@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import utility.StringUtility;
 
 public class WinningNumber {
@@ -18,7 +17,7 @@ public class WinningNumber {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public WinningNumber(String inputWinningNumber){
+    public WinningNumber(String inputWinningNumber) {
         validateIsEmpty(inputWinningNumber);
         String[] winningNumbers = StringUtility.removeBlank(inputWinningNumber)
                 .split(",");
@@ -49,27 +48,26 @@ public class WinningNumber {
 
     private void validateDuplication(List<Integer> lottoNumbers) {
         Set<Integer> duplicationSet = new HashSet<>(lottoNumbers);
-        if(lottoNumbers.size() != duplicationSet.size()) {
+        if (lottoNumbers.size() != duplicationSet.size()) {
             throw new LottoException(DUPLICATE_LOTTO_NUMBERS);
         }
     }
 
     private static void validateSizeCheck(String[] winningNumbers) {
-        if(winningNumbers.length != LOTTO_LENGTH){
+        if (winningNumbers.length != LOTTO_LENGTH) {
             throw new LottoException(WINNING_NUMBER_SIZE_INVALID);
         }
     }
 
     private static void validateIsEmpty(String inputWinningNumber) {
-        if(inputWinningNumber == null){
+        if (inputWinningNumber == null) {
             throw new LottoException(WINNING_NUMBER_EMPTY);
         }
     }
 
     private void validateIsNumber(String winningNumber) {
-        if(!StringUtility.isNumber(winningNumber)){
+        if (!StringUtility.isNumber(winningNumber)) {
             throw new LottoException(WINNING_NUMBER_MUST_BE_NUMBER);
         }
     }
-
 }

@@ -1,7 +1,5 @@
 package utility;
 
-import java.util.Map;
-
 public class StringUtility {
 
     private static final String IS_NUMBER_PATTERN = "^\\d+$";
@@ -11,7 +9,6 @@ public class StringUtility {
     }
 
     public static String removeBlank(String string) {
-        return string.replace(" ","");
+        return string.replace(" ", "");
     }
-
 }

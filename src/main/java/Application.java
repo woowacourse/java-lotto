@@ -9,7 +9,8 @@ import view.OutputView;
 
 public class Application {
 
-    private static final LottoController lottoController = new LottoController(new LottoService(new LottoRepository(), new WinningNumberRepository(), new BonusNumberRepository()));
+    private static final LottoController lottoController = new LottoController(
+            new LottoService(new LottoRepository(), new WinningNumberRepository(), new BonusNumberRepository()));
 
     public static void main(String[] args) {
         startLotto();
@@ -24,17 +25,17 @@ public class Application {
 
     private static void buyLotto() {
         boolean retry = true;
-        while(retry) {
+        while (retry) {
             retry = buyLottoInput();
         }
         OutputView.printBuyLotto(lottoController.formattingBuyLottoResult());
     }
 
     private static boolean buyLottoInput() {
-        try{
+        try {
             String inputBuyLottoMoney = InputView.inputBuyLottoMoney();
             lottoController.inputBuyLottoMoney(inputBuyLottoMoney);
-        }catch (LottoException lottoException){
+        } catch (LottoException lottoException) {
             OutputView.printError(lottoException);
             return true;
         }
@@ -43,16 +44,16 @@ public class Application {
 
     private static void settingWinningNumbers() {
         boolean retry = true;
-        while(retry) {
+        while (retry) {
             retry = inputWinningNumber();
         }
     }
 
     private static boolean inputWinningNumber() {
-        try{
+        try {
             String inputWinningNumber = InputView.inputWinningNumber();
             lottoController.inputWinningNumber(inputWinningNumber);
-        }catch (LottoException lottoException){
+        } catch (LottoException lottoException) {
             OutputView.printError(lottoException);
             return true;
         }
@@ -61,16 +62,16 @@ public class Application {
 
     private static void settingBonusNumbers() {
         boolean retry = true;
-        while(retry) {
+        while (retry) {
             retry = inputBonusNumber();
         }
     }
 
     private static boolean inputBonusNumber() {
-        try{
+        try {
             String inputBonusNumber = InputView.inputBonusNumber();
             lottoController.inputBonusNumber(inputBonusNumber);
-        }catch (LottoException lottoException){
+        } catch (LottoException lottoException) {
             OutputView.printError(lottoException);
             return true;
         }
@@ -80,5 +81,4 @@ public class Application {
     private static void printWinningResult() {
         System.out.println(lottoController.formattingWinningResult());
     }
-
 }

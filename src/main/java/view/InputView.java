@@ -24,5 +24,4 @@ public class InputView {
         OutputView.printInputBonusNumber();
         return input();
     }
-
 }

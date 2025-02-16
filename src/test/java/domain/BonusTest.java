@@ -19,7 +19,7 @@ public class BonusTest {
 
     @DisplayName("보너스_번호가_숫자가_아니면_예외가_발생한다")
     @ParameterizedTest
-    @ValueSource(strings = {"a",""})
+    @ValueSource(strings = {"a", ""})
     void 보너스_번호가_숫자가_아니면_예외가_발생한다(String numbers) {
         Assertions.assertThatThrownBy(() -> {
             new BonusNumber(numbers);

@@ -14,10 +14,9 @@ public class LottoRandomGenerator {
 
     public static List<Integer> generateNumbers() {
         Set<Integer> numbers = new HashSet<>();
-        while(numbers.size() != LOTTO_NUMBER_SIZE) {
+        while (numbers.size() != LOTTO_NUMBER_SIZE) {
             numbers.add(random.nextInt(LOTTO_NUMBER_START, LOTTO_NUMBER_END));
         }
         return numbers.stream().toList();
     }
-
 }

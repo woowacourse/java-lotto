@@ -31,6 +31,4 @@ public class OutputView {
     public static void printInputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER);
     }
-
-
 }

@@ -28,14 +28,14 @@ public class LottoDispenser {
     }
 
     private void validateLottoDispenser(String buyMoney) {
-        if(buyMoney == null || !StringUtility.isNumber(buyMoney)){
+        if (buyMoney == null || !StringUtility.isNumber(buyMoney)) {
             throw new LottoException(INVALID_BUY_MONEY);
         }
         int buyMoneyNumber = Integer.parseInt(buyMoney);
-        if(buyMoneyNumber == 0){
+        if (buyMoneyNumber == 0) {
             throw new LottoException(INVALID_BUY_MONEY);
         }
-        if(buyMoneyNumber % LOTTO_MONEY_UNIT != 0){
+        if (buyMoneyNumber % LOTTO_MONEY_UNIT != 0) {
             throw new LottoException(INVALID_BUY_MONEY);
         }
     }
@@ -48,13 +48,13 @@ public class LottoDispenser {
         return lottos;
     }
 
-    public Map<WinningCase,Integer> winningCalculate(WinningNumber winningNumber, BonusNumber bonusNumber) {
-        Map<WinningCase,Integer> winningResult = WinningCase.toMap();
-        for(Lotto lotto : lottos){
+    public Map<WinningCase, Integer> winningCalculate(WinningNumber winningNumber, BonusNumber bonusNumber) {
+        Map<WinningCase, Integer> winningResult = WinningCase.toMap();
+        for (Lotto lotto : lottos) {
             int sameCount = lotto.compare(winningNumber, bonusNumber);
             boolean isBonus = lotto.compareBonusNumber(bonusNumber);
             WinningCase winningCase = WinningCase.getWinningCase(sameCount, isBonus);
-            winningResult.put(winningCase,winningResult.getOrDefault(winningCase,0)+1);
+            winningResult.put(winningCase, winningResult.getOrDefault(winningCase, 0) + 1);
         }
         return winningResult;
     }
@@ -70,11 +70,10 @@ public class LottoDispenser {
     }
 
     public double calculateEarnMoneyRatio(long earnMoney) {
-        return  ((double) (earnMoney / buyMoney) * 100) / 100;
+        return ((double) (earnMoney / buyMoney) * 100) / 100;
     }
 
     public String buyLottoResult() {
         return LottoBuyResultFormatter.formattingBuyLottoResult(lottos);
     }
-
 }

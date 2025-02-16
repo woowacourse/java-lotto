@@ -5,7 +5,6 @@ import exception.LottoException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -24,17 +23,17 @@ public class Lotto {
 
     private void validateLottoNumbers(List<Integer> lottoNumbers) {
         Set<Integer> duplicationSet = new HashSet<>(lottoNumbers);
-        if(lottoNumbers.size() != duplicationSet.size()) {
+        if (lottoNumbers.size() != duplicationSet.size()) {
             throw new LottoException(DUPLICATE_LOTTO_NUMBERS);
         }
-        if(lottoNumbers.size() != LOTTO_LENGTH){
+        if (lottoNumbers.size() != LOTTO_LENGTH) {
             throw new LottoException(INVALID_LOTTO_SIZE);
         }
     }
 
     public int compare(WinningNumber winningNumber, BonusNumber bonusNumber) {
-         return (int) lottoNumbers.stream().filter(lottoNumber ->
-            winningNumber.isContain(lottoNumber)
+        return (int) lottoNumbers.stream().filter(lottoNumber ->
+                winningNumber.isContain(lottoNumber)
         ).count();
     }
 
@@ -46,5 +45,4 @@ public class Lotto {
     public String buyNumber() {
         return LottoBuyResultFormatter.formatNumbers(lottoNumbers);
     }
-
 }

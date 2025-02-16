@@ -13,5 +13,4 @@ public class LottoRepository {
     public void saveLottoDispenser(LottoDispenser lottoDispenser) {
         this.lottoDispenser = lottoDispenser;
     }
-
 }

@@ -26,8 +26,7 @@ public class LottoController {
         lottoService.inputWinningNumber(inputWinningNumber);
     }
 
-    public void inputBonusNumber(String inputBonusNumber){
+    public void inputBonusNumber(String inputBonusNumber) {
         lottoService.inputBonusNumber(inputBonusNumber);
     }
-
 }
