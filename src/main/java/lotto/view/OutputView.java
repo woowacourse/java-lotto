@@ -6,7 +6,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.WinningCondition;
 import lotto.domain.WinningTier;
-import lotto.view.constant.OutputMessage;
+import lotto.view.message.OutputMessage;
 
 public class OutputView {
 

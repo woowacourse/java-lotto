@@ -2,8 +2,8 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.stream.IntStream;
+import lotto.exception_message.ExceptionMessage;
 import lotto.utility.RandomGenerator;
-import lotto.view.constant.ExceptionMessage;
 
 public class LottoMachine {
 

@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Scanner;
-import lotto.view.constant.Prompt;
+import lotto.view.message.Prompt;
 import lotto.view.validator.InputValidator;
 
 public class InputView {

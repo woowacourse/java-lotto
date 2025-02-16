@@ -3,7 +3,7 @@ package lotto.vaildator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import lotto.view.constant.ExceptionMessage;
+import lotto.exception_message.ExceptionMessage;
 
 public class CommonValidator {
 
