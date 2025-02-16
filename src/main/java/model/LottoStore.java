@@ -7,7 +7,6 @@ import controller.dto.LottoRankResultResponse;
 import controller.dto.LottoTicketResponse;
 import controller.dto.WinningLottoRequest;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
@@ -18,12 +17,18 @@ public class LottoStore {
 
     private final NumbersGenerator numbersGenerator;
     private final LottoRankFinder lottoRankFinder;
+    private final LottoRankCounter lottoRankCounter;
     private final LottoDtoMapper lottoDtoMapper;
 
-    public LottoStore(NumbersGenerator numbersGenerator, LottoRankFinder lottoRankFinder,
-            LottoDtoMapper lottoDtoMapper) {
+    public LottoStore(
+            NumbersGenerator numbersGenerator,
+            LottoRankFinder lottoRankFinder,
+            LottoRankCounter lottoRankCounter,
+            LottoDtoMapper lottoDtoMapper
+    ) {
         this.numbersGenerator = numbersGenerator;
         this.lottoRankFinder = lottoRankFinder;
+        this.lottoRankCounter = lottoRankCounter;
         this.lottoDtoMapper = lottoDtoMapper;
     }
 
@@ -47,8 +52,8 @@ public class LottoStore {
         WinningLotto winningLotto = lottoDtoMapper.toWinningLotto(winningLottoRequest);
 
         List<LottoRank> lottoRanks = lottoRankFinder.findAll(lottoTickets, winningLotto);
-        Map<LottoRank, Integer> lottoRankCounter = countLottoRank(lottoRanks);
-        LottoRankResult lottoRankResult = new LottoRankResult(lottoRankCounter);
+        Map<LottoRank, Integer> lottoRankCountResult = lottoRankCounter.countLottoRanks(lottoRanks);
+        LottoRankResult lottoRankResult = new LottoRankResult(lottoRankCountResult);
 
         return lottoDtoMapper.toLottoRankResultResponse(lottoRankResult);
     }
@@ -76,13 +81,5 @@ public class LottoStore {
         if (purchaseAmount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 1000원 단위여야 합니다.");
         }
-    }
-
-    private Map<LottoRank, Integer> countLottoRank(List<LottoRank> lottoRanks) {
-        Map<LottoRank, Integer> lottoRankCounter = new HashMap<>();
-        for (LottoRank lottoRank : lottoRanks) {
-            lottoRankCounter.put(lottoRank, lottoRankCounter.getOrDefault(lottoRank, 0) + 1);
-        }
-        return lottoRankCounter;
     }
 }
