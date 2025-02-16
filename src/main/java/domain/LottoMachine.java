@@ -7,8 +7,11 @@ import java.util.Set;
 
 public class LottoMachine {
 
-    public LottoMachine(LottoPickStrategy numberStrategy) {
+    private final int lottoNumberSize;
+
+    public LottoMachine(LottoPickStrategy numberStrategy, int lottoNumberSize) {
         this.numberStrategy = numberStrategy;
+        this.lottoNumberSize = lottoNumberSize;
     }
 
     private final LottoPickStrategy numberStrategy;
@@ -17,12 +20,12 @@ public class LottoMachine {
         Set<Number> numbers;
         do {
             numbers = new HashSet<>(selectNumbers());
-        } while (numbers.size() != Lotto.NUMBERS_SIZE);
+        } while (numbers.size() != lottoNumberSize);
         return new Lotto(numbers);
     }
 
     private List<Number> selectNumbers() {
-        List<Integer> numbers = numberStrategy.pickNumbers(Number.MAX_NUMBER, Lotto.NUMBERS_SIZE);
+        List<Integer> numbers = numberStrategy.pickNumbers(Number.MAX_NUMBER, lottoNumberSize);
         return numbers.stream().map(Number::new).toList();
     }
 }

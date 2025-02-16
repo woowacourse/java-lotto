@@ -2,7 +2,6 @@ package controller;
 
 import converter.InputConverter;
 import domain.Lotto;
-import domain.LottoMachine;
 import domain.LottoStore;
 import domain.Lottos;
 import domain.Money;
@@ -53,7 +52,7 @@ public class LottoController {
 
     private Lottos purchaseLottos(Money purchaseLottoMoney) {
         LottoPickStrategy numberStrategy = new RandomLottoPickStrategy();
-        LottoStore lottoStore = new LottoStore(new LottoMachine(numberStrategy));
+        LottoStore lottoStore = new LottoStore(Lotto.createLottoMachine(numberStrategy));
         return lottoStore.buy(purchaseLottoMoney);
     }
 

@@ -2,6 +2,7 @@ package domain;
 
 import static java.util.Collections.unmodifiableSet;
 
+import domain.lottogeneratestrategy.LottoPickStrategy;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Set;
 
 public class Lotto {
 
-    public static final int NUMBERS_SIZE = 6;
+    private static final int NUMBERS_SIZE = 6;
 
     private final Set<Number> numbers;
 
@@ -25,12 +26,20 @@ public class Lotto {
         this.numbers = new HashSet<>(numbers);
     }
 
+    public static LottoMachine createLottoMachine(LottoPickStrategy strategy) {
+        return new LottoMachine(strategy, NUMBERS_SIZE);
+    }
+
     public boolean contains(Number number) {
         return numbers.contains(number);
     }
 
+    public boolean hasCorrectSize(Collection<Number> numbers) {
+        return numbers.size() == NUMBERS_SIZE;
+    }
+
     private void validateNumberSize(Collection<Number> numbers) {
-        if (numbers.size() != NUMBERS_SIZE) {
+        if (!hasCorrectSize(numbers)) {
             throw new IllegalArgumentException("로또 번호는 " + NUMBERS_SIZE + "개여야 합니다.");
         }
     }

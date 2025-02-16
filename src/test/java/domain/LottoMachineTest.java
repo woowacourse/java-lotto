@@ -13,7 +13,7 @@ class LottoMachineTest {
     void 로또를_생성할_수_있다() {
         //given
         LottoPickStrategy fixNumberStrategy = (int maxNumber, int size) -> List.of(1, 2, 3, 4, 5, 6);
-        LottoMachine lottoMachine = new LottoMachine(fixNumberStrategy);
+        LottoMachine lottoMachine = Lotto.createLottoMachine(fixNumberStrategy);
 
         //when
         Lotto lotto = lottoMachine.createLotto();
