@@ -2,8 +2,8 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
+import static testfixture.LottoNumberFixture.convertToLottoNumbers;
 
-import java.util.ArrayList;
 import java.util.List;
 import mock.MockNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
@@ -24,9 +24,7 @@ class StoreTest {
             Store store = new Store(lottoMachine);
             PurchaseAmount purchaseAmount = new PurchaseAmount(1000);
 
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                    LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+            List<LottoNumber> lottoNumbers = convertToLottoNumbers(1, 2, 3, 4, 5, 6);
             Lotto expectedLotto = new Lotto(lottoNumbers);
 
             // when
@@ -50,13 +48,11 @@ class StoreTest {
             LottoMachine lottoMachine = new LottoMachine(new MockNumberGenerator());
             Store store = new Store(lottoMachine);
 
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                    LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
-            Lotto lotto = new Lotto(lottoNumbers);
+            Lotto lotto = new Lotto(convertToLottoNumbers(1, 2, 3, 4, 5, 6));
             List<Lotto> lottos = List.of(lotto);
 
-            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, LottoNumber.of(7));
+            WinningNumbers winningNumbers =
+                new WinningNumbers(convertToLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
 
             // when
             WinningResult winningResult = store.calculateWinningResult(winningNumbers, lottos);

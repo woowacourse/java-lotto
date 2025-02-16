@@ -2,9 +2,9 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static testfixture.LottoNumberFixture.convertToLottoNumbers;
 
 import error.ErrorType;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -20,10 +20,7 @@ class LottoTest {
         @Test
         void createLottoNumbers() {
             // given
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(LottoNumber.of(1), LottoNumber.of(3), LottoNumber.of(9),
-                    LottoNumber.of(8), LottoNumber.of(45), LottoNumber.of(21)));
-
+            List<LottoNumber> lottoNumbers = convertToLottoNumbers(1, 2, 3, 4, 5, 6);
             // when
             Lotto actual = new Lotto(lottoNumbers);
 
@@ -40,10 +37,7 @@ class LottoTest {
         @Test
         void validateSize() {
             // given
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(LottoNumber.of(1), LottoNumber.of(3), LottoNumber.of(9),
-                    LottoNumber.of(8), LottoNumber.of(45), LottoNumber.of(21), LottoNumber.of(30)));
-
+            List<LottoNumber> lottoNumbers = convertToLottoNumbers(1, 2, 3, 4, 5, 6, 7);
             // when & then
             assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -54,9 +48,7 @@ class LottoTest {
         @Test
         void validateDuplicate() {
             // given
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(LottoNumber.of(1), LottoNumber.of(3), LottoNumber.of(9),
-                    LottoNumber.of(1), LottoNumber.of(45), LottoNumber.of(21)));
+            List<LottoNumber> lottoNumbers = convertToLottoNumbers(1, 2, 3, 4, 5, 5);
 
             // when & then
             assertThatThrownBy(() -> new Lotto(lottoNumbers))

@@ -3,8 +3,8 @@ package model;
 import static model.LottoRank.FIRST_PLACE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
+import static testfixture.LottoNumberFixture.convertToLottoNumbers;
 
-import java.util.ArrayList;
 import java.util.List;
 import mock.MockNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
@@ -23,10 +23,7 @@ class LottoMachineTest {
             // given
             LottoMachine lottoMachine = new LottoMachine(new MockNumberGenerator());
 
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                    LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
-            Lotto expectedLotto = new Lotto(lottoNumbers);
+            Lotto expectedLotto = new Lotto(convertToLottoNumbers(1, 2, 3, 4, 5, 6));
 
             // when
             List<Lotto> lottos = lottoMachine.issueLottos(1);
@@ -47,11 +44,9 @@ class LottoMachineTest {
             // given
             LottoMachine lottoMachine = new LottoMachine(new MockNumberGenerator());
 
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                    LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
-            Lotto lotto = new Lotto(lottoNumbers);
-            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, LottoNumber.of(7));
+            Lotto lotto = new Lotto(convertToLottoNumbers(1, 2, 3, 4, 5, 6));
+            WinningNumbers winningNumbers =
+                new WinningNumbers(convertToLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
 
             // when
             LottoRank lottoRank = lottoMachine.checkWinningRank(lotto, winningNumbers);
