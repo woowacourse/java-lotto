@@ -2,7 +2,7 @@ package controller;
 
 import java.util.List;
 import java.util.Scanner;
-import model.LottoResult;
+import model.LottoCalculator;
 import model.LottoShop;
 import model.Lottos;
 import model.WinnerNumber;
@@ -23,10 +23,10 @@ public class LottoController {
         int bonusBall = inputBonusBall(winnerNumbers);
         WinnerNumber winnerNumber = new WinnerNumber(winnerNumbers, bonusBall);
 
-        winnerNumber.compareLottoToWinning(lottos);
-        double result = LottoResult.lottoRateOfReturn(price);
+        LottoCalculator lottoCalculator = winnerNumber.compareLottoToWinning(lottos);
+        double result = lottoCalculator.lottoRateOfReturn(price);
 
-        OutputView.winningStatistics(result);
+        OutputView.winningStatistics(lottoCalculator, result);
         scanner.close();
     }
 
@@ -42,7 +42,8 @@ public class LottoController {
     }
 
     private void printPurchasedLotto(Lottos lottos) {
-        OutputView.printLottoResults(lottos);
+        List<String> lottoNumbers = lottos.searchLottoNumbers();
+        OutputView.printLottoResults(lottoNumbers);
     }
 
     private List<Integer> inputWinnerNumbers() {
