@@ -19,7 +19,7 @@ class NumberGeneratorTest {
 
     @Test
     void 설정한_개수만큼의_숫자들이_뽑힌다() {
-        assertThat(numbers.size()).isEqualTo(size);
+        assertThat(numbers).hasSize(size);
     }
 
     @Test
