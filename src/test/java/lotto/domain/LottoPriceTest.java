@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class LottoPriceTest {
 
     @Test
-    void 로또_구입_금액을_입력한다() {
+    void 로또_구입_금액을_정상적으로_생성한다() {
         // Given
 
         // When

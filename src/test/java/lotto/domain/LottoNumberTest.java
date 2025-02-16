@@ -8,7 +8,7 @@ public class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
-    void 로또_번호가_정상적으로_생성된다(final int value) {
+    void 로또_번호를_정상적으로_생성한다(final int value) {
         Assertions.assertThatCode(() -> LottoNumber.from(value))
                 .doesNotThrowAnyException();
     }
