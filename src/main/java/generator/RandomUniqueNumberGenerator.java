@@ -4,7 +4,7 @@ import constans.ErrorType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomUniqueNumberGenerator extends NumberGenerator {
+public class RandomUniqueNumberGenerator extends RandomNumberGenerator {
 
     public RandomUniqueNumberGenerator(final int startInclusive, final int endInclusive) {
         super(startInclusive, endInclusive);

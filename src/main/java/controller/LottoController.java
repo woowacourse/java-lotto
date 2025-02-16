@@ -1,6 +1,6 @@
 package controller;
 
-import generator.NumberGenerator;
+import generator.RandomNumberGenerator;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -17,10 +17,10 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final NumberGenerator numberGenerator;
+    private final RandomNumberGenerator numberGenerator;
 
     public LottoController(final InputView inputView, final OutputView outputView,
-                           final NumberGenerator numberGenerator) {
+                           final RandomNumberGenerator numberGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.numberGenerator = numberGenerator;

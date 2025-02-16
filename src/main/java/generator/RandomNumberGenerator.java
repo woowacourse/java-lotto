@@ -3,12 +3,12 @@ package generator;
 import constans.ErrorType;
 import java.util.List;
 
-public abstract class NumberGenerator {
+public abstract class RandomNumberGenerator {
 
     final int startInclusive;
     final int endInclusive;
 
-    public NumberGenerator(final int startInclusive, final int endInclusive) {
+    public RandomNumberGenerator(final int startInclusive, final int endInclusive) {
         validateStartLessThanEnd(startInclusive, endInclusive);
         this.startInclusive = startInclusive;
         this.endInclusive = endInclusive;

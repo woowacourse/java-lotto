@@ -1,14 +1,14 @@
 package model;
 
-import generator.NumberGenerator;
+import generator.RandomNumberGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
 
-    private final NumberGenerator numberGenerator;
+    private final RandomNumberGenerator numberGenerator;
 
-    public LottoMachine(final NumberGenerator numberGenerator) {
+    public LottoMachine(final RandomNumberGenerator numberGenerator) {
         this.numberGenerator = numberGenerator;
     }
 
