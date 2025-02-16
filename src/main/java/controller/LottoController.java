@@ -11,29 +11,29 @@ import view.OutputView;
 
 public class LottoController {
 
-  private final InputView inputView;
-  private final OutputView outputView;
-  private final LottoService lottoService;
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final LottoService lottoService;
 
-  public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
-    this.inputView = inputView;
-    this.outputView = outputView;
-    this.lottoService = lottoService;
-  }
+    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.lottoService = lottoService;
+    }
 
-  public void run() {
-    Money money = lottoService.createMoney(inputView.inputLottoMoney());
-    Buyer buyer = lottoService.buyLotto(money);
-    outputView.displayLottos(money.calculateTotalLotto(), buyer.createResult());
+    public void run() {
+        Money money = lottoService.createMoney(inputView.inputLottoMoney());
+        Buyer buyer = lottoService.buyLotto(money);
+        outputView.displayLottos(money.calculateTotalLotto(), buyer.createResult());
 
-    WinningLotto winningLotto = lottoService.createWinningLotto(
-            inputView.inputWinningNumbers(),
-            inputView.inputBonusNumber()
-    );
-    Map<LottoMatch, Integer> lottoResult = lottoService.calculateLottoResults(buyer, winningLotto);
-    outputView.displayResult(lottoResult);
+        WinningLotto winningLotto = lottoService.createWinningLotto(
+                inputView.inputWinningNumbers(),
+                inputView.inputBonusNumber()
+        );
+        Map<LottoMatch, Integer> lottoResult = lottoService.calculateLottoResults(buyer, winningLotto);
+        outputView.displayResult(lottoResult);
 
-    double profit = lottoService.calculateProfit(money, lottoResult);
-    outputView.displayProfit(profit);
-  }
+        double profit = lottoService.calculateProfit(money, lottoResult);
+        outputView.displayProfit(profit);
+    }
 }

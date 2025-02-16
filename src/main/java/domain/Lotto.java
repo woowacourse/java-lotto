@@ -1,59 +1,45 @@
 package domain;
 
-import static util.constant.Values.*;
-
-import java.util.ArrayList;
-import java.util.Collections;
+import generator.RandomGenerator;
 import java.util.List;
-import java.util.Random;
 
 public class Lotto {
 
-  private List<Integer> numbers = new ArrayList<>();
+    private List<Integer> numbers;
 
-  public Lotto() {
-    createNumbers();
-  }
-
-  private void createNumbers() {
-    Random random = new Random();
-    do {
-      int randomNumber = random.nextInt(LOTTO_MIN_NUM, LOTTO_MAX_NUM + 1);
-      addNumber(randomNumber);
-    } while (numbers.size() < LOTTO_SIZE);
-    Collections.sort(numbers);
-  }
-
-  private void addNumber(int randomNumber) {
-    if (!numbers.contains(randomNumber)) {
-      numbers.add(randomNumber);
+    // 전략을 생성자에서 주입받음
+    public Lotto(RandomGenerator randomGenerator) {
+        this.numbers = randomGenerator.generateNumbers();
     }
-  }
 
-  public LottoMatch compareLotto(WinningLotto winningLotto) {
-    List<Integer> winningNumbers = winningLotto.getWinningNumbers();
-    int bonusNumber = winningLotto.getBonusNumber();
-    int winningCounter = 0;
-    boolean bonusChecker = false;
-
-    for (int number : numbers) {
-      winningCounter += checkWinningCounter(winningNumbers, number);
+    public List<Integer> getNumbers() {
+        return numbers;
     }
-    if (numbers.contains(bonusNumber)) {
-      bonusChecker = true;
-    }
-    return LottoMatch.calculateLotto(winningCounter, bonusChecker);
-  }
 
-  private int checkWinningCounter(List<Integer> winningNumbers, int number) {
-    if (winningNumbers.contains(number)) {
-      return 1;
-    }
-    return 0;
-  }
+    public LottoMatch compareLotto(WinningLotto winningLotto) {
+        List<Integer> winningNumbers = winningLotto.getWinningNumbers();
+        int bonusNumber = winningLotto.getBonusNumber();
+        int winningCounter = 0;
+        boolean bonusChecker = false;
 
-  @Override
-  public String toString() {
-    return numbers.toString();
-  }
+        for (int number : numbers) {
+            winningCounter += checkWinningCounter(winningNumbers, number);
+        }
+        if (numbers.contains(bonusNumber)) {
+            bonusChecker = true;
+        }
+        return LottoMatch.calculateLotto(winningCounter, bonusChecker);
+    }
+
+    private int checkWinningCounter(List<Integer> winningNumbers, int number) {
+        if (winningNumbers.contains(number)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }
