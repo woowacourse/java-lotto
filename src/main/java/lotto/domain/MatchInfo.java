@@ -27,7 +27,8 @@ public enum MatchInfo {
         return money;
     }
 
-    public String getMatchData() {
+    @Override
+    public String toString() {
         if (this == MATCH_BONUS) {
             return String.format(BONUS_OUTPUT, number, money);
         }

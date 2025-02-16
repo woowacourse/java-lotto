@@ -14,17 +14,18 @@ import org.junit.jupiter.api.Test;
 class InputParserTest {
 
     @Nested
+    @DisplayName("String 입력값을 Int 값으로 변환할 때")
     class ParseToIntTest {
-        @DisplayName("String 입력값을 Int 값으로 변환한다.")
+        @DisplayName("정상적으로 작동한다.")
         @Test
-        void parseToIntCorrected() {
+        void test_ParseToInt_Corrected() {
             String str = "1000";
             assertThat(parseToInt(str)).isEqualTo(1000);
         }
 
         @DisplayName("입력값에 숫자가 아닌 문자를 포함할 경우 예외가 발생한다.")
         @Test
-        void parseErrorWhenIncludeNotDigit() {
+        void parseError_IncludeNotDigit() {
             String str = "1000익";
             assertThatThrownBy(() -> parseToInt(str))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -33,7 +34,7 @@ class InputParserTest {
 
         @DisplayName("입력값이 빈칸를 포함할 경우 예외가 발생한다.")
         @Test
-        void parseToErrorWhenIncludeBlank() {
+        void parseError_IncludeBlank() {
             String str = " ";
             assertThatThrownBy(() -> parseToInt(str))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -42,7 +43,7 @@ class InputParserTest {
 
         @DisplayName("입력값이 Null일 경우, 예외가 발생한다.")
         @Test
-        void parseErrorWhenIncludeNull() {
+        void parseError_IncludeNull() {
             String str = "";
             assertThatThrownBy(() -> parseToInt(str))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -51,17 +52,18 @@ class InputParserTest {
     }
 
     @Nested
+    @DisplayName("String 입력값을 List<Integer> 값으로 변환할 때")
     class ParseToListTest {
-        @DisplayName("List 변환 시, 구분자를 가진 String 입력값을 List로 변환한다.")
+        @DisplayName("구분자를 가진 String 입력값을 List로 변환한다.")
         @Test
-        void parseToListCorrected() {
+        void test_ParseToList_Corrected() {
             String str = "1,2,3,4,5,6";
             assertThat(parseToList(str)).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
         }
 
         @DisplayName("입력값에 숫자가 아닌 문자를 포함할 경우 예외가 발생한다.")
         @Test
-        void parseErrorWhenIncludeNotDigit() {
+        void parseError_IncludeNotDigit() {
             String str = "1000익,1,2,3,4,5";
             assertThatThrownBy(() -> parseToList(str))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -70,7 +72,7 @@ class InputParserTest {
 
         @DisplayName("입력값이 빈칸를 포함할 경우 예외가 발생한다.")
         @Test
-        void parseToErrorWhenIncludeBlank() {
+        void parseError_IncludeBlank() {
             String str = " ";
             assertThatThrownBy(() -> parseToList(str))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -79,7 +81,7 @@ class InputParserTest {
 
         @DisplayName("입력값이 Null일 경우, 예외가 발생한다.")
         @Test
-        void parseErrorWhenIncludeNull() {
+        void parseError_IncludeNull() {
             String str = "";
             assertThatThrownBy(() -> parseToList(str))
                 .isInstanceOf(IllegalArgumentException.class)
