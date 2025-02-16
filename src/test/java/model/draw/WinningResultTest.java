@@ -22,11 +22,12 @@ class WinningResultTest {
 
     @DisplayName("수익률을 구한다")
     @ParameterizedTest
-    @CsvSource(value = {"SECOND:10000:3000", "FOURTH:100000:0.5", "NONE:5000:0", "FIRST:1000:2000000"}, delimiter = ':')
-    void calculateEarningRate(WinningStatus winningStatus, int purchaseInput, double expectedEarningRate) {
+    @CsvSource(value = {"30_000_000:10_000:3_000", "50_000:100_000:0.5", "0:5_000:0", "2_000_000_000:1000:2_000_000"}
+            , delimiter = ':')
+    void calculateEarningRate(int totalPriceInput, int purchaseInput, double expectedEarningRate) {
         WinningResult winningResult = new WinningResult();
-        winningResult.update(winningStatus);
 
-        assertThat(winningResult.calculateEarningRate(new Purchase(purchaseInput))).isEqualTo(expectedEarningRate);
+        assertThat(winningResult.calculateEarningRate(new Purchase(purchaseInput), () -> totalPriceInput))
+                .isEqualTo(expectedEarningRate);
     }
 }

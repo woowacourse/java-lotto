@@ -31,7 +31,7 @@ public class LottoController {
         BonusNumber bonusNumber = readBonusNumber(winningNumber);
 
         WinningResult winningResult = getWinningResult(issuedLottos, winningNumber, bonusNumber);
-        double earningRate = winningResult.calculateEarningRate(purchase);
+        double earningRate = winningResult.calculateEarningRate(purchase, winningResult::calculateTotalPrice);
 
         printResult(winningResult, earningRate);
     }

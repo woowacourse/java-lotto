@@ -31,6 +31,7 @@ public class LottoTest {
         //TODO : 세팅이 불편하다.
         WinningNumber defaultWinningNumber = new WinningNumber(new ArrayList<>(Arrays.asList(11, 12, 13, 14, 15, 16)));
         BonusNumber targetBonusNumber = new BonusNumber(targetNumberInput, defaultWinningNumber);
+
         Lotto lotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         assertThat(lotto.contains(targetBonusNumber)).isEqualTo(expected);

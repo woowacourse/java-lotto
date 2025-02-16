@@ -3,6 +3,7 @@ package model.draw;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 import model.purchase.Purchase;
 
 public class WinningResult {
@@ -24,12 +25,12 @@ public class WinningResult {
         return Collections.unmodifiableMap(winningResults);
     }
 
-    public double calculateEarningRate(Purchase purchase) {
-        int totalPrice = calculateTotalPrice();
+    public double calculateEarningRate(Purchase purchase, Supplier<Integer> totalPriceCalculator) {
+        int totalPrice = totalPriceCalculator.get();
         return ((double) totalPrice) / purchase.getAmount();
     }
 
-    private int calculateTotalPrice() {
+    public int calculateTotalPrice() {
         int totalPrice = 0;
         for (WinningStatus winningStatus : winningResults.keySet()) {
             totalPrice += winningStatus.getPrice() * winningResults.get(winningStatus);
