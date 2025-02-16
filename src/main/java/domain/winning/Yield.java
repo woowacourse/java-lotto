@@ -6,10 +6,6 @@ public class Yield {
 
     private final double yield;
 
-    private Yield(double yield) {
-        this.yield = yield;
-    }
-
     public static Yield calculate(int purchaseAmount, List<WinningCounter> winningCounters) {
         int totalPrizeMoney = winningCounters.stream()
                 .mapToInt(winningCounter ->
@@ -21,4 +17,9 @@ public class Yield {
     public double getYield() {
         return yield;
     }
+
+    private Yield(double yield) {
+        this.yield = yield;
+    }
+
 }

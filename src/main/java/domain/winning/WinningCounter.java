@@ -19,23 +19,22 @@ public class WinningCounter {
 
         List<WinningCounter> winningCounters = new ArrayList<>();
         for (WinningStatistics winningStatistics : WinningStatistics.values()) {
-            addWinningCountDtoIfExists(winningStatistics, winningStatisticsList, winningCounters);
+            countWinningStatistics(winningStatistics, winningStatisticsList, winningCounters);
         }
         return winningCounters;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public WinningStatistics getWinningStatistics() {
+        return winningStatistics;
     }
 
     private WinningCounter(WinningStatistics winningStatistics, int count) {
         this.winningStatistics = winningStatistics;
         this.count = count;
-    }
-
-    private static void addWinningCountDtoIfExists(WinningStatistics winningStatistics,
-                                                   List<WinningStatistics> winningStatisticsList,
-                                                   List<WinningCounter> winningCounters) {
-        if (winningStatistics != WinningStatistics.NONE) {
-            int count = Collections.frequency(winningStatisticsList, winningStatistics);
-            winningCounters.add(new WinningCounter(winningStatistics, count));
-        }
     }
 
     private static WinningStatistics findMatchInfo(Matcher matcher) {
@@ -58,11 +57,13 @@ public class WinningCounter {
         return winningStatisticsFilteredByMatchCount.size() == SIZE_WITH_BONUS;
     }
 
-    public int getCount() {
-        return count;
+    private static void countWinningStatistics(WinningStatistics winningStatistics,
+                                               List<WinningStatistics> winningStatisticsList,
+                                               List<WinningCounter> winningCounters) {
+        if (winningStatistics != WinningStatistics.NONE) {
+            int count = Collections.frequency(winningStatisticsList, winningStatistics);
+            winningCounters.add(new WinningCounter(winningStatistics, count));
+        }
     }
-
-    public WinningStatistics getWinningStatistics() {
-        return winningStatistics;
-    }
+    
 }
