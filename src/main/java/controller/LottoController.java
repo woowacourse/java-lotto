@@ -2,11 +2,10 @@ package controller;
 
 import dto.LottoAmountResponse;
 import global.utils.Parser;
-import model.utils.Validator;
-import model.LottoResult;
-import model.Lottos;
-import model.LottoMachine;
-import model.WinningLotto;
+import domain.LottoResult;
+import domain.Lottos;
+import domain.LottoMachine;
+import domain.WinningLotto;
 import view.InputView;
 import view.OutputView;
 

@@ -1,10 +1,10 @@
-package model;
+package domain;
 
 import dto.ReturnOfInvestmentResultResponse;
 import dto.LottoAmountResponse;
 
-import static model.utils.Validator.validateDivisibility;
-import static model.utils.Validator.validateRange;
+import static domain.utils.Validator.validateDivisibility;
+import static domain.utils.Validator.validateRange;
 
 public class LottoMachine {
 

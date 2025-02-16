@@ -1,4 +1,4 @@
-package model.utils;
+package domain.utils;
 
 public class Validator {
 

@@ -1,10 +1,10 @@
-package model;
+package domain;
 
 import static global.constant.LottoConstant.MAX_LOTTO_NUMBER;
 import static global.constant.LottoConstant.MIN_LOTTO_NUMBER;
 
 import global.utils.Parser;
-import model.utils.Validator;
+import domain.utils.Validator;
 
 import java.util.EnumMap;
 import java.util.List;

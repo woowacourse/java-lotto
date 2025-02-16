@@ -1,8 +1,8 @@
-package model;
+package domain;
 
 import dto.LottoNumbersResponse;
 import global.utils.Parser;
-import model.utils.Validator;
+import domain.utils.Validator;
 
 import java.util.*;
 
