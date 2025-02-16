@@ -1,21 +1,19 @@
 package view;
 
-import static constant.OutputViewMessage.FIFTH_PLACE_STATISTICS;
-import static constant.OutputViewMessage.FIRST_PLACE_STATISTICS;
-import static constant.OutputViewMessage.FOUR_PLACE_STATISTICS;
-import static constant.OutputViewMessage.LOTTO_PURCHASE_GUIDANCE;
-import static constant.OutputViewMessage.SECOND_PLACE_STATISTICS;
-import static constant.OutputViewMessage.THIRD_PLACE_STATISTICS;
-import static constant.OutputViewMessage.TOTAL_PROFIT_RATE_RESULT;
-import static constant.OutputViewMessage.LOTTO_PURCHASE_RESULT;
-import static constant.OutputViewMessage.WINNING_BONUS_GUIDANCE;
-import static constant.OutputViewMessage.WINNING_LOTTO_GUIDANCE;
-import static constant.OutputViewMessage.WINNING_STATISTIC_TITLE;
-import static constant.OutputViewMessage.WINNING_STATISTICS_SEPARATOR;
+import static constant.message.OutputViewMessage.FIFTH_PLACE_STATISTICS;
+import static constant.message.OutputViewMessage.FIRST_PLACE_STATISTICS;
+import static constant.message.OutputViewMessage.FOUR_PLACE_STATISTICS;
+import static constant.message.OutputViewMessage.LOTTO_PURCHASE_GUIDANCE;
+import static constant.message.OutputViewMessage.SECOND_PLACE_STATISTICS;
+import static constant.message.OutputViewMessage.THIRD_PLACE_STATISTICS;
+import static constant.message.OutputViewMessage.TOTAL_PROFIT_RATE_RESULT;
+import static constant.message.OutputViewMessage.LOTTO_PURCHASE_RESULT;
+import static constant.message.OutputViewMessage.WINNING_BONUS_GUIDANCE;
+import static constant.message.OutputViewMessage.WINNING_LOTTO_GUIDANCE;
+import static constant.message.OutputViewMessage.WINNING_STATISTIC_TITLE;
+import static constant.message.OutputViewMessage.WINNING_STATISTICS_SEPARATOR;
 
 import java.util.EnumMap;
-import java.util.List;
-import model.Lotto;
 import model.Prize;
 import model.LottoFactory;
 

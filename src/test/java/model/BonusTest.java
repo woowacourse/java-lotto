@@ -1,9 +1,9 @@
 package model;
 
-import static constant.ExceptionMessage.DUPLICATE_BONUS_NUMBER;
-import static constant.ExceptionMessage.INVALID_BONUS_RANGE;
-import static constant.ExceptionMessage.INVALID_BONUS_FORMAT;
-import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
+import static constant.message.ExceptionMessage.DUPLICATE_BONUS_NUMBER;
+import static constant.message.ExceptionMessage.INVALID_BONUS_RANGE;
+import static constant.message.ExceptionMessage.INVALID_BONUS_FORMAT;
+import static constant.message.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

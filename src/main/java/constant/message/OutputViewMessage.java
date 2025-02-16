@@ -1,4 +1,4 @@
-package constant;
+package constant.message;
 
 public enum OutputViewMessage {
 
