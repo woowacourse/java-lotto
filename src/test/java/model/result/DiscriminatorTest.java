@@ -33,7 +33,7 @@ public class DiscriminatorTest {
     @DisplayName("judge메서드_Rank에맞는개수계산")
     @Test
     void testJudge() {
-        PrizeResult result = discriminator.judge(ownedLotto, winningNumbers);
+        PrizeResult result = WinningDiscriminator.judge(ownedLotto, winningNumbers);
 
         EnumMap<Rank, Integer> expectedCounts = new EnumMap<>(Rank.class);
         expectedCounts.put(Rank.RANK1, 1);

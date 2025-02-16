@@ -8,7 +8,7 @@ import model.OwnedLotto;
 import model.lotto.Lotto;
 import model.lotto.LottoMachine;
 import model.result.PrizeResult;
-import model.result.discriminator;
+import model.result.WinningDiscriminator;
 import service.parser.BonusNumberParser;
 import service.parser.BudgetParser;
 import service.parser.WinningNumberParser;
@@ -35,7 +35,8 @@ public class Controller {
         List<Integer> winningNumbers = inputResponseForWinningNumber();
         int bonusNumber = inputResponseForBonusNumber(winningNumbers);
 
-        PrizeResult prizeResult = discriminator.judge(ownedLotto, new LottoWinningNumbers(winningNumbers, bonusNumber));
+        PrizeResult prizeResult = WinningDiscriminator.judge(ownedLotto,
+                new LottoWinningNumbers(winningNumbers, bonusNumber));
         outputView.displayPrizeSummary(prizeResult);
     }
 
