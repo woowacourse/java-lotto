@@ -35,3 +35,7 @@
   - 당첨 로또 번호에 중복된 숫자가 존재하는 경우 `IllegalArgumentException`을 발생시킨다.
   - 로또 번호와 보너스번호에 중복이 존재하는 경우 `IllegalArgumentException`을 발생시킨다.
   - 범위가 1이상 45이하가 아닌 경우 `IllegalArgumentException`을 발생시킨다.
+- [x] 로또 번호 자동 생성기 예외처리
+  - 최소값이 최대값보다 큰 경우 `IllegalArgumentException`을 발생시킨다.
+  - 번호 개수가 0보다 작은 경우 `IllegalArgumentException`을 발생시킨다.
+  - 번호 범위가 개수보다 작으면 `IllegalArgumentException`을 발생시킨다.

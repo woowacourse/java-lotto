@@ -35,6 +35,13 @@ class LottoNumbersGeneratorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("로또 번호 생성기의 번호 범위가 번호의 총 개수보다 작을 수 없습니다.")
+    @Test
+    void createGeneratorWitRangeLessThanSize() {
+        assertThatThrownBy(() -> new LottoNumbersGenerator(MIN_LOTTO_NUMBER, 5, LOTTO_SIZE))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("로또 번호 생성기는 필요한 로또 숫자 개수만큼 반환한다.")
     @Test
     void generateLottoNumbersWithValidSize() {
