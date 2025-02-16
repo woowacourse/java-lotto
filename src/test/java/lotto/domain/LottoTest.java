@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import static lotto.TestUtil.parseToList;
+import static lotto.constant.ErrorMessage.DUPLICATE_LOTTO_NUMBER;
+import static lotto.constant.ErrorMessage.INVALID_LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -42,7 +44,8 @@ public class LottoTest {
     })
     void 로또_번호_개수가_6개가_아닐_경우_예외를_반환한다(String testName, String numbers) {
         assertThatThrownBy(() -> new Lotto(parseToList(numbers)))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(INVALID_LOTTO_NUMBER_COUNT.getMessage());
     }
 
     @ParameterizedTest
@@ -52,6 +55,7 @@ public class LottoTest {
     })
     void 로또_번호가_중복될_경우_예외를_반환한다(String numbers) {
         assertThatThrownBy(() -> new Lotto(parseToList(numbers)))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(DUPLICATE_LOTTO_NUMBER.getMessage());
     }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.constant.ErrorMessage.INVALID_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -35,6 +36,7 @@ public class LottosTest {
     @ValueSource(ints = {3, 3003})
     void 구입_금액이_1000원으로_나누어떨어지지_않을_경우_예외를_반환한다(int payment) {
         assertThatThrownBy(() -> new Lottos(payment))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(INVALID_PRICE.getMessage());
     }
 }

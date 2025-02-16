@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.constant.ErrorMessage.OUT_OF_RANGE_LOTTO_NUMBER;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -20,6 +21,7 @@ class LottoNumberTest {
     @ValueSource(ints = {0, 46, -1})
     void _1부터_45사이의_숫자가_아닐_경우_예외를_반환한다(int number) {
         assertThatThrownBy(() -> new LottoNumber(number))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(OUT_OF_RANGE_LOTTO_NUMBER.getMessage());
     }
 }
