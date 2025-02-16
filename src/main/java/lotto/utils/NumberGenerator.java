@@ -10,10 +10,9 @@ import java.util.Set;
 public class NumberGenerator {
 
     public static List<Integer> numberGeneratorWithUniqueValues(int makeQuantity, int minValue, int maxValue) {
-        Random random = new Random();
         Set<Integer> set = new HashSet<>();
         do {
-            int randomNum = random.nextInt(maxValue - minValue + 1) + minValue;
+            int randomNum = generateRandomNumber(minValue, maxValue);
             set.add(randomNum);
         } while (set.size() != makeQuantity);
 
@@ -22,4 +21,8 @@ public class NumberGenerator {
         return lottoNumbers;
     }
 
+    private static int generateRandomNumber(int minValue, int maxValue) {
+        Random random = new Random();
+        return random.nextInt(maxValue - minValue + 1) + minValue;
+    }
 }
