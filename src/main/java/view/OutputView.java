@@ -40,9 +40,15 @@ public class OutputView {
         if (entry.getKey().equals(Prize.MISS)) {
             return;
         }
+
         Prize currentPrize = entry.getKey();
         int prizeCount = entry.getValue();
-        System.out.printf("%s (%d원)- %d개%n", currentPrize.getMatchedMessage(), currentPrize.getPrizeMoney(),
-                prizeCount);
+
+        System.out.printf("%s개 일치", currentPrize.getMatchedCount());
+        if (currentPrize.isBonusRequired()) {
+            System.out.print(", 보너스 볼 일치");
+        }
+
+        System.out.printf(" (%d원)- %d개%n", currentPrize.getPrizeMoney(), prizeCount);
     }
 }
