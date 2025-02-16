@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoBundle {
 
@@ -13,7 +15,8 @@ public class LottoBundle {
 
     public Map<Rank, Integer> makeStatistics(WinningNumbers winningNumbers) {
 
-        Map<Rank, Integer> rankIntegerEnumMap = Rank.makeDefaultMap();
+        Map<Rank, Integer> rankIntegerEnumMap = Arrays.stream(Rank.values())
+                .collect(Collectors.toMap(rank -> rank, rank -> 0));
 
         for (Lotto lotto : lottoBundle) {
             Rank currentRank = Rank.checkPrize(winningNumbers.checkMatchCount(lotto),
