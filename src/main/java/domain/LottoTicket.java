@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.List;
+import view.InputErrorMessage;
 
 
 public class LottoTicket {
@@ -11,28 +12,33 @@ public class LottoTicket {
 
     private final List<Integer> numbers;
 
-    public LottoTicket(List<Integer> numbers) {
+    private LottoTicket(List<Integer> numbers) {
         validateLottoSize(numbers);
         numbers.forEach(this::validateLottoNumberRange);
         validateDuplicateNumber(numbers);
         this.numbers = numbers;
     }
 
+    public static LottoTicket from(List<Integer> numbers) {
+        return new LottoTicket(numbers);
+    }
+
+
     private void validateLottoSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+            throw new IllegalArgumentException(InputErrorMessage.REQUIRED_SIX_NUMBERS.getMessage());
         }
     }
 
     private void validateLottoNumberRange(Integer number) {
         if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("로또 번호는 1 이상 45 이하이다.");
+            throw new IllegalArgumentException(InputErrorMessage.NOT_FITTED_RANGE.getMessage());
         }
     }
 
     private void validateDuplicateNumber(List<Integer> numbers) {
         if (numbers.stream().distinct().count() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("중복된 번호가 존재합니다.");
+            throw new IllegalArgumentException(InputErrorMessage.DUPLICATED.getMessage());
         }
     }
 

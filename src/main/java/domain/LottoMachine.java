@@ -9,14 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-    public LottoTicket generateLottoTicket(IntegerGenerator generator) {
-
+    private List<Integer> generateLottoTicket(IntegerGenerator generator) {
         List<Integer> numbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_SIZE; i++) {
             int number = extractUniqueNumber(generator, numbers);
             numbers.add(number);
         }
-        return new LottoTicket(numbers);
+        return numbers;
     }
 
     private int extractUniqueNumber(IntegerGenerator generator, List<Integer> numbers) {
@@ -31,8 +30,8 @@ public class LottoMachine {
         int lottoTicketNumber = purchaseAmount / LOTTO_PRICE;
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < lottoTicketNumber; i++) {
-            LottoTicket lottoTicket = generateLottoTicket(generator);
-            lottoTickets.add(lottoTicket);
+            List<Integer> numbers = generateLottoTicket(generator);
+            lottoTickets.add(LottoTicket.from(numbers));
         }
         return lottoTickets;
     }
