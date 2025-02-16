@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +11,6 @@ class PrizeTest {
         Prize prize = new Prize(3, false);
 
         //when & then
-        Assertions.assertThat(prize.matchRank()).isEqualTo(Rank.FIFTH);
+        Assertions.assertThat(prize.getMatchRank()).isEqualTo(Rank.FIFTH);
     }
 }
