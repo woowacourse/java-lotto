@@ -26,7 +26,6 @@ public class InputView {
         return Bonus.of(getIntegerInput(), lotto);
     }
 
-
     private static int getIntegerInput() {
         return InputParser.of(getInput()).getInput();
     }
