@@ -1,13 +1,12 @@
 import controller.MainController;
-import domain.LottoMachine;
-import domain.RandomIntegerGenerator;
-import domain.StatisticsService;
+import service.IssuingService;
+import service.StatisticsService;
 
 public class Application {
     public static void main(String[] args) {
         MainController mainController = new MainController(
-                new StatisticsService(),
-                new LottoMachine(new RandomIntegerGenerator())
+                new IssuingService(),
+                new StatisticsService()
         );
         mainController.run();
     }
