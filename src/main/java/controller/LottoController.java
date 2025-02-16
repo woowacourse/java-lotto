@@ -3,11 +3,12 @@ package controller;
 import java.util.List;
 import domain.BonusNumber;
 import domain.Lotto;
-import util.LottoGenerator;
+import domain.LottoMachine;
 import domain.Purchase;
 import domain.WinningNumber;
 import domain.WinningResult;
 import domain.WinningStatus;
+import util.NumberGenerator;
 import view.InputView;
 import view.OutputView;
 
@@ -54,7 +55,8 @@ public class LottoController {
     }
 
     public List<Lotto> issueLotto(int lottoCount) {
-        List<Lotto> lottos = LottoGenerator.generate(lottoCount);
+        LottoMachine lottoMachine = new LottoMachine();
+        List<Lotto> lottos = lottoMachine.generate(lottoCount);
         outputView.printLottos(lottos);
         return lottos;
     }

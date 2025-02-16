@@ -1,13 +1,14 @@
-package util;
+package domain;
 
 import static domain.LottoConstants.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import domain.Lotto;
+import util.NumberGenerator;
 
-public class LottoGenerator {
-    public static List<Lotto> generate(int lottoCount) {
+public class LottoMachine {
+
+    public List<Lotto> generate(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         while (lottos.size() < lottoCount) {
             try {
@@ -21,9 +22,9 @@ public class LottoGenerator {
         return lottos;
     }
 
-    private static void validateDuplication(List<Integer> randomNumbers, List<Lotto> lottos) {
+    private void validateDuplication(List<Integer> randomNumbers, List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            if (lotto.checkDuplication(randomNumbers)) {
+            if (lotto.isUnique(randomNumbers)) {
                 throw new IllegalStateException();
             }
         }
