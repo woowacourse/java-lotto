@@ -10,5 +10,5 @@ public class OutputMessage {
     public static final String THIRD_RESULT = "%d개 일치 (%d원)- %d개%n";
     public static final String FOURTH_RESULT = "%d개 일치 (%d원)- %d개%n";
     public static final String FIFTH_RESULT = "%d개 일치 (%d원)- %d개%n";
-    public static final String TOTAL_RETURN = "총 수익률은 %.2f입니다.%n";
+    public static final String TOTAL_Result = "총 수익률은 %.2f입니다.%n";
 }

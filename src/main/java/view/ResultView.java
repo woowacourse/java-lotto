@@ -24,8 +24,8 @@ public class ResultView {
                 nullToZero(result.getCount(FIRST)));
     }
 
-    public void printTotalReturn(Result result, Purchase purchase) {
-        System.out.printf(OutputMessage.TOTAL_RETURN, result.totalReturn(purchase.getPurchaseAmount()));
+    public void printTotalResult(Result result, Purchase purchase) {
+        System.out.printf(OutputMessage.TOTAL_Result, result.totalReturn(purchase.getPurchaseAmount()));
     }
 
     private Integer nullToZero(Integer number) {
