@@ -13,19 +13,19 @@ public enum WinLottoInfo {
     FIFTH(3, false, 5000),
     NONE(2, false, 0);
 
-    private final Integer matchNumberCount;
-    private final Boolean matchBonusNumber;
-    private final Integer price;
+    private final int matchNumberCount;
+    private final boolean matchBonusNumber;
+    private final int price;
 
-    WinLottoInfo(Integer matchNumberCount, Boolean matchBonusNumber, Integer price) {
+    WinLottoInfo(int matchNumberCount, boolean matchBonusNumber, int price) {
         this.matchNumberCount = matchNumberCount;
         this.matchBonusNumber = matchBonusNumber;
         this.price = price;
     }
 
     public static WinLottoInfo result(LottoNumbers purchasedLotto, WinLotto winLotto) {
-        Integer matchNumberCount = winLotto.countMatchNumber(purchasedLotto);
-        Boolean bonusMatch = winLotto.bonusMatch(purchasedLotto);
+        int matchNumberCount = winLotto.countMatchNumber(purchasedLotto);
+        boolean bonusMatch = winLotto.bonusMatch(purchasedLotto);
         if (matchNumberCount <= 2) {
             return NONE;
         }
@@ -38,11 +38,11 @@ public enum WinLottoInfo {
         return filteredWinLottoInfo.getFirst();
     }
 
-    public Integer getMatchNumberCount() {
+    public int getMatchNumberCount() {
         return matchNumberCount;
     }
 
-    public Integer getPrice() {
+    public int getPrice() {
         return price;
     }
 }

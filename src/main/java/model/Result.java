@@ -15,21 +15,21 @@ public class Result {
         }
     }
 
-    private Integer calculateTotalPrize() {
-        Integer sum = 0;
+    private int calculateTotalPrize() {
+        int sum = 0;
         for (Entry<WinLottoInfo, Integer> winLottoInfoIntegerEntry : result.entrySet()) {
             WinLottoInfo winLottoInfo = winLottoInfoIntegerEntry.getKey();
-            Integer count = winLottoInfoIntegerEntry.getValue();
+            int count = winLottoInfoIntegerEntry.getValue();
             sum += winLottoInfo.getPrice() * count;
         }
         return sum;
     }
 
-    public Integer getCount(WinLottoInfo winLottoInfo) {
+    public int getCount(WinLottoInfo winLottoInfo) {
         return result.get(winLottoInfo);
     }
 
-    public Double totalReturn(Integer purchaseAmount) {
+    public double totalReturn(int purchaseAmount) {
         return (double) calculateTotalPrize() / purchaseAmount;
     }
 }

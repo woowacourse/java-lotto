@@ -8,7 +8,7 @@ public class PurchaseController {
 
     public Purchase purchase() {
         purchaseView.printPurchaseGuide();
-        Integer purchaseAmount = purchaseView.readPurchaseAmount();
+        int purchaseAmount = purchaseView.readPurchaseAmount();
         Purchase purchase = new Purchase(purchaseAmount);
         purchaseView.printPurchaseResult(purchase.size());
         purchaseView.printPurchasedLottos(purchase);

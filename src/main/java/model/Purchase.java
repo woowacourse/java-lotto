@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Purchase {
     private final List<LottoNumbers> lottos = new ArrayList<>();
-    private final Integer purchaseAmount;
+    private final int purchaseAmount;
 
-    public Purchase(Integer purchaseAmount) {
-        Integer purchaseCount = purchaseAmount / Constants.LOTTO_PRICE;
+    public Purchase(int purchaseAmount) {
+        int purchaseCount = purchaseAmount / Constants.LOTTO_PRICE;
         for (int i = 0; i < purchaseCount; i++) {
             lottos.add(new LottoNumbers());
         }
@@ -17,7 +17,7 @@ public class Purchase {
     }
 
 
-    public Integer size() {
+    public int size() {
         return lottos.size();
     }
 
@@ -25,7 +25,7 @@ public class Purchase {
         return lottos;
     }
 
-    public Integer getPurchaseAmount() {
+    public int getPurchaseAmount() {
         return purchaseAmount;
     }
 }

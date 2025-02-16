@@ -31,14 +31,14 @@ public class LottoNumbers {
         return numbers;
     }
 
-    public Integer countMatchNumber(LottoNumbers lottoNumbers) {
+    public int countMatchNumber(LottoNumbers lottoNumbers) {
         List<Integer> matchList = lottoNumbers.getNumbers().stream()
                 .filter(lottoNumber -> numbers.stream().anyMatch((number) -> number == lottoNumber))
                 .toList();
         return matchList.size();
     }
 
-    public Boolean bonusMatch(Integer bonusNumber) {
+    public Boolean bonusMatch(int bonusNumber) {
         return numbers.contains(bonusNumber);
     }
 }

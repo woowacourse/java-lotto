@@ -14,7 +14,7 @@ class WinLottoTest {
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(4, 5, 6, 7, 8, 9));
         WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 4, 5, 6), 44);
         // when
-        Integer count = winLotto.countMatchNumber(lottoNumbers);
+        int count = winLotto.countMatchNumber(lottoNumbers);
         //then
         assertThat(count).isEqualTo(3);
     }

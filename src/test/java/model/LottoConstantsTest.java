@@ -25,7 +25,7 @@ class LottoConstantsTest {
         LottoNumbers lottoNumbers = new LottoNumbers();
         List<Integer> numbers = lottoNumbers.getNumbers();
         // then
-        for (Integer number : numbers) {
+        for (int number : numbers) {
             assertThat(number).isBetween(1, 45);
         }
     }

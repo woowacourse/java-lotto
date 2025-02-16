@@ -18,7 +18,7 @@ class ResultTest {
         WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         Result result = new Result(lottoNumbers, winLotto);
         // when
-        Integer count = result.getCount(WinLottoInfo.FIRST);
+        int count = result.getCount(WinLottoInfo.FIRST);
         // then
         assertThat(count).isEqualTo(1);
     }
