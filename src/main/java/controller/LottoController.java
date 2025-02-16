@@ -1,9 +1,9 @@
 package controller;
 
-import domain.Lottos;
 import domain.MatchDto;
 import domain.WinningCountDto;
 import domain.WinningStatistics;
+import domain.lotto.Lottos;
 import java.util.List;
 import view.InputView;
 import view.OutputView;
@@ -29,7 +29,7 @@ public class LottoController {
     }
 
     private Lottos issueLottos(int purchaseAmount) {
-        Lottos lottos = Lottos.of(purchaseAmount);
+        Lottos lottos = Lottos.issueByMoney(purchaseAmount);
 
         int quantity = lottos.getQuantity();
         outputView.printLottoQuantity(quantity);

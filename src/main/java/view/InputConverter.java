@@ -1,8 +1,8 @@
 package view;
 
-import static domain.Lotto.LOTTO_PRICE;
-import static domain.Lotto.MAX_LOTTO_NUMBER;
-import static domain.Lotto.MIN_LOTTO_NUMBER;
+import static domain.lotto.Lotto.LOTTO_PRICE;
+import static domain.lotto.Lotto.MAX_LOTTO_NUMBER;
+import static domain.lotto.Lotto.MIN_LOTTO_NUMBER;
 
 import java.util.Arrays;
 import java.util.Collections;

@@ -1,8 +1,9 @@
-package domain;
+package domain.lotto;
 
 
-import static domain.Lotto.LOTTO_PRICE;
+import static domain.lotto.Lotto.LOTTO_PRICE;
 
+import domain.MatchDto;
 import domain.numbergenerator.RandomNumberGenerator;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos of(int money) {
+    public static Lottos issueByMoney(int money) {
         int quantity = money / LOTTO_PRICE;
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 
