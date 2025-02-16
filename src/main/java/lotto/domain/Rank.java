@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public enum Rank {
     FIFTH(5000, "3개 일치 (5000원)- ", 3, false),
@@ -25,7 +24,7 @@ public enum Rank {
         this.matchBonus = matchBonus;
     }
 
-    public static Rank matchRank(int matchCounts, boolean matchBonus) {
+    public static Rank checkRank(int matchCounts, boolean matchBonus) {
         if (matchCounts == 5) {
             return checkEqualFive(matchBonus);
         }
@@ -40,7 +39,7 @@ public enum Rank {
         return winningCounts * this.money;
     }
 
-    public static List<Rank> validRank() {
+    public static List<Rank> getValidRanks() {
         return new ArrayList<>(Arrays.asList(Rank.values()).subList(0, 5));
     }
 

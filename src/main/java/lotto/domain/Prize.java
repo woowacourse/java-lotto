@@ -10,7 +10,7 @@ public class Prize {
         this.matchBonus = matchBonus;
     }
 
-    public Rank matchRank() {
-        return Rank.matchRank(matchCount, matchBonus);
+    public Rank getMatchRank() {
+        return Rank.checkRank(matchCount, matchBonus);
     }
 }
