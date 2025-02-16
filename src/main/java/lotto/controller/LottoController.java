@@ -3,35 +3,50 @@ package lotto.controller;
 import java.util.List;
 import lotto.config.ApplicationConfiguration;
 import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningTier;
 import lotto.service.InputService;
-import lotto.service.LottoService;
 import lotto.service.OutputService;
 
 public class LottoController {
 
     private final InputService inputService;
-    private final LottoService lottoService;
     private final OutputService outputService;
+    private final LottoMachine lottoMachine;
 
     public LottoController(ApplicationConfiguration applicationConfiguration) {
         this.inputService = applicationConfiguration.getInputService();
-        this.lottoService = applicationConfiguration.getLottoService();
+        this.lottoMachine = applicationConfiguration.getLottoMachine();
         this.outputService = applicationConfiguration.getOutputService();
     }
 
     public void run() {
-        int purchaseAmount = inputService.readPurchaseAmount();
-        int lottoCount = lottoService.purchaseLotto(purchaseAmount);
-        List<Lotto> lottos = lottoService.issueLottos(lottoCount);
-        outputService.printLottos(lottos);
+        int purchaseAmount = readPurchaseAmount();
+        List<Lotto> lottos = purchaseLottos(purchaseAmount);
+        List<WinningTier> winningTiers = findWinningTiers(lottos);
+        printWinningResult(winningTiers, purchaseAmount);
+    }
 
+    private int readPurchaseAmount() {
+        return inputService.readPurchaseAmount();
+    }
+
+    private List<Lotto> purchaseLottos(int purchaseAmount) {
+        List<Lotto> lottos = lottoMachine.purchaseLotto(purchaseAmount);
+        outputService.printLottos(lottos);
+        return lottos;
+    }
+
+    private List<WinningTier> findWinningTiers(List<Lotto> lottos) {
         Lotto winningNumbers = inputService.readWinningNumbers();
         int bonusNumber = inputService.readBonusNumber(winningNumbers);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        List<WinningTier> winningTiers = lottoService.findWinningTiers(lottos, winningLotto);
-        double profit = lottoService.calculateProfit(winningTiers, purchaseAmount);
-        outputService.printResults(winningTiers, profit);
+        return lottoMachine.findWinningTiers(lottos, winningLotto);
+    }
+
+    private void printWinningResult(List<WinningTier> tiers, int purchaseAmount) {
+        double profit = lottoMachine.calculateProfit(tiers, purchaseAmount);
+        outputService.printResults(tiers, profit);
     }
 }
