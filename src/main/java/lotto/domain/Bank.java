@@ -13,7 +13,7 @@ public class Bank {
 
     public double calculateRateOfReturn(Map<Rank, Integer> result) {
         long sum = result.entrySet().stream()
-            .mapToLong(set -> set.getKey().getPrice() * set.getValue())
+            .mapToLong(set -> set.getKey().calculatePrice(set.getValue()))
             .sum();
 
         validatePrice();

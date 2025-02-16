@@ -9,6 +9,7 @@ import lotto.dto.request.PaymentRequest;
 import lotto.dto.request.WinningBallsRequest;
 import lotto.dto.response.LottosResponse;
 import lotto.dto.response.ResultResponse;
+import lotto.util.RandomNumberGenerator;
 
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class LottoService {
 
     public LottosResponse buyLottos(PaymentRequest request) {
         bank.use(request.payment());
-        this.lottos = new Lottos(request.payment());
+        this.lottos = new Lottos(new RandomNumberGenerator(), request.payment());
         return LottosResponse.from(lottos);
     }
 

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.util.NumberGenerator;
-import lotto.util.RandomNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -15,18 +14,14 @@ public class Lottos {
     public static final int INCREASE_UNIT = 1;
 
     private final List<Lotto> lottos = new ArrayList<>();
-    private final NumberGenerator generator = new RandomNumberGenerator();
 
-    public Lottos(int payment) {
+    public Lottos(NumberGenerator generator, int payment) {
         validate(payment);
 
-        for (int i = 0; i < payment / Lotto.PRICE; i++) {
+        int lottoCount = payment / Lotto.PRICE;
+        for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(generator));
         }
-    }
-
-    public Lottos(List<Lotto> lottos) {
-        this.lottos.addAll(lottos);
     }
 
     private void validate(int payment) {

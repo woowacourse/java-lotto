@@ -8,6 +8,8 @@ import static lotto.constant.ErrorMessage.NOT_NUMBER;
 public class ConvertUtil {
     public static final String DELIMITER = ",";
 
+    private ConvertUtil() {}
+
     public static int convertToNumber(String input) {
         try {
             return Integer.parseInt(input);
