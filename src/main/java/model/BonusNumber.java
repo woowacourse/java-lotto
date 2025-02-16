@@ -21,11 +21,8 @@ public class BonusNumber {
         }
     }
 
-    public boolean isBonusNumber(Lotto lotto) {
-        if (lotto.contains(bonusNumber)) {
-            return true;
-        }
-        return false;
+    public boolean isBonusMatch(Lotto lotto) {
+        return lotto.contains(bonusNumber);
     }
 
 }

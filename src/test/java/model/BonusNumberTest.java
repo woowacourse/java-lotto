@@ -27,7 +27,7 @@ class BonusNumberTest {
         Lotto lotto = new Lotto(lottoNumbers);
         BonusNumber bonusNumber = new BonusNumber(5);
 
-        assertThat(bonusNumber.isBonusNumber(lotto)).isTrue();
+        assertThat(bonusNumber.isBonusMatch(lotto)).isTrue();
     }
 
 
