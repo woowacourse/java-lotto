@@ -11,8 +11,8 @@ public class WinningLotto{
     private Lotto lotto;
     private int bonusNumber;
 
-    public WinningLotto(final String input, final String bonusNumber) {
-        this.lotto = new Lotto(input);
+    public WinningLotto(final String numbers, final String bonusNumber) {
+        this.lotto = new Lotto(numbers);
         this.bonusNumber = validateBonus(bonusNumber);
     }
 
@@ -21,25 +21,25 @@ public class WinningLotto{
         return Rank.matchRank(count, lotto.contains(bonusNumber));
     }
 
-    public boolean contains(final int num) {
-        return lotto.contains(num);
+    public boolean contains(final int number) {
+        return lotto.contains(number);
     }
 
-    private int validateBonus(final String input) {
-        int bonus = validateIsInteger(input);
+    private int validateBonus(final String bonusNumber) {
+        int bonus = validateIsInteger(bonusNumber);
         validateRange(bonus);
         validateBonusDuplicate(bonus);
         return bonus;
     }
 
-    private void validateBonusDuplicate(final int bonus) {
-        if(lotto.contains(bonus)){
+    private void validateBonusDuplicate(final int bonusNumber) {
+        if(lotto.contains(bonusNumber)){
             throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
         }
     }
 
-    private void validateRange(final int num) {
-        if (num < LOTTO_MIN || num > LOTTO_MAX) {
+    private void validateRange(final int number) {
+        if (number < LOTTO_MIN || number > LOTTO_MAX) {
             throw new IllegalArgumentException(INVALID_RANGE.getMessage());
         }
     }

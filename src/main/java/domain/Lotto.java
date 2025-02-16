@@ -32,8 +32,8 @@ public class Lotto {
         validateLottoDuplicate();
     }
 
-    public boolean contains(final int num) {
-        return numbers.contains(num);
+    public boolean contains(final int number) {
+        return numbers.contains(number);
     }
 
     public int matchCount(final WinningLotto winningLotto) {
@@ -62,15 +62,15 @@ public class Lotto {
         }
     }
 
-    private void validateRange(final int num) {
-        if (num < LOTTO_MIN || num > LOTTO_MAX) {
+    private void validateRange(final int number) {
+        if (number < LOTTO_MIN || number > LOTTO_MAX) {
             throw new IllegalArgumentException(INVALID_RANGE.getMessage());
         }
     }
 
-    private int validateIsInteger(final String inputNumber) {
+    private int validateIsInteger(final String number) {
         try {
-            return Integer.parseInt(inputNumber);
+            return Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }
