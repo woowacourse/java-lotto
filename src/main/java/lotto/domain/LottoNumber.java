@@ -22,14 +22,16 @@ public record LottoNumber(
         }
     }
 
-    public static LottoNumber random(NumberGenerator generator) {
+    public static LottoNumber generate(NumberGenerator generator) {
         return new LottoNumber(generator.generate(MINIMUM, MAXIMUM));
     }
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber)o;
         return number == that.number;
     }
 

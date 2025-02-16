@@ -6,10 +6,10 @@ public class WinningNumbers {
     private Lotto winningLotto;
     private LottoNumber bonusNumber;
 
-    public WinningNumbers(Lotto lotto, int bonusNumber) {
+    public WinningNumbers(Lotto winningLotto, int bonusNumber) {
         LottoNumber generatedBonusNumber = new LottoNumber(bonusNumber);
-        validateWinningNumbersContainBonusNumber(lotto, generatedBonusNumber);
-        this.winningLotto = lotto;
+        validateWinningNumbersContainBonusNumber(winningLotto, generatedBonusNumber);
+        this.winningLotto = winningLotto;
         this.bonusNumber = generatedBonusNumber;
     }
 
