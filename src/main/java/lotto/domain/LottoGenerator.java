@@ -21,7 +21,7 @@ public class LottoGenerator {
     public Lotto makeLotto() {
         return new Lotto(
                 NumberGenerator.numberGeneratorWithUniqueValues(6, 1, 45).stream()
-                        .map(LottoNumber::new)
+                        .map(LottoNumber::of)
                         .collect(Collectors.toSet())
         );
     }
