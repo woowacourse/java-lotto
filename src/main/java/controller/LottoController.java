@@ -4,7 +4,6 @@ import domain.Lotto;
 import domain.LottoGenerator;
 import domain.LottoResultCalculator;
 import domain.Rank;
-import domain.TicketMachine;
 import domain.WinningInfo;
 import java.util.List;
 import java.util.Map;
@@ -25,21 +24,16 @@ public class LottoController {
         LottoResultCalculator lottoResultCalculator = new LottoResultCalculator();
 
         int purchaseAmount = inputView.purchaseAmountInput();
-        TicketMachine ticketMachine = generateTicket(purchaseAmount);
-        List<Lotto> lottoBundle = generateLottoBundle(lottoGenerator, ticketMachine);
+        List<Lotto> lottoBundle = purchaseLottoBundle(lottoGenerator, purchaseAmount);
         WinningInfo winningInfo = generateWinningInfo(lottoGenerator);
         Map<Rank, Integer> rankResult = calculateMatchingRank(lottoResultCalculator, winningInfo, lottoBundle);
         calculateProfit(lottoResultCalculator, rankResult, purchaseAmount);
     }
 
-    private TicketMachine generateTicket(int purchaseAmount) {
-        TicketMachine ticketMachine = TicketMachine.create(purchaseAmount);
-        outputView.printPurchaseResult(ticketMachine);
-        return ticketMachine;
-    }
-
-    private List<Lotto> generateLottoBundle(LottoGenerator lottoGenerator, TicketMachine ticketMachine) {
-        List<Lotto> lottoBundle = lottoGenerator.createLottoBundleForTicket(ticketMachine);
+    private List<Lotto> purchaseLottoBundle(LottoGenerator lottoGenerator, int purchaseAmount) {
+        int lottoQuantity = lottoGenerator.purchaseLottoByAmount(purchaseAmount);
+        outputView.printPurchaseResult(lottoQuantity);
+        List<Lotto> lottoBundle = lottoGenerator.createLottoBundleForQuantity(lottoQuantity);
         outputView.printLottos(lottoBundle);
         return lottoBundle;
     }
