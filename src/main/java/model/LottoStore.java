@@ -3,7 +3,7 @@ package model;
 import common.NumbersGenerator;
 import controller.dto.LottoDtoMapper;
 import controller.dto.LottoRankResponse;
-import controller.dto.LottoRankResultResponse;
+import controller.dto.LottoRankResultsResponse;
 import controller.dto.LottoTicketResponse;
 import controller.dto.WinningLottoRequest;
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class LottoStore {
                 .toList();
     }
 
-    public LottoRankResultResponse countLottoRankResult(
+    public LottoRankResultsResponse countAllLottoRanks(
             List<LottoTicketResponse> lottoTicketResponses,
             WinningLottoRequest winningLottoRequest
     ) {
@@ -58,19 +58,19 @@ public class LottoStore {
         return lottoDtoMapper.toLottoRankResultResponse(lottoRankResult);
     }
 
-    public List<LottoRankResponse> getLottoRankResults(LottoRankResultResponse lottoRankResultResponse) {
-        return new ArrayList<>(lottoRankResultResponse.getKeys().stream()
+    public List<LottoRankResponse> getLottoRankResults(LottoRankResultsResponse lottoRankResultsResponse) {
+        return new ArrayList<>(lottoRankResultsResponse.getKeys().stream()
                 .map(rank -> {
-                    int rankMatchCount = lottoRankResultResponse.getValue(rank);
+                    int rankMatchCount = lottoRankResultsResponse.getValue(rank);
                     return LottoRankResponse.of(rank, rankMatchCount);
                 })
                 .toList());
     }
 
-    public double calculateProfitRate(int lottoTicketCount, LottoRankResultResponse lottoRankResultResponse) {
+    public double calculateProfitRate(int lottoTicketCount, LottoRankResultsResponse lottoRankResultsResponse) {
         int purchasedAmount = lottoTicketCount * LOTTO_PRICE;
 
-        LottoRankResult lottoRankResult = lottoDtoMapper.toLottoRankResult(lottoRankResultResponse);
+        LottoRankResult lottoRankResult = lottoDtoMapper.toLottoRankResult(lottoRankResultsResponse);
 
         int profit = lottoRankResult.getKeys().stream()
                 .mapToInt(rank -> rank.getWinningAmount() * lottoRankResult.getValue(rank)).sum();

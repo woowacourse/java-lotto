@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Set;
 import model.LottoRank;
 
-public record LottoRankResultResponse(
+public record LottoRankResultsResponse(
         Map<LottoRank, Integer> rankCount
 ) {
 

@@ -1,7 +1,7 @@
 package controller;
 
 import controller.dto.LottoRankResponse;
-import controller.dto.LottoRankResultResponse;
+import controller.dto.LottoRankResultsResponse;
 import controller.dto.LottoTicketResponse;
 import controller.dto.WinningLottoRequest;
 import java.util.List;
@@ -21,8 +21,8 @@ public class LottoController {
     public void run() {
         List<LottoTicketResponse> lottoTicketResponses = purchaseLottoTicket();
         WinningLottoRequest winningLottoRequest = createWinningLotto();
-        LottoRankResultResponse lottoRankResultResponse = calculateRank(lottoTicketResponses, winningLottoRequest);
-        calculateProfitRate(lottoTicketResponses.size(), lottoRankResultResponse);
+        LottoRankResultsResponse lottoRankResultsResponse = countAllLottoRanks(lottoTicketResponses, winningLottoRequest);
+        calculateProfitRate(lottoTicketResponses.size(), lottoRankResultsResponse);
     }
 
     private List<LottoTicketResponse> purchaseLottoTicket() {
@@ -42,20 +42,20 @@ public class LottoController {
         return new WinningLottoRequest(winningNumbers, bonusNumber);
     }
 
-    private LottoRankResultResponse calculateRank(
+    private LottoRankResultsResponse countAllLottoRanks(
             List<LottoTicketResponse> lottoTicketResponses,
             WinningLottoRequest winningLottoRequest
     ) {
-        LottoRankResultResponse lottoRankResultResponse = lottoStore.countLottoRankResult(lottoTicketResponses, winningLottoRequest);
+        LottoRankResultsResponse lottoRankResultsResponse = lottoStore.countAllLottoRanks(lottoTicketResponses, winningLottoRequest);
 
-        List<LottoRankResponse> lottoRankResponses = lottoStore.getLottoRankResults(lottoRankResultResponse);
+        List<LottoRankResponse> lottoRankResponses = lottoStore.getLottoRankResults(lottoRankResultsResponse);
         lottoConsoleView.printLottoRankResults(lottoRankResponses);
 
-        return lottoRankResultResponse;
+        return lottoRankResultsResponse;
     }
 
-    private void calculateProfitRate(int lottoTicketCount, LottoRankResultResponse lottoRankResultResponse) {
-        double profitRate = lottoStore.calculateProfitRate(lottoTicketCount, lottoRankResultResponse);
+    private void calculateProfitRate(int lottoTicketCount, LottoRankResultsResponse lottoRankResultsResponse) {
+        double profitRate = lottoStore.calculateProfitRate(lottoTicketCount, lottoRankResultsResponse);
         lottoConsoleView.printProfitRate(profitRate);
     }
 }

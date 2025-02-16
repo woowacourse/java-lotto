@@ -15,8 +15,8 @@ public class LottoDtoMapper {
         return new WinningLotto(request.numbers(), request.bonusNumber());
     }
 
-    public LottoRankResultResponse toLottoRankResultResponse(LottoRankResult lottoRankResult) {
-        return new LottoRankResultResponse(lottoRankResult.getRankCount());
+    public LottoRankResultsResponse toLottoRankResultResponse(LottoRankResult lottoRankResult) {
+        return new LottoRankResultsResponse(lottoRankResult.getRankCount());
     }
 
     public List<LottoTicket> toLottoTickets(List<LottoTicketResponse> responses) {
@@ -25,7 +25,7 @@ public class LottoDtoMapper {
                 .toList();
     }
 
-    public LottoRankResult toLottoRankResult(LottoRankResultResponse response) {
+    public LottoRankResult toLottoRankResult(LottoRankResultsResponse response) {
         return new LottoRankResult(response.rankCount());
     }
 }

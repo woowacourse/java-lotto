@@ -3,7 +3,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.within;
 
 import controller.dto.LottoDtoMapper;
-import controller.dto.LottoRankResultResponse;
+import controller.dto.LottoRankResultsResponse;
 import controller.dto.LottoTicketResponse;
 import controller.dto.WinningLottoRequest;
 import java.util.HashMap;
@@ -53,10 +53,10 @@ class LottoStoreTest {
         WinningLottoRequest winningLotto = new WinningLottoRequest(List.of(1, 2, 3, 4, 5, 7), 6);
 
         // when
-        LottoRankResultResponse lottoRankResultResponse = lottoStore.countLottoRankResult(lottoTickets, winningLotto);
+        LottoRankResultsResponse lottoRankResultsResponse = lottoStore.countAllLottoRanks(lottoTickets, winningLotto);
 
         // then
-        assertThat(lottoRankResultResponse.getValue(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(lottoRankResultsResponse.getValue(LottoRank.SECOND)).isEqualTo(1);
     }
 
     @Test
@@ -66,10 +66,10 @@ class LottoStoreTest {
 
         Map<LottoRank, Integer> data = new HashMap<>();
         data.put(LottoRank.FIFTH, 1);
-        LottoRankResultResponse lottoRankResultResponse = new LottoRankResultResponse(data);
+        LottoRankResultsResponse lottoRankResultsResponse = new LottoRankResultsResponse(data);
 
         // when
-        double profitRate = lottoStore.calculateProfitRate(ticketCount, lottoRankResultResponse);
+        double profitRate = lottoStore.calculateProfitRate(ticketCount, lottoRankResultsResponse);
 
         // then
         assertThat(profitRate).isCloseTo(0.36, within(0.01));
