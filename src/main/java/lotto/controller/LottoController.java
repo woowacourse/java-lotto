@@ -4,7 +4,7 @@ import java.util.List;
 import lotto.config.ApplicationConfiguration;
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
-import lotto.domain.constant.WinningTier;
+import lotto.domain.WinningTier;
 import lotto.service.InputService;
 import lotto.service.LottoService;
 import lotto.service.OutputService;

@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
-import lotto.domain.constant.WinningTier;
+import lotto.domain.WinningTier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

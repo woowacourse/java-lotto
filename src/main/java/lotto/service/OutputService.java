@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.WinningCondition;
-import lotto.domain.constant.WinningTier;
+import lotto.domain.WinningTier;
 import lotto.view.OutputView;
 import lotto.view.constant.OutputMessage;
 
