@@ -4,6 +4,7 @@ import static lotto.domain.Rank.FIRST_PRIDE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.EnumMap;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,7 +35,7 @@ class RankTest {
     void 기본_맵을_생성한다() {
 
         //given
-        EnumMap<Rank, Integer> defaultMap = Rank.makeDefaultMap();
+        Map<Rank, Integer> defaultMap = Rank.makeDefaultMap();
 
         //when & then
         assertThat(defaultMap.size()).isEqualTo(6);

@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST_PRIDE(6, false, 2_000_000_000),
@@ -28,14 +30,11 @@ public enum Rank {
                 .orElse(BOOM);
     }
 
-    public static EnumMap<Rank, Integer> makeDefaultMap() {
-        EnumMap<Rank, Integer> rankIntegerEnumMap = new EnumMap<>(Rank.class);
-        for (Rank rank : Rank.values()) {
-            rankIntegerEnumMap.put(rank, 0);
-        }
-        return rankIntegerEnumMap;
-
+    public static Map<Rank, Integer> makeDefaultMap() {
+        return Arrays.stream(Rank.values())
+                .collect(Collectors.toMap(rank -> rank, rank -> 0));
     }
+
 
     public static int calculateTotalPrize(EnumMap<Rank, Integer> lottoResult) {
         return lottoResult.entrySet().stream()
