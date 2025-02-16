@@ -9,9 +9,10 @@ import utility.StringUtility;
 
 public class LottoDispenser {
 
-    private final int LOTTO_MONEY_UNIT = 1000;
-    private final int buyMoney;
     private final String INVALID_BUY_MONEY = "유효하지 않은 구매 금액입니다.";
+    private final int LOTTO_MONEY_UNIT = 1000;
+    
+    private final int buyMoney;
     private final List<Lotto> lottos;
     private LottoBuyResultFormatter lottoBuyResultFormatter;
 

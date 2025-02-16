@@ -6,6 +6,7 @@ import utility.StringUtility;
 public class BonusNumber {
 
     private static final String INVALID_BONUS_NUMBER = "유효하지 않은 보너스 번호입니다.";
+    
     private final LottoNumber lottoNumber;
 
     public BonusNumber(String bonusNumber) {

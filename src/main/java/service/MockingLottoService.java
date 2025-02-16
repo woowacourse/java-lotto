@@ -12,8 +12,11 @@ import java.util.Map;
 
 public class MockingLottoService extends LottoService {
 
-    public MockingLottoService() {
-        super(new WinningCalculateFormatter(), new LottoBuyResultFormatter());
+    private final WinningCalculateFormatter winningCalculateFormatter;
+
+    public MockingLottoService(WinningCalculateFormatter winningCalculateFormatter) {
+        super(winningCalculateFormatter, new LottoBuyResultFormatter());
+        this.winningCalculateFormatter = winningCalculateFormatter;
     }
 
     public String winningCalculate(List<Lotto> lottos, String winningNumberInput, String bonusMoneyInput) {
@@ -23,6 +26,6 @@ public class MockingLottoService extends LottoService {
         Map<WinningCase, Integer> winningCalculateResult = lottoDispenser.winningCalculate(winningNumber, bonusNumber);
         long earnMoney = lottoDispenser.calculateEarnMoney(winningCalculateResult);
         double earnMoneyRatio = lottoDispenser.calculateEarnMoneyRatio(earnMoney);
-        return WinningCalculateFormatter.winningResultFormatting(winningCalculateResult, earnMoneyRatio);
+        return winningCalculateFormatter.winningResultFormatting(winningCalculateResult, earnMoneyRatio);
     }
 }
