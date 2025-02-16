@@ -1,32 +1,40 @@
 package model.lotto;
 
 import dto.LottoNumbersResponse;
-import global.utils.Validator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
+import java.util.Set;
 
-import static model.lotto.LottoConstant.*;
+import static global.utils.RandomNumber.generateRandomNumber;
+import static global.utils.Validator.validateNumberRange;
+import static global.utils.Validator.validateNumeric;
+import static model.lotto.LottoConstant.LOTTO_LENGTH;
+import static model.lotto.LottoConstant.MAX_LOTTO_NUMBER;
+import static model.lotto.LottoConstant.MIN_LOTTO_NUMBER;
 
 public class Lotto {
 
     private final List<Integer> numbers;
 
     public Lotto() {
-        numbers = new ArrayList<>();
-        generateLotto();
+        numbers = generateDefaultLotto();
     }
 
     public Lotto(final String input) {
         numbers = new ArrayList<>();
         generateCustomLotto(input);
+
+        validateNumberRange(numbers.size(), LOTTO_LENGTH.getValue(), LOTTO_LENGTH.getValue());
+        validateDuplicateNumber(numbers);
     }
 
     public int calculateMatchNumber(final Lotto otherLotto) {
-        return (int) numbers.stream().filter(otherLotto::isContained).count();
+        return (int) numbers.stream()
+                .filter(otherLotto::isContained)
+                .count();
     }
 
     public boolean isContained(final int number) {
@@ -34,33 +42,40 @@ public class Lotto {
     }
 
     public LottoNumbersResponse createResponse() {
-        return new LottoNumbersResponse(numbers.stream().map(String::valueOf).toArray(String[]::new));
+        return new LottoNumbersResponse(numbers.stream()
+                .map(String::valueOf)
+                .toArray(String[]::new));
     }
 
-    private void generateLotto() {
-        Random random = new Random();
-        for (int i = 0; i < NUMBER_COUNT.getValue(); i++) {
-            numbers.add(random.nextInt(MAX_LOTTO_NUMBER.getValue()) + 1);
+    private List<Integer> generateDefaultLotto() { // 구매 로또 자동 발급
+        Set<Integer> uniqueNumbers = new HashSet<>();
+        while (uniqueNumbers.size() < LOTTO_LENGTH.getValue()) {
+            uniqueNumbers.add(generateRandomLottoNumber());
         }
+
+        return new ArrayList<>(uniqueNumbers);
     }
 
-    private void generateCustomLotto(final String input) {
+    private int generateRandomLottoNumber() {
+        return generateRandomNumber(MIN_LOTTO_NUMBER.getValue(), MAX_LOTTO_NUMBER.getValue());
+    }
+
+    private void generateCustomLotto(final String input) { // 지난 로또 번호 수동 발급
         String[] tokens = input.split(", ");
-        Validator.validateNumberRange(tokens.length, NUMBER_COUNT.getValue(), NUMBER_COUNT.getValue());
 
-        Arrays.stream(tokens).forEach(this::addNumber);
-
-        validateUniqueNumber(numbers);
+        Arrays.stream(tokens)
+                .forEach(this::validateAndAddNumber);
     }
 
-    private void addNumber(String token) {
-        Validator.validateNumeric(token);
-        int number = Integer.parseInt(token);
-        Validator.validateNumberRange(number, MIN_LOTTO_NUMBER.getValue(), MAX_LOTTO_NUMBER.getValue());
-        numbers.add(number);
+    private void validateAndAddNumber(final String input) {
+        validateNumeric(input);
+        int parsedNumber = Integer.parseInt(input);
+
+        validateNumberRange(parsedNumber, MIN_LOTTO_NUMBER.getValue(), MAX_LOTTO_NUMBER.getValue());
+        numbers.add(parsedNumber);
     }
 
-    private void validateUniqueNumber(final List<Integer> numbers) {
+    private void validateDuplicateNumber(final List<Integer> numbers) {
         if (new HashSet<>(numbers).size() != numbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
