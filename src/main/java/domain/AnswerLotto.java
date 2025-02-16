@@ -21,7 +21,7 @@ public class AnswerLotto {
     }
 
     private void validate(Lotto lotto, final int bonusNumber) {
-        if (lotto.hasDuplicateNumber(bonusNumber)) {
+        if (lotto.has(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_DUPLICATED.getMessage());
         }
         if (!isValidNumber(bonusNumber)) {

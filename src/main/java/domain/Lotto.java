@@ -13,21 +13,32 @@ public class Lotto {
         validate(this.numbers);
     }
 
+    public void validate(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_COUNT.getMessage());
+        }
+        if (hasDistinctNumber(numbers)) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_DUPLICATED.getMessage());
+        }
+        if (numbers.stream().anyMatch(number -> !isValidNumber(number))) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_RANGE.getMessage());
+        }
+        if (!isSorted(numbers)) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NOT_SORTED.getMessage());
+        }
+    }
+
     public static Lotto from(NumberGenerator numberGenerator) {
         List<Integer> numbers = numberGenerator.generateNumber();
         return new Lotto(numbers);
     }
 
-    public boolean hasDuplicateNumber(final int bonusNumber) {
-        return numbers.stream().anyMatch(number -> number == bonusNumber);
+    public boolean has(int number) {
+        return this.numbers.contains(number);
     }
 
     public OutputLottosDto getOutputLottoDto() {
         return new OutputLottosDto(numbers);
-    }
-
-    public boolean has(int number) {
-        return this.numbers.contains(number);
     }
 
     public int getHitCountFrom(Lotto lotto) {
@@ -43,21 +54,6 @@ public class Lotto {
             return 1;
         }
         return 0;
-    }
-
-    public void validate(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_COUNT.getMessage());
-        }
-        if (hasDistinctNumber(numbers)) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_DUPLICATED.getMessage());
-        }
-        if (numbers.stream().anyMatch(number -> !isValidNumber(number))) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_RANGE.getMessage());
-        }
-        if (!isSorted(numbers)) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_NOT_SORTED.getMessage());
-        }
     }
 
     private boolean isSorted(List<Integer> numbers) {
