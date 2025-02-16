@@ -24,6 +24,19 @@ class LottoManagerTest {
     }
 
     @Test
+    @DisplayName("요구하는 로또 개수만큼 로또를 생성하여 반환한다")
+    void should_return_lotto_list_by_lotto_count() {
+        // given
+        int lottoCount = 2;
+
+        // when
+        List<Lotto> lottos = lottoManager.generateLottos(lottoCount);
+
+        // then
+        assertThat(lottos).hasSize(lottoCount);
+    }
+
+    @Test
     @DisplayName("로또와 당첨 번호가 주어졌을 때 로또 순위별 당첨 횟수를 정확히 계산한다")
     void check_each_winning_count_correctly() {
         // given
