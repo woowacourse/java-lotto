@@ -28,6 +28,6 @@ public class LottoStore {
             lottos.add(lottoMachine.createLotto());
         }
 
-        return new Lottos(lottos, new Money(lottos.size() * LOTTO_PRICE));
+        return new Lottos(lottos);
     }
 }

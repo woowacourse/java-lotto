@@ -39,7 +39,7 @@ class LottosTest {
                         new Number(10))
                 )
         );
-        Lottos lottos = new Lottos(lottoNumbers, new Money(3000));
+        Lottos lottos = new Lottos(lottoNumbers);
         WinningLotto winningLotto = new WinningLotto(
                 new Lotto(List.of(
                         new Number(1),
