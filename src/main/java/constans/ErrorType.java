@@ -26,7 +26,10 @@ public enum ErrorType {
     // ConsoleInputView
     PURCHASE_AMOUNT_INVALID_INPUT("구입 금액의 입력값이 올바르지 않습니다."),
     WINNING_NUMBERS_INVALID_INPUT("당첨 번호의 입력값이 올바르지 않습니다."),
-    BONUS_BALL_INVALID_INPUT("보너스 볼의 입력값이 올바르지 않습니다.");
+    BONUS_BALL_INVALID_INPUT("보너스 볼의 입력값이 올바르지 않습니다."),
+
+    // LottoController
+    RETRY_COUNT_OVER_THAN_MAX("재시도 횟수가 최대치를 초과하였습니다. 프로그램을 종료합니다.");
 
     private final String message;
 
