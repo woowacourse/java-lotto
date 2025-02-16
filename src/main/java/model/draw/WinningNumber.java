@@ -1,7 +1,8 @@
-package model;
+package model.draw;
 
 import java.util.HashSet;
 import java.util.List;
+import model.LottoConstants;
 
 public class WinningNumber {
     private final List<Integer> numbers;

@@ -1,6 +1,7 @@
-package model;
+package model.draw;
 
 import java.util.List;
+import model.LottoConstants;
 
 public class BonusNumber {
 

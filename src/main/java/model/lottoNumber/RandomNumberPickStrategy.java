@@ -1,4 +1,4 @@
-package util;
+package model.lottoNumber;
 
 import java.util.Random;
 

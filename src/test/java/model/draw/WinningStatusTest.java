@@ -1,4 +1,4 @@
-package model;
+package model.draw;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

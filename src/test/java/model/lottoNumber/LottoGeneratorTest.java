@@ -1,9 +1,9 @@
-package util;
+package model.lottoNumber;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.HashSet;
 import java.util.Set;
-import model.Lotto;
+import model.purchase.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

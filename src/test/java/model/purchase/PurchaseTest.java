@@ -1,4 +1,4 @@
-package model;
+package model.purchase;
 
 import static org.assertj.core.api.Assertions.*;
 

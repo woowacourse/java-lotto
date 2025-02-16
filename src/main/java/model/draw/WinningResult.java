@@ -1,8 +1,9 @@
-package model;
+package model.draw;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import model.purchase.Purchase;
 
 public class WinningResult {
     private final Map<WinningStatus, Integer> winningResults;

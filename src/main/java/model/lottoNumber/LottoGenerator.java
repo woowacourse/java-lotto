@@ -1,10 +1,10 @@
-package util;
+package model.lottoNumber;
 
 import static model.LottoConstants.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.Lotto;
+import model.purchase.Lotto;
 
 public class LottoGenerator {
 

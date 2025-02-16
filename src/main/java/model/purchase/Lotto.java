@@ -1,8 +1,9 @@
-package model;
+package model.purchase;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import model.LottoConstants;
 
 public class Lotto {
     private final List<Integer> numbers;
