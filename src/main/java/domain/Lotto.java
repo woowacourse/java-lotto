@@ -20,7 +20,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public Lotto(List<Number> numbers) {
+    public Lotto(List<Integer> number) {
+        List<Number> numbers = number.stream().map(Number::new).toList();
         validateNumberSize(numbers);
         validateNonDuplicatedNumbers(numbers);
         this.numbers = new HashSet<>(numbers);

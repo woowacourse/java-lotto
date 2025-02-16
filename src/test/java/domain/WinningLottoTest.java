@@ -16,16 +16,7 @@ class WinningLottoTest {
     void 보너스볼과_당첨번호가_중복된_경우_예외를_반환한다() {
         //given
         Number bonus = new Number(3);
-        Lotto lotto = new Lotto(
-                List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(6)
-                )
-        );
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         //when //then
         assertThatThrownBy(() -> new WinningLotto(lotto, bonus))
@@ -37,27 +28,9 @@ class WinningLottoTest {
     void 당첨_번호와_몇개가_같은지_계산할_수_있다() {
         //given
         Number bonus = new Number(7);
-        Lotto lotto = new Lotto(
-                List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(6)
-                )
-        );
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(lotto, bonus);
-        Lotto purchasedLotto = new Lotto(
-                List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(10),
-                        new Number(11),
-                        new Number(12),
-                        new Number(13)
-                )
-        );
+        Lotto purchasedLotto = new Lotto(List.of(1, 2, 10, 11, 12, 13));
 
         //when
         int matchCount = winningLotto.calculateMatchCount(purchasedLotto);
@@ -71,27 +44,9 @@ class WinningLottoTest {
     void 보너스번호와_일치하는지_판단한다() {
         //given
         Number bonus = new Number(7);
-        Lotto lotto1 = new Lotto(
-                List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(6)
-                )
-        );
+        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
-        Lotto lotto2 = new Lotto(
-                List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(7)
-                )
-        );
+        Lotto lotto2 = new Lotto(List.of(1, 2, 3, 4, 5, 7));
         WinningLotto winningLotto = new WinningLotto(lotto1, bonus);
         //when
         boolean actual = winningLotto.containsBonusNumber(lotto2);
@@ -101,18 +56,10 @@ class WinningLottoTest {
 
     @ParameterizedTest
     @MethodSource("generateLottos")
-    void 당첨순위를_판단할_수_있다(List<Number> numbers, Rank expected) {
+    void 당첨순위를_판단할_수_있다(List<Integer> numbers, Rank expected) {
         //given
         Number bonus = new Number(7);
-        Lotto lotto = new Lotto(
-                List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(6))
-        );
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(lotto, bonus);
         Lotto purchasedLotto = new Lotto(numbers);
         //when
@@ -123,66 +70,15 @@ class WinningLottoTest {
 
     private static Stream<Arguments> generateLottos() {
         return Stream.of(
-                Arguments.of(
-                        List.of(
-                                new Number(1),
-                                new Number(2),
-                                new Number(3),
-                                new Number(4),
-                                new Number(5),
-                                new Number(6)
-                        ), Rank.FIRST
+                Arguments.of(List.of(1, 2, 3, 4, 5, 6), Rank.FIRST
                 ),
-                Arguments.of(
-                        List.of(
-                                new Number(1),
-                                new Number(2),
-                                new Number(3),
-                                new Number(4),
-                                new Number(5),
-                                new Number(7)
-                        ), Rank.SECOND
+                Arguments.of(List.of(1, 2, 3, 4, 5, 7), Rank.SECOND
                 ),
-                Arguments.of(
-                        List.of(
-                                new Number(1),
-                                new Number(2),
-                                new Number(3),
-                                new Number(4),
-                                new Number(5),
-                                new Number(8)
-                        ), Rank.THIRD
+                Arguments.of(List.of(1, 2, 3, 4, 5, 8), Rank.THIRD
                 ),
-                Arguments.of(
-                        List.of(
-                                new Number(1),
-                                new Number(2),
-                                new Number(3),
-                                new Number(4),
-                                new Number(8),
-                                new Number(9)
-                        ), Rank.FOURTH
-                ),
-                Arguments.of(
-                        List.of(
-                                new Number(1),
-                                new Number(2),
-                                new Number(3),
-                                new Number(8),
-                                new Number(9),
-                                new Number(10)
-                        ), Rank.FIFTH
-                ),
-                Arguments.of(
-                        List.of(
-                                new Number(1),
-                                new Number(2),
-                                new Number(8),
-                                new Number(9),
-                                new Number(10),
-                                new Number(11)
-                        ), Rank.MISS
-                )
+                Arguments.of(List.of(1, 2, 3, 4, 8, 9), Rank.FOURTH),
+                Arguments.of(List.of(1, 2, 3, 8, 9, 10), Rank.FIFTH),
+                Arguments.of(List.of(1, 2, 8, 9, 10, 11), Rank.MISS)
         );
     }
 }

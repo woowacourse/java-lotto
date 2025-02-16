@@ -14,43 +14,12 @@ class LottosTest {
     void 로또_결과를_계산할_수_있다() {
         //given
         List<Lotto> lottoNumbers = List.of(
-                new Lotto(List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(6))
-                ),
-                new Lotto(List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(10))
-                ),
-                new Lotto(List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(10))
-                )
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                new Lotto(List.of(1, 2, 3, 4, 5, 10)),
+                new Lotto(List.of(1, 2, 3, 4, 5, 10))
         );
         Lottos lottos = new Lottos(lottoNumbers);
-        WinningLotto winningLotto = new WinningLotto(
-                new Lotto(List.of(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(6))
-                ),
-                new Number(10)
-        );
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Number(10));
 
         //when
         WinningResult winningResult = lottos.calculateWinning(winningLotto);

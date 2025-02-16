@@ -1,6 +1,5 @@
 package converter;
 
-import domain.Number;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,12 +7,12 @@ public class InputConverter {
 
     private static final String WINNING_NUMBER_DELIMITER = ",";
 
-    public List<Number> convertStringToWinningNumberValue(String rawInput) {
+    public List<Integer> convertStringToWinningNumberValue(String rawInput) {
         validateWinningNumber(rawInput);
         return Arrays.stream(rawInput.split(WINNING_NUMBER_DELIMITER))
                 .map(String::trim)
-                .map(Integer::valueOf)
-                .map(Number::new)
+                .map(Integer::parseInt)
+                .mapToInt(n -> n).boxed()
                 .toList();
     }
 

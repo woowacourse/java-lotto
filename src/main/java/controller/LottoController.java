@@ -69,7 +69,7 @@ public class LottoController {
 
     private Lotto inputWinningNumbers() {
         String rawWinningNumbers = inputView.inputWinningNumbers();
-        List<Number> numbers = inputConverter.convertStringToWinningNumberValue(rawWinningNumbers);
+        List<Integer> numbers = inputConverter.convertStringToWinningNumberValue(rawWinningNumbers);
         return new Lotto(numbers);
     }
 
