@@ -8,12 +8,8 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos() {
-        lottos = new ArrayList<>();
-    }
-
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public EnumMap<Rank, Integer> countMatchNumbers(WinningLotto winningLotto) {
