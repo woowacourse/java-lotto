@@ -1,6 +1,9 @@
 package global.utils;
 
-public class Validator {
+public final class Validator {
+
+    private Validator() {
+    }
 
     public static void validateNumeric(final String input) {
         try {
