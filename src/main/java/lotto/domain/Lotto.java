@@ -24,10 +24,7 @@ public class Lotto {
     }
 
     private void validateDuplication(final List<Integer> values) {
-        boolean isDuplicate = values.stream()
-                .distinct()
-                .count() != values.size();
-        if (isDuplicate) {
+        if (hasDuplication(values)) {
             throw new IllegalArgumentException("중복되지 않은 로또 번호를 입력해 주세요.");
         }
     }
@@ -46,6 +43,12 @@ public class Lotto {
         return values.stream()
                 .map(LottoNumber::new)
                 .toList();
+    }
+
+    private boolean hasDuplication(final List<Integer> values) {
+        return values.stream()
+                .distinct()
+                .count() != values.size();
     }
 
     @Override
