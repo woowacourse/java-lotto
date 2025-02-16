@@ -25,7 +25,7 @@ class LottoTest {
     void orderLottoNumber() {
         List<Integer> lottoNumbers = new ArrayList<>(List.of(6, 5, 4, 3, 2, 1));
         Lotto lotto = new Lotto(lottoNumbers);
-        String result = lotto.printLottoNumber();
-        Assertions.assertThat(result).isEqualTo("[1,2,3,4,5,6]");
+        String result = lotto.searchLottoNumber();
+        Assertions.assertThat(result).isEqualTo("1,2,3,4,5,6");
     }
 }
