@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class MoneyTest {
     @DisplayName("Money 객체 생성이 올바르게 되는지 확인한다.")
@@ -18,6 +19,13 @@ class MoneyTest {
 
         // then
         Assertions.assertThat(money).isInstanceOf(Money.class);
+    }
+
+    @DisplayName("Money 객체의 예외가 올바르게 동작하는지 확인한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {0, 999})
+    void Money_예외_테스트(int moneyValue) {
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new Money(moneyValue));
     }
 
     @DisplayName("로또 구매 가능 개수가 올바르게 반환되는지 확인한다.")
