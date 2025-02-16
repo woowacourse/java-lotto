@@ -1,52 +1,41 @@
 package service;
 
 import domain.BonusNumber;
+import domain.LottoBuyResultFormatter;
 import domain.LottoDispenser;
+import domain.WinningCalculateFormatter;
 import domain.WinningCase;
 import domain.WinningNumber;
-import domain.WinningCalculateFormatter;
 import java.util.Map;
-import repository.BonusNumberRepository;
-import repository.LottoRepository;
-import repository.WinningNumberRepository;
 
 public class LottoService {
 
-    private final LottoRepository lottoRepository;
-    private final WinningNumberRepository winningNumberRepository;
-    private final BonusNumberRepository bonusNumberRepository;
+    private final WinningCalculateFormatter winningCalculateFormatter;
+    private final LottoBuyResultFormatter lottoBuyResultFormatter;
 
-    public LottoService(LottoRepository lottoRepository, WinningNumberRepository winningNumberRepository,
-                        BonusNumberRepository bonusNumberRepository) {
-        this.lottoRepository = lottoRepository;
-        this.winningNumberRepository = winningNumberRepository;
-        this.bonusNumberRepository = bonusNumberRepository;
+    public LottoService(WinningCalculateFormatter winningCalculateFormatter,
+                        LottoBuyResultFormatter lottoBuyResultFormatter) {
+        this.winningCalculateFormatter = winningCalculateFormatter;
+        this.lottoBuyResultFormatter = lottoBuyResultFormatter;
     }
 
-    public void inputBuyLottoMoney(String inputBuyLottoMoney) {
-        lottoRepository.saveLottoDispenser(new LottoDispenser(inputBuyLottoMoney));
+    public LottoDispenser inputBuyLottoMoney(String inputBuyLottoMoney) {
+        return new LottoDispenser(inputBuyLottoMoney, lottoBuyResultFormatter);
     }
 
-    public void inputWinningNumber(String inputWinningNumber) {
-        winningNumberRepository.saveWinningNumber(new WinningNumber(inputWinningNumber));
+    public WinningNumber inputWinningNumber(String inputWinningNumber) {
+        return new WinningNumber(inputWinningNumber);
     }
 
-    public void inputBonusNumber(String inputBonusNumber) {
-        bonusNumberRepository.saveBonusNumber(new BonusNumber(inputBonusNumber));
+    public BonusNumber inputBonusNumber(String inputBonusNumber) {
+        return new BonusNumber(inputBonusNumber);
     }
 
-    public String winningCalculate() {
-        LottoDispenser lottoDispenser = lottoRepository.getLottoDispenser();
-        WinningNumber winningNumber = winningNumberRepository.getWinningNumber();
-        BonusNumber bonusNumber = bonusNumberRepository.getBonusNumber();
+    public String winningCalculate(LottoDispenser lottoDispenser, WinningNumber winningNumber,
+                                   BonusNumber bonusNumber) {
         Map<WinningCase, Integer> winningCalculateResult = lottoDispenser.winningCalculate(winningNumber, bonusNumber);
         long earnMoney = lottoDispenser.calculateEarnMoney(winningCalculateResult);
         double earnMoneyRatio = lottoDispenser.calculateEarnMoneyRatio(earnMoney);
-        return WinningCalculateFormatter.winningResultFormatting(winningCalculateResult, earnMoneyRatio);
-    }
-
-    public String buyLottoResult() {
-        return lottoRepository.getLottoDispenser()
-                .buyLottoResult();
+        return winningCalculateFormatter.winningResultFormatting(winningCalculateResult, earnMoneyRatio);
     }
 }

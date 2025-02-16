@@ -1,5 +1,8 @@
 package controller;
 
+import domain.BonusNumber;
+import domain.LottoDispenser;
+import domain.WinningNumber;
 import service.LottoService;
 
 public class LottoController {
@@ -10,23 +13,24 @@ public class LottoController {
         this.lottoService = lottoService;
     }
 
-    public void inputBuyLottoMoney(String inputBuyLottoMoney) {
-        lottoService.inputBuyLottoMoney(inputBuyLottoMoney);
+    public LottoDispenser inputBuyLottoMoney(String inputBuyLottoMoney) {
+        return lottoService.inputBuyLottoMoney(inputBuyLottoMoney);
     }
 
-    public String formattingBuyLottoResult() {
-        return lottoService.buyLottoResult();
+    public String formattingBuyLottoResult(LottoDispenser lottoDispenser) {
+        return lottoDispenser.buyLottoResult();
     }
 
-    public String formattingWinningResult() {
-        return lottoService.winningCalculate();
+    public String formattingWinningResult(LottoDispenser lottoDispenser, WinningNumber winningNumber,
+                                          BonusNumber bonusNumber) {
+        return lottoService.winningCalculate(lottoDispenser, winningNumber, bonusNumber);
     }
 
-    public void inputWinningNumber(String inputWinningNumber) {
-        lottoService.inputWinningNumber(inputWinningNumber);
+    public WinningNumber inputWinningNumber(String inputWinningNumber) {
+        return lottoService.inputWinningNumber(inputWinningNumber);
     }
 
-    public void inputBonusNumber(String inputBonusNumber) {
-        lottoService.inputBonusNumber(inputBonusNumber);
+    public BonusNumber inputBonusNumber(String inputBonusNumber) {
+        return lottoService.inputBonusNumber(inputBonusNumber);
     }
 }

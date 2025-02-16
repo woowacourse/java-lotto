@@ -7,8 +7,4 @@ public class StringUtility {
     public static boolean isNumber(String string) {
         return string.matches(IS_NUMBER_PATTERN);
     }
-
-    public static String removeBlank(String string) {
-        return string.replace(" ", "");
-    }
 }

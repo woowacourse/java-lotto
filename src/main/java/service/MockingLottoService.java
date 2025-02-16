@@ -2,21 +2,18 @@ package service;
 
 import domain.BonusNumber;
 import domain.Lotto;
+import domain.LottoBuyResultFormatter;
 import domain.LottoDispenser;
+import domain.WinningCalculateFormatter;
 import domain.WinningCase;
 import domain.WinningNumber;
-import domain.WinningCalculateFormatter;
 import java.util.List;
 import java.util.Map;
-import repository.BonusNumberRepository;
-import repository.LottoRepository;
-import repository.WinningNumberRepository;
 
 public class MockingLottoService extends LottoService {
 
-    public MockingLottoService(LottoRepository lottoRepository, WinningNumberRepository winningNumberRepository,
-                               BonusNumberRepository bonusNumberRepository) {
-        super(lottoRepository, winningNumberRepository, bonusNumberRepository);
+    public MockingLottoService() {
+        super(new WinningCalculateFormatter(), new LottoBuyResultFormatter());
     }
 
     public String winningCalculate(List<Lotto> lottos, String winningNumberInput, String bonusMoneyInput) {
