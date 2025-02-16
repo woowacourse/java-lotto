@@ -26,9 +26,9 @@ public class WinningNumbers {
         final int number
     ) {
         final List<LottoNumber> winningNumbers = numbers.stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .toList();
-        final LottoNumber bonusBall = new LottoNumber(number);
+        final LottoNumber bonusBall = LottoNumber.of(number);
 
         return new WinningNumbers(winningNumbers, bonusBall);
     }

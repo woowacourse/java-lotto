@@ -2,7 +2,6 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +25,8 @@ class StoreTest {
             PurchaseAmount purchaseAmount = new PurchaseAmount(1000);
 
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                    new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                    LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
             Lotto expectedLotto = new Lotto(lottoNumbers);
 
             // when
@@ -52,18 +51,19 @@ class StoreTest {
             Store store = new Store(lottoMachine);
 
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                    new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                    LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
             Lotto lotto = new Lotto(lottoNumbers);
             List<Lotto> lottos = List.of(lotto);
 
-            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, new LottoNumber(7));
+            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, LottoNumber.of(7));
 
             // when
             WinningResult winningResult = store.calculateWinningResult(winningNumbers, lottos);
 
             // then
-            assertThat(winningResult.getLottoRanks().get(LottoRank.FIRST_PLACE))
+            assertThat(winningResult.getLottoRanks()
+                .get(LottoRank.FIRST_PLACE))
                 .isEqualTo(1);
         }
     }

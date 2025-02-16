@@ -24,8 +24,8 @@ class LottoMachineTest {
             LottoMachine lottoMachine = new LottoMachine(new MockNumberGenerator());
 
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                    new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                    LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
             Lotto expectedLotto = new Lotto(lottoNumbers);
 
             // when
@@ -48,10 +48,10 @@ class LottoMachineTest {
             LottoMachine lottoMachine = new LottoMachine(new MockNumberGenerator());
 
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                    new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                    LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
             Lotto lotto = new Lotto(lottoNumbers);
-            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, new LottoNumber(6));
+            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, LottoNumber.of(7));
 
             // when
             LottoRank lottoRank = lottoMachine.checkWinningRank(lotto, winningNumbers);

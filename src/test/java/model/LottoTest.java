@@ -21,8 +21,8 @@ class LottoTest {
         void createLottoNumbers() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
+                List.of(LottoNumber.of(1), LottoNumber.of(3), LottoNumber.of(9),
+                    LottoNumber.of(8), LottoNumber.of(45), LottoNumber.of(21)));
 
             // when
             Lotto actual = new Lotto(lottoNumbers);
@@ -41,8 +41,8 @@ class LottoTest {
         void validateSize() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                    new LottoNumber(8), new LottoNumber(45), new LottoNumber(21), new LottoNumber(30)));
+                List.of(LottoNumber.of(1), LottoNumber.of(3), LottoNumber.of(9),
+                    LottoNumber.of(8), LottoNumber.of(45), LottoNumber.of(21), LottoNumber.of(30)));
 
             // when & then
             assertThatThrownBy(() -> new Lotto(lottoNumbers))
@@ -55,8 +55,8 @@ class LottoTest {
         void validateDuplicate() {
             // given
             List<LottoNumber> lottoNumbers = new ArrayList<>(
-                List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                    new LottoNumber(1), new LottoNumber(45), new LottoNumber(21)));
+                List.of(LottoNumber.of(1), LottoNumber.of(3), LottoNumber.of(9),
+                    LottoNumber.of(1), LottoNumber.of(45), LottoNumber.of(21)));
 
             // when & then
             assertThatThrownBy(() -> new Lotto(lottoNumbers))
