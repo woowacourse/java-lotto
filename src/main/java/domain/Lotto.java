@@ -1,24 +1,24 @@
 package domain;
 
 import infrastructure.constants.Constants;
-import domain.vo.Number;
+import domain.vo.LottoNumber;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    private List<Number> numbers;
+    private List<LottoNumber> numbers;
 
     public Lotto(List<Integer> lottoNumbers) {
         validate(lottoNumbers);
         numbers = lottoNumbers.stream()
                 .sorted()
-                .map(Number::new)
+                .map(LottoNumber::new)
                 .toList();
     }
 
-    public boolean isExist(Number number) {
+    public boolean isExist(LottoNumber number) {
         return numbers.contains(number);
     }
 
@@ -29,7 +29,7 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return numbers.stream().map(Number::value).toList();
+        return numbers.stream().map(LottoNumber::value).toList();
     }
 
     private void validate(List<Integer> numbers) {

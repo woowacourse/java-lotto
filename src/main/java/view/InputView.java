@@ -3,7 +3,7 @@ package view;
 import domain.Lotto;
 import domain.WinningLotto;
 import domain.vo.Money;
-import domain.vo.Number;
+import domain.vo.LottoNumber;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +18,7 @@ public class InputView {
 
     public WinningLotto inputWinningLotto() {
         Lotto winningNumbers = inputWinningNumbers();
-        Number bonusNumber = inputBonusNumber();
+        LottoNumber bonusNumber = inputBonusNumber();
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 
@@ -33,10 +33,10 @@ public class InputView {
         return new Lotto(winningNumbers);
     }
 
-    private Number inputBonusNumber() {
+    private LottoNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusRawInput = readLine();
-        return Number.from(bonusRawInput);
+        return LottoNumber.from(bonusRawInput);
     }
 
     private String readLine() {
