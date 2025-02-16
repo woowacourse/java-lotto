@@ -1,7 +1,5 @@
 package domain;
 
-import static domain.LottoTicket.LOTTO_PRICE;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class LottoMachine {
 
     public LottoTickets generateLottoTickets(int purchaseAmount, IntegerGenerator generator) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < purchaseAmount / LOTTO_PRICE; i++) {
+        for (int i = 0; i < purchaseAmount / LottoTicket.LOTTO_PRICE; i++) {
             LottoTicket lottoTicket = generateLottoTicket(generator);
             lottoTickets.add(lottoTicket);
         }
