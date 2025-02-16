@@ -1,30 +1,26 @@
 package controller;
 
-import converter.StringToNumbersConverter;
+import converter.StringToLottoConverter;
+import converter.StringToLottoNumberConverter;
+import converter.StringToMoneyConverter;
 import domain.Lotto;
-import domain.LottoMachine;
+import domain.LottoNumber;
 import domain.LottoStore;
 import domain.Lottos;
 import domain.Money;
-import domain.Number;
 import domain.WinningLotto;
 import domain.WinningResult;
-import domain.numberstrategy.NumberPickStrategy;
-import domain.numberstrategy.RandomNumberPickStrategy;
-import java.util.List;
-import view.InputValidator;
+import domain.numbergenerator.NumberGenerator;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
 
     private final InputView inputView;
-    private final InputValidator inputValidator;
     private final OutputView outputView;
 
-    public LottoController(InputView inputView, InputValidator inputValidator, OutputView outputView) {
+    public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
-        this.inputValidator = inputValidator;
         this.outputView = outputView;
     }
 
@@ -32,10 +28,10 @@ public class LottoController {
         try {
             Money purchaseLottoMoney = inputMoney();
             Lottos purchasedLottos = purchaseLottos(purchaseLottoMoney);
-            outputView.printPurchaseLottos(purchasedLottos);
+            outputView.printPurchaseLottos(purchasedLottos.getLottos());
 
             WinningLotto winningLotto = inputWinningLotto();
-            WinningResult winningResult = purchasedLottos.calculateWinning(winningLotto);
+            WinningResult winningResult = purchasedLottos.calculateWinning(winningLotto, purchaseLottoMoney);
             outputView.printWinningResult(winningResult);
         } catch (RuntimeException e) {
             outputView.printErrorMessage(e);
@@ -44,32 +40,28 @@ public class LottoController {
 
     private Money inputMoney() {
         String rawMoney = inputView.inputMoney();
-        inputValidator.validateInputMoney(rawMoney);
-        return new Money(rawMoney);
+        return new StringToMoneyConverter().convert(rawMoney);
     }
 
     private Lottos purchaseLottos(Money purchaseLottoMoney) {
-        NumberPickStrategy numberStrategy = new RandomNumberPickStrategy();
-        LottoStore lottoStore = new LottoStore(new LottoMachine(numberStrategy));
-        return lottoStore.buy(purchaseLottoMoney);
+        NumberGenerator numberGenerator = LottoNumber.createRandomNumberGenerator();
+        LottoStore lottoStore = new LottoStore();
+        return lottoStore.buy(purchaseLottoMoney, numberGenerator);
     }
 
     private WinningLotto inputWinningLotto() {
-        Lotto winningNumbers = inputWinningNumbers();
-        Number bonusNumber = inputBonusNumber();
+        Lotto winningNumbers = inputWinningLottoNumbers();
+        LottoNumber bonusNumber = inputBonusNumber();
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 
-    private Lotto inputWinningNumbers() {
-        String rawWinningNumbers = inputView.inputWinningNumbers();
-        inputValidator.validateWinningNumber(rawWinningNumbers);
-        List<Number> numbers = new StringToNumbersConverter().convert(rawWinningNumbers, ",");
-        return new Lotto(numbers);
+    private Lotto inputWinningLottoNumbers() {
+        String rawWinningLottoNumbers = inputView.inputWinningLottoNumbers();
+        return new StringToLottoConverter().convert(rawWinningLottoNumbers);
     }
 
-    private Number inputBonusNumber() {
+    private LottoNumber inputBonusNumber() {
         String rawBonusNumber = inputView.inputBonusNumber();
-        inputValidator.validateNotStringNumber(rawBonusNumber);
-        return new Number(Integer.parseInt(rawBonusNumber));
+        return new StringToLottoNumberConverter().convert(rawBonusNumber);
     }
 }
