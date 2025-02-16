@@ -10,7 +10,7 @@ public class Purchase {
     private final int amount;
 
     public Purchase(int amount) {
-        validateRange(amount);
+        validate(amount);
         this.amount = amount;
     }
 
@@ -22,7 +22,7 @@ public class Purchase {
         return amount;
     }
 
-    private void validateRange(int amount) {
+    private void validate(int amount) {
         if (amount < MIN_PURCHASE_AMOUNT || amount > MAX_PURCHASE_AMOUNT) {
             throw new IllegalArgumentException(ExceptionMessage.OUT_OF_PURCHASE_AMOUNT_RANGE);
         }

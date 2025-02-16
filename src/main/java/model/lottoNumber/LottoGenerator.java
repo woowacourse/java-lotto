@@ -1,6 +1,6 @@
 package model.lottoNumber;
 
-import static model.LottoConstants.*;
+import static model.common.LottoConstants.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +22,13 @@ public class LottoGenerator {
         try {
             List<Integer> randomNumbers = NumberGenerator.pickUniqueNumbersInRange(
                     MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT, numberPickStrategy);
-            validateDuplication(randomNumbers, lottos);
+            validateDuplicationWithCreatedNumbers(randomNumbers, lottos);
             lottos.add(new Lotto(randomNumbers));
         } catch (IllegalStateException e) {
         }
     }
 
-    private static void validateDuplication(List<Integer> randomNumbers, List<Lotto> lottos) {
+    private static void validateDuplicationWithCreatedNumbers(List<Integer> randomNumbers, List<Lotto> lottos) {
         lottos.stream().forEach(lotto -> {
             if (lotto.isDuplicatedWith(randomNumbers)) {
                 throw new IllegalStateException();

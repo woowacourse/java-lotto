@@ -1,8 +1,7 @@
 package model.draw;
 
 import exception.ExceptionMessage;
-import java.util.List;
-import model.LottoConstants;
+import model.common.LottoValidator;
 
 public class BonusNumber {
 
@@ -13,23 +12,13 @@ public class BonusNumber {
         this.number = number;
     }
 
-    public boolean hasMatchingNumberIn(List<Integer> targetNumbers) {
-        return targetNumbers.contains(number);
-    }
-
     public int getNumber() {
         return number;
     }
 
     private void validate(int number, WinningNumber winningNumber) {
-        validateBonusNumberRange(number);
+        LottoValidator.validateLottoNumberRange(number);
         validateBonusNumberDuplication(winningNumber, number);
-    }
-
-    private void validateBonusNumberRange(int number) {
-        if (number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
-            throw new IllegalArgumentException(ExceptionMessage.OUT_OF_LOTTO_NUMBER_RANGE);
-        }
     }
 
     private void validateBonusNumberDuplication(WinningNumber winningNumber, int number) {

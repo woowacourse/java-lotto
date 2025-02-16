@@ -17,7 +17,7 @@ public class LottoTest {
     void findMatchingCountWithLottoNumber(String targetNumberInput, int expectedCount) {
         WinningNumber targetWinningNumber = new WinningNumber(
                 Arrays.stream(targetNumberInput.split(", "))
-                .map(Integer::parseInt).toList());
+                        .map(Integer::parseInt).toList());
         Lotto lotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         int matchingCount = lotto.findMatchingCountWith(targetWinningNumber);
 

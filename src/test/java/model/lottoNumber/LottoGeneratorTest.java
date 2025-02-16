@@ -1,4 +1,5 @@
 package model.lottoNumber;
+
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.HashSet;
