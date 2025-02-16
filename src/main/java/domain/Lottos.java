@@ -19,7 +19,8 @@ public class Lottos {
     public static Lottos of(NumberGenerator numberGenerator, final int quantity) {
         List<Lotto> generatedLottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
-            generatedLottos.add(Lotto.from(numberGenerator));
+            List<Integer> generatedNumbers = numberGenerator.generateNumber();
+            generatedLottos.add(Lotto.from(generatedNumbers));
         }
 
         return new Lottos(generatedLottos);

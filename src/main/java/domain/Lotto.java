@@ -13,8 +13,7 @@ public class Lotto {
         validate(this.numbers);
     }
 
-    public static Lotto from(NumberGenerator numberGenerator) {
-        List<Integer> numbers = numberGenerator.generateNumber();
+    public static Lotto from(List<Integer> numbers) {
         return new Lotto(numbers);
     }
 
