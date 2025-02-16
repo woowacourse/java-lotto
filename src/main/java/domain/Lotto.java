@@ -2,6 +2,7 @@ package domain;
 
 import static java.util.Collections.unmodifiableSet;
 
+import domain.lottogeneratestrategy.LottoPickStrategy;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Set;
 
 public class Lotto {
 
-    public static final int NUMBERS_SIZE = 6;
+    private static final int NUMBERS_SIZE = 6;
 
     private final Set<Number> numbers;
 
@@ -19,18 +20,15 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public Lotto(List<Number> numbers) {
+    public Lotto(List<Integer> number) {
+        List<Number> numbers = number.stream().map(Number::new).toList();
         validateNumberSize(numbers);
         validateNonDuplicatedNumbers(numbers);
         this.numbers = new HashSet<>(numbers);
     }
 
-    public boolean contains(Number number) {
-        return numbers.contains(number);
-    }
-
     private void validateNumberSize(Collection<Number> numbers) {
-        if (numbers.size() != NUMBERS_SIZE) {
+        if (!hasCorrectSize(numbers)) {
             throw new IllegalArgumentException("로또 번호는 " + NUMBERS_SIZE + "개여야 합니다.");
         }
     }
@@ -42,14 +40,22 @@ public class Lotto {
         }
     }
 
+    public static LottoMachine createLottoMachine(LottoPickStrategy strategy) {
+        return new LottoMachine(strategy, NUMBERS_SIZE);
+    }
+
+    public boolean contains(Number number) {
+        return numbers.contains(number);
+    }
+
+    public boolean hasCorrectSize(Collection<Number> numbers) {
+        return numbers.size() == NUMBERS_SIZE;
+    }
+
     public int calculateMatchCount(Lotto lotto) {
         return (int) lotto.numbers.stream()
                 .filter(numbers::contains)
                 .count();
-    }
-
-    public Set<Number> getNumbers() {
-        return unmodifiableSet(numbers);
     }
 
     @Override
@@ -68,5 +74,9 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hashCode(getNumbers());
+    }
+
+    public Set<Number> getNumbers() {
+        return unmodifiableSet(numbers);
     }
 }

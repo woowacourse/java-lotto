@@ -7,23 +7,24 @@ import java.util.Set;
 
 public class LottoMachine {
 
-    public LottoMachine(LottoPickStrategy numberStrategy) {
-        this.numberStrategy = numberStrategy;
-    }
-
+    private final int lottoNumberSize;
     private final LottoPickStrategy numberStrategy;
 
+    public LottoMachine(LottoPickStrategy numberStrategy, int lottoNumberSize) {
+        this.numberStrategy = numberStrategy;
+        this.lottoNumberSize = lottoNumberSize;
+    }
 
     public Lotto createLotto() {
         Set<Number> numbers;
         do {
             numbers = new HashSet<>(selectNumbers());
-        } while (numbers.size() != Lotto.NUMBERS_SIZE);
+        } while (numbers.size() != lottoNumberSize);
         return new Lotto(numbers);
     }
 
     private List<Number> selectNumbers() {
-        List<Integer> numbers = numberStrategy.pickNumbers(Number.MAX_NUMBER, Lotto.NUMBERS_SIZE);
+        List<Integer> numbers = numberStrategy.pickNumbers(lottoNumberSize);
         return numbers.stream().map(Number::new).toList();
     }
 }
