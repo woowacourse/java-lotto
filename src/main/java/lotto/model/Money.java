@@ -19,6 +19,10 @@ public class Money {
         return amount / unitPrice;
     }
 
+    public int calculateChange(final int lottoPrice) {
+        return amount - (lottoPrice * calculateBuyingCount(lottoPrice));
+    }
+
     public double calculateReturnRatio(final long totalReturnMoney) {
         double returnRatio = (double) totalReturnMoney / amount;
         return Math.floor(returnRatio * 100) / 100;

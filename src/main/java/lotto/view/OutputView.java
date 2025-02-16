@@ -8,8 +8,9 @@ import lotto.model.winning.WinningResultResponses;
 
 public class OutputView {
 
-    private static final String WINNING_RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
-    private static final String WINNING_SECOND_RESULT_FORMAT = "%d개, 보너스 볼 일치(%d원)- %d개";
+    public void printChangeAmount(final int changeAmount) {
+        System.out.println("로또 구매 후 남은 잔돈은 %d원 입니다.".formatted(changeAmount));
+    }
 
     public void printIssuedLottos(final List<List<Integer>> issuedLottoNumbers) {
         for (List<Integer> issuedLottoNumber : issuedLottoNumbers) {
@@ -27,15 +28,17 @@ public class OutputView {
         }
     }
 
-    private static void printStatistics(final WinningResultResponse response) {
+    private void printStatistics(final WinningResultResponse response) {
         if (response.isHasBonus() && response.getMatchingCount() == 5) {
             System.out.println(
-                    WINNING_SECOND_RESULT_FORMAT.formatted(response.getMatchingCount(), response.getWinningAmount(),
-                            response.getWinningCount()));
+                    "%d개, 보너스 볼 일치(%d원)- %d개".formatted(
+                            response.getMatchingCount(), response.getWinningAmount(), response.getWinningCount()
+                    ));
             return;
         }
-        System.out.println(WINNING_RESULT_FORMAT.formatted(response.getMatchingCount(), response.getWinningAmount(),
-                response.getWinningCount()));
+        System.out.println("%d개 일치 (%d원)- %d개".formatted(
+                response.getMatchingCount(), response.getWinningAmount(), response.getWinningCount()
+        ));
     }
 
     public void printWinningRatio(final double returnRatio) {

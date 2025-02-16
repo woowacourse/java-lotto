@@ -19,4 +19,8 @@ public class LottoMachine {
         return new Lottos(lottoTickets);
     }
 
+    public int calculateChange(final Money buyingAmount) {
+        return buyingAmount.calculateChange(LOTTO_PRICE);
+    }
+
 }

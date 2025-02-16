@@ -31,9 +31,7 @@ public class LottoController {
 
             WinningLotto winningLotto = createWinningLotto();
             WinningResultResponses winningResultResponses = winningLotto.calculateWinning(lottoTickets);
-            outputView.printWinningResult(winningResultResponses);
-            outputView.printWinningRatio(
-                    buyingAmount.calculateReturnRatio(winningResultResponses.calculateTotalReturn()));
+            printWinningResult(winningResultResponses, buyingAmount);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
         }
@@ -50,6 +48,7 @@ public class LottoController {
         LottoNumbersGenerator numbersGenerator = new LottoNumbersGenerator(
                 LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER, Lotto.LOTTO_SIZE
         );
+        outputView.printChangeAmount(lottoMachine.calculateChange(buyingAmount));
         return lottoMachine.issueAutomatic(buyingAmount, numbersGenerator);
     }
 
@@ -59,6 +58,12 @@ public class LottoController {
                 .map(Lotto::getNumbers)
                 .toList();
         outputView.printIssuedLottos(issuedLottoNumbers);
+    }
+
+    private void printWinningResult(final WinningResultResponses winningResultResponses, final Money buyingAmount) {
+        outputView.printWinningResult(winningResultResponses);
+        outputView.printWinningRatio(
+                buyingAmount.calculateReturnRatio(winningResultResponses.calculateTotalReturn()));
     }
 
 }

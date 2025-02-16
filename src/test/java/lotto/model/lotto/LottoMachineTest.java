@@ -22,4 +22,13 @@ class LottoMachineTest {
         assertThat(issuedLottos.getLottos()).hasSize(1);
     }
 
+    @DisplayName("구매 금액에 맞는 잔돈을 계산해 준다.")
+    @Test
+    void calculateChangeWithMoney() {
+        LottoMachine lottoMachine = new LottoMachine();
+        Money buyingAmount = new Money(1_100);
+
+        assertThat(lottoMachine.calculateChange(buyingAmount)).isEqualTo(100);
+    }
+
 }
