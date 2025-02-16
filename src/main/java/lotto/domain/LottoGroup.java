@@ -2,29 +2,22 @@ package lotto.domain;
 
 import static lotto.common.Constants.LINE_SEPARATOR;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
 public class LottoGroup {
-    private final List<Lotto> item = new ArrayList<>();
+    private final List<Lotto> item;
 
-    public static LottoGroup create() {
-        return new LottoGroup();
+    public LottoGroup(List<Lotto> item) {
+        this.item = item;
     }
 
-    public void add(List<Integer> lottoNumbers) {
-        item.add(Lotto.from(convertToLottoNumbers(lottoNumbers)));
+    public static LottoGroup from(List<Lotto> lottoList) {
+        return new LottoGroup(lottoList);
     }
 
     public List<Lotto> getItem() {
         return item;
-    }
-
-    private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .toList();
     }
 
     @Override
