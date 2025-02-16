@@ -6,20 +6,23 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class BonusNumberTest {
 
-    @Test
-    @DisplayName("보너스 번호는 1~45 사이가 아닌 경우 예외를 발생한다.")
-    void bonus_number_out_of_range_test(){
-        assertThatThrownBy(() -> new BonusNumber(46))
+    @ParameterizedTest
+    @DisplayName("보너스 번호의 범위를 벗어난 경우 예외가 발생한다.")
+    @ValueSource(ints = {0, 46, -1, 100})
+    void 보너스_번호의_범위를_벗어난_경우_예외가_발생한다(int number) {
+        assertThatThrownBy(() -> new BonusNumber(number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("숫자는 1~45 사이여야 합니다.");
     }
 
     @Test
     @DisplayName("보너스 번호가 로또 번호 내부에 존재하는 경우 true를 반환한다.")
-    void is_bonus_number_true(){
+    void 보너스_번호가_로또_번호_내부에_존재하는_경우_true를_반환한다() {
         Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(lottoNumbers);
         BonusNumber bonusNumber = new BonusNumber(5);
