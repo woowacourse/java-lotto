@@ -8,6 +8,10 @@ import java.util.List;
 
 public class LottoNumberGenerator {
 
+    private LottoNumberGenerator() {
+
+    }
+
     public static List<Integer> generate() {
         List<Integer> lottoNumbers = new ArrayList<>();
         for (int i = LottoConstants.MIN_NUMBER; i <= LottoConstants.MAX_NUMBER; i++) {
