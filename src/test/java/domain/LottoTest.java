@@ -1,12 +1,11 @@
 package domain;
 
-import static global.exception.ExceptionMessage.DUPLICATED_NUMBER;
-import static global.exception.ExceptionMessage.INVALID_FORMAT;
-import static global.exception.ExceptionMessage.INVALID_RANGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import domain.excepetion.BonusExceptionMessage;
+import domain.excepetion.LottoExceptionMessage;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Nested;
@@ -29,7 +28,7 @@ class LottoTest {
             assertThatThrownBy(() -> {
                 new Lotto(List.of(1,2,3,4,5,46));
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_RANGE);
+                    .hasMessage(LottoExceptionMessage.INVALID_RANGE);
         }
 
         @Test
@@ -37,7 +36,7 @@ class LottoTest {
             assertThatThrownBy(() -> {
                 new Lotto(List.of(1,2,3,4,5,5));
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(DUPLICATED_NUMBER);
+                    .hasMessage(LottoExceptionMessage.DUPLICATED_NUMBER);
         }
 
         @Test
@@ -45,17 +44,13 @@ class LottoTest {
             assertThatThrownBy(() -> {
                 new Lotto(List.of(1,2,3,4,5));
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_FORMAT);
+                    .hasMessage(LottoExceptionMessage.INVALID_FORMAT);
         }
     }
 
     @Test
     void 보너스_번호_생성_성공_테스트() {
-        //given
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-
-        //when-then
-        assertThatCode(() -> lotto.validateBonus("45")).doesNotThrowAnyException();
+        assertThatCode(() -> new WinningLotto(List.of(1, 2, 3, 4, 5, 6), "45")).doesNotThrowAnyException();
     }
 
     @Nested
@@ -68,9 +63,9 @@ class LottoTest {
 
             //when-then
             assertThatThrownBy(() -> {
-                lotto.validateBonus("46");
+                new WinningLotto(List.of(1, 2, 3, 4, 5, 6), "46");
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_RANGE);
+                    .hasMessage(LottoExceptionMessage.INVALID_RANGE);
         }
 
         @Test
@@ -80,9 +75,9 @@ class LottoTest {
 
             //when-then
             assertThatThrownBy(() -> {
-                lotto.validateBonus("6");
+                new WinningLotto(List.of(1, 2, 3, 4, 5, 6), "6");
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(DUPLICATED_NUMBER);
+                    .hasMessage(BonusExceptionMessage.DUPLICATED_NUMBER);
         }
     }
 

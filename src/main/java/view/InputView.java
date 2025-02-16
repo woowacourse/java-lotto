@@ -1,8 +1,12 @@
 package view;
 
-import static view.InputMessage.*;
+import static view.InputMessage.BONUS;
+import static view.InputMessage.PRICE;
+import static view.InputMessage.WINNING_LOTTO;
 
+import java.util.List;
 import java.util.Scanner;
+import view.parser.InputParser;
 
 public class InputView {
 

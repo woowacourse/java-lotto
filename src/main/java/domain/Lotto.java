@@ -1,9 +1,7 @@
 package domain;
 
-import static global.exception.ExceptionMessage.DUPLICATED_NUMBER;
-import static global.exception.ExceptionMessage.INVALID_FORMAT;
-import static global.exception.ExceptionMessage.INVALID_RANGE;
-
+import domain.excepetion.BonusExceptionMessage;
+import domain.excepetion.LottoExceptionMessage;
 import java.util.List;
 
 public class Lotto {
@@ -20,14 +18,6 @@ public class Lotto {
         validateLottoDuplicate(inputLotto);
 
         this.numbers = inputLotto;
-    }
-
-    public int validateBonus(String inputBonus) {
-        int bonus = validateIsInteger(inputBonus);
-        validateRange(bonus);
-        validateBonusDuplicate(bonus);
-
-        return bonus;
     }
 
     public Rank countMatchNumbers(WinningLotto winningLotto) {
@@ -47,15 +37,36 @@ public class Lotto {
         return numbers.contains(number);
     }
 
+    protected static void validateRange(Integer lottoNum) {
+        if(lottoNum < LOTTO_MIN || lottoNum > LOTTO_MAX) {
+            throw new IllegalArgumentException(LottoExceptionMessage.INVALID_RANGE);
+        }
+    }
+
+    protected int validateIsInteger(String lottoNum) {
+        try {
+            return Integer.parseInt(lottoNum);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(LottoExceptionMessage.INVALID_FORMAT);
+        }
+    }
+
     private void validateLottoDuplicate(List<Integer> inputLotto) {
         if(inputLotto.stream().distinct().count() != LOTTO_LENGTH){
-            throw new IllegalArgumentException(DUPLICATED_NUMBER);
+            throw new IllegalArgumentException(LottoExceptionMessage.DUPLICATED_NUMBER);
         }
+    }
+
+    protected void validateBonusDuplicate(int inputBonus) {
+        Integer bonus = inputBonus;
+        numbers.stream().filter(number -> number.equals(bonus)).forEach(number -> {
+            throw new IllegalArgumentException(BonusExceptionMessage.DUPLICATED_NUMBER);
+        });
     }
 
     private void validateLength(List<Integer> inputLotto) {
         if(inputLotto.size() != LOTTO_LENGTH) {
-            throw new IllegalArgumentException(INVALID_FORMAT);
+            throw new IllegalArgumentException(LottoExceptionMessage.INVALID_FORMAT);
         }
     }
     
@@ -63,27 +74,6 @@ public class Lotto {
         for (Integer lottoNum : inputLotto) {
             validateRange(lottoNum);
         }
-    }
-
-    private static void validateRange(Integer lottoNum) {
-        if(lottoNum < LOTTO_MIN || lottoNum > LOTTO_MAX) {
-            throw new IllegalArgumentException(INVALID_RANGE);
-        }
-    }
-
-    private int validateIsInteger(String lottoNum) {
-        try {
-            return Integer.parseInt(lottoNum);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_FORMAT);
-        }
-    }
-
-    private void validateBonusDuplicate(int inputBonus) {
-        Integer bonus = inputBonus;
-        numbers.stream().filter(number -> number.equals(bonus)).forEach(number -> {
-            throw new IllegalArgumentException(DUPLICATED_NUMBER);
-        });
     }
 
     public List<Integer> getNumbers() {

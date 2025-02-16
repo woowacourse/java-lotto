@@ -1,6 +1,5 @@
 package view.parser;
 
-import static domain.excepetion.ExceptionMessage.INVALID_FORMAT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,7 @@ class InputParserTest {
         assertThatThrownBy(() -> {
             InputParser.parseWinningLotto("1/2/3/4/5/6");
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(INVALID_FORMAT);
+                .hasMessage(ParserExceptionMessage.INVALID_FORMAT);
     }
 
     @Test
@@ -20,6 +19,6 @@ class InputParserTest {
         assertThatThrownBy(() -> {
             InputParser.parseWinningLotto("1,2,3,4,5,a");
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(INVALID_FORMAT);
+                .hasMessage(ParserExceptionMessage.INVALID_FORMAT);
     }
 }
