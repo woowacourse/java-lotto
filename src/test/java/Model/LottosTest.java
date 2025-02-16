@@ -7,11 +7,13 @@ class LottosTest {
 
     @Test
     void 로또_갯수_생성_테스트() {
-        int count = 14;
         int price = 14000;
-        Lottos lottos = new Lottos(price);
+        int expectCount = 14;
 
-        Assertions.assertThat(lottos.getLottos().size()).isEqualTo(count);
+        Lottos lottos = new Lottos(price);
+        int result = lottos.lottoSize();
+
+        Assertions.assertThat(result).isEqualTo(expectCount);
     }
 
 }
