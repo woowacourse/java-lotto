@@ -59,9 +59,9 @@ class LottoTest {
                             new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
             Lotto lotto = new Lotto(lottoNumbers);
             LottoNumber bonusBall = new LottoNumber(30);
-            
+
             // when
-            boolean containsBonusNumber = lotto.isContainsBonusNumber(bonusBall);
+            boolean containsBonusNumber = lotto.isContainsNumber(bonusBall);
 
             // then
             assertThat(containsBonusNumber).isTrue();

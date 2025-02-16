@@ -50,7 +50,7 @@ public class WinningNumbers {
     }
 
     public boolean matchBonusNumber(final Lotto lotto) {
-        return lotto.isContainsBonusNumber(bonusBall);
+        return lotto.isContainsNumber(bonusBall);
     }
 
     public List<LottoNumber> getWinningNumbers() {
