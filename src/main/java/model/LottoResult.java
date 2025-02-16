@@ -27,4 +27,8 @@ public record LottoResult(
         }
         return totalPrize;
     }
+
+    public double getLottoRate(int price){
+        return (double) getTotalPrize() / price;
+    }
 }
