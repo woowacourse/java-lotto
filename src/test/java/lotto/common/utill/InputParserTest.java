@@ -14,8 +14,9 @@ import org.junit.jupiter.api.Test;
 class InputParserTest {
 
     @Nested
+    @DisplayName("String 입력값을 Int 값으로 변환할 때")
     class ParseToIntTest {
-        @DisplayName("String 입력값을 Int 값으로 변환한다.")
+        @DisplayName("정상적으로 작동한다.")
         @Test
         void parseToIntCorrected() {
             String str = "1000";
@@ -51,8 +52,9 @@ class InputParserTest {
     }
 
     @Nested
+    @DisplayName("String 입력값을 List<Integer> 값으로 변환할 때")
     class ParseToListTest {
-        @DisplayName("List 변환 시, 구분자를 가진 String 입력값을 List로 변환한다.")
+        @DisplayName("구분자를 가진 String 입력값을 List로 변환한다.")
         @Test
         void parseToListCorrected() {
             String str = "1,2,3,4,5,6";

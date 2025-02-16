@@ -9,10 +9,13 @@ import org.junit.jupiter.api.Test;
 
 class CashierTest {
     @Test
-    @DisplayName(" ")
+    @DisplayName("로또의 기준 가격에 비례하여 로또를 발급한다.")
     void generateAmount() {
         Cashier cashier = new Cashier(LOTTO_PRICE);
         assertThat(cashier.getNumberOfLotto()).isEqualTo(1);
+
+        Cashier cashier2 = new Cashier(LOTTO_PRICE * 2);
+        assertThat(cashier2.getNumberOfLotto()).isEqualTo(2);
     }
 
     @Test
