@@ -1,5 +1,6 @@
-package domain;
+package domain.lotto;
 
+import domain.MatchDto;
 import domain.numbergenerator.NumberGenerator;
 import java.util.ArrayList;
 import java.util.Comparator;

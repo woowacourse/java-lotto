@@ -2,6 +2,7 @@ package domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import domain.lotto.Lotto;
 import domain.numbergenerator.NumberGenerator;
 import java.util.List;
 import java.util.stream.Stream;
