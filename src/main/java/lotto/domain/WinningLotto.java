@@ -1,14 +1,17 @@
 package lotto.domain;
 
-import lotto.domain.constant.WinningTier;
+import java.util.List;
+import lotto.exception_message.ExceptionMessage;
 
 public class WinningLotto {
 
     private final Lotto lotto;
     private final int bonusNumber;
 
-    public WinningLotto(Lotto lotto, int bonusNumber) {
-        this.lotto = lotto;
+    public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
+        validateRange(bonusNumber);
+        validateOverlap(winningNumbers, bonusNumber);
+        this.lotto = new Lotto(winningNumbers);
         this.bonusNumber = bonusNumber;
     }
 
@@ -16,5 +19,20 @@ public class WinningLotto {
         int matches = this.lotto.findMatches(lotto);
         boolean isBonusMatched = lotto.hasNumber(bonusNumber);
         return WinningTier.find(matches, isBonusMatched);
+    }
+
+
+    private void validateRange(int bonusNumber) {
+        boolean isOutOfRange = bonusNumber < Lotto.MIN_LOTTO_NUMBER || bonusNumber > Lotto.MAX_LOTTO_NUMBER;
+        if (isOutOfRange) {
+            throw new IllegalArgumentException(ExceptionMessage.OUT_OF_RANGE.getContent());
+        }
+    }
+
+    private void validateOverlap(List<Integer> winningNumbers, int bonusNumber) {
+        boolean isOverlap = winningNumbers.contains(bonusNumber);
+        if (isOverlap) {
+            throw new IllegalArgumentException(ExceptionMessage.DUPLICATED_NUMBERS.getContent());
+        }
     }
 }
