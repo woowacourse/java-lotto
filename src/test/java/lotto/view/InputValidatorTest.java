@@ -9,11 +9,23 @@ import org.junit.jupiter.params.provider.ValueSource;
 class InputValidatorTest {
 
     @Test
-    void 입력값이_null이면_예외가_발생한다() {
+    void 입력값을_정상적으로_검증한다() {
         // Given
+        final String input = "abc";
 
         // When & Then
-        Assertions.assertThatThrownBy(() -> InputValidator.validate(null))
+        Assertions.assertThatCode(() -> {
+            InputValidator.validate(input);
+        }).doesNotThrowAnyException();
+    }
+
+    @Test
+    void 입력값이_null이면_예외가_발생한다() {
+        // Given
+        final String input = null;
+
+        // When & Then
+        Assertions.assertThatThrownBy(() -> InputValidator.validate(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값은 null일 수 없습니다.");
     }
