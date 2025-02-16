@@ -18,18 +18,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumber(number);
     }
 
-    public static LottoNumber from(String input) {
-        return new LottoNumber(parseLottoNumber(input));
-    }
-
-    public static int parseLottoNumber(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ONLY_LOTTO_NUMBER.getMessage());
-        }
-    }
-
     private void validateNumber(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(ONLY_LOTTO_NUMBER.getMessage());

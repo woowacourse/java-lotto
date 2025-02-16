@@ -11,7 +11,6 @@ import lotto.domain.Money;
 import lotto.domain.Profit;
 import lotto.domain.Rank;
 import lotto.domain.WinnerLotto;
-import lotto.utils.NumberUtils;
 
 public class LottoService {
 
@@ -21,8 +20,7 @@ public class LottoService {
         this.randomLottoService = randomLottoService;
     }
 
-    public Money getMoney(String input) {
-        int money = NumberUtils.parseInt(input);
+    public Money getMoney(int money) {
         return new Money(money);
     }
 
@@ -41,13 +39,16 @@ public class LottoService {
         return lottoGroup.toString();
     }
 
-    public Lotto getWinnerNumber(String winnerNumber) {
-        return Lotto.from(winnerNumber);
+    public Lotto getWinnerNumber(List<Integer> winnerNumberInput) {
+        List<LottoNumber> winnerNumber = winnerNumberInput.stream()
+                .map(LottoNumber::new)
+                .toList();
+
+        return new Lotto(winnerNumber);
     }
 
-    public WinnerLotto getWinnerLotto(Lotto winnerNumber, String bonusNumberInput) {
-        int parseInput = NumberUtils.parseInt(bonusNumberInput);
-        LottoNumber bonusNumber = LottoNumber.from(parseInput);
+    public WinnerLotto getWinnerLotto(Lotto winnerNumber, int bonusNumberInput) {
+        LottoNumber bonusNumber = LottoNumber.from(bonusNumberInput);
         WinnerLotto.validateBonusNumbers(winnerNumber, bonusNumber);
 
         return new WinnerLotto(winnerNumber, bonusNumber);

@@ -5,8 +5,8 @@ import java.math.RoundingMode;
 import lotto.common.ErrorMessage;
 
 public class Money {
-    private static final int SCALE_VALUE = 2;
     static final int LOTTO_PRICE = 1000;
+    private static final int SCALE_VALUE = 2;
     private final int amount;
 
     public Money(final int amount) {
@@ -20,17 +20,13 @@ public class Money {
         }
     }
 
-    public String calculateAverageProfitRate(long totalProfit){
+    public String calculateAverageProfitRate(long totalProfit) {
         return new BigDecimal(totalProfit)
                 .divide(new BigDecimal(amount), SCALE_VALUE, RoundingMode.HALF_UP).toString();
     }
 
     public int getLottoTicketCount() {
         return amount / LOTTO_PRICE;
-    }
-
-    public int getAmount() {
-        return amount;
     }
 }
 

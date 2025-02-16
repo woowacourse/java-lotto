@@ -14,41 +14,43 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
 
-    @DisplayName("올바른 값 입력 테스트")
-    @Test
-    void correctTest() {
-        String input = "1,2,3,4,5,6";
+    // TODO InputView 테스트로 넘긴다.
 
-        assertThatCode(() -> Lotto.from(input))
-                .doesNotThrowAnyException();
-    }
-
-    @DisplayName("공백을 허용한다.")
-    @ParameterizedTest
-    @ValueSource(strings = {" 1,2,3,4,5,6", "1,2,3,4,5,6 ", "1, 2,3,4,5,6 "})
-    void acceptBlank(String input) {
-        assertThatCode(() -> Lotto.from(input))
-                .doesNotThrowAnyException();
-    }
-
-
-    @DisplayName("숫자가_6개가_아니라면_에러를_발생한다")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
-    void sizeNotEqualLottoSize(String input) {
-        assertThatThrownBy(() -> Lotto.from(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.INVALID_LOTTO_NUM_SIZE.getMessage());
-    }
-
-    @DisplayName("지정한_구분자를_사용해야_한다")
-    @ParameterizedTest
-    @ValueSource(strings = {"1.2.3.4.5.6", "1 2 3 4 5 6"})
-    void useCorrectSeparator(String input) {
-        assertThatThrownBy(() -> Lotto.from(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.USE_SEPARATOR.getMessage());
-    }
+//    @DisplayName("올바른 값 입력 테스트")
+//    @Test
+//    void correctTest() {
+//        String input = "1,2,3,4,5,6";
+//
+//        assertThatCode(() -> Lotto.from(input))
+//                .doesNotThrowAnyException();
+//    }
+//
+//    @DisplayName("공백을 허용한다.")
+//    @ParameterizedTest
+//    @ValueSource(strings = {" 1,2,3,4,5,6", "1,2,3,4,5,6 ", "1, 2,3,4,5,6 "})
+//    void acceptBlank(String input) {
+//        assertThatCode(() -> Lotto.from(input))
+//                .doesNotThrowAnyException();
+//    }
+//
+//
+//    @DisplayName("숫자가_6개가_아니라면_에러를_발생한다")
+//    @ParameterizedTest
+//    @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
+//    void sizeNotEqualLottoSize(String input) {
+//        assertThatThrownBy(() -> Lotto.from(input))
+//                .isInstanceOf(IllegalArgumentException.class)
+//                .hasMessage(ErrorMessage.INVALID_LOTTO_NUM_SIZE.getMessage());
+//    }
+//
+//    @DisplayName("지정한_구분자를_사용해야_한다")
+//    @ParameterizedTest
+//    @ValueSource(strings = {"1.2.3.4.5.6", "1 2 3 4 5 6"})
+//    void useCorrectSeparator(String input) {
+//        assertThatThrownBy(() -> Lotto.from(input))
+//                .isInstanceOf(IllegalArgumentException.class)
+//                .hasMessage(ErrorMessage.USE_SEPARATOR.getMessage());
+//    }
 
     @DisplayName("로또번호가_로또에_존재하면_True_반환")
     @Test

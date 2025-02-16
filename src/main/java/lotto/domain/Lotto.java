@@ -2,11 +2,8 @@ package lotto.domain;
 
 import static lotto.common.Constants.LOTTO_NUM_SIZE;
 import static lotto.common.ErrorMessage.DUPLICATE_LOTTO_NUMBER;
-import static lotto.common.ErrorMessage.INVALID_LOTTO_INPUT;
 import static lotto.common.ErrorMessage.INVALID_LOTTO_NUM_SIZE;
-import static lotto.common.ErrorMessage.USE_SEPARATOR;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.StringJoiner;
@@ -19,21 +16,6 @@ public class Lotto {
     public Lotto(List<LottoNumber> lottoNumbers) {
         validLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-    }
-
-    public static Lotto from(String input) {
-        if (input == null || input.isBlank() || input.endsWith(DELIMITER)) {
-            throw new IllegalArgumentException(INVALID_LOTTO_INPUT.getMessage());
-        }
-
-        if (!input.contains(DELIMITER)) {
-            throw new IllegalArgumentException(USE_SEPARATOR.getMessage());
-        }
-
-        return new Lotto(Arrays.stream(input.split(DELIMITER))
-                .map(String::trim)
-                .map(LottoNumber::from)
-                .toList());
     }
 
     public long getMatchCount(Lotto winnerNumbers) {
