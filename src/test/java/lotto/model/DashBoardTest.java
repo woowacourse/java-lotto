@@ -30,7 +30,7 @@ class DashBoardTest {
             assertThat(dashBoard.getWinningLottoCountForRank(Rank.FIRST))
                     .isEqualTo(0);
 
-            dashBoard.recordWinningRank(Rank.FIRST);
+            dashBoard.incrementWinningCount(Rank.FIRST);
             assertThat(dashBoard.getWinningLottoCountForRank(Rank.FIRST))
                     .isEqualTo(1);
         }
@@ -38,11 +38,11 @@ class DashBoardTest {
         @DisplayName("수익률을 계산할 수 있다.")
         @Test
         void calculateWinningRate() {
-            dashBoard.recordWinningRank(Rank.NO_PRIZE);
+            dashBoard.incrementWinningCount(Rank.NO_PRIZE);
             assertThat(dashBoard.calculateWinningRate())
                     .isEqualTo(0.0f);
 
-            dashBoard.recordWinningRank(Rank.FIFTH);
+            dashBoard.incrementWinningCount(Rank.FIFTH);
             assertThat(dashBoard.calculateWinningRate())
                     .isEqualTo(2.5f);
         }
@@ -74,7 +74,7 @@ class DashBoardTest {
         @DisplayName("당첨 결과가 null인 경우 예외가 발생한다.")
         @Test
         void shouldThrowException_WhenRankIsNull() {
-            assertThatThrownBy(() -> dashBoard.recordWinningRank(null))
+            assertThatThrownBy(() -> dashBoard.incrementWinningCount(null))
                     .isInstanceOf(NullPointerException.class)
                     .hasMessage("당첨 결과는 null이 될 수 없습니다.");
         }

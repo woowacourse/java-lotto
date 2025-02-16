@@ -15,21 +15,22 @@ public class DashBoard {
     private final EnumMap<Rank, Integer> ranks;
 
     public DashBoard() {
-        ranks = new EnumMap<>(Rank.class);
-        initializeRanks();
+        this.ranks = initializeRanks();
     }
 
-    private void initializeRanks() {
+    private EnumMap<Rank, Integer> initializeRanks() {
+        EnumMap<Rank, Integer> rankMap = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
-            ranks.put(rank, INITIAL_RANK_COUNT);
+            rankMap.put(rank, INITIAL_RANK_COUNT);
         }
+        return rankMap;
     }
 
     public void recordWinningResults(WinningLotto winningLotto, LottoTicket lottoTicket) {
         validateRecordRequest(winningLotto, lottoTicket);
-        for (Lotto lotto : lottoTicket.getLottos()) {
+        for (Lotto lotto : lottoTicket.lottos()) {
             Rank rank = winningLotto.determineRank(lotto);
-            recordWinningRank(rank);
+            incrementWinningCount(rank);
         }
     }
 
@@ -38,25 +39,25 @@ public class DashBoard {
         Objects.requireNonNull(lottoTicket, "로또 티켓은 null이 될 수 없습니다.");
     }
 
-    public void recordWinningRank(Rank rank) {
-        Objects.requireNonNull(rank, "당첨 결과는 null이 될 수 없습니다.");
-        incrementRankCount(rank);
-    }
-
     /**
      * rank 키가 존재하지 않으면 RANK_COUNT_INCREMENT로 초기화하고, 존재하면 기존 값에 RANK_COUNT_INCREMENT를 더하여 업데이트한다.
      */
-    private void incrementRankCount(Rank rank) {
+    public void incrementWinningCount(Rank rank) {
+        Objects.requireNonNull(rank, "당첨 결과는 null이 될 수 없습니다.");
         ranks.merge(rank, RANK_COUNT_INCREMENT, Integer::sum);
     }
 
     public float calculateWinningRate() {
+        validateWinningRateCalculation();
+        int purchaseAmount = getTotalPurchasedLottoCount() * LOTTO_PRICE_UNIT;
+        return (float) calculateTotalWinningAmount() / purchaseAmount;
+    }
+
+    private void validateWinningRateCalculation() {
         boolean isNoLottoPurchased = getTotalPurchasedLottoCount() == 0;
         if (isNoLottoPurchased) {
             throw new IllegalArgumentException("로또를 구입한 내역이 없어서 수익률을 계산할 수 없습니다.");
         }
-        int purchaseAmount = getTotalPurchasedLottoCount() * LOTTO_PRICE_UNIT;
-        return (float) calculateTotalWinningAmount() / purchaseAmount;
     }
 
     private int getTotalPurchasedLottoCount() {
