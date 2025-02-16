@@ -6,6 +6,7 @@ import domain.winning.Matcher;
 import domain.winning.WinningCounter;
 import domain.winning.WinningLotto;
 import domain.winning.Yield;
+import infrastructure.RandomNumberGenerator;
 import java.util.List;
 import view.InputView;
 import view.OutputView;
@@ -45,7 +46,8 @@ public class LottoController {
         int lottoQuantity = purchaseAmount.getLottoQuantity();
         outputView.printLottoQuantity(lottoQuantity);
 
-        Lottos lottos = Lottos.create(purchaseAmount.getMoney());
+        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        Lottos lottos = Lottos.issue(purchaseAmount.getMoney(), randomNumberGenerator);
 
         lottos.getLottos()
                 .forEach(lotto -> outputView.printLotto(lotto.getBallNumbers()));
