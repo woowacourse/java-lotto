@@ -13,5 +13,4 @@ public class LottoFactory {
     public Lotto generate() {
         return new Lotto(generator.generate());
     }
-
 }

@@ -1,8 +1,12 @@
 package view;
 
-import static view.InputMessage.*;
+import static view.InputMessage.BONUS;
+import static view.InputMessage.PRICE;
+import static view.InputMessage.WINNING_LOTTO;
 
+import java.util.List;
 import java.util.Scanner;
+import view.parser.InputParser;
 
 public class InputView {
 
@@ -17,9 +21,12 @@ public class InputView {
         return sc.nextLine();
     }
 
-    public String inputWinningLotto() {
+    public List<Integer> inputWinningLotto() {
         System.out.println(WINNING_LOTTO);
-        return sc.nextLine();
+
+        String inputWinningLotto = sc.nextLine();
+
+        return InputParser.parseWinningLotto(inputWinningLotto);
     }
 
     public String inputBonusLotto() {

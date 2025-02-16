@@ -31,4 +31,8 @@ public enum Rank {
     public static long calculateTotalPrize(Rank rank, Integer count) {
         return (long) rank.prize * count;
     }
+
+    public int getPrize() {
+        return prize;
+    }
 }

@@ -4,6 +4,8 @@ import domain.Amount;
 import domain.Lotto;
 import domain.Lottos;
 import domain.generator.Generator;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottosFactory {
 
@@ -14,12 +16,10 @@ public class LottosFactory {
     }
 
     public Lottos from(final Amount amount) {
-        Lottos lottos = new Lottos();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; amount.compareAmount(i); i++) {
-            Lotto lotto = lottoFactory.generate();
-            lottos.add(lotto);
+            lottos.add(lottoFactory.generate());
         }
-        return lottos;
+        return new Lottos(lottos);
     }
-
 }
