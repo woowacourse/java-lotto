@@ -9,47 +9,36 @@ public class InputView {
 
     public int requestPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        int purchaseAmount = parseInt(Console.readLine());
-        validatePositive(purchaseAmount);
-        return purchaseAmount;
+        return validateAndParsePositiveInteger(Console.readLine());
     }
 
     public List<Integer> requestWinningNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String input = Console.readLine();
-        return parseWinningNumbers(input);
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        return parseWinningNumbers(Console.readLine());
     }
 
     private List<Integer> parseWinningNumbers(String input) {
-        String[] split = splitWithRegex(input, COMMA);
-        List<Integer> numbers = convertToIntegers(split);
-        return List.copyOf(numbers);
+        String[] splitValues = input.split(COMMA);
+        return parsePositiveIntegers(splitValues);
     }
 
-    private String[] splitWithRegex(String value, String regex) {
-        return value.split(regex);
-    }
-
-    private List<Integer> convertToIntegers(String[] split) {
+    private List<Integer> parsePositiveIntegers(String[] values) {
         List<Integer> numbers = new ArrayList<>();
-        for (String token : split) {
-            int number = parseInt(token);
-            validatePositive(number);
-            numbers.add(number);
+        for (String token : values) {
+            numbers.add(validateAndParsePositiveInteger(token));
         }
         return List.copyOf(numbers);
     }
 
     public int requestBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        String input = Console.readLine();
-        return parseBonusNumber(input);
+        return validateAndParsePositiveInteger(Console.readLine());
     }
 
-    private int parseBonusNumber(String input) {
-        int bonusNumber = parseInt(input);
-        validatePositive(bonusNumber);
-        return bonusNumber;
+    private int validateAndParsePositiveInteger(String value) {
+        int number = parseInt(value);
+        validatePositive(parseInt(value));
+        return number;
     }
 
     private int parseInt(String value) {
