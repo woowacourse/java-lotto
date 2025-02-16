@@ -27,8 +27,8 @@ class WinningNumbersTest {
     @DisplayName("유효한 경우의 테스트")
     class ValidCases {
 
-        @DisplayName("당첨 번호를 올바르게 생성한다.")
         @Test
+        @DisplayName("당첨 번호를 올바르게 생성한다.")
         void createWinningNumbers() {
             // given & when
             WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
@@ -37,8 +37,8 @@ class WinningNumbersTest {
             assertThat(winningNumbers).extracting("winningNumbers").isEqualTo(lottoNumbers);
         }
 
-        @DisplayName("당첨 번호를 올바르게 비교한다.")
         @Test
+        @DisplayName("당첨 번호를 올바르게 비교한다.")
         void containsLottoNumber() {
             // given
             WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
@@ -56,8 +56,8 @@ class WinningNumbersTest {
     @DisplayName("유효하지 않은 경우의 테스트")
     class InvalidCases {
 
-        @DisplayName("당첨 번호가 6개가 아니면 예외가 발생한다.")
         @Test
+        @DisplayName("당첨 번호가 6개가 아니면 예외가 발생한다.")
         void validateSize() {
             // given
             lottoNumbers.add(new LottoNumber(10));
@@ -67,8 +67,8 @@ class WinningNumbersTest {
                     .hasMessageContaining(ErrorType.WINNING_NUMBERS_IS_INVALID_SIZE.getMessage());
         }
 
-        @DisplayName("당첨 번호에 중복이 존재한다면 예외가 발생한다.")
         @Test
+        @DisplayName("당첨 번호에 중복이 존재한다면 예외가 발생한다.")
         void validateDuplicate() {
             // given
             lottoNumbers.removeLast();

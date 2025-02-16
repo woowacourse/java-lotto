@@ -15,8 +15,8 @@ class WinningResultTest {
     @DisplayName("유효한 경우의 테스트")
     class ValidCases {
 
-        @DisplayName("당첨 결과를 올바르게 생성한다.")
         @Test
+        @DisplayName("당첨 결과를 올바르게 생성한다.")
         void createWinningResult() {
             // given
             Map<LottoRank, Integer> lottoRanks = Map.of(LottoRank.FAIL, 3, LottoRank.FIFTH_PLACE, 1,
@@ -29,8 +29,8 @@ class WinningResultTest {
             assertThat(winningResult.getLottoRanks()).usingRecursiveComparison().isEqualTo(lottoRanks);
         }
 
-        @DisplayName("손해 여부를 올바르게 계산한다.")
         @Test
+        @DisplayName("손해 여부를 올바르게 계산한다.")
         void isDamage() {
             // given
             Map<LottoRank, Integer> lottoRanks = Map.of(LottoRank.FAIL, 3);
@@ -42,8 +42,8 @@ class WinningResultTest {
             assertThat(winningResult.isRevenue()).isFalse();
         }
 
-        @DisplayName("수익률을 올바르게 계산한다.")
         @Test
+        @DisplayName("수익률을 올바르게 계산한다.")
         void calculateRateOfRevenue() {
             // given
             Map<LottoRank, Integer> lottoRanks = Map.of(LottoRank.FIFTH_PLACE, 1);
@@ -63,8 +63,8 @@ class WinningResultTest {
     @DisplayName("유효하지 않은 경우의 테스트")
     class InvalidCases {
 
-        @DisplayName("당첨 결과가 음수면 예외가 발생한다.")
         @Test
+        @DisplayName("당첨 결과가 음수면 예외가 발생한다.")
         void validateSize() {
             // given
             Map<LottoRank, Integer> lottoRanks = Map.of(LottoRank.FAIL, -1);
