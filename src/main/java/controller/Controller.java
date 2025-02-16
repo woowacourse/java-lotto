@@ -1,7 +1,9 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 import model.LottoWinningNumbers;
 import model.PurchasedLotto;
@@ -27,12 +29,12 @@ public class Controller {
     }
 
     public void start() {
-        int lottoCount = inputResponseForBudget();
+        int lottoCount = inputResponseForBudget().orElse(0);
 
         PurchasedLotto purchasedLotto = buyLotto(lottoCount);
         outputView.displayLottoNumbers(purchasedLotto);
 
-        List<Integer> winningNumbers = inputResponseForWinningNumber();
+        List<Integer> winningNumbers = inputResponseForWinningNumber().orElse(Collections.emptyList());
         int bonusNumber = inputResponseForBonusNumber(winningNumbers);
 
         PrizeResult prizeResult = WinningDiscriminator.judge(purchasedLotto,
@@ -49,11 +51,11 @@ public class Controller {
         return new PurchasedLotto(lottos);
     }
 
-    private int inputResponseForBudget() {
+    private Optional<Integer> inputResponseForBudget() {
         return inputResponse(() -> BudgetParser.parseLottoCount(inputView.askForBudget()));
     }
 
-    private List<Integer> inputResponseForWinningNumber() {
+    private Optional<List<Integer>> inputResponseForWinningNumber() {
         return inputResponse(() -> WinningNumberParser.parseWinningNumbers(inputView.askForWinningNumber()));
     }
 
@@ -67,13 +69,13 @@ public class Controller {
         }
     }
 
-    private <T> T inputResponse(Supplier<T> parser) {
+    private <T> Optional<T> inputResponse(Supplier<T> parser) {
         try {
-            return parser.get();
+            return Optional.ofNullable(parser.get());
         } catch (IllegalArgumentException e) {
             outputView.displayErrorMessage(e.getMessage());
             System.exit(1);
-            return null;
+            return Optional.empty();
         }
     }
 }
