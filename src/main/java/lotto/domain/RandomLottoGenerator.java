@@ -11,7 +11,6 @@ import java.util.stream.IntStream;
 
 public class RandomLottoGenerator {
 
-    static final int LOTTO_SIZE = 6;
     private static final int START_INDEX = 0;
 
     public List<Lotto> generate(final int count) {
@@ -33,6 +32,6 @@ public class RandomLottoGenerator {
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(numberRange);
-        return numberRange.subList(START_INDEX, LOTTO_SIZE);
+        return numberRange.subList(START_INDEX, Lotto.LOTTO_SIZE);
     }
 }

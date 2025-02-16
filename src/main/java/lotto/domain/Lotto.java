@@ -5,28 +5,13 @@ import java.util.Objects;
 
 public class Lotto {
 
+    static final int LOTTO_SIZE = 6;
+
     private final List<LottoNumber> numbers;
 
     public Lotto(final List<Integer> values) {
         validate(values);
         this.numbers = makeNumber(values);
-    }
-
-    private void validate(final List<Integer> values) {
-        validateDuplication(values);
-        validateSize(values);
-    }
-
-    private void validateSize(final List<Integer> values) {
-        if (values.size() != RandomLottoGenerator.LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
-        }
-    }
-
-    private void validateDuplication(final List<Integer> values) {
-        if (hasDuplication(values)) {
-            throw new IllegalArgumentException("중복되지 않은 로또 번호를 입력해 주세요.");
-        }
     }
 
     public int countMatchingLottoNumber(final Lotto lotto) {
@@ -37,6 +22,23 @@ public class Lotto {
 
     boolean contains(final LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
+    }
+
+    private void validate(final List<Integer> values) {
+        validateDuplication(values);
+        validateSize(values);
+    }
+
+    private void validateSize(final List<Integer> values) {
+        if (values.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
+        }
+    }
+
+    private void validateDuplication(final List<Integer> values) {
+        if (hasDuplication(values)) {
+            throw new IllegalArgumentException("중복되지 않은 로또 번호를 입력해 주세요.");
+        }
     }
 
     private List<LottoNumber> makeNumber(final List<Integer> values) {
