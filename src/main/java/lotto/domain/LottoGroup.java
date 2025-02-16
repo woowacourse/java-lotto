@@ -1,14 +1,10 @@
 package lotto.domain;
 
 import static lotto.common.Constants.LINE_SEPARATOR;
-import static lotto.common.Constants.LOTTO_NUM_SIZE;
-import static lotto.common.Constants.MAX_LOTTO_NUMBER;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
-import java.util.stream.IntStream;
-import lotto.utils.RandomNumberUtils;
 
 public class LottoGroup {
     private final List<Lotto> item = new ArrayList<>();
@@ -17,25 +13,12 @@ public class LottoGroup {
         return new LottoGroup();
     }
 
-    public void generate(Money money) {
-        IntStream.range(0, money.getLottoTicketCount())
-                .mapToObj(index -> createLotto())
-                .forEach(item::add);
+    public void add(List<Integer> lottoNumbers) {
+        item.add(Lotto.from(convertToLottoNumbers(lottoNumbers)));
     }
 
     public List<Lotto> getItem() {
         return item;
-    }
-
-    private Lotto createLotto() {
-        List<Integer> randomNumbers = generateRandomNumbers();
-        List<LottoNumber> lottoNumbers = convertToLottoNumbers(randomNumbers);
-
-        return Lotto.from(lottoNumbers);
-    }
-
-    private List<Integer> generateRandomNumbers() {
-        return RandomNumberUtils.generateRandomNumbers(LOTTO_NUM_SIZE, MAX_LOTTO_NUMBER);
     }
 
     private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {

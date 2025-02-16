@@ -17,7 +17,7 @@ public class Main {
 
     public static void main(String[] args) {
         Money money = RecoveryUtils.executeWithRetry(() -> lottoService.getMoney(InputView.readMoney()));
-        LottoGroup lottoGroup = lottoService.createLottoGroup(money);
+        LottoGroup lottoGroup = lottoService.generateLottoGroupByMoney(money);
         printLottoGroup(money, lottoGroup);
 
         Lotto winnerNumber = getWinnerNumberWithRetry();

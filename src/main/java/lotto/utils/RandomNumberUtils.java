@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 public final class RandomNumberUtils {
 
@@ -25,5 +26,11 @@ public final class RandomNumberUtils {
             numberSet.add(randomNumber);
         }
         return new ArrayList<>(numberSet).stream().sorted().toList();
+    }
+
+    public static List<List<Integer>> generateRandomNumbersList(int count, int maxSize, int maxNumber) {
+        return IntStream.range(0, count)
+                .mapToObj(i -> generateRandomNumbers(maxSize, maxNumber))
+                .toList();
     }
 }

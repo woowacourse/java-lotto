@@ -1,5 +1,8 @@
 package lotto.service;
 
+import static lotto.common.Constants.LOTTO_NUM_SIZE;
+import static lotto.common.Constants.MAX_LOTTO_NUMBER;
+
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
@@ -9,6 +12,7 @@ import lotto.domain.Profit;
 import lotto.domain.Rank;
 import lotto.domain.WinnerLotto;
 import lotto.utils.NumberUtils;
+import lotto.utils.RandomNumberUtils;
 
 public class LottoService {
 
@@ -17,11 +21,18 @@ public class LottoService {
         return new Money(money);
     }
 
-    public LottoGroup createLottoGroup(Money money) {
+    public LottoGroup generateLottoGroupByMoney(Money money) {
         LottoGroup lottoGroup = LottoGroup.create();
-        lottoGroup.generate(money);
+        int lottoTicketCount = money.getLottoTicketCount();
+
+        for (List<Integer> randomNumbers : RandomNumberUtils.generateRandomNumbersList(lottoTicketCount, LOTTO_NUM_SIZE,
+                MAX_LOTTO_NUMBER)) {
+            lottoGroup.add(randomNumbers);
+        }
+
         return lottoGroup;
     }
+
 
     public String getLottoGroupMessage(LottoGroup lottoGroup) {
         return lottoGroup.toString();
