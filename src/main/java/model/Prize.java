@@ -15,7 +15,7 @@ public enum Prize {
     final int price;
     final int count;
     final boolean bonus;
-    final static int FIVE_MATCH = 5;
+    static final int FIVE_MATCH = 5;
 
     Prize(int rank, int count, boolean bonus, int price) {
         this.rank = rank;

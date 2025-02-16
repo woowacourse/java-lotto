@@ -14,8 +14,7 @@ public record LottosDTO(List<InnerLottoDetail> lottoDTOs) {
     }
 
     public static LottosDTO from(Lottos lottos) {
-        return new LottosDTO(lottos.getLottos()
-                .stream()
+        return new LottosDTO(lottos.stream()
                 .map(InnerLottoDetail::from)
                 .toList());
     }
