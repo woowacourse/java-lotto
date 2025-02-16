@@ -13,7 +13,7 @@ class LottosTest {
     @Test
     void 로또_결과를_계산할_수_있다() {
         //given
-        Lottos lottos = new Lottos(List.of(
+        List<Lotto> lottoNumbers = List.of(
                 new Lotto(List.of(
                         new Number(1),
                         new Number(2),
@@ -38,7 +38,8 @@ class LottosTest {
                         new Number(5),
                         new Number(10))
                 )
-        ));
+        );
+        Lottos lottos = new Lottos(lottoNumbers, new Money(3000));
         WinningLotto winningLotto = new WinningLotto(
                 new Lotto(List.of(
                         new Number(1),

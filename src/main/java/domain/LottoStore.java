@@ -4,12 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
-    public static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     private final LottoMachine lottoMachine;
 
     public LottoStore(LottoMachine lottoMachine) {
         this.lottoMachine = lottoMachine;
+    }
+
+    public static boolean isPurchasable(int amount) {
+        return LOTTO_PRICE <= amount;
+    }
+
+    public static Money calculatePurchaseAmount(int lottoCount) {
+        return new Money(lottoCount * LOTTO_PRICE);
     }
 
     public Lottos buy(Money money) {
@@ -20,6 +28,6 @@ public class LottoStore {
             lottos.add(lottoMachine.createLotto());
         }
 
-        return new Lottos(lottos);
+        return new Lottos(lottos, new Money(lottos.size() * LOTTO_PRICE));
     }
 }

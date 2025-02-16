@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Lottos {
+
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos, Money purchaseAmount) {
         this.lottos = lottos;
     }
 
@@ -23,7 +24,6 @@ public class Lottos {
             Rank rank = winningLotto.calculateRank(purchaseLotto);
             winningResult.put(rank, winningResult.getOrDefault(rank, 0) + 1);
         }
-        Money purchaseLottoMoney = new Money(LottoStore.LOTTO_PRICE).multiply(lottos.size());
-        return new WinningResult(purchaseLottoMoney, winningResult);
+        return new WinningResult(LottoStore.calculatePurchaseAmount(lottos.size()), winningResult);
     }
 }

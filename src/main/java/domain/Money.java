@@ -15,7 +15,7 @@ public class Money {
     }
 
     private static void validatePurchaseAmount(int amount) {
-        if (amount < LottoStore.LOTTO_PRICE) {
+        if (!LottoStore.isPurchasable(amount)) {
             throw new IllegalArgumentException("구매 금액은 로또 가격보다 적을 수 없습니다.");
         }
     }
