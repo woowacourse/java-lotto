@@ -2,6 +2,7 @@ package model;
 
 import dto.LottoResultDetailResponse;
 import dto.LottoResultsResponse;
+import model.lotto.WinningLotto;
 
 import java.util.LinkedHashMap;
 import java.util.List;

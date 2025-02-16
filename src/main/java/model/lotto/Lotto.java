@@ -1,11 +1,15 @@
-package model;
+package model.lotto;
 
 import dto.LottoNumbersResponse;
 import global.utils.Validator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 
-import static global.constant.LottoConstant.*;
+import static model.lotto.LottoConstant.*;
 
 public class Lotto {
 
@@ -30,22 +34,19 @@ public class Lotto {
     }
 
     public LottoNumbersResponse createResponse() {
-        return new LottoNumbersResponse(numbers.stream()
-                .map(String::valueOf)
-                .toArray(String[]::new)
-        );
+        return new LottoNumbersResponse(numbers.stream().map(String::valueOf).toArray(String[]::new));
     }
 
     private void generateLotto() {
         Random random = new Random();
-        for (int i = 0; i < NUMBER_COUNT; i++) {
-            numbers.add(random.nextInt(MAX_LOTTO_NUMBER) + 1);
+        for (int i = 0; i < NUMBER_COUNT.getValue(); i++) {
+            numbers.add(random.nextInt(MAX_LOTTO_NUMBER.getValue()) + 1);
         }
     }
 
     private void generateCustomLotto(final String input) {
-        String[] tokens = input.split(NUMBER_DELIMITER);
-        Validator.validateRange(tokens.length, NUMBER_COUNT, NUMBER_COUNT);
+        String[] tokens = input.split(", ");
+        Validator.validateRange(tokens.length, NUMBER_COUNT.getValue(), NUMBER_COUNT.getValue());
 
         Arrays.stream(tokens).forEach(this::addNumber);
 
@@ -55,7 +56,7 @@ public class Lotto {
     private void addNumber(String token) {
         Validator.validateNumeric(token);
         int number = Integer.parseInt(token);
-        Validator.validateRange(number, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+        Validator.validateRange(number, MIN_LOTTO_NUMBER.getValue(), MAX_LOTTO_NUMBER.getValue());
         numbers.add(number);
     }
 

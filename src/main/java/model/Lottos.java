@@ -1,6 +1,7 @@
 package model;
 
 import dto.LottosResponse;
+import model.lotto.Lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
