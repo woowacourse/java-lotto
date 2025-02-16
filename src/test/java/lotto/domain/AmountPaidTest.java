@@ -33,4 +33,12 @@ class AmountPaidTest {
 
         assertThat(amountPaid.calculateProfitRate(5000)).isEqualTo("0.35");
     }
+
+    @DisplayName("로또 금액에 따른 로또 장수를 반환한다.")
+    @Test
+    void 로또_금액에_따른_로또_장수를_반환한다() {
+        AmountPaid amountPaid = new AmountPaid(14000);
+
+        assertThat(amountPaid.getLottoQuantity()).isEqualTo(14);
+    }
 }
