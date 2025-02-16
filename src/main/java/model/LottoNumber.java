@@ -2,7 +2,7 @@ package model;
 
 import constans.ErrorType;
 
-public class LottoNumber implements Comparable {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
@@ -37,9 +37,8 @@ public class LottoNumber implements Comparable {
     }
 
     @Override
-    public int compareTo(final Object o) {
-        final int target = ((LottoNumber) o).number;
-        return this.number - target;
+    public int compareTo(final LottoNumber target) {
+        return this.number - target.number;
     }
 
     public int getNumber() {
