@@ -19,11 +19,11 @@ public class LottoController {
     }
 
     public void run() {
-        final int purchaseAmount = readPurchaseAmount();
+        final int purchaseAmount = requestPurchaseAmount();
         Lottos lottos = createLottos(purchaseAmount);
 
-        final List<Integer> winningNumbers = readWinningNumbers();
-        final int bonusNumber = readBonusNumber();
+        final List<Integer> winningNumbers = requestWinningNumbers();
+        final int bonusNumber = requestBonusNumber();
 
         final WinningLotto winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonusNumber);
         List<Prize> prizes = winningLotto.calculatePrizes(lottos);
@@ -32,24 +32,24 @@ public class LottoController {
         inputView.close();
     }
 
-    private int readPurchaseAmount() {
-        String rawPurchaseAmount = inputView.readPurchaseAmount();
+    private int requestPurchaseAmount() {
+        String rawPurchaseAmount = inputView.read("구입금액을 입력해 주세요.");
         return NumberParser.parse(rawPurchaseAmount);
-    }
-
-    private List<Integer> readWinningNumbers() {
-        String rawWinningNumber = inputView.readWinningNumber();
-        return NumberParser.parseFromCSV(rawWinningNumber);
-    }
-
-    private int readBonusNumber() {
-        final String rawBonusNumber = inputView.readBonusNumber();
-        return NumberParser.parse(rawBonusNumber);
     }
 
     private Lottos createLottos(final int purchaseAmount) {
         Lottos lottos = Lottos.ofSize(purchaseAmount / 1000);
         outputView.printPurchasedLottos(lottos);
         return lottos;
+    }
+
+    private List<Integer> requestWinningNumbers() {
+        String rawWinningNumber = inputView.read("지난 주 당첨 번호를 입력해 주세요.");
+        return NumberParser.parseFromCSV(rawWinningNumber);
+    }
+
+    private int requestBonusNumber() {
+        final String rawBonusNumber = inputView.read("보너스 볼을 입력해 주세요.");
+        return NumberParser.parse(rawBonusNumber);
     }
 }
