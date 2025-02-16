@@ -7,6 +7,7 @@ import domain.dto.AmountDto;
 import domain.dto.LottosDto;
 import domain.WinningLotto;
 import domain.dto.ResultDto;
+import global.generator.RandomGenerator;
 import parser.InputParser;
 import java.util.EnumMap;
 import view.InputView;
@@ -38,7 +39,7 @@ public class LottoController {
     }
 
     private Lottos createLottosFromRandomNumber(final Money money) {
-        Lottos lottos = money.buyLottos();
+        Lottos lottos = money.buyLottos(new RandomGenerator());
         outputView.printLottos(LottosDto.from(lottos));
         return lottos;
     }
