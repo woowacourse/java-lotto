@@ -6,9 +6,10 @@ import static domain.Lotto.MIN_LOTTO_NUMBER;
 import java.util.Random;
 
 public class RandomNumberGenerator implements NumberGenerator {
+    private static final Random RANDOM = new Random();
+
     @Override
     public int generate() {
-        Random random = new Random();
-        return random.nextInt(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1);
+        return RANDOM.nextInt(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1);
     }
 }
