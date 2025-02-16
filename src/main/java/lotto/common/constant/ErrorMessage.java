@@ -4,10 +4,10 @@ import static lotto.common.constant.BusinessRule.*;
 
 public enum ErrorMessage {
     ERROR_LOTTO_NUMBER_RANGE("로또 번호는 " + LOTTO_MINIMUM + "에서 " + LOTTO_MAXIMUM + "사이여야 합니다."
-        , ErrorType.VALIDATION),
+        , ErrorType.BUSINESS_RULE),
 
     ERROR_INCORRECT_LOTTO_SIZE("로또 번호는 " + LOTTO_SIZE + "개여야 합니다"
-        , ErrorType.VALIDATION),
+        , ErrorType.BUSINESS_RULE),
 
     ERROR_MONEY_LESS_THEN_STANDARD("로또를 구매하려면 " + LOTTO_PRICE + "원이상 필요합니다."
         , ErrorType.BUSINESS_RULE),
