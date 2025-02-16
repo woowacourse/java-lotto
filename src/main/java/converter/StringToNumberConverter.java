@@ -9,7 +9,7 @@ public class StringToNumberConverter implements Converter<String, Number> {
         return new Number(Integer.parseInt(source));
     }
 
-    public void validateNotStringNumber(String value) {
+    private void validateNotStringNumber(String value) {
         try {
             Integer.parseInt(value.trim());
         } catch (NumberFormatException e) {

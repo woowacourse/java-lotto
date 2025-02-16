@@ -9,7 +9,7 @@ public class StringToMoneyConverter implements Converter<String, Money> {
         return new Money(source);
     }
 
-    public void validateNotStringNumber(String value) {
+    private void validateNotStringNumber(String value) {
         try {
             Integer.parseInt(value.trim());
         } catch (NumberFormatException e) {
