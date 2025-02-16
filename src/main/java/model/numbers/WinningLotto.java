@@ -15,11 +15,13 @@ public class WinningLotto {
 
     private void validateBonusNumber(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         lottoNumbers.getNumbers()
-                .forEach(number -> {
-                    if (bonusNumber.isMatched(number)) {
-                        throw new IllegalArgumentException("[ERROR] 당첨 번호와 보너스 번호는 중복되어서는 안됩니다.");
-                    }
-                });
+                .forEach(number -> validateDuplication(number, bonusNumber));
+    }
+
+    private void validateDuplication(int number, LottoNumber bonusNumber) {
+        if (bonusNumber.isMatched(number)) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호와 보너스 번호는 중복되어서는 안됩니다.");
+        }
     }
 
     public int countOverlappedNumbers(List<Integer> numbers) {

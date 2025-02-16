@@ -23,15 +23,15 @@ public class OutputView {
         System.out.println("당첨 통계\n" + "---------");
 
         lottoRankResponses.sort(Comparator.comparing(LottoRankResponse::prizeMoney));
+        lottoRankResponses.forEach(this::printLottoRankSingleResult);
+    }
 
-        lottoRankResponses.forEach(lottoRankResponse -> {
-                    if (lottoRankResponse.isBonusMatched()) {
-                        printLottoRankResultWithBonusNumber(lottoRankResponse);
-                        return;
-                    }
-                    printLottoRankResultWithoutBonusNumber(lottoRankResponse);
-                }
-        );
+    private void printLottoRankSingleResult(LottoRankResponse lottoRankResponse) {
+        if (lottoRankResponse.isBonusMatched()) {
+            printLottoRankResultWithBonusNumber(lottoRankResponse);
+            return;
+        }
+        printLottoRankResultWithoutBonusNumber(lottoRankResponse);
     }
 
     public void printProfitRate(double profitRate) {
