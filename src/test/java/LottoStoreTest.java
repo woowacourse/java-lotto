@@ -18,16 +18,24 @@ class LottoStoreTest {
 
     @Test
     void 구입_금액이_1000원_단위가_아나라면_예외를_발생시킨다() {
-        int purchasePrice = 1001;
+        int purchaseAmount = 1001;
         assertThatThrownBy(
-                () -> lottoStore.purchase(purchasePrice)
+                () -> lottoStore.calculatePurchaseCount(purchaseAmount)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 구입_금액에_해당하는_개수만큼_로또_티켓이_생성된다() {
-        int purchasePrice = 14000;
-        assertThat(lottoStore.purchase(purchasePrice).size()).isEqualTo(14);
+    void 구입_금액에_따라_구매될_로또_개수를_반환한다() {
+        int purchaseAmount = 14000;
+
+        int purchaseCount = lottoStore.calculatePurchaseCount(purchaseAmount);
+        assertThat(purchaseCount).isEqualTo(14);
+    }
+
+    @Test
+    void 구입_개수만큼_로또_티켓이_생성된다() {
+        int purchaseCount = 14;
+        assertThat(lottoStore.createLottoTickets(purchaseCount).size()).isEqualTo(14);
     }
 
     @Test

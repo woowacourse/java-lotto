@@ -16,10 +16,14 @@ public class LottoStore {
         this.lottoRankCalculator = lottoRankCalculator;
     }
 
-    public List<LottoTicket> purchase(final int purchaseAmount) {
+    public int calculatePurchaseCount(int purchaseAmount) {
         validateAmountUnit(purchaseAmount);
-        int purchaseCount = purchaseAmount / LOTTO_PRICE;
-        return IntStream.range(0, purchaseCount).mapToObj(count -> new LottoTicket(lottoNumberGenerator.generate()))
+        return purchaseAmount / LOTTO_PRICE;
+    }
+
+    public List<LottoTicket> createLottoTickets(int purchaseCount) {
+        return IntStream.range(0, purchaseCount)
+                .mapToObj(count -> new LottoTicket(lottoNumberGenerator.generate()))
                 .toList();
     }
 
