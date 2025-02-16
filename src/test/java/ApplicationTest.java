@@ -1,38 +1,32 @@
-package service;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.assertj.core.api.Assertions.*;
-
+import domain.BonusNumber;
 import domain.Lotto;
+import domain.LottoDispenser;
+import domain.WinningLotto;
+import domain.WinningNumber;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import repository.BonusNumberRepository;
-import repository.LottoRepository;
-import repository.WinningNumberRepository;
 
-public class MockingLottoServiceTest {
-
-  private final LottoRepository lottoRepository = new LottoRepository();
-  private final WinningNumberRepository winningNumberRepository = new WinningNumberRepository();
-  private final BonusNumberRepository bonusNumberRepository = new BonusNumberRepository();
-
-  private final MockingLottoService mockingLottoService = new MockingLottoService(
-      lottoRepository,
-      winningNumberRepository,
-      bonusNumberRepository
-  );
-
+public class ApplicationTest {
   @ParameterizedTest
   @DisplayName("당첨_통계_계산_및_출력_테스트")
   @MethodSource("calculateWinningResult")
-  public void 당첨_통계_계산_및_출력_테스트(List<List<Integer>> testLottoNumbers, String winningNumber, String bonusNumber) {
+  public void 당첨_통계_계산_및_출력_테스트(List<List<Integer>> testLottoNumbers, String winningNumber,
+      String bonusNumber) {
 
     List<Lotto> lottos = testLottoNumbers.stream().map(Lotto::new).toList();
 
-    String result = mockingLottoService.winningCalculate(lottos, winningNumber, bonusNumber);
+    WinningLotto winningLotto = new WinningLotto(
+        new WinningNumber(winningNumber),
+        new BonusNumber(bonusNumber)
+    );
+
+    String result = new LottoDispenser(lottos).winningCalculateResultFormat(winningLotto);
 
     assertThat(result)
         .isEqualTo("""
@@ -72,6 +66,4 @@ public class MockingLottoServiceTest {
         )
     );
   }
-
-
 }

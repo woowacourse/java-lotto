@@ -6,16 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import repository.BonusNumberRepository;
-import repository.LottoRepository;
-import repository.WinningNumberRepository;
-import service.LottoService;
 
 public class BonusTest {
-
-  private final LottoRepository lottoRepository = new LottoRepository();
-  private final WinningNumberRepository winningNumberRepository = new WinningNumberRepository();
-  private final BonusNumberRepository bonusNumberRepository = new BonusNumberRepository();
 
   @DisplayName("보너스_번호가_1_45내의_숫자가_아니면_예외가_발생한다")
   @ParameterizedTest
@@ -40,13 +32,7 @@ public class BonusTest {
   void 보너스_번호가_당첨_번호에_존재하는_경우_예외가_발생한다() {
     Assertions.assertThatThrownBy(() -> {
       WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
-      LottoService lottoService = new LottoService(
-          lottoRepository,
-          winningNumberRepository,
-          bonusNumberRepository
-      );
-      winningNumberRepository.saveWinningNumber(winningNumber);
-      lottoService.inputBonusNumber("6");
+      new WinningLotto(winningNumber, new BonusNumber("6"));
     }).isInstanceOf(LottoException.class);
   }
 

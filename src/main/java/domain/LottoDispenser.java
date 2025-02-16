@@ -1,5 +1,6 @@
 package domain;
 
+import domain.formatter.WinningCalculateFormatter;
 import dto.BuyLottoResultDto;
 import domain.enums.WinningCase;
 import exception.LottoException;
@@ -22,6 +23,11 @@ public class LottoDispenser {
         lottos = generateLottos(calculateBuyLottoCount());
     }
 
+    public LottoDispenser(List<Lotto> lottos) {
+        this.lottos = lottos;
+        this.buyMoney = lottos.size() * LOTTO_MONEY_UNIT;
+    }
+
     private int calculateBuyLottoCount() {
         int lottoCount = calculateBuyLottoAmount();
         return lottoCount;
@@ -29,11 +35,6 @@ public class LottoDispenser {
 
     private int calculateBuyLottoAmount() {
         return buyMoney / LOTTO_MONEY_UNIT;
-    }
-
-    public LottoDispenser(List<Lotto> lottos) {
-        this.lottos = lottos;
-        this.buyMoney = lottos.size() * LOTTO_MONEY_UNIT;
     }
 
     private void validateLottoDispenser(String buyMoney) {
@@ -57,18 +58,7 @@ public class LottoDispenser {
         return lottos;
     }
 
-    public Map<WinningCase,Integer> winningCalculate(WinningNumber winningNumber, BonusNumber bonusNumber) {
-        Map<WinningCase,Integer> winningResult = WinningCase.toMap();
-        for(Lotto lotto : lottos){
-            int sameCount = lotto.compare(winningNumber, bonusNumber);
-            boolean isBonus = lotto.compareBonusNumber(bonusNumber);
-            WinningCase winningCase = WinningCase.getWinningCase(sameCount, isBonus);
-            winningResult.put(winningCase,winningResult.getOrDefault(winningCase,0)+1);
-        }
-        return winningResult;
-    }
-
-    public long calculateEarnMoney(Map<WinningCase, Integer> winningCalculateResult) {
+    private long calculateEarnMoney(Map<WinningCase, Integer> winningCalculateResult) {
         long earnMoneySum = 0;
         for (Entry<WinningCase, Integer> winningCaseIntegerEntry : winningCalculateResult.entrySet()) {
             long earnMoney = winningCaseIntegerEntry.getKey()
@@ -78,7 +68,7 @@ public class LottoDispenser {
         return earnMoneySum;
     }
 
-    public double calculateEarnMoneyRatio(long earnMoney) {
+    private double calculateEarnMoneyRatio(long earnMoney) {
         return  (double) earnMoney / buyMoney;
     }
 
@@ -87,6 +77,13 @@ public class LottoDispenser {
              lottos.stream().map(Lotto::getLottoNumbers).toList(),
              calculateBuyLottoAmount()
          );
+    }
+
+    public String winningCalculateResultFormat(WinningLotto winningLotto){
+        Map<WinningCase, Integer> winningCalculateResult = winningLotto.winningCalculate(lottos);
+        long earnMoney = calculateEarnMoney(winningCalculateResult);
+        double earnMoneyRatio = calculateEarnMoneyRatio(earnMoney);
+        return WinningCalculateFormatter.winningResultFormatting(winningCalculateResult,earnMoneyRatio);
     }
 
 }

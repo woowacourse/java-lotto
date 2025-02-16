@@ -1,7 +1,6 @@
 package domain;
 
 import exception.LottoException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
