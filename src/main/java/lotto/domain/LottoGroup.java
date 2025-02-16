@@ -1,44 +1,33 @@
 package lotto.domain;
 
-import static lotto.common.Constants.LOTTO_NUM_SIZE;
-import static lotto.common.Constants.MAX_LOTTO_NUMBER;
+import static lotto.common.Constants.LINE_SEPARATOR;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
-import lotto.utils.RandomNumberUtils;
+import java.util.StringJoiner;
 
 public class LottoGroup {
-    private final List<Lotto> item = new ArrayList<>();
+    private final List<Lotto> item;
 
-    public static LottoGroup create() {
-        return new LottoGroup();
+    public LottoGroup(List<Lotto> item) {
+        this.item = item;
     }
 
-    public void generate(Money money) {
-        IntStream.range(0, money.getLottoTicketCount())
-                .mapToObj(index -> createLotto())
-                .forEach(item::add);
+    public static LottoGroup from(List<Lotto> lottoList) {
+        return new LottoGroup(lottoList);
     }
 
     public List<Lotto> getItem() {
         return item;
     }
 
-    private Lotto createLotto() {
-        List<Integer> randomNumbers = generateRandomNumbers();
-        List<LottoNumber> lottoNumbers = convertToLottoNumbers(randomNumbers);
+    @Override
+    public String toString() {
+        StringJoiner joiner = new StringJoiner(LINE_SEPARATOR);
 
-        return Lotto.from(lottoNumbers);
-    }
+        for (Lotto lotto : item) {
+            joiner.add(lotto.toString());
+        }
 
-    private List<Integer> generateRandomNumbers() {
-        return RandomNumberUtils.generateRandomNumbers(LOTTO_NUM_SIZE, MAX_LOTTO_NUMBER);
-    }
-
-    private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .toList();
+        return joiner.toString();
     }
 }
