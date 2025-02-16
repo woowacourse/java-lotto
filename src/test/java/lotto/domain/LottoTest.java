@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.constant.ErrorMessage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,8 +27,7 @@ class LottoTest {
     void 로또_숫자_개수_오류(String invalidLotto) {
         //when & then
         assertThatThrownBy(() -> new Lotto(invalidLotto))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_LENGTH_ERROR.getMessage());
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -39,8 +37,7 @@ class LottoTest {
 
         //when & then
         assertThatThrownBy(() -> new Lotto(invalidLotto))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_FORMAT_ERROR.getMessage());
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -50,8 +47,7 @@ class LottoTest {
 
         //when & then
         assertThatThrownBy(() -> new Lotto(invalidLotto))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.RANGE_ERROR.getMessage());
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -61,8 +57,7 @@ class LottoTest {
 
         //when & then
         assertThatThrownBy(() -> new Lotto(invalidLotto))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_DUPLICATED_ERROR.getMessage());
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

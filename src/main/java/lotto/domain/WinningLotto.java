@@ -1,10 +1,12 @@
 package lotto.domain;
 
-import lotto.constant.ErrorMessage;
 import lotto.constant.LottoConstants;
 import lotto.util.Parser;
 
 public class WinningLotto {
+
+    private static final String RANGE_ERROR = "1과 45 사이의 수를 입력하셔야 합니다.";
+    private static final String BONUS_NUMBER_FORMAT_ERROR = "보너스 숫자는 숫자여야 합니다.";
 
     private final Lotto lotto;
     private final int bonusNumber;
@@ -15,7 +17,7 @@ public class WinningLotto {
     }
 
     private int validate(String bonusNumber) {
-        int parsedBonusNumber = Parser.validateNumber(bonusNumber, ErrorMessage.BONUS_NUMBER_FORMAT_ERROR.getMessage());
+        int parsedBonusNumber = Parser.validateNumber(bonusNumber, BONUS_NUMBER_FORMAT_ERROR);
         checkRange(parsedBonusNumber);
         validateBonusNumber(lotto, parsedBonusNumber);
         return parsedBonusNumber;
@@ -23,7 +25,7 @@ public class WinningLotto {
 
     private void checkRange(int number) {
         if (number < LottoConstants.LOTTO_MINIMUM_NUMBER.getNumber() || number > LottoConstants.LOTTO_MAXIMUM_NUMBER.getNumber()) {
-            throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR.getMessage());
+            throw new IllegalArgumentException(RANGE_ERROR);
         }
     }
 

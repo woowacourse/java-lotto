@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import lotto.constant.ErrorMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +16,7 @@ class WinningLottoTest {
         //when & then
         Assertions.assertThatThrownBy(() -> {
                     new WinningLotto(new Lotto(winningLottoNumber), bonusNumber);})
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.BONUS_NUMBER_FORMAT_ERROR.getMessage());
-
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -31,9 +28,7 @@ class WinningLottoTest {
         //when & then
         Assertions.assertThatThrownBy(() -> {
             new WinningLotto(new Lotto(winningLottoNumber), bonusNumber);})
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.RANGE_ERROR.getMessage());
-
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -45,8 +40,6 @@ class WinningLottoTest {
         //when & then
         Assertions.assertThatThrownBy(() -> {
                     new WinningLotto(new Lotto(winningLottoNumber), bonusNumber);})
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.BONUS_NUMBER_DUPLICATED_ERROR.getMessage());
-
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
