@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
+    public static int LOTTO_PRICE = 1000;
     private final IntegerGenerator generator;
 
     public LottoMachine(IntegerGenerator generator) {
@@ -31,7 +32,7 @@ public class LottoMachine {
 
     public LottoTickets generateLottoTickets(Payment payment) {
         List<LottoTicket> LottoTickets = new ArrayList<>();
-        for (int i = 0; i < payment.money() / LottoTicket.LOTTO_PRICE; i++) {
+        for (int i = 0; i < payment.money() / LOTTO_PRICE; i++) {
             LottoTicket LottoTicket = generateLottoTicket();
             LottoTickets.add(LottoTicket);
         }

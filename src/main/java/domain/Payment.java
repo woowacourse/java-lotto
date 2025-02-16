@@ -1,7 +1,7 @@
 package domain;
 
 public record Payment(int money) {
-    public static int UNIT = LottoTicket.LOTTO_PRICE;
+    public static int UNIT = LottoMachine.LOTTO_PRICE;
 
     public Payment {
         validatePositive(money);

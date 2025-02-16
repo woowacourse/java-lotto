@@ -1,8 +1,8 @@
 package service;
 
 import domain.DrawResult;
+import domain.LottoMachine;
 import domain.LottoPrize;
-import domain.LottoTicket;
 import domain.LottoTickets;
 import domain.WinningStatistics;
 import java.util.HashMap;
@@ -39,6 +39,6 @@ public class StatisticsService {
             sum += (long) prizeCounter.get(lottoPrize) * lottoPrize.getMoney();
             lottoTicketNumber += prizeCounter.get(lottoPrize);
         }
-        return lottoTicketNumber == 0 ? 0 : ((double) sum / (lottoTicketNumber * LottoTicket.LOTTO_PRICE));
+        return lottoTicketNumber == 0 ? 0 : ((double) sum / (lottoTicketNumber * LottoMachine.LOTTO_PRICE));
     }
 }
