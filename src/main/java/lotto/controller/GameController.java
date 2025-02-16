@@ -34,17 +34,11 @@ public class GameController {
     }
 
     private LottoMoney storeLottoMoney() {
-        Optional<LottoMoney> lottoMoney = Optional.empty();
-
-        while (lottoMoney.isEmpty()) {
-            lottoMoney = createLottoMoney();
-        }
-        return lottoMoney.get();
+        return ObjectCreator.repeatUntilSuccess(this::receiveLottoMoney);
     }
 
-    private Optional<LottoMoney> createLottoMoney() {
+    private Optional<LottoMoney> receiveLottoMoney() {
         return ObjectCreator.useInputToCreateObject(() -> {
-
             String money = InputView.readLottoMoney();
 
             return lottoMoneyService.createLottoMoney(money);
@@ -52,12 +46,11 @@ public class GameController {
     }
 
     private LottoMachine buyLottoTickets(LottoMoney lottoMoney) {
-        Optional<LottoMachine> lottoMachine = Optional.empty();
+        return ObjectCreator.repeatUntilSuccess(() -> receiveLottoMachine(lottoMoney));
+    }
 
-        while (lottoMachine.isEmpty()) {
-            lottoMachine = ObjectCreator.useInputToCreateObject(() -> new LottoMachine(lottoMoney));
-        }
-        return lottoMachine.get();
+    private Optional<LottoMachine> receiveLottoMachine(LottoMoney lottoMoney) {
+        return ObjectCreator.useInputToCreateObject(() -> new LottoMachine(lottoMoney));
     }
 
     private WinningLotto storeWinningLotto() {
@@ -67,17 +60,11 @@ public class GameController {
     }
 
     private Lotto storeWinningLottoNumbers() {
-        Optional<Lotto> lotto = Optional.empty();
-
-        while (lotto.isEmpty()) {
-            lotto = createWinningLottoNumbers();
-        }
-        return lotto.get();
+        return ObjectCreator.repeatUntilSuccess(this::receiveWinningLottoNumbers);
     }
 
-    private Optional<Lotto> createWinningLottoNumbers() {
+    private Optional<Lotto> receiveWinningLottoNumbers() {
         return ObjectCreator.useInputToCreateObject(() -> {
-
             String numbers = InputView.readWinningNumbers();
 
             return lottoService.createLotto(numbers);
@@ -85,17 +72,11 @@ public class GameController {
     }
 
     private WinningLotto storeWinningLottoBonus(Lotto winningNumbers) {
-        Optional<WinningLotto> winningLotto = Optional.empty();
-
-        while (winningLotto.isEmpty()) {
-            winningLotto = createWinningLottoWithBonus(winningNumbers);
-        }
-        return winningLotto.get();
+        return ObjectCreator.repeatUntilSuccess(() -> receiveWinningLottoBonus(winningNumbers));
     }
 
-    private Optional<WinningLotto> createWinningLottoWithBonus(Lotto winningNumbers) {
+    private Optional<WinningLotto> receiveWinningLottoBonus(Lotto winningNumbers) {
         return ObjectCreator.useInputToCreateObject(() -> {
-
             String bonus = InputView.readBonusBall();
 
             return winningLottoService.createWinningLotto(winningNumbers, bonus);
