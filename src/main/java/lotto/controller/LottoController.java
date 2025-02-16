@@ -57,7 +57,7 @@ public class LottoController {
     private LottoNumber getBonusNumber() {
         final String bonusNumber = inputView.readBonusNumber();
         final int parsedBonusNumber = StringParser.parseInt(bonusNumber);
-        return new LottoNumber(parsedBonusNumber);
+        return LottoNumber.from(parsedBonusNumber);
     }
 
     private LottoPrice getLottoPrice() {

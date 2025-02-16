@@ -43,7 +43,7 @@ public class Lotto {
 
     private List<LottoNumber> makeNumber(final List<Integer> values) {
         return values.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .toList();
     }
 
