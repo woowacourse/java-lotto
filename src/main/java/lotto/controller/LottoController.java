@@ -37,7 +37,7 @@ public class LottoController {
 
     private LottoTicket purchaseLotto(int purchaseAmount) {
         LottoTicket lottoTicket = cashier.payForLotto(purchaseAmount);
-        outputView.printLottos(lottoTicket.getLottos());
+        outputView.printLottos(lottoTicket.lottos());
         return lottoTicket;
     }
 
