@@ -3,7 +3,7 @@ package lotto.common.utill;
 import static lotto.common.constant.ErrorMessage.*;
 import static lotto.common.utill.InputParser.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.AssertionsForInterfaceTypes.*;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ class InputParserTest {
         void parseError_IncludeNotDigit() {
             String str = "1000익";
             assertThatThrownBy(() -> parseToInt(str))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(NumberFormatException.class)
                 .hasMessage(ERROR_NOT_NUMBER_TYPE.getMessage());
         }
 
@@ -37,7 +37,7 @@ class InputParserTest {
         void parseError_IncludeBlank() {
             String str = " ";
             assertThatThrownBy(() -> parseToInt(str))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(NumberFormatException.class)
                 .hasMessage(ERROR_NOT_NUMBER_TYPE.getMessage());
         }
 
@@ -46,7 +46,7 @@ class InputParserTest {
         void parseError_IncludeNull() {
             String str = "";
             assertThatThrownBy(() -> parseToInt(str))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(NumberFormatException.class)
                 .hasMessage(ERROR_NOT_NUMBER_TYPE.getMessage());
         }
     }
@@ -66,7 +66,7 @@ class InputParserTest {
         void parseError_IncludeNotDigit() {
             String str = "1000익,1,2,3,4,5";
             assertThatThrownBy(() -> parseToList(str))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(NumberFormatException.class)
                 .hasMessage(ERROR_NOT_NUMBER_TYPE.getMessage());
         }
 
@@ -75,7 +75,7 @@ class InputParserTest {
         void parseError_IncludeBlank() {
             String str = " ";
             assertThatThrownBy(() -> parseToList(str))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(NumberFormatException.class)
                 .hasMessage(ERROR_NOT_NUMBER_TYPE.getMessage());
         }
 
@@ -84,7 +84,7 @@ class InputParserTest {
         void parseError_IncludeNull() {
             String str = "";
             assertThatThrownBy(() -> parseToList(str))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(NumberFormatException.class)
                 .hasMessage(ERROR_NOT_NUMBER_TYPE.getMessage());
         }
     }
