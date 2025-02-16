@@ -23,9 +23,9 @@ public enum LottoPrize {
 
     public static LottoPrize getLottoPrize(int countMatched, boolean isBonusNumberMatched) {
         int countBonusNumberMatched = Boolean.compare(isBonusNumberMatched, false);
-        return Arrays.stream(LottoPrize.values()).filter(lottoPrize ->
-                        lottoPrize.countMatched == countMatched
-                                && lottoPrize.countBonusNumberMatched <= countBonusNumberMatched)
+        return Arrays.stream(LottoPrize.values())
+                .filter(lottoPrize -> lottoPrize.countMatched == countMatched
+                        && lottoPrize.countBonusNumberMatched <= countBonusNumberMatched)
                 .max(Comparator.comparing(LottoPrize::getMoney))
                 .orElse(LottoPrize.NOTHING);
     }

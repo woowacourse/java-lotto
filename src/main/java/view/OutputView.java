@@ -33,7 +33,7 @@ public class OutputView {
         Map<LottoPrize, Integer> prizeCounter = winningStatistics.prizeCounter();
         List<LottoPrize> lottoPrizes = Arrays.stream(LottoPrize.values())
                 .filter(lottoPrize -> lottoPrize != LottoPrize.NOTHING)
-                .sorted(Comparator.comparing((LottoPrize::getMoney)))
+                .sorted(Comparator.comparing(LottoPrize::getMoney))
                 .sorted(Comparator.reverseOrder())
                 .toList();
         for (LottoPrize lottoPrize : lottoPrizes) {
