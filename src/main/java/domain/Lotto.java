@@ -34,11 +34,7 @@ public class Lotto {
     }
 
     private boolean isNotValidRange(List<Integer> numbers) {
-        for (int number : numbers) {
-            if (number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
-                return true;
-            }
-        }
-        return false;
+        return numbers.stream()
+                .anyMatch(n -> n < LottoConstants.MIN_NUMBER || n > LottoConstants.MAX_NUMBER);
     }
 }

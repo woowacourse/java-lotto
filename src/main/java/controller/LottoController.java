@@ -36,13 +36,12 @@ public class LottoController {
 
     public Purchase readPurchaseAmount() {
         outputView.printPurchaseAmountInstruction();
-        while (true) {
-            try {
-                String purchaseAmountInput = inputView.readPurchaseAmount();
-                return new Purchase(purchaseAmountInput);
-            } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e.getMessage());
-            }
+        try {
+            String purchaseAmountInput = inputView.readPurchaseAmount();
+            return new Purchase(purchaseAmountInput);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return readPurchaseAmount();
         }
     }
 
@@ -61,25 +60,23 @@ public class LottoController {
 
     public WinningNumber readWinningNumber() {
         outputView.printWinningNumbersInstruction();
-        while (true) {
-            try {
-                String winningNumbersInput = inputView.readWinningNumbers();
-                return new WinningNumber(winningNumbersInput);
-            } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e.getMessage());
-            }
+        try {
+            String winningNumbersInput = inputView.readWinningNumbers();
+            return new WinningNumber(winningNumbersInput);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return readWinningNumber();
         }
     }
 
     public BonusNumber readBonusNumber(WinningNumber winningNumber) {
         outputView.printBonusNumbersInstruction();
-        while (true) {
-            try {
-                String bonusNumberInput = inputView.readBonusNumbers();
-                return new BonusNumber(bonusNumberInput, winningNumber);
-            } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e.getMessage());
-            }
+        try {
+            String bonusNumberInput = inputView.readBonusNumbers();
+            return new BonusNumber(bonusNumberInput, winningNumber);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return readBonusNumber(winningNumber);
         }
     }
 

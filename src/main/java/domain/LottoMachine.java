@@ -11,22 +11,22 @@ public class LottoMachine {
     public List<Lotto> generate(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         while (lottos.size() < lottoCount) {
-            try {
-                List<Integer> randomNumbers = NumberGenerator.pickUniqueRandomNumbers(
-                        MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT);
-                validateDuplication(randomNumbers, lottos);
-                lottos.add(new Lotto(randomNumbers));
-            } catch (IllegalStateException ignored) {
-            }
+            List<Integer> randomNumbers = getUniqueRandomNumbers(lottos);
+            lottos.add(new Lotto(randomNumbers));
         }
         return lottos;
     }
 
-    private void validateDuplication(List<Integer> randomNumbers, List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            if (lotto.isSameWith(randomNumbers)) {
-                throw new IllegalStateException();
-            }
-        }
+    private List<Integer> getUniqueRandomNumbers(List<Lotto> lottos) {
+        List<Integer> randomNumbers;
+        do {
+            randomNumbers = NumberGenerator.pickUniqueRandomNumbers(MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT);
+        } while (isDuplicated(randomNumbers, lottos));
+        return randomNumbers;
+    }
+
+    private boolean isDuplicated(List<Integer> randomNumbers, List<Lotto> lottos) {
+        return lottos.stream()
+                .anyMatch(lotto -> lotto.isSameWith(randomNumbers));
     }
 }
