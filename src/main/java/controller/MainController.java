@@ -9,6 +9,7 @@ import domain.RandomIntegerGenerator;
 import domain.StatisticsService;
 import domain.WinningStatistics;
 import domain.WinningStatisticsAndProfit;
+import util.RetryHandler;
 import view.InputView;
 import view.OutputView;
 
@@ -37,9 +38,11 @@ public class MainController {
     }
 
     private DrawResult inputDrawResult() {
-        LottoNumbers winningLottoNumbers = InputView.inputWinningLottoNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
-        return new DrawResult(winningLottoNumbers, bonusNumber);
+        return (DrawResult) RetryHandler.retryUntilSuccessWithReturn(() -> {
+            LottoNumbers winningLottoNumbers = InputView.inputWinningLottoNumbers();
+            int bonusNumber = InputView.inputBonusNumber();
+            return new DrawResult(winningLottoNumbers, bonusNumber);
+        });
     }
 
     private WinningStatisticsAndProfit calculateWinningStatisticsAndProfit(LottoTickets lottoTickets,
