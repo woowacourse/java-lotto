@@ -21,7 +21,7 @@ class LottoTest {
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 
         // when
-        Lotto lotto = Lotto.from(randomNumberGenerator);
+        Lotto lotto = Lotto.from(randomNumberGenerator.generateNumber());
 
         // then
         Assertions.assertThat(lotto).isInstanceOf(Lotto.class);
