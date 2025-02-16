@@ -12,9 +12,14 @@ import lotto.domain.Profit;
 import lotto.domain.Rank;
 import lotto.domain.WinnerLotto;
 import lotto.utils.NumberUtils;
-import lotto.utils.RandomNumberUtils;
 
 public class LottoService {
+
+    private final RandomService randomService;
+
+    public LottoService(RandomService randomService) {
+        this.randomService = randomService;
+    }
 
     public Money getMoney(String input) {
         int money = NumberUtils.parseInt(input);
@@ -24,7 +29,8 @@ public class LottoService {
     public LottoGroup generateLottoGroupByMoney(Money money) {
         int lottoTicketCount = money.getLottoTicketCount();
 
-        List<Lotto> lottoList = RandomNumberUtils.generateRandomNumbersList(lottoTicketCount, LOTTO_NUM_SIZE, MAX_LOTTO_NUMBER)
+        List<Lotto> lottoList = randomService.generateRandomNumbersList(lottoTicketCount, LOTTO_NUM_SIZE,
+                        MAX_LOTTO_NUMBER)
                 .stream()
                 .map(this::toLottoNumbers)
                 .map(Lotto::from)
