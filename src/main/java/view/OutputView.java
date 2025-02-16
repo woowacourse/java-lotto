@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import model.Lotto;
 import model.LottoRepository;
 import model.RankType;
+import model.WinningStatistics;
 
 public class OutputView {
     private static final String BUY_QUANTITY_PROMPT = "%d개를 구매했습니다.";
@@ -43,10 +44,10 @@ public class OutputView {
         System.out.println(String.format(WINNING_RATE_INFORMATION_UNDER_1, winningRate));
     }
 
-    public static void printResult(final Map<RankType, Integer> rankTypeMap) {
+    public static void printResult(final WinningStatistics winningStatistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println(makeLottoResult(rankTypeMap));
+        System.out.println(makeLottoResult(winningStatistics.getWinningStatistics()));
     }
 
     public static String makeLottoResult(final Map<RankType, Integer> map){
@@ -54,10 +55,10 @@ public class OutputView {
 
         for(RankType rankType : map.keySet()){
             if(rankType == RankType.SECOND){
-                stringBuilder.append(String.format(LOTTO_RESULT_BONUS_BALL_PRINT_FORMAT, rankType.getWinningCount(), rankType.getPrice(), map.get(rankType)));
+                stringBuilder.append(String.format(LOTTO_RESULT_BONUS_BALL_PRINT_FORMAT, rankType.getMatchCount(), rankType.getPrice(), map.get(rankType)));
                 continue;
             }
-            stringBuilder.append(String.format(LOTTO_RESULT_PRINT_FORMAT, rankType.getWinningCount(), rankType.getPrice(), map.get(rankType)));
+            stringBuilder.append(String.format(LOTTO_RESULT_PRINT_FORMAT, rankType.getMatchCount(), rankType.getPrice(), map.get(rankType)));
         }
 
         return stringBuilder.toString();

@@ -1,71 +1,43 @@
 package model;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public enum RankType {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
-    FIFTH(3, 5_000);
+    FIFTH(3, 5_000),
+    NONE(0, 0);
 
-    private int winningCount;
+    private int matchCount;
     private int price;
 
     RankType(int winningCount, int price) {
-        this.winningCount = winningCount;
+        this.matchCount = winningCount;
         this.price = price;
     }
 
-    public int getWinningCount() {
-        return winningCount;
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public int getPrice() {
         return price;
     }
 
-    public static Map<RankType, Integer> makeMap() {
-        Map<RankType, Integer> map = new LinkedHashMap<>();
-        for(RankType rankType : RankType.values()){
-            map.putIfAbsent(rankType, 0);
-        }
-        return map;
+    private static RankType checkSecondAndThird(boolean bonusBall){
+        if(bonusBall) return SECOND;
+        return THIRD;
     }
 
-    public static void updateMapByWinningCount(Map<RankType,Integer> map, int matchCount, boolean bonusBall) {
-        for (RankType rankType : map.keySet()) {
-            updateMap(map, bonusBall, rankType, matchCount);
+    public static RankType calculateRankType(boolean isBonusMatch, int matchCount){
+        if(matchCount == SECOND.matchCount){
+            return checkSecondAndThird(isBonusMatch);
         }
+        for(RankType rankType : values()){
+            if(rankType.matchCount == matchCount) return rankType;
+        }
+        return NONE;
     }
 
-    private static void updateMap(Map<RankType, Integer> map, boolean bonusBall, RankType rankType, int matchCount) {
-        if (rankType.winningCount != matchCount) return;
-        if (rankType.winningCount == 5) {
-            checkSecondAndThird(rankType, map, bonusBall);
-            return;
-        }
-        map.put(rankType, map.get(rankType) + 1);
-    }
 
-    private static void checkSecondAndThird(RankType rankTypeTemp, Map<RankType, Integer> map, boolean bonusBall){
-        if (rankTypeTemp == RankType.SECOND && bonusBall) {
-            map.put(rankTypeTemp, map.get(rankTypeTemp) + 1);
-            return;
-        }
-        if (rankTypeTemp == RankType.THIRD && !bonusBall) {
-            map.put(rankTypeTemp,map.get(rankTypeTemp) + 1);
-        }
-    }
-
-    public static int calculateTotalPrice(final Map<RankType, Integer> map){
-        int totalPrice = 0;
-
-        for(RankType rankType : map.keySet()){
-            totalPrice += rankType.price * map.get(rankType);
-        }
-
-        return totalPrice;
-    }
 }
