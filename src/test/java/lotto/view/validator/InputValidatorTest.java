@@ -61,7 +61,7 @@ class InputValidatorTest {
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> inputValidator.validateNumberFormat(inputs))
-                .withMessage(ExceptionMessage.INVALID_INPUT.getContent());
+                .withMessage(ExceptionMessage.INVALID_NUMBER_FORMAT.getContent());
     }
 
     static Stream<Arguments> 여러개의_문자열이_숫자형인지_검증할_수_있다() {

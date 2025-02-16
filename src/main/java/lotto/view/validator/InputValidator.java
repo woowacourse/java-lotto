@@ -23,7 +23,7 @@ public class InputValidator {
         try {
             List<Integer> numbers = numericContents.stream().map(Integer::parseInt).toList();
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getContent());
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_NUMBER_FORMAT.getContent());
         }
     }
 }
