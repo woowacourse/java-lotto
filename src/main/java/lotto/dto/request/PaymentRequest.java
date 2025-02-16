@@ -1,6 +1,6 @@
 package lotto.dto.request;
 
-import lotto.dto.ConvertUtil;
+import lotto.dto.util.ConvertUtil;
 
 public record PaymentRequest(
     int payment
