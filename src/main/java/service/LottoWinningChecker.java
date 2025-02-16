@@ -28,6 +28,6 @@ public class LottoWinningChecker {
 
         int correctCount = numbers.size();
         boolean isBonusCollect = lotto.getNumbers().contains(winningNumberWithBonusNumber.bonusNumber());
-        return LottoRanking.from(correctCount, isBonusCollect);
+        return LottoRanking.of(correctCount, isBonusCollect);
     }
 }
