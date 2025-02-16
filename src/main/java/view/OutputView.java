@@ -24,6 +24,10 @@ public class OutputView {
         System.out.println("거스름돈은 " + changeMoney + "원 입니다.");
     }
 
+    public static void printRateOfReturn(double rateOfReturn) {
+        System.out.println("총 수익률을 " + rateOfReturn + "입니다.");
+    }
+
     public static void printPrizeResult(final Map<Prize, Integer> prizeResult) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
@@ -33,16 +37,18 @@ public class OutputView {
     }
 
     private static void printSinglePrizeResult(Entry<Prize, Integer> entry) {
-        if (entry.getKey().equals(Prize.EMPTY)) {
+        if (entry.getKey().equals(Prize.MISS)) {
             return;
         }
+
         Prize currentPrize = entry.getKey();
         int prizeCount = entry.getValue();
-        System.out.printf("%s (%d원)- %d개%n", currentPrize.getMatchedMessage(), currentPrize.getPrizeMoney(),
-                prizeCount);
-    }
 
-    public static void printRateOfReturn(double rateOfReturn) {
-        System.out.println("총 수익률을 " + rateOfReturn + "입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.printf("%s개 일치", currentPrize.getMatchedCount());
+        if (currentPrize.isBonusRequired()) {
+            System.out.print(", 보너스 볼 일치");
+        }
+
+        System.out.printf(" (%d원)- %d개%n", currentPrize.getPrizeMoney(), prizeCount);
     }
 }

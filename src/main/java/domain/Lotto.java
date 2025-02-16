@@ -1,29 +1,35 @@
 package domain;
 
-import domain.numbergenerator.NumberGenerator;
-import dto.OutputLottosDto;
+import java.util.HashSet;
 import java.util.List;
-import validator.LottoValidator;
+import constants.ErrorMessage;
 
 public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
+        validate(numbers);
         this.numbers = numbers.stream().sorted().toList();
-        LottoValidator.validate(this.numbers);
     }
 
-    public static Lotto from(NumberGenerator numberGenerator) {
-        List<Integer> numbers = numberGenerator.generateNumber();
+    public static Lotto from(List<Integer> numbers) {
         return new Lotto(numbers);
     }
 
-    public boolean hasDuplicateNumber(final int bonusNumber) {
-        return numbers.stream().anyMatch(number -> number == bonusNumber);
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 
-    public OutputLottosDto getOutputLottoDto() {
-        return new OutputLottosDto(numbers);
+    public void validate(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_COUNT.getMessage());
+        }
+        if (hasDistinctNumber(numbers)) {
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_DUPLICATED.getMessage());
+        }
+        if (numbers.stream().anyMatch(number -> !isValidNumber(number))) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_RANGE.getMessage());
+        }
     }
 
     public boolean has(int number) {
@@ -43,5 +49,13 @@ public class Lotto {
             return 1;
         }
         return 0;
+    }
+
+    private boolean isValidNumber(int number) {
+        return number > 0 && number <= 45;
+    }
+
+    private boolean hasDistinctNumber(List<Integer> numbers) {
+        return new HashSet<>(numbers).size() != numbers.size();
     }
 }

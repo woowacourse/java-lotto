@@ -1,47 +1,48 @@
 package domain.enums;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public enum Prize {
-    EMPTY("", 0, 0),
-    FIFTH("3개 일치", 5_000, 3),
-    FOURTH("4개 일치", 50_000, 4),
-    THIRD("5개 일치", 150_000, 5),
-    SECOND("5개 일치, 보너스 볼 일치", 30_000_000, 5),
-    FIRST("6개 일치", 2_000_000_000, 6),
+    MISS(0, 0, false),
+    FIFTH( 5_000, 3, false),
+    FOURTH(50_000, 4, false),
+    THIRD( 150_000, 5, false),
+    SECOND( 30_000_000, 5, true),
+    FIRST(2_000_000_000, 6, false),
     ;
 
-    private String matchedMessage;
-    private int prizeMoney;
-    private int matchedCount;
-
-    public String getMatchedMessage() {
-        return matchedMessage;
-    }
+    private final int prizeMoney;
+    private final int matchedCount;
+    private final boolean isBonusRequired;
 
     public int getPrizeMoney() {
         return this.prizeMoney;
     }
 
-    Prize(String matchedMessage, int prizeMoney, int matchedCount) {
-        this.matchedMessage = matchedMessage;
+    public int getMatchedCount() {
+        return matchedCount;
+    }
+
+    public boolean isBonusRequired() {
+        return isBonusRequired;
+    }
+
+    Prize(int prizeMoney, int matchedCount, boolean isBonusRequired) {
         this.prizeMoney = prizeMoney;
         this.matchedCount = matchedCount;
+        this.isBonusRequired = isBonusRequired;
     }
 
     public static Prize getPrizeOf(int matchedCount, boolean isBonusMatched) {
-        List<Optional<Prize>> foundPrizes = new ArrayList<>();
         for (Prize prize : Prize.values()) {
-            foundPrizes.add(findPrize(matchedCount, isBonusMatched, prize));
+            Optional<Prize> foundPrize = findPrize(matchedCount, isBonusMatched, prize);
+            if (foundPrize.isEmpty()) {
+                continue;
+            }
+            return foundPrize.get();
         }
 
-        if (foundPrizes.stream().noneMatch(Optional::isPresent)) {
-            return Prize.EMPTY;
-        }
-
-        return foundPrizes.stream().filter(Optional::isPresent).findFirst().get().get();
+        return Prize.MISS;
     }
 
     private static Optional<Prize> findPrize(int matchedCount, boolean isBonusMatched, Prize prize) {
@@ -51,6 +52,7 @@ public enum Prize {
         if (isBonusMatched && prize.equals(Prize.THIRD)) {
             return Optional.of(Prize.SECOND);
         }
+
         return Optional.of(prize);
     }
 }

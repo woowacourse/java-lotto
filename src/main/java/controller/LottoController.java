@@ -23,13 +23,16 @@ public class LottoController {
         OutputView.printChangeMoney(money.getChange());
 
         Lottos lottos = getLottos(money.getBuyableLottoCount());
-        OutputView.printLottos(lottos.getOutputLottosDtos());
+        OutputView.printLottos(lottoService.getLottosDtos(lottos.getLottos()));
 
+        AnswerLotto answerLotto = getAnswerLotto();
+        printPrizeResult(answerLotto, lottos);
+    }
+
+    private AnswerLotto getAnswerLotto() {
         List<Integer> answerNumbers = getAnswerNumbers();
         int bonusNumber = getBonusNumber();
-        AnswerLotto answerLotto = lottoService.getAnswerLotto(answerNumbers, bonusNumber);
-
-        printPrizeResult(answerLotto, lottos);
+        return lottoService.getAnswerLotto(answerNumbers, bonusNumber);
     }
 
     private void printPrizeResult(AnswerLotto answerLotto, Lottos lottos) {
