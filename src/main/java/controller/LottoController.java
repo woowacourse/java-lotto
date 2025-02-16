@@ -12,43 +12,43 @@ import view.OutputView;
 
 public class LottoController {
 
-  private final InputView inputView;
-  private final OutputView outputView;
+    private final InputView inputView;
+    private final OutputView outputView;
 
-  public LottoController(InputView inputView, OutputView outputView) {
-    this.inputView = inputView;
-    this.outputView = outputView;
-  }
+    public LottoController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
 
-  public void run() {
-    Money money = creaeteMoney();
+    public void run() {
+        Money money = creaeteMoney();
 
-    LottoFactory lottoFactory = new LottoFactory(money);
-    outputView.displayLottos(money.calculateTotalLotto(), lottoFactory.createResult());
+        LottoFactory lottoFactory = new LottoFactory(money);
+        outputView.displayLottos(money.calculateTotalLotto(), lottoFactory.createResult());
 
-    WinningLotto winningLotto = createWinningLotto();
-    Map<LottoMatch, Integer> lottoResult = lottoFactory.countLottos(winningLotto);
-    outputView.displayResult(lottoResult);
+        WinningLotto winningLotto = createWinningLotto();
+        Map<LottoMatch, Integer> lottoResult = lottoFactory.countLottos(winningLotto);
+        outputView.displayResult(lottoResult);
 
-    double profit = money.calculateProfit(lottoResult);
-    outputView.displayProfit(profit);
-  }
+        double profit = money.calculateProfit(lottoResult);
+        outputView.displayProfit(profit);
+    }
 
-  private Money creaeteMoney() {
-    String inputMoney = inputView.inputLottoMoney();
-    Validator.inputValidatorIsNull(inputMoney);
+    private Money creaeteMoney() {
+        String inputMoney = inputView.inputLottoMoney();
+        Validator.inputValidatorIsNull(inputMoney);
 
-    return new Money(InputParser.parseStringToInteger(inputMoney));
-  }
+        return new Money(InputParser.parseStringToInteger(inputMoney));
+    }
 
-  private WinningLotto createWinningLotto() {
-    String inputWinningNumber = inputView.inputWinningNumbers();
-    Validator.inputValidatorIsNull(inputWinningNumber);
+    private WinningLotto createWinningLotto() {
+        String inputWinningNumber = inputView.inputWinningNumbers();
+        Validator.inputValidatorIsNull(inputWinningNumber);
 
-    String inputBonusNumber = inputView.inputBonusNumber();
-    Validator.inputValidatorIsNull(inputBonusNumber);
+        String inputBonusNumber = inputView.inputBonusNumber();
+        Validator.inputValidatorIsNull(inputBonusNumber);
 
-    return new WinningLotto(InputParser.parseStringToList(inputWinningNumber),
-        InputParser.parseStringToInteger(inputBonusNumber));
-  }
+        return new WinningLotto(InputParser.parseStringToList(inputWinningNumber),
+            InputParser.parseStringToInteger(inputBonusNumber));
+    }
 }
