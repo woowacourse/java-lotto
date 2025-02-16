@@ -7,14 +7,14 @@ import lotto.domain.Money;
 import lotto.domain.Profit;
 import lotto.domain.WinnerLotto;
 import lotto.service.LottoService;
-import lotto.service.RandomServiceImpl;
+import lotto.service.RandomLottoServiceImpl;
 import lotto.utils.RecoveryUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class Main {
 
-    private static final LottoService lottoService = new LottoService(new RandomServiceImpl());
+    private static final LottoService lottoService = new LottoService(new RandomLottoServiceImpl());
 
     public static void main(String[] args) {
         Money money = RecoveryUtils.executeWithRetry(() -> lottoService.getMoney(InputView.readMoney()));

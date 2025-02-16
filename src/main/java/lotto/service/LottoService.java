@@ -15,10 +15,10 @@ import lotto.utils.NumberUtils;
 
 public class LottoService {
 
-    private final RandomService randomService;
+    private final RandomLottoService randomLottoService;
 
-    public LottoService(RandomService randomService) {
-        this.randomService = randomService;
+    public LottoService(RandomLottoService randomLottoService) {
+        this.randomLottoService = randomLottoService;
     }
 
     public Money getMoney(String input) {
@@ -29,13 +29,15 @@ public class LottoService {
     public LottoGroup generateLottoGroupByMoney(Money money) {
         int lottoTicketCount = money.getLottoTicketCount();
 
-        List<Lotto> lottoList = randomService.generateRandomNumbersList(lottoTicketCount, LOTTO_NUM_SIZE,
+        List<Lotto> lottoList = randomLottoService.generateLottoList(lottoTicketCount, LOTTO_NUM_SIZE,
                         MAX_LOTTO_NUMBER)
                 .stream()
                 .toList();
 
         return LottoGroup.from(lottoList);
     }
+
+
 
 
     public String getLottoGroupMessage(LottoGroup lottoGroup) {

@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
-public class RandomServiceImpl implements RandomService {
+public class RandomLottoServiceImpl implements RandomLottoService {
 
     private static final Random random = new Random();
 
@@ -16,7 +16,7 @@ public class RandomServiceImpl implements RandomService {
         return random.nextInt(maxNumber) + 1;
     }
 
-    public List<LottoNumber> generateRandomNumbers(int maxSize, int maxNumber) {
+    public List<LottoNumber> generateRandomLottoNumbers(int maxSize, int maxNumber) {
         List<Integer> randomNumbers = generateUniqueRandomNumbers(maxSize, maxNumber);
         return randomNumbers.stream()
                 .map(LottoNumber::new)
@@ -35,9 +35,9 @@ public class RandomServiceImpl implements RandomService {
                 .toList();
     }
 
-    public List<Lotto> generateRandomNumbersList(int count, int maxSize, int maxNumber) {
+    public List<Lotto> generateLottoList(int count, int maxSize, int maxNumber) {
         return IntStream.range(0, count)
-                .mapToObj(i -> generateRandomNumbers(maxSize, maxNumber))
+                .mapToObj(i -> generateRandomLottoNumbers(maxSize, maxNumber))
                 .map(Lotto::new)
                 .toList();
     }
