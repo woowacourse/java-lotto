@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class InputConverter {
 
-    private static final String WINNING_NUMBER_REGEX = "([0-9]+)(,[0-9]+)*";
+    private static final String WINNING_NUMBER_REGEX = "([0-9]+)(,( )*[0-9]+)*";
     private static final String NUMBER_REGEX = "[0-9]+";
     private static final String WINNING_NUMBER_DELIMITER = ",";
 
@@ -26,6 +26,7 @@ public class InputConverter {
         }
 
         List<LottoNumber> winningLottoNumbers = Arrays.stream(input.split(WINNING_NUMBER_DELIMITER))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .peek(InputConverter::validateNumberRange)
                 .map(LottoNumber::of)
