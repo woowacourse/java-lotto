@@ -1,6 +1,6 @@
 package controller;
 
-import constans.ErrorType;
+import constants.ErrorType;
 import generator.RandomNumberGenerator;
 import java.util.List;
 import java.util.function.Supplier;

@@ -1,6 +1,6 @@
 package generator;
 
-import constans.ErrorType;
+import constants.ErrorType;
 import java.util.List;
 
 public abstract class RandomNumberGenerator {

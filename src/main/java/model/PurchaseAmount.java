@@ -1,6 +1,6 @@
 package model;
 
-import constans.ErrorType;
+import constants.ErrorType;
 
 public class PurchaseAmount {
 

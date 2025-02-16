@@ -1,6 +1,6 @@
 package model;
 
-import constans.ErrorType;
+import constants.ErrorType;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
