@@ -1,24 +1,29 @@
 package lotto.model;
 
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_COUNT;
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
+import static lotto.rule.LottoConstants.Number.LOTTO_NUMBER_COUNT;
+import static lotto.rule.LottoConstants.Number.LOTTO_NUMBER_MAX;
+import static lotto.rule.LottoConstants.Number.LOTTO_NUMBER_MIN;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class Lotto {
 
-    private final Set<Integer> numbers;
+    private final SortedSet<Integer> numbers;
 
     public Lotto(Set<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers;
+        this.numbers = Collections.unmodifiableSortedSet(new TreeSet<>(numbers));
     }
 
     private void validateNumbers(Set<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_COUNT.value()) {
-            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        Objects.requireNonNull(numbers, "로또 번호는 null이 될 수 없습니다.");
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("로또 번호는 %d개여야 합니다.".formatted(LOTTO_NUMBER_COUNT));
         }
         for (int number : numbers) {
             validateNumberInRange(number);
@@ -26,15 +31,17 @@ public class Lotto {
     }
 
     private void validateNumberInRange(int number) {
-        if (number < LOTTO_NUMBER_MIN.value() || number > LOTTO_NUMBER_MAX.value()) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 수여야 합니다.");
+        boolean isOutOfRange = number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX;
+        if (isOutOfRange) {
+            throw new IllegalArgumentException(
+                    "로또 번호는 %d부터 %d 사이의 수여야 합니다.".formatted(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX));
         }
     }
 
-    public int getMatchCount(Lotto lotto) {
-        Set<Integer> me = new HashSet<>(Set.copyOf(this.numbers));
-        me.retainAll(lotto.getNumbers());
-        return me.size();
+    public int countMatchingNumbers(Lotto otherLotto) {
+        Set<Integer> thisNumbers = new HashSet<>(numbers);
+        thisNumbers.retainAll(otherLotto.numbers);
+        return thisNumbers.size();
     }
 
     public boolean contains(int number) {
@@ -42,6 +49,6 @@ public class Lotto {
     }
 
     public Set<Integer> getNumbers() {
-        return Set.copyOf(numbers);
+        return numbers;
     }
 }

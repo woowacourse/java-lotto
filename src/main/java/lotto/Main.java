@@ -1,6 +1,9 @@
 package lotto;
 
 import lotto.controller.LottoController;
+import lotto.model.Cashier;
+import lotto.model.LottoMachine;
+import lotto.model.RandomNumberPicker;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -12,8 +15,14 @@ public class Main {
     }
 
     private static LottoController initializeController() {
-        InputView inputView = new InputView();
-        OutputView outputView = new OutputView();
-        return new LottoController(inputView, outputView);
+        return new LottoController(new InputView(), new OutputView(), createCashier());
+    }
+
+    private static Cashier createCashier() {
+        return new Cashier(createRandomLottoMachine());
+    }
+
+    private static LottoMachine createRandomLottoMachine() {
+        return new LottoMachine(new RandomNumberPicker());
     }
 }
