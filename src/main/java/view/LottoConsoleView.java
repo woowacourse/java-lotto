@@ -2,7 +2,6 @@ package view;
 
 import controller.dto.LottoRankResponse;
 import controller.dto.LottoTicketResponse;
-import controller.dto.WinningLottoRequest;
 import java.util.List;
 
 public class LottoConsoleView {
@@ -30,14 +29,14 @@ public class LottoConsoleView {
         outputView.printPurchasedLottos(lottoTicketResponses);
     }
 
-    public WinningLottoRequest requestWinningLotto() {
+    public List<Integer> requestWinningNumbers() {
         String rawWinningNumbers = inputView.inputWinningNumbers();
-        List<Integer> parsedWinningNumbers = lottoParser.parseWinningNumbers(rawWinningNumbers);
+        return lottoParser.parseWinningNumbers(rawWinningNumbers);
+    }
 
+    public int requestBonusNumber() {
         String rawBonusNumber = inputView.inputBonusNumber();
-        int parsedBonusNumber = lottoParser.parseBonusNumber(rawBonusNumber);
-
-        return new WinningLottoRequest(parsedWinningNumbers, parsedBonusNumber);
+        return lottoParser.parseBonusNumber(rawBonusNumber);
     }
 
     public void printLottoRankResults(List<LottoRankResponse> lottoRankResponses) {

@@ -37,8 +37,9 @@ public class LottoController {
     }
 
     private WinningLottoRequest createWinningLotto() {
-        WinningLottoRequest winningLottoRequest = lottoConsoleView.requestWinningLotto();
-        return winningLottoRequest;
+        List<Integer> winningNumbers = lottoConsoleView.requestWinningNumbers();
+        int bonusNumber = lottoConsoleView.requestBonusNumber();
+        return new WinningLottoRequest(winningNumbers, bonusNumber);
     }
 
     private LottoRankResultResponse calculateRank(
