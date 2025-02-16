@@ -27,10 +27,15 @@ class WinnerNumberTest {
         int bonusBall = 7;
 
         WinnerNumber winnerNumber = new WinnerNumber(winnerNumbers, bonusBall);
-        winnerNumber.compareLottoToWinning(lottos);
+        LottoCalculator result = winnerNumber.compareLottoToWinning(lottos);
 
-        for (LottoResult result : LottoResult.values()) {
-            Assertions.assertThat(result.getCount()).isEqualTo(1);
+        Assertions.assertThat(result).isNotNull();
+
+        for (LottoResult lottoResult : LottoResult.values()) {
+            int expected = result.findTargetResultCount(
+                    LottoResult.findTargetResult(lottoResult.getPrice(), lottoResult.isBonus()));
+            Assertions.assertThat(expected)
+                    .isEqualTo(1);
         }
     }
 }
