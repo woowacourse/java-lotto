@@ -40,9 +40,9 @@ public class LottoController {
 
     private void processLottoDrawing(PurchaseHistory purchaseHistory) {
         List<Integer> basicNumbers = InputConverter.convertToList(viewFacade.getWinningNumbers());
-        Lotto basicLotto = LottoFactory.createCustomLotto(basicNumbers);
+        //Lotto basicLotto = LottoFactory.createCustomLotto(basicNumbers);
         int bonusNumber = InputConverter.convertToInteger(viewFacade.getBonusNumber());
-        lottoEvaluationService.evaluateLottos(purchaseHistory.lottos, basicLotto, bonusNumber);
+        lottoEvaluationService.evaluateLottos(purchaseHistory.lottos, basicNumbers, bonusNumber);
     }
 
     private void processStatistics(PurchaseHistory purchaseHistory) {

@@ -66,9 +66,13 @@ public class Lotto {
 
     private void validateNumbersRange(List<Integer> numbers) {
         for (Integer number : numbers) {
-            if (number < 1 || number > 45) {
-                throw new IllegalArgumentException(ErrorMessage.NUMBER_OUT_OF_RANGE.getMessage());
-            }
+            validateNumberRange(number);
+        }
+    }
+
+    private void validateNumberRange(Integer number) {
+        if (number < 1 || number > 45) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_OUT_OF_RANGE.getMessage());
         }
     }
 }

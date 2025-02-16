@@ -10,6 +10,11 @@ import util.RandomGenerator;
 
 public class LottoGenerateService {
     private static final Integer PRICE = 1000;
+    private final LottoFactory lottoFactory;
+
+    public LottoGenerateService(LottoFactory lottoFactory) {
+        this.lottoFactory = lottoFactory;
+    }
 
     public Lottos generateLottos(int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
@@ -18,7 +23,7 @@ public class LottoGenerateService {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            lottos.add(LottoFactory.createRandomLotto());
+            lottos.add(lottoFactory.createLotto());
         }
 
         return new Lottos(lottos);
