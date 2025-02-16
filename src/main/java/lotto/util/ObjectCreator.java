@@ -13,4 +13,13 @@ public class ObjectCreator {
             return Optional.empty();
         }
     }
+
+    public static <T> T repeatUntilSuccess(Supplier<Optional<T>> supplier) {
+        Optional<T> result = Optional.empty();
+
+        while (result.isEmpty()) {
+            result = supplier.get();
+        }
+        return result.get();
+    }
 }
