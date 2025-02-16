@@ -1,12 +1,11 @@
 package controller;
 
-import java.util.Map;
 import model.BonusNumber;
 import model.Lotto;
 import model.LottoRepository;
-import model.RankType;
 import model.UserLotto;
 import model.Wallet;
+import model.WinningStatistics;
 import view.InputView;
 import view.OutputView;
 import view.util.RandomNumberGenerator;
@@ -19,28 +18,27 @@ public class LottoController {
 
         buyLottoForUserMoney(lottoRepository, wallet.getPurchasableQuantity());
 
-        OutputView.printBuyQuantity(wallet.getPurchasableQuantity());
+        OutputView.printBuyQuantity(wallet);
         OutputView.printRandomLotto(lottoRepository);
-        
-        UserLotto userLotto = createUserLotto();
-        BonusNumber bonusNumber = isDuplicateBonusNumber(userLotto);
 
-        calculateResultAndPrintResult(wallet.getMoney(), lottoRepository, userLotto, bonusNumber);
+        UserLotto userLotto = createUserLotto();
+
+        calculateResultAndPrintResult(wallet, lottoRepository, userLotto);
     }
 
-    private static Wallet createWallet(){
+    private static Wallet createWallet() {
         try {
             return new Wallet(InputView.inputAndValidateUserMoney());
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return createWallet();
         }
     }
 
-    private static UserLotto createUserLotto(){
-        try{
-            return new UserLotto(InputView.inputWinningNumbers());
-        } catch (IllegalArgumentException e){
+    private static UserLotto createUserLotto() {
+        try {
+            return new UserLotto(InputView.inputWinningNumbers(), new BonusNumber(InputView.inputBonusNumber()));
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return createUserLotto();
         }
@@ -48,37 +46,17 @@ public class LottoController {
 
     private static void buyLottoForUserMoney(LottoRepository lottoRepository, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            lottoRepository.addLotto(new Lotto(RandomNumberGenerator.makeRandomNumber()));
+            lottoRepository.addLotto(new Lotto(new RandomNumberGenerator()));
         }
     }
 
+    public static void calculateResultAndPrintResult(Wallet wallet, LottoRepository lottoRepository,
+                                                     UserLotto userLotto) {
+        WinningStatistics winningStatistics = new WinningStatistics(lottoRepository, userLotto);
 
-    public static BonusNumber isDuplicateBonusNumber(UserLotto userLotto) {
-        try {
-            BonusNumber bonusNumber = new BonusNumber(InputView.isNumericBonusNumber());
-            userLotto.isDuplicateBonusNumber(bonusNumber.getBonusNumber());
-            return bonusNumber;
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return isDuplicateBonusNumber(userLotto);
-        }
-    }
+        OutputView.printResult(winningStatistics);
 
-    public static void calculateResultAndPrintResult(int userMoney, LottoRepository lottoRepository, UserLotto userLotto, BonusNumber bonusNumber) {
-        Map<RankType, Integer> rankTypeMap = RankType.makeMap();
-
-        for (Lotto lotto : lottoRepository.getLottos()) {
-            RankType.updateMapByWinningCount(rankTypeMap, userLotto.calculateMatchCount(lotto), bonusNumber.isBonusNumber(lotto));
-        }
-
-        OutputView.printResult(rankTypeMap);
-
-        OutputView.printWinningRate(calculateWinningRate(userMoney,rankTypeMap));
-    }
-
-    private static double calculateWinningRate(int userMoney, Map<RankType, Integer> map){
-        int totalPrice = RankType.calculateTotalPrice(map);
-        return (double)totalPrice / userMoney;
+        OutputView.printWinningRate(winningStatistics.calculateWinningRate(wallet));
     }
 
 

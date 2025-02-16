@@ -1,6 +1,5 @@
 package model;
 
-
 public class Wallet {
     private static final int LOTTO_PRICE_PER_ONE = 1000;
     private int money;

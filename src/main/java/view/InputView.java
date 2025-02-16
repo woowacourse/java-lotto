@@ -36,48 +36,48 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static List<Integer> inputWinningNumbers(){
+    public static List<Integer> inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBER_PROMPT);
         try {
             String input = read();
             isValidDelimiter(input);
             return splitWinningNumbers(input);
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputWinningNumbers();
         }
     }
 
-    private static int parseInt(String input){
+    private static int parseInt(String input) {
         isNumeric(input);
         return Integer.parseInt(input);
     }
 
-    private static void isValidDelimiter(String input){
+    private static void isValidDelimiter(String input) {
         String regex = DELIMITER_VALIDATE_REGEX;
-        if(!input.matches(regex)){
+        if (!input.matches(regex)) {
             throw new IllegalArgumentException("당첨번호 형식이 올바르지 않습니다.");
         }
     }
 
-    private static List<Integer> splitWinningNumbers(String input){
+    private static List<Integer> splitWinningNumbers(String input) {
         List<Integer> winningNumbers = new ArrayList<>();
 
         for (String value : input.split(COMMA_REGEX)) {
             winningNumbers.add(Integer.parseInt(value));
         }
 
-        return  winningNumbers;
+        return winningNumbers;
     }
 
-    public static int isNumericBonusNumber() {
+    public static int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_PROMPT);
         String bonusNumberString = read();
         try {
             return parseInt(bonusNumberString);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return isNumericBonusNumber();
+            return inputBonusNumber();
         }
     }
 }
