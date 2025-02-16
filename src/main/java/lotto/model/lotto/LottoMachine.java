@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.model.Money;
-import lotto.model.lotto.generator.NumbersGenerator;
+import lotto.controller.generator.NumbersGenerator;
 
 public class LottoMachine {
 

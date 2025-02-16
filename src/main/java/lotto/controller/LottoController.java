@@ -2,12 +2,12 @@ package lotto.controller;
 
 import java.util.List;
 
+import lotto.controller.generator.LottoNumbersGenerator;
 import lotto.model.Money;
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoMachine;
 import lotto.model.lotto.LottoNumber;
 import lotto.model.lotto.Lottos;
-import lotto.model.lotto.generator.LottoNumbersGenerator;
 import lotto.model.winning.WinningLotto;
 import lotto.model.winning.WinningResultResponses;
 import lotto.view.InputView;
@@ -47,7 +47,10 @@ public class LottoController {
 
     private Lottos issueRandomLottoTickets(final Money buyingAmount) {
         LottoMachine lottoMachine = new LottoMachine();
-        return lottoMachine.issueAutomatic(buyingAmount, new LottoNumbersGenerator());
+        LottoNumbersGenerator numbersGenerator = new LottoNumbersGenerator(
+                LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER, Lotto.LOTTO_SIZE
+        );
+        return lottoMachine.issueAutomatic(buyingAmount, numbersGenerator);
     }
 
     private void printIssuedLottoTickets(final Lottos lottoTickets) {
