@@ -1,5 +1,9 @@
 package model;
 
+import static model.Lotto.LOTTO_SIZE;
+import static model.Lotto.MAXIMUM_LOTTO_NUMBER;
+import static model.Lotto.MINIMUM_LOTTO_NUMBER;
+
 import dto.LottoDto;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,7 +82,7 @@ public class WinningLotto {
 
     private void validateDuplicateWinningNumbers() {
         Set<Integer> set = new HashSet<>(winningNumbers);
-        if (set.size() != 6) {
+        if (set.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(WINNING_NUMBERS_INPUT_ERROR_MESSAGE);
         }
     }
@@ -88,7 +92,7 @@ public class WinningLotto {
     }
 
     private boolean isValidateNumberRange(int number) {
-        return number >= 1 && number <= 45;
+        return number >= MINIMUM_LOTTO_NUMBER && number <= MAXIMUM_LOTTO_NUMBER;
     }
 
 }
