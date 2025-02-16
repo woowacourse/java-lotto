@@ -30,7 +30,7 @@ public class OutputView {
     }
 
     private static void printWinningStatistics(WinningStatistics winningStatistics) {
-        Map<LottoPrize, Integer> prizeCounter = winningStatistics.getPrizeCounter();
+        Map<LottoPrize, Integer> prizeCounter = winningStatistics.prizeCounter();
         List<LottoPrize> lottoPrizes = Arrays.stream(LottoPrize.values())
                 .filter(lottoPrize -> lottoPrize != LottoPrize.NOTHING)
                 .sorted(Comparator.comparing((LottoPrize::getMoney)))

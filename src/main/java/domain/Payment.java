@@ -1,13 +1,11 @@
 package domain;
 
-public class Payment {
+public record Payment(int money) {
     public static int UNIT = LottoTicket.LOTTO_PRICE;
-    private final int money;
 
-    public Payment(int money) {
+    public Payment {
         validatePositive(money);
         validateUnit(money);
-        this.money = money;
     }
 
     private void validatePositive(int money) {
@@ -20,9 +18,5 @@ public class Payment {
         if (money % UNIT != 0) {
             throw new IllegalArgumentException("올바르지 않은 구매금액 단위입니다.");
         }
-    }
-
-    public int getMoney() {
-        return money;
     }
 }

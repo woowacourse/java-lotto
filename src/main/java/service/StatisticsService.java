@@ -16,8 +16,8 @@ public class StatisticsService {
 
         lottoTickets.getLottoTickets()
                 .forEach(lottoTicket -> {
-                    int countMatched = lottoTicket.countMatchedLottoNumbers(drawResult.getWinningLottoNumbers());
-                    boolean isBonusNumberMatched = lottoTicket.containsLottoNumber(drawResult.getBonusNumber());
+                    int countMatched = lottoTicket.countMatchedLottoNumbers(drawResult.winningLottoNumbers());
+                    boolean isBonusNumberMatched = lottoTicket.containsLottoNumber(drawResult.bonusNumber());
                     LottoPrize prize = LottoPrize.getLottoPrize(countMatched, isBonusNumberMatched);
                     int prizeCount = prizeCounter.get(prize);
                     prizeCounter.put(prize, prizeCount + 1);
@@ -34,7 +34,7 @@ public class StatisticsService {
     public double calculateProfit(WinningStatistics winningStatistics) {
         long sum = 0;
         long lottoTicketNumber = 0;
-        Map<LottoPrize, Integer> prizeCounter = winningStatistics.getPrizeCounter();
+        Map<LottoPrize, Integer> prizeCounter = winningStatistics.prizeCounter();
         for (LottoPrize lottoPrize : LottoPrize.values()) {
             sum += (long) prizeCounter.get(lottoPrize) * lottoPrize.getMoney();
             lottoTicketNumber += prizeCounter.get(lottoPrize);

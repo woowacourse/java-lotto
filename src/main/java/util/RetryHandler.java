@@ -8,7 +8,7 @@ public class RetryHandler {
         do {
             er = executeGivenMethod(supplier);
         } while (!er.isSuccess());
-        return (T) er.getResult();
+        return (T) er.result();
     }
 
     private static <T> ExecuteResult executeGivenMethod(Supplier<T> supplier) {
@@ -20,21 +20,6 @@ public class RetryHandler {
         return new ExecuteResult(null, false);
     }
 
-    static class ExecuteResult {
-        private final Object result;
-        private final boolean isSuccess;
-
-        public ExecuteResult(Object result, boolean isSuccess) {
-            this.result = result;
-            this.isSuccess = isSuccess;
-        }
-
-        public Object getResult() {
-            return result;
-        }
-
-        public boolean isSuccess() {
-            return isSuccess;
-        }
+    record ExecuteResult(Object result, boolean isSuccess) {
     }
 }

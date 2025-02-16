@@ -101,7 +101,7 @@ class StatisticsServiceTest {
 
         // when
         WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, drawResult);
-        Map<LottoPrize, Integer> prizeCounter = winningStatistics.getPrizeCounter();
+        Map<LottoPrize, Integer> prizeCounter = winningStatistics.prizeCounter();
 
         // then
         Assertions.assertThat(prizeCounter.get(LottoPrize.FIFTH)).isEqualTo(1);

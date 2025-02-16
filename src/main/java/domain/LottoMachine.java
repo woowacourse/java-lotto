@@ -31,7 +31,7 @@ public class LottoMachine {
 
     public LottoTickets generateLottoTickets(Payment payment) {
         List<LottoTicket> LottoTickets = new ArrayList<>();
-        for (int i = 0; i < payment.getMoney() / LottoTicket.LOTTO_PRICE; i++) {
+        for (int i = 0; i < payment.money() / LottoTicket.LOTTO_PRICE; i++) {
             LottoTicket LottoTicket = generateLottoTicket();
             LottoTickets.add(LottoTicket);
         }
