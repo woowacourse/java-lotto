@@ -17,6 +17,14 @@ public class WinningLotto {
         this.bonusNumber = validate(bonusNumber);
     }
 
+    public boolean matchBonusNumber(Lotto lotto) {
+        return lotto.containsNumber(bonusNumber);
+    }
+
+    public int matchCount(Lotto lotto) {
+        return lotto.getMatchCount(this.lotto);
+    }
+
     private int validate(String bonusNumber) {
         int parsedBonusNumber = Parser.validateNumber(bonusNumber, BONUS_NUMBER_FORMAT_ERROR);
         checkRange(parsedBonusNumber);
@@ -34,13 +42,5 @@ public class WinningLotto {
         if (lotto.containsNumber(bonusNumber)) {
             throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATED_ERROR);
         }
-    }
-
-    public Lotto getLotto() {
-        return lotto;
-    }
-
-    public int getBonusNumber() {
-        return bonusNumber;
     }
 }
