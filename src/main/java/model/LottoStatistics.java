@@ -18,16 +18,6 @@ public class LottoStatistics {
         lottoStatistics.remove(LottoWinRank.NONE);
     }
 
-    private Integer calculateTotalPrize() {
-        int sum = 0;
-        for (Entry<LottoWinRank, Integer> statisticsEntry : lottoStatistics.entrySet()) {
-            LottoWinRank lottoWinRank = statisticsEntry.getKey();
-            Integer count = statisticsEntry.getValue();
-            sum += lottoWinRank.getPrice() * count;
-        }
-        return sum;
-    }
-
     public Integer getCount(LottoWinRank lottoWinRank) {
         return lottoStatistics.get(lottoWinRank);
     }
@@ -38,5 +28,15 @@ public class LottoStatistics {
 
     public Set<Entry<LottoWinRank, Integer>> getStatisticsEntries() {
         return lottoStatistics.entrySet();
+    }
+
+    private Integer calculateTotalPrize() {
+        int sum = 0;
+        for (Entry<LottoWinRank, Integer> statisticsEntry : lottoStatistics.entrySet()) {
+            LottoWinRank lottoWinRank = statisticsEntry.getKey();
+            Integer count = statisticsEntry.getValue();
+            sum += lottoWinRank.getPrice() * count;
+        }
+        return sum;
     }
 }

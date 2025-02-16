@@ -19,14 +19,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = random.nextInt(MAXIMUM_LOTTO_NUMBER) + 1;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     private void validateBound(int number) {
         if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
             throw new IllegalArgumentException(NUMBER_BOUND_EXCEPTION);
         }
-    }
-
-    public int getNumber() {
-        return number;
     }
 
     @Override

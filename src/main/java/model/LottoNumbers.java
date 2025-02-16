@@ -21,18 +21,6 @@ public class LottoNumbers {
         this.numbers = numbers.stream().map(LottoNumber::new).toList();
     }
 
-    private List<LottoNumber> generateLottoNumbers() {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        while (lottoNumbers.size() < LOTTO_NUMBER_COUNT) {
-            lottoNumbers.add(new LottoNumber());
-        }
-        return lottoNumbers.stream().sorted().toList();
-    }
-
-    public List<LottoNumber> getNumbers() {
-        return numbers;
-    }
-
     public Integer countMatchNumber(LottoNumbers otherNumbers) {
         List<LottoNumber> matchList = otherNumbers.getNumbers().stream()
                 .filter(otherNumber -> numbers.stream().anyMatch((number) -> number.equals(otherNumber)))
@@ -42,6 +30,18 @@ public class LottoNumbers {
 
     public Boolean bonusMatch(LottoNumber bonusNumber) {
         return numbers.contains(bonusNumber);
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return numbers;
+    }
+
+    private List<LottoNumber> generateLottoNumbers() {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        while (lottoNumbers.size() < LOTTO_NUMBER_COUNT) {
+            lottoNumbers.add(new LottoNumber());
+        }
+        return lottoNumbers.stream().sorted().toList();
     }
 
     private void validateNumberCount(List<Integer> winNumbers) {
