@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoPrizeTest {
 
-    private static final MockedNumberGenerator mockedNumberGenerator = new MockedNumberGenerator();
+    private static final MockedNumberGenerator mockedNumberGenerator = new MockedNumberGenerator(null);
 
     private static Stream<Arguments> 보너스_볼이_매칭되지_않는_경우의_당첨_결과를_반환한다_테스트_케이스() {
         return Stream.of(

@@ -6,8 +6,8 @@ public class MockedNumberGenerator implements NumberGenerator {
 
     private List<Integer> numbersToGenerate;
 
-    public MockedNumberGenerator() {
-        this.numbersToGenerate = null;
+    public MockedNumberGenerator(List<Integer> numbersToGenerate) {
+        this.numbersToGenerate = numbersToGenerate;
     }
 
     public void setNumbersToGenerate(List<Integer> numbersToGenerate) {

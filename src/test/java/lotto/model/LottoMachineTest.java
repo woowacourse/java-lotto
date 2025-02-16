@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoMachineTest {
 
-    private final MockedNumberGenerator mockedNumberGenerator = new MockedNumberGenerator();
+    private final MockedNumberGenerator mockedNumberGenerator = new MockedNumberGenerator(null);
     private final LottoMachine lottoMachine = new LottoMachine(mockedNumberGenerator);
 
     @ParameterizedTest
