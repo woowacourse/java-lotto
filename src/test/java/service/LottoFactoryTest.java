@@ -2,7 +2,10 @@ package service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.List;
+import java.util.stream.Collectors;
 import model.Lotto;
 import model.LottoFactory;
 import model.Prize;
@@ -11,6 +14,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoFactoryTest {
+
+    private List<Integer> extractNumbersFromLotto(Lotto lotto) {
+        return Arrays.stream(lotto.toString()
+                        .replaceAll("[\\[\\]]", "") // [ ] 제거
+                        .split(", "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
 
     private LottoFactory lottoFactory;
 
@@ -31,8 +42,8 @@ class LottoFactoryTest {
     @DisplayName("발행된 티켓 내 숫자들은 모두 1 부터 45 사이여야 한다.")
     void validTicketRange() {
         for (Lotto issuedTicket : lottoFactory.getIssuedLottoTickets()) {
-            issuedTicket.getNumbers()
-                    .forEach(number -> assertThat(number).isBetween(1, 45));
+            List<Integer> numbers = extractNumbersFromLotto(issuedTicket);
+            numbers.forEach(number -> assertThat(number).isBetween(1, 45));
         }
     }
 
@@ -40,7 +51,8 @@ class LottoFactoryTest {
     @DisplayName("발행된 티켓 내 숫자 갯수는 6개여야 한다.")
     void validTicketSize() {
         for (Lotto issuedTicket : lottoFactory.getIssuedLottoTickets()) {
-            assertThat(issuedTicket.getNumbers().size()).isEqualTo(6);
+            List<Integer> numbers = extractNumbersFromLotto(issuedTicket);
+            assertThat(numbers.size()).isEqualTo(6);
         }
     }
 

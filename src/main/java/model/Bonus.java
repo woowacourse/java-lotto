@@ -7,8 +7,6 @@ import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
 import static constant.LottoConstant.LOTTO_NUMBER_MAX_RANGE;
 import static constant.LottoConstant.LOTTO_NUMBER_MIN_RANGE;
 
-import java.util.List;
-
 public class Bonus {
 
     private final Integer number;
@@ -30,8 +28,8 @@ public class Bonus {
         return number.equals(bonusNumber);
     }
 
-    public boolean compareBonusNumber(List<Integer> numbers) {
-        return numbers.contains(number);
+    public boolean isContainedIn(Lotto lotto) {
+        return lotto.contains(number);
     }
 
     private static void validateNullOrBlank(final String input) {
@@ -60,7 +58,7 @@ public class Bonus {
     }
 
     private void validateDuplicateWithLotto(final Integer number, final Lotto lotto) {
-        if (lotto.isDuplicated(number)) {
+        if (lotto.contains(number)) {
             throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER.getMessage());
         }
     }

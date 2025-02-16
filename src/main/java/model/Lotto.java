@@ -13,6 +13,7 @@ import static constant.LottoConstant.LOTTO_TICKET_SIZE;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
 
@@ -24,7 +25,7 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public Lotto(final List<Integer> numbers) {
+    private Lotto(final List<Integer> numbers) {
         validateSize(numbers);
         validateRange(numbers);
         validateDuplicate(numbers);
@@ -35,6 +36,20 @@ public class Lotto {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException(INVALID_INPUT_NULL_OR_BLANK.getMessage());
         }
+    }
+
+    public boolean contains(Integer number) {
+        return numbers.contains(number);
+    }
+
+    public int matchCount(Lotto issuedTicket) {
+        return (int) issuedTicket.numbers.stream()
+                .filter(this.numbers::contains)
+                .count();
+    }
+
+    public String toString() {
+        return numbers.toString();
     }
 
     private static List<Integer> parseLotto(String input) {
@@ -76,7 +91,19 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof Lotto other)) {
+            return false;
+        }
+        return Objects.equals(numbers, other.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }

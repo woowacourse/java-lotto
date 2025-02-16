@@ -40,7 +40,7 @@ public class OutputView {
     public static void printLottoTickets(final LottoFactory lottoFactory) {
         List<Lotto> issuedLottoTickets = lottoFactory.getIssuedLottoTickets();
         issuedLottoTickets.stream()
-                .map(lotto -> lotto.getNumbers().toString())
+                .map(Lotto::toString)
                 .forEach(OutputView::print);
 
         printNewLine();

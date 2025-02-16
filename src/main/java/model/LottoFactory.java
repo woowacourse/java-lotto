@@ -3,6 +3,7 @@ package model;
 import static constant.LottoConstant.DAMAGE;
 import static constant.LottoConstant.LOTTO_NUMBER_MAX_RANGE;
 import static constant.LottoConstant.LOTTO_PURCHASE_UNIT;
+import static constant.LottoConstant.LOTTO_SEPARATOR;
 import static constant.LottoConstant.LOTTO_TICKET_SIZE;
 import static constant.LottoConstant.PROFIT;
 import static model.Prize.initializeMap;
@@ -12,6 +13,7 @@ import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 
 public class LottoFactory {
@@ -33,8 +35,8 @@ public class LottoFactory {
     public EnumMap<Prize, Integer> getStatistic(Lotto lotto, Bonus bonus) {
         EnumMap<Prize, Integer> prizes = initializeMap();
         for (Lotto issuedTicket : issuedLottoTickets) {
-            int matchCount = compareLottoNumbers(lotto, issuedTicket);
-            boolean matchesBonus = bonus.compareBonusNumber(issuedTicket.getNumbers());
+            int matchCount = lotto.matchCount(issuedTicket);
+            boolean matchesBonus = bonus.isContainedIn(lotto);
             Prize foundPrize = Prize.find(matchCount, matchesBonus);
             prizes.put(foundPrize, prizes.get(foundPrize) + 1);
         }
@@ -64,21 +66,20 @@ public class LottoFactory {
     }
 
     private Lotto issueLottoTicket() {
-        HashSet<Integer> issuedTicket = new HashSet<>();
-        while (issuedTicket.size() < LOTTO_TICKET_SIZE) {
-            issuedTicket.add(getRandomNumber());
+        HashSet<Integer> issuedTicketSet = new HashSet<>();
+        while (issuedTicketSet.size() < LOTTO_TICKET_SIZE) {
+            issuedTicketSet.add(getRandomNumber());
         }
-        return new Lotto(new ArrayList<>(issuedTicket));
+
+        String issuedTicket = issuedTicketSet.stream()
+                .map(String::valueOf)  // int → String 변환
+                .collect(Collectors.joining(LOTTO_SEPARATOR));
+
+        return Lotto.of(issuedTicket);
     }
 
     private int getRandomNumber() {
         return random.nextInt(LOTTO_NUMBER_MAX_RANGE) + 1;
-    }
-
-    private int compareLottoNumbers(Lotto lotto, Lotto issuedTicket) {
-        return (int) issuedTicket.getNumbers().stream()
-                .filter(issuedNumber -> lotto.getNumbers().contains(issuedNumber))
-                .count();
     }
 
     private int calculateWinningAmount(EnumMap<Prize, Integer> prizes) {
