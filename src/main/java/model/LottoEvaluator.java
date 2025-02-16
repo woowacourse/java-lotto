@@ -1,7 +1,5 @@
 package model;
 
-import static constant.LottoConstant.LOTTO_PRICE;
-
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
@@ -28,11 +26,11 @@ public class LottoEvaluator {
 
     public double computeProfit(Lottos lottos) {
         Map<Prize, Integer> result = getResult(lottos);
-        int sum = 0;
-        for (var entry : result.entrySet()) {
-            sum += entry.getKey().price * entry.getValue();
-        }
-        return sum / (lottos.computeTicketCount() * (double) LOTTO_PRICE);
+        int sum = result.entrySet()
+                .stream()
+                .mapToInt(entry -> entry.getKey().price * entry.getValue())
+                .sum();
+        return sum / (double) lottos.computeTicketAmount();
     }
 
     public Optional<Prize> calculatePrize(Lotto userLotto) {

@@ -1,22 +1,24 @@
 package model;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class NumberTest {
 
-    @Test
-    void 로또_번호는_1부터_45사이여야_한다() {
-        LottoNumber number = new LottoNumber(40);
-        assertThat(number.value()).isEqualTo(40);
+    @ParameterizedTest
+    @ValueSource(ints = {1, 45})
+    void 로또_번호는_1부터_45사이여야_한다(int lottoNumber) {
+        assertThatCode(() -> new LottoNumber(lottoNumber)).doesNotThrowAnyException();
     }
 
-    @Test
-    void 로또_번호가_1부터_45사이가_아니면_예외가_발생한다() {
-        assertThatThrownBy(() -> {
-            new LottoNumber(46);
-        }).isInstanceOf(IllegalArgumentException.class);
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46, -1})
+    void 로또_번호가_1부터_45사이가_아니면_예외가_발생한다(int lottoNumber) {
+        assertThatThrownBy(() -> new LottoNumber(lottoNumber))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

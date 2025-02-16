@@ -1,8 +1,9 @@
 package model;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static util.LottoUtil.generateTestLotto;
 
-import org.assertj.core.api.Assertions;
+import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 class LottoGeneraterTest {
@@ -11,15 +12,9 @@ class LottoGeneraterTest {
     void 로또_생성을_테스트합니다() {
         CustomLottoNumberPicker customLottoNumberPicker = new CustomLottoNumberPicker();
         LottoGenerater lottoGenerater = new LottoGenerater(customLottoNumberPicker);
-        customLottoNumberPicker.addValue(1);
-        customLottoNumberPicker.addValue(2);
-        customLottoNumberPicker.addValue(3);
-        customLottoNumberPicker.addValue(4);
-        customLottoNumberPicker.addValue(5);
-        customLottoNumberPicker.addValue(6);
-
+        int[] lottoNumbers = {1, 2, 3, 4, 5, 6};
+        Arrays.stream(lottoNumbers).forEach(customLottoNumberPicker::addValue);
         Lotto lotto = lottoGenerater.generateLotto();
-
-        Assertions.assertThat(lotto).isEqualTo(generateTestLotto(1, 2, 3, 4, 5, 6));
+        assertThat(lotto).isEqualTo(generateTestLotto(lottoNumbers));
     }
 }
