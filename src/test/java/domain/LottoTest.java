@@ -6,10 +6,28 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import exception.ExceptionMessage;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
+
+    public static Stream<Arguments> getMatchedCountTest() {
+        return Stream.of(
+                Arguments.of(List.of(1, 2, 3, 4, 5, 6), 6),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 7), 5),
+                Arguments.of(List.of(1, 2, 3, 4, 7, 8), 4),
+                Arguments.of(List.of(1, 2, 3, 7, 8, 9), 3),
+                Arguments.of(List.of(1, 2, 7, 8, 9, 10), 2),
+                Arguments.of(List.of(1, 11, 7, 8, 9, 10), 1),
+                Arguments.of(List.of(12, 11, 7, 8, 9, 10), 0)
+        );
+    }
+
     @DisplayName("로또_번호_범위_테스트(1 미만의 값)")
     @Test
     void rangeTest1() {
@@ -52,4 +70,29 @@ class LottoTest {
         assertThat(numbers).containsExactly(1, 2, 3, 4, 5, 6);
     }
 
+    @DisplayName("hasNumber - 해당 번호가 있으면 TRUE 없으면 FALSE를 반환다.")
+    @ParameterizedTest
+    @CsvSource({"1,true", "2,true", "10,false", "45,false"})
+    void hasNumberTest(int number, boolean expected) {
+        // given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber lottoNumber = new LottoNumber(number);
+        // when
+        boolean hasNumber = lotto.hasNumber(lottoNumber);
+        // then
+        assertThat(hasNumber).isEqualTo(expected);
+    }
+
+    @DisplayName("hasNumber - 해당 번호가 있으면 TRUE 없으면 FALSE를 반환다.")
+    @ParameterizedTest
+    @MethodSource
+    void getMatchedCountTest(List<Integer> numbers, int expectedCount) {
+        // given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto compareLotto = new Lotto(numbers);
+        // when
+        int matchedCount = lotto.getMatchedCount(compareLotto);
+        // then
+        assertThat(matchedCount).isEqualTo(expectedCount);
+    }
 }

@@ -60,7 +60,7 @@ class WinningLottoTest {
 
     static class RandomNumberGenerate implements RandomGenerator {
         private static List<Integer> numberList = List.of(1, 2, 3, 4, 5, 6, 1, 2, 3, 8, 9, 10, 1, 2, 3, 4, 5, 10,
-                1,2,3,4,5,7);
+                1, 2, 3, 4, 5, 7);
         private int index = 0;
 
         @Override
