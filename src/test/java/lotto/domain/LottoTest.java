@@ -67,7 +67,7 @@ class LottoTest {
         Lotto userLotto = new Lotto("1, 2, 3, 10, 11 ,12");
 
         //when & then
-        assertThat(userLotto.match(winningLotto)).isEqualTo(3);
+        assertThat(userLotto.getMatchCount(winningLotto)).isEqualTo(3);
     }
 
     @Test
@@ -77,7 +77,7 @@ class LottoTest {
         int bonusNumber = 3;
 
         //when & then
-        assertThat(lotto.contains(bonusNumber)).isEqualTo(true);
+        assertThat(lotto.containsNumber(bonusNumber)).isEqualTo(true);
     }
 
     @Test
@@ -87,6 +87,6 @@ class LottoTest {
         int bonusNumber = 7;
 
         //when & then
-        assertThat(lotto.contains(bonusNumber)).isEqualTo(false);
+        assertThat(lotto.containsNumber(bonusNumber)).isEqualTo(false);
     }
 }

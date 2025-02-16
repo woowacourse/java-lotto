@@ -27,13 +27,13 @@ public class Lotto {
         validate(winningLottoInput);
     }
 
-    public int match(Lotto winningLottoNumber) {
+    public int getMatchCount(Lotto winningLottoNumber) {
         List<Integer> copiedLottoNumber = new ArrayList<>(lottoNumber);
         copiedLottoNumber.retainAll(winningLottoNumber.lottoNumber);
         return copiedLottoNumber.size();
     }
 
-    public boolean contains(int bonusNumber) {
+    public boolean containsNumber(int bonusNumber) {
         return lottoNumber.contains(bonusNumber);
     }
 

@@ -20,8 +20,8 @@ public class Lottos {
     private Prizes matchNumber(Lotto winningLottoNumber, int bonusNumber) {
         List<Prize> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.match(winningLottoNumber);
-            result.add(new Prize(matchCount, lotto.contains(bonusNumber)));
+            int matchCount = lotto.getMatchCount(winningLottoNumber);
+            result.add(new Prize(matchCount, lotto.containsNumber(bonusNumber)));
         }
         return new Prizes(result);
     }
