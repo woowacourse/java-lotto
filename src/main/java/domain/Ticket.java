@@ -12,7 +12,7 @@ public class Ticket {
 
     public static Ticket create(int price) {
         validatePrice(price);
-        int quantity = buy(price);
+        int quantity = calculateQuantity(price);
         return new Ticket(quantity);
     }
 
@@ -20,7 +20,7 @@ public class Ticket {
         return quantity;
     }
 
-    private static int buy(int price) {
+    private static int calculateQuantity(int price) {
         return price / TICKET_PRICE;
     }
 
