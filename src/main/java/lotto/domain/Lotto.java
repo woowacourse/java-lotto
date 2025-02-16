@@ -17,8 +17,8 @@ public class Lotto {
 
     private List<Integer> lottoNumber;
 
-    public Lotto(RandomLottoGenerator randomLottoGenerator) {
-        this.lottoNumber = randomLottoGenerator.generateLotto();
+    public Lotto(LottoGenerator lottoGenerator) {
+        this.lottoNumber = lottoGenerator.generateLotto();
     }
 
     public Lotto(String winningLottoInput) {

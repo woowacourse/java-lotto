@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -11,12 +12,24 @@ import org.junit.jupiter.params.provider.ValueSource;
 class LottoTest {
 
     @Test
-    void 로또_생성_검증_1() {
+    void 로또_생성_검증() {
         //given
         String inputLotto = "1, 2, 3, 4, 5, 6";
 
         //when & then
         Assertions.assertDoesNotThrow(() -> new Lotto(inputLotto));
+    }
+
+    @Test
+    void 랜덤_로또_생성_검증() {
+        //given
+        Lotto randomLotto = new Lotto(new FixedRandomLottoGenerator());
+        Lotto fixedLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        int expectedMatchCount = 6;
+
+        //when & then
+        assertThat(randomLotto.getMatchCount(fixedLotto))
+                .isEqualTo(expectedMatchCount);
     }
 
     @ParameterizedTest
@@ -65,9 +78,11 @@ class LottoTest {
         //given
         Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
         Lotto userLotto = new Lotto("1, 2, 3, 10, 11 ,12");
+        int expectedMatchCount = 3;
 
         //when & then
-        assertThat(userLotto.getMatchCount(winningLotto)).isEqualTo(3);
+        assertThat(userLotto.getMatchCount(winningLotto))
+                .isEqualTo(expectedMatchCount);
     }
 
     @Test
