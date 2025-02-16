@@ -16,11 +16,9 @@ public class WinningResult {
     }
 
     private long sumTotalProfit(Map<LottoRank, Integer> winningInfo) {
-        long sum = 0;
-        for (LottoRank lottoRank : winningInfo.keySet()) {
-            sum += lottoRank.calculateWinningAmount(winningInfo.get(lottoRank));
-        }
-
-        return sum;
+        return winningInfo.entrySet().stream()
+                .mapToLong(entry
+                        -> entry.getKey().calculateWinningAmount(entry.getValue()))
+                .sum();
     }
 }
