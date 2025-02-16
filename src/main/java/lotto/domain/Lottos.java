@@ -5,42 +5,28 @@ import java.util.List;
 
 public class Lottos {
     private List<Lotto> lottos = new ArrayList<>();
-    private RandomNumber randomNumber;
 
     public Lottos(int lottoCounts, RandomNumber randomNumber) {
-        this.randomNumber = randomNumber;
-        generateLottos(lottoCounts);
+        generateLottos(lottoCounts, randomNumber);
     }
 
-    private void generateLottos(int lottoCounts) {
+    private void generateLottos(int lottoCounts, RandomNumber randomNumber) {
         for (int i = 0; i < lottoCounts; i ++) {
-            lottos.add(new Lotto(randomNumber));
+            lottos.add(new Lotto(new LottoNumbers(randomNumber)));
         }
     }
 
-    public Prizes calculatePrize(WinningLotto winningLotto) {
-        Lotto winningLottoNumber = winningLotto.getLotto();
-        int bonusNumber = winningLotto.getBonusNumber();
-
-        return matchNumber(winningLottoNumber, bonusNumber);
-
-    }
-    private Prizes matchNumber(Lotto winningLottoNumber, int bonusNumber) {
-        List<Prize> result = new ArrayList<>();
+    public Prizes calculatePrize(Lotto winningLotto, LottoNumber bonusNumber) {
+        List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.match(winningLottoNumber);
-            result.add(new Prize(matchCount, lotto.checkBonusNumberMatch(bonusNumber)));
+            int matchCount = lotto.match(winningLotto);
+            ranks.add(Rank.matchRank(matchCount, lotto.checkBonusNumberMatch(bonusNumber)));
         }
-        return new Prizes(result);
+        return new Prizes(ranks);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            stringBuilder.append(lotto.toString());
-        }
-        return stringBuilder.toString();
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
 }

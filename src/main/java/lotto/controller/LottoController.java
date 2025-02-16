@@ -12,8 +12,6 @@ import lotto.view.OutputView;
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
-    private Lottos lottos;
-    private WinningLotto winningLotto;
 
     public LottoController(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
@@ -22,31 +20,33 @@ public class LottoController {
 
     public void run() {
         Money money = new Money(inputView.inputMoney());
-        purchaseLotto(money);
-        operateWinningLotto();
-        operateStatistics(money);
+        Lottos lottos = purchaseLotto(money);
+
+        outputView.printLottos(lottos);
+
+        WinningLotto winningLotto = operateWinningLotto();
+        operateStatistics(money, winningLotto, lottos);
         inputView.closeScanner();
     }
 
-    private void operateWinningLotto() {
+    private WinningLotto operateWinningLotto() {
         Lotto winningLottoNumber = new Lotto(inputView.inputWinningLotto());
         String bonusNumber = inputView.inputBonusNumber();
-        winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
+        return new WinningLotto(winningLottoNumber, bonusNumber);
     }
 
-    private void operateStatistics(Money money) {
-        Prizes prizes = lottos.calculatePrize(winningLotto);
+    private void operateStatistics(Money money, WinningLotto winningLotto, Lottos lottos) {
+        Prizes prizes = winningLotto.calculatePrize(lottos);
         double totalProfit = prizes.calculateProfit(money);
 
-        outputView.printResult(prizes.toString().trim());
+        outputView.printResult(prizes);
         outputView.printProfitRate(totalProfit);
     }
 
-    private void purchaseLotto(Money money) {
+    private Lottos purchaseLotto(Money money) {
         int lottoCounts = money.countsLotto();
         outputView.printCount(lottoCounts);
-        lottos = new Lottos(lottoCounts, new RandomNumber());
-        outputView.printLottos(lottos);
+        return new Lottos(lottoCounts, new RandomNumber());
     }
 
 }

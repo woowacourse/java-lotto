@@ -19,7 +19,6 @@ class WinningLottoTest {
                     new WinningLotto(new Lotto(winningLottoNumber), bonusNumber);})
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.BONUS_NUMBER_FORMAT_ERROR.getMessage());
-
     }
 
     @Test
@@ -33,7 +32,6 @@ class WinningLottoTest {
             new WinningLotto(new Lotto(winningLottoNumber), bonusNumber);})
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.RANGE_ERROR.getMessage());
-
     }
 
     @Test
@@ -47,6 +45,6 @@ class WinningLottoTest {
                     new WinningLotto(new Lotto(winningLottoNumber), bonusNumber);})
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.BONUS_NUMBER_DUPLICATED_ERROR.getMessage());
-
     }
+
 }
