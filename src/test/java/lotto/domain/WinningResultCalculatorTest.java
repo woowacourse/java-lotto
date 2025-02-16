@@ -36,7 +36,6 @@ public class WinningResultCalculatorTest {
         // Given
         final Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         final LottoNumber bonusNumber = LottoNumber.from(7);
-
         final List<Lotto> lottos = List.of(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new Lotto(Arrays.asList(7, 2, 3, 4, 5, 6)),
@@ -44,13 +43,18 @@ public class WinningResultCalculatorTest {
                 new Lotto(Arrays.asList(8, 9, 3, 4, 5, 6))
         );
         final WinningResultCalculator winningResultCalculator = new WinningResultCalculator(winningLotto, bonusNumber);
+        final Map<LottoAward, Integer> expectedResult = Map.of(
+                LottoAward.FIRST_RANK, 1,
+                LottoAward.SECOND_RANK, 1,
+                LottoAward.THIRD_RANK, 1,
+                LottoAward.FOURTH_RANK, 1,
+                LottoAward.FIFTH_RANK, 0
+        );
 
         // When
         final WinningResult winningResult = winningResultCalculator.makeWinningResult(lottos);
 
         // Then
-        final Map<LottoAward, Integer> expectedResult = Map.of(LottoAward.FIRST_RANK, 1, LottoAward.SECOND_RANK, 1,
-                LottoAward.THIRD_RANK, 1, LottoAward.FOURTH_RANK, 1, LottoAward.FIFTH_RANK, 0);
         Assertions.assertThat(winningResult.getWinningResult()).isEqualTo(expectedResult);
     }
 }
