@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.util.NumberGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -9,20 +8,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
-    private static class LottoNumberGenerator implements NumberGenerator {
-        private final List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-        private int index = 0;
-
-        @Override
-        public int generate(int minimum, int maximum) {
-            return numbers.get(index++);
-        }
-    }
 
     @Test
     void 로또_번호_생성_테스트() {
         //given
-        Lotto lotto = new Lotto(new LottoNumberGenerator());
+        Lotto lotto = new Lotto(new LottoTestNumberGenerator());
         List<LottoNumber> expected = List.of(
             new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
             new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
