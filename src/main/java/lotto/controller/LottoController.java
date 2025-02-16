@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
 import java.util.Set;
 import lotto.model.Cashier;
 import lotto.model.DashBoard;
@@ -38,14 +37,8 @@ public class LottoController {
 
     private LottoTicket purchaseLotto(int purchaseAmount) {
         LottoTicket lottoTicket = cashier.payForLotto(purchaseAmount);
-        outputView.printLottos(convertLottoDtos(lottoTicket.getLottos()));
+        outputView.printLottos(lottoTicket.getLottos());
         return lottoTicket;
-    }
-
-    private List<LottoDto> convertLottoDtos(List<Lotto> lottos) {
-        return lottos.stream()
-                .map(LottoDto::from)
-                .toList();
     }
 
     private WinningLotto requestWinningLotto() {
@@ -61,7 +54,7 @@ public class LottoController {
     }
 
     private void printResult(DashBoard dashBoard) {
-        outputView.printResult(dashBoard.getRanks());
+        outputView.printWinningStatistics(dashBoard.getRanks());
         outputView.printWinningRatio(dashBoard.calculateWinningRate());
     }
 
