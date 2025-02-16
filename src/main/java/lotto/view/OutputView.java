@@ -2,6 +2,8 @@ package lotto.view;
 
 import static lotto.domain.MatchRank.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoStatistics;
@@ -26,7 +28,9 @@ public class OutputView {
 
         StringBuilder sb = new StringBuilder();
         for (LottoDto dto : lottoDtos) {
-            sb.append(dto.numbers());
+            List<Integer> numbers = new ArrayList<>(dto.numbers());
+            Collections.sort(numbers);
+            sb.append(numbers);
             sb.append("\n");
         }
 

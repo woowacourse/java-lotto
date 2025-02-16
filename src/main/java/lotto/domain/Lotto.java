@@ -18,26 +18,11 @@ public class Lotto {
         validate(numbers);
 
         this.numbers = new ArrayList<>(numbers);
-        sortNumbers(this.numbers);
-    }
-
-    public MatchResult countMatchingNumbers(Lotto matchLotto, int bonus) {
-
-        int count = (int) numbers.stream()
-                .filter(matchLotto::containsNumber)
-                .count();
-
-        return new MatchResult(count, containsNumber(bonus));
-    }
-
-    public boolean containsNumber(int number) {
-        return numbers.contains(number);
     }
 
     private static void validate(List<Integer> numbers) {
         validateNull(numbers);
         validateSize(numbers);
-        validateRange(numbers);
         validateDuplicate(numbers);
     }
 
@@ -48,43 +33,32 @@ public class Lotto {
     }
 
     private static void validateSize(List<Integer> numbers) {
-        if (isCorrectedSize(numbers)) {
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ERROR_LOTTO_SIZE);
-        }
-    }
-
-    private static boolean isCorrectedSize(List<Integer> numbers) {
-        return numbers.size() != LOTTO_NUMBER_COUNT;
-    }
-
-    private static void validateRange(List<Integer> numbers) {
-        for (int number : numbers) {
-            checkLottoRange(number);
-        }
-    }
-
-    private static void checkLottoRange(int number) {
-        if (isNumberInRage(number)) {
-            throw new IllegalArgumentException(ERROR_NUMBER_RANGE);
         }
     }
 
     private static void validateDuplicate(List<Integer> numbers) {
         Set<Integer> set = new HashSet<>();
-        for(int number: numbers) {
+        for (int number : numbers) {
 
-            if(!set.add(number)) {
+            if (!set.add(number)) {
                 throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_DUPLICATE);
             }
         }
     }
 
-    private static boolean isNumberInRage(int number) {
-        return number < LOTTO_RANGE_MINIMUM || number > LOTTO_RANGE_MAXIMUM;
+    public MatchResult countMatchingNumbers(Lotto matchLotto, int bonus) {
+
+        int count = (int) numbers.stream()
+                .filter(matchLotto::contains)
+                .count();
+
+        return new MatchResult(count, contains(bonus));
     }
 
-    private static void sortNumbers(List<Integer> numbers) {
-        Collections.sort(numbers);
+    public boolean contains(int number) {
+        return numbers.contains(number);
     }
 
     @Override

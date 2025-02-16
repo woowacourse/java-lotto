@@ -50,16 +50,4 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("로또 번호가 오름차순으로 정렬되어야 한다.")
-    @Test
-    void testSort_lottoNumber() {
-        // given
-        List<Integer> list = new ArrayList<>(List.of(3, 5, 4, 1, 6, 2));
-        Lotto lotto = new Lotto(list);
-
-        List<Integer> sortedList = list.stream().sorted().toList();
-
-        assertThat(lotto.getNumbers()).isEqualTo(sortedList);
-    }
-
 }

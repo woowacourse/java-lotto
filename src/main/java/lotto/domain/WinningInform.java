@@ -1,7 +1,8 @@
 package lotto.domain;
 
-import static lotto.common.constant.Constant.*;
 import static lotto.common.exception.ErrorMessage.*;
+import static lotto.domain.LottoNumber.LOTTO_RANGE_MAXIMUM;
+import static lotto.domain.LottoNumber.LOTTO_RANGE_MINIMUM;
 
 public class WinningInform {
     private final Lotto winningLotto;
@@ -29,7 +30,7 @@ public class WinningInform {
     }
 
     private static void validateBonusDuplicate(Lotto winningLotto, int bonus) {
-        if (winningLotto.containsNumber(bonus)) {
+        if (winningLotto.contains(bonus)) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_WINNING_AND_BONUS);
         }
     }
