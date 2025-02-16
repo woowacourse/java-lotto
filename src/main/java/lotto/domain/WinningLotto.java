@@ -1,42 +1,31 @@
 package lotto.domain;
 
 import lotto.constant.ErrorMessage;
-import lotto.constant.LottoConstants;
 import lotto.util.Parser;
 
 public class WinningLotto {
 
-    private final Lotto lotto;
-    private final int bonusNumber;
+    private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto lotto, String bonusNumber) {
-        this.lotto = lotto;
+    public WinningLotto(Lotto winningLotto, String bonusNumber) {
+        this.winningLotto = winningLotto;
         this.bonusNumber = validate(bonusNumber);
     }
 
-    private int validate(String bonusNumber) {
+    private LottoNumber validate(String bonusNumber) {
         int parsedBonusNumber = Parser.validateNumber(bonusNumber, ErrorMessage.BONUS_NUMBER_FORMAT_ERROR.getMessage());
-        checkRange(parsedBonusNumber);
-        validateBonusNumber(lotto, parsedBonusNumber);
-        return parsedBonusNumber;
+        LottoNumber validBonusNumber = new LottoNumber(parsedBonusNumber);
+        validateBonusNumber(winningLotto, validBonusNumber);
+        return validBonusNumber;
     }
 
-    private void validateBonusNumber(Lotto lotto, int bonusNumber) {
-        lotto.checkDuplicate(bonusNumber);
+    private void validateBonusNumber(Lotto lotto, LottoNumber validBonusNumber) {
+        lotto.checkBonusDuplicate(validBonusNumber);
     }
 
-    private void checkRange(int number) {
-        if (number < LottoConstants.LOTTO_MINIMUM_NUMBER.getNumber() || number > LottoConstants.LOTTO_MAXIMUM_NUMBER.getNumber()) {
-            throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR.getMessage());
-        }
-    }
-
-    public Lotto getLotto() {
-        return lotto;
-    }
-
-    public int getBonusNumber() {
-        return bonusNumber;
+    public Prizes calculatePrize(Lottos lottos) {
+        return lottos.calculatePrize(winningLotto, bonusNumber);
     }
 
 }

@@ -56,7 +56,7 @@ class RankTest {
     @Test
     void 유효한_등수만_확인() {
         //given
-        List<Rank> ranks = Rank.validRank();
+        List<Rank> ranks = Rank.getValidRank();
 
         //when & then
         Assertions.assertThat(ranks.contains(Rank.NONE)).isFalse();
