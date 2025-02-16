@@ -1,8 +1,8 @@
 package view;
 
 import enums.LottoRanking;
-import model.Lotto;
-import model.Lottos;
+import domain.Lotto;
+import domain.Lottos;
 
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package controller;
 
 import enums.LottoRanking;
-import model.*;
+import domain.*;
 import view.OutputView;
 
 import java.io.BufferedReader;

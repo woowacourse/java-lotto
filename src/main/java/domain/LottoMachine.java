@@ -1,6 +1,6 @@
-package model;
+package domain;
 
-import static model.LottoInformation.*;
+import static domain.LottoInformation.*;
 
 public class LottoMachine {
 

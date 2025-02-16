@@ -1,6 +1,6 @@
-import model.Lotto;
-import model.Lottos;
-import model.Numbers;
+import domain.Lotto;
+import domain.Lottos;
+import domain.Numbers;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;

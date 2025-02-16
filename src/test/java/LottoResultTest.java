@@ -1,5 +1,5 @@
 import enums.LottoRanking;
-import model.LottoResult;
+import domain.LottoResult;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;

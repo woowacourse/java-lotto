@@ -1,6 +1,6 @@
-package model;
+package domain;
 
-import static model.LottoInformation.LOTTO_PRICE;
+import static domain.LottoInformation.LOTTO_PRICE;
 
 public class Price {
 
