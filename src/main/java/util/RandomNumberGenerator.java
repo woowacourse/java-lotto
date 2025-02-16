@@ -5,7 +5,6 @@ import static constant.LottoConstants.LOTTO_SIZE;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 public class RandomNumberGenerator {

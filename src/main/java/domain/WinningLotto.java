@@ -1,48 +1,43 @@
 package domain;
 
 import static exception.ExceptionMessage.LOTTO_NUMBER_DUPLICATED_ERROR;
-import static exception.ExceptionMessage.LOTTO_RANGE_ERROR;
 
 import constant.WinningCount;
-import dto.WinningLottoDto;
 import exception.LottoException;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class WinningLotto {
     private final Lotto lotto;
-    private final Integer bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> numbers, Integer bonusNumber) {
+    public WinningLotto(List<Integer> numbers, Integer bonus) {
         this.lotto = new Lotto(numbers);
-        validate(bonusNumber);
+        LottoNumber bonusNumber = new LottoNumber(bonus);
+        validateDuplicate(this.lotto, bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    public void validate(Integer bonusNumber) {
-        validateBonusNumberRange(bonusNumber);
-        validateDuplicate(bonusNumber);
-    }
-
-    private void validateBonusNumberRange(Integer bonusNumber) {
-        if (bonusNumber < 1 || bonusNumber > 45) {
-            throw LottoException.from(LOTTO_RANGE_ERROR);
-        }
-    }
-
-    private void validateDuplicate(Integer bonusNumber) {
-        List<Integer> lottos = this.lotto.getSortedNumbers();
-        if (lottos.contains(bonusNumber)) {
+    public void validateDuplicate(Lotto lotto, LottoNumber bonusNumber) {
+        if (lotto.hasNumber(bonusNumber)) {
             throw LottoException.from(LOTTO_NUMBER_DUPLICATED_ERROR);
         }
     }
 
-    public WinningLottoDto getWinningLottoDto() {
-        return new WinningLottoDto(lotto.getSortedNumbers(), bonusNumber);
+    public Map<WinningCount, Integer> getLottosResult(Lottos lottos) {
+        List<Lotto> lottoList = lottos.getLottos();
+        Map<WinningCount, Integer> result = new EnumMap<>(WinningCount.class);
+        lottoList.stream().forEach(lotto -> {
+            WinningCount lottoResult = getLottoResult(lotto);
+            result.put(lottoResult, result.getOrDefault(lottoResult, 0) + 1);
+        });
+        return result;
     }
 
-    public WinningCount getLottoResult(List<Integer> issuedLotto) {
-        int matchedCount = (int) issuedLotto.stream().filter(lotto.getSortedNumbers()::contains).count();
-        boolean isBonusContained = issuedLotto.contains(bonusNumber);
+    private WinningCount getLottoResult(Lotto lotto) {
+        int matchedCount = this.lotto.getMatchedCount(lotto);
+        boolean isBonusContained = lotto.hasNumber(bonusNumber);
         return getWinningCount(matchedCount, isBonusContained);
     }
 
