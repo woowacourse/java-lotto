@@ -22,14 +22,14 @@ public class WinningLotto {
     }
 
 
-    public static void validateRange(int bonusNumber) {
+    private void validateRange(int bonusNumber) {
         boolean isOutOfRange = bonusNumber < Lotto.MIN_LOTTO_NUMBER || bonusNumber > Lotto.MAX_LOTTO_NUMBER;
         if (isOutOfRange) {
             throw new IllegalArgumentException(ExceptionMessage.OUT_OF_RANGE.getContent());
         }
     }
 
-    public static void validateOverlap(List<Integer> winningNumbers, int bonusNumber) {
+    private void validateOverlap(List<Integer> winningNumbers, int bonusNumber) {
         boolean isOverlap = winningNumbers.contains(bonusNumber);
         if (isOverlap) {
             throw new IllegalArgumentException(ExceptionMessage.DUPLICATED_NUMBERS.getContent());
