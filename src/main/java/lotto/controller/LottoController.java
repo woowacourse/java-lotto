@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
@@ -17,7 +18,12 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
+    private final LottoGenerator lottoGenerator;
     LottoGroup lottoGroup = new LottoGroup();
+
+    public LottoController(LottoGenerator lottoGenerator) {
+        this.lottoGenerator = lottoGenerator;
+    }
 
     public void run() {
         Money money = getMoney();
@@ -35,7 +41,7 @@ public class LottoController {
     }
 
     private void processLottoGeneration(Money money) {
-        lottoGroup.processLottoTicketGeneration(money);
+        lottoGroup.processLottoTicketGeneration(money, lottoGenerator);
         OutputView.printLottoGroup(LottoGroupDto.from(lottoGroup));
     }
 
