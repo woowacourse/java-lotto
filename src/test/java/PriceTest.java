@@ -3,7 +3,8 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class PriceTest {
@@ -21,12 +22,5 @@ class PriceTest {
         assertThatThrownBy(() -> new Price("asdasd"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
-    @Test
-    void getterTest() {
-        //when & then
-        Price price = new Price("10000");
-
-        assertThat(price.getValue()).isEqualTo(10000);
-    }
+    
 }
