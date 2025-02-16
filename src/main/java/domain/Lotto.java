@@ -35,7 +35,15 @@ public class Lotto {
     }
 
     public static Lotto issueByNumbers(List<LottoNumber> numbers) {
+        validateSize(numbers);
+
         return new Lotto(numbers);
+    }
+
+    private static void validateSize(List<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("당첨 번호는 6개 입력해야 합니다.");
+        }
     }
 
     private static void addNumberIfUnique(List<LottoNumber> lottoNumbers, LottoNumber number) {

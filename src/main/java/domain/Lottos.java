@@ -12,7 +12,7 @@ public class Lottos {
 
     private static final int DEFAULT_VALUE = 0;
     private static final int INCREMENT_UNIT = 1;
-    
+
     private final List<Lotto> lottos;
 
     private Lottos(List<Lotto> lottos) {
@@ -33,10 +33,6 @@ public class Lottos {
         return new Lottos(generatedLottos);
     }
 
-    public int getQuantity() {
-        return lottos.size();
-    }
-
     public Map<Rank, Integer> getRankCount(WinningNumbers winningNumbers) {
         Map<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
         lottos.forEach(lotto ->
@@ -45,6 +41,10 @@ public class Lottos {
                         rankCount.getOrDefault(winningNumbers.getRank(lotto), DEFAULT_VALUE) + INCREMENT_UNIT));
 
         return rankCount;
+    }
+
+    public int getQuantity() {
+        return lottos.size();
     }
 
     public List<Lotto> getLottos() {
