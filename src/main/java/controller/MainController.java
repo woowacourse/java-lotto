@@ -4,7 +4,6 @@ import domain.DrawResult;
 import domain.LottoMachine;
 import domain.LottoTickets;
 import domain.Payment;
-import domain.Profit;
 import domain.RandomIntegerGenerator;
 import domain.StatisticsService;
 import domain.WinningResult;
@@ -39,7 +38,7 @@ public class MainController {
     private WinningResult calculateWinningResult(LottoTickets lottoTickets,
                                                  DrawResult drawResult) {
         WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, drawResult);
-        Profit profit = statisticsService.calculateProfit(winningStatistics);
+        double profit = statisticsService.calculateProfit(winningStatistics);
         return new WinningResult(winningStatistics, profit);
     }
 }

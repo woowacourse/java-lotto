@@ -1,4 +1,4 @@
 package domain;
 
-public record WinningResult(WinningStatistics winningStatistics, Profit profit) {
+public record WinningResult(WinningStatistics winningStatistics, double profit) {
 }

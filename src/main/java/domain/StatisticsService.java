@@ -26,7 +26,7 @@ public class StatisticsService {
         }
     }
 
-    public Profit calculateProfit(WinningStatistics winningStatistics) {
+    public double calculateProfit(WinningStatistics winningStatistics) {
         long sum = 0;
         long lottoTicketNumber = 0;
         Map<LottoPrize, Integer> prizeCounter = winningStatistics.getPrizeCounter();
@@ -34,6 +34,6 @@ public class StatisticsService {
             sum += (long) prizeCounter.get(lottoPrize) * lottoPrize.getMoney();
             lottoTicketNumber += prizeCounter.get(lottoPrize);
         }
-        return new Profit((double) sum / (lottoTicketNumber * LottoTicket.LOTTO_PRICE));
+        return lottoTicketNumber == 0 ? 0 : ((double) sum / (lottoTicketNumber * LottoTicket.LOTTO_PRICE));
     }
 }

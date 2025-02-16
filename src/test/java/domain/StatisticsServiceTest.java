@@ -124,9 +124,9 @@ class StatisticsServiceTest {
 
         // when
         WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, drawResult);
-        Profit profit = statisticsService.calculateProfit(winningStatistics);
+        double profit = statisticsService.calculateProfit(winningStatistics);
 
         // then
-        Assertions.assertThat(profit.getProfit()).isEqualTo(7513.75);
+        Assertions.assertThat(profit).isEqualTo(7513.75);
     }
 }
