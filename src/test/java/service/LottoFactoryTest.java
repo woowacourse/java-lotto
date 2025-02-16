@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
-import model.Lotto;
 import model.LottoFactory;
 import model.LottoPurchase;
 import model.Prize;
@@ -60,7 +59,7 @@ class LottoFactoryTest {
     @Test
     @DisplayName("수익률은 당첨합계 / 원금 이어야 한다.")
     void validBenefit() {
-        EnumMap<Prize, Integer> prizeMap = Prize.initializeMap();
+        EnumMap<Prize, Integer> prizeMap = Prize.initialize();
         prizeMap.put(Prize.FIFTH_PLACE, 3);
 
         double benefit = lottoFactory.getWinningAmount(prizeMap);

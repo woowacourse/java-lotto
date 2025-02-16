@@ -6,7 +6,7 @@ import static constant.LottoConstant.LOTTO_PURCHASE_UNIT;
 import static constant.LottoConstant.LOTTO_SEPARATOR;
 import static constant.LottoConstant.LOTTO_TICKET_SIZE;
 import static constant.LottoConstant.PROFIT;
-import static model.Prize.initializeMap;
+import static model.Prize.initialize;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -32,7 +32,7 @@ public class LottoFactory {
     }
 
     public EnumMap<Prize, Integer> getStatistic(final Lotto lotto, final Bonus bonus) {
-        EnumMap<Prize, Integer> prizes = initializeMap();
+        EnumMap<Prize, Integer> prizes = initialize();
         for (Lotto issuedTicket : issuedLottoTickets) {
             int matchCount = lotto.matchCount(issuedTicket);
             boolean matchesBonus = bonus.isContainedIn(lotto);
@@ -45,7 +45,7 @@ public class LottoFactory {
 
     public double getWinningAmount(final EnumMap<Prize, Integer> prizes) {
         int principalMoney = lottoCount * LOTTO_PURCHASE_UNIT;
-        int winningAmount = calculateWinningAmount(prizes);
+        int winningAmount = Prize.calculateWinningAmount(prizes);
 
         return (double) winningAmount / principalMoney;
     }
@@ -91,11 +91,5 @@ public class LottoFactory {
 
     private int getRandomNumber() {
         return random.nextInt(LOTTO_NUMBER_MAX_RANGE) + 1;
-    }
-
-    private int calculateWinningAmount(final EnumMap<Prize, Integer> prizes) {
-        return prizes.entrySet().stream()
-                .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
-                .sum();
     }
 }
