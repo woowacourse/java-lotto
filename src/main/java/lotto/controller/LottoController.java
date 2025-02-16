@@ -6,17 +6,17 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningTier;
-import lotto.service.InputService;
 import lotto.service.OutputService;
+import lotto.view.InputView;
 
 public class LottoController {
 
-    private final InputService inputService;
+    private final InputView inputView;
     private final OutputService outputService;
     private final LottoMachine lottoMachine;
 
     public LottoController(ApplicationConfiguration applicationConfiguration) {
-        this.inputService = applicationConfiguration.getInputService();
+        this.inputView = applicationConfiguration.getInputView();
         this.lottoMachine = applicationConfiguration.getLottoMachine();
         this.outputService = applicationConfiguration.getOutputService();
     }
@@ -29,7 +29,7 @@ public class LottoController {
     }
 
     private int readPurchaseAmount() {
-        return inputService.readPurchaseAmount();
+        return inputView.readPurchaseAmount();
     }
 
     private List<Lotto> purchaseLottos(int purchaseAmount) {
@@ -39,9 +39,9 @@ public class LottoController {
     }
 
     private List<WinningTier> findWinningTiers(List<Lotto> lottos) {
-        Lotto winningNumbers = inputService.readWinningNumbers();
-        int bonusNumber = inputService.readBonusNumber(winningNumbers);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        List<Integer> winningNumbers = inputView.readWinningNumbers();
+        int bonusNumber = inputView.readBonusNumber();
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusNumber);
         return lottoMachine.findWinningTiers(lottos, winningLotto);
     }
 
