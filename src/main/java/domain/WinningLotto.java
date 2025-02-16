@@ -18,11 +18,11 @@ public class WinningLotto{
 
     public Rank countMatchNumbers(final Lotto lotto) {
         int count = lotto.matchCount(this);
-        return Rank.matchRank(count, lotto.isContains(bonus));
+        return Rank.matchRank(count, lotto.contains(bonus));
     }
 
-    public boolean isContains(final int num) {
-        return lotto.isContains(num);
+    public boolean contains(final int num) {
+        return lotto.contains(num);
     }
 
     private int validateBonus(final String input) {
@@ -33,7 +33,7 @@ public class WinningLotto{
     }
 
     private void validateBonusDuplicate(final int bonus) {
-        if(lotto.isContains(bonus)){
+        if(lotto.contains(bonus)){
             throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
         }
     }

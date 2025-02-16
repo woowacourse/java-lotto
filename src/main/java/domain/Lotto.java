@@ -32,13 +32,13 @@ public class Lotto {
         validateLottoDuplicate();
     }
 
-    public boolean isContains(final int num) {
+    public boolean contains(final int num) {
         return numbers.contains(num);
     }
 
     public int matchCount(final WinningLotto winningLotto) {
         return (int) numbers.stream()
-                .filter(winningLotto::isContains)
+                .filter(winningLotto::contains)
                 .count();
     }
 
