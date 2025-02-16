@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -9,10 +10,12 @@ public class LottoStatistics {
     private final EnumMap<LottoWinRank, Integer> lottoStatistics = new EnumMap<>(LottoWinRank.class);
 
     public LottoStatistics(List<LottoNumbers> lottoNumbers, WinLotto winLotto) {
+        Arrays.stream(LottoWinRank.values()).forEach(lottoWinRank -> lottoStatistics.put(lottoWinRank, 0));
         for (LottoNumbers purchasedLotto : lottoNumbers) {
             LottoWinRank winResult = LottoWinRank.calculateLottoWinRank(purchasedLotto, winLotto);
-            lottoStatistics.put(winResult, lottoStatistics.getOrDefault(winResult, 0) + 1);
+            lottoStatistics.put(winResult, lottoStatistics.get(winResult) + 1);
         }
+        lottoStatistics.remove(LottoWinRank.NONE);
     }
 
     private Integer calculateTotalPrize() {

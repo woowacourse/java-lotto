@@ -21,6 +21,7 @@ public class OutputView {
     }
 
     public void printResult(LottoStatistics lottoStatistics) {
+        System.out.printf("%n당첨 통계%n-------%n");
         for (Entry<LottoWinRank, Integer> statisticsEntry : lottoStatistics.getStatisticsEntries()) {
             LottoWinRank lottoWinRank = statisticsEntry.getKey();
             Integer count = statisticsEntry.getValue();
@@ -35,6 +36,7 @@ public class OutputView {
     private void printLottoWinStatistics(LottoWinRank lottoWinRank, Integer count) {
         if (lottoWinRank.matchBonusNumber()) {
             printLottoWinStatisticsWithBonusBall(lottoWinRank, count);
+            return;
         }
         System.out.printf("%d개 일치 (%d원)- %d개%n", lottoWinRank.getMatchNumberCount(), lottoWinRank.getPrice(),
                 nullToZero(count));
