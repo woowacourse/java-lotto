@@ -43,12 +43,12 @@ public class LottoController {
     }
 
     private List<Lotto> issueRandomLottoTickets(final Money buyingAmount) {
-        LottoMachine lottoMachine = new LottoMachine();
+        LottoMachine lottoMachine = new LottoMachine(buyingAmount);
         LottoNumbersGenerator numbersGenerator = new LottoNumbersGenerator(
                 LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER, Lotto.LOTTO_SIZE
         );
-        outputView.printChangeAmount(lottoMachine.calculateChange(buyingAmount));
-        return lottoMachine.issueAutomatic(buyingAmount, numbersGenerator);
+        outputView.printChangeAmount(lottoMachine.calculateChange());
+        return lottoMachine.issueAutomatic(numbersGenerator);
     }
 
     private void printIssuedLottoTickets(final List<Lotto> lottoTickets) {

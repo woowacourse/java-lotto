@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class MoneyTest {
 
@@ -37,6 +39,15 @@ class MoneyTest {
         Money money = new Money(14_000);
 
         assertThat(money.calculateReturnRatio(5_000L)).isEqualTo(0.35);
+    }
+
+    @DisplayName("다른 금액을 알려주면 부족한지 알려준다.")
+    @CsvSource(value = {"999,true", "1_000,false"})
+    @ParameterizedTest
+    void lessThanOtherAmount(int amount, boolean expected) {
+        Money money = new Money(amount);
+
+        assertThat(money.isLessThan(1_000)).isEqualTo(expected);
     }
 
 }

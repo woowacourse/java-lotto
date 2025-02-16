@@ -14,10 +14,10 @@ class LottoMachineTest {
     @DisplayName("구매 금액에 맞게 로또 티켓을 자동 발행해 준다.")
     @Test
     void issueAutomaticLottoWithBuyingAmount() {
-        LottoMachine lottoMachine = new LottoMachine();
         Money buyingAmount = new Money(1_000);
+        LottoMachine lottoMachine = new LottoMachine(buyingAmount);
 
-        List<Lotto> issuedLottos = lottoMachine.issueAutomatic(buyingAmount, () -> List.of(1, 2, 3, 4, 5, 6));
+        List<Lotto> issuedLottos = lottoMachine.issueAutomatic(() -> List.of(1, 2, 3, 4, 5, 6));
 
         assertThat(issuedLottos).hasSize(1);
     }
@@ -25,10 +25,10 @@ class LottoMachineTest {
     @DisplayName("구매 금액에 맞는 잔돈을 계산해 준다.")
     @Test
     void calculateChangeWithMoney() {
-        LottoMachine lottoMachine = new LottoMachine();
         Money buyingAmount = new Money(1_100);
+        LottoMachine lottoMachine = new LottoMachine(buyingAmount);
 
-        assertThat(lottoMachine.calculateChange(buyingAmount)).isEqualTo(100);
+        assertThat(lottoMachine.calculateChange()).isEqualTo(100);
     }
 
 }

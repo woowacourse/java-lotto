@@ -28,4 +28,8 @@ public class Money {
         return Math.floor(returnRatio * 100) / 100;
     }
 
+    public boolean isLessThan(final int otherAmount) {
+        return this.amount < otherAmount;
+    }
+
 }
