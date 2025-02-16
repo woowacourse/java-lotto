@@ -10,7 +10,7 @@ import util.RetryHandler;
 
 public class InputView {
     public static Payment inputPayment() {
-        return (Payment) RetryHandler.retryUntilSuccessWithReturn(() -> {
+        return RetryHandler.retryUntilSuccessWithReturn(() -> {
             System.out.println("구매금액을 입력해 주세요.");
             String purchaseAmount = Console.readLine();
             validateInteger(purchaseAmount);
@@ -29,14 +29,14 @@ public class InputView {
     public static DrawResult inputDrawResult() {
         List<LottoNumber> winningLottoNumbers = inputWinningLottoNumbers();
 
-        return (DrawResult) RetryHandler.retryUntilSuccessWithReturn(() -> {
+        return RetryHandler.retryUntilSuccessWithReturn(() -> {
             LottoNumber bonusNumber = inputBonusNumber();
             return new DrawResult(winningLottoNumbers, bonusNumber);
         });
     }
 
     public static List<LottoNumber> inputWinningLottoNumbers() {
-        return (List<LottoNumber>) RetryHandler.retryUntilSuccessWithReturn(() -> {
+        return RetryHandler.retryUntilSuccessWithReturn(() -> {
                     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
                     String winningLottoTicket = Console.readLine();
                     return Arrays.stream(winningLottoTicket.split(",", -1))
@@ -50,7 +50,7 @@ public class InputView {
     }
 
     public static LottoNumber inputBonusNumber() {
-        return (LottoNumber) RetryHandler.retryUntilSuccessWithReturn(() -> {
+        return RetryHandler.retryUntilSuccessWithReturn(() -> {
             System.out.println("보너스 볼을 입력해 주세요.");
             String input = Console.readLine();
             validateInteger(input);

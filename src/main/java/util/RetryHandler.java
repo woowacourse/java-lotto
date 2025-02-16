@@ -3,12 +3,12 @@ package util;
 import java.util.function.Supplier;
 
 public class RetryHandler {
-    public static <T> Object retryUntilSuccessWithReturn(Supplier<T> supplier) {
+    public static <T> T retryUntilSuccessWithReturn(Supplier<T> supplier) {
         ExecuteResult er;
         do {
             er = executeGivenMethod(supplier);
         } while (!er.isSuccess());
-        return er.getResult();
+        return (T) er.getResult();
     }
 
     private static <T> ExecuteResult executeGivenMethod(Supplier<T> supplier) {
