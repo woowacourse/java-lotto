@@ -1,6 +1,9 @@
 package view;
 
 import dto.LottoDto;
+import dto.LottoResultDto;
+import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import model.Rank;
@@ -25,9 +28,15 @@ public class OutputView {
 
     public void printPurchaseLottos(List<LottoDto> lottosDto) {
         System.out.printf(PURCHASE_LOTTO_NUMBER_GUIDE_FORM, lottosDto.size());
-        lottosDto.stream()
-                .forEach(System.out::println);
+        for (LottoDto lottoDto : lottosDto) {
+            List<String> sortedList = lottoDto.lotto().stream().sorted().map(String::valueOf).toList();
+            printLotto(sortedList);
+        }
         System.out.println();
+    }
+
+    private void printLotto(List<String> lotto) {
+        System.out.println("[" + String.join(", ", lotto) + "]");
     }
 
     public void printWinningNumberGuide() {
@@ -38,18 +47,19 @@ public class OutputView {
         System.out.println(WINNING_BONUS_GUIDE);
     }
 
-    public void printResultRanks(Map<Rank, Integer> resultRanks) {
+    public void printResultRanks(LottoResultDto lottoResultDto) {
         System.out.println(RESULT_GUIDE);
-        for (Rank rank : resultRanks.keySet()) {
-            if (rank.equals(Rank.FAIL)) {
-                return;
-            }
-            if (rank.equals(Rank.SECOND)) {
-                System.out.printf(SECOND_RANK_RESULT_FORM, resultRanks.get(rank));
-                continue;
-            }
-            System.out.printf(RANK_RESULT_FORM, rank.getMatchNumber(), rank.getWinningAmount(), resultRanks.get(rank));
-        }
+        EnumMap<Rank, Integer> rankResult = lottoResultDto.rankResult();
+        rankResult.keySet()
+                .forEach(rank -> {
+                    if (rank.equals(Rank.SECOND)) {
+                        System.out.printf(SECOND_RANK_RESULT_FORM, rankResult.get(rank));
+                    }
+                    if (!rank.equals(Rank.FAIL)) {
+                        System.out.printf(RANK_RESULT_FORM, rank.getMatchNumber(), rank.getWinningAmount(), rankResult.get(rank));
+                    }
+                });
+        printProfitRate(lottoResultDto.profitRate());
     }
 
     public void printProfitRate(double profitRate) {
