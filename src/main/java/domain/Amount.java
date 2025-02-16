@@ -46,5 +46,4 @@ public class Amount {
     public int getAmount() {
         return amount;
     }
-
 }
