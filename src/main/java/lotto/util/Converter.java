@@ -9,7 +9,7 @@ public class Converter {
 
     }
 
-    public static int convertToInteger(String input) {
+    public static int convertToInteger(final String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -17,7 +17,7 @@ public class Converter {
         }
     }
 
-    public static List<Integer> convertToIntegerList(String input) {
+    public static List<Integer> convertToIntegerList(final String input) {
         try {
             return Arrays.stream(input.split(","))
                     .map(s -> Integer.parseInt(s.trim()))

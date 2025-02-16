@@ -11,7 +11,8 @@ public class LottoTicket {
         this.lottos = lottos;
     }
 
-    public List<MatchResultDto> deriveMatchResults(WinningNumber winningNumber, BonusNumber bonusNumber) {
+    public List<MatchResultDto> deriveMatchResults(final WinningNumber winningNumber,
+                                                   final BonusNumber bonusNumber) {
         List<MatchResultDto> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
             results.add(lotto.deriveMatchResult(winningNumber, bonusNumber));

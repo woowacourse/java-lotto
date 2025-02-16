@@ -7,6 +7,7 @@ public class PurchaseAmount {
     private final long amount;
 
     public PurchaseAmount(long purchaseAmount) {
+        validatePositive(purchaseAmount);
         validateAmount(purchaseAmount);
         this.amount = purchaseAmount;
     }
@@ -19,9 +20,15 @@ public class PurchaseAmount {
         return (int) amount / LottoConstants.LOTTO_PRICE;
     }
 
-    private void validateAmount(long purchaseAmount) {
+    private void validateAmount(final long purchaseAmount) {
         if (purchaseAmount % LottoConstants.LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("구매 금액은 " + LottoConstants.LOTTO_PRICE + "원 단위어야 합니다.");
+        }
+    }
+
+    private void validatePositive(final long purchaseAmount) {
+        if (purchaseAmount <= 0) {
+            throw new IllegalArgumentException("구매 금액은 양수여야 합니다.");
         }
     }
 }

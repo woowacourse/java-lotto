@@ -10,17 +10,15 @@ public class WinningResult {
         this.winningInfo = winningInfo;
     }
 
-    public double calculateProfitRate(PurchaseAmount purchaseAmount) {
+    public double calculateProfitRate(final PurchaseAmount purchaseAmount) {
         long totalProfit = sumTotalProfit(winningInfo);
         return (double) totalProfit / purchaseAmount.getAmount();
     }
 
-    private long sumTotalProfit(Map<LottoRank, Integer> winningInfo) {
-        long sum = 0;
-        for (LottoRank lottoRank : winningInfo.keySet()) {
-            sum += lottoRank.calculateWinningAmount(winningInfo.get(lottoRank));
-        }
-
-        return sum;
+    private long sumTotalProfit(final Map<LottoRank, Integer> winningInfo) {
+        return winningInfo.entrySet().stream()
+                .mapToLong(entry ->
+                        entry.getKey().calculateWinningAmount(entry.getValue()))
+                .sum();
     }
 }
