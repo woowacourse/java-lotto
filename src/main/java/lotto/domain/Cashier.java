@@ -30,7 +30,7 @@ public record Cashier(int money) {
         return money % LOTTO_PRICE != 0;
     }
 
-    public int getLottoAmount() {
+    public int getNumberOfLotto() {
         return money / LOTTO_PRICE;
     }
 }

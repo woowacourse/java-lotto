@@ -11,8 +11,8 @@ class WalletTest {
     @Test
     void WalletToStringIsSatisfiedRequest() {
         Cashier cashier = new Cashier(5000);
-
-        Wallet wallet = new Wallet(cashier);
+        int numberOfLotto = cashier.getNumberOfLotto();
+        Wallet wallet = new Wallet(numberOfLotto);
 
         String output = wallet.toString();
         String[] lines = output.split("\n");

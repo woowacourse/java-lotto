@@ -26,9 +26,10 @@ public class Controller {
     }
 
     public void run() {
-        Cashier cashier = requestAmount();
-        Wallet wallet = new Wallet(cashier);
-        outputView.print(cashier.getLottoAmount() + "개를 구매했습니다.\n");
+        Cashier cashier = requestToCashier();
+        int numberOfLotto = cashier.getNumberOfLotto();
+        Wallet wallet = new Wallet(numberOfLotto);
+        outputView.print(cashier.getNumberOfLotto() + "개를 구매했습니다.\n");
         outputView.print(wallet.toString());
 
         Lotto matchLotto = requestMatchLotto();
@@ -45,7 +46,7 @@ public class Controller {
     private int requestBonus(Lotto matchLotto) {
         while (true) {
             try {
-                int bonus = requestInt("보너스 볼을 입력해주세요.");
+                int bonus = requestNumber("보너스 볼을 입력해주세요.");
                 matchLotto.validateBonus(bonus);
                 return bonus;
             } catch (IllegalArgumentException e) {
@@ -60,10 +61,10 @@ public class Controller {
         return lottoService.convertToMap(matchCount);
     }
 
-    private Cashier requestAmount() {
+    private Cashier requestToCashier() {
         while (true) {
             try {
-                int money = requestInt("구입금액을 입력해 주세요.");
+                int money = requestNumber("구입금액을 입력해 주세요.");
                 return new Cashier(money);
             } catch (IllegalArgumentException e) {
                 outputView.print(e.getMessage());
@@ -72,7 +73,7 @@ public class Controller {
 
     }
 
-    private int requestInt(String output) {
+    private int requestNumber(String output) {
         while (true) {
             try {
                 outputView.print(output);

@@ -12,7 +12,7 @@ class CashierTest {
     @DisplayName(" ")
     void generateAmount() {
         Cashier cashier = new Cashier(LOTTO_PRICE);
-        assertThat(cashier.getLottoAmount()).isEqualTo(1);
+        assertThat(cashier.getNumberOfLotto()).isEqualTo(1);
     }
 
     @Test
