@@ -41,6 +41,5 @@ public class OutputView {
     private void printLotto(final LottoResponse lottoResponse) {
         System.out.println(lottoResponse.numbers());
     }
-
 }
 
