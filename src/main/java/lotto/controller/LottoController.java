@@ -1,10 +1,10 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Prize;
 import lotto.domain.WinningLotto;
-import java.util.List;
 import lotto.util.NumberParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -24,9 +24,9 @@ public class LottoController {
 
         final List<Integer> winningNumbers = requestWinningNumbers();
         final int bonusNumber = requestBonusNumber();
-
         final WinningLotto winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonusNumber);
-        List<Prize> prizes = winningLotto.calculatePrizes(lottos);
+
+        List<Prize> prizes = lottos.calculatePrizes(winningLotto);
 
         outputView.printLottoResult(prizes, Prize.calculateEarningRate(prizes, lottos.getQuantity() * 1000));
         inputView.close();

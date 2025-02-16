@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -36,12 +35,15 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public List<List<Integer>> getPurchasedLottos() {
-        return lottos.stream().map(Lotto::getNumbers).toList();
+    public List<Prize> calculatePrizes(WinningLotto winningLotto) {
+        return lottos.stream()
+                .map(lotto -> Prize.getPrizePlace(
+                        winningLotto.matchWinningNumbers(lotto), winningLotto.isBonusMatched(lotto)))
+                .toList();
     }
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+    public List<List<Integer>> getPurchasedLottos() {
+        return lottos.stream().map(Lotto::getNumbers).toList();
     }
 
     public int getQuantity() {
