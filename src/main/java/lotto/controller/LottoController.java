@@ -28,6 +28,7 @@ public class LottoController {
     public void run() {
         LottoPrice lottoPrice = getLottoPrice();
         int lottoCount = getLottoCount(lottoPrice);
+        outputView.printLottoCount(lottoCount);
         List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
         printPurchaseLottos(lottos);
 
@@ -44,7 +45,6 @@ public class LottoController {
 
     private int getLottoCount(final LottoPrice lottoPrice) {
         int lottoCount = lottoPrice.calculateLottoCount();
-        outputView.printLottoCount(lottoCount);
         return lottoCount;
     }
 

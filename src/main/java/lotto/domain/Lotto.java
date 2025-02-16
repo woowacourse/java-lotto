@@ -25,10 +25,6 @@ public class Lotto {
         return numbers.contains(lottoNumber);
     }
 
-    boolean isDuplicateNumber(final LottoNumber inputNumber) {
-        return numbers.contains(inputNumber);
-    }
-
     private void validate(final List<Integer> values) {
         validateDuplicated(values);
         validateSize(values);
@@ -55,6 +51,12 @@ public class Lotto {
                 .toList();
     }
 
+    public List<Integer> getNumbers() {
+        return numbers.stream()
+                .map(LottoNumber::number)
+                .toList();
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (!(o instanceof Lotto lotto)) {
@@ -66,11 +68,5 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hashCode(numbers);
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers.stream()
-                .map(LottoNumber::number)
-                .toList();
     }
 }
