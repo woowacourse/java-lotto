@@ -39,4 +39,13 @@ class LottoTest {
                         .hasMessageContaining(INVALID_LOTTO_ERROR_MESSAGE)
         );
     }
+
+    @DisplayName("로또 번호에 중복이 존재한다면 예외를 발생시킨다")
+    @Test
+    void lottoNumberDuplicateTest() {
+        assertThatThrownBy(
+                () -> new Lotto(List.of(1, 2, 3, 4, 5, 5)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(INVALID_LOTTO_ERROR_MESSAGE);
+    }
 }

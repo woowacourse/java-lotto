@@ -24,6 +24,7 @@ public class Lotto {
     private void validateLotto(final List<Integer> lotto) {
         validateLottoSize(lotto);
         validateLottoNumberRange(lotto);
+        validateLottoNumberNotDuplicated(lotto);
     }
 
     private void validateLottoSize(final List<Integer> lotto) {
@@ -42,6 +43,8 @@ public class Lotto {
     }
 
     private void validateLottoNumberNotDuplicated(final List<Integer> lotto) {
-
+        if (lotto.size() != lotto.stream().distinct().count()) {
+            throw new IllegalArgumentException(INVALID_LOTTO_ERROR_MESSAGE);
+        }
     }
 }
