@@ -1,7 +1,6 @@
 package domain;
 
-import view.InputView;
-import view.Validator;
+import validation.LottoValidator;
 
 import java.util.List;
 
@@ -9,7 +8,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        Validator.validateWinningNumbers(numbers);
+        LottoValidator.validateWinningNumbers(numbers);
         this.numbers = numbers;
     }
 

@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import static validation.LottoValidator.*;
+
 public class InputView {
     static Scanner sc = new Scanner(System.in);
 
@@ -24,8 +26,7 @@ public class InputView {
                     .map(String::trim)
                     .map(Integer::parseInt)
                     .toList();
-            Validator.validateWinningNumbers(winningNumbers);
-            Validator.validateWinningNumbersUnique(winningNumbers);
+            validateWinningNumbers(winningNumbers);
             return winningNumbers;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("당첨 번호는 숫자만 가능합니다.");
@@ -36,8 +37,8 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
             int bonusBall = Integer.parseInt(sc.nextLine());
-            Validator.validateNumber(bonusBall);
-            Validator.validateBonusBallUnique(winningNumbers, bonusBall);
+            validateNumber(bonusBall);
+            validateBonusBallUnique(winningNumbers, bonusBall);
             return bonusBall;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("보너스 볼을 형식에 맞게 입력해주세요.");

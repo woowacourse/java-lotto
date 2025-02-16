@@ -2,6 +2,7 @@ package view;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import validation.LottoValidator;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ class ValidatorTest {
         List<Integer> sixNumbers = List.of(1, 2, 3, 4, 5, 6);
         List<Integer> overSixNumbers = List.of(1, 2, 3, 4, 5, 6, 7);
         assertThatThrownBy(() -> {
-            Validator.validateWinningNumbers(underSixNumbers);
-            Validator.validateWinningNumbers(sixNumbers);
-            Validator.validateWinningNumbers(overSixNumbers);
+            LottoValidator.validateWinningNumbers(underSixNumbers);
+            LottoValidator.validateWinningNumbers(sixNumbers);
+            LottoValidator.validateWinningNumbers(overSixNumbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -25,10 +26,10 @@ class ValidatorTest {
     @Test
     void 당첨_번호는_1에서_45_사이의_수_예외_처리_테스트() {
         assertThatThrownBy(() -> {
-            Validator.validateNumber(0);
-            Validator.validateNumber(5);
-            Validator.validateNumber(40);
-            Validator.validateNumber(50);
+            LottoValidator.validateNumber(0);
+            LottoValidator.validateNumber(5);
+            LottoValidator.validateNumber(40);
+            LottoValidator.validateNumber(50);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -36,7 +37,7 @@ class ValidatorTest {
     @Test
     void 당첨_번호_중복_예외_처리_테스트() {
         assertThatThrownBy(() -> {
-            Validator.validateWinningNumbersUnique(List.of(1,1,2,3,4,5));
+            LottoValidator.validateWinningNumbers(List.of(1,1,2,3,4,5));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

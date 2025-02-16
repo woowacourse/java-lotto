@@ -1,8 +1,8 @@
-package view;
+package validation;
 
 import java.util.List;
 
-public class Validator {
+public class LottoValidator {
     public static void validateWinningNumbers(List<Integer> winningNumbers) {
         if(winningNumbers.size() != 6) {
             throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
@@ -10,6 +10,7 @@ public class Validator {
         for (int num : winningNumbers) {
             validateNumber(num);
         }
+        validateWinningNumbersUnique(winningNumbers);
     }
 
     public static void validateNumber(int number) {
@@ -18,7 +19,7 @@ public class Validator {
         }
     }
 
-    public static void validateWinningNumbersUnique(List<Integer> winningNumbers) {
+    private static void validateWinningNumbersUnique(List<Integer> winningNumbers) {
         if (winningNumbers.size() != winningNumbers.stream().distinct().count()) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
