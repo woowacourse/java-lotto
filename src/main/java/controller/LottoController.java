@@ -4,11 +4,11 @@ import domain.Amount;
 import domain.Lotto;
 import domain.Lottos;
 import domain.Rank;
+import domain.WinningLotto;
 import domain.dto.LottoResponse;
 import domain.dto.LottosResponse;
-import domain.factory.LottosFactory;
-import domain.WinningLotto;
 import domain.dto.ResultResponse;
+import domain.factory.LottosFactory;
 import domain.generator.RandomGenerator;
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -29,9 +29,14 @@ public class LottoController {
 
     public void run() {
         Amount amount = inputAmount();
-        Lottos lottos = getRandomLottos(amount);
+
+        Lottos lottos = createRandomLottos(amount);
+        printRandomLottos(lottos);
+
         WinningLotto winningLotto = inputWinningLotto();
-        getResult(lottos, winningLotto, amount);
+
+        ResultResponse lottoResult = createLottoResultResponse(lottos, winningLotto, amount);
+        printLottoResult(lottoResult);
     }
 
     private Amount inputAmount() {
@@ -41,22 +46,24 @@ public class LottoController {
         return amount;
     }
 
-    private Lottos getRandomLottos(Amount amount) {
+    private Lottos createRandomLottos(Amount amount) {
         LottosFactory lottosFactory = new LottosFactory(new RandomGenerator());
-        Lottos lottos = lottosFactory.from(amount);
-        outputView.printLottos(getLottosDto(lottos));
-        return lottos;
+        return lottosFactory.from(amount);
     }
 
-    private LottosResponse getLottosDto(Lottos lottos) {
+    private void printRandomLottos(Lottos lottos) {
+        outputView.printLottos(createLottosDto(lottos));
+    }
+
+    private LottosResponse createLottosDto(Lottos lottos) {
         List<LottoResponse> lottoResponses = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
-            lottoResponses.add(getLottoDto(lotto));
+            lottoResponses.add(createLottoDto(lotto));
         }
         return new LottosResponse(lottoResponses);
     }
 
-    private LottoResponse getLottoDto(Lotto lotto) {
+    private LottoResponse createLottoDto(Lotto lotto) {
         return new LottoResponse(lotto.getNumbers());
     }
 
@@ -66,12 +73,7 @@ public class LottoController {
         return new WinningLotto(winningNumber, bonusNumber);
     }
 
-    private void getResult(Lottos lottos, WinningLotto winningLotto, Amount amount) {
-        ResultResponse lottosResult = getResultResponse(lottos, winningLotto, amount);
-        outputView.printWinningStatistic(lottosResult);
-    }
-
-    public ResultResponse getResultResponse(Lottos lottos, WinningLotto winningLotto, Amount amount) {
+    private ResultResponse createLottoResultResponse(Lottos lottos, WinningLotto winningLotto, Amount amount) {
         EnumMap<Rank, Integer> countRank = lottos.countMatchNumbers(winningLotto);
 
         long prizeSum = 0L;
@@ -81,5 +83,9 @@ public class LottoController {
 
         double profit = amount.calculateProfit(prizeSum);
         return new ResultResponse(countRank, profit);
+    }
+
+    private void printLottoResult(ResultResponse lottoResult) {
+        outputView.printWinningStatistic(lottoResult);
     }
 }
