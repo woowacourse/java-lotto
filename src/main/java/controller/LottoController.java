@@ -28,7 +28,7 @@ public class LottoController {
         try {
             Money purchaseLottoMoney = inputMoney();
             Lottos purchasedLottos = purchaseLottos(purchaseLottoMoney);
-            outputView.printPurchaseLottos(purchasedLottos);
+            outputView.printPurchaseLottos(purchasedLottos.getLottos());
 
             WinningLotto winningLotto = inputWinningLotto();
             WinningResult winningResult = purchasedLottos.calculateWinning(winningLotto, purchaseLottoMoney);
