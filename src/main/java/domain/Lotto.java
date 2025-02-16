@@ -58,10 +58,6 @@ public class Lotto {
                 .count();
     }
 
-    public Set<Number> getNumbers() {
-        return unmodifiableSet(numbers);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -78,5 +74,9 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hashCode(getNumbers());
+    }
+
+    public Set<Number> getNumbers() {
+        return unmodifiableSet(numbers);
     }
 }
