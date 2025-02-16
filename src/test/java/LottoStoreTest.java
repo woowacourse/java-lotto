@@ -3,7 +3,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.within;
 
 import java.util.List;
-import model.LottoNumberGenerator;
 import model.LottoRank;
 import model.LottoRankCalculator;
 import model.LottoRankResult;
@@ -14,7 +13,10 @@ import org.junit.jupiter.api.Test;
 
 class LottoStoreTest {
 
-    private LottoStore lottoStore = new LottoStore(new LottoNumberGenerator(), new LottoRankCalculator());
+    private LottoStore lottoStore = new LottoStore(
+            () -> List.of(1, 2, 3, 4, 5, 6),
+            new LottoRankCalculator()
+    );
 
     @Test
     void 구입_금액이_1000원_단위가_아나라면_예외를_발생시킨다() {
@@ -36,6 +38,7 @@ class LottoStoreTest {
     void 구입_개수만큼_로또_티켓이_생성된다() {
         int purchaseCount = 14;
         assertThat(lottoStore.createLottoTickets(purchaseCount).size()).isEqualTo(14);
+        assertThat(lottoStore.createLottoTickets(purchaseCount).getFirst().getNumbers()).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }
 
     @Test

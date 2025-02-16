@@ -1,5 +1,6 @@
 package model;
 
+import common.NumbersGenerator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -8,11 +9,11 @@ public class LottoStore {
 
     private static final int LOTTO_PRICE = 1_000;
 
-    private final LottoNumberGenerator lottoNumberGenerator;
+    private final NumbersGenerator numbersGenerator;
     private final LottoRankCalculator lottoRankCalculator;
 
-    public LottoStore(LottoNumberGenerator lottoNumberGenerator, LottoRankCalculator lottoRankCalculator) {
-        this.lottoNumberGenerator = lottoNumberGenerator;
+    public LottoStore(NumbersGenerator numbersGenerator, LottoRankCalculator lottoRankCalculator) {
+        this.numbersGenerator = numbersGenerator;
         this.lottoRankCalculator = lottoRankCalculator;
     }
 
@@ -23,7 +24,7 @@ public class LottoStore {
 
     public List<LottoTicket> createLottoTickets(int purchaseCount) {
         return IntStream.range(0, purchaseCount)
-                .mapToObj(count -> new LottoTicket(lottoNumberGenerator.generate()))
+                .mapToObj(count -> new LottoTicket(numbersGenerator.generate()))
                 .toList();
     }
 
