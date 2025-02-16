@@ -1,15 +1,14 @@
 package model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class UserLotto {
 
     private final Lotto winningNumbers;
     private final BonusNumber bonusNumber;
 
-    public UserLotto(Set<Integer> userInputNumbers, BonusNumber bonusNumber) {
-        this.winningNumbers = new Lotto(new HashSet<>(userInputNumbers));
+    public UserLotto(List<Integer> userInputNumbers, BonusNumber bonusNumber) {
+        this.winningNumbers = new Lotto(userInputNumbers);
         validateDuplicateBonusNumber(bonusNumber.getBonusNumber());
         this.bonusNumber = bonusNumber;
     }

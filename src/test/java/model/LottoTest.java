@@ -41,10 +41,9 @@ class LottoTest {
 
     @ParameterizedTest
     @MethodSource("outOfRangeNumbers")
-    @DisplayName("당첨 번호가 범위를 넘어가면 예외가 발생한다")
-    void 당첨_번호가_범위를_넘어가면_예외가_발생한다(Set<Integer> outOfRangeNumbers) {
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 55, 66);
-        assertThatThrownBy(() -> new Lotto(outOfRangeNumbers))
+    @DisplayName("번호가 범위를 넘어가면 예외가 발생한다")
+    void 번호가_범위를_넘어가면_예외가_발생한다(List<Integer> outOfRangeNumbers) {
+        assertThatThrownBy(() -> new Lotto(new TestLottoNumberGenerator(outOfRangeNumbers)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("숫자는 1~45 사이여야 합니다.");
     }
