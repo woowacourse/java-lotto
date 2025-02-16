@@ -5,6 +5,7 @@ import domain.LottoTicket;
 import domain.LottoTickets;
 import domain.Profit;
 import domain.WinningStatistics;
+import domain.WinningStatisticsAndProfit;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -21,7 +22,12 @@ public class OutputView {
         }
     }
 
-    public static void printWinningStatistics(WinningStatistics winningStatistics) {
+    public static void printWinningStatisticsAndProfit(WinningStatisticsAndProfit winningStatisticsAndProfit) {
+        printWinningStatistics(winningStatisticsAndProfit.winningStatistics());
+        printProfit(winningStatisticsAndProfit.profit());
+    }
+
+    private static void printWinningStatistics(WinningStatistics winningStatistics) {
         Map<LottoPrize, Integer> prizeCounter = winningStatistics.getPrizeCounter();
         List<LottoPrize> lottoPrizes = Arrays.stream(LottoPrize.values())
                 .filter(lottoPrize -> lottoPrize != LottoPrize.NOTHING)
@@ -43,7 +49,7 @@ public class OutputView {
         return " ";
     }
 
-    public static void printProfit(Profit profit) {
+    private static void printProfit(Profit profit) {
         DecimalFormat df = new DecimalFormat("0.##");
         df.setRoundingMode(RoundingMode.DOWN);
         System.out.printf("총 수익률은 %s입니다.", df.format(profit.getProfit()));

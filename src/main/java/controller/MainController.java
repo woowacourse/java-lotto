@@ -8,6 +8,7 @@ import domain.Profit;
 import domain.RandomIntegerGenerator;
 import domain.StatisticsService;
 import domain.WinningStatistics;
+import domain.WinningStatisticsAndProfit;
 import view.InputView;
 import view.OutputView;
 
@@ -24,7 +25,9 @@ public class MainController {
 
         DrawResult drawResult = inputDrawResult();
 
-        calculateAndPrintStatistics(lottoTickets, drawResult);
+        WinningStatisticsAndProfit winningStatisticsAndProfit = calculateWinningStatisticsAndProfit(lottoTickets,
+                drawResult);
+        OutputView.printWinningStatisticsAndProfit(winningStatisticsAndProfit);
     }
 
     private LottoTickets purchaseLottoTickets() {
@@ -39,10 +42,10 @@ public class MainController {
         return new DrawResult(winningLottoNumbers, bonusNumber);
     }
 
-    private void calculateAndPrintStatistics(LottoTickets lottoTickets, DrawResult drawResult) {
+    private WinningStatisticsAndProfit calculateWinningStatisticsAndProfit(LottoTickets lottoTickets,
+                                                                           DrawResult drawResult) {
         WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, drawResult);
         Profit profit = statisticsService.calculateProfit(winningStatistics);
-        OutputView.printWinningStatistics(winningStatistics);
-        OutputView.printProfit(profit);
+        return new WinningStatisticsAndProfit(winningStatistics, profit);
     }
 }
