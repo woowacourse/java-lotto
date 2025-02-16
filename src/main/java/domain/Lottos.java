@@ -1,12 +1,8 @@
 package domain;
 
-import domain.dto.LottoResponse;
-import domain.dto.LottosResponse;
-import domain.dto.ResultResponse;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 public class Lottos {
 

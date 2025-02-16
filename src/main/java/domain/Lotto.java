@@ -1,8 +1,9 @@
 package domain;
 
-import static global.exception.ExceptionMessage.*;
+import static global.exception.ExceptionMessage.DUPLICATED_NUMBER;
+import static global.exception.ExceptionMessage.INVALID_FORMAT;
+import static global.exception.ExceptionMessage.INVALID_RANGE;
 
-import domain.dto.LottoResponse;
 import java.util.ArrayList;
 import java.util.List;
 

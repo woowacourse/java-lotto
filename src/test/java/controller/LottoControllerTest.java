@@ -1,7 +1,6 @@
 package controller;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import domain.Amount;
 import domain.Lotto;
