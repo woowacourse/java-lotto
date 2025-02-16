@@ -41,10 +41,6 @@ public class Lotto {
         return bonus;
     }
 
-    public LottoResponse getLottoDto() {
-        return new LottoResponse(numbers);
-    }
-
     public Rank countMatchNumbers(WinningLotto winningLotto) {
         int count = (int) numbers.stream()
                 .filter(winningLotto::contains)
@@ -95,4 +91,7 @@ public class Lotto {
         }
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }

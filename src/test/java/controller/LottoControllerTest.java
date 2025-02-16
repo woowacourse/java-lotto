@@ -1,16 +1,23 @@
-package domain;
+package controller;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
+import domain.Amount;
+import domain.Lotto;
+import domain.Lottos;
+import domain.Rank;
+import domain.WinningLotto;
 import domain.dto.ResultResponse;
 import java.util.EnumMap;
 import org.junit.jupiter.api.Test;
 
-class LottosTest {
+class LottoControllerTest {
 
     @Test
     void 정상_결과_반환_테스트() {
         //given
+        LottoController controller = new LottoController();
         Lottos lottos = createFakeLottos();
         WinningLotto winningLotto = new WinningLotto("5, 12, 19, 23, 34, 42", "27");
         Amount amount = new Amount("8000");
@@ -22,7 +29,7 @@ class LottosTest {
 
         ResultResponse resultResponse = new ResultResponse(expectedRankCount, expectedProfit);
         //when
-        ResultResponse result = lottos.getResult(winningLotto, amount);
+        ResultResponse result = controller.getResultResponse(lottos, winningLotto, amount);
 
         //then
         assertThat(resultResponse).isEqualTo(result);
