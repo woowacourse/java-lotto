@@ -9,11 +9,11 @@ public class CustomLottoNumberPicker extends LottoNumberPicker {
     private Integer index = INIT_INDEX;
 
     @Override
-    public Number pickRandomNumber() {
+    public LottoNumber pickRandomNumber() {
         if (index >= values.size()) {
             index = INIT_INDEX;
         }
-        return new Number(values.get(index++));
+        return new LottoNumber(values.get(index++));
     }
 
     public void addValue(int value) {

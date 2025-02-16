@@ -9,8 +9,8 @@ public class LottoNumberPicker {
 
     private final int UPPER_BOUND = 1;
 
-    public Number pickRandomNumber() {
-        return new Number(ThreadLocalRandom.current().nextInt(
+    public LottoNumber pickRandomNumber() {
+        return new LottoNumber(ThreadLocalRandom.current().nextInt(
                 MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + UPPER_BOUND
         ));
     }

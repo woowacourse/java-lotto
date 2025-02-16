@@ -40,10 +40,10 @@ public class LottoEvaluator {
         if (lotto.containsNumber(winningLotto.getBonus())) {
             bonus = true;
         }
-        Set<Number> winningNumbers = winningLotto.getLotto().getLottoNumbers();
-        Set<Number> matchedLottoNumbers = lotto.getLottoNumbers();
-        matchedLottoNumbers.retainAll(winningNumbers);
-        int matchCount = matchedLottoNumbers.size();
+        Set<LottoNumber> winningLottoNumbers = winningLotto.getLotto().getLottoNumbers();
+        Set<LottoNumber> matchedLottoLottoNumbers = lotto.getLottoNumbers();
+        matchedLottoLottoNumbers.retainAll(winningLottoNumbers);
+        int matchCount = matchedLottoLottoNumbers.size();
         return Prize.findPrize(matchCount, bonus);
     }
 }

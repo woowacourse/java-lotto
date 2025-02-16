@@ -2,9 +2,9 @@ package model;
 
 public class WinningLotto {
     private final Lotto lotto;
-    private final Number bonus;
+    private final LottoNumber bonus;
 
-    public WinningLotto(Lotto lotto, Number bonus) {
+    public WinningLotto(Lotto lotto, LottoNumber bonus) {
         this.lotto = lotto;
         this.bonus = bonus;
     }
@@ -13,7 +13,7 @@ public class WinningLotto {
         return lotto;
     }
 
-    public Number getBonus() {
+    public LottoNumber getBonus() {
         return bonus;
     }
 }

@@ -3,15 +3,15 @@ package util;
 import java.util.Set;
 import java.util.TreeSet;
 import model.Lotto;
-import model.Number;
+import model.LottoNumber;
 
 public class LottoUtil {
 
-    public static Lotto generateTestLotto(int ... values){
-        Set<Number> numbers = new TreeSet<>();
-        for (int value : values){
-            numbers.add(new Number(value));
+    public static Lotto generateTestLotto(int... values) {
+        Set<LottoNumber> lottoNumbers = new TreeSet<>();
+        for (int value : values) {
+            lottoNumbers.add(new LottoNumber(value));
         }
-        return new Lotto(numbers);
+        return new Lotto(lottoNumbers);
     }
 }

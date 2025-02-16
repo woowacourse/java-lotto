@@ -4,10 +4,10 @@ import java.util.stream.IntStream;
 import model.Lotto;
 import model.LottoEvaluator;
 import model.LottoGenerater;
+import model.LottoNumber;
 import model.LottoNumberPicker;
 import model.Lottos;
 import model.Money;
-import model.Number;
 import model.WinningLotto;
 import util.Parser;
 import view.InputView;
@@ -44,8 +44,8 @@ public class Controller {
         LottoGenerater lottoGenerater = new LottoGenerater(lottoNumberPicker);
         return new Lottos(
                 IntStream.range(0, money.computeTicketCount())
-                .mapToObj(i -> lottoGenerater.generateLotto())
-                .toList()
+                        .mapToObj(i -> lottoGenerater.generateLotto())
+                        .toList()
         );
     }
 
@@ -53,7 +53,7 @@ public class Controller {
         String rawWinningLotto = inputView.inputWinningLotto();
         Lotto lotto = Parser.parseLotto(rawWinningLotto);
         String rawBonusNumber = inputView.inputBonus();
-        Number bonusNumber = Parser.parseNumber(rawBonusNumber);
-        return new WinningLotto(lotto, bonusNumber);
+        LottoNumber bonusLottoNumber = Parser.parseNumber(rawBonusNumber);
+        return new WinningLotto(lotto, bonusLottoNumber);
     }
 }
