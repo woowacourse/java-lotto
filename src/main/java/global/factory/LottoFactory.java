@@ -6,7 +6,7 @@ import global.generator.Generator;
 public class LottoFactory {
     private final Generator generator;
 
-    public LottoFactory(Generator generator) {
+    public LottoFactory(final Generator generator) {
         this.generator = generator;
     }
 

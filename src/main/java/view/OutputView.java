@@ -1,14 +1,14 @@
 package view;
 
-import static view.Output.FIFTH_MESSAGE;
-import static view.Output.FIRST_MESSAGE;
-import static view.Output.FOURTH_MESSAGE;
-import static view.Output.PROFIT_MESSAGE;
-import static view.Output.PURCHASE_MESSAGE;
-import static view.Output.RESULT_TITLE_MESSAGE;
-import static view.Output.SECOND_MESSAGE;
-import static view.Output.SEPARATE_LINE;
-import static view.Output.THIRD_MESSAGE;
+import static view.OutputMessage.FIFTH_MESSAGE;
+import static view.OutputMessage.FIRST_MESSAGE;
+import static view.OutputMessage.FOURTH_MESSAGE;
+import static view.OutputMessage.PROFIT_MESSAGE;
+import static view.OutputMessage.PURCHASE_MESSAGE;
+import static view.OutputMessage.RESULT_TITLE_MESSAGE;
+import static view.OutputMessage.SECOND_MESSAGE;
+import static view.OutputMessage.SEPARATE_LINE;
+import static view.OutputMessage.THIRD_MESSAGE;
 
 import domain.Rank;
 import domain.dto.AmountDto;
@@ -18,15 +18,15 @@ import domain.dto.ResultDto;
 
 public class OutputView {
 
-    public void printAmount(AmountDto amountDto) {
+    public void printAmount(final AmountDto amountDto) {
         System.out.printf(PURCHASE_MESSAGE.getMessage(), amountDto.amount());
     }
 
-    public void printLottos(LottosDto lottosDto) {
+    public void printLottos(final LottosDto lottosDto) {
         lottosDto.getLottoDtos().forEach(this::printLotto);
     }
 
-    public void printWinningStatistic(ResultDto lottosResult) {
+    public void printWinningStatistic(final ResultDto lottosResult) {
         System.out.print(RESULT_TITLE_MESSAGE.getMessage());
         System.out.print(SEPARATE_LINE.getMessage());
         System.out.printf(FIFTH_MESSAGE.getMessage(), lottosResult.countRank().get(Rank.FIFTH));

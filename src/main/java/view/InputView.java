@@ -14,7 +14,7 @@ public class InputView {
     }
 
     public int inputPrice() {
-        System.out.println(Input.PRICE.getMessage());
+        System.out.println(InputMessage.PRICE.getMessage());
         try {
             int price = sc.nextInt();
             sc.nextLine();
@@ -25,12 +25,12 @@ public class InputView {
     }
 
     public String inputWinningLotto() {
-        System.out.println(Input.WINNING_LOTTO.getMessage());
+        System.out.println(InputMessage.WINNING_LOTTO.getMessage());
         return sc.nextLine();
     }
 
     public String inputBonusLotto() {
-        System.out.println(Input.BONUS.getMessage());
+        System.out.println(InputMessage.BONUS.getMessage());
         return sc.nextLine();
     }
 }

@@ -6,7 +6,7 @@ public record AmountDto(
         int amount
 ) {
 
-    public AmountDto(Money money) {
+    public AmountDto(final Money money) {
         this(money.getMoney());
     }
 }

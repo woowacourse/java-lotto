@@ -1,6 +1,6 @@
 package view;
 
-public enum Output {
+public enum OutputMessage {
 
     PURCHASE_MESSAGE("%d개를 구매했습니다."),
 
@@ -18,7 +18,7 @@ public enum Output {
 
     private String message;
 
-    Output(String message) {
+    OutputMessage(final String message) {
         this.message = message;
     }
 

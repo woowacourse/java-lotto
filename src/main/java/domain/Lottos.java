@@ -8,11 +8,11 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
+    public Lottos(final List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public EnumMap<Rank, Integer> calculateWinningResult(WinningLotto winningLotto) {
+    public EnumMap<Rank, Integer> calculateWinningResult(final WinningLotto winningLotto) {
         EnumMap<Rank, Integer> countRank = countMatchNumbers(winningLotto);
         return countRank;
     }
@@ -21,7 +21,7 @@ public class Lottos {
         return lottos;
     }
 
-    private EnumMap<Rank, Integer> countMatchNumbers(WinningLotto winningLotto) {
+    private EnumMap<Rank, Integer> countMatchNumbers(final WinningLotto winningLotto) {
         EnumMap<Rank, Integer> countRank = new EnumMap<>(Rank.class);
 
         for (Rank rank : Rank.values()) {

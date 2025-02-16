@@ -11,42 +11,42 @@ public class WinningLotto{
     private Lotto lotto;
     private int bonus;
 
-    public WinningLotto(String input, String bonus) {
+    public WinningLotto(final String input, final String bonus) {
         this.lotto = new Lotto(input);
         this.bonus = validateBonus(bonus);
     }
 
-    public Rank countMatchNumbers(Lotto lotto) {
+    public Rank countMatchNumbers(final Lotto lotto) {
         int count = lotto.matchCount(this);
         return Rank.matchRank(count, lotto.isContains(bonus));
     }
 
-    public boolean isContains(int num) {
+    public boolean isContains(final int num) {
         return lotto.isContains(num);
     }
 
-    private int validateBonus(String input) {
+    private int validateBonus(final String input) {
         int bonus = validateIsInteger(input);
         validateRange(bonus);
         validateBonusDuplicate(bonus);
         return bonus;
     }
 
-    private void validateBonusDuplicate(int bonus) {
+    private void validateBonusDuplicate(final int bonus) {
         if(lotto.isContains(bonus)){
             throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
         }
     }
 
-    private void validateRange(int num) {
+    private void validateRange(final int num) {
         if (num < LOTTO_MIN || num > LOTTO_MAX) {
             throw new IllegalArgumentException(INVALID_RANGE.getMessage());
         }
     }
 
-    private int validateIsInteger(String s) {
+    private int validateIsInteger(final String input) {
         try {
-            return Integer.parseInt(s);
+            return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }

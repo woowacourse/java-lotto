@@ -11,7 +11,7 @@ public class LottosFactory {
 
     private final LottoFactory lottoFactory;
 
-    public LottosFactory(Generator generator) {
+    public LottosFactory(final Generator generator) {
         this.lottoFactory = new LottoFactory(generator);
     }
 

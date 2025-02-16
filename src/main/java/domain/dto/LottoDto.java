@@ -6,7 +6,7 @@ import java.util.List;
 public record LottoDto(
         List<Integer> numbers
 ) {
-    public LottoDto(Lotto lotto) {
+    public LottoDto(final Lotto lotto) {
         this(lotto.getNumbers());
     }
 }

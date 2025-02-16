@@ -36,7 +36,7 @@ public class LottoController {
         return money;
     }
 
-    private Lottos createLottosFromRandomNumber(Money money) {
+    private Lottos createLottosFromRandomNumber(final Money money) {
         Lottos lottos = money.buyLottos();
         outputView.printLottos(LottosDto.from(lottos));
         return lottos;
@@ -49,7 +49,7 @@ public class LottoController {
         return new WinningLotto(winningNumber, bonusNumber);
     }
 
-    private void calculateResult(Lottos lottos, WinningLotto winningLotto, Money money) {
+    private void calculateResult(final Lottos lottos, final WinningLotto winningLotto, final Money money) {
         EnumMap<Rank, Integer> countRank = lottos.calculateWinningResult(winningLotto);
         double profit = money.calculateProfit(countRank);
 

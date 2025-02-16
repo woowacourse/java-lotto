@@ -15,11 +15,11 @@ public class Lotto {
 
     protected List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(final List<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    public Lotto(String lotto) {
+    public Lotto(final String lotto) {
         numbers = new ArrayList<>();
         String[] splitNumbers = lotto.split(DELIMITER);
 
@@ -32,11 +32,11 @@ public class Lotto {
         validateLottoDuplicate();
     }
 
-    public boolean isContains(int num) {
+    public boolean isContains(final int num) {
         return numbers.contains(num);
     }
 
-    public int matchCount(WinningLotto winningLotto) {
+    public int matchCount(final WinningLotto winningLotto) {
         return (int) numbers.stream()
                 .filter(winningLotto::isContains)
                 .count();
@@ -52,21 +52,21 @@ public class Lotto {
         }
     }
 
-    private void validateLength(String[] splitNumbers) {
+    private void validateLength(final String[] splitNumbers) {
         if (splitNumbers.length != LOTTO_LENGTH) {
             throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }
     }
 
-    private void validateRange(int num) {
+    private void validateRange(final int num) {
         if (num < LOTTO_MIN || num > LOTTO_MAX) {
             throw new IllegalArgumentException(INVALID_RANGE.getMessage());
         }
     }
 
-    private int validateIsInteger(String s) {
+    private int validateIsInteger(final String inputNumber) {
         try {
-            return Integer.parseInt(s);
+            return Integer.parseInt(inputNumber);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
         }

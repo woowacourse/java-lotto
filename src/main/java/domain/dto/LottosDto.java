@@ -6,7 +6,7 @@ import java.util.List;
 public record LottosDto(
         List<LottoDto> getLottoDtos
 ) {
-    public static LottosDto from(Lottos lottos){
+    public static LottosDto from(final Lottos lottos){
         return new LottosDto(lottos.getLottos().stream()
                 .map(LottoDto::new)
                 .toList());
