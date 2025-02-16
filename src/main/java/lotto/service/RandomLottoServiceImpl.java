@@ -18,6 +18,7 @@ public class RandomLottoServiceImpl implements RandomLottoService {
 
     public List<LottoNumber> generateRandomLottoNumbers(int maxSize, int maxNumber) {
         List<Integer> randomNumbers = generateUniqueRandomNumbers(maxSize, maxNumber);
+
         return randomNumbers.stream()
                 .map(LottoNumber::new)
                 .toList();

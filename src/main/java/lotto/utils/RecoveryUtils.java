@@ -16,5 +16,4 @@ public final class RecoveryUtils {
             return executeWithRetry(inputSupplier);
         }
     }
-
 }

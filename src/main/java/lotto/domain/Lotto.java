@@ -80,6 +80,4 @@ public class Lotto {
 
         return joiner.toString();
     }
-
-
 }

@@ -28,7 +28,6 @@ public class Main {
         printStatics(profit, money);
     }
 
-
     private static void printLottoGroup(Money money, LottoGroup lottoGroup) {
         int lottoTicketCount = money.getLottoTicketCount();
         String lottoGroupMessage = lottoService.getLottoGroupMessage(lottoGroup);
@@ -52,6 +51,4 @@ public class Main {
 
         OutputView.printStatics(statusValues, profitRate);
     }
-
-
 }

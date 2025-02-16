@@ -37,9 +37,6 @@ public class LottoService {
         return LottoGroup.from(lottoList);
     }
 
-
-
-
     public String getLottoGroupMessage(LottoGroup lottoGroup) {
         return lottoGroup.toString();
     }
