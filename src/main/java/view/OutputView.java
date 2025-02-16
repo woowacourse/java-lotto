@@ -1,9 +1,9 @@
 package view;
 
 import domain.Rank;
-import domain.dto.LottoResultViewDto;
-import domain.dto.LottosViewDto;
-import domain.dto.TicketViewDto;
+import domain.dto.LottoResultDto;
+import domain.dto.LottosDto;
+import domain.dto.TicketDto;
 import java.util.List;
 import java.util.Map;
 
@@ -22,22 +22,22 @@ public class OutputView {
         return new OutputView();
     }
 
-    public void printPurchaseResult(TicketViewDto ticketViewDto) {
-        System.out.printf(PURCHASE_RESULT, ticketViewDto.getTicket());
+    public void printPurchaseResult(TicketDto ticketDto) {
+        System.out.printf(PURCHASE_RESULT, ticketDto.getTicket());
         changeLine();
     }
 
-    public void printLottos(LottosViewDto lottosViewDto) {
-        List<List<Integer>> lottos = lottosViewDto.getLottos();
+    public void printLottos(LottosDto lottosDto) {
+        List<List<Integer>> lottos = lottosDto.getLottos();
         for (List<Integer> lotto : lottos) {
             System.out.println(lotto);
         }
     }
 
-    public void printWinningStatistic(LottoResultViewDto lottoResultViewDto) {
+    public void printWinningStatistic(LottoResultDto lottoResultDto) {
         printMessage(WINNING_STATISTIC_MESSAGE);
         printMessage(HYPHEN.repeat(9));
-        Map<Rank, Integer> viewResult = lottoResultViewDto.getViewResult();
+        Map<Rank, Integer> viewResult = lottoResultDto.getViewResult();
         for (Rank rank : viewResult.keySet()) {
             if (!rank.getDescription().isBlank()) {
                 System.out.print(rank.getDescription() + " " + HYPHEN + " ");

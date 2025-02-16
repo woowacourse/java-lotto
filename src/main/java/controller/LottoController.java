@@ -1,14 +1,10 @@
 package controller;
 
-import domain.Lotto;
-import domain.Rank;
-import domain.Ticket;
-import domain.WinningNumber;
-import domain.dto.LottoResultViewDto;
-import domain.dto.LottosViewDto;
-import domain.dto.TicketViewDto;
-import java.util.List;
-import java.util.Map;
+import domain.dto.LottoDto;
+import domain.dto.LottoResultDto;
+import domain.dto.LottosDto;
+import domain.dto.TicketDto;
+import domain.dto.WinningNumberDto;
 import service.LottoService;
 import view.InputView;
 import view.OutputView;
@@ -27,43 +23,43 @@ public class LottoController {
 
     public void start() {
         int purchaseAmount = inputView.purchaseAmountInput();
-        Ticket ticket = ticketProcess(purchaseAmount);
-        List<Lotto> lottos = lottoProcess(ticket);
-        WinningNumber winningNumber = winningNumberProcess();
-        Map<Rank, Integer> rankResult = calculateRankProcess(winningNumber, lottos);
-        profitProcess(rankResult, purchaseAmount);
+        TicketDto ticketDto = ticketProcess(purchaseAmount);
+        LottosDto lottosDto = lottoProcess(ticketDto);
+        WinningNumberDto winningNumberDto = winningNumberProcess();
+        LottoResultDto lottoResultDto = calculateRankProcess(winningNumberDto, lottosDto);
+        profitProcess(lottoResultDto, purchaseAmount);
     }
 
-    private Ticket ticketProcess(int purchaseAmount) {
-        Ticket ticket = lottoService.makeTicket(purchaseAmount);
-        outputView.printPurchaseResult(TicketViewDto.from(ticket));
-        return ticket;
+    private TicketDto ticketProcess(int purchaseAmount) {
+        TicketDto ticketDto = lottoService.makeTicket(purchaseAmount);
+        outputView.printPurchaseResult(ticketDto);
+        return ticketDto;
     }
 
-    private void profitProcess(Map<Rank, Integer> rankResult, int purchaseAmount) {
-        double calculateRate = lottoService.calculateProfit(rankResult, purchaseAmount);
+    private void profitProcess(LottoResultDto lottoResultDto, int purchaseAmount) {
+        double calculateRate = lottoService.calculateProfit(lottoResultDto, purchaseAmount);
         outputView.printProfit(calculateRate);
     }
 
-    private Map<Rank, Integer> calculateRankProcess(
-        WinningNumber winningNumber, List<Lotto> lottos) {
+    private LottoResultDto calculateRankProcess(
+        WinningNumberDto winningNumber, LottosDto lottos) {
         lottoService.calculateRank(winningNumber, lottos);
-        Map<Rank, Integer> rankResult = lottoService.getRankResult();
-        outputView.printWinningStatistic(LottoResultViewDto.from(rankResult));
-        return rankResult;
+        LottoResultDto lottoResult = lottoService.getRankResult();
+        outputView.printWinningStatistic(lottoResult);
+        return lottoResult;
     }
 
-    private WinningNumber winningNumberProcess() {
+    private WinningNumberDto winningNumberProcess() {
         String winningNumbers = inputView.winningNumbersInput();
-        Lotto lotto = lottoService.makeLotto(winningNumbers);
+        LottoDto lottoDto = lottoService.makeLotto(winningNumbers);
         int bonusNumber = inputView.bonusNumberInput();
-        return lottoService.makeWinningNumber(lotto, bonusNumber);
+        return lottoService.makeWinningNumber(lottoDto, bonusNumber);
     }
 
-    private List<Lotto> lottoProcess(Ticket ticket) {
-        lottoService.saveLotto(ticket);
-        List<Lotto> lottos = lottoService.getLottos();
-        outputView.printLottos(LottosViewDto.from(lottos));
+    private LottosDto lottoProcess(TicketDto ticketDto) {
+        lottoService.saveLotto(ticketDto);
+        LottosDto lottos = lottoService.getLottos();
+        outputView.printLottos(lottos);
         return lottos;
     }
 }

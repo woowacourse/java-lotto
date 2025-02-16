@@ -5,16 +5,16 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class LottoResultViewDto {
+public class LottoResultDto {
 
     private final Map<Rank, Integer> viewResult;
 
-    private LottoResultViewDto(Map<Rank, Integer> result) {
+    private LottoResultDto(Map<Rank, Integer> result) {
         this.viewResult = new LinkedHashMap<>(result);
     }
 
-    public static LottoResultViewDto from(Map<Rank, Integer> result) {
-        return new LottoResultViewDto(result);
+    public static LottoResultDto from(Map<Rank, Integer> result) {
+        return new LottoResultDto(result);
     }
 
     public Map<Rank, Integer> getViewResult() {
