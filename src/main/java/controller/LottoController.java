@@ -16,7 +16,7 @@ public class LottoController {
         Lotto winningLotto = getWinningLotto();
         Bonus winningBonus = getWinningBonus(winningLotto);
 
-        LottoFactory lottoFactory = LottoFactory.of(lottoPurchase.getAmount());
+        LottoFactory lottoFactory = LottoFactory.of(lottoPurchase);
         EnumMap<Prize, Integer> prizes = lottoFactory.getStatistic(winningLotto, winningBonus);
 
         printLotto(lottoFactory);

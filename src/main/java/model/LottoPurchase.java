@@ -16,10 +16,14 @@ public class LottoPurchase {
         return new LottoPurchase(parseInteger(input));
     }
 
-    public LottoPurchase(Integer amount) {
+    private LottoPurchase(Integer amount) {
         validateMinAmount(amount);
         validateAmountUnit(amount);
         this.amount = amount;
+    }
+
+    public int calculateLottoCount() {
+        return amount / LOTTO_PURCHASE_MIN_AMOUNT;
     }
 
     private static void validateNullOrBlank(final String input) {
@@ -50,9 +54,5 @@ public class LottoPurchase {
         if (amount % LOTTO_PURCHASE_MIN_AMOUNT != 0) {
             throw new IllegalArgumentException(INVALID_LOTTO_PURCHASE_UNIT.getMessage(LOTTO_PURCHASE_MIN_AMOUNT));
         }
-    }
-
-    public Integer getAmount() {
-        return amount;
     }
 }

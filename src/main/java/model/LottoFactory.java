@@ -23,8 +23,8 @@ public class LottoFactory {
 
     private final Random random = new Random();
 
-    public static LottoFactory of(final int input) {
-        return new LottoFactory(input / LOTTO_PURCHASE_UNIT);
+    public static LottoFactory of(final LottoPurchase lottoPurchase) {
+        return new LottoFactory(lottoPurchase.calculateLottoCount());
     }
 
     private LottoFactory(final int lottoCount) {

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import model.Lotto;
 import model.LottoFactory;
+import model.LottoPurchase;
 import model.Prize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,8 +28,8 @@ class LottoFactoryTest {
 
     @BeforeEach
     void beforeEach() {
-        Integer purchase = 10000;
-        lottoFactory = LottoFactory.of(purchase);
+        LottoPurchase lottoPurchase = LottoPurchase.of(Integer.toString(10000));
+        lottoFactory = LottoFactory.of(lottoPurchase);
     }
 
     @Test
