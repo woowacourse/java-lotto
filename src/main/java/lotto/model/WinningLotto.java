@@ -3,6 +3,7 @@ package lotto.model;
 import static lotto.LottoConstants.Number.LOTTO_NUMBER_MAX;
 import static lotto.LottoConstants.Number.LOTTO_NUMBER_MIN;
 
+import java.util.Objects;
 import lotto.Rank;
 
 public class WinningLotto {
@@ -17,9 +18,7 @@ public class WinningLotto {
     }
 
     private void validate(Lotto winningLotto, int bonusNumber) {
-        if (winningLotto == null) {
-            throw new IllegalArgumentException("당첨 번호를 확인할 수 없습니다.");
-        }
+        Objects.requireNonNull(winningLotto, "당첨 번호는 null이 될 수 없습니다.");
         if (bonusNumber < LOTTO_NUMBER_MIN || bonusNumber > LOTTO_NUMBER_MAX) {
             throw new IllegalArgumentException(
                     "보너스 번호는 %d부터 %d 사이의 수여야 합니다.".formatted(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX));

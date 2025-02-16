@@ -2,10 +2,10 @@ package lotto.controller;
 
 import java.util.List;
 import java.util.Set;
-import lotto.Rank;
 import lotto.model.Cashier;
 import lotto.model.DashBoard;
 import lotto.model.Lotto;
+import lotto.model.LottoTicket;
 import lotto.model.WinningLotto;
 import lotto.view.Console;
 import lotto.view.InputView;
@@ -25,10 +25,10 @@ public class LottoController {
 
     public void start() {
         int purchaseAmount = requestPurchaseAmount();
-        List<Lotto> lottos = purchaseLotto(purchaseAmount);
+        LottoTicket lottoTicket = purchaseLotto(purchaseAmount);
         WinningLotto winningLotto = requestWinningLotto();
-        DashBoard dashBoard = judgeLottoResult(lottos, winningLotto);
-        printResult(dashBoard, purchaseAmount);
+        DashBoard dashBoard = judgeLottoResult(lottoTicket, winningLotto);
+        printResult(dashBoard);
         end();
     }
 
@@ -36,10 +36,10 @@ public class LottoController {
         return inputView.requestPurchaseAmount();
     }
 
-    private List<Lotto> purchaseLotto(int purchaseAmount) {
-        List<Lotto> lottos = cashier.payForLotto(purchaseAmount);
-        outputView.printLottos(convertLottoDtos(lottos));
-        return lottos;
+    private LottoTicket purchaseLotto(int purchaseAmount) {
+        LottoTicket lottoTicket = cashier.payForLotto(purchaseAmount);
+        outputView.printLottos(convertLottoDtos(lottoTicket.getLottos()));
+        return lottoTicket;
     }
 
     private List<LottoDto> convertLottoDtos(List<Lotto> lottos) {
@@ -54,18 +54,15 @@ public class LottoController {
         return new WinningLotto(new Lotto(winningNumbers), bonusNumber);
     }
 
-    private DashBoard judgeLottoResult(List<Lotto> lottos, WinningLotto winningLotto) {
+    private DashBoard judgeLottoResult(LottoTicket lottoTicket, WinningLotto winningLotto) {
         DashBoard dashBoard = new DashBoard();
-        for (Lotto lotto : lottos) {
-            Rank rank = winningLotto.determineRank(lotto);
-            dashBoard.recordResult(rank);
-        }
+        dashBoard.recordWinningResults(winningLotto, lottoTicket);
         return dashBoard;
     }
 
-    private void printResult(DashBoard dashBoard, int purchaseAmount) {
+    private void printResult(DashBoard dashBoard) {
         outputView.printResult(dashBoard.getRanks());
-        outputView.printWinningRatio(dashBoard.calculateWinningRate(purchaseAmount));
+        outputView.printWinningRatio(dashBoard.calculateWinningRate());
     }
 
     private void end() {

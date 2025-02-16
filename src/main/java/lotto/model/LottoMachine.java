@@ -6,6 +6,7 @@ import static lotto.LottoConstants.Number.LOTTO_NUMBER_MIN;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class LottoMachine {
@@ -13,23 +14,17 @@ public class LottoMachine {
     private final NumberPicker numberPicker;
 
     public LottoMachine(NumberPicker numberPicker) {
-        validateNumberPicker(numberPicker);
+        Objects.requireNonNull(numberPicker, "번호 생성기는 null이 될 수 없습니다.");
         this.numberPicker = numberPicker;
     }
 
-    private void validateNumberPicker(NumberPicker numberPicker) {
-        if (numberPicker == null) {
-            throw new IllegalArgumentException("번호 생성기가 필요합니다.");
-        }
-    }
-
-    public List<Lotto> issueLottoByCount(int count) {
+    public LottoTicket issueLottoTicket(int count) {
         validateCount(count);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(issue());
         }
-        return lottos;
+        return new LottoTicket(lottos);
     }
 
     private void validateCount(int count) {

@@ -2,19 +2,20 @@ package lotto.model;
 
 import static lotto.LottoConstants.Price.LOTTO_PRICE_UNIT;
 
-import java.util.List;
+import java.util.Objects;
 
 public class Cashier {
 
     private final LottoMachine lottoMachine;
 
     public Cashier(LottoMachine lottoMachine) {
+        Objects.requireNonNull(lottoMachine, "로또 발급기는 null이 될 수 없습니다.");
         this.lottoMachine = lottoMachine;
     }
 
-    public List<Lotto> payForLotto(int amount) {
+    public LottoTicket payForLotto(int amount) {
         int count = calculateLottoCount(amount);
-        return lottoMachine.issueLottoByCount(count);
+        return lottoMachine.issueLottoTicket(count);
     }
 
     private int calculateLottoCount(int amount) {

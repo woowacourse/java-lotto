@@ -74,8 +74,8 @@ class WinningLottoTest {
             int bonusNumber = 7;
 
             assertThatThrownBy(() -> new WinningLotto(null, bonusNumber))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("당첨 번호를 확인할 수 없습니다.");
+                    .isInstanceOf(NullPointerException.class)
+                    .hasMessage("당첨 번호는 null이 될 수 없습니다.");
         }
     }
 }

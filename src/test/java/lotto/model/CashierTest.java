@@ -4,7 +4,6 @@ import static lotto.LottoConstants.Price.LOTTO_PRICE_UNIT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -23,10 +22,10 @@ class CashierTest {
         @ParameterizedTest
         @ValueSource(ints = {1_000, 2_000, 3_000})
         void payForLotto(int purchaseAmount) {
-            List<Lotto> lottos = cashier.payForLotto(purchaseAmount);
+            LottoTicket lottoTicket = cashier.payForLotto(purchaseAmount);
             int expectedCount = purchaseAmount / LOTTO_PRICE_UNIT;
 
-            assertThat(lottos.size())
+            assertThat(lottoTicket.getLottoCount())
                     .isEqualTo(expectedCount);
         }
     }
@@ -34,6 +33,14 @@ class CashierTest {
     @DisplayName("예외가 발생하는 경우")
     @Nested
     class ExceptionCase {
+
+        @DisplayName("로또 발급기가 null인 경우 예외가 발생한다.")
+        @Test
+        void shouldThrowException_WhenLottoMachineIsNull() {
+            assertThatThrownBy(() -> new Cashier(null))
+                    .isInstanceOf(NullPointerException.class)
+                    .hasMessage("로또 발급기는 null이 될 수 없습니다.");
+        }
 
         @DisplayName("구입 금액 단위가 일치하지 않을 경우 예외가 발생한다.")
         @ParameterizedTest
