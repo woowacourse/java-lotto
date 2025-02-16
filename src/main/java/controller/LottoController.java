@@ -24,9 +24,9 @@ public class LottoController {
     public void run() {
         int purchaseAmount = inputView.purchaseAmountInput();
         Ticket ticket = ticketProcess(purchaseAmount);
-        List<Lotto> lottos = lottoProcess(ticket);
+        List<Lotto> lottoBundle = lottoProcess(ticket);
         WinningInfo winningInfo = winningInfoProcess();
-        Map<Rank, Integer> rankResult = calculateRankProcess(winningInfo, lottos);
+        Map<Rank, Integer> rankResult = calculateRankProcess(winningInfo, lottoBundle);
         profitProcess(rankResult, purchaseAmount);
     }
 
@@ -41,8 +41,8 @@ public class LottoController {
         outputView.printProfit(calculateRate);
     }
 
-    private Map<Rank, Integer> calculateRankProcess(WinningInfo winningInfo, List<Lotto> lottos) {
-        Map<Rank, Integer> rankResult = lottoService.calculateRank(winningInfo, lottos);
+    private Map<Rank, Integer> calculateRankProcess(WinningInfo winningInfo, List<Lotto> lottoBundle) {
+        Map<Rank, Integer> rankResult = lottoService.calculateRank(winningInfo, lottoBundle);
         outputView.printWinningStatistic(rankResult);
         return rankResult;
     }
@@ -55,9 +55,9 @@ public class LottoController {
     }
 
     private List<Lotto> lottoProcess(Ticket ticket) {
-        lottoService.createLottos(ticket);
-        List<Lotto> lottos = lottoService.getLottos();
-        outputView.printLottos(lottos);
-        return lottos;
+        lottoService.createLottoBundle(ticket);
+        List<Lotto> lottoBundle = lottoService.getLottoBundle();
+        outputView.printLottos(lottoBundle);
+        return lottoBundle;
     }
 }

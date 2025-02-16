@@ -9,32 +9,32 @@ import domain.WinningInfo;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import repository.LottoRepository;
+import domain.LottoBundle;
 import utils.InputParser;
 import utils.RandomNumber;
 
 public class LottoService {
-    private final LottoRepository lottoRepository;
+    private final LottoBundle lottoBundle;
 
-    public LottoService(LottoRepository lottoRepository) {
-        this.lottoRepository = lottoRepository;
+    public LottoService(LottoBundle lottoBundle) {
+        this.lottoBundle = lottoBundle;
     }
 
     public Ticket createTicket(int price) {
         return Ticket.create(price);
     }
 
-    public void createLottos(Ticket ticket) {
+    public void createLottoBundle(Ticket ticket) {
         for (int i = 0; i < ticket.getQuantity(); i++) {
             List<Integer> numbers = RandomNumber.generateNumbers(WINNING_NUMBERS_REQUIRED);
             Lotto lotto = Lotto.from(numbers);
 
-            lottoRepository.addLotto(lotto);
+            lottoBundle.addLotto(lotto);
         }
     }
 
-    public List<Lotto> getLottos() {
-        return lottoRepository.getLottos();
+    public List<Lotto> getLottoBundle() {
+        return lottoBundle.getLottoBundle();
     }
 
     public Lotto createLotto(String winningNumbers) {
@@ -46,14 +46,14 @@ public class LottoService {
         return WinningInfo.of(winningNumbers, bonusNumber);
     }
 
-    public Map<Rank, Integer> calculateRank(WinningInfo winningInfo, List<Lotto> lottos) {
+    public Map<Rank, Integer> calculateRank(WinningInfo winningInfo, List<Lotto> lottoBundle) {
         Map<Rank, Integer> calculateResult = new LinkedHashMap<>();
 
         for (Rank value : Rank.values()) {
             calculateResult.put(value, 0);
         }
 
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottoBundle) {
             Rank foundRank = findRank(winningInfo, lotto);
             calculateResult.put(foundRank, calculateResult.get(foundRank) + 1);
         }

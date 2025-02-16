@@ -1,7 +1,7 @@
 package config;
 
 import controller.LottoController;
-import repository.LottoRepository;
+import domain.LottoBundle;
 import service.LottoService;
 import view.InputView;
 import view.OutputView;
@@ -12,6 +12,6 @@ public class LottoConfig {
     }
 
     public static LottoService createService() {
-        return new LottoService(LottoRepository.create());
+        return new LottoService(LottoBundle.create());
     }
 }
