@@ -21,11 +21,18 @@ public class LottoController {
     private final InputView inputView;
     private final InputValidator inputValidator;
     private final OutputView outputView;
+    private final StringToNumbersConverter stringToNumbersConverter;
 
-    public LottoController(InputView inputView, InputValidator inputValidator, OutputView outputView) {
+    public LottoController(
+            InputView inputView,
+            InputValidator inputValidator,
+            OutputView outputView,
+            StringToNumbersConverter stringToNumbersConverter
+    ) {
         this.inputView = inputView;
         this.inputValidator = inputValidator;
         this.outputView = outputView;
+        this.stringToNumbersConverter = stringToNumbersConverter;
     }
 
     public void start() {
@@ -63,7 +70,7 @@ public class LottoController {
     private Lotto inputWinningNumbers() {
         String rawWinningNumbers = inputView.inputWinningNumbers();
         inputValidator.validateWinningNumber(rawWinningNumbers);
-        List<Number> numbers = new StringToNumbersConverter().convert(rawWinningNumbers, ",");
+        List<Number> numbers = stringToNumbersConverter.convert(rawWinningNumbers, ",");
         return new Lotto(numbers);
     }
 
