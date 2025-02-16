@@ -25,7 +25,7 @@ public class LottoMachine {
     }
 
     private List<Number> selectNumbers() {
-        List<Integer> numbers = numberStrategy.pickNumbers(Number.MAX_NUMBER, lottoNumberSize);
+        List<Integer> numbers = numberStrategy.pickNumbers(lottoNumberSize);
         return numbers.stream().map(Number::new).toList();
     }
 }

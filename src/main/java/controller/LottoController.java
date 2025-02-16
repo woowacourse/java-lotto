@@ -9,7 +9,6 @@ import domain.Number;
 import domain.WinningLotto;
 import domain.WinningResult;
 import domain.lottogeneratestrategy.LottoPickStrategy;
-import domain.lottogeneratestrategy.RandomLottoPickStrategy;
 import java.util.List;
 import view.InputView;
 import view.OutputView;
@@ -51,8 +50,8 @@ public class LottoController {
     }
 
     private Lottos purchaseLottos(Money purchaseLottoMoney) {
-        LottoPickStrategy numberStrategy = new RandomLottoPickStrategy();
-        LottoStore lottoStore = new LottoStore(Lotto.createLottoMachine(numberStrategy));
+        LottoPickStrategy lottoPickStrategy = Number.createLottPickStrategy();
+        LottoStore lottoStore = new LottoStore(Lotto.createLottoMachine(lottoPickStrategy));
         return lottoStore.buy(purchaseLottoMoney);
     }
 

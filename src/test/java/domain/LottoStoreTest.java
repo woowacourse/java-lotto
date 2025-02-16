@@ -13,7 +13,7 @@ class LottoStoreTest {
     void 돈을_이용해_로또를_살_수_있다() {
         //given
         Money money = new Money(3000);
-        LottoPickStrategy fixNumberStrategy = (int maxNumber, int size) -> List.of(1, 2, 3, 4, 5, 6);
+        LottoPickStrategy fixNumberStrategy = (int size) -> List.of(1, 2, 3, 4, 5, 6);
         LottoMachine lottoMachine = Lotto.createLottoMachine(fixNumberStrategy);
         LottoStore lottoStore = new LottoStore(lottoMachine);
 
