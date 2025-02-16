@@ -4,6 +4,7 @@ import static lotto.common.Constants.MIN_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import lotto.utils.RandomNumberStrategy;
 import org.junit.jupiter.api.Test;
 
 class LottoGeneratorTest {

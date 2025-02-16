@@ -7,6 +7,7 @@ import static lotto.common.Constants.MIN_LOTTO_NUMBER;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import lotto.utils.RandomNumberStrategy;
 
 public class LottoGenerator {
 

@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.LottoGenerator;
-import lotto.domain.RandomNumberGenerator;
+import lotto.utils.RandomNumberGenerator;
 
 public class Main {
 
