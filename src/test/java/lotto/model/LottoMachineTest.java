@@ -3,6 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 class LottoMachineTest {
@@ -12,14 +13,18 @@ class LottoMachineTest {
     void ok_LottoNumberCount() {
         Lotto lotto = LottoMachine.issue();
 
-        assertThat(lotto.getNumbers().size()).isEqualTo(6);
+        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
     }
 
     @DisplayName("중복되지 않는 숫자들을 갖는 로또를 발급할 수 있다.")
-    @Test
+    @RepeatedTest(value = 1_000)
     void ok_DistinctNumbers() {
         Lotto lotto = LottoMachine.issue();
 
-        assertThat(lotto.getNumbers().stream().distinct().count()).isEqualTo(lotto.getNumbers().size());
+        assertThat(lotto.getLottoNumbers()
+                .stream()
+                .distinct()
+                .count()
+        ).isEqualTo(lotto.getLottoNumbers().size());
     }
 }

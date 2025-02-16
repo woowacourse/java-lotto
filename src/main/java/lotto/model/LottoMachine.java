@@ -8,22 +8,25 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class LottoMachine {
+public final class LottoMachine {
+
+    private LottoMachine() {
+    }
 
     public static Lotto issue() {
         return new Lotto(generateNumbers());
     }
 
-    private static Set<Integer> generateNumbers() {
-        Set<Integer> uniqueNumbers = new HashSet<>();
+    private static Set<LottoNumber> generateNumbers() {
+        Set<LottoNumber> uniqueNumbers = new HashSet<>();
         while (uniqueNumbers.size() < LOTTO_NUMBER_COUNT.value()) {
-            uniqueNumbers.add(getRandomNumberInRange(LOTTO_NUMBER_MIN.value(), LOTTO_NUMBER_MAX.value()));
+            uniqueNumbers.add(getRandomLottoNumberInRange(LOTTO_NUMBER_MIN.value(), LOTTO_NUMBER_MAX.value()));
         }
         return Set.copyOf(uniqueNumbers);
     }
 
-    private static int getRandomNumberInRange(int start, int end) {
+    private static LottoNumber getRandomLottoNumberInRange(int start, int end) {
         Random random = new Random();
-        return random.nextInt(end - start) + start;
+        return new LottoNumber(random.nextInt(end - start) + start);
     }
 }

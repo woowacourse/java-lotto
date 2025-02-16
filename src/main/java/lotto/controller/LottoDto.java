@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 
 public record LottoDto(List<Integer> numbers) {
 
@@ -10,8 +11,9 @@ public record LottoDto(List<Integer> numbers) {
     }
 
     private static List<Integer> sortAsc(Lotto lotto) {
-        return lotto.getNumbers()
+        return lotto.getLottoNumbers()
                 .stream()
+                .map(LottoNumber::getNumber)
                 .sorted()
                 .toList();
     }

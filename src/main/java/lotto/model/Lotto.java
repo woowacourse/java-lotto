@@ -1,47 +1,36 @@
 package lotto.model;
 
 import static lotto.LottoNumberConstants.LOTTO_NUMBER_COUNT;
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class Lotto {
 
-    private final Set<Integer> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public Lotto(Set<Integer> numbers) {
-        validateNumbers(numbers);
+    public Lotto(Set<LottoNumber> numbers) {
+        validateNumbersCount(numbers);
         this.numbers = numbers;
     }
 
-    private void validateNumbers(Set<Integer> numbers) {
+    private void validateNumbersCount(Set<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT.value()) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
-        }
-        for (int number : numbers) {
-            validateNumberInRange(number);
-        }
-    }
-
-    private void validateNumberInRange(int number) {
-        if (number < LOTTO_NUMBER_MIN.value() || number > LOTTO_NUMBER_MAX.value()) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 수여야 합니다.");
         }
     }
 
     public int getMatchCount(Lotto lotto) {
-        Set<Integer> me = new HashSet<>(Set.copyOf(this.numbers));
-        me.retainAll(lotto.getNumbers());
+        Set<LottoNumber> me = new HashSet<>(Set.copyOf(this.numbers));
+        me.retainAll(lotto.getLottoNumbers());
         return me.size();
     }
 
-    public boolean contains(int number) {
+    public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }
 
-    public Set<Integer> getNumbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return Set.copyOf(numbers);
     }
 }
