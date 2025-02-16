@@ -19,15 +19,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoTest {
-    private static Stream<Arguments> methodSourceIterableTestArguments() {
-        return Stream.of(
-                Arguments.arguments(List.of(1, 2, 3, 4, 5)),
-                Arguments.arguments(List.of()),
-                Arguments.arguments(List.of(1, 2, 3, 4, 5, 6, 7)),
-                Arguments.arguments(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
-        );
-    }
-
     @ParameterizedTest
     @MethodSource("methodSourceIterableTestArguments")
     @DisplayName("숫자가 6개가 아닐 경우 예외를 발생시킨다.")
@@ -36,6 +27,15 @@ public class LottoTest {
             Lotto lotto = Lotto.from(values);
         });
         assertThat(exception.getMessage()).isEqualTo(INVALID_NUMBERS_SIZE.getMessage());
+    }
+
+    private static Stream<Arguments> methodSourceIterableTestArguments() {
+        return Stream.of(
+                Arguments.arguments(List.of(1, 2, 3, 4, 5)),
+                Arguments.arguments(List.of()),
+                Arguments.arguments(List.of(1, 2, 3, 4, 5, 6, 7)),
+                Arguments.arguments(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+        );
     }
 
     @DisplayName("숫자가 6개인 경우 성공")
