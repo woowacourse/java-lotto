@@ -19,7 +19,6 @@ public class MainController {
 
     public void run() {
         int purchaseAmount = InputView.inputPurchaseAmount();
-//        int lottoTicketNumber = purchaseAmount / LOTTO_PRICE;
         LottoMachine lottoMachine = new LottoMachine();
         List<LottoTicket> lottoTickets =
                 lottoMachine.generateLottoTickets(purchaseAmount, new RandomIntegerGenerator());
