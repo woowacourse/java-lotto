@@ -20,7 +20,8 @@ public class LottoController {
 
     public void run() {
         final int purchaseAmount = requestPurchaseAmount();
-        Lottos lottos = createLottos(purchaseAmount);
+        Lottos lottos = Lottos.ofAmount(purchaseAmount);
+        outputView.printPurchasedLottos(lottos);
 
         final List<Integer> winningNumbers = requestWinningNumbers();
         final int bonusNumber = requestBonusNumber();
@@ -36,12 +37,6 @@ public class LottoController {
     private int requestPurchaseAmount() {
         String rawPurchaseAmount = inputView.read("구입금액을 입력해 주세요.");
         return NumberParser.parse(rawPurchaseAmount);
-    }
-
-    private Lottos createLottos(final int purchaseAmount) {
-        Lottos lottos = Lottos.ofSize(purchaseAmount / 1000);
-        outputView.printPurchasedLottos(lottos);
-        return lottos;
     }
 
     private List<Integer> requestWinningNumbers() {

@@ -16,7 +16,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos ofSize(final int quantity) {
+    public static Lottos ofAmount(final int amount) {
+        int quantity = amount / LOTTO_PRICE;
         validateQuantity(quantity);
         List<Lotto> lottos = new ArrayList<>(quantity);
         for (int i = 0; i < quantity; i++) {

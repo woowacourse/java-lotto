@@ -9,18 +9,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottosTest {
-    @DisplayName("구입 개수만큼 로또를 생성한다")
+    @DisplayName("구입 금액만큼 로또를 생성한다")
     @Test
     void lottosCreationTest() {
-        int quantity = 7;
-        Lottos lottos = Lottos.ofSize(quantity);
+        int amount = 7000;
+        Lottos lottos = Lottos.ofAmount(amount);
 
-        // TODO: 사이즈 체크하기
-        assertThat(lottos).isNotNull()
-                .isInstanceOf(Lottos.class);
+        assertThat(lottos).isNotNull().isInstanceOf(Lottos.class);
+        assertThat(lottos.getQuantity()).isEqualTo(amount / 1000);
     }
 
-    @DisplayName("")
+    @DisplayName("당첨 등수를 계산한다")
     @Test
     void calculatePrizesTest() {
         Lotto winningNumbers = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
@@ -42,6 +41,7 @@ class LottosTest {
         assertThat(prizes).isEqualTo(Arrays.stream(Prize.values()).toList());
     }
 
+    @DisplayName("총 수익률을 계산한다")
     @Test
     void earningRateTest() {
         Lotto winningNumbers = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
