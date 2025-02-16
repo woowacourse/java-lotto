@@ -16,7 +16,7 @@ public class LottoController {
     public void run() {
         int price = getPrice();
         Lottos lottos = getLottos(price);
-        getLottoAmount(lottos);
+        printLottoAmount(lottos);
 
         List<Integer> winnerNumbers = getWinnerNumbers();
 
@@ -55,7 +55,7 @@ public class LottoController {
         return lottos;
     }
 
-    private void getLottoAmount(Lottos lottos) {
+    private void printLottoAmount(Lottos lottos) {
         OutputView.printPurchaseCount(lottos.lottoSize());
     }
 
