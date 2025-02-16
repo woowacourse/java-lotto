@@ -1,12 +1,12 @@
 package controller;
 
-import controller.dto.LottoDtoMapper;
 import controller.dto.WinningLottoRequest;
 import java.util.List;
-import model.LottoRankResult;
 import model.LottoStore;
-import model.LottoTicket;
-import model.WinningLotto;
+import model.PaidAmount;
+import model.numbers.LottoNumbers;
+import model.numbers.WinningLotto;
+import model.rank.LottoRankResult;
 import view.LottoConsoleView;
 
 public class LottoController {
@@ -22,21 +22,20 @@ public class LottoController {
     }
 
     public void run() {
-        List<LottoTicket> lottoTickets = createLottoTickets();
+        PaidAmount paidAmount = new PaidAmount(lottoConsoleView.readPaidAmount());
+        List<LottoNumbers> lottoNumbers = createLottoNumbers(paidAmount);
         WinningLotto winningLotto = createWinningLotto();
 
-        LottoRankResult lottoRankResult = calculateRank(lottoTickets, winningLotto);
-        calculateProfitRate(lottoTickets.size(), lottoRankResult);
+        getResult(lottoNumbers, winningLotto, paidAmount);
     }
 
-    private List<LottoTicket> createLottoTickets() {
-        int paidAmount = lottoConsoleView.readPaidAmount();
-        List<LottoTicket> lottoTickets = lottoStore.purchase(paidAmount);
+    private List<LottoNumbers> createLottoNumbers(PaidAmount paidAmount) {
+        List<LottoNumbers> lottoNumbers = lottoStore.purchase(paidAmount);
 
-        lottoConsoleView.printPurchasedTicketAmount(lottoTickets.size());
-        lottoConsoleView.printPurchasedLotto(lottoDtoMapper.toLottoTicketResponses(lottoTickets));
+        lottoConsoleView.printPurchasedTicketAmount(paidAmount.getUnitCount());
+        lottoConsoleView.printPurchasedLotto(lottoDtoMapper.toLottoTicketResponses(lottoNumbers));
 
-        return lottoTickets;
+        return lottoNumbers;
     }
 
     private WinningLotto createWinningLotto() {
@@ -44,14 +43,11 @@ public class LottoController {
         return lottoDtoMapper.toWinningLotto(winningLottoRequest);
     }
 
-    private LottoRankResult calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
-        LottoRankResult lottoRankResult = lottoStore.calculateRankMatchCount(lottoTickets, winningLotto);
+    private void getResult(List<LottoNumbers> lottoNumbers, WinningLotto winningLotto, PaidAmount paidAmount) {
+        LottoRankResult lottoRankResult = lottoStore.calculateRankMatchCount(lottoNumbers, winningLotto);
         lottoConsoleView.printLottoRankResults(lottoDtoMapper.toLottoRankResponses(lottoRankResult));
-        return lottoRankResult;
-    }
 
-    private void calculateProfitRate(int lottoTicketCount, LottoRankResult lottoRankResult) {
-        double profitRate = lottoStore.calculateProfitRate(lottoTicketCount, lottoRankResult);
+        double profitRate = lottoStore.calculateProfitRate(paidAmount, lottoRankResult);
         lottoConsoleView.printProfitRate(profitRate);
     }
 }

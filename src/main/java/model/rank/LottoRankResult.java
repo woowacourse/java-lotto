@@ -1,4 +1,4 @@
-package model;
+package model.rank;
 
 import java.util.HashMap;
 import java.util.Map;
