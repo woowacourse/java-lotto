@@ -10,9 +10,7 @@ public class WinLottoController {
     private final InputView inputView = new InputView();
 
     public WinLotto winLotto() {
-        outputView.printWinNumberGuide();
         List<Integer> winNumbers = inputView.readWinNumbers();
-        outputView.printBonusNumberGuide();
         Integer bonusNumber = inputView.readBonusNumber();
         return new WinLotto(winNumbers, bonusNumber);
     }

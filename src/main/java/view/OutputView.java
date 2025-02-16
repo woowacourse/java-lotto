@@ -1,14 +1,10 @@
 package view;
 
-import static model.WinLottoInfo.FIFTH;
-import static model.WinLottoInfo.FIRST;
-import static model.WinLottoInfo.FOURTH;
-import static model.WinLottoInfo.SECOND;
-import static model.WinLottoInfo.THIRD;
-
+import java.util.Map.Entry;
 import model.LottoNumber;
 import model.LottoNumbers;
 import model.LottoStatistics;
+import model.LottoWinRank;
 import model.PurchasedLottos;
 
 public class OutputView {
@@ -24,29 +20,29 @@ public class OutputView {
         System.out.println(lottoNumbers.getNumbers().stream().map(LottoNumber::getNumber).toList());
     }
 
-    public void printWinNumberGuide() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-    }
-
-    public void printBonusNumberGuide() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-    }
-
     public void printResult(LottoStatistics lottoStatistics) {
-        System.out.printf("%d개 일치 (%d원)- %d개%n", FIFTH.getMatchNumberCount(), FIFTH.getPrice(),
-                nullToZero(lottoStatistics.getCount(FIFTH)));
-        System.out.printf("%d개 일치 (%d원)- %d개%n", FOURTH.getMatchNumberCount(), FOURTH.getPrice(),
-                nullToZero(lottoStatistics.getCount(FOURTH)));
-        System.out.printf("%d개 일치 (%d원)- %d개%n", THIRD.getMatchNumberCount(), THIRD.getPrice(),
-                nullToZero(lottoStatistics.getCount(THIRD)));
-        System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", SECOND.getMatchNumberCount(), SECOND.getPrice(),
-                nullToZero(lottoStatistics.getCount(SECOND)));
-        System.out.printf("%d개 일치 (%d원)- %d개%n", FIRST.getMatchNumberCount(), FIRST.getPrice(),
-                nullToZero(lottoStatistics.getCount(FIRST)));
+        for (Entry<LottoWinRank, Integer> statisticsEntry : lottoStatistics.getStatisticsEntries()) {
+            LottoWinRank lottoWinRank = statisticsEntry.getKey();
+            Integer count = statisticsEntry.getValue();
+            printLottoWinStatistics(lottoWinRank, count);
+        }
     }
 
     public void printTotalReturn(LottoStatistics lottoStatistics, PurchasedLottos purchasedLottos) {
         System.out.printf("총 수익률은 %.2f입니다.%n", lottoStatistics.totalReturn(purchasedLottos.getPurchaseAmount()));
+    }
+
+    private void printLottoWinStatistics(LottoWinRank lottoWinRank, Integer count) {
+        if (lottoWinRank.matchBonusNumber()) {
+            printLottoWinStatisticsWithBonusBall(lottoWinRank, count);
+        }
+        System.out.printf("%d개 일치 (%d원)- %d개%n", lottoWinRank.getMatchNumberCount(), lottoWinRank.getPrice(),
+                nullToZero(count));
+    }
+
+    private void printLottoWinStatisticsWithBonusBall(LottoWinRank lottoWinRank, Integer count) {
+        System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", lottoWinRank.getMatchNumberCount(), lottoWinRank.getPrice(),
+                nullToZero(count));
     }
 
     private Integer nullToZero(Integer number) {

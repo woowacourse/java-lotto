@@ -17,7 +17,7 @@ class LottoStatisticsTest {
         WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         LottoStatistics lottoStatistics = new LottoStatistics(lottoNumbers, winLotto);
         // when
-        Integer count = lottoStatistics.getCount(WinLottoInfo.FIRST);
+        Integer count = lottoStatistics.getCount(LottoWinRank.FIRST);
         // then
         assertThat(count).isEqualTo(1);
     }
