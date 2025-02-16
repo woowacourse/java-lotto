@@ -9,16 +9,16 @@ public class WinningLotto{
     public static final int LOTTO_MAX = 45;
 
     private Lotto lotto;
-    private int bonus;
+    private int bonusNumber;
 
-    public WinningLotto(final String input, final String bonus) {
+    public WinningLotto(final String input, final String bonusNumber) {
         this.lotto = new Lotto(input);
-        this.bonus = validateBonus(bonus);
+        this.bonusNumber = validateBonus(bonusNumber);
     }
 
     public Rank countMatchNumbers(final Lotto lotto) {
         int count = lotto.matchCount(this);
-        return Rank.matchRank(count, lotto.contains(bonus));
+        return Rank.matchRank(count, lotto.contains(bonusNumber));
     }
 
     public boolean contains(final int num) {
