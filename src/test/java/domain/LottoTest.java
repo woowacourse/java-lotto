@@ -4,6 +4,7 @@ import static global.exception.ExceptionMessage.DUPLICATED_NUMBER;
 import static global.exception.ExceptionMessage.INVALID_FORMAT;
 import static global.exception.ExceptionMessage.INVALID_RANGE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
@@ -13,11 +14,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
 
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5,6", "1,15,17,25,40,45", "1, 2, 3, 4, 5, 6"})
+    void 로또_번호_생성_성공_테스트(String inputLotto) {
+        assertThatCode(() -> new Lotto(inputLotto)).doesNotThrowAnyException();
+    }
+
     @Nested
-    class 로또_번호_테스트 {
+    class 로또_번호_실패_테스트 {
         @Test
         void 로또_번호_범위_테스트() {
             assertThatThrownBy(() -> {
@@ -57,7 +65,15 @@ class LottoTest {
             }).isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(INVALID_FORMAT);
         }
+    }
 
+    @Test
+    void 보너스_번호_생성_성공_테스트() {
+        //given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+        //when-then
+        assertThatCode(() -> lotto.validateBonus("45")).doesNotThrowAnyException();
     }
 
     @Nested
