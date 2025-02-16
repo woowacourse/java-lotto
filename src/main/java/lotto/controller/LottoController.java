@@ -2,13 +2,11 @@ package lotto.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.domain.Profit;
-import lotto.domain.Rank;
 import lotto.domain.WinnerLotto;
 import lotto.dto.LottoGroupDto;
 import lotto.dto.ProfitDto;
@@ -31,7 +29,7 @@ public class LottoController {
         processLottoGeneration(money);
         WinnerLotto winnerLotto = getWinnerLotto();
 
-        Profit profit = calculateProfit(winnerLotto);
+        Profit profit = getProfit(winnerLotto);
         String profitRate = profit.calculateAverageProfitRate(money);
 
         OutputView.printResult(ProfitDto.from(profit), profitRate);
@@ -76,16 +74,8 @@ public class LottoController {
         }
     }
 
-    private Profit calculateProfit(WinnerLotto winnerLotto) {
-        Profit profit = new Profit();
-
-        for (Lotto lotto : lottoGroup.getLottoGroup()) {
-            long matchCount = winnerLotto.getMatchCount(lotto);
-            boolean hasBonus = winnerLotto.hasBonus(lotto);
-            Rank rank = Rank.find((int) matchCount, hasBonus);
-            profit.incrementCount(rank);
-        }
-
-        return profit;
+    private Profit getProfit(WinnerLotto winnerLotto) {
+        return Profit.calculateProfit(winnerLotto, lottoGroup);
     }
+
 }

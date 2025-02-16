@@ -20,7 +20,6 @@ public class Profit {
     }
 
     private long calculateTotalProfit() {
-
         return rankCounts.entrySet().stream()
                 .mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();
@@ -35,5 +34,17 @@ public class Profit {
 
     public Map<Rank, Integer> getRankCounts() {
         return rankCounts;
+    }
+
+    public static Profit calculateProfit(WinnerLotto winnerLotto, LottoGroup lottoGroup) {
+        Profit profit = new Profit();
+
+        for (Lotto lotto : lottoGroup.getLottoGroup()) {
+            long matchCount = winnerLotto.getMatchCount(lotto);
+            boolean hasBonus = winnerLotto.hasBonus(lotto);
+            Rank rank = Rank.find((int) matchCount, hasBonus);
+            profit.incrementCount(rank);
+        }
+        return profit;
     }
 }
