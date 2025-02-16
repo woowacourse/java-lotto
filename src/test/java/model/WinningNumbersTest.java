@@ -6,12 +6,28 @@ import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import constans.ErrorType;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class WinningNumbersTest {
+
+    private List<LottoNumber> lottoNumbers;
+    private LottoNumber bonusBall;
+    private Lotto lotto;
+
+    @BeforeEach
+    void initTestFixture() {
+        lottoNumbers = new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
+                , new LottoNumber(4),
+                new LottoNumber(5), new LottoNumber(6)));
+        bonusBall = new LottoNumber(7);
+        lotto = new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                new LottoNumber(5), new LottoNumber(7)));
+    }
 
     @Nested
     @DisplayName("유효한 경우의 테스트")
@@ -20,20 +36,14 @@ class WinningNumbersTest {
         @DisplayName("당첨 번호를 올바르게 생성한다.")
         @Test
         void createWinningNumbers() {
-            // given
-            List<LottoNumber> numbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9), new LottoNumber(8),
-                            new LottoNumber(45), new LottoNumber(21)));
-            LottoNumber bonusNumber = new LottoNumber(4);
-
-            // when
-            WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
+            // given & when
+            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusBall);
 
             // then
 
             assertSoftly(softly -> {
-                softly.assertThat(winningNumbers.getWinningNumbers()).isEqualTo(numbers);
-                softly.assertThat(winningNumbers.getBonusBall()).isEqualTo(bonusNumber);
+                softly.assertThat(winningNumbers).extracting("winningNumbers").isEqualTo(lottoNumbers);
+                softly.assertThat(winningNumbers).extracting("bonusBall").isEqualTo(bonusBall);
             });
         }
 
@@ -41,11 +51,7 @@ class WinningNumbersTest {
         @Test
         void containsLottoNumber() {
             // given
-            List<LottoNumber> numbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                            new LottoNumber(5), new LottoNumber(6)));
-            LottoNumber bonusNumber = new LottoNumber(7);
-            WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
+            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusBall);
             LottoNumber lottoNumber = new LottoNumber(1);
 
             // when
@@ -59,14 +65,7 @@ class WinningNumbersTest {
         @Test
         void matchBonusNumber() {
             // given
-            List<LottoNumber> numbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                            new LottoNumber(5), new LottoNumber(6)));
-            LottoNumber bonusNumber = new LottoNumber(7);
-            Lotto lotto = new Lotto(new ArrayList<>(
-                    List.of(new LottoNumber(7), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                            new LottoNumber(5), new LottoNumber(6))));
-            WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
+            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusBall);
 
             // when
             boolean matchBonusNumber = winningNumbers.matchBonusNumber(lotto);
@@ -84,13 +83,10 @@ class WinningNumbersTest {
         @Test
         void validateSize() {
             // given
-            List<LottoNumber> numbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9), new LottoNumber(8),
-                            new LottoNumber(45), new LottoNumber(21), new LottoNumber(30)));
-            LottoNumber bonusNumber = new LottoNumber(4);
+            lottoNumbers.add(new LottoNumber(10));
 
             // when & then
-            assertThatThrownBy(() -> new WinningNumbers(numbers, bonusNumber)).isInstanceOf(
+            assertThatThrownBy(() -> new WinningNumbers(lottoNumbers, bonusBall)).isInstanceOf(
                             IllegalArgumentException.class)
                     .hasMessageContaining(ErrorType.WINNING_NUMBERS_IS_INVALID_SIZE.getMessage());
         }
@@ -99,13 +95,11 @@ class WinningNumbersTest {
         @Test
         void validateDuplicate() {
             // given
-            List<LottoNumber> numbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(1), new LottoNumber(9), new LottoNumber(8),
-                            new LottoNumber(45), new LottoNumber(21)));
-            LottoNumber bonusNumber = new LottoNumber(4);
+            lottoNumbers.removeLast();
+            lottoNumbers.add(new LottoNumber(1));
 
             // when & then
-            assertThatThrownBy(() -> new WinningNumbers(numbers, bonusNumber)).isInstanceOf(
+            assertThatThrownBy(() -> new WinningNumbers(lottoNumbers, bonusBall)).isInstanceOf(
                             IllegalArgumentException.class)
                     .hasMessageContaining(ErrorType.WINNING_NUMBERS_IS_DUPLICATION.getMessage());
         }
@@ -114,13 +108,10 @@ class WinningNumbersTest {
         @Test
         void validateBonusNumberDuplicate() {
             // given
-            List<LottoNumber> numbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(9), new LottoNumber(8),
-                            new LottoNumber(45), new LottoNumber(21)));
-            LottoNumber bonusNumber = new LottoNumber(1);
+            LottoNumber bonusBallOfContainedLottoNumber = new LottoNumber(1);
 
             // when & then
-            assertThatThrownBy(() -> new WinningNumbers(numbers, bonusNumber)).isInstanceOf(
+            assertThatThrownBy(() -> new WinningNumbers(lottoNumbers, bonusBallOfContainedLottoNumber)).isInstanceOf(
                             IllegalArgumentException.class)
                     .hasMessageContaining(ErrorType.BONUS_BALL_IS_DUPLICATION.getMessage());
         }

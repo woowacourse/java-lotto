@@ -52,12 +52,4 @@ public class WinningNumbers {
     public boolean matchBonusNumber(final Lotto lotto) {
         return lotto.isContainsNumber(bonusBall);
     }
-
-    public List<LottoNumber> getWinningNumbers() {
-        return List.copyOf(winningNumbers);
-    }
-
-    public LottoNumber getBonusBall() {
-        return bonusBall;
-    }
 }
