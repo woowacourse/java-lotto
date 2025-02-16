@@ -54,19 +54,14 @@ class LottoStatsTest {
     @DisplayName("총 상금 계산 테스트")
     @Test
     void 총_상금_계산_테스트() {
-        List<Lotto> lottos = new ArrayList<>();
         LottoStats lottoStats = new LottoStats(new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7));
 
         Lotto firstRank = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        lottos.add(firstRank);
         Lotto secondRank = new Lotto(List.of(1, 2, 3, 4, 5, 7));
-        lottos.add(secondRank);
         Lotto thirdRank = new Lotto(List.of(1, 2, 3, 4, 5, 8));
-        lottos.add(thirdRank);
         Lotto fourthRank = new Lotto(List.of(1, 2, 3, 4, 7, 8));
-        lottos.add(fourthRank);
         Lotto fifthRank = new Lotto(List.of(1, 2, 3, 7, 8, 9));
-        lottos.add(fifthRank);
+        List<Lotto> lottos = List.of(firstRank, secondRank, thirdRank, fourthRank, fifthRank);
 
         lottoStats.calculateResult(lottos);
 
