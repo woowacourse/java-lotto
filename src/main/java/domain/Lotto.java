@@ -1,6 +1,5 @@
 package domain;
 
-import dto.OutputLottosDto;
 import java.util.List;
 import constants.ErrorMessage;
 
@@ -14,6 +13,10 @@ public class Lotto {
 
     public static Lotto from(List<Integer> numbers) {
         return new Lotto(numbers);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 
     public void validate(List<Integer> numbers) {
@@ -33,10 +36,6 @@ public class Lotto {
 
     public boolean has(int number) {
         return this.numbers.contains(number);
-    }
-
-    public OutputLottosDto getOutputLottoDto() {
-        return new OutputLottosDto(numbers);
     }
 
     public int getHitCountFrom(Lotto lotto) {
