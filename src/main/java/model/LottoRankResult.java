@@ -18,10 +18,6 @@ public class LottoRankResult {
         return rankCount;
     }
 
-    public void updateRankCount(LottoRank lottoRank) {
-        rankCount.merge(lottoRank, 1, Integer::sum);
-    }
-
     public Set<LottoRank> getKeys() {
         return rankCount.keySet();
     }

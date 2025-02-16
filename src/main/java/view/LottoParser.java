@@ -7,6 +7,8 @@ import java.util.stream.Stream;
 
 public class LottoParser {
 
+    private static final String LOTTO_NUMBER_SEPARATOR = "\", \"";
+
     public int parsePurchaseAmount(String rawPurchaseAmount) {
         return parsePositiveInteger(rawPurchaseAmount);
     }
@@ -16,7 +18,7 @@ public class LottoParser {
     }
 
     public List<Integer> parseWinningNumbers(String rawWinningNumbers) {
-        String[] splitWinningNumbers = rawWinningNumbers.split(", ");
+        String[] splitWinningNumbers = rawWinningNumbers.split(LOTTO_NUMBER_SEPARATOR);
         return Stream.of(splitWinningNumbers)
                 .map(this::parsePositiveInteger)
                 .toList();
