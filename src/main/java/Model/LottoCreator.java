@@ -1,5 +1,6 @@
 package Model;
 
+import Constant.Constants;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,8 +8,6 @@ import java.util.Random;
 public class LottoCreator {
 
     private static final int LOTTO_COUNT = 6;
-    private static final int LOTTO_MAX_NUMBER = 45;
-
 
     public static List<Integer> createLotto() {
         List<Integer> lottoNumber = new ArrayList<>();
@@ -36,7 +35,7 @@ public class LottoCreator {
 
     private static int createRandomNumber() {
         Random random = new Random();
-        return random.nextInt(LOTTO_MAX_NUMBER) + 1;
+        return random.nextInt(Constants.LOTTO_MAX_NUMBER) + 1;
     }
 
 }
