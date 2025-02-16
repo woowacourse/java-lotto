@@ -42,6 +42,9 @@ public enum LottoWinRank {
     }
 
     private boolean isMatched(int matchNumberCount, boolean bonusNumberMatch) {
+        if (!this.matchNumberCount.equals(5)) {
+            return this.matchNumberCount.equals(matchNumberCount);
+        }
         return this.matchNumberCount.equals(matchNumberCount) && this.matchBonusNumber.equals(bonusNumberMatch);
     }
 }

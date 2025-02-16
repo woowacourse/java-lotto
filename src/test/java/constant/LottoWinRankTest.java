@@ -2,7 +2,6 @@ package constant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
 import java.util.List;
 import model.LottoNumbers;
 import model.LottoWinRank;
@@ -23,41 +22,40 @@ class LottoWinRankTest {
     List<LottoWinRank> resultList = lottoNumbersList.stream()
             .map((purchasedLotto) -> LottoWinRank.calculateLottoWinRank(purchasedLotto, winLotto))
             .toList();
-    List<LottoWinRank> lottoWinRank = Arrays.stream(LottoWinRank.values()).toList();
 
     @Test
     @DisplayName("1등 당첨 결과 메서드 테스트")
     public void test1() {
-        assertThat(resultList.getFirst()).isEqualTo(lottoWinRank.getFirst());
+        assertThat(resultList.getFirst()).isEqualTo(LottoWinRank.FIRST);
     }
 
     @Test
     @DisplayName("2등 당첨 결과 메서드 테스트")
     void test2() {
-        assertThat(resultList.get(1)).isEqualTo(lottoWinRank.get(1));
+        assertThat(resultList.get(1)).isEqualTo(LottoWinRank.SECOND);
     }
 
     @Test
     @DisplayName("3등 당첨 결과 메서드 테스트")
     void test3() {
-        assertThat(resultList.get(2)).isEqualTo(lottoWinRank.get(2));
+        assertThat(resultList.get(2)).isEqualTo(LottoWinRank.THIRD);
     }
 
     @Test
     @DisplayName("4등 당첨 결과 메서드 테스트")
     void test4() {
-        assertThat(resultList.get(3)).isEqualTo(lottoWinRank.get(3));
+        assertThat(resultList.get(3)).isEqualTo(LottoWinRank.FOURTH);
     }
 
     @Test
     @DisplayName("5등 당첨 결과 메서드 테스트")
     void test5() {
-        assertThat(resultList.get(4)).isEqualTo(lottoWinRank.get(4));
+        assertThat(resultList.get(4)).isEqualTo(LottoWinRank.FIFTH);
     }
 
     @Test
     @DisplayName("꽝 결과 메서드 테스트")
     void test6() {
-        assertThat(resultList.get(5)).isEqualTo(lottoWinRank.get(5));
+        assertThat(resultList.get(5)).isEqualTo(LottoWinRank.NONE);
     }
 }
