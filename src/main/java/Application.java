@@ -1,10 +1,8 @@
 import controller.LottoController;
 import infrastructure.AppConfig;
 
-import java.io.IOException;
-
 public class Application {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         AppConfig appConfig = new AppConfig();
         LottoController lottoController = appConfig.controller();
         lottoController.run();
