@@ -49,8 +49,10 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public List<Integer> getLotto() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .toList();
     }
-    
+
 }

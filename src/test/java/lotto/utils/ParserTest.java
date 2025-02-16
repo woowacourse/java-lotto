@@ -11,7 +11,7 @@ class ParserTest {
 
     @DisplayName("하나의 숫자를 넣지않으면 예외를 발생한다.")
     @ParameterizedTest
-    @CsvSource(value = {"a", "1,2"})
+    @CsvSource(value = {"a", "'1,2'"})
     void 하나의_숫자를_넣지않으면_예외를_발생한다(String number) {
 
         //when & then

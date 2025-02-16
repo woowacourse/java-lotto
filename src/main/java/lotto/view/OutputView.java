@@ -1,10 +1,8 @@
 package lotto.view;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
-import lotto.domain.LottoBundle;
-import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 
 public class OutputView {
@@ -13,10 +11,9 @@ public class OutputView {
         System.out.println(lottoQuantity + "개를 구매했습니다.");
     }
 
-    public void lottoStatusPrint(LottoBundle lottoBundle) {
-        for (Lotto lotto : lottoBundle.getLottoBundle()) {
-            String numbers = lotto.getLottoNumbers().stream()
-                    .map(LottoNumber::getNumber)
+    public void lottoStatusPrint(List<List<Integer>> lottoBundle) {
+        for (List<Integer> lottoNumbers : lottoBundle) {
+            String numbers = lottoNumbers.stream()
                     .map(String::valueOf)
                     .collect(Collectors.joining(", "));
 
@@ -24,6 +21,7 @@ public class OutputView {
         }
         System.out.println();
     }
+
 
     public void lottoStatisticsPrint(EnumMap<Rank, Integer> statistics, String profitRate) {
 

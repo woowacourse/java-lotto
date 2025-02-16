@@ -28,7 +28,9 @@ public class LottoBundle {
         return lottoBundle.size();
     }
 
-    public List<Lotto> getLottoBundle() {
-        return lottoBundle;
+    public List<List<Integer>> getLottoBundle() {
+        return lottoBundle.stream()
+                .map(Lotto::getLotto)
+                .toList();
     }
 }
