@@ -1,13 +1,13 @@
 package controller;
 
 import java.util.List;
-import model.BonusNumber;
-import model.Lotto;
+import domain.BonusNumber;
+import domain.Lotto;
 import util.LottoGenerator;
-import model.Purchase;
-import model.WinningNumber;
-import model.WinningResult;
-import model.WinningStatus;
+import domain.Purchase;
+import domain.WinningNumber;
+import domain.WinningResult;
+import domain.WinningStatus;
 import view.InputView;
 import view.OutputView;
 

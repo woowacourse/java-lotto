@@ -1,10 +1,10 @@
 package util;
 
-import static model.LottoConstants.*;
+import static domain.LottoConstants.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.Lotto;
+import domain.Lotto;
 
 public class LottoGenerator {
     public static List<Lotto> generate(int lottoCount) {
