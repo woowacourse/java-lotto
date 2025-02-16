@@ -61,9 +61,9 @@ public enum LottoRank {
         this.incrementIfMatchCondition = incrementIfMatchCondition;
     }
 
-    public static LottoRank of(final Lotto lotto, final WinningNumbers winningNumbers) {
+    public static LottoRank of(final Lotto lotto, final WinningNumbers winningNumbers, final BonusBall bonusBall) {
         final int lottoMatchCount = lotto.calculateWinningNumbersMatchCount(winningNumbers);
-        final boolean bonusBallMatch = winningNumbers.matchBonusNumber(lotto);
+        final boolean bonusBallMatch = bonusBall.matchBonusNumber(lotto);
 
         return Arrays.stream(values())
                 .filter(lottoRank -> lottoRank.incrementIfMatchCondition.test(lottoMatchCount, bonusBallMatch))

@@ -5,6 +5,7 @@ import generator.NumberGenerator;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import model.BonusBall;
 import model.Lotto;
 import model.LottoMachine;
 import model.LottoNumber;
@@ -37,7 +38,9 @@ public class LottoController {
         outputView.printLottoNumbers(convertLottos(lottos));
 
         final WinningNumbers winningNumbers = executeWithRetry(this::inputWinningNumbers, 0);
-        final WinningResult winningResult = WinningResult.of(lottos, winningNumbers);
+        final BonusBall bonusBall = executeWithRetry(() -> inputBonusBall(winningNumbers), 0);
+
+        final WinningResult winningResult = WinningResult.of(lottos, winningNumbers, bonusBall);
         outputView.printLottoStatistics(winningResult.calculateRateOfRevenue(), winningResult.getLottoRanks(),
                 winningResult.isRevenue());
     }
@@ -48,21 +51,21 @@ public class LottoController {
 
     private WinningNumbers inputWinningNumbers() {
         final List<Integer> winningNumber = inputView.readWinningNumber();
+
+        return WinningNumbers.from(winningNumber);
+    }
+
+    private BonusBall inputBonusBall(final WinningNumbers winningNumbers) {
         final int bonusBall = inputView.readBonusBall();
-        return WinningNumbers.of(winningNumber, bonusBall);
+        return BonusBall.of(bonusBall, winningNumbers);
     }
 
     private List<List<Integer>> convertLottos(final List<Lotto> lottos) {
-        return lottos.stream()
-                .map(Lotto::getLottoNumbers)
-                .map(this::convertLottoNumbers)
-                .collect(Collectors.toList());
+        return lottos.stream().map(Lotto::getLottoNumbers).map(this::convertLottoNumbers).collect(Collectors.toList());
     }
 
     private List<Integer> convertLottoNumbers(final List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
+        return lottoNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList());
     }
 
     private <T> T executeWithRetry(final Supplier<T> supplier, final int depth) {

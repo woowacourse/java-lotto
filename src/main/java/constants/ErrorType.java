@@ -13,6 +13,8 @@ public enum ErrorType {
     // WinningNumbers
     WINNING_NUMBERS_IS_INVALID_SIZE("당첨 번호는 6개여야합니다."),
     WINNING_NUMBERS_IS_DUPLICATION("당첨 번호의 숫자들 중 중복되는 수가 있습니다."),
+
+    // BonusBall
     BONUS_BALL_IS_DUPLICATION("보너스 번호는 당첨 번호와 중복될 수 없습니다."),
 
     // LottoNumber

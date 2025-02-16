@@ -18,8 +18,9 @@ class LottoTest {
 
     @BeforeEach
     public void initTestFixture() {
-        lottoNumbers = new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+        lottoNumbers = new ArrayList<>(
+                Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                        new LottoNumber(5), new LottoNumber(6)));
     }
 
     @Nested
@@ -41,7 +42,7 @@ class LottoTest {
         void calculateWinningNumbersMatchCount() {
             // given
             Lotto lotto = new Lotto(lottoNumbers);
-            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, new LottoNumber(7));
+            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
             int expected = 6;
 
             // when
@@ -77,8 +78,7 @@ class LottoTest {
             lottoNumbers.add(new LottoNumber(10));
 
             // when & then
-            assertThatThrownBy(() -> new Lotto(lottoNumbers))
-                    .isInstanceOf(IllegalArgumentException.class)
+            assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class)
                     .hasMessageContaining(ErrorType.LOTTO_NUMBER_IS_INVALID_SIZE.getMessage());
         }
 
@@ -90,8 +90,7 @@ class LottoTest {
             lottoNumbers.add(new LottoNumber(1));
 
             // when & then
-            assertThatThrownBy(() -> new Lotto(lottoNumbers))
-                    .isInstanceOf(IllegalArgumentException.class)
+            assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class)
                     .hasMessageContaining(ErrorType.LOTTO_NUMBER_DUPLICATE.getMessage());
         }
     }

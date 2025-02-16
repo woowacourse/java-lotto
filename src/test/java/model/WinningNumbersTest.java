@@ -2,7 +2,6 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import constants.ErrorType;
 import java.util.ArrayList;
@@ -16,17 +15,12 @@ import org.junit.jupiter.api.Test;
 class WinningNumbersTest {
 
     private List<LottoNumber> lottoNumbers;
-    private LottoNumber bonusBall;
-    private Lotto lotto;
 
     @BeforeEach
     void initTestFixture() {
-        lottoNumbers = new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
-                , new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
-        bonusBall = new LottoNumber(7);
-        lotto = new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(7)));
+        lottoNumbers = new ArrayList<>(
+                Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                        new LottoNumber(5), new LottoNumber(6)));
     }
 
     @Nested
@@ -37,20 +31,17 @@ class WinningNumbersTest {
         @Test
         void createWinningNumbers() {
             // given & when
-            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusBall);
+            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
 
             // then
-            assertSoftly(softly -> {
-                softly.assertThat(winningNumbers).extracting("winningNumbers").isEqualTo(lottoNumbers);
-                softly.assertThat(winningNumbers).extracting("bonusBall").isEqualTo(bonusBall);
-            });
+            assertThat(winningNumbers).extracting("winningNumbers").isEqualTo(lottoNumbers);
         }
 
         @DisplayName("당첨 번호를 올바르게 비교한다.")
         @Test
         void containsLottoNumber() {
             // given
-            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusBall);
+            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
             LottoNumber lottoNumber = new LottoNumber(1);
 
             // when
@@ -58,19 +49,6 @@ class WinningNumbersTest {
 
             // then
             assertThat(actual).isTrue();
-        }
-
-        @DisplayName("보너스 번호를 올바르게 비교한다.")
-        @Test
-        void matchBonusNumber() {
-            // given
-            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusBall);
-
-            // when
-            boolean matchBonusNumber = winningNumbers.matchBonusNumber(lotto);
-
-            // then
-            assertThat(matchBonusNumber).isTrue();
         }
     }
 
@@ -85,8 +63,7 @@ class WinningNumbersTest {
             lottoNumbers.add(new LottoNumber(10));
 
             // when & then
-            assertThatThrownBy(() -> new WinningNumbers(lottoNumbers, bonusBall)).isInstanceOf(
-                            IllegalArgumentException.class)
+            assertThatThrownBy(() -> new WinningNumbers(lottoNumbers)).isInstanceOf(IllegalArgumentException.class)
                     .hasMessageContaining(ErrorType.WINNING_NUMBERS_IS_INVALID_SIZE.getMessage());
         }
 
@@ -98,22 +75,8 @@ class WinningNumbersTest {
             lottoNumbers.add(new LottoNumber(1));
 
             // when & then
-            assertThatThrownBy(() -> new WinningNumbers(lottoNumbers, bonusBall)).isInstanceOf(
-                            IllegalArgumentException.class)
+            assertThatThrownBy(() -> new WinningNumbers(lottoNumbers)).isInstanceOf(IllegalArgumentException.class)
                     .hasMessageContaining(ErrorType.WINNING_NUMBERS_IS_DUPLICATION.getMessage());
         }
-
-        @DisplayName("보너스 볼이 당첨 번호에 존재한다면 예외가 발생한다.")
-        @Test
-        void validateBonusNumberDuplicate() {
-            // given
-            LottoNumber bonusBallOfContainedLottoNumber = new LottoNumber(1);
-
-            // when & then
-            assertThatThrownBy(() -> new WinningNumbers(lottoNumbers, bonusBallOfContainedLottoNumber)).isInstanceOf(
-                            IllegalArgumentException.class)
-                    .hasMessageContaining(ErrorType.BONUS_BALL_IS_DUPLICATION.getMessage());
-        }
-
     }
 }

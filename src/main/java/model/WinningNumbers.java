@@ -8,22 +8,18 @@ import java.util.Set;
 public class WinningNumbers {
 
     private final List<LottoNumber> winningNumbers;
-    private final LottoNumber bonusBall;
 
-    public WinningNumbers(final List<LottoNumber> winningNumbers, final LottoNumber bonusBall) {
+    public WinningNumbers(final List<LottoNumber> winningNumbers) {
         validateSize(winningNumbers);
         validateDuplicate(winningNumbers);
-        validateBonusNumberDuplicate(winningNumbers, bonusBall);
         this.winningNumbers = winningNumbers;
-        this.bonusBall = bonusBall;
     }
 
-    public static WinningNumbers of(final List<Integer> numbers, final int number) {
+    public static WinningNumbers from(final List<Integer> numbers) {
         final List<LottoNumber> winningNumbers = numbers.stream()
                 .map(LottoNumber::new)
                 .toList();
-        final LottoNumber bonusBall = new LottoNumber(number);
-        return new WinningNumbers(winningNumbers, bonusBall);
+        return new WinningNumbers(winningNumbers);
     }
 
     private void validateSize(final List<LottoNumber> winningNumbers) {
@@ -39,17 +35,8 @@ public class WinningNumbers {
         }
     }
 
-    private void validateBonusNumberDuplicate(final List<LottoNumber> winningNumbers, final LottoNumber bonusBall) {
-        if (winningNumbers.contains(bonusBall)) {
-            throw new IllegalArgumentException(ErrorType.BONUS_BALL_IS_DUPLICATION.getMessage());
-        }
-    }
-
     public boolean containsLottoNumber(final LottoNumber lottoNumber) {
         return winningNumbers.contains(lottoNumber);
     }
 
-    public boolean matchBonusNumber(final Lotto lotto) {
-        return lotto.isContainsNumber(bonusBall);
-    }
 }
