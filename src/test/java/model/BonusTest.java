@@ -4,11 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import exception.BonusExceptionType;
-import exception.CommonExceptionType;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -51,6 +49,6 @@ class BonusTest {
     }
 
     static Stream<Arguments> provideLottoRange() {
-        return Stream.of(Arguments.of(Lotto.LOTTO_MIN_RANGE, Lotto.LOTTO_MAX_RANGE));
+        return Stream.of(Arguments.of(LottoConstant.MIN_NUMBER, LottoConstant.MAX_NUMBER));
     }
 }

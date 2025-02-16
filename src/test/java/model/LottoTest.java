@@ -40,6 +40,6 @@ class LottoTest {
     }
 
     static Stream<Arguments> provideLottoRange() {
-        return Stream.of(Arguments.of(Lotto.LOTTO_MIN_RANGE, Lotto.LOTTO_MAX_RANGE));
+        return Stream.of(Arguments.of(LottoConstant.MIN_NUMBER, LottoConstant.MAX_NUMBER));
     }
 }

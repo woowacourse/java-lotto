@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
 import model.Lotto;
+import model.LottoConstant;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -22,7 +23,7 @@ class LottoFactoryTest {
     }
 
     @ParameterizedTest(name = "구매 티켓 갯수는 구매 금액에 나누기 {0}이여야 한다.")
-    @ValueSource(ints = {LottoFactory.LOTTO_PURCHASE_UNIT})
+    @ValueSource(ints = {LottoConstant.TICKET_PRICE_UNIT})
     void validTicketNumber(final int lottoPurchaseUnit) {
         int expected = purchase / lottoPurchaseUnit;
         assertThat(lottoFactory.getTicketNumber()).isEqualTo(expected);
@@ -38,7 +39,7 @@ class LottoFactoryTest {
     }
 
     @ParameterizedTest(name = "발행된 티켓 내 숫자 갯수는 {0}개여야 한다.")
-    @ValueSource(ints = {Lotto.LOTTO_SIZE})
+    @ValueSource(ints = {LottoConstant.SIZE})
     void validTicketSize(final int expectedCount) {
         for (Lotto issuedTicket : lottoFactory.getIssuedTickets()) {
             assertThat(issuedTicket.getNumbers().size()).isEqualTo(expectedCount);
@@ -46,6 +47,6 @@ class LottoFactoryTest {
     }
 
     static Stream<Arguments> provideLottoRange() {
-        return Stream.of(Arguments.of(Lotto.LOTTO_MIN_RANGE, Lotto.LOTTO_MAX_RANGE));
+        return Stream.of(Arguments.of(LottoConstant.MIN_NUMBER, LottoConstant.MAX_NUMBER));
     }
 }

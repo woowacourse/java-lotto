@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import model.Bonus;
 import model.Lotto;
+import model.LottoConstant;
 import model.Prize;
 
 public class LottoFactory {
 
-    public static final int LOTTO_PURCHASE_UNIT = 1_000;
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_MAX_RANGE = 45;
 
@@ -25,7 +25,7 @@ public class LottoFactory {
     private final Random random;
 
     public static LottoFactory of(final int purchase) {
-        return new LottoFactory(purchase / LOTTO_PURCHASE_UNIT);
+        return new LottoFactory(purchase / LottoConstant.TICKET_PRICE_UNIT);
     }
 
     private LottoFactory(final int ticketNumber) {

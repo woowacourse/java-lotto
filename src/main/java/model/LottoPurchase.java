@@ -5,8 +5,6 @@ import exception.LottoPurchaseExceptionType;
 
 public class LottoPurchase {
 
-    public static final int MIN_AMOUNT = 1_000;
-
     private final int amount;
 
     public static LottoPurchase of(final int input) {
@@ -20,16 +18,16 @@ public class LottoPurchase {
     }
 
     private void validateMinAmount(int amount) {
-        if (amount < MIN_AMOUNT) {
+        if (amount < LottoConstant.TICKET_PRICE_UNIT) {
             throw new IllegalArgumentException(
-                    LottoPurchaseExceptionType.INVALID_LOTTO_MIN_PURCHASE.getMessage(MIN_AMOUNT));
+                    LottoPurchaseExceptionType.INVALID_LOTTO_MIN_PURCHASE.getMessage(LottoConstant.TICKET_PRICE_UNIT));
         }
     }
 
     private void validateAmountUnit(int amount) {
-        if (amount % MIN_AMOUNT != 0) {
+        if (amount % LottoConstant.TICKET_PRICE_UNIT != 0) {
             throw new IllegalArgumentException(
-                    LottoPurchaseExceptionType.INVALID_LOTTO_PURCHASE_UNIT.getMessage(MIN_AMOUNT));
+                    LottoPurchaseExceptionType.INVALID_LOTTO_PURCHASE_UNIT.getMessage(LottoConstant.TICKET_PRICE_UNIT));
         }
     }
 
