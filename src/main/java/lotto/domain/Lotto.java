@@ -61,11 +61,14 @@ public record Lotto(List<Integer> numbers) {
         return number < LOTTO_MINIMUM || number > LOTTO_MAXIMUM;
     }
 
-    public MatchCount matchCount(Lotto matchLotto, int bonus) {
-        int count = (int)matchLotto.numbers().stream()
-            .filter(this::isContainsBonus)
+    public MatchCount matchCount(Lotto winningLotto, int bonus) {
+        int count = (int)winningLotto.numbers().stream()
+            .filter(numbers::contains)
             .count();
-        return new MatchCount(count, isContainsBonus(bonus));
+
+        boolean isBonus = isContainsBonus(bonus);
+
+        return new MatchCount(count, isBonus);
     }
 
     public void validateBonus(int bonus) {

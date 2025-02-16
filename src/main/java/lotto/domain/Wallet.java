@@ -2,36 +2,28 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Wallet {
     private final List<Lotto> lottoList = new ArrayList<>();
 
     public Wallet(int numberOfLotto) {
-        for (int i = 0; i < numberOfLotto; i++) {
-            lottoList.add(Lotto.generateLotto());
-        }
+        Stream.generate(Lotto::generateLotto)
+            .limit(numberOfLotto)
+            .forEach(lottoList::add);
     }
 
-    public List<MatchCount> matchCount(Lotto matchLotto, int bonus) {
-        List<MatchCount> list = new ArrayList<>();
-
-        for (Lotto lotto : lottoList) {
-            MatchCount dto = lotto.matchCount(matchLotto, bonus);
-            list.add(dto);
-        }
-
-        return list;
+    public List<MatchCount> getMatchCountList(Lotto winningLotto, int bonus) {
+        return lottoList.stream()
+            .map(lotto -> lotto.matchCount(winningLotto, bonus))
+            .toList();
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        for (Lotto lotto : lottoList) {
-            sb.append(lotto.toString());
-            sb.append("\n");
-        }
-
-        return sb.toString();
+        return lottoList.stream()
+            .map(Lotto::toString)
+            .collect(Collectors.joining("\n"));
     }
 }

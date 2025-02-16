@@ -29,23 +29,23 @@ public class Controller {
         outputView.print(cashier.getNumberOfLotto() + "개를 구매했습니다.\n");
         outputView.print(wallet.toString());
 
-        Lotto matchLotto = requestMatchLotto();
+        Lotto winningLotto = requestwinningLotto();
 
-        int bonus = requestBonus(matchLotto);
+        int bonus = requestBonus(winningLotto);
 
-        List<MatchCount> matchCount = wallet.matchCount(matchLotto, bonus);
-        Map<MatchInfo, Integer> map = cashier.convertToMatchResult(matchCount);
-        outputView.printStatics(map);
+        List<MatchCount> matchCount = wallet.getMatchCountList(winningLotto, bonus);
+        Map<MatchInfo, Integer> matchResult = cashier.convertToMatchResult(matchCount);
+        outputView.printStatics(matchResult);
 
-        Profit profit = cashier.calculateProfit(map, cashier.money());
+        Profit profit = cashier.calculateProfit(matchResult, cashier.money());
         outputView.printProfit(profit);
     }
 
-    private int requestBonus(Lotto matchLotto) {
+    private int requestBonus(Lotto winningLotto) {
         while (true) {
             try {
                 int bonus = requestNumber("보너스 볼을 입력해주세요.");
-                matchLotto.validateBonus(bonus);
+                winningLotto.validateBonus(bonus);
                 return bonus;
             } catch (IllegalArgumentException e) {
                 outputView.print(e.getMessage());
@@ -77,7 +77,7 @@ public class Controller {
         }
     }
 
-    private Lotto requestMatchLotto() {
+    private Lotto requestwinningLotto() {
         while (true) {
             try {
                 outputView.print("지난 주 당첨 번호를 입력해 주세요.");

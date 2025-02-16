@@ -15,4 +15,7 @@ class MatchInfoTest {
         assertThat(getMatchInfo(5, false)).isEqualTo(MATCH_FIVE);
         assertThat(getMatchInfo(5, true)).isEqualTo(MATCH_BONUS);
     }
+    // MatchStatistics.getMatchData()
+    //     MatchStatistics.isMatchBonus()
+
 }

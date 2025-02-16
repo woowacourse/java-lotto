@@ -50,9 +50,9 @@ class LottoTest {
         var correctCount = 5;
 
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, bonus));
-        Lotto matchLotto = new Lotto(List.of(1, 2, 3, 4, 5, notBonus));
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, notBonus));
 
-        MatchCount count = lotto.matchCount(matchLotto, bonus);
+        MatchCount count = lotto.matchCount(winningLotto, bonus);
 
         assertThat(count.matchCount()).isEqualTo(correctCount);
         assertThat(count.bonus()).isTrue();
@@ -83,5 +83,22 @@ class LottoTest {
         assertThatThrownBy(() -> lotto.validateBonus(duplicatedNumber))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_DUPLICATED_BONUS_NUMBER.getMessage());
+    }
+
+    @Test
+    @DisplayName("로또 보너스 번호가 로또의 번호와 중복될 경우, 예외를 발생한다.")
+    void MatchWinningLottoCorrectly() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 10));
+        Lotto winningLotto2 = new Lotto(List.of(1, 2, 3, 4, 11, 10));
+        Lotto winningLotto3 = new Lotto(List.of(1, 2, 3, 12, 11, 10));
+
+        MatchCount count1 = lotto.matchCount(winningLotto1, 10);
+        MatchCount count2 = lotto.matchCount(winningLotto2, 10);
+        MatchCount count3 = lotto.matchCount(winningLotto3, 10);
+
+        assertThat(count1.matchCount()).isEqualTo(5);
+        assertThat(count2.matchCount()).isEqualTo(4);
+        assertThat(count3.matchCount()).isEqualTo(3);
     }
 }
