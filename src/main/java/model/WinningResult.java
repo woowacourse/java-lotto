@@ -4,6 +4,7 @@ import constans.ErrorType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class WinningResult {
 
@@ -15,11 +16,14 @@ public class WinningResult {
     }
 
     private void validateRankSize(final Map<LottoRank, Integer> lottoRanks) {
-        lottoRanks.forEach((lottoRank, count) -> {
-            if (count < 0) {
-                throw new IllegalArgumentException(ErrorType.WINNING_RESULT_POSITIVE.getMessage());
-            }
-        });
+        long negativeCount = lottoRanks.entrySet().stream()
+                .mapToInt(Entry::getValue)
+                .filter(count -> count < 0)
+                .count();
+
+        if (negativeCount > 0) {
+            throw new IllegalArgumentException(ErrorType.WINNING_RESULT_POSITIVE.getMessage());
+        }
     }
 
     public static WinningResult of(final List<Lotto> lottos, final WinningNumbers winningNumbers) {
