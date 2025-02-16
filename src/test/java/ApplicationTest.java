@@ -3,6 +3,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import domain.BonusNumber;
 import domain.Lotto;
 import domain.LottoDispenser;
+import domain.Money;
 import domain.WinningLotto;
 import domain.WinningNumber;
 import java.util.List;
@@ -26,7 +27,7 @@ public class ApplicationTest {
         new BonusNumber(bonusNumber)
     );
 
-    String result = new LottoDispenser(lottos).winningCalculateResultFormat(winningLotto);
+    String result = new LottoDispenser(lottos, new Money("14000")).winningCalculateResultFormat(winningLotto);
 
     assertThat(result)
         .isEqualTo("""

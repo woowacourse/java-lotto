@@ -18,7 +18,7 @@ public class LottoDispenserTest {
     @DisplayName("구입_금액이_0원이면_예외가_발생한다")
     public void 구입_금액이_0원이면_예외가_발생한다(String buyMoney){
         assertThatThrownBy(() -> {
-            new LottoDispenser(buyMoney);
+            new Money(buyMoney);
         }).isInstanceOf(LottoException.class);
     }
 
@@ -27,7 +27,7 @@ public class LottoDispenserTest {
     @DisplayName("구입_금액이_1000원_단위가_아니면_예외가_발생한다")
     public void 구입_금액이_1000원_단위가_아니면_예외가_발생한다(String buyMoney){
         assertThatThrownBy(() -> {
-            new LottoDispenser(buyMoney);
+            new Money(buyMoney);
         }).isInstanceOf(LottoException.class);
     }
 
@@ -36,7 +36,7 @@ public class LottoDispenserTest {
     @DisplayName("구입_금액이_숫자가_아니면_예외가_발생한다")
     public void 구입_금액이_숫자가_아니면_예외가_발생한다(String buyMoney){
         assertThatThrownBy(() -> {
-            new LottoDispenser(buyMoney);
+            new Money(buyMoney);
         }).isInstanceOf(LottoException.class);
     }
 
