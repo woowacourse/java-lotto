@@ -50,7 +50,7 @@ public enum LottoRank {
         return Arrays.stream(LottoRank.values())
                 .filter(rank -> {
                     if (overlappedCount == REQUIRED_BONUS_OVERLAPPED_COUNT) {
-                        return rank.isRequiredBonusNumber() && rank.overlappedCount == overlappedCount;
+                        return rank.isRequiredBonusNumber() == isBonusNUmberOverlapped && rank.overlappedCount == overlappedCount;
                     }
                     return rank.overlappedCount == overlappedCount;
                 })
