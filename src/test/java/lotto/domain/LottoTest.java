@@ -8,6 +8,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoTest {
+
     @Test
     void 일치하는_숫자_갯수를_구한다() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
@@ -25,10 +26,10 @@ public class LottoTest {
 
     @Test
     void 로또_번호의_등수를_판정한다() {
-        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 7);
-        assertThat(winningNumbers.getRank(new Lotto(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(Rank.FIRST);
-        assertThat(winningNumbers.getRank(new Lotto(List.of(1, 2, 3, 4, 5, 7)))).isEqualTo(Rank.SECOND);
-        assertThat(winningNumbers.getRank(new Lotto(List.of(1, 2, 3, 4, 5, 8)))).isEqualTo(Rank.THIRD);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 7);
+        assertThat(winningLotto.getRank(new Lotto(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(Rank.FIRST);
+        assertThat(winningLotto.getRank(new Lotto(List.of(1, 2, 3, 4, 5, 7)))).isEqualTo(Rank.SECOND);
+        assertThat(winningLotto.getRank(new Lotto(List.of(1, 2, 3, 4, 5, 8)))).isEqualTo(Rank.THIRD);
     }
 
     @Test

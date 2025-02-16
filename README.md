@@ -109,16 +109,16 @@ git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 �
 - [x] getter 사용 지양(메서드명 포함)
 
 ## 2차 피드백 내용
-- [ ] Rank 객체에게 메시지 보내기
-  - [ ] calculateTotalPrice 기존 위치로 원상복구
-- [ ] 객체간의 비교라는 게 동일성을 의미하는 것인지?
-- [ ] getTicketCount()의 메서드명으로 getLottoSize() 혹은 lottos.size()는 어떤지?
-- [ ] 약속된 에러메시지가 아닌 경우, 하드 코딩
-- [ ] WinningNumbers -> WinningLotto는 어떤지? (네이밍 방식 통일)
-- [ ] 생성자 오버로딩 활용해보기 in WinningNumbers
-- [ ] Map<Rank, Long>을 상태값으로 가지는 새로운 객체에게 수익률을 계산하는 역할 위임해보기
-  - [ ] Bank객체가 로또 당첨 통계치를 모두 알고 있어야하는 상황이 어색하다. (수익률 계산 로직 포함)
-- [ ] NumberGenerator는 domain 패키지에 위치하는 것이 좋다고 생각됨
+- [x] Rank 객체에게 메시지 보내기
+  - [x] calculateTotalPrice 기존 위치로 원상복구
+- [x] 객체간의 비교라는 게 동일성을 의미하는 것인지?
+- [x] getTicketCount()의 메서드명으로 getLottoSize() 혹은 lottos.size()는 어떤지?
+- [x] 약속된 에러메시지가 아닌 경우, 하드 코딩
+- [x] WinningNumbers -> WinningLotto는 어떤지? (네이밍 방식 통일)
+- [x] 생성자 오버로딩 활용해보기 in WinningNumbers
+- [x] Map<Rank, Long>을 상태값으로 가지는 새로운 객체에게 수익률을 계산하는 역할 위임해보기
+  - [x] Bank객체가 로또 당첨 통계치를 모두 알고 있어야하는 상황이 어색하다. (수익률 계산 로직 포함)
+- [x] NumberGenerator는 domain 패키지에 위치하는 것이 좋다고 생각됨
   - 로또라는 도메인의 핵심적인 로직으로 생각되기 때문
-- [ ] Number 하나를 만드는 것 대신에, Lotto 혹은 Lottos를 생성해주는 것은 어떨지?
-- [ ] 로또 숫자를 미리 캐싱해두고 재사용한다면 효율적이라고 생각됨
+- [x] Number 하나를 만드는 것 대신에, Lotto 혹은 Lottos를 생성해주는 것은 어떨지?
+- [x] 로또 숫자를 미리 캐싱해두고 재사용한다면 효율적이라고 생각됨
