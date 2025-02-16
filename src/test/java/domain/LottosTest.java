@@ -2,7 +2,6 @@ package domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import domain.lotto.Lottos;
 import org.junit.jupiter.api.Test;
 
 class LottosTest {

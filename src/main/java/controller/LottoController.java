@@ -1,10 +1,12 @@
 package controller;
 
-import domain.MatchDto;
-import domain.WinningCountDto;
-import domain.WinningStatistics;
-import domain.lotto.Lottos;
-import java.util.List;
+import domain.Lotto;
+import domain.Lottos;
+import domain.Rank;
+import domain.WinningNumbers;
+import dto.response.LottosResponse;
+import dto.response.WinningResultResponse;
+import java.util.Map;
 import view.InputView;
 import view.OutputView;
 
@@ -22,10 +24,12 @@ public class LottoController {
         int purchaseAmount = inputView.askPurchaseAmount();
         Lottos lottos = issueLottos(purchaseAmount);
 
-        List<Integer> winningNumbers = inputView.askWinningNumbers();
+        Lotto winningLotto = inputView.askWinningLotto();
         int bonusNumber = inputView.askBonusNumber();
 
-        printWinningResult(lottos, winningNumbers, bonusNumber, purchaseAmount);
+        WinningNumbers winningNumbers = WinningNumbers.createByWinningLottoAndBonusNumber(winningLotto, bonusNumber);
+
+        outputView.printWinningResult(getWinningResult(lottos, winningNumbers, purchaseAmount));
     }
 
     private Lottos issueLottos(int purchaseAmount) {
@@ -34,17 +38,12 @@ public class LottoController {
         int quantity = lottos.getQuantity();
         outputView.printLottoQuantity(quantity);
 
-        List<String> lottoNumbers = lottos.getLottoNumbers();
-        outputView.printLottos(lottoNumbers);
+        outputView.printLottos(LottosResponse.from(lottos));
         return lottos;
     }
 
-    private void printWinningResult(Lottos lottos, List<Integer> winningNumbers, int bonusNumber, int purchaseAmount) {
-        List<MatchDto> matchDtos = lottos.getMatchDtos(winningNumbers, bonusNumber);
-        List<WinningCountDto> winningCountDtos = WinningStatistics.calculateWinningCountDtos(matchDtos);
-        outputView.printWinningStatistics(winningCountDtos);
-
-        double yield = WinningStatistics.calculateYield(purchaseAmount, winningCountDtos);
-        outputView.printYield(yield);
+    private WinningResultResponse getWinningResult(Lottos lottos, WinningNumbers winningNumbers, int purchaseAmount) {
+        Map<Rank, Integer> rankCount = lottos.getRankCount(winningNumbers);
+        return WinningResultResponse.of(rankCount, winningNumbers.calculateYield(rankCount, purchaseAmount));
     }
 }

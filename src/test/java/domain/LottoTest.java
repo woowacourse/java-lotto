@@ -2,8 +2,6 @@ package domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import domain.lotto.Lotto;
-import domain.numbergenerator.NumberGenerator;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,15 +22,19 @@ class LottoTest {
     @ParameterizedTest
     void 당첨_번호와_비교하여_일치_결과를_반환한다(
             List<Integer> lottoNumbers, int winningNumberCount, boolean hasBonusNumber) {
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 7;
+        Lotto winningNumbers = Lotto.issueByNumbers(List.of(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)));
+        LottoNumber bonusNumber = LottoNumber.of(7);
 
         Lotto lotto = Lotto.issueByNumberGenerator(new FixedNumberGenerator(lottoNumbers));
 
-        MatchDto matchDto = lotto.getMatchDto(winningNumbers, bonusNumber);
-
-        assertThat(matchDto.winningNumberCount()).isEqualTo(winningNumberCount);
-        assertThat(matchDto.hasBonusNumber()).isEqualTo(hasBonusNumber);
+        assertThat(lotto.calculateMatchCount(winningNumbers)).isEqualTo(winningNumberCount);
+        assertThat(lotto.hasNumber(bonusNumber)).isEqualTo(hasBonusNumber);
     }
 
     public static class FixedNumberGenerator implements NumberGenerator {
