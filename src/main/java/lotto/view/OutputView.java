@@ -5,11 +5,12 @@ import java.util.stream.Collectors;
 
 import lotto.model.winning.WinningResultResponse;
 import lotto.model.winning.WinningResultResponses;
+import lotto.view.util.NumberFormatter;
 
 public class OutputView {
 
     public void printChangeAmount(final int changeAmount) {
-        System.out.println("로또 구매 후 남은 잔돈은 %d원 입니다.".formatted(changeAmount));
+        System.out.println("로또 구매 후 남은 잔돈은 %s원 입니다.".formatted(getFormattedMoney(changeAmount)));
     }
 
     public void printIssuedLottos(final List<List<Integer>> issuedLottoNumbers) {
@@ -31,13 +32,15 @@ public class OutputView {
     private void printStatistics(final WinningResultResponse response) {
         if (response.isHasBonus() && response.getMatchingCount() == 5) {
             System.out.println(
-                    "%d개, 보너스 볼 일치(%d원)- %d개".formatted(
-                            response.getMatchingCount(), response.getWinningAmount(), response.getWinningCount()
+                    "%d개, 보너스 볼 일치(%s원)- %d개".formatted(
+                            response.getMatchingCount(), getFormattedMoney(response.getWinningAmount()),
+                            response.getWinningCount()
                     ));
             return;
         }
-        System.out.println("%d개 일치 (%d원)- %d개".formatted(
-                response.getMatchingCount(), response.getWinningAmount(), response.getWinningCount()
+        System.out.println("%d개 일치 (%s원)- %d개".formatted(
+                response.getMatchingCount(), getFormattedMoney(response.getWinningAmount()),
+                response.getWinningCount()
         ));
     }
 
@@ -48,6 +51,10 @@ public class OutputView {
 
     public void printErrorMessage(final String message) {
         System.out.println(String.join(" : ", "[ERROR]", message));
+    }
+
+    private String getFormattedMoney(final long moneyAmount) {
+        return NumberFormatter.formatMoney(moneyAmount);
     }
 
 }
