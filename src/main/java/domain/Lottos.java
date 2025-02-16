@@ -1,7 +1,5 @@
 package domain;
 
-import global.generator.Generator;
-import global.generator.RandomGenerator;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -14,7 +12,7 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public EnumMap<Rank, Integer> calculateResultOfWinning(WinningLotto winningLotto) {
+    public EnumMap<Rank, Integer> calculateWinningResult(WinningLotto winningLotto) {
         EnumMap<Rank, Integer> countRank = countMatchNumbers(winningLotto);
         return countRank;
     }

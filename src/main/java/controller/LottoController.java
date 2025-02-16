@@ -5,10 +5,8 @@ import domain.Lottos;
 import domain.Rank;
 import domain.dto.AmountDto;
 import domain.dto.LottosDto;
-import global.factory.LottosFactory;
 import domain.WinningLotto;
 import domain.dto.ResultDto;
-import global.generator.RandomGenerator;
 import java.util.EnumMap;
 import view.InputView;
 import view.OutputView;
@@ -52,7 +50,7 @@ public class LottoController {
     }
 
     private void calculateResult(Lottos lottos, WinningLotto winningLotto, Money money) {
-        EnumMap<Rank, Integer> countRank = lottos.calculateResultOfWinning(winningLotto);
+        EnumMap<Rank, Integer> countRank = lottos.calculateWinningResult(winningLotto);
         double profit = money.calculateProfit(countRank);
 
         outputView.printWinningStatistic(new ResultDto(countRank, profit));
