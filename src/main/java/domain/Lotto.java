@@ -1,6 +1,7 @@
 package domain;
 
 import constant.LottoConstants;
+import java.util.Collections;
 import java.util.List;
 import validator.Validator;
 
@@ -15,6 +16,6 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 }
