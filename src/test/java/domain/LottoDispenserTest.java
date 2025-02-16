@@ -4,11 +4,8 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import exception.LottoException;
-import java.util.List;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoDispenserTest {
@@ -40,12 +37,4 @@ public class LottoDispenserTest {
         }).isInstanceOf(LottoException.class);
     }
 
-
-    private static Stream<Arguments> calculateWinningResult(){
-        return Stream.of(
-                Arguments.arguments(
-                        List.of(1,2,3,4,5,6)
-                        )
-        );
-    }
 }

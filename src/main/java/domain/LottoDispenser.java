@@ -1,8 +1,7 @@
 package domain;
 
-import domain.formatter.WinningCalculateFormatter;
 import dto.BuyLottoResultDto;
-import domain.enums.WinningCase;
+import dto.DrawResultDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,9 +17,18 @@ public class LottoDispenser {
         lottos = generateLottos(money.calculateBuyLottoCount());
     }
 
-    public LottoDispenser(List<Lotto> lottos, Money money) {
-        this.lottos = lottos;
-        this.money = money;
+    public DrawResultDto getDrawResult(WinningLotto winningLotto){
+        Map<WinningCase, Integer> winningCalculateResult = winningLotto.winningCalculate(lottos);
+        long earnMoney = calculateTotalEarnMoney(winningCalculateResult);
+        double earnMoneyRatio = money.calculateEarnMoneyRatio(earnMoney);
+        return new DrawResultDto(winningCalculateResult,earnMoneyRatio);
+    }
+
+    public BuyLottoResultDto getBuyLottos() {
+        return new BuyLottoResultDto(
+            lottos.stream().map(Lotto::getLottoNumbers).toList(),
+            money.calculateBuyLottoAmount()
+        );
     }
 
     private List<Lotto> generateLottos(int lottoCount) {
@@ -39,21 +47,6 @@ public class LottoDispenser {
             earnMoneySum += earnMoney;
         }
         return earnMoneySum;
-    }
-
-
-    public BuyLottoResultDto getBuyLottos() {
-        return new BuyLottoResultDto(
-             lottos.stream().map(Lotto::getLottoNumbers).toList(),
-             money.calculateBuyLottoAmount()
-         );
-    }
-
-    public String winningCalculateResultFormat(WinningLotto winningLotto){
-        Map<WinningCase, Integer> winningCalculateResult = winningLotto.winningCalculate(lottos);
-        long earnMoney = calculateTotalEarnMoney(winningCalculateResult);
-        double earnMoneyRatio = money.calculateEarnMoneyRatio(earnMoney);
-        return WinningCalculateFormatter.winningResultFormatting(winningCalculateResult,earnMoneyRatio);
     }
 
 }

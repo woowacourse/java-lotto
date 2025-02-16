@@ -19,6 +19,23 @@ public class Lotto {
                 .toList();
     }
 
+    public int compare(WinningNumber winningNumber) {
+        return (int) lottoNumbers.stream().filter(lottoNumber ->
+            winningNumber.isContain(lottoNumber)
+        ).count();
+    }
+
+    public boolean compareBonusNumber(BonusNumber bonusNumber) {
+        return lottoNumbers.stream()
+            .anyMatch(lottoNumber -> bonusNumber.isContain(lottoNumber));
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.stream()
+            .map(LottoNumber::getLottoNumber)
+            .toList();
+    }
+
     private void validateLottoNumbers(List<Integer> lottoNumbers) {
         Set<Integer> duplicationSet = new HashSet<>(lottoNumbers);
         if(lottoNumbers.size() != duplicationSet.size()) {
@@ -27,23 +44,6 @@ public class Lotto {
         if(lottoNumbers.size() != LOTTO_LENGTH){
             throw new LottoException(INVALID_LOTTO_SIZE);
         }
-    }
-
-    public int compare(WinningNumber winningNumber, BonusNumber bonusNumber) {
-         return (int) lottoNumbers.stream().filter(lottoNumber ->
-            winningNumber.isContain(lottoNumber)
-        ).count();
-    }
-
-    public boolean compareBonusNumber(BonusNumber bonusNumber) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> bonusNumber.isContain(lottoNumber));
-    }
-
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers.stream()
-            .map(LottoNumber::getLottoNumber)
-            .toList();
     }
 
 }

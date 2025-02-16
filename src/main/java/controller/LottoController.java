@@ -4,6 +4,7 @@ import domain.BonusNumber;
 import domain.LottoDispenser;
 import domain.WinningLotto;
 import domain.WinningNumber;
+import dto.DrawResultDto;
 import exception.LottoException;
 import view.InputView;
 import view.OutputView;
@@ -15,7 +16,7 @@ public class LottoController {
         displayBuyLottos(lottoDispenser);
         WinningNumber winningNumber = settingWinningNumbers();
         WinningLotto winningLotto = settingWinningLotto(winningNumber);
-        printWinningResult(lottoDispenser, winningLotto);
+        displayDrawResult(lottoDispenser.getDrawResult(winningLotto));
     }
 
     private LottoDispenser buyLotto() {
@@ -36,7 +37,7 @@ public class LottoController {
         }
     }
 
-    public void displayBuyLottos(LottoDispenser lottoDispenser) {
+    private void displayBuyLottos(LottoDispenser lottoDispenser) {
         OutputView.printBuyLottos(lottoDispenser.getBuyLottos());
     }
 
@@ -59,19 +60,17 @@ public class LottoController {
     }
 
     private WinningLotto settingWinningLotto(WinningNumber winningNumber) {
-        WinningLotto winningLotto;
-        do {
-            BonusNumber bonusNumber = inputBonusNumber();
-            winningLotto = generateWinningLotto(winningNumber, bonusNumber);
-            return winningLotto;
+        WinningLotto winningLotto = null;
+        while (winningLotto == null) {
+            winningLotto = checkWinningLotto(winningNumber);
         }
-        while(winningLotto != null);
+        return winningLotto;
     }
 
-    private BonusNumber inputBonusNumber() {
+    private WinningLotto checkWinningLotto(WinningNumber winningNumber) {
         try{
             String inputBonusNumber = InputView.inputBonusNumber();
-            return new BonusNumber(inputBonusNumber);
+            return generateWinningLotto(winningNumber, new BonusNumber(inputBonusNumber));
         }catch (LottoException lottoException){
             OutputView.printError(lottoException);
             return null;
@@ -86,13 +85,8 @@ public class LottoController {
         }
     }
 
-    private void printWinningResult(LottoDispenser lottoDispenser, WinningLotto winningLotto) {
-        System.out.println(formattingWinningResult(lottoDispenser, winningLotto));
-    }
-
-
-    public String formattingWinningResult(LottoDispenser lottoDispenser, WinningLotto winningLotto) {
-        return lottoDispenser.winningCalculateResultFormat(winningLotto);
+    private void displayDrawResult(DrawResultDto drawResultDto) {
+        OutputView.printDrawResult(drawResultDto);
     }
 
 }
