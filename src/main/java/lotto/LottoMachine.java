@@ -8,7 +8,7 @@ import lotto.domain.LottoBundle;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
 import lotto.exception.LottoException;
-import lotto.service.LottoService;
+import lotto.service.LottoManager;
 import lotto.utils.Parser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -17,12 +17,12 @@ public class LottoMachine {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoService lottoService;
+    private final LottoManager lottoManager;
 
-    public LottoMachine(InputView inputView, OutputView outputView, LottoService lottoService) {
+    public LottoMachine(InputView inputView, OutputView outputView, LottoManager lottoManager) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoService = lottoService;
+        this.lottoManager = lottoManager;
     }
 
     public void run() {
@@ -31,9 +31,9 @@ public class LottoMachine {
         outputView.lottoQuantityPrint(lottoBundle.getLottoQuantity());
         outputView.lottoStatusPrint(lottoBundle);
         WinningNumbers winningNumbers = makeWinningNumber();
-        EnumMap<Rank, Integer> lottoResult = lottoService.makeStatistics(lottoBundle, winningNumbers);
+        EnumMap<Rank, Integer> lottoResult = lottoManager.makeStatistics(lottoBundle, winningNumbers);
 
-        outputView.lottoStatisticsPrint(lottoResult, lottoService.calculateTotalResult(lottoResult, amountPaid));
+        outputView.lottoStatisticsPrint(lottoResult, lottoManager.calculateTotalResult(lottoResult, amountPaid));
     }
 
     private AmountPaid makeAmountPaid() {
@@ -47,13 +47,13 @@ public class LottoMachine {
     }
 
     private LottoBundle makeLottoBundle(AmountPaid amountPaid) {
-        return retryUntilValidInput(() -> lottoService.makeLottoBundle(amountPaid));
+        return retryUntilValidInput(() -> lottoManager.makeLottoBundle(amountPaid));
     }
 
     private WinningNumbers makeWinningNumber() {
         return retryUntilValidInput(() -> {
             try {
-                return lottoService.makeWinningNumbers(inputView.winningNumberInput(), inputView.bonusNumberInput());
+                return lottoManager.makeWinningNumbers(inputView.winningNumberInput(), inputView.bonusNumberInput());
             } catch (IOException e) {
                 throw new IllegalArgumentException(e);
             }

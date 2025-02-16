@@ -13,7 +13,7 @@ import lotto.utils.NumberGenerator;
 import lotto.utils.Parser;
 import lotto.utils.Splitter;
 
-public class LottoService {
+public class LottoManager {
 
     public LottoBundle makeLottoBundle(AmountPaid amount) {
         List<Lotto> lottoBundle = new ArrayList<>();
