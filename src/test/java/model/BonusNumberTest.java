@@ -1,9 +1,10 @@
 package model;
 
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.Set;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,8 +24,7 @@ class BonusNumberTest {
     @Test
     @DisplayName("보너스 번호가 로또 번호 내부에 존재하는 경우 true를 반환한다.")
     void 보너스_번호가_로또_번호_내부에_존재하는_경우_true를_반환한다() {
-        Set<Integer> lottoNumbers = Set.of(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new Lotto(new TestLottoNumberGenerator(List.of(1, 2, 3, 4, 5, 6)));
         BonusNumber bonusNumber = new BonusNumber(5);
 
         assertThat(bonusNumber.isBonusMatch(lotto)).isTrue();

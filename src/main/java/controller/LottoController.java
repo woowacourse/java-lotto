@@ -18,7 +18,7 @@ public class LottoController {
 
         buyLottoForUserMoney(lottoRepository, wallet.getPurchasableQuantity());
 
-        OutputView.printBuyQuantity(wallet.getPurchasableQuantity());
+        OutputView.printBuyQuantity(wallet);
         OutputView.printRandomLotto(lottoRepository);
 
         UserLotto userLotto = createUserLotto();
@@ -46,7 +46,7 @@ public class LottoController {
 
     private static void buyLottoForUserMoney(LottoRepository lottoRepository, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            lottoRepository.addLotto(new Lotto(RandomNumberGenerator.makeRandomNumber()));
+            lottoRepository.addLotto(new Lotto(new RandomNumberGenerator()));
         }
     }
 
