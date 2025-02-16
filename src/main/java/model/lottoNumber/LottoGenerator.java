@@ -30,7 +30,7 @@ public class LottoGenerator {
 
     private static void validateDuplication(List<Integer> randomNumbers, List<Lotto> lottos) {
         lottos.stream().forEach(lotto -> {
-            if (lotto.hasDuplicationWith(randomNumbers)) {
+            if (lotto.isDuplicatedWith(randomNumbers)) {
                 throw new IllegalStateException();
             }
         });

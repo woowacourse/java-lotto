@@ -30,17 +30,6 @@ class WinningNumberTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("당첨 번호와 겹치는 로또 번호의 개수를 구한다")
-    @ParameterizedTest
-    @CsvSource(value = {"1, 7, 8, 9, 10, 11:1", "1, 2, 7, 8, 9, 10:2", "1, 2, 3, 4, 5, 6:6"}, delimiter = ':')
-    void findMatchingCountWithLottoNumber(String lottoNumberInput, int expectedCount) {
-        List<Integer> lottoNumbers = splitAndParseNumbersToInteger(lottoNumberInput);
-        WinningNumber winningNumber = new WinningNumber(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        int matchingCount = winningNumber.findMatchingCountWith(lottoNumbers);
-
-        assertThat(matchingCount).isEqualTo(expectedCount);
-    }
-
     private List<Integer> splitAndParseNumbersToInteger(String numberInput) {
         return Arrays.stream(numberInput.split(", "))
                 .map(Integer::parseInt).toList();

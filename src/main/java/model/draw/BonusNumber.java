@@ -12,8 +12,8 @@ public class BonusNumber {
         this.number = number;
     }
 
-    public boolean hasMatchingNumberIn(List<Integer> lottoNumbers) {
-        return lottoNumbers.contains(number);
+    public boolean hasMatchingNumberIn(List<Integer> targetNumbers) {
+        return targetNumbers.contains(number);
     }
 
     public int getNumber() {

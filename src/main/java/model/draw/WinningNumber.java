@@ -16,14 +16,8 @@ public class WinningNumber {
         this.numbers = numbers;
     }
 
-    public boolean contains(int number) {
-        return numbers.contains(number);
-    }
-
-    public int findMatchingCountWith(List<Integer> lottoNumbers) {
-        return (int) numbers.stream()
-                .filter(n -> lottoNumbers.contains(n))
-                .count();
+    public boolean contains(int targetNumber) {
+        return numbers.contains(targetNumber);
     }
 
     private void validateNumberCount(List<Integer> numbers) {

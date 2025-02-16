@@ -26,7 +26,7 @@ public class NumberGeneratorTest {
             """)
     @Test
     void createListWithUnduplicatedNumbers() {
-        List<Integer> numbers = NumberGenerator.pickUniqueNumbersInRange(-1, -6, 3, new NumberPickStrategy() {
+        List<Integer> numbers = NumberGenerator.pickUniqueNumbersInRange(1, 6, 3, new NumberPickStrategy() {
             private int methodCallCounter = 0;
             private List<Integer> pickingNumbers = new ArrayList<>(Arrays.asList(1, 1, 1, 1, 2, 2, 2, 3, 4));
 

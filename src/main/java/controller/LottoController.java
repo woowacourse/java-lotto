@@ -79,8 +79,8 @@ public class LottoController {
                                           BonusNumber bonusNumber) {
         WinningResult winningResult = new WinningResult();
         for (Lotto lotto : issuedLottos) {
-            int matchingCount = winningNumber.findMatchingCountWith(lotto.getNumbers());
-            boolean matchesBonusNumber = bonusNumber.hasMatchingNumberIn(lotto.getNumbers());
+            int matchingCount = lotto.findMatchingCountWith(winningNumber);
+            boolean matchesBonusNumber = lotto.contains(bonusNumber);
             WinningStatus winningStatus = WinningStatus.decideBy(matchingCount, matchesBonusNumber);
             winningResult.update(winningStatus);
         }

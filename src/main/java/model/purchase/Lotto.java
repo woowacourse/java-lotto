@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import model.LottoConstants;
+import model.draw.BonusNumber;
+import model.draw.WinningNumber;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -17,8 +19,18 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public boolean hasDuplicationWith(List<Integer> targetNumbers) {
+    public boolean isDuplicatedWith(List<Integer> targetNumbers) {
         return new HashSet<>(numbers).containsAll(targetNumbers);
+    }
+
+    public int findMatchingCountWith(WinningNumber winningNumber) {
+        return (int) numbers.stream()
+                .filter(number -> winningNumber.contains(number))
+                .count();
+    }
+
+    public boolean contains(BonusNumber bonusNumber) {
+        return this.numbers.contains(bonusNumber.getNumber());
     }
 
     public List<Integer> getNumbers() {
