@@ -2,40 +2,36 @@ package Model;
 
 public enum LottoResult {
 
-    FIFTH(5000, 0),
-    FOURTH(50000, 0),
-    THIRD(1500000, 0),
-    SECOND(30000000, 0),
-    FIRST(2000000000, 0);
+    FIFTH(5000, 0, 3),
+    FOURTH(50000, 0, 4 ),
+    THIRD(1500000, 0, 5),
+    SECOND(30000000, 0, 5),
+    FIRST(2000000000, 0, 6);
 
     private final int price;
     private int count;
+    private final int correctNumber;
 
-    private static final int LOTTO_ALL_CORRECT = 6;
-    private static final int LOTTO_ONE_WRONG = 5;
-    private static final int LOTTO_TWO_WRONG = 4;
-    private static final int LOTTO_THREE_WRONG = 3;
-
-
-    LottoResult(int price, int count) {
+    LottoResult(int price, int count, int correctNumber) {
         this.price = price;
         this.count = count;
+        this.correctNumber = correctNumber;
     }
 
     public static void addCount(int count, boolean isBonus) {
-        if (count == LOTTO_ALL_CORRECT) {
+        if (count == LottoResult.FIRST.correctNumber) {
             FIRST.count++;
         }
-        if (count == LOTTO_ONE_WRONG && isBonus) {
+        if (count == LottoResult.SECOND.correctNumber && isBonus) {
             SECOND.count++;
         }
-        if (count == LOTTO_ONE_WRONG && !isBonus) {
+        if (count == LottoResult.THIRD.correctNumber && !isBonus) {
             THIRD.count++;
         }
-        if (count == LOTTO_TWO_WRONG) {
+        if (count == LottoResult.FOURTH.correctNumber) {
             FOURTH.count++;
         }
-        if (count == LOTTO_THREE_WRONG) {
+        if (count == LottoResult.FIFTH.correctNumber) {
             FIFTH.count++;
         }
     }
