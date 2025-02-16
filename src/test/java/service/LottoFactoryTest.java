@@ -18,7 +18,7 @@ class LottoFactoryTest {
 
     private List<Integer> extractNumbersFromLotto(String lotto) {
         return Arrays.stream(lotto
-                        .replaceAll("[\\[\\]]", "") // [ ] 제거
+                        .replaceAll("[\\[\\]]", "")
                         .split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
