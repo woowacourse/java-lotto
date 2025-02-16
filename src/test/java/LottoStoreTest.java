@@ -51,7 +51,7 @@ class LottoStoreTest {
         WinningLottoRequest winningLotto = new WinningLottoRequest(List.of(1, 2, 3, 4, 5, 7), 6);
 
         // when
-        LottoRankResultResponse lottoRankResultResponse = lottoStore.calculateRankMatchCount(lottoTickets, winningLotto);
+        LottoRankResultResponse lottoRankResultResponse = lottoStore.countLottoRankResult(lottoTickets, winningLotto);
 
         // then
         assertThat(lottoRankResultResponse.getValue(LottoRank.SECOND)).isEqualTo(1);

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class LottoStore {
@@ -40,7 +39,7 @@ public class LottoStore {
                 .toList();
     }
 
-    public LottoRankResultResponse calculateRankMatchCount(
+    public LottoRankResultResponse countLottoRankResult(
             List<LottoTicketResponse> lottoTicketResponses,
             WinningLottoRequest winningLottoRequest
     ) {
@@ -71,11 +70,6 @@ public class LottoStore {
         int profit = lottoRankResult.getKeys().stream()
                 .mapToInt(rank -> rank.getWinningAmount() * lottoRankResult.getValue(rank)).sum();
         return (double) profit / purchasedAmount;
-    }
-
-    private List<LottoRank> calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
-        return lottoTickets.stream().map(lottoTicket -> lottoRankCalculator.calculate(lottoTicket, winningLotto))
-                .filter(Objects::nonNull).toList();
     }
 
     private void validateAmountUnit(int purchaseAmount) {

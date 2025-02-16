@@ -46,7 +46,7 @@ public class LottoController {
             List<LottoTicketResponse> lottoTicketResponses,
             WinningLottoRequest winningLottoRequest
     ) {
-        LottoRankResultResponse lottoRankResultResponse = lottoStore.calculateRankMatchCount(lottoTicketResponses, winningLottoRequest);
+        LottoRankResultResponse lottoRankResultResponse = lottoStore.countLottoRankResult(lottoTicketResponses, winningLottoRequest);
 
         List<LottoRankResponse> lottoRankResponses = lottoStore.getLottoRankResults(lottoRankResultResponse);
         lottoConsoleView.printLottoRankResults(lottoRankResponses);
