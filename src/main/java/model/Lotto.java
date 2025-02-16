@@ -42,13 +42,15 @@ public class Lotto {
     }
 
     private List<Integer> generateLotto() {
-        List<Integer> numbers = new ArrayList<>();
+        Set<Integer> numbers = new HashSet<>();
 
-        for (int i = 0; i < NUMBER_COUNT; i++) {
+        while (numbers.size() != NUMBER_COUNT) {
             numbers.add(generateNumber());
         }
 
-        return numbers;
+        return numbers.stream()
+                .sorted()
+                .toList();
     }
 
     private List<Integer> generateCustomLotto(final String input) {
