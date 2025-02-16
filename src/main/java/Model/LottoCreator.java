@@ -1,42 +1,28 @@
 package Model;
 
+import Constant.Constants;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class LottoCreator {
 
     private static final int LOTTO_COUNT = 6;
-    private static final int LOTTO_MAX_NUMBER = 45;
-
 
     public static List<Integer> createLotto() {
-        List<Integer> lottoNumber = new ArrayList<>();
+        Set<Integer> nonDuplicateLottoNumbers = new HashSet<>();
 
-        addRandomNumber(lottoNumber);
-        return lottoNumber;
-    }
-
-    private static void addRandomNumber(List<Integer> lottoNumber) {
-
-        for (int i = 0; i < LOTTO_COUNT; i++) {
-            int randomNumber = createRandomNumber();
-            randomNumber = createNonDuplicateNumber(lottoNumber, randomNumber);
-            lottoNumber.add(randomNumber);
+        while (nonDuplicateLottoNumbers.size() < LOTTO_COUNT) {
+            nonDuplicateLottoNumbers.add(createRandomNumber());
         }
-    }
-
-    private static int createNonDuplicateNumber(List<Integer> lottoNumber, int randomNumber) {
-        if (lottoNumber.contains(randomNumber)) {
-            randomNumber = createRandomNumber();
-            createNonDuplicateNumber(lottoNumber, randomNumber);
-        }
-        return randomNumber;
+        return new ArrayList<>(nonDuplicateLottoNumbers);
     }
 
     private static int createRandomNumber() {
         Random random = new Random();
-        return random.nextInt(LOTTO_MAX_NUMBER) + 1;
+        return random.nextInt(Constants.LOTTO_MAX_NUMBER) + 1;
     }
 
 }

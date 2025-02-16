@@ -1,7 +1,5 @@
 package View;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,7 +8,11 @@ class InputViewTest {
     @Test
     void 로또_구매_입력_테스트() {
         String input = "14000";
-        Assertions.assertThat(InputView.inputPrice(input)).isEqualTo(14000);
+        int expect = 14000;
+
+        int inputPrice = InputView.inputPrice(input);
+
+        Assertions.assertThat(inputPrice).isEqualTo(expect);
     }
 
     @Test
@@ -30,9 +32,12 @@ class InputViewTest {
     @Test
     void 당첨번호_입력_테스트() {
         String inputWinnerNumber = "1,2,3,4,5,6";
-        List<Integer> result = List.of(1, 2, 3, 4, 5, 6);
+        List<Integer> expect = List.of(1, 2, 3, 4, 5, 6);
+
+        List<Integer> result = InputView.inputWinnerNumbers(inputWinnerNumber);
+
         org.junit.jupiter.api.Assertions
-                .assertEquals(result, InputView.inputWinnerNumbers(inputWinnerNumber));
+                .assertEquals(expect, result);
     }
 
     @Test
@@ -58,7 +63,7 @@ class InputViewTest {
 
     @Test
     void 당첨번호_입력_범위_예외_테스트() {
-        String wrongInputRange = "102,1,2,3,4,5";
+        String wrongInputRange = "46,1,2,3,4,5";
         Assertions.assertThatThrownBy(() -> InputView.inputPrice(wrongInputRange))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -90,7 +95,7 @@ class InputViewTest {
 
     @Test
     void 보너스_볼_입력_범위_예외_테스트() {
-        String wrongRangeNumber = "102";
+        String wrongRangeNumber = "46";
         List<Integer> result = List.of(1, 2, 3, 4, 5, 6);
 
         Assertions.assertThatThrownBy(() -> InputView.inputBonusBall(wrongRangeNumber, result))
