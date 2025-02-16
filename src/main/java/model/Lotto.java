@@ -21,11 +21,16 @@ public class Lotto {
 
     public static Lotto of(final String input) {
         Validator.validateNullOrBlank(input, INVALID_INPUT_NULL_OR_BLANK.getMessage());
+
         List<Integer> numbers = Parser.separateBySeparator(input, LOTTO_SEPARATOR).stream()
                 .peek(string -> Validator.validateInteger(string, INVALID_LOTTO_FORMAT.getMessage()))
                 .map(Parser::convertStringToInteger)
                 .toList();
 
+        return from(numbers);
+    }
+
+    public static Lotto from(final List<Integer> numbers) {
         return new Lotto(numbers);
     }
 

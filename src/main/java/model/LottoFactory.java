@@ -2,32 +2,29 @@ package model;
 
 import static constant.LottoConstant.DAMAGE;
 import static constant.LottoConstant.LOTTO_NUMBER_MAX_RANGE;
+import static constant.LottoConstant.LOTTO_NUMBER_MIN_RANGE;
 import static constant.LottoConstant.LOTTO_PURCHASE_UNIT;
-import static constant.LottoConstant.LOTTO_SEPARATOR;
-import static constant.LottoConstant.LOTTO_TICKET_SIZE;
 import static constant.LottoConstant.PROFIT;
 import static model.Prize.initialize;
 
 import java.util.EnumMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import util.random.RandomUtil;
 
 public class LottoFactory {
 
-    private static final Random random = new Random();
-
     private final int lottoCount;
     private final List<Lotto> issuedLottoTickets;
+    private final RandomUtil randomUtil;
 
-    public static LottoFactory of(final LottoPurchase lottoPurchase) {
-        return new LottoFactory(lottoPurchase.calculateLottoCount());
+    public static LottoFactory of(final LottoPurchase lottoPurchase, final RandomUtil randomUtil) {
+        return new LottoFactory(lottoPurchase.calculateLottoCount(), randomUtil);
     }
 
-    private LottoFactory(final int lottoCount) {
+    private LottoFactory(final int lottoCount, final RandomUtil randomUtil) {
         this.lottoCount = lottoCount;
+        this.randomUtil = randomUtil;
         this.issuedLottoTickets = issueLottoTickets();
     }
 
@@ -55,7 +52,6 @@ public class LottoFactory {
         if (winningAmount >= 1) {
             return PROFIT;
         }
-
         return DAMAGE;
     }
 
@@ -66,7 +62,7 @@ public class LottoFactory {
     public List<String> issuedLottoTicketsToString() {
         return issuedLottoTickets.stream()
                 .map(Lotto::toString)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private List<Lotto> issueLottoTickets() {
@@ -76,17 +72,7 @@ public class LottoFactory {
     }
 
     private Lotto issueLottoTicket() {
-        HashSet<Integer> issuedTicketNumbers = new HashSet<>();
-        while (issuedTicketNumbers.size() < LOTTO_TICKET_SIZE) {
-            issuedTicketNumbers.add(getRandomNumber());
-        }
-
-        return Lotto.of(issuedTicketNumbers.stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(LOTTO_SEPARATOR)));
-    }
-
-    private int getRandomNumber() {
-        return random.nextInt(LOTTO_NUMBER_MAX_RANGE) + 1;
+        List<Integer> numbers = randomUtil.generateRandomNumbers(LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE, 6);
+        return Lotto.from(numbers);
     }
 }

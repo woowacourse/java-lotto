@@ -6,17 +6,24 @@ import model.Lotto;
 import model.LottoPurchase;
 import model.Prize;
 import model.LottoFactory;
+import util.random.RandomUtil;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
+
+    private final RandomUtil randomUtil;
+
+    public LottoController(RandomUtil randomUtil) {
+        this.randomUtil = randomUtil;
+    }
 
     public void run() {
         LottoPurchase lottoPurchase = getLottoPurchase();
         Lotto winningLotto = getWinningLotto();
         Bonus winningBonus = getWinningBonus(winningLotto);
 
-        LottoFactory lottoFactory = LottoFactory.of(lottoPurchase);
+        LottoFactory lottoFactory = LottoFactory.of(lottoPurchase, randomUtil);
         EnumMap<Prize, Integer> prizes = lottoFactory.getStatistic(winningLotto, winningBonus);
 
         printLotto(lottoFactory);
@@ -33,7 +40,7 @@ public class LottoController {
         return InputView.getWinningLotto();
     }
 
-    private static Bonus getWinningBonus(Lotto winningLotto) {
+    private Bonus getWinningBonus(Lotto winningLotto) {
         OutputView.printWinningBonusGuidance();
         return InputView.getWinningBonus(winningLotto);
     }
