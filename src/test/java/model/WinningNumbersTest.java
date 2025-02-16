@@ -37,6 +37,24 @@ class WinningNumbersTest {
             });
         }
 
+        @DisplayName("당첨 번호를 올바르게 비교한다.")
+        @Test
+        void containsLottoNumber() {
+            // given
+            List<LottoNumber> numbers = new ArrayList<>(
+                    List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                            new LottoNumber(5), new LottoNumber(6)));
+            LottoNumber bonusNumber = new LottoNumber(7);
+            WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
+            LottoNumber lottoNumber = new LottoNumber(1);
+
+            // when
+            boolean actual = winningNumbers.containsLottoNumber(lottoNumber);
+
+            // then
+            assertThat(actual).isTrue();
+        }
+
         @DisplayName("보너스 번호를 올바르게 비교한다.")
         @Test
         void matchBonusNumber() {
