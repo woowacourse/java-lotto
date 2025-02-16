@@ -45,8 +45,8 @@ public class LottoController {
 
     private Lottos purchaseLottos(Money purchaseLottoMoney) {
         NumberGenerator numberGenerator = LottoNumber.createRandomNumberGenerator();
-        LottoStore lottoStore = new LottoStore(Lotto.createLottoMachine(numberGenerator));
-        return lottoStore.buy(purchaseLottoMoney);
+        LottoStore lottoStore = new LottoStore();
+        return lottoStore.buy(purchaseLottoMoney, numberGenerator);
     }
 
     private WinningLotto inputWinningLotto() {

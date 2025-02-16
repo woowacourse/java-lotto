@@ -1,5 +1,6 @@
 package domain;
 
+import domain.numbergenerator.NumberGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,19 +9,13 @@ public class LottoStore {
     private static final int LOTTO_PRICE = 1000;
     private static final Money LOTTO_MONEY = new Money(LOTTO_PRICE);
 
-    private final LottoMachine lottoMachine;
-
-    public LottoStore(LottoMachine lottoMachine) {
-        this.lottoMachine = lottoMachine;
-    }
-
-    public Lottos buy(Money money) {
+    public Lottos buy(Money money, NumberGenerator numberGenerator) {
         validateMoney(money);
 
         List<Lotto> lottos = new ArrayList<>();
         while (money.isGreaterOrEqualThan(LOTTO_MONEY)) {
             money = money.minus(LOTTO_MONEY);
-            lottos.add(lottoMachine.createLotto());
+            lottos.add(Lotto.create(numberGenerator));
         }
 
         return new Lottos(lottos);

@@ -26,11 +26,10 @@ class LottoStoreTest {
     void 돈을_이용해_로또를_살_수_있다() {
         //given
         Money money = new Money(3000);
-        LottoMachine lottoMachine = new LottoMachine(new FixNumberGenerator(), 6);
-        LottoStore lottoStore = new LottoStore(lottoMachine);
+        LottoStore lottoStore = new LottoStore();
 
         //when
-        Lottos lottos = lottoStore.buy(money);
+        Lottos lottos = lottoStore.buy(money, new FixNumberGenerator());
 
         //then
         assertThat(lottos).extracting("lottos")
@@ -51,11 +50,10 @@ class LottoStoreTest {
     void 구입금액이_1000원_단위가_아니라면_예외가_발생한다() {
         //given
         Money money = new Money(1500);
-        LottoMachine lottoMachine = new LottoMachine(new FixNumberGenerator(), 6);
-        LottoStore lottoStore = new LottoStore(lottoMachine);
+        LottoStore lottoStore = new LottoStore();
 
         //when
-        Assertions.assertThatThrownBy(() -> lottoStore.buy(money))
+        Assertions.assertThatThrownBy(() -> lottoStore.buy(money, new FixNumberGenerator()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또를 사기 위해서는 1000원 단위여야 합니다.");
 

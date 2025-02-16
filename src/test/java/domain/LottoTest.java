@@ -3,6 +3,7 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import domain.numbergenerator.NumberGenerator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -13,6 +14,33 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
+
+    @Test
+    void 숫자_생성_전략에_따라_로또를_생성할_수_있다() {
+        //given
+        NumberGenerator fixNumberGenerator = new NumberGenerator() {
+            int index = 0;
+            List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+
+            @Override
+            public int generate() {
+                int number = numbers.get(index++);
+                index %= numbers.size();
+                return number;
+            }
+        };
+
+        //when
+        Lotto lotto = Lotto.create(fixNumberGenerator);
+
+        //then
+        assertThat(lotto)
+                .extracting("numbers")
+                .isEqualTo(Set.of(
+                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                        new LottoNumber(5), new LottoNumber(6)
+                ));
+    }
 
     @ParameterizedTest
     @MethodSource("generateNotSixLottoNumber")

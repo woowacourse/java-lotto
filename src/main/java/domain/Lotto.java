@@ -26,8 +26,13 @@ public class Lotto {
         this.numbers = new HashSet<>(numbers);
     }
 
-    public static LottoMachine createLottoMachine(NumberGenerator numberGenerator) {
-        return new LottoMachine(numberGenerator, NUMBERS_SIZE);
+    public static Lotto create(NumberGenerator numberGenerator) {
+        Set<LottoNumber> numbers = new HashSet<>();
+        while (numbers.size() < NUMBERS_SIZE) {
+            int number = numberGenerator.generate();
+            numbers.add(new LottoNumber(number));
+        }
+        return new Lotto(numbers);
     }
 
     public boolean contains(LottoNumber number) {
