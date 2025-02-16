@@ -16,7 +16,7 @@ public class RandomLottoServiceImpl implements RandomLottoService {
         return random.nextInt(maxNumber) + 1;
     }
 
-    public List<LottoNumber> generateRandomLottoNumbers(int maxSize, int maxNumber) {
+    private List<LottoNumber> generateRandomLottoNumbers(int maxSize, int maxNumber) {
         List<Integer> randomNumbers = generateUniqueRandomNumbers(maxSize, maxNumber);
 
         return randomNumbers.stream()

@@ -13,7 +13,7 @@ public class WinnerLotto {
     }
 
     public static void validateBonusNumbers(Lotto winnerNumbers, LottoNumber bonusNumber) {
-        if (winnerNumbers.hasNumber(bonusNumber)) {
+        if (winnerNumbers.hasLottoNumber(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER.getMessage());
         }
     }
@@ -23,6 +23,6 @@ public class WinnerLotto {
     }
 
     public boolean hasBonusNumber(Lotto lotto) {
-        return lotto.hasNumber(bonusNumber);
+        return lotto.hasLottoNumber(bonusNumber);
     }
 }

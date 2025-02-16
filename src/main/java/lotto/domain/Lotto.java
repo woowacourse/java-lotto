@@ -21,10 +21,6 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto from(List<LottoNumber> lottoNumbers) {
-        return new Lotto(lottoNumbers);
-    }
-
     public static Lotto from(String input) {
         if (input == null || input.isBlank() || input.endsWith(DELIMITER)) {
             throw new IllegalArgumentException(INVALID_LOTTO_INPUT.getMessage());
@@ -41,17 +37,13 @@ public class Lotto {
     }
 
     public long getMatchCount(Lotto winnerNumbers) {
-        return winnerNumbers.getMatchCount(lottoNumbers);
-    }
-
-    public boolean hasNumber(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
-    }
-
-    private long getMatchCount(List<LottoNumber> winnerNumbers) {
         return lottoNumbers.stream()
-                .filter(winnerNumbers::contains)
+                .filter(winnerNumbers.lottoNumbers::contains)
                 .count();
+    }
+
+    public boolean hasLottoNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     private void validLottoNumbers(List<LottoNumber> lottoNumbers) {

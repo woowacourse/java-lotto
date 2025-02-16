@@ -29,8 +29,8 @@ public class LottoService {
     public LottoGroup generateLottoGroupByMoney(Money money) {
         int lottoTicketCount = money.getLottoTicketCount();
 
-        List<Lotto> lottoList = randomLottoService.generateLottoList(lottoTicketCount, LOTTO_NUM_SIZE,
-                        MAX_LOTTO_NUMBER)
+        List<Lotto> lottoList = randomLottoService
+                .generateLottoList(lottoTicketCount, LOTTO_NUM_SIZE, MAX_LOTTO_NUMBER)
                 .stream()
                 .toList();
 

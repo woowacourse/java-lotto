@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +7,6 @@ import java.util.Map;
 public class Profit {
 
     private static final int DEFAULT_INCREMENT = 1;
-    private static final int SCALE_VALUE = 2;
     private static final int INIT_VALUE = 0;
 
     private final Map<Rank, Integer> rankCounts;
@@ -32,10 +29,7 @@ public class Profit {
     }
 
     public String calculateAverageProfitRate(Money money) {
-        int amount = money.getAmount();
-        long totalProfit = calculateTotalProfit();
-        return new BigDecimal(totalProfit)
-                .divide(new BigDecimal(amount), SCALE_VALUE, RoundingMode.HALF_UP).toString();
+        return money.calculateAverageProfitRate(calculateTotalProfit());
     }
 
     public List<Integer> getValues() {

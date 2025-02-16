@@ -10,7 +10,7 @@ public enum Rank {
     SECOND(5, true, 30_000_000),
     FIRST(6, false, 2_000_000_000);
 
-    private static final int VALIDATE_CORRECT_COUNT = 5;
+    private static final int SPECIFIC_MATCH_COUNT_FOR_BONUS_CHECK = 5;
     private final int correctCount;
     private final boolean hasBonusNumber;
     private final long prize;
@@ -29,11 +29,15 @@ public enum Rank {
     }
 
     private boolean filter(int correctCount, boolean hasBonusNumber) {
-        if (correctCount == VALIDATE_CORRECT_COUNT) {
+        if (requireBonusCheck(correctCount)) {
             return correctCount == this.correctCount && hasBonusNumber == this.hasBonusNumber;
         }
 
         return correctCount == this.correctCount;
+    }
+
+    private boolean requireBonusCheck(int correctCount) {
+        return correctCount == SPECIFIC_MATCH_COUNT_FOR_BONUS_CHECK;
     }
 
     public long getPrize() {

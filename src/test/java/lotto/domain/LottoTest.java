@@ -57,7 +57,7 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         for (LottoNumber lottoNumber : lottoNumbers) {
-            assertThat(lotto.hasNumber(lottoNumber)).isTrue();
+            assertThat(lotto.hasLottoNumber(lottoNumber)).isTrue();
         }
     }
 
@@ -68,7 +68,7 @@ class LottoTest {
         LottoNumber notContainNumber = new LottoNumber(7);
         Lotto lotto = new Lotto(lottoNumbers);
 
-        assertThat(lotto.hasNumber(notContainNumber)).isFalse();
+        assertThat(lotto.hasLottoNumber(notContainNumber)).isFalse();
     }
 
     @DisplayName("일치하는_개수를_반환한다")
@@ -89,7 +89,7 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         for (LottoNumber bonusNumber : lottoNumbers) {
-            assertThat(lotto.hasNumber(bonusNumber)).isTrue();
+            assertThat(lotto.hasLottoNumber(bonusNumber)).isTrue();
         }
     }
 
@@ -100,7 +100,7 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
         LottoNumber bonusNumber = new LottoNumber(7);
 
-        assertThat(lotto.hasNumber(bonusNumber)).isFalse();
+        assertThat(lotto.hasLottoNumber(bonusNumber)).isFalse();
     }
 
     @DisplayName("출력은_오름차순으로_정렬된다")
