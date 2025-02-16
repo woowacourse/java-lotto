@@ -2,7 +2,6 @@ package lotto.view;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import lotto.model.WinningResult;
 import lotto.model.WinningResults;
 
@@ -21,7 +20,7 @@ public class OutputView {
     public void printWinningResult(final WinningResults responses) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (WinningResult response : responses.getResponses()) {
+        for (WinningResult response : responses.getResults()) {
             printStatistics(response);
         }
     }
