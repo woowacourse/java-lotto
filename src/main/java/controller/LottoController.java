@@ -42,7 +42,7 @@ public class LottoController {
     }
 
     private Map<Rank, Integer> calculateRankProcess(WinningInfo winningInfo, List<Lotto> lottoBundle) {
-        Map<Rank, Integer> rankResult = lottoService.calculateRank(winningInfo, lottoBundle);
+        Map<Rank, Integer> rankResult = lottoService.calculateMatchingRank(winningInfo, lottoBundle);
         outputView.printWinningStatistic(rankResult);
         return rankResult;
     }
@@ -55,7 +55,7 @@ public class LottoController {
     }
 
     private List<Lotto> lottoProcess(Ticket ticket) {
-        lottoService.createLottoBundle(ticket);
+        lottoService.createLottoBundleForTicket(ticket);
         List<Lotto> lottoBundle = lottoService.getLottoBundle();
         outputView.printLottos(lottoBundle);
         return lottoBundle;

@@ -24,7 +24,7 @@ public class LottoService {
         return Ticket.create(price);
     }
 
-    public void createLottoBundle(Ticket ticket) {
+    public void createLottoBundleForTicket(Ticket ticket) {
         for (int i = 0; i < ticket.getQuantity(); i++) {
             List<Integer> numbers = RandomNumber.generateNumbers(WINNING_NUMBERS_REQUIRED);
             Lotto lotto = Lotto.from(numbers);
@@ -46,7 +46,7 @@ public class LottoService {
         return WinningInfo.of(winningNumbers, bonusNumber);
     }
 
-    public Map<Rank, Integer> calculateRank(WinningInfo winningInfo, List<Lotto> lottoBundle) {
+    public Map<Rank, Integer> calculateMatchingRank(WinningInfo winningInfo, List<Lotto> lottoBundle) {
         Map<Rank, Integer> calculateResult = new LinkedHashMap<>();
 
         for (Rank value : Rank.values()) {
@@ -62,14 +62,8 @@ public class LottoService {
     }
 
     private Rank findRank(WinningInfo winningInfo, Lotto lotto) {
-        int matchCount = 0;
-        boolean matchBonus = false;
-        Lotto winningLotto = winningInfo.getWinningLotto();
-        int bonusNumber = winningInfo.getBonusNumber();
-
-        matchCount = lotto.calculateMatchCount(winningLotto);
-        matchBonus = lotto.hasBonusNumber(bonusNumber);
-
+        int matchCount = lotto.calculateMatchCount(winningInfo.getWinningLotto());
+        boolean matchBonus = lotto.hasBonusNumber( winningInfo.getBonusNumber());
         return Rank.findRank(matchCount, matchBonus);
     }
 
