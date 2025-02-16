@@ -12,12 +12,9 @@ public class LottoPriceTest {
         // Given
         final int amount = 1000;
 
-        // When
-        final LottoPrice lottoPrice = new LottoPrice(amount);
-
-        // Then
+        // When & Then
         Assertions.assertThatCode(() -> {
-            Assertions.assertThat(lottoPrice);
+            new LottoPrice(amount);
         }).doesNotThrowAnyException();
     }
 
