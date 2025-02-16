@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoBundle {
 
@@ -11,9 +11,9 @@ public class LottoBundle {
         this.lottoBundle = lottoBundle;
     }
 
-    public EnumMap<Rank, Integer> makeStatistics(WinningNumbers winningNumbers) {
+    public Map<Rank, Integer> makeStatistics(WinningNumbers winningNumbers) {
 
-        EnumMap<Rank, Integer> rankIntegerEnumMap = Rank.makeDefaultMap();
+        Map<Rank, Integer> rankIntegerEnumMap = Rank.makeDefaultMap();
 
         for (Lotto lotto : lottoBundle) {
             Rank currentRank = Rank.checkPrize(winningNumbers.checkMatchCount(lotto),
