@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.HashSet;
 import java.util.List;
 import constants.ErrorMessage;
 
@@ -7,8 +8,8 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
+        validate(numbers);
         this.numbers = numbers.stream().sorted().toList();
-        validate(this.numbers);
     }
 
     public static Lotto from(List<Integer> numbers) {
@@ -28,9 +29,6 @@ public class Lotto {
         }
         if (numbers.stream().anyMatch(number -> !isValidNumber(number))) {
             throw new IllegalArgumentException(ErrorMessage.NUMBER_RANGE.getMessage());
-        }
-        if (!isSorted(numbers)) {
-            throw new IllegalArgumentException(ErrorMessage.LOTTO_NOT_SORTED.getMessage());
         }
     }
 
@@ -53,21 +51,11 @@ public class Lotto {
         return 0;
     }
 
-    private boolean isSorted(List<Integer> numbers) {
-        List<Integer> sortedNumbers = numbers.stream().sorted().toList();
-        return sortedNumbers.equals(numbers);
-    }
-
     private boolean isValidNumber(int number) {
         return number > 0 && number <= 45;
     }
 
     private boolean hasDistinctNumber(List<Integer> numbers) {
-        int distinctedSize = numbers.stream()
-                .distinct()
-                .toList()
-                .size();
-
-        return numbers.size() != distinctedSize;
+        return new HashSet<>(numbers).size() != numbers.size();
     }
 }
