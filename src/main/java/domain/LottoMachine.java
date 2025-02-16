@@ -6,27 +6,29 @@ import java.util.List;
 public class LottoMachine {
     public LottoTicket generateLottoTicket(IntegerGenerator generator) {
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 0; i < LottoNumbers.LOTTO_SIZE; i++) {
+        for (int i = 0; i < LottoTicket.LOTTO_SIZE; i++) {
             int number = extractUniqueLottoNumber(generator, numbers);
             numbers.add(number);
         }
-        return new LottoTicket(new LottoNumbers(numbers));
+        return new LottoTicket(numbers.stream()
+                .map(LottoNumber::new)
+                .toList());
     }
 
-    private int extractUniqueLottoNumber(IntegerGenerator generator, List<Integer> lottoNumbers) {
+    private int extractUniqueLottoNumber(IntegerGenerator generator, List<Integer> numbers) {
         int number;
         do {
-            number = generator.generateInteger(LottoNumbers.LOTTO_MIN_NUMBER, LottoNumbers.LOTTO_MAX_NUMBER);
-        } while (lottoNumbers.contains(number));
+            number = generator.generateInteger(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER);
+        } while (numbers.contains(number));
         return number;
     }
 
     public LottoTickets generateLottoTickets(int purchaseAmount, IntegerGenerator generator) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+        List<LottoTicket> LottoTickets = new ArrayList<>();
         for (int i = 0; i < purchaseAmount / LottoTicket.LOTTO_PRICE; i++) {
-            LottoTicket lottoTicket = generateLottoTicket(generator);
-            lottoTickets.add(lottoTicket);
+            LottoTicket LottoTicket = generateLottoTicket(generator);
+            LottoTickets.add(LottoTicket);
         }
-        return new LottoTickets(lottoTickets);
+        return new LottoTickets(LottoTickets);
     }
 }

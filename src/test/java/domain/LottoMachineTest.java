@@ -12,18 +12,17 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         // when
-        LottoTicket lottoTicket = lottoMachine.generateLottoTicket(new FixedIntegerGenerator());
+        LottoTicket LottoTicket = lottoMachine.generateLottoTicket(new FixedIntegerGenerator());
 
         // then
-        Assertions.assertThat(lottoTicket.getSize()).isEqualTo(LottoNumbers.LOTTO_SIZE);
-        for (int number : lottoTicket.getLottoNumbers().numbers()) {
-            Assertions.assertThat(number).isGreaterThanOrEqualTo(LottoNumbers.LOTTO_MIN_NUMBER);
-            Assertions.assertThat(number).isLessThanOrEqualTo(LottoNumbers.LOTTO_MAX_NUMBER);
+        Assertions.assertThat(LottoTicket.getSize()).isEqualTo(LottoTicket.LOTTO_SIZE);
+        for (LottoNumber number : LottoTicket.getLottoNumbers()) {
+            Assertions.assertThat(number.getNumber()).isGreaterThanOrEqualTo(LottoNumber.LOTTO_MIN_NUMBER);
+            Assertions.assertThat(number.getNumber()).isLessThanOrEqualTo(LottoNumber.LOTTO_MAX_NUMBER);
         }
-        Assertions.assertThat(lottoTicket.getLottoNumbers()
-                        .numbers()
+        Assertions.assertThat(LottoTicket.getLottoNumbers()
                         .stream()
                         .distinct())
-                .hasSize(LottoNumbers.LOTTO_SIZE);
+                .hasSize(LottoTicket.LOTTO_SIZE);
     }
 }

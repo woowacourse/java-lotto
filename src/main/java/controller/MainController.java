@@ -2,14 +2,12 @@ package controller;
 
 import domain.DrawResult;
 import domain.LottoMachine;
-import domain.LottoNumbers;
 import domain.LottoTickets;
 import domain.Profit;
 import domain.RandomIntegerGenerator;
 import domain.StatisticsService;
+import domain.WinningResult;
 import domain.WinningStatistics;
-import domain.WinningStatisticsAndProfit;
-import util.RetryHandler;
 import view.InputView;
 import view.OutputView;
 
@@ -24,11 +22,11 @@ public class MainController {
         LottoTickets lottoTickets = purchaseLottoTickets();
         OutputView.printLottoTickets(lottoTickets);
 
-        DrawResult drawResult = inputDrawResult();
+        DrawResult drawResult = InputView.inputDrawResult();
 
-        WinningStatisticsAndProfit winningStatisticsAndProfit = calculateWinningStatisticsAndProfit(lottoTickets,
+        WinningResult winningResult = calculateWinningResult(lottoTickets,
                 drawResult);
-        OutputView.printWinningStatisticsAndProfit(winningStatisticsAndProfit);
+        OutputView.printWinningResult(winningResult);
     }
 
     private LottoTickets purchaseLottoTickets() {
@@ -37,18 +35,10 @@ public class MainController {
         return lottoMachine.generateLottoTickets(purchaseAmount, new RandomIntegerGenerator());
     }
 
-    private DrawResult inputDrawResult() {
-        return (DrawResult) RetryHandler.retryUntilSuccessWithReturn(() -> {
-            LottoNumbers winningLottoNumbers = InputView.inputWinningLottoNumbers();
-            int bonusNumber = InputView.inputBonusNumber();
-            return new DrawResult(winningLottoNumbers, bonusNumber);
-        });
-    }
-
-    private WinningStatisticsAndProfit calculateWinningStatisticsAndProfit(LottoTickets lottoTickets,
-                                                                           DrawResult drawResult) {
+    private WinningResult calculateWinningResult(LottoTickets lottoTickets,
+                                                 DrawResult drawResult) {
         WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, drawResult);
         Profit profit = statisticsService.calculateProfit(winningStatistics);
-        return new WinningStatisticsAndProfit(winningStatistics, profit);
+        return new WinningResult(winningStatistics, profit);
     }
 }

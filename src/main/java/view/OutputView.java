@@ -1,11 +1,12 @@
 package view;
 
+import domain.LottoNumber;
 import domain.LottoPrize;
 import domain.LottoTicket;
 import domain.LottoTickets;
 import domain.Profit;
+import domain.WinningResult;
 import domain.WinningStatistics;
-import domain.WinningStatisticsAndProfit;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -16,15 +17,17 @@ import java.util.Map;
 public class OutputView {
     public static void printLottoTickets(LottoTickets lottoTickets) {
         System.out.printf("%d개를 구매했습니다.\n", lottoTickets.getSize());
-
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            System.out.println(lottoTicket.getLottoNumbers().numbers());
+        for (LottoTicket LottoTicket : lottoTickets.getLottoTickets()) {
+            System.out.println(LottoTicket.getLottoNumbers()
+                    .stream()
+                    .map(LottoNumber::getNumber)
+                    .toList());
         }
     }
 
-    public static void printWinningStatisticsAndProfit(WinningStatisticsAndProfit winningStatisticsAndProfit) {
-        printWinningStatistics(winningStatisticsAndProfit.winningStatistics());
-        printProfit(winningStatisticsAndProfit.profit());
+    public static void printWinningResult(WinningResult winningResult) {
+        printWinningStatistics(winningResult.winningStatistics());
+        printProfit(winningResult.profit());
     }
 
     private static void printWinningStatistics(WinningStatistics winningStatistics) {

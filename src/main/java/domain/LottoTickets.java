@@ -3,17 +3,17 @@ package domain;
 import java.util.List;
 
 public class LottoTickets {
-    private final List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> LottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    public LottoTickets(List<LottoTicket> LottoTickets) {
+        this.LottoTickets = LottoTickets;
     }
 
     public int getSize() {
-        return lottoTickets.size();
+        return LottoTickets.size();
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+        return LottoTickets;
     }
 }

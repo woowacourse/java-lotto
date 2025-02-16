@@ -1,7 +1,9 @@
 package view;
 
-import domain.LottoNumbers;
+import domain.DrawResult;
+import domain.LottoNumber;
 import java.util.Arrays;
+import java.util.List;
 import util.Console;
 import util.RetryHandler;
 
@@ -35,23 +37,35 @@ public class InputView {
         }
     }
 
-    public static LottoNumbers inputWinningLottoNumbers() {
-        return (LottoNumbers) RetryHandler.retryUntilSuccessWithReturn(() -> {
+    public static DrawResult inputDrawResult() {
+        List<LottoNumber> winningLottoNumbers = inputWinningLottoNumbers();
+
+        return (DrawResult) RetryHandler.retryUntilSuccessWithReturn(() -> {
+            LottoNumber bonusNumber = inputBonusNumber();
+            return new DrawResult(winningLottoNumbers, bonusNumber);
+        });
+    }
+
+    public static List<LottoNumber> inputWinningLottoNumbers() {
+        return (List<LottoNumber>) RetryHandler.retryUntilSuccessWithReturn(() -> {
                     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
                     String winningLottoTicket = Console.readLine();
-                    return new LottoNumbers(Arrays.stream(winningLottoTicket.split(",", -1))
+                    return Arrays.stream(winningLottoTicket.split(",", -1))
                             .map(String::strip)
                             .mapToInt(Integer::parseInt)
                             .boxed()
-                            .toList());
+                            .map(LottoNumber::new)
+                            .toList();
                 }
         );
     }
 
-    public static int inputBonusNumber() {
-        return (Integer) RetryHandler.retryUntilSuccessWithReturn(() -> {
+    public static LottoNumber inputBonusNumber() {
+        return (LottoNumber) RetryHandler.retryUntilSuccessWithReturn(() -> {
             System.out.println("보너스 볼을 입력해 주세요.");
-            return Integer.parseInt(Console.readLine());
+            String input = Console.readLine();
+            validateInteger(input);
+            return new LottoNumber(Integer.parseInt(input));
         });
     }
 }
